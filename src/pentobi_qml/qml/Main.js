@@ -233,6 +233,19 @@ function openFileUrl() {
     gameDisplay.showToPlay()
 }
 
+function openGameInfoDialog() {
+    gameInfoDialog.open()
+    var dialog = gameInfoDialog.item
+    dialog.playerName0 = gameModel.playerName0
+    dialog.playerName1 = gameModel.playerName1
+    dialog.playerName2 = gameModel.playerName2
+    dialog.playerName3 = gameModel.playerName3
+    dialog.date = gameModel.date
+    dialog.time = gameModel.time
+    dialog.event = gameModel.event
+    dialog.round = gameModel.round
+}
+
 function play(pieceModel, gameCoord) {
     var wasComputerToPlay = isComputerToPlay()
     gameModel.playPiece(pieceModel, gameCoord)

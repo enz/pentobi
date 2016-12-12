@@ -87,6 +87,10 @@ Menu {
             }
         }
     }
+    MenuItem {
+        text: qsTr("&Game Info")
+        onTriggered: Logic.openGameInfoDialog()
+    }
     MenuSeparator { }
     MenuItem {
         text: qsTr("&Undo Move")

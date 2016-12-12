@@ -165,6 +165,7 @@ ApplicationWindow {
             onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
         }
     }
+    DialogLoader { id: gameInfoDialog; url: "GameInfoDialog.qml" }
     DialogLoader { id: openDialog; url: "OpenDialog.qml" }
     DialogLoader { id: saveDialog; url: "SaveDialog.qml" }
     DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }

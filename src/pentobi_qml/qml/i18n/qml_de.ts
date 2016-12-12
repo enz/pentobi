@@ -63,6 +63,53 @@
     </message>
 </context>
 <context>
+    <name>GameInfoDialog</name>
+    <message>
+        <source>Game Info</source>
+        <translation>Spielinformation</translation>
+    </message>
+    <message>
+        <source>Player Blue/Red:</source>
+        <translation>Spieler Blau/Rot:</translation>
+    </message>
+    <message>
+        <source>Player Blue:</source>
+        <translation>Spieler Blau:</translation>
+    </message>
+    <message>
+        <source>Player Yellow/Green:</source>
+        <translation>Spieler Gelb/Grün:</translation>
+    </message>
+    <message>
+        <source>Player Green:</source>
+        <translation>Spieler Grün:</translation>
+    </message>
+    <message>
+        <source>Player Yellow:</source>
+        <translation>Spieler Gelb:</translation>
+    </message>
+    <message>
+        <source>Player Red:</source>
+        <translation>Spieler Rot:</translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation>Datum:</translation>
+    </message>
+    <message>
+        <source>Time:</source>
+        <translation>Bedenkzeit:</translation>
+    </message>
+    <message>
+        <source>Event:</source>
+        <translation>Veranstaltung:</translation>
+    </message>
+    <message>
+        <source>Round:</source>
+        <translation>Runde:</translation>
+    </message>
+</context>
+<context>
     <name>GameModel</name>
     <message>
         <source>(Setup)</source>
@@ -478,6 +525,10 @@
     <message>
         <source>Save &amp;As...</source>
         <translation>Speichern &amp;unter ...</translation>
+    </message>
+    <message>
+        <source>&amp;Game Info</source>
+        <translation>Spielinf&amp;ormation</translation>
     </message>
 </context>
 <context>

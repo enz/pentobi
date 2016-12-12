@@ -65,6 +65,14 @@ class GameModel
     Q_PROPERTY(QVariantList startingPoints2 READ startingPoints2 NOTIFY startingPoints2Changed)
     Q_PROPERTY(QVariantList startingPoints3 READ startingPoints3 NOTIFY startingPoints3Changed)
     Q_PROPERTY(QVariantList startingPointsAll READ startingPointsAll NOTIFY startingPointsAllChanged)
+    Q_PROPERTY(QString playerName0 READ playerName0 WRITE setPlayerName0 NOTIFY playerName0Changed)
+    Q_PROPERTY(QString playerName1 READ playerName1 WRITE setPlayerName1 NOTIFY playerName1Changed)
+    Q_PROPERTY(QString playerName2 READ playerName2 WRITE setPlayerName2 NOTIFY playerName2Changed)
+    Q_PROPERTY(QString playerName3 READ playerName3 WRITE setPlayerName3 NOTIFY playerName3Changed)
+    Q_PROPERTY(QString date READ date WRITE setDate NOTIFY dateChanged)
+    Q_PROPERTY(QString time READ time WRITE setTime NOTIFY timeChanged)
+    Q_PROPERTY(QString event READ event WRITE setEvent NOTIFY eventChanged)
+    Q_PROPERTY(QString round READ getRound WRITE setRound NOTIFY roundChanged)
 
 public:
     static Variant getInitialGameVariant();
@@ -212,6 +220,41 @@ public:
 
     const QVariantList& startingPointsAll() const { return m_startingPointsAll; }
 
+    const QString& playerName0() const { return m_playerName0; }
+
+    const QString& playerName1() const { return m_playerName1; }
+
+    const QString& playerName2() const { return m_playerName2; }
+
+    const QString& playerName3() const { return m_playerName3; }
+
+    const QString& date() const { return m_date; }
+
+    const QString& time() const { return m_time; }
+
+    const QString& event() const { return m_event; }
+
+    // Avoid conflict with round(), which cannot be resolved by using fully
+    // qualified std::round(), because with many GCC versions it's in the
+    // global namespace (http://stackoverflow.com/questions/1882689)
+    const QString& getRound() const { return m_round; }
+
+    void setPlayerName0(const QString& name);
+
+    void setPlayerName1(const QString& name);
+
+    void setPlayerName2(const QString& name);
+
+    void setPlayerName3(const QString& name);
+
+    void setDate(const QString& date);
+
+    void setTime(const QString& time);
+
+    void setEvent(const QString& event);
+
+    void setRound(const QString& round);
+
     const Board& getBoard() const { return m_game.get_board(); }
 
 signals:
@@ -291,6 +334,22 @@ signals:
 
     void startingPointsAllChanged();
 
+    void playerName0Changed();
+
+    void playerName1Changed();
+
+    void playerName2Changed();
+
+    void playerName3Changed();
+
+    void dateChanged();
+
+    void timeChanged();
+
+    void eventChanged();
+
+    void roundChanged();
+
 private:
     Game m_game;
 
@@ -303,6 +362,22 @@ private:
     QString m_lastInputOutputError;
 
     QString m_file;
+
+    QString m_playerName0;
+
+    QString m_playerName1;
+
+    QString m_playerName2;
+
+    QString m_playerName3;
+
+    QString m_date;
+
+    QString m_time;
+
+    QString m_event;
+
+    QString m_round;
 
     int m_nuColors;
 
@@ -410,6 +485,8 @@ private:
     void setFile(const QString& file);
 
     void setUtf8();
+
+    void updateGameInfo();
 
     void updateIsGameEmpty();
 

@@ -7,6 +7,7 @@
 #include "GameModel.h"
 
 #include <cerrno>
+#include <cmath>
 #include <cstring>
 #include <fstream>
 #include <QDebug>
@@ -424,6 +425,7 @@ void GameModel::initGame(Variant variant)
     setUtf8();
     m_game.clear_modified();
     setFile("");
+    updateGameInfo();
 }
 
 void GameModel::initGameVariant(const QString& gameVariant)
@@ -546,6 +548,7 @@ bool GameModel::open(istream& in)
             initGameVariant(variant);
         goEnd();
         updateProperties();
+        updateGameInfo();
         QSettings settings;
         settings.remove("autosave");
     }
@@ -708,6 +711,95 @@ void GameModel::setFile(const QString& file)
     emit fileChanged();
 }
 
+void GameModel::setPlayerName0(const QString& name)
+{
+    if (name == m_playerName0)
+        return;
+    m_playerName0 = name;
+    m_game.set_player_name(Color(0), encode(name).constData());
+    emit playerName0Changed();
+    updateIsGameEmpty();
+    updateIsModified();
+}
+
+void GameModel::setPlayerName1(const QString& name)
+{
+    if (name == m_playerName1)
+        return;
+    m_playerName1 = name;
+    m_game.set_player_name(Color(1), encode(name).constData());
+    emit playerName1Changed();
+    updateIsGameEmpty();
+    updateIsModified();
+}
+
+void GameModel::setPlayerName2(const QString& name)
+{
+    if (name == m_playerName2)
+        return;
+    m_playerName2 = name;
+    m_game.set_player_name(Color(2), encode(name).constData());
+    emit playerName2Changed();
+    updateIsGameEmpty();
+    updateIsModified();
+}
+
+void GameModel::setPlayerName3(const QString& name)
+{
+    if (name == m_playerName3)
+        return;
+    m_playerName3 = name;
+    m_game.set_player_name(Color(3), encode(name).constData());
+    emit playerName3Changed();
+    updateIsGameEmpty();
+    updateIsModified();
+}
+
+void GameModel::setDate(const QString& date)
+{
+    if (date == m_date)
+        return;
+    m_date = date;
+    m_game.set_date(encode(date).constData());
+    emit dateChanged();
+    // updateIsGameEmpty() not necessary, see
+    // libboardgame_sgf::util::is_empty()
+    updateIsModified();
+}
+
+void GameModel::setTime(const QString& time)
+{
+    if (time == m_time)
+        return;
+    m_time = time;
+    m_game.set_time(encode(time).constData());
+    emit playerName3Changed();
+    updateIsGameEmpty();
+    updateIsModified();
+}
+
+void GameModel::setEvent(const QString& event)
+{
+    if (event == m_event)
+        return;
+    m_event = event;
+    m_game.set_event(encode(event).constData());
+    emit eventChanged();
+    updateIsGameEmpty();
+    updateIsModified();
+}
+
+void GameModel::setRound(const QString& round)
+{
+    if (round == m_round)
+        return;
+    m_round = round;
+    m_game.set_round(encode(round).constData());
+    emit roundChanged();
+    updateIsGameEmpty();
+    updateIsModified();
+}
+
 void GameModel::setUtf8()
 {
     m_game.set_charset("UTF-8");
@@ -743,6 +835,22 @@ void GameModel::updateIsGameEmpty()
 {
     set(m_isGameEmpty, libboardgame_sgf::util::is_empty(m_game.get_tree()),
         &GameModel::isGameEmptyChanged);
+}
+
+void GameModel::updateGameInfo()
+{
+    static_assert(Color::range == 4, "");
+    setPlayerName0(decode(m_game.get_player_name(Color(0))));
+    setPlayerName1(decode(m_game.get_player_name(Color(1))));
+    auto nu_players = m_game.get_board().get_nu_players();
+    if (nu_players > 2)
+        setPlayerName2(decode(m_game.get_player_name(Color(2))));
+    if (nu_players > 3)
+        setPlayerName3(decode(m_game.get_player_name(Color(3))));
+    setDate(decode(m_game.get_date()));
+    setTime(decode(m_game.get_time()));
+    setEvent(decode(m_game.get_event()));
+    setRound(decode(m_game.get_round()));
 }
 
 void GameModel::updateIsModified()
