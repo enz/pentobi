@@ -77,7 +77,11 @@ class GameModel
 public:
     static Variant getInitialGameVariant();
 
+
     explicit GameModel(QObject* parent = nullptr);
+
+    ~GameModel();
+
 
     Q_INVOKABLE void deleteAllVar();
 

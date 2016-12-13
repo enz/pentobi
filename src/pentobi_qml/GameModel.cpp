@@ -115,6 +115,8 @@ GameModel::GameModel(QObject* parent)
     updateProperties();
 }
 
+GameModel::~GameModel() = default;
+
 void GameModel::autoSave()
 {
     // Don't autosave if game was not modified because it could have been
