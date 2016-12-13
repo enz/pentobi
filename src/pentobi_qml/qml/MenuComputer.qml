@@ -23,6 +23,13 @@ Menu {
         visible: ! isAndroid || enabled
         onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
     }
+    MenuItem {
+        text: qsTr("St&op")
+        enabled: playerModel.isGenMoveRunning
+         // Android doesn't use levels with long thinking times
+        visible: ! isAndroid
+        onTriggered: cancelGenMove()
+    }
     MenuSeparator { }
     Menu {
         title:

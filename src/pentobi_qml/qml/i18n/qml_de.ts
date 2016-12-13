@@ -364,6 +364,14 @@
         <source>&amp;Level (Callisto, 3 Players)</source>
         <translation>Spielst&amp;ufe (Callisto, 3 Spieler)</translation>
     </message>
+    <message>
+        <source>Play &amp;Single Move</source>
+        <translation>&amp;Einzelnen Zug spielen</translation>
+    </message>
+    <message>
+        <source>St&amp;op</source>
+        <translation>St&amp;opp</translation>
+    </message>
 </context>
 <context>
     <name>MenuEdit</name>

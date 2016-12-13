@@ -172,9 +172,9 @@ Item {
 
         Rectangle {
             visible: image.status == Image.Ready
-            color: gameModel.gameVariant == "duo"
-                   || gameModel.gameVariant == "junior"
-                   || gameModel.gameVariant == "callisto_2" ?
+            color: gameModel.gameVariant === "duo"
+                   || gameModel.gameVariant === "junior"
+                   || gameModel.gameVariant === "callisto_2" ?
                        theme.colorGreen : theme.colorYellow
             width: startingPointSize; height: width
             radius: width / 2
