@@ -29,132 +29,97 @@ Dialog {
     }
     onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
 
-    ColumnLayout {
-        RowLayout {
-            Layout.fillWidth: true
+    GridLayout {
+        columns: 2
 
-            Label {
-                text: {
-                    switch (gameModel.gameVariant) {
-                    case "classic_2":
-                    case "trigon_2":
-                    case "nexos_2":
-                        return qsTr("Player Blue/Red:")
-                    default:
-                        qsTr("Player Blue:")
-                    }
+        Label {
+            text: {
+                switch (gameModel.gameVariant) {
+                case "classic_2":
+                case "trigon_2":
+                case "nexos_2":
+                    return qsTr("Player Blue/Red:")
+                default:
+                    qsTr("Player Blue:")
                 }
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-            }
-            TextField {
-                id: textFieldPlayerName0
             }
         }
-        RowLayout {
-            Layout.fillWidth: true
+        TextField {
+            id: textFieldPlayerName0
 
-            Label {
-                text: {
-                    switch (gameVariant) {
-                    case "classic_2":
-                    case "trigon_2":
-                    case "nexos_2":
-                        return qsTr("Player Yellow/Green:")
-                    case "duo":
-                    case "junior":
-                    case "callisto_2":
-                        return qsTr("Player Green:")
-                    default:
-                        qsTr("Player Yellow:")
-                    }
+            Layout.fillWidth: true
+        }
+        Label {
+            text: {
+                switch (gameVariant) {
+                case "classic_2":
+                case "trigon_2":
+                case "nexos_2":
+                    return qsTr("Player Yellow/Green:")
+                case "duo":
+                case "junior":
+                case "callisto_2":
+                    return qsTr("Player Green:")
+                default:
+                    qsTr("Player Yellow:")
                 }
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-            }
-            TextField {
-                id: textFieldPlayerName1
             }
         }
-        RowLayout {
+        TextField {
+            id: textFieldPlayerName1
+
+            Layout.fillWidth: true
+        }
+        Label {
+            visible: textFieldPlayerName2.visible
+            text: qsTr("Player Red:")
+        }
+        TextField {
+            id: textFieldPlayerName2
+
             visible: gameVariant === "classic" || gameVariant === "trigon"
                      || gameVariant === "trigon_3"
                      || gameVariant === "classic_3"
                      || gameVariant === "nexos"
                      || gameVariant === "callisto_3"
                      || gameVariant === "callisto"
-            Layout.fillWidth: true
 
-            Label {
-                text: qsTr("Player Red:")
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-            }
-            TextField {
-                id: textFieldPlayerName2
-            }
+            Layout.fillWidth: true
         }
-        RowLayout {
+        Label {
+            visible: textFieldPlayerName3.visible
+            text: qsTr("Player Green:")
+        }
+        TextField {
+            id: textFieldPlayerName3
+
             visible: gameVariant === "classic" || gameVariant === "trigon"
                      || gameVariant === "nexos" || gameVariant === "callisto"
             Layout.fillWidth: true
-
-            Label {
-                text: qsTr("Player Green:")
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-            }
-            TextField {
-                id: textFieldPlayerName3
-            }
         }
-        RowLayout {
-            Layout.fillWidth: true
+        Label { text: qsTr("Date:") }
+        TextField {
+            id: textFieldDate
 
-            Label {
-                text: qsTr("Date:")
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-            }
-            TextField {
-                id: textFieldDate
-            }
+            Layout.fillWidth: true
         }
-        RowLayout {
-            Layout.fillWidth: true
+        Label { text: qsTr("Time:") }
+        TextField {
+            id: textFieldTime
 
-            Label {
-                text: qsTr("Time:")
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-            }
-            TextField {
-                id: textFieldTime
-            }
+            Layout.fillWidth: true
         }
-        RowLayout {
-            Layout.fillWidth: true
+        Label { text: qsTr("Event:") }
+        TextField {
+            id: textFieldEvent
 
-            Label {
-                text: qsTr("Event:")
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-            }
-            TextField {
-                id: textFieldEvent
-            }
+            Layout.fillWidth: true
         }
-        RowLayout {
-            Layout.fillWidth: true
+        Label { text: qsTr("Round:") }
+        TextField {
+            id: textFieldRound
 
-            Label {
-                text: qsTr("Round:")
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-            }
-            TextField {
-                id: textFieldRound
-            }
+            Layout.fillWidth: true
         }
     }
 }
