@@ -16,6 +16,14 @@ Menu {
         visible: ! isAndroid
         onTriggered: Logic.computerPlay()
     }
+    MenuSeparator { }
+    MenuItem {
+        text: qsTr("Play &Single Move")
+        enabled: ! gameModel.isGameOver
+        visible: ! isAndroid || enabled
+        onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
+    }
+    MenuSeparator { }
     Menu {
         title:
             switch (gameModel.gameVariant)

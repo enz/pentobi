@@ -193,7 +193,10 @@ function moveGenerated(move) {
         return
     }
     gameModel.playMove(move)
-    delayedCheckComputerMove.restart()
+    if (isPlaySingleMoveRunning)
+        isPlaySingleMoveRunning = false
+    else
+        delayedCheckComputerMove.restart()
 }
 
 function moveHint() {

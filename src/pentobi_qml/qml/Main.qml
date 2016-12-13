@@ -16,6 +16,7 @@ ApplicationWindow {
     property bool computerPlays2
     property bool computerPlays3
     property bool isMoveHintRunning
+    property bool isPlaySingleMoveRunning
     property bool isAndroid: Qt.platform.os === "android"
     property bool useAndroidToolbar: isAndroid
     property string themeName: isAndroid ? "dark" : "light"
