@@ -64,13 +64,14 @@ bool has_move(const SgfNode& node, Variant variant)
 bool get_move(const SgfNode& node, Variant variant, Color& c,
               MovePoints& points)
 {
+    auto nu_colors = get_nu_colors(variant);
     string id;
     // Pentobi 0.1 used BLUE/YELLOW/RED/GREEN instead of 1/2/3/4 as suggested
     // by SGF FF[5]. Pentobi 12.0 erroneosly used 1/2 for two-player Callisto
     // instead of B/W. We still want to be able to read files written by older
     // versions. They will be converted to the current format by
     // PentobiTreeWriter.
-    if (get_nu_colors(variant) == 2)
+    if (nu_colors == 2)
     {
         if (node.has_property("B"))
         {
@@ -146,7 +147,7 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
             c = Color(3);
         }
     }
-    if (id.empty())
+    if (id.empty() || c.to_int() >= nu_colors)
         return false;
     vector<string> values;
     values = node.get_multi_property(id);
