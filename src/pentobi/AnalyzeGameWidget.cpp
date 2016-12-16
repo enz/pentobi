@@ -213,7 +213,7 @@ void AnalyzeGameWidget::threadFunction()
                 return;
             int progress = 100 * movesAnalyzed / totalMoves;
             QMetaObject::invokeMethod(this, "showProgress",
-                                      Qt::QueuedConnection,
+                                      Qt::BlockingQueuedConnection,
                                       Q_ARG(int, progress));
         };
     m_analyzeGame.run(*m_game, *m_search, m_nuSimulations, progressCallback);
