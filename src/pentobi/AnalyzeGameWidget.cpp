@@ -223,8 +223,7 @@ void AnalyzeGameWidget::threadFunction()
                                       Q_ARG(int, progress));
         };
     m_analyzeGame.run(*m_game, *m_search, m_nuSimulations, progressCallback);
-    QMetaObject::invokeMethod(this, "showProgress", Qt::QueuedConnection,
-                              Q_ARG(int, 100));
+    QMetaObject::invokeMethod(m_progressDialog, "hide", Qt::QueuedConnection);
     m_isRunning = false;
     emit finished();
 }
