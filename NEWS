@@ -9,6 +9,7 @@ Desktop version:
   was modified by editing the comment in the root node or the game info.
 * Fixed a race condition that could cause a crash when updating the
   analysis window while a game analysis was running.
+* Game analysis progress dialog was not closed if analysis was canceled.
 
 Android version:
 * Open/Save did not show error message on failure.
