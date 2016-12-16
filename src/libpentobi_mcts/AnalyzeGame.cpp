@@ -37,21 +37,13 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     auto& root = game.get_root();
     auto node = &root;
     unsigned total_moves = 0;
-    try {
-        do
-        {
-            if (tree.has_move(*node))
-                ++total_moves;
-            node = node->get_first_child_or_null();
-        }
-        while (node);
-    }
-    catch (const InvalidTree&)
+    do
     {
-        // PentobiTree::has_move() can throw on invalid SGF tree read from
-        // external file. We simply abort the analysis.
-        return;
+        if (tree.has_move(*node))
+            ++total_moves;
+        node = node->get_first_child_or_null();
     }
+    while (node);
     WallTimeSource time_source;
     clear_abort();
     node = &root;

@@ -29,6 +29,8 @@ using libboardgame_sgf::SgfNode;
 bool get_move(const SgfNode& node, Variant variant, Color& c,
               MovePoints& points);
 
+bool has_move(const SgfNode& node, Variant variant);
+
 /** Check if a node has setup properties (not including the PL property). */
 bool has_setup(const SgfNode& node);
 

@@ -22,6 +22,45 @@ using libboardgame_util::trim;
 
 //-----------------------------------------------------------------------------
 
+bool has_move(const SgfNode& node, Variant variant)
+{
+    // See also comment in get_move()
+    switch (get_nu_colors(variant))
+    {
+    case 2:
+        for (auto& prop : node.get_properties())
+        {
+            auto& id = prop.id;
+            if (id == "B" || id == "W" || id == "1" || id == "2"
+                    || id == "BLUE" || id == "GREEN")
+                return true;
+        }
+        break;
+    case 3:
+        for (auto& prop : node.get_properties())
+        {
+            auto& id = prop.id;
+            if (id == "1" || id == "2" || id == "3" || id == "BLUE"
+                    || id == "YELLOW" || id == "RED")
+                return true;
+        }
+        break;
+    case 4:
+        for (auto& prop : node.get_properties())
+        {
+            auto& id = prop.id;
+            if (id == "1" || id == "2" || id == "3" || id == "4"
+                    || id == "BLUE" || id == "YELLOW" || id == "RED"
+                     || id == "GREEN")
+                return true;
+        }
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(false);
+    }
+    return false;
+}
+
 bool get_move(const SgfNode& node, Variant variant, Color& c,
               MovePoints& points)
 {

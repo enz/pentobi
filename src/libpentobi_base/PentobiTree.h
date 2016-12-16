@@ -9,6 +9,7 @@
 
 #include "ColorMove.h"
 #include "BoardConst.h"
+#include "NodeUtil.h"
 #include "Variant.h"
 #include "Setup.h"
 #include "PentobiSgfUtil.h"
@@ -56,7 +57,8 @@ public:
         value. */
     ColorMove get_move_ignore_invalid(const SgfNode& node) const;
 
-    /** Same as ! get_move.is_null() */
+    /** Does the node have a move property?
+        Does not check or throw if move value is invalid. */
     bool has_move(const SgfNode& node) const;
 
     /** Same as ! get_move_ignore_invalid.is_null() */
@@ -148,7 +150,7 @@ inline Variant PentobiTree::get_variant() const
 
 inline bool PentobiTree::has_move(const SgfNode& node) const
 {
-    return ! get_move(node).is_null();
+    return libpentobi_base::node_util::has_move(node, m_variant);
 }
 
 inline bool PentobiTree::has_move_ignore_invalid(const SgfNode& node) const
