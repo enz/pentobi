@@ -31,6 +31,8 @@ Desktop version:
   text in the game info dialog was deleted.
 * New Game/Save As was not enabled if no move had been played but game
   was modified by editing the comment in the root node or the game info.
+* Fixed a race condition that could cause a crash when updating the
+  analysis window while a game analysis was running.
 
 Android version:
 * Open/Save did not show error message on failure.
