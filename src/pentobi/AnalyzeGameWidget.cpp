@@ -191,15 +191,18 @@ void AnalyzeGameWidget::start(const Game& game, Search& search,
     m_search = &search;
     m_nuSimulations = nuSimulations;
     initSize();
-    m_progressDialog = new QProgressDialog(this);
-    m_progressDialog->setWindowModality(Qt::WindowModal);
-    m_progressDialog->setWindowFlags(m_progressDialog->windowFlags()
-                                     & ~Qt::WindowContextHelpButtonHint);
-    m_progressDialog->setLabel(new QLabel(tr("Running game analysis..."),
-                                          this));
-    Util::setNoTitle(*m_progressDialog);
-    m_progressDialog->setMinimumDuration(0);
-    connect(m_progressDialog, SIGNAL(canceled()), SLOT(cancel()));
+    if (! m_progressDialog)
+    {
+        m_progressDialog = new QProgressDialog(this);
+        m_progressDialog->setWindowModality(Qt::WindowModal);
+        m_progressDialog->setWindowFlags(m_progressDialog->windowFlags()
+                                         & ~Qt::WindowContextHelpButtonHint);
+        m_progressDialog->setLabel(new QLabel(tr("Running game analysis..."),
+                                              this));
+        Util::setNoTitle(*m_progressDialog);
+        m_progressDialog->setMinimumDuration(0);
+        connect(m_progressDialog, SIGNAL(canceled()), SLOT(cancel()));
+    }
     m_progressDialog->show();
     m_isRunning = true;
     m_future = QtConcurrent::run(this, &AnalyzeGameWidget::threadFunction);

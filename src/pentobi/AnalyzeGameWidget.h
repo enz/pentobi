@@ -90,7 +90,7 @@ private:
 
     AnalyzeGame m_analyzeGame;
 
-    QProgressDialog* m_progressDialog;
+    QProgressDialog* m_progressDialog = nullptr;
 
     QFuture<void> m_future;
 
