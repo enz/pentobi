@@ -13,6 +13,7 @@
 
 using namespace std;
 using libpentobi_mcts::Player;
+using libpentobi_mcts::Search;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
@@ -81,6 +82,8 @@ public:
     Q_INVOKABLE void cancelGenMove();
 
     bool isGenMoveRunning() const { return m_isGenMoveRunning; }
+
+    Search& getSearch() { return m_player.get_search(); }
 
 signals:
     void levelCallistoChanged();

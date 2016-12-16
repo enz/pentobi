@@ -7,6 +7,15 @@ function about() {
              "<br><a href=\"" + url + "\">" + url + "</a></p>")
 }
 
+function analyzeGame() {
+    if (! gameModel.isMainVar) {
+        showInfo(qsTr("Game analysis is only possible in main variation."))
+        return
+    }
+    gameDisplay.showAnalyzeGame()
+    analyzeGameModel.start(gameModel, playerModel)
+}
+
 function changeGameVariant(gameVariant) {
     if (gameModel.gameVariant === gameVariant)
         return
@@ -19,12 +28,13 @@ function changeGameVariant(gameVariant) {
 }
 
 function changeGameVariantNoVerify(gameVariant) {
-    cancelGenMove()
+    cancelRunning()
     lengthyCommand.run(function() {
         gameDisplay.destroyPieces()
         gameModel.initGameVariant(gameVariant)
         gameDisplay.createPieces()
         gameDisplay.showToPlay()
+        analyzeGameModel.clear()
         initComputerColors()
     })
 }
@@ -210,6 +220,7 @@ function newGameNoVerify()
 {
     gameModel.newGame()
     gameDisplay.showToPlay()
+    analyzeGameModel.clear()
     initComputerColors()
 }
 
@@ -234,6 +245,7 @@ function openFileUrl() {
     }
     gameDisplay.createPieces()
     gameDisplay.showToPlay()
+    analyzeGameModel.clear()
 }
 
 function openGameInfoDialog() {

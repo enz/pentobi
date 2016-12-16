@@ -17,7 +17,7 @@ function createColorPieces(component, pieceModels) {
         "label": Qt.binding(function() {
             return (moveMarking == "all_number"
                     || (moveMarking == "last_number"
-                        &&  this.pieceModel.isLastMove)) ?
+                        && this.pieceModel.isLastMove)) ?
                         this.pieceModel.moveLabel : ""})
     }
     var pieces = []

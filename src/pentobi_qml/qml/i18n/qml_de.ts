@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>AnalyzeGame</name>
+    <message>
+        <source>(No analysis)</source>
+        <translation>(Keine Analyse)</translation>
+    </message>
+</context>
+<context>
     <name>AsciiArtSaveDialog</name>
     <message>
         <source>Export ASCII Art</source>
@@ -297,6 +304,10 @@
         <source>Creating image failed.</source>
         <translation>Grafik konnte nicht erzeugt werden.</translation>
     </message>
+    <message>
+        <source>Game analysis is only possible in main variation.</source>
+        <translation>Spielanalyse ist nur in Hauptvariante möglich.</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -559,6 +570,17 @@
     <message>
         <source>&amp;About Pentobi</source>
         <translation>Über &amp;Pentobi</translation>
+    </message>
+</context>
+<context>
+    <name>MenuTools</name>
+    <message>
+        <source>&amp;Tools</source>
+        <translation>&amp;Extras</translation>
+    </message>
+    <message>
+        <source>&amp;Analyze Game</source>
+        <translation>Spiel &amp;analysieren</translation>
     </message>
 </context>
 <context>

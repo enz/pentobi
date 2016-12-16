@@ -16,6 +16,7 @@ Android version
   Edit/Keep Only Position, Edit/Keep Only Subtree, View/Coordinates,
   Computer/Play Single Move.
 * Support for displaying and editing comments in the SGF file.
+* Support for game analysis.
 * Support for displaying and editing game information.
 * Support for different kinds of move markings like in desktop version.
 * The source code now requires Qt 5.8, which no longer supports Android

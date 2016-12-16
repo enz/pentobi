@@ -28,7 +28,7 @@ Menu {
         enabled: playerModel.isGenMoveRunning
          // Android doesn't use levels with long thinking times
         visible: ! isAndroid
-        onTriggered: cancelGenMove()
+        onTriggered: cancelRunning()
     }
     MenuSeparator { }
     Menu {

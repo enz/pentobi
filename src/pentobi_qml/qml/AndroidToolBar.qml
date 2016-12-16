@@ -39,8 +39,9 @@ RowLayout {
         MenuGame { }
         MenuGo { }
         MenuEdit { }
-        MenuComputer { }
         MenuView { }
+        MenuComputer { }
+        MenuTools { }
         MenuHelp { }
     }
 }

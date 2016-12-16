@@ -31,7 +31,8 @@ ApplicationWindow {
                     Math.min(Math.round(Screen.pixelDensity / 3.5 * 800))
     property int exportImageWidth: 400
 
-    function cancelGenMove() {
+    function cancelRunning() {
+        analyzeGameModel.cancel()
         playerModel.cancelGenMove()
         delayedCheckComputerMove.stop()
     }
@@ -82,6 +83,7 @@ ApplicationWindow {
             busyIndicatorRunning: pieces0 === undefined
                                   || lengthyCommand.isRunning
                                   || playerModel.isGenMoveRunning
+                                  || analyzeGameModel.isRunning
             Layout.fillWidth: true
             Layout.fillHeight: true
             focus: true
@@ -100,8 +102,9 @@ ApplicationWindow {
                 MenuGame { }
                 MenuGo { }
                 MenuEdit { }
-                MenuComputer { }
                 MenuView { }
+                MenuComputer { }
+                MenuTools { }
                 MenuHelp { }
             }
         }
@@ -137,12 +140,15 @@ ApplicationWindow {
     GameModel {
         id: gameModel
 
-        onPositionAboutToChange: cancelGenMove()
+        onPositionAboutToChange: cancelRunning()
     }
     PlayerModel {
         id: playerModel
 
         onMoveGenerated: Logic.moveGenerated(move)
+    }
+    AnalyzeGameModel {
+        id: analyzeGameModel
     }
     Loader { id: computerColorDialogLoader }
     Component {
@@ -158,7 +164,7 @@ ApplicationWindow {
                 root.computerPlays2 = computerColorDialog.computerPlays2
                 root.computerPlays3 = computerColorDialog.computerPlays3
                 if (! Logic.isComputerToPlay())
-                    cancelGenMove()
+                    cancelRunning()
                 else if (! gameModel.isGameOver)
                     Logic.checkComputerMove()
                 gameDisplay.forceActiveFocus() // QTBUG-48456

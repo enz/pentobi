@@ -259,7 +259,13 @@ public:
 
     void setRound(const QString& round);
 
+    const Game& getGame() const { return m_game; }
+
     const Board& getBoard() const { return m_game.get_board(); }
+
+    void gotoNode(const SgfNode& node);
+
+    void gotoNode(const SgfNode* node);
 
 signals:
     /** Position is about to change due to new game or navigation or editing of
@@ -470,10 +476,6 @@ private:
                   QPointF coord, Move& mv) const;
 
     QList<PieceModel*>& getPieceModels(Color c);
-
-    void gotoNode(const SgfNode& node);
-
-    void gotoNode(const SgfNode* node);
 
     void initGame(Variant variant);
 

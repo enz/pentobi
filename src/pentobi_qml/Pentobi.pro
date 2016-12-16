@@ -20,6 +20,7 @@ gcc {
 }
 
 SOURCES += \
+    AnalyzeGameModel.cpp \
     GameModel.cpp \
     Main.cpp \
     PieceModel.cpp \
@@ -76,6 +77,7 @@ SOURCES += \
     ../libpentobi_base/Variant.cpp \
     ../libpentobi_base/PlayerBase.cpp \
     ../libpentobi_base/PentobiTree.cpp \
+    ../libpentobi_mcts/AnalyzeGame.cpp \
     ../libpentobi_mcts/History.cpp \
     ../libpentobi_mcts/Player.cpp \
     ../libpentobi_mcts/PlayoutFeatures.cpp \
@@ -106,6 +108,7 @@ android {
 include(deployment.pri)
 
 HEADERS += \
+    AnalyzeGameModel.h \
     GameModel.h \
     PieceModel.h \
     PlayerModel.h \
@@ -197,6 +200,7 @@ HEADERS += \
     ../libpentobi_base/TrigonGeometry.h \
     ../libpentobi_base/TrigonTransform.h \
     ../libpentobi_base/Variant.h \
+    ../libpentobi_mcts/AnalyzeGame.h \
     ../libpentobi_mcts/Float.h \
     ../libpentobi_mcts/History.h \
     ../libpentobi_mcts/Player.h \

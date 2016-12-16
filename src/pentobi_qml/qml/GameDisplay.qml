@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.1
+import QtQuick.Layouts 1.0
 import "GameDisplay.js" as Logic
 
 Item
@@ -34,6 +35,7 @@ Item
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
     function showToPlay() { pieceSelector.contentY = 0 }
+    function showAnalyzeGame() { flickable.contentX = 2 * flickable.width }
     function showMoveHint(move) { Logic.showMoveHint(move) }
     function grabBoardToImage(callback, width) {
         return board.grabToImage(callback,
@@ -64,9 +66,9 @@ Item
         Flickable {
             id: flickable
 
-            width: Math.min(gameDisplay.width, 1.2 * board.width)
+            width: Math.min(gameDisplay.width, 1.4 * board.width)
             height: Math.min(gameDisplay.height - board.height, board.height)
-            contentWidth: 2 * width
+            contentWidth: 3 * width
             contentHeight: height
             anchors.horizontalCenter: board.horizontalCenter
             clip: true
@@ -75,7 +77,9 @@ Item
             onHeightChanged: snap()
 
             function snap() {
-                snapAnimation.to = contentX > width / 2 ? width : 0
+                if (width == 0) return
+                snapAnimation.to =
+                        Math.min(Math.round(contentX / width), 2) * width
                 snapAnimation.restart()
             }
 
@@ -128,7 +132,20 @@ Item
                 NavigationPanel {
                     width: flickable.width
                     height: flickable.height
-                    positionInfoSize: Math.ceil(0.04 * board.width)
+                }
+                ColumnLayout {
+                    width: flickable.width
+                    height: flickable.height
+
+                    AnalyzeGame {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                    }
+                    NavigationButtons
+                    {
+                        height: width / 6
+                        Layout.fillWidth: true
+                    }
                 }
             }
             SmoothedAnimation {
@@ -172,6 +189,9 @@ Item
     }
     Connections {
         target: gameModel
-        onPositionChanged: pickedPiece = null
+        onPositionChanged: {
+            pickedPiece = null
+            analyzeGameModel.markCurrentMove(gameModel)
+        }
     }
 }

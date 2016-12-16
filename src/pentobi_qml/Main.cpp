@@ -13,6 +13,7 @@
 #include <QMessageBox>
 #include <QTranslator>
 #include <QtQml>
+#include "AnalyzeGameModel.h"
 #include "GameModel.h"
 #include "PlayerModel.h"
 #include "libboardgame_util/Log.h"
@@ -32,6 +33,8 @@ int main(int argc, char *argv[])
 #endif
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
+    qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
+    qmlRegisterInterface<PieceModel>("AnalyzeGameElement");
     qmlRegisterInterface<PieceModel>("PieceModel");
     QString locale = QLocale::system().name();
     QTranslator translatorPentobi;

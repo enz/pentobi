@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/AnalyzeGame.qml</file>
         <file>qml/AndroidToolBar.qml</file>
         <file>qml/AndroidToolButton.qml</file>
         <file>qml/AsciiArtSaveDialog.qml</file>
@@ -20,7 +21,9 @@
         <file>qml/MenuHelp.qml</file>
         <file>qml/MenuItemGameVariant.qml</file>
         <file>qml/MenuItemLevel.qml</file>
+        <file>qml/MenuTools.qml</file>
         <file>qml/MenuView.qml</file>
+        <file>qml/NavigationButtons.qml</file>
         <file>qml/NavigationPanel.qml</file>
         <file>qml/OpenDialog.qml</file>
         <file>qml/PieceCallisto.qml</file>
