@@ -169,7 +169,10 @@ void AnalyzeGameWidget::setCurrentPosition(const Game& game,
 
 void AnalyzeGameWidget::showProgress(int progress)
 {
-    m_progressDialog->setValue(progress);
+    // m_progressDialog might already be closed if cancel was pressed and
+    // setValue makes it visible again (only with some Qt versions/platforms?)
+    if (m_progressDialog->isVisible())
+        m_progressDialog->setValue(progress);
     // Repaint the window with the current status of the analysis
     update();
 }
