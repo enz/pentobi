@@ -12,6 +12,7 @@ Desktop version:
 
 Android version
 
+* Current location in autosaved game will now be remembered.
 * New menu items Game/Save, Game/Export/Image, Game/Export/ASCII Art,
   Edit/Keep Only Position, Edit/Keep Only Subtree, View/Coordinates,
   Computer/Play Single Move.

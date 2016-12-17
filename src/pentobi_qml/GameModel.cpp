@@ -119,19 +119,34 @@ GameModel::~GameModel() = default;
 
 void GameModel::autoSave()
 {
+    auto& tree = m_game.get_tree();
     // Don't autosave if game was not modified because it could have been
     // loaded from a file, but autosave if not modified and empty to ensure
     // that we start with the same game variant next time.
-    if (! m_game.is_modified()
-            && ! libboardgame_sgf::util::is_empty(m_game.get_tree()))
+    if (! m_game.is_modified() && ! libboardgame_sgf::util::is_empty(tree))
         return;
+
+    QSettings settings;
     ostringstream s;
-    PentobiTreeWriter writer(s, m_game.get_tree());
+    PentobiTreeWriter writer(s, tree);
     writer.set_indent(-1);
     writer.write();
-    QSettings settings;
     settings.setValue("variant", to_string_id(m_game.get_variant()));
     settings.setValue("autosave", s.str().c_str());
+
+    QVariantList location;
+    uint depth = 0;
+    auto node = &m_game.get_current();
+    while (node != &tree.get_root())
+    {
+        auto& parent = node->get_parent();
+        if (parent.get_nu_children() > 1)
+            location.prepend(parent.get_child_index(*node));
+        node = &parent;
+        ++depth;
+    };
+    location.prepend(depth);
+    settings.setValue("autosaveLocation", QVariant::fromValue(location));
 }
 
 void GameModel::backToMainVar()
@@ -480,6 +495,8 @@ bool GameModel::loadAutoSave()
     istringstream in(s.constData());
     if (! open(in))
         return false;
+    if (! restoreAutoSaveLocation())
+        goEnd();
     m_game.set_modified();
     return true;
 }
@@ -548,8 +565,6 @@ bool GameModel::open(istream& in)
         auto variant = to_string_id(m_game.get_variant());
         if (variant != m_gameVariant)
             initGameVariant(variant);
-        goEnd();
-        updateProperties();
         updateGameInfo();
         QSettings settings;
         settings.remove("autosave");
@@ -573,6 +588,7 @@ bool GameModel::open(const QString& file)
     if (open(in))
     {
         setFile(file);
+        goEnd();
         return true;
     }
     setFile("");
@@ -653,6 +669,40 @@ void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
     auto& pieceInfo = bd.get_piece_info(bd.get_move_piece(mv));
     if (! compareTransform(pieceInfo, pieceModel->getTransform(), transform))
         pieceModel->setTransform(transform);
+}
+
+bool GameModel::restoreAutoSaveLocation()
+{
+    QSettings settings;
+    auto location = settings.value("autosaveLocation").value<QVariantList>();
+    if (location.empty())
+        return false;
+    int index = 0;
+    bool ok;
+    auto depth = location[index++].toUInt(&ok);
+    if (! ok)
+        return false;
+    auto node = &m_game.get_root();
+    while (depth > 0)
+    {
+        auto nuChildren = node->get_nu_children();
+        if (nuChildren == 0)
+            return false;
+        if (nuChildren == 1)
+            node = &node->get_first_child();
+        else
+        {
+            if (index >= location.size())
+                return false;
+            auto child = location[index++].toUInt(&ok);
+            if (! ok || child >= nuChildren)
+                return false;
+            node = &node->get_child(child);
+        }
+        --depth;
+    }
+    gotoNode(*node);
+    return true;
 }
 
 bool GameModel::save(const QString& file)

@@ -165,7 +165,7 @@ function init() {
     }
     else {
         gameDisplay.createPieces()
-        if (! gameModel.isGameOver)
+        if (! gameModel.isGameOver && ! gameModel.canGoForward)
             checkComputerMove()
     }
 }

@@ -485,6 +485,8 @@ private:
 
     void preparePieceTransform(PieceModel* pieceModel, Move mv);
 
+    bool restoreAutoSaveLocation();
+
     template<typename T>
     void set(T& target, const T& value, void (GameModel::*changedSignal)());
 
