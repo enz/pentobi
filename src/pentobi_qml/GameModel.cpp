@@ -146,7 +146,7 @@ void GameModel::autoSave()
         ++depth;
     };
     location.prepend(depth);
-    settings.setValue("autosaveLocation", QVariant::fromValue(location));
+    settings.setValue("autosaveLocation", location);
 }
 
 void GameModel::backToMainVar()
