@@ -148,12 +148,13 @@ Item
                     }
                 }
             }
-            SmoothedAnimation {
+            NumberAnimation {
                 id: snapAnimation
 
                 target: flickable
                 property: "contentX"
-                duration: 200
+                duration: 800
+                easing.type: Easing.OutBack
             }
         }
     }
