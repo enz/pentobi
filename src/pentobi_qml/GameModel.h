@@ -118,7 +118,7 @@ public:
 
     Q_INVOKABLE void backToMainVar();
 
-    Q_INVOKABLE void initGameVariant(const QString& gameVariant);
+    Q_INVOKABLE void changeGameVariant(const QString& gameVariant);
 
     Q_INVOKABLE void autoSave();
 
@@ -492,6 +492,8 @@ private:
     QList<PieceModel*>& getPieceModels(Color c);
 
     void initGame(Variant variant);
+
+    void initGameVariant(Variant variant);
 
     bool open(istream& in);
 

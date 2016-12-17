@@ -27,19 +27,14 @@ function autoSave() {
 function changeGameVariant(gameVariant) {
     if (gameModel.gameVariant === gameVariant)
         return
-    if (! gameModel.isGameEmpty && ! gameModel.isGameOver) {
-        showQuestion(qsTr("New game?"),
-                     function() { changeGameVariantNoVerify(gameVariant) })
-        return
-    }
-    changeGameVariantNoVerify(gameVariant)
+    verify(function() { changeGameVariantNoVerify(gameVariant) })
 }
 
 function changeGameVariantNoVerify(gameVariant) {
     cancelRunning()
     lengthyCommand.run(function() {
         gameDisplay.destroyPieces()
-        gameModel.initGameVariant(gameVariant)
+        gameModel.changeGameVariant(gameVariant)
         gameDisplay.createPieces()
         gameDisplay.showToPlay()
         analyzeGameModel.clear()
@@ -244,31 +239,11 @@ function newGameNoVerify()
 
 function newGame()
 {
-    if (gameModel.file !== "") {
-        if (gameModel.isModified) {
-            showQuestion(qsTr("Discard changes?"), newGameNoVerify)
-            return
-        }
-    }
-    else if (! gameModel.isGameEmpty && ! gameModel.isGameOver) {
-        showQuestion(qsTr("Abort game?"), newGameNoVerify)
-        return
-    }
-    newGameNoVerify()
+    verify(newGameNoVerify)
 }
 
 function open() {
-    if (gameModel.file !== "") {
-        if (gameModel.isModified) {
-            showQuestion(qsTr("Discard changes?"), openNoVerify)
-            return
-        }
-    }
-    else if (! gameModel.isGameEmpty && ! gameModel.isGameOver) {
-        showQuestion(qsTr("Abort game?"), openNoVerify)
-        return
-    }
-    openNoVerify()
+    verify(openNoVerify)
 }
 
 function openNoVerify() {
@@ -388,4 +363,19 @@ function truncateChildren() {
 
 function undo() {
     gameModel.undo()
+}
+
+function verify(callback)
+{
+    if (gameModel.file !== "") {
+        if (gameModel.isModified) {
+            showQuestion(qsTr("Discard changes?"), callback)
+            return
+        }
+    }
+    else if (! gameModel.isGameEmpty && ! gameModel.isGameOver) {
+        showQuestion(qsTr("Abort game?"), callback)
+        return
+    }
+    callback()
 }

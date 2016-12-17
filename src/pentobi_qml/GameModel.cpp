@@ -153,6 +153,19 @@ void GameModel::backToMainVar()
     gotoNode(back_to_main_variation(m_game.get_current()));
 }
 
+void GameModel::changeGameVariant(const QString& gameVariant)
+{
+    Variant variant;
+    if (! parse_variant_id(gameVariant.toLocal8Bit().constData(), variant))
+    {
+        qWarning("GameModel: invalid game variant");
+        return;
+    }
+    initGameVariant(variant);
+    setIsModified(false);
+    setFile("");
+}
+
 bool GameModel::checkFileModifiedOutside()
 {
     if (m_file.isEmpty())
@@ -452,14 +465,8 @@ void GameModel::initGame(Variant variant)
     updateGameInfo();
 }
 
-void GameModel::initGameVariant(const QString& gameVariant)
+void GameModel::initGameVariant(Variant variant)
 {
-    Variant variant;
-    if (! parse_variant_id(gameVariant.toLocal8Bit().constData(), variant))
-    {
-        qWarning("GameModel: invalid game variant");
-        return;
-    }
     if (m_game.get_variant() != variant)
         initGame(variant);
     auto& bd = getBoard();
@@ -467,7 +474,7 @@ void GameModel::initGameVariant(const QString& gameVariant)
         &GameModel::nuColorsChanged);
     m_lastMovePieceModel = nullptr;
     createPieceModels();
-    m_gameVariant = gameVariant;
+    m_gameVariant = to_string_id(variant);
     emit gameVariantChanged();
     updateProperties();
 }
@@ -575,7 +582,7 @@ bool GameModel::open(istream& in)
         }
         auto variant = to_string_id(m_game.get_variant());
         if (variant != m_gameVariant)
-            initGameVariant(variant);
+            initGameVariant(m_game.get_variant());
         setIsModified(false);
         updateGameInfo();
     }
