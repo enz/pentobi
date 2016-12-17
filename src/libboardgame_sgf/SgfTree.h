@@ -43,7 +43,7 @@ public:
         to init() or clear_modified() */
     bool is_modified() const;
 
-    void set_modified();
+    void set_modified(bool is_modified = true);
 
     void clear_modified();
 
@@ -243,9 +243,9 @@ inline void SgfTree::set_event(const string& event)
     set_property_remove_empty(get_root(), "EV", event);
 }
 
-inline void SgfTree::set_modified()
+inline void SgfTree::set_modified(bool is_modified)
 {
-    m_modified = true;
+    m_modified = is_modified;
 }
 
 template<typename T>

@@ -107,13 +107,13 @@ Menu {
     MenuSeparator { }
     MenuItem {
         text: qsTr("&Open...")
-        onTriggered: openDialog.open()
+        onTriggered: Logic.open()
     }
     MenuItem {
         text: qsTr("&Save")
         enabled: gameModel.file !== "" && gameModel.isModified
         visible: ! isAndroid || enabled
-        onTriggered: Logic.save(gameModel.file)
+        onTriggered: Logic.save()
     }
     MenuItem {
         text: qsTr("Save &As...")

@@ -65,10 +65,7 @@ void AnalyzeGameModel::autoSave(GameModel* gameModel)
     QVariantList list;
     auto variant = bd.get_variant();
     if (m_analyzeGame.get_variant() != variant)
-    {
-        LIBBOARDGAME_ASSERT(false);
         return;
-    }
     list.append(to_string_id(variant));
     list.append(m_analyzeGame.get_nu_moves());
     for (unsigned i = 0; i < m_analyzeGame.get_nu_moves(); ++i)

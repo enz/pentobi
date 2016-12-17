@@ -128,6 +128,11 @@ function deleteAllVar() {
     showQuestion(qsTr("Delete all variations?"), gameModel.deleteAllVar)
 }
 
+function exportAsciiArt(fileUrl) {
+    if (! gameModel.saveAsciiArt(getFileFromUrl(fileUrl)))
+        showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
+}
+
 function exportImage(fileUrl) {
     if (! gameDisplay.grabBoardToImage(function(result) {
         if (! result.saveToFile(getFileFromUrl(fileUrl)))
@@ -170,13 +175,17 @@ function init() {
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
         initComputerColors()
+        return
     }
-    else {
-        gameDisplay.createPieces()
-        analyzeGameModel.loadAutoSave(gameModel)
-        if (wasGenMoveRunning)
-            checkComputerMove()
+    gameDisplay.createPieces()
+    if (gameModel.checkFileModifiedOutside())
+    {
+        showQuestion(qsTr("File has been modified by another application. Reload?"), reloadFile)
+        return
     }
+    analyzeGameModel.loadAutoSave(gameModel)
+    if (wasGenMoveRunning)
+        checkComputerMove()
 }
 
 function initComputerColors() {
@@ -235,16 +244,40 @@ function newGameNoVerify()
 
 function newGame()
 {
-    if (! gameModel.isGameEmpty &&  ! gameModel.isGameOver) {
-        showQuestion(qsTr("New game?"), newGameNoVerify)
+    if (gameModel.file !== "") {
+        if (gameModel.isModified) {
+            showQuestion(qsTr("Discard changes?"), newGameNoVerify)
+            return
+        }
+    }
+    else if (! gameModel.isGameEmpty && ! gameModel.isGameOver) {
+        showQuestion(qsTr("Abort game?"), newGameNoVerify)
         return
     }
     newGameNoVerify()
 }
 
-function openFileUrl() {
+function open() {
+    if (gameModel.file !== "") {
+        if (gameModel.isModified) {
+            showQuestion(qsTr("Discard changes?"), openNoVerify)
+            return
+        }
+    }
+    else if (! gameModel.isGameEmpty && ! gameModel.isGameOver) {
+        showQuestion(qsTr("Abort game?"), openNoVerify)
+        return
+    }
+    openNoVerify()
+}
+
+function openNoVerify() {
+    openDialog.open()
+}
+
+function openFile(file) {
     gameDisplay.destroyPieces()
-    if (! gameModel.open(getFileFromUrl(openDialog.item.fileUrl)))
+    if (! gameModel.open(file))
         showError(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
     else {
         computerPlays0 = false
@@ -255,6 +288,10 @@ function openFileUrl() {
     gameDisplay.createPieces()
     gameDisplay.showToPlay()
     analyzeGameModel.clear()
+}
+
+function openFileUrl() {
+    openFile(getFileFromUrl(openDialog.item.fileUrl))
 }
 
 function openGameInfoDialog() {
@@ -279,18 +316,29 @@ function play(pieceModel, gameCoord) {
         delayedCheckComputerMove.restart()
 }
 
-function exportAsciiArt(fileUrl) {
-    if (! gameModel.saveAsciiArt(getFileFromUrl(fileUrl)))
-        showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
+function reloadFile() {
+    openFile(gameModel.file)
 }
 
-function save(file) {
+function save() {
+    if (gameModel.checkFileModifiedOutside())
+        showQuestion(qsTr("File has been modified by another application. Save anyway?"),
+                     saveCurrentFile)
+    else
+        saveCurrentFile()
+}
+
+function saveCurrentFile() {
+    saveFile(gameModel.file)
+}
+
+function saveFile(file) {
     if (! gameModel.save(file))
         showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
 }
 
 function saveFileUrl(fileUrl) {
-    save(getFileFromUrl(fileUrl))
+    saveFile(getFileFromUrl(fileUrl))
 }
 
 function showComputerColorDialog() {

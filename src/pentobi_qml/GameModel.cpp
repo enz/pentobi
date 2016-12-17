@@ -11,6 +11,7 @@
 #include <cstring>
 #include <fstream>
 #include <QDebug>
+#include <QFileInfo>
 #include <QSettings>
 #include <QTextCodec>
 #include "libboardgame_sgf/SgfUtil.h"
@@ -120,12 +121,6 @@ GameModel::~GameModel() = default;
 void GameModel::autoSave()
 {
     auto& tree = m_game.get_tree();
-    // Don't autosave if game was not modified because it could have been
-    // loaded from a file, but autosave if not modified and empty to ensure
-    // that we start with the same game variant next time.
-    if (! m_game.is_modified() && ! libboardgame_sgf::util::is_empty(tree))
-        return;
-
     QSettings settings;
     ostringstream s;
     PentobiTreeWriter writer(s, tree);
@@ -133,6 +128,10 @@ void GameModel::autoSave()
     writer.write();
     settings.setValue("variant", to_string_id(m_game.get_variant()));
     settings.setValue("autosave", s.str().c_str());
+
+    settings.setValue("file", m_file);
+    settings.setValue("fileDate", m_fileDate);
+    settings.setValue("isModified", m_isModified);
 
     QVariantList location;
     uint depth = 0;
@@ -152,6 +151,16 @@ void GameModel::autoSave()
 void GameModel::backToMainVar()
 {
     gotoNode(back_to_main_variation(m_game.get_current()));
+}
+
+bool GameModel::checkFileModifiedOutside()
+{
+    if (m_file.isEmpty())
+        return false;
+    QFileInfo fileInfo(m_file);
+    if (! fileInfo.exists())
+        return true;
+    return fileInfo.lastModified() != m_fileDate;
 }
 
 void GameModel::createPieceModels()
@@ -440,8 +449,6 @@ void GameModel::initGame(Variant variant)
 #endif
     m_game.set_date_today();
     setUtf8();
-    m_game.clear_modified();
-    setFile("");
     updateGameInfo();
 }
 
@@ -495,9 +502,11 @@ bool GameModel::loadAutoSave()
     istringstream in(s.constData());
     if (! open(in))
         return false;
+    setFile(settings.value("file").toString());
+    setFileDate(settings.value("fileDate").toDateTime());
+    setIsModified(settings.value("isModified").toBool());
     if (! restoreAutoSaveLocation())
         goEnd();
-    m_game.set_modified();
     return true;
 }
 
@@ -531,6 +540,8 @@ void GameModel::newGame()
 {
     emit positionAboutToChange();
     initGame(m_game.get_variant());
+    setIsModified(false);
+    setFile("");
     for (auto pieceModel : m_pieceModels0)
         pieceModel->setDefaultState();
     for (auto pieceModel : m_pieceModels1)
@@ -565,9 +576,8 @@ bool GameModel::open(istream& in)
         auto variant = to_string_id(m_game.get_variant());
         if (variant != m_gameVariant)
             initGameVariant(variant);
+        setIsModified(false);
         updateGameInfo();
-        QSettings settings;
-        settings.remove("autosave");
     }
     catch (const runtime_error& e)
     {
@@ -587,7 +597,7 @@ bool GameModel::open(const QString& file)
     }
     if (open(in))
     {
-        setFile(file);
+        updateFileInfo(file);
         goEnd();
         return true;
     }
@@ -716,8 +726,8 @@ bool GameModel::save(const QString& file)
         m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
-    m_game.clear_modified();
-    updateIsModified();
+    updateFileInfo(file);
+    setIsModified(false);
     return true;
 }
 
@@ -761,6 +771,20 @@ void GameModel::setFile(const QString& file)
         return;
     m_file = file;
     emit fileChanged();
+}
+
+void GameModel::setFileDate(const QDateTime& fileDate)
+{
+    if (fileDate == m_fileDate)
+        return;
+    m_fileDate = fileDate;
+    emit fileDateChanged();
+}
+
+void GameModel::setIsModified(bool isModified)
+{
+    m_game.set_modified(isModified);
+    updateIsModified();
 }
 
 void GameModel::setPlayerName0(const QString& name)
@@ -882,6 +906,13 @@ void GameModel::undo()
     updateProperties();
 }
 
+
+void GameModel::updateFileInfo(const QString& file)
+{
+    setFile(file);
+    QFileInfo fileInfo(file);
+    setFileDate(fileInfo.lastModified());
+}
 
 void GameModel::updateIsGameEmpty()
 {

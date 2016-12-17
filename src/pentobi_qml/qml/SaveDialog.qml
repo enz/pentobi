@@ -5,7 +5,7 @@ import "Main.js" as Logic
 FileDialog {
     title: qsTr("Save")
     selectExisting: false
-    folder: root.folder == "" ? shortcuts.desktop : root.folder
+    folder: root.folder === "" ? shortcuts.desktop : root.folder
     nameFilters: [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
     onAccepted: {
         Logic.saveFileUrl(fileUrl)

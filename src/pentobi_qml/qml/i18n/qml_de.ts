@@ -308,6 +308,22 @@
         <source>Game analysis is only possible in main variation.</source>
         <translation>Spielanalyse ist nur in Hauptvariante möglich.</translation>
     </message>
+    <message>
+        <source>File has been modified by another application. Reload?</source>
+        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Neu laden?</translation>
+    </message>
+    <message>
+        <source>Discard changes?</source>
+        <translation>Änderungen verwerfen?</translation>
+    </message>
+    <message>
+        <source>Abort game?</source>
+        <translation>Spiel abbrechen?</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Save anyway?</source>
+        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Trotzdem speichern?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

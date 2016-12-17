@@ -7,6 +7,7 @@
 #ifndef PENTOBI_QML_GAME_MODEL_H
 #define PENTOBI_QML_GAME_MODEL_H
 
+#include <QDateTime>
 #include <QQmlListProperty>
 #include "PieceModel.h"
 #include "libpentobi_base/Game.h"
@@ -31,6 +32,7 @@ class GameModel
     Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
     Q_PROPERTY(QString lastInputOutputError READ lastInputOutputError)
     Q_PROPERTY(QString file READ file NOTIFY fileChanged)
+    Q_PROPERTY(QDateTime fileDate READ fileDate NOTIFY fileDateChanged)
     Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int toPlay READ toPlay NOTIFY toPlayChanged)
     Q_PROPERTY(int altPlayer READ altPlayer NOTIFY altPlayerChanged)
@@ -144,6 +146,9 @@ public:
 
     Q_INVOKABLE QString getResultMessage();
 
+    Q_INVOKABLE bool checkFileModifiedOutside();
+
+
     void setComment(const QString& comment);
 
     QQmlListProperty<PieceModel> pieceModels0();
@@ -160,9 +165,11 @@ public:
 
     const QString& lastInputOutputError() const { return m_lastInputOutputError; }
 
-    const QString& comment() const { return m_comment; }
-
     const QString& file() const { return m_file; }
+
+    const QDateTime& fileDate() const { return m_fileDate; }
+
+    const QString& comment() const { return m_comment; }
 
     int nuColors() const { return m_nuColors; }
 
@@ -243,6 +250,8 @@ public:
     // global namespace (http://stackoverflow.com/questions/1882689)
     const QString& getRound() const { return m_round; }
 
+    void setIsModified(bool isModified);
+
     void setPlayerName0(const QString& name);
 
     void setPlayerName1(const QString& name);
@@ -281,6 +290,8 @@ signals:
     void altPlayerChanged();
 
     void fileChanged();
+
+    void fileDateChanged();
 
     void points0Changed();
 
@@ -389,6 +400,9 @@ private:
 
     QString m_round;
 
+    QDateTime m_fileDate;
+
+
     int m_nuColors;
 
     int m_toPlay = 0;
@@ -492,7 +506,11 @@ private:
 
     void setFile(const QString& file);
 
+    void setFileDate(const QDateTime& fileDate);
+
     void setUtf8();
+
+    void updateFileInfo(const QString& file);
 
     void updateGameInfo();
 

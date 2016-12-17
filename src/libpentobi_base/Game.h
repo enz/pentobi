@@ -151,7 +151,7 @@ public:
     /** Make the current node the first child of its parent. */
     void make_first_child();
 
-    void set_modified();
+    void set_modified(bool is_modified = true);
 
     void clear_modified();
 
@@ -399,9 +399,9 @@ inline void Game::set_interesting_move()
     m_tree.set_interesting_move(*m_current);
 }
 
-inline void Game::set_modified()
+inline void Game::set_modified(bool is_modified)
 {
-    m_tree.set_modified();
+    m_tree.set_modified(is_modified);
 }
 
 inline void Game::set_player_name(Color c, const string& name)
