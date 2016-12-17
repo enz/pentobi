@@ -7,7 +7,11 @@ import "." as Pentobi
 ColumnLayout {
     id: root
 
+    property alias activeFocusComment: comment.activeFocus
+
     TextArea {
+        id: comment
+
         Layout.fillWidth: true
         Layout.fillHeight: true
         style: TextAreaStyle {

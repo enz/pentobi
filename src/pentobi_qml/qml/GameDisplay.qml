@@ -79,6 +79,8 @@ Item
 
             function showAnalyzeGame() { contentX = 2 * width }
             function snap() {
+                if (navigationPanel.activeFocusComment)
+                    forceActiveFocus()
                 if (width == 0) return
                 snapAnimation.to =
                         Math.min(Math.round(contentX / width), 2) * width
@@ -132,6 +134,8 @@ Item
                     }
                 }
                 NavigationPanel {
+                    id: navigationPanel
+
                     width: flickable.width
                     height: flickable.height
                 }
