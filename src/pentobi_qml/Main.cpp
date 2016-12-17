@@ -22,6 +22,17 @@ using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------
 
+//
+void initAndroid()
+{
+    // Disable sidebars in QtQuick.Dialogs.FileDialog, the dialog is not
+    // very usable on smartphones otherwise
+    QSettings settings;
+    settings.setValue("QQControlsFileDialog/sidebarVisible", false);
+}
+
+//-----------------------------------------------------------------------------
+
 int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
@@ -30,6 +41,9 @@ int main(int argc, char *argv[])
     app.setApplicationName("Pentobi");
 #ifdef VERSION
     app.setApplicationVersion(VERSION);
+#endif
+#ifdef Q_OS_ANDROID
+    initAndroid();
 #endif
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
