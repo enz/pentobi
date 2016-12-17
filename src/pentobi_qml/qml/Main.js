@@ -16,6 +16,13 @@ function analyzeGame() {
     analyzeGameModel.start(gameModel, playerModel)
 }
 
+function autoSave() {
+    wasGenMoveRunning =
+            playerModel.isGenMoveRunning && ! isMoveHintRunning
+            && ! isPlaySingleMoveRunning
+    gameModel.autoSave()
+}
+
 function changeGameVariant(gameVariant) {
     if (gameModel.gameVariant === gameVariant)
         return
@@ -165,7 +172,7 @@ function init() {
     }
     else {
         gameDisplay.createPieces()
-        if (! gameModel.isGameOver && ! gameModel.canGoForward)
+        if (wasGenMoveRunning)
             checkComputerMove()
     }
 }

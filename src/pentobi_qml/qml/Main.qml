@@ -17,6 +17,11 @@ ApplicationWindow {
     property bool computerPlays3
     property bool isMoveHintRunning
     property bool isPlaySingleMoveRunning
+
+    // Was computer thinking on regular game move when game was autosaved?
+    // If yes, it will automatically start a move generation on startup.
+    property bool wasGenMoveRunning
+
     property bool isAndroid: Qt.platform.os === "android"
     property bool useAndroidToolbar: isAndroid
     property string themeName: isAndroid ? "dark" : "light"
@@ -56,7 +61,7 @@ ApplicationWindow {
         Logic.init()
         show()
     }
-    Component.onDestruction: gameModel.autoSave()
+    Component.onDestruction: Logic.autoSave()
 
     ColumnLayout {
         anchors.fill: parent
@@ -135,6 +140,7 @@ ApplicationWindow {
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
+        property alias wasGenMoveRunning: root.wasGenMoveRunning
         property alias exportImageWidth: root.exportImageWidth
     }
     GameModel {
@@ -232,6 +238,6 @@ ApplicationWindow {
         target: Qt.application
         onStateChanged:
             if (Qt.application.state === Qt.ApplicationSuspended)
-                gameModel.autoSave()
+                Logic.autoSave()
     }
 }
