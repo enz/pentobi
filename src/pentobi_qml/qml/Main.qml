@@ -136,6 +136,7 @@ ApplicationWindow {
         property alias enableAnimations: gameDisplay.enableAnimations
         property alias moveMarking: gameDisplay.moveMarking
         property alias showCoordinates: gameDisplay.showCoordinates
+        property alias flickableContentX: gameDisplay.flickableContentX
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2

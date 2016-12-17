@@ -15,6 +15,7 @@ Item
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
     property alias busyIndicatorRunning: busyIndicator.running
+    property alias flickableContentX: flickable.contentX
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
         if (board.isTrigon)
@@ -35,7 +36,7 @@ Item
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
     function showToPlay() { pieceSelector.contentY = 0 }
-    function showAnalyzeGame() { flickable.contentX = 2 * flickable.width }
+    function showAnalyzeGame() { flickable.showAnalyzeGame() }
     function showMoveHint(move) { Logic.showMoveHint(move) }
     function grabBoardToImage(callback, width) {
         return board.grabToImage(callback,
@@ -76,6 +77,7 @@ Item
             onWidthChanged: snap()
             onHeightChanged: snap()
 
+            function showAnalyzeGame() { contentX = 2 * width }
             function snap() {
                 if (width == 0) return
                 snapAnimation.to =
