@@ -59,6 +59,29 @@ void AnalyzeGameModel::asyncRun(const Game* game, Search* search)
     m_analyzeGame.run(*game, *search, nuSimulations, progressCallback);
 }
 
+void AnalyzeGameModel::autoSave(GameModel* gameModel)
+{
+    auto& bd = gameModel->getGame().get_board();
+    QVariantList list;
+    auto variant = bd.get_variant();
+    if (m_analyzeGame.get_variant() != variant)
+    {
+        LIBBOARDGAME_ASSERT(false);
+        return;
+    }
+    list.append(to_string_id(variant));
+    list.append(m_analyzeGame.get_nu_moves());
+    for (unsigned i = 0; i < m_analyzeGame.get_nu_moves(); ++i)
+    {
+        auto mv = m_analyzeGame.get_move(i);
+        list.append(mv.color.to_int());
+        list.append(bd.to_string(mv.move).c_str());
+        list.append(m_analyzeGame.get_value(i));
+    }
+    QSettings settings;
+    settings.setValue("analyzeGame", QVariant::fromValue(list));
+}
+
 void AnalyzeGameModel::cancel()
 {
     if (! m_isRunning)
@@ -118,6 +141,46 @@ void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)
     }
     gameModel->gotoNode(*node);
     setMarkMoveNumber(moveNumber);
+}
+
+void AnalyzeGameModel::loadAutoSave(GameModel* gameModel)
+{
+    QSettings settings;
+    auto list = settings.value("analyzeGame").value<QVariantList>();
+    int size = list.size();
+    int index = 0;
+    if (index >= size)
+        return;
+    auto variant = list[index++].toString();
+    auto& bd = gameModel->getGame().get_board();
+    if (variant != to_string_id(bd.get_variant()))
+        return;
+    if (index >= size)
+        return;
+    auto nuMoves = list[index++].toUInt();
+    vector<ColorMove> moves;
+    vector<double> values;
+    for (unsigned i = 0; i < nuMoves; ++i)
+    {
+        if (index >= size)
+            return;
+        auto color = list[index++].toUInt();
+        if (color >= bd.get_nu_colors())
+            return;
+        if (index >= size)
+            return;
+        auto moveString = list[index++].toString();
+        auto mv = bd.from_string(moveString.toLatin1().constData());
+        if (mv.is_null())
+            return;
+        if (index >= size)
+            return;
+        auto value = list[index++].toDouble();
+        moves.push_back(ColorMove(Color(color), mv));
+        values.push_back(value);
+    }
+    m_analyzeGame.set(bd.get_variant(), moves, values);
+    updateElements();
 }
 
 void AnalyzeGameModel::markCurrentMove(GameModel* gameModel)

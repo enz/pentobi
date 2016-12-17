@@ -57,15 +57,19 @@ public:
     ~AnalyzeGameModel();
 
 
+    Q_INVOKABLE void autoSave(GameModel* gameModel);
+
     Q_INVOKABLE void cancel();
 
     Q_INVOKABLE void clear();
 
-    Q_INVOKABLE void start(GameModel* gameModel, PlayerModel* playerModel);
-
     Q_INVOKABLE void gotoMove(GameModel* gameModel, int moveNumber);
 
+    Q_INVOKABLE void loadAutoSave(GameModel* gameModel);
+
     Q_INVOKABLE void markCurrentMove(GameModel* gameModel);
+
+    Q_INVOKABLE void start(GameModel* gameModel, PlayerModel* playerModel);
 
 
     bool isRunning() const { return m_isRunning; }

@@ -97,6 +97,15 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     while (node);
 }
 
+void AnalyzeGame::set(Variant variant, const vector<ColorMove>& moves,
+                      const vector<double>& values)
+{
+    LIBBOARDGAME_ASSERT(moves.size() == values.size());
+    m_variant = variant;
+    m_moves = moves;
+    m_values = values;
+}
+
 //-----------------------------------------------------------------------------
 
 } // namespace libpentobi_mcts

@@ -21,6 +21,7 @@ function autoSave() {
             playerModel.isGenMoveRunning && ! isMoveHintRunning
             && ! isPlaySingleMoveRunning
     gameModel.autoSave()
+    analyzeGameModel.autoSave(gameModel)
 }
 
 function changeGameVariant(gameVariant) {
@@ -172,6 +173,7 @@ function init() {
     }
     else {
         gameDisplay.createPieces()
+        analyzeGameModel.loadAutoSave(gameModel)
         if (wasGenMoveRunning)
             checkComputerMove()
     }

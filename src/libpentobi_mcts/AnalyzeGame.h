@@ -46,6 +46,8 @@ public:
 
     double get_value(unsigned i) const;
 
+    void set(Variant variant, const vector<ColorMove>& moves,
+             const vector<double>& values);
 private:
     Variant m_variant;
 
@@ -53,6 +55,7 @@ private:
 
     vector<double> m_values;
 };
+
 
 inline ColorMove AnalyzeGame::get_move(unsigned i) const
 {
