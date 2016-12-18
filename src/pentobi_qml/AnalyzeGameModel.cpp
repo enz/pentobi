@@ -113,7 +113,7 @@ void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)
         return;
     auto& tree = game.get_tree();
     auto node = &tree.get_root();
-    if (tree.has_move_ignore_invalid(*node))
+    if (tree.has_move(*node))
     {
         // Move in root node not supported.
         setMarkMoveNumber(-1);

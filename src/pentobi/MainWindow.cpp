@@ -1972,7 +1972,7 @@ void MainWindow::gotoPosition(Variant variant,
         return;
     auto& tree = m_game.get_tree();
     auto node = &tree.get_root();
-    if (tree.has_move_ignore_invalid(*node))
+    if (tree.has_move(*node))
         // Move in root node not supported.
         return;
     for (ColorMove mv : moves)
@@ -3157,8 +3157,7 @@ void MainWindow::showVariations(bool checked)
 void MainWindow::undo()
 {
     auto& current = m_game.get_current();
-    if (current.has_children()
-            || ! m_game.get_tree().has_move_ignore_invalid(current)
+    if (current.has_children() || ! m_game.get_tree().has_move(current)
             || ! current.has_parent())
         return;
     cancelThread();
@@ -3195,7 +3194,7 @@ void MainWindow::updateFlipActions()
 
 void MainWindow::updateMoveAnnotationActions()
 {
-    if (m_game.get_move_ignore_invalid().is_null())
+    if (! m_game.get_tree().has_move(m_game.get_current()))
     {
         m_menuMoveAnnotation->setEnabled(false);
         return;
@@ -3368,7 +3367,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     bool hasEarlierVariation = has_earlier_variation(current);
     bool hasParent = current.has_parent();
     bool hasChildren = current.has_children();
-    bool hasMove = tree.has_move_ignore_invalid(current);
+    bool hasMove = tree.has_move(current);
     bool hasMoves = m_bd.has_moves(to_play);
     bool isEmpty = libboardgame_sgf::util::is_empty(tree);
     bool hasNextVar = current.get_sibling();

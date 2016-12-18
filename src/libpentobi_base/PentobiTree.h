@@ -48,21 +48,12 @@ public:
 
     void set_move(const SgfNode& node, Color c, Move mv);
 
+    bool has_move(const SgfNode& node) const;
+
     /** Return move or ColorMove::null() if node has no move property.
         @throws InvalidTree if the node has a move property with an invalid
         value. */
     ColorMove get_move(const SgfNode& node) const;
-
-    /** Like get_move() but returns ColorMove::null() on invalid property
-        value. */
-    ColorMove get_move_ignore_invalid(const SgfNode& node) const;
-
-    /** Does the node have a move property?
-        Does not check or throw if move value is invalid. */
-    bool has_move(const SgfNode& node) const;
-
-    /** Same as ! get_move_ignore_invalid.is_null() */
-    bool has_move_ignore_invalid(const SgfNode& node) const;
 
     const SgfNode* find_child_with_move(const SgfNode& node,
                                         ColorMove mv) const;
@@ -151,11 +142,6 @@ inline Variant PentobiTree::get_variant() const
 inline bool PentobiTree::has_move(const SgfNode& node) const
 {
     return libpentobi_base::node_util::has_move(node, m_variant);
-}
-
-inline bool PentobiTree::has_move_ignore_invalid(const SgfNode& node) const
-{
-    return ! get_move_ignore_invalid(node).is_null();
 }
 
 inline void PentobiTree::set_move(const SgfNode& node, ColorMove mv)

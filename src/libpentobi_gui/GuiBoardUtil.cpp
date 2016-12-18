@@ -17,6 +17,7 @@ namespace gui_board_util {
 
 using libpentobi_base::ColorMove;
 using libpentobi_base::PentobiTree;
+using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::util::is_main_variation;
 using libboardgame_sgf::util::get_move_annotation;
@@ -95,19 +96,25 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
     auto& bd = game.get_board();
     unsigned moveNumber = bd.get_nu_moves();
     auto node = &game.get_current();
-    do
+    try
     {
-        auto mv = tree.get_move_ignore_invalid(*node);
-        if (! mv.is_null())
+        do
         {
-            if (moveNumber >= markMovesBegin && moveNumber <= markMovesEnd)
-                markMove(guiBoard, game, *node, moveNumber, mv, markVariations,
-                         markWithDot);
-            --moveNumber;
+            auto mv = tree.get_move(*node);
+            if (! mv.is_null())
+            {
+                if (moveNumber >= markMovesBegin && moveNumber <= markMovesEnd)
+                    markMove(guiBoard, game, *node, moveNumber, mv, markVariations,
+                             markWithDot);
+                --moveNumber;
+            }
+            node = node->get_parent_or_null();
         }
-        node = node->get_parent_or_null();
+        while (node);
     }
-    while (node);
+    catch (const InvalidTree&)
+    {
+    }
 }
 
 //-----------------------------------------------------------------------------

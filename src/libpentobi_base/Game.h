@@ -90,9 +90,6 @@ public:
 
     ColorMove get_move() const;
 
-    /** See libpentobi_base::Tree::get_move_ignore_invalid() */
-    ColorMove get_move_ignore_invalid() const;
-
     /** Add final score to root node if the current node is in the main
         variation. */
     void set_result(int score);
@@ -252,11 +249,6 @@ inline double Game::get_good_move() const
 inline ColorMove Game::get_move() const
 {
     return m_tree.get_move(*m_current);
-}
-
-inline ColorMove Game::get_move_ignore_invalid() const
-{
-    return m_tree.get_move_ignore_invalid(*m_current);
 }
 
 inline string Game::get_player_name(Color c) const

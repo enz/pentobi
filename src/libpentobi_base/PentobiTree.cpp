@@ -76,18 +76,6 @@ ColorMove PentobiTree::get_move(const SgfNode& node) const
     return ColorMove(c, mv);
 }
 
-ColorMove PentobiTree::get_move_ignore_invalid(const SgfNode& node) const
-{
-    try
-    {
-        return get_move(node);
-    }
-    catch (const InvalidTree&)
-    {
-        return ColorMove::null();
-    }
-}
-
 const SgfNode* PentobiTree::get_node_before_move_number(
         unsigned move_number) const
 {
@@ -152,7 +140,7 @@ bool PentobiTree::has_main_variation_moves() const
     auto node = &get_root();
     do
     {
-        if (has_move_ignore_invalid(*node))
+        if (has_move(*node))
             return true;
         node = node->get_first_child_or_null();
     }

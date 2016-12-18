@@ -1130,7 +1130,7 @@ void GameModel::updateProperties()
         &GameModel::startingPointsAllChanged);
     auto& current = m_game.get_current();
     set(m_canUndo,
-           ! current.has_children() && tree.has_move_ignore_invalid(current)
+           ! current.has_children() && tree.has_move(current)
            && current.has_parent(),
            &GameModel::canUndoChanged);
     set(m_canGoForward, current.has_children(),
