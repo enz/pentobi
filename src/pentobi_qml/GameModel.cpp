@@ -172,7 +172,7 @@ void GameModel::changeGameVariant(const QString& gameVariant)
 
 bool GameModel::checkFileModifiedOutside()
 {
-    if (m_file.isEmpty())
+    if (m_file.isEmpty() || ! m_fileDate.isValid())
         return false;
     QFileInfo fileInfo(m_file);
     if (! fileInfo.exists())
