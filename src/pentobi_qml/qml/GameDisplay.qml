@@ -38,6 +38,10 @@ Item
     function showToPlay() { pieceSelector.contentY = 0 }
     function showAnalyzeGame() { flickable.showAnalyzeGame() }
     function showComment() { flickable.showComment() }
+    function dropCommentFocus() {
+        if (navigationPanel.activeFocusComment)
+            forceActiveFocus()
+    }
     function showMoveHint(move) { Logic.showMoveHint(move) }
     function grabBoardToImage(callback, width) {
         return board.grabToImage(callback,
@@ -81,8 +85,7 @@ Item
             function showAnalyzeGame() { contentX = 2 * width }
             function showComment() { contentX = width }
             function snap() {
-                if (navigationPanel.activeFocusComment)
-                    forceActiveFocus()
+                dropCommentFocus()
                 if (width == 0) return
                 snapAnimation.to =
                         Math.min(Math.round(contentX / width), 2) * width
@@ -201,6 +204,7 @@ Item
         onPositionChanged: {
             pickedPiece = null
             analyzeGameModel.markCurrentMove(gameModel)
+            dropCommentFocus()
         }
     }
 }
