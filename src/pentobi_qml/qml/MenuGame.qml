@@ -1,3 +1,4 @@
+import QtQml 2.2
 import QtQuick 2.0
 import QtQuick.Controls 1.1
 import "Main.js" as Logic
@@ -108,6 +109,24 @@ Menu {
     MenuItem {
         text: qsTr("&Open...")
         onTriggered: Logic.open()
+    }
+    Menu {
+        id: recentFiles
+
+        title: qsTr("Open Recent")
+        enabled: gameModel.recentFiles.length > 0
+        visible: ! isAndroid || enabled
+
+        Instantiator {
+            model: gameModel.recentFiles
+
+            MenuItem {
+                text: modelData
+                onTriggered: Logic.openFile(modelData)
+            }
+            onObjectAdded: recentFiles.insertItem(index, object)
+            onObjectRemoved: recentFiles.removeItem(object)
+        }
     }
     MenuItem {
         text: qsTr("&Save")

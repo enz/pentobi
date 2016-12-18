@@ -27,12 +27,14 @@ class GameModel
     : public QObject
 {
     Q_OBJECT
+
     Q_PROPERTY(QString gameVariant READ gameVariant NOTIFY gameVariantChanged)
     Q_PROPERTY(QString positionInfo READ positionInfo NOTIFY positionInfoChanged)
     Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
     Q_PROPERTY(QString lastInputOutputError READ lastInputOutputError)
     Q_PROPERTY(QString file READ file NOTIFY fileChanged)
     Q_PROPERTY(QString moveAnnotation READ moveAnnotation WRITE setMoveAnnotation NOTIFY moveAnnotationChanged)
+    Q_PROPERTY(QStringList recentFiles READ recentFiles NOTIFY recentFilesChanged)
     Q_PROPERTY(QDateTime fileDate READ fileDate NOTIFY fileDateChanged)
     Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int toPlay READ toPlay NOTIFY toPlayChanged)
@@ -81,6 +83,8 @@ class GameModel
     Q_PROPERTY(QString round READ getRound WRITE setRound NOTIFY roundChanged)
 
 public:
+    static const int maxRecentFiles = 10;
+
     static Variant getInitialGameVariant();
 
 
@@ -237,6 +241,8 @@ public:
 
     bool isMainVar() const { return m_isMainVar; }
 
+    const QStringList& recentFiles() const { return m_recentFiles; }
+
     const QVariantList& startingPoints0() const { return m_startingPoints0; }
 
     const QVariantList& startingPoints1() const { return m_startingPoints1; }
@@ -371,6 +377,8 @@ signals:
 
     void nuColorsChanged();
 
+    void recentFilesChanged();
+
     void startingPoints0Changed();
 
     void startingPoints1Changed();
@@ -427,6 +435,8 @@ private:
     QString m_event;
 
     QString m_round;
+
+    QStringList m_recentFiles;
 
     QDateTime m_fileDate;
 
@@ -511,6 +521,8 @@ private:
     QTextCodec* m_textCodec;
 
 
+    void addRecentFile(const QString& file);
+
     void createPieceModels();
 
     void createPieceModels(Color c, QList<PieceModel*>& pieceModels);
@@ -527,6 +539,8 @@ private:
     void initGame(Variant variant);
 
     void initGameVariant(Variant variant);
+
+    void loadRecentFiles();
 
     bool open(istream& in);
 

@@ -117,12 +117,24 @@ GameModel::GameModel(QObject* parent)
       m_gameVariant(to_string_id(m_game.get_variant())),
       m_nuColors(getBoard().get_nu_colors())
 {
+    loadRecentFiles();
     initGame(m_game.get_variant());
     createPieceModels();
     updateProperties();
 }
 
 GameModel::~GameModel() = default;
+
+void GameModel::addRecentFile(const QString& file)
+{
+    m_recentFiles.removeAll(file);
+    m_recentFiles.prepend(file);
+    while (m_recentFiles.length() > maxRecentFiles)
+        m_recentFiles.removeLast();
+    QSettings settings;
+    settings.setValue("recentFiles", m_recentFiles);
+    emit recentFilesChanged();
+}
 
 void GameModel::autoSave()
 {
@@ -534,6 +546,19 @@ bool GameModel::loadAutoSave()
     return true;
 }
 
+void GameModel::loadRecentFiles()
+{
+    QSettings settings;
+    m_recentFiles = settings.value("recentFiles", "").toStringList();
+    QMutableListIterator<QString> i(m_recentFiles);
+    while (i.hasNext())
+        if (! QFileInfo::exists(i.next()))
+            i.remove();
+    while (m_recentFiles.length() > maxRecentFiles)
+        m_recentFiles.removeLast();
+    emit recentFilesChanged();
+}
+
 void GameModel::makeMainVar()
 {
     m_game.make_main_variation();
@@ -623,6 +648,7 @@ bool GameModel::open(const QString& file)
     {
         updateFileInfo(file);
         goEnd();
+        addRecentFile(file);
         return true;
     }
     setFile("");
@@ -752,6 +778,7 @@ bool GameModel::save(const QString& file)
     }
     updateFileInfo(file);
     setIsModified(false);
+    addRecentFile(file);
     return true;
 }
 

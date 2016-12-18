@@ -604,6 +604,10 @@
         <source>&amp;Game Info</source>
         <translation>Spielinf&amp;ormation</translation>
     </message>
+    <message>
+        <source>Open Recent</source>
+        <translation>&amp;Zuletzt benutzte Dateien</translation>
+    </message>
 </context>
 <context>
     <name>MenuGo</name>

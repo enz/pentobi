@@ -14,9 +14,10 @@ Android version
 
 * Current game position, associated file name and file modification status
   are now remembered between sessions.
-* New menu items Game/Save, Game/Export/Image, Game/Export/ASCII Art,
-  Go/Go to Move, Go/Beginning of Branch, Edit/Keep Only Position,
-  Edit/Keep Only Subtree, View/Coordinates, Computer/Play Single Move.
+* New menu items Game/Recent Files, Game/Save, Game/Export/Image,
+  Game/Export/ASCII Art, Go/Go to Move, Go/Beginning of Branch,
+  Edit/Keep Only Position, Edit/Keep Only Subtree, View/Coordinates,
+  Computer/Play Single Move.
 * Support for displaying and editing comments in the SGF file.
 * Support for game analysis.
 * Support for displaying and editing game information.
