@@ -282,6 +282,10 @@ function openGameInfoDialog() {
     dialog.round = gameModel.round
 }
 
+function openRecentFile(file) {
+    verify(function() { openFile(file) })
+}
+
 function play(pieceModel, gameCoord) {
     var wasComputerToPlay = isComputerToPlay()
     gameModel.playPiece(pieceModel, gameCoord)

@@ -122,7 +122,7 @@ Menu {
 
             MenuItem {
                 text: modelData
-                onTriggered: Logic.openFile(modelData)
+                onTriggered: Logic.openRecentFile(modelData)
             }
             onObjectAdded: recentFiles.insertItem(index, object)
             onObjectRemoved: recentFiles.removeItem(object)
