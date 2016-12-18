@@ -32,6 +32,7 @@ class GameModel
     Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
     Q_PROPERTY(QString lastInputOutputError READ lastInputOutputError)
     Q_PROPERTY(QString file READ file NOTIFY fileChanged)
+    Q_PROPERTY(QString moveAnnotation READ moveAnnotation WRITE setMoveAnnotation NOTIFY moveAnnotationChanged)
     Q_PROPERTY(QDateTime fileDate READ fileDate NOTIFY fileDateChanged)
     Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int toPlay READ toPlay NOTIFY toPlayChanged)
@@ -171,6 +172,8 @@ public:
 
     const QString& file() const { return m_file; }
 
+    const QString& moveAnnotation() const { return m_moveAnnotation; }
+
     const QDateTime& fileDate() const { return m_fileDate; }
 
     const QString& comment() const { return m_comment; }
@@ -260,6 +263,8 @@ public:
 
     void setIsModified(bool isModified);
 
+    void setMoveAnnotation(const QString& annotation);
+
     void setPlayerName0(const QString& name);
 
     void setPlayerName1(const QString& name);
@@ -300,6 +305,8 @@ signals:
     void fileChanged();
 
     void fileDateChanged();
+
+    void moveAnnotationChanged();
 
     void points0Changed();
 
@@ -396,6 +403,8 @@ private:
 
     QString m_file;
 
+    QString m_moveAnnotation;
+
     QString m_playerName0;
 
     QString m_playerName1;
@@ -413,7 +422,6 @@ private:
     QString m_round;
 
     QDateTime m_fileDate;
-
 
     int m_nuColors;
 
@@ -536,10 +544,14 @@ private:
 
     void updateIsModified();
 
+    void updateMoveAnnotation();
+
     PieceModel* updatePiece(Color c, Move mv,
                             array<bool, Board::max_pieces>& isPlayed);
 
     void updatePieces();
+
+    void updatePositionInfo();
 
     void updateProperties();
 };

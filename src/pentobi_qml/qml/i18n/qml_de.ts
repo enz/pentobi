@@ -449,6 +449,38 @@
         <source>Keep Only &amp;Subtree</source>
         <translation>Nur &amp;Teilbaum behalten</translation>
     </message>
+    <message>
+        <source>Move &amp;Annotation</source>
+        <translation>&amp;Zugkommentierung</translation>
+    </message>
+    <message>
+        <source>&amp;None</source>
+        <translation>&amp;Keine</translation>
+    </message>
+    <message>
+        <source>&amp;Very good</source>
+        <translation>&amp;Sehr gut</translation>
+    </message>
+    <message>
+        <source>&amp;Good</source>
+        <translation>&amp;Gut</translation>
+    </message>
+    <message>
+        <source>&amp;Doubtful</source>
+        <translation>&amp;Zweifelhaft</translation>
+    </message>
+    <message>
+        <source>&amp;Bad</source>
+        <translation>S&amp;chlecht</translation>
+    </message>
+    <message>
+        <source>Very B&amp;ad</source>
+        <translation>Se&amp;hr schlecht</translation>
+    </message>
+    <message>
+        <source>Int&amp;eresting</source>
+        <translation>Int&amp;eressant</translation>
+    </message>
 </context>
 <context>
     <name>MenuGame</name>

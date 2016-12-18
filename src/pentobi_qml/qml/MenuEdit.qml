@@ -5,6 +5,63 @@ import "Main.js" as Logic
 Menu {
     title: qsTr("&Edit")
 
+    Menu {
+        title: qsTr("Move &Annotation")
+        enabled: gameModel.moveNumber > 0
+        visible: ! isAndroid || enabled
+
+        ExclusiveGroup { id: moveAnnotationGroup }
+        MenuItem {
+            text: qsTr("&None")
+            checkable: true
+            exclusiveGroup: moveAnnotationGroup
+            checked: gameModel.moveAnnotation === ""
+            onTriggered: gameModel.moveAnnotation = ""
+        }
+        MenuItem {
+            text: qsTr("&Very good")
+            checkable: true
+            exclusiveGroup: moveAnnotationGroup
+            checked: gameModel.moveAnnotation === "!!"
+            onTriggered: gameModel.moveAnnotation = "!!"
+        }
+        MenuItem {
+            text: qsTr("&Good")
+            checkable: true
+            exclusiveGroup: moveAnnotationGroup
+            checked: gameModel.moveAnnotation === "!"
+            onTriggered: gameModel.moveAnnotation = "!"
+        }
+        MenuItem {
+            text: qsTr("Int&eresting")
+            checkable: true
+            exclusiveGroup: moveAnnotationGroup
+            checked: gameModel.moveAnnotation === "!?"
+            onTriggered: gameModel.moveAnnotation = "!?"
+        }
+        MenuItem {
+            text: qsTr("&Doubtful")
+            checkable: true
+            exclusiveGroup: moveAnnotationGroup
+            checked: gameModel.moveAnnotation === "?!"
+            onTriggered: gameModel.moveAnnotation = "?!"
+        }
+        MenuItem {
+            text: qsTr("&Bad")
+            checkable: true
+            exclusiveGroup: moveAnnotationGroup
+            checked: gameModel.moveAnnotation === "?"
+            onTriggered: gameModel.moveAnnotation = "?"
+        }
+        MenuItem {
+            text: qsTr("Very B&ad")
+            checkable: true
+            exclusiveGroup: moveAnnotationGroup
+            checked: gameModel.moveAnnotation === "??"
+            onTriggered: gameModel.moveAnnotation = "??"
+        }
+    }
+    MenuSeparator { }
     MenuItem {
         text: qsTr("Make &Main Variation")
         enabled: ! gameModel.isMainVar

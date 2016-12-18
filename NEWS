@@ -20,7 +20,8 @@ Android version
 * Support for displaying and editing comments in the SGF file.
 * Support for game analysis.
 * Support for displaying and editing game information.
-* Support for different kinds of move markings like in desktop version.
+* Support for different kinds of move markings like in desktop version
+* Support for move annotations.
 * The source code now requires Qt 5.8, which no longer supports Android
   versions older than Android 4.1.
 

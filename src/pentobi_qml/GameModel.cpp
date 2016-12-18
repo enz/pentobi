@@ -782,6 +782,29 @@ void GameModel::setComment(const QString& comment)
     updateIsModified();
 }
 
+void GameModel::setDate(const QString& date)
+{
+    if (date == m_date)
+        return;
+    m_date = date;
+    m_game.set_date(encode(date).constData());
+    emit dateChanged();
+    // updateIsGameEmpty() not necessary, see
+    // libboardgame_sgf::util::is_empty()
+    updateIsModified();
+}
+
+void GameModel::setEvent(const QString& event)
+{
+    if (event == m_event)
+        return;
+    m_event = event;
+    m_game.set_event(encode(event).constData());
+    emit eventChanged();
+    updateIsGameEmpty();
+    updateIsModified();
+}
+
 void GameModel::setFile(const QString& file)
 {
     if (file == m_file)
@@ -802,6 +825,26 @@ void GameModel::setIsModified(bool isModified)
 {
     m_game.set_modified(isModified);
     updateIsModified();
+}
+
+void GameModel::setMoveAnnotation(const QString& annotation)
+{
+    m_game.remove_move_annotation();
+    if (annotation == "!")
+        m_game.set_good_move();
+    else if (annotation == "!!")
+        m_game.set_good_move(2);
+    else if (annotation == "?")
+        m_game.set_bad_move();
+    else if (annotation == "??")
+        m_game.set_bad_move(2);
+    else if (annotation == "!?")
+        m_game.set_interesting_move();
+    else if (annotation == "?!")
+        m_game.set_doubtful_move();
+    updateMoveAnnotation();
+    updatePositionInfo();
+    updatePieces();
 }
 
 void GameModel::setPlayerName0(const QString& name)
@@ -848,15 +891,14 @@ void GameModel::setPlayerName3(const QString& name)
     updateIsModified();
 }
 
-void GameModel::setDate(const QString& date)
+void GameModel::setRound(const QString& round)
 {
-    if (date == m_date)
+    if (round == m_round)
         return;
-    m_date = date;
-    m_game.set_date(encode(date).constData());
-    emit dateChanged();
-    // updateIsGameEmpty() not necessary, see
-    // libboardgame_sgf::util::is_empty()
+    m_round = round;
+    m_game.set_round(encode(round).constData());
+    emit roundChanged();
+    updateIsGameEmpty();
     updateIsModified();
 }
 
@@ -867,28 +909,6 @@ void GameModel::setTime(const QString& time)
     m_time = time;
     m_game.set_time(encode(time).constData());
     emit playerName3Changed();
-    updateIsGameEmpty();
-    updateIsModified();
-}
-
-void GameModel::setEvent(const QString& event)
-{
-    if (event == m_event)
-        return;
-    m_event = event;
-    m_game.set_event(encode(event).constData());
-    emit eventChanged();
-    updateIsGameEmpty();
-    updateIsModified();
-}
-
-void GameModel::setRound(const QString& round)
-{
-    if (round == m_round)
-        return;
-    m_round = round;
-    m_game.set_round(encode(round).constData());
-    emit roundChanged();
     updateIsGameEmpty();
     updateIsModified();
 }
@@ -931,12 +951,6 @@ void GameModel::updateFileInfo(const QString& file)
     setFileDate(fileInfo.lastModified());
 }
 
-void GameModel::updateIsGameEmpty()
-{
-    set(m_isGameEmpty, libboardgame_sgf::util::is_empty(m_game.get_tree()),
-        &GameModel::isGameEmptyChanged);
-}
-
 void GameModel::updateGameInfo()
 {
     static_assert(Color::range == 4, "");
@@ -953,9 +967,22 @@ void GameModel::updateGameInfo()
     setRound(decode(m_game.get_round()));
 }
 
+void GameModel::updateIsGameEmpty()
+{
+    set(m_isGameEmpty, libboardgame_sgf::util::is_empty(m_game.get_tree()),
+        &GameModel::isGameEmptyChanged);
+}
+
 void GameModel::updateIsModified()
 {
     set(m_isModified, m_game.is_modified(), &GameModel::isModifiedChanged);
+}
+
+void GameModel::updateMoveAnnotation()
+{
+    QString moveAnnotation =
+            get_move_annotation(m_game.get_tree(), m_game.get_current());
+    set(m_moveAnnotation, moveAnnotation, &GameModel::moveAnnotationChanged);
 }
 
 PieceModel* GameModel::updatePiece(Color c, Move mv,
@@ -1061,6 +1088,27 @@ void GameModel::updatePieces()
     }
 }
 
+void GameModel::updatePositionInfo()
+{
+    auto& tree = m_game.get_tree();
+    auto& current = m_game.get_current();
+    auto& bd = m_game.get_board();
+    auto positionInfo
+            = QString::fromLocal8Bit(get_position_info(tree, current).c_str());
+    if (positionInfo.isEmpty())
+        positionInfo = bd.has_setup() ? tr("(Setup)") : tr("(No moves)");
+    else
+    {
+        positionInfo = tr("Move %1").arg(positionInfo);
+        if (bd.get_nu_moves() == 0 && bd.has_setup())
+        {
+            positionInfo.append(' ');
+            positionInfo.append(tr("(Setup)"));
+        }
+    }
+    set(m_positionInfo, positionInfo, &GameModel::positionInfoChanged);
+}
+
 /** Update all properties that might change when changing the current
     position in the game tree. */
 void GameModel::updateProperties()
@@ -1150,20 +1198,7 @@ void GameModel::updateProperties()
         &GameModel::moveNumberChanged);
     set(m_movesLeft, static_cast<int>(get_moves_left(tree, current)),
         &GameModel::movesLeftChanged);
-    auto positionInfo
-            = QString::fromLocal8Bit(get_position_info(tree, current).c_str());
-    if (positionInfo.isEmpty())
-        positionInfo = bd.has_setup() ? tr("(Setup)") : tr("(No moves)");
-    else
-    {
-        positionInfo = tr("Move %1").arg(positionInfo);
-        if (bd.get_nu_moves() == 0 && bd.has_setup())
-        {
-            positionInfo.append(' ');
-            positionInfo.append(tr("(Setup)"));
-        }
-    }
-    set(m_positionInfo, positionInfo, &GameModel::positionInfoChanged);
+    updatePositionInfo();
     bool isGameOver = true;
     for (Color c : bd.get_colors())
         if (bd.has_moves(c))
@@ -1174,6 +1209,7 @@ void GameModel::updateProperties()
     set(m_isGameOver, isGameOver, &GameModel::isGameOverChanged);
     updateIsGameEmpty();
     updateIsModified();
+    updateMoveAnnotation();
     updatePieces();
     set(m_comment, decode(m_game.get_comment()), &GameModel::commentChanged);
     set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int(),
