@@ -43,6 +43,9 @@ using libpentobi_base::PiecePoints;
 using libpentobi_base::PieceSet;
 using libpentobi_base::Point;
 using libpentobi_base::node_util::has_setup;
+using libpentobi_base::tree_util::get_move_number;
+using libpentobi_base::tree_util::get_moves_left;
+using libpentobi_base::tree_util::get_move_node;
 using libpentobi_base::tree_util::get_position_info;
 
 //-----------------------------------------------------------------------------
@@ -429,6 +432,12 @@ void GameModel::goNextVar()
 void GameModel::goPrevVar()
 {
     gotoNode(m_game.get_current().get_previous_sibling());
+}
+
+void GameModel::gotoMove(int n)
+{
+    if (n > 0)
+        gotoNode(get_move_node(m_game.get_tree(), m_game.get_current(), n));
 }
 
 void GameModel::gotoNode(const SgfNode& node)
@@ -1050,6 +1059,8 @@ void GameModel::updatePieces()
     }
 }
 
+/** Update all properties that might change when changing the current
+    position in the game tree. */
 void GameModel::updateProperties()
 {
     auto& bd = getBoard();
@@ -1132,8 +1143,11 @@ void GameModel::updateProperties()
         &GameModel::hasNextVarChanged);
     set(m_hasVariations, tree.has_variations(),
         &GameModel::hasVariationsChanged);
-    set(m_isMainVar, is_main_variation(current),
-        &GameModel::isMainVarChanged);
+    set(m_isMainVar, is_main_variation(current), &GameModel::isMainVarChanged);
+    set(m_moveNumber, static_cast<int>(get_move_number(tree, current)),
+        &GameModel::moveNumberChanged);
+    set(m_movesLeft, static_cast<int>(get_moves_left(tree, current)),
+        &GameModel::movesLeftChanged);
     auto positionInfo
             = QString::fromLocal8Bit(get_position_info(tree, current).c_str());
     if (positionInfo.isEmpty())

@@ -232,6 +232,17 @@
     </message>
 </context>
 <context>
+    <name>GotoMoveDialog</name>
+    <message>
+        <source>Go to Move</source>
+        <translation>Gehe zu Zug</translation>
+    </message>
+    <message>
+        <source>Move number:</source>
+        <translation>Zugnummer:</translation>
+    </message>
+</context>
+<context>
     <name>ImageSaveDialog</name>
     <message>
         <source>Save Image</source>
@@ -251,10 +262,6 @@
     <message>
         <source>Pentobi</source>
         <translation>Pentobi</translation>
-    </message>
-    <message>
-        <source>New game?</source>
-        <translation>Neues Spiel?</translation>
     </message>
     <message>
         <source>Open failed.</source>
@@ -575,6 +582,10 @@
     <message>
         <source>Back to &amp;Main Variation</source>
         <translation>Zurück zu &amp;Hauptvariante</translation>
+    </message>
+    <message>
+        <source>&amp;Go to Move...</source>
+        <translation>&amp;Gehe zu Zug...</translation>
     </message>
 </context>
 <context>

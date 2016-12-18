@@ -36,6 +36,8 @@ class GameModel
     Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int toPlay READ toPlay NOTIFY toPlayChanged)
     Q_PROPERTY(int altPlayer READ altPlayer NOTIFY altPlayerChanged)
+    Q_PROPERTY(int moveNumber READ moveNumber NOTIFY moveNumberChanged)
+    Q_PROPERTY(int movesLeft READ movesLeft NOTIFY movesLeftChanged)
     Q_PROPERTY(float points0 READ points0 NOTIFY points0Changed)
     Q_PROPERTY(float points1 READ points1 NOTIFY points1Changed)
     Q_PROPERTY(float points2 READ points2 NOTIFY points2Changed)
@@ -118,6 +120,8 @@ public:
 
     Q_INVOKABLE void backToMainVar();
 
+    Q_INVOKABLE void gotoMove(int n);
+
     Q_INVOKABLE void changeGameVariant(const QString& gameVariant);
 
     Q_INVOKABLE void autoSave();
@@ -176,6 +180,10 @@ public:
     int toPlay() const { return m_toPlay; }
 
     int altPlayer() const { return m_altPlayer; }
+
+    int moveNumber() const { return m_moveNumber; }
+
+    int movesLeft() const { return m_movesLeft; }
 
     float points0() const { return m_points0; }
 
@@ -343,6 +351,10 @@ signals:
 
     void commentChanged();
 
+    void moveNumberChanged();
+
+    void movesLeftChanged();
+
     void nuColorsChanged();
 
     void startingPoints0Changed();
@@ -408,6 +420,10 @@ private:
     int m_toPlay = 0;
 
     int m_altPlayer = 0;
+
+    int m_moveNumber = 0;
+
+    int m_movesLeft = 0;
 
     float m_points0 = 0;
 

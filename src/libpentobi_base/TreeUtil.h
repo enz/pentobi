@@ -14,6 +14,10 @@ namespace tree_util {
 
 //-----------------------------------------------------------------------------
 
+/** Get the node with a given move number in the variation of a given node. */
+const SgfNode* get_move_node(const PentobiTree& tree, const SgfNode& node,
+                             unsigned n);
+
 /** Get the move number at a node.
     Counts the number of moves since the root node or the last node
     that contained setup properties. Invalid moves are ignored. */

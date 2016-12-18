@@ -81,6 +81,7 @@ using libpentobi_base::PieceSet;
 using libpentobi_base::PentobiTree;
 using libpentobi_base::PentobiTreeWriter;
 using libpentobi_base::ScoreType;
+using libpentobi_base::tree_util::get_move_node;
 using libpentobi_base::tree_util::get_move_number;
 using libpentobi_base::tree_util::get_moves_left;
 using libpentobi_base::tree_util::get_position_info;
@@ -1916,27 +1917,13 @@ void MainWindow::goodMove(bool checked)
 
 void MainWindow::gotoMove()
 {
-    vector<const SgfNode*> nodes;
     auto& tree = m_game.get_tree();
-    auto node = &m_game.get_current();
-    do
-    {
-        if (! tree.get_move(*node).is_null())
-            nodes.insert(nodes.begin(), node);
-        node = node->get_parent_or_null();
-    }
-    while (node);
-    node = m_game.get_current().get_first_child_or_null();
-    while (node)
-    {
-        if (! tree.get_move(*node).is_null())
-            nodes.push_back(node);
-        node = node->get_first_child_or_null();
-    }
-    int maxMoves = int(nodes.size());
+    auto& current = m_game.get_current();
+    auto moveNumber = get_move_number(tree, current);
+    auto maxMoves = moveNumber + get_moves_left(tree, current);
     if (maxMoves == 0)
         return;
-    int defaultValue = m_bd.get_nu_moves();
+    auto defaultValue = moveNumber;
     if (defaultValue == 0)
         defaultValue = maxMoves;
     QInputDialog dialog(this);
@@ -1945,11 +1932,11 @@ void MainWindow::gotoMove()
     dialog.setWindowTitle(tr("Go to Move"));
     dialog.setLabelText(tr("Move number:"));
     dialog.setInputMode(QInputDialog::IntInput);
-    dialog.setIntRange(1, static_cast<int>(nodes.size()));
+    dialog.setIntRange(1, static_cast<int>(maxMoves));
     dialog.setIntStep(1);
-    dialog.setIntValue(defaultValue);
+    dialog.setIntValue(static_cast<int>(defaultValue));
     if (dialog.exec())
-        gotoNode(*nodes[dialog.intValue() - 1]);
+        gotoNode(get_move_node(tree, current, dialog.intValue()));
 }
 
 void MainWindow::gotoNode(const SgfNode& node)

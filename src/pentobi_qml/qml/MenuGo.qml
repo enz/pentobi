@@ -4,8 +4,16 @@ import "Main.js" as Logic
 
 Menu {
     title: qsTr("G&o")
-    visible: ! isAndroid || backToMainVar.enabled
+    visible: ! isAndroid || backToMainVar.enabled || gotoMove.enabled
 
+    MenuItem {
+        id: gotoMove
+
+        text: qsTr("&Go to Move...")
+        enabled: gameModel.moveNumber + gameModel.movesLeft > 1
+        visible: ! isAndroid || enabled
+        onTriggered: gotoMoveDialog.open()
+    }
     MenuItem {
         id: backToMainVar
 

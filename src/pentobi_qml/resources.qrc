@@ -11,6 +11,7 @@
         <file>qml/ExportImageDialog.qml</file>
         <file>qml/GameDisplay.qml</file>
         <file>qml/GameInfoDialog.qml</file>
+        <file>qml/GotoMoveDialog.qml</file>
         <file>qml/ImageSaveDialog.qml</file>
         <file>qml/LineSegment.qml</file>
         <file>qml/Main.qml</file>

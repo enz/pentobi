@@ -185,6 +185,7 @@ ApplicationWindow {
     DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
     DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
     DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }
+    DialogLoader { id: gotoMoveDialog; url: "GotoMoveDialog.qml" }
     Loader { id: errorMessageLoader }
     Component {
         id: errorMessageComponent
