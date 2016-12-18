@@ -26,6 +26,7 @@ using libboardgame_sgf::TreeReader;
 using libboardgame_util::get_letter_coord;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::get_last_node;
+using libboardgame_sgf::util::get_move_annotation;
 using libboardgame_sgf::util::is_main_variation;
 using libpentobi_base::get_piece_set;
 using libpentobi_base::to_string_id;
@@ -1027,6 +1028,7 @@ void GameModel::updatePieces()
             unsigned moveIndex;
             if (getVariationIndex(tree, *node, moveIndex))
                 label.append(get_letter_coord(moveIndex).c_str());
+            label.append(get_move_annotation(tree, *node));
             pieceModel->setMoveLabel(label);
             if (! lastMovePieceModel)
                 lastMovePieceModel = pieceModel;
