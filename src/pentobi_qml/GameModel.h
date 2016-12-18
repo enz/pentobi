@@ -60,6 +60,7 @@ class GameModel
     Q_PROPERTY(bool hasPrevVar READ hasPrevVar NOTIFY hasPrevVarChanged)
     Q_PROPERTY(bool hasNextVar READ hasNextVar NOTIFY hasNextVarChanged)
     Q_PROPERTY(bool hasVariations READ hasVariations NOTIFY hasVariationsChanged)
+    Q_PROPERTY(bool hasEarlierVar READ hasEarlierVar NOTIFY hasEarlierVarChanged)
     Q_PROPERTY(bool isMainVar READ isMainVar NOTIFY isMainVarChanged)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels0 READ pieceModels0)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels1 READ pieceModels1)
@@ -120,6 +121,8 @@ public:
     Q_INVOKABLE void goPrevVar();
 
     Q_INVOKABLE void backToMainVar();
+
+    Q_INVOKABLE void gotoBeginningOfBranch();
 
     Q_INVOKABLE void gotoMove(int n);
 
@@ -224,6 +227,8 @@ public:
 
     bool canGoForward() const { return m_canGoForward; }
 
+    bool hasEarlierVar() const { return m_hasEarlierVar; }
+
     bool hasPrevVar() const { return m_hasPrevVar; }
 
     bool hasNextVar() const { return m_hasNextVar; }
@@ -323,6 +328,8 @@ signals:
     void bonus2Changed();
 
     void bonus3Changed();
+
+    void hasEarlierVarChanged();
 
     void hasMoves0Changed();
 
@@ -470,6 +477,8 @@ private:
     bool m_canGoForward = false;
 
     bool m_canGoBackward = false;
+
+    bool m_hasEarlierVar = false;
 
     bool m_hasPrevVar = false;
 

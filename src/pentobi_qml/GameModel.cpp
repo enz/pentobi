@@ -25,8 +25,10 @@ using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;
 using libboardgame_util::get_letter_coord;
 using libboardgame_sgf::util::back_to_main_variation;
+using libboardgame_sgf::util::beginning_of_branch;
 using libboardgame_sgf::util::get_last_node;
 using libboardgame_sgf::util::get_move_annotation;
+using libboardgame_sgf::util::has_earlier_variation;
 using libboardgame_sgf::util::is_main_variation;
 using libpentobi_base::get_piece_set;
 using libpentobi_base::to_string_id;
@@ -433,6 +435,11 @@ void GameModel::goNextVar()
 void GameModel::goPrevVar()
 {
     gotoNode(m_game.get_current().get_previous_sibling());
+}
+
+void GameModel::gotoBeginningOfBranch()
+{
+    gotoNode(beginning_of_branch(m_game.get_current()));
 }
 
 void GameModel::gotoMove(int n)
@@ -1193,6 +1200,8 @@ void GameModel::updateProperties()
         &GameModel::hasNextVarChanged);
     set(m_hasVariations, tree.has_variations(),
         &GameModel::hasVariationsChanged);
+    set(m_hasEarlierVar, has_earlier_variation(current),
+        &GameModel::hasEarlierVarChanged);
     set(m_isMainVar, is_main_variation(current), &GameModel::isMainVarChanged);
     set(m_moveNumber, static_cast<int>(get_move_number(tree, current)),
         &GameModel::moveNumberChanged);

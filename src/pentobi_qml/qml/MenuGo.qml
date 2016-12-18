@@ -5,6 +5,7 @@ import "Main.js" as Logic
 Menu {
     title: qsTr("G&o")
     visible: ! isAndroid || backToMainVar.enabled || gotoMove.enabled
+             || beginningOfBranch.enabled
 
     MenuItem {
         id: gotoMove
@@ -21,5 +22,13 @@ Menu {
         enabled: ! gameModel.isMainVar
         visible: ! isAndroid || enabled
         onTriggered: gameModel.backToMainVar()
+    }
+    MenuItem {
+        id: beginningOfBranch
+
+        text: qsTr("Beginning of Bran&ch")
+        enabled: gameModel.hasEarlierVar
+        visible: ! isAndroid || enabled
+        onTriggered: gameModel.gotoBeginningOfBranch()
     }
 }
