@@ -5,7 +5,7 @@ import "Main.js" as Logic
 Menu {
     title: qsTr("G&o")
     visible: ! isAndroid || backToMainVar.enabled || gotoMove.enabled
-             || beginningOfBranch.enabled
+             || beginningOfBranch.enabled || findNextComment.enabled
 
     MenuItem {
         id: gotoMove
@@ -30,5 +30,14 @@ Menu {
         enabled: gameModel.hasEarlierVar
         visible: ! isAndroid || enabled
         onTriggered: gameModel.gotoBeginningOfBranch()
+    }
+    MenuSeparator { }
+    MenuItem {
+        id: findNextComment
+
+        text: qsTr("Find Next &Comment")
+        enabled: gameModel.canGoForward || gameModel.canGoBackward
+        visible: ! isAndroid || enabled
+        onTriggered: Logic.findNextComment()
     }
 }

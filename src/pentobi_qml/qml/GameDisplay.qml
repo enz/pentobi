@@ -37,6 +37,7 @@ Item
     function destroyPieces() { Logic.destroyPieces() }
     function showToPlay() { pieceSelector.contentY = 0 }
     function showAnalyzeGame() { flickable.showAnalyzeGame() }
+    function showComment() { flickable.showComment() }
     function showMoveHint(move) { Logic.showMoveHint(move) }
     function grabBoardToImage(callback, width) {
         return board.grabToImage(callback,
@@ -78,6 +79,7 @@ Item
             onHeightChanged: snap()
 
             function showAnalyzeGame() { contentX = 2 * width }
+            function showComment() { contentX = width }
             function snap() {
                 if (navigationPanel.activeFocusComment)
                     forceActiveFocus()

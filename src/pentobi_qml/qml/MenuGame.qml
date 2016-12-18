@@ -113,7 +113,7 @@ Menu {
     Menu {
         id: recentFiles
 
-        title: qsTr("Open Recent")
+        title: qsTr("Open R&ecent")
         enabled: gameModel.recentFiles.length > 0
         visible: ! isAndroid || enabled
 

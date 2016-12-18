@@ -95,6 +95,10 @@ public:
 
     Q_INVOKABLE void deleteAllVar();
 
+    Q_INVOKABLE bool findNextComment();
+
+    Q_INVOKABLE bool findNextCommentContinueFromRoot();
+
     Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, const QString& state,
                                 QPointF coord) const;
 

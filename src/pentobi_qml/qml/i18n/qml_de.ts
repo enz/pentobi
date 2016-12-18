@@ -331,6 +331,14 @@
         <source>File has been modified by another application. Save anyway?</source>
         <translation>Datei wurde von einer anderen Anwendung bearbeitet. Trotzdem speichern?</translation>
     </message>
+    <message>
+        <source>End of tree was reached. Continue search from start of the tree?</source>
+        <translation>Ende des Spielbaums erreicht. Suche vom Start des Spielbaums fortsetzen?</translation>
+    </message>
+    <message>
+        <source>No comment found</source>
+        <translation>Kein Kommentar gefunden</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -605,7 +613,7 @@
         <translation>Spielinf&amp;ormation</translation>
     </message>
     <message>
-        <source>Open Recent</source>
+        <source>Open R&amp;ecent</source>
         <translation>&amp;Zuletzt benutzte Dateien</translation>
     </message>
 </context>
@@ -626,6 +634,10 @@
     <message>
         <source>Beginning of Bran&amp;ch</source>
         <translation>Anfang der Verz&amp;weigung</translation>
+    </message>
+    <message>
+        <source>Find Next &amp;Comment</source>
+        <translation>Nächsten &amp;Kommentar finden</translation>
     </message>
 </context>
 <context>

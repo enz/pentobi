@@ -136,6 +136,28 @@ function exportImage(fileUrl) {
         showError(qsTr("Creating image failed."))
 }
 
+function findNextComment() {
+    if (gameModel.findNextComment()) {
+        gameDisplay.showComment()
+        return
+    }
+    if (gameModel.canGoBackward)
+        // Current is not root
+        showQuestion(qsTr("End of tree was reached. Continue search from start of the tree?"),
+                     findNextCommentContinueFromRoot)
+    else
+        showInfo(qsTr("No comment found"))
+
+}
+
+function findNextCommentContinueFromRoot() {
+    if (gameModel.findNextCommentContinueFromRoot()) {
+        gameDisplay.showComment()
+        return
+    }
+    showInfo(qsTr("No comment found"))
+}
+
 function genMove() {
     gameDisplay.pickedPiece = null
     isMoveHintRunning = false

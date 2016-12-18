@@ -26,8 +26,10 @@ using libboardgame_sgf::TreeReader;
 using libboardgame_util::get_letter_coord;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::beginning_of_branch;
+using libboardgame_sgf::util::find_next_comment;
 using libboardgame_sgf::util::get_last_node;
 using libboardgame_sgf::util::get_move_annotation;
+using libboardgame_sgf::util::has_comment;
 using libboardgame_sgf::util::has_earlier_variation;
 using libboardgame_sgf::util::is_main_variation;
 using libpentobi_base::get_piece_set;
@@ -288,6 +290,26 @@ bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
         points.push_back(geo.get_point(x, y));
     }
     return bd.find_move(points, piece, mv);
+}
+
+bool GameModel::findNextComment()
+{
+    auto node = find_next_comment(m_game.get_current());
+    if (! node)
+        return false;
+    gotoNode(*node);
+    return true;
+}
+
+bool GameModel::findNextCommentContinueFromRoot()
+{
+    auto node = &m_game.get_root();
+    if (! has_comment(*node))
+        node = find_next_comment(*node);
+    if (! node)
+        return false;
+    gotoNode(*node);
+    return true;
 }
 
 QString GameModel::getResultMessage()
