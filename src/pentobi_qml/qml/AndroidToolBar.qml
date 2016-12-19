@@ -30,7 +30,7 @@ RowLayout {
         }
         MouseArea {
             anchors.fill: parent
-            onClicked: toolTip.open()
+            onClicked: if (title.truncated) toolTip.open()
         }
     }
     AndroidToolButton {
