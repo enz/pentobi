@@ -696,6 +696,10 @@
         <source>N&amp;one</source>
         <translation>&amp;Keine</translation>
     </message>
+    <message>
+        <source>Show &amp;Variations</source>
+        <translation>&amp;Varianten zeigen</translation>
+    </message>
 </context>
 <context>
     <name>OpenDialog</name>

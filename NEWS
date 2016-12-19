@@ -17,7 +17,7 @@ Android version
 * New menu items Game/Recent Files, Game/Save, Game/Export/Image,
   Game/Export/ASCII Art, Go/Go to Move, Go/Beginning of Branch,
   Go/Find Next Comment, Edit/Keep Only Position, Edit/Keep Only Subtree,
-  View/Coordinates, Computer/Play Single Move.
+  View/Coordinates, View/Show Variations, Computer/Play Single Move.
 * Support for displaying and editing comments in the SGF file.
 * Support for game analysis.
 * Support for displaying and editing game information.

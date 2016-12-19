@@ -143,6 +143,7 @@ ApplicationWindow {
         property alias computerPlays3: root.computerPlays3
         property alias wasGenMoveRunning: root.wasGenMoveRunning
         property alias exportImageWidth: root.exportImageWidth
+        property alias showVariations: gameModel.showVariations
     }
     GameModel {
         id: gameModel

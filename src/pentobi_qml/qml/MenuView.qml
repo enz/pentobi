@@ -46,6 +46,12 @@ Menu {
         onTriggered: gameDisplay.showCoordinates = checked
     }
     MenuItem {
+        text: qsTr("Show &Variations")
+        checkable: true
+        checked: gameModel.showVariations
+        onTriggered: gameModel.showVariations = checked
+    }
+    MenuItem {
         text: qsTr("&Animate Pieces")
         checkable: true
         checked: gameDisplay.enableAnimations

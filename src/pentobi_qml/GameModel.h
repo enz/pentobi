@@ -64,6 +64,7 @@ class GameModel
     Q_PROPERTY(bool hasVariations READ hasVariations NOTIFY hasVariationsChanged)
     Q_PROPERTY(bool hasEarlierVar READ hasEarlierVar NOTIFY hasEarlierVarChanged)
     Q_PROPERTY(bool isMainVar READ isMainVar NOTIFY isMainVarChanged)
+    Q_PROPERTY(bool showVariations MEMBER m_showVariations WRITE setShowVariations NOTIFY showVariationsChanged)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels0 READ pieceModels0)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels1 READ pieceModels1)
     Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels2 READ pieceModels2)
@@ -290,6 +291,8 @@ public:
 
     void setDate(const QString& date);
 
+    void setShowVariations(bool showVariations);
+
     void setTime(const QString& time);
 
     void setEvent(const QString& event);
@@ -403,6 +406,8 @@ signals:
 
     void dateChanged();
 
+    void showVariationsChanged();
+
     void timeChanged();
 
     void eventChanged();
@@ -500,6 +505,8 @@ private:
 
     bool m_isMainVar = true;
 
+    bool m_showVariations = true;
+
     QList<PieceModel*> m_pieceModels0;
 
     QList<PieceModel*> m_pieceModels1;
@@ -555,7 +562,7 @@ private:
     bool restoreAutoSaveLocation();
 
     template<typename T>
-    void set(T& target, const T& value, void (GameModel::*changedSignal)());
+    bool set(T& target, const T& value, void (GameModel::*changedSignal)());
 
     void setFile(const QString& file);
 

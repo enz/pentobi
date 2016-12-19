@@ -817,14 +817,16 @@ bool GameModel::saveAsciiArt(const QString& file)
 }
 
 template<typename T>
-void GameModel::set(T& target, const T& value,
+bool GameModel::set(T& target, const T& value,
                     void (GameModel::*changedSignal)())
 {
     if (target != value)
     {
         target = value;
         emit (this->*changedSignal)();
+        return true;
     }
+    return false;
 }
 
 void GameModel::setComment(const QString& comment)
@@ -956,6 +958,12 @@ void GameModel::setRound(const QString& round)
     emit roundChanged();
     updateIsGameEmpty();
     updateIsModified();
+}
+
+void GameModel::setShowVariations(bool showVariations)
+{
+    if (set(m_showVariations, showVariations, &GameModel::showVariationsChanged))
+        updatePieces();
 }
 
 void GameModel::setTime(const QString& time)
@@ -1109,7 +1117,7 @@ void GameModel::updatePieces()
             auto pieceModel = updatePiece(c, mv.move, isPlayed[c]);
             QString label = QString::number(move_number);
             unsigned moveIndex;
-            if (getVariationIndex(tree, *node, moveIndex))
+            if (m_showVariations && getVariationIndex(tree, *node, moveIndex))
                 label.append(get_letter_coord(moveIndex).c_str());
             label.append(get_move_annotation(tree, *node));
             pieceModel->setMoveLabel(label);

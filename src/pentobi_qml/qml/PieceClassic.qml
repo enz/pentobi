@@ -60,8 +60,9 @@ Item
     }
     Rectangle {
         opacity: isMarked ? 0.5 : 0
-        color: colorName == "blue" || colorName == "red" ?
-                   "white" : "#333333"
+        color: gameModel.showVariations && ! gameModel.isMainVar ? "transparent" : border.color
+        border.width: 0.2 * width
+        border.color: colorName == "blue" || colorName == "red" ? "white" : "#333333"
         width: 0.3 * gridHeight
         height: width
         radius: width / 2
