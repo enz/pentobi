@@ -36,8 +36,8 @@ Item
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
     function showToPlay() { pieceSelector.contentY = 0 }
-    function showAnalyzeGame() { flickable.showAnalyzeGame() }
-    function showComment() { flickable.showComment() }
+    function showAnalyzeGame() { pickedPiece = null; flickable.showAnalyzeGame() }
+    function showComment() { pickedPiece = null; flickable.showComment() }
     function dropCommentFocus() {
         if (navigationPanel.activeFocusComment)
             forceActiveFocus()
