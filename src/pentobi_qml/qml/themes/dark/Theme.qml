@@ -13,8 +13,8 @@ QtObject {
     property color backgroundButtonPressed: Qt.lighter(backgroundColor, 3)
     property color selectionColor: "steelblue"
     property color selectedTextColor: "#EEE"
-    property color analyzeBackgroundColor: "#888"
-    property color analyzeLineColor: "black"
+    property color analyzeBackgroundColor: "#222"
+    property color analyzeLineColor: "#888"
     property color analyzeMiddleLineColor: "#555"
     property real pieceListOpacity: 0.94
     property real toPlayColorLighter: 1.7
