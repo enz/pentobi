@@ -54,10 +54,12 @@ Item {
             dist = d
 
             ctx.beginPath()
-            ctx.moveTo(0, 0)
-            ctx.lineTo(w, 0)
-            ctx.moveTo(0, h)
-            ctx.lineTo(w, h)
+            var top =  makeCrispY(0, root.y + margin)
+            ctx.moveTo(0, top)
+            ctx.lineTo(w, top)
+            var bottom =  makeCrispY(h, root.y + margin)
+            ctx.moveTo(0, bottom)
+            ctx.lineTo(w, bottom)
             ctx.strokeStyle = theme.analyzeLineColor
             ctx.stroke()
 
