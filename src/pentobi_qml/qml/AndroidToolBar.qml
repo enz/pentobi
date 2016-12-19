@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.1
+import QtQuick.Controls 2.1 as Controls2
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
 import "Main.js" as Logic
@@ -13,13 +14,24 @@ RowLayout {
 
     spacing: 0
 
-    Label {
+    Controls2.Label {
         id: title
 
         Layout.fillWidth: true
         Layout.leftMargin: root.height / 10
         color: theme.androidToolBarTextColor
         elide: Text.ElideRight
+
+        Controls2.ToolTip {
+            id: toolTip
+
+            text: title.text
+            timeout: 2000
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: toolTip.open()
+        }
     }
     AndroidToolButton {
         imageSource: "icons/pentobi-newgame.svg"
