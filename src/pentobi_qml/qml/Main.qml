@@ -23,7 +23,7 @@ ApplicationWindow {
     property bool wasGenMoveRunning
 
     property bool isAndroid: Qt.platform.os === "android"
-    property bool useAndroidToolbar: isAndroid
+    property bool useAndroidToolbar: true || isAndroid
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
     property url folder
@@ -79,7 +79,9 @@ ApplicationWindow {
             Component {
                 id: androidToolBarComponent
 
-                AndroidToolBar { }
+                AndroidToolBar {
+                    title: gameModel.file === "" ? "" : root.title
+                }
             }
         }
         GameDisplay {

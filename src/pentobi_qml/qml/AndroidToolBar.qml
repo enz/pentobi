@@ -5,11 +5,22 @@ import QtQuick.Window 2.0
 import "Main.js" as Logic
 
 RowLayout {
+    id: root
+
+    property alias title: title.text
+
     function popupMenu() { menu.popup() }
 
     spacing: 0
 
-    Item { Layout.fillWidth: true }
+    Label {
+        id: title
+
+        Layout.fillWidth: true
+        Layout.leftMargin: root.height / 10
+        color: theme.androidToolBarTextColor
+        elide: Text.ElideRight
+    }
     AndroidToolButton {
         imageSource: "icons/pentobi-newgame.svg"
         visible: ! gameModel.isGameEmpty

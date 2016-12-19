@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 QtObject {
+    property color androidToolBarTextColor: fontColorPosInfo
     property color backgroundColor: "#131313"
     property color fontColorScore: "#C8C1BE"
     property color fontColorCoordinates: "#A09B99"

@@ -12,6 +12,7 @@ Desktop version:
 
 Android version
 
+* Loaded file name is now shown in toolbar.
 * Current game position, associated file name and file modification status
   are now remembered between sessions.
 * New menu items Game/Recent Files, Game/Save, Game/Export/Image,
