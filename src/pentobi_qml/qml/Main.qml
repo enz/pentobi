@@ -23,7 +23,7 @@ ApplicationWindow {
     property bool wasGenMoveRunning
 
     property bool isAndroid: Qt.platform.os === "android"
-    property bool useAndroidToolbar: true || isAndroid
+    property bool useAndroidToolbar: isAndroid
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
     property url folder
