@@ -24,6 +24,8 @@ Android version
 * Support for displaying and editing game information.
 * Support for different kinds of move markings like in desktop version
 * Support for move annotations.
+* Game/Find Move now behaves like in the desktop version and will cycle
+  through all legal moves if called repeatedly.
 * The source code now requires Qt 5.8, which no longer supports Android
   versions older than Android 4.1.
 

@@ -18,8 +18,7 @@ function analyzeGame() {
 
 function autoSave() {
     wasGenMoveRunning =
-            playerModel.isGenMoveRunning && ! isMoveHintRunning
-            && ! isPlaySingleMoveRunning
+            playerModel.isGenMoveRunning && ! isPlaySingleMoveRunning
     gameModel.autoSave()
     analyzeGameModel.autoSave(gameModel)
 }
@@ -136,6 +135,10 @@ function exportImage(fileUrl) {
         showError(qsTr("Creating image failed."))
 }
 
+function findMove() {
+    gameDisplay.showMove(gameModel.findMove())
+}
+
 function findNextComment() {
     if (gameModel.findNextComment()) {
         gameDisplay.showComment()
@@ -160,7 +163,6 @@ function findNextCommentContinueFromRoot() {
 
 function genMove() {
     gameDisplay.pickedPiece = null
-    isMoveHintRunning = false
     playerModel.startGenMove(gameModel)
 }
 
@@ -232,23 +234,11 @@ function keepOnlySubtree() {
 }
 
 function moveGenerated(move) {
-    if (isMoveHintRunning) {
-        gameDisplay.showMoveHint(move)
-        isMoveHintRunning = false
-        return
-    }
     gameModel.playMove(move)
     if (isPlaySingleMoveRunning)
         isPlaySingleMoveRunning = false
     else
         delayedCheckComputerMove.restart()
-}
-
-function moveHint() {
-    if (gameModel.isGameOver)
-        return
-    isMoveHintRunning = true
-    playerModel.startGenMoveAtLevel(gameModel, 1)
 }
 
 function newGameNoVerify()

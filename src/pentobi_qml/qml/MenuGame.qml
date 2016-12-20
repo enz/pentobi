@@ -103,7 +103,7 @@ Menu {
         text: qsTr("&Find Move")
         enabled: ! gameModel.isGameOver
         visible: ! isAndroid || enabled
-        onTriggered: Logic.moveHint()
+        onTriggered: Logic.findMove()
     }
     MenuSeparator { }
     MenuItem {

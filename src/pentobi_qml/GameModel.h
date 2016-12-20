@@ -19,6 +19,9 @@ using libboardgame_sgf::SgfNode;
 using libpentobi_base::Board;
 using libpentobi_base::Game;
 using libpentobi_base::Move;
+using libpentobi_base::MoveList;
+using libpentobi_base::MoveMarker;
+using libpentobi_base::ScoreType;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
@@ -164,6 +167,8 @@ public:
     Q_INVOKABLE QString getResultMessage();
 
     Q_INVOKABLE bool checkFileModifiedOutside();
+
+    Q_INVOKABLE int findMove();
 
 
     void setComment(const QString& comment);
@@ -531,6 +536,13 @@ private:
 
     QTextCodec* m_textCodec;
 
+    unique_ptr<MoveList> m_legalMoves;
+
+    unsigned m_legalMoveIndex;
+
+    /** Local variable reused for efficiency. */
+    unique_ptr<MoveMarker> m_marker;
+
 
     void addRecentFile(const QString& file);
 
@@ -558,6 +570,8 @@ private:
     void preparePieceGameCoord(PieceModel* pieceModel, Move mv);
 
     void preparePieceTransform(PieceModel* pieceModel, Move mv);
+
+    void preparePositionChange();
 
     bool restoreAutoSaveLocation();
 

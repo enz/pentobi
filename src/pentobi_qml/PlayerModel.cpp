@@ -206,11 +206,6 @@ void PlayerModel::startGenMove(GameModel* gm)
     default:
         level = m_levelClassic;
     }
-    startGenMoveAtLevel(gm, level);
-}
-
-void PlayerModel::startGenMoveAtLevel(GameModel* gm, unsigned level)
-{
     cancelGenMove();
     m_player.set_level(level);
     auto variant = gm->getBoard().get_variant();

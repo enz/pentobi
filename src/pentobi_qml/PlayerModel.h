@@ -75,8 +75,6 @@ public:
         with cancelGenMove() */
     Q_INVOKABLE void startGenMove(GameModel* gameModel);
 
-    Q_INVOKABLE void startGenMoveAtLevel(GameModel* gameModel, unsigned level);
-
     /** Cancel the move generation in the background thread if one is
         running. */
     Q_INVOKABLE void cancelGenMove();

@@ -42,7 +42,7 @@ Item
         if (navigationPanel.activeFocusComment)
             forceActiveFocus()
     }
-    function showMoveHint(move) { Logic.showMoveHint(move) }
+    function showMove(move) { Logic.showMove(move) }
     function grabBoardToImage(callback, width) {
         return board.grabToImage(callback,
                                  Qt.size(width,

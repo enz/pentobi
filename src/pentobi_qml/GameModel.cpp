@@ -16,6 +16,7 @@
 #include <QTextCodec>
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
+#include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
@@ -80,6 +81,15 @@ QPointF getGameCoord(const Board& bd, Move mv)
     for (Point p : bd.get_move_points(mv))
         movePoints.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
     return PieceModel::findCenter(bd, movePoints, false);
+}
+
+/** Simple heuristic used for sorting the list used in GameModel::findMove().
+    Prefers larger pieces, and moves of the same piece (in that order). */
+double getHeuristic(const Board& bd, Move mv)
+{
+    auto piece = bd.get_move_piece(mv);
+    auto points = bd.get_piece_info(piece).get_score_points();
+    return 100. * points + piece.to_int();
 }
 
 /** Get the index of a variation.
@@ -233,7 +243,7 @@ QString GameModel::decode(const string& s) const
 void GameModel::deleteAllVar()
 {
     if (! is_main_variation(m_game.get_current()))
-        emit positionAboutToChange();
+        preparePositionChange();
     m_game.delete_all_variations();
     updateProperties();
 }
@@ -242,6 +252,32 @@ void GameModel::deleteAllVar()
 QByteArray GameModel::encode(const QString& s) const
 {
     return m_textCodec->fromUnicode(s);
+}
+
+int GameModel::findMove()
+{
+    auto& bd = getBoard();
+    if (bd.is_game_over())
+        return Move::null().to_int();
+    if (! m_legalMoves)
+        m_legalMoves.reset(new MoveList);
+    Color c = bd.get_to_play();
+    if (m_legalMoves->empty())
+    {
+        if (! m_marker)
+            m_marker.reset(new MoveMarker);
+        bd.gen_moves(c, *m_marker, *m_legalMoves);
+        m_marker->clear(*m_legalMoves);
+        sort(m_legalMoves->begin(), m_legalMoves->end(),
+             [&](Move mv1, Move mv2) {
+                 return getHeuristic(bd, mv1) > getHeuristic(bd, mv2);
+             });
+    }
+    if (m_legalMoves->empty())
+        return Move::null().to_int();
+    if (m_legalMoveIndex >= m_legalMoves->size())
+        m_legalMoveIndex = 0;
+    return (*m_legalMoves)[m_legalMoveIndex++].to_int();
 }
 
 bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
@@ -486,7 +522,7 @@ void GameModel::gotoNode(const SgfNode& node)
 {
     if (&node == &m_game.get_current())
         return;
-    emit positionAboutToChange();
+    preparePositionChange();
     try
     {
         m_game.goto_node(node);
@@ -601,7 +637,7 @@ void GameModel::moveUpVar()
 
 void GameModel::nextColor()
 {
-    emit positionAboutToChange();
+    preparePositionChange();
     auto& bd = getBoard();
     m_game.set_to_play(bd.get_next(bd.get_to_play()));
     updateProperties();
@@ -609,7 +645,7 @@ void GameModel::nextColor()
 
 void GameModel::newGame()
 {
-    emit positionAboutToChange();
+    preparePositionChange();
     initGame(m_game.get_variant());
     setIsModified(false);
     setFile("");
@@ -631,7 +667,7 @@ bool GameModel::open(istream& in)
         TreeReader reader;
         reader.read(in);
         auto root = reader.get_tree_transfer_ownership();
-        emit positionAboutToChange();
+        preparePositionChange();
         m_game.init(root);
         auto charSet = m_game.get_charset();
         if (charSet.empty())
@@ -702,7 +738,7 @@ void GameModel::playMove(int move)
     Move mv(static_cast<Move::IntType>(move));
     if (mv.is_null())
         return;
-    emit positionAboutToChange();
+    preparePositionChange();
     m_game.play(m_game.get_to_play(), mv, false);
     updateProperties();
 }
@@ -716,7 +752,7 @@ void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
         qWarning("GameModel::play: illegal move");
         return;
     }
-    emit positionAboutToChange();
+    preparePositionChange();
     preparePieceGameCoord(pieceModel, mv);
     pieceModel->setIsPlayed(true);
     preparePieceTransform(pieceModel, mv);
@@ -727,6 +763,8 @@ void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
 PieceModel* GameModel::preparePiece(int color, int move)
 {
     Move mv(static_cast<Move::IntType>(move));
+    if (mv.is_null())
+        return nullptr;
     Color c(static_cast<Color::IntType>(color));
     Piece piece = getBoard().get_move_piece(mv);
     for (auto pieceModel : getPieceModels(c))
@@ -751,6 +789,16 @@ void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
     auto& pieceInfo = bd.get_piece_info(bd.get_move_piece(mv));
     if (! compareTransform(pieceInfo, pieceModel->getTransform(), transform))
         pieceModel->setTransform(transform);
+}
+
+void GameModel::preparePositionChange()
+{
+    if (m_legalMoves)
+    {
+        m_legalMoves->clear();
+        m_legalMoveIndex = 0;
+    }
+    emit positionAboutToChange();
 }
 
 bool GameModel::restoreAutoSaveLocation()
@@ -987,7 +1035,7 @@ void GameModel::truncate()
 {
     if (! m_game.get_current().has_parent())
         return;
-    emit positionAboutToChange();
+    preparePositionChange();
     m_game.truncate();
     updateProperties();
 }
@@ -1002,11 +1050,10 @@ void GameModel::undo()
 {
     if (! m_canUndo)
         return;
-    emit positionAboutToChange();
+    preparePositionChange();
     m_game.undo();
     updateProperties();
 }
-
 
 void GameModel::updateFileInfo(const QString& file)
 {

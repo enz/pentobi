@@ -15,7 +15,6 @@ ApplicationWindow {
     property bool computerPlays1
     property bool computerPlays2
     property bool computerPlays3
-    property bool isMoveHintRunning
     property bool isPlaySingleMoveRunning
 
     // Was computer thinking on regular game move when game was autosaved?
