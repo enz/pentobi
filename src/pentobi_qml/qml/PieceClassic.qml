@@ -136,9 +136,6 @@ Item
             }
         ]
 
-        // Unique states are defined by rotating and flipping around the x axis
-        // but for some transitions, the shortest visual animation is flipping
-        // around the y axis.
         transitions: [
             Transition {
                 from: ",rot90,rot180,rot270"; to: from
