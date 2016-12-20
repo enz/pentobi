@@ -1123,8 +1123,12 @@ PieceModel* GameModel::updatePiece(Color c, Move mv,
         if (pieceModels[i]->getPiece() == piece && ! isPlayed[i])
         {
             isPlayed[i] = true;
-            // Order is important: isPlayed will trigger an animation to move
-            // the piece, so it needs to be set after gameCoord.
+            // Set PieceModel.isPlayed temporarily to false, such that there is
+            // always a state transition animation (e.g. if the piece stays
+            // on the board but changes its coordinates when navigating through
+            // move variations).
+            pieceModels[i]->setIsPlayed(false);
+            // Set gameCoord before isPlayed because the animation needs it.
             pieceModels[i]->setGameCoord(gameCoord);
             pieceModels[i]->setIsPlayed(true);
             pieceModels[i]->setTransform(transform);
