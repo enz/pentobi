@@ -32,12 +32,14 @@ function changeGameVariant(gameVariant) {
 function changeGameVariantNoVerify(gameVariant) {
     cancelRunning()
     lengthyCommand.run(function() {
+        var computerPlayedAny = computerPlaysAny()
         gameDisplay.destroyPieces()
         gameModel.changeGameVariant(gameVariant)
         gameDisplay.createPieces()
         gameDisplay.showToPlay()
         analyzeGameModel.clear()
-        initComputerColors()
+        if (computerPlayedAny)
+            initComputerColors()
     })
 }
 
@@ -111,6 +113,14 @@ function computerPlays(color) {
     case 2: return computerPlays2
     case 3: return computerPlays3
     }
+}
+
+function computerPlaysAny() {
+    if (computerPlays0) return true
+    if (computerPlays1) return true
+    if (gameModel.nuColors >= 2 && computerPlays2) return true
+    if (gameModel.nuColors >= 3 && computerPlays3) return true
+    return false
 }
 
 function createTheme(themeName) {
@@ -193,7 +203,8 @@ function init() {
     }
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
-        initComputerColors()
+        if (computerPlaysAny())
+            initComputerColors()
         return
     }
     gameDisplay.createPieces()
@@ -246,7 +257,8 @@ function newGameNoVerify()
     gameModel.newGame()
     gameDisplay.showToPlay()
     analyzeGameModel.clear()
-    initComputerColors()
+    if (computerPlaysAny())
+        initComputerColors()
 }
 
 function newGame()
