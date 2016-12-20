@@ -231,53 +231,25 @@ Item
                 from: ",rot180Flip"; to: from
                 enabled: enableAnimations
 
-                SequentialAnimation {
-                    PropertyAction { property: "rotation"; value: rotation }
-                    PropertyAction {
-                        target: flipX; property: "angle"; value: flipX.angle
-                    }
-                    PieceFlipAnimation { target: flipY; to: 180 }
-                    PropertyAction { target: flipY; property: "angle"; value: 0 }
-                }
+                PieceSwitchedFlipAnimation { }
             },
             Transition {
                 from: "rot90,rot270Flip"; to: from
                 enabled: enableAnimations
 
-                SequentialAnimation {
-                    PropertyAction { property: "rotation"; value: rotation }
-                    PropertyAction {
-                        target: flipX; property: "angle"; value: flipX.angle
-                    }
-                    PieceFlipAnimation { target: flipY; to: 180 }
-                    PropertyAction { target: flipY; property: "angle"; value: 0 }
-                }
+                PieceSwitchedFlipAnimation { }
             },
             Transition {
                 from: "rot180,flip"; to: from
                 enabled: enableAnimations
 
-                SequentialAnimation {
-                    PropertyAction { property: "rotation"; value: rotation }
-                    PropertyAction {
-                        target: flipX; property: "angle"; value: flipX.angle
-                    }
-                    PieceFlipAnimation { target: flipY; to: 180 }
-                    PropertyAction { target: flipY; property: "angle"; value: 0 }
-                }
+                PieceSwitchedFlipAnimation { }
             },
             Transition {
                 from: "rot270,rot90Flip"; to: from
                 enabled: enableAnimations
 
-                SequentialAnimation {
-                    PropertyAction { property: "rotation"; value: rotation }
-                    PropertyAction {
-                        target: flipX; property: "angle"; value: flipX.angle
-                    }
-                    PieceFlipAnimation { target: flipY; to: 180 }
-                    PropertyAction { target: flipY; property: "angle"; value: 0 }
-                }
+                PieceSwitchedFlipAnimation { }
             }
         ]
     }

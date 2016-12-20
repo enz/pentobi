@@ -35,6 +35,7 @@
         <file>qml/PieceNexos.qml</file>
         <file>qml/PieceRotationAnimation.qml</file>
         <file>qml/PieceSelector.qml</file>
+        <file>qml/PieceSwitchedFlipAnimation.qml</file>
         <file>qml/PieceTrigon.qml</file>
         <file>qml/SaveDialog.qml</file>
         <file>qml/ScoreDisplay.qml</file>

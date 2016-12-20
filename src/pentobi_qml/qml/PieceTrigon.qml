@@ -216,79 +216,37 @@ Item
                 from: ",rot180Flip"; to: from
                 enabled: enableAnimations
 
-                SequentialAnimation {
-                    PropertyAction { property: "rotation"; value: rotation }
-                    PropertyAction {
-                        target: flipX; property: "angle"; value: flipX.angle
-                    }
-                    PieceFlipAnimation { target: flipY; to: 180 }
-                    PropertyAction { target: flipY; property: "angle"; value: 0 }
-                }
+                PieceSwitchedFlipAnimation { }
             },
             Transition {
                 from: "rot60,rot240Flip"; to: from
                 enabled: enableAnimations
 
-                SequentialAnimation {
-                    PropertyAction { property: "rotation"; value: rotation }
-                    PropertyAction {
-                        target: flipX; property: "angle"; value: flipX.angle
-                    }
-                    PieceFlipAnimation { target: flipY; to: 180 }
-                    PropertyAction { target: flipY; property: "angle"; value: 0 }
-                }
+                PieceSwitchedFlipAnimation { }
             },
             Transition {
                 from: "rot120,rot300Flip"; to: from
                 enabled: enableAnimations
 
-                SequentialAnimation {
-                    PropertyAction { property: "rotation"; value: rotation }
-                    PropertyAction {
-                        target: flipX; property: "angle"; value: flipX.angle
-                    }
-                    PieceFlipAnimation { target: flipY; to: 180 }
-                    PropertyAction { target: flipY; property: "angle"; value: 0 }
-                }
+                PieceSwitchedFlipAnimation { }
             },
             Transition {
                 from: "rot180,flip"; to: from
                 enabled: enableAnimations
 
-                SequentialAnimation {
-                    PropertyAction { property: "rotation"; value: rotation }
-                    PropertyAction {
-                        target: flipX; property: "angle"; value: flipX.angle
-                    }
-                    PieceFlipAnimation { target: flipY; to: 180 }
-                    PropertyAction { target: flipY; property: "angle"; value: 0 }
-                }
+                PieceSwitchedFlipAnimation { }
             },
             Transition {
                 from: "rot240,rot60Flip"; to: from
                 enabled: enableAnimations
 
-                SequentialAnimation {
-                    PropertyAction { property: "rotation"; value: rotation }
-                    PropertyAction {
-                        target: flipX; property: "angle"; value: flipX.angle
-                    }
-                    PieceFlipAnimation { target: flipY; to: 180 }
-                    PropertyAction { target: flipY; property: "angle"; value: 0 }
-                }
+                PieceSwitchedFlipAnimation { }
             },
             Transition {
                 from: "rot300,rot120Flip"; to: from
                 enabled: enableAnimations
 
-                SequentialAnimation {
-                    PropertyAction { property: "rotation"; value: rotation }
-                    PropertyAction {
-                        target: flipX; property: "angle"; value: flipX.angle
-                    }
-                    PieceFlipAnimation { target: flipY; to: 180 }
-                    PropertyAction { target: flipY; property: "angle"; value: 0 }
-                }
+                PieceSwitchedFlipAnimation { }
             }
         ]
     }
