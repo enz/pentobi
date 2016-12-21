@@ -16,6 +16,7 @@ class QTextCodec;
 
 using namespace std;
 using libboardgame_sgf::SgfNode;
+using libpentobi_base::ColorMove;
 using libpentobi_base::Board;
 using libpentobi_base::Game;
 using libpentobi_base::Move;
@@ -23,6 +24,30 @@ using libpentobi_base::MoveList;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::ScoreType;
 using libpentobi_base::Variant;
+
+//-----------------------------------------------------------------------------
+
+class GameMove
+    : public QObject
+{
+    Q_OBJECT
+
+    Q_PROPERTY(int color READ color CONSTANT)
+
+public:
+    GameMove(QObject* parent, ColorMove mv);
+
+
+    Q_INVOKABLE bool isNull() const { return m_move.is_null(); }
+
+
+    int color() const { return static_cast<int>(m_move.color.to_int()); }
+
+    ColorMove get() const { return m_move; }
+
+private:
+    ColorMove m_move;
+};
 
 //-----------------------------------------------------------------------------
 
@@ -97,6 +122,15 @@ public:
     ~GameModel();
 
 
+    Q_INVOKABLE void addSetup(PieceModel* pieceModel, QPointF coord);
+
+    /** Remove a piece from the board.
+        Updates setup properties in the current node.
+        @param pos The point on the board in game coordinates.
+        @return The corresponding move or null if there is no piece at this
+        location. */
+    Q_INVOKABLE GameMove* addEmpty(const QPoint& pos);
+
     Q_INVOKABLE void deleteAllVar();
 
     Q_INVOKABLE bool findNextComment();
@@ -114,7 +148,13 @@ public:
 
     Q_INVOKABLE void playPiece(PieceModel* pieceModel, QPointF coord);
 
-    Q_INVOKABLE void playMove(int move);
+    Q_INVOKABLE void playMove(GameMove* move);
+
+    /** Find the piece model for a given move and set its transform and game
+        coordinates accordingly but do not set its status to played yet. */
+    Q_INVOKABLE PieceModel* preparePiece(GameMove* move);
+
+    Q_INVOKABLE void setSetupPlayer();
 
     Q_INVOKABLE void newGame();
 
@@ -144,10 +184,6 @@ public:
 
     Q_INVOKABLE bool loadAutoSave();
 
-    /** Find the piece model for a given move and set its transform and game
-        coordinates accordingly but do not set its status to played yet. */
-    Q_INVOKABLE PieceModel* preparePiece(int color, int move);
-
     Q_INVOKABLE bool save(const QString& file);
 
     Q_INVOKABLE bool saveAsciiArt(const QString& file);
@@ -168,7 +204,7 @@ public:
 
     Q_INVOKABLE bool checkFileModifiedOutside();
 
-    Q_INVOKABLE int findMove();
+    Q_INVOKABLE GameMove* findMove();
 
 
     void setComment(const QString& comment);
@@ -545,6 +581,10 @@ private:
 
 
     void addRecentFile(const QString& file);
+
+    bool checkSetupAllowed() const;
+
+    void clearLegalMoves();
 
     void createPieceModels();
 

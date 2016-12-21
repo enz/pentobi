@@ -112,7 +112,7 @@ signals:
 
     void isGenMoveRunningChanged();
 
-    void moveGenerated(int move);
+    void moveGenerated(GameMove* move);
 
 private:
     struct GenMoveResult
@@ -161,7 +161,7 @@ private:
     QFutureWatcher<GenMoveResult> m_genMoveWatcher;
 
 
-    GenMoveResult asyncGenMove(GameModel* gm, unsigned genMoveId);
+    GenMoveResult asyncGenMove(GameModel* gm, Color c, unsigned genMoveId);
 
     void loadBook(Variant variant);
 

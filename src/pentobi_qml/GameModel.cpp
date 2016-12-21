@@ -123,6 +123,14 @@ bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
 
 //-----------------------------------------------------------------------------
 
+GameMove::GameMove(QObject* parent, ColorMove mv)
+    : QObject(parent),
+      m_move(mv)
+{
+}
+
+//-----------------------------------------------------------------------------
+
 GameModel::GameModel(QObject* parent)
     : QObject(parent),
       m_game(getInitialGameVariant()),
@@ -137,6 +145,30 @@ GameModel::GameModel(QObject* parent)
 
 GameModel::~GameModel() = default;
 
+GameMove* GameModel::addEmpty(const QPoint& pos)
+{
+    if (! checkSetupAllowed())
+        return nullptr;
+    auto& bd = getBoard();
+    auto& geo = bd.get_geometry();
+    if (pos.x() < 0 || pos.y() < 0)
+        return nullptr;
+    auto x = static_cast<unsigned>(pos.x());
+    auto y = static_cast<unsigned>(pos.y());
+    if (! geo.is_onboard(CoordPoint(x, y)))
+        return nullptr;
+    auto p = geo.get_point(x, y);
+    auto s = bd.get_point_state(p);
+    if (s.is_empty())
+        return nullptr;
+    auto c = s.to_color();
+    auto mv = bd.get_move_at(p);
+    LIBBOARDGAME_ASSERT(bd.get_setup().placements[c].contains(mv));
+    m_game.remove_setup(c, mv);
+    updateProperties();
+    return new GameMove(this, ColorMove(c, mv));
+}
+
 void GameModel::addRecentFile(const QString& file)
 {
     m_recentFiles.removeAll(file);
@@ -146,6 +178,25 @@ void GameModel::addRecentFile(const QString& file)
     QSettings settings;
     settings.setValue("recentFiles", m_recentFiles);
     emit recentFilesChanged();
+}
+
+void GameModel::addSetup(PieceModel* pieceModel, QPointF coord)
+{
+    if (! checkSetupAllowed())
+        return;
+    Color c(static_cast<Color::IntType>(pieceModel->color()));
+    Move mv;
+    if (! findMove(*pieceModel, pieceModel->state(), coord, mv))
+    {
+        qWarning("GameModel: move not found");
+        return;
+    }
+    clearLegalMoves();
+    preparePieceGameCoord(pieceModel, mv);
+    pieceModel->setIsPlayed(true);
+    preparePieceTransform(pieceModel, mv);
+    m_game.add_setup(c, mv);
+    updateProperties();
 }
 
 void GameModel::autoSave()
@@ -206,6 +257,29 @@ bool GameModel::checkFileModifiedOutside()
     return fileInfo.lastModified() != m_fileDate;
 }
 
+/** Check if setup is allowed in the current position.
+    Currently, we supprt setup mode only if no moves have been played. It
+    should also work in inner nodes but this might be confusing for users and
+    violate some assumptions in the user interface (e.g. node depth is equal to
+    move number).*/
+bool GameModel::checkSetupAllowed() const
+{
+    if (m_canGoBackward || m_canGoForward || m_moveNumber > 0)
+    {
+        qWarning("GameModel: setup only supported in root node");
+        return false;
+    }
+    return true;
+}
+
+void GameModel::clearLegalMoves()
+{
+    if (! m_legalMoves)
+        return;
+    m_legalMoves->clear();
+    m_legalMoveIndex = 0;
+}
+
 void GameModel::createPieceModels()
 {
     createPieceModels(Color(0), m_pieceModels0);
@@ -254,14 +328,14 @@ QByteArray GameModel::encode(const QString& s) const
     return m_textCodec->fromUnicode(s);
 }
 
-int GameModel::findMove()
+GameMove* GameModel::findMove()
 {
     auto& bd = getBoard();
+    auto c = bd.get_to_play();
     if (bd.is_game_over())
-        return Move::null().to_int();
+        return new GameMove(this, ColorMove(c, Move::null()));
     if (! m_legalMoves)
         m_legalMoves.reset(new MoveList);
-    Color c = bd.get_to_play();
     if (m_legalMoves->empty())
     {
         if (! m_marker)
@@ -274,10 +348,11 @@ int GameModel::findMove()
              });
     }
     if (m_legalMoves->empty())
-        return Move::null().to_int();
+        return new GameMove(this, ColorMove(c, Move::null()));
     if (m_legalMoveIndex >= m_legalMoves->size())
         m_legalMoveIndex = 0;
-    return (*m_legalMoves)[m_legalMoveIndex++].to_int();
+    auto mv = (*m_legalMoves)[m_legalMoveIndex++];
+    return new GameMove(this, ColorMove(c, mv));
 }
 
 bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
@@ -601,6 +676,7 @@ bool GameModel::loadAutoSave()
     setIsModified(settings.value("isModified").toBool());
     if (! restoreAutoSaveLocation())
         goEnd();
+    updateProperties();
     return true;
 }
 
@@ -705,8 +781,12 @@ bool GameModel::open(const QString& file)
     if (open(in))
     {
         updateFileInfo(file);
-        goEnd();
         addRecentFile(file);
+        auto& root = m_game.get_root();
+        if (! has_setup(root) && root.has_children())
+            goEnd();
+        else
+            updateProperties();
         return true;
     }
     setFile("");
@@ -733,13 +813,13 @@ QQmlListProperty<PieceModel> GameModel::pieceModels3()
     return QQmlListProperty<PieceModel>(this, m_pieceModels3);
 }
 
-void GameModel::playMove(int move)
+void GameModel::playMove(GameMove* move)
 {
-    Move mv(static_cast<Move::IntType>(move));
+    auto mv = move->get();
     if (mv.is_null())
         return;
     preparePositionChange();
-    m_game.play(m_game.get_to_play(), mv, false);
+    m_game.play(mv, false);
     updateProperties();
 }
 
@@ -760,18 +840,19 @@ void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
     updateProperties();
 }
 
-PieceModel* GameModel::preparePiece(int color, int move)
+PieceModel* GameModel::preparePiece(GameMove* move)
 {
-    Move mv(static_cast<Move::IntType>(move));
+    if (move == nullptr)
+        return nullptr;
+    auto mv = move->get();
     if (mv.is_null())
         return nullptr;
-    Color c(static_cast<Color::IntType>(color));
-    Piece piece = getBoard().get_move_piece(mv);
-    for (auto pieceModel : getPieceModels(c))
+    auto piece = getBoard().get_move_piece(mv.move);
+    for (auto pieceModel : getPieceModels(mv.color))
         if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
         {
-            preparePieceTransform(pieceModel, mv);
-            preparePieceGameCoord(pieceModel, mv);
+            preparePieceTransform(pieceModel, mv.move);
+            preparePieceGameCoord(pieceModel, mv.move);
             return pieceModel;
         }
     return nullptr;
@@ -793,11 +874,7 @@ void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
 
 void GameModel::preparePositionChange()
 {
-    if (m_legalMoves)
-    {
-        m_legalMoves->clear();
-        m_legalMoveIndex = 0;
-    }
+    clearLegalMoves();
     emit positionAboutToChange();
 }
 
@@ -1012,6 +1089,14 @@ void GameModel::setShowVariations(bool showVariations)
 {
     if (set(m_showVariations, showVariations, &GameModel::showVariationsChanged))
         updatePieces();
+}
+
+void GameModel::setSetupPlayer()
+{
+    if (! m_game.has_setup())
+        m_game.remove_player();
+    else
+        m_game.set_player(getBoard().get_to_play());
 }
 
 void GameModel::setTime(const QString& time)

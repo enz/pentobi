@@ -42,6 +42,7 @@
         <file>qml/ScoreElement.qml</file>
         <file>qml/ScoreElement2.qml</file>
         <file>qml/Square.qml</file>
+        <file>qml/StatusBar.qml</file>
         <file>qml/ToolBar.qml</file>
         <file>qml/Triangle.qml</file>
         <file>qml/Main.js</file>

@@ -14,6 +14,7 @@ Item
 
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
+    property bool setupMode
     property alias busyIndicatorRunning: busyIndicator.running
     property alias flickableContentX: flickable.contentX
     property size imageSourceSize: {
@@ -33,8 +34,25 @@ Item
 
     signal play(var pieceModel, point gameCoord)
 
+    function changeGameVariant(gameVariant) {
+        destroyPieces()
+        gameModel.changeGameVariant(gameVariant)
+        createPieces()
+        showToPlay()
+        setupMode = false
+    }
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
+    function nextColor() {
+        gameModel.nextColor();
+        if (setupMode)
+            gameModel.setSetupPlayer()
+    }
+    function newGame() {
+        gameModel.newGame()
+        setupMode = false
+        showToPlay()
+    }
     function showToPlay() { pieceSelector.contentY = 0 }
     function showAnalyzeGame() { pickedPiece = null; flickable.showAnalyzeGame() }
     function showComment() { pickedPiece = null; flickable.showComment() }
@@ -68,6 +86,12 @@ Item
                        gameDisplay.height / (1.07 + 2.7 / pieceSelector.columns))
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                if (! setupMode) return
+                var mv = gameModel.addEmpty(pos)
+                gameModel.setSetupPlayer()
+                showMove(mv)
+            }
         }
         Flickable {
             id: flickable
@@ -179,8 +203,8 @@ Item
         id: pieceManipulator
 
         legal: {
-            if (pickedPiece === null)
-                return false
+            if (pickedPiece === null) return false
+            if (setupMode) return true
             // Don't use mapToItem(board, width / 2, height / 2), we want a
             // dependency on x, y.
             var pos = parent.mapToItem(board, x + width / 2, y + height / 2)
@@ -195,6 +219,10 @@ Item
             var pos = mapToItem(board, width / 2, height / 2)
             if (! board.contains(Qt.point(pos.x, pos.y)))
                 pickedPiece = null
+            else if (setupMode) {
+                gameModel.addSetup(pieceModel, board.mapToGame(pos))
+                gameModel.setSetupPlayer()
+            }
             else if (legal)
                 play(pieceModel, board.mapToGame(pos))
         }
@@ -203,6 +231,9 @@ Item
         target: gameModel
         onPositionChanged: {
             pickedPiece = null
+            if (gameModel.canGoBackward || gameModel.canGoForward
+                    || gameModel.moveNumber > 0)
+                    setupMode = false
             analyzeGameModel.markCurrentMove(gameModel)
             dropCommentFocus()
         }

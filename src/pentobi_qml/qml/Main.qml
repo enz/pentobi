@@ -56,6 +56,7 @@ ApplicationWindow {
     // too distracting with the dark background we use on Android.
     menuBar: menuBarLoader.item
     toolBar: toolBarLoader.item
+    statusBar: statusBarLoader.item
     Component.onCompleted: {
         Logic.init()
         show()
@@ -126,6 +127,17 @@ ApplicationWindow {
             Pentobi.ToolBar { }
         }
     }
+    Loader {
+        id: statusBarLoader
+
+        sourceComponent: isAndroid ? undefined : statusBarComponent
+
+        Component {
+            id: statusBarComponent
+
+            Pentobi.StatusBar { }
+        }
+    }
     Settings {
         id: settings
 
@@ -138,6 +150,7 @@ ApplicationWindow {
         property alias moveMarking: gameDisplay.moveMarking
         property alias showCoordinates: gameDisplay.showCoordinates
         property alias flickableContentX: gameDisplay.flickableContentX
+        property alias setupMode: gameDisplay.setupMode
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2

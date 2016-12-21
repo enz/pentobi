@@ -83,7 +83,7 @@ function findPiece(pieceModel, color) {
 
 function pickPiece(piece) {
     if (playerModel.isGenMoveRunning || gameModel.isGameOver
-            || piece.pieceModel.color !== gameModel.toPlay)
+            || (piece.pieceModel.color !== gameModel.toPlay && ! setupMode))
         return
     if (! pieceManipulator.visible) {
         // Position pieceManipulator at center of piece if possible, but
@@ -100,7 +100,7 @@ function pickPiece(piece) {
 }
 
 function showMove(move) {
-    var pieceModel = gameModel.preparePiece(gameModel.toPlay, move)
+    var pieceModel = gameModel.preparePiece(move)
     if (pieceModel === null)
         return
     var pos = board.mapToItem(pieceManipulator.parent,

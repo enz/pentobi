@@ -33,22 +33,38 @@ RowLayout {
             onClicked: if (title.truncated) toolTip.open()
         }
     }
+    Controls2.Button {
+        id: leaveSetup
+
+        visible: gameDisplay.setupMode
+        text: qsTr("Leave setup mode")
+        background: Rectangle {
+            color: leaveSetup.down ? theme.backgroundButtonPressed : "transparent"
+            border.color: theme.androidToolBarTextColor
+        }
+        contentItem: Controls2.Label {
+            text: leaveSetup.text
+            color: theme.androidToolBarTextColor
+        }
+        onClicked: gameDisplay.setupMode = false
+    }
     AndroidToolButton {
         imageSource: "icons/pentobi-newgame.svg"
-        visible: ! gameModel.isGameEmpty
+        visible: ! gameModel.isGameEmpty && ! gameDisplay.setupMode
         onClicked: Logic.newGame()
     }
     AndroidToolButton {
-        visible: gameModel.canUndo
+        visible: gameModel.canUndo && ! gameDisplay.setupMode
         imageSource: "icons/pentobi-undo.svg"
         onClicked: Logic.undo()
     }
     AndroidToolButton {
+        visible:  ! gameDisplay.setupMode
         imageSource: "icons/pentobi-computer-colors.svg"
         onClicked: Logic.showComputerColorDialog()
     }
     AndroidToolButton {
-        visible: ! gameModel.isGameOver
+        visible: ! gameModel.isGameOver && ! gameDisplay.setupMode
         imageSource: "icons/pentobi-play.svg"
         onClicked: Logic.computerPlay()
     }

@@ -89,13 +89,14 @@ PlayerModel::~PlayerModel()
     settings.setValue("level_callisto_3", m_levelCallisto3);
 }
 
-PlayerModel::GenMoveResult PlayerModel::asyncGenMove(GameModel* gm,
-                                                     unsigned genMoveId)
+PlayerModel::GenMoveResult PlayerModel::asyncGenMove(
+        GameModel* gm, Color c, unsigned genMoveId)
 {
     QElapsedTimer timer;
     timer.start();
     auto& bd = gm->getBoard();
     GenMoveResult result;
+    result.color = c;
     result.genMoveId = genMoveId;
     result.gameModel = gm;
     result.move = m_player.genmove(bd, bd.get_effective_to_play());
@@ -127,19 +128,18 @@ void PlayerModel::genMoveFinished()
         return;
     setIsGenMoveRunning(false);
     auto& bd = result.gameModel->getBoard();
-    auto mv = result.move;
+    ColorMove mv(result.color, result.move);
     if (mv.is_null())
     {
         qWarning("PlayerModel: failed to generate move");
         return;
     }
-    Color c = bd.get_effective_to_play();
-    if (! bd.is_legal(c, mv))
+    if (! bd.is_legal(mv.color, mv.move))
     {
         qWarning("PlayerModel: player generated illegal move");
         return;
     }
-    emit moveGenerated(mv.to_int());
+    emit moveGenerated(new GameMove(this, mv));
 }
 
 void PlayerModel::loadBook(Variant variant)
@@ -168,7 +168,8 @@ void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
 void PlayerModel::startGenMove(GameModel* gm)
 {
     unsigned level;
-    switch (gm->getBoard().get_variant())
+    auto& bd = gm->getBoard();
+    switch (bd.get_variant())
     {
     case Variant::classic_2:
         level = m_levelClassic2;
@@ -215,7 +216,7 @@ void PlayerModel::startGenMove(GameModel* gm)
     ++m_genMoveId;
     QFuture<GenMoveResult> future =
             QtConcurrent::run(this, &PlayerModel::asyncGenMove, gm,
-                              m_genMoveId);
+                              bd.get_effective_to_play(), m_genMoveId);
     m_genMoveWatcher.setFuture(future);
     setIsGenMoveRunning(true);
 }

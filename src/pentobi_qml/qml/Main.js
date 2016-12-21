@@ -33,10 +33,7 @@ function changeGameVariantNoVerify(gameVariant) {
     cancelRunning()
     lengthyCommand.run(function() {
         var computerPlayedAny = computerPlaysAny()
-        gameDisplay.destroyPieces()
-        gameModel.changeGameVariant(gameVariant)
-        gameDisplay.createPieces()
-        gameDisplay.showToPlay()
+        gameDisplay.changeGameVariant(gameVariant)
         analyzeGameModel.clear()
         if (computerPlayedAny)
             initComputerColors()
@@ -252,18 +249,17 @@ function moveGenerated(move) {
         delayedCheckComputerMove.restart()
 }
 
-function newGameNoVerify()
-{
-    gameModel.newGame()
-    gameDisplay.showToPlay()
-    analyzeGameModel.clear()
-    if (computerPlaysAny())
-        initComputerColors()
-}
-
 function newGame()
 {
     verify(newGameNoVerify)
+}
+
+function newGameNoVerify()
+{
+    gameDisplay.newGame()
+    analyzeGameModel.clear()
+    if (computerPlaysAny())
+        initComputerColors()
 }
 
 function open() {
@@ -286,6 +282,7 @@ function openFile(file) {
     }
     gameDisplay.createPieces()
     gameDisplay.showToPlay()
+    gameDisplay.setupMode = false
     analyzeGameModel.clear()
 }
 

@@ -48,7 +48,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
-    qmlRegisterInterface<PieceModel>("AnalyzeGameElement");
+    qmlRegisterInterface<AnalyzeGameElement>("AnalyzeGameElement");
+    qmlRegisterInterface<GameMove>("GameModelMove");
     qmlRegisterInterface<PieceModel>("PieceModel");
     QString locale = QLocale::system().name();
     QTranslator translatorPentobi;

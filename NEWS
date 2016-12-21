@@ -22,6 +22,7 @@ Android version
 * Support for displaying and editing comments in the SGF file.
 * Support for game analysis.
 * Support for displaying and editing game information.
+* Support for setup positions.
 * Support for different kinds of move markings like in desktop version
 * Support for move annotations.
 * Game/Find Move now behaves like in the desktop version and will cycle

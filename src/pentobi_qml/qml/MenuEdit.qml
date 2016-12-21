@@ -113,7 +113,16 @@ Menu {
     }
     MenuSeparator { }
     MenuItem {
+        text: qsTr("S&etup Mode")
+        checkable: true
+        enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
+                 && gameModel.moveNumber === 0
+        visible: ! isAndroid || enabled
+        checked: gameDisplay.setupMode
+        onTriggered: gameDisplay.setupMode = checked
+    }
+    MenuItem {
         text: qsTr("&Next Color")
-        onTriggered: gameModel.nextColor()
+        onTriggered: gameDisplay.nextColor()
     }
 }

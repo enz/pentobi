@@ -9,6 +9,13 @@
     </message>
 </context>
 <context>
+    <name>AndroidToolBar</name>
+    <message>
+        <source>Leave setup mode</source>
+        <translation>Stellungsaufbau beenden</translation>
+    </message>
+</context>
+<context>
     <name>AsciiArtSaveDialog</name>
     <message>
         <source>Export ASCII Art</source>
@@ -489,6 +496,10 @@
         <source>Int&amp;eresting</source>
         <translation>Int&amp;eressant</translation>
     </message>
+    <message>
+        <source>S&amp;etup Mode</source>
+        <translation>&amp;Stellungsaufbau</translation>
+    </message>
 </context>
 <context>
     <name>MenuGame</name>
@@ -729,6 +740,21 @@
     <message>
         <source>All files (*)</source>
         <translation>Alle Dateien (*)</translation>
+    </message>
+</context>
+<context>
+    <name>StatusBar</name>
+    <message>
+        <source>Setup mode</source>
+        <translation>Stellungsaufbau</translation>
+    </message>
+    <message>
+        <source>Computer is thinking...</source>
+        <translation>Computer denkt ...</translation>
+    </message>
+    <message>
+        <source>Analyzing game...</source>
+        <translation>Spiel wird analysiert ...</translation>
     </message>
 </context>
 <context>

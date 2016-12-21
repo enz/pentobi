@@ -67,6 +67,8 @@ Item {
         return 0.35 * gridHeight
     }
 
+    signal clicked(point pos)
+
     function mapFromGameX(x) {
         if (isTrigon) return image.x + (x + 0.5) * gridWidth
         else if (isNexos) return image.x + (x - 0.25) * gridWidth
@@ -261,6 +263,15 @@ Item {
             font.pixelSize: (isTrigon ? 0.4 : 0.6) * gridHeight
             x: mapFromGameX(isTrigon ? columns + 0.5 : columns) + (gridWidth - width) / 2
             y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
+        }
+    }
+    MouseArea {
+        anchors.fill: root
+        onClicked: {
+            var pos = mapToGame(Qt.point(mouseX, mouseY))
+            pos.x = Math.floor(pos.x)
+            pos.y = Math.floor(pos.y)
+            root.clicked(pos)
         }
     }
 }
