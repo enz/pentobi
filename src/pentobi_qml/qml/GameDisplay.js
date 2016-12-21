@@ -65,9 +65,9 @@ function destroyPieces() {
     destroyColorPieces(pieces3); pieces3 = []
 }
 
-function findPiece(pieceModel, color) {
+function findPiece(pieceModel) {
     var pieces
-    switch (color) {
+    switch (pieceModel.color) {
     case 0: pieces = pieces0; break
     case 1: pieces = pieces1; break
     case 2: pieces = pieces2; break
@@ -108,5 +108,5 @@ function showMove(move) {
                               board.mapFromGameY(pieceModel.gameCoord.y))
     pieceManipulator.x = pos.x - pieceManipulator.width / 2
     pieceManipulator.y = pos.y - pieceManipulator.height / 2
-    pickedPiece = findPiece(pieceModel, gameModel.toPlay)
+    pickedPiece = findPiece(pieceModel)
 }

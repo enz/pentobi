@@ -154,8 +154,6 @@ public:
         coordinates accordingly but do not set its status to played yet. */
     Q_INVOKABLE PieceModel* preparePiece(GameMove* move);
 
-    Q_INVOKABLE void setSetupPlayer();
-
     Q_INVOKABLE void newGame();
 
     Q_INVOKABLE void undo();
@@ -621,6 +619,8 @@ private:
     void setFile(const QString& file);
 
     void setFileDate(const QDateTime& fileDate);
+
+    void setSetupPlayer();
 
     void setUtf8();
 

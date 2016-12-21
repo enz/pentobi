@@ -123,6 +123,6 @@ Menu {
     }
     MenuItem {
         text: qsTr("&Next Color")
-        onTriggered: gameDisplay.nextColor()
+        onTriggered: gameModel.nextColor()
     }
 }

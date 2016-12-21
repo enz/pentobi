@@ -43,11 +43,6 @@ Item
     }
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
-    function nextColor() {
-        gameModel.nextColor();
-        if (setupMode)
-            gameModel.setSetupPlayer()
-    }
     function newGame() {
         gameModel.newGame()
         setupMode = false
@@ -89,7 +84,6 @@ Item
             onClicked: {
                 if (! setupMode) return
                 var mv = gameModel.addEmpty(pos)
-                gameModel.setSetupPlayer()
                 showMove(mv)
             }
         }
@@ -219,10 +213,8 @@ Item
             var pos = mapToItem(board, width / 2, height / 2)
             if (! board.contains(Qt.point(pos.x, pos.y)))
                 pickedPiece = null
-            else if (setupMode) {
+            else if (setupMode)
                 gameModel.addSetup(pieceModel, board.mapToGame(pos))
-                gameModel.setSetupPlayer()
-            }
             else if (legal)
                 play(pieceModel, board.mapToGame(pos))
         }

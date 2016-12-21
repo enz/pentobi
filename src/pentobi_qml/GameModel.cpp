@@ -164,7 +164,9 @@ GameMove* GameModel::addEmpty(const QPoint& pos)
     auto c = s.to_color();
     auto mv = bd.get_move_at(p);
     LIBBOARDGAME_ASSERT(bd.get_setup().placements[c].contains(mv));
+    preparePositionChange();
     m_game.remove_setup(c, mv);
+    setSetupPlayer();
     updateProperties();
     return new GameMove(this, ColorMove(c, mv));
 }
@@ -191,11 +193,12 @@ void GameModel::addSetup(PieceModel* pieceModel, QPointF coord)
         qWarning("GameModel: move not found");
         return;
     }
-    clearLegalMoves();
+    preparePositionChange();
     preparePieceGameCoord(pieceModel, mv);
     pieceModel->setIsPlayed(true);
     preparePieceTransform(pieceModel, mv);
     m_game.add_setup(c, mv);
+    setSetupPlayer();
     updateProperties();
 }
 
@@ -716,6 +719,7 @@ void GameModel::nextColor()
     preparePositionChange();
     auto& bd = getBoard();
     m_game.set_to_play(bd.get_next(bd.get_to_play()));
+    setSetupPlayer();
     updateProperties();
 }
 
