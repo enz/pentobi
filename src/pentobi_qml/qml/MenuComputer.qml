@@ -7,7 +7,6 @@ Menu {
 
     MenuItem {
         text: qsTr("Computer &Colors")
-        enabled: ! isRated
         visible: ! isAndroid
         onTriggered: Logic.showComputerColorDialog()
     }

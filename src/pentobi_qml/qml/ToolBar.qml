@@ -19,7 +19,6 @@ ToolBar {
         }
         ToolButton {
             iconSource: "icons/pentobi-computer-colors.svg"
-            enabled: ! isRated
             onClicked: Logic.showComputerColorDialog()
         }
         ToolButton {
