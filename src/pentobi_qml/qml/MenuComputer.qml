@@ -8,13 +8,13 @@ Menu {
     MenuItem {
         text: qsTr("Computer &Colors")
         enabled: ! isRated
-        visible: ! isAndroid || enabled
+        visible: ! isAndroid
         onTriggered: Logic.showComputerColorDialog()
     }
     MenuItem {
         text: qsTr("&Play")
         enabled: ! gameModel.isGameOver && ! isRated
-        visible: ! isAndroid || enabled
+        visible: ! isAndroid
         onTriggered: Logic.computerPlay()
     }
     MenuSeparator { }
