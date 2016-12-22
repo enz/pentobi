@@ -16,6 +16,7 @@
         <file>qml/InitialRatingDialog.qml</file>
         <file>qml/LineSegment.qml</file>
         <file>qml/Main.qml</file>
+        <file>qml/MessageDialog.qml</file>
         <file>qml/MenuComputer.qml</file>
         <file>qml/MenuEdit.qml</file>
         <file>qml/MenuGame.qml</file>

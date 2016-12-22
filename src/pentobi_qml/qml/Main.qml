@@ -225,13 +225,13 @@ ApplicationWindow {
     Component {
         id: infoMessageComponent
 
-        MessageDialog { }
+        Pentobi.MessageDialog { }
     }
     Loader { id: questionMessageLoader }
     Component {
         id: questionMessageComponent
 
-        MessageDialog {
+        Pentobi.MessageDialog {
             standardButtons: StandardButton.Ok | StandardButton.Cancel
         }
     }
