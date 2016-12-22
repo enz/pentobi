@@ -211,14 +211,6 @@ ApplicationWindow {
     DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
     DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }
     DialogLoader { id: gotoMoveDialog; url: "GotoMoveDialog.qml" }
-    Loader { id: errorMessageLoader }
-    Component {
-        id: errorMessageComponent
-
-        MessageDialog {
-            icon: StandardIcon.Critical
-        }
-    }
     Loader { id: infoMessageLoader }
     Component {
         id: infoMessageComponent

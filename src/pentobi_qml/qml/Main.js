@@ -148,15 +148,15 @@ function deleteAllVar() {
 
 function exportAsciiArt(fileUrl) {
     if (! gameModel.saveAsciiArt(getFileFromUrl(fileUrl)))
-        showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
+        showInfo(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
 }
 
 function exportImage(fileUrl) {
     if (! gameDisplay.grabBoardToImage(function(result) {
         if (! result.saveToFile(getFileFromUrl(fileUrl)))
-            showError(qsTr("Saving image failed."))
+            showInfo(qsTr("Saving image failed."))
     }, exportImageWidth))
-        showError(qsTr("Creating image failed."))
+        showInfo(qsTr("Creating image failed."))
 }
 
 function findMove() {
@@ -314,7 +314,7 @@ function openNoVerify() {
 function openFile(file) {
     gameDisplay.destroyPieces()
     if (! gameModel.open(file))
-        showError(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
+        showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
     else {
         computerPlays0 = false
         computerPlays1 = false
@@ -443,7 +443,7 @@ function saveCurrentFile() {
 
 function saveFile(file) {
     if (! gameModel.save(file))
-        showError(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
+        showInfo(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
 }
 
 function saveFileUrl(fileUrl) {
@@ -477,14 +477,6 @@ function showComputerColorDialog() {
     dialog.computerPlays1 = computerPlays1
     dialog.computerPlays2 = computerPlays2
     dialog.computerPlays3 = computerPlays3
-    dialog.open()
-}
-
-function showError(text) {
-    if (errorMessageLoader.status === Loader.Null)
-        errorMessageLoader.sourceComponent = errorMessageComponent
-    var dialog = errorMessageLoader.item
-    dialog.text = text
     dialog.open()
 }
 
