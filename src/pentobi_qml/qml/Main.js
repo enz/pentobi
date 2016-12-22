@@ -138,7 +138,7 @@ function computerPlaysAny() {
 }
 
 function createTheme(themeName) {
-    var source = "qrc:///qml/themes/" + themeName + "/Theme.qml"
+    var source = "themes/" + themeName + "/Theme.qml"
     return Qt.createComponent(source).createObject(root)
 }
 
@@ -427,6 +427,14 @@ function save() {
                      saveCurrentFile)
     else
         saveCurrentFile()
+}
+
+function saveAs() {
+    // We always create a new save file dialog because currently there is no
+    // way to initialize the default file in FileDialog and we don't want the
+    // save dialog to default to the last file saved, which might be different
+    // from the currently loaded file.
+    Qt.createComponent("SaveDialog.qml").createObject(root).open()
 }
 
 function saveCurrentFile() {

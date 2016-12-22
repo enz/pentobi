@@ -11,5 +11,9 @@ FileDialog {
         Logic.saveFileUrl(fileUrl)
         root.folder = folder
     }
-    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
+    onVisibleChanged:
+        if (! visible) {
+            destroy() // We don't reuse this dialog, see comment in Logic.saveAs()
+            gameDisplay.forceActiveFocus() // QTBUG-48456
+        }
 }

@@ -207,7 +207,6 @@ ApplicationWindow {
     DialogLoader { id: initialRatingDialog; url: "InitialRatingDialog.qml" }
     DialogLoader { id: openDialog; url: "OpenDialog.qml" }
     DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
-    DialogLoader { id: saveDialog; url: "SaveDialog.qml" }
     DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
     DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
     DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }

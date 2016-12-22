@@ -140,7 +140,7 @@ Menu {
         text: qsTr("Save &As...")
         enabled: ! gameModel.isGameEmpty
         visible: ! isAndroid || enabled
-        onTriggered: saveDialog.open()
+        onTriggered: Logic.saveAs()
     }
     Menu {
         title: qsTr("&Export")
