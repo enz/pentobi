@@ -4,8 +4,10 @@ import "Main.js" as Logic
 
 Menu {
     title: qsTr("G&o")
-    visible: ! isAndroid || backToMainVar.enabled || gotoMove.enabled
-             || beginningOfBranch.enabled || findNextComment.enabled
+    enabled:  ! isRated &&
+              (backToMainVar.enabled || gotoMove.enabled
+               || beginningOfBranch.enabled || findNextComment.enabled)
+    visible: ! isAndroid || enabled
 
     MenuItem {
         id: gotoMove

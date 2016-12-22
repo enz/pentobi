@@ -25,6 +25,7 @@ SOURCES += \
     Main.cpp \
     PieceModel.cpp \
     PlayerModel.cpp \
+    RatingModel.cpp \
     ../libboardgame_base/CoordPoint.cpp \
     ../libboardgame_base/Rating.cpp \
     ../libboardgame_base/RectTransform.cpp \
@@ -112,6 +113,7 @@ HEADERS += \
     GameModel.h \
     PieceModel.h \
     PlayerModel.h \
+    RatingModel.h \
     ../libboardgame_base/CoordPoint.h \
     ../libboardgame_base/Geometry.h \
     ../libboardgame_base/GeometryUtil.h \

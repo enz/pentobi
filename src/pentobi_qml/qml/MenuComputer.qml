@@ -7,25 +7,26 @@ Menu {
 
     MenuItem {
         text: qsTr("Computer &Colors")
-        visible: ! isAndroid
+        enabled: ! isRated
+        visible: ! isAndroid || enabled
         onTriggered: Logic.showComputerColorDialog()
     }
     MenuItem {
         text: qsTr("&Play")
-        enabled: ! gameModel.isGameOver
-        visible: ! isAndroid
+        enabled: ! gameModel.isGameOver && ! isRated
+        visible: ! isAndroid || enabled
         onTriggered: Logic.computerPlay()
     }
     MenuSeparator { }
     MenuItem {
         text: qsTr("Play &Single Move")
-        enabled: ! gameModel.isGameOver
+        enabled: ! gameModel.isGameOver && ! isRated
         visible: ! isAndroid || enabled
         onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
     }
     MenuItem {
         text: qsTr("St&op")
-        enabled: playerModel.isGenMoveRunning
+        enabled: playerModel.isGenMoveRunning && ! isRated
          // Android doesn't use levels with long thinking times
         visible: ! isAndroid
         onTriggered: cancelRunning()
@@ -49,6 +50,8 @@ Menu {
             case "callisto_2": return qsTr("&Level (Callisto, 2 Players)")
             case "callisto_3": return qsTr("&Level (Callisto, 3 Players)")
             }
+        enabled: ! isRated
+        visible: ! isAndroid || enabled
 
         ExclusiveGroup { id: levelGroup }
         MenuItemLevel { level: 1 }

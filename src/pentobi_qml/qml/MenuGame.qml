@@ -12,9 +12,11 @@ Menu {
         visible: ! isAndroid
         onTriggered: Logic.newGame()
     }
-    MenuSeparator {
-        visible: ! isAndroid
+    MenuItem {
+        text: qsTr("&Rated Game")
+        onTriggered: Logic.ratedGame()
     }
+    MenuSeparator { }
     Menu {
         title: qsTr("Game &Variant")
 
@@ -95,7 +97,7 @@ Menu {
     MenuSeparator { }
     MenuItem {
         text: qsTr("&Undo Move")
-        enabled: gameModel.canUndo
+        enabled: gameModel.canUndo && ! isRated
         visible: ! isAndroid
         onTriggered: Logic.undo()
     }

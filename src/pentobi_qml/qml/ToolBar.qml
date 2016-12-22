@@ -9,20 +9,22 @@ ToolBar {
 
         ToolButton {
             iconSource: "icons/pentobi-newgame.svg"
-            enabled: ! gameModel.isGameEmpty
+            enabled: ! gameModel.isGameEmpty || isRated
             onClicked: Logic.newGame()
         }
         ToolButton {
             iconSource: "icons/pentobi-undo.svg"
-            enabled: gameModel.canUndo
+            enabled: gameModel.canUndo && ! isRated
             onClicked: Logic.undo()
         }
         ToolButton {
             iconSource: "icons/pentobi-computer-colors.svg"
+            enabled: ! isRated
             onClicked: Logic.showComputerColorDialog()
         }
         ToolButton {
             iconSource: "icons/pentobi-play.svg"
+            enabled: ! isRated
             onClicked: Logic.computerPlay()
         }
         Item { Layout.fillWidth: true }

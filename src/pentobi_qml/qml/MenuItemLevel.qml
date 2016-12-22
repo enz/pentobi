@@ -1,4 +1,5 @@
 import QtQuick.Controls 1.1
+import "Main.js" as Logic
 
 MenuItem {
     property int level
@@ -23,21 +24,5 @@ MenuItem {
         default: return playerModel.levelClassic === level
         }
     }
-    onTriggered: {
-        switch (gameModel.gameVariant) {
-        case "classic_2": playerModel.levelClassic2 = level; break
-        case "classic_3": playerModel.levelClassic3 = level; break
-        case "duo": playerModel.levelDuo = level; break
-        case "trigon": playerModel.levelTrigon = level; break
-        case "trigon_2": playerModel.levelTrigon2 = level; break
-        case "trigon_3": playerModel.levelTrigon3 = level; break
-        case "junior": playerModel.levelJunior = level; break
-        case "nexos": playerModel.levelNexos = level; break
-        case "nexos_2": playerModel.levelNexos2 = level; break
-        case "callisto": playerModel.levelCallisto = level; break
-        case "callisto_2": playerModel.levelCallisto2 = level; break
-        case "callisto_3": playerModel.levelCallisto3 = level; break
-        default: playerModel.levelClassic = level
-        }
-    }
+    onTriggered: Logic.setLevel(level)
 }

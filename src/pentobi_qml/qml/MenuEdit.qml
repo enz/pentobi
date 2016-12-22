@@ -4,6 +4,8 @@ import "Main.js" as Logic
 
 Menu {
     title: qsTr("&Edit")
+    enabled:  ! isRated
+    visible: ! isAndroid || enabled
 
     Menu {
         title: qsTr("Move &Annotation")

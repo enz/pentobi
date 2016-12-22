@@ -16,6 +16,7 @@
 #include "AnalyzeGameModel.h"
 #include "GameModel.h"
 #include "PlayerModel.h"
+#include "RatingModel.h"
 #include "libboardgame_util/Log.h"
 
 using libboardgame_util::RandomGenerator;
@@ -48,6 +49,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
+    qmlRegisterType<RatingModel>("pentobi", 1, 0, "RatingModel");
     qmlRegisterInterface<AnalyzeGameElement>("AnalyzeGameElement");
     qmlRegisterInterface<GameMove>("GameModelMove");
     qmlRegisterInterface<PieceModel>("PieceModel");

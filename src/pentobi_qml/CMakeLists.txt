@@ -12,6 +12,8 @@ set(pentobi_qml_SRCS
   PieceModel.cpp
   PlayerModel.h
   PlayerModel.cpp
+  RatingModel.h
+  RatingModel.cpp
 )
 
 qt5_add_resources(pentobi_qml_RC_SRCS

@@ -12,6 +12,8 @@ StatusBar
                     return qsTr("Computer is thinking...")
                 if (analyzeGameModel.isRunning)
                     return qsTr("Analyzing game...")
+                if (isRated)
+                    return qsTr("Rated game")
                 return ""
             }
         }

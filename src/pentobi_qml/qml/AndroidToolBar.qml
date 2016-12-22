@@ -50,21 +50,21 @@ RowLayout {
     }
     AndroidToolButton {
         imageSource: "icons/pentobi-newgame.svg"
-        visible: ! gameModel.isGameEmpty && ! gameDisplay.setupMode
+        visible: ! (gameModel.isGameEmpty && ! isRated) && ! gameDisplay.setupMode
         onClicked: Logic.newGame()
     }
     AndroidToolButton {
-        visible: gameModel.canUndo && ! gameDisplay.setupMode
+        visible: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
         imageSource: "icons/pentobi-undo.svg"
         onClicked: Logic.undo()
     }
     AndroidToolButton {
-        visible:  ! gameDisplay.setupMode
+        visible:  ! gameDisplay.setupMode && ! isRated
         imageSource: "icons/pentobi-computer-colors.svg"
         onClicked: Logic.showComputerColorDialog()
     }
     AndroidToolButton {
-        visible: ! gameModel.isGameOver && ! gameDisplay.setupMode
+        visible: ! gameModel.isGameOver && ! gameDisplay.setupMode && ! isRated
         imageSource: "icons/pentobi-play.svg"
         onClicked: Logic.computerPlay()
     }

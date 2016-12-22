@@ -265,6 +265,29 @@
     </message>
 </context>
 <context>
+    <name>InitialRatingDialog</name>
+    <message>
+        <source>Initial Rating</source>
+        <translation>Anfangswertung</translation>
+    </message>
+    <message>
+        <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
+        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt. Schätzen Sie Ihre Spielstärke zur Initialisierung Ihrer Wertung.</translation>
+    </message>
+    <message>
+        <source>Beginner</source>
+        <translation>Anfänger</translation>
+    </message>
+    <message>
+        <source>Expert</source>
+        <translation>Experte</translation>
+    </message>
+    <message>
+        <source>Your initial rating:</source>
+        <translation>Ihre Anfangswertung:</translation>
+    </message>
+</context>
+<context>
     <name>Main</name>
     <message>
         <source>Pentobi</source>
@@ -345,6 +368,50 @@
     <message>
         <source>No comment found</source>
         <translation>Kein Kommentar gefunden</translation>
+    </message>
+    <message>
+        <source>Rated game</source>
+        <translation>Gewertetes Spiel</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue/Red against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Blau/Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Blau gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Gelb/Grün gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Green against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Grün gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Gelb gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Red against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Your rating has increased from %1 to %2.</source>
+        <translation>Ihre Wertung hat sich von %1 auf %2 erhöht.</translation>
+    </message>
+    <message>
+        <source>Your rating has decreased from %1 to %2.</source>
+        <translation>Ihre Wertung hat sich von %1 auf %2 verringert.</translation>
+    </message>
+    <message>
+        <source>Your rating stays at %1.</source>
+        <translation>Ihre Wertung bleibt bei %1.</translation>
+    </message>
+    <message>
+        <source>Delete all rating information for the current game variant?</source>
+        <translation>Alle Wertungsinformationen für die gegenwärtige Spielvariante löschen?</translation>
     </message>
 </context>
 <context>
@@ -627,6 +694,10 @@
         <source>Open R&amp;ecent</source>
         <translation>&amp;Zuletzt benutzte Dateien</translation>
     </message>
+    <message>
+        <source>&amp;Rated Game</source>
+        <translation>Ge&amp;wertetes Spiel</translation>
+    </message>
 </context>
 <context>
     <name>MenuGo</name>
@@ -671,6 +742,10 @@
     <message>
         <source>&amp;Analyze Game</source>
         <translation>Spiel &amp;analysieren</translation>
+    </message>
+    <message>
+        <source>&amp;Rating</source>
+        <translation>&amp;Wertung</translation>
     </message>
 </context>
 <context>
@@ -728,6 +803,85 @@
     </message>
 </context>
 <context>
+    <name>RatingDialog</name>
+    <message>
+        <source>Rating</source>
+        <translation>Wertung</translation>
+    </message>
+    <message>
+        <source>Your rating:</source>
+        <translation>Ihre Wertung:</translation>
+    </message>
+    <message>
+        <source>Number rated games:</source>
+        <translation>Anzahl gewerteter Spiele:</translation>
+    </message>
+    <message>
+        <source>Best previous rating:</source>
+        <translation>Beste frühere Wertung:</translation>
+    </message>
+    <message>
+        <source>Classic (2 players)</source>
+        <translation>Klassisch (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Classic (3 players)</source>
+        <translation>Klassisch (3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Classic (4 players)</source>
+        <translation>Klassisch (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Duo</source>
+        <translation>Duo</translation>
+    </message>
+    <message>
+        <source>Junior</source>
+        <translation>Junior</translation>
+    </message>
+    <message>
+        <source>Trigon (2 players)</source>
+        <translation>Trigon (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Trigon (3 players)</source>
+        <translation>Trigon (3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Trigon (4 players)</source>
+        <translation>Trigon (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Nexos (2 players)</source>
+        <translation>Nexos (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Nexos (4 players)</source>
+        <translation>Nexos (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (2 players)</source>
+        <translation>Callisto (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (3 players)</source>
+        <translation>Callisto (3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (4 players)</source>
+        <translation>Callisto (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Game variant:</source>
+        <translation>Spielvariante:</translation>
+    </message>
+    <message>
+        <source>Clear rating</source>
+        <translation>Wertung löschen</translation>
+    </message>
+</context>
+<context>
     <name>SaveDialog</name>
     <message>
         <source>Save</source>
@@ -755,6 +909,10 @@
     <message>
         <source>Analyzing game...</source>
         <translation>Spiel wird analysiert ...</translation>
+    </message>
+    <message>
+        <source>Rated game</source>
+        <translation>Gewertetes Spiel</translation>
     </message>
 </context>
 <context>

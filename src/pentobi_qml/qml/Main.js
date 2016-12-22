@@ -34,6 +34,7 @@ function changeGameVariantNoVerify(gameVariant) {
     lengthyCommand.run(function() {
         var computerPlayedAny = computerPlaysAny()
         gameDisplay.changeGameVariant(gameVariant)
+        isRated = false
         analyzeGameModel.clear()
         if (computerPlayedAny)
             initComputerColors()
@@ -42,7 +43,21 @@ function changeGameVariantNoVerify(gameVariant) {
 
 function checkComputerMove() {
     if (gameModel.isGameOver) {
-        showInfo(gameModel.getResultMessage())
+        var msg = gameModel.getResultMessage()
+        if (isRated) {
+            var oldRating = Math.round(ratingModel.rating)
+            ratingModel.addResult(gameModel, getLevel())
+            var newRating = Math.round(ratingModel.rating)
+            msg += "\n"
+            if (newRating > oldRating)
+                msg += qsTr("Your rating has increased from %1 to %2.").arg(oldRating).arg(newRating)
+            else if (newRating < oldRating)
+                msg += qsTr("Your rating has decreased from %1 to %2.").arg(oldRating).arg(newRating)
+            else
+                msg += qsTr("Your rating stays at %1.").arg(newRating)
+            isRated = false
+        }
+        showInfo(msg);
         return
     }
     if (! isComputerToPlay())
@@ -54,6 +69,11 @@ function checkComputerMove() {
     case 3: if (! gameModel.hasMoves3) return; break
     }
     genMove();
+}
+
+function clearRating() {
+    showQuestion(qsTr("Delete all rating information for the current game variant?"),
+                 ratingModel.clearRating)
 }
 
 /** If the computer already plays the current color to play, start generating
@@ -77,25 +97,22 @@ function computerPlay() {
         }
         else
         {
-            var isMultiColor =
-                    (variant == "classic_2" || variant == "trigon_2"
-                     || variant == "nexos_2")
             switch (gameModel.toPlay) {
             case 0:
                 computerPlays0 = true
-                if (isMultiColor) computerPlays2 = true
+                if (isMultiColor()) computerPlays2 = true
                 break;
             case 1:
                 computerPlays1 = true
-                if (isMultiColor) computerPlays3 = true
+                if (isMultiColor()) computerPlays3 = true
                 break;
             case 2:
                 computerPlays2 = true
-                if (isMultiColor) computerPlays0 = true
+                if (isMultiColor()) computerPlays0 = true
                 break;
             case 3:
                 computerPlays3 = true
-                if (isMultiColor) computerPlays1 = true
+                if (isMultiColor()) computerPlays1 = true
                 break;
             }
         }
@@ -179,6 +196,24 @@ function getFileFromUrl(fileUrl) {
     return decodeURIComponent(file)
 }
 
+function getLevel() {
+    switch (gameModel.gameVariant) {
+    case "classic_2": return playerModel.levelClassic2
+    case "classic_3": return playerModel.levelClassic3
+    case "duo": return playerModel.levelDuo
+    case "trigon": return playerModel.levelTrigon
+    case "trigon_2": return playerModel.levelTrigon2
+    case "trigon_3": return playerModel.levelTrigon3
+    case "junior": return playerModel.levelJunior
+    case "nexos": return playerModel.levelNexos
+    case "nexos_2": return playerModel.levelNexos2
+    case "callisto": return playerModel.levelCallisto
+    case "callisto_2": return playerModel.levelCallisto2
+    case "callisto_3": return playerModel.levelCallisto3
+    default: return playerModel.levelClassic
+    }
+}
+
 function getTitle(file, isModified) {
     if (file === "")
         return qsTr("Pentobi")
@@ -211,7 +246,7 @@ function init() {
         return
     }
     analyzeGameModel.loadAutoSave(gameModel)
-    if (wasGenMoveRunning)
+    if (wasGenMoveRunning || (isRated && isComputerToPlay()))
         checkComputerMove()
 }
 
@@ -221,9 +256,7 @@ function initComputerColors() {
     computerPlays1 = true
     computerPlays2 = true
     computerPlays3 = true
-    if (gameModel.gameVariant == "classic_2"
-            || gameModel.gameVariant == "trigon_2"
-            || gameModel.gameVariant == "nexos_2")
+    if (isMultiColor())
         computerPlays2 = false
 }
 
@@ -231,6 +264,13 @@ function isComputerToPlay() {
     if (gameModel.gameVariant == "classic_3" && gameModel.toPlay == 3)
         return computerPlays(gameModel.altPlayer)
     return computerPlays(gameModel.toPlay)
+}
+
+function isMultiColor() {
+    var gameVariant = gameModel.gameVariant
+    return (gameVariant == "classic_2" || gameVariant == "trigon_2"
+            || gameVariant == "nexos_2")
+
 }
 
 function keepOnlyPosition() {
@@ -257,6 +297,7 @@ function newGame()
 function newGameNoVerify()
 {
     gameDisplay.newGame()
+    isRated = false
     analyzeGameModel.clear()
     if (computerPlaysAny())
         initComputerColors()
@@ -283,6 +324,7 @@ function openFile(file) {
     gameDisplay.createPieces()
     gameDisplay.showToPlay()
     gameDisplay.setupMode = false
+    isRated = false
     analyzeGameModel.clear()
 }
 
@@ -316,6 +358,65 @@ function play(pieceModel, gameCoord) {
         delayedCheckComputerMove.restart()
 }
 
+function ratedGame()
+{
+    verify(ratedGameCheckFirstGame)
+}
+
+function ratedGameCheckFirstGame() {
+    if (ratingModel.numberGames === 0)
+        initialRatingDialog.open()
+    else
+        ratedGameNoVerify()
+}
+
+function ratedGameNoVerify()
+{
+    var player = ratingModel.getNextHumanPlayer()
+    var level = ratingModel.getNextLevel(maxLevel)
+    var gameVariant = gameModel.gameVariant
+    var msg
+    switch (player) {
+    case 0:
+        if (isMultiColor())
+            msg = qsTr("Start rated game with Blue/Red against Pentobi level %1?").arg(level)
+        else
+            msg = qsTr("Start rated game with Blue against Pentobi level %1?").arg(level)
+        break
+    case 1:
+        if (isMultiColor())
+            msg = qsTr("Start rated game with Yellow/Green against Pentobi level %1?").arg(level)
+        else if (gameModel.nuColors === 2)
+            msg = qsTr("Start rated game with Green against Pentobi level %1?").arg(level)
+        else
+            msg = qsTr("Start rated game with Yellow against Pentobi level %1?").arg(level)
+        break
+    case 2:
+        msg = qsTr("Start rated game with Red against Pentobi level %1?").arg(level)
+        break
+    case 3:
+        msg = qsTr("Start rated game with Green against Pentobi level %1?").arg(level)
+        break
+    }
+    showQuestion(msg, ratedGameStart)
+}
+
+function ratedGameStart() {
+    var player = ratingModel.getNextHumanPlayer()
+    computerPlays0 = (player !== 0)
+    computerPlays1 = (player !== 1)
+    computerPlays2 = (player !== 2)
+    computerPlays3 = (player !== 3)
+    if (isMultiColor()) {
+        computerPlays2 = computerPlays0
+        computerPlays3 = computerPlays1
+    }
+    setLevel(ratingModel.getNextLevel(maxLevel))
+    gameDisplay.newGame()
+    isRated = true
+    analyzeGameModel.clear()
+}
+
 function reloadFile() {
     openFile(gameModel.file)
 }
@@ -339,6 +440,24 @@ function saveFile(file) {
 
 function saveFileUrl(fileUrl) {
     saveFile(getFileFromUrl(fileUrl))
+}
+
+function setLevel(level) {
+    switch (gameModel.gameVariant) {
+    case "classic_2": playerModel.levelClassic2 = level; break
+    case "classic_3": playerModel.levelClassic3 = level; break
+    case "duo": playerModel.levelDuo = level; break
+    case "trigon": playerModel.levelTrigon = level; break
+    case "trigon_2": playerModel.levelTrigon2 = level; break
+    case "trigon_3": playerModel.levelTrigon3 = level; break
+    case "junior": playerModel.levelJunior = level; break
+    case "nexos": playerModel.levelNexos = level; break
+    case "nexos_2": playerModel.levelNexos2 = level; break
+    case "callisto": playerModel.levelCallisto = level; break
+    case "callisto_2": playerModel.levelCallisto2 = level; break
+    case "callisto_3": playerModel.levelCallisto3 = level; break
+    default: playerModel.levelClassic = level
+    }
 }
 
 function showComputerColorDialog() {

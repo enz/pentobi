@@ -16,6 +16,8 @@ ApplicationWindow {
     property bool computerPlays2
     property bool computerPlays3
     property bool isPlaySingleMoveRunning
+    property bool isRated
+    property int maxLevel: 7
 
     // Was computer thinking on regular game move when game was autosaved?
     // If yes, it will automatically start a move generation on startup.
@@ -80,7 +82,11 @@ ApplicationWindow {
                 id: androidToolBarComponent
 
                 AndroidToolBar {
-                    title: gameModel.file === "" ? "" : root.title
+                    title: {
+                        if (isRated) return qsTr("Rated game")
+                        if (gameModel.file === "") return ""
+                        return root.title
+                    }
                 }
             }
         }
@@ -155,6 +161,7 @@ ApplicationWindow {
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
+        property alias isRated: root.isRated
         property alias wasGenMoveRunning: root.wasGenMoveRunning
         property alias exportImageWidth: root.exportImageWidth
         property alias showVariations: gameModel.showVariations
@@ -169,8 +176,11 @@ ApplicationWindow {
 
         onMoveGenerated: Logic.moveGenerated(move)
     }
-    AnalyzeGameModel {
-        id: analyzeGameModel
+    AnalyzeGameModel { id: analyzeGameModel }
+    RatingModel {
+        id: ratingModel
+
+        gameVariant: gameModel.gameVariant
     }
     Loader { id: computerColorDialogLoader }
     Component {
@@ -195,7 +205,9 @@ ApplicationWindow {
         }
     }
     DialogLoader { id: gameInfoDialog; url: "GameInfoDialog.qml" }
+    DialogLoader { id: initialRatingDialog; url: "InitialRatingDialog.qml" }
     DialogLoader { id: openDialog; url: "OpenDialog.qml" }
+    DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
     DialogLoader { id: saveDialog; url: "SaveDialog.qml" }
     DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
     DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }

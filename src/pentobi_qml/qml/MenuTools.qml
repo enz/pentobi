@@ -6,6 +6,12 @@ Menu {
     title: qsTr("&Tools")
 
     MenuItem {
+        text: qsTr("&Rating")
+        onTriggered: ratingDialog.open()
+    }
+    MenuItem {
+        enabled:  ! isRated
+        visible: ! isAndroid || enabled
         text: qsTr("&Analyze Game")
         onTriggered: Logic.analyzeGame()
     }
