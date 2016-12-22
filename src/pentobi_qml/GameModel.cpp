@@ -651,8 +651,20 @@ bool GameModel::isLegalPos(PieceModel* pieceModel, const QString& state,
     if (! findMove(*pieceModel, state, coord, mv))
         return false;
     Color c(static_cast<Color::IntType>(pieceModel->color()));
-    bool result = getBoard().is_legal(c, mv);
-    return result;
+    return getBoard().is_legal(c, mv);
+}
+
+bool GameModel::isLegalSetupPos(PieceModel* pieceModel, const QString& state,
+                                QPointF coord) const
+{
+    Move mv;
+    if (! findMove(*pieceModel, state, coord, mv))
+        return false;
+    auto& bd = getBoard();
+    for (auto p : bd.get_move_points(mv))
+        if (! bd.get_point_state(p).is_empty())
+            return false;
+    return true;
 }
 
 void GameModel::keepOnlyPosition()

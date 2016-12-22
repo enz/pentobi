@@ -198,10 +198,13 @@ Item
 
         legal: {
             if (pickedPiece === null) return false
-            if (setupMode) return true
-            // Don't use mapToItem(board, width / 2, height / 2), we want a
-            // dependency on x, y.
+            // The following expressions need explicit dependencies on
+            // x, y, pieceModel.state
             var pos = parent.mapToItem(board, x + width / 2, y + height / 2)
+            if (setupMode)
+                return gameModel.isLegalSetupPos(pickedPiece.pieceModel,
+                                                 pickedPiece.pieceModel.state,
+                                                 board.mapToGame(pos))
             return gameModel.isLegalPos(pickedPiece.pieceModel,
                                         pickedPiece.pieceModel.state,
                                         board.mapToGame(pos))

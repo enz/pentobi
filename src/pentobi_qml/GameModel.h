@@ -140,6 +140,10 @@ public:
     Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, const QString& state,
                                 QPointF coord) const;
 
+    Q_INVOKABLE bool isLegalSetupPos(PieceModel* pieceModel,
+                                     const QString& state,
+                                     QPointF coord) const;
+
     Q_INVOKABLE void keepOnlyPosition();
 
     Q_INVOKABLE void keepOnlySubtree();
