@@ -41,7 +41,7 @@ Dialog {
                       }
                 Layout.fillWidth: true
             }
-            Label { text: qsTr("Number rated games:") }
+            Label { text: qsTr("Rated games:") }
             Label {
                 text: ratingModel.numberGames
                 Layout.fillWidth: true

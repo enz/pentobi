@@ -813,10 +813,6 @@
         <translation>Ihre Wertung:</translation>
     </message>
     <message>
-        <source>Number rated games:</source>
-        <translation>Anzahl gewerteter Spiele:</translation>
-    </message>
-    <message>
         <source>Best previous rating:</source>
         <translation>Beste frühere Wertung:</translation>
     </message>
@@ -879,6 +875,10 @@
     <message>
         <source>Clear rating</source>
         <translation>Wertung löschen</translation>
+    </message>
+    <message>
+        <source>Rated games:</source>
+        <translation>Gewertete Spiele:</translation>
     </message>
 </context>
 <context>
