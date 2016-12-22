@@ -415,6 +415,7 @@ function ratedGameStart() {
     gameDisplay.newGame()
     isRated = true
     analyzeGameModel.clear()
+    checkComputerMove()
 }
 
 function reloadFile() {
