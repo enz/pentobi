@@ -22,4 +22,5 @@ Dialog {
             wrapMode: Text.Wrap
         }
     }
+    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 }

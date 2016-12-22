@@ -25,9 +25,8 @@ Dialog {
         gameModel.time = time
         gameModel.event = event
         gameModel.round = round
-        gameDisplay.forceActiveFocus() // QTBUG-48456
     }
-    onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 
     GridLayout {
         columns: 2

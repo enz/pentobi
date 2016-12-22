@@ -7,7 +7,7 @@ import "Main.js" as Logic
 
 Dialog {
     title: qsTr("Rating")
-    onAccepted: gameDisplay.forceActiveFocus() // QTBUG-48456
+    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 
     ColumnLayout
     {

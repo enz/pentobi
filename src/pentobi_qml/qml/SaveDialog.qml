@@ -10,7 +10,6 @@ FileDialog {
     onAccepted: {
         Logic.saveFileUrl(fileUrl)
         root.folder = folder
-        gameDisplay.forceActiveFocus() // QTBUG-48456
     }
-    onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 }

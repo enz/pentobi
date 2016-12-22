@@ -8,8 +8,7 @@ FileDialog {
     folder: root.folder === "" ? shortcuts.desktop : root.folder
     onAccepted: {
         root.folder = folder
-        gameDisplay.forceActiveFocus() // QTBUG-48456
         lengthyCommand.run(Logic.openFileUrl)
     }
-    onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 }

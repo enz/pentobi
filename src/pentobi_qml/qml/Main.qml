@@ -199,9 +199,8 @@ ApplicationWindow {
                     cancelRunning()
                 else if (! gameModel.isGameOver)
                     Logic.checkComputerMove()
-                gameDisplay.forceActiveFocus() // QTBUG-48456
             }
-            onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+            onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
         }
     }
     DialogLoader { id: gameInfoDialog; url: "GameInfoDialog.qml" }

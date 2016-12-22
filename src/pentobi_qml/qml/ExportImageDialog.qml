@@ -9,7 +9,7 @@ Dialog {
         exportImageWidth = parseInt(textField.text)
         imageSaveDialog.open()
     }
-    onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 
     Column {
         Label { text: qsTr("Image width:") }

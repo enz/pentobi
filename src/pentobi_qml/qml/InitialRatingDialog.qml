@@ -10,10 +10,9 @@ Dialog {
     standardButtons: StandardButton.Ok | StandardButton.Cancel
     onAccepted: {
         ratingModel.setInitialRating(Math.round(slider.value))
-        gameDisplay.forceActiveFocus() // QTBUG-48456
         Logic.ratedGameNoVerify()
     }
-    onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 
     Column
     {

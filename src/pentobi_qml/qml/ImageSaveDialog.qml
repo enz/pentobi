@@ -7,9 +7,6 @@ FileDialog {
     selectExisting: false
     folder: shortcuts.pictures
     nameFilters: [ qsTr("Image files (*.png *.jpg)"), qsTr("All files (*)") ]
-    onAccepted: {
-        Logic.exportImage(fileUrl)
-        gameDisplay.forceActiveFocus() // QTBUG-48456
-    }
-    onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+    onAccepted: Logic.exportImage(fileUrl)
+    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 }

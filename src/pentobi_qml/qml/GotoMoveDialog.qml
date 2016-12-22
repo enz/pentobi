@@ -5,11 +5,8 @@ import QtQuick.Dialogs 1.2
 Dialog {
     title: qsTr("Go to Move")
     standardButtons: StandardButton.Ok | StandardButton.Cancel
-    onAccepted: {
-        gameModel.gotoMove(parseInt(textField.text))
-        gameDisplay.forceActiveFocus() // QTBUG-48456
-    }
-    onRejected: gameDisplay.forceActiveFocus() // QTBUG-48456
+    onAccepted: gameModel.gotoMove(parseInt(textField.text))
+    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 
     Column {
         Label { text: qsTr("Move number:") }
