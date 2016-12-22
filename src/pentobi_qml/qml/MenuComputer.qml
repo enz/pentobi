@@ -4,6 +4,7 @@ import "Main.js" as Logic
 
 Menu {
     title: qsTr("&Computer")
+    visible: ! isAndroid || ! isRated
 
     MenuItem {
         text: qsTr("Computer &Colors")
