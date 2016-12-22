@@ -355,7 +355,7 @@
     </message>
     <message>
         <source>Abort game?</source>
-        <translation>Spiel abbrechen?</translation>
+        <translation>Spiel verwerfen?</translation>
     </message>
     <message>
         <source>File has been modified by another application. Save anyway?</source>
