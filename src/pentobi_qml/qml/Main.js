@@ -332,6 +332,22 @@ function openFileUrl() {
     openFile(getFileFromUrl(openDialog.item.fileUrl))
 }
 
+function openFromClipboard() {
+    gameDisplay.destroyPieces()
+    if (! gameModel.openFromClipboard())
+        showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
+    else {
+        computerPlays0 = false
+        computerPlays1 = false
+        computerPlays2 = false
+        computerPlays3 = false
+    }
+    gameDisplay.createPieces()
+    gameDisplay.showToPlay()
+    gameDisplay.setupMode = false
+    isRated = false
+    analyzeGameModel.clear()
+}
 function openGameInfoDialog() {
     gameInfoDialog.open()
     var dialog = gameInfoDialog.item

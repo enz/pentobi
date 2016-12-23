@@ -237,6 +237,10 @@
         <source>Game ends in a tie between Yellow, Red and Green.</source>
         <translation>Spiel endet in einem Unentschieden zwischen Gelb, Rot und Grün.</translation>
     </message>
+    <message>
+        <source>Clipboard empty</source>
+        <translation>Zwischenablage ist leer</translation>
+    </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>
@@ -697,6 +701,10 @@
     <message>
         <source>&amp;Rated Game</source>
         <translation>Ge&amp;wertetes Spiel</translation>
+    </message>
+    <message>
+        <source>Open From &amp;Clipboard</source>
+        <translation>Aus &amp;Zwischenablage öffnen</translation>
     </message>
 </context>
 <context>

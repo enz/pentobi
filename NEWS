@@ -28,6 +28,7 @@ Android version
 * Support for move annotations.
 * Game/Find Move now behaves like in the desktop version and will cycle
   through all legal moves if called repeatedly.
+* Games can be opened from clipboard.
 * Computer color settings will no longer be changed on new game if computer
   played no color.
 * The source code now requires Qt 5.8, which no longer supports Android

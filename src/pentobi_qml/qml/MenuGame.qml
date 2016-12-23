@@ -133,6 +133,10 @@ Menu {
         }
     }
     MenuItem {
+        text: qsTr("Open From &Clipboard")
+        onTriggered: Logic.openFromClipboard()
+    }
+    MenuItem {
         text: qsTr("&Save")
         enabled: gameModel.file !== "" && gameModel.isModified
         visible: ! isAndroid || enabled

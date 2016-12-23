@@ -10,6 +10,8 @@
 #include <cmath>
 #include <cstring>
 #include <fstream>
+#include <QClipboard>
+#include <QGuiApplication>
 #include <QDebug>
 #include <QFileInfo>
 #include <QSettings>
@@ -798,6 +800,28 @@ bool GameModel::open(const QString& file)
     {
         updateFileInfo(file);
         addRecentFile(file);
+        auto& root = m_game.get_root();
+        if (! has_setup(root) && root.has_children())
+            goEnd();
+        else
+            updateProperties();
+        return true;
+    }
+    setFile("");
+    return false;
+}
+
+bool GameModel::openFromClipboard()
+{
+    auto text = QGuiApplication::clipboard()->text();
+    if (text.isEmpty())
+    {
+        m_lastInputOutputError = tr("Clipboard empty");
+        return false;
+    }
+    istringstream in(text.toLocal8Bit().constData());
+    if (open(in))
+    {
         auto& root = m_game.get_root();
         if (! has_setup(root) && root.has_children())
             goEnd();
