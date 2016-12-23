@@ -222,6 +222,8 @@ ApplicationWindow {
         id: questionMessageComponent
 
         Pentobi.MessageDialog {
+            property var acceptedFunc
+
             standardButtons: StandardButton.Ok | StandardButton.Cancel
         }
     }

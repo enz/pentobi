@@ -494,7 +494,10 @@ function showQuestion(text, acceptedFunc) {
         questionMessageLoader.sourceComponent = questionMessageComponent
     var dialog = questionMessageLoader.item
     dialog.text = text
+    if (dialog.acceptedFunc)
+        dialog.accepted.disconnect(dialog.acceptedFunc)
     dialog.accepted.connect(acceptedFunc)
+    dialog.acceptedFunc = acceptedFunc
     dialog.open()
 }
 
