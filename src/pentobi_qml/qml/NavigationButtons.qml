@@ -16,14 +16,18 @@ RowLayout
         imageSource: "icons/pentobi-backward.svg"
         Layout.fillWidth: true
         onClicked: gameModel.goBackward()
-        autoRepeat: true
+        // Don't use autoRepeat: true, there is a bug in Qt 5.8 that makes
+        // autorepeat not work correctly if enabled becomes false while the
+        // button is pressed.
+        autoRepeat: enabled
     }
     Pentobi.Button {
         enabled: gameModel.canGoForward
         imageSource: "icons/pentobi-forward.svg"
         Layout.fillWidth: true
         onClicked: gameModel.goForward()
-        autoRepeat: true
+        // See comment in backward button
+        autoRepeat: enabled
     }
     Pentobi.Button {
         enabled: gameModel.canGoForward
