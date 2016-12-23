@@ -16,9 +16,9 @@ RowLayout
         imageSource: "icons/pentobi-backward.svg"
         Layout.fillWidth: true
         onClicked: gameModel.goBackward()
-        // Don't use autoRepeat: true, there is a bug in Qt 5.8 that makes
-        // autorepeat not work correctly if enabled becomes false while the
-        // button is pressed.
+        // Don't use autoRepeat: true, there is a bug in Qt 5.8-rc on Android
+        // that makes the button produce an infinite number of clicks if it
+        // becomes disabled while pressed (QTBUG-57797).
         autoRepeat: enabled
     }
     Pentobi.Button {
@@ -26,7 +26,7 @@ RowLayout
         imageSource: "icons/pentobi-forward.svg"
         Layout.fillWidth: true
         onClicked: gameModel.goForward()
-        // See comment in backward button
+        // Don't use autoRepeat: true, see comment in backward button.
         autoRepeat: enabled
     }
     Pentobi.Button {
