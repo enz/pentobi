@@ -704,7 +704,7 @@
     </message>
     <message>
         <source>Open From &amp;Clipboard</source>
-        <translation>Aus &amp;Zwischenablage öffnen</translation>
+        <translation type="unfinished">Aus Zwischen&amp;ablage öffnen</translation>
     </message>
 </context>
 <context>
