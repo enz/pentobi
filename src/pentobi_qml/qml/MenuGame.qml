@@ -14,6 +14,8 @@ Menu {
     }
     MenuItem {
         text: qsTr("&Rated Game")
+        enabled: ! isRated
+        visible: ! isAndroid || enabled
         onTriggered: Logic.ratedGame()
     }
     MenuSeparator { }
