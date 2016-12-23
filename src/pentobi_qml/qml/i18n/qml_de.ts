@@ -238,8 +238,8 @@
         <translation>Spiel endet in einem Unentschieden zwischen Gelb, Rot und Grün.</translation>
     </message>
     <message>
-        <source>Clipboard empty</source>
-        <translation>Zwischenablage ist leer</translation>
+        <source>Clipboard is empty.</source>
+        <translation>Zwischenablage ist leer.</translation>
     </message>
 </context>
 <context>
@@ -704,7 +704,7 @@
     </message>
     <message>
         <source>Open From &amp;Clipboard</source>
-        <translation type="unfinished">Aus Zwischen&amp;ablage öffnen</translation>
+        <translation>Aus Zwischen&amp;ablage öffnen</translation>
     </message>
 </context>
 <context>

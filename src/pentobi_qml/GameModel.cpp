@@ -816,7 +816,7 @@ bool GameModel::openFromClipboard()
     auto text = QGuiApplication::clipboard()->text();
     if (text.isEmpty())
     {
-        m_lastInputOutputError = tr("Clipboard empty");
+        m_lastInputOutputError = tr("Clipboard is empty.");
         return false;
     }
     istringstream in(text.toLocal8Bit().constData());
