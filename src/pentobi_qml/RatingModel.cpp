@@ -93,8 +93,9 @@ void RatingModel::saveSettings()
 {
     QSettings settings;
     settings.setValue("rated_games_" + m_gameVariant, m_numberGames);
-    // Cast rating to double, otherwise QSettings saves it as a QVariant in
-    // the config files on Linux, which is not human-readable.
+    // Cast rating to double, if float is used, QSettings saves it as a
+    // QVariant in the config files on Linux, which is not human-readable
+    // (last tested with Qt 5.8-rc)
     settings.setValue("rating_" + m_gameVariant, static_cast<double>(m_rating.get()));
     settings.setValue("best_rating_" + m_gameVariant, static_cast<double>(m_bestRating.get()));
 }
@@ -113,14 +114,17 @@ void RatingModel::setGameVariant(const QString& gameVariant)
         return;
     m_gameVariant = gameVariant;
     QSettings settings;
+    // See comment in saveSettings() why ratings are stored as double, not float
+    auto rating = static_cast<float>(settings.value("rating_" + gameVariant, 1000).toDouble());
+    auto bestRating = static_cast<float>(settings.value("best_rating_" + gameVariant, 0).toDouble());
     // Use same keys as Pentobi 12.x to be compatible
     setNumberGames(settings.value("rated_games_" + gameVariant, 0).toInt());
-    setRating(settings.value("rating_" + gameVariant, 1000).toDouble());
-    setBestRating(settings.value("best_rating_" + gameVariant, 0).toDouble());
+    setRating(rating);
+    setBestRating(bestRating);
     emit gameVariantChanged();
 }
 
-void RatingModel::setInitialRating(int rating)
+void RatingModel::setInitialRating(float rating)
 {
     setRating(rating);
     setBestRating(rating);
