@@ -69,12 +69,6 @@ Dialog {
             implicitHeight: implicitWidth / 3
         }
 
-        Label {
-            visible: history.length > 0
-            text: qsTr("Recent games:")
-            Layout.topMargin: Screen.pixelDensity * 1
-        }
-
         // We want to use QtQuick Controls TableView but it currently uses
         // strange fonts on Android, so we go for a Grid with Labels.
         Controls1.ScrollView

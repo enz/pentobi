@@ -36,7 +36,7 @@ Canvas {
             minY = Math.min(minY, info.rating)
             maxY = Math.max(maxY, info.rating)
         }
-        maxX = minX + Math.round((maxX - minX) * 1.2)
+        maxX = minX + Math.ceil((maxX - minX) * 1.2)
         minY = Math.floor(minY / 100) * 100
         maxY = Math.ceil(maxY / 100) * 100
         if (maxY - minY < 100)
@@ -52,7 +52,7 @@ Canvas {
         ctx.strokeStyle = "gray"
         ctx.stroke()
 
-        ctx.font = Math.ceil(h / 10) + "px sans-serif"
+        ctx.font = Math.ceil(h / 7) + "px sans-serif"
         ctx.fillStyle = "gray"
         ctx.textAlign = "right"
         ctx.fillText(minY, w, h - w / 60)

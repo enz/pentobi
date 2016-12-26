@@ -781,7 +781,7 @@
     </message>
     <message>
         <source>&amp;Clear Rating</source>
-        <translation>Wertung lö&amp;schen</translation>
+        <translation type="unfinished">Wertung lö&amp;schen</translation>
     </message>
 </context>
 <context>
@@ -931,10 +931,6 @@
     <message>
         <source>Date</source>
         <translation>Datum</translation>
-    </message>
-    <message>
-        <source>Recent games:</source>
-        <translation>Zuletzt gespielte Spiele:</translation>
     </message>
     <message>
         <source>Win</source>
