@@ -59,7 +59,7 @@ RowLayout {
         onClicked: Logic.undo()
     }
     AndroidToolButton {
-        visible:  ! gameDisplay.setupMode
+        visible: ! gameDisplay.setupMode
         imageSource: "icons/pentobi-computer-colors.svg"
         onClicked: Logic.showComputerColorDialog()
     }

@@ -137,6 +137,8 @@ public:
 
     Q_INVOKABLE bool findNextCommentContinueFromRoot();
 
+    Q_INVOKABLE QString getPlayerString(int color);
+
     Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, const QString& state,
                                 QPointF coord) const;
 
@@ -186,6 +188,8 @@ public:
 
     Q_INVOKABLE bool loadAutoSave();
 
+    Q_INVOKABLE bool loadSgf(const QByteArray& byteArray);
+
     Q_INVOKABLE bool save(const QString& file);
 
     Q_INVOKABLE bool saveAsciiArt(const QString& file);
@@ -210,6 +214,8 @@ public:
 
     Q_INVOKABLE GameMove* findMove();
 
+
+    QByteArray getSgf() const;
 
     void setComment(const QString& comment);
 

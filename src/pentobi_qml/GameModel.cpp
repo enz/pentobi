@@ -208,12 +208,8 @@ void GameModel::autoSave()
 {
     auto& tree = m_game.get_tree();
     QSettings settings;
-    ostringstream s;
-    PentobiTreeWriter writer(s, tree);
-    writer.set_indent(-1);
-    writer.write();
     settings.setValue("variant", to_string_id(m_game.get_variant()));
-    settings.setValue("autosave", s.str().c_str());
+    settings.setValue("autosave", getSgf());
 
     settings.setValue("file", m_file);
     settings.setValue("fileDate", m_fileDate);
@@ -428,6 +424,54 @@ bool GameModel::findNextCommentContinueFromRoot()
     return true;
 }
 
+QString GameModel::getPlayerString(int player)
+{
+    auto variant = m_game.get_variant();
+    auto nuColors = get_nu_colors(variant);
+    bool isMulticolor = (nuColors > get_nu_players(variant));
+    switch (player) {
+    case 0:
+        if (isMulticolor)
+            return tr("Blue/Red");
+        else
+            return tr("Blue");
+    case 1:
+        if (isMulticolor)
+            return tr("Yellow/Green");
+        else if (nuColors == 2)
+            return tr("Green");
+        else
+            return tr("Yellow");
+    case 2:
+        return tr("Red");
+    case 3:
+        return tr("Green");
+    }
+    return "";
+}
+
+Variant GameModel::getInitialGameVariant()
+{
+    QSettings settings;
+    auto variantString = settings.value("variant", "").toString();
+    Variant variant;
+    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
+        variant = Variant::duo;
+    return variant;
+}
+
+QList<PieceModel*>& GameModel::getPieceModels(Color c)
+{
+    if (c == Color(0))
+        return m_pieceModels0;
+    else if (c == Color(1))
+        return m_pieceModels1;
+    else if (c == Color(2))
+        return m_pieceModels2;
+    else
+        return m_pieceModels3;
+}
+
 QString GameModel::getResultMessage()
 {
     auto& bd = getBoard();
@@ -535,26 +579,14 @@ QString GameModel::getResultMessage()
     return tr("Game ends in a tie between all players.");
 }
 
-Variant GameModel::getInitialGameVariant()
+QByteArray GameModel::getSgf() const
 {
-    QSettings settings;
-    auto variantString = settings.value("variant", "").toString();
-    Variant variant;
-    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
-        variant = Variant::duo;
-    return variant;
-}
-
-QList<PieceModel*>& GameModel::getPieceModels(Color c)
-{
-    if (c == Color(0))
-        return m_pieceModels0;
-    else if (c == Color(1))
-        return m_pieceModels1;
-    else if (c == Color(2))
-        return m_pieceModels2;
-    else
-        return m_pieceModels3;
+    auto& tree = m_game.get_tree();
+    ostringstream s;
+    PentobiTreeWriter writer(s, tree);
+    writer.set_indent(-1);
+    writer.write();
+    return QByteArray(s.str().c_str());
 }
 
 void GameModel::goBackward()
@@ -684,15 +716,12 @@ void GameModel::keepOnlySubtree()
 bool GameModel::loadAutoSave()
 {
     QSettings settings;
-    auto s = settings.value("autosave", "").toByteArray();
-    istringstream in(s.constData());
-    if (! open(in))
+    if (! loadSgf(settings.value("autosave", "").toByteArray()))
         return false;
     setFile(settings.value("file").toString());
     setFileDate(settings.value("fileDate").toDateTime());
     setIsModified(settings.value("isModified").toBool());
-    if (! restoreAutoSaveLocation())
-        goEnd();
+    restoreAutoSaveLocation();
     updateProperties();
     return true;
 }
@@ -708,6 +737,17 @@ void GameModel::loadRecentFiles()
     while (m_recentFiles.length() > maxRecentFiles)
         m_recentFiles.removeLast();
     emit recentFilesChanged();
+}
+
+bool GameModel::loadSgf(const QByteArray& byteArray)
+{
+    istringstream in(byteArray.constData());
+    setFile("");
+    if (! open(in))
+        return false;
+    goEnd();
+    updateProperties();
+    return true;
 }
 
 void GameModel::makeMainVar()
@@ -801,7 +841,10 @@ bool GameModel::open(const QString& file)
         updateFileInfo(file);
         addRecentFile(file);
         auto& root = m_game.get_root();
-        if (! has_setup(root) && root.has_children())
+        // Show end of game position by default unless the root node has
+        // setup stones or comments, because then it might be a puzzle and
+        // we don't want to show the solution.
+        if (! has_setup(root) && ! has_comment(root) && root.has_children())
             goEnd();
         else
             updateProperties();
@@ -954,14 +997,16 @@ bool GameModel::restoreAutoSaveLocation()
 
 bool GameModel::save(const QString& file)
 {
-    ofstream out(file.toLocal8Bit().constData());
-    PentobiTreeWriter writer(out, m_game.get_tree());
-    writer.set_indent(1);
-    writer.write();
-    if (! out)
     {
-        m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
-        return false;
+        ofstream out(file.toLocal8Bit().constData());
+        PentobiTreeWriter writer(out, m_game.get_tree());
+        writer.set_indent(1);
+        writer.write();
+        if (! out)
+        {
+            m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
+            return false;
+        }
     }
     updateFileInfo(file);
     setIsModified(false);

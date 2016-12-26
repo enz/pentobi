@@ -39,12 +39,12 @@ void RatingGraph::paintEvent(QPaintEvent* event)
     if (! m_values.empty())
     {
         QFontMetrics metrics(painter.font());
-        float yRange = m_yMax - m_yMin;
-        float yTic = m_yMin;
-        float topMargin = ceil(1.2f * static_cast<float>(metrics.height()));
-        float bottomMargin = ceil(0.3f * static_cast<float>(metrics.height()));
-        float graphHeight =
-            static_cast<float>(height) - topMargin - bottomMargin;
+        auto yRange = m_yMax - m_yMin;
+        auto yTic = m_yMin;
+        auto topMargin = ceil(1.2 * static_cast<double>(metrics.height()));
+        auto bottomMargin = ceil(0.3 * static_cast<double>(metrics.height()));
+        auto graphHeight =
+            static_cast<double>(height) - topMargin - bottomMargin;
         QPen pen(QColor(96, 96, 96));
         pen.setStyle(Qt::DotLine);
         painter.setPen(pen);
@@ -106,7 +106,7 @@ void RatingGraph::updateContent(const RatingHistory& history)
     m_yMax = m_yMin;
     for (const RatingHistory::GameInfo& info : games)
     {
-        float rating = info.rating.get();
+        auto rating = info.rating.get();
         m_yMin = min(m_yMin, rating);
         m_yMax = max(m_yMax, rating);
         m_values.push_back(rating);

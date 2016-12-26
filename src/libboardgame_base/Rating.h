@@ -23,14 +23,14 @@ public:
     friend ostream& operator<<(ostream& out, const Rating& rating);
     friend istream& operator>>(istream& in, Rating& rating);
 
-    explicit Rating(float elo = 0);
+    explicit Rating(double elo = 0) : m_elo(elo) { }
 
     /** Get the expected outcome of a game.
         @param elo_opponent Elo-rating of the opponent.
         @param nu_opponents The number of opponents (all with the same rating
         elo_opponent) */
-    float get_expected_result(Rating elo_opponent,
-                              unsigned nu_opponents = 1) const;
+    double get_expected_result(Rating elo_opponent,
+                               unsigned nu_opponents = 1) const;
 
     /** Update a rating after a game.
         @param game_result The outcome of the game (0=loss, 0.5=tie, 1=win)
@@ -38,32 +38,17 @@ public:
         @param k_value The K-value
         @param nu_opponents The number of opponents (all with the same rating
         elo_opponent) */
-    void update(float game_result, Rating elo_opponent, float k_value = 32,
+    void update(double game_result, Rating elo_opponent, double k_value = 32,
                 unsigned nu_opponents = 1);
 
-    float get() const;
+    double get() const { return m_elo; }
 
     /** Get rating rounded to an integer. */
-    int to_int() const;
+    int to_int() const { return static_cast<int>(round(m_elo)); }
 
 private:
-    float m_elo;
+    double m_elo;
 };
-
-inline Rating::Rating(float elo)
-  : m_elo(elo)
-{
-}
-
-inline float Rating::get() const
-{
-    return m_elo;
-}
-
-inline int Rating::to_int() const
-{
-    return static_cast<int>(round(m_elo));
-}
 
 //-----------------------------------------------------------------------------
 

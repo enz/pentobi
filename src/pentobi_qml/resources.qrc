@@ -40,6 +40,7 @@
         <file>qml/PieceSwitchedFlipAnimation.qml</file>
         <file>qml/PieceTrigon.qml</file>
         <file>qml/RatingDialog.qml</file>
+        <file>qml/RatingGraph.qml</file>
         <file>qml/SaveDialog.qml</file>
         <file>qml/ScoreDisplay.qml</file>
         <file>qml/ScoreElement.qml</file>

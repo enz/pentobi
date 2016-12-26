@@ -50,6 +50,7 @@ Item
     }
     function showToPlay() { pieceSelector.contentY = 0 }
     function showAnalyzeGame() { pickedPiece = null; flickable.showAnalyzeGame() }
+    function showNavigation() { showComment() }
     function showComment() { pickedPiece = null; flickable.showComment() }
     function dropCommentFocus() {
         if (navigationPanel.activeFocusComment)

@@ -3,9 +3,13 @@ import QtQuick.Controls 2.1
 import QtQuick.Controls 1.1 as Controls1
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
+import QtQuick.Window 2.0
 import "Main.js" as Logic
 
 Dialog {
+    property int numberGames: ratingModel.numberGames
+    property var history: ratingModel.history
+
     title: qsTr("Rating")
     onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 
@@ -43,20 +47,124 @@ Dialog {
             }
             Label { text: qsTr("Rated games:") }
             Label {
-                text: ratingModel.numberGames
+                text: numberGames
                 Layout.fillWidth: true
             }
             Label { text: qsTr("Best previous rating:") }
             Label {
-                text: ratingModel.numberGames === 0 ?
-                          "--" : Math.round(ratingModel.bestRating).toString()
+                text: numberGames === 0 ? "--" : Math.round(ratingModel.bestRating).toString()
                 Layout.fillWidth: true
             }
         }
-        Controls1.Button {
-            visible: ratingModel.numberGames > 0
-            text: qsTr("Clear rating")
-            onClicked: Logic.clearRating()
+
+        Label {
+            visible: history.length > 1
+            text: qsTr("Recent development:")
+            Layout.topMargin: Screen.pixelDensity * 1
+        }
+        RatingGraph {
+            visible: history.length > 1
+            history: ratingModel.history
+            implicitWidth: Math.min(Screen.pixelDensity * 100, 0.85 * Screen.width)
+            implicitHeight: implicitWidth / 3
+        }
+
+        Label {
+            visible: history.length > 0
+            text: qsTr("Recent games:")
+            Layout.topMargin: Screen.pixelDensity * 1
+        }
+
+        // We want to use QtQuick Controls TableView but it currently uses
+        // strange fonts on Android, so we go for a Grid with Labels.
+        Controls1.ScrollView
+        {
+            visible: history.length > 0
+            implicitWidth: Math.min(Screen.pixelDensity * 100, 0.85 * Screen.width)
+            Layout.fillHeight: true
+
+            GridLayout {
+                id: grid
+
+                rows: history.length + 1
+                flow: Grid.TopToBottom
+
+                Label {
+                    id: gameHeader
+
+                    font.underline: true
+                    text: qsTr("Game")
+                }
+                Repeater {
+                    id: gameRepeater
+
+                    model: history
+
+                    Label { text: modelData.number }
+                }
+                Label { font.underline: true; text: qsTr("Result") }
+                Repeater {
+                    model: history
+
+                    Label {
+                        text: switch (modelData.result) {
+                              case 1: return qsTr("Win")
+                              case 0: return qsTr("Loss")
+                              case 0.5: return qsTr("Tie")
+                              }
+                    }
+                }
+                Label { font.underline: true; text: qsTr("Level") }
+                Repeater {
+                    model: history
+
+                    Label { text: modelData.level }
+                }
+                Label { font.underline: true; text: qsTr("Your Color") }
+                Repeater {
+                    model: history
+
+                    Label { text: gameModel.getPlayerString(modelData.color) }
+                }
+                Label { font.underline: true; text: qsTr("Date") }
+                Repeater {
+                    model: history
+
+                    Label { text: modelData.date }
+                }
+                MouseArea {
+                    function openMenu(x, y) {
+                        if (y < gameHeader.height)
+                            return
+                        var n = history.length
+                        var i
+                        for (i = 1; i < n; ++i)
+                            if (y < gameRepeater.itemAt(i).y)
+                                break
+                        menu.row = i - 1
+                        menu.popup()
+                    }
+
+                    anchors.fill: parent
+                    acceptedButtons: Qt.LeftButton | Qt.RightButton
+                    onClicked: openMenu(mouseX, mouseY)
+                    onPressAndHold: openMenu(mouseX, mouseY)
+                }
+            }
+        }
+        Controls1.Menu {
+            id: menu
+
+            property int row
+
+            Controls1.MenuItem {
+                text: history && menu.row < history.length ?
+                          qsTr("Open Game %1").arg(history[menu.row].number) : ""
+                onTriggered: {
+                    Logic.openRatedGame(history[menu.row].sgf)
+                    close()
+                }
+            }
         }
     }
 }

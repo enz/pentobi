@@ -33,11 +33,11 @@ protected:
     void paintEvent(QPaintEvent* event) override;
 
 private:
-    float m_yMin;
+    double m_yMin;
 
-    float m_yMax;
+    double m_yMax;
 
-    vector<float> m_values;
+    vector<double> m_values;
 };
 
 //-----------------------------------------------------------------------------

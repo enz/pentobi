@@ -241,6 +241,30 @@
         <source>Clipboard is empty.</source>
         <translation>Zwischenablage ist leer.</translation>
     </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation>Blau/Rot</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>Blau</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation>Gelb/Grün</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Grün</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Gelb</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rot</translation>
+    </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>
@@ -354,14 +378,6 @@
         <translation>Datei wurde von einer anderen Anwendung bearbeitet. Neu laden?</translation>
     </message>
     <message>
-        <source>Discard changes?</source>
-        <translation>Änderungen verwerfen?</translation>
-    </message>
-    <message>
-        <source>Abort game?</source>
-        <translation>Spiel verwerfen?</translation>
-    </message>
-    <message>
         <source>File has been modified by another application. Save anyway?</source>
         <translation>Datei wurde von einer anderen Anwendung bearbeitet. Trotzdem speichern?</translation>
     </message>
@@ -416,6 +432,14 @@
     <message>
         <source>Delete all rating information for the current game variant?</source>
         <translation>Alle Wertungsinformationen für die gegenwärtige Spielvariante löschen?</translation>
+    </message>
+    <message>
+        <source>Discard changes to current game?</source>
+        <translation>Änderungen am gegenwärtigen Spiel verwerfen?</translation>
+    </message>
+    <message>
+        <source>Abort current game?</source>
+        <translation>Gegenwärtiges Spiel verwerfen?</translation>
     </message>
 </context>
 <context>
@@ -755,6 +779,10 @@
         <source>&amp;Rating</source>
         <translation>&amp;Wertung</translation>
     </message>
+    <message>
+        <source>&amp;Clear Rating</source>
+        <translation>Wertung lö&amp;schen</translation>
+    </message>
 </context>
 <context>
     <name>MenuView</name>
@@ -881,12 +909,52 @@
         <translation>Spielvariante:</translation>
     </message>
     <message>
-        <source>Clear rating</source>
-        <translation>Wertung löschen</translation>
-    </message>
-    <message>
         <source>Rated games:</source>
         <translation>Gewertete Spiele:</translation>
+    </message>
+    <message>
+        <source>Game</source>
+        <translation>Spiel</translation>
+    </message>
+    <message>
+        <source>Your Color</source>
+        <translation>Ihre Farbe</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation>Stufe</translation>
+    </message>
+    <message>
+        <source>Result</source>
+        <translation>Ergebnis</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <source>Recent games:</source>
+        <translation>Zuletzt gespielte Spiele:</translation>
+    </message>
+    <message>
+        <source>Win</source>
+        <translation>Gewinn</translation>
+    </message>
+    <message>
+        <source>Loss</source>
+        <translation>Verlust</translation>
+    </message>
+    <message>
+        <source>Tie</source>
+        <translation>Unentsch.</translation>
+    </message>
+    <message>
+        <source>Recent development:</source>
+        <translation>Aktuelle Entwicklung:</translation>
+    </message>
+    <message>
+        <source>Open Game %1</source>
+        <translation>Spiel %1 öffnen</translation>
     </message>
 </context>
 <context>

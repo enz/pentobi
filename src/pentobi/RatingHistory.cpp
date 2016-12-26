@@ -103,10 +103,10 @@ void RatingHistory::getNextRatedGameSettings(int maxLevel, unsigned random,
 {
     color =
         Color(static_cast<Color::IntType>(random % get_nu_players(m_variant)));
-    float minDiff = 0; // Initialize to avoid compiler warning
+    double minDiff = 0; // Initialize to avoid compiler warning
     for (int i = 1; i <= maxLevel; ++i)
     {
-        float diff =
+        auto diff =
             abs(m_rating.get() - Player::get_rating(m_variant, i).get());
         if (i == 1 || diff < minDiff)
         {
@@ -176,10 +176,8 @@ void RatingHistory::save() const
     QString variantStr = QString(to_string_id(m_variant));
     QSettings settings;
     settings.setValue("rated_games_" + variantStr, m_nuGames);
-    settings.setValue("rating_" + variantStr,
-                      static_cast<double>(m_rating.get()));
-    settings.setValue("best_rating_" + variantStr,
-                      static_cast<double>(m_bestRating.get()));
+    settings.setValue("rating_" + variantStr, m_rating.get());
+    settings.setValue("best_rating_" + variantStr, m_bestRating.get());
     LIBBOARDGAME_ASSERT(! m_file.isEmpty());
     QDir dir("");
     dir.mkpath(m_dir);

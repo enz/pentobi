@@ -173,7 +173,7 @@ void AnalyzeGameModel::loadAutoSave(GameModel* gameModel)
         if (index >= size)
             return;
         auto value = list[index++].toDouble();
-        moves.push_back(ColorMove(Color(color), mv));
+        moves.push_back(ColorMove(Color(static_cast<Color::IntType>(color)), mv));
         values.push_back(value);
     }
     m_analyzeGame.set(bd.get_variant(), moves, values);

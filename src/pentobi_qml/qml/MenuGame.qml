@@ -123,13 +123,13 @@ Menu {
 
         Instantiator {
             model: gameModel.recentFiles
+            onObjectAdded: recentFiles.insertItem(index, object)
+            onObjectRemoved: recentFiles.removeItem(object)
 
             MenuItem {
                 text: modelData
                 onTriggered: Logic.openRecentFile(modelData)
             }
-            onObjectAdded: recentFiles.insertItem(index, object)
-            onObjectRemoved: recentFiles.removeItem(object)
         }
     }
     MenuItem {

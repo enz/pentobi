@@ -311,6 +311,26 @@ function openNoVerify() {
     openDialog.open()
 }
 
+function openRatedGame(byteArray) {
+    verify(function() { openRatedGameNoVerify(byteArray) })
+}
+
+function openRatedGameNoVerify(byteArray) {
+    gameDisplay.destroyPieces()
+    if (! gameModel.loadSgf(byteArray))
+        showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
+    computerPlays0 = false
+    computerPlays1 = false
+    computerPlays2 = false
+    computerPlays3 = false
+    gameDisplay.createPieces()
+    gameDisplay.showToPlay()
+    gameDisplay.setupMode = false
+    isRated = false
+    analyzeGameModel.clear()
+    gameDisplay.showNavigation()
+}
+
 function openFile(file) {
     gameDisplay.destroyPieces()
     if (! gameModel.open(file))
@@ -326,6 +346,8 @@ function openFile(file) {
     gameDisplay.setupMode = false
     isRated = false
     analyzeGameModel.clear()
+    if (gameModel.comment.length > 0)
+        gameDisplay.showComment()
 }
 
 function openFileUrl() {
@@ -533,12 +555,12 @@ function verify(callback)
 {
     if (gameModel.file !== "") {
         if (gameModel.isModified) {
-            showQuestion(qsTr("Discard changes?"), callback)
+            showQuestion(qsTr("Discard changes to current game?"), callback)
             return
         }
     }
     else if (! gameModel.isGameEmpty && ! gameModel.isGameOver) {
-        showQuestion(qsTr("Abort game?"), callback)
+        showQuestion(qsTr("Abort current game?"), callback)
         return
     }
     callback()

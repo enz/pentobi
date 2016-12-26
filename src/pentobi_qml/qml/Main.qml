@@ -181,6 +181,12 @@ ApplicationWindow {
         id: ratingModel
 
         gameVariant: gameModel.gameVariant
+        // Due to a bug in Qt with Repeater inside GridLayout, the rating
+        // dialog is currently not very usable if the history changes because
+        // empty rows will appear if the layout children are updated (last
+        // tested with Qt 5.8-rc). As a workaround, we force it to be
+        // recreated if the history changed.
+        onHistoryChanged: ratingDialog.source = ""
     }
     Loader { id: computerColorDialogLoader }
     Component {

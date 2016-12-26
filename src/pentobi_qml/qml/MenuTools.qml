@@ -10,6 +10,13 @@ Menu {
         onTriggered: ratingDialog.open()
     }
     MenuItem {
+        enabled:  ! isRated && ratingModel.numberGames > 0
+        visible: ! isAndroid || enabled
+        text: qsTr("&Clear Rating")
+        onTriggered: Logic.clearRating()
+    }
+    MenuSeparator { }
+    MenuItem {
         enabled:  ! isRated
         visible: ! isAndroid || enabled
         text: qsTr("&Analyze Game")

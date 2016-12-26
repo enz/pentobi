@@ -30,20 +30,19 @@ istream& operator>>(istream& in, Rating& rating)
     return in;
 }
 
-float Rating::get_expected_result(Rating elo_opponent,
+double Rating::get_expected_result(Rating elo_opponent,
                                   unsigned nu_opponents) const
 {
-    float diff = elo_opponent.m_elo - m_elo;
+    auto diff = elo_opponent.m_elo - m_elo;
     return
-        1.f
-        / (1.f + static_cast<float>(nu_opponents) * pow(10.f, diff / 400.f));
+        1. / (1. + static_cast<double>(nu_opponents) * pow(10., diff / 400.));
 }
 
-void Rating::update(float game_result, Rating elo_opponent, float k_value,
+void Rating::update(double game_result, Rating elo_opponent, double k_value,
                     unsigned nu_opponents)
 {
     LIBBOARDGAME_ASSERT(k_value > 0);
-    float diff = game_result - get_expected_result(elo_opponent, nu_opponents);
+    auto diff = game_result - get_expected_result(elo_opponent, nu_opponents);
     m_elo += k_value * diff;
 }
 
