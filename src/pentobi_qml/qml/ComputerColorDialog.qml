@@ -20,7 +20,7 @@ Dialog {
             CheckBox {
                 id: checkBox0
 
-                //XXX enabled: ! isRated
+                enabled: ! isRated
                 text: {
                     switch (gameVariant) {
                     case "classic_2":
@@ -40,7 +40,7 @@ Dialog {
             CheckBox {
                 id: checkBox1
 
-                //XXX enabled: ! isRated
+                enabled: ! isRated
                 text: {
                     switch (gameVariant) {
                     case "classic_2":
@@ -64,7 +64,7 @@ Dialog {
             CheckBox {
                 id: checkBox2
 
-                //XXX enabled: ! isRated
+                enabled: ! isRated
                 text: qsTr("Red")
                 visible: gameVariant == "classic" || gameVariant == "trigon"
                          || gameVariant == "trigon_3"
@@ -76,7 +76,7 @@ Dialog {
             CheckBox {
                 id: checkBox3
 
-                //XXX enabled: ! isRated
+                enabled: ! isRated
                 text: qsTr("Green")
                 visible: gameVariant == "classic" || gameVariant == "trigon"
                          || gameVariant == "nexos" || gameVariant == "callisto"
