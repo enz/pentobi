@@ -87,11 +87,11 @@ class RatingModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(float bestRating READ bestRating NOTIFY bestRatingChanged)
+    Q_PROPERTY(double bestRating READ bestRating NOTIFY bestRatingChanged)
     Q_PROPERTY(QString gameVariant MEMBER m_gameVariant WRITE setGameVariant NOTIFY gameVariantChanged)
     Q_PROPERTY(QList<QObject*> history READ history NOTIFY historyChanged)
     Q_PROPERTY(int numberGames READ numberGames NOTIFY numberGamesChanged)
-    Q_PROPERTY(float rating READ rating NOTIFY ratingChanged)
+    Q_PROPERTY(double rating READ rating NOTIFY ratingChanged)
 
 public:
     explicit RatingModel(QObject* parent = nullptr);
