@@ -11,7 +11,12 @@ Dialog {
     property var history: ratingModel.history
 
     title: qsTr("Rating")
-    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
+    onVisibleChanged:
+        if (! visible) {
+            gameDisplay.forceActiveFocus() // QTBUG-48456
+            // See comment in Main.qml at ratingModel.onHistoryChanged
+            ratingDialog.source = ""
+        }
 
     ColumnLayout
     {

@@ -181,11 +181,12 @@ ApplicationWindow {
         id: ratingModel
 
         gameVariant: gameModel.gameVariant
-        // Due to a bug in Qt with Repeater inside GridLayout, the rating
-        // dialog is currently not very usable if the history changes because
-        // empty rows will appear if the layout children are updated (last
-        // tested with Qt 5.8-rc). As a workaround, we force it to be
-        // recreated if the history changed.
+        // There is a bug in the combination of ScrollView, GridLayout and
+        // Repeater, which makes the rating dialog not reusable if the history
+        // changes or the dialog is closed and opened again because empty rows
+        // will appear in the GridLayout (last tested with Qt 5.8-rc, some bugs
+        // only happen on Android, some also on Linux). As a workaround, we
+        // force it to be recreated if the history changed or it is closed.
         onHistoryChanged: ratingDialog.source = ""
     }
     Loader { id: computerColorDialogLoader }
@@ -212,11 +213,11 @@ ApplicationWindow {
     DialogLoader { id: gameInfoDialog; url: "GameInfoDialog.qml" }
     DialogLoader { id: initialRatingDialog; url: "InitialRatingDialog.qml" }
     DialogLoader { id: openDialog; url: "OpenDialog.qml" }
-    DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
     DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
     DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
     DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }
     DialogLoader { id: gotoMoveDialog; url: "GotoMoveDialog.qml" }
+    DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
     Loader { id: infoMessageLoader }
     Component {
         id: infoMessageComponent
