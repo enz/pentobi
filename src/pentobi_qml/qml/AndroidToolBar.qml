@@ -38,6 +38,7 @@ RowLayout {
 
         visible: gameDisplay.setupMode
         text: qsTr("Leave setup mode")
+        Layout.rightMargin: 0.1 * root.height
         background: Rectangle {
             color: leaveSetup.down ? theme.backgroundButtonPressed : "transparent"
             border.color: theme.androidToolBarTextColor
