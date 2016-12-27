@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <manifest package="net.sf.pentobi" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="12.UNKNOWN" android:versionCode="12999" android:installLocation="auto">
-    <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Pentobi" android:icon="@drawable/icon">
+    <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Pentobi" android:theme="@style/AppTheme" android:icon="@drawable/icon">
         <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation" android:name="org.qtproject.qt5.android.bindings.QtActivity" android:label="@string/app_name" android:screenOrientation="portrait" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -28,9 +28,7 @@
             <!--  Messages maps -->
 
             <!-- Splash screen -->
-            <!--
-            <meta-data android:name="android.app.splash_screen_drawable" android:resource="@drawable/logo"/>
-            -->
+            <meta-data android:name="android.app.splash_screen_drawable" android:resource="@drawable/splash"/>
             <!-- Splash screen -->
         </activity>
     </application>
