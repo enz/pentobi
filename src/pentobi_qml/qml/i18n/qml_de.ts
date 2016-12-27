@@ -750,7 +750,7 @@
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation>&amp;Gehe zu Zug...</translation>
+        <translation>&amp;Gehe zu Zug ...</translation>
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
