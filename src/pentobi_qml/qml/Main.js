@@ -221,6 +221,12 @@ function getTitle(file, isModified) {
     return (isModified ? "*" : "") + file.substring(pos + 1)
 }
 
+function help() {
+    if (helpWindowLoader.status === Loader.Null)
+        helpWindowLoader.source = "HelpWindow.qml"
+    helpWindowLoader.item.show()
+}
+
 function init() {
     // Settings might contain unusable geometry
     var maxWidth = Screen.desktopAvailableWidth

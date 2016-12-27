@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick svg concurrent
+QT += qml quick svg concurrent webview
 
 INCLUDEPATH += ..
 CONFIG += c++11
@@ -22,6 +22,7 @@ gcc {
 SOURCES += \
     AnalyzeGameModel.cpp \
     GameModel.cpp \
+    HelpFileExtractor.cpp \
     Main.cpp \
     PieceModel.cpp \
     PlayerModel.cpp \
@@ -91,6 +92,7 @@ SOURCES += \
 
 RESOURCES += \
     ../books/pentobi_books.qrc \
+    ../pentobi/help.qrc \
     qml/themes/theme_shared.qrc \
     resources.qrc \
     translations.qrc
@@ -111,6 +113,7 @@ include(deployment.pri)
 HEADERS += \
     AnalyzeGameModel.h \
     GameModel.h \
+    HelpFileExtractor.h \
     PieceModel.h \
     PlayerModel.h \
     RatingModel.h \

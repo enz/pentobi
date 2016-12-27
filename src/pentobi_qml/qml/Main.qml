@@ -218,6 +218,7 @@ ApplicationWindow {
     DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }
     DialogLoader { id: gotoMoveDialog; url: "GotoMoveDialog.qml" }
     DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
+    Loader { id: helpWindowLoader }
     Loader { id: infoMessageLoader }
     Component {
         id: infoMessageComponent

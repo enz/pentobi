@@ -1,0 +1,49 @@
+<!-- Help files for use in pentobi_qml -->
+<RCC>
+    <qresource prefix="/qml">
+        <file>help/C/pentobi/analysis.jpg</file>
+        <file>help/C/pentobi/become_stronger.html</file>
+        <file>help/C/pentobi/board_callisto.png</file>
+        <file>help/C/pentobi/board_classic.png</file>
+        <file>help/C/pentobi/board_duo.png</file>
+        <file>help/C/pentobi/board_nexos.png</file>
+        <file>help/C/pentobi/board_trigon.jpg</file>
+        <file>help/C/pentobi/callisto_rules.html</file>
+        <file>help/C/pentobi/classic_rules.html</file>
+        <file>help/C/pentobi/duo_rules.html</file>
+        <file>help/C/pentobi/index.html</file>
+        <file>help/C/pentobi/junior_rules.html</file>
+        <file>help/C/pentobi/license.html</file>
+        <file>help/C/pentobi/nexos_rules.html</file>
+        <file>help/C/pentobi/pieces_callisto.png</file>
+        <file>help/C/pentobi/pieces_junior.png</file>
+        <file>help/C/pentobi/pieces_nexos.png</file>
+        <file>help/C/pentobi/pieces.png</file>
+        <file>help/C/pentobi/pieces_trigon.jpg</file>
+        <file>help/C/pentobi/position_callisto.png</file>
+        <file>help/C/pentobi/position_classic.png</file>
+        <file>help/C/pentobi/position_duo.png</file>
+        <file>help/C/pentobi/position_nexos.png</file>
+        <file>help/C/pentobi/position_trigon.jpg</file>
+        <file>help/C/pentobi/rating.jpg</file>
+        <file>help/C/pentobi/shortcuts.html</file>
+        <file>help/C/pentobi/stylesheet.css</file>
+        <file>help/C/pentobi/system.html</file>
+        <file>help/C/pentobi/trigon_rules.html</file>
+        <file>help/C/pentobi/user_interface.html</file>
+        <file>help/C/pentobi/window_menu.html</file>
+        <file>help/de/pentobi/become_stronger.html</file>
+        <file>help/de/pentobi/callisto_rules.html</file>
+        <file>help/de/pentobi/classic_rules.html</file>
+        <file>help/de/pentobi/duo_rules.html</file>
+        <file>help/de/pentobi/index.html</file>
+        <file>help/de/pentobi/junior_rules.html</file>
+        <file>help/de/pentobi/license.html</file>
+        <file>help/de/pentobi/nexos_rules.html</file>
+        <file>help/de/pentobi/shortcuts.html</file>
+        <file>help/de/pentobi/system.html</file>
+        <file>help/de/pentobi/trigon_rules.html</file>
+        <file>help/de/pentobi/user_interface.html</file>
+        <file>help/de/pentobi/window_menu.html</file>
+    </qresource>
+</RCC>

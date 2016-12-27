@@ -13,8 +13,10 @@
 #include <QMessageBox>
 #include <QTranslator>
 #include <QtQml>
+#include <QtWebView/QtWebView>
 #include "AnalyzeGameModel.h"
 #include "GameModel.h"
+#include "HelpFileExtractor.h"
 #include "PlayerModel.h"
 #include "RatingModel.h"
 #include "libboardgame_util/Log.h"
@@ -46,9 +48,10 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_ANDROID
     initAndroid();
 #endif
-    qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
-    qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
+    qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
+    qmlRegisterType<HelpFileExtractor>("pentobi", 1, 0, "HelpFileExtractor");
+    qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterType<RatingModel>("pentobi", 1, 0, "RatingModel");
     qmlRegisterInterface<AnalyzeGameElement>("AnalyzeGameElement");
     qmlRegisterInterface<GameMove>("GameModelMove");
@@ -106,6 +109,7 @@ int main(int argc, char *argv[])
             PlayerModel::nuThreads = nuThreads;
         }
         QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
+        QtWebView::initialize();
         return app.exec();
     }
     catch (const bad_alloc&)

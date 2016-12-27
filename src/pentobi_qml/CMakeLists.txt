@@ -7,6 +7,8 @@ set(pentobi_qml_SRCS
   AnalyzeGameModel.cpp
   GameModel.h
   GameModel.cpp
+  HelpFileExtractor.h
+  HelpFileExtractor.cpp
   Main.cpp
   PieceModel.h
   PieceModel.cpp

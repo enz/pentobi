@@ -6,6 +6,10 @@ Menu {
     title: qsTr("&Help")
 
     MenuItem {
+        text: qsTr("Pentobi &Help")
+        onTriggered: Logic.help()
+    }
+    MenuItem {
         text: qsTr("&About Pentobi")
         onTriggered: Logic.about()
     }

@@ -278,6 +278,13 @@
     </message>
 </context>
 <context>
+    <name>HelpWindow</name>
+    <message>
+        <source>Pentobi Help</source>
+        <translation>Pentobi-Hilfe</translation>
+    </message>
+</context>
+<context>
     <name>ImageSaveDialog</name>
     <message>
         <source>Save Image</source>
@@ -764,6 +771,10 @@
         <source>&amp;About Pentobi</source>
         <translation>Über &amp;Pentobi</translation>
     </message>
+    <message>
+        <source>Pentobi &amp;Help</source>
+        <translation>Pentobi-&amp;Hilfe</translation>
+    </message>
 </context>
 <context>
     <name>MenuTools</name>
@@ -781,7 +792,7 @@
     </message>
     <message>
         <source>&amp;Clear Rating</source>
-        <translation type="unfinished">Wertung lö&amp;schen</translation>
+        <translation>Wertung lö&amp;schen</translation>
     </message>
 </context>
 <context>
