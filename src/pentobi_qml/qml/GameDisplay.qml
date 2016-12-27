@@ -51,6 +51,7 @@ Item
     function showToPlay() { pieceSelector.contentY = 0 }
     function showAnalyzeGame() { pickedPiece = null; flickable.showAnalyzeGame() }
     function showNavigation() { showComment() }
+    function showPieces() { flickable.showPieces() }
     function showComment() { pickedPiece = null; flickable.showComment() }
     function dropCommentFocus() {
         if (navigationPanel.activeFocusComment)
@@ -103,6 +104,7 @@ Item
 
             function showAnalyzeGame() { contentX = 2 * width }
             function showComment() { contentX = width }
+            function showPieces() { contentX = 0 }
             function snap() {
                 dropCommentFocus()
                 if (width == 0) return

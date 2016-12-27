@@ -121,7 +121,10 @@ Menu {
                  && gameModel.moveNumber === 0
         visible: ! isAndroid || enabled
         checked: gameDisplay.setupMode
-        onTriggered: gameDisplay.setupMode = checked
+        onTriggered: {
+            gameDisplay.setupMode = checked
+            if (checked) gameDisplay.showPieces()
+        }
     }
     MenuItem {
         text: qsTr("&Next Color")
