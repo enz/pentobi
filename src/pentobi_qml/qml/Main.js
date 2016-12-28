@@ -75,7 +75,12 @@ function checkComputerMove() {
 
 function clearRating() {
     showQuestion(qsTr("Delete all rating information for the current game variant?"),
-                 ratingModel.clearRating)
+                 clearRatingNoVerify)
+}
+
+function clearRatingNoVerify() {
+    ratingModel.clearRating()
+    gameDisplay.showTemporaryMessage(qsTr("Rating information deleted."))
 }
 
 /** If the computer already plays the current color to play, start generating
@@ -492,6 +497,8 @@ function saveCurrentFile() {
 function saveFile(file) {
     if (! gameModel.save(file))
         showInfo(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
+    else
+        gameDisplay.showTemporaryMessage(qsTr("File saved."))
 }
 
 function saveFileUrl(fileUrl) {

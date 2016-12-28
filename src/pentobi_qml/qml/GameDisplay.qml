@@ -63,6 +63,7 @@ Item
                                  Qt.size(width,
                                          width * board.height / board.width))
     }
+    function showTemporaryMessage(text) { message.showTemporary(text) }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
@@ -195,6 +196,38 @@ Item
 
         x: (gameDisplay.width - width) / 2
         y: column.y + flickable.y + (flickable.height - height) / 2
+    }
+    Rectangle {
+        id: message
+
+        function showTemporary(text) {
+            messageText.text = text
+            opacity = 1
+            messageTimer.start()
+        }
+
+        opacity: 0
+        x: (gameDisplay.width - width) / 2
+        y: column.y + flickable.y + (flickable.height - height) / 2
+        radius: 0.1 * height
+        color: theme.messageBackgroundColor
+        implicitWidth: messageText.implicitWidth + 0.5 * messageText.implicitHeight
+        implicitHeight: 1.5 * messageText.implicitHeight
+
+        Behavior on opacity { NumberAnimation { duration: 80 } }
+
+        Text {
+            id: messageText
+
+            anchors.centerIn: parent
+            color: theme.messageTextColor
+        }
+        Timer {
+            id: messageTimer
+
+            interval: 2500
+            onTriggered: message.opacity = 0
+        }
     }
     PieceManipulator {
         id: pieceManipulator

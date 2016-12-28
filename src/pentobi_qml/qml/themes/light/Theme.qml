@@ -3,6 +3,8 @@ import QtQuick.Controls.Styles 1.4
 
 QtObject {
     property color androidToolBarTextColor: "black"
+    property color messageTextColor: "black"
+    property color messageBackgroundColor: "#cac9c9"
     property color backgroundColor: "#E6E5E5"
     property color fontColorScore: "#5A5755"
     property color fontColorCoordinates: "#64615E"
