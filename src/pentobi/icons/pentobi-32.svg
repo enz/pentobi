@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="32" width="32" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<g id="a">
-<rect height="7" width="7" x="16" y="2" fill="#73d216"/>
-<path d="m16 9h7v-7l-1 1v 5h-5z" fill="#4e9a06"/>
-<path d="m16 9v-7h7l-1 1h-5v5z" fill="#8ae234"/>
-</g>
-<use xlink:href="#a" x="7"/>
-<use xlink:href="#a" x="7" y="7"/>
-<use xlink:href="#a" x="7" y="14"/>
-<g id="b">
-<rect height="7" width="7" x="9" y="16" fill="#3465a4"/>
-<path d="m9 23h7v-7l-1 1v 5h-5z" fill="#204a87"/>
-<path d="m9 23v-7h7l-1 1h-5v5z" fill="#558bc5"/>
-</g>
-<use xlink:href="#b" x="7"/>
-<use xlink:href="#b" x="7" y="7"/>
-<use xlink:href="#b" x="14" y="7"/>
-<g id="c">
-<rect height="7" width="7" x="2" y="9" fill="#edd400"/>
-<path d="m2 16h7v-7l-1 1v 5h-5z" fill="#c4a000"/>
-<path d="m2 16v-7h7l-1 1h-5v5z" fill="#fce94f"/>
-</g>
-<use xlink:href="#c" y="7"/>
-<use xlink:href="#c" y="14"/>
-<use xlink:href="#c" x="7" y="14"/>
-<g id="d">
-<rect height="7" width="7" x="2" y="2" fill="#C00"/>
-<path d="m2 9h7v-7l-1 1v 5h-5z" fill="#a40000"/>
-<path d="m2 9v-7h7l-1 1h-5v5z" fill="#ef2929"/>
-</g>
-<use xlink:href="#d" x="7"/>
-<use xlink:href="#d" x="7" y="7"/>
-<use xlink:href="#d" x="14" y="7"/>
+ <g id="h">
+  <rect height="7" width="7" y="2" x="16" fill="#73d216"/>
+  <path d="m16 9h7v-7l-1 1v5h-5z" fill="#4e9a06"/>
+  <path d="m16 9v-7h7l-1 1h-5v5z" fill="#8ae234"/>
+ </g>
+ <use y="7" x="7" xlink:href="#h"/>
+ <use y="14" x="7" xlink:href="#h"/>
+ <g id="g">
+  <rect height="7" width="7" y="16" x="9" fill="#3465a4"/>
+  <path d="m9 23h7v-7l-1 1v5h-5z" fill="#204a87"/>
+  <path d="m9 23v-7h7l-1 1h-5v5z" fill="#558bc5"/>
+ </g>
+ <use x="7" xlink:href="#g"/>
+ <use y="7" x="7" xlink:href="#g"/>
+ <g id="f">
+  <rect height="7" width="7" y="9" x="2" fill="#edd400"/>
+  <path d="m2 16h7v-7l-1 1v5h-5z" fill="#c4a000"/>
+  <path d="m2 16v-7h7l-1 1h-5v5z" fill="#fce94f"/>
+ </g>
+ <use y="7" xlink:href="#f"/>
+ <use y="14" x="7" xlink:href="#f"/>
+ <g id="e" transform="translate(7)">
+  <rect height="7" width="7" y="2" x="2" fill="#c00"/>
+  <path fill="#a40000" d="m2 9h7v-7l-1 1v5h-5z"/>
+  <path fill="#ef2929" d="m2 9v-7h7l-1 1h-5v5z"/>
+ </g>
+ <use xlink:href="#e" transform="translate(-7)" height="100%" width="100%" y="7" x="7"/>
+ <use xlink:href="#e" transform="translate(-7)" height="100%" width="100%" y="7" x="14"/>
+ <g transform="translate(18.918 -6.9073)">
+  <path d="m-13.869 8.9072c-1.6698 0.017754-3.0101 1.3491-3.0488 3.0137v3.9863h7v-0.0078l-0.011719-6.9824-0.00195-0.00586-1.9492-0.00391h-1.9883z" fill="#c00"/>
+  <path fill="#a40000" d="m-16.918 15.907h7v-7l-1 1v5h-5z"/>
+  <path d="m-13.865 8.9073c-1.6689 0.0188-3.0081 1.3498-3.0469 3.0137v3.9863l1-1v-5h5l0.98828-0.98828v-0.002l-0.00195-0.0059-1.9492-0.0039h-1.9902z" fill="#ef2929"/>
+ </g>
+ <g transform="translate(15.194 4.0674)">
+  <path d="m-6.2021 18.933-6.9824 0.01172-0.0059 0.002-0.0039 1.9492v1.9902c0.0188 1.669 1.3497 3.0082 3.0137 3.0469h3.9863v-7h-0.00781z" fill="#edd400"/>
+  <path d="m-6.1944 18.933-1 1v5h-5l-0.10156 0.10156c0.54268 0.54364 1.2886 0.87918 2.1152 0.89844h3.9863v-7z" fill="#c4a000"/>
+  <path d="m-6.2002 18.933-0.00195 0.002-6.9824 0.0098-0.0059 0.0039-0.0039 1.9492v1.9863c0.0089 0.8401 0.34891 1.5994 0.89844 2.1504l0.10156-0.10156v-5h5l1-1h-0.00586z" fill="#fce94f"/>
+ </g>
+ <g transform="matrix(.99999 0 0 1 -19.651 1.0403)">
+  <path d="m42.652 21.96v0.0078l0.01172 6.9824 0.002 0.0059 1.9492 0.0039h1.9883c1.6698-0.01776 3.0101-1.3491 3.0488-3.0137v-3.9863h-7z" fill="#3465a4"/>
+  <path d="m49.646 21.96-1 1v5h-5l-0.98828 0.98828 0.002 0.0078 2.5996 0.0039h1.3379c1.6699-0.01776 3.0102-1.3509 3.0488-3.0156v-3.9844z" fill="#204a87"/>
+  <path fill="#558bc5" d="m42.652 28.96v-7h7l-1 1h-5v5z"/>
+ </g>
+ <g transform="translate(-14.13 -.87891)">
+  <path d="m37.13 2.8789v7h0.0078l6.9824-0.01172 0.0059-0.002 0.0039-1.9492v-1.9883c-0.018-1.6698-1.349-3.01-3.014-3.0488h-3.9863z" fill="#73d216"/>
+  <path d="m43.231 3.7773-0.10156 0.10156v5h-5l-1 1h0.0078l6.9824-0.011719 0.0059-0.00195 0.0039-1.9492v-1.9883c-0.008-0.8406-0.347-1.5993-0.898-2.1504z" fill="#4e9a06"/>
+  <path d="m37.13 2.8789v7l1-1v-5h5l0.10352-0.10352c-0.543-0.5432-1.29-0.8767-2.116-0.8965h-3.9883z" fill="#8ae234"/>
+ </g>
 </svg>
