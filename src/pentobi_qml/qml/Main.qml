@@ -226,11 +226,10 @@ ApplicationWindow {
         id: questionMessageComponent
 
         Pentobi.MessageDialog {
-            property var acceptedFunc
-
             standardButtons: StandardButton.Ok | StandardButton.Cancel
         }
     }
+
     // Used to delay calls to Logic.checkComputerMove such that the computer
     // starts thinking and the busy indicator is visible after the current move
     // placement animation has finished
@@ -240,6 +239,7 @@ ApplicationWindow {
         interval: 400
         onTriggered: Logic.checkComputerMove()
     }
+
     // Delay lengthy function calls such that the busy indicator is visible
     Timer {
         id: lengthyCommand

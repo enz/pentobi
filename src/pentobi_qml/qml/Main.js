@@ -539,13 +539,7 @@ function showInfo(text) {
 function showQuestion(text, acceptedFunc) {
     if (questionMessageLoader.status === Loader.Null)
         questionMessageLoader.sourceComponent = questionMessageComponent
-    var dialog = questionMessageLoader.item
-    dialog.text = text
-    if (dialog.acceptedFunc)
-        dialog.accepted.disconnect(dialog.acceptedFunc)
-    dialog.accepted.connect(acceptedFunc)
-    dialog.acceptedFunc = acceptedFunc
-    dialog.open()
+    questionMessageLoader.item.openWithCallback(text, acceptedFunc)
 }
 
 function truncate() {
