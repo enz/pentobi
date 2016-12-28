@@ -562,7 +562,7 @@ function verify(callback)
             return
         }
     }
-    else if (! gameModel.isGameEmpty && ! gameModel.isGameOver) {
+    else if (isRated || (! gameModel.isGameEmpty && ! gameModel.isGameOver)) {
         showQuestion(qsTr("Abort current game?"), callback)
         return
     }
