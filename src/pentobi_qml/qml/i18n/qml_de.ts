@@ -357,10 +357,6 @@
         <translation>Computer-Gegner für das Brettspiel Blokus.</translation>
     </message>
     <message>
-        <source>&amp;copy; 2011&amp;ndash;%1 Markus&amp;nbsp;Enzenberger</source>
-        <translation>&amp;copy; 2011&amp;ndash;%1 Markus&amp;nbsp;Enzenberger</translation>
-    </message>
-    <message>
         <source>Keep only position?</source>
         <translation>Nur Brettstellung behalten?</translation>
     </message>
@@ -447,6 +443,10 @@
     <message>
         <source>Abort current game?</source>
         <translation>Gegenwärtiges Spiel verwerfen?</translation>
+    </message>
+    <message>
+        <source>(c) 2011-%1 Markus&amp;nbsp;Enzenberger</source>
+        <translation>(c) 2011-%1 Markus&amp;nbsp;Enzenberger</translation>
     </message>
 </context>
 <context>
