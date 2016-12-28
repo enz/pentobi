@@ -459,6 +459,7 @@ function ratedGameStart() {
     }
     setLevel(ratingModel.getNextLevel(maxLevel))
     gameDisplay.newGame()
+    gameDisplay.showPieces()
     isRated = true
     analyzeGameModel.clear()
     checkComputerMove()
