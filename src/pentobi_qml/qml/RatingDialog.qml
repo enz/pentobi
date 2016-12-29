@@ -57,7 +57,7 @@ Dialog {
             }
             Label { text: qsTr("Best previous rating:") }
             Label {
-                text: numberGames === 0 ? "--" : Math.round(ratingModel.bestRating).toString()
+                text: numberGames < 2 ? "--" : Math.round(ratingModel.bestRating).toString()
                 Layout.fillWidth: true
             }
         }
