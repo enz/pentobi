@@ -2,10 +2,10 @@ function about() {
     var url = "http://pentobi.sourceforge.net"
     // Don't use &copy; or &ndash;, this is currently not rendered in the label
     // of the message box (last tested with Qt 5.8-rc)
-    showInfo("<h2>" + qsTr("Pentobi") + "</h2><p>" +
-             qsTr("Version %1").arg(Qt.application.version) + "</p><p>" +
-             qsTr("Computer opponent for the board game Blokus.") + "<br>" +
-             qsTr("(c) 2011-%1 Markus&nbsp;Enzenberger").arg(2016) +
+    showInfo("<h2>" + qsTr("Pentobi") + "</h2><br/>" +
+             qsTr("Version %1").arg(Qt.application.version) + "<br/><br/>" +
+             qsTr("Computer opponent for the board game Blokus.") + "<br/>" +
+             qsTr("Copyright 2011-%1 Markus&nbsp;Enzenberger").arg(2016) +
              "<br><a href=\"" + url + "\">" + url + "</a></p>")
 }
 

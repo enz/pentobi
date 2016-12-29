@@ -438,16 +438,16 @@
         <translation>Gegenwärtiges Spiel verwerfen?</translation>
     </message>
     <message>
-        <source>(c) 2011-%1 Markus&amp;nbsp;Enzenberger</source>
-        <translation>(c) 2011-%1 Markus&amp;nbsp;Enzenberger</translation>
-    </message>
-    <message>
         <source>Rating information deleted.</source>
         <translation>Wertungsinformationen gelöscht.</translation>
     </message>
     <message>
         <source>File saved.</source>
         <translation>Datei gespeichert.</translation>
+    </message>
+    <message>
+        <source>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</source>
+        <translation>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</translation>
     </message>
 </context>
 <context>
