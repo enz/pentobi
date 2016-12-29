@@ -64,19 +64,23 @@ void AnalyzeGameModel::autoSave(GameModel* gameModel)
     auto& bd = gameModel->getGame().get_board();
     QVariantList list;
     auto variant = bd.get_variant();
-    if (m_analyzeGame.get_variant() != variant)
-        return;
-    list.append(to_string_id(variant));
-    list.append(m_analyzeGame.get_nu_moves());
-    for (unsigned i = 0; i < m_analyzeGame.get_nu_moves(); ++i)
-    {
-        auto mv = m_analyzeGame.get_move(i);
-        list.append(mv.color.to_int());
-        list.append(bd.to_string(mv.move).c_str());
-        list.append(m_analyzeGame.get_value(i));
-    }
+    auto nuMoves = m_analyzeGame.get_nu_moves();
     QSettings settings;
-    settings.setValue("analyzeGame", QVariant::fromValue(list));
+    if (m_analyzeGame.get_variant() != variant || nuMoves == 0)
+        settings.remove("analyzeGame");
+    else
+    {
+        list.append(to_string_id(variant));
+        list.append(nuMoves);
+        for (unsigned i = 0; i < nuMoves; ++i)
+        {
+            auto mv = m_analyzeGame.get_move(i);
+            list.append(mv.color.to_int());
+            list.append(bd.to_string(mv.move).c_str());
+            list.append(m_analyzeGame.get_value(i));
+        }
+        settings.setValue("analyzeGame", QVariant::fromValue(list));
+    }
 }
 
 void AnalyzeGameModel::cancel()
