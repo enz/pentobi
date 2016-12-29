@@ -48,11 +48,9 @@ void AnalyzeGameModel::asyncRun(const Game* game, Search* search)
     auto progressCallback =
         [&](unsigned movesAnalyzed, unsigned totalMoves)
         {
-            int progress = 100 * movesAnalyzed / max(totalMoves, 1u);
+            LIBBOARDGAME_UNUSED(movesAnalyzed);
+            LIBBOARDGAME_UNUSED(totalMoves);
             // Use invokeMethod() because callback runs in different thread
-            QMetaObject::invokeMethod(this, "setProgress",
-                                      Qt::QueuedConnection,
-                                      Q_ARG(int, progress));
             QMetaObject::invokeMethod(this, "updateElements",
                                       Qt::BlockingQueuedConnection);
         };
@@ -235,14 +233,6 @@ void AnalyzeGameModel::setMarkMoveNumber(int markMoveNumber)
         return;
     m_markMoveNumber = markMoveNumber;
     emit markMoveNumberChanged();
-}
-
-void AnalyzeGameModel::setProgress(int progress)
-{
-    if (m_progress == progress)
-        return;
-    m_progress = progress;
-    emit progressChanged();
 }
 
 void AnalyzeGameModel::start(GameModel* gameModel, PlayerModel* playerModel)

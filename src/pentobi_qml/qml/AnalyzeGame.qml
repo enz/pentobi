@@ -97,12 +97,6 @@ Item {
         color: theme.fontColorPosInfo
         text: qsTr("(No analysis)")
     }
-    ProgressBar {
-        visible: analyzeGameModel.isRunning
-        anchors.centerIn: parent
-        minimumValue: 0; maximumValue: 100
-        value: analyzeGameModel.progress
-    }
     MouseArea {
         anchors.fill: parent
 

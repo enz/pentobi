@@ -49,7 +49,6 @@ class AnalyzeGameModel
     Q_PROPERTY(QQmlListProperty<AnalyzeGameElement> elements READ elements NOTIFY elementsChanged)
     Q_PROPERTY(bool isRunning READ isRunning NOTIFY isRunningChanged)
     Q_PROPERTY(int markMoveNumber READ markMoveNumber NOTIFY markMoveNumberChanged)
-    Q_PROPERTY(int progress READ progress NOTIFY progressChanged)
 
 public:
     explicit AnalyzeGameModel(QObject* parent = nullptr);
@@ -76,8 +75,6 @@ public:
 
     int markMoveNumber() const { return m_markMoveNumber; }
 
-    int progress() const { return m_progress; }
-
     QQmlListProperty<AnalyzeGameElement> elements();
 
 signals:
@@ -94,16 +91,12 @@ private:
 
     int m_markMoveNumber = -1;
 
-    int m_progress = 0;
-
     QList<AnalyzeGameElement*> m_elements;
 
     QFutureWatcher<void> m_watcher;
 
     AnalyzeGame m_analyzeGame;
 
-
-    Q_INVOKABLE void setProgress(int progress);
 
     Q_INVOKABLE void updateElements();
 
