@@ -29,11 +29,11 @@ function autoSave() {
 function cancelRunning() {
     if (analyzeGameModel.isRunning) {
         analyzeGameModel.cancel()
-        gameDisplay.showTemporaryMessage(qsTr("Game analysis aborted."))
+        showTemporaryMessage(qsTr("Game analysis aborted."))
     }
     if (playerModel.isGenMoveRunning) {
         playerModel.cancelGenMove()
-        gameDisplay.showTemporaryMessage(qsTr("Computer move aborted."))
+        showTemporaryMessage(qsTr("Computer move aborted."))
     }
     delayedCheckComputerMove.stop()
 }
@@ -93,7 +93,7 @@ function clearRating() {
 
 function clearRatingNoVerify() {
     ratingModel.clearRating()
-    gameDisplay.showTemporaryMessage(qsTr("Rating information deleted."))
+    showTemporaryMessage(qsTr("Rating information deleted."))
 }
 
 /** If the computer already plays the current color to play, start generating
@@ -163,18 +163,27 @@ function createTheme(themeName) {
 }
 
 function deleteAllVar() {
-    showQuestion(qsTr("Delete all variations?"), gameModel.deleteAllVar)
+    showQuestion(qsTr("Delete all variations?"), deleteAllVarNoVerify)
+}
+
+function deleteAllVarNoVerify() {
+    gameModel.deleteAllVar()
+    showTemporaryMessage(qsTr("Variations deleted."))
 }
 
 function exportAsciiArt(fileUrl) {
     if (! gameModel.saveAsciiArt(getFileFromUrl(fileUrl)))
         showInfo(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
+    else
+        showTemporaryMessage(qsTr("File saved."))
 }
 
 function exportImage(fileUrl) {
     if (! gameDisplay.grabBoardToImage(function(result) {
         if (! result.saveToFile(getFileFromUrl(fileUrl)))
             showInfo(qsTr("Saving image failed."))
+        else
+            showTemporaryMessage(qsTr("Image saved."))
     }, exportImageWidth))
         showInfo(qsTr("Creating image failed."))
 }
@@ -301,11 +310,21 @@ function isMultiColor() {
 }
 
 function keepOnlyPosition() {
-    showQuestion(qsTr("Keep only position?"), gameModel.keepOnlyPosition())
+    showQuestion(qsTr("Keep only position?"), keepOnlyPositionNoVerify)
+}
+
+function keepOnlyPositionNoVerify() {
+    gameModel.keepOnlyPosition()
+    showTemporaryMessage(qsTr("Kept only position."))
 }
 
 function keepOnlySubtree() {
-    showQuestion(qsTr("Keep only subtree?"), gameModel.keepOnlySubtree())
+    showQuestion(qsTr("Keep only subtree?"), keepOnlySubtreeNoVerify)
+}
+
+function keepOnlySubtreeNoVerify() {
+    gameModel.keepOnlySubtree()
+    showTemporaryMessage(qsTr("Kept only subtree."))
 }
 
 function moveGenerated(move) {
@@ -512,7 +531,7 @@ function saveFile(file) {
     if (! gameModel.save(file))
         showInfo(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
     else
-        gameDisplay.showTemporaryMessage(qsTr("File saved."))
+        showTemporaryMessage(qsTr("File saved."))
 }
 
 function saveFileUrl(fileUrl) {
@@ -563,12 +582,21 @@ function showQuestion(text, acceptedFunc) {
     questionMessageLoader.item.openWithCallback(text, acceptedFunc)
 }
 
+function showTemporaryMessage(text) {
+    gameDisplay.showTemporaryMessage(text)
+}
+
 function truncate() {
     showQuestion(qsTr("Truncate this subtree?"), gameModel.truncate)
 }
 
 function truncateChildren() {
-    showQuestion(qsTr("Truncate children?"), gameModel.truncateChildren)
+    showQuestion(qsTr("Truncate children?"), truncateChildrenNoVerify)
+}
+
+function truncateChildrenNoVerify() {
+    gameModel.truncateChildren()
+    showTemporaryMessage(qsTr("Children truncated."))
 }
 
 function undo() {

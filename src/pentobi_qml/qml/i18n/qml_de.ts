@@ -457,6 +457,26 @@
         <source>Computer move aborted.</source>
         <translation>Computer-Zug abgebrochen.</translation>
     </message>
+    <message>
+        <source>Variations deleted.</source>
+        <translation>Varianten gelöscht.</translation>
+    </message>
+    <message>
+        <source>Image saved.</source>
+        <translation>Grafik gespeichert.</translation>
+    </message>
+    <message>
+        <source>Kept only position.</source>
+        <translation>Nur Brettstellung behalten.</translation>
+    </message>
+    <message>
+        <source>Kept only subtree.</source>
+        <translation>Nur Teilbaum behalten.</translation>
+    </message>
+    <message>
+        <source>Children truncated.</source>
+        <translation>Kindknoten abgeschnitten.</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -610,6 +630,10 @@
     <message>
         <source>S&amp;etup Mode</source>
         <translation>&amp;Stellungsaufbau</translation>
+    </message>
+    <message>
+        <source>Made main variation.</source>
+        <translation>Zu Hauptvariante gemacht.</translation>
     </message>
 </context>
 <context>

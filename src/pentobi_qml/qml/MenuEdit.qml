@@ -68,7 +68,10 @@ Menu {
         text: qsTr("Make &Main Variation")
         enabled: ! gameModel.isMainVar
         visible: ! isAndroid || enabled
-        onTriggered: gameModel.makeMainVar()
+        onTriggered: {
+            gameModel.makeMainVar()
+            Logic.showTemporaryMessage(qsTr("Made main variation."))
+        }
     }
     MenuItem {
         text: qsTr("Move Variation &Up")
