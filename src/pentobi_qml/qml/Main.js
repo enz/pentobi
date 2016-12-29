@@ -15,6 +15,7 @@ function analyzeGame() {
         return
     }
     gameDisplay.showAnalyzeGame()
+    Logic.cancelRunning()
     analyzeGameModel.start(gameModel, playerModel)
 }
 
@@ -205,6 +206,7 @@ function findNextCommentContinueFromRoot() {
 }
 
 function genMove() {
+    Logic.cancelRunning()
     gameDisplay.pickedPiece = null
     playerModel.startGenMove(gameModel)
 }
