@@ -589,6 +589,16 @@ QByteArray GameModel::getSgf() const
     return QByteArray(s.str().c_str());
 }
 
+QString GameModel::getVariationInfo() const
+{
+    auto moveNumber = getBoard().get_nu_moves();
+    QString s = QString::number(moveNumber);
+    unsigned moveIndex;
+    if (getVariationIndex(m_game.get_tree(), m_game.get_current(), moveIndex))
+        s.append(get_letter_coord(moveIndex).c_str());
+    return s;
+}
+
 void GameModel::goBackward()
 {
     gotoNode(m_game.get_current().get_parent_or_null());
@@ -1327,7 +1337,7 @@ void GameModel::updatePieces()
     // Update pieces of moves played after last setup or root
     auto& tree = m_game.get_tree();
     auto node = &m_game.get_current();
-    auto move_number = bd.get_nu_moves();
+    auto moveNumber = bd.get_nu_moves();
     PieceModel* lastMovePieceModel = nullptr;
     do
     {
@@ -1336,7 +1346,7 @@ void GameModel::updatePieces()
         {
             auto c = mv.color;
             auto pieceModel = updatePiece(c, mv.move, isPlayed[c]);
-            QString label = QString::number(move_number);
+            QString label = QString::number(moveNumber);
             unsigned moveIndex;
             if (m_showVariations && getVariationIndex(tree, *node, moveIndex))
                 label.append(get_letter_coord(moveIndex).c_str());
@@ -1344,7 +1354,7 @@ void GameModel::updatePieces()
             pieceModel->setMoveLabel(label);
             if (! lastMovePieceModel)
                 lastMovePieceModel = pieceModel;
-            --move_number;
+            --moveNumber;
         }
         if (has_setup(*node))
             break;

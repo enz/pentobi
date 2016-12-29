@@ -327,12 +327,22 @@ function keepOnlySubtreeNoVerify() {
     showTemporaryMessage(qsTr("Kept only subtree."))
 }
 
+function moveDownVar() {
+    gameModel.moveDownVar()
+    showVariationInfo()
+}
+
 function moveGenerated(move) {
     gameModel.playMove(move)
     if (isPlaySingleMoveRunning)
         isPlaySingleMoveRunning = false
     else
         delayedCheckComputerMove.restart()
+}
+
+function moveUpVar() {
+    gameModel.moveUpVar()
+    showVariationInfo()
 }
 
 function newGame()
@@ -584,6 +594,10 @@ function showQuestion(text, acceptedFunc) {
 
 function showTemporaryMessage(text) {
     gameDisplay.showTemporaryMessage(text)
+}
+
+function showVariationInfo() {
+    showTemporaryMessage(qsTr("Variation is now %1.").arg(gameModel.getVariationInfo()))
 }
 
 function truncate() {

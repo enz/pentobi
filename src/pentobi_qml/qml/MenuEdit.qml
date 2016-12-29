@@ -77,13 +77,13 @@ Menu {
         text: qsTr("Move Variation &Up")
         enabled: gameModel.hasPrevVar
         visible: ! isAndroid || enabled
-        onTriggered: gameModel.moveUpVar()
+        onTriggered: Logic.moveUpVar()
     }
     MenuItem {
         text: qsTr("Move Variation &Down")
         enabled: gameModel.hasNextVar
         visible: ! isAndroid || enabled
-        onTriggered: gameModel.moveDownVar()
+        onTriggered: Logic.moveDownVar()
     }
     MenuSeparator { }
     MenuItem {

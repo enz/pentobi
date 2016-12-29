@@ -477,6 +477,10 @@
         <source>Children truncated.</source>
         <translation>Kindknoten abgeschnitten.</translation>
     </message>
+    <message>
+        <source>Variation is now %1.</source>
+        <translation>Variante ist jetzt %1.</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

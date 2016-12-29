@@ -139,6 +139,8 @@ public:
 
     Q_INVOKABLE QString getPlayerString(int color);
 
+    Q_INVOKABLE QString getVariationInfo() const;
+
     Q_INVOKABLE bool isLegalPos(PieceModel* pieceModel, const QString& state,
                                 QPointF coord) const;
 
