@@ -25,7 +25,7 @@ Window {
     color: theme.backgroundColor
     flags: Qt.Dialog
     // We'd like to hide the window instead of closing it but it doesn't work on
-    // Android to make it visible again (propblem with WebView? Last tested with
+    // Android to make it visible again (problem with WebView? Last tested with
     // Qt 5.8-rc), so for now we destroy it and recreate it when needed.
     onClosing: helpWindowLoader.source = ""
 
