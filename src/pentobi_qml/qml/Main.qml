@@ -36,12 +36,6 @@ Window {
                     Math.min(Math.round(Screen.pixelDensity / 3.5 * 800))
     property int exportImageWidth: 400
 
-    function cancelRunning() {
-        analyzeGameModel.cancel()
-        playerModel.cancelGenMove()
-        delayedCheckComputerMove.stop()
-    }
-
     minimumWidth: 240; minimumHeight: 320
     width: isAndroid ? Screen.desktopAvailableWidth : defaultWidth
     height: isAndroid ? Screen.desktopAvailableHeight : defaultHeight
@@ -108,7 +102,7 @@ Window {
     GameModel {
         id: gameModel
 
-        onPositionAboutToChange: cancelRunning()
+        onPositionAboutToChange: Logic.cancelRunning()
     }
     PlayerModel {
         id: playerModel
@@ -142,7 +136,7 @@ Window {
                 root.computerPlays2 = computerColorDialog.computerPlays2
                 root.computerPlays3 = computerColorDialog.computerPlays3
                 if (! Logic.isComputerToPlay())
-                    cancelRunning()
+                    Logic.cancelRunning()
                 else if (! gameModel.isGameOver)
                     Logic.checkComputerMove()
             }

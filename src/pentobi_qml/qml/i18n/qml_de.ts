@@ -449,6 +449,14 @@
         <source>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</source>
         <translation>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</translation>
     </message>
+    <message>
+        <source>Game analysis aborted.</source>
+        <translation>Spielanalyse abgebrochen.</translation>
+    </message>
+    <message>
+        <source>Computer move aborted.</source>
+        <translation>Computer-Zug abgebrochen.</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

@@ -25,6 +25,18 @@ function autoSave() {
     analyzeGameModel.autoSave(gameModel)
 }
 
+function cancelRunning() {
+    if (analyzeGameModel.isRunning) {
+        analyzeGameModel.cancel()
+        gameDisplay.showTemporaryMessage(qsTr("Game analysis aborted."))
+    }
+    if (playerModel.isGenMoveRunning) {
+        playerModel.cancelGenMove()
+        gameDisplay.showTemporaryMessage(qsTr("Computer move aborted."))
+    }
+    delayedCheckComputerMove.stop()
+}
+
 function changeGameVariant(gameVariant) {
     if (gameModel.gameVariant === gameVariant)
         return
