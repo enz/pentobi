@@ -8,7 +8,7 @@ import pentobi 1.0
 import "." as Pentobi
 import "Main.js" as Logic
 
-ApplicationWindow {
+Window {
     id: root
 
     property bool computerPlays0
