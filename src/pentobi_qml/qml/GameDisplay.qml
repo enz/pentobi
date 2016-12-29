@@ -203,7 +203,7 @@ Item
         function showTemporary(text) {
             messageText.text = text
             opacity = 1
-            messageTimer.start()
+            messageTimer.restart()
         }
 
         opacity: 0
@@ -214,7 +214,7 @@ Item
         implicitWidth: messageText.implicitWidth + 0.5 * messageText.implicitHeight
         implicitHeight: 1.5 * messageText.implicitHeight
 
-        Behavior on opacity { NumberAnimation { duration: 80 } }
+        Behavior on opacity { NumberAnimation { duration: 200 } }
 
         Text {
             id: messageText

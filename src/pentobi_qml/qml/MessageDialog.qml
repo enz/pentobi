@@ -18,7 +18,7 @@ Dialog {
             accepted.disconnect(root.acceptedFunc)
         accepted.connect(acceptedFunc)
         root.acceptedFunc = acceptedFunc
-        timer.start()
+        timer.restart()
     }
 
     onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
