@@ -69,10 +69,10 @@ void RatingModel::addResult(GameModel* gameModel, int level)
     Rating rating = m_rating;
     rating.update(gameResult, opponentRating, kValue, nuOpponents);
     setRating(rating.get());
-    if (rating.get() > m_bestRating.get())
+    auto numberGames = m_numberGames + 1;
+    if (numberGames == 1 || rating.get() > m_bestRating.get())
         setBestRating(rating.get());
     auto date = QDate::currentDate().toString("yyyy-MM-dd");
-    auto numberGames = m_numberGames + 1;
     m_history.prepend(new RatedGameInfo(this, numberGames, color, gameResult,
                                        date, level, m_rating.get(),
                                        gameModel->getSgf()));
