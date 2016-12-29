@@ -26,6 +26,8 @@ using libpentobi_base::Variant;
 class AnalyzeGame
 {
 public:
+    void clear();
+
     /** Run the analysis.
         The analysis can be aborted from a different thread with
         libboardgame_util::set_abort().

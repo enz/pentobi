@@ -25,6 +25,12 @@ using libpentobi_base::BoardUpdater;
 
 //-----------------------------------------------------------------------------
 
+void AnalyzeGame::clear()
+{
+    m_moves.clear();
+    m_values.clear();
+}
+
 void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                       function<void(unsigned,unsigned)> progress_callback)
 {
