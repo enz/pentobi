@@ -984,7 +984,7 @@
     <name>ToolBar</name>
     <message>
         <source>Leave setup mode</source>
-        <translation type="unfinished">Stellungsaufbau beenden</translation>
+        <translation>Stellungsaufbau beenden</translation>
     </message>
 </context>
 <context>
