@@ -10,7 +10,6 @@ RowLayout {
     id: root
 
     property alias title: title.text
-    property alias titleToolTip: toolTip.text
 
     function popupMenu() { menu.popup() }
 
@@ -27,11 +26,12 @@ RowLayout {
         Controls2.ToolTip {
             id: toolTip
 
-            timeout: 2500
+            text: title.text
+            timeout: 2000
         }
         MouseArea {
             anchors.fill: parent
-            onClicked: toolTip.visible = ! toolTip.visible
+            onClicked: if (title.truncated) toolTip.open()
         }
     }
     Controls2.Button {

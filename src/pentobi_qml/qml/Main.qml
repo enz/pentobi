@@ -69,7 +69,6 @@ Window {
                 if (gameModel.file === "") return ""
                 return Logic.getFileLabel(gameModel.file, gameModel.isModified)
             }
-            titleToolTip: gameModel.file
         }
         GameDisplay {
             id: gameDisplay
