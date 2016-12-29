@@ -1,7 +1,6 @@
 import QtQuick 2.0
 
 QtObject {
-    property color androidToolBarTextColor: fontColorPosInfo
     property color messageTextColor: fontColorPosInfo
     property color messageBackgroundColor: "#333"
     property color backgroundColor: "#131313"
@@ -16,6 +15,7 @@ QtObject {
     property color backgroundButtonPressed: Qt.lighter(backgroundColor, 3)
     property color selectionColor: "steelblue"
     property color selectedTextColor: "#EEE"
+    property color toolBarTextColor: fontColorPosInfo
     property color analyzeBackgroundColor: "#222"
     property color analyzeLineColor: "#888"
     property color analyzeMiddleLineColor: "#555"

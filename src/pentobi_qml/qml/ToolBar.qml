@@ -1,31 +1,88 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.1
+import QtQuick.Controls 2.1 as Controls2
 import QtQuick.Layouts 1.1
+import QtQuick.Window 2.0
+import "." as Pentobi
 import "Main.js" as Logic
 
-ToolBar {
-    RowLayout {
-        anchors.fill: parent
+RowLayout {
+    id: root
 
-        ToolButton {
-            iconSource: "icons/pentobi-newgame.svg"
-            enabled: ! gameModel.isGameEmpty || isRated
-            onClicked: Logic.newGame()
+    property alias title: title.text
+
+    function popupMenu() { menu.popup() }
+
+    spacing: 0
+
+    Controls2.Label {
+        id: title
+
+        Layout.fillWidth: true
+        Layout.leftMargin: root.height / 10
+        color: theme.toolBarTextColor
+        elide: Text.ElideRight
+
+        Controls2.ToolTip {
+            id: toolTip
+
+            text: title.text
+            timeout: 2000
         }
-        ToolButton {
-            iconSource: "icons/pentobi-undo.svg"
-            enabled: gameModel.canUndo && ! isRated
-            onClicked: Logic.undo()
+        MouseArea {
+            anchors.fill: parent
+            onClicked: if (title.truncated) toolTip.open()
         }
-        ToolButton {
-            iconSource: "icons/pentobi-computer-colors.svg"
-            onClicked: Logic.showComputerColorDialog()
+    }
+    Controls2.Button {
+        id: leaveSetup
+
+        visible: gameDisplay.setupMode
+        text: qsTr("Leave setup mode")
+        Layout.rightMargin: 0.1 * root.height
+        background: Rectangle {
+            color: leaveSetup.down ? theme.backgroundButtonPressed : "transparent"
+            border.color: theme.toolBarTextColor
         }
-        ToolButton {
-            iconSource: "icons/pentobi-play.svg"
-            enabled: ! isRated
-            onClicked: Logic.computerPlay()
+        contentItem: Controls2.Label {
+            text: leaveSetup.text
+            color: theme.toolBarTextColor
         }
-        Item { Layout.fillWidth: true }
+        onClicked: gameDisplay.setupMode = false
+    }
+    Pentobi.ToolButton {
+        imageSource: "icons/pentobi-newgame.svg"
+        visible: ! (gameModel.isGameEmpty && ! isRated) && ! gameDisplay.setupMode
+        onClicked: Logic.newGame()
+    }
+    Pentobi.ToolButton {
+        visible: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
+        imageSource: "icons/pentobi-undo.svg"
+        onClicked: Logic.undo()
+    }
+    Pentobi.ToolButton {
+        visible: ! gameDisplay.setupMode
+        imageSource: "icons/pentobi-computer-colors.svg"
+        onClicked: Logic.showComputerColorDialog()
+    }
+    Pentobi.ToolButton {
+        visible: ! gameModel.isGameOver && ! gameDisplay.setupMode && ! isRated
+        imageSource: "icons/pentobi-play.svg"
+        onClicked: Logic.computerPlay()
+    }
+    Pentobi.ToolButton {
+        imageSource: isAndroid ? "icons/menu.svg" : ""
+        menu: menu
+    }
+    Menu {
+        id: menu
+
+        MenuGame { }
+        MenuGo { }
+        MenuEdit { }
+        MenuView { }
+        MenuComputer { }
+        MenuTools { }
+        MenuHelp { }
     }
 }

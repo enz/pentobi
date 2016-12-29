@@ -203,6 +203,13 @@ function getFileFromUrl(fileUrl) {
     return decodeURIComponent(file)
 }
 
+function getFileLabel(file, isModified) {
+    if (file === "")
+        return ""
+    var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"));
+    return (isModified ? "*" : "") + file.substring(pos + 1)
+}
+
 function getLevel() {
     switch (gameModel.gameVariant) {
     case "classic_2": return playerModel.levelClassic2
@@ -219,13 +226,6 @@ function getLevel() {
     case "callisto_3": return playerModel.levelCallisto3
     default: return playerModel.levelClassic
     }
-}
-
-function getTitle(file, isModified) {
-    if (file === "")
-        return qsTr("Pentobi")
-    var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"));
-    return (isModified ? "*" : "") + file.substring(pos + 1)
 }
 
 function help() {

@@ -24,7 +24,6 @@ ApplicationWindow {
     property bool wasGenMoveRunning
 
     property bool isAndroid: Qt.platform.os === "android"
-    property bool useAndroidToolbar: isAndroid
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
     property url folder
@@ -47,14 +46,8 @@ ApplicationWindow {
     width: isAndroid ? Screen.desktopAvailableWidth : defaultWidth
     height: isAndroid ? Screen.desktopAvailableHeight : defaultHeight
     color: theme.backgroundColor
-    title: Logic.getTitle(gameModel.file, gameModel.isModified)
+    title: qsTr("Pentobi")
     onClosing: Qt.quit()
-    // Currently, we don't use the QtQuick ToolBar/MenuBar on Android. The file
-    // dialog is unusable with dark themes (QTBUG-48324) and a white toolbar is
-    // too distracting with the dark background we use on Android.
-    menuBar: menuBarLoader.item
-    toolBar: toolBarLoader.item
-    statusBar: statusBarLoader.item
     Component.onCompleted: {
         Logic.init()
         show()
@@ -64,26 +57,17 @@ ApplicationWindow {
     ColumnLayout {
         anchors.fill: parent
         Keys.onReleased: if (isAndroid && event.key === Qt.Key_Menu) {
-                             androidToolBarLoader.item.popupMenu()
+                             toolBar.popupMenu()
                              event.accepted = true
                          }
 
-        Loader {
-            id: androidToolBarLoader
+        Pentobi.ToolBar {
+            id: toolBar
 
-            sourceComponent: useAndroidToolbar ? androidToolBarComponent : undefined
-            Layout.fillWidth: true
-
-            Component {
-                id: androidToolBarComponent
-
-                AndroidToolBar {
-                    title: {
-                        if (isRated) return qsTr("Rated game")
-                        if (gameModel.file === "") return ""
-                        return root.title
-                    }
-                }
+            title: {
+                if (isRated) return qsTr("Rated game")
+                if (gameModel.file === "") return ""
+                return Logic.getFileLabel(gameModel.file, gameModel.isModified)
             }
         }
         GameDisplay {
@@ -97,47 +81,6 @@ ApplicationWindow {
             Layout.fillHeight: true
             focus: true
             onPlay: Logic.play(pieceModel, gameCoord)
-        }
-    }
-    Loader {
-        id: menuBarLoader
-
-        sourceComponent: useAndroidToolbar ? undefined : menuBarComponent
-
-        Component {
-            id: menuBarComponent
-
-            MenuBar {
-                MenuGame { }
-                MenuGo { }
-                MenuEdit { }
-                MenuView { }
-                MenuComputer { }
-                MenuTools { }
-                MenuHelp { }
-            }
-        }
-    }
-    Loader {
-        id: toolBarLoader
-
-        sourceComponent: useAndroidToolbar ? undefined : toolBarComponent
-
-        Component {
-            id: toolBarComponent
-
-            Pentobi.ToolBar { }
-        }
-    }
-    Loader {
-        id: statusBarLoader
-
-        sourceComponent: isAndroid ? undefined : statusBarComponent
-
-        Component {
-            id: statusBarComponent
-
-            Pentobi.StatusBar { }
         }
     }
     Settings {

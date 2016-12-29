@@ -1,8 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/AnalyzeGame.qml</file>
-        <file>qml/AndroidToolBar.qml</file>
-        <file>qml/AndroidToolButton.qml</file>
         <file>qml/AsciiArtSaveDialog.qml</file>
         <file>qml/Board.qml</file>
         <file>qml/Button.qml</file>
@@ -47,8 +45,8 @@
         <file>qml/ScoreElement.qml</file>
         <file>qml/ScoreElement2.qml</file>
         <file>qml/Square.qml</file>
-        <file>qml/StatusBar.qml</file>
         <file>qml/ToolBar.qml</file>
+        <file>qml/ToolButton.qml</file>
         <file>qml/Triangle.qml</file>
         <file>qml/Main.js</file>
         <file>qml/GameDisplay.js</file>
