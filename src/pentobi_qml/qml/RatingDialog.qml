@@ -161,7 +161,12 @@ Dialog {
                           qsTr("Open Game %1").arg(history[menu.row].number) : ""
                 onTriggered: {
                     Logic.openRatedGame(history[menu.row].sgf)
-                    close()
+                    // Not sure why, but if we close this dialog here and
+                    // Logic.openRatedGame() needs to open a message dialog to
+                    // verify that the current game should be discarded, then
+                    // gameDisplay is undefined in Logic.openRatedGameNoVerify()
+                    // (last tested with Qt 5.8-rc) So we close the rating
+                    // dialog in openRatedGameNoVerify() instead.
                 }
             }
         }

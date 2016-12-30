@@ -385,6 +385,8 @@ function openRatedGameNoVerify(byteArray) {
     isRated = false
     analyzeGameModel.clear()
     gameDisplay.showNavigation()
+    // See comment in RatingDialog onTriggered of the menu item
+    ratingDialog.item.close()
 }
 
 function openFile(file) {
