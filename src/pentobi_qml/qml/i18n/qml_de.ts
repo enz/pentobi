@@ -258,6 +258,10 @@
         <source>Red</source>
         <translation>Rot</translation>
     </message>
+    <message>
+        <source>Invalid Blokus SGF file. (%1)</source>
+        <translation>Ungültige Blokus-SGF-Datei. (%1)</translation>
+    </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>

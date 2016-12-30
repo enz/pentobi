@@ -832,7 +832,9 @@ bool GameModel::open(istream& in)
     }
     catch (const runtime_error& e)
     {
-        m_lastInputOutputError = QString::fromLocal8Bit(e.what());
+        m_lastInputOutputError =
+                QString(tr("Invalid Blokus SGF file. (%1)"))
+                .arg(QString::fromLocal8Bit(e.what()));
         return false;
     }
     return true;
