@@ -12,9 +12,9 @@ Window {
     id: root
 
     property bool computerPlays0
-    property bool computerPlays1
-    property bool computerPlays2
-    property bool computerPlays3
+    property bool computerPlays1: true
+    property bool computerPlays2: true
+    property bool computerPlays3: true
     property bool isPlaySingleMoveRunning
     property bool isRated
     property int maxLevel: 7
