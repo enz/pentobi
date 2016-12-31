@@ -553,11 +553,7 @@ function save() {
 }
 
 function saveAs() {
-    // We always create a new save file dialog because currently there is no
-    // way to initialize the default file in FileDialog and we don't want the
-    // save dialog to default to the last file saved, which might be different
-    // from the currently loaded file.
-    Qt.createComponent("SaveDialog.qml").createObject(root).open()
+    saveDialog.open()
 }
 
 function saveCurrentFile() {

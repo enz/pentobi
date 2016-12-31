@@ -151,6 +151,7 @@ Window {
     DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }
     DialogLoader { id: gotoMoveDialog; url: "GotoMoveDialog.qml" }
     DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
+    DialogLoader { id: saveDialog; url: "SaveDialog.qml" }
     Loader { id: helpWindowLoader }
     Loader { id: infoMessageLoader }
     Component {

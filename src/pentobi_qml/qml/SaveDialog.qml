@@ -13,7 +13,11 @@ FileDialog {
     }
     onVisibleChanged:
         if (! visible) {
-            destroy() // We don't reuse this dialog, see comment in Logic.saveAs()
+            // We always create a new save file dialog because currently there
+            // is no way to initialize the default file in FileDialog and we
+            // don't want the dialog to default to the last file saved, which
+            // might be different from the currently loaded file.
+            saveDialog.source = ""
             gameDisplay.forceActiveFocus() // QTBUG-48456
         }
 }
