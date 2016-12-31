@@ -28,18 +28,18 @@ Window {
     property QtObject theme: Logic.createTheme(themeName)
     property url folder
     property int defaultWidth:
-        isAndroid ? Screen.desktopAvailableWidth :
                     Math.min(Screen.desktopAvailableWidth,
                              Math.round(Screen.pixelDensity / 3.5 * 600))
     property int defaultHeight:
-        isAndroid ? Screen.desktopAvailableHeight :
                     Math.min(Screen.desktopAvailableHeight,
                              Math.round(Screen.pixelDensity / 3.5 * 800))
     property int exportImageWidth: 400
 
-    minimumWidth: 240; minimumHeight: 320
-    width: isAndroid ? Screen.desktopAvailableWidth : defaultWidth
-    height: isAndroid ? Screen.desktopAvailableHeight : defaultHeight
+    // Minimum size corresponds to a QVGA mobile device with 19px statusbar
+    minimumWidth: 240; minimumHeight: 301
+
+    width: defaultWidth
+    height: defaultHeight
     color: theme.backgroundColor
     title: qsTr("Pentobi")
     onClosing: Qt.quit()

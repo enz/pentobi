@@ -874,6 +874,10 @@
         <source>Show &amp;Variations</source>
         <translation>&amp;Varianten zeigen</translation>
     </message>
+    <message>
+        <source>&amp;Fullscreen</source>
+        <translation>Voll&amp;bild</translation>
+    </message>
 </context>
 <context>
     <name>OpenDialog</name>
