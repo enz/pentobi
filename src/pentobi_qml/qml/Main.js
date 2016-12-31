@@ -373,41 +373,55 @@ function openRatedGame(byteArray) {
 
 function openRatedGameNoVerify(byteArray) {
     lengthyCommand.run(function() {
-        gameDisplay.destroyPieces()
+        var oldGameVariant = gameModel.gameVariant
+        var oldEnableAnimations = gameDisplay.enableAnimations
+        gameDisplay.enableAnimations = false
         if (! gameModel.loadSgf(byteArray))
             showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
         computerPlays0 = false
         computerPlays1 = false
         computerPlays2 = false
         computerPlays3 = false
-        gameDisplay.createPieces()
+        if (gameModel.gameVariant != oldGameVariant) {
+            gameDisplay.destroyPieces()
+            gameDisplay.createPieces()
+        }
         gameDisplay.showToPlay()
         gameDisplay.setupMode = false
         isRated = false
         analyzeGameModel.clear()
-        gameDisplay.showNavigation()
+        gameDisplay.showToPlay()
+        gameDisplay.enableAnimations = oldEnableAnimations
         // See comment in RatingDialog onTriggered of the menu item
         ratingDialog.item.close()
     })
 }
 
 function openFile(file) {
-    gameDisplay.destroyPieces()
-    if (! gameModel.open(file))
-        showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-    else {
-        computerPlays0 = false
-        computerPlays1 = false
-        computerPlays2 = false
-        computerPlays3 = false
-    }
-    gameDisplay.createPieces()
-    gameDisplay.showToPlay()
-    gameDisplay.setupMode = false
-    isRated = false
-    analyzeGameModel.clear()
-    if (gameModel.comment.length > 0)
-        gameDisplay.showComment()
+    lengthyCommand.run(function() {
+        var oldGameVariant = gameModel.gameVariant
+        var oldEnableAnimations = gameDisplay.enableAnimations
+        gameDisplay.enableAnimations = false
+        if (! gameModel.open(file))
+            showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
+        else {
+            computerPlays0 = false
+            computerPlays1 = false
+            computerPlays2 = false
+            computerPlays3 = false
+        }
+        if (gameModel.gameVariant != oldGameVariant) {
+            gameDisplay.destroyPieces()
+            gameDisplay.createPieces()
+        }
+        gameDisplay.showToPlay()
+        gameDisplay.enableAnimations = oldEnableAnimations
+        gameDisplay.setupMode = false
+        isRated = false
+        analyzeGameModel.clear()
+        if (gameModel.comment.length > 0)
+            gameDisplay.showComment()
+    })
 }
 
 function openFileUrl() {
@@ -416,7 +430,9 @@ function openFileUrl() {
 
 function openFromClipboard() {
     lengthyCommand.run(function() {
-        gameDisplay.destroyPieces()
+        var oldGameVariant = gameModel.gameVariant
+        var oldEnableAnimations = gameDisplay.enableAnimations
+        gameDisplay.enableAnimations = false
         if (! gameModel.openFromClipboard())
             showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
         else {
@@ -425,8 +441,12 @@ function openFromClipboard() {
             computerPlays2 = false
             computerPlays3 = false
         }
-        gameDisplay.createPieces()
+        if (gameModel.gameVariant != oldGameVariant) {
+            gameDisplay.destroyPieces()
+            gameDisplay.createPieces()
+        }
         gameDisplay.showToPlay()
+        gameDisplay.enableAnimations = oldEnableAnimations
         gameDisplay.setupMode = false
         isRated = false
         analyzeGameModel.clear()
