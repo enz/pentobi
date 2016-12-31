@@ -32,8 +32,9 @@ Window {
                     Math.min(Screen.desktopAvailableWidth,
                              Math.round(Screen.pixelDensity / 3.5 * 600))
     property int defaultHeight:
-        isAndroid ? Screen.desktopAvailableWidth :
-                    Math.min(Math.round(Screen.pixelDensity / 3.5 * 800))
+        isAndroid ? Screen.desktopAvailableHeight :
+                    Math.min(Screen.desktopAvailableHeight,
+                             Math.round(Screen.pixelDensity / 3.5 * 800))
     property int exportImageWidth: 400
 
     minimumWidth: 240; minimumHeight: 320
