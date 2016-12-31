@@ -372,21 +372,23 @@ function openRatedGame(byteArray) {
 }
 
 function openRatedGameNoVerify(byteArray) {
-    gameDisplay.destroyPieces()
-    if (! gameModel.loadSgf(byteArray))
-        showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-    computerPlays0 = false
-    computerPlays1 = false
-    computerPlays2 = false
-    computerPlays3 = false
-    gameDisplay.createPieces()
-    gameDisplay.showToPlay()
-    gameDisplay.setupMode = false
-    isRated = false
-    analyzeGameModel.clear()
-    gameDisplay.showNavigation()
-    // See comment in RatingDialog onTriggered of the menu item
-    ratingDialog.item.close()
+    lengthyCommand.run(function() {
+        gameDisplay.destroyPieces()
+        if (! gameModel.loadSgf(byteArray))
+            showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
+        computerPlays0 = false
+        computerPlays1 = false
+        computerPlays2 = false
+        computerPlays3 = false
+        gameDisplay.createPieces()
+        gameDisplay.showToPlay()
+        gameDisplay.setupMode = false
+        isRated = false
+        analyzeGameModel.clear()
+        gameDisplay.showNavigation()
+        // See comment in RatingDialog onTriggered of the menu item
+        ratingDialog.item.close()
+    })
 }
 
 function openFile(file) {
@@ -413,21 +415,24 @@ function openFileUrl() {
 }
 
 function openFromClipboard() {
-    gameDisplay.destroyPieces()
-    if (! gameModel.openFromClipboard())
-        showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-    else {
-        computerPlays0 = false
-        computerPlays1 = false
-        computerPlays2 = false
-        computerPlays3 = false
-    }
-    gameDisplay.createPieces()
-    gameDisplay.showToPlay()
-    gameDisplay.setupMode = false
-    isRated = false
-    analyzeGameModel.clear()
+    lengthyCommand.run(function() {
+        gameDisplay.destroyPieces()
+        if (! gameModel.openFromClipboard())
+            showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
+        else {
+            computerPlays0 = false
+            computerPlays1 = false
+            computerPlays2 = false
+            computerPlays3 = false
+        }
+        gameDisplay.createPieces()
+        gameDisplay.showToPlay()
+        gameDisplay.setupMode = false
+        isRated = false
+        analyzeGameModel.clear()
+    })
 }
+
 function openGameInfoDialog() {
     gameInfoDialog.open()
     var dialog = gameInfoDialog.item
