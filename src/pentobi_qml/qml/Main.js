@@ -3,7 +3,7 @@ function about() {
     showInfo("<h2>" + qsTr("Pentobi") + "</h2><p>" +
              qsTr("Version %1").arg(Qt.application.version) + "</p><p>" +
              qsTr("Computer opponent for the board game Blokus.") + "<br>" +
-             qsTr("&copy; 2011&ndash;%1 Markus&nbsp;Enzenberger").arg(2016) +
+             qsTr("&copy; 2011&ndash;%1 Markus&nbsp;Enzenberger").arg(2017) +
              "<br><a href=\"" + url + "\">" + url + "</a></p>")
 }
 
