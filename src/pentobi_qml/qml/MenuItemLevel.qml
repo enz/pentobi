@@ -4,7 +4,7 @@ import "Main.js" as Logic
 MenuItem {
     property int level
 
-    text: "&" + level
+    text: qsTr("Level &%1").arg(level)
     checkable: true
     exclusiveGroup: levelGroup
     checked: {

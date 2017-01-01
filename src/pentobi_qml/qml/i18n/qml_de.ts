@@ -818,6 +818,13 @@
     </message>
 </context>
 <context>
+    <name>MenuItemLevel</name>
+    <message>
+        <source>Level &amp;%1</source>
+        <translation>Stufe &amp;%1</translation>
+    </message>
+</context>
+<context>
     <name>MenuTools</name>
     <message>
         <source>&amp;Tools</source>
