@@ -376,7 +376,7 @@ function openRatedGameNoVerify(byteArray) {
         var oldGameVariant = gameModel.gameVariant
         var oldEnableAnimations = gameDisplay.enableAnimations
         gameDisplay.enableAnimations = false
-        if (! gameModel.loadSgf(byteArray))
+        if (! gameModel.openByteArray(byteArray))
             showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
         computerPlays0 = false
         computerPlays1 = false
@@ -402,7 +402,7 @@ function openFile(file) {
         var oldGameVariant = gameModel.gameVariant
         var oldEnableAnimations = gameDisplay.enableAnimations
         gameDisplay.enableAnimations = false
-        if (! gameModel.open(file))
+        if (! gameModel.openFile(file))
             showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
         else {
             computerPlays0 = false
@@ -428,12 +428,12 @@ function openFileUrl() {
     openFile(getFileFromUrl(openDialog.item.fileUrl))
 }
 
-function openFromClipboard() {
+function openClipboard() {
     lengthyCommand.run(function() {
         var oldGameVariant = gameModel.gameVariant
         var oldEnableAnimations = gameDisplay.enableAnimations
         gameDisplay.enableAnimations = false
-        if (! gameModel.openFromClipboard())
+        if (! gameModel.openClipboard())
             showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
         else {
             computerPlays0 = false

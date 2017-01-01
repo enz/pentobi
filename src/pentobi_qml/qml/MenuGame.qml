@@ -134,7 +134,7 @@ Menu {
     }
     MenuItem {
         text: qsTr("Open From &Clipboard")
-        onTriggered: Logic.openFromClipboard()
+        onTriggered: Logic.openClipboard()
     }
     MenuItem {
         text: qsTr("&Save")

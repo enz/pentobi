@@ -726,7 +726,7 @@ void GameModel::keepOnlySubtree()
 bool GameModel::loadAutoSave()
 {
     QSettings settings;
-    if (! loadSgf(settings.value("autosave", "").toByteArray()))
+    if (! openByteArray(settings.value("autosave", "").toByteArray()))
         return false;
     setFile(settings.value("file").toString());
     setFileDate(settings.value("fileDate").toDateTime());
@@ -749,7 +749,7 @@ void GameModel::loadRecentFiles()
     emit recentFilesChanged();
 }
 
-bool GameModel::loadSgf(const QByteArray& byteArray)
+bool GameModel::openByteArray(const QByteArray& byteArray)
 {
     istringstream in(byteArray.constData());
     setFile("");
@@ -840,7 +840,7 @@ bool GameModel::openStream(istream& in)
     return true;
 }
 
-bool GameModel::open(const QString& file)
+bool GameModel::openFile(const QString& file)
 {
     ifstream in(file.toLocal8Bit().constData());
     if (! in)
@@ -866,7 +866,7 @@ bool GameModel::open(const QString& file)
     return false;
 }
 
-bool GameModel::openFromClipboard()
+bool GameModel::openClipboard()
 {
     auto text = QGuiApplication::clipboard()->text();
     if (text.isEmpty())

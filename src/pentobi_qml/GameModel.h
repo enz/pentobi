@@ -154,6 +154,12 @@ public:
 
     Q_INVOKABLE void nextColor();
 
+    Q_INVOKABLE bool openByteArray(const QByteArray& byteArray);
+
+    Q_INVOKABLE bool openClipboard();
+
+    Q_INVOKABLE bool openFile(const QString& file);
+
     Q_INVOKABLE void playPiece(PieceModel* pieceModel, QPointF coord);
 
     Q_INVOKABLE void playMove(GameMove* move);
@@ -190,15 +196,9 @@ public:
 
     Q_INVOKABLE bool loadAutoSave();
 
-    Q_INVOKABLE bool loadSgf(const QByteArray& byteArray);
-
     Q_INVOKABLE bool save(const QString& file);
 
     Q_INVOKABLE bool saveAsciiArt(const QString& file);
-
-    Q_INVOKABLE bool open(const QString& file);
-
-    Q_INVOKABLE bool openFromClipboard();
 
     Q_INVOKABLE void makeMainVar();
 
