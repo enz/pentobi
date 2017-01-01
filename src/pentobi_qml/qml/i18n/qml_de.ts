@@ -434,14 +434,6 @@
         <translation>Alle Wertungsinformationen für die gegenwärtige Spielvariante löschen?</translation>
     </message>
     <message>
-        <source>Discard changes to current game?</source>
-        <translation>Änderungen am gegenwärtigen Spiel verwerfen?</translation>
-    </message>
-    <message>
-        <source>Abort current game?</source>
-        <translation>Gegenwärtiges Spiel verwerfen?</translation>
-    </message>
-    <message>
         <source>Rating information deleted.</source>
         <translation>Wertungsinformationen gelöscht.</translation>
     </message>
@@ -484,6 +476,10 @@
     <message>
         <source>Variation is now %1.</source>
         <translation>Variante ist jetzt %1.</translation>
+    </message>
+    <message>
+        <source>Discard game?</source>
+        <translation>Spiel verwerfen?</translation>
     </message>
 </context>
 <context>

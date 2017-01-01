@@ -642,14 +642,8 @@ function undo() {
 
 function verify(callback)
 {
-    if (gameModel.file !== "") {
-        if (gameModel.isModified) {
-            showQuestion(qsTr("Discard changes to current game?"), callback)
-            return
-        }
-    }
-    else if (isRated || (! gameModel.isGameEmpty && ! gameModel.isGameOver)) {
-        showQuestion(qsTr("Abort current game?"), callback)
+    if (gameModel.isModified) {
+        showQuestion(qsTr("Discard game?"), callback)
         return
     }
     callback()
