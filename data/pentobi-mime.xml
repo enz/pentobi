@@ -11,6 +11,11 @@
 <match type="string" offset="0:256" value="GM[Blokus Trigon Three-Player]"/>
 <match type="string" offset="0:256" value="GM[Blokus Trigon Two-Player]"/>
 <match type="string" offset="0:256" value="GM[Blokus Two-Player]"/>
+<match type="string" offset="0:256" value="GM[Callisto]"/>
+<match type="string" offset="0:256" value="GM[Callisto Three-Player]"/>
+<match type="string" offset="0:256" value="GM[Callisto Two-Player]"/>
+<match type="string" offset="0:256" value="GM[Nexos]"/>
+<match type="string" offset="0:256" value="GM[Nexos Two-Player]"/>
 </magic>
 <sub-class-of type="text/plain"/>
 <glob pattern="*.blksgf"/>

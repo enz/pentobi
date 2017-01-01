@@ -31,6 +31,10 @@ Android version
 Version 12.1.UNKNOWN (v12-fixes)
 ================================
 
+General:
+* Added patterns for Nexos and Callisto SGF files to MIME type
+  specification for detecting them independent of the file ending.
+
 Desktop version:
 
 * Game info properties were not removed from file if the corresponding
@@ -42,6 +46,7 @@ Desktop version:
 * Game analysis progress dialog was not closed if analysis was canceled.
 
 Android version:
+
 * Open/Save did not show error message on failure.
 
 
