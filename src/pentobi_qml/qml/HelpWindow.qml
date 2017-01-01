@@ -36,6 +36,13 @@ Window {
 
         anchors.fill: parent
         url: startUrl
+
+        // Workaround for a bug in Qt on Android that makes the webview
+        // sometimes have a very small initial width until it is scrolled for
+        // the first time despite that we create it with
+        // "anchors.fill: parent" (last tested with Qt 5.8-rc)
+        onWidthChanged: reload()
+        onHeightChanged: reload()
     }
     HelpFileExtractor { id: helpFileExtractor }
 }
