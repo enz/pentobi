@@ -11,8 +11,6 @@ RowLayout {
 
     property alias title: title.text
 
-    function popupMenu() { menu.popup() }
-
     spacing: 0
 
     Controls2.Label {

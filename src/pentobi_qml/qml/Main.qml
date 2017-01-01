@@ -53,14 +53,8 @@ Window {
 
     ColumnLayout {
         anchors.fill: parent
-        Keys.onReleased: if (isAndroid && event.key === Qt.Key_Menu) {
-                             toolBar.popupMenu()
-                             event.accepted = true
-                         }
 
         Pentobi.ToolBar {
-            id: toolBar
-
             title: {
                 if (isRated) return qsTr("Rated game")
                 if (gameModel.file === "") return ""
