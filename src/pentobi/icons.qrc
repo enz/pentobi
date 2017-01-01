@@ -1,6 +1,7 @@
 <!-- Subset of the icons in pentobi/icons for use in pentobi_qml -->
 <RCC>
     <qresource prefix="/qml">
+        <file>icons/menu.svg</file>
         <file>icons/pentobi-backward.svg</file>
         <file>icons/pentobi-beginning.svg</file>
         <file>icons/pentobi-computer-colors.svg</file>

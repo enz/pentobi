@@ -71,7 +71,7 @@ RowLayout {
         onClicked: Logic.computerPlay()
     }
     Pentobi.ToolButton {
-        imageSource: isAndroid ? "icons/menu.svg" : ""
+        imageSource: "icons/menu.svg"
         menu: menu
     }
     Menu {
