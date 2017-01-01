@@ -617,7 +617,7 @@ private:
 
     void loadRecentFiles();
 
-    bool open(istream& in);
+    bool openStream(istream& in);
 
     void preparePieceGameCoord(PieceModel* pieceModel, Move mv);
 

@@ -753,7 +753,7 @@ bool GameModel::loadSgf(const QByteArray& byteArray)
 {
     istringstream in(byteArray.constData());
     setFile("");
-    if (! open(in))
+    if (! openStream(in))
         return false;
     goEnd();
     updateProperties();
@@ -804,7 +804,7 @@ void GameModel::newGame()
     updateProperties();
 }
 
-bool GameModel::open(istream& in)
+bool GameModel::openStream(istream& in)
 {
     try
     {
@@ -848,7 +848,7 @@ bool GameModel::open(const QString& file)
         m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
-    if (open(in))
+    if (openStream(in))
     {
         updateFileInfo(file);
         addRecentFile(file);
@@ -875,7 +875,7 @@ bool GameModel::openFromClipboard()
         return false;
     }
     istringstream in(text.toLocal8Bit().constData());
-    if (open(in))
+    if (openStream(in))
     {
         auto& root = m_game.get_root();
         if (! has_setup(root) && root.has_children())
