@@ -259,15 +259,15 @@ function help() {
 
 function init() {
     // Settings might contain unusable geometry
-    var maxWidth = Screen.desktopAvailableWidth
-    var maxHeight = Screen.desktopAvailableHeight
+    var maxWidth = root.Screen.desktopAvailableWidth
+    var maxHeight = root.Screen.desktopAvailableHeight
     if (x < 0 || x + width > maxWidth || y < 0 || y + height > maxHeight) {
-        if (width > maxWidth || height > Screen.maxHeight) {
+        if (width > maxWidth || height > maxHeight) {
             width = defaultWidth
             height = defaultHeight
         }
-        x = (Screen.width - width) / 2
-        y = (Screen.height - height) / 2
+        x = (root.Screen.width - width) / 2
+        y = (root.Screen.height - height) / 2
     }
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
