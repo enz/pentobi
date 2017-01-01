@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.1
+import QtQuick.Controls 2.1 as Controls2
 import QtQuick.Layouts 1.0
 import "GameDisplay.js" as Logic
 
@@ -16,7 +17,7 @@ Item
     property bool enableAnimations: true
     property bool setupMode
     property alias busyIndicatorRunning: busyIndicator.running
-    property alias flickableContentX: flickable.contentX
+    property alias swipeViewCurrentIndex: swipeView.currentIndex
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
         if (board.isTrigon)
@@ -49,10 +50,9 @@ Item
         showToPlay()
     }
     function showToPlay() { pieceSelector.contentY = 0 }
-    function showAnalyzeGame() { pickedPiece = null; flickable.showAnalyzeGame() }
-    function showNavigation() { showComment() }
-    function showPieces() { flickable.showPieces() }
-    function showComment() { pickedPiece = null; flickable.showComment() }
+    function showAnalyzeGame() { pickedPiece = null; swipeViewCurrentIndex = 2 }
+    function showComment() { pickedPiece = null; swipeViewCurrentIndex = 1 }
+    function showPieces() { swipeViewCurrentIndex = 0 }
     function dropCommentFocus() {
         if (navigationPanel.activeFocusComment)
             forceActiveFocus()
@@ -90,104 +90,66 @@ Item
                 showMove(mv)
             }
         }
-        Flickable {
-            id: flickable
+        Controls2.SwipeView {
+            id: swipeView
 
             width: Math.min(gameDisplay.width, 1.4 * board.width)
             height: Math.min(gameDisplay.height - board.height, board.height)
-            contentWidth: 3 * width
-            contentHeight: height
             anchors.horizontalCenter: board.horizontalCenter
-            clip: true
-            onMovementEnded: snap()
-            onWidthChanged: snap()
-            onHeightChanged: snap()
 
-            function showAnalyzeGame() { contentX = 2 * width }
-            function showComment() { contentX = width }
-            function showPieces() { contentX = 0 }
-            function snap() {
-                dropCommentFocus()
-                if (width == 0) return
-                snapAnimation.to =
-                        Math.min(Math.round(contentX / width), 2) * width
-                snapAnimation.restart()
-            }
+            Column {
+                ScoreDisplay {
+                    id: scoreDisplay
 
-            Row {
-                id: flickableContent
-
-                Column {
-                    height: flickable.height
-                    width: flickable.width
-
-                    ScoreDisplay {
-                        id: scoreDisplay
-
-                        gameVariant: gameModel.gameVariant
-                        points0: gameModel.points0
-                        points1: gameModel.points1
-                        points2: gameModel.points2
-                        points3: gameModel.points3
-                        bonus0: gameModel.bonus0
-                        bonus1: gameModel.bonus1
-                        bonus2: gameModel.bonus2
-                        bonus3: gameModel.bonus3
-                        hasMoves0: gameModel.hasMoves0
-                        hasMoves1: gameModel.hasMoves1
-                        hasMoves2: gameModel.hasMoves2
-                        hasMoves3: gameModel.hasMoves3
-                        toPlay: gameModel.isGameOver ? -1 : gameModel.toPlay
-                        altPlayer: gameModel.altPlayer
-                        height: 0.05 * board.width
-                        pointSize: 0.6 * height
-                        anchors.horizontalCenter: parent.horizontalCenter
-                    }
-                    PieceSelector {
-                        id: pieceSelector
-
-                        columns: gameModel.gameVariant.startsWith("classic")
-                                 || gameModel.gameVariant.startsWith("callisto")
-                                 || gameModel.gameVariant === "duo" ? 7 : 8
-                        // Use width such that height shows only full rows
-                        width: columns * height / Math.ceil(height / (flickable.width / columns))
-                        height: flickable.height - scoreDisplay.height
-                        gameVariant: gameModel.gameVariant
-                        toPlay: gameModel.toPlay
-                        nuColors: gameModel.nuColors
-                        transitionsEnabled: false
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        onPiecePicked: Logic.pickPiece(piece)
-                    }
+                    gameVariant: gameModel.gameVariant
+                    points0: gameModel.points0
+                    points1: gameModel.points1
+                    points2: gameModel.points2
+                    points3: gameModel.points3
+                    bonus0: gameModel.bonus0
+                    bonus1: gameModel.bonus1
+                    bonus2: gameModel.bonus2
+                    bonus3: gameModel.bonus3
+                    hasMoves0: gameModel.hasMoves0
+                    hasMoves1: gameModel.hasMoves1
+                    hasMoves2: gameModel.hasMoves2
+                    hasMoves3: gameModel.hasMoves3
+                    toPlay: gameModel.isGameOver ? -1 : gameModel.toPlay
+                    altPlayer: gameModel.altPlayer
+                    height: 0.05 * board.width
+                    pointSize: 0.6 * height
+                    anchors.horizontalCenter: parent.horizontalCenter
                 }
-                NavigationPanel {
-                    id: navigationPanel
+                PieceSelector {
+                    id: pieceSelector
 
-                    width: flickable.width
-                    height: flickable.height
-                }
-                ColumnLayout {
-                    width: flickable.width
-                    height: flickable.height
-
-                    AnalyzeGame {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                    }
-                    NavigationButtons
-                    {
-                        height: width / 6
-                        Layout.fillWidth: true
-                    }
+                    columns: gameModel.gameVariant.startsWith("classic")
+                             || gameModel.gameVariant.startsWith("callisto")
+                             || gameModel.gameVariant === "duo" ? 7 : 8
+                    // Use width such that height shows only full rows
+                    width: columns * height / Math.ceil(height / (swipeView.width / columns))
+                    height: swipeView.height - scoreDisplay.height
+                    gameVariant: gameModel.gameVariant
+                    toPlay: gameModel.toPlay
+                    nuColors: gameModel.nuColors
+                    transitionsEnabled: false
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    onPiecePicked: Logic.pickPiece(piece)
                 }
             }
-            NumberAnimation {
-                id: snapAnimation
-
-                target: flickable
-                property: "contentX"
-                duration: 800
-                easing.type: Easing.OutBack
+            NavigationPanel {
+                id: navigationPanel
+            }
+            ColumnLayout {
+                AnalyzeGame {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                }
+                NavigationButtons
+                {
+                    height: width / 6
+                    Layout.fillWidth: true
+                }
             }
         }
     }
@@ -195,7 +157,7 @@ Item
         id: busyIndicator
 
         x: (gameDisplay.width - width) / 2
-        y: column.y + flickable.y + (flickable.height - height) / 2
+        y: column.y + swipeView.y + (swipeView.height - height) / 2
     }
     Rectangle {
         id: message
@@ -208,7 +170,7 @@ Item
 
         opacity: 0
         x: (gameDisplay.width - width) / 2
-        y: column.y + flickable.y + (flickable.height - height) / 2
+        y: column.y + swipeView.y + (swipeView.height - height) / 2
         radius: 0.1 * height
         color: theme.messageBackgroundColor
         implicitWidth: messageText.implicitWidth + 0.5 * messageText.implicitHeight
@@ -264,7 +226,7 @@ Item
             pickedPiece = null
             if (gameModel.canGoBackward || gameModel.canGoForward
                     || gameModel.moveNumber > 0)
-                    setupMode = false
+                setupMode = false
             analyzeGameModel.markCurrentMove(gameModel)
             dropCommentFocus()
         }
