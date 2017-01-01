@@ -95,6 +95,7 @@ Item
 
             width: Math.min(gameDisplay.width, 1.4 * board.width)
             height: Math.min(gameDisplay.height - board.height, board.height)
+            clip: true
             anchors.horizontalCenter: board.horizontalCenter
 
             Column {
