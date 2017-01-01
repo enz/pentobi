@@ -44,7 +44,7 @@ void initAndroid()
 int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
     app.setOrganizationName("Pentobi");
     app.setApplicationName("Pentobi");
 #ifdef VERSION
