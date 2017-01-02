@@ -76,7 +76,6 @@ function checkComputerMove() {
     }
     if (! isComputerToPlay())
         return
-    initComputerColorsOnNewGame = true
     switch (gameModel.toPlay) {
     case 0: if (! gameModel.hasMoves0) return; break
     case 1: if (! gameModel.hasMoves1) return; break
@@ -136,6 +135,7 @@ function computerPlay() {
                 break;
             }
         }
+        initComputerColorsOnNewGame = true
     }
     checkComputerMove()
 }
@@ -152,8 +152,8 @@ function computerPlays(color) {
 function computerPlaysAny() {
     if (computerPlays0) return true
     if (computerPlays1) return true
-    if (gameModel.nuColors >= 2 && computerPlays2) return true
-    if (gameModel.nuColors >= 3 && computerPlays3) return true
+    if (gameModel.nuColors > 2 && computerPlays2) return true
+    if (gameModel.nuColors > 3 && computerPlays3) return true
     return false
 }
 

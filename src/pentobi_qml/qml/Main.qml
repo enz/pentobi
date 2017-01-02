@@ -138,8 +138,7 @@ Window {
                 root.computerPlays1 = computerColorDialog.computerPlays1
                 root.computerPlays2 = computerColorDialog.computerPlays2
                 root.computerPlays3 = computerColorDialog.computerPlays3
-                if (! Logic.computerPlaysAny())
-                    initComputerColorsOnNewGame = false
+                initComputerColorsOnNewGame = Logic.computerPlaysAny()
                 if (! Logic.isComputerToPlay())
                     Logic.cancelRunning()
                 else if (! gameModel.isGameOver)
