@@ -26,7 +26,6 @@
 using namespace std;
 using libboardgame_sgf::InvalidTree;
 using libboardgame_sgf::TreeReader;
-using libboardgame_util::get_letter_coord;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::beginning_of_branch;
 using libboardgame_sgf::util::find_next_comment;
@@ -35,6 +34,8 @@ using libboardgame_sgf::util::get_move_annotation;
 using libboardgame_sgf::util::has_comment;
 using libboardgame_sgf::util::has_earlier_variation;
 using libboardgame_sgf::util::is_main_variation;
+using libboardgame_util::ArrayList;
+using libboardgame_util::get_letter_coord;
 using libpentobi_base::get_piece_set;
 using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
@@ -1338,30 +1339,35 @@ void GameModel::updatePieces()
 
     // Update pieces of moves played after last setup or root
     auto& tree = m_game.get_tree();
+    // We need to loop forward through the moves to ensure the persistence of
+    // the GUI pieces, see comment in updatePiece()
+    ArrayList<const SgfNode*, Board::max_game_moves> nodes;
     auto node = &m_game.get_current();
-    auto moveNumber = bd.get_nu_moves();
-    PieceModel* lastMovePieceModel = nullptr;
     do
     {
-        auto mv = tree.get_move(*node);
-        if (! mv.is_null())
-        {
-            auto c = mv.color;
-            auto pieceModel = updatePiece(c, mv.move, isPlayed[c]);
-            QString label = QString::number(moveNumber);
-            unsigned moveIndex;
-            if (m_showVariations && getVariationIndex(tree, *node, moveIndex))
-                label.append(get_letter_coord(moveIndex).c_str());
-            label.append(get_move_annotation(tree, *node));
-            pieceModel->setMoveLabel(label);
-            if (! lastMovePieceModel)
-                lastMovePieceModel = pieceModel;
-            --moveNumber;
-        }
-        if (has_setup(*node))
+        if (tree.has_move(*node))
+            nodes.push_back(node);
+        if (has_setup(*node) || nodes.size() == nodes.max_size)
             break;
         node = node->get_parent_or_null();
-    } while (node);
+    }
+    while (node);
+    PieceModel* lastMovePieceModel = nullptr;
+    for (unsigned i = nodes.size(); i > 0; --i)
+    {
+        auto& node = *nodes[i - 1];
+        auto mv = tree.get_move(node);
+        auto c = mv.color;
+        auto pieceModel = updatePiece(c, mv.move, isPlayed[c]);
+        QString label = QString::number(i);
+        unsigned moveIndex;
+        if (m_showVariations && getVariationIndex(tree, node, moveIndex))
+            label.append(get_letter_coord(moveIndex).c_str());
+        label.append(get_move_annotation(tree, node));
+        pieceModel->setMoveLabel(label);
+        if (! lastMovePieceModel)
+            lastMovePieceModel = pieceModel;
+    }
     if (lastMovePieceModel != m_lastMovePieceModel)
     {
         if (m_lastMovePieceModel != nullptr)
