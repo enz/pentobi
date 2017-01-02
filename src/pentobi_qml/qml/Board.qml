@@ -147,11 +147,13 @@ Item {
                 return gridHeight
             }
         }
-        // It should work to use Image.Tile for all game variants, but the
-        // Trigon board is not painted with Image.width/height even if
-        // sourceSize is bound to it (the Trigon SVG files have a different
-        // aspect ratio but that shouldn't matter). Bug in Qt 5.6?
-        fillMode: isTrigon? Image.Stretch : Image.Tile
+        // Tiling board elements is much faster than loading a whole board
+        // image, but tiling is not possible if the board is not rectangular
+        // (Trigon, Callisto). Note that the aspect ratio of the Trigon SVG
+        // files is 1:1 to avoid irrational coordinates for the triangles but
+        // Image.sourceSize always maintains the image's aspect ratio, so we
+        // need to use Image.Stretch here, not Image.Tile.
+        fillMode: isTrigon ? Image.Stretch : Image.Tile
         horizontalAlignment: Image.AlignLeft
         verticalAlignment: Image.AlignTop
         cache: false
