@@ -157,7 +157,6 @@ Item {
         horizontalAlignment: Image.AlignLeft
         verticalAlignment: Image.AlignTop
         cache: false
-        asynchronous: true
     }
     Repeater {
         model: gameModel.startingPoints0

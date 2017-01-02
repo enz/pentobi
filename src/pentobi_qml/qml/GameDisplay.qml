@@ -79,9 +79,12 @@ Item
             id: board
 
             gameVariant: gameModel.gameVariant
+
+            // Tuned to show at least 3 rows on typical smartphone screen sizes
             width: Math.min(
                        parent.width,
-                       gameDisplay.height / (1.07 + 2.7 / pieceSelector.columns))
+                       gameDisplay.height / (1.07 + 2.4 / pieceSelector.columns))
+
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
@@ -93,7 +96,7 @@ Item
         Controls2.SwipeView {
             id: swipeView
 
-            width: Math.min(gameDisplay.width, 1.4 * board.width)
+            width: board.width
             height: Math.min(gameDisplay.height - board.height, board.height)
             clip: true
             anchors.horizontalCenter: board.horizontalCenter
@@ -120,21 +123,32 @@ Item
                     height: 0.05 * board.width
                     pointSize: 0.6 * height
                     anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottomMargin: 0.01 * board.width
                 }
                 PieceSelector {
                     id: pieceSelector
 
+                    // How many full rows can we show if we use 85% of the board width?
+                    property int rows: Math.floor(height / (0.85 * swipeView.width / columns))
+
                     columns: gameModel.gameVariant.startsWith("classic")
                              || gameModel.gameVariant.startsWith("callisto")
                              || gameModel.gameVariant === "duo" ? 7 : 8
-                    // Use width such that height shows only full rows
-                    width: columns * height / Math.ceil(height / (swipeView.width / columns))
+
+                    // Show at least 1 row
+                    width: rows < 1 ? columns * height : 0.85 * swipeView.width
+
                     height: swipeView.height - scoreDisplay.height
+
+                    // Try not to show partial piece rows unless we cannot even
+                    // show all pieces of one color (3 rows)
+                    spacingPieceLists: rows < 3 ? 0 : height - rows * (width / columns)
+
+                    anchors.horizontalCenter: parent.horizontalCenter
                     gameVariant: gameModel.gameVariant
                     toPlay: gameModel.toPlay
                     nuColors: gameModel.nuColors
                     transitionsEnabled: false
-                    anchors.horizontalCenter: parent.horizontalCenter
                     onPiecePicked: Logic.pickPiece(piece)
                 }
             }

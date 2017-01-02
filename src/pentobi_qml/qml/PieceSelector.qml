@@ -11,48 +11,51 @@ Flickable {
     property var pieces3
     property int nuColors
     property int columns
+    property alias spacingPieceLists: column.spacing
     property bool transitionsEnabled
 
     signal piecePicked(var piece)
 
-    contentHeight: pieceList0.height + pieceList1.height
-                   + pieceList2.height + pieceList3.height
+    contentHeight: column.height
     flickableDirection: Flickable.VerticalFlick
     clip: true
 
-    PieceList {
-        id: pieceList0
+    Column {
+        id: column
 
-        width: root.width
-        columns: root.columns
-        pieces: pieces0
-        onPiecePicked: root.piecePicked(piece)
+        PieceList {
+            id: pieceList0
+
+            width: root.width
+            columns: root.columns
+            pieces: pieces0
+            onPiecePicked: root.piecePicked(piece)
+        }
+        PieceList {
+            id: pieceList1
+
+            width: root.width
+            columns: root.columns
+            pieces: pieces1
+            onPiecePicked: root.piecePicked(piece)
+        }
+        PieceList {
+            id: pieceList2
+
+            width: root.width
+            columns: root.columns
+            pieces: pieces2
+            onPiecePicked: root.piecePicked(piece)
+        }
+        PieceList {
+            id: pieceList3
+
+            width: root.width
+            columns: root.columns
+            pieces: pieces3
+            onPiecePicked: root.piecePicked(piece)
+        }
     }
-    PieceList {
-        id: pieceList1
-
-        width: root.width
-        columns: root.columns
-        pieces: pieces1
-        onPiecePicked: root.piecePicked(piece)
-    }
-    PieceList {
-        id: pieceList2
-
-        width: root.width
-        columns: root.columns
-        pieces: pieces2
-        onPiecePicked: root.piecePicked(piece)
-    }
-    PieceList {
-        id: pieceList3
-
-        width: root.width
-        columns: root.columns
-        pieces: pieces3
-        onPiecePicked: root.piecePicked(piece)
-    }
-
     states: [
         State {
             name: "toPlay0"
