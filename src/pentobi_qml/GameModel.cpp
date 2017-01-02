@@ -1353,20 +1353,21 @@ void GameModel::updatePieces()
     }
     while (node);
     PieceModel* lastMovePieceModel = nullptr;
-    for (unsigned i = nodes.size(); i > 0; --i)
+    int moveNumber = 1;
+    for (auto i = nodes.size(); i > 0; --i)
     {
         auto& node = *nodes[i - 1];
         auto mv = tree.get_move(node);
         auto c = mv.color;
         auto pieceModel = updatePiece(c, mv.move, isPlayed[c]);
-        QString label = QString::number(i);
+        QString label = QString::number(moveNumber);
+        ++moveNumber;
         unsigned moveIndex;
         if (m_showVariations && getVariationIndex(tree, node, moveIndex))
             label.append(get_letter_coord(moveIndex).c_str());
         label.append(get_move_annotation(tree, node));
         pieceModel->setMoveLabel(label);
-        if (! lastMovePieceModel)
-            lastMovePieceModel = pieceModel;
+        lastMovePieceModel = pieceModel;
     }
     if (lastMovePieceModel != m_lastMovePieceModel)
     {
