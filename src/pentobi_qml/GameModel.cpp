@@ -1352,14 +1352,14 @@ void GameModel::updatePieces()
         node = node->get_parent_or_null();
     }
     while (node);
-    PieceModel* lastMovePieceModel = nullptr;
+    PieceModel* pieceModel = nullptr;
     int moveNumber = 1;
     for (auto i = nodes.size(); i > 0; --i)
     {
         auto& node = *nodes[i - 1];
         auto mv = tree.get_move(node);
         auto c = mv.color;
-        auto pieceModel = updatePiece(c, mv.move, isPlayed[c]);
+        pieceModel = updatePiece(c, mv.move, isPlayed[c]);
         QString label = QString::number(moveNumber);
         ++moveNumber;
         unsigned moveIndex;
@@ -1367,15 +1367,14 @@ void GameModel::updatePieces()
             label.append(get_letter_coord(moveIndex).c_str());
         label.append(get_move_annotation(tree, node));
         pieceModel->setMoveLabel(label);
-        lastMovePieceModel = pieceModel;
     }
-    if (lastMovePieceModel != m_lastMovePieceModel)
+    if (pieceModel != m_lastMovePieceModel)
     {
         if (m_lastMovePieceModel != nullptr)
             m_lastMovePieceModel->setIsLastMove(false);
-        if (lastMovePieceModel != nullptr)
-            lastMovePieceModel->setIsLastMove(true);
-        m_lastMovePieceModel = lastMovePieceModel;
+        if (pieceModel != nullptr)
+            pieceModel->setIsLastMove(true);
+        m_lastMovePieceModel = pieceModel;
     }
 
     // Update pieces not on board
