@@ -7,6 +7,17 @@
 <file>light/board-tile-nexos.svg</file>
 <file>light/board-trigon.svg</file>
 <file>light/board-trigon-3.svg</file>
+<file>light/menu.svg</file>
+<file>light/pentobi-backward.svg</file>
+<file>light/pentobi-beginning.svg</file>
+<file>light/pentobi-computer-colors.svg</file>
+<file>light/pentobi-end.svg</file>
+<file>light/pentobi-forward.svg</file>
+<file>light/pentobi-newgame.svg</file>
+<file>light/pentobi-next-variation.svg</file>
+<file>light/pentobi-play.svg</file>
+<file>light/pentobi-previous-variation.svg</file>
+<file>light/pentobi-undo.svg</file>
 <file>light/Theme.qml</file>
 </qresource>
 </RCC>

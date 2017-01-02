@@ -9,7 +9,8 @@ Desktop version:
 
 * The compilation now requires CMake 3.1.0 or newer.
 
-Android version
+Android version:
+
 * The Android version now supports all features of the desktop version,
   including comments, move annotations, setup positions, game analysis (only
   a very fast mode) and rated games. The playing levels are still restricted
@@ -22,6 +23,7 @@ Android version
 * Game/Find Move now behaves like in the desktop version and will cycle
   through all legal moves if called repeatedly.
 * Games can be opened from clipboard.
+* Added a light theme in addition to the default dark theme.
 * Computer color settings will no longer be changed on new game if computer
   was set to play no color before.
 * The source code now requires Qt 5.8, which no longer supports Android

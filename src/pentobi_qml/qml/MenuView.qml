@@ -52,6 +52,26 @@ Menu {
         checked: gameModel.showVariations
         onTriggered: gameModel.showVariations = checked
     }
+    MenuSeparator { }
+    Menu {
+        title: qsTr("&Theme")
+
+        ExclusiveGroup { id: themeGroup }
+        MenuItem {
+            text: qsTr("&Light")
+            checkable: true
+            exclusiveGroup: themeGroup
+            checked: themeName === "light"
+            onTriggered: themeName = "light"
+        }
+        MenuItem {
+            text: qsTr("&Dark")
+            checkable: true
+            exclusiveGroup: themeGroup
+            checked: themeName === "dark"
+            onTriggered: themeName = "dark"
+        }
+    }
     MenuItem {
         text: qsTr("&Animate Pieces")
         checkable: true

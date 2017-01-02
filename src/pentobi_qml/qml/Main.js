@@ -262,6 +262,7 @@ function init() {
     var maxWidth = root.Screen.desktopAvailableWidth
     var maxHeight = root.Screen.desktopAvailableHeight
     if (x < 0 || x + width > maxWidth || y < 0 || y + height > maxHeight) {
+        console.debug("Invalid geometry in settings")
         if (width > maxWidth || height > maxHeight) {
             width = defaultWidth
             height = defaultHeight
@@ -269,6 +270,13 @@ function init() {
         x = (root.Screen.width - width) / 2
         y = (root.Screen.height - height) / 2
     }
+
+    // Settings may contain invalid theme
+    if (themeName !== "dark" && themeName !== "light") {
+        console.debug("Invalid theme name in settings")
+        themeName = "light"
+    }
+
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
         initComputerColors()

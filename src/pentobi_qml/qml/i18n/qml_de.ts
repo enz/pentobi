@@ -881,6 +881,18 @@
         <source>&amp;Fullscreen</source>
         <translation>Voll&amp;bild</translation>
     </message>
+    <message>
+        <source>&amp;Theme</source>
+        <translation>&amp;Erscheinungsbild</translation>
+    </message>
+    <message>
+        <source>&amp;Light</source>
+        <translation>&amp;Hell</translation>
+    </message>
+    <message>
+        <source>&amp;Dark</source>
+        <translation>&amp;Dunkel</translation>
+    </message>
 </context>
 <context>
     <name>OpenDialog</name>

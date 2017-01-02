@@ -93,19 +93,11 @@ SOURCES += \
 RESOURCES += \
     ../books/pentobi_books.qrc \
     ../pentobi/help.qrc \
+    qml/themes/theme_dark.qrc \
+    qml/themes/theme_light.qrc \
     qml/themes/theme_shared.qrc \
     resources.qrc \
     translations.qrc
-
-android {
-    RESOURCES += \
-        icons_android.qrc \
-        qml/themes/theme_dark.qrc
-} else {
-    RESOURCES += \
-        ../pentobi/icons.qrc \
-        qml/themes/theme_light.qrc
-}
 
 # Default rules for deployment.
 include(deployment.pri)

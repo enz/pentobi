@@ -98,6 +98,7 @@ Window {
         property alias computerPlays3: root.computerPlays3
         property alias initComputerColorsOnNewGame: root.initComputerColorsOnNewGame;
         property alias isRated: root.isRated
+        property alias themeName: root.themeName
         property alias wasGenMoveRunning: root.wasGenMoveRunning
         property alias exportImageWidth: root.exportImageWidth
         property alias showVariations: gameModel.showVariations

@@ -7,13 +7,13 @@ RowLayout
 {
     Pentobi.Button {
         enabled: gameModel.canGoBackward
-        imageSource: "icons/pentobi-beginning.svg"
+        imageSource: theme.getImage("pentobi-beginning")
         Layout.fillWidth: true
         onClicked: gameModel.goBeginning()
     }
     Pentobi.Button {
         enabled: gameModel.canGoBackward
-        imageSource: "icons/pentobi-backward.svg"
+        imageSource: theme.getImage("pentobi-backward")
         Layout.fillWidth: true
         onClicked: gameModel.goBackward()
         // Don't use autoRepeat: true, there is a bug in Qt 5.8-rc on Android
@@ -23,7 +23,7 @@ RowLayout
     }
     Pentobi.Button {
         enabled: gameModel.canGoForward
-        imageSource: "icons/pentobi-forward.svg"
+        imageSource: theme.getImage("pentobi-forward")
         Layout.fillWidth: true
         onClicked: gameModel.goForward()
         // Don't use autoRepeat: true, see comment in backward button.
@@ -31,19 +31,19 @@ RowLayout
     }
     Pentobi.Button {
         enabled: gameModel.canGoForward
-        imageSource: "icons/pentobi-end.svg"
+        imageSource: theme.getImage("pentobi-end")
         Layout.fillWidth: true
         onClicked: gameModel.goEnd()
     }
     Pentobi.Button {
         enabled: gameModel.hasPrevVar
-        imageSource: "icons/pentobi-previous-variation.svg"
+        imageSource: theme.getImage("pentobi-previous-variation")
         Layout.fillWidth: true
         onClicked: gameModel.goPrevVar()
     }
     Pentobi.Button {
         enabled: gameModel.hasNextVar
-        imageSource: "icons/pentobi-next-variation.svg"
+        imageSource: theme.getImage("pentobi-next-variation")
         Layout.fillWidth: true
         onClicked: gameModel.goNextVar()
     }

@@ -49,27 +49,27 @@ RowLayout {
         onClicked: gameDisplay.setupMode = false
     }
     Pentobi.ToolButton {
-        imageSource: "icons/pentobi-newgame.svg"
+        imageSource: theme.getImage("pentobi-newgame")
         visible: ! (gameModel.isGameEmpty && ! isRated) && ! gameDisplay.setupMode
         onClicked: Logic.newGame()
     }
     Pentobi.ToolButton {
         visible: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
-        imageSource: "icons/pentobi-undo.svg"
+        imageSource: theme.getImage("pentobi-undo")
         onClicked: Logic.undo()
     }
     Pentobi.ToolButton {
         visible: ! gameDisplay.setupMode
-        imageSource: "icons/pentobi-computer-colors.svg"
+        imageSource: theme.getImage("pentobi-computer-colors")
         onClicked: Logic.showComputerColorDialog()
     }
     Pentobi.ToolButton {
         visible: ! gameModel.isGameOver && ! gameDisplay.setupMode && ! isRated
-        imageSource: "icons/pentobi-play.svg"
+        imageSource: theme.getImage("pentobi-play")
         onClicked: Logic.computerPlay()
     }
     Pentobi.ToolButton {
-        imageSource: "icons/menu.svg"
+        imageSource: theme.getImage("menu")
         menu: menu
     }
     Menu {
