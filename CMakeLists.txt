@@ -30,10 +30,6 @@ set(CMAKE_CXX_STANDARD 11)
 if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
   add_compile_options(-ffast-math -Wall -Wextra)
 endif()
-if(MSVC)
-  add_definitions(-D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE
-    -D_SCL_SECURE_NO_WARNINGS)
-endif()
 
 check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
@@ -43,23 +39,15 @@ if(NOT DEFINED LIBPENTOBI_MCTS_FLOAT_TYPE)
   set(LIBPENTOBI_MCTS_FLOAT_TYPE float)
 endif()
 
-# Don't set the Pentobi data dirs on Windows. This is currently needed for
-# building a version of Pentobi for the NSIS installer on Windows (see
-# directory windows) such that Pentobi will look for data dirs relative to
-# the installation directory. (It breaks installing Pentobi on Windows with
-# "make install" but we don't support that on Windows anyway.)
-if(UNIX)
-  if(NOT DEFINED PENTOBI_BOOKS_DIR)
-    set(PENTOBI_BOOKS_DIR "${CMAKE_INSTALL_FULL_DATADIR}/pentobi/books")
-  endif()
-  if(NOT DEFINED PENTOBI_HELP_DIR)
-    set(PENTOBI_HELP_DIR "${CMAKE_INSTALL_FULL_DATAROOTDIR}/help")
-  endif()
-  if(NOT DEFINED PENTOBI_TRANSLATIONS)
-    set(PENTOBI_TRANSLATIONS
-      "${CMAKE_INSTALL_FULL_DATADIR}/pentobi/translations")
-  endif()
-endif(UNIX)
+if(NOT DEFINED PENTOBI_BOOKS_DIR)
+  set(PENTOBI_BOOKS_DIR "${CMAKE_INSTALL_FULL_DATADIR}/pentobi/books")
+endif()
+if(NOT DEFINED PENTOBI_HELP_DIR)
+  set(PENTOBI_HELP_DIR "${CMAKE_INSTALL_FULL_DATAROOTDIR}/help")
+endif()
+if(NOT DEFINED PENTOBI_TRANSLATIONS)
+  set(PENTOBI_TRANSLATIONS "${CMAKE_INSTALL_FULL_DATADIR}/pentobi/translations")
+endif()
 
 configure_file(config.h.in config.h)
 add_definitions(-DHAVE_CONFIG_H)
