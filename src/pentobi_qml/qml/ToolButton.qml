@@ -9,6 +9,8 @@ import QtQuick.Window 2.0
 ToolButton {
     property string imageSource
 
+    opacity: enabled ? 1 : 0.6
+
     Image {
         width: Screen.pixelDensity < 5 ? 22 : 44; height: width
         sourceSize { width: width; height: height }
