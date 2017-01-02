@@ -47,12 +47,10 @@ function changeGameVariant(gameVariant) {
 function changeGameVariantNoVerify(gameVariant) {
     cancelRunning()
     lengthyCommand.run(function() {
-        var computerPlayedAny = computerPlaysAny()
         gameDisplay.changeGameVariant(gameVariant)
         isRated = false
         analyzeGameModel.clear()
-        if (computerPlayedAny)
-            initComputerColors()
+        initComputerColors()
     })
 }
 
@@ -77,6 +75,7 @@ function checkComputerMove() {
     }
     if (! isComputerToPlay())
         return
+    initComputerColorsOnNewGame = true
     switch (gameModel.toPlay) {
     case 0: if (! gameModel.hasMoves0) return; break
     case 1: if (! gameModel.hasMoves1) return; break
@@ -271,8 +270,7 @@ function init() {
     }
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
-        if (computerPlaysAny())
-            initComputerColors()
+        initComputerColors()
         return
     }
     gameDisplay.createPieces()
@@ -287,6 +285,8 @@ function init() {
 }
 
 function initComputerColors() {
+    if (! initComputerColorsOnNewGame)
+        return
     // Default setting is that the computer plays all colors but the first
     computerPlays0 = false
     computerPlays1 = true
@@ -355,8 +355,7 @@ function newGameNoVerify()
     gameDisplay.newGame()
     isRated = false
     analyzeGameModel.clear()
-    if (computerPlaysAny())
-        initComputerColors()
+    initComputerColors()
 }
 
 function open() {

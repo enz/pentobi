@@ -23,6 +23,11 @@ Window {
     // If yes, it will automatically start a move generation on startup.
     property bool wasGenMoveRunning
 
+    // If the user manually disabled all computer colors in the dialog, we
+    // assume that they want to edit games rather than play, and we will not
+    // initialize the computer colors on New Game but only clear the board.
+    property bool initComputerColorsOnNewGame: true
+
     property bool isAndroid: Qt.platform.os === "android"
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
@@ -91,6 +96,7 @@ Window {
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
+        property alias initComputerColorsOnNewGame: root.initComputerColorsOnNewGame;
         property alias isRated: root.isRated
         property alias wasGenMoveRunning: root.wasGenMoveRunning
         property alias exportImageWidth: root.exportImageWidth
@@ -132,6 +138,8 @@ Window {
                 root.computerPlays1 = computerColorDialog.computerPlays1
                 root.computerPlays2 = computerColorDialog.computerPlays2
                 root.computerPlays3 = computerColorDialog.computerPlays3
+                if (! Logic.computerPlaysAny())
+                    initComputerColorsOnNewGame = false
                 if (! Logic.isComputerToPlay())
                     Logic.cancelRunning()
                 else if (! gameModel.isGameOver)
