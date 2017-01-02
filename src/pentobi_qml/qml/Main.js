@@ -50,6 +50,7 @@ function changeGameVariantNoVerify(gameVariant) {
         gameDisplay.changeGameVariant(gameVariant)
         isRated = false
         analyzeGameModel.clear()
+        gameDisplay.showPieces()
         initComputerColors()
     })
 }
