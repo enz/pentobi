@@ -16,7 +16,8 @@ Flickable {
 
     signal piecePicked(var piece)
 
-    contentHeight: column.height
+    contentHeight: pieceList0.height + pieceList1.height + pieceList2.height
+                   + pieceList3.height + 3 * spacingPieceLists
     flickableDirection: Flickable.VerticalFlick
     clip: true
 
