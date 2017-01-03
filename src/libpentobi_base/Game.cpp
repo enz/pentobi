@@ -146,8 +146,8 @@ void Game::play(ColorMove mv, bool always_create_new_node)
 
 void Game::remove_player()
 {
-    m_tree.remove_player(*m_current);
-    update(*m_current);
+    if (m_tree.remove_player(*m_current))
+        update(*m_current);
 }
 
 void Game::remove_setup(Color c, Move mv)

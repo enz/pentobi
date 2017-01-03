@@ -215,9 +215,9 @@ void PentobiTree::keep_only_subtree(const SgfNode& node)
     set_game_property();
 }
 
-void PentobiTree::remove_player(const SgfNode& node)
+bool PentobiTree::remove_player(const SgfNode& node)
 {
-    remove_property(node, "PL");
+    return remove_property(node, "PL");
 }
 
 const SgfNode& PentobiTree::remove_setup(const SgfNode& node, Color c,

@@ -95,7 +95,7 @@ public:
 
     /** Remove the PL property.
         @see set_player() */
-    void remove_player(const SgfNode& node);
+    bool remove_player(const SgfNode& node);
 
 private:
     Variant m_variant;
