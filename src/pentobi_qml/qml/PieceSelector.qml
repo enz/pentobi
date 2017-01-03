@@ -17,7 +17,7 @@ Flickable {
     signal piecePicked(var piece)
 
     contentHeight: pieceList0.height + pieceList1.height + pieceList2.height
-                   + pieceList3.height + 3 * spacingPieceLists
+                   + pieceList3.height + nuColors * 0.5 * spacingPieceLists
     flickableDirection: Flickable.VerticalFlick
     clip: true
 
@@ -65,25 +65,25 @@ Flickable {
 
             PropertyChanges {
                 target: pieceList0
-                y: 0
+                y: 0.25 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList1
                 y: gameVariant != "classic_2" && gameVariant != "trigon_2"
                    && gameVariant != "nexos_2" ?
-                       pieceList0.height + spacingPieceLists :
-                       pieceList0.height + pieceList2.height + 2 * spacingPieceLists
+                       pieceList0.height + 0.75 * spacingPieceLists :
+                       pieceList0.height + pieceList2.height + 1.25 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList2
                 y: gameVariant != "classic_2" && gameVariant != "trigon_2"
                    && gameVariant != "nexos_2" ?
-                       pieceList0.height + pieceList1.height  + 2 * spacingPieceLists :
-                       pieceList0.height + spacingPieceLists
+                       pieceList0.height + pieceList1.height  + 1.25 * spacingPieceLists :
+                       pieceList0.height + 0.75 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList3
-                y: pieceList0.height + pieceList1.height + pieceList2.height + 3 * spacingPieceLists
+                y: pieceList0.height + pieceList1.height + pieceList2.height + 1.75 * spacingPieceLists
             }
         },
         State {
@@ -92,25 +92,25 @@ Flickable {
 
             PropertyChanges {
                 target: pieceList1
-                y: 0
+                y: 0.25 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList2
                 y: gameVariant != "classic_2" && gameVariant != "trigon_2"
                    && gameVariant != "nexos_2" ?
-                       pieceList1.height + spacingPieceLists :
-                       pieceList1.height + pieceList3.height + 2 * spacingPieceLists
+                       pieceList1.height + 0.75 * spacingPieceLists :
+                       pieceList1.height + pieceList3.height + 1.25 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList3
                 y: gameVariant != "classic_2" && gameVariant != "trigon_2"
                    && gameVariant != "nexos_2" ?
-                       pieceList1.height + pieceList2.height + 2 * spacingPieceLists :
-                       pieceList1.height + spacingPieceLists
+                       pieceList1.height + pieceList2.height + 1.25 * spacingPieceLists :
+                       pieceList1.height + 0.75 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList0
-                y: pieceList1.height + pieceList2.height + pieceList3.height + 3 * spacingPieceLists
+                y: pieceList1.height + pieceList2.height + pieceList3.height + 1.75 * spacingPieceLists
             }
         },
         State {
@@ -119,25 +119,25 @@ Flickable {
 
             PropertyChanges {
                 target: pieceList2
-                y: 0
+                y: 0.25 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList3
                 y: gameVariant != "classic_2" && gameVariant != "trigon_2"
                    && gameVariant != "nexos_2" ?
-                       pieceList2.height + spacingPieceLists :
-                       pieceList2.height + pieceList0.height + 2 * spacingPieceLists
+                       pieceList2.height + 0.75 * spacingPieceLists :
+                       pieceList2.height + pieceList0.height + 1.25 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList0
                 y: gameVariant != "classic_2" && gameVariant != "trigon_2"
                    && gameVariant != "nexos_2" ?
-                       pieceList2.height + pieceList3.height + 2 * spacingPieceLists :
-                       pieceList2.height + spacingPieceLists
+                       pieceList2.height + pieceList3.height + 1.25 * spacingPieceLists :
+                       pieceList2.height + 0.75 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList1
-                y: pieceList2.height + pieceList3.height + pieceList0.height + 3 * spacingPieceLists
+                y: pieceList2.height + pieceList3.height + pieceList0.height + 1.75 * spacingPieceLists
             }
         },
         State {
@@ -146,25 +146,25 @@ Flickable {
 
             PropertyChanges {
                 target: pieceList3
-                y: 0
+                y: 0.25 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList0
                 y: gameVariant != "classic_2" && gameVariant != "trigon_2"
                    && gameVariant != "nexos_2" ?
-                       pieceList3.height + spacingPieceLists :
-                       pieceList3.height + pieceList1.height + 2 * spacingPieceLists
+                       pieceList3.height + 0.75 * spacingPieceLists :
+                       pieceList3.height + pieceList1.height + 1.25 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList1
                 y: gameVariant != "classic_2" && gameVariant != "trigon_2"
                    && gameVariant != "nexos_2" ?
-                       pieceList3.height + pieceList0.height + 2 * spacingPieceLists :
-                       pieceList3.height + spacingPieceLists
+                       pieceList3.height + pieceList0.height + 1.25 * spacingPieceLists :
+                       pieceList3.height + 0.75 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList2
-                y: pieceList3.height + pieceList0.height + pieceList1.height + 3 * spacingPieceLists
+                y: pieceList3.height + pieceList0.height + pieceList1.height + 1.75 * spacingPieceLists
             }
         }
     ]
