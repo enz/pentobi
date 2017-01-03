@@ -51,25 +51,21 @@ RowLayout {
     Pentobi.ToolButton {
         imageSource: theme.getImage("pentobi-newgame")
         enabled: ! (gameModel.isGameEmpty && ! isRated) && ! gameDisplay.setupMode
-        visible: ! isAndroid || enabled
         onClicked: Logic.newGame()
     }
     Pentobi.ToolButton {
         imageSource: theme.getImage("pentobi-undo")
         enabled: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
-        visible: ! isAndroid || enabled
         onClicked: Logic.undo()
     }
     Pentobi.ToolButton {
         imageSource: theme.getImage("pentobi-computer-colors")
         enabled: ! gameDisplay.setupMode
-        visible: ! isAndroid || enabled
         onClicked: Logic.showComputerColorDialog()
     }
     Pentobi.ToolButton {
         imageSource: theme.getImage("pentobi-play")
         enabled: ! gameModel.isGameOver && ! gameDisplay.setupMode && ! isRated
-        visible: ! isAndroid || enabled
         onClicked: Logic.computerPlay()
     }
     Pentobi.ToolButton {

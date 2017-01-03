@@ -9,6 +9,7 @@ import QtQuick.Window 2.0
 ToolButton {
     property string imageSource
 
+    visible: ! isAndroid || enabled
     opacity: enabled ? 1 : 0.6
 
     Image {
