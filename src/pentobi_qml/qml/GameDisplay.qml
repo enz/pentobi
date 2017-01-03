@@ -123,7 +123,6 @@ Item
                     height: 0.05 * board.width
                     pointSize: 0.6 * height
                     anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottomMargin: 0.01 * board.width
                 }
                 PieceSelector {
                     id: pieceSelector
