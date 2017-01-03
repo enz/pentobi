@@ -54,6 +54,10 @@ Flickable {
         onPiecePicked: root.piecePicked(piece)
     }
 
+    // States order the piece lists such that the color to play is on top. If a
+    // player plays two colors, their second color follows, such that at least
+    // at the end of the game all of their remaining pieces should be in the
+    // visible area. Otherwise the colors are in order of play.
     states: [
         State {
             name: "toPlay0"
