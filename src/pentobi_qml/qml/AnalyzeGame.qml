@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Window 2.0
 
 Item {
     id: root
@@ -53,6 +54,7 @@ Item {
             dist = d
 
             ctx.beginPath()
+            ctx.lineWidth = Math.max(1, 0.2 * Screen.pixelDensity)
             var top =  makeCrispY(0, root.y + margin)
             ctx.moveTo(0, top)
             ctx.lineTo(w, top)

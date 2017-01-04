@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Window 2.0
 
 Canvas {
     id: root
@@ -43,6 +44,7 @@ Canvas {
             maxY = minY + 100
 
         ctx.beginPath()
+        ctx.lineWidth = Math.max(1, 0.2 * Screen.pixelDensity)
         var top =  0
         ctx.moveTo(0, top)
         ctx.lineTo(w, top)
@@ -52,7 +54,7 @@ Canvas {
         ctx.strokeStyle = "gray"
         ctx.stroke()
 
-        ctx.font = Math.ceil(h / 7) + "px sans-serif"
+        ctx.font = Math.ceil(0.15 * h) + "px sans-serif"
         ctx.fillStyle = "gray"
         ctx.textAlign = "right"
         ctx.fillText(minY, w, h - w / 60)
