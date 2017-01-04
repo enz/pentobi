@@ -80,10 +80,10 @@ Item
 
             gameVariant: gameModel.gameVariant
 
-            // Tuned to show at least 3 rows on typical smartphone screen sizes
+            // Ensures that at least 3 rows are shown in pieceSelector
             width: Math.min(
                        parent.width,
-                       gameDisplay.height / (1.07 + 2.4 / pieceSelector.columns))
+                       gameDisplay.height / (1.05 + 0.85 / pieceSelector.columns * 3))
 
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
