@@ -92,7 +92,7 @@ double getHeuristic(const Board& bd, Move mv)
 {
     auto piece = bd.get_move_piece(mv);
     auto points = bd.get_piece_info(piece).get_score_points();
-    return 100. * points + piece.to_int();
+    return Piece::max_pieces * points - piece.to_int();
 }
 
 /** Get the index of a variation.
