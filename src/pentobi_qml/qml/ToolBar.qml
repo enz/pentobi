@@ -50,7 +50,7 @@ RowLayout {
     }
     Pentobi.ToolButton {
         imageSource: theme.getImage("pentobi-newgame")
-        enabled: ! (gameModel.isGameEmpty && ! isRated) && ! gameDisplay.setupMode
+        enabled: ! (gameModel.isGameEmpty && gameModel.file === "" && ! gameModel.isModified && ! isRated) && ! gameDisplay.setupMode
         onClicked: Logic.newGame()
     }
     Pentobi.ToolButton {
