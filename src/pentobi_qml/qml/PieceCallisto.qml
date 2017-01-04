@@ -99,7 +99,8 @@ Item
         opacity: isMarked ? 0.5 : 0
         color: gameModel.showVariations && ! gameModel.isMainVar ? "transparent" : border.color
         border.width: 0.2 * width
-        border.color: colorName == "blue" || colorName == "red" ? "white" : "#333333"
+        border.color: colorName === "blue" || colorName === "red" || root.pieceModel.elements.length === 1 ?
+                          "white" : "#333333"
         width: 0.3 * gridHeight
         height: width
         radius: width / 2
@@ -112,7 +113,7 @@ Item
     Text {
         opacity: label == "" ? 0 : 1
         text: label
-        color: colorName == "blue" || colorName == "red" ?
+        color: colorName === "blue" || colorName === "red" || root.pieceModel.elements.length === 1 ?
                    "white" : "#333333"
         font.pixelSize: 0.5 * gridHeight
         width: 0
