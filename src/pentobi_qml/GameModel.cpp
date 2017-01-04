@@ -1269,7 +1269,13 @@ void GameModel::updateIsGameEmpty()
 
 void GameModel::updateIsModified()
 {
-    set(m_isModified, m_game.is_modified(), &GameModel::isModifiedChanged);
+    // Don't consider modified game tree as modified if it is empty and no
+    // file is associated.
+    bool isModified =
+            m_game.is_modified()
+            && (! libboardgame_sgf::util::is_empty(m_game.get_tree())
+                || ! m_file.isEmpty());
+    set(m_isModified, isModified, &GameModel::isModifiedChanged);
 }
 
 void GameModel::updateMoveAnnotation()
