@@ -17,7 +17,6 @@ Button {
         fillMode: Image.PreserveAspectFit
         source: imageSource
         opacity: root.enabled ? 1 : 0.4
-        cache: false
     }
     background: Rectangle {
         anchors.fill: root
