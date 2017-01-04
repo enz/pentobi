@@ -1,5 +1,6 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.1
+import QtQuick.Controls 1.2
+import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
 Dialog {
@@ -14,9 +15,9 @@ Dialog {
 
     GroupBox {
         title: qsTr("Computer plays:")
-        background: null
+        flat: true
 
-        Column {
+        ColumnLayout {
             CheckBox {
                 id: checkBox0
 

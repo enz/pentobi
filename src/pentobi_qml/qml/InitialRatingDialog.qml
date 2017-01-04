@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.1
+import QtQuick.Controls 1.2 as Controls1
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 import QtQuick.Window 2.0
@@ -24,17 +25,32 @@ Dialog {
             width: 0.9 * parent.width
             wrapMode: Text.Wrap
         }
-        RowLayout {
-            Label { text: qsTr("Beginner") }
-            Slider {
+        Row {
+            spacing: Screen.pixelDensity * 2
+
+            Label {
+                text: qsTr("Beginner")
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            // Don't use Qt Quick Controls 2 Slider yet, it doesn't look good
+            // on high DPI devices without enabling Qt::AA_EnableHighDpiScaling
+            // and that causes problems as long as we still also use Qt Quick
+            // Controls 1 and Dialogs.
+            Controls1.Slider {
                 id: slider
 
+                width: Screen.pixelDensity * 25
                 value: 1000
-                from: 1000; to: 2000
+                minimumValue: 1000; maximumValue: 2000
                 stepSize: 100
-                onPositionChanged: value = 1000 + 1000 * position
+                anchors.verticalCenter: parent.verticalCenter
             }
-            Label { text: qsTr("Expert") }
+
+            Label {
+                text: qsTr("Expert")
+                anchors.verticalCenter: parent.verticalCenter
+            }
         }
         RowLayout {
             Label {
