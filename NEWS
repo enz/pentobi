@@ -15,6 +15,7 @@ Android version:
   including comments, move annotations, setup positions, game analysis (only
   a very fast mode) and rated games. The playing levels are still restricted
   to 1-7 because the top levels would be too slow on mobile devices.
+* Fixed too small tool and navigation buttons on very high DPI devices.
 * Loaded file name is now shown in toolbar.
 * Current game position, associated file name and file modification status
   are now remembered between sessions.
