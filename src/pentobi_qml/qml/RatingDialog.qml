@@ -80,7 +80,7 @@ Dialog {
         {
             visible: history.length > 0
             implicitWidth: Math.min(Screen.pixelDensity * 100, 0.85 * Screen.width)
-            Layout.fillHeight: true
+            implicitHeight: implicitWidth / 3
 
             GridLayout {
                 id: grid
