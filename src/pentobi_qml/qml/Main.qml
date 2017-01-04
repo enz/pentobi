@@ -69,6 +69,7 @@ Window {
         GameDisplay {
             id: gameDisplay
 
+            theme: root.theme
             busyIndicatorRunning: pieces0 === undefined
                                   || lengthyCommand.isRunning
                                   || playerModel.isGenMoveRunning

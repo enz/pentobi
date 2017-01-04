@@ -13,6 +13,7 @@ Item
     // Values: "last_dot", "last_number", "all_number", "none"
     property string moveMarking: "last_dot"
 
+    property QtObject theme
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
     property bool setupMode
@@ -156,6 +157,7 @@ Item
             }
             ColumnLayout {
                 AnalyzeGame {
+                    theme: root.theme
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                 }

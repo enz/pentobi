@@ -14,6 +14,7 @@ Item {
     property real margin: makeCrispY(width / 60, y)
     property int markMoveNumber: analyzeGameModel.markMoveNumber
     property int maxMoves: gameDisplay.pieces0.length * gameModel.nuColors
+    property QtObject theme
 
     // Distance between moves on the x axis
     property real dist
@@ -29,6 +30,7 @@ Item {
         canvas.requestPaint()
     }
     onMarkMoveNumberChanged: canvas.requestPaint()
+    onThemeChanged: canvas.requestPaint()
 
     Canvas {
         id: canvas
