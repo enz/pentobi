@@ -27,7 +27,7 @@ Dialog {
     // with Qt 5.8beta), which causes the label to be too wide.
     Column
     {
-        width: Math.min(Screen.pixelDensity * 120, 0.95 * Screen.width)
+        width: Math.min(Screen.pixelDensity * 80, 0.95 * Screen.width)
 
         Label {
             id: label
