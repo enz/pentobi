@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.1
+import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 
@@ -46,7 +46,7 @@ Dialog {
         TextField {
             id: textFieldPlayerName0
 
-            Layout.fillWidth: true
+            Layout.maximumWidth: font.pixelSize * 15
         }
         Label {
             text: {
@@ -67,7 +67,7 @@ Dialog {
         TextField {
             id: textFieldPlayerName1
 
-            Layout.fillWidth: true
+            Layout.maximumWidth: font.pixelSize * 15
         }
         Label {
             visible: textFieldPlayerName2.visible
@@ -83,7 +83,7 @@ Dialog {
                      || gameVariant === "callisto_3"
                      || gameVariant === "callisto"
 
-            Layout.fillWidth: true
+            Layout.maximumWidth: font.pixelSize * 15
         }
         Label {
             visible: textFieldPlayerName3.visible
@@ -94,31 +94,31 @@ Dialog {
 
             visible: gameVariant === "classic" || gameVariant === "trigon"
                      || gameVariant === "nexos" || gameVariant === "callisto"
-            Layout.fillWidth: true
+            Layout.maximumWidth: font.pixelSize * 15
         }
         Label { text: qsTr("Date:") }
         TextField {
             id: textFieldDate
 
-            Layout.fillWidth: true
+            Layout.maximumWidth: font.pixelSize * 15
         }
         Label { text: qsTr("Time:") }
         TextField {
             id: textFieldTime
 
-            Layout.fillWidth: true
+            Layout.maximumWidth: font.pixelSize * 15
         }
         Label { text: qsTr("Event:") }
         TextField {
             id: textFieldEvent
 
-            Layout.fillWidth: true
+            Layout.maximumWidth: font.pixelSize * 15
         }
         Label { text: qsTr("Round:") }
         TextField {
             id: textFieldRound
 
-            Layout.fillWidth: true
+            Layout.maximumWidth: font.pixelSize * 15
         }
     }
 }
