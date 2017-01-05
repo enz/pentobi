@@ -400,8 +400,6 @@ function openRatedGameNoVerify(byteArray) {
         analyzeGameModel.clear()
         gameDisplay.showToPlay()
         gameDisplay.enableAnimations = oldEnableAnimations
-        // See comment in RatingDialog onTriggered of the menu item
-        ratingDialog.source = ""
     })
 }
 

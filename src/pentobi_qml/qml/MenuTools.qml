@@ -7,7 +7,12 @@ Menu {
 
     MenuItem {
         text: qsTr("&Rating")
-        onTriggered: ratingDialog.open()
+        onTriggered: {
+            // Never reuse RatingDialog
+            // See comment in Main.qml at ratingModel.onHistoryChanged
+            ratingDialog.source = ""
+            ratingDialog.open()
+        }
     }
     MenuItem {
         enabled:  ! isRated && ratingModel.numberGames > 0

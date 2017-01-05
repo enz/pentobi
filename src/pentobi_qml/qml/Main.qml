@@ -125,7 +125,7 @@ Window {
         // will appear in the GridLayout (last tested with Qt 5.8-rc, some bugs
         // only happen on Android, some also on Linux). As a workaround, we
         // force it to be recreated if the history changed or it is closed.
-        onHistoryChanged: ratingDialog.source = ""
+        onHistoryChanged: if (ratingDialog.item) ratingDialog.item.close()
     }
     Loader { id: computerColorDialogLoader }
     Component {
@@ -203,6 +203,20 @@ Window {
             isRunning = false
         }
     }
+
+    // Runs the openRatedGame() callback from RatingDialog in a new event
+    // because RatingDialog destroys itself before the callback and otherwise
+    // the environment for the callback is undefined (at least if another
+    // verify abort game dialog is shown first).
+    Timer {
+        id: queuedOpenRatedGame
+
+        property var byteArray
+
+        interval: 0
+        onTriggered: Logic.openRatedGame(byteArray)
+    }
+
     Connections {
         target: Qt.application
         onStateChanged:
