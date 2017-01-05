@@ -35,6 +35,7 @@ Version 12.1.UNKNOWN (v12-fixes)
 ================================
 
 General:
+
 * Added patterns for Nexos and Callisto SGF files to MIME type
   specification for detecting them independent of the file ending.
 
@@ -51,6 +52,7 @@ Desktop version:
 Android version:
 
 * Open/Save did not show error message on failure.
+* Toolbuttons were to small on very high DPI devices.
 
 
 Version 12.1 (30 Nov 2016)
