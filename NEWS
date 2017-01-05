@@ -31,8 +31,14 @@ Android version:
   versions older than 4.1.
 
 
-Version 12.1.UNKNOWN (v12-fixes)
+Version 12.2.UNKNOWN (v12-fixes)
 ================================
+
+*
+
+
+Version 12.2 (05 Jan 2017)
+==========================
 
 General:
 
@@ -51,8 +57,8 @@ Desktop version:
 
 Android version:
 
+* Toolbuttons were too small on very high DPI devices.
 * Open/Save did not show error message on failure.
-* Toolbuttons were to small on very high DPI devices.
 
 
 Version 12.1 (30 Nov 2016)
