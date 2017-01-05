@@ -36,10 +36,6 @@ ApplicationWindow {
     minimumWidth: 240; minimumHeight: 320
     width: isAndroid ? Screen.desktopAvailableWidth : defaultWidth
     height: isAndroid ? Screen.desktopAvailableHeight : defaultHeight
-    // On Android, initialize visible to true because startup time is slow and
-    // we want to show the window as soon as possible. On the desktop, visible
-    // is set to true in Component.onCompleted to reduce flickering.
-    visible: isAndroid
     color: theme.backgroundColor
     title: qsTr("Pentobi")
     onClosing: Qt.quit()
