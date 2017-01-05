@@ -2,15 +2,14 @@ import QtQuick 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Window 2.0
 
-/** ToolButton with a dynamically sized image.
-    The size of the image depends on the pixel density of the screen. Works
-    around missing support for multi-size icons in QtQuick.Controls 1.1.
-    The image source should be a SVG file with size 22x22. */
 ToolButton {
     property string imageSource
 
     Image {
-        width: Screen.pixelDensity < 5 ? 22 : 44; height: width
+        // We currently use 22x22 SVG files, try to use 22x22 or 44x44, unless
+        // very high DPI
+        width: Screen.pixelDensity < 5 ? 22 : Screen.pixelDensity < 10 ? 44 : 5 * Screen.pixelDensity
+        height: width
         sourceSize { width: width; height: height }
         anchors.centerIn: parent
         source: imageSource
