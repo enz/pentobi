@@ -33,7 +33,10 @@ Android version:
 Version 12.2.UNKNOWN (v12-fixes)
 ================================
 
-*
+Desktop version:
+
+* Install AppData file to /usr/share/metainfo instead of /usr/share/appdata
+  according to the Debian AppStream guidelines.
 
 
 Version 12.2 (05 Jan 2017)
@@ -42,7 +45,7 @@ Version 12.2 (05 Jan 2017)
 General:
 
 * Added patterns for Nexos and Callisto SGF files to MIME type
-  specification for detecting them independent of the file ending.
+  specification for detecting them independently of the file ending.
 
 Desktop version:
 
@@ -50,8 +53,8 @@ Desktop version:
   text in the game info dialog was deleted.
 * New Game/Save As was not enabled if no move had been played but game
   was modified by editing the comment in the root node or the game info.
-* Fixed a race condition that could cause a crash when updating the
-  analysis window while a game analysis was running.
+* Fixed a race condition in updating the analysis window that could cause
+  a crash while a game analysis was running.
 * Game analysis progress dialog was not closed if analysis was canceled.
 
 Android version:

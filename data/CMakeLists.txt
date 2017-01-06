@@ -46,6 +46,6 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
 install(FILES pentobi-mime.xml
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/mime/packages)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.appdata.xml
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/appdata)
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
 
 endif(PENTOBI_BUILD_GUI AND NOT WIN32)
