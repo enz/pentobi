@@ -55,10 +55,15 @@ ApplicationWindow {
 
     ColumnLayout {
         anchors.fill: parent
-        Keys.onReleased: if (isAndroid && event.key === Qt.Key_Menu) {
-                             androidToolBarLoader.item.popupMenu()
-                             event.accepted = true
-                         }
+        Keys.onReleased:
+            if (isAndroid && event.key === Qt.Key_Menu) {
+                androidToolBarLoader.item.popupMenu()
+                event.accepted = true
+            }
+            else if (event.key === Qt.Key_Back && isAndroid && visibility === Window.FullScreen) {
+                visibility = Window.AutomaticVisibility
+                event.accepted = true
+            }
 
         Loader {
             id: androidToolBarLoader
@@ -69,7 +74,9 @@ ApplicationWindow {
             Component {
                 id: androidToolBarComponent
 
-                AndroidToolBar { }
+                AndroidToolBar {
+                    visible: ! (visibility === Window.FullScreen && isAndroid)
+                }
             }
         }
         GameDisplay {
