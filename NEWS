@@ -1,7 +1,10 @@
 Version 12.2.UNKNOWN (v12-fixes)
 ================================
 
-*
+Desktop version:
+
+* Install AppData file to /usr/share/metainfo instead of /usr/share/appdata
+  according to the Debian AppStream guidelines.
 
 
 Version 12.2 (05 Jan 2017)
