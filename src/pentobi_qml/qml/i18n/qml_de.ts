@@ -435,6 +435,10 @@
         <source>&amp;Animate Pieces</source>
         <translation>Spielsteine &amp;animieren</translation>
     </message>
+    <message>
+        <source>&amp;Fullscreen</source>
+        <translation>Voll&amp;bild</translation>
+    </message>
 </context>
 <context>
     <name>OpenDialog</name>
@@ -475,10 +479,6 @@
     <message>
         <source>Pentobi</source>
         <translation>Pentobi</translation>
-    </message>
-    <message>
-        <source>&amp;Fullscreen</source>
-        <translation>Voll&amp;bild</translation>
     </message>
 </context>
 </TS>
