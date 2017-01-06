@@ -476,5 +476,9 @@
         <source>Pentobi</source>
         <translation>Pentobi</translation>
     </message>
+    <message>
+        <source>&amp;Fullscreen</source>
+        <translation>Voll&amp;bild</translation>
+    </message>
 </context>
 </TS>

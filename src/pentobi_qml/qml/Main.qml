@@ -21,21 +21,20 @@ ApplicationWindow {
     property QtObject theme: Logic.createTheme(themeName)
     property url folder
     property int defaultWidth:
-        isAndroid ? Screen.desktopAvailableWidth :
-                    Math.min(Screen.desktopAvailableWidth,
-                             Math.round(Screen.pixelDensity / 3.5 * 600))
+        Math.min(Screen.desktopAvailableWidth,
+                 Math.round(Screen.pixelDensity / 3.5 * 600))
     property int defaultHeight:
-        isAndroid ? Screen.desktopAvailableWidth :
-                    Math.min(Math.round(Screen.pixelDensity / 3.5 * 800))
+        Math.min(Math.round(Screen.pixelDensity / 3.5 * 800))
 
     function cancelGenMove() {
         playerModel.cancelGenMove()
         delayedCheckComputerMove.stop()
     }
 
-    minimumWidth: 240; minimumHeight: 320
-    width: isAndroid ? Screen.desktopAvailableWidth : defaultWidth
-    height: isAndroid ? Screen.desktopAvailableHeight : defaultHeight
+    // Minimum size corresponds to a QVGA mobile device with 19px statusbar
+    minimumWidth: 240; minimumHeight: 301
+
+    width: defaultWidth; height: defaultHeight
     color: theme.backgroundColor
     title: qsTr("Pentobi")
     onClosing: Qt.quit()

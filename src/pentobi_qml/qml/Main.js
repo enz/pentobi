@@ -131,8 +131,8 @@ function init() {
             width = defaultWidth
             height = defaultHeight
         }
-        x = (maxWidth - width) / 2
-        y = (maxHeight - height) / 2
+        x = (Screen.width - width) / 2
+        y = (Screen.height - height) / 2
     }
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
