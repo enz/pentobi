@@ -58,6 +58,7 @@ Window {
 
     ColumnLayout {
         anchors.fill: parent
+        spacing: 0
         Keys.onReleased:
             if (isAndroid && event.key === Qt.Key_Menu) {
                 androidToolBarLoader.item.popupMenu()
