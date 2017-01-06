@@ -1,35 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="48" width="48" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<g id="e" transform="matrix(1.099991 0 0 1.099983 18.49986 -17.799)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#c00"/>
-<path fill-opacity=".1568628" d="m-15 28 0.909098-0.909578h8.181886v-8.181946l0.9093462-0.909106v10z"/>
-<path d="m-15 28v-10h10l-0.9090162 0.908476h-8.181886v8.181946z" fill-opacity=".1568628" fill="#fff"/>
-</g>
-<use xlink:href="#e" transform="translate(10.99991)" height="48" width="48" y="0" x="0"/>
-<use xlink:href="#e" transform="translate(10.99991 10.99983)" height="48" width="48" y="0" x="0"/>
-<use xlink:href="#e" transform="translate(21.99982 10.99983)" height="48" width="48" y="0" x="0"/>
-<g id="f" transform="matrix(1.099991 0 0 1.099983 18.49986 -6.79917)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#edd400"/>
-<path fill-opacity=".1568628" d="m-15 28 0.909098-0.90942h8.181886v-8.181947l0.9093462-0.909263v10z"/>
-<path d="m-15 28v-10h10l-0.9090162 0.908633h-8.181886v8.181947z" fill-opacity=".1568628" fill="#fff"/>
-</g>
-<use xlink:href="#f" transform="translate(1.222212e-8 10.99983)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#f" transform="translate(1.222212e-8 21.99965)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#f" transform="translate(10.99991 21.99965)" height="72" width="72" y="0" x="0"/>
-<g id="g" transform="matrix(1.099991 0 0 1.099983 29.49977 4.200657)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#3465a4"/>
-<path fill-opacity=".1568628" d="m-15 28 0.909181-0.909262h8.181886v-8.181947l0.9092634-0.909421v10z"/>
-<path d="m-15 28v-10h10l-0.9089334 0.908791h-8.181886v8.181947z" fill-opacity=".1568628" fill="#fff"/>
-</g>
-<use xlink:href="#g" transform="translate(10.99991 10.99983)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#g" transform="translate(10.99991)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#g" transform="translate(21.99982 10.99983)" height="72" width="72" y="0" x="0"/>
-<g id="h" transform="matrix(1.099991 0 0 1.099983 40.49968 -17.799)">
-<rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#73d216"/>
-<path fill-opacity=".1568628" d="m-15 28 0.909263-0.909578h8.181886v-8.181946l0.9091807-0.909106v10z"/>
-<path d="m-15 28v-10h10l-0.9088507 0.908476h-8.181886v8.181946z" fill-opacity=".1568628" fill="#fff"/>
-</g>
-<use xlink:href="#h" transform="translate(10.99991)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#h" transform="translate(10.99991 10.99983)" height="72" width="72" y="0" x="0"/>
-<use xlink:href="#h" transform="translate(10.99991 21.99965)" height="72" width="72" y="0" x="0"/>
+ <g transform="translate(30.406 -14.813)">
+  <path opacity="0.99" d="m-24.83 16.813c-1.9807 0-3.5762 1.5955-3.5762 3.5762v7.4238h11v-11h-7.4238z" fill-rule="evenodd" fill="#c00"/>
+  <path fill-opacity=".15686" d="m-28.406 27.813 1-1.0005h9v-9l1.0003-1v11z"/>
+  <path d="m-24.83 16.813c-0.96479 0-1.8347 0.383-2.4766 1h8.9004l1-1h-7.4238zm-2.5762 1.0996c-0.617 0.6419-1 1.5118-1 2.4766v7.4238l1-1v-8.9004z" fill-opacity=".15686" fill="#fff"/>
+ </g>
+ <g transform="matrix(1.1 0 0 1.1 29.5 -6.7992)">
+  <rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#c00"/>
+  <path d="m-15 28 0.9091-0.90958h8.1819v-8.1819l0.90935-0.90911v10z" fill-opacity=".15686"/>
+  <path d="m-15 28v-10h10l-0.90902 0.90848h-8.1819v8.1819z" fill-opacity=".15686" fill="#fff"/>
+ </g>
+ <g transform="matrix(1.1 0 0 1.1 40.5 -6.7992)">
+  <rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#c00"/>
+  <path d="m-15 28 0.9091-0.90958h8.1819v-8.1819l0.90935-0.90911v10z" fill-opacity=".15686"/>
+  <path d="m-15 28v-10h10l-0.90902 0.90848h-8.1819v8.1819z" fill-opacity=".15686" fill="#fff"/>
+ </g>
+ <g id="c" transform="matrix(1.1 0 0 1.1 18.5 -6.7992)">
+  <rect opacity=".99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#edd400"/>
+  <path d="m-15 28 0.9091-0.90942h8.1819v-8.1819l0.90935-0.90926v10z" fill-opacity=".15686"/>
+  <path fill="#fff" d="m-15 28v-10h10l-0.90902 0.90863h-8.1819v8.1819z" fill-opacity=".15686"/>
+ </g>
+ <use xlink:href="#c" transform="translate(1.2222e-8 11)" height="72" width="72" y="0" x="0"/>
+ <use xlink:href="#c" transform="translate(11 22)" height="72" width="72" y="0" x="0"/>
+ <g id="b" transform="matrix(1.1 0 0 1.1 29.5 4.2007)">
+  <rect opacity=".99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#3465a4"/>
+  <path d="m-15 28 0.90918-0.90926h8.1819v-8.1819l0.90926-0.90942v10z" fill-opacity=".15686"/>
+  <path fill="#fff" d="m-15 28v-10h10l-0.90893 0.90879h-8.1819v8.1819z" fill-opacity=".15686"/>
+ </g>
+ <use xlink:href="#b" transform="translate(11 11)" height="72" width="72" y="0" x="0"/>
+ <use xlink:href="#b" transform="translate(11)" height="72" width="72" y="0" x="0"/>
+ <g id="a" transform="matrix(1.1 0 0 1.1 40.5 -17.799)">
+  <rect opacity=".99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#73d216"/>
+  <path d="m-15 28 0.90926-0.90958h8.1819v-8.1819l0.90918-0.90911v10z" fill-opacity=".15686"/>
+  <path fill="#fff" d="m-15 28v-10h10l-0.90885 0.90848h-8.1819v8.1819z" fill-opacity=".15686"/>
+ </g>
+ <use xlink:href="#a" transform="translate(11 11)" height="72" width="72" y="0" x="0"/>
+ <use xlink:href="#a" transform="translate(11 22)" height="72" width="72" y="0" x="0"/>
+ <g transform="matrix(1.1 0 0 1.0999 29.499 -17.798)">
+  <rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#c00"/>
+  <path fill-opacity=".15686" d="m-15 28 0.9091-0.90958h8.1819v-8.1819l0.90935-0.90911v10z"/>
+  <path fill-opacity=".15686" fill="#fff" d="m-15 28v-10h10l-0.90902 0.90848h-8.1819v8.1819z"/>
+ </g>
+ <g transform="translate(39.928 .74318)">
+  <g transform="translate(-9.7734)">
+   <path opacity="0.99" d="m-28.154 34.257v7.4238c-0.000001 1.9807 1.5955 3.5762 3.5762 3.5762h7.4238v-11h-11z" fill-rule="evenodd" fill="#edd400"/>
+   <path fill-opacity=".15686" d="m-17.154 34.257-1 1v9h-8.9004c0.6419 0.617 1.5118 1 2.4766 1h7.4238v-11z"/>
+  </g>
+  <path d="m-37.928 34.257v7.4258c0 0.96478 0.38301 1.8327 1 2.4746v-8.9004h9l1-1h-11z" fill-opacity=".15686" fill="#fff"/>
+ </g>
+ <g transform="translate(74.315 17.385)">
+  <path opacity="0.99" d="m-39.314 17.615v11h7.4238c1.974 0 3.5635-1.5833 3.5742-3.5547v-7.4453h-10.998z" fill-rule="evenodd" fill="#3465a4"/>
+  <path d="m-28.315 17.615-1 1v8.9004c0.61705-0.64191 1-1.5117 1-2.4766v-7.4238zm-10 10-1 1h7.4258c0.96473 0 1.8327-0.38306 2.4746-1h-8.9004z" fill-opacity=".15686"/>
+  <path d="m-39.315 17.615v11l1-1v-9h9l1-1h-11z" fill-opacity=".15686" fill="#fff"/>
+ </g>
+ <g transform="translate(60.33 -21.321)">
+  <g transform="translate(25.231 1.9445)">
+   <path opacity="0.99" d="m-50.561 21.376v11h11v-7.4238c0-1.9807-1.5955-3.5762-3.5762-3.5762h-7.4238z" fill-rule="evenodd" fill="#73d216"/>
+   <path fill-opacity=".15686" fill="#fff" d="m-50.561 21.376v11l1-1v-9h8.9004c-0.64189-0.61694-1.5099-1-2.4746-1h-7.4258z"/>
+  </g>
+  <path d="m-15.33 24.42v8.9004h-9l-1 1h11v-7.4238c0-0.96479-0.383-1.8347-1-2.4766z" fill-opacity=".15686"/>
+ </g>
 </svg>
