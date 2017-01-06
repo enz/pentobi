@@ -21,10 +21,13 @@ ApplicationWindow {
     property QtObject theme: Logic.createTheme(themeName)
     property url folder
     property int defaultWidth:
-        Math.min(Screen.desktopAvailableWidth,
-                 Math.round(Screen.pixelDensity / 3.5 * 600))
+        isAndroid ? Screen.desktopAvailableWidth :
+                    Math.min(Screen.desktopAvailableWidth,
+                             Math.round(Screen.pixelDensity / 3.5 * 600))
     property int defaultHeight:
-        Math.min(Math.round(Screen.pixelDensity / 3.5 * 800))
+        isAndroid ? Screen.desktopAvailableHeight :
+                    Math.min(Screen.desktopAvailableHeight,
+                             Math.round(Screen.pixelDensity / 3.5 * 800))
 
     function cancelGenMove() {
         playerModel.cancelGenMove()
@@ -35,6 +38,7 @@ ApplicationWindow {
     minimumWidth: 240; minimumHeight: 301
 
     width: defaultWidth; height: defaultHeight
+    visibility: Window.AutomaticVisibility
     color: theme.backgroundColor
     title: qsTr("Pentobi")
     onClosing: Qt.quit()
