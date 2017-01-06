@@ -58,8 +58,18 @@ Window {
 
     ColumnLayout {
         anchors.fill: parent
+        Keys.onReleased:
+            if (isAndroid && event.key === Qt.Key_Menu) {
+                androidToolBarLoader.item.popupMenu()
+                event.accepted = true
+            }
+            else if (event.key === Qt.Key_Back && isAndroid && visibility === Window.FullScreen) {
+                visibility = Window.AutomaticVisibility
+                event.accepted = true
+            }
 
         Pentobi.ToolBar {
+            visible: ! (visibility === Window.FullScreen && isAndroid)
             title: {
                 if (isRated) return qsTr("Rated game")
                 if (gameModel.file === "") return ""
