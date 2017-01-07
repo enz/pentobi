@@ -5,7 +5,7 @@ import "Main.js" as Logic
 FileDialog {
     title: qsTr("Open")
     nameFilters: [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
-    folder: root.folder === "" ? shortcuts.desktop : root.folder
+    folder: root.folder != "" ? root.folder : (isAndroid ? "file:///sdcard" : shortcuts.desktop)
     onAccepted: {
         root.folder = folder
         Logic.openFileUrl()
