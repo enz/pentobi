@@ -46,13 +46,10 @@ Android version:
 Version 12.2 (05 Jan 2017)
 ==========================
 
-General:
+Desktop version:
 
 * Added patterns for Nexos and Callisto SGF files to MIME type
   specification for detecting them independently of the file ending.
-
-Desktop version:
-
 * Game info properties were not removed from file if the corresponding
   text in the game info dialog was deleted.
 * New Game/Save As was not enabled if no move had been played but game
