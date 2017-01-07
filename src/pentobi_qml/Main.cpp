@@ -21,7 +21,7 @@ using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------
 
-//
+#ifdef Q_OS_ANDROID
 void initAndroid()
 {
     // Disable sidebars in QtQuick.Dialogs.FileDialog, the dialog is not
@@ -29,6 +29,7 @@ void initAndroid()
     QSettings settings;
     settings.setValue("QQControlsFileDialog/sidebarVisible", false);
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
