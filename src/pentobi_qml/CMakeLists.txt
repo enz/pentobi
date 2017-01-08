@@ -24,6 +24,7 @@ qt5_add_resources(pentobi_qml_RC_SRCS
   qml/themes/theme_light.qrc
   qml/themes/theme_shared.qrc
   ../books/pentobi_books.qrc
+  ../pentobi/help.qrc
 )
 
 add_executable(pentobi_qml WIN32
@@ -40,7 +41,7 @@ target_link_libraries(pentobi_qml
   boardgame_sys
 )
 
-qt5_use_modules(pentobi_qml Concurrent Gui Qml Svg)
+qt5_use_modules(pentobi_qml Concurrent Gui Qml Svg WebView)
 
 if(CMAKE_THREAD_LIBS_INIT)
   target_link_libraries(pentobi_qml ${CMAKE_THREAD_LIBS_INIT})
