@@ -47,7 +47,7 @@ public:
 
     /** Read a game tree from a stream.
         @param in The input stream containing the SGF game tree(s).
-        @param check_single_tree has_more If true, the caller does not want to
+        @param check_single_tree If true, the caller does not want to
         handle multi-tree SGF files and a ReadError will be thrown if
         non-whitespace characters follow after the first tree before the end of
         the stream.
