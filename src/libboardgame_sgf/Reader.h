@@ -45,21 +45,16 @@ public:
         Reduces CPU time and memory if only the main variation is needed. */
     void set_read_only_main_variation(bool enable);
 
-    /** Read a game tree from the file.
-        @param in
-        @param check_single_tree Throw an error if non-whitespace characters
-        follow after the tree before the end of the stream. This is mainly
-        useful to ensure that the input is not a SGF file with multiple game
-        trees if the caller does not want to handle this case. If
-        check_single_tree is false, you can call read() multiple times to read
-        all game trees.
-        @param[out] more_game_trees_left set to true if check_single_tree is
-        false and there are more game trees to read.
+    /** Read a game tree from a stream.
+        @param in The input stream containing the SGF game tree(s).
+        @param check_single_tree has_more If true, the caller does not want to
+        handle multi-tree SGF files and a ReadError will be thrown if
+        non-whitespace characters follow after the first tree before the end of
+        the stream.
+        @return true, if there are more trees to read in the stream.
         @throws ReadError */
-    void read(istream& in, bool check_single_tree = true,
-              bool* more_game_trees_left = nullptr);
+    bool read(istream& in, bool check_single_tree = true);
 
-    /** See read(istream&,bool) */
     void read(const string& file);
 
 private:

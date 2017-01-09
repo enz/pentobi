@@ -89,8 +89,7 @@ char Reader::peek()
     return char(c);
 }
 
-void Reader::read(istream& in, bool check_single_tree,
-                  bool* more_game_trees_left)
+bool Reader::read(istream& in, bool check_single_tree)
 {
     m_in = &in;
     m_is_in_main_variation = true;
@@ -100,21 +99,13 @@ void Reader::read(istream& in, bool check_single_tree,
     {
         int c = m_in->peek();
         if (c == EOF)
-        {
-            if (more_game_trees_left)
-                *more_game_trees_left = false;
-            return;
-        }
+            return false;
         else if (c == '(')
         {
             if (check_single_tree)
                 throw ReadError("Input has multiple game trees");
             else
-            {
-                if (more_game_trees_left)
-                    *more_game_trees_left = true;
-                return;
-            }
+                return true;
         }
         else if (is_ascii_space(c))
             m_in->get();
@@ -130,7 +121,7 @@ void Reader::read(const string& file)
         throw ReadError("Could not open '" + file + "'");
     try
     {
-        read(in, true);
+        read(in);
     }
     catch (const ReadError& e)
     {
