@@ -16,9 +16,9 @@ add_custom_target(
   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-16.svg
   )
 
-configure_file(pentobi.desktop.in pentobi.desktop @ONLY)
+configure_file(net.sf.pentobi.desktop.in net.sf.pentobi.desktop @ONLY)
 configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
-configure_file(pentobi.appdata.xml.in pentobi.appdata.xml @ONLY)
+configure_file(net.sf.pentobi.appdata.xml.in net.sf.pentobi.appdata.xml @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps)
 install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi-16.png
@@ -49,9 +49,9 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.appdata.xml
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
 
 if(PENTOBI_BUILD_KDE_THUMBNAILER)
-  configure_file(pentobi-kde-thumbnailer.metainfo.xml.in
-    pentobi-kde-thumbnailer.metainfo.xml @ONLY)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-kde-thumbnailer.metainfo.xml
+  configure_file(net.sf.pentobi.kde-thumbnailer.metainfo.xml.in
+    net.sf.pentobi.kde-thumbnailer.metainfo.xml @ONLY)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/net.sf.pentobi.kde-thumbnailer.metainfo.xml
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
 endif()
 
