@@ -5,6 +5,7 @@ Desktop version:
 
 * Install AppData file to /usr/share/metainfo instead of /usr/share/appdata
   according to the Debian AppStream guidelines.
+* Added an AppStream file for the KDE thumbnailer.
 
 Android version:
 
