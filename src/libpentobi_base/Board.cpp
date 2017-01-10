@@ -172,7 +172,7 @@ Color Board::get_effective_to_play(Color c) const
 
 void Board::get_place(Color c, unsigned& place, bool& is_shared) const
 {
-    bool break_ties = (m_piece_set == PieceSet::callisto);
+    bool break_ties = get_break_ties();
     array<ScoreType, Color::range> all_scores;
     for (Color::IntType i = 0; i < Color::range; ++i)
     {

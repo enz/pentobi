@@ -77,8 +77,8 @@ float TwoGtp::get_result(unsigned player_black)
         for (Color::IntType i = 0; i < m_bd.get_nu_colors(); ++i)
             points[i] = m_bd.get_points(Color(i));
         array<float, Color::range> player_result;
-        bool break_ties = (m_bd.get_piece_set() == PieceSet::callisto);
-        get_multiplayer_result(nu_players, points, player_result, break_ties);
+        get_multiplayer_result(nu_players, points, player_result,
+                               m_bd.get_break_ties());
         result = player_result[player_black];
     }
     return result;
