@@ -38,10 +38,6 @@ Desktop version:
 * Install AppData file to /usr/share/metainfo instead of /usr/share/appdata
   according to the Debian AppStream guidelines.
 * Added an AppStream file for the KDE thumbnailer.
-* The .desktop file and the AppStream files now use IDs with a reverse domain
-  name (net.sf.pentobi). The old ID broke the CTest tests on some platforms if
-  compiled with PENTOBI_BUILD_KDE_THUMBNAILER=1 because KDECMakeSettings
-  automatically adds a test for validation with appstreamcli.
 
 Android version:
 
