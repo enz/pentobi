@@ -72,6 +72,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 if(PENTOBI_BUILD_TESTS)
   enable_testing()
+  configure_file(${CMAKE_SOURCE_DIR}/CTestCustom.cmake ${CMAKE_BINARY_DIR})
 endif()
 
 find_package(Threads)
