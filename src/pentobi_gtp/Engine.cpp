@@ -87,14 +87,16 @@ void Engine::cmd_selfplay(const Arguments& args)
     args.check_size(2);
     auto nu_games = args.parse<int>(0);
     ofstream out(args.get(1));
-    Writer writer(out);
-    writer.set_indent(0);
     auto variant = get_board().get_variant();
     auto variant_str = to_string(variant);
     Board bd(variant);
     auto& player = get_mcts_player();
+    ostringstream s;
     for (int i = 0; i < nu_games; ++i)
     {
+        s.str("");
+        Writer writer(s);
+        writer.set_indent(0);
         bd.init();
         writer.begin_tree();
         writer.begin_node();
@@ -111,6 +113,7 @@ void Engine::cmd_selfplay(const Arguments& args)
             writer.end_node();
         }
         writer.end_tree();
+        out << s.str();
     }
 }
 
