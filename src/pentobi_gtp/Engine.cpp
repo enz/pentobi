@@ -11,11 +11,15 @@
 #include "Engine.h"
 
 #include <fstream>
+#include "libboardgame_sgf/Writer.h"
 #include "libpentobi_mcts/Util.h"
 
 namespace pentobi_gtp {
 
 using libboardgame_gtp::Failure;
+using libboardgame_sgf::Writer;
+using libpentobi_base::Board;
+using libpentobi_base::sgf_util::get_color_id;
 using libpentobi_mcts::Float;
 
 //-----------------------------------------------------------------------------
@@ -31,6 +35,7 @@ Engine::Engine(Variant variant, unsigned level, bool use_book,
     add("param", &Engine::cmd_param);
     add("move_values", &Engine::cmd_move_values);
     add("save_tree", &Engine::cmd_save_tree);
+    add("selfplay", &Engine::cmd_selfplay);
     add("version", &Engine::cmd_version);
 }
 
@@ -70,6 +75,43 @@ void Engine::cmd_save_tree(const Arguments& args)
         throw Failure("no search tree");
     ofstream out(args.get());
     libpentobi_mcts::util::dump_tree(out, search);
+}
+
+/** Let the engine play a number of games against itself.
+    This is more efficient than using twogtp if selfplay games are needed
+    because it has lower memory requirements (only one engine needed), process
+    switches between the engines are avoided and parts of the search tree can
+    be reused between moves of different players. */
+void Engine::cmd_selfplay(const Arguments& args)
+{
+    args.check_size(2);
+    auto nu_games = args.parse<int>(0);
+    ofstream out(args.get(1));
+    Writer writer(out);
+    writer.set_indent(0);
+    auto variant = get_board().get_variant();
+    auto variant_str = to_string(variant);
+    Board bd(variant);
+    auto& player = get_mcts_player();
+    for (int i = 0; i < nu_games; ++i)
+    {
+        bd.init();
+        writer.begin_tree();
+        writer.begin_node();
+        writer.write_property("GM", variant_str);
+        writer.end_node();
+        while (! bd.is_game_over())
+        {
+            auto c = bd.get_effective_to_play();
+            auto mv = player.genmove(bd, c);
+            bd.play(c, mv);
+            writer.begin_node();
+            writer.write_property(get_color_id(variant, c),
+                                  bd.to_string(mv, false));
+            writer.end_node();
+        }
+        writer.end_tree();
+    }
 }
 
 void Engine::cmd_param(const Arguments& args, Response& response)

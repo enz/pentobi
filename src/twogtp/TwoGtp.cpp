@@ -99,7 +99,7 @@ void TwoGtp::play_game(unsigned game_number)
     bool resign = false;
     ostringstream sgf_string;
     Writer sgf(sgf_string);
-    sgf.set_indent(0);
+    writer.set_indent(-1);
     sgf.begin_tree();
     sgf.begin_node();
     sgf.write_property("GM", to_string(m_variant));
