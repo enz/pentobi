@@ -99,7 +99,7 @@ void TwoGtp::play_game(unsigned game_number)
     bool resign = false;
     ostringstream sgf_string;
     Writer sgf(sgf_string);
-    writer.set_indent(-1);
+    sgf.set_indent(-1);
     sgf.begin_tree();
     sgf.begin_node();
     sgf.write_property("GM", to_string(m_variant));
@@ -158,6 +158,7 @@ void TwoGtp::play_game(unsigned game_number)
     else
         result = get_result(player_black);
     sgf.end_tree();
+    sgf_string << '\n';
     m_output.add_result(game_number, result, m_bd, player_black, cpu_black,
                         cpu_white, sgf_string.str(), is_real_move);
 }

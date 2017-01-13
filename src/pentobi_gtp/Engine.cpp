@@ -96,7 +96,7 @@ void Engine::cmd_selfplay(const Arguments& args)
     {
         s.str("");
         Writer writer(s);
-        writer.set_indent(0);
+        writer.set_indent(-1);
         bd.init();
         writer.begin_tree();
         writer.begin_node();
@@ -113,7 +113,7 @@ void Engine::cmd_selfplay(const Arguments& args)
             writer.end_node();
         }
         writer.end_tree();
-        out << s.str();
+        out << s.str() << '\n';
     }
 }
 
