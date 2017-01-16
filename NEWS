@@ -37,6 +37,8 @@ Desktop version:
 
 * Install AppData file to /usr/share/metainfo instead of /usr/share/appdata
   according to the Debian AppStream guidelines.
+* Added content rating information to AppData file according to
+  https://odrs.gnome.org/oars
 * Added an AppStream file for the KDE thumbnailer.
 * Disabled tests in KDE thumbnailer subdirectory because some versions of
   KDECMakeSettings automatically add a test that globally checks all
