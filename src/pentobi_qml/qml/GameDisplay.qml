@@ -36,20 +36,8 @@ Item
 
     signal play(var pieceModel, point gameCoord)
 
-    function changeGameVariant(gameVariant) {
-        destroyPieces()
-        gameModel.changeGameVariant(gameVariant)
-        createPieces()
-        showToPlay()
-        setupMode = false
-    }
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
-    function newGame() {
-        gameModel.newGame()
-        setupMode = false
-        showToPlay()
-    }
     function showToPlay() { pieceSelector.contentY = 0 }
     function showAnalyzeGame() { pickedPiece = null; swipeViewCurrentIndex = 2 }
     function showComment() { pickedPiece = null; swipeViewCurrentIndex = 1 }
@@ -59,11 +47,7 @@ Item
             forceActiveFocus()
     }
     function showMove(move) { Logic.showMove(move) }
-    function grabBoardToImage(callback, width) {
-        return board.grabToImage(callback,
-                                 Qt.size(width,
-                                         width * board.height / board.width))
-    }
+    function getBoard() { return board }
     function showTemporaryMessage(text) { message.showTemporary(text) }
 
     onWidthChanged: pickedPiece = null
@@ -106,21 +90,6 @@ Item
                 ScoreDisplay {
                     id: scoreDisplay
 
-                    gameVariant: gameModel.gameVariant
-                    points0: gameModel.points0
-                    points1: gameModel.points1
-                    points2: gameModel.points2
-                    points3: gameModel.points3
-                    bonus0: gameModel.bonus0
-                    bonus1: gameModel.bonus1
-                    bonus2: gameModel.bonus2
-                    bonus3: gameModel.bonus3
-                    hasMoves0: gameModel.hasMoves0
-                    hasMoves1: gameModel.hasMoves1
-                    hasMoves2: gameModel.hasMoves2
-                    hasMoves3: gameModel.hasMoves3
-                    toPlay: gameModel.isGameOver ? -1 : gameModel.toPlay
-                    altPlayer: gameModel.altPlayer
                     height: 0.05 * board.width
                     pointSize: 0.6 * height
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -234,17 +203,6 @@ Item
                 gameModel.addSetup(pieceModel, board.mapToGame(pos))
             else if (legal)
                 play(pieceModel, board.mapToGame(pos))
-        }
-    }
-    Connections {
-        target: gameModel
-        onPositionChanged: {
-            pickedPiece = null
-            if (gameModel.canGoBackward || gameModel.canGoForward
-                    || gameModel.moveNumber > 0)
-                setupMode = false
-            analyzeGameModel.markCurrentMove(gameModel)
-            dropCommentFocus()
         }
     }
 }

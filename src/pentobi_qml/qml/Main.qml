@@ -119,6 +119,14 @@ Window {
         id: gameModel
 
         onPositionAboutToChange: Logic.cancelRunning()
+        onPositionChanged: {
+            gameDisplay.pickedPiece = null
+            if (gameModel.canGoBackward || gameModel.canGoForward
+                    || gameModel.moveNumber > 0)
+                gameDisplay.setupMode = false
+            analyzeGameModel.markCurrentMove(gameModel)
+            gameDisplay.dropCommentFocus()
+        }
     }
     PlayerModel {
         id: playerModel

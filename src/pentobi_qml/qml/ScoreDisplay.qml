@@ -4,21 +4,21 @@ Row {
     id: root
 
     property real pointSize
-    property int toPlay
-    property int altPlayer
-    property string gameVariant
-    property real points0
-    property real points1
-    property real points2
-    property real points3
-    property real bonus0
-    property real bonus1
-    property real bonus2
-    property real bonus3
-    property bool hasMoves0
-    property bool hasMoves1
-    property bool hasMoves2
-    property bool hasMoves3
+    property int toPlay: gameModel.isGameOver ? -1 : gameModel.toPlay
+    property int altPlayer: gameModel.altPlayer
+    property string gameVariant: gameModel.gameVariant
+    property real points0: gameModel.points0
+    property real points1: gameModel.points1
+    property real points2: gameModel.points2
+    property real points3: gameModel.points3
+    property real bonus0: gameModel.bonus0
+    property real bonus1: gameModel.bonus1
+    property real bonus2: gameModel.bonus2
+    property real bonus3: gameModel.bonus3
+    property bool hasMoves0: gameModel.hasMoves0
+    property bool hasMoves1: gameModel.hasMoves1
+    property bool hasMoves2: gameModel.hasMoves2
+    property bool hasMoves3: gameModel.hasMoves3
 
     ScoreElement2 {
         visible: gameVariant == "classic_2" || gameVariant == "trigon_2"

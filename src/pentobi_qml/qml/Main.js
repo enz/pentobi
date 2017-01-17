@@ -47,7 +47,11 @@ function changeGameVariant(gameVariant) {
 function changeGameVariantNoVerify(gameVariant) {
     cancelRunning()
     lengthyCommand.run(function() {
-        gameDisplay.changeGameVariant(gameVariant)
+        gameDisplay.destroyPieces()
+        gameModel.changeGameVariant(gameVariant)
+        gameDisplay.createPieces()
+        gameDisplay.showToPlay()
+        gameDisplay.setupMode = false
         isRated = false
         analyzeGameModel.clear()
         gameDisplay.showPieces()
@@ -179,12 +183,14 @@ function exportAsciiArt(fileUrl) {
 }
 
 function exportImage(fileUrl) {
-    if (! gameDisplay.grabBoardToImage(function(result) {
+    var board = gameDisplay.getBoard()
+    var size = Qt.size(exportImageWidth, exportImageWidth * board.height / board.width)
+    if (! board.grabToImage(function(result) {
         if (! result.saveToFile(getFileFromUrl(fileUrl)))
             showInfo(qsTr("Saving image failed."))
         else
             showTemporaryMessage(qsTr("Image saved."))
-    }, exportImageWidth))
+    }, size))
         showInfo(qsTr("Creating image failed."))
 }
 
@@ -361,7 +367,9 @@ function newGame()
 
 function newGameNoVerify()
 {
-    gameDisplay.newGame()
+    gameModel.newGame()
+    gameDisplay.setupMode = false
+    gameDisplay.showToPlay()
     isRated = false
     analyzeGameModel.clear()
     initComputerColors()
@@ -539,7 +547,9 @@ function ratedGameStart() {
         computerPlays3 = computerPlays1
     }
     setLevel(ratingModel.getNextLevel(maxLevel))
-    gameDisplay.newGame()
+    gameModel.newGame()
+    gameDisplay.setupMode = false
+    gameDisplay.showToPlay()
     gameDisplay.showPieces()
     isRated = true
     analyzeGameModel.clear()
