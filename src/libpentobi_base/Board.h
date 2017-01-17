@@ -519,7 +519,7 @@ inline ColorMove Board::get_move(unsigned n) const
 inline const MoveInfoExt2& Board::get_move_info_ext_2(Move mv) const
 {
     LIBBOARDGAME_ASSERT(! mv.is_null());
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_range());
     return *(m_move_info_ext_2_array + mv.to_int());
 }
 

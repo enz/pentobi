@@ -596,34 +596,34 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     switch (board_type)
     {
     case BoardType::classic:
-        m_nu_moves = Move::onboard_moves_classic + 1;
+        m_range = Move::onboard_moves_classic + 1;
         break;
     case BoardType::trigon:
-        m_nu_moves = Move::onboard_moves_trigon + 1;
+        m_range = Move::onboard_moves_trigon + 1;
         break;
     case BoardType::trigon_3:
-        m_nu_moves = Move::onboard_moves_trigon_3 + 1;
+        m_range = Move::onboard_moves_trigon_3 + 1;
         break;
     case BoardType::duo:
         if (piece_set == PieceSet::classic)
-            m_nu_moves = Move::onboard_moves_duo + 1;
+            m_range = Move::onboard_moves_duo + 1;
         else
         {
             LIBBOARDGAME_ASSERT(piece_set == PieceSet::junior);
-            m_nu_moves = Move::onboard_moves_junior + 1;
+            m_range = Move::onboard_moves_junior + 1;
         }
         break;
     case BoardType::nexos:
-        m_nu_moves = Move::onboard_moves_nexos + 1;
+        m_range = Move::onboard_moves_nexos + 1;
         break;
     case BoardType::callisto:
-        m_nu_moves = Move::onboard_moves_callisto + 1;
+        m_range = Move::onboard_moves_callisto + 1;
         break;
     case BoardType::callisto_2:
-        m_nu_moves = Move::onboard_moves_callisto_2 + 1;
+        m_range = Move::onboard_moves_callisto_2 + 1;
         break;
     case BoardType::callisto_3:
-        m_nu_moves = Move::onboard_moves_callisto_3 + 1;
+        m_range = Move::onboard_moves_callisto_3 + 1;
         break;
     }
     switch (piece_set)
@@ -633,32 +633,32 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_pieces = create_pieces_classic(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 5;
         m_max_adj_attach = 16;
-        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
-        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<16>)));
+        m_move_info.reset(calloc(m_range, sizeof(MoveInfo<5>)));
+        m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<16>)));
         break;
     case PieceSet::junior:
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_junior(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 5;
         m_max_adj_attach = 16;
-        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
-        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<16>)));
+        m_move_info.reset(calloc(m_range, sizeof(MoveInfo<5>)));
+        m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<16>)));
         break;
     case PieceSet::trigon:
         m_transforms.reset(new PieceTransformsTrigon);
         m_pieces = create_pieces_trigon(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 6;
         m_max_adj_attach = 22;
-        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<6>)));
-        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<22>)));
+        m_move_info.reset(calloc(m_range, sizeof(MoveInfo<6>)));
+        m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<22>)));
         break;
     case PieceSet::nexos:
         m_transforms.reset(new PieceTransformsClassic);
         m_pieces = create_pieces_nexos(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 7;
         m_max_adj_attach = 12;
-        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<7>)));
-        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<12>)));
+        m_move_info.reset(calloc(m_range, sizeof(MoveInfo<7>)));
+        m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<12>)));
         break;
     case PieceSet::callisto:
         m_transforms.reset(new PieceTransformsClassic);
@@ -669,11 +669,11 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         // faster if we don't have to handle different values for
         // m_max_adj_attach for the same m_max_piece_size.
         m_max_adj_attach = 16;
-        m_move_info.reset(calloc(m_nu_moves, sizeof(MoveInfo<5>)));
-        m_move_info_ext.reset(calloc(m_nu_moves, sizeof(MoveInfoExt<16>)));
+        m_move_info.reset(calloc(m_range, sizeof(MoveInfo<5>)));
+        m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<16>)));
         break;
     }
-    m_move_info_ext_2.reset(new MoveInfoExt2[m_nu_moves]);
+    m_move_info_ext_2.reset(new MoveInfoExt2[m_range]);
     m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
     init_adj_status();
     auto width = m_geo.get_width();
@@ -712,7 +712,7 @@ inline void BoardConst::create_move(unsigned& moves_created, Piece piece,
 {
     LIBBOARDGAME_ASSERT(m_max_piece_size == MAX_SIZE);
     LIBBOARDGAME_ASSERT(m_max_adj_attach == MAX_ADJ_ATTACH);
-    LIBBOARDGAME_ASSERT(moves_created < m_nu_moves);
+    LIBBOARDGAME_ASSERT(moves_created < m_range);
     Move mv(static_cast<Move::IntType>(moves_created));
     void* place =
             static_cast<MoveInfo<MAX_SIZE>*>(m_move_info.get())
@@ -810,7 +810,7 @@ void BoardConst::create_moves()
                     list.clear();
                 }
     }
-    LIBBOARDGAME_ASSERT(moves_created == m_nu_moves);
+    LIBBOARDGAME_ASSERT(moves_created == m_range);
     if (log_move_creation)
         LIBBOARDGAME_LOG("Created moves: ", moves_created, ", precomp: ", n);
 }
@@ -1002,7 +1002,7 @@ template<unsigned MAX_SIZE>
 void BoardConst::init_symmetry_info()
 {
     m_symmetric_points.init(m_geo);
-    for (Move::IntType i = 1; i < m_nu_moves; ++i)
+    for (Move::IntType i = 1; i < m_range; ++i)
     {
         Move mv(i);
         auto& info = get_move_info<MAX_SIZE>(mv);

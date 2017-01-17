@@ -384,7 +384,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
 template<unsigned MAX_SIZE>
 inline const MoveInfo<MAX_SIZE>& State::get_move_info(Move mv) const
 {
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_range());
     return BoardConst::get_move_info<MAX_SIZE>(mv, m_move_info_array);
 }
 
@@ -392,7 +392,7 @@ template<unsigned MAX_ADJ_ATTACH>
 inline const MoveInfoExt<MAX_ADJ_ATTACH>& State::get_move_info_ext(
         Move mv) const
 {
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_nu_moves());
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_bc->get_range());
     return BoardConst::get_move_info_ext<MAX_ADJ_ATTACH>(
                 mv, m_move_info_ext_array);
 }

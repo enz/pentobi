@@ -100,7 +100,7 @@ public:
 
     const MoveInfoExt2* get_move_info_ext_2_array() const;
 
-    unsigned get_nu_moves() const;
+    Move::IntType get_range() const { return m_range; }
 
     bool find_move(const MovePoints& points, Move& move) const;
 
@@ -161,7 +161,7 @@ private:
 
     Piece::IntType m_nu_pieces;
 
-    unsigned m_nu_moves;
+    Move::IntType m_range;
 
     unsigned m_max_piece_size;
 
@@ -258,7 +258,7 @@ BoardConst::get_move_info_ext(Move mv, MoveInfoExtArray move_info_ext_array)
 
 inline const MoveInfoExt2& BoardConst::get_move_info_ext_2(Move mv) const
 {
-    LIBBOARDGAME_ASSERT(mv.to_int() < m_nu_moves);
+    LIBBOARDGAME_ASSERT(mv.to_int() < m_range);
     return m_move_info_ext_2[mv.to_int()];
 }
 
@@ -328,11 +328,6 @@ template<unsigned MAX_SIZE>
 inline const Point* BoardConst::get_move_points_begin(Move mv) const
 {
     return get_move_info<MAX_SIZE>(mv).begin();
-}
-
-inline unsigned BoardConst::get_nu_moves() const
-{
-    return m_nu_moves;
 }
 
 inline unsigned BoardConst::get_nu_attach_points(Piece piece) const
