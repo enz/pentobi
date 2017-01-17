@@ -231,7 +231,7 @@ public:
     PieceSet get_piece_set() const { return m_piece_set; }
 
     /** Whether ties are broken in the current game variant. */
-    bool get_break_ties() const { return m_piece_set == PieceSet::callisto; }
+    bool get_break_ties() const { return m_is_callisto; }
 
     unsigned get_adj_status(Point p, Color c) const;
 

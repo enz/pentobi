@@ -94,8 +94,7 @@ const Transform* Board::find_transform(Move mv) const
 void Board::gen_moves(Color c, MoveMarker& marker, MoveList& moves) const
 {
     moves.clear();
-    bool is_callisto = (m_piece_set == PieceSet::callisto);
-    if (! is_callisto && is_first_piece(c))
+    if (! m_is_callisto && is_first_piece(c))
     {
         for (Point p : get_starting_points(c))
             if (! m_state_color[c].forbidden[p])
@@ -106,7 +105,7 @@ void Board::gen_moves(Color c, MoveMarker& marker, MoveList& moves) const
             }
         return;
     }
-    if (is_callisto && is_piece_left(c, m_one_piece))
+    if (m_is_callisto && is_piece_left(c, m_one_piece))
         for (auto p : *m_geo)
             if (! is_forbidden(p, c) && ! m_is_center_section[p])
                 gen_moves(c, p, m_one_piece, get_adj_status(p, c), marker,
@@ -116,7 +115,7 @@ void Board::gen_moves(Color c, MoveMarker& marker, MoveList& moves) const
         {
             auto adj_status = get_adj_status(p, c);
             for (Piece piece : m_state_color[c].pieces_left)
-                if (! is_callisto || piece != m_one_piece)
+                if (! m_is_callisto || piece != m_one_piece)
                     gen_moves(c, p, piece, adj_status, marker, moves);
         }
 }
@@ -220,12 +219,11 @@ Move Board::get_move_at(Point p) const
 
 bool Board::has_moves(Color c) const
 {
-    bool is_callisto = (m_piece_set == PieceSet::callisto);
-    if (is_callisto && is_piece_left(c, m_one_piece))
+    if (m_is_callisto && is_piece_left(c, m_one_piece))
         for (auto p : *m_geo)
             if (! is_forbidden(p, c) && ! m_is_center_section[p])
                 return true;
-    if (! is_callisto && is_first_piece(c))
+    if (! m_is_callisto && is_first_piece(c))
     {
         for (auto p : get_starting_points(c))
             if (has_moves(c, p))
@@ -242,14 +240,13 @@ bool Board::has_moves(Color c, Point p) const
 {
     if (is_forbidden(p, c))
         return false;
-    bool is_callisto = (m_piece_set == PieceSet::callisto);
-    if (is_callisto && is_piece_left(c, m_one_piece))
+    if (m_is_callisto && is_piece_left(c, m_one_piece))
         if (m_is_center_section[p])
             return true;
     auto adj_status = get_adj_status(p, c);
     for (auto piece : m_state_color[c].pieces_left)
     {
-        if (piece == m_one_piece && is_callisto)
+        if (piece == m_one_piece && m_is_callisto)
             continue;
         for (auto mv : m_bc->get_moves(piece, p, adj_status))
             if (! is_forbidden(c, mv))
@@ -365,7 +362,7 @@ void Board::init_variant(Variant variant)
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
     m_move_info_ext_2_array = m_bc->get_move_info_ext_2_array();
     m_starting_points.init(variant, *m_geo);
-    if (m_piece_set == PieceSet::callisto)
+    if (m_is_callisto)
         for (Point p : *m_geo)
             m_is_center_section[p] =
                     CallistoGeometry::is_center_section(m_geo->get_x(p),
@@ -534,7 +531,6 @@ void Board::write(ostream& out, bool mark_last_move) const
     bool is_info_location_right = (width <= 20);
     bool is_trigon = (m_piece_set == PieceSet::trigon);
     bool is_nexos = (m_piece_set == PieceSet::nexos);
-    bool is_callisto = (m_piece_set == PieceSet::callisto);
     for (unsigned y = 0; y < height; ++y)
     {
         if (height - y < 10)
@@ -593,7 +589,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                     set_color(out, "\x1B[1;30;47m");
                     out << (point_type == 1 ? '\\' : '/');
                 }
-                else if (is_callisto && x == 0)
+                else if (m_is_callisto && x == 0)
                 {
                     set_color(out, "\x1B[0m");
                     out << ' ';
@@ -631,7 +627,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                             out << '|';
                         else if (is_nexos && point_type == 0)
                             out << '+';
-                        else if (is_callisto && is_center_section(p))
+                        else if (m_is_callisto && is_center_section(p))
                             out << ',';
                         else
                             out << '.';
