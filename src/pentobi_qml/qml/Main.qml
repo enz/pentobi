@@ -108,7 +108,7 @@ Window {
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
-        property alias initComputerColorsOnNewGame: root.initComputerColorsOnNewGame;
+        property alias initComputerColorsOnNewGame: root.initComputerColorsOnNewGame
         property alias isRated: root.isRated
         property alias themeName: root.themeName
         property alias wasGenMoveRunning: root.wasGenMoveRunning

@@ -75,7 +75,7 @@ function checkComputerMove() {
                 msg += qsTr("Your rating stays at %1.").arg(newRating)
             isRated = false
         }
-        showInfo(msg);
+        showInfo(msg)
         return
     }
     if (! isComputerToPlay())
@@ -86,7 +86,7 @@ function checkComputerMove() {
     case 2: if (! gameModel.hasMoves2) return; break
     case 3: if (! gameModel.hasMoves3) return; break
     }
-    genMove();
+    genMove()
 }
 
 function clearRating() {
@@ -124,19 +124,19 @@ function computerPlay() {
             case 0:
                 computerPlays0 = true
                 if (isMultiColor()) computerPlays2 = true
-                break;
+                break
             case 1:
                 computerPlays1 = true
                 if (isMultiColor()) computerPlays3 = true
-                break;
+                break
             case 2:
                 computerPlays2 = true
                 if (isMultiColor()) computerPlays0 = true
-                break;
+                break
             case 3:
                 computerPlays3 = true
                 if (isMultiColor()) computerPlays1 = true
-                break;
+                break
             }
         }
         initComputerColorsOnNewGame = true
@@ -235,7 +235,7 @@ function getFileFromUrl(fileUrl) {
 function getFileLabel(file, isModified) {
     if (file === "")
         return ""
-    var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"));
+    var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"))
     return (isModified ? "*" : "") + file.substring(pos + 1)
 }
 
