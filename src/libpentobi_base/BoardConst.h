@@ -116,7 +116,7 @@ public:
 
     const PrecompMoves& get_precomp_moves() const { return m_precomp_moves; }
 
-    BoardType get_board_type() const { return m_board_type; };
+    BoardType get_board_type() const { return m_board_type; }
 
     PieceSet get_piece_set() const { return m_piece_set; }
 
