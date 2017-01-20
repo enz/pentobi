@@ -92,18 +92,11 @@ Window {
         }
     }
     Settings {
-        id: settings
-
         property alias x: root.x
         property alias y: root.y
         property alias width: root.width
         property alias height: root.height
         property alias folder: root.folder
-        property alias enableAnimations: gameDisplay.enableAnimations
-        property alias moveMarking: gameDisplay.moveMarking
-        property alias showCoordinates: gameDisplay.showCoordinates
-        property alias swipeViewCurrentIndex: gameDisplay.swipeViewCurrentIndex
-        property alias setupMode: gameDisplay.setupMode
         property alias computerPlays0: root.computerPlays0
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2

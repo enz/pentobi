@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.1
 import QtQuick.Controls 2.1 as Controls2
 import QtQuick.Layouts 1.0
+import Qt.labs.settings 1.0
 import "GameDisplay.js" as Logic
 
 Item
@@ -53,6 +54,13 @@ Item
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
 
+    Settings {
+        property alias enableAnimations: gameDisplay.enableAnimations
+        property alias moveMarking: gameDisplay.moveMarking
+        property alias showCoordinates: gameDisplay.showCoordinates
+        property alias swipeViewCurrentIndex: gameDisplay.swipeViewCurrentIndex
+        property alias setupMode: gameDisplay.setupMode
+    }
     Column {
         id: column
 
