@@ -19,7 +19,6 @@ Item
     property bool enableAnimations: true
     property bool setupMode
     property alias busyIndicatorRunning: busyIndicator.running
-    property alias swipeViewCurrentIndex: swipeView.currentIndex
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
         if (board.isTrigon)
@@ -58,7 +57,7 @@ Item
         property alias enableAnimations: gameDisplay.enableAnimations
         property alias moveMarking: gameDisplay.moveMarking
         property alias showCoordinates: gameDisplay.showCoordinates
-        property alias swipeViewCurrentIndex: gameDisplay.swipeViewCurrentIndex
+        property alias swipeViewCurrentIndex: swipeView.currentIndex
         property alias setupMode: gameDisplay.setupMode
     }
     Column {
