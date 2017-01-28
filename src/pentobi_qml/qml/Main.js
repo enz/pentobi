@@ -289,6 +289,11 @@ function init() {
         return
     }
     gameDisplay.createPieces()
+    if (gameModel.checkFileDeletedOutside())
+    {
+        showInfo(qsTr("File was deleted by another application."))
+        gameModel.isModified = true
+    }
     if (gameModel.checkFileModifiedOutside())
     {
         showQuestion(qsTr("File has been modified by another application. Reload?"), reloadFile)

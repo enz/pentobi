@@ -481,6 +481,10 @@
         <source>Discard game?</source>
         <translation>Spiel verwerfen?</translation>
     </message>
+    <message>
+        <source>File was deleted by another application.</source>
+        <translation>Datei wurde von einer anderen Anwendung gelöscht.</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

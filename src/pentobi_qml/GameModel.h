@@ -82,7 +82,7 @@ class GameModel
     Q_PROPERTY(bool hasMoves2 READ hasMoves2 NOTIFY hasMoves2Changed)
     Q_PROPERTY(bool hasMoves3 READ hasMoves3 NOTIFY hasMoves3Changed)
     Q_PROPERTY(bool isGameOver READ isGameOver NOTIFY isGameOverChanged)
-    Q_PROPERTY(bool isModified READ isModified NOTIFY isModifiedChanged)
+    Q_PROPERTY(bool isModified READ isModified WRITE setIsModified NOTIFY isModifiedChanged)
     Q_PROPERTY(bool isGameEmpty READ isGameEmpty NOTIFY isGameEmptyChanged)
     Q_PROPERTY(bool canUndo READ canUndo NOTIFY canUndoChanged)
     Q_PROPERTY(bool canGoBackward READ canGoBackward NOTIFY canGoBackwardChanged)
@@ -211,6 +211,8 @@ public:
     Q_INVOKABLE void truncateChildren();
 
     Q_INVOKABLE QString getResultMessage();
+
+    Q_INVOKABLE bool checkFileDeletedOutside();
 
     Q_INVOKABLE bool checkFileModifiedOutside();
 

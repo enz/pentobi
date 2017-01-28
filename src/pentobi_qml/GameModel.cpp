@@ -249,13 +249,23 @@ void GameModel::changeGameVariant(const QString& gameVariant)
     setFile("");
 }
 
+bool GameModel::checkFileDeletedOutside()
+{
+    if (m_file.isEmpty() || ! m_fileDate.isValid())
+        return false;
+    QFileInfo fileInfo(m_file);
+    return ! fileInfo.exists();
+}
+
 bool GameModel::checkFileModifiedOutside()
 {
     if (m_file.isEmpty() || ! m_fileDate.isValid())
         return false;
     QFileInfo fileInfo(m_file);
     if (! fileInfo.exists())
-        return true;
+        // We handle deleted files as not modified, no reason to ask the user
+        // what to do if they want to save a file in this case.
+        return false;
     return fileInfo.lastModified() != m_fileDate;
 }
 
