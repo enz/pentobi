@@ -79,6 +79,9 @@ add_library(pentobi_gui STATIC
   ${pentobi_gui_RC_SRCS}
   ${pentobi_gui_QM_SRCS})
 
+target_compile_definitions(pentobi_gui PRIVATE
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050200)
+
 target_link_libraries(pentobi_gui Qt5::Widgets)
 
 # Install translation files. If you change the destination, you need to

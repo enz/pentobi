@@ -35,4 +35,7 @@ add_library(pentobi_kde_thumbnailer STATIC
   ../libpentobi_thumbnail/CreateThumbnail.cpp
 )
 
+target_compile_definitions(pentobi_kde_thumbnailer PRIVATE
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050200)
+
 target_link_libraries(pentobi_kde_thumbnailer Qt5::Widgets)

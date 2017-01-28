@@ -108,6 +108,9 @@ if(MINGW AND (CMAKE_SIZEOF_VOID_P EQUAL "4"))
   set_target_properties(pentobi PROPERTIES LINK_FLAGS -Wl,--large-address-aware)
 endif()
 
+target_compile_definitions(pentobi PRIVATE
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050200)
+
 target_link_libraries(pentobi
   pentobi_gui
   pentobi_mcts

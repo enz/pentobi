@@ -212,7 +212,7 @@ void RatingModel::setGameVariant(const QString& gameVariant)
                                            level, rating, sgf));
     }
     settings.endArray();
-    qSort(m_history.begin(), m_history.end(), isRatedGameInfoNewer);
+    sort(m_history.begin(), m_history.end(), isRatedGameInfoNewer);
     emit historyChanged();
     setNumberGames(settings.value("rated_games_" + gameVariant, 0).toInt());
     emit gameVariantChanged();

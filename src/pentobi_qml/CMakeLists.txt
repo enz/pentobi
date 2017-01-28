@@ -32,6 +32,9 @@ add_executable(pentobi_qml WIN32
   ${pentobi_qml_RC_SRCS}
 )
 
+target_compile_definitions(pentobi_qml PRIVATE
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050800)
+
 target_link_libraries(pentobi_qml
   pentobi_mcts
   pentobi_base
