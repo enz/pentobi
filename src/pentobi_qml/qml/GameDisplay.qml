@@ -39,9 +39,9 @@ Item
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
     function showToPlay() { pieceSelector.contentY = 0 }
-    function showAnalyzeGame() { pickedPiece = null; swipeViewCurrentIndex = 2 }
-    function showComment() { pickedPiece = null; swipeViewCurrentIndex = 1 }
-    function showPieces() { swipeViewCurrentIndex = 0 }
+    function showAnalyzeGame() { pickedPiece = null; swipeView.currentIndex = 2 }
+    function showComment() { pickedPiece = null; swipeView.currentIndex = 1 }
+    function showPieces() { swipeView.currentIndex = 0 }
     function dropCommentFocus() {
         if (navigationPanel.activeFocusComment)
             forceActiveFocus()
