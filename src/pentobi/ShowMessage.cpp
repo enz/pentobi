@@ -53,7 +53,7 @@ void showFatal(const QString& detailedText)
     QString infoText =
         "Please report this error together with any details available with"
         " the button below and other context information at the Pentobi"
-        " <a href=\"http://sf.net/p/pentobi/bugs\">bug tracker</a>.";
+        " <a href=\"https://sf.net/p/pentobi/bugs\">bug tracker</a>.";
     msgBox.setInformativeText("<html>" + infoText);
     msgBox.setDetailedText(detailedText);
     msgBox.exec();
