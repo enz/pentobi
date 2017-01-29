@@ -11,6 +11,7 @@
 #include "Assert.h"
 
 #include <list>
+#include "Unused.h"
 
 #if LIBBOARDGAME_DEBUG
 #include <algorithm>
@@ -56,7 +57,13 @@ AssertionHandler::~AssertionHandler()
 void handle_assertion(const char* expression, const char* file, int line)
 {
     static bool is_during_handle_assertion = false;
+#if LIBBOARDGAME_DISABLE_LOG
+    LIBBOARDGAME_UNUSED(expression);
+    LIBBOARDGAME_UNUSED(file);
+    LIBBOARDGAME_UNUSED(line);
+#else
     LIBBOARDGAME_LOG(file, ":", line, ": Assertion '", expression, "' failed");
+#endif
     flush_log();
     if (! is_during_handle_assertion)
     {
