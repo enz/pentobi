@@ -1,5 +1,5 @@
 function about() {
-    var url = "http://pentobi.sourceforge.net"
+    var url = "https://pentobi.sourceforge.io/"
     showInfo("<h2>" + qsTr("Pentobi") + "</h2><p>" +
              qsTr("Version %1").arg(Qt.application.version) + "</p><p>" +
              qsTr("Computer opponent for the board game Blokus.") + "<br>" +
