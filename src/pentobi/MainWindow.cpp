@@ -318,7 +318,7 @@ void MainWindow::about()
                        + "<br>" +
                        tr("&copy; 2011&ndash;%1 Markus Enzenberger").arg(2017) +
                        + "<br>" +
-                       "<a href=\"https://pentobi.sourceforge.io/\">https://pentobi.sourceforge.io/</a>"
+                       "<a href=\"https://pentobi.sourceforge.io\">https://pentobi.sourceforge.io</a>"
                        "</p>");
 }
 
