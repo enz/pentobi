@@ -413,13 +413,11 @@ inline void PriorKnowledge::init_local(const Board& bd)
         auto j = info_ext.begin_attach();
         auto end = info_ext.end_attach();
         do
-        {
-            if (is_forbidden[*j])
-                continue;
-            if (! m_is_local[*j])
+            if (! is_forbidden[*j] && ! m_is_local[*j])
+            {
                 m_local_points.get_unchecked(nu_local++) = *j;
-            m_is_local[*j] = true;
-        }
+                m_is_local[*j] = true;
+            }
         while (++j != end);
     }
     m_local_points.resize(nu_local);
