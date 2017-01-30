@@ -61,13 +61,6 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     connect(actionForward, SIGNAL(triggered()), browser, SLOT(forward()));
     connect(browser, SIGNAL(forwardAvailable(bool)),
             actionForward, SLOT(setEnabled(bool)));
-    m_actionHome = new QAction(tr("Contents"), this);
-    m_actionHome->setToolTip(tr("Show table of contents"));
-    m_actionHome->setEnabled(false);
-    setIcon(m_actionHome, "go-home");
-    connect(m_actionHome, SIGNAL(triggered()), browser, SLOT(home()));
-    connect(browser, SIGNAL(sourceChanged(const QUrl&)),
-            SLOT(handleSourceChanged(const QUrl&)));
     auto actionClose = new QAction("", this);
     actionClose->setShortcut(QKeySequence::Close);
     connect(actionClose, SIGNAL(triggered()), SLOT(hide()));
@@ -77,7 +70,6 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
     toolBar->addAction(actionBack);
     toolBar->addAction(actionForward);
-    toolBar->addAction(m_actionHome);
     addToolBar(toolBar);
     QSettings settings;
     if (! restoreGeometry(settings.value("helpwindow_geometry").toByteArray()))
@@ -102,11 +94,6 @@ void HelpWindow::closeEvent(QCloseEvent* event)
     QSettings settings;
     settings.setValue("helpwindow_geometry", saveGeometry());
     QMainWindow::closeEvent(event);
-}
-
-void HelpWindow::handleSourceChanged(const QUrl& src)
-{
-    m_actionHome->setEnabled(src != m_mainPageUrl);
 }
 
 QSize HelpWindow::sizeHint() const

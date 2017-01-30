@@ -40,11 +40,6 @@ protected:
 
 private:
     QUrl m_mainPageUrl;
-
-    QAction* m_actionHome;
-
-private slots:
-    void handleSourceChanged(const QUrl& src);
 };
 
 //-----------------------------------------------------------------------------

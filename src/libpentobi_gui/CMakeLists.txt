@@ -32,7 +32,6 @@ set(pentobi_gui_STAT_SRCS
 )
 
 set(pentobi_gui_ICNS
-  go-home.png
   go-next.png
   go-previous.png
 )

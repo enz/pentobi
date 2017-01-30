@@ -1,7 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource prefix="/libpentobi_gui">
-    <file>icons/go-home@2x.png</file>
     <file>icons/go-next@2x.png</file>
     <file>icons/go-previous@2x.png</file>
   </qresource>
