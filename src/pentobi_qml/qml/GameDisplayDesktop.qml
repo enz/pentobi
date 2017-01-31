@@ -38,14 +38,11 @@ Item
 
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
-    function showToPlay() { pieceSelector.contentY = 0 }
+    function showToPlay() { }
     function showAnalyzeGame() { pickedPiece = null; swipeView.currentIndex = 2 }
     function showComment() { pickedPiece = null; swipeView.currentIndex = 1 }
-    function showPieces() { swipeView.currentIndex = 0 }
-    function dropCommentFocus() {
-        if (navigationPanel.activeFocusComment)
-            forceActiveFocus()
-    }
+    function showPieces() { }
+    function dropCommentFocus() { if (comment.activeFocus) forceActiveFocus() }
     function showMove(move) { Logic.showMove(move) }
     function getBoard() { return board }
     function showTemporaryMessage(text) { message.showTemporary(text) }
@@ -57,10 +54,9 @@ Item
         property alias enableAnimations: gameDisplay.enableAnimations
         property alias moveMarking: gameDisplay.moveMarking
         property alias showCoordinates: gameDisplay.showCoordinates
-        property alias swipeViewCurrentIndex: swipeView.currentIndex
         property alias setupMode: gameDisplay.setupMode
     }
-    Column {
+    Row {
         id: column
 
         width: gameDisplay.width
@@ -72,75 +68,48 @@ Item
 
             gameVariant: gameModel.gameVariant
 
-            // Ensures that at least 3 rows are shown in pieceSelector
-            width: Math.min(
-                       parent.width,
-                       gameDisplay.height / (1.05 + 0.85 / pieceSelector.columns * 3))
-
+            width: parent.width *0.52
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
             onClicked: {
                 if (! setupMode) return
                 var mv = gameModel.addEmpty(pos)
                 showMove(mv)
             }
         }
-        Controls2.SwipeView {
-            id: swipeView
+        Column {
+            width: 0.9 * board.width
+            anchors.verticalCenter: board.verticalCenter
+            spacing: 0.02 * board.width
 
-            width: board.width
-            height: Math.min(gameDisplay.height - board.height, board.height)
-            clip: true
-            anchors.horizontalCenter: board.horizontalCenter
+            ScoreDisplay {
+                id: scoreDisplay
 
-            Column {
-                ScoreDisplay {
-                    id: scoreDisplay
-
-                    height: 0.05 * board.width
-                    pointSize: 0.6 * height
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-                PieceSelector {
-                    id: pieceSelector
-
-                    // How many full rows can we show if we use 85% of the board width?
-                    property int rows: Math.floor(height / (0.85 * swipeView.width / columns))
-
-                    columns: gameModel.gameVariant.startsWith("classic")
-                             || gameModel.gameVariant.startsWith("callisto")
-                             || gameModel.gameVariant === "duo" ? 7 : 8
-
-                    // Show at least 1 row
-                    width: rows < 1 ? columns * height : 0.85 * swipeView.width
-
-                    height: swipeView.height - scoreDisplay.height
-
-                    // Try not to show partial piece rows unless we cannot even
-                    // show all pieces of one color (3 rows)
-                    spacingPieceLists: rows < 3 ? 0 : height - rows * (width / columns)
-
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    gameVariant: gameModel.gameVariant
-                    toPlay: gameModel.toPlay
-                    nuColors: gameModel.nuColors
-                    transitionsEnabled: false
-                    onPiecePicked: Logic.pickPiece(piece)
-                }
+                height: 0.04 * board.width
+                pointSize: 0.6 * height
+                anchors.horizontalCenter: parent.horizontalCenter
             }
-            NavigationPanel {
-                id: navigationPanel
+            PieceSelectorDesktop {
+                id: pieceSelector
+
+                width: parent.width
+                height: width / columns * 8
+                anchors.horizontalCenter: parent.horizontalCenter
+                onPiecePicked: Logic.pickPiece(piece)
             }
-            ColumnLayout {
+            Controls2.SwipeView {
+                id: swipeView
+
+                width: parent.width
+                height: 0.2 * width
+                anchors.horizontalCenter: parent.horizontalCenter
+                clip: true
+
+                Comment {
+                    id: comment
+                }
                 AnalyzeGame {
                     theme: root.theme
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                }
-                NavigationButtons
-                {
-                    height: width / 6
-                    Layout.fillWidth: true
                 }
             }
         }
@@ -149,7 +118,7 @@ Item
         id: busyIndicator
 
         x: (gameDisplay.width - width) / 2
-        y: column.y + swipeView.y + (swipeView.height - height) / 2
+        y: (gameDisplay.height - height) / 2
     }
     Rectangle {
         id: message
@@ -162,7 +131,7 @@ Item
 
         opacity: 0
         x: (gameDisplay.width - width) / 2
-        y: column.y + swipeView.y + (swipeView.height - height) / 2
+        y: (gameDisplay.height - height) / 2
         radius: 0.1 * height
         color: theme.messageBackgroundColor
         implicitWidth: messageText.implicitWidth + 0.5 * messageText.implicitHeight
@@ -188,8 +157,7 @@ Item
 
         legal: {
             if (pickedPiece === null) return false
-            // The following expressions need explicit dependencies on
-            // x, y, pieceModel.state
+            // Need explicit dependencies on x, y, pieceModel.state
             var pos = parent.mapToItem(board, x + width / 2, y + height / 2)
             if (setupMode)
                 return gameModel.isLegalSetupPos(pickedPiece.pieceModel,

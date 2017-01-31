@@ -29,6 +29,7 @@ Window {
     property bool initComputerColorsOnNewGame: true
 
     property bool isAndroid: Qt.platform.os === "android"
+    property bool desktopLayout: ! isAndroid
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
     property url folder
@@ -41,6 +42,7 @@ Window {
                     Math.min(Screen.desktopAvailableHeight,
                              Math.round(Screen.pixelDensity / 3.5 * 800))
     property int exportImageWidth: 400
+    property alias gameDisplay: gameDisplayLoader.item
 
     // Minimum size corresponds to a QVGA mobile device with 19px statusbar
     minimumWidth: 240; minimumHeight: 301
@@ -77,18 +79,37 @@ Window {
                 return Logic.getFileLabel(gameModel.file, gameModel.isModified)
             }
         }
-        GameDisplay {
-            id: gameDisplay
+        Loader {
+            id: gameDisplayLoader
 
-            theme: root.theme
-            busyIndicatorRunning: pieces0 === undefined
-                                  || lengthyCommand.isRunning
-                                  || playerModel.isGenMoveRunning
-                                  || analyzeGameModel.isRunning
+            sourceComponent: desktopLayout ? gameDisplayDesktop : gameDisplayMobile
             Layout.fillWidth: true
             Layout.fillHeight: true
             focus: true
-            onPlay: Logic.play(pieceModel, gameCoord)
+        }
+        Component {
+            id: gameDisplayDesktop
+
+            GameDisplayDesktop {
+                theme: root.theme
+                busyIndicatorRunning: pieces0 === undefined
+                                      || lengthyCommand.isRunning
+                                      || playerModel.isGenMoveRunning
+                                      || analyzeGameModel.isRunning
+                onPlay: Logic.play(pieceModel, gameCoord)
+            }
+        }
+        Component {
+            id: gameDisplayMobile
+
+            GameDisplayMobile {
+                theme: root.theme
+                busyIndicatorRunning: pieces0 === undefined
+                                      || lengthyCommand.isRunning
+                                      || playerModel.isGenMoveRunning
+                                      || analyzeGameModel.isRunning
+                onPlay: Logic.play(pieceModel, gameCoord)
+            }
         }
     }
     Settings {
@@ -101,7 +122,8 @@ Window {
         property alias computerPlays1: root.computerPlays1
         property alias computerPlays2: root.computerPlays2
         property alias computerPlays3: root.computerPlays3
-        property alias initComputerColorsOnNewGame: root.initComputerColorsOnNewGame
+        property alias desktopLayout: root.desktopLayout
+        property alias initComputerColorsOnNewGame: root.initComputerColorsOnNewGame;
         property alias isRated: root.isRated
         property alias themeName: root.themeName
         property alias wasGenMoveRunning: root.wasGenMoveRunning

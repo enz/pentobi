@@ -5,9 +5,11 @@
         <file>qml/Board.qml</file>
         <file>qml/Button.qml</file>
         <file>qml/ComputerColorDialog.qml</file>
+        <file>qml/Comment.qml</file>
         <file>qml/DialogLoader.qml</file>
         <file>qml/ExportImageDialog.qml</file>
-        <file>qml/GameDisplay.qml</file>
+        <file>qml/GameDisplayDesktop.qml</file>
+        <file>qml/GameDisplayMobile.qml</file>
         <file>qml/GameInfoDialog.qml</file>
         <file>qml/GotoMoveDialog.qml</file>
         <file>qml/HelpWindow.qml</file>
@@ -35,7 +37,8 @@
         <file>qml/PieceManipulator.qml</file>
         <file>qml/PieceNexos.qml</file>
         <file>qml/PieceRotationAnimation.qml</file>
-        <file>qml/PieceSelector.qml</file>
+        <file>qml/PieceSelectorDesktop.qml</file>
+        <file>qml/PieceSelectorMobile.qml</file>
         <file>qml/PieceSwitchedFlipAnimation.qml</file>
         <file>qml/PieceTrigon.qml</file>
         <file>qml/RatingDialog.qml</file>
