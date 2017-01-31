@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
             translationsLibPentobiGuiDir =
                 settings.value("TranslationsLibPentobiGuiDir",
                                translationsLibPentobiGuiDir).toString();
-        }
+            }
 
         QTranslator qtTranslator;
         QString qtTranslationPath =

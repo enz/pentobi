@@ -18,14 +18,20 @@ set(pentobi_qml_SRCS
   RatingModel.cpp
 )
 
-qt5_add_resources(pentobi_qml_RC_SRCS
-  resources.qrc
-  qml/themes/theme_dark.qrc
-  qml/themes/theme_light.qrc
-  qml/themes/theme_shared.qrc
-  ../books/pentobi_books.qrc
-  ../pentobi/help.qrc
-)
+set(pentobi_qml_QRC
+    resources.qrc
+    qml/themes/theme_dark.qrc
+    qml/themes/theme_light.qrc
+    qml/themes/theme_shared.qrc
+    ../books/pentobi_books.qrc
+    )
+if (${CMAKE_SYSTEM_NAME} MATCHES "Android")
+    set(pentobi_qml_QRC ${pentobi_qml_QRC}
+        ../pentobi/help.qrc
+        )
+endif()
+
+qt5_add_resources(pentobi_qml_RC_SRCS ${pentobi_qml_QRC})
 
 add_executable(pentobi_qml WIN32
   ${pentobi_qml_SRCS}
@@ -49,4 +55,11 @@ qt5_use_modules(pentobi_qml Concurrent Gui Qml Svg WebView)
 
 if(CMAKE_THREAD_LIBS_INIT)
   target_link_libraries(pentobi_qml ${CMAKE_THREAD_LIBS_INIT})
+endif()
+
+if(MSVC)
+  configure_file(pentobi.conf.in Debug/pentobi.conf @ONLY)
+  configure_file(pentobi.conf.in Release/pentobi.conf @ONLY)
+else()
+  configure_file(pentobi.conf.in pentobi.conf @ONLY)
 endif()

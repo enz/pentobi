@@ -17,7 +17,7 @@ Window {
         if (isAndroid)
             return helpFileExtractor.extract(language)
         else
-            return "qrc:///qml/help/" + language + "/pentobi/index.html"
+            return "file:///" + helpDir + "/" + language + "/pentobi/index.html"
 
     width: isAndroid ? Screen.desktopAvailableWidth : Math.min(Screen.pixelDensity * 150, Screen.desktopAvailableWidth)
     height: isAndroid ? Screen.desktopAvailableHeight : Math.min(Screen.pixelDensity * 180, Screen.desktopAvailableHeight)
