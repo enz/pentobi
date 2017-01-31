@@ -36,6 +36,7 @@ add_library(pentobi_kde_thumbnailer STATIC
 )
 
 target_compile_definitions(pentobi_kde_thumbnailer PRIVATE
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050200)
+    -DQT_DEPRECATED_WARNINGS
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050800)
 
 target_link_libraries(pentobi_kde_thumbnailer Qt5::Widgets)

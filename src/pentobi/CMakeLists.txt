@@ -109,7 +109,8 @@ if(MINGW AND (CMAKE_SIZEOF_VOID_P EQUAL "4"))
 endif()
 
 target_compile_definitions(pentobi PRIVATE
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x050200)
+    -DQT_DEPRECATED_WARNINGS
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x050800)
 
 target_link_libraries(pentobi
   pentobi_gui
