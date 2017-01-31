@@ -139,7 +139,7 @@ Item
                                         pickedPiece.pieceModel.state,
                                         board.mapToGame(pos))
         }
-        width: 0.6 * board.width; height: width
+        width: 0.52 * board.width; height: width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
         onPiecePlayed: {
