@@ -34,7 +34,11 @@ AnalyzeGameElement::AnalyzeGameElement(QObject* parent, int moveColor,
 AnalyzeGameModel::AnalyzeGameModel(QObject* parent)
     : QObject(parent)
 {
-    connect(&m_watcher, SIGNAL(finished()), SLOT(runFinished()));
+    connect(&m_watcher, &QFutureWatcher<void>::finished, [this]
+    {
+        setIsRunning(false);
+        updateElements();
+    });
 }
 
 AnalyzeGameModel::~AnalyzeGameModel()
@@ -211,12 +215,6 @@ void AnalyzeGameModel::markCurrentMove(GameModel* gameModel)
         }
     }
     setMarkMoveNumber(moveNumber);
-}
-
-void AnalyzeGameModel::runFinished()
-{
-    setIsRunning(false);
-    updateElements();
 }
 
 void AnalyzeGameModel::setIsRunning(bool isRunning)

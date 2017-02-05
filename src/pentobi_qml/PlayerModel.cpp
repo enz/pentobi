@@ -67,7 +67,8 @@ PlayerModel::PlayerModel(QObject* parent)
     getLevel(settings, "level_callisto", m_levelCallisto);
     getLevel(settings, "level_callisto_2", m_levelCallisto2);
     getLevel(settings, "level_callisto_3", m_levelCallisto3);
-    connect(&m_genMoveWatcher, SIGNAL(finished()), SLOT(genMoveFinished()));
+    connect(&m_genMoveWatcher, &QFutureWatcher<GenMoveResult>::finished,
+            this, &PlayerModel::genMoveFinished);
 }
 
 PlayerModel::~PlayerModel()

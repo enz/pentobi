@@ -18,13 +18,6 @@ using libpentobi_mcts::Player;
 
 //-----------------------------------------------------------------------------
 
-bool isRatedGameInfoNewer(const QObject* o1, const QObject* o2)
-{
-    return dynamic_cast<const RatedGameInfo&>(*o1).number() > dynamic_cast<const RatedGameInfo&>(*o2).number();
-}
-
-//-----------------------------------------------------------------------------
-
 RatedGameInfo::RatedGameInfo(QObject* parent, int number, int color,
                              double result, const QString& date, int level,
                              double rating, const QByteArray& sgf)
@@ -212,7 +205,12 @@ void RatingModel::setGameVariant(const QString& gameVariant)
                                            level, rating, sgf));
     }
     settings.endArray();
-    sort(m_history.begin(), m_history.end(), isRatedGameInfoNewer);
+    sort(m_history.begin(), m_history.end(),
+         [](const QObject* o1, const QObject* o2)
+         {
+             return dynamic_cast<const RatedGameInfo&>(*o1).number()
+                     > dynamic_cast<const RatedGameInfo&>(*o2).number();
+         });
     emit historyChanged();
     setNumberGames(settings.value("rated_games_" + gameVariant, 0).toInt());
     emit gameVariantChanged();

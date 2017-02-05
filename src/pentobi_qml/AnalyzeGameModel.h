@@ -106,9 +106,6 @@ private:
     void setIsRunning(bool isRunning);
 
     void setMarkMoveNumber(int markMoveNumber);
-
-private slots:
-    void runFinished();
 };
 
 //-----------------------------------------------------------------------------
