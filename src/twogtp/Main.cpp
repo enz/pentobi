@@ -37,6 +37,7 @@ int main(int argc, char** argv)
             "nugames|n:",
             "quiet",
             "splitsgf:",
+            "saveinterval:",
             "threads:",
             "tree",
             "white|w:",
@@ -58,6 +59,7 @@ int main(int argc, char** argv)
         auto nu_games = opt.get<unsigned>("nugames", 1);
         auto nu_threads = opt.get<unsigned>("threads", 1);
         auto variant_string = opt.get("game", "classic");
+        auto save_interval = opt.get<double>("saveinterval", 60);
         bool quiet = opt.contains("quiet");
         if (quiet)
             libboardgame_util::disable_logging();
@@ -67,18 +69,20 @@ int main(int argc, char** argv)
         if (! parse_variant_id(variant_string, variant))
             throw runtime_error("invalid game variant " + variant_string);
         Output output(variant, prefix, create_tree);
-        vector<shared_ptr<TwoGtp>> twogtp;
+        vector<shared_ptr<TwoGtp>> twogtps;
         for (unsigned i = 0; i < nu_threads; ++i)
         {
             string log_prefix;
             if (nu_threads > 1)
                 log_prefix = to_string(i + 1);
-            twogtp.push_back(make_shared<TwoGtp>(black, white, variant,
-                                                 nu_games, output, quiet,
-                                                 log_prefix, fast_open));
+            auto twogtp = make_shared<TwoGtp>(black, white, variant,
+                                              nu_games, output, quiet,
+                                              log_prefix, fast_open);
+            twogtp->set_save_interval(save_interval);
+            twogtps.push_back(twogtp);
         }
         vector<thread> threads;
-        for (auto& i : twogtp)
+        for (auto& i : twogtps)
             threads.push_back(thread([&i, &result]()
             {
                 try

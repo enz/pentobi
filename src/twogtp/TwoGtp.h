@@ -28,6 +28,8 @@ public:
 
     void run();
 
+    void set_save_interval(double seconds) { m_output.set_save_interval(seconds); }
+
 private:
     bool m_quiet;
 

@@ -34,6 +34,7 @@ Output::Output(Variant variant, const string& prefix, bool create_tree)
         throw runtime_error("Output: could not create lock file");
     if (flock(m_lock_fd, LOCK_EX | LOCK_NB) == -1)
         throw runtime_error("Output: twogtp already running");
+    m_timer.reset(m_time_source);
     ifstream in(prefix + ".dat");
     if (! in)
         return;
@@ -61,6 +62,7 @@ Output::Output(Variant variant, const string& prefix, bool create_tree)
 
 Output::~Output()
 {
+    save();
     flock(m_lock_fd, LOCK_UN);
     close(m_lock_fd);
     remove((m_prefix + ".lock").c_str());
@@ -71,34 +73,29 @@ void Output::add_result(unsigned n, float result, const Board& bd,
                         double cpu_white, const string& sgf,
                         const array<bool, Board::max_game_moves>& is_real_move)
 {
-    lock_guard<mutex> lock(m_mutex);
-    unsigned nu_fast_open = 0;
-    for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
-        if (! is_real_move[i])
-            ++nu_fast_open;
-    ostringstream line;
-    line << n << '\t'
-         << setprecision(4) << result << '\t'
-         << bd.get_nu_moves() << '\t'
-         << player_black << '\t'
-         << setprecision(5) << cpu_black << '\t'
-         << cpu_white << '\t'
-         << nu_fast_open;
-    m_games.insert(make_pair(n, line.str()));
     {
-        ofstream out(m_prefix + ".dat");
-        out << "# Game\tResult\tLength\tPlayerB\tCpuB\tCpuW\tFast\n";
-        for (auto& i : m_games)
-            out << i.second << '\n';
+        lock_guard<mutex> lock(m_mutex);
+        unsigned nu_fast_open = 0;
+        for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
+            if (! is_real_move[i])
+                ++nu_fast_open;
+        ostringstream line;
+        line << n << '\t'
+             << setprecision(4) << result << '\t'
+             << bd.get_nu_moves() << '\t'
+             << player_black << '\t'
+             << setprecision(5) << cpu_black << '\t'
+             << cpu_white << '\t'
+             << nu_fast_open;
+        m_games.insert(make_pair(n, line.str()));
+        m_sgf_buffer << sgf;
+        if (m_create_tree)
+            m_output_tree.add_game(bd, player_black, result, is_real_move);
     }
+    if (m_timer() > m_save_interval)
     {
-        ofstream out(m_prefix + ".blksgf", ios::app);
-        out << sgf;
-    }
-    if (m_create_tree)
-    {
-        m_output_tree.add_game(bd, player_black, result, is_real_move);
-        m_output_tree.save(m_prefix + "-tree.blksgf");
+        save();
+        m_timer.reset();
     }
 }
 
@@ -123,6 +120,24 @@ unsigned Output::get_next()
        ++m_next;
     while (m_games.count(m_next) != 0);
     return n;
+}
+
+void Output::save()
+{
+    lock_guard<mutex> lock(m_mutex);
+    {
+        ofstream out(m_prefix + ".dat");
+        out << "# Game\tResult\tLength\tPlayerB\tCpuB\tCpuW\tFast\n";
+        for (auto& i : m_games)
+            out << i.second << '\n';
+    }
+    {
+        ofstream out(m_prefix + ".blksgf", ios::app);
+        out << m_sgf_buffer.str();
+        m_sgf_buffer.str("");
+    }
+    if (m_create_tree)
+        m_output_tree.save(m_prefix + "-tree.blksgf");
 }
 
 //-----------------------------------------------------------------------------

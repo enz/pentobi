@@ -11,6 +11,11 @@
 #include <map>
 #include <mutex>
 #include "OutputTree.h"
+#include "libboardgame_util/Timer.h"
+#include "libboardgame_util/WallTimeSource.h"
+
+using libboardgame_util::Timer;
+using libboardgame_util::WallTimeSource;
 
 //-----------------------------------------------------------------------------
 
@@ -21,6 +26,8 @@ public:
     Output(Variant variant, const string& prefix, bool fastopen);
 
     ~Output();
+
+    void set_save_interval(double seconds) { m_save_interval = seconds; }
 
     void add_result(unsigned n, float result, const Board& bd,
                     unsigned player_black, double cpu_black, double cpu_white,
@@ -48,6 +55,16 @@ private:
     map<unsigned, string> m_games;
 
     OutputTree m_output_tree;
+
+    ostringstream m_sgf_buffer;
+
+    WallTimeSource m_time_source;
+
+    Timer m_timer;
+
+    double m_save_interval = 60;
+
+    void save();
 };
 
 //-----------------------------------------------------------------------------
