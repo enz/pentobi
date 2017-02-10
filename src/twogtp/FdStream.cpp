@@ -27,7 +27,7 @@ FdInBuf::FdInBuf(int fd, size_t buf_size)
     : m_fd(fd),
       m_buf(buf_size + put_back)
 {
-    auto end = &(*m_buf.end());
+    auto end = &(*m_buf.begin()) + m_buf.size();
     setg(end, end, end);
 }
 
