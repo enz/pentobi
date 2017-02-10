@@ -22,7 +22,6 @@ Android version:
   initial position contains either a setup or a comment.
 * Game/Find Move now behaves like in the desktop version and will cycle
   through all legal moves if called repeatedly.
-* Games can be opened from clipboard.
 * Added a light theme in addition to the default dark theme.
 * Computer color settings will no longer be changed on new game if computer
   was set to play no color before.
