@@ -150,6 +150,10 @@
         <source>Game ends in a tie between Yellow, Red and Green.</source>
         <translation>Spiel endet in einem Unentschieden zwischen Gelb, Rot und Grün.</translation>
     </message>
+    <message>
+        <source>Clipboard empty</source>
+        <translation>Zwischenablage ist leer</translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
@@ -479,6 +483,10 @@
     <message>
         <source>Pentobi</source>
         <translation>Pentobi</translation>
+    </message>
+    <message>
+        <source>Open From &amp;Clipboard</source>
+        <translation>Aus &amp;Zwischenablage öffnen</translation>
     </message>
 </context>
 </TS>

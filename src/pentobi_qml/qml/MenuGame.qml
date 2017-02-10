@@ -106,6 +106,10 @@ Menu {
         onTriggered: openDialog.open()
     }
     MenuItem {
+        text: qsTr("Open From &Clipboard")
+        onTriggered: Logic.openFromClipboard()
+    }
+    MenuItem {
         text: qsTr("&Save As...")
         enabled: ! gameModel.isGameEmpty
         visible: ! isAndroid || enabled

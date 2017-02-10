@@ -9,6 +9,8 @@
 #include <cerrno>
 #include <cstring>
 #include <fstream>
+#include <QClipboard>
+#include <QGuiApplication>
 #include <QDebug>
 #include <QSettings>
 #include "libboardgame_sgf/SgfUtil.h"
@@ -465,7 +467,6 @@ bool GameModel::open(istream& in)
         if (variant != m_gameVariant)
             initGameVariant(variant);
         goEnd();
-        updateProperties();
         QSettings settings;
         settings.remove("autosave");
     }
@@ -486,6 +487,19 @@ bool GameModel::open(const QString& file)
         return false;
     }
     return open(in);
+}
+
+bool GameModel::openFromClipboard()
+{
+    auto text = QGuiApplication::clipboard()->text();
+    if (text.isEmpty())
+    {
+        m_lastInputOutputError = tr("Clipboard empty");
+        return false;
+    }
+    istringstream in(text.toLocal8Bit().constData());
+    return open(in);
+    return false;
 }
 
 QQmlListProperty<PieceModel> GameModel::pieceModels0()

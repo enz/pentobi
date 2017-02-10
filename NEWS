@@ -16,6 +16,7 @@ Desktop version:
 Android version:
 
 * New menu item View/Fullscreen.
+* New menu item Game/Open From Clipboard.
 * Default folder for Open/Save is now /sdcard.
 * Set minimum Android version to 4.1 because Qt 5.6 crashes on Android 2.3.
 

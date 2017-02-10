@@ -119,6 +119,8 @@ public:
 
     Q_INVOKABLE bool open(const QString& file);
 
+    Q_INVOKABLE bool openFromClipboard();
+
     Q_INVOKABLE void makeMainVar();
 
     Q_INVOKABLE void moveDownVar();
