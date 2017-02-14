@@ -155,6 +155,12 @@ Item
     PieceManipulator {
         id: pieceManipulator
 
+        innerSize: {
+            if (board.isTrigon) return board.gridHeight * 6.2
+            if (board.isNexos) return board.gridHeight * 8.9
+            if (board.isCallisto) return board.gridHeight * 5.5
+            return board.gridHeight * 6.5
+        }
         legal: {
             if (pickedPiece === null) return false
             // Need explicit dependencies on x, y, pieceModel.state
@@ -167,7 +173,6 @@ Item
                                         pickedPiece.pieceModel.state,
                                         board.mapToGame(pos))
         }
-        width: 0.56 * board.width; height: width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
         onPiecePlayed: {

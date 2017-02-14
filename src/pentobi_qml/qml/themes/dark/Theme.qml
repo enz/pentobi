@@ -23,10 +23,10 @@ QtObject {
     property real toPlayColorLighter: 1.7
 
     function getImage(name) {
-        if (name.startsWith("frame-")
+        if (name === "flip" || name === "rotate"
+                || name.startsWith("frame-")
                 || name.startsWith("junction-")
                 || name.startsWith("linesegment-")
-                || name.startsWith("piece-manipulator")
                 || name.startsWith("square-")
                 || name.startsWith("triangle-"))
             return "themes/light/" + name + ".svg"
