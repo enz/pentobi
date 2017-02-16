@@ -6,10 +6,9 @@ Desktop version:
 * Install AppData file to /usr/share/metainfo instead of /usr/share/appdata
   according to the Debian AppStream guidelines.
 * Added an AppStream file for the KDE thumbnailer.
-* Disabled tests in KDE thumbnailer subdirectory because some versions of
-  KDECMakeSettings automatically add a test that globally checks all
-  appstream files in the project and fails if they don't use reverse domain
-  IDs (and would even fail if they did because of bugs in the test).
+* Disabled AppStream tests added by KDECMakeSettings that are broken in some
+  versions of KDE and made the project tests fail.
+* Use same app icon as in the Android version.
 
 Android version:
 
