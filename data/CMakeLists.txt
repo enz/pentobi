@@ -15,6 +15,16 @@ add_custom_target(
   COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-16.svg application-x-blokus-sgf-16.png
   DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-16.svg
   )
+add_custom_target(
+  application-x-blokus-sgf-32.png ALL
+  COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-32.svg application-x-blokus-sgf-32.png
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-32.svg
+  )
+add_custom_target(
+  application-x-blokus-sgf-64.png ALL
+  COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-64.svg application-x-blokus-sgf-64.png
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-64.svg
+  )
 
 configure_file(pentobi.desktop.in pentobi.desktop @ONLY)
 configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
@@ -36,6 +46,12 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/mimetypes)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-16.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/mimetypes
+  RENAME application-x-blokus-sgf.png)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-32.png
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/mimetypes
+  RENAME application-x-blokus-sgf.png)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-64.png
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/mimetypes
   RENAME application-x-blokus-sgf.png)
 install(FILES application-x-blokus-sgf.svg
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/mimetypes)

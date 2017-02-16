@@ -40,6 +40,7 @@ Desktop version:
 * Disabled AppStream tests added by KDECMakeSettings that are broken in some
   versions of KDE and made the project tests fail.
 * Use same app icon as in the Android version.
+* Install MIME icons with size 32x32 and 64x64.
 
 Android version:
 
