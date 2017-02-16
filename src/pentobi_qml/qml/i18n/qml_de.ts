@@ -1061,7 +1061,7 @@
         <translation>Pentobi</translation>
     </message>
     <message>
-        <source>Open From &amp;Clipboard</source>
+        <source>Open from &amp;Clipboard</source>
         <translation>Aus &amp;Zwischenablage öffnen</translation>
     </message>
 </context>

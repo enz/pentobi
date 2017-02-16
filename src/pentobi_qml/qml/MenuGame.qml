@@ -133,7 +133,7 @@ Menu {
         }
     }
     MenuItem {
-        text: qsTr("Open From &Clipboard")
+        text: qsTr("Open from &Clipboard")
         onTriggered: Logic.openClipboard()
     }
     MenuItem {
