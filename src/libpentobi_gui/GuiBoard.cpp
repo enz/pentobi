@@ -12,10 +12,12 @@
 
 #include <QApplication>
 #include <QMouseEvent>
+#include "libboardgame_base/GeometryUtil.h"
 #include "libboardgame_base/Transform.h"
 
 using namespace std;
 using libboardgame_base::Transform;
+using libboardgame_base::geometry_util::type_match_offset;
 using libpentobi_base::Geometry;
 using libpentobi_base::MovePoints;
 using libpentobi_base::PiecePoints;
@@ -422,39 +424,8 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
         return;
     }
     auto& geo = m_bd.get_geometry();
-    auto pieceSet = m_bd.get_piece_set();
-    unsigned old_point_type = geo.get_point_type(offset);
-    CoordPoint type_matched_offset = offset;
-    if (pieceSet == PieceSet::trigon)
-    {
-        // Offset must match the point type (triangle up/down) of
-        // CoordPoint(0, 0) after the piece transformation
-        unsigned point_type = m_selectedPieceTransform->get_new_point_type();
-        bool hasLeft = geo.is_onboard(CoordPoint(offset.x - 1, offset.y));
-        bool hasRight = geo.is_onboard(CoordPoint(offset.x + 1, offset.y));
-        if (old_point_type != point_type)
-        {
-            if ((point_type == 0 && hasRight)
-                    || (point_type == 1 && ! hasLeft))
-                ++type_matched_offset.x;
-            else
-                --type_matched_offset.x;
-        }
-    }
-    if (pieceSet == PieceSet::nexos)
-    {
-        // Offset must be a junction
-        if (old_point_type == 1) // horiz. segment
-            --type_matched_offset.x;
-        else if (old_point_type == 2) // vert. segment
-            --type_matched_offset.y;
-        else if (old_point_type == 3) // hole
-        {
-            --type_matched_offset.x;
-            --type_matched_offset.y;
-        }
-    }
-    m_selectedPieceOffset = type_matched_offset;
+    m_selectedPieceOffset =
+            offset + type_match_offset(geo, geo.get_point_type(offset));
 }
 
 void GuiBoard::setSelectedPiecePoints(Move mv)
