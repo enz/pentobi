@@ -100,7 +100,6 @@ private:
 
         CompressedRange(unsigned begin, unsigned size)
         {
-            LIBBOARDGAME_ASSERT(begin < max_move_lists_sum_length);
             LIBBOARDGAME_ASSERT(begin + size <= max_move_lists_sum_length);
             static_assert(max_move_lists_sum_length < (1 << 24), "");
             LIBBOARDGAME_ASSERT(size < (1 << 8));
