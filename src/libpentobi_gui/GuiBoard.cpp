@@ -419,8 +419,12 @@ void GuiBoard::setSelectedPieceOffset(const QMouseEvent& event)
 void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
 {
     auto& geo = m_bd.get_geometry();
-    m_selectedPieceOffset =
-            offset + type_match_offset(geo, geo.get_point_type(offset));
+    auto transformPointType = m_selectedPieceTransform->get_new_point_type();
+    auto newOffset =
+            offset - type_match_offset(geo, geo.get_point_type(offset))
+            + type_match_offset(geo, transformPointType);
+    if (geo.is_onboard(newOffset))
+        m_selectedPieceOffset = newOffset;
 }
 
 void GuiBoard::setSelectedPiecePoints(Move mv)
