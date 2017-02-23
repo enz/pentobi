@@ -6,16 +6,19 @@
         <file>help/C/pentobi/board_callisto.png</file>
         <file>help/C/pentobi/board_classic.png</file>
         <file>help/C/pentobi/board_duo.png</file>
+        <file>help/C/pentobi/board_gembloq.jpg</file>
         <file>help/C/pentobi/board_nexos.png</file>
         <file>help/C/pentobi/board_trigon.jpg</file>
         <file>help/C/pentobi/callisto_rules.html</file>
         <file>help/C/pentobi/classic_rules.html</file>
         <file>help/C/pentobi/duo_rules.html</file>
+        <file>help/C/pentobi/gembloq_rules.html</file>
         <file>help/C/pentobi/index.html</file>
         <file>help/C/pentobi/junior_rules.html</file>
         <file>help/C/pentobi/license.html</file>
         <file>help/C/pentobi/nexos_rules.html</file>
         <file>help/C/pentobi/pieces_callisto.png</file>
+        <file>help/C/pentobi/pieces_gembloq.jpg</file>
         <file>help/C/pentobi/pieces_junior.png</file>
         <file>help/C/pentobi/pieces_nexos.png</file>
         <file>help/C/pentobi/pieces.png</file>
@@ -23,6 +26,7 @@
         <file>help/C/pentobi/position_callisto.png</file>
         <file>help/C/pentobi/position_classic.png</file>
         <file>help/C/pentobi/position_duo.png</file>
+        <file>help/C/pentobi/position_gembloq.jpg</file>
         <file>help/C/pentobi/position_nexos.png</file>
         <file>help/C/pentobi/position_trigon.jpg</file>
         <file>help/C/pentobi/rating.jpg</file>
@@ -36,6 +40,7 @@
         <file>help/de/pentobi/callisto_rules.html</file>
         <file>help/de/pentobi/classic_rules.html</file>
         <file>help/de/pentobi/duo_rules.html</file>
+        <file>help/de/pentobi/gembloq_rules.html</file>
         <file>help/de/pentobi/index.html</file>
         <file>help/de/pentobi/junior_rules.html</file>
         <file>help/de/pentobi/license.html</file>

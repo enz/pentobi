@@ -7,7 +7,7 @@
 <body>
 <h1>Pentobi SGF Files</h1>
 <div style="font-size:small">Author: Markus Enzenberger<br>
-Last modified: 2016-12-11</div>
+Last modified: 2017-02-23</div>
 <p>This document describes the file format for <a href=
 "http://en.wikipedia.org/wiki/Blokus">Blokus</a> game records as used by the
 program <a href="http://pentobi.sourceforge.net">Pentobi</a>. The most recent
@@ -48,7 +48,8 @@ number is used as the value for the <tt>GM</tt> property. Currently, the
 following strings are used: Blokus, Blokus Two-Player, Blokus Three-Player,
 Blokus Duo, Blokus Trigon, Blokus Trigon Two-Player, Blokus Trigon
 Three-Player, Blokus Junior, Nexos, Nexos Two-Player, Callisto, Callisto
-Two-Player, Callisto Three-Player.</p>
+Two-Player, Callisto Three-Player, GembloQ, GembloQ Two-Player, GembloQ
+Three-Player, GembloQ Two-Player Four-Color.</p>
 The strings are case-sensitive, words are separated by exactly one space and no
 additional whitespace at the beginning or end of the string is allowed.
 <h2>Color and Player Properties</h2>
@@ -85,8 +86,7 @@ whitespaces. Note that, unlike the common convention in the game of Go, the
 letter 'i' is used.</p>
 <p>If there are more than 26 columns, the columns continue with 'aa', 'ab',
 ..., 'ba', 'bb', ... More than 26 columns are presently required for Trigon and
-could also be required for future game variants on rectangular boards larger
-than 26×26.</p>
+GembloQ.</p>
 <p>For Trigon, hexagonal boards are mapped to rectangular coordinates as in the
 following example of a hexagon with edge size 3:</p>
 <pre>
@@ -109,6 +109,15 @@ with vertical line segments and holes:</p>
        2 |   |   |
        1 + - + - + -
          a b c d e f
+</pre>
+<p>In GembloQ, each square field is divided into four triangles with their own
+coordinates, like in this example:</p>
+<pre>
+       4 | / | \ | / | \ | /
+       3 | \ | / | \ | / | \
+       2 | / | \ | / | \ | /
+       1 | \ | / | \ | / | \
+          a b c d e f g h i
 </pre>
 <h2>Move Properties</h2>
 <p>The value of a move property is a string with the coordinates of the played
