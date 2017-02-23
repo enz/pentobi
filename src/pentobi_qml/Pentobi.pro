@@ -64,6 +64,8 @@ SOURCES += \
     ../libpentobi_base/CallistoGeometry.cpp \
     ../libpentobi_base/Color.cpp \
     ../libpentobi_base/Game.cpp \
+    ../libpentobi_base/GembloQGeometry.cpp \
+    ../libpentobi_base/GembloQTransform.cpp \
     ../libpentobi_base/NexosGeometry.cpp \
     ../libpentobi_base/NodeUtil.cpp \
     ../libpentobi_base/PentobiSgfUtil.cpp \
@@ -71,6 +73,7 @@ SOURCES += \
     ../libpentobi_base/PieceInfo.cpp \
     ../libpentobi_base/PieceTransforms.cpp \
     ../libpentobi_base/PieceTransformsClassic.cpp \
+    ../libpentobi_base/PieceTransformsGembloQ.cpp \
     ../libpentobi_base/PieceTransformsTrigon.cpp \
     ../libpentobi_base/PointState.cpp \
     ../libpentobi_base/StartingPoints.cpp \
@@ -169,6 +172,8 @@ HEADERS += \
     ../libpentobi_base/ColorMap.h \
     ../libpentobi_base/ColorMove.h \
     ../libpentobi_base/Game.h \
+    ../libpentobi_base/GembloQGeometry.h \
+    ../libpentobi_base/GembloQTransform.h \
     ../libpentobi_base/Geometry.h \
     ../libpentobi_base/Grid.h \
     ../libpentobi_base/Marker.h \
@@ -185,6 +190,7 @@ HEADERS += \
     ../libpentobi_base/PieceMap.h \
     ../libpentobi_base/PieceTransforms.h \
     ../libpentobi_base/PieceTransformsClassic.h \
+    ../libpentobi_base/PieceTransformsGembloQ.h \
     ../libpentobi_base/PieceTransformsTrigon.h \
     ../libpentobi_base/PlayerBase.h \
     ../libpentobi_base/Point.h \
