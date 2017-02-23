@@ -61,6 +61,13 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
     switch (bc.get_board_type())
     {
     case BoardType::duo:
+        if (nu_moves < 2 * nu_colors)
+            filter_min_size(bc, 5, is_piece_considered);
+        else if (nu_moves < 3 * nu_colors)
+            filter_min_size(bc, 4, is_piece_considered);
+        else if (nu_moves < 5 * nu_colors)
+            filter_min_size(bc, 3, is_piece_considered);
+        break;
     case BoardType::gembloq_2:
         if (nu_moves < nu_colors)
         {
