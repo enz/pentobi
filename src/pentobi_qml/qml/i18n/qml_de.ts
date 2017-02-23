@@ -262,6 +262,10 @@
         <source>Invalid Blokus SGF file. (%1)</source>
         <translation>Ungültige Blokus-SGF-Datei. (%1)</translation>
     </message>
+    <message>
+        <source>Unsupported game variant.</source>
+        <translation>Nicht unterstützte Spielvariante.</translation>
+    </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>
@@ -776,7 +780,7 @@
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
-        <translation type="unfinished">Aus &amp;Zwischenablage öffnen</translation>
+        <translation>Aus &amp;Zwischenablage öffnen</translation>
     </message>
 </context>
 <context>

@@ -466,7 +466,8 @@ Variant GameModel::getInitialGameVariant()
     QSettings settings;
     auto variantString = settings.value("variant", "").toString();
     Variant variant;
-    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
+    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant)
+            || get_piece_set(variant) == PieceSet::gembloq) // GembloQ not yet supported
         variant = Variant::duo;
     return variant;
 }
@@ -822,6 +823,12 @@ bool GameModel::openStream(istream& in)
         TreeReader reader;
         reader.read(in);
         auto root = reader.get_tree_transfer_ownership();
+        if (get_piece_set(PentobiTree::get_variant(*root)) == PieceSet::gembloq)
+        {
+            // GembloQ not yet supported
+            m_lastInputOutputError = QString(tr("Unsupported game variant."));
+            return false;
+        }
         preparePositionChange();
         m_game.init(root);
         auto charSet = m_game.get_charset();
