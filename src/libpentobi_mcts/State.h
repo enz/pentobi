@@ -434,10 +434,15 @@ inline void State::play_in_tree(Move mv)
             m_bd.play<6, 22>(to_play, mv);
             update_playout_features<6, 22>(to_play, mv);
         }
-        else
+        else if (m_max_piece_size == 7)
         {
             m_bd.play<7, 12>(to_play, mv);
             update_playout_features<7, 12>(to_play, mv);
+        }
+        else
+        {
+            m_bd.play<22, 44>(to_play, mv);
+            update_playout_features<22, 44>(to_play, mv);
         }
     }
     else
@@ -467,11 +472,19 @@ inline void State::play_playout(Move mv)
         if (! m_is_symmetry_broken)
             update_symmetry_broken<6>(mv);
     }
-    else
+    else if (m_max_piece_size == 7)
     {
         m_bd.play<7, 12>(to_play, mv);
         update_playout_features<7, 12>(to_play, mv);
         // No game variant with piece size 7 uses m_is_symmetry_broken
+        LIBBOARDGAME_ASSERT(m_is_symmetry_broken);
+    }
+    else
+    {
+        m_bd.play<22, 44>(to_play, mv);
+        update_playout_features<22, 44>(to_play, mv);
+        if (! m_is_symmetry_broken)
+            update_symmetry_broken<22>(mv);
     }
     ++m_nu_new_moves[to_play];
     m_last_move[to_play] = mv;

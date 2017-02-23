@@ -170,9 +170,12 @@ Move Player::genmove(const Board& bd, Color c)
             max_count = counts_trigon[level - 1];
             break;
         case BoardType::nexos:
+        case BoardType::gembloq: // Not measured
+        case BoardType::gembloq_3: // Not measured
             max_count = counts_nexos[level - 1];
             break;
         case BoardType::callisto_2:
+        case BoardType::gembloq_2: // Not measured
             max_count = counts_callisto_2[level - 1];
             break;
         }
@@ -190,6 +193,7 @@ Move Player::genmove(const Board& bd, Color c)
                 weight = m_weight_max_count_classic[player_move];
                 break;
             case BoardType::duo:
+            case BoardType::gembloq_2:
                 weight = m_weight_max_count_duo[player_move];
                 break;
             case BoardType::callisto:
@@ -202,6 +206,8 @@ Move Player::genmove(const Board& bd, Color c)
             case BoardType::trigon:
             case BoardType::trigon_3:
             case BoardType::nexos:
+            case BoardType::gembloq:
+            case BoardType::gembloq_3:
                 weight = m_weight_max_count_trigon[player_move];
                 break;
             }
@@ -312,6 +318,9 @@ Rating Player::get_rating(Variant variant, unsigned level)
     case BoardType::nexos:
     case BoardType::callisto: // Not measured
     case BoardType::callisto_3: // Not measured
+    case BoardType::gembloq: // Not measured
+    case BoardType::gembloq_2: // Not measured
+    case BoardType::gembloq_3: // Not measured
         {
             // Anchor 1000, scale 0.60
             static float elo[Player::max_supported_level] =

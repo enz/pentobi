@@ -44,9 +44,8 @@ public:
     /** The maximum sum of the sizes of all precomputed move lists in any
         game variant. */
     static const unsigned max_move_lists_sum_length =
-            adj_status_nu_adj == 4 ?
-                832444 : adj_status_nu_adj == 5 ? 1425934 : 2769060;
-    static_assert(adj_status_nu_adj >= 4 && adj_status_nu_adj <= 6, "");
+            adj_status_nu_adj == 5 ? 1675561 : 3075824;
+    static_assert(adj_status_nu_adj == 5 || adj_status_nu_adj == 6, "");
 
     /** The range of values for the adjacent status. */
     static const unsigned nu_adj_status = 1 << adj_status_nu_adj;

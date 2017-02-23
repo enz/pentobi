@@ -284,10 +284,12 @@ inline Piece BoardConst::get_move_piece(Move mv) const
         return get_move_piece<5>(mv);
     else if (m_max_piece_size == 6)
         return get_move_piece<6>(mv);
+    else if (m_max_piece_size == 7)
+        return get_move_piece<7>(mv);
     else
     {
-        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
-        return get_move_piece<7>(mv);
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
+        return get_move_piece<22>(mv);
     }
 }
 
@@ -303,10 +305,15 @@ inline Range<const Point> BoardConst::get_move_points(Move mv) const
         auto& info = get_move_info<6>(mv);
         return Range<const Point>(info.begin(), info.end());
     }
+    else if (m_max_piece_size == 7)
+    {
+        auto& info = get_move_info<7>(mv);
+        return Range<const Point>(info.begin(), info.end());
+    }
     else
     {
-        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
-        auto& info = get_move_info<7>(mv);
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
+        auto& info = get_move_info<22>(mv);
         return Range<const Point>(info.begin(), info.end());
     }
 }
@@ -317,10 +324,12 @@ inline const Point* BoardConst::get_move_points_begin(Move mv) const
         return get_move_points_begin<5>(mv);
     else if (m_max_piece_size == 6)
         return get_move_points_begin<6>(mv);
+    else if (m_max_piece_size == 7)
+        return get_move_points_begin<7>(mv);
     else
     {
-        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
-        return get_move_points_begin<7>(mv);
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
+        return get_move_points_begin<22>(mv);
     }
 }
 

@@ -11,6 +11,7 @@
 #include "Variant.h"
 
 #include "CallistoGeometry.h"
+#include "GembloQGeometry.h"
 #include "NexosGeometry.h"
 #include "TrigonGeometry.h"
 #include "libboardgame_base/RectGeometry.h"
@@ -74,6 +75,16 @@ BoardType get_board_type(Variant variant)
     case Variant::callisto_3:
         result = BoardType::callisto_3;
         break;
+    case Variant::gembloq:
+    case Variant::gembloq_2_4:
+        result = BoardType::gembloq;
+        break;
+    case Variant::gembloq_2:
+        result = BoardType::gembloq_2;
+        break;
+    case Variant::gembloq_3:
+        result = BoardType::gembloq_3;
+        break;
     }
     return result;
 }
@@ -107,6 +118,15 @@ const Geometry& get_geometry(BoardType board_type)
     case BoardType::callisto_3:
         result = &CallistoGeometry::get(3);
         break;
+    case BoardType::gembloq:
+        result = &GembloQGeometry::get(4);
+        break;
+    case BoardType::gembloq_2:
+        result = &GembloQGeometry::get(2);
+        break;
+    case BoardType::gembloq_3:
+        result = &GembloQGeometry::get(3);
+        break;
     }
     return *result;
 }
@@ -124,10 +144,12 @@ Color::IntType get_nu_colors(Variant variant)
     case Variant::duo:
     case Variant::junior:
     case Variant::callisto_2:
+    case Variant::gembloq_2:
         result = 2;
         break;
     case Variant::trigon_3:
     case Variant::callisto_3:
+    case Variant::gembloq_3:
         result = 3;
         break;
     case Variant::classic:
@@ -138,6 +160,8 @@ Color::IntType get_nu_colors(Variant variant)
     case Variant::nexos:
     case Variant::nexos_2:
     case Variant::callisto:
+    case Variant::gembloq:
+    case Variant::gembloq_2_4:
         result = 4;
         break;
     }
@@ -155,17 +179,21 @@ Color::IntType get_nu_players(Variant variant)
     case Variant::trigon_2:
     case Variant::nexos_2:
     case Variant::callisto_2:
+    case Variant::gembloq_2:
+    case Variant::gembloq_2_4:
         result = 2;
         break;
     case Variant::classic_3:
     case Variant::trigon_3:
     case Variant::callisto_3:
+    case Variant::gembloq_3:
         result = 3;
         break;
     case Variant::classic:
     case Variant::trigon:
     case Variant::nexos:
     case Variant::callisto:
+    case Variant::gembloq:
         result = 4;
         break;
     }
@@ -199,6 +227,12 @@ PieceSet get_piece_set(Variant variant)
     case Variant::callisto_2:
     case Variant::callisto_3:
         result = PieceSet::callisto;
+        break;
+    case Variant::gembloq:
+    case Variant::gembloq_2:
+    case Variant::gembloq_2_4:
+    case Variant::gembloq_3:
+        result = PieceSet::gembloq;
         break;
     }
     return result;
@@ -261,8 +295,15 @@ void get_transforms(Variant variant,
         inv_transforms.emplace_back(new PointTransfRot270Refl<Point>);
         break;
     case BoardType::classic:
-    case BoardType::trigon_3:
+    case BoardType::gembloq:
+    case BoardType::gembloq_3:
     case BoardType::nexos:
+        break;
+    case BoardType::trigon_3:
+        // Can we use the same as for BoardType::trigon?
+        break;
+    case BoardType::gembloq_2:
+        // Rot270Refl for GembloQ not yet implemented
         break;
     }
 }
@@ -270,7 +311,8 @@ void get_transforms(Variant variant,
 bool has_central_symmetry(Variant variant)
 {
     return variant == Variant::duo || variant == Variant::junior
-            || variant == Variant::trigon_2 || variant == Variant::callisto_2;
+            || variant == Variant::trigon_2 || variant == Variant::callisto_2
+            || variant == Variant::gembloq_2;
 }
 
 bool parse_variant(const string& s, Variant& variant)
@@ -302,6 +344,14 @@ bool parse_variant(const string& s, Variant& variant)
         variant = Variant::callisto_2;
     else if (t == "callisto three-player")
         variant = Variant::callisto_3;
+    else if (t == "gembloq")
+        variant = Variant::gembloq;
+    else if (t == "gembloq two-player")
+        variant = Variant::gembloq_2;
+    else if (t == "gembloq two-player four-color")
+        variant = Variant::gembloq_2_4;
+    else if (t == "gembloq three-player")
+        variant = Variant::gembloq_3;
     else
         return false;
     return true;
@@ -336,6 +386,14 @@ bool parse_variant_id(const string& s, Variant& variant)
         variant = Variant::callisto_2;
     else if (t == "callisto_3" || t == "ca3")
         variant = Variant::callisto_3;
+    else if (t == "gembloq" || t == "g")
+        variant = Variant::gembloq;
+    else if (t == "gembloq_2" || t == "g2")
+        variant = Variant::gembloq_2;
+    else if (t == "gembloq_2_4" || t == "g24")
+        variant = Variant::gembloq_2_4;
+    else if (t == "gembloq_3" || t == "g3")
+        variant = Variant::gembloq_3;
     else
         return false;
     return true;
@@ -385,6 +443,18 @@ const char* to_string(Variant variant)
     case Variant::callisto_3:
         result = "Callisto Three-Player";
         break;
+    case Variant::gembloq:
+        result = "GembloQ";
+        break;
+    case Variant::gembloq_2:
+        result = "GembloQ Two-Player";
+        break;
+    case Variant::gembloq_2_4:
+        result = "GembloQ Two-Player Four-Color";
+        break;
+    case Variant::gembloq_3:
+        result = "GembloQ Three-Player";
+        break;
     }
     return result;
 }
@@ -432,6 +502,18 @@ const char* to_string_id(Variant variant)
         break;
     case Variant::callisto_3:
         result = "callisto_3";
+        break;
+    case Variant::gembloq:
+        result = "gembloq";
+        break;
+    case Variant::gembloq_2:
+        result = "gembloq_2";
+        break;
+    case Variant::gembloq_2_4:
+        result = "gembloq_2_4";
+        break;
+    case Variant::gembloq_3:
+        result = "gembloq_3";
         break;
     }
     return result;

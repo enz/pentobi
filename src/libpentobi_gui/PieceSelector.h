@@ -52,9 +52,9 @@ protected:
     void paintEvent(QPaintEvent* event) override;
 
 private:
-    static const unsigned maxColumns = 45;
+    static const unsigned maxColumns = 91;
 
-    static const unsigned maxRows = 9;
+    static const unsigned maxRows = 10;
 
     const Board& m_bd;
 

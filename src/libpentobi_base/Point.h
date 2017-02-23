@@ -15,10 +15,8 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-/** Point (coordinate of on-board field) for Blokus game variants.
-    Supports RectGeometry up to size 20, TrigonGeometry up to edge size 9,
-    and NexosGeometry up to size 13. */
-typedef libboardgame_base::Point<486, 35, 25, unsigned short> Point;
+/** Point (coordinate of on-board field) for Blokus game variants. */
+typedef libboardgame_base::Point<1564, 56, 28, unsigned short> Point;
 
 //-----------------------------------------------------------------------------
 

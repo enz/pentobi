@@ -310,6 +310,11 @@ public:
     const ArrayList<Point,StartingPoints::max_starting_points>&
     get_starting_points(Color c) const;
 
+    /** Number of starting points the first move needs to cover.
+        This is needed for GembloQ Three-Player to ensure that the first
+        player covers all four triangles of the starting square. */
+    unsigned get_needed_starting_points() const { return m_needed_starting_points; }
+
     /** Get the second color in game variants in which a player plays two
         colors.
         @return The second color of the player that plays color c, or c if
@@ -388,6 +393,9 @@ private:
 
     /** Caches m_bc->get_max_adj_attach(). */
     unsigned m_max_adj_attach;
+
+    /** See get_needed_starting_points() */
+    unsigned m_needed_starting_points;
 
     /** Bonus for playing all pieces. */
     ScoreType m_bonus_all_pieces;

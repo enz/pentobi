@@ -61,7 +61,13 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
     switch (bc.get_board_type())
     {
     case BoardType::duo:
-        if (nu_moves < 2 * nu_colors)
+    case BoardType::gembloq_2:
+        if (nu_moves < nu_colors)
+        {
+            is_piece_considered.fill(false);
+            set_piece_considered(bc, "I5", is_piece_considered);
+        }
+        else if (nu_moves < 2 * nu_colors)
             filter_min_size(bc, 5, is_piece_considered);
         else if (nu_moves < 3 * nu_colors)
             filter_min_size(bc, 4, is_piece_considered);
@@ -114,6 +120,37 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
         else if (nu_moves < 7 * nu_colors)
             filter_min_size(bc, 4, is_piece_considered);
         else if (nu_moves < 9 * nu_colors)
+            filter_min_size(bc, 3, is_piece_considered);
+        break;
+    case BoardType::gembloq:
+        if (nu_moves < nu_colors)
+        {
+            is_piece_considered.fill(false);
+            set_piece_considered(bc, "I5", is_piece_considered);
+        }
+        else if (nu_moves < 2 * nu_colors)
+            filter_min_size(bc, 5, is_piece_considered);
+        else if (nu_moves < 3 * nu_colors)
+            filter_min_size(bc, 5, is_piece_considered);
+        else if (nu_moves < 5 * nu_colors)
+            filter_min_size(bc, 4, is_piece_considered);
+        else if (nu_moves < 7 * nu_colors)
+            filter_min_size(bc, 3, is_piece_considered);
+        break;
+    case BoardType::gembloq_3:
+        if (nu_moves < nu_colors)
+        {
+            is_piece_considered.fill(false);
+            set_piece_considered(bc, "I5", is_piece_considered);
+            set_piece_considered(bc, "L5", is_piece_considered);
+        }
+        else if (nu_moves < 2 * nu_colors)
+            filter_min_size(bc, 5, is_piece_considered);
+        else if (nu_moves < 3 * nu_colors)
+            filter_min_size(bc, 5, is_piece_considered);
+        else if (nu_moves < 5 * nu_colors)
+            filter_min_size(bc, 4, is_piece_considered);
+        else if (nu_moves < 7 * nu_colors)
             filter_min_size(bc, 3, is_piece_considered);
         break;
     case BoardType::nexos:

@@ -108,14 +108,6 @@
         <source>Show next page in history</source>
         <translation>Die nächste Seite in der Chronik anzeigen</translation>
     </message>
-    <message>
-        <source>Contents</source>
-        <translation>Inhalt</translation>
-    </message>
-    <message>
-        <source>Show table of contents</source>
-        <translation>Das Inhaltsverzeichnis anzeigen</translation>
-    </message>
 </context>
 <context>
     <name>InitialRatingDialog</name>

@@ -43,13 +43,13 @@ public:
     /** On-board diagonal neighbors of a point
         Currently supports up to nine diagonal points as used on boards
         for Blokus Trigon. */
-    typedef ArrayList<Point, 9, unsigned short> DiagList;
+    typedef ArrayList<Point, 11, unsigned short> DiagList;
 
     /** Adjacent neighbors of a coordinate. */
     typedef ArrayList<CoordPoint, 4> AdjCoordList;
 
     /** Diagonal neighbors of a coordinate. */
-    typedef ArrayList<CoordPoint, 9> DiagCoordList;
+    typedef ArrayList<CoordPoint, 11> DiagCoordList;
 
     class Iterator
     {
@@ -70,8 +70,14 @@ public:
 
     virtual ~Geometry();
 
+    /** Get points that share an edge with this point. */
     virtual AdjCoordList get_adj_coord(int x, int y) const = 0;
 
+    /** Get points that share a corner but not an edge with this point.
+        The order does not matter logically but it is better to put far away
+        points first because BoardConst uses the forbidden status of the first
+        points during move generation and far away points can reject more
+        moves. */
     virtual DiagCoordList get_diag_coord(int x, int y) const = 0;
 
     /** Return the point type if the board has different types of points.

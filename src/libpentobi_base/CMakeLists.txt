@@ -17,6 +17,10 @@ set(pentobi_base_STAT_SRCS
   ColorMove.h
   Game.h
   Game.cpp
+  GembloQGeometry.h
+  GembloQGeometry.cpp
+  GembloQTransform.h
+  GembloQTransform.cpp
   Geometry.h
   Grid.h
   Marker.h
@@ -41,6 +45,8 @@ set(pentobi_base_STAT_SRCS
   PieceMap.h
   PieceTransformsClassic.h
   PieceTransformsClassic.cpp
+  PieceTransformsGembloQ.h
+  PieceTransformsGembloQ.cpp
   PieceTransforms.cpp
   PieceTransformsTrigon.h
   PieceTransformsTrigon.cpp

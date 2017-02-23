@@ -43,9 +43,15 @@ public:
 
     static const IntType onboard_moves_callisto_3 = 6885;
 
+    static const IntType onboard_moves_gembloq = 31254;
+
+    static const IntType onboard_moves_gembloq_2 = 15018;
+
+    static const IntType onboard_moves_gembloq_3 = 23518;
+
     /** Integer range of moves.
-        The maximum is given by the number of on-board moves in game variant
-        Trigon, plus a null move. */
+        The maximum is given by the number of on-board moves in any game
+        variant, plus a null move. */
     static const IntType range = onboard_moves_trigon + 1;
 
     static Move null();

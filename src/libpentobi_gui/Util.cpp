@@ -46,6 +46,109 @@ void paintDot(QPainter& painter, QColor color, qreal x, qreal y, qreal width,
     painter.restore();
 }
 
+void paintGembloQ(QPainter& painter, unsigned pointType, qreal x, qreal y,
+                  qreal width, QColor color, QColor upColor, QColor downColor,
+                  bool flat)
+{
+    painter.save();
+    painter.translate(x, y);
+    qreal border = 0.2 * width;
+    if (flat)
+        painter.setPen(Qt::NoPen);
+    else
+        painter.setPen(color);
+    painter.setBrush(color);
+    switch (pointType)
+    {
+    case 0:
+    {
+        const QPointF trianglePolygon[3] =
+        {
+            QPointF(0, 0),
+            QPointF(2 * width - border, 0),
+            QPointF(0, 2 * width - border)
+        };
+        painter.drawPolygon(trianglePolygon, 3);
+        const QPointF borderPolygon[4] =
+        {
+            QPointF(2 * width - border, 0),
+            QPointF(2 * width, 0),
+            QPointF(0, 2 * width),
+            QPointF(0, 2 * width - border)
+        };
+        painter.setPen(downColor);
+        painter.setBrush(downColor);
+        painter.drawPolygon(borderPolygon, 4);
+        break;
+    }
+    case 1:
+    {
+        const QPointF trianglePolygon[3] =
+        {
+            QPointF(width, border),
+            QPointF(width, 2 * width),
+            QPointF(-width + border, 2 * width)
+        };
+        painter.drawPolygon(trianglePolygon, 3);
+        const QPointF borderPolygon[4] =
+        {
+            QPointF(width, 0),
+            QPointF(width, border),
+            QPointF(-width + border, 2 * width),
+            QPointF(-width, 2 * width)
+        };
+        painter.setPen(upColor);
+        painter.setBrush(upColor);
+        painter.drawPolygon(borderPolygon, 4);
+        break;
+    }
+    case 2:
+    {
+        const QPointF trianglePolygon[3] =
+        {
+            QPointF(0, border),
+            QPointF(2 * width - border, 2 * width),
+            QPointF(0, 2 * width)
+        };
+        painter.drawPolygon(trianglePolygon, 3);
+        const QPointF borderPolygon[4] =
+        {
+            QPointF(0, 0),
+            QPointF(2 * width, 2 * width),
+            QPointF(2 * width - border, 2 * width),
+            QPointF(0, border)
+        };
+        painter.setPen(upColor);
+        painter.setBrush(upColor);
+        painter.drawPolygon(borderPolygon, 4);
+        break;
+    }
+    case 3:
+    {
+        const QPointF trianglePolygon[3] =
+        {
+            QPointF(-width + border, 0),
+            QPointF(width, 0),
+            QPointF(width, 2 * width - border)
+        };
+        painter.drawPolygon(trianglePolygon, 3);
+        const QPointF borderPolygon[4] =
+        {
+            QPointF(-width, 0),
+            QPointF(-width + border, 0),
+            QPointF(width, 2 * width - border),
+            QPointF(width, 2 * width)
+        };
+        painter.setPen(downColor);
+        painter.setBrush(downColor);
+        painter.drawPolygon(borderPolygon, 4);
+        break;
+    }
+    }
+    painter.restore();
+}
+
+
 void paintSquare(QPainter& painter, qreal x, qreal y, qreal width,
                  qreal height, const QColor& rectColor,
                  const QColor& upLeftColor, const QColor& downRightColor,
@@ -311,6 +414,30 @@ void Util::paintColorSegment(QPainter& painter, Variant variant, Color c,
                     color, upLeftColor, downRightColor);
 }
 
+void Util::paintColorGembloQ(QPainter& painter, Variant variant, Color c,
+                             unsigned pointType, qreal x, qreal y, qreal width,
+                             qreal alpha, qreal saturation, bool flat)
+{
+    auto color = getPaintColor(variant, c);
+    QColor upColor;
+    QColor downColor;
+    if (flat)
+    {
+        upColor = color;
+        downColor = color;
+    }
+    else
+    {
+        upColor = color.lighter(125);
+        downColor = color.darker(130);
+    }
+    setAlphaSaturation(color, alpha, saturation);
+    setAlphaSaturation(upColor, alpha, saturation);
+    setAlphaSaturation(downColor, alpha, saturation);
+    paintGembloQ(painter, pointType, x, y, width, color, upColor, downColor,
+                 flat);
+}
+
 void Util::paintColorSquare(QPainter& painter, Variant variant, Color c,
                             qreal x, qreal y, qreal size, qreal alpha,
                             qreal saturation, bool flat)
@@ -382,6 +509,13 @@ void Util::paintColorTriangle(QPainter& painter, Variant variant,
                   downRightColor);
 }
 
+void Util::paintEmptyGembloQ(QPainter& painter, unsigned pointType, qreal x,
+                             qreal y, qreal width)
+{
+    paintGembloQ(painter, pointType, x, y, width, gray, gray.darker(130),
+                 gray.lighter(115), false);
+}
+
 void Util::paintEmptyJunction(QPainter& painter, qreal x, qreal y, qreal size)
 {
     painter.fillRect(QRectF(x + 0.25 * size, y + 0.25 * size,
@@ -421,6 +555,31 @@ void Util::paintEmptySquareCallistoCenter(QPainter& painter, qreal x, qreal y,
     paintSquare(painter, x + 0.05 * size, y + 0.05 * size, 0.9 * size,
                 0.9 * size, gray.darker(120), gray.darker(150),
                 gray.lighter(95), false);
+}
+
+void Util::paintGembloQStartingPoint(QPainter& painter, unsigned pointType,
+                                     Variant variant, Color c, qreal x,
+                                     qreal y, qreal width)
+{
+    switch (pointType)
+    {
+    case 0:
+        x -= width;
+        y -= width;
+        break;
+    case 1:
+        y += width;
+        break;
+    case 2:
+        x -= width;
+        y += width;
+        break;
+    case 3:
+        y -= width;
+        break;
+    }
+    paintDot(painter, getPaintColor(variant, c), x, y,
+             2 * width, 2 * width, 0.4 * width);
 }
 
 void Util::paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x,

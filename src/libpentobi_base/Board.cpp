@@ -20,20 +20,44 @@ namespace libpentobi_base {
 
 namespace {
 
-void write_x_coord(ostream& out, unsigned width, unsigned offset)
+void write_x_coord(ostream& out, unsigned width, unsigned offset,
+                   bool is_gembloq)
 {
     for (unsigned i = 0; i < offset; ++i)
         out << ' ';
-    char c = 'A';
-    for (unsigned x = 0; x < width; ++x, ++c)
+    if (is_gembloq)
     {
-        if (x < 26)
-            out << ' ';
-        else
-            out << 'A';
-        if (x == 26)
-            c = 'A';
-        out << c;
+        char c = 'A';
+        char c1 = ' ';
+        out << ' ';
+        for (unsigned x = 0; x < width; ++x, ++c)
+        {
+            if (x % 2 != 0)
+                out << c1;
+            if (x > 0 && x % 26 == 0)
+            {
+                c = 'A';
+                if (c1 == ' ')
+                    c1 = 'A';
+                else
+                    ++c1;
+            }
+            out << c;
+        }
+    }
+    else
+    {
+        char c = 'A';
+        for (unsigned x = 0; x < width; ++x, ++c)
+        {
+            if (x < 26)
+                out << ' ';
+            else
+                out << 'A';
+            if (x == 26)
+                c = 'A';
+            out << c;
+        }
     }
     out << '\n';
 }
@@ -362,6 +386,10 @@ void Board::init_variant(Variant variant)
     m_move_info_ext_array = m_bc->get_move_info_ext_array();
     m_move_info_ext_2_array = m_bc->get_move_info_ext_2_array();
     m_starting_points.init(variant, *m_geo);
+    if (m_piece_set == PieceSet::gembloq)
+        m_needed_starting_points = 4;
+    else
+        m_needed_starting_points = 1;
     if (m_is_callisto)
         for (Point p : *m_geo)
             m_is_center_section[p] =
@@ -425,13 +453,14 @@ bool Board::is_legal(Color c, Move mv) const
     if (! is_first_piece(c))
         return false;
     i = points.begin();
+    unsigned n = 0;
     do
         if (is_colorless_starting_point(*i)
                 || (is_colored_starting_point(*i)
                     && get_starting_point_color(*i) == c))
-            return true;
+            ++n;
     while (++i != end);
-    return false;
+    return n == m_needed_starting_points;
 }
 
 /** Remove forbidden points from attach point lists.
@@ -463,10 +492,14 @@ void Board::place_setup(const Setup& setup)
         for (Color c : get_colors())
             for (Move mv : setup.placements[c])
                 place<6, 22>(c, mv);
-    else
+    else if (m_max_piece_size == 7)
         for (Color c : get_colors())
             for (Move mv : setup.placements[c])
                 place<7, 12>(c, mv);
+    else
+        for (Color c : get_colors())
+            for (Move mv : setup.placements[c])
+                place<22, 44>(c, mv);
 }
 
 void Board::play(Color c, Move mv)
@@ -475,8 +508,10 @@ void Board::play(Color c, Move mv)
         play<5, 16>(c, mv);
     else if (m_max_piece_size == 6)
         play<6, 22>(c, mv);
-    else
+    else if (m_max_piece_size == 7)
         play<7, 12>(c, mv);
+    else
+        play<22, 44>(c, mv);
 }
 
 void Board::take_snapshot()
@@ -531,6 +566,7 @@ void Board::write(ostream& out, bool mark_last_move) const
     bool is_info_location_right = (width <= 20);
     bool is_trigon = (m_piece_set == PieceSet::trigon);
     bool is_nexos = (m_piece_set == PieceSet::nexos);
+    bool is_gembloq = (m_piece_set == PieceSet::gembloq);
     for (unsigned y = 0; y < height; ++y)
     {
         if (height - y < 10)
@@ -576,6 +612,14 @@ void Board::write(ostream& out, bool mark_last_move) const
                     set_color(out, "\x1B[1;30;47m");
                     out << (point_type == 1 ? '\\' : '/');
                 }
+                else if (is_gembloq)
+                {
+                    set_color(out, "\x1B[1;30;47m");
+                    if (point_type == 1)
+                        out << '/';
+                    else if (point_type == 3)
+                        out << '\\';
+                }
                 else
                 {
                     set_color(out, "\x1B[1;30;47m");
@@ -589,10 +633,26 @@ void Board::write(ostream& out, bool mark_last_move) const
                     set_color(out, "\x1B[1;30;47m");
                     out << (point_type == 1 ? '\\' : '/');
                 }
+                else if (is_gembloq && x > 0 && m_geo->is_onboard(x - 1, y))
+                {
+                    set_color(out, "\x1B[1;30;47m");
+                    if (point_type == 1)
+                        out << '/';
+                    else if (point_type == 3)
+                        out << '\\';
+                }
                 else if (m_is_callisto && x == 0)
                 {
                     set_color(out, "\x1B[0m");
                     out << ' ';
+                }
+                else if (is_gembloq)
+                {
+                    set_color(out, "\x1B[0m");
+                    if (point_type == 1 || point_type == 3)
+                        out << "  ";
+                    else
+                        out << ' ';
                 }
                 else
                 {
@@ -619,7 +679,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                     else
                     {
                         set_color(out, "\x1B[1;30;47m");
-                        if (is_trigon)
+                        if (is_trigon || is_gembloq)
                             out << ' ';
                         else if (is_nexos && point_type == 1)
                             out << '-';
@@ -662,7 +722,7 @@ void Board::write(ostream& out, bool mark_last_move) const
             write_info_line(out, y, pieces_left);
         out << '\n';
     }
-    write_x_coord(out, width, is_trigon ? 3 : 2);
+    write_x_coord(out, width, is_trigon ? 3 : 2, is_gembloq);
     if (! is_info_location_right)
         for (Color c : get_colors())
         {

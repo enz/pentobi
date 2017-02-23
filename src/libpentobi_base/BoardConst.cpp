@@ -13,6 +13,7 @@
 #include <algorithm>
 #include "Marker.h"
 #include "PieceTransformsClassic.h"
+#include "PieceTransformsGembloQ.h"
 #include "PieceTransformsTrigon.h"
 #include "libboardgame_base/Transform.h"
 #include "libboardgame_util/Log.h"
@@ -39,7 +40,7 @@ Marker g_marker;
 /** Non-compact representation of lists of moves of a piece at a point
     constrained by the forbidden status of adjacent points.
     Only used during construction. See g_marker why this variable is global. */
-Grid<array<ArrayList<Move, 40>, PrecompMoves::nu_adj_status>>
+Grid<array<ArrayList<Move, 44>, PrecompMoves::nu_adj_status>>
     g_full_move_table;
 
 
@@ -56,10 +57,13 @@ bool is_reverse(MovePoints::const_iterator begin1, const Point* begin2, unsigned
 // of the y axis!)
 void sort_piece_points(PiecePoints& points)
 {
+    auto less = [](const CoordPoint& a, const CoordPoint& b)
+    {
+        return ((a.y == b.y && a.x < b.x) || a.y > b.y);
+    };
     auto check = [&](unsigned short a, unsigned short b)
     {
-        if ((points[a].y == points[b].y && points[a].x > points[b].x)
-                || points[a].y < points[b].y)
+        if (! less(points[a], points[b]))
             swap(points[a], points[b]);
     };
     // Minimal number of necessary comparisons with sorting networks
@@ -124,8 +128,10 @@ void sort_piece_points(PiecePoints& points)
     case 2:
         check(0, 1);
         break;
+    case 1:
+        break;
     default:
-        LIBBOARDGAME_ASSERT(size == 1);
+        sort(points.begin(), points.end(), less);
     }
 }
 
@@ -290,6 +296,222 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geo,
                         geo, transforms, piece_set, CoordPoint(0, 0));
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(0, 0) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    return pieces;
+}
+
+vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
+                                        PieceSet piece_set,
+                                        const PieceTransforms& transforms)
+{
+    vector<PieceInfo> pieces;
+    pieces.reserve(21);
+    pieces.emplace_back("P",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(1, 1), CoordPoint(2, 1),
+                                     CoordPoint(3, 1), CoordPoint(3, 2),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(1, -1), CoordPoint(2, -1),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2),
+                                     CoordPoint(-1, -2), CoordPoint(0, -2),
+                                     CoordPoint(1, -2), CoordPoint(2, -2),
+                                     CoordPoint(-1, -3), CoordPoint(0, -3) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("I5",
+                        PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(-5, -2), CoordPoint(-4, -2),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2),
+                                     CoordPoint(-5, -3), CoordPoint(-4, -3),
+                                     CoordPoint(1, 1), CoordPoint(2, 1),
+                                     CoordPoint(3, 1), CoordPoint(4, 1),
+                                     CoordPoint(3, 2), CoordPoint(4, 2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("X",
+                        PiecePoints{ CoordPoint(-3, 0), CoordPoint(-2, 0),
+                                     CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(1, -1), CoordPoint(2, -1),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2),
+                                     CoordPoint(1, -2), CoordPoint(2, -2),
+                                     CoordPoint(-3, 1), CoordPoint(-2, 1),
+                                     CoordPoint(1, 1), CoordPoint(2, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("W",
+                        PiecePoints{ CoordPoint(-5, 0), CoordPoint(-4, 0),
+                                     CoordPoint(-3, 0), CoordPoint(-2, 0),
+                                     CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(3, 0), CoordPoint(4, 0),
+                                     CoordPoint(-5, -1), CoordPoint(-4, -1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(3, -1), CoordPoint(4, -1),
+                                     CoordPoint(-3, 1), CoordPoint(-2, 1),
+                                     CoordPoint(1, 1), CoordPoint(2, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("Z",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(3, 0), CoordPoint(4, 0),
+                                     CoordPoint(-5, 0), CoordPoint(-4, 0),
+                                     CoordPoint(-5, -1), CoordPoint(-4, -1),
+                                     CoordPoint(1, 1), CoordPoint(2, 1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(3, -1), CoordPoint(4, -1),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("Y",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-3, 0),
+                                     CoordPoint(-2, 0), CoordPoint(-1, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(-2, -1), CoordPoint(-1, -1),
+                                     CoordPoint(0, -1), CoordPoint(-3, -1),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2),
+                                     CoordPoint(-3, 1), CoordPoint(-2, 1),
+                                     CoordPoint(1, 1), CoordPoint(2, 1),
+                                     CoordPoint(3, 1), CoordPoint(4, 1),
+                                     CoordPoint(3, 2), CoordPoint(4, 2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("N5",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(-3, -1),
+                                     CoordPoint(-2, -1), CoordPoint(-1, -1),
+                                     CoordPoint(-4, -2), CoordPoint(-3, -2),
+                                     CoordPoint(-5, -2), CoordPoint(-5, -3),
+                                     CoordPoint(-2, -2), CoordPoint(-4, -3),
+                                     CoordPoint(-3, 0), CoordPoint(-2, 0),
+                                     CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(-3, 1), CoordPoint(-2, 1),
+                                     CoordPoint(-1, 1), CoordPoint(0, 1),
+                                     CoordPoint(-1, 2), CoordPoint(0, 2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("T5",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-5, 0),
+                                     CoordPoint(-4, 0), CoordPoint(-1, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(1, 1), CoordPoint(2, 1),
+                                     CoordPoint(-5, -1), CoordPoint(-4, -1),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2),
+                                     CoordPoint(-1, -2), CoordPoint(0, -2),
+                                     CoordPoint(-1, -3), CoordPoint(0, -3) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("L5",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(-5, -2), CoordPoint(-4, -2),
+                                     CoordPoint(-5, -3), CoordPoint(-4, -3),
+                                     CoordPoint(3, 0), CoordPoint(4, 0),
+                                     CoordPoint(1, 1), CoordPoint(2, 1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(3, -1), CoordPoint(4, -1),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("N4.5",
+                        PiecePoints{ CoordPoint(0, -1), CoordPoint(-3, -1),
+                                     CoordPoint(-2, -1), CoordPoint(-1, -1),
+                                     CoordPoint(-4, -2), CoordPoint(-3, -2),
+                                     CoordPoint(-2, -2), CoordPoint(-4, -3),
+                                     CoordPoint(-3, 0), CoordPoint(-2, 0),
+                                     CoordPoint(-1, 0), CoordPoint(0, 0),
+                                     CoordPoint(-3, 1), CoordPoint(-2, 1),
+                                     CoordPoint(-1, 1), CoordPoint(0, 1),
+                                     CoordPoint(-1, 2), CoordPoint(0, 2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("O",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-3, 0),
+                                     CoordPoint(-2, 0), CoordPoint(-1, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(-3, 1), CoordPoint(-2, 1),
+                                     CoordPoint(-1, 1), CoordPoint(0, 1),
+                                     CoordPoint(1, 1), CoordPoint(2, 1),
+                                     CoordPoint(-1, 2), CoordPoint(0, 2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("T4",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-3, 0),
+                                     CoordPoint(-2, 0), CoordPoint(-1, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(1, -1), CoordPoint(2, -1),
+                                     CoordPoint(1, -2), CoordPoint(2, -2),
+                                     CoordPoint(-3, 1), CoordPoint(-2, 1),
+                                     CoordPoint(1, 1), CoordPoint(2, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("L4",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(3, 0), CoordPoint(4, 0),
+                                     CoordPoint(1, 1), CoordPoint(2, 1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(3, -1), CoordPoint(4, -1),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("I4",
+                        PiecePoints{ CoordPoint(-2, -1), CoordPoint(-3, -1),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2),
+                                     CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(2, 1), CoordPoint(1, 1),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(4, 2), CoordPoint(3, 2),
+                                     CoordPoint(3, 1), CoordPoint(4, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("L3.5",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(1, -1), CoordPoint(2, -1),
+                                     CoordPoint(1, -2), CoordPoint(2, -2),
+                                     CoordPoint(-5, -2), CoordPoint(-4, -2),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("V",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(1, -1), CoordPoint(2, -1),
+                                     CoordPoint(1, -2), CoordPoint(2, -2),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("I3",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(1, 1), CoordPoint(2, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("L2.5",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(-3, -1), CoordPoint(-2, -1),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(1, -1), CoordPoint(2, -1),
+                                     CoordPoint(-3, -2), CoordPoint(-2, -2) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("2",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(1, 0), CoordPoint(2, 0),
+                                     CoordPoint(1, 1), CoordPoint(2, 1) },
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("1.5",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1),
+                                     CoordPoint(1, 0), CoordPoint(2, 0)},
+                        geo, transforms, piece_set, CoordPoint(0, 0));
+    pieces.emplace_back("1",
+                        PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
+                                     CoordPoint(-1, -1), CoordPoint(0, -1) },
                         geo, transforms, piece_set, CoordPoint(0, 0));
     return pieces;
 }
@@ -596,36 +818,46 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     switch (board_type)
     {
     case BoardType::classic:
-        m_range = Move::onboard_moves_classic + 1;
+        m_range = Move::onboard_moves_classic;
         break;
     case BoardType::trigon:
-        m_range = Move::onboard_moves_trigon + 1;
+        m_range = Move::onboard_moves_trigon;
         break;
     case BoardType::trigon_3:
-        m_range = Move::onboard_moves_trigon_3 + 1;
+        m_range = Move::onboard_moves_trigon_3;
         break;
     case BoardType::duo:
         if (piece_set == PieceSet::classic)
-            m_range = Move::onboard_moves_duo + 1;
+            m_range = Move::onboard_moves_duo;
         else
         {
             LIBBOARDGAME_ASSERT(piece_set == PieceSet::junior);
-            m_range = Move::onboard_moves_junior + 1;
+            m_range = Move::onboard_moves_junior;
         }
         break;
     case BoardType::nexos:
-        m_range = Move::onboard_moves_nexos + 1;
+        m_range = Move::onboard_moves_nexos;
         break;
     case BoardType::callisto:
-        m_range = Move::onboard_moves_callisto + 1;
+        m_range = Move::onboard_moves_callisto;
         break;
     case BoardType::callisto_2:
-        m_range = Move::onboard_moves_callisto_2 + 1;
+        m_range = Move::onboard_moves_callisto_2;
         break;
     case BoardType::callisto_3:
-        m_range = Move::onboard_moves_callisto_3 + 1;
+        m_range = Move::onboard_moves_callisto_3;
+        break;
+    case BoardType::gembloq:
+        m_range = Move::onboard_moves_gembloq;
+        break;
+    case BoardType::gembloq_2:
+        m_range = Move::onboard_moves_gembloq_2;
+        break;
+    case BoardType::gembloq_3:
+        m_range = Move::onboard_moves_gembloq_3;
         break;
     }
+    ++m_range; // Move::null()
     switch (piece_set)
     {
     case PieceSet::classic:
@@ -672,6 +904,14 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_move_info.reset(calloc(m_range, sizeof(MoveInfo<5>)));
         m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<16>)));
         break;
+    case PieceSet::gembloq:
+        m_transforms.reset(new PieceTransformsGembloQ);
+        m_pieces = create_pieces_gembloq(m_geo, piece_set, *m_transforms);
+        m_max_piece_size = 22;
+        m_max_adj_attach = 44;
+        m_move_info.reset(calloc(m_range, sizeof(MoveInfo<22>)));
+        m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<44>)));
+        break;
     }
     m_move_info_ext_2.reset(new MoveInfoExt2[m_range]);
     m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
@@ -699,11 +939,16 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     case PieceSet::callisto:
         LIBBOARDGAME_ASSERT(m_nu_pieces == 12);
         break;
+    case PieceSet::gembloq:
+        LIBBOARDGAME_ASSERT(m_nu_pieces == 21);
+        break;
     }
     if (board_type == BoardType::duo || board_type == BoardType::callisto_2)
         init_symmetry_info<5>();
     else if (board_type == BoardType::trigon)
         init_symmetry_info<6>();
+    else if (board_type == BoardType::gembloq_2)
+        init_symmetry_info<22>();
 }
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
@@ -797,8 +1042,10 @@ void BoardConst::create_moves()
             create_moves<5, 16>(moves_created, piece);
         else if (m_max_piece_size == 6)
             create_moves<6, 22>(moves_created, piece);
-        else
+        else if (m_max_piece_size == 7)
             create_moves<7, 12>(moves_created, piece);
+        else
+            create_moves<22, 44>(moves_created, piece);
         for (Point p : m_geo)
             for (unsigned j = 0; j < PrecompMoves::nu_adj_status; ++j)
                 {
@@ -1030,9 +1277,13 @@ void BoardConst::init_symmetry_info()
 
 inline void BoardConst::sort(MovePoints& points) const
 {
+    auto less = [this](Point a, Point b)
+    {
+        return this->m_compare_val[a] < this->m_compare_val[b];
+    };
     auto check = [&](unsigned short a, unsigned short b)
     {
-        if (m_compare_val[points[a]] > m_compare_val[points[b]])
+        if (! less(points[a], points[b]))
             swap(points[a], points[b]);
     };
     // Minimal number of necessary comparisons with sorting networks
@@ -1097,8 +1348,10 @@ inline void BoardConst::sort(MovePoints& points) const
     case 2:
         check(0, 1);
         break;
+    case 1:
+        break;
     default:
-        LIBBOARDGAME_ASSERT(size == 1);
+        std::sort(points.begin(), points.end(), less);
     }
 }
 

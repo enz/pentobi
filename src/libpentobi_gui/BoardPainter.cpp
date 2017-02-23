@@ -62,8 +62,8 @@ void BoardPainter::paintCoordinates(QPainter& painter)
             label = QString(QChar('A' + x));
         else
         {
-            label = "A";
-            label.append(QChar('A' + (x - 26)));
+            label = QString(QChar('A' + x / 26 - 1));
+            label.append(QChar('A' + (x % 26)));
         }
         paintLabel(painter, x * m_fieldWidth, m_height * m_fieldHeight,
                    m_fieldWidth, m_fieldHeight, label, true);
@@ -107,6 +107,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     m_isTrigon = (pieceSet == PieceSet::trigon);
     m_isNexos = (pieceSet == PieceSet::nexos);
     m_isCallisto = (pieceSet == PieceSet::callisto);
+    m_isGembloQ = (pieceSet == PieceSet::gembloq);
     qreal ratio;
     if (m_isTrigon)
     {
@@ -118,6 +119,17 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
         else
             m_fieldWidth =
                     min(qreal(width) / (m_width + 1), height / (ratio * m_height));
+    }
+    else if (m_isGembloQ)
+    {
+        ratio = 2;
+        if (m_coordinates)
+            m_fieldWidth =
+                    min(qreal(width) / (m_width + 2),
+                        height / (ratio * (m_height + 2)));
+        else
+            m_fieldWidth =
+                    min(qreal(width) / m_width, qreal(height) / (ratio * m_height));
     }
     else
     {
@@ -136,14 +148,31 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
     m_fieldHeight = ratio * m_fieldWidth;
     m_boardOffset = QPointF(0.5 * (width - m_fieldWidth * m_width),
                             0.5 * (height - m_fieldHeight * m_height));
+    int fontSize;
+    int coordFontSize;
+    if (m_isTrigon)
+    {
+        fontSize = static_cast<int>(0.7f * m_fieldWidth);
+        coordFontSize = fontSize;
+    }
+    else if (m_isGembloQ)
+    {
+        fontSize = static_cast<int>(1.4f * m_fieldWidth);
+        coordFontSize = static_cast<int>(0.7f * m_fieldWidth);
+    }
+    else
+    {
+        fontSize = static_cast<int>(0.5f * m_fieldWidth);
+        coordFontSize = fontSize;
+    }
     // QFont::setPixelSize(0) prints a warning even if it works and the docs
-    // of Qt 5.3 don't forbid it (unlike QFont::setPointSize(0)).
-    int fontSize =
-            max(1, static_cast<int>((m_isTrigon ? 0.7 : 0.5) * m_fieldWidth));
+    // of Qt 5.3 don't forbid it (unlike QFont::setPointSize(0))
+    fontSize = max(fontSize, 1);
+    coordFontSize = max(coordFontSize, 1);
     m_font.setPixelSize(fontSize);
     m_fontSemiCondensed.setPixelSize(fontSize);
     m_fontCondensed.setPixelSize(fontSize);
-    m_fontCoordLabels.setPixelSize(fontSize);
+    m_fontCoordLabels.setPixelSize(coordFontSize);
     painter.save();
     painter.translate(m_boardOffset);
     if (m_coordinates)
@@ -182,6 +211,9 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
                                          m_fieldWidth);
             }
         }
+        else if (m_isGembloQ)
+            Util::paintEmptyGembloQ(painter, pointType, fieldX, fieldY,
+                                    m_fieldWidth);
         else if (m_isCallisto
                  && CallistoGeometry::is_center_section(x, y, nu_players))
             Util::paintEmptySquareCallistoCenter(painter, fieldX, fieldY,
@@ -326,6 +358,28 @@ void BoardPainter::paintLabels(QPainter& painter,
                     y += 0.333 * height;
                 height = 0.666 * height;
             }
+            else if (m_isGembloQ)
+            {
+                switch (m_geo->get_point_type(p))
+                {
+                case 0:
+                    x -= width / 2;
+                    y -= height / 2;
+                    break;
+                case 1:
+                    x += width / 2;
+                    y += height / 2;
+                    break;
+                case 2:
+                    x -= width / 2;
+                    y += height / 2;
+                    break;
+                case 3:
+                    x += width / 2;
+                    y -= height / 2;
+                    break;
+                }
+            }
             paintLabel(painter, x, y, width, height, labels[p], false);
         }
 }
@@ -350,6 +404,29 @@ void BoardPainter::paintMarks(QPainter& painter,
                 else
                     y -= 0.167 * m_fieldHeight;
                 size = 0.1 * m_fieldHeight;
+            }
+            else if (m_isGembloQ)
+            {
+                size = 0.4 * m_fieldWidth;
+                switch (m_geo->get_point_type(p))
+                {
+                case 0:
+                    x -= m_fieldWidth / 2;
+                    y -= m_fieldHeight / 2;
+                    break;
+                case 1:
+                    x += m_fieldWidth / 2;
+                    y += m_fieldHeight / 2;
+                    break;
+                case 2:
+                    x -= m_fieldWidth / 2;
+                    y += m_fieldHeight / 2;
+                    break;
+                case 3:
+                    x += m_fieldWidth / 2;
+                    y -= m_fieldHeight / 2;
+                    break;
+                }
             }
             else if (m_isCallisto)
                 size = 0.1 * m_fieldHeight;
@@ -422,6 +499,15 @@ void BoardPainter::paintPieces(QPainter& painter,
                 paintJunction(painter, m_variant, pointState, pieceId, x, y,
                               fieldX, fieldY);
             }
+        }
+        else if (m_isGembloQ)
+        {
+            if (s.is_empty())
+                continue;
+            Color c = s.to_color();
+            isFirstPiece[c] = false;
+            Util::paintColorGembloQ(painter, m_variant, c, pointType, fieldX,
+                                    fieldY, m_fieldWidth);
         }
         else
         {
@@ -524,6 +610,10 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
                 }
             }
         }
+        else if (m_isGembloQ)
+            Util::paintColorGembloQ(painter, m_variant, c, pointType,
+                                     fieldX, fieldY, m_fieldWidth,
+                                     alpha, saturation, flat);
         else if (m_isCallisto)
         {
             bool hasRight = (m_geo->is_onboard(CoordPoint(x + 1, y))
@@ -609,6 +699,11 @@ void BoardPainter::paintStartingPoints(QPainter& painter, Variant variant,
                     Util::paintSegmentStartingPoint(painter, variant, c,
                                                     fieldX, fieldY,
                                                     m_fieldWidth);
+                else if (m_isGembloQ)
+                    Util::paintGembloQStartingPoint(painter,
+                                                    m_geo->get_point_type(p),
+                                                    variant, c, fieldX,
+                                                    fieldY, m_fieldWidth);
                 else
                     Util::paintSquareStartingPoint(painter, variant, c, fieldX,
                                                    fieldY, m_fieldWidth);

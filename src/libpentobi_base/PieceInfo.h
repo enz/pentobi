@@ -33,15 +33,14 @@ typedef float ScoreType;
 class PieceInfo
 {
 public:
-    /** Maximum number of points in a piece.
-        The maximum piece size occurs with the I4 piece in Nexos (4 real points
-        and 3 junction points, see get_points()). */
-    static const unsigned max_size = 7;
+    /** Maximum number of points in a piece. */
+    static const unsigned max_size = 22;
 
     /** Maximum number of scored points in a piece.
-        This excludes junction points in Nexos. The maximum number of scored
-        points occurs in Trigon. */
-    static const unsigned max_scored_size = 6;
+        Currently the same as max_size, needed for GembloQ. If Nexos was the
+        game with the largest pieces, some memory could be saved because
+        junction points in Nexos are not scored. */
+    static const unsigned max_scored_size = 22;
 
     /** Maximum number of instances of a piece per player. */
     static const unsigned max_instances = 3;

@@ -775,8 +775,8 @@
         <translation>Ge&amp;wertetes Spiel</translation>
     </message>
     <message>
-        <source>Open From &amp;Clipboard</source>
-        <translation>Aus Zwischen&amp;ablage öffnen</translation>
+        <source>Open from &amp;Clipboard</source>
+        <translation type="unfinished">Aus &amp;Zwischenablage öffnen</translation>
     </message>
 </context>
 <context>
@@ -1059,10 +1059,6 @@
     <message>
         <source>Pentobi</source>
         <translation>Pentobi</translation>
-    </message>
-    <message>
-        <source>Open from &amp;Clipboard</source>
-        <translation>Aus &amp;Zwischenablage öffnen</translation>
     </message>
 </context>
 </TS>

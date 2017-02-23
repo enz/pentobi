@@ -30,7 +30,9 @@ enum class PieceSet
 
     nexos,
 
-    callisto
+    callisto,
+
+    gembloq
 };
 
 //-----------------------------------------------------------------------------
@@ -52,6 +54,12 @@ enum class BoardType
     callisto_2,
 
     callisto_3,
+
+    gembloq,
+
+    gembloq_2,
+
+    gembloq_3
 };
 
 //-----------------------------------------------------------------------------
@@ -83,7 +91,16 @@ enum class Variant
 
     callisto_2,
 
-    callisto_3
+    callisto_3,
+
+    gembloq,
+
+    gembloq_2,
+
+    /** GembloQ two-player four-color. */
+    gembloq_2_4,
+
+    gembloq_3
 };
 
 //-----------------------------------------------------------------------------

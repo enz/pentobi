@@ -151,6 +151,18 @@ void RatingDialog::updateContent()
     case Variant::callisto_3:
         variantStr = tr("Callisto (3 players)");
         break;
+    case Variant::gembloq:
+        variantStr = tr("GembloQ (4 players)");
+        break;
+    case Variant::gembloq_2:
+        variantStr = tr("GembloQ (2 players, 2 colors)");
+        break;
+    case Variant::gembloq_2_4:
+        variantStr = tr("GembloQ (2 players, 4 colors)");
+        break;
+    case Variant::gembloq_3:
+        variantStr = tr("GembloQ (3 players)");
+        break;
     }
     m_labelVariant->setText(variantStr);
         m_labelNuGames->setText(QString::number(nuGames));

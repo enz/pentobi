@@ -111,11 +111,15 @@ void Search::set_default_param(Variant variant)
     case Variant::classic:
     case Variant::classic_2:
     case Variant::classic_3:
+    case Variant::gembloq: // Not tuned
+    case Variant::gembloq_2_4: // Not tuned
+    case Variant::gembloq_3: // Not tuned
         set_exploration_constant(0.021f);
         set_rave_parent_max(50000);
         break;
     case Variant::duo:
     case Variant::junior:
+    case Variant::gembloq_2: // Not tuned
         set_exploration_constant(0.020f);
         set_rave_parent_max(25000);
         break;

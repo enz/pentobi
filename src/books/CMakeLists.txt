@@ -8,6 +8,10 @@ install(FILES
   book_classic_2.blksgf
   book_classic_3.blksgf
   book_duo.blksgf
+  book_gembloq.blksgf
+  book_gembloq_2.blksgf
+  book_gembloq_2_4.blksgf
+  book_gembloq_3.blksgf
   book_junior.blksgf
   book_nexos.blksgf
   book_nexos_2.blksgf

@@ -456,6 +456,14 @@ private:
 
     QAction* m_actionVariantDuo;
 
+    QAction* m_actionVariantGembloQ;
+
+    QAction* m_actionVariantGembloQ2;
+
+    QAction* m_actionVariantGembloQ24;
+
+    QAction* m_actionVariantGembloQ3;
+
     QAction* m_actionVariantJunior;
 
     QAction* m_actionVariantNexos;

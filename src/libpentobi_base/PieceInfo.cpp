@@ -144,6 +144,8 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
                 ++m_score_points;
         }
     }
+    else if (piece_set == PieceSet::gembloq)
+        m_score_points = 0.25f * static_cast<ScoreType>(points.size());
     else if (points.size() == 1 && piece_set == PieceSet::callisto)
         m_score_points = 0;
     else

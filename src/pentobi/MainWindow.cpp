@@ -1080,6 +1080,15 @@ void MainWindow::createActions()
     m_actionVariantClassic =
             createActionVariant(Variant::classic, tr("Classic (&4 Players)"));
     m_actionVariantDuo = createActionVariant(Variant::duo, tr("&Duo"));
+    m_actionVariantGembloQ2 =
+            createActionVariant(Variant::gembloq_2, tr("GembloQ (&2 Players, 2 Colors)"));
+    m_actionVariantGembloQ24 =
+            createActionVariant(Variant::gembloq_2_4,
+                                tr("GembloQ (2 &Players, 4 Colors)"));
+    m_actionVariantGembloQ3 =
+            createActionVariant(Variant::gembloq_3, tr("GembloQ (&3 Players)"));
+    m_actionVariantGembloQ =
+            createActionVariant(Variant::gembloq, tr("GembloQ (&4 Players)"));
     m_actionVariantJunior =
             createActionVariant(Variant::junior, tr("J&unior"));
     m_actionVariantTrigon2 =
@@ -1175,6 +1184,11 @@ void MainWindow::createMenu()
     auto menuNexos = m_menuVariant->addMenu(tr("&Nexos"));
     menuNexos->addAction(m_actionVariantNexos2);
     menuNexos->addAction(m_actionVariantNexos);
+    auto menuGembloQ = m_menuVariant->addMenu(tr("&GembloQ"));
+    menuGembloQ->addAction(m_actionVariantGembloQ2);
+    menuGembloQ->addAction(m_actionVariantGembloQ24);
+    menuGembloQ->addAction(m_actionVariantGembloQ3);
+    menuGembloQ->addAction(m_actionVariantGembloQ);
     auto menuCallisto = m_menuVariant->addMenu(tr("C&allisto"));
     menuCallisto->addAction(m_actionVariantCallisto2);
     menuCallisto->addAction(m_actionVariantCallisto3);
@@ -2950,6 +2964,18 @@ void MainWindow::setTitleMenuLevel()
         break;
     case Variant::callisto_3:
         title = tr("&Level (Callisto, 3 Players)");
+        break;
+    case Variant::gembloq:
+        title = tr("&Level (GembloQ, 4 Players)");
+        break;
+    case Variant::gembloq_2:
+        title = tr("&Level (GembloQ, 2 Players, 2 Colors)");
+        break;
+    case Variant::gembloq_2_4:
+        title = tr("&Level (GembloQ, 2 Players, 4 Colors)");
+        break;
+    case Variant::gembloq_3:
+        title = tr("&Level (GembloQ, 3 Players)");
         break;
     }
     m_menuLevel->setTitle(title);

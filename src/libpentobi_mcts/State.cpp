@@ -116,12 +116,17 @@ void State::add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
     auto& marker = m_marker[c];
     auto& is_forbidden = m_bd.is_forbidden(c);
     float total_gamma = 0;
+    bool is_gembloq = (m_bd.get_piece_set() == PieceSet::gembloq);
     for (Piece piece : pieces)
         for (Move mv : get_moves(c, piece, p, 0))
         {
-            LIBBOARDGAME_ASSERT(! marker[mv]);
+            // In GembloQ, not all moves covering on starting point
+            // (=quarter-square tringle) are legal.
+            if (is_gembloq && ! m_bd.is_legal(c, mv))
+                continue;
             if (check_forbidden<MAX_SIZE>(is_forbidden, mv, moves, nu_moves))
             {
+                LIBBOARDGAME_ASSERT(! marker[mv]);
                 marker.set(mv);
                 if (with_gamma)
                 {
@@ -375,13 +380,20 @@ bool State::gen_children(Tree::NodeExpander& expander, Float root_val)
                                                      m_is_symmetry_broken,
                                                      expander, root_val);
     }
-    else
+    else if (m_max_piece_size == 7)
     {
-        LIBBOARDGAME_ASSERT(m_max_piece_size == 7);
         init_moves_without_gamma<7>(to_play);
         return m_prior_knowledge.gen_children<7, 12>(m_bd, m_moves[to_play],
                                                      m_is_symmetry_broken,
                                                      expander, root_val);
+    }
+    else
+    {
+        LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
+        init_moves_without_gamma<22>(to_play);
+        return m_prior_knowledge.gen_children<22, 44>(m_bd, m_moves[to_play],
+                                                      m_is_symmetry_broken,
+                                                      expander, root_val);
     }
 }
 
@@ -401,8 +413,10 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
             }
             else if (m_max_piece_size == 6)
                 init_moves_with_gamma<6, 22, false>(to_play);
-            else
+            else if (m_max_piece_size == 7)
                 init_moves_with_gamma<7, 12, false>(to_play);
+            else
+                init_moves_with_gamma<22, 44, false>(to_play);
         }
         else if (m_has_moves[to_play])
         {
@@ -415,8 +429,10 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
             }
             else if (m_max_piece_size == 6)
                 update_moves<6, 22, false>(to_play);
-            else
+            else if (m_max_piece_size == 7)
                 update_moves<7, 12, false>(to_play);
+            else
+                update_moves<22, 44, false>(to_play);
         }
         if ((m_has_moves[to_play] = ! m_moves[to_play].empty()))
             break;
@@ -710,7 +726,8 @@ void State::start_search()
         // Pretending that the symmetry is always broken is equivalent to
         // ignoring symmetric draws
         m_is_symmetry_broken = true;
-    if (variant == Variant::trigon_2 || variant == Variant::callisto_2)
+    if (variant == Variant::trigon_2 || variant == Variant::callisto_2
+            || variant == Variant::gembloq_2)
         m_symmetry_min_nu_pieces = 5;
     else
     {
@@ -731,6 +748,9 @@ void State::start_search()
     switch (bd.get_board_type())
     {
     case BoardType::classic:
+    case BoardType::gembloq: // Not tuned
+    case BoardType::gembloq_2: // Not tuned
+    case BoardType::gembloq_3: // Not tuned
         gamma_size_factor = 5;
         break;
     case BoardType::duo:

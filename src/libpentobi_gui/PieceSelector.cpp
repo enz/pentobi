@@ -78,6 +78,41 @@ const char* pieceLayoutNexos =
     "I4 .L4 . . . W . . .L3 . . . G . . . E . . .T3 . . . . . . . . .Z4 . . . . .I2 . . . . .V4"
     " . .L4L4 . . W W . .L3L3L3 . . . . . . . . . . . .I3I3I3I3I3 . . . . 1 1 1 .I2 . .V4V4V4V4";
 
+const char* pieceLayoutGembloQ =
+    " . . . . . . . . . W W . . W W . . . . . . X X . . X X . . . . . . Y Y . . Y Y . . . . . .NANA . .NANA . . . . . .T4T4 . .T4T4 . . . . . . V V . . . . . .I3I3 . . . . . . 2 2 . . . ."
+    " . . . . . . . W W W W W W W W W W . . . . X X X X X X . . . . . . Y Y Y Y Y Y . . . . . .NANANANANANANANA . . . .T4T4T4T4T4T4 . . . . V V V V V V . . . .I3I3I3I3 . . . . 2 2 2 2 . ."
+    " . . . . . . . W W . . W W . . W W . . . . X X X X X X . . . . . . Y Y Y Y . . . . . . . . . .NANA . .NANANANA . . . .T4T4T4T4 . . . . V V . . V V . . . . . .I3I3I3I3 . . . . 2 2 . ."
+    " . . . P P . . . . . . . . . . . . . . . . X X . . X X . . . . Y Y Y Y . . . . . . . .T5T5 . . . . . . . . . . . . . . . .T4T4 . . . . . . . . . . . . . . . . . .I3I3 . . . . . . . ."
+    " . P P P P P P . . . . . .I5I5 . . . . . . . . . . . . . . . . Y Y . . . .T5T5 . .T5T5T5T5 . . . .L5L5 . . . . . . . . . . . . . . . . . .LBLB . .LBLBLBLB . . . . . . . .1A1A1A1A . ."
+    " . P P P P P P . . . .I5I5I5I5 . . . . . . . . . . . . . . . . . . . . . .T5T5T5T5T5T5 . . . . . .L5L5L5L5 . . . . . . . . . .L4L4 . . . .LBLBLBLBLBLB . . . .I4I4 . . . .1A1A . . . ."
+    " . P P P P . . . .I5I5I5I5 . . . . Z Z . . . . . . . . . .N5N5 . .N5N5 . . . .T5T5T5T5 . . . . . .L5L5L5L5 . . . . O O . . . .L4L4L4L4 . . . .LBLB . . . .I4I4I4I4 . . . . . . . .LALA"
+    " P P P . . . .I5I5I5I5 . . . . Z Z Z Z Z Z . . Z Z . . . .N5N5N5N5N5N5N5N5 . . . .T5T5 . . . .L5L5L5L5 . . . . O O O O O O . . . .L4L4L4L4 . . . . . .I4I4I4I4 . . . . . .LALALALALALA"
+    " P . . . .I5I5I5I5 . . . . . . Z Z . . Z Z Z Z Z Z . . . . . .N5N5 . .N5N5N5N5 . . . . . .L5L5L5L5 . . . . . . O O O O O O . . . .L4L4L4L4 . . . .I4I4I4I4 . . . . 1 1 . . . .LALA . ."
+    " . . . . .I5I5 . . . . . . . . . . . . . . Z Z . . . . . . . . . . . . . .N5N5 . . . . . .L5L5 . . . . . . . . . . O O . . . . . .L4L4 . . . . . .I4I4 . . . . . . 1 1 . . . . . . . .";
+
+
+Piece get_piece(const Board& bd, string name)
+{
+    if (name == ".")
+        return Piece::null();
+    if (bd.get_piece_set() == PieceSet::gembloq)
+    {
+        if (name == "1A")
+            name = "1.5";
+        else if (name == "LA")
+            name = "L2.5";
+        else if (name == "LB")
+            name = "L3.5";
+        else if (name == "NA")
+            name = "N4.5";
+    }
+    Piece piece;
+    bool found = bd.get_piece_by_name(name, piece);
+    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(found);
+    LIBBOARDGAME_ASSERT(found);
+    return piece;
+}
+
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -177,6 +212,11 @@ void PieceSelector::init()
         m_nuColumns = 28;
         m_nuRows = 6;
         break;
+    case PieceSet::gembloq:
+        m_pieceLayout = pieceLayoutGembloQ;
+        m_nuColumns = 91;
+        m_nuRows = 10;
+        break;
     }
     LIBBOARDGAME_ASSERT(m_nuColumns <= maxColumns);
     LIBBOARDGAME_ASSERT(m_nuRows <= maxRows);
@@ -185,13 +225,7 @@ void PieceSelector::init()
         {
             string name = m_pieceLayout.substr(y * m_nuColumns * 2 + x * 2, 2);
             name = trim(name);
-            Piece piece = Piece::null();
-            if (name != ".")
-            {
-                m_bd.get_piece_by_name(name, piece);
-                LIBBOARDGAME_ASSERT(! piece.is_null());
-            }
-            m_piece[x][y] = piece;
+            m_piece[x][y] = get_piece(m_bd, name);
         }
     auto& geo = m_bd.get_geometry();
     for (unsigned y = 0; y < m_nuRows; ++y)
@@ -240,11 +274,18 @@ void PieceSelector::paintEvent(QPaintEvent*)
     bool isTrigon = (pieceSet == PieceSet::trigon);
     bool isNexos = (pieceSet == PieceSet::nexos);
     bool isCallisto = (pieceSet == PieceSet::callisto);
+    bool isGembloQ = (pieceSet == PieceSet::gembloq);
     qreal ratio;
     if (isTrigon)
     {
         ratio = 1.732;
         m_fieldWidth = min(qreal(width()) / (m_nuColumns + 1),
+                           qreal(height()) / (ratio * m_nuRows));
+    }
+    else if (isGembloQ)
+    {
+        ratio = 2;
+        m_fieldWidth = min(qreal(width()) / (m_nuColumns + 2),
                            qreal(height()) / (ratio * m_nuRows));
     }
     else
@@ -277,6 +318,14 @@ void PieceSelector::paintEvent(QPaintEvent*)
                 Util::paintColorTriangle(painter, variant, m_color, isUpward,
                                          x * m_fieldWidth, y * m_fieldHeight,
                                          m_fieldWidth, m_fieldHeight);
+            }
+            else if (isGembloQ)
+            {
+                if (piece.is_null() || m_disabled[x][y])
+                    continue;
+                Util::paintColorGembloQ(painter, variant, m_color, pointType,
+                                         x * m_fieldWidth, y * m_fieldHeight,
+                                         m_fieldWidth);
             }
             else if (isNexos)
             {

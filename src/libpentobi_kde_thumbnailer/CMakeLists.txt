@@ -25,6 +25,7 @@ add_library(pentobi_kde_thumbnailer STATIC
   ../libboardgame_sgf/SgfTree.cpp
   ../libboardgame_sgf/TreeReader.cpp
   ../libpentobi_base/CallistoGeometry.cpp
+  ../libpentobi_base/GembloQGeometry.cpp
   ../libpentobi_base/NexosGeometry.cpp
   ../libpentobi_base/NodeUtil.cpp
   ../libpentobi_base/StartingPoints.cpp

@@ -45,12 +45,18 @@ using libpentobi_base::Variant;
 class PlayoutFeatures
 {
 public:
-    typedef unsigned IntType;
+    /** Integer type used in the implementation.
+        Should be fast and have enough space for the masks used. Note that
+        logically, we want uint_fast32_t, but that is an 8-byte unsigned
+        with GCC on Intel CPUs, which is *slower* than a 4-byte unsigned. */
+    typedef uint_least32_t IntType;
 
     /** The maximum number of local points for a move.
         The number can be higher than PieceInfo::max_size (see class
         description). */
     static const unsigned max_local = 2 * PieceInfo::max_size;
+    static_assert(max_local < 0x01000u, ""); // Value for forbidden status
+    static_assert(PieceInfo::max_size <= 0xff, ""); // Mask for forbidden status
 
     /** Compute the sum of the feature values for a move. */
     class Compute
@@ -71,7 +77,7 @@ public:
 
         bool is_forbidden() const
         {
-            return (m_value & 0xf000u) != 0;
+            return (m_value & 0xff000u) != 0;
         }
 
         /** Get the number of local points for this move.
@@ -121,7 +127,7 @@ inline void PlayoutFeatures::init_snapshot(const Board& bd, Color c)
     m_point_value[Point::null()] = 0;
     auto& is_forbidden = bd.is_forbidden(c);
     for (Point p : bd)
-        m_snapshot[p] = (is_forbidden[p] ? 0x1000u : 0);
+        m_snapshot[p] = (is_forbidden[p] ? 0x01000u : 0);
 }
 
 
@@ -135,7 +141,7 @@ inline void PlayoutFeatures::set_forbidden(const MoveInfo<MAX_SIZE>& info)
 {
     auto p = info.begin();
     for (unsigned i = 0; i < MAX_SIZE; ++i, ++p)
-        m_point_value[*p] = 0x1000u;
+        m_point_value[*p] = 0x01000u;
     m_point_value[Point::null()] = 0;
 }
 
@@ -145,7 +151,7 @@ inline void PlayoutFeatures::set_forbidden(
 {
     for (auto i = info_ext.begin_adj(), end = info_ext.end_adj(); i != end;
          ++i)
-        m_point_value[*i] = 0x1000u;
+        m_point_value[*i] = 0x01000u;
 }
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
@@ -153,7 +159,7 @@ inline void PlayoutFeatures::set_local(const Board& bd)
 {
     // Clear old info about local points
     for (Point p : m_local_points)
-        m_point_value[p] &= 0xf000u;
+        m_point_value[p] &= 0xff000u;
     unsigned nu_local = 0;
 
     Color to_play = bd.get_to_play();

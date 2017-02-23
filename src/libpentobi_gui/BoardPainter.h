@@ -92,6 +92,8 @@ private:
 
     bool m_isCallisto;
 
+    bool m_isGembloQ;
+
     const Geometry* m_geo;
 
     Variant m_variant;

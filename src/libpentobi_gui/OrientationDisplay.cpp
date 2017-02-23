@@ -70,6 +70,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     bool isTrigon = (pieceSet == PieceSet::trigon);
     bool isNexos = (pieceSet == PieceSet::nexos);
     bool isCallisto = (pieceSet == PieceSet::callisto);
+    bool isGembloQ = (pieceSet == PieceSet::gembloq);
     qreal ratio;
     int columns;
     int rows;
@@ -78,6 +79,12 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
         ratio = 1.732;
         columns = 7;
         rows = 4;
+    }
+    else if (isGembloQ)
+    {
+        ratio = 2;
+        columns = 12;
+        rows = 6;
     }
     else if (isNexos)
     {
@@ -140,6 +147,9 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
             Util::paintColorTriangle(painter, variant, m_color, isUpward,
                                      x, y, fieldWidth, fieldHeight);
         }
+        else if (isGembloQ)
+            Util::paintColorGembloQ(painter, variant, m_color, pointType, x, y,
+                                    fieldWidth);
         else if (isNexos)
         {
             if (pointType == 1 || pointType == 2)

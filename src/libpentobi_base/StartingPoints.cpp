@@ -91,6 +91,48 @@ void StartingPoints::init(Variant variant, const Geometry& geo)
     case BoardType::callisto_2:
     case BoardType::callisto_3:
         break;
+    case BoardType::gembloq:
+        add_colored_starting_point(geo, 1, 0, Color(0));
+        add_colored_starting_point(geo, 2, 0, Color(0));
+        add_colored_starting_point(geo, 1, 1, Color(0));
+        add_colored_starting_point(geo, 2, 1, Color(0));
+        add_colored_starting_point(geo, 53, 0, Color(1));
+        add_colored_starting_point(geo, 54, 0, Color(1));
+        add_colored_starting_point(geo, 53, 1, Color(1));
+        add_colored_starting_point(geo, 54, 1, Color(1));
+        add_colored_starting_point(geo, 53, 26, Color(2));
+        add_colored_starting_point(geo, 54, 26, Color(2));
+        add_colored_starting_point(geo, 53, 27, Color(2));
+        add_colored_starting_point(geo, 54, 27, Color(2));
+        add_colored_starting_point(geo, 1, 26, Color(3));
+        add_colored_starting_point(geo, 2, 26, Color(3));
+        add_colored_starting_point(geo, 1, 27, Color(3));
+        add_colored_starting_point(geo, 2, 27, Color(3));
+        break;
+    case BoardType::gembloq_2:
+        add_colored_starting_point(geo, 13, 0, Color(0));
+        add_colored_starting_point(geo, 14, 0, Color(0));
+        add_colored_starting_point(geo, 13, 1, Color(0));
+        add_colored_starting_point(geo, 14, 1, Color(0));
+        add_colored_starting_point(geo, 29, 20, Color(1));
+        add_colored_starting_point(geo, 30, 20, Color(1));
+        add_colored_starting_point(geo, 29, 21, Color(1));
+        add_colored_starting_point(geo, 30, 21, Color(1));
+        break;
+    case BoardType::gembloq_3:
+        add_colored_starting_point(geo, 25, 24, Color(0));
+        add_colored_starting_point(geo, 26, 24, Color(0));
+        add_colored_starting_point(geo, 25, 25, Color(0));
+        add_colored_starting_point(geo, 26, 25, Color(0));
+        add_colored_starting_point(geo, 1, 6, Color(1));
+        add_colored_starting_point(geo, 2, 6, Color(1));
+        add_colored_starting_point(geo, 1, 7, Color(1));
+        add_colored_starting_point(geo, 2, 7, Color(1));
+        add_colored_starting_point(geo, 49, 6, Color(2));
+        add_colored_starting_point(geo, 50, 6, Color(2));
+        add_colored_starting_point(geo, 49, 7, Color(2));
+        add_colored_starting_point(geo, 50, 7, Color(2));
+        break;
     }
 }
 
