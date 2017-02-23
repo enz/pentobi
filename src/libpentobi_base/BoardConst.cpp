@@ -1275,7 +1275,7 @@ void BoardConst::init_symmetry_info()
     }
 }
 
-inline void BoardConst::sort(MovePoints& points) const
+void BoardConst::sort(MovePoints& points) const
 {
     auto less = [this](Point a, Point b)
     {
