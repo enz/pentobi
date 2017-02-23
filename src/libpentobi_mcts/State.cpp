@@ -28,12 +28,28 @@ using libpentobi_base::ScoreType;
 
 namespace {
 
-/** Gamma value for PlayoutFeatures::get_nu_local().
-    The value of nu_local dominates all other features, so we use a high
-    gamma. Above some limit, we don't care about the exact value. */
-float gamma_local[PlayoutFeatures::max_local + 1] =
-  { 1, 1e6f, 1e12f, 1e18f, 1e24f, 1e25f, 1e25f, 1e25f, 1e25f, 1e25f, 1e25f,
-    1e25f, 1e25f, 1e25f, 1e25f };
+/** Gamma value for PlayoutFeatures::get_nu_local(). */
+float gamma_local[PlayoutFeatures::max_local + 1];
+
+/** Initialize variables that are global for performance reasons. */
+struct Initializer
+{
+    Initializer();
+};
+
+Initializer::Initializer()
+{
+    static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
+    gamma_local[0] = 1;
+    gamma_local[1] = 1e6f;
+    gamma_local[2] = 1e12f;
+    gamma_local[3] = 1e18f;
+    gamma_local[4] = 1e24f;
+    for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
+        gamma_local[4] = 1e25f;
+}
+
+Initializer g_initializer;
 
 inline Float sigmoid(Float steepness, Float x)
 {
