@@ -54,7 +54,7 @@ Item {
         var n = columns
         if (showCoordinates) n += (isTrigon ? 3 : 2)
         if (isTrigon) return sideLength / (n + 1)
-        else if (isNexos) Math.floor(sideLength / (n - 0.5))
+        else if (isNexos) return Math.floor(sideLength / (n - 0.5))
         else return Math.floor(sideLength / n)
     }
     property real gridHeight: {
