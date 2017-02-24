@@ -410,7 +410,7 @@ void Board::init_variant(Variant variant)
         Piece piece(i);
         auto& piece_info = get_piece_info(piece);
         m_score_points[piece] = piece_info.get_score_points();
-        if (piece_info.get_points().size() == 1)
+        if (m_score_points[piece] == 1)
             m_one_piece = piece;
     }
 }
