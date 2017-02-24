@@ -54,12 +54,12 @@ Item {
         var n = columns
         if (showCoordinates) n += (isTrigon ? 3 : 2)
         if (isTrigon) return sideLength / (n + 1)
-        else if (isNexos) return Math.floor(sideLength / (n - 0.5))
-        else return Math.floor(sideLength / n)
+        if (isNexos) return Math.floor(sideLength / (n - 0.5))
+        return Math.floor(sideLength / n)
     }
     property real gridHeight: {
         if (isTrigon) return Math.sqrt(3) * gridWidth
-        else return gridWidth
+        return gridWidth
     }
     property real startingPointSize: {
         if (isTrigon) return 0.27 * gridHeight
@@ -71,23 +71,22 @@ Item {
 
     function mapFromGameX(x) {
         if (isTrigon) return image.x + (x + 0.5) * gridWidth
-        else if (isNexos) return image.x + (x - 0.25) * gridWidth
-        else return image.x + x * gridWidth
+        if (isNexos) return image.x + (x - 0.25) * gridWidth
+        return image.x + x * gridWidth
     }
     function mapFromGameY(y) {
         if (isNexos) return image.y + (y - 0.25) * gridHeight
-        else return image.y + y * gridHeight
+        return image.y + y * gridHeight
     }
     function mapToGame(pos) {
         if (isTrigon)
             return Qt.point((pos.x - image.x - 0.5 * gridWidth) / gridWidth,
                             (pos.y - image.y) / gridHeight)
-        else if (isNexos)
+        if (isNexos)
             return Qt.point((pos.x - image.x + 0.25 * gridWidth) / gridWidth,
                             (pos.y - image.y + 0.25 * gridHeight) / gridHeight)
-        else
-            return Qt.point((pos.x - image.x) / gridWidth,
-                            (pos.y - image.y) / gridHeight)
+        return Qt.point((pos.x - image.x) / gridWidth,
+                        (pos.y - image.y) / gridHeight)
     }
     function getCenterYTrigon(pos) {
 
@@ -107,12 +106,12 @@ Item {
 
         width: {
             if (isTrigon) return gridWidth * (columns + 1)
-            else if (isNexos) return gridWidth * (columns - 0.5)
-            else return gridWidth * columns
+            if (isNexos) return gridWidth * (columns - 0.5)
+            return gridWidth * columns
         }
         height: {
             if (isNexos) return gridHeight * (rows - 0.5)
-            else return gridHeight * rows
+            return gridHeight * rows
         }
         anchors.centerIn: root
         source: {
