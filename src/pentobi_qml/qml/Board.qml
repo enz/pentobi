@@ -51,7 +51,7 @@ Item {
         if (isTrigon) sideLength = Math.min(width, Math.sqrt(3) * height)
         else sideLength = Math.min(width, height)
         if (isTrigon) return sideLength / (columns + 1)
-        else if (isNexos) Math.floor(sideLength / (columns - 0.5))
+        else if (isNexos) return Math.floor(sideLength / (columns - 0.5))
         else return Math.floor(sideLength / columns)
     }
     property real gridHeight: {
