@@ -779,13 +779,13 @@ void State::start_search()
         // Pretending that the symmetry is always broken is equivalent to
         // ignoring symmetric draws
         m_is_symmetry_broken = true;
-    if (variant == Variant::trigon_2 || variant == Variant::callisto_2
-            || variant == Variant::gembloq_2)
+    if (variant == Variant::trigon_2 || variant == Variant::callisto_2)
         m_symmetry_min_nu_pieces = 5;
     else
     {
         LIBBOARDGAME_ASSERT(! m_check_symmetric_draw || variant == Variant::duo
-                            || variant == Variant::junior);
+                            || variant == Variant::junior
+                            || variant == Variant::gembloq_2);
         m_symmetry_min_nu_pieces = 3;
     }
 
