@@ -801,9 +801,6 @@ void State::start_search()
     switch (bd.get_board_type())
     {
     case BoardType::classic:
-    case BoardType::gembloq: // Not tuned
-    case BoardType::gembloq_2: // Not tuned
-    case BoardType::gembloq_3: // Not tuned
         gamma_size_factor = 5;
         break;
     case BoardType::duo:
@@ -823,6 +820,11 @@ void State::start_search()
     case BoardType::callisto_3: // Not tuned
         gamma_size_factor = 12;
         gamma_nu_attach_factor = 1.8f;
+        break;
+    case BoardType::gembloq_2:
+    case BoardType::gembloq: // Not tuned
+    case BoardType::gembloq_3: // Not tuned
+        gamma_size_factor = 1.5f;
         break;
     }
     for (Piece::IntType i = 0; i < m_bc->get_nu_pieces(); ++i)
