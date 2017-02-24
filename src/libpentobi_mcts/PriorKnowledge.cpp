@@ -108,12 +108,12 @@ void PriorKnowledge::start_search(const Board& bd)
     case Variant::gembloq_3:
         m_check_dist_to_center.fill(true);
         m_dist_to_center_max_pieces = 12;
-        m_max_dist_diff = 0.3f;
+        m_max_dist_diff = 0.5f;
         break;
     case Variant::gembloq_2:
         m_check_dist_to_center.fill(true);
         m_dist_to_center_max_pieces = 4;
-        m_max_dist_diff = 0.3f;
+        m_max_dist_diff = 0.5f;
         break;
     }
 
