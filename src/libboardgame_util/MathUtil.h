@@ -30,6 +30,12 @@ inline T fast_exp(T x)
     return x;
 }
 
+/** Modulus operation with always positive result. */
+inline int mod(int a, int b)
+{
+    return ((a % b) + b) % b;
+}
+
 //-----------------------------------------------------------------------------
 
 } // namespace libboardgame_util

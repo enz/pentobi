@@ -10,11 +10,13 @@
 
 #include "GembloQGeometry.h"
 
+#include "libboardgame_util/MathUtil.h"
 #include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
 
 using libboardgame_base::CoordPoint;
+using libboardgame_util::mod;
 
 //-----------------------------------------------------------------------------
 
@@ -144,8 +146,7 @@ unsigned GembloQGeometry::get_period_y() const
 
 unsigned GembloQGeometry::get_point_type(int x, int y) const
 {
-    int t = ((x + 2 * (y % 2 != 0)) % 4);
-    return t >= 0 ? t : t + 4;
+    return mod(x + 2 * (y % 2 != 0), 4);
 }
 
 bool GembloQGeometry::init_is_onboard(unsigned x, unsigned y) const

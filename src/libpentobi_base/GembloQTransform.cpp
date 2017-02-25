@@ -10,18 +10,16 @@
 
 #include "GembloQTransform.h"
 
+#include "libboardgame_util/MathUtil.h"
+
 namespace libpentobi_base {
+
+using libboardgame_util::mod;
 
 //-----------------------------------------------------------------------------
 
 namespace
 {
-
-/** Modulo operation that also works for negative integers. */
-int mod(int a, int b)
-{
-    return ((a % b) + b) % b;
-}
 
 /** Divide integer by 2 and round down. */
 int div2(int a)
