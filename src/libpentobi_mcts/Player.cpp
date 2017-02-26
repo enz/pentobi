@@ -161,6 +161,7 @@ Move Player::genmove(const Board& bd, Color c)
             max_count = counts_classic[level - 1];
             break;
         case BoardType::duo:
+        case BoardType::gembloq_2: // Not measured
             max_count = counts_duo[level - 1];
             break;
         case BoardType::trigon:
@@ -175,7 +176,6 @@ Move Player::genmove(const Board& bd, Color c)
             max_count = counts_nexos[level - 1];
             break;
         case BoardType::callisto_2:
-        case BoardType::gembloq_2: // Not measured
             max_count = counts_callisto_2[level - 1];
             break;
         }
