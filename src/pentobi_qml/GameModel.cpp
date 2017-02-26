@@ -393,7 +393,7 @@ bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
     int offX = static_cast<int>(round(coord.x() - center.x()));
     int offY = static_cast<int>(round(coord.y() - center.y()));
     auto& geo = bd.get_geometry();
-    if (geo.get_point_type(offX, offY) != transform->get_new_point_type())
+    if (geo.get_point_type(offX, offY) != transform->get_point_type())
         return false;
     MovePoints points;
     for (auto& p : piecePoints)

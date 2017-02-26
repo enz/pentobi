@@ -126,7 +126,7 @@ void OrientationDisplay::paintEvent(QPaintEvent*)
     m_transform->transform(points.begin(), points.end());
     auto& geo = m_bd.get_geometry();
     type_match_shift(geo, points.begin(), points.end(),
-                     m_transform->get_new_point_type());
+                     m_transform->get_point_type());
     unsigned width;
     unsigned height;
     CoordPoint offset;

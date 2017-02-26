@@ -1107,7 +1107,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
                 LIBBOARDGAME_LOG("Transformation ", get_type_name(transform));
 #endif
             }
-            if (transforms[i]->get_new_point_type() != point_type)
+            if (transforms[i]->get_point_type() != point_type)
                 continue;
             bool is_onboard = true;
             for (MovePoints::IntType j = 0; j < piece_size; ++j)

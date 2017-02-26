@@ -26,19 +26,19 @@ public:
         For example, in the Blokus Trigon board, a reflection at the y axis
         changes the type from 0 (=downside triangle) to 1 (=upside triangle).
         @see Geometry::get_point_type() */
-    unsigned get_new_point_type() const { return m_new_point_type; }
+    unsigned get_point_type() const { return m_point_type; }
 
     /** @tparam I An iterator of a container with elements of type CoordPoint */
     template<class I>
     void transform(I begin, I end) const;
 
 protected:
-    explicit Transform(unsigned new_point_type)
-        : m_new_point_type(new_point_type)
+    explicit Transform(unsigned point_type)
+        : m_point_type(point_type)
     {}
 
 private:
-    unsigned m_new_point_type;
+    unsigned m_point_type;
 };
 
 template<class I>

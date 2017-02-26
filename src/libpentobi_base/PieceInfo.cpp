@@ -110,7 +110,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
         transform->transform(transformed_points.begin(),
                              transformed_points.end());
         NormalizedPoints normalized = normalize(transformed_points,
-                                                transform->get_new_point_type(),
+                                                transform->get_point_type(),
                                                 geo);
         if (log_piece_creation)
             LIBBOARDGAME_LOG("Normalized ", normalized.points, " point type ",
@@ -188,7 +188,7 @@ const Transform* PieceInfo::find_transform(const Geometry& geo,
         Points piece_points = get_points();
         transform->transform(piece_points.begin(), piece_points.end());
         NormalizedPoints normalized_piece =
-            normalize(piece_points, transform->get_new_point_type(), geo);
+            normalize(piece_points, transform->get_point_type(), geo);
         if (normalized_piece == normalized)
             return transform;
     }
