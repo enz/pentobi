@@ -801,7 +801,12 @@ inline void Board::place(Color c, Move mv)
     if (--state_color.nu_left_piece[piece] == 0)
     {
         state_color.pieces_left.remove_fast(piece);
-        if (state_color.pieces_left.empty())
+        if (MAX_SIZE == 22) // GembloQ
+        {
+            LIBBOARDGAME_ASSERT(m_bonus_all_pieces == 0);
+            LIBBOARDGAME_ASSERT(m_bonus_one_piece == 0);
+        }
+        else if (state_color.pieces_left.empty())
         {
             state_color.points += m_bonus_all_pieces;
             if (MAX_SIZE == 7) // Nexos
