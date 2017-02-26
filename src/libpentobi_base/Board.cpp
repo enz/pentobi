@@ -460,7 +460,7 @@ bool Board::is_legal(Color c, Move mv) const
                     && get_starting_point_color(*i) == c))
             ++n;
     while (++i != end);
-    return n == m_needed_starting_points;
+    return n >= m_needed_starting_points;
 }
 
 /** Remove forbidden points from attach point lists.
