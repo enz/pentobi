@@ -387,29 +387,20 @@ bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
     auto& info = bd.get_piece_info(piece);
     PiecePoints piecePoints = info.get_points();
     transform->transform(piecePoints.begin(), piecePoints.end());
-    auto boardType = bd.get_board_type();
-    auto newPointType = transform->get_new_point_type();
-    bool pointTypeChanged =
-            ((boardType == BoardType::trigon && newPointType == 1)
-             || (boardType == BoardType::trigon_3 && newPointType == 0));
     QPointF center(PieceModel::findCenter(bd, piecePoints, false));
     // Round y of center to a multiple of 0.5, works better in Trigon
     center.setY(round(2 * center.y()) / 2);
     int offX = static_cast<int>(round(coord.x() - center.x()));
     int offY = static_cast<int>(round(coord.y() - center.y()));
     auto& geo = bd.get_geometry();
+    if (geo.get_point_type(offX, offY) != transform->get_new_point_type())
+        return false;
     MovePoints points;
     for (auto& p : piecePoints)
     {
         int x = p.x + offX;
         int y = p.y + offY;
         if (! geo.is_onboard(CoordPoint(x, y)))
-            return false;
-        auto pointType = geo.get_point_type(p);
-        auto boardPointType = geo.get_point_type(x, y);
-        if (! pointTypeChanged && pointType != boardPointType)
-            return false;
-        if (pointTypeChanged && pointType == boardPointType)
             return false;
         points.push_back(geo.get_point(x, y));
     }
