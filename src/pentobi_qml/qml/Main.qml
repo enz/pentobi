@@ -167,7 +167,6 @@ Window {
         ComputerColorDialog {
             id: computerColorDialog
 
-            gameVariant: gameModel.gameVariant
             onAccepted: {
                 root.computerPlays0 = computerColorDialog.computerPlays0
                 root.computerPlays1 = computerColorDialog.computerPlays1

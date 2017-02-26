@@ -49,6 +49,10 @@ Menu {
             case "callisto": return qsTr("&Level (Callisto, 4 Players)")
             case "callisto_2": return qsTr("&Level (Callisto, 2 Players)")
             case "callisto_3": return qsTr("&Level (Callisto, 3 Players)")
+            case "gembloq": return qsTr("&Level (GembloQ, 4 Players)")
+            case "gembloq_2": return qsTr("&Level (GembloQ, 2 Players, 2 Colors)")
+            case "gembloq_2_4": return qsTr("&Level (GembloQ, 2 Players, 4 Colors)")
+            case "gembloq_3": return qsTr("&Level (GembloQ, 3 Players)")
             }
         enabled: ! isRated
         visible: ! isAndroid || enabled

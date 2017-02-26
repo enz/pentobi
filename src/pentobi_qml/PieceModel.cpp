@@ -8,6 +8,8 @@
 
 #include <QDebug>
 #include "libboardgame_base/RectTransform.h"
+#include "libboardgame_sys/Compiler.h"
+#include "libpentobi_base/GembloQTransform.h"
 #include "libpentobi_base/TrigonTransform.h"
 
 using namespace std;
@@ -21,9 +23,18 @@ using libboardgame_base::TransfRectRefl;
 using libboardgame_base::TransfRectRot90Refl;
 using libboardgame_base::TransfRectRot180Refl;
 using libboardgame_base::TransfRectRot270Refl;
+using libboardgame_sys::get_type_name;
 using libpentobi_base::BoardType;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::PieceSet;
+using libpentobi_base::TransfGembloQIdentity;
+using libpentobi_base::TransfGembloQRot90;
+using libpentobi_base::TransfGembloQRot180;
+using libpentobi_base::TransfGembloQRot270;
+using libpentobi_base::TransfGembloQRefl;
+using libpentobi_base::TransfGembloQRot90Refl;
+using libpentobi_base::TransfGembloQRot180Refl;
+using libpentobi_base::TransfGembloQRot270Refl;
 using libpentobi_base::TransfTrigonIdentity;
 using libpentobi_base::TransfTrigonRefl;
 using libpentobi_base::TransfTrigonReflRot60;
@@ -155,48 +166,75 @@ QPointF PieceModel::gameCoord() const
 
 const Transform* PieceModel::getTransform(const QString& state) const
 {
-    auto variant = m_bd.get_variant();
-    bool isTrigon = (variant == Variant::trigon || variant == Variant::trigon_2
-                     || variant == Variant::trigon_3);
-    auto& transforms = m_bd.get_transforms();
     // See comment in getTransform() about the mapping between states and
     // transform classes.
-    if (state.isEmpty())
-        return isTrigon ? transforms.find<TransfTrigonIdentity>()
-                        : transforms.find<TransfIdentity>();
-    if (state == QLatin1String("rot60"))
-        return transforms.find<TransfTrigonRot60>();
-    if (state == QLatin1String("rot90"))
-        return transforms.find<TransfRectRot90>();
-    if (state == QLatin1String("rot120"))
-        return transforms.find<TransfTrigonRot120>();
-    if (state == QLatin1String("rot180"))
-        return isTrigon ? transforms.find<TransfTrigonRot180>()
-                        : transforms.find<TransfRectRot180>();
-    if (state == QLatin1String("rot240"))
-        return transforms.find<TransfTrigonRot240>();
-    if (state == QLatin1String("rot270"))
-        return transforms.find<TransfRectRot270>();
-    if (state == QLatin1String("rot300"))
-        return transforms.find<TransfTrigonRot300>();
-    if (state == QLatin1String("flip"))
-        return isTrigon ? transforms.find<TransfTrigonReflRot180>()
-                        : transforms.find<TransfRectRot180Refl>();
-    if (state == QLatin1String("rot60Flip"))
-        return transforms.find<TransfTrigonReflRot120>();
-    if (state == QLatin1String("rot90Flip"))
-        return transforms.find<TransfRectRot90Refl>();
-    if (state == QLatin1String("rot120Flip"))
-        return transforms.find<TransfTrigonReflRot60>();
-    if (state == QLatin1String("rot180Flip"))
-        return isTrigon ? transforms.find<TransfTrigonRefl>()
-                        : transforms.find<TransfRectRefl>();
-    if (state == QLatin1String("rot240Flip"))
-        return transforms.find<TransfTrigonReflRot300>();
-    if (state == QLatin1String("rot270Flip"))
-        return transforms.find<TransfRectRot270Refl>();
-    if (state == QLatin1String("rot300Flip"))
-        return transforms.find<TransfTrigonReflRot240>();
+    auto& transforms = m_bd.get_transforms();
+    auto pieceSet = m_bd.get_piece_set();
+    if (pieceSet == PieceSet::trigon)
+    {
+        if (state.isEmpty())
+            return transforms.find<TransfTrigonIdentity>();
+        if (state == QLatin1String("rot60"))
+            return transforms.find<TransfTrigonRot60>();
+        if (state == QLatin1String("rot120"))
+            return transforms.find<TransfTrigonRot120>();
+        if (state == QLatin1String("rot180"))
+            return transforms.find<TransfTrigonRot180>();
+        if (state == QLatin1String("rot240"))
+            return transforms.find<TransfTrigonRot240>();
+        if (state == QLatin1String("rot300"))
+            return transforms.find<TransfTrigonRot300>();
+        if (state == QLatin1String("flip"))
+            return transforms.find<TransfTrigonReflRot180>();
+        if (state == QLatin1String("rot60Flip"))
+            return transforms.find<TransfTrigonReflRot120>();
+        if (state == QLatin1String("rot120Flip"))
+            return transforms.find<TransfTrigonReflRot60>();
+        if (state == QLatin1String("rot180Flip"))
+            return transforms.find<TransfTrigonRefl>();
+        if (state == QLatin1String("rot240Flip"))
+            return transforms.find<TransfTrigonReflRot300>();
+        if (state == QLatin1String("rot300Flip"))
+            return transforms.find<TransfTrigonReflRot240>();
+    }
+    else if (pieceSet == PieceSet::gembloq)
+    {
+        if (state.isEmpty())
+            return transforms.find<TransfGembloQIdentity>();
+        if (state == QLatin1String("rot90"))
+            return transforms.find<TransfGembloQRot90>();
+        if (state == QLatin1String("rot180"))
+            return transforms.find<TransfGembloQRot180>();
+        if (state == QLatin1String("rot270"))
+            return transforms.find<TransfGembloQRot270>();
+        if (state == QLatin1String("flip"))
+            return transforms.find<TransfGembloQRot180Refl>();
+        if (state == QLatin1String("rot90Flip"))
+            return transforms.find<TransfGembloQRot90Refl>();
+        if (state == QLatin1String("rot180Flip"))
+            return transforms.find<TransfGembloQRefl>();
+        if (state == QLatin1String("rot270Flip"))
+            return transforms.find<TransfGembloQRot270Refl>();
+    }
+    else
+    {
+        if (state.isEmpty())
+            return transforms.find<TransfIdentity>();
+        if (state == QLatin1String("rot90"))
+            return transforms.find<TransfRectRot90>();
+        if (state == QLatin1String("rot180"))
+            return transforms.find<TransfRectRot180>();
+        if (state == QLatin1String("rot270"))
+            return transforms.find<TransfRectRot270>();
+        if (state == QLatin1String("flip"))
+            return transforms.find<TransfRectRot180Refl>();
+        if (state == QLatin1String("rot90Flip"))
+            return transforms.find<TransfRectRot90Refl>();
+        if (state == QLatin1String("rot180Flip"))
+            return transforms.find<TransfRectRefl>();
+        if (state == QLatin1String("rot270Flip"))
+            return transforms.find<TransfRectRot270Refl>();
+    }
     qWarning() << "PieceModel: unknown state " << m_state;
     return transforms.find<TransfIdentity>();
 }
@@ -302,49 +340,79 @@ void PieceModel::setMoveLabel(const QString& moveLabel)
 
 void PieceModel::setTransform(const Transform* transform)
 {
-    QString state;
+    QString state = "invalid";
     // libboardgame_base uses a different convention for the order of flipping
     // and rotation, so the names of the states and transform classes differ
     // for flipped states.
-    if (dynamic_cast<const TransfIdentity*>(transform)
-            || dynamic_cast<const TransfTrigonIdentity*>(transform))
-        ;
-    else if (dynamic_cast<const TransfTrigonRot60*>(transform))
-        state = QLatin1String("rot60");
-    else if (dynamic_cast<const TransfRectRot90*>(transform))
-        state = QLatin1String("rot90");
-    else if (dynamic_cast<const TransfTrigonRot120*>(transform))
-        state = QLatin1String("rot120");
-    else if (dynamic_cast<const TransfRectRot180*>(transform)
-             || dynamic_cast<const TransfTrigonRot180*>(transform))
-        state = QLatin1String("rot180");
-    else if (dynamic_cast<const TransfTrigonRot240*>(transform))
-        state = QLatin1String("rot240");
-    else if (dynamic_cast<const TransfRectRot270*>(transform))
-        state = QLatin1String("rot270");
-    else if (dynamic_cast<const TransfTrigonRot300*>(transform))
-        state = QLatin1String("rot300");
-    else if (dynamic_cast<const TransfRectRot180Refl*>(transform)
-             || dynamic_cast<const TransfTrigonReflRot180*>(transform))
-        state = QLatin1String("flip");
-    else if (dynamic_cast<const TransfTrigonReflRot120*>(transform))
-        state = QLatin1String("rot60Flip");
-    else if (dynamic_cast<const TransfRectRot90Refl*>(transform))
-        state = QLatin1String("rot90Flip");
-    else if (dynamic_cast<const TransfTrigonReflRot60*>(transform))
-        state = QLatin1String("rot120Flip");
-    else if (dynamic_cast<const TransfRectRefl*>(transform)
-             || dynamic_cast<const TransfTrigonRefl*>(transform))
-        state = QLatin1String("rot180Flip");
-    else if (dynamic_cast<const TransfTrigonReflRot300*>(transform))
-        state = QLatin1String("rot240Flip");
-    else if (dynamic_cast<const TransfRectRot270Refl*>(transform))
-        state = QLatin1String("rot270Flip");
-    else if (dynamic_cast<const TransfTrigonReflRot240*>(transform))
-        state = QLatin1String("rot300Flip");
+    auto pieceSet = m_bd.get_piece_set();
+    if (pieceSet == PieceSet::trigon)
+    {
+        if (dynamic_cast<const TransfTrigonIdentity*>(transform))
+            state = QString();
+        else if (dynamic_cast<const TransfTrigonRot60*>(transform))
+            state = QLatin1String("rot60");
+        else if (dynamic_cast<const TransfTrigonRot120*>(transform))
+            state = QLatin1String("rot120");
+        else if (dynamic_cast<const TransfTrigonRot180*>(transform))
+            state = QLatin1String("rot180");
+        else if (dynamic_cast<const TransfTrigonRot240*>(transform))
+            state = QLatin1String("rot240");
+        else if (dynamic_cast<const TransfTrigonRot300*>(transform))
+            state = QLatin1String("rot300");
+        else if (dynamic_cast<const TransfTrigonReflRot180*>(transform))
+            state = QLatin1String("flip");
+        else if (dynamic_cast<const TransfTrigonReflRot120*>(transform))
+            state = QLatin1String("rot60Flip");
+        else if (dynamic_cast<const TransfTrigonReflRot60*>(transform))
+            state = QLatin1String("rot120Flip");
+        else if (dynamic_cast<const TransfTrigonRefl*>(transform))
+            state = QLatin1String("rot180Flip");
+        else if (dynamic_cast<const TransfTrigonReflRot300*>(transform))
+            state = QLatin1String("rot240Flip");
+        else if (dynamic_cast<const TransfTrigonReflRot240*>(transform))
+            state = QLatin1String("rot300Flip");
+    }
+    else if (pieceSet == PieceSet::gembloq)
+    {
+        if (dynamic_cast<const TransfGembloQIdentity*>(transform))
+            state = QString();
+        else if (dynamic_cast<const TransfGembloQRot90*>(transform))
+            state = QLatin1String("rot90");
+        else if (dynamic_cast<const TransfGembloQRot180*>(transform))
+            state = QLatin1String("rot180");
+        else if (dynamic_cast<const TransfGembloQRot270*>(transform))
+            state = QLatin1String("rot270");
+        else if (dynamic_cast<const TransfGembloQRot180Refl*>(transform))
+            state = QLatin1String("flip");
+        else if (dynamic_cast<const TransfGembloQRot90Refl*>(transform))
+            state = QLatin1String("rot90Flip");
+        else if (dynamic_cast<const TransfGembloQRefl*>(transform))
+            state = QLatin1String("rot180Flip");
+        else if (dynamic_cast<const TransfGembloQRot270Refl*>(transform))
+            state = QLatin1String("rot270Flip");
+    }
     else
     {
-        qWarning() << "Invalid Transform " << typeid(*transform).name();
+        if (dynamic_cast<const TransfIdentity*>(transform))
+            state = QString();
+        else if (dynamic_cast<const TransfRectRot90*>(transform))
+            state = QLatin1String("rot90");
+        else if (dynamic_cast<const TransfRectRot180*>(transform))
+            state = QLatin1String("rot180");
+        else if (dynamic_cast<const TransfRectRot270*>(transform))
+            state = QLatin1String("rot270");
+        else if (dynamic_cast<const TransfRectRot180Refl*>(transform))
+            state = QLatin1String("flip");
+        else if (dynamic_cast<const TransfRectRot90Refl*>(transform))
+            state = QLatin1String("rot90Flip");
+        else if (dynamic_cast<const TransfRectRefl*>(transform))
+            state = QLatin1String("rot180Flip");
+        else if (dynamic_cast<const TransfRectRot270Refl*>(transform))
+            state = QLatin1String("rot270Flip");
+    }
+    if (state == "invalid")
+    {
+        qWarning() << "Invalid Transform" << get_type_name(*transform).c_str();
         return;
     }
     if (m_state == state)

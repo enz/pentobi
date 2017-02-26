@@ -159,6 +159,7 @@ Item
             if (board.isTrigon) return board.gridHeight * 6.2
             if (board.isNexos) return board.gridHeight * 8.9
             if (board.isCallisto) return board.gridHeight * 5.5
+            if (board.isGembloQ) return board.gridHeight * 9.0
             return board.gridHeight * 6.5
         }
         legal: {

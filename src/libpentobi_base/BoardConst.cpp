@@ -18,6 +18,7 @@
 #include "libboardgame_base/Transform.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/StringUtil.h"
+#include "libboardgame_sys/Compiler.h"
 
 namespace libpentobi_base {
 
@@ -25,6 +26,7 @@ using libboardgame_base::Transform;
 using libboardgame_util::split;
 using libboardgame_util::to_lower;
 using libboardgame_util::trim;
+using libboardgame_sys::get_type_name;
 
 //-----------------------------------------------------------------------------
 
@@ -1102,7 +1104,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
             {
 #if ! LIBBOARDGAME_DISABLE_LOG
                 auto& transform = *transforms[i];
-                LIBBOARDGAME_LOG("Transformation ", typeid(transform).name());
+                LIBBOARDGAME_LOG("Transformation ", get_type_name(transform));
 #endif
             }
             if (transforms[i]->get_new_point_type() != point_type)

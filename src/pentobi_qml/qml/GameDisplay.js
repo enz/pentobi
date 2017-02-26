@@ -36,6 +36,8 @@ function createPieces() {
         file = "PieceNexos.qml"
     else if (gameModel.gameVariant.startsWith("callisto"))
         file = "PieceCallisto.qml"
+    else if (gameModel.gameVariant.startsWith("gembloq"))
+        file = "PieceGembloQ.qml"
     else
         file = "PieceClassic.qml"
     var component = Qt.createComponent(file)

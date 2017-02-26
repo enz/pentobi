@@ -138,7 +138,8 @@ GameModel::GameModel(QObject* parent)
     : QObject(parent),
       m_game(getInitialGameVariant()),
       m_gameVariant(to_string_id(m_game.get_variant())),
-      m_nuColors(getBoard().get_nu_colors())
+      m_nuColors(getBoard().get_nu_colors()),
+      m_nuPlayers(getBoard().get_nu_players())
 {
     loadRecentFiles();
     initGame(m_game.get_variant());
@@ -437,9 +438,8 @@ bool GameModel::findNextCommentContinueFromRoot()
 
 QString GameModel::getPlayerString(int player)
 {
-    auto variant = m_game.get_variant();
-    auto nuColors = get_nu_colors(variant);
-    bool isMulticolor = (nuColors > get_nu_players(variant));
+    bool isMulticolor = (m_nuColors > m_nuPlayers
+                         && m_game.get_variant() != Variant::classic_3);
     switch (player) {
     case 0:
         if (isMulticolor)
@@ -449,7 +449,7 @@ QString GameModel::getPlayerString(int player)
     case 1:
         if (isMulticolor)
             return tr("Yellow/Green");
-        else if (nuColors == 2)
+        else if (m_nuColors == 2)
             return tr("Green");
         else
             return tr("Yellow");
@@ -466,8 +466,7 @@ Variant GameModel::getInitialGameVariant()
     QSettings settings;
     auto variantString = settings.value("variant", "").toString();
     Variant variant;
-    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant)
-            || get_piece_set(variant) == PieceSet::gembloq) // GembloQ not yet supported
+    if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
         variant = Variant::duo;
     return variant;
 }
@@ -487,7 +486,6 @@ QList<PieceModel*>& GameModel::getPieceModels(Color c)
 QString GameModel::getResultMessage()
 {
     auto& bd = getBoard();
-    auto nuPlayers = bd.get_nu_players();
     bool breakTies = (bd.get_piece_set() == PieceSet::callisto);
     if (m_nuColors == 2)
     {
@@ -504,7 +502,7 @@ QString GameModel::getResultMessage()
             return tr("Green wins (tie resolved).");
         return tr("Game ends in a tie.");
     }
-    if (m_nuColors == 4 && nuPlayers == 2)
+    if (m_nuColors == 4 && m_nuPlayers == 2)
     {
         auto score = m_points0 + m_points2 - m_points1 - m_points3;
         if (score == 1)
@@ -519,7 +517,7 @@ QString GameModel::getResultMessage()
             return tr("Yellow/Green wins (tie resolved).");
         return tr("Game ends in a tie.");
     }
-    if (nuPlayers == 3)
+    if (m_nuPlayers == 3)
     {
         auto maxPoints = max(max(m_points0, m_points1), m_points2);
         unsigned nuWinners = 0;
@@ -691,8 +689,8 @@ void GameModel::initGameVariant(Variant variant)
     if (m_game.get_variant() != variant)
         initGame(variant);
     auto& bd = getBoard();
-    set(m_nuColors, static_cast<int>(bd.get_nu_colors()),
-        &GameModel::nuColorsChanged);
+    set(m_nuColors, static_cast<int>(bd.get_nu_colors()), &GameModel::nuColorsChanged);
+    set(m_nuPlayers, static_cast<int>(bd.get_nu_players()), &GameModel::nuPlayersChanged);
     m_lastMovePieceModel = nullptr;
     createPieceModels();
     m_gameVariant = to_string_id(variant);
@@ -823,12 +821,6 @@ bool GameModel::openStream(istream& in)
         TreeReader reader;
         reader.read(in);
         auto root = reader.get_tree_transfer_ownership();
-        if (get_piece_set(PentobiTree::get_variant(*root)) == PieceSet::gembloq)
-        {
-            // GembloQ not yet supported
-            m_lastInputOutputError = QString(tr("Unsupported game variant."));
-            return false;
-        }
         preparePositionChange();
         m_game.init(root);
         auto charSet = m_game.get_charset();
@@ -1267,10 +1259,9 @@ void GameModel::updateGameInfo()
     static_assert(Color::range == 4, "");
     setPlayerName0(decode(m_game.get_player_name(Color(0))));
     setPlayerName1(decode(m_game.get_player_name(Color(1))));
-    auto nu_players = m_game.get_board().get_nu_players();
-    if (nu_players > 2)
+    if (m_nuPlayers > 2)
         setPlayerName2(decode(m_game.get_player_name(Color(2))));
-    if (nu_players > 3)
+    if (m_nuPlayers > 3)
         setPlayerName3(decode(m_game.get_player_name(Color(3))));
     setDate(decode(m_game.get_date()));
     setTime(decode(m_game.get_time()));

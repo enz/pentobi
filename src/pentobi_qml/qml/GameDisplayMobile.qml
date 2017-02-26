@@ -21,7 +21,7 @@ Item
     property alias busyIndicatorRunning: busyIndicator.running
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
-        if (board.isTrigon)
+        if (board.isTrigon || board.isGembloQ)
             return Qt.size(2 * width, height)
         if (board.isNexos)
             return Qt.size(1.5 * width, 1.5 * height)
@@ -190,6 +190,7 @@ Item
             if (board.isTrigon) return board.gridHeight * 6.2
             if (board.isNexos) return board.gridHeight * 8.9
             if (board.isCallisto) return board.gridHeight * 5.5
+            if (board.isGembloQ) return board.gridHeight * 9.0
             return board.gridHeight * 6.5
         }
         legal: {

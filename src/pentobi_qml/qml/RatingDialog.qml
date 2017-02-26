@@ -46,6 +46,10 @@ Dialog {
                       case "callisto_2": return qsTr("Callisto (2 players)")
                       case "callisto_3": return qsTr("Callisto (3 players)")
                       case "callisto": return qsTr("Callisto (4 players)")
+                      case "gembloq": return qsTr("GembloQ (4 players)")
+                      case "gembloq_2": return qsTr("GembloQ (2 players, 2 colors)")
+                      case "gembloq_2_4": return qsTr("GembloQ (2 players, 4 colors)")
+                      case "gembloq_3": return qsTr("GembloQ (3 players)")
                       default: return ""
                       }
                 Layout.fillWidth: true

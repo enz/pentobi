@@ -14,11 +14,13 @@
 #include "libboardgame_base/GeometryUtil.h"
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/Log.h"
+#include "libboardgame_sys/Compiler.h"
 
 namespace libpentobi_base {
 
 using libboardgame_base::geometry_util::normalize_offset;
 using libboardgame_base::geometry_util::type_match_shift;
+using libboardgame_sys::get_type_name;
 
 //-----------------------------------------------------------------------------
 
@@ -103,7 +105,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
     for (const Transform* transform : transforms.get_all())
     {
         if (log_piece_creation)
-            LIBBOARDGAME_LOG("Transformation ", typeid(*transform).name());
+            LIBBOARDGAME_LOG("Transformation ", get_type_name(*transform));
         transformed_points = points;
         transform->transform(transformed_points.begin(),
                              transformed_points.end());

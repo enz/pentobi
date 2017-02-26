@@ -27,6 +27,7 @@ QtObject {
                 || name.startsWith("frame-")
                 || name.startsWith("junction-")
                 || name.startsWith("linesegment-")
+                || name.startsWith("quarter-square-")
                 || name.startsWith("square-")
                 || name.startsWith("triangle-"))
             return "themes/light/" + name + ".svg"

@@ -262,10 +262,6 @@
         <source>Invalid Blokus SGF file. (%1)</source>
         <translation>Ungültige Blokus-SGF-Datei. (%1)</translation>
     </message>
-    <message>
-        <source>Unsupported game variant.</source>
-        <translation>Nicht unterstützte Spielvariante.</translation>
-    </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>
@@ -564,6 +560,22 @@
         <source>St&amp;op</source>
         <translation>St&amp;opp</translation>
     </message>
+    <message>
+        <source>&amp;Level (GembloQ, 4 Players)</source>
+        <translation>Spielst&amp;ufe (GembloQ, 2 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (GembloQ, 3 Players)</source>
+        <translation>Spielst&amp;ufe (GembloQ, 3 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (GembloQ, 2 Players, 2 Colors)</source>
+        <translation>Spielst&amp;ufe (GembloQ, 2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (GembloQ, 2 Players, 4 Colors)</source>
+        <translation>Spielst&amp;ufe (GembloQ, 2 Spieler, 4 Farben)</translation>
+    </message>
 </context>
 <context>
     <name>MenuEdit</name>
@@ -781,6 +793,26 @@
     <message>
         <source>Open from &amp;Clipboard</source>
         <translation>Aus &amp;Zwischenablage öffnen</translation>
+    </message>
+    <message>
+        <source>&amp;GembloQ</source>
+        <translation>&amp;GembloQ</translation>
+    </message>
+    <message>
+        <source>GembloQ (&amp;2 Players, 2 Colors)</source>
+        <translation>GembloQ (&amp;2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>GembloQ (2 &amp;Players, 4 Colors)</source>
+        <translation>GembloQ (2 &amp;Spieler, 4 Farben)</translation>
+    </message>
+    <message>
+        <source>GembloQ (&amp;3 Players)</source>
+        <translation>GembloQ (&amp;3 Spieler)</translation>
+    </message>
+    <message>
+        <source>GembloQ (&amp;4 Players)</source>
+        <translation>GembloQ (&amp;4 Spieler)</translation>
     </message>
 </context>
 <context>
@@ -1030,6 +1062,22 @@
     <message>
         <source>Open Game %1</source>
         <translation>Spiel %1 öffnen</translation>
+    </message>
+    <message>
+        <source>GembloQ (4 players)</source>
+        <translation>GembloQ (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>GembloQ (2 players, 2 colors)</source>
+        <translation>GembloQ (2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>GembloQ (2 players, 4 colors)</source>
+        <translation>GembloQ (2 Spieler, 4 Farben)</translation>
+    </message>
+    <message>
+        <source>GembloQ (3 players)</source>
+        <translation>GembloQ (3 Spieler)</translation>
     </message>
 </context>
 <context>

@@ -6,7 +6,6 @@ Row {
     property real pointSize
     property int toPlay: gameModel.isGameOver ? -1 : gameModel.toPlay
     property int altPlayer: gameModel.altPlayer
-    property string gameVariant: gameModel.gameVariant
     property real points0: gameModel.points0
     property real points1: gameModel.points1
     property real points2: gameModel.points2
@@ -21,8 +20,7 @@ Row {
     property bool hasMoves3: gameModel.hasMoves3
 
     ScoreElement2 {
-        visible: gameVariant == "classic_2" || gameVariant == "trigon_2"
-                 || gameVariant == "nexos_2"
+        visible: gameModel.nuColors == 4 && gameModel.nuPlayers == 2
         value: points0 + points2
         isFinal: ! hasMoves0 && ! hasMoves2
         pointSize: root.pointSize
@@ -32,8 +30,7 @@ Row {
         color2: theme.colorRed
     }
     ScoreElement2 {
-        visible: gameVariant == "classic_2" || gameVariant == "trigon_2"
-                 || gameVariant == "nexos_2"
+        visible: gameModel.nuColors == 4 && gameModel.nuPlayers == 2
         value: points1 + points3
         isFinal: ! hasMoves1 && ! hasMoves3
         pointSize: root.pointSize
@@ -74,7 +71,7 @@ Row {
         color: theme.colorRed
     }
     ScoreElement {
-        visible: gameModel.nuColors > 3 && gameVariant != "classic_3"
+        visible: gameModel.nuColors > 3 && gameModel.gameVariant != "classic_3"
         value: points3
         bonus: bonus3
         isFinal: ! hasMoves3
@@ -85,7 +82,7 @@ Row {
         color: theme.colorGreen
     }
     ScoreElement2 {
-        visible: gameVariant == "classic_3"
+        visible: gameModel.gameVariant == "classic_3"
         value: points3
         isAltColor: true
         isToPlay: toPlay == 3

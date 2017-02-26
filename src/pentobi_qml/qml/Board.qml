@@ -8,6 +8,7 @@ Item {
     property bool isTrigon: gameVariant.startsWith("trigon")
     property bool isNexos: gameVariant.startsWith("nexos")
     property bool isCallisto: gameVariant.startsWith("callisto")
+    property bool isGembloQ: gameVariant.startsWith("gembloq")
     property int columns: {
         switch (gameVariant) {
         case "duo":
@@ -23,6 +24,13 @@ Item {
         case "nexos":
         case "nexos_2":
             return 25
+        case "gembloq":
+        case "gembloq_2_4":
+            return 56
+        case "gembloq_2":
+            return 44
+        case "gembloq_3":
+            return 52
         default:
             return 20
         }
@@ -42,6 +50,13 @@ Item {
         case "nexos":
         case "nexos_2":
             return 25
+        case "gembloq":
+        case "gembloq_2_4":
+            return 28
+        case "gembloq_2":
+            return 22
+        case "gembloq_3":
+            return 26
         default:
             return 20
         }
@@ -55,16 +70,24 @@ Item {
         if (showCoordinates) n += (isTrigon ? 3 : 2)
         if (isTrigon) return sideLength / (n + 1)
         if (isNexos) return Math.floor(sideLength / (n - 0.5))
+        if (isGembloQ) return Math.floor(2 * sideLength / n) / 2
         return Math.floor(sideLength / n)
     }
     property real gridHeight: {
         if (isTrigon) return Math.sqrt(3) * gridWidth
+        if (isGembloQ) return 2 * gridWidth
         return gridWidth
     }
     property real startingPointSize: {
         if (isTrigon) return 0.27 * gridHeight
         if (isNexos) return 0.3 * gridHeight
+        if (isGembloQ) return 0.45 * gridHeight
         return 0.35 * gridHeight
+    }
+    property int coordinateFontSize: {
+        if (isTrigon) return 0.4 * gridHeight
+        if (isGembloQ) return 0.35 * gridHeight
+        return 0.6 * gridHeight
     }
 
     signal clicked(point pos)
@@ -88,6 +111,24 @@ Item {
         return Qt.point((pos.x - image.x) / gridWidth,
                         (pos.y - image.y) / gridHeight)
     }
+    // Needs all arguments for dependencies
+    function getStartingPointX(x, gridWidth, pointSize, isGembloQ) {
+        var sx = mapFromGameX(x) + (gridWidth - pointSize) / 2
+        if (isGembloQ) {
+            if (x % 2 == 0) sx -= gridWidth / 2
+            else sx += gridWidth / 2
+        }
+        return sx
+    }
+    // Needs all arguments for dependencies
+    function getStartingPointY(y, gridHeight, pointSize, isGembloQ) {
+        var sy = mapFromGameY(y) + (gridHeight - pointSize) / 2
+        if (isGembloQ) {
+            if (y % 2 == 0) sy += gridHeight / 2
+            else sy -= gridHeight / 2
+        }
+        return sy
+    }
     function getCenterYTrigon(pos) {
 
         var isDownward = (pos.x % 2 == 0) != (pos.y % 2 == 0)
@@ -97,7 +138,8 @@ Item {
     }
     function getColumnCoord(x) {
         if (x > 25)
-            return "A" + String.fromCharCode("A".charCodeAt(0) + (x - 26))
+            return String.fromCharCode("A".charCodeAt(0) + x / 26 - 1)
+                    + String.fromCharCode("A".charCodeAt(0) + (x % 26))
         return String.fromCharCode("A".charCodeAt(0) + x)
     }
 
@@ -130,28 +172,34 @@ Item {
                 return theme.getImage("board-callisto-2")
             case "callisto_3":
                 return theme.getImage("board-callisto-3")
+            case "gembloq":
+            case "gembloq_2_4":
+                return theme.getImage("board-gembloq")
+            case "gembloq_2":
+                return theme.getImage("board-gembloq-2")
+            case "gembloq_3":
+                return theme.getImage("board-gembloq-3")
             default:
                 return theme.getImage("board-tile-classic")
             }
         }
         sourceSize {
             width: {
-                if (isTrigon || isCallisto) return width
+                if (isTrigon || isCallisto || isGembloQ) return width
                 if (isNexos) return 2 * gridWidth
                 return gridWidth
             }
             height: {
-                if (isTrigon || isCallisto) return height
+                if (isTrigon || isCallisto || isGembloQ) return height
                 if (isNexos) return 2 * gridHeight
                 return gridHeight
             }
         }
-        // Tiling board elements is much faster than loading a whole board
-        // image, but tiling is not possible if the board is not rectangular
-        // (Trigon, Callisto). Note that the aspect ratio of the Trigon SVG
-        // files is 1:1 to avoid irrational coordinates for the triangles but
-        // Image.sourceSize always maintains the image's aspect ratio, so we
-        // need to use Image.Stretch here, not Image.Tile.
+        // Tiling board elements is faster than loading a whole board image,
+        // but tiling is only possible for rectangular boards. Note that the
+        // aspect ratio of the Trigon SVG files is 1:1 to avoid irrational
+        // coordinates for the triangles but Image.sourceSize always maintains
+        // aspect ratio, so we need Image.Stretch, not Image.Tile.
         fillMode: isTrigon ? Image.Stretch : Image.Tile
         horizontalAlignment: Image.AlignLeft
         verticalAlignment: Image.AlignTop
@@ -165,8 +213,8 @@ Item {
             color: theme.colorBlue
             width: startingPointSize; height: width
             radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
-            y: mapFromGameY(modelData.y) + (gridHeight - height) / 2
+            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
         }
     }
     Repeater {
@@ -174,14 +222,11 @@ Item {
 
         Rectangle {
             visible: image.status == Image.Ready
-            color: gameModel.gameVariant === "duo"
-                   || gameModel.gameVariant === "junior"
-                   || gameModel.gameVariant === "callisto_2" ?
-                       theme.colorGreen : theme.colorYellow
+            color: gameModel.nuColors === 2 ? theme.colorGreen : theme.colorYellow
             width: startingPointSize; height: width
             radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
-            y: mapFromGameY(modelData.y) + (gridHeight - height) / 2
+            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
         }
     }
     Repeater {
@@ -192,8 +237,8 @@ Item {
             color: theme.colorRed
             width: startingPointSize; height: width
             radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
-            y: mapFromGameY(modelData.y) + (gridHeight - height) / 2
+            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
         }
     }
     Repeater {
@@ -204,8 +249,8 @@ Item {
             color: theme.colorGreen
             width: startingPointSize; height: width
             radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
-            y: mapFromGameY(modelData.y) + (gridHeight - height) / 2
+            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
         }
     }
     Repeater {
@@ -227,7 +272,7 @@ Item {
         Text {
             text: getColumnCoord(index)
             color: theme.fontColorCoordinates
-            font.pixelSize: (isTrigon ? 0.4 : 0.6) * gridHeight
+            font.pixelSize: coordinateFontSize
             x: mapFromGameX(index) + (gridWidth - width) / 2
             y: mapFromGameY(-1) + (gridHeight - height) / 2
         }
@@ -238,7 +283,7 @@ Item {
         Text {
             text: getColumnCoord(index)
             color: theme.fontColorCoordinates
-            font.pixelSize: (isTrigon ? 0.4 : 0.6) * gridHeight
+            font.pixelSize: coordinateFontSize
             x: mapFromGameX(index) + (gridWidth - width) / 2
             y: mapFromGameY(rows) + (gridHeight - height) / 2
         }
@@ -249,7 +294,7 @@ Item {
         Text {
             text: index + 1
             color: theme.fontColorCoordinates
-            font.pixelSize: (isTrigon ? 0.4 : 0.6) * gridHeight
+            font.pixelSize: coordinateFontSize
             x: mapFromGameX(isTrigon ? -1.5 : -1) + (gridWidth - width) / 2
             y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
         }
@@ -260,7 +305,7 @@ Item {
         Text {
             text: index + 1
             color: theme.fontColorCoordinates
-            font.pixelSize: (isTrigon ? 0.4 : 0.6) * gridHeight
+            font.pixelSize: coordinateFontSize
             x: mapFromGameX(isTrigon ? columns + 0.5 : columns) + (gridWidth - width) / 2
             y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
         }

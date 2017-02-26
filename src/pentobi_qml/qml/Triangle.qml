@@ -1,6 +1,6 @@
 import QtQuick 2.3
 
-// See Square.qml for comments
+// Piece element used in Trigon. See Square.qml for comments
 Item {
     id: root
 

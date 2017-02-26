@@ -65,6 +65,7 @@ class GameModel
     Q_PROPERTY(QStringList recentFiles READ recentFiles NOTIFY recentFilesChanged)
     Q_PROPERTY(QDateTime fileDate READ fileDate NOTIFY fileDateChanged)
     Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
+    Q_PROPERTY(int nuPlayers READ nuPlayers NOTIFY nuPlayersChanged)
     Q_PROPERTY(int toPlay READ toPlay NOTIFY toPlayChanged)
     Q_PROPERTY(int altPlayer READ altPlayer NOTIFY altPlayerChanged)
     Q_PROPERTY(int moveNumber READ moveNumber NOTIFY moveNumberChanged)
@@ -246,6 +247,8 @@ public:
     const QString& comment() const { return m_comment; }
 
     int nuColors() const { return m_nuColors; }
+
+    int nuPlayers() const { return m_nuPlayers; }
 
     int toPlay() const { return m_toPlay; }
 
@@ -439,6 +442,8 @@ signals:
 
     void nuColorsChanged();
 
+    void nuPlayersChanged();
+
     void recentFilesChanged();
 
     void startingPoints0Changed();
@@ -505,6 +510,8 @@ private:
     QDateTime m_fileDate;
 
     int m_nuColors;
+
+    int m_nuPlayers;
 
     int m_toPlay = 0;
 

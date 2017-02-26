@@ -33,6 +33,7 @@
         <file>qml/PieceCallisto.qml</file>
         <file>qml/PieceClassic.qml</file>
         <file>qml/PieceFlipAnimation.qml</file>
+        <file>qml/PieceGembloQ.qml</file>
         <file>qml/PieceList.qml</file>
         <file>qml/PieceManipulator.qml</file>
         <file>qml/PieceNexos.qml</file>
@@ -41,6 +42,7 @@
         <file>qml/PieceSelectorMobile.qml</file>
         <file>qml/PieceSwitchedFlipAnimation.qml</file>
         <file>qml/PieceTrigon.qml</file>
+        <file>qml/QuarterSquare.qml</file>
         <file>qml/RatingDialog.qml</file>
         <file>qml/RatingGraph.qml</file>
         <file>qml/SaveDialog.qml</file>

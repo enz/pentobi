@@ -76,6 +76,26 @@ Menu {
             }
         }
         Menu {
+            title: qsTr("&GembloQ")
+
+            MenuItemGameVariant {
+                gameVariant: "gembloq_2"
+                text: qsTr("GembloQ (&2 Players, 2 Colors)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "gembloq_2_4"
+                text: qsTr("GembloQ (2 &Players, 4 Colors)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "gembloq_3"
+                text: qsTr("GembloQ (&3 Players)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "gembloq"
+                text: qsTr("GembloQ (&4 Players)")
+            }
+        }
+        Menu {
             title: qsTr("C&allisto")
 
             MenuItemGameVariant {
