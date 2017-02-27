@@ -62,6 +62,13 @@ static const float counts_nexos[Player::max_supported_level] =
 static const float counts_callisto_2[Player::max_supported_level] =
     { 100, 192, 405, 1079, 3323, 12258, 94104, 470522, 2352609 };
 
+static const float counts_gembloq[Player::max_supported_level] =
+    { 3, 18, 75, 311, 1260, 4137, 16556, 83473, 467634 };
+
+static const float counts_gembloq_2[Player::max_supported_level] =
+    { 3, 12, 55, 250, 1500, 8000, 35200, 158028, 880000 };
+
+
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -161,7 +168,6 @@ Move Player::genmove(const Board& bd, Color c)
             max_count = counts_classic[level - 1];
             break;
         case BoardType::duo:
-        case BoardType::gembloq_2: // Not measured
             max_count = counts_duo[level - 1];
             break;
         case BoardType::trigon:
@@ -171,12 +177,17 @@ Move Player::genmove(const Board& bd, Color c)
             max_count = counts_trigon[level - 1];
             break;
         case BoardType::nexos:
-        case BoardType::gembloq: // Not measured
-        case BoardType::gembloq_3: // Not measured
             max_count = counts_nexos[level - 1];
             break;
         case BoardType::callisto_2:
             max_count = counts_callisto_2[level - 1];
+            break;
+        case BoardType::gembloq:
+        case BoardType::gembloq_3: // Not measured
+            max_count = counts_gembloq[level - 1];
+            break;
+        case BoardType::gembloq_2:
+            max_count = counts_gembloq_2[level - 1];
             break;
         }
         // Don't weight max_count in low levels, otherwise it is still too
