@@ -32,16 +32,8 @@ Dialog {
         columns: 2
 
         Label {
-            text: {
-                switch (gameModel.gameVariant) {
-                case "classic_2":
-                case "trigon_2":
-                case "nexos_2":
-                    return qsTr("Player Blue/Red:")
-                default:
-                    qsTr("Player Blue:")
-                }
-            }
+            text: gameModel.nuColors === 4 && gameModel.nuPlayers === 2 ?
+                      qsTr("Player Blue/Red:") : qsTr("Player Blue:")
         }
         TextField {
             id: textFieldPlayerName0
@@ -50,18 +42,11 @@ Dialog {
         }
         Label {
             text: {
-                switch (gameVariant) {
-                case "classic_2":
-                case "trigon_2":
-                case "nexos_2":
+                if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
                     return qsTr("Player Yellow/Green:")
-                case "duo":
-                case "junior":
-                case "callisto_2":
+                if (gameModel.nuColors === 2)
                     return qsTr("Player Green:")
-                default:
-                    qsTr("Player Yellow:")
-                }
+                return qsTr("Player Yellow:")
             }
         }
         TextField {
@@ -76,13 +61,7 @@ Dialog {
         TextField {
             id: textFieldPlayerName2
 
-            visible: gameVariant === "classic" || gameVariant === "trigon"
-                     || gameVariant === "trigon_3"
-                     || gameVariant === "classic_3"
-                     || gameVariant === "nexos"
-                     || gameVariant === "callisto_3"
-                     || gameVariant === "callisto"
-
+            visible: gameModel.nuPlayers > 2
             Layout.maximumWidth: font.pixelSize * 15
         }
         Label {
@@ -92,8 +71,7 @@ Dialog {
         TextField {
             id: textFieldPlayerName3
 
-            visible: gameVariant === "classic" || gameVariant === "trigon"
-                     || gameVariant === "nexos" || gameVariant === "callisto"
+            visible: gameModel.nuPlayers > 3
             Layout.maximumWidth: font.pixelSize * 15
         }
         Label { text: qsTr("Date:") }

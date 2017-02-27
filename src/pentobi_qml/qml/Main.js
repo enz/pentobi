@@ -323,9 +323,7 @@ function isComputerToPlay() {
 }
 
 function isMultiColor() {
-    var gameVariant = gameModel.gameVariant
-    return gameVariant == "classic_2" || gameVariant == "trigon_2"
-            || gameVariant == "nexos_2"
+    return gameModel.nuColors == 4 && gameModel.nuPlayers == 2
 
 }
 

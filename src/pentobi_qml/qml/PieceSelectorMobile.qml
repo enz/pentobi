@@ -69,15 +69,13 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList1
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
-                   && gameVariant != "nexos_2" ?
+                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
                        pieceList0.height + 1 * spacingPieceLists :
                        pieceList0.height + pieceList2.height + 1.5 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList2
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
-                   && gameVariant != "nexos_2" ?
+                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
                        pieceList0.height + pieceList1.height  + 1.5 * spacingPieceLists :
                        pieceList0.height + 1 * spacingPieceLists
             }
@@ -96,15 +94,13 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList2
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
-                   && gameVariant != "nexos_2" ?
+                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
                        pieceList1.height + 1 * spacingPieceLists :
                        pieceList1.height + pieceList3.height + 1.5 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList3
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
-                   && gameVariant != "nexos_2" ?
+                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
                        pieceList1.height + pieceList2.height + 1.5 * spacingPieceLists :
                        pieceList1.height + 1 * spacingPieceLists
             }
@@ -123,15 +119,13 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList3
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
-                   && gameVariant != "nexos_2" ?
+                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
                        pieceList2.height + 1 * spacingPieceLists :
                        pieceList2.height + pieceList0.height + 1.5 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList0
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
-                   && gameVariant != "nexos_2" ?
+                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
                        pieceList2.height + pieceList3.height + 1.5 * spacingPieceLists :
                        pieceList2.height + 1 * spacingPieceLists
             }
@@ -150,15 +144,13 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList0
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
-                   && gameVariant != "nexos_2" ?
+                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
                        pieceList3.height + 1 * spacingPieceLists :
                        pieceList3.height + pieceList1.height + 1.5 * spacingPieceLists
             }
             PropertyChanges {
                 target: pieceList1
-                y: gameVariant != "classic_2" && gameVariant != "trigon_2"
-                   && gameVariant != "nexos_2" ?
+                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
                        pieceList3.height + pieceList0.height + 1.5 * spacingPieceLists :
                        pieceList3.height + 1 * spacingPieceLists
             }
