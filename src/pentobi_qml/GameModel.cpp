@@ -390,10 +390,24 @@ bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
     QPointF center(PieceModel::findCenter(bd, piecePoints, false));
     // Round y of center to a multiple of 0.5, works better in Trigon
     center.setY(round(2 * center.y()) / 2);
-    int offX = static_cast<int>(round(coord.x() - center.x()));
-    int offY = static_cast<int>(round(coord.y() - center.y()));
+    auto pointType = transform->get_point_type();
+    auto dx = coord.x() - center.x();
+    auto dy = coord.y() - center.y();
+    int offX;
+    if (bd.get_piece_set() == PieceSet::gembloq)
+    {
+        // In GembloQ, every piece has at least one full square, so we can use
+        // half the x resolution, which makes positioning easier for the user.
+        if (pointType == 0 || pointType == 2)
+            offX = static_cast<int>(round(dx * 0.5f)) * 2;
+        else if (pointType == 1 || pointType == 3)
+            offX = static_cast<int>(round((dx - 1) * 0.5f)) * 2 + 1;
+    }
+    else
+        offX = static_cast<int>(round(dx));
+    int offY = static_cast<int>(round(dy));
     auto& geo = bd.get_geometry();
-    if (geo.get_point_type(offX, offY) != transform->get_point_type())
+    if (geo.get_point_type(offX, offY) != pointType)
         return false;
     MovePoints points;
     for (auto& p : piecePoints)
