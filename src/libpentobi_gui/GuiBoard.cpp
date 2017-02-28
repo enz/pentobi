@@ -453,10 +453,20 @@ void GuiBoard::setSelectedPieceOffset(const CoordPoint& wantedOffset,
             wantedOffset
             - type_match_offset(geo, geo.get_point_type(wantedOffset))
             + type_match_offset(geo, transformPointType);
-    if (preferRightShift && offset.x != wantedOffset.x)
-        offset.x += geo.get_period_x();
-    if (preferDownShift && offset.y != wantedOffset.y)
-        offset.y += geo.get_period_y();
+    if (preferRightShift)
+    {
+        if (offset.x < wantedOffset.x)
+            offset.x += geo.get_period_x();
+    }
+    else if (offset.x > wantedOffset.x)
+        offset.x -= geo.get_period_x();
+    if (preferDownShift)
+    {
+        if (offset.y < wantedOffset.y)
+            offset.y += geo.get_period_y();
+    }
+    else if (offset.y > wantedOffset.y)
+        offset.y -= geo.get_period_y();
     if (isSelectedPiecePartiallyOnBoard(offset))
         m_selectedPieceOffset = offset;
 }
