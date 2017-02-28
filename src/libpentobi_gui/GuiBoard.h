@@ -147,7 +147,10 @@ private:
 
     QTimer m_currentMoveShownAnimationTimer;
 
+
     Move findSelectedPieceMove();
+
+    bool isSelectedPiecePartiallyOnBoard(CoordPoint offset) const;
 
     void setEmptyBoardDirty();
 
@@ -155,7 +158,9 @@ private:
 
     void setSelectedPieceOffset(const QMouseEvent& event);
 
-    void setSelectedPieceOffset(const CoordPoint& offset);
+    void setSelectedPieceOffset(const CoordPoint& offset,
+                                bool preferRightShift = false,
+                                bool preferDownShift = false);
 
     void setSelectedPiecePoints();
 

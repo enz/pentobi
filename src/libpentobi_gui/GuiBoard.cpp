@@ -119,13 +119,10 @@ void GuiBoard::copyFromBoard(const Board& bd)
 
 Move GuiBoard::findSelectedPieceMove()
 {
-    if (m_selectedPiece.is_null() || m_selectedPieceOffset.is_null())
-        return Move::null();
-    const PiecePoints& points =
-        m_bd.get_piece_info(m_selectedPiece).get_points();
+    auto& points = m_bd.get_piece_info(m_selectedPiece).get_points();
     auto& geo = m_bd.get_geometry();
-    int width = static_cast<int>(geo.get_width());
-    int height = static_cast<int>(geo.get_height());
+    auto width = static_cast<int>(geo.get_width());
+    auto height = static_cast<int>(geo.get_height());
     MovePoints movePoints;
     for (CoordPoint p : points)
     {
@@ -149,6 +146,29 @@ Move GuiBoard::findSelectedPieceMove()
         return mv;
 }
 
+bool GuiBoard::isSelectedPiecePartiallyOnBoard(CoordPoint offset) const
+{
+    if (m_selectedPiece.is_null() || offset.is_null()
+            || ! m_selectedPieceTransform)
+        return false;
+    auto& points = m_bd.get_piece_info(m_selectedPiece).get_points();
+    auto& geo = m_bd.get_geometry();
+    auto width = static_cast<int>(geo.get_width());
+    auto height = static_cast<int>(geo.get_height());
+    for (auto p : points)
+    {
+        p = m_selectedPieceTransform->get_transformed(p);
+        auto x = p.x + offset.x;
+        auto y = p.y + offset.y;
+        if (x < 0 || x >= width || y < 0 || y >= height)
+            continue;
+        Point pp = geo.get_point(x, y);
+        if (! pp.is_null())
+            return true;
+    }
+    return false;
+}
+
 void GuiBoard::leaveEvent(QEvent*)
 {
     m_selectedPieceOffset = CoordPoint::null();
@@ -159,7 +179,7 @@ void GuiBoard::mouseMoveEvent(QMouseEvent* event)
 {
     if (m_selectedPiece.is_null())
         return;
-    CoordPoint oldOffset = m_selectedPieceOffset;
+    auto oldOffset = m_selectedPieceOffset;
     setSelectedPieceOffset(*event);
     if (m_selectedPieceOffset != oldOffset)
         setSelectedPiecePoints();
@@ -183,114 +203,110 @@ void GuiBoard::movePieceDown()
 {
     if (m_selectedPiece.is_null())
         return;
-    auto& geo = m_bd.get_geometry();
-    CoordPoint newOffset;
+    CoordPoint offset;
+    bool preferRightShift;
     if (m_selectedPieceOffset.is_null())
     {
-        newOffset = CoordPoint(geo.get_width() / 2, 0);
-        setSelectedPieceOffset(newOffset);
-        setSelectedPiecePoints();
+        auto& geo = m_bd.get_geometry();
+        auto width = static_cast<int>(geo.get_width());
+        auto height = static_cast<int>(geo.get_height());
+        for (int y = 0; y < height; ++y)
+        {
+            offset = CoordPoint(width / 2, y);
+            if (isSelectedPiecePartiallyOnBoard(offset))
+                break;
+        }
+        preferRightShift = false;
     }
     else
     {
-        newOffset = m_selectedPieceOffset;
-        if (m_bd.get_piece_set() == PieceSet::trigon)
-        {
-            if (m_selectedPieceOffset.x % 2 == 0)
-                ++newOffset.x;
-            else
-                --newOffset.x;
-            ++newOffset.y;
-        }
-        else
-            newOffset.y += geo.get_period_y();
-        if (geo.is_onboard(newOffset))
-        {
-            setSelectedPieceOffset(newOffset);
-            setSelectedPiecePoints();
-        }
+        offset = m_selectedPieceOffset;
+        ++offset.y;
+        preferRightShift = (offset.y % 2 == 0);
     }
+    setSelectedPieceOffset(offset, preferRightShift, true);
+    setSelectedPiecePoints();
 }
 
 void GuiBoard::movePieceLeft()
 {
     if (m_selectedPiece.is_null())
         return;
-    auto& geo = m_bd.get_geometry();
-    CoordPoint newOffset;
+    CoordPoint offset;
     if (m_selectedPieceOffset.is_null())
     {
-        newOffset = CoordPoint(geo.get_width() - 1, geo.get_height() / 2);
-        setSelectedPieceOffset(newOffset);
-        setSelectedPiecePoints();
+        auto& geo = m_bd.get_geometry();
+        auto width = static_cast<int>(geo.get_width());
+        auto height = static_cast<int>(geo.get_height());
+        for (int x = width - 1; x >= 0; --x)
+        {
+            offset = CoordPoint(x, height / 2);
+            if (isSelectedPiecePartiallyOnBoard(offset))
+                break;
+        }
     }
     else
     {
-        newOffset = m_selectedPieceOffset;
-        newOffset.x -= geo.get_period_x();
-        if (geo.is_onboard(newOffset))
-        {
-            setSelectedPieceOffset(newOffset);
-            setSelectedPiecePoints();
-        }
+        offset = m_selectedPieceOffset;
+        --offset.x;
     }
+    setSelectedPieceOffset(offset, false);
+    setSelectedPiecePoints();
 }
 
 void GuiBoard::movePieceRight()
 {
     if (m_selectedPiece.is_null())
         return;
-    auto& geo = m_bd.get_geometry();
-    CoordPoint newOffset;
+    CoordPoint offset;
     if (m_selectedPieceOffset.is_null())
     {
-        newOffset = CoordPoint(0, geo.get_height() / 2);
-        setSelectedPieceOffset(newOffset);
-        setSelectedPiecePoints();
+        auto& geo = m_bd.get_geometry();
+        auto width = static_cast<int>(geo.get_width());
+        auto height = static_cast<int>(geo.get_height());
+        for (int x = 0; x < width; ++x)
+        {
+            offset = CoordPoint(x, height / 2);
+            if (isSelectedPiecePartiallyOnBoard(offset))
+                break;
+        }
     }
     else
     {
-        newOffset = m_selectedPieceOffset;
-        newOffset.x += geo.get_period_x();
-        if (geo.is_onboard(newOffset))
-        {
-            setSelectedPieceOffset(newOffset);
-            setSelectedPiecePoints();
-        }
+        offset = m_selectedPieceOffset;
+        ++offset.x;
     }
+    setSelectedPieceOffset(offset, true);
+    setSelectedPiecePoints();
 }
 
 void GuiBoard::movePieceUp()
 {
     if (m_selectedPiece.is_null())
         return;
-    auto& geo = m_bd.get_geometry();
-    CoordPoint newOffset;
+    CoordPoint offset;
+    bool preferRightShift;
     if (m_selectedPieceOffset.is_null())
     {
-        newOffset = CoordPoint(geo.get_width() / 2, geo.get_height() - 1);
-        setSelectedPieceOffset(newOffset);
-        setSelectedPiecePoints();
+        auto& geo = m_bd.get_geometry();
+        auto width = static_cast<int>(geo.get_width());
+        auto height = static_cast<int>(geo.get_height());
+        for (int y = height - 1; y >= 0; --y)
+        {
+            offset = CoordPoint(width / 2, y);
+            if (isSelectedPiecePartiallyOnBoard(offset))
+                break;
+        }
+        preferRightShift = false;
     }
     else
     {
-        newOffset = m_selectedPieceOffset;
-        if (m_bd.get_piece_set() == PieceSet::trigon)
-        {
-            if (m_selectedPieceOffset.x % 2 == 0)
-                ++newOffset.x;
-            else
-                --newOffset.x;
-            --newOffset.y;
-        }
-        else
-            newOffset.y -= geo.get_period_y();
-        if (geo.is_onboard(newOffset))
-        {
-            setSelectedPieceOffset(newOffset);
-            setSelectedPiecePoints();
-        }
+        offset = m_selectedPieceOffset;
+        --offset.y;
+        preferRightShift = (offset.y % 2 == 0);
     }
+    setSelectedPieceOffset(offset, preferRightShift, false);
+    setSelectedPiecePoints();
 }
 
 void GuiBoard::paintEvent(QPaintEvent*)
@@ -359,7 +375,9 @@ void GuiBoard::selectPiece(Color color, Piece piece)
     if (m_selectedPiece.is_null())
         m_selectedPieceOffset = CoordPoint::null();
     m_selectedPiece = piece;
-    setSelectedPieceOffset(m_selectedPieceOffset);
+    auto wantedOffset = m_selectedPieceOffset;
+    m_selectedPieceOffset = CoordPoint::null();
+    setSelectedPieceOffset(wantedOffset);
     setSelectedPiecePoints();
     setMouseTracking(true);
 }
@@ -416,15 +434,31 @@ void GuiBoard::setSelectedPieceOffset(const QMouseEvent& event)
     setSelectedPieceOffset(m_boardPainter.getCoordPoint(event.x(), event.y()));
 }
 
-void GuiBoard::setSelectedPieceOffset(const CoordPoint& offset)
+/** Set new selected piece offset.
+    Shifts the wanted offset to match the geometry given the currently selected
+    piece and transformation and sets the new offset if all elements of the
+    piece are on the board.
+    @param wantedOffset
+    @param preferRightShift Prefer a geometry-matching shift to the right
+    instead of to the left.
+    @param preferDownShift Prefer a downward geometry-matching shift
+    instead of upward. */
+void GuiBoard::setSelectedPieceOffset(const CoordPoint& wantedOffset,
+                                      bool preferRightShift,
+                                      bool preferDownShift)
 {
     auto& geo = m_bd.get_geometry();
     auto transformPointType = m_selectedPieceTransform->get_point_type();
-    auto newOffset =
-            offset - type_match_offset(geo, geo.get_point_type(offset))
+    auto offset =
+            wantedOffset
+            - type_match_offset(geo, geo.get_point_type(wantedOffset))
             + type_match_offset(geo, transformPointType);
-    if (geo.is_onboard(newOffset))
-        m_selectedPieceOffset = newOffset;
+    if (preferRightShift && offset.x != wantedOffset.x)
+        offset.x += geo.get_period_x();
+    if (preferDownShift && offset.y != wantedOffset.y)
+        offset.y += geo.get_period_y();
+    if (isSelectedPiecePartiallyOnBoard(offset))
+        m_selectedPieceOffset = offset;
 }
 
 void GuiBoard::setSelectedPiecePoints(Move mv)
@@ -460,7 +494,9 @@ void GuiBoard::setSelectedPieceTransform(const Transform* transform)
     if (m_selectedPieceTransform == transform)
         return;
     m_selectedPieceTransform = transform;
-    setSelectedPieceOffset(m_selectedPieceOffset);
+    auto wantedOffset = m_selectedPieceOffset;
+    m_selectedPieceOffset = CoordPoint::null();
+    setSelectedPieceOffset(wantedOffset);
     setSelectedPiecePoints();
 }
 
