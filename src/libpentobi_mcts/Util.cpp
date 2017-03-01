@@ -99,16 +99,16 @@ unsigned get_nu_threads()
         nu_threads = 1;
     }
     // The lock-free search probably scales up to 16-32 threads, but we
-    // haven't tested more than 4 threads, we still use single precision
+    // haven't tested more than 8 threads, we still use single precision
     // float for LIBBOARDGAME_MCTS_FLOAT_TYPE (which limits the maximum number
-    // of simulations per search) and CPUs with more than 4 cores are
+    // of simulations per search) and CPUs with more than 8 cores are
     // currently not very common anyway. Also, the loss of playing strength
     // of a multi-threaded search with the same count as a single-threaded
     // search will become larger with many threads, so there would need to be
     // a correction factor in the number of simulations per level to take this
     // into account.
-    if (nu_threads > 4)
-        nu_threads = 4;
+    if (nu_threads > 8)
+        nu_threads = 8;
     return nu_threads;
 }
 

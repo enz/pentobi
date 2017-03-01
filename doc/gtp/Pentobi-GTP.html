@@ -108,7 +108,7 @@ standard error after each command that alters the position.</dd>
 <dt>--nobook</dt>
 <dd>Disable the use of opening books.</dd>
 <dt>--noresign</dt>
-<dd>Disable resignation. If resignation is desabled, the <tt>genmove</tt>
+<dd>Disable resignation. If resignation is disabled, the <tt>genmove</tt>
 command will never respond with <tt>resign</tt>. Resignation can speed up the
 playing of test games if only the win/loss information is wanted.</dd>
 <dt>--quiet,-q</dt>
@@ -123,9 +123,8 @@ as fast but may lose a bit of playing strength compared to the single-threaded
 search. Therefore, if the GTP engine is used to play many test games with
 twogtp.py (which supports playing games in parallel), it is better to play the
 games with single-threaded search in parallel than with multi-threaded search
-sequentially. Using a large number of threads (e.g. more than 4 on game
-variants with a small board or more than 8 on large boards) is untested and
-might reduce the playing strength significantly compared to the single-threaded
+sequentially. Using a large number of threads (e.g. more than 8) is untested
+and might reduce the playing strength compared to the single-threaded
 search.</dd>
 <dt>--version,-v</dt>
 <dd>Print the version of Pentobi and exit.</dd>
