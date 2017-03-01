@@ -373,6 +373,7 @@ function newGameNoVerify()
     gameModel.newGame()
     gameDisplay.setupMode = false
     gameDisplay.showToPlay()
+    gameDisplay.showPieces()
     isRated = false
     analyzeGameModel.clear()
     initComputerColors()
