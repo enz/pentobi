@@ -296,14 +296,12 @@ void get_transforms(Variant variant,
         break;
     case BoardType::classic:
     case BoardType::gembloq:
+    case BoardType::gembloq_2:
     case BoardType::gembloq_3:
     case BoardType::nexos:
         break;
     case BoardType::trigon_3:
         // Can we use the same as for BoardType::trigon?
-        break;
-    case BoardType::gembloq_2:
-        // Rot270Refl for GembloQ not yet implemented
         break;
     }
 }
