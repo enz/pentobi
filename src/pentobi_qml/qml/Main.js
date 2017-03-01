@@ -223,6 +223,7 @@ function findNextCommentContinueFromRoot() {
 function genMove() {
     Logic.cancelRunning()
     gameDisplay.pickedPiece = null
+    gameDisplay.showToPlay()
     playerModel.startGenMove(gameModel)
 }
 
