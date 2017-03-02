@@ -1061,8 +1061,7 @@ void BoardConst::create_moves()
                 }
     }
     LIBBOARDGAME_ASSERT(moves_created == m_range);
-    if (log_move_creation)
-        LIBBOARDGAME_LOG("Created moves: ", moves_created, ", precomp: ", n);
+    LIBBOARDGAME_LOG("Created moves: ", moves_created, ", precomp: ", n);
 }
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
@@ -1229,45 +1228,56 @@ bool BoardConst::find_move(const MovePoints& points, Piece piece,
     status for matching precompted move lists. */
 void BoardConst::init_adj_status_list(Point p)
 {
+    if (m_geo.get_adj(p).empty() && m_geo.get_diag(p).empty())
+        // Nexos junction points have no adj. or diag. points
+        return;
     // The order of points affects the size of the precomputed lists. The
     // following algorithm does well but is not optimal for all geometries.
-    auto max_size = PrecompMoves::adj_status_nu_adj;
     auto& list = m_adj_status_list[p];
-    auto add_neighbors = [&](Point p)
+    auto add_adj = [&](Point p)
     {
-        auto max_size = PrecompMoves::adj_status_nu_adj;
         for (Point pp : m_geo.get_adj(p))
         {
-            if (list.size() == max_size)
-                return;
-            list.include(pp);
-        }
-        for (Point pp : m_geo.get_diag(p))
-        {
-            if (list.size() == max_size)
+            if (list.size() == PrecompMoves::adj_status_nu_adj)
                 return;
             list.include(pp);
         }
     };
-    if (m_geo.get_adj(p).empty() && m_geo.get_diag(p).empty())
-        // Nexos junction points have no adj. or diag. points
-        return;
-    add_neighbors(p);
-    if (list.size() < max_size)
+    auto add_diag = [&](Point p)
     {
-        auto end = list.end();
+        for (Point pp : m_geo.get_diag(p))
+        {
+            if (list.size() == PrecompMoves::adj_status_nu_adj)
+                return;
+            list.include(pp);
+        }
+    };
+    add_adj(p);
+    add_diag(p);
+    auto end = list.end();
+    if (list.size() < PrecompMoves::adj_status_nu_adj)
+    {
         for (auto pp = list.begin(); pp != end; ++pp)
         {
-            add_neighbors(*pp);
-            if (list.size() == max_size)
+            add_adj(*pp);
+            if (list.size() == PrecompMoves::adj_status_nu_adj)
+                break;
+        }
+    }
+    if (list.size() < PrecompMoves::adj_status_nu_adj)
+    {
+        for (auto pp = list.begin(); pp != end; ++pp)
+        {
+            add_diag(*pp);
+            if (list.size() == PrecompMoves::adj_status_nu_adj)
                 break;
         }
     }
 
-    // There are enough neighbors for the currently used max_size and
+    // There are enough neighbors for the currently used adj_status_nu_adj and
     // geometries. If this was not true, we would need to fill up with null
     // points as garanteed by the function documentation.
-    LIBBOARDGAME_ASSERT(list.size() == max_size);
+    LIBBOARDGAME_ASSERT(list.size() == PrecompMoves::adj_status_nu_adj);
 }
 
 template<unsigned MAX_SIZE>
