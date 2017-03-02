@@ -917,7 +917,8 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     }
     m_move_info_ext_2.reset(new MoveInfoExt2[m_range]);
     m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
-    init_adj_status();
+    for (Point p : m_geo)
+        init_adj_status(p);
     auto width = m_geo.get_width();
     auto height = m_geo.get_height();
     for (Point p : m_geo)
@@ -1224,27 +1225,44 @@ bool BoardConst::find_move(const MovePoints& points, Piece piece,
     return false;
 }
 
-void BoardConst::init_adj_status()
+void BoardConst::init_adj_status(Point p)
 {
-    for (Point p : m_geo)
+    auto max_size = PrecompMoves::adj_status_nu_adj;
+    auto& l = m_adj_status_list[p];
+    for (Point pp : m_geo.get_adj(p))
     {
-        auto& l = m_adj_status_list[p];
-        for (Point pp : m_geo.get_adj(p))
-        {
-            if (l.size() == PrecompMoves::adj_status_nu_adj)
-                break;
-            l.push_back(pp);
-        }
-        for (Point pp : m_geo.get_diag(p))
-        {
-            if (l.size() == PrecompMoves::adj_status_nu_adj)
-                break;
-            l.push_back(pp);
-        }
-        for (auto i = l.end(); i < l.begin() + PrecompMoves::adj_status_nu_adj;
-             ++i)
-            *i = Point::null();
+        if (l.size() == max_size)
+            break;
+        l.push_back(pp);
     }
+    for (Point pp : m_geo.get_diag(p))
+    {
+        if (l.size() == max_size)
+            break;
+        l.push_back(pp);
+    }
+
+    // In Callisto, the maximum number of "diagonal" plus "adjacent" neighbors
+    // is only 4 (see CallistoGeometry), so we also use the real diagonal
+    // neighbors to increase the number of points used in the adjacent status.
+    if (m_piece_set == PieceSet::callisto)
+    {
+        auto x = m_geo.get_x(p);
+        auto y = m_geo.get_y(p);
+        // See Geometry::get_diag_coord() about advantageous ordering of the list
+        if (l.size() < max_size && m_geo.is_onboard(CoordPoint(x - 1, y - 1)))
+            l.push_back(m_geo.get_point(x - 1, y - 1));
+        if (l.size() < max_size && m_geo.is_onboard(CoordPoint(x + 1, y + 1)))
+            l.push_back(m_geo.get_point(x + 1, y + 1));
+        if (l.size() < max_size && m_geo.is_onboard(CoordPoint(x + 1, y - 1)))
+            l.push_back(m_geo.get_point(x + 1, y - 1));
+        if (l.size() < max_size && m_geo.is_onboard(CoordPoint(x - 1, y + 1)))
+            l.push_back(m_geo.get_point(x - 1, y + 1));
+    }
+
+    // Fill up with null points as garanteed by the function documentation
+    for (auto i = l.end(); i < l.begin() + max_size; ++i)
+        *i = Point::null();
 }
 
 template<unsigned MAX_SIZE>
