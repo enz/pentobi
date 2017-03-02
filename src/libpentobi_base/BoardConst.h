@@ -220,7 +220,7 @@ private:
     template<unsigned MAX_SIZE>
     const MoveInfo<MAX_SIZE>& get_move_info(Move mv) const;
 
-    void init_adj_status(Point p);
+    void init_adj_status_list(Point p);
 
     template<unsigned MAX_SIZE>
     void init_symmetry_info();

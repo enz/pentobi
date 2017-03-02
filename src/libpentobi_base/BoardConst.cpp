@@ -918,7 +918,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     m_move_info_ext_2.reset(new MoveInfoExt2[m_range]);
     m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
     for (Point p : m_geo)
-        init_adj_status(p);
+        init_adj_status_list(p);
     auto width = m_geo.get_width();
     auto height = m_geo.get_height();
     for (Point p : m_geo)
@@ -1225,44 +1225,49 @@ bool BoardConst::find_move(const MovePoints& points, Piece piece,
     return false;
 }
 
-void BoardConst::init_adj_status(Point p)
+/** Builds the list of neighboring points that is used for the adjacent
+    status for matching precompted move lists. */
+void BoardConst::init_adj_status_list(Point p)
 {
+    // The order of points affects the size of the precomputed lists. The
+    // following algorithm does well but is not optimal for all geometries.
     auto max_size = PrecompMoves::adj_status_nu_adj;
-    auto& l = m_adj_status_list[p];
-    for (Point pp : m_geo.get_adj(p))
+    auto& list = m_adj_status_list[p];
+    auto add_neighbors = [&](Point p)
     {
-        if (l.size() == max_size)
-            break;
-        l.push_back(pp);
-    }
-    for (Point pp : m_geo.get_diag(p))
+        auto max_size = PrecompMoves::adj_status_nu_adj;
+        for (Point pp : m_geo.get_adj(p))
+        {
+            if (list.size() == max_size)
+                return;
+            list.include(pp);
+        }
+        for (Point pp : m_geo.get_diag(p))
+        {
+            if (list.size() == max_size)
+                return;
+            list.include(pp);
+        }
+    };
+    if (m_geo.get_adj(p).empty() && m_geo.get_diag(p).empty())
+        // Nexos junction points have no adj. or diag. points
+        return;
+    add_neighbors(p);
+    if (list.size() < max_size)
     {
-        if (l.size() == max_size)
-            break;
-        l.push_back(pp);
+        auto end = list.end();
+        for (auto pp = list.begin(); pp != end; ++pp)
+        {
+            add_neighbors(*pp);
+            if (list.size() == max_size)
+                break;
+        }
     }
 
-    // In Callisto, the maximum number of "diagonal" plus "adjacent" neighbors
-    // is only 4 (see CallistoGeometry), so we also use the real diagonal
-    // neighbors to increase the number of points used in the adjacent status.
-    if (m_piece_set == PieceSet::callisto)
-    {
-        auto x = m_geo.get_x(p);
-        auto y = m_geo.get_y(p);
-        // See Geometry::get_diag_coord() about advantageous ordering of the list
-        if (l.size() < max_size && m_geo.is_onboard(CoordPoint(x - 1, y - 1)))
-            l.push_back(m_geo.get_point(x - 1, y - 1));
-        if (l.size() < max_size && m_geo.is_onboard(CoordPoint(x + 1, y + 1)))
-            l.push_back(m_geo.get_point(x + 1, y + 1));
-        if (l.size() < max_size && m_geo.is_onboard(CoordPoint(x + 1, y - 1)))
-            l.push_back(m_geo.get_point(x + 1, y - 1));
-        if (l.size() < max_size && m_geo.is_onboard(CoordPoint(x - 1, y + 1)))
-            l.push_back(m_geo.get_point(x - 1, y + 1));
-    }
-
-    // Fill up with null points as garanteed by the function documentation
-    for (auto i = l.end(); i < l.begin() + max_size; ++i)
-        *i = Point::null();
+    // There are enough neighbors for the currently used max_size and
+    // geometries. If this was not true, we would need to fill up with null
+    // points as garanteed by the function documentation.
+    LIBBOARDGAME_ASSERT(list.size() == max_size);
 }
 
 template<unsigned MAX_SIZE>
