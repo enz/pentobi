@@ -63,10 +63,10 @@ static const float counts_callisto_2[Player::max_supported_level] =
     { 100, 192, 405, 1079, 3323, 12258, 94104, 470522, 2352609 };
 
 static const float counts_gembloq[Player::max_supported_level] =
-    { 3, 18, 75, 311, 1260, 4137, 16556, 83473, 467634 };
+    { 3, 18, 75, 311, 1260, 4137, 19039, 91820, 514397 };
 
 static const float counts_gembloq_2[Player::max_supported_level] =
-    { 3, 12, 55, 250, 1500, 8000, 35200, 158028, 880000 };
+    { 3, 12, 55, 250, 1500, 8000, 38720, 173830, 968000 };
 
 
 } // namespace
