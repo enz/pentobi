@@ -184,6 +184,9 @@ void PlayerModel::startGenMove(GameModel* gm)
     auto& bd = gm->getBoard();
     switch (bd.get_variant())
     {
+    case Variant::classic:
+        level = m_levelClassic;
+        break;
     case Variant::classic_2:
         level = m_levelClassic2;
         break;
@@ -192,6 +195,9 @@ void PlayerModel::startGenMove(GameModel* gm)
         break;
     case Variant::duo:
         level = m_levelDuo;
+        break;
+    case Variant::junior:
+        level = m_levelJunior;
         break;
     case Variant::trigon:
         level = m_levelTrigon;
@@ -214,11 +220,24 @@ void PlayerModel::startGenMove(GameModel* gm)
     case Variant::callisto_2:
         level = m_levelCallisto2;
         break;
+    case Variant::callisto_2_4:
+        level = m_levelCallisto24;
+        break;
     case Variant::callisto_3:
         level = m_levelCallisto3;
         break;
-    default:
-        level = m_levelClassic;
+    case Variant::gembloq:
+        level = m_levelGembloQ;
+        break;
+    case Variant::gembloq_2:
+        level = m_levelGembloQ2;
+        break;
+    case Variant::gembloq_2_4:
+        level = m_levelGembloQ24;
+        break;
+    case Variant::gembloq_3:
+        level = m_levelGembloQ3;
+        break;
     }
     cancelGenMove();
     m_player.set_level(level);
