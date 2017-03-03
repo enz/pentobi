@@ -1007,6 +1007,18 @@
         <source>&amp;Level (GembloQ, 2 Players, 2 Colors)</source>
         <translation>Spielst&amp;ufe (GembloQ, 2 Spieler, 2 Farben)</translation>
     </message>
+    <message>
+        <source>Open from &amp;Clipboard</source>
+        <translation>Aus &amp;Zwischenablage öffnen</translation>
+    </message>
+    <message>
+        <source>Clipboard is empty.</source>
+        <translation>Zwischenablage ist leer.</translation>
+    </message>
+    <message>
+        <source>Blokus SGF file format error</source>
+        <translation>Fehler in Blokus-SGF-Dateiformat</translation>
+    </message>
 </context>
 <context>
     <name>RatedGamesList</name>

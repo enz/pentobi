@@ -14,6 +14,7 @@
 #include <fstream>
 #include <QAction>
 #include <QApplication>
+#include <QClipboard>
 #include <QDir>
 #include <QDesktopWidget>
 #include <QFileDialog>
@@ -918,6 +919,11 @@ void MainWindow::createActions()
     m_actionOpen = createAction(tr("&Open..."));
     m_actionOpen->setShortcut(QKeySequence::Open);
     connect(m_actionOpen, SIGNAL(triggered()), SLOT(open()));
+
+    m_actionOpenFromClipboard = createAction(tr("Open from &Clipboard"));
+    connect(m_actionOpenFromClipboard, SIGNAL(triggered()),
+            SLOT(openFromClipboard()));
+
     m_actionPlacePiece = createAction();
     m_actionPlacePiece->setShortcut(QString("Return"));
 
@@ -1202,6 +1208,7 @@ void MainWindow::createMenu()
     m_menuOpenRecent = menuGame->addMenu(tr("Open R&ecent"));
     for (auto& action : m_actionRecentFile)
         m_menuOpenRecent->addAction(action);
+    menuGame->addAction(m_actionOpenFromClipboard);
     menuGame->addSeparator();
     menuGame->addAction(m_actionSave);
     menuGame->addAction(m_actionSaveAs);
@@ -2289,42 +2296,23 @@ void MainWindow::open()
         rememberFile(file);
 }
 
-bool MainWindow::open(const QString& file, bool isTemporary)
+bool MainWindow::open(istream& in)
 {
-    if (file.isEmpty())
-        return false;
     cancelThread();
     TreeReader reader;
-    ifstream in(file.toLocal8Bit().constData());
     try
     {
         reader.read(in);
     }
     catch (const TreeReader::ReadError& e)
     {
-        if (! in)
-        {
-            QString text =
-                tr("Could not read file '%1'").arg(QFileInfo(file).fileName());
-            showError(text, QString::fromLocal8Bit(strerror(errno)));
-        }
-        else
-        {
-            showInvalidFile(file, e);
-        }
+        showInvalidSgf(e);
         return false;
     }
+    setFile("");
     m_isAutoSaveLoaded = false;
-    if (! isTemporary)
-    {
-        setFile(file);
-        deleteAutoSaveFile();
-    }
-    if (m_analyzeGameWindow)
-    {
-        delete m_analyzeGameWindow;
-        m_analyzeGameWindow = nullptr;
-    }
+    delete m_analyzeGameWindow;
+    m_analyzeGameWindow = nullptr;
     setRated(false);
     try
     {
@@ -2347,7 +2335,7 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     }
     catch (const InvalidTree& e)
     {
-        showInvalidFile(file, e);
+        showInvalidSgf(e);
     }
     m_computerColors.fill(false);
     m_autoPlay = false;
@@ -2357,6 +2345,42 @@ bool MainWindow::open(const QString& file, bool isTemporary)
     updateWindow(true);
     loadHistory();
     return true;
+}
+
+bool MainWindow::open(const QString& file, bool isTemporary)
+{
+    if (file.isEmpty())
+        return false;
+    cancelThread();
+    TreeReader reader;
+    ifstream in(file.toLocal8Bit().constData());
+    if (! in)
+    {
+        QString text =
+            tr("Could not read file '%1'").arg(QFileInfo(file).fileName());
+        showError(text, QString::fromLocal8Bit(strerror(errno)));
+        return false;
+    }
+    if (! open(in))
+        return false;
+    if (! isTemporary)
+    {
+        setFile(file);
+        deleteAutoSaveFile();
+    }
+    return true;
+}
+
+void MainWindow::openFromClipboard()
+{
+    auto text = qApp->clipboard()->text();
+    if (text.isEmpty())
+    {
+        showInfo(tr("Clipboard is empty."));
+        return;
+    }
+    istringstream in(text.toLocal8Bit().constData());
+    open(in);
 }
 
 void MainWindow::openRecentFile()
@@ -3048,6 +3072,12 @@ void MainWindow::showInfo(const QString& text, const QString& infoText,
 void MainWindow::showInvalidFile(QString file, const exception& e)
 {
     showError(tr("Error in file '%1'").arg(QFileInfo(file).fileName()),
+              tr("The file is not a valid Blokus SGF file."), e.what());
+}
+
+void MainWindow::showInvalidSgf(const exception& e)
+{
+    showError(tr("Blokus SGF file format error"),
               tr("The file is not a valid Blokus SGF file."), e.what());
 }
 

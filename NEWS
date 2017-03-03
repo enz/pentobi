@@ -5,6 +5,7 @@ General:
 
 * New game variant GembloQ.
 * Slightly increased playing strength in Callisto.
+* New menu item Game/Open From Clipboard.
 * The engine now uses up to 8 threads (instead of 4) by default if the CPU
   has enough cores.
 * Support for SGF file encodings other than ISO-8859-1 and UTF-8.

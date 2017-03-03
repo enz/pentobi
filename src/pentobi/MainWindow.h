@@ -145,7 +145,11 @@ public slots:
 
     void open();
 
+    bool open(istream& in);
+
     bool open(const QString& file, bool isTemporary = false);
+
+    void openFromClipboard();
 
     void placePiece(Color c, Move mv);
 
@@ -392,6 +396,8 @@ private:
 
     QAction* m_actionOpen;
 
+    QAction* m_actionOpenFromClipboard;
+
     QAction* m_actionPlacePiece;
 
     QAction* m_actionPlay;
@@ -624,6 +630,8 @@ private:
                   const QString& detailText = "", bool withIcon = false);
 
     void showInvalidFile(QString file, const exception& e);
+
+    void showInvalidSgf(const exception& e);
 
     void showStatus(const QString& text, bool temporary = false);
 
