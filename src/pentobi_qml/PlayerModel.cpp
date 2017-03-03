@@ -170,6 +170,9 @@ void PlayerModel::startGenMove(GameModel* gm)
     unsigned level;
     switch (gm->getBoard().get_variant())
     {
+    case Variant::classic:
+        level = m_levelClassic;
+        break;
     case Variant::classic_2:
         level = m_levelClassic2;
         break;
@@ -178,6 +181,9 @@ void PlayerModel::startGenMove(GameModel* gm)
         break;
     case Variant::duo:
         level = m_levelDuo;
+        break;
+    case Variant::junior:
+        level = m_levelJunior;
         break;
     case Variant::trigon:
         level = m_levelTrigon;
@@ -203,8 +209,6 @@ void PlayerModel::startGenMove(GameModel* gm)
     case Variant::callisto_3:
         level = m_levelCallisto3;
         break;
-    default:
-        level = m_levelClassic;
     }
     startGenMoveAtLevel(gm, level);
 }

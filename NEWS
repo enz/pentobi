@@ -13,6 +13,7 @@ Desktop version:
 
 Android version:
 
+* Game variant Junior erroneously used level set for Classic.
 * New menu item View/Fullscreen.
 * New menu item Game/Open From Clipboard.
 * Default folder for Open/Save is now /sdcard.
