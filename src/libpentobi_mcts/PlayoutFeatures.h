@@ -197,8 +197,20 @@ inline void PlayoutFeatures::set_local(const Board& bd)
                         1 + static_cast<IntType>(
                             bd.is_attach_point(*j, to_play));
             }
-            if (MAX_SIZE == 7 || IS_CALLISTO) // Nexos or Callisto
-                LIBBOARDGAME_ASSERT(geo.get_adj(*j).empty());
+            if (MAX_SIZE == 7 || IS_CALLISTO)
+            {
+                // Nexos or Callisto don't use adjacent points, use 2nd-order
+                // "diagonal" points instead
+                LIBBOARDGAME_ASSERT(geo.get_diag(*j).empty());
+                for (Point k : geo.get_adj(*j))
+                    if (! is_forbidden[k] && m_point_value[k] == 0)
+                    {
+                        m_local_points.get_unchecked(nu_local++) = k;
+                        m_point_value[k] =
+                                1 + static_cast<IntType>(
+                                    bd.is_attach_point(k, to_play));
+                    }
+            }
             else
                 for (Point k : geo.get_adj(*j))
                     if (! is_forbidden[k] && m_point_value[k] == 0)

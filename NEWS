@@ -4,7 +4,7 @@ Version 12.UNKNOWN (master)
 General:
 
 * New game variant GembloQ.
-* Slightly increased playing strength in Callisto.
+* Slightly increased playing strength in Callisto and Nexos.
 * New menu item Game/Open From Clipboard.
 * The engine now uses up to 8 threads (instead of 4) by default if the CPU
   has enough cores.
