@@ -876,10 +876,6 @@
         <translation>Gelb/Grün gewinnt mit %1 Punkten.</translation>
     </message>
     <message>
-        <source>Callisto (&amp;2 Players)</source>
-        <translation>Callisto (&amp;2 Spieler)</translation>
-    </message>
-    <message>
         <source>Callisto (&amp;3 Players)</source>
         <translation>Callisto (&amp;3 Spieler)</translation>
     </message>
@@ -952,10 +948,6 @@
         <translation>Spielst&amp;ufe (Callisto, 4 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Level (Callisto, 2 Players)</source>
-        <translation>Spielst&amp;ufe (Callisto, 2 Spieler)</translation>
-    </message>
-    <message>
         <source>&amp;Level (Callisto, 3 Players)</source>
         <translation>Spielst&amp;ufe (Callisto, 3 Spieler)</translation>
     </message>
@@ -1018,6 +1010,22 @@
     <message>
         <source>Blokus SGF file format error</source>
         <translation>Fehler in Blokus-SGF-Dateiformat</translation>
+    </message>
+    <message>
+        <source>Callisto (&amp;2 Players, 2 Colors)</source>
+        <translation>Callisto (&amp;2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>Callisto (2 &amp;Players, 4 Colors)</source>
+        <translation>Callisto (2 &amp;Spieler, 4 Farben)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Callisto, 2 Players, 2 Colors)</source>
+        <translation>Spielst&amp;ufe (Callisto, 2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Callisto, 2 Players, 4 Colors)</source>
+        <translation>Spielst&amp;ufe (Callisto, 2 Spieler, 4 Farben)</translation>
     </message>
 </context>
 <context>
@@ -1142,10 +1150,6 @@
         <translation>Callisto (4 Spieler)</translation>
     </message>
     <message>
-        <source>Callisto (2 players)</source>
-        <translation>Callisto (2 Spieler)</translation>
-    </message>
-    <message>
         <source>Callisto (3 players)</source>
         <translation>Callisto (3 Spieler)</translation>
     </message>
@@ -1164,6 +1168,14 @@
     <message>
         <source>GembloQ (2 players, 2 colors)</source>
         <translation>GembloQ (2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>Callisto (2 players, 2 colors)</source>
+        <translation>Callisto (2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>Callisto (2 players, 4 colors)</source>
+        <translation>Callisto (2 Spieler, 4 Farben)</translation>
     </message>
 </context>
 <context>

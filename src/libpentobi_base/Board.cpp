@@ -395,7 +395,7 @@ void Board::init_variant(Variant variant)
             m_is_center_section[p] =
                     CallistoGeometry::is_center_section(m_geo->get_x(p),
                                                         m_geo->get_y(p),
-                                                        m_nu_players);
+                                                        m_nu_colors);
     else
         m_is_center_section.fill(false, *m_geo);
     for (Color c : get_colors())

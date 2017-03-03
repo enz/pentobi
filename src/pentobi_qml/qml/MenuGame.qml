@@ -100,7 +100,11 @@ Menu {
 
             MenuItemGameVariant {
                 gameVariant: "callisto_2"
-                text: qsTr("Callisto (&2 Players)")
+                text: qsTr("Callisto (&2 Players, 2 Colors)")
+            }
+            MenuItemGameVariant {
+                gameVariant: "callisto_2_4"
+                text: qsTr("Callisto (2 &Players, 4 Colors)")
             }
             MenuItemGameVariant {
                 gameVariant: "callisto_3"

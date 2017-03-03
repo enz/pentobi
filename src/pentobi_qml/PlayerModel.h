@@ -22,33 +22,25 @@ class PlayerModel
     : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(unsigned levelClassic MEMBER m_levelClassic
-               NOTIFY levelClassicChanged)
-    Q_PROPERTY(unsigned levelClassic2 MEMBER m_levelClassic2
-               NOTIFY levelClassic2Changed)
-    Q_PROPERTY(unsigned levelClassic3 MEMBER m_levelClassic3
-               NOTIFY levelClassic3Changed)
+    Q_PROPERTY(unsigned levelClassic MEMBER m_levelClassic NOTIFY levelClassicChanged)
+    Q_PROPERTY(unsigned levelClassic2 MEMBER m_levelClassic2 NOTIFY levelClassic2Changed)
+    Q_PROPERTY(unsigned levelClassic3 MEMBER m_levelClassic3 NOTIFY levelClassic3Changed)
     Q_PROPERTY(unsigned levelDuo MEMBER m_levelDuo NOTIFY levelDuoChanged)
-    Q_PROPERTY(unsigned levelTrigon MEMBER m_levelTrigon
-               NOTIFY levelTrigonChanged)
-    Q_PROPERTY(unsigned levelTrigon2 MEMBER m_levelTrigon2
-               NOTIFY levelTrigon2Changed)
-    Q_PROPERTY(unsigned levelTrigon3 MEMBER m_levelTrigon3
-               NOTIFY levelTrigon3Changed)
-    Q_PROPERTY(unsigned levelJunior MEMBER m_levelJunior
-               NOTIFY levelJuniorChanged)
-    Q_PROPERTY(unsigned levelNexos MEMBER m_levelNexos NOTIFY
-               levelNexosChanged)
-    Q_PROPERTY(unsigned levelNexos2 MEMBER m_levelNexos2 NOTIFY
-               levelNexos2Changed)
-    Q_PROPERTY(unsigned levelCallisto MEMBER m_levelCallisto
-               NOTIFY levelCallistoChanged)
-    Q_PROPERTY(unsigned levelCallisto2 MEMBER m_levelCallisto2
-               NOTIFY levelCallisto2Changed)
-    Q_PROPERTY(unsigned levelCallisto3 MEMBER m_levelCallisto3
-               NOTIFY levelCallisto3Changed)
-    Q_PROPERTY(bool isGenMoveRunning READ isGenMoveRunning
-               NOTIFY isGenMoveRunningChanged)
+    Q_PROPERTY(unsigned levelTrigon MEMBER m_levelTrigon NOTIFY levelTrigonChanged)
+    Q_PROPERTY(unsigned levelTrigon2 MEMBER m_levelTrigon2 NOTIFY levelTrigon2Changed)
+    Q_PROPERTY(unsigned levelTrigon3 MEMBER m_levelTrigon3 NOTIFY levelTrigon3Changed)
+    Q_PROPERTY(unsigned levelJunior MEMBER m_levelJunior NOTIFY levelJuniorChanged)
+    Q_PROPERTY(unsigned levelNexos MEMBER m_levelNexos NOTIFY levelNexosChanged)
+    Q_PROPERTY(unsigned levelNexos2 MEMBER m_levelNexos2 NOTIFY levelNexos2Changed)
+    Q_PROPERTY(unsigned levelGembloQ MEMBER m_levelGembloQ NOTIFY levelGembloQChanged)
+    Q_PROPERTY(unsigned levelGembloQ2 MEMBER m_levelGembloQ2 NOTIFY levelGembloQ2Changed)
+    Q_PROPERTY(unsigned levelGembloQ24 MEMBER m_levelGembloQ24 NOTIFY levelGembloQ24Changed)
+    Q_PROPERTY(unsigned levelGembloQ3 MEMBER m_levelGembloQ3 NOTIFY levelGembloQ3Changed)
+    Q_PROPERTY(unsigned levelCallisto MEMBER m_levelCallisto NOTIFY levelCallistoChanged)
+    Q_PROPERTY(unsigned levelCallisto2 MEMBER m_levelCallisto2 NOTIFY levelCallisto2Changed)
+    Q_PROPERTY(unsigned levelCallisto24 MEMBER m_levelCallisto24 NOTIFY levelCallisto24Changed)
+    Q_PROPERTY(unsigned levelCallisto3 MEMBER m_levelCallisto3 NOTIFY levelCallisto3Changed)
+    Q_PROPERTY(bool isGenMoveRunning READ isGenMoveRunning NOTIFY isGenMoveRunningChanged)
 
 public:
     /** Global variable to disable opening books. */
@@ -88,6 +80,8 @@ signals:
 
     void levelCallisto2Changed();
 
+    void levelCallisto24Changed();
+
     void levelCallisto3Changed();
 
     void levelClassicChanged();
@@ -97,6 +91,14 @@ signals:
     void levelClassic3Changed();
 
     void levelDuoChanged();
+
+    void levelGembloQChanged();
+
+    void levelGembloQ2Changed();
+
+    void levelGembloQ24Changed();
+
+    void levelGembloQ3Changed();
 
     void levelTrigonChanged();
 
@@ -132,6 +134,8 @@ private:
 
     unsigned m_levelCallisto2;
 
+    unsigned m_levelCallisto24;
+
     unsigned m_levelCallisto3;
 
     unsigned m_levelClassic;
@@ -141,6 +145,14 @@ private:
     unsigned m_levelClassic3;
 
     unsigned m_levelDuo;
+
+    unsigned m_levelGembloQ;
+
+    unsigned m_levelGembloQ2;
+
+    unsigned m_levelGembloQ24;
+
+    unsigned m_levelGembloQ3;
 
     unsigned m_levelTrigon;
 

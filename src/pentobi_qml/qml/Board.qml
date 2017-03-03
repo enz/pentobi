@@ -167,6 +167,7 @@ Item {
             case "nexos_2":
                 return theme.getImage("board-tile-nexos")
             case "callisto":
+            case "callisto_2_4":
                 return theme.getImage("board-callisto")
             case "callisto_2":
                 return theme.getImage("board-callisto-2")

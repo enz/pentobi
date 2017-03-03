@@ -1070,7 +1070,10 @@ void MainWindow::createActions()
 
     m_actionVariantCallisto2 =
             createActionVariant(Variant::callisto_2,
-                                tr("Callisto (&2 Players)"));
+                                tr("Callisto (&2 Players, 2 Colors)"));
+    m_actionVariantCallisto24 =
+            createActionVariant(Variant::callisto_2_4,
+                                tr("Callisto (2 &Players, 4 Colors)"));
     m_actionVariantCallisto3 =
             createActionVariant(Variant::callisto_3,
                                 tr("Callisto (&3 Players)"));
@@ -1197,6 +1200,7 @@ void MainWindow::createMenu()
     menuGembloQ->addAction(m_actionVariantGembloQ);
     auto menuCallisto = m_menuVariant->addMenu(tr("C&allisto"));
     menuCallisto->addAction(m_actionVariantCallisto2);
+    menuCallisto->addAction(m_actionVariantCallisto24);
     menuCallisto->addAction(m_actionVariantCallisto3);
     menuCallisto->addAction(m_actionVariantCallisto);
     menuGame->addAction(m_actionGameInfo);
@@ -2984,7 +2988,10 @@ void MainWindow::setTitleMenuLevel()
         title = tr("&Level (Callisto, 4 Players)");
         break;
     case Variant::callisto_2:
-        title = tr("&Level (Callisto, 2 Players)");
+        title = tr("&Level (Callisto, 2 Players, 2 Colors)");
+        break;
+    case Variant::callisto_2_4:
+        title = tr("&Level (Callisto, 2 Players, 4 Colors)");
         break;
     case Variant::callisto_3:
         title = tr("&Level (Callisto, 3 Players)");

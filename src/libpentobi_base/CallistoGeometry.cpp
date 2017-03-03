@@ -51,20 +51,20 @@ bool is_onboard_callisto(unsigned x, unsigned y, unsigned width,
 
 map<unsigned, shared_ptr<CallistoGeometry>> CallistoGeometry::s_geometry;
 
-CallistoGeometry::CallistoGeometry(unsigned nu_players)
+CallistoGeometry::CallistoGeometry(unsigned nu_colors)
 {
-    unsigned sz = get_size_callisto(nu_players);
-    m_edge = get_edge_callisto(nu_players);
+    unsigned sz = get_size_callisto(nu_colors);
+    m_edge = get_edge_callisto(nu_colors);
     Geometry::init(sz, sz);
 }
 
-const CallistoGeometry& CallistoGeometry::get(unsigned nu_players)
+const CallistoGeometry& CallistoGeometry::get(unsigned nu_colors)
 {
-    auto pos = s_geometry.find(nu_players);
+    auto pos = s_geometry.find(nu_colors);
     if (pos != s_geometry.end())
         return *pos->second;
-    shared_ptr<CallistoGeometry> geometry(new CallistoGeometry(nu_players));
-    return *s_geometry.insert(make_pair(nu_players, geometry)).first->second;
+    shared_ptr<CallistoGeometry> geometry(new CallistoGeometry(nu_colors));
+    return *s_geometry.insert(make_pair(nu_colors, geometry)).first->second;
 }
 
 auto CallistoGeometry::get_adj_coord(int x, int y) const -> AdjCoordList
@@ -107,9 +107,9 @@ bool CallistoGeometry::init_is_onboard(unsigned x, unsigned y) const
 }
 
 bool CallistoGeometry::is_center_section(unsigned x, unsigned y,
-                                         unsigned nu_players)
+                                         unsigned nu_colors)
 {
-    auto size = get_size_callisto(nu_players);
+    auto size = get_size_callisto(nu_colors);
     if (x < size / 2 - 3 || y < size / 2 - 3)
         return false;
     x -= size / 2 - 3;

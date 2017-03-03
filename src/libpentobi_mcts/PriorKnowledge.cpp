@@ -83,6 +83,7 @@ void PriorKnowledge::start_search(const Board& bd)
         m_check_dist_to_center.fill(false);
         break;
     case Variant::callisto:
+    case Variant::callisto_2_4:
         m_check_dist_to_center.fill(true);
         m_dist_to_center_max_pieces = 4;
         m_max_dist_diff = 0;

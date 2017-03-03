@@ -91,6 +91,9 @@ enum class Variant
 
     callisto_2,
 
+    /** Callisto two-player four-color. */
+    callisto_2_4,
+
     callisto_3,
 
     gembloq,
@@ -102,6 +105,8 @@ enum class Variant
 
     gembloq_3
 };
+
+static const int nu_game_variants = 18;
 
 //-----------------------------------------------------------------------------
 

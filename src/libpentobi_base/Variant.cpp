@@ -67,6 +67,7 @@ BoardType get_board_type(Variant variant)
         result = BoardType::nexos;
         break;
     case Variant::callisto:
+    case Variant::callisto_2_4:
         result = BoardType::callisto;
         break;
     case Variant::callisto_2:
@@ -160,6 +161,7 @@ Color::IntType get_nu_colors(Variant variant)
     case Variant::nexos:
     case Variant::nexos_2:
     case Variant::callisto:
+    case Variant::callisto_2_4:
     case Variant::gembloq:
     case Variant::gembloq_2_4:
         result = 4;
@@ -179,6 +181,7 @@ Color::IntType get_nu_players(Variant variant)
     case Variant::trigon_2:
     case Variant::nexos_2:
     case Variant::callisto_2:
+    case Variant::callisto_2_4:
     case Variant::gembloq_2:
     case Variant::gembloq_2_4:
         result = 2;
@@ -225,6 +228,7 @@ PieceSet get_piece_set(Variant variant)
         break;
     case Variant::callisto:
     case Variant::callisto_2:
+    case Variant::callisto_2_4:
     case Variant::callisto_3:
         result = PieceSet::callisto;
         break;
@@ -340,6 +344,8 @@ bool parse_variant(const string& s, Variant& variant)
         variant = Variant::callisto;
     else if (t == "callisto two-player")
         variant = Variant::callisto_2;
+    else if (t == "callisto two-player four-color")
+        variant = Variant::callisto_2_4;
     else if (t == "callisto three-player")
         variant = Variant::callisto_3;
     else if (t == "gembloq")
@@ -382,6 +388,8 @@ bool parse_variant_id(const string& s, Variant& variant)
         variant = Variant::callisto;
     else if (t == "callisto_2" || t == "ca2")
         variant = Variant::callisto_2;
+    else if (t == "callisto_2_4" || t == "ca24")
+        variant = Variant::callisto_2_4;
     else if (t == "callisto_3" || t == "ca3")
         variant = Variant::callisto_3;
     else if (t == "gembloq" || t == "g")
@@ -399,6 +407,7 @@ bool parse_variant_id(const string& s, Variant& variant)
 
 const char* to_string(Variant variant)
 {
+    LIBBOARDGAME_ASSERT(static_cast<int>(variant) < nu_game_variants);
     const char* result = nullptr; // Init to avoid compiler warning
     switch (variant)
     {
@@ -437,6 +446,9 @@ const char* to_string(Variant variant)
         break;
     case Variant::callisto_2:
         result = "Callisto Two-Player";
+        break;
+    case Variant::callisto_2_4:
+        result = "Callisto Two-Player Four-Color";
         break;
     case Variant::callisto_3:
         result = "Callisto Three-Player";
@@ -497,6 +509,9 @@ const char* to_string_id(Variant variant)
         break;
     case Variant::callisto_2:
         result = "callisto_2";
+        break;
+    case Variant::callisto_2_4:
+        result = "callisto_2_4";
         break;
     case Variant::callisto_3:
         result = "callisto_3";

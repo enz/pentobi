@@ -452,6 +452,8 @@ private:
 
     QAction* m_actionVariantCallisto2;
 
+    QAction* m_actionVariantCallisto24;
+
     QAction* m_actionVariantCallisto3;
 
     QAction* m_actionVariantClassic;

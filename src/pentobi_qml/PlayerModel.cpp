@@ -64,9 +64,15 @@ PlayerModel::PlayerModel(QObject* parent)
     getLevel(settings, "level_junior", m_levelJunior);
     getLevel(settings, "level_nexos", m_levelNexos);
     getLevel(settings, "level_nexos_2", m_levelNexos2);
+    getLevel(settings, "level_gembloq", m_levelGembloQ);
+    getLevel(settings, "level_gembloq_2", m_levelGembloQ2);
+    getLevel(settings, "level_gembloq_2_4", m_levelGembloQ24);
+    getLevel(settings, "level_gembloq_3", m_levelGembloQ3);
     getLevel(settings, "level_callisto", m_levelCallisto);
     getLevel(settings, "level_callisto_2", m_levelCallisto2);
+    getLevel(settings, "level_callisto_2_4", m_levelCallisto24);
     getLevel(settings, "level_callisto_3", m_levelCallisto3);
+    static_assert(libpentobi_base::nu_game_variants == 18, "");
     connect(&m_genMoveWatcher, &QFutureWatcher<GenMoveResult>::finished,
             this, &PlayerModel::genMoveFinished);
 }
@@ -85,9 +91,15 @@ PlayerModel::~PlayerModel()
     settings.setValue("level_junior", m_levelJunior);
     settings.setValue("level_nexos", m_levelNexos);
     settings.setValue("level_nexos_2", m_levelNexos2);
+    settings.setValue("level_gembloq", m_levelGembloQ);
+    settings.setValue("level_gembloq_2", m_levelGembloQ2);
+    settings.setValue("level_gembloq_2_4", m_levelGembloQ24);
+    settings.setValue("level_gembloq_3", m_levelGembloQ3);
     settings.setValue("level_callisto", m_levelCallisto);
     settings.setValue("level_callisto_2", m_levelCallisto2);
+    settings.setValue("level_callisto_2_4", m_levelCallisto24);
     settings.setValue("level_callisto_3", m_levelCallisto3);
+    static_assert(libpentobi_base::nu_game_variants == 18, "");
 }
 
 PlayerModel::GenMoveResult PlayerModel::asyncGenMove(

@@ -27,9 +27,9 @@ class CallistoGeometry final
 public:
     /** Create or reuse an already created geometry.
         @param nu_players The number of players (2, 3, or 4). */
-    static const CallistoGeometry& get(unsigned nu_players);
+    static const CallistoGeometry& get(unsigned nu_colors);
 
-    static bool is_center_section(unsigned x, unsigned y, unsigned nu_players);
+    static bool is_center_section(unsigned x, unsigned y, unsigned nu_colors);
 
 
     AdjCoordList get_adj_coord(int x, int y) const override;
@@ -46,14 +46,14 @@ protected:
     bool init_is_onboard(unsigned x, unsigned y) const override;
 
 private:
-    /** Stores already created geometries by number of players. */
+    /** Stores already created geometries by number of colors. */
     static map<unsigned, shared_ptr<CallistoGeometry>> s_geometry;
 
 
     unsigned m_edge;
 
 
-    explicit CallistoGeometry(unsigned nu_players);
+    explicit CallistoGeometry(unsigned nu_colors);
 };
 
 //-----------------------------------------------------------------------------

@@ -146,7 +146,10 @@ void RatingDialog::updateContent()
         variantStr = tr("Callisto (4 players)");
         break;
     case Variant::callisto_2:
-        variantStr = tr("Callisto (2 players)");
+        variantStr = tr("Callisto (2 players, 2 colors)");
+        break;
+    case Variant::callisto_2_4:
+        variantStr = tr("Callisto (2 players, 4 colors)");
         break;
     case Variant::callisto_3:
         variantStr = tr("Callisto (3 players)");

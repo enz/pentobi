@@ -182,7 +182,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
                                 m_width * m_fieldWidth - m_fieldWidth / 2,
                                 m_height * m_fieldHeight - m_fieldHeight / 2),
                          QColor(174, 167, 172));
-    auto nu_players = get_nu_players(m_variant);
+    auto nu_colors = get_nu_colors(m_variant);
     for (Point p : *m_geo)
     {
         int x = m_geo->get_x(p);
@@ -215,7 +215,7 @@ void BoardPainter::paintEmptyBoard(QPainter& painter, unsigned width,
             Util::paintEmptyGembloQ(painter, pointType, fieldX, fieldY,
                                     m_fieldWidth);
         else if (m_isCallisto
-                 && CallistoGeometry::is_center_section(x, y, nu_players))
+                 && CallistoGeometry::is_center_section(x, y, nu_colors))
             Util::paintEmptySquareCallistoCenter(painter, fieldX, fieldY,
                                                  m_fieldWidth);
         else if (m_isCallisto)

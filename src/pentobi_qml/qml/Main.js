@@ -242,6 +242,7 @@ function getFileLabel(file, isModified) {
 
 function getLevel() {
     switch (gameModel.gameVariant) {
+    case "classic": return playerModel.levelClassic
     case "classic_2": return playerModel.levelClassic2
     case "classic_3": return playerModel.levelClassic3
     case "duo": return playerModel.levelDuo
@@ -253,8 +254,13 @@ function getLevel() {
     case "nexos_2": return playerModel.levelNexos2
     case "callisto": return playerModel.levelCallisto
     case "callisto_2": return playerModel.levelCallisto2
+    case "callisto_2_4": return playerModel.levelCallisto24
     case "callisto_3": return playerModel.levelCallisto3
-    default: return playerModel.levelClassic
+    case "gembloq": return playerModel.levelGembloQ
+    case "gembloq_2": return playerModel.levelGembloQ2
+    case "gembloq_2_4": return playerModel.levelGembloQ24
+    case "gembloq_3": return playerModel.levelGembloQ3
+    default: console.assert(false)
     }
 }
 
@@ -608,6 +614,7 @@ function saveFileUrl(fileUrl) {
 
 function setLevel(level) {
     switch (gameModel.gameVariant) {
+    case "classic_2": playerModel.levelClassic = level; break
     case "classic_2": playerModel.levelClassic2 = level; break
     case "classic_3": playerModel.levelClassic3 = level; break
     case "duo": playerModel.levelDuo = level; break
@@ -619,8 +626,13 @@ function setLevel(level) {
     case "nexos_2": playerModel.levelNexos2 = level; break
     case "callisto": playerModel.levelCallisto = level; break
     case "callisto_2": playerModel.levelCallisto2 = level; break
+    case "callisto_2_4": playerModel.levelCallisto24 = level; break
     case "callisto_3": playerModel.levelCallisto3 = level; break
-    default: playerModel.levelClassic = level
+    case "gembloq": playerModel.levelGembloQ = level; break
+    case "gembloq_2": playerModel.levelGembloQ2 = level; break
+    case "gembloq_2_4": playerModel.levelGembloQ24 = level; break
+    case "gembloq_3": playerModel.levelGembloQ3 = level; break
+    default: console.assert(false)
     }
 }
 

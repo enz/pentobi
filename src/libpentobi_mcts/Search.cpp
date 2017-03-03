@@ -127,6 +127,7 @@ void Search::set_default_param(Variant variant)
     case Variant::trigon_2:
     case Variant::trigon_3:
     case Variant::callisto:
+    case Variant::callisto_2_4:
     case Variant::callisto_3:
         set_exploration_constant(0.014f);
         set_rave_parent_max(50000);

@@ -545,10 +545,6 @@
         <translation>Spielst&amp;ufe (Callisto, 4 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Level (Callisto, 2 Players)</source>
-        <translation>Spielst&amp;ufe (Callisto, 2 Spieler)</translation>
-    </message>
-    <message>
         <source>&amp;Level (Callisto, 3 Players)</source>
         <translation>Spielst&amp;ufe (Callisto, 3 Spieler)</translation>
     </message>
@@ -575,6 +571,14 @@
     <message>
         <source>&amp;Level (GembloQ, 2 Players, 4 Colors)</source>
         <translation>Spielst&amp;ufe (GembloQ, 2 Spieler, 4 Farben)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Callisto, 2 Players, 2 Colors)</source>
+        <translation>Spielst&amp;ufe (Callisto, 2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Callisto, 2 Players, 4 Colors)</source>
+        <translation>Spielst&amp;ufe (Callisto, 2 Spieler, 4 Farben)</translation>
     </message>
 </context>
 <context>
@@ -747,10 +751,6 @@
         <translation>&amp;Callisto</translation>
     </message>
     <message>
-        <source>Callisto (&amp;2 Players)</source>
-        <translation>Callisto (&amp;2 Spieler)</translation>
-    </message>
-    <message>
         <source>Callisto (&amp;3 Players)</source>
         <translation>Callisto (&amp;3 Spieler)</translation>
     </message>
@@ -813,6 +813,14 @@
     <message>
         <source>GembloQ (&amp;4 Players)</source>
         <translation>GembloQ (&amp;4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (&amp;2 Players, 2 Colors)</source>
+        <translation>Callisto (&amp;2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>Callisto (2 &amp;Players, 4 Colors)</source>
+        <translation>Callisto (2 &amp;Spieler, 4 Farben)</translation>
     </message>
 </context>
 <context>
