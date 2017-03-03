@@ -201,8 +201,8 @@ inline void PlayoutFeatures::set_local(const Board& bd)
             {
                 // Nexos or Callisto don't use adjacent points, use 2nd-order
                 // "diagonal" points instead
-                LIBBOARDGAME_ASSERT(geo.get_diag(*j).empty());
-                for (Point k : geo.get_adj(*j))
+                LIBBOARDGAME_ASSERT(geo.get_adj(*j).empty());
+                for (Point k : geo.get_diag(*j))
                     if (! is_forbidden[k] && m_point_value[k] == 0)
                     {
                         m_local_points.get_unchecked(nu_local++) = k;
