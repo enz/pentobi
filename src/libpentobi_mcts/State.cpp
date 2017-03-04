@@ -28,29 +28,6 @@ using libpentobi_base::ScoreType;
 
 namespace {
 
-/** Gamma value for PlayoutFeatures::get_nu_local(). */
-float gamma_local[PlayoutFeatures::max_local + 1];
-
-/** Initialize variables that are global for performance reasons. */
-struct Initializer
-{
-    Initializer();
-};
-
-Initializer::Initializer()
-{
-    static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
-    gamma_local[0] = 1;
-    gamma_local[1] = 1e6f;
-    gamma_local[2] = 1e12f;
-    gamma_local[3] = 1e18f;
-    gamma_local[4] = 1e24f;
-    for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
-        gamma_local[4] = 1e25f;
-}
-
-Initializer g_initializer;
-
 inline Float sigmoid(Float steepness, Float x)
 {
     return -1.f + 2.f / (1.f + fast_exp(-steepness * x));
@@ -188,7 +165,7 @@ bool State::check_move(Move mv, const MoveInfo<MAX_SIZE>& info,
     if (features.is_forbidden())
         return false;
     auto gamma = gamma_piece;
-    gamma *= gamma_local[features.get_nu_local()];
+    gamma *= m_gamma_local[features.get_nu_local()];
     total_gamma += gamma;
     m_cumulative_gamma[nu_moves] = total_gamma;
     LIBBOARDGAME_ASSERT(nu_moves < MoveList::max_size);
@@ -796,6 +773,43 @@ void State::start_search()
         m_stat_score[c].clear();
 
     // Init gamma values
+    if (m_bd.get_piece_set() == PieceSet::gembloq)
+    {
+        static_assert(PlayoutFeatures::max_local + 1 >= 20, "");
+        m_gamma_local[0] = 1;
+        m_gamma_local[1] = 1e6f;
+        m_gamma_local[2] = 1e6f;
+        m_gamma_local[3] = 1e6f;
+        m_gamma_local[4] = 1e6f;
+        m_gamma_local[5] = 1e6f;
+        m_gamma_local[6] = 1e6f;
+        m_gamma_local[7] = 1e6f;
+        m_gamma_local[8] = 1e12f;
+        m_gamma_local[9] = 1e12f;
+        m_gamma_local[10] = 1e12f;
+        m_gamma_local[11] = 1e12f;
+        m_gamma_local[12] = 1e18f;
+        m_gamma_local[13] = 1e18f;
+        m_gamma_local[14] = 1e18f;
+        m_gamma_local[15] = 1e18f;
+        m_gamma_local[16] = 1e24f;
+        m_gamma_local[17] = 1e24f;
+        m_gamma_local[18] = 1e24f;
+        m_gamma_local[19] = 1e24f;
+        for (unsigned i = 20; i < PlayoutFeatures::max_local + 1; ++i)
+            m_gamma_local[4] = 1e25f;
+    }
+    else
+    {
+        static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
+        m_gamma_local[0] = 1;
+        m_gamma_local[1] = 1e6f;
+        m_gamma_local[2] = 1e12f;
+        m_gamma_local[3] = 1e18f;
+        m_gamma_local[4] = 1e24f;
+        for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
+            m_gamma_local[4] = 1e25f;
+    }
     float gamma_size_factor = 1;
     float gamma_nu_attach_factor = 1;
     switch (bd.get_board_type())

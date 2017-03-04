@@ -140,6 +140,9 @@ private:
 
     PriorKnowledge m_prior_knowledge;
 
+    /** Gamma value for PlayoutFeatures::get_nu_local(). */
+    array<float, PlayoutFeatures::max_local + 1> m_gamma_local;
+
     /** Gamma value for a piece. */
     PieceMap<float> m_gamma_piece;
 
