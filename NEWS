@@ -40,6 +40,9 @@ Version 12.2.UNKNOWN (v12-fixes)
 
 Desktop version:
 
+* Leave Fullscreen button had no border with some versions of Qt (e.g. on
+  Ubuntu 16.10). This broke the behavior recommended by the Gnome 2 HIG, which
+  require that some pixels stay visible after the button slided off the screen.
 * Install AppData file to /usr/share/metainfo instead of /usr/share/appdata
   according to the Debian AppStream guidelines.
 * Added an AppStream file for the KDE thumbnailer.

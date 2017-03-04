@@ -18,15 +18,15 @@
 class QAction;
 class QPropertyAnimation;
 class QTimer;
-class QToolButton;
+class QPushButton;
 
 //-----------------------------------------------------------------------------
 
-/** A button at the top right of the screen to leave fullscreen mode that
-    slides of the screen after a few seconds.
-    A few pixels of the button stay visible and also an invisible slightly
-    larger trigger area. If the mouse is moved over this area, the button
-    becomes visible again. */
+/** A button at the top right of the screen to leave fullscreen mode.
+    The button behaves as recommended by the human interface guidelines of
+    Gnome 2. It slides off the screen after a few seconds. A few pixels of the
+    button stay visible and also an invisible slightly larger trigger area.
+    If the mouse is moved over this area, the button becomes visible again. */
 class LeaveFullscreenButton
     : public QObject
 {
@@ -49,7 +49,7 @@ public:
     void hideButton();
 
 private:
-    QToolButton* m_button;
+    QPushButton* m_button;
 
     QWidget* m_triggerArea;
 
