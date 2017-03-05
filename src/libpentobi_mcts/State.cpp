@@ -798,7 +798,7 @@ void State::start_search()
         m_gamma_local[18] = 1e24f;
         m_gamma_local[19] = 1e24f;
         for (unsigned i = 20; i < PlayoutFeatures::max_local + 1; ++i)
-            m_gamma_local[4] = 1e25f;
+            m_gamma_local[i] = 1e25f;
     }
     else if (piece_set == PieceSet::trigon)
     {
@@ -809,7 +809,7 @@ void State::start_search()
         m_gamma_local[3] = 1e18f;
         m_gamma_local[4] = 1e24f;
         for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
-            m_gamma_local[4] = 1e30f;
+            m_gamma_local[i] = 1e30f;
     }
     else
     {
@@ -820,7 +820,7 @@ void State::start_search()
         m_gamma_local[3] = 1e18f;
         m_gamma_local[4] = 1e24f;
         for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
-            m_gamma_local[4] = 1e25f;
+            m_gamma_local[i] = 1e25f;
     }
     float gamma_size_factor = 1;
     float gamma_nu_attach_factor = 1;
