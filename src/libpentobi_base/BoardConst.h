@@ -123,7 +123,7 @@ public:
     const Geometry& get_geometry() const;
 
     /** List containing the points used for the adjacent status.
-        Contains a number of first or sencond.order adjacent and diagonal
+        Contains a number of first or second-order adjacent and diagonal
         neighbor points. Should the size of the list be smaller than
         AdjStatusList::max_size, then elements above end() may be accessed and
         contain Point::null() for easy unrolling of loops. */
