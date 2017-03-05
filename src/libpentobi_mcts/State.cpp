@@ -811,6 +811,16 @@ void State::start_search()
         for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
             m_gamma_local[i] = 1e30f;
     }
+    else if (piece_set == PieceSet::nexos)
+    {
+        static_assert(PlayoutFeatures::max_local + 1 >= 4, "");
+        m_gamma_local[0] = 1;
+        m_gamma_local[1] = 1e6f;
+        m_gamma_local[2] = 1e12f;
+        m_gamma_local[3] = 1e18f;
+        for (unsigned i = 4; i < PlayoutFeatures::max_local + 1; ++i)
+            m_gamma_local[i] = 1e24f;
+    }
     else
     {
         static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
