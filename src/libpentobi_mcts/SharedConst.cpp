@@ -210,7 +210,7 @@ void SharedConst::init(bool is_followup)
 
         m_is_forbidden.set();
         for (Point p : bd)
-            if (! bd.is_forbidden(p, c))
+            if (! bd.is_forbidden(p, c) && ! bc.get_adj_status_list(p).empty())
             {
                 auto adj_status = bd.get_adj_status(p, c);
                 for (Piece piece : bd.get_pieces_left(c))
@@ -233,7 +233,8 @@ void SharedConst::init(bool is_followup)
                 pieces.push_back(Piece(i));
         if (! is_followup)
             for (Point p : bd)
-                if (! bd.is_forbidden(p, c))
+                if (! bd.is_forbidden(p, c)
+                        && ! bc.get_adj_status_list(p).empty())
                 {
                     auto adj_status = bd.get_adj_status(p, c);
                     for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
@@ -244,7 +245,7 @@ void SharedConst::init(bool is_followup)
         unsigned n = 0;
         for (Point p : bd)
         {
-            if (bd.is_forbidden(p, c))
+            if (bd.is_forbidden(p, c) || bc.get_adj_status_list(p).empty())
                 continue;
             auto adj_status = bd.get_adj_status(p, c);
             for (unsigned i = 0; i < PrecompMoves::nu_adj_status; ++i)
