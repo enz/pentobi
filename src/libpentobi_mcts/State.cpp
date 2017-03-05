@@ -735,7 +735,8 @@ void State::start_search()
     m_bd.set_to_play(m_shared_const.to_play);
     m_bd.take_snapshot();
     m_nu_colors = bd.get_nu_colors();
-    m_is_callisto = (bd.get_piece_set() == PieceSet::callisto);
+    const auto piece_set = bd.get_piece_set();
+    m_is_callisto = (piece_set == PieceSet::callisto);
     for (Color c : Color::Range(m_nu_colors))
         m_playout_features[c].init_snapshot(m_bd, c);
     m_bc = &m_bd.get_board_const();
@@ -773,7 +774,7 @@ void State::start_search()
         m_stat_score[c].clear();
 
     // Init gamma values
-    if (m_bd.get_piece_set() == PieceSet::gembloq)
+    if (piece_set == PieceSet::gembloq)
     {
         static_assert(PlayoutFeatures::max_local + 1 >= 20, "");
         m_gamma_local[0] = 1;
@@ -798,6 +799,17 @@ void State::start_search()
         m_gamma_local[19] = 1e24f;
         for (unsigned i = 20; i < PlayoutFeatures::max_local + 1; ++i)
             m_gamma_local[4] = 1e25f;
+    }
+    else if (piece_set == PieceSet::trigon)
+    {
+        static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
+        m_gamma_local[0] = 1;
+        m_gamma_local[1] = 1e6f;
+        m_gamma_local[2] = 1e12f;
+        m_gamma_local[3] = 1e18f;
+        m_gamma_local[4] = 1e24f;
+        for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
+            m_gamma_local[4] = 1e30f;
     }
     else
     {
