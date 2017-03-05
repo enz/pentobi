@@ -123,10 +123,10 @@ public:
     const Geometry& get_geometry() const;
 
     /** List containing the points used for the adjacent status.
-        Contains the first PrecompMoves::adj_status_nu_adj points of
-        Geometry::get_adj() concatenated with Geometry::get_diag().
-        Elements above end() may be accessed and contain Point::null()
-        for easy unrolling of loops. */
+        Contains a number of first or sencond.order adjacent and diagonal
+        neighbor points. Should the size of the list be smaller than
+        AdjStatusList::max_size, then elements above end() may be accessed and
+        contain Point::null() for easy unrolling of loops. */
     const AdjStatusList& get_adj_status_list(Point p) const
     {
         return m_adj_status_list[p];
