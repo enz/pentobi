@@ -3,9 +3,8 @@ Version 12.2.UNKNOWN (v12-fixes)
 
 Desktop version:
 
-* Leave Fullscreen button had no border with some versions of Qt (e.g. on
-  Ubuntu 16.10). This broke the behavior recommended by the Gnome 2 HIG, which
-  require that some pixels stay visible after the button slided off the screen.
+* Leave Fullscreen button had no border with some versions of Qt in some
+  environments.
 * Install AppData file to /usr/share/metainfo instead of /usr/share/appdata
   according to the Debian AppStream guidelines.
 * Added an AppStream file for the KDE thumbnailer.
@@ -20,6 +19,7 @@ Android version:
 * New menu item View/Fullscreen.
 * New menu item Game/Open From Clipboard.
 * Default folder for Open/Save is now /sdcard.
+* Minor bugfixes.
 * Set minimum Android version to 4.1 because Qt 5.6 crashes on Android 2.3.
 
 
