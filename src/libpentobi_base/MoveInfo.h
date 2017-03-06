@@ -47,8 +47,6 @@ public:
 
     Piece get_piece() const { return Piece(m_piece); }
 
-    unsigned get_size() const { return m_size; }
-
 private:
     uint_least8_t m_piece;
 
