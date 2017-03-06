@@ -254,6 +254,8 @@ private:
 
     const Board::PiecesLeftList& get_pieces_considered(Color c);
 
+    void init_gamma();
+
     template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
     void init_moves_with_gamma(Color c);
 

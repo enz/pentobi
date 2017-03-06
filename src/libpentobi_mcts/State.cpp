@@ -575,6 +575,117 @@ inline Float State::get_quality_bonus_attach_multicolor()
     return 0;
 }
 
+void State::init_gamma()
+{
+    auto& bd = *m_shared_const.board;
+    const auto piece_set = bd.get_piece_set();
+    if (piece_set == PieceSet::gembloq)
+    {
+        static_assert(PlayoutFeatures::max_local + 1 >= 20, "");
+        m_gamma_local[0] = 1;
+        m_gamma_local[1] = 1e6f;
+        m_gamma_local[2] = 1e6f;
+        m_gamma_local[3] = 1e6f;
+        m_gamma_local[4] = 1e6f;
+        m_gamma_local[5] = 1e6f;
+        m_gamma_local[6] = 1e6f;
+        m_gamma_local[7] = 1e6f;
+        m_gamma_local[8] = 1e12f;
+        m_gamma_local[9] = 1e12f;
+        m_gamma_local[10] = 1e12f;
+        m_gamma_local[11] = 1e12f;
+        m_gamma_local[12] = 1e18f;
+        m_gamma_local[13] = 1e18f;
+        m_gamma_local[14] = 1e18f;
+        m_gamma_local[15] = 1e18f;
+        m_gamma_local[16] = 1e24f;
+        m_gamma_local[17] = 1e24f;
+        m_gamma_local[18] = 1e24f;
+        m_gamma_local[19] = 1e24f;
+        for (unsigned i = 20; i < PlayoutFeatures::max_local + 1; ++i)
+            m_gamma_local[i] = 1e25f;
+    }
+    else if (piece_set == PieceSet::trigon)
+    {
+        static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
+        m_gamma_local[0] = 1;
+        m_gamma_local[1] = 1e6f;
+        m_gamma_local[2] = 1e12f;
+        m_gamma_local[3] = 1e18f;
+        m_gamma_local[4] = 1e24f;
+        for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
+            m_gamma_local[i] = 1e30f;
+    }
+    else if (piece_set == PieceSet::nexos)
+    {
+        static_assert(PlayoutFeatures::max_local + 1 >= 4, "");
+        m_gamma_local[0] = 1;
+        m_gamma_local[1] = 1e6f;
+        m_gamma_local[2] = 1e12f;
+        m_gamma_local[3] = 1e18f;
+        for (unsigned i = 4; i < PlayoutFeatures::max_local + 1; ++i)
+            m_gamma_local[i] = 1e24f;
+    }
+    else
+    {
+        static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
+        m_gamma_local[0] = 1;
+        m_gamma_local[1] = 1e6f;
+        m_gamma_local[2] = 1e12f;
+        m_gamma_local[3] = 1e18f;
+        m_gamma_local[4] = 1e24f;
+        for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
+            m_gamma_local[i] = 1e25f;
+    }
+    float gamma_size_factor = 1;
+    float gamma_nu_attach_factor = 1;
+    switch (bd.get_board_type())
+    {
+    case BoardType::classic:
+        gamma_size_factor = 5;
+        break;
+    case BoardType::duo:
+        gamma_size_factor = 3;
+        gamma_nu_attach_factor = 1.8f;
+        break;
+    case BoardType::trigon:
+    case BoardType::trigon_3: // Not tuned
+        gamma_size_factor = 5;
+        break;
+    case BoardType::nexos: // Not tuned
+        gamma_size_factor = 5;
+        gamma_nu_attach_factor = 1.8f;
+        break;
+    case BoardType::callisto_2:
+    case BoardType::callisto: // Not tuned
+    case BoardType::callisto_3: // Not tuned
+        gamma_size_factor = 12;
+        gamma_nu_attach_factor = 1.8f;
+        break;
+    case BoardType::gembloq_2:
+    case BoardType::gembloq: // Not tuned
+    case BoardType::gembloq_3: // Not tuned
+        gamma_size_factor = 1.5f;
+        break;
+    }
+    for (Piece::IntType i = 0; i < m_bc->get_nu_pieces(); ++i)
+    {
+        Piece piece(i);
+        auto score_points = m_bc->get_piece_info(piece).get_score_points();
+        auto piece_nu_attach =
+                static_cast<float>(m_bc->get_nu_attach_points(piece));
+        LIBBOARDGAME_ASSERT(score_points >= 0);
+        LIBBOARDGAME_ASSERT(piece_nu_attach > 0);
+        m_gamma_piece[piece] =
+                pow(gamma_size_factor, score_points)
+                * pow(gamma_nu_attach_factor, piece_nu_attach - 1);
+    }
+    if (m_is_callisto)
+        // Playing 1-piece in Callisto early in playouts is bad, make sure it
+        // gets a low gamma even if it is on a local point.
+        m_gamma_piece[m_bd.get_one_piece()] = 1e-13f;
+}
+
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
 void State::init_moves_with_gamma(Color c)
 {
@@ -773,112 +884,7 @@ void State::start_search()
     for (Color c : Color::Range(m_nu_colors))
         m_stat_score[c].clear();
 
-    // Init gamma values
-    if (piece_set == PieceSet::gembloq)
-    {
-        static_assert(PlayoutFeatures::max_local + 1 >= 20, "");
-        m_gamma_local[0] = 1;
-        m_gamma_local[1] = 1e6f;
-        m_gamma_local[2] = 1e6f;
-        m_gamma_local[3] = 1e6f;
-        m_gamma_local[4] = 1e6f;
-        m_gamma_local[5] = 1e6f;
-        m_gamma_local[6] = 1e6f;
-        m_gamma_local[7] = 1e6f;
-        m_gamma_local[8] = 1e12f;
-        m_gamma_local[9] = 1e12f;
-        m_gamma_local[10] = 1e12f;
-        m_gamma_local[11] = 1e12f;
-        m_gamma_local[12] = 1e18f;
-        m_gamma_local[13] = 1e18f;
-        m_gamma_local[14] = 1e18f;
-        m_gamma_local[15] = 1e18f;
-        m_gamma_local[16] = 1e24f;
-        m_gamma_local[17] = 1e24f;
-        m_gamma_local[18] = 1e24f;
-        m_gamma_local[19] = 1e24f;
-        for (unsigned i = 20; i < PlayoutFeatures::max_local + 1; ++i)
-            m_gamma_local[i] = 1e25f;
-    }
-    else if (piece_set == PieceSet::trigon)
-    {
-        static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
-        m_gamma_local[0] = 1;
-        m_gamma_local[1] = 1e6f;
-        m_gamma_local[2] = 1e12f;
-        m_gamma_local[3] = 1e18f;
-        m_gamma_local[4] = 1e24f;
-        for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
-            m_gamma_local[i] = 1e30f;
-    }
-    else if (piece_set == PieceSet::nexos)
-    {
-        static_assert(PlayoutFeatures::max_local + 1 >= 4, "");
-        m_gamma_local[0] = 1;
-        m_gamma_local[1] = 1e6f;
-        m_gamma_local[2] = 1e12f;
-        m_gamma_local[3] = 1e18f;
-        for (unsigned i = 4; i < PlayoutFeatures::max_local + 1; ++i)
-            m_gamma_local[i] = 1e24f;
-    }
-    else
-    {
-        static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
-        m_gamma_local[0] = 1;
-        m_gamma_local[1] = 1e6f;
-        m_gamma_local[2] = 1e12f;
-        m_gamma_local[3] = 1e18f;
-        m_gamma_local[4] = 1e24f;
-        for (unsigned i = 5; i < PlayoutFeatures::max_local + 1; ++i)
-            m_gamma_local[i] = 1e25f;
-    }
-    float gamma_size_factor = 1;
-    float gamma_nu_attach_factor = 1;
-    switch (bd.get_board_type())
-    {
-    case BoardType::classic:
-        gamma_size_factor = 5;
-        break;
-    case BoardType::duo:
-        gamma_size_factor = 3;
-        gamma_nu_attach_factor = 1.8f;
-        break;
-    case BoardType::trigon:
-    case BoardType::trigon_3: // Not tuned
-        gamma_size_factor = 5;
-        break;
-    case BoardType::nexos: // Not tuned
-        gamma_size_factor = 5;
-        gamma_nu_attach_factor = 1.8f;
-        break;
-    case BoardType::callisto_2:
-    case BoardType::callisto: // Not tuned
-    case BoardType::callisto_3: // Not tuned
-        gamma_size_factor = 12;
-        gamma_nu_attach_factor = 1.8f;
-        break;
-    case BoardType::gembloq_2:
-    case BoardType::gembloq: // Not tuned
-    case BoardType::gembloq_3: // Not tuned
-        gamma_size_factor = 1.5f;
-        break;
-    }
-    for (Piece::IntType i = 0; i < m_bc->get_nu_pieces(); ++i)
-    {
-        Piece piece(i);
-        auto score_points = m_bc->get_piece_info(piece).get_score_points();
-        auto piece_nu_attach =
-                static_cast<float>(m_bc->get_nu_attach_points(piece));
-        LIBBOARDGAME_ASSERT(score_points >= 0);
-        LIBBOARDGAME_ASSERT(piece_nu_attach > 0);
-        m_gamma_piece[piece] =
-            pow(gamma_size_factor, score_points)
-            * pow(gamma_nu_attach_factor, piece_nu_attach - 1);
-    }
-    if (m_is_callisto)
-        // Playing 1-piece in Callisto early in playouts is bad, make sure it
-        // gets a low gamma even if it is on a local point.
-        m_gamma_piece[m_bd.get_one_piece()] = 1e-13f;
+    init_gamma();
 }
 
 void State::start_simulation(size_t n)
