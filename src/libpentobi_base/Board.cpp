@@ -436,8 +436,7 @@ bool Board::is_legal(Color c, Move mv) const
     {
         if (m_state_color[c].forbidden[*i])
             return false;
-        if (is_attach_point(*i, c))
-            has_attach_point = true;
+        has_attach_point |= is_attach_point(*i, c);
     }
     while (++i != end);
     if (m_is_callisto)
@@ -458,9 +457,10 @@ bool Board::is_legal(Color c, Move mv) const
         if (is_colorless_starting_point(*i)
                 || (is_colored_starting_point(*i)
                     && get_starting_point_color(*i) == c))
-            ++n;
+            if (++n >= m_needed_starting_points)
+                return true;
     while (++i != end);
-    return n >= m_needed_starting_points;
+    return false;
 }
 
 /** Remove forbidden points from attach point lists.
