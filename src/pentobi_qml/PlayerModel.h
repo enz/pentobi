@@ -22,24 +22,15 @@ class PlayerModel
     : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(unsigned levelClassic MEMBER m_levelClassic NOTIFY levelClassicChanged)
-    Q_PROPERTY(unsigned levelClassic2 MEMBER m_levelClassic2 NOTIFY levelClassic2Changed)
-    Q_PROPERTY(unsigned levelClassic3 MEMBER m_levelClassic3 NOTIFY levelClassic3Changed)
-    Q_PROPERTY(unsigned levelDuo MEMBER m_levelDuo NOTIFY levelDuoChanged)
-    Q_PROPERTY(unsigned levelTrigon MEMBER m_levelTrigon NOTIFY levelTrigonChanged)
-    Q_PROPERTY(unsigned levelTrigon2 MEMBER m_levelTrigon2 NOTIFY levelTrigon2Changed)
-    Q_PROPERTY(unsigned levelTrigon3 MEMBER m_levelTrigon3 NOTIFY levelTrigon3Changed)
-    Q_PROPERTY(unsigned levelJunior MEMBER m_levelJunior NOTIFY levelJuniorChanged)
-    Q_PROPERTY(unsigned levelNexos MEMBER m_levelNexos NOTIFY levelNexosChanged)
-    Q_PROPERTY(unsigned levelNexos2 MEMBER m_levelNexos2 NOTIFY levelNexos2Changed)
-    Q_PROPERTY(unsigned levelGembloQ MEMBER m_levelGembloQ NOTIFY levelGembloQChanged)
-    Q_PROPERTY(unsigned levelGembloQ2 MEMBER m_levelGembloQ2 NOTIFY levelGembloQ2Changed)
-    Q_PROPERTY(unsigned levelGembloQ24 MEMBER m_levelGembloQ24 NOTIFY levelGembloQ24Changed)
-    Q_PROPERTY(unsigned levelGembloQ3 MEMBER m_levelGembloQ3 NOTIFY levelGembloQ3Changed)
-    Q_PROPERTY(unsigned levelCallisto MEMBER m_levelCallisto NOTIFY levelCallistoChanged)
-    Q_PROPERTY(unsigned levelCallisto2 MEMBER m_levelCallisto2 NOTIFY levelCallisto2Changed)
-    Q_PROPERTY(unsigned levelCallisto24 MEMBER m_levelCallisto24 NOTIFY levelCallisto24Changed)
-    Q_PROPERTY(unsigned levelCallisto3 MEMBER m_levelCallisto3 NOTIFY levelCallisto3Changed)
+
+    /** Game variant should be bound to GameModel.gameVariant.
+        This automatically updates the level property to the stored level for
+        the current game variant. The level will also be updated on
+        startGenMove() but the user interface might want to display the current
+        level immediately after changing the game variant. */
+    Q_PROPERTY(QString gameVariant READ gameVariant WRITE setGameVariant NOTIFY gameVariantChanged)
+
+    Q_PROPERTY(unsigned level READ level WRITE setLevel NOTIFY levelChanged)
     Q_PROPERTY(bool isGenMoveRunning READ isGenMoveRunning NOTIFY isGenMoveRunningChanged)
 
 public:
@@ -71,46 +62,22 @@ public:
         running. */
     Q_INVOKABLE void cancelGenMove();
 
+    const QString& gameVariant() const { return m_gameVariant; }
+
+    void setGameVariant(const QString& gameVariant);
+
+    unsigned level() const { return m_level; }
+
+    void setLevel(unsigned level);
+
     bool isGenMoveRunning() const { return m_isGenMoveRunning; }
 
     Search& getSearch() { return m_player.get_search(); }
 
 signals:
-    void levelCallistoChanged();
+    void gameVariantChanged();
 
-    void levelCallisto2Changed();
-
-    void levelCallisto24Changed();
-
-    void levelCallisto3Changed();
-
-    void levelClassicChanged();
-
-    void levelClassic2Changed();
-
-    void levelClassic3Changed();
-
-    void levelDuoChanged();
-
-    void levelGembloQChanged();
-
-    void levelGembloQ2Changed();
-
-    void levelGembloQ24Changed();
-
-    void levelGembloQ3Changed();
-
-    void levelTrigonChanged();
-
-    void levelTrigon2Changed();
-
-    void levelTrigon3Changed();
-
-    void levelJuniorChanged();
-
-    void levelNexosChanged();
-
-    void levelNexos2Changed();
+    void levelChanged();
 
     void isGenMoveRunningChanged();
 
@@ -128,43 +95,12 @@ private:
         GameModel* gameModel;
     };
 
+
     bool m_isGenMoveRunning = false;
 
-    unsigned m_levelCallisto;
+    QString m_gameVariant;
 
-    unsigned m_levelCallisto2;
-
-    unsigned m_levelCallisto24;
-
-    unsigned m_levelCallisto3;
-
-    unsigned m_levelClassic;
-
-    unsigned m_levelClassic2;
-
-    unsigned m_levelClassic3;
-
-    unsigned m_levelDuo;
-
-    unsigned m_levelGembloQ;
-
-    unsigned m_levelGembloQ2;
-
-    unsigned m_levelGembloQ24;
-
-    unsigned m_levelGembloQ3;
-
-    unsigned m_levelTrigon;
-
-    unsigned m_levelTrigon2;
-
-    unsigned m_levelTrigon3;
-
-    unsigned m_levelJunior;
-
-    unsigned m_levelNexos;
-
-    unsigned m_levelNexos2;
+    unsigned m_level = 1;
 
     unsigned m_genMoveId = 0;
 
@@ -175,7 +111,11 @@ private:
 
     GenMoveResult asyncGenMove(GameModel* gm, Color c, unsigned genMoveId);
 
+    bool getKey(const QString& gameVariant, QString& key);
+
     void loadBook(Variant variant);
+
+    void loadLevel(const QString& gameVariant);
 
     void setIsGenMoveRunning(bool isGenMoveRunning);
 

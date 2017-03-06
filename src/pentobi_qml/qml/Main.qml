@@ -145,6 +145,7 @@ Window {
     PlayerModel {
         id: playerModel
 
+        gameVariant: gameModel.gameVariant
         onMoveGenerated: Logic.moveGenerated(move)
     }
     AnalyzeGameModel { id: analyzeGameModel }

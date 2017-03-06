@@ -571,7 +571,7 @@ function ratedGameStart() {
         computerPlays2 = computerPlays0
         computerPlays3 = computerPlays1
     }
-    setLevel(ratingModel.getNextLevel(maxLevel))
+    playerModel.level = ratingModel.getNextLevel(maxLevel)
     gameModel.newGame()
     gameDisplay.setupMode = false
     gameDisplay.showToPlay()
@@ -610,30 +610,6 @@ function saveFile(file) {
 
 function saveFileUrl(fileUrl) {
     saveFile(getFileFromUrl(fileUrl))
-}
-
-function setLevel(level) {
-    switch (gameModel.gameVariant) {
-    case "classic_2": playerModel.levelClassic = level; break
-    case "classic_2": playerModel.levelClassic2 = level; break
-    case "classic_3": playerModel.levelClassic3 = level; break
-    case "duo": playerModel.levelDuo = level; break
-    case "trigon": playerModel.levelTrigon = level; break
-    case "trigon_2": playerModel.levelTrigon2 = level; break
-    case "trigon_3": playerModel.levelTrigon3 = level; break
-    case "junior": playerModel.levelJunior = level; break
-    case "nexos": playerModel.levelNexos = level; break
-    case "nexos_2": playerModel.levelNexos2 = level; break
-    case "callisto": playerModel.levelCallisto = level; break
-    case "callisto_2": playerModel.levelCallisto2 = level; break
-    case "callisto_2_4": playerModel.levelCallisto24 = level; break
-    case "callisto_3": playerModel.levelCallisto3 = level; break
-    case "gembloq": playerModel.levelGembloQ = level; break
-    case "gembloq_2": playerModel.levelGembloQ2 = level; break
-    case "gembloq_2_4": playerModel.levelGembloQ24 = level; break
-    case "gembloq_3": playerModel.levelGembloQ3 = level; break
-    default: console.assert(false)
-    }
 }
 
 function showComputerColorDialog() {

@@ -19,23 +19,7 @@ using libboardgame_util::set_abort;
 
 namespace {
 
-unsigned maxLevel = 7;
-
-void getLevel(QSettings& settings, const char* key, unsigned& level)
-{
-    level = settings.value(key, 1).toUInt();
-    if (level < 1)
-    {
-        qDebug() << "PlayerModel: invalid level in settings:" << level;
-        level = 1;
-    }
-    else if (level > maxLevel)
-    {
-        qDebug() << "PlayerModel: level in settings too high, using level"
-                 << maxLevel;
-        level = maxLevel;
-    }
-}
+const unsigned maxLevel = 7;
 
 } // namespace
 
@@ -53,26 +37,6 @@ PlayerModel::PlayerModel(QObject* parent)
 {
     if (noBook)
         m_player.set_use_book(false);
-    QSettings settings;
-    getLevel(settings, "level_classic", m_levelClassic);
-    getLevel(settings, "level_classic_2", m_levelClassic2);
-    getLevel(settings, "level_classic_3", m_levelClassic3);
-    getLevel(settings, "level_duo", m_levelDuo);
-    getLevel(settings, "level_trigon", m_levelTrigon);
-    getLevel(settings, "level_trigon_2", m_levelTrigon2);
-    getLevel(settings, "level_trigon_3", m_levelTrigon3);
-    getLevel(settings, "level_junior", m_levelJunior);
-    getLevel(settings, "level_nexos", m_levelNexos);
-    getLevel(settings, "level_nexos_2", m_levelNexos2);
-    getLevel(settings, "level_gembloq", m_levelGembloQ);
-    getLevel(settings, "level_gembloq_2", m_levelGembloQ2);
-    getLevel(settings, "level_gembloq_2_4", m_levelGembloQ24);
-    getLevel(settings, "level_gembloq_3", m_levelGembloQ3);
-    getLevel(settings, "level_callisto", m_levelCallisto);
-    getLevel(settings, "level_callisto_2", m_levelCallisto2);
-    getLevel(settings, "level_callisto_2_4", m_levelCallisto24);
-    getLevel(settings, "level_callisto_3", m_levelCallisto3);
-    static_assert(libpentobi_base::nu_game_variants == 18, "");
     connect(&m_genMoveWatcher, &QFutureWatcher<GenMoveResult>::finished,
             this, &PlayerModel::genMoveFinished);
 }
@@ -80,26 +44,6 @@ PlayerModel::PlayerModel(QObject* parent)
 PlayerModel::~PlayerModel()
 {
     cancelGenMove();
-    QSettings settings;
-    settings.setValue("level_classic", m_levelClassic);
-    settings.setValue("level_classic_2", m_levelClassic2);
-    settings.setValue("level_classic_3", m_levelClassic3);
-    settings.setValue("level_duo", m_levelDuo);
-    settings.setValue("level_trigon", m_levelTrigon);
-    settings.setValue("level_trigon_2", m_levelTrigon2);
-    settings.setValue("level_trigon_3", m_levelTrigon3);
-    settings.setValue("level_junior", m_levelJunior);
-    settings.setValue("level_nexos", m_levelNexos);
-    settings.setValue("level_nexos_2", m_levelNexos2);
-    settings.setValue("level_gembloq", m_levelGembloQ);
-    settings.setValue("level_gembloq_2", m_levelGembloQ2);
-    settings.setValue("level_gembloq_2_4", m_levelGembloQ24);
-    settings.setValue("level_gembloq_3", m_levelGembloQ3);
-    settings.setValue("level_callisto", m_levelCallisto);
-    settings.setValue("level_callisto_2", m_levelCallisto2);
-    settings.setValue("level_callisto_2_4", m_levelCallisto24);
-    settings.setValue("level_callisto_3", m_levelCallisto3);
-    static_assert(libpentobi_base::nu_game_variants == 18, "");
 }
 
 PlayerModel::GenMoveResult PlayerModel::asyncGenMove(
@@ -170,6 +114,51 @@ void PlayerModel::loadBook(Variant variant)
     m_player.load_book(in);
 }
 
+bool PlayerModel::getKey(const QString& gameVariant, QString& key)
+{
+    Variant variant;
+    if (! parse_variant_id(gameVariant.toLocal8Bit().constData(), variant))
+    {
+        qWarning("PlayerModel: invalid game variant");
+        return false;
+    }
+    key = QString("level_%1").arg(to_string_id(variant));
+    return true;
+}
+
+void PlayerModel::loadLevel(const QString& gameVariant)
+{
+    QString key;
+    if (! getKey(gameVariant, key))
+        return;
+    QSettings settings;
+    auto level = settings.value(key, 1).toUInt();
+    if (level < 1)
+    {
+        qDebug() << "PlayerModel: invalid level in settings:" << level;
+        level = 1;
+    }
+    else if (level > maxLevel)
+    {
+        qDebug() << "PlayerModel: level in settings too high, using" << maxLevel;
+        level = maxLevel;
+    }
+    if (m_level != level)
+    {
+        m_level = level;
+        emit levelChanged();
+    }
+}
+
+void PlayerModel::setGameVariant(const QString& gameVariant)
+{
+    if (m_gameVariant == gameVariant)
+        return;
+    loadLevel(gameVariant);
+    m_gameVariant = gameVariant;
+    emit gameVariantChanged();
+}
+
 void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
 {
     if (m_isGenMoveRunning == isGenMoveRunning)
@@ -178,69 +167,28 @@ void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
     emit isGenMoveRunningChanged();
 }
 
+void PlayerModel::setLevel(unsigned level)
+{
+    if (m_level == level)
+        return;
+    QString key;
+    if (! getKey(m_gameVariant, key))
+        return;
+    {
+        QSettings settings;
+        settings.setValue(key, level);
+    }
+    m_level = level;
+    emit levelChanged();
+}
+
 void PlayerModel::startGenMove(GameModel* gm)
 {
-    unsigned level;
     auto& bd = gm->getBoard();
-    switch (bd.get_variant())
-    {
-    case Variant::classic:
-        level = m_levelClassic;
-        break;
-    case Variant::classic_2:
-        level = m_levelClassic2;
-        break;
-    case Variant::classic_3:
-        level = m_levelClassic3;
-        break;
-    case Variant::duo:
-        level = m_levelDuo;
-        break;
-    case Variant::junior:
-        level = m_levelJunior;
-        break;
-    case Variant::trigon:
-        level = m_levelTrigon;
-        break;
-    case Variant::trigon_2:
-        level = m_levelTrigon2;
-        break;
-    case Variant::trigon_3:
-        level = m_levelTrigon3;
-        break;
-    case Variant::nexos:
-        level = m_levelNexos;
-        break;
-    case Variant::nexos_2:
-        level = m_levelNexos2;
-        break;
-    case Variant::callisto:
-        level = m_levelCallisto;
-        break;
-    case Variant::callisto_2:
-        level = m_levelCallisto2;
-        break;
-    case Variant::callisto_2_4:
-        level = m_levelCallisto24;
-        break;
-    case Variant::callisto_3:
-        level = m_levelCallisto3;
-        break;
-    case Variant::gembloq:
-        level = m_levelGembloQ;
-        break;
-    case Variant::gembloq_2:
-        level = m_levelGembloQ2;
-        break;
-    case Variant::gembloq_2_4:
-        level = m_levelGembloQ24;
-        break;
-    case Variant::gembloq_3:
-        level = m_levelGembloQ3;
-        break;
-    }
+    if (gm->gameVariant() != m_gameVariant)
+        loadLevel(gm->gameVariant());
     cancelGenMove();
-    m_player.set_level(level);
+    m_player.set_level(m_level);
     auto variant = gm->getBoard().get_variant();
     if (! m_player.is_book_loaded(variant))
         loadBook(variant);
