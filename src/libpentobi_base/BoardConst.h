@@ -30,10 +30,8 @@ using libboardgame_util::Range;
 class BoardConst
 {
 public:
-    /** See get_adj_status_list() */
-    typedef
-    ArrayList<Point, PrecompMoves::adj_status_nu_adj, unsigned short>
-    AdjStatusList;
+    /** See get_adj_status_points() */
+    typedef array<Point, PrecompMoves::adj_status_nu_adj> AdjStatusPoints;
 
     /** Start of the MoveInfo array, which can be cached by the user in
         performance-critical code and then passed into the static version of
@@ -122,14 +120,20 @@ public:
 
     const Geometry& get_geometry() const;
 
-    /** List containing the points used for the adjacent status.
-        Contains a number of first or second-order adjacent and diagonal
-        neighbor points. Should the size of the list be smaller than
-        AdjStatusList::max_size, then elements above end() may be accessed and
-        contain Point::null() for easy unrolling of loops. */
-    const AdjStatusList& get_adj_status_list(Point p) const
+    /** Array containing the points used for the adjacent status.
+        Contains a selection of first-order or second-order adjacent and
+        diagonal neighbor points.
+        @requires has_adj_status_points(p) */
+    const AdjStatusPoints& get_adj_status_points(Point p) const
     {
-        return m_adj_status_list[p];
+        return m_adj_status_points[p];
+    }
+
+    /** Adjacent status arrays are not initialized for junction points in
+        Nexos. */
+    bool has_adj_status_points(Point p) const
+    {
+        return m_board_type != BoardType::nexos || m_geo.get_point_type(p) != 0;
     }
 
     /** Only initialized in game variants with central symmetry of board
@@ -176,7 +180,7 @@ private:
 
     vector<PieceInfo> m_pieces;
 
-    Grid<AdjStatusList> m_adj_status_list;
+    Grid<AdjStatusPoints> m_adj_status_points;
 
     unique_ptr<PieceTransforms> m_transforms;
 
@@ -220,7 +224,7 @@ private:
     template<unsigned MAX_SIZE>
     const MoveInfo<MAX_SIZE>& get_move_info(Move mv) const;
 
-    void init_adj_status_list(Point p);
+    void init_adj_status_points(Point p);
 
     template<unsigned MAX_SIZE>
     void init_symmetry_info();
