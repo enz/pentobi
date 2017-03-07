@@ -600,39 +600,46 @@ void Util::paintJunction(QPainter& painter, Variant variant, Color c, qreal x,
     painter.translate(x + 0.25 * width, y + 0.25 * height);
     width *= 0.5;
     height *= 0.5;
-    if (hasUp && hasDown)
-        painter.fillRect(QRectF(0.25 * width, 0, 0.5 * width, height), color);
-    if (hasLeft && hasRight)
-        painter.fillRect(QRectF(0, 0.25 * height, width, 0.5 * height), color);
     painter.setPen(Qt::NoPen);
     painter.setBrush(color);
-    if (hasLeft && hasUp)
+    if (hasLeft && hasUp && ! hasRight && ! hasDown)
     {
         const QPointF polygon[3] = { QPointF(0, 0),
                                      QPointF(0.75 * width, 0),
                                      QPointF(0, 0.75 * height) };
         painter.drawPolygon(polygon, 3);
     }
-    if (hasRight && hasUp)
+    else if (hasRight && hasUp && ! hasLeft && ! hasDown)
     {
         const QPointF polygon[3] = { QPointF(0.25 * width, 0),
                                      QPointF(width, 0),
                                      QPointF(width, 0.75 * height) };
         painter.drawPolygon(polygon, 3);
     }
-    if (hasLeft && hasDown)
+    else if (hasLeft && hasDown && ! hasRight && ! hasUp)
     {
         const QPointF polygon[3] = { QPointF(0, 0.25 * height),
                                      QPointF(0, height),
                                      QPointF(0.75 * width, height) };
         painter.drawPolygon(polygon, 3);
     }
-    if (hasRight && hasDown)
+    else if (hasRight && hasDown && ! hasLeft && ! hasUp)
     {
         const QPointF polygon[3] = { QPointF(0.25 * width, height),
                                      QPointF(width, 0.25 * height),
                                      QPointF(width, height) };
         painter.drawPolygon(polygon, 3);
+    }
+    else
+    {
+        if (hasUp && (hasDown || hasLeft || hasRight))
+            painter.fillRect(QRectF(0.25 * width, 0, 0.5 * width, 0.5 * height), color);
+        if (hasDown && (hasUp || hasLeft || hasRight))
+            painter.fillRect(QRectF(0.25 * width, 0.5 * height, 0.5 * width, height), color);
+        if (hasLeft && (hasUp || hasDown || hasRight))
+            painter.fillRect(QRectF(0, 0.25 * height, 0.5 * width, 0.5 * height), color);
+        if (hasRight && (hasUp || hasDown || hasLeft))
+            painter.fillRect(QRectF(0.5 * width , 0.25 * height, width, 0.5 * height), color);
     }
     painter.restore();
 }
