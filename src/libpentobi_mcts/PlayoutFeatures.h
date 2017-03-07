@@ -13,13 +13,9 @@
 namespace libpentobi_mcts {
 
 using namespace std;
-using libboardgame_base::ArrayList;
-using libboardgame_util::Range;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::Color;
-using libpentobi_base::ColorMove;
-using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::GridExt;
 using libpentobi_base::Move;
