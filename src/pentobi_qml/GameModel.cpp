@@ -400,7 +400,7 @@ bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
         // half the x resolution, which makes positioning easier for the user.
         if (pointType == 0 || pointType == 2)
             offX = static_cast<int>(round(dx * 0.5f)) * 2;
-        else if (pointType == 1 || pointType == 3)
+        else
             offX = static_cast<int>(round((dx - 1) * 0.5f)) * 2 + 1;
     }
     else
