@@ -37,7 +37,7 @@ struct CmdLineRange
 
     bool operator==(const string& s) const
     {
-        return size() == s.size() && equal(m_begin, m_end, s.begin());
+        return equal(m_begin, m_end, s.begin(), s.end());
     }
 
     bool operator!=(const string& s) const

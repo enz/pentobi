@@ -13,7 +13,7 @@ General:
 
 Desktop version:
 
-* The compilation now requires CMake 3.1.0 or newer.
+* The compilation now requires CMake 3.1.0 or newer and a C++14 compiler.
 
 Android version:
 

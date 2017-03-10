@@ -168,9 +168,7 @@ inline const T& ArrayList<T, M, I>::operator[](I i) const
 template<typename T, unsigned M, typename I>
 bool ArrayList<T, M, I>::operator==(const ArrayList& array_list) const
 {
-    if (m_size != array_list.m_size)
-        return false;
-    return equal(begin(), end(), array_list.begin());
+    return equal(begin(), end(), array_list.begin(), array_list.end());
 }
 
 template<typename T, unsigned M, typename I>

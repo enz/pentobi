@@ -1199,9 +1199,9 @@ bool BoardConst::find_move(const MovePoints& points, Move& move) const
         for (auto mv : get_moves(piece, points[0]))
         {
             auto& info_ext_2 = get_move_info_ext_2(mv);
-            if (sorted_points.size() == info_ext_2.scored_points_size
-                && equal(sorted_points.begin(), sorted_points.end(),
-                         info_ext_2.begin_scored_points()))
+            if (equal(sorted_points.begin(), sorted_points.end(),
+                      info_ext_2.begin_scored_points(),
+                      info_ext_2.end_scored_points()))
             {
                 move = mv;
                 return true;
