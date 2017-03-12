@@ -153,11 +153,11 @@ protected:
     virtual bool init_is_onboard(unsigned x, unsigned y) const = 0;
 
 private:
+    IntType m_range;
+
     AdjList m_adj[Point::range_onboard];
 
     DiagList m_diag[Point::range_onboard];
-
-    IntType m_range;
 
     Point m_points[Point::max_width][Point::max_height];
 
