@@ -18,6 +18,11 @@ namespace libboardgame_gtp {
 
 //-----------------------------------------------------------------------------
 
+CmdLine::CmdLine(const string& line)
+{
+    init(line);
+}
+
 CmdLine::~CmdLine() = default;
 
 void CmdLine::add_elem(string::const_iterator begin,

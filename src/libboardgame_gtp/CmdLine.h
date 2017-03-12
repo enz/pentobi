@@ -72,11 +72,6 @@ private:
     void parse_id();
 };
 
-inline CmdLine::CmdLine(const string& line)
-{
-    init(line);
-}
-
 inline const vector<CmdLineRange>& CmdLine::get_elements() const
 {
     return m_elem;
