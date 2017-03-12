@@ -27,10 +27,8 @@ using namespace libboardgame_util;
     "no point".
     @tparam M The maximum number of on-board points of all geometries this
     point is used in (excluding the null point).
-    @tparam W The maximum width of all geometries this point is used in.
-    @tparam H The maximum height of all geometries this point is used in.
     @tparam I An unsigned integer type to store the point value. */
-template<unsigned M, unsigned W, unsigned H, typename I>
+template<unsigned M, typename I>
 class Point
 {
 public:
@@ -38,15 +36,9 @@ public:
 
     static const unsigned max_onboard = M;
 
-    static const unsigned max_width = W;
-
-    static const unsigned max_height = W;
-
     static_assert(numeric_limits<I>::is_integer, "");
 
     static_assert(! numeric_limits<I>::is_signed, "");
-
-    static_assert(max_onboard <= max_width * max_height, "");
 
     static const unsigned range_onboard = max_onboard;
 
@@ -79,64 +71,64 @@ private:
     LIBBOARDGAME_FORCE_INLINE bool is_initialized() const;
 };
 
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline Point<M, W, H, I>::Point()
+template<unsigned M, typename I>
+inline Point<M, I>::Point()
 {
 #if LIBBOARDGAME_DEBUG
     m_i = value_uninitialized;
 #endif
 }
 
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline Point<M, W, H, I>::Point(unsigned i)
+template<unsigned M, typename I>
+inline Point<M, I>::Point(unsigned i)
 {
     LIBBOARDGAME_ASSERT(i < range);
     m_i = static_cast<I>(i);
 }
 
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline bool Point<M, W, H, I>::operator==(const Point& p) const
+template<unsigned M, typename I>
+inline bool Point<M, I>::operator==(const Point& p) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(p.is_initialized());
     return m_i == p.m_i;
 }
 
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline bool Point<M, W, H, I>::operator!=(const Point& p) const
+template<unsigned M, typename I>
+inline bool Point<M, I>::operator!=(const Point& p) const
 {
     return ! operator==(p);
 }
 
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline bool Point<M, W, H, I>::operator<(const Point& p) const
+template<unsigned M, typename I>
+inline bool Point<M, I>::operator<(const Point& p) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(p.is_initialized());
     return m_i < p.m_i;
 }
 
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline bool Point<M, W, H, I>::is_initialized() const
+template<unsigned M, typename I>
+inline bool Point<M, I>::is_initialized() const
 {
     return m_i < value_uninitialized;
 }
 
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline bool Point<M, W, H, I>::is_null() const
+template<unsigned M, typename I>
+inline bool Point<M, I>::is_null() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i == value_null;
 }
 
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline auto Point<M, W, H, I>::null() -> Point
+template<unsigned M, typename I>
+inline auto Point<M, I>::null() -> Point
 {
     return Point(value_null);
 }
 
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline unsigned Point<M, W, H, I>::to_int() const
+template<unsigned M, typename I>
+inline unsigned Point<M, I>::to_int() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;

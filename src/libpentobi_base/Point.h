@@ -16,7 +16,7 @@ namespace libpentobi_base {
 //-----------------------------------------------------------------------------
 
 /** Point (coordinate of on-board field) for Blokus game variants. */
-typedef libboardgame_base::Point<1564, 56, 28, unsigned short> Point;
+typedef libboardgame_base::Point<1564, unsigned short> Point;
 
 //-----------------------------------------------------------------------------
 
