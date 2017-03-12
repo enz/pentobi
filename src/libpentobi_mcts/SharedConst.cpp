@@ -213,21 +213,7 @@ void SharedConst::init(bool is_followup)
     {
         auto& precomp = precomp_moves[c];
         auto& old_precomp = (is_followup ? precomp : bc.get_precomp_moves());
-
         m_is_forbidden.set();
-        for (Point p : points)
-            if (! bd.is_forbidden(p, c))
-            {
-                auto adj_status = bd.get_adj_status(p, c);
-                for (Piece piece : bd.get_pieces_left(c))
-                {
-                    if (! old_precomp.has_moves(piece, p, adj_status))
-                        continue;
-                    for (Move mv : old_precomp.get_moves(piece, p, adj_status))
-                        if (m_is_forbidden[mv] && ! bd.is_forbidden(c, mv))
-                            m_is_forbidden.clear(mv);
-                }
-            }
 
         // Don't use bd.get_pieces_left() because its ordering is not preserved
         // during a game. The in-place construction requires that the loop
@@ -238,6 +224,19 @@ void SharedConst::init(bool is_followup)
             if (bd.is_piece_left(c, Piece(i)))
                 pieces.push_back(Piece(i));
 
+        for (Point p : points)
+            if (! bd.is_forbidden(p, c))
+            {
+                auto adj_status = bd.get_adj_status(p, c);
+                for (Piece piece : pieces)
+                {
+                    if (! old_precomp.has_moves(piece, p, adj_status))
+                        continue;
+                    for (Move mv : old_precomp.get_moves(piece, p, adj_status))
+                        if (m_is_forbidden[mv] && ! bd.is_forbidden(c, mv))
+                            m_is_forbidden.clear(mv);
+                }
+            }
         if (! is_followup)
             for (Point p : points)
                 if (! bd.is_forbidden(p, c))
