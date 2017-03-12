@@ -37,7 +37,7 @@ class Point
 public:
     typedef I IntType;
 
-    static const unsigned max_onboard = M;
+    static const unsigned range_onboard = M;
 
     static const unsigned max_width = W;
 
@@ -47,11 +47,9 @@ public:
 
     static_assert(! numeric_limits<I>::is_signed, "");
 
-    static_assert(max_onboard <= max_width * max_height, "");
+    static_assert(range_onboard <= max_width * max_height, "");
 
-    static const unsigned range_onboard = max_onboard;
-
-    static const unsigned range = max_onboard + 1;
+    static const unsigned range = range_onboard + 1;
 
     static Point null();
 

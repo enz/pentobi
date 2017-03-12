@@ -70,7 +70,7 @@ public:
     PointList one_piece_points_callisto;
 
     /** Moves corresponding to one_piece_points_callisto. */
-    ArrayList<Move, Point::max_onboard> one_piece_moves_callisto;
+    ArrayList<Move, Point::range_onboard> one_piece_moves_callisto;
 
 
     explicit SharedConst(const Color& to_play);

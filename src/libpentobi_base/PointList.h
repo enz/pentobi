@@ -14,7 +14,7 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-typedef ArrayList<Point, Point::max_onboard> PointList;
+typedef ArrayList<Point, Point::range_onboard> PointList;
 
 //-----------------------------------------------------------------------------
 
