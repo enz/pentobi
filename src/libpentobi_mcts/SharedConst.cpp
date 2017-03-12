@@ -203,13 +203,19 @@ void SharedConst::init(bool is_followup)
     auto& bc = bd.get_board_const();
 
     // Initialize precomp_moves
+    PointList points;
+    unsigned n = 0;
+    for (Point p : bd)
+        if (bd.get_point_state(p).is_empty())
+            points.get_unchecked(n++) = p;
+    points.resize(n);
     for (Color c : bd.get_colors())
     {
         auto& precomp = precomp_moves[c];
         auto& old_precomp = (is_followup ? precomp : bc.get_precomp_moves());
 
         m_is_forbidden.set();
-        for (Point p : bd)
+        for (Point p : points)
             if (! bd.is_forbidden(p, c) && bc.has_adj_status_points(p))
             {
                 auto adj_status = bd.get_adj_status(p, c);
@@ -231,8 +237,9 @@ void SharedConst::init(bool is_followup)
         for (Piece::IntType i = 0; i < bc.get_nu_pieces(); ++i)
             if (bd.is_piece_left(c, Piece(i)))
                 pieces.push_back(Piece(i));
+
         if (! is_followup)
-            for (Point p : bd)
+            for (Point p : points)
                 if (! bd.is_forbidden(p, c) && bc.has_adj_status_points(p))
                 {
                     auto adj_status = bd.get_adj_status(p, c);
@@ -242,7 +249,7 @@ void SharedConst::init(bool is_followup)
                                 precomp.set_list_range(p, i, piece, 0, 0);
                 }
         unsigned n = 0;
-        for (Point p : bd)
+        for (Point p : points)
         {
             if (bd.is_forbidden(p, c) || ! bc.has_adj_status_points(p))
                 continue;
