@@ -26,7 +26,8 @@ using namespace libboardgame_util;
     the board has the coordinates (0,0). Point::null() has the meaning
     "no point".
     @tparam M The maximum number of on-board points of all geometries this
-    point is used in (excluding the null point).
+    point is used in (excluding the null point). This may be smaller than
+    W*H if the geomtries are not rectangular.
     @tparam W The maximum width of all geometries this point is used in.
     @tparam H The maximum height of all geometries this point is used in.
     @tparam I An unsigned integer type to store the point value. */
