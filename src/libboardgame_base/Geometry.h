@@ -101,7 +101,7 @@ public:
 
     Iterator begin() const { return Iterator(0); }
 
-    Iterator end() const { return Iterator(get_range()); }
+    Iterator end() const { return Iterator(m_range); }
 
     unsigned get_point_type(CoordPoint p) const;
 
@@ -118,12 +118,12 @@ public:
         off-board. */
     Point get_point(unsigned x, unsigned y) const;
 
-    unsigned get_width() const;
+    unsigned get_width() const { return m_width; }
 
-    unsigned get_height() const;
+    unsigned get_height() const { return m_height; }
 
     /** Get range used for onboard points. */
-    IntType get_range() const;
+    IntType get_range() const { return m_range; }
 
     unsigned get_x(Point p) const;
 
@@ -219,12 +219,6 @@ inline auto Geometry<P>::get_diag(Point p) const -> const DiagList&
 }
 
 template<class P>
-inline unsigned Geometry<P>::get_height() const
-{
-    return m_height;
-}
-
-template<class P>
 inline auto Geometry<P>::get_point(unsigned x, unsigned y) const -> Point
 {
     LIBBOARDGAME_ASSERT(x < m_width);
@@ -243,18 +237,6 @@ template<class P>
 inline unsigned Geometry<P>::get_point_type(CoordPoint p) const
 {
     return get_point_type(p.x, p.y);
-}
-
-template<class P>
-inline auto Geometry<P>::get_range() const -> IntType
-{
-    return m_range;
-}
-
-template<class P>
-inline unsigned Geometry<P>::get_width() const
-{
-    return m_width;
 }
 
 template<class P>
@@ -298,7 +280,7 @@ void Geometry<P>::init(unsigned width, unsigned height)
             else
                 m_points[x][y] = Point::null();
     m_range = n;
-    for (IntType i = 0; i < m_range; ++i)
+    for (IntType i = 0; i < n; ++i)
     {
         Point p(i);
         auto x = get_x(p);
@@ -330,7 +312,7 @@ bool Geometry<P>::is_onboard(CoordPoint p) const
 template<class P>
 inline bool Geometry<P>::is_valid(Point p) const
 {
-    return ! p.is_null() && p.to_int() < get_range();
+    return ! p.is_null() && p.to_int() < m_range;
 }
 
 #endif
@@ -338,7 +320,7 @@ inline bool Geometry<P>::is_valid(Point p) const
 template<class P>
 inline const string& Geometry<P>::to_string(Point p) const
 {
-    LIBBOARDGAME_ASSERT(p.to_int() < get_range());
+    LIBBOARDGAME_ASSERT(p.to_int() < m_range);
     return m_string[p.to_int()];
 }
 
