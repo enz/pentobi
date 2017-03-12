@@ -41,8 +41,8 @@ public:
     typedef ArrayList<Point, 4, unsigned short> AdjList;
 
     /** On-board diagonal neighbors of a point
-        Currently supports up to nine diagonal points as used on boards
-        for Blokus Trigon. */
+        Currently supports up to 11 diagonal points as used on boards
+        for GembloQ. */
     typedef ArrayList<Point, 11, unsigned short> DiagList;
 
     /** Adjacent neighbors of a coordinate. */
