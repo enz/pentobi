@@ -29,8 +29,6 @@ public:
 
     using AdjCoordList = typename Geometry<P>::AdjCoordList;
     using DiagCoordList = typename Geometry<P>::DiagCoordList;
-    using AdjList = typename Geometry<P>::AdjList;
-    using DiagList = typename Geometry<P>::DiagList;
 
     /** Create or reuse an already created geometry with a given size. */
     static const RectGeometry& get(unsigned width, unsigned height);
