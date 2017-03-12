@@ -17,7 +17,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19 * 19, unsigned short> Point;
+typedef libboardgame_base::Point<19 * 19, 19, 19, unsigned short> Point;
 typedef libboardgame_base::RectGeometry<Point> RectGeometry;
 
 //-----------------------------------------------------------------------------

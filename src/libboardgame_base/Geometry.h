@@ -159,7 +159,7 @@ private:
 
     IntType m_range;
 
-    Point m_points[Point::range_onboard];
+    Point m_points[Point::max_width][Point::max_height];
 
     unique_ptr<StringRep> m_string_rep;
 
@@ -229,7 +229,7 @@ inline auto Geometry<P>::get_point(unsigned x, unsigned y) const -> Point
 {
     LIBBOARDGAME_ASSERT(x < m_width);
     LIBBOARDGAME_ASSERT(y < m_height);
-    return m_points[x + y * m_width];
+    return m_points[x][y];
 }
 
 template<class P>
@@ -276,7 +276,8 @@ void Geometry<P>::init(unsigned width, unsigned height)
 {
     LIBBOARDGAME_ASSERT(width >= 1);
     LIBBOARDGAME_ASSERT(height >= 1);
-    LIBBOARDGAME_ASSERT(width * height <= Point::max_onboard);
+    LIBBOARDGAME_ASSERT(width <= Point::max_width);
+    LIBBOARDGAME_ASSERT(height <= Point::max_height);
     m_width = width;
     m_height = height;
     m_string[Point::null().to_int()] = "null";
@@ -286,7 +287,7 @@ void Geometry<P>::init(unsigned width, unsigned height)
         for (unsigned x = 0; x < width; ++x)
             if (init_is_onboard(x, y))
             {
-                m_points[x + y * width] = Point(n);
+                m_points[x][y] = Point(n);
                 m_x[n] = x;
                 m_y[n] = y;
                 ostr.str("");
@@ -295,8 +296,9 @@ void Geometry<P>::init(unsigned width, unsigned height)
                 ++n;
             }
             else
-                m_points[x + y * width] = Point::null();
-    for (IntType i = 0; i < n; ++i)
+                m_points[x][y] = Point::null();
+    m_range = n;
+    for (IntType i = 0; i < m_range; ++i)
     {
         Point p(i);
         auto x = get_x(p);
@@ -309,7 +311,6 @@ void Geometry<P>::init(unsigned width, unsigned height)
                 m_diag[i].push_back(get_point(p.x, p.y));
         m_point_type[i] = get_point_type(x, y);
     }
-    m_range = n;
 }
 
 template<class P>

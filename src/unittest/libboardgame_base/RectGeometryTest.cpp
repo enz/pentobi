@@ -16,7 +16,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19 * 19, unsigned short> Point;
+typedef libboardgame_base::Point<19 * 19, 19, 19, unsigned short> Point;
 typedef libboardgame_base::Geometry<Point> Geometry;
 typedef libboardgame_base::RectGeometry<Point> RectGeometry;
 typedef libboardgame_base::ArrayList<Point, Point::max_onboard> PointList;
