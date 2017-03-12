@@ -22,8 +22,8 @@ using libpentobi_base::PointState;
 
 namespace {
 
-array<Color, Color::range> symmetric_state =
-    { Color(1), Color(0), Color(3), Color(2) };
+array<Color, Color::range> symmetric_state{
+    { Color(1), Color(0), Color(3), Color(2) }};
 
 } // namespace
 
