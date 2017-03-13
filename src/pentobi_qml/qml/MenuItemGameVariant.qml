@@ -8,5 +8,10 @@ MenuItem {
     checkable: true
     checked: gameModel.gameVariant == gameVariant
     exclusiveGroup: groupGameVariant
-    onTriggered: Logic.changeGameVariant(gameVariant)
+    onTriggered: {
+        Logic.changeGameVariant(gameVariant)
+        // Trigger an update of checked in all game variant items in case
+        // the user aborted the game variant change in the discard game dialog.
+        gameModel.gameVariantChanged()
+    }
 }
