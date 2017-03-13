@@ -23,8 +23,7 @@ QtObject {
     property real toPlayColorLighter: 1.7
 
     function getImage(name) {
-        if (name === "flip" || name === "rotate"
-                || startsWith(name, "frame-")
+        if (startsWith(name, "frame-")
                 || startsWith(name, "junction-")
                 || startsWith(name, "linesegment-")
                 || startsWith(name, "quarter-square-")

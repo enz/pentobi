@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import QtQuick.Window 2.0
 
 Item {
     id: root
@@ -7,68 +6,22 @@ Item {
     property var pieceModel
     // True if piece manipulator is at a board location that is a legal move
     property bool legal
-    property real innerSize
-    property real buttonSize: Math.min(innerSize * 0.4, 10 * Screen.pixelDensity)
 
     signal piecePlayed
 
-    width: innerSize + 2 * buttonSize; height: width
-
-    Rectangle {
+    Image {
         anchors.fill: root
-        color: "#70716d"
-        radius: width / 2
-        opacity: 0.3
-    }
-    Rectangle {
-        anchors.centerIn: root
-        color: "white"
-        width: innerSize; height: width
-        radius: width / 2
-        opacity: legal ? 0.3 : 0.1
+        source: theme.getImage("piece-manipulator")
+        sourceSize { width: width; height: height }
+        opacity: ! legal ? 0.4 : 0
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     Image {
-        source: theme.getImage("rotate")
-        anchors {
-            top: parent.top
-            horizontalCenter: parent.horizontalCenter
-        }
-        width: buttonSize; height: width
+        anchors.fill: root
+        source: theme.getImage("piece-manipulator-legal")
         sourceSize { width: width; height: height }
-        opacity: 0.3
-    }
-    Image {
-        source: theme.getImage("rotate")
-        mirror: true
-        anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
-        }
-        width: buttonSize; height: width
-        sourceSize { width: width; height: height }
-        opacity: 0.3
-    }
-    Image {
-        source: theme.getImage("flip")
-        anchors {
-            right: parent.right
-            verticalCenter: parent.verticalCenter
-        }
-        width: buttonSize; height: width
-        sourceSize { width: width; height: height }
-        opacity: 0.3
-    }
-    Image {
-        source: theme.getImage("flip")
-        rotation: 90
-        anchors {
-            bottom: parent.bottom
-            horizontalCenter: parent.horizontalCenter
-        }
-        width: buttonSize; height: width
-        sourceSize { width: width; height: height }
-        opacity: 0.3
+        opacity: legal ? 0.4 : 0
+        Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     MouseArea {
         id: dragArea
@@ -83,7 +36,7 @@ Item {
 
         MouseArea {
             anchors.centerIn: dragArea
-            width: innerSize; height: width
+            width: 0.5 * root.width; height: width
             onClicked: piecePlayed()
         }
         MouseArea {
@@ -91,7 +44,7 @@ Item {
                 top: dragArea.top
                 horizontalCenter: dragArea.horizontalCenter
             }
-            width: buttonSize; height: width
+            width: 0.2 * root.width; height: width
             onClicked: pieceModel.rotateRight()
         }
         MouseArea {
@@ -99,7 +52,7 @@ Item {
                 right: dragArea.right
                 verticalCenter: dragArea.verticalCenter
             }
-            width: buttonSize; height: width
+            width: 0.2 * root.width; height: width
             onClicked: pieceModel.flipAcrossX()
         }
         MouseArea {
@@ -107,12 +60,12 @@ Item {
                 bottom: dragArea.bottom
                 horizontalCenter: dragArea.horizontalCenter
             }
-            width: buttonSize; height: width
+            width: 0.2 * root.width; height: width
             onClicked: pieceModel.flipAcrossY()
         }
         MouseArea {
             anchors { left: dragArea.left; verticalCenter: dragArea.verticalCenter }
-            width: buttonSize; height: width
+            width: 0.2 * root.width; height: width
             onClicked: pieceModel.rotateLeft()
         }
     }
