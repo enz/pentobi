@@ -40,9 +40,9 @@ Item {
     Text {
         text: {
             if (isAltColor)
-                return isFinal ? "(<u>" + value + "</u>)" : "(" + value + ")"
+                return isFinal ? "(<u>%L1</u>)".arg(value) : "(%L1)".arg(value)
             else
-                return isFinal ? "<u>" + value + "</u>" : value
+                return isFinal ? "<u>%L1</u>".arg(value) : "%L1".arg(value)
         }
         color: theme.fontColorScore
         width: root.width - point1.width - point2.width - anchors.leftMargin
