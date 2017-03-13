@@ -4,7 +4,6 @@ import "Main.js" as Logic
 
 Menu {
     title: qsTr("&Computer")
-    visible: ! isAndroid || ! isRated
 
     MenuItem {
         text: qsTr("Computer &Colors")
@@ -55,8 +54,6 @@ Menu {
             case "gembloq_2_4": return qsTr("&Level (GembloQ, 2 Players, 4 Colors)")
             case "gembloq_3": return qsTr("&Level (GembloQ, 3 Players)")
             }
-        enabled: ! isRated
-        visible: ! isAndroid || enabled
 
         ExclusiveGroup { id: levelGroup }
         MenuItemLevel { level: 1 }
