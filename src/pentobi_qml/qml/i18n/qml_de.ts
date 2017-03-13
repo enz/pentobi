@@ -1109,6 +1109,14 @@
         <source>Rated game</source>
         <translation>Gewertetes Spiel</translation>
     </message>
+    <message>
+        <source>File (modified): %1</source>
+        <translation>Datei (geändert): %1</translation>
+    </message>
+    <message>
+        <source>File: %1</source>
+        <translation>Datei: %1</translation>
+    </message>
 </context>
 <context>
     <name>main</name>

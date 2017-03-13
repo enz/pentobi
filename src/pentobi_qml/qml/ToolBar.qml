@@ -25,7 +25,15 @@ RowLayout {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: if (gameDisplay.setupMode) gameDisplay.setupMode = false
+            onClicked:
+                if (gameDisplay.setupMode)
+                    gameDisplay.setupMode = false
+                else if (gameModel.file != "") {
+                    if (gameModel.isModified)
+                        Logic.showInfo(qsTr("File (modified): %1").arg(gameModel.file))
+                    else
+                        Logic.showInfo(qsTr("File: %1").arg(gameModel.file))
+                }
         }
     }
     Pentobi.ToolButton {
