@@ -28,15 +28,21 @@ function createColorPieces(component, pieceModels) {
     return pieces
 }
 
+// Helper function for Qt <5.8, which doesn't support String.startsWith()
+function startsWith(s, s1) {
+    return s.substring(0, s1.length) === s1
+}
+
 function createPieces() {
     var file
-    if (gameModel.gameVariant.startsWith("trigon"))
+    var gameVariant = gameModel.gameVariant
+    if (startsWith(gameVariant, "trigon"))
         file = "PieceTrigon.qml"
-    else if (gameModel.gameVariant.startsWith("nexos"))
+    else if (startsWith(gameVariant, "nexos"))
         file = "PieceNexos.qml"
-    else if (gameModel.gameVariant.startsWith("callisto"))
+    else if (startsWith(gameVariant, "callisto"))
         file = "PieceCallisto.qml"
-    else if (gameModel.gameVariant.startsWith("gembloq"))
+    else if (startsWith(gameVariant, "gembloq"))
         file = "PieceGembloQ.qml"
     else
         file = "PieceClassic.qml"

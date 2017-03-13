@@ -24,13 +24,16 @@ QtObject {
 
     function getImage(name) {
         if (name === "flip" || name === "rotate"
-                || name.startsWith("frame-")
-                || name.startsWith("junction-")
-                || name.startsWith("linesegment-")
-                || name.startsWith("quarter-square-")
-                || name.startsWith("square-")
-                || name.startsWith("triangle-"))
+                || startsWith(name, "frame-")
+                || startsWith(name, "junction-")
+                || startsWith(name, "linesegment-")
+                || startsWith(name, "quarter-square-")
+                || startsWith(name, "square-")
+                || startsWith(name, "triangle-"))
             return "themes/light/" + name + ".svg"
         return "themes/dark/" + name + ".svg"
     }
+
+    // Helper function for Qt <5.8, which doesn't support String.startsWith()
+    function startsWith(s, s1) { return s.substring(0, s1.length) === s1 }
 }

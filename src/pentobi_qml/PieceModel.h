@@ -39,7 +39,7 @@ class PieceModel
         In Nexos, this is the type of junction in junction(). In Callisto, it
         is the information if the squares in elements() have a right and/or
         down neighbor. See implementation for the meaning of the numbers. */
-    Q_PROPERTY(QVector<int> junctionType MEMBER m_junctionType CONSTANT)
+    Q_PROPERTY(QVariantList junctionType MEMBER m_junctionType CONSTANT)
 
     Q_PROPERTY(QPointF center MEMBER m_center CONSTANT)
     Q_PROPERTY(QPointF labelPos MEMBER m_labelPos CONSTANT)
@@ -125,7 +125,7 @@ private:
 
     QVariantList m_junctions;
 
-    QVector<int> m_junctionType;
+    QVariantList m_junctionType;
 
     QString m_state;
 

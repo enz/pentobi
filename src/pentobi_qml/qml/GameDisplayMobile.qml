@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.1
-import QtQuick.Controls 2.1 as Controls2
+import Qt.labs.controls 1.0 as Controls2
 import QtQuick.Layouts 1.0
 import Qt.labs.settings 1.0
 import "GameDisplay.js" as Logic
@@ -107,8 +107,8 @@ Item
                     // How many full rows can we show if we use 85% of the board width?
                     property int rows: Math.floor(height / (0.85 * swipeView.width / columns))
 
-                    columns: gameModel.gameVariant.startsWith("classic")
-                             || gameModel.gameVariant.startsWith("callisto")
+                    columns: Logic.startsWith(gameModel.gameVariant, "classic")
+                             || Logic.startsWith(gameModel.gameVariant, "callisto")
                              || gameModel.gameVariant === "duo" ? 7 : 8
 
                     // Show at least 1 row

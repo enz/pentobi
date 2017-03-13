@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.1
+import Qt.labs.controls 1.0
 import QtQuick.Controls 1.2 as Controls1
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0

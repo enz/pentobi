@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.1
-import QtQuick.Controls 2.1 as Controls2
+import Qt.labs.controls 1.0 as Controls2
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
 import "." as Pentobi
@@ -21,12 +21,13 @@ RowLayout {
         color: theme.toolBarTextColor
         elide: Text.ElideRight
 
-        Controls2.ToolTip {
-            id: toolTip
-
-            text: title.text
-            timeout: 2000
-        }
+        //// Tooltip not yet available in Qt.labs.controls
+        //Controls2.ToolTip {
+        //    id: toolTip
+        //
+        //    text: title.text
+        //    timeout: 2000
+        //}
         MouseArea {
             anchors.fill: parent
             onClicked: if (title.truncated) toolTip.open()

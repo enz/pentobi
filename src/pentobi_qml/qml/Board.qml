@@ -5,10 +5,10 @@ Item {
 
     property string gameVariant
     property bool showCoordinates
-    property bool isTrigon: gameVariant.startsWith("trigon")
-    property bool isNexos: gameVariant.startsWith("nexos")
-    property bool isCallisto: gameVariant.startsWith("callisto")
-    property bool isGembloQ: gameVariant.startsWith("gembloq")
+    property bool isTrigon: startsWith(gameVariant, "trigon")
+    property bool isNexos: startsWith(gameVariant, "nexos")
+    property bool isCallisto: startsWith(gameVariant, "callisto")
+    property bool isGembloQ: startsWith(gameVariant, "gembloq")
     property int columns: {
         switch (gameVariant) {
         case "duo":
@@ -142,6 +142,9 @@ Item {
                     + String.fromCharCode("A".charCodeAt(0) + (x % 26))
         return String.fromCharCode("A".charCodeAt(0) + x)
     }
+
+    // Helper function for Qt <5.8, which doesn't support String.startsWith()
+    function startsWith(s, s1) { return s.substring(0, s1.length) === s1 }
 
     Image {
         id: image
