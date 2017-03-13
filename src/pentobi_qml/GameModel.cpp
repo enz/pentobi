@@ -498,11 +498,11 @@ QString GameModel::getResultMessage()
         if (score == 1)
             return tr("Blue wins with 1 point.");
         if (score > 0)
-            return tr("Blue wins with %1 points.").arg(score);
+            return tr("Blue wins with %L1 points.").arg(score);
         if (score == -1)
             return tr("Green wins with 1 point.");
         if (score < 0)
-            return tr("Green wins with %1 points.").arg(-score);
+            return tr("Green wins with %L1 points.").arg(-score);
         if (breakTies)
             return tr("Green wins (tie resolved).");
         return tr("Game ends in a tie.");
@@ -513,11 +513,11 @@ QString GameModel::getResultMessage()
         if (score == 1)
             return tr("Blue/Red wins with 1 point.");
         if (score > 0)
-            return tr("Blue/Red wins with %1 points.").arg(score);
+            return tr("Blue/Red wins with %L1 points.").arg(score);
         if (score == -1)
             return tr("Yellow/Green wins with 1 point.");
         if (score < 0)
-            return tr("Yellow/Green wins with %1 points.").arg(-score);
+            return tr("Yellow/Green wins with %L1 points.").arg(-score);
         if (breakTies)
             return tr("Yellow/Green wins (tie resolved).");
         return tr("Game ends in a tie.");

@@ -848,32 +848,32 @@
         <translation>Blau gewinnt mit 1 Punkt.</translation>
     </message>
     <message>
-        <source>Blue wins with %1 points.</source>
-        <translation>Blau gewinnt mit %1 Punkten.</translation>
+        <source>Blue wins with %L1 points.</source>
+        <translation>Blau gewinnt mit %L1 Punkten.</translation>
     </message>
     <message>
         <source>Green wins with 1 point.</source>
         <translation>Grün gewinnt mit 1 Punkt.</translation>
     </message>
     <message>
-        <source>Green wins with %1 points.</source>
-        <translation>Grün gewinnt mit %1 Punkten.</translation>
+        <source>Green wins with %L1 points.</source>
+        <translation>Grün gewinnt mit %L1 Punkten.</translation>
     </message>
     <message>
         <source>Blue/Red wins with 1 point.</source>
         <translation>Blau/Rot gewinnt mit 1 Punkt.</translation>
     </message>
     <message>
-        <source>Blue/Red wins with %1 points.</source>
-        <translation>Blau/Rot gewinnt mit %1 Punkten.</translation>
+        <source>Blue/Red wins with %L1 points.</source>
+        <translation>Blau/Rot gewinnt mit %L1 Punkten.</translation>
     </message>
     <message>
         <source>Yellow/Green wins with 1 point.</source>
         <translation>Gelb/Grün gewinnt mit 1 Punkt.</translation>
     </message>
     <message>
-        <source>Yellow/Green wins with %1 points.</source>
-        <translation>Gelb/Grün gewinnt mit %1 Punkten.</translation>
+        <source>Yellow/Green wins with %L1 points.</source>
+        <translation>Gelb/Grün gewinnt mit %L1 Punkten.</translation>
     </message>
     <message>
         <source>Callisto (&amp;3 Players)</source>
