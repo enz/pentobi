@@ -390,10 +390,6 @@
         <translation>Kein Kommentar gefunden</translation>
     </message>
     <message>
-        <source>Rated game</source>
-        <translation>Gewertetes Spiel</translation>
-    </message>
-    <message>
         <source>Start rated game with Blue/Red against Pentobi level %1?</source>
         <translation>Gewertetes Spiel mit Blau/Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
     </message>
@@ -1108,6 +1104,10 @@
     <message>
         <source>Leave setup mode</source>
         <translation>Stellungsaufbau beenden</translation>
+    </message>
+    <message>
+        <source>Rated game</source>
+        <translation>Gewertetes Spiel</translation>
     </message>
 </context>
 <context>

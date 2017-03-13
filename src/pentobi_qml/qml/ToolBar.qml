@@ -9,45 +9,24 @@ import "Main.js" as Logic
 RowLayout {
     id: root
 
-    property alias title: title.text
-
     spacing: 0
 
     Controls2.Label {
-        id: title
-
+        text: {
+            if (isRated) return qsTr("Rated game")
+            if (gameDisplay.setupMode) return qsTr("Leave setup mode")
+            if (gameModel.file === "") return ""
+            return Logic.getFileLabel(gameModel.file, gameModel.isModified)
+        }
         Layout.fillWidth: true
         Layout.leftMargin: root.height / 10
         color: theme.toolBarTextColor
         elide: Text.ElideRight
 
-        //// Tooltip not yet available in Qt.labs.controls
-        //Controls2.ToolTip {
-        //    id: toolTip
-        //
-        //    text: title.text
-        //    timeout: 2000
-        //}
         MouseArea {
             anchors.fill: parent
-            onClicked: if (title.truncated) toolTip.open()
+            onClicked: if (gameDisplay.setupMode) gameDisplay.setupMode = false
         }
-    }
-    Controls2.Button {
-        id: leaveSetup
-
-        visible: gameDisplay.setupMode
-        text: qsTr("Leave setup mode")
-        Layout.rightMargin: 0.1 * root.height
-        background: Rectangle {
-            color: leaveSetup.down ? theme.backgroundButtonPressed : "transparent"
-            border.color: theme.toolBarTextColor
-        }
-        contentItem: Controls2.Label {
-            text: leaveSetup.text
-            color: theme.toolBarTextColor
-        }
-        onClicked: gameDisplay.setupMode = false
     }
     Pentobi.ToolButton {
         imageSource: theme.getImage("pentobi-newgame")

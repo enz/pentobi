@@ -73,11 +73,6 @@ Window {
 
         Pentobi.ToolBar {
             visible: ! (visibility === Window.FullScreen && isAndroid)
-            title: {
-                if (isRated) return qsTr("Rated game")
-                if (gameModel.file === "") return ""
-                return Logic.getFileLabel(gameModel.file, gameModel.isModified)
-            }
         }
         Loader {
             id: gameDisplayLoader
