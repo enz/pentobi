@@ -29,7 +29,6 @@ Window {
     property bool initComputerColorsOnNewGame: true
 
     property bool isAndroid: Qt.platform.os === "android"
-    property bool desktopLayout: false // Not yet fully implemented
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
     property url folder
@@ -42,7 +41,6 @@ Window {
                     Math.min(Screen.desktopAvailableHeight,
                              Math.round(Screen.pixelDensity / 3.5 * 800))
     property int exportImageWidth: 400
-    property alias gameDisplay: gameDisplayLoader.item
 
     // Minimum size corresponds to a QVGA mobile device with 19px statusbar
     minimumWidth: 240; minimumHeight: 301
@@ -74,37 +72,18 @@ Window {
         Pentobi.ToolBar {
             visible: ! (visibility === Window.FullScreen && isAndroid)
         }
-        Loader {
-            id: gameDisplayLoader
+        GameDisplayMobile {
+            id: gameDisplay
 
-            sourceComponent: desktopLayout ? gameDisplayDesktop : gameDisplayMobile
+            theme: root.theme
+            busyIndicatorRunning: pieces0 === undefined
+                                  || lengthyCommand.isRunning
+                                  || playerModel.isGenMoveRunning
+                                  || analyzeGameModel.isRunning
+            onPlay: Logic.play(pieceModel, gameCoord)
             Layout.fillWidth: true
             Layout.fillHeight: true
             focus: true
-        }
-        Component {
-            id: gameDisplayDesktop
-
-            GameDisplayDesktop {
-                theme: root.theme
-                busyIndicatorRunning: pieces0 === undefined
-                                      || lengthyCommand.isRunning
-                                      || playerModel.isGenMoveRunning
-                                      || analyzeGameModel.isRunning
-                onPlay: Logic.play(pieceModel, gameCoord)
-            }
-        }
-        Component {
-            id: gameDisplayMobile
-
-            GameDisplayMobile {
-                theme: root.theme
-                busyIndicatorRunning: pieces0 === undefined
-                                      || lengthyCommand.isRunning
-                                      || playerModel.isGenMoveRunning
-                                      || analyzeGameModel.isRunning
-                onPlay: Logic.play(pieceModel, gameCoord)
-            }
         }
     }
     Settings {
