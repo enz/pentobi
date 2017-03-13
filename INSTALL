@@ -4,7 +4,7 @@ This file explains how to compile and install Pentobi from the sources.
 == Requirements ==
 
 Pentobi requires the Qt libraries (>=5.2). The C++ compiler needs C++14
-support (GCC >=5.0). The build system uses CMake (>=3.1.0).
+support (GCC >=4.9). The build system uses CMake (>=3.1.0).
 
 Ubuntu 16.10 provides suitable versions of the required tools and libraries in
 its package repository. They can be installed with the shell command:
