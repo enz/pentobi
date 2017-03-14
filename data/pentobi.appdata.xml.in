@@ -42,37 +42,37 @@
   <screenshots>
     <screenshot type="default">
       <image width="1248" height="702">
-      http://pentobi.sourceforge.net/pentobi-classic.png</image>
+      https://pentobi.sourceforge.io/pentobi-classic.png</image>
       <caption>Game variant Classic</caption>
       <caption xml:lang="de">Spielvariante Klassisch</caption>
     </screenshot>
     <screenshot>
       <image width="1248" height="702">
-      http://pentobi.sourceforge.net/pentobi-duo.png</image>
+      https://pentobi.sourceforge.io/pentobi-duo.png</image>
       <caption>Game variant Duo</caption>
       <caption xml:lang="de">Spielvariante Duo</caption>
     </screenshot>
     <screenshot>
       <image width="1248" height="702">
-      http://pentobi.sourceforge.net/pentobi-trigon.png</image>
+      https://pentobi.sourceforge.io/pentobi-trigon.png</image>
       <caption>Game variant Trigon</caption>
       <caption xml:lang="de">Spielvariante Trigon</caption>
     </screenshot>
     <screenshot>
       <image width="1248" height="702">
-      http://pentobi.sourceforge.net/pentobi-nexos.png</image>
+      https://pentobi.sourceforge.io/pentobi-nexos.png</image>
       <caption>Game variant Nexos</caption>
       <caption xml:lang="de">Spielvariante Nexos</caption>
     </screenshot>
     <screenshot>
       <image width="1248" height="702">
-      http://pentobi.sourceforge.net/pentobi-gembloq.png</image>
+      https://pentobi.sourceforge.io/pentobi-gembloq.png</image>
       <caption>Game variant GembloQ</caption>
       <caption xml:lang="de">Spielvariante GembloQ</caption>
     </screenshot>
     <screenshot>
       <image width="1248" height="702">
-      http://pentobi.sourceforge.net/pentobi-callisto.png</image>
+      https://pentobi.sourceforge.io/pentobi-callisto.png</image>
       <caption>Game variant Callisto</caption>
       <caption xml:lang="de">Spielvariante Callisto</caption>
     </screenshot>
