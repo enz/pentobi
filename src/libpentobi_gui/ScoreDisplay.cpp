@@ -115,7 +115,7 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
         y += 2 * lineWidth;
         if (y > height() - 1)
             y = height() - 1;
-        painter.drawLine(x + (hasBonus ? metrics.width(text.left(1)) : 0), y,
+        painter.drawLine(x + (hasBonus ? metrics.width(text.at(0)) : 0), y,
                          x + metrics.width(text), y);
     }
 }
