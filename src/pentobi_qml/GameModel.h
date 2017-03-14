@@ -213,6 +213,8 @@ public:
 
     Q_INVOKABLE QString getResultMessage();
 
+    Q_INVOKABLE bool checkFileExists(const QString& file);
+
     Q_INVOKABLE bool checkFileDeletedOutside();
 
     Q_INVOKABLE bool checkFileModifiedOutside();

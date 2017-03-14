@@ -608,10 +608,6 @@ function saveFile(file) {
         showTemporaryMessage(qsTr("File saved."))
 }
 
-function saveFileUrl(fileUrl) {
-    saveFile(getFileFromUrl(fileUrl))
-}
-
 function showComputerColorDialog() {
     if (computerColorDialogLoader.status === Loader.Null)
         computerColorDialogLoader.sourceComponent =

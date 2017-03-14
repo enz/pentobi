@@ -8,8 +8,9 @@ FileDialog {
     folder: root.folder != "" ? root.folder : (isAndroid ? "file:///sdcard" : shortcuts.desktop)
     nameFilters: [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
     onAccepted: {
-        Logic.saveFileUrl(fileUrl)
         root.folder = folder
+        queuedSaveFileUrl.file = Logic.getFileFromUrl(fileUrl)
+        queuedSaveFileUrl.restart()
     }
     onVisibleChanged:
         if (! visible) {

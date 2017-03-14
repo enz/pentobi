@@ -258,6 +258,11 @@ bool GameModel::checkFileDeletedOutside()
     return ! fileInfo.exists();
 }
 
+bool GameModel::checkFileExists(const QString& file)
+{
+    return QFileInfo::exists(file);
+}
+
 bool GameModel::checkFileModifiedOutside()
 {
     if (m_file.isEmpty() || ! m_fileDate.isValid())

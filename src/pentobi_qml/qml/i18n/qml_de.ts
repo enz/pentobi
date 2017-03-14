@@ -481,6 +481,10 @@
         <source>File was deleted by another application.</source>
         <translation>Datei wurde von einer anderen Anwendung gelöscht.</translation>
     </message>
+    <message>
+        <source>Overwrite existing file?</source>
+        <translation>Existierende Datei überschreiben?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

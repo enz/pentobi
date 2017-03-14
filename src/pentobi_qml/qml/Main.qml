@@ -222,6 +222,24 @@ Window {
         interval: 0
         onTriggered: Logic.openRatedGame(byteArray)
     }
+    // Runs the saveFileUrl() callback from SaveDialog in a new event because
+    // SaveDialog is destroyed before the callback and otherwise the
+    // environment for the callback is undefined.
+    Timer {
+        id: queuedSaveFileUrl
+
+        property string file
+
+        function save() { Logic.saveFile(file) }
+
+        interval: 0
+        onTriggered:
+            // Save dialog on Android doesn't warn about overwriting (last tested on Qt 5.6)
+            if (isAndroid && gameModel.checkFileExists(file))
+                Logic.showQuestion(qsTr("Overwrite existing file?"), save)
+            else
+                save()
+    }
 
     Connections {
         target: Qt.application
