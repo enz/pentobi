@@ -88,20 +88,6 @@ int main(int argc, char *argv[])
     parser.process(app);
     try
     {
-        QString appDir = app.applicationDirPath();
-        QString helpDir;
-#ifdef PENTOBI_HELP_DIR
-        helpDir = PENTOBI_HELP_DIR;
-#endif
-        // Allow the user to override installation paths with a config file in
-        // the directory of the executable to test it without installation
-        QString configFile = appDir + "/pentobi.conf";
-        if (QFileInfo::exists(configFile))
-        {
-            QSettings settings(configFile, QSettings::IniFormat);
-            helpDir = settings.value("HelpDir", helpDir).toString();
-        }
-
 #if ! LIBBOARDGAME_DISABLE_LOG
         if (! parser.isSet(optionVerbose))
             libboardgame_util::disable_logging();
@@ -126,8 +112,6 @@ int main(int argc, char *argv[])
             PlayerModel::nuThreads = nuThreads;
         }
         QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
-        if (! helpDir.isEmpty())
-            engine.rootContext()->setContextProperty("helpDir", helpDir);
         QtWebView::initialize();
         return app.exec();
     }

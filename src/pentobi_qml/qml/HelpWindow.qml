@@ -13,11 +13,7 @@ Window {
             s = "C"
         return s
     }
-    property url startUrl:
-        if (isAndroid)
-            return helpFileExtractor.extract(language)
-        else
-            return "file:///" + helpDir + "/" + language + "/pentobi/index.html"
+    property url startUrl: helpFileExtractor.extract(language)
 
     width: isAndroid ? Screen.desktopAvailableWidth : Math.min(Screen.pixelDensity * 150, Screen.desktopAvailableWidth)
     height: isAndroid ? Screen.desktopAvailableHeight : Math.min(Screen.pixelDensity * 180, Screen.desktopAvailableHeight)

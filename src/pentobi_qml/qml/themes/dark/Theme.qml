@@ -26,6 +26,7 @@ QtObject {
         if (startsWith(name, "frame-")
                 || startsWith(name, "junction-")
                 || startsWith(name, "linesegment-")
+                || startsWith(name, "piece-manipulator")
                 || startsWith(name, "quarter-square-")
                 || startsWith(name, "square-")
                 || startsWith(name, "triangle-"))
