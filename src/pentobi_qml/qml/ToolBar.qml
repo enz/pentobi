@@ -13,13 +13,14 @@ RowLayout {
 
     Controls2.Label {
         text: {
-            if (isRated) return qsTr("Rated game")
-            if (gameDisplay.setupMode) return qsTr("Leave setup mode")
+            if (isRated) return qsTr("Rated")
+            if (gameDisplay.setupMode) return qsTr("Leave setup")
             if (gameModel.file === "") return ""
             return Logic.getFileLabel(gameModel.file, gameModel.isModified)
         }
         Layout.fillWidth: true
         Layout.leftMargin: root.height / 10
+        renderType: Text.NativeRendering
         color: theme.toolBarTextColor
         elide: Text.ElideRight
 

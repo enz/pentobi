@@ -1106,20 +1106,20 @@
 <context>
     <name>ToolBar</name>
     <message>
-        <source>Leave setup mode</source>
-        <translation>Stellungsaufbau beenden</translation>
-    </message>
-    <message>
-        <source>Rated game</source>
-        <translation>Gewertetes Spiel</translation>
-    </message>
-    <message>
         <source>File (modified): %1</source>
         <translation>Datei (geändert): %1</translation>
     </message>
     <message>
         <source>File: %1</source>
         <translation>Datei: %1</translation>
+    </message>
+    <message>
+        <source>Rated</source>
+        <translation>Gewertet</translation>
+    </message>
+    <message>
+        <source>Leave setup</source>
+        <translation>Aufbau beenden</translation>
     </message>
 </context>
 <context>
