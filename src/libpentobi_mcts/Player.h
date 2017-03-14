@@ -35,7 +35,8 @@ public:
         @param books_dir Directory containing opening books.
         @param nu_threads The number of threads to use in the search (0 means
         to select a reasonable default value) */
-    Player(Variant initial_variant, unsigned max_level, string books_dir, unsigned nu_threads = 0);
+    Player(Variant initial_variant, unsigned max_level, const string& books_dir,
+           unsigned nu_threads = 0);
 
     ~Player();
 

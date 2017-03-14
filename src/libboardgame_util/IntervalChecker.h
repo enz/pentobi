@@ -30,7 +30,7 @@ public:
         @param time_interval The time interval in seconds
         @param f The expensive function */
     IntervalChecker(TimeSource& time_source, double time_interval,
-                    function<bool()> f);
+                    const function<bool()>& f);
 
     bool operator()();
 

@@ -27,10 +27,10 @@ namespace libboardgame_util {
 //-----------------------------------------------------------------------------
 
 IntervalChecker::IntervalChecker(TimeSource& time_source, double time_interval,
-                                 function<bool()> f)
+                                 const function<bool()>& f)
     : m_time_source(time_source),
       m_time_interval(time_interval),
-      m_function(move(f))
+      m_function(f)
 {
 #if LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
     log(format("IntervalChecker::IntervalChecker: time_interval=%1%")

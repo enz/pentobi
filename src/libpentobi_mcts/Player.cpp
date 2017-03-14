@@ -73,12 +73,12 @@ static const float counts_gembloq_2[Player::max_supported_level] =
 
 //-----------------------------------------------------------------------------
 
-Player::Player(Variant initial_variant, unsigned max_level, string  books_dir,
-               unsigned nu_threads)
+Player::Player(Variant initial_variant, unsigned max_level,
+               const string&  books_dir, unsigned nu_threads)
     : m_is_book_loaded(false),
       m_use_book(true),
       m_resign(false),
-      m_books_dir(move(books_dir)),
+      m_books_dir(books_dir),
       m_max_level(max_level),
       m_level(4),
       m_fixed_simulations(0),
