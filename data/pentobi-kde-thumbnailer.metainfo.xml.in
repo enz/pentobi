@@ -22,7 +22,7 @@
   <screenshots>
     <screenshot type="default">
       <image width="1248" height="702">
-      http://pentobi.sourceforge.net/pentobi-kde-thumbnailer.png</image>
+      https://pentobi.sourceforge.io/pentobi-kde-thumbnailer.png</image>
       <caption>Game file previews in Dolphin</caption>
       <caption xml:lang="de">Vorschaubilder von Spieldateien in Dolphin</caption>
     </screenshot>
