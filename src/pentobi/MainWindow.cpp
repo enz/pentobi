@@ -2590,7 +2590,6 @@ void MainWindow::ratedGame()
     QString computerPlayerName =
         //: The first argument is the version of Pentobi
         tr("Pentobi %1 (level %2)").arg(getVersion(), QString::number(level));
-    string charset = m_game.get_root().get_property("CA", "");
     string computerPlayerNameStdStr = encode(computerPlayerName).constData();
     string humanPlayerNameStdStr = encode(tr("Human")).constData();
     for (Color c : Color::Range(m_bd.get_nu_nonalt_colors()))
