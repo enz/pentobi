@@ -35,13 +35,6 @@ LIBBOARDGAME_TEST_CASE(util_array_list_basic)
     LIBBOARDGAME_CHECK(l.empty());
 }
 
-LIBBOARDGAME_TEST_CASE(util_array_list_construct_single_element)
-{
-    ArrayList<int, 10> l(5);
-    LIBBOARDGAME_CHECK_EQUAL(1u, l.size());
-    LIBBOARDGAME_CHECK_EQUAL(5, l[0]);
-}
-
 LIBBOARDGAME_TEST_CASE(util_array_list_equals)
 {
     ArrayList<int, 10> l1{ 1, 2, 3 };
@@ -55,7 +48,7 @@ LIBBOARDGAME_TEST_CASE(util_array_list_equals)
 
 LIBBOARDGAME_TEST_CASE(util_array_list_pop_back)
 {
-    ArrayList<int, 10> l(5);
+    ArrayList<int, 10> l({ 5 });
     int i = l.pop_back();
     LIBBOARDGAME_CHECK_EQUAL(5, i);
     LIBBOARDGAME_CHECK(l.empty());

@@ -48,9 +48,6 @@ public:
 
     ArrayList() = default;
 
-    /** Construct list with a single element. */
-    explicit ArrayList(const T& t);
-
     explicit ArrayList(const initializer_list<T>& l);
 
     /** Assignment operator.
@@ -128,12 +125,6 @@ private:
 
     I m_size = 0;
 };
-
-template<typename T, unsigned M, typename I>
-inline ArrayList<T, M, I>::ArrayList(const T& t)
-{
-    assign(t);
-}
 
 template<typename T, unsigned M, typename I>
 ArrayList<T, M, I>::ArrayList(const initializer_list<T>& l)
