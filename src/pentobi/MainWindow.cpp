@@ -1421,7 +1421,8 @@ void MainWindow::createToolBar()
     // QAction::autoRepeat applies only to keyboard and adding a QToolButton
     // with QToolBar::addWidget() makes the tool button not respect the
     // toolButtonStyle.
-    for (auto button : toolBar->findChildren<QToolButton*>())
+    const auto buttons = toolBar->findChildren<QToolButton*>();
+    for (auto button : buttons)
     {
         auto action = button->defaultAction();
         if (action == m_actionBackward || action == m_actionForward)
