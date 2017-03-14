@@ -66,6 +66,12 @@
     </screenshot>
     <screenshot>
       <image width="1248" height="702">
+      http://pentobi.sourceforge.net/pentobi-gembloq.png</image>
+      <caption>Game variant GembloQ</caption>
+      <caption xml:lang="de">Spielvariante GembloQ</caption>
+    </screenshot>
+    <screenshot>
+      <image width="1248" height="702">
       http://pentobi.sourceforge.net/pentobi-callisto.png</image>
       <caption>Game variant Callisto</caption>
       <caption xml:lang="de">Spielvariante Callisto</caption>
