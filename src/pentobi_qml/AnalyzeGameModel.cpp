@@ -251,7 +251,7 @@ void AnalyzeGameModel::updateElements()
     {
         auto moveColor = m_analyzeGame.get_move(i).color.to_int();
         // Values of search are supposed to be win/loss probabilities but can
-        // be slighly outside [0..1] (see libpentobi_mcts::State).
+        // be slightly outside [0..1] (see libpentobi_mcts::State).
         auto value = max(0., min(1., m_analyzeGame.get_value(i)));
         m_elements.append(new AnalyzeGameElement(this, moveColor, value));
     }
