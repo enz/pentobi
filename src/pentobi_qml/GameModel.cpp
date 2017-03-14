@@ -749,7 +749,7 @@ bool GameModel::loadAutoSave()
     if (! openByteArray(settings.value("autosave", "").toByteArray()))
         return false;
     setFile(settings.value("file").toString());
-    setFileDate(settings.value("fileDate").toDateTime());
+    m_fileDate = settings.value("fileDate").toDateTime();
     setIsModified(settings.value("isModified").toBool());
     restoreAutoSaveLocation();
     updateProperties();
@@ -1113,14 +1113,6 @@ void GameModel::setFile(const QString& file)
     emit fileChanged();
 }
 
-void GameModel::setFileDate(const QDateTime& fileDate)
-{
-    if (fileDate == m_fileDate)
-        return;
-    m_fileDate = fileDate;
-    emit fileDateChanged();
-}
-
 void GameModel::setIsModified(bool isModified)
 {
     m_game.set_modified(isModified);
@@ -1261,7 +1253,7 @@ void GameModel::updateFileInfo(const QString& file)
 {
     setFile(file);
     QFileInfo fileInfo(file);
-    setFileDate(fileInfo.lastModified());
+    m_fileDate = fileInfo.lastModified();
 }
 
 void GameModel::updateGameInfo()

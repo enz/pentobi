@@ -63,7 +63,6 @@ class GameModel
     Q_PROPERTY(QString file READ file NOTIFY fileChanged)
     Q_PROPERTY(QString moveAnnotation READ moveAnnotation WRITE setMoveAnnotation NOTIFY moveAnnotationChanged)
     Q_PROPERTY(QStringList recentFiles READ recentFiles NOTIFY recentFilesChanged)
-    Q_PROPERTY(QDateTime fileDate READ fileDate NOTIFY fileDateChanged)
     Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int nuPlayers READ nuPlayers NOTIFY nuPlayersChanged)
     Q_PROPERTY(int toPlay READ toPlay NOTIFY toPlayChanged)
@@ -244,8 +243,6 @@ public:
 
     const QString& moveAnnotation() const { return m_moveAnnotation; }
 
-    const QDateTime& fileDate() const { return m_fileDate; }
-
     const QString& comment() const { return m_comment; }
 
     int nuColors() const { return m_nuColors; }
@@ -381,8 +378,6 @@ signals:
     void altPlayerChanged();
 
     void fileChanged();
-
-    void fileDateChanged();
 
     void moveAnnotationChanged();
 
@@ -642,8 +637,6 @@ private:
     bool set(T& target, const T& value, void (GameModel::*changedSignal)());
 
     void setFile(const QString& file);
-
-    void setFileDate(const QDateTime& fileDate);
 
     void setSetupPlayer();
 
