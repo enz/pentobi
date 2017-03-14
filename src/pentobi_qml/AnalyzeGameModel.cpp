@@ -68,7 +68,7 @@ void AnalyzeGameModel::autoSave(GameModel* gameModel)
     auto variant = bd.get_variant();
     auto nuMoves = m_analyzeGame.get_nu_moves();
     QSettings settings;
-    if (m_analyzeGame.get_variant() != variant || nuMoves == 0)
+    if (nuMoves == 0 || m_analyzeGame.get_variant() != variant)
         settings.remove("analyzeGame");
     else
     {
