@@ -1,5 +1,5 @@
 function about() {
-    var url = "https://pentobi.sourceforge.io/"
+    var url = "https://pentobi.sourceforge.io"
     // Don't use &copy; or &ndash;, this is currently not rendered in the label
     // of the message box (last tested with Qt 5.8-rc)
     showInfo("<h2>" + qsTr("Pentobi") + "</h2><br/>" +
