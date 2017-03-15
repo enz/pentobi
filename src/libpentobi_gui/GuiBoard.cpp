@@ -512,8 +512,12 @@ void GuiBoard::setSelectedPieceTransform(const Transform* transform)
         return;
     m_selectedPieceTransform = transform;
     auto wantedOffset = m_selectedPieceOffset;
+    auto& geo = m_bd.get_geometry();
+    int width = static_cast<int>(geo.get_width());
+    int height = static_cast<int>(geo.get_height());
     m_selectedPieceOffset = CoordPoint::null();
-    setSelectedPieceOffset(wantedOffset);
+    setSelectedPieceOffset(wantedOffset, wantedOffset.x < width / 2,
+                           wantedOffset.y < height / 2);
     setSelectedPiecePoints();
 }
 
