@@ -511,6 +511,8 @@ void GuiBoard::setSelectedPieceTransform(const Transform* transform)
     if (m_selectedPieceTransform == transform)
         return;
     m_selectedPieceTransform = transform;
+    if (m_selectedPieceOffset.is_null())
+        return;
     auto wantedOffset = m_selectedPieceOffset;
     m_selectedPieceOffset = CoordPoint::null();
 
