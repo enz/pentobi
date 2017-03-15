@@ -100,8 +100,6 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
 void Search::set_default_param(Variant variant)
 {
     LIBBOARDGAME_LOG("Setting default parameters for ", to_string(variant));
-    set_expand_threshold(1);
-    set_expand_threshold_inc(0.5f);
     set_rave_weight(0.7f);
     set_rave_child_max(2000);
     // The following parameters are currently tuned for duo, classic_2 and

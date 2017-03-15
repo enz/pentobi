@@ -119,6 +119,12 @@ struct SearchParamConstDefault
         knowledge initialization is used. */
     static constexpr Float prune_count_start = 16;
 
+    /** Minimum count of a node to be expanded. */
+    static constexpr Float expand_threshold = 0;
+
+    /** Increase of the expand threshold per in-tree move played. */
+    static constexpr Float expand_threshold_inc = 0;
+
     /** Expected simulations per second.
         If the simulations per second vary a lot, it should be a value closer
         to the lower values. This value is used, for example, to determine an
@@ -231,16 +237,6 @@ public:
 
     /** @name Parameters */
     /** @{ */
-
-    /** Minimum count of a node to be expanded. */
-    void set_expand_threshold(Float n);
-
-    Float get_expand_threshold() const;
-
-    /** Increase of the expand threshold per in-tree move played. */
-    void set_expand_threshold_inc(Float n);
-
-    Float get_expand_threshold_inc() const;
 
     /** Constant used in the exploration term.
         The exploration term has the form c * sqrt(parent_count) / child_count
@@ -471,10 +467,6 @@ private:
 
 
     unsigned m_nu_threads;
-
-    Float m_expand_threshold = 0;
-
-    Float m_expand_threshold_inc = 0;
 
     bool m_deterministic;
 
@@ -847,18 +839,6 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
 }
 
 template<class S, class M, class R>
-inline auto SearchBase<S, M, R>::get_expand_threshold() const -> Float
-{
-    return m_expand_threshold;
-}
-
-template<class S, class M, class R>
-inline auto SearchBase<S, M, R>::get_expand_threshold_inc() const -> Float
-{
-    return m_expand_threshold_inc;
-}
-
-template<class S, class M, class R>
 inline size_t SearchBase<S, M, R>::get_nu_simulations() const
 {
     return m_nu_simulations;
@@ -978,7 +958,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     simulation.moves.clear();
     auto& root = m_tree.get_root();
     auto node = &root;
-    Float expand_threshold = m_expand_threshold;
+    Float expand_threshold = SearchParamConst::expand_threshold;
     while (node->has_children())
     {
         node = select_child(*node);
@@ -988,7 +968,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
         Move mv = node->get_move();
         simulation.moves.push_back(PlayerMove(state.get_player(), mv));
         state.play_in_tree(mv);
-        expand_threshold += m_expand_threshold_inc;
+        expand_threshold += SearchParamConst::expand_threshold_inc;
     }
     state.finish_in_tree();
     if (node->get_visit_count() > expand_threshold)
@@ -1360,18 +1340,6 @@ template<class S, class M, class R>
 void SearchBase<S, M, R>::set_callback(function<void(double, double)> callback)
 {
     m_callback = callback;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::set_expand_threshold(Float n)
-{
-    m_expand_threshold = n;
-}
-
-template<class S, class M, class R>
-void SearchBase<S, M, R>::set_expand_threshold_inc(Float n)
-{
-    m_expand_threshold_inc = n;
 }
 
 template<class S, class M, class R>

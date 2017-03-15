@@ -126,8 +126,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             << "avoid_symmetric_draw " << s.get_avoid_symmetric_draw() << '\n'
             << "auto_param " << s.get_auto_param() << '\n'
             << "exploration_constant " << s.get_exploration_constant() << '\n'
-            << "expand_threshold " << s.get_expand_threshold() << '\n'
-            << "expand_threshold_inc " << s.get_expand_threshold_inc() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
             << "rave_child_max " << s.get_rave_child_max() << '\n'
             << "rave_parent_max " << s.get_rave_parent_max() << '\n'
@@ -144,10 +142,6 @@ void Engine::cmd_param(const Arguments& args, Response& response)
             s.set_auto_param(args.parse<bool>(1));
         else if (name == "exploration_constant")
             s.set_exploration_constant(args.parse<Float>(1));
-        else if (name == "expand_threshold")
-            s.set_expand_threshold(args.parse<Float>(1));
-        else if (name == "expand_threshold_inc")
-            s.set_expand_threshold_inc(args.parse<Float>(1));
         else if (name == "fixed_simulations")
             p.set_fixed_simulations(args.parse<Float>(1));
         else if (name == "rave_child_max")
