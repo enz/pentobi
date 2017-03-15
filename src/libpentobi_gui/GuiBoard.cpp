@@ -517,12 +517,12 @@ void GuiBoard::setSelectedPieceTransform(const Transform* transform)
     m_selectedPieceOffset = CoordPoint::null();
 
     // Avoid a drift when changing the transformation multiple times
-    auto preferRightShift = wantedOffset.x % 2 == 0;
-    auto preferDownShift = wantedOffset.y % 2 == 0;
+    auto& geo = m_bd.get_geometry();
+    auto preferRightShift = wantedOffset.x / geo.get_period_x() % 2 == 0;
+    auto preferDownShift = wantedOffset.y  / geo.get_period_y() % 2 == 0;
     setSelectedPieceOffset(wantedOffset, preferRightShift, preferDownShift);
 
     // Shift towards center if completely outside board
-    auto& geo = m_bd.get_geometry();
     int width = static_cast<int>(geo.get_width());
     int height = static_cast<int>(geo.get_height());
     while (m_selectedPieceOffset.is_null())
