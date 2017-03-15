@@ -277,23 +277,22 @@ inline void Tree<N>::NodeExpander::link_children(Tree& tree, const Node& node)
 
 template<typename N>
 Tree<N>::Tree(size_t memory, unsigned nu_threads)
-    : m_nu_threads(nu_threads)
 {
-    size_t max_nodes = memory / sizeof(Node);
+    if (nu_threads == 0)
+        nu_threads = 1;
+    auto max_nodes = memory / sizeof(Node);
+    // We need at least one node per thread
+    max_nodes = max(max_nodes, static_cast<size_t>(nu_threads));
     // It doesn't make sense to set max_nodes higher than what can be accessed
     // with NodeIdx
     max_nodes =
         min(max_nodes, static_cast<size_t>(numeric_limits<NodeIdx>::max()));
-    if (max_nodes == 0)
-        // We need at least the root node (for useful searches we need of
-        // course also children, but a root node is the minimum requirement to
-        // avoid crashing).
-        max_nodes = 1;
+    m_nu_threads = nu_threads;
     m_max_nodes = max_nodes;
     m_nodes.reset(new Node[max_nodes]);
-    m_thread_storage.reset(new ThreadStorage[m_nu_threads]);
-    m_nodes_per_thread = max_nodes / m_nu_threads;
-    for (unsigned i = 0; i < m_nu_threads; ++i)
+    m_thread_storage.reset(new ThreadStorage[nu_threads]);
+    m_nodes_per_thread = max_nodes / nu_threads;
+    for (unsigned i = 0; i < nu_threads; ++i)
     {
         auto& thread_storage = m_thread_storage[i];
         thread_storage.begin = m_nodes.get() + i * m_nodes_per_thread;
