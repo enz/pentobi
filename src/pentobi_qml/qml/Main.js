@@ -272,10 +272,9 @@ function help() {
 
 function init() {
     // Settings might contain unusable geometry
-    var maxWidth = root.Screen.desktopAvailableWidth
-    var maxHeight = root.Screen.desktopAvailableHeight
+    var maxWidth = root.Screen.width
+    var maxHeight = root.Screen.height
     if (x < 0 || x + width > maxWidth || y < 0 || y + height > maxHeight) {
-        console.debug("Invalid geometry in settings")
         if (width > maxWidth || height > maxHeight) {
             width = defaultWidth
             height = defaultHeight
