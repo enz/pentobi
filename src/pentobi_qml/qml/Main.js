@@ -446,6 +446,8 @@ function openFile(file) {
         analyzeGameModel.clear()
         if (gameModel.comment.length > 0)
             gameDisplay.showComment()
+        else
+            gameDisplay.showPieces()
     })
 }
 
