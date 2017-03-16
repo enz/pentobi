@@ -284,10 +284,8 @@ function init() {
     }
 
     // Settings may contain invalid theme
-    if (themeName !== "dark" && themeName !== "light") {
-        console.debug("Invalid theme name in settings")
+    if (themeName !== "dark" && themeName !== "light")
         themeName = "light"
-    }
 
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
