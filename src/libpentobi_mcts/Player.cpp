@@ -51,7 +51,7 @@ static const float counts_classic[Player::max_supported_level] =
     { 3, 18, 75, 311, 1260, 8949, 66179, 330894, 1654470 };
 
 static const float counts_duo[Player::max_supported_level] =
-    { 3, 14, 63, 253, 2203, 13614, 202994, 1014969, 5074843 };
+    { 3, 14, 63, 253, 2203, 13614, 218983, 1094918, 5474588 };
 
 static const float counts_trigon[Player::max_supported_level] =
     { 228, 376, 733, 1214, 2606, 6802, 18428, 92138, 460691 };
