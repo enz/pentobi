@@ -57,7 +57,7 @@ static const float counts_trigon[Player::max_supported_level] =
     { 228, 376, 733, 1214, 2606, 6802, 18428, 92138, 460691 };
 
 static const float counts_nexos[Player::max_supported_level] =
-    { 250, 347, 625, 1223, 3117, 8270, 22626, 113130, 565651 };
+    { 250, 347, 625, 1223, 3117, 8270, 20556, 102784, 513924 };
 
 static const float counts_callisto_2[Player::max_supported_level] =
     { 100, 192, 405, 1079, 3323, 12258, 112924, 564626, 2823130 };
