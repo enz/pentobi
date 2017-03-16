@@ -609,7 +609,10 @@ void MainWindow::computerColors()
             break;
         }
 
-    checkComputerMove();
+    if (m_isGenMoveRunning && ! isComputerToPlay())
+        cancelThread();
+    else
+        checkComputerMove();
 }
 
 bool MainWindow::computerPlaysAll() const
