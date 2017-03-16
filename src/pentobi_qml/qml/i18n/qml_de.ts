@@ -292,8 +292,8 @@
         <translation>Alle Dateien (*)</translation>
     </message>
     <message>
-        <source>Image files (*.png *.jpg)</source>
-        <translation>Bilddateien (*.png *.jpg)</translation>
+        <source>PNG image files (*.png)</source>
+        <translation>PNG-Bilddateien (*.png)</translation>
     </message>
 </context>
 <context>

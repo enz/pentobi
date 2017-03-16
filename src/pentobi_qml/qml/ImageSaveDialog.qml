@@ -6,7 +6,7 @@ FileDialog {
     title: qsTr("Save Image")
     selectExisting: false
     folder: shortcuts.pictures
-    nameFilters: [ qsTr("Image files (*.png *.jpg)"), qsTr("All files (*)") ]
+    nameFilters: [ qsTr("PNG image files (*.png)"), qsTr("All files (*)") ]
     onAccepted: Logic.exportImage(fileUrl)
     onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 }
