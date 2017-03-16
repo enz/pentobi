@@ -85,8 +85,8 @@ void PriorKnowledge::start_search(const Board& bd)
     case Variant::callisto:
     case Variant::callisto_2_4:
         m_check_dist_to_center.fill(true);
-        m_dist_to_center_max_pieces = 4;
-        m_max_dist_diff = 0;
+        m_dist_to_center_max_pieces = 8;
+        m_max_dist_diff = 4;
         break;
     case Variant::callisto_2:
         m_check_dist_to_center.fill(true);
@@ -95,8 +95,8 @@ void PriorKnowledge::start_search(const Board& bd)
         break;
     case Variant::callisto_3:
         m_check_dist_to_center.fill(true);
-        m_dist_to_center_max_pieces = 3;
-        m_max_dist_diff = 0;
+        m_dist_to_center_max_pieces = 6;
+        m_max_dist_diff = 3;
         break;
     case Variant::nexos:
     case Variant::nexos_2:
@@ -106,9 +106,13 @@ void PriorKnowledge::start_search(const Board& bd)
         break;
     case Variant::gembloq:
     case Variant::gembloq_2_4:
-    case Variant::gembloq_3:
         m_check_dist_to_center.fill(true);
         m_dist_to_center_max_pieces = 12;
+        m_max_dist_diff = 0.5f;
+        break;
+    case Variant::gembloq_3:
+        m_check_dist_to_center.fill(true);
+        m_dist_to_center_max_pieces = 9;
         m_max_dist_diff = 0.5f;
         break;
     case Variant::gembloq_2:
