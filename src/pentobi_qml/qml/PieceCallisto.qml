@@ -74,7 +74,6 @@ Item
                    + (gridHeight - height) / 2
                 sourceSize: imageSourceSize
                 mipmap: true
-                antialiasing: true
             }
             // Down junction
             Image {
@@ -89,7 +88,6 @@ Item
                    - height / 2
                 sourceSize: imageSourceSize
                 mipmap: true
-                antialiasing: true
             }
         }
     }

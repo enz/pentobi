@@ -107,7 +107,6 @@ Item
             y: (modelData.y - pieceModel.center.y + 0.25) * gridHeight
             sourceSize: imageSourceSize
             mipmap: true
-            antialiasing: true
         }
     }
     Rectangle {
