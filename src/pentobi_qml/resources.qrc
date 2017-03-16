@@ -37,7 +37,6 @@
         <file>qml/PieceManipulator.qml</file>
         <file>qml/PieceNexos.qml</file>
         <file>qml/PieceRotationAnimation.qml</file>
-        <file>qml/PieceSelectorDesktop.qml</file>
         <file>qml/PieceSelectorMobile.qml</file>
         <file>qml/PieceSwitchedFlipAnimation.qml</file>
         <file>qml/PieceTrigon.qml</file>
