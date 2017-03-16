@@ -69,15 +69,19 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList1
-                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
-                       pieceList0.height + 1 * spacingPieceLists :
-                       pieceList0.height + pieceList2.height + 1.5 * spacingPieceLists
+                y: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return pieceList0.height + pieceList2.height + 1.5 * spacingPieceLists
+                    return pieceList0.height + spacingPieceLists
+                }
             }
             PropertyChanges {
                 target: pieceList2
-                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
-                       pieceList0.height + pieceList1.height  + 1.5 * spacingPieceLists :
-                       pieceList0.height + 1 * spacingPieceLists
+                y: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return pieceList0.height + spacingPieceLists
+                    return pieceList0.height + pieceList1.height  + 1.5 * spacingPieceLists
+                }
             }
             PropertyChanges {
                 target: pieceList3
@@ -94,19 +98,29 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList2
-                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
-                       pieceList1.height + 1 * spacingPieceLists :
-                       pieceList1.height + pieceList3.height + 1.5 * spacingPieceLists
+                y: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return pieceList1.height + pieceList3.height + 1.5 * spacingPieceLists
+                    return pieceList1.height + spacingPieceLists
+                }
             }
             PropertyChanges {
                 target: pieceList3
-                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
-                       pieceList1.height + pieceList2.height + 1.5 * spacingPieceLists :
-                       pieceList1.height + 1 * spacingPieceLists
+                y: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return pieceList1.height + spacingPieceLists
+                    return pieceList1.height + pieceList2.height + 1.5 * spacingPieceLists
+                }
             }
             PropertyChanges {
                 target: pieceList0
-                y: pieceList1.height + pieceList2.height + pieceList3.height + 2 * spacingPieceLists
+                y: {
+                    if (gameModel.nuColors === 2)
+                        return pieceList1.height + pieceList2.height + pieceList3.height + spacingPieceLists
+                    if (gameModel.nuColors === 3)
+                        return pieceList1.height + pieceList2.height + pieceList3.height + 1.5 * spacingPieceLists
+                    return pieceList1.height + pieceList2.height + pieceList3.height + 2 * spacingPieceLists
+                }
             }
         },
         State {
@@ -119,19 +133,29 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList3
-                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
-                       pieceList2.height + 1 * spacingPieceLists :
-                       pieceList2.height + pieceList0.height + 1.5 * spacingPieceLists
+                y: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return pieceList2.height + pieceList0.height + 1.5 * spacingPieceLists
+                    return pieceList2.height + spacingPieceLists
+                }
             }
             PropertyChanges {
                 target: pieceList0
-                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
-                       pieceList2.height + pieceList3.height + 1.5 * spacingPieceLists :
-                       pieceList2.height + 1 * spacingPieceLists
+                y: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return pieceList2.height + spacingPieceLists
+                    if (gameModel.nuColors === 3)
+                        return pieceList2.height + pieceList3.height + spacingPieceLists
+                    return pieceList2.height + pieceList3.height + 1.5 * spacingPieceLists
+                }
             }
             PropertyChanges {
                 target: pieceList1
-                y: pieceList2.height + pieceList3.height + pieceList0.height + 2 * spacingPieceLists
+                y: {
+                    if (gameModel.nuColors === 3)
+                        return pieceList2.height + pieceList3.height + pieceList0.height + 1.5 * spacingPieceLists
+                    return pieceList2.height + pieceList3.height + pieceList0.height + 2 * spacingPieceLists
+                }
             }
         },
         State {
@@ -144,15 +168,19 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList0
-                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
-                       pieceList3.height + 1 * spacingPieceLists :
-                       pieceList3.height + pieceList1.height + 1.5 * spacingPieceLists
+                y: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return pieceList3.height + pieceList1.height + 1.5 * spacingPieceLists
+                    return pieceList3.height + spacingPieceLists
+                }
             }
             PropertyChanges {
                 target: pieceList1
-                y: ! (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
-                       pieceList3.height + pieceList0.height + 1.5 * spacingPieceLists :
-                       pieceList3.height + 1 * spacingPieceLists
+                y: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return pieceList3.height + spacingPieceLists
+                    return pieceList3.height + pieceList0.height + 1.5 * spacingPieceLists
+                }
             }
             PropertyChanges {
                 target: pieceList2
