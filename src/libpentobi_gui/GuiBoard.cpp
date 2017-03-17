@@ -261,7 +261,6 @@ void GuiBoard::movePieceRight()
 {
     if (m_selectedPiece.is_null())
         return;
-    CoordPoint offset;
     if (m_selectedPieceOffset.is_null())
     {
         auto& geo = m_bd.get_geometry();
