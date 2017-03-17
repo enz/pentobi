@@ -282,13 +282,13 @@ inline const SgfNode* SgfNode::get_parent_or_null() const
 inline SgfNode& SgfNode::get_first_child()
 {
     LIBBOARDGAME_ASSERT(has_children());
-    return *m_first_child.get();
+    return *m_first_child;
 }
 
 inline const SgfNode& SgfNode::get_first_child() const
 {
     LIBBOARDGAME_ASSERT(has_children());
-    return *(m_first_child.get());
+    return *m_first_child;
 }
 
 inline SgfNode* SgfNode::get_first_child_or_null()

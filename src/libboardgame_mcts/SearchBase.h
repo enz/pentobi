@@ -724,9 +724,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(
     }
     if (thread_state.thread_id == 0 && m_callback)
         m_callback(time, remaining_time);
-    if (check_cannot_change(thread_state, remaining_simulations))
-        return true;
-    return false;
+    return check_cannot_change(thread_state, remaining_simulations);
 }
 
 template<class S, class M, class R>

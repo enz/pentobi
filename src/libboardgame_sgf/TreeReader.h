@@ -37,7 +37,7 @@ public:
     void on_property(const string& identifier,
                      const vector<string>& values) override;
 
-    const SgfNode& get_tree() const;
+    const SgfNode& get_tree() const { return *m_root; }
 
     /** Get the tree and transfer the ownership to the caller. */
     unique_ptr<SgfNode> get_tree_transfer_ownership();
@@ -49,11 +49,6 @@ private:
 
     stack<SgfNode*> m_stack;
 };
-
-inline const SgfNode& TreeReader::get_tree() const
-{
-    return *m_root.get();
-}
 
 //-----------------------------------------------------------------------------
 

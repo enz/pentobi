@@ -49,9 +49,7 @@ bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
             moveIndex = nuSiblingMoves;
         ++nuSiblingMoves;
     }
-    if (nuSiblingMoves == 1)
-        return false;
-    return true;
+    return nuSiblingMoves != 1;
 }
 
 void markMove(GuiBoard& guiBoard, const Game& game, const SgfNode& node,

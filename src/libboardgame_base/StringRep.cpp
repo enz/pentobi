@@ -69,9 +69,7 @@ bool StdStringRep::read(istream& in, unsigned width, unsigned height,
         in.clear();
         return true;
     }
-    if (isspace(c))
-        return true;
-    return false;
+    return isspace(c);
 }
 
 void StdStringRep::write(ostream& out, unsigned x, unsigned y, unsigned width,

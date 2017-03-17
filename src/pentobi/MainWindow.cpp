@@ -490,9 +490,7 @@ bool MainWindow::checkSave()
         auto cancelButton = msgBox.addButton(QMessageBox::Cancel);
         msgBox.setDefaultButton(cancelButton);
         msgBox.exec();
-        if (msgBox.clickedButton() != abortGameButton)
-            return false;
-        return true;
+        return msgBox.clickedButton() == abortGameButton;
     }
     return true;
 }
