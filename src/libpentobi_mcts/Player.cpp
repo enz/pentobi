@@ -60,7 +60,7 @@ static const float counts_nexos[Player::max_supported_level] =
     { 250, 347, 625, 1223, 3117, 8270, 20556, 102784, 513924 };
 
 static const float counts_callisto_2[Player::max_supported_level] =
-    { 100, 192, 405, 1079, 3323, 12258, 112924, 564626, 2823130 };
+    { 100, 192, 405, 1079, 3323, 12258, 105467, 527345, 2636726 };
 
 static const float counts_gembloq[Player::max_supported_level] =
     { 3, 18, 75, 311, 1260, 4137, 20338, 98088, 549514 };
