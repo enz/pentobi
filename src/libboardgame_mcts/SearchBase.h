@@ -360,7 +360,7 @@ private:
         : public libboardgame_util::AssertionHandler
     {
     public:
-        AssertionHandler(const SearchBase& search);
+        explicit AssertionHandler(const SearchBase& search);
 
         ~AssertionHandler();
 

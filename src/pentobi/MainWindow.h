@@ -60,11 +60,11 @@ class MainWindow
     Q_OBJECT
 
 public:
-    MainWindow(Variant variant, const QString& initialFile = "",
-               const QString& helpDir = "",
-               unsigned maxLevel = Player::max_supported_level,
-               const QString& booksDir = "", bool noBook = false,
-               unsigned nuThreads = 0);
+    explicit MainWindow(Variant variant, const QString& initialFile = "",
+                        const QString& helpDir = "",
+                        unsigned maxLevel = Player::max_supported_level,
+                        const QString& booksDir = "", bool noBook = false,
+                        unsigned nuThreads = 0);
 
     ~MainWindow();
 
