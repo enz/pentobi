@@ -302,9 +302,7 @@ MainWindow::MainWindow(Variant variant, const QString& initialFile,
     }
 }
 
-MainWindow::~MainWindow()
-{
-}
+MainWindow::~MainWindow() = default;
 
 void MainWindow::about()
 {

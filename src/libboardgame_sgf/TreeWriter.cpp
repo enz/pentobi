@@ -20,9 +20,7 @@ TreeWriter::TreeWriter(ostream& out, const SgfNode& root)
 {
 }
 
-TreeWriter::~TreeWriter()
-{
-}
+TreeWriter::~TreeWriter() = default;
 
 void TreeWriter::write()
 {

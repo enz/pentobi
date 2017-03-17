@@ -43,9 +43,7 @@ Book::Book(Variant variant)
     get_transforms(variant, m_transforms, m_inv_transforms);
 }
 
-Book::~Book()
-{
-}
+Book::~Book() = default;
 
 Move Book::genmove(const Board& bd, Color c)
 {
