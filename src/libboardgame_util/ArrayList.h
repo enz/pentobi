@@ -50,7 +50,7 @@ public:
 
     ArrayList(const ArrayList& l);
 
-    explicit ArrayList(const initializer_list<T>& l);
+    ArrayList(const initializer_list<T>& l);
 
     /** Assignment operator.
         Copies only elements with index below the current size. */
