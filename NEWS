@@ -1,5 +1,5 @@
-Version 12.UNKNOWN (master)
-===========================
+Version 13.0 (17 Mar 2017)
+==========================
 
 General:
 
@@ -8,20 +8,23 @@ General:
 * Slightly increased playing strength in Callisto and Nexos.
 * New menu item Game/Open From Clipboard.
 * The engine now uses up to 8 threads (instead of 4) by default if the CPU
-  has enough cores.
+  has enough cores or hardware threads.
 * Support for SGF file encodings other than ISO-8859-1 and UTF-8.
 
 Desktop version:
 
+* Install AppData file to /usr/share/metainfo instead of /usr/share/appdata.
+* Added AppStream file for the KDE thumbnailer.
+* Disabled AppStream tests added by KDECMakeSettings that are broken in some
+  versions of KDE and made the project tests fail.
 * The compilation now requires CMake >=3.1.0.
 
 Android version:
 
-* The Android version now supports all features of the desktop version,
+* The Android version now supports most features of the desktop version,
   including comments, move annotations, setup positions, game analysis (only
   a very fast mode) and rated games. The playing levels are still restricted
   to 1-7 because the top levels would be too slow on mobile devices.
-* Loaded file name is now shown in toolbar.
 * Current game position, associated file name and file modification status
   are now remembered between sessions.
 * Opened games now show the initial instead of the last position if the
@@ -29,33 +32,9 @@ Android version:
 * Game/Find Move now behaves like in the desktop version and will cycle
   through all legal moves if called repeatedly.
 * Added a light theme in addition to the default dark theme.
-* Computer color settings will no longer be changed on new game if computer
-  was set to play no color before.
-
-
-Version 12.2.UNKNOWN (v12-fixes)
-================================
-
-Desktop version:
-
-* Leave Fullscreen button had no border with some versions of Qt in some
-  environments.
-* Install AppData file to /usr/share/metainfo instead of /usr/share/appdata
-  according to the Debian AppStream guidelines.
-* Added an AppStream file for the KDE thumbnailer.
-* Disabled AppStream tests added by KDECMakeSettings that are broken in some
-  versions of KDE and made the project tests fail.
-* Use same app icon as in the Android version.
-* Install MIME icons with size 32x32 and 64x64.
-
-Android version:
-
-* Game variant Junior erroneously used level set for Classic.
-* New menu item View/Fullscreen.
-* New menu item Game/Open From Clipboard.
-* Default folder for Open/Save is now /sdcard.
-* Minor bugfixes.
-* Set minimum Android version to 4.1 because Qt 5.6 crashes on Android 2.3.
+* New menu item View/Fullscreen to make better use of small-screen displays.
+* Bugfix: game variant Junior erroneously used level set for Classic.
+* The minimum required Android version is now 4.1.
 
 
 Version 12.2 (05 Jan 2017)
