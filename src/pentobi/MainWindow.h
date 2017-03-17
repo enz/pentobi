@@ -625,10 +625,10 @@ private:
 
     void setUtf8();
 
-    void showError(const QString& message, const QString& infoText = "",
+    void showError(const QString& text, const QString& infoText = "",
                    const QString& detailText = "");
 
-    void showInfo(const QString& message, const QString& infoText = "",
+    void showInfo(const QString& text, const QString& infoText = "",
                   const QString& detailText = "", bool withIcon = false);
 
     void showInvalidFile(QString file, const exception& e);
@@ -706,7 +706,7 @@ private slots:
 
     void setTitleMenuLevel();
 
-    void setupMode(bool checked);
+    void setupMode(bool enable);
 
     void showComment(bool checked);
 

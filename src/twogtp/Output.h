@@ -23,7 +23,7 @@ using libboardgame_util::WallTimeSource;
 class Output
 {
 public:
-    Output(Variant variant, const string& prefix, bool fastopen);
+    Output(Variant variant, const string& prefix, bool create_tree);
 
     ~Output();
 

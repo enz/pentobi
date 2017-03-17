@@ -158,7 +158,7 @@ private:
 
     void setSelectedPieceOffset(const QMouseEvent& event);
 
-    void setSelectedPieceOffset(const CoordPoint& offset,
+    void setSelectedPieceOffset(const CoordPoint& wantedOffset,
                                 bool preferRightShift = false,
                                 bool preferDownShift = false);
 

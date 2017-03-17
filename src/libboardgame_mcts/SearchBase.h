@@ -259,7 +259,7 @@ public:
     bool get_reuse_tree() const;
 
     /** Maximum parent visit count for applying RAVE. */
-    void set_rave_parent_max(Float value);
+    void set_rave_parent_max(Float n);
 
     Float get_rave_parent_max() const;
 
@@ -269,7 +269,7 @@ public:
     Float get_rave_child_max() const;
 
     /** Weight used for adding RAVE values to the node value. */
-    void set_rave_weight(Float value);
+    void set_rave_weight(Float v);
 
     Float get_rave_weight() const;
 

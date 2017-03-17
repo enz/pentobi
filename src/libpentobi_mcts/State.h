@@ -92,7 +92,7 @@ public:
         @return @c false if end of game was reached, and no move was
         generated. */
     bool gen_playout_move(const LastGoodReply& lgr, Move last,
-                          Move second_last, PlayerMove<Move>& move);
+                          Move second_last, PlayerMove<Move>& mv);
 
     void evaluate_playout(array<Float, 6>& result);
 

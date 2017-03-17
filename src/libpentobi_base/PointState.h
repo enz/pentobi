@@ -77,9 +77,9 @@ inline PointState::PointState(IntType i)
     m_i = i;
 }
 
-inline bool PointState::operator==(const PointState& p) const
+inline bool PointState::operator==(const PointState& s) const
 {
-    return m_i == p.m_i;
+    return m_i == s.m_i;
 }
 
 inline bool PointState::operator==(const Color& c) const

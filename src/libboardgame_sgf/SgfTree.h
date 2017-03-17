@@ -157,7 +157,7 @@ public:
 
     string get_round() const;
 
-    void set_round(const string& date);
+    void set_round(const string& round);
 
     string get_time() const;
 
