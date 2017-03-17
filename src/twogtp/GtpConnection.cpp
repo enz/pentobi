@@ -68,7 +68,7 @@ vector<string> split_args(string s)
 GtpConnection::GtpConnection(const string& command)
 {
     vector<string> args = split_args(command);
-    if (args.size() == 0)
+    if (args.empty())
         throw runtime_error("GtpConnection: empty command line");
     int fd1[2];
     if (pipe(fd1) < 0)
