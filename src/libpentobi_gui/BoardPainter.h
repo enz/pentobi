@@ -72,7 +72,8 @@ public:
         Paints the selected piece either transparent (if not legal) or opaque
         (if legal). */
     void paintSelectedPiece(QPainter& painter, Color c,
-                            const MovePoints& points, bool isLegal);
+                            const MovePoints& points, bool isOnePiece,
+                            bool isLegal);
 
     /** Get the corresponding board coordinates of a pixel.
         @return The board coordinates or CoordPoint::null() if paint() was
