@@ -354,14 +354,17 @@ void GuiBoard::paintEvent(QPaintEvent*)
     if (m_isMoveShown)
     {
         if (m_currentMoveShownAnimationIndex % 2 == 0)
-            m_boardPainter.paintSelectedPiece(painter, m_currentMoveShownColor,
-                                              m_currentMoveShownPoints, true);
+            m_boardPainter.paintSelectedPiece(
+                        painter, m_currentMoveShownColor,
+                        m_currentMoveShownPoints,
+                        m_currentMoveShownPoints.size() == 1, true);
     }
     else if (! m_selectedPiecePoints.empty())
     {
         bool isLegal = ! findSelectedPieceMove().is_null();
-        m_boardPainter.paintSelectedPiece(painter, m_selectedPieceColor,
-                                          m_selectedPiecePoints, isLegal);
+        m_boardPainter.paintSelectedPiece(
+                    painter, m_selectedPieceColor, m_selectedPiecePoints,
+                    m_selectedPiece == m_bd.get_one_piece(), isLegal);
     }
 }
 

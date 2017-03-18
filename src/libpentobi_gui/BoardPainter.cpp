@@ -549,7 +549,8 @@ void BoardPainter::paintPieces(QPainter& painter,
 }
 
 void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
-                                      const MovePoints& points, bool isLegal)
+                                      const MovePoints& points,
+                                      bool isOnePiece, bool isLegal)
 {
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.save();
@@ -620,7 +621,6 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
                              && points.contains(m_geo->get_point(x + 1, y)));
             bool hasDown = (m_geo->is_onboard(CoordPoint(x, y + 1))
                             && points.contains(m_geo->get_point(x, y + 1)));
-            bool isOnePiece = (points.size() == 1);
             Util::paintColorSquareCallisto(painter, m_variant, c, fieldX,
                                            fieldY, m_fieldWidth, hasRight,
                                            hasDown, isOnePiece, alpha,
