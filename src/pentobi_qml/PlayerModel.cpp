@@ -37,7 +37,7 @@ PlayerModel::PlayerModel(QObject* parent)
 {
     if (noBook)
         m_player.set_use_book(false);
-    connect(&m_genMoveWatcher, &QFutureWatcher<GenMoveResult>::finished,
+    connect(&m_watcher, &QFutureWatcher<GenMoveResult>::finished,
             this, &PlayerModel::genMoveFinished);
 }
 
@@ -73,13 +73,13 @@ void PlayerModel::cancelGenMove()
     // Increasing m_genMoveId will make genMoveFinished() ignore the event.
     ++m_genMoveId;
     set_abort();
-    m_genMoveWatcher.waitForFinished();
+    m_watcher.waitForFinished();
     setIsGenMoveRunning(false);
 }
 
 void PlayerModel::genMoveFinished()
 {
-    auto result = m_genMoveWatcher.future().result();
+    auto result = m_watcher.future().result();
     if (result.genMoveId != m_genMoveId)
         // Callback from a canceled move generation
         return;
@@ -114,7 +114,7 @@ void PlayerModel::loadBook(Variant variant)
     m_player.load_book(in);
 }
 
-bool PlayerModel::getKey(const QString& gameVariant, QString& key)
+bool PlayerModel::getLevelKey(const QString& gameVariant, QString& key)
 {
     Variant variant;
     if (! parse_variant_id(gameVariant.toLocal8Bit().constData(), variant))
@@ -129,7 +129,7 @@ bool PlayerModel::getKey(const QString& gameVariant, QString& key)
 void PlayerModel::loadLevel(const QString& gameVariant)
 {
     QString key;
-    if (! getKey(gameVariant, key))
+    if (! getLevelKey(gameVariant, key))
         return;
     QSettings settings;
     auto level = settings.value(key, 1).toUInt();
@@ -172,7 +172,7 @@ void PlayerModel::setLevel(unsigned level)
     if (m_level == level)
         return;
     QString key;
-    if (! getKey(m_gameVariant, key))
+    if (! getLevelKey(m_gameVariant, key))
         return;
     {
         QSettings settings;
@@ -197,7 +197,7 @@ void PlayerModel::startGenMove(GameModel* gm)
     QFuture<GenMoveResult> future =
             QtConcurrent::run(this, &PlayerModel::asyncGenMove, gm,
                               bd.get_effective_to_play(), m_genMoveId);
-    m_genMoveWatcher.setFuture(future);
+    m_watcher.setFuture(future);
     setIsGenMoveRunning(true);
 }
 

@@ -106,12 +106,12 @@ private:
 
     Player m_player;
 
-    QFutureWatcher<GenMoveResult> m_genMoveWatcher;
+    QFutureWatcher<GenMoveResult> m_watcher;
 
 
     GenMoveResult asyncGenMove(GameModel* gm, Color c, unsigned genMoveId);
 
-    bool getKey(const QString& gameVariant, QString& key);
+    bool getLevelKey(const QString& gameVariant, QString& key);
 
     void loadBook(Variant variant);
 
