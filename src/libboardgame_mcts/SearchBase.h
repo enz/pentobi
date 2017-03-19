@@ -350,10 +350,6 @@ protected:
 
     virtual void on_start_search(bool is_followup);
 
-    /** Time source for current search.
-        Only valid during a search. */
-    TimeSource& get_time_source();
-
 private:
 #if LIBBOARDGAME_DEBUG
     class AssertionHandler
@@ -905,13 +901,6 @@ inline const S& SearchBase<S, M, R>::get_state(unsigned thread_id) const
 {
     LIBBOARDGAME_ASSERT(thread_id < m_threads.size());
     return *m_threads[thread_id]->thread_state.state;
-}
-
-template<class S, class M, class R>
-inline TimeSource& SearchBase<S, M, R>::get_time_source()
-{
-    LIBBOARDGAME_ASSERT(m_time_source != 0);
-    return *m_time_source;
 }
 
 template<class S, class M, class R>
