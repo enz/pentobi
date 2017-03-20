@@ -107,9 +107,9 @@ public:
 
     unsigned get_point_type(Point p) const;
 
-    bool is_onboard(unsigned x, unsigned y) const;
-
     bool is_onboard(CoordPoint p) const;
+
+    bool is_onboard(int x, int y) const { return is_onboard(CoordPoint(x, y)); }
 
     /** Return the point at a given coordinate.
         @pre x < get_width()
@@ -195,8 +195,7 @@ bool Geometry<P>::from_string(const string& s, Point& p) const
     istringstream in(s);
     unsigned x;
     unsigned y;
-    if (m_string_rep->read(in, m_width, m_height, x, y)
-            && is_onboard(CoordPoint(x, y)))
+    if (m_string_rep->read(in, m_width, m_height, x, y) && is_onboard(x, y))
     {
         p = get_point(x, y);
         return true;
@@ -296,15 +295,9 @@ void Geometry<P>::init(unsigned width, unsigned height)
 }
 
 template<class P>
-inline bool Geometry<P>::is_onboard(unsigned x, unsigned y) const
-{
-    return ! get_point(x, y).is_null();
-}
-
-template<class P>
 bool Geometry<P>::is_onboard(CoordPoint p) const
 {
-    return p.is_onboard(m_width, m_height) && is_onboard(p.x, p.y);
+    return p.is_onboard(m_width, m_height) && ! get_point(p.x, p.y).is_null();
 }
 
 #if LIBBOARDGAME_DEBUG

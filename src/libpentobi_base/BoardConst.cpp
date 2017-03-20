@@ -1117,7 +1117,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
                 auto& pp = transformed_points[i][j];
                 int xx = pp.x + x;
                 int yy = pp.y + y;
-                if (! m_geo.is_onboard(CoordPoint(xx, yy)))
+                if (! m_geo.is_onboard(xx, yy))
                 {
                     is_onboard = false;
                     break;

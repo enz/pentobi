@@ -575,8 +575,8 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
     {
         if (p.is_null())
             continue;
-        auto x = m_geo->get_x(p);
-        auto y = m_geo->get_y(p);
+        int x = m_geo->get_x(p);
+        int y = m_geo->get_y(p);
         auto pointType = m_geo->get_point_type(p);
         qreal fieldX = x * m_fieldWidth;
         qreal fieldY = y * m_fieldHeight;
@@ -617,9 +617,9 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
                                      alpha, saturation, flat);
         else if (m_isCallisto)
         {
-            bool hasRight = (m_geo->is_onboard(CoordPoint(x + 1, y))
+            bool hasRight = (m_geo->is_onboard(x + 1, y)
                              && points.contains(m_geo->get_point(x + 1, y)));
-            bool hasDown = (m_geo->is_onboard(CoordPoint(x, y + 1))
+            bool hasDown = (m_geo->is_onboard(x, y + 1)
                             && points.contains(m_geo->get_point(x, y + 1)));
             Util::paintColorSquareCallisto(painter, m_variant, c, fieldX,
                                            fieldY, m_fieldWidth, hasRight,
@@ -635,13 +635,13 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
         {
             auto x = m_geo->get_x(p);
             auto y = m_geo->get_y(p);
-            bool hasLeft = (m_geo->is_onboard(CoordPoint(x - 1, y))
+            bool hasLeft = (m_geo->is_onboard(x - 1, y)
                             && points.contains(m_geo->get_point(x - 1, y)));
-            bool hasRight = (m_geo->is_onboard(CoordPoint(x + 1, y))
+            bool hasRight = (m_geo->is_onboard(x + 1, y)
                              && points.contains(m_geo->get_point(x + 1, y)));
-            bool hasUp = (m_geo->is_onboard(CoordPoint(x, y - 1))
+            bool hasUp = (m_geo->is_onboard(x, y - 1)
                           && points.contains(m_geo->get_point(x, y - 1)));
-            bool hasDown = (m_geo->is_onboard(CoordPoint(x, y + 1))
+            bool hasDown = (m_geo->is_onboard(x, y + 1)
                             && points.contains(m_geo->get_point(x, y + 1)));
             Util::paintJunction(painter, m_variant, c, x * m_fieldWidth,
                                 y * m_fieldHeight, m_fieldWidth, m_fieldHeight,

@@ -561,18 +561,18 @@ void Board::write(ostream& out, bool mark_last_move) const
         if (n > 0)
             last_mv = get_move(n - 1);
     }
-    unsigned width = m_geo->get_width();
-    unsigned height = m_geo->get_height();
+    int width = m_geo->get_width();
+    int height = m_geo->get_height();
     bool is_info_location_right = (width <= 20);
     bool is_trigon = (m_piece_set == PieceSet::trigon);
     bool is_nexos = (m_piece_set == PieceSet::nexos);
     bool is_gembloq = (m_piece_set == PieceSet::gembloq);
-    for (unsigned y = 0; y < height; ++y)
+    for (int y = 0; y < height; ++y)
     {
         if (height - y < 10)
             out << ' ';
         out << (height - y) << ' ';
-        for (unsigned x = 0; x < width; ++x)
+        for (int x = 0; x < width; ++x)
         {
             Point p = m_geo->get_point(x, y);
             bool is_offboard = p.is_null();
@@ -587,7 +587,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                 // space to mark the last piece played.
                 if (! last_mv.is_null()
                         && get_move_points(last_mv.move).contains(p)
-                        && (x == 0 || ! m_geo->is_onboard(x - 1, y)
+                        && (! m_geo->is_onboard(x - 1, y)
                             || get_point_state(m_geo->get_point(x - 1, y))
                                != last_mv.color))
                 {
@@ -596,7 +596,7 @@ void Board::write(ostream& out, bool mark_last_move) const
                     last_mv = ColorMove::null();
                 }
                 else if (! last_mv.is_null()
-                         && x > 0 && m_geo->is_onboard(x - 1, y)
+                         && m_geo->is_onboard(x - 1, y)
                          && get_move_points(last_mv.move).contains(
                                                    m_geo->get_point(x - 1, y))
                          && get_point_state(p) != last_mv.color
@@ -628,12 +628,12 @@ void Board::write(ostream& out, bool mark_last_move) const
             }
             if (is_offboard)
             {
-                if (is_trigon && x > 0 && m_geo->is_onboard(x - 1, y))
+                if (is_trigon && m_geo->is_onboard(x - 1, y))
                 {
                     set_color(out, "\x1B[1;30;47m");
                     out << (point_type == 1 ? '\\' : '/');
                 }
-                else if (is_gembloq && x > 0 && m_geo->is_onboard(x - 1, y))
+                else if (is_gembloq && m_geo->is_onboard(x - 1, y))
                 {
                     set_color(out, "\x1B[1;30;47m");
                     if (point_type == 1)

@@ -159,7 +159,7 @@ GameMove* GameModel::addEmpty(const QPoint& pos)
         return nullptr;
     auto x = static_cast<unsigned>(pos.x());
     auto y = static_cast<unsigned>(pos.y());
-    if (! geo.is_onboard(CoordPoint(x, y)))
+    if (! geo.is_onboard(x, y))
         return nullptr;
     auto p = geo.get_point(x, y);
     auto s = bd.get_point_state(p);
@@ -419,7 +419,7 @@ bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
     {
         int x = p.x + offX;
         int y = p.y + offY;
-        if (! geo.is_onboard(CoordPoint(x, y)))
+        if (! geo.is_onboard(x, y))
             return false;
         points.push_back(geo.get_point(x, y));
     }
