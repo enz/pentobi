@@ -33,7 +33,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_piece_played_twice)
     reader.read(in);
     unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     PentobiTree tree(root);
-    unique_ptr<Board> bd(new Board(tree.get_variant()));
+    auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
     auto& node = get_last_node(tree.get_root());
     LIBBOARDGAME_CHECK_THROW(updater.update(*bd, tree, node), runtime_error);
@@ -49,7 +49,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup)
     reader.read(in);
     unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     PentobiTree tree(root);
-    unique_ptr<Board> bd(new Board(tree.get_variant()));
+    auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
     updater.update(*bd, tree, tree.get_root());
     LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_moves(), 0u);
@@ -68,7 +68,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_inner_node)
     reader.read(in);
     unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     PentobiTree tree(root);
-    unique_ptr<Board> bd(new Board(tree.get_variant()));
+    auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
     auto& node = get_last_node(tree.get_root());
     updater.update(*bd, tree, node);
@@ -90,7 +90,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty)
     reader.read(in);
     unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     PentobiTree tree(root);
-    unique_ptr<Board> bd(new Board(tree.get_variant()));
+    auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
     auto& node = get_last_node(tree.get_root());
     updater.update(*bd, tree, node);

@@ -863,7 +863,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     switch (piece_set)
     {
     case PieceSet::classic:
-        m_transforms.reset(new PieceTransformsClassic);
+        m_transforms = make_unique<PieceTransformsClassic>();
         m_pieces = create_pieces_classic(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 5;
         m_max_adj_attach = 16;
@@ -871,7 +871,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<16>)));
         break;
     case PieceSet::junior:
-        m_transforms.reset(new PieceTransformsClassic);
+        m_transforms = make_unique<PieceTransformsClassic>();
         m_pieces = create_pieces_junior(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 5;
         m_max_adj_attach = 16;
@@ -879,7 +879,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<16>)));
         break;
     case PieceSet::trigon:
-        m_transforms.reset(new PieceTransformsTrigon);
+        m_transforms = make_unique<PieceTransformsTrigon>();
         m_pieces = create_pieces_trigon(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 6;
         m_max_adj_attach = 22;
@@ -887,7 +887,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<22>)));
         break;
     case PieceSet::nexos:
-        m_transforms.reset(new PieceTransformsClassic);
+        m_transforms = make_unique<PieceTransformsClassic>();
         m_pieces = create_pieces_nexos(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 7;
         m_max_adj_attach = 12;
@@ -895,7 +895,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<12>)));
         break;
     case PieceSet::callisto:
-        m_transforms.reset(new PieceTransformsClassic);
+        m_transforms = make_unique<PieceTransformsClassic>();
         m_pieces = create_pieces_callisto(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 5;
         // m_max_adj_attach is actually 10 in Callisto, but we care more about
@@ -907,7 +907,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<16>)));
         break;
     case PieceSet::gembloq:
-        m_transforms.reset(new PieceTransformsGembloQ);
+        m_transforms = make_unique<PieceTransformsGembloQ>();
         m_pieces = create_pieces_gembloq(m_geo, piece_set, *m_transforms);
         m_max_piece_size = 22;
         m_max_adj_attach = 44;
@@ -915,7 +915,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         m_move_info_ext.reset(calloc(m_range, sizeof(MoveInfoExt<44>)));
         break;
     }
-    m_move_info_ext_2.reset(new MoveInfoExt2[m_range]);
+    m_move_info_ext_2 = make_unique<MoveInfoExt2[]>(m_range);
     m_nu_pieces = static_cast<Piece::IntType>(m_pieces.size());
     for (Point p : m_geo)
         if (has_adj_status_points(p))

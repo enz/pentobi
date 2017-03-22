@@ -105,7 +105,7 @@ bool SgfTree::has_variations() const
 
 void SgfTree::init()
 {
-    unique_ptr<SgfNode> root(new SgfNode);
+    auto root = make_unique<SgfNode>();
     m_root = move(root);
     m_modified = false;
 }

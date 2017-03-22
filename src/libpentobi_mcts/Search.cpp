@@ -53,7 +53,7 @@ bool Search::check_followup(ArrayList<Move, max_moves>& sequence)
 
 unique_ptr<State> Search::create_state()
 {
-    return unique_ptr<State>(new State(m_variant, m_shared_const));
+    return make_unique<State>(m_variant, m_shared_const);
 }
 
 void Search::get_root_position(Variant& variant, Setup& setup) const

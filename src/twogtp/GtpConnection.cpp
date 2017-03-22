@@ -87,8 +87,8 @@ GtpConnection::GtpConnection(const string& command)
     {
         close(fd1[0]);
         close(fd2[1]);
-        m_in.reset(new FdInStream(fd2[0]));
-        m_out.reset(new FdOutStream(fd1[1]));
+        m_in  = make_unique<FdInStream>(fd2[0]);
+        m_out = make_unique<FdOutStream>(fd1[1]);
         return;
     }
     else // Child

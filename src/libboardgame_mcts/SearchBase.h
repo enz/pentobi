@@ -787,7 +787,7 @@ void SearchBase<S, M, R>::create_threads()
                           bind(&SearchBase::search_loop, this, placeholders::_1));
     for (unsigned i = 0; i < m_nu_threads; ++i)
     {
-        unique_ptr<Thread> t(new Thread(search_func));
+        auto t = make_unique<Thread>(search_func);
         auto& thread_state = t->thread_state;
         thread_state.thread_id = i;
         thread_state.state = create_state();

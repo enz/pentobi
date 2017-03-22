@@ -138,8 +138,7 @@ public:
     const DiagList& get_diag(Point p) const;
 
 protected:
-    explicit Geometry(unique_ptr<StringRep> string_rep =
-                          unique_ptr<StringRep>(new StdStringRep));
+    explicit Geometry(unique_ptr<StringRep> string_rep = make_unique<StdStringRep>());
 
     /** Initialize.
         Subclasses must call this function in their constructors. */

@@ -193,7 +193,7 @@ void PentobiTree::keep_only_subtree(const SgfNode& node)
     }
     if (create_new_setup)
     {
-        unique_ptr<Board> bd(new Board(m_variant));
+        auto bd = make_unique<Board>(m_variant);
         BoardUpdater updater;
         updater.update(*bd, *this, node);
         Setup setup;

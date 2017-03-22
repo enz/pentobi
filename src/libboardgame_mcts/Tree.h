@@ -289,8 +289,8 @@ Tree<N>::Tree(size_t memory, unsigned nu_threads)
         min(max_nodes, static_cast<size_t>(numeric_limits<NodeIdx>::max()));
     m_nu_threads = nu_threads;
     m_max_nodes = max_nodes;
-    m_nodes.reset(new Node[max_nodes]);
-    m_thread_storage.reset(new ThreadStorage[nu_threads]);
+    m_nodes = make_unique<Node[]>(max_nodes);
+    m_thread_storage = make_unique<ThreadStorage[]>(nu_threads);
     m_nodes_per_thread = max_nodes / nu_threads;
     for (unsigned i = 0; i < nu_threads; ++i)
     {

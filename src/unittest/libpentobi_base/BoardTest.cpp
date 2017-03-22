@@ -74,7 +74,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_classic_2)
       ;1[i10]
       )
     */
-    unique_ptr<Board> bd(new Board(Variant::classic_2));
+    auto bd = make_unique<Board>(Variant::classic_2);
     play(*bd, Color(0), "a20,b20,c20,d20,e20");
     play(*bd, Color(1), "q20,r20,s20,t20");
     play(*bd, Color(2), "p1,q1,r1,s1,t1");
@@ -129,9 +129,9 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_classic_2)
 
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_classic_initial)
 {
-    unique_ptr<Board> bd(new Board(Variant::classic));
-    unique_ptr<MoveList> moves(new MoveList);
-    unique_ptr<MoveMarker> marker(new MoveMarker);
+    auto bd = make_unique<Board>(Variant::classic);
+    auto moves = make_unique<MoveList>();
+    auto marker = make_unique<MoveMarker>();
     bd->gen_moves(Color(0), *marker, *moves);
     LIBBOARDGAME_CHECK_EQUAL(moves->size(), 58u);
 }
@@ -140,7 +140,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_classic_initial)
     a higher score but color 1 has less points than color 2. */
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_get_place)
 {
-    unique_ptr<Board> bd(new Board(Variant::classic_2));
+    auto bd = make_unique<Board>(Variant::classic_2);
     play(*bd, Color(0), "a20,b20");
     play(*bd, Color(1), "r20,s20,t20");
     play(*bd, Color(2), "q1,r1,s1,t1");

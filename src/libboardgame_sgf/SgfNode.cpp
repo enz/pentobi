@@ -37,7 +37,7 @@ void SgfNode::append(unique_ptr<SgfNode> node)
 
 SgfNode& SgfNode::create_new_child()
 {
-    unique_ptr<SgfNode> node(new SgfNode);
+    auto node = make_unique<SgfNode>();
     node->m_parent = this;
     SgfNode& result = *(node.get());
     auto last_child = get_last_child();

@@ -52,13 +52,12 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
     reader.read(in);
     unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     PentobiTree tree(root);
-    unique_ptr<Board> bd(new Board(tree.get_variant()));
+    auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
     updater.update(*bd, tree, get_last_node(tree.get_root()));
     unsigned nu_threads = 1;
     size_t memory = 10000;
-    unique_ptr<Search> search(new Search(bd->get_variant(), nu_threads,
-                                         memory));
+    auto search = make_unique<Search>(bd->get_variant(), nu_threads, memory);
     Float max_count = 1;
     size_t min_simulations = 1;
     double max_time = 0;
@@ -93,13 +92,12 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_callisto_useless_one_piece)
     reader.read(in);
     unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
     PentobiTree tree(root);
-    unique_ptr<Board> bd(new Board(tree.get_variant()));
+    auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
     updater.update(*bd, tree, get_last_node(tree.get_root()));
     unsigned nu_threads = 1;
     size_t memory = 10000;
-    unique_ptr<Search> search(new Search(bd->get_variant(), nu_threads,
-                                         memory));
+    auto search = make_unique<Search>(bd->get_variant(), nu_threads, memory);
     Float max_count = 1;
     size_t min_simulations = 1;
     double max_time = 0;
