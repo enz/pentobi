@@ -19,7 +19,6 @@
 
 using namespace std;
 using libboardgame_base::Transform;
-using libboardgame_util::ArrayList;
 using libpentobi_base::Color;
 using libpentobi_base::Board;
 using libpentobi_base::Piece;

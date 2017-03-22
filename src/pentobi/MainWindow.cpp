@@ -73,7 +73,6 @@ using libboardgame_util::clear_abort;
 using libboardgame_util::get_abort;
 using libboardgame_util::set_abort;
 using libboardgame_util::trim_right;
-using libboardgame_util::ArrayList;
 using libpentobi_base::BoardType;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;

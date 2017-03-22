@@ -18,6 +18,7 @@
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::TreeWriter;
+using libboardgame_util::ArrayList;
 using libpentobi_base::get_transforms;
 using libpentobi_base::ColorMove;
 using libpentobi_base::MovePoints;

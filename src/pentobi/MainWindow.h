@@ -38,7 +38,6 @@ class ScoreDisplay;
 using namespace std;
 using libboardgame_sgf::SgfNode;
 using libboardgame_base::Transform;
-using libboardgame_util::ArrayList;
 using libboardgame_util::RandomGenerator;
 using libpentobi_base::Board;
 using libpentobi_base::ColorMap;

@@ -13,7 +13,6 @@
 
 using namespace std;
 using libboardgame_base::PointTransform;
-using libboardgame_util::ArrayList;
 using libpentobi_base::Board;
 using libpentobi_base::Color;
 using libpentobi_base::Move;
