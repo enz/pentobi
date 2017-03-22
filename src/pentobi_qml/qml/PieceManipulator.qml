@@ -45,7 +45,7 @@ Item {
                 horizontalCenter: dragArea.horizontalCenter
             }
             width: 0.2 * root.width; height: width
-            onClicked: pieceModel.flipAcrossX()
+            onClicked: pieceModel.rotateRight()
         }
         MouseArea {
             anchors {
@@ -53,7 +53,7 @@ Item {
                 verticalCenter: dragArea.verticalCenter
             }
             width: 0.2 * root.width; height: width
-            onClicked: pieceModel.rotateRight()
+            onClicked: pieceModel.flipAcrossX()
         }
         MouseArea {
             anchors {
