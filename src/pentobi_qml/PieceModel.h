@@ -11,7 +11,12 @@
 #include <QPointF>
 #include <QVariant>
 #include <QVector>
-#include "libpentobi_base/Board.h"
+#include "libpentobi_base/Color.h"
+#include "libpentobi_base/Piece.h"
+#include "libpentobi_base/PieceInfo.h"
+
+namespace libboardgame_base { class Transform; }
+namespace libpentobi_base { class Board; }
 
 using libboardgame_base::Transform;
 using libpentobi_base::Board;

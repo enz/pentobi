@@ -8,13 +8,17 @@
 #define PENTOBI_QML_PLAYER_MODEL_H
 
 #include <QFutureWatcher>
-#include "GameModel.h"
 #include "libpentobi_mcts/Player.h"
 
+class GameModel;
+class GameMove;
+
 using namespace std;
+using libpentobi_base::Color;
+using libpentobi_base::Move;
+using libpentobi_base::Variant;
 using libpentobi_mcts::Player;
 using libpentobi_mcts::Search;
-using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
