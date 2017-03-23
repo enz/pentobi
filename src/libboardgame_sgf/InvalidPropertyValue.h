@@ -39,7 +39,7 @@ template<typename T>
 string InvalidPropertyValue::get_message(const string& id, const T& value)
 {
     ostringstream msg;
-    msg << "Invalid value '" << value << " for SGF property '" << id << "'";
+    msg << "Invalid value '" << value << "' for SGF property '" << id << "'";
     return msg.str();
 }
 
