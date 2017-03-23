@@ -612,8 +612,6 @@ private:
 
     void searchCallback(double elapsedSeconds, double remainingSeconds);
 
-    void setCommentText(const QString& text);
-
     void setVariant(Variant variant);
 
     void setPlayToolTip();

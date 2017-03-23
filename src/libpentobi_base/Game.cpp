@@ -180,7 +180,7 @@ void Game::truncate()
 
 void Game::undo()
 {
-    LIBBOARDGAME_ASSERT(! m_tree.get_move(*m_current).is_null());
+    LIBBOARDGAME_ASSERT(m_tree.has_move(*m_current));
     LIBBOARDGAME_ASSERT(m_current->has_parent());
     truncate();
 }

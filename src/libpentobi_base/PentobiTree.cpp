@@ -84,7 +84,7 @@ const SgfNode* PentobiTree::get_node_before_move_number(
     while (node->has_children())
     {
         auto& child = node->get_first_child();
-        if (! get_move(child).is_null() && n++ == move_number)
+        if (has_move(child) && n++ == move_number)
                 return node;
         node = &child;
     }

@@ -75,7 +75,7 @@ public:
     void goto_node(const SgfNode& node);
 
     /** Undo the current move and go to parent node.
-        @pre ! get_current().get_move().is_null()
+        @pre get_tree().has_move(get_current())
         @pre get_current()->has_parent()
         @note Even if the implementation of this function calls goto_node(),
         it cannot throw an InvalidPropertyValue because the class Game ensures
