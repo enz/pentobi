@@ -1,6 +1,11 @@
 Version 13.0.UNKNOWN (v13-fixes)
 ================================
 
+General:
+
+* Fixed crash after loading a SGF file with too many coordinates in a move.
+
+
 Desktop version:
 
 * Callisto: selected piece was wrongly rendered as one-piece in some
@@ -11,8 +16,6 @@ Desktop version:
 
 Version 13.0 (17 Mar 2017)
 ==========================
-
-General:
 
 * New game variant GembloQ.
 * New game subvariant Callisto Two-Player Four-Color.
