@@ -176,6 +176,8 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
                     // Pentobi.
                     continue;
             }
+            if (points.size() == points.max_size)
+                throw InvalidPropertyValue(id, p_str);
             points.push_back(p);
         }
     }
