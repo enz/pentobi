@@ -9,7 +9,8 @@
 
 #include "InvalidTree.h"
 
-#include "sstream"
+#include <string>
+#include <sstream>
 
 namespace libboardgame_sgf {
 
