@@ -18,6 +18,8 @@ namespace libboardgame_sgf {
 
 //-----------------------------------------------------------------------------
 
+//-----------------------------------------------------------------------------
+
 Property::~Property() = default;
 
 //-----------------------------------------------------------------------------
@@ -61,13 +63,12 @@ forward_list<Property>::const_iterator SgfNode::find_property(
                    [&](const Property& p) { return p.id == id; });
 }
 
-const vector<string> SgfNode::get_multi_property(const string& id) const
+const vector<string>& SgfNode::get_multi_property(const string& id) const
 {
     auto property = find_property(id);
     if (property == m_properties.end())
-        return vector<string>();
-    else
-        return property->values;
+        throw MissingProperty(id);
+    return property->values;
 }
 
 bool SgfNode::has_property(const string& id) const

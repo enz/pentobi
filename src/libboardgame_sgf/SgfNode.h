@@ -124,16 +124,15 @@ public:
     bool has_property(const string& id) const;
 
     /** Get a property.
-        @pre has_property(id) */
+        @throws MissingProperty if no such property */
     const string& get_property(const string& id) const;
 
     const string& get_property(const string& id,
                                const string& default_value) const;
 
-    const vector<string> get_multi_property(const string& id) const;
+    const vector<string>& get_multi_property(const string& id) const;
 
     /** Get property parsed as a type.
-        @pre has_property(id)
         @throws InvalidPropertyValue, MissingProperty */
     template<typename T>
     T parse_property(const string& id) const;

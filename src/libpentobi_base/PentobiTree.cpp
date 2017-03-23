@@ -119,10 +119,21 @@ string PentobiTree::get_player_name(Color c) const
 Setup::PlacementList PentobiTree::get_setup_property(const SgfNode& node,
                                                      const char* id) const
 {
-    vector<string> values = node.get_multi_property(id);
     Setup::PlacementList result;
-    for (const string& s : values)
-        result.push_back(m_bc->from_string(s));
+    if (node.has_property(id))
+        for (auto& s : node.get_multi_property(id))
+        {
+            if (result.size() == result.max_size)
+                throw InvalidPropertyValue(id, s);
+            try
+            {
+                result.push_back(m_bc->from_string(s));
+            }
+            catch (const runtime_error&)
+            {
+                throw InvalidPropertyValue(id, s);
+            }
+        }
     return result;
 }
 

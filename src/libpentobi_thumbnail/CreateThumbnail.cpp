@@ -33,8 +33,9 @@ void handleSetup(const char* id, Color c, const SgfNode& node,
                  const Geometry& geo, Grid<PointState>& pointState,
                  Grid<unsigned>& pieceId, unsigned& currentPieceId)
 {
-    vector<string> values = node.get_multi_property(id);
-    for (const string& s : values)
+    if (! node.has_property(id))
+        return;
+    for (auto& s : node.get_multi_property(id))
     {
         if (trim(s).empty())
             continue;
@@ -56,8 +57,9 @@ void handleSetup(const char* id, Color c, const SgfNode& node,
 void handleSetupEmpty(const SgfNode& node, const Geometry& geo,
                       Grid<PointState>& pointState, Grid<unsigned>& pieceId)
 {
-    vector<string> values = node.get_multi_property("AE");
-    for (const auto& s : values)
+    if (! node.has_property("AE"))
+        return;
+    for (auto& s : node.get_multi_property("AE"))
     {
         if (trim(s).empty())
             continue;
