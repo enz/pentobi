@@ -2827,17 +2827,6 @@ void MainWindow::selectPiece(Color c, Piece piece, const Transform* transform)
     m_actionClearPiece->setEnabled(true);
 }
 
-void MainWindow::setCommentText(const QString& text)
-{
-    m_ignoreCommentTextChanged = true;
-    m_comment->setPlainText(text);
-    m_ignoreCommentTextChanged = false;
-    if (! text.isEmpty())
-        m_comment->ensureCursorVisible();
-    m_comment->clearFocus();
-    updateWindow(false);
-}
-
 void MainWindow::setNoDelay()
 {
     m_noDelay = true;
@@ -3232,12 +3221,15 @@ void MainWindow::undo()
 void MainWindow::updateComment()
 {
     string comment = m_game.get_comment();
-    if (comment.empty())
-    {
-        setCommentText("");
-        return;
-    }
-    setCommentText(decode(comment));
+    QString text;
+    if (! comment.empty())
+        text = decode(comment);
+    m_ignoreCommentTextChanged = true;
+    m_comment->setPlainText(text);
+    m_ignoreCommentTextChanged = false;
+    if (! text.isEmpty())
+        m_comment->ensureCursorVisible();
+    m_comment->clearFocus();
 }
 
 void MainWindow::updateFlipActions()
