@@ -5,6 +5,8 @@ Desktop version:
 
 * Callisto: selected piece was wrongly rendered as one-piece in some
   situations if partially outside board.
+* Crash dialog instead of error dialog was shown in some situations
+  after loading a SGF file with invalid moves.
 
 
 Version 13.0 (17 Mar 2017)

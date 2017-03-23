@@ -118,14 +118,14 @@ bool hasCurrentVariationOtherMoves(const PentobiTree& tree,
     auto node = current.get_parent_or_null();
     while (node)
     {
-        if (! tree.get_move(*node).is_null())
+        if (tree.has_move(*node))
             return true;
         node = node->get_parent_or_null();
     }
     node = current.get_first_child_or_null();
     while (node)
     {
-        if (! tree.get_move(*node).is_null())
+        if (tree.has_move(*node))
             return true;
         node = node->get_first_child_or_null();
     }
