@@ -126,28 +126,40 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_keep_only_subtree_callisto)
 
     node = &tree.get_root();
     LIBBOARDGAME_CHECK(node->has_single_child());
-    auto values = node->get_multi_property("A1");
-    LIBBOARDGAME_CHECK_EQUAL(values.size(), 2u);
-    auto begin = values.begin();
-    auto end = values.end();
-    LIBBOARDGAME_CHECK(find(begin, end, "h12") != end);
-    LIBBOARDGAME_CHECK(find(begin, end, "i8") != end);
-    values = node->get_multi_property("A2");
-    LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
-    LIBBOARDGAME_CHECK_EQUAL(values[0], "m9");
-    values = node->get_multi_property("A3");
-    LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
-    LIBBOARDGAME_CHECK_EQUAL(values[0], "l8");
-    values = node->get_multi_property("A4");
-    LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
-    LIBBOARDGAME_CHECK_EQUAL(values[0], "i13");
-    auto value = node->get_property("PL");
-    LIBBOARDGAME_CHECK_EQUAL(value, "2");
+    {
+        auto& values = node->get_multi_property("A1");
+        LIBBOARDGAME_CHECK_EQUAL(values.size(), 2u);
+        auto begin = values.begin();
+        auto end = values.end();
+        LIBBOARDGAME_CHECK(find(begin, end, "h12") != end);
+        LIBBOARDGAME_CHECK(find(begin, end, "i8") != end);
+    }
+    {
+        auto& values = node->get_multi_property("A2");
+        LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
+        LIBBOARDGAME_CHECK_EQUAL(values[0], "m9");
+    }
+    {
+        auto& values = node->get_multi_property("A3");
+        LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
+        LIBBOARDGAME_CHECK_EQUAL(values[0], "l8");
+    }
+    {
+        auto& values = node->get_multi_property("A4");
+        LIBBOARDGAME_CHECK_EQUAL(values.size(), 1u);
+        LIBBOARDGAME_CHECK_EQUAL(values[0], "i13");
+    }
+    {
+        auto& value = node->get_property("PL");
+        LIBBOARDGAME_CHECK_EQUAL(value, "2");
 
-    node = &node->get_first_child();
-    LIBBOARDGAME_CHECK(! node->has_children());
-    value = node->get_property("2");
-    LIBBOARDGAME_CHECK_EQUAL(value, "p14");
+        node = &node->get_first_child();
+        LIBBOARDGAME_CHECK(! node->has_children());
+    }
+    {
+        auto& value = node->get_property("2");
+        LIBBOARDGAME_CHECK_EQUAL(value, "p14");
+    }
 }
 
 /** Check that keep_only_subtree() works in Nexos.

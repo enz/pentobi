@@ -9,7 +9,8 @@ Version 13.0.UNKNOWN (v13-fixes)
 
 General:
 
-* Fixed crash after loading a SGF file with too many coordinates in a move.
+* Fixed crash after loading a SGF file with too many coordinates in
+  a move or too many pieces in a setup.
 
 
 Desktop version:

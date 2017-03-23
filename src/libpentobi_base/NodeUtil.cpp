@@ -149,15 +149,13 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
     }
     if (id.empty() || c.to_int() >= nu_colors)
         return false;
-    vector<string> values;
-    values = node.get_multi_property(id);
     // Note: we still support having the points of a move in a list of point
     // values instead of a single value as used by Pentobi <= 0.2, but it
     // is deprecated
     points.clear();
     auto& geo = get_geometry(variant);
     bool is_nexos = (get_board_type(variant) == BoardType::nexos);
-    for (const auto& s : values)
+    for (auto& s : node.get_multi_property(id))
     {
         if (trim(s).empty())
             continue;

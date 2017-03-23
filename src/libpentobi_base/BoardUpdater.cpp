@@ -36,8 +36,7 @@ void handle_setup_property(const SgfNode& node, const char* id, Color c,
 {
     if (! node.has_property(id))
         return;
-    vector<string> values = node.get_multi_property(id);
-    for (const string& s : values)
+    for (auto& s : node.get_multi_property(id))
     {
         Move mv;
         try
@@ -61,8 +60,7 @@ void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
 {
     if (! node.has_property("AE"))
         return;
-    vector<string> values = node.get_multi_property("AE");
-    for (const string& s : values)
+    for (auto& s : node.get_multi_property("AE"))
     {
         Move mv;
         try
