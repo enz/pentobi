@@ -22,13 +22,11 @@ using libboardgame_util::ArrayList;
 
 /** %Geometry data of a board with a given size.
     This class is a base class that uses virtual functions in its constructor
-    that allow to restrict the shape of the board to a subset of the rectangle
+    that can restrict the shape of the board to a subset of the rectangle
     and/or to define different definitions of adjacent and diagonal neighbors
-    of a point for geometries that are not a regular rectangular grid.
+    of a point for geometries that are not rectangular grids.
     @tparam P An instantiation of libboardgame_base::Point (or compatible
-    class)
-    @tparam S A class with functions to convert points from and to strings
-    depending on the string representation of points in the game. */
+    class) */
 template<class P>
 class Geometry
 {
