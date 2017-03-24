@@ -1144,21 +1144,12 @@ Move BoardConst::from_string(const string& s) const
     vector<string> v = split(trimmed, ',');
     if (v.size() > PieceInfo::max_size)
         throw runtime_error("illegal move (too many points)");
-    bool is_nexos = (m_board_type == BoardType::nexos);
     MovePoints points;
     for (const auto& s : v)
     {
         Point p;
         if (! m_geo.from_string(s, p))
             throw runtime_error("illegal move (invalid point)");
-        if (is_nexos)
-        {
-            auto point_type = m_geo.get_point_type(p);
-            if (point_type != 1 && point_type != 2)
-                // Silently discard points that are not line segments, such
-                // files were written by some (unreleased) versions of Pentobi.
-                continue;
-        }
         points.push_back(p);
     }
     Move mv;
