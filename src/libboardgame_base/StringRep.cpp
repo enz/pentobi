@@ -27,49 +27,46 @@ StringRep::~StringRep() = default;
 
 StdStringRep::~StdStringRep() = default;
 
-bool StdStringRep::read(istream& in, unsigned width, unsigned height,
-                        unsigned& x, unsigned& y) const
+bool StdStringRep::read(string::const_iterator begin,
+                        string::const_iterator end, unsigned width,
+                        unsigned height, unsigned& x, unsigned& y) const
 {
-    int c;
-    while (true)
-    {
-        c = in.peek();
-        if (c == EOF || ! isspace(c))
-            break;
-        in.get();
-    }
+    auto p = begin;
+    while (p != end && isspace(*p))
+        ++p;
     bool read_x = false;
     x = 0;
-    while (true)
+    int c;
+    while (p != end && isalpha(*p))
     {
-        c = in.peek();
-        if (c == EOF || ! isalpha(c))
-            break;
-        c = tolower(in.get());
+        c = tolower(*(p++));
         if (c < 'a' || c > 'z')
             return false;
         x = 26 * x + (c - 'a' + 1);
+        if (x > width)
+            return false;
         read_x = true;
     }
     if (! read_x)
         return false;
     --x;
-    if (x >= width)
-        return false;
-    c = in.peek();
-    if (c < '0' || c > '9')
-        return false;
-    in >> y;
-    if (! in || y > height + 1)
+    bool read_y = false;
+    y = 0;
+    while (p != end && isdigit(*p))
+    {
+        c = *(p++);
+        y = 10 * y + (c - '0');
+        if (y > height)
+            return false;
+        read_y = true;
+    }
+    if (! read_y)
         return false;
     y = height - y;
-    c = in.peek();
-    if (c == EOF)
-    {
-        in.clear();
-        return true;
-    }
-    return isspace(c);
+    while (p != end)
+        if (! isspace(*(p++)))
+            return false;
+    return true;
 }
 
 void StdStringRep::write(ostream& out, unsigned x, unsigned y, unsigned width,

@@ -156,15 +156,21 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
     auto& geo = get_geometry(variant);
     for (auto& s : node.get_multi_property(id))
     {
-        if (trim(s).empty())
-            continue;
-        vector<string> v = split(s, ',');
-        for (const auto& p_str : v)
+        auto begin = s.begin();
+        auto end = begin;
+        while (true)
         {
+            while (end != s.end() && *end != ',')
+                ++end;
             Point p;
-            if (! geo.from_string(p_str, p) || points.size() == points.max_size)
-                throw InvalidPropertyValue(id, p_str);
+            if (! geo.from_string(begin, end, p)
+                    || points.size() == points.max_size)
+                throw InvalidPropertyValue(id, string(begin, end));
             points.push_back(p);
+            if (end == s.end())
+                break;
+            ++end;
+            begin = end;
         }
     }
     return true;

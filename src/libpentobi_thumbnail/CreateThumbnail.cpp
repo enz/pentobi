@@ -37,18 +37,22 @@ void handleSetup(const char* id, Color c, const SgfNode& node,
         return;
     for (auto& s : node.get_multi_property(id))
     {
-        if (trim(s).empty())
-            continue;
-        vector<string> v = split(s, ',');
-        ++currentPieceId;
-        for (const string& p_str : v)
+        auto begin = s.begin();
+        auto end = begin;
+        while (true)
         {
+            while (end != s.end() && *end != ',')
+                ++end;
             Point p;
-            if (geo.from_string(p_str, p))
+            if (geo.from_string(begin, end, p))
             {
                 pointState[p] = PointState(c);
                 pieceId[p] = currentPieceId;
             }
+            if (end == s.end())
+                break;
+            ++end;
+            begin = end;
         }
     }
 }
@@ -61,17 +65,22 @@ void handleSetupEmpty(const SgfNode& node, const Geometry& geo,
         return;
     for (auto& s : node.get_multi_property("AE"))
     {
-        if (trim(s).empty())
-            continue;
-        vector<string> v = split(s, ',');
-        for (const auto& p_str : v)
+        auto begin = s.begin();
+        auto end = begin;
+        while (true)
         {
+            while (end != s.end() && *end != ',')
+                ++end;
             Point p;
-            if (geo.from_string(p_str, p))
+            if (geo.from_string(begin, end, p))
             {
                 pointState[p] = PointState::empty();
                 pieceId[p] = 0;
             }
+            if (end == s.end())
+                break;
+            ++end;
+            begin = end;
         }
     }
 }

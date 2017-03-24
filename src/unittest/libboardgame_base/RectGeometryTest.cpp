@@ -23,6 +23,17 @@ typedef libboardgame_base::ArrayList<Point, Point::range_onboard> PointList;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+bool from_string(const string& s, const Geometry& geo, Point& p)
+{
+    return geo.from_string(s.begin(), s.end(), p);
+}
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_iterate)
 {
     auto& geo = RectGeometry::get(3, 3);
@@ -63,20 +74,20 @@ LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_from_string)
     auto& geo = RectGeometry::get(19, 19);
     Point p;
 
-    LIBBOARDGAME_CHECK(geo.from_string("a1", p));
+    LIBBOARDGAME_CHECK(from_string("a1", geo, p));
     LIBBOARDGAME_CHECK(p == geo.get_point(0, 18));
 
-    LIBBOARDGAME_CHECK(geo.from_string("a19", p));
+    LIBBOARDGAME_CHECK(from_string("a19", geo, p));
     LIBBOARDGAME_CHECK(p == geo.get_point(0, 0));
 
-    LIBBOARDGAME_CHECK(geo.from_string("A1", p));
+    LIBBOARDGAME_CHECK(from_string("A1", geo, p));
     LIBBOARDGAME_CHECK(p == geo.get_point(0, 18));
 
-    LIBBOARDGAME_CHECK(! geo.from_string("foobar", p));
-    LIBBOARDGAME_CHECK(! geo.from_string("a123", p));
-    LIBBOARDGAME_CHECK(! geo.from_string("a56", p));
-    LIBBOARDGAME_CHECK(! geo.from_string("aa1", p));
-    LIBBOARDGAME_CHECK(! geo.from_string("c3#", p));
+    LIBBOARDGAME_CHECK(! from_string("foobar", geo, p));
+    LIBBOARDGAME_CHECK(! from_string("a123", geo, p));
+    LIBBOARDGAME_CHECK(! from_string("a56", geo, p));
+    LIBBOARDGAME_CHECK(! from_string("aa1", geo, p));
+    LIBBOARDGAME_CHECK(! from_string("c3#", geo, p));
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_to_string)

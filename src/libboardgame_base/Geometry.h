@@ -129,7 +129,8 @@ public:
 
     unsigned get_y(Point p) const;
 
-    bool from_string(const string& s, Point& p) const;
+    bool from_string(string::const_iterator begin, string::const_iterator end,
+                     Point& p) const;
 
     const string& to_string(Point p) const;
 
@@ -189,17 +190,16 @@ template<class P>
 Geometry<P>::~Geometry() = default;
 
 template<class P>
-bool Geometry<P>::from_string(const string& s, Point& p) const
+bool Geometry<P>::from_string(string::const_iterator begin,
+                              string::const_iterator end, Point& p) const
 {
-    istringstream in(s);
     unsigned x;
     unsigned y;
-    if (m_string_rep->read(in, m_width, m_height, x, y) && is_onboard(x, y))
-    {
-        p = get_point(x, y);
-        return true;
-    }
-    return false;
+    if (! m_string_rep->read(begin, end, m_width, m_height, x, y)
+            || ! is_onboard(x, y))
+        return false;
+    p = get_point(x, y);
+    return true;
 }
 
 template<class P>

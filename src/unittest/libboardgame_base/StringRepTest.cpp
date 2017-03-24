@@ -24,8 +24,7 @@ StdStringRep string_rep;
 bool read(const string& s, unsigned& x, unsigned& y, unsigned width,
           unsigned height)
 {
-    istringstream in(s);
-    return string_rep.read(in, width, height, x, y);
+    return string_rep.read(s.begin(), s.end(), width, height, x, y);
 }
 
 string write(unsigned x, unsigned y, unsigned width, unsigned height)

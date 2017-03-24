@@ -1138,19 +1138,23 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
 
 Move BoardConst::from_string(const string& s) const
 {
-    string trimmed = to_lower(trim(s));
-    if (trimmed == "null")
-        return Move::null();
-    vector<string> v = split(trimmed, ',');
-    if (v.size() > PieceInfo::max_size)
-        throw runtime_error("illegal move (too many points)");
     MovePoints points;
-    for (const auto& s : v)
+    auto begin = s.begin();
+    auto end = begin;
+    while (true)
     {
+        while (end != s.end() && *end != ',')
+            ++end;
         Point p;
-        if (! m_geo.from_string(s, p))
+        if (! m_geo.from_string(begin, end, p))
             throw runtime_error("illegal move (invalid point)");
+        if (points.size() == points.max_size)
+            throw runtime_error("illegal move (too many points)");
         points.push_back(p);
+        if (end == s.end())
+            break;
+        ++end;
+        begin = end;
     }
     Move mv;
     if (! find_move(points, mv))

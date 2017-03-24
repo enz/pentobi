@@ -8,6 +8,7 @@
 #define LIBBOARDGAME_BASE_STRING_REP_H
 
 #include <iosfwd>
+#include <string>
 
 namespace libboardgame_base {
 
@@ -20,8 +21,9 @@ struct StringRep
 {
     virtual ~StringRep();
 
-    virtual bool read(istream& in, unsigned width, unsigned height,
-                      unsigned& x, unsigned& y) const = 0;
+    virtual bool read(string::const_iterator begin, string::const_iterator end,
+                      unsigned width, unsigned height, unsigned& x,
+                      unsigned& y) const = 0;
 
     virtual void write(ostream& out, unsigned x, unsigned y, unsigned width,
                        unsigned height) const = 0;
@@ -41,7 +43,8 @@ struct StdStringRep
 {
     ~StdStringRep();
 
-    bool read(istream& in, unsigned width, unsigned height, unsigned& x,
+    bool read(string::const_iterator begin, string::const_iterator end,
+              unsigned width, unsigned height, unsigned& x,
               unsigned& y) const override;
 
     void write(ostream& out, unsigned x, unsigned y, unsigned width,
