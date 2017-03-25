@@ -201,7 +201,13 @@ void GameModel::addSetup(PieceModel* pieceModel, QPointF coord)
     preparePieceGameCoord(pieceModel, mv);
     pieceModel->setIsPlayed(true);
     preparePieceTransform(pieceModel, mv);
-    m_game.add_setup(c, mv);
+    try
+    {
+        m_game.add_setup(c, mv);
+    }
+    catch (const InvalidTree&)
+    {
+    }
     setSetupPlayer();
     updateProperties();
 }
