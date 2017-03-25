@@ -170,7 +170,7 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
     return true;
 }
 
-bool get_player(const SgfNode& node, Color& c)
+bool get_player(const SgfNode& node, Color::IntType nu_colors, Color& c)
 {
     if (! node.has_property("PL"))
         return false;
@@ -179,12 +179,12 @@ bool get_player(const SgfNode& node, Color& c)
         c = Color(0);
     else if (value == "W" || value == "2")
         c = Color(1);
-    else if (value == "3")
+    else if (value == "3" && nu_colors > 2)
         c = Color(2);
-    else if (value == "4")
+    else if (value == "4" && nu_colors > 3)
         c = Color(3);
     else
-        throw InvalidTree("invalid value for PL property");
+        return false;
     return true;
 }
 
