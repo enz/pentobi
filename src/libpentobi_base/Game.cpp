@@ -64,7 +64,7 @@ Color Game::get_to_play_default(const Game& game)
             break;
         }
         Color c;
-        if (libpentobi_base::node_util::get_player(*node, c))
+        if (libpentobi_base::node_util::get_player(*node, bd.get_nu_colors(), c))
             return c;
         node = node->get_parent_or_null();
     }

@@ -9,16 +9,19 @@ Version 13.0.UNKNOWN (v13-fixes)
 
 General:
 
-* Fixed crash after loading a SGF file with too many coordinates in
-  a move or too many pieces in a setup.
+* Fixed some crashes that could be triggered by SGF files with
+  semantic errors.
 
 
 Desktop version:
 
 * Callisto: selected piece was wrongly rendered as one-piece in some
   situations if partially outside board.
-* Crash dialog instead of error dialog was shown in some situations
-  after loading a SGF file with invalid moves.
+
+Android version:
+
+* Displayed game variant was not changed when loading a file of a
+  different game variant that contained semantic SGF errors.
 
 
 Version 13.0 (17 Mar 2017)

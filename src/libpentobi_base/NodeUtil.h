@@ -35,7 +35,7 @@ bool has_move(const SgfNode& node, Variant variant);
 bool has_setup(const SgfNode& node);
 
 /** Get the color to play in a setup position (PL property). */
-bool get_player(const SgfNode& node, Color& c);
+bool get_player(const SgfNode& node, Color::IntType nu_colors, Color& c);
 
 //-----------------------------------------------------------------------------
 
