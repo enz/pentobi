@@ -262,6 +262,10 @@
         <source>Invalid Blokus SGF file. (%1)</source>
         <translation>Ungültige Blokus-SGF-Datei. (%1)</translation>
     </message>
+    <message>
+        <source>File has unsupported character set.</source>
+        <translation>Datei hat nicht unterstützten Zeichensatz.</translation>
+    </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>

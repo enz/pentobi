@@ -205,7 +205,7 @@ void GameModel::addSetup(PieceModel* pieceModel, QPointF coord)
     {
         m_game.add_setup(c, mv);
     }
-    catch (const InvalidTree&)
+    catch (const SgfError&)
     {
     }
     setSetupPlayer();
@@ -855,10 +855,12 @@ bool GameModel::openStream(istream& in)
         m_textCodec = QTextCodec::codecForName(m_game.get_charset().c_str());
     if (! m_textCodec)
     {
-        qWarning() << "GameModel: unknown codec '"
-                   << QString::fromLocal8Bit(charSet.c_str()) << "'";
         m_textCodec = QTextCodec::codecForName("ISO 8859-1");
+        m_lastInputOutputError = QString(tr("File has unsupported character set."));
+        result = false;
     }
+    if (! result)
+        m_game.init();
     auto variant = to_string_id(m_game.get_variant());
     if (variant != m_gameVariant)
         initGameVariant(m_game.get_variant());

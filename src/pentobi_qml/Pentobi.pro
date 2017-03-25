@@ -46,8 +46,8 @@ SOURCES += \
     ../libboardgame_util/Timer.cpp \
     ../libboardgame_util/TimeSource.cpp \
     ../libboardgame_util/WallTimeSource.cpp \
-    ../libboardgame_sgf/MissingProperty.cpp \
     ../libboardgame_sgf/Reader.cpp \
+    ../libboardgame_sgf/SgfError.cpp \
     ../libboardgame_sgf/SgfNode.cpp \
     ../libboardgame_sgf/SgfTree.cpp \
     ../libboardgame_sgf/SgfUtil.cpp \
