@@ -19,8 +19,8 @@ add_library(pentobi_kde_thumbnailer STATIC
   ../libboardgame_util/Log.cpp
   ../libboardgame_util/StringUtil.cpp
   ../libboardgame_base/StringRep.cpp
-  ../libboardgame_sgf/MissingProperty.cpp
   ../libboardgame_sgf/Reader.cpp
+  ../libboardgame_sgf/SgfError.cpp
   ../libboardgame_sgf/SgfNode.cpp
   ../libboardgame_sgf/SgfTree.cpp
   ../libboardgame_sgf/TreeReader.cpp

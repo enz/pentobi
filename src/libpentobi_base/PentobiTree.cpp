@@ -16,8 +16,8 @@
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::InvalidPropertyValue;
-using libboardgame_sgf::InvalidTree;
+using libboardgame_sgf::InvalidProperty;
+using libboardgame_sgf::SgfError;
 using libboardgame_util::to_string;
 using libpentobi_base::boardutil::get_current_position_as_setup;
 
@@ -72,7 +72,7 @@ ColorMove PentobiTree::get_move(const SgfNode& node) const
         return ColorMove::null();
     Move mv;
     if (! m_bc->find_move(points, mv))
-        throw InvalidTree("Tree contains illegal move");
+        throw SgfError("Tree contains illegal move");
     return ColorMove(c, mv);
 }
 
@@ -124,14 +124,14 @@ Setup::PlacementList PentobiTree::get_setup_property(const SgfNode& node,
         for (auto& s : node.get_multi_property(id))
         {
             if (result.size() == result.max_size)
-                throw InvalidPropertyValue(id, s);
+                throw InvalidProperty(id, s);
             try
             {
                 result.push_back(m_bc->from_string(s));
             }
             catch (const runtime_error&)
             {
-                throw InvalidPropertyValue(id, s);
+                throw InvalidProperty(id, s);
             }
         }
     return result;
@@ -142,7 +142,7 @@ Variant PentobiTree::get_variant(const SgfNode& root)
     string game = root.get_property("GM");
     Variant variant;
     if (! parse_variant(game, variant))
-        throw InvalidPropertyValue("GM", game);
+        throw InvalidProperty("GM", game);
     return variant;
 }
 

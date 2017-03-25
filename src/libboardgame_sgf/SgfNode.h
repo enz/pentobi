@@ -11,7 +11,7 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "InvalidPropertyValue.h"
+#include "SgfError.h"
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/StringUtil.h"
 
@@ -331,7 +331,7 @@ T SgfNode::parse_property(const string& id) const
     string value = get_property(id);
     T result;
     if (! from_string(value, result))
-        throw InvalidPropertyValue(id, value);
+        throw InvalidProperty(id, value);
     return result;
 }
 

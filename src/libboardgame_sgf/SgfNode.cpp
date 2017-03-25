@@ -11,7 +11,7 @@
 #include "SgfNode.h"
 
 #include <algorithm>
-#include "MissingProperty.h"
+#include "SgfError.h"
 #include "libboardgame_util/Assert.h"
 
 namespace libboardgame_sgf {

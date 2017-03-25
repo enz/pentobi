@@ -16,7 +16,7 @@
 
 namespace libpentobi_mcts {
 
-using libboardgame_sgf::InvalidTree;
+using libboardgame_sgf::SgfError;
 using libboardgame_sgf::SgfNode;
 using libboardgame_util::clear_abort;
 using libboardgame_util::get_abort;
@@ -89,7 +89,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                     m_moves.push_back(mv);
                     m_values.push_back(search.get_root_val().get_mean());
                 }
-                catch (const InvalidTree&)
+                catch (const SgfError&)
                 {
                     // BoardUpdater::update() can throw on invalid SGF tree
                     // read from external file. We simply abort the analysis.

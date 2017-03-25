@@ -16,7 +16,7 @@
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::InvalidTree;
+using libboardgame_sgf::SgfError;
 using libboardgame_sgf::util::get_path_from_root;
 using libpentobi_base::boardutil::get_current_position_as_setup;
 
@@ -45,11 +45,11 @@ void handle_setup_property(const SgfNode& node, const char* id, Color c,
         }
         catch (const runtime_error& e)
         {
-            throw InvalidTree(e.what());
+            throw SgfError(e.what());
         }
         Piece piece = bd.get_move_piece(mv);
         if (! pieces_left[c].remove(piece))
-            throw InvalidTree("piece played twice");
+            throw SgfError("piece played twice");
         setup.placements[c].push_back(mv);
     }
 }
@@ -69,7 +69,7 @@ void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
         }
         catch (const runtime_error& e)
         {
-            throw InvalidTree(e.what());
+            throw SgfError(e.what());
         }
         for (Color c : bd.get_colors())
         {
@@ -80,7 +80,7 @@ void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
                 pieces_left[c].push_back(piece);
                 break;
             }
-            throw InvalidTree("invalid value for AE property");
+            throw SgfError("invalid value for AE property");
         }
     }
 }
@@ -140,7 +140,7 @@ void BoardUpdater::update(Board& bd, const PentobiTree& tree,
         if (! mv.is_null())
         {
             if (! bd.is_piece_left(mv.color, bd.get_move_piece(mv.move)))
-                throw InvalidTree("piece played twice");
+                throw SgfError("piece played twice");
             bd.play(mv);
         }
     }

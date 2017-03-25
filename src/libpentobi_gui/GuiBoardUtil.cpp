@@ -17,7 +17,7 @@ namespace gui_board_util {
 
 using libpentobi_base::ColorMove;
 using libpentobi_base::PentobiTree;
-using libboardgame_sgf::InvalidTree;
+using libboardgame_sgf::SgfError;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::util::is_main_variation;
 using libboardgame_sgf::util::get_move_annotation;
@@ -110,7 +110,7 @@ void setMarkup(GuiBoard& guiBoard, const Game& game, unsigned markMovesBegin,
         }
         while (node);
     }
-    catch (const InvalidTree&)
+    catch (const SgfError&)
     {
     }
 }

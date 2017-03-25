@@ -24,7 +24,7 @@
 #include "libpentobi_base/TreeUtil.h"
 
 using namespace std;
-using libboardgame_sgf::InvalidTree;
+using libboardgame_sgf::SgfError;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::beginning_of_branch;
@@ -669,7 +669,7 @@ void GameModel::gotoNode(const SgfNode& node)
     {
         m_game.goto_node(node);
     }
-    catch (const InvalidTree&)
+    catch (const SgfError&)
     {
     }
     updateProperties();

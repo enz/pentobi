@@ -1,12 +1,13 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/InvalidTree.h
+/** @file libboardgame_sgf/SgfError.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_INVALID_TREE_H
-#define LIBBOARDGAME_SGF_INVALID_TREE_H
+#ifndef LIBBOARDGAME_SGF_ERROR_H
+#define LIBBOARDGAME_SGF_ERROR_H
 
+#include <sstream>
 #include <stdexcept>
 
 namespace libboardgame_sgf {
@@ -24,7 +25,7 @@ using namespace std;
     some variations. As a consequence, functions that use the tree may cause
     errors later (e.g. when trying to update the game state to a node in the
     tree). In this case, they should throw InvalidTree. */
-class InvalidTree
+class SgfError
     : public runtime_error
 {
     using runtime_error::runtime_error;
@@ -32,6 +33,45 @@ class InvalidTree
 
 //-----------------------------------------------------------------------------
 
+class MissingProperty
+    : public SgfError
+{
+public:
+    explicit MissingProperty(const string& message);
+
+    MissingProperty(const string& id, const string& message);
+};
+
+//-----------------------------------------------------------------------------
+
+class InvalidProperty
+    : public SgfError
+{
+public:
+    template<typename T>
+    InvalidProperty(const string& id, const T& value);
+
+private:
+    template<typename T>
+    static string get_message(const string& id, const T& value);
+};
+
+template<typename T>
+InvalidProperty::InvalidProperty(const string& id, const T& value)
+    : SgfError(get_message(id, value))
+{
+}
+
+template<typename T>
+string InvalidProperty::get_message(const string& id, const T& value)
+{
+    ostringstream msg;
+    msg << "Invalid value '" << value << "' for SGF property '" << id << "'";
+    return msg.str();
+}
+
+//-----------------------------------------------------------------------------
+
 } // namespace libboardgame_sgf
 
-#endif // LIBBOARDGAME_SGF_INVALID_TREE_H
+#endif // LIBBOARDGAME_SGF_ERROR_H

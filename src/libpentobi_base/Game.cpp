@@ -11,12 +11,12 @@
 #include "Game.h"
 
 #include "BoardUtil.h"
-#include "libboardgame_sgf/InvalidTree.h"
+#include "libboardgame_sgf/SgfError.h"
 #include "libboardgame_sgf/SgfUtil.h"
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::InvalidTree;
+using libboardgame_sgf::SgfError;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::is_main_variation;
 using libpentobi_base::boardutil::get_current_position_as_setup;
@@ -79,7 +79,7 @@ void Game::goto_node(const SgfNode& node)
     {
         update(node);
     }
-    catch (const InvalidTree&)
+    catch (const SgfError&)
     {
         // Try to restore the old state.
         if (! old)
@@ -90,7 +90,7 @@ void Game::goto_node(const SgfNode& node)
             {
                 update(*old);
             }
-            catch (const InvalidTree&)
+            catch (const SgfError&)
             {
             }
         }

@@ -1,10 +1,8 @@
 add_library(boardgame_sgf STATIC
-  InvalidPropertyValue.h
-  InvalidTree.h
-  MissingProperty.h
-  MissingProperty.cpp
   Reader.h
   Reader.cpp
+  SgfError.h
+  SgfError.cpp
   SgfNode.h
   SgfNode.cpp
   SgfTree.h

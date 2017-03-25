@@ -15,8 +15,8 @@
 namespace libpentobi_base {
 namespace node_util {
 
-using libboardgame_sgf::InvalidPropertyValue;
-using libboardgame_sgf::InvalidTree;
+using libboardgame_sgf::InvalidProperty;
+using libboardgame_sgf::SgfError;
 using libboardgame_util::split;
 using libboardgame_util::trim;
 
@@ -165,7 +165,7 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
             Point p;
             if (! geo.from_string(begin, end, p)
                     || points.size() == points.max_size)
-                throw InvalidPropertyValue(id, string(begin, end));
+                throw InvalidProperty(id, string(begin, end));
             points.push_back(p);
             if (end == s.end())
                 break;
@@ -190,7 +190,7 @@ bool get_player(const SgfNode& node, Color& c)
     else if (value == "4")
         c = Color(3);
     else
-        throw InvalidTree("invalid value for PL property");
+        throw SgfError("invalid value for PL property");
     return true;
 }
 

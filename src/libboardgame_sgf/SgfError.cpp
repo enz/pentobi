@@ -1,31 +1,29 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/MissingProperty.h
+/** @file libboardgame_sgf/SgfError.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_MISSING_PROPERTY_H
-#define LIBBOARDGAME_SGF_MISSING_PROPERTY_H
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
-#include "InvalidTree.h"
+#include "SgfError.h"
 
 namespace libboardgame_sgf {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
-class MissingProperty
-    : public InvalidTree
+MissingProperty::MissingProperty(const string& message)
+    : SgfError("Missing SGF property: " + message)
 {
-public:
-    explicit MissingProperty(const string& message);
+}
 
-    MissingProperty(const string& id, const string& message);
-};
+MissingProperty::MissingProperty(const string& id, const string& message)
+    : SgfError("Missing SGF property '" + id + ": " + message)
+{
+}
 
 //-----------------------------------------------------------------------------
 
 } // namespace libboardgame_sgf
-
-#endif // LIBBOARDGAME_SGF_MISSING_PROPERTY_H

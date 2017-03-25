@@ -8,14 +8,14 @@
 #include <config.h>
 #endif
 
-#include "libboardgame_sgf/MissingProperty.h"
+#include "libboardgame_sgf/SgfError.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_test/Test.h"
 #include "libpentobi_base/PentobiTree.h"
 
 using namespace std;
 using namespace libpentobi_base;
-using libboardgame_sgf::InvalidPropertyValue;
+using libboardgame_sgf::InvalidProperty;
 using libboardgame_sgf::MissingProperty;
 using libboardgame_sgf::TreeReader;
 
@@ -95,7 +95,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_invalid_game)
     TreeReader reader;
     reader.read(in);
     unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
-    LIBBOARDGAME_CHECK_THROW(PentobiTree tree(root), InvalidPropertyValue);
+    LIBBOARDGAME_CHECK_THROW(PentobiTree tree(root), InvalidProperty);
 }
 
 /** Check that keep_only_subtree() works in Callisto.

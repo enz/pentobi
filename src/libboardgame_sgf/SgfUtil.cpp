@@ -12,7 +12,7 @@
 
 #include <algorithm>
 #include <sstream>
-#include "InvalidPropertyValue.h"
+#include "SgfError.h"
 #include "TreeWriter.h"
 #include "libboardgame_util/StringUtil.h"
 
