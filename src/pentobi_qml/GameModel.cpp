@@ -826,6 +826,7 @@ void GameModel::newGame()
 
 bool GameModel::openStream(istream& in)
 {
+    bool result = true;
     try
     {
         TreeReader reader;
@@ -833,31 +834,31 @@ bool GameModel::openStream(istream& in)
         auto root = reader.get_tree_transfer_ownership();
         preparePositionChange();
         m_game.init(root);
-        auto charSet = m_game.get_charset();
-        if (charSet.empty())
-            m_textCodec = QTextCodec::codecForName("ISO 8859-1");
-        else
-            m_textCodec = QTextCodec::codecForName(m_game.get_charset().c_str());
-        if (! m_textCodec)
-        {
-            qWarning() << "GameModel: unknown codec '"
-                       << QString::fromLocal8Bit(charSet.c_str()) << "'";
-            m_textCodec = QTextCodec::codecForName("ISO 8859-1");
-        }
-        auto variant = to_string_id(m_game.get_variant());
-        if (variant != m_gameVariant)
-            initGameVariant(m_game.get_variant());
-        setIsModified(false);
-        updateGameInfo();
     }
     catch (const runtime_error& e)
     {
         m_lastInputOutputError =
                 QString(tr("Invalid Blokus SGF file. (%1)"))
                 .arg(QString::fromLocal8Bit(e.what()));
-        return false;
+        result = false;
     }
-    return true;
+    auto charSet = m_game.get_charset();
+    if (charSet.empty())
+        m_textCodec = QTextCodec::codecForName("ISO 8859-1");
+    else
+        m_textCodec = QTextCodec::codecForName(m_game.get_charset().c_str());
+    if (! m_textCodec)
+    {
+        qWarning() << "GameModel: unknown codec '"
+                   << QString::fromLocal8Bit(charSet.c_str()) << "'";
+        m_textCodec = QTextCodec::codecForName("ISO 8859-1");
+    }
+    auto variant = to_string_id(m_game.get_variant());
+    if (variant != m_gameVariant)
+        initGameVariant(m_game.get_variant());
+    setIsModified(false);
+    updateGameInfo();
+    return result;
 }
 
 bool GameModel::openFile(const QString& file)
