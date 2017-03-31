@@ -249,6 +249,7 @@ private:
 
     const PieceMap<bool>& get_is_piece_considered(Color c) const;
 
+    template<bool IS_CALLISTO>
     const Board::PiecesLeftList& get_pieces_considered(Color c);
 
     void init_gamma();
@@ -256,7 +257,7 @@ private:
     template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
     void init_moves_with_gamma(Color c);
 
-    template<unsigned MAX_SIZE>
+    template<unsigned MAX_SIZE, bool IS_CALLISTO>
     void init_moves_without_gamma(Color c);
 
     template<unsigned MAX_SIZE>

@@ -361,21 +361,24 @@ bool State::gen_children(Tree::NodeExpander& expander, Float root_val)
     Color to_play = m_bd.get_to_play();
     if (m_max_piece_size == 5)
     {
-        init_moves_without_gamma<5>(to_play);
+        if (m_is_callisto)
+            init_moves_without_gamma<5, true>(to_play);
+        else
+            init_moves_without_gamma<5, false>(to_play);
         return m_prior_knowledge.gen_children<5, 16>(m_bd, m_moves[to_play],
                                                      m_is_symmetry_broken,
                                                      expander, root_val);
     }
     else if (m_max_piece_size == 6)
     {
-        init_moves_without_gamma<6>(to_play);
+        init_moves_without_gamma<6, false>(to_play);
         return m_prior_knowledge.gen_children<6, 22>(m_bd, m_moves[to_play],
                                                      m_is_symmetry_broken,
                                                      expander, root_val);
     }
     else if (m_max_piece_size == 7)
     {
-        init_moves_without_gamma<7>(to_play);
+        init_moves_without_gamma<7, false>(to_play);
         return m_prior_knowledge.gen_children<7, 12>(m_bd, m_moves[to_play],
                                                      m_is_symmetry_broken,
                                                      expander, root_val);
@@ -383,7 +386,7 @@ bool State::gen_children(Tree::NodeExpander& expander, Float root_val)
     else
     {
         LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
-        init_moves_without_gamma<22>(to_play);
+        init_moves_without_gamma<22, false>(to_play);
         return m_prior_knowledge.gen_children<22, 44>(m_bd, m_moves[to_play],
                                                       m_is_symmetry_broken,
                                                       expander, root_val);
@@ -488,12 +491,13 @@ inline const PieceMap<bool>& State::get_is_piece_considered(Color c) const
 
 /** Initializes and returns m_pieces_considered if not all pieces are
     considered, otherwise m_bd.get_pieces_left(c) is returned. */
+template<bool IS_CALLISTO>
 inline const Board::PiecesLeftList& State::get_pieces_considered(Color c)
 {
     auto is_piece_considered = m_is_piece_considered[c];
     auto& pieces_left = m_bd.get_pieces_left(c);
     if (is_piece_considered == &m_shared_const.is_piece_considered_all
-            && ! m_is_callisto)
+            && ! IS_CALLISTO)
         return pieces_left;
     unsigned n = 0;
     for (Piece piece : pieces_left)
@@ -695,7 +699,7 @@ void State::init_moves_with_gamma(Color c)
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
-    auto& pieces = get_pieces_considered(c);
+    auto& pieces = get_pieces_considered<IS_CALLISTO>(c);
     if (m_bd.is_first_piece(c) && ! IS_CALLISTO)
         add_starting_moves<MAX_SIZE>(c, pieces, true, moves);
     else
@@ -729,21 +733,21 @@ void State::init_moves_with_gamma(Color c)
     }
 }
 
-template<unsigned MAX_SIZE>
+template<unsigned MAX_SIZE, bool IS_CALLISTO>
 void State::init_moves_without_gamma(Color c)
 {
     m_is_piece_considered[c] = &get_is_piece_considered(c);
     auto& marker = m_marker[c];
     auto& moves = m_moves[c];
     marker.clear(moves);
-    auto& pieces = get_pieces_considered(c);
+    auto& pieces = get_pieces_considered<IS_CALLISTO>(c);
     auto& is_forbidden = m_bd.is_forbidden(c);
-    if (m_bd.is_first_piece(c) && ! (MAX_SIZE == 5 && m_is_callisto))
+    if (m_bd.is_first_piece(c) && ! (MAX_SIZE == 5 && IS_CALLISTO))
         add_starting_moves<MAX_SIZE>(c, pieces, false, moves);
     else
     {
         unsigned nu_moves = 0;
-        if (MAX_SIZE == 5 && m_is_callisto)
+        if (MAX_SIZE == 5 && IS_CALLISTO)
         {
             float total_gamma_dummy;
             add_one_piece_moves<MAX_SIZE>(c, false, total_gamma_dummy, moves,
@@ -778,7 +782,7 @@ void State::init_moves_without_gamma(Color c)
             != &m_shared_const.is_piece_considered_all)
     {
         m_force_consider_all_pieces = true;
-        init_moves_without_gamma<MAX_SIZE>(c);
+        init_moves_without_gamma<MAX_SIZE, IS_CALLISTO>(c);
     }
 }
 
@@ -911,7 +915,7 @@ void State::update_moves(Color c)
         }
 
     // Find new legal moves because of new pieces played by this color
-    auto& pieces = get_pieces_considered(c);
+    auto& pieces = get_pieces_considered<IS_CALLISTO>(c);
     auto& attach_points = m_bd.get_attach_points(c);
     auto begin = m_last_attach_points_end[c];
     auto end = attach_points.end();
