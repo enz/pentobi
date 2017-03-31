@@ -54,7 +54,7 @@ static const float counts_duo[Player::max_supported_level] =
     { 3, 14, 63, 253, 2203, 13614, 218983, 1094918, 5474588 };
 
 static const float counts_trigon[Player::max_supported_level] =
-    { 228, 376, 733, 1214, 2606, 6802, 18428, 92138, 460691 };
+    { 228, 376, 733, 1214, 2606, 6802, 18947, 94732, 473665 };
 
 static const float counts_nexos[Player::max_supported_level] =
     { 250, 347, 625, 1223, 3117, 8270, 20556, 102784, 513924 };
