@@ -95,7 +95,7 @@ public:
 
     void play_playout(Move mv);
 
-    /** Do not update RAVE values for n'th move of the current simulation. */
+    /** Check if RAVE value for this move should not be updated. */
     bool skip_rave(Move mv) const;
 
 #if LIBBOARDGAME_DEBUG
