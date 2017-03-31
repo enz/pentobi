@@ -74,9 +74,6 @@ public:
     /** Play a move right after expanding a node. */
     void play_expanded_child(Move mv);
 
-    /** Finish in-tree phase without expanding a node. */
-    void finish_in_tree_no_expansion();
-
     /** Get current player to play. */
     PlayerInt get_player() const;
 
