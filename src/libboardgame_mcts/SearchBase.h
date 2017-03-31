@@ -1261,7 +1261,7 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
 template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
-    auto children = m_tree.get_children(node);
+    auto children = m_tree.get_children_nonempty(node);
     LIBBOARDGAME_ASSERT(! children.empty());
     auto parent_count = node.get_visit_count();
     Float bias_factor = m_exploration_constant * sqrt(parent_count);
@@ -1292,7 +1292,7 @@ template<class S, class M, class R>
 auto SearchBase<S, M, R>::select_final() const-> const Node*
 {
     // Select the child with the highest number of wins
-    auto children = m_tree.get_children(m_tree.get_root());
+    auto children = m_tree.get_children_nonempty(m_tree.get_root());
     if (children.empty())
         return nullptr;
     auto i = children.begin();
@@ -1431,7 +1431,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
         Float dist_factor;
         if (SearchParamConst::rave_dist_weighting)
             dist_factor = 1 / static_cast<Float>(nu_moves - i);
-        auto children = m_tree.get_children(*node);
+        auto children = m_tree.get_children_nonempty(*node);
         LIBBOARDGAME_ASSERT(! children.empty());
         auto it = children.begin();
         do
