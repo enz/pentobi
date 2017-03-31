@@ -18,6 +18,7 @@ namespace libboardgame_mcts {
 using namespace std;
 using libboardgame_util::get_abort;
 using libboardgame_util::IntervalChecker;
+using libboardgame_util::Range;
 
 //-----------------------------------------------------------------------------
 
@@ -44,37 +45,7 @@ public:
     typedef typename Node::Float Float;
 
     /** Range for iterating over the children of a node. */
-    class Children
-    {
-    public:
-        Children(const Tree& tree, const Node& node)
-        {
-            auto nu_children = node.get_nu_children();
-            m_begin = (nu_children != 0 ?
-                        &tree.get_node(node.get_first_child()) : nullptr);
-            m_end = m_begin + nu_children;
-        }
-
-        const Node* begin() const
-        {
-            return m_begin;
-        }
-
-        const Node* end() const
-        {
-            return m_end;
-        }
-
-        bool empty() const
-        {
-            return m_begin == nullptr;
-        }
-
-    private:
-        const Node* m_begin;
-
-        const Node* m_end;
-    };
+    typedef Range<const Node> Children;
 
 
     /** Helper class that is passed to the search state during node expansion.
@@ -136,15 +107,9 @@ public:
 
     const Node& get_root() const;
 
-    Children get_children(const Node& node) const
-    {
-        return Children(*this, node);
-    }
+    Children get_children(const Node& node) const;
 
-    Children get_root_children() const
-    {
-        return get_children(get_root());
-    }
+    Children get_root_children() const { return get_children(get_root()); }
 
     size_t get_nu_nodes() const;
 
@@ -258,6 +223,15 @@ template<typename N>
 inline auto Tree<N>::NodeExpander::get_best_child() const -> const Node*
 {
     return m_best_child;
+}
+
+template<typename N>
+inline auto Tree<N>::get_children(const Node& node) const -> Children
+{
+    auto nu_children = node.get_nu_children();
+    auto begin = nu_children != 0 ? &get_node(node.get_first_child()) : nullptr;
+    auto end = begin + nu_children;
+    return Children(begin, end);
 }
 
 template<typename N>

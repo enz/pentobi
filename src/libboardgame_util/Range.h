@@ -28,6 +28,8 @@ public:
 
     size_t size() const { return m_end - m_begin; }
 
+    bool empty() const { return m_begin == m_end; }
+
     bool contains(T& t) const;
 
 private:
