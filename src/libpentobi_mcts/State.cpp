@@ -802,43 +802,6 @@ void State::play_expanded_child(Move mv)
     }
 }
 
-void State::play_in_tree(Move mv)
-{
-    Color to_play = m_bd.get_to_play();
-    if (! mv.is_null())
-    {
-        LIBBOARDGAME_ASSERT(m_bd.is_legal(to_play, mv));
-        m_nu_passes = 0;
-        if (m_max_piece_size == 5)
-        {
-            m_bd.play<5, 16>(to_play, mv);
-            update_playout_features<5, 16>(to_play, mv);
-        }
-        else if (m_max_piece_size == 6)
-        {
-            m_bd.play<6, 22>(to_play, mv);
-            update_playout_features<6, 22>(to_play, mv);
-        }
-        else if (m_max_piece_size == 7)
-        {
-            m_bd.play<7, 12>(to_play, mv);
-            update_playout_features<7, 12>(to_play, mv);
-        }
-        else
-        {
-            m_bd.play<22, 44>(to_play, mv);
-            update_playout_features<22, 44>(to_play, mv);
-        }
-    }
-    else
-    {
-        ++m_nu_passes;
-        m_bd.set_to_play(to_play.get_next(m_nu_colors));
-    }
-    if (log_simulations)
-        LIBBOARDGAME_LOG(m_bd);
-}
-
 void State::start_search()
 {
     auto& bd = *m_shared_const.board;
