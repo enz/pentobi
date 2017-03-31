@@ -361,10 +361,10 @@ bool State::gen_children(Tree::NodeExpander& expander, Float root_val)
     Color to_play = m_bd.get_to_play();
     if (m_max_piece_size == 5)
     {
-        if (m_is_callisto)
-            init_moves_without_gamma<5, true>(to_play);
-        else
+        if (! m_is_callisto)
             init_moves_without_gamma<5, false>(to_play);
+        else
+            init_moves_without_gamma<5, true>(to_play);
         return m_prior_knowledge.gen_children<5, 16>(m_bd, m_moves[to_play],
                                                      m_is_symmetry_broken,
                                                      expander, root_val);
