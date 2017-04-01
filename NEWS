@@ -16,8 +16,8 @@ Desktop version:
 * Callisto: selected piece was wrongly rendered as one-piece in some
   situations if partially outside board.
 * Use reverse-domain file names for appstream and desktop file.
-* Removed workaround for disabling appstreamtest added by KDECMakeSettings
-  because the appstream files have been updated to not make it fail.
+* Removed no longer needed workaround for disabling appstreamtest
+  added by KDECMakeSettings.
 
 Android version:
 
