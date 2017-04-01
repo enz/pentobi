@@ -239,10 +239,8 @@ inline auto Tree<N>::get_children(const Node& node) const -> Children
 template<typename N>
 inline auto Tree<N>::get_children_nonempty(const Node& node) const -> Children
 {
-    auto nu_children = node.get_nu_children();
-    LIBBOARDGAME_ASSERT(nu_children);
     auto begin = &get_node(node.get_first_child());
-    auto end = begin + nu_children;
+    auto end = begin + node.get_nu_children();
     return Children(begin, end);
 }
 
