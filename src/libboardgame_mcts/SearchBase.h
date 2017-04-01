@@ -1261,12 +1261,11 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
 template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
-    auto children = m_tree.get_children_nonempty(node);
-    LIBBOARDGAME_ASSERT(! children.empty());
     auto parent_count = node.get_visit_count();
     Float bias_factor = m_exploration_constant * sqrt(parent_count);
     static_assert(SearchParamConst::child_min_count > 0, "");
     auto bias_limit = bias_factor / SearchParamConst::child_min_count;
+    auto children = m_tree.get_children_nonempty(node);
     auto i = children.begin();
     auto value = i->get_value() + bias_factor / i->get_value_count();
     auto best_value = value;
