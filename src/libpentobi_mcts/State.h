@@ -508,8 +508,11 @@ inline void State::update_playout_features(Color c, Move mv)
     auto& info = get_move_info<MAX_SIZE>(mv);
     for (Color i : Color::Range(m_nu_colors))
         m_playout_features[i].set_forbidden(info);
-    m_playout_features[c].set_forbidden<MAX_ADJ_ATTACH>(
-                get_move_info_ext<MAX_ADJ_ATTACH>(mv));
+    if (MAX_SIZE == 7) // Nexos
+        LIBBOARDGAME_ASSERT(get_move_info_ext<MAX_ADJ_ATTACH>(mv).size_adj_points == 0);
+    else
+        m_playout_features[c].set_forbidden<MAX_ADJ_ATTACH>(
+                    get_move_info_ext<MAX_ADJ_ATTACH>(mv));
 }
 
 template<unsigned MAX_SIZE>
