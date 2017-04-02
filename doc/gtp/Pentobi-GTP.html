@@ -9,7 +9,7 @@
 <div style="font-size:small">Author: Markus Enzenberger</div>
 <p>This document describes the text-based interface to the engine of the Blokus
 program <a href="https://pentobi.sourceforge.io">Pentobi</a>. The interface is
-an adaption of the <a href="http://www.lysator.liu.se/~gunnar/gtp/">Go Text
+an adaption of the <a href="https://www.lysator.liu.se/~gunnar/gtp/">Go Text
 Protocol</a> (GTP) and allows controller programs to use the engine in an
 automated way without the GUI. The most recent version of this document can be
 found in the source code distribution of Pentobi in the folder
@@ -21,7 +21,7 @@ responses to its standard output stream. The first character of a response is a
 status character: <tt>=</tt> for success, <tt>?</tt> for failure, followed by
 the actual response. The response ends with two consecutive newline characters.
 See the <a href=
-"http://www.lysator.liu.se/~gunnar/gtp/gtp2-spec-draft2/gtp2-spec.html">GTP
+"https://www.lysator.liu.se/~gunnar/gtp/gtp2-spec-draft2/gtp2-spec.html">GTP
 specification</a> for details.</p>
 <h2>Controllers</h2>
 <p>To use the engine from a controller program, the controller typically
@@ -123,7 +123,7 @@ of hardware threads (CPUs, cores or virtual cores) available on the current
 system. The reason is that, for example, using 2 threads makes the search twice
 as fast but may lose a bit of playing strength compared to the single-threaded
 search. Therefore, if the GTP engine is used to play many test games with
-twogtp.py (which supports playing games in parallel), it is better to play the
+twogtp (which supports playing games in parallel), it is better to play the
 games with single-threaded search in parallel than with multi-threaded search
 sequentially. Using a large number of threads (e.g. more than 8) is untested
 and might reduce the playing strength compared to the single-threaded
