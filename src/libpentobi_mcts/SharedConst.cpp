@@ -41,6 +41,18 @@ inline bool is_followup_adj_status(unsigned status_new, unsigned status_old)
     return (status_new & status_old) == status_old;
 }
 
+/** Check if a point is a useless move for the 1-piece in Callisto.
+    @return true if all neighbors are occupied, because the 1-piece doesn't
+    contribute to the score and playing there neither enables own moves
+    nor prevents opponent moves with larger pieces. */
+bool is_useless_one_piece_point(const Board& bd, Point p)
+{
+    for (Point pp: bd.get_geometry().get_diag(p))
+        if (bd.get_point_state(pp).is_empty())
+            return false;
+    return true;
+}
+
 void set_piece_considered(const BoardConst& bc, const char* name,
                           PieceMap<bool>& is_piece_considered,
                           bool is_considered = true)
@@ -291,7 +303,7 @@ void SharedConst::init_one_piece_callisto(bool is_followup)
                 auto moves = bc.get_moves(one_piece, p, 0);
                 LIBBOARDGAME_ASSERT(moves.size() == 1);
                 Move mv = *moves.begin();
-                if (! is_useless_one_piece_point(p))
+                if (! is_useless_one_piece_point(bd, p))
                 {
                     one_piece_points_callisto.get_unchecked(n) = p;
                     one_piece_moves_callisto.get_unchecked(n) = mv;
@@ -305,7 +317,7 @@ void SharedConst::init_one_piece_callisto(bool is_followup)
             Point p = one_piece_points_callisto[i];
             Move mv = one_piece_moves_callisto[i];
             if (bd.get_point_state(p).is_empty()
-                    && ! is_useless_one_piece_point(p))
+                    && ! is_useless_one_piece_point(bd, p))
             {
                 one_piece_points_callisto.get_unchecked(n) = p;
                 one_piece_moves_callisto.get_unchecked(n) = mv;
@@ -354,19 +366,6 @@ void SharedConst::init_pieces_considered()
     if (is_callisto)
         is_piece_considered_all[bd.get_one_piece()] = false;
     is_piece_considered_none.fill(false);
-}
-
-/** Check if a point is a useless move for the 1-piece.
-    @return true if all neighbors are occupied, because the 1-piece doesn't
-    contribute to the score and playing there neither enables own moves
-    nor prevents opponent moves with larger pieces. */
-bool SharedConst::is_useless_one_piece_point(Point p) const
-{
-    auto& bd = *board;
-    for (Point pp: bd.get_geometry().get_diag(p))
-        if (bd.get_point_state(pp).is_empty())
-            return false;
-    return true;
 }
 
 //-----------------------------------------------------------------------------

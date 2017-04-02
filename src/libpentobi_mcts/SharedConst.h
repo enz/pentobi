@@ -85,8 +85,6 @@ private:
     void init_one_piece_callisto(bool is_followup);
 
     void init_pieces_considered();
-
-    bool is_useless_one_piece_point(Point p) const;
 };
 
 //-----------------------------------------------------------------------------
