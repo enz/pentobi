@@ -54,8 +54,8 @@ using libboardgame_util::TimeSource;
 
 //-----------------------------------------------------------------------------
 
-/** Default optional compile-time parameters for Search.
-    See description of class Search for more information. */
+/** Default optional compile-time parameters for SearchBase.
+    See description of class SearchBase for more information. */
 struct SearchParamConstDefault
 {
     /** The floating type used for mean values and counts.
