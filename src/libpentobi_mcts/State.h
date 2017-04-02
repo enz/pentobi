@@ -217,10 +217,10 @@ private:
     void add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
                             bool with_gamma, MoveList& moves);
 
-    template<unsigned MAX_SIZE>
     LIBBOARDGAME_NOINLINE
-    void add_one_piece_moves(Color c, bool with_gamma, float& total_gamma,
-                             MoveList& moves, unsigned& nu_moves);
+    void add_callisto_one_piece_moves(Color c, bool with_gamma,
+                                      float& total_gamma, MoveList& moves,
+                                      unsigned& nu_moves);
 
     void evaluate_multicolor(array<Float, 6>& result);
 

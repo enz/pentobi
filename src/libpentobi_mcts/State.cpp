@@ -66,9 +66,9 @@ inline void State::add_moves(Point p, Color c,
     }
 }
 
-template<unsigned MAX_SIZE>
-void State::add_one_piece_moves(Color c, bool with_gamma, float& total_gamma,
-                                MoveList& moves, unsigned& nu_moves)
+void State::add_callisto_one_piece_moves(Color c, bool with_gamma,
+                                         float& total_gamma, MoveList& moves,
+                                         unsigned& nu_moves)
 {
     Piece one_piece = m_bd.get_one_piece();
     auto nu_left = m_bd.get_nu_left_piece(c, one_piece);
@@ -703,8 +703,7 @@ void State::init_moves_with_gamma(Color c)
         unsigned nu_moves = 0;
         float total_gamma = 0;
         if (IS_CALLISTO)
-            add_one_piece_moves<MAX_SIZE>(c, true, total_gamma, moves,
-                                          nu_moves);
+            add_callisto_one_piece_moves(c, true, total_gamma, moves, nu_moves);
         if (m_is_piece_considered[c]
                 != &m_shared_const.is_piece_considered_none)
             for (Point p : m_bd.get_attach_points(c))
@@ -746,8 +745,8 @@ void State::init_moves_without_gamma(Color c)
         if (MAX_SIZE == 5 && m_is_callisto)
         {
             float total_gamma_dummy;
-            add_one_piece_moves<MAX_SIZE>(c, false, total_gamma_dummy, moves,
-                                          nu_moves);
+            add_callisto_one_piece_moves(c, false, total_gamma_dummy, moves,
+                                         nu_moves);
         }
         if (m_is_piece_considered[c]
                 != &m_shared_const.is_piece_considered_none)
