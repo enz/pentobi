@@ -22,6 +22,10 @@ void showMessage(QWidget* parent, QMessageBox::Icon icon, const QString& text,
 {
     QMessageBox msgBox(parent);
     Util::setNoTitle(msgBox);
+    // Both setStandardButtons() and setEscapeButton() are necessary to make
+    // the window close button work (last tested with Qt 5.6 on Linux)
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setEscapeButton(QMessageBox::Ok);
     msgBox.setIcon(icon);
     msgBox.setText(text);
     msgBox.setInformativeText(infoText);
@@ -49,6 +53,10 @@ void showFatal(const QString& detailedText)
     QMessageBox msgBox;
     msgBox.setWindowTitle("Pentobi");
     msgBox.setIcon(QMessageBox::Critical);
+    // Both setStandardButtons() and setEscapeButton() are necessary to make
+    // the window close button work (last tested with Qt 5.6 on Linux)
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setEscapeButton(QMessageBox::Ok);
     msgBox.setText("An unexpected error occurred.");
     QString infoText =
         "Please report this error together with any details available with"
