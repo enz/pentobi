@@ -9,6 +9,7 @@ Desktop version:
 
 * Callisto: selected piece was wrongly rendered as one-piece in some
   situations if partially outside board.
+* Window close button did not work in dialogs with detailed text.
 * Use reverse-domain file names for appstream and desktop file.
 * Removed no longer needed workaround for disabling appstreamtest
   added by KDECMakeSettings.
