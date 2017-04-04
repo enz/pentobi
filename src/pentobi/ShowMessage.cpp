@@ -23,7 +23,8 @@ void showMessage(QWidget* parent, QMessageBox::Icon icon, const QString& text,
     QMessageBox msgBox(parent);
     Util::setNoTitle(msgBox);
     // Both setStandardButtons() and setEscapeButton() are necessary to make
-    // the window close button work (last tested with Qt 5.6 on Linux)
+    // the window close button work if detailedText is not empty (last tested
+    // with Qt 5.6 on Linux)
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setEscapeButton(QMessageBox::Ok);
     msgBox.setIcon(icon);
@@ -54,7 +55,8 @@ void showFatal(const QString& detailedText)
     msgBox.setWindowTitle("Pentobi");
     msgBox.setIcon(QMessageBox::Critical);
     // Both setStandardButtons() and setEscapeButton() are necessary to make
-    // the window close button work (last tested with Qt 5.6 on Linux)
+    // the window close button work if detailedText is not empty (last tested
+    // with Qt 5.6 on Linux)
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setEscapeButton(QMessageBox::Ok);
     msgBox.setText("An unexpected error occurred.");
