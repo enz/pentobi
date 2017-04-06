@@ -9,7 +9,6 @@
 
 #include <cstdint>
 #include <iosfwd>
-#include <stdexcept>
 #include "libboardgame_util/Assert.h"
 
 namespace libpentobi_base {
