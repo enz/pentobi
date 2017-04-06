@@ -19,16 +19,6 @@ using libboardgame_util::to_lower;
 
 //-----------------------------------------------------------------------------
 
-Color::Color(const string& s)
-{
-    istringstream in(s);
-    in >> *this;
-    if (! in)
-        throw InvalidString("Invalid color string '" + s + "'");
-}
-
-//-----------------------------------------------------------------------------
-
 ostream& operator<<(ostream& out, const Color& c)
 {
     out << (c.to_int() + 1);
