@@ -156,11 +156,6 @@ inline Color::IntType Color::to_int() const
     The strings "1", "2", ... are used for the colors. */
 ostream& operator<<(ostream& out, const Color& c);
 
-/** Read color from input stream.
-    Accepts the strings "1", "2", ..., as well as "b", "w" or "black", "white"
-    for the first two colors. */
-istream& operator>>(istream& in, Color& c);
-
 //-----------------------------------------------------------------------------
 
 /** Unrolled loop over all colors. */
