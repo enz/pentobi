@@ -10,7 +10,6 @@
 #include <cstdint>
 #include <iosfwd>
 #include <stdexcept>
-#include <string>
 #include "libboardgame_util/Assert.h"
 
 namespace libpentobi_base {
@@ -23,12 +22,6 @@ class Color
 {
 public:
     typedef uint_fast8_t IntType;
-
-    class InvalidString
-        : public runtime_error
-    {
-        using runtime_error::runtime_error;
-    };
 
     class Iterator
     {
@@ -82,8 +75,6 @@ public:
     Color();
 
     explicit Color(IntType i);
-
-    explicit Color(const string& s);
 
     bool operator==(const Color& c) const;
 
