@@ -67,7 +67,7 @@ vector<string> split_args(string s)
 
 GtpConnection::GtpConnection(const string& command)
 {
-    vector<string> args = split_args(command);
+    auto args = split_args(command);
     if (args.empty())
         throw runtime_error("GtpConnection: empty command line");
     int fd1[2];
@@ -109,10 +109,7 @@ GtpConnection::GtpConnection(const string& command)
             }
         auto const argv = new char*[args.size() + 1];
         for (size_t i = 0; i < args.size(); ++i)
-        {
-            argv[i] = new char[args[i].size() + 1];
-            strcpy(argv[i], args[i].c_str());
-        }
+            argv[i] = strdup(args[i].c_str());
         argv[args.size()] = nullptr;
         if (execvp(args[0].c_str(), argv) == -1)
             terminate_child("Could not execute '" + command + "'");
