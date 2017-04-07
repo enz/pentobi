@@ -151,10 +151,8 @@ HEADERS += \
     ../libboardgame_util/TimeSource.h \
     ../libboardgame_util/Unused.h \
     ../libboardgame_util/WallTimeSource.h \
-    ../libboardgame_sgf/InvalidPropertyValue.h \
-    ../libboardgame_sgf/InvalidTree.h \
-    ../libboardgame_sgf/MissingProperty.h \
     ../libboardgame_sgf/Reader.h \
+    ../libboardgame_sgf/SgfError.h \
     ../libboardgame_sgf/SgfNode.h \
     ../libboardgame_sgf/SgfTree.h \
     ../libboardgame_sgf/SgfUtil.h \
