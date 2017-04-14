@@ -978,7 +978,7 @@ void MainWindow::createActions()
             SLOT(rotateClockwise()));
 
     m_actionQuit = createAction(tr("&Quit"));
-    m_actionQuit->setShortcut(QKeySequence::Quit);
+    m_actionQuit->setShortcuts({QKeySequence::Quit, QKeySequence::Close});
     connect(m_actionQuit, SIGNAL(triggered()), SLOT(close()));
 
     m_actionSave = createAction(tr("&Save"));
