@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.2
+import Qt.labs.controls 1.0
 import QtQuick.Layouts 1.1
 import QtQuick.Dialogs 1.2
 
@@ -12,50 +12,48 @@ Dialog {
     title: qsTr("Computer Colors")
     standardButtons: StandardButton.Ok | StandardButton.Cancel
 
-    GroupBox {
-        title: qsTr("Computer plays:")
-        flat: true
+    ColumnLayout {
+        Label {
+            text: qsTr("Computer plays:")
+        }
+        CheckBox {
+            id: checkBox0
 
-        ColumnLayout {
-            CheckBox {
-                id: checkBox0
+            enabled: ! isRated
+            text: gameModel.nuColors == 4 && gameModel.nuPlayers == 2 ?
+                      qsTr("Blue/Red") : qsTr("Blue")
+            onClicked:
+                if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
+                    computerPlays2 = checked
+        }
+        CheckBox {
+            id: checkBox1
 
-                enabled: ! isRated
-                text: gameModel.nuColors == 4 && gameModel.nuPlayers == 2 ?
-                          qsTr("Blue/Red") : qsTr("Blue")
-                onClicked:
-                    if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
-                        computerPlays2 = checked
+            enabled: ! isRated
+            text: {
+                if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
+                    return qsTr("Yellow/Green")
+                if (gameModel.nuColors == 2)
+                    return qsTr("Green")
+                return qsTr("Yellow")
             }
-            CheckBox {
-                id: checkBox1
+            onClicked:
+                if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
+                    computerPlays3 = checked
+        }
+        CheckBox {
+            id: checkBox2
 
-                enabled: ! isRated
-                text: {
-                    if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
-                        return qsTr("Yellow/Green")
-                    if (gameModel.nuColors == 2)
-                        return qsTr("Green")
-                    return qsTr("Yellow")
-                }
-                onClicked:
-                    if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
-                        computerPlays3 = checked
-            }
-            CheckBox {
-                id: checkBox2
+            enabled: ! isRated
+            text: qsTr("Red")
+            visible: gameModel.nuPlayers > 2
+        }
+        CheckBox {
+            id: checkBox3
 
-                enabled: ! isRated
-                text: qsTr("Red")
-                visible: gameModel.nuPlayers > 2
-            }
-            CheckBox {
-                id: checkBox3
-
-                enabled: ! isRated
-                text: qsTr("Green")
-                visible: gameModel.nuPlayers > 3
-            }
+            enabled: ! isRated
+            text: qsTr("Green")
+            visible: gameModel.nuPlayers > 3
         }
     }
 }
