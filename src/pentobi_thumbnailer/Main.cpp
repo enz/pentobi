@@ -26,6 +26,9 @@ int main(int argc, char* argv[])
                     "Generate image with height and width <size>.",
                     "size", "128");
         parser.addOption(optionSize);
+        parser.addHelpOption();
+        parser.addPositionalArgument("input.blksgf", "Blokus SGF input file");
+        parser.addPositionalArgument("output.png", "PNG image output file");
         parser.process(app);
         auto args = parser.positionalArguments();
         bool ok;
@@ -33,7 +36,7 @@ int main(int argc, char* argv[])
         if (! ok || size <= 0)
             throw runtime_error("Invalid image size");
         if (args.size() > 2)
-            throw runtime_error("Too many file arguments");
+            throw runtime_error("Too many arguments");
         if (args.size() < 2)
             throw runtime_error("Need input and output file argument");
         QImage image(size, size, QImage::Format_ARGB32);

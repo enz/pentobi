@@ -1,4 +1,4 @@
-.TH PENTOBI-THUMBNAILER 6 "2013-06-21" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+.TH PENTOBI-THUMBNAILER 6 "2017-04-17" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
 
 .SH NAME
 pentobi-thumbnailer \- thumbnailer for game records for the board game Blokus as used by the program Pentobi
@@ -23,6 +23,9 @@ The output file is a thumbnail in PNG format.
 .TP
 .B \-s, \-\-size
 The size of the thumbnail. The default is 128.
+.TP
+.B \-h, \-\-help
+Display help and exit.
 
 .SH EXIT STATUS
 .TP
