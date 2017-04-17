@@ -1,7 +1,8 @@
 Version 13.UNKNOWN (master)
 ================================
 
-* Added option --help to pentobi-thumbnailer.
+* Added option --help to pentobi-thumbnailer and pentobi.
+* Documented all command line options for pentobi in man page.
 * Minimum required Qt version is now 5.6.
 
 

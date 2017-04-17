@@ -120,16 +120,21 @@ int main(int argc, char* argv[])
                                           "Set maximum level to <n>.", "n",
                                           QString::number(maxSupportedLevel));
         parser.addOption(optionMaxLevel);
-        QCommandLineOption optionNoBook("nobook");
+        QCommandLineOption optionNoBook("nobook", "Do not use opening books.");
         parser.addOption(optionNoBook);
-        QCommandLineOption optionNoDelay("nodelay");
+        QCommandLineOption optionNoDelay(
+                    "nodelay", "Do not delay fast computer moves.");
         parser.addOption(optionNoDelay);
         QCommandLineOption optionSeed("seed", "Set random seed to <n>.", "n");
         parser.addOption(optionSeed);
         QCommandLineOption optionThreads("threads", "Use <n> threads.", "n");
         parser.addOption(optionThreads);
-        QCommandLineOption optionVerbose("verbose");
+        QCommandLineOption optionVerbose(
+                    "verbose", "Print logging information to standard error.");
         parser.addOption(optionVerbose);
+        parser.addPositionalArgument("file.blksgf",
+                                     "Blokus SGF file to open (optional).");
+        parser.addHelpOption();
         parser.process(app);
         bool ok;
         auto maxLevel = parser.value(optionMaxLevel).toUInt(&ok);

@@ -1,4 +1,4 @@
-.TH PENTOBI 6 "2015-01-04" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+.TH PENTOBI 6 "2017-04-17" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
 
 .SH NAME
 pentobi \- computer opponent for the board game Blokus
@@ -29,6 +29,21 @@ By default, Pentobi currently allocates up to 2 GB (but not more than a third
 of the physical memory available on the system).
 Reducing the maximum level to 8 currently reduces this amount by a factor
 of 6 and lower maximum levels even more.
+.TP
+.B \-h, \-\-help
+Display help and exit.
+.TP
+.B \-\-nobook
+Do not use opening books.
+.TP
+.B \-\-nodelay
+Do not delay fast computer moves. By default, the computer player adds a
+small delay if the move generation took less than a second to make it easier
+for the human to follow the game if the computer plays several moves in a row.
+.TP
+.B \-\-seed
+Set the seed for the random generator. Using a fixed seed makes the move
+generation deterministic if no multi-threading is used (see option --threads).
 .TP
 .B \-\-threads
 The number of threads to use in the search. By default, up to 4 threads are
