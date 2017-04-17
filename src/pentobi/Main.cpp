@@ -57,9 +57,7 @@ int main(int argc, char* argv[])
 {
     LogInitializer log_initializer;
     Q_INIT_RESOURCE(libpentobi_gui_resources);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#endif
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     Application app(argc, argv);
     app.setOrganizationName("Pentobi");
