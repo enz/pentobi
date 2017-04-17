@@ -1,5 +1,4 @@
-# Config file to override installation settings such that the executable
-# can be tested without installation
+# Override installation settings to test the executable without installation
 BooksDir=@CMAKE_SOURCE_DIR@/src/books
 HelpDir=@CMAKE_SOURCE_DIR@/src/pentobi/help
 TranslationsPentobiDir=@CMAKE_BINARY_DIR@/src/pentobi

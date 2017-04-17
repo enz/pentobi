@@ -71,44 +71,36 @@ int main(int argc, char* argv[])
         // Windows 7 with Qt 4.8. We don't want that.
         app.setStyleSheet("QStatusBar::item { border: 0px solid black }");
 
-        // Allow the user to override installation paths with a config file in
-        // the directory of the executable to test it without installation
+#ifdef PENTOBI_HELP_DIR
+        QString helpDir = PENTOBI_HELP_DIR;
+#else
         QString helpDir;
+#endif
+#ifdef PENTOBI_BOOKS_DIR
+        QString booksDir = PENTOBI_BOOKS_DIR;
+#else
         QString booksDir;
+#endif
+#ifdef PENTOBI_TRANSLATIONS
+        QString translationsPentobiDir = PENTOBI_TRANSLATIONS;
+        QString translationsLibPentobiGuiDir = PENTOBI_TRANSLATIONS;
+#else
         QString translationsPentobiDir;
         QString translationsLibPentobiGuiDir;
-        QString appDir = app.applicationDirPath();
-#ifdef PENTOBI_HELP_DIR
-        helpDir = PENTOBI_HELP_DIR;
 #endif
-        if (helpDir.isEmpty())
-            helpDir = appDir + "/help";
-#ifdef PENTOBI_BOOKS_DIR
-        booksDir = PENTOBI_BOOKS_DIR;
-#endif
-        if (booksDir.isEmpty())
-            booksDir = appDir + "/books";
-#ifdef PENTOBI_TRANSLATIONS
-        translationsPentobiDir = PENTOBI_TRANSLATIONS;
-        translationsLibPentobiGuiDir = PENTOBI_TRANSLATIONS;
-#endif
-        if (translationsPentobiDir.isEmpty())
-            translationsPentobiDir = appDir + "/translations";
-        if (translationsLibPentobiGuiDir.isEmpty())
-            translationsLibPentobiGuiDir = appDir + "/translations";
-        QString overrideConfigFile = appDir + "/pentobi.conf";
+        // Allow the user to override installation paths with a config file in
+        // the directory of the executable to test it without installation
+        auto overrideConfigFile = app.applicationDirPath() + "/pentobi.conf";
         if (QFileInfo::exists(overrideConfigFile))
         {
             QSettings settings(overrideConfigFile, QSettings::IniFormat);
-            helpDir = settings.value("HelpDir", helpDir).toString();
-            booksDir = settings.value("BooksDir", booksDir).toString();
+            helpDir = settings.value("HelpDir").toString();
+            booksDir = settings.value("BooksDir").toString();
             translationsPentobiDir =
-                settings.value("TranslationsPentobiDir",
-                               translationsPentobiDir).toString();
+                settings.value("TranslationsPentobiDir").toString();
             translationsLibPentobiGuiDir =
-                settings.value("TranslationsLibPentobiGuiDir",
-                               translationsLibPentobiGuiDir).toString();
-            }
+                settings.value("TranslationsLibPentobiGuiDir").toString();
+        }
 
         QTranslator qtTranslator;
         QString qtTranslationPath =
