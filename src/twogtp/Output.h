@@ -32,7 +32,7 @@ public:
     void add_result(unsigned n, float result, const Board& bd,
                     unsigned player_black, double cpu_black, double cpu_white,
                     const string& sgf,
-                    const array<bool, Board::max_game_moves>& is_real_move);
+                    const array<bool, Board::max_moves>& is_real_move);
 
     unsigned get_next();
 

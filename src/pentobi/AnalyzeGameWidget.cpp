@@ -51,7 +51,7 @@ void AnalyzeGameWidget::initSize()
     m_borderX = width() / 50;
     m_borderY = height() / 20;
     m_maxX = width() - 2 * m_borderX;
-    m_dX = qreal(m_maxX) / Board::max_game_moves;
+    m_dX = qreal(m_maxX) / Board::max_moves;
     m_maxY = height() - 2 * m_borderY;
 }
 
@@ -145,13 +145,13 @@ void AnalyzeGameWidget::setCurrentPosition(const Game& game,
     m_currentPosition = -1;
     if (is_main_variation(node))
     {
-        ArrayList<ColorMove,Board::max_game_moves> moves;
+        ArrayList<ColorMove,Board::max_moves> moves;
         auto& tree = game.get_tree();
         auto current = &find_root(node);
         while (current)
         {
             auto mv = tree.get_move(*current);
-            if (! mv.is_null() && moves.size() < Board::max_game_moves)
+            if (! mv.is_null() && moves.size() < Board::max_moves)
                 moves.push_back(mv);
             if (current == &node)
                 break;

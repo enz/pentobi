@@ -57,7 +57,7 @@ public:
 
     /** Add the moves of a game to the tree and update the move counters. */
     void add_game(const Board& bd, unsigned player_black, float result,
-                  const array<bool, Board::max_game_moves>& is_real_move);
+                  const array<bool, Board::max_moves>& is_real_move);
 
 private:
     typedef libboardgame_base::PointTransform<Point> PointTransform;

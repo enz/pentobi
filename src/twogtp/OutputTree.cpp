@@ -64,8 +64,8 @@ void add(PentobiTree& tree, const SgfNode& node, bool is_player_black,
     tree.set_comment(node, out.str());
 }
 
-bool compare_sequence(ArrayList<ColorMove, Board::max_game_moves>& s1,
-                      ArrayList<ColorMove, Board::max_game_moves>& s2)
+bool compare_sequence(ArrayList<ColorMove, Board::max_moves>& s1,
+                      ArrayList<ColorMove, Board::max_moves>& s2)
 {
     LIBBOARDGAME_ASSERT(s1.size() == s2.size());
     for (unsigned i = 0; i < s1.size(); ++i)
@@ -108,16 +108,16 @@ OutputTree::OutputTree(Variant variant)
 OutputTree::~OutputTree() = default;
 
 void OutputTree::add_game(const Board& bd, unsigned player_black, float result,
-                        const array<bool, Board::max_game_moves>& is_real_move)
+                          const array<bool, Board::max_moves>& is_real_move)
 {
     if (bd.has_setup())
         throw runtime_error("OutputTree: setup not supported");
 
     // Find the canonical representation
-    ArrayList<ColorMove, Board::max_game_moves> sequence;
+    ArrayList<ColorMove, Board::max_moves> sequence;
     for (auto& transform : m_transforms)
     {
-        ArrayList<ColorMove, Board::max_game_moves> s;
+        ArrayList<ColorMove, Board::max_moves> s;
         for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
         {
             auto mv = bd.get_move(i);

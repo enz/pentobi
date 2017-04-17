@@ -336,7 +336,7 @@ PlayerBase& Engine::get_player() const
 void Engine::play(Color c, const Arguments& args, unsigned arg_move_begin)
 {
     auto& bd = get_board();
-    if (bd.get_nu_moves() >= Board::max_game_moves)
+    if (bd.get_nu_moves() >= Board::max_moves)
         throw Failure("too many moves");
     Move mv;
     try

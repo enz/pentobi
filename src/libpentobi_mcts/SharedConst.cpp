@@ -334,7 +334,7 @@ void SharedConst::init_pieces_considered()
     auto& bc = bd.get_board_const();
     is_piece_considered_list.clear();
     bool is_callisto = (bd.get_piece_set() == PieceSet::callisto);
-    for (auto i = bd.get_nu_onboard_pieces(); i < Board::max_game_moves; ++i)
+    for (auto i = bd.get_nu_onboard_pieces(); i < Board::max_moves; ++i)
     {
         PieceMap<bool> is_piece_considered;
         set_pieces_considered(bd, i, is_piece_considered);

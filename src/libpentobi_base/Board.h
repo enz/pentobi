@@ -40,7 +40,7 @@ public:
     static const unsigned max_player_moves = max_pieces;
 
     /** Maximum number of moves in any game variant. */
-    static const unsigned max_game_moves = Color::range * max_player_moves;
+    static const unsigned max_moves = Color::range * max_player_moves;
 
     /** Use ANSI escape sequences for colored text output in operator>> */
     static bool color_output;
@@ -191,7 +191,7 @@ public:
 
     ColorMove get_move(unsigned n) const;
 
-    const ArrayList<ColorMove, max_game_moves>& get_moves() const;
+    const ArrayList<ColorMove, max_moves>& get_moves() const;
 
     /** Generate all legal moves for a color.
         @param c The color
@@ -438,7 +438,7 @@ private:
 
     ColorMap<const char*> m_color_name;
 
-    ArrayList<ColorMove, max_game_moves> m_moves;
+    ArrayList<ColorMove, max_moves> m_moves;
 
     Snapshot m_snapshot;
 
@@ -543,8 +543,7 @@ inline Range<const Point> Board::get_move_points(Move mv) const
     return m_bc->get_move_points(mv);
 }
 
-inline auto Board::get_moves() const
--> const ArrayList<ColorMove, max_game_moves>&
+inline auto Board::get_moves() const -> const ArrayList<ColorMove, max_moves>&
 {
     return m_moves;
 }

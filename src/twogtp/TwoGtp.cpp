@@ -105,7 +105,7 @@ void TwoGtp::play_game(unsigned game_number)
     sgf.write_property("GM", to_string(m_variant));
     sgf.write_property("GN", game_number);
     sgf.end_node();
-    array<bool, Board::max_game_moves> is_real_move;
+    array<bool, Board::max_moves> is_real_move;
     unsigned player;
     while (! m_bd.is_game_over())
     {

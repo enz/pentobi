@@ -194,13 +194,13 @@ void AnalyzeGameModel::markCurrentMove(GameModel* gameModel)
     int moveNumber = -1;
     if (is_main_variation(node))
     {
-        ArrayList<ColorMove, Board::max_game_moves> moves;
+        ArrayList<ColorMove, Board::max_moves> moves;
         auto& tree = game.get_tree();
         auto current = &find_root(node);
         while (current)
         {
             auto mv = tree.get_move(*current);
-            if (! mv.is_null() && moves.size() < Board::max_game_moves)
+            if (! mv.is_null() && moves.size() < Board::max_moves)
                 moves.push_back(mv);
             if (current == &node)
                 break;

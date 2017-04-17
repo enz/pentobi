@@ -53,10 +53,10 @@ public:
         root position and less than min_move_all_considered.
         Contains pointers to unique values such that the comparison of the
         lists can be done by comparing the pointers to the lists. */
-    array<const PieceMap<bool>*, Board::max_game_moves> is_piece_considered;
+    array<const PieceMap<bool>*, Board::max_moves> is_piece_considered;
 
     /** List of unique values for is_piece_considered. */
-    ArrayList<PieceMap<bool>, Board::max_game_moves> is_piece_considered_list;
+    ArrayList<PieceMap<bool>, Board::max_moves> is_piece_considered_list;
 
     /** Precomputed lists of considered pieces if all pieces are enforced to be
         considered (because using the restricted set of pieces would generate

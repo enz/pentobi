@@ -1366,7 +1366,7 @@ void GameModel::updatePieces()
     auto& tree = m_game.get_tree();
     // We need to loop forward through the moves to ensure the persistence of
     // the GUI pieces, see comment in updatePiece()
-    ArrayList<const SgfNode*, Board::max_game_moves> nodes;
+    ArrayList<const SgfNode*, Board::max_moves> nodes;
     auto node = &m_game.get_current();
     do
     {

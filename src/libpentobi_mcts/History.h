@@ -72,7 +72,7 @@ private:
 
     Variant m_variant;
 
-    ArrayList<ColorMove, Board::max_game_moves> m_moves;
+    ArrayList<ColorMove, Board::max_moves> m_moves;
 
     Color m_to_play;
 };
