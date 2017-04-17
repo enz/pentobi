@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     translatorPentobi.load("qml_" + locale, ":qml/i18n");
     app.installTranslator(&translatorPentobi);
     // The translation of standard buttons in QtQuick.Dialogs.MessageDialog
-    // is broken on Android (tested with Qt 5.5; QTBUG-43353), so we
+    // is broken on Android (last tested with Qt 5.6; QTBUG-43353), so we
     // created our own file, which contains the translations we need.
     QTranslator translatorQt;
     translatorQt.load("replace_qtbase_" + locale, ":qml/i18n");
