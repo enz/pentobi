@@ -179,7 +179,7 @@ void AnalyzeGameWidget::showProgress(int progress)
 
 QSize AnalyzeGameWidget::sizeHint() const
 {
-    auto geo = QApplication::desktop()->screenGeometry();
+    auto geo = QApplication::desktop()->availableGeometry(this);
     return QSize(geo.width() / 2, geo.height() / 3);
 }
 

@@ -248,7 +248,7 @@ MainWindow::MainWindow(Variant variant, const QString& initialFile,
     setWindowIcon(icon);
 
     bool centerOnScreen = false;
-    QRect screenGeometry = QApplication::desktop()->screenGeometry();
+    QRect screenGeometry = QApplication::desktop()->availableGeometry(this);
     if (restoreGeometry(settings.value("geometry").toByteArray()))
     {
         if (! screenGeometry.contains(geometry()))
@@ -2017,16 +2017,13 @@ void MainWindow::gotoPosition(Variant variant,
 
 void MainWindow::help()
 {
-    if (m_helpWindow)
+    if (! m_helpWindow)
     {
-        m_helpWindow->show();
-        m_helpWindow->raise();
-        return;
+        QString path = HelpWindow::findMainPage(m_helpDir, "pentobi");
+        m_helpWindow = new HelpWindow(nullptr, tr("Pentobi Help"), path);
     }
-    QString path = HelpWindow::findMainPage(m_helpDir, "pentobi");
-    m_helpWindow = new HelpWindow(nullptr, tr("Pentobi Help"), path);
-    initToolBarText(m_helpWindow->findChild<QToolBar*>());
     m_helpWindow->show();
+    m_helpWindow->raise();
 }
 
 void MainWindow::initGame()
@@ -3103,7 +3100,7 @@ void MainWindow::showToolbar(bool checked)
 
 QSize MainWindow::sizeHint() const
 {
-    auto geo = QApplication::desktop()->screenGeometry();
+    auto geo = QApplication::desktop()->availableGeometry(this);
     return QSize(geo.width() * 2 / 3, min(geo.width() * 4 / 10, geo.height()));
 }
 

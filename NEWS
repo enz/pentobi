@@ -17,6 +17,7 @@ Desktop version:
 
 * Callisto: selected piece was wrongly rendered as one-piece in some
   situations if partially outside board.
+* Fixed Leave Fullscreen button positioning if multiple screens exist.
 * Window close button did not work in message dialogs with detailed text.
 * Ctrl-W now closes application.
 * Use reverse-domain file names for appstream and desktop file.

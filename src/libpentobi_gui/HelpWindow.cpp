@@ -17,7 +17,6 @@
 #include <QLocale>
 #include <QSettings>
 #include <QTextBrowser>
-#include <QToolBar>
 #include "libboardgame_util/Log.h"
 
 //-----------------------------------------------------------------------------
@@ -65,12 +64,9 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     actionClose->setShortcut(QKeySequence::Close);
     connect(actionClose, SIGNAL(triggered()), SLOT(hide()));
     addAction(actionClose);
-    auto toolBar = new QToolBar;
-    toolBar->setMovable(false);
-    toolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
-    toolBar->addAction(actionBack);
-    toolBar->addAction(actionForward);
-    addToolBar(toolBar);
+    browser->addAction(actionBack);
+    browser->addAction(actionForward);
+    browser->setContextMenuPolicy(Qt::ActionsContextMenu);
     QSettings settings;
     if (! restoreGeometry(settings.value("helpwindow_geometry").toByteArray()))
         adjustSize();
@@ -98,7 +94,7 @@ void HelpWindow::closeEvent(QCloseEvent* event)
 
 QSize HelpWindow::sizeHint() const
 {
-    auto geo = QApplication::desktop()->screenGeometry();
+    auto geo = QApplication::desktop()->availableGeometry(this);
     return QSize(geo.width() * 4 / 10, geo.height() * 9 / 10);
 }
 
