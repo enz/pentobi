@@ -89,7 +89,7 @@ void RatingGraph::paintEvent(QPaintEvent* event)
 
 QSize RatingGraph::sizeHint() const
 {
-    auto geo = QApplication::desktop()->screenGeometry();
+    auto geo = QApplication::desktop()->availableGeometry(this);
     return QSize(geo.width() / 3, min(geo.width() / 12, geo.height() / 3));
 }
 

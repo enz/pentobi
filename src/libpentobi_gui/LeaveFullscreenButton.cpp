@@ -32,7 +32,7 @@ LeaveFullscreenButton::LeaveFullscreenButton(QWidget* parent, QAction* action)
     // Resize to size hint as a workaround for a bug that clips the
     // long button text (tested on Qt 4.8.3 on Linux/KDE).
     m_button->resize(m_button->sizeHint());
-    int x = qApp->desktop()->screenGeometry().width() - m_button->width();
+    int x = qApp->desktop()->screenGeometry(parent).width() - m_button->width();
     m_buttonPos = QPoint(x, 0);
     m_triggerArea->resize(m_button->width(), m_button->height() / 2);
     m_triggerArea->move(m_buttonPos);

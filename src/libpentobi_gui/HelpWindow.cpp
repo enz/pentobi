@@ -94,7 +94,7 @@ void HelpWindow::closeEvent(QCloseEvent* event)
 
 QSize HelpWindow::sizeHint() const
 {
-    auto geo = QApplication::desktop()->screenGeometry();
+    auto geo = QApplication::desktop()->availableGeometry(this);
     return QSize(geo.width() * 4 / 10, geo.height() * 9 / 10);
 }
 
