@@ -2018,16 +2018,13 @@ void MainWindow::gotoPosition(Variant variant,
 
 void MainWindow::help()
 {
-    if (m_helpWindow)
+    if (! m_helpWindow)
     {
-        m_helpWindow->show();
-        m_helpWindow->raise();
-        return;
+        QString path = HelpWindow::findMainPage(m_helpDir, "pentobi");
+        m_helpWindow = new HelpWindow(nullptr, tr("Pentobi Help"), path);
     }
-    QString path = HelpWindow::findMainPage(m_helpDir, "pentobi");
-    m_helpWindow = new HelpWindow(nullptr, tr("Pentobi Help"), path);
-    initToolBarText(m_helpWindow->findChild<QToolBar*>());
     m_helpWindow->show();
+    m_helpWindow->raise();
 }
 
 void MainWindow::initGame()
