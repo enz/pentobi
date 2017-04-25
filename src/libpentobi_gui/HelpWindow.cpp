@@ -47,6 +47,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     browser->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     browser->setSource(m_mainPageUrl);
     auto actionBack = new QAction(tr("Back"), this);
+    actionBack->setShortcut(QKeySequence::Back);
     actionBack->setToolTip(tr("Show previous page in history"));
     actionBack->setEnabled(false);
     setIcon(actionBack, "go-previous");
@@ -54,6 +55,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     connect(browser, SIGNAL(backwardAvailable(bool)),
             actionBack, SLOT(setEnabled(bool)));
     auto actionForward = new QAction(tr("Forward"), this);
+    actionForward->setShortcut(QKeySequence::Forward);
     actionForward->setToolTip(tr("Show next page in history"));
     actionForward->setEnabled(false);
     setIcon(actionForward, "go-next");
