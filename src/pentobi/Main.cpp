@@ -56,13 +56,11 @@ void redirectStdErr()
 int main(int argc, char* argv[])
 {
     LogInitializer log_initializer;
-    Q_INIT_RESOURCE(libpentobi_gui_resources);
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     Application app(argc, argv);
     app.setOrganizationName("Pentobi");
     app.setApplicationName("Pentobi");
-    Q_INIT_RESOURCE(libpentobi_gui_resources_2x);
     try
     {
         // For some reason, labels in the status bar have a border on

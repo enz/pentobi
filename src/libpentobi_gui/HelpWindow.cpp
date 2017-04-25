@@ -21,18 +21,6 @@
 
 //-----------------------------------------------------------------------------
 
-namespace {
-
-void setIcon(QAction* action, const QString& name)
-{
-    QString fallback = QString(":/libpentobi_gui/icons/%1.png").arg(name);
-    action->setIcon(QIcon::fromTheme(name, QIcon(fallback)));
-}
-
-} // namespace
-
-//-----------------------------------------------------------------------------
-
 HelpWindow::HelpWindow(QWidget* parent, const QString& title,
                        const QString& mainPage)
     : QMainWindow(parent)
@@ -50,7 +38,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     actionBack->setShortcut(QKeySequence::Back);
     actionBack->setToolTip(tr("Show previous page in history"));
     actionBack->setEnabled(false);
-    setIcon(actionBack, "go-previous");
+    actionBack->setIcon(QIcon::fromTheme("go-previous"));
     connect(actionBack, SIGNAL(triggered()), browser, SLOT(backward()));
     connect(browser, SIGNAL(backwardAvailable(bool)),
             actionBack, SLOT(setEnabled(bool)));
@@ -58,7 +46,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     actionForward->setShortcut(QKeySequence::Forward);
     actionForward->setToolTip(tr("Show next page in history"));
     actionForward->setEnabled(false);
-    setIcon(actionForward, "go-next");
+    actionForward->setIcon(QIcon::fromTheme("go-next"));
     connect(actionForward, SIGNAL(triggered()), browser, SLOT(forward()));
     connect(browser, SIGNAL(forwardAvailable(bool)),
             actionForward, SLOT(setEnabled(bool)));
