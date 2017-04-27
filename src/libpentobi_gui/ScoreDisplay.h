@@ -83,7 +83,7 @@ private:
 
     QString getScoreText(ScoreType points, ScoreType bonus) const;
 
-    int getTextWidth(QString text) const;
+    int getTextWidth(const QString& text) const;
 
     void drawText(QPainter& painter, const QString& text, int x, int y,
                   bool underline, bool hasBonus);

@@ -62,7 +62,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
         adjustSize();
 }
 
-QString HelpWindow::findMainPage(QString helpDir, QString appName)
+QString HelpWindow::findMainPage(const QString& helpDir, const QString& appName)
 {
     auto locale = QLocale::system().name();
     auto path = QString("%1/%2/%3/index.html").arg(helpDir, locale, appName);

@@ -155,7 +155,7 @@ int ScoreDisplay::getScoreTextWidth3()
     return getTextWidth(getScoreText3());
 }
 
-int ScoreDisplay::getTextWidth(QString text) const
+int ScoreDisplay::getTextWidth(const QString& text) const
 {
     // Make text width only depend on number of digits to avoid frequent small
     // changes to the layout

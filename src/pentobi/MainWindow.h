@@ -629,7 +629,7 @@ private:
     void showInfo(const QString& text, const QString& infoText = "",
                   const QString& detailText = "", bool withIcon = false);
 
-    void showInvalidFile(QString file, const exception& e);
+    void showInvalidFile(const QString& file, const exception& e);
 
     void showInvalidSgf(const exception& e);
 
