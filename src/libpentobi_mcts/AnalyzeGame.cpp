@@ -32,7 +32,7 @@ void AnalyzeGame::clear()
 }
 
 void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
-                      function<void(unsigned,unsigned)> progress_callback)
+                      const function<void(unsigned,unsigned)>& progress_callback)
 {
     m_variant = game.get_variant();
     m_moves.clear();

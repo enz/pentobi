@@ -38,7 +38,7 @@ public:
         of the analysis of a position. Arguments: number moves analyzed so far,
         total number of moves. */
     void run(const Game& game, Search& search, size_t nu_simulations,
-             function<void(unsigned,unsigned)> progress_callback);
+             const function<void(unsigned,unsigned)>& progress_callback);
 
     Variant get_variant() const;
 

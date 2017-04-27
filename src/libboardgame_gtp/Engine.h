@@ -88,13 +88,13 @@ public:
     /** Register command handler.
         If a command was already registered with the same name, it will be
         replaced by the new command. */
-    void add(const string& name, Handler f);
+    void add(const string& name, const Handler& f);
 
-    void add(const string& name, HandlerNoArgs f);
+    void add(const string& name, const HandlerNoArgs& f);
 
-    void add(const string& name, HandlerNoResponse f);
+    void add(const string& name, const HandlerNoResponse& f);
 
-    void add(const string& name, HandlerNoArgsNoResponse f);
+    void add(const string& name, const HandlerNoArgsNoResponse& f);
 
     /** Register a member function as a command handler.
         If a command was already registered with the same name, it will be
@@ -156,13 +156,13 @@ private:
     bool handle_cmd(CmdLine& line, ostream* out, Response& response,
                     string& buffer);
 
-    static void no_args_wrapper(HandlerNoArgs h,
+    static void no_args_wrapper(const HandlerNoArgs& h,
                                 const Arguments& args, Response& response);
 
-    static void no_response_wrapper(HandlerNoResponse h,
+    static void no_response_wrapper(const HandlerNoResponse& h,
                                     const Arguments& args, Response&);
 
-    static void no_args_no_response_wrapper(HandlerNoArgsNoResponse h,
+    static void no_args_no_response_wrapper(const HandlerNoArgsNoResponse& h,
                                            const Arguments& args, Response&);
 };
 

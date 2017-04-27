@@ -316,7 +316,7 @@ public:
         estimated time left.
         The callback function will be called about every 0.1s. The arguments
         of the callback function are: elapsed time, estimated remaining time. */
-    void set_callback(function<void(double, double)> callback);
+    void set_callback(const function<void(double, double)>& callback);
 
     /** Get evaluation for a player at root node. */
     const StatisticsDirtyLockFree<Float>& get_root_val(PlayerInt player) const;
@@ -1323,7 +1323,8 @@ bool SearchBase<S, M, R>::select_move(Move& mv) const
 }
 
 template<class S, class M, class R>
-void SearchBase<S, M, R>::set_callback(function<void(double, double)> callback)
+void SearchBase<S, M, R>::set_callback(
+        const function<void(double, double)>& callback)
 {
     m_callback = callback;
 }

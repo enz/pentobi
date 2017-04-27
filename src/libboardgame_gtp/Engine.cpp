@@ -65,24 +65,24 @@ Engine::Engine()
 
 Engine::~Engine() = default;
 
-void Engine::add(const string& name, Handler f)
+void Engine::add(const string& name, const Handler& f)
 {
     m_handlers[name] = f;
 }
 
-void Engine::add(const string& name, HandlerNoArgs f)
+void Engine::add(const string& name, const HandlerNoArgs& f)
 {
     add(name,
         Handler(bind(no_args_wrapper, f, placeholders::_1, placeholders::_2)));
 }
 
-void Engine::add(const string& name, HandlerNoResponse f)
+void Engine::add(const string& name, const HandlerNoResponse& f)
 {
     add(name, Handler(bind(no_response_wrapper, f,
                            placeholders::_1, placeholders::_2)));
 }
 
-void Engine::add(const string& name, HandlerNoArgsNoResponse f)
+void Engine::add(const string& name, const HandlerNoArgsNoResponse& f)
 {
     add(name, Handler(bind(no_args_no_response_wrapper, f,
                            placeholders::_1, placeholders::_2)));
@@ -213,20 +213,20 @@ bool Engine::handle_cmd(CmdLine& line, ostream* out, Response& response,
     return status;
 }
 
-void Engine::no_args_wrapper(HandlerNoArgs h, const Arguments& args,
+void Engine::no_args_wrapper(const HandlerNoArgs& h, const Arguments& args,
                              Response& response)
 {
     args.check_empty();
     h(response);
 }
 
-void Engine::no_response_wrapper(HandlerNoResponse h, const Arguments& args,
+void Engine::no_response_wrapper(const HandlerNoResponse& h, const Arguments& args,
                                  Response&)
 {
     h(args);
 }
 
-void Engine::no_args_no_response_wrapper(HandlerNoArgsNoResponse h,
+void Engine::no_args_no_response_wrapper(const HandlerNoArgsNoResponse& h,
                                          const Arguments& args, Response&)
 {
     args.check_empty();
