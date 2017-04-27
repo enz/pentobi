@@ -76,13 +76,16 @@ void write_setup(Writer& writer, Variant variant, const Setup& setup)
 {
     auto& board_const = BoardConst::get(variant);
     for (Color c : get_colors(variant))
-        if (! setup.placements[c].empty())
-        {
-            vector<string> values;
-            for (Move mv : setup.placements[c])
-                values.push_back(board_const.to_string(mv, false));
-            writer.write_property(get_setup_id(variant, c), values);
-        }
+    {
+        auto& placements = setup.placements[c];
+        if (placements.empty())
+            continue;
+        vector<string> values;
+        values.reserve(placements.size());
+        for (Move mv : placements)
+            values.push_back(board_const.to_string(mv, false));
+        writer.write_property(get_setup_id(variant, c), values);
+    }
 }
 
 //-----------------------------------------------------------------------------
