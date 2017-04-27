@@ -29,7 +29,7 @@ public:
         @param helpDir The help directory.
         @param appName The subdirectory name for the application.
         @return The full path of index.html. */
-    static QString findMainPage(QString helpDir, QString appName);
+    static QString findMainPage(const QString& helpDir, const QString& appName);
 
     HelpWindow(QWidget* parent, const QString& title, const QString& mainPage);
 

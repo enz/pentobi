@@ -27,7 +27,7 @@ void terminate_child(const string& message)
     exit(1);
 }
 
-vector<string> split_args(string s)
+vector<string> split_args(const string& s)
 {
     vector<string> result;
     bool escape = false;
