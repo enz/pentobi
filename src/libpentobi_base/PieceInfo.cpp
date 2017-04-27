@@ -134,7 +134,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
             m_uniq_transforms.push_back(transform);
         }
         all_transformed_points.push_back(normalized);
-    };
+    }
     if (piece_set == PieceSet::nexos)
     {
         m_score_points = 0;

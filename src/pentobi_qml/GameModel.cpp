@@ -233,7 +233,7 @@ void GameModel::autoSave()
             location.prepend(parent.get_child_index(*node));
         node = &parent;
         ++depth;
-    };
+    }
     location.prepend(depth);
     settings.setValue("autosaveLocation", location);
 }
