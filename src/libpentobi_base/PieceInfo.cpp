@@ -87,7 +87,7 @@ NormalizedPoints normalize(const PiecePoints& points, unsigned point_type,
 
 PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
                      const Geometry& geo, const PieceTransforms& transforms,
-                     PieceSet piece_set, const CoordPoint& label_pos,
+                     PieceSet piece_set, CoordPoint label_pos,
                      unsigned nu_instances)
     : m_nu_instances(nu_instances),
       m_points(points),

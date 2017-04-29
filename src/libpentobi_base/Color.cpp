@@ -19,7 +19,7 @@ using libboardgame_util::to_lower;
 
 //-----------------------------------------------------------------------------
 
-ostream& operator<<(ostream& out, const Color& c)
+ostream& operator<<(ostream& out, Color c)
 {
     out << (c.to_int() + 1);
     return out;

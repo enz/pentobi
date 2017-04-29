@@ -31,19 +31,19 @@ struct CoordPoint
 
     CoordPoint(int x, int y);
 
-    bool operator==(const CoordPoint& p) const;
+    bool operator==(CoordPoint p) const;
 
-    bool operator!=(const CoordPoint& p) const;
+    bool operator!=(CoordPoint p) const;
 
-    bool operator<(const CoordPoint& p) const;
+    bool operator<(CoordPoint p) const;
 
-    CoordPoint operator+(const CoordPoint& p) const;
+    CoordPoint operator+(CoordPoint p) const;
 
-    CoordPoint operator-(const CoordPoint& p) const;
+    CoordPoint operator-(CoordPoint p) const;
 
-    CoordPoint& operator+=(const CoordPoint& p);
+    CoordPoint& operator+=(CoordPoint p);
 
-    CoordPoint& operator-=(const CoordPoint& p);
+    CoordPoint& operator-=(CoordPoint p);
 
     bool is_null() const;
 
@@ -56,40 +56,40 @@ inline CoordPoint::CoordPoint(int x, int y)
     this->y = y;
 }
 
-inline bool CoordPoint::operator==(const CoordPoint& p) const
+inline bool CoordPoint::operator==(CoordPoint p) const
 {
     return x == p.x && y == p.y;
 }
 
-inline bool CoordPoint::operator<(const CoordPoint& p) const
+inline bool CoordPoint::operator<(CoordPoint p) const
 {
     if (y != p.y)
         return y < p.y;
     return x < p.x;
 }
 
-inline bool CoordPoint::operator!=(const CoordPoint& p) const
+inline bool CoordPoint::operator!=(CoordPoint p) const
 {
     return ! operator==(p);
 }
 
-inline CoordPoint CoordPoint::operator+(const CoordPoint& p) const
+inline CoordPoint CoordPoint::operator+(CoordPoint p) const
 {
     return CoordPoint(x + p.x, y + p.y);
 }
 
-inline CoordPoint& CoordPoint::operator+=(const CoordPoint& p)
+inline CoordPoint& CoordPoint::operator+=(CoordPoint p)
 {
     *this = *this + p;
     return *this;
 }
 
-inline CoordPoint CoordPoint::operator-(const CoordPoint& p) const
+inline CoordPoint CoordPoint::operator-(CoordPoint p) const
 {
     return CoordPoint(x - p.x, y - p.y);
 }
 
-inline CoordPoint& CoordPoint::operator-=(const CoordPoint& p)
+inline CoordPoint& CoordPoint::operator-=(CoordPoint p)
 {
     *this = *this - p;
     return *this;
@@ -119,7 +119,7 @@ inline bool CoordPoint::is_null() const
 
 //-----------------------------------------------------------------------------
 
-ostream& operator<<(ostream& out, const CoordPoint& p);
+ostream& operator<<(ostream& out, CoordPoint p);
 
 //-----------------------------------------------------------------------------
 

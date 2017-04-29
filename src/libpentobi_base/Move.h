@@ -60,11 +60,11 @@ public:
 
     explicit Move(IntType i);
 
-    bool operator==(const Move& mv) const;
+    bool operator==(Move mv) const;
 
-    bool operator!=(const Move& mv) const;
+    bool operator!=(Move mv) const;
 
-    bool operator<(const Move& mv) const;
+    bool operator<(Move mv) const;
 
     bool is_null() const;
 
@@ -92,19 +92,19 @@ inline Move::Move(IntType i)
     m_i = i;
 }
 
-inline bool Move::operator==(const Move& mv) const
+inline bool Move::operator==(Move mv) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(mv.is_initialized());
     return m_i == mv.m_i;
 }
 
-inline bool Move::operator!=(const Move& mv) const
+inline bool Move::operator!=(Move mv) const
 {
     return ! operator==(mv);
 }
 
-inline bool Move::operator<(const Move& mv) const
+inline bool Move::operator<(Move mv) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(mv.is_initialized());

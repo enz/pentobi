@@ -31,14 +31,14 @@ int div2(int a)
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfGembloQIdentity::get_transformed(const CoordPoint& p) const
+CoordPoint TransfGembloQIdentity::get_transformed(CoordPoint p) const
 {
     return p;
 }
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfGembloQRot90::get_transformed(const CoordPoint& p) const
+CoordPoint TransfGembloQRot90::get_transformed(CoordPoint p) const
 {
     auto y = div2(p.x);
     auto x = -2 * p.y;
@@ -58,14 +58,14 @@ CoordPoint TransfGembloQRot90::get_transformed(const CoordPoint& p) const
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfGembloQRot180::get_transformed(const CoordPoint& p) const
+CoordPoint TransfGembloQRot180::get_transformed(CoordPoint p) const
 {
     return CoordPoint(-p.x, -p.y);
 }
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfGembloQRot270::get_transformed(const CoordPoint& p) const
+CoordPoint TransfGembloQRot270::get_transformed(CoordPoint p) const
 {
     auto y = -div2(p.x);
     auto x = 2 * p.y;
@@ -85,14 +85,14 @@ CoordPoint TransfGembloQRot270::get_transformed(const CoordPoint& p) const
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfGembloQRefl::get_transformed(const CoordPoint& p) const
+CoordPoint TransfGembloQRefl::get_transformed(CoordPoint p) const
 {
     return CoordPoint(-p.x, p.y);
 }
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfGembloQRot90Refl::get_transformed(const CoordPoint& p) const
+CoordPoint TransfGembloQRot90Refl::get_transformed(CoordPoint p) const
 {
     auto y = -div2(p.x);
     auto x = -2 * p.y;
@@ -112,14 +112,14 @@ CoordPoint TransfGembloQRot90Refl::get_transformed(const CoordPoint& p) const
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfGembloQRot180Refl::get_transformed(const CoordPoint& p) const
+CoordPoint TransfGembloQRot180Refl::get_transformed(CoordPoint p) const
 {
     return CoordPoint(p.x, -p.y);
 }
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfGembloQRot270Refl::get_transformed(const CoordPoint& p) const
+CoordPoint TransfGembloQRot270Refl::get_transformed(CoordPoint p) const
 {
     auto y = div2(p.x);
     auto x = 2 * p.y;

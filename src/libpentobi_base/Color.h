@@ -75,11 +75,11 @@ public:
 
     explicit Color(IntType i);
 
-    bool operator==(const Color& c) const;
+    bool operator==(Color c) const;
 
-    bool operator!=(const Color& c) const;
+    bool operator!=(Color c) const;
 
-    bool operator<(const Color& c) const;
+    bool operator<(Color c) const;
 
     IntType to_int() const;
 
@@ -109,19 +109,19 @@ inline Color::Color(IntType i)
     m_i = i;
 }
 
-inline bool Color::operator==(const Color& c) const
+inline bool Color::operator==(Color c) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(c.is_initialized());
     return m_i == c.m_i;
 }
 
-inline bool Color::operator!=(const Color& c) const
+inline bool Color::operator!=(Color c) const
 {
     return ! operator==(c);
 }
 
-inline bool Color::operator<(const Color& c) const
+inline bool Color::operator<(Color c) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(c.is_initialized());
@@ -153,7 +153,7 @@ inline Color::IntType Color::to_int() const
 
 /** Output string representation of color.
     The strings "1", "2", ... are used for the colors. */
-ostream& operator<<(ostream& out, const Color& c);
+ostream& operator<<(ostream& out, Color c);
 
 //-----------------------------------------------------------------------------
 

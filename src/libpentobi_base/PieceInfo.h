@@ -58,7 +58,7 @@ public:
         @param nu_instances The number of instances of the piece per player. */
     PieceInfo(const string& name, const Points& points,
               const Geometry& geo, const PieceTransforms& transforms,
-              PieceSet piece_set, const CoordPoint& label_pos,
+              PieceSet piece_set, CoordPoint label_pos,
               unsigned nu_instances = 1);
 
     const string& get_name() const { return m_name; }

@@ -22,7 +22,7 @@ class TransfTrigonIdentity
 public:
     TransfTrigonIdentity() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -33,7 +33,7 @@ class TransfTrigonRot60
 public:
     TransfTrigonRot60() : Transform(1) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -44,7 +44,7 @@ class TransfTrigonRot120
 public:
     TransfTrigonRot120() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -55,7 +55,7 @@ class TransfTrigonRot180
 public:
     TransfTrigonRot180() : Transform(1) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -66,7 +66,7 @@ class TransfTrigonRot240
 public:
     TransfTrigonRot240() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -77,7 +77,7 @@ class TransfTrigonRot300
 public:
     TransfTrigonRot300() : Transform(1) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -88,7 +88,7 @@ class TransfTrigonRefl
 public:
     TransfTrigonRefl() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -99,7 +99,7 @@ class TransfTrigonReflRot60
 public:
     TransfTrigonReflRot60() : Transform(1) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -110,7 +110,7 @@ class TransfTrigonReflRot120
 public:
     TransfTrigonReflRot120() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -121,7 +121,7 @@ class TransfTrigonReflRot180
 public:
     TransfTrigonReflRot180() : Transform(1) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -132,7 +132,7 @@ class TransfTrigonReflRot240
 public:
     TransfTrigonReflRot240() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -143,7 +143,7 @@ class TransfTrigonReflRot300
 public:
     TransfTrigonReflRot300() : Transform(1) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------

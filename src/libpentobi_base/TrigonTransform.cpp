@@ -16,21 +16,21 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonIdentity::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonIdentity::get_transformed(CoordPoint p) const
 {
     return p;
 }
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonRefl::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonRefl::get_transformed(CoordPoint p) const
 {
     return CoordPoint(-p.x, p.y);
 }
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonRot60::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonRot60::get_transformed(CoordPoint p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
@@ -41,7 +41,7 @@ CoordPoint TransfTrigonRot60::get_transformed(const CoordPoint& p) const
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonRot120::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonRot120::get_transformed(CoordPoint p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
@@ -52,14 +52,14 @@ CoordPoint TransfTrigonRot120::get_transformed(const CoordPoint& p) const
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonRot180::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonRot180::get_transformed(CoordPoint p) const
 {
     return CoordPoint(-p.x, -p.y);
 }
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonRot240::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonRot240::get_transformed(CoordPoint p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
@@ -70,7 +70,7 @@ CoordPoint TransfTrigonRot240::get_transformed(const CoordPoint& p) const
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonRot300::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonRot300::get_transformed(CoordPoint p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
@@ -81,7 +81,7 @@ CoordPoint TransfTrigonRot300::get_transformed(const CoordPoint& p) const
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonReflRot60::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonReflRot60::get_transformed(CoordPoint p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
@@ -92,7 +92,7 @@ CoordPoint TransfTrigonReflRot60::get_transformed(const CoordPoint& p) const
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonReflRot120::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonReflRot120::get_transformed(CoordPoint p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
@@ -103,14 +103,14 @@ CoordPoint TransfTrigonReflRot120::get_transformed(const CoordPoint& p) const
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonReflRot180::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonReflRot180::get_transformed(CoordPoint p) const
 {
     return CoordPoint(p.x, -p.y);
 }
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonReflRot240::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonReflRot240::get_transformed(CoordPoint p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);
@@ -121,7 +121,7 @@ CoordPoint TransfTrigonReflRot240::get_transformed(const CoordPoint& p) const
 
 //-----------------------------------------------------------------------------
 
-CoordPoint TransfTrigonReflRot300::get_transformed(const CoordPoint& p) const
+CoordPoint TransfTrigonReflRot300::get_transformed(CoordPoint p) const
 {
     float px = static_cast<float>(p.x);
     float py = static_cast<float>(p.y);

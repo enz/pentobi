@@ -37,9 +37,9 @@ public:
 
     explicit Piece(IntType i);
 
-    bool operator==(const Piece& piece) const;
+    bool operator==(Piece piece) const;
 
-    bool operator!=(const Piece& piece) const;
+    bool operator!=(Piece piece) const;
 
     bool is_null() const;
 
@@ -69,12 +69,12 @@ inline Piece::Piece(IntType i)
     m_i = i;
 }
 
-inline bool Piece::operator==(const Piece& piece) const
+inline bool Piece::operator==(Piece piece) const
 {
     return m_i == piece.m_i;
 }
 
-inline bool Piece::operator!=(const Piece& piece) const
+inline bool Piece::operator!=(Piece piece) const
 {
     return ! operator==(piece);
 }

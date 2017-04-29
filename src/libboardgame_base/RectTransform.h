@@ -19,7 +19,7 @@ class TransfIdentity
 public:
     TransfIdentity() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -30,7 +30,7 @@ class TransfRectRot90
 public:
     TransfRectRot90() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -41,7 +41,7 @@ class TransfRectRot180
 public:
     TransfRectRot180() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -52,7 +52,7 @@ class TransfRectRot270
 public:
     TransfRectRot270() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -63,7 +63,7 @@ class TransfRectRefl
 public:
     TransfRectRefl() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -74,7 +74,7 @@ class TransfRectRot90Refl
 public:
     TransfRectRot90Refl() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -85,7 +85,7 @@ class TransfRectRot180Refl
 public:
     TransfRectRot180Refl() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------
@@ -96,7 +96,7 @@ class TransfRectRot270Refl
 public:
     TransfRectRot270Refl() : Transform(0) {}
 
-    CoordPoint get_transformed(const CoordPoint& p) const override;
+    CoordPoint get_transformed(CoordPoint p) const override;
 };
 
 //-----------------------------------------------------------------------------

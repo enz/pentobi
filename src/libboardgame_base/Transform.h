@@ -19,7 +19,7 @@ class Transform
 public:
     virtual ~Transform();
 
-    virtual CoordPoint get_transformed(const CoordPoint& p) const = 0;
+    virtual CoordPoint get_transformed(CoordPoint p) const = 0;
 
     /** Get the new point type of the (0,0) coordinates.
         The transformation may change the point type of the (0,0) coordinates.

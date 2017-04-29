@@ -36,11 +36,11 @@ struct ColorMove
 
     /** Equality operator.
         @pre move, color, mv.move, mv.color are initialized. */
-    bool operator==(const ColorMove& mv) const;
+    bool operator==(ColorMove mv) const;
 
     /** Inequality operator.
         @pre move, color, mv.move, mv.color are initialized. */
-    bool operator!=(const ColorMove& mv) const;
+    bool operator!=(ColorMove mv) const;
 
     bool is_null() const;
 };
@@ -51,12 +51,12 @@ inline ColorMove::ColorMove(Color c, Move mv)
 {
 }
 
-inline bool ColorMove::operator==(const ColorMove& mv) const
+inline bool ColorMove::operator==(ColorMove mv) const
 {
     return move == mv.move && color == mv.color;
 }
 
-inline bool ColorMove::operator!=(const ColorMove& mv) const
+inline bool ColorMove::operator!=(ColorMove mv) const
 {
     return ! operator==(mv);
 }

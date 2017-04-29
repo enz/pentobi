@@ -16,7 +16,7 @@ namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
-ostream& operator<<(ostream& out, const CoordPoint& p)
+ostream& operator<<(ostream& out, CoordPoint p)
 {
     if (! p.is_null())
         out << '(' << p.x << ',' << p.y << ')';

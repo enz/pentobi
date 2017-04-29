@@ -32,13 +32,13 @@ public:
 
     explicit PointState(IntType i);
 
-    bool operator==(const PointState& s) const;
+    bool operator==(PointState s) const;
 
-    bool operator!=(const PointState& s) const;
+    bool operator!=(PointState s) const;
 
-    bool operator==(const Color& c) const;
+    bool operator==(Color c) const;
 
-    bool operator!=(const Color& c) const;
+    bool operator!=(Color c) const;
 
     IntType to_int() const;
 
@@ -77,22 +77,22 @@ inline PointState::PointState(IntType i)
     m_i = i;
 }
 
-inline bool PointState::operator==(const PointState& s) const
+inline bool PointState::operator==(PointState s) const
 {
     return m_i == s.m_i;
 }
 
-inline bool PointState::operator==(const Color& c) const
+inline bool PointState::operator==(Color c) const
 {
     return m_i == c.to_int();
 }
 
-inline bool PointState::operator!=(const PointState& s) const
+inline bool PointState::operator!=(PointState s) const
 {
     return ! operator==(s);
 }
 
-inline bool PointState::operator!=(const Color& c) const
+inline bool PointState::operator!=(Color c) const
 {
     return ! operator==(c);
 }

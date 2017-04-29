@@ -37,7 +37,7 @@ bool allPointEmpty(const Board& bd, Move mv)
     return true;
 }
 
-QPixmap* createPixmap(const QPainter& painter, const QSize& size)
+QPixmap* createPixmap(const QPainter& painter, QSize size)
 {
     auto devicePixelRatio = painter.device()->devicePixelRatio();
     auto pixmap = new QPixmap(devicePixelRatio * size);
@@ -452,7 +452,7 @@ void GuiBoard::setSelectedPieceOffset(const QMouseEvent& event)
     instead of to the left.
     @param preferDownShift Prefer a downward geometry-matching shift
     instead of upward. */
-void GuiBoard::setSelectedPieceOffset(const CoordPoint& wantedOffset,
+void GuiBoard::setSelectedPieceOffset(CoordPoint wantedOffset,
                                       bool preferRightShift,
                                       bool preferDownShift)
 {

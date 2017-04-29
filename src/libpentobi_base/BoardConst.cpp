@@ -59,7 +59,7 @@ bool is_reverse(MovePoints::const_iterator begin1, const Point* begin2, unsigned
 // of the y axis!)
 void sort_piece_points(PiecePoints& points)
 {
-    auto less = [](const CoordPoint& a, const CoordPoint& b)
+    auto less = [](CoordPoint a, CoordPoint b)
     {
         return ((a.y == b.y && a.x < b.x) || a.y > b.y);
     };
