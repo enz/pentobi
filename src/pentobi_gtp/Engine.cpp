@@ -52,6 +52,7 @@ void Engine::cmd_move_values(Response& response)
     auto& tree = search.get_tree();
     auto& bd = get_board();
     vector<const Search::Node*> children;
+    children.reserve(tree.get_root().get_nu_children());
     for (auto& i : tree.get_root_children())
         children.push_back(&i);
     sort(children.begin(), children.end(), libpentobi_mcts::util::compare_node);

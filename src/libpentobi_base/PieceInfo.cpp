@@ -100,9 +100,12 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
     if (log_piece_creation)
         LIBBOARDGAME_LOG("Creating transformations for piece ", name, ' ',
                          points);
+    auto& all_transforms = transforms.get_all();
     vector<NormalizedPoints> all_transformed_points;
+    all_transformed_points.reserve(all_transforms.size());
+    m_uniq_transforms.reserve(all_transforms.size()); // Upper limit
     PiecePoints transformed_points;
-    for (const Transform* transform : transforms.get_all())
+    for (auto transform : all_transforms)
     {
         if (log_piece_creation)
             LIBBOARDGAME_LOG("Transformation ", get_type_name(*transform));

@@ -70,6 +70,7 @@ int main(int argc, char** argv)
             throw runtime_error("invalid game variant " + variant_string);
         Output output(variant, prefix, create_tree);
         vector<shared_ptr<TwoGtp>> twogtps;
+        twogtps.reserve(nu_threads);
         for (unsigned i = 0; i < nu_threads; ++i)
         {
             string log_prefix;
@@ -82,6 +83,7 @@ int main(int argc, char** argv)
             twogtps.push_back(twogtp);
         }
         vector<thread> threads;
+        threads.reserve(nu_threads);
         for (auto& i : twogtps)
             threads.push_back(thread([&i, &result]()
             {

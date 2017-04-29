@@ -346,7 +346,7 @@ void PentobiTree::set_setup(const SgfNode& node, const Setup& setup)
 }
 
 void PentobiTree::set_setup_property(const SgfNode& node, const char* id,
-                              const Setup::PlacementList& placements)
+                                     const Setup::PlacementList& placements)
 {
     if (placements.empty())
     {
@@ -354,6 +354,7 @@ void PentobiTree::set_setup_property(const SgfNode& node, const char* id,
         return;
     }
     vector<string> values;
+    values.reserve(placements.size());
     for (Move mv : placements)
         values.push_back(m_bc->to_string(mv, false));
     set_property(node, id, values);
