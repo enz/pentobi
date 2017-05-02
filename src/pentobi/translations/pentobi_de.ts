@@ -1174,8 +1174,8 @@
         <translation>Callisto (2 Spieler, 4 Farben)</translation>
     </message>
     <message>
-        <source>Number of rated games:</source>
-        <translation>Anzahl gewerteter Spiele:</translation>
+        <source>Rated games:</source>
+        <translation>Gewertete Spiele:</translation>
     </message>
 </context>
 <context>
