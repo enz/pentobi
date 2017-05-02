@@ -1078,10 +1078,6 @@
         <translation>Spielvariante:</translation>
     </message>
     <message>
-        <source>Number rated games:</source>
-        <translation>Anzahl gewertete Spiele:</translation>
-    </message>
-    <message>
         <source>Best previous rating:</source>
         <translation>Beste frühere Wertung:</translation>
     </message>
@@ -1176,6 +1172,10 @@
     <message>
         <source>Callisto (2 players, 4 colors)</source>
         <translation>Callisto (2 Spieler, 4 Farben)</translation>
+    </message>
+    <message>
+        <source>Number of rated games:</source>
+        <translation>Anzahl gewerteter Spiele:</translation>
     </message>
 </context>
 <context>
