@@ -52,7 +52,7 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     m_labelVariant = createSelectableLabel();
     formLayout->addRow(tr("Game variant:"), m_labelVariant);
     m_labelNuGames = createSelectableLabel();
-    formLayout->addRow(tr("Number of rated games:"), m_labelNuGames);
+    formLayout->addRow(tr("Rated games:"), m_labelNuGames);
     m_labelBestRating = createSelectableLabel();
     formLayout->addRow(tr("Best previous rating:"), m_labelBestRating);
     layout->addSpacing(layout->margin());
