@@ -7,7 +7,7 @@
 <body>
 <h1>Pentobi SGF Files</h1>
 <div style="font-size:small">Author: Markus Enzenberger<br>
-Last modified: 2017-04-02</div>
+Last modified: 2017-05-05</div>
 <p>This document describes the file format for <a href=
 "http://en.wikipedia.org/wiki/Blokus">Blokus</a> game records as used by the
 program <a href="https://pentobi.sourceforge.io">Pentobi</a>. The most recent
@@ -36,12 +36,11 @@ directories. This file needs to contain the line:</p>
 <blockquote style="font-size:small">AddType application/x-blokus-sgf
 blksgf</blockquote>
 <h2>Character Set</h2>
-<p>Although not specific to Blokus, it is recommended to use <a href=
-"http://en.wikipedia.org/wiki/UTF-8">UTF-8</a> as the character set. Pentobi
-always writes files in UTF-8 and indicates that with the <tt>CA</tt> property.
-Pentobi versions before 13.0 can only read SGF files encoded in UTF-8 or
-ISO-8859-1 (Latin1). As specified by the SGF standard, ISO-8859-1 is assumed
-for files without <tt>CA</tt> property.</p>
+<p><a href="http://en.wikipedia.org/wiki/UTF-8">UTF-8</a> should be used as the
+character set. Pentobi always writes files in UTF-8 and indicates that with the
+<tt>CA</tt> property. Pentobi versions before 13.0 can only read SGF files
+encoded in UTF-8 or ISO-8859-1 (Latin1). As specified by the SGF standard,
+ISO-8859-1 is assumed for files without <tt>CA</tt> property.</p>
 <h2>Game Property</h2>
 <p>Since there is no number for Blokus defined in SGF 4, a string instead of a
 number is used as the value for the <tt>GM</tt> property. Currently, the
@@ -50,8 +49,8 @@ Blokus Duo, Blokus Trigon, Blokus Trigon Two-Player, Blokus Trigon
 Three-Player, Blokus Junior, Nexos, Nexos Two-Player, Callisto, Callisto
 Two-Player, Callisto Two-Player Four-Color, Callisto Three-Player, GembloQ,
 GembloQ Two-Player, GembloQ Three-Player, GembloQ Two-Player Four-Color.</p>
-The strings are case-sensitive, words are separated by exactly one space and no
-additional whitespace at the beginning or end of the string is allowed.
+The strings are case-sensitive, words must be separated by exactly one space
+and must not contain whitespaces at the beginning or end of the string.
 <h2>Color and Player Properties</h2>
 <p>In game variants with two players and two colors, <tt>B</tt> denotes the
 first player or color, <tt>W</tt> the second player or color. In game variants
@@ -81,9 +80,9 @@ properties.</p>
 <p>Fields on the board (called points in SGF) are identified by a
 case-insensitive string with a letter for the column followed by a number for
 the row. The letters start with 'a', the numbers start with '1'. The lower left
-corner of the board is 'a1'. The strings are not allowed to contain
-whitespaces. Note that, unlike the common convention in the game of Go, the
-letter 'i' is used.</p>
+corner of the board is 'a1'. The strings must not contain whitespaces. Note
+that, unlike the common convention in the game of Go, the letter 'i' is
+used.</p>
 <p>If there are more than 26 columns, the columns continue with 'aa', 'ab',
 ..., 'ba', 'bb', ... More than 26 columns are presently required for Trigon and
 GembloQ.</p>
