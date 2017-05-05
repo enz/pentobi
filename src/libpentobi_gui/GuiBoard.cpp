@@ -54,8 +54,8 @@ GuiBoard::GuiBoard(QWidget* parent, const Board& bd)
       m_bd(bd)
 {
     setMinimumSize(350, 350);
-    connect(&m_currentMoveShownAnimationTimer, SIGNAL(timeout()),
-            SLOT(showMoveAnimation()));
+    connect(&m_currentMoveShownAnimationTimer, &QTimer::timeout,
+            this, &GuiBoard::showMoveAnimation);
 }
 
 void GuiBoard::changeEvent(QEvent* event)

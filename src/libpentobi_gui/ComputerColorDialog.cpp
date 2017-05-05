@@ -34,8 +34,10 @@ ComputerColorDialog::ComputerColorDialog(QWidget* parent,
     auto buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
-    connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::accepted,
+            this, &ComputerColorDialog::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected,
+            this, &ComputerColorDialog::reject);
     buttonBox->setFocus();
 }
 

@@ -26,7 +26,7 @@ AnalyzeGameWindow::AnalyzeGameWindow(QWidget* parent)
     layout->addWidget(analyzeGameWidget);
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
     layout->addWidget(buttonBox);
-    connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &AnalyzeGameWindow::reject);
     buttonBox->setFocus();
 }
 

@@ -202,7 +202,7 @@ void AnalyzeGameWidget::start(const Game& game, Search& search,
                                               this));
         Util::setNoTitle(*m_progressDialog);
         m_progressDialog->setMinimumDuration(0);
-        connect(m_progressDialog, SIGNAL(canceled()), SLOT(cancel()));
+        connect(m_progressDialog, &QProgressDialog::canceled, this, &AnalyzeGameWidget::cancel);
     }
     m_progressDialog->show();
     m_isRunning = true;

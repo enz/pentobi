@@ -39,20 +39,18 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     actionBack->setToolTip(tr("Show previous page in history"));
     actionBack->setEnabled(false);
     actionBack->setIcon(QIcon::fromTheme("go-previous"));
-    connect(actionBack, SIGNAL(triggered()), browser, SLOT(backward()));
-    connect(browser, SIGNAL(backwardAvailable(bool)),
-            actionBack, SLOT(setEnabled(bool)));
+    connect(actionBack, &QAction::triggered, browser, &QTextBrowser::backward);
+    connect(browser, &QTextBrowser::backwardAvailable, actionBack, &QAction::setEnabled);
     auto actionForward = new QAction(tr("Forward"), this);
     actionForward->setShortcut(QKeySequence::Forward);
     actionForward->setToolTip(tr("Show next page in history"));
     actionForward->setEnabled(false);
     actionForward->setIcon(QIcon::fromTheme("go-next"));
-    connect(actionForward, SIGNAL(triggered()), browser, SLOT(forward()));
-    connect(browser, SIGNAL(forwardAvailable(bool)),
-            actionForward, SLOT(setEnabled(bool)));
+    connect(actionForward, &QAction::triggered, browser, &QTextBrowser::forward);
+    connect(browser, &QTextBrowser::forwardAvailable, actionForward, &QAction::setEnabled);
     auto actionClose = new QAction("", this);
     actionClose->setShortcut(QKeySequence::Close);
-    connect(actionClose, SIGNAL(triggered()), SLOT(hide()));
+    connect(actionClose, &QAction::triggered, this, &HelpWindow::hide);
     addAction(actionClose);
     browser->addAction(actionBack);
     browser->addAction(actionForward);

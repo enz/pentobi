@@ -44,12 +44,12 @@ InitialRatingDialog::InitialRatingDialog(QWidget* parent)
     m_ratingLabel = new QLabel;
     layout->addWidget(m_ratingLabel);
     setRating(1000);
-    connect(m_slider, SIGNAL(valueChanged(int)), SLOT(setRating(int)));
+    connect(m_slider, &QSlider::valueChanged, this, &InitialRatingDialog::setRating);
     auto buttonBox =
         new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     layout->addWidget(buttonBox);
-    connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::accepted, this, &InitialRatingDialog::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &InitialRatingDialog::reject);
 }
 
 void InitialRatingDialog::setRating(int rating)

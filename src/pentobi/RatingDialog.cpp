@@ -71,11 +71,9 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     buttonBox->button(QDialogButtonBox::Close)->setAutoDefault(true);
     buttonBox->button(QDialogButtonBox::Close)->setFocus();
     updateContent();
-    connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
-    connect(buttonBox, SIGNAL(clicked(QAbstractButton*)),
-            SLOT(buttonClicked(QAbstractButton*)));
-    connect(m_list, SIGNAL(openRatedGame(unsigned)),
-            SLOT(activateGame(unsigned)));
+    connect(buttonBox, &QDialogButtonBox::rejected, this, &RatingDialog::reject);
+    connect(buttonBox, &QDialogButtonBox::clicked, this, &RatingDialog::buttonClicked);
+    connect(m_list, &RatedGamesList::openRatedGame, this, &RatingDialog::activateGame);
 }
 
 void RatingDialog::activateGame(unsigned n)

@@ -144,9 +144,9 @@ public slots:
 
     void open();
 
-    bool open(istream& in);
+    bool openStream(istream& in);
 
-    bool open(const QString& file, bool isTemporary = false);
+    bool openFile(const QString& file, bool isTemporary = false);
 
     void openFromClipboard();
 
@@ -176,7 +176,8 @@ public slots:
 
     void selectPiece(Color c, Piece piece);
 
-    void selectPiece(Color c, Piece piece, const Transform* transform);
+    void selectTransformedPiece(Color c, Piece piece,
+                                const Transform* transform);
 
     void setLevel(unsigned level);
 
@@ -604,11 +605,11 @@ private:
 
     void leaveSetupMode();
 
-    void play(Color c, Move mv);
+    void playMove(Color c, Move mv);
 
     void restoreLevel(Variant variant);
 
-    bool save(const QString& file);
+    bool saveFile(const QString& file);
 
     void searchCallback(double elapsedSeconds, double remainingSeconds);
 
@@ -675,15 +676,9 @@ private slots:
 
     void leaveFullscreen();
 
-    void levelTriggered(bool checked);
-
     void noMoveAnnotation(bool checked);
 
-    void openCheckSave(const QString& file);
-
     void openRecentFile();
-
-    void orientationDisplayColorClicked(Color c);
 
     void rememberFile(const QString& file);
 
@@ -707,17 +702,7 @@ private slots:
 
     void showComment(bool checked);
 
-    void toolBarNoText(bool checked);
-
     void toolBarText(const QString& key, Qt::ToolButtonStyle style);
-
-    void toolBarTextBesideIcons(bool checked);
-
-    void toolBarTextBelowIcons(bool checked);
-
-    void toolBarTextOnly(bool checked);
-
-    void toolBarTextSystem(bool checked);
 
     void veryBadMove(bool checked);
 

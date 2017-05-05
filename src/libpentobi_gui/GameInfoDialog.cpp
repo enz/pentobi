@@ -71,8 +71,10 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game,
     }
     else if (! m_playerBlue->text().isEmpty())
         buttonBox->setFocus();
-    connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
-    connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
+    connect(buttonBox, &QDialogButtonBox::accepted,
+            this, &GameInfoDialog::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected,
+            this, &GameInfoDialog::reject);
 }
 
 GameInfoDialog::~GameInfoDialog() = default;

@@ -29,8 +29,7 @@ RatedGamesList::RatedGamesList(QWidget* parent)
     setAlternatingRowColors(true);
     m_model = new QStandardItemModel(this);
     setModel(m_model);
-    connect(this, SIGNAL(doubleClicked(const QModelIndex&)),
-            SLOT(activateGame(const QModelIndex&)));
+    connect(this, &RatedGamesList::doubleClicked, this, &RatedGamesList::activateGame);
 }
 
 void RatedGamesList::activateGame(const QModelIndex& index)
