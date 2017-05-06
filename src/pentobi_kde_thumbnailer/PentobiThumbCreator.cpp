@@ -19,6 +19,11 @@ Q_DECL_EXPORT ThumbCreator* new_creator() { return new PentobiThumbCreator; }
 
 //-----------------------------------------------------------------------------
 
+PentobiThumbCreator::PentobiThumbCreator(QObject* parent)
+    : QObject(parent)
+{
+}
+
 PentobiThumbCreator::~PentobiThumbCreator() = default;
 
 bool PentobiThumbCreator::create(const QString& path, int width, int height,

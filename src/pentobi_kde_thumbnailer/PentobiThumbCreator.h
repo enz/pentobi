@@ -19,6 +19,8 @@ class PentobiThumbCreator
     Q_OBJECT
 
 public:
+    PentobiThumbCreator(QObject* parent = nullptr);
+
     virtual ~PentobiThumbCreator();
 
     bool create(const QString& path, int width, int height,

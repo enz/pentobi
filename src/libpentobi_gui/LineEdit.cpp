@@ -14,8 +14,9 @@
 
 //-----------------------------------------------------------------------------
 
-LineEdit::LineEdit(int nuCharactersHint)
-    : m_nuCharactersHint(nuCharactersHint)
+LineEdit::LineEdit(QWidget* parent, int nuCharactersHint)
+    : QLineEdit(parent),
+      m_nuCharactersHint(nuCharactersHint)
 {
 }
 

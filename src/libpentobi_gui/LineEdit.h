@@ -24,7 +24,7 @@ class LineEdit
     Q_OBJECT
 
 public:
-    explicit LineEdit(int nuCharactersHint);
+    explicit LineEdit(QWidget* parent, int nuCharactersHint);
 
     QSize sizeHint() const override;
 

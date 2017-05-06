@@ -59,7 +59,8 @@ class MainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(Variant variant, const QString& initialFile = "",
+    explicit MainWindow(QWidget* parent, Variant variant,
+                        const QString& initialFile = "",
                         const QString& helpDir = "",
                         unsigned maxLevel = Player::max_supported_level,
                         const QString& booksDir = "", bool noBook = false,

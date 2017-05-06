@@ -167,11 +167,12 @@ ScoreType getHeuristic(const Board& bd, Move mv)
 
 //-----------------------------------------------------------------------------
 
-MainWindow::MainWindow(Variant variant, const QString& initialFile,
-                       const QString& helpDir, unsigned maxLevel,
-                       const QString& booksDir, bool noBook,
+MainWindow::MainWindow(QWidget* parent, Variant variant,
+                       const QString& initialFile, const QString& helpDir,
+                       unsigned maxLevel, const QString& booksDir, bool noBook,
                        unsigned nuThreads)
-    : m_game(variant),
+    : QMainWindow(parent),
+      m_game(variant),
       m_bd(m_game.get_board()),
       m_helpDir(helpDir)
 {

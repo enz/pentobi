@@ -175,8 +175,8 @@ int main(int argc, char* argv[])
             variant = Variant::duo;
         try
         {
-            MainWindow mainWindow(variant, initialFile, helpDir, maxLevel,
-                                  booksDir, noBook, threads);
+            MainWindow mainWindow(nullptr, variant, initialFile, helpDir,
+                                  maxLevel, booksDir, noBook, threads);
             if (parser.isSet(optionNoDelay))
                 mainWindow.setNoDelay();
             mainWindow.show();
