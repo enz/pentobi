@@ -677,6 +677,8 @@ private slots:
 
     void leaveFullscreen();
 
+    void levelTriggered(bool checked);
+
     void noMoveAnnotation(bool checked);
 
     void openRecentFile();

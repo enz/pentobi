@@ -662,10 +662,7 @@ QAction* MainWindow::createActionLevel(unsigned level, const QString& text)
     action->setCheckable(true);
     action->setActionGroup(m_actionGroupLevel);
     action->setData(level);
-    connect(action, &QAction::triggered, [this](bool checked) {
-        if (checked)
-            setLevel(qobject_cast<QAction*>(sender())->data().toUInt());
-    });
+    connect(action, &QAction::triggered, this, &MainWindow::levelTriggered);
     return action;
 }
 
@@ -2154,6 +2151,12 @@ void MainWindow::leaveSetupMode()
     if (! m_actionSetupMode->isChecked())
         return;
     setupMode(false);
+}
+
+void MainWindow::levelTriggered(bool checked)
+{
+    if (checked)
+        setLevel(qobject_cast<QAction*>(sender())->data().toUInt());
 }
 
 void MainWindow::loadHistory()
