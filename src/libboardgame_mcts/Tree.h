@@ -10,14 +10,10 @@
 #include <algorithm>
 #include <memory>
 #include "Node.h"
-#include "libboardgame_util/Abort.h"
-#include "libboardgame_util/IntervalChecker.h"
 
 namespace libboardgame_mcts {
 
 using namespace std;
-using libboardgame_util::get_abort;
-using libboardgame_util::IntervalChecker;
 
 //-----------------------------------------------------------------------------
 
