@@ -15,7 +15,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-/** Exception indication a semantic error in the tree.
+/** Exception indicating a semantic error in the tree.
     This exception is used for semantic errors in SGF trees. If a SGF tree
     is loaded from an external file, it is usually only checked for
     (game-independent) syntax errors, but not for semantic errors (e.g. illegal
