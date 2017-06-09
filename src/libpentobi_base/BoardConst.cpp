@@ -1186,6 +1186,8 @@ bool BoardConst::get_piece_by_name(const string& name, Piece& piece) const
 
 bool BoardConst::find_move(const MovePoints& points, Move& move) const
 {
+    if (points.empty())
+        return false;
     MovePoints sorted_points = points;
     sort(sorted_points);
     for (Piece::IntType i = 0; i < m_pieces.size(); ++i)
