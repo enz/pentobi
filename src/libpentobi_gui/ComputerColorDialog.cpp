@@ -73,9 +73,13 @@ QString ComputerColorDialog::getPlayerString(Color c)
     if (nuPlayers == 2 && nuColors == 4)
         return i == 0 || i == 2 ? tr("&Blue/Red") : tr("&Yellow/Green");
     if (i == 0)
-        return tr("&Blue");
+        return m_variant == Variant::duo ? tr("&Purple") :
+                                           m_variant == Variant::junior ?
+                                               tr("&Green") : tr("&Blue");
     if (i == 1)
-        return nuColors == 2 ? tr("&Green") : tr("&Yellow");
+        return m_variant == Variant::duo || m_variant == Variant::junior ?
+                    tr("&Orange") : nuColors == 2 ?
+                        tr("&Green") : tr("&Yellow");
     if (i == 2)
         return tr("&Red");
     LIBBOARDGAME_ASSERT(i == 3);

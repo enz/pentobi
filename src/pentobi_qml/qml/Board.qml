@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item {
     id: root
 
-    property string gameVariant
+    property string gameVariant: gameModel.gameVariant
     property bool showCoordinates
     property bool isTrigon: startsWith(gameVariant, "trigon")
     property bool isNexos: startsWith(gameVariant, "nexos")
@@ -214,7 +214,9 @@ Item {
 
         Rectangle {
             visible: image.status == Image.Ready
-            color: theme.colorBlue
+            color: gameVariant === "duo" ?
+                       theme.colorPurple : gameVariant === "junior" ?
+                           theme.colorGreen : theme.colorBlue
             width: startingPointSize; height: width
             radius: width / 2
             x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
@@ -226,7 +228,9 @@ Item {
 
         Rectangle {
             visible: image.status == Image.Ready
-            color: gameModel.nuColors === 2 ? theme.colorGreen : theme.colorYellow
+            color: gameVariant === "duo" || gameVariant === "junior" ?
+                       theme.colorOrange : gameModel.nuColors === 2 ?
+                           theme.colorGreen : theme.colorYellow
             width: startingPointSize; height: width
             radius: width / 2
             x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)

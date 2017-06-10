@@ -34,7 +34,17 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game,
     auto variant = game.get_variant();
     auto nuColors = get_nu_colors(variant);
     auto nuPlayers = get_nu_players(variant);
-    if (nuColors == 2)
+    if (variant == Variant::duo)
+    {
+        m_playerBlue = createPlayerName(tr("Player &Purple:"), Color(0));
+        m_playerGreen = createPlayerName(tr("Player &Orange:"), Color(1));
+    }
+    else if (variant == Variant::junior)
+    {
+        m_playerBlue = createPlayerName(tr("Player &Green:"), Color(0));
+        m_playerGreen = createPlayerName(tr("Player &Orange:"), Color(1));
+    }
+    else if (nuColors == 2)
     {
         m_playerBlue = createPlayerName(tr("Player &Blue:"), Color(0));
         m_playerGreen = createPlayerName(tr("Player &Green:"), Color(1));

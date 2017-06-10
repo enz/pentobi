@@ -1,7 +1,11 @@
 Version 13.1.UNKNOWN (v13-fixes)
 ================================
 
-*
+General:
+
+* Game variant Duo now uses the colors purple/orange to be compatible with
+  the physical game and the Blokus game servers.
+* Game variant Junior now uses the colors green/orange.
 
 
 Version 13.1 (06 Jun 2017)

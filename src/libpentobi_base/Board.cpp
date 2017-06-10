@@ -335,7 +335,25 @@ void Board::init_variant(Variant variant)
 {
     m_variant = variant;
     m_nu_colors = libpentobi_base::get_nu_colors(variant);
-    if (m_nu_colors == 2)
+    if (variant == Variant::duo)
+    {
+        m_color_name[Color(0)] = "Purple";
+        m_color_name[Color(1)] = "Orange";
+        m_color_esc_sequence[Color(0)] = "\x1B[1;35;47m";
+        m_color_esc_sequence[Color(1)] = "\x1B[1;33;47m";
+        m_color_esc_sequence_text[Color(0)] = "\x1B[1;35m";
+        m_color_esc_sequence_text[Color(1)] = "\x1B[1;33m";
+    }
+    else if (variant == Variant::junior)
+    {
+        m_color_name[Color(0)] = "Green";
+        m_color_name[Color(1)] = "Orange";
+        m_color_esc_sequence[Color(0)] = "\x1B[1;32;47m";
+        m_color_esc_sequence[Color(1)] = "\x1B[1;33;47m";
+        m_color_esc_sequence_text[Color(0)] = "\x1B[1;32m";
+        m_color_esc_sequence_text[Color(1)] = "\x1B[1;33m";
+    }
+    else if (m_nu_colors == 2)
     {
         m_color_name[Color(0)] = "Blue";
         m_color_name[Color(1)] = "Green";
