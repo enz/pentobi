@@ -20,8 +20,15 @@ Dialog {
             id: checkBox0
 
             enabled: ! isRated
-            text: gameModel.nuColors == 4 && gameModel.nuPlayers == 2 ?
-                      qsTr("Blue/Red") : qsTr("Blue")
+            text: {
+                if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
+                      return qsTr("Blue/Red")
+                if (gameModel.gameVariant === "duo")
+                    return qsTr("Purple")
+                if (gameModel.gameVariant === "junior")
+                    return qsTr("Green")
+                return qsTr("Blue")
+            }
             onClicked:
                 if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
                     computerPlays2 = checked
@@ -33,6 +40,8 @@ Dialog {
             text: {
                 if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
                     return qsTr("Yellow/Green")
+                if (gameModel.gameVariant === "duo" || gameModel.gameVariant === "junior")
+                    return qsTr("Orange")
                 if (gameModel.nuColors == 2)
                     return qsTr("Green")
                 return qsTr("Yellow")

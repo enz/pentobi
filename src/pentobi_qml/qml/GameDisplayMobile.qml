@@ -70,8 +70,6 @@ Item
         Board {
             id: board
 
-            gameVariant: gameModel.gameVariant
-
             // Ensures that at least 3 rows are shown in pieceSelector
             width: Math.min(
                        parent.width,

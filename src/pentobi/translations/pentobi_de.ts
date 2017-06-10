@@ -1027,6 +1027,22 @@
         <source>&amp;Level (Callisto, 2 Players, 4 Colors)</source>
         <translation>Spielst&amp;ufe (Callisto, 2 Spieler, 4 Farben)</translation>
     </message>
+    <message>
+        <source>Purple wins with 1 point.</source>
+        <translation>Lila gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Purple wins with %L1 points.</source>
+        <translation>Lila gewinnt mit %L1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Orange wins with 1 point.</source>
+        <translation>Orange gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Orange wins with %L1 points.</source>
+        <translation>Orange gewinnt mit %L1 Punkten.</translation>
+    </message>
 </context>
 <context>
     <name>RatedGamesList</name>

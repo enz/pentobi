@@ -454,17 +454,23 @@ bool GameModel::findNextCommentContinueFromRoot()
 
 QString GameModel::getPlayerString(int player)
 {
-    bool isMulticolor = (m_nuColors > m_nuPlayers
-                         && m_game.get_variant() != Variant::classic_3);
+    auto variant = m_game.get_variant();
+    bool isMulticolor = (m_nuColors > m_nuPlayers && variant != Variant::classic_3);
     switch (player) {
     case 0:
         if (isMulticolor)
             return tr("Blue/Red");
+        else if (variant == Variant::duo)
+            return tr("Purple");
+        else if (variant == Variant::junior)
+            return tr("Green");
         else
             return tr("Blue");
     case 1:
         if (isMulticolor)
             return tr("Yellow/Green");
+        else if (variant == Variant::duo || variant == Variant::junior)
+            return tr("Orange");
         else if (m_nuColors == 2)
             return tr("Green");
         else
@@ -502,6 +508,33 @@ QList<PieceModel*>& GameModel::getPieceModels(Color c)
 QString GameModel::getResultMessage()
 {
     auto& bd = getBoard();
+    auto variant = bd.get_variant();
+    if (variant == Variant::duo)
+    {
+        auto score = m_points0 - m_points1;
+        if (score == 1)
+            return tr("Purple wins with 1 point.");
+        if (score > 0)
+            return tr("Purple wins with %L1 points.").arg(score);
+        if (score == -1)
+            return tr("Orange wins with 1 point.");
+        if (score < 0)
+            return tr("Orange wins with %L1 points.").arg(-score);
+        return tr("Game ends in a tie.");
+    }
+    if (variant == Variant::junior)
+    {
+        auto score = m_points0 - m_points1;
+        if (score == 1)
+            return tr("Green wins with 1 point.");
+        if (score > 0)
+            return tr("Green wins with %L1 points.").arg(score);
+        if (score == -1)
+            return tr("Orange wins with 1 point.");
+        if (score < 0)
+            return tr("Orange wins with %L1 points.").arg(-score);
+        return tr("Game ends in a tie.");
+    }
     bool breakTies = (bd.get_piece_set() == PieceSet::callisto);
     if (m_nuColors == 2)
     {

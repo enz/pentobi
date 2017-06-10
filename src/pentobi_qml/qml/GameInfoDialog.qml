@@ -32,8 +32,15 @@ Dialog {
         columns: 2
 
         Label {
-            text: gameModel.nuColors === 4 && gameModel.nuPlayers === 2 ?
-                      qsTr("Player Blue/Red:") : qsTr("Player Blue:")
+            text: {
+                if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                      return qsTr("Player Blue/Red:")
+                if (gameModel.gameVariant === "duo")
+                    return qsTr("Player Purple:")
+                if (gameModel.gameVariant === "junior")
+                    return qsTr("Player Green:")
+                return qsTr("Player Blue:")
+            }
         }
         TextField {
             id: textFieldPlayerName0
@@ -44,6 +51,8 @@ Dialog {
             text: {
                 if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
                     return qsTr("Player Yellow/Green:")
+                if (gameModel.gameVariant === "duo" || gameModel.gameVariant === "junior")
+                    return qsTr("Player Orange:")
                 if (gameModel.nuColors === 2)
                     return qsTr("Player Green:")
                 return qsTr("Player Yellow:")

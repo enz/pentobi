@@ -1657,7 +1657,35 @@ void MainWindow::gameOver()
     auto nuPlayers = get_nu_players(variant);
     bool breakTies = (m_bd.get_piece_set() == PieceSet::callisto);
     QString info;
-    if (nuColors == 2)
+    if (variant == Variant::duo)
+    {
+        auto score = m_bd.get_score_twocolor(Color(0));
+        if (score == 1)
+            info = tr("Purple wins with 1 point.");
+        else if (score > 0)
+            info = tr("Purple wins with %L1 points.").arg(score);
+        else if (score == -1)
+            info = tr("Orange wins with 1 point.");
+        else if (score < 0)
+            info = tr("Orange wins with %L1 points.").arg(-score);
+        else
+            info = tr("The game ends in a tie.");
+    }
+    else if (variant == Variant::junior)
+    {
+        auto score = m_bd.get_score_twocolor(Color(0));
+        if (score == 1)
+            info = tr("Green wins with 1 point.");
+        else if (score > 0)
+            info = tr("Green wins with %L1 points.").arg(score);
+        else if (score == -1)
+            info = tr("Orange wins with 1 point.");
+        else if (score < 0)
+            info = tr("Orange wins with %L1 points.").arg(-score);
+        else
+            info = tr("The game ends in a tie.");
+    }
+    else if (nuColors == 2)
     {
         auto score = m_bd.get_score_twocolor(Color(0));
         if (score == 1)

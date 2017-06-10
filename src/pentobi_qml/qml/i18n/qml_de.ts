@@ -57,6 +57,14 @@
         <source>Red</source>
         <translation>Rot</translation>
     </message>
+    <message>
+        <source>Purple</source>
+        <translation>Lila</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
+    </message>
 </context>
 <context>
     <name>ExportImageDialog</name>
@@ -114,6 +122,14 @@
     <message>
         <source>Round:</source>
         <translation>Runde:</translation>
+    </message>
+    <message>
+        <source>Player Purple:</source>
+        <translation>Spieler Lila:</translation>
+    </message>
+    <message>
+        <source>Player Orange:</source>
+        <translation>Spieler Orange:</translation>
     </message>
 </context>
 <context>
@@ -266,6 +282,30 @@
         <source>File has unsupported character set.</source>
         <translation>Datei hat nicht unterstützten Zeichensatz.</translation>
     </message>
+    <message>
+        <source>Purple</source>
+        <translation>Lila</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
+    </message>
+    <message>
+        <source>Purple wins with 1 point.</source>
+        <translation>Lila gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Purple wins with %L1 points.</source>
+        <translation>Lila gewinnt mit %L1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Orange wins with 1 point.</source>
+        <translation>Orange gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Orange wins with %L1 points.</source>
+        <translation>Orange gewinnt mit %L1 Punkten.</translation>
+    </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>
@@ -308,7 +348,7 @@
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt. Schätzen Sie Ihre Spielstärke zur Initialisierung Ihrer Wertung.</translation>
+        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt. Schätzen Sie Ihre Spielstärke, um Ihre Wertung zu initialisieren.</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -488,6 +528,14 @@
     <message>
         <source>Overwrite existing file?</source>
         <translation>Existierende Datei überschreiben?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Purple against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Lila gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Orange against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Orange gegen Pentobi Spielstufe %1 beginnen?</translation>
     </message>
 </context>
 <context>

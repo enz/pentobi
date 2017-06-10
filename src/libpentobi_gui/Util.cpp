@@ -24,6 +24,10 @@ const QColor red(230, 62, 44);
 
 const QColor yellow(235, 205, 35);
 
+const QColor purple(161, 44, 207);
+
+const QColor orange(240, 173, 26);
+
 const QColor gray(174, 167, 172);
 
 void setAlphaSaturation(QColor& c, qreal alpha, qreal saturation)
@@ -353,7 +357,11 @@ QColor Util::getMarkColor(Variant variant, PointState s)
 
 QColor Util::getPaintColor(Variant variant, Color c)
 {
-    if (get_nu_colors(variant) == 2)
+    if (variant == Variant::duo)
+        return c == Color(0) ? purple : orange;
+    else if (variant == Variant::junior)
+        return c == Color(0) ? green : orange;
+    else if (get_nu_colors(variant) == 2)
         return c == Color(0) ? blue : green;
     else
     {
@@ -371,6 +379,12 @@ QColor Util::getPaintColor(Variant variant, Color c)
 QString Util::getPlayerString(Variant variant, Color c)
 {
     auto i = c.to_int();
+    if (variant == Variant::duo)
+        return i == 0 ? qApp->translate("Util", "Purple")
+                      : qApp->translate("Util", "Orange");
+    if (variant == Variant::junior)
+        return i == 0 ? qApp->translate("Util", "Green")
+                      : qApp->translate("Util", "Orange");
     if (get_nu_colors(variant) == 2)
         return i == 0 ? qApp->translate("Util", "Blue")
                       : qApp->translate("Util", "Green");

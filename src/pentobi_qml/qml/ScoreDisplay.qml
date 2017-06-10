@@ -47,7 +47,9 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: theme.colorBlue
+        color: gameModel.gameVariant === "duo" ?
+                   theme.colorPurple : gameModel.gameVariant === "junior" ?
+                       theme.colorGreen : theme.colorBlue
     }
     ScoreElement {
         value: points1
@@ -57,7 +59,9 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: gameModel.nuColors == 2 ? theme.colorGreen : theme.colorYellow
+        color: gameModel.gameVariant === "duo" || gameModel.gameVariant === "junior" ?
+                   theme.colorOrange : gameModel.nuColors === 2 ?
+                       theme.colorGreen : theme.colorYellow
     }
     ScoreElement {
         visible: gameModel.nuColors > 2

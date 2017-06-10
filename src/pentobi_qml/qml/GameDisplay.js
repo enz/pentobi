@@ -3,9 +3,20 @@ function createColorPieces(component, pieceModels) {
         return []
     var colorName
     switch (pieceModels[0].color) {
-    case 0: colorName = "blue"; break
+    case 0:
+        if (gameModel.gameVariant == "duo")
+            colorName = "purple"
+        else if (gameModel.gameVariant == "junior")
+            colorName = "green"
+        else
+            colorName = "blue"
+        break
     case 1:
-        colorName = gameModel.nuColors == 2 ? "green" : "yellow"; break
+        if (gameModel.gameVariant == "duo" || gameModel.gameVariant == "junior")
+            colorName = "orange"
+        else
+            colorName = gameModel.nuColors == 2 ? "green" : "yellow"
+        break
     case 2: colorName = "red"; break
     case 3: colorName = "green"; break
     }

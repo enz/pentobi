@@ -35,6 +35,14 @@
         <source>&amp;Yellow/Green</source>
         <translation>&amp;Gelb/Grün</translation>
     </message>
+    <message>
+        <source>&amp;Purple</source>
+        <translation>&amp;Lila</translation>
+    </message>
+    <message>
+        <source>&amp;Orange</source>
+        <translation>&amp;Orange</translation>
+    </message>
 </context>
 <context>
     <name>GameInfoDialog</name>
@@ -88,6 +96,14 @@
     <message>
         <source>R&amp;ound:</source>
         <translation>R&amp;unde:</translation>
+    </message>
+    <message>
+        <source>Player &amp;Purple:</source>
+        <translation>Spieler &amp;Lila:</translation>
+    </message>
+    <message>
+        <source>Player &amp;Orange:</source>
+        <translation>Spieler &amp;Orange:</translation>
     </message>
 </context>
 <context>
@@ -157,6 +173,14 @@
     <message>
         <source>Yellow/Green</source>
         <translation>Gelb/Grün</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Lila</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
     </message>
 </context>
 </TS>

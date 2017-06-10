@@ -537,13 +537,19 @@ function ratedGameNoVerify()
     var msg
     switch (player) {
     case 0:
-        if (isMultiColor())
+        if (gameVariant === "duo")
+            msg = qsTr("Start rated game with Purple against Pentobi level %1?").arg(level)
+        else if (gameVariant === "junior")
+            msg = qsTr("Start rated game with Green against Pentobi level %1?").arg(level)
+        else if (isMultiColor())
             msg = qsTr("Start rated game with Blue/Red against Pentobi level %1?").arg(level)
         else
             msg = qsTr("Start rated game with Blue against Pentobi level %1?").arg(level)
         break
     case 1:
-        if (isMultiColor())
+        if (gameVariant === "duo" || gameVariant === "junior")
+            msg = qsTr("Start rated game with Orange against Pentobi level %1?").arg(level)
+        else if (isMultiColor())
             msg = qsTr("Start rated game with Yellow/Green against Pentobi level %1?").arg(level)
         else if (gameModel.nuColors === 2)
             msg = qsTr("Start rated game with Green against Pentobi level %1?").arg(level)

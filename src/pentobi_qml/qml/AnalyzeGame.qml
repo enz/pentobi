@@ -6,8 +6,12 @@ Item {
 
     property var elements: analyzeGameModel.elements
     property var color: [
-        theme.colorBlue,
-        (gameModel.nuColors === 2 ? theme.colorGreen : theme.colorYellow),
+        (gameModel.gameVariant === "duo" ?
+             theme.colorPurple : gameModel.gameVariant === "junior" ?
+                 theme.colorGreen : theme.colorBlue),
+        (gameModel.gameVariant === "duo" || gameModel.gameVariant === "junior" ?
+             theme.colorOrange : gameModel.nuColors === 2 ?
+                 theme.colorGreen : theme.colorYellow),
         theme.colorRed,
         theme.colorGreen
     ]
