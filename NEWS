@@ -15,6 +15,11 @@ General:
   the physical game and the Blokus game servers.
 * Game variant Junior now uses the colors green/orange.
 
+Android:
+
+* Added app permission READ_EXTERNAL_STORAGE to read game files from
+  SD cards.
+
 
 Version 13.1 (06 Jun 2017)
 ==========================
