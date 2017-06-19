@@ -85,7 +85,4 @@ endif()
 add_subdirectory(doc)
 add_subdirectory(src)
 add_subdirectory(data)
-if(WIN32 AND PENTOBI_BUILD_GUI)
-  add_subdirectory(windows)
-endif()
 
