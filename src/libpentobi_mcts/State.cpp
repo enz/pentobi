@@ -266,7 +266,7 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
     }
 }
 
-/** Evaluation function for Duo, Junior and Callisto Two-Player. */
+/** Evaluation function for game variants with 2 colors. */
 void State::evaluate_twocolor(array<Float, 6>& result)
 {
     LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
