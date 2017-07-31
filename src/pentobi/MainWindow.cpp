@@ -2872,6 +2872,7 @@ void MainWindow::setVariant(Variant variant)
     clearPiece();
     m_game.init(variant);
     initPieceSelectors();
+    m_orientationDisplay->update();
     newGame();
     loadHistory();
     restoreLevel(variant);
