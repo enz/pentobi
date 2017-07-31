@@ -15,6 +15,11 @@ General:
   the physical game and the Blokus game servers.
 * Game variant Junior now uses the colors green/orange.
 
+Desktop version:
+
+* Color of dot indicating color to play in orientation display was not
+  updated after changing game variant.
+
 
 Version 13.1 (06 Jun 2017)
 ==========================
