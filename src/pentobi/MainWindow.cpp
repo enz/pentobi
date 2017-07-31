@@ -2372,6 +2372,7 @@ bool MainWindow::open(istream& in)
     initVariantActions();
     restoreLevel(m_bd.get_variant());
     updateWindow(true);
+    m_orientationDisplay->update();
     loadHistory();
     return true;
 }
