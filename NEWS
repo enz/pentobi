@@ -16,6 +16,12 @@ General:
 * Game variant Junior now uses the colors green/orange.
 
 
+Desktop version:
+
+* Dot indicating color to play in orientation selector was not always
+  updated correctly after loading a file of a different game variant.
+
+
 Version 13.1 (06 Jun 2017)
 ==========================
 
