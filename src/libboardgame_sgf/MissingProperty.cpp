@@ -10,6 +10,8 @@
 
 #include "MissingProperty.h"
 
+#include <string>
+
 namespace libboardgame_sgf {
 
 //-----------------------------------------------------------------------------
