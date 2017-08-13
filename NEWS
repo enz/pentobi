@@ -20,6 +20,7 @@ Desktop version:
 
 * Dot indicating color to play in orientation selector was not always
   updated correctly after loading a file of a different game variant.
+* Added missing include that broke compilation on FreeBSD 11.
 
 
 Version 13.1 (06 Jun 2017)

@@ -10,6 +10,8 @@
 
 #include "SgfError.h"
 
+#include <string>
+
 namespace libboardgame_sgf {
 
 //-----------------------------------------------------------------------------
