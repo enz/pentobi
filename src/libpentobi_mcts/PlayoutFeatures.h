@@ -93,6 +93,7 @@ public:
 
     PlayoutFeatures();
 
+
     /** Initialize snapshot with forbidden state. */
     void init_snapshot(const Board& bd, Color c);
 
@@ -116,7 +117,23 @@ private:
 
     /** Points with non-zero local value. */
     PointList m_local_points;
+
+
+    void add_local(const Board& bd, Point p, Color to_play,
+                   unsigned& nu_local);
 };
+
+
+inline void PlayoutFeatures::add_local(const Board& bd, Point p, Color to_play,
+                                       unsigned& nu_local)
+{
+    if (m_point_value[p] == 0)
+    {
+        m_local_points.get_unchecked(nu_local++) = p;
+        m_point_value[p] =
+                1 + static_cast<IntType>(bd.is_attach_point(p, to_play));
+    }
+}
 
 inline void PlayoutFeatures::init_snapshot(const Board& bd, Color c)
 {
@@ -186,36 +203,20 @@ inline void PlayoutFeatures::set_local(const Board& bd)
         {
             if (is_forbidden[*j])
                 continue;
-            if (m_point_value[*j] == 0)
-            {
-                m_local_points.get_unchecked(nu_local++) = *j;
-                m_point_value[*j] =
-                        1 + static_cast<IntType>(
-                            bd.is_attach_point(*j, to_play));
-            }
+            add_local(bd, *j, to_play, nu_local);
             if (MAX_SIZE == 7 || IS_CALLISTO)
             {
                 // Nexos or Callisto don't use adjacent points, use 2nd-order
                 // "diagonal" points instead
                 LIBBOARDGAME_ASSERT(geo.get_adj(*j).empty());
                 for (Point k : geo.get_diag(*j))
-                    if (! is_forbidden[k] && m_point_value[k] == 0)
-                    {
-                        m_local_points.get_unchecked(nu_local++) = k;
-                        m_point_value[k] =
-                                1 + static_cast<IntType>(
-                                    bd.is_attach_point(k, to_play));
-                    }
+                    if (! is_forbidden[k])
+                        add_local(bd, k, to_play, nu_local);
             }
             else
                 for (Point k : geo.get_adj(*j))
-                    if (! is_forbidden[k] && m_point_value[k] == 0)
-                    {
-                        m_local_points.get_unchecked(nu_local++) = k;
-                        m_point_value[k] =
-                                1 + static_cast<IntType>(
-                                    bd.is_attach_point(k, to_play));
-                    }
+                    if (! is_forbidden[k])
+                        add_local(bd, k, to_play, nu_local);
         }
         while (++j != end);
     }
