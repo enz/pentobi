@@ -78,7 +78,7 @@ struct TestRegistrar
         if (result1 != result2)                                         \
         {                                                               \
             ostringstream msg;                                          \
-            msg << "'" << result1 << " != " << "'" << result2 << "'";   \
+            msg << "'" << result1 << "' != '" << result2 << "'";   \
             throw TestFail(__FILE__, __LINE__, msg.str());              \
         }                                                               \
     }
