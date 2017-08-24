@@ -16,13 +16,8 @@ namespace libboardgame_sgf {
 
 //-----------------------------------------------------------------------------
 
-MissingProperty::MissingProperty(const string& message)
-    : InvalidTree("Missing SGF property: " + message)
-{
-}
-
-MissingProperty::MissingProperty(const string& id, const string& message)
-    : InvalidTree("Missing SGF property '" + id + ": " + message)
+MissingProperty::MissingProperty(const string& id)
+    : InvalidTree("Missing SGF property '" + id + "'")
 {
 }
 
