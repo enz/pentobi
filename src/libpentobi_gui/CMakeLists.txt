@@ -39,7 +39,6 @@ qt5_add_translation(pentobi_gui_QM_SRCS ${pentobi_gui_TS})
 
 add_library(pentobi_gui STATIC
   ${pentobi_gui_STAT_SRCS}
-  ${pentobi_gui_RC_SRCS}
   ${pentobi_gui_QM_SRCS})
 
 target_compile_definitions(pentobi_gui PRIVATE
