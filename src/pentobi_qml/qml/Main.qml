@@ -48,7 +48,6 @@ Window {
     visibility: Window.AutomaticVisibility
     color: theme.backgroundColor
     title: qsTr("Pentobi")
-    onClosing: Qt.quit()
     Component.onCompleted: {
         Logic.init()
         show()
