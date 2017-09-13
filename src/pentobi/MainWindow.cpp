@@ -248,30 +248,7 @@ MainWindow::MainWindow(Variant variant, const QString& initialFile,
     icon.addFile(":/pentobi/icons/pentobi-32.png");
     setWindowIcon(icon);
 
-    bool centerOnScreen = false;
-    QRect screenGeometry = QApplication::desktop()->availableGeometry(this);
-    if (restoreGeometry(settings.value("geometry").toByteArray()))
-    {
-        if (! screenGeometry.contains(geometry()))
-        {
-            if (width() > screenGeometry.width()
-                    || height() > screenGeometry.height())
-                adjustSize();
-            centerOnScreen = true;
-        }
-    }
-    else
-    {
-        adjustSize();
-        centerOnScreen = true;
-    }
-    if (centerOnScreen)
-    {
-        int x = (screenGeometry.width() - width()) / 2;
-        int y = (screenGeometry.height() - height()) / 2;
-        move(x, y);
-    }
-
+    restoreGeometry(settings.value("geometry").toByteArray());
     auto showComment = settings.value("show_comment", false).toBool();
     m_comment->setVisible(showComment);
     if (showComment)

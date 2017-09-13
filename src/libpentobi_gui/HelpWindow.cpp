@@ -58,8 +58,7 @@ HelpWindow::HelpWindow(QWidget* parent, const QString& title,
     browser->addAction(actionForward);
     browser->setContextMenuPolicy(Qt::ActionsContextMenu);
     QSettings settings;
-    if (! restoreGeometry(settings.value("helpwindow_geometry").toByteArray()))
-        adjustSize();
+    restoreGeometry(settings.value("helpwindow_geometry").toByteArray());
 }
 
 QString HelpWindow::findMainPage(const QString& helpDir, const QString& appName)
