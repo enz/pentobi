@@ -1,40 +1,31 @@
 if(PENTOBI_BUILD_GUI AND NOT WIN32)
 
-add_custom_target(
-  pentobi-64.png ALL
-  COMMAND convert ${CMAKE_SOURCE_DIR}/src/pentobi/icons/pentobi-64.svg pentobi-64.png
-  DEPENDS ${CMAKE_SOURCE_DIR}/src/pentobi/icons/pentobi-64.svg
-  )
-add_custom_target(
-  application-x-blokus-sgf.png ALL
-  COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf.svg application-x-blokus-sgf.png
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf.svg
-  )
-add_custom_target(
-  application-x-blokus-sgf-16.png ALL
-  COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-16.svg application-x-blokus-sgf-16.png
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-16.svg
-  )
-add_custom_target(
-  application-x-blokus-sgf-32.png ALL
-  COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-32.svg application-x-blokus-sgf-32.png
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-32.svg
-  )
-add_custom_target(
-  application-x-blokus-sgf-64.png ALL
-  COMMAND convert ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-64.svg application-x-blokus-sgf-64.png
-  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-64.svg
-  )
+foreach(icon application-x-blokus-sgf application-x-blokus-sgf-16
+	application-x-blokus-sgf-32 application-x-blokus-sgf-64)
+  set(icon_svg "${CMAKE_CURRENT_SOURCE_DIR}/${icon}.svg")
+  set(icon_png "${CMAKE_CURRENT_BINARY_DIR}/${icon}.png")
+  add_custom_command(OUTPUT "${icon_png}"
+    COMMAND convert "${icon_svg}" "${icon_png}" DEPENDS "${icon_svg}")
+  list(APPEND png_icons "${icon_png}")
+endforeach()
+foreach(icon pentobi pentobi-16 pentobi-32 pentobi-64)
+  set(icon_svg "${CMAKE_SOURCE_DIR}/src/pentobi/icons/${icon}.svg")
+  set(icon_png "${CMAKE_CURRENT_BINARY_DIR}/${icon}.png")
+  add_custom_command(OUTPUT "${icon_png}"
+    COMMAND convert "${icon_svg}" "${icon_png}" DEPENDS "${icon_svg}")
+  list(APPEND png_icons "${icon_png}")
+endforeach()
+add_custom_target(data_icons ALL DEPENDS ${png_icons})
 
 configure_file(io.sourceforge.pentobi.desktop.in io.sourceforge.pentobi.desktop @ONLY)
 configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
 configure_file(io.sourceforge.pentobi.appdata.xml.in io.sourceforge.pentobi.appdata.xml @ONLY)
-install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi.png
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps)
-install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi-16.png
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-16.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/apps
   RENAME pentobi.png)
-install(FILES ${CMAKE_BINARY_DIR}/src/pentobi/icons/pentobi-32.png
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-32.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps
   RENAME pentobi.png)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-64.png
