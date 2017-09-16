@@ -14,7 +14,8 @@ General:
 * Game variant Duo now uses the colors purple/orange to be compatible with
   the physical game and the Blokus game servers.
 * Game variant Junior now uses the colors green/orange.
-
+* File format: accept whitespaces before and after property idetifiers as
+  required by SGF standard.
 
 Desktop version:
 
