@@ -7,7 +7,7 @@
 <body>
 <h1>Pentobi SGF Files</h1>
 <div style="font-size:small">Author: Markus Enzenberger<br>
-Last modified: 2017-05-05</div>
+Last modified: 2017-09-16</div>
 <p>This document describes the file format for <a href=
 "http://en.wikipedia.org/wiki/Blokus">Blokus</a> game records as used by the
 program <a href="https://pentobi.sourceforge.io">Pentobi</a>. The most recent
@@ -21,6 +21,10 @@ of game-specific properties and value types had to be defined. The definitions
 follow the recommendations of SGF 4 and the proposals for multi-player games
 from the <a href="http://www.red-bean.com/sgf/ff5/ff5.htm">discussions</a>
 about the future SGF version 5.</p>
+<p style="font-size:small"><b>Note</b><br>
+Older versions of Pentobi (up to version 13.1) did not accept whitespaces
+before and after property identifiers, so it is recommended to avoid them for
+compatibilty.</p>
 <h2>File Extension and MIME Type</h2>
 <p>The file extension <tt>.blksgf</tt> and the <a href=
 "http://en.wikipedia.org/wiki/Internet_media_type">MIME type</a>
