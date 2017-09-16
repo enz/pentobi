@@ -195,7 +195,11 @@ void Reader::read_property()
     {
         m_id.clear();
         while (peek() != '[')
-            m_id += read_char();
+        {
+            char c = read_char();
+            if (! is_ascii_space(c))
+                m_id += c;
+        }
         m_values.clear();
         while (peek() == '[')
         {

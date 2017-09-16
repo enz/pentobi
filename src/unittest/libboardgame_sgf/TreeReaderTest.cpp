@@ -44,6 +44,21 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_basic_2)
     LIBBOARDGAME_CHECK_EQUAL(root.get_child(1).get_property("C"), "2.2");
 }
 
+LIBBOARDGAME_TEST_CASE(sgf_tree_reader_multiprop_with_whitespace)
+{
+    istringstream in("(;A [1]\n[2] [3]\t[4]\r\n[5])");
+    TreeReader reader;
+    reader.read(in);
+    auto& root = reader.get_tree();
+    auto values = root.get_multi_property("A");
+    LIBBOARDGAME_CHECK_EQUAL(values.size(), 5u);
+    LIBBOARDGAME_CHECK_EQUAL(values[0], "1");
+    LIBBOARDGAME_CHECK_EQUAL(values[1], "2");
+    LIBBOARDGAME_CHECK_EQUAL(values[2], "3");
+    LIBBOARDGAME_CHECK_EQUAL(values[3], "4");
+    LIBBOARDGAME_CHECK_EQUAL(values[4], "5");
+}
+
 /** Test that a property value with a unicode character is preserved after
     reading and writing.
     In previous versions this was broken because of a bug in the replacement
