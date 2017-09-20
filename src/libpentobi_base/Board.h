@@ -497,8 +497,7 @@ inline Move Board::from_string(const string& s) const
 inline unsigned Board::get_adj_status(Point p, Color c) const
 {
     LIBBOARDGAME_ASSERT(m_bc->has_adj_status_points(p));
-    auto adj_status_points = m_bc->get_adj_status_points(p);
-    auto i = adj_status_points.begin();
+    auto i = m_bc->get_adj_status_points(p).begin();
     unsigned result = is_forbidden(*i, c);
     for (unsigned j = 1; j < PrecompMoves::adj_status_nu_adj; ++j)
         result |= (is_forbidden(*(++i), c) << j);
