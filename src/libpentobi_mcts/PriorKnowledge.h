@@ -201,10 +201,10 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         auto mv = moves[i];
-        auto info = BoardConst::get_move_info<MAX_SIZE>(mv, move_info_array);
         auto& info_ext = BoardConst::get_move_info_ext<MAX_ADJ_ATTACH>(
                     mv, move_info_ext_array);
         auto& features = m_features[i];
+        auto& info = BoardConst::get_move_info<MAX_SIZE>(mv, move_info_array);
         auto j = info.begin();
         Float heuristic = point_value[*j];
         bool local = m_is_local[*j];
