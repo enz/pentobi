@@ -14,13 +14,11 @@
 #include "PrecompMoves.h"
 #include "SymmetricPoints.h"
 #include "Variant.h"
-#include "libboardgame_util/ArrayList.h"
 #include "libboardgame_util/Range.h"
 
 namespace libpentobi_base {
 
 using namespace std;
-using libboardgame_util::ArrayList;
 using libboardgame_util::Range;
 
 //-----------------------------------------------------------------------------
