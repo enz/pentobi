@@ -19,6 +19,8 @@
 class Application
     : public QApplication
 {
+    Q_OBJECT
+
 public:
     using QApplication::QApplication;
 
