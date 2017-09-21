@@ -28,11 +28,11 @@ using namespace std;
 class Engine
 {
 public:
-    typedef function<void(const Arguments&, Response&)> Handler;
+    typedef function<void(Arguments, Response&)> Handler;
 
     typedef function<void(Response&)> HandlerNoArgs;
 
-    typedef function<void(const Arguments&)> HandlerNoResponse;
+    typedef function<void(Arguments)> HandlerNoResponse;
 
     typedef function<void()> HandlerNoArgsNoResponse;
 
@@ -53,7 +53,7 @@ public:
         </dl> */
     /** @name Command handlers */
     /** @{ */
-    void cmd_known_command(const Arguments&, Response&);
+    void cmd_known_command(Arguments, Response&);
     void cmd_list_commands(Response&);
     void cmd_name(Response&);
     void cmd_protocol_version(Response&);
@@ -100,11 +100,10 @@ public:
         If a command was already registered with the same name, it will be
         replaced by the new command. */
     template<class T>
-    void add(const string& name,
-             void (T::*f)(const Arguments&, Response&), T* t);
+    void add(const string& name, void (T::*f)(Arguments, Response&), T* t);
 
     template<class T>
-    void add(const string& name, void (T::*f)(const Arguments&), T* t);
+    void add(const string& name, void (T::*f)(Arguments), T* t);
 
     template<class T>
     void add(const string& name, void (T::*f)(Response&), T* t);
@@ -125,10 +124,10 @@ protected:
         If a command was already registered with the same name, it will be
         replaced by the new command. */
     template<class T>
-    void add(const string& name, void (T::*f)(const Arguments&, Response&));
+    void add(const string& name, void (T::*f)(Arguments, Response&));
 
     template<class T>
-    void add(const string& name, void (T::*f)(const Arguments&));
+    void add(const string& name, void (T::*f)(Arguments));
 
     template<class T>
     void add(const string& name, void (T::*f)(Response&));
@@ -156,18 +155,18 @@ private:
     bool handle_cmd(CmdLine& line, ostream* out, Response& response,
                     string& buffer);
 
-    static void no_args_wrapper(const HandlerNoArgs& h,
-                                const Arguments& args, Response& response);
+    static void no_args_wrapper(const HandlerNoArgs& h, Arguments args,
+                                Response& response);
 
-    static void no_response_wrapper(const HandlerNoResponse& h,
-                                    const Arguments& args, Response&);
+    static void no_response_wrapper(const HandlerNoResponse& h, Arguments args,
+                                    Response&);
 
     static void no_args_no_response_wrapper(const HandlerNoArgsNoResponse& h,
-                                           const Arguments& args, Response&);
+                                            Arguments args, Response&);
 };
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)(const Arguments&, Response&))
+void Engine::add(const string& name, void (T::*f)(Arguments, Response&))
 {
     add(name, f, dynamic_cast<T*>(this));
 }
@@ -179,7 +178,7 @@ void Engine::add(const string& name, void (T::*f)(Response&))
 }
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)(const Arguments&))
+void Engine::add(const string& name, void (T::*f)(Arguments))
 {
     add(name, f, dynamic_cast<T*>(this));
 }
@@ -191,8 +190,7 @@ void Engine::add(const string& name, void (T::*f)())
 }
 
 template<class T>
-void Engine::add(const string& name,
-                 void (T::*f)(const Arguments&, Response&), T* t)
+void Engine::add(const string& name, void (T::*f)(Arguments, Response&), T* t)
 {
     assert(f);
     add(name,
@@ -207,7 +205,7 @@ void Engine::add(const string& name, void (T::*f)(Response&), T* t)
 }
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)(const Arguments&), T* t)
+void Engine::add(const string& name, void (T::*f)(Arguments), T* t)
 {
     assert(f);
     add(name, static_cast<HandlerNoResponse>(bind(f, t, placeholders::_1)));

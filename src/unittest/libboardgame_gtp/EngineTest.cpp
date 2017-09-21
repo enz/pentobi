@@ -29,9 +29,9 @@ class InvalidResponseEngine
 public:
     InvalidResponseEngine();
 
-    void invalid_response(const Arguments&, Response&);
+    void invalid_response(Arguments, Response&);
 
-    void invalid_response_2(const Arguments&, Response&);
+    void invalid_response_2(Arguments, Response&);
 };
 
 InvalidResponseEngine::InvalidResponseEngine()
@@ -40,14 +40,14 @@ InvalidResponseEngine::InvalidResponseEngine()
     add("invalid_response_2", &InvalidResponseEngine::invalid_response_2);
 }
 
-void InvalidResponseEngine::invalid_response(const Arguments&, Response& r)
+void InvalidResponseEngine::invalid_response(Arguments, Response& r)
 {
     r << "This response is invalid\n"
       << "\n"
       << "because it contains an empty line";
 }
 
-void InvalidResponseEngine::invalid_response_2(const Arguments&, Response& r)
+void InvalidResponseEngine::invalid_response_2(Arguments, Response& r)
 {
     r << "This response is invalid\n"
       << "\n"

@@ -89,7 +89,7 @@ void Engine::add(const string& name, const HandlerNoArgsNoResponse& f)
 }
 
 /** Return @c true if command is known, @c false otherwise. */
-void Engine::cmd_known_command(const Arguments& args, Response& response)
+void Engine::cmd_known_command(Arguments args, Response& response)
 {
     response.set(contains(args.get()) ? "true" : "false");
 }
@@ -213,21 +213,21 @@ bool Engine::handle_cmd(CmdLine& line, ostream* out, Response& response,
     return status;
 }
 
-void Engine::no_args_wrapper(const HandlerNoArgs& h, const Arguments& args,
+void Engine::no_args_wrapper(const HandlerNoArgs& h, Arguments args,
                              Response& response)
 {
     args.check_empty();
     h(response);
 }
 
-void Engine::no_response_wrapper(const HandlerNoResponse& h, const Arguments& args,
+void Engine::no_response_wrapper(const HandlerNoResponse& h, Arguments args,
                                  Response&)
 {
     h(args);
 }
 
 void Engine::no_args_no_response_wrapper(const HandlerNoArgsNoResponse& h,
-                                         const Arguments& args, Response&)
+                                         Arguments args, Response&)
 {
     args.check_empty();
     h();

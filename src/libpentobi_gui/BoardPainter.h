@@ -142,7 +142,7 @@ private:
 
     void paintStartingPoints(QPainter& painter, Variant variant,
                              const Grid<PointState>& pointState,
-                             const ColorMap<bool>& isFirstPiece);
+                             ColorMap<bool> isFirstPiece);
 };
 
 //-----------------------------------------------------------------------------

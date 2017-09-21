@@ -21,7 +21,7 @@ class Engine
 {
 public:
     void cmd_cputime(Response&);
-    void cmd_set_random_seed(const Arguments&);
+    void cmd_set_random_seed(Arguments);
 
     Engine();
 

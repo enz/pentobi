@@ -53,7 +53,7 @@ void Engine::board_changed()
         LIBBOARDGAME_LOG(get_board());
 }
 
-void Engine::cmd_all_legal(const Arguments& args, Response& response)
+void Engine::cmd_all_legal(Arguments args, Response& response)
 {
     auto& bd = get_board();
     auto moves = make_unique<MoveList>();
@@ -94,12 +94,12 @@ void Engine::cmd_g(Response& response)
     genmove(get_board().get_effective_to_play(), response);
 }
 
-void Engine::cmd_genmove(const Arguments& args, Response& response)
+void Engine::cmd_genmove(Arguments args, Response& response)
 {
     genmove(get_color_arg(args), response);
 }
 
-void Engine::cmd_get_place(const Arguments& args, Response& response)
+void Engine::cmd_get_place(Arguments args, Response& response)
 {
     auto& bd = get_board();
     unsigned place;
@@ -110,7 +110,7 @@ void Engine::cmd_get_place(const Arguments& args, Response& response)
         response << " shared";
 }
 
-void Engine::cmd_loadsgf(const Arguments& args)
+void Engine::cmd_loadsgf(Arguments args)
 {
     args.check_size_less_equal(2);
     string file = args.get(0);
@@ -138,7 +138,7 @@ void Engine::cmd_loadsgf(const Arguments& args)
 }
 
 /** Return move info of a move given by its integer or string representation. */
-void Engine::cmd_move_info(const Arguments& args, Response& response)
+void Engine::cmd_move_info(Arguments args, Response& response)
 {
     auto& bd = get_board();
     Move mv;
@@ -177,12 +177,12 @@ void Engine::cmd_move_info(const Arguments& args, Response& response)
         << "SymMv:  " << bd.to_string(info_ext_2.symmetric_move);
 }
 
-void Engine::cmd_p(const Arguments& args)
+void Engine::cmd_p(Arguments args)
 {
     play(get_board().get_to_play(), args, 0);
 }
 
-void Engine::cmd_param_base(const Arguments& args, Response& response)
+void Engine::cmd_param_base(Arguments args, Response& response)
 {
     if (args.get_size() == 0)
         response
@@ -205,7 +205,7 @@ void Engine::cmd_param_base(const Arguments& args, Response& response)
     }
 }
 
-void Engine::cmd_play(const Arguments& args)
+void Engine::cmd_play(Arguments args)
 {
     play(get_color_arg(args, 0), args, 1);
 }
@@ -219,7 +219,7 @@ void Engine::cmd_point_integers(Response& response)
     response << '\n' << grid.to_string(geo);
 }
 
-void Engine::cmd_reg_genmove(const Arguments& args, Response& response)
+void Engine::cmd_reg_genmove(Arguments args, Response& response)
 {
     RandomGenerator::set_global_seed_last();
     Move move = get_player().genmove(get_board(), get_color_arg(args));
@@ -228,7 +228,7 @@ void Engine::cmd_reg_genmove(const Arguments& args, Response& response)
     response << get_board().to_string(move, false);
 }
 
-void Engine::cmd_savesgf(const Arguments& args)
+void Engine::cmd_savesgf(Arguments args)
 {
     ofstream out(args.get());
     PentobiTreeWriter writer(out, m_game.get_tree());
@@ -244,7 +244,7 @@ void Engine::cmd_savesgf(const Arguments& args)
     This command is similar to the command that is used by Quarry
     (http://home.gna.org/quarry/) to set a game at GTP engines that support
     multiple games. */
-void Engine::cmd_set_game(const Arguments& args)
+void Engine::cmd_set_game(Arguments args)
 {
     Variant variant;
     if (! parse_variant(args.get_line(), variant))
@@ -293,14 +293,14 @@ void Engine::genmove(Color c, Response& response)
     board_changed();
 }
 
-Color Engine::get_color_arg(const Arguments& args) const
+Color Engine::get_color_arg(Arguments args) const
 {
     if (args.get_size() > 1)
         throw Failure("too many arguments");
     return get_color_arg(args, 0);
 }
 
-Color Engine::get_color_arg(const Arguments& args, unsigned i) const
+Color Engine::get_color_arg(Arguments args, unsigned i) const
 {
     string s = args.get_tolower(i);
     auto& bd = get_board();
@@ -333,7 +333,7 @@ PlayerBase& Engine::get_player() const
     return *m_player;
 }
 
-void Engine::play(Color c, const Arguments& args, unsigned arg_move_begin)
+void Engine::play(Color c, Arguments args, unsigned arg_move_begin)
 {
     auto& bd = get_board();
     if (bd.get_nu_moves() >= Board::max_moves)

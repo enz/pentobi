@@ -653,7 +653,7 @@ void BoardPainter::paintSelectedPiece(QPainter& painter, Color c,
 
 void BoardPainter::paintStartingPoints(QPainter& painter, Variant variant,
                                        const Grid<PointState>& pointState,
-                                       const ColorMap<bool>& isFirstPiece)
+                                       ColorMap<bool> isFirstPiece)
 {
     m_startingPoints.init(variant, *m_geo);
     auto colors = get_colors(variant);

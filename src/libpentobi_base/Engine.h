@@ -26,22 +26,22 @@ class Engine
 public:
     explicit Engine(Variant variant);
 
-    void cmd_all_legal(const Arguments&, Response&);
+    void cmd_all_legal(Arguments, Response&);
     void cmd_clear_board();
     void cmd_final_score(Response&);
     void cmd_g(Response&);
-    void cmd_genmove(const Arguments&, Response&);
-    void cmd_get_place(const Arguments& args, Response&);
-    void cmd_loadsgf(const Arguments&);
-    void cmd_move_info(const Arguments&, Response&);
-    void cmd_p(const Arguments&);
-    void cmd_param_base(const Arguments&, Response&);
-    void cmd_play(const Arguments&);
+    void cmd_genmove(Arguments, Response&);
+    void cmd_get_place(Arguments args, Response&);
+    void cmd_loadsgf(Arguments);
+    void cmd_move_info(Arguments, Response&);
+    void cmd_p(Arguments);
+    void cmd_param_base(Arguments, Response&);
+    void cmd_play(Arguments);
     void cmd_point_integers(Response&);
     void cmd_showboard(Response&);
-    void cmd_reg_genmove(const Arguments&, Response&);
-    void cmd_savesgf(const Arguments&);
-    void cmd_set_game(const Arguments&);
+    void cmd_reg_genmove(Arguments, Response&);
+    void cmd_savesgf(Arguments);
+    void cmd_set_game(Arguments);
     void cmd_undo();
 
     /** Set the player.
@@ -58,9 +58,9 @@ public:
     const Board& get_board() const;
 
 protected:
-    Color get_color_arg(const Arguments& args, unsigned i) const;
+    Color get_color_arg(Arguments args, unsigned i) const;
 
-    Color get_color_arg(const Arguments& args) const;
+    Color get_color_arg(Arguments args) const;
 
 private:
     bool m_accept_illegal = false;
@@ -79,7 +79,7 @@ private:
 
     PlayerBase& get_player() const;
 
-    void play(Color c, const Arguments& args, unsigned arg_move_begin);
+    void play(Color c, Arguments args, unsigned arg_move_begin);
 };
 
 inline const Board& Engine::get_board() const

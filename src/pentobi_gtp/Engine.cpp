@@ -69,7 +69,7 @@ void Engine::cmd_name(Response& response)
     response.set("Pentobi");
 }
 
-void Engine::cmd_save_tree(const Arguments& args)
+void Engine::cmd_save_tree(Arguments args)
 {
     auto& search = get_search();
     if (! search.get_last_history().is_valid())
@@ -83,7 +83,7 @@ void Engine::cmd_save_tree(const Arguments& args)
     because it has lower memory requirements (only one engine needed), process
     switches between the engines are avoided and parts of the search tree can
     be reused between moves of different players. */
-void Engine::cmd_selfplay(const Arguments& args)
+void Engine::cmd_selfplay(Arguments args)
 {
     args.check_size(2);
     auto nu_games = args.parse<int>(0);
@@ -118,7 +118,7 @@ void Engine::cmd_selfplay(const Arguments& args)
     }
 }
 
-void Engine::cmd_param(const Arguments& args, Response& response)
+void Engine::cmd_param(Arguments args, Response& response)
 {
     auto& p = get_mcts_player();
     auto& s = get_search();
