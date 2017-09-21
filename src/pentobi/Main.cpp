@@ -8,6 +8,7 @@
 #include <config.h>
 #endif
 
+#include <QApplication>
 #include <QCommandLineParser>
 #include <QFileInfo>
 #include <QLibraryInfo>
@@ -15,7 +16,6 @@
 #include <QSettings>
 #include <QStyle>
 #include <QTranslator>
-#include "Application.h"
 #include "MainWindow.h"
 
 #ifdef Q_OS_WIN
@@ -57,10 +57,10 @@ int main(int argc, char* argv[])
 {
     LogInitializer log_initializer;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-    QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-    Application app(argc, argv);
+    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    QApplication app(argc, argv);
     app.setOrganizationName("Pentobi");
     app.setApplicationName("Pentobi");
     try
