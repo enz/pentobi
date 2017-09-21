@@ -7,8 +7,6 @@ set(pentobi_SRCS
   AnalyzeGameWindow.cpp
   AnalyzeSpeedDialog.h
   AnalyzeSpeedDialog.cpp
-  Application.h
-  Application.cpp
   Main.cpp
   MainWindow.h
   MainWindow.cpp
