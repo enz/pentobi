@@ -9,8 +9,6 @@
 
 namespace libboardgame_util {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** Fast approximation of exp(x).

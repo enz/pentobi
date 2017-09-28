@@ -11,11 +11,9 @@
 #include "PriorKnowledge.h"
 
 #include <cmath>
-#include "libboardgame_util/MathUtil.h"
 
 namespace libpentobi_mcts {
 
-using libboardgame_util::fast_exp;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
 using libpentobi_base::PointState;
