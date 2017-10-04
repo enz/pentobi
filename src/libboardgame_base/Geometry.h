@@ -35,19 +35,23 @@ public:
 
     typedef typename Point::IntType IntType;
 
+    static const unsigned max_adj = 4;
+
+    static const unsigned max_attach = 11;
+
     /** On-board adjacent neighbors of a point. */
-    typedef ArrayList<Point, 4, unsigned short> AdjList;
+    typedef ArrayList<Point, max_adj, unsigned short> AdjList;
 
     /** On-board diagonal neighbors of a point
         Currently supports up to 11 diagonal points as used on boards
         for GembloQ. */
-    typedef ArrayList<Point, 11, unsigned short> DiagList;
+    typedef ArrayList<Point, max_attach, unsigned short> DiagList;
 
     /** Adjacent neighbors of a coordinate. */
-    typedef ArrayList<CoordPoint, 4> AdjCoordList;
+    typedef ArrayList<CoordPoint, max_adj> AdjCoordList;
 
     /** Diagonal neighbors of a coordinate. */
-    typedef ArrayList<CoordPoint, 11> DiagCoordList;
+    typedef ArrayList<CoordPoint, max_attach> DiagCoordList;
 
     class Iterator
     {
