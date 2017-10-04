@@ -1,0 +1,496 @@
+//-----------------------------------------------------------------------------
+/** @file learn_tool/Main.cpp
+    Learn the parameters used in libpentobi_mcts/PriorKnowledge from existing
+    games with softmax training.
+
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <fstream>
+#include <random>
+#include "libboardgame_sgf/TreeReader.h"
+#include "libboardgame_util/FmtSaver.h"
+#include "libboardgame_util/Log.h"
+#include "libboardgame_util/Options.h"
+#include "libpentobi_base/Game.h"
+#include "libpentobi_base/MoveMarker.h"
+#include "libpentobi_mcts/LocalPoints.h"
+
+using namespace std;
+using libboardgame_sgf::TreeReader;
+using libboardgame_util::FmtSaver;
+using libboardgame_util::Options;
+using libboardgame_util::split;
+using libpentobi_base::Board;
+using libpentobi_base::BoardConst;
+using libpentobi_base::Color;
+using libpentobi_base::Game;
+using libpentobi_base::GridExt;
+using libpentobi_base::Move;
+using libpentobi_base::MoveList;
+using libpentobi_base::MoveMarker;
+using libpentobi_base::PointList;
+using libpentobi_base::Piece;
+using libpentobi_base::PieceSet;
+using libpentobi_base::Variant;
+using libpentobi_mcts::LocalPoints;
+
+//-----------------------------------------------------------------------------
+
+namespace {
+
+/** Features, see PriorKnowledge::m_gamma_... */
+enum {
+    point_other,
+    point_opp_attach_or_nb,
+    point_second_color_attach,
+    adj_connect,
+    adj_occupied_other,
+    adj_forbidden_other,
+    adj_own_attach,
+    adj_nonforbidden,
+    attach_to_play,
+    attach_forbidden_other,
+    attach_nonforbidden_0,
+    attach_nonforbidden_1,
+    attach_nonforbidden_2,
+    attach_nonforbidden_3,
+    attach_nonforbidden_4,
+    attach_second_color,
+    local_move,
+    piece_score_0,
+    piece_score_1,
+    piece_score_2,
+    piece_score_3,
+    piece_score_4,
+    piece_score_5,
+    piece_score_6,
+    _nu_features
+};
+
+struct Features
+{
+    typedef uint_least8_t IntType;
+
+
+    array<IntType, _nu_features> feature;
+
+
+    Features() { feature.fill(0); }
+
+    void operator+=(const Features& f)
+    {
+        for (int i = 0; i < _nu_features; ++i)
+             feature[i] = feature[i] + f.feature[i];
+    }
+
+    void operator|=(const Features& f)
+    {
+        for (int i = 0; i < _nu_features; ++i)
+             feature[i] = feature[i] | f.feature[i];
+    }
+};
+
+struct Sample
+{
+    unsigned played_move;
+
+    vector<Features> features;
+};
+
+
+typedef double Float;
+
+const Float step_size = 0.01;
+
+MoveMarker marker;
+
+MoveList moves;
+
+MoveList tmp_moves;
+
+long nu_games;
+
+long nu_positions;
+
+long nu_moves;
+
+random_device rand_dev;
+
+mt19937 rand_gen(rand_dev());
+
+vector<Float> probs;
+
+array<Float, _nu_features> weights;
+
+array<Float, _nu_features> grad_weights;
+
+GridExt<Features> feature_grid_point;
+
+GridExt<Features> feature_grid_adj;
+
+GridExt<Features> feature_grid_attach;
+
+vector<Sample> samples;
+
+LocalPoints local_points;
+
+Features feature_occured_globally;
+
+
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
+void add_sample(const Board& bd, Color to_play, Move played_mv)
+{
+    marker.clear();
+    bd.gen_moves(to_play, marker, moves);
+    nu_moves += moves.size();
+
+    local_points.init<MAX_SIZE, MAX_ADJ_ATTACH>(bd);
+    auto& geo = bd.get_geometry();
+    auto variant = bd.get_variant();
+    auto& is_forbidden = bd.is_forbidden(to_play);
+    Color second_color;
+    Color connect_color;
+    if (variant == Variant::classic_3 && to_play.to_int() == 3)
+    {
+        second_color = Color(bd.get_alt_player());
+        connect_color = to_play;
+    }
+    else
+    {
+        second_color = bd.get_second_color(to_play);
+        connect_color = second_color;
+    }
+    for (auto p : geo)
+    {
+        feature_grid_point[p] = Features();
+        feature_grid_adj[p] = Features();
+        feature_grid_attach[p] = Features();
+    }
+    for (auto p : geo)
+    {
+        auto& feature_point = feature_grid_point[p].feature;
+        auto& feature_adj = feature_grid_adj[p].feature;
+        auto& feature_attach = feature_grid_attach[p].feature;
+        auto s = bd.get_point_state(p);
+        if (is_forbidden[p])
+        {
+            if (s != to_play)
+                feature_attach[attach_forbidden_other] = 1;
+            else
+                feature_attach[attach_to_play] = 1;
+            if (s == connect_color)
+                feature_adj[adj_connect] = 1;
+            else if (! s.is_empty())
+                feature_adj[adj_occupied_other] = 1;
+            else
+                feature_adj[adj_forbidden_other] = 1;
+        }
+        else
+        {
+            feature_point[point_other] = 1;
+            if (bd.is_attach_point(p, to_play))
+                feature_adj[adj_own_attach] = 1;
+            else
+                feature_adj[adj_nonforbidden] = 1;
+            unsigned n = 0;
+            for (auto pa : geo.get_adj(p))
+                if (! is_forbidden[pa])
+                    ++n;
+            if (n == 0)
+                feature_attach[attach_nonforbidden_0] = 1;
+            else if (n == 1)
+                feature_attach[attach_nonforbidden_1] = 1;
+            else if (n == 2)
+                feature_attach[attach_nonforbidden_2] = 1;
+            else if (n == 3)
+                feature_attach[attach_nonforbidden_3] = 1;
+            else
+                feature_attach[attach_nonforbidden_4] = 1;
+        }
+    }
+    for (Color c : bd.get_colors())
+    {
+        if (c == to_play || c == second_color)
+            continue;
+        auto& is_forbidden = bd.is_forbidden(c);
+        for (auto p : bd.get_attach_points(c))
+            if (! is_forbidden[p])
+            {
+                feature_grid_point[p].feature[point_other] = 0;
+                feature_grid_point[p].feature[point_opp_attach_or_nb] = 1;
+                for (auto j : geo.get_adj(p))
+                    if (! is_forbidden[j])
+                    {
+                        feature_grid_point[j].feature[point_other] = 0;
+                        feature_grid_point[j].feature[point_opp_attach_or_nb] = 1;
+                    }
+            }
+    }
+    if (second_color != to_play)
+    {
+        auto& is_forbidden_second_color = bd.is_forbidden(second_color);
+        for (auto p : bd.get_attach_points(second_color))
+            if (! is_forbidden_second_color[p])
+            {
+                feature_grid_point[p].feature[point_second_color_attach] = 1;
+                if (! is_forbidden[p])
+                    feature_grid_attach[p].feature[attach_second_color] = 1;
+            }
+    }
+
+    Sample sample;
+    sample.played_move = moves.size() + 1;
+    sample.features.reserve(moves.size());
+    auto& bc = bd.get_board_const();
+    auto move_info_array = bc.get_move_info_array();
+    auto move_info_ext_array = bc.get_move_info_ext_array();
+    for (unsigned i = 0; i < moves.size(); ++i)
+    {
+        auto mv = moves[i];
+        if (mv == played_mv)
+            sample.played_move = i;
+        auto& info_ext = BoardConst::get_move_info_ext<MAX_ADJ_ATTACH>(
+                    mv, move_info_ext_array);
+        auto& info = BoardConst::get_move_info<MAX_SIZE>(mv, move_info_array);
+        auto j = info.begin();
+        Features features = feature_grid_point[*j];
+        bool local = local_points.contains(*j);
+        for (unsigned k = 1; k < MAX_SIZE; ++k)
+        {
+            ++j;
+            features += feature_grid_point[*j];
+            local |= local_points.contains(*j);
+        }
+        if (local)
+            features.feature[local_move] = 1;
+        j = info_ext.begin_attach();
+        auto end = info_ext.end_attach();
+        features += feature_grid_attach[*j];
+        while (++j != end)
+            features += feature_grid_attach[*j];
+        j = info_ext.begin_adj();
+        end = info_ext.end_adj();
+        for ( ; j != end; ++j)
+            features += feature_grid_adj[*j];
+        switch (static_cast<unsigned>(bd.get_piece_info(info.get_piece()).get_score_points()))
+        {
+        case 0: features.feature[piece_score_0] = 1; break;
+        case 1: features.feature[piece_score_1] = 1; break;
+        case 2: features.feature[piece_score_2] = 1; break;
+        case 3: features.feature[piece_score_3] = 1; break;
+        case 4: features.feature[piece_score_4] = 1; break;
+        case 5: features.feature[piece_score_5] = 1; break;
+        default: features.feature[piece_score_6] = 1; break;
+        }
+        sample.features.push_back(features);
+        feature_occured_globally |= features;
+    }
+    if (sample.played_move == moves.size() + 1)
+        throw runtime_error("game contains illegal move");
+    samples.push_back(sample);
+}
+
+void gen_train_data(const string& file, Variant& variant)
+{
+    ifstream in(file);
+    if (! in)
+        throw runtime_error("could not open " + file);
+    Game game(variant);
+    auto& bd = game.get_board();
+    TreeReader reader;
+    bool has_more;
+    do
+    {
+        has_more = reader.read(in, false);
+        auto tree = reader.get_tree_transfer_ownership();
+        game.init(tree);
+        if (nu_games > 0 && game.get_variant() != variant)
+            throw runtime_error("Files have inconsistent game variants");
+        ++nu_games;
+        variant = game.get_variant();
+        auto max_piece_size = bd.get_board_const().get_max_piece_size();
+        auto node = &game.get_root();
+        do
+        {
+            auto mv = game.get_tree().get_move(*node);
+            if (! mv.is_null() && node->has_parent())
+            {
+                ++nu_positions;
+                game.goto_node(node->get_parent());
+                game.set_to_play(mv.color);
+                if (max_piece_size == 5)
+                    add_sample<5, 16>(bd, mv.color, mv.move);
+                else if (max_piece_size == 6)
+                    add_sample<6, 22>(bd, mv.color, mv.move);
+                else if (max_piece_size == 7)
+                    add_sample<7, 12>(bd, mv.color, mv.move);
+                else
+                    add_sample<22, 44>(bd, mv.color, mv.move);
+            }
+            node = node->get_first_child_or_null();
+        }
+        while (node);
+        cerr << '.';
+        if (nu_games % 79 == 0)
+            cerr << '\n';
+    }
+    while (has_more);
+}
+
+void print_weight(int i, const char* name, bool is_member = true)
+{
+    if (is_member)
+        cout << "m_";
+    cout << "gamma_" << name << " = ";
+    if (! feature_occured_globally.feature[i])
+        cout << "1; // unused\n";
+    else
+        cout << "exp(" << weights[i] << "f / temperature);\n";
+}
+
+void print_weights()
+{
+    FmtSaver saver(cout);
+    cout << std::fixed << setprecision(3);
+    print_weight(point_other, "point_other");
+    print_weight(point_opp_attach_or_nb, "point_opp_attach_or_nb");
+    print_weight(point_second_color_attach, "point_second_color_attach");
+    print_weight(adj_connect, "adj_connect");
+    print_weight(adj_occupied_other, "adj_occupied_other");
+    print_weight(adj_forbidden_other, "adj_forbidden_other");
+    print_weight(adj_own_attach, "adj_own_attach");
+    print_weight(adj_nonforbidden, "adj_nonforbidden");
+    print_weight(attach_to_play, "attach_to_play");
+    print_weight(attach_forbidden_other, "attach_forbidden_other");
+    print_weight(attach_nonforbidden_0, "attach_nonforbidden[0]");
+    print_weight(attach_nonforbidden_1, "attach_nonforbidden[1]");
+    print_weight(attach_nonforbidden_2, "attach_nonforbidden[2]");
+    print_weight(attach_nonforbidden_3, "attach_nonforbidden[3]");
+    print_weight(attach_nonforbidden_4, "attach_nonforbidden[4]");
+    print_weight(attach_second_color, "attach_second_color");
+    print_weight(local_move, "local");
+    print_weight(piece_score_0, "piece_score_0", false);
+    print_weight(piece_score_1, "piece_score_1", false);
+    print_weight(piece_score_2, "piece_score_2", false);
+    print_weight(piece_score_3, "piece_score_3", false);
+    print_weight(piece_score_4, "piece_score_4", false);
+    print_weight(piece_score_5, "piece_score_5", false);
+    print_weight(piece_score_6, "piece_score_6", false);
+}
+
+void init_weights()
+{
+    normal_distribution<Float> distribution(0.f, 0.01f);
+    for (auto& w : weights)
+        w = distribution(rand_gen);
+}
+
+/** Gradient descent step using softmax training. */
+void train_step(unsigned step)
+{
+    for (auto& w : grad_weights)
+        w = 0;
+
+    Float cost = 0;
+    for (auto& sample : samples)
+    {
+        auto nu_moves = sample.features.size();
+        probs.resize(nu_moves);
+        Float sum = 0;
+        for (size_t i = 0; i < nu_moves; ++i)
+        {
+            auto& feature = sample.features[i].feature;
+            probs[i] = 0;
+            for (int j = 0; j < _nu_features; ++j)
+                probs[i] += weights[j] * feature[j];
+            probs[i] = exp(probs[i]);
+            sum += probs[i];
+        }
+        for (size_t i = 0; i < nu_moves; ++i)
+            probs[i] /= sum;
+        for (size_t i = 0; i < nu_moves; ++i)
+        {
+            auto p = probs[i];
+            auto& feature = sample.features[i].feature;
+            if (i == sample.played_move)
+            {
+                for (int j = 0; j < _nu_features; ++j)
+                    grad_weights[j] -= (1 - p) * feature[j];
+            }
+            else
+            {
+                for (int j = 0; j < _nu_features; ++j)
+                    grad_weights[j] -= (-p) * feature[j];
+            }
+        }
+        cost += -log(probs[sample.played_move]);
+    }
+
+    auto nu_samples = static_cast<Float>(samples.size());
+    Float decay = 1e-3;
+    for (int i = 0; i < _nu_features; ++i)
+    {
+        auto& w = weights[i];
+        auto dw = grad_weights[i] / nu_samples + decay * w;
+        w += -step_size * dw;
+    }
+
+    cost /= nu_samples;
+
+    if (step % 100 == 0)
+    {
+        LIBBOARDGAME_LOG("Step ", step);
+        LIBBOARDGAME_LOG("Cost ", cost);
+        print_weights();
+    }
+}
+
+void train(const string& file_list)
+{
+    nu_games = 0;
+    nu_positions = 0;
+    nu_moves = 0;
+        auto files = split(file_list, ',');
+    Variant variant = Variant::classic_2;
+    for (auto file : files)
+        gen_train_data(file, variant);
+    cerr << '\n';
+    LIBBOARDGAME_LOG("Files:", file_list);
+    LIBBOARDGAME_LOG(nu_games, " games");
+    LIBBOARDGAME_LOG(nu_positions, " positions");
+    LIBBOARDGAME_LOG(double(nu_moves) / nu_positions, " moves/pos");
+    init_weights();
+    unsigned steps = 1000000;
+    for (unsigned i = 0; i < steps; ++i)
+        train_step(i);
+}
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
+int main(int argc, char** argv)
+{
+    try
+    {
+        vector<string> specs = {
+            "sgffiles:",
+        };
+        Options opt(argc, argv, specs);
+        train(opt.get("sgffiles"));
+    }
+    catch (const exception& e)
+    {
+        LIBBOARDGAME_LOG("Error: ", e.what());
+        return 1;
+    }
+    return 0;
+}
+
+//-----------------------------------------------------------------------------

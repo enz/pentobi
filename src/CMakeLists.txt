@@ -15,6 +15,7 @@ if (PENTOBI_BUILD_GTP)
   else()
     message(STATUS "Not building twogtp, needs POSIX")
   endif()
+  add_subdirectory(learn_tool)
 endif()
 
 if (PENTOBI_BUILD_TESTS)

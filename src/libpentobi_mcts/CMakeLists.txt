@@ -4,6 +4,8 @@ add_library(pentobi_mcts STATIC
   Float.h
   History.h
   History.cpp
+  LocalPoints.h
+  LocalPoints.cpp
   Player.h
   Player.cpp
   PlayoutFeatures.h

@@ -39,7 +39,8 @@ inline Float sigmoid(Float steepness, Float x)
 
 State::State(Variant initial_variant, const SharedConst& shared_const)
   : m_shared_const(shared_const),
-    m_bd(initial_variant)
+    m_bd(initial_variant),
+    m_prior_knowledge(m_bd)
 {
 }
 

@@ -230,6 +230,8 @@ public:
 
     PieceSet get_piece_set() const { return m_piece_set; }
 
+    bool is_callisto() const { return m_is_callisto; }
+
     /** Whether ties are broken in the current game variant. */
     bool get_break_ties() const { return m_is_callisto; }
 
