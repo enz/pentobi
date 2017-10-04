@@ -86,7 +86,7 @@ struct Features
     void operator+=(const Features& f)
     {
         for (int i = 0; i < _nu_features; ++i)
-             feature[i] = feature[i] + f.feature[i];
+             feature[i] = static_cast<IntType>(feature[i] + f.feature[i]);
     }
 
     void operator|=(const Features& f)
@@ -464,7 +464,7 @@ void train(const string& file_list)
     LIBBOARDGAME_LOG("Files:", file_list);
     LIBBOARDGAME_LOG(nu_games, " games");
     LIBBOARDGAME_LOG(nu_positions, " positions");
-    LIBBOARDGAME_LOG(double(nu_moves) / nu_positions, " moves/pos");
+    LIBBOARDGAME_LOG(double(nu_moves) / double(nu_positions), " moves/pos");
     init_weights();
     unsigned steps = 1000000;
     for (unsigned i = 0; i < steps; ++i)
