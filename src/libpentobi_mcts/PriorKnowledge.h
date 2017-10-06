@@ -58,7 +58,7 @@ public:
 
     /** Generate children nodes initialized with prior knowledge.
         @return false If the tree has not enough capacity for the children. */
-    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
     bool gen_children(const Board& bd, const MoveList& moves,
                       bool is_symmetry_broken, Tree::NodeExpander& expander,
                       Float root_val);
@@ -142,7 +142,7 @@ private:
     GridExt<float> m_dist_to_center;
 
 
-    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
+    template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
     void compute_features(const Board& bd, const MoveList& moves,
                           bool check_dist_to_center, bool check_connect);
 
@@ -150,7 +150,7 @@ private:
 };
 
 
-template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
 void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
                                       bool check_dist_to_center,
                                       bool check_connect)
@@ -283,10 +283,19 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
         gamma *= gamma_attach[*j];
         while (++j != end)
             gamma *= gamma_attach[*j];
-        if (MAX_SIZE == 7) // Nexos
+        if (MAX_SIZE == 7 || IS_CALLISTO)
         {
+            // Nexos and Callisto don't use "adjacent" points, only "diagonal"
+            // Use the features of gamma_adj also for the attach points
             LIBBOARDGAME_ASSERT(info_ext.size_adj_points == 0);
             LIBBOARDGAME_ASSERT(! check_connect);
+            j = info_ext.begin_attach();
+            end = info_ext.end_attach();
+            for ( ; j != end; ++j)
+            {
+                gamma *= gamma_attach[*j];
+                gamma *= gamma_adj[*j];
+            }
         }
         else
         {
@@ -317,7 +326,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     }
 }
 
-template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
 bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                                   bool is_symmetry_broken,
                                   Tree::NodeExpander& expander, Float root_val)
@@ -341,8 +350,8 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
              && nu_onboard_pieces <= m_dist_to_center_max_pieces);
     bool check_connect =
         (bd.get_variant() == Variant::classic_2 && nu_onboard_pieces < 14);
-    compute_features<MAX_SIZE, MAX_ADJ_ATTACH>(bd, moves, check_dist_to_center,
-                                               check_connect);
+    compute_features<MAX_SIZE, MAX_ADJ_ATTACH, IS_CALLISTO>(
+                bd, moves, check_dist_to_center, check_connect);
     if (! m_has_connect_move)
         check_connect = false;
     Move symmetric_mv = Move::null();

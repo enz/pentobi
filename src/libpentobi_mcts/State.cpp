@@ -363,34 +363,41 @@ bool State::gen_children(Tree::NodeExpander& expander, Float root_val)
     if (m_max_piece_size == 5)
     {
         if (! m_is_callisto)
+        {
             init_moves_without_gamma<5, false>(to_play);
+            return m_prior_knowledge.gen_children<5, 16, false>(
+                        m_bd, m_moves[to_play], m_is_symmetry_broken,
+                        expander, root_val);
+        }
         else
+        {
             init_moves_without_gamma<5, true>(to_play);
-        return m_prior_knowledge.gen_children<5, 16>(m_bd, m_moves[to_play],
-                                                     m_is_symmetry_broken,
-                                                     expander, root_val);
+            return m_prior_knowledge.gen_children<5, 16, true>(
+                        m_bd, m_moves[to_play], m_is_symmetry_broken,
+                        expander, root_val);
+        }
     }
     else if (m_max_piece_size == 6)
     {
         init_moves_without_gamma<6, false>(to_play);
-        return m_prior_knowledge.gen_children<6, 22>(m_bd, m_moves[to_play],
-                                                     m_is_symmetry_broken,
-                                                     expander, root_val);
+        return m_prior_knowledge.gen_children<6, 22, false>(
+                    m_bd, m_moves[to_play], m_is_symmetry_broken, expander,
+                    root_val);
     }
     else if (m_max_piece_size == 7)
     {
         init_moves_without_gamma<7, false>(to_play);
-        return m_prior_knowledge.gen_children<7, 12>(m_bd, m_moves[to_play],
-                                                     m_is_symmetry_broken,
-                                                     expander, root_val);
+        return m_prior_knowledge.gen_children<7, 12, false>(
+                    m_bd, m_moves[to_play], m_is_symmetry_broken, expander,
+                    root_val);
     }
     else
     {
         LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
         init_moves_without_gamma<22, false>(to_play);
-        return m_prior_knowledge.gen_children<22, 44>(m_bd, m_moves[to_play],
-                                                      m_is_symmetry_broken,
-                                                      expander, root_val);
+        return m_prior_knowledge.gen_children<22, 44, false>(
+                    m_bd, m_moves[to_play], m_is_symmetry_broken, expander,
+                    root_val);
     }
 }
 

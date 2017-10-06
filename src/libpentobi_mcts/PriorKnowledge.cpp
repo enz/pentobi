@@ -182,29 +182,29 @@ void PriorKnowledge::init_variant(const Board& bd)
     else if (variant == Variant::callisto_2)
     {
         Float temperature = 0.84f;
-        m_gamma_point_other = exp(0.253f / temperature);
-        m_gamma_point_opp_attach_or_nb = exp(1.991f / temperature);
+        m_gamma_point_other = exp(0.264f / temperature);
+        m_gamma_point_opp_attach_or_nb = exp(1.988f / temperature);
         m_gamma_point_second_color_attach = 1; // unused
-        m_gamma_adj_connect = 1; // unused
-        m_gamma_adj_occupied_other = 1; // unused
+        m_gamma_adj_connect = exp(-0.095f / temperature);
+        m_gamma_adj_occupied_other = exp(-0.053f / temperature);
         m_gamma_adj_forbidden_other = 1; // unused
-        m_gamma_adj_own_attach = 1; // unused
-        m_gamma_adj_nonforbidden = 1; // unused
-        m_gamma_attach_to_play = exp(-0.196f / temperature);
-        m_gamma_attach_forbidden_other = exp(-0.599f / temperature);
-        m_gamma_attach_nonforbidden[0] = exp(0.134f / temperature);
+        m_gamma_adj_own_attach = exp(-0.593f / temperature);
+        m_gamma_adj_nonforbidden = exp(0.205f / temperature);
+        m_gamma_attach_to_play = exp(-0.113f / temperature);
+        m_gamma_attach_forbidden_other = exp(-0.530f / temperature);
+        m_gamma_attach_nonforbidden[0] = exp(0.129f / temperature);
         m_gamma_attach_nonforbidden[1] = 1; // unused
         m_gamma_attach_nonforbidden[2] = 1; // unused
         m_gamma_attach_nonforbidden[3] = 1; // unused
         m_gamma_attach_nonforbidden[4] = 1; // unused
         m_gamma_attach_second_color = 1; // unused
-        m_gamma_local = exp(0.165f / temperature);
-        gamma_piece_score_0 = exp(0.777f / temperature);
+        m_gamma_local = exp(0.182f / temperature);
+        gamma_piece_score_0 = exp(0.614f / temperature);
         gamma_piece_score_1 = 1; // unused
-        gamma_piece_score_2 = exp(-1.383f / temperature);
-        gamma_piece_score_3 = exp(-0.728f / temperature);
-        gamma_piece_score_4 = exp(0.280f / temperature);
-        gamma_piece_score_5 = exp(1.062f / temperature);
+        gamma_piece_score_2 = exp(-1.282f / temperature);
+        gamma_piece_score_3 = exp(-0.634f / temperature);
+        gamma_piece_score_4 = exp(0.353f / temperature);
+        gamma_piece_score_5 = exp(0.950f / temperature);
         gamma_piece_score_6 = 1; // unused
     }
     else if (variant == Variant::gembloq_2)
@@ -268,28 +268,28 @@ void PriorKnowledge::init_variant(const Board& bd)
     {
         Float temperature = 0.84f;
         // Tuned for nexos_2
-        m_gamma_point_other = exp(0.706f / temperature);
-        m_gamma_point_opp_attach_or_nb = exp(1.704f / temperature);
-        m_gamma_point_second_color_attach = exp(0.105f / temperature);
-        m_gamma_adj_connect = 1; // unused
-        m_gamma_adj_occupied_other = 1; // unused
+        m_gamma_point_other = exp(0.676f / temperature);
+        m_gamma_point_opp_attach_or_nb = exp(1.676f / temperature);
+        m_gamma_point_second_color_attach = exp(0.021f / temperature);
+        m_gamma_adj_connect = exp(0.100f / temperature);
+        m_gamma_adj_occupied_other = exp(0.015f / temperature);
         m_gamma_adj_forbidden_other = 1; // unused
-        m_gamma_adj_own_attach = 1; // unused
-        m_gamma_adj_nonforbidden = 1; // unused
-        m_gamma_attach_to_play = exp(-0.025f / temperature);
-        m_gamma_attach_forbidden_other = exp(-0.051f / temperature);
-        m_gamma_attach_nonforbidden[0] = exp(-0.009f / temperature);
+        m_gamma_adj_own_attach = exp(-0.278f / temperature);
+        m_gamma_adj_nonforbidden = exp(0.144f / temperature);
+        m_gamma_attach_to_play = exp(0.026f / temperature);
+        m_gamma_attach_forbidden_other = exp(-0.071f / temperature);
+        m_gamma_attach_nonforbidden[0] = exp(0.015f / temperature);
         m_gamma_attach_nonforbidden[1] = 1; // unused
         m_gamma_attach_nonforbidden[2] = 1; // unused
         m_gamma_attach_nonforbidden[3] = 1; // unused
         m_gamma_attach_nonforbidden[4] = 1; // unused
-        m_gamma_attach_second_color = exp(0.165f / temperature);
-        m_gamma_local = exp(0.783f / temperature);
+        m_gamma_attach_second_color = exp(0.064f / temperature);
+        m_gamma_local = exp(0.839f / temperature);
         gamma_piece_score_0 = 1; // unused
-        gamma_piece_score_1 = exp(0.372f / temperature);
-        gamma_piece_score_2 = exp(-0.342f / temperature);
-        gamma_piece_score_3 = exp(-0.491f / temperature);
-        gamma_piece_score_4 = exp(0.462f / temperature);
+        gamma_piece_score_1 = exp(0.319f / temperature);
+        gamma_piece_score_2 = exp(-0.312f / temperature);
+        gamma_piece_score_3 = exp(-0.463f / temperature);
+        gamma_piece_score_4 = exp(0.456f / temperature);
         gamma_piece_score_5 = 1; // unused
         gamma_piece_score_6 = 1; // unused
     }
@@ -297,29 +297,29 @@ void PriorKnowledge::init_variant(const Board& bd)
     {
         Float temperature = 0.84f;
         // Tuned for callisto_2_4
-        m_gamma_point_other = exp(0.181f / temperature);
-        m_gamma_point_opp_attach_or_nb = exp(1.910f / temperature);
-        m_gamma_point_second_color_attach = exp(0.221f / temperature);
-        m_gamma_adj_connect = 1; // unused
-        m_gamma_adj_occupied_other = 1; // unused
+        m_gamma_point_other = exp(0.212f / temperature);
+        m_gamma_point_opp_attach_or_nb = exp(1.936f / temperature);
+        m_gamma_point_second_color_attach = exp(0.057f / temperature);
+        m_gamma_adj_connect = exp(0.097f / temperature);
+        m_gamma_adj_occupied_other = exp(-0.087f / temperature);
         m_gamma_adj_forbidden_other = 1; // unused
-        m_gamma_adj_own_attach = 1; // unused
-        m_gamma_adj_nonforbidden = 1; // unused
-        m_gamma_attach_to_play = exp(-0.179f / temperature);
-        m_gamma_attach_forbidden_other = exp(-0.475f / temperature);
-        m_gamma_attach_nonforbidden[0] = exp(0.096f / temperature);
+        m_gamma_adj_own_attach = exp(-0.474f / temperature);
+        m_gamma_adj_nonforbidden = exp(0.044f / temperature);
+        m_gamma_attach_to_play = exp(-0.130f / temperature);
+        m_gamma_attach_forbidden_other = exp(-0.439f / temperature);
+        m_gamma_attach_nonforbidden[0] = exp(0.145f / temperature);
         m_gamma_attach_nonforbidden[1] = 1; // unused
         m_gamma_attach_nonforbidden[2] = 1; // unused
         m_gamma_attach_nonforbidden[3] = 1; // unused
         m_gamma_attach_nonforbidden[4] = 1; // unused
-        m_gamma_attach_second_color = exp(-0.001f / temperature);
-        m_gamma_local = exp(0.236f / temperature);
-        gamma_piece_score_0 = exp(0.741f / temperature);
+        m_gamma_attach_second_color = exp(-0.027f / temperature);
+        m_gamma_local = exp(0.262f / temperature);
+        gamma_piece_score_0 = exp(0.639f / temperature);
         gamma_piece_score_1 = 1; // unused
-        gamma_piece_score_2 = exp(-1.330f / temperature);
-        gamma_piece_score_3 = exp(-0.750f / temperature);
-        gamma_piece_score_4 = exp(0.311f / temperature);
-        gamma_piece_score_5 = exp(0.989f / temperature);
+        gamma_piece_score_2 = exp(-1.209f / temperature);
+        gamma_piece_score_3 = exp(-0.662f / temperature);
+        gamma_piece_score_4 = exp(0.349f / temperature);
+        gamma_piece_score_5 = exp(0.894f / temperature);
         gamma_piece_score_6 = 1; // unused
     }
     else if (piece_set == PieceSet::gembloq)

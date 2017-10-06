@@ -143,7 +143,9 @@ LocalPoints local_points;
 Features feature_occured_globally;
 
 
-template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
+/** This function mirrors what is happening in PriorKnowledge::gen_children,
+    but produces feature vectors instead of a gamma value for each move. */
+template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
 void add_sample(const Board& bd, Color to_play, Move played_mv)
 {
     marker.clear();
@@ -269,15 +271,29 @@ void add_sample(const Board& bd, Color to_play, Move played_mv)
         }
         if (local)
             features.feature[local_move] = 1;
-        j = info_ext.begin_attach();
-        auto end = info_ext.end_attach();
-        features += feature_grid_attach[*j];
-        while (++j != end)
+        if (MAX_SIZE == 7 || IS_CALLISTO)
+        {
+            j = info_ext.begin_attach();
+            auto end = info_ext.end_attach();
             features += feature_grid_attach[*j];
-        j = info_ext.begin_adj();
-        end = info_ext.end_adj();
-        for ( ; j != end; ++j)
-            features += feature_grid_adj[*j];
+            while (++j != end)
+            {
+                features += feature_grid_adj[*j];
+                features += feature_grid_attach[*j];
+            }
+        }
+        else
+        {
+            j = info_ext.begin_attach();
+            auto end = info_ext.end_attach();
+            features += feature_grid_attach[*j];
+            while (++j != end)
+                features += feature_grid_attach[*j];
+            j = info_ext.begin_adj();
+            end = info_ext.end_adj();
+            for ( ; j != end; ++j)
+                features += feature_grid_adj[*j];
+        }
         switch (static_cast<unsigned>(bd.get_piece_info(info.get_piece()).get_score_points()))
         {
         case 0: features.feature[piece_score_0] = 1; break;
@@ -324,14 +340,16 @@ void gen_train_data(const string& file, Variant& variant)
                 ++nu_positions;
                 game.goto_node(node->get_parent());
                 game.set_to_play(mv.color);
-                if (max_piece_size == 5)
-                    add_sample<5, 16>(bd, mv.color, mv.move);
+                if (max_piece_size == 5 && bd.is_callisto())
+                    add_sample<5, 16, true>(bd, mv.color, mv.move);
+                else if (max_piece_size == 5)
+                    add_sample<5, 16, false>(bd, mv.color, mv.move);
                 else if (max_piece_size == 6)
-                    add_sample<6, 22>(bd, mv.color, mv.move);
+                    add_sample<6, 22, false>(bd, mv.color, mv.move);
                 else if (max_piece_size == 7)
-                    add_sample<7, 12>(bd, mv.color, mv.move);
+                    add_sample<7, 12, false>(bd, mv.color, mv.move);
                 else
-                    add_sample<22, 44>(bd, mv.color, mv.move);
+                    add_sample<22, 44, false>(bd, mv.color, mv.move);
             }
             node = node->get_first_child_or_null();
         }
