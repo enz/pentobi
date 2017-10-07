@@ -109,7 +109,10 @@ struct SearchParamConstDefault
         The value must be greater 0 (it may be a positive epsilon) because
         otherwise the search would need to handle a special case in the bias
         term computation. */
-    static constexpr Float child_min_count = 0;
+    static constexpr Float child_min_count = 1;
+
+    /** Maximum value used for Node::get_move_prior() */
+    static constexpr Float max_move_prior = 1;
 
     /** An evaluation value representing a 50% winning probability. */
     static constexpr Float tie_value = 0.5f;
@@ -150,6 +153,11 @@ struct SearchParamConstDefault
     saves memory in the tree and speeds up move selection in the in-tree phase.
     It is weaker than the original RAVE at a low number of simulations but
     seems to be equally good or even better at a high number of simulations.
+
+    The exploration term is not as in original UCT but has the form
+    @f$ c * P_{move} * \sqrt{N_{parent}}/N_{child} @f$ with an exploration
+    constant c and a prior move value P (similar as used in AlphaGo
+    @ref libboardgame_doc_alphago_2016).
 
     @tparam S The game-dependent state of a simulation. The state provides
     functions for move generation, evaluation of terminal positions, etc. The
@@ -821,7 +829,8 @@ bool SearchBase<S, M, R>::expand_node(ThreadState& thread_state,
     auto& state = *thread_state.state;
     auto thread_id = thread_state.thread_id;
     typename Tree::NodeExpander expander(thread_id, m_tree,
-                                         SearchParamConst::child_min_count);
+                                         SearchParamConst::child_min_count,
+                                         SearchParamConst::max_move_prior);
     auto root_val = m_root_val[state.get_player()].get_mean();
     if (state.gen_children(expander, root_val))
     {
@@ -1264,24 +1273,28 @@ inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
     auto parent_count = node.get_visit_count();
     Float bias_factor = m_exploration_constant * sqrt(parent_count);
     static_assert(SearchParamConst::child_min_count > 0, "");
-    auto bias_limit = bias_factor / SearchParamConst::child_min_count;
+    auto bias_limit =
+            bias_factor * SearchParamConst::max_move_prior
+            / SearchParamConst::child_min_count;
     auto children = m_tree.get_children_nonempty(node);
     auto i = children.begin();
-    auto value = i->get_value() + bias_factor / i->get_value_count();
+    auto value =
+            i->get_value()
+            + i->get_move_prior() * bias_factor / i->get_value_count();
     auto best_value = value;
-    auto best_child = i;
     auto limit = best_value - bias_limit;
+    auto best_child = i;
     while (++i != children.end())
     {
         value = i->get_value();
         if (value <= limit)
             continue;
-        value += bias_factor / i->get_value_count();
+        value += i->get_move_prior() * bias_factor / i->get_value_count();
         if (value > best_value)
         {
             best_value = value;
-            best_child = i;
             limit = best_value - bias_limit;
+            best_child = i;
         }
     }
     return best_child;

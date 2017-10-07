@@ -38,9 +38,9 @@ using libpentobi_base::Variant;
     with a weight vector phi and a feature vector x. These weights can be
     learned with softmax training from existing games.
 
-    The move values are initialized by a combination of the root value of the
-    search and a value that decreases exponentially wrt. the move with the
-    highest probability: exp(phi*x/T)/exp(phi_0*x_0/T) with a temperature T.
+    The move priors are not normalized but scaled such that the best move has
+    move prior 1. The move values are initialized by multiplying the root value
+    of the current search with the move prior.
 
     The move generation also prunes certain moves in some game variants (e.g.
     opening moves that don't go towards the center). */
@@ -64,6 +64,27 @@ public:
                       Float root_val);
 
 private:
+    /** @name Weights for heuristic move probabilities.
+        Currently tuned for classic_2. */
+    /** @{ */
+
+    constexpr static Float temperature = 1.4f;
+    constexpr static Float gamma_point_other = exp(0.538f / temperature);
+    constexpr static Float gamma_point_opp_attach_or_nb = exp(1.247f / temperature);
+    constexpr static Float gamma_point_second_color_attach = exp(-0.350f / temperature);
+    constexpr static Float gamma_adj_connect = exp(0.441f / temperature);
+    constexpr static Float gamma_adj_occupied_other = exp(0.359f / temperature);
+    constexpr static Float gamma_adj_forbidden_other = exp(0.320f / temperature);
+    constexpr static Float gamma_adj_own_attach = exp(-0.717f / temperature);
+    constexpr static Float gamma_adj_nonforbidden = exp(-0.070f / temperature);
+    constexpr static Float gamma_attach_to_play = exp(0.135f / temperature);
+    constexpr static Float gamma_attach_forbidden_other = exp(-0.324f / temperature);
+    constexpr static Float gamma_attach_nonforbidden = exp(0.336f / temperature);
+    constexpr static Float gamma_attach_second_color = exp(-0.317f / temperature);
+    constexpr static Float gamma_local = exp(0.597f / temperature);
+
+    /** @} */ // @name
+
     struct MoveFeatures
     {
         /** Heuristic unnormalized probability of the move. */
@@ -339,7 +360,7 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         if (! expander.check_capacity(1))
             return false;
         expander.add_child(Move::null(), root_val,
-                           SearchParamConst::child_min_count);
+                           SearchParamConst::child_min_count, 1);
         return true;
     }
     m_local_points.init<MAX_SIZE, MAX_ADJ_ATTACH>(bd);
@@ -354,7 +375,6 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                 bd, moves, check_dist_to_center, check_connect);
     if (! m_has_connect_move)
         check_connect = false;
-    Move symmetric_mv = Move::null();
     bool has_symmetry_breaker = false;
     if (! is_symmetry_broken)
     {
@@ -363,9 +383,19 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         {
             if (nu_moves > 0)
             {
+                // If a symmetric draw is still possible, encourage exploring
+                // the move that keeps the symmetry
                 ColorMove last = bd.get_move(nu_moves - 1);
-                symmetric_mv =
+                Move symmetric_mv =
                         bd.get_move_info_ext_2(last.move).symmetric_move;
+                for (unsigned i = 0; i < moves.size(); ++i)
+                    if (moves[i] == symmetric_mv)
+                    {
+                        m_features[i].gamma *= 100.f;
+                        if (m_features[i].gamma > m_max_gamma)
+                            m_max_gamma = m_features[i].gamma;
+                        break;
+                    }
             }
         }
         else if (nu_moves > 0)
@@ -389,38 +419,25 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         const auto& features = m_features[i];
-
         // Depending on the game variant, prune early moves that don't minimize
-        // dist to center and moves that don't connect in the middle if
-        // connection is possible
+        // dist to center and moves that don't connect in the middle
         if ((check_dist_to_center
              && features.dist_to_center > m_min_dist_to_center)
                 || (check_connect && ! features.connect))
             continue;
-
         auto mv = moves[i];
-
-        // Initialize value from gamma and root_val, each with a count
-        // of 1.5. If this is changed, SearchParamConst::child_min_count
-        // should be updated.
-        Float value = 1.5f * (features.gamma * inv_max_gamma + root_val);
-        Float count = 3;
-
-        // If a symmetric draw is still possible, encourage exploring a move
-        // that keeps or breaks the symmetry by adding 5 wins or 5 losses
-        // See also the comment in evaluate_playout()
-        if (! symmetric_mv.is_null())
-        {
-            if (mv == symmetric_mv)
-                value += 5;
-            count += 5;
-        }
-        else if (has_symmetry_breaker
-                 && ! bd.get_move_info_ext_2(mv).breaks_symmetry)
+        // If a symmetric draw is still possible, consider only moves that
+        // break the symmetry
+        if (has_symmetry_breaker
+                && ! bd.get_move_info_ext_2(mv).breaks_symmetry)
             continue;
 
+        Float move_prior = features.gamma * inv_max_gamma;
+        Float value = move_prior * root_val;
+
         LIBBOARDGAME_ASSERT(bd.is_legal(to_play, mv));
-        expander.add_child(mv, value / count, count);
+        expander.add_child(mv, value, SearchParamConst::child_min_count,
+                           move_prior);
     }
     return true;
 }

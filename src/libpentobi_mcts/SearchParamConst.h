@@ -61,6 +61,8 @@ struct SearchParamConst
 
     static constexpr Float child_min_count = 3;
 
+    static constexpr Float max_move_prior = 1;
+
     static constexpr Float tie_value = 0.5f;
 
     static constexpr Float prune_count_start = 16;

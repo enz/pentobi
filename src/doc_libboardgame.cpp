@@ -59,6 +59,10 @@ Smart Game Format http://www.red-bean.com/sgf/
 @page libboardgame_doc_bibliography Bibliography
 List of publications.
 
+@section libboardgame_doc_alphago_2016  Mastering the game of Go with deep neural networks and tree search.
+D. Silver, A. Huang, et al. Nature 529 (7587), pp. 484-489, 2016.
+<a href="https://storage.googleapis.com/deepmind-media/alphago/AlphaGoNaturePaper.pdf">(PDF)</a>
+
 @section libboardgame_doc_enz_2009 A Lock-free Multithreaded Monte-Carlo Tree Search Algorithm.
 M. Enzenberger, M. Mueller. Advances in Computer Games 2009.
 <a href="http://webdocs.cs.ualberta.ca/~mmueller/ps/enzenberger-mueller-acg12.pdf">(PDF)</a>

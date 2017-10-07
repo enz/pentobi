@@ -33,6 +33,9 @@
     - twogtp -
       Tool for playing games between two GTP engines
       (currently only supported on Linux/GCC)
+    - learn_tool -
+      Tool for learning the weights used for move priors in the
+      Monte-Carlo tree search in libpentobi_mcts
 
     @section mainpage_gui Pentobi QWidgets GUI Modules
 

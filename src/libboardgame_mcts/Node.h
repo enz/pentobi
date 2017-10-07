@@ -42,17 +42,22 @@ public:
         This function may not be called on a node that is already part of
         the tree in multi-threaded mode.
         The node may be initialized with values and counts greater zero
-        (prior knowledge) but even if it is initialized with count zero, it
-        must be initialized with a usable value (e.g. first play urgency for
-        inner nodes or tie value for the root node). */
-    void init(const Move& mv, Float value, Float count);
+        but even if it is initialized with count zero, it must be initialized
+        with a usable value, because some code uses node values without
+        handling the case of count 0 for performance reasons. */
+    void init(const Move& mv, Float value, Float count, Float move_prior);
 
     /** Initializes the root node.
         Does not initialize value and value count as they are not used for the
         root. */
     void init_root();
 
-    const Move& get_move() const;
+    const Move& get_move() const { return m_move; }
+
+    /** Prior value for the move.
+        This value is used in the exploration term, see description of class
+        SearchBase. */
+    Float get_move_prior() const { return m_move_prior; }
 
     /** Number of simulations that went through this node. */
     Float get_visit_count() const;
@@ -112,6 +117,8 @@ private:
 
     Atomic<Float, MT> m_visit_count;
 
+    Float m_move_prior;
+
     Atomic<unsigned short, MT> m_nu_children;
 
     Move m_move;
@@ -154,6 +161,7 @@ void Node<M, F, MT>::copy_data_from(const Node& node)
         Atomic<Float, MT> m_value;
         Atomic<Float, MT> m_value_count;
         Atomic<Float, MT> m_visit_count;
+        Float m_move_prior;
         Atomic<unsigned short, MT> m_nu_children;
         Move m_move;
         NodeIdx m_first_child;
@@ -161,6 +169,7 @@ void Node<M, F, MT>::copy_data_from(const Node& node)
     static_assert(sizeof(Node) == sizeof(Dummy), "");
 
     m_move = node.m_move;
+    m_move_prior = node.m_move_prior;
     // Load/store relaxed (it wouldn't even need to be atomic) because this
     // function is only used before the multi-threaded search.
     m_value_count.store(node.m_value_count.load(memory_order_relaxed),
@@ -182,12 +191,6 @@ inline NodeIdx Node<M, F, MT>::get_first_child() const
 {
     LIBBOARDGAME_ASSERT(has_children());
     return m_first_child;
-}
-
-template<typename M, typename F, bool MT>
-inline auto Node<M, F, MT>::get_move() const -> const Move&
-{
-    return m_move;
 }
 
 template<typename M, typename F, bool MT>
@@ -225,7 +228,8 @@ inline void Node<M, F, MT>::inc_visit_count()
 }
 
 template<typename M, typename F, bool MT>
-void Node<M, F, MT>::init(const Move& mv, Float value, Float count)
+void Node<M, F, MT>::init(const Move& mv, Float value, Float count,
+                          Float move_prior)
 {
     // The node is not yet visible to other threads because init() is called
     // before the children are linked to its parent with link_children()
@@ -233,6 +237,7 @@ void Node<M, F, MT>::init(const Move& mv, Float value, Float count)
     // Therefore, the most efficient way here is to initialize all values with
     // memory_order_relaxed.
     m_move = mv;
+    m_move_prior = move_prior;
     m_value_count.store(count, memory_order_relaxed);
     m_value.store(value, memory_order_relaxed);
     m_visit_count.store(0, memory_order_relaxed);

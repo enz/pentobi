@@ -56,10 +56,13 @@ public:
             @param thread_id
             @param tree
             @param child_min_count The minimum count used for initializing
-            children. Used only in debug mode to assert that the children
-            are really initialized with a minimum count as declared with
-            SearchParamConst::child_min_count. */
-        NodeExpander(unsigned thread_id, Tree& tree, Float child_min_count);
+            children. Used only in debug mode to verify the arguments for
+            add_child().
+            @param max_move_prior The maximum move prior used for initializing
+            children. Used only in debug mode to verify the arguments for
+            add_child(). */
+        NodeExpander(unsigned thread_id, Tree& tree, Float child_min_count,
+                     Float max_move_prior);
 
         /** Check if the tree still has the capacity for a given number
             of children. */
@@ -68,7 +71,8 @@ public:
         /** Add new child.
             It needs to be checked first with check_capacity() that the tree
             has enough capacity. */
-        void add_child(const Move& mv, Float value, Float count);
+        void add_child(const Move& mv, Float value, Float count,
+                       Float move_prior);
 
         /** Link the children to the parent node. */
         void link_children(Tree& tree, const Node& node);
@@ -83,7 +87,7 @@ public:
     private:
         ThreadStorage& m_thread_storage;
 
-        Float m_best_value = -numeric_limits<Float>::max();
+        Float m_best_move_prior = -numeric_limits<Float>::max();
 
         const Node* m_first_child;
 
@@ -91,6 +95,8 @@ public:
 
 #if LIBBOARDGAME_DEBUG
         Float m_child_min_count;
+
+        Float m_max_move_prior;
 #endif
     };
 
@@ -179,7 +185,8 @@ private:
 
 template<typename N>
 inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
-                                           Float child_min_count)
+                                           Float child_min_count,
+                                           Float max_move_prior)
     : m_thread_storage(tree.m_thread_storage[thread_id]),
       m_first_child(m_thread_storage.next),
       m_best_child(nullptr)
@@ -187,25 +194,28 @@ inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
     LIBBOARDGAME_ASSERT(thread_id < tree.m_nu_threads);
 #if LIBBOARDGAME_DEBUG
     m_child_min_count = child_min_count;
+    m_max_move_prior = max_move_prior;
 #else
     LIBBOARDGAME_UNUSED(child_min_count);
+    LIBBOARDGAME_UNUSED(max_move_prior);
 #endif
 }
 
 template<typename N>
 inline void Tree<N>::NodeExpander::add_child(const Move& mv, Float value,
-                                             Float count)
+                                             Float count, Float move_prior)
 {
     // -numeric_limits<Float>::max() ist init value for m_best_value
     LIBBOARDGAME_ASSERT(value > -numeric_limits<Float>::max());
     LIBBOARDGAME_ASSERT(count >= m_child_min_count);
+    LIBBOARDGAME_ASSERT(move_prior <= m_max_move_prior);
     auto& next = m_thread_storage.next;
     LIBBOARDGAME_ASSERT(next < m_thread_storage.end);
-    next->init(mv, value, count);
-    if (value > m_best_value)
+    next->init(mv, value, count, move_prior);
+    if (move_prior > m_best_move_prior)
     {
         m_best_child = next;
-        m_best_value = value;
+        m_best_move_prior = move_prior;
     }
     ++next;
 }
