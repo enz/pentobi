@@ -64,27 +64,6 @@ public:
                       Float root_val);
 
 private:
-    /** @name Weights for heuristic move probabilities.
-        Currently tuned for classic_2. */
-    /** @{ */
-
-    constexpr static Float temperature = 1.4f;
-    constexpr static Float gamma_point_other = exp(0.538f / temperature);
-    constexpr static Float gamma_point_opp_attach_or_nb = exp(1.247f / temperature);
-    constexpr static Float gamma_point_second_color_attach = exp(-0.350f / temperature);
-    constexpr static Float gamma_adj_connect = exp(0.441f / temperature);
-    constexpr static Float gamma_adj_occupied_other = exp(0.359f / temperature);
-    constexpr static Float gamma_adj_forbidden_other = exp(0.320f / temperature);
-    constexpr static Float gamma_adj_own_attach = exp(-0.717f / temperature);
-    constexpr static Float gamma_adj_nonforbidden = exp(-0.070f / temperature);
-    constexpr static Float gamma_attach_to_play = exp(0.135f / temperature);
-    constexpr static Float gamma_attach_forbidden_other = exp(-0.324f / temperature);
-    constexpr static Float gamma_attach_nonforbidden = exp(0.336f / temperature);
-    constexpr static Float gamma_attach_second_color = exp(-0.317f / temperature);
-    constexpr static Float gamma_local = exp(0.597f / temperature);
-
-    /** @} */ // @name
-
     struct MoveFeatures
     {
         /** Heuristic unnormalized probability of the move. */
