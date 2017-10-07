@@ -40,11 +40,7 @@ public:
 
     /** Initialize the node.
         This function may not be called on a node that is already part of
-        the tree in multi-threaded mode.
-        The node may be initialized with values and counts greater zero
-        but even if it is initialized with count zero, it must be initialized
-        with a usable value, because some code uses node values without
-        handling the case of count 0 for performance reasons. */
+        the tree in multi-threaded mode. */
     void init(const Move& mv, Float value, Float count, Float move_prior);
 
     /** Initializes the root node.
