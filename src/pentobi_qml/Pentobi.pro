@@ -86,6 +86,7 @@ SOURCES += \
     ../libpentobi_base/PentobiTree.cpp \
     ../libpentobi_mcts/AnalyzeGame.cpp \
     ../libpentobi_mcts/History.cpp \
+    ../libpentobi_mcts/LocalPoints.cpp \
     ../libpentobi_mcts/Player.cpp \
     ../libpentobi_mcts/PlayoutFeatures.cpp \
     ../libpentobi_mcts/PriorKnowledge.cpp \
