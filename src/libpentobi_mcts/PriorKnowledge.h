@@ -390,11 +390,6 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         return false;
     auto inv_max_gamma = 1.f / m_max_gamma;
 
-    // Increase root_val a bit to ensure that new nodes are not initialized
-    // with values close to 0 and never explored if a small exploration
-    // constant is used.
-    root_val += 0.1f;
-
     for (unsigned i = 0; i < moves.size(); ++i)
     {
         const auto& features = m_features[i];
