@@ -202,18 +202,15 @@ void add_sample(const Board& bd, Color to_play, Move played_mv)
                 feature_adj[adj_nonforbidden] = 1;
             unsigned n = 0;
             for (auto pa : geo.get_adj(p))
-                if (! is_forbidden[pa])
-                    ++n;
-            if (n == 0)
-                feature_attach[attach_nonforbidden_0] = 1;
-            else if (n == 1)
-                feature_attach[attach_nonforbidden_1] = 1;
-            else if (n == 2)
-                feature_attach[attach_nonforbidden_2] = 1;
-            else if (n == 3)
-                feature_attach[attach_nonforbidden_3] = 1;
-            else
-                feature_attach[attach_nonforbidden_4] = 1;
+                n+= 1u - static_cast<unsigned>(is_forbidden[pa]);
+            switch (n)
+            {
+            case 0: feature_attach[attach_nonforbidden_0] = 1; break;
+            case 1: feature_attach[attach_nonforbidden_1] = 1; break;
+            case 2: feature_attach[attach_nonforbidden_2] = 1; break;
+            case 3: feature_attach[attach_nonforbidden_3] = 1; break;
+            default: feature_attach[attach_nonforbidden_4] = 1; break;
+            }
         }
     }
     for (Color c : bd.get_colors())

@@ -211,8 +211,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
                 gamma_adj[p] = m_gamma_adj_nonforbidden;
             unsigned n = 0;
             for (auto pa : geo.get_adj(p))
-                if (! is_forbidden[pa])
-                    ++n;
+                n+= 1u - static_cast<unsigned>(is_forbidden[pa]);
             LIBBOARDGAME_ASSERT(n < m_gamma_attach_nonforbidden.size());
             gamma_attach[p] = m_gamma_attach_nonforbidden[n];
         }
