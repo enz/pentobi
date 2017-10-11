@@ -71,7 +71,7 @@ bool IntervalChecker::check_expensive()
         else if (new_count_interval < 1)
             m_count_interval = 1;
         else
-            m_count_interval = (unsigned)(new_count_interval);
+            m_count_interval = static_cast<unsigned>(new_count_interval);
         m_result = m_function();
 #if LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
         log(format("IntervalChecker::check_expensive: "
