@@ -473,7 +473,7 @@ void train(const string& file_list)
     nu_moves = 0;
         auto files = split(file_list, ',');
     Variant variant = Variant::classic_2;
-    for (auto file : files)
+    for (auto& file : files)
         gen_train_data(file, variant);
     cerr << '\n';
     LIBBOARDGAME_LOG("Files:", file_list);
