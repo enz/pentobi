@@ -131,7 +131,7 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
         }
         node = node->get_first_child_or_null();
     }
-    while (node);
+    while (node != nullptr);
     return true;
 }
 

@@ -35,7 +35,7 @@ RatedGamesList::RatedGamesList(QWidget* parent)
 void RatedGamesList::activateGame(const QModelIndex& index)
 {
     auto item = m_model->item(index.row(), 0);
-    if (! item)
+    if (item == nullptr)
         return;
     bool ok;
     unsigned n = item->text().toUInt(&ok);

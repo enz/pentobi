@@ -55,7 +55,7 @@ void CmdLine::find_elem()
             begin = i + 1;
             is_in_string = ! is_in_string;
         }
-        else if (isspace(static_cast<unsigned char>(c)) && ! is_in_string)
+        else if (isspace(static_cast<unsigned char>(c)) != 0 && ! is_in_string)
         {
             if (i > begin)
                 m_elem.emplace_back(begin, i);
@@ -74,10 +74,11 @@ CmdLineRange CmdLine::get_trimmed_line_after_elem(unsigned i) const
     auto begin = e.end();
     if (begin < m_line.end() && *begin == '"')
         ++begin;
-    while (begin < m_line.end() && isspace(static_cast<unsigned char>(*begin)))
+    while (begin < m_line.end()
+           && isspace(static_cast<unsigned char>(*begin)) != 0)
         ++begin;
     auto end = m_line.end();
-    while (end > begin && isspace(static_cast<unsigned char>(*(end - 1))))
+    while (end > begin && isspace(static_cast<unsigned char>(*(end - 1))) != 0)
         --end;
     return CmdLineRange(begin, end);
 }

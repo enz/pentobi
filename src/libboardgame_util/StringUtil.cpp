@@ -85,9 +85,9 @@ string trim(const string& s)
 {
     string::size_type begin = 0;
     auto end = s.size();
-    while (begin != end && isspace(s[begin]))
+    while (begin != end && isspace(s[begin]) != 0)
         ++begin;
-    while (end > begin && isspace(s[end - 1]))
+    while (end > begin && isspace(s[end - 1]) != 0)
         --end;
     return s.substr(begin, end - begin);
 }
@@ -95,7 +95,7 @@ string trim(const string& s)
 string trim_right(const string& s)
 {
     auto end = s.size();
-    while (end > 0 && isspace(s[end - 1]))
+    while (end > 0 && isspace(s[end - 1]) != 0)
         --end;
     return s.substr(0, end);
 }

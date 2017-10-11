@@ -158,7 +158,7 @@ bool PentobiTree::has_main_variation_moves() const
             return true;
         node = node->get_first_child_or_null();
     }
-    while (node);
+    while (node != nullptr);
     return false;
 }
 
@@ -195,7 +195,7 @@ void PentobiTree::keep_only_subtree(const SgfNode& node)
     if (! create_new_setup)
     {
         auto current = node.get_parent_or_null();
-        while (current)
+        while (current != nullptr)
         {
             if (has_move(*current) || node_util::has_setup(*current))
             {

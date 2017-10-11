@@ -313,7 +313,7 @@ void Board::init(Variant variant, const Setup* setup)
         m_attach_points[c].clear();
     }
     m_state_base.nu_onboard_pieces_all = 0;
-    if (! setup)
+    if (setup == nullptr)
     {
         m_setup.clear();
         m_state_base.to_play = Color(0);
@@ -454,7 +454,7 @@ bool Board::is_legal(Color c, Move mv) const
     {
         if (m_state_color[c].forbidden[*i])
             return false;
-        has_attach_point |= is_attach_point(*i, c);
+        has_attach_point |= static_cast<int>(is_attach_point(*i, c));
     }
     while (++i != end);
     if (m_is_callisto)

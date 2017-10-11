@@ -32,12 +32,12 @@ bool StdStringRep::read(string::const_iterator begin,
                         unsigned height, unsigned& x, unsigned& y) const
 {
     auto p = begin;
-    while (p != end && isspace(*p))
+    while (p != end && isspace(*p) != 0)
         ++p;
     bool read_x = false;
     x = 0;
     int c;
-    while (p != end && isalpha(*p))
+    while (p != end && isalpha(*p) != 0)
     {
         c = tolower(*(p++));
         if (c < 'a' || c > 'z')
@@ -52,7 +52,7 @@ bool StdStringRep::read(string::const_iterator begin,
     --x;
     bool read_y = false;
     y = 0;
-    while (p != end && isdigit(*p))
+    while (p != end && isdigit(*p) != 0)
     {
         c = *(p++);
         y = 10 * y + (c - '0');
@@ -64,7 +64,7 @@ bool StdStringRep::read(string::const_iterator begin,
         return false;
     y = height - y;
     while (p != end)
-        if (! isspace(*(p++)))
+        if (isspace(*(p++)) == 0)
             return false;
     return true;
 }

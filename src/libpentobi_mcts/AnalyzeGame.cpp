@@ -49,7 +49,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
             ++total_moves;
         node = node->get_first_child_or_null();
     }
-    while (node);
+    while (node != nullptr);
     WallTimeSource time_source;
     clear_abort();
     node = &root;
@@ -100,7 +100,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
         }
         node = node->get_first_child_or_null();
     }
-    while (node);
+    while (node != nullptr);
 }
 
 void AnalyzeGame::set(Variant variant, const vector<ColorMove>& moves,

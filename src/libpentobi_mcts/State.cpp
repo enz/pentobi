@@ -543,9 +543,9 @@ inline Float State::get_quality_bonus_attach_twocolor()
     int n = m_bd.get_attach_points(Color(0)).size()
             - m_bd.get_attach_points(Color(1)).size();
     for (Point p : m_bd.get_attach_points(Color(0)))
-        n -= m_bd.is_forbidden(p, Color(0));
+        n -= static_cast<int>(m_bd.is_forbidden(p, Color(0)));
     for (Point p : m_bd.get_attach_points(Color(1)))
-        n += m_bd.is_forbidden(p, Color(1));
+        n += static_cast<int>(m_bd.is_forbidden(p, Color(1)));
     auto attach = static_cast<Float>(n);
     m_stat_attach.add(attach);
     auto var = m_stat_attach.get_variance();
@@ -565,13 +565,13 @@ inline Float State::get_quality_bonus_attach_multicolor()
             - m_bd.get_attach_points(Color(1)).size()
             - m_bd.get_attach_points(Color(3)).size();
     for (Point p : m_bd.get_attach_points(Color(0)))
-        n -= m_bd.is_forbidden(p, Color(0));
+        n -= static_cast<int>(m_bd.is_forbidden(p, Color(0)));
     for (Point p : m_bd.get_attach_points(Color(2)))
-        n -= m_bd.is_forbidden(p, Color(2));
+        n -= static_cast<int>(m_bd.is_forbidden(p, Color(2)));
     for (Point p : m_bd.get_attach_points(Color(1)))
-        n += m_bd.is_forbidden(p, Color(1));
+        n += static_cast<int>(m_bd.is_forbidden(p, Color(1)));
     for (Point p : m_bd.get_attach_points(Color(3)))
-        n += m_bd.is_forbidden(p, Color(3));
+        n += static_cast<int>(m_bd.is_forbidden(p, Color(3)));
     auto attach = static_cast<Float>(n);
     m_stat_attach.add(attach);
     auto var = m_stat_attach.get_variance();

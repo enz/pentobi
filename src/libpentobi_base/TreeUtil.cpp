@@ -42,12 +42,12 @@ const SgfNode* get_move_node(const PentobiTree& tree, const SgfNode& node,
                 break;
             current = current->get_parent_or_null();
         }
-        while (current);
+        while (current != nullptr);
     }
     else
     {
         auto current = node.get_first_child_or_null();
-        while (current)
+        while (current != nullptr)
         {
             if (libpentobi_base::node_util::has_setup(*current))
                 break;
@@ -75,7 +75,7 @@ unsigned get_move_number(const PentobiTree& tree, const SgfNode& node)
             break;
         current = current->get_parent_or_null();
     }
-    while (current);
+    while (current != nullptr);
     return move_number;
 }
 
@@ -83,7 +83,7 @@ unsigned get_moves_left(const PentobiTree& tree, const SgfNode& node)
 {
     unsigned moves_left = 0;
     auto current = node.get_first_child_or_null();
-    while (current)
+    while (current != nullptr)
     {
         if (libpentobi_base::node_util::has_setup(*current))
             break;

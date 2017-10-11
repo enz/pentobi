@@ -41,7 +41,7 @@ SgfNode& SgfNode::create_new_child()
     node->m_parent = this;
     SgfNode& result = *(node.get());
     auto last_child = get_last_child();
-    if (! last_child)
+    if (last_child == nullptr)
         m_first_child = move(node);
     else
         last_child->m_sibling = move(node);
@@ -103,7 +103,7 @@ unsigned SgfNode::get_child_index(const SgfNode& child) const
 SgfNode* SgfNode::get_last_child() const
 {
     auto node = m_first_child.get();
-    if (! node)
+    if (node == nullptr)
         return nullptr;
     while (node->m_sibling)
         node = node->m_sibling.get();
@@ -114,7 +114,7 @@ unsigned SgfNode::get_nu_children() const
 {
     unsigned n = 0;
     auto child = m_first_child.get();
-    while (child)
+    while (child != nullptr)
     {
         ++n;
         child = child->m_sibling.get();
@@ -124,7 +124,7 @@ unsigned SgfNode::get_nu_children() const
 
 const SgfNode* SgfNode::get_previous_sibling() const
 {
-    if (! m_parent)
+    if (m_parent == nullptr)
         return nullptr;
     auto child = &m_parent->get_first_child();
     if (child == this)
@@ -135,7 +135,7 @@ const SgfNode* SgfNode::get_previous_sibling() const
             return child;
         child = child->get_sibling();
     }
-    while (child);
+    while (child != nullptr);
     LIBBOARDGAME_ASSERT(false);
     return nullptr;
 }
@@ -236,7 +236,7 @@ void SgfNode::move_up()
         auto sibling = current->m_sibling.get();
         if (sibling == this)
         {
-            if (! prev)
+            if (prev == nullptr)
             {
                 make_first_child();
                 return;
@@ -278,7 +278,7 @@ unique_ptr<SgfNode> SgfNode::remove_child(SgfNode& child)
         if (node->get() == &child)
         {
             unique_ptr<SgfNode> result = move(*node);
-            if (! previous)
+            if (previous == nullptr)
                 m_first_child = move(child.m_sibling);
             else
                 (*previous)->m_sibling = move(child.m_sibling);

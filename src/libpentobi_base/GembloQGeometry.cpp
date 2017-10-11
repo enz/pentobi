@@ -146,7 +146,7 @@ unsigned GembloQGeometry::get_period_y() const
 
 unsigned GembloQGeometry::get_point_type(int x, int y) const
 {
-    return mod(x + 2 * (y % 2 != 0), 4);
+    return mod(x + 2 * static_cast<int>(y % 2 != 0), 4);
 }
 
 bool GembloQGeometry::init_is_onboard(unsigned x, unsigned y) const

@@ -149,7 +149,7 @@ void AnalyzeGameWidget::setCurrentPosition(const Game& game,
         ArrayList<ColorMove,Board::max_moves> moves;
         auto& tree = game.get_tree();
         auto current = &find_root(node);
-        while (current)
+        while (current != nullptr)
         {
             auto mv = tree.get_move(*current);
             if (! mv.is_null() && moves.size() < Board::max_moves)
@@ -192,7 +192,7 @@ void AnalyzeGameWidget::start(const Game& game, Search& search,
     m_search = &search;
     m_nuSimulations = nuSimulations;
     initSize();
-    if (! m_progressDialog)
+    if (m_progressDialog == nullptr)
     {
         m_progressDialog = new QProgressDialog(this);
         m_progressDialog->setWindowModality(Qt::WindowModal);

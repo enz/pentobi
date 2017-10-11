@@ -20,7 +20,7 @@ using namespace std;
 SameHeightLayout::~SameHeightLayout()
 {
     QLayoutItem* item;
-    while ((item = takeAt(0)))
+    while ((item = takeAt(0)) != nullptr)
         delete item;
 }
 
@@ -71,7 +71,7 @@ int SameHeightLayout::getSpacing() const
     // spacing is inherited from the parent layout, or from the style settings
     // for the parent widget."
     int result = spacing();
-    if (result < 0 && parentWidget())
+    if (result < 0 && (parentWidget() != nullptr))
         result = parentWidget()->style()->layoutSpacing(QSizePolicy::Frame,
                                                         QSizePolicy::Frame,
                                                         Qt::Vertical);

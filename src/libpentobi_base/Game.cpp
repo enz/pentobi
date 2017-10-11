@@ -68,7 +68,7 @@ Color Game::get_to_play_default(const Game& game)
             return c;
         node = node->get_parent_or_null();
     }
-    while (node);
+    while (node != nullptr);
     return bd.get_effective_to_play(next);
 }
 
@@ -82,7 +82,7 @@ void Game::goto_node(const SgfNode& node)
     catch (const SgfError&)
     {
         // Try to restore the old state.
-        if (! old)
+        if (old == nullptr)
             m_current = &node;
         else
         {
@@ -134,7 +134,7 @@ void Game::play(ColorMove mv, bool always_create_new_node)
     const SgfNode* child = nullptr;
     if (! always_create_new_node)
         child = m_tree.find_child_with_move(*m_current, mv);
-    if (child)
+    if (child != nullptr)
         m_current = child;
     else
     {

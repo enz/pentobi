@@ -26,7 +26,7 @@ namespace {
     in the ASCII range. */
 bool is_ascii_space(int c)
 {
-    return c >= 0 && c < 128 && isspace(c);
+    return c >= 0 && c < 128 && isspace(c) != 0;
 }
 
 } // namespace

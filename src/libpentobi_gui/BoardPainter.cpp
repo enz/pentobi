@@ -388,7 +388,7 @@ void BoardPainter::paintMarks(QPainter& painter,
                               Variant variant, const Grid<int>& marks)
 {
     for (Point p : *m_geo)
-        if (marks[p] & (dot | circle))
+        if ((marks[p] & (dot | circle)) != 0)
         {
             qreal x = (static_cast<float>(m_geo->get_x(p)) + 0.5f)
                     * m_fieldWidth;
@@ -433,7 +433,7 @@ void BoardPainter::paintMarks(QPainter& painter,
                 size = 0.12 * m_fieldHeight;
             QColor color = Util::getMarkColor(variant, pointState[p]);
             qreal penWidth = 0.05 * m_fieldHeight;
-            if (marks[p] & dot)
+            if ((marks[p] & dot) != 0)
             {
                 color.setAlphaF(0.5);
                 painter.setPen(Qt::NoPen);
@@ -540,9 +540,9 @@ void BoardPainter::paintPieces(QPainter& painter,
         }
     }
     paintStartingPoints(painter, m_variant, pointState, isFirstPiece);
-    if (marks)
+    if (marks != nullptr)
         paintMarks(painter, pointState, m_variant, *marks);
-    if (labels)
+    if (labels != nullptr)
         paintLabels(painter, pointState, m_variant, *labels);
     painter.restore();
 }

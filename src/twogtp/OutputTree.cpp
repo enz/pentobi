@@ -144,7 +144,7 @@ void OutputTree::add_game(const Board& bd, unsigned player_black, float result,
         else
             player = c.to_int() % bd.get_nu_players();
         auto child = m_tree.find_child_with_move(*node, mv);
-        if (! child)
+        if (child == nullptr)
         {
             child = &m_tree.create_new_child(*node);
             m_tree.set_move(*child, mv);
@@ -185,7 +185,7 @@ void OutputTree::generate_move(bool is_player_black, const Board& bd,
         ColorMove transformed_mv(mv.color,
                                  get_transformed(bd, mv.move, transform));
         auto child = m_tree.find_child_with_move(*node, transformed_mv);
-        if (! child)
+        if (child == nullptr)
             return;
         node = child;
     }

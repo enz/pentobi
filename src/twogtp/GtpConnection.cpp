@@ -44,7 +44,7 @@ vector<string> split_args(const string& s)
             }
             is_in_string = ! is_in_string;
         }
-        else if (isspace(c) && ! is_in_string)
+        else if ((isspace(c) != 0) && ! is_in_string)
         {
             if (! token.str().empty())
             {

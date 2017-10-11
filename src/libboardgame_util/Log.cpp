@@ -87,7 +87,7 @@ ostream* _log_stream = &cerr;
 
 void _log(const string& s)
 {
-    if (! _log_stream)
+    if (_log_stream == nullptr)
         return;
     if (s.empty())
         *_log_stream << '\n';

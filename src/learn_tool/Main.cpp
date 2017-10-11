@@ -350,7 +350,7 @@ void gen_train_data(const string& file, Variant& variant)
             }
             node = node->get_first_child_or_null();
         }
-        while (node);
+        while (node != nullptr);
         cerr << '.';
         if (nu_games % 79 == 0)
             cerr << '\n';
@@ -363,7 +363,7 @@ void print_weight(int i, const char* name, bool is_member = true)
     if (is_member)
         cout << "m_";
     cout << "gamma_" << name << " = ";
-    if (! feature_occured_globally.feature[i])
+    if (feature_occured_globally.feature[i] == 0u)
         cout << "1; // unused\n";
     else
         cout << "exp(" << weights[i] << "f / temperature);\n";

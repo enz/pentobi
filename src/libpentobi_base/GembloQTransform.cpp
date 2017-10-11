@@ -46,11 +46,11 @@ CoordPoint TransfGembloQRot90::get_transformed(CoordPoint p) const
     {
     case 0:
     case 3:
-        x -= (p.y % 2 != 0);
+        x -= static_cast<int>(p.y % 2 != 0);
         break;
     case 1:
     case 2:
-        x -= (p.y % 2 == 0);
+        x -= static_cast<int>(p.y % 2 == 0);
         break;
     }
     return CoordPoint(x, y);
@@ -73,11 +73,11 @@ CoordPoint TransfGembloQRot270::get_transformed(CoordPoint p) const
     {
     case 0:
     case 3:
-        x += (p.y % 2 != 0);
+        x += static_cast<int>(p.y % 2 != 0);
         break;
     case 1:
     case 2:
-        x += (p.y % 2 == 0);
+        x += static_cast<int>(p.y % 2 == 0);
         break;
     }
     return CoordPoint(x, y);
@@ -100,11 +100,11 @@ CoordPoint TransfGembloQRot90Refl::get_transformed(CoordPoint p) const
     {
     case 0:
     case 3:
-        x -= (p.y % 2 != 0);
+        x -= static_cast<int>(p.y % 2 != 0);
         break;
     case 1:
     case 2:
-        x -= (p.y % 2 == 0);
+        x -= static_cast<int>(p.y % 2 == 0);
         break;
     }
     return CoordPoint(x, y);
@@ -127,11 +127,11 @@ CoordPoint TransfGembloQRot270Refl::get_transformed(CoordPoint p) const
     {
     case 0:
     case 3:
-        x += (p.y % 2 != 0);
+        x += static_cast<int>(p.y % 2 != 0);
         break;
     case 1:
     case 2:
-        x += (p.y % 2 == 0);
+        x += static_cast<int>(p.y % 2 == 0);
         break;
     }
     return CoordPoint(x, y);

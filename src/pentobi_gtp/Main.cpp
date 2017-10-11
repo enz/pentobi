@@ -29,7 +29,7 @@ namespace {
 
 string get_application_dir_path(int argc, char** argv)
 {
-    if (argc == 0 || ! argv || ! argv[0])
+    if (argc == 0 || argv == nullptr || argv[0] == nullptr)
         return "";
     string application_path(argv[0]);
 #ifdef _WIN32

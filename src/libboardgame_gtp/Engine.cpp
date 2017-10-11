@@ -25,7 +25,7 @@ namespace {
 bool is_cmd_line(const string& line)
 {
     for (char c : line)
-        if (! isspace(static_cast<unsigned char>(c)))
+        if (isspace(static_cast<unsigned char>(c)) == 0)
             return c != '#';
     return false;
 }
@@ -141,7 +141,7 @@ bool Engine::exec(istream& in, bool throw_on_fail, ostream* log)
         if (! is_cmd_line(line))
             continue;
         cmd.init(line);
-        if (log)
+        if (log != nullptr)
             *log << cmd.get_line() << '\n';
         bool status = handle_cmd(cmd, log, response, buffer);
         if (! status && throw_on_fail)
@@ -201,7 +201,7 @@ bool Engine::handle_cmd(CmdLine& line, ostream* out, Response& response,
         status = false;
         response.set(failure.what());
     }
-    if (out)
+    if (out != nullptr)
     {
         *out << (status ? '=' : '?');
         line.write_id(*out);

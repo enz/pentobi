@@ -36,12 +36,12 @@ const SgfNode& back_to_main_variation(const SgfNode& node)
 const SgfNode& beginning_of_branch(const SgfNode& node)
 {
     auto current = node.get_parent_or_null();
-    if (! current)
+    if (current == nullptr)
         return node;
     while (true)
     {
         auto parent = current->get_parent_or_null();
-        if (! parent || ! parent->has_single_child())
+        if (parent == nullptr || ! parent->has_single_child())
             break;
         current = parent;
     }
@@ -51,7 +51,7 @@ const SgfNode& beginning_of_branch(const SgfNode& node)
 const SgfNode* find_next_comment(const SgfNode& node)
 {
     auto current = get_next_node(node);
-    while (current)
+    while (current != nullptr)
     {
         if (has_comment(*current))
             return current;
@@ -111,12 +111,12 @@ const SgfNode* get_next_earlier_variation(const SgfNode& node)
 {
     auto child = &node;
     auto current = node.get_parent_or_null();
-    while (current && ! child->get_sibling())
+    while (current != nullptr && (child->get_sibling() == nullptr))
     {
         child = current;
         current = current->get_parent_or_null();
     }
-    if (! current)
+    if (current == nullptr)
         return nullptr;
     return child->get_sibling();
 }
@@ -124,7 +124,7 @@ const SgfNode* get_next_earlier_variation(const SgfNode& node)
 const SgfNode* get_next_node(const SgfNode& node)
 {
     auto child = node.get_first_child_or_null();
-    if (child)
+    if (child != nullptr)
         return child;
     return get_next_earlier_variation(node);
 }
@@ -175,12 +175,12 @@ bool has_comment(const SgfNode& node)
 bool has_earlier_variation(const SgfNode& node)
 {
     auto current = node.get_parent_or_null();
-    if (! current)
+    if (current == nullptr)
         return false;
     while (true)
     {
         auto parent = current->get_parent_or_null();
-        if (! parent)
+        if (parent == nullptr)
             return false;
         if (! parent->has_single_child())
             return true;

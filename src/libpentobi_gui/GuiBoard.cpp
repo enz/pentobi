@@ -148,7 +148,7 @@ Move GuiBoard::findSelectedPieceMove()
 bool GuiBoard::isSelectedPiecePartiallyOnBoard(CoordPoint offset) const
 {
     if (m_selectedPiece.is_null() || offset.is_null()
-            || ! m_selectedPieceTransform)
+            || (m_selectedPieceTransform == nullptr))
         return false;
     auto& points = m_bd.get_piece_info(m_selectedPiece).get_points();
     auto& geo = m_bd.get_geometry();
