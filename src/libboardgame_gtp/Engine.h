@@ -145,15 +145,6 @@ private:
 
     bool handle_cmd(CmdLine& line, ostream* out, Response& response,
                     string& buffer);
-
-    static void no_args_wrapper(const HandlerNoArgs& h, Arguments args,
-                                Response& response);
-
-    static void no_response_wrapper(const HandlerNoResponse& h, Arguments args,
-                                    Response&);
-
-    static void no_args_no_response_wrapper(const HandlerNoArgsNoResponse& h,
-                                            Arguments args, Response&);
 };
 
 template<class T>

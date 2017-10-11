@@ -71,20 +71,25 @@ void Engine::add(const string& name, const Handler& f)
 
 void Engine::add(const string& name, const HandlerNoArgs& f)
 {
-    add(name,
-        Handler(bind(no_args_wrapper, f, placeholders::_1, placeholders::_2)));
+    add(name, [f](Arguments args, Response& response) {
+        args.check_empty();
+        f(response);
+    });
 }
 
 void Engine::add(const string& name, const HandlerNoResponse& f)
 {
-    add(name, Handler(bind(no_response_wrapper, f,
-                           placeholders::_1, placeholders::_2)));
+    add(name, [f](Arguments args, Response&) {
+        f(args);
+    });
 }
 
 void Engine::add(const string& name, const HandlerNoArgsNoResponse& f)
 {
-    add(name, Handler(bind(no_args_no_response_wrapper, f,
-                           placeholders::_1, placeholders::_2)));
+    add(name, [f](Arguments args, Response&) {
+        args.check_empty();
+        f();
+    });
 }
 
 /** Return @c true if command is known, @c false otherwise. */
@@ -210,26 +215,6 @@ bool Engine::handle_cmd(CmdLine& line, ostream* out, Response& response,
         out->flush();
     }
     return status;
-}
-
-void Engine::no_args_wrapper(const HandlerNoArgs& h, Arguments args,
-                             Response& response)
-{
-    args.check_empty();
-    h(response);
-}
-
-void Engine::no_response_wrapper(const HandlerNoResponse& h, Arguments args,
-                                 Response&)
-{
-    h(args);
-}
-
-void Engine::no_args_no_response_wrapper(const HandlerNoArgsNoResponse& h,
-                                         Arguments args, Response&)
-{
-    args.check_empty();
-    h();
 }
 
 void Engine::on_handle_cmd_begin()
