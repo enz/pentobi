@@ -59,7 +59,7 @@ vector<string> split(const string& s, char separator)
 
 string time_to_string(double seconds, bool with_seconds_as_double)
 {
-    int int_seconds = int(seconds + 0.5);
+    auto int_seconds = int(seconds + 0.5);
     int hours = int_seconds / 3600;
     int_seconds -= hours * 3600;
     int minutes = int_seconds / 60;

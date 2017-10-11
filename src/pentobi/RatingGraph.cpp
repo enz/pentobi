@@ -51,7 +51,7 @@ void RatingGraph::paintEvent(QPaintEvent* event)
         int maxLabelWidth = 0;
         while (yTic <= m_yMax)
         {
-            int y =
+            auto y =
                 static_cast<int>(round(
                     topMargin
                     + graphHeight - (yTic - m_yMin) / yRange * graphHeight));

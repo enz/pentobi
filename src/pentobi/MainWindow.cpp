@@ -2709,7 +2709,7 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
     if (! m_isGenMoveRunning || elapsedSeconds < 10)
         return;
     QString text;
-    int seconds = static_cast<int>(ceil(remainingSeconds));
+    auto seconds = static_cast<int>(ceil(remainingSeconds));
     if (seconds < 90)
     {
         if (seconds == m_lastRemainingSeconds)
@@ -2721,7 +2721,7 @@ void MainWindow::searchCallback(double elapsedSeconds, double remainingSeconds)
     }
     else
     {
-        int minutes = static_cast<int>(ceil(remainingSeconds / 60));
+        auto minutes = static_cast<int>(ceil(remainingSeconds / 60));
         if (minutes == m_lastRemainingMinutes)
             return;
         m_lastRemainingMinutes = minutes;

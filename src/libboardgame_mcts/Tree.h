@@ -414,7 +414,7 @@ template<typename N>
 inline void Tree<N>::link_children(const Node& node, const Node* first_child,
                                    unsigned short nu_children)
 {
-    NodeIdx first_child_idx = static_cast<NodeIdx>(first_child - m_nodes.get());
+    auto first_child_idx = static_cast<NodeIdx>(first_child - m_nodes.get());
     LIBBOARDGAME_ASSERT(first_child_idx > 0);
     LIBBOARDGAME_ASSERT(first_child_idx < m_max_nodes);
     non_const(node).link_children(first_child_idx, nu_children);

@@ -36,16 +36,16 @@ void PriorKnowledge::init_variant(const Board& bd)
     auto piece_set = bd.get_piece_set();
 
     // Init m_dist_to_center
-    float width = static_cast<float>(geo.get_width());
-    float height = static_cast<float>(geo.get_height());
+    auto width = static_cast<float>(geo.get_width());
+    auto height = static_cast<float>(geo.get_height());
     float center_x = 0.5f * width - 0.5f;
     float center_y = 0.5f * height - 0.5f;
     bool is_trigon = (piece_set == PieceSet::trigon);
     float ratio = (is_trigon ? 1.732f : 1);
     for (Point p : geo)
     {
-        float x = static_cast<float>(geo.get_x(p));
-        float y = static_cast<float>(geo.get_y(p));
+        auto x = static_cast<float>(geo.get_x(p));
+        auto y = static_cast<float>(geo.get_y(p));
         float dx = x - center_x;
         float dy = ratio * (y - center_y);
         float d = sqrt(dx * dx + dy * dy);

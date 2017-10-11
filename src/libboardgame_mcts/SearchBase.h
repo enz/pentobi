@@ -1027,7 +1027,7 @@ bool SearchBase<S, M, R>::prune(TimeSource& time_source, double time,
     m_tmp_tree.clear();
     m_tree.copy_subtree(m_tmp_tree, m_tmp_tree.get_root(), m_tree.get_root(),
                         prune_min_count);
-    int percent = int(m_tmp_tree.get_nu_nodes() * 100 / m_tree.get_nu_nodes());
+    auto percent = int(m_tmp_tree.get_nu_nodes() * 100 / m_tree.get_nu_nodes());
     LIBBOARDGAME_LOG("Pruning MinCnt: ", prune_min_count, ", AtTm: ", time,
                      ", Nds: ", m_tmp_tree.get_nu_nodes(), " (", percent,
                      "%), Tm: ", timer());
@@ -1241,7 +1241,7 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
                      ref(thread_state)));
     if (m_deterministic)
     {
-        unsigned interval =
+        auto interval =
             static_cast<unsigned>(
                     max(1.0, SearchParamConst::expected_sim_per_sec / 5.0));
         expensive_abort_checker.set_deterministic(interval);
@@ -1417,7 +1417,7 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
     auto& was_played = thread_state.was_played;
     auto& first_play = thread_state.first_play;
     auto& nodes = thread_state.simulation.nodes;
-    unsigned nu_nodes = static_cast<unsigned>(nodes.size());
+    auto nu_nodes = static_cast<unsigned>(nodes.size());
     unsigned i = nu_moves - 1;
     // nu_nodes is at least 2 (including root) because the case of no legal
     // moves at the root is already handled before running any simulations.
@@ -1482,7 +1482,7 @@ void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
     const auto& simulation = thread_state.simulation;
     auto& nodes = simulation.nodes;
     auto& eval = simulation.eval;
-    unsigned nu_nodes = static_cast<unsigned>(nodes.size());
+    auto nu_nodes = static_cast<unsigned>(nodes.size());
     m_tree.inc_visit_count(*nodes[0]);
     for (unsigned i = 1; i < nu_nodes; ++i)
     {

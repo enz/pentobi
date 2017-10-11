@@ -200,7 +200,7 @@ void OutputTree::generate_move(bool is_player_black, const Board& bd,
         play_real = true;
         return;
     }
-    unsigned random = static_cast<unsigned>(distribution(m_random) * sum);
+    auto random = static_cast<unsigned>(distribution(m_random) * sum);
     sum = 0;
     for (auto& i : node->get_children())
     {

@@ -120,7 +120,7 @@ void Writer::write_property(const string& id, const vector<T>& values)
                 && ! is_first_value && m_indent >= 0)
         {
             m_out << '\n';
-            int indent = static_cast<int>(m_current_indent + 1 + id.size());
+            auto indent = static_cast<int>(m_current_indent + 1 + id.size());
             for (int i = 0; i < indent; ++i)
                 m_out << ' ';
         }

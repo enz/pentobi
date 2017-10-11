@@ -203,7 +203,7 @@ T Arguments::parse(unsigned i) const
 template<typename T>
 T Arguments::parse_min(unsigned i, T min) const
 {
-    T result = parse<T>(i);
+    auto result = parse<T>(i);
     if (result < min)
     {
         ostringstream msg;

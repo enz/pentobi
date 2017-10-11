@@ -37,7 +37,7 @@ void ScoreDisplay::drawScore(QPainter& painter, Color c, int x)
     QFontMetrics metrics(m_font);
     int ascent = metrics.ascent();
     // y is baseline
-    int y = static_cast<int>(ceil(0.5 * (height() - ascent)) + ascent);
+    auto y = static_cast<int>(ceil(0.5 * (height() - ascent)) + ascent);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawEllipse(x,  y - m_colorDotSize, m_colorDotSize,
                         m_colorDotSize);
@@ -55,7 +55,7 @@ void ScoreDisplay::drawScore2(QPainter& painter, Color c1, Color c2, int x)
     QFontMetrics metrics(m_font);
     int ascent = metrics.ascent();
     // y is baseline
-    int y = static_cast<int>(ceil(0.5 * (height() - ascent)) + ascent);
+    auto y = static_cast<int>(ceil(0.5 * (height() - ascent)) + ascent);
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawEllipse(x, y - m_colorDotSize, m_colorDotSize, m_colorDotSize);
     color = Util::getPaintColor(m_variant, c2);
@@ -75,7 +75,7 @@ void ScoreDisplay::drawScore3(QPainter& painter, int x)
     QFontMetrics metrics(m_font);
     int ascent = metrics.ascent();
     // y is baseline
-    int y = static_cast<int>(ceil(0.5 * (height() - ascent)) + ascent);
+    auto y = static_cast<int>(ceil(0.5 * (height() - ascent)) + ascent);
     painter.setRenderHint(QPainter::Antialiasing, true);
     if (m_hasMoves[Color(3)])
     {

@@ -216,8 +216,8 @@ P PointTransfTrigonRot60<P>::get_transformed(Point p, const Geometry<P>& geo) co
     float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
     float px = static_cast<float>(geo.get_x(p)) - cx;
     float py = static_cast<float>(geo.get_y(p)) - cy;
-    unsigned x = static_cast<unsigned>(round(cx + 0.5f * px + 1.5f * py));
-    unsigned y = static_cast<unsigned>(round(cy - 0.5f * px + 0.5f * py));
+    auto x = static_cast<unsigned>(round(cx + 0.5f * px + 1.5f * py));
+    auto y = static_cast<unsigned>(round(cy - 0.5f * px + 0.5f * py));
     return geo.get_point(x, y);
 }
 
@@ -240,8 +240,8 @@ P PointTransfTrigonRot120<P>::get_transformed(Point p, const Geometry<P>& geo) c
     float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
     float px = static_cast<float>(geo.get_x(p)) - cx;
     float py = static_cast<float>(geo.get_y(p)) - cy;
-    unsigned x = static_cast<unsigned>(round(cx - 0.5f * px + 1.5f * py));
-    unsigned y = static_cast<unsigned>(round(cy - 0.5f * px - 0.5f * py));
+    auto x = static_cast<unsigned>(round(cx - 0.5f * px + 1.5f * py));
+    auto y = static_cast<unsigned>(round(cy - 0.5f * px - 0.5f * py));
     return geo.get_point(x, y);
 }
 
@@ -264,8 +264,8 @@ P PointTransfTrigonRot240<P>::get_transformed(Point p, const Geometry<P>& geo) c
     float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
     float px = static_cast<float>(geo.get_x(p)) - cx;
     float py = static_cast<float>(geo.get_y(p)) - cy;
-    unsigned x = static_cast<unsigned>(round(cx - 0.5f * px - 1.5f * py));
-    unsigned y = static_cast<unsigned>(round(cy + 0.5f * px - 0.5f * py));
+    auto x = static_cast<unsigned>(round(cx - 0.5f * px - 1.5f * py));
+    auto y = static_cast<unsigned>(round(cy + 0.5f * px - 0.5f * py));
     return geo.get_point(x, y);
 }
 
@@ -288,8 +288,8 @@ P PointTransfTrigonRot300<P>::get_transformed(Point p, const Geometry<P>& geo) c
     float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
     float px = static_cast<float>(geo.get_x(p)) - cx;
     float py = static_cast<float>(geo.get_y(p)) - cy;
-    unsigned x = static_cast<unsigned>(round(cx + 0.5f * px - 1.5f * py));
-    unsigned y = static_cast<unsigned>(round(cy + 0.5f * px + 0.5f * py));
+    auto x = static_cast<unsigned>(round(cx + 0.5f * px - 1.5f * py));
+    auto y = static_cast<unsigned>(round(cy + 0.5f * px + 0.5f * py));
     return geo.get_point(x, y);
 }
 
@@ -312,8 +312,8 @@ P PointTransfTrigonReflRot60<P>::get_transformed(Point p, const Geometry<P>& geo
     float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
     float px = static_cast<float>(geo.get_x(p)) - cx;
     float py = static_cast<float>(geo.get_y(p)) - cy;
-    unsigned x = static_cast<unsigned>(round(cx + 0.5f * (-px) + 1.5f * py));
-    unsigned y = static_cast<unsigned>(round(cy - 0.5f * (-px) + 0.5f * py));
+    auto x = static_cast<unsigned>(round(cx + 0.5f * (-px) + 1.5f * py));
+    auto y = static_cast<unsigned>(round(cy - 0.5f * (-px) + 0.5f * py));
     return geo.get_point(x, y);
 }
 
@@ -336,8 +336,8 @@ P PointTransfTrigonReflRot120<P>::get_transformed(Point p, const Geometry<P>& ge
     float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
     float px = static_cast<float>(geo.get_x(p)) - cx;
     float py = static_cast<float>(geo.get_y(p)) - cy;
-    unsigned x = static_cast<unsigned>(round(cx - 0.5f * (-px) + 1.5f * py));
-    unsigned y = static_cast<unsigned>(round(cy - 0.5f * (-px) - 0.5f * py));
+    auto x = static_cast<unsigned>(round(cx - 0.5f * (-px) + 1.5f * py));
+    auto y = static_cast<unsigned>(round(cy - 0.5f * (-px) - 0.5f * py));
     return geo.get_point(x, y);
 }
 
@@ -360,8 +360,8 @@ P PointTransfTrigonReflRot240<P>::get_transformed(Point p, const Geometry<P>& ge
     float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
     float px = static_cast<float>(geo.get_x(p)) - cx;
     float py = static_cast<float>(geo.get_y(p)) - cy;
-    unsigned x = static_cast<unsigned>(round(cx - 0.5f * (-px) - 1.5f * py));
-    unsigned y = static_cast<unsigned>(round(cy + 0.5f * (-px) - 0.5f * py));
+    auto x = static_cast<unsigned>(round(cx - 0.5f * (-px) - 1.5f * py));
+    auto y = static_cast<unsigned>(round(cy + 0.5f * (-px) - 0.5f * py));
     return geo.get_point(x, y);
 }
 
@@ -384,8 +384,8 @@ P PointTransfTrigonReflRot300<P>::get_transformed(Point p, const Geometry<P>& ge
     float cy = 0.5f * static_cast<float>(geo.get_height() - 1);
     float px = static_cast<float>(geo.get_x(p)) - cx;
     float py = static_cast<float>(geo.get_y(p)) - cy;
-    unsigned x = static_cast<unsigned>(round(cx + 0.5f * (-px) - 1.5f * py));
-    unsigned y = static_cast<unsigned>(round(cy + 0.5f * (-px) + 0.5f * py));
+    auto x = static_cast<unsigned>(round(cx + 0.5f * (-px) - 1.5f * py));
+    auto y = static_cast<unsigned>(round(cy + 0.5f * (-px) + 0.5f * py));
     return geo.get_point(x, y);
 }
 

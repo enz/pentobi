@@ -494,8 +494,8 @@ void GuiBoard::setSelectedPiecePoints()
     if (! m_selectedPiece.is_null() && ! m_selectedPieceOffset.is_null())
     {
         auto& geo = m_bd.get_geometry();
-        int width = static_cast<int>(geo.get_width());
-        int height = static_cast<int>(geo.get_height());
+        auto width = static_cast<int>(geo.get_width());
+        auto height = static_cast<int>(geo.get_height());
         for (CoordPoint p : m_bd.get_piece_info(m_selectedPiece).get_points())
         {
             p = m_selectedPieceTransform->get_transformed(p);
@@ -525,8 +525,8 @@ void GuiBoard::setSelectedPieceTransform(const Transform* transform)
     setSelectedPieceOffset(wantedOffset, preferRightShift, preferDownShift);
 
     // Shift towards center if completely outside board
-    int width = static_cast<int>(geo.get_width());
-    int height = static_cast<int>(geo.get_height());
+    auto width = static_cast<int>(geo.get_width());
+    auto height = static_cast<int>(geo.get_height());
     while (m_selectedPieceOffset.is_null())
     {
         preferRightShift = wantedOffset.x < width / 2;

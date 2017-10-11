@@ -73,7 +73,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                 {
                     updater.update(*bd, tree, node->get_parent());
                     LIBBOARDGAME_LOG("Analyzing move ", bd->get_nu_moves());
-                    const Float max_count = Float(nu_simulations);
+                    const auto max_count = Float(nu_simulations);
                     double max_time = 0;
                     // Set min_simulations to a reasonable value because
                     // nu_simulations can be reached without having that many

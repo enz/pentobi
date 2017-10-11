@@ -59,7 +59,7 @@ void AnalyzeGameWidget::mousePressEvent(QMouseEvent* event)
 {
     if (! m_isInitialized && m_isRunning)
         return;
-    unsigned moveNumber =
+    auto moveNumber =
         static_cast<unsigned>((event->x() - m_borderX) / m_dX);
     if (moveNumber >= m_analyzeGame.get_nu_moves())
         return;
@@ -92,7 +92,7 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
         QPen pen(QColor(96, 96, 96));
         pen.setStyle(Qt::DotLine);
         painter.setPen(pen);
-        int x = static_cast<int>(m_currentPosition * m_dX + 0.5 * m_dX);
+        auto x = static_cast<int>(m_currentPosition * m_dX + 0.5 * m_dX);
         painter.drawLine(x, 0, x, m_maxY);
     }
     painter.setPen(QColor(32, 32, 32));

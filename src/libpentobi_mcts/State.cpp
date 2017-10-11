@@ -327,8 +327,8 @@ Point State::find_best_starting_point(Color c) const
             if (y <= 3 || y >= geo.get_height() - 3 - 1)
                 continue;
         }
-        float px = static_cast<float>(geo.get_x(p));
-        float py = static_cast<float>(geo.get_y(p));
+        auto px = static_cast<float>(geo.get_x(p));
+        auto py = static_cast<float>(geo.get_y(p));
         float d = 0;
         for (Color i : Color::Range(m_nu_colors))
             for (Point pp : m_bd.get_starting_points(i))
@@ -336,8 +336,8 @@ Point State::find_best_starting_point(Color c) const
                 PointState s = m_bd.get_point_state(pp);
                 if (! s.is_empty())
                 {
-                    float ppx = static_cast<float>(geo.get_x(pp));
-                    float ppy = static_cast<float>(geo.get_y(pp));
+                    auto ppx = static_cast<float>(geo.get_x(pp));
+                    auto ppy = static_cast<float>(geo.get_y(pp));
                     float dx = ppx - px;
                     float dy = ratio * (ppy - py);
                     float weight = 1;
@@ -523,7 +523,7 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score)
     Float bonus = 0;
 
     // Game length
-    Float l = static_cast<Float>(m_bd.get_nu_moves());
+    auto l = static_cast<Float>(m_bd.get_nu_moves());
     m_stat_len.add(l);
     Float var = m_stat_len.get_variance();
     if (var > 0)
@@ -552,7 +552,7 @@ inline Float State::get_quality_bonus_attach_twocolor()
         n -= m_bd.is_forbidden(p, Color(0));
     for (Point p : m_bd.get_attach_points(Color(1)))
         n += m_bd.is_forbidden(p, Color(1));
-    Float attach = static_cast<Float>(n);
+    auto attach = static_cast<Float>(n);
     m_stat_attach.add(attach);
     auto var = m_stat_attach.get_variance();
     if (var > 0)
@@ -578,7 +578,7 @@ inline Float State::get_quality_bonus_attach_multicolor()
         n += m_bd.is_forbidden(p, Color(1));
     for (Point p : m_bd.get_attach_points(Color(3)))
         n += m_bd.is_forbidden(p, Color(3));
-    Float attach = static_cast<Float>(n);
+    auto attach = static_cast<Float>(n);
     m_stat_attach.add(attach);
     auto var = m_stat_attach.get_variance();
     if (var > 0)

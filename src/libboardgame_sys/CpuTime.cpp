@@ -45,7 +45,7 @@ double cpu_time()
     return (sys_int.QuadPart + user_int.QuadPart) * 1e-7;
 
 #elif HAVE_UNISTD_H && HAVE_SYS_TIMES_H
-    static double ticks_per_second = double(sysconf(_SC_CLK_TCK));
+    static auto ticks_per_second = double(sysconf(_SC_CLK_TCK));
     struct tms buf;
     if (times(&buf) == clock_t(-1))
         return -1;
