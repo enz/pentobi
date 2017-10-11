@@ -19,7 +19,7 @@ class PentobiThumbCreator
     Q_OBJECT
 
 public:
-    PentobiThumbCreator(QObject* parent = nullptr);
+    using QObject::QObject;
 
     virtual ~PentobiThumbCreator();
 
