@@ -93,7 +93,7 @@ QLayoutItem* SameHeightLayout::takeAt(int i)
 void SameHeightLayout::setGeometry(const QRect& rect)
 {
     QLayout::setGeometry(rect);
-    if (m_list.size() == 0)
+    if (m_list.empty())
         return;
     int count = m_list.count();
     int width = rect.width();

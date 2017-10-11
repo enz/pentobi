@@ -157,7 +157,7 @@ void Board::gen_moves(Color c, Point p, Piece piece, unsigned adj_status,
 
 ScoreType Board::get_bonus(Color c) const
 {
-    if (get_pieces_left(c).size() > 0)
+    if (! get_pieces_left(c).empty())
         return 0;
     auto bonus = m_bonus_all_pieces;
     unsigned i = m_moves.size();
