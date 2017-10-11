@@ -75,7 +75,7 @@ enum {
 
 struct Features
 {
-    typedef uint_least8_t IntType;
+    using IntType = uint_least8_t;
 
 
     array<IntType, _nu_features> feature;
@@ -104,7 +104,7 @@ struct Sample
 };
 
 
-typedef double Float;
+using Float = double;
 
 const Float step_size = 0.01;
 
