@@ -274,7 +274,7 @@ public:
     Float get_rave_parent_max() const;
 
     /** Maximum child value count for applying RAVE. */
-    void set_rave_child_max(Float value);
+    void set_rave_child_max(Float n);
 
     Float get_rave_child_max() const;
 
