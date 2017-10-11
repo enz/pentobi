@@ -35,7 +35,7 @@ string get_application_dir_path(int argc, char** argv)
 #ifdef _WIN32
     auto pos = application_path.find_last_of("/\\");
 #else
-    auto pos = application_path.find_last_of("/");
+    auto pos = application_path.find_last_of('/');
 #endif
     if (pos == string::npos)
         return "";

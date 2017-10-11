@@ -18,9 +18,9 @@ Options::Options(int argc, const char** argv, const vector<string>& specs)
 {
     for (auto& s : specs)
     {
-        auto pos = s.find("|");
+        auto pos = s.find('|');
         if (pos == string::npos)
-            pos = s.find(":");
+            pos = s.find(':');
         if (pos != string::npos)
             m_names.insert(s.substr(0, pos));
         else
