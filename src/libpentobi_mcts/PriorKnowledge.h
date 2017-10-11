@@ -52,7 +52,7 @@ public:
 
     typedef libboardgame_mcts::Tree<Node> Tree;
 
-    PriorKnowledge(const Board& bd);
+    explicit PriorKnowledge(const Board& bd);
 
     void start_search(const Board& bd);
 

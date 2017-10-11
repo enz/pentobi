@@ -37,7 +37,7 @@ class MissingProperty
     : public SgfError
 {
 public:
-    MissingProperty(const string& id);
+    explicit MissingProperty(const string& id);
 };
 
 //-----------------------------------------------------------------------------
