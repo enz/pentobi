@@ -26,7 +26,7 @@ class SameHeightLayout
     Q_OBJECT
 
 public:
-    explicit SameHeightLayout(QWidget* parent = nullptr);
+    using QLayout::QLayout;
 
     ~SameHeightLayout();
 

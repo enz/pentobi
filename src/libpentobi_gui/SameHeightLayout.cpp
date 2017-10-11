@@ -17,11 +17,6 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-SameHeightLayout::SameHeightLayout(QWidget* parent)
-    : QLayout(parent)
-{
-}
-
 SameHeightLayout::~SameHeightLayout()
 {
     QLayoutItem* item;
