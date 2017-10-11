@@ -178,7 +178,7 @@ MainWindow::MainWindow(QWidget* parent, Variant variant,
     m_maxLevel = maxLevel;
     Util::initDataDir();
     QSettings settings;
-    m_history.reset(new RatingHistory(variant));
+    m_history = make_unique<RatingHistory>(variant);
     createActions();
     restoreLevel(variant);
     setCentralWidget(createCentralWidget());
@@ -192,8 +192,9 @@ MainWindow::MainWindow(QWidget* parent, Variant variant,
     statusBar()->addWidget(m_ratedGameLabelText);
     m_ratedGameLabelText->hide();
     initGame();
-    m_player.reset(new Player(variant, maxLevel,
-                              booksDir.toLocal8Bit().constData(), nuThreads));
+    m_player =
+            make_unique<Player>(variant, maxLevel,
+                                booksDir.toLocal8Bit().constData(), nuThreads);
     m_player->get_search().set_callback(bind(&MainWindow::searchCallback,
                                              this, placeholders::_1,
                                              placeholders::_2));
@@ -1508,12 +1509,12 @@ void MainWindow::findMove()
     if (m_bd.is_game_over())
         return;
     if (! m_legalMoves)
-        m_legalMoves.reset(new MoveList);
+        m_legalMoves = make_unique<MoveList>();
     Color to_play = m_bd.get_to_play();
     if (m_legalMoves->empty())
     {
         if (! m_marker)
-            m_marker.reset(new MoveMarker);
+            m_marker = make_unique<MoveMarker>();
         m_bd.gen_moves(to_play, *m_marker, *m_legalMoves);
         m_marker->clear(*m_legalMoves);
         sort(m_legalMoves->begin(), m_legalMoves->end(),

@@ -376,9 +376,9 @@ bool Player::resign() const
 void Player::use_cpu_time(bool enable)
 {
     if (enable)
-        m_time_source.reset(new CpuTimeSource);
+        m_time_source = make_unique<CpuTimeSource>();
     else
-        m_time_source.reset(new WallTimeSource);
+        m_time_source = make_unique<WallTimeSource>();
 }
 
 //-----------------------------------------------------------------------------

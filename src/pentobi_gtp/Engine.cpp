@@ -191,7 +191,7 @@ void Engine::create_player(Variant variant, unsigned level,
                            const string& books_dir, unsigned nu_threads)
 {
     auto max_level = level;
-    m_player.reset(new Player(variant, max_level, books_dir, nu_threads));
+    m_player = make_unique<Player>(variant, max_level, books_dir, nu_threads);
     get_mcts_player().set_level(level);
     set_player(*m_player);
 }
