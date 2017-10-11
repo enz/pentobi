@@ -39,7 +39,7 @@ inline ostream* get_log_stream()
 inline void flush_log()
 {
 #if ! LIBBOARDGAME_DISABLE_LOG
-    if (_log_stream)
+    if (_log_stream != nullptr)
         _log_stream->flush();
 #endif
 }
