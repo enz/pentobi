@@ -84,7 +84,7 @@ int main(int argc, char** argv)
         vector<thread> threads;
         threads.reserve(nu_threads);
         for (auto& i : twogtps)
-            threads.push_back(thread([&i, &result]()
+            threads.emplace_back([&i, &result]()
             {
                 try
                 {
@@ -95,7 +95,7 @@ int main(int argc, char** argv)
                     LIBBOARDGAME_LOG("Error: ", e.what());
                     result = 1;
                 }
-            }));
+            });
         for (auto& t : threads)
             t.join();
     }
