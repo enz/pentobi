@@ -204,8 +204,7 @@ void Board::get_place(Color c, unsigned& place, bool& is_shared) const
             all_scores[i] += i * 0.0001f;
     }
     auto score = all_scores[c.to_int()];
-    sort(all_scores.begin(), all_scores.begin() + m_nu_players,
-         greater<ScoreType>());
+    sort(all_scores.begin(), all_scores.begin() + m_nu_players, greater<>());
     is_shared = false;
     bool found = false;
     for (unsigned i = 0; i < m_nu_players; ++i)
