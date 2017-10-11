@@ -74,8 +74,8 @@ struct TestRegistrar
 #define LIBBOARDGAME_CHECK_EQUAL(expr1, expr2)                          \
     {                                                                   \
         using libboardgame_test::TestFail;                              \
-        auto result1 = (expr1);                                         \
-        auto result2 = (expr2);                                         \
+        const auto& result1 = (expr1);                                         \
+        const auto& result2 = (expr2);                                         \
         if (result1 != result2)                                         \
         {                                                               \
             ostringstream msg;                                          \

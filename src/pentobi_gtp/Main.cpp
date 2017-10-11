@@ -120,7 +120,7 @@ int main(int argc, char** argv)
         if (level < 1 || level > Player::max_supported_level)
             throw runtime_error("invalid level");
         auto use_book = (! opt.contains("nobook"));
-        string books_dir = application_dir_path;
+        const string& books_dir = application_dir_path;
         pentobi_gtp::Engine engine(variant, level, use_book, books_dir,
                                    threads);
         engine.set_resign(! opt.contains("noresign"));

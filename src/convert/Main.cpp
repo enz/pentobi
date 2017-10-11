@@ -29,8 +29,8 @@ int main(int argc, char* argv[])
         auto args = parser.positionalArguments();
         if (args.size() != 2)
             throw QString("Need two arguments");
-        auto in = args.at(0);
-        auto out = args.at(1);
+        auto& in = args.at(0);
+        auto& out = args.at(1);
         QImageReader reader(in);
         QImage image = reader.read();
         if (image.isNull())
