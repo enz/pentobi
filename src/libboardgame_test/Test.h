@@ -124,11 +124,11 @@ struct TestRegistrar
         using libboardgame_test::TestFail;                              \
         auto result1 = (expr1);                                         \
         auto result2 = (expr2);                                         \
-        if (fabs(result1 - result2) > 0.01 * tolerance * result1)       \
+        if (fabs(result1 - result2) > 0.01 * (tolerance) * result1)     \
         {                                                               \
             ostringstream msg;                                          \
             msg << "Difference between " << result1 << " and "          \
-                << result2 << " exceeds " << (0.01 * tolerance)         \
+                << result2 << " exceeds " << (0.01 * (tolerance))       \
                 << " percent";                                          \
             throw TestFail(__FILE__, __LINE__, msg.str());              \
         }                                                               \
@@ -140,11 +140,11 @@ struct TestRegistrar
         using libboardgame_test::TestFail;                              \
         auto result1 = (expr1);                                         \
         auto result2 = (expr2);                                         \
-        if (fabs(result1 - result2) > epsilon)                          \
+        if (fabs(result1 - result2) > (epsilon))                        \
         {                                                               \
             ostringstream msg;                                          \
             msg << "Difference between " << result1 << " and "          \
-                << result2 << " exceeds " << epsilon;                   \
+                << result2 << " exceeds " << (epsilon);                 \
             throw TestFail(__FILE__, __LINE__, msg.str());              \
         }                                                               \
     }
