@@ -66,7 +66,7 @@ public:
                         const QString& booksDir = "", bool noBook = false,
                         unsigned nuThreads = 0);
 
-    ~MainWindow();
+    ~MainWindow() override;
 
     bool eventFilter(QObject* object, QEvent* event) override;
 

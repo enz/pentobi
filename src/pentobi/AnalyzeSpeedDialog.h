@@ -24,7 +24,7 @@ class AnalyzeSpeedDialog final
 public:
     AnalyzeSpeedDialog(QWidget* parent, const QString& title);
 
-    ~AnalyzeSpeedDialog();
+    ~AnalyzeSpeedDialog() override;
 
     /** Get return value if dialog was accepted.
         0 = fast, 1 = normal, 2 = slow */

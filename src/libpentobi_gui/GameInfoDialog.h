@@ -33,7 +33,7 @@ class GameInfoDialog final
 public:
     GameInfoDialog(QWidget* parent, Game& game, QTextCodec*& textCodec);
 
-    ~GameInfoDialog();
+    ~GameInfoDialog() override;
 
 public slots:
     void accept() override;

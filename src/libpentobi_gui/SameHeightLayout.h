@@ -28,7 +28,7 @@ class SameHeightLayout
 public:
     using QLayout::QLayout;
 
-    ~SameHeightLayout();
+    ~SameHeightLayout() override;
 
     void addItem(QLayoutItem* item) override;
 
