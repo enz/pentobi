@@ -306,17 +306,12 @@ inline bool State::check_lgr(Move mv) const
     auto points = m_bd.get_move_points(mv);
     auto i = points.begin();
     auto end = points.end();
-    bool has_attach_point = false;
+    int has_attach_point = 0;
     do
     {
         if (m_bd.is_forbidden(*i, c))
             return false;
-        // Logically, we mean:
-        // has_attach_point = has_attach_point || is_attach_point(*i, c)
-        // But this generates branches, which are bad for performance in this
-        // tight loop (unrolled by the compiler). So we use a bitwise OR, which
-        // works because C++ guarantees that true/false converts to 1/0.
-        has_attach_point |= m_bd.is_attach_point(*i, c);
+        has_attach_point |= static_cast<int>(m_bd.is_attach_point(*i, c));
     }
     while (++i != end);
     if (m_is_callisto)
@@ -327,7 +322,7 @@ inline bool State::check_lgr(Move mv) const
         if (m_bd.get_nu_left_piece(c, one_piece) > 1 && piece != one_piece)
             return false;
     }
-    return has_attach_point;
+    return has_attach_point != 0;
 }
 
 inline void State::evaluate_playout(array<Float, 6>& result)

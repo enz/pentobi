@@ -500,9 +500,9 @@ inline unsigned Board::get_adj_status(Point p, Color c) const
 {
     LIBBOARDGAME_ASSERT(m_bc->has_adj_status_points(p));
     auto i = m_bc->get_adj_status_points(p).begin();
-    unsigned result = is_forbidden(*i, c);
+    auto result = static_cast<unsigned>(is_forbidden(*i, c));
     for (unsigned j = 1; j < PrecompMoves::adj_status_nu_adj; ++j)
-        result |= (is_forbidden(*(++i), c) << j);
+        result |= (static_cast<unsigned>(is_forbidden(*(++i), c)) << j);
     return result;
 }
 
