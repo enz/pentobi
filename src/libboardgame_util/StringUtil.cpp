@@ -11,6 +11,7 @@
 #include "StringUtil.h"
 
 #include <cctype>
+#include <cmath>
 #include <iomanip>
 
 namespace libboardgame_util {
@@ -59,7 +60,7 @@ vector<string> split(const string& s, char separator)
 
 string time_to_string(double seconds, bool with_seconds_as_double)
 {
-    auto int_seconds = int(seconds + 0.5);
+    auto int_seconds = static_cast<int>(round(seconds));
     int hours = int_seconds / 3600;
     int_seconds -= hours * 3600;
     int minutes = int_seconds / 60;
