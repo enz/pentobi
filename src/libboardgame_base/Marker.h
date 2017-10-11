@@ -24,7 +24,8 @@ template<class P>
 class Marker
 {
 public:
-    typedef P Point;
+    using Point = P;
+
 
     Marker();
 
@@ -50,6 +51,7 @@ private:
 
     void reset();
 };
+
 
 template<class P>
 inline Marker<P>::Marker()

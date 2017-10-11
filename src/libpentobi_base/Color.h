@@ -20,7 +20,7 @@ using namespace std;
 class Color
 {
 public:
-    typedef uint_fast8_t IntType;
+    using IntType = uint_fast8_t;
 
     class Iterator
     {

@@ -15,7 +15,7 @@ namespace libpentobi_base {
 //-----------------------------------------------------------------------------
 
 /** List that can hold all possible moves, not including Move::null() */
-typedef libboardgame_util::ArrayList<Move, Move::range - 1> MoveList;
+using MoveList = libboardgame_util::ArrayList<Move, Move::range - 1>;
 
 //-----------------------------------------------------------------------------
 

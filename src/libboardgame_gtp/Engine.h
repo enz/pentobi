@@ -28,13 +28,14 @@ using namespace std;
 class Engine
 {
 public:
-    typedef function<void(Arguments, Response&)> Handler;
+    using Handler = function<void(Arguments, Response&)>;
 
-    typedef function<void(Response&)> HandlerNoArgs;
+    using HandlerNoArgs = function<void(Response&)>;
 
-    typedef function<void(Arguments)> HandlerNoResponse;
+    using HandlerNoResponse = function<void(Arguments)>;
 
-    typedef function<void()> HandlerNoArgsNoResponse;
+    using HandlerNoArgsNoResponse = function<void()>;
+
 
     /** @page libboardgame_gtp_commands libboardgame_gtp::Engine GTP commands
         <dl>
@@ -136,20 +137,10 @@ protected:
     void add(const string& name, void (T::*f)());
 
 private:
-    /** Mapping of command name to command handler.
-        They key is a string subrange, not a string, to allow looking up the
-        command name using Command::name_as_subrange() without creating a
-        temporary string for the command name. The value of type CmdInfo with
-        the name string and callback function are stored in an object allocated
-        on the heap to ensure that the range stays valid, if the value object
-        is copied. */
-    typedef map<string, Handler> Handlers;
-
-
     /** Flag to quit main loop. */
     bool m_quit;
 
-    Handlers m_handlers;
+    map<string, Handler> m_handlers;
 
 
     bool handle_cmd(CmdLine& line, ostream* out, Response& response,

@@ -26,7 +26,7 @@ using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
-typedef float ScoreType;
+using ScoreType = float;
 
 //-----------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ public:
     /** Maximum number of instances of a piece per player. */
     static const unsigned max_instances = 3;
 
-    typedef ArrayList<CoordPoint, max_size> Points;
+    using Points = ArrayList<CoordPoint, max_size>;
 
 
     /** Constructor.
@@ -127,7 +127,7 @@ private:
 
 //-----------------------------------------------------------------------------
 
-typedef PieceInfo::Points PiecePoints;
+using PiecePoints = PieceInfo::Points;
 
 //-----------------------------------------------------------------------------
 

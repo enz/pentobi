@@ -19,7 +19,7 @@ using namespace std;
 class PointState
 {
 public:
-    typedef Color::IntType IntType;
+    using IntType = Color::IntType;
 
     static const IntType range = Color::range + 1;
 

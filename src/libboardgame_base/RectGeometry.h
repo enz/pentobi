@@ -25,10 +25,12 @@ class RectGeometry final
     : public Geometry<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     using AdjCoordList = typename Geometry<P>::AdjCoordList;
+
     using DiagCoordList = typename Geometry<P>::DiagCoordList;
+
 
     /** Create or reuse an already created geometry with a given size. */
     static const RectGeometry& get(unsigned width, unsigned height);

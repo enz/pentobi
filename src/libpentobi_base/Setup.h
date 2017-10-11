@@ -22,7 +22,8 @@ struct Setup
     /** Maximum number of pieces on board per color. */
     static const unsigned max_pieces = 24;
 
-    typedef ArrayList<Move,max_pieces> PlacementList;
+    using PlacementList = ArrayList<Move, max_pieces>;
+
 
     Color to_play = Color(0);
 

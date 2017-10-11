@@ -38,7 +38,8 @@ public:
     const PentobiTree& get_tree() const;
 
 private:
-    typedef libboardgame_base::PointTransform<Point> PointTransform;
+    using PointTransform = libboardgame_base::PointTransform<Point>;
+
 
     PentobiTree m_tree;
 

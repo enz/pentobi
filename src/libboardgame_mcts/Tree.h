@@ -34,14 +34,14 @@ class Tree
     friend class NodeExpander;
 
 public:
-    typedef N Node;
+    using Node = N;
 
-    typedef typename Node::Move Move;
+    using Move = typename Node::Move;
 
-    typedef typename Node::Float Float;
+    using Float = typename Node::Float;
 
     /** Range for iterating over the children of a node. */
-    typedef Range<const Node> Children;
+    using Children = Range<const Node>;
 
 
     /** Helper class that is passed to the search state during node expansion.

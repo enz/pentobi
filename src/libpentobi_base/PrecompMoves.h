@@ -51,7 +51,7 @@ public:
     static const unsigned nu_adj_status = 1 << adj_status_nu_adj;
 
     /** Begin/end range for lists with moves at a given point. */
-    typedef libboardgame_util::Range<const Move> Range;
+    using Range = libboardgame_util::Range<const Move>;
 
 
     /** Add a move to list during construction. */

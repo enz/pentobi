@@ -9,6 +9,7 @@
 #define LIBBOARDGAME_TEST_TEST_H
 
 #include <cmath>
+#include <functional>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -19,7 +20,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-typedef void (*TestFunction)();
+using TestFunction = function<void()>;
 
 //-----------------------------------------------------------------------------
 

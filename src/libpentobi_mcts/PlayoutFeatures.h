@@ -45,7 +45,7 @@ public:
         Should be fast and have enough space for the masks used. Note that
         logically, we want uint_fast32_t, but that is an 8-byte unsigned
         with GCC on Intel CPUs, which is *slower* than a 4-byte unsigned. */
-    typedef uint_least32_t IntType;
+    using IntType = uint_least32_t;
 
     /** The maximum number of local points for a move.
         The number can be higher than PieceInfo::max_size (see class

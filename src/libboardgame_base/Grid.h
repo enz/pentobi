@@ -68,9 +68,10 @@ class Grid
     friend class GridExt<P, T>; // for GridExt::copy_from(Grid)
 
 public:
-    typedef P Point;
+    using Point = P;
 
-    typedef libboardgame_base::Geometry<P> Geometry;
+    using Geometry = libboardgame_base::Geometry<P>;
+
 
     T& operator[](const Point& p);
 
@@ -95,6 +96,7 @@ public:
 private:
     T m_a[Point::range_onboard];
 };
+
 
 template<class P, typename T>
 inline T& Grid<P, T>::operator[](const Point& p)
@@ -150,9 +152,10 @@ template<class P, typename T>
 class GridExt
 {
 public:
-    typedef P Point;
+    using Point = P;
 
-    typedef libboardgame_base::Geometry<P> Geometry;
+    using Geometry = libboardgame_base::Geometry<P>;
+
 
     T& operator[](const Point& p);
 
@@ -173,6 +176,7 @@ public:
 private:
     T m_a[Point::range];
 };
+
 
 template<class P, typename T>
 inline T& GridExt<P, T>::operator[](const Point& p)

@@ -35,7 +35,7 @@ template<unsigned M, unsigned W, unsigned H, typename I>
 class Point
 {
 public:
-    typedef I IntType;
+    using IntType = I;
 
     static const unsigned range_onboard = M;
 
@@ -51,7 +51,9 @@ public:
 
     static const unsigned range = range_onboard + 1;
 
+
     static Point null();
+
 
     LIBBOARDGAME_FORCE_INLINE Point();
 
@@ -73,10 +75,12 @@ private:
 
     static const IntType value_null = range - 1;
 
+
     IntType m_i;
 
     LIBBOARDGAME_FORCE_INLINE bool is_initialized() const;
 };
+
 
 template<unsigned M, unsigned W, unsigned H, typename I>
 inline Point<M, W, H, I>::Point()

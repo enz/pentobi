@@ -45,16 +45,17 @@ using libpentobi_base::Variant;
 class State
 {
 public:
-    typedef libboardgame_mcts::Node<Move, Float, SearchParamConst::multithread>
-        Node;
+    using Node =
+        libboardgame_mcts::Node<Move, Float, SearchParamConst::multithread>;
 
-    typedef libboardgame_mcts::Tree<Node> Tree;
+    using Tree = libboardgame_mcts::Tree<Node>;
 
-    typedef libboardgame_mcts::LastGoodReply<Move,
-                                             SearchParamConst::max_players,
-                                             SearchParamConst::lgr_hash_table_size,
-                                             SearchParamConst::multithread>
-        LastGoodReply;
+    using LastGoodReply =
+        libboardgame_mcts::LastGoodReply<Move,
+                                         SearchParamConst::max_players,
+                                         SearchParamConst::lgr_hash_table_size,
+                                         SearchParamConst::multithread>;
+
 
     /** Constructor.
         @param initial_variant Game variant to initialize the internal

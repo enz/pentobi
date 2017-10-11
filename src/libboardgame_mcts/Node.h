@@ -17,7 +17,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-typedef uint_least32_t NodeIdx;
+using NodeIdx = uint_least32_t;
 
 //-----------------------------------------------------------------------------
 
@@ -28,9 +28,10 @@ template<typename M, typename F, bool MT>
 class Node
 {
 public:
-    typedef M Move;
+    using Move = M;
 
-    typedef F Float;
+    using Float = F;
+
 
     Node() = default;
 

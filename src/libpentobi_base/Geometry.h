@@ -14,7 +14,7 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Geometry<Point> Geometry;
+using Geometry = libboardgame_base::Geometry<Point>;
 
 //-----------------------------------------------------------------------------
 

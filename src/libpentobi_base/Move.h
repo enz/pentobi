@@ -23,7 +23,7 @@ public:
         This class is optimized for size not for speed because there are
         large precomputed data structures that store moves and move lists.
         Therefore it uses uint_least16_t, not uint_fast16_t. */
-    typedef uint_least16_t IntType;
+    using IntType = uint_least16_t;
 
     static const IntType onboard_moves_classic = 30433;
 

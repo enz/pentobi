@@ -29,17 +29,18 @@ class BoardConst
 {
 public:
     /** See get_adj_status_points() */
-    typedef array<Point, PrecompMoves::adj_status_nu_adj> AdjStatusPoints;
+    using AdjStatusPoints = array<Point, PrecompMoves::adj_status_nu_adj>;
 
     /** Start of the MoveInfo array, which can be cached by the user in
         performance-critical code and then passed into the static version of
         get_move_info(). */
-    typedef const void* MoveInfoArray;
+    using MoveInfoArray = const void*;
 
     /** Start of the MoveInfoExt array, which can be cached by the user in
         performance-critical code and then passed into the static version of
         get_move_info_ext(). */
-    typedef const void* MoveInfoExtArray;
+    using MoveInfoExtArray = const void*;
+
 
     /** Get the single instance for a given board size.
         The instance is created the first time this function is called.

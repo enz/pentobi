@@ -60,7 +60,8 @@ public:
                   const array<bool, Board::max_moves>& is_real_move);
 
 private:
-    typedef libboardgame_base::PointTransform<Point> PointTransform;
+    using PointTransform = libboardgame_base::PointTransform<Point>;
+
 
     PentobiTree m_tree;
 

@@ -16,10 +16,10 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19 * 19, 19, 19, unsigned short> Point;
+using Point = libboardgame_base::Point<19 * 19, 19, 19, unsigned short>;
 using Geometry = libboardgame_base::Geometry<Point>;
 using RectGeometry = libboardgame_base::RectGeometry<Point>;
-typedef libboardgame_base::ArrayList<Point, Point::range_onboard> PointList;
+using PointList = libboardgame_base::ArrayList<Point, Point::range_onboard>;
 
 //-----------------------------------------------------------------------------
 

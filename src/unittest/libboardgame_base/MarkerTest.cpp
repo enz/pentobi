@@ -16,7 +16,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Point<19 * 19, 19, 19, unsigned short> Point;
+using Point = libboardgame_base::Point<19 * 19, 19, 19, unsigned short>;
 using Marker = libboardgame_base::Marker<Point>;
 
 //-----------------------------------------------------------------------------

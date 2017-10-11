@@ -66,7 +66,8 @@ struct SearchParamConstDefault
         the digits in the mantissa (=23 for IEEE 754 float's). The search will
         terminate when this number is reached. For longer searches, the code
         should be compiled with floating type @c double. */
-    typedef float Float;
+    using Float = float;
+
 
     /** The maximum number of players. */
     static const PlayerInt max_players = 2;
@@ -170,21 +171,22 @@ template<class S, class M, class R = SearchParamConstDefault>
 class SearchBase
 {
 public:
-    typedef S State;
+    using State = S;
 
-    typedef M Move;
+    using Move = M;
 
-    typedef R SearchParamConst;
+    using SearchParamConst = R;
 
     static const bool multithread = SearchParamConst::multithread;
 
-    typedef typename SearchParamConst::Float Float;
+    using Float = typename SearchParamConst::Float;
 
-    typedef libboardgame_mcts::Node<M, Float, multithread> Node;
+    using Node = libboardgame_mcts::Node<M, Float, multithread>;
 
-    typedef libboardgame_mcts::Tree<Node> Tree;
+    using Tree = libboardgame_mcts::Tree<Node>;
 
-    typedef libboardgame_mcts::PlayerMove<M> PlayerMove;
+    using PlayerMove = libboardgame_mcts::PlayerMove<M>;
+
 
     static const PlayerInt max_players = SearchParamConst::max_players;
 
@@ -411,7 +413,8 @@ private:
     class Thread
     {
     public:
-        typedef function<void(ThreadState&)> SearchFunc;
+        using SearchFunc = function<void(ThreadState&)>;
+
 
         ThreadState thread_state;
 

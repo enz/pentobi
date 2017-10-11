@@ -26,8 +26,8 @@ namespace {
 
 /** List to hold remaining pieces of a color with one entry for each instance
     of the same piece. */
-typedef ArrayList<Piece, PieceInfo::max_instances * Piece::max_pieces>
-AllPiecesLeftList;
+using AllPiecesLeftList =
+    ArrayList<Piece, PieceInfo::max_instances * Piece::max_pieces>;
 
 /** Helper function used in init_setup. */
 void handle_setup_property(const SgfNode& node, const char* id, Color c,

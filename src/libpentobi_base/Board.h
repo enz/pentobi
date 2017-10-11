@@ -30,12 +30,12 @@ class MoveMarker;
 class Board
 {
 public:
-    typedef Grid<PointState> PointStateGrid;
+    using PointStateGrid = Grid<PointState>;
 
     /** Maximum number of pieces per player in any game variant. */
     static const unsigned max_pieces = Setup::max_pieces;
 
-    typedef ArrayList<Piece, Piece::max_pieces> PiecesLeftList;
+    using PiecesLeftList = ArrayList<Piece, Piece::max_pieces>;
 
     static const unsigned max_player_moves = max_pieces;
 

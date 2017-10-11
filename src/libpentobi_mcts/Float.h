@@ -14,9 +14,9 @@ namespace libpentobi_mcts {
 //-----------------------------------------------------------------------------
 
 #ifdef LIBPENTOBI_MCTS_FLOAT_TYPE
-typedef LIBPENTOBI_MCTS_FLOAT_TYPE Float;
+using Float = LIBPENTOBI_MCTS_FLOAT_TYPE;
 #else
-typedef float Float;
+using Float = float;
 #endif
 
 static_assert(std::is_floating_point<Float>::value, "");

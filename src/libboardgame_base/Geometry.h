@@ -31,27 +31,27 @@ template<class P>
 class Geometry
 {
 public:
-    typedef P Point;
+    using Point = P;
 
-    typedef typename Point::IntType IntType;
+    using IntType = typename Point::IntType;
 
     static const unsigned max_adj = 4;
 
     static const unsigned max_diag = 11;
 
     /** On-board adjacent neighbors of a point. */
-    typedef ArrayList<Point, max_adj, unsigned short> AdjList;
+    using AdjList = ArrayList<Point, max_adj, unsigned short>;
 
     /** On-board diagonal neighbors of a point
         Currently supports up to 11 diagonal points as used on boards
         for GembloQ. */
-    typedef ArrayList<Point, max_diag, unsigned short> DiagList;
+    using DiagList = ArrayList<Point, max_diag, unsigned short>;
 
     /** Adjacent neighbors of a coordinate. */
-    typedef ArrayList<CoordPoint, max_adj> AdjCoordList;
+    using AdjCoordList = ArrayList<CoordPoint, max_adj>;
 
     /** Diagonal neighbors of a coordinate. */
-    typedef ArrayList<CoordPoint, max_diag> DiagCoordList;
+    using DiagCoordList = ArrayList<CoordPoint, max_diag>;
 
     class Iterator
     {

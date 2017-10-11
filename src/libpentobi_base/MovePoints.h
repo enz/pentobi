@@ -17,7 +17,7 @@ using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
-typedef ArrayList<Point, PieceInfo::max_size, unsigned short> MovePoints;
+using MovePoints = ArrayList<Point, PieceInfo::max_size, unsigned short>;
 
 //-----------------------------------------------------------------------------
 

@@ -47,10 +47,11 @@ using libpentobi_base::Variant;
 class PriorKnowledge
 {
 public:
-    typedef libboardgame_mcts::Node<Move, Float, SearchParamConst::multithread>
-    Node;
+    using Node =
+        libboardgame_mcts::Node<Move, Float, SearchParamConst::multithread>;
 
-    typedef libboardgame_mcts::Tree<Node> Tree;
+    using Tree = libboardgame_mcts::Tree<Node>;
+
 
     explicit PriorKnowledge(const Board& bd);
 

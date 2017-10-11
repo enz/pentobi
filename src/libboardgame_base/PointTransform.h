@@ -21,12 +21,13 @@ template<class P>
 class PointTransform
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     virtual ~PointTransform();
 
     virtual Point get_transformed(Point p, const Geometry<P>& geo) const = 0;
 };
+
 
 template<class P>
 PointTransform<P>::~PointTransform() = default;
@@ -38,10 +39,11 @@ class PointTransfIdent
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfIdent<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -58,10 +60,11 @@ class PointTransfRot90
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfRot90<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -79,10 +82,11 @@ class PointTransfRot180
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfRot180<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -100,10 +104,11 @@ class PointTransfRot270
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfRot270<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -122,10 +127,11 @@ class PointTransfRot270Refl
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfRot270Refl<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -142,10 +148,11 @@ class PointTransfRot90Refl
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfRot90Refl<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -163,10 +170,11 @@ class PointTransfRefl
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfRefl<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -184,10 +192,11 @@ class PointTransfReflRot180
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfReflRot180<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -204,10 +213,11 @@ class PointTransfTrigonRot60
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfTrigonRot60<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -228,10 +238,11 @@ class PointTransfTrigonRot120
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfTrigonRot120<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -252,10 +263,11 @@ class PointTransfTrigonRot240
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfTrigonRot240<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -276,10 +288,11 @@ class PointTransfTrigonRot300
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfTrigonRot300<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -300,10 +313,11 @@ class PointTransfTrigonReflRot60
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfTrigonReflRot60<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -324,10 +338,11 @@ class PointTransfTrigonReflRot120
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfTrigonReflRot120<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -348,10 +363,11 @@ class PointTransfTrigonReflRot240
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfTrigonReflRot240<P>::get_transformed(Point p, const Geometry<P>& geo) const
@@ -372,10 +388,11 @@ class PointTransfTrigonReflRot300
     : public PointTransform<P>
 {
 public:
-    typedef P Point;
+    using Point = P;
 
     Point get_transformed(Point p, const Geometry<P>& geo) const override;
 };
+
 
 template<class P>
 P PointTransfTrigonReflRot300<P>::get_transformed(Point p, const Geometry<P>& geo) const

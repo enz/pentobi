@@ -33,17 +33,17 @@ template<typename T, unsigned M, typename I = unsigned>
 class ArrayList
 {
 public:
-    typedef I IntType;
+    using IntType = I;
 
     static_assert(numeric_limits<IntType>::is_integer, "");
 
     static const IntType max_size = M;
 
-    typedef typename array<T, max_size>::iterator iterator;
+    using iterator = typename array<T, max_size>::iterator;
 
-    typedef typename array<T, max_size>::const_iterator const_iterator;
+    using const_iterator = typename array<T, max_size>::const_iterator;
 
-    typedef T value_type;
+    using value_type = T;
 
 
     ArrayList() = default;

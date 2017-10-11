@@ -20,7 +20,7 @@ using namespace std;
 class Piece
 {
 public:
-    typedef uint_fast8_t IntType;
+    using IntType = uint_fast8_t;
 
     /** Maximum number of unique pieces per color. */
     static const IntType max_pieces = 24;
@@ -31,7 +31,9 @@ public:
     /** Integer range used for unique pieces including the null piece */
     static const IntType range = max_pieces + 1;
 
+
     static Piece null();
+
 
     Piece();
 

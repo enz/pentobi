@@ -24,7 +24,8 @@ using libpentobi_base::Color;
     members. */
 struct SearchParamConst
 {
-    typedef libpentobi_mcts::Float Float;
+    using Float = libpentobi_mcts::Float;
+
 
     static const PlayerInt max_players = 6;
 

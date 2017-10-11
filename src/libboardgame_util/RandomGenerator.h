@@ -26,9 +26,9 @@ using namespace std;
 class RandomGenerator
 {
 public:
-    typedef minstd_rand Generator;
+    using Generator = minstd_rand;
 
-    typedef Generator::result_type ResultType;
+    using ResultType = Generator::result_type;
 
 
     /** Set seed for all currently existing and future generators.

@@ -42,11 +42,13 @@ template<class M, unsigned P, size_t S, bool MT>
 class LastGoodReply
 {
 public:
-    typedef M Move;
+    using Move = M;
+
 
     static const unsigned max_players = P;
 
     static const size_t hash_table_size = S;
+
 
     LastGoodReply();
 

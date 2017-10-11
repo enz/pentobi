@@ -14,7 +14,7 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-typedef libboardgame_base::Marker<Point> Marker;
+using Marker = libboardgame_base::Marker<Point>;
 
 //-----------------------------------------------------------------------------
 
