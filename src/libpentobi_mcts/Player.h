@@ -38,7 +38,7 @@ public:
     Player(Variant initial_variant, unsigned max_level, const string& books_dir,
            unsigned nu_threads = 0);
 
-    ~Player();
+    ~Player() override;
 
     Move genmove(const Board& bd, Color c) override;
 

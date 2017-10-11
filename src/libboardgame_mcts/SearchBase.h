@@ -368,7 +368,7 @@ private:
     public:
         explicit AssertionHandler(const SearchBase& search);
 
-        ~AssertionHandler();
+        ~AssertionHandler() override;
 
         void run() override;
 

@@ -23,7 +23,7 @@ class PentobiTreeWriter
 public:
     PentobiTreeWriter(ostream& out, const PentobiTree& tree);
 
-    virtual ~PentobiTreeWriter();
+    ~PentobiTreeWriter() override;
 
     void write_property(const string& id,
                         const vector<string>& values) override;

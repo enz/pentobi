@@ -24,7 +24,7 @@ class TreeReader
 public:
     TreeReader();
 
-    ~TreeReader();
+    ~TreeReader() override;
 
     void on_begin_tree(bool is_root) override;
 

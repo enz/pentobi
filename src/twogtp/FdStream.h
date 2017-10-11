@@ -21,7 +21,7 @@ class FdInBuf
 public:
     explicit FdInBuf(int fd, size_t buf_size = 1024);
 
-    ~FdInBuf();
+    ~FdInBuf() override;
 
 protected:
     int_type underflow() override;
@@ -56,7 +56,7 @@ public:
         : m_fd(fd)
     { }
 
-    ~FdOutBuf();
+    ~FdOutBuf() override;
 
 protected:
     int_type overflow(int_type c) override;

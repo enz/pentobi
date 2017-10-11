@@ -25,7 +25,7 @@ public:
 
     Engine();
 
-    ~Engine();
+    ~Engine() override;
 
 protected:
     void on_handle_cmd_begin() override;

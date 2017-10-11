@@ -41,7 +41,7 @@ struct StringRep
 struct StdStringRep
         : public StringRep
 {
-    ~StdStringRep();
+    ~StdStringRep() override;
 
     bool read(string::const_iterator begin, string::const_iterator end,
               unsigned width, unsigned height, unsigned& x,

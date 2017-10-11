@@ -30,7 +30,7 @@ public:
                     bool use_book = true, const string& books_dir = "",
                     unsigned nu_threads = 0);
 
-    ~Engine();
+    ~Engine() override;
 
     void cmd_param(Arguments, Response&);
     void cmd_get_value(Response&);
