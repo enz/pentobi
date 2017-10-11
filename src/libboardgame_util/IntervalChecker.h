@@ -68,8 +68,7 @@ inline bool IntervalChecker::operator()()
 {
     if (--m_count == 0)
         return check_expensive();
-    else
-        return m_result;
+    return m_result;
 }
 
 //-----------------------------------------------------------------------------

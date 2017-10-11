@@ -169,11 +169,8 @@ string Arguments::get_type_name()
         free(name_ptr);
         return result;
     }
-    else
-        return typeid(T).name();
-#else
-    return typeid(T).name();
 #endif
+    return typeid(T).name();
 }
 
 template<typename T>

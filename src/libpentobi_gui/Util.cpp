@@ -339,8 +339,7 @@ QColor Util::getLabelColor(Variant variant, PointState s)
     QColor paintColor = getPaintColor(variant, c);
     if (paintColor == yellow || paintColor == green)
         return Qt::black;
-    else
-        return Qt::white;
+    return Qt::white;
 }
 
 QColor Util::getMarkColor(Variant variant, PointState s)
@@ -351,29 +350,25 @@ QColor Util::getMarkColor(Variant variant, PointState s)
     QColor paintColor = getPaintColor(variant, c);
     if (paintColor == yellow || paintColor == green)
         return QColor(51, 51, 51);
-    else
-        return Qt::white;
+    return Qt::white;
 }
 
 QColor Util::getPaintColor(Variant variant, Color c)
 {
     if (variant == Variant::duo)
         return c == Color(0) ? purple : orange;
-    else if (variant == Variant::junior)
+    if (variant == Variant::junior)
         return c == Color(0) ? green : orange;
-    else if (get_nu_colors(variant) == 2)
+    if (get_nu_colors(variant) == 2)
         return c == Color(0) ? blue : green;
-    else
-    {
-        if (c == Color(0))
-            return blue;
-        if (c == Color(1))
-            return yellow;
-        if (c == Color(2))
-            return red;
-        LIBBOARDGAME_ASSERT(c == Color(3));
-        return green;
-    }
+    if (c == Color(0))
+        return blue;
+    if (c == Color(1))
+        return yellow;
+    if (c == Color(2))
+        return red;
+    LIBBOARDGAME_ASSERT(c == Color(3));
+    return green;
 }
 
 QString Util::getPlayerString(Variant variant, Color c)

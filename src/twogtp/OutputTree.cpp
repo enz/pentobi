@@ -73,7 +73,7 @@ bool compare_sequence(ArrayList<ColorMove, Board::max_moves>& s1,
         LIBBOARDGAME_ASSERT(s1[i].color == s2[i].color);
         if (s1[i].move.to_int() < s2[i].move.to_int())
             return true;
-        else if (s1[i].move.to_int() > s2[i].move.to_int())
+        if (s1[i].move.to_int() > s2[i].move.to_int())
             return false;
     }
     return false;

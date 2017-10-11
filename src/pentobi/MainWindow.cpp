@@ -1504,8 +1504,7 @@ void MainWindow::exportImage()
         QImageWriter writer(file);
         if (writer.write(image))
             break;
-        else
-            showError(writer.errorString());
+        showError(writer.errorString());
     }
 }
 
@@ -2662,11 +2661,8 @@ bool MainWindow::saveFile(const QString& file)
                                    QString::fromLocal8Bit(strerror(errno))));
         return false;
     }
-    else
-    {
-        Util::removeThumbnail(file);
-        return true;
-    }
+    Util::removeThumbnail(file);
+    return true;
 }
 
 void MainWindow::saveAs()

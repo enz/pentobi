@@ -48,8 +48,7 @@ CoordPoint BoardPainter::getCoordPoint(int x, int y)
     y = static_cast<int>((y - m_boardOffset.y()) / m_fieldHeight);
     if (x < 0 || x >= m_width || y < 0 || y >= m_height)
         return CoordPoint::null();
-    else
-        return CoordPoint(x, y);
+    return CoordPoint(x, y);
 }
 
 void BoardPainter::paintCoordinates(QPainter& painter)

@@ -640,10 +640,9 @@ inline ScoreType Board::get_score(Color c) const
 {
     if (m_nu_colors == 2)
         return get_score_twocolor(c);
-    else if (m_nu_players == 2)
+    if (m_nu_players == 2)
         return get_score_multicolor(c);
-    else
-        return get_score_multiplayer(c);
+    return get_score_multiplayer(c);
 }
 
 inline ScoreType Board::get_score_twocolor(Color c) const
@@ -653,8 +652,7 @@ inline ScoreType Board::get_score_twocolor(Color c) const
     auto points1 = get_points(Color(1));
     if (c == Color(0))
         return points0 - points1;
-    else
-        return points1 - points0;
+    return points1 - points0;
 }
 
 inline ScoreType Board::get_score_twoplayer(Color c) const
@@ -662,8 +660,7 @@ inline ScoreType Board::get_score_twoplayer(Color c) const
     LIBBOARDGAME_ASSERT(m_nu_players == 2);
     if (m_nu_colors == 2)
         return get_score_twocolor(c);
-    else
-        return get_score_multicolor(c);
+    return get_score_multicolor(c);
 }
 
 inline ScoreType Board::get_score_multicolor(Color c) const
@@ -673,8 +670,7 @@ inline ScoreType Board::get_score_multicolor(Color c) const
     auto points1 = get_points(Color(1)) + get_points(Color(3));
     if (c == Color(0) || c == Color(2))
         return points0 - points1;
-    else
-        return points1 - points0;
+    return points1 - points0;
 }
 
 inline ScoreType Board::get_score_multiplayer(Color c) const

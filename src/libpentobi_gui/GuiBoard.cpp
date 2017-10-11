@@ -142,8 +142,7 @@ Move GuiBoard::findSelectedPieceMove()
             || (! m_freePlacement
                 && ! m_bd.is_legal(m_selectedPieceColor, mv)))
         return Move::null();
-    else
-        return mv;
+    return mv;
 }
 
 bool GuiBoard::isSelectedPiecePartiallyOnBoard(CoordPoint offset) const

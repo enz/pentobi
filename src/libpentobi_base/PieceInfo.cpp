@@ -215,8 +215,7 @@ const Transform* PieceInfo::get_next_transform(const Transform* transform) const
     LIBBOARDGAME_ASSERT(pos != end);
     if (pos + 1 == end)
         return *begin;
-    else
-        return *(pos + 1);
+    return *(pos + 1);
 }
 
 const Transform* PieceInfo::get_previous_transform(
@@ -229,8 +228,7 @@ const Transform* PieceInfo::get_previous_transform(
     LIBBOARDGAME_ASSERT(pos != end);
     if (pos == begin)
         return *(end - 1);
-    else
-        return *(pos - 1);
+    return *(pos - 1);
 }
 
 //-----------------------------------------------------------------------------

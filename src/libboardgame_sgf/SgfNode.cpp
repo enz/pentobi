@@ -154,8 +154,7 @@ const string& SgfNode::get_property(const string& id,
     auto property = find_property(id);
     if (property == m_properties.end())
         return default_value;
-    else
-        return property->values[0];
+    return property->values[0];
 }
 
 void SgfNode::make_first_child()

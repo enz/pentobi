@@ -79,8 +79,7 @@ unsigned NexosGeometry::get_point_type(int x, int y) const
 {
     if (x % 2 == 0)
         return y % 2 == 0 ? 0 : 2;
-    else
-        return y % 2 == 0 ? 1 : 3;
+    return y % 2 == 0 ? 1 : 3;
 }
 
 bool NexosGeometry::init_is_onboard(unsigned x, unsigned y) const

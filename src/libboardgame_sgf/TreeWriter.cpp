@@ -37,7 +37,7 @@ void TreeWriter::write_node(const SgfNode& node)
     m_writer.end_node();
     if (! node.has_children())
         return;
-    else if (node.has_single_child())
+    if (node.has_single_child())
         write_node(node.get_child());
     else
         for (auto& i : node.get_children())

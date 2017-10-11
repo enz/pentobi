@@ -45,8 +45,7 @@ bool read_cmd(CmdLine& c, istream& in)
         c.init(line);
         return true;
     }
-    else
-        return false;
+    return false;
 }
 
 } // namespace

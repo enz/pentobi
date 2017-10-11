@@ -100,7 +100,7 @@ bool Reader::read(istream& in, bool check_single_tree)
         int c = m_in->peek();
         if (c == EOF)
             return false;
-        else if (c == '(')
+        if (c == '(')
         {
             if (check_single_tree)
                 throw ReadError("Input has multiple game trees");
@@ -236,7 +236,7 @@ void Reader::read_tree(bool is_root)
         char c = peek();
         if (c == ')')
             break;
-        else if (c == ';')
+        if (c == ';')
         {
             read_node(is_root);
             is_root = false;

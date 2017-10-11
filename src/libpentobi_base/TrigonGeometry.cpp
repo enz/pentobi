@@ -98,16 +98,11 @@ unsigned TrigonGeometry::get_point_type(int x, int y) const
     {
         if (x % 2 == 0)
             return y % 2 == 0 ? 1 : 0;
-        else
-            return y % 2 != 0 ? 1 : 0;
+        return y % 2 != 0 ? 1 : 0;
     }
-    else
-    {
-        if (x % 2 != 0)
-            return y % 2 == 0 ? 1 : 0;
-        else
-            return y % 2 != 0 ? 1 : 0;
-    }
+    if (x % 2 != 0)
+        return y % 2 == 0 ? 1 : 0;
+    return y % 2 != 0 ? 1 : 0;
 }
 
 bool TrigonGeometry::init_is_onboard(unsigned x, unsigned y) const

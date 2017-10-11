@@ -73,11 +73,8 @@ bool run_all_tests()
         LIBBOARDGAME_LOG("OK");
         return true;
     }
-    else
-    {
-        LIBBOARDGAME_LOG(nu_fail, " tests failed.\nFAIL");
-        return false;
-    }
+    LIBBOARDGAME_LOG(nu_fail, " tests failed.\nFAIL");
+    return false;
 }
 
 bool run_test(const string& name)

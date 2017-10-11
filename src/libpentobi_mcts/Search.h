@@ -136,8 +136,7 @@ inline PlayerInt Search::get_player() const
     auto to_play = m_to_play.to_int();
     if ( m_variant == Variant::classic_3 && to_play == 3)
         return static_cast<PlayerInt>(to_play + get_board().get_alt_player());
-    else
-        return to_play;
+    return to_play;
 }
 
 inline Color Search::get_to_play() const

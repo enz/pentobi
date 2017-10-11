@@ -1039,11 +1039,8 @@ bool SearchBase<S, M, R>::prune(TimeSource& time_source, double time,
         new_prune_min_count = prune_min_count * 2;
         return true;
     }
-    else
-    {
-        new_prune_min_count = prune_min_count;
-        return true;
-    }
+    new_prune_min_count = prune_min_count;
+    return true;
 }
 
 /** Estimate the value and count of a root node from its children.
@@ -1331,8 +1328,7 @@ bool SearchBase<S, M, R>::select_move(Move& mv) const
         mv = child->get_move();
         return true;
     }
-    else
-        return false;
+    return false;
 }
 
 template<class S, class M, class R>

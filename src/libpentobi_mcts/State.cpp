@@ -369,36 +369,30 @@ bool State::gen_children(Tree::NodeExpander& expander, Float root_val)
                         m_bd, m_moves[to_play], m_is_symmetry_broken,
                         expander, root_val);
         }
-        else
-        {
-            init_moves_without_gamma<5, true>(to_play);
-            return m_prior_knowledge.gen_children<5, 16, true>(
-                        m_bd, m_moves[to_play], m_is_symmetry_broken,
-                        expander, root_val);
-        }
+        init_moves_without_gamma<5, true>(to_play);
+        return m_prior_knowledge.gen_children<5, 16, true>(
+                    m_bd, m_moves[to_play], m_is_symmetry_broken,
+                    expander, root_val);
     }
-    else if (m_max_piece_size == 6)
+    if (m_max_piece_size == 6)
     {
         init_moves_without_gamma<6, false>(to_play);
         return m_prior_knowledge.gen_children<6, 22, false>(
                     m_bd, m_moves[to_play], m_is_symmetry_broken, expander,
                     root_val);
     }
-    else if (m_max_piece_size == 7)
+    if (m_max_piece_size == 7)
     {
         init_moves_without_gamma<7, false>(to_play);
         return m_prior_knowledge.gen_children<7, 12, false>(
                     m_bd, m_moves[to_play], m_is_symmetry_broken, expander,
                     root_val);
     }
-    else
-    {
-        LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
-        init_moves_without_gamma<22, false>(to_play);
-        return m_prior_knowledge.gen_children<22, 44, false>(
-                    m_bd, m_moves[to_play], m_is_symmetry_broken, expander,
-                    root_val);
-    }
+    LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
+    init_moves_without_gamma<22, false>(to_play);
+    return m_prior_knowledge.gen_children<22, 44, false>(
+                m_bd, m_moves[to_play], m_is_symmetry_broken, expander,
+                root_val);
 }
 
 bool State::gen_playout_move_full(PlayerMove<Move>& mv)
