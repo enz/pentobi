@@ -26,9 +26,9 @@ class Engine
     : public libpentobi_base::Engine
 {
 public:
-    Engine(Variant variant, unsigned level = 5,
-           bool use_book = true, const string& books_dir = "",
-           unsigned nu_threads = 0);
+    explicit Engine(Variant variant, unsigned level = 5,
+                    bool use_book = true, const string& books_dir = "",
+                    unsigned nu_threads = 0);
 
     ~Engine();
 

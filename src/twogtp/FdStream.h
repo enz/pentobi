@@ -19,7 +19,7 @@ class FdInBuf
     : public streambuf
 {
 public:
-    FdInBuf(int fd, size_t buf_size = 1024);
+    explicit FdInBuf(int fd, size_t buf_size = 1024);
 
     ~FdInBuf();
 
