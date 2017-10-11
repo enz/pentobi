@@ -49,12 +49,15 @@ void get_multiplayer_result(unsigned nu_players,
         FLOAT n = 0;
         FLOAT float_j = 0;
         FLOAT factor = 1 / FLOAT(nu_players - 1);
-        for (unsigned j = 0; j < nu_players; ++j, ++float_j)
+        for (unsigned j = 0; j < nu_players; ++j)
+        {
             if (sorted[j] == adjusted[i])
             {
                 sum += factor * float_j;
                 ++n;
             }
+            ++float_j;
+        }
         result[i] = sum / n;
     }
 }
