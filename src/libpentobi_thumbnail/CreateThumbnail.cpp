@@ -8,16 +8,12 @@
 
 #include <iostream>
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_util/StringUtil.h"
 #include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_gui/BoardPainter.h"
 
 using namespace std;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
-using libboardgame_util::split;
-using libboardgame_util::trim;
-using libpentobi_base::get_board_type;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::PieceSet;

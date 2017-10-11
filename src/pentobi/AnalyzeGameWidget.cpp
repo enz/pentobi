@@ -26,7 +26,6 @@ using libboardgame_sgf::util::is_main_variation;
 using libboardgame_util::set_abort;
 using libboardgame_util::ArrayList;
 using libpentobi_base::Board;
-using libpentobi_base::PentobiTree;
 
 //-----------------------------------------------------------------------------
 

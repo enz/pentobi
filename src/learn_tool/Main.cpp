@@ -35,8 +35,6 @@ using libpentobi_base::Move;
 using libpentobi_base::MoveList;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::PointList;
-using libpentobi_base::Piece;
-using libpentobi_base::PieceSet;
 using libpentobi_base::Variant;
 using libpentobi_mcts::LocalPoints;
 

@@ -19,12 +19,9 @@
 using libboardgame_base::CoordPoint;
 using libboardgame_base::geometry_util::type_match_shift;
 using libboardgame_util::trim;
-using libpentobi_base::BoardConst;
-using libpentobi_base::BoardType;
 using libpentobi_base::Geometry;
 using libpentobi_base::PieceMap;
 using libpentobi_base::PieceSet;
-using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 

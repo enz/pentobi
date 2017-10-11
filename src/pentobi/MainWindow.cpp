@@ -64,7 +64,6 @@ using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::beginning_of_branch;
 using libboardgame_sgf::util::find_next_comment;
 using libboardgame_sgf::util::get_last_node;
-using libboardgame_sgf::util::get_move_annotation;
 using libboardgame_sgf::util::get_variation_string;
 using libboardgame_sgf::util::has_comment;
 using libboardgame_sgf::util::has_earlier_variation;
@@ -74,9 +73,6 @@ using libboardgame_util::get_abort;
 using libboardgame_util::set_abort;
 using libboardgame_util::trim_right;
 using libpentobi_base::BoardType;
-using libpentobi_base::MoveInfo;
-using libpentobi_base::MoveInfoExt;
-using libpentobi_base::PieceInfo;
 using libpentobi_base::PieceSet;
 using libpentobi_base::PentobiTree;
 using libpentobi_base::PentobiTreeWriter;
@@ -85,7 +81,6 @@ using libpentobi_base::tree_util::get_move_node;
 using libpentobi_base::tree_util::get_move_number;
 using libpentobi_base::tree_util::get_moves_left;
 using libpentobi_base::tree_util::get_position_info;
-using libpentobi_mcts::Search;
 
 //-----------------------------------------------------------------------------
 

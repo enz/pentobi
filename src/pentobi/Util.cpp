@@ -17,9 +17,6 @@
 #include <QStandardPaths>
 #include <QString>
 #include <QUrl>
-#include "libpentobi_mcts/Player.h"
-
-using libpentobi_mcts::Player;
 
 //-----------------------------------------------------------------------------
 

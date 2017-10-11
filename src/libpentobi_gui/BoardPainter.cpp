@@ -17,9 +17,7 @@
 
 using namespace std;
 using libboardgame_util::ArrayList;
-using libpentobi_base::BoardType;
 using libpentobi_base::CallistoGeometry;
-using libpentobi_base::Move;
 using libpentobi_base::PieceSet;
 using libpentobi_base::PointState;
 

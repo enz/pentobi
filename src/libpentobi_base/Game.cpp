@@ -10,7 +10,6 @@
 
 #include "Game.h"
 
-#include "BoardUtil.h"
 #include "libboardgame_sgf/SgfError.h"
 #include "libboardgame_sgf/SgfUtil.h"
 
@@ -19,7 +18,6 @@ namespace libpentobi_base {
 using libboardgame_sgf::SgfError;
 using libboardgame_sgf::util::back_to_main_variation;
 using libboardgame_sgf::util::is_main_variation;
-using libpentobi_base::boardutil::get_current_position_as_setup;
 
 //-----------------------------------------------------------------------------
 

@@ -12,13 +12,11 @@
 
 #include "BoardUpdater.h"
 #include "BoardUtil.h"
-#include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {
 
 using libboardgame_sgf::InvalidProperty;
 using libboardgame_sgf::SgfError;
-using libboardgame_util::to_string;
 using libpentobi_base::boardutil::get_current_position_as_setup;
 
 //-----------------------------------------------------------------------------

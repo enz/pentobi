@@ -12,14 +12,11 @@
 
 #include "libboardgame_sgf/Writer.h"
 #include "libboardgame_util/Log.h"
-#include "libboardgame_util/StringUtil.h"
 #include "libpentobi_base/ScoreUtil.h"
 
 using libboardgame_sgf::Writer;
-using libboardgame_util::trim;
 using libpentobi_base::get_multiplayer_result;
 using libpentobi_base::Move;
-using libpentobi_base::PieceSet;
 using libpentobi_base::ScoreType;
 
 //-----------------------------------------------------------------------------

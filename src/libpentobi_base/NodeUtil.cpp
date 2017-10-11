@@ -10,15 +10,10 @@
 
 #include "NodeUtil.h"
 
-#include "libboardgame_util/StringUtil.h"
-
 namespace libpentobi_base {
 namespace node_util {
 
 using libboardgame_sgf::InvalidProperty;
-using libboardgame_sgf::SgfError;
-using libboardgame_util::split;
-using libboardgame_util::trim;
 
 //-----------------------------------------------------------------------------
 

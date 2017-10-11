@@ -11,11 +11,8 @@
 #include "Color.h"
 
 #include <sstream>
-#include "libboardgame_util/StringUtil.h"
 
 namespace libpentobi_base {
-
-using libboardgame_util::to_lower;
 
 //-----------------------------------------------------------------------------
 

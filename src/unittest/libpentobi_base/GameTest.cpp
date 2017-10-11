@@ -10,14 +10,12 @@
 
 #include "libpentobi_base/Game.h"
 
-#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
 using namespace libpentobi_base;
 using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::util::get_last_node;
 
 //-----------------------------------------------------------------------------
 

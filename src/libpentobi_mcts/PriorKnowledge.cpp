@@ -17,7 +17,6 @@ namespace libpentobi_mcts {
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
 using libpentobi_base::PointState;
-using libpentobi_base::PieceInfo;
 using libpentobi_base::PieceSet;
 
 //-----------------------------------------------------------------------------

@@ -18,20 +18,6 @@
 
 namespace libpentobi_base {
 
-using libboardgame_base::PointTransfIdent;
-using libboardgame_base::PointTransfRefl;
-using libboardgame_base::PointTransfReflRot180;
-using libboardgame_base::PointTransfRot180;
-using libboardgame_base::PointTransfRot270Refl;
-using libboardgame_base::PointTransfTrigonReflRot60;
-using libboardgame_base::PointTransfTrigonReflRot120;
-using libboardgame_base::PointTransfTrigonReflRot240;
-using libboardgame_base::PointTransfTrigonReflRot300;
-using libboardgame_base::PointTransfTrigonRot60;
-using libboardgame_base::PointTransfTrigonRot120;
-using libboardgame_base::PointTransfTrigonRot240;
-using libboardgame_base::PointTransfTrigonRot300;
-using libboardgame_sgf::InvalidProperty;
 using libboardgame_sgf::TreeReader;
 using boardutil::get_transformed;
 

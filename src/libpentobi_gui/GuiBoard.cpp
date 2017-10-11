@@ -23,7 +23,6 @@ using libpentobi_base::MovePoints;
 using libpentobi_base::PiecePoints;
 using libpentobi_base::PieceSet;
 using libpentobi_base::Point;
-using libpentobi_base::PointState;
 
 //-----------------------------------------------------------------------------
 
