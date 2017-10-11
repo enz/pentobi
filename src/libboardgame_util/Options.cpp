@@ -62,7 +62,7 @@ Options::Options(int argc, const char** argv, const vector<string>& specs)
             else
             {
                 // Short options
-                for (unsigned i = 1; i < arg.size(); ++i)
+                for (string::size_type i = 1; i < arg.size(); ++i)
                 {
                     auto c = arg[i];
                     bool found = false;
