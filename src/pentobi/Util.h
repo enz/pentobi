@@ -21,8 +21,7 @@ using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
-namespace Util
-{
+namespace Util {
 
 /** Remove a thumbnail for a given file.
     Currently, the QT open file dialog shows thumbnails even if they belong
@@ -42,7 +41,7 @@ void initDataDir();
 /** Set an empty window title for message boxes and similar small dialogs. */
 void setNoTitle(QDialog& dialog);
 
-}
+} // namespace Util
 
 //-----------------------------------------------------------------------------
 

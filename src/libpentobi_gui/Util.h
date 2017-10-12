@@ -20,8 +20,7 @@ using libpentobi_base::PointState;
 
 //-----------------------------------------------------------------------------
 
-namespace Util
-{
+namespace Util {
 
 QColor getPaintColor(Variant variant, Color c);
 
@@ -101,7 +100,7 @@ void paintTriangleStartingPoint(QPainter& painter, bool isUpward, qreal x,
     with multiple colors per player. */
 QString getPlayerString(Variant variant, Color c);
 
-}
+} // namespace Util
 
 //-----------------------------------------------------------------------------
 
