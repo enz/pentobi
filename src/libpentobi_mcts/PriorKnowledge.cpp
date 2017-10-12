@@ -352,34 +352,33 @@ void PriorKnowledge::init_variant(const Board& bd)
     }
     else
     {
-        Float temperature = 0.84f;
         // Tuned for classic_2
-        m_gamma_point_other = exp(0.111f / temperature);
-        m_gamma_point_opp_attach_or_nb = exp(0.807f / temperature);
-        m_gamma_point_second_color_attach = exp(-0.296f / temperature);
+        Float temperature = 0.90f;
+        m_gamma_point_other = exp(0.090f / temperature);
+        m_gamma_point_opp_attach_or_nb = exp(0.794f / temperature);
+        m_gamma_point_second_color_attach = exp(-0.322f / temperature);
         m_gamma_adj_connect = exp(0.583f / temperature);
-        m_gamma_adj_occupied_other = exp(0.505f / temperature);
-        m_gamma_adj_forbidden_other = exp(0.473f / temperature);
-        m_gamma_adj_own_attach = exp(-0.743f / temperature);
-        m_gamma_adj_nonforbidden = exp(-0.060f / temperature);
-        m_gamma_attach_to_play = exp(0.018f / temperature);
-        m_gamma_attach_forbidden_other = exp(-0.404f / temperature);
-        m_gamma_attach_nonforbidden[0] = exp(-0.130f / temperature);
-        m_gamma_attach_nonforbidden[1] = exp(0.002f / temperature);
-        m_gamma_attach_nonforbidden[2] = exp(0.207f / temperature);
-        m_gamma_attach_nonforbidden[3] = exp(0.308f / temperature);
-        m_gamma_attach_nonforbidden[4] = exp(0.544f / temperature);
-        m_gamma_attach_second_color = exp(-0.099f / temperature);
-        m_gamma_local = exp(0.590f / temperature);
+        m_gamma_adj_occupied_other = exp(0.508f / temperature);
+        m_gamma_adj_forbidden_other = exp(0.474f / temperature);
+        m_gamma_adj_own_attach = exp(-0.725f / temperature);
+        m_gamma_adj_nonforbidden = exp(-0.065f / temperature);
+        m_gamma_attach_to_play = exp(0.020f / temperature);
+        m_gamma_attach_forbidden_other = exp(-0.417f / temperature);
+        m_gamma_attach_nonforbidden[0] = exp(-0.149f / temperature);
+        m_gamma_attach_nonforbidden[1] = exp(0.005f / temperature);
+        m_gamma_attach_nonforbidden[2] = exp(0.208f / temperature);
+        m_gamma_attach_nonforbidden[3] = exp(0.309f / temperature);
+        m_gamma_attach_nonforbidden[4] = exp(0.541f / temperature);
+        m_gamma_attach_second_color = exp(-0.226f / temperature);
+        m_gamma_local = exp(0.591f / temperature);
         gamma_piece_score_0 = 1; // unused
-        gamma_piece_score_1 = exp(0.345f / temperature);
-        gamma_piece_score_2 = exp(-0.188f / temperature);
-        gamma_piece_score_3 = exp(-0.663f / temperature);
-        gamma_piece_score_4 = exp(-0.284f / temperature);
-        gamma_piece_score_5 = exp(0.817f / temperature);
+        gamma_piece_score_1 = exp(0.344f / temperature);
+        gamma_piece_score_2 = exp(-0.235f / temperature);
+        gamma_piece_score_3 = exp(-0.660f / temperature);
+        gamma_piece_score_4 = exp(-0.285f / temperature);
+        gamma_piece_score_5 = exp(0.829f / temperature);
         gamma_piece_score_6 = 1; // unused
     }
-
     for (Piece::IntType i = 0; i < bd.get_nu_uniq_pieces(); ++i)
         switch (static_cast<unsigned>(
                     bd.get_piece_info(Piece(i)).get_score_points()))
