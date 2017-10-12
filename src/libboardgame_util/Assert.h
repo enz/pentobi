@@ -20,6 +20,9 @@ public:
     /** Destruct and unregister assertion handler. */
     virtual ~AssertionHandler();
 
+    AssertionHandler(const AssertionHandler&) = delete;
+    AssertionHandler& operator=(const AssertionHandler&) = delete;
+
     virtual void run() = 0;
 };
 

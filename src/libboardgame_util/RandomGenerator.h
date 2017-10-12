@@ -56,6 +56,9 @@ public:
 
     ~RandomGenerator();
 
+    RandomGenerator(const RandomGenerator&) = delete;
+    RandomGenerator& operator=(const RandomGenerator&) = delete;
+
     void set_seed(ResultType seed);
 
     ResultType generate();
