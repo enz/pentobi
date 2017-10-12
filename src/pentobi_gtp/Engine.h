@@ -32,13 +32,13 @@ public:
 
     ~Engine() override;
 
-    void cmd_param(Arguments, Response&);
-    void cmd_get_value(Response&);
-    void cmd_move_values(Response&);
-    void cmd_name(Response&);
-    void cmd_selfplay(Arguments);
-    void cmd_save_tree(Arguments);
-    void cmd_version(Response&);
+    void cmd_param(Arguments args, Response& response);
+    void cmd_get_value(Response& response);
+    void cmd_move_values(Response& response);
+    void cmd_name(Response& response);
+    void cmd_selfplay(Arguments args);
+    void cmd_save_tree(Arguments args);
+    void cmd_version(Response& response);
 
     Player& get_mcts_player();
 

@@ -20,8 +20,8 @@ class Engine
     : public libboardgame_gtp::Engine
 {
 public:
-    void cmd_cputime(Response&);
-    void cmd_set_random_seed(Arguments);
+    void cmd_cputime(Response& response);
+    void cmd_set_random_seed(Arguments args);
 
     Engine();
 

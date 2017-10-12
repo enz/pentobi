@@ -26,22 +26,22 @@ class Engine
 public:
     explicit Engine(Variant variant);
 
-    void cmd_all_legal(Arguments, Response&);
+    void cmd_all_legal(Arguments args, Response& response);
     void cmd_clear_board();
-    void cmd_final_score(Response&);
-    void cmd_g(Response&);
-    void cmd_genmove(Arguments, Response&);
-    void cmd_get_place(Arguments args, Response&);
-    void cmd_loadsgf(Arguments);
-    void cmd_move_info(Arguments, Response&);
-    void cmd_p(Arguments);
-    void cmd_param_base(Arguments, Response&);
-    void cmd_play(Arguments);
-    void cmd_point_integers(Response&);
-    void cmd_showboard(Response&);
-    void cmd_reg_genmove(Arguments, Response&);
-    void cmd_savesgf(Arguments);
-    void cmd_set_game(Arguments);
+    void cmd_final_score(Response& response);
+    void cmd_g(Response& response);
+    void cmd_genmove(Arguments args, Response& response);
+    void cmd_get_place(Arguments args, Response& response);
+    void cmd_loadsgf(Arguments args);
+    void cmd_move_info(Arguments args, Response& response);
+    void cmd_p(Arguments args);
+    void cmd_param_base(Arguments args, Response& response);
+    void cmd_play(Arguments args);
+    void cmd_point_integers(Response& response);
+    void cmd_showboard(Response& response);
+    void cmd_reg_genmove(Arguments args, Response& response);
+    void cmd_savesgf(Arguments args);
+    void cmd_set_game(Arguments args);
     void cmd_undo();
 
     /** Set the player.

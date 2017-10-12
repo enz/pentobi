@@ -54,12 +54,12 @@ public:
         </dl> */
     /** @name Command handlers */
     /** @{ */
-    void cmd_known_command(Arguments, Response&);
-    void cmd_list_commands(Response&);
-    void cmd_name(Response&);
-    void cmd_protocol_version(Response&);
+    void cmd_known_command(Arguments args, Response& response);
+    void cmd_list_commands(Response& response);
+    void cmd_name(Response& response);
+    void cmd_protocol_version(Response& response);
     void cmd_quit();
-    void cmd_version(Response&);
+    void cmd_version(Response& response);
     /** @} */ // @name
 
     Engine();
