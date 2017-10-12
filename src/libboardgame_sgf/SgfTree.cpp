@@ -24,7 +24,7 @@ using libboardgame_util::trim;
 
 SgfTree::SgfTree()
 {
-    init();
+    SgfTree::init();
 }
 
 SgfTree::~SgfTree() = default;

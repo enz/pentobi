@@ -28,7 +28,7 @@ RatedGamesList::RatedGamesList(QWidget* parent)
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setAlternatingRowColors(true);
     m_model = new QStandardItemModel(this);
-    setModel(m_model);
+    QTableView::setModel(m_model);
     connect(this, &RatedGamesList::doubleClicked, this, &RatedGamesList::activateGame);
 }
 

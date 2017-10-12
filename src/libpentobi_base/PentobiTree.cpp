@@ -28,7 +28,7 @@ PentobiTree::PentobiTree(Variant variant)
 
 PentobiTree::PentobiTree(unique_ptr<SgfNode>& root)
 {
-    init(root);
+    PentobiTree::init(root);
 }
 
 const SgfNode& PentobiTree::add_setup(const SgfNode& node, Color c, Move mv)

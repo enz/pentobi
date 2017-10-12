@@ -20,7 +20,7 @@ using namespace std;
 SameHeightLayout::~SameHeightLayout()
 {
     QLayoutItem* item;
-    while ((item = takeAt(0)) != nullptr)
+    while ((item = SameHeightLayout::takeAt(0)) != nullptr)
         delete item;
 }
 
