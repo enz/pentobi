@@ -116,7 +116,7 @@ GtpConnection::GtpConnection(const string& command)
     }
 }
 
-GtpConnection::~GtpConnection() = default;
+GtpConnection::~GtpConnection() = default; // Non-inline to avoid GCC -Winline warning
 
 void GtpConnection::enable_log(const string& prefix)
 {

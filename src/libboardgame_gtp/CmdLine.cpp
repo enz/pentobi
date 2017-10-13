@@ -23,7 +23,7 @@ CmdLine::CmdLine(const string& line)
     init(line);
 }
 
-CmdLine::~CmdLine() = default;
+CmdLine::~CmdLine() = default; // Non-inline to avoid GCC -Winline warning
 
 void CmdLine::add_elem(string::const_iterator begin,
                        string::const_iterator end)

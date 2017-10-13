@@ -18,13 +18,11 @@ namespace libboardgame_sgf {
 
 //-----------------------------------------------------------------------------
 
-Property::~Property() = default;
+Property::~Property() = default; // Non-inline to avoid GCC -Winline warning
 
 //-----------------------------------------------------------------------------
 
-SgfNode::SgfNode() = default;
-
-SgfNode::~SgfNode() = default;
+SgfNode::~SgfNode() = default;  // Non-inline to avoid GCC -Winline warning
 
 void SgfNode::append(unique_ptr<SgfNode> node)
 {

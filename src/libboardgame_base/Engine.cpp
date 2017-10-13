@@ -29,8 +29,6 @@ Engine::Engine()
     add("set_random_seed", &Engine::cmd_set_random_seed);
 }
 
-Engine::~Engine() = default;
-
 void Engine::cmd_cputime(Response& response)
 {
     double time = libboardgame_sys::cpu_time();

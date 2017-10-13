@@ -31,7 +31,7 @@ FdInBuf::FdInBuf(int fd, size_t buf_size)
     setg(end, end, end);
 }
 
-FdInBuf::~FdInBuf() = default;
+FdInBuf::~FdInBuf() = default; // Non-inline to avoid GCC -Winline warning
 
 auto FdInBuf::underflow() -> int_type
 {
@@ -62,7 +62,7 @@ FdInStream::FdInStream(int fd)
 
 //-----------------------------------------------------------------------------
 
-FdOutBuf::~FdOutBuf() = default;
+FdOutBuf::~FdOutBuf() = default; // Non-inline to avoid GCC -Winline warning
 
 auto FdOutBuf::overflow(int_type c) -> int_type
 {

@@ -39,7 +39,7 @@ Engine::Engine(Variant variant, unsigned level, bool use_book,
     add("version", &Engine::cmd_version);
 }
 
-Engine::~Engine() = default;
+Engine::~Engine() = default; // Non-inline to avoid GCC -Winline warning
 
 void Engine::cmd_get_value(Response& response)
 {

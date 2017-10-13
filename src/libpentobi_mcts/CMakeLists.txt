@@ -9,7 +9,6 @@ add_library(pentobi_mcts STATIC
   Player.h
   Player.cpp
   PlayoutFeatures.h
-  PlayoutFeatures.cpp
   PriorKnowledge.h
   PriorKnowledge.cpp
   SearchParamConst.h

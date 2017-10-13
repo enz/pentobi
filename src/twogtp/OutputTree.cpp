@@ -105,7 +105,7 @@ OutputTree::OutputTree(Variant variant)
     get_transforms(variant, m_transforms, m_inv_transforms);
 }
 
-OutputTree::~OutputTree() = default;
+OutputTree::~OutputTree() = default; // Non-inline to avoid GCC -Winline warning
 
 void OutputTree::add_game(const Board& bd, unsigned player_black, float result,
                           const array<bool, Board::max_moves>& is_real_move)

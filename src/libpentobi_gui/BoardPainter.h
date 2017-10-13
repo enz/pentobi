@@ -44,8 +44,6 @@ public:
 
     BoardPainter();
 
-    ~BoardPainter();
-
     void setCoordinates(bool enable) { m_coordinates = enable; }
 
     void setCoordinateColor(const QColor& color) { m_coordinateColor = color; }

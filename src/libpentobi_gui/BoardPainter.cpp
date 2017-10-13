@@ -36,8 +36,6 @@ BoardPainter::BoardPainter()
     m_fontCoordLabels.setStretch(QFont::SemiCondensed);
 }
 
-BoardPainter::~BoardPainter() = default;
-
 CoordPoint BoardPainter::getCoordPoint(int x, int y)
 {
     if (! m_hasPainted)

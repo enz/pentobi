@@ -91,8 +91,6 @@ public:
 
     friend class Compute;
 
-    PlayoutFeatures();
-
 
     /** Initialize snapshot with forbidden state. */
     void init_snapshot(const Board& bd, Color c);

@@ -23,14 +23,11 @@ class PointTransform
 public:
     using Point = P;
 
-    virtual ~PointTransform();
+    virtual ~PointTransform() = default;
 
     virtual Point get_transformed(Point p, const Geometry<P>& geo) const = 0;
 };
 
-
-template<class P>
-PointTransform<P>::~PointTransform() = default;
 
 //-----------------------------------------------------------------------------
 

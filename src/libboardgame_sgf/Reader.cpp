@@ -33,10 +33,6 @@ bool is_ascii_space(int c)
 
 //-----------------------------------------------------------------------------
 
-Reader::Reader() = default;
-
-Reader::~Reader() = default;
-
 void Reader::consume_char(char expected)
 {
     LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(expected);

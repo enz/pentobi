@@ -29,7 +29,7 @@ Book::Book(Variant variant)
     get_transforms(variant, m_transforms, m_inv_transforms);
 }
 
-Book::~Book() = default;
+Book::~Book() = default; // Non-inline to avoid GCC -Winline warning
 
 Move Book::genmove(const Board& bd, Color c)
 {

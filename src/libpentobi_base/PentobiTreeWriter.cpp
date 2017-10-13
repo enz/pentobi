@@ -20,8 +20,6 @@ PentobiTreeWriter::PentobiTreeWriter(ostream& out, const PentobiTree& tree)
 {
 }
 
-PentobiTreeWriter::~PentobiTreeWriter() = default;
-
 void PentobiTreeWriter::write_property(const string& id,
                                        const vector<string>& values)
 {

@@ -27,8 +27,6 @@ Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
     create_threads();
 }
 
-Search::~Search() = default;
-
 bool Search::check_followup(ArrayList<Move, max_moves>& sequence)
 {
     auto& bd = get_board();

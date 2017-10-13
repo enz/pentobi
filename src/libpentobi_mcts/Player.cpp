@@ -129,8 +129,6 @@ Player::Player(Variant initial_variant, unsigned max_level,
     }
 }
 
-Player::~Player() = default;
-
 Move Player::genmove(const Board& bd, Color c)
 {
     m_resign = false;

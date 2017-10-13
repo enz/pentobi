@@ -368,8 +368,6 @@ private:
     public:
         explicit AssertionHandler(const SearchBase& search);
 
-        ~AssertionHandler() override;
-
         void run() override;
 
     private:
@@ -401,8 +399,6 @@ private:
         /** Local variable for update_rave().
             Reused for efficiency. */
         array<unsigned, Move::range> first_play;
-
-        ~ThreadState();
     };
 
     /** Thread in the parallel search.
@@ -562,9 +558,6 @@ private:
 
 
 template<class S, class M, class R>
-SearchBase<S, M, R>::ThreadState::~ThreadState() = default;
-
-template<class S, class M, class R>
 SearchBase<S, M, R>::Thread::Thread(SearchFunc& search_func)
     : m_search_func(search_func)
 { }
@@ -643,9 +636,6 @@ SearchBase<S, M, R>::AssertionHandler::AssertionHandler(
 }
 
 template<class S, class M, class R>
-SearchBase<S, M, R>::AssertionHandler::~AssertionHandler() = default;
-
-template<class S, class M, class R>
 void SearchBase<S, M, R>::AssertionHandler::run()
 {
     LIBBOARDGAME_LOG(m_search.dump());
@@ -665,7 +655,7 @@ SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
 { }
 
 template<class S, class M, class R>
-SearchBase<S, M, R>::~SearchBase() = default;
+SearchBase<S, M, R>::~SearchBase() = default; // Non-inline to avoid GCC -Winline warning
 
 template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state) const

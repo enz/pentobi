@@ -19,7 +19,7 @@ using namespace std;
 /** String representation of points. */
 struct StringRep
 {
-    virtual ~StringRep();
+    virtual ~StringRep() = default;
 
     virtual bool read(string::const_iterator begin, string::const_iterator end,
                       unsigned width, unsigned height, unsigned& x,
@@ -41,8 +41,6 @@ struct StringRep
 struct StdStringRep
         : public StringRep
 {
-    ~StdStringRep() override;
-
     bool read(string::const_iterator begin, string::const_iterator end,
               unsigned width, unsigned height, unsigned& x,
               unsigned& y) const override;

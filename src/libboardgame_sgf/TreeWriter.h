@@ -19,7 +19,7 @@ class TreeWriter
 public:
     TreeWriter(ostream& out, const SgfNode& root);
 
-    virtual ~TreeWriter();
+    virtual ~TreeWriter() = default;
 
     /** Overridable function to write a property.
         Can be used in subclasses, for example, to replace or remove obsolete

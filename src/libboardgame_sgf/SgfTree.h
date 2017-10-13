@@ -27,7 +27,8 @@ class SgfTree
 public:
     SgfTree();
 
-    virtual ~SgfTree();
+    virtual ~SgfTree() = default;
+
 
     virtual void init();
 

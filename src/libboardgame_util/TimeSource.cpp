@@ -14,7 +14,7 @@ namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
 
-TimeSource::~TimeSource() = default;
+TimeSource::~TimeSource() = default; // Non-inline to avoid GCC -Winline warning
 
 //----------------------------------------------------------------------------
 

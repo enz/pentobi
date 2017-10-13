@@ -36,7 +36,6 @@ class Search final
 public:
     Search(Variant initial_variant, unsigned nu_threads, size_t memory);
 
-    ~Search() override;
 
     unique_ptr<State> create_state() override;
 

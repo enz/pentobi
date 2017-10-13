@@ -87,8 +87,6 @@ GameInfoDialog::GameInfoDialog(QWidget* parent, Game& game,
             this, &GameInfoDialog::reject);
 }
 
-GameInfoDialog::~GameInfoDialog() = default;
-
 void GameInfoDialog::accept()
 {
     auto variant = m_game.get_variant();

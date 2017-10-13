@@ -189,7 +189,7 @@ Geometry<P>::Geometry(unique_ptr<StringRep> string_rep)
 { }
 
 template<class P>
-Geometry<P>::~Geometry() = default;
+Geometry<P>::~Geometry() = default; // Non-inline to avoid GCC -Winline warning
 
 template<class P>
 bool Geometry<P>::from_string(string::const_iterator begin,

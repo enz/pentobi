@@ -102,7 +102,6 @@ public:
 
     Tree(size_t memory, unsigned nu_threads);
 
-    ~Tree();
 
     /** Remove all nodes but the root node. */
     void clear();
@@ -290,9 +289,6 @@ Tree<N>::Tree(size_t memory, unsigned nu_threads)
     }
     clear();
 }
-
-template<typename N>
-Tree<N>::~Tree() = default;
 
 template<typename N>
 inline void Tree<N>::add_value(const Node& node, Float v)

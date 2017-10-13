@@ -29,8 +29,6 @@ public:
 
     explicit Game(Variant variant);
 
-    ~Game();
-
 
     void init(Variant variant);
 

@@ -273,7 +273,7 @@ MainWindow::MainWindow(QWidget* parent, Variant variant,
     }
 }
 
-MainWindow::~MainWindow() = default;
+MainWindow::~MainWindow() = default; // Non-inline to avoid GCC -Winline warning
 
 void MainWindow::about()
 {

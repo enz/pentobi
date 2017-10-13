@@ -14,8 +14,6 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-PlayerBase::~PlayerBase() = default;
-
 bool PlayerBase::resign() const
 {
     return false;

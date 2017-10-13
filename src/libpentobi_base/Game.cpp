@@ -28,8 +28,6 @@ Game::Game(Variant variant)
     init(variant);
 }
 
-Game::~Game() = default;
-
 void Game::add_setup(Color c, Move mv)
 {
     auto& node = m_tree.add_setup(*m_current, c, mv);

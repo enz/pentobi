@@ -17,7 +17,7 @@ namespace libboardgame_base {
 class Transform
 {
 public:
-    virtual ~Transform();
+    virtual ~Transform() = default;
 
     virtual CoordPoint get_transformed(CoordPoint p) const = 0;
 

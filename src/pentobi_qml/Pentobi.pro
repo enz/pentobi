@@ -33,7 +33,6 @@ SOURCES += \
     ../libboardgame_base/Rating.cpp \
     ../libboardgame_base/RectTransform.cpp \
     ../libboardgame_base/StringRep.cpp \
-    ../libboardgame_base/Transform.cpp \
     ../libboardgame_util/Abort.cpp \
     ../libboardgame_util/Assert.cpp \
     ../libboardgame_util/Barrier.cpp \
@@ -71,7 +70,6 @@ SOURCES += \
     ../libpentobi_base/PentobiSgfUtil.cpp \
     ../libpentobi_base/PentobiTreeWriter.cpp \
     ../libpentobi_base/PieceInfo.cpp \
-    ../libpentobi_base/PieceTransforms.cpp \
     ../libpentobi_base/PieceTransformsClassic.cpp \
     ../libpentobi_base/PieceTransformsGembloQ.cpp \
     ../libpentobi_base/PieceTransformsTrigon.cpp \
@@ -88,7 +86,6 @@ SOURCES += \
     ../libpentobi_mcts/History.cpp \
     ../libpentobi_mcts/LocalPoints.cpp \
     ../libpentobi_mcts/Player.cpp \
-    ../libpentobi_mcts/PlayoutFeatures.cpp \
     ../libpentobi_mcts/PriorKnowledge.cpp \
     ../libpentobi_mcts/Search.cpp \
     ../libpentobi_mcts/SharedConst.cpp \

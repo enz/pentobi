@@ -19,7 +19,7 @@ using namespace std;
 class Response
 {
 public:
-    ~Response();
+    ~Response() = default;
 
     /** Conversion to output stream.
         Returns reference to response stream. */

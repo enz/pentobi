@@ -62,7 +62,7 @@ Engine::Engine()
     add("version", &Engine::cmd_version);
 }
 
-Engine::~Engine() = default;
+Engine::~Engine() = default; // Non-inline to avoid GCC -Winline warning
 
 void Engine::add(const string& name, const Handler& f)
 {

@@ -114,9 +114,9 @@ public:
         Iterator m_begin;
     };
 
-    SgfNode();
 
     ~SgfNode();
+
 
     /** Append a new child. */
     void append(unique_ptr<SgfNode> node);

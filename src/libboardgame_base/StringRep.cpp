@@ -21,12 +21,6 @@ using libboardgame_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 
-StringRep::~StringRep() = default;
-
-//-----------------------------------------------------------------------------
-
-StdStringRep::~StdStringRep() = default;
-
 bool StdStringRep::read(string::const_iterator begin,
                         string::const_iterator end, unsigned width,
                         unsigned height, unsigned& x, unsigned& y) const

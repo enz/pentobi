@@ -48,7 +48,6 @@ set(pentobi_base_STAT_SRCS
   PieceTransformsGembloQ.h
   PieceTransformsGembloQ.cpp
   PieceTransforms.h
-  PieceTransforms.cpp
   PieceTransformsTrigon.h
   PieceTransformsTrigon.cpp
   PlayerBase.h

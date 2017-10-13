@@ -21,7 +21,6 @@ class PentobiThumbCreator
 public:
     using QObject::QObject;
 
-    virtual ~PentobiThumbCreator();
 
     bool create(const QString& path, int width, int height,
                 QImage& image) override;

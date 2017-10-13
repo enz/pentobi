@@ -16,7 +16,7 @@ namespace libpentobi_base {
 class PlayerBase
 {
 public:
-    virtual ~PlayerBase();
+    virtual ~PlayerBase() = default;
 
     virtual Move genmove(const Board& bd, Color c) = 0;
 

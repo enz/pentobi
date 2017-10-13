@@ -14,9 +14,9 @@ namespace libboardgame_sgf {
 
 //-----------------------------------------------------------------------------
 
-TreeReader::TreeReader() = default;
+TreeReader::TreeReader() = default; // Non-inline to avoid GCC -Winline warning
 
-TreeReader::~TreeReader() = default;
+TreeReader::~TreeReader() = default; // Non-inline to avoid GCC -Winline warning
 
 unique_ptr<SgfNode> TreeReader::get_tree_transfer_ownership()
 {
