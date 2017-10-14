@@ -33,14 +33,10 @@ using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
-/** Initializes newly created nodes with heuristic prior count and value.
-    Computes heuristic unnormalized move probabilties of the form exp(phi*x)
-    with a weight vector phi and a feature vector x. These weights can be
-    learned with softmax training from existing games.
-
-    The move priors are not normalized but scaled such that the best move has
-    move prior 1. The move values are initialized by multiplying the root value
-    of the current search with the move prior.
+/** Initializes newly created nodes with move prior, count and value.
+    Computes move priors of the form exp(phi*x) with a weight vector phi and a
+    feature vector x. These weights can be learned with softmax training from
+    existing games (see pentobi/src/learn_tool).
 
     The move generation also prunes certain moves in some game variants (e.g.
     opening moves that don't go towards the center). */
@@ -124,6 +120,9 @@ private:
 
     /** Maximum of Features::gamma for all moves. */
     Float m_max_gamma;
+
+    /** Sum of Features::gamma for all moves. */
+    Float m_sum_gamma;
 
     bool m_has_connect_move;
 
@@ -243,6 +242,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             }
     }
     m_max_gamma = -numeric_limits<Float>::max();
+    m_sum_gamma = 0;
     m_min_dist_to_center = numeric_limits<unsigned short>::max();
     m_has_connect_move = false;
     for (unsigned i = 0; i < moves.size(); ++i)
@@ -320,6 +320,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             }
         }
         gamma *= m_gamma_piece_score[info.get_piece()];
+        m_sum_gamma += gamma;
         if (gamma > m_max_gamma)
             m_max_gamma = gamma;
         features.gamma = gamma;
@@ -389,6 +390,7 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
     if (! expander.check_capacity(static_cast<unsigned short>(moves.size())))
         return false;
     auto inv_max_gamma = 1.f / m_max_gamma;
+    auto inv_sum_gamma = 1.f / m_sum_gamma;
 
     for (unsigned i = 0; i < moves.size(); ++i)
     {
@@ -405,10 +407,8 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
         if (has_symmetry_breaker
                 && ! bd.get_move_info_ext_2(mv).breaks_symmetry)
             continue;
-
-        Float move_prior = features.gamma * inv_max_gamma;
-        Float value = move_prior * root_val;
-
+        Float move_prior = features.gamma * inv_sum_gamma;
+        Float value = features.gamma * inv_max_gamma * root_val;
         LIBBOARDGAME_ASSERT(bd.is_legal(to_play, mv));
         expander.add_child(mv, value, SearchParamConst::child_min_count,
                            move_prior);
