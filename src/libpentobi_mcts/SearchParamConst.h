@@ -68,9 +68,9 @@ struct SearchParamConst
 
     static constexpr Float prune_count_start = 16;
 
-    static constexpr Float expand_threshold = 1;
+    static constexpr Float expansion_threshold = 1;
 
-    static constexpr Float expand_threshold_inc = 0.5f;
+    static constexpr Float expansion_threshold_inc = 0.5f;
 
     static constexpr double expected_sim_per_sec = 100;
 };

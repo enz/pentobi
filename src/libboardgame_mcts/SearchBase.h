@@ -124,10 +124,10 @@ struct SearchParamConstDefault
     static constexpr Float prune_count_start = 16;
 
     /** Minimum count of a node to be expanded. */
-    static constexpr Float expand_threshold = 0;
+    static constexpr Float expansion_threshold = 0;
 
-    /** Increase of the expand threshold per in-tree move played. */
-    static constexpr Float expand_threshold_inc = 0;
+    /** Increase of the expansion threshold per in-tree move played. */
+    static constexpr Float expansion_threshold_inc = 0;
 
     /** Expected simulations per second.
         If the simulations per second vary a lot, it should be a value closer
@@ -947,7 +947,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     simulation.moves.clear();
     auto& root = m_tree.get_root();
     auto node = &root;
-    Float expand_threshold = SearchParamConst::expand_threshold;
+    Float expansion_threshold = SearchParamConst::expansion_threshold;
     while (node->has_children())
     {
         node = select_child(*node);
@@ -957,10 +957,10 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
         Move mv = node->get_move();
         simulation.moves.push_back(PlayerMove(state.get_player(), mv));
         state.play_in_tree(mv);
-        expand_threshold += SearchParamConst::expand_threshold_inc;
+        expansion_threshold += SearchParamConst::expansion_threshold_inc;
     }
     state.finish_in_tree();
-    if (node->get_visit_count() > expand_threshold)
+    if (node->get_visit_count() > expansion_threshold)
     {
         if (! expand_node(thread_state, *node, node))
             thread_state.is_out_of_mem = true;
