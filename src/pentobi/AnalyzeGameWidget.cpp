@@ -69,8 +69,9 @@ void AnalyzeGameWidget::mousePressEvent(QMouseEvent* event)
     emit gotoPosition(m_analyzeGame.get_variant(), moves);
 }
 
-void AnalyzeGameWidget::paintEvent(QPaintEvent*)
+void AnalyzeGameWidget::paintEvent(QPaintEvent* event)
 {
+    LIBBOARDGAME_UNUSED(event);
     if (! m_isInitialized)
         return;
     QPainter painter(this);
@@ -131,8 +132,9 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent*)
     }
 }
 
-void AnalyzeGameWidget::resizeEvent(QResizeEvent*)
+void AnalyzeGameWidget::resizeEvent(QResizeEvent* event)
 {
+    LIBBOARDGAME_UNUSED(event);
     if (! m_isInitialized)
         return;
     initSize();

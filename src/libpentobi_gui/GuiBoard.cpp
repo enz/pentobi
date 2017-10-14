@@ -167,8 +167,9 @@ bool GuiBoard::isSelectedPiecePartiallyOnBoard(CoordPoint offset) const
     return false;
 }
 
-void GuiBoard::leaveEvent(QEvent*)
+void GuiBoard::leaveEvent(QEvent* event)
 {
+    LIBBOARDGAME_UNUSED(event);
     m_selectedPieceOffset = CoordPoint::null();
     setSelectedPiecePoints();
 }
@@ -313,8 +314,9 @@ void GuiBoard::movePieceUp()
     }
 }
 
-void GuiBoard::paintEvent(QPaintEvent*)
+void GuiBoard::paintEvent(QPaintEvent* event)
 {
+    LIBBOARDGAME_UNUSED(event);
     if (! m_isInitialized)
         return;
     QPainter painter(this);

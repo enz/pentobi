@@ -61,7 +61,7 @@ private:
 private slots:
     void activateGame(unsigned n);
 
-    void buttonClicked(QAbstractButton*);
+    void buttonClicked(QAbstractButton* button);
 };
 
 //-----------------------------------------------------------------------------

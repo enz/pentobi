@@ -262,8 +262,9 @@ void PieceSelector::mousePressEvent(QMouseEvent* event)
     emit pieceSelected(m_color, piece, m_transform[x][y]);
 }
 
-void PieceSelector::paintEvent(QPaintEvent*)
+void PieceSelector::paintEvent(QPaintEvent* event)
 {
+    LIBBOARDGAME_UNUSED(event);
     setDisabledStatus(m_disabled);
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);

@@ -51,14 +51,16 @@ void OrientationDisplay::clearPiece()
     update();
 }
 
-void OrientationDisplay::mousePressEvent(QMouseEvent*)
+void OrientationDisplay::mousePressEvent(QMouseEvent* event)
 {
+    LIBBOARDGAME_UNUSED(event);
     if (m_isColorSelected && m_piece.is_null())
         emit colorClicked(m_color);
 }
 
-void OrientationDisplay::paintEvent(QPaintEvent*)
+void OrientationDisplay::paintEvent(QPaintEvent* event)
 {
+    LIBBOARDGAME_UNUSED(event);
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
     auto variant = m_bd.get_variant();

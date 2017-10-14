@@ -175,8 +175,9 @@ int ScoreDisplay::getTextWidth(const QString& text) const
                 metrics.boundingRect(text).width());
 }
 
-void ScoreDisplay::paintEvent(QPaintEvent*)
+void ScoreDisplay::paintEvent(QPaintEvent* event)
 {
+    LIBBOARDGAME_UNUSED(event);
     QPainter painter(this);
     m_colorDotSize = static_cast<int>(0.8 * m_fontSize);
     m_colorDotSpace = static_cast<int>(0.3 * m_fontSize);
@@ -278,8 +279,9 @@ void ScoreDisplay::paintEvent(QPaintEvent*)
     }
 }
 
-void ScoreDisplay::resizeEvent(QResizeEvent*)
+void ScoreDisplay::resizeEvent(QResizeEvent* event)
 {
+    LIBBOARDGAME_UNUSED(event);
     // QFont::setPixelSize(0) prints a warning even if it works and the docs
     // of Qt 5.3 don't forbid it (unlike QFont::setPointSize(0)).
     m_fontSize = max(1, static_cast<int>(floor(0.6 * height())));
