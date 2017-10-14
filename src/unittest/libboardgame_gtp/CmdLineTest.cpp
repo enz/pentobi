@@ -30,7 +30,7 @@ string get_element(const CmdLine& c, unsigned i)
     return string(c.get_element(i));
 }
 
-}
+} // namespace
 
 //-----------------------------------------------------------------------------
 
