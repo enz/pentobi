@@ -33,7 +33,7 @@ public:
 
 //-----------------------------------------------------------------------------
 
-void add_test(const string& name, TestFunction function);
+void add_test(const string& name, const TestFunction& function);
 
 bool run_all_tests();
 
@@ -49,7 +49,7 @@ int test_main(int argc, char* argv[]);
     declared. */
 struct TestRegistrar
 {
-    TestRegistrar(const string& name, TestFunction function)
+    TestRegistrar(const string& name, const TestFunction& function)
     {
         add_test(name, function);
     }

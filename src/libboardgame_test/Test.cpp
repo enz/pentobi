@@ -45,7 +45,7 @@ TestFail::TestFail(const char* file, int line, const string& s)
 
 //-----------------------------------------------------------------------------
 
-void add_test(const string& name, TestFunction function)
+void add_test(const string& name, const TestFunction& function)
 {
     auto& all_tests = get_all_tests();
     LIBBOARDGAME_ASSERT(all_tests.find(name) == all_tests.end());
