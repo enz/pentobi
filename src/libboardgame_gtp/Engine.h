@@ -59,7 +59,7 @@ public:
     void cmd_name(Response& response);
     void cmd_protocol_version(Response& response);
     void cmd_quit();
-    void cmd_version(Response& response);
+    void cmd_version();
     /** @} */ // @name
 
     Engine();
