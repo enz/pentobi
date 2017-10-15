@@ -8,7 +8,6 @@
 #define LIBBOARDGAME_SGF_SGF_TREE_H
 
 #include "libboardgame_sgf/SgfNode.h"
-#include "libboardgame_util/StringUtil.h"
 
 namespace libboardgame_sgf {
 

@@ -8,7 +8,6 @@
 #include <config.h>
 #endif
 
-#include <sstream>
 #include "libboardgame_base/StringRep.h"
 #include "libboardgame_test/Test.h"
 

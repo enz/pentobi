@@ -8,7 +8,6 @@
 #include <config.h>
 #endif
 
-#include "libboardgame_sgf/SgfError.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_test/Test.h"
 #include "libpentobi_base/PentobiTree.h"

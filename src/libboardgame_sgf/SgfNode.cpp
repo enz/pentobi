@@ -11,8 +11,6 @@
 #include "SgfNode.h"
 
 #include <algorithm>
-#include "SgfError.h"
-#include "libboardgame_util/Assert.h"
 
 namespace libboardgame_sgf {
 

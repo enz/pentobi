@@ -11,7 +11,6 @@
 #include "Assert.h"
 
 #include <list>
-#include "Unused.h"
 
 #if LIBBOARDGAME_DEBUG
 #include <algorithm>
@@ -20,6 +19,10 @@
 #include <string>
 #include <vector>
 #include "Log.h"
+#endif
+
+#if LIBBOARDGAME_DISABLE_LOG
+#include "Unused.h"
 #endif
 
 namespace libboardgame_util {
