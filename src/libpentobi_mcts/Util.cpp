@@ -33,8 +33,9 @@ void dump_tree_recurse(Writer& writer, Variant variant,
 {
     ostringstream comment;
     comment << "Visits: " << node.get_visit_count()
-            << "\nVal: " << node.get_value()
-            << "\nCnt: " << node.get_value_count();
+            << "\nPrior: " << node.get_move_prior()
+            << "\nVal:   " << node.get_value()
+            << "\nCnt:   " << node.get_value_count();
     writer.write_property("C", comment.str());
     writer.end_node();
     Color next_to_play = to_play.get_next(get_nu_colors(variant));
