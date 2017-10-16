@@ -14,7 +14,7 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-class PieceTransformsTrigon
+class PieceTransformsTrigon final
     : public PieceTransforms
 {
 public:

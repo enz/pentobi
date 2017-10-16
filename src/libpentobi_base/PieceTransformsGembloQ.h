@@ -14,7 +14,7 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-class PieceTransformsGembloQ
+class PieceTransformsGembloQ final
     : public PieceTransforms
 {
 public:

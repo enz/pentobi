@@ -23,7 +23,7 @@ using libboardgame_base::TransfRectRot270Refl;
 
 //-----------------------------------------------------------------------------
 
-class PieceTransformsClassic
+class PieceTransformsClassic final
     : public PieceTransforms
 {
 public:

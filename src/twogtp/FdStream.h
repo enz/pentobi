@@ -35,7 +35,7 @@ private:
 //-----------------------------------------------------------------------------
 
 /** Input stream from a file descriptor. */
-class FdInStream
+class FdInStream final
     : public istream
 {
 public:
@@ -70,7 +70,7 @@ private:
 //-----------------------------------------------------------------------------
 
 /** Output stream from a file descriptor. */
-class FdOutStream
+class FdOutStream final
     : public ostream
 {
 public:
