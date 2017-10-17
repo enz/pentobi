@@ -371,7 +371,9 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                 for (unsigned i = 0; i < moves.size(); ++i)
                     if (moves[i] == symmetric_mv)
                     {
+                        m_sum_gamma -= m_features[i].gamma;
                         m_features[i].gamma *= 100.f;
+                        m_sum_gamma += m_features[i].gamma;
                         if (m_features[i].gamma > m_max_gamma)
                             m_max_gamma = m_features[i].gamma;
                         break;
