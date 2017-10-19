@@ -3,8 +3,7 @@ Version 13.UNKNOWN (master)
 
 * Added option --help to pentobi-thumbnailer and pentobi.
 * Documented all command line options for pentobi in man page.
-* Minimum required Qt version is now 5.6 for the desktop and
-  5.9 for the Android version.
+* Minimum required Qt version is now 5.6.
 
 
 Version 13.1.UNKNOWN (v13-fixes)
