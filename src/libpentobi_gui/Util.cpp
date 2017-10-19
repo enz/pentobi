@@ -39,8 +39,8 @@ void setAlphaSaturation(QColor& c, qreal alpha, qreal saturation)
         c.setAlphaF(alpha);
 }
 
-void paintDot(QPainter& painter, QColor color, qreal x, qreal y, qreal width,
-              qreal height, qreal size)
+void paintDot(QPainter& painter, const QColor& color, qreal x, qreal y,
+              qreal width, qreal height, qreal size)
 {
     painter.save();
     painter.translate(x, y);
@@ -51,8 +51,8 @@ void paintDot(QPainter& painter, QColor color, qreal x, qreal y, qreal width,
 }
 
 void paintGembloQ(QPainter& painter, unsigned pointType, qreal x, qreal y,
-                  qreal width, QColor color, QColor upColor, QColor downColor,
-                  bool flat)
+                  qreal width, const QColor& color, const QColor& upColor,
+                  const QColor& downColor, bool flat)
 {
     painter.save();
     painter.translate(x, y);
