@@ -1,59 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="72" width="72" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<svg xmlns="http://www.w3.org/2000/svg" height="72" width="72" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">
  <g transform="translate(47.16 -34.465)">
-  <path opacity="0.99" d="m-38.16 36.465c-3.878 0-7 3.122-7 7v10h17v-17h-10z" fill-rule="evenodd" fill="#c00"/>
+  <path opacity=".99" fill="#c00" d="m-38.16 36.465c-3.878 0-7 3.122-7 7v10h17v-17h-10z" fill-rule="evenodd"/>
   <path d="m-28.16 36.465-2 2v13h-13l-2 2h17v-17z" fill-opacity=".15686"/>
-  <path d="m-38.16 36.465c-1.915 0-3.6449 0.76228-4.9062 2h12.906l2-2h-10zm-5 2.0938c-1.2377 1.2614-2 2.9912-2 4.9062v10l2-2v-12.906z" fill-opacity=".15686" fill="#fff"/>
- </g>
- <g transform="matrix(1.7 0 0 1.7 44.5 -11.6)">
-  <rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#c00"/>
-  <path d="m-15 28 1.1765-1.1764h7.6471v-7.6471l1.1765-1.1764v10z" fill-opacity=".15686"/>
-  <path d="m-15 28v-10h10l-1.1764 1.1765h-7.6471v7.6471z" fill-opacity=".15686" fill="#fff"/>
- </g>
- <g transform="matrix(1.7 0 0 1.7 61.5 -11.6)">
-  <rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#c00"/>
-  <path d="m-15 28 1.1765-1.1764h7.6471v-7.6471l1.1765-1.1764v10z" fill-opacity=".15686"/>
-  <path d="m-15 28v-10h10l-1.1764 1.1765h-7.6471v7.6471z" fill-opacity=".15686" fill="#fff"/>
+  <path fill="#fff" d="m-38.16 36.465c-1.915 0-3.6449 0.76228-4.9062 2h12.906l2-2h-10zm-5 2.0938c-1.2377 1.2614-2 2.9912-2 4.9062v10l2-2v-12.906z" fill-opacity=".15686"/>
  </g>
  <g id="c" transform="matrix(1.7 0 0 1.7 27.5 -11.6)">
   <rect opacity=".99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#edd400"/>
   <path d="m-15 28 1.1765-1.1764h7.6471v-7.6471l1.1765-1.1764v10z" fill-opacity=".15686"/>
-  <path fill="#fff" d="m-15 28v-10h10l-1.1764 1.1765h-7.6471v7.6471z" fill-opacity=".15686"/>
+  <path fill-opacity=".15686" d="m-15 28v-10h10l-1.1764 1.1765h-7.6471v7.6471z" fill="#fff"/>
  </g>
  <use xlink:href="#c" transform="translate(1.8889e-8 17)" height="72" width="72" y="0" x="0"/>
  <use xlink:href="#c" transform="translate(17 34)" height="72" width="72" y="0" x="0"/>
  <g id="b" transform="matrix(1.7 0 0 1.7 44.5 5.4)">
   <rect opacity=".99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#3465a4"/>
   <path d="m-15 28 1.1765-1.1764h7.6471v-7.6471l1.1765-1.1764v10z" fill-opacity=".15686"/>
-  <path fill="#fff" d="m-15 28v-10h10l-1.1764 1.1765h-7.6471v7.6471z" fill-opacity=".15686"/>
+  <path fill-opacity=".15686" d="m-15 28v-10h10l-1.1764 1.1765h-7.6471v7.6471z" fill="#fff"/>
  </g>
  <use xlink:href="#b" transform="translate(17 17)" height="72" width="72" y="0" x="0"/>
  <use xlink:href="#b" transform="translate(17 4.0042e-7)" height="72" width="72" y="0" x="0"/>
  <g id="a" transform="matrix(1.7 0 0 1.7 61.5 -28.6)">
   <rect opacity=".99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#73d216"/>
   <path d="m-15 28 1.1765-1.1764h7.6471v-7.6471l1.1765-1.1764v10z" fill-opacity=".15686"/>
-  <path fill="#fff" d="m-15 28v-10h10l-1.1764 1.1765h-7.6471v7.6471z" fill-opacity=".15686"/>
+  <path fill-opacity=".15686" d="m-15 28v-10h10l-1.1764 1.1765h-7.6471v7.6471z" fill="#fff"/>
  </g>
  <use xlink:href="#a" transform="translate(17 17)" height="72" width="72" y="0" x="0"/>
  <use xlink:href="#a" transform="translate(17 34)" height="72" width="72" y="0" x="0"/>
- <g transform="matrix(1.7 0 0 1.7 44.5 -28.6)">
-  <rect opacity="0.99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#c00"/>
-  <path fill-opacity=".15686" d="m-15 28 1.1765-1.1764h7.6471v-7.6471l1.1765-1.1764v10z"/>
-  <path fill-opacity=".15686" fill="#fff" d="m-15 28v-10h10l-1.1764 1.1765h-7.6471v7.6471z"/>
+ <g id="e" transform="matrix(1.7 0 0 1.7 44.5 -28.6)">
+  <rect opacity=".99" fill-rule="evenodd" rx="0" ry="0" height="10" width="10" y="18" x="-15" fill="#c00"/>
+  <path d="m-15 28 1.1765-1.1764h7.6471v-7.6471l1.1765-1.1764v10z" fill-opacity=".15686"/>
+  <path fill="#fff" d="m-15 28v-10h10l-1.1764 1.1765h-7.6471v7.6471z" fill-opacity=".15686"/>
  </g>
  <g transform="translate(45.776 37.573)">
-  <path opacity="0.99" d="m-43.776 15.427v10c0 3.878 3.122 7 7 7h10v-17h-17z" fill-rule="evenodd" fill="#edd400"/>
+  <path opacity=".99" fill="#edd400" d="m-43.776 15.427v10c0 3.878 3.122 7 7 7h10v-17h-17z" fill-rule="evenodd"/>
   <path d="m-26.776 15.427-2 2v13h-12.904c1.2614 1.2377 2.9893 2 4.9043 2h10v-17z" fill-opacity=".15686"/>
-  <path d="m-43.776 15.427v10c0 1.9141 0.76336 3.6431 2 4.9043v-12.904h13l2-2h-17z" fill-opacity=".15686" fill="#fff"/>
+  <path fill="#fff" d="m-43.776 15.427v10c0 1.9141 0.76336 3.6431 2 4.9043v-12.904h13l2-2h-17z" fill-opacity=".15686"/>
  </g>
  <g transform="translate(96.877 35.451)">
-  <path opacity="0.99" d="m-43.877 17.549v17h10c3.878 0 7-3.122 7-7v-10h-17z" fill-rule="evenodd" fill="#3465a4"/>
+  <path opacity=".99" fill="#3465a4" d="m-43.877 17.549v17h10c3.878 0 7-3.122 7-7v-10h-17z" fill-rule="evenodd"/>
   <path d="m-26.877 17.549-2 2v12.904c1.2366-1.2612 2-2.9903 2-4.9043v-10zm-15 15-2 2h10c1.915 0 3.6429-0.76229 4.9043-2h-12.904z" fill-opacity=".15686"/>
-  <path d="m-43.877 17.549v17l2-2v-13h13l2-2h-17z" fill-opacity=".15686" fill="#fff"/>
+  <path fill="#fff" d="m-43.877 17.549v17l2-2v-13h13l2-2h-17z" fill-opacity=".15686"/>
  </g>
  <g transform="translate(119.89 -16.717)">
-  <path opacity="0.99" d="m-66.889 18.717v17h17v-10c0-3.878-3.122-7-7-7h-10z" fill-rule="evenodd" fill="#73d216"/>
+  <path opacity=".99" fill="#73d216" d="m-66.889 18.717v17h17v-10c0-3.878-3.122-7-7-7h-10z" fill-rule="evenodd"/>
   <path d="m-51.889 20.814v12.902h-13l-2 2h17v-10c0-1.914-0.76342-3.6411-2-4.9023z" fill-opacity=".15686"/>
-  <path d="m-66.889 18.717v17l2-2v-13h12.904c-1.2614-1.2377-2.9893-2-4.9043-2h-10z" fill-opacity=".15686" fill="#fff"/>
+  <path fill="#fff" d="m-66.889 18.717v17l2-2v-13h12.904c-1.2614-1.2377-2.9893-2-4.9043-2h-10z" fill-opacity=".15686"/>
  </g>
+ <use id="d" xlink:href="#e" transform="translate(17 17)" height="100%" width="100%" y="0" x="0"/>
+ <use xlink:href="#d" transform="translate(-17,-7e-5)" height="100%" width="100%" y="0" x="0"/>
 </svg>
