@@ -10,3 +10,4 @@ Icon=pentobi
 Type=Application
 Categories=Game;BoardGame;
 MimeType=application/x-blokus-sgf;
+StartupWMClass=Pentobi
