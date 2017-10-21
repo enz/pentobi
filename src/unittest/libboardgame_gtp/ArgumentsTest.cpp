@@ -18,7 +18,7 @@ using namespace libboardgame_gtp;
 
 LIBBOARDGAME_TEST_CASE(gtp_arguments_arg)
 {
-    CmdLine line("command arg1   \"arg2 \" arg3 ");
+    CmdLine line(R"(command arg1   "arg2 " arg3 )");
     Arguments args(line);
     LIBBOARDGAME_CHECK_EQUAL("arg1", string(args.get(0)));
     LIBBOARDGAME_CHECK_EQUAL("arg2 ", string(args.get(1)));
@@ -146,7 +146,7 @@ LIBBOARDGAME_TEST_CASE(gtp_arguments_remaining_arg_empty)
 
 LIBBOARDGAME_TEST_CASE(gtp_arguments_remaining_line)
 {
-    CmdLine line("command arg1   \"arg2 \" arg3 ");
+    CmdLine line(R"(command arg1   "arg2 " arg3 )");
     Arguments args(line);
     LIBBOARDGAME_CHECK_EQUAL("\"arg2 \" arg3",
                              string(args.get_remaining_line(0)));
