@@ -35,7 +35,6 @@ int main(int argc, char** argv)
             "game|g:",
             "nugames|n:",
             "quiet",
-            "splitsgf:",
             "saveinterval:",
             "threads:",
             "tree",
@@ -45,11 +44,6 @@ int main(int argc, char** argv)
         if (opt.contains("analyze"))
         {
             analyze(opt.get("analyze"));
-            return 0;
-        }
-        if (opt.contains("splitsgf"))
-        {
-            splitsgf(opt.get("splitsgf"));
             return 0;
         }
         auto black = opt.get("black");

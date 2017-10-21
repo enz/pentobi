@@ -135,39 +135,4 @@ void analyze(const string& file)
     cout << '\n';
 }
 
-void splitsgf(const string& file)
-{
-    ifstream in(file);
-    string filename;
-    string buffer;
-    regex pattern("GN\\[(\\d+)\\]");
-    string line;
-    while (getline(in, line))
-    {
-        if (trim(line) == "(")
-        {
-            if (! filename.empty())
-            {
-                ofstream out(filename);
-                out << buffer;
-            }
-            buffer.clear();
-        }
-        else
-        {
-            smatch match;
-            regex_search(line, match, pattern);
-            if (! match.empty())
-                filename = string(match[1]) + ".blksgf";
-        }
-        buffer.append(line);
-        buffer.append("\n");
-    }
-    if (! filename.empty())
-    {
-        ofstream out(filename);
-        out << buffer;
-    }
-}
-
 //-----------------------------------------------------------------------------
