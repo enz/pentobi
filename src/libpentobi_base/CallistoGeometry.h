@@ -26,7 +26,7 @@ class CallistoGeometry final
 {
 public:
     /** Create or reuse an already created geometry.
-        @param nu_players The number of players (2, 3, or 4). */
+        @param nu_colors The number of colors (2, 3, or 4). */
     static const CallistoGeometry& get(unsigned nu_colors);
 
     static bool is_center_section(unsigned x, unsigned y, unsigned nu_colors);

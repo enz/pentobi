@@ -122,7 +122,7 @@ public:
     /** Array containing the points used for the adjacent status.
         Contains a selection of first-order or second-order adjacent and
         diagonal neighbor points.
-        @requires has_adj_status_points(p) */
+        @pre has_adj_status_points(p) */
     const AdjStatusPoints& get_adj_status_points(Point p) const
     {
         return m_adj_status_points[p];

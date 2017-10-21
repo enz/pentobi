@@ -22,7 +22,8 @@ namespace {
 
 /** GTP engine returning invalid responses for testing class Engine.
     For testing that the base class Engine sanitizes responses of
-    subclasses that contain empty lines (see @ref Engine::exec_main_loop). */
+    subclasses that contain empty lines (see
+    @ref libboardgame_gtp::Engine::exec_main_loop). */
 class InvalidResponseEngine
     : public Engine
 {
