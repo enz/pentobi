@@ -474,9 +474,11 @@ void train(const string& file_list)
     for (auto& file : files)
         gen_train_data(file, variant);
     cerr << '\n';
-    LIBBOARDGAME_LOG("Files:", file_list);
+    LIBBOARDGAME_LOG("Files: ", file_list);
     LIBBOARDGAME_LOG(nu_games, " games");
     LIBBOARDGAME_LOG(nu_positions, " positions");
+    if (nu_positions == 0)
+        return;
     LIBBOARDGAME_LOG(double(nu_moves) / double(nu_positions), " moves/pos");
     init_weights();
     unsigned steps = 1000000;
