@@ -1,6 +1,8 @@
 Version 13.UNKNOWN (master)
 ================================
 
+* Increased playing strength in all game variants except for Nexos,
+  especially in Trigon, GembloQ and Callisto.
 * Added option --help to pentobi-thumbnailer and pentobi.
 * Documented all command line options for pentobi in man page.
 * Minimum required Qt version is now 5.6.
