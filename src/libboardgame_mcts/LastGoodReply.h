@@ -112,8 +112,10 @@ void LastGoodReply<M, P, S, MT>::init(PlayerInt nu_players)
 {
     for (PlayerInt i = 0; i < nu_players; ++i)
     {
-        fill(m_lgr1[i], m_lgr1[i] + Move::range, Move::null().to_int());
-        fill(m_lgr2[i], m_lgr2[i] + hash_table_size, Move::null().to_int());
+        for (typename Move::IntType j = 0; j < Move::range; ++j)
+            m_lgr1[i][j].store(Move::null().to_int(), memory_order_relaxed);
+        for (size_t j = 0; j < hash_table_size; ++j)
+            m_lgr2[i][j].store(Move::null().to_int(), memory_order_relaxed);
     }
 }
 
