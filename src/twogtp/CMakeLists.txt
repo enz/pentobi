@@ -20,9 +20,6 @@ target_link_libraries(twogtp
   boardgame_base
   boardgame_util
   boardgame_sys
+  Threads::Threads
 )
-
-if(CMAKE_THREAD_LIBS_INIT)
-  target_link_libraries(twogtp ${CMAKE_THREAD_LIBS_INIT})
-endif()
 

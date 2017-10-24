@@ -118,13 +118,10 @@ target_link_libraries(pentobi
   boardgame_sgf
   boardgame_util
   boardgame_sys
+  Qt5::Widgets
+  Qt5::Concurrent
+  Threads::Threads
   )
-
-target_link_libraries(pentobi Qt5::Widgets Qt5::Concurrent)
-
-if(CMAKE_THREAD_LIBS_INIT)
-  target_link_libraries(pentobi ${CMAKE_THREAD_LIBS_INIT})
-endif()
 
 install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})
 

@@ -49,13 +49,13 @@ target_link_libraries(pentobi_qml
   boardgame_sgf
   boardgame_util
   boardgame_sys
+  Concurrent
+  Qt5::Gui
+  Qt5::Qml
+  Qt5::Svg
+  Qt5::WebView
+  Threads::Threads
 )
-
-qt5_use_modules(pentobi_qml Concurrent Gui Qml Svg WebView)
-
-if(CMAKE_THREAD_LIBS_INIT)
-  target_link_libraries(pentobi_qml ${CMAKE_THREAD_LIBS_INIT})
-endif()
 
 if(MSVC)
   configure_file(pentobi.conf.in Debug/pentobi.conf @ONLY)
