@@ -46,28 +46,24 @@ namespace {
 //   between beginner and lower master level).
 // * The numbers for level 1-6 are chosen such that they correspond to roughly
 //   equidistant Elo differences measured in self-play experiments.
+// * We only calibrate the numbers for the game variants we care most about.
+//   For other game variants, we use the numbers of game variants with similar
+//   playing strength and speed of simulations.
 
 const float counts_classic[Player::max_supported_level] =
-    { 3, 18, 75, 311, 1260, 8949, 66179, 330894, 1654470 };
+    { 3, 30, 90, 181, 667, 5028, 69809, 349044, 1745221 };
 
 const float counts_duo[Player::max_supported_level] =
-    { 3, 14, 63, 253, 2203, 13614, 218983, 1094918, 5474588 };
+    { 3, 21, 77, 213, 861, 7280, 221867, 1109339, 5546695 };
 
 const float counts_trigon[Player::max_supported_level] =
-    { 228, 376, 733, 1214, 2606, 6802, 18947, 94732, 473665 };
+    { 100, 246, 457, 876, 1882, 5506, 19819, 99092, 495465 };
 
 const float counts_nexos[Player::max_supported_level] =
-    { 250, 347, 625, 1223, 3117, 8270, 20556, 102784, 513924 };
+    { 250, 347, 625, 1223, 3117, 8270, 20954, 104774, 523877 };
 
 const float counts_callisto_2[Player::max_supported_level] =
-    { 100, 192, 405, 1079, 3323, 12258, 105467, 527345, 2636726 };
-
-const float counts_gembloq[Player::max_supported_level] =
-    { 3, 18, 75, 311, 1260, 4137, 20338, 98088, 549514 };
-
-const float counts_gembloq_2[Player::max_supported_level] =
-    { 3, 12, 55, 250, 1500, 8000, 44287, 198825, 1107190 };
-
+    { 30, 87, 300, 1017, 4729, 20435, 122778, 613905, 3069529 };
 
 } // namespace
 
@@ -163,6 +159,7 @@ Move Player::genmove(const Board& bd, Color c)
         switch (board_type)
         {
         case BoardType::classic:
+        case BoardType::gembloq_2:
             max_count = counts_classic[level - 1];
             break;
         case BoardType::duo:
@@ -172,6 +169,8 @@ Move Player::genmove(const Board& bd, Color c)
         case BoardType::trigon_3:
         case BoardType::callisto:
         case BoardType::callisto_3:
+        case BoardType::gembloq:
+        case BoardType::gembloq_3:
             max_count = counts_trigon[level - 1];
             break;
         case BoardType::nexos:
@@ -179,13 +178,6 @@ Move Player::genmove(const Board& bd, Color c)
             break;
         case BoardType::callisto_2:
             max_count = counts_callisto_2[level - 1];
-            break;
-        case BoardType::gembloq:
-        case BoardType::gembloq_3: // Not measured
-            max_count = counts_gembloq[level - 1];
-            break;
-        case BoardType::gembloq_2:
-            max_count = counts_gembloq_2[level - 1];
             break;
         }
         // Don't weight max_count in low levels, otherwise it is still too
@@ -284,52 +276,53 @@ Rating Player::get_rating(Variant variant, unsigned level)
     // level 1. The exact value for anchor and scale is chosen according to our
     // estimate how strong Pentobi plays at level 1 and level 9 in each game
     // variant (2000 Elo would be lower expert level). Currently, only 2-player
-    // variants are tested and the ratings are used for multi-player variants
-    // on the same board.
+    // variants are calibrated and the ratings are also used for other game
+    // variants that we assume have comparable strength (e.g. multi-player on
+    // the same board).
     auto max_supported_level = Player::max_supported_level;
     level = min(max(level, 1u), max_supported_level);
     Rating result;
     switch (get_board_type(variant))
     {
-    case BoardType::classic:
+    case BoardType::classic: // Measured for classic_2
         {
-            // Anchor 1000, scale 0.63
+            // Anchor 1000, scale 0.6
             static float elo[Player::max_supported_level] =
-                { 1000, 1145, 1290, 1435, 1580, 1725, 1870, 1957, 2021 };
+                { 1000, 1142, 1283, 1425, 1567, 1708, 1850, 1951, 2030 };
             result = Rating(elo[level - 1]);
         }
         break;
     case BoardType::duo:
         {
-            // Anchor 1100, scale 0.7
+            // Anchor 1100, scale 0.68
             static float elo[Player::max_supported_level] =
-                { 1100, 1269, 1438, 1607, 1776, 1945, 2114, 2165, 2209 };
+                { 1100, 1273, 1447, 1620, 1793, 1967, 2140, 2187, 2209 };
             result = Rating(elo[level - 1]);
         }
         break;
     case BoardType::callisto_2:
         {
-            // Anchor 1000, scale 0.63
+            // Anchor 1000, scale 0.49
             static float elo[Player::max_supported_level] =
-                { 1000, 1101, 1203, 1304, 1405, 1507, 1608, 1673, 1756 };
+                { 1000, 1113, 1225, 1338, 1450, 1563, 1675, 1783, 1868 };
             result = Rating(elo[level - 1]);
         }
         break;
-    case BoardType::trigon:
+    case BoardType::trigon: // Measured for trigon_2
     case BoardType::trigon_3:
         {
-            // Anchor 1000, scale 0.60
+            // Anchor 1000, scale 0.48
             static float elo[Player::max_supported_level] =
-                { 1000, 1103, 1206, 1308, 1411, 1514, 1617, 1757, 1856 };
+                { 1000, 1110, 1220, 1330, 1440, 1550, 1660, 1765, 1897 };
             result = Rating(elo[level - 1]);
         }
         break;
-    case BoardType::nexos:
-    case BoardType::callisto: // Not measured
-    case BoardType::callisto_3: // Not measured
-    case BoardType::gembloq: // Not measured
-    case BoardType::gembloq_2: // Not measured
-    case BoardType::gembloq_3: // Not measured
+    case BoardType::nexos: // Measured for nexos_2
+    case BoardType::callisto:
+    case BoardType::callisto_3:
+    case BoardType::gembloq:
+    case BoardType::gembloq_2:
+    case BoardType::gembloq_3:
         {
             // Anchor 1000, scale 0.60
             static float elo[Player::max_supported_level] =
