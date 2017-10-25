@@ -49,7 +49,7 @@ target_link_libraries(pentobi_qml
   boardgame_sgf
   boardgame_util
   boardgame_sys
-  Concurrent
+  Qt5::Concurrent
   Qt5::Gui
   Qt5::Qml
   Qt5::Svg
