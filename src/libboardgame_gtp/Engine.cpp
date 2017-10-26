@@ -56,10 +56,8 @@ Engine::Engine()
 {
     add("known_command", &Engine::cmd_known_command);
     add("list_commands", &Engine::cmd_list_commands);
-    add("name", &Engine::cmd_name);
     add("protocol_version", &Engine::cmd_protocol_version);
     add("quit", &Engine::cmd_quit);
-    add("version", &Engine::cmd_version);
 }
 
 Engine::~Engine() = default; // Non-inline to avoid GCC -Winline warning
@@ -105,12 +103,6 @@ void Engine::cmd_list_commands(Response& response)
         response << i.first << '\n';
 }
 
-/** Return name. */
-void Engine::cmd_name(Response& response)
-{
-    response.set("Unknown");
-}
-
 /** Return protocol version. */
 void Engine::cmd_protocol_version(Response& response)
 {
@@ -121,13 +113,6 @@ void Engine::cmd_protocol_version(Response& response)
 void Engine::cmd_quit()
 {
     m_quit = true;
-}
-
-/** Return empty version string.
-    The GTP standard says to return empty string, if no meaningful response
-    is available. */
-void Engine::cmd_version()
-{
 }
 
 bool Engine::contains(const string& name) const
