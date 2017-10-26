@@ -1,31 +1,20 @@
-Version 13.UNKNOWN (master)
-================================
-
-* Increased playing strength in all game variants except for Nexos,
-  especially in Trigon, GembloQ and Callisto.
-* Added option --help to pentobi-thumbnailer and pentobi.
-* Documented all command line options for pentobi in man page.
-* Minimum required Qt version is now 5.6.
-* Prevent multiple icons in Gnome dock if Pentobi is in the favorites
-  and running.
-
-
-Version 13.1.UNKNOWN (v13-fixes)
+Version 14.0 (26 Oct 2017)
 ================================
 
 General:
 
-* Game variant Duo now uses the colors purple/orange to be compatible with
-  the physical game and the Blokus game servers.
-* Game variant Junior now uses the colors green/orange.
-* File format: accept whitespaces before and after property idetifiers as
-  required by SGF standard.
+* Increased playing strength in almost all game variants (except for
+  Nexos), especially in Trigon, GembloQ and Callisto.
+* Duo now uses the colors purple/orange.
+* Junior now uses the colors green/orange.
+* File format: accept whitespaces before and after property identifiers.
 
 Desktop version:
 
-* Dot indicating color to play in orientation selector was not always
-  updated correctly after loading a file of a different game variant.
-* Added missing include that broke compilation on FreeBSD 11.
+* Minimum required Qt version is now 5.6.
+* Bugfix: dot indicating color to play in orientation selector was not
+  always updated correctly after loading a file of a different game variant.
+* Bugfix: added missing include that broke compilation on FreeBSD 11.
 
 
 Version 13.1 (06 Jun 2017)
