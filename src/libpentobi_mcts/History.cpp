@@ -23,7 +23,7 @@ void History::get_as_setup(Variant& variant, Setup& setup) const
 {
     LIBBOARDGAME_ASSERT(is_valid());
     variant = m_variant;
-    unique_ptr<Board> bd(new Board(variant));
+    auto bd = make_unique<Board>(variant);
     for (ColorMove mv : m_moves)
         bd->play(mv);
     get_current_position_as_setup(*bd, setup);
