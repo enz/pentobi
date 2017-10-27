@@ -114,7 +114,7 @@ void State::add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
     for (Piece piece : pieces)
         for (Move mv : get_moves(c, piece, p, 0))
         {
-            // In GembloQ, not all moves covering on starting point
+            // In GembloQ, not all moves covering one starting point
             // (=quarter-square tringle) are legal.
             if (is_gembloq && ! m_bd.is_legal(c, mv))
                 continue;
