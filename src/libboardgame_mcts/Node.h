@@ -256,7 +256,7 @@ inline void Node<M, F, MT>::link_children(NodeIdx first_child,
     LIBBOARDGAME_ASSERT(nu_children < Move::range);
     // first_child cannot be 0 because 0 is always used for the root node
     LIBBOARDGAME_ASSERT(first_child != 0);
-    m_first_child.store(first_child, memory_order_release);
+    m_first_child.store(first_child, memory_order_relaxed);
     m_nu_children.store(nu_children, memory_order_release);
 }
 
@@ -268,7 +268,7 @@ inline void Node<M, F, MT>::link_children_st(NodeIdx first_child,
     // first_child cannot be 0 because 0 is always used for the root node
     LIBBOARDGAME_ASSERT(first_child != 0);
     // Store relaxed (wouldn't even need to be atomic)
-    m_first_child.store(first_child, memory_order_release);
+    m_first_child.store(first_child, memory_order_relaxed);
     m_nu_children.store(nu_children, memory_order_relaxed);
 }
 
