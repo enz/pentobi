@@ -56,10 +56,3 @@ target_link_libraries(pentobi_qml
   Qt5::WebView
   Threads::Threads
 )
-
-if(MSVC)
-  configure_file(pentobi.conf.in Debug/pentobi.conf @ONLY)
-  configure_file(pentobi.conf.in Release/pentobi.conf @ONLY)
-else()
-  configure_file(pentobi.conf.in pentobi.conf @ONLY)
-endif()

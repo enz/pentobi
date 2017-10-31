@@ -1,3 +1,0 @@
-# Config file to override installation settings such that the executable
-# can be tested without installation
-HelpDir=@CMAKE_SOURCE_DIR@/src/pentobi/help
