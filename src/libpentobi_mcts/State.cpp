@@ -190,7 +190,7 @@ inline bool State::check_move(Move mv, const MoveInfo<MAX_SIZE>& info,
 string State::dump() const
 {
     ostringstream s;
-    s << "pentobi_mcts::State:\n" << libpentobi_base::boardutil::dump(m_bd);
+    s << "pentobi_mcts::State:\n" << libpentobi_base::dump(m_bd);
     return s.str();
 }
 #endif

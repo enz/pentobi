@@ -17,7 +17,7 @@ namespace libpentobi_base {
 
 using libboardgame_sgf::InvalidProperty;
 using libboardgame_sgf::SgfError;
-using libpentobi_base::boardutil::get_current_position_as_setup;
+using libpentobi_base::get_current_position_as_setup;
 
 //-----------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ ColorMove PentobiTree::get_move(const SgfNode& node) const
 {
     Color c;
     MovePoints points;
-    if (! libpentobi_base::node_util::get_move(node, m_variant, c, points))
+    if (! libpentobi_base::get_move(node, m_variant, c, points))
         return ColorMove::null();
     if (points.size() == 0)
         // Older (unreleased?) versions of Pentobi used empty move values
@@ -195,7 +195,7 @@ void PentobiTree::keep_only_subtree(const SgfNode& node)
         auto current = node.get_parent_or_null();
         while (current != nullptr)
         {
-            if (has_move(*current) || node_util::has_setup(*current))
+            if (has_move(*current) || has_setup(*current))
             {
                 create_new_setup = true;
                 break;
@@ -210,7 +210,7 @@ void PentobiTree::keep_only_subtree(const SgfNode& node)
         updater.update(*bd, *this, node);
         Setup setup;
         get_current_position_as_setup(*bd, setup);
-        LIBBOARDGAME_ASSERT(! node_util::has_setup(node));
+        LIBBOARDGAME_ASSERT(! has_setup(node));
         set_setup(node, setup);
     }
     make_root(node);

@@ -17,8 +17,8 @@
 namespace libpentobi_base {
 
 using libboardgame_sgf::SgfError;
-using libboardgame_sgf::util::get_path_from_root;
-using libpentobi_base::boardutil::get_current_position_as_setup;
+using libboardgame_sgf::get_path_from_root;
+using libpentobi_base::get_current_position_as_setup;
 
 //-----------------------------------------------------------------------------
 
@@ -108,7 +108,7 @@ void init_setup(Board& bd, const SgfNode& node)
     handle_setup_property(node, "AW", Color(1), bd, setup, all_pieces_left);
     handle_setup_empty(node, bd, setup, all_pieces_left);
     Color to_play;
-    if (! libpentobi_base::node_util::get_player(node, bd.get_nu_colors(),
+    if (! libpentobi_base::get_player(node, bd.get_nu_colors(),
                                                  setup.to_play))
     {
         // Try to guess who should be to play based on the setup pieces.
@@ -135,7 +135,7 @@ void BoardUpdater::update(Board& bd, const PentobiTree& tree,
     get_path_from_root(node, m_path);
     for (const auto i : m_path)
     {
-        if (libpentobi_base::node_util::has_setup(*i))
+        if (libpentobi_base::has_setup(*i))
             init_setup(bd, *i);
         auto mv = tree.get_move(*i);
         if (! mv.is_null())

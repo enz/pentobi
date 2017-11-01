@@ -16,11 +16,8 @@
 #endif
 
 namespace libpentobi_base {
-namespace boardutil {
 
 using namespace std;
-using sgf_util::get_color_id;
-using sgf_util::get_setup_id;
 
 //-----------------------------------------------------------------------------
 
@@ -90,5 +87,4 @@ void write_setup(Writer& writer, Variant variant, const Setup& setup)
 
 //-----------------------------------------------------------------------------
 
-} // namespace boardutil
 } // namespace libpentobi_base

@@ -140,7 +140,7 @@ public:
 
     /** Delete all variations but the main variation.
         If the current node is not in the main variation it will be changed
-        to the node as in libboardgame_sgf::util::back_to_main_variation() */
+        to the node as in libboardgame_sgf::back_to_main_variation() */
     void delete_all_variations();
 
     /** Make the current node the first child of its parent. */
@@ -281,7 +281,7 @@ inline const PentobiTree& Game::get_tree() const
 
 inline bool Game::has_setup() const
 {
-    return libpentobi_base::node_util::has_setup(*m_current);
+    return libpentobi_base::has_setup(*m_current);
 }
 
 inline Variant Game::get_variant() const

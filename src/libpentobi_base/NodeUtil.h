@@ -13,7 +13,6 @@
 #include "libboardgame_sgf/SgfNode.h"
 
 namespace libpentobi_base {
-namespace node_util {
 
 using libboardgame_sgf::SgfNode;
 
@@ -39,7 +38,6 @@ bool get_player(const SgfNode& node, Color::IntType nu_colors, Color& c);
 
 //-----------------------------------------------------------------------------
 
-} // namespace node_util
 } // namespace libpentobi_base
 
 #endif // LIBPENTOBI_BASE_NODE_UTIL_H

@@ -12,8 +12,8 @@
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_util/Abort.h"
 
-using libboardgame_sgf::util::is_main_variation;
-using libboardgame_sgf::util::find_root;
+using libboardgame_sgf::is_main_variation;
+using libboardgame_sgf::find_root;
 using libboardgame_util::clear_abort;
 using libboardgame_util::ArrayList;
 using libboardgame_util::set_abort;

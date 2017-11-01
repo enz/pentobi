@@ -11,7 +11,6 @@
 #include "SgfTree.h"
 
 namespace libboardgame_sgf {
-namespace util {
 
 using namespace std;
 
@@ -71,7 +70,6 @@ bool is_empty(const SgfTree& tree);
 
 //-----------------------------------------------------------------------------
 
-} // namespace util
 } // namespace libboardgame_sgf
 
 #endif // LIBBOARDGAME_SGF_SGF_UTIL_H

@@ -21,7 +21,7 @@ using namespace std;
 using namespace libpentobi_mcts;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::util::get_last_node;
+using libboardgame_sgf::get_last_node;
 using libboardgame_util::CpuTimeSource;
 using libpentobi_base::BoardUpdater;
 using libpentobi_base::PentobiTree;

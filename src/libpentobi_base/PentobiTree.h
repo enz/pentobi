@@ -126,12 +126,12 @@ inline const BoardConst& PentobiTree::get_board_const() const
 
 inline const char* PentobiTree::get_color(Color c) const
 {
-    return sgf_util::get_color_id(m_variant, c);
+    return get_color_id(m_variant, c);
 }
 
 inline const char* PentobiTree::get_setup_prop_id(Color c) const
 {
-    return sgf_util::get_setup_id(m_variant, c);
+    return get_setup_id(m_variant, c);
 }
 
 inline Variant PentobiTree::get_variant() const
@@ -141,7 +141,7 @@ inline Variant PentobiTree::get_variant() const
 
 inline bool PentobiTree::has_move(const SgfNode& node) const
 {
-    return libpentobi_base::node_util::has_move(node, m_variant);
+    return libpentobi_base::has_move(node, m_variant);
 }
 
 inline void PentobiTree::set_move(const SgfNode& node, ColorMove mv)

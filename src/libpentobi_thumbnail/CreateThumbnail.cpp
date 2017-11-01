@@ -100,7 +100,7 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
     unsigned id = 0;
     do
     {
-        if (libpentobi_base::node_util::has_setup(*node))
+        if (libpentobi_base::has_setup(*node))
         {
             handleSetup("AB", Color(0), *node, *geo, pointState, pieceId, id);
             handleSetup("AW", Color(1), *node, *geo, pointState, pieceId, id);
@@ -116,7 +116,7 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
         }
         Color c;
         MovePoints points;
-        if (libpentobi_base::node_util::get_move(*node, variant, c, points))
+        if (libpentobi_base::get_move(*node, variant, c, points))
         {
             ++id;
             for (Point p : points)

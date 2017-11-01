@@ -60,14 +60,14 @@
 using Util::getPlayerString;
 using libboardgame_sgf::SgfError;
 using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::util::back_to_main_variation;
-using libboardgame_sgf::util::beginning_of_branch;
-using libboardgame_sgf::util::find_next_comment;
-using libboardgame_sgf::util::get_last_node;
-using libboardgame_sgf::util::get_variation_string;
-using libboardgame_sgf::util::has_comment;
-using libboardgame_sgf::util::has_earlier_variation;
-using libboardgame_sgf::util::is_main_variation;
+using libboardgame_sgf::back_to_main_variation;
+using libboardgame_sgf::beginning_of_branch;
+using libboardgame_sgf::find_next_comment;
+using libboardgame_sgf::get_last_node;
+using libboardgame_sgf::get_variation_string;
+using libboardgame_sgf::has_comment;
+using libboardgame_sgf::has_earlier_variation;
+using libboardgame_sgf::is_main_variation;
 using libboardgame_util::clear_abort;
 using libboardgame_util::get_abort;
 using libboardgame_util::set_abort;
@@ -77,10 +77,10 @@ using libpentobi_base::PieceSet;
 using libpentobi_base::PentobiTree;
 using libpentobi_base::PentobiTreeWriter;
 using libpentobi_base::ScoreType;
-using libpentobi_base::tree_util::get_move_node;
-using libpentobi_base::tree_util::get_move_number;
-using libpentobi_base::tree_util::get_moves_left;
-using libpentobi_base::tree_util::get_position_info;
+using libpentobi_base::get_move_node;
+using libpentobi_base::get_move_number;
+using libpentobi_base::get_moves_left;
+using libpentobi_base::get_position_info;
 
 //-----------------------------------------------------------------------------
 
@@ -2303,7 +2303,7 @@ bool MainWindow::openStream(istream& in)
                        << QString::fromLocal8Bit(charSet.c_str()) << "'";
             m_textCodec = QTextCodec::codecForName("ISO 8859-1");
         }
-        if (! libpentobi_base::node_util::has_setup(m_game.get_root()))
+        if (! libpentobi_base::has_setup(m_game.get_root()))
             m_game.goto_node(get_last_node(m_game.get_root()));
         initPieceSelectors();
     }
@@ -3353,7 +3353,7 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     bool hasChildren = current.has_children();
     bool hasMove = tree.has_move(current);
     bool hasMoves = m_bd.has_moves(to_play);
-    bool isEmpty = libboardgame_sgf::util::is_empty(tree);
+    bool isEmpty = libboardgame_sgf::is_empty(tree);
     bool hasNextVar = current.get_sibling() != nullptr;
     bool hasPrevVar = current.get_previous_sibling() != nullptr;
     m_actionAnalyzeGame->setEnabled(! m_isRated

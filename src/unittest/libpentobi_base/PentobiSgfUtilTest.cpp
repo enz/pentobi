@@ -14,8 +14,6 @@
 #include "libboardgame_test/Test.h"
 
 using namespace libpentobi_base;
-using sgf_util::get_color_id;
-using sgf_util::get_setup_id;
 
 //-----------------------------------------------------------------------------
 

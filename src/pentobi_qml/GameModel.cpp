@@ -26,14 +26,14 @@
 using namespace std;
 using libboardgame_sgf::SgfError;
 using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::util::back_to_main_variation;
-using libboardgame_sgf::util::beginning_of_branch;
-using libboardgame_sgf::util::find_next_comment;
-using libboardgame_sgf::util::get_last_node;
-using libboardgame_sgf::util::get_move_annotation;
-using libboardgame_sgf::util::has_comment;
-using libboardgame_sgf::util::has_earlier_variation;
-using libboardgame_sgf::util::is_main_variation;
+using libboardgame_sgf::back_to_main_variation;
+using libboardgame_sgf::beginning_of_branch;
+using libboardgame_sgf::find_next_comment;
+using libboardgame_sgf::get_last_node;
+using libboardgame_sgf::get_move_annotation;
+using libboardgame_sgf::has_comment;
+using libboardgame_sgf::has_earlier_variation;
+using libboardgame_sgf::is_main_variation;
 using libboardgame_util::ArrayList;
 using libboardgame_util::get_letter_coord;
 using libpentobi_base::get_piece_set;
@@ -51,11 +51,11 @@ using libpentobi_base::PieceInfo;
 using libpentobi_base::PiecePoints;
 using libpentobi_base::PieceSet;
 using libpentobi_base::Point;
-using libpentobi_base::node_util::has_setup;
-using libpentobi_base::tree_util::get_move_number;
-using libpentobi_base::tree_util::get_moves_left;
-using libpentobi_base::tree_util::get_move_node;
-using libpentobi_base::tree_util::get_position_info;
+using libpentobi_base::has_setup;
+using libpentobi_base::get_move_number;
+using libpentobi_base::get_moves_left;
+using libpentobi_base::get_move_node;
+using libpentobi_base::get_position_info;
 
 //-----------------------------------------------------------------------------
 
@@ -1132,7 +1132,7 @@ void GameModel::setDate(const QString& date)
     m_game.set_date(encode(date).constData());
     emit dateChanged();
     // updateIsGameEmpty() not necessary, see
-    // libboardgame_sgf::util::is_empty()
+    // libboardgame_sgf::is_empty()
     updateIsModified();
 }
 
@@ -1315,7 +1315,7 @@ void GameModel::updateGameInfo()
 
 void GameModel::updateIsGameEmpty()
 {
-    set(m_isGameEmpty, libboardgame_sgf::util::is_empty(m_game.get_tree()),
+    set(m_isGameEmpty, libboardgame_sgf::is_empty(m_game.get_tree()),
         &GameModel::isGameEmptyChanged);
 }
 
@@ -1325,7 +1325,7 @@ void GameModel::updateIsModified()
     // file is associated.
     bool isModified =
             m_game.is_modified()
-            && (! libboardgame_sgf::util::is_empty(m_game.get_tree())
+            && (! libboardgame_sgf::is_empty(m_game.get_tree())
                 || ! m_file.isEmpty());
     set(m_isModified, isModified, &GameModel::isModifiedChanged);
 }

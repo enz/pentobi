@@ -19,8 +19,8 @@ using libpentobi_base::ColorMove;
 using libpentobi_base::PentobiTree;
 using libboardgame_sgf::SgfError;
 using libboardgame_sgf::SgfNode;
-using libboardgame_sgf::util::is_main_variation;
-using libboardgame_sgf::util::get_move_annotation;
+using libboardgame_sgf::is_main_variation;
+using libboardgame_sgf::get_move_annotation;
 using libboardgame_util::get_letter_coord;
 
 //-----------------------------------------------------------------------------

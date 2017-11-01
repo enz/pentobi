@@ -20,8 +20,8 @@ namespace libpentobi_mcts {
 namespace util {
 
 using libboardgame_sgf::Writer;
-using libpentobi_base::boardutil::write_setup;
-using libpentobi_base::sgf_util::get_color_id;
+using libpentobi_base::write_setup;
+using libpentobi_base::get_color_id;
 
 //-----------------------------------------------------------------------------
 

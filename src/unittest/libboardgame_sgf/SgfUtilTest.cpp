@@ -14,7 +14,6 @@
 
 using namespace std;
 using namespace libboardgame_sgf;
-using namespace libboardgame_sgf::util;
 
 //-----------------------------------------------------------------------------
 

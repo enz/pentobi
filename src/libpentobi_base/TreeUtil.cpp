@@ -14,10 +14,9 @@
 #include "libboardgame_sgf/SgfUtil.h"
 
 namespace libpentobi_base {
-namespace tree_util {
 
-using libboardgame_sgf::util::get_move_annotation;
-using libboardgame_sgf::util::get_variation_string;
+using libboardgame_sgf::get_move_annotation;
+using libboardgame_sgf::get_variation_string;
 
 //-----------------------------------------------------------------------------
 
@@ -38,7 +37,7 @@ const SgfNode* get_move_node(const PentobiTree& tree, const SgfNode& node,
                     return current;
                 --move_number;
             }
-            if (libpentobi_base::node_util::has_setup(*current))
+            if (libpentobi_base::has_setup(*current))
                 break;
             current = current->get_parent_or_null();
         }
@@ -49,7 +48,7 @@ const SgfNode* get_move_node(const PentobiTree& tree, const SgfNode& node,
         auto current = node.get_first_child_or_null();
         while (current != nullptr)
         {
-            if (libpentobi_base::node_util::has_setup(*current))
+            if (libpentobi_base::has_setup(*current))
                 break;
             if (tree.has_move(*current))
             {
@@ -71,7 +70,7 @@ unsigned get_move_number(const PentobiTree& tree, const SgfNode& node)
     {
         if (tree.has_move(*current))
             ++move_number;
-        if (libpentobi_base::node_util::has_setup(*current))
+        if (libpentobi_base::has_setup(*current))
             break;
         current = current->get_parent_or_null();
     }
@@ -85,7 +84,7 @@ unsigned get_moves_left(const PentobiTree& tree, const SgfNode& node)
     auto current = node.get_first_child_or_null();
     while (current != nullptr)
     {
-        if (libpentobi_base::node_util::has_setup(*current))
+        if (libpentobi_base::has_setup(*current))
             break;
         if (tree.has_move(*current))
             ++moves_left;
@@ -113,5 +112,4 @@ string get_position_info(const PentobiTree& tree, const SgfNode& node)
 
 //-----------------------------------------------------------------------------
 
-} // namespace tree_util
 } // namespace libpentobi_base

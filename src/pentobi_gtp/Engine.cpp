@@ -19,7 +19,7 @@ namespace pentobi_gtp {
 using libboardgame_gtp::Failure;
 using libboardgame_sgf::Writer;
 using libpentobi_base::Board;
-using libpentobi_base::sgf_util::get_color_id;
+using libpentobi_base::get_color_id;
 using libpentobi_mcts::Float;
 
 //-----------------------------------------------------------------------------

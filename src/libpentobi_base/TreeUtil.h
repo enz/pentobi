@@ -10,7 +10,6 @@
 #include "PentobiTree.h"
 
 namespace libpentobi_base {
-namespace tree_util {
 
 //-----------------------------------------------------------------------------
 
@@ -37,7 +36,6 @@ string get_position_info(const PentobiTree& tree, const SgfNode& node);
 
 //-----------------------------------------------------------------------------
 
-} // namespace tree_util
 } // namespace libpentobi_base
 
 #endif // LIBPENTOBI_BASE_TREE_UTIL_H

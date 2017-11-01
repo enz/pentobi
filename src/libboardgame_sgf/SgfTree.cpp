@@ -18,7 +18,7 @@
 
 namespace libboardgame_sgf {
 
-using libboardgame_sgf::util::find_root;
+using libboardgame_sgf::find_root;
 using libboardgame_util::trim;
 
 //-----------------------------------------------------------------------------

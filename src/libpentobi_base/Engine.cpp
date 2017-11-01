@@ -22,7 +22,7 @@ namespace libpentobi_base {
 
 using libboardgame_gtp::Failure;
 using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::util::get_last_node;
+using libboardgame_sgf::get_last_node;
 using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------

@@ -11,7 +11,6 @@
 #include "NodeUtil.h"
 
 namespace libpentobi_base {
-namespace node_util {
 
 using libboardgame_sgf::InvalidProperty;
 
@@ -200,5 +199,4 @@ bool has_setup(const SgfNode& node)
 
 //-----------------------------------------------------------------------------
 
-} // namespace node_util
 } // namespace libpentobi_base

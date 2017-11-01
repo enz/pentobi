@@ -11,7 +11,6 @@
 #include "Variant.h"
 
 namespace libpentobi_base {
-namespace sgf_util {
 
 //-----------------------------------------------------------------------------
 
@@ -23,7 +22,6 @@ const char* get_setup_id(Variant variant, Color c);
 
 //-----------------------------------------------------------------------------
 
-} // namespace sgf_util
 } // namespace libpentobi_base
 
 #endif // LIBPENTOBI_BASE_PENTOBI_SGF_UTIL_H

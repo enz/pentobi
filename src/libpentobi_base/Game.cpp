@@ -16,8 +16,8 @@
 namespace libpentobi_base {
 
 using libboardgame_sgf::SgfError;
-using libboardgame_sgf::util::back_to_main_variation;
-using libboardgame_sgf::util::is_main_variation;
+using libboardgame_sgf::back_to_main_variation;
+using libboardgame_sgf::is_main_variation;
 
 //-----------------------------------------------------------------------------
 
@@ -60,7 +60,7 @@ Color Game::get_to_play_default(const Game& game)
             break;
         }
         Color c;
-        if (libpentobi_base::node_util::get_player(*node, bd.get_nu_colors(), c))
+        if (libpentobi_base::get_player(*node, bd.get_nu_colors(), c))
             return c;
         node = node->get_parent_or_null();
     }

@@ -21,8 +21,8 @@
 #include "libboardgame_util/Abort.h"
 #include "libpentobi_gui/Util.h"
 
-using libboardgame_sgf::util::find_root;
-using libboardgame_sgf::util::is_main_variation;
+using libboardgame_sgf::find_root;
+using libboardgame_sgf::is_main_variation;
 using libboardgame_util::set_abort;
 using libboardgame_util::ArrayList;
 using libpentobi_base::Board;

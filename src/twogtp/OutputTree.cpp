@@ -22,7 +22,7 @@ using libboardgame_util::ArrayList;
 using libpentobi_base::get_transforms;
 using libpentobi_base::ColorMove;
 using libpentobi_base::MovePoints;
-using libpentobi_base::boardutil::get_transformed;
+using libpentobi_base::get_transformed;
 
 //-----------------------------------------------------------------------------
 

@@ -11,7 +11,6 @@
 #include "libboardgame_sgf/Writer.h"
 
 namespace libpentobi_base {
-namespace boardutil {
 
 using libboardgame_sgf::Writer;
 
@@ -34,7 +33,6 @@ Move get_transformed(const Board& bd, Move mv,
 
 //-----------------------------------------------------------------------------
 
-} // namespace boardutil
 } // namespace libpentobi_base
 
 #endif // LIBPENTOBI_BASE_BOARDUTIL_H

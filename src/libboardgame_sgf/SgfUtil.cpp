@@ -15,7 +15,6 @@
 #include "libboardgame_util/StringUtil.h"
 
 namespace libboardgame_sgf {
-namespace util {
 
 using libboardgame_util::get_letter_coord;
 
@@ -215,5 +214,4 @@ bool is_main_variation(const SgfNode& node)
 
 //-----------------------------------------------------------------------------
 
-} // namespace util
 } // namespace libboardgame_sgf

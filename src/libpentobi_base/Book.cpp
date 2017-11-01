@@ -19,7 +19,6 @@
 namespace libpentobi_base {
 
 using libboardgame_sgf::TreeReader;
-using boardutil::get_transformed;
 
 //-----------------------------------------------------------------------------
 
