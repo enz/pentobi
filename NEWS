@@ -1,7 +1,8 @@
 Version 14.0.UNKNOWN (v14-fixes)
 ================================
 
-*
+* Fixed some potential (very unlikely) crashes on platforms other
+  than i386/amd64.
 
 
 Version 14.0 (26 Oct 2017)
@@ -19,7 +20,8 @@ Desktop version:
 
 * Minimum required Qt version is now 5.6.
 * Bugfix: dot indicating color to play in orientation selector was not
-  always updated correctly after loading a file of a different game variant.
+  always updated correctly after loading a file of a different game
+  variant.
 * Bugfix: added missing include that broke compilation on FreeBSD 11.
 
 
