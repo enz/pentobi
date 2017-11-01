@@ -185,7 +185,7 @@ template<typename M, typename F, bool MT>
 inline NodeIdx Node<M, F, MT>::get_first_child() const
 {
     LIBBOARDGAME_ASSERT(has_children());
-    return m_first_child.load(memory_order_relaxed);
+    return m_first_child.load(memory_order_acquire);
 }
 
 template<typename M, typename F, bool MT>
@@ -256,7 +256,10 @@ inline void Node<M, F, MT>::link_children(NodeIdx first_child,
     LIBBOARDGAME_ASSERT(nu_children < Move::range);
     // first_child cannot be 0 because 0 is always used for the root node
     LIBBOARDGAME_ASSERT(first_child != 0);
-    m_first_child.store(first_child, memory_order_relaxed);
+    // Even if m_first_child is only used by other threads after m_nu_children
+    // was set, we need release/acquire order for both because m_first_child
+    // can be overwritten later if two threads expand a node simultaneously.
+    m_first_child.store(first_child, memory_order_release);
     m_nu_children.store(nu_children, memory_order_release);
 }
 
