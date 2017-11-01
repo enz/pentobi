@@ -7,12 +7,9 @@
 #ifndef LIBBOARDGAME_MCTS_LAST_GOOD_REPLY_H
 #define LIBBOARDGAME_MCTS_LAST_GOOD_REPLY_H
 
-#include <algorithm>
-#include <cstring>
-#include <memory>
+#include <cstddef>
 #include <random>
 #include "Atomic.h"
-#include "PlayerMove.h"
 
 namespace libboardgame_mcts {
 
