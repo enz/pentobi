@@ -64,20 +64,20 @@ void InvalidResponseEngine::invalid_response_2(Response& r)
 
 LIBBOARDGAME_TEST_CASE(gtp_engine_command)
 {
-    istringstream in("version\n");
+    istringstream in("known_command known_command\n");
     ostringstream out;
     Engine engine;
     engine.exec_main_loop(in, out);
-    LIBBOARDGAME_CHECK_EQUAL(string("= \n\n"), out.str());
+    LIBBOARDGAME_CHECK_EQUAL(string("= true\n\n"), out.str());
 }
 
 LIBBOARDGAME_TEST_CASE(gtp_engine_command_with_id)
 {
-    istringstream in("10 version\n");
+    istringstream in("10 known_command known_command\n");
     ostringstream out;
     Engine engine;
     engine.exec_main_loop(in, out);
-    LIBBOARDGAME_CHECK_EQUAL(string("=10 \n\n"), out.str());
+    LIBBOARDGAME_CHECK_EQUAL(string("=10 true\n\n"), out.str());
 }
 
 /** Check that invalid responses with one empty line are sanitized. */
