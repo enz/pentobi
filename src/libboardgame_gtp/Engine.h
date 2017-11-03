@@ -43,8 +43,6 @@ public:
         <dd>@copydoc cmd_known_command() </dd>
         <dt>@link cmd_list_commands() @c list_commands @endlink</dt>
         <dd>@copydoc cmd_list_commands() </dd>
-        <dt>@link cmd_protocol_version() @c protocol_version @endlink</dt>
-        <dd>@copydoc cmd_protocol_version() </dd>
         <dt>@link cmd_quit() @c quit @endlink</dt>
         <dd>@copydoc cmd_quit() </dd>
         </dl> */
@@ -52,7 +50,6 @@ public:
     /** @{ */
     void cmd_known_command(Arguments args, Response& response);
     void cmd_list_commands(Response& response);
-    void cmd_protocol_version(Response& response);
     void cmd_quit();
     /** @} */ // @name
 

@@ -56,7 +56,6 @@ Engine::Engine()
 {
     add("known_command", &Engine::cmd_known_command);
     add("list_commands", &Engine::cmd_list_commands);
-    add("protocol_version", &Engine::cmd_protocol_version);
     add("quit", &Engine::cmd_quit);
 }
 
@@ -101,12 +100,6 @@ void Engine::cmd_list_commands(Response& response)
 {
     for (auto& i : m_handlers)
         response << i.first << '\n';
-}
-
-/** Return protocol version. */
-void Engine::cmd_protocol_version(Response& response)
-{
-    response.set("2");
 }
 
 /** Quit command loop. */
