@@ -4,6 +4,8 @@ Version 14.0.UNKNOWN (v14-fixes)
 * Fixed some potential (very unlikely) crashes on platforms other
   than i386/amd64.
 * Made unit tests work again.
+* Never allocate more than a quarter of the total system memory
+  (instead of a third).
 
 
 Version 14.0 (26 Oct 2017)
