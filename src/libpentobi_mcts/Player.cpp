@@ -241,11 +241,7 @@ size_t Player::get_memory()
         available = 512000000;
     }
     // Don't use all of the available memory
-#if PENTOBI_LOW_RESOURCES
     size_t reasonable = available / 4;
-#else
-    size_t reasonable = available / 3;
-#endif
     size_t wanted = 2000000000;
     if (m_max_level < max_supported_level)
     {
