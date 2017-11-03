@@ -25,10 +25,10 @@ doc/blksgf/Pentobi-SGF.html in the Pentobi source package.
 Set the maximum playing level. Reducing this value reduces the amount
 of memory used by the search, which can be useful to run Pentobi on systems
 that have low memory or are too slow to use the highest levels.
-By default, Pentobi currently allocates up to 2 GB (but not more than a third
+By default, Pentobi currently allocates up to 2 GB (but not more than a quarter
 of the physical memory available on the system).
 Reducing the maximum level to 8 currently reduces this amount by a factor
-of 6 and lower maximum levels even more.
+of 3 to 4 and lower maximum levels even more.
 .TP
 .B \-h, \-\-help
 Display help and exit.
