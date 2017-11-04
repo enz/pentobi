@@ -18,6 +18,7 @@
 #include <QTextCodec>
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
+#include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
