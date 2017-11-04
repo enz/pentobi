@@ -7,7 +7,6 @@
 #ifndef PENTOBI_UTIL_H
 #define PENTOBI_UTIL_H
 
-#include "RatingHistory.h"
 #include "libboardgame_base/Rating.h"
 #include "libpentobi_base/Color.h"
 #include "libpentobi_base/Variant.h"

@@ -12,7 +12,6 @@
 
 #include <fstream>
 #include <map>
-#include <regex>
 #include "libboardgame_util/FmtSaver.h"
 #include "libboardgame_util/Statistics.h"
 #include "libboardgame_util/StringUtil.h"

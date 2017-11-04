@@ -10,7 +10,6 @@
 
 #include "Rating.h"
 
-#include <cmath>
 #include <iostream>
 #include "libboardgame_util/Assert.h"
 
