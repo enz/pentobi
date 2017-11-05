@@ -109,8 +109,8 @@ GtpConnection::GtpConnection(const string& command)
         vector<char*> argv;
         argv.reserve(args.size() + 1);
         for (size_t i = 0; i < args.size(); ++i)
-            argv[i] = const_cast<char*>(args[i].c_str());
-        argv[args.size()] = nullptr;
+            argv.push_back(const_cast<char*>(args[i].c_str()));
+        argv.push_back(nullptr);
         execvp(args[0].c_str(), &(*argv.begin()));
         terminate_child("Could not execute '" + command + "': "
                         + strerror(errno));
