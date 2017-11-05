@@ -10,7 +10,6 @@
 
 #include "GtpConnection.h"
 
-#include <cstdlib>
 #include <cstring>
 #include <vector>
 #include <unistd.h>
@@ -107,12 +106,14 @@ GtpConnection::GtpConnection(const string& command)
                 close(fd2[1]);
                 terminate_child("GtpConnection: dup2 to stdout failed");
             }
-        auto const argv = new char*[args.size() + 1];
+        vector<char*> argv;
+        argv.reserve(args.size() + 1);
         for (size_t i = 0; i < args.size(); ++i)
-            argv[i] = strdup(args[i].c_str());
+            argv[i] = const_cast<char*>(args[i].c_str());
         argv[args.size()] = nullptr;
-        if (execvp(args[0].c_str(), argv) == -1)
-            terminate_child("Could not execute '" + command + "'");
+        execvp(args[0].c_str(), &(*argv.begin()));
+        terminate_child("Could not execute '" + command + "': "
+                        + strerror(errno));
     }
 }
 
