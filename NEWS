@@ -1,11 +1,17 @@
 Version 14.0.UNKNOWN (v14-fixes)
 ================================
 
+General:
+
 * Fixed some potential (very unlikely) crashes on platforms other
   than i386/amd64.
 * Made unit tests work again.
 * Never allocate more than a quarter of the total system memory
   (instead of a third).
+
+Android version:
+
+* The compilation now requires Qt >=5.7.
 
 
 Version 14.0 (26 Oct 2017)
