@@ -218,7 +218,7 @@ Item
                 NumberAnimation {
                     properties: "x,y,scale"
                     duration: 300
-                    easing.type: Easing.InOutQuad
+                    easing.type: Easing.InOutSine
                 }
             }
     }
