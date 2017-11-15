@@ -268,6 +268,7 @@ function help() {
     if (helpWindowLoader.status === Loader.Null)
         helpWindowLoader.source = "HelpWindow.qml"
     helpWindowLoader.item.show()
+    helpWindowLoader.item.init()
 }
 
 function init() {
