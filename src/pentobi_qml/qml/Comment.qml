@@ -3,8 +3,6 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
 TextArea {
-    id: comment
-
     style: TextAreaStyle {
         textColor: theme.fontColorPosInfo
         selectionColor: theme.selectionColor
