@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
     QGuiApplication app(argc, argv);
+    QtWebView::initialize();
     app.setOrganizationName("Pentobi");
     app.setApplicationName("Pentobi");
 #ifdef VERSION
@@ -112,7 +113,6 @@ int main(int argc, char *argv[])
             PlayerModel::nuThreads = nuThreads;
         }
         QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
-        QtWebView::initialize();
         return app.exec();
     }
     catch (const bad_alloc&)
