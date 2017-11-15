@@ -15,6 +15,12 @@ Window {
     }
     property url startUrl: helpFileExtractor.extract(language)
 
+    // Instead of initializing webView.url with startUrl, we provide an init
+    // function that needs to be called after show() to work around an issue
+    // with the initial zoom factor of WebView sometimes very large on Android
+    // (last tested with Qt 5.9.2)
+    function init() { webView.url = startUrl }
+
     width: isAndroid ? Screen.desktopAvailableWidth : Math.min(Screen.pixelDensity * 150, Screen.desktopAvailableWidth)
     height: isAndroid ? Screen.desktopAvailableHeight : Math.min(Screen.pixelDensity * 180, Screen.desktopAvailableHeight)
     visibility: Window.AutomaticVisibility
@@ -31,14 +37,6 @@ Window {
         id: webView
 
         anchors.fill: parent
-        url: startUrl
-
-        // Workaround for a bug in Qt on Android that makes the webview
-        // sometimes have a very small initial width until it is scrolled for
-        // the first time despite that we create it with
-        // "anchors.fill: parent" (last tested with Qt 5.8-rc)
-        onWidthChanged: reload()
-        onHeightChanged: reload()
     }
     HelpFileExtractor { id: helpFileExtractor }
 }
