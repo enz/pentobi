@@ -23,7 +23,6 @@ Window {
 
     width: isAndroid ? Screen.desktopAvailableWidth : Math.min(Screen.pixelDensity * 150, Screen.desktopAvailableWidth)
     height: isAndroid ? Screen.desktopAvailableHeight : Math.min(Screen.pixelDensity * 180, Screen.desktopAvailableHeight)
-    visibility: Window.AutomaticVisibility
     title: qsTr("Pentobi Help")
     color: theme.backgroundColor
     flags: Qt.Dialog
