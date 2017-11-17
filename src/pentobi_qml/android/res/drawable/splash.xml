@@ -5,7 +5,7 @@
             <solid android:color="#131313"/>
         </shape>
     </item>
-    <item>
+    <item android:top="-24dp">
          <bitmap android:src="@drawable/icon" android:gravity="center" />
     </item>
 </layer-list>
