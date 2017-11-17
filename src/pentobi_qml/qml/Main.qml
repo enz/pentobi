@@ -45,7 +45,6 @@ Window {
     minimumWidth: 240; minimumHeight: 301
 
     width: defaultWidth; height: defaultHeight
-    visibility: Window.AutomaticVisibility
     color: theme.backgroundColor
     title: qsTr("Pentobi")
     Component.onCompleted: {
