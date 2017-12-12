@@ -410,7 +410,8 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                 && ! bd.get_move_info_ext_2(mv).breaks_symmetry)
             continue;
         Float move_prior = features.gamma * inv_sum_gamma;
-        Float value = features.gamma * inv_max_gamma * root_val;
+        // Empirical good formula for value initialization
+        Float value = root_val * sqrt(features.gamma * inv_max_gamma);
         LIBBOARDGAME_ASSERT(bd.is_legal(to_play, mv));
         expander.add_child(mv, value, SearchParamConst::child_min_count,
                            move_prior);
