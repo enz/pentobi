@@ -125,7 +125,6 @@ void Engine::cmd_param(Arguments args, Response& response)
     if (args.get_size() == 0)
         response
             << "avoid_symmetric_draw " << s.get_avoid_symmetric_draw() << '\n'
-            << "auto_param " << s.get_auto_param() << '\n'
             << "exploration_constant " << s.get_exploration_constant() << '\n'
             << "fixed_simulations " << p.get_fixed_simulations() << '\n'
             << "rave_child_max " << s.get_rave_child_max() << '\n'
@@ -139,8 +138,6 @@ void Engine::cmd_param(Arguments args, Response& response)
         string name = args.get(0);
         if (name == "avoid_symmetric_draw")
             s.set_avoid_symmetric_draw(args.parse<bool>(1));
-        else if (name == "auto_param")
-            s.set_auto_param(args.parse<bool>(1));
         else if (name == "exploration_constant")
             s.set_exploration_constant(args.parse<Float>(1));
         else if (name == "fixed_simulations")

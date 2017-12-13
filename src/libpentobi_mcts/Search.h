@@ -25,10 +25,14 @@ using libpentobi_base::Setup;
     Multiple colors per player (e.g. in Classic 2) are handled by using the
     same game result for each color of a player.
     Multiple players of a color (the 4th color in Classic 3) are handled by
-    adding additional players for each player of this color that share the
-    game result with the main color of the player.
+    adding one additional pseudo-player for each real player that shares the
+    game result with the main color of the real player.
     The maximum number of players is 6, which occurs in Classic 3 with 3
-    real players and 3 pseudo-players for the 4th color.
+    real players and 3 pseudo-players.
+
+    Some user-changeable parameters that have different optimal values for
+    different game variants are automatically changed whenever the game variant
+    changes.
     @note @ref libboardgame_avoid_stack_allocation */
 class Search final
     : public libboardgame_mcts::SearchBase<State, Move, SearchParamConst>
@@ -55,14 +59,6 @@ public:
 
     void set_avoid_symmetric_draw(bool enable);
 
-    /** Automatically set some user-changeable parameters that have different
-        optimal values for different game variants whenever the game variant
-        changes.
-        Default is true. */
-    bool get_auto_param() const;
-
-    void set_auto_param(bool enable);
-
     /** @} */ // @name
 
 
@@ -84,10 +80,6 @@ protected:
     void on_start_search(bool is_followup) override;
 
 private:
-    /** Automatically set default parameters for the game variant if
-        the game variant changes. */
-    bool m_auto_param;
-
     /** Game variant of last search. */
     Variant m_variant;
 
@@ -104,11 +96,6 @@ private:
 
     void set_default_param(Variant variant);
 };
-
-inline bool Search::get_auto_param() const
-{
-    return m_auto_param;
-}
 
 inline bool Search::get_avoid_symmetric_draw() const
 {
@@ -141,11 +128,6 @@ inline PlayerInt Search::get_player() const
 inline Color Search::get_to_play() const
 {
     return m_to_play;
-}
-
-inline void Search::set_auto_param(bool enable)
-{
-    m_auto_param = enable;
 }
 
 inline void Search::set_avoid_symmetric_draw(bool enable)

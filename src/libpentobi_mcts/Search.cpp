@@ -19,7 +19,6 @@ namespace libpentobi_mcts {
 Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
     : SearchBase(nu_threads == 0 ? util::get_nu_threads() : nu_threads,
                  memory),
-      m_auto_param(true),
       m_variant(initial_variant),
       m_shared_const(m_to_play)
 {
@@ -72,7 +71,7 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
     m_shared_const.board = &bd;
     m_to_play = to_play;
     auto variant = bd.get_variant();
-    if (m_auto_param && variant != m_variant)
+    if (variant != m_variant)
         set_default_param(variant);
     m_variant = variant;
     bool result = SearchBase::search(mv, max_count, min_simulations, max_time,
