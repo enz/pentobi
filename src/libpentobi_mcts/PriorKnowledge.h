@@ -235,9 +235,13 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             if (! is_forbidden[p])
             {
                 gamma_point[p] = m_gamma_point_opp_attach_or_nb;
-                for (Point j : geo.get_adj(p))
-                    if (! is_forbidden[j])
-                        gamma_point[j] = m_gamma_point_opp_attach_or_nb;
+                if (MAX_SIZE == 7 || IS_CALLISTO)
+                    // Nexos or Callisto
+                    LIBBOARDGAME_ASSERT(geo.get_adj(p).empty());
+                else
+                    for (Point j : geo.get_adj(p))
+                        if (! is_forbidden[j])
+                            gamma_point[j] = m_gamma_point_opp_attach_or_nb;
             }
     }
     if (second_color != to_play)
