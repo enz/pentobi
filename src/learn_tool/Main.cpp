@@ -30,6 +30,7 @@ using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::Color;
 using libpentobi_base::Game;
+using libpentobi_base::Geometry;
 using libpentobi_base::GridExt;
 using libpentobi_base::Move;
 using libpentobi_base::MoveList;
@@ -59,6 +60,8 @@ enum {
     attach_nonforbidden_2,
     attach_nonforbidden_3,
     attach_nonforbidden_4,
+    attach_nonforbidden_5,
+    attach_nonforbidden_6,
     attach_second_color,
     local_move,
     piece_score_0,
@@ -199,15 +202,24 @@ void add_sample(const Board& bd, Color to_play, Move played_mv)
             else
                 feature_adj[adj_nonforbidden] = 1;
             unsigned n = 0;
-            for (auto pa : geo.get_adj(p))
-                n+= 1u - static_cast<unsigned>(is_forbidden[pa]);
+            if (MAX_SIZE == 7 || IS_CALLISTO)
+            {
+                LIBBOARDGAME_ASSERT(geo.get_adj(p).empty());
+                for (auto pa : geo.get_diag(p))
+                    n += 1u - static_cast<unsigned>(is_forbidden[pa]);
+            }
+            else
+                for (auto pa : geo.get_adj(p))
+                    n += 1u - static_cast<unsigned>(is_forbidden[pa]);
             switch (n)
             {
             case 0: feature_attach[attach_nonforbidden_0] = 1; break;
             case 1: feature_attach[attach_nonforbidden_1] = 1; break;
             case 2: feature_attach[attach_nonforbidden_2] = 1; break;
             case 3: feature_attach[attach_nonforbidden_3] = 1; break;
-            default: feature_attach[attach_nonforbidden_4] = 1; break;
+            case 4: feature_attach[attach_nonforbidden_4] = 1; break;
+            case 5: feature_attach[attach_nonforbidden_5] = 1; break;
+            default: feature_attach[attach_nonforbidden_6] = 1; break;
             }
         }
     }
@@ -386,6 +398,8 @@ void print_weights()
     print_weight(attach_nonforbidden_2, "attach_nonforbidden[2]");
     print_weight(attach_nonforbidden_3, "attach_nonforbidden[3]");
     print_weight(attach_nonforbidden_4, "attach_nonforbidden[4]");
+    print_weight(attach_nonforbidden_5, "attach_nonforbidden[5]");
+    print_weight(attach_nonforbidden_6, "attach_nonforbidden[6]");
     print_weight(attach_second_color, "attach_second_color");
     print_weight(local_move, "local");
     print_weight(piece_score_0, "piece_score_0", false);

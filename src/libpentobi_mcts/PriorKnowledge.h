@@ -20,7 +20,6 @@ using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
-using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
 using libpentobi_base::GridExt;
 using libpentobi_base::Move;
@@ -113,8 +112,10 @@ private:
 
     PieceMap<Float> m_gamma_piece_score;
 
-    /** Attach point is nonforbidden and has n non-forbidden neighbors. */
-    array<Float, Geometry::max_adj + 1> m_gamma_attach_nonforbidden;
+    /** Attach point is nonforbidden and has n non-forbidden neighbors.
+        Nexos/Callisto use "diagonal" neighbors instead of "adjacent", so the
+        index is [0..6] */
+    array<Float, 7> m_gamma_attach_nonforbidden;
 
     /** @} */ // @name
 
@@ -210,8 +211,17 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
             else
                 gamma_adj[p] = m_gamma_adj_nonforbidden;
             unsigned n = 0;
-            for (auto pa : geo.get_adj(p))
-                n+= 1u - static_cast<unsigned>(is_forbidden[pa]);
+            if (MAX_SIZE == 7 || IS_CALLISTO)
+            {
+                // Nexos and Callisto don't use "adjacent" points, use
+                // "diagonal" instead
+                LIBBOARDGAME_ASSERT(geo.get_adj(p).empty());
+                for (auto pa : geo.get_diag(p))
+                    n += 1u - static_cast<unsigned>(is_forbidden[pa]);
+            }
+            else
+                for (auto pa : geo.get_adj(p))
+                    n += 1u - static_cast<unsigned>(is_forbidden[pa]);
             LIBBOARDGAME_ASSERT(n < m_gamma_attach_nonforbidden.size());
             gamma_attach[p] = m_gamma_attach_nonforbidden[n];
         }
