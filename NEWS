@@ -12,6 +12,8 @@ General:
 Android version:
 
 * The compilation now requires Qt >=5.7.
+* The binary translation files are now automatically created during
+  compilation with src/pentobi_qml/Pentobi.pro.
 
 
 Version 14.0 (26 Oct 2017)

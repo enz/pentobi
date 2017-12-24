@@ -222,9 +222,13 @@ SOURCES += \
     qml/*.js
 }
 
-TRANSLATIONS += \
-    qml/i18n/qml_de.ts \
-    qml/i18n/replace_qtbase_de.ts
+TRANSLATIONS = $$files(qml/i18n/*.ts)
+qtPrepareTool(LRELEASE, lrelease)
+updateqm.input = TRANSLATIONS
+updateqm.output = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
+updateqm.commands = $$LRELEASE -silent ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_OUT}
+updateqm.CONFIG += no_link target_predeps
+QMAKE_EXTRA_COMPILERS += updateqm
 
 OTHER_FILES += \
     android/AndroidManifest.xml
