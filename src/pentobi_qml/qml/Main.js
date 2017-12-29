@@ -5,7 +5,7 @@ function about() {
     showInfo("<h2>" + qsTr("Pentobi") + "</h2><br/>" +
              qsTr("Version %1").arg(Qt.application.version) + "<br/><br/>" +
              qsTr("Computer opponent for the board game Blokus.") + "<br/>" +
-             qsTr("Copyright 2011-%1 Markus&nbsp;Enzenberger").arg(2017) +
+             qsTr("Copyright 2011-%1 Markus&nbsp;Enzenberger").arg(2018) +
              "<br><a href=\"" + url + "\">" + url + "</a></p>")
 }
 

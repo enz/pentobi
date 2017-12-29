@@ -3,7 +3,7 @@ Pentobi is a computer opponent for the board game Blokus.
 It has a strong Blokus engine with 9 different playing levels. The supported
 game variants are: Classic, Duo, Trigon, Junior, Nexos, GembloQ, Callisto.
 
-Copyright (C) 2011-2017 Markus Enzenberger <enz@users.sourceforge.net>
+Copyright (C) 2011-2018 Markus Enzenberger <enz@users.sourceforge.net>
 
 See COPYING for license information.
 See INSTALL for instructions how to build the program from the sources.
