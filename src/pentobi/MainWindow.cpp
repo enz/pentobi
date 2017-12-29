@@ -286,7 +286,7 @@ void MainWindow::about()
                        "<p>" +
                        tr("Computer opponent for the board game Blokus.")
                        + "<br>" +
-                       tr("&copy; 2011&ndash;%1 Markus Enzenberger").arg(2017) +
+                       tr("&copy; 2011&ndash;%1 Markus Enzenberger").arg(2018) +
                        + "<br>" +
                        "<a href=\"https://pentobi.sourceforge.io\">https://pentobi.sourceforge.io</a>"
                        "</p>");
