@@ -7,19 +7,24 @@ Version 14.UNKNOWN (master)
 Version 14.0.UNKNOWN (v14-fixes)
 ================================
 
+*
+
+
+Version 14.1 (03 Jan 2018)
+==========================
+
 General:
 
-* Fixed some potential (very unlikely) crashes on platforms other
-  than i386/amd64.
+* Fixed a potential race condition during move generation.
+* Reduced maximum memory usage to a quarter instead of a third of the
+  total system memory.
 * Made unit tests work again.
-* Never allocate more than a quarter of the total system memory
-  (instead of a third).
 
 Android version:
 
-* The compilation now requires Qt >=5.7.
-* The binary translation files are now automatically created during
-  compilation with src/pentobi_qml/Pentobi.pro.
+* Migrated QML files from Qt 5.6 to Qt >=5.7.
+* The binary translation files are now automatically created by the
+  qmake project file.
 
 
 Version 14.0 (26 Oct 2017)
