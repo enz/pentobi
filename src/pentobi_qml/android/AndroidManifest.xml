@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<manifest package="net.sf.pentobi" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="14.0.UNKNOWN" android:versionCode="14000" android:installLocation="auto">
+<manifest package="net.sf.pentobi" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="14.1" android:versionCode="14001" android:installLocation="auto">
     <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Pentobi" android:theme="@style/AppTheme" android:icon="@drawable/icon">
         <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|locale|fontScale|keyboard|keyboardHidden|navigation" android:name="org.qtproject.qt5.android.bindings.QtActivity" android:label="@string/app_name" android:screenOrientation="portrait" android:launchMode="singleTop" android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -32,7 +32,7 @@
             <!-- Splash screen -->
         </activity>
     </application>
-    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="16"/>
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="23"/>
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!-- %%INSERT_FEATURES -->

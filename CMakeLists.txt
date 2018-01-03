@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.1.0)
 
 project(Pentobi)
-set(PENTOBI_VERSION 14.0.UNKNOWN)
-set(PENTOBI_RELEASE_DATE 2017-10-26)
+set(PENTOBI_VERSION 14.1)
+set(PENTOBI_RELEASE_DATE 2018-01-03)
 
 cmake_policy(SET CMP0043 NEW)
 
