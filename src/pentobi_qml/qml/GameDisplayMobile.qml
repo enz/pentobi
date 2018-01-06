@@ -105,8 +105,8 @@ Item
                     // How many full rows can we show if we use 85% of the board width?
                     property int rows: Math.floor(height / (0.85 * swipeView.width / columns))
 
-                    columns: Logic.startsWith(gameModel.gameVariant, "classic")
-                             || Logic.startsWith(gameModel.gameVariant, "callisto")
+                    columns: gameModel.gameVariant.startsWith("classic")
+                             || gameModel.gameVariant.startsWith("callisto")
                              || gameModel.gameVariant === "duo" ? 7 : 8
 
                     // Show at least 1 row

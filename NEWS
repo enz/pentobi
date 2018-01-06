@@ -1,7 +1,9 @@
 Version 14.UNKNOWN (master)
 ===========================
 
-*
+Android version:
+
+* The minimum required Qt version is now 5.8.
 
 
 Version 14.0.UNKNOWN (v14-fixes)

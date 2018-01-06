@@ -25,17 +25,14 @@ QtObject {
     property real toPlayColorLighter: 1.7
 
     function getImage(name) {
-        if (startsWith(name, "frame-")
-                || startsWith(name, "junction-")
-                || startsWith(name, "linesegment-")
-                || startsWith(name, "piece-manipulator")
-                || startsWith(name, "quarter-square-")
-                || startsWith(name, "square-")
-                || startsWith(name, "triangle-"))
+        if (name.startsWith("frame-")
+                || name.startsWith("junction-")
+                || name.startsWith("linesegment-")
+                || name.startsWith("piece-manipulator")
+                || name.startsWith("quarter-square-")
+                || name.startsWith("square-")
+                || name.startsWith("triangle-"))
             return "themes/light/" + name + ".svg"
         return "themes/dark/" + name + ".svg"
     }
-
-    // Helper function for Qt <5.8, which doesn't support String.startsWith()
-    function startsWith(s, s1) { return s.substring(0, s1.length) === s1 }
 }
