@@ -419,7 +419,7 @@ void init_weights()
 }
 
 /** Gradient descent step using softmax training. */
-void train_step(unsigned step)
+void train_step(unsigned step, bool print)
 {
     for (auto& w : grad_weights)
         w = 0;
@@ -470,7 +470,7 @@ void train_step(unsigned step)
 
     cost /= nu_samples;
 
-    if (step % 100 == 0)
+    if (print)
     {
         LIBBOARDGAME_LOG("Step ", step);
         LIBBOARDGAME_LOG("Cost ", cost);
@@ -478,7 +478,7 @@ void train_step(unsigned step)
     }
 }
 
-void train(const string& file_list)
+void train(const string& file_list, unsigned steps)
 {
     nu_games = 0;
     nu_positions = 0;
@@ -495,9 +495,8 @@ void train(const string& file_list)
         return;
     LIBBOARDGAME_LOG(double(nu_moves) / double(nu_positions), " moves/pos");
     init_weights();
-    unsigned steps = 1000000;
-    for (unsigned i = 0; i < steps; ++i)
-        train_step(i);
+    for (unsigned i = 1; i <= steps; ++i)
+        train_step(i, i % 100 == 0 || i == steps);
 }
 
 } // namespace
@@ -510,9 +509,10 @@ int main(int argc, char** argv)
     {
         vector<string> specs = {
             "sgffiles:",
+            "steps:"
         };
         Options opt(argc, argv, specs);
-        train(opt.get("sgffiles"));
+        train(opt.get("sgffiles"), opt.get<unsigned>("steps", 15000));
     }
     catch (const exception& e)
     {
