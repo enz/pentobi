@@ -107,7 +107,7 @@ struct Sample
 
 using Float = double;
 
-const Float step_size = 0.01;
+const Float step_size = 0.05;
 
 MoveMarker marker;
 
@@ -512,7 +512,7 @@ int main(int argc, char** argv)
             "steps:"
         };
         Options opt(argc, argv, specs);
-        train(opt.get("sgffiles"), opt.get<unsigned>("steps", 15000));
+        train(opt.get("sgffiles"), opt.get<unsigned>("steps", 3000));
     }
     catch (const exception& e)
     {
