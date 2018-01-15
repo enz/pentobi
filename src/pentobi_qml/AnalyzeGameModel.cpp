@@ -6,7 +6,8 @@
 
 #include "AnalyzeGameModel.h"
 
-#include <QtConcurrent>
+#include <QSettings>
+#include <QtConcurrentRun>
 #include "GameModel.h"
 #include "PlayerModel.h"
 #include "libboardgame_sgf/SgfUtil.h"
