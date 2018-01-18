@@ -25,8 +25,6 @@ public:
 
     explicit PieceMap(const T& val);
 
-    PieceMap& operator=(const PieceMap& piece_map);
-
     bool operator==(const PieceMap& piece_map) const;
 
     T& operator[](Piece piece);
@@ -43,13 +41,6 @@ template<typename T>
 inline PieceMap<T>::PieceMap(const T& val)
 {
     fill(val);
-}
-
-template<typename T>
-PieceMap<T>& PieceMap<T>::operator=(const PieceMap& piece_map)
-{
-    copy(piece_map.m_a.begin(), piece_map.m_a.end(), m_a.begin());
-    return *this;
 }
 
 template<typename T>
