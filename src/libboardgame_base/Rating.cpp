@@ -17,7 +17,7 @@ namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
-ostream& operator<<(ostream& out, const Rating& rating)
+ostream& operator<<(ostream& out, Rating rating)
 {
     out << rating.m_elo;
     return out;

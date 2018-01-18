@@ -20,7 +20,7 @@ using namespace std;
 class Rating
 {
 public:
-    friend ostream& operator<<(ostream& out, const Rating& rating);
+    friend ostream& operator<<(ostream& out, Rating rating);
     friend istream& operator>>(istream& in, Rating& rating);
 
     explicit Rating(double elo = 0) : m_elo(elo) { }
