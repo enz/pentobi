@@ -133,7 +133,7 @@ inline PointState::IntType PointState::to_int() const
 
 //-----------------------------------------------------------------------------
 
-ostream& operator<<(ostream& out, const PointState& s);
+ostream& operator<<(ostream& out, PointState s);
 
 //-----------------------------------------------------------------------------
 

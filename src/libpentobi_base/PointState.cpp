@@ -16,7 +16,7 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-ostream& operator<<(ostream& out, const PointState& s)
+ostream& operator<<(ostream& out, PointState s)
 {
     if (s.is_color())
         out << s.to_color();
