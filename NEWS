@@ -3,7 +3,7 @@ Version 14.1.UNKNOWN (v14-fixes)
 
 General:
 
-* Added a workaround for a compiler issue with GCC 7.2, which slowed
+* Added a workaround for a compiler issue with GCC 7/8, which slowed
   down the startup time of Pentobi.
 
 

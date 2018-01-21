@@ -280,9 +280,9 @@ Tree<N>::Tree(size_t memory, unsigned nu_threads)
     m_max_nodes = max_nodes;
 
     // Using make_unique<Node[]>(max_nodes) slows down the array creation and
-    // thereby the startup time of Pentobi with GCC 7 because the compiler does
-    // not optimize away the call to the empty Move() constructor (last tested
-    // with GCC 7.2.0 on Ubuntu 17.10).
+    // thereby the startup time of Pentobi with GCC 7/8 because the compiler
+    // does not optimize away the call to the empty Move() constructor (last
+    // tested with GCC 7.2.0 and GCC 8.0.0 on Ubuntu 17.10).
     m_nodes.reset(new Node[max_nodes]);
 
     m_thread_storage = make_unique<ThreadStorage[]>(nu_threads);
