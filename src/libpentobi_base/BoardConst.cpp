@@ -133,68 +133,68 @@ void sort_piece_points(PiecePoints& points)
 }
 
 vector<PieceInfo> create_pieces_callisto(const Geometry& geo,
-                                         PieceSet piece_set,
                                          const PieceTransforms& transforms)
 {
+    auto geometry_type = GeometryType::callisto;
     vector<PieceInfo> pieces;
     pieces.reserve(19);
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(0, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 3);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 3);
     pieces.emplace_back("W",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, -1),
                                      CoordPoint(0, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("X",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, -1),
                                      CoordPoint(0, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("T5",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, -1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("U",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, -1),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(1, -1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("L",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("T4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("Z",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 0), CoordPoint(1, -1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("V",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("I",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("2",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     return pieces;
 }
 
 vector<PieceInfo> create_pieces_classic(const Geometry& geo,
-                                        PieceSet piece_set,
                                         const PieceTransforms& transforms)
 {
+    auto geometry_type = GeometryType::classic;
     vector<PieceInfo> pieces;
     // Define the 21 standard pieces. The piece names are the standard names as
     // in http://blokusstrategy.com/?p=48. The default orientation is chosen
@@ -204,103 +204,103 @@ vector<PieceInfo> create_pieces_classic(const Geometry& geo,
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2), CoordPoint(1, 0),
                                      CoordPoint(2, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("L5",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(1, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("Z5",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("N",
                         PiecePoints{ CoordPoint(-1, 1), CoordPoint(-1, 0),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2)},
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("W",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, -1),
                                      CoordPoint(0, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("X",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, -1),
                                      CoordPoint(0, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("F",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(1, -1),
                                      CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("I5",
                         PiecePoints{ CoordPoint(0, 2), CoordPoint(0, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("T5",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, -1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("Y",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(0, 1),
                                      CoordPoint(0, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("P",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(1, 0),
                                      CoordPoint(1, -1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("U",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(-1, -1),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(1, -1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("L4",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("I4",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("T4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("Z4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 0), CoordPoint(1, -1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("V3",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("I3",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("2",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(0, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     return pieces;
 }
 
 vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
-                                        PieceSet piece_set,
                                         const PieceTransforms& transforms)
 {
+    auto geometry_type = GeometryType::gembloq;
     vector<PieceInfo> pieces;
     pieces.reserve(21);
     pieces.emplace_back("P",
@@ -315,7 +315,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(-1, -2), CoordPoint(0, -2),
                                      CoordPoint(1, -2), CoordPoint(2, -2),
                                      CoordPoint(-1, -3), CoordPoint(0, -3) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("I5",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
@@ -327,7 +327,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(1, 1), CoordPoint(2, 1),
                                      CoordPoint(3, 1), CoordPoint(4, 1),
                                      CoordPoint(3, 2), CoordPoint(4, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("X",
                         PiecePoints{ CoordPoint(-3, 0), CoordPoint(-2, 0),
                                      CoordPoint(-1, 0), CoordPoint(0, 0),
@@ -339,7 +339,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(1, -2), CoordPoint(2, -2),
                                      CoordPoint(-3, 1), CoordPoint(-2, 1),
                                      CoordPoint(1, 1), CoordPoint(2, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("W",
                         PiecePoints{ CoordPoint(-5, 0), CoordPoint(-4, 0),
                                      CoordPoint(-3, 0), CoordPoint(-2, 0),
@@ -351,7 +351,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(3, -1), CoordPoint(4, -1),
                                      CoordPoint(-3, 1), CoordPoint(-2, 1),
                                      CoordPoint(1, 1), CoordPoint(2, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("Z",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
@@ -363,7 +363,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(3, -1), CoordPoint(4, -1),
                                      CoordPoint(-3, -1), CoordPoint(-2, -1),
                                      CoordPoint(-3, -2), CoordPoint(-2, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("Y",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-3, 0),
                                      CoordPoint(-2, 0), CoordPoint(-1, 0),
@@ -375,7 +375,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(1, 1), CoordPoint(2, 1),
                                      CoordPoint(3, 1), CoordPoint(4, 1),
                                      CoordPoint(3, 2), CoordPoint(4, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("N5",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(-3, -1),
                                      CoordPoint(-2, -1), CoordPoint(-1, -1),
@@ -387,7 +387,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(-3, 1), CoordPoint(-2, 1),
                                      CoordPoint(-1, 1), CoordPoint(0, 1),
                                      CoordPoint(-1, 2), CoordPoint(0, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("T5",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-5, 0),
                                      CoordPoint(-4, 0), CoordPoint(-1, 0),
@@ -399,7 +399,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(-3, -2), CoordPoint(-2, -2),
                                      CoordPoint(-1, -2), CoordPoint(0, -2),
                                      CoordPoint(-1, -3), CoordPoint(0, -3) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("L5",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
@@ -411,7 +411,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(3, -1), CoordPoint(4, -1),
                                      CoordPoint(-3, -1), CoordPoint(-2, -1),
                                      CoordPoint(-3, -2), CoordPoint(-2, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("N4.5",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(-3, -1),
                                      CoordPoint(-2, -1), CoordPoint(-1, -1),
@@ -422,7 +422,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(-3, 1), CoordPoint(-2, 1),
                                      CoordPoint(-1, 1), CoordPoint(0, 1),
                                      CoordPoint(-1, 2), CoordPoint(0, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-3, 0),
                                      CoordPoint(-2, 0), CoordPoint(-1, 0),
@@ -432,7 +432,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(-1, 1), CoordPoint(0, 1),
                                      CoordPoint(1, 1), CoordPoint(2, 1),
                                      CoordPoint(-1, 2), CoordPoint(0, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("T4",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-3, 0),
                                      CoordPoint(-2, 0), CoordPoint(-1, 0),
@@ -442,7 +442,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(1, -2), CoordPoint(2, -2),
                                      CoordPoint(-3, 1), CoordPoint(-2, 1),
                                      CoordPoint(1, 1), CoordPoint(2, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("L4",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
@@ -452,7 +452,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(3, -1), CoordPoint(4, -1),
                                      CoordPoint(-3, -1), CoordPoint(-2, -1),
                                      CoordPoint(-3, -2), CoordPoint(-2, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("I4",
                         PiecePoints{ CoordPoint(-2, -1), CoordPoint(-3, -1),
                                      CoordPoint(-3, -2), CoordPoint(-2, -2),
@@ -462,7 +462,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(1, 0), CoordPoint(2, 0),
                                      CoordPoint(4, 2), CoordPoint(3, 2),
                                      CoordPoint(3, 1), CoordPoint(4, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("L3.5",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
                                      CoordPoint(-3, -1), CoordPoint(-2, -1),
@@ -471,7 +471,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(1, -2), CoordPoint(2, -2),
                                      CoordPoint(-5, -2), CoordPoint(-4, -2),
                                      CoordPoint(-3, -2), CoordPoint(-2, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("V",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
                                      CoordPoint(-3, -1), CoordPoint(-2, -1),
@@ -479,7 +479,7 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(1, -1), CoordPoint(2, -1),
                                      CoordPoint(1, -2), CoordPoint(2, -2),
                                      CoordPoint(-3, -2), CoordPoint(-2, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("I3",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
                                      CoordPoint(-3, -1), CoordPoint(-2, -1),
@@ -487,94 +487,94 @@ vector<PieceInfo> create_pieces_gembloq(const Geometry& geo,
                                      CoordPoint(-1, -1), CoordPoint(0, -1),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
                                      CoordPoint(1, 1), CoordPoint(2, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("L2.5",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
                                      CoordPoint(-3, -1), CoordPoint(-2, -1),
                                      CoordPoint(-1, -1), CoordPoint(0, -1),
                                      CoordPoint(1, -1), CoordPoint(2, -1),
                                      CoordPoint(-3, -2), CoordPoint(-2, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("2",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
                                      CoordPoint(-1, -1), CoordPoint(0, -1),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
                                      CoordPoint(1, 1), CoordPoint(2, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("1.5",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
                                      CoordPoint(-1, -1), CoordPoint(0, -1),
                                      CoordPoint(1, 0), CoordPoint(2, 0)},
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(-1, 0),
                                      CoordPoint(-1, -1), CoordPoint(0, -1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     return pieces;
 }
 
 vector<PieceInfo> create_pieces_junior(const Geometry& geo,
-                                       PieceSet piece_set,
                                        const PieceTransforms& transforms)
 {
+    auto geometry_type = GeometryType::classic;
     vector<PieceInfo> pieces;
     pieces.reserve(12);
     pieces.emplace_back("L5",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(1, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("P",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(1, 0),
                                      CoordPoint(1, -1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("I5",
                         PiecePoints{ CoordPoint(0, 2), CoordPoint(0, 1),
                                      CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 0), CoordPoint(1, -1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("T4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("Z4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("L4",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("I4",
                         PiecePoints{ CoordPoint(0, 1), CoordPoint(0, 0),
                                      CoordPoint(0, -1), CoordPoint(0, -2) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("V3",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(0, -1),
                                      CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("I3",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("2",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(0, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0), 2);
+                        geo, transforms, geometry_type, CoordPoint(0, 0), 2);
     return pieces;
 }
 
 vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
-                                       PieceSet piece_set,
                                        const PieceTransforms& transforms)
 {
+    auto geometry_type = GeometryType::trigon;
     vector<PieceInfo> pieces;
     // Define the 22 standard Trigon pieces. The piece names are similar to one
     // of the possible notations from the thread "Trigon book: how to play, how
@@ -588,111 +588,111 @@ vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(2, -1),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(-1, 1), CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("L6",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(2, -1),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(1, 0));
+                        geo, transforms, geometry_type, CoordPoint(1, 0));
     pieces.emplace_back("V",
                         PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, -1),
                                      CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("S",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, -1),
                                      CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(-1, 1), CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("P6",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
                                      CoordPoint(-1, 1), CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(1, 0));
+                        geo, transforms, geometry_type, CoordPoint(1, 0));
     pieces.emplace_back("F",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1),
                                      CoordPoint(2, 1), CoordPoint(1, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("W",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(2, 0), CoordPoint(3, 0) },
-                        geo, transforms, piece_set, CoordPoint(1, 0));
+                        geo, transforms, geometry_type, CoordPoint(1, 0));
     pieces.emplace_back("A6",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
                                      CoordPoint(0, 1), CoordPoint(2, 1) },
-                        geo, transforms, piece_set, CoordPoint(1, 0));
+                        geo, transforms, geometry_type, CoordPoint(1, 0));
     pieces.emplace_back("G",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 1), CoordPoint(2, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("Y",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(-1, 1), CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("X",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(-1, 1),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(-1, -1), CoordPoint(0, -1),
                                      CoordPoint(1, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 0), CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("I5",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(-1, 1),
                                      CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("L5",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("C5",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1),
                                      CoordPoint(2, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("P5",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(1, 0));
+                        geo, transforms, geometry_type, CoordPoint(1, 0));
     pieces.emplace_back("I4",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(-1, 1), CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("C4",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("A4",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0), CoordPoint(2, 0) },
-                        geo, transforms, piece_set, CoordPoint(1, 0));
+                        geo, transforms, geometry_type, CoordPoint(1, 0));
     pieces.emplace_back("I3",
                         PiecePoints{ CoordPoint(1, -1), CoordPoint(0, 0),
                                      CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(1, 0));
+                        geo, transforms, geometry_type, CoordPoint(1, 0));
     pieces.emplace_back("2",
                         PiecePoints{ CoordPoint(0, 0), CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(0, 0) },
-                        geo, transforms, piece_set, CoordPoint(0, 0));
+                        geo, transforms, geometry_type, CoordPoint(0, 0));
     return pieces;
 }
 
 vector<PieceInfo> create_pieces_nexos(const Geometry& geo,
-                                      PieceSet piece_set,
                                       const PieceTransforms& transforms)
 {
+    auto geometry_type = GeometryType::nexos;
     vector<PieceInfo> pieces;
     pieces.reserve(24);
     pieces.emplace_back("I4",
@@ -700,106 +700,106 @@ vector<PieceInfo> create_pieces_nexos(const Geometry& geo,
                                      CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2),
                                      CoordPoint(0, 3) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("L4",
                         PiecePoints{ CoordPoint(0, -3), CoordPoint(0, -2),
                                      CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("Y",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2),
                                      CoordPoint(0, 3)},
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("N",
                         PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2),
                                      CoordPoint(0, 3)},
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("V4",
                         PiecePoints{ CoordPoint(-3, 0), CoordPoint(-2, 0),
                                      CoordPoint(-1, 0), CoordPoint(0, -1),
                                      CoordPoint(0, -2), CoordPoint(0, -3) },
-                        geo, transforms, piece_set, CoordPoint(-1, 0));
+                        geo, transforms, geometry_type, CoordPoint(-1, 0));
     pieces.emplace_back("W",
                         PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 2)},
-                        geo, transforms, piece_set, CoordPoint(-1, 0));
+                        geo, transforms, geometry_type, CoordPoint(-1, 0));
     pieces.emplace_back("Z4",
                         PiecePoints{ CoordPoint(-1, -2), CoordPoint(0, -1),
                                      CoordPoint(0, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("T4",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2),
                                      CoordPoint(0, 3) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("E",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(-1, 2)},
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("U4",
                         PiecePoints{ CoordPoint(-2, -1), CoordPoint(-1, 0),
                                      CoordPoint(0, 0), CoordPoint(1, 0),
                                      CoordPoint(2, -1) },
-                        geo, transforms, piece_set, CoordPoint(-1, 0));
+                        geo, transforms, geometry_type, CoordPoint(-1, 0));
     pieces.emplace_back("X",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(-1, 0),
                                      CoordPoint(1, 0), CoordPoint(0, 1)},
-                        geo, transforms, piece_set, CoordPoint(0, -1));
+                        geo, transforms, geometry_type, CoordPoint(0, -1));
     pieces.emplace_back("F",
                         PiecePoints{ CoordPoint(1, -2), CoordPoint(0, -1),
                                      CoordPoint(1, 0), CoordPoint(0, 1)},
-                        geo, transforms, piece_set, CoordPoint(0, -1));
+                        geo, transforms, geometry_type, CoordPoint(0, -1));
     pieces.emplace_back("H",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(2, 1)},
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("J",
                         PiecePoints{ CoordPoint(0, -3), CoordPoint(0, -2),
                                      CoordPoint(0, -1), CoordPoint(-1, 0),
                                      CoordPoint(-2, -1) },
-                        geo, transforms, piece_set, CoordPoint(-1, 0));
+                        geo, transforms, geometry_type, CoordPoint(-1, 0));
     pieces.emplace_back("G",
                         PiecePoints{ CoordPoint(2, -1), CoordPoint(1, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 2)},
-                        geo, transforms, piece_set, CoordPoint(1, 0));
+                        geo, transforms, geometry_type, CoordPoint(1, 0));
     pieces.emplace_back("O",
                         PiecePoints{ CoordPoint(1, 0), CoordPoint(2, 1),
                                      CoordPoint(0, 1), CoordPoint(1, 2)},
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("I3",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(0, 2),
                                      CoordPoint(0, 3) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("L3",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1), CoordPoint(1, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("T3",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(1, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("Z3",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, 1),
                                      CoordPoint(1, 2) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("U3",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(1, 0),
                                      CoordPoint(2, -1) },
-                        geo, transforms, piece_set, CoordPoint(1, 0));
+                        geo, transforms, geometry_type, CoordPoint(1, 0));
     pieces.emplace_back("V2",
                         PiecePoints{ CoordPoint(-1, 0), CoordPoint(0, -1) },
-                        geo, transforms, piece_set, CoordPoint(-1, 0));
+                        geo, transforms, geometry_type, CoordPoint(-1, 0));
     pieces.emplace_back("I2",
                         PiecePoints{ CoordPoint(0, -1), CoordPoint(0, 0),
                                      CoordPoint(0, 1) },
-                        geo, transforms, piece_set, CoordPoint(0, 1));
+                        geo, transforms, geometry_type, CoordPoint(0, 1));
     pieces.emplace_back("1",
                         PiecePoints{ CoordPoint(1, 0) },
-                        geo, transforms, piece_set, CoordPoint(1, 0));
+                        geo, transforms, geometry_type, CoordPoint(1, 0));
     return pieces;
 }
 
@@ -859,7 +859,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
     {
     case PieceSet::classic:
         m_transforms = make_unique<PieceTransformsClassic>();
-        m_pieces = create_pieces_classic(m_geo, piece_set, *m_transforms);
+        m_pieces = create_pieces_classic(m_geo, *m_transforms);
         m_max_piece_size = 5;
         m_max_adj_attach = 16;
         m_move_info.reset(calloc(m_range, sizeof(MoveInfo<5>)));
@@ -867,7 +867,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         break;
     case PieceSet::junior:
         m_transforms = make_unique<PieceTransformsClassic>();
-        m_pieces = create_pieces_junior(m_geo, piece_set, *m_transforms);
+        m_pieces = create_pieces_junior(m_geo, *m_transforms);
         m_max_piece_size = 5;
         m_max_adj_attach = 16;
         m_move_info.reset(calloc(m_range, sizeof(MoveInfo<5>)));
@@ -875,7 +875,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         break;
     case PieceSet::trigon:
         m_transforms = make_unique<PieceTransformsTrigon>();
-        m_pieces = create_pieces_trigon(m_geo, piece_set, *m_transforms);
+        m_pieces = create_pieces_trigon(m_geo, *m_transforms);
         m_max_piece_size = 6;
         m_max_adj_attach = 22;
         m_move_info.reset(calloc(m_range, sizeof(MoveInfo<6>)));
@@ -883,7 +883,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         break;
     case PieceSet::nexos:
         m_transforms = make_unique<PieceTransformsClassic>();
-        m_pieces = create_pieces_nexos(m_geo, piece_set, *m_transforms);
+        m_pieces = create_pieces_nexos(m_geo, *m_transforms);
         m_max_piece_size = 7;
         m_max_adj_attach = 12;
         m_move_info.reset(calloc(m_range, sizeof(MoveInfo<7>)));
@@ -891,7 +891,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         break;
     case PieceSet::callisto:
         m_transforms = make_unique<PieceTransformsClassic>();
-        m_pieces = create_pieces_callisto(m_geo, piece_set, *m_transforms);
+        m_pieces = create_pieces_callisto(m_geo, *m_transforms);
         m_max_piece_size = 5;
         // m_max_adj_attach is actually 10 in Callisto, but we care more about
         // the performance in the classic Blokus variants and some code is
@@ -903,7 +903,7 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         break;
     case PieceSet::gembloq:
         m_transforms = make_unique<PieceTransformsGembloQ>();
-        m_pieces = create_pieces_gembloq(m_geo, piece_set, *m_transforms);
+        m_pieces = create_pieces_gembloq(m_geo, *m_transforms);
         m_max_piece_size = 22;
         m_max_adj_attach = 44;
         m_move_info.reset(calloc(m_range, sizeof(MoveInfo<22>)));

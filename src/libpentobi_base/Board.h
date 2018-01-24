@@ -230,6 +230,8 @@ public:
 
     PieceSet get_piece_set() const { return m_piece_set; }
 
+    GeometryType get_geometry_type() const { return m_geometry_type; }
+
     bool is_callisto() const { return m_is_callisto; }
 
     /** Whether ties are broken in the current game variant. */
@@ -383,6 +385,8 @@ private:
     Variant m_variant;
 
     PieceSet m_piece_set;
+
+    GeometryType m_geometry_type;
 
     Color::IntType m_nu_colors;
 

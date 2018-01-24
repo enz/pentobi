@@ -64,6 +64,21 @@ enum class BoardType
 
 //-----------------------------------------------------------------------------
 
+enum class GeometryType
+{
+    classic,
+
+    trigon,
+
+    nexos,
+
+    callisto,
+
+    gembloq
+};
+
+//-----------------------------------------------------------------------------
+
 /** Game variant. */
 enum class Variant
 {
@@ -106,8 +121,6 @@ enum class Variant
     gembloq_3
 };
 
-static const int nu_game_variants = 18;
-
 //-----------------------------------------------------------------------------
 
 /** Get name of game variant as in the GM property in Blokus SGF files. */
@@ -145,6 +158,8 @@ Color::IntType get_nu_players(Variant variant);
 const Geometry& get_geometry(BoardType board_type);
 
 const Geometry& get_geometry(Variant variant);
+
+GeometryType get_geometry_type(Variant variant);
 
 BoardType get_board_type(Variant variant);
 

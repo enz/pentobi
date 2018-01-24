@@ -137,6 +137,43 @@ const Geometry& get_geometry(Variant variant)
     return get_geometry(get_board_type(variant));
 }
 
+GeometryType get_geometry_type(Variant variant)
+{
+    GeometryType result = GeometryType::classic; // Init to avoid compiler warning
+    switch (variant)
+    {
+    case Variant::classic:
+    case Variant::classic_2:
+    case Variant::classic_3:
+    case Variant::duo:
+    case Variant::junior:
+        result = GeometryType::classic;
+        break;
+    case Variant::trigon:
+    case Variant::trigon_2:
+    case Variant::trigon_3:
+        result = GeometryType::trigon;
+        break;
+    case Variant::nexos:
+    case Variant::nexos_2:
+        result = GeometryType::nexos;
+        break;
+    case Variant::callisto:
+    case Variant::callisto_2:
+    case Variant::callisto_2_4:
+    case Variant::callisto_3:
+        result = GeometryType::callisto;
+        break;
+    case Variant::gembloq:
+    case Variant::gembloq_2:
+    case Variant::gembloq_2_4:
+    case Variant::gembloq_3:
+        result = GeometryType::gembloq;
+        break;
+    }
+    return result;
+}
+
 Color::IntType get_nu_colors(Variant variant)
 {
     Color::IntType result = 0; // Init to avoid compiler warning
@@ -407,7 +444,6 @@ bool parse_variant_id(const string& s, Variant& variant)
 
 const char* to_string(Variant variant)
 {
-    LIBBOARDGAME_ASSERT(static_cast<int>(variant) < nu_game_variants);
     const char* result = nullptr; // Init to avoid compiler warning
     switch (variant)
     {

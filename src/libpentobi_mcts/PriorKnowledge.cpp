@@ -15,6 +15,7 @@
 namespace libpentobi_mcts {
 
 using libpentobi_base::BoardType;
+using libpentobi_base::GeometryType;
 using libpentobi_base::Color;
 using libpentobi_base::PointState;
 using libpentobi_base::PieceSet;
@@ -33,6 +34,7 @@ void PriorKnowledge::init_variant(const Board& bd)
     auto& geo = bd.get_geometry();
     auto board_type = bd.get_board_type();
     auto piece_set = bd.get_piece_set();
+    auto geometry_type = bd.get_geometry_type();
 
     // Init m_dist_to_center
     auto width = static_cast<float>(geo.get_width());
@@ -302,7 +304,7 @@ void PriorKnowledge::init_variant(const Board& bd)
         gamma_piece_score_5 = 1; // unused
         gamma_piece_score_6 = 1; // unused
     }
-    else if (piece_set == PieceSet::callisto)
+    else if (geometry_type == GeometryType::callisto)
     {
         Float temperature = 0.84f;
         // Tuned for callisto_2_4

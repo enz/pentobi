@@ -87,7 +87,7 @@ NormalizedPoints normalize(const PiecePoints& points, unsigned point_type,
 
 PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
                      const Geometry& geo, const PieceTransforms& transforms,
-                     PieceSet piece_set, CoordPoint label_pos,
+                     GeometryType geometry_type, CoordPoint label_pos,
                      unsigned nu_instances)
     : m_nu_instances(nu_instances),
       m_points(points),
@@ -138,7 +138,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
         }
         all_transformed_points.push_back(normalized);
     }
-    if (piece_set == PieceSet::nexos)
+    if (geometry_type == GeometryType::nexos)
     {
         m_score_points = 0;
         for (auto& p : points)
@@ -149,9 +149,9 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
                 ++m_score_points;
         }
     }
-    else if (piece_set == PieceSet::gembloq)
+    else if (geometry_type == GeometryType::gembloq)
         m_score_points = 0.25f * static_cast<ScoreType>(points.size());
-    else if (points.size() == 1 && piece_set == PieceSet::callisto)
+    else if (points.size() == 1 && geometry_type == GeometryType::callisto)
         m_score_points = 0;
     else
         m_score_points = static_cast<ScoreType>(points.size());

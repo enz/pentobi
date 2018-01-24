@@ -379,7 +379,8 @@ void Board::init_variant(Variant variant)
     m_nu_players = libpentobi_base::get_nu_players(variant);
     m_bc = &BoardConst::get(variant);
     m_piece_set = m_bc->get_piece_set();
-    m_is_callisto = (m_piece_set == PieceSet::callisto);
+    m_geometry_type = libpentobi_base::get_geometry_type(variant);
+    m_is_callisto = (m_geometry_type == GeometryType::callisto);
     if ((m_piece_set == PieceSet::classic && variant != Variant::junior)
             || m_piece_set == PieceSet::trigon)
     {
