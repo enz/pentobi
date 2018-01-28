@@ -814,8 +814,7 @@ void State::start_search()
     m_bd.set_to_play(m_shared_const.to_play);
     m_bd.take_snapshot();
     m_nu_colors = bd.get_nu_colors();
-    const auto piece_set = bd.get_piece_set();
-    m_is_callisto = (piece_set == PieceSet::callisto);
+    m_is_callisto = bd.is_callisto();
     for (Color c : Color::Range(m_nu_colors))
         m_playout_features[c].init_snapshot(m_bd, c);
     m_bc = &m_bd.get_board_const();
