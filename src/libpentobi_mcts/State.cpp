@@ -743,12 +743,12 @@ void State::init_moves_without_gamma(Color c)
     marker.clear(moves);
     auto& pieces = get_pieces_considered<IS_CALLISTO>(c);
     auto& is_forbidden = m_bd.is_forbidden(c);
-    if (m_bd.is_first_piece(c) && ! (MAX_SIZE == 5 && IS_CALLISTO))
+    if (m_bd.is_first_piece(c) && ! IS_CALLISTO)
         add_starting_moves<MAX_SIZE>(c, pieces, false, moves);
     else
     {
         unsigned nu_moves = 0;
-        if (MAX_SIZE == 5 && IS_CALLISTO)
+        if (IS_CALLISTO)
         {
             float total_gamma_dummy;
             add_callisto_one_piece_moves(c, false, total_gamma_dummy, moves,
