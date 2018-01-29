@@ -26,6 +26,11 @@ class MoveMarker;
 //-----------------------------------------------------------------------------
 
 /** Blokus board.
+    The implementation is speed-optimized for Monte-Carlo tree search. Only
+    data that is needed during the MCTS search is computed incrementally.
+    For the same reason, it does not provide an undo function, but instead
+    a snapshot state that can can be restored quickly at the start of each
+    MCTS simulation.
     @note @ref libboardgame_avoid_stack_allocation */
 class Board
 {
