@@ -35,32 +35,9 @@ Item {
             return 20
         }
     }
-    property int rows: {
-        switch (gameVariant) {
-        case "duo":
-        case "junior":
-            return 14
-        case "callisto_2":
-            return 16
-        case "trigon":
-        case "trigon_2":
-            return 18
-        case "trigon_3":
-            return 16
-        case "nexos":
-        case "nexos_2":
-            return 25
-        case "gembloq":
-        case "gembloq_2_4":
-            return 28
-        case "gembloq_2":
-            return 22
-        case "gembloq_3":
-            return 26
-        default:
-            return 20
-        }
-    }
+    property int rows:
+        isTrigon ? (columns + 1) / 2 : isGembloQ ? columns / 2 : columns
+
     // Avoid fractional piece element sizes if the piece elements are squares
     property real gridWidth: {
         var sideLength
