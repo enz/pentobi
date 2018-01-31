@@ -10,7 +10,6 @@
 
 #include "Test.h"
 
-#include <sstream>
 #include <map>
 #include "libboardgame_util/Assert.h"
 #include "libboardgame_util/Log.h"

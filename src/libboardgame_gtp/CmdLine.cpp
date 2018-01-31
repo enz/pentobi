@@ -10,7 +10,6 @@
 
 #include "CmdLine.h"
 
-#include <cassert>
 #include <limits>
 #include <sstream>
 

@@ -15,7 +15,6 @@
 #include <QDir>
 #include <QFile>
 #include <QSettings>
-#include <QString>
 #include "Util.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_mcts/Player.h"
