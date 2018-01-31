@@ -22,7 +22,6 @@
 #include "libboardgame_util/Barrier.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
-#include "libboardgame_util/MathUtil.h"
 #include "libboardgame_util/Statistics.h"
 #include "libboardgame_util/StringUtil.h"
 #include "libboardgame_util/TimeIntervalChecker.h"
