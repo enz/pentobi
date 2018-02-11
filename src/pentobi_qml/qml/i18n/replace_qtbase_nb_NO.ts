@@ -5,7 +5,7 @@
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation></translation>
+        <translation>Avbryt</translation>
     </message>
 </context>
 </TS>
