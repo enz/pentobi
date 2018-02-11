@@ -9,25 +9,25 @@
     </message>
     <message>
         <source>Loss</source>
-        <translation></translation>
+        <translation>Tap</translation>
     </message>
     <message>
         <source>Running game analysis...</source>
-        <translation></translation>
+        <translation type="unfinished">Kjører spillanalyse…</translation>
     </message>
 </context>
 <context>
     <name>AnalyzeGameWindow</name>
     <message>
         <source>Game Analysis</source>
-        <translation></translation>
+        <translation>Spillanalyse</translation>
     </message>
 </context>
 <context>
     <name>AnalyzeSpeedDialog</name>
     <message>
         <source>Fast</source>
-        <translation></translation>
+        <translation>Rask</translation>
     </message>
     <message>
         <source>Normal</source>
@@ -35,74 +35,74 @@
     </message>
     <message>
         <source>Slow</source>
-        <translation></translation>
+        <translation>Treg</translation>
     </message>
     <message>
         <source>Analysis speed:</source>
-        <translation></translation>
+        <translation>Analysehastighet:</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>About Pentobi</source>
-        <translation></translation>
+        <translation>Om Pentobi</translation>
     </message>
     <message>
         <source>Next &amp;Color</source>
-        <translation></translation>
+        <translation>Beste &amp;farge</translation>
     </message>
     <message>
         <source>S&amp;etup Mode</source>
-        <translation></translation>
+        <translation>O&amp;ppsettsmodus</translation>
     </message>
     <message>
         <source>Could not read file &apos;%1&apos;</source>
-        <translation></translation>
+        <translation>Kunne ikke lese filen &apos;%1&apos;</translation>
     </message>
     <message>
         <source>The file is not a valid Blokus SGF file.</source>
-        <translation></translation>
+        <translation>Filen er ikke en gyldig Blokus SGF-fil.</translation>
     </message>
     <message>
         <source>Truncate this subtree?</source>
-        <translation></translation>
+        <translation>Forkort dette undertreet?</translation>
     </message>
     <message>
         <source>This position and all following moves and variations will be removed from the game tree.</source>
-        <translation></translation>
+        <translation>Denne posisjonen og alle påfølgende trekk og variasjoner vil bli fjernet fra spilltreet.</translation>
     </message>
     <message>
         <source>Truncate</source>
-        <translation></translation>
+        <translation>Forkort</translation>
     </message>
     <message>
         <source>Truncate children?</source>
-        <translation></translation>
+        <translation>Forkort underprosess?</translation>
     </message>
     <message>
         <source>All following moves and variations will be removed from the game tree.</source>
-        <translation></translation>
+        <translation>Alle påfølgende trekk og variasjoner vil bli fjernet fra spilltreet.</translation>
     </message>
     <message>
         <source>Truncate Children</source>
-        <translation></translation>
+        <translation>Forkort underprosesser</translation>
     </message>
     <message>
         <source>Could not delete %1</source>
-        <translation></translation>
+        <translation>Kunne ikke slette %1</translation>
     </message>
     <message>
         <source>Rated game</source>
-        <translation></translation>
+        <translation>Poenggitt spill</translation>
     </message>
     <message>
         <source>Continuing unfinished rated game.</source>
-        <translation></translation>
+        <translation>Fortsetter uferdig poenggitt spill.</translation>
     </message>
     <message>
         <source>You play %1 in this game.</source>
-        <translation></translation>
+        <translation>Du spiller %1 i dette spillet.</translation>
     </message>
     <message>
         <source>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</source>
@@ -110,67 +110,67 @@
     </message>
     <message>
         <source>Analyze Game</source>
-        <translation></translation>
+        <translation>Analyser spill</translation>
     </message>
     <message>
         <source>&amp;About Pentobi</source>
-        <translation></translation>
+        <translation>&amp;Om Pentobi</translation>
     </message>
     <message>
         <source>&amp;Analyze Game...</source>
-        <translation></translation>
+        <translation type="unfinished">&amp;Analyser spill…</translation>
     </message>
     <message>
         <source>B&amp;ackward</source>
-        <translation></translation>
+        <translation>&amp;Tilbake</translation>
     </message>
     <message>
         <source>Go one move backward</source>
-        <translation></translation>
+        <translation>Gå ett steg bakover</translation>
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
-        <translation></translation>
+        <translation>Tilbake til &amp;hovedvariasjon</translation>
     </message>
     <message>
         <source>&amp;Bad</source>
-        <translation></translation>
+        <translation>&amp;Dårlig</translation>
     </message>
     <message>
         <source>&amp;Beginning</source>
-        <translation></translation>
+        <translation>&amp;Begynnelsen</translation>
     </message>
     <message>
         <source>Go to beginning of game</source>
-        <translation></translation>
+        <translation>Gå til begynnelsen av spillet</translation>
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation></translation>
+        <translation>Begynnelse på for&amp;greining</translation>
     </message>
     <message>
         <source>Clear Piece</source>
-        <translation></translation>
+        <translation>Fjern spillbrikke</translation>
     </message>
     <message>
         <source>&amp;Computer Colors</source>
-        <translation></translation>
+        <translation>&amp;Datamaskinfarger</translation>
     </message>
     <message>
         <source>Set the colors played by the computer</source>
-        <translation></translation>
+        <translation>Sett fargene spilt av datamaskinen</translation>
     </message>
     <message>
         <source>C&amp;oordinates</source>
-        <translation></translation>
+        <translation>K&amp;oordinater</translation>
     </message>
     <message>
         <source>&amp;Delete All Variations</source>
-        <translation></translation>
+        <translation>&amp;Slett alle variasjoner</translation>
     </message>
     <message>
         <source>&amp;Doubtful</source>
-        <translation></translation>
+        <translation>&amp;Tvilsom</translation>
     </message>
     <message>
         <source>&amp;End</source>
@@ -178,39 +178,39 @@
     </message>
     <message>
         <source>Go to end of moves</source>
-        <translation></translation>
+        <translation>Gå til trekkslutt</translation>
     </message>
     <message>
         <source>&amp;ASCII Art</source>
-        <translation></translation>
+        <translation>&amp;ASCII-kunst</translation>
     </message>
     <message>
         <source>I&amp;mage</source>
-        <translation></translation>
+        <translation>&amp;Grafikk</translation>
     </message>
     <message>
         <source>&amp;Find Move</source>
-        <translation></translation>
+        <translation>&amp;Finn trekk</translation>
     </message>
     <message>
         <source>Flip Horizontally</source>
-        <translation></translation>
+        <translation>Vend vannrett</translation>
     </message>
     <message>
         <source>Flip Vertically</source>
-        <translation></translation>
+        <translation>Vend loddrett</translation>
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation></translation>
+        <translation>&amp;Framover</translation>
     </message>
     <message>
         <source>Go one move forward</source>
-        <translation></translation>
+        <translation>Gå ett steg forover</translation>
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation></translation>
+        <translation>&amp;Fullskjermsvisning</translation>
     </message>
     <message>
         <source>Ga&amp;me Info</source>
@@ -226,51 +226,51 @@
     </message>
     <message>
         <source>&amp;Good</source>
-        <translation></translation>
+        <translation>&amp;God</translation>
     </message>
     <message>
         <source>Game analysis is only possible in the main variation.</source>
-        <translation></translation>
+        <translation>Spillanalyse er kun tilgjengelig i hovedvariasjonen.</translation>
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
-        <translation></translation>
+        <translation>Finn neste &amp;kommentar</translation>
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation></translation>
+        <translation>&amp;Gå til trekk…</translation>
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
-        <translation></translation>
+        <translation>Pentobi-&amp;help</translation>
     </message>
     <message>
         <source>I&amp;nteresting</source>
-        <translation></translation>
+        <translation>&amp;Interessant</translation>
     </message>
     <message>
         <source>&amp;Keep Only Position</source>
-        <translation></translation>
+        <translation>&amp;Kun behold posisjonen</translation>
     </message>
     <message>
         <source>Keep Only &amp;Subtree</source>
-        <translation></translation>
+        <translation>Kun behold &amp;undertreet</translation>
     </message>
     <message>
         <source>Leave Fullscreen</source>
-        <translation></translation>
+        <translation>Forlat fullskjermsvisning</translation>
     </message>
     <message>
         <source>M&amp;ake Main Variation</source>
-        <translation></translation>
+        <translation>G&amp;jør til hovedvariasjon</translation>
     </message>
     <message>
         <source>Move Variation D&amp;own</source>
-        <translation></translation>
+        <translation>Flytt variasjon n&amp;edover</translation>
     </message>
     <message>
         <source>Move Variation &amp;Up</source>
-        <translation></translation>
+        <translation>Flytt variasjon &amp;oppover</translation>
     </message>
     <message>
         <source>&amp;1</source>
@@ -311,19 +311,19 @@
     </message>
     <message>
         <source>Next Piece</source>
-        <translation></translation>
+        <translation>Neste spillbrikke</translation>
     </message>
     <message>
         <source>&amp;Next Variation</source>
-        <translation></translation>
+        <translation>&amp;Neste variasjon</translation>
     </message>
     <message>
         <source>Go to next variation</source>
-        <translation></translation>
+        <translation>Gå til neste variasjon</translation>
     </message>
     <message>
         <source>&amp;Rated Game</source>
-        <translation></translation>
+        <translation>&amp;Vurdert spill</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -331,7 +331,7 @@
     </message>
     <message>
         <source>Start a new game</source>
-        <translation></translation>
+        <translation>Start nytt spill</translation>
     </message>
     <message>
         <source>N&amp;one</source>
@@ -344,51 +344,51 @@
     </message>
     <message>
         <source>&amp;Play</source>
-        <translation></translation>
+        <translation>&amp;Spill</translation>
     </message>
     <message>
         <source>Play &amp;Single Move</source>
-        <translation></translation>
+        <translation>Spill &amp;enkelttrekk</translation>
     </message>
     <message>
         <source>Previous Piece</source>
-        <translation></translation>
+        <translation>Forrige spillbrikke</translation>
     </message>
     <message>
         <source>&amp;Previous Variation</source>
-        <translation></translation>
+        <translation>&amp;Forrige variasjon</translation>
     </message>
     <message>
         <source>Go to previous variation</source>
-        <translation></translation>
+        <translation>Gå til forrige variasjon</translation>
     </message>
     <message>
         <source>Rotate Anticlockwise</source>
-        <translation></translation>
+        <translation>Roter mot klokka</translation>
     </message>
     <message>
         <source>Rotate Clockwise</source>
-        <translation></translation>
+        <translation>Roter med klokka</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation></translation>
+        <translation>&amp;Avslutt</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation></translation>
+        <translation>&amp;Lagre</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation></translation>
+        <translation>Lagre &amp;som…</translation>
     </message>
     <message>
         <source>&amp;Comment</source>
-        <translation></translation>
+        <translation>&amp;Kommentar</translation>
     </message>
     <message>
         <source>&amp;Rating</source>
-        <translation></translation>
+        <translation>&amp;Vurdering</translation>
     </message>
     <message>
         <source>&amp;No Text</source>
@@ -396,7 +396,7 @@
     </message>
     <message>
         <source>Text &amp;Beside Icons</source>
-        <translation></translation>
+        <translation>Tekst &amp;ved siden av ikoner</translation>
     </message>
     <message>
         <source>Text Bel&amp;ow Icons</source>
@@ -404,7 +404,7 @@
     </message>
     <message>
         <source>&amp;Text Only</source>
-        <translation></translation>
+        <translation>Kun &amp;tekst</translation>
     </message>
     <message>
         <source>&amp;System Default</source>
@@ -412,35 +412,35 @@
     </message>
     <message>
         <source>&amp;Truncate</source>
-        <translation></translation>
+        <translation>&amp;Forkort</translation>
     </message>
     <message>
         <source>Truncate C&amp;hildren</source>
-        <translation></translation>
+        <translation>Forkort &amp;underprosesser</translation>
     </message>
     <message>
         <source>Show &amp;Variations</source>
-        <translation></translation>
+        <translation>Vis &amp;variasjoner</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation></translation>
+        <translation>&amp;Angre trekk</translation>
     </message>
     <message>
         <source>V&amp;ery Bad</source>
-        <translation></translation>
+        <translation>V&amp;eldig dårlig</translation>
     </message>
     <message>
         <source>&amp;Very Good</source>
-        <translation></translation>
+        <translation>&amp;Veldig god</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation></translation>
+        <translation>&amp;Rediger</translation>
     </message>
     <message>
         <source>&amp;Move Annotation</source>
-        <translation></translation>
+        <translation>&amp;Flytt anmerkning</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -448,15 +448,15 @@
     </message>
     <message>
         <source>Toolbar T&amp;ext</source>
-        <translation></translation>
+        <translation>Verktøyst&amp;ekst</translation>
     </message>
     <message>
         <source>&amp;Computer</source>
-        <translation></translation>
+        <translation>&amp;Datamaskin</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
-        <translation></translation>
+        <translation>&amp;Verktøy</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -464,76 +464,76 @@
     </message>
     <message>
         <source>Delete all variations?</source>
-        <translation></translation>
+        <translation>Slett alle variasjoner?</translation>
     </message>
     <message>
         <source>All variations but the main variation will be removed from the game tree.</source>
-        <translation></translation>
+        <translation>Alle variasjoner unntatt hovedvariasjonen vil bli fjernet fra spilltreet.</translation>
     </message>
     <message>
         <source>Delete Variations</source>
-        <translation></translation>
+        <translation>Slett variasjoner</translation>
     </message>
     <message>
         <source>&amp;Toolbar</source>
-        <translation></translation>
+        <translation>&amp;Verktøyslinje</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*)</source>
-        <translation></translation>
+        <translation>Tekstfiler (*.txt);;Alle filer (*)</translation>
     </message>
     <message>
         <source>No comment found</source>
-        <translation></translation>
+        <translation>Fant ikke noen kommentarer</translation>
     </message>
     <message>
         <source>Blokus games (*.blksgf);;All files (*)</source>
-        <translation></translation>
+        <translation>Blokus-spill (*.blksgf);;Alle filer (*)</translation>
     </message>
     <message>
         <source>Move number:</source>
-        <translation></translation>
+        <translation>Trekknummer:</translation>
     </message>
     <message>
         <source>Go to Move</source>
-        <translation></translation>
+        <translation>Gå til trekk</translation>
     </message>
     <message>
         <source>Keep only position?</source>
-        <translation></translation>
+        <translation>Kun behold posisjonen?</translation>
     </message>
     <message>
         <source>All previous and following moves and variations will be removed from the game tree.</source>
-        <translation></translation>
+        <translation>Alle foregående og påfølgende trekk og variasjoner vil bli fjernet fra spilltreet.</translation>
     </message>
     <message>
         <source>Keep only subtree?</source>
-        <translation></translation>
+        <translation>Kun behold undertreet?</translation>
     </message>
     <message>
         <source>All previous moves and variations will be removed from the game tree.</source>
-        <translation></translation>
+        <translation>Alle foregående trekk og variasjoner vil bli fjernet fra spilltreet.</translation>
     </message>
     <message>
         <source>Start rated game?</source>
-        <translation></translation>
+        <translation>Start vurdert spill?</translation>
     </message>
     <message>
         <source>In this game, you play %1 against Pentobi level&amp;nbsp;%2.</source>
-        <translation></translation>
+        <translation>I dette spillet, spiller du %1 mot Pentobi nivå&amp;nbsp;%2.</translation>
     </message>
     <message>
         <source>&amp;Start Game</source>
-        <translation></translation>
+        <translation>&amp;Start spill</translation>
     </message>
     <message>
         <source>Pentobi %1 (level %2)</source>
         <extracomment>The first argument is the version of Pentobi</extracomment>
-        <translation></translation>
+        <translation>Pentobi %1 (nivå %2)</translation>
     </message>
     <message>
         <source>Human</source>
-        <translation></translation>
+        <translation>Menneske</translation>
     </message>
     <message>
         <source>Open</source>
@@ -541,7 +541,7 @@
     </message>
     <message>
         <source>The file could not be saved.</source>
-        <translation></translation>
+        <translation>Filen kunne ikke lagres.</translation>
     </message>
     <message>
         <source>%1: %2</source>
@@ -550,15 +550,15 @@
     </message>
     <message>
         <source>Untitled Game.blksgf</source>
-        <translation></translation>
+        <translation>Spill uten tittel.blksgf</translation>
     </message>
     <message>
         <source>Untitled Game %1.blksgf</source>
-        <translation></translation>
+        <translation>Spill uten tittel %1.blksgf</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation></translation>
+        <translation>Lagre</translation>
     </message>
     <message>
         <source>Pentobi</source>
@@ -570,31 +570,31 @@
     </message>
     <message>
         <source>Computer opponent for the board game Blokus.</source>
-        <translation></translation>
+        <translation>Datamaskinmotstander for brettspillet Blokus.</translation>
     </message>
     <message>
         <source>The file has been modified.</source>
-        <translation></translation>
+        <translation>Filen har blitt endret.</translation>
     </message>
     <message>
         <source>Do you want to save your changes?</source>
-        <translation></translation>
+        <translation>Ønsker du å lagre endringene dine?</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation></translation>
+        <translation>&amp;Ikke lagre</translation>
     </message>
     <message>
         <source>The current game is not finished.</source>
-        <translation></translation>
+        <translation>Nåværende spill er ikke ferdig.</translation>
     </message>
     <message>
         <source>Do you want to abort the game?</source>
-        <translation></translation>
+        <translation>Ønsker du å avbryte spillet?</translation>
     </message>
     <message>
         <source>&amp;Abort Game</source>
-        <translation></translation>
+        <translation>&amp;Avbryt spill</translation>
     </message>
     <message>
         <source>&amp;9</source>
@@ -602,39 +602,39 @@
     </message>
     <message>
         <source>&amp;All with Number</source>
-        <translation></translation>
+        <translation>&amp;Alle med nummer</translation>
     </message>
     <message>
         <source>Last with &amp;Dot</source>
-        <translation></translation>
+        <translation>Siste med &amp;punkt</translation>
     </message>
     <message>
         <source>&amp;Last with Number</source>
-        <translation></translation>
+        <translation>&amp;Siste med nummer</translation>
     </message>
     <message>
         <source>Start a rated game</source>
-        <translation></translation>
+        <translation>Start vurdert spill</translation>
     </message>
     <message>
         <source>Classic (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>Klassisk (&amp;3 spillere)</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation></translation>
+        <translation>&amp;Spill</translation>
     </message>
     <message>
         <source>Game &amp;Variant</source>
-        <translation></translation>
+        <translation>Spill&amp;variant</translation>
     </message>
     <message>
         <source>Open R&amp;ecent</source>
-        <translation></translation>
+        <translation>Åpne n&amp;ylige</translation>
     </message>
     <message>
         <source>E&amp;xport</source>
-        <translation></translation>
+        <translation>E&amp;ksporter</translation>
     </message>
     <message>
         <source>G&amp;o</source>
@@ -642,7 +642,7 @@
     </message>
     <message>
         <source>&amp;Move Marking</source>
-        <translation></translation>
+        <translation>&amp;Flytt markering</translation>
     </message>
     <message>
         <source>Export Image</source>
@@ -650,35 +650,35 @@
     </message>
     <message>
         <source>Image size:</source>
-        <translation></translation>
+        <translation>Bildestørrelse:</translation>
     </message>
     <message>
         <source>The end of the tree was reached.</source>
-        <translation></translation>
+        <translation>Nådde treets slutt.</translation>
     </message>
     <message>
         <source>Continue the search from the start of the tree?</source>
-        <translation></translation>
+        <translation>Fortsett søket fra treets begynnelse?</translation>
     </message>
     <message>
         <source>Continue From Start</source>
-        <translation></translation>
+        <translation>Fortsett fra begynnelsen</translation>
     </message>
     <message>
         <source>Show &amp;Rating</source>
-        <translation></translation>
+        <translation>Vis &amp;vurdering</translation>
     </message>
     <message>
         <source>Pentobi Help</source>
-        <translation></translation>
+        <translation>Pentobi-hjelp</translation>
     </message>
     <message>
         <source>Keep Only Position</source>
-        <translation></translation>
+        <translation>Kun behold posisjonen</translation>
     </message>
     <message>
         <source>Keep Only Subtree</source>
-        <translation></translation>
+        <translation>Kun behold undertreet</translation>
     </message>
     <message>
         <source>[*]%1</source>
@@ -686,87 +686,87 @@
     </message>
     <message>
         <source>Setup mode cannot be used if moves have been played.</source>
-        <translation></translation>
+        <translation>Oppsettsmodus kan ikke brukes hvis trekk har blitt spilt.</translation>
     </message>
     <message>
         <source>Setup mode</source>
-        <translation></translation>
+        <translation>Oppsettsmodus</translation>
     </message>
     <message>
         <source>The game ends in a tie.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort.</translation>
     </message>
     <message>
         <source>The game ends in a tie between all colors.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom alle farger.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue, Yellow and Red.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom blå, gul og rød.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue, Yellow and Green.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom blå, gul og grønn.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue, Red and Green.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom blå, rød og grønn.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Yellow, Red and Green.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom gul, rød og grønn.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue and Yellow.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom blå og gul.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue and Red.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom blå og rød.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue and Green.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom blå og grønn.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Yellow and Red.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom gul og rød.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Yellow and Green.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom gul og grønn.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Red and Green.</source>
-        <translation></translation>
+        <translation>Spillet ender uavgjort mellom rød og grønn.</translation>
     </message>
     <message>
         <source>Blue wins.</source>
-        <translation></translation>
+        <translation>Blå vinner.</translation>
     </message>
     <message>
         <source>Yellow wins.</source>
-        <translation></translation>
+        <translation>Gul vinner.</translation>
     </message>
     <message>
         <source>Red wins.</source>
-        <translation></translation>
+        <translation>Rød vinner.</translation>
     </message>
     <message>
         <source>Green wins.</source>
-        <translation></translation>
+        <translation>Grønn vinner.</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
-        <translation></translation>
+        <translation>Vurderingen din har økt fra %1 til %2.</translation>
     </message>
     <message>
         <source>Your rating stays at %1.</source>
-        <translation></translation>
+        <translation>Din vurdering forblir %1.</translation>
     </message>
     <message>
         <source>Your rating has decreased from %1 to %2.</source>
-        <translation></translation>
+        <translation>Din vurdering har sunket fra %1 til %2.</translation>
     </message>
     <message>
         <source>Error in file &apos;%1&apos;</source>
@@ -774,32 +774,32 @@
     </message>
     <message>
         <source>Move %1</source>
-        <translation></translation>
+        <translation>Trekk %1</translation>
     </message>
     <message numerus="yes">
         <source>%n move(s)</source>
-        <translation><numerusform></numerusform>
-        <numerusform></numerusform>
+        <translation><numerusform>%n trekk</numerusform>
+        <numerusform>%n trekk</numerusform>
         </translation></message>
     <message>
         <source>Move %1 of %2</source>
-        <translation></translation>
+        <translation>Trekk %1 av %2</translation>
     </message>
     <message>
         <source>Move %1 of %2 in variation %3</source>
-        <translation></translation>
+        <translation>Trekk %1 av %2 i variasjon %3</translation>
     </message>
     <message>
         <source>Make the computer continue to play the current color</source>
-        <translation></translation>
+        <translation>Få datamaskinen til å fortsette å spille gjeldende farge</translation>
     </message>
     <message>
         <source>Make the computer play the current color</source>
-        <translation></translation>
+        <translation>Få datamaskinen til å spille gjeldende farge</translation>
     </message>
     <message>
         <source>Classic (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Klassisk (&amp;4 spillere)</translation>
     </message>
     <message>
         <source>J&amp;unior</source>
@@ -807,31 +807,31 @@
     </message>
     <message>
         <source>Classic (&amp;2 Players)</source>
-        <translation></translation>
+        <translation>Klassisk (&amp;2 spillere)</translation>
     </message>
     <message>
         <source>Nexos (&amp;2 Players)</source>
-        <translation></translation>
+        <translation>Nexos (&amp;2 spillere)</translation>
     </message>
     <message>
         <source>Nexos (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Nexos (&amp;4 spillere)</translation>
     </message>
     <message>
         <source>Trigon (&amp;2 Players)</source>
-        <translation></translation>
+        <translation>Trigon (&amp;2 spillere)</translation>
     </message>
     <message>
         <source>Trigon (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>Trigon (&amp;3 spillere)</translation>
     </message>
     <message>
         <source>Trigon (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Trigon (&amp;4 spillere)</translation>
     </message>
     <message>
         <source>&amp;Classic</source>
-        <translation></translation>
+        <translation>&amp;Klassisk</translation>
     </message>
     <message>
         <source>&amp;Trigon</source>
@@ -843,43 +843,43 @@
     </message>
     <message>
         <source>Blue wins with 1 point.</source>
-        <translation></translation>
+        <translation>Blå vinner med ett poeng.</translation>
     </message>
     <message>
         <source>Blue wins with %L1 points.</source>
-        <translation></translation>
+        <translation>Blå vinner med %L1 poeng.</translation>
     </message>
     <message>
         <source>Green wins with 1 point.</source>
-        <translation></translation>
+        <translation>Grønn vinner med ett poeng.</translation>
     </message>
     <message>
         <source>Green wins with %L1 points.</source>
-        <translation></translation>
+        <translation>Grønn vinner med %L1 poeng.</translation>
     </message>
     <message>
         <source>Blue/Red wins with 1 point.</source>
-        <translation></translation>
+        <translation>Blå/rød vinner med ett poeng.</translation>
     </message>
     <message>
         <source>Blue/Red wins with %L1 points.</source>
-        <translation></translation>
+        <translation>Blå/rød vinner med %L1 poeng.</translation>
     </message>
     <message>
         <source>Yellow/Green wins with 1 point.</source>
-        <translation></translation>
+        <translation>Gul/grønn vinner med ett poeng.</translation>
     </message>
     <message>
         <source>Yellow/Green wins with %L1 points.</source>
-        <translation></translation>
+        <translation>Gul/grønn vinner med %L1 poeng.</translation>
     </message>
     <message>
         <source>Callisto (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>Callisto (&amp;3 spillere)</translation>
     </message>
     <message>
         <source>Callisto (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Callisto (&amp;4 spillere)</translation>
     </message>
     <message>
         <source>C&amp;allisto</source>
@@ -903,71 +903,71 @@
     </message>
     <message>
         <source>&amp;Level (Classic, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (klassisk, 4 spillere)</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 2 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (klassisk, 2 spillere)</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (klassisk, 3 spillere)</translation>
     </message>
     <message>
         <source>&amp;Level (Duo)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Duo)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Trigon, 4 spillere)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 2 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Trigon, 2 spillere)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Trigon, 3 spillere)</translation>
     </message>
     <message>
         <source>&amp;Level (Junior)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Junior)</translation>
     </message>
     <message>
         <source>&amp;Level (Nexos, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Nexos, 4 spillere)</translation>
     </message>
     <message>
         <source>&amp;Level (Nexos, 2 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Nexos, 2 spillere)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Callisto, 4 spillere)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Callisto, 3 spillere)</translation>
     </message>
     <message>
         <source>Computer is thinking... (up to %1 seconds remaining)</source>
-        <translation></translation>
+        <translation type="unfinished">Datamaskinen tenker… (opptil %1 sekunder gjenstår)</translation>
     </message>
     <message>
         <source>Computer is thinking... (up to %1 minutes remaining)</source>
-        <translation></translation>
+        <translation type="unfinished">Datamaskinen tenker… (opptil %1 minutter gjenstår)</translation>
     </message>
     <message>
         <source>Computer is thinking...</source>
-        <translation></translation>
+        <translation type="unfinished">Datamaskinen tenker…</translation>
     </message>
     <message>
         <source>GembloQ (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>GembloQ (&amp;3 spillere)</translation>
     </message>
     <message>
         <source>GembloQ (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>GembloQ (&amp;4 spillere)</translation>
     </message>
     <message>
         <source>&amp;GembloQ</source>
@@ -975,82 +975,82 @@
     </message>
     <message>
         <source>&amp;Level (GembloQ, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (GembloQ, 4 spillere)</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (GembloQ, 3 spillere)</translation>
     </message>
     <message>
         <source>GembloQ (2 &amp;Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>GembloQ (2 &amp;spillere, 4 farger)</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 2 Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (GembloQ, 2 spillere, 4 farger)</translation>
     </message>
     <message>
         <source>GembloQ (&amp;2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>GembloQ (&amp;2 spillere, 2 farger)</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (GembloQ, 2 spillere, 2 farger)</translation>
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
-        <translation></translation>
+        <translation>Åpne fra &amp;utklippstavle</translation>
     </message>
     <message>
         <source>Clipboard is empty.</source>
-        <translation></translation>
+        <translation>Utklippstavlen er tom.</translation>
     </message>
     <message>
         <source>Blokus SGF file format error</source>
-        <translation></translation>
+        <translation>Blokus SGF-filformatfeil</translation>
     </message>
     <message>
         <source>Callisto (&amp;2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>Callisto (&amp;2 spillere, 2 farger)</translation>
     </message>
     <message>
         <source>Callisto (2 &amp;Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>Callisto (2 &amp;spillere, 4 farger)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Callisto, 2 spillere, 2 farger)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 2 Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Nivå (Callisto, 2 spillere, 4 farger)</translation>
     </message>
     <message>
         <source>Purple wins with 1 point.</source>
-        <translation></translation>
+        <translation>Lilla vinner med ett poeng.</translation>
     </message>
     <message>
         <source>Purple wins with %L1 points.</source>
-        <translation></translation>
+        <translation>Lilla vinner med %L1 poeng.</translation>
     </message>
     <message>
         <source>Orange wins with 1 point.</source>
-        <translation></translation>
+        <translation>Oransje vinner med ett poeng.</translation>
     </message>
     <message>
         <source>Orange wins with %L1 points.</source>
-        <translation></translation>
+        <translation>Oransje vinner med %L1 poeng.</translation>
     </message>
 </context>
 <context>
     <name>RatedGamesList</name>
     <message>
         <source>Game</source>
-        <translation></translation>
+        <translation>Spill</translation>
     </message>
     <message>
         <source>Your Color</source>
-        <translation></translation>
+        <translation>Din farge</translation>
     </message>
     <message>
         <source>Level</source>
@@ -1058,7 +1058,7 @@
     </message>
     <message>
         <source>Result</source>
-        <translation></translation>
+        <translation>Resultat</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1070,58 +1070,58 @@
     </message>
     <message>
         <source>Tie</source>
-        <translation></translation>
+        <translation>Uavgjort</translation>
     </message>
     <message>
         <source>Loss</source>
-        <translation></translation>
+        <translation>Tap</translation>
     </message>
 </context>
 <context>
     <name>RatingDialog</name>
     <message>
         <source>Rating</source>
-        <translation></translation>
+        <translation>Vurdering</translation>
     </message>
     <message>
         <source>Your rating:</source>
-        <translation></translation>
+        <translation>Din vurdering:</translation>
     </message>
     <message>
         <source>Game variant:</source>
-        <translation></translation>
+        <translation>Spillvariant:</translation>
     </message>
     <message>
         <source>Best previous rating:</source>
-        <translation></translation>
+        <translation>Beste tidligere vurdering:</translation>
     </message>
     <message>
         <source>Recent games:</source>
-        <translation></translation>
+        <translation>Nylige spill:</translation>
     </message>
     <message>
         <source>&amp;Clear</source>
-        <translation></translation>
+        <translation>&amp;Tøm</translation>
     </message>
     <message>
         <source>Clear rating and delete rating history?</source>
-        <translation></translation>
+        <translation>Fjern vurdering og slett vurderingshistorikk?</translation>
     </message>
     <message>
         <source>Clear rating</source>
-        <translation></translation>
+        <translation>Fjern vurdering</translation>
     </message>
     <message>
         <source>Classic (4 players)</source>
-        <translation></translation>
+        <translation>Klassisk (4 spillere)</translation>
     </message>
     <message>
         <source>Classic (2 players)</source>
-        <translation></translation>
+        <translation>Klassisk (2 spillere)</translation>
     </message>
     <message>
         <source>Classic (3 players)</source>
-        <translation></translation>
+        <translation>Klassisk (3 spillere)</translation>
     </message>
     <message>
         <source>Duo</source>
@@ -1129,15 +1129,15 @@
     </message>
     <message>
         <source>Trigon (4 players)</source>
-        <translation></translation>
+        <translation>Trigon (4 spillere)</translation>
     </message>
     <message>
         <source>Trigon (2 players)</source>
-        <translation></translation>
+        <translation>Trigon (2 spillere)</translation>
     </message>
     <message>
         <source>Trigon (3 players)</source>
-        <translation></translation>
+        <translation>Trigon (3 spillere)</translation>
     </message>
     <message>
         <source>Junior</source>
@@ -1145,58 +1145,58 @@
     </message>
     <message>
         <source>Recent development:</source>
-        <translation></translation>
+        <translation>Nylig utvikling:</translation>
     </message>
     <message>
         <source>Nexos (4 players)</source>
-        <translation></translation>
+        <translation>Nexos (4 spillere)</translation>
     </message>
     <message>
         <source>Nexos (2 players)</source>
-        <translation></translation>
+        <translation>Nexos (2 spillere)</translation>
     </message>
     <message>
         <source>Callisto (4 players)</source>
-        <translation></translation>
+        <translation>Callisto (4 spillere)</translation>
     </message>
     <message>
         <source>Callisto (3 players)</source>
-        <translation></translation>
+        <translation>Callisto (3 spillere)</translation>
     </message>
     <message>
         <source>GembloQ (4 players)</source>
-        <translation></translation>
+        <translation>GembloQ (4 spillere)</translation>
     </message>
     <message>
         <source>GembloQ (3 players)</source>
-        <translation></translation>
+        <translation>GembloQ (3 spillere)</translation>
     </message>
     <message>
         <source>GembloQ (2 players, 4 colors)</source>
-        <translation></translation>
+        <translation>GembloQ (2 spillere, 4 farger)</translation>
     </message>
     <message>
         <source>GembloQ (2 players, 2 colors)</source>
-        <translation></translation>
+        <translation>GembloQ (2 spillere, 2 farger)</translation>
     </message>
     <message>
         <source>Callisto (2 players, 2 colors)</source>
-        <translation></translation>
+        <translation>Callisto (2 spillere, 2 farger)</translation>
     </message>
     <message>
         <source>Callisto (2 players, 4 colors)</source>
-        <translation></translation>
+        <translation>Callisto (2 spillere, 4 farger)</translation>
     </message>
     <message>
         <source>Rated games:</source>
-        <translation></translation>
+        <translation>Vurderte spill:</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>Not enough memory.</source>
-        <translation></translation>
+        <translation>Ikke nok minne.</translation>
     </message>
     <message>
         <source>Pentobi</source>
