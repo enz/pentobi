@@ -46,7 +46,7 @@
     <name>MainWindow</name>
     <message>
         <source>About Pentobi</source>
-        <translation></translation>
+        <translation>À &amp;propos de Pentobi</translation>
     </message>
     <message>
         <source>Next &amp;Color</source>
@@ -114,7 +114,7 @@
     </message>
     <message>
         <source>&amp;About Pentobi</source>
-        <translation></translation>
+        <translation>À &amp;propos de Pentobi</translation>
     </message>
     <message>
         <source>&amp;Analyze Game...</source>
@@ -242,7 +242,7 @@
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
-        <translation></translation>
+        <translation>&amp;Aide de Pentobi</translation>
     </message>
     <message>
         <source>I&amp;nteresting</source>
@@ -327,7 +327,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation></translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Start a new game</source>
@@ -340,7 +340,7 @@
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation></translation>
+        <translation>&amp;Ouvrir...</translation>
     </message>
     <message>
         <source>&amp;Play</source>
@@ -372,15 +372,15 @@
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation></translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation></translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation></translation>
+        <translation>Enre&amp;gistrer sous...</translation>
     </message>
     <message>
         <source>&amp;Comment</source>
@@ -436,7 +436,7 @@
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation></translation>
+        <translation>&amp;Edition</translation>
     </message>
     <message>
         <source>&amp;Move Annotation</source>
@@ -444,7 +444,7 @@
     </message>
     <message>
         <source>&amp;View</source>
-        <translation></translation>
+        <translation>&amp;Affichage</translation>
     </message>
     <message>
         <source>Toolbar T&amp;ext</source>
@@ -456,11 +456,11 @@
     </message>
     <message>
         <source>&amp;Tools</source>
-        <translation></translation>
+        <translation>&amp;Outils</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation></translation>
+        <translation>Aid&amp;e</translation>
     </message>
     <message>
         <source>Delete all variations?</source>
@@ -558,7 +558,7 @@
     </message>
     <message>
         <source>Save</source>
-        <translation></translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <source>Pentobi</source>
@@ -578,11 +578,11 @@
     </message>
     <message>
         <source>Do you want to save your changes?</source>
-        <translation></translation>
+        <translation>Voulez-vous enregistrer vos modifications ?</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation></translation>
+        <translation>&amp;Ne pas enregistrer</translation>
     </message>
     <message>
         <source>The current game is not finished.</source>
@@ -670,7 +670,7 @@
     </message>
     <message>
         <source>Pentobi Help</source>
-        <translation></translation>
+        <translation>Aide de Pentobi</translation>
     </message>
     <message>
         <source>Keep Only Position</source>
