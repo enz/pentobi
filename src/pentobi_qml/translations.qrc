@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/i18n/qml_de.qm</file>
+        <file>qml/i18n/qml_nb_NO.qm</file>
         <file>qml/i18n/replace_qtbase_de.qm</file>
+        <file>qml/i18n/replace_qtbase_nb_NO.qm</file>
     </qresource>
 </RCC>
