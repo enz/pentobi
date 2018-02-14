@@ -5,7 +5,7 @@
     <name>AnalyzeGame</name>
     <message>
         <source>(No analysis)</source>
-        <translation></translation>
+        <translation>(Pas d’analyse)</translation>
     </message>
 </context>
 <context>
@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Text files (*.txt)</source>
-        <translation></translation>
+        <translation>Fichiers texte (*.txt)</translation>
     </message>
     <message>
         <source>All files (*)</source>
-        <translation></translation>
+        <translation>Tous les fichiers (*)</translation>
     </message>
 </context>
 <context>
@@ -31,19 +31,19 @@
     </message>
     <message>
         <source>Computer plays:</source>
-        <translation></translation>
+        <translation>L&apos;ordinateur joue:</translation>
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation></translation>
+        <translation>Bleu/rouge</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation></translation>
+        <translation>Bleu</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation></translation>
+        <translation>Jaune/vert</translation>
     </message>
     <message>
         <source>Green</source>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Yellow</source>
-        <translation></translation>
+        <translation>Jaune</translation>
     </message>
     <message>
         <source>Red</source>
@@ -59,7 +59,7 @@
     </message>
     <message>
         <source>Purple</source>
-        <translation></translation>
+        <translation>Violet</translation>
     </message>
     <message>
         <source>Orange</source>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Image width:</source>
-        <translation></translation>
+        <translation>Largeur de l&apos;image:</translation>
     </message>
 </context>
 <context>
@@ -85,27 +85,27 @@
     </message>
     <message>
         <source>Player Blue/Red:</source>
-        <translation></translation>
+        <translation>Joueur bleu/rouge:</translation>
     </message>
     <message>
         <source>Player Blue:</source>
-        <translation></translation>
+        <translation>Joueur bleu:</translation>
     </message>
     <message>
         <source>Player Yellow/Green:</source>
-        <translation></translation>
+        <translation>Joueur jaune/vert:</translation>
     </message>
     <message>
         <source>Player Green:</source>
-        <translation></translation>
+        <translation>Joueur vert:</translation>
     </message>
     <message>
         <source>Player Yellow:</source>
-        <translation></translation>
+        <translation>Joueur jaune:</translation>
     </message>
     <message>
         <source>Player Red:</source>
-        <translation></translation>
+        <translation>Joueur rouge:</translation>
     </message>
     <message>
         <source>Date:</source>
@@ -113,7 +113,7 @@
     </message>
     <message>
         <source>Time:</source>
-        <translation></translation>
+        <translation>Temps:</translation>
     </message>
     <message>
         <source>Event:</source>
@@ -125,11 +125,11 @@
     </message>
     <message>
         <source>Player Purple:</source>
-        <translation></translation>
+        <translation>Joueur violet:</translation>
     </message>
     <message>
         <source>Player Orange:</source>
-        <translation></translation>
+        <translation>Joueur orange:</translation>
     </message>
 </context>
 <context>
@@ -248,19 +248,19 @@
     </message>
     <message>
         <source>Clipboard is empty.</source>
-        <translation></translation>
+        <translation>Le presse-papiers est vide.</translation>
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation></translation>
+        <translation>Bleu/rouge</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation></translation>
+        <translation>Bleu</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation></translation>
+        <translation>Jaune/vert</translation>
     </message>
     <message>
         <source>Green</source>
@@ -268,7 +268,7 @@
     </message>
     <message>
         <source>Yellow</source>
-        <translation></translation>
+        <translation>Jaune</translation>
     </message>
     <message>
         <source>Red</source>
@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>Purple</source>
-        <translation></translation>
+        <translation>Violet</translation>
     </message>
     <message>
         <source>Orange</source>
@@ -322,18 +322,18 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation></translation>
+        <translation>Aide de Pentobi</translation>
     </message>
 </context>
 <context>
     <name>ImageSaveDialog</name>
     <message>
         <source>Save Image</source>
-        <translation></translation>
+        <translation>Enregistrer l&apos;image</translation>
     </message>
     <message>
         <source>All files (*)</source>
-        <translation></translation>
+        <translation>Tous les fichiers (*)</translation>
     </message>
     <message>
         <source>PNG image files (*.png)</source>
@@ -352,7 +352,7 @@
     </message>
     <message>
         <source>Beginner</source>
-        <translation></translation>
+        <translation>Débutant</translation>
     </message>
     <message>
         <source>Expert</source>
@@ -479,7 +479,7 @@
     </message>
     <message>
         <source>File saved.</source>
-        <translation></translation>
+        <translation>Fichier enregistré.</translation>
     </message>
     <message>
         <source>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</source>
@@ -527,7 +527,7 @@
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation></translation>
+        <translation>Remplacer le fichier existant?</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
@@ -542,63 +542,63 @@
     <name>MenuComputer</name>
     <message>
         <source>&amp;Computer</source>
-        <translation></translation>
+        <translation>&amp;Ordinateur</translation>
     </message>
     <message>
         <source>Computer &amp;Colors</source>
-        <translation></translation>
+        <translation>&amp;Couleurs de l&apos;ordinateur</translation>
     </message>
     <message>
         <source>&amp;Play</source>
-        <translation></translation>
+        <translation>&amp;Jouer</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Classique, 4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 2 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Classique, 2 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Classique, 3 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Duo)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Duo)</translation>
     </message>
     <message>
         <source>&amp;Level (Junior)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Junior)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Trigon, 4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 2 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Trigon, 2 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Trigon, 3 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Nexos, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Nexos, 4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Nexos, 2 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Nexos, 2 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Callisto, 4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Callisto, 3 joueurs)</translation>
     </message>
     <message>
         <source>Play &amp;Single Move</source>
@@ -610,27 +610,27 @@
     </message>
     <message>
         <source>&amp;Level (GembloQ, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (GembloQ, 4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp; Niveau (GembloQ, 3 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (GembloQ, 2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 2 Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (GembloQ, 2 joueurs, 4 couleurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Callisto, 2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 2 Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Callisto, 2 joueurs, 4 couleurs)</translation>
     </message>
 </context>
 <context>
@@ -653,7 +653,7 @@
     </message>
     <message>
         <source>&amp;Truncate</source>
-        <translation></translation>
+        <translation>&amp;Tronquer</translation>
     </message>
     <message>
         <source>Truncate &amp;Children</source>
@@ -720,7 +720,7 @@
     <name>MenuGame</name>
     <message>
         <source>&amp;Game</source>
-        <translation></translation>
+        <translation>&amp;Jeu</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -728,15 +728,15 @@
     </message>
     <message>
         <source>Game &amp;Variant</source>
-        <translation></translation>
+        <translation>&amp;Variante du jeu</translation>
     </message>
     <message>
         <source>Classic (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>Classique (&amp;3 joueurs)</translation>
     </message>
     <message>
         <source>Classic (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Classique (&amp;4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Duo</source>
@@ -760,15 +760,15 @@
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation></translation>
+        <translation>&amp;Quitter</translation>
     </message>
     <message>
         <source>&amp;Classic</source>
-        <translation></translation>
+        <translation>&amp;Classique</translation>
     </message>
     <message>
         <source>Classic (&amp;2 Players)</source>
-        <translation></translation>
+        <translation>Classique (&amp;2 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Trigon</source>
@@ -776,15 +776,15 @@
     </message>
     <message>
         <source>Trigon (&amp;2 Players)</source>
-        <translation></translation>
+        <translation>Trigon (&amp;2 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>Trigon (&amp;3 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Trigon (&amp;4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Nexos</source>
@@ -792,11 +792,11 @@
     </message>
     <message>
         <source>Nexos (&amp;2 Players)</source>
-        <translation></translation>
+        <translation>Nexos (&amp;2 joueurs)</translation>
     </message>
     <message>
         <source>Nexos (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Nexos (&amp;4 joueurs)</translation>
     </message>
     <message>
         <source>C&amp;allisto</source>
@@ -804,11 +804,11 @@
     </message>
     <message>
         <source>Callisto (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>Callisto (&amp;3 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Callisto (&amp;4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Export</source>
@@ -820,15 +820,15 @@
     </message>
     <message>
         <source>&amp;ASCII Art</source>
-        <translation></translation>
+        <translation>&amp;Art ASCII</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation></translation>
+        <translation>Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation></translation>
+        <translation>Enre&amp;gistrer sous...</translation>
     </message>
     <message>
         <source>&amp;Game Info</source>
@@ -852,27 +852,27 @@
     </message>
     <message>
         <source>GembloQ (&amp;2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>GembloQ (&amp;2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>GembloQ (2 &amp;Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>GembloQ (2 &amp;joueurs, 4 couleurs)</translation>
     </message>
     <message>
         <source>GembloQ (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>GembloQ (&amp;3 joueurs)</translation>
     </message>
     <message>
         <source>GembloQ (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>GembloQ (&amp;4 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (&amp;2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>Callisto (&amp;2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>Callisto (2 &amp;Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>Callisto (2 &amp;joueurs, 4 couleurs)</translation>
     </message>
 </context>
 <context>
@@ -902,15 +902,15 @@
     <name>MenuHelp</name>
     <message>
         <source>&amp;Help</source>
-        <translation></translation>
+        <translation>Aid&amp;e</translation>
     </message>
     <message>
         <source>&amp;About Pentobi</source>
-        <translation></translation>
+        <translation>À &amp;propos de Pentobi</translation>
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
-        <translation></translation>
+        <translation>&amp;Aide de Pentobi</translation>
     </message>
 </context>
 <context>
@@ -924,7 +924,7 @@
     <name>MenuTools</name>
     <message>
         <source>&amp;Tools</source>
-        <translation></translation>
+        <translation>&amp;Outils</translation>
     </message>
     <message>
         <source>&amp;Analyze Game</source>
@@ -951,7 +951,7 @@
     </message>
     <message>
         <source>&amp;Coordinates</source>
-        <translation></translation>
+        <translation>&amp;Coordonnées</translation>
     </message>
     <message>
         <source>&amp;Move Marking</source>
@@ -1006,7 +1006,7 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation></translation>
+        <translation>Tous les fichiers (*)</translation>
     </message>
 </context>
 <context>
@@ -1025,15 +1025,15 @@
     </message>
     <message>
         <source>Classic (2 players)</source>
-        <translation></translation>
+        <translation>Classique (2 joueurs)</translation>
     </message>
     <message>
         <source>Classic (3 players)</source>
-        <translation></translation>
+        <translation>Classique (3 joueurs)</translation>
     </message>
     <message>
         <source>Classic (4 players)</source>
-        <translation></translation>
+        <translation>Classique (4 joueurs)</translation>
     </message>
     <message>
         <source>Duo</source>
@@ -1045,39 +1045,39 @@
     </message>
     <message>
         <source>Trigon (2 players)</source>
-        <translation></translation>
+        <translation>Trigon (2 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (3 players)</source>
-        <translation></translation>
+        <translation>Trigon (3 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (4 players)</source>
-        <translation></translation>
+        <translation>Trigon (4 joueurs)</translation>
     </message>
     <message>
         <source>Nexos (2 players)</source>
-        <translation></translation>
+        <translation>Nexos (2 joueurs)</translation>
     </message>
     <message>
         <source>Nexos (4 players)</source>
-        <translation></translation>
+        <translation>Nexos (4 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (2 players)</source>
-        <translation></translation>
+        <translation>Callisto (2 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (3 players)</source>
-        <translation></translation>
+        <translation>Callisto (3 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (4 players)</source>
-        <translation></translation>
+        <translation>Callisto (4 joueurs)</translation>
     </message>
     <message>
         <source>Game variant:</source>
-        <translation></translation>
+        <translation>Variante du jeu:</translation>
     </message>
     <message>
         <source>Rated games:</source>
@@ -1085,11 +1085,11 @@
     </message>
     <message>
         <source>Game</source>
-        <translation></translation>
+        <translation>Partie</translation>
     </message>
     <message>
         <source>Your Color</source>
-        <translation></translation>
+        <translation>Votre couleur</translation>
     </message>
     <message>
         <source>Level</source>
@@ -1097,7 +1097,7 @@
     </message>
     <message>
         <source>Result</source>
-        <translation></translation>
+        <translation>Résultat</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1125,26 +1125,26 @@
     </message>
     <message>
         <source>GembloQ (4 players)</source>
-        <translation></translation>
+        <translation>GembloQ (4 joueurs)</translation>
     </message>
     <message>
         <source>GembloQ (2 players, 2 colors)</source>
-        <translation></translation>
+        <translation>GembloQ (2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>GembloQ (2 players, 4 colors)</source>
-        <translation></translation>
+        <translation>GembloQ (2 joueurs, 4 couleurs)</translation>
     </message>
     <message>
         <source>GembloQ (3 players)</source>
-        <translation></translation>
+        <translation>GembloQ (3 joueurs)</translation>
     </message>
 </context>
 <context>
     <name>SaveDialog</name>
     <message>
         <source>Save</source>
-        <translation></translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
@@ -1152,14 +1152,14 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation></translation>
+        <translation>Tous les fichiers (*)</translation>
     </message>
 </context>
 <context>
     <name>ToolBar</name>
     <message>
         <source>File (modified): %1</source>
-        <translation></translation>
+        <translation>Fichier (modifié): %1</translation>
     </message>
     <message>
         <source>File: %1</source>
@@ -1178,7 +1178,7 @@
     <name>main</name>
     <message>
         <source>Not enough memory.</source>
-        <translation></translation>
+        <translation>Mémoire insuffisante.</translation>
     </message>
     <message>
         <source>Pentobi</source>
