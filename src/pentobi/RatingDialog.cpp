@@ -37,6 +37,7 @@ RatingDialog::RatingDialog(QWidget* parent, RatingHistory& history)
     : QDialog(parent),
       m_history(history)
 {
+    //: Window title for the rating dialog.
     setWindowTitle(tr("Rating"));
     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     auto layout = new QVBoxLayout;

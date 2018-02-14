@@ -952,6 +952,7 @@ void MainWindow::createActions()
     m_actionShowComment->setShortcut(QString("Ctrl+T"));
     connect(m_actionShowComment, &QAction::triggered, this, &MainWindow::showComment);
 
+    //: Menu label for opening the rating dialog.
     m_actionRating = createAction(tr("&Rating"));
     m_actionRating->setShortcut(QString("F7"));
     connect(m_actionRating, &QAction::triggered, this, &MainWindow::showRating);
@@ -2261,6 +2262,7 @@ void MainWindow::open()
 {
     if (! checkSave())
         return;
+    //: Window title for open dialog
     QString file = QFileDialog::getOpenFileName(this, tr("Open"), getLastDir(),
                                                 getFilter());
     if (file.isEmpty())
@@ -2674,6 +2676,8 @@ void MainWindow::saveAs()
             {
                 file = getLastDir();
                 file.append(QDir::separator());
+                //: The argument is a number, which will be increased if a
+                //: file with the same name already exists
                 file.append(tr("Untitled Game %1.blksgf").arg(i));
                 if (! QFileInfo::exists(file))
                     break;
@@ -2815,9 +2819,10 @@ void MainWindow::setFile(const QString& file)
     m_file = file;
     // Don't use setWindowFilePath() because of QTBUG-16507
     if (m_file.isEmpty())
+        //: Main window title if no file is loaded.
         setWindowTitle(tr("Pentobi"));
     else
-        setWindowTitle(tr("[*]%1").arg(QFileInfo(m_file).fileName()));
+        setWindowTitle(QString("[*]%1").arg(QFileInfo(m_file).fileName()));
 }
 
 void MainWindow::setLevel(unsigned level)
@@ -3235,18 +3240,27 @@ void MainWindow::updateMoveNumber()
         if (movesLeft == 0)
         {
             if (move > 0)
+                //: The argument is the current move number.
                 toolTip = tr("Move %1").arg(move);
         }
         else
         {
             if (move == 0)
+                //: The argument is the number of moves played in the main
+                //: variation if the current position is the beginning (empty
+                //: board or setup).
                 toolTip = tr("%n move(s)", "", totalMoves);
             else
+                //: The first argument is the current move number, the second
+                //: is the number of moves in the main variation.
                 toolTip = tr("Move %1 of %2").arg(QString::number(move),
                                                   QString::number(totalMoves));
         }
     }
     else
+        //: The first argument is the current move number, the second is
+        //: the number of moves in the current variation, the third is an
+        //: identifier for the variation (e.g. 3b-4c).
         toolTip = tr("Move %1 of %2 in variation %3")
                   .arg(QString::number(move), QString::number(totalMoves),
                        variation.c_str());

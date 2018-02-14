@@ -105,10 +105,15 @@ void RatedGamesList::updateContent(Variant variant,
         level->setData(info.level, Qt::DisplayRole);
         QString result;
         if (info.result == 1)
+            //: Result of rated game is a win
             result = tr("Win");
         else if (info.result == 0.5)
+            //: Result of rated game is a tie. Abbreviate long translations to
+            //: ensure that all columns of rated games list are visible on
+            //: mobile devices with small screens.
             result = tr("Tie");
         else if (info.result == 0)
+            //: Result of rated game is a loss
             result = tr("Loss");
         int row = nuRows - i - 1;
         m_model->setItem(row, 0, number);

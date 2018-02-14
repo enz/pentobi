@@ -46,6 +46,7 @@ Window {
 
     width: defaultWidth; height: defaultHeight
     color: theme.backgroundColor
+    //: Main window title if no file is loaded.
     title: qsTr("Pentobi")
     Component.onCompleted: {
         Logic.init()

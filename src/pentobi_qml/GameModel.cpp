@@ -1460,6 +1460,7 @@ void GameModel::updatePositionInfo()
         positionInfo = bd.has_setup() ? tr("(Setup)") : tr("(No moves)");
     else
     {
+        //: The argument is the current move number.
         positionInfo = tr("Move %1").arg(positionInfo);
         if (bd.get_nu_moves() == 0 && bd.has_setup())
         {
