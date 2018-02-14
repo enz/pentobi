@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>&amp;Bad</source>
-        <translation></translation>
+        <translation>&amp;Mauvais</translation>
     </message>
     <message>
         <source>&amp;Beginning</source>
@@ -170,7 +170,7 @@
     </message>
     <message>
         <source>&amp;Doubtful</source>
-        <translation></translation>
+        <translation>&amp;Douteux</translation>
     </message>
     <message>
         <source>&amp;End</source>
@@ -210,7 +210,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation></translation>
+        <translation>&amp;Plein écran</translation>
     </message>
     <message>
         <source>Ga&amp;me Info</source>
@@ -226,7 +226,7 @@
     </message>
     <message>
         <source>&amp;Good</source>
-        <translation></translation>
+        <translation>&amp;Bon</translation>
     </message>
     <message>
         <source>Game analysis is only possible in the main variation.</source>
@@ -246,7 +246,7 @@
     </message>
     <message>
         <source>I&amp;nteresting</source>
-        <translation></translation>
+        <translation>I&amp;ntéressant</translation>
     </message>
     <message>
         <source>&amp;Keep Only Position</source>
@@ -336,7 +336,7 @@
     <message>
         <source>N&amp;one</source>
         <comment>move annotation</comment>
-        <translation></translation>
+        <translation>&amp;Aucune</translation>
     </message>
     <message>
         <source>&amp;Open...</source>
@@ -428,11 +428,11 @@
     </message>
     <message>
         <source>V&amp;ery Bad</source>
-        <translation></translation>
+        <translation>Très m&amp;auvais</translation>
     </message>
     <message>
         <source>&amp;Very Good</source>
-        <translation></translation>
+        <translation>&amp;Très bon</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -440,7 +440,7 @@
     </message>
     <message>
         <source>&amp;Move Annotation</source>
-        <translation></translation>
+        <translation>&amp;Annotation courante</translation>
     </message>
     <message>
         <source>&amp;View</source>
