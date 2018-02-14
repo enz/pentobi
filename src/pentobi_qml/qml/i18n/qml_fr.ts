@@ -637,7 +637,7 @@
     <name>MenuEdit</name>
     <message>
         <source>&amp;Edit</source>
-        <translation></translation>
+        <translation>&amp;Edition</translation>
     </message>
     <message>
         <source>Make &amp;Main Variation</source>
@@ -665,7 +665,7 @@
     </message>
     <message>
         <source>&amp;Next Color</source>
-        <translation></translation>
+        <translation>&amp;Couleur suivante</translation>
     </message>
     <message>
         <source>&amp;Keep Only Position</source>
@@ -677,35 +677,35 @@
     </message>
     <message>
         <source>Move &amp;Annotation</source>
-        <translation></translation>
+        <translation>&amp;Annotation courante</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation></translation>
+        <translation>&amp;Aucune</translation>
     </message>
     <message>
         <source>&amp;Very good</source>
-        <translation></translation>
+        <translation>&amp;Très bon</translation>
     </message>
     <message>
         <source>&amp;Good</source>
-        <translation></translation>
+        <translation>&amp;Bon</translation>
     </message>
     <message>
         <source>&amp;Doubtful</source>
-        <translation></translation>
+        <translation>&amp;Douteux</translation>
     </message>
     <message>
         <source>&amp;Bad</source>
-        <translation></translation>
+        <translation>&amp;Mauvais</translation>
     </message>
     <message>
         <source>Very B&amp;ad</source>
-        <translation></translation>
+        <translation>Très m&amp;auvais</translation>
     </message>
     <message>
         <source>Int&amp;eresting</source>
-        <translation></translation>
+        <translation>I&amp;ntéressant</translation>
     </message>
     <message>
         <source>S&amp;etup Mode</source>
@@ -979,7 +979,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation></translation>
+        <translation>&amp;Plein écran</translation>
     </message>
     <message>
         <source>&amp;Theme</source>
