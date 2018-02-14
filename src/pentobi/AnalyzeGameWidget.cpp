@@ -99,12 +99,14 @@ void AnalyzeGameWidget::paintEvent(QPaintEvent* event)
     painter.drawLine(0, 0, m_maxX, 0);
     painter.drawLine(0, m_maxY, m_maxX, m_maxY);
     painter.setRenderHint(QPainter::Antialiasing, true);
+    //: Label for 100% win rate in analyze game graph
     QString labelWin = tr("Win");
     QRect boundingRectWin = metrics.boundingRect(labelWin);
     painter.drawText(QRect(0, 0, boundingRectWin.width(),
                            boundingRectWin.height()),
                      Qt::AlignLeft | Qt::AlignTop | Qt::TextDontClip,
                      labelWin);
+    //: Label for 0% win rate in analyze game graph
     QString labelLoss = tr("Loss");
     QRect boundingRectLoss = metrics.boundingRect(labelLoss);
     painter.drawText(QRect(0, m_maxY - boundingRectLoss.height(),
