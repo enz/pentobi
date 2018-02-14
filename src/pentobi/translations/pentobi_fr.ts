@@ -46,7 +46,7 @@
     <name>MainWindow</name>
     <message>
         <source>About Pentobi</source>
-        <translation>À &amp;propos de Pentobi</translation>
+        <translation>À propos de Pentobi</translation>
     </message>
     <message>
         <source>Next &amp;Color</source>
@@ -452,7 +452,7 @@
     </message>
     <message>
         <source>&amp;Computer</source>
-        <translation></translation>
+        <translation>&amp;Ordinateur</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
@@ -476,7 +476,7 @@
     </message>
     <message>
         <source>&amp;Toolbar</source>
-        <translation></translation>
+        <translation>Barre d&apos;ou&amp;tils</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*)</source>
