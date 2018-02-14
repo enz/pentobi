@@ -20,14 +20,14 @@
     <name>AnalyzeGameWindow</name>
     <message>
         <source>Game Analysis</source>
-        <translation></translation>
+        <translation>Analyse de partie</translation>
     </message>
 </context>
 <context>
     <name>AnalyzeSpeedDialog</name>
     <message>
         <source>Fast</source>
-        <translation></translation>
+        <translation>Rapide</translation>
     </message>
     <message>
         <source>Normal</source>
@@ -35,11 +35,11 @@
     </message>
     <message>
         <source>Slow</source>
-        <translation></translation>
+        <translation>Lente</translation>
     </message>
     <message>
         <source>Analysis speed:</source>
-        <translation></translation>
+        <translation>Vitesse d’analyse:</translation>
     </message>
 </context>
 <context>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Next &amp;Color</source>
-        <translation></translation>
+        <translation>&amp;Couleur suivante</translation>
     </message>
     <message>
         <source>S&amp;etup Mode</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Could not read file &apos;%1&apos;</source>
-        <translation></translation>
+        <translation>Impossible de lire le fichier &apos;%1&apos;</translation>
     </message>
     <message>
         <source>The file is not a valid Blokus SGF file.</source>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Truncate</source>
-        <translation></translation>
+        <translation>Tronquer</translation>
     </message>
     <message>
         <source>Truncate children?</source>
@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>&amp;Beginning</source>
-        <translation></translation>
+        <translation>&amp;Début</translation>
     </message>
     <message>
         <source>Go to beginning of game</source>
@@ -162,7 +162,7 @@
     </message>
     <message>
         <source>C&amp;oordinates</source>
-        <translation></translation>
+        <translation>C&amp;oordonnées</translation>
     </message>
     <message>
         <source>&amp;Delete All Variations</source>
@@ -182,7 +182,7 @@
     </message>
     <message>
         <source>&amp;ASCII Art</source>
-        <translation></translation>
+        <translation>&amp;Art ASCII</translation>
     </message>
     <message>
         <source>I&amp;mage</source>
@@ -194,11 +194,11 @@
     </message>
     <message>
         <source>Flip Horizontally</source>
-        <translation></translation>
+        <translation>Retourner horizontalement</translation>
     </message>
     <message>
         <source>Flip Vertically</source>
-        <translation></translation>
+        <translation>Retourner verticalement</translation>
     </message>
     <message>
         <source>&amp;Forward</source>
@@ -331,7 +331,7 @@
     </message>
     <message>
         <source>Start a new game</source>
-        <translation></translation>
+        <translation>Commencer une nouvelle partie</translation>
     </message>
     <message>
         <source>N&amp;one</source>
@@ -344,7 +344,7 @@
     </message>
     <message>
         <source>&amp;Play</source>
-        <translation></translation>
+        <translation>&amp;Jouer</translation>
     </message>
     <message>
         <source>Play &amp;Single Move</source>
@@ -384,7 +384,7 @@
     </message>
     <message>
         <source>&amp;Comment</source>
-        <translation></translation>
+        <translation>&amp;Commentaire</translation>
     </message>
     <message>
         <source>&amp;Rating</source>
@@ -396,7 +396,7 @@
     </message>
     <message>
         <source>Text &amp;Beside Icons</source>
-        <translation></translation>
+        <translation>Texte à &amp;côté des icônes</translation>
     </message>
     <message>
         <source>Text Bel&amp;ow Icons</source>
@@ -404,7 +404,7 @@
     </message>
     <message>
         <source>&amp;Text Only</source>
-        <translation></translation>
+        <translation>&amp;Texte seulement</translation>
     </message>
     <message>
         <source>&amp;System Default</source>
@@ -412,7 +412,7 @@
     </message>
     <message>
         <source>&amp;Truncate</source>
-        <translation></translation>
+        <translation>&amp;Tronquer</translation>
     </message>
     <message>
         <source>Truncate C&amp;hildren</source>
@@ -480,7 +480,7 @@
     </message>
     <message>
         <source>Text files (*.txt);;All files (*)</source>
-        <translation></translation>
+        <translation>Fichiers texte (*.txt);;Tous les fichiers (*)</translation>
     </message>
     <message>
         <source>No comment found</source>
@@ -488,7 +488,7 @@
     </message>
     <message>
         <source>Blokus games (*.blksgf);;All files (*)</source>
-        <translation></translation>
+        <translation>Parties de Blokus (*.blksgf) ; Tous les fichiers (*)</translation>
     </message>
     <message>
         <source>Move number:</source>
@@ -529,7 +529,7 @@
     <message>
         <source>Pentobi %1 (level %2)</source>
         <extracomment>The first argument is the version of Pentobi</extracomment>
-        <translation></translation>
+        <translation>Pentobi %1 (niveau %2)</translation>
     </message>
     <message>
         <source>Human</source>
@@ -550,11 +550,11 @@
     </message>
     <message>
         <source>Untitled Game.blksgf</source>
-        <translation></translation>
+        <translation>Partie sans titre.blksgf</translation>
     </message>
     <message>
         <source>Untitled Game %1.blksgf</source>
-        <translation></translation>
+        <translation>Partie sans titre %1.blksgf</translation>
     </message>
     <message>
         <source>Save</source>
@@ -574,7 +574,7 @@
     </message>
     <message>
         <source>The file has been modified.</source>
-        <translation></translation>
+        <translation>Le fichier a été modifié.</translation>
     </message>
     <message>
         <source>Do you want to save your changes?</source>
@@ -590,11 +590,11 @@
     </message>
     <message>
         <source>Do you want to abort the game?</source>
-        <translation></translation>
+        <translation>Voulez-vous abandonner la partie?</translation>
     </message>
     <message>
         <source>&amp;Abort Game</source>
-        <translation></translation>
+        <translation>&amp;Abandonner la partie</translation>
     </message>
     <message>
         <source>&amp;9</source>
@@ -618,15 +618,15 @@
     </message>
     <message>
         <source>Classic (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>Classique (&amp;3 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation></translation>
+        <translation>&amp;Jeu</translation>
     </message>
     <message>
         <source>Game &amp;Variant</source>
-        <translation></translation>
+        <translation>&amp;Variante du jeu</translation>
     </message>
     <message>
         <source>Open R&amp;ecent</source>
@@ -634,7 +634,7 @@
     </message>
     <message>
         <source>E&amp;xport</source>
-        <translation></translation>
+        <translation>E&amp;xporter</translation>
     </message>
     <message>
         <source>G&amp;o</source>
@@ -650,7 +650,7 @@
     </message>
     <message>
         <source>Image size:</source>
-        <translation></translation>
+        <translation>Taille de l’image:</translation>
     </message>
     <message>
         <source>The end of the tree was reached.</source>
@@ -799,7 +799,7 @@
     </message>
     <message>
         <source>Classic (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Classique (&amp;4 joueurs)</translation>
     </message>
     <message>
         <source>J&amp;unior</source>
@@ -807,31 +807,31 @@
     </message>
     <message>
         <source>Classic (&amp;2 Players)</source>
-        <translation></translation>
+        <translation>Classique (&amp;2 joueurs)</translation>
     </message>
     <message>
         <source>Nexos (&amp;2 Players)</source>
-        <translation></translation>
+        <translation>Nexos (&amp;2 joueurs)</translation>
     </message>
     <message>
         <source>Nexos (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Nexos (&amp;4 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (&amp;2 Players)</source>
-        <translation></translation>
+        <translation>Trigon (&amp;2 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>Trigon (&amp;3 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Trigon (&amp;4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Classic</source>
-        <translation></translation>
+        <translation>&amp;Classique</translation>
     </message>
     <message>
         <source>&amp;Trigon</source>
@@ -875,11 +875,11 @@
     </message>
     <message>
         <source>Callisto (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>Callisto (&amp;3 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>Callisto (&amp;4 joueurs)</translation>
     </message>
     <message>
         <source>C&amp;allisto</source>
@@ -903,51 +903,51 @@
     </message>
     <message>
         <source>&amp;Level (Classic, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Classique, 4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 2 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Classique, 2 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Classique, 3 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Duo)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Duo)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Trigon, 4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 2 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Trigon, 2 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Trigon, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Trigon, 3 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Junior)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Junior)</translation>
     </message>
     <message>
         <source>&amp;Level (Nexos, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Nexos, 4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Nexos, 2 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Nexos, 2 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Callisto, 4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Callisto, 3 joueurs)</translation>
     </message>
     <message>
         <source>Computer is thinking... (up to %1 seconds remaining)</source>
@@ -963,11 +963,11 @@
     </message>
     <message>
         <source>GembloQ (&amp;3 Players)</source>
-        <translation></translation>
+        <translation>GembloQ (&amp;3 joueurs)</translation>
     </message>
     <message>
         <source>GembloQ (&amp;4 Players)</source>
-        <translation></translation>
+        <translation>GembloQ (&amp;4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;GembloQ</source>
@@ -975,27 +975,27 @@
     </message>
     <message>
         <source>&amp;Level (GembloQ, 4 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (GembloQ, 4 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 3 Players)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (GembloQ, 3 joueurs)</translation>
     </message>
     <message>
         <source>GembloQ (2 &amp;Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>GembloQ (2 &amp;joueurs, 4 couleurs)</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 2 Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (GembloQ, 2 joueurs, 4 couleurs)</translation>
     </message>
     <message>
         <source>GembloQ (&amp;2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>GembloQ (&amp;2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (GembloQ, 2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
@@ -1003,7 +1003,7 @@
     </message>
     <message>
         <source>Clipboard is empty.</source>
-        <translation></translation>
+        <translation>Le presse-papiers est vide.</translation>
     </message>
     <message>
         <source>Blokus SGF file format error</source>
@@ -1011,19 +1011,19 @@
     </message>
     <message>
         <source>Callisto (&amp;2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>Callisto (&amp;2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>Callisto (2 &amp;Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>Callisto (2 &amp;joueurs, 4 couleurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 2 Players, 2 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Callisto, 2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>&amp;Level (Callisto, 2 Players, 4 Colors)</source>
-        <translation></translation>
+        <translation>&amp;Niveau (Callisto, 2 joueurs, 4 couleurs)</translation>
     </message>
     <message>
         <source>Purple wins with 1 point.</source>
@@ -1046,19 +1046,19 @@
     <name>RatedGamesList</name>
     <message>
         <source>Game</source>
-        <translation></translation>
+        <translation>Partie</translation>
     </message>
     <message>
         <source>Your Color</source>
-        <translation></translation>
+        <translation>Votre couleur</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation></translation>
+        <translation>Niveau</translation>
     </message>
     <message>
         <source>Result</source>
-        <translation></translation>
+        <translation>Résultat</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1089,7 +1089,7 @@
     </message>
     <message>
         <source>Game variant:</source>
-        <translation></translation>
+        <translation>Variante du jeu:</translation>
     </message>
     <message>
         <source>Best previous rating:</source>
@@ -1113,15 +1113,15 @@
     </message>
     <message>
         <source>Classic (4 players)</source>
-        <translation></translation>
+        <translation>Classique (4 joueurs)</translation>
     </message>
     <message>
         <source>Classic (2 players)</source>
-        <translation></translation>
+        <translation>Classique (2 joueurs)</translation>
     </message>
     <message>
         <source>Classic (3 players)</source>
-        <translation></translation>
+        <translation>Classique (3 joueurs)</translation>
     </message>
     <message>
         <source>Duo</source>
@@ -1129,15 +1129,15 @@
     </message>
     <message>
         <source>Trigon (4 players)</source>
-        <translation></translation>
+        <translation>Trigon (4 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (2 players)</source>
-        <translation></translation>
+        <translation>Trigon (2 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (3 players)</source>
-        <translation></translation>
+        <translation>Trigon (3 joueurs)</translation>
     </message>
     <message>
         <source>Junior</source>
@@ -1149,43 +1149,43 @@
     </message>
     <message>
         <source>Nexos (4 players)</source>
-        <translation></translation>
+        <translation>Nexos (4 joueurs)</translation>
     </message>
     <message>
         <source>Nexos (2 players)</source>
-        <translation></translation>
+        <translation>Nexos (2 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (4 players)</source>
-        <translation></translation>
+        <translation>Callisto (4 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (3 players)</source>
-        <translation></translation>
+        <translation>Callisto (3 joueurs)</translation>
     </message>
     <message>
         <source>GembloQ (4 players)</source>
-        <translation></translation>
+        <translation>GembloQ (4 joueurs)</translation>
     </message>
     <message>
         <source>GembloQ (3 players)</source>
-        <translation></translation>
+        <translation>GembloQ (3 joueurs)</translation>
     </message>
     <message>
         <source>GembloQ (2 players, 4 colors)</source>
-        <translation></translation>
+        <translation>GembloQ (2 joueurs, 4 couleurs)</translation>
     </message>
     <message>
         <source>GembloQ (2 players, 2 colors)</source>
-        <translation></translation>
+        <translation>GembloQ (2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>Callisto (2 players, 2 colors)</source>
-        <translation></translation>
+        <translation>Callisto (2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>Callisto (2 players, 4 colors)</source>
-        <translation></translation>
+        <translation>Callisto (2 joueurs, 4 couleurs)</translation>
     </message>
     <message>
         <source>Rated games:</source>
@@ -1196,7 +1196,7 @@
     <name>main</name>
     <message>
         <source>Not enough memory.</source>
-        <translation></translation>
+        <translation>Mémoire insuffisante.</translation>
     </message>
     <message>
         <source>Pentobi</source>
