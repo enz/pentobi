@@ -4,1499 +4,1185 @@
 <context>
     <name>AnalyzeGame</name>
     <message>
-        <location filename="../AnalyzeGame.qml" line="105"/>
         <source>(No analysis)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Keine Analyse)</translation>
     </message>
 </context>
 <context>
     <name>AsciiArtSaveDialog</name>
     <message>
-        <location filename="../AsciiArtSaveDialog.qml" line="6"/>
         <source>Export ASCII Art</source>
-        <translation type="unfinished"></translation>
+        <translation>ASCII-Art exportieren</translation>
     </message>
     <message>
-        <location filename="../AsciiArtSaveDialog.qml" line="9"/>
         <source>Text files (*.txt)</source>
-        <translation type="unfinished"></translation>
+        <translation>Textdateien (*.txt)</translation>
     </message>
     <message>
-        <location filename="../AsciiArtSaveDialog.qml" line="9"/>
         <source>All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
     <name>ComputerColorDialog</name>
     <message>
-        <location filename="../ComputerColorDialog.qml" line="12"/>
         <source>Computer Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Computer-Farben</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.qml" line="17"/>
         <source>Computer plays:</source>
-        <translation type="unfinished"></translation>
+        <translation>Computer spielt:</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.qml" line="25"/>
         <source>Blue/Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Blau/Rot</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.qml" line="27"/>
-        <source>Purple</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ComputerColorDialog.qml" line="29"/>
-        <location filename="../ComputerColorDialog.qml" line="46"/>
-        <location filename="../ComputerColorDialog.qml" line="64"/>
-        <source>Green</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ComputerColorDialog.qml" line="30"/>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Blau</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.qml" line="42"/>
         <source>Yellow/Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelb/Grün</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.qml" line="44"/>
-        <source>Orange</source>
-        <translation type="unfinished"></translation>
+        <source>Green</source>
+        <translation>Grün</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.qml" line="47"/>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelb</translation>
     </message>
     <message>
-        <location filename="../ComputerColorDialog.qml" line="57"/>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rot</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Lila</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
     </message>
 </context>
 <context>
     <name>ExportImageDialog</name>
     <message>
-        <location filename="../ExportImageDialog.qml" line="6"/>
         <source>Export Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafik exportieren</translation>
     </message>
     <message>
-        <location filename="../ExportImageDialog.qml" line="15"/>
         <source>Image width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildbreite:</translation>
     </message>
 </context>
 <context>
     <name>GameInfoDialog</name>
     <message>
-        <location filename="../GameInfoDialog.qml" line="17"/>
         <source>Game Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielinformation</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.qml" line="37"/>
         <source>Player Blue/Red:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spieler Blau/Rot:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.qml" line="39"/>
-        <source>Player Purple:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../GameInfoDialog.qml" line="41"/>
-        <location filename="../GameInfoDialog.qml" line="57"/>
-        <location filename="../GameInfoDialog.qml" line="78"/>
-        <source>Player Green:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../GameInfoDialog.qml" line="42"/>
         <source>Player Blue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spieler Blau:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.qml" line="53"/>
         <source>Player Yellow/Green:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spieler Gelb/Grün:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.qml" line="55"/>
-        <source>Player Orange:</source>
-        <translation type="unfinished"></translation>
+        <source>Player Green:</source>
+        <translation>Spieler Grün:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.qml" line="58"/>
         <source>Player Yellow:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spieler Gelb:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.qml" line="68"/>
         <source>Player Red:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spieler Rot:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.qml" line="86"/>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.qml" line="92"/>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedenkzeit:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.qml" line="98"/>
         <source>Event:</source>
-        <translation type="unfinished"></translation>
+        <translation>Veranstaltung:</translation>
     </message>
     <message>
-        <location filename="../GameInfoDialog.qml" line="104"/>
         <source>Round:</source>
-        <translation type="unfinished"></translation>
+        <translation>Runde:</translation>
+    </message>
+    <message>
+        <source>Player Purple:</source>
+        <translation>Spieler Lila:</translation>
+    </message>
+    <message>
+        <source>Player Orange:</source>
+        <translation>Spieler Orange:</translation>
     </message>
 </context>
 <context>
     <name>GameModel</name>
     <message>
-        <location filename="../../GameModel.cpp" line="462"/>
-        <source>Blue/Red</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="464"/>
-        <source>Purple</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="466"/>
-        <location filename="../../GameModel.cpp" line="475"/>
-        <location filename="../../GameModel.cpp" line="481"/>
-        <source>Green</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="468"/>
-        <source>Blue</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="471"/>
-        <source>Yellow/Green</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="473"/>
-        <source>Orange</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="477"/>
-        <source>Yellow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="479"/>
-        <source>Red</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="516"/>
-        <source>Purple wins with 1 point.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="518"/>
-        <source>Purple wins with %L1 points.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="520"/>
-        <location filename="../../GameModel.cpp" line="533"/>
-        <source>Orange wins with 1 point.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="522"/>
-        <location filename="../../GameModel.cpp" line="535"/>
-        <source>Orange wins with %L1 points.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="523"/>
-        <location filename="../../GameModel.cpp" line="536"/>
-        <location filename="../../GameModel.cpp" line="552"/>
-        <location filename="../../GameModel.cpp" line="567"/>
-        <source>Game ends in a tie.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="529"/>
-        <location filename="../../GameModel.cpp" line="547"/>
-        <source>Green wins with 1 point.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="531"/>
-        <location filename="../../GameModel.cpp" line="549"/>
-        <source>Green wins with %L1 points.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="543"/>
-        <source>Blue wins with 1 point.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="545"/>
-        <source>Blue wins with %L1 points.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="551"/>
-        <location filename="../../GameModel.cpp" line="616"/>
-        <source>Green wins (tie resolved).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="558"/>
-        <source>Blue/Red wins with 1 point.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="560"/>
-        <source>Blue/Red wins with %L1 points.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="562"/>
-        <source>Yellow/Green wins with 1 point.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="564"/>
-        <source>Yellow/Green wins with %L1 points.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="566"/>
-        <source>Yellow/Green wins (tie resolved).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="580"/>
-        <location filename="../../GameModel.cpp" line="608"/>
-        <source>Blue wins.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="582"/>
-        <location filename="../../GameModel.cpp" line="610"/>
-        <source>Yellow wins.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="584"/>
-        <location filename="../../GameModel.cpp" line="612"/>
-        <source>Red wins.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="586"/>
-        <location filename="../../GameModel.cpp" line="618"/>
-        <source>Red wins (tie resolved).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="588"/>
-        <location filename="../../GameModel.cpp" line="620"/>
-        <source>Yellow wins (tie resolved).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="590"/>
-        <location filename="../../GameModel.cpp" line="633"/>
-        <source>Game ends in a tie between Blue and Yellow.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="592"/>
-        <location filename="../../GameModel.cpp" line="635"/>
-        <source>Game ends in a tie between Blue and Red.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="594"/>
-        <location filename="../../GameModel.cpp" line="637"/>
-        <source>Game ends in a tie between Yellow and Red.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="595"/>
-        <location filename="../../GameModel.cpp" line="638"/>
-        <source>Game ends in a tie between all players.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="614"/>
-        <source>Green wins.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="623"/>
-        <source>Game ends in a tie between Blue, Yellow and Red.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="626"/>
-        <source>Game ends in a tie between Blue, Yellow and Green.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="629"/>
-        <source>Game ends in a tie between Blue, Red and Green.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="631"/>
-        <source>Game ends in a tie between Yellow, Red and Green.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="880"/>
-        <source>Invalid Blokus SGF file. (%1)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="892"/>
-        <source>File has unsupported character set.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="936"/>
-        <source>Clipboard is empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../GameModel.cpp" line="1460"/>
-        <location filename="../../GameModel.cpp" line="1468"/>
         <source>(Setup)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Stellung)</translation>
     </message>
     <message>
-        <location filename="../../GameModel.cpp" line="1460"/>
         <source>(No moves)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Keine Züge)</translation>
     </message>
     <message>
-        <location filename="../../GameModel.cpp" line="1464"/>
         <source>Move %1</source>
-        <extracomment>The argument is the current move number.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Zug %1</translation>
+    </message>
+    <message>
+        <source>Blue wins with 1 point.</source>
+        <translation>Blau gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Blue wins with %L1 points.</source>
+        <translation>Blau gewinnt mit %L1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Green wins with 1 point.</source>
+        <translation>Grün gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Green wins with %L1 points.</source>
+        <translation>Grün gewinnt mit %L1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Green wins (tie resolved).</source>
+        <translation>Grün gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie.</source>
+        <translation>Spiel endet unentschieden.</translation>
+    </message>
+    <message>
+        <source>Blue/Red wins with 1 point.</source>
+        <translation>Blau/Rot gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Blue/Red wins with %L1 points.</source>
+        <translation>Blau/Rot gewinnt mit %L1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Yellow/Green wins with 1 point.</source>
+        <translation>Gelb/Grün gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Yellow/Green wins with %L1 points.</source>
+        <translation>Gelb/Grün gewinnt mit %L1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Yellow/Green wins (tie resolved).</source>
+        <translation>Gelb/Grün gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Blue wins.</source>
+        <translation>Blau gewinnt.</translation>
+    </message>
+    <message>
+        <source>Yellow wins.</source>
+        <translation>Gelb gewinnt.</translation>
+    </message>
+    <message>
+        <source>Red wins.</source>
+        <translation>Rot gewinnt.</translation>
+    </message>
+    <message>
+        <source>Red wins (tie resolved).</source>
+        <translation>Rot gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Yellow wins (tie resolved).</source>
+        <translation>Gelb gewinnt (Unentschieden aufgelöst).</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Blue and Yellow.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Blau und Gelb.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Blue and Red.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Blau und Rot.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Yellow and Red.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Gelb und Rot.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between all players.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen allen Spielern.</translation>
+    </message>
+    <message>
+        <source>Green wins.</source>
+        <translation>Grün gewinnt.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Blue, Yellow and Red.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Blau, Gelb und Rot.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Blue, Yellow and Green.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Blau, Gelb und Grün.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Blue, Red and Green.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Blau, Rot und Grün.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie between Yellow, Red and Green.</source>
+        <translation>Spiel endet in einem Unentschieden zwischen Gelb, Rot und Grün.</translation>
+    </message>
+    <message>
+        <source>Clipboard is empty.</source>
+        <translation>Zwischenablage ist leer.</translation>
+    </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation>Blau/Rot</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>Blau</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation>Gelb/Grün</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Grün</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Gelb</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rot</translation>
+    </message>
+    <message>
+        <source>Invalid Blokus SGF file. (%1)</source>
+        <translation>Ungültige Blokus-SGF-Datei. (%1)</translation>
+    </message>
+    <message>
+        <source>File has unsupported character set.</source>
+        <translation>Datei hat nicht unterstützten Zeichensatz.</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Lila</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
+    </message>
+    <message>
+        <source>Purple wins with 1 point.</source>
+        <translation>Lila gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Purple wins with %L1 points.</source>
+        <translation>Lila gewinnt mit %L1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Orange wins with 1 point.</source>
+        <translation>Orange gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Orange wins with %L1 points.</source>
+        <translation>Orange gewinnt mit %L1 Punkten.</translation>
     </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>
     <message>
-        <location filename="../GotoMoveDialog.qml" line="6"/>
         <source>Go to Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Gehe zu Zug</translation>
     </message>
     <message>
-        <location filename="../GotoMoveDialog.qml" line="12"/>
         <source>Move number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zugnummer:</translation>
     </message>
 </context>
 <context>
     <name>HelpWindow</name>
     <message>
-        <location filename="../HelpWindow.qml" line="26"/>
         <source>Pentobi Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentobi-Hilfe</translation>
     </message>
 </context>
 <context>
     <name>ImageSaveDialog</name>
     <message>
-        <location filename="../ImageSaveDialog.qml" line="6"/>
         <source>Save Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafik speichern</translation>
     </message>
     <message>
-        <location filename="../ImageSaveDialog.qml" line="9"/>
-        <source>PNG image files (*.png)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ImageSaveDialog.qml" line="9"/>
         <source>All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien (*)</translation>
+    </message>
+    <message>
+        <source>PNG image files (*.png)</source>
+        <translation>PNG-Bilddateien (*.png)</translation>
     </message>
 </context>
 <context>
     <name>InitialRatingDialog</name>
     <message>
-        <location filename="../InitialRatingDialog.qml" line="10"/>
         <source>Initial Rating</source>
-        <translation type="unfinished"></translation>
+        <translation>Anfangswertung</translation>
     </message>
     <message>
-        <location filename="../InitialRatingDialog.qml" line="24"/>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt. Schätzen Sie Ihre Spielstärke, um Ihre Wertung zu initialisieren.</translation>
     </message>
     <message>
-        <location filename="../InitialRatingDialog.qml" line="32"/>
         <source>Beginner</source>
-        <translation type="unfinished"></translation>
+        <translation>Anfänger</translation>
     </message>
     <message>
-        <location filename="../InitialRatingDialog.qml" line="51"/>
         <source>Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>Experte</translation>
     </message>
     <message>
-        <location filename="../InitialRatingDialog.qml" line="57"/>
         <source>Your initial rating:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Anfangswertung:</translation>
     </message>
 </context>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../Main.qml" line="50"/>
-        <location filename="../Main.js" line="5"/>
         <source>Pentobi</source>
-        <extracomment>Main window title if no file is loaded.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Pentobi</translation>
     </message>
     <message>
-        <location filename="../Main.qml" line="238"/>
-        <source>Overwrite existing file?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="6"/>
-        <source>Version %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="7"/>
-        <source>Computer opponent for the board game Blokus.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="8"/>
-        <source>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="14"/>
-        <source>Game analysis is only possible in main variation.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="32"/>
-        <source>Game analysis aborted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="36"/>
-        <source>Computer move aborted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="71"/>
-        <source>Your rating has increased from %1 to %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="73"/>
-        <source>Your rating has decreased from %1 to %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="75"/>
-        <source>Your rating stays at %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="93"/>
-        <source>Delete all rating information for the current game variant?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="99"/>
-        <source>Rating information deleted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="170"/>
-        <source>Delete all variations?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="175"/>
-        <source>Variations deleted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="180"/>
-        <location filename="../Main.js" line="612"/>
-        <source>Save failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="182"/>
-        <location filename="../Main.js" line="614"/>
-        <source>File saved.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="190"/>
-        <source>Saving image failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="192"/>
-        <source>Image saved.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="194"/>
-        <source>Creating image failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="208"/>
-        <source>End of tree was reached. Continue search from start of the tree?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="211"/>
-        <location filename="../Main.js" line="220"/>
-        <source>No comment found</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="299"/>
-        <source>File was deleted by another application.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="304"/>
-        <source>File has been modified by another application. Reload?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="336"/>
-        <source>Keep only position?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="341"/>
-        <source>Kept only position.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="345"/>
-        <source>Keep only subtree?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="350"/>
-        <source>Kept only subtree.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="405"/>
-        <location filename="../Main.js" line="429"/>
-        <location filename="../Main.js" line="462"/>
-        <location filename="../Main.js" line="501"/>
         <source>Open failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen fehlgeschlagen.</translation>
     </message>
     <message>
-        <location filename="../Main.js" line="542"/>
-        <source>Start rated game with Purple against Pentobi level %1?</source>
-        <translation type="unfinished"></translation>
+        <source>Save failed.</source>
+        <translation>Speichern fehlgeschlagen.</translation>
     </message>
     <message>
-        <location filename="../Main.js" line="544"/>
-        <location filename="../Main.js" line="556"/>
-        <location filename="../Main.js" line="564"/>
-        <source>Start rated game with Green against Pentobi level %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="546"/>
-        <source>Start rated game with Blue/Red against Pentobi level %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="548"/>
-        <source>Start rated game with Blue against Pentobi level %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="552"/>
-        <source>Start rated game with Orange against Pentobi level %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="554"/>
-        <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="558"/>
-        <source>Start rated game with Yellow against Pentobi level %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="561"/>
-        <source>Start rated game with Red against Pentobi level %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="596"/>
-        <source>File has been modified by another application. Save anyway?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="648"/>
-        <source>Variation is now %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../Main.js" line="652"/>
         <source>Truncate this subtree?</source>
-        <translation type="unfinished"></translation>
+        <translation>Diesen Teilbaum abschneiden?</translation>
     </message>
     <message>
-        <location filename="../Main.js" line="656"/>
         <source>Truncate children?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kindknoten abschneiden?</translation>
     </message>
     <message>
-        <location filename="../Main.js" line="661"/>
+        <source>Delete all variations?</source>
+        <translation>Alle Varianten löschen?</translation>
+    </message>
+    <message>
+        <source>Version %1</source>
+        <translation>Version %1</translation>
+    </message>
+    <message>
+        <source>Computer opponent for the board game Blokus.</source>
+        <translation>Computer-Gegner für das Brettspiel Blokus.</translation>
+    </message>
+    <message>
+        <source>Keep only position?</source>
+        <translation>Nur Brettstellung behalten?</translation>
+    </message>
+    <message>
+        <source>Keep only subtree?</source>
+        <translation>Nur Teilbaum behalten?</translation>
+    </message>
+    <message>
+        <source>Saving image failed.</source>
+        <translation>Grafik konnte nicht gespeichert werden.</translation>
+    </message>
+    <message>
+        <source>Creating image failed.</source>
+        <translation>Grafik konnte nicht erzeugt werden.</translation>
+    </message>
+    <message>
+        <source>Game analysis is only possible in main variation.</source>
+        <translation>Spielanalyse ist nur in Hauptvariante möglich.</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Reload?</source>
+        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Neu laden?</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Save anyway?</source>
+        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Trotzdem speichern?</translation>
+    </message>
+    <message>
+        <source>End of tree was reached. Continue search from start of the tree?</source>
+        <translation>Ende des Spielbaums erreicht. Suche vom Start des Spielbaums fortsetzen?</translation>
+    </message>
+    <message>
+        <source>No comment found</source>
+        <translation>Kein Kommentar gefunden</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue/Red against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Blau/Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Blau gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Gelb/Grün gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Green against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Grün gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Gelb gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Red against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Your rating has increased from %1 to %2.</source>
+        <translation>Ihre Wertung hat sich von %1 auf %2 erhöht.</translation>
+    </message>
+    <message>
+        <source>Your rating has decreased from %1 to %2.</source>
+        <translation>Ihre Wertung hat sich von %1 auf %2 verringert.</translation>
+    </message>
+    <message>
+        <source>Your rating stays at %1.</source>
+        <translation>Ihre Wertung bleibt bei %1.</translation>
+    </message>
+    <message>
+        <source>Delete all rating information for the current game variant?</source>
+        <translation>Alle Wertungsinformationen für die gegenwärtige Spielvariante löschen?</translation>
+    </message>
+    <message>
+        <source>Rating information deleted.</source>
+        <translation>Wertungsinformationen gelöscht.</translation>
+    </message>
+    <message>
+        <source>File saved.</source>
+        <translation>Datei gespeichert.</translation>
+    </message>
+    <message>
+        <source>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</source>
+        <translation>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</translation>
+    </message>
+    <message>
+        <source>Game analysis aborted.</source>
+        <translation>Spielanalyse abgebrochen.</translation>
+    </message>
+    <message>
+        <source>Computer move aborted.</source>
+        <translation>Computer-Zug abgebrochen.</translation>
+    </message>
+    <message>
+        <source>Variations deleted.</source>
+        <translation>Varianten gelöscht.</translation>
+    </message>
+    <message>
+        <source>Image saved.</source>
+        <translation>Grafik gespeichert.</translation>
+    </message>
+    <message>
+        <source>Kept only position.</source>
+        <translation>Nur Brettstellung behalten.</translation>
+    </message>
+    <message>
+        <source>Kept only subtree.</source>
+        <translation>Nur Teilbaum behalten.</translation>
+    </message>
+    <message>
         <source>Children truncated.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kindknoten abgeschnitten.</translation>
     </message>
     <message>
-        <location filename="../Main.js" line="671"/>
+        <source>Variation is now %1.</source>
+        <translation>Variante ist jetzt %1.</translation>
+    </message>
+    <message>
         <source>Discard game?</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiel verwerfen?</translation>
+    </message>
+    <message>
+        <source>File was deleted by another application.</source>
+        <translation>Datei wurde von einer anderen Anwendung gelöscht.</translation>
+    </message>
+    <message>
+        <source>Overwrite existing file?</source>
+        <translation>Existierende Datei überschreiben?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Purple against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Lila gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Orange against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Orange gegen Pentobi Spielstufe %1 beginnen?</translation>
     </message>
 </context>
 <context>
     <name>MenuComputer</name>
     <message>
-        <location filename="../MenuComputer.qml" line="6"/>
         <source>&amp;Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Computer</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="9"/>
         <source>Computer &amp;Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Computer-&amp;Farben</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="14"/>
         <source>&amp;Play</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spielen</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="21"/>
-        <source>Play &amp;Single Move</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuComputer.qml" line="27"/>
-        <source>St&amp;op</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuComputer.qml" line="38"/>
         <source>&amp;Level (Classic, 4 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Klassisch, 4 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="39"/>
         <source>&amp;Level (Classic, 2 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Klassisch, 2 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="40"/>
         <source>&amp;Level (Classic, 3 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Klassisch, 3 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="41"/>
         <source>&amp;Level (Duo)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Duo)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="42"/>
         <source>&amp;Level (Junior)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Junior)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="43"/>
         <source>&amp;Level (Trigon, 4 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Trigon, 4 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="44"/>
         <source>&amp;Level (Trigon, 2 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Trigon, 2 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="45"/>
         <source>&amp;Level (Trigon, 3 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Trigon, 3 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="46"/>
         <source>&amp;Level (Nexos, 4 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Nexos, 4 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="47"/>
         <source>&amp;Level (Nexos, 2 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Nexos, 2 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="48"/>
         <source>&amp;Level (Callisto, 4 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Callisto, 4 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="49"/>
-        <source>&amp;Level (Callisto, 2 Players, 2 Colors)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuComputer.qml" line="50"/>
-        <source>&amp;Level (Callisto, 2 Players, 4 Colors)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuComputer.qml" line="51"/>
         <source>&amp;Level (Callisto, 3 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (Callisto, 3 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="52"/>
+        <source>Play &amp;Single Move</source>
+        <translation>&amp;Einzelnen Zug spielen</translation>
+    </message>
+    <message>
+        <source>St&amp;op</source>
+        <translation>St&amp;opp</translation>
+    </message>
+    <message>
         <source>&amp;Level (GembloQ, 4 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (GembloQ, 2 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuComputer.qml" line="53"/>
-        <source>&amp;Level (GembloQ, 2 Players, 2 Colors)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuComputer.qml" line="54"/>
-        <source>&amp;Level (GembloQ, 2 Players, 4 Colors)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuComputer.qml" line="55"/>
         <source>&amp;Level (GembloQ, 3 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielst&amp;ufe (GembloQ, 3 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (GembloQ, 2 Players, 2 Colors)</source>
+        <translation>Spielst&amp;ufe (GembloQ, 2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (GembloQ, 2 Players, 4 Colors)</source>
+        <translation>Spielst&amp;ufe (GembloQ, 2 Spieler, 4 Farben)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Callisto, 2 Players, 2 Colors)</source>
+        <translation>Spielst&amp;ufe (Callisto, 2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>&amp;Level (Callisto, 2 Players, 4 Colors)</source>
+        <translation>Spielst&amp;ufe (Callisto, 2 Spieler, 4 Farben)</translation>
     </message>
 </context>
 <context>
     <name>MenuEdit</name>
     <message>
-        <location filename="../MenuEdit.qml" line="6"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
-        <location filename="../MenuEdit.qml" line="11"/>
-        <source>Move &amp;Annotation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="17"/>
-        <source>&amp;None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="24"/>
-        <source>&amp;Very good</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="31"/>
-        <source>&amp;Good</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="38"/>
-        <source>Int&amp;eresting</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="45"/>
-        <source>&amp;Doubtful</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="52"/>
-        <source>&amp;Bad</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="59"/>
-        <source>Very B&amp;ad</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="68"/>
         <source>Make &amp;Main Variation</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu &amp;Hauptvariante machen</translation>
     </message>
     <message>
-        <location filename="../MenuEdit.qml" line="73"/>
-        <source>Made main variation.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="77"/>
         <source>Move Variation &amp;Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Variante nach &amp;oben schieben</translation>
     </message>
     <message>
-        <location filename="../MenuEdit.qml" line="83"/>
         <source>Move Variation &amp;Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Variante nach &amp;unten schieben</translation>
     </message>
     <message>
-        <location filename="../MenuEdit.qml" line="90"/>
-        <source>&amp;Delete All Variations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="96"/>
         <source>&amp;Truncate</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abschneiden</translation>
     </message>
     <message>
-        <location filename="../MenuEdit.qml" line="102"/>
         <source>Truncate &amp;Children</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kindknoten abschneiden</translation>
     </message>
     <message>
-        <location filename="../MenuEdit.qml" line="108"/>
-        <source>&amp;Keep Only Position</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Delete All Variations</source>
+        <translation>Alle &amp;Varianten löschen</translation>
     </message>
     <message>
-        <location filename="../MenuEdit.qml" line="114"/>
-        <source>Keep Only &amp;Subtree</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="121"/>
-        <source>S&amp;etup Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuEdit.qml" line="133"/>
         <source>&amp;Next Color</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nächste Farbe</translation>
+    </message>
+    <message>
+        <source>&amp;Keep Only Position</source>
+        <translation>Nur &amp;Brettstellung behalten</translation>
+    </message>
+    <message>
+        <source>Keep Only &amp;Subtree</source>
+        <translation>Nur &amp;Teilbaum behalten</translation>
+    </message>
+    <message>
+        <source>Move &amp;Annotation</source>
+        <translation>&amp;Zugkommentierung</translation>
+    </message>
+    <message>
+        <source>&amp;None</source>
+        <translation>&amp;Keine</translation>
+    </message>
+    <message>
+        <source>&amp;Very good</source>
+        <translation>&amp;Sehr gut</translation>
+    </message>
+    <message>
+        <source>&amp;Good</source>
+        <translation>&amp;Gut</translation>
+    </message>
+    <message>
+        <source>&amp;Doubtful</source>
+        <translation>&amp;Zweifelhaft</translation>
+    </message>
+    <message>
+        <source>&amp;Bad</source>
+        <translation>S&amp;chlecht</translation>
+    </message>
+    <message>
+        <source>Very B&amp;ad</source>
+        <translation>Se&amp;hr schlecht</translation>
+    </message>
+    <message>
+        <source>Int&amp;eresting</source>
+        <translation>Int&amp;eressant</translation>
+    </message>
+    <message>
+        <source>S&amp;etup Mode</source>
+        <translation>&amp;Stellungsaufbau</translation>
+    </message>
+    <message>
+        <source>Made main variation.</source>
+        <translation>Zu Hauptvariante gemacht.</translation>
     </message>
 </context>
 <context>
     <name>MenuGame</name>
     <message>
-        <location filename="../MenuGame.qml" line="7"/>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spiel</translation>
     </message>
     <message>
-        <location filename="../MenuGame.qml" line="10"/>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Neu</translation>
     </message>
     <message>
-        <location filename="../MenuGame.qml" line="16"/>
-        <source>&amp;Rated Game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="23"/>
         <source>Game &amp;Variant</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiel&amp;variante</translation>
     </message>
     <message>
-        <location filename="../MenuGame.qml" line="27"/>
-        <source>&amp;Classic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="31"/>
-        <source>Classic (&amp;2 Players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="35"/>
         <source>Classic (&amp;3 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Klassisch (&amp;3 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuGame.qml" line="39"/>
         <source>Classic (&amp;4 Players)</source>
-        <translation type="unfinished"></translation>
+        <translation>Klassisch (&amp;4 Spieler)</translation>
     </message>
     <message>
-        <location filename="../MenuGame.qml" line="44"/>
         <source>&amp;Duo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Duo</translation>
     </message>
     <message>
-        <location filename="../MenuGame.qml" line="48"/>
         <source>&amp;Junior</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Junior</translation>
     </message>
     <message>
-        <location filename="../MenuGame.qml" line="51"/>
-        <source>&amp;Trigon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="55"/>
-        <source>Trigon (&amp;2 Players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="59"/>
-        <source>Trigon (&amp;3 Players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="63"/>
-        <source>Trigon (&amp;4 Players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="67"/>
-        <source>&amp;Nexos</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="71"/>
-        <source>Nexos (&amp;2 Players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="75"/>
-        <source>Nexos (&amp;4 Players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="79"/>
-        <source>&amp;GembloQ</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="83"/>
-        <source>GembloQ (&amp;2 Players, 2 Colors)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="87"/>
-        <source>GembloQ (2 &amp;Players, 4 Colors)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="91"/>
-        <source>GembloQ (&amp;3 Players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="95"/>
-        <source>GembloQ (&amp;4 Players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="99"/>
-        <source>C&amp;allisto</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="103"/>
-        <source>Callisto (&amp;2 Players, 2 Colors)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="107"/>
-        <source>Callisto (2 &amp;Players, 4 Colors)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="111"/>
-        <source>Callisto (&amp;3 Players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="115"/>
-        <source>Callisto (&amp;4 Players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="120"/>
-        <source>&amp;Game Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="125"/>
         <source>&amp;Undo Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Zug &amp;rückgängig</translation>
     </message>
     <message>
-        <location filename="../MenuGame.qml" line="131"/>
         <source>&amp;Find Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Zug &amp;finden</translation>
     </message>
     <message>
-        <location filename="../MenuGame.qml" line="138"/>
         <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffn&amp;en ...</translation>
     </message>
     <message>
-        <location filename="../MenuGame.qml" line="144"/>
-        <source>Open R&amp;ecent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="160"/>
-        <source>Open from &amp;Clipboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="164"/>
-        <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="170"/>
-        <source>Save &amp;As...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="176"/>
-        <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="179"/>
-        <source>&amp;Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="183"/>
-        <source>&amp;ASCII Art</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGame.qml" line="189"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Beenden</translation>
+    </message>
+    <message>
+        <source>&amp;Classic</source>
+        <translation>&amp;Klassisch</translation>
+    </message>
+    <message>
+        <source>Classic (&amp;2 Players)</source>
+        <translation>Klassisch (&amp;2 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Trigon</source>
+        <translation>&amp;Trigon</translation>
+    </message>
+    <message>
+        <source>Trigon (&amp;2 Players)</source>
+        <translation>Trigon (&amp;2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Trigon (&amp;3 Players)</source>
+        <translation>Trigon (&amp;3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Trigon (&amp;4 Players)</source>
+        <translation>Trigon (&amp;4 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Nexos</source>
+        <translation>&amp;Nexos</translation>
+    </message>
+    <message>
+        <source>Nexos (&amp;2 Players)</source>
+        <translation>Nexos (&amp;2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Nexos (&amp;4 Players)</source>
+        <translation>Nexos (&amp;4 Spieler)</translation>
+    </message>
+    <message>
+        <source>C&amp;allisto</source>
+        <translation>&amp;Callisto</translation>
+    </message>
+    <message>
+        <source>Callisto (&amp;3 Players)</source>
+        <translation>Callisto (&amp;3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (&amp;4 Players)</source>
+        <translation>Callisto (&amp;4 Spieler)</translation>
+    </message>
+    <message>
+        <source>&amp;Export</source>
+        <translation>&amp;Exportieren</translation>
+    </message>
+    <message>
+        <source>&amp;Image</source>
+        <translation>&amp;Grafik</translation>
+    </message>
+    <message>
+        <source>&amp;ASCII Art</source>
+        <translation>&amp;ASCII-Art</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Speichern</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation>Speichern &amp;unter ...</translation>
+    </message>
+    <message>
+        <source>&amp;Game Info</source>
+        <translation>Spielinf&amp;ormation</translation>
+    </message>
+    <message>
+        <source>Open R&amp;ecent</source>
+        <translation>&amp;Zuletzt benutzte Dateien</translation>
+    </message>
+    <message>
+        <source>&amp;Rated Game</source>
+        <translation>Ge&amp;wertetes Spiel</translation>
+    </message>
+    <message>
+        <source>Open from &amp;Clipboard</source>
+        <translation>Aus &amp;Zwischenablage öffnen</translation>
+    </message>
+    <message>
+        <source>&amp;GembloQ</source>
+        <translation>&amp;GembloQ</translation>
+    </message>
+    <message>
+        <source>GembloQ (&amp;2 Players, 2 Colors)</source>
+        <translation>GembloQ (&amp;2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>GembloQ (2 &amp;Players, 4 Colors)</source>
+        <translation>GembloQ (2 &amp;Spieler, 4 Farben)</translation>
+    </message>
+    <message>
+        <source>GembloQ (&amp;3 Players)</source>
+        <translation>GembloQ (&amp;3 Spieler)</translation>
+    </message>
+    <message>
+        <source>GembloQ (&amp;4 Players)</source>
+        <translation>GembloQ (&amp;4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (&amp;2 Players, 2 Colors)</source>
+        <translation>Callisto (&amp;2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>Callisto (2 &amp;Players, 4 Colors)</source>
+        <translation>Callisto (2 &amp;Spieler, 4 Farben)</translation>
     </message>
 </context>
 <context>
     <name>MenuGo</name>
     <message>
-        <location filename="../MenuGo.qml" line="6"/>
         <source>G&amp;o</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gehe zu</translation>
     </message>
     <message>
-        <location filename="../MenuGo.qml" line="15"/>
-        <source>&amp;Go to Move...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuGo.qml" line="23"/>
         <source>Back to &amp;Main Variation</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurück zu &amp;Hauptvariante</translation>
     </message>
     <message>
-        <location filename="../MenuGo.qml" line="31"/>
+        <source>&amp;Go to Move...</source>
+        <translation>&amp;Gehe zu Zug ...</translation>
+    </message>
+    <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation type="unfinished"></translation>
+        <translation>Anfang der Verz&amp;weigung</translation>
     </message>
     <message>
-        <location filename="../MenuGo.qml" line="40"/>
         <source>Find Next &amp;Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Nächsten &amp;Kommentar finden</translation>
     </message>
 </context>
 <context>
     <name>MenuHelp</name>
     <message>
-        <location filename="../MenuHelp.qml" line="6"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../MenuHelp.qml" line="9"/>
-        <source>Pentobi &amp;Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuHelp.qml" line="13"/>
         <source>&amp;About Pentobi</source>
-        <translation type="unfinished"></translation>
+        <translation>Über &amp;Pentobi</translation>
+    </message>
+    <message>
+        <source>Pentobi &amp;Help</source>
+        <translation>Pentobi-&amp;Hilfe</translation>
     </message>
 </context>
 <context>
     <name>MenuItemLevel</name>
     <message>
-        <location filename="../MenuItemLevel.qml" line="8"/>
         <source>Level &amp;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Stufe &amp;%1</translation>
     </message>
 </context>
 <context>
     <name>MenuTools</name>
     <message>
-        <location filename="../MenuTools.qml" line="6"/>
         <source>&amp;Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Extras</translation>
     </message>
     <message>
-        <location filename="../MenuTools.qml" line="9"/>
-        <source>&amp;Rating</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuTools.qml" line="20"/>
-        <source>&amp;Clear Rating</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuTools.qml" line="27"/>
         <source>&amp;Analyze Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiel &amp;analysieren</translation>
+    </message>
+    <message>
+        <source>&amp;Rating</source>
+        <translation>&amp;Wertung</translation>
+    </message>
+    <message>
+        <source>&amp;Clear Rating</source>
+        <translation>Wertung lö&amp;schen</translation>
     </message>
 </context>
 <context>
     <name>MenuView</name>
     <message>
-        <location filename="../MenuView.qml" line="6"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ansicht</translation>
     </message>
     <message>
-        <location filename="../MenuView.qml" line="9"/>
-        <source>&amp;Move Marking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuView.qml" line="13"/>
-        <source>Last With &amp;Dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuView.qml" line="22"/>
-        <source>Last With &amp;Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuView.qml" line="29"/>
-        <source>&amp;All With Number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuView.qml" line="36"/>
-        <source>N&amp;one</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuView.qml" line="44"/>
-        <source>&amp;Coordinates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuView.qml" line="50"/>
-        <source>Show &amp;Variations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuView.qml" line="57"/>
-        <source>&amp;Theme</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuView.qml" line="61"/>
-        <source>&amp;Light</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuView.qml" line="68"/>
-        <source>&amp;Dark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../MenuView.qml" line="76"/>
         <source>&amp;Animate Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielsteine &amp;animieren</translation>
     </message>
     <message>
-        <location filename="../MenuView.qml" line="83"/>
+        <source>&amp;Coordinates</source>
+        <translation>&amp;Koordinaten</translation>
+    </message>
+    <message>
+        <source>&amp;Move Marking</source>
+        <translation>&amp;Zugmarkierung</translation>
+    </message>
+    <message>
+        <source>Last With &amp;Dot</source>
+        <translation>Letzter mit &amp;Punkt</translation>
+    </message>
+    <message>
+        <source>Last With &amp;Number</source>
+        <translation>Letzter mit &amp;Nummer</translation>
+    </message>
+    <message>
+        <source>&amp;All With Number</source>
+        <translation>&amp;Alle mit Nummer</translation>
+    </message>
+    <message>
+        <source>N&amp;one</source>
+        <translation>&amp;Keine</translation>
+    </message>
+    <message>
+        <source>Show &amp;Variations</source>
+        <translation>&amp;Varianten zeigen</translation>
+    </message>
+    <message>
         <source>&amp;Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Voll&amp;bild</translation>
+    </message>
+    <message>
+        <source>&amp;Theme</source>
+        <translation>&amp;Erscheinungsbild</translation>
+    </message>
+    <message>
+        <source>&amp;Light</source>
+        <translation>&amp;Hell</translation>
+    </message>
+    <message>
+        <source>&amp;Dark</source>
+        <translation>&amp;Dunkel</translation>
     </message>
 </context>
 <context>
     <name>OpenDialog</name>
     <message>
-        <location filename="../OpenDialog.qml" line="6"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen</translation>
     </message>
     <message>
-        <location filename="../OpenDialog.qml" line="7"/>
         <source>Blokus games (*.blksgf)</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokus-Partien (*.blksgf)</translation>
     </message>
     <message>
-        <location filename="../OpenDialog.qml" line="7"/>
         <source>All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
     <name>RatingDialog</name>
     <message>
-        <location filename="../RatingDialog.qml" line="14"/>
         <source>Rating</source>
-        <extracomment>Window title for the rating dialog.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Wertung</translation>
     </message>
     <message>
-        <location filename="../RatingDialog.qml" line="27"/>
         <source>Your rating:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Wertung:</translation>
     </message>
     <message>
-        <location filename="../RatingDialog.qml" line="34"/>
-        <source>Game variant:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="37"/>
-        <source>Classic (2 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="38"/>
-        <source>Classic (3 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="39"/>
-        <source>Classic (4 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="40"/>
-        <source>Duo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="41"/>
-        <source>Junior</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="42"/>
-        <source>Trigon (2 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="43"/>
-        <source>Trigon (3 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="44"/>
-        <source>Trigon (4 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="45"/>
-        <source>Nexos (2 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="46"/>
-        <source>Nexos (4 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="47"/>
-        <source>Callisto (2 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="48"/>
-        <source>Callisto (3 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="49"/>
-        <source>Callisto (4 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="50"/>
-        <source>GembloQ (4 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="51"/>
-        <source>GembloQ (2 players, 2 colors)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="52"/>
-        <source>GembloQ (2 players, 4 colors)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="53"/>
-        <source>GembloQ (3 players)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="58"/>
-        <source>Rated games:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="63"/>
         <source>Best previous rating:</source>
-        <translation type="unfinished"></translation>
+        <translation>Beste frühere Wertung:</translation>
     </message>
     <message>
-        <location filename="../RatingDialog.qml" line="72"/>
-        <source>Recent development:</source>
-        <translation type="unfinished"></translation>
+        <source>Classic (2 players)</source>
+        <translation>Klassisch (2 Spieler)</translation>
     </message>
     <message>
-        <location filename="../RatingDialog.qml" line="100"/>
+        <source>Classic (3 players)</source>
+        <translation>Klassisch (3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Classic (4 players)</source>
+        <translation>Klassisch (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Duo</source>
+        <translation>Duo</translation>
+    </message>
+    <message>
+        <source>Junior</source>
+        <translation>Junior</translation>
+    </message>
+    <message>
+        <source>Trigon (2 players)</source>
+        <translation>Trigon (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Trigon (3 players)</source>
+        <translation>Trigon (3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Trigon (4 players)</source>
+        <translation>Trigon (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Nexos (2 players)</source>
+        <translation>Nexos (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Nexos (4 players)</source>
+        <translation>Nexos (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (2 players)</source>
+        <translation>Callisto (2 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (3 players)</source>
+        <translation>Callisto (3 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (4 players)</source>
+        <translation>Callisto (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Game variant:</source>
+        <translation>Spielvariante:</translation>
+    </message>
+    <message>
+        <source>Rated games:</source>
+        <translation>Gewertete Spiele:</translation>
+    </message>
+    <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiel</translation>
     </message>
     <message>
-        <location filename="../RatingDialog.qml" line="109"/>
-        <source>Result</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="115"/>
-        <source>Win</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="116"/>
-        <source>Loss</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="117"/>
-        <source>Tie</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="121"/>
-        <source>Level</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../RatingDialog.qml" line="127"/>
         <source>Your Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Ihre Farbe</translation>
     </message>
     <message>
-        <location filename="../RatingDialog.qml" line="133"/>
+        <source>Level</source>
+        <translation>Stufe</translation>
+    </message>
+    <message>
+        <source>Result</source>
+        <translation>Ergebnis</translation>
+    </message>
+    <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../RatingDialog.qml" line="166"/>
+        <source>Win</source>
+        <translation>Gewinn</translation>
+    </message>
+    <message>
+        <source>Loss</source>
+        <translation>Verlust</translation>
+    </message>
+    <message>
+        <source>Tie</source>
+        <translation>Unentsch.</translation>
+    </message>
+    <message>
+        <source>Recent development:</source>
+        <translation>Aktuelle Entwicklung:</translation>
+    </message>
+    <message>
         <source>Open Game %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiel %1 öffnen</translation>
+    </message>
+    <message>
+        <source>GembloQ (4 players)</source>
+        <translation>GembloQ (4 Spieler)</translation>
+    </message>
+    <message>
+        <source>GembloQ (2 players, 2 colors)</source>
+        <translation>GembloQ (2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>GembloQ (2 players, 4 colors)</source>
+        <translation>GembloQ (2 Spieler, 4 Farben)</translation>
+    </message>
+    <message>
+        <source>GembloQ (3 players)</source>
+        <translation>GembloQ (3 Spieler)</translation>
     </message>
 </context>
 <context>
     <name>SaveDialog</name>
     <message>
-        <location filename="../SaveDialog.qml" line="6"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../SaveDialog.qml" line="9"/>
         <source>Blokus games (*.blksgf)</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokus-Partien (*.blksgf)</translation>
     </message>
     <message>
-        <location filename="../SaveDialog.qml" line="9"/>
         <source>All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
     <name>ToolBar</name>
     <message>
-        <location filename="../ToolBar.qml" line="16"/>
-        <source>Rated</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ToolBar.qml" line="17"/>
-        <source>Leave setup</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ToolBar.qml" line="34"/>
         <source>File (modified): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei (geändert): %1</translation>
     </message>
     <message>
-        <location filename="../ToolBar.qml" line="36"/>
         <source>File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei: %1</translation>
+    </message>
+    <message>
+        <source>Rated</source>
+        <translation>Gewertet</translation>
+    </message>
+    <message>
+        <source>Leave setup</source>
+        <translation>Aufbau beenden</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
-        <location filename="../../Main.cpp" line="122"/>
-        <source>Pentobi</source>
-        <translation type="unfinished"></translation>
+        <source>Not enough memory.</source>
+        <translation>Nicht genügend Speicher.</translation>
     </message>
     <message>
-        <location filename="../../Main.cpp" line="123"/>
-        <source>Not enough memory.</source>
-        <translation type="unfinished"></translation>
+        <source>Pentobi</source>
+        <translation>Pentobi</translation>
     </message>
 </context>
 </TS>
