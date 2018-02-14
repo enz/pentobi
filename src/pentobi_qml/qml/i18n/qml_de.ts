@@ -144,6 +144,7 @@
     </message>
     <message>
         <source>Move %1</source>
+        <extracomment>The argument is the current move number.</extracomment>
         <translation>Zug %1</translation>
     </message>
     <message>
@@ -367,6 +368,7 @@
     <name>Main</name>
     <message>
         <source>Pentobi</source>
+        <extracomment>Main window title if no file is loaded.</extracomment>
         <translation>Pentobi</translation>
     </message>
     <message>
@@ -1013,6 +1015,7 @@
     <name>RatingDialog</name>
     <message>
         <source>Rating</source>
+        <extracomment>Window title for the rating dialog.</extracomment>
         <translation>Wertung</translation>
     </message>
     <message>

@@ -5,10 +5,12 @@
     <name>AnalyzeGameWidget</name>
     <message>
         <source>Win</source>
+        <extracomment>Label for 100% win rate in analyze game graph</extracomment>
         <translation>Gewinn</translation>
     </message>
     <message>
         <source>Loss</source>
+        <extracomment>Label for 0% win rate in analyze game graph</extracomment>
         <translation>Verlust</translation>
     </message>
     <message>
@@ -388,6 +390,7 @@
     </message>
     <message>
         <source>&amp;Rating</source>
+        <extracomment>Menu label for opening the rating dialog.</extracomment>
         <translation>&amp;Wertung</translation>
     </message>
     <message>
@@ -537,6 +540,7 @@
     </message>
     <message>
         <source>Open</source>
+        <extracomment>Window title for open dialog</extracomment>
         <translation>Öffnen</translation>
     </message>
     <message>
@@ -554,6 +558,7 @@
     </message>
     <message>
         <source>Untitled Game %1.blksgf</source>
+        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
         <translation>Unbenanntes Spiel %1.blksgf</translation>
     </message>
     <message>
@@ -682,7 +687,7 @@
     </message>
     <message>
         <source>[*]%1</source>
-        <translation>[*]%1</translation>
+        <translation type="vanished">[*]%1</translation>
     </message>
     <message>
         <source>Setup mode cannot be used if moves have been played.</source>
@@ -785,10 +790,12 @@
     </message>
     <message>
         <source>Move %1 of %2</source>
+        <extracomment>The first argument is the current move number, the second is the number of moves in the main variation.</extracomment>
         <translation>Zug %1 von %2</translation>
     </message>
     <message>
         <source>Move %1 of %2 in variation %3</source>
+        <extracomment>The first argument is the current move number, the second is the number of moves in the current variation, the third is an identifier for the variation (e.g. 3b-4c).</extracomment>
         <translation>Zug %1 von %2 in Variante %3</translation>
     </message>
     <message>
@@ -1083,6 +1090,7 @@
     <name>RatingDialog</name>
     <message>
         <source>Rating</source>
+        <extracomment>Window title for the rating dialog.</extracomment>
         <translation>Wertung</translation>
     </message>
     <message>
