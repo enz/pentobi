@@ -2817,7 +2817,7 @@ void MainWindow::setFile(const QString& file)
     if (m_file.isEmpty())
         setWindowTitle(tr("Pentobi"));
     else
-        setWindowTitle(tr("[*]%1").arg(QFileInfo(m_file).fileName()));
+        setWindowTitle(QString("[*]%1").arg(QFileInfo(m_file).fileName()));
 }
 
 void MainWindow::setLevel(unsigned level)
