@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>Rated game</source>
-        <translation type="unfinished">Rated game</translation>
+        <translation>Partie classèe</translation>
     </message>
     <message>
         <source>Continuing unfinished rated game.</source>
@@ -178,7 +178,7 @@
     </message>
     <message>
         <source>Go to end of moves</source>
-        <translation type="unfinished">Go to end of moves</translation>
+        <translation>Aller à la fin des coups</translation>
     </message>
     <message>
         <source>&amp;ASCII Art</source>
@@ -190,7 +190,7 @@
     </message>
     <message>
         <source>&amp;Find Move</source>
-        <translation type="unfinished">&amp;Find Move</translation>
+        <translation>&amp;Trouver un coup</translation>
     </message>
     <message>
         <source>Flip Horizontally</source>
@@ -218,7 +218,7 @@
     </message>
     <message>
         <source>St&amp;op</source>
-        <translation type="unfinished">St&amp;op</translation>
+        <translation>&amp;Arrêter</translation>
     </message>
     <message>
         <source>&amp;Duo</source>
@@ -323,7 +323,7 @@
     </message>
     <message>
         <source>&amp;Rated Game</source>
-        <translation type="unfinished">&amp;Rated Game</translation>
+        <translation>Partie &amp;classée</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -348,7 +348,7 @@
     </message>
     <message>
         <source>Play &amp;Single Move</source>
-        <translation type="unfinished">Play &amp;Single Move</translation>
+        <translation>Jouer un &amp;seul coup</translation>
     </message>
     <message>
         <source>Previous Piece</source>
@@ -388,7 +388,7 @@
     </message>
     <message>
         <source>&amp;Rating</source>
-        <translation type="unfinished">&amp;Rating</translation>
+        <translation>&amp;Classement</translation>
     </message>
     <message>
         <source>&amp;No Text</source>
@@ -452,11 +452,11 @@
     </message>
     <message>
         <source>&amp;Computer</source>
-        <translation>Ordi&amp;nateur</translation>
+        <translation>&amp;Ordinateur</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
-        <translation>&amp;Outils</translation>
+        <translation>O&amp;utils</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -516,7 +516,7 @@
     </message>
     <message>
         <source>Start rated game?</source>
-        <translation type="unfinished">Start rated game?</translation>
+        <translation>Commencer la partie classée ?</translation>
     </message>
     <message>
         <source>In this game, you play %1 against Pentobi level&amp;nbsp;%2.</source>
@@ -524,7 +524,7 @@
     </message>
     <message>
         <source>&amp;Start Game</source>
-        <translation type="unfinished">&amp;Start Game</translation>
+        <translation>&amp;Commencer la partie</translation>
     </message>
     <message>
         <source>Pentobi %1 (level %2)</source>
@@ -614,7 +614,7 @@
     </message>
     <message>
         <source>Start a rated game</source>
-        <translation type="unfinished">Start a rated game</translation>
+        <translation>Commence une partie classée</translation>
     </message>
     <message>
         <source>Classic (&amp;3 Players)</source>
@@ -666,7 +666,7 @@
     </message>
     <message>
         <source>Show &amp;Rating</source>
-        <translation type="unfinished">Show &amp;Rating</translation>
+        <translation>Afficher le &amp;classement</translation>
     </message>
     <message>
         <source>Pentobi Help</source>
@@ -1081,11 +1081,11 @@
     <name>RatingDialog</name>
     <message>
         <source>Rating</source>
-        <translation type="unfinished">Rating</translation>
+        <translation>Classement</translation>
     </message>
     <message>
         <source>Your rating:</source>
-        <translation type="unfinished">Your rating:</translation>
+        <translation>Votre classement:</translation>
     </message>
     <message>
         <source>Game variant:</source>
@@ -1093,7 +1093,7 @@
     </message>
     <message>
         <source>Best previous rating:</source>
-        <translation type="unfinished">Best previous rating:</translation>
+        <translation type="unfinished">Meilleur classement précédent:</translation>
     </message>
     <message>
         <source>Recent games:</source>
@@ -1189,7 +1189,7 @@
     </message>
     <message>
         <source>Rated games:</source>
-        <translation type="unfinished">Rated games:</translation>
+        <translation>Parties classées:</translation>
     </message>
 </context>
 <context>
