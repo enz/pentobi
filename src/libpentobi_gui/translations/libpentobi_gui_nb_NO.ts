@@ -5,15 +5,15 @@
     <name>ComputerColorDialog</name>
     <message>
         <source>Computer Colors</source>
-        <translation></translation>
+        <translation>Datamaskinfarger</translation>
     </message>
     <message>
         <source>Computer plays:</source>
-        <translation></translation>
+        <translation>Datamaskinen spiller:</translation>
     </message>
     <message>
         <source>&amp;Blue</source>
-        <translation></translation>
+        <translation>&amp;Blå</translation>
     </message>
     <message>
         <source>&amp;Green</source>
@@ -21,7 +21,7 @@
     </message>
     <message>
         <source>&amp;Yellow</source>
-        <translation></translation>
+        <translation>&amp;Gul</translation>
     </message>
     <message>
         <source>&amp;Red</source>
@@ -29,15 +29,15 @@
     </message>
     <message>
         <source>&amp;Blue/Red</source>
-        <translation></translation>
+        <translation>&amp;Blå/rød</translation>
     </message>
     <message>
         <source>&amp;Yellow/Green</source>
-        <translation></translation>
+        <translation>&amp;Gul/grønn</translation>
     </message>
     <message>
         <source>&amp;Purple</source>
-        <translation></translation>
+        <translation>&amp;Lilla</translation>
     </message>
     <message>
         <source>&amp;Orange</source>
@@ -48,37 +48,37 @@
     <name>GameInfoDialog</name>
     <message>
         <source>Game Info</source>
-        <translation></translation>
+        <translation>Spillinfo</translation>
     </message>
     <message>
         <source>Player &amp;Blue:</source>
         <oldsource>Player Blue:</oldsource>
-        <translation></translation>
+        <translation type="unfinished">&amp;Blå spiller:</translation>
     </message>
     <message>
         <source>Player &amp;Green:</source>
         <oldsource>Player Green:</oldsource>
-        <translation></translation>
+        <translation>&amp;Grønn spiller:</translation>
     </message>
     <message>
         <source>Player &amp;Yellow:</source>
         <oldsource>Player Yellow:</oldsource>
-        <translation></translation>
+        <translation>&amp;Gul spiller:</translation>
     </message>
     <message>
         <source>Player &amp;Red:</source>
         <oldsource>Player Red:</oldsource>
-        <translation></translation>
+        <translation>&amp;Rød spiller:</translation>
     </message>
     <message>
         <source>Player &amp;Blue/Red:</source>
         <oldsource>Player Blue/Red:</oldsource>
-        <translation></translation>
+        <translation>Blå/rød spiller:</translation>
     </message>
     <message>
         <source>Player &amp;Yellow/Green:</source>
         <oldsource>Player Yellow/Green:</oldsource>
-        <translation></translation>
+        <translation>Gul/grønn spiller:</translation>
     </message>
     <message>
         <source>&amp;Date:</source>
@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>&amp;Time limits:</source>
-        <translation></translation>
+        <translation>&amp;Tidsgrenser:</translation>
     </message>
     <message>
         <source>&amp;Event:</source>
@@ -95,49 +95,49 @@
     </message>
     <message>
         <source>R&amp;ound:</source>
-        <translation></translation>
+        <translation>R&amp;unde:</translation>
     </message>
     <message>
         <source>Player &amp;Purple:</source>
-        <translation></translation>
+        <translation>&amp;Lilla spiller:</translation>
     </message>
     <message>
         <source>Player &amp;Orange:</source>
-        <translation></translation>
+        <translation>&amp;Oransje spiller:</translation>
     </message>
 </context>
 <context>
     <name>HelpWindow</name>
     <message>
         <source>Back</source>
-        <translation></translation>
+        <translation>Tilbake</translation>
     </message>
     <message>
         <source>Show previous page in history</source>
-        <translation></translation>
+        <translation>Vis forrige side i historikk</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation></translation>
+        <translation>Framover</translation>
     </message>
     <message>
         <source>Show next page in history</source>
-        <translation></translation>
+        <translation>Vis neste side i historikk</translation>
     </message>
 </context>
 <context>
     <name>InitialRatingDialog</name>
     <message>
         <source>Initial Rating</source>
-        <translation></translation>
+        <translation>Oppstartsvurdering</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation></translation>
+        <translation>Du har ikke spillt noen vurderte spill i denne varianten enda. Anslå din spillerstyrke for å anta din vurdering.</translation>
     </message>
     <message>
         <source>Beginner</source>
-        <translation></translation>
+        <translation>Begynner</translation>
     </message>
     <message>
         <source>Expert</source>
@@ -145,14 +145,14 @@
     </message>
     <message>
         <source>Your initial rating: %1</source>
-        <translation></translation>
+        <translation>Din oppstartsvurdering: %1</translation>
     </message>
 </context>
 <context>
     <name>Util</name>
     <message>
         <source>Blue</source>
-        <translation></translation>
+        <translation>Blå</translation>
     </message>
     <message>
         <source>Green</source>
@@ -160,7 +160,7 @@
     </message>
     <message>
         <source>Yellow</source>
-        <translation></translation>
+        <translation>Gul</translation>
     </message>
     <message>
         <source>Red</source>
@@ -168,15 +168,15 @@
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation></translation>
+        <translation>Blå/rød</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation></translation>
+        <translation>Gul/grønn</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation></translation>
+        <translation>Lilla</translation>
     </message>
     <message>
         <source>Orange</source>
