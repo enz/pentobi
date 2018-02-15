@@ -542,7 +542,7 @@
     <name>MenuComputer</name>
     <message>
         <source>&amp;Computer</source>
-        <translation>&amp;Ordinateur</translation>
+        <translation>Ordi&amp;nateur</translation>
     </message>
     <message>
         <source>Computer &amp;Colors</source>
@@ -637,7 +637,7 @@
     <name>MenuEdit</name>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Edition</translation>
+        <translation>&amp;Édition</translation>
     </message>
     <message>
         <source>Make &amp;Main Variation</source>
@@ -720,7 +720,7 @@
     <name>MenuGame</name>
     <message>
         <source>&amp;Game</source>
-        <translation>&amp;Jeu</translation>
+        <translation>&amp;Partie</translation>
     </message>
     <message>
         <source>&amp;New</source>
