@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>Event:</source>
-        <translation type="unfinished">Event:</translation>
+        <translation type="unfinished">&amp;Événement:</translation>
     </message>
     <message>
         <source>Round:</source>
@@ -344,7 +344,7 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initial Rating</source>
-        <translation type="unfinished">Initial Rating</translation>
+        <translation>Classement initial</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
@@ -360,7 +360,7 @@
     </message>
     <message>
         <source>Your initial rating:</source>
-        <translation type="unfinished">Your initial rating:</translation>
+        <translation>Votre classement initial:</translation>
     </message>
 </context>
 <context>
@@ -371,7 +371,7 @@
     </message>
     <message>
         <source>Open failed.</source>
-        <translation type="unfinished">Open failed.</translation>
+        <translation type="unfinished">Échec de l&apos;ouverture.</translation>
     </message>
     <message>
         <source>Save failed.</source>
@@ -499,7 +499,7 @@
     </message>
     <message>
         <source>Image saved.</source>
-        <translation type="unfinished">Image saved.</translation>
+        <translation>Image enregistrée.</translation>
     </message>
     <message>
         <source>Kept only position.</source>
@@ -542,7 +542,7 @@
     <name>MenuComputer</name>
     <message>
         <source>&amp;Computer</source>
-        <translation>Ordi&amp;nateur</translation>
+        <translation>&amp;Ordinateur</translation>
     </message>
     <message>
         <source>Computer &amp;Colors</source>
@@ -602,11 +602,11 @@
     </message>
     <message>
         <source>Play &amp;Single Move</source>
-        <translation type="unfinished">Play &amp;Single Move</translation>
+        <translation type="unfinished">Jouer un &amp;seul coup</translation>
     </message>
     <message>
         <source>St&amp;op</source>
-        <translation type="unfinished">St&amp;op</translation>
+        <translation type="unfinished">&amp;Arrêter</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 4 Players)</source>
@@ -752,7 +752,7 @@
     </message>
     <message>
         <source>&amp;Find Move</source>
-        <translation type="unfinished">&amp;Find Move</translation>
+        <translation type="unfinished">&amp;Trouver un coup</translation>
     </message>
     <message>
         <source>&amp;Open...</source>
@@ -840,7 +840,7 @@
     </message>
     <message>
         <source>&amp;Rated Game</source>
-        <translation type="unfinished">&amp;Rated Game</translation>
+        <translation type="unfinished">Partie &amp;classée</translation>
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
@@ -924,7 +924,7 @@
     <name>MenuTools</name>
     <message>
         <source>&amp;Tools</source>
-        <translation>&amp;Outils</translation>
+        <translation>O&amp;utils</translation>
     </message>
     <message>
         <source>&amp;Analyze Game</source>
@@ -932,7 +932,7 @@
     </message>
     <message>
         <source>&amp;Rating</source>
-        <translation type="unfinished">&amp;Rating</translation>
+        <translation type="unfinished">&amp;Classement</translation>
     </message>
     <message>
         <source>&amp;Clear Rating</source>
@@ -1013,15 +1013,15 @@
     <name>RatingDialog</name>
     <message>
         <source>Rating</source>
-        <translation type="unfinished">Rating</translation>
+        <translation>Classement</translation>
     </message>
     <message>
         <source>Your rating:</source>
-        <translation type="unfinished">Your rating:</translation>
+        <translation>Votre classement:</translation>
     </message>
     <message>
         <source>Best previous rating:</source>
-        <translation type="unfinished">Best previous rating:</translation>
+        <translation type="unfinished">Meilleur classement précédent:</translation>
     </message>
     <message>
         <source>Classic (2 players)</source>
@@ -1081,7 +1081,7 @@
     </message>
     <message>
         <source>Rated games:</source>
-        <translation type="unfinished">Rated games:</translation>
+        <translation>Parties classées:</translation>
     </message>
     <message>
         <source>Game</source>
@@ -1167,7 +1167,7 @@
     </message>
     <message>
         <source>Rated</source>
-        <translation type="unfinished">Rated</translation>
+        <translation>Classée</translation>
     </message>
     <message>
         <source>Leave setup</source>
