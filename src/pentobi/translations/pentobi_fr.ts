@@ -202,7 +202,7 @@
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation>En &amp;avant</translation>
+        <translation>En a&amp;vant</translation>
     </message>
     <message>
         <source>Go one move forward</source>
@@ -436,7 +436,7 @@
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Edition</translation>
+        <translation>&amp;Édition</translation>
     </message>
     <message>
         <source>&amp;Move Annotation</source>
@@ -452,7 +452,7 @@
     </message>
     <message>
         <source>&amp;Computer</source>
-        <translation>&amp;Ordinateur</translation>
+        <translation>Ordi&amp;nateur</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
@@ -622,7 +622,7 @@
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation>&amp;Jeu</translation>
+        <translation>&amp;Partie</translation>
     </message>
     <message>
         <source>Game &amp;Variant</source>
