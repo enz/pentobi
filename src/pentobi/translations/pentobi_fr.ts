@@ -62,11 +62,11 @@
     </message>
     <message>
         <source>The file is not a valid Blokus SGF file.</source>
-        <translation></translation>
+        <translation>Le fichier n’est pas un fichier Blokus SGF valable.</translation>
     </message>
     <message>
         <source>Truncate this subtree?</source>
-        <translation></translation>
+        <translation>Élaguer la branche actuelle ?</translation>
     </message>
     <message>
         <source>This position and all following moves and variations will be removed from the game tree.</source>
@@ -74,11 +74,11 @@
     </message>
     <message>
         <source>Truncate</source>
-        <translation>Tronquer</translation>
+        <translation>Couper</translation>
     </message>
     <message>
         <source>Truncate children?</source>
-        <translation></translation>
+        <translation>Élaguer les branches filles ?</translation>
     </message>
     <message>
         <source>All following moves and variations will be removed from the game tree.</source>
@@ -86,7 +86,7 @@
     </message>
     <message>
         <source>Truncate Children</source>
-        <translation></translation>
+        <translation>Couper les branches filles</translation>
     </message>
     <message>
         <source>Could not delete %1</source>
@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Analyze Game</source>
-        <translation></translation>
+        <translation>Analyser la partie</translation>
     </message>
     <message>
         <source>&amp;About Pentobi</source>
@@ -118,19 +118,19 @@
     </message>
     <message>
         <source>&amp;Analyze Game...</source>
-        <translation></translation>
+        <translation>&amp;Analyser la partie...</translation>
     </message>
     <message>
         <source>B&amp;ackward</source>
-        <translation></translation>
+        <translation>En &amp;arrière</translation>
     </message>
     <message>
         <source>Go one move backward</source>
-        <translation></translation>
+        <translation>Revenir un coup en arrière</translation>
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
-        <translation></translation>
+        <translation>Retour à la variation &amp;principale</translation>
     </message>
     <message>
         <source>&amp;Bad</source>
@@ -142,7 +142,7 @@
     </message>
     <message>
         <source>Go to beginning of game</source>
-        <translation></translation>
+        <translation>Aller en début de partie</translation>
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
@@ -154,7 +154,7 @@
     </message>
     <message>
         <source>&amp;Computer Colors</source>
-        <translation></translation>
+        <translation>&amp;Couleurs de l&apos;ordinateur</translation>
     </message>
     <message>
         <source>Set the colors played by the computer</source>
@@ -166,7 +166,7 @@
     </message>
     <message>
         <source>&amp;Delete All Variations</source>
-        <translation></translation>
+        <translation>&amp;Détruire toutes les variations</translation>
     </message>
     <message>
         <source>&amp;Doubtful</source>
@@ -174,7 +174,7 @@
     </message>
     <message>
         <source>&amp;End</source>
-        <translation></translation>
+        <translation>&amp;Fin</translation>
     </message>
     <message>
         <source>Go to end of moves</source>
@@ -202,11 +202,11 @@
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation></translation>
+        <translation>En &amp;avant</translation>
     </message>
     <message>
         <source>Go one move forward</source>
-        <translation></translation>
+        <translation>Avancer d&apos;un coup</translation>
     </message>
     <message>
         <source>&amp;Fullscreen</source>
@@ -214,7 +214,7 @@
     </message>
     <message>
         <source>Ga&amp;me Info</source>
-        <translation></translation>
+        <translation>I&amp;nfo sur la partie</translation>
     </message>
     <message>
         <source>St&amp;op</source>
@@ -234,11 +234,11 @@
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
-        <translation></translation>
+        <translation>Trouver le &amp;commentaire suivant</translation>
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation></translation>
+        <translation>Aller au &amp;coup...</translation>
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
@@ -250,7 +250,7 @@
     </message>
     <message>
         <source>&amp;Keep Only Position</source>
-        <translation></translation>
+        <translation>&amp;Garder seulement la position</translation>
     </message>
     <message>
         <source>Keep Only &amp;Subtree</source>
@@ -258,11 +258,11 @@
     </message>
     <message>
         <source>Leave Fullscreen</source>
-        <translation></translation>
+        <translation>Quitter le plein écran</translation>
     </message>
     <message>
         <source>M&amp;ake Main Variation</source>
-        <translation></translation>
+        <translation>Choisir comme variation &amp;principale</translation>
     </message>
     <message>
         <source>Move Variation D&amp;own</source>
@@ -307,19 +307,19 @@
     <message>
         <source>&amp;None</source>
         <comment>move numbers</comment>
-        <translation></translation>
+        <translation>&amp;Aucun</translation>
     </message>
     <message>
         <source>Next Piece</source>
-        <translation></translation>
+        <translation>Pièce suivante</translation>
     </message>
     <message>
         <source>&amp;Next Variation</source>
-        <translation></translation>
+        <translation>&amp;Prochaine variation</translation>
     </message>
     <message>
         <source>Go to next variation</source>
-        <translation></translation>
+        <translation>Aller à la variation suivante</translation>
     </message>
     <message>
         <source>&amp;Rated Game</source>
@@ -352,23 +352,23 @@
     </message>
     <message>
         <source>Previous Piece</source>
-        <translation></translation>
+        <translation>Pièce &amp;précédente</translation>
     </message>
     <message>
         <source>&amp;Previous Variation</source>
-        <translation></translation>
+        <translation>Variation &amp;précédente</translation>
     </message>
     <message>
         <source>Go to previous variation</source>
-        <translation></translation>
+        <translation>Aller à la variation précédente</translation>
     </message>
     <message>
         <source>Rotate Anticlockwise</source>
-        <translation></translation>
+        <translation>Rotation anti-horaire</translation>
     </message>
     <message>
         <source>Rotate Clockwise</source>
-        <translation></translation>
+        <translation>Rotation horaire</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -392,7 +392,7 @@
     </message>
     <message>
         <source>&amp;No Text</source>
-        <translation></translation>
+        <translation>&amp;Aucun texte</translation>
     </message>
     <message>
         <source>Text &amp;Beside Icons</source>
@@ -408,23 +408,23 @@
     </message>
     <message>
         <source>&amp;System Default</source>
-        <translation></translation>
+        <translation>&amp;Système par défaut</translation>
     </message>
     <message>
         <source>&amp;Truncate</source>
-        <translation>&amp;Tronquer</translation>
+        <translation>&amp;Couper</translation>
     </message>
     <message>
         <source>Truncate C&amp;hildren</source>
-        <translation></translation>
+        <translation>Couper les branches &amp;filles</translation>
     </message>
     <message>
         <source>Show &amp;Variations</source>
-        <translation></translation>
+        <translation>Afficher les &amp;variations</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation></translation>
+        <translation>&amp;Annuler le coup</translation>
     </message>
     <message>
         <source>V&amp;ery Bad</source>
@@ -464,15 +464,15 @@
     </message>
     <message>
         <source>Delete all variations?</source>
-        <translation></translation>
+        <translation>Détruire toutes les variations ?</translation>
     </message>
     <message>
         <source>All variations but the main variation will be removed from the game tree.</source>
-        <translation></translation>
+        <translation>Toutes les variation seront détruites, sauf la variation principale.</translation>
     </message>
     <message>
         <source>Delete Variations</source>
-        <translation></translation>
+        <translation>Détruire les variations</translation>
     </message>
     <message>
         <source>&amp;Toolbar</source>
@@ -484,7 +484,7 @@
     </message>
     <message>
         <source>No comment found</source>
-        <translation></translation>
+        <translation>Aucun commentaire trouvé</translation>
     </message>
     <message>
         <source>Blokus games (*.blksgf);;All files (*)</source>
@@ -492,19 +492,19 @@
     </message>
     <message>
         <source>Move number:</source>
-        <translation></translation>
+        <translation>Numéro de coup:</translation>
     </message>
     <message>
         <source>Go to Move</source>
-        <translation></translation>
+        <translation>Aller au coup</translation>
     </message>
     <message>
         <source>Keep only position?</source>
-        <translation></translation>
+        <translation>Garder seulement la position ?</translation>
     </message>
     <message>
         <source>All previous and following moves and variations will be removed from the game tree.</source>
-        <translation></translation>
+        <translation>Tous les coups et variations seront détruits.</translation>
     </message>
     <message>
         <source>Keep only subtree?</source>
@@ -533,15 +533,15 @@
     </message>
     <message>
         <source>Human</source>
-        <translation></translation>
+        <translation>Personne</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation></translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <source>The file could not be saved.</source>
-        <translation></translation>
+        <translation>Impossible d&apos;enregistrer le fichier.</translation>
     </message>
     <message>
         <source>%1: %2</source>
@@ -550,11 +550,11 @@
     </message>
     <message>
         <source>Untitled Game.blksgf</source>
-        <translation>Partie sans titre.blksgf</translation>
+        <translation>Partie sans nom.blksgf</translation>
     </message>
     <message>
         <source>Untitled Game %1.blksgf</source>
-        <translation>Partie sans titre %1.blksgf</translation>
+        <translation>Partie sans nom %1.blksgf</translation>
     </message>
     <message>
         <source>Save</source>
@@ -586,7 +586,7 @@
     </message>
     <message>
         <source>The current game is not finished.</source>
-        <translation></translation>
+        <translation>La partie en cours n&apos;est pas finie.</translation>
     </message>
     <message>
         <source>Do you want to abort the game?</source>
@@ -638,7 +638,7 @@
     </message>
     <message>
         <source>G&amp;o</source>
-        <translation></translation>
+        <translation>&amp;Atteindre</translation>
     </message>
     <message>
         <source>&amp;Move Marking</source>
@@ -646,7 +646,7 @@
     </message>
     <message>
         <source>Export Image</source>
-        <translation></translation>
+        <translation>Exporter une image</translation>
     </message>
     <message>
         <source>Image size:</source>
@@ -654,15 +654,15 @@
     </message>
     <message>
         <source>The end of the tree was reached.</source>
-        <translation></translation>
+        <translation>La fin de l&apos;arbre est atteinte.</translation>
     </message>
     <message>
         <source>Continue the search from the start of the tree?</source>
-        <translation></translation>
+        <translation>Continuer la recherche depuis la racine ?</translation>
     </message>
     <message>
         <source>Continue From Start</source>
-        <translation></translation>
+        <translation>Continuer depuis la dèbut</translation>
     </message>
     <message>
         <source>Show &amp;Rating</source>
@@ -674,7 +674,7 @@
     </message>
     <message>
         <source>Keep Only Position</source>
-        <translation></translation>
+        <translation>Garder seulement la position</translation>
     </message>
     <message>
         <source>Keep Only Subtree</source>
@@ -770,24 +770,24 @@
     </message>
     <message>
         <source>Error in file &apos;%1&apos;</source>
-        <translation></translation>
+        <translation>Erreur dans le fichier &apos;%1&apos;</translation>
     </message>
     <message>
         <source>Move %1</source>
-        <translation></translation>
+        <translation>Coup %1</translation>
     </message>
     <message numerus="yes">
         <source>%n move(s)</source>
-        <translation><numerusform></numerusform>
-        <numerusform></numerusform>
+        <translation><numerusform>%n coup</numerusform>
+        <numerusform>%n coups</numerusform>
         </translation></message>
     <message>
         <source>Move %1 of %2</source>
-        <translation></translation>
+        <translation>Coup %1 des %2</translation>
     </message>
     <message>
         <source>Move %1 of %2 in variation %3</source>
-        <translation></translation>
+        <translation>Coup %1 des %2 dans variation %3</translation>
     </message>
     <message>
         <source>Make the computer continue to play the current color</source>
@@ -951,15 +951,15 @@
     </message>
     <message>
         <source>Computer is thinking... (up to %1 seconds remaining)</source>
-        <translation></translation>
+        <translation>L&apos;ordinateur pense… (jusqu’à %1 secondes restantes)</translation>
     </message>
     <message>
         <source>Computer is thinking... (up to %1 minutes remaining)</source>
-        <translation></translation>
+        <translation>L&apos;ordinateur pense… (jusqu’à %1 minutes restantes)</translation>
     </message>
     <message>
         <source>Computer is thinking...</source>
-        <translation></translation>
+        <translation>L&apos;ordinateur pense…</translation>
     </message>
     <message>
         <source>GembloQ (&amp;3 Players)</source>
@@ -1066,15 +1066,15 @@
     </message>
     <message>
         <source>Win</source>
-        <translation></translation>
+        <translation>Victoire</translation>
     </message>
     <message>
         <source>Tie</source>
-        <translation></translation>
+        <translation>Egalité</translation>
     </message>
     <message>
         <source>Loss</source>
-        <translation></translation>
+        <translation>Perte</translation>
     </message>
 </context>
 <context>
@@ -1097,11 +1097,11 @@
     </message>
     <message>
         <source>Recent games:</source>
-        <translation></translation>
+        <translation>Parties récentes:</translation>
     </message>
     <message>
         <source>&amp;Clear</source>
-        <translation></translation>
+        <translation>Effa&amp;cer</translation>
     </message>
     <message>
         <source>Clear rating and delete rating history?</source>
@@ -1145,7 +1145,7 @@
     </message>
     <message>
         <source>Recent development:</source>
-        <translation></translation>
+        <translation>Développement récent:</translation>
     </message>
     <message>
         <source>Nexos (4 players)</source>
