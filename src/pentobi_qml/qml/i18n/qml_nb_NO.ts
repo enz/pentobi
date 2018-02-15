@@ -344,11 +344,11 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initial Rating</source>
-        <translation type="unfinished">Startvurdering</translation>
+        <translation>Oppstartsvurdering</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation>Du har ikke spilt noen vurderte spill av denne spillvarianten. Estimer din spillerstyrke for å anslå din vurdering.</translation>
+        <translation>Du har ikke spillt noen vurderte spill i denne varianten enda. Anslå din spillerstyrke for å anta din vurdering.</translation>
     </message>
     <message>
         <source>Beginner</source>
