@@ -879,7 +879,7 @@
     <name>MenuGo</name>
     <message>
         <source>G&amp;o</source>
-        <translation>&amp;Atteindre</translation>
+        <translation>&amp;Déplacement</translation>
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
