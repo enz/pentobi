@@ -33,6 +33,8 @@ set(pentobi_gui_STAT_SRCS
 
 set(pentobi_gui_TS
   translations/libpentobi_gui_de.ts
+  translations/libpentobi_gui_fr.ts
+  translations/libpentobi_gui_nb_NO.ts
   )
 
 qt5_add_translation(pentobi_gui_QM_SRCS ${pentobi_gui_TS})
