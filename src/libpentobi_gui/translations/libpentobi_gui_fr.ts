@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>&amp;Blue/Red</source>
-        <translation>&amp;Bleu/Rouge</translation>
+        <translation>&amp;Bleu/rouge</translation>
     </message>
     <message>
         <source>&amp;Yellow/Green</source>
@@ -87,11 +87,11 @@
     </message>
     <message>
         <source>&amp;Time limits:</source>
-        <translation type="unfinished">&amp;Time limits:</translation>
+        <translation>Limites de &amp;temps:</translation>
     </message>
     <message>
         <source>&amp;Event:</source>
-        <translation type="unfinished">&amp;Event:</translation>
+        <translation>&amp;Événement:</translation>
     </message>
     <message>
         <source>R&amp;ound:</source>
@@ -129,7 +129,7 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initial Rating</source>
-        <translation type="unfinished">Initial Rating</translation>
+        <translation>Classement initial</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
@@ -145,7 +145,7 @@
     </message>
     <message>
         <source>Your initial rating: %1</source>
-        <translation type="unfinished">Your initial rating: %1</translation>
+        <translation>Votre classement initial: %1</translation>
     </message>
 </context>
 <context>
