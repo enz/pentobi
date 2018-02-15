@@ -12,7 +12,7 @@
     <name>AsciiArtSaveDialog</name>
     <message>
         <source>Export ASCII Art</source>
-        <translation></translation>
+        <translation>Exporter art ASCII</translation>
     </message>
     <message>
         <source>Text files (*.txt)</source>
@@ -27,7 +27,7 @@
     <name>ComputerColorDialog</name>
     <message>
         <source>Computer Colors</source>
-        <translation></translation>
+        <translation>Couleurs de l&apos;ordinateur</translation>
     </message>
     <message>
         <source>Computer plays:</source>
@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Green</source>
-        <translation></translation>
+        <translation>Vert</translation>
     </message>
     <message>
         <source>Yellow</source>
@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>Red</source>
-        <translation></translation>
+        <translation>Rouge</translation>
     </message>
     <message>
         <source>Purple</source>
@@ -70,7 +70,7 @@
     <name>ExportImageDialog</name>
     <message>
         <source>Export Image</source>
-        <translation></translation>
+        <translation>Exporter une image</translation>
     </message>
     <message>
         <source>Image width:</source>
@@ -81,7 +81,7 @@
     <name>GameInfoDialog</name>
     <message>
         <source>Game Info</source>
-        <translation></translation>
+        <translation>Info sur la partie</translation>
     </message>
     <message>
         <source>Player Blue/Red:</source>
@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>Event:</source>
-        <translation></translation>
+        <translation type="unfinished">Event:</translation>
     </message>
     <message>
         <source>Round:</source>
@@ -136,115 +136,115 @@
     <name>GameModel</name>
     <message>
         <source>(Setup)</source>
-        <translation></translation>
+        <translation type="unfinished">(Setup)</translation>
     </message>
     <message>
         <source>(No moves)</source>
-        <translation></translation>
+        <translation>(Pas des coups)</translation>
     </message>
     <message>
         <source>Move %1</source>
-        <translation></translation>
+        <translation>Coup %1</translation>
     </message>
     <message>
         <source>Blue wins with 1 point.</source>
-        <translation></translation>
+        <translation type="unfinished">Blue wins with 1 point.</translation>
     </message>
     <message>
         <source>Blue wins with %L1 points.</source>
-        <translation></translation>
+        <translation type="unfinished">Blue wins with %L1 points.</translation>
     </message>
     <message>
         <source>Green wins with 1 point.</source>
-        <translation></translation>
+        <translation type="unfinished">Green wins with 1 point.</translation>
     </message>
     <message>
         <source>Green wins with %L1 points.</source>
-        <translation></translation>
+        <translation type="unfinished">Green wins with %L1 points.</translation>
     </message>
     <message>
         <source>Green wins (tie resolved).</source>
-        <translation></translation>
+        <translation type="unfinished">Green wins (tie resolved).</translation>
     </message>
     <message>
         <source>Game ends in a tie.</source>
-        <translation></translation>
+        <translation type="unfinished">Game ends in a tie.</translation>
     </message>
     <message>
         <source>Blue/Red wins with 1 point.</source>
-        <translation></translation>
+        <translation type="unfinished">Blue/Red wins with 1 point.</translation>
     </message>
     <message>
         <source>Blue/Red wins with %L1 points.</source>
-        <translation></translation>
+        <translation type="unfinished">Blue/Red wins with %L1 points.</translation>
     </message>
     <message>
         <source>Yellow/Green wins with 1 point.</source>
-        <translation></translation>
+        <translation type="unfinished">Yellow/Green wins with 1 point.</translation>
     </message>
     <message>
         <source>Yellow/Green wins with %L1 points.</source>
-        <translation></translation>
+        <translation type="unfinished">Yellow/Green wins with %L1 points.</translation>
     </message>
     <message>
         <source>Yellow/Green wins (tie resolved).</source>
-        <translation></translation>
+        <translation type="unfinished">Yellow/Green wins (tie resolved).</translation>
     </message>
     <message>
         <source>Blue wins.</source>
-        <translation></translation>
+        <translation type="unfinished">Blue wins.</translation>
     </message>
     <message>
         <source>Yellow wins.</source>
-        <translation></translation>
+        <translation type="unfinished">Yellow wins.</translation>
     </message>
     <message>
         <source>Red wins.</source>
-        <translation></translation>
+        <translation type="unfinished">Red wins.</translation>
     </message>
     <message>
         <source>Red wins (tie resolved).</source>
-        <translation></translation>
+        <translation type="unfinished">Red wins (tie resolved).</translation>
     </message>
     <message>
         <source>Yellow wins (tie resolved).</source>
-        <translation></translation>
+        <translation type="unfinished">Yellow wins (tie resolved).</translation>
     </message>
     <message>
         <source>Game ends in a tie between Blue and Yellow.</source>
-        <translation></translation>
+        <translation type="unfinished">Game ends in a tie between Blue and Yellow.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Blue and Red.</source>
-        <translation></translation>
+        <translation type="unfinished">Game ends in a tie between Blue and Red.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Yellow and Red.</source>
-        <translation></translation>
+        <translation type="unfinished">Game ends in a tie between Yellow and Red.</translation>
     </message>
     <message>
         <source>Game ends in a tie between all players.</source>
-        <translation></translation>
+        <translation type="unfinished">Game ends in a tie between all players.</translation>
     </message>
     <message>
         <source>Green wins.</source>
-        <translation></translation>
+        <translation type="unfinished">Green wins.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Blue, Yellow and Red.</source>
-        <translation></translation>
+        <translation type="unfinished">Game ends in a tie between Blue, Yellow and Red.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Blue, Yellow and Green.</source>
-        <translation></translation>
+        <translation type="unfinished">Game ends in a tie between Blue, Yellow and Green.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Blue, Red and Green.</source>
-        <translation></translation>
+        <translation type="unfinished">Game ends in a tie between Blue, Red and Green.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Yellow, Red and Green.</source>
-        <translation></translation>
+        <translation type="unfinished">Game ends in a tie between Yellow, Red and Green.</translation>
     </message>
     <message>
         <source>Clipboard is empty.</source>
@@ -264,7 +264,7 @@
     </message>
     <message>
         <source>Green</source>
-        <translation></translation>
+        <translation>Vert</translation>
     </message>
     <message>
         <source>Yellow</source>
@@ -272,15 +272,15 @@
     </message>
     <message>
         <source>Red</source>
-        <translation></translation>
+        <translation>Rouge</translation>
     </message>
     <message>
         <source>Invalid Blokus SGF file. (%1)</source>
-        <translation></translation>
+        <translation>Le fichier n’est pas un fichier Blokus SGF valable. (%1)</translation>
     </message>
     <message>
         <source>File has unsupported character set.</source>
-        <translation></translation>
+        <translation type="unfinished">File has unsupported character set.</translation>
     </message>
     <message>
         <source>Purple</source>
@@ -292,30 +292,30 @@
     </message>
     <message>
         <source>Purple wins with 1 point.</source>
-        <translation></translation>
+        <translation type="unfinished">Purple wins with 1 point.</translation>
     </message>
     <message>
         <source>Purple wins with %L1 points.</source>
-        <translation></translation>
+        <translation type="unfinished">Purple wins with %L1 points.</translation>
     </message>
     <message>
         <source>Orange wins with 1 point.</source>
-        <translation></translation>
+        <translation type="unfinished">Orange wins with 1 point.</translation>
     </message>
     <message>
         <source>Orange wins with %L1 points.</source>
-        <translation></translation>
+        <translation type="unfinished">Orange wins with %L1 points.</translation>
     </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>
     <message>
         <source>Go to Move</source>
-        <translation></translation>
+        <translation>Aller au coup</translation>
     </message>
     <message>
         <source>Move number:</source>
-        <translation></translation>
+        <translation>Numéro de coup:</translation>
     </message>
 </context>
 <context>
@@ -337,18 +337,18 @@
     </message>
     <message>
         <source>PNG image files (*.png)</source>
-        <translation></translation>
+        <translation>Image PNG (*.png)</translation>
     </message>
 </context>
 <context>
     <name>InitialRatingDialog</name>
     <message>
         <source>Initial Rating</source>
-        <translation></translation>
+        <translation type="unfinished">Initial Rating</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation></translation>
+        <translation type="unfinished">You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -360,7 +360,7 @@
     </message>
     <message>
         <source>Your initial rating:</source>
-        <translation></translation>
+        <translation type="unfinished">Your initial rating:</translation>
     </message>
 </context>
 <context>
@@ -371,23 +371,23 @@
     </message>
     <message>
         <source>Open failed.</source>
-        <translation></translation>
+        <translation type="unfinished">Open failed.</translation>
     </message>
     <message>
         <source>Save failed.</source>
-        <translation></translation>
+        <translation>Échec de l’enregistrement.</translation>
     </message>
     <message>
         <source>Truncate this subtree?</source>
-        <translation></translation>
+        <translation>Élaguer la branche actuelle ?</translation>
     </message>
     <message>
         <source>Truncate children?</source>
-        <translation></translation>
+        <translation>Élaguer les branches filles ?</translation>
     </message>
     <message>
         <source>Delete all variations?</source>
-        <translation></translation>
+        <translation>Détruire toutes les variations ?</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -395,87 +395,87 @@
     </message>
     <message>
         <source>Computer opponent for the board game Blokus.</source>
-        <translation></translation>
+        <translation type="unfinished">Computer opponent for the board game Blokus.</translation>
     </message>
     <message>
         <source>Keep only position?</source>
-        <translation></translation>
+        <translation>Garder seulement la position ?</translation>
     </message>
     <message>
         <source>Keep only subtree?</source>
-        <translation></translation>
+        <translation type="unfinished">Keep only subtree?</translation>
     </message>
     <message>
         <source>Saving image failed.</source>
-        <translation></translation>
+        <translation>Impossible d&apos;enregistrer l&apos;image.</translation>
     </message>
     <message>
         <source>Creating image failed.</source>
-        <translation></translation>
+        <translation type="unfinished">Creating image failed.</translation>
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
-        <translation></translation>
+        <translation type="unfinished">Game analysis is only possible in main variation.</translation>
     </message>
     <message>
         <source>File has been modified by another application. Reload?</source>
-        <translation></translation>
+        <translation type="unfinished">File has been modified by another application. Reload?</translation>
     </message>
     <message>
         <source>File has been modified by another application. Save anyway?</source>
-        <translation></translation>
+        <translation type="unfinished">File has been modified by another application. Save anyway?</translation>
     </message>
     <message>
         <source>End of tree was reached. Continue search from start of the tree?</source>
-        <translation></translation>
+        <translation>La fin de l&apos;arbre est atteinte. Continuer la recherche depuis la racine ?</translation>
     </message>
     <message>
         <source>No comment found</source>
-        <translation></translation>
+        <translation>Aucun commentaire trouvé</translation>
     </message>
     <message>
         <source>Start rated game with Blue/Red against Pentobi level %1?</source>
-        <translation></translation>
+        <translation type="unfinished">Start rated game with Blue/Red against Pentobi level %1?</translation>
     </message>
     <message>
         <source>Start rated game with Blue against Pentobi level %1?</source>
-        <translation></translation>
+        <translation type="unfinished">Start rated game with Blue against Pentobi level %1?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
-        <translation></translation>
+        <translation type="unfinished">Start rated game with Yellow/Green against Pentobi level %1?</translation>
     </message>
     <message>
         <source>Start rated game with Green against Pentobi level %1?</source>
-        <translation></translation>
+        <translation type="unfinished">Start rated game with Green against Pentobi level %1?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow against Pentobi level %1?</source>
-        <translation></translation>
+        <translation type="unfinished">Start rated game with Yellow against Pentobi level %1?</translation>
     </message>
     <message>
         <source>Start rated game with Red against Pentobi level %1?</source>
-        <translation></translation>
+        <translation type="unfinished">Start rated game with Red against Pentobi level %1?</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
-        <translation></translation>
+        <translation type="unfinished">Your rating has increased from %1 to %2.</translation>
     </message>
     <message>
         <source>Your rating has decreased from %1 to %2.</source>
-        <translation></translation>
+        <translation type="unfinished">Your rating has decreased from %1 to %2.</translation>
     </message>
     <message>
         <source>Your rating stays at %1.</source>
-        <translation></translation>
+        <translation type="unfinished">Your rating stays at %1.</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
-        <translation></translation>
+        <translation type="unfinished">Delete all rating information for the current game variant?</translation>
     </message>
     <message>
         <source>Rating information deleted.</source>
-        <translation></translation>
+        <translation type="unfinished">Rating information deleted.</translation>
     </message>
     <message>
         <source>File saved.</source>
@@ -487,55 +487,55 @@
     </message>
     <message>
         <source>Game analysis aborted.</source>
-        <translation></translation>
+        <translation type="unfinished">Game analysis aborted.</translation>
     </message>
     <message>
         <source>Computer move aborted.</source>
-        <translation></translation>
+        <translation type="unfinished">Computer move aborted.</translation>
     </message>
     <message>
         <source>Variations deleted.</source>
-        <translation></translation>
+        <translation type="unfinished">Variations deleted.</translation>
     </message>
     <message>
         <source>Image saved.</source>
-        <translation></translation>
+        <translation type="unfinished">Image saved.</translation>
     </message>
     <message>
         <source>Kept only position.</source>
-        <translation></translation>
+        <translation type="unfinished">Kept only position.</translation>
     </message>
     <message>
         <source>Kept only subtree.</source>
-        <translation></translation>
+        <translation type="unfinished">Kept only subtree.</translation>
     </message>
     <message>
         <source>Children truncated.</source>
-        <translation></translation>
+        <translation type="unfinished">Children truncated.</translation>
     </message>
     <message>
         <source>Variation is now %1.</source>
-        <translation></translation>
+        <translation>La variation est maintenant %1.</translation>
     </message>
     <message>
         <source>Discard game?</source>
-        <translation></translation>
+        <translation type="unfinished">Discard game?</translation>
     </message>
     <message>
         <source>File was deleted by another application.</source>
-        <translation></translation>
+        <translation type="unfinished">File was deleted by another application.</translation>
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation>Remplacer le fichier existant?</translation>
+        <translation>Remplacer le fichier existant ?</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
-        <translation></translation>
+        <translation type="unfinished">Start rated game with Purple against Pentobi level %1?</translation>
     </message>
     <message>
         <source>Start rated game with Orange against Pentobi level %1?</source>
-        <translation></translation>
+        <translation type="unfinished">Start rated game with Orange against Pentobi level %1?</translation>
     </message>
 </context>
 <context>
@@ -602,11 +602,11 @@
     </message>
     <message>
         <source>Play &amp;Single Move</source>
-        <translation></translation>
+        <translation type="unfinished">Play &amp;Single Move</translation>
     </message>
     <message>
         <source>St&amp;op</source>
-        <translation></translation>
+        <translation type="unfinished">St&amp;op</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 4 Players)</source>
@@ -614,7 +614,7 @@
     </message>
     <message>
         <source>&amp;Level (GembloQ, 3 Players)</source>
-        <translation>&amp; Niveau (GembloQ, 3 joueurs)</translation>
+        <translation>&amp;Niveau (GembloQ, 3 joueurs)</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 2 Players, 2 Colors)</source>
@@ -641,27 +641,27 @@
     </message>
     <message>
         <source>Make &amp;Main Variation</source>
-        <translation></translation>
+        <translation>Choisir comme variation &amp;principale</translation>
     </message>
     <message>
         <source>Move Variation &amp;Up</source>
-        <translation></translation>
+        <translation type="unfinished">Move Variation &amp;Up</translation>
     </message>
     <message>
         <source>Move Variation &amp;Down</source>
-        <translation></translation>
+        <translation type="unfinished">Move Variation &amp;Down</translation>
     </message>
     <message>
         <source>&amp;Truncate</source>
-        <translation>&amp;Tronquer</translation>
+        <translation>&amp;Couper</translation>
     </message>
     <message>
         <source>Truncate &amp;Children</source>
-        <translation></translation>
+        <translation>Couper les branches &amp;filles</translation>
     </message>
     <message>
         <source>&amp;Delete All Variations</source>
-        <translation></translation>
+        <translation>&amp;Détruire toutes les variations</translation>
     </message>
     <message>
         <source>&amp;Next Color</source>
@@ -669,11 +669,11 @@
     </message>
     <message>
         <source>&amp;Keep Only Position</source>
-        <translation></translation>
+        <translation>&amp;Garder seulement la position</translation>
     </message>
     <message>
         <source>Keep Only &amp;Subtree</source>
-        <translation></translation>
+        <translation type="unfinished">Keep Only &amp;Subtree</translation>
     </message>
     <message>
         <source>Move &amp;Annotation</source>
@@ -709,11 +709,11 @@
     </message>
     <message>
         <source>S&amp;etup Mode</source>
-        <translation></translation>
+        <translation type="unfinished">S&amp;etup Mode</translation>
     </message>
     <message>
         <source>Made main variation.</source>
-        <translation></translation>
+        <translation type="unfinished">Made main variation.</translation>
     </message>
 </context>
 <context>
@@ -724,7 +724,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation></translation>
+        <translation>&amp;Nouveau</translation>
     </message>
     <message>
         <source>Game &amp;Variant</source>
@@ -748,15 +748,15 @@
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation></translation>
+        <translation>&amp;Annuler le coup</translation>
     </message>
     <message>
         <source>&amp;Find Move</source>
-        <translation></translation>
+        <translation type="unfinished">&amp;Find Move</translation>
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation></translation>
+        <translation>&amp;Ouvrir...</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -812,7 +812,7 @@
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation></translation>
+        <translation>&amp;Exporter</translation>
     </message>
     <message>
         <source>&amp;Image</source>
@@ -832,19 +832,19 @@
     </message>
     <message>
         <source>&amp;Game Info</source>
-        <translation></translation>
+        <translation>I&amp;nfo sur la partie</translation>
     </message>
     <message>
         <source>Open R&amp;ecent</source>
-        <translation></translation>
+        <translation type="unfinished">Open R&amp;ecent</translation>
     </message>
     <message>
         <source>&amp;Rated Game</source>
-        <translation></translation>
+        <translation type="unfinished">&amp;Rated Game</translation>
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
-        <translation></translation>
+        <translation type="unfinished">Open from &amp;Clipboard</translation>
     </message>
     <message>
         <source>&amp;GembloQ</source>
@@ -879,23 +879,23 @@
     <name>MenuGo</name>
     <message>
         <source>G&amp;o</source>
-        <translation></translation>
+        <translation>&amp;Atteindre</translation>
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
-        <translation></translation>
+        <translation>Retour à la variation &amp;principale</translation>
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation></translation>
+        <translation>Aller au &amp;coup...</translation>
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation></translation>
+        <translation type="unfinished">Beginning of Bran&amp;ch</translation>
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
-        <translation></translation>
+        <translation>Trouver le &amp;commentaire suivant</translation>
     </message>
 </context>
 <context>
@@ -917,7 +917,7 @@
     <name>MenuItemLevel</name>
     <message>
         <source>Level &amp;%1</source>
-        <translation></translation>
+        <translation>Niveau &amp;%1</translation>
     </message>
 </context>
 <context>
@@ -928,26 +928,26 @@
     </message>
     <message>
         <source>&amp;Analyze Game</source>
-        <translation></translation>
+        <translation>&amp;Analyser la partie</translation>
     </message>
     <message>
         <source>&amp;Rating</source>
-        <translation></translation>
+        <translation type="unfinished">&amp;Rating</translation>
     </message>
     <message>
         <source>&amp;Clear Rating</source>
-        <translation></translation>
+        <translation type="unfinished">&amp;Clear Rating</translation>
     </message>
 </context>
 <context>
     <name>MenuView</name>
     <message>
         <source>&amp;View</source>
-        <translation></translation>
+        <translation>&amp;Affichage</translation>
     </message>
     <message>
         <source>&amp;Animate Pieces</source>
-        <translation></translation>
+        <translation type="unfinished">&amp;Animate Pieces</translation>
     </message>
     <message>
         <source>&amp;Coordinates</source>
@@ -955,27 +955,27 @@
     </message>
     <message>
         <source>&amp;Move Marking</source>
-        <translation></translation>
+        <translation type="unfinished">&amp;Move Marking</translation>
     </message>
     <message>
         <source>Last With &amp;Dot</source>
-        <translation></translation>
+        <translation type="unfinished">Last With &amp;Dot</translation>
     </message>
     <message>
         <source>Last With &amp;Number</source>
-        <translation></translation>
+        <translation type="unfinished">Last With &amp;Number</translation>
     </message>
     <message>
         <source>&amp;All With Number</source>
-        <translation></translation>
+        <translation type="unfinished">&amp;All With Number</translation>
     </message>
     <message>
         <source>N&amp;one</source>
-        <translation></translation>
+        <translation>&amp;Aucune</translation>
     </message>
     <message>
         <source>Show &amp;Variations</source>
-        <translation></translation>
+        <translation>Afficher les &amp;variations</translation>
     </message>
     <message>
         <source>&amp;Fullscreen</source>
@@ -983,26 +983,26 @@
     </message>
     <message>
         <source>&amp;Theme</source>
-        <translation></translation>
+        <translation>&amp;Thème</translation>
     </message>
     <message>
         <source>&amp;Light</source>
-        <translation></translation>
+        <translation type="unfinished">&amp;Light</translation>
     </message>
     <message>
         <source>&amp;Dark</source>
-        <translation></translation>
+        <translation type="unfinished">&amp;Dark</translation>
     </message>
 </context>
 <context>
     <name>OpenDialog</name>
     <message>
         <source>Open</source>
-        <translation></translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
-        <translation></translation>
+        <translation>Parties de Blokus (*.blksgf)</translation>
     </message>
     <message>
         <source>All files (*)</source>
@@ -1013,15 +1013,15 @@
     <name>RatingDialog</name>
     <message>
         <source>Rating</source>
-        <translation></translation>
+        <translation type="unfinished">Rating</translation>
     </message>
     <message>
         <source>Your rating:</source>
-        <translation></translation>
+        <translation type="unfinished">Your rating:</translation>
     </message>
     <message>
         <source>Best previous rating:</source>
-        <translation></translation>
+        <translation type="unfinished">Best previous rating:</translation>
     </message>
     <message>
         <source>Classic (2 players)</source>
@@ -1081,7 +1081,7 @@
     </message>
     <message>
         <source>Rated games:</source>
-        <translation></translation>
+        <translation type="unfinished">Rated games:</translation>
     </message>
     <message>
         <source>Game</source>
@@ -1093,7 +1093,7 @@
     </message>
     <message>
         <source>Level</source>
-        <translation></translation>
+        <translation>Niveau</translation>
     </message>
     <message>
         <source>Result</source>
@@ -1105,23 +1105,23 @@
     </message>
     <message>
         <source>Win</source>
-        <translation></translation>
+        <translation>Victoire</translation>
     </message>
     <message>
         <source>Loss</source>
-        <translation></translation>
+        <translation>Perte</translation>
     </message>
     <message>
         <source>Tie</source>
-        <translation></translation>
+        <translation>Egalité</translation>
     </message>
     <message>
         <source>Recent development:</source>
-        <translation></translation>
+        <translation>Développement récent:</translation>
     </message>
     <message>
         <source>Open Game %1</source>
-        <translation></translation>
+        <translation type="unfinished">Open Game %1</translation>
     </message>
     <message>
         <source>GembloQ (4 players)</source>
@@ -1148,7 +1148,7 @@
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
-        <translation></translation>
+        <translation>Parties de Blokus (*.blksgf)</translation>
     </message>
     <message>
         <source>All files (*)</source>
@@ -1163,15 +1163,15 @@
     </message>
     <message>
         <source>File: %1</source>
-        <translation></translation>
+        <translation>Fichier: %1</translation>
     </message>
     <message>
         <source>Rated</source>
-        <translation></translation>
+        <translation type="unfinished">Rated</translation>
     </message>
     <message>
         <source>Leave setup</source>
-        <translation></translation>
+        <translation type="unfinished">Leave setup</translation>
     </message>
 </context>
 <context>
