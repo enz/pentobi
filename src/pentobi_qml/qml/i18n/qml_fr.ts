@@ -136,7 +136,7 @@
     <name>GameModel</name>
     <message>
         <source>(Setup)</source>
-        <translation type="unfinished">(Setup)</translation>
+        <translation>(Position)</translation>
     </message>
     <message>
         <source>(No moves)</source>
@@ -280,7 +280,7 @@
     </message>
     <message>
         <source>File has unsupported character set.</source>
-        <translation type="unfinished">File has unsupported character set.</translation>
+        <translation>Codage des caractères de fichier non supporté.</translation>
     </message>
     <message>
         <source>Purple</source>
@@ -709,7 +709,7 @@
     </message>
     <message>
         <source>S&amp;etup Mode</source>
-        <translation type="unfinished">S&amp;etup Mode</translation>
+        <translation>P&amp;osition</translation>
     </message>
     <message>
         <source>Made main variation.</source>
@@ -1171,7 +1171,7 @@
     </message>
     <message>
         <source>Leave setup</source>
-        <translation type="unfinished">Leave setup</translation>
+        <translation>Quitter mode position</translation>
     </message>
 </context>
 <context>
