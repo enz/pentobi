@@ -110,19 +110,19 @@
     <name>HelpWindow</name>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Back</translation>
+        <translation>Reculer</translation>
     </message>
     <message>
         <source>Show previous page in history</source>
-        <translation type="unfinished">Show previous page in history</translation>
+        <translation>Afficher la page précédente dans l&apos;histoire</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Forward</translation>
+        <translation>Avancer</translation>
     </message>
     <message>
         <source>Show next page in history</source>
-        <translation type="unfinished">Show next page in history</translation>
+        <translation>Afficher la page suivante de l&apos;histoire</translation>
     </message>
 </context>
 <context>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation type="unfinished">You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</translation>
+        <translation>Vous n&apos;avez pas encore joué des parties classées dans cette variante du jeu. Estimez votre niveau pour initialiser votre classement.</translation>
     </message>
     <message>
         <source>Beginner</source>
