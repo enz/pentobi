@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>(No moves)</source>
-        <translation>(Pas des coups)</translation>
+        <translation>(Pas de coups)</translation>
     </message>
     <message>
         <source>Move %1</source>
