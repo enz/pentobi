@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>You play %1 in this game.</source>
-        <translation type="unfinished">You play %1 in this game.</translation>
+        <translation>Vous jouez %1 dans cette partie.</translation>
     </message>
     <message>
         <source>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</source>
@@ -146,7 +146,7 @@
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation type="unfinished">Beginning of Bran&amp;ch</translation>
+        <translation type="unfinished">Au début de la bran&amp;che</translation>
     </message>
     <message>
         <source>Clear Piece</source>
@@ -158,7 +158,7 @@
     </message>
     <message>
         <source>Set the colors played by the computer</source>
-        <translation type="unfinished">Set the colors played by the computer</translation>
+        <translation>Définir les couleurs joué par l&apos;ordinateur</translation>
     </message>
     <message>
         <source>C&amp;oordinates</source>
@@ -254,7 +254,7 @@
     </message>
     <message>
         <source>Keep Only &amp;Subtree</source>
-        <translation type="unfinished">Keep Only &amp;Subtree</translation>
+        <translation>Garder seulement le &amp;sous-arbre</translation>
     </message>
     <message>
         <source>Leave Fullscreen</source>
@@ -266,11 +266,11 @@
     </message>
     <message>
         <source>Move Variation D&amp;own</source>
-        <translation type="unfinished">Move Variation D&amp;own</translation>
+        <translation>Déplacer variation vers le &amp;bas</translation>
     </message>
     <message>
         <source>Move Variation &amp;Up</source>
-        <translation type="unfinished">Move Variation &amp;Up</translation>
+        <translation>Déplacer variation vers le &amp;haut</translation>
     </message>
     <message>
         <source>&amp;1</source>
@@ -400,7 +400,7 @@
     </message>
     <message>
         <source>Text Bel&amp;ow Icons</source>
-        <translation type="unfinished">Text Bel&amp;ow Icons</translation>
+        <translation>Texte &amp;sous les icônes</translation>
     </message>
     <message>
         <source>&amp;Text Only</source>
@@ -448,7 +448,7 @@
     </message>
     <message>
         <source>Toolbar T&amp;ext</source>
-        <translation type="unfinished">Toolbar T&amp;ext</translation>
+        <translation>&amp;Apparence de la barre d&apos;outils</translation>
     </message>
     <message>
         <source>&amp;Computer</source>
@@ -508,11 +508,11 @@
     </message>
     <message>
         <source>Keep only subtree?</source>
-        <translation type="unfinished">Keep only subtree?</translation>
+        <translation>Garder seulement le sous-arbre ?</translation>
     </message>
     <message>
         <source>All previous moves and variations will be removed from the game tree.</source>
-        <translation type="unfinished">All previous moves and variations will be removed from the game tree.</translation>
+        <translation>Tous les précédents mouvements et les variations seront supprimés à partir de l&apos;arborescence du jeu.</translation>
     </message>
     <message>
         <source>Start rated game?</source>
@@ -520,7 +520,7 @@
     </message>
     <message>
         <source>In this game, you play %1 against Pentobi level&amp;nbsp;%2.</source>
-        <translation type="unfinished">In this game, you play %1 against Pentobi level&amp;nbsp;%2.</translation>
+        <translation>Dans cette partie, vous jouez %1 contre Pentobi niveau&amp;nbsp;%2.</translation>
     </message>
     <message>
         <source>&amp;Start Game</source>
@@ -602,15 +602,15 @@
     </message>
     <message>
         <source>&amp;All with Number</source>
-        <translation type="unfinished">&amp;All with Number</translation>
+        <translation>&amp;Tous avec numéro</translation>
     </message>
     <message>
         <source>Last with &amp;Dot</source>
-        <translation type="unfinished">Last with &amp;Dot</translation>
+        <translation>Dernier avec &amp;point</translation>
     </message>
     <message>
         <source>&amp;Last with Number</source>
-        <translation type="unfinished">&amp;Last with Number</translation>
+        <translation>Dernier avec &amp;numéro</translation>
     </message>
     <message>
         <source>Start a rated game</source>
@@ -630,7 +630,7 @@
     </message>
     <message>
         <source>Open R&amp;ecent</source>
-        <translation type="unfinished">Open R&amp;ecent</translation>
+        <translation>Ouvrir fichier réc&amp;ent</translation>
     </message>
     <message>
         <source>E&amp;xport</source>
@@ -642,7 +642,7 @@
     </message>
     <message>
         <source>&amp;Move Marking</source>
-        <translation type="unfinished">&amp;Move Marking</translation>
+        <translation>&amp;Marquage des coups</translation>
     </message>
     <message>
         <source>Export Image</source>
@@ -678,7 +678,7 @@
     </message>
     <message>
         <source>Keep Only Subtree</source>
-        <translation type="unfinished">Keep Only Subtree</translation>
+        <translation>Garder seulement le sous-arbre</translation>
     </message>
     <message>
         <source>[*]%1</source>
@@ -694,79 +694,79 @@
     </message>
     <message>
         <source>The game ends in a tie.</source>
-        <translation type="unfinished">The game ends in a tie.</translation>
+        <translation>La partie se termine par une égalité.</translation>
     </message>
     <message>
         <source>The game ends in a tie between all colors.</source>
-        <translation type="unfinished">The game ends in a tie between all colors.</translation>
+        <translation>La partie se termine par une égalité entre tous les couleurs.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue, Yellow and Red.</source>
-        <translation type="unfinished">The game ends in a tie between Blue, Yellow and Red.</translation>
+        <translation>La partie se termine par une égalité entre bleu, jaune et rouge.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue, Yellow and Green.</source>
-        <translation type="unfinished">The game ends in a tie between Blue, Yellow and Green.</translation>
+        <translation>La partie se termine par une égalité entre bleu, jaune et vert.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue, Red and Green.</source>
-        <translation type="unfinished">The game ends in a tie between Blue, Red and Green.</translation>
+        <translation>La partie se termine par une égalité entre bleu, rouge et vert.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Yellow, Red and Green.</source>
-        <translation type="unfinished">The game ends in a tie between Yellow, Red and Green.</translation>
+        <translation>La partie se termine par une égalité entre jaune, rouge et vert.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue and Yellow.</source>
-        <translation type="unfinished">The game ends in a tie between Blue and Yellow.</translation>
+        <translation>La partie se termine par une égalité entre bleu et jaune.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue and Red.</source>
-        <translation type="unfinished">The game ends in a tie between Blue and Red.</translation>
+        <translation>La partie se termine par une égalité entre bleu et rouge.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue and Green.</source>
-        <translation type="unfinished">The game ends in a tie between Blue and Green.</translation>
+        <translation>La partie se termine par une égalité entre bleu et vert.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Yellow and Red.</source>
-        <translation type="unfinished">The game ends in a tie between Yellow and Red.</translation>
+        <translation>La partie se termine par une égalité entre jaune et rouge.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Yellow and Green.</source>
-        <translation type="unfinished">The game ends in a tie between Yellow and Green.</translation>
+        <translation>La partie se termine par une égalité entre jaune et vert.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Red and Green.</source>
-        <translation type="unfinished">The game ends in a tie between Red and Green.</translation>
+        <translation>La partie se termine par une égalité entre rouge et vert.</translation>
     </message>
     <message>
         <source>Blue wins.</source>
-        <translation type="unfinished">Blue wins.</translation>
+        <translation>Bleu gagne.</translation>
     </message>
     <message>
         <source>Yellow wins.</source>
-        <translation type="unfinished">Yellow wins.</translation>
+        <translation>Jaune gagne.</translation>
     </message>
     <message>
         <source>Red wins.</source>
-        <translation type="unfinished">Red wins.</translation>
+        <translation>Rouge gagne.</translation>
     </message>
     <message>
         <source>Green wins.</source>
-        <translation type="unfinished">Green wins.</translation>
+        <translation>Vert gagne.</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
-        <translation type="unfinished">Your rating has increased from %1 to %2.</translation>
+        <translation>Votre classement a augmenté de %1 à %2.</translation>
     </message>
     <message>
         <source>Your rating stays at %1.</source>
-        <translation type="unfinished">Your rating stays at %1.</translation>
+        <translation>Votre classement reste à %1.</translation>
     </message>
     <message>
         <source>Your rating has decreased from %1 to %2.</source>
-        <translation type="unfinished">Your rating has decreased from %1 to %2.</translation>
+        <translation>Votre classement a diminué de %1 à %2.</translation>
     </message>
     <message>
         <source>Error in file &apos;%1&apos;</source>
@@ -843,35 +843,35 @@
     </message>
     <message>
         <source>Blue wins with 1 point.</source>
-        <translation type="unfinished">Blue wins with 1 point.</translation>
+        <translation>Bleu gagne avec 1 point.</translation>
     </message>
     <message>
         <source>Blue wins with %L1 points.</source>
-        <translation type="unfinished">Blue wins with %L1 points.</translation>
+        <translation>Bleu gagne avec %L1 points.</translation>
     </message>
     <message>
         <source>Green wins with 1 point.</source>
-        <translation type="unfinished">Green wins with 1 point.</translation>
+        <translation>Vert gagne avec 1 point.</translation>
     </message>
     <message>
         <source>Green wins with %L1 points.</source>
-        <translation type="unfinished">Green wins with %L1 points.</translation>
+        <translation>Vert gagne avec %L1 points.</translation>
     </message>
     <message>
         <source>Blue/Red wins with 1 point.</source>
-        <translation type="unfinished">Blue/Red wins with 1 point.</translation>
+        <translation>Bleu/rouge gagne avec 1 point.</translation>
     </message>
     <message>
         <source>Blue/Red wins with %L1 points.</source>
-        <translation type="unfinished">Blue/Red wins with %L1 points.</translation>
+        <translation>Bleu/rouge gagne avec %L1 points.</translation>
     </message>
     <message>
         <source>Yellow/Green wins with 1 point.</source>
-        <translation type="unfinished">Yellow/Green wins with 1 point.</translation>
+        <translation>Jaune/vert gagne avec 1 point.</translation>
     </message>
     <message>
         <source>Yellow/Green wins with %L1 points.</source>
-        <translation type="unfinished">Yellow/Green wins with %L1 points.</translation>
+        <translation>Jaune/vert gagne avec % L1 points.</translation>
     </message>
     <message>
         <source>Callisto (&amp;3 Players)</source>
@@ -887,19 +887,19 @@
     </message>
     <message>
         <source>Green wins (tie resolved).</source>
-        <translation type="unfinished">Green wins (tie resolved).</translation>
+        <translation>Vert gagne (égalité résolue).</translation>
     </message>
     <message>
         <source>Yellow/Green wins (tie resolved).</source>
-        <translation type="unfinished">Yellow/Green wins (tie resolved).</translation>
+        <translation>Jaune/vert gagne (égalité résolue).</translation>
     </message>
     <message>
         <source>Red wins (tie resolved).</source>
-        <translation type="unfinished">Red wins (tie resolved).</translation>
+        <translation>Rouge gagne (égalité résolue).</translation>
     </message>
     <message>
         <source>Yellow wins (tie resolved).</source>
-        <translation type="unfinished">Yellow wins (tie resolved).</translation>
+        <translation>Jaune gagne (égalité résolue).</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 4 Players)</source>
@@ -999,7 +999,7 @@
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
-        <translation type="unfinished">Open from &amp;Clipboard</translation>
+        <translation>Ouvrir depuis le &amp;presse-papiers</translation>
     </message>
     <message>
         <source>Clipboard is empty.</source>
@@ -1027,19 +1027,19 @@
     </message>
     <message>
         <source>Purple wins with 1 point.</source>
-        <translation type="unfinished">Purple wins with 1 point.</translation>
+        <translation>Violet gagne avec 1 point.</translation>
     </message>
     <message>
         <source>Purple wins with %L1 points.</source>
-        <translation type="unfinished">Purple wins with %L1 points.</translation>
+        <translation>Violet gagne avec %L1 points.</translation>
     </message>
     <message>
         <source>Orange wins with 1 point.</source>
-        <translation type="unfinished">Orange wins with 1 point.</translation>
+        <translation>Orange gagne avec 1 point.</translation>
     </message>
     <message>
         <source>Orange wins with %L1 points.</source>
-        <translation type="unfinished">Orange wins with %L1 points.</translation>
+        <translation>Orange gagne avec %L1 points.</translation>
     </message>
 </context>
 <context>
@@ -1093,7 +1093,7 @@
     </message>
     <message>
         <source>Best previous rating:</source>
-        <translation type="unfinished">Meilleur classement précédent:</translation>
+        <translation>Meilleur classement précédent:</translation>
     </message>
     <message>
         <source>Recent games:</source>
@@ -1109,7 +1109,7 @@
     </message>
     <message>
         <source>Clear rating</source>
-        <translation type="unfinished">Clear rating</translation>
+        <translation>Effacer le classement</translation>
     </message>
     <message>
         <source>Classic (4 players)</source>
