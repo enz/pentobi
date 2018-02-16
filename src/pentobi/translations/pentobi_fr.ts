@@ -178,7 +178,7 @@
     </message>
     <message>
         <source>Go to end of moves</source>
-        <translation>Aller à la fin des coups</translation>
+        <translation>Aller à la fin de coups</translation>
     </message>
     <message>
         <source>&amp;ASCII Art</source>
