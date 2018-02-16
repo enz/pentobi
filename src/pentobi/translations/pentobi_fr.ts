@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>S&amp;etup Mode</source>
-        <translation type="unfinished">S&amp;etup Mode</translation>
+        <translation>P&amp;osition</translation>
     </message>
     <message>
         <source>Could not read file &apos;%1&apos;</source>
@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Continuing unfinished rated game.</source>
-        <translation type="unfinished">Continuing unfinished rated game.</translation>
+        <translation>Continue partie classée incomplète.</translation>
     </message>
     <message>
         <source>You play %1 in this game.</source>
@@ -686,11 +686,11 @@
     </message>
     <message>
         <source>Setup mode cannot be used if moves have been played.</source>
-        <translation type="unfinished">Setup mode cannot be used if moves have been played.</translation>
+        <translation>La position ne peut pas être modifiée si des coups ont été joués.</translation>
     </message>
     <message>
         <source>Setup mode</source>
-        <translation type="unfinished">Setup mode</translation>
+        <translation>Position</translation>
     </message>
     <message>
         <source>The game ends in a tie.</source>
@@ -791,11 +791,11 @@
     </message>
     <message>
         <source>Make the computer continue to play the current color</source>
-        <translation type="unfinished">Make the computer continue to play the current color</translation>
+        <translation>Faire que l’ordinateur continue à jouer la couleur actuelle</translation>
     </message>
     <message>
         <source>Make the computer play the current color</source>
-        <translation type="unfinished">Make the computer play the current color</translation>
+        <translation>Faire que l’ordinateur joue la couleur actuelle</translation>
     </message>
     <message>
         <source>Classic (&amp;4 Players)</source>
