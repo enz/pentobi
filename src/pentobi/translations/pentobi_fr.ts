@@ -13,7 +13,7 @@
     </message>
     <message>
         <source>Running game analysis...</source>
-        <translation type="unfinished">Running game analysis...</translation>
+        <translation>Exécution de l&apos;analyse de la partie...</translation>
     </message>
 </context>
 <context>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>This position and all following moves and variations will be removed from the game tree.</source>
-        <translation type="unfinished">This position and all following moves and variations will be removed from the game tree.</translation>
+        <translation>Cette position et tous les coups suivants et variations suivantes seront retirés de l&apos;arbre du jeu.</translation>
     </message>
     <message>
         <source>Truncate</source>
@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>All following moves and variations will be removed from the game tree.</source>
-        <translation type="unfinished">All following moves and variations will be removed from the game tree.</translation>
+        <translation>Tous les coups suivants et variations suivantes seront retirés de l&apos;arbre du jeu.</translation>
     </message>
     <message>
         <source>Truncate Children</source>
@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Could not delete %1</source>
-        <translation type="unfinished">Could not delete %1</translation>
+        <translation>Impossible de supprimer %1</translation>
     </message>
     <message>
         <source>Rated game</source>
@@ -146,11 +146,11 @@
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation type="unfinished">Au début de la bran&amp;che</translation>
+        <translation>Au début de la bran&amp;che</translation>
     </message>
     <message>
         <source>Clear Piece</source>
-        <translation type="unfinished">Clear Piece</translation>
+        <translation>Effacer pièce</translation>
     </message>
     <message>
         <source>&amp;Computer Colors</source>
@@ -230,7 +230,7 @@
     </message>
     <message>
         <source>Game analysis is only possible in the main variation.</source>
-        <translation type="unfinished">Game analysis is only possible in the main variation.</translation>
+        <translation>L&apos;analyse de la partie n&apos;est possible que dans la variation principale.</translation>
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
@@ -570,7 +570,7 @@
     </message>
     <message>
         <source>Computer opponent for the board game Blokus.</source>
-        <translation type="unfinished">Computer opponent for the board game Blokus.</translation>
+        <translation>Un adversaire d&apos;ordinateur pour le jeu Blokus.</translation>
     </message>
     <message>
         <source>The file has been modified.</source>
@@ -630,7 +630,7 @@
     </message>
     <message>
         <source>Open R&amp;ecent</source>
-        <translation>Ouvrir fichier réc&amp;ent</translation>
+        <translation>Ouvrir un fichier réc&amp;ent</translation>
     </message>
     <message>
         <source>E&amp;xport</source>
@@ -642,7 +642,7 @@
     </message>
     <message>
         <source>&amp;Move Marking</source>
-        <translation>&amp;Marquage des coups</translation>
+        <translation>&amp;Marquage de coups</translation>
     </message>
     <message>
         <source>Export Image</source>
@@ -1007,7 +1007,7 @@
     </message>
     <message>
         <source>Blokus SGF file format error</source>
-        <translation type="unfinished">Blokus SGF file format error</translation>
+        <translation>Le fichier n’est pas un fichier Blokus SGF valable</translation>
     </message>
     <message>
         <source>Callisto (&amp;2 Players, 2 Colors)</source>
@@ -1105,7 +1105,7 @@
     </message>
     <message>
         <source>Clear rating and delete rating history?</source>
-        <translation type="unfinished">Clear rating and delete rating history?</translation>
+        <translation>Effacer classement et supprimer l’historique du classement ?</translation>
     </message>
     <message>
         <source>Clear rating</source>
