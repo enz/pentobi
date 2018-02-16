@@ -348,7 +348,7 @@
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation type="unfinished">You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</translation>
+        <translation>Vous n&apos;avez pas encore joué des parties classées dans cette variante du jeu. Estimez votre niveau pour initialiser votre classement.</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -395,7 +395,7 @@
     </message>
     <message>
         <source>Computer opponent for the board game Blokus.</source>
-        <translation type="unfinished">Computer opponent for the board game Blokus.</translation>
+        <translation>Un adversaire d&apos;ordinateur pour le jeu Blokus.</translation>
     </message>
     <message>
         <source>Keep only position?</source>
@@ -415,11 +415,11 @@
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
-        <translation type="unfinished">Game analysis is only possible in main variation.</translation>
+        <translation>L&apos;analyse de la partie n&apos;est possible que dans la variation principale.</translation>
     </message>
     <message>
         <source>File has been modified by another application. Reload?</source>
-        <translation type="unfinished">File has been modified by another application. Reload?</translation>
+        <translation>Le fichier a été modifié par une autre application. Recharger ?</translation>
     </message>
     <message>
         <source>File has been modified by another application. Save anyway?</source>
@@ -471,7 +471,7 @@
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
-        <translation type="unfinished">Supprimer toutes les informations de classement de l&apos;actuelle variante du jeu ?</translation>
+        <translation>Supprimer toutes les informations de classement de l&apos;actuelle variante du jeu ?</translation>
     </message>
     <message>
         <source>Rating information deleted.</source>
@@ -495,7 +495,7 @@
     </message>
     <message>
         <source>Variations deleted.</source>
-        <translation type="unfinished">Variations supprimées.</translation>
+        <translation>Variations supprimées.</translation>
     </message>
     <message>
         <source>Image saved.</source>
@@ -511,7 +511,7 @@
     </message>
     <message>
         <source>Children truncated.</source>
-        <translation type="unfinished">Children truncated.</translation>
+        <translation>Nœuds fils coupé.</translation>
     </message>
     <message>
         <source>Variation is now %1.</source>
@@ -836,7 +836,7 @@
     </message>
     <message>
         <source>Open R&amp;ecent</source>
-        <translation>Ouvrir fichier réc&amp;ent</translation>
+        <translation>Ouvrir un fichier réc&amp;ent</translation>
     </message>
     <message>
         <source>&amp;Rated Game</source>
@@ -955,7 +955,7 @@
     </message>
     <message>
         <source>&amp;Move Marking</source>
-        <translation>&amp;Marquage des coups</translation>
+        <translation>&amp;Marquage de coups</translation>
     </message>
     <message>
         <source>Last With &amp;Dot</source>
@@ -1121,7 +1121,7 @@
     </message>
     <message>
         <source>Open Game %1</source>
-        <translation>Ouvrir partie %1</translation>
+        <translation>Ouvrir la partie %1</translation>
     </message>
     <message>
         <source>GembloQ (4 players)</source>
