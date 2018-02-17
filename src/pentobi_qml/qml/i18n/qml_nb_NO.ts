@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Grønn</translation>
     </message>
     <message>
         <source>Yellow</source>
@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rød</translation>
     </message>
     <message>
         <source>Purple</source>
@@ -63,14 +63,14 @@
     </message>
     <message>
         <source>Orange</source>
-        <translation type="unfinished"></translation>
+        <translation>Oransje</translation>
     </message>
 </context>
 <context>
     <name>ExportImageDialog</name>
     <message>
         <source>Export Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksporter bilde</translation>
     </message>
     <message>
         <source>Image width:</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dato:</translation>
     </message>
     <message>
         <source>Time:</source>
@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>Event:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hendelse:</translation>
     </message>
     <message>
         <source>Round:</source>
@@ -264,7 +264,7 @@
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Grønn</translation>
     </message>
     <message>
         <source>Yellow</source>
@@ -272,7 +272,7 @@
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rød</translation>
     </message>
     <message>
         <source>Invalid Blokus SGF file. (%1)</source>
@@ -288,7 +288,7 @@
     </message>
     <message>
         <source>Orange</source>
-        <translation type="unfinished"></translation>
+        <translation>Oransje</translation>
     </message>
     <message>
         <source>Purple wins with 1 point.</source>
@@ -337,7 +337,7 @@
     </message>
     <message>
         <source>PNG image files (*.png)</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG-bildefiler (*.png)</translation>
     </message>
 </context>
 <context>
@@ -356,7 +356,7 @@
     </message>
     <message>
         <source>Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekspert</translation>
     </message>
     <message>
         <source>Your initial rating:</source>
@@ -367,7 +367,7 @@
     <name>Main</name>
     <message>
         <source>Pentobi</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentobi</translation>
     </message>
     <message>
         <source>Open failed.</source>
@@ -391,7 +391,7 @@
     </message>
     <message>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Versjon %1</translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus.</source>
@@ -606,7 +606,7 @@
     </message>
     <message>
         <source>St&amp;op</source>
-        <translation type="unfinished"></translation>
+        <translation>St&amp;opp</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 4 Players)</source>
@@ -681,7 +681,7 @@
     </message>
     <message>
         <source>&amp;None</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ingen</translation>
     </message>
     <message>
         <source>&amp;Very good</source>
@@ -724,7 +724,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ny</translation>
     </message>
     <message>
         <source>Game &amp;Variant</source>
@@ -740,11 +740,11 @@
     </message>
     <message>
         <source>&amp;Duo</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Duo</translation>
     </message>
     <message>
         <source>&amp;Junior</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Junior</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
@@ -756,7 +756,7 @@
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Åpne…</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -812,11 +812,11 @@
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Eksporter</translation>
     </message>
     <message>
         <source>&amp;Image</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bilde</translation>
     </message>
     <message>
         <source>&amp;ASCII Art</source>
@@ -848,7 +848,7 @@
     </message>
     <message>
         <source>&amp;GembloQ</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;</translation>
     </message>
     <message>
         <source>GembloQ (&amp;2 Players, 2 Colors)</source>
@@ -879,7 +879,7 @@
     <name>MenuGo</name>
     <message>
         <source>G&amp;o</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">G&amp;å</translation>
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
@@ -902,7 +902,7 @@
     <name>MenuHelp</name>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hjelp</translation>
     </message>
     <message>
         <source>&amp;About Pentobi</source>
@@ -917,7 +917,7 @@
     <name>MenuItemLevel</name>
     <message>
         <source>Level &amp;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nivå &amp;%1</translation>
     </message>
 </context>
 <context>
@@ -943,7 +943,7 @@
     <name>MenuView</name>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vis</translation>
     </message>
     <message>
         <source>&amp;Animate Pieces</source>
@@ -971,7 +971,7 @@
     </message>
     <message>
         <source>N&amp;one</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ingen</translation>
     </message>
     <message>
         <source>Show &amp;Variations</source>
@@ -983,7 +983,7 @@
     </message>
     <message>
         <source>&amp;Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Drakt</translation>
     </message>
     <message>
         <source>&amp;Light</source>
@@ -998,7 +998,7 @@
     <name>OpenDialog</name>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Åpne</translation>
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
@@ -1037,11 +1037,11 @@
     </message>
     <message>
         <source>Duo</source>
-        <translation type="unfinished"></translation>
+        <translation>Duo</translation>
     </message>
     <message>
         <source>Junior</source>
-        <translation type="unfinished"></translation>
+        <translation>Junior</translation>
     </message>
     <message>
         <source>Trigon (2 players)</source>
@@ -1093,7 +1093,7 @@
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Nivå</translation>
     </message>
     <message>
         <source>Result</source>
@@ -1101,11 +1101,11 @@
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Dato</translation>
     </message>
     <message>
         <source>Win</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vinn</translation>
     </message>
     <message>
         <source>Loss</source>
@@ -1163,7 +1163,7 @@
     </message>
     <message>
         <source>File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fil: %1</translation>
     </message>
     <message>
         <source>Rated</source>
@@ -1182,7 +1182,7 @@
     </message>
     <message>
         <source>Pentobi</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentobi</translation>
     </message>
 </context>
 </TS>
