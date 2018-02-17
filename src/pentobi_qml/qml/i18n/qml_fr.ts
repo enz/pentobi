@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>Event:</source>
-        <translation>&amp;Événement:</translation>
+        <translation>Événement:</translation>
     </message>
     <message>
         <source>Round:</source>
@@ -836,7 +836,7 @@
     </message>
     <message>
         <source>Open R&amp;ecent</source>
-        <translation>Ouvrir un fichier réc&amp;ent</translation>
+        <translation>Fichiers réc&amp;ents</translation>
     </message>
     <message>
         <source>&amp;Rated Game</source>
