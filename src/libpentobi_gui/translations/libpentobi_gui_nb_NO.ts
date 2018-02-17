@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Expert</source>
-        <translation></translation>
+        <translation>Ekspert</translation>
     </message>
     <message>
         <source>Your initial rating: %1</source>
