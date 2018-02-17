@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Continuing unfinished rated game.</source>
-        <translation>Continue partie classée incomplète.</translation>
+        <translation>On continue la partie classée incomplète.</translation>
     </message>
     <message>
         <source>You play %1 in this game.</source>
@@ -630,7 +630,7 @@
     </message>
     <message>
         <source>Open R&amp;ecent</source>
-        <translation>Ouvrir un fichier réc&amp;ent</translation>
+        <translation>Fichiers réc&amp;ents</translation>
     </message>
     <message>
         <source>E&amp;xport</source>
