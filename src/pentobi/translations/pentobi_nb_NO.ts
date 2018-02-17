@@ -5,7 +5,7 @@
     <name>AnalyzeGameWidget</name>
     <message>
         <source>Win</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Loss</source>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Normal</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Slow</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Analyze Game</source>
@@ -174,7 +174,7 @@
     </message>
     <message>
         <source>&amp;End</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Go to end of moves</source>
@@ -214,15 +214,15 @@
     </message>
     <message>
         <source>Ga&amp;me Info</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>St&amp;op</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Duo</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Good</source>
@@ -274,40 +274,40 @@
     </message>
     <message>
         <source>&amp;1</source>
-        <translation></translation>
+        <translation>&amp;1</translation>
     </message>
     <message>
         <source>&amp;2</source>
-        <translation></translation>
+        <translation>&amp;2</translation>
     </message>
     <message>
         <source>&amp;3</source>
-        <translation></translation>
+        <translation>&amp;3</translation>
     </message>
     <message>
         <source>&amp;4</source>
-        <translation></translation>
+        <translation>&amp;4</translation>
     </message>
     <message>
         <source>&amp;5</source>
-        <translation></translation>
+        <translation>&amp;5</translation>
     </message>
     <message>
         <source>&amp;6</source>
-        <translation></translation>
+        <translation>&amp;6</translation>
     </message>
     <message>
         <source>&amp;7</source>
-        <translation></translation>
+        <translation>&amp;7</translation>
     </message>
     <message>
         <source>&amp;8</source>
-        <translation></translation>
+        <translation>&amp;8</translation>
     </message>
     <message>
         <source>&amp;None</source>
         <comment>move numbers</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Next Piece</source>
@@ -327,7 +327,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Start a new game</source>
@@ -336,11 +336,11 @@
     <message>
         <source>N&amp;one</source>
         <comment>move annotation</comment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Play</source>
@@ -392,7 +392,7 @@
     </message>
     <message>
         <source>&amp;No Text</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Text &amp;Beside Icons</source>
@@ -400,7 +400,7 @@
     </message>
     <message>
         <source>Text Bel&amp;ow Icons</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Text Only</source>
@@ -408,7 +408,7 @@
     </message>
     <message>
         <source>&amp;System Default</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Truncate</source>
@@ -444,7 +444,7 @@
     </message>
     <message>
         <source>&amp;View</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Toolbar T&amp;ext</source>
@@ -460,7 +460,7 @@
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete all variations?</source>
@@ -537,7 +537,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The file could not be saved.</source>
@@ -546,7 +546,7 @@
     <message>
         <source>%1: %2</source>
         <extracomment>Error message if file cannot be saved. %1 is replaced by the file name, %2 by the error message of the operating system.</extracomment>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Untitled Game.blksgf</source>
@@ -562,11 +562,11 @@
     </message>
     <message>
         <source>Pentobi</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Version %1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus.</source>
@@ -598,7 +598,7 @@
     </message>
     <message>
         <source>&amp;9</source>
-        <translation></translation>
+        <translation>&amp;9</translation>
     </message>
     <message>
         <source>&amp;All with Number</source>
@@ -638,7 +638,7 @@
     </message>
     <message>
         <source>G&amp;o</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Move Marking</source>
@@ -646,7 +646,7 @@
     </message>
     <message>
         <source>Export Image</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Image size:</source>
@@ -682,7 +682,7 @@
     </message>
     <message>
         <source>[*]%1</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Setup mode cannot be used if moves have been played.</source>
@@ -770,7 +770,7 @@
     </message>
     <message>
         <source>Error in file &apos;%1&apos;</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move %1</source>
@@ -803,7 +803,7 @@
     </message>
     <message>
         <source>J&amp;unior</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Classic (&amp;2 Players)</source>
@@ -835,11 +835,11 @@
     </message>
     <message>
         <source>&amp;Trigon</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Nexos</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Blue wins with 1 point.</source>
@@ -883,23 +883,23 @@
     </message>
     <message>
         <source>C&amp;allisto</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Green wins (tie resolved).</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Yellow/Green wins (tie resolved).</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Red wins (tie resolved).</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Yellow wins (tie resolved).</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 4 Players)</source>
@@ -971,7 +971,7 @@
     </message>
     <message>
         <source>&amp;GembloQ</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 4 Players)</source>
@@ -1054,7 +1054,7 @@
     </message>
     <message>
         <source>Level</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Result</source>
@@ -1062,11 +1062,11 @@
     </message>
     <message>
         <source>Date</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Win</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tie</source>
@@ -1125,7 +1125,7 @@
     </message>
     <message>
         <source>Duo</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Trigon (4 players)</source>
@@ -1141,7 +1141,7 @@
     </message>
     <message>
         <source>Junior</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Recent development:</source>
@@ -1200,7 +1200,7 @@
     </message>
     <message>
         <source>Pentobi</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
