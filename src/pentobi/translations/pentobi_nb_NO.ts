@@ -1125,7 +1125,7 @@
     </message>
     <message>
         <source>Duo</source>
-        <translation type="unfinished"></translation>
+        <translation>Duo</translation>
     </message>
     <message>
         <source>Trigon (4 players)</source>
@@ -1141,7 +1141,7 @@
     </message>
     <message>
         <source>Junior</source>
-        <translation type="unfinished"></translation>
+        <translation>Junior</translation>
     </message>
     <message>
         <source>Recent development:</source>
@@ -1200,7 +1200,7 @@
     </message>
     <message>
         <source>Pentobi</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentobi</translation>
     </message>
 </context>
 </TS>
