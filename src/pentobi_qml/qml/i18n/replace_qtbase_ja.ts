@@ -5,11 +5,11 @@
     <name>QPlatformTheme</name>
     <message>
         <source>Cancel</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
