@@ -48,7 +48,7 @@
     <name>MainWindow</name>
     <message>
         <source>About Pentobi</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentobiについて</translation>
     </message>
     <message>
         <source>Next &amp;Color</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Truncate Children</source>
-        <translation type="unfinished"></translation>
+        <translation>子ノードの削除</translation>
     </message>
     <message>
         <source>Could not delete %1</source>
@@ -116,7 +116,7 @@
     </message>
     <message>
         <source>&amp;About Pentobi</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentobiについて</translation>
     </message>
     <message>
         <source>&amp;Analyze Game...</source>
@@ -124,7 +124,7 @@
     </message>
     <message>
         <source>B&amp;ackward</source>
-        <translation type="unfinished"></translation>
+        <translation>戻る</translation>
     </message>
     <message>
         <source>Go one move backward</source>
@@ -132,7 +132,7 @@
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
-        <translation type="unfinished"></translation>
+        <translation>本手順へ戻る</translation>
     </message>
     <message>
         <source>&amp;Bad</source>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>&amp;Beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>最初へ移動</translation>
     </message>
     <message>
         <source>Go to beginning of game</source>
@@ -176,7 +176,7 @@
     </message>
     <message>
         <source>&amp;End</source>
-        <translation type="unfinished"></translation>
+        <translation>最後へ移動</translation>
     </message>
     <message>
         <source>Go to end of moves</source>
@@ -204,7 +204,7 @@
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>進む</translation>
     </message>
     <message>
         <source>Go one move forward</source>
@@ -212,15 +212,15 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>フルスクリーン</translation>
     </message>
     <message>
         <source>Ga&amp;me Info</source>
-        <translation type="unfinished"></translation>
+        <translation>対局情報</translation>
     </message>
     <message>
         <source>St&amp;op</source>
-        <translation type="unfinished"></translation>
+        <translation>割り込み</translation>
     </message>
     <message>
         <source>&amp;Duo</source>
@@ -236,15 +236,15 @@
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>次のコメントを検索</translation>
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation type="unfinished"></translation>
+        <translation>N手目へ移動...</translation>
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘルプ</translation>
     </message>
     <message>
         <source>I&amp;nteresting</source>
@@ -252,7 +252,7 @@
     </message>
     <message>
         <source>&amp;Keep Only Position</source>
-        <translation type="unfinished"></translation>
+        <translation>位置のみ保存</translation>
     </message>
     <message>
         <source>Keep Only &amp;Subtree</source>
@@ -264,7 +264,7 @@
     </message>
     <message>
         <source>M&amp;ake Main Variation</source>
-        <translation type="unfinished"></translation>
+        <translation>本手順にする</translation>
     </message>
     <message>
         <source>Move Variation D&amp;own</source>
@@ -317,7 +317,7 @@
     </message>
     <message>
         <source>&amp;Next Variation</source>
-        <translation type="unfinished"></translation>
+        <translation>次の変化図</translation>
     </message>
     <message>
         <source>Go to next variation</source>
@@ -329,7 +329,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>新規対局</translation>
     </message>
     <message>
         <source>Start a new game</source>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>開く...</translation>
     </message>
     <message>
         <source>&amp;Play</source>
@@ -358,7 +358,7 @@
     </message>
     <message>
         <source>&amp;Previous Variation</source>
-        <translation type="unfinished"></translation>
+        <translation>前の変化図</translation>
     </message>
     <message>
         <source>Go to previous variation</source>
@@ -374,15 +374,15 @@
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>終了</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>上書き保存</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation type="unfinished"></translation>
+        <translation>名前を付けて保存...</translation>
     </message>
     <message>
         <source>&amp;Comment</source>
@@ -439,7 +439,7 @@
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>編集</translation>
     </message>
     <message>
         <source>&amp;Move Annotation</source>
@@ -447,7 +447,7 @@
     </message>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>表示</translation>
     </message>
     <message>
         <source>Toolbar T&amp;ext</source>
@@ -459,11 +459,11 @@
     </message>
     <message>
         <source>&amp;Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>ツール</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘルプ</translation>
     </message>
     <message>
         <source>Delete all variations?</source>
@@ -479,7 +479,7 @@
     </message>
     <message>
         <source>&amp;Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>ツールバー</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*)</source>
@@ -487,7 +487,7 @@
     </message>
     <message>
         <source>No comment found</source>
-        <translation type="unfinished"></translation>
+        <translation>コメントが見つかりません。</translation>
     </message>
     <message>
         <source>Blokus games (*.blksgf);;All files (*)</source>
@@ -495,7 +495,7 @@
     </message>
     <message>
         <source>Move number:</source>
-        <translation type="unfinished"></translation>
+        <translation>着手番号</translation>
     </message>
     <message>
         <source>Go to Move</source>
@@ -541,7 +541,7 @@
     <message>
         <source>Open</source>
         <extracomment>Window title for open dialog</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>開く</translation>
     </message>
     <message>
         <source>The file could not be saved.</source>
@@ -563,7 +563,7 @@
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存する</translation>
     </message>
     <message>
         <source>Pentobi</source>
@@ -571,7 +571,7 @@
     </message>
     <message>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>バージョン %1</translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus.</source>
@@ -587,7 +587,7 @@
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation type="unfinished"></translation>
+        <translation>保存しない</translation>
     </message>
     <message>
         <source>The current game is not finished.</source>
@@ -635,15 +635,15 @@
     </message>
     <message>
         <source>Open R&amp;ecent</source>
-        <translation type="unfinished"></translation>
+        <translation>最近使ったファイル</translation>
     </message>
     <message>
         <source>E&amp;xport</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポート</translation>
     </message>
     <message>
         <source>G&amp;o</source>
-        <translation type="unfinished"></translation>
+        <translation>移動</translation>
     </message>
     <message>
         <source>&amp;Move Marking</source>
@@ -663,7 +663,7 @@
     </message>
     <message>
         <source>Continue the search from the start of the tree?</source>
-        <translation type="unfinished"></translation>
+        <translation>最初から続けますか？</translation>
     </message>
     <message>
         <source>Continue From Start</source>
@@ -675,7 +675,7 @@
     </message>
     <message>
         <source>Pentobi Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentobi ヘルプ</translation>
     </message>
     <message>
         <source>Keep Only Position</source>
