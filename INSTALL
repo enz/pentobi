@@ -6,11 +6,11 @@ This file explains how to compile and install Pentobi from the sources.
 Pentobi requires the Qt libraries (>=5.6). The C++ compiler needs C++14
 support (GCC >=4.9). The build system uses CMake (>=3.1.0).
 
-Ubuntu 17.10 provides suitable versions of the required tools and libraries in
+Ubuntu 18.04 provides suitable versions of the required tools and libraries in
 its package repository. They can be installed with the shell command:
 
-  sudo apt-get install \
-    g++ make cmake qtbase5-dev libqt5svg5-dev qttools5-dev-tools
+  sudo apt-get install g++ make cmake qtbase5-dev libqt5svg5-dev \
+      qtdeclarative5-dev libqt5webview5-dev qttools5-dev qttools5-dev-tools
 
 
 == Building ==
@@ -26,7 +26,7 @@ Pentobi can be compiled from the source directory with the shell commands:
 A thumbnailer plugin for KDE can be built by using the cmake option
 -DPENTOBI_BUILD_KDE_THUMBNAILER=1. In this case, the KDE development files
 need to be installed (packages libkf5kio-dev and extra-cmake-modules on
-Ubuntu 17.10). Note that on Ubuntu 17.10, the plugin will not be found if
+Ubuntu 18.04). Note that on Ubuntu 18.04, the plugin will not be found if
 the default installation prefix /usr/local is used. You need to add
 QT_PLUGIN_PATH=/usr/local/lib/plugins to /etc/environment. After that, you
 can enable previews for Blokus game file in the Dolphin file manager in
@@ -41,7 +41,7 @@ On Linux, Pentobi can be installed after compilation with the shell command:
 
 After installation, the system-wide databases should be updated to
 make Pentobi appear in the desktop menu and register it as handler for Blokus
-files (*.blksgf). On Ubuntu 17.10 with install prefix /usr/local, this can be
+files (*.blksgf). On Ubuntu 18.04 with install prefix /usr/local, this can be
 done by running:
 
   sudo update-mime-database /usr/local/share/mime
@@ -55,4 +55,4 @@ src/pentobi_qml/Pentobi.pro. It requires Qt >=5.8.
 
 For testing purposes, the GUI that is used for Android can also be built as a
 desktop application by running CMake with -DPENTOBI_BUILD_QML=1 (needs the
-packages qtdeclarative5-dev and libqt5webview5-dev on Ubuntu 17.10).
+packages qtdeclarative5-dev and libqt5webview5-dev on Ubuntu 18.04).
