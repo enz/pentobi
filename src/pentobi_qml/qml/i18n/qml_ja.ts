@@ -81,7 +81,7 @@
     <name>GameInfoDialog</name>
     <message>
         <source>Game Info</source>
-        <translation type="unfinished"></translation>
+        <translation>対局情報</translation>
     </message>
     <message>
         <source>Player Blue/Red:</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>日付:</translation>
     </message>
     <message>
         <source>Time:</source>
@@ -249,7 +249,7 @@
     </message>
     <message>
         <source>Clipboard is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>クリップボードにテキストが選択されていません</translation>
     </message>
     <message>
         <source>Blue/Red</source>
@@ -312,18 +312,18 @@
     <name>GotoMoveDialog</name>
     <message>
         <source>Go to Move</source>
-        <translation type="unfinished"></translation>
+        <translation>N手目へ移動</translation>
     </message>
     <message>
         <source>Move number:</source>
-        <translation type="unfinished"></translation>
+        <translation>着手番号</translation>
     </message>
 </context>
 <context>
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentobi ヘルプ</translation>
     </message>
 </context>
 <context>
@@ -393,7 +393,7 @@
     </message>
     <message>
         <source>Version %1</source>
-        <translation type="unfinished"></translation>
+        <translation>バージョン %1</translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus.</source>
@@ -429,11 +429,11 @@
     </message>
     <message>
         <source>End of tree was reached. Continue search from start of the tree?</source>
-        <translation type="unfinished"></translation>
+        <translation>ツリーの最後に到達しました。ツリーの先頭から検索を続けますか？</translation>
     </message>
     <message>
         <source>No comment found</source>
-        <translation type="unfinished"></translation>
+        <translation>コメントが見つかりません。</translation>
     </message>
     <message>
         <source>Start rated game with Blue/Red against Pentobi level %1?</source>
@@ -604,11 +604,11 @@
     </message>
     <message>
         <source>Play &amp;Single Move</source>
-        <translation type="unfinished"></translation>
+        <translation>1手打つ</translation>
     </message>
     <message>
         <source>St&amp;op</source>
-        <translation type="unfinished"></translation>
+        <translation>割り込み</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 4 Players)</source>
@@ -639,11 +639,11 @@
     <name>MenuEdit</name>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>編集</translation>
     </message>
     <message>
         <source>Make &amp;Main Variation</source>
-        <translation type="unfinished"></translation>
+        <translation>本手順にする</translation>
     </message>
     <message>
         <source>Move Variation &amp;Up</source>
@@ -659,7 +659,7 @@
     </message>
     <message>
         <source>Truncate &amp;Children</source>
-        <translation type="unfinished"></translation>
+        <translation>子ノードの削除</translation>
     </message>
     <message>
         <source>&amp;Delete All Variations</source>
@@ -671,7 +671,7 @@
     </message>
     <message>
         <source>&amp;Keep Only Position</source>
-        <translation type="unfinished"></translation>
+        <translation>位置のみ保存</translation>
     </message>
     <message>
         <source>Keep Only &amp;Subtree</source>
@@ -722,11 +722,11 @@
     <name>MenuGame</name>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>対局情報</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>新規対局</translation>
     </message>
     <message>
         <source>Game &amp;Variant</source>
@@ -758,11 +758,11 @@
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>開く...</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>終了</translation>
     </message>
     <message>
         <source>&amp;Classic</source>
@@ -814,7 +814,7 @@
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>エクスポート</translation>
     </message>
     <message>
         <source>&amp;Image</source>
@@ -826,19 +826,19 @@
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>上書き保存</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation type="unfinished"></translation>
+        <translation>名前を付けて保存...</translation>
     </message>
     <message>
         <source>&amp;Game Info</source>
-        <translation type="unfinished"></translation>
+        <translation>対局情報</translation>
     </message>
     <message>
         <source>Open R&amp;ecent</source>
-        <translation type="unfinished"></translation>
+        <translation>最近使ったファイル</translation>
     </message>
     <message>
         <source>&amp;Rated Game</source>
@@ -881,15 +881,15 @@
     <name>MenuGo</name>
     <message>
         <source>G&amp;o</source>
-        <translation type="unfinished"></translation>
+        <translation>移動</translation>
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
-        <translation type="unfinished"></translation>
+        <translation>本手順へ戻る</translation>
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation type="unfinished"></translation>
+        <translation>N手目へ移動...</translation>
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
@@ -897,22 +897,22 @@
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>次のコメントを検索</translation>
     </message>
 </context>
 <context>
     <name>MenuHelp</name>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘルプ</translation>
     </message>
     <message>
         <source>&amp;About Pentobi</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentobiについて</translation>
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>ヘルプ</translation>
     </message>
 </context>
 <context>
@@ -926,7 +926,7 @@
     <name>MenuTools</name>
     <message>
         <source>&amp;Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>ツール</translation>
     </message>
     <message>
         <source>&amp;Analyze Game</source>
@@ -945,7 +945,7 @@
     <name>MenuView</name>
     <message>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>表示</translation>
     </message>
     <message>
         <source>&amp;Animate Pieces</source>
@@ -981,7 +981,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>フルスクリーン</translation>
     </message>
     <message>
         <source>&amp;Theme</source>
@@ -1000,7 +1000,7 @@
     <name>OpenDialog</name>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>開く</translation>
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
@@ -1147,7 +1147,7 @@
     <name>SaveDialog</name>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>上書き保存</translation>
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>

@@ -48,7 +48,7 @@
     <name>GameInfoDialog</name>
     <message>
         <source>Game Info</source>
-        <translation type="unfinished"></translation>
+        <translation>対局情報</translation>
     </message>
     <message>
         <source>Player &amp;Blue:</source>
