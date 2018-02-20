@@ -184,7 +184,7 @@
     </message>
     <message>
         <source>&amp;ASCII Art</source>
-        <translation type="unfinished"></translation>
+        <translation>アスキーアート</translation>
     </message>
     <message>
         <source>I&amp;mage</source>
@@ -499,7 +499,7 @@
     </message>
     <message>
         <source>Go to Move</source>
-        <translation type="unfinished"></translation>
+        <translation>N手目へ移動</translation>
     </message>
     <message>
         <source>Keep only position?</source>
@@ -536,7 +536,7 @@
     </message>
     <message>
         <source>Human</source>
-        <translation type="unfinished"></translation>
+        <translation>人間</translation>
     </message>
     <message>
         <source>Open</source>
@@ -627,7 +627,7 @@
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>対局情報</translation>
     </message>
     <message>
         <source>Game &amp;Variant</source>
@@ -659,7 +659,7 @@
     </message>
     <message>
         <source>The end of the tree was reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>ツリーの最後に到達しました。</translation>
     </message>
     <message>
         <source>Continue the search from the start of the tree?</source>
@@ -679,7 +679,7 @@
     </message>
     <message>
         <source>Keep Only Position</source>
-        <translation type="unfinished"></translation>
+        <translation>位置のみ保存</translation>
     </message>
     <message>
         <source>Keep Only Subtree</source>
