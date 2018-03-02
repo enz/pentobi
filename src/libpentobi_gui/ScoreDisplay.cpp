@@ -19,6 +19,38 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+
+int horizontalAdvance(const QFontMetrics& metrics, QChar ch)
+{
+    return metrics.horizontalAdvance(ch);
+}
+
+int horizontalAdvance(const QFontMetrics& metrics, const QString& text)
+{
+    return metrics.horizontalAdvance(text);
+}
+
+#else
+
+int horizontalAdvance(const QFontMetrics& metrics, QChar ch)
+{
+    return metrics.width(ch);
+}
+
+int horizontalAdvance(const QFontMetrics& metrics, const QString& text)
+{
+    return metrics.width(text);
+}
+
+#endif
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
 ScoreDisplay::ScoreDisplay(QWidget* parent)
     : QWidget(parent)
 {
@@ -115,8 +147,8 @@ void ScoreDisplay::drawText(QPainter& painter, const QString& text, int x,
         y += 2 * lineWidth;
         if (y > height() - 1)
             y = height() - 1;
-        painter.drawLine(x + (hasBonus ? metrics.width(text.at(0)) : 0), y,
-                         x + metrics.width(text), y);
+        painter.drawLine(x + (hasBonus ? horizontalAdvance(metrics, text.at(0)) : 0), y,
+                         x + horizontalAdvance(metrics, text), y);
     }
 }
 
@@ -161,16 +193,16 @@ int ScoreDisplay::getTextWidth(const QString& text) const
     // changes to the layout
     QFontMetrics metrics(m_font);
     int maxDigitWidth = 0;
-    maxDigitWidth = max(maxDigitWidth, metrics.width('0'));
-    maxDigitWidth = max(maxDigitWidth, metrics.width('1'));
-    maxDigitWidth = max(maxDigitWidth, metrics.width('2'));
-    maxDigitWidth = max(maxDigitWidth, metrics.width('3'));
-    maxDigitWidth = max(maxDigitWidth, metrics.width('4'));
-    maxDigitWidth = max(maxDigitWidth, metrics.width('5'));
-    maxDigitWidth = max(maxDigitWidth, metrics.width('6'));
-    maxDigitWidth = max(maxDigitWidth, metrics.width('7'));
-    maxDigitWidth = max(maxDigitWidth, metrics.width('8'));
-    maxDigitWidth = max(maxDigitWidth, metrics.width('9'));
+    maxDigitWidth = max(maxDigitWidth, horizontalAdvance(metrics, '0'));
+    maxDigitWidth = max(maxDigitWidth, horizontalAdvance(metrics, '1'));
+    maxDigitWidth = max(maxDigitWidth, horizontalAdvance(metrics, '2'));
+    maxDigitWidth = max(maxDigitWidth, horizontalAdvance(metrics, '3'));
+    maxDigitWidth = max(maxDigitWidth, horizontalAdvance(metrics, '4'));
+    maxDigitWidth = max(maxDigitWidth, horizontalAdvance(metrics, '5'));
+    maxDigitWidth = max(maxDigitWidth, horizontalAdvance(metrics, '6'));
+    maxDigitWidth = max(maxDigitWidth, horizontalAdvance(metrics, '7'));
+    maxDigitWidth = max(maxDigitWidth, horizontalAdvance(metrics, '8'));
+    maxDigitWidth = max(maxDigitWidth, horizontalAdvance(metrics, '9'));
     return max(text.length() * maxDigitWidth,
                 metrics.boundingRect(text).width());
 }

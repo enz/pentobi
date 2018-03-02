@@ -17,6 +17,28 @@
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+
+int horizontalAdvance(const QFontMetrics& metrics, const QString& text)
+{
+    return metrics.horizontalAdvance(text);
+}
+
+#else
+
+int horizontalAdvance(const QFontMetrics& metrics, const QString& text)
+{
+    return metrics.width(text);
+}
+
+#endif
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
 RatingGraph::RatingGraph(QWidget* parent)
     : QFrame(parent)
 {
@@ -58,7 +80,7 @@ void RatingGraph::paintEvent(QPaintEvent* event)
             painter.drawLine(0, y, width, y);
             QString label;
             label.setNum(yTic, 'f', 0);
-            int labelWidth = metrics.width(label + " ");
+            int labelWidth = horizontalAdvance(metrics, label + " ");
             maxLabelWidth = max(maxLabelWidth, labelWidth);
             painter.drawText(width - labelWidth, y - metrics.descent(),
                              label);
