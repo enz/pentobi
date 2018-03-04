@@ -15,6 +15,11 @@ General:
   down the startup time of Pentobi.
 
 
+Android version:
+
+* Saving a game with "Save As..." did not work anymore with Qt 5.11.
+
+
 Version 14.1 (03 Jan 2018)
 ==========================
 

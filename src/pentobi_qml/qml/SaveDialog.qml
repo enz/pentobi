@@ -9,16 +9,18 @@ FileDialog {
     nameFilters: [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
     onAccepted: {
         root.folder = folder
-        queuedSaveFileUrl.file = Logic.getFileFromUrl(fileUrl)
-        queuedSaveFileUrl.restart()
+        // Save dialog on Android doesn't warn about overwriting (last tested on Qt 5.6)
+        if (isAndroid && gameModel.checkFileExists(Logic.getFileFromUrl(fileUrl)))
+            Logic.showQuestion(qsTr("Overwrite existing file?"), save)
+        else
+            save()
+        // We always create a new save file dialog because currently there is
+        // no way to initialize the default file in FileDialog and we don't
+        // want the dialog to default to the last file saved, which might be
+        // different from the currently loaded file.
+        saveDialog.source = ""
     }
-    onVisibleChanged:
-        if (! visible) {
-            // We always create a new save file dialog because currently there
-            // is no way to initialize the default file in FileDialog and we
-            // don't want the dialog to default to the last file saved, which
-            // might be different from the currently loaded file.
-            saveDialog.source = ""
-            gameDisplay.forceActiveFocus() // QTBUG-48456
-        }
+    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
+
+    function save() { Logic.saveFile(Logic.getFileFromUrl(fileUrl)) }
 }
