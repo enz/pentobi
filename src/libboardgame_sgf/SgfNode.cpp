@@ -283,7 +283,6 @@ unique_ptr<SgfNode> SgfNode::remove_child(SgfNode& child)
         }
         previous = node;
         node = &(*node)->m_sibling;
-        LIBBOARDGAME_ASSERT(node);
     }
 }
 
