@@ -258,7 +258,6 @@ void SgfTree::set_interesting_move(const SgfNode& node)
 
 const SgfNode& SgfTree::truncate(const SgfNode& node)
 {
-    LIBBOARDGAME_ASSERT(node.has_parent());
     auto& parent = node.get_parent();
     non_const(parent).remove_child(non_const(node));
     m_modified = true;
