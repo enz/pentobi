@@ -78,9 +78,7 @@ void Game::goto_node(const SgfNode& node)
     catch (const SgfError&)
     {
         // Try to restore the old state.
-        if (old == nullptr)
-            m_current = &node;
-        else
+        if (&node != old)
         {
             try
             {
@@ -105,7 +103,7 @@ void Game::init(unique_ptr<SgfNode>& root)
 {
     m_tree.init(root);
     m_bd->init(m_tree.get_variant());
-    m_current = nullptr;
+    m_current = &m_tree.get_root();
     goto_node(m_tree.get_root());
 }
 
@@ -113,14 +111,14 @@ void Game::keep_only_position()
 {
     m_tree.keep_only_subtree(*m_current);
     m_tree.remove_children(m_tree.get_root());
-    m_current = nullptr;
+    m_current = &m_tree.get_root();
     goto_node(m_tree.get_root());
 }
 
 void Game::keep_only_subtree()
 {
     m_tree.keep_only_subtree(*m_current);
-    m_current = nullptr;
+    m_current = &m_tree.get_root();
     goto_node(m_tree.get_root());
 }
 
