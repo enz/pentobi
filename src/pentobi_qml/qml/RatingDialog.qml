@@ -87,54 +87,60 @@ Dialog {
             implicitWidth: Math.min(Screen.pixelDensity * 100, 0.85 * Screen.width)
             implicitHeight: implicitWidth / 3
 
-            GridLayout {
-                id: grid
+            Item
+            {
+                implicitHeight: grid.height
+                implicitWidth: grid.width
 
-                rows: history.length + 1
-                flow: Grid.TopToBottom
+                GridLayout {
+                    id: grid
 
-                Label {
-                    id: gameHeader
-
-                    font.underline: true
-                    text: qsTr("Game")
-                }
-                Repeater {
-                    id: gameRepeater
-
-                    model: history
-
-                    Label { text: modelData.number }
-                }
-                Label { font.underline: true; text: qsTr("Result") }
-                Repeater {
-                    model: history
+                    rows: history.length + 1
+                    flow: Grid.TopToBottom
 
                     Label {
-                        text: switch (modelData.result) {
-                              case 1: return qsTr("Win")
-                              case 0: return qsTr("Loss")
-                              case 0.5: return qsTr("Tie")
-                              }
+                        id: gameHeader
+
+                        font.underline: true
+                        text: qsTr("Game")
                     }
-                }
-                Label { font.underline: true; text: qsTr("Level") }
-                Repeater {
-                    model: history
+                    Repeater {
+                        id: gameRepeater
 
-                    Label { text: modelData.level }
-                }
-                Label { font.underline: true; text: qsTr("Your Color") }
-                Repeater {
-                    model: history
+                        model: history
 
-                    Label { text: gameModel.getPlayerString(modelData.color) }
-                }
-                Label { font.underline: true; text: qsTr("Date") }
-                Repeater {
-                    model: history
+                        Label { text: modelData.number }
+                    }
+                    Label { font.underline: true; text: qsTr("Result") }
+                    Repeater {
+                        model: history
 
-                    Label { text: modelData.date }
+                        Label {
+                            text: switch (modelData.result) {
+                                  case 1: return qsTr("Win")
+                                  case 0: return qsTr("Loss")
+                                  case 0.5: return qsTr("Tie")
+                                  }
+                        }
+                    }
+                    Label { font.underline: true; text: qsTr("Level") }
+                    Repeater {
+                        model: history
+
+                        Label { text: modelData.level }
+                    }
+                    Label { font.underline: true; text: qsTr("Your Color") }
+                    Repeater {
+                        model: history
+
+                        Label { text: gameModel.getPlayerString(modelData.color) }
+                    }
+                    Label { font.underline: true; text: qsTr("Date") }
+                    Repeater {
+                        model: history
+
+                        Label { text: modelData.date }
+                    }
                 }
                 MouseArea {
                     function openMenu(x, y) {
@@ -149,7 +155,7 @@ Dialog {
                         menu.popup()
                     }
 
-                    anchors.fill: parent
+                    anchors.fill: grid
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
                     onClicked: openMenu(mouseX, mouseY)
                     onPressAndHold: openMenu(mouseX, mouseY)
