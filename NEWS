@@ -1,6 +1,10 @@
 Version 14.UNKNOWN (master)
 ===========================
 
+General:
+
+* Disable menu item "Keep Only Position" if position is empty board.
+
 Android version:
 
 * The minimum required Qt version is now 5.8.

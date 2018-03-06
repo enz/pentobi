@@ -1570,6 +1570,8 @@ void GameModel::updateProperties()
             isGameOver = false;
             break;
         }
+    set(m_isBoardEmpty, bd.get_nu_onboard_pieces() == 0,
+        &GameModel::isBoardEmptyChanged);
     set(m_isGameOver, isGameOver, &GameModel::isGameOverChanged);
     updateIsGameEmpty();
     updateIsModified();

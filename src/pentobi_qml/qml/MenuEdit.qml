@@ -106,7 +106,7 @@ Menu {
     }
     MenuItem {
         text: qsTr("&Keep Only Position")
-        enabled: gameModel.canGoBackward || gameModel.canGoForward
+        enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward)
         visible: ! isAndroid || enabled
         onTriggered: Logic.keepOnlyPosition()
     }

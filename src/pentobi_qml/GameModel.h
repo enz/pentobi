@@ -81,6 +81,7 @@ class GameModel
     Q_PROPERTY(bool hasMoves1 READ hasMoves1 NOTIFY hasMoves1Changed)
     Q_PROPERTY(bool hasMoves2 READ hasMoves2 NOTIFY hasMoves2Changed)
     Q_PROPERTY(bool hasMoves3 READ hasMoves3 NOTIFY hasMoves3Changed)
+    Q_PROPERTY(bool isBoardEmpty READ isBoardEmpty NOTIFY isBoardEmptyChanged)
     Q_PROPERTY(bool isGameOver READ isGameOver NOTIFY isGameOverChanged)
     Q_PROPERTY(bool isModified READ isModified WRITE setIsModified NOTIFY isModifiedChanged)
     Q_PROPERTY(bool isGameEmpty READ isGameEmpty NOTIFY isGameEmptyChanged)
@@ -281,6 +282,8 @@ public:
 
     bool hasMoves3() const { return m_hasMoves3; }
 
+    bool isBoardEmpty() const { return m_isBoardEmpty; }
+
     bool isGameOver() const { return m_isGameOver; }
 
     bool isGameEmpty() const { return m_isGameEmpty; }
@@ -408,6 +411,8 @@ signals:
     void hasMoves3Changed();
 
     void hasVariationsChanged();
+
+    void isBoardEmptyChanged();
 
     void isGameOverChanged();
 
@@ -543,6 +548,8 @@ private:
     bool m_hasMoves3 = true;
 
     bool m_hasVariations = false;
+
+    bool m_isBoardEmpty = true;
 
     bool m_isGameOver = false;
 
