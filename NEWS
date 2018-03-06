@@ -10,6 +10,7 @@ General:
 Android version:
 
 * Saving a game with "Save As..." did not work anymore with Qt 5.11.
+* Rating dialog layout implementation depended on undefined behavior.
 
 
 Version 14.1 (03 Jan 2018)
