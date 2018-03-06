@@ -3385,7 +3385,8 @@ void MainWindow::updateWindow(bool currentNodeChanged)
     m_actionGotoMove->setEnabled(! m_isRated &&
                                  hasCurrentVariationOtherMoves(tree, current));
     m_actionKeepOnlyPosition->setEnabled(! m_isRated
-                                         && (hasParent || hasChildren));
+                                         && (hasParent || hasChildren)
+                                         && m_bd.get_nu_onboard_pieces() > 0);
     m_actionKeepOnlySubtree->setEnabled(hasParent && hasChildren);
     m_actionGroupLevel->setEnabled(! m_isRated);
     m_actionMakeMainVariation->setEnabled(! isMain);
