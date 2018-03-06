@@ -109,7 +109,7 @@ public:
     void move_property_to_front(const SgfNode& node, const string& id);
 
     /** See Node::remove_children() */
-    unique_ptr<SgfNode> remove_children(const SgfNode& node);
+    void remove_children(const SgfNode& node);
 
     void append(const SgfNode& node, unique_ptr<SgfNode> child);
 
@@ -221,7 +221,7 @@ inline SgfNode& SgfTree::non_const(const SgfNode& node)
     return const_cast<SgfNode&>(node);
 }
 
-inline unique_ptr<SgfNode> SgfTree::remove_children(const SgfNode& node)
+inline void SgfTree::remove_children(const SgfNode& node)
 {
     if (node.has_children())
         m_modified = true;

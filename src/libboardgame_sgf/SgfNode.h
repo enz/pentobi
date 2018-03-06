@@ -216,10 +216,8 @@ public:
         @return The removed child node. */
     unique_ptr<SgfNode> remove_child(SgfNode& child);
 
-    /** Remove all children.
-        @return A pointer to the first child (which also owns its siblings),
-        which can be used to append the children to a different node. */
-    unique_ptr<SgfNode> remove_children();
+    /** Remove all children. */
+    void remove_children();
 
     /** @pre has_parent() */
     void make_first_child();
@@ -343,11 +341,9 @@ T SgfNode::parse_property(const string& id, const T& default_value) const
     return parse_property<T>(id);
 }
 
-inline unique_ptr<SgfNode> SgfNode::remove_children()
+inline void SgfNode::remove_children()
 {
-    if (m_first_child)
-        m_first_child->m_parent = nullptr;
-    return move(m_first_child);
+    return m_first_child.reset();
 }
 
 template<typename T>
