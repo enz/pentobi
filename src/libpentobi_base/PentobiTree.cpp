@@ -210,7 +210,6 @@ void PentobiTree::keep_only_subtree(const SgfNode& node)
         updater.update(*bd, *this, node);
         Setup setup;
         get_current_position_as_setup(*bd, setup);
-        LIBBOARDGAME_ASSERT(! node_util::has_setup(node));
         set_setup(node, setup);
     }
     make_root(node);
