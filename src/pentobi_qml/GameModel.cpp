@@ -205,8 +205,10 @@ void GameModel::addSetup(PieceModel* pieceModel, QPointF coord)
     {
         m_game.add_setup(c, mv);
     }
-    catch (const SgfError&)
+    catch (const SgfError& error)
     {
+        m_lastInputOutputError = error.what();
+        emit invalidSgfFile();
     }
     setSetupPlayer();
     updateProperties();
@@ -708,8 +710,10 @@ void GameModel::gotoNode(const SgfNode& node)
     {
         m_game.goto_node(node);
     }
-    catch (const SgfError&)
+    catch (const SgfError& error)
     {
+        m_lastInputOutputError = error.what();
+        emit invalidSgfFile();
     }
     updateProperties();
 }

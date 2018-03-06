@@ -368,6 +368,12 @@ public:
     void gotoNode(const SgfNode* node);
 
 signals:
+    /** Loaded Blokus SGF file has invalid syntax.
+        Triggered when a loaded SGF file causes a problem later than at load
+        time (e.g. invalid move property value in a side variation). The
+        reason is store in lastInputOutputError.*/
+    void invalidSgfFile();
+
     /** Position is about to change due to new game or navigation or editing of
         the game tree. */
     void positionAboutToChange();

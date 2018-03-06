@@ -113,6 +113,7 @@ Window {
             analyzeGameModel.markCurrentMove(gameModel)
             gameDisplay.dropCommentFocus()
         }
+        onInvalidSgfFile: Logic.showInfo(gameModel.lastInputOutputError)
     }
     PlayerModel {
         id: playerModel
