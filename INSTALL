@@ -55,4 +55,7 @@ src/pentobi_qml/Pentobi.pro. It requires Qt >=5.7.
 
 For testing purposes, the GUI that is used for Android can also be built as a
 desktop application by running CMake with -DPENTOBI_BUILD_QML=1 (needs the
-packages qtdeclarative5-dev and libqt5webview5-dev on Ubuntu 18.04).
+packages qtdeclarative5-dev, libqt5webview5-dev, qml-module-qt-labs-settings,
+qml-module-qtquick-dialogs, qml-module-qtquick-layouts,
+qml-module-qtquick-window2, qml-module-qtquick2, qml-module-qtquick-controls
+and qml-module-qtquick-controls2 on Ubuntu 18.04).
