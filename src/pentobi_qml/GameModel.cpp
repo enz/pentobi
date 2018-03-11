@@ -550,6 +550,7 @@ QString GameModel::getResultMessage()
         if (score < 0)
             return tr("Green wins with %L1 points.").arg(-score);
         if (breakTies)
+            //: Game variant with tie-breaker rule made later player win.
             return tr("Green wins (tie resolved).");
         return tr("Game ends in a tie.");
     }
@@ -565,6 +566,7 @@ QString GameModel::getResultMessage()
         if (score < 0)
             return tr("Yellow/Green wins with %L1 points.").arg(-score);
         if (breakTies)
+            //: Game variant with tie-breaker rule made later player win.
             return tr("Yellow/Green wins (tie resolved).");
         return tr("Game ends in a tie.");
     }
@@ -585,8 +587,10 @@ QString GameModel::getResultMessage()
         if (m_points2 == maxPoints && nuWinners == 1)
             return tr("Red wins.");
         if (m_points2 == maxPoints && breakTies)
+            //: Game variant with tie-breaker rule made later player win.
             return tr("Red wins (tie resolved).");
         if (m_points1 == maxPoints && breakTies)
+            //: Game variant with tie-breaker rule made later player win.
             return tr("Yellow wins (tie resolved).");
         if (m_points0 == maxPoints && m_points1 == maxPoints && nuWinners == 2)
             return tr("Game ends in a tie between Blue and Yellow.");
@@ -615,10 +619,13 @@ QString GameModel::getResultMessage()
     if (m_points3 == maxPoints && nuWinners == 1)
         return tr("Green wins.");
     if (m_points3 == maxPoints && breakTies)
+        //: Game variant with tie-breaker rule made later player win.
         return tr("Green wins (tie resolved).");
     if (m_points2 == maxPoints && breakTies)
+        //: Game variant with tie-breaker rule made later player win.
         return tr("Red wins (tie resolved).");
     if (m_points1 == maxPoints && breakTies)
+        //: Game variant with tie-breaker rule made later player win.
         return tr("Yellow wins (tie resolved).");
     if (m_points0 == maxPoints && m_points1 == maxPoints
             && m_points2 == maxPoints && nuWinners == 3)
