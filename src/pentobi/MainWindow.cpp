@@ -1670,6 +1670,7 @@ void MainWindow::gameOver()
         else if (score < 0)
             info = tr("Green wins with %L1 points.").arg(-score);
         else if (breakTies)
+            //: Game variant with tie-breaker rule made later player win.
             info = tr("Green wins (tie resolved).");
         else
             info = tr("The game ends in a tie.");
@@ -1687,6 +1688,7 @@ void MainWindow::gameOver()
         else if (score < 0)
             info = tr("Yellow/Green wins with %L1 points.").arg(-score);
         else if (breakTies)
+            //: Game variant with tie-breaker rule made later player win.
             info = tr("Yellow/Green wins (tie resolved).");
         else
             info = tr("The game ends in a tie.");
@@ -1699,8 +1701,10 @@ void MainWindow::gameOver()
         auto maxPoints = max(blue, max(yellow, red));
         if (breakTies && red == maxPoints
                 && (blue == maxPoints || yellow == maxPoints))
+            //: Game variant with tie-breaker rule made later player win.
             info = tr("Red wins (tie resolved).");
         else if (breakTies && yellow == maxPoints && blue == maxPoints)
+            //: Game variant with tie-breaker rule made later player win.
             info = tr("Yellow wins (tie resolved).");
         else if (blue == yellow && yellow == red)
             info = tr("The game ends in a tie between all colors.");
@@ -1728,11 +1732,14 @@ void MainWindow::gameOver()
         if (breakTies && green == maxPoints
                 && (red == maxPoints || blue == maxPoints
                     || yellow == maxPoints))
+            //: Game variant with tie-breaker rule made later player win.
             info = tr("Green wins (tie resolved).");
         else if (breakTies && red == maxPoints
                 && (blue == maxPoints || yellow == maxPoints))
+            //: Game variant with tie-breaker rule made later player win.
             info = tr("Red wins (tie resolved).");
         else if (breakTies && yellow == maxPoints && blue == maxPoints)
+            //: Game variant with tie-breaker rule made later player win.
             info = tr("Yellow wins (tie resolved).");
         else if (blue == yellow && yellow == red && red == green)
             info = tr("The game ends in a tie between all colors.");
