@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>Computer plays:</source>
-        <translation>L&apos;ordinateur joue:</translation>
+        <translation>L&apos;ordinateur joue :</translation>
     </message>
     <message>
         <source>&amp;Blue</source>
@@ -53,45 +53,45 @@
     <message>
         <source>Player &amp;Blue:</source>
         <oldsource>Player Blue:</oldsource>
-        <translation>Joueur &amp;bleu:</translation>
+        <translation>Joueur &amp;bleu :</translation>
     </message>
     <message>
         <source>Player &amp;Green:</source>
         <oldsource>Player Green:</oldsource>
-        <translation>Joueur &amp;vert:</translation>
+        <translation>Joueur &amp;vert :</translation>
     </message>
     <message>
         <source>Player &amp;Yellow:</source>
         <oldsource>Player Yellow:</oldsource>
-        <translation>Joueur &amp;jaune:</translation>
+        <translation>Joueur &amp;jaune :</translation>
     </message>
     <message>
         <source>Player &amp;Red:</source>
         <oldsource>Player Red:</oldsource>
-        <translation>Joueur &amp;rouge:</translation>
+        <translation>Joueur &amp;rouge :</translation>
     </message>
     <message>
         <source>Player &amp;Blue/Red:</source>
         <oldsource>Player Blue/Red:</oldsource>
-        <translation>Joueur &amp;bleu/rouge:</translation>
+        <translation>Joueur &amp;bleu/rouge :</translation>
     </message>
     <message>
         <source>Player &amp;Yellow/Green:</source>
         <oldsource>Player Yellow/Green:</oldsource>
-        <translation>Joueur &amp;jaune/vert:</translation>
+        <translation>Joueur &amp;jaune/vert :</translation>
     </message>
     <message>
         <source>&amp;Date:</source>
         <oldsource>Date:</oldsource>
-        <translation></translation>
+        <translation>&amp;Date :</translation>
     </message>
     <message>
         <source>&amp;Time limits:</source>
-        <translation>Limites de &amp;temps:</translation>
+        <translation>Limites de &amp;temps :</translation>
     </message>
     <message>
         <source>&amp;Event:</source>
-        <translation>&amp;Événement:</translation>
+        <translation>&amp;Événement :</translation>
     </message>
     <message>
         <source>R&amp;ound:</source>
@@ -99,11 +99,11 @@
     </message>
     <message>
         <source>Player &amp;Purple:</source>
-        <translation>Joueur &amp;violet:</translation>
+        <translation>Joueur &amp;violet :</translation>
     </message>
     <message>
         <source>Player &amp;Orange:</source>
-        <translation>Joueur &amp;orange:</translation>
+        <translation>Joueur &amp;orange :</translation>
     </message>
 </context>
 <context>
