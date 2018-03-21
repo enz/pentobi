@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Analysis speed:</source>
-        <translation>Vitesse d’analyse:</translation>
+        <translation>Vitesse d’analyse :</translation>
     </message>
 </context>
 <context>
@@ -492,7 +492,7 @@
     </message>
     <message>
         <source>Move number:</source>
-        <translation>Numéro de coup:</translation>
+        <translation>Numéro de coup :</translation>
     </message>
     <message>
         <source>Go to Move</source>
@@ -546,7 +546,7 @@
     <message>
         <source>%1: %2</source>
         <extracomment>Error message if file cannot be saved. %1 is replaced by the file name, %2 by the error message of the operating system.</extracomment>
-        <translation></translation>
+        <translation>%1 : %2</translation>
     </message>
     <message>
         <source>Untitled Game.blksgf</source>
@@ -650,7 +650,7 @@
     </message>
     <message>
         <source>Image size:</source>
-        <translation>Taille de l’image:</translation>
+        <translation>Taille de l’image :</translation>
     </message>
     <message>
         <source>The end of the tree was reached.</source>
@@ -778,9 +778,11 @@
     </message>
     <message numerus="yes">
         <source>%n move(s)</source>
-        <translation><numerusform>%n coup</numerusform>
-        <numerusform>%n coups</numerusform>
-        </translation></message>
+        <translation>
+            <numerusform>%n coup</numerusform>
+            <numerusform>%n coups</numerusform>
+        </translation>
+    </message>
     <message>
         <source>Move %1 of %2</source>
         <translation>Coup %1 des %2</translation>

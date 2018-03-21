@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>Computer plays:</source>
-        <translation>L&apos;ordinateur joue :</translation>
+        <translation>L&apos;ordinateur joue :</translation>
     </message>
     <message>
         <source>&amp;Blue</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>R&amp;ound:</source>
-        <translation></translation>
+        <translation>R&amp;ound :</translation>
     </message>
     <message>
         <source>Player &amp;Purple:</source>

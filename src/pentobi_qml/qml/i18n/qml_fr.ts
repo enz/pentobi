@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Computer plays:</source>
-        <translation>L&apos;ordinateur joue :</translation>
+        <translation>L&apos;ordinateur joue :</translation>
     </message>
     <message>
         <source>Blue/Red</source>
@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>Round:</source>
-        <translation></translation>
+        <translation>Round :</translation>
     </message>
     <message>
         <source>Player Purple:</source>
