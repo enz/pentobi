@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Computer plays:</source>
-        <translation>L&apos;ordinateur joue:</translation>
+        <translation>L&apos;ordinateur joue :</translation>
     </message>
     <message>
         <source>Blue/Red</source>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Image width:</source>
-        <translation>Largeur de l&apos;image:</translation>
+        <translation>Largeur de l&apos;image :</translation>
     </message>
 </context>
 <context>
@@ -85,39 +85,39 @@
     </message>
     <message>
         <source>Player Blue/Red:</source>
-        <translation>Joueur bleu/rouge:</translation>
+        <translation>Joueur bleu/rouge :</translation>
     </message>
     <message>
         <source>Player Blue:</source>
-        <translation>Joueur bleu:</translation>
+        <translation>Joueur bleu :</translation>
     </message>
     <message>
         <source>Player Yellow/Green:</source>
-        <translation>Joueur jaune/vert:</translation>
+        <translation>Joueur jaune/vert :</translation>
     </message>
     <message>
         <source>Player Green:</source>
-        <translation>Joueur vert:</translation>
+        <translation>Joueur vert :</translation>
     </message>
     <message>
         <source>Player Yellow:</source>
-        <translation>Joueur jaune:</translation>
+        <translation>Joueur jaune :</translation>
     </message>
     <message>
         <source>Player Red:</source>
-        <translation>Joueur rouge:</translation>
+        <translation>Joueur rouge :</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation></translation>
+        <translation>Date :</translation>
     </message>
     <message>
         <source>Time:</source>
-        <translation>Temps:</translation>
+        <translation>Temps :</translation>
     </message>
     <message>
         <source>Event:</source>
-        <translation>Événement:</translation>
+        <translation>Événement :</translation>
     </message>
     <message>
         <source>Round:</source>
