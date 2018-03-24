@@ -39,10 +39,8 @@
 
     @section mainpage_gui Pentobi QWidgets GUI Modules
 
-    The Pentobi QWidgets GUI modules implement a user interface based on
-    Qt/QWidgets and targeted at desktops.
-    They have a dependency on the following
-    <a href="http://qt.digia.com/">Qt</a> libraries: QtCore4, QtGui4.
+    The Pentobi QtWidgets GUI modules implement a user interface based on
+    <a href="http://qt.digia.com/">Qt</a>/QtWidgets.
     They are currently used for the desktop versions of Pentobi.
     They may become obsolete in the future, once the QML GUI Modules
     (@ref mainpage_gui_qml) provide the same functionality.
