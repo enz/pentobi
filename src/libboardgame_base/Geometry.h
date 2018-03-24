@@ -306,7 +306,7 @@ bool Geometry<P>::is_onboard(CoordPoint p) const
 template<class P>
 inline bool Geometry<P>::is_valid(Point p) const
 {
-    return ! p.is_null() && p.to_int() < m_range;
+    return p.to_int() < m_range;
 }
 
 #endif
