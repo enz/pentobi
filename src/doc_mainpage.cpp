@@ -42,7 +42,7 @@
     The Pentobi QtWidgets GUI modules implement a user interface based on
     <a href="http://qt.digia.com/">Qt</a>/QtWidgets.
     They are currently used for the desktop versions of Pentobi.
-    They may become obsolete in the future, once the QML GUI Modules
+    They may become obsolete in the future, once the QML GUI modules
     (@ref mainpage_gui_qml) provide the same functionality.
 
     - convert -
