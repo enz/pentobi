@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;copy; 2011&amp;ndash;%1 Markus Enzenberger</translation>
     </message>
     <message>
         <source>Analyze Game</source>
@@ -839,7 +839,7 @@
     </message>
     <message>
         <source>&amp;Nexos</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nexos</translation>
     </message>
     <message>
         <source>Blue wins with 1 point.</source>
@@ -883,23 +883,23 @@
     </message>
     <message>
         <source>C&amp;allisto</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Callisto</translation>
     </message>
     <message>
         <source>Green wins (tie resolved).</source>
-        <translation type="unfinished"></translation>
+        <translation>Grønn vinner (uavgjort tilstand løst).</translation>
     </message>
     <message>
         <source>Yellow/Green wins (tie resolved).</source>
-        <translation type="unfinished"></translation>
+        <translation>Gul/grønn vinner (uavgjort tilstand løst).</translation>
     </message>
     <message>
         <source>Red wins (tie resolved).</source>
-        <translation type="unfinished"></translation>
+        <translation>Rød vinner (uavgjort tilstand løst).</translation>
     </message>
     <message>
         <source>Yellow wins (tie resolved).</source>
-        <translation type="unfinished"></translation>
+        <translation>Gul vinner (uavgjort tilstand løst).</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 4 Players)</source>
@@ -971,7 +971,7 @@
     </message>
     <message>
         <source>&amp;GembloQ</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;GembloQ</translation>
     </message>
     <message>
         <source>&amp;Level (GembloQ, 4 Players)</source>
