@@ -772,7 +772,7 @@
     </message>
     <message>
         <source>&amp;Trigon</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Trigon</translation>
     </message>
     <message>
         <source>Trigon (&amp;2 Players)</source>
@@ -788,7 +788,7 @@
     </message>
     <message>
         <source>&amp;Nexos</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nexos</translation>
     </message>
     <message>
         <source>Nexos (&amp;2 Players)</source>
@@ -800,7 +800,7 @@
     </message>
     <message>
         <source>C&amp;allisto</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Callisto</translation>
     </message>
     <message>
         <source>Callisto (&amp;3 Players)</source>
