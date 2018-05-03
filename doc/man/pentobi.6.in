@@ -1,4 +1,4 @@
-.TH PENTOBI 6 "2017-11-03" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+.TH PENTOBI 6 "2018-05-03" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
 
 .SH NAME
 pentobi \- computer opponent for the board game Blokus
@@ -46,7 +46,7 @@ Set the seed for the random generator. Using a fixed seed makes the move
 generation deterministic if no multi-threading is used (see option --threads).
 .TP
 .B \-\-threads
-The number of threads to use in the search. By default, up to 4 threads are
+The number of threads to use in the search. By default, up to 8 threads are
 used in the search depending on the number of hardware threads supported
 by the current system.
 Using more threads will speed up the move generation but using a very high
