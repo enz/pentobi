@@ -53,7 +53,7 @@
     <message>
         <source>Player &amp;Blue:</source>
         <oldsource>Player Blue:</oldsource>
-        <translation type="unfinished">&amp;Blå spiller:</translation>
+        <translation>&amp;Blå spiller:</translation>
     </message>
     <message>
         <source>Player &amp;Green:</source>
