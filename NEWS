@@ -7,7 +7,7 @@ General:
 
 Android version:
 
-* The minimum required Qt version is now 5.8.
+* The minimum required Qt version is now 5.11.
 * An error message is now shown when an invalid loaded SGF file causes
   a problem later (e.g. invalid move property value in a side variation).
 

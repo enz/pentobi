@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.0
 import "." as Pentobi
 
@@ -16,18 +15,14 @@ RowLayout
         imageSource: theme.getImage("pentobi-backward")
         Layout.fillWidth: true
         onClicked: gameModel.goBackward()
-        // Don't use autoRepeat: true, there is a bug in Qt 5.8-rc on Android
-        // that makes the button produce an infinite number of clicks if it
-        // becomes disabled while pressed (QTBUG-57797).
-        autoRepeat: enabled
+        autoRepeat: true
     }
     Pentobi.Button {
         enabled: gameModel.canGoForward
         imageSource: theme.getImage("pentobi-forward")
         Layout.fillWidth: true
         onClicked: gameModel.goForward()
-        // Don't use autoRepeat: true, see comment in backward button.
-        autoRepeat: enabled
+        autoRepeat: true
     }
     Pentobi.Button {
         enabled: gameModel.canGoForward
