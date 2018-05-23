@@ -740,7 +740,7 @@
     </message>
     <message>
         <source>&amp;Duo</source>
-        <translation type="unfinished">&amp;Duo</translation>
+        <translation>&amp;Duo</translation>
     </message>
     <message>
         <source>&amp;Junior</source>
@@ -756,7 +756,7 @@
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation type="unfinished">&amp;Åpne…</translation>
+        <translation>&amp;Åpne…</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -828,7 +828,7 @@
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation type="unfinished">Lagre &amp;som…</translation>
+        <translation>Lagre &amp;som…</translation>
     </message>
     <message>
         <source>&amp;Game Info</source>
@@ -879,7 +879,7 @@
     <name>MenuGo</name>
     <message>
         <source>G&amp;o</source>
-        <translation type="unfinished">G&amp;å</translation>
+        <translation>G&amp;å</translation>
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
@@ -936,7 +936,7 @@
     </message>
     <message>
         <source>&amp;Clear Rating</source>
-        <translation type="unfinished">&amp;Fjern vurdering</translation>
+        <translation>&amp;Fjern vurdering</translation>
     </message>
 </context>
 <context>
@@ -1105,7 +1105,7 @@
     </message>
     <message>
         <source>Win</source>
-        <translation type="unfinished">Vinn</translation>
+        <translation>Vinn</translation>
     </message>
     <message>
         <source>Loss</source>
