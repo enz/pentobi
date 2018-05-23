@@ -1,3 +1,10 @@
+lessThan(QT_MAJOR_VERSION, 5) {
+    error("Qt >=5.11 required")
+}
+equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 11) {
+    error("Qt >=5.11 required")
+}
+
 TEMPLATE = app
 
 QT += qml quick svg concurrent webview
