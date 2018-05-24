@@ -1,6 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.1
-import QtQuick.Controls 2.0 as Controls2
+import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import Qt.labs.settings 1.0
 import "GameDisplay.js" as Logic
@@ -83,7 +82,7 @@ Item
                 showMove(mv)
             }
         }
-        Controls2.SwipeView {
+        SwipeView {
             id: swipeView
 
             width: board.width
@@ -146,6 +145,8 @@ Item
     BusyIndicator {
         id: busyIndicator
 
+        width: Math.min(gameDisplay.width / 6, gameDisplay.height)
+        height: width
         x: (gameDisplay.width - width) / 2
         y: column.y + swipeView.y + (swipeView.height - height) / 2
     }
