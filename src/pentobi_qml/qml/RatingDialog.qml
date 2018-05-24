@@ -118,13 +118,15 @@ Dialog {
                         Label {
                             text: switch (modelData.result) {
                                   case 1:
-                                      //: Game result in rating dialog table
+                                      //: Result of rated game is a win
                                       return qsTr("Win")
                                   case 0:
-                                      //: Game result in rating dialog table
+                                      //: Result of rated game is a loss
                                       return qsTr("Loss")
                                   case 0.5:
-                                      //: Game result in rating dialog table
+                                      //: Result of rated game is a tie. Abbreviate long translations to
+                                      //: ensure that all columns of rated games list are visible on
+                                      //: mobile devices with small screens.
                                       return qsTr("Tie")
                                   }
                         }
