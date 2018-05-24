@@ -117,9 +117,15 @@ Dialog {
 
                         Label {
                             text: switch (modelData.result) {
-                                  case 1: return qsTr("Win")
-                                  case 0: return qsTr("Loss")
-                                  case 0.5: return qsTr("Tie")
+                                  case 1:
+                                      //: Game result in rating dialog table
+                                      return qsTr("Win")
+                                  case 0:
+                                      //: Game result in rating dialog table
+                                      return qsTr("Loss")
+                                  case 0.5:
+                                      //: Game result in rating dialog table
+                                      return qsTr("Tie")
                                   }
                         }
                     }
