@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls.Styles 1.4
 
 QtObject {
+    property color busyIndicatorColor: fontColorScore
     property color messageTextColor: "black"
     property color messageBackgroundColor: "#cac9c9"
     property color backgroundColor: "#dcdbda"
