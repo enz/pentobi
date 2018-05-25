@@ -1105,11 +1105,11 @@
     </message>
     <message>
         <source>Win</source>
-        <translation>Vinn</translation>
+        <translation>Vunnet</translation>
     </message>
     <message>
         <source>Loss</source>
-        <translation>Tap</translation>
+        <translation>Tapt</translation>
     </message>
     <message>
         <source>Tie</source>
