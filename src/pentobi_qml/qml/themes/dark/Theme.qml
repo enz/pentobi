@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 QtObject {
     property color busyIndicatorColor: fontColorScore
+    property color commentBorderColor: "#64615f"
     property color messageTextColor: fontColorPosInfo
     property color messageBackgroundColor: "#333"
     property color backgroundColor: "#131313"

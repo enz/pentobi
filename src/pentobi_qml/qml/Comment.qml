@@ -1,17 +1,15 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 2.2
 
-TextArea {
-    style: TextAreaStyle {
-        textColor: theme.fontColorPosInfo
-        selectionColor: theme.selectionColor
-        selectedTextColor: theme.selectedTextColor
-        backgroundColor: theme.backgroundColor
+ScrollView {
+    TextArea {
+        text: gameModel.comment
+        onTextChanged: gameModel.comment = text
+        color: theme.fontColorPosInfo
+        wrapMode: TextEdit.Wrap
+        background: Rectangle {
+            color: theme.backgroundColor
+            border.color: theme.commentBorderColor
+        }
     }
-    // Selection doesn't work very well on Android with Qt 5.8
-    selectByKeyboard: ! isAndroid
-    selectByMouse: ! isAndroid
-    text: gameModel.comment
-    onTextChanged: gameModel.comment = text
 }
