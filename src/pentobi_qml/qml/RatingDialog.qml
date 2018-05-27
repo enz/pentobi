@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.2
 import QtQuick.Controls 1.1 as Controls1
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
@@ -79,9 +79,7 @@ Dialog {
             implicitHeight: implicitWidth / 3
         }
 
-        // We want to use QtQuick Controls TableView but it currently uses
-        // strange fonts on Android, so we go for a Grid with Labels.
-        Controls1.ScrollView
+        ScrollView
         {
             visible: history.length > 0
             implicitWidth: Math.min(Screen.pixelDensity * 100, 0.85 * Screen.width)
@@ -170,12 +168,12 @@ Dialog {
                 }
             }
         }
-        Controls1.Menu {
+        Menu {
             id: menu
 
             property int row
 
-            Controls1.MenuItem {
+            MenuItem {
                 text: history && menu.row < history.length ?
                           qsTr("Open Game %1").arg(history[menu.row].number) : ""
                 onTriggered: {
