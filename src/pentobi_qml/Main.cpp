@@ -44,6 +44,10 @@ void initAndroid()
 int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
+    // QtQuick.Controls 2 needs EnableHighDpiScaling for high DPI devices, but
+    // it causes problems as long as we still also use QtQuick.Controls 1 and
+    // QtQuick.Dialogs.
+    //QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
     QtWebView::initialize();
     app.setOrganizationName("Pentobi");
