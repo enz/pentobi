@@ -115,6 +115,8 @@ private:
 
     GenMoveResult asyncGenMove(GameModel* gm, Color c, unsigned genMoveId);
 
+    void genMoveFinished();
+
     bool getLevelKey(const QString& gameVariant, QString& key);
 
     void loadBook(Variant variant);
@@ -123,8 +125,6 @@ private:
 
     void setIsGenMoveRunning(bool isGenMoveRunning);
 
-private slots:
-    void genMoveFinished();
 };
 
 //-----------------------------------------------------------------------------
