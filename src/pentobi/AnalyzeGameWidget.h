@@ -34,12 +34,6 @@ class AnalyzeGameWidget
 {
     Q_OBJECT
 
-public slots:
-    /** Cancel a running analysis.
-        The function waits for the analysis to finish. The finished() signal
-        will still be invoked. */
-    void cancel();
-
 public:
     explicit AnalyzeGameWidget(QWidget* parent);
 
@@ -59,6 +53,11 @@ public:
         sequence when the analysis was done. */
     void setCurrentPosition(const Game& game, const SgfNode& node);
 
+    /** Cancel a running analysis.
+        The function waits for the analysis to finish. The finished() signal
+        will still be invoked. */
+    void cancel();
+
     QSize sizeHint() const override;
 
 signals:
@@ -75,6 +74,7 @@ protected:
     void resizeEvent(QResizeEvent* event) override;
 
 private slots:
+    /** Declared as slot because used in QMetaObject::invokeMethod() */
     void showProgress(int progress);
 
 private:

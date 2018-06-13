@@ -65,7 +65,6 @@ public:
 
     void setSelectedPiecePoints(Move mv);
 
-public slots:
     void clearPiece();
 
     void selectPiece(Color color, Piece piece);
@@ -164,7 +163,6 @@ private:
 
     void setSelectedPiecePoints();
 
-private slots:
     void showMoveAnimation();
 };
 

@@ -29,7 +29,6 @@ public:
         0 = fast, 1 = normal, 2 = slow */
     int getSpeedValue() { return m_speedValue; }
 
-public slots:
     void accept() override;
 
 private:

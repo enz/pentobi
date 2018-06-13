@@ -42,7 +42,7 @@ protected:
 private:
     QStandardItemModel* m_model;
 
-private slots:
+
     void activateGame(const QModelIndex& index);
 };
 

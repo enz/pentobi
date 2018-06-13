@@ -59,7 +59,7 @@ private:
 
     QPropertyAnimation* m_animation;
 
-private slots:
+
     void slideOut();
 };
 

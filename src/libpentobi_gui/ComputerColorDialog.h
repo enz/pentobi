@@ -34,7 +34,6 @@ public:
     ComputerColorDialog(QWidget* parent, Variant variant,
                         ColorMap<bool>& computerColor);
 
-public slots:
     void accept() override;
 
 private:

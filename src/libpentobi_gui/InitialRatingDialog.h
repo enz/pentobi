@@ -32,7 +32,6 @@ public:
 
     int getRating() const;
 
-public slots:
     void setRating(int rating);
 
 private:

@@ -72,7 +72,6 @@ public:
 
     QSize sizeHint() const override;
 
-public slots:
     void about();
 
     void analyzeGame();
@@ -654,14 +653,11 @@ private:
 
     bool writeGame(const string& file);
 
-private slots:
     void analyzeGameFinished();
 
     void badMove(bool checked);
 
     void commentChanged();
-
-    void continueRatedGame();
 
     void coordinates(bool checked);
 
@@ -712,6 +708,11 @@ private slots:
     void veryGoodMove(bool checked);
 
     void variantTriggered(bool checked);
+
+private slots:
+    /** Declared as slot because used in QMetaObject::invokeMethod() */
+    void continueRatedGame();
+
 };
 
 //-----------------------------------------------------------------------------
