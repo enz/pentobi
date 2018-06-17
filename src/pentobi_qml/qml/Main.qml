@@ -142,10 +142,10 @@ ApplicationWindow {
             id: computerColorDialog
 
             onAccepted: {
-                root.computerPlays0 = computerColorDialog.computerPlays0
-                root.computerPlays1 = computerColorDialog.computerPlays1
-                root.computerPlays2 = computerColorDialog.computerPlays2
-                root.computerPlays3 = computerColorDialog.computerPlays3
+                rootWindow.computerPlays0 = computerColorDialog.computerPlays0
+                rootWindow.computerPlays1 = computerColorDialog.computerPlays1
+                rootWindow.computerPlays2 = computerColorDialog.computerPlays2
+                rootWindow.computerPlays3 = computerColorDialog.computerPlays3
                 initComputerColorsOnNewGame = Logic.computerPlaysAny()
                 if (! Logic.isComputerToPlay())
                     Logic.cancelRunning()
