@@ -1,14 +1,14 @@
 import QtQuick 2.0
-import QtQuick.Dialogs 1.2
 import "Main.js" as Logic
+import "." as Pentobi
 
-FileDialog {
+Pentobi.FileDialog {
     title: qsTr("Open")
-    nameFilters: [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
-    folder: root.folder != "" ? root.folder : (isAndroid ? "file:///sdcard" : shortcuts.desktop)
+    nameFilterText: qsTr("Blokus games (*.blksgf)")
+    nameFilter: "*.blksgf"
+    folder: rootWindow.folder != "" ? rootWindow.folder : (isAndroid ? "file:///sdcard" : "")
     onAccepted: {
-        root.folder = folder
+        rootWindow.folder = folder
         Logic.openFileUrl()
     }
-    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 }

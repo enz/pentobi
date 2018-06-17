@@ -1,28 +1,20 @@
 import QtQuick 2.0
-import QtQuick.Dialogs 1.2
 import "Main.js" as Logic
+import "." as Pentobi
 
-FileDialog {
+Pentobi.FileDialog {
     title: qsTr("Save")
     selectExisting: false
-    folder: root.folder != "" ? root.folder : (isAndroid ? "file:///sdcard" : shortcuts.desktop)
-    nameFilters: [ qsTr("Blokus games (*.blksgf)"), qsTr("All files (*)") ]
+    nameFilterText: qsTr("Blokus games (*.blksgf)")
+    nameFilter: "*.blksgf"
+    folder: rootWindow.folder != "" ? rootWindow.folder : (isAndroid ? "file:///sdcard" : "")
     onAccepted: {
-        root.folder = folder
-        // Save dialog on Android doesn't warn about overwriting (last tested on Qt 5.6)
-        if (isAndroid && gameModel.checkFileExists(Logic.getFileFromUrl(fileUrl)))
+        rootWindow.folder = folder
+        if (gameModel.checkFileExists(Logic.getFileFromUrl(fileUrl)))
             Logic.showQuestion(qsTr("Overwrite existing file?"), save)
         else
             save()
     }
-    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 
-    function save() {
-        Logic.saveFile(Logic.getFileFromUrl(fileUrl))
-        // We always create a new save file dialog because currently there is
-        // no way to initialize the default file in FileDialog and we don't
-        // want the dialog to default to the last file saved, which might be
-        // different from the currently loaded file.
-        saveDialog.source = ""
-    }
+    function save() { Logic.saveFile(Logic.getFileFromUrl(fileUrl)) }
 }

@@ -1,6 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.1
-import QtQuick.Controls 2.0 as Controls2
+import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
 import "." as Pentobi
@@ -9,9 +8,11 @@ import "Main.js" as Logic
 RowLayout {
     id: root
 
+    property real buttonPadding: Math.round(1.5 * Screen.pixelDensity)
+
     spacing: 0
 
-    Controls2.Label {
+    Label {
         text: {
             if (isRated) return qsTr("Rated")
             if (gameDisplay.setupMode) return qsTr("Leave setup")
@@ -37,39 +38,45 @@ RowLayout {
                 }
         }
     }
-    Pentobi.ToolButton {
+    Pentobi.Button {
+        padding: buttonPadding
         imageSource: theme.getImage("pentobi-newgame")
         enabled: ! (gameModel.isGameEmpty && gameModel.file === "" && ! gameModel.isModified && ! isRated) && ! gameDisplay.setupMode
         onClicked: Logic.newGame()
     }
-    Pentobi.ToolButton {
+    Pentobi.Button {
+        padding: buttonPadding
         imageSource: theme.getImage("pentobi-undo")
         enabled: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
         onClicked: Logic.undo()
     }
-    Pentobi.ToolButton {
+    Pentobi.Button {
+        padding: buttonPadding
         imageSource: theme.getImage("pentobi-computer-colors")
         enabled: ! gameDisplay.setupMode
         onClicked: Logic.showComputerColorDialog()
     }
-    Pentobi.ToolButton {
+    Pentobi.Button {
+        padding: buttonPadding
         imageSource: theme.getImage("pentobi-play")
         enabled: ! gameModel.isGameOver && ! gameDisplay.setupMode && ! isRated
         onClicked: Logic.computerPlay()
     }
-    Pentobi.ToolButton {
+    Pentobi.Button {
+        padding: buttonPadding
         imageSource: theme.getImage("menu")
-        menu: menu
-    }
-    Menu {
-        id: menu
+        onClicked: menu.popup()
 
-        MenuGame { }
-        MenuGo { }
-        MenuEdit { }
-        MenuView { }
-        MenuComputer { }
-        MenuTools { }
-        MenuHelp { }
+        Menu {
+            id: menu
+
+            MenuGame { }
+            MenuGo { }
+            MenuEdit { }
+            MenuView { }
+            MenuComputer { }
+            MenuTools { }
+            MenuHelp { }
+        }
     }
 }

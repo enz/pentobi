@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
-import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 import QtQuick.Window 2.0
 import "Main.js" as Logic
@@ -11,9 +10,9 @@ Dialog {
 
     //: Window title for the rating dialog.
     title: qsTr("Rating")
+    standardButtons: Dialog.Ok
     onVisibleChanged:
         if (! visible) {
-            gameDisplay.forceActiveFocus() // QTBUG-48456
             // See comment in Main.qml at ratingModel.onHistoryChanged
             close()
         }

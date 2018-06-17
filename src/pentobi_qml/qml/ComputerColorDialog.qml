@@ -1,7 +1,6 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.1
-import QtQuick.Dialogs 1.2
+import QtQuick.Controls 2.2
+import QtQuick.Window 2.0
 
 Dialog {
     property alias computerPlays0: checkBox0.checked
@@ -10,10 +9,14 @@ Dialog {
     property alias computerPlays3: checkBox3.checked
 
     title: qsTr("Computer Colors")
-    standardButtons: StandardButton.Ok | StandardButton.Cancel
+    standardButtons: Dialog.Ok | Dialog.Cancel
 
-    ColumnLayout {
+    Column {
+        spacing: Math.round(Screen.pixelDensity * 1.5)
+        width: Math.min(Screen.pixelDensity * 60, 0.9 * rootWindow.width)
+
         Label {
+            width: parent.width
             text: qsTr("Computer plays:")
         }
         CheckBox {

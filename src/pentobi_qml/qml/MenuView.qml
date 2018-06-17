@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.1
+import QtQuick.Controls 2.2
 import QtQuick.Window 2.1
 
 Menu {
@@ -8,11 +8,10 @@ Menu {
     Menu {
         title: qsTr("&Move Marking")
 
-        ExclusiveGroup { id: moveMarkingGroup }
         MenuItem {
             text: qsTr("Last With &Dot")
             checkable: true
-            exclusiveGroup: moveMarkingGroup
+            autoExclusive: true
             checked: gameDisplay.moveMarking !== "last_number"
                      && gameDisplay.moveMarking !== "all_number"
                      && gameDisplay.moveMarking !== "none"
@@ -21,21 +20,21 @@ Menu {
         MenuItem {
             text: qsTr("Last With &Number")
             checkable: true
-            exclusiveGroup: moveMarkingGroup
+            autoExclusive: true
             checked: gameDisplay.moveMarking === "last_number"
             onTriggered: gameDisplay.moveMarking = "last_number"
         }
         MenuItem {
             text: qsTr("&All With Number")
             checkable: true
-            exclusiveGroup: moveMarkingGroup
+            autoExclusive: true
             checked: gameDisplay.moveMarking === "all_number"
             onTriggered: gameDisplay.moveMarking = "all_number"
         }
         MenuItem {
             text: qsTr("N&one")
             checkable: true
-            exclusiveGroup: moveMarkingGroup
+            autoExclusive: true
             checked: gameDisplay.moveMarking === "none"
             onTriggered: gameDisplay.moveMarking = "none"
         }
@@ -56,18 +55,17 @@ Menu {
     Menu {
         title: qsTr("&Theme")
 
-        ExclusiveGroup { id: themeGroup }
         MenuItem {
             text: qsTr("&Light")
             checkable: true
-            exclusiveGroup: themeGroup
+            autoExclusive: true
             checked: themeName === "light"
             onTriggered: themeName = "light"
         }
         MenuItem {
             text: qsTr("&Dark")
             checkable: true
-            exclusiveGroup: themeGroup
+            autoExclusive: true
             checked: themeName === "dark"
             onTriggered: themeName = "dark"
         }

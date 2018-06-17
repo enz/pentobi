@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 1.1
+import QtQuick.Controls 2.2
 import "Main.js" as Logic
 
 Menu {
@@ -7,27 +7,22 @@ Menu {
 
     MenuItem {
         text: qsTr("Computer &Colors")
-        visible: ! isAndroid
         onTriggered: Logic.showComputerColorDialog()
     }
     MenuItem {
         text: qsTr("&Play")
         enabled: ! gameModel.isGameOver && ! isRated
-        visible: ! isAndroid
         onTriggered: Logic.computerPlay()
     }
     MenuSeparator { }
     MenuItem {
         text: qsTr("Play &Single Move")
         enabled: ! gameModel.isGameOver && ! isRated
-        visible: ! isAndroid || enabled
         onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
     }
     MenuItem {
         text: qsTr("St&op")
         enabled: playerModel.isGenMoveRunning && ! isRated
-         // Android doesn't use levels with long thinking times
-        visible: ! isAndroid
         onTriggered: Logic.cancelRunning()
     }
     MenuSeparator { }
@@ -55,7 +50,6 @@ Menu {
             case "gembloq_3": return qsTr("&Level (GembloQ, 3 Players)")
             }
 
-        ExclusiveGroup { id: levelGroup }
         MenuItemLevel { level: 1 }
         MenuItemLevel { level: 2 }
         MenuItemLevel { level: 3 }

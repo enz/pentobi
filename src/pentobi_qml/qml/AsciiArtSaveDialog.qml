@@ -1,15 +1,15 @@
 import QtQuick 2.0
-import QtQuick.Dialogs 1.2
 import "Main.js" as Logic
+import "." as Pentobi
 
-FileDialog {
+Pentobi.FileDialog {
     title: qsTr("Export ASCII Art")
     selectExisting: false
-    folder: root.folder === "" ? shortcuts.desktop : root.folder
-    nameFilters: [ qsTr("Text files (*.txt)"), qsTr("All files (*)") ]
+    nameFilterText: qsTr("Text files (*.txt)")
+    nameFilter: "*.png"
+    folder: rootWindow.folder != "" ? rootWindow.folder : (isAndroid ? "file:///sdcard" : "")
     onAccepted: {
+        rootWindow.folder = folder
         Logic.exportAsciiArt(fileUrl)
-        root.folder = folder
     }
-    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 }

@@ -131,7 +131,7 @@ Item
             }
             ColumnLayout {
                 AnalyzeGame {
-                    theme: root.theme
+                    theme: rootWindow.theme
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                 }

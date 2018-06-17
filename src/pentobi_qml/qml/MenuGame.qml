@@ -1,6 +1,6 @@
 import QtQml 2.2
 import QtQuick 2.0
-import QtQuick.Controls 1.1
+import QtQuick.Controls 2.2
 import "Main.js" as Logic
 
 Menu {
@@ -9,20 +9,18 @@ Menu {
     MenuItem {
         text: qsTr("&New")
         enabled: ! gameModel.isGameEmpty
-        visible: ! isAndroid
         onTriggered: Logic.newGame()
     }
     MenuItem {
         text: qsTr("&Rated Game")
         enabled: ! isRated
-        visible: ! isAndroid || enabled
         onTriggered: Logic.ratedGame()
     }
     MenuSeparator { }
     Menu {
         title: qsTr("Game &Variant")
 
-        ExclusiveGroup { id: groupGameVariant }
+        ButtonGroup { id: groupGameVariant }
         Menu {
             title: qsTr("&Classic")
 
@@ -124,13 +122,11 @@ Menu {
     MenuItem {
         text: qsTr("&Undo Move")
         enabled: gameModel.canUndo && ! isRated
-        visible: ! isAndroid
         onTriggered: Logic.undo()
     }
     MenuItem {
         text: qsTr("&Find Move")
         enabled: ! gameModel.isGameOver
-        visible: ! isAndroid || enabled
         onTriggered: Logic.findMove()
     }
     MenuSeparator { }
@@ -143,7 +139,6 @@ Menu {
 
         title: qsTr("Open R&ecent")
         enabled: gameModel.recentFiles.length > 0
-        visible: ! isAndroid || enabled
 
         Instantiator {
             model: gameModel.recentFiles
@@ -163,13 +158,11 @@ Menu {
     MenuItem {
         text: qsTr("&Save")
         enabled: gameModel.file !== "" && gameModel.isModified
-        visible: ! isAndroid || enabled
         onTriggered: Logic.save()
     }
     MenuItem {
         text: qsTr("Save &As...")
         enabled: ! gameModel.isGameEmpty
-        visible: ! isAndroid || enabled
         onTriggered: Logic.saveAs()
     }
     Menu {

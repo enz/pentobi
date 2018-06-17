@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Dialogs 1.2
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.1
 import Qt.labs.settings 1.0
@@ -7,8 +7,8 @@ import pentobi 1.0
 import "." as Pentobi
 import "Main.js" as Logic
 
-Window {
-    id: root
+ApplicationWindow {
+    id: rootWindow
 
     property bool computerPlays0
     property bool computerPlays1: true
@@ -73,7 +73,7 @@ Window {
         GameDisplayMobile {
             id: gameDisplay
 
-            theme: root.theme
+            theme: rootWindow.theme
             busyIndicatorRunning: pieces0 === undefined
                                   || lengthyCommand.isRunning
                                   || playerModel.isGenMoveRunning
@@ -85,20 +85,20 @@ Window {
         }
     }
     Settings {
-        property alias x: root.x
-        property alias y: root.y
-        property alias width: root.width
-        property alias height: root.height
-        property alias folder: root.folder
-        property alias computerPlays0: root.computerPlays0
-        property alias computerPlays1: root.computerPlays1
-        property alias computerPlays2: root.computerPlays2
-        property alias computerPlays3: root.computerPlays3
-        property alias initComputerColorsOnNewGame: root.initComputerColorsOnNewGame;
-        property alias isRated: root.isRated
-        property alias themeName: root.themeName
-        property alias wasGenMoveRunning: root.wasGenMoveRunning
-        property alias exportImageWidth: root.exportImageWidth
+        property alias x: rootWindow.x
+        property alias y: rootWindow.y
+        property alias width: rootWindow.width
+        property alias height: rootWindow.height
+        property alias folder: rootWindow.folder
+        property alias computerPlays0: rootWindow.computerPlays0
+        property alias computerPlays1: rootWindow.computerPlays1
+        property alias computerPlays2: rootWindow.computerPlays2
+        property alias computerPlays3: rootWindow.computerPlays3
+        property alias initComputerColorsOnNewGame: rootWindow.initComputerColorsOnNewGame;
+        property alias isRated: rootWindow.isRated
+        property alias themeName: rootWindow.themeName
+        property alias wasGenMoveRunning: rootWindow.wasGenMoveRunning
+        property alias exportImageWidth: rootWindow.exportImageWidth
         property alias showVariations: gameModel.showVariations
     }
     GameModel {
@@ -152,7 +152,6 @@ Window {
                 else if (! gameModel.isGameOver)
                     Logic.checkComputerMove()
             }
-            onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
         }
     }
     DialogLoader { id: gameInfoDialog; url: "GameInfoDialog.qml" }
@@ -176,7 +175,7 @@ Window {
         id: questionMessageComponent
 
         Pentobi.MessageDialog {
-            standardButtons: StandardButton.Ok | StandardButton.Cancel
+            standardButtons: Dialog.Ok | Dialog.Cancel
         }
     }
 

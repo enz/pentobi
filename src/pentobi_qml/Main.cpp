@@ -25,38 +25,16 @@ using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------
 
-namespace {
-
-#ifdef Q_OS_ANDROID
-void initAndroid()
-{
-    // Disable sidebars in QtQuick.Dialogs.FileDialog, the dialog is not
-    // very usable on smartphones otherwise
-    QSettings settings;
-    settings.setValue("QQControlsFileDialog/sidebarVisible", false);
-}
-#endif
-
-}
-
-//-----------------------------------------------------------------------------
-
 int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
-    // QtQuick.Controls 2 needs EnableHighDpiScaling for high DPI devices, but
-    // it causes problems as long as we still also use QtQuick.Controls 1 and
-    // QtQuick.Dialogs.
-    //QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
     QtWebView::initialize();
     app.setOrganizationName("Pentobi");
     app.setApplicationName("Pentobi");
 #ifdef VERSION
     app.setApplicationVersion(VERSION);
-#endif
-#ifdef Q_OS_ANDROID
-    initAndroid();
 #endif
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
@@ -70,9 +48,9 @@ int main(int argc, char *argv[])
     QTranslator translatorPentobi;
     translatorPentobi.load("qml_" + locale, ":qml/i18n");
     app.installTranslator(&translatorPentobi);
-    // The translation of standard buttons in QtQuick.Dialogs.MessageDialog
-    // is broken on Android (last tested with Qt 5.6; QTBUG-43353), so we
-    // created our own file, which contains the translations we need.
+    // The translation of standard buttons in QtQuick.Controls 2 Dialog is
+    // broken on Android (last tested with Qt 5.11; see also QTBUG-43353), so
+    // we created our own file, which contains the translations we need.
     QTranslator translatorQt;
     translatorQt.load("replace_qtbase_" + locale, ":qml/i18n");
     app.installTranslator(&translatorQt);

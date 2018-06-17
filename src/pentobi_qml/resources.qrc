@@ -9,6 +9,7 @@
         <file>qml/Comment.qml</file>
         <file>qml/DialogLoader.qml</file>
         <file>qml/ExportImageDialog.qml</file>
+        <file>qml/FileDialog.qml</file>
         <file>qml/GameDisplayMobile.qml</file>
         <file>qml/GameInfoDialog.qml</file>
         <file>qml/GotoMoveDialog.qml</file>
@@ -50,7 +51,6 @@
         <file>qml/ScoreElement2.qml</file>
         <file>qml/Square.qml</file>
         <file>qml/ToolBar.qml</file>
-        <file>qml/ToolButton.qml</file>
         <file>qml/Triangle.qml</file>
         <file>qml/Main.js</file>
         <file>qml/GameDisplay.js</file>

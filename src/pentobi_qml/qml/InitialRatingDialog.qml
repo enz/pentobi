@@ -1,18 +1,16 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.0
-import QtQuick.Dialogs 1.2
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import QtQuick.Window 2.0
 import "Main.js" as Logic
 
 Dialog {
     title: qsTr("Initial Rating")
-    standardButtons: StandardButton.Ok | StandardButton.Cancel
+    standardButtons: Dialog.Ok | Dialog.Cancel
     onAccepted: {
         ratingModel.setInitialRating(Math.round(slider.value))
         Logic.ratedGameNoVerify()
     }
-    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 
     Column
     {

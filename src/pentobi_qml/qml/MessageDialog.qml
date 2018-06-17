@@ -1,11 +1,7 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.0
-import QtQuick.Dialogs 1.2
+import QtQuick.Controls 2.2
 import QtQuick.Window 2.0
 
-// Used instead of MessageDialog from QtQuick.Dialogs because those have
-// a different font and buttons on Android than other dialogs from
-// QtQuick.Dialogs, and we want a coherent dialog style.
 Dialog {
     id: root
 
@@ -21,7 +17,7 @@ Dialog {
         timer.restart()
     }
 
-    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
+    standardButtons: Dialog.Ok
 
     // Outer column is a workaround for a bug in Qt on Android (last tested
     // with Qt 5.8beta), which causes the label to be too wide.

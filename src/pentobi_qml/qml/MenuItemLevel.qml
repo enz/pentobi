@@ -1,4 +1,4 @@
-import QtQuick.Controls 1.1
+import QtQuick.Controls 2.2
 import "Main.js" as Logic
 
 MenuItem {
@@ -7,7 +7,7 @@ MenuItem {
     enabled: ! isRated
     text: qsTr("Level &%1").arg(level)
     checkable: true
-    exclusiveGroup: levelGroup
+    autoExclusive: true
     checked: playerModel.level === level
     onTriggered: playerModel.level = level
 }

@@ -163,7 +163,7 @@ function computerPlaysAny() {
 
 function createTheme(themeName) {
     var source = "themes/" + themeName + "/Theme.qml"
-    return Qt.createComponent(source).createObject(root)
+    return Qt.createComponent(source).createObject(rootWindow)
 }
 
 function deleteAllVar() {
@@ -273,8 +273,8 @@ function help() {
 
 function init() {
     // Settings might contain unusable geometry
-    var maxWidth = root.Screen.width
-    var maxHeight = root.Screen.height
+    var maxWidth = Screen.width
+    var maxHeight = Screen.height
     if (x < 0 || x + width > maxWidth || y < 0 || y + height > maxHeight) {
         if (width > maxWidth || height > maxHeight) {
             width = defaultWidth

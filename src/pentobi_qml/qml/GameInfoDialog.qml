@@ -1,6 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.0
-import QtQuick.Dialogs 1.2
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 
 Dialog {
@@ -15,7 +14,7 @@ Dialog {
     property string gameVariant: gameModel.gameVariant
 
     title: qsTr("Game Info")
-    standardButtons: StandardButton.Ok | StandardButton.Cancel
+    standardButtons: Dialog.Ok | Dialog.Cancel
     onAccepted: {
         gameModel.playerName0 = playerName0
         gameModel.playerName1 = playerName1
@@ -26,7 +25,6 @@ Dialog {
         gameModel.event = event
         gameModel.round = round
     }
-    onVisibleChanged: if (! visible) gameDisplay.forceActiveFocus() // QTBUG-48456
 
     GridLayout {
         columns: 2
