@@ -81,7 +81,7 @@
     <name>FileDialog</name>
     <message>
         <source>All files (*)</source>
-        <translation type="unfinished">Alle filer (*)</translation>
+        <translation>Alle filer (*)</translation>
     </message>
 </context>
 <context>
@@ -1169,7 +1169,7 @@
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation type="unfinished">Overskriv eksisterende fil?</translation>
+        <translation>Overskriv eksisterende fil?</translation>
     </message>
 </context>
 <context>
