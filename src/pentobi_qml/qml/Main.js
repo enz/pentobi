@@ -280,8 +280,8 @@ function init() {
             width = defaultWidth
             height = defaultHeight
         }
-        x = (root.Screen.width - width) / 2
-        y = (root.Screen.height - height) / 2
+        x = (Screen.width - width) / 2
+        y = (Screen.height - height) / 2
     }
 
     // Settings may contain invalid theme
