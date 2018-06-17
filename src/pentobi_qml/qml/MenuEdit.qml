@@ -4,7 +4,6 @@ import "Main.js" as Logic
 
 Menu {
     title: qsTr("&Edit")
-    enabled:  ! isRated
 
     Menu {
         title: qsTr("Move &Annotation")

@@ -4,9 +4,6 @@ import "Main.js" as Logic
 
 Menu {
     title: qsTr("G&o")
-    enabled:  ! isRated &&
-              (backToMainVar.enabled || gotoMove.enabled
-               || beginningOfBranch.enabled || findNextComment.enabled)
 
     MenuItem {
         id: gotoMove

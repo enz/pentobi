@@ -71,8 +71,22 @@ RowLayout {
             id: menu
 
             MenuGame { }
-            MenuGo { }
-            MenuEdit { }
+            MenuGo {
+                // Note: it's not good enough to set enabled in MenuGo because
+                // properties of invisible items are lazily updated (last
+                // tested with Qt 5.11)
+                enabled: ! isRated &&
+                         (! gameModel.isMainVar
+                          || (gameModel.moveNumber + gameModel.movesLeft > 1)
+                          || gameModel.hasEarlierVar
+                          || gameModel.canGoForward || gameModel.canGoBackward)
+            }
+            MenuEdit {
+                // Note: it's not good enough to set enabled in MenuEdit
+                // because properties of invisible items are lazily updated
+                // (last tested with Qt 5.11)
+                enabled:  ! isRated
+            }
             MenuView { }
             MenuComputer { }
             MenuTools { }
