@@ -146,7 +146,7 @@ Menu {
             onObjectRemoved: recentFiles.removeItem(object)
 
             MenuItem {
-                text: modelData
+                text: modelData.substring(modelData.lastIndexOf("/") + 1)
                 onTriggered: Logic.openRecentFile(modelData)
             }
         }
