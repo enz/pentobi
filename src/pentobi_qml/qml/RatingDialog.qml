@@ -68,20 +68,21 @@ Dialog {
         Label {
             visible: history.length > 1
             text: qsTr("Recent development:")
-            Layout.topMargin: Screen.pixelDensity * 1
+            Layout.topMargin: Math.round(Screen.pixelDensity)
         }
         RatingGraph {
             visible: history.length > 1
             history: ratingModel.history
-            implicitWidth: Math.min(Screen.pixelDensity * 100, 0.85 * Screen.width)
+            implicitWidth: Math.min(Screen.pixelDensity * 100, 0.95 * rootWindow.width)
             implicitHeight: implicitWidth / 3
         }
 
         ScrollView
         {
             visible: history.length > 0
-            implicitWidth: Math.min(Screen.pixelDensity * 100, 0.85 * Screen.width)
+            implicitWidth: Math.min(Screen.pixelDensity * 100, 0.95 * rootWindow.width)
             implicitHeight: implicitWidth / 3
+            clip: true
 
             Item
             {
