@@ -8,7 +8,7 @@ Menu {
 
     MenuItem {
         text: qsTr("&New")
-        enabled: ! gameModel.isGameEmpty
+        enabled: isRated || ! gameModel.isGameEmpty
         onTriggered: Logic.newGame()
     }
     MenuItem {
