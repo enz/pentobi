@@ -686,10 +686,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>[*]%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Setup mode cannot be used if moves have been played.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -783,10 +779,12 @@
     </message>
     <message numerus="yes">
         <source>%n move(s)</source>
-        <translation><numerusform></numerusform>
-        <numerusform></numerusform>
-        <numerusform></numerusform>
-        </translation></message>
+        <translation>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
     <message>
         <source>Move %1 of %2</source>
         <extracomment>The first argument is the current move number, the second is the number of moves in the main variation.</extracomment>

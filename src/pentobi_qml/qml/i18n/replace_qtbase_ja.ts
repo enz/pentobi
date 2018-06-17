@@ -11,5 +11,13 @@
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

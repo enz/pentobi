@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Alle filer (*)</translation>
+        <translation type="vanished">Alle filer (*)</translation>
     </message>
 </context>
 <context>
@@ -75,6 +75,13 @@
     <message>
         <source>Image width:</source>
         <translation>Bildebredde:</translation>
+    </message>
+</context>
+<context>
+    <name>FileDialog</name>
+    <message>
+        <source>All files (*)</source>
+        <translation type="unfinished">Alle filer (*)</translation>
     </message>
 </context>
 <context>
@@ -144,6 +151,7 @@
     </message>
     <message>
         <source>Move %1</source>
+        <extracomment>The argument is the current move number.</extracomment>
         <translation>Trekk %1</translation>
     </message>
     <message>
@@ -333,7 +341,7 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Alle filer (*)</translation>
+        <translation type="vanished">Alle filer (*)</translation>
     </message>
     <message>
         <source>PNG image files (*.png)</source>
@@ -367,6 +375,7 @@
     <name>Main</name>
     <message>
         <source>Pentobi</source>
+        <extracomment>Main window title if no file is loaded.</extracomment>
         <translation>Pentobi</translation>
     </message>
     <message>
@@ -527,7 +536,7 @@
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation>Overskriv eksisterende fil?</translation>
+        <translation type="vanished">Overskriv eksisterende fil?</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
@@ -1006,13 +1015,14 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Alle filer (*)</translation>
+        <translation type="vanished">Alle filer (*)</translation>
     </message>
 </context>
 <context>
     <name>RatingDialog</name>
     <message>
         <source>Rating</source>
+        <extracomment>Window title for the rating dialog.</extracomment>
         <translation>Vurdering</translation>
     </message>
     <message>
@@ -1105,14 +1115,17 @@
     </message>
     <message>
         <source>Win</source>
+        <extracomment>Result of rated game is a win</extracomment>
         <translation>Vunnet</translation>
     </message>
     <message>
         <source>Loss</source>
+        <extracomment>Result of rated game is a loss</extracomment>
         <translation>Tapt</translation>
     </message>
     <message>
         <source>Tie</source>
+        <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
         <translation>Uavgjort</translation>
     </message>
     <message>
@@ -1152,7 +1165,11 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Alle filer (*)</translation>
+        <translation type="vanished">Alle filer (*)</translation>
+    </message>
+    <message>
+        <source>Overwrite existing file?</source>
+        <translation type="unfinished">Overskriv eksisterende fil?</translation>
     </message>
 </context>
 <context>

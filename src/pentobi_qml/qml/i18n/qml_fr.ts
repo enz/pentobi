@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Tous les fichiers (*)</translation>
+        <translation type="vanished">Tous les fichiers (*)</translation>
     </message>
 </context>
 <context>
@@ -74,7 +74,14 @@
     </message>
     <message>
         <source>Image width:</source>
-        <translation>Largeur de l&apos;image :</translation>
+        <translation>Largeur de l&apos;image&#xa0;:</translation>
+    </message>
+</context>
+<context>
+    <name>FileDialog</name>
+    <message>
+        <source>All files (*)</source>
+        <translation>Tous les fichiers (*)</translation>
     </message>
 </context>
 <context>
@@ -85,39 +92,39 @@
     </message>
     <message>
         <source>Player Blue/Red:</source>
-        <translation>Joueur bleu/rouge :</translation>
+        <translation>Joueur bleu/rouge&#xa0;:</translation>
     </message>
     <message>
         <source>Player Blue:</source>
-        <translation>Joueur bleu :</translation>
+        <translation>Joueur bleu&#xa0;:</translation>
     </message>
     <message>
         <source>Player Yellow/Green:</source>
-        <translation>Joueur jaune/vert :</translation>
+        <translation>Joueur jaune/vert&#xa0;:</translation>
     </message>
     <message>
         <source>Player Green:</source>
-        <translation>Joueur vert :</translation>
+        <translation>Joueur vert&#xa0;:</translation>
     </message>
     <message>
         <source>Player Yellow:</source>
-        <translation>Joueur jaune :</translation>
+        <translation>Joueur jaune&#xa0;:</translation>
     </message>
     <message>
         <source>Player Red:</source>
-        <translation>Joueur rouge :</translation>
+        <translation>Joueur rouge&#xa0;:</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation>Date :</translation>
+        <translation>Date&#xa0;:</translation>
     </message>
     <message>
         <source>Time:</source>
-        <translation>Temps :</translation>
+        <translation>Temps&#xa0;:</translation>
     </message>
     <message>
         <source>Event:</source>
-        <translation>Événement :</translation>
+        <translation>Événement&#xa0;:</translation>
     </message>
     <message>
         <source>Round:</source>
@@ -144,6 +151,7 @@
     </message>
     <message>
         <source>Move %1</source>
+        <extracomment>The argument is the current move number.</extracomment>
         <translation>Coup %1</translation>
     </message>
     <message>
@@ -333,7 +341,7 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Tous les fichiers (*)</translation>
+        <translation type="vanished">Tous les fichiers (*)</translation>
     </message>
     <message>
         <source>PNG image files (*.png)</source>
@@ -367,6 +375,7 @@
     <name>Main</name>
     <message>
         <source>Pentobi</source>
+        <extracomment>Main window title if no file is loaded.</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -435,7 +444,7 @@
     </message>
     <message>
         <source>Start rated game with Blue/Red against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec bleu/rouge contre Pentobi niveau %1 ?</translation>
+        <translation>Commencer une partie classée avec bleu/rouge contre Pentobi niveau %1&#xa0;?</translation>
     </message>
     <message>
         <source>Start rated game with Blue against Pentobi level %1?</source>
@@ -527,7 +536,7 @@
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation>Remplacer le fichier existant ?</translation>
+        <translation type="vanished">Remplacer le fichier existant&#xa0;?</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
@@ -1006,13 +1015,14 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Tous les fichiers (*)</translation>
+        <translation type="vanished">Tous les fichiers (*)</translation>
     </message>
 </context>
 <context>
     <name>RatingDialog</name>
     <message>
         <source>Rating</source>
+        <extracomment>Window title for the rating dialog.</extracomment>
         <translation>Classement</translation>
     </message>
     <message>
@@ -1105,14 +1115,17 @@
     </message>
     <message>
         <source>Win</source>
+        <extracomment>Result of rated game is a win</extracomment>
         <translation>Victoire</translation>
     </message>
     <message>
         <source>Loss</source>
+        <extracomment>Result of rated game is a loss</extracomment>
         <translation>Perte</translation>
     </message>
     <message>
         <source>Tie</source>
+        <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
         <translation>Egalité</translation>
     </message>
     <message>
@@ -1152,7 +1165,11 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Tous les fichiers (*)</translation>
+        <translation type="vanished">Tous les fichiers (*)</translation>
+    </message>
+    <message>
+        <source>Overwrite existing file?</source>
+        <translation>Remplacer le fichier existant&#xa0;?</translation>
     </message>
 </context>
 <context>

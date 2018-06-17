@@ -18,10 +18,6 @@
         <source>Text files (*.txt)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>All files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ComputerColorDialog</name>
@@ -74,6 +70,13 @@
     </message>
     <message>
         <source>Image width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FileDialog</name>
+    <message>
+        <source>All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -333,10 +336,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>PNG image files (*.png)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -525,10 +524,6 @@
     </message>
     <message>
         <source>File was deleted by another application.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Overwrite existing file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1006,10 +1001,6 @@
         <source>Blokus games (*.blksgf)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>All files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>RatingDialog</name>
@@ -1108,14 +1099,17 @@
     </message>
     <message>
         <source>Win</source>
+        <extracomment>Result of rated game is a win</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Loss</source>
+        <extracomment>Result of rated game is a loss</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tie</source>
+        <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1154,7 +1148,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All files (*)</source>
+        <source>Overwrite existing file?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
