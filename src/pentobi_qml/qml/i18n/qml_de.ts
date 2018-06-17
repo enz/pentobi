@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Alle Dateien (*)</translation>
+        <translation type="vanished">Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
@@ -75,6 +75,13 @@
     <message>
         <source>Image width:</source>
         <translation>Bildbreite:</translation>
+    </message>
+</context>
+<context>
+    <name>FileDialog</name>
+    <message>
+        <source>All files (*)</source>
+        <translation>Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
@@ -334,7 +341,7 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Alle Dateien (*)</translation>
+        <translation type="vanished">Alle Dateien (*)</translation>
     </message>
     <message>
         <source>PNG image files (*.png)</source>
@@ -529,7 +536,7 @@
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation>Existierende Datei überschreiben?</translation>
+        <translation type="vanished">Existierende Datei überschreiben?</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
@@ -1008,7 +1015,7 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Alle Dateien (*)</translation>
+        <translation type="vanished">Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
@@ -1108,14 +1115,17 @@
     </message>
     <message>
         <source>Win</source>
+        <extracomment>Result of rated game is a win</extracomment>
         <translation>Gewinn</translation>
     </message>
     <message>
         <source>Loss</source>
+        <extracomment>Result of rated game is a loss</extracomment>
         <translation>Verlust</translation>
     </message>
     <message>
         <source>Tie</source>
+        <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
         <translation>Unentsch.</translation>
     </message>
     <message>
@@ -1155,7 +1165,11 @@
     </message>
     <message>
         <source>All files (*)</source>
-        <translation>Alle Dateien (*)</translation>
+        <translation type="vanished">Alle Dateien (*)</translation>
+    </message>
+    <message>
+        <source>Overwrite existing file?</source>
+        <translation>Existierende Datei überschreiben?</translation>
     </message>
 </context>
 <context>
