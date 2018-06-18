@@ -3,11 +3,12 @@
 <file>light/board-callisto.svg</file>
 <file>light/board-callisto-2.svg</file>
 <file>light/board-callisto-3.svg</file>
-<file>light/board-tile-classic.svg</file>
+<file>light/board-classic.svg</file>
+<file>light/board-duo.svg</file>
 <file>light/board-gembloq.svg</file>
 <file>light/board-gembloq-2.svg</file>
 <file>light/board-gembloq-3.svg</file>
-<file>light/board-tile-nexos.svg</file>
+<file>light/board-nexos.svg</file>
 <file>light/board-trigon.svg</file>
 <file>light/board-trigon-3.svg</file>
 <file>light/menu.svg</file>

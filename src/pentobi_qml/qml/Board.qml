@@ -142,7 +142,7 @@ Item {
                 return theme.getImage("board-trigon-3")
             case "nexos":
             case "nexos_2":
-                return theme.getImage("board-tile-nexos")
+                return theme.getImage("board-nexos")
             case "callisto":
             case "callisto_2_4":
                 return theme.getImage("board-callisto")
@@ -157,28 +157,14 @@ Item {
                 return theme.getImage("board-gembloq-2")
             case "gembloq_3":
                 return theme.getImage("board-gembloq-3")
+            case "duo":
+            case "junior":
+                return theme.getImage("board-duo")
             default:
-                return theme.getImage("board-tile-classic")
+                return theme.getImage("board-classic")
             }
         }
-        sourceSize {
-            width: {
-                if (isTrigon || isCallisto || isGembloQ) return width
-                if (isNexos) return 2 * gridWidth
-                return gridWidth
-            }
-            height: {
-                if (isTrigon || isCallisto || isGembloQ) return height
-                if (isNexos) return 2 * gridHeight
-                return gridHeight
-            }
-        }
-        // Tiling board elements is faster than loading a whole board image,
-        // but tiling is only possible for rectangular boards. Note that the
-        // aspect ratio of the Trigon SVG files is 1:1 to avoid irrational
-        // coordinates for the triangles but Image.sourceSize always maintains
-        // aspect ratio, so we need Image.Stretch, not Image.Tile.
-        fillMode: isTrigon ? Image.Stretch : Image.Tile
+        sourceSize { width: width; height: height }
         horizontalAlignment: Image.AlignLeft
         verticalAlignment: Image.AlignTop
         cache: false
