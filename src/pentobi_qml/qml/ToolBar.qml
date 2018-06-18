@@ -42,24 +42,28 @@ RowLayout {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-newgame")
         enabled: ! (gameModel.isGameEmpty && gameModel.file === "" && ! gameModel.isModified && ! isRated) && ! gameDisplay.setupMode
+        visible: ! isAndroid || enabled
         onClicked: Logic.newGame()
     }
     Pentobi.Button {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-undo")
         enabled: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
+        visible: ! isAndroid || enabled
         onClicked: Logic.undo()
     }
     Pentobi.Button {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-computer-colors")
         enabled: ! gameDisplay.setupMode
+        visible: ! isAndroid || enabled
         onClicked: Logic.showComputerColorDialog()
     }
     Pentobi.Button {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-play")
         enabled: ! gameModel.isGameOver && ! gameDisplay.setupMode && ! isRated
+        visible: ! isAndroid || enabled
         onClicked: Logic.computerPlay()
     }
     Pentobi.Button {
