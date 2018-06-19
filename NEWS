@@ -23,6 +23,7 @@ General:
 
 Android version:
 
+* Games table in rating dialog did not show the correct level used.
 * Saving a game with "Save As..." did not work anymore with Qt 5.11.
 * Rating dialog layout implementation depended on undefined behavior.
 
