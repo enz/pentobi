@@ -5,6 +5,7 @@ import "Main.js" as Logic
 
 Menu {
     title: Logic.removeShortcut(qsTr("&Game"))
+    cascade: false
 
     MenuItem {
         text: Logic.removeShortcut(qsTr("&New"))

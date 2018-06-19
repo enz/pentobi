@@ -4,6 +4,7 @@ import "Main.js" as Logic
 
 Menu {
     title: Logic.removeShortcut(qsTr("&Edit"))
+    cascade: false
 
     Menu {
         title: Logic.removeShortcut(qsTr("Move &Annotation"))

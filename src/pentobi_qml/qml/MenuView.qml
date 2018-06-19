@@ -5,6 +5,7 @@ import "Main.js" as Logic
 
 Menu {
     title: Logic.removeShortcut(qsTr("&View"))
+    cascade: false
 
     Menu {
         title: Logic.removeShortcut(qsTr("&Move Marking"))

@@ -74,6 +74,8 @@ RowLayout {
         Menu {
             id: menu
 
+            cascade: false
+
             MenuGame { }
             MenuGo {
                 // Note: it's not good enough to set enabled in MenuGo because

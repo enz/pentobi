@@ -4,6 +4,7 @@ import "Main.js" as Logic
 
 Menu {
     title: Logic.removeShortcut(qsTr("&Computer"))
+    cascade: false
 
     MenuItem {
         text: Logic.removeShortcut(qsTr("Computer &Colors"))
