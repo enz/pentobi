@@ -1,10 +1,10 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import "Main.js" as Logic
+import "." as Pentobi
 
-Menu {
+Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&Help"))
-    cascade: false
 
     MenuItem {
         text: Logic.removeShortcut(qsTr("Pentobi &Help"))

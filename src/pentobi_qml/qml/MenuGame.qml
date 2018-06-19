@@ -2,10 +2,10 @@ import QtQml 2.2
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import "Main.js" as Logic
+import "." as Pentobi
 
-Menu {
+Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&Game"))
-    cascade: false
 
     MenuItem {
         text: Logic.removeShortcut(qsTr("&New"))
@@ -18,11 +18,11 @@ Menu {
         onTriggered: Logic.ratedGame()
     }
     MenuSeparator { }
-    Menu {
+    Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("Game &Variant"))
 
         ButtonGroup { id: groupGameVariant }
-        Menu {
+        Pentobi.Menu {
             title: Logic.removeShortcut(qsTr("&Classic"))
 
             MenuItemGameVariant {
@@ -46,7 +46,7 @@ Menu {
             gameVariant: "junior"
             text: Logic.removeShortcut(qsTr("&Junior"))
         }
-        Menu {
+        Pentobi.Menu {
             title: Logic.removeShortcut(qsTr("&Trigon"))
 
             MenuItemGameVariant {
@@ -62,7 +62,7 @@ Menu {
                 text: Logic.removeShortcut(qsTr("Trigon (&4 Players)"))
             }
         }
-        Menu {
+        Pentobi.Menu {
             title: Logic.removeShortcut(qsTr("&Nexos"))
 
             MenuItemGameVariant {
@@ -74,7 +74,7 @@ Menu {
                 text: Logic.removeShortcut(qsTr("Nexos (&4 Players)"))
             }
         }
-        Menu {
+        Pentobi.Menu {
             title: Logic.removeShortcut(qsTr("&GembloQ"))
 
             MenuItemGameVariant {
@@ -94,7 +94,7 @@ Menu {
                 text: Logic.removeShortcut(qsTr("GembloQ (&4 Players)"))
             }
         }
-        Menu {
+        Pentobi.Menu {
             title: Logic.removeShortcut(qsTr("C&allisto"))
 
             MenuItemGameVariant {
@@ -135,7 +135,7 @@ Menu {
         text: Logic.removeShortcut(qsTr("&Open..."))
         onTriggered: Logic.open()
     }
-    Menu {
+    Pentobi.Menu {
         id: recentFiles
 
         title: Logic.removeShortcut(qsTr("Open R&ecent"))
@@ -166,7 +166,7 @@ Menu {
         enabled: ! gameModel.isGameEmpty
         onTriggered: Logic.saveAs()
     }
-    Menu {
+    Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("&Export"))
 
         MenuItem {

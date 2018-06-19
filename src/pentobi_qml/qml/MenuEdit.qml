@@ -1,12 +1,12 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import "Main.js" as Logic
+import "." as Pentobi
 
-Menu {
+Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&Edit"))
-    cascade: false
 
-    Menu {
+    Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("Move &Annotation"))
         enabled: gameModel.moveNumber > 0
 

@@ -2,12 +2,12 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.1
 import "Main.js" as Logic
+import "." as Pentobi
 
-Menu {
+Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&View"))
-    cascade: false
 
-    Menu {
+    Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("&Move Marking"))
 
         MenuItem {
@@ -54,7 +54,7 @@ Menu {
         onTriggered: gameModel.showVariations = checked
     }
     MenuSeparator { }
-    Menu {
+    Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("&Theme"))
 
         MenuItem {

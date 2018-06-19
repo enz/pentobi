@@ -71,10 +71,8 @@ RowLayout {
         imageSource: theme.getImage("menu")
         onClicked: menu.popup()
 
-        Menu {
+        Pentobi.Menu {
             id: menu
-
-            cascade: false
 
             MenuGame { }
             MenuGo {
