@@ -64,7 +64,7 @@ function checkComputerMove() {
         var msg = gameModel.getResultMessage()
         if (isRated) {
             var oldRating = Math.round(ratingModel.rating)
-            ratingModel.addResult(gameModel, getLevel())
+            ratingModel.addResult(gameModel, playerModel.level)
             var newRating = Math.round(ratingModel.rating)
             msg += "\n"
             if (newRating > oldRating)
@@ -238,30 +238,6 @@ function getFileLabel(file, isModified) {
         return ""
     var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"))
     return (isModified ? "*" : "") + file.substring(pos + 1)
-}
-
-function getLevel() {
-    switch (gameModel.gameVariant) {
-    case "classic": return playerModel.levelClassic
-    case "classic_2": return playerModel.levelClassic2
-    case "classic_3": return playerModel.levelClassic3
-    case "duo": return playerModel.levelDuo
-    case "trigon": return playerModel.levelTrigon
-    case "trigon_2": return playerModel.levelTrigon2
-    case "trigon_3": return playerModel.levelTrigon3
-    case "junior": return playerModel.levelJunior
-    case "nexos": return playerModel.levelNexos
-    case "nexos_2": return playerModel.levelNexos2
-    case "callisto": return playerModel.levelCallisto
-    case "callisto_2": return playerModel.levelCallisto2
-    case "callisto_2_4": return playerModel.levelCallisto24
-    case "callisto_3": return playerModel.levelCallisto3
-    case "gembloq": return playerModel.levelGembloQ
-    case "gembloq_2": return playerModel.levelGembloQ2
-    case "gembloq_2_4": return playerModel.levelGembloQ24
-    case "gembloq_3": return playerModel.levelGembloQ3
-    default: console.assert(false)
-    }
 }
 
 function help() {
