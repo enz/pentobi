@@ -3,14 +3,14 @@ import QtQuick.Controls 2.2
 import "Main.js" as Logic
 
 Menu {
-    title: qsTr("&Help")
+    title: Logic.removeShortcut(qsTr("&Help"))
 
     MenuItem {
-        text: qsTr("Pentobi &Help")
+        text: Logic.removeShortcut(qsTr("Pentobi &Help"))
         onTriggered: Logic.help()
     }
     MenuItem {
-        text: qsTr("&About Pentobi")
+        text: Logic.removeShortcut(qsTr("&About Pentobi"))
         onTriggered: Logic.about()
     }
 }

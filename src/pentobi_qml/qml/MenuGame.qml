@@ -4,140 +4,140 @@ import QtQuick.Controls 2.2
 import "Main.js" as Logic
 
 Menu {
-    title: qsTr("&Game")
+    title: Logic.removeShortcut(qsTr("&Game"))
 
     MenuItem {
-        text: qsTr("&New")
+        text: Logic.removeShortcut(qsTr("&New"))
         enabled: isRated || ! gameModel.isGameEmpty
         onTriggered: Logic.newGame()
     }
     MenuItem {
-        text: qsTr("&Rated Game")
+        text: Logic.removeShortcut(qsTr("&Rated Game"))
         enabled: ! isRated
         onTriggered: Logic.ratedGame()
     }
     MenuSeparator { }
     Menu {
-        title: qsTr("Game &Variant")
+        title: Logic.removeShortcut(qsTr("Game &Variant"))
 
         ButtonGroup { id: groupGameVariant }
         Menu {
-            title: qsTr("&Classic")
+            title: Logic.removeShortcut(qsTr("&Classic"))
 
             MenuItemGameVariant {
                 gameVariant: "classic_2"
-                text: qsTr("Classic (&2 Players)")
+                text: Logic.removeShortcut(qsTr("Classic (&2 Players)"))
             }
             MenuItemGameVariant {
                 gameVariant: "classic_3"
-                text: qsTr("Classic (&3 Players)")
+                text: Logic.removeShortcut(qsTr("Classic (&3 Players)"))
             }
             MenuItemGameVariant {
                 gameVariant: "classic"
-                text: qsTr("Classic (&4 Players)")
+                text: Logic.removeShortcut(qsTr("Classic (&4 Players)"))
             }
         }
         MenuItemGameVariant {
             gameVariant: "duo"
-            text: qsTr("&Duo")
+            text: Logic.removeShortcut(qsTr("&Duo"))
         }
         MenuItemGameVariant {
             gameVariant: "junior"
-            text: qsTr("&Junior")
+            text: Logic.removeShortcut(qsTr("&Junior"))
         }
         Menu {
-            title: qsTr("&Trigon")
+            title: Logic.removeShortcut(qsTr("&Trigon"))
 
             MenuItemGameVariant {
                 gameVariant: "trigon_2"
-                text: qsTr("Trigon (&2 Players)")
+                text: Logic.removeShortcut(qsTr("Trigon (&2 Players)"))
             }
             MenuItemGameVariant {
                 gameVariant: "trigon_3"
-                text: qsTr("Trigon (&3 Players)")
+                text: Logic.removeShortcut(qsTr("Trigon (&3 Players)"))
             }
             MenuItemGameVariant {
                 gameVariant: "trigon"
-                text: qsTr("Trigon (&4 Players)")
+                text: Logic.removeShortcut(qsTr("Trigon (&4 Players)"))
             }
         }
         Menu {
-            title: qsTr("&Nexos")
+            title: Logic.removeShortcut(qsTr("&Nexos"))
 
             MenuItemGameVariant {
                 gameVariant: "nexos_2"
-                text: qsTr("Nexos (&2 Players)")
+                text: Logic.removeShortcut(qsTr("Nexos (&2 Players)"))
             }
             MenuItemGameVariant {
                 gameVariant: "nexos"
-                text: qsTr("Nexos (&4 Players)")
+                text: Logic.removeShortcut(qsTr("Nexos (&4 Players)"))
             }
         }
         Menu {
-            title: qsTr("&GembloQ")
+            title: Logic.removeShortcut(qsTr("&GembloQ"))
 
             MenuItemGameVariant {
                 gameVariant: "gembloq_2"
-                text: qsTr("GembloQ (&2 Players, 2 Colors)")
+                text: Logic.removeShortcut(qsTr("GembloQ (&2 Players, 2 Colors)"))
             }
             MenuItemGameVariant {
                 gameVariant: "gembloq_2_4"
-                text: qsTr("GembloQ (2 &Players, 4 Colors)")
+                text: Logic.removeShortcut(qsTr("GembloQ (2 &Players, 4 Colors)"))
             }
             MenuItemGameVariant {
                 gameVariant: "gembloq_3"
-                text: qsTr("GembloQ (&3 Players)")
+                text: Logic.removeShortcut(qsTr("GembloQ (&3 Players)"))
             }
             MenuItemGameVariant {
                 gameVariant: "gembloq"
-                text: qsTr("GembloQ (&4 Players)")
+                text: Logic.removeShortcut(qsTr("GembloQ (&4 Players)"))
             }
         }
         Menu {
-            title: qsTr("C&allisto")
+            title: Logic.removeShortcut(qsTr("C&allisto"))
 
             MenuItemGameVariant {
                 gameVariant: "callisto_2"
-                text: qsTr("Callisto (&2 Players, 2 Colors)")
+                text: Logic.removeShortcut(qsTr("Callisto (&2 Players, 2 Colors)"))
             }
             MenuItemGameVariant {
                 gameVariant: "callisto_2_4"
-                text: qsTr("Callisto (2 &Players, 4 Colors)")
+                text: Logic.removeShortcut(qsTr("Callisto (2 &Players, 4 Colors)"))
             }
             MenuItemGameVariant {
                 gameVariant: "callisto_3"
-                text: qsTr("Callisto (&3 Players)")
+                text: Logic.removeShortcut(qsTr("Callisto (&3 Players)"))
             }
             MenuItemGameVariant {
                 gameVariant: "callisto"
-                text: qsTr("Callisto (&4 Players)")
+                text: Logic.removeShortcut(qsTr("Callisto (&4 Players)"))
             }
         }
     }
     MenuItem {
-        text: qsTr("&Game Info")
+        text: Logic.removeShortcut(qsTr("&Game Info"))
         onTriggered: Logic.openGameInfoDialog()
     }
     MenuSeparator { }
     MenuItem {
-        text: qsTr("&Undo Move")
+        text: Logic.removeShortcut(qsTr("&Undo Move"))
         enabled: gameModel.canUndo && ! isRated
         onTriggered: Logic.undo()
     }
     MenuItem {
-        text: qsTr("&Find Move")
+        text: Logic.removeShortcut(qsTr("&Find Move"))
         enabled: ! gameModel.isGameOver
         onTriggered: Logic.findMove()
     }
     MenuSeparator { }
     MenuItem {
-        text: qsTr("&Open...")
+        text: Logic.removeShortcut(qsTr("&Open..."))
         onTriggered: Logic.open()
     }
     Menu {
         id: recentFiles
 
-        title: qsTr("Open R&ecent")
+        title: Logic.removeShortcut(qsTr("Open R&ecent"))
         enabled: gameModel.recentFiles.length > 0
 
         Instantiator {
@@ -152,34 +152,34 @@ Menu {
         }
     }
     MenuItem {
-        text: qsTr("Open from &Clipboard")
+        text: Logic.removeShortcut(qsTr("Open from &Clipboard"))
         onTriggered: Logic.openClipboard()
     }
     MenuItem {
-        text: qsTr("&Save")
+        text: Logic.removeShortcut(qsTr("&Save"))
         enabled: gameModel.file !== "" && gameModel.isModified
         onTriggered: Logic.save()
     }
     MenuItem {
-        text: qsTr("Save &As...")
+        text: Logic.removeShortcut(qsTr("Save &As..."))
         enabled: ! gameModel.isGameEmpty
         onTriggered: Logic.saveAs()
     }
     Menu {
-        title: qsTr("&Export")
+        title: Logic.removeShortcut(qsTr("&Export"))
 
         MenuItem {
-            text: qsTr("&Image")
+            text: Logic.removeShortcut(qsTr("&Image"))
             onTriggered: exportImageDialog.open()
         }
         MenuItem {
-            text: qsTr("&ASCII Art")
+            text: Logic.removeShortcut(qsTr("&ASCII Art"))
             onTriggered: asciiArtSaveDialog.open()
         }
     }
     MenuSeparator { }
     MenuItem {
-        text: qsTr("&Quit")
+        text: Logic.removeShortcut(qsTr("&Quit"))
         onTriggered: Qt.quit()
     }
 }

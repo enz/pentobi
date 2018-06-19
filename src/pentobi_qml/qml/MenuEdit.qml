@@ -3,56 +3,56 @@ import QtQuick.Controls 2.2
 import "Main.js" as Logic
 
 Menu {
-    title: qsTr("&Edit")
+    title: Logic.removeShortcut(qsTr("&Edit"))
 
     Menu {
-        title: qsTr("Move &Annotation")
+        title: Logic.removeShortcut(qsTr("Move &Annotation"))
         enabled: gameModel.moveNumber > 0
 
         MenuItem {
-            text: qsTr("&None")
+            text: Logic.removeShortcut(qsTr("&None"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === ""
             onTriggered: gameModel.moveAnnotation = ""
         }
         MenuItem {
-            text: qsTr("&Very good")
+            text: Logic.removeShortcut(qsTr("&Very good"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "!!"
             onTriggered: gameModel.moveAnnotation = "!!"
         }
         MenuItem {
-            text: qsTr("&Good")
+            text: Logic.removeShortcut(qsTr("&Good"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "!"
             onTriggered: gameModel.moveAnnotation = "!"
         }
         MenuItem {
-            text: qsTr("Int&eresting")
+            text: Logic.removeShortcut(qsTr("Int&eresting"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "!?"
             onTriggered: gameModel.moveAnnotation = "!?"
         }
         MenuItem {
-            text: qsTr("&Doubtful")
+            text: Logic.removeShortcut(qsTr("&Doubtful"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "?!"
             onTriggered: gameModel.moveAnnotation = "?!"
         }
         MenuItem {
-            text: qsTr("&Bad")
+            text: Logic.removeShortcut(qsTr("&Bad"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "?"
             onTriggered: gameModel.moveAnnotation = "?"
         }
         MenuItem {
-            text: qsTr("Very B&ad")
+            text: Logic.removeShortcut(qsTr("Very B&ad"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "??"
@@ -61,7 +61,7 @@ Menu {
     }
     MenuSeparator { }
     MenuItem {
-        text: qsTr("Make &Main Variation")
+        text: Logic.removeShortcut(qsTr("Make &Main Variation"))
         enabled: ! gameModel.isMainVar
         onTriggered: {
             gameModel.makeMainVar()
@@ -69,44 +69,44 @@ Menu {
         }
     }
     MenuItem {
-        text: qsTr("Move Variation &Up")
+        text: Logic.removeShortcut(qsTr("Move Variation &Up"))
         enabled: gameModel.hasPrevVar
         onTriggered: Logic.moveUpVar()
     }
     MenuItem {
-        text: qsTr("Move Variation &Down")
+        text: Logic.removeShortcut(qsTr("Move Variation &Down"))
         enabled: gameModel.hasNextVar
         onTriggered: Logic.moveDownVar()
     }
     MenuSeparator { }
     MenuItem {
-        text: qsTr("&Delete All Variations")
+        text: Logic.removeShortcut(qsTr("&Delete All Variations"))
         enabled: gameModel.hasVariations
         onTriggered: Logic.deleteAllVar()
     }
     MenuItem {
-        text: qsTr("&Truncate")
+        text: Logic.removeShortcut(qsTr("&Truncate"))
         enabled: gameModel.canGoBackward
         onTriggered: Logic.truncate()
     }
     MenuItem {
-        text: qsTr("Truncate &Children")
+        text: Logic.removeShortcut(qsTr("Truncate &Children"))
         enabled: gameModel.canGoForward
         onTriggered: Logic.truncateChildren()
     }
     MenuItem {
-        text: qsTr("&Keep Only Position")
+        text: Logic.removeShortcut(qsTr("&Keep Only Position"))
         enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward)
         onTriggered: Logic.keepOnlyPosition()
     }
     MenuItem {
-        text: qsTr("Keep Only &Subtree")
+        text: Logic.removeShortcut(qsTr("Keep Only &Subtree"))
         enabled: gameModel.canGoBackward && gameModel.canGoForward
         onTriggered: Logic.keepOnlySubtree()
     }
     MenuSeparator { }
     MenuItem {
-        text: qsTr("S&etup Mode")
+        text: Logic.removeShortcut(qsTr("S&etup Mode"))
         checkable: true
         enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
                  && gameModel.moveNumber === 0
@@ -117,7 +117,7 @@ Menu {
         }
     }
     MenuItem {
-        text: qsTr("&Next Color")
+        text: Logic.removeShortcut(qsTr("&Next Color"))
         onTriggered: gameModel.nextColor()
     }
 }

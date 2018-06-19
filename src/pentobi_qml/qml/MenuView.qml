@@ -1,15 +1,16 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.1
+import "Main.js" as Logic
 
 Menu {
-    title: qsTr("&View")
+    title: Logic.removeShortcut(qsTr("&View"))
 
     Menu {
-        title: qsTr("&Move Marking")
+        title: Logic.removeShortcut(qsTr("&Move Marking"))
 
         MenuItem {
-            text: qsTr("Last With &Dot")
+            text: Logic.removeShortcut(qsTr("Last With &Dot"))
             checkable: true
             autoExclusive: true
             checked: gameDisplay.moveMarking !== "last_number"
@@ -18,21 +19,21 @@ Menu {
             onTriggered: gameDisplay.moveMarking = "last_dot"
         }
         MenuItem {
-            text: qsTr("Last With &Number")
+            text: Logic.removeShortcut(qsTr("Last With &Number"))
             checkable: true
             autoExclusive: true
             checked: gameDisplay.moveMarking === "last_number"
             onTriggered: gameDisplay.moveMarking = "last_number"
         }
         MenuItem {
-            text: qsTr("&All With Number")
+            text: Logic.removeShortcut(qsTr("&All With Number"))
             checkable: true
             autoExclusive: true
             checked: gameDisplay.moveMarking === "all_number"
             onTriggered: gameDisplay.moveMarking = "all_number"
         }
         MenuItem {
-            text: qsTr("N&one")
+            text: Logic.removeShortcut(qsTr("N&one"))
             checkable: true
             autoExclusive: true
             checked: gameDisplay.moveMarking === "none"
@@ -40,30 +41,30 @@ Menu {
         }
     }
     MenuItem {
-        text: qsTr("&Coordinates")
+        text: Logic.removeShortcut(qsTr("&Coordinates"))
         checkable: true
         checked: gameDisplay.showCoordinates
         onTriggered: gameDisplay.showCoordinates = checked
     }
     MenuItem {
-        text: qsTr("Show &Variations")
+        text: Logic.removeShortcut(qsTr("Show &Variations"))
         checkable: true
         checked: gameModel.showVariations
         onTriggered: gameModel.showVariations = checked
     }
     MenuSeparator { }
     Menu {
-        title: qsTr("&Theme")
+        title: Logic.removeShortcut(qsTr("&Theme"))
 
         MenuItem {
-            text: qsTr("&Light")
+            text: Logic.removeShortcut(qsTr("&Light"))
             checkable: true
             autoExclusive: true
             checked: themeName === "light"
             onTriggered: themeName = "light"
         }
         MenuItem {
-            text: qsTr("&Dark")
+            text: Logic.removeShortcut(qsTr("&Dark"))
             checkable: true
             autoExclusive: true
             checked: themeName === "dark"
@@ -71,14 +72,14 @@ Menu {
         }
     }
     MenuItem {
-        text: qsTr("&Animate Pieces")
+        text: Logic.removeShortcut(qsTr("&Animate Pieces"))
         checkable: true
         checked: gameDisplay.enableAnimations
         onTriggered: gameDisplay.enableAnimations = checked
     }
     MenuSeparator { }
     MenuItem {
-        text: qsTr("&Fullscreen")
+        text: Logic.removeShortcut(qsTr("&Fullscreen"))
         checkable: true
         checked: visibility === Window.FullScreen
         onTriggered:
