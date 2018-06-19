@@ -18,6 +18,9 @@ Dialog {
     }
 
     standardButtons: Dialog.Ok
+    x: (rootWindow.width - width) / 2
+    y: (rootWindow.height - height) / 2
+    parent: ApplicationWindow.overlay
 
     Column
     {

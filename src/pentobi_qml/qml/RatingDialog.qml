@@ -10,6 +10,9 @@ Dialog {
 
     //: Window title for the rating dialog.
     title: qsTr("Rating")
+    x: (rootWindow.width - width) / 2
+    y: (rootWindow.height - height) / 2
+    parent: ApplicationWindow.overlay
     standardButtons: Dialog.Ok
     onVisibleChanged:
         if (! visible) {

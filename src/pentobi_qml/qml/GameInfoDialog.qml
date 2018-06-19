@@ -13,6 +13,9 @@ Dialog {
     property alias round: textFieldRound.text
     property string gameVariant: gameModel.gameVariant
 
+    x: (rootWindow.width - width) / 2
+    y: (rootWindow.height - height) / 2
+    parent: ApplicationWindow.overlay
     title: qsTr("Game Info")
     standardButtons: Dialog.Ok | Dialog.Cancel
     onAccepted: {

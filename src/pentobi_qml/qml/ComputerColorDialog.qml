@@ -10,6 +10,9 @@ Dialog {
 
     title: qsTr("Computer Colors")
     standardButtons: Dialog.Ok | Dialog.Cancel
+    x: (rootWindow.width - width) / 2
+    y: (rootWindow.height - height) / 2
+    parent: ApplicationWindow.overlay
 
     Column {
         spacing: Math.round(Screen.pixelDensity * 1.5)

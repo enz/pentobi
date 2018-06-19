@@ -7,6 +7,9 @@ import "Main.js" as Logic
 Dialog {
     title: qsTr("Initial Rating")
     standardButtons: Dialog.Ok | Dialog.Cancel
+    x: (rootWindow.width - width) / 2
+    y: (rootWindow.height - height) / 2
+    parent: ApplicationWindow.overlay
     onAccepted: {
         ratingModel.setInitialRating(Math.round(slider.value))
         Logic.ratedGameNoVerify()

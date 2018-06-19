@@ -3,6 +3,9 @@ import QtQuick.Controls 2.2
 
 Dialog {
     title: qsTr("Go to Move")
+    x: (rootWindow.width - width) / 2
+    y: (rootWindow.height - height) / 2
+    parent: ApplicationWindow.overlay
     standardButtons: Dialog.Ok | Dialog.Cancel
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 

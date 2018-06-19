@@ -4,6 +4,9 @@ import QtQuick.Controls 2.2
 Dialog {
     title: qsTr("Export Image")
     standardButtons: Dialog.Ok | Dialog.Cancel
+    x: (rootWindow.width - width) / 2
+    y: (rootWindow.height - height) / 2
+    parent: ApplicationWindow.overlay
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
         imageSaveDialog.open()

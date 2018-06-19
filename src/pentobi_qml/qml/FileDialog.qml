@@ -14,6 +14,9 @@ Dialog {
     property string nameFilterText
     property string nameFilter
 
+    x: (rootWindow.width - width) / 2
+    y: (rootWindow.height - height) / 2
+    parent: ApplicationWindow.overlay
     standardButtons: Dialog.Cancel | (selectExisting ? Dialog.Open : Dialog.Save)
     onVisibleChanged: {
         if (visible) {
