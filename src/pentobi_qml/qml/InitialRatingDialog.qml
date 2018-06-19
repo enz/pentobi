@@ -14,7 +14,7 @@ Dialog {
 
     Column
     {
-        width: Math.min(Screen.pixelDensity * 120, 0.95 * Screen.width)
+        width: Math.min(initialRatingLabel.height * 25, 0.95 * rootWindow.width)
         spacing: Screen.pixelDensity * 2
 
         Label {
@@ -24,6 +24,7 @@ Dialog {
         }
         RowLayout {
             Label {
+                id: initialRatingLabel
                 text: qsTr("Your initial rating:")
             }
             Label {

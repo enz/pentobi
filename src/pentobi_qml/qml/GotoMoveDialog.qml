@@ -7,10 +7,17 @@ Dialog {
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
     Column {
-        Label { text: qsTr("Move number:") }
+        width: Math.min(label.height * 15, 0.95 * rootWindow.width)
+
+        Label {
+            id: label
+
+            text: qsTr("Move number:")
+        }
         TextField {
             id: textField
 
+            width: parent.width
             text: gameModel.moveNumber
             focus: true
             inputMethodHints: Qt.ImhDigitsOnly

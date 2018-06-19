@@ -17,12 +17,16 @@ Dialog {
             close()
         }
 
-    ColumnLayout
+    Column
     {
         GridLayout {
             columns: 2
 
-            Label { text: qsTr("Your rating:") }
+            Label {
+                id: labelYourRating
+
+                text: qsTr("Your rating:")
+            }
             Label {
                 text: ratingModel.numberGames === 0 ?
                           "--" : Math.round(ratingModel.rating).toString()
@@ -73,14 +77,14 @@ Dialog {
         RatingGraph {
             visible: history.length > 1
             history: ratingModel.history
-            implicitWidth: Math.min(Screen.pixelDensity * 100, 0.95 * rootWindow.width)
+            implicitWidth: Math.min(labelYourRating.font.pixelSize * 25, 0.95 * rootWindow.width)
             implicitHeight: implicitWidth / 3
         }
 
         ScrollView
         {
             visible: history.length > 0
-            implicitWidth: Math.min(Screen.pixelDensity * 100, 0.95 * rootWindow.width)
+            implicitWidth: Math.min(labelYourRating.font.pixelSize * 25, 0.95 * rootWindow.width)
             implicitHeight: implicitWidth / 3
             clip: true
 

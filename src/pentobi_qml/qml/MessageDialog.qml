@@ -19,11 +19,9 @@ Dialog {
 
     standardButtons: Dialog.Ok
 
-    // Outer column is a workaround for a bug in Qt on Android (last tested
-    // with Qt 5.8beta), which causes the label to be too wide.
     Column
     {
-        width: Math.min(Screen.pixelDensity * 80, 0.95 * Screen.width)
+        width: Math.min(label.font.pixelSize * 30, 0.95 * rootWindow.width)
 
         Label {
             id: label

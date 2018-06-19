@@ -13,9 +13,11 @@ Dialog {
 
     Column {
         spacing: Math.round(Screen.pixelDensity * 1.5)
-        width: Math.min(Screen.pixelDensity * 60, 0.9 * rootWindow.width)
+        width: Math.min(label.height * 15, 0.95 * rootWindow.width)
 
         Label {
+            id: label
+
             width: parent.width
             text: qsTr("Computer plays:")
         }
