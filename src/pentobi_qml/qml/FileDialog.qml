@@ -52,7 +52,9 @@ Dialog {
                     if (hasParent) {
                         folderModel.folder = folderModel.parentFolder
                         view.currentIndex = -1
-                        textField.text = Logic.getFileFromUrl(folderModel.folder) + "/"
+                        textField.text = Logic.getFileFromUrl(folderModel.folder)
+                        if (! textField.text.endsWith("/"))
+                            textField.text += "/"
                         textField.cursorPosition = textField.length
                     }
             }
