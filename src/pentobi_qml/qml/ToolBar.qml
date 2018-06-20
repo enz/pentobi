@@ -21,7 +21,6 @@ RowLayout {
         }
         Layout.fillWidth: true
         Layout.leftMargin: root.height / 10
-        renderType: Text.NativeRendering
         color: theme.toolBarTextColor
         elide: Text.ElideRight
 
