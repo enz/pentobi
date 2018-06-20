@@ -21,7 +21,7 @@ Dialog {
     onVisibleChanged: {
         if (visible) {
             view.currentIndex = -1
-            textField.text = Logic.getFileFromUrl(folderModel.folder)
+            textField.text = Logic.getFileFromUrl(folderModel.folder) + "/"
         }
     }
     onAccepted: {
@@ -52,7 +52,7 @@ Dialog {
                     if (hasParent) {
                         folderModel.folder = folderModel.parentFolder
                         view.currentIndex = -1
-                        textField.text = Logic.getFileFromUrl(folderModel.folder)
+                        textField.text = Logic.getFileFromUrl(folderModel.folder) + "/"
                         textField.cursorPosition = textField.length
                     }
             }
@@ -107,7 +107,7 @@ Dialog {
                                     folderModel.folder = folderModel.folder + "/"
                                 folderModel.folder = folderModel.folder + fileName
                                 view.currentIndex = -1
-                                textField.text = Logic.getFileFromUrl(folderModel.folder)
+                                textField.text = Logic.getFileFromUrl(folderModel.folder) + "/"
                                 textField.cursorPosition = textField.length
                             }
                             else {
