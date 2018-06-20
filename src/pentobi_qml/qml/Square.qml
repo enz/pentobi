@@ -24,7 +24,6 @@ Item {
                 source: imageName
                 sourceSize: imageSourceSize
                 mipmap: true
-                antialiasing: true
             }
         }
     }
@@ -46,7 +45,6 @@ Item {
                 source: imageName
                 sourceSize: imageSourceSize
                 mipmap: true
-                antialiasing: true
                 rotation: -90
             }
         }
@@ -69,7 +67,6 @@ Item {
                 source: imageName
                 sourceSize: imageSourceSize
                 mipmap: true
-                antialiasing: true
                 rotation: -180
             }
         }
@@ -92,7 +89,6 @@ Item {
                 source: imageName
                 sourceSize: imageSourceSize
                 mipmap: true
-                antialiasing: true
                 rotation: -270
             }
         }
