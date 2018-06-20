@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Window 2.2
 
 Item {
     id: root
@@ -38,17 +39,17 @@ Item {
     property int rows:
         isTrigon ? (columns + 1) / 2 : isGembloQ ? columns / 2 : columns
 
-    // Avoid fractional piece element sizes if the piece elements are squares
     property real gridWidth: {
+        // Avoid fractional piece element sizes if the piece elements are squares
         var sideLength
         if (isTrigon) sideLength = Math.min(width, Math.sqrt(3) * height)
         else sideLength = Math.min(width, height)
         var n = columns
         if (showCoordinates) n += (isTrigon ? 3 : 2)
         if (isTrigon) return sideLength / (n + 1)
-        if (isNexos) return Math.floor(sideLength / (n - 0.5))
-        if (isGembloQ) return Math.floor(2 * sideLength / n) / 2
-        return Math.floor(sideLength / n)
+        if (isNexos) return Math.floor(sideLength * Screen.devicePixelRatio / (n - 0.5)) / Screen.devicePixelRatio
+        if (isGembloQ) return Math.floor(2 * sideLength * Screen.devicePixelRatio / n) / 2 / Screen.devicePixelRatio
+        return Math.floor(sideLength * Screen.devicePixelRatio / n) / Screen.devicePixelRatio
     }
     property real gridHeight: {
         if (isTrigon) return Math.sqrt(3) * gridWidth
