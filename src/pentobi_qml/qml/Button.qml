@@ -7,16 +7,17 @@ import QtQuick.Controls 2.0
 Button {
     id: root
 
-    property string imageSource
+    property alias imageSource: image.source
 
     contentItem: Image {
+        id: image
+
         sourceSize {
             // Try to use 22x22, unless high DPI
             width: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
             height: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
         }
         fillMode: Image.PreserveAspectFit
-        source: imageSource
         opacity: root.enabled ? 1 : 0.4
     }
     background: Rectangle {
