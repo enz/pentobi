@@ -15,12 +15,10 @@ Grid {
         MouseArea {
             id: mouseArea
 
-            property var piece: modelData
-
             width: root.width / columns; height: width
-            visible: ! piece.pieceModel.isPlayed
-            onClicked: piecePicked(piece)
-            Component.onCompleted: piece.parentUnplayed = mouseArea
+            visible: ! modelData.pieceModel.isPlayed
+            onClicked: piecePicked(modelData)
+            Component.onCompleted: modelData.parentUnplayed = mouseArea
         }
     }
 }
