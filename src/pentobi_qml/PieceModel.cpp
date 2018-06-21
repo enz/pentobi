@@ -262,9 +262,9 @@ QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
             bool isDownward =
                     (geo.get_point_type(p) == (isOriginDownward ? 0 : 1));
             if (isDownward)
-                centerY = static_cast<qreal>(p.y) + 1.f / 3;
+                centerY = p.y + static_cast<qreal>(1) / 3;
             else
-                centerY = static_cast<qreal>(p.y) + 2.f / 3;
+                centerY = p.y + static_cast<qreal>(2) / 3;
         }
         else
             centerY = p.y + 0.5;
