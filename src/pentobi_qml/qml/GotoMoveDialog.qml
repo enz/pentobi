@@ -10,7 +10,7 @@ Dialog {
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
     Column {
-        width: Math.min(label.height * 15, 0.95 * rootWindow.width)
+        width: Math.min(label.height * 15, 0.9 * rootWindow.width)
 
         Label {
             id: label

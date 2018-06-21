@@ -17,7 +17,7 @@ Dialog {
 
     Column
     {
-        width: Math.min(initialRatingLabel.height * 25, 0.95 * rootWindow.width)
+        width: Math.min(initialRatingLabel.height * 25, 0.9 * rootWindow.width)
         spacing: Screen.pixelDensity * 2
 
         Label {

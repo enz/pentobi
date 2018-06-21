@@ -30,7 +30,7 @@ Dialog {
     }
 
     Column {
-        width: Math.min(textField.height * 20, 0.95 * rootWindow.width)
+        width: Math.min(textField.height * 20, 0.9 * rootWindow.width)
         spacing: Math.round(Screen.pixelDensity * 1.5)
 
         TextField {

@@ -16,7 +16,7 @@ Dialog {
 
     Column {
         spacing: Math.round(Screen.pixelDensity * 1.5)
-        width: Math.min(label.height * 15, 0.95 * rootWindow.width)
+        width: Math.min(label.height * 15, 0.9 * rootWindow.width)
 
         Label {
             id: label

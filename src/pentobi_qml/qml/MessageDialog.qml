@@ -24,7 +24,7 @@ Dialog {
 
     Column
     {
-        width: Math.min(label.font.pixelSize * 30, 0.95 * rootWindow.width)
+        width: Math.min(label.font.pixelSize * 30, 0.9 * rootWindow.width)
 
         Label {
             id: label

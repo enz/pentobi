@@ -80,14 +80,14 @@ Dialog {
         RatingGraph {
             visible: history.length > 1
             history: ratingModel.history
-            implicitWidth: Math.min(labelYourRating.font.pixelSize * 25, 0.95 * rootWindow.width)
+            implicitWidth: Math.min(labelYourRating.font.pixelSize * 25, 0.9 * rootWindow.width)
             implicitHeight: implicitWidth / 3
         }
 
         ScrollView
         {
             visible: history.length > 0
-            implicitWidth: Math.min(labelYourRating.font.pixelSize * 25, 0.95 * rootWindow.width)
+            implicitWidth: Math.min(labelYourRating.font.pixelSize * 25, 0.9 * rootWindow.width)
             implicitHeight: implicitWidth / 3
             clip: true
 
