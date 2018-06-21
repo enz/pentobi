@@ -4,16 +4,15 @@ import QtWebView 1.1
 import pentobi 1.0
 
 Window {
-    property string language: {
-        var s = Qt.locale().name
-        var pos = s.indexOf("_")
+    property url startUrl: {
+        var lang = Qt.locale().name
+        var pos = lang.indexOf("_")
         if (pos >= 0)
-            s = s.substr(0, pos)
-        if (s !== "C" && s !== "de")
-            s = "C"
-        return s
+            lang = lang.substr(0, pos)
+        if (lang !== "C" && lang !== "de")
+            lang = "C"
+        helpFileExtractor.extract(lang)
     }
-    property url startUrl: helpFileExtractor.extract(language)
 
     // Instead of initializing webView.url with startUrl, we provide an init
     // function that needs to be called after show() to work around an issue
