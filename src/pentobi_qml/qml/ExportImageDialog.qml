@@ -13,14 +13,12 @@ Dialog {
     }
 
     Column {
-        width: Math.min(label.height * 15, 0.95 * rootWindow.width)
+        width: Math.min(textField.height * 8, 0.9 * rootWindow.width)
 
-        Label {
-            id: label
-
-            text: qsTr("Image width:")
-        }
+        Label { text: qsTr("Image width:") }
         TextField {
+            id: textField
+
             text: exportImageWidth
             width: parent.width
             inputMethodHints: Qt.ImhDigitsOnly
