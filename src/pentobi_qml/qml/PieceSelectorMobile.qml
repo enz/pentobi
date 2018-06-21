@@ -5,14 +5,14 @@ Flickable {
 
     property string gameVariant
     property int toPlay
-    property var pieces0
-    property var pieces1
-    property var pieces2
-    property var pieces3
+    property alias pieces0: pieceList0.pieces
+    property alias pieces1: pieceList1.pieces
+    property alias pieces2: pieceList2.pieces
+    property alias pieces3: pieceList3.pieces
     property int nuColors
     property int columns
     property real spacingPieceLists
-    property bool transitionsEnabled
+    property alias transitionsEnabled: transition.enabled
 
     signal piecePicked(var piece)
 
@@ -26,7 +26,6 @@ Flickable {
 
         width: root.width
         columns: root.columns
-        pieces: pieces0
         onPiecePicked: root.piecePicked(piece)
     }
     PieceList {
@@ -34,7 +33,6 @@ Flickable {
 
         width: root.width
         columns: root.columns
-        pieces: pieces1
         onPiecePicked: root.piecePicked(piece)
     }
     PieceList {
@@ -42,7 +40,6 @@ Flickable {
 
         width: root.width
         columns: root.columns
-        pieces: pieces2
         onPiecePicked: root.piecePicked(piece)
     }
     PieceList {
@@ -50,7 +47,6 @@ Flickable {
 
         width: root.width
         columns: root.columns
-        pieces: pieces3
         onPiecePicked: root.piecePicked(piece)
     }
 
@@ -190,30 +186,30 @@ Flickable {
     ]
     transitions:
         Transition {
-        enabled: transitionsEnabled
+            id: transition
 
-        SequentialAnimation {
-            PropertyAction {
-                target: pieceList0; property: "y"; value: pieceList0.y }
-            PropertyAction {
-                target: pieceList1; property: "y"; value: pieceList1.y }
-            PropertyAction {
-                target: pieceList2; property: "y"; value: pieceList2.y }
-            PropertyAction {
-                target: pieceList3; property: "y"; value: pieceList3.y }
-            // Delay showing new color because of piece placement animation
-            PauseAnimation { duration: 200 }
-            NumberAnimation {
-                target: root; property: "opacity"; to: 0; duration: 100
+            SequentialAnimation {
+                PropertyAction {
+                    target: pieceList0; property: "y"; value: pieceList0.y }
+                PropertyAction {
+                    target: pieceList1; property: "y"; value: pieceList1.y }
+                PropertyAction {
+                    target: pieceList2; property: "y"; value: pieceList2.y }
+                PropertyAction {
+                    target: pieceList3; property: "y"; value: pieceList3.y }
+                // Delay showing new color because of piece placement animation
+                PauseAnimation { duration: 200 }
+                NumberAnimation {
+                    target: root; property: "opacity"; to: 0; duration: 100
+                }
+                PropertyAction { target: pieceList0; property: "y" }
+                PropertyAction { target: pieceList1; property: "y" }
+                PropertyAction { target: pieceList2; property: "y" }
+                PropertyAction { target: pieceList3; property: "y" }
+                PropertyAction { target: root; property: "contentY"; value: 0 }
+                NumberAnimation {
+                    target: root; property: "opacity"; to: 1; duration: 100
+                }
             }
-            PropertyAction { target: pieceList0; property: "y" }
-            PropertyAction { target: pieceList1; property: "y" }
-            PropertyAction { target: pieceList2; property: "y" }
-            PropertyAction { target: pieceList3; property: "y" }
-            PropertyAction { target: root; property: "contentY"; value: 0 }
-            NumberAnimation {
-                target: root; property: "opacity"; to: 1; duration: 100
-            }
-        }
     }
 }
