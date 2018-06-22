@@ -231,8 +231,6 @@ void GameModel::androidScanFile(const QString& pathname)
     auto ACTION_MEDIA_SCANNER_SCAN_FILE =
             QAndroidJniObject::getStaticObjectField<jstring>(
                 "android/content/Intent", "ACTION_MEDIA_SCANNER_SCAN_FILE");
-    QAndroidJniObject intent("android/content/Intent", "(Ljava/lang/String;)V",
-                             ACTION_MEDIA_SCANNER_SCAN_FILE.object<jstring>());
     auto pathnameString = QAndroidJniObject::fromString(pathname);
     QAndroidJniObject file("java/io/File", "(Ljava/lang/String;)V",
                            pathnameString.object<jstring>());
@@ -241,9 +239,10 @@ void GameModel::androidScanFile(const QString& pathname)
     auto uri = QAndroidJniObject::callStaticObjectMethod(
                 "android/net/Uri", "fromFile",
                 "(Ljava/io/File;)Landroid/net/Uri;", absoluteFile.object());
-    intent.callObjectMethod("setData",
-                            "(Landroid/net/Uri;)Landroid/content/Intent;",
-                            uri.object());
+    QAndroidJniObject intent("android/content/Intent",
+                             "(Ljava/lang/String;Landroid/net/Uri;)V",
+                             ACTION_MEDIA_SCANNER_SCAN_FILE.object<jstring>(),
+                             uri.object());
     auto activity = QtAndroid::androidActivity();
     activity.callMethod<void>("sendBroadcast", "(Landroid/content/Intent;)V",
                               intent.object());
