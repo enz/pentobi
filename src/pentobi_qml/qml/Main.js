@@ -186,10 +186,13 @@ function exportImage(fileUrl) {
     var board = gameDisplay.getBoard()
     var size = Qt.size(exportImageWidth, exportImageWidth * board.height / board.width)
     if (! board.grabToImage(function(result) {
-        if (! result.saveToFile(getFileFromUrl(fileUrl)))
+        var file = getFileFromUrl(fileUrl)
+        if (! result.saveToFile(file))
             showInfo(qsTr("Saving image failed."))
-        else
+        else {
+            gameModel.androidScanFile(file)
             showTemporaryMessage(qsTr("Image saved."))
+        }
     }, size))
         showInfo(qsTr("Creating image failed."))
 }

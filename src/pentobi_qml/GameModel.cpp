@@ -23,6 +23,11 @@
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
 
+#ifdef Q_OS_ANDROID
+#include <QtAndroidExtras/QtAndroid>
+#include <QtAndroidExtras/QAndroidJniObject>
+#endif
+
 using namespace std;
 using libboardgame_sgf::SgfError;
 using libboardgame_sgf::TreeReader;
@@ -212,6 +217,37 @@ void GameModel::addSetup(PieceModel* pieceModel, QPointF coord)
     }
     setSetupPlayer();
     updateProperties();
+}
+
+/** Request the Android media scanner to scan a file.
+    This ensures that the file will be visible via MTP. */
+void GameModel::androidScanFile(const QString& pathname)
+{
+#ifdef Q_OS_ANDROID
+    // Corresponding Java code:
+    //     Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+    //     intent.setData(Uri.fromFile(File(pathname).getAbsolutePath()));
+    //     sendBroadcast(intent);
+    auto ACTION_MEDIA_SCANNER_SCAN_FILE =
+            QAndroidJniObject::getStaticObjectField<jstring>(
+                "android/content/Intent", "ACTION_MEDIA_SCANNER_SCAN_FILE");
+    QAndroidJniObject intent("android/content/Intent", "(Ljava/lang/String;)V",
+                             ACTION_MEDIA_SCANNER_SCAN_FILE.object<jstring>());
+    auto pathnameString = QAndroidJniObject::fromString(pathname);
+    QAndroidJniObject file("java/io/File", "(Ljava/lang/String;)V",
+                           pathnameString.object<jstring>());
+    auto absoluteFile = file.callObjectMethod(
+                "getAbsoluteFile", "()Ljava/io/File;", file.object());
+    auto uri = QAndroidJniObject::callStaticObjectMethod(
+                "android/net/Uri", "fromFile",
+                "(Ljava/io/File;)Landroid/net/Uri;", absoluteFile.object());
+    intent.callObjectMethod("setData",
+                            "(Landroid/net/Uri;)Landroid/content/Intent;",
+                            uri.object());
+    auto activity = QtAndroid::androidActivity();
+    activity.callMethod<void>("sendBroadcast", "(Landroid/content/Intent;)V",
+                              intent.object());
+#endif
 }
 
 void GameModel::autoSave()
@@ -1093,6 +1129,7 @@ bool GameModel::save(const QString& file)
             return false;
         }
     }
+    androidScanFile(file);
     updateFileInfo(file);
     setIsModified(false);
     addRecentFile(file);
@@ -1108,6 +1145,7 @@ bool GameModel::saveAsciiArt(const QString& file)
         m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
+    androidScanFile(file);
     return true;
 }
 

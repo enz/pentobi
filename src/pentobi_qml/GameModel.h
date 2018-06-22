@@ -132,6 +132,14 @@ public:
         location. */
     Q_INVOKABLE GameMove* addEmpty(const QPoint& pos);
 
+    /** Request the Android media scanner to scan a file.
+        Ensures that the file will be visible via MTP. This function is
+        automatically invoked after a saving to a file but it is part of the
+        public interface because there are use cases where the same
+        functionality is needed in QML (e.g. after
+        ItemGrabResult.saveToFile()) */
+    Q_INVOKABLE void androidScanFile(const QString& pathname);
+
     Q_INVOKABLE void deleteAllVar();
 
     Q_INVOKABLE bool findNextComment();

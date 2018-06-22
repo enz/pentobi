@@ -8,6 +8,8 @@ General:
 Android version:
 
 * The minimum required Qt version is now 5.11.
+* Saved files should now immediately be visible from computers connecting
+  with the Android device via MTP (might not work on all devices).
 * An error message is now shown when an invalid loaded SGF file causes
   a problem later (e.g. invalid move property value in a side variation).
 
