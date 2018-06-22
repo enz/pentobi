@@ -225,9 +225,8 @@ void GameModel::androidScanFile(const QString& pathname)
 {
 #ifdef Q_OS_ANDROID
     // Corresponding Java code:
-    //     Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-    //     intent.setData(Uri.fromFile(File(pathname).getCanonicalFile()));
-    //     sendBroadcast(intent);
+    //   sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+    //                       Uri.fromFile(File(pathname).getCanonicalFile())));
     auto ACTION_MEDIA_SCANNER_SCAN_FILE =
             QAndroidJniObject::getStaticObjectField<jstring>(
                 "android/content/Intent", "ACTION_MEDIA_SCANNER_SCAN_FILE");
