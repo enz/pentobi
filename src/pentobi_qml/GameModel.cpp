@@ -226,7 +226,7 @@ void GameModel::androidScanFile(const QString& pathname)
 #ifdef Q_OS_ANDROID
     // Corresponding Java code:
     //     Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-    //     intent.setData(Uri.fromFile(File(pathname).getAbsolutePath()));
+    //     intent.setData(Uri.fromFile(File(pathname).getCanonicalFile()));
     //     sendBroadcast(intent);
     auto ACTION_MEDIA_SCANNER_SCAN_FILE =
             QAndroidJniObject::getStaticObjectField<jstring>(
@@ -237,7 +237,7 @@ void GameModel::androidScanFile(const QString& pathname)
     QAndroidJniObject file("java/io/File", "(Ljava/lang/String;)V",
                            pathnameString.object<jstring>());
     auto absoluteFile = file.callObjectMethod(
-                "getAbsoluteFile", "()Ljava/io/File;", file.object());
+                "getCanonicalFile", "()Ljava/io/File;", file.object());
     auto uri = QAndroidJniObject::callStaticObjectMethod(
                 "android/net/Uri", "fromFile",
                 "(Ljava/io/File;)Landroid/net/Uri;", absoluteFile.object());
