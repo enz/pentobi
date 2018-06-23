@@ -137,8 +137,8 @@ Item
                 }
                 NavigationButtons
                 {
-                    height: width / 6
                     Layout.fillWidth: true
+                    Layout.preferredHeight: Math.min(implicitButtonWidth, parent.width / 6)
                 }
             }
         }
