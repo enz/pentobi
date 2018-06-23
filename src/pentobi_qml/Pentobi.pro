@@ -7,7 +7,10 @@ equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 11) {
 
 TEMPLATE = app
 
-QT += qml quick svg concurrent webview androidextras
+QT += qml quick svg concurrent webview
+android {
+    QT += androidextras
+}
 
 INCLUDEPATH += ..
 CONFIG += c++14
