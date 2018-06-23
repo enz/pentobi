@@ -17,7 +17,6 @@ Item {
     ]
     property real margin: makeCrispY(width / 60, y)
     property int markMoveNumber: analyzeGameModel.markMoveNumber
-    property int maxMoves: gameDisplay.pieces0.length * gameModel.nuColors
     property QtObject theme
 
     // Distance between moves on the x axis
@@ -56,7 +55,9 @@ Item {
             ctx.translate(margin, margin)
             w -= 2 * margin
             h -= 2 * margin
-            var d = w / (Math.max(maxMoves, 1))
+            // Use the whole width unless few moves (0.4 * maxMoves) have been played
+            var nuBins = Math.ceil(Math.max(nuMoves, 0.4 * gameDisplay.pieces0.length * gameModel.nuColors))
+            var d = w / nuBins
             dist = d
 
             ctx.beginPath()
