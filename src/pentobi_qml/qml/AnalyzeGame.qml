@@ -26,7 +26,7 @@ Item {
     // Modify dy, such that y + dy is an odd multiple of 0.5 for crisp
     // horizontal lines with linewidth 1
     function makeCrispY(dy, y) {
-        return (dy * Screen.devicePixelRatio - ((y + dy) * Screen.devicePixelRatio - Math.floor((y + dy) * Screen.devicePixelRatio)) + 0.5 * Screen.devicePixelRatio) / Screen.devicePixelRatio
+        return dy - ((y + dy) - Math.floor((y + dy) * Screen.devicePixelRatio) / Screen.devicePixelRatio) + 0.5
     }
 
     onElementsChanged: {
