@@ -3,6 +3,7 @@ Version 14.UNKNOWN (master)
 
 General:
 
+* New UI translations: French, Norsk bokmål (thanks to Allan Nordhøy)
 * Disable menu item "Keep Only Position" if position is empty board.
 
 Android version:
