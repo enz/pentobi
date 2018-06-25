@@ -255,6 +255,8 @@ void GameModel::androidScanFile(const QString& pathname)
     auto activity = QtAndroid::androidActivity();
     activity.callMethod<void>("sendBroadcast", "(Landroid/content/Intent;)V",
                               intent.object());
+#else
+    LIBBOARDGAME_UNUSED(pathname);
 #endif
 }
 
