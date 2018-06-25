@@ -46,7 +46,7 @@ Dialog {
         TextField {
             id: textFieldPlayerName0
 
-            Layout.maximumWidth: font.pixelSize * 15
+            Layout.maximumWidth: font.pixelSize * 12
         }
         Label {
             text: {
@@ -62,7 +62,7 @@ Dialog {
         TextField {
             id: textFieldPlayerName1
 
-            Layout.maximumWidth: font.pixelSize * 15
+            Layout.maximumWidth: font.pixelSize * 12
         }
         Label {
             visible: textFieldPlayerName2.visible
@@ -72,7 +72,7 @@ Dialog {
             id: textFieldPlayerName2
 
             visible: gameModel.nuPlayers > 2
-            Layout.maximumWidth: font.pixelSize * 15
+            Layout.maximumWidth: font.pixelSize * 12
         }
         Label {
             visible: textFieldPlayerName3.visible
@@ -82,31 +82,31 @@ Dialog {
             id: textFieldPlayerName3
 
             visible: gameModel.nuPlayers > 3
-            Layout.maximumWidth: font.pixelSize * 15
+            Layout.maximumWidth: font.pixelSize * 12
         }
         Label { text: qsTr("Date:") }
         TextField {
             id: textFieldDate
 
-            Layout.maximumWidth: font.pixelSize * 15
+            Layout.maximumWidth: font.pixelSize * 12
         }
         Label { text: qsTr("Time:") }
         TextField {
             id: textFieldTime
 
-            Layout.maximumWidth: font.pixelSize * 15
+            Layout.maximumWidth: font.pixelSize * 12
         }
         Label { text: qsTr("Event:") }
         TextField {
             id: textFieldEvent
 
-            Layout.maximumWidth: font.pixelSize * 15
+            Layout.maximumWidth: font.pixelSize * 12
         }
         Label { text: qsTr("Round:") }
         TextField {
             id: textFieldRound
 
-            Layout.maximumWidth: font.pixelSize * 15
+            Layout.maximumWidth: font.pixelSize * 12
         }
     }
 }
