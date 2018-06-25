@@ -699,51 +699,51 @@
     </message>
     <message>
         <source>The game ends in a tie.</source>
-        <translation>Das Spiel endet in einem Unentschieden.</translation>
+        <translation>Das Spiel endet unentschieden.</translation>
     </message>
     <message>
         <source>The game ends in a tie between all colors.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen allen Farben.</translation>
+        <translation>Das Spiel endet unentschieden zwischen allen Farben.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue, Yellow and Red.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen Blau, Gelb und Rot.</translation>
+        <translation>Das Spiel endet unentschieden zwischen Blau, Gelb und Rot.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue, Yellow and Green.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen Blau, Gelb und Grün.</translation>
+        <translation>Das Spiel endet unentschieden zwischen Blau, Gelb und Grün.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue, Red and Green.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen Blau, Rot und Grün.</translation>
+        <translation>Das Spiel endet unentschieden zwischen Blau, Rot und Grün.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Yellow, Red and Green.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen Gelb, Rot und Grün.</translation>
+        <translation>Das Spiel endet unentschieden zwischen Gelb, Rot und Grün.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue and Yellow.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen Blau und Gelb.</translation>
+        <translation>Das Spiel endet unentschieden zwischen Blau und Gelb.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue and Red.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen Blau und Rot.</translation>
+        <translation>Das Spiel endet unentschieden zwischen Blau und Rot.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Blue and Green.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen Blau und Grün.</translation>
+        <translation>Das Spiel endet unentschieden zwischen Blau und Grün.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Yellow and Red.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen Gelb und Rot.</translation>
+        <translation>Das Spiel endet unentschieden zwischen Gelb und Rot.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Yellow and Green.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen Gelb und Grün.</translation>
+        <translation>Das Spiel endet unentschieden zwischen Gelb und Grün.</translation>
     </message>
     <message>
         <source>The game ends in a tie between Red and Green.</source>
-        <translation>Das Spiel endet in einem Unentschieden zwischen Rot und Grün.</translation>
+        <translation>Das Spiel endet unentschieden zwischen Rot und Grün.</translation>
     </message>
     <message>
         <source>Blue wins.</source>
