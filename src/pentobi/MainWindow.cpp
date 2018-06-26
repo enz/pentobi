@@ -304,8 +304,7 @@ void MainWindow::analyzeGame()
         return;
     int speed = dialog.getSpeedValue();
     cancelThread();
-    if (m_analyzeGameWindow != nullptr)
-        delete m_analyzeGameWindow;
+    delete m_analyzeGameWindow;
     m_analyzeGameWindow = new AnalyzeGameWindow(this);
     // Make sure all action shortcuts work when the analyze dialog has the
     // focus apart from m_actionLeaveFullscreen because the Esc key is used
