@@ -343,7 +343,7 @@ T SgfNode::parse_property(const string& id, const T& default_value) const
 
 inline void SgfNode::remove_children()
 {
-    return m_first_child.reset();
+    m_first_child.reset();
 }
 
 template<typename T>

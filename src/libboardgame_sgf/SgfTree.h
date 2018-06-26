@@ -225,7 +225,7 @@ inline void SgfTree::remove_children(const SgfNode& node)
 {
     if (node.has_children())
         m_modified = true;
-    return non_const(node).remove_children();
+    non_const(node).remove_children();
 }
 
 inline void SgfTree::set_charset(const string& charset)
