@@ -491,7 +491,7 @@
     </message>
     <message>
         <source>Blokus games (*.blksgf);;All files (*)</source>
-        <translation>Parties de Blokus (*.blksgf) ; Tous les fichiers (*)</translation>
+        <translation>Parties de Blokus (*.blksgf);;Tous les fichiers (*)</translation>
     </message>
     <message>
         <source>Move number:</source>
@@ -583,7 +583,7 @@
     </message>
     <message>
         <source>Do you want to save your changes?</source>
-        <translation>Voulez-vous enregistrer vos modifications ?</translation>
+        <translation>Voulez-vous enregistrer vos modifications&#xa0;?</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
@@ -663,7 +663,7 @@
     </message>
     <message>
         <source>Continue the search from the start of the tree?</source>
-        <translation>Continuer la recherche depuis la racine ?</translation>
+        <translation>Continuer la recherche depuis la racine&#xa0;?</translation>
     </message>
     <message>
         <source>Continue From Start</source>
