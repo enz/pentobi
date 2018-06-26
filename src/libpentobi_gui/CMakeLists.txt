@@ -45,7 +45,7 @@ add_library(pentobi_gui STATIC
 
 target_compile_definitions(pentobi_gui PRIVATE
     -DQT_DEPRECATED_WARNINGS
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x051000)
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x051100)
 
 target_link_libraries(pentobi_gui Qt5::Widgets)
 
