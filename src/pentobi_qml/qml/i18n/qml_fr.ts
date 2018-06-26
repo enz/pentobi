@@ -192,7 +192,7 @@
     </message>
     <message>
         <source>Yellow/Green wins with %L1 points.</source>
-        <translation>Jaune/vert gagne avec % L1 points.</translation>
+        <translation>Jaune/vert gagne avec %L1 points.</translation>
     </message>
     <message>
         <source>Yellow/Green wins (tie resolved).</source>
