@@ -15,8 +15,6 @@ using namespace std;
 
 void analyze(const string& file);
 
-void splitsgf(const string& file);
-
 //-----------------------------------------------------------------------------
 
 #endif // TWOGTP_ANALYZE_H
