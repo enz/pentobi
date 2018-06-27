@@ -98,16 +98,26 @@ int main(int argc, char* argv[])
                 settings.value("TranslationsLibPentobiGuiDir").toString();
         }
 
+        QString locale = QLocale::system().name();
+
+        // qtbase_minimal is included for languages not yet supported by Qt
+        // and contains only the translations for qtbase that we need
+        QTranslator qtMinimalTranslator;
+        qtMinimalTranslator.load("qtbase_minimal_" + locale,
+                                 translationsPentobiDir);
+        app.installTranslator(&qtMinimalTranslator);
+
         QTranslator qtTranslator;
         QString qtTranslationPath =
             QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-        QString locale = QLocale::system().name();
         qtTranslator.load("qt_" + locale, qtTranslationPath);
         app.installTranslator(&qtTranslator);
+
         QTranslator libPentobiGuiTranslator;
         libPentobiGuiTranslator.load("libpentobi_gui_" + locale,
                                      translationsLibPentobiGuiDir);
         app.installTranslator(&libPentobiGuiTranslator);
+
         QTranslator pentobiTranslator;
         pentobiTranslator.load("pentobi_" + locale, translationsPentobiDir);
         app.installTranslator(&pentobiTranslator);
