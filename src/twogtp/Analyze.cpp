@@ -40,6 +40,7 @@ void write_result(const Statistics<>& stat)
 
 void analyze(const string& file)
 {
+    FmtSaver saver(cout);
     ifstream in(file);
     Statistics<> stat_result;
     map<unsigned, Statistics<>> stat_result_player;
