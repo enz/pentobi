@@ -53,7 +53,7 @@ public:
         @param points The coordinates of the piece elements.
         @param geo
         @param transforms
-        @param piece_set
+        @param geometry_type
         @param label_pos The coordinates for drawing a label on the piece.
         @param nu_instances The number of instances of the piece per player. */
     PieceInfo(const string& name, const Points& points,
