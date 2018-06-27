@@ -857,7 +857,7 @@
     </message>
     <message>
         <source>&amp;GembloQ</source>
-        <translation>&amp;</translation>
+        <translation>&amp;GembloQ</translation>
     </message>
     <message>
         <source>GembloQ (&amp;2 Players, 2 Colors)</source>

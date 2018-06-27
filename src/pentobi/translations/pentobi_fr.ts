@@ -354,7 +354,7 @@
     </message>
     <message>
         <source>Previous Piece</source>
-        <translation>Pièce &amp;précédente</translation>
+        <translation>Pièce précédente</translation>
     </message>
     <message>
         <source>&amp;Previous Variation</source>

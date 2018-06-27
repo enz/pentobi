@@ -21,7 +21,7 @@
     </message>
     <message>
         <source>&amp;Yellow</source>
-        <translation>&amp;Gul</translation>
+        <translation>G&amp;ul</translation>
     </message>
     <message>
         <source>&amp;Red</source>
@@ -63,7 +63,7 @@
     <message>
         <source>Player &amp;Yellow:</source>
         <oldsource>Player Yellow:</oldsource>
-        <translation>&amp;Gul spiller:</translation>
+        <translation>G&amp;ul spiller:</translation>
     </message>
     <message>
         <source>Player &amp;Red:</source>
@@ -73,12 +73,12 @@
     <message>
         <source>Player &amp;Blue/Red:</source>
         <oldsource>Player Blue/Red:</oldsource>
-        <translation>Blå/rød spiller:</translation>
+        <translation>&amp;Blå/rød spiller:</translation>
     </message>
     <message>
         <source>Player &amp;Yellow/Green:</source>
         <oldsource>Player Yellow/Green:</oldsource>
-        <translation>Gul/grønn spiller:</translation>
+        <translation>&amp;Gul/grønn spiller:</translation>
     </message>
     <message>
         <source>&amp;Date:</source>
