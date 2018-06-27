@@ -3,7 +3,7 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.FileDialog {
-    title: qsTr("Save Image")
+    title: isAndroid ? "" : qsTr("Save Image")
     selectExisting: false
     nameFilterText: qsTr("PNG image files (*.png)")
     nameFilter: "*.png"

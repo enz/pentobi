@@ -9,7 +9,7 @@ Dialog {
     property var history: ratingModel.history
 
     //: Window title for the rating dialog.
-    title: qsTr("Rating")
+    title: isAndroid ? "" : qsTr("Rating")
     x: (rootWindow.width - width) / 2
     y: (rootWindow.height - height) / 2
     parent: ApplicationWindow.overlay

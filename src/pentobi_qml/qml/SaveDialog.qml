@@ -3,7 +3,7 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.FileDialog {
-    title: qsTr("Save")
+    title: isAndroid ? "" : qsTr("Save")
     selectExisting: false
     nameFilterText: qsTr("Blokus games (*.blksgf)")
     nameFilter: "*.blksgf"

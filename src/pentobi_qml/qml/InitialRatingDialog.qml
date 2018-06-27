@@ -5,7 +5,7 @@ import QtQuick.Window 2.0
 import "Main.js" as Logic
 
 Dialog {
-    title: qsTr("Initial Rating")
+    title: isAndroid ? "" : qsTr("Initial Rating")
     standardButtons: Dialog.Ok | Dialog.Cancel
     x: (rootWindow.width - width) / 2
     y: (rootWindow.height - height) / 2

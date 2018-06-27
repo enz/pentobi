@@ -8,7 +8,7 @@ Dialog {
     property alias computerPlays2: checkBox2.checked
     property alias computerPlays3: checkBox3.checked
 
-    title: qsTr("Computer Colors")
+    title: isAndroid ? "" : qsTr("Computer Colors")
     standardButtons: Dialog.Ok | Dialog.Cancel
     x: (rootWindow.width - width) / 2
     y: (rootWindow.height - height) / 2

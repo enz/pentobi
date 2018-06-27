@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 
 Dialog {
-    title: qsTr("Export Image")
+    title: isAndroid ? "" : qsTr("Export Image")
     standardButtons: Dialog.Ok | Dialog.Cancel
     x: (rootWindow.width - width) / 2
     y: (rootWindow.height - height) / 2

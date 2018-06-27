@@ -16,7 +16,7 @@ Dialog {
     x: (rootWindow.width - width) / 2
     y: (rootWindow.height - height) / 2
     parent: ApplicationWindow.overlay
-    title: qsTr("Game Info")
+    title: isAndroid ? "" : qsTr("Game Info")
     standardButtons: Dialog.Ok | Dialog.Cancel
     onAccepted: {
         gameModel.playerName0 = playerName0
