@@ -22,6 +22,8 @@ Dialog {
 
     Column
     {
+        spacing: Screen.pixelDensity * 2
+
         GridLayout {
             columns: 2
 
@@ -72,16 +74,18 @@ Dialog {
             }
         }
 
-        Label {
-            visible: history.length > 1
-            text: qsTr("Recent development:")
-            Layout.topMargin: Math.round(Screen.pixelDensity)
-        }
-        RatingGraph {
-            visible: history.length > 1
-            history: ratingModel.history
-            implicitWidth: Math.min(labelYourRating.font.pixelSize * 25, 0.9 * rootWindow.width)
-            implicitHeight: implicitWidth / 3
+        Column {
+            Label {
+                visible: history.length > 1
+                text: qsTr("Recent development:")
+                Layout.topMargin: Math.round(Screen.pixelDensity)
+            }
+            RatingGraph {
+                visible: history.length > 1
+                history: ratingModel.history
+                implicitWidth: Math.min(labelYourRating.font.pixelSize * 25, 0.9 * rootWindow.width)
+                implicitHeight: implicitWidth / 3
+            }
         }
 
         ScrollView
