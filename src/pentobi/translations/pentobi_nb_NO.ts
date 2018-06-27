@@ -6,7 +6,7 @@
     <message>
         <source>Win</source>
         <extracomment>Label for 100% win rate in analyze game graph</extracomment>
-        <translation type="unfinished">Vinn</translation>
+        <translation>Vinn</translation>
     </message>
     <message>
         <source>Loss</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Running game analysis...</source>
-        <translation type="unfinished">Kjører spillanalyse…</translation>
+        <translation>Kjører spillanalyse…</translation>
     </message>
 </context>
 <context>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>&amp;Analyze Game...</source>
-        <translation type="unfinished">&amp;Analyser spill…</translation>
+        <translation>&amp;Analyser spill…</translation>
     </message>
     <message>
         <source>B&amp;ackward</source>
@@ -176,7 +176,7 @@
     </message>
     <message>
         <source>&amp;End</source>
-        <translation type="unfinished">&amp;Slutt</translation>
+        <translation>&amp;Slutt</translation>
     </message>
     <message>
         <source>Go to end of moves</source>
@@ -960,15 +960,15 @@
     </message>
     <message>
         <source>Computer is thinking... (up to %1 seconds remaining)</source>
-        <translation type="unfinished">Datamaskinen tenker… (opptil %1 sekunder gjenstår)</translation>
+        <translation>Datamaskinen tenker… (opptil %1 sekunder gjenstår)</translation>
     </message>
     <message>
         <source>Computer is thinking... (up to %1 minutes remaining)</source>
-        <translation type="unfinished">Datamaskinen tenker… (opptil %1 minutter gjenstår)</translation>
+        <translation>Datamaskinen tenker… (opptil %1 minutter gjenstår)</translation>
     </message>
     <message>
         <source>Computer is thinking...</source>
-        <translation type="unfinished">Datamaskinen tenker…</translation>
+        <translation>Datamaskinen tenker…</translation>
     </message>
     <message>
         <source>GembloQ (&amp;3 Players)</source>
@@ -1075,7 +1075,7 @@
     </message>
     <message>
         <source>Win</source>
-        <translation type="unfinished">Vinn</translation>
+        <translation>Vinn</translation>
     </message>
     <message>
         <source>Tie</source>

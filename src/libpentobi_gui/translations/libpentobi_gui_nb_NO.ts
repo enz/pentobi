@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>&amp;Green</source>
-        <translation></translation>
+        <translation>&amp;Grønn</translation>
     </message>
     <message>
         <source>&amp;Yellow</source>
@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>&amp;Red</source>
-        <translation></translation>
+        <translation>&amp;Rød</translation>
     </message>
     <message>
         <source>&amp;Blue/Red</source>
@@ -41,7 +41,7 @@
     </message>
     <message>
         <source>&amp;Orange</source>
-        <translation></translation>
+        <translation>&amp;Oransje</translation>
     </message>
 </context>
 <context>
@@ -83,7 +83,7 @@
     <message>
         <source>&amp;Date:</source>
         <oldsource>Date:</oldsource>
-        <translation></translation>
+        <translation>&amp;Dato:</translation>
     </message>
     <message>
         <source>&amp;Time limits:</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>&amp;Event:</source>
-        <translation></translation>
+        <translation>&amp;Hendelse:</translation>
     </message>
     <message>
         <source>R&amp;ound:</source>
@@ -156,7 +156,7 @@
     </message>
     <message>
         <source>Green</source>
-        <translation></translation>
+        <translation>Grønn</translation>
     </message>
     <message>
         <source>Yellow</source>
@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>Red</source>
-        <translation></translation>
+        <translation>Rød</translation>
     </message>
     <message>
         <source>Blue/Red</source>
@@ -180,7 +180,7 @@
     </message>
     <message>
         <source>Orange</source>
-        <translation></translation>
+        <translation>Oransje</translation>
     </message>
 </context>
 </TS>
