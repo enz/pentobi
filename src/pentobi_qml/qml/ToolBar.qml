@@ -27,8 +27,10 @@ RowLayout {
         MouseArea {
             anchors.fill: parent
             onClicked:
-                if (gameDisplay.setupMode)
+                if (gameDisplay.setupMode) {
                     gameDisplay.setupMode = false
+                    Logic.setComputerNone()
+                }
                 else if (gameModel.file != "") {
                     if (gameModel.isModified)
                         Logic.showInfo(qsTr("File (modified): %1").arg(gameModel.file))

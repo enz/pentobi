@@ -114,7 +114,10 @@ Pentobi.Menu {
         checked: gameDisplay.setupMode
         onTriggered: {
             gameDisplay.setupMode = checked
-            if (checked) gameDisplay.showPieces()
+            if (checked)
+                gameDisplay.showPieces()
+            else
+                Logic.setComputerNone()
         }
     }
     MenuItem {
