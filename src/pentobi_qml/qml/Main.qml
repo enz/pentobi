@@ -7,8 +7,6 @@ import pentobi 1.0
 import "." as Pentobi
 import "Main.js" as Logic
 
-// We don't use any ApplicationWindow functionality, but using Window causes
-// problems with Controls2.Menu in Qt 5.11.1 (QTBUG-68858)
 ApplicationWindow {
     id: rootWindow
 
