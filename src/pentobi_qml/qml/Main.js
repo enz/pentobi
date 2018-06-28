@@ -106,10 +106,7 @@ function computerPlay() {
     if (playerModel.isGenMoveRunning)
         return
     if (! isComputerToPlay()) {
-        computerPlays0 = false
-        computerPlays1 = false
-        computerPlays2 = false
-        computerPlays3 = false
+        setComputerNone()
         var variant = gameModel.gameVariant
         if (variant == "classic_3" && gameModel.toPlay == 3) {
             switch (gameModel.altPlayer) {
@@ -382,10 +379,7 @@ function openRatedGameNoVerify(byteArray) {
         gameDisplay.enableAnimations = false
         if (! gameModel.openByteArray(byteArray))
             showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-        computerPlays0 = false
-        computerPlays1 = false
-        computerPlays2 = false
-        computerPlays3 = false
+        setComputerNone()
         if (gameModel.gameVariant != oldGameVariant) {
             gameDisplay.destroyPieces()
             gameDisplay.createPieces()
@@ -406,12 +400,8 @@ function openFile(file) {
         gameDisplay.enableAnimations = false
         if (! gameModel.openFile(file))
             showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-        else {
-            computerPlays0 = false
-            computerPlays1 = false
-            computerPlays2 = false
-            computerPlays3 = false
-        }
+        else
+            setComputerNone()
         if (gameModel.gameVariant != oldGameVariant) {
             gameDisplay.destroyPieces()
             gameDisplay.createPieces()
@@ -439,12 +429,8 @@ function openClipboard() {
         gameDisplay.enableAnimations = false
         if (! gameModel.openClipboard())
             showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-        else {
-            computerPlays0 = false
-            computerPlays1 = false
-            computerPlays2 = false
-            computerPlays3 = false
-        }
+        else
+            setComputerNone()
         if (gameModel.gameVariant != oldGameVariant) {
             gameDisplay.destroyPieces()
             gameDisplay.createPieces()
@@ -478,12 +464,8 @@ function openFromClipboard() {
     gameDisplay.destroyPieces()
     if (! gameModel.openFromClipboard())
         showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-    else {
-        computerPlays0 = false
-        computerPlays1 = false
-        computerPlays2 = false
-        computerPlays3 = false
-    }
+    else
+        setComputerNone()
     gameDisplay.createPieces()
     gameDisplay.showToPlay()
 }
@@ -597,6 +579,13 @@ function saveFile(file) {
         showInfo(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
     else
         showTemporaryMessage(qsTr("File saved."))
+}
+
+function setComputerNone() {
+    computerPlays0 = false
+    computerPlays1 = false
+    computerPlays2 = false
+    computerPlays3 = false
 }
 
 function showComputerColorDialog() {
