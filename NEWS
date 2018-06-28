@@ -1,34 +1,21 @@
-Version 14.UNKNOWN (master)
-===========================
+Version 15.0 (28 Jun 2018)
+==========================
 
 General:
 
 * New UI translations: French, Norsk bokmål (thanks to Allan Nordhøy)
-* Disable menu item "Keep Only Position" if position is empty board.
+* Added a workaround for a compiler issue with GCC 7/8, which slowed
+  down the startup time of Pentobi.
+* Disable menu item "Keep Only Position" if board is empty.
 
 Android version:
 
 * The minimum required Qt version is now 5.11.
+* Games table in rating dialog did not show the correct level used.
 * Saved files should now immediately be visible from computers connecting
   with the Android device via MTP (might not work on all devices).
 * An error message is now shown when an invalid loaded SGF file causes
   a problem later (e.g. invalid move property value in a side variation).
-
-
-Version 14.0.UNKNOWN (v14-fixes)
-================================
-
-General:
-
-* Added a workaround for a compiler issue with GCC 7/8, which slowed
-  down the startup time of Pentobi.
-
-
-Android version:
-
-* Games table in rating dialog did not show the correct level used.
-* Saving a game with "Save As..." did not work anymore with Qt 5.11.
-* Rating dialog layout implementation depended on undefined behavior.
 
 
 Version 14.1 (03 Jan 2018)
