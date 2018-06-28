@@ -460,16 +460,6 @@ function openRecentFile(file) {
     verify(function() { openFile(file) })
 }
 
-function openFromClipboard() {
-    gameDisplay.destroyPieces()
-    if (! gameModel.openFromClipboard())
-        showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-    else
-        setComputerNone()
-    gameDisplay.createPieces()
-    gameDisplay.showToPlay()
-}
-
 function play(pieceModel, gameCoord) {
     var wasComputerToPlay = isComputerToPlay()
     gameModel.playPiece(pieceModel, gameCoord)
