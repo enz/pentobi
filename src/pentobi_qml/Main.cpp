@@ -10,7 +10,6 @@
 
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QMessageBox>
 #include <QTranslator>
 #include <QtQml>
 #include <QtWebView/QtWebView>
@@ -96,14 +95,6 @@ int main(int argc, char *argv[])
         }
         QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
         return app.exec();
-    }
-    catch (const bad_alloc&)
-    {
-        // bad_alloc is an expected error because the player requires a larger
-        // amount of memory.
-        QMessageBox::critical(nullptr, app.translate("main", "Pentobi"),
-                              app.translate("main", "Not enough memory."));
-        return 1;
     }
     catch (const exception& e)
     {

@@ -9,7 +9,9 @@ Android version:
 Version 15.0.UNKNOWN (v15-fixes)
 ================================
 
-*
+Android version:
+
+* Show a meaningful error message if startup fails due to low memory.
 
 
 Version 15.0 (28 Jun 2018)

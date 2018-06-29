@@ -598,6 +598,12 @@ function showInfo(text) {
     dialog.open()
 }
 
+function showInfo(text, acceptedFunc) {
+    if (infoMessageLoader.status === Loader.Null)
+        infoMessageLoader.sourceComponent = infoMessageComponent
+    infoMessageLoader.item.openWithCallback(text, acceptedFunc)
+}
+
 function showQuestion(text, acceptedFunc) {
     if (questionMessageLoader.status === Loader.Null)
         questionMessageLoader.sourceComponent = questionMessageComponent

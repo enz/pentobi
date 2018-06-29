@@ -33,11 +33,21 @@ bool PlayerModel::noDelay = false;
 unsigned PlayerModel::nuThreads = 0;
 
 PlayerModel::PlayerModel(QObject* parent)
-    : QObject(parent),
-      m_player(GameModel::getInitialGameVariant(), maxLevel, "", nuThreads)
+    : QObject(parent)
 {
+    try
+    {
+        m_player = make_unique<Player>(GameModel::getInitialGameVariant(),
+                                       maxLevel, "", nuThreads);
+        m_notEnoughMemory = false;
+    }
+    catch (const bad_alloc&)
+    {
+        m_notEnoughMemory = true;
+        return;
+    }
     if (noBook)
-        m_player.set_use_book(false);
+        m_player->set_use_book(false);
     connect(&m_watcher, &QFutureWatcher<GenMoveResult>::finished,
             this, &PlayerModel::genMoveFinished);
 }
@@ -57,7 +67,7 @@ PlayerModel::GenMoveResult PlayerModel::asyncGenMove(
     result.color = c;
     result.genMoveId = genMoveId;
     result.gameModel = gm;
-    result.move = m_player.genmove(bd, bd.get_effective_to_play());
+    result.move = m_player->genmove(bd, bd.get_effective_to_play());
     auto elapsed = timer.elapsed();
     // Enforce minimum thinking time of 1 sec
     if (elapsed < 1000 && ! noDelay)
@@ -112,7 +122,7 @@ void PlayerModel::loadBook(Variant variant)
     QTextStream stream(&file);
     QString text = stream.readAll();
     istringstream in(text.toLocal8Bit().constData());
-    m_player.load_book(in);
+    m_player->load_book(in);
 }
 
 bool PlayerModel::getLevelKey(const QString& gameVariant, QString& key)
@@ -189,9 +199,9 @@ void PlayerModel::startGenMove(GameModel* gm)
     if (gm->gameVariant() != m_gameVariant)
         loadLevel(gm->gameVariant());
     cancelGenMove();
-    m_player.set_level(m_level);
+    m_player->set_level(m_level);
     auto variant = gm->getBoard().get_variant();
-    if (! m_player.is_book_loaded(variant))
+    if (! m_player->is_book_loaded(variant))
         loadBook(variant);
     clear_abort();
     ++m_genMoveId;
