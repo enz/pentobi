@@ -546,6 +546,10 @@
         <source>Start rated game with Orange against Pentobi level %1?</source>
         <translation>Gewertetes Spiel mit Orange gegen Pentobi Spielstufe %1 beginnen?</translation>
     </message>
+    <message>
+        <source>Not enough memory.</source>
+        <translation>Nicht genügend Speicher.</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -1200,11 +1204,11 @@
     <name>main</name>
     <message>
         <source>Not enough memory.</source>
-        <translation>Nicht genügend Speicher.</translation>
+        <translation type="vanished">Nicht genügend Speicher.</translation>
     </message>
     <message>
         <source>Pentobi</source>
-        <translation>Pentobi</translation>
+        <translation type="vanished">Pentobi</translation>
     </message>
 </context>
 </TS>

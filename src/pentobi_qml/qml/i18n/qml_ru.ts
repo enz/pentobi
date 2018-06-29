@@ -534,6 +534,10 @@
         <source>Start rated game with Orange against Pentobi level %1?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Not enough memory.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -1173,17 +1177,6 @@
     </message>
     <message>
         <source>Leave setup</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>main</name>
-    <message>
-        <source>Not enough memory.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pentobi</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

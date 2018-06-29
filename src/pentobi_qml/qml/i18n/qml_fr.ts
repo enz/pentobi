@@ -128,15 +128,15 @@
     </message>
     <message>
         <source>Round:</source>
-        <translation>Round :</translation>
+        <translation>Round&#xa0;:</translation>
     </message>
     <message>
         <source>Player Purple:</source>
-        <translation>Joueur violet:</translation>
+        <translation>Joueur violet&#xa0;:</translation>
     </message>
     <message>
         <source>Player Orange:</source>
-        <translation>Joueur orange:</translation>
+        <translation>Joueur orange&#xa0;:</translation>
     </message>
 </context>
 <context>
@@ -448,23 +448,23 @@
     </message>
     <message>
         <source>Start rated game with Blue against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec bleu contre Pentobi niveau %1 ?</translation>
+        <translation>Commencer une partie classée avec bleu contre Pentobi niveau %1&#xa0;?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec jaune/vert contre Pentobi niveau %1 ?</translation>
+        <translation>Commencer une partie classée avec jaune/vert contre Pentobi niveau %1&#xa0;?</translation>
     </message>
     <message>
         <source>Start rated game with Green against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec vert contre Pentobi niveau %1 ?</translation>
+        <translation>Commencer une partie classée avec vert contre Pentobi niveau %1&#xa0;?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec jaune contre Pentobi niveau %1 ?</translation>
+        <translation>Commencer une partie classée avec jaune contre Pentobi niveau %1&#xa0;?</translation>
     </message>
     <message>
         <source>Start rated game with Red against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec rouge contre Pentobi niveau %1 ?</translation>
+        <translation>Commencer une partie classée avec rouge contre Pentobi niveau %1&#xa0;?</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
@@ -540,11 +540,15 @@
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec violet contre Pentobi niveau %1 ?</translation>
+        <translation>Commencer une partie classée avec violet contre Pentobi niveau %1&#xa0;?</translation>
     </message>
     <message>
         <source>Start rated game with Orange against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec orange contre Pentobi niveau %1 ?</translation>
+        <translation>Commencer une partie classée avec orange contre Pentobi niveau %1&#xa0;?</translation>
+    </message>
+    <message>
+        <source>Not enough memory.</source>
+        <translation>Mémoire insuffisante.</translation>
     </message>
 </context>
 <context>
@@ -1174,7 +1178,7 @@
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation>Remplacer le fichier existant&#xa0;?</translation>
+        <translation>Remplacer le fichier existant ?</translation>
     </message>
 </context>
 <context>
@@ -1200,11 +1204,7 @@
     <name>main</name>
     <message>
         <source>Not enough memory.</source>
-        <translation>Mémoire insuffisante.</translation>
-    </message>
-    <message>
-        <source>Pentobi</source>
-        <translation></translation>
+        <translation type="vanished">Mémoire insuffisante.</translation>
     </message>
 </context>
 </TS>
