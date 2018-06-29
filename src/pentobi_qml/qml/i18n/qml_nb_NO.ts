@@ -1005,7 +1005,7 @@
     <message>
         <source>&amp;Colorblind</source>
         <extracomment>Name of theme optimized for colorblindness.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fargeblind</translation>
     </message>
 </context>
 <context>
