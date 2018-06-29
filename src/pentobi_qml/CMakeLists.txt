@@ -20,9 +20,7 @@ set(pentobi_qml_SRCS
 
 set(pentobi_qml_QRC
     resources.qrc
-    qml/themes/theme_dark.qrc
-    qml/themes/theme_light.qrc
-    qml/themes/theme_shared.qrc
+    qml/themes/themes.qrc
     ../books/pentobi_books.qrc
     )
 if (${CMAKE_SYSTEM_NAME} MATCHES "Android")

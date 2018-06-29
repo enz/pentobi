@@ -261,7 +261,7 @@ function init() {
     }
 
     // Settings may contain invalid theme
-    if (themeName !== "dark" && themeName !== "light")
+    if (themeName !== "dark" && themeName !== "light" && themeName !== "colorblind")
         themeName = "light"
 
     if (! gameModel.loadAutoSave()) {

@@ -107,9 +107,7 @@ SOURCES += \
 RESOURCES += \
     ../books/pentobi_books.qrc \
     ../pentobi/help.qrc \
-    qml/themes/theme_dark.qrc \
-    qml/themes/theme_light.qrc \
-    qml/themes/theme_shared.qrc \
+    qml/themes/themes.qrc \
     resources.qrc \
     translations.qrc
 

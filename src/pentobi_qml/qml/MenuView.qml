@@ -71,6 +71,14 @@ Pentobi.Menu {
             checked: themeName === "dark"
             onTriggered: themeName = "dark"
         }
+        MenuItem {
+            //: Name of theme optimized for colorblindness.
+            text: Logic.removeShortcut(qsTr("&Colorblind"))
+            checkable: true
+            autoExclusive: true
+            checked: themeName === "colorblind"
+            onTriggered: themeName = "colorblind"
+        }
     }
     MenuItem {
         text: Logic.removeShortcut(qsTr("&Animate Pieces"))
