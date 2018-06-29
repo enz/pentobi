@@ -56,6 +56,12 @@ public:
     ~PlayerModel();
 
 
+    /** Check if the player creation failed because of low memory.
+        This is an expected error condition because the player allocates a
+        large amount of memory. This function must be checked after object
+        creation and no functions may be called if it returns true. */
+    Q_INVOKABLE bool notEnoughMemory() const { return m_notEnoughMemory; }
+
     /** Start a move generation in a background thread.
         The state of the board model may not be changed until the move
         generation was finished (computerPlayed signal) or aborted
@@ -76,7 +82,7 @@ public:
 
     bool isGenMoveRunning() const { return m_isGenMoveRunning; }
 
-    Search& getSearch() { return m_player.get_search(); }
+    Search& getSearch() { return m_player->get_search(); }
 
 signals:
     void gameVariantChanged();
@@ -100,6 +106,8 @@ private:
     };
 
 
+    bool m_notEnoughMemory;
+
     bool m_isGenMoveRunning = false;
 
     QString m_gameVariant;
@@ -108,7 +116,7 @@ private:
 
     unsigned m_genMoveId = 0;
 
-    Player m_player;
+    unique_ptr<Player> m_player;
 
     QFutureWatcher<GenMoveResult> m_watcher;
 

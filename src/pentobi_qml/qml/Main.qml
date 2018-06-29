@@ -120,6 +120,9 @@ ApplicationWindow {
 
         gameVariant: gameModel.gameVariant
         onMoveGenerated: Logic.moveGenerated(move)
+        Component.onCompleted:
+            if (notEnoughMemory())
+                Logic.showInfo(qsTr("Not enough memory."), Qt.quit)
     }
     AnalyzeGameModel { id: analyzeGameModel }
     RatingModel {
