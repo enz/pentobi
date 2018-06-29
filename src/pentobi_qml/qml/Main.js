@@ -598,7 +598,7 @@ function showInfo(text) {
     dialog.open()
 }
 
-function showInfo(text, acceptedFunc) {
+function showInfoWithCallback(text, acceptedFunc) {
     if (infoMessageLoader.status === Loader.Null)
         infoMessageLoader.sourceComponent = infoMessageComponent
     infoMessageLoader.item.openWithCallback(text, acceptedFunc)
