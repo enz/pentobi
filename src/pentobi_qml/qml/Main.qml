@@ -122,7 +122,7 @@ ApplicationWindow {
         onMoveGenerated: Logic.moveGenerated(move)
         Component.onCompleted:
             if (notEnoughMemory())
-                Logic.showInfo(qsTr("Not enough memory."), Qt.quit)
+                Logic.showInfoWithCallback(qsTr("Not enough memory."), Qt.quit)
     }
     AnalyzeGameModel { id: analyzeGameModel }
     RatingModel {
