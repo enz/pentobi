@@ -990,6 +990,11 @@
         <source>&amp;Dark</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Colorblind</source>
+        <extracomment>Name of theme optimized for colorblindness.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OpenDialog</name>

@@ -1002,6 +1002,11 @@
         <source>&amp;Dark</source>
         <translation>&amp;Noir</translation>
     </message>
+    <message>
+        <source>&amp;Colorblind</source>
+        <extracomment>Name of theme optimized for colorblindness.</extracomment>
+        <translation>&amp;Daltonien</translation>
+    </message>
 </context>
 <context>
     <name>OpenDialog</name>
