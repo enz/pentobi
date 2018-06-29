@@ -13,8 +13,8 @@ QtObject {
     property color colorYellow: "#bb7031"
     property color colorRed: "#984326"
     property color colorGreen: "#72a074"
-    property color colorPurple: "#008f9d"
-    property color colorOrange: "#bb7031"
+    property color colorPurple: "#974226"
+    property color colorOrange: "#bc7031"
     property color colorStartingPoint: "#82777E"
     property color backgroundButtonPressed: Qt.lighter(backgroundColor, 3)
     property color selectionColor: "steelblue"
