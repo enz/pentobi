@@ -93,6 +93,8 @@ signals:
 
     void moveGenerated(GameMove* move);
 
+    void searchCallback(double elapsedSeconds, double remainingSeconds);
+
 private:
     struct GenMoveResult
     {

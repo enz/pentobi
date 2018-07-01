@@ -48,6 +48,10 @@ PlayerModel::PlayerModel(QObject* parent)
     }
     if (noBook)
         m_player->set_use_book(false);
+    m_player->get_search().set_callback(
+                [this](double elapsedSeconds, double remainingSeconds) {
+        emit searchCallback(elapsedSeconds, remainingSeconds);
+    });
     connect(&m_watcher, &QFutureWatcher<GenMoveResult>::finished,
             this, &PlayerModel::genMoveFinished);
 }

@@ -19,7 +19,10 @@ Item
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
     property bool setupMode
-    property alias busyIndicatorRunning: busyIndicator.running
+
+    // Dummy for compatibility with GameDisplayMobile
+    property bool busyIndicatorRunning
+
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
         if (board.isTrigon || board.isGembloQ)
@@ -50,9 +53,36 @@ Item
     function showMove(move) { Logic.showMove(move) }
     function getBoard() { return board }
     function showTemporaryMessage(text) {
-        statusText.text = text
+        showStatus(text)
         messageTimer.restart()
     }
+    function startSearch() { showStatus(qsTr("Computer is thinking...")) }
+    function endSearch() { if (! messageTimer.running) clearStatus() }
+    function searchCallback(elapsedSeconds, remainingSeconds) {
+        // If the search is longer than 10 sec, we show the (maximum) remaining
+        // time (only during a move generation, ignore search callbacks during
+        // game analysis)
+        if (! playerModel.isGenMoveRunning || elapsedSeconds < 10)
+            return;
+        var text;
+        var seconds = Math.ceil(remainingSeconds);
+        if (seconds < 90)
+            text =
+                qsTr("Computer is thinking... (up to %1 seconds remaining)")
+                .arg(seconds);
+        else
+        {
+            var minutes = Math.ceil(remainingSeconds / 60);
+            text =
+                qsTr("Computer is thinking... (up to %1 minutes remaining)")
+                .arg(minutes);
+        }
+        showStatus(text)
+    }
+
+    function showStatus(text) { statusText.text = text; statusText.opacity = 1 }
+    function clearStatus() { statusText.opacity = 0 }
+
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
 
@@ -149,8 +179,11 @@ Item
             Text {
                 id: statusText
 
+                opacity: 0
                 color: theme.fontColorPosInfo
                 padding: 0.2 * font.pixelSize
+
+                Behavior on opacity { NumberAnimation { duration: 110 } }
             }
             Item { Layout.fillWidth: true }
             Text {
@@ -164,18 +197,9 @@ Item
                 id: messageTimer
 
                 interval: 3000
-                onTriggered: statusText.text = ""
+                onTriggered: clearStatus()
             }
         }
-    }
-    Pentobi.BusyIndicator {
-        id: busyIndicator
-
-        width: 0.15 * rightColumn.width
-        height: width
-        x: rightColumn.x + rightColumn.width / 2
-        y: rightColumn.y + pieceSelector.y + pieceSelector.height / 2
-        opacity: 0.7
     }
     PieceManipulator {
         id: pieceManipulator

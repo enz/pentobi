@@ -50,6 +50,11 @@ Item
     function getBoard() { return board }
     function showTemporaryMessage(text) { message.showTemporary(text) }
 
+    // For compatibility with GameDisplayDesktop
+    function searchCallback(elapsedSeconds, remainingSeconds) { }
+    function startSearch() { }
+    function endSearch() { }
+
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
 

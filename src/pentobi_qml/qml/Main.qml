@@ -35,12 +35,10 @@ ApplicationWindow {
     property url folder
     property int defaultWidth:
         isAndroid ? Screen.desktopAvailableWidth :
-                    Math.min(Screen.desktopAvailableWidth,
-                             Math.round(Screen.pixelDensity / 3.5 * 600))
+                    Math.min(Screen.desktopAvailableWidth, 1230)
     property int defaultHeight:
         isAndroid ? Screen.desktopAvailableHeight :
-                    Math.min(Screen.desktopAvailableHeight,
-                             Math.round(Screen.pixelDensity / 3.5 * 800))
+                    Math.min(Screen.desktopAvailableHeight, 720)
     property int exportImageWidth: 400
     property bool busyIndicatorRunning: gameDisplay.pieces0 === undefined
                                         || lengthyCommand.isRunning
@@ -101,6 +99,13 @@ ApplicationWindow {
             }
         }
     }
+    MouseArea {
+        visible: desktopLayout
+        enabled: false
+        anchors.fill: parent
+        cursorShape: busyIndicatorRunning ? Qt.BusyCursor : Qt.ArrowCursor
+    }
+
     Settings {
         property alias x: rootWindow.x
         property alias y: rootWindow.y
@@ -137,6 +142,10 @@ ApplicationWindow {
 
         gameVariant: gameModel.gameVariant
         onMoveGenerated: Logic.moveGenerated(move)
+        onSearchCallback: gameDisplay.searchCallback(elapsedSeconds, remainingSeconds)
+        onIsGenMoveRunningChanged:
+            if (isGenMoveRunning) gameDisplay.startSearch()
+            else gameDisplay.endSearch()
         Component.onCompleted:
             if (notEnoughMemory())
                 Logic.showInfoWithCallback(qsTr("Not enough memory."), Qt.quit)
