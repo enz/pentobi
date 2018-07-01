@@ -22,7 +22,7 @@ Pentobi.Menu {
     }
     MenuSeparator { }
     MenuItem {
-        enabled:  ! isRated
+        enabled: ! isRated && (gameModel.canGoBackward || gameModel.canGoForward)
         text: Logic.removeShortcut(qsTr("&Analyze Game"))
         onTriggered: Logic.analyzeGame()
     }
