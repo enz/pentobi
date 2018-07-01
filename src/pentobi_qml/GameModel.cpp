@@ -1515,8 +1515,12 @@ void GameModel::updatePositionInfo()
     auto& bd = m_game.get_board();
     auto positionInfo
             = QString::fromLocal8Bit(get_position_info(tree, current).c_str());
+    auto positionInfoShort = positionInfo;
     if (positionInfo.isEmpty())
+    {
         positionInfo = bd.has_setup() ? tr("(Setup)") : tr("(No moves)");
+        positionInfoShort = bd.has_setup() ? tr("(Setup)") : "";
+    }
     else
     {
         //: The argument is the current move number.
@@ -1525,9 +1529,13 @@ void GameModel::updatePositionInfo()
         {
             positionInfo.append(' ');
             positionInfo.append(tr("(Setup)"));
+            positionInfoShort.append(' ');
+            positionInfoShort.append(tr("(Setup)"));
         }
     }
     set(m_positionInfo, positionInfo, &GameModel::positionInfoChanged);
+    set(m_positionInfoShort, positionInfoShort,
+        &GameModel::positionInfoShortChanged);
 }
 
 /** Update all properties that might change when changing the current

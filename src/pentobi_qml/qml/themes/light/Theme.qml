@@ -3,7 +3,7 @@ import QtQuick.Controls.Styles 1.4
 
 QtObject {
     property color busyIndicatorColor: fontColorScore
-    property color commentBorderColor: "#968f8b"
+    property color commentBorderColor: "#b4b3b3"
     property color messageTextColor: "black"
     property color messageBackgroundColor: "#cac9c9"
     property color backgroundColor: "#dcdbda"
@@ -21,11 +21,11 @@ QtObject {
     property color selectionColor: "steelblue"
     property color selectedTextColor: "#EEE"
     property color toolBarTextColor: "black"
-    property color analyzeBackgroundColor: "white"
+    property color analyzeBackgroundColor: backgroundColor
     property color analyzeLineColor: "black"
     property color analyzeMiddleLineColor: "grey"
     property real pieceListOpacity: 1
-    property real toPlayColorLighter: 0.5
+    property real toPlayColorLighter: 0.2
 
     function getImage(name) { return "themes/light/" + name + ".svg" }
 }

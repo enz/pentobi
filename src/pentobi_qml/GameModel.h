@@ -58,6 +58,7 @@ class GameModel
 
     Q_PROPERTY(QString gameVariant READ gameVariant NOTIFY gameVariantChanged)
     Q_PROPERTY(QString positionInfo READ positionInfo NOTIFY positionInfoChanged)
+    Q_PROPERTY(QString positionInfoShort READ positionInfoShort NOTIFY positionInfoShortChanged)
     Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
     Q_PROPERTY(QString lastInputOutputError READ lastInputOutputError)
     Q_PROPERTY(QString file READ file NOTIFY fileChanged)
@@ -245,6 +246,8 @@ public:
     const QString& gameVariant() const { return m_gameVariant; }
 
     const QString& positionInfo() const { return m_positionInfo; }
+
+    const QString& positionInfoShort() const { return m_positionInfoShort; }
 
     const QString& lastInputOutputError() const { return m_lastInputOutputError; }
 
@@ -450,6 +453,8 @@ signals:
 
     void positionInfoChanged();
 
+    void positionInfoShortChanged();
+
     void commentChanged();
 
     void moveNumberChanged();
@@ -496,6 +501,8 @@ private:
     QString m_gameVariant;
 
     QString m_positionInfo;
+
+    QString m_positionInfoShort;
 
     QString m_comment;
 

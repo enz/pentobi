@@ -16,7 +16,9 @@ ApplicationWindow {
     property bool computerPlays3: true
     property bool isPlaySingleMoveRunning
     property bool isRated
+    property bool desktopLayout: ! isAndroid
     property int maxLevel: 7
+    property alias gameDisplay: gameDisplayLoader.item
 
     // Was computer thinking on regular game move when game was autosaved?
     // If yes, it will automatically start a move generation on startup.
@@ -40,9 +42,14 @@ ApplicationWindow {
                     Math.min(Screen.desktopAvailableHeight,
                              Math.round(Screen.pixelDensity / 3.5 * 800))
     property int exportImageWidth: 400
+    property bool busyIndicatorRunning: gameDisplay.pieces0 === undefined
+                                        || lengthyCommand.isRunning
+                                        || playerModel.isGenMoveRunning
+                                        || analyzeGameModel.isRunning
 
-    // Minimum size corresponds to a QVGA mobile device with 19px statusbar
-    minimumWidth: 240; minimumHeight: 301
+
+    minimumWidth: desktopLayout ? 560 : 240
+    minimumHeight: desktopLayout ? 315 : 301
 
     width: defaultWidth; height: defaultHeight
     color: theme.backgroundColor
@@ -66,18 +73,32 @@ ApplicationWindow {
         Pentobi.ToolBar {
             visible: ! (visibility === Window.FullScreen && isAndroid)
         }
-        GameDisplayMobile {
-            id: gameDisplay
+        Loader {
+            id: gameDisplayLoader
 
-            theme: rootWindow.theme
-            busyIndicatorRunning: pieces0 === undefined
-                                  || lengthyCommand.isRunning
-                                  || playerModel.isGenMoveRunning
-                                  || analyzeGameModel.isRunning
-            onPlay: Logic.play(pieceModel, gameCoord)
             Layout.fillWidth: true
             Layout.fillHeight: true
             focus: true
+            sourceComponent: desktopLayout ? componentGameDisplayDesktop : componentGameDisplayMobile
+
+            Component {
+                id: componentGameDisplayDesktop
+
+                GameDisplayDesktop {
+                    theme: rootWindow.theme
+                    busyIndicatorRunning: rootWindow.busyIndicatorRunning
+                    onPlay: Logic.play(pieceModel, gameCoord)
+                }
+            }
+            Component {
+                id: componentGameDisplayMobile
+
+                GameDisplayMobile {
+                    theme: rootWindow.theme
+                    busyIndicatorRunning: rootWindow.busyIndicatorRunning
+                    onPlay: Logic.play(pieceModel, gameCoord)
+                }
+            }
         }
     }
     Settings {

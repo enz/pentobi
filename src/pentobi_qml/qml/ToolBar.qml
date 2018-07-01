@@ -13,6 +13,8 @@ RowLayout {
     spacing: 0
 
     Label {
+        visible: ! desktopLayout
+
         text: {
             if (isRated) return qsTr("Rated")
             if (gameDisplay.setupMode) return qsTr("Leave setup")
@@ -66,6 +68,78 @@ RowLayout {
         enabled: ! gameModel.isGameOver && ! gameDisplay.setupMode && ! isRated
         visible: ! isAndroid || enabled
         onClicked: Logic.computerPlay()
+    }
+    Pentobi.Button {
+        visible: desktopLayout
+        padding: buttonPadding
+        enabled: gameModel.canGoBackward
+        imageSource: theme.getImage("pentobi-beginning")
+        onClicked: gameModel.goBeginning()
+    }
+    Pentobi.Button {
+        visible: desktopLayout
+        padding: buttonPadding
+        enabled: gameModel.canGoBackward
+        imageSource: theme.getImage("pentobi-backward")
+        onClicked: gameModel.goBackward()
+        autoRepeat: true
+    }
+    Pentobi.Button {
+        visible: desktopLayout
+        padding: buttonPadding
+        enabled: gameModel.canGoForward
+        imageSource: theme.getImage("pentobi-forward")
+        onClicked: gameModel.goForward()
+        autoRepeat: true
+    }
+    Pentobi.Button {
+        visible: desktopLayout
+        padding: buttonPadding
+        enabled: gameModel.canGoForward
+        imageSource: theme.getImage("pentobi-end")
+        onClicked: gameModel.goEnd()
+    }
+    Pentobi.Button {
+        visible: desktopLayout
+        padding: buttonPadding
+        enabled: gameModel.hasPrevVar
+        imageSource: theme.getImage("pentobi-previous-variation")
+        onClicked: gameModel.goPrevVar()
+    }
+    Pentobi.Button {
+        visible: desktopLayout
+        padding: buttonPadding
+        enabled: gameModel.hasNextVar
+        imageSource: theme.getImage("pentobi-next-variation")
+        onClicked: gameModel.goNextVar()
+    }
+    ToolButton {
+        visible: desktopLayout && gameDisplay.setupMode
+        contentItem: Text {
+            color: theme.messageTextColor
+            text: qsTr("Leave setup")
+        }
+        background: Rectangle {
+            anchors.fill: parent
+            color: parent.pressed ? theme.backgroundButtonPressed : theme.messageBackgroundColor
+        }
+        onClicked:
+            if (gameDisplay.setupMode) {
+                gameDisplay.setupMode = false
+                Logic.setComputerNone()
+            }
+    }
+    Item { Layout.preferredWidth: parent.height / 2 }
+    Label {
+        visible: desktopLayout && (isRated || gameModel.file !== "")
+        text: {
+            if (isRated) return qsTr("Rated")
+            return Logic.getFileLabel(gameModel.file, gameModel.isModified)
+        }
+    }
+    Item {
+        visible: desktopLayout
+        Layout.fillWidth: true
     }
     Pentobi.Button {
         padding: buttonPadding
