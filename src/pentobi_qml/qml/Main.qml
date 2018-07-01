@@ -58,11 +58,7 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 0
         Keys.onReleased:
-            if (isAndroid && event.key === Qt.Key_Menu) {
-                androidToolBarLoader.item.popupMenu()
-                event.accepted = true
-            }
-            else if (event.key === Qt.Key_Back && isAndroid && visibility === Window.FullScreen) {
+            if (event.key === Qt.Key_Back && isAndroid && visibility === Window.FullScreen) {
                 visibility = Window.AutomaticVisibility
                 event.accepted = true
             }
