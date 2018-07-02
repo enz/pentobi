@@ -15,7 +15,7 @@ function analyzeGame() {
         return
     }
     gameDisplay.showAnalyzeGame()
-    Logic.cancelRunning()
+    Logic.cancelRuning()
     analyzeGameModel.start(gameModel, playerModel)
 }
 
@@ -261,7 +261,9 @@ function init() {
     }
 
     // Settings may contain invalid theme
-    if (themeName !== "dark" && themeName !== "light" && themeName !== "colorblind")
+    if (themeName !== "dark" && themeName !== "light"
+            && themeName !== "colorblind-light"
+            && themeName !== "colorblind-dark")
         themeName = "light"
 
     if (! gameModel.loadAutoSave()) {

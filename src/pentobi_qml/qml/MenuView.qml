@@ -72,12 +72,20 @@ Pentobi.Menu {
             onTriggered: themeName = "dark"
         }
         MenuItem {
-            //: Name of theme optimized for colorblindness.
-            text: Logic.removeShortcut(qsTr("&Colorblind"))
+            //: Name of light theme optimized for colorblindness.
+            text: Logic.removeShortcut(qsTr("&Colorblind Light"))
             checkable: true
             autoExclusive: true
-            checked: themeName === "colorblind"
-            onTriggered: themeName = "colorblind"
+            checked: themeName === "colorblind-light"
+            onTriggered: themeName = "colorblind-light"
+        }
+        MenuItem {
+            //: Name of dark theme optimized for colorblindness.
+            text: Logic.removeShortcut(qsTr("Colorblind D&ark"))
+            checkable: true
+            autoExclusive: true
+            checked: themeName === "colorblind-dark"
+            onTriggered: themeName = "colorblind-dark"
         }
     }
     MenuItem {
