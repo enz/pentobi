@@ -62,7 +62,7 @@ Item
                    + (gridHeight - height) / 2
             }
             // Right junction
-            Image {
+            PieceElementImage {
                 visible: pieceModel.junctionType[index] === 0
                          || pieceModel.junctionType[index] === 1
                 source: theme.getImage("junction-all-" + colorName)
@@ -73,10 +73,9 @@ Item
                 y: (modelData.y - pieceModel.center.y) * gridHeight
                    + (gridHeight - height) / 2
                 sourceSize: imageSourceSize
-                mipmap: true
             }
             // Down junction
-            Image {
+            PieceElementImage {
                 visible: pieceModel.junctionType[index] === 0
                          || pieceModel.junctionType[index] === 2
                 source: theme.getImage("junction-all-" + colorName)
@@ -87,7 +86,6 @@ Item
                 y: (modelData.y - pieceModel.center.y + 1) * gridHeight
                    - height / 2
                 sourceSize: imageSourceSize
-                mipmap: true
             }
         }
     }

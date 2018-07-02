@@ -20,10 +20,9 @@ Item {
         Component {
             id: component0
 
-            Image {
+            PieceElementImage {
                 source: imageName
                 sourceSize: imageSourceSize
-                mipmap: true
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? 0 : -90
             }
@@ -43,10 +42,9 @@ Item {
         Component {
             id: component90
 
-            Image {
+            PieceElementImage {
                 source: imageName
                 sourceSize: imageSourceSize
-                mipmap: true
                 mirror: isHorizontal
                 rotation: isHorizontal ? -180 : -90
             }
@@ -66,10 +64,9 @@ Item {
         Component {
             id: component180
 
-            Image {
+            PieceElementImage {
                 source: imageName
                 sourceSize: imageSourceSize
-                mipmap: true
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? -180 : -270
             }
@@ -89,10 +86,9 @@ Item {
         Component {
             id: component270
 
-            Image {
+            PieceElementImage {
                 source: imageName
                 sourceSize: imageSourceSize
-                mipmap: true
                 mirror: isHorizontal
                 rotation: isHorizontal ? 0 : -270
             }

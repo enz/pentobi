@@ -20,10 +20,9 @@ Item {
         Component {
             id: component0
 
-            Image {
+            PieceElementImage {
                 source: isDownward ? imageNameDownward : imageName
                 sourceSize: imageSourceSize
-                mipmap: true
                 antialiasing: true
             }
         }
@@ -42,10 +41,9 @@ Item {
         Component {
             id: component60
 
-            Image {
+            PieceElementImage {
                 source: isDownward ? imageName : imageNameDownward
                 sourceSize: imageSourceSize
-                mipmap: true
                 antialiasing: true
                 transform: [
                     Rotation {
@@ -74,10 +72,9 @@ Item {
         Component {
             id: component120
 
-            Image {
+            PieceElementImage {
                 source: isDownward ? imageNameDownward : imageName
                 sourceSize: imageSourceSize
-                mipmap: true
                 antialiasing: true
                 transform: Rotation {
                     angle: -120
@@ -103,10 +100,9 @@ Item {
         Component {
             id: component180
 
-            Image {
+            PieceElementImage {
                 source: isDownward ? imageName : imageNameDownward
                 sourceSize: imageSourceSize
-                mipmap: true
                 antialiasing: true
                 rotation: -180
             }
@@ -126,10 +122,9 @@ Item {
         Component {
             id: component240
 
-            Image {
+            PieceElementImage {
                 source: isDownward ? imageNameDownward : imageName
                 sourceSize: imageSourceSize
-                mipmap: true
                 antialiasing: true
                 transform: Rotation {
                     angle: -240
@@ -155,10 +150,9 @@ Item {
         Component {
             id: component300
 
-            Image {
+            PieceElementImage {
                 source: isDownward ? imageName : imageNameDownward
                 sourceSize: imageSourceSize
-                mipmap: true
                 antialiasing: true
                 transform: [
                     Rotation {

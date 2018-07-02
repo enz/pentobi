@@ -20,10 +20,9 @@ Item {
         Component {
             id: component0
 
-            Image {
+            PieceElementImage {
                 source: imageName
                 sourceSize: imageSourceSize
-                mipmap: true
             }
         }
     }
@@ -41,10 +40,9 @@ Item {
         Component {
             id: component90
 
-            Image {
+            PieceElementImage {
                 source: imageName
                 sourceSize: imageSourceSize
-                mipmap: true
                 rotation: -90
             }
         }
@@ -63,10 +61,9 @@ Item {
         Component {
             id: component180
 
-            Image {
+            PieceElementImage {
                 source: imageName
                 sourceSize: imageSourceSize
-                mipmap: true
                 rotation: -180
             }
         }
@@ -85,10 +82,9 @@ Item {
         Component {
             id: component270
 
-            Image {
+            PieceElementImage {
                 source: imageName
                 sourceSize: imageSourceSize
-                mipmap: true
                 rotation: -270
             }
         }

@@ -62,7 +62,7 @@ Item
     Repeater {
         model: pieceModel.junctions
 
-        Image {
+        PieceElementImage {
             source: {
                 switch (pieceModel.junctionType[index]) {
                 case 0:
@@ -106,7 +106,6 @@ Item
             x: (modelData.x - pieceModel.center.x + 0.25) * gridWidth
             y: (modelData.y - pieceModel.center.y + 0.25) * gridHeight
             sourceSize: imageSourceSize
-            mipmap: true
         }
     }
     Rectangle {

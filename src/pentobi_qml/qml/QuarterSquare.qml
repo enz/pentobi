@@ -27,12 +27,12 @@ Item {
         Component {
             id: componentTop
 
-            Image {
-                // Don't set antialiasing, vertex antialiasing causes unwanted
-                // seams between edges of the quarter squares
+            PieceElementImage {
                 source: imageName
                 sourceSize: imageSourceSize
-                mipmap: true
+                // Don't set antialiasing, vertex antialiasing causes unwanted
+                // seams between edges of the quarter squares
+                antialiasing: false
                 rotation: switch (pointType) {
                           case 1: return 180
                           case 2: return 270
@@ -62,11 +62,11 @@ Item {
         Component {
             id: componentBottom
 
-            Image {
-                // Don't set antialiasing, see above
+            PieceElementImage {
                 source: imageNameBottom
                 sourceSize: imageSourceSize
-                mipmap: true
+                // Don't set antialiasing, see above
+                antialiasing: false
                 rotation: switch (pointType) {
                           case 1: return 180
                           case 2: return 270
