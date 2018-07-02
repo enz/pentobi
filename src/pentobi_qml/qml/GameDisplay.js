@@ -69,6 +69,9 @@ function createPieces() {
 function destroyColorPieces(pieces) {
     if (pieces === undefined)
         return
+    // Make sure all pieces are unplayed before destroying them to avoid
+    // a warning by QQuickItem::stackBefore
+    gameModel.newGame()
     for (var i = 0; i < pieces.length; ++i) {
         pieces[i].visible = false
         pieces[i].destroy(1000)
