@@ -15,7 +15,7 @@ function analyzeGame() {
         return
     }
     gameDisplay.showAnalyzeGame()
-    Logic.cancelRuning()
+    Logic.cancelRunning()
     analyzeGameModel.start(gameModel, playerModel)
 }
 
