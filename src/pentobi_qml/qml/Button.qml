@@ -9,6 +9,7 @@ Button {
 
     property alias imageSource: image.source
 
+    focusPolicy: Qt.NoFocus
     contentItem: Image {
         id: image
 
@@ -22,7 +23,7 @@ Button {
     }
     background: Rectangle {
         anchors.fill: root
-        visible: pressed
+        visible: down
         color: theme.backgroundButtonPressed
     }
 }

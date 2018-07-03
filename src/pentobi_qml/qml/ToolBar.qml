@@ -10,6 +10,8 @@ RowLayout {
 
     property real buttonPadding: Math.round(1.5 * Screen.pixelDensity)
 
+    function openMenu() { menuButton.openMenu() }
+
     spacing: 0
 
     Label {
@@ -142,9 +144,15 @@ RowLayout {
         Layout.fillWidth: true
     }
     Pentobi.Button {
+        id: menuButton
+
+        function openMenu() { if (isAndroid) menu.popup(); else menu.popup(0, height) }
+
         padding: buttonPadding
         imageSource: theme.getImage("menu")
-        onClicked: menu.popup()
+        checkable: true
+        down: menu.opened
+        onClicked: if (menu.opened) menu.close(); else openMenu()
 
         Pentobi.Menu {
             id: menu

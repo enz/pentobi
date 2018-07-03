@@ -63,12 +63,20 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 0
         Keys.onReleased:
-            if (event.key === Qt.Key_Back && isAndroid && visibility === Window.FullScreen) {
+            if ((event.key === Qt.Key_Back || event.key === Qt.Key_Escape)
+                    && visibility === Window.FullScreen) {
                 visibility = Window.AutomaticVisibility
                 event.accepted = true
             }
+            else if (event.key === Qt.Key_Menu)
+                toolBar.openMenu()
+        Keys.onPressed:
+            if (event.key === Qt.Key_Alt)
+                toolBar.openMenu()
 
         Pentobi.ToolBar {
+            id: toolBar
+
             visible: ! (visibility === Window.FullScreen && isAndroid)
         }
         Loader {
