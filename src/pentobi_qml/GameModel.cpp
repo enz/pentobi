@@ -955,7 +955,7 @@ bool GameModel::openStream(istream& in)
     if (variant != m_gameVariant)
         initGameVariant(m_game.get_variant());
     setIsModified(false);
-    updateGameInfo();
+    updateProperties();
     return result;
 }
 
@@ -977,8 +977,6 @@ bool GameModel::openFile(const QString& file)
         // we don't want to show the solution.
         if (! has_setup(root) && ! has_comment(root) && root.has_children())
             goEnd();
-        else
-            updateProperties();
         return true;
     }
     setFile("");
@@ -999,8 +997,6 @@ bool GameModel::openClipboard()
         auto& root = m_game.get_root();
         if (! has_setup(root) && root.has_children())
             goEnd();
-        else
-            updateProperties();
         return true;
     }
     setFile("");
