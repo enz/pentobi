@@ -81,6 +81,21 @@
     </message>
 </context>
 <context>
+    <name>GameDisplayDesktop</name>
+    <message>
+        <source>Computer is thinking...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Computer is thinking... (up to %1 seconds remaining)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Computer is thinking... (up to %1 minutes remaining)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GameInfoDialog</name>
     <message>
         <source>Game Info</source>
@@ -995,8 +1010,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Colorblind</source>
-        <extracomment>Name of theme optimized for colorblindness.</extracomment>
+        <source>&amp;Colorblind Light</source>
+        <extracomment>Name of light theme optimized for colorblindness.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Colorblind D&amp;ark</source>
+        <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>

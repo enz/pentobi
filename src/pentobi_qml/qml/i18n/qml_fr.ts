@@ -85,6 +85,21 @@
     </message>
 </context>
 <context>
+    <name>GameDisplayDesktop</name>
+    <message>
+        <source>Computer is thinking...</source>
+        <translation>L&amp;apos;ordinateur pense…</translation>
+    </message>
+    <message>
+        <source>Computer is thinking... (up to %1 seconds remaining)</source>
+        <translation>L&amp;apos;ordinateur pense… (jusqu’à %1 secondes restantes)</translation>
+    </message>
+    <message>
+        <source>Computer is thinking... (up to %1 minutes remaining)</source>
+        <translation>L&amp;apos;ordinateur pense… (jusqu’à %1 minutes restantes)</translation>
+    </message>
+</context>
+<context>
     <name>GameInfoDialog</name>
     <message>
         <source>Game Info</source>
@@ -1009,7 +1024,17 @@
     <message>
         <source>&amp;Colorblind</source>
         <extracomment>Name of theme optimized for colorblindness.</extracomment>
-        <translation>&amp;Daltonien</translation>
+        <translation type="vanished">&amp;Daltonien</translation>
+    </message>
+    <message>
+        <source>&amp;Colorblind Light</source>
+        <extracomment>Name of light theme optimized for colorblindness.</extracomment>
+        <translation>&amp;Daltonien clair</translation>
+    </message>
+    <message>
+        <source>Colorblind D&amp;ark</source>
+        <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
+        <translation>Daltonien n&amp;oir</translation>
     </message>
 </context>
 <context>
