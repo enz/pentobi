@@ -872,7 +872,6 @@ bool GameModel::openByteArray(const QByteArray& byteArray)
     if (! openStream(in))
         return false;
     goEnd();
-    updateProperties();
     return true;
 }
 
