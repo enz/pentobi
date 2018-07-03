@@ -925,10 +925,10 @@ bool GameModel::openStream(istream& in)
     bool result = true;
     try
     {
+        preparePositionChange();
         TreeReader reader;
         reader.read(in);
         auto root = reader.get_tree_transfer_ownership();
-        preparePositionChange();
         m_game.init(root);
     }
     catch (const runtime_error& e)
