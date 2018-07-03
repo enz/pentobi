@@ -5,7 +5,6 @@ import "." as Pentobi
 
 Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("G&o"))
-    cascade: false
 
     MenuItem {
         id: gotoMove
