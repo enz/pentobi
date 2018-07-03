@@ -424,7 +424,12 @@ function openFileUrl() {
     openFile(getFileFromUrl(openDialog.item.fileUrl))
 }
 
-function openClipboard() {
+function openClipboard()
+{
+    verify(openClipboardNoVerify)
+}
+
+function openClipboardNoVerify() {
     lengthyCommand.run(function() {
         var oldGameVariant = gameModel.gameVariant
         var oldEnableAnimations = gameDisplay.enableAnimations
