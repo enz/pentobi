@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/Actions.qml</file>
         <file>qml/AnalyzeGame.qml</file>
         <file>qml/AsciiArtSaveDialog.qml</file>
         <file>qml/Board.qml</file>

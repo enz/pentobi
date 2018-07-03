@@ -46,74 +46,64 @@ RowLayout {
     Pentobi.Button {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-newgame")
-        enabled: ! (gameModel.isGameEmpty && gameModel.file === "" && ! gameModel.isModified && ! isRated) && ! gameDisplay.setupMode
+        action: actions.actionNew
         visible: ! isAndroid || enabled
-        onClicked: Logic.newGame()
     }
     Pentobi.Button {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-undo")
-        enabled: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
+        action: actions.actionUndo
         visible: ! isAndroid || enabled
-        onClicked: Logic.undo()
     }
     Pentobi.Button {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-computer-colors")
-        enabled: ! gameDisplay.setupMode
+        action: actions.actionComputerColors
         visible: ! isAndroid || enabled
-        onClicked: Logic.showComputerColorDialog()
     }
     Pentobi.Button {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-play")
-        enabled: ! gameModel.isGameOver && ! gameDisplay.setupMode && ! isRated
+        action: actions.actionPlay
         visible: ! isAndroid || enabled
-        onClicked: Logic.computerPlay()
     }
     Pentobi.Button {
         visible: desktopLayout
         padding: buttonPadding
-        enabled: gameModel.canGoBackward
         imageSource: theme.getImage("pentobi-beginning")
-        onClicked: gameModel.goBeginning()
+        action: actions.actionBeginning
     }
     Pentobi.Button {
         visible: desktopLayout
         padding: buttonPadding
-        enabled: gameModel.canGoBackward
         imageSource: theme.getImage("pentobi-backward")
-        onClicked: gameModel.goBackward()
+        action: actions.actionBackward
         autoRepeat: true
     }
     Pentobi.Button {
         visible: desktopLayout
         padding: buttonPadding
-        enabled: gameModel.canGoForward
         imageSource: theme.getImage("pentobi-forward")
-        onClicked: gameModel.goForward()
+        action: actions.actionForward
         autoRepeat: true
     }
     Pentobi.Button {
         visible: desktopLayout
         padding: buttonPadding
-        enabled: gameModel.canGoForward
         imageSource: theme.getImage("pentobi-end")
-        onClicked: gameModel.goEnd()
+        action: actions.actionEnd
     }
     Pentobi.Button {
         visible: desktopLayout
         padding: buttonPadding
-        enabled: gameModel.hasPrevVar
         imageSource: theme.getImage("pentobi-previous-variation")
-        onClicked: gameModel.goPrevVar()
+        action: actions.actionPrevVar
     }
     Pentobi.Button {
         visible: desktopLayout
         padding: buttonPadding
-        enabled: gameModel.hasNextVar
         imageSource: theme.getImage("pentobi-next-variation")
-        onClicked: gameModel.goNextVar()
+        action: actions.actionNextVar
     }
     ToolButton {
         visible: desktopLayout && gameDisplay.setupMode

@@ -2,6 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr">
 <context>
+    <name>Actions</name>
+    <message>
+        <source>Computer &amp;Colors</source>
+        <translation>&amp;Couleurs de l&apos;ordinateur</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation>&amp;Nouveau</translation>
+    </message>
+    <message>
+        <source>&amp;Play</source>
+        <translation>&amp;Jouer</translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation>&amp;Quitter</translation>
+    </message>
+    <message>
+        <source>&amp;Undo Move</source>
+        <translation>&amp;Annuler le coup</translation>
+    </message>
+</context>
+<context>
     <name>AnalyzeGame</name>
     <message>
         <source>(No analysis)</source>
@@ -574,11 +597,11 @@
     </message>
     <message>
         <source>Computer &amp;Colors</source>
-        <translation>&amp;Couleurs de l&apos;ordinateur</translation>
+        <translation type="vanished">&amp;Couleurs de l&apos;ordinateur</translation>
     </message>
     <message>
         <source>&amp;Play</source>
-        <translation>&amp;Jouer</translation>
+        <translation type="vanished">&amp;Jouer</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 4 Players)</source>
@@ -752,7 +775,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Nouveau</translation>
+        <translation type="vanished">&amp;Nouveau</translation>
     </message>
     <message>
         <source>Game &amp;Variant</source>
@@ -776,7 +799,7 @@
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation>&amp;Annuler le coup</translation>
+        <translation type="vanished">&amp;Annuler le coup</translation>
     </message>
     <message>
         <source>&amp;Find Move</source>
@@ -788,7 +811,7 @@
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation>&amp;Quitter</translation>
+        <translation type="vanished">&amp;Quitter</translation>
     </message>
     <message>
         <source>&amp;Classic</source>

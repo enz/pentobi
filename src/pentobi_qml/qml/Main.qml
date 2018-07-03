@@ -44,6 +44,7 @@ ApplicationWindow {
                                         || lengthyCommand.isRunning
                                         || playerModel.isGenMoveRunning
                                         || analyzeGameModel.isRunning
+    property Actions actions: Actions { }
 
 
     minimumWidth: desktopLayout ? 560 : 240

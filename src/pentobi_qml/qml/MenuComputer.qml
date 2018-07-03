@@ -6,15 +6,8 @@ import "." as Pentobi
 Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&Computer"))
 
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("Computer &Colors"))
-        onTriggered: Logic.showComputerColorDialog()
-    }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&Play"))
-        enabled: ! gameModel.isGameOver && ! isRated
-        onTriggered: Logic.computerPlay()
-    }
+    MenuItem { action: actions.actionComputerColors }
+    MenuItem { action: actions.actionPlay }
     MenuSeparator { }
     MenuItem {
         text: Logic.removeShortcut(qsTr("Play &Single Move"))

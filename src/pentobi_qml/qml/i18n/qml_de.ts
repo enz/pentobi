@@ -2,6 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>Actions</name>
+    <message>
+        <source>Computer &amp;Colors</source>
+        <translation>Computer-&amp;Farben</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation>&amp;Neu</translation>
+    </message>
+    <message>
+        <source>&amp;Play</source>
+        <translation>&amp;Spielen</translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation>&amp;Beenden</translation>
+    </message>
+    <message>
+        <source>&amp;Undo Move</source>
+        <translation>Zug &amp;rückgängig</translation>
+    </message>
+</context>
+<context>
     <name>AnalyzeGame</name>
     <message>
         <source>(No analysis)</source>
@@ -574,11 +597,11 @@
     </message>
     <message>
         <source>Computer &amp;Colors</source>
-        <translation>Computer-&amp;Farben</translation>
+        <translation type="vanished">Computer-&amp;Farben</translation>
     </message>
     <message>
         <source>&amp;Play</source>
-        <translation>&amp;Spielen</translation>
+        <translation type="vanished">&amp;Spielen</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 4 Players)</source>
@@ -752,7 +775,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Neu</translation>
+        <translation type="vanished">&amp;Neu</translation>
     </message>
     <message>
         <source>Game &amp;Variant</source>
@@ -776,7 +799,7 @@
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation>Zug &amp;rückgängig</translation>
+        <translation type="vanished">Zug &amp;rückgängig</translation>
     </message>
     <message>
         <source>&amp;Find Move</source>
@@ -788,7 +811,7 @@
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation>&amp;Beenden</translation>
+        <translation type="vanished">&amp;Beenden</translation>
     </message>
     <message>
         <source>&amp;Classic</source>

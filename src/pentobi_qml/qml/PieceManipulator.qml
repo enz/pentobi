@@ -7,18 +7,23 @@ Item {
     // True if piece manipulator is at a board location that is a legal move
     property bool legal
 
+    // Manipulator buttons are smaller on desktop with mouse usage
+    property real buttonSize: (desktopLayout ? 0.14 : 0.20) * root.width
+
     signal piecePlayed
 
     Image {
         anchors.fill: root
-        source: theme.getImage("piece-manipulator")
+        source: desktopLayout ? theme.getImage("piece-manipulator-desktop")
+                              : theme.getImage("piece-manipulator")
         sourceSize { width: width; height: height }
         opacity: ! legal ? 0.4 : 0
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     Image {
         anchors.fill: root
-        source: theme.getImage("piece-manipulator-legal")
+        source: desktopLayout ? theme.getImage("piece-manipulator-desktop-legal")
+                              : theme.getImage("piece-manipulator-legal")
         sourceSize { width: width; height: height }
         opacity: legal ? 0.4 : 0
         Behavior on opacity { NumberAnimation { duration: 100 } }
@@ -33,6 +38,8 @@ Item {
             minimumX: -width / 2; maximumX: root.parent.width - width / 2
             minimumY: -height / 2; maximumY: root.parent.height - height / 2
         }
+        // Consume mouse hover events in case it is over PieceList
+        hoverEnabled: desktopLayout
 
         MouseArea {
             anchors.centerIn: dragArea
@@ -44,7 +51,7 @@ Item {
                 top: dragArea.top
                 horizontalCenter: dragArea.horizontalCenter
             }
-            width: 0.2 * root.width; height: width
+            width: buttonSize; height: width
             onClicked: pieceModel.rotateRight()
         }
         MouseArea {
@@ -52,7 +59,7 @@ Item {
                 right: dragArea.right
                 verticalCenter: dragArea.verticalCenter
             }
-            width: 0.2 * root.width; height: width
+            width: buttonSize; height: width
             onClicked: pieceModel.flipAcrossX()
         }
         MouseArea {
@@ -60,12 +67,12 @@ Item {
                 bottom: dragArea.bottom
                 horizontalCenter: dragArea.horizontalCenter
             }
-            width: 0.2 * root.width; height: width
+            width: buttonSize; height: width
             onClicked: pieceModel.flipAcrossY()
         }
         MouseArea {
             anchors { left: dragArea.left; verticalCenter: dragArea.verticalCenter }
-            width: 0.2 * root.width; height: width
+            width: buttonSize; height: width
             onClicked: pieceModel.rotateLeft()
         }
     }

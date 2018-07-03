@@ -2,6 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ru">
 <context>
+    <name>Actions</name>
+    <message>
+        <source>Computer &amp;Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Undo Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AnalyzeGame</name>
     <message>
         <source>(No analysis)</source>
@@ -561,14 +584,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Computer &amp;Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Level (Classic, 4 Players)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -739,10 +754,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Game &amp;Variant</source>
         <translation type="unfinished"></translation>
     </message>
@@ -763,19 +774,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Undo Move</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Find Move</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

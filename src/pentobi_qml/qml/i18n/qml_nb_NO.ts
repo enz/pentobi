@@ -2,6 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="nb_NO">
 <context>
+    <name>Actions</name>
+    <message>
+        <source>Computer &amp;Colors</source>
+        <translation>Datamaskin&amp;farger</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation>&amp;Ny</translation>
+    </message>
+    <message>
+        <source>&amp;Play</source>
+        <translation>&amp;Spill</translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation>&amp;Avslutt</translation>
+    </message>
+    <message>
+        <source>&amp;Undo Move</source>
+        <translation>&amp;Angre trekk</translation>
+    </message>
+</context>
+<context>
     <name>AnalyzeGame</name>
     <message>
         <source>(No analysis)</source>
@@ -574,11 +597,11 @@
     </message>
     <message>
         <source>Computer &amp;Colors</source>
-        <translation>Datamaskin&amp;farger</translation>
+        <translation type="vanished">Datamaskin&amp;farger</translation>
     </message>
     <message>
         <source>&amp;Play</source>
-        <translation>&amp;Spill</translation>
+        <translation type="vanished">&amp;Spill</translation>
     </message>
     <message>
         <source>&amp;Level (Classic, 4 Players)</source>
@@ -752,7 +775,7 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Ny</translation>
+        <translation type="vanished">&amp;Ny</translation>
     </message>
     <message>
         <source>Game &amp;Variant</source>
@@ -776,7 +799,7 @@
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation>&amp;Angre trekk</translation>
+        <translation type="vanished">&amp;Angre trekk</translation>
     </message>
     <message>
         <source>&amp;Find Move</source>
@@ -788,7 +811,7 @@
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation>&amp;Avslutt</translation>
+        <translation type="vanished">&amp;Avslutt</translation>
     </message>
     <message>
         <source>&amp;Classic</source>

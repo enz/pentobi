@@ -7,11 +7,7 @@ import "." as Pentobi
 Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&Game"))
 
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&New"))
-        enabled: isRated || ! gameModel.isGameEmpty
-        onTriggered: Logic.newGame()
-    }
+    MenuItem { action: actions.actionNew }
     MenuItem {
         text: Logic.removeShortcut(qsTr("&Rated Game"))
         enabled: ! isRated
@@ -120,11 +116,7 @@ Pentobi.Menu {
         onTriggered: Logic.openGameInfoDialog()
     }
     MenuSeparator { }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&Undo Move"))
-        enabled: gameModel.canUndo && ! isRated
-        onTriggered: Logic.undo()
-    }
+    MenuItem { action: actions.actionUndo }
     MenuItem {
         text: Logic.removeShortcut(qsTr("&Find Move"))
         enabled: ! gameModel.isGameOver
@@ -179,8 +171,5 @@ Pentobi.Menu {
         }
     }
     MenuSeparator { }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&Quit"))
-        onTriggered: Qt.quit()
-    }
+    MenuItem { action: actions.actionQuit }
 }
