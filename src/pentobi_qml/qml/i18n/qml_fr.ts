@@ -1074,7 +1074,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation type="vanished">&amp;Plein écran</translation>
+        <translation>&amp;Plein écran</translation>
     </message>
     <message>
         <source>&amp;Theme</source>

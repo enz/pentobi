@@ -1038,7 +1038,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation type="vanished">フルスクリーン</translation>
+        <translation>フルスクリーン</translation>
     </message>
     <message>
         <source>&amp;Theme</source>
