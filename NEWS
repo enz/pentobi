@@ -9,6 +9,10 @@ Android version:
 Version 15.0.UNKNOWN (v15-fixes)
 ================================
 
+Desktop version:
+
+* Avoid duplicate menu mnemonics in some translations.
+
 Android version:
 
 * Board was not updated if it became empty after opening a file failed.

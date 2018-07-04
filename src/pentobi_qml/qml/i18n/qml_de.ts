@@ -939,7 +939,7 @@
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
-        <translation>Aus &amp;Zwischenablage öffnen</translation>
+        <translation>Aus Zwischen&amp;ablage öffnen</translation>
     </message>
     <message>
         <source>&amp;GembloQ</source>
