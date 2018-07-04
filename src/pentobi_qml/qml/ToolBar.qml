@@ -15,7 +15,7 @@ RowLayout {
     spacing: 0
 
     Label {
-        visible: ! desktopLayout
+        visible: ! isDesktop
 
         text: {
             if (isRated) return qsTr("Rated")
@@ -68,45 +68,45 @@ RowLayout {
         visible: ! isAndroid || enabled
     }
     Pentobi.Button {
-        visible: desktopLayout
+        visible: isDesktop
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-beginning")
         action: actions.actionBeginning
     }
     Pentobi.Button {
-        visible: desktopLayout
+        visible: isDesktop
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-backward")
         action: actions.actionBackward
         autoRepeat: true
     }
     Pentobi.Button {
-        visible: desktopLayout
+        visible: isDesktop
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-forward")
         action: actions.actionForward
         autoRepeat: true
     }
     Pentobi.Button {
-        visible: desktopLayout
+        visible: isDesktop
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-end")
         action: actions.actionEnd
     }
     Pentobi.Button {
-        visible: desktopLayout
+        visible: isDesktop
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-previous-variation")
         action: actions.actionPrevVar
     }
     Pentobi.Button {
-        visible: desktopLayout
+        visible: isDesktop
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-next-variation")
         action: actions.actionNextVar
     }
     ToolButton {
-        visible: desktopLayout && gameDisplay.setupMode
+        visible: isDesktop && gameDisplay.setupMode
         contentItem: Text {
             color: theme.messageTextColor
             text: qsTr("Leave setup")
@@ -123,14 +123,14 @@ RowLayout {
     }
     Item { Layout.preferredWidth: parent.height / 2 }
     Label {
-        visible: desktopLayout && (isRated || gameModel.file !== "")
+        visible: isDesktop && (isRated || gameModel.file !== "")
         text: {
             if (isRated) return qsTr("Rated")
             return Logic.getFileLabel(gameModel.file, gameModel.isModified)
         }
     }
     Item {
-        visible: desktopLayout
+        visible: isDesktop
         Layout.fillWidth: true
     }
     Pentobi.Button {

@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
-import QtQuick.Window 2.1
 import "Main.js" as Logic
 import "." as Pentobi
 
@@ -95,14 +94,5 @@ Pentobi.Menu {
         onTriggered: gameDisplay.enableAnimations = checked
     }
     MenuSeparator { }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&Fullscreen"))
-        checkable: true
-        checked: visibility === Window.FullScreen
-        onTriggered:
-            if (visibility !== Window.FullScreen)
-                visibility = Window.FullScreen
-            else
-                visibility = Window.AutomaticVisibility
-    }
+    MenuItem { action: actions.actionFullscreen }
 }

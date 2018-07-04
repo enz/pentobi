@@ -23,6 +23,50 @@
         <source>&amp;Undo Move</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Back to &amp;Main Variation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Find Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Game Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Go to Move...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pentobi &amp;Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rated Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play &amp;Single Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeGame</name>
@@ -632,10 +676,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play &amp;Single Move</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>St&amp;op</source>
         <translation type="unfinished"></translation>
     </message>
@@ -774,14 +814,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Find Move</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Open...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Classic</source>
         <translation type="unfinished"></translation>
     </message>
@@ -842,23 +874,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Game Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open R&amp;ecent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Rated Game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -901,14 +917,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Back to &amp;Main Variation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Go to Move...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Beginning of Bran&amp;ch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -927,10 +935,6 @@
         <source>&amp;About Pentobi</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Pentobi &amp;Help</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MenuItemLevel</name>
@@ -947,10 +951,6 @@
     </message>
     <message>
         <source>&amp;Analyze Game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -994,10 +994,6 @@
     </message>
     <message>
         <source>Show &amp;Variations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

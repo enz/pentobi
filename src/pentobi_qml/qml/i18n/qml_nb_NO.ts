@@ -23,6 +23,50 @@
         <source>&amp;Undo Move</source>
         <translation>&amp;Angre trekk</translation>
     </message>
+    <message>
+        <source>Back to &amp;Main Variation</source>
+        <translation>Tilbake til &amp;hovedvariasjon</translation>
+    </message>
+    <message>
+        <source>&amp;Find Move</source>
+        <translation>&amp;Finn trekk</translation>
+    </message>
+    <message>
+        <source>&amp;Game Info</source>
+        <translation>&amp;Spillinfo</translation>
+    </message>
+    <message>
+        <source>&amp;Go to Move...</source>
+        <translation>&amp;Gå til trekk…</translation>
+    </message>
+    <message>
+        <source>Pentobi &amp;Help</source>
+        <translation>Pentobi-&amp;help</translation>
+    </message>
+    <message>
+        <source>&amp;Rated Game</source>
+        <translation>&amp;Vurdert spill</translation>
+    </message>
+    <message>
+        <source>&amp;Open...</source>
+        <translation>&amp;Åpne…</translation>
+    </message>
+    <message>
+        <source>Play &amp;Single Move</source>
+        <translation>Spill &amp;enkelttrekk</translation>
+    </message>
+    <message>
+        <source>&amp;Rating</source>
+        <translation>&amp;Vurdering</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Lagre</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation>Lagre &amp;som…</translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeGame</name>
@@ -653,7 +697,7 @@
     </message>
     <message>
         <source>Play &amp;Single Move</source>
-        <translation>Spill &amp;enkelttrekk</translation>
+        <translation type="vanished">Spill &amp;enkelttrekk</translation>
     </message>
     <message>
         <source>St&amp;op</source>
@@ -803,11 +847,11 @@
     </message>
     <message>
         <source>&amp;Find Move</source>
-        <translation>&amp;Finn trekk</translation>
+        <translation type="vanished">&amp;Finn trekk</translation>
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation>&amp;Åpne…</translation>
+        <translation type="vanished">&amp;Åpne…</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -875,15 +919,15 @@
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Lagre</translation>
+        <translation type="vanished">&amp;Lagre</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Lagre &amp;som…</translation>
+        <translation type="vanished">Lagre &amp;som…</translation>
     </message>
     <message>
         <source>&amp;Game Info</source>
-        <translation>&amp;Spillinfo</translation>
+        <translation type="vanished">&amp;Spillinfo</translation>
     </message>
     <message>
         <source>Open R&amp;ecent</source>
@@ -891,7 +935,7 @@
     </message>
     <message>
         <source>&amp;Rated Game</source>
-        <translation>&amp;Vurdert spill</translation>
+        <translation type="vanished">&amp;Vurdert spill</translation>
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
@@ -934,11 +978,11 @@
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
-        <translation>Tilbake til &amp;hovedvariasjon</translation>
+        <translation type="vanished">Tilbake til &amp;hovedvariasjon</translation>
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation>&amp;Gå til trekk…</translation>
+        <translation type="vanished">&amp;Gå til trekk…</translation>
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
@@ -961,7 +1005,7 @@
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
-        <translation>Pentobi-&amp;help</translation>
+        <translation type="vanished">Pentobi-&amp;help</translation>
     </message>
 </context>
 <context>
@@ -983,7 +1027,7 @@
     </message>
     <message>
         <source>&amp;Rating</source>
-        <translation>&amp;Vurdering</translation>
+        <translation type="vanished">&amp;Vurdering</translation>
     </message>
     <message>
         <source>&amp;Clear Rating</source>
@@ -1030,7 +1074,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation>&amp;Fullskjermsvisning</translation>
+        <translation type="vanished">&amp;Fullskjermsvisning</translation>
     </message>
     <message>
         <source>&amp;Theme</source>

@@ -1,8 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.0
+import "." as Pentobi
 
-Dialog {
+Pentobi.Dialog {
     property alias computerPlays0: checkBox0.checked
     property alias computerPlays1: checkBox1.checked
     property alias computerPlays2: checkBox2.checked
@@ -10,9 +11,6 @@ Dialog {
 
     title: isAndroid ? "" : qsTr("Computer Colors")
     standardButtons: Dialog.Ok | Dialog.Cancel
-    x: (rootWindow.width - width) / 2
-    y: (rootWindow.height - height) / 2
-    parent: ApplicationWindow.overlay
 
     Column {
         spacing: Math.round(Screen.pixelDensity * 1.5)

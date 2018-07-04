@@ -16,7 +16,10 @@ ApplicationWindow {
     property bool computerPlays3: true
     property bool isPlaySingleMoveRunning
     property bool isRated
-    property bool desktopLayout: ! isAndroid
+
+    // Assume larger screen with landscape orientation and mouse input.
+    property bool isDesktop: ! isAndroid
+
     property int maxLevel: 7
     property alias gameDisplay: gameDisplayLoader.item
 
@@ -47,8 +50,8 @@ ApplicationWindow {
     property Actions actions: Actions { }
 
 
-    minimumWidth: desktopLayout ? 560 : 240
-    minimumHeight: desktopLayout ? 315 : 301
+    minimumWidth: isDesktop ? 560 : 240
+    minimumHeight: isDesktop ? 315 : 301
 
     width: defaultWidth; height: defaultHeight
     color: theme.backgroundColor
@@ -64,13 +67,19 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 0
         Keys.onReleased:
-            if ((event.key === Qt.Key_Back || event.key === Qt.Key_Escape)
+            if (event.key === Qt.Key_0) {
+                gameDisplay.pickedPiece = null
+                event.accepted = true
+            }
+            else if ((event.key === Qt.Key_Back || event.key === Qt.Key_Escape)
                     && visibility === Window.FullScreen) {
                 visibility = Window.AutomaticVisibility
                 event.accepted = true
             }
-            else if (event.key === Qt.Key_Menu)
+            else if (event.key === Qt.Key_Menu) {
                 toolBar.openMenu()
+                event.accepted = true
+            }
         Keys.onPressed:
             if (event.key === Qt.Key_Alt)
                 toolBar.openMenu()
@@ -86,7 +95,7 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
             focus: true
-            sourceComponent: desktopLayout ? componentGameDisplayDesktop : componentGameDisplayMobile
+            sourceComponent: isDesktop ? componentGameDisplayDesktop : componentGameDisplayMobile
 
             Component {
                 id: componentGameDisplayDesktop
@@ -109,7 +118,7 @@ ApplicationWindow {
         }
     }
     MouseArea {
-        visible: desktopLayout
+        visible: isDesktop
         enabled: false
         anchors.fill: parent
         cursorShape: busyIndicatorRunning ? Qt.BusyCursor : Qt.ArrowCursor

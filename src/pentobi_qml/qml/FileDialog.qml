@@ -3,9 +3,10 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
 import Qt.labs.folderlistmodel 2.1
+import "." as Pentobi
 import "Main.js" as Logic
 
-Dialog {
+Pentobi.Dialog {
     id: root
 
     property bool selectExisting: true
@@ -14,9 +15,6 @@ Dialog {
     property string nameFilterText
     property string nameFilter
 
-    x: (rootWindow.width - width) / 2
-    y: (rootWindow.height - height) / 2
-    parent: ApplicationWindow.overlay
     standardButtons: Dialog.Cancel | (selectExisting ? Dialog.Open : Dialog.Save)
     onVisibleChanged: {
         if (visible) {

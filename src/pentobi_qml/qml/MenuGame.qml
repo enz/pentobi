@@ -8,11 +8,7 @@ Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&Game"))
 
     MenuItem { action: actions.actionNew }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&Rated Game"))
-        enabled: ! isRated
-        onTriggered: Logic.ratedGame()
-    }
+    MenuItem { action: actions.actionNewRated }
     MenuSeparator { }
     Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("Game &Variant"))
@@ -111,22 +107,12 @@ Pentobi.Menu {
             }
         }
     }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&Game Info"))
-        onTriggered: Logic.openGameInfoDialog()
-    }
+    MenuItem { action: actions.actionGameInfo }
     MenuSeparator { }
     MenuItem { action: actions.actionUndo }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&Find Move"))
-        enabled: ! gameModel.isGameOver
-        onTriggered: Logic.findMove()
-    }
+    MenuItem { action: actions.actionFindMove }
     MenuSeparator { }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&Open..."))
-        onTriggered: Logic.open()
-    }
+    MenuItem { action: actions.actionOpen }
     Pentobi.Menu {
         id: recentFiles
 
@@ -148,16 +134,8 @@ Pentobi.Menu {
         text: Logic.removeShortcut(qsTr("Open from &Clipboard"))
         onTriggered: Logic.openClipboard()
     }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&Save"))
-        enabled: gameModel.file !== "" && gameModel.isModified
-        onTriggered: Logic.save()
-    }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("Save &As..."))
-        enabled: ! gameModel.isGameEmpty
-        onTriggered: Logic.saveAs()
-    }
+    MenuItem { action: actions.actionSave }
+    MenuItem { action: actions.actionSaveAs }
     Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("&Export"))
 

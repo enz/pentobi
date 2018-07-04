@@ -1,5 +1,7 @@
 set(CMAKE_AUTOMOC TRUE)
 
+find_package(Qt5QuickCompiler)
+
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(pentobi_qml_SRCS
@@ -20,16 +22,13 @@ set(pentobi_qml_SRCS
 
 set(pentobi_qml_QRC
     resources.qrc
+    translations.qrc
     qml/themes/themes.qrc
     ../books/pentobi_books.qrc
-    )
-if (${CMAKE_SYSTEM_NAME} MATCHES "Android")
-    set(pentobi_qml_QRC ${pentobi_qml_QRC}
-        ../pentobi/help.qrc
-        )
-endif()
+    ../pentobi/help.qrc
+)
 
-qt5_add_resources(pentobi_qml_RC_SRCS ${pentobi_qml_QRC})
+qtquick_compiler_add_resources(pentobi_qml_RC_SRCS ${pentobi_qml_QRC})
 
 add_executable(pentobi_qml WIN32
   ${pentobi_qml_SRCS}

@@ -23,6 +23,50 @@
         <source>&amp;Undo Move</source>
         <translation>&amp;Annuler le coup</translation>
     </message>
+    <message>
+        <source>Back to &amp;Main Variation</source>
+        <translation>Retour à la variation &amp;principale</translation>
+    </message>
+    <message>
+        <source>&amp;Find Move</source>
+        <translation>&amp;Trouver un coup</translation>
+    </message>
+    <message>
+        <source>&amp;Game Info</source>
+        <translation>I&amp;nfo sur la partie</translation>
+    </message>
+    <message>
+        <source>&amp;Go to Move...</source>
+        <translation>Aller au &amp;coup...</translation>
+    </message>
+    <message>
+        <source>Pentobi &amp;Help</source>
+        <translation>&amp;Aide de Pentobi</translation>
+    </message>
+    <message>
+        <source>&amp;Rated Game</source>
+        <translation>Partie &amp;classée</translation>
+    </message>
+    <message>
+        <source>&amp;Open...</source>
+        <translation>&amp;Ouvrir...</translation>
+    </message>
+    <message>
+        <source>Play &amp;Single Move</source>
+        <translation>Jouer un &amp;seul coup</translation>
+    </message>
+    <message>
+        <source>&amp;Rating</source>
+        <translation>&amp;Classement</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>Enregi&amp;strer</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation>Enre&amp;gistrer sous...</translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeGame</name>
@@ -653,7 +697,7 @@
     </message>
     <message>
         <source>Play &amp;Single Move</source>
-        <translation>Jouer un &amp;seul coup</translation>
+        <translation type="vanished">Jouer un &amp;seul coup</translation>
     </message>
     <message>
         <source>St&amp;op</source>
@@ -803,11 +847,11 @@
     </message>
     <message>
         <source>&amp;Find Move</source>
-        <translation>&amp;Trouver un coup</translation>
+        <translation type="vanished">&amp;Trouver un coup</translation>
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation>&amp;Ouvrir...</translation>
+        <translation type="vanished">&amp;Ouvrir...</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -875,15 +919,15 @@
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>Enregi&amp;strer</translation>
+        <translation type="vanished">Enregi&amp;strer</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Enre&amp;gistrer sous...</translation>
+        <translation type="vanished">Enre&amp;gistrer sous...</translation>
     </message>
     <message>
         <source>&amp;Game Info</source>
-        <translation>I&amp;nfo sur la partie</translation>
+        <translation type="vanished">I&amp;nfo sur la partie</translation>
     </message>
     <message>
         <source>Open R&amp;ecent</source>
@@ -891,7 +935,7 @@
     </message>
     <message>
         <source>&amp;Rated Game</source>
-        <translation>Partie &amp;classée</translation>
+        <translation type="vanished">Partie &amp;classée</translation>
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
@@ -934,11 +978,11 @@
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
-        <translation>Retour à la variation &amp;principale</translation>
+        <translation type="vanished">Retour à la variation &amp;principale</translation>
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation>Aller au &amp;coup...</translation>
+        <translation type="vanished">Aller au &amp;coup...</translation>
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
@@ -961,7 +1005,7 @@
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
-        <translation>&amp;Aide de Pentobi</translation>
+        <translation type="vanished">&amp;Aide de Pentobi</translation>
     </message>
 </context>
 <context>
@@ -983,7 +1027,7 @@
     </message>
     <message>
         <source>&amp;Rating</source>
-        <translation>&amp;Classement</translation>
+        <translation type="vanished">&amp;Classement</translation>
     </message>
     <message>
         <source>&amp;Clear Rating</source>
@@ -1030,7 +1074,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation>&amp;Plein écran</translation>
+        <translation type="vanished">&amp;Plein écran</translation>
     </message>
     <message>
         <source>&amp;Theme</source>

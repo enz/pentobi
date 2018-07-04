@@ -23,6 +23,50 @@
         <source>&amp;Undo Move</source>
         <translation>Zug &amp;rückgängig</translation>
     </message>
+    <message>
+        <source>Back to &amp;Main Variation</source>
+        <translation>Zurück zu &amp;Hauptvariante</translation>
+    </message>
+    <message>
+        <source>&amp;Find Move</source>
+        <translation>Zug &amp;finden</translation>
+    </message>
+    <message>
+        <source>&amp;Game Info</source>
+        <translation>Spielinf&amp;ormation</translation>
+    </message>
+    <message>
+        <source>&amp;Go to Move...</source>
+        <translation>&amp;Gehe zu Zug ...</translation>
+    </message>
+    <message>
+        <source>Pentobi &amp;Help</source>
+        <translation>Pentobi-&amp;Hilfe</translation>
+    </message>
+    <message>
+        <source>&amp;Rated Game</source>
+        <translation>Ge&amp;wertetes Spiel</translation>
+    </message>
+    <message>
+        <source>&amp;Open...</source>
+        <translation>Öffn&amp;en ...</translation>
+    </message>
+    <message>
+        <source>Play &amp;Single Move</source>
+        <translation>&amp;Einzelnen Zug spielen</translation>
+    </message>
+    <message>
+        <source>&amp;Rating</source>
+        <translation>&amp;Wertung</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Speichern</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation>Speichern &amp;unter ...</translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeGame</name>
@@ -653,7 +697,7 @@
     </message>
     <message>
         <source>Play &amp;Single Move</source>
-        <translation>&amp;Einzelnen Zug spielen</translation>
+        <translation type="vanished">&amp;Einzelnen Zug spielen</translation>
     </message>
     <message>
         <source>St&amp;op</source>
@@ -803,11 +847,11 @@
     </message>
     <message>
         <source>&amp;Find Move</source>
-        <translation>Zug &amp;finden</translation>
+        <translation type="vanished">Zug &amp;finden</translation>
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation>Öffn&amp;en ...</translation>
+        <translation type="vanished">Öffn&amp;en ...</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -875,15 +919,15 @@
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Speichern</translation>
+        <translation type="vanished">&amp;Speichern</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>Speichern &amp;unter ...</translation>
+        <translation type="vanished">Speichern &amp;unter ...</translation>
     </message>
     <message>
         <source>&amp;Game Info</source>
-        <translation>Spielinf&amp;ormation</translation>
+        <translation type="vanished">Spielinf&amp;ormation</translation>
     </message>
     <message>
         <source>Open R&amp;ecent</source>
@@ -891,7 +935,7 @@
     </message>
     <message>
         <source>&amp;Rated Game</source>
-        <translation>Ge&amp;wertetes Spiel</translation>
+        <translation type="vanished">Ge&amp;wertetes Spiel</translation>
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
@@ -934,11 +978,11 @@
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
-        <translation>Zurück zu &amp;Hauptvariante</translation>
+        <translation type="vanished">Zurück zu &amp;Hauptvariante</translation>
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation>&amp;Gehe zu Zug ...</translation>
+        <translation type="vanished">&amp;Gehe zu Zug ...</translation>
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
@@ -961,7 +1005,7 @@
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
-        <translation>Pentobi-&amp;Hilfe</translation>
+        <translation type="vanished">Pentobi-&amp;Hilfe</translation>
     </message>
 </context>
 <context>
@@ -983,7 +1027,7 @@
     </message>
     <message>
         <source>&amp;Rating</source>
-        <translation>&amp;Wertung</translation>
+        <translation type="vanished">&amp;Wertung</translation>
     </message>
     <message>
         <source>&amp;Clear Rating</source>
@@ -1030,7 +1074,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation>Voll&amp;bild</translation>
+        <translation type="vanished">Voll&amp;bild</translation>
     </message>
     <message>
         <source>&amp;Theme</source>

@@ -1,8 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.0
+import "." as Pentobi
 
-Dialog {
+Pentobi.Dialog {
     id: root
 
     property alias text: label.text
@@ -18,9 +19,6 @@ Dialog {
     }
 
     standardButtons: Dialog.Ok
-    x: (rootWindow.width - width) / 2
-    y: (rootWindow.height - height) / 2
-    parent: ApplicationWindow.overlay
 
     Column
     {

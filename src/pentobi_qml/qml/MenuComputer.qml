@@ -9,11 +9,7 @@ Pentobi.Menu {
     MenuItem { action: actions.actionComputerColors }
     MenuItem { action: actions.actionPlay }
     MenuSeparator { }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("Play &Single Move"))
-        enabled: ! gameModel.isGameOver && ! isRated
-        onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
-    }
+    MenuItem { action: actions.actionPlaySingle }
     MenuItem {
         text: Logic.removeShortcut(qsTr("St&op"))
         enabled: playerModel.isGenMoveRunning && ! isRated

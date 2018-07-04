@@ -23,6 +23,50 @@
         <source>&amp;Undo Move</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Back to &amp;Main Variation</source>
+        <translation>本手順へ戻る</translation>
+    </message>
+    <message>
+        <source>&amp;Find Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Game Info</source>
+        <translation>対局情報</translation>
+    </message>
+    <message>
+        <source>&amp;Go to Move...</source>
+        <translation>N手目へ移動...</translation>
+    </message>
+    <message>
+        <source>Pentobi &amp;Help</source>
+        <translation>ヘルプ</translation>
+    </message>
+    <message>
+        <source>&amp;Rated Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Open...</source>
+        <translation>開く...</translation>
+    </message>
+    <message>
+        <source>Play &amp;Single Move</source>
+        <translation>1手打つ</translation>
+    </message>
+    <message>
+        <source>&amp;Rating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>上書き保存</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation>名前を付けて保存...</translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeGame</name>
@@ -633,7 +677,7 @@
     </message>
     <message>
         <source>Play &amp;Single Move</source>
-        <translation>1手打つ</translation>
+        <translation type="vanished">1手打つ</translation>
     </message>
     <message>
         <source>St&amp;op</source>
@@ -778,12 +822,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Find Move</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Open...</source>
-        <translation>開く...</translation>
+        <translation type="vanished">開く...</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -851,23 +891,19 @@
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>上書き保存</translation>
+        <translation type="vanished">上書き保存</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
-        <translation>名前を付けて保存...</translation>
+        <translation type="vanished">名前を付けて保存...</translation>
     </message>
     <message>
         <source>&amp;Game Info</source>
-        <translation>対局情報</translation>
+        <translation type="vanished">対局情報</translation>
     </message>
     <message>
         <source>Open R&amp;ecent</source>
         <translation>最近使ったファイル</translation>
-    </message>
-    <message>
-        <source>&amp;Rated Game</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
@@ -910,11 +946,11 @@
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
-        <translation>本手順へ戻る</translation>
+        <translation type="vanished">本手順へ戻る</translation>
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation>N手目へ移動...</translation>
+        <translation type="vanished">N手目へ移動...</translation>
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
@@ -937,7 +973,7 @@
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
-        <translation>ヘルプ</translation>
+        <translation type="vanished">ヘルプ</translation>
     </message>
 </context>
 <context>
@@ -955,10 +991,6 @@
     </message>
     <message>
         <source>&amp;Analyze Game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1006,7 +1038,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation>フルスクリーン</translation>
+        <translation type="vanished">フルスクリーン</translation>
     </message>
     <message>
         <source>&amp;Theme</source>

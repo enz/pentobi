@@ -1,8 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
+import "." as Pentobi
 
-Dialog {
+Pentobi.Dialog {
     property alias playerName0: textFieldPlayerName0.text
     property alias playerName1: textFieldPlayerName1.text
     property alias playerName2: textFieldPlayerName2.text
@@ -13,9 +14,6 @@ Dialog {
     property alias round: textFieldRound.text
     property string gameVariant: gameModel.gameVariant
 
-    x: (rootWindow.width - width) / 2
-    y: (rootWindow.height - height) / 2
-    parent: ApplicationWindow.overlay
     title: isAndroid ? "" : qsTr("Game Info")
     standardButtons: Dialog.Ok | Dialog.Cancel
     onAccepted: {

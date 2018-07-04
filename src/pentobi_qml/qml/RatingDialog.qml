@@ -2,17 +2,15 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import QtQuick.Window 2.0
+import "." as Pentobi
 import "Main.js" as Logic
 
-Dialog {
+Pentobi.Dialog {
     property int numberGames: ratingModel.numberGames
     property var history: ratingModel.history
 
     //: Window title for the rating dialog.
     title: isAndroid ? "" : qsTr("Rating")
-    x: (rootWindow.width - width) / 2
-    y: (rootWindow.height - height) / 2
-    parent: ApplicationWindow.overlay
     standardButtons: Dialog.Ok
     onVisibleChanged:
         if (! visible) {

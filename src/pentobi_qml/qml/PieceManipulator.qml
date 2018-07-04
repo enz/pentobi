@@ -8,13 +8,13 @@ Item {
     property bool legal
 
     // Manipulator buttons are smaller on desktop with mouse usage
-    property real buttonSize: (desktopLayout ? 0.14 : 0.20) * root.width
+    property real buttonSize: (isDesktop ? 0.14 : 0.20) * root.width
 
     signal piecePlayed
 
     Image {
         anchors.fill: root
-        source: desktopLayout ? theme.getImage("piece-manipulator-desktop")
+        source: isDesktop ? theme.getImage("piece-manipulator-desktop")
                               : theme.getImage("piece-manipulator")
         sourceSize { width: width; height: height }
         opacity: ! legal ? 0.4 : 0
@@ -22,7 +22,7 @@ Item {
     }
     Image {
         anchors.fill: root
-        source: desktopLayout ? theme.getImage("piece-manipulator-desktop-legal")
+        source: isDesktop ? theme.getImage("piece-manipulator-desktop-legal")
                               : theme.getImage("piece-manipulator-legal")
         sourceSize { width: width; height: height }
         opacity: legal ? 0.4 : 0
@@ -39,7 +39,7 @@ Item {
             minimumY: -height / 2; maximumY: root.parent.height - height / 2
         }
         // Consume mouse hover events in case it is over PieceList
-        hoverEnabled: desktopLayout
+        hoverEnabled: isDesktop
 
         MouseArea {
             anchors.centerIn: dragArea
@@ -76,4 +76,7 @@ Item {
             onClicked: pieceModel.rotateLeft()
         }
     }
+
+    Behavior on x { NumberAnimation { duration: visible ? 300 : 0; easing.type: Easing.InOutSine } }
+    Behavior on y { NumberAnimation { duration: visible ? 300 : 0; easing.type: Easing.InOutSine } }
 }

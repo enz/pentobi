@@ -11,7 +11,10 @@ Window {
             lang = lang.substr(0, pos)
         if (lang !== "C" && lang !== "de")
             lang = "C"
-        helpFileExtractor.extract(lang)
+        // qrc urls work in WebView on Linux but not on Android
+        if (isDesktop)
+            return "qrc:///qml/help/" + lang + "/pentobi/index.html"
+        return helpFileExtractor.extract(lang)
     }
 
     // Instead of initializing webView.url with startUrl, we provide an init

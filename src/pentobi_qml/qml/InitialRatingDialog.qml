@@ -2,14 +2,12 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import QtQuick.Window 2.0
+import "." as Pentobi
 import "Main.js" as Logic
 
-Dialog {
+Pentobi.Dialog {
     title: isAndroid ? "" : qsTr("Initial Rating")
     standardButtons: Dialog.Ok | Dialog.Cancel
-    x: (rootWindow.width - width) / 2
-    y: (rootWindow.height - height) / 2
-    parent: ApplicationWindow.overlay
     onAccepted: {
         ratingModel.setInitialRating(Math.round(slider.value))
         Logic.ratedGameNoVerify()

@@ -6,15 +6,7 @@ import "." as Pentobi
 Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&Tools"))
 
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("&Rating"))
-        onTriggered: {
-            // Never reuse RatingDialog
-            // See comment in Main.qml at ratingModel.onHistoryChanged
-            ratingDialog.source = ""
-            ratingDialog.open()
-        }
-    }
+    MenuItem { action: actions.actionRating }
     MenuItem {
         enabled:  ! isRated && ratingModel.numberGames > 0
         text: Logic.removeShortcut(qsTr("&Clear Rating"))

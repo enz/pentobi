@@ -1,11 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import "." as Pentobi
 
-Dialog {
+Pentobi.Dialog {
     title: isAndroid ? "" : qsTr("Go to Move")
-    x: (rootWindow.width - width) / 2
-    y: (rootWindow.height - height) / 2
-    parent: ApplicationWindow.overlay
     standardButtons: Dialog.Ok | Dialog.Cancel
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 

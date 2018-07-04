@@ -1,12 +1,10 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import "." as Pentobi
 
-Dialog {
+Pentobi.Dialog {
     title: isAndroid ? "" : qsTr("Export Image")
     standardButtons: Dialog.Ok | Dialog.Cancel
-    x: (rootWindow.width - width) / 2
-    y: (rootWindow.height - height) / 2
-    parent: ApplicationWindow.overlay
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
         imageSaveDialog.open()
