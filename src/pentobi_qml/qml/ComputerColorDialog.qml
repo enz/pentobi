@@ -10,7 +10,7 @@ Pentobi.Dialog {
     property alias computerPlays3: checkBox3.checked
 
     title: isAndroid ? "" : qsTr("Computer Colors")
-    standardButtons: Dialog.Ok | Dialog.Cancel
+    footer: OkCancelButtons { }
 
     Column {
         spacing: Math.round(Screen.pixelDensity * 1.5)

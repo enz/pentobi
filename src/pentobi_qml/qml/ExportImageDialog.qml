@@ -4,7 +4,7 @@ import "." as Pentobi
 
 Pentobi.Dialog {
     title: isAndroid ? "" : qsTr("Export Image")
-    standardButtons: Dialog.Ok | Dialog.Cancel
+    footer: OkCancelButtons { }
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
         imageSaveDialog.open()

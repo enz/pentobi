@@ -15,7 +15,7 @@ Pentobi.Dialog {
     property string gameVariant: gameModel.gameVariant
 
     title: isAndroid ? "" : qsTr("Game Info")
-    standardButtons: Dialog.Ok | Dialog.Cancel
+    footer: OkCancelButtons { }
     onAccepted: {
         gameModel.playerName0 = playerName0
         gameModel.playerName1 = playerName1

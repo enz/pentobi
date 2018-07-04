@@ -7,7 +7,7 @@ import "Main.js" as Logic
 
 Pentobi.Dialog {
     title: isAndroid ? "" : qsTr("Initial Rating")
-    standardButtons: Dialog.Ok | Dialog.Cancel
+    footer: OkCancelButtons { }
     onAccepted: {
         ratingModel.setInitialRating(Math.round(slider.value))
         Logic.ratedGameNoVerify()

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.0
+import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Dialog {
@@ -8,6 +9,7 @@ Pentobi.Dialog {
 
     property alias text: label.text
     property var acceptedFunc
+    property bool isQuestion: false
 
     function openWithCallback(text, acceptedFunc) {
         label.text = text
@@ -17,8 +19,10 @@ Pentobi.Dialog {
         root.acceptedFunc = acceptedFunc
         timer.restart()
     }
+    property DialogButtonBox infoButtons: OkButton { }
+    property DialogButtonBox questionButtons: OkCancelButtons { }
 
-    standardButtons: Dialog.Ok
+    footer: isQuestion ? questionButtons : infoButtons
 
     Column
     {

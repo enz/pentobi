@@ -15,7 +15,20 @@ Pentobi.Dialog {
     property string nameFilterText
     property string nameFilter
 
-    standardButtons: Dialog.Cancel | (selectExisting ? Dialog.Open : Dialog.Save)
+    // We don't use standardButtons because on Android, QtCreator does not
+    // automatically include the qtbase translations and Dialog in Qt 5.11
+    // has no mnemonics for the buttons.
+    footer: DialogButtonBox {
+        Button {
+            text: Logic.removeShortcut(selectExisting ? qsTr("&Open") : qsTr("&Save"))
+            DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+        }
+        Button {
+            text: Logic.removeShortcut(qsTr("&Cancel"))
+            DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
+        }
+    }
+
     onVisibleChanged: {
         if (visible) {
             view.currentIndex = -1

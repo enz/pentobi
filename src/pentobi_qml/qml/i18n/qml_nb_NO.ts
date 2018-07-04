@@ -162,6 +162,18 @@
         <source>All files (*)</source>
         <translation>Alle filer (*)</translation>
     </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation>Å&amp;pne</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Lagre</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Avbryt</translation>
+    </message>
 </context>
 <context>
     <name>GameDisplayDesktop</name>
@@ -1114,6 +1126,35 @@
         <source>Colorblind D&amp;ark</source>
         <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
         <translation>Fargeblind mør&amp;k</translation>
+    </message>
+</context>
+<context>
+    <name>MessageDialog</name>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="vanished">&amp;OK</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="vanished">&amp;Avbryt</translation>
+    </message>
+</context>
+<context>
+    <name>OkButton</name>
+    <message>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
+    </message>
+</context>
+<context>
+    <name>OkCancelButtons</name>
+    <message>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Avbryt</translation>
     </message>
 </context>
 <context>

@@ -34,6 +34,8 @@
         <file>qml/MenuView.qml</file>
         <file>qml/NavigationButtons.qml</file>
         <file>qml/NavigationPanel.qml</file>
+        <file>qml/OkButton.qml</file>
+        <file>qml/OkCancelButtons.qml</file>
         <file>qml/OpenDialog.qml</file>
         <file>qml/PieceCallisto.qml</file>
         <file>qml/PieceClassic.qml</file>

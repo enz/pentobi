@@ -52,15 +52,12 @@ ApplicationWindow {
 
     minimumWidth: isDesktop ? 560 : 240
     minimumHeight: isDesktop ? 315 : 301
-
     width: defaultWidth; height: defaultHeight
+    visible: true
     color: theme.backgroundColor
     //: Main window title if no file is loaded.
     title: qsTr("Pentobi")
-    Component.onCompleted: {
-        Logic.init()
-        show()
-    }
+    Component.onCompleted: Logic.init()
     Component.onDestruction: Logic.autoSave()
 
     ColumnLayout {
@@ -69,12 +66,6 @@ ApplicationWindow {
         Keys.onReleased:
             if (event.key === Qt.Key_Back && visibility === Window.FullScreen) {
                 visibility = Window.AutomaticVisibility
-                event.accepted = true
-            }
-        Keys.onPressed:
-            if (event.key === Qt.Key_Alt)
-            {
-                toolBar.openMenu()
                 event.accepted = true
             }
 
@@ -123,6 +114,7 @@ ApplicationWindow {
         property alias y: rootWindow.y
         property alias width: rootWindow.width
         property alias height: rootWindow.height
+        property alias visibility: rootWindow.visibility
         property alias folder: rootWindow.folder
         property alias computerPlays0: rootWindow.computerPlays0
         property alias computerPlays1: rootWindow.computerPlays1
@@ -215,9 +207,7 @@ ApplicationWindow {
     Component {
         id: questionMessageComponent
 
-        Pentobi.MessageDialog {
-            standardButtons: Dialog.Ok | Dialog.Cancel
-        }
+        Pentobi.MessageDialog { isQuestion: true }
     }
 
     // Used to delay calls to Logic.checkComputerMove such that the computer

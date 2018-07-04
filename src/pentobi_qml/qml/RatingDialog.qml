@@ -11,7 +11,7 @@ Pentobi.Dialog {
 
     //: Window title for the rating dialog.
     title: isAndroid ? "" : qsTr("Rating")
-    standardButtons: Dialog.Ok
+    footer: OkButton { }
     onVisibleChanged:
         if (! visible) {
             // See comment in Main.qml at ratingModel.onHistoryChanged

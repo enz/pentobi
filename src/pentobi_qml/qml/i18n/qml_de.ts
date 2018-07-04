@@ -162,6 +162,18 @@
         <source>All files (*)</source>
         <translation>Alle Dateien (*)</translation>
     </message>
+    <message>
+        <source>&amp;Open</source>
+        <translation>Öff&amp;nen</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Speichern</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Abbrechen</translation>
+    </message>
 </context>
 <context>
     <name>GameDisplayDesktop</name>
@@ -1114,6 +1126,35 @@
         <source>Colorblind D&amp;ark</source>
         <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
         <translation>Farbenblind d&amp;unkel</translation>
+    </message>
+</context>
+<context>
+    <name>MessageDialog</name>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="vanished">&amp;OK</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="vanished">&amp;Abbrechen</translation>
+    </message>
+</context>
+<context>
+    <name>OkButton</name>
+    <message>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
+    </message>
+</context>
+<context>
+    <name>OkCancelButtons</name>
+    <message>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Abbrechen</translation>
     </message>
 </context>
 <context>
