@@ -67,6 +67,18 @@
         <source>Save &amp;As...</source>
         <translation>Speichern &amp;unter ...</translation>
     </message>
+    <message>
+        <source>Beginning of Bran&amp;ch</source>
+        <translation>Anfang der Verz&amp;weigung</translation>
+    </message>
+    <message>
+        <source>Find Next &amp;Comment</source>
+        <translation>Nächsten &amp;Kommentar finden</translation>
+    </message>
+    <message>
+        <source>&amp;Fullscreen</source>
+        <translation>Voll&amp;bild</translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeGame</name>
@@ -986,11 +998,11 @@
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation>Anfang der Verz&amp;weigung</translation>
+        <translation type="vanished">Anfang der Verz&amp;weigung</translation>
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
-        <translation>Nächsten &amp;Kommentar finden</translation>
+        <translation type="vanished">Nächsten &amp;Kommentar finden</translation>
     </message>
 </context>
 <context>
@@ -1074,7 +1086,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation>Voll&amp;bild</translation>
+        <translation type="vanished">Voll&amp;bild</translation>
     </message>
     <message>
         <source>&amp;Theme</source>

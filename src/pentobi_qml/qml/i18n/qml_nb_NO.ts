@@ -67,6 +67,18 @@
         <source>Save &amp;As...</source>
         <translation>Lagre &amp;som…</translation>
     </message>
+    <message>
+        <source>Beginning of Bran&amp;ch</source>
+        <translation>Begynnelse av forgre&amp;ining</translation>
+    </message>
+    <message>
+        <source>Find Next &amp;Comment</source>
+        <translation>Finn neste &amp;kommentar</translation>
+    </message>
+    <message>
+        <source>&amp;Fullscreen</source>
+        <translation>&amp;Fullskjermsvisning</translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeGame</name>
@@ -986,11 +998,11 @@
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation>Begynnelse av forgre&amp;ining</translation>
+        <translation type="vanished">Begynnelse av forgre&amp;ining</translation>
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
-        <translation>Finn neste &amp;kommentar</translation>
+        <translation type="vanished">Finn neste &amp;kommentar</translation>
     </message>
 </context>
 <context>
@@ -1074,7 +1086,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation>&amp;Fullskjermsvisning</translation>
+        <translation type="vanished">&amp;Fullskjermsvisning</translation>
     </message>
     <message>
         <source>&amp;Theme</source>

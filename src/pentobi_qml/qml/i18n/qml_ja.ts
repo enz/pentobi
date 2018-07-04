@@ -67,6 +67,18 @@
         <source>Save &amp;As...</source>
         <translation>名前を付けて保存...</translation>
     </message>
+    <message>
+        <source>Beginning of Bran&amp;ch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find Next &amp;Comment</source>
+        <translation>次のコメントを検索</translation>
+    </message>
+    <message>
+        <source>&amp;Fullscreen</source>
+        <translation>フルスクリーン</translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeGame</name>
@@ -953,12 +965,8 @@
         <translation type="vanished">N手目へ移動...</translation>
     </message>
     <message>
-        <source>Beginning of Bran&amp;ch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Find Next &amp;Comment</source>
-        <translation>次のコメントを検索</translation>
+        <translation type="vanished">次のコメントを検索</translation>
     </message>
 </context>
 <context>
@@ -1038,7 +1046,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation>フルスクリーン</translation>
+        <translation type="vanished">フルスクリーン</translation>
     </message>
     <message>
         <source>&amp;Theme</source>

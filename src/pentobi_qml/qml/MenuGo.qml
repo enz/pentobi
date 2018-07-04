@@ -8,15 +8,7 @@ Pentobi.Menu {
 
     MenuItem { action: actions.actionGoto }
     MenuItem { action: actions.actionBackToMainVar }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("Beginning of Bran&ch"))
-        enabled: gameModel.hasEarlierVar
-        onTriggered: gameModel.gotoBeginningOfBranch()
-    }
+    MenuItem { action: actions.actionBeginningOfBranch }
     MenuSeparator { }
-    MenuItem {
-        text: Logic.removeShortcut(qsTr("Find Next &Comment"))
-        enabled: gameModel.canGoForward || gameModel.canGoBackward
-        onTriggered: Logic.findNextComment()
-    }
+    MenuItem { action: actions.actionFindNextComment }
 }

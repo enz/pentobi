@@ -11,5 +11,11 @@ ScrollView {
             color: theme.backgroundColor
             border.color: theme.commentBorderColor
         }
+        Keys.onPressed:
+            if (event.key === Qt.Key_Tab)
+            {
+                focus = false
+                event.accepted = true
+            }
     }
 }

@@ -20,6 +20,12 @@ QtObject {
         enabled: gameModel.canGoBackward
         onTriggered: gameModel.goBeginning()
     }
+    property Action actionBeginningOfBranch: Action {
+        shortcut: "Ctrl+B"
+        text: Logic.removeShortcut(qsTr("Beginning of Bran&ch"))
+        enabled: gameModel.hasEarlierVar
+        onTriggered: gameModel.gotoBeginningOfBranch()
+    }
     property Action actionComputerColors: Action {
         shortcut: "Ctrl+U"
         text: Logic.removeShortcut(qsTr("Computer &Colors"))
@@ -30,11 +36,21 @@ QtObject {
         enabled: gameModel.canGoForward
         onTriggered: gameModel.goEnd()
     }
+    property Action actionDropPickedPiece: Action {
+        shortcut: "0"
+        onTriggered: gameDisplay.pickedPiece = null
+    }
     property Action actionFindMove: Action {
         shortcut: "F6"
         text: Logic.removeShortcut(qsTr("&Find Move"))
         enabled: ! gameModel.isGameOver
         onTriggered: Logic.findMove()
+    }
+    property Action actionFindNextComment: Action {
+        shortcut: "F3"
+        text: Logic.removeShortcut(qsTr("Find Next &Comment"))
+        enabled: gameModel.canGoForward || gameModel.canGoBackward
+        onTriggered: Logic.findNextComment()
     }
     property Action actionForward: Action {
         shortcut: "Ctrl+Right"
@@ -43,6 +59,7 @@ QtObject {
     }
     property Action actionFullscreen: Action {
         shortcut: "F11"
+        text: Logic.removeShortcut(qsTr("&Fullscreen"))
         checkable: true
         checked: visibility === Window.FullScreen
         onTriggered:
@@ -90,6 +107,10 @@ QtObject {
         shortcut: "Ctrl+O"
         text: Logic.removeShortcut(qsTr("&Open..."))
         onTriggered: Logic.open()
+    }
+    property Action actionOpenMenu: Action {
+        shortcut: "Menu"
+        onTriggered: toolBar.openMenu()
     }
     property Action actionPlay: Action {
         shortcut: "Ctrl+L"

@@ -125,7 +125,12 @@ Pentobi.Menu {
             onObjectRemoved: recentFiles.removeItem(object)
 
             MenuItem {
-                text: modelData.substring(modelData.lastIndexOf("/") + 1)
+                text: {
+                    var result = modelData.substring(modelData.lastIndexOf("/") + 1)
+                    if (! isAndroid)
+                        result = "&" + (index + 1) + " " + result
+                    return result
+                }
                 onTriggered: Logic.openRecentFile(modelData)
             }
         }

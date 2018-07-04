@@ -67,22 +67,16 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 0
         Keys.onReleased:
-            if (event.key === Qt.Key_0) {
-                gameDisplay.pickedPiece = null
-                event.accepted = true
-            }
-            else if ((event.key === Qt.Key_Back || event.key === Qt.Key_Escape)
-                    && visibility === Window.FullScreen) {
+            if (event.key === Qt.Key_Back && visibility === Window.FullScreen) {
                 visibility = Window.AutomaticVisibility
-                event.accepted = true
-            }
-            else if (event.key === Qt.Key_Menu) {
-                toolBar.openMenu()
                 event.accepted = true
             }
         Keys.onPressed:
             if (event.key === Qt.Key_Alt)
+            {
                 toolBar.openMenu()
+                event.accepted = true
+            }
 
         Pentobi.ToolBar {
             id: toolBar

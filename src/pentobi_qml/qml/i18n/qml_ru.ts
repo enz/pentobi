@@ -67,6 +67,18 @@
         <source>Save &amp;As...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Beginning of Bran&amp;ch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find Next &amp;Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeGame</name>
@@ -914,14 +926,6 @@
     <name>MenuGo</name>
     <message>
         <source>G&amp;o</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Beginning of Bran&amp;ch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Find Next &amp;Comment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

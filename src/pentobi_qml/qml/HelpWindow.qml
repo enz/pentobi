@@ -2,8 +2,11 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.1
 import QtWebView 1.1
 import pentobi 1.0
+import Qt.labs.settings 1.0
 
 Window {
+    id: root
+
     property url startUrl: {
         var lang = Qt.locale().name
         var pos = lang.indexOf("_")
@@ -40,4 +43,12 @@ Window {
         anchors.fill: parent
     }
     HelpFileExtractor { id: helpFileExtractor }
+    Settings {
+        property alias x: root.x
+        property alias y: root.y
+        property alias width: root.width
+        property alias height: root.height
+
+        category: "HelpWindow"
+    }
 }

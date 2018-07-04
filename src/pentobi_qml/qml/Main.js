@@ -248,18 +248,6 @@ function help() {
 }
 
 function init() {
-    // Settings might contain unusable geometry
-    var maxWidth = Screen.width
-    var maxHeight = Screen.height
-    if (x < 0 || x + width > maxWidth || y < 0 || y + height > maxHeight) {
-        if (width > maxWidth || height > maxHeight) {
-            width = defaultWidth
-            height = defaultHeight
-        }
-        x = (Screen.width - width) / 2
-        y = (Screen.height - height) / 2
-    }
-
     // Settings may contain invalid theme
     if (themeName !== "dark" && themeName !== "light"
             && themeName !== "colorblind-light"
