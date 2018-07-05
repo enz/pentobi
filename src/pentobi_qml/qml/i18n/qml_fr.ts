@@ -646,7 +646,7 @@
     <name>MenuEdit</name>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Édition</translation>
+        <translation>Éditio&amp;n</translation>
     </message>
     <message>
         <source>Make &amp;Main Variation</source>
@@ -674,7 +674,7 @@
     </message>
     <message>
         <source>&amp;Next Color</source>
-        <translation>&amp;Couleur suivante</translation>
+        <translation>Co&amp;uleur suivante</translation>
     </message>
     <message>
         <source>&amp;Keep Only Position</source>
@@ -841,7 +841,7 @@
     </message>
     <message>
         <source>&amp;Game Info</source>
-        <translation>I&amp;nfo sur la partie</translation>
+        <translation>&amp;Info sur la partie</translation>
     </message>
     <message>
         <source>Open R&amp;ecent</source>
@@ -892,7 +892,7 @@
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
-        <translation>Retour à la variation &amp;principale</translation>
+        <translation>&amp;Retour à la variation principale</translation>
     </message>
     <message>
         <source>&amp;Go to Move...</source>
@@ -900,11 +900,11 @@
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation>Au début de la bran&amp;che</translation>
+        <translation>Au dé&amp;but de la branche</translation>
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
-        <translation>Trouver le &amp;commentaire suivant</translation>
+        <translation>&amp;Trouver le commentaire suivant</translation>
     </message>
 </context>
 <context>
