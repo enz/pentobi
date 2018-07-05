@@ -24,7 +24,7 @@ Window {
     // function that needs to be called after show() to work around an issue
     // with the initial zoom factor of WebView sometimes very large on Android
     // (last tested with Qt 5.9.2)
-    function init() { webView.url = startUrl }
+    function init() { if (isAndroid) webView.url = startUrl }
 
     width: isAndroid ? Screen.desktopAvailableWidth : Math.min(Screen.pixelDensity * 150, Screen.desktopAvailableWidth)
     height: isAndroid ? Screen.desktopAvailableHeight : Math.min(Screen.pixelDensity * 180, Screen.desktopAvailableHeight)
@@ -35,11 +35,13 @@ Window {
     // We'd like to hide the window instead of closing it but it doesn't work on
     // Android to make it visible again (problem with WebView? Last tested with
     // Qt 5.8-rc), so for now we destroy it and recreate it when needed.
-    onClosing: helpWindowLoader.source = ""
+    onClosing: if (isAndroid) helpWindowLoader.source = ""
 
     WebView {
         id: webView
 
+        // See comment at init()
+        url: isAndroid ? undefined : startUrl
         anchors.fill: parent
     }
     HelpFileExtractor { id: helpFileExtractor }

@@ -20,7 +20,11 @@ using libboardgame_util::set_abort;
 
 namespace {
 
+#ifdef Q_OS_ANDROID
 const unsigned maxLevel = 7;
+#else
+const unsigned maxLevel = 9;
+#endif
 
 } // namespace
 

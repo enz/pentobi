@@ -47,17 +47,19 @@ ApplicationWindow {
                                         || lengthyCommand.isRunning
                                         || playerModel.isGenMoveRunning
                                         || analyzeGameModel.isRunning
-    property Actions actions: Actions { }
 
+    property Actions actions: Actions { }
 
     minimumWidth: isDesktop ? 560 : 240
     minimumHeight: isDesktop ? 315 : 301
     width: defaultWidth; height: defaultHeight
-    visible: true
     color: theme.backgroundColor
     //: Main window title if no file is loaded.
     title: qsTr("Pentobi")
-    Component.onCompleted: Logic.init()
+    Component.onCompleted: {
+        Logic.init()
+        show()
+    }
     Component.onDestruction: Logic.autoSave()
 
     ColumnLayout {
@@ -114,7 +116,6 @@ ApplicationWindow {
         property alias y: rootWindow.y
         property alias width: rootWindow.width
         property alias height: rootWindow.height
-        property alias visibility: rootWindow.visibility
         property alias folder: rootWindow.folder
         property alias computerPlays0: rootWindow.computerPlays0
         property alias computerPlays1: rootWindow.computerPlays1

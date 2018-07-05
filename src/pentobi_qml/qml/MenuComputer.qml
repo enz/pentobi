@@ -1,3 +1,4 @@
+import QtQml 2.2
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import "Main.js" as Logic
@@ -17,6 +18,8 @@ Pentobi.Menu {
     }
     MenuSeparator { }
     Pentobi.Menu {
+        id: menuLevel
+
         title:
             switch (gameModel.gameVariant)
             {
@@ -40,12 +43,12 @@ Pentobi.Menu {
             case "gembloq_3": return Logic.removeShortcut(qsTr("&Level (GembloQ, 3 Players)"))
             }
 
-        MenuItemLevel { level: 1 }
-        MenuItemLevel { level: 2 }
-        MenuItemLevel { level: 3 }
-        MenuItemLevel { level: 4 }
-        MenuItemLevel { level: 5 }
-        MenuItemLevel { level: 6 }
-        MenuItemLevel { level: 7 }
+        Instantiator {
+            model: isAndroid ? 7 : 9
+            onObjectAdded: menuLevel.insertItem(index, object)
+            onObjectRemoved: menuLevel.removeItem(object)
+
+            MenuItemLevel { level: index + 1 }
+        }
     }
 }
