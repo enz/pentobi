@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation>&amp;Avslutt</translation>
+        <translation>Avslu&amp;tt</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
@@ -45,11 +45,11 @@
     </message>
     <message>
         <source>&amp;Rated Game</source>
-        <translation>&amp;Vurdert spill</translation>
+        <translation>V&amp;urdert spill</translation>
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation>&amp;Åpne…</translation>
+        <translation>Å&amp;pne…</translation>
     </message>
     <message>
         <source>Play &amp;Single Move</source>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation>Begynnelse av forgre&amp;ining</translation>
+        <translation>B&amp;egynnelse av forgreining</translation>
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
@@ -77,7 +77,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation>&amp;Fullskjermsvisning</translation>
+        <translation>F&amp;ullskjermsvisning</translation>
     </message>
 </context>
 <context>
@@ -792,7 +792,7 @@
     </message>
     <message>
         <source>Keep Only &amp;Subtree</source>
-        <translation>Kun behold &amp;undertre</translation>
+        <translation>Kun behold u&amp;ndertreet</translation>
     </message>
     <message>
         <source>Move &amp;Annotation</source>
@@ -875,11 +875,11 @@
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation type="vanished">&amp;Åpne…</translation>
+        <translation type="vanished">Å&amp;pne…</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="vanished">&amp;Avslutt</translation>
+        <translation type="vanished">Avslu&amp;tt</translation>
     </message>
     <message>
         <source>&amp;Classic</source>
@@ -959,11 +959,11 @@
     </message>
     <message>
         <source>&amp;Rated Game</source>
-        <translation type="vanished">&amp;Vurdert spill</translation>
+        <translation type="vanished">V&amp;urdert spill</translation>
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
-        <translation>Åpne fra &amp;utklippstavle</translation>
+        <translation>Åpne fra ut&amp;klippstavle</translation>
     </message>
     <message>
         <source>&amp;GembloQ</source>
@@ -998,7 +998,7 @@
     <name>MenuGo</name>
     <message>
         <source>G&amp;o</source>
-        <translation>G&amp;å</translation>
+        <translation>&amp;Gå</translation>
     </message>
     <message>
         <source>Back to &amp;Main Variation</source>
@@ -1010,7 +1010,7 @@
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation type="vanished">Begynnelse av forgre&amp;ining</translation>
+        <translation type="vanished">B&amp;egynnelse av forgreining</translation>
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
@@ -1043,7 +1043,7 @@
     <name>MenuTools</name>
     <message>
         <source>&amp;Tools</source>
-        <translation>&amp;Verktøy</translation>
+        <translation>V&amp;erktøy</translation>
     </message>
     <message>
         <source>&amp;Analyze Game</source>
@@ -1094,11 +1094,11 @@
     </message>
     <message>
         <source>Show &amp;Variations</source>
-        <translation>Vis &amp;variasjoner</translation>
+        <translation>Vis v&amp;ariasjoner</translation>
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation type="vanished">&amp;Fullskjermsvisning</translation>
+        <translation type="vanished">F&amp;ullskjermsvisning</translation>
     </message>
     <message>
         <source>&amp;Theme</source>

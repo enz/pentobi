@@ -52,7 +52,7 @@
     </message>
     <message>
         <source>Next &amp;Color</source>
-        <translation>Beste &amp;farge</translation>
+        <translation>Neste far&amp;ge</translation>
     </message>
     <message>
         <source>S&amp;etup Mode</source>
@@ -148,7 +148,7 @@
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation>Begynnelse på for&amp;greining</translation>
+        <translation>B&amp;egynnelse på forgreining</translation>
     </message>
     <message>
         <source>Clear Piece</source>
@@ -212,7 +212,7 @@
     </message>
     <message>
         <source>&amp;Fullscreen</source>
-        <translation>&amp;Fullskjermsvisning</translation>
+        <translation>F&amp;ullskjermsvisning</translation>
     </message>
     <message>
         <source>Ga&amp;me Info</source>
@@ -256,7 +256,7 @@
     </message>
     <message>
         <source>Keep Only &amp;Subtree</source>
-        <translation>Kun behold &amp;undertreet</translation>
+        <translation>Kun behold u&amp;ndertreet</translation>
     </message>
     <message>
         <source>Leave Fullscreen</source>
@@ -264,7 +264,7 @@
     </message>
     <message>
         <source>M&amp;ake Main Variation</source>
-        <translation>G&amp;jør til hovedvariasjon</translation>
+        <translation>Gjør til &amp;hovedvariasjon</translation>
     </message>
     <message>
         <source>Move Variation D&amp;own</source>
@@ -325,7 +325,7 @@
     </message>
     <message>
         <source>&amp;Rated Game</source>
-        <translation>&amp;Vurdert spill</translation>
+        <translation>V&amp;urdert spill</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -342,7 +342,7 @@
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation>&amp;Åpne…</translation>
+        <translation>Å&amp;pne…</translation>
     </message>
     <message>
         <source>&amp;Play</source>
@@ -358,7 +358,7 @@
     </message>
     <message>
         <source>&amp;Previous Variation</source>
-        <translation>&amp;Forrige variasjon</translation>
+        <translation>F&amp;orrige variasjon</translation>
     </message>
     <message>
         <source>Go to previous variation</source>
@@ -374,7 +374,7 @@
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation>&amp;Avslutt</translation>
+        <translation>Avslut&amp;t</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -423,7 +423,7 @@
     </message>
     <message>
         <source>Show &amp;Variations</source>
-        <translation>Vis &amp;variasjoner</translation>
+        <translation>Vis v&amp;ariasjoner</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
@@ -443,7 +443,7 @@
     </message>
     <message>
         <source>&amp;Move Annotation</source>
-        <translation>&amp;Flytt anmerkning</translation>
+        <translation>Flytt &amp;anmerkning</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -459,7 +459,7 @@
     </message>
     <message>
         <source>&amp;Tools</source>
-        <translation>&amp;Verktøy</translation>
+        <translation>V&amp;erktøy</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -639,11 +639,11 @@
     </message>
     <message>
         <source>E&amp;xport</source>
-        <translation>E&amp;ksporter</translation>
+        <translation>&amp;Eksporter</translation>
     </message>
     <message>
         <source>G&amp;o</source>
-        <translation>G&amp;å</translation>
+        <translation>&amp;Gå</translation>
     </message>
     <message>
         <source>&amp;Move Marking</source>
@@ -1008,7 +1008,7 @@
     </message>
     <message>
         <source>Open from &amp;Clipboard</source>
-        <translation>Åpne fra &amp;utklippstavle</translation>
+        <translation>Åpne fra ut&amp;klippstavle</translation>
     </message>
     <message>
         <source>Clipboard is empty.</source>
