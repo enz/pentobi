@@ -7,8 +7,15 @@ Item {
     // True if piece manipulator is at a board location that is a legal move
     property bool legal
 
+    // Fast move animation to make sure that the next grid cell is reached
+    // before the next auto-repeat keyboard command
+    property bool fastMove: false
+
     // Manipulator buttons are smaller on desktop with mouse usage
     property real buttonSize: (isDesktop ? 0.14 : 0.20) * root.width
+
+    property real animationsDuration:
+        ! visible || ! gameDisplay.enableAnimations ? 0 : fastMove ? 20 : 300
 
     signal piecePlayed
 
@@ -77,6 +84,6 @@ Item {
         }
     }
 
-    Behavior on x { NumberAnimation { duration: visible ? 300 : 0; easing.type: Easing.InOutSine } }
-    Behavior on y { NumberAnimation { duration: visible ? 300 : 0; easing.type: Easing.InOutSine } }
+    Behavior on x { NumberAnimation { duration: animationsDuration; easing.type: Easing.InOutSine } }
+    Behavior on y { NumberAnimation { duration: animationsDuration; easing.type: Easing.InOutSine } }
 }

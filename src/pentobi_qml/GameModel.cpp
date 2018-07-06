@@ -500,6 +500,14 @@ bool GameModel::findNextCommentContinueFromRoot()
     return true;
 }
 
+PieceModel* GameModel::findPieceModel(Color c, Piece piece)
+{
+    for (auto pieceModel : getPieceModels(c))
+        if (pieceModel->getPiece() == piece)
+            return pieceModel;
+    return nullptr;
+}
+
 QString GameModel::getPlayerString(int player)
 {
     auto variant = m_game.get_variant();
@@ -902,6 +910,30 @@ void GameModel::nextColor()
     updateProperties();
 }
 
+PieceModel* GameModel::nextPiece(PieceModel* currentPickedPiece)
+{
+    auto& bd = getBoard();
+    auto c = bd.get_to_play();
+    if (bd.get_pieces_left(c).empty())
+        return nullptr;
+    auto nuUniqPieces = bd.get_nu_uniq_pieces();
+    Piece::IntType i;
+    if (currentPickedPiece != nullptr)
+        i = static_cast<Piece::IntType>(
+                    currentPickedPiece->getPiece().to_int() + 1);
+    else
+        i = 0;
+    while (true)
+    {
+        if (i >= nuUniqPieces)
+            i = 0;
+        if (bd.is_piece_left(c, Piece(i)))
+            break;
+        ++i;
+    }
+    return findPieceModel(c, Piece(i));
+}
+
 void GameModel::newGame()
 {
     preparePositionChange();
@@ -1002,6 +1034,43 @@ bool GameModel::openClipboard()
     return false;
 }
 
+PieceModel* GameModel::pickNamedPiece(const QString& name,
+                                      PieceModel* currentPickedPiece)
+{
+    string nameStr(name.toLocal8Bit().constData());
+    auto& bd = getBoard();
+    auto c = bd.get_to_play();
+    Board::PiecesLeftList pieces;
+    for (Piece::IntType i = 0; i < bd.get_nu_uniq_pieces(); ++i)
+    {
+        Piece piece(i);
+        if (bd.is_piece_left(c, piece)
+                && bd.get_piece_info(piece).get_name().find(nameStr) == 0)
+            pieces.push_back(piece);
+    }
+    if (pieces.empty())
+        return nullptr;
+    Piece piece;
+    if (currentPickedPiece == nullptr)
+        piece = pieces[0];
+    else
+    {
+        piece = currentPickedPiece->getPiece();
+        auto pos = std::find(pieces.begin(), pieces.end(), piece);
+        if (pos == pieces.end())
+            piece = pieces[0];
+        else
+        {
+            ++pos;
+            if (pos == pieces.end())
+                piece = pieces[0];
+            else
+                piece = *pos;
+        }
+    }
+    return findPieceModel(c, piece);
+}
+
 QQmlListProperty<PieceModel> GameModel::pieceModels0()
 {
     return QQmlListProperty<PieceModel>(this, m_pieceModels0);
@@ -1085,6 +1154,30 @@ void GameModel::preparePositionChange()
 {
     clearLegalMoves();
     emit positionAboutToChange();
+}
+
+PieceModel* GameModel::previousPiece(PieceModel* currentPickedPiece)
+{
+    auto& bd = getBoard();
+    auto c = bd.get_to_play();
+    if (bd.get_pieces_left(c).empty())
+        return nullptr;
+    auto nuUniqPieces = bd.get_nu_uniq_pieces();
+    Piece::IntType i;
+    if (currentPickedPiece != nullptr)
+        i = static_cast<Piece::IntType>(currentPickedPiece->getPiece().to_int());
+    else
+        i = 0;
+    while (true)
+    {
+        if (i == 0)
+            i = static_cast<Piece::IntType>(nuUniqPieces - 1);
+        else
+            --i;
+        if (bd.is_piece_left(c, Piece(i)))
+            break;
+    }
+    return findPieceModel(c, Piece(i));
 }
 
 bool GameModel::restoreAutoSaveLocation()

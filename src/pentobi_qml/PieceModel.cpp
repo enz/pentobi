@@ -289,6 +289,16 @@ QString PieceModel::moveLabel() const
     return m_moveLabel;
 }
 
+void PieceModel::nextOrientation()
+{
+    setTransform(m_bd.get_piece_info(m_piece).get_next_transform(getTransform()));
+}
+
+void PieceModel::previousOrientation()
+{
+    setTransform(m_bd.get_piece_info(m_piece).get_previous_transform(getTransform()));
+}
+
 void PieceModel::rotateLeft()
 {
     setTransform(m_bd.get_transforms().get_rotated_anticlockwise(getTransform()));

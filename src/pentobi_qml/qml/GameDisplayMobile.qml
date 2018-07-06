@@ -38,6 +38,13 @@ Item
 
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
+    function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
+    function pickPieceAtBoard(piece) { Logic.pickPieceAtBoard(piece) }
+    function movePieceDown() { Logic.movePieceDown() }
+    function movePieceLeft() { Logic.movePieceLeft() }
+    function movePieceRight() { Logic.movePieceRight() }
+    function movePieceUp() { Logic.movePieceUp() }
+    function playPickedPiece() { Logic.playPickedPiece() }
     function showToPlay() { pieceSelector.contentY = 0 }
     function showAnalyzeGame() { pickedPiece = null; swipeView.currentIndex = 2 }
     function showComment() { pickedPiece = null; swipeView.currentIndex = 1 }
@@ -207,14 +214,6 @@ Item
         width: 0.6 * board.width; height: width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
-        onPiecePlayed: {
-            var pos = mapToItem(board, width / 2, height / 2)
-            if (! board.contains(Qt.point(pos.x, pos.y)))
-                pickedPiece = null
-            else if (setupMode)
-                gameModel.addSetup(pieceModel, board.mapToGame(pos))
-            else if (legal)
-                play(pieceModel, board.mapToGame(pos))
-        }
+        onPiecePlayed: Logic.playPickedPiece()
     }
 }

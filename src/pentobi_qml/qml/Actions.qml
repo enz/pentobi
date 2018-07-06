@@ -1,9 +1,19 @@
+import QtQml 2.2
 import QtQuick 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Window 2.1
 import "Main.js" as Logic
 
 QtObject {
+    property Instantiator actionsPickedNamedPiece: Instantiator {
+        model: [ "1", "2", "A", "C", "E", "F", "G", "H", "I", "J", "L",
+            "N", "O", "P", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
+
+        Action {
+            shortcut: modelData
+            onTriggered: Logic.pickNamedPiece(modelData)
+        }
+    }
     property Action actionBackToMainVar: Action {
         shortcut: "Ctrl+M"
         text: Logic.removeShortcut(qsTr("Back to &Main Variation"))
@@ -84,6 +94,22 @@ QtObject {
         text: Logic.removeShortcut(qsTr("Pentobi &Help"))
         onTriggered: Logic.help()
     }
+    property Action actionMovePieceDown: Action {
+        shortcut: "Down"
+        onTriggered: gameDisplay.movePieceDown()
+    }
+    property Action actionMovePieceLeft: Action {
+        shortcut: "Left"
+        onTriggered: gameDisplay.movePieceLeft()
+    }
+    property Action actionMovePieceRight: Action {
+        shortcut: "Right"
+        onTriggered: gameDisplay.movePieceRight()
+    }
+    property Action actionMovePieceUp: Action {
+        shortcut: "Up"
+        onTriggered: gameDisplay.movePieceUp()
+    }
     property Action actionNew: Action {
         shortcut: "Ctrl+N"
         text: Logic.removeShortcut(qsTr("&New"))
@@ -97,6 +123,15 @@ QtObject {
         text: Logic.removeShortcut(qsTr("&Rated Game"))
         enabled: ! isRated
         onTriggered: Logic.ratedGame()
+    }
+    property Action actionNextOrientation: Action {
+        shortcut: "Space"
+        enabled: gameDisplay.pickedPiece
+        onTriggered: gameDisplay.pickedPiece.pieceModel.nextOrientation()
+    }
+    property Action actionNextPiece: Action {
+        shortcut: "+"
+        onTriggered: Logic.nextPiece()
     }
     property Action actionNextVar: Action {
         shortcut: "Ctrl+Down"
@@ -124,10 +159,23 @@ QtObject {
         enabled: ! gameModel.isGameOver && ! isRated
         onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
     }
+    property Action actionPrevOrientation: Action {
+        shortcut: "Shift+Space"
+        enabled: gameDisplay.pickedPiece
+        onTriggered: gameDisplay.pickedPiece.pieceModel.previousOrientation()
+    }
+    property Action actionPrevPiece: Action {
+        shortcut: "-"
+        onTriggered: Logic.prevPiece()
+    }
     property Action actionPrevVar: Action {
         shortcut: "Ctrl+Up"
         enabled: gameModel.hasPrevVar
         onTriggered: gameModel.goPrevVar()
+    }
+    property Action actionPlayPickedPiece: Action {
+        shortcut: "Return"
+        onTriggered: gameDisplay.playPickedPiece()
     }
     property Action actionQuit: Action {
         shortcut: "Ctrl+Q"

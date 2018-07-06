@@ -230,6 +230,13 @@ public:
 
     Q_INVOKABLE GameMove* findMove();
 
+    Q_INVOKABLE PieceModel* pickNamedPiece(const QString& name,
+                                           PieceModel* currentPickedPiece);
+
+    Q_INVOKABLE PieceModel* nextPiece(PieceModel* currentPickedPiece);
+
+    Q_INVOKABLE PieceModel* previousPiece(PieceModel* currentPickedPiece);
+
 
     QByteArray getSgf() const;
 
@@ -642,6 +649,8 @@ private:
 
     bool findMove(const PieceModel& pieceModel, const QString& state,
                   QPointF coord, Move& mv) const;
+
+    PieceModel* findPieceModel(Color c, Piece piece);
 
     QList<PieceModel*>& getPieceModels(Color c);
 

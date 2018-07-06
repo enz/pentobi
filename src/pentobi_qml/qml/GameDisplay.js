@@ -103,22 +103,83 @@ function findPiece(pieceModel) {
     return null
 }
 
+function movePiece(x, y) {
+    if (pickedPiece == null)
+        return
+    var pos = pieceManipulator.mapToItem(
+                board, pieceManipulator.width / 2, pieceManipulator.height / 2)
+    if (! board.contains(pos)) {
+        // Outside board before moving
+        var oldPickedPiece = pickedPiece
+        pickedPiece = null
+        pickPieceAtBoard(oldPickedPiece)
+        return
+    }
+    pos = pieceManipulator.mapToItem(
+                board,
+                pieceManipulator.width / 2 + x - pieceManipulator.x,
+                pieceManipulator.height / 2 + y - pieceManipulator.y)
+    if (! board.contains(pos))
+        // Would be outside board after moving
+        return
+    pieceManipulator.fastMove = true
+    pieceManipulator.x = x
+    pieceManipulator.y = y
+    pieceManipulator.fastMove = false
+}
+
+function movePieceDown() {
+    movePiece(pieceManipulator.x, pieceManipulator.y + board.gridHeight / 2)
+}
+
+function movePieceLeft() {
+    movePiece(pieceManipulator.x - board.gridWidth / 2, pieceManipulator.y)
+}
+
+function movePieceRight() {
+    movePiece(pieceManipulator.x + board.gridWidth / 2, pieceManipulator.y)
+}
+
+function movePieceUp() {
+    movePiece(pieceManipulator.x, pieceManipulator.y - board.gridHeight / 2)
+}
+
 function pickPiece(piece) {
+    pickPieceAt(piece, mapFromItem(piece, 0, 0))
+}
+
+function pickPieceAt(piece, coord) {
     if (playerModel.isGenMoveRunning || gameModel.isGameOver
             || (piece.pieceModel.color !== gameModel.toPlay && ! setupMode))
         return
     if (! pieceManipulator.visible) {
         // Position pieceManipulator at center of piece if possible, but
         // make sure it is completely visible
-        var newCoord = mapFromItem(piece, 0, 0)
-        var x = newCoord.x - pieceManipulator.width / 2
-        var y = newCoord.y - pieceManipulator.height / 2
+        var x = coord.x - pieceManipulator.width / 2
+        var y = coord.y - pieceManipulator.height / 2
         x = Math.max(Math.min(x, width - pieceManipulator.width), 0)
         y = Math.max(Math.min(y, height - pieceManipulator.height), 0)
         pieceManipulator.x = x
         pieceManipulator.y = y
     }
     pickedPiece = piece
+}
+
+function pickPieceAtBoard(piece) {
+    pickPieceAt(piece, mapFromItem(board, board.width / 2, board.height / 2))
+}
+
+function playPickedPiece() {
+    if (! pickedPiece)
+        return
+    var pos = pieceManipulator.mapToItem(board, pieceManipulator.width / 2,
+                                         pieceManipulator.height / 2)
+    if (! board.contains(pos))
+        pickedPiece = null
+    else if (setupMode)
+        gameModel.addSetup(pieceModel, board.mapToGame(pos))
+    else if (pieceManipulator.legal)
+        play(pieceManipulator.pieceModel, board.mapToGame(pos))
 }
 
 function showMove(move) {

@@ -42,6 +42,13 @@ Item
 
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
+    function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
+    function pickPieceAtBoard(piece) { Logic.pickPieceAtBoard(piece) }
+    function movePieceDown() { Logic.movePieceDown() }
+    function movePieceLeft() { Logic.movePieceLeft() }
+    function movePieceRight() { Logic.movePieceRight() }
+    function movePieceUp() { Logic.movePieceUp() }
+    function playPickedPiece() { Logic.playPickedPiece() }
     function showToPlay() { }
     function showAnalyzeGame() { pickedPiece = null }
     function showComment() { pickedPiece = null }
@@ -219,14 +226,6 @@ Item
         width: (board.isNexos ? 10.4 : board.isGembloQ ? 10.1 : 7.1) * board.gridHeight; height: width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
-        onPiecePlayed: {
-            var pos = mapToItem(board, width / 2, height / 2)
-            if (! board.contains(Qt.point(pos.x, pos.y)))
-                pickedPiece = null
-            else if (setupMode)
-                gameModel.addSetup(pieceModel, board.mapToGame(pos))
-            else if (legal)
-                play(pieceModel, board.mapToGame(pos))
-        }
+        onPiecePlayed: Logic.playPickedPiece()
     }
 }

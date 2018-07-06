@@ -98,6 +98,10 @@ public:
 
     Q_INVOKABLE void flipAcrossY();
 
+    Q_INVOKABLE void nextOrientation();
+
+    Q_INVOKABLE void previousOrientation();
+
 signals:
     void stateChanged();
 

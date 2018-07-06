@@ -350,6 +350,15 @@ function newGameNoVerify()
     initComputerColors()
 }
 
+function nextPiece() {
+    var currentPickedPiece = null
+    if (gameDisplay.pickedPiece)
+        currentPickedPiece = gameDisplay.pickedPiece.pieceModel
+    var pieceModel = gameModel.nextPiece(currentPickedPiece)
+    if (pieceModel)
+        gameDisplay.pickPieceAtBoard(gameDisplay.findPiece(pieceModel))
+}
+
 function open() {
     verify(openNoVerify)
 }
@@ -455,6 +464,15 @@ function openRecentFile(file) {
     verify(function() { openFile(file) })
 }
 
+function pickNamedPiece(name) {
+    var currentPickedPiece = null
+    if (gameDisplay.pickedPiece)
+        currentPickedPiece = gameDisplay.pickedPiece.pieceModel
+    var pieceModel = gameModel.pickNamedPiece(name, currentPickedPiece)
+    if (pieceModel)
+        gameDisplay.pickPieceAtBoard(gameDisplay.findPiece(pieceModel))
+}
+
 function play(pieceModel, gameCoord) {
     var wasComputerToPlay = isComputerToPlay()
     gameModel.playPiece(pieceModel, gameCoord)
@@ -462,6 +480,15 @@ function play(pieceModel, gameCoord) {
     // played by the computer.
     if (! wasComputerToPlay)
         delayedCheckComputerMove.restart()
+}
+
+function prevPiece() {
+    var currentPickedPiece = null
+    if (gameDisplay.pickedPiece)
+        currentPickedPiece = gameDisplay.pickedPiece.pieceModel
+    var pieceModel = gameModel.previousPiece(currentPickedPiece)
+    if (pieceModel)
+        gameDisplay.pickPieceAtBoard(gameDisplay.findPiece(pieceModel))
 }
 
 function ratedGame()
