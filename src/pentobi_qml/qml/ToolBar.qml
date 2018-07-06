@@ -35,12 +35,8 @@ RowLayout {
                     gameDisplay.setupMode = false
                     Logic.setComputerNone()
                 }
-                else if (gameModel.file != "") {
-                    if (gameModel.isModified)
-                        Logic.showInfo(qsTr("File (modified): %1").arg(gameModel.file))
-                    else
-                        Logic.showInfo(qsTr("File: %1").arg(gameModel.file))
-                }
+                else if (gameModel.file != "")
+                    Logic.showInfo(Logic.getFileInfo(gameModel.file, gameModel.isModified))
         }
     }
     Pentobi.Button {
@@ -127,6 +123,14 @@ RowLayout {
         text: {
             if (isRated) return qsTr("Rated")
             return Logic.getFileLabel(gameModel.file, gameModel.isModified)
+        }
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            ToolTip.text: Logic.getFileInfo(gameModel.file, gameModel.isModified)
+            ToolTip.visible: containsMouse && gameModel.file != ""
+            ToolTip.delay: 700
+            ToolTip.timeout: 9000
         }
     }
     Item {

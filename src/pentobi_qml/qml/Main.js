@@ -233,6 +233,11 @@ function getFileFromUrl(fileUrl) {
     return decodeURIComponent(file)
 }
 
+function getFileInfo(file, isModified) {
+    if (isModified) return qsTr("%1 (modified)").arg(file)
+    return file
+}
+
 function getFileLabel(file, isModified) {
     if (file === "")
         return ""

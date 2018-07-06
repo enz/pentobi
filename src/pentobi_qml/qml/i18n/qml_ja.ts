@@ -644,6 +644,10 @@
         <source>Not enough memory.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 (modified)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -1264,14 +1268,6 @@
 </context>
 <context>
     <name>ToolBar</name>
-    <message>
-        <source>File (modified): %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Rated</source>
         <translation type="unfinished"></translation>

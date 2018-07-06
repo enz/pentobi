@@ -656,6 +656,10 @@
         <source>Not enough memory.</source>
         <translation>Nicht genügend Speicher.</translation>
     </message>
+    <message>
+        <source>%1 (modified)</source>
+        <translation>%1 (geändert)</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -1330,11 +1334,11 @@
     <name>ToolBar</name>
     <message>
         <source>File (modified): %1</source>
-        <translation>Datei (geändert): %1</translation>
+        <translation type="vanished">Datei (geändert): %1</translation>
     </message>
     <message>
         <source>File: %1</source>
-        <translation>Datei: %1</translation>
+        <translation type="vanished">Datei: %1</translation>
     </message>
     <message>
         <source>Rated</source>
