@@ -7,7 +7,7 @@ Pentobi.FileDialog {
     selectExisting: false
     nameFilterText: qsTr("Blokus games (*.blksgf)")
     nameFilter: "*.blksgf"
-    folder: rootWindow.folder != "" ? rootWindow.folder : (isAndroid ? "file:///sdcard" : "")
+    folder: rootWindow.folder
     onAccepted: {
         rootWindow.folder = folder
         if (gameModel.checkFileExists(Logic.getFileFromUrl(fileUrl)))

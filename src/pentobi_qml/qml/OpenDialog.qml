@@ -6,7 +6,7 @@ Pentobi.FileDialog {
     title: isAndroid ? "" : qsTr("Open")
     nameFilterText: qsTr("Blokus games (*.blksgf)")
     nameFilter: "*.blksgf"
-    folder: rootWindow.folder != "" ? rootWindow.folder : (isAndroid ? "file:///sdcard" : "")
+    folder: rootWindow.folder
     onAccepted: {
         rootWindow.folder = folder
         Logic.openFileUrl()

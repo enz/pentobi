@@ -94,6 +94,10 @@ QtObject {
         text: Logic.removeShortcut(qsTr("Pentobi &Help"))
         onTriggered: Logic.help()
     }
+    property Action actionMenuKey: Action {
+        shortcut: "Menu"
+        onTriggered: toolBar.openMenu()
+    }
     property Action actionMovePieceDown: Action {
         shortcut: "Down"
         onTriggered: gameDisplay.movePieceDown()
@@ -144,7 +148,7 @@ QtObject {
         onTriggered: Logic.open()
     }
     property Action actionOpenMenu: Action {
-        shortcut: "Menu"
+        shortcut: "F10"
         onTriggered: toolBar.openMenu()
     }
     property Action actionPlay: Action {

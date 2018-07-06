@@ -51,6 +51,7 @@
         <file>qml/PieceSwitchedFlipAnimation.qml</file>
         <file>qml/PieceTrigon.qml</file>
         <file>qml/QuarterSquare.qml</file>
+        <file>qml/QuestionDialog.qml</file>
         <file>qml/RatingDialog.qml</file>
         <file>qml/RatingGraph.qml</file>
         <file>qml/SaveDialog.qml</file>

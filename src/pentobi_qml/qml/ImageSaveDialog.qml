@@ -7,7 +7,7 @@ Pentobi.FileDialog {
     selectExisting: false
     nameFilterText: qsTr("PNG image files (*.png)")
     nameFilter: "*.png"
-    folder: rootWindow.folder != "" ? rootWindow.folder : (isAndroid ? "file:///sdcard" : "")
+    folder: rootWindow.folder
     onAccepted: {
         rootWindow.folder = folder
         Logic.exportImage(fileUrl)

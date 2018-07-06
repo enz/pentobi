@@ -19,7 +19,7 @@ Pentobi.Dialog {
         timer.restart()
     }
 
-    footer: OkButton { }
+    footer: OkCancelButtons { }
 
     Column
     {
