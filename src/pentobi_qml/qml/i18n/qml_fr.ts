@@ -179,15 +179,15 @@
     <name>GameDisplayDesktop</name>
     <message>
         <source>Computer is thinking...</source>
-        <translation>L&amp;apos;ordinateur pense…</translation>
+        <translation>L&apos;ordinateur pense…</translation>
     </message>
     <message>
         <source>Computer is thinking... (up to %1 seconds remaining)</source>
-        <translation>L&amp;apos;ordinateur pense… (jusqu’à %1 secondes restantes)</translation>
+        <translation>L&apos;ordinateur pense… (jusqu’à %1 secondes restantes)</translation>
     </message>
     <message>
         <source>Computer is thinking... (up to %1 minutes remaining)</source>
-        <translation>L&amp;apos;ordinateur pense… (jusqu’à %1 minutes restantes)</translation>
+        <translation>L&apos;ordinateur pense… (jusqu’à %1 minutes restantes)</translation>
     </message>
 </context>
 <context>
@@ -1060,6 +1060,10 @@
     <message>
         <source>&amp;Clear Rating</source>
         <translation>&amp;Effacer le classement</translation>
+    </message>
+    <message>
+        <source>Clear A&amp;nalysis</source>
+        <translation>Effacer l&apos;a&amp;nalyse</translation>
     </message>
 </context>
 <context>

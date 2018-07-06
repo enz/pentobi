@@ -13,7 +13,10 @@ Pentobi.Menu {
     MenuItem { action: actions.actionPlaySingle }
     MenuItem {
         text: Logic.removeShortcut(qsTr("St&op"))
-        enabled: playerModel.isGenMoveRunning && ! isRated
+        enabled: (playerModel.isGenMoveRunning
+                  || delayedCheckComputerMove.running
+                  || analyzeGameModel.isRunning)
+                 && ! isRated
         onTriggered: Logic.cancelRunning()
     }
     MenuSeparator { }

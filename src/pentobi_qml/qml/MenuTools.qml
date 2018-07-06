@@ -18,4 +18,9 @@ Pentobi.Menu {
         text: Logic.removeShortcut(qsTr("&Analyze Game"))
         onTriggered: Logic.analyzeGame()
     }
+    MenuItem {
+        enabled: analyzeGameModel.elements.length !== 0
+        text: Logic.removeShortcut(qsTr("Clear A&nalysis"))
+        onTriggered: analyzeGameModel.clear()
+    }
 }

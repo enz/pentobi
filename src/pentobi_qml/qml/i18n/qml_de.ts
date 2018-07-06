@@ -1061,6 +1061,10 @@
         <source>&amp;Clear Rating</source>
         <translation>Wertung lö&amp;schen</translation>
     </message>
+    <message>
+        <source>Clear A&amp;nalysis</source>
+        <translation>A&amp;nalyse löschen</translation>
+    </message>
 </context>
 <context>
     <name>MenuView</name>

@@ -7,12 +7,12 @@ QtObject {
     property color commentBorderColorFocus: "#0066ff"
     property color messageTextColor: "black"
     property color messageBackgroundColor: "#cac9c9"
-    property color backgroundColor: "#efebe7"
+    property color backgroundColor: "#dcdad6"
     property color fontColorScore: "#666"
     property color fontColorCoordinates: "#64615E"
     property color fontColorPosInfo: "#282625"
     property color colorBlue: "#0077D2"
-    property color colorYellow: "#ebc300"
+    property color colorYellow: "#e1b800"
     property color colorRed: "#E63E2C"
     property color colorGreen: "#00C000"
     property color colorPurple: "#a12CCF"
@@ -26,7 +26,7 @@ QtObject {
     property color analyzeLineColor: "black"
     property color analyzeMiddleLineColor: "grey"
     property real pieceListOpacity: 1
-    property real toPlayColorLighter: 0.3
+    property real toPlayColorLighter: 0.5
 
     function getImage(name) { return "themes/light/" + name + ".svg" }
 }

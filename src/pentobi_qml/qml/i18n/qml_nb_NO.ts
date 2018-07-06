@@ -1061,6 +1061,10 @@
         <source>&amp;Clear Rating</source>
         <translation>&amp;Fjern vurdering</translation>
     </message>
+    <message>
+        <source>Clear A&amp;nalysis</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MenuView</name>

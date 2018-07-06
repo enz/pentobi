@@ -97,13 +97,13 @@ void AnalyzeGameModel::cancel()
 
 void AnalyzeGameModel::clear()
 {
-    if (! m_elements.empty())
-    {
-        m_analyzeGame.clear();
-        m_markMoveNumber = -1;
-        m_elements.clear();
-        emit elementsChanged();
-    }
+    cancel();
+    if (m_elements.empty())
+        return;
+    m_analyzeGame.clear();
+    m_markMoveNumber = -1;
+    m_elements.clear();
+    emit elementsChanged();
 }
 
 QQmlListProperty<AnalyzeGameElement> AnalyzeGameModel::elements()

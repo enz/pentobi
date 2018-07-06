@@ -21,7 +21,9 @@ function analyzeGame() {
 
 function autoSave() {
     wasGenMoveRunning =
-            playerModel.isGenMoveRunning && ! isPlaySingleMoveRunning
+            (playerModel.isGenMoveRunning
+             || delayedCheckComputerMove.running)
+            && ! isPlaySingleMoveRunning
     gameModel.autoSave()
     analyzeGameModel.autoSave(gameModel)
 }
