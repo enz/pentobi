@@ -3,6 +3,8 @@ import QtQuick.Controls 2.2
 import "." as Pentobi
 
 Pentobi.Dialog {
+    id: root
+
     title: isAndroid ? "" : qsTr("Go to Move")
     footer: OkCancelButtons { }
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
@@ -19,13 +21,16 @@ Pentobi.Dialog {
             id: textField
 
             width: parent.width
-            text: gameModel.moveNumber
+            text: gameModel.moveNumber === 0 ?
+                      gameModel.moveNumber + gameModel.movesLeft : gameModel.moveNumber
             focus: true
             inputMethodHints: Qt.ImhDigitsOnly
             validator: IntValidator{
                 bottom: 1
                 top: gameModel.moveNumber + gameModel.movesLeft
             }
+            onVisibleChanged: if (visible) selectAll()
+            onAccepted: root.accept()
         }
     }
 }

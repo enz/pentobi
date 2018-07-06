@@ -4,6 +4,7 @@ import QtQuick.Controls.Styles 1.4
 QtObject {
     property color busyIndicatorColor: fontColorScore
     property color commentBorderColor: "#b4b3b3"
+    property color commentBorderColorFocus: "#0066ff"
     property color messageTextColor: "black"
     property color messageBackgroundColor: "#cac9c9"
     property color backgroundColor: "#dcdbda"

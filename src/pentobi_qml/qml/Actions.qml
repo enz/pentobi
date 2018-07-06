@@ -178,7 +178,10 @@ QtObject {
         onTriggered: gameModel.goPrevVar()
     }
     property Action actionPlayPickedPiece: Action {
-        shortcut: "Return"
+        // Note: the previously used shortcut Return causes problems if a
+        // TextField has the focus, it will never receive the Return key
+        // to accept the input (last tested with Qt 5.11)
+        shortcut: "Ctrl+Return"
         onTriggered: gameDisplay.playPickedPiece()
     }
     property Action actionQuit: Action {
@@ -199,8 +202,8 @@ QtObject {
     property Action actionSave: Action {
         shortcut: "Ctrl+S"
         text: Logic.removeShortcut(qsTr("&Save"))
-        enabled: gameModel.file !== "" && gameModel.isModified
-        onTriggered: Logic.save()
+        enabled: ! gameModel.isGameEmpty && gameModel.isModified
+        onTriggered: if (gameModel.file !== "") Logic.save(); else Logic.saveAs()
     }
     property Action actionSaveAs: Action {
         shortcut: "Ctrl+Shift+S"
