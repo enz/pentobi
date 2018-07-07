@@ -24,7 +24,11 @@ function autoSave() {
             (playerModel.isGenMoveRunning
              || delayedCheckComputerMove.running)
             && ! isPlaySingleMoveRunning
-    gameModel.autoSave()
+    // Don't autosave if file was loaded from content property set by command
+    // line argument, because the user might want to continue the previously
+    // autosaved game.
+    if (initialFile === "" || gameModel.isModified)
+        gameModel.autoSave()
     analyzeGameModel.autoSave(gameModel)
 }
 
@@ -261,6 +265,13 @@ function init() {
             && themeName !== "colorblind-dark")
         themeName = "light"
 
+    // initialFile is a context property set from command line argument
+    if (initialFile) {
+        gameModel.openFile(initialFile)
+        gameDisplay.createPieces()
+        initComputerColors()
+        return
+    }
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
         initComputerColors()

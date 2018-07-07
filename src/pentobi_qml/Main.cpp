@@ -54,9 +54,10 @@ int main(int argc, char *argv[])
     translatorQt.load("replace_qtbase_" + locale, ":qml/i18n");
     app.installTranslator(&translatorQt);
     QCommandLineParser parser;
-    QCommandLineOption optionNoBook("nobook");
+    QCommandLineOption optionNoBook("nobook", "Do not use opening books.");
     parser.addOption(optionNoBook);
-    QCommandLineOption optionNoDelay("nodelay");
+    QCommandLineOption optionNoDelay(
+                "nodelay", "Do not delay fast computer moves.");
     parser.addOption(optionNoDelay);
     QCommandLineOption optionSeed("seed", "Set random seed to <n>.", "n");
     parser.addOption(optionSeed);
@@ -64,9 +65,13 @@ int main(int argc, char *argv[])
                                      "n");
     parser.addOption(optionThreads);
 #if ! LIBBOARDGAME_DISABLE_LOG
-    QCommandLineOption optionVerbose("verbose");
+    QCommandLineOption optionVerbose(
+                "verbose", "Print logging information to standard error.");
     parser.addOption(optionVerbose);
 #endif
+    parser.addPositionalArgument("file.blksgf",
+                                 "Blokus SGF file to open (optional).");
+    parser.addHelpOption();
     parser.process(app);
     try
     {
@@ -93,7 +98,13 @@ int main(int argc, char *argv[])
                 throw runtime_error("--threads must be a positive number");
             PlayerModel::nuThreads = nuThreads;
         }
-        QQmlApplicationEngine engine(QUrl("qrc:///qml/Main.qml"));
+        QString initialFile;
+        auto args = parser.positionalArguments();
+        if (! args.empty())
+            initialFile = args.at(0);
+        QQmlApplicationEngine engine;
+        engine.rootContext()->setContextProperty("initialFile", initialFile);
+        engine.load(QUrl("qrc:///qml/Main.qml"));
         return app.exec();
     }
     catch (const exception& e)
