@@ -82,10 +82,47 @@ Pentobi.Dialog {
 
             height: Math.min(Screen.pixelDensity * 80, 0.4 * rootWindow.height)
             width: parent.width
-            highlight: Rectangle { color: "lightblue" }
             clip: true
             model: folderModel
-            delegate: fileDelegate
+            delegate: FocusScope {
+                width: view.width
+                height: 2 * font.pixelSize
+
+                Button {
+                    id: fileButton
+
+                    anchors.fill: parent
+                    flat: true
+                    onActiveFocusChanged: if (activeFocus) view.currentIndex = index
+                    contentItem: Text {
+                        text: {
+                            if (index < 0) return ""
+                            if (folderModel.isFolder(index)) return "> " + fileName
+                            return fileName
+                        }
+                        color: parent.activeFocus ? "blue" : "black"
+                        horizontalAlignment: Text.AlignHLeft
+                        verticalAlignment: Text.AlignVCenter
+                        elide: Text.ElideRight
+                    }
+                    onClicked: {
+                        view.currentIndex = index
+                        if (folderModel.isFolder(index)) {
+                            if (! folderModel.folder.toString().endsWith("/"))
+                                folderModel.folder = folderModel.folder + "/"
+                            folderModel.folder = folderModel.folder + fileName
+                            view.currentIndex = -1
+                            textField.text = Logic.getFileFromUrl(folderModel.folder) + "/"
+                            textField.cursorPosition = textField.length
+                        }
+                        else {
+                            textField.text = filePath
+                            textField.cursorPosition = textField.length
+                        }
+                    }
+                    onDoubleClicked: root.accept()
+                }
+            }
 
             FolderListModel {
                 id: folderModel
@@ -93,43 +130,6 @@ Pentobi.Dialog {
                 folder: root.folder
                 nameFilters: [ root.nameFilter ]
                 showDirsFirst: true
-            }
-            Component {
-                id: fileDelegate
-
-                Item {
-                    id: fileItem
-
-                    implicitWidth: Math.ceil(1.1 * fileRow.implicitWidth)
-                    implicitHeight: Math.ceil(1.7 * fileRow.implicitHeight)
-
-                    Row {
-                        id: fileRow
-
-                        anchors.verticalCenter: parent.verticalCenter
-
-                        Label { text: folderModel.isFolder(index) ? "> " : "" }
-                        Label { text: fileName }
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            view.currentIndex = index
-                            if (folderModel.isFolder(index)) {
-                                if (! folderModel.folder.toString().endsWith("/"))
-                                    folderModel.folder = folderModel.folder + "/"
-                                folderModel.folder = folderModel.folder + fileName
-                                view.currentIndex = -1
-                                textField.text = Logic.getFileFromUrl(folderModel.folder) + "/"
-                                textField.cursorPosition = textField.length
-                            }
-                            else {
-                                textField.text = filePath
-                                textField.cursorPosition = textField.length
-                            }
-                        }
-                    }
-                }
             }
         }
     }

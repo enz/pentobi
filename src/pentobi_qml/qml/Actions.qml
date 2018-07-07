@@ -180,7 +180,7 @@ QtObject {
     property Action actionPlayPickedPiece: Action {
         // Note: the previously used shortcut Return causes problems if a
         // TextField has the focus, it will never receive the Return key
-        // to accept the input (last tested with Qt 5.11)
+        // to accept the input (QTBUG-69345)
         shortcut: "Ctrl+Return"
         onTriggered: gameDisplay.playPickedPiece()
     }
