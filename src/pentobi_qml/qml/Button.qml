@@ -26,9 +26,9 @@ Button {
         visible: down
         color: theme.backgroundButtonPressed
     }
-    onPressed: toolTipSuppressTimer.restart()
+    onPressed: if (isDesktop) toolTipSuppressTimer.restart()
     hoverEnabled: true
-    ToolTip.visible: ToolTip.text && hovered && ! toolTipSuppressTimer.running
+    ToolTip.visible: ToolTip.text && isDesktop && hovered && ! toolTipSuppressTimer.running
     ToolTip.delay: 900
     ToolTip.timeout: 9000
 
