@@ -124,6 +124,9 @@ Item
                     height: isTrigon ? Math.sqrt(3) / 2 * width : width
                     anchors.verticalCenter: parent.verticalCenter
                     onClicked: {
+                        // Give the user an option to remove the focus from
+                        // the comment textfield by clicking on the board
+                        focus = true
                         if (! setupMode) return
                         var mv = gameModel.addEmpty(pos)
                         showMove(mv)
