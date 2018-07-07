@@ -26,4 +26,17 @@ Button {
         visible: down
         color: theme.backgroundButtonPressed
     }
+    onPressed: toolTipSuppressTimer.restart()
+    hoverEnabled: true
+    ToolTip.visible: ToolTip.text && hovered && ! toolTipSuppressTimer.running
+    ToolTip.delay: 900
+    ToolTip.timeout: 9000
+
+    // If the button is pressed and released, we don't want to show the tooltip
+    // to show again
+    Timer {
+        id: toolTipSuppressTimer
+
+        interval: 9000
+    }
 }

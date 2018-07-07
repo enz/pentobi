@@ -1352,6 +1352,46 @@
         <source>Leave setup</source>
         <translation>Forlat oppsett</translation>
     </message>
+    <message>
+        <source>Start a new game</source>
+        <translation>Start nytt spill</translation>
+    </message>
+    <message>
+        <source>Set the colors played by the computer</source>
+        <translation>Sett fargene spilt av datamaskinen</translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation>Få datamaskinen til å fortsette å spille gjeldende farge</translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation>Få datamaskinen til å spille gjeldende farge</translation>
+    </message>
+    <message>
+        <source>Go to beginning of game</source>
+        <translation>Gå til begynnelsen av spillet</translation>
+    </message>
+    <message>
+        <source>Go one move backward</source>
+        <translation>Gå ett steg bakover</translation>
+    </message>
+    <message>
+        <source>Go one move forward</source>
+        <translation>Gå ett steg forover</translation>
+    </message>
+    <message>
+        <source>Go to end of moves</source>
+        <translation>Gå til trekkslutt</translation>
+    </message>
+    <message>
+        <source>Go to previous variation</source>
+        <translation>Gå til forrige variasjon</translation>
+    </message>
+    <message>
+        <source>Go to next variation</source>
+        <translation>Gå til neste variasjon</translation>
+    </message>
 </context>
 <context>
     <name>main</name>

@@ -1232,5 +1232,45 @@
         <source>Leave setup</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Start a new game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the colors played by the computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to beginning of game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go one move backward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go one move forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to end of moves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to previous variation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to next variation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

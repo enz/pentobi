@@ -44,30 +44,45 @@ RowLayout {
         imageSource: theme.getImage("pentobi-newgame")
         action: actions.actionNew
         visible: ! isAndroid || enabled
+        ToolTip.text: qsTr("Start a new game")
     }
     Pentobi.Button {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-undo")
         action: actions.actionUndo
         visible: ! isAndroid || enabled
+        ToolTip.text: action.text.replace("&", "")
     }
     Pentobi.Button {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-computer-colors")
         action: actions.actionComputerColors
         visible: ! isAndroid || enabled
+        ToolTip.text: qsTr("Set the colors played by the computer")
     }
     Pentobi.Button {
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-play")
         action: actions.actionPlay
         visible: ! isAndroid || enabled
+        ToolTip.text: {
+            var toPlay = gameModel.toPlay
+            if (gameModel.gameVariant == "classic_3" && toPlay == 3)
+                toPlay = gameModel.altPlayer
+            if ((computerPlays0 && toPlay == 0)
+                    || (computerPlays1 && toPlay == 1)
+                    || (computerPlays2 && toPlay == 2)
+                    || (computerPlays3 && toPlay == 3))
+                return qsTr("Make the computer continue to play the current color")
+            return qsTr("Make the computer play the current color")
+        }
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-beginning")
         action: actions.actionBeginning
+        ToolTip.text: qsTr("Go to beginning of game")
     }
     Pentobi.Button {
         visible: isDesktop
@@ -75,6 +90,7 @@ RowLayout {
         imageSource: theme.getImage("pentobi-backward")
         action: actions.actionBackward
         autoRepeat: true
+        ToolTip.text: qsTr("Go one move backward")
     }
     Pentobi.Button {
         visible: isDesktop
@@ -82,24 +98,28 @@ RowLayout {
         imageSource: theme.getImage("pentobi-forward")
         action: actions.actionForward
         autoRepeat: true
+        ToolTip.text: qsTr("Go one move forward")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-end")
         action: actions.actionEnd
+        ToolTip.text: qsTr("Go to end of moves")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-previous-variation")
         action: actions.actionPrevVar
+        ToolTip.text: qsTr("Go to previous variation")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
         imageSource: theme.getImage("pentobi-next-variation")
         action: actions.actionNextVar
+        ToolTip.text: qsTr("Go to next variation")
     }
     ToolButton {
         visible: isDesktop && gameDisplay.setupMode

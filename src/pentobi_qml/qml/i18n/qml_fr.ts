@@ -153,7 +153,7 @@
     </message>
     <message>
         <source>Image width:</source>
-        <translation>Largeur de l&apos;image&#xa0;:</translation>
+        <translation>Largeur de l&apos;image :</translation>
     </message>
 </context>
 <context>
@@ -198,51 +198,51 @@
     </message>
     <message>
         <source>Player Blue/Red:</source>
-        <translation>Joueur bleu/rouge&#xa0;:</translation>
+        <translation>Joueur bleu/rouge :</translation>
     </message>
     <message>
         <source>Player Blue:</source>
-        <translation>Joueur bleu&#xa0;:</translation>
+        <translation>Joueur bleu :</translation>
     </message>
     <message>
         <source>Player Yellow/Green:</source>
-        <translation>Joueur jaune/vert&#xa0;:</translation>
+        <translation>Joueur jaune/vert :</translation>
     </message>
     <message>
         <source>Player Green:</source>
-        <translation>Joueur vert&#xa0;:</translation>
+        <translation>Joueur vert :</translation>
     </message>
     <message>
         <source>Player Yellow:</source>
-        <translation>Joueur jaune&#xa0;:</translation>
+        <translation>Joueur jaune :</translation>
     </message>
     <message>
         <source>Player Red:</source>
-        <translation>Joueur rouge&#xa0;:</translation>
+        <translation>Joueur rouge :</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation>Date&#xa0;:</translation>
+        <translation>Date :</translation>
     </message>
     <message>
         <source>Time:</source>
-        <translation>Temps&#xa0;:</translation>
+        <translation>Temps :</translation>
     </message>
     <message>
         <source>Event:</source>
-        <translation>Événement&#xa0;:</translation>
+        <translation>Événement :</translation>
     </message>
     <message>
         <source>Round:</source>
-        <translation>Round&#xa0;:</translation>
+        <translation>Round :</translation>
     </message>
     <message>
         <source>Player Purple:</source>
-        <translation>Joueur violet&#xa0;:</translation>
+        <translation>Joueur violet :</translation>
     </message>
     <message>
         <source>Player Orange:</source>
-        <translation>Joueur orange&#xa0;:</translation>
+        <translation>Joueur orange :</translation>
     </message>
 </context>
 <context>
@@ -550,27 +550,27 @@
     </message>
     <message>
         <source>Start rated game with Blue/Red against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec bleu/rouge contre Pentobi niveau %1&#xa0;?</translation>
+        <translation>Commencer une partie classée avec bleu/rouge contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Blue against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec bleu contre Pentobi niveau %1&#xa0;?</translation>
+        <translation>Commencer une partie classée avec bleu contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec jaune/vert contre Pentobi niveau %1&#xa0;?</translation>
+        <translation>Commencer une partie classée avec jaune/vert contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Green against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec vert contre Pentobi niveau %1&#xa0;?</translation>
+        <translation>Commencer une partie classée avec vert contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec jaune contre Pentobi niveau %1&#xa0;?</translation>
+        <translation>Commencer une partie classée avec jaune contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Red against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec rouge contre Pentobi niveau %1&#xa0;?</translation>
+        <translation>Commencer une partie classée avec rouge contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
@@ -642,15 +642,15 @@
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation type="vanished">Remplacer le fichier existant&#xa0;?</translation>
+        <translation type="vanished">Remplacer le fichier existant ?</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec violet contre Pentobi niveau %1&#xa0;?</translation>
+        <translation>Commencer une partie classée avec violet contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Orange against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec orange contre Pentobi niveau %1&#xa0;?</translation>
+        <translation>Commencer une partie classée avec orange contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Not enough memory.</source>
@@ -1351,6 +1351,46 @@
     <message>
         <source>Leave setup</source>
         <translation>Quitter mode position</translation>
+    </message>
+    <message>
+        <source>Start a new game</source>
+        <translation>Commencer une nouvelle partie</translation>
+    </message>
+    <message>
+        <source>Set the colors played by the computer</source>
+        <translation>Définir les couleurs joué par l&apos;ordinateur</translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation>Faire que l’ordinateur continue à jouer la couleur actuelle</translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation>Faire que l’ordinateur joue la couleur actuelle</translation>
+    </message>
+    <message>
+        <source>Go to beginning of game</source>
+        <translation>Aller en début de partie</translation>
+    </message>
+    <message>
+        <source>Go one move backward</source>
+        <translation>Revenir un coup en arrière</translation>
+    </message>
+    <message>
+        <source>Go one move forward</source>
+        <translation>Avancer d&apos;un coup</translation>
+    </message>
+    <message>
+        <source>Go to end of moves</source>
+        <translation>Aller à la fin de coups</translation>
+    </message>
+    <message>
+        <source>Go to previous variation</source>
+        <translation>Aller à la variation précédente</translation>
+    </message>
+    <message>
+        <source>Go to next variation</source>
+        <translation>Aller à la variation suivante</translation>
     </message>
 </context>
 <context>

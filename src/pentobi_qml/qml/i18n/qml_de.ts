@@ -1352,6 +1352,46 @@
         <source>Leave setup</source>
         <translation>Aufbau beenden</translation>
     </message>
+    <message>
+        <source>Start a new game</source>
+        <translation>Ein neues Spiel beginnen</translation>
+    </message>
+    <message>
+        <source>Set the colors played by the computer</source>
+        <translation>Die vom Computer gespielten Farben festlegen</translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation>Den Computer die gegenwärtige Farbe weiterspielen lassen</translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation>Den Computer die gegenwärtige Farbe spielen lassen</translation>
+    </message>
+    <message>
+        <source>Go to beginning of game</source>
+        <translation>Zum Anfang des Spiels gehen</translation>
+    </message>
+    <message>
+        <source>Go one move backward</source>
+        <translation>Einen Zug zurück gehen</translation>
+    </message>
+    <message>
+        <source>Go one move forward</source>
+        <translation>Einen Zug vorwärts gehen</translation>
+    </message>
+    <message>
+        <source>Go to end of moves</source>
+        <translation>Zum Ende der Züge gehen</translation>
+    </message>
+    <message>
+        <source>Go to previous variation</source>
+        <translation>Zur vorherigen Variante gehen</translation>
+    </message>
+    <message>
+        <source>Go to next variation</source>
+        <translation>Zur nächsten Variante gehen</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
