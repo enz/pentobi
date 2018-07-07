@@ -48,6 +48,11 @@ int main(int argc, char *argv[])
     translatorPentobi.load("qml_" + locale, ":qml/i18n");
     app.installTranslator(&translatorPentobi);
     QCommandLineParser parser;
+    auto maxSupportedLevel = Player::max_supported_level;
+    QCommandLineOption optionMaxLevel("maxlevel",
+                                      "Set maximum level to <n>.", "n",
+                                      QString::number(maxSupportedLevel));
+    parser.addOption(optionMaxLevel);
     QCommandLineOption optionNoBook("nobook", "Do not use opening books.");
     parser.addOption(optionNoBook);
     QCommandLineOption optionNoDelay(
@@ -78,6 +83,11 @@ int main(int argc, char *argv[])
         if (parser.isSet(optionNoDelay))
             PlayerModel::noDelay = true;
         bool ok;
+        auto maxLevel = parser.value(optionMaxLevel).toUInt(&ok);
+        if (! ok || maxLevel < 1 || maxLevel > maxSupportedLevel)
+            throw runtime_error("--maxlevel must be between 1 and "
+                                + to_string(maxSupportedLevel));
+        PlayerModel::maxLevel = maxLevel;
         if (parser.isSet(optionSeed))
         {
             auto seed = parser.value(optionSeed).toUInt(&ok);

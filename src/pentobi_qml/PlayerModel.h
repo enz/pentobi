@@ -36,19 +36,30 @@ class PlayerModel
 
     Q_PROPERTY(unsigned level READ level WRITE setLevel NOTIFY levelChanged)
     Q_PROPERTY(bool isGenMoveRunning READ isGenMoveRunning NOTIFY isGenMoveRunningChanged)
+    Q_PROPERTY(unsigned maxLevel MEMBER maxLevel CONSTANT)
 
 public:
-    /** Global variable to disable opening books. */
+    /** Global variable to disable opening books.
+        Must be set before creating any instances of PlayerModel and not be
+        changed afterwards. */
     static bool noBook;
 
-    /** Global variable to disable the minimum thinking time. */
+    /** Global variable to disable the minimum thinking time.
+        Must be set before creating any instances of PlayerModel and not be
+        changed afterwards. */
     static bool noDelay;
 
     /** Global variable to set the number of threads the player is constructed
         with.
         The default value 0 means that the number of threads depends on the
-        hardware. */
+        hardware. Must be set before creating any instances of PlayerModel and
+        not be changed afterwards. */
     static unsigned nuThreads;
+
+    /** Global variable to set the maximum level.
+        Must be set before creating any instances of PlayerModel and not be
+        changed afterwards. */
+    static unsigned maxLevel;
 
 
     explicit PlayerModel(QObject* parent = nullptr);

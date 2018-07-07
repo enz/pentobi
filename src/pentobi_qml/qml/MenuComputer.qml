@@ -47,7 +47,7 @@ Pentobi.Menu {
             }
 
         Instantiator {
-            model: isAndroid ? 7 : 9
+            model: playerModel.maxLevel
             onObjectAdded: menuLevel.insertItem(index, object)
             onObjectRemoved: menuLevel.removeItem(object)
 

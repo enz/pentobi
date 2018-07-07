@@ -18,23 +18,17 @@ using libboardgame_util::set_abort;
 
 //-----------------------------------------------------------------------------
 
-namespace {
-
-#ifdef Q_OS_ANDROID
-const unsigned maxLevel = 7;
-#else
-const unsigned maxLevel = 9;
-#endif
-
-} // namespace
-
-//-----------------------------------------------------------------------------
-
 bool PlayerModel::noBook = false;
 
 bool PlayerModel::noDelay = false;
 
 unsigned PlayerModel::nuThreads = 0;
+
+#ifdef Q_OS_ANDROID
+unsigned PlayerModel::maxLevel = 7;
+#else
+unsigned PlayerModel::maxLevel = 9;
+#endif
 
 PlayerModel::PlayerModel(QObject* parent)
     : QObject(parent)
@@ -207,7 +201,7 @@ void PlayerModel::startGenMove(GameModel* gm)
     if (gm->gameVariant() != m_gameVariant)
         loadLevel(gm->gameVariant());
     cancelGenMove();
-    m_player->set_level(m_level);
+    m_player->set_level(min(m_level, maxLevel));
     auto variant = gm->getBoard().get_variant();
     if (! m_player->is_book_loaded(variant))
         loadBook(variant);
