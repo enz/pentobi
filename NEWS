@@ -1,6 +1,11 @@
 Version 15.UNKNOWN (master)
 ===========================
 
+Desktop version:
+
+* Thumbnailer for GNOME is now only built if CMake option
+  PENTOBI_BUILD_THUMBNAILER is set (defaults to ON)
+
 Android version:
 
 * New theme with colors optimized for colorblindness.
