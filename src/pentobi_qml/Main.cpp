@@ -21,6 +21,7 @@
 #include "libboardgame_util/Log.h"
 
 using libboardgame_util::RandomGenerator;
+using libboardgame_util::to_string;
 
 //-----------------------------------------------------------------------------
 
