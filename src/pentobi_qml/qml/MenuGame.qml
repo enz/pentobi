@@ -128,7 +128,7 @@ Pentobi.Menu {
                 text: {
                     var result = modelData.substring(modelData.lastIndexOf("/") + 1)
                     if (! isAndroid)
-                        result = "&" + (index + 1) + " " + result
+                        result = "&" + (index + 1) + ". " + result
                     return result
                 }
                 onTriggered: Logic.openRecentFile(modelData)
