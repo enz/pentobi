@@ -11,7 +11,7 @@ QtObject {
     property color fontColorCoordinates: "#A09B99"
     property color fontColorPosInfo: "#C8C1BE"
     property color colorBlue: "#0077D2"
-    property color colorYellow: "#EBCD23"
+    property color colorYellow: "#e8c616"
     property color colorRed: "#E63E2C"
     property color colorGreen: "#00C000"
     property color colorPurple: "#a12CCF"

@@ -12,7 +12,7 @@ QtObject {
     property color fontColorCoordinates: "#64615E"
     property color fontColorPosInfo: "#282625"
     property color colorBlue: "#0077D2"
-    property color colorYellow: "#e1b800"
+    property color colorYellow: "#e8c616"
     property color colorRed: "#E63E2C"
     property color colorGreen: "#00C000"
     property color colorPurple: "#a12CCF"
