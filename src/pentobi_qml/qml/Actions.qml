@@ -178,11 +178,13 @@ QtObject {
         onTriggered: gameModel.goPrevVar()
     }
     property Action actionPlayPickedPiece: Action {
-        // Note: the previously used shortcut Return causes problems if a
-        // TextField has the focus, it will never receive the Return key
-        // to accept the input (QTBUG-69345)
-        shortcut: "Ctrl+Return"
-        onTriggered: gameDisplay.playPickedPiece()
+        shortcut: "Return"
+        onTriggered:
+            // Ignore return key if popups exist because textfields (e.g. in
+            // the Go To Move dialog don't handle and consume the Return key
+            // if an action with this shortkey exists (QTBUG-69345)
+            if (rootWindow.overlay.children.length === 0)
+                gameDisplay.playPickedPiece()
     }
     property Action actionQuit: Action {
         shortcut: "Ctrl+Q"
