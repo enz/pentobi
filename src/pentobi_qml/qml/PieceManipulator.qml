@@ -50,7 +50,7 @@ Item {
 
         MouseArea {
             anchors.centerIn: dragArea
-            width: 0.5 * root.width; height: width
+            width: 0.9 * (root.width - 2 * buttonSize); height: width
             onClicked: piecePlayed()
         }
         MouseArea {
