@@ -84,44 +84,38 @@ Pentobi.Dialog {
             width: parent.width
             clip: true
             model: folderModel
-            delegate: FocusScope {
+            delegate: Button {
                 width: view.width
                 height: 2 * font.pixelSize
-
-                Button {
-                    id: fileButton
-
-                    anchors.fill: parent
-                    flat: true
-                    onActiveFocusChanged: if (activeFocus) view.currentIndex = index
-                    contentItem: Text {
-                        text: {
-                            if (index < 0) return ""
-                            if (folderModel.isFolder(index)) return "> " + fileName
-                            return fileName
-                        }
-                        color: parent.activeFocus ? "blue" : "black"
-                        horizontalAlignment: Text.AlignHLeft
-                        verticalAlignment: Text.AlignVCenter
-                        elide: Text.ElideRight
+                flat: true
+                onActiveFocusChanged: if (activeFocus) view.currentIndex = index
+                contentItem: Text {
+                    text: {
+                        if (index < 0) return ""
+                        if (folderModel.isFolder(index)) return "> " + fileName
+                        return fileName
                     }
-                    onClicked: {
-                        view.currentIndex = index
-                        if (folderModel.isFolder(index)) {
-                            if (! folderModel.folder.toString().endsWith("/"))
-                                folderModel.folder = folderModel.folder + "/"
-                            folderModel.folder = folderModel.folder + fileName
-                            view.currentIndex = -1
-                            textField.text = Logic.getFileFromUrl(folderModel.folder) + "/"
-                            textField.cursorPosition = textField.length
-                        }
-                        else {
-                            textField.text = filePath
-                            textField.cursorPosition = textField.length
-                        }
-                    }
-                    onDoubleClicked: root.accept()
+                    color: parent.activeFocus ? "blue" : "black"
+                    horizontalAlignment: Text.AlignHLeft
+                    verticalAlignment: Text.AlignVCenter
+                    elide: Text.ElideRight
                 }
+                onClicked: {
+                    view.currentIndex = index
+                    if (folderModel.isFolder(index)) {
+                        if (! folderModel.folder.toString().endsWith("/"))
+                            folderModel.folder = folderModel.folder + "/"
+                        folderModel.folder = folderModel.folder + fileName
+                        view.currentIndex = -1
+                        textField.text = Logic.getFileFromUrl(folderModel.folder) + "/"
+                        textField.cursorPosition = textField.length
+                    }
+                    else {
+                        textField.text = filePath
+                        textField.cursorPosition = textField.length
+                    }
+                }
+                onDoubleClicked: root.accept()
             }
 
             FolderListModel {
