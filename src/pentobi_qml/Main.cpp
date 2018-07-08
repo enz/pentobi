@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     auto maxSupportedLevel = Player::max_supported_level;
     QCommandLineOption optionMaxLevel("maxlevel",
                                       "Set maximum level to <n>.", "n",
-                                      QString::number(maxSupportedLevel));
+                                      QString::number(PlayerModel::maxLevel));
     parser.addOption(optionMaxLevel);
     QCommandLineOption optionNoBook("nobook", "Do not use opening books.");
     parser.addOption(optionNoBook);
