@@ -105,21 +105,25 @@ function movePiece(x, y) {
         return
     var pos = pieceManipulator.mapToItem(
                 board, pieceManipulator.width / 2, pieceManipulator.height / 2)
+    var fastMove
     if (! board.contains(pos)) {
-        // Outside board before moving
-        var oldPickedPiece = pickedPiece
-        pickedPiece = null
-        pickPieceAtBoard(oldPickedPiece)
-        return
+        // Outside board before moving, move to center of board
+        pos = mapFromItem(board, board.width / 2, board.height / 2)
+        x = pos.x - pieceManipulator.width / 2
+        y = pos.y - pieceManipulator.height / 2
+        fastMove = false
     }
-    pos = pieceManipulator.mapToItem(
-                board,
-                pieceManipulator.width / 2 + x - pieceManipulator.x,
-                pieceManipulator.height / 2 + y - pieceManipulator.y)
-    if (! board.contains(pos))
-        // Would be outside board after moving
-        return
-    pieceManipulator.fastMove = true
+    else {
+        pos = pieceManipulator.mapToItem(
+                    board,
+                    pieceManipulator.width / 2 + x - pieceManipulator.x,
+                    pieceManipulator.height / 2 + y - pieceManipulator.y)
+        if (! board.contains(pos))
+            // Would be outside board after moving
+            return
+        fastMove = true
+    }
+    pieceManipulator.fastMove = fastMove
     pieceManipulator.x = x
     pieceManipulator.y = y
     pieceManipulator.fastMove = false
