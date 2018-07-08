@@ -4,52 +4,55 @@ find_package(Qt5QuickCompiler)
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(pentobi_qml_SRCS
-  AnalyzeGameModel.h
-  AnalyzeGameModel.cpp
-  GameModel.h
-  GameModel.cpp
-  HelpFileExtractor.h
-  HelpFileExtractor.cpp
-  Main.cpp
-  PieceModel.h
-  PieceModel.cpp
-  PlayerModel.h
-  PlayerModel.cpp
-  RatingModel.h
-  RatingModel.cpp
-)
+qt5_add_translation(pentobi_qml_QM
+    qml/i18n/qml_de.ts
+    qml/i18n/qml_fr.ts
+    qml/i18n/qml_nb_NO.ts
+    )
 
-set(pentobi_qml_QRC
+file(COPY translations.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+qtquick_compiler_add_resources(pentobi_qml_RC_SRCS
     resources.qrc
-    translations.qrc
     qml/themes/themes.qrc
+    ${CMAKE_CURRENT_BINARY_DIR}/qml/translations.qrc
     ../books/pentobi_books.qrc
     ../pentobi/help.qrc
-)
-
-qtquick_compiler_add_resources(pentobi_qml_RC_SRCS ${pentobi_qml_QRC})
+    )
 
 add_executable(pentobi_qml WIN32
-  ${pentobi_qml_SRCS}
-  ${pentobi_qml_RC_SRCS}
-)
+    ${pentobi_qml_QM}
+    ${pentobi_qml_RC_SRCS}
+    AnalyzeGameModel.h
+    AnalyzeGameModel.cpp
+    GameModel.h
+    GameModel.cpp
+    HelpFileExtractor.h
+    HelpFileExtractor.cpp
+    Main.cpp
+    PieceModel.h
+    PieceModel.cpp
+    PlayerModel.h
+    PlayerModel.cpp
+    RatingModel.h
+    RatingModel.cpp
+    )
 
 target_compile_definitions(pentobi_qml PRIVATE
     -DQT_DEPRECATED_WARNINGS
     -DQT_DISABLE_DEPRECATED_BEFORE=0x051100)
 
 target_link_libraries(pentobi_qml
-  pentobi_mcts
-  pentobi_base
-  boardgame_base
-  boardgame_sgf
-  boardgame_util
-  boardgame_sys
-  Qt5::Concurrent
-  Qt5::Gui
-  Qt5::Qml
-  Qt5::Svg
-  Qt5::WebView
-  Threads::Threads
-)
+    pentobi_mcts
+    pentobi_base
+    boardgame_base
+    boardgame_sgf
+    boardgame_util
+    boardgame_sys
+    Qt5::Concurrent
+    Qt5::Gui
+    Qt5::Qml
+    Qt5::Svg
+    Qt5::WebView
+    Threads::Threads
+    )
