@@ -1,5 +1,3 @@
-set(pentobi_thumbnailer_SRCS Main.cpp)
-
 add_executable(pentobi-thumbnailer Main.cpp)
 
 target_link_libraries(pentobi-thumbnailer
