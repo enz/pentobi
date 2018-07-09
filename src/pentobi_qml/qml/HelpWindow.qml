@@ -26,8 +26,10 @@ Window {
     // (last tested with Qt 5.9.2)
     function init() { if (isAndroid) webView.url = startUrl }
 
-    width: isAndroid ? Screen.desktopAvailableWidth : Math.min(Screen.pixelDensity * 150, Screen.desktopAvailableWidth)
-    height: isAndroid ? Screen.desktopAvailableHeight : Math.min(Screen.pixelDensity * 180, Screen.desktopAvailableHeight)
+    x: (Screen.width - width) / 2
+    y: (Screen.height - height) / 2
+    width: isAndroid ? Screen.desktopAvailableWidth : Math.min(Screen.pixelDensity * 200, Screen.desktopAvailableWidth)
+    height: isAndroid ? Screen.desktopAvailableHeight : Math.min(Screen.pixelDensity * 220, Screen.desktopAvailableHeight)
     title: qsTr("Pentobi Help")
     color: theme.backgroundColor
     flags: Qt.Dialog
