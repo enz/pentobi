@@ -1,6 +1,7 @@
 import QtQuick.Controls 2.2
+import "." as Pentobi
 
-MenuItem {
+Pentobi.MenuItem {
     property int level
 
     enabled: ! isRated

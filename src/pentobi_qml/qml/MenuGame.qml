@@ -7,8 +7,8 @@ import "." as Pentobi
 Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&Game"))
 
-    MenuItem { action: actions.actionNew }
-    MenuItem { action: actions.actionNewRated }
+    Pentobi.MenuItem { action: actions.actionNew }
+    Pentobi.MenuItem { action: actions.actionNewRated }
     MenuSeparator { }
     Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("Game &Variant"))
@@ -107,12 +107,12 @@ Pentobi.Menu {
             }
         }
     }
-    MenuItem { action: actions.actionGameInfo }
+    Pentobi.MenuItem { action: actions.actionGameInfo }
     MenuSeparator { }
-    MenuItem { action: actions.actionUndo }
-    MenuItem { action: actions.actionFindMove }
+    Pentobi.MenuItem { action: actions.actionUndo }
+    Pentobi.MenuItem { action: actions.actionFindMove }
     MenuSeparator { }
-    MenuItem { action: actions.actionOpen }
+    Pentobi.MenuItem { action: actions.actionOpen }
     Pentobi.Menu {
         id: recentFiles
 
@@ -124,7 +124,7 @@ Pentobi.Menu {
             onObjectAdded: recentFiles.insertItem(index, object)
             onObjectRemoved: recentFiles.removeItem(object)
 
-            MenuItem {
+            Pentobi.MenuItem {
                 text: {
                     var result = modelData.substring(modelData.lastIndexOf("/") + 1)
                     if (! isAndroid)
@@ -135,24 +135,24 @@ Pentobi.Menu {
             }
         }
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("Open from &Clipboard"))
         onTriggered: Logic.openClipboard()
     }
-    MenuItem { action: actions.actionSave }
-    MenuItem { action: actions.actionSaveAs }
+    Pentobi.MenuItem { action: actions.actionSave }
+    Pentobi.MenuItem { action: actions.actionSaveAs }
     Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("&Export"))
 
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("&Image"))
             onTriggered: exportImageDialog.open()
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("&ASCII Art"))
             onTriggered: asciiArtSaveDialog.open()
         }
     }
     MenuSeparator { }
-    MenuItem { action: actions.actionQuit }
+    Pentobi.MenuItem { action: actions.actionQuit }
 }

@@ -1,7 +1,9 @@
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.0
+import "." as Pentobi
 
 Menu {
-    width: Math.min(rootWindow.font.pixelSize * 18, rootWindow.width)
+    implicitWidth: Math.min(font.pixelSize * (isDesktop ? 21 : 18), rootWindow.width)
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+    delegate: Pentobi.MenuItem { }
 }

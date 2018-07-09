@@ -6,9 +6,9 @@ import "." as Pentobi
 Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("G&o"))
 
-    MenuItem { action: actions.actionGoto }
-    MenuItem { action: actions.actionBackToMainVar }
-    MenuItem { action: actions.actionBeginningOfBranch }
+    Pentobi.MenuItem { action: actions.actionGoto }
+    Pentobi.MenuItem { action: actions.actionBackToMainVar }
+    Pentobi.MenuItem { action: actions.actionBeginningOfBranch }
     MenuSeparator { }
-    MenuItem { action: actions.actionFindNextComment }
+    Pentobi.MenuItem { action: actions.actionFindNextComment }
 }

@@ -28,6 +28,7 @@
         <file>qml/MenuGame.qml</file>
         <file>qml/MenuGo.qml</file>
         <file>qml/MenuHelp.qml</file>
+        <file>qml/MenuItem.qml</file>
         <file>qml/MenuItemGameVariant.qml</file>
         <file>qml/MenuItemLevel.qml</file>
         <file>qml/MenuTools.qml</file>

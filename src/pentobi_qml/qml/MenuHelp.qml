@@ -6,8 +6,8 @@ import "." as Pentobi
 Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&Help"))
 
-    MenuItem { action: actions.actionHelp }
-    MenuItem {
+    Pentobi.MenuItem { action: actions.actionHelp }
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("&About Pentobi"))
         onTriggered: Logic.about()
     }

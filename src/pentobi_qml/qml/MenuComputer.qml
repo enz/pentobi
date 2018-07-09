@@ -7,11 +7,11 @@ import "." as Pentobi
 Pentobi.Menu {
     title: Logic.removeShortcut(qsTr("&Computer"))
 
-    MenuItem { action: actions.actionComputerColors }
-    MenuItem { action: actions.actionPlay }
+    Pentobi.MenuItem { action: actions.actionComputerColors }
+    Pentobi.MenuItem { action: actions.actionPlay }
     MenuSeparator { }
-    MenuItem { action: actions.actionPlaySingle }
-    MenuItem {
+    Pentobi.MenuItem { action: actions.actionPlaySingle }
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("St&op"))
         enabled: (playerModel.isGenMoveRunning
                   || delayedCheckComputerMove.running

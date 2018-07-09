@@ -9,7 +9,7 @@ Pentobi.Menu {
     Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("&Move Marking"))
 
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("Last With &Dot"))
             checkable: true
             autoExclusive: true
@@ -18,21 +18,21 @@ Pentobi.Menu {
                      && gameDisplay.moveMarking !== "none"
             onTriggered: gameDisplay.moveMarking = "last_dot"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("Last With &Number"))
             checkable: true
             autoExclusive: true
             checked: gameDisplay.moveMarking === "last_number"
             onTriggered: gameDisplay.moveMarking = "last_number"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("&All With Number"))
             checkable: true
             autoExclusive: true
             checked: gameDisplay.moveMarking === "all_number"
             onTriggered: gameDisplay.moveMarking = "all_number"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("N&one"))
             checkable: true
             autoExclusive: true
@@ -40,13 +40,13 @@ Pentobi.Menu {
             onTriggered: gameDisplay.moveMarking = "none"
         }
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("&Coordinates"))
         checkable: true
         checked: gameDisplay.showCoordinates
         onTriggered: gameDisplay.showCoordinates = checked
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("Show &Variations"))
         checkable: true
         checked: gameModel.showVariations
@@ -56,21 +56,21 @@ Pentobi.Menu {
     Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("&Theme"))
 
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("&Light"))
             checkable: true
             autoExclusive: true
             checked: themeName === "light"
             onTriggered: themeName = "light"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("&Dark"))
             checkable: true
             autoExclusive: true
             checked: themeName === "dark"
             onTriggered: themeName = "dark"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             //: Name of light theme optimized for colorblindness.
             text: Logic.removeShortcut(qsTr("&Colorblind Light"))
             checkable: true
@@ -78,7 +78,7 @@ Pentobi.Menu {
             checked: themeName === "colorblind-light"
             onTriggered: themeName = "colorblind-light"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             //: Name of dark theme optimized for colorblindness.
             text: Logic.removeShortcut(qsTr("Colorblind D&ark"))
             checkable: true
@@ -87,12 +87,12 @@ Pentobi.Menu {
             onTriggered: themeName = "colorblind-dark"
         }
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("&Animate Pieces"))
         checkable: true
         checked: gameDisplay.enableAnimations
         onTriggered: gameDisplay.enableAnimations = checked
     }
     MenuSeparator { }
-    MenuItem { action: actions.actionFullscreen }
+    Pentobi.MenuItem { action: actions.actionFullscreen }
 }

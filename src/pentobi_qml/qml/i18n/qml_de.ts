@@ -1037,6 +1037,17 @@
     </message>
 </context>
 <context>
+    <name>MenuItem</name>
+    <message>
+        <source>Ctrl</source>
+        <translation>Strg</translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <translation>Umschalt</translation>
+    </message>
+</context>
+<context>
     <name>MenuItemLevel</name>
     <message>
         <source>Level &amp;%1</source>

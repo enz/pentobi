@@ -957,6 +957,17 @@
     </message>
 </context>
 <context>
+    <name>MenuItem</name>
+    <message>
+        <source>Ctrl</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MenuItemLevel</name>
     <message>
         <source>Level &amp;%1</source>

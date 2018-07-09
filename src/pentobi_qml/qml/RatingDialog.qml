@@ -181,7 +181,7 @@ Pentobi.Dialog {
 
             property int row
 
-            MenuItem {
+            Pentobi.MenuItem {
                 text: history && menu.row < history.length ?
                           qsTr("Open Game %1").arg(history[menu.row].number) : ""
                 onTriggered: {

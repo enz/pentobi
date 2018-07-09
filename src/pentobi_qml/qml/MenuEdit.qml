@@ -10,49 +10,49 @@ Pentobi.Menu {
         title: Logic.removeShortcut(qsTr("Move &Annotation"))
         enabled: gameModel.moveNumber > 0
 
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("&None"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === ""
             onTriggered: gameModel.moveAnnotation = ""
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("&Very good"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "!!"
             onTriggered: gameModel.moveAnnotation = "!!"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("&Good"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "!"
             onTriggered: gameModel.moveAnnotation = "!"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("Int&eresting"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "!?"
             onTriggered: gameModel.moveAnnotation = "!?"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("&Doubtful"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "?!"
             onTriggered: gameModel.moveAnnotation = "?!"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("&Bad"))
             checkable: true
             autoExclusive: true
             checked: gameModel.moveAnnotation === "?"
             onTriggered: gameModel.moveAnnotation = "?"
         }
-        MenuItem {
+        Pentobi.MenuItem {
             text: Logic.removeShortcut(qsTr("Very B&ad"))
             checkable: true
             autoExclusive: true
@@ -61,7 +61,7 @@ Pentobi.Menu {
         }
     }
     MenuSeparator { }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("Make &Main Variation"))
         enabled: ! gameModel.isMainVar
         onTriggered: {
@@ -69,44 +69,44 @@ Pentobi.Menu {
             Logic.showTemporaryMessage(qsTr("Made main variation."))
         }
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("Move Variation &Up"))
         enabled: gameModel.hasPrevVar
         onTriggered: Logic.moveUpVar()
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("Move Variation &Down"))
         enabled: gameModel.hasNextVar
         onTriggered: Logic.moveDownVar()
     }
     MenuSeparator { }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("&Delete All Variations"))
         enabled: gameModel.hasVariations
         onTriggered: Logic.deleteAllVar()
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("&Truncate"))
         enabled: gameModel.canGoBackward
         onTriggered: Logic.truncate()
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("Truncate &Children"))
         enabled: gameModel.canGoForward
         onTriggered: Logic.truncateChildren()
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("&Keep Only Position"))
         enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward)
         onTriggered: Logic.keepOnlyPosition()
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("Keep Only &Subtree"))
         enabled: gameModel.canGoBackward && gameModel.canGoForward
         onTriggered: Logic.keepOnlySubtree()
     }
     MenuSeparator { }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("S&etup Mode"))
         checkable: true
         enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
@@ -120,7 +120,7 @@ Pentobi.Menu {
                 Logic.setComputerNone()
         }
     }
-    MenuItem {
+    Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("&Next Color"))
         onTriggered: gameModel.nextColor()
     }
