@@ -65,16 +65,16 @@ ApplicationWindow {
     Component.onDestruction: Logic.autoSave()
 
     ColumnLayout {
-        property bool nonAltKeyPressed
+        property bool altKeyPressed
 
         anchors.fill: parent
         spacing: 0
-        Keys.onPressed: nonAltKeyPressed = (event.key !== Qt.Key_Alt)
+        Keys.onPressed: altKeyPressed = (event.key === Qt.Key_Alt)
         Keys.onReleased:
             if (event.key === Qt.Key_Alt) {
                 // We want the Alt key open the menu but not if it is used in a
                 // combination used by the window manager (e.g. Alt-Tab)
-                if (! nonAltKeyPressed)  {
+                if (altKeyPressed)  {
                     toolBar.clickMenuButton()
                     event.accepted = true
                 }
