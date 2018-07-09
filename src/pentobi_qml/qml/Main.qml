@@ -77,6 +77,7 @@ ApplicationWindow {
                 if (altKeyPressed)  {
                     toolBar.clickMenuButton()
                     event.accepted = true
+                    altKeyPressed = false
                 }
             }
             else if (event.key === Qt.Key_Back) {
@@ -97,7 +98,7 @@ ApplicationWindow {
                     }
                     event.accepted = true
                 }
-            }
+        }
 
         Pentobi.ToolBar {
             id: toolBar
