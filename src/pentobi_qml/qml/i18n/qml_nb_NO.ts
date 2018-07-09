@@ -187,7 +187,7 @@
     </message>
     <message>
         <source>Computer is thinking... (up to %1 minutes remaining)</source>
-        <translation>Computer is thinking... (up to %1 minutes remaining)</translation>
+        <translation>Datamaskinen tenker… (opptil %1 minutter gjenstår)</translation>
     </message>
 </context>
 <context>
