@@ -96,7 +96,7 @@ QtObject {
     }
     property Action actionMenuKey: Action {
         shortcut: "Menu"
-        onTriggered: toolBar.openMenu()
+        onTriggered: toolBar.clickMenuButton()
     }
     property Action actionMovePieceDown: Action {
         shortcut: "Down"

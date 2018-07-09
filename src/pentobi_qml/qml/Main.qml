@@ -65,20 +65,29 @@ ApplicationWindow {
     Component.onDestruction: Logic.autoSave()
 
     ColumnLayout {
+        property bool nonAltKeyPressed
+
         anchors.fill: parent
         spacing: 0
-        Keys.onPressed:
-            // Only handle Alt key to open menu if no popups are visible to not
-            // interfere with mnemonics
-            if (event.key === Qt.Key_Alt
-                    && rootWindow.overlay.children.length === 0) {
-                toolBar.openMenu()
-                event.accepted = true
-            }
+        Keys.onPressed: nonAltKeyPressed = (event.key !== Qt.Key_Alt)
         Keys.onReleased:
-            if (event.key === Qt.Key_Back && visibility === Window.FullScreen) {
-                visibility = Window.AutomaticVisibility
-                event.accepted = true
+            if (event.key === Qt.Key_Alt) {
+                // We want the Alt key open the menu but not if it is used in a
+                // combination used by the window manager (e.g. Alt-Tab)
+                if (! nonAltKeyPressed)  {
+                    toolBar.clickMenuButton()
+                    event.accepted = true
+                }
+            }
+            else if (event.key === Qt.Key_Back) {
+                // Note that we cannot use an action with shortcut Back because
+                // as of Qt 5.11.1 the action would always receive the Back key
+                // even if a Controls2.Dialog is open that could be closed with
+                // the back key if the Action did not exist.
+                if (visibility === Window.FullScreen) {
+                    visibility = Window.AutomaticVisibility
+                    event.accepted = true
+                }
             }
 
         Pentobi.ToolBar {
