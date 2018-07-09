@@ -9,6 +9,7 @@
 
 #include <QDateTime>
 #include <QQmlListProperty>
+#include <QUrl>
 #include "PieceModel.h"
 #include "libpentobi_base/Game.h"
 
@@ -236,6 +237,8 @@ public:
     Q_INVOKABLE PieceModel* nextPiece(PieceModel* currentPickedPiece);
 
     Q_INVOKABLE PieceModel* previousPiece(PieceModel* currentPickedPiece);
+
+    Q_INVOKABLE QUrl getDefaultFolder() const;
 
 
     QByteArray getSgf() const;

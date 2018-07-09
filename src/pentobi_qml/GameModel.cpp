@@ -15,6 +15,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QSettings>
+#include <QStandardPaths>
 #include <QTextCodec>
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
@@ -506,6 +507,16 @@ PieceModel* GameModel::findPieceModel(Color c, Piece piece)
         if (pieceModel->getPiece() == piece)
             return pieceModel;
     return nullptr;
+}
+
+QUrl GameModel::getDefaultFolder() const
+{
+#ifdef Q_OS_ANDROID
+    return QUrl("file:///sdcard");
+#else
+    return QUrl::fromLocalFile(
+                QStandardPaths::writableLocation(QStandardPaths::HomeLocation));
+#endif
 }
 
 QString GameModel::getPlayerString(int player)

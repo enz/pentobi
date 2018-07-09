@@ -3,7 +3,6 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.1
 import Qt.labs.settings 1.0
-import Qt.labs.platform 1.0
 import pentobi 1.0
 import "." as Pentobi
 import "Main.js" as Logic
@@ -36,9 +35,7 @@ ApplicationWindow {
     property bool isAndroid: Qt.platform.os === "android"
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
-    property url folder:
-        isAndroid ? "file:///sdcard"
-                  : StandardPaths.writableLocation(StandardPaths.HomeLocation)
+    property url folder: gameModel.getDefaultFolder()
     property int defaultWidth:
         isAndroid ? Screen.desktopAvailableWidth :
                     Math.min(Screen.desktopAvailableWidth, 1230)
