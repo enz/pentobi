@@ -87,6 +87,34 @@ Pentobi.Menu {
             onTriggered: themeName = "colorblind-dark"
         }
     }
+    Pentobi.Menu {
+        title: Logic.removeShortcut(qsTr("&Layout"))
+        enabled: ! isAndroid
+        Pentobi.MenuItem {
+            //: Name of window layout optimized for desktop.
+            text: Logic.removeShortcut(qsTr("&Desktop"))
+            checkable: true
+            autoExclusive: true
+            checked: isDesktop
+            onTriggered: {
+                gameDisplay.destroyPieces()
+                isDesktop = true
+                gameDisplay.createPieces()
+            }
+        }
+        Pentobi.MenuItem {
+            //: Name of window layout optimized for smartphones.
+            text: Logic.removeShortcut(qsTr("&Mobile"))
+            checkable: true
+            autoExclusive: true
+            checked: ! isDesktop
+            onTriggered: {
+                gameDisplay.destroyPieces()
+                isDesktop = false
+                gameDisplay.createPieces()
+            }
+        }
+    }
     Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("&Animate Pieces"))
         checkable: true

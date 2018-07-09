@@ -1146,6 +1146,20 @@
         <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
         <translation>Farbenblind d&amp;unkel</translation>
     </message>
+    <message>
+        <source>&amp;Layout</source>
+        <translation>&amp;Layout</translation>
+    </message>
+    <message>
+        <source>&amp;Desktop</source>
+        <extracomment>Name of window layout optimized for desktop.</extracomment>
+        <translation>&amp;Desktop</translation>
+    </message>
+    <message>
+        <source>&amp;Mobile</source>
+        <extracomment>Name of window layout optimized for smartphones.</extracomment>
+        <translation>&amp;Mobil</translation>
+    </message>
 </context>
 <context>
     <name>MessageDialog</name>

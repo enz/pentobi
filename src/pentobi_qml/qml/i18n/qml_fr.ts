@@ -1146,6 +1146,20 @@
         <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
         <translation>Daltonien n&amp;oir</translation>
     </message>
+    <message>
+        <source>&amp;Layout</source>
+        <translation>&amp;Disposition</translation>
+    </message>
+    <message>
+        <source>&amp;Desktop</source>
+        <extracomment>Name of window layout optimized for desktop.</extracomment>
+        <translation>&amp;Bureau</translation>
+    </message>
+    <message>
+        <source>&amp;Mobile</source>
+        <extracomment>Name of window layout optimized for smartphones.</extracomment>
+        <translation>&amp;Portable</translation>
+    </message>
 </context>
 <context>
     <name>MessageDialog</name>

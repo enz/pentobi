@@ -134,6 +134,7 @@ ApplicationWindow {
         property alias initComputerColorsOnNewGame: rootWindow.initComputerColorsOnNewGame;
         property alias isRated: rootWindow.isRated
         property alias themeName: rootWindow.themeName
+        property alias isDesktop: rootWindow.isDesktop
         property alias wasGenMoveRunning: rootWindow.wasGenMoveRunning
         property alias exportImageWidth: rootWindow.exportImageWidth
         property alias showVariations: gameModel.showVariations

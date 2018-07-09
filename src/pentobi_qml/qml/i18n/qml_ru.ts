@@ -1053,6 +1053,20 @@
         <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Desktop</source>
+        <extracomment>Name of window layout optimized for desktop.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Mobile</source>
+        <extracomment>Name of window layout optimized for smartphones.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OkButton</name>
