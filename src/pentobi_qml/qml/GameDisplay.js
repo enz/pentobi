@@ -178,7 +178,7 @@ function playPickedPiece() {
     if (! board.contains(pos))
         pickedPiece = null
     else if (setupMode)
-        gameModel.addSetup(pieceModel, board.mapToGame(pos))
+        gameModel.addSetup(pieceManipulator.pieceModel, board.mapToGame(pos))
     else if (pieceManipulator.legal)
         play(pieceManipulator.pieceModel, board.mapToGame(pos))
 }
