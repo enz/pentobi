@@ -23,6 +23,7 @@ MenuItem {
                         + root.text.substring(pos + 1, pos + 2)
                         + "</u>" + root.text.substring(pos + 2)
             }
+            font: root.font
             elide: Text.ElideRight
             Layout.fillWidth: true
         }
@@ -39,6 +40,7 @@ MenuItem {
                                     ///: Shortcut modifier key as displayed in menu item text (abbreviate if long)
                                     qsTr("Shift"))
             }
+            font: root.font
             color: "#666"
         }
         Item { implicitWidth: root.arrow.width }
