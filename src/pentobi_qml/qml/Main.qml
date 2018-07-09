@@ -68,6 +68,14 @@ ApplicationWindow {
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
+        Keys.onPressed:
+            // Only handle Alt key to open menu if no popups are visible to not
+            // interfere with mnemonics
+            if (event.key === Qt.Key_Alt
+                    && rootWindow.overlay.children.length === 0) {
+                toolBar.openMenu()
+                event.accepted = true
+            }
         Keys.onReleased:
             if (event.key === Qt.Key_Back && visibility === Window.FullScreen) {
                 visibility = Window.AutomaticVisibility

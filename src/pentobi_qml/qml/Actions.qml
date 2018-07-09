@@ -147,10 +147,6 @@ QtObject {
         text: Logic.removeShortcut(qsTr("&Open..."))
         onTriggered: Logic.open()
     }
-    property Action actionOpenMenu: Action {
-        shortcut: "F10"
-        onTriggered: toolBar.openMenu()
-    }
     property Action actionPlay: Action {
         shortcut: "Ctrl+L"
         text: Logic.removeShortcut(qsTr("&Play"))
