@@ -30,10 +30,12 @@ MenuItem {
                 if (! root.action || ! root.action.shortcut)
                     return ""
                 var text = root.action.shortcut
-                ///: Shortcut modifier key as displayed in menu item text
-                text = text.replace("Ctrl", qsTr("Ctrl"))
-                ///: Shortcut modifier key as displayed in menu item text
-                return text.replace("Shift", qsTr("Shift"))
+                text = text.replace("Ctrl",
+                                    ///: Shortcut modifier key as displayed in menu item text (abbreviate if long)
+                                    qsTr("Ctrl"))
+                return text.replace("Shift",
+                                    ///: Shortcut modifier key as displayed in menu item text (abbreviate if long)
+                                    qsTr("Shift"))
             }
             color: "#666"
         }

@@ -1040,11 +1040,11 @@
     <name>MenuItem</name>
     <message>
         <source>Ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <source>Shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj</translation>
     </message>
 </context>
 <context>
