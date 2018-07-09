@@ -6,6 +6,8 @@ import "Main.js" as Logic
 MenuItem {
     id: root
 
+    // implicitWidth should be the same as in Pentobi.Menu
+    implicitWidth: Math.min(font.pixelSize * (isDesktop ? 21 : 18), rootWindow.width)
     contentItem: RowLayout {
         opacity: enabled ? 1.0 : 0.3
 
