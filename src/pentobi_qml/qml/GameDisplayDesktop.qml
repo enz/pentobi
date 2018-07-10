@@ -165,6 +165,7 @@ Item
 
                         Comment {
                             id: comment
+
                             width: parent.width
                             height: analyzeGame.visible ? 0.4 * (parent.height - parent.spacing) : parent.height
                         }
