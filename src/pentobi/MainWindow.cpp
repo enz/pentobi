@@ -2665,7 +2665,6 @@ bool MainWindow::saveFile(const QString& file)
                                    QString::fromLocal8Bit(strerror(errno))));
         return false;
     }
-    Util::removeThumbnail(file);
     return true;
 }
 

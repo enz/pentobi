@@ -21,18 +21,6 @@ Pentobi can be compiled from the source directory with the shell commands:
   make
 
 
-=== Building the KDE thumbnailer plugin ===
-
-A thumbnailer plugin for KDE can be built by using the cmake option
--DPENTOBI_BUILD_KDE_THUMBNAILER=1. In this case, the KDE development files
-need to be installed (packages libkf5kio-dev and extra-cmake-modules on
-Ubuntu 18.04). Note that on Ubuntu 18.04, the plugin will not be found if
-the default installation prefix /usr/local is used. You need to add
-QT_PLUGIN_PATH=/usr/local/lib/plugins to /etc/environment. After that, you
-can enable previews for Blokus game file in the Dolphin file manager in
-"Configure Dolphin/General/Previews".
-
-
 == Installing ==
 
 On Linux, Pentobi can be installed after compilation with the shell command:

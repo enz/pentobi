@@ -49,16 +49,8 @@
       Small helper program to convert SVG icons to bitmaps at build time
     - libpentobi_gui -
       GUI functionality that could be reused for other projects
-    - libpentobi_thumbnail -
-      Common functionality for file preview thumbnailers
     - pentobi -
       Main program that provides a GUI for the player in libpentobi_mcts
-    - pentobi_thumbnailer -
-      Generates file preview thumbnails for the
-      <a href="http://www.gnome.org/">Gnome</a> desktop
-    - pentobi_kde_thumbnailer -
-      Plugin for file preview thumbnails for the
-      <a href="http://www.kde.org/">KDE</a> desktop
 
     @section mainpage_gui_qml Pentobi QML GUI Modules
 

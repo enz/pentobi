@@ -52,17 +52,4 @@ install(FILES pentobi-mime.xml
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
 
-if(PENTOBI_BUILD_THUMBNAILER)
-  configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/thumbnailers)
-endif()
-
-if(PENTOBI_BUILD_KDE_THUMBNAILER)
-  configure_file(io.sourceforge.pentobi.kde-thumbnailer.metainfo.xml.in
-    io.sourceforge.pentobi.kde-thumbnailer.metainfo.xml @ONLY)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.kde-thumbnailer.metainfo.xml
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
-endif()
-
 endif(PENTOBI_BUILD_GUI AND NOT WIN32)

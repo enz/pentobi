@@ -12,18 +12,7 @@ include(GNUInstallDirs)
 option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build Qt-based GUI" ON)
-option(PENTOBI_BUILD_THUMBNAILER "Build thumbnailer for GNOME" ON)
 option(PENTOBI_BUILD_QML "Build QtQuick-based GUI" OFF)
-option(PENTOBI_BUILD_KDE_THUMBNAILER "Build thumbnailer for KDE" OFF)
-
-if (PENTOBI_BUILD_THUMBNAILER AND NOT PENTOBI_BUILD_GUI)
-  message(FATAL_ERROR
-    "PENTOBI_BUILD_THUMBNAILER requires PENTOBI_BUILD_GUI=1")
-endif()
-if (PENTOBI_BUILD_KDE_THUMBNAILER AND NOT PENTOBI_BUILD_GUI)
-  message(FATAL_ERROR
-    "PENTOBI_BUILD_KDE_THUMBNAILER requires PENTOBI_BUILD_GUI=1")
-endif()
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "No build type selected, default to Release")

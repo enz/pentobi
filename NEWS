@@ -3,8 +3,9 @@ Version 15.UNKNOWN (master)
 
 Desktop version:
 
-* Thumbnailer for GNOME is now only built if CMake option
-  PENTOBI_BUILD_THUMBNAILER is set (defaults to ON)
+* Gnome and KDE thumbnailers have been removed because they depended on
+  the code of the QWidgets-based GUI, which will be replaced by the
+  QtQuick-based GUI of the Android version in one of the next releases.
 
 Android version:
 

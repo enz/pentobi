@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Service
-Name=Blokus games
-Name[de]=Blokus-Partien
-ServiceTypes=ThumbCreator
-MimeType=application/x-blokus-sgf;
-X-KDE-Library=pentobi-thumbnail
