@@ -59,3 +59,5 @@ target_link_libraries(pentobi_qml
     Qt5::WebView
     Threads::Threads
     )
+
+add_subdirectory(qml)
