@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("Pentobi");
 #ifdef VERSION
     app.setApplicationVersion(VERSION);
-#endif
+#endif    
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<HelpFileExtractor>("pentobi", 1, 0, "HelpFileExtractor");

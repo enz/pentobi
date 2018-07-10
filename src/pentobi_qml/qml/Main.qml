@@ -85,15 +85,6 @@ ApplicationWindow {
                 // the back key if the Action did not exist.
                 if (visibility === Window.FullScreen) {
                     visibility = Window.AutomaticVisibility
-                    if (isAndroid) {
-                        // For some reason, when leaving fullscreen on Android
-                        // the window is sometimes shifted down by twice the
-                        // Android statusbar height and some white space between
-                        // the reappearing statusbar and the window (last tested
-                        // with Qt 5.11.1 on Android 6)
-                        rootWindow.x = 0
-                        rootWindow.y = 0
-                    }
                     event.accepted = true
                 }
         }
