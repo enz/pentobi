@@ -1040,11 +1040,11 @@
     <name>MenuItem</name>
     <message>
         <source>Ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <source>Shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift</translation>
     </message>
 </context>
 <context>
@@ -1074,7 +1074,7 @@
     </message>
     <message>
         <source>Clear A&amp;nalysis</source>
-        <translation type="unfinished"></translation>
+        <translation>Tøm a&amp;nalyse</translation>
     </message>
 </context>
 <context>
@@ -1148,17 +1148,17 @@
     </message>
     <message>
         <source>&amp;Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Oppsett</translation>
     </message>
     <message>
         <source>&amp;Desktop</source>
         <extracomment>Name of window layout optimized for desktop.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Skrivebord</translation>
     </message>
     <message>
         <source>&amp;Mobile</source>
         <extracomment>Name of window layout optimized for smartphones.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mobil</translation>
     </message>
 </context>
 <context>
