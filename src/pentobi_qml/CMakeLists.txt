@@ -15,10 +15,21 @@ qt5_add_translation(pentobi_qml_QM
     qml/i18n/qml_nb_NO.ts
     )
 
-file(COPY qml/i18n/translations.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+add_custom_command(
+    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/qml/i18n/translations.qrc"
+    "${CMAKE_CURRENT_BINARY_DIR}"
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/qml/i18n/translations.qrc"
+    )
+
+# Don't use qtquick_compiler_add_resources for dynamically generated files, it
+# doesn't check dependencies like qt5_add_resources (last tested in Qt 5.11.1)
+qt5_add_resources(pentobi_qml_RC_TRANSL_SRCS
+    "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
+    )
+
 qtquick_compiler_add_resources(pentobi_qml_RC_SRCS
     resources.qrc
-    ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
     qml/themes/themes.qrc
     ../books/pentobi_books.qrc
     ../pentobi/help.qrc
@@ -26,6 +37,7 @@ qtquick_compiler_add_resources(pentobi_qml_RC_SRCS
 
 add_executable(pentobi_qml WIN32
     ${pentobi_qml_QM}
+    ${pentobi_qml_RC_TRANSL_SRCS}
     ${pentobi_qml_RC_SRCS}
     AnalyzeGameModel.h
     AnalyzeGameModel.cpp
