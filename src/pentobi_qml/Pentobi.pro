@@ -108,8 +108,8 @@ RESOURCES += \
     ../books/pentobi_books.qrc \
     ../pentobi/help.qrc \
     qml/themes/themes.qrc \
-    resources.qrc \
-    translations.qrc
+    qml/i18n/translations.qrc \
+    resources.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -231,7 +231,7 @@ SOURCES += \
     qml/*.js
 }
 
-TRANSLATIONS = $$files(qml/i18n/*.ts)
+TRANSLATIONS = $$files(qml/i18n/qml_*.ts)
 qtPrepareTool(LRELEASE, lrelease)
 updateqm.input = TRANSLATIONS
 updateqm.output = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm

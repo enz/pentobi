@@ -15,9 +15,10 @@ qt5_add_translation(pentobi_qml_QM
     qml/i18n/qml_nb_NO.ts
     )
 
+file(COPY qml/i18n/translations.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 qtquick_compiler_add_resources(pentobi_qml_RC_SRCS
     resources.qrc
-    translations.qrc
+    ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
     qml/themes/themes.qrc
     ../books/pentobi_books.qrc
     ../pentobi/help.qrc
