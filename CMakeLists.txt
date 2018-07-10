@@ -61,13 +61,6 @@ if(PENTOBI_BUILD_GUI)
   find_package(Qt5LinguistTools 5.6 REQUIRED)
   find_package(Qt5Svg 5.6 REQUIRED)
 endif()
-if(PENTOBI_BUILD_QML)
-  find_package(Qt5Concurrent 5.11 REQUIRED)
-  find_package(Qt5Qml 5.11 REQUIRED)
-  find_package(Qt5Gui 5.11 REQUIRED)
-  find_package(Qt5Svg 5.11 REQUIRED)
-  find_package(Qt5WebView 5.11 REQUIRED)
-endif()
 
 if(UNIX)
   add_custom_target(dist

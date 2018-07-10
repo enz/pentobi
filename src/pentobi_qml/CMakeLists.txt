@@ -1,6 +1,11 @@
 set(CMAKE_AUTOMOC TRUE)
 
-find_package(Qt5QuickCompiler)
+find_package(Qt5Concurrent 5.11 REQUIRED)
+find_package(Qt5QuickCompiler REQUIRED)
+find_package(Qt5QuickControls2 REQUIRED)
+find_package(Qt5LinguistTools 5.11 REQUIRED)
+find_package(Qt5Svg 5.11 REQUIRED)
+find_package(Qt5WebView 5.11 REQUIRED)
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
