@@ -110,8 +110,8 @@ Item
             Row {
                 id: row
 
-                width: Math.min(parent.width - leftPadding - rightPadding, parent.height / 0.55)
-                height: Math.min(parent.height, (parent.width - leftPadding - rightPadding) * 0.55)
+                width: Math.min(parent.width - leftPadding - rightPadding, parent.height / 0.53)
+                height: Math.min(parent.height, (parent.width - leftPadding - rightPadding) * 0.53)
                 leftPadding: spacing
                 rightPadding: spacing
                 anchors.centerIn: parent
@@ -120,7 +120,7 @@ Item
                 Board {
                     id: board
 
-                    width: 0.55 * parent.width
+                    width: 0.53 * parent.width
                     height: isTrigon ? Math.sqrt(3) / 2 * width : width
                     anchors.verticalCenter: parent.verticalCenter
                     onClicked: {
@@ -166,7 +166,7 @@ Item
                         Comment {
                             id: comment
                             width: parent.width
-                            height: analyzeGame.visible ? (parent.height - parent.spacing) / 2 : parent.height
+                            height: analyzeGame.visible ? 0.4 * (parent.height - parent.spacing) : parent.height
                         }
                         AnalyzeGame {
                             id: analyzeGame
@@ -174,7 +174,7 @@ Item
                             visible: elements.length !== 0 || analyzeGameModel.isRunning
                             theme: rootWindow.theme
                             width: parent.width
-                            height: (parent.height - parent.spacing) / 2
+                            height: 0.6 * (parent.height - parent.spacing)
                         }
                     }
                 }

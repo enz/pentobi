@@ -38,10 +38,10 @@ ApplicationWindow {
     property url folder: gameModel.getDefaultFolder()
     property int defaultWidth:
         isAndroid ? Screen.desktopAvailableWidth :
-                    Math.min(Screen.desktopAvailableWidth, 1230)
+                    Math.min(Screen.desktopAvailableWidth, 1200)
     property int defaultHeight:
         isAndroid ? Screen.desktopAvailableHeight :
-                    Math.min(Screen.desktopAvailableHeight, 720)
+                    Math.min(Screen.desktopAvailableHeight, 680)
     property int exportImageWidth: 400
     property bool busyIndicatorRunning: gameDisplay.pieces0 === undefined
                                         || lengthyCommand.isRunning
