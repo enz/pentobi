@@ -24,11 +24,7 @@ function autoSave() {
             (playerModel.isGenMoveRunning
              || delayedCheckComputerMove.running)
             && ! isPlaySingleMoveRunning
-    // Don't autosave if file was loaded from content property set by command
-    // line argument, because the user might want to continue the previously
-    // autosaved game.
-    if (initialFile === "" || gameModel.isModified)
-        gameModel.autoSave()
+    gameModel.autoSave()
     analyzeGameModel.autoSave(gameModel)
 }
 
@@ -265,21 +261,7 @@ function init() {
             && themeName !== "colorblind-dark")
         themeName = "light"
 
-    // initialFile is a context property set from command line argument
-    if (initialFile) {
-        if (gameModel.openFile(initialFile)) {
-            gameDisplay.createPieces()
-            initComputerColors()
-            return
-        }
-        else
-            showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-    }
-    if (! gameModel.loadAutoSave()) {
-        gameDisplay.createPieces()
-        initComputerColors()
-        return
-    }
+    gameModel.loadAutoSave()
     gameDisplay.createPieces()
     if (gameModel.checkFileDeletedOutside())
     {
@@ -292,7 +274,10 @@ function init() {
         return
     }
     analyzeGameModel.loadAutoSave(gameModel)
-    if (wasGenMoveRunning || (isRated && isComputerToPlay()))
+    // initialFile is a context property set from command line argument
+    if (initialFile)
+        verify(function() { openFile(initialFile) })
+    else if (wasGenMoveRunning)
         checkComputerMove()
 }
 
