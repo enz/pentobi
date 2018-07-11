@@ -110,6 +110,8 @@ int main(int argc, char *argv[])
         QQmlApplicationEngine engine;
         engine.rootContext()->setContextProperty("initialFile", initialFile);
         engine.load(QUrl("qrc:///qml/Main.qml"));
+        if (engine.rootObjects().empty())
+            return 1;
         return app.exec();
     }
     catch (const exception& e)
