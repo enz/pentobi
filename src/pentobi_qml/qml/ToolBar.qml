@@ -35,7 +35,7 @@ RowLayout {
                     gameDisplay.setupMode = false
                     Logic.setComputerNone()
                 }
-                else if (gameModel.file != "")
+                else if (gameModel.file !== "")
                     Logic.showInfo(Logic.getFileInfo(gameModel.file, gameModel.isModified))
         }
     }
@@ -67,12 +67,12 @@ RowLayout {
         visible: ! isAndroid || enabled
         ToolTip.text: {
             var toPlay = gameModel.toPlay
-            if (gameModel.gameVariant == "classic_3" && toPlay == 3)
+            if (gameModel.gameVariant === "classic_3" && toPlay === 3)
                 toPlay = gameModel.altPlayer
-            if ((computerPlays0 && toPlay == 0)
-                    || (computerPlays1 && toPlay == 1)
-                    || (computerPlays2 && toPlay == 2)
-                    || (computerPlays3 && toPlay == 3))
+            if ((computerPlays0 && toPlay === 0)
+                    || (computerPlays1 && toPlay === 1)
+                    || (computerPlays2 && toPlay === 2)
+                    || (computerPlays3 && toPlay === 3))
                 return qsTr("Make the computer continue to play the current color")
             return qsTr("Make the computer play the current color")
         }
@@ -148,7 +148,7 @@ RowLayout {
             anchors.fill: parent
             hoverEnabled: true
             ToolTip.text: Logic.getFileInfo(gameModel.file, gameModel.isModified)
-            ToolTip.visible: containsMouse && gameModel.file != ""
+            ToolTip.visible: containsMouse && gameModel.file !== ""
             ToolTip.delay: 700
             ToolTip.timeout: 9000
         }
