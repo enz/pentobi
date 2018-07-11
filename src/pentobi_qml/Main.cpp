@@ -111,6 +111,8 @@ int main(int argc, char *argv[])
         }
         QString initialFile;
         auto args = parser.positionalArguments();
+        if (args.size() > 1)
+            throw runtime_error("Too many arguments");
         if (! args.empty())
             initialFile = args.at(0);
         QQmlApplicationEngine engine;
