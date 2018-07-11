@@ -267,10 +267,13 @@ function init() {
 
     // initialFile is a context property set from command line argument
     if (initialFile) {
-        gameModel.openFile(initialFile)
-        gameDisplay.createPieces()
-        initComputerColors()
-        return
+        if (gameModel.openFile(initialFile)) {
+            gameDisplay.createPieces()
+            initComputerColors()
+            return
+        }
+        else
+            showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
     }
     if (! gameModel.loadAutoSave()) {
         gameDisplay.createPieces()
