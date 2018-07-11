@@ -162,7 +162,13 @@ function computerPlaysAny() {
 
 function createTheme(themeName) {
     var source = "themes/" + themeName + "/Theme.qml"
-    return Qt.createComponent(source).createObject(rootWindow)
+    var component = Qt.createComponent(source)
+    if (component.status !== Component.Ready) {
+        // In case the settings contained an invalid theme name
+        var source = "themes/light/Theme.qml"
+        var component = Qt.createComponent(source)
+    }
+    return component.createObject(rootWindow)
 }
 
 function deleteAllVar() {
@@ -255,12 +261,6 @@ function help() {
 }
 
 function init() {
-    // Settings may contain invalid theme
-    if (themeName !== "dark" && themeName !== "light"
-            && themeName !== "colorblind-light"
-            && themeName !== "colorblind-dark")
-        themeName = "light"
-
     gameModel.loadAutoSave()
     gameDisplay.createPieces()
     if (gameModel.checkFileDeletedOutside())
