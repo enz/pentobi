@@ -1005,7 +1005,8 @@ bool GameModel::openStream(istream& in)
 
 bool GameModel::openFile(const QString& file)
 {
-    ifstream in(file.toLocal8Bit().constData());
+    auto absoluteFile = QFileInfo(file).absoluteFilePath();
+    ifstream in(absoluteFile.toLocal8Bit().constData());
     if (! in)
     {
         m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
@@ -1013,8 +1014,8 @@ bool GameModel::openFile(const QString& file)
     }
     if (openStream(in))
     {
-        updateFileInfo(file);
-        addRecentFile(file);
+        updateFileInfo(absoluteFile);
+        addRecentFile(absoluteFile);
         auto& root = m_game.get_root();
         // Show end of game position by default unless the root node has
         // setup stones or comments, because then it might be a puzzle and
