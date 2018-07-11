@@ -33,7 +33,6 @@ Window {
     y: (Screen.height - defaultHeight) / 2
     title: qsTr("Pentobi Help")
     color: theme.backgroundColor
-    flags: Qt.Dialog
 
     // We'd like to hide the window instead of closing it but it doesn't work on
     // Android to make it visible again (problem with WebView? Last tested with
