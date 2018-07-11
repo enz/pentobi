@@ -309,8 +309,7 @@ bool GameModel::checkFileDeletedOutside()
 {
     if (m_file.isEmpty() || ! m_fileDate.isValid())
         return false;
-    QFileInfo fileInfo(m_file);
-    return ! fileInfo.exists();
+    return ! QFileInfo::exists(m_file);
 }
 
 bool GameModel::checkFileExists(const QString& file)
@@ -1455,8 +1454,7 @@ void GameModel::undo()
 void GameModel::updateFileInfo(const QString& file)
 {
     setFile(file);
-    QFileInfo fileInfo(file);
-    m_fileDate = fileInfo.lastModified();
+    m_fileDate = QFileInfo(file).lastModified();
 }
 
 void GameModel::updateGameInfo()
