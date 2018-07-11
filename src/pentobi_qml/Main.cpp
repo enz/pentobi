@@ -36,6 +36,12 @@ int main(int argc, char *argv[])
 #ifdef VERSION
     app.setApplicationVersion(VERSION);
 #endif    
+    QIcon icon;
+    icon.addFile(":/pentobi_icon/pentobi.svg");
+    icon.addFile(":/pentobi_icon/pentobi-16.svg");
+    icon.addFile(":/pentobi_icon/pentobi-32.svg");
+    icon.addFile(":/pentobi_icon/pentobi-64.svg");
+    app.setWindowIcon(icon);
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<HelpFileExtractor>("pentobi", 1, 0, "HelpFileExtractor");

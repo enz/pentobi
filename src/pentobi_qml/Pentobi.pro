@@ -106,6 +106,7 @@ SOURCES += \
 
 RESOURCES += \
     ../books/pentobi_books.qrc \
+    ../icon/pentobi_icon.qrc \
     ../pentobi/help.qrc \
     qml/themes/themes.qrc \
     qml/i18n/translations.qrc \
