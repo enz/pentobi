@@ -55,6 +55,10 @@ add_executable(pentobi_qml WIN32
     RatingModel.cpp
     )
 
+if(MINGW AND (CMAKE_SIZEOF_VOID_P EQUAL "4"))
+    set_target_properties(pentobi PROPERTIES LINK_FLAGS -Wl,--large-address-aware)
+endif()
+
 target_compile_definitions(pentobi_qml PRIVATE
     -DQT_DEPRECATED_WARNINGS
     -DQT_DISABLE_DEPRECATED_BEFORE=0x051100)
