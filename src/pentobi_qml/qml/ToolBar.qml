@@ -144,6 +144,7 @@ RowLayout {
             if (isRated) return qsTr("Rated")
             return Logic.getFileLabel(gameModel.file, gameModel.isModified)
         }
+        color: theme.fontColorPosInfo
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
