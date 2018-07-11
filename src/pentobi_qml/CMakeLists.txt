@@ -24,7 +24,7 @@ add_custom_command(
 
 # Don't use qtquick_compiler_add_resources for dynamically generated files, it
 # doesn't check dependencies like qt5_add_resources (last tested in Qt 5.11.1)
-qt5_add_resources(pentobi_qml_RC_SRCS
+qt5_add_resources(pentobi_qml_RC_TRANSL_SRCS
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     )
 
@@ -39,6 +39,7 @@ qtquick_compiler_add_resources(pentobi_qml_RC_SRCS
 add_executable(pentobi_qml WIN32
     ${pentobi_qml_QM}
     ${pentobi_qml_RC_SRCS}
+    ${pentobi_qml_RC_TRANSL_SRCS}
     AnalyzeGameModel.h
     AnalyzeGameModel.cpp
     GameModel.h
