@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQml 2.2
 import "../dark" as Dark
 
 Dark.Theme {
