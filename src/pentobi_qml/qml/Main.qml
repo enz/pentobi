@@ -36,12 +36,8 @@ ApplicationWindow {
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
     property url folder: gameModel.getDefaultFolder()
-    property int defaultWidth:
-        isAndroid ? Screen.desktopAvailableWidth :
-                    Math.min(Screen.desktopAvailableWidth, 1200)
-    property int defaultHeight:
-        isAndroid ? Screen.desktopAvailableHeight :
-                    Math.min(Screen.desktopAvailableHeight, 680)
+    property real defaultWidth: Math.min(Screen.desktopAvailableWidth, 1200)
+    property real defaultHeight: Math.min(Screen.desktopAvailableHeight, 680)
     property int exportImageWidth: 400
     property bool busyIndicatorRunning: gameDisplay.pieces0 === undefined
                                         || lengthyCommand.isRunning
@@ -53,6 +49,8 @@ ApplicationWindow {
     minimumWidth: isDesktop ? 560 : 240
     minimumHeight: isDesktop ? 315 : 301
     width: defaultWidth; height: defaultHeight
+    x: (Screen.width - defaultWidth) / 2
+    y: (Screen.height - defaultHeight) / 2
     color: theme.backgroundColor
     //: Main window title if no file is loaded.
     title: qsTr("Pentobi")

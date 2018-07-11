@@ -19,6 +19,8 @@ Window {
             return "qrc:///qml/help/" + lang + "/pentobi/index.html"
         return helpFileExtractor.extract(lang)
     }
+    property real defaultWidth: Math.min(Screen.pixelDensity * 200, Screen.desktopAvailableWidth)
+    property real defaultHeight: Math.min(Screen.pixelDensity * 220, Screen.desktopAvailableHeight)
 
     // Instead of initializing webView.url with startUrl, we provide an init
     // function that needs to be called after show() to work around an issue
@@ -26,8 +28,9 @@ Window {
     // (last tested with Qt 5.9.2)
     function init() { if (isAndroid) webView.url = startUrl }
 
-    width: isAndroid ? Screen.desktopAvailableWidth : Math.min(Screen.pixelDensity * 200, Screen.desktopAvailableWidth)
-    height: isAndroid ? Screen.desktopAvailableHeight : Math.min(Screen.pixelDensity * 220, Screen.desktopAvailableHeight)
+    width: defaultWidth; height: defaultHeight
+    x: (Screen.width - defaultWidth) / 2
+    y: (Screen.height - defaultHeight) / 2
     title: qsTr("Pentobi Help")
     color: theme.backgroundColor
     flags: Qt.Dialog
