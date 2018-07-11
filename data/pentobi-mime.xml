@@ -3,6 +3,8 @@
 <mime-type type="application/x-blokus-sgf">
 <comment>Blokus game</comment>
 <comment xml:lang="de">Blokus-Partie</comment>
+<comment xml:lang="fr">Partie de Blokus</comment>
+<comment xml:lang="nb_NO">Blokus-spill</comment>
 <magic priority="60">
 <match type="string" offset="0:256" value="GM[Blokus]"/>
 <match type="string" offset="0:256" value="GM[Blokus Duo]"/>

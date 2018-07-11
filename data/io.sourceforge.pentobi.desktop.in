@@ -1,9 +1,9 @@
 [Desktop Entry]
 Name=Pentobi
-GenericName=Computer Opponent for Blokus
-GenericName[de]=Computer-Gegner für Blokus
 Comment=Computer opponent for the board game Blokus
 Comment[de]=Computer-Gegner für das Brettspiel Blokus
+Comment[fr]=Un adversaire d'ordinateur pour le jeu Blokus.
+Comment[nb_NO]=Datamaskinmotstander for brettspillet Blokus.
 Keywords=Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo Q;GembloQ
 Exec=@CMAKE_INSTALL_FULL_BINDIR@/pentobi %f
 Icon=pentobi
