@@ -21,6 +21,7 @@ Pentobi.Dialog {
     // has no mnemonics for the buttons.
     footer: DialogButtonBox {
         Button {
+            enabled: name.trim().length > 0
             text: Logic.removeShortcut(selectExisting ? qsTr("&Open") : qsTr("&Save"))
             DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
         }
@@ -29,7 +30,6 @@ Pentobi.Dialog {
             DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
         }
     }
-
     onVisibleChanged:
         if (visible) {
             if (! isAndroid) {
