@@ -136,6 +136,9 @@ install(FILES ${pentobi_QM_SRCS}
 install(DIRECTORY ../../doc/help DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}
   FILES_MATCHING PATTERN "*.css" PATTERN "*.html" PATTERN "*.png" PATTERN "*.jpg")
 
+install(DIRECTORY ../books DESTINATION ${CMAKE_INSTALL_DATADIR}/pentobi
+  FILES_MATCHING PATTERN "*.blksgf")
+
 if(MSVC)
   configure_file(pentobi.conf.in Debug/pentobi.conf @ONLY)
   configure_file(pentobi.conf.in Release/pentobi.conf @ONLY)
