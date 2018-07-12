@@ -232,7 +232,11 @@ SOURCES += \
     qml/*.js
 }
 
-TRANSLATIONS = $$files(qml/i18n/qml_*.ts)
+TRANSLATIONS = \
+    qml/i18n/qml_de.ts \
+    qml/i18n/qml_fr.ts \
+    qml/i18n/qml_nb_NO.ts
+
 qtPrepareTool(LRELEASE, lrelease)
 updateqm.input = TRANSLATIONS
 updateqm.output = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
