@@ -262,22 +262,19 @@ function help() {
 
 function init() {
     gameModel.loadAutoSave()
-    // initialFile is a context property set from command line argument
-    if (! initialFile || gameModel.isModified) {
-        gameDisplay.createPieces()
-        if (gameModel.checkFileDeletedOutside())
-        {
-            showInfo(qsTr("File was deleted by another application."))
-            gameModel.isModified = true
-        }
-        if (gameModel.checkFileModifiedOutside())
-        {
-            showQuestion(qsTr("File has been modified by another application. Reload?"),
-                         reloadFile)
-            return
-        }
-        analyzeGameModel.loadAutoSave(gameModel)
+    gameDisplay.createPieces()
+    if (gameModel.checkFileDeletedOutside())
+    {
+        showInfo(qsTr("File was deleted by another application."))
+        gameModel.isModified = true
     }
+    if (gameModel.checkFileModifiedOutside())
+    {
+        showQuestion(qsTr("File has been modified by another application. Reload?"), reloadFile)
+        return
+    }
+    analyzeGameModel.loadAutoSave(gameModel)
+    // initialFile is a context property set from command line argument
     if (initialFile)
         verify(function() { openFile(initialFile) })
     else if (wasGenMoveRunning)
