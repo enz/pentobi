@@ -1,5 +1,6 @@
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.1
+import QtQuick.Controls 2.3
 import QtWebView 1.1
 import pentobi 1.0
 import Qt.labs.settings 1.0
@@ -47,6 +48,10 @@ Window {
         anchors.fill: parent
     }
     HelpFileExtractor { id: helpFileExtractor }
+    Action {
+        shortcut: "Ctrl+W"
+        onTriggered: close()
+    }
     Settings {
         property alias x: root.x
         property alias y: root.y
