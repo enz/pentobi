@@ -590,7 +590,10 @@ function save() {
 }
 
 function saveAs() {
-    saveDialog.open()
+    if (saveDialog.status === Loader.Null)
+        saveDialog.source = saveDialog.url
+    saveDialog.item.fileUrl = gameModel.suggestFileName(rootWindow.folder)
+    saveDialog.item.open()
 }
 
 function saveCurrentFile() {

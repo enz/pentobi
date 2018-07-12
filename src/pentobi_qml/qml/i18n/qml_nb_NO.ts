@@ -420,6 +420,15 @@
         <source>Orange wins with %L1 points.</source>
         <translation>Oransje vinner med %L1 poeng.</translation>
     </message>
+    <message>
+        <source>Untitled Game.blksgf</source>
+        <translation>Spill uten tittel.blksgf</translation>
+    </message>
+    <message>
+        <source>Untitled Game %1.blksgf</source>
+        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
+        <translation>Spill uten tittel %1.blksgf</translation>
+    </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>

@@ -416,6 +416,15 @@
         <source>Orange wins with %L1 points.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Untitled Game.blksgf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Untitled Game %1.blksgf</source>
+        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>

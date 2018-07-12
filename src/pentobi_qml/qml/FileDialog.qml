@@ -11,7 +11,7 @@ Pentobi.Dialog {
 
     property bool selectExisting: true
     property url folder
-    property url fileUrl
+    property url fileUrl: folderModel.folder
     property string nameFilterText
     property string nameFilter
 
@@ -32,7 +32,7 @@ Pentobi.Dialog {
     onVisibleChanged: {
         if (visible) {
             view.currentIndex = -1
-            textField.text = Logic.getFileFromUrl(folderModel.folder) + "/"
+            textField.text = Logic.getFileFromUrl(fileUrl)
         }
     }
     onAccepted: {

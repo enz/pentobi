@@ -1453,6 +1453,32 @@ void GameModel::setUtf8()
     m_textCodec = QTextCodec::codecForName("UTF-8");
 }
 
+QUrl GameModel::suggestFileName(const QUrl& folder)
+{
+    QString file;
+    if (! m_file.isEmpty())
+        file = m_file;
+    else
+    {
+        auto localFolder = folder.toLocalFile();
+        file = localFolder;
+        file.append('/');
+        file.append(tr("Untitled Game.blksgf"));
+        if (QFileInfo::exists(file))
+            for (unsigned i = 1; ; ++i)
+            {
+                file = localFolder;
+                file.append('/');
+                //: The argument is a number, which will be increased if a
+                //: file with the same name already exists
+                file.append(tr("Untitled Game %1.blksgf").arg(i));
+                if (! QFileInfo::exists(file))
+                    break;
+            }
+    }
+    return QUrl::fromLocalFile(file);
+}
+
 void GameModel::truncate()
 {
     if (! m_game.get_current().has_parent())
