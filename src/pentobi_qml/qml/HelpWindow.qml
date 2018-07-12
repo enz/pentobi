@@ -52,6 +52,14 @@ Window {
         shortcut: "Ctrl+W"
         onTriggered: close()
     }
+    Action {
+        shortcut: "Alt+Left"
+        onTriggered: webView.goBack()
+    }
+    Action {
+        shortcut: "Alt+Right"
+        onTriggered: webView.goForward()
+    }
     Settings {
         property alias x: root.x
         property alias y: root.y
