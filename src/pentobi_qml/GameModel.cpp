@@ -736,6 +736,19 @@ void GameModel::goBackward()
     gotoNode(m_game.get_current().get_parent_or_null());
 }
 
+void GameModel::goBackward10()
+{
+    auto node = &m_game.get_current();
+    for (unsigned i = 0; i < 10; ++i)
+    {
+        auto parent = node->get_parent_or_null();
+        if (parent == nullptr)
+            break;
+        node = parent;
+    }
+    gotoNode(node);
+}
+
 void GameModel::goBeginning()
 {
     gotoNode(m_game.get_root());
@@ -749,6 +762,19 @@ void GameModel::goEnd()
 void GameModel::goForward()
 {
     gotoNode(m_game.get_current().get_first_child_or_null());
+}
+
+void GameModel::goForward10()
+{
+    auto node = &m_game.get_current();
+    for (unsigned i = 0; i < 10; ++i)
+    {
+        auto child = node->get_first_child_or_null();
+        if (child == nullptr)
+            break;
+        node = child;
+    }
+    gotoNode(node);
 }
 
 void GameModel::goNextVar()

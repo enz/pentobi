@@ -187,7 +187,11 @@ public:
 
     Q_INVOKABLE void goBackward();
 
+    Q_INVOKABLE void goBackward10();
+
     Q_INVOKABLE void goForward();
+
+    Q_INVOKABLE void goForward10();
 
     Q_INVOKABLE void goEnd();
 

@@ -25,6 +25,11 @@ QtObject {
         enabled: gameModel.canGoBackward
         onTriggered: gameModel.goBackward()
     }
+    property Action actionBackward10: Action {
+        shortcut: "Ctrl+Shift+Left"
+        enabled: gameModel.canGoBackward
+        onTriggered: gameModel.goBackward10()
+    }
     property Action actionBeginning: Action {
         shortcut: "Ctrl+Home"
         enabled: gameModel.canGoBackward
@@ -66,6 +71,11 @@ QtObject {
         shortcut: "Ctrl+Right"
         enabled: gameModel.canGoForward
         onTriggered: gameModel.goForward()
+    }
+    property Action actionForward10: Action {
+        shortcut: "Ctrl+Shift+Right"
+        enabled: gameModel.canGoForward
+        onTriggered: gameModel.goForward10()
     }
     property Action actionFullscreen: Action {
         shortcut: "F11"
