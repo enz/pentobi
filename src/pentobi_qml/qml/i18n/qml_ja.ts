@@ -1345,5 +1345,13 @@
         <source>Go to next variation</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Go ten moves backward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go ten moves forward</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

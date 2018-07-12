@@ -1417,6 +1417,14 @@
         <source>Go to next variation</source>
         <translation>Zur nächsten Variante gehen</translation>
     </message>
+    <message>
+        <source>Go ten moves backward</source>
+        <translation>Zehn Züge zurück gehen</translation>
+    </message>
+    <message>
+        <source>Go ten moves forward</source>
+        <translation>Zehn Züge vorwärts gehen</translation>
+    </message>
 </context>
 <context>
     <name>main</name>

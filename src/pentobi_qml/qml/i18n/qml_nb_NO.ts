@@ -1417,6 +1417,14 @@
         <source>Go to next variation</source>
         <translation>Gå til neste variasjon</translation>
     </message>
+    <message>
+        <source>Go ten moves backward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go ten moves forward</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>main</name>

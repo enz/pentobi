@@ -58,10 +58,12 @@
 <file>dark/board-trigon-3.svg</file>
 <file>dark/board-trigon.svg</file>
 <file>dark/menu.svg</file>
+<file>dark/pentobi-backward10.svg</file>
 <file>dark/pentobi-backward.svg</file>
 <file>dark/pentobi-beginning.svg</file>
 <file>dark/pentobi-computer-colors.svg</file>
 <file>dark/pentobi-end.svg</file>
+<file>dark/pentobi-forward10.svg</file>
 <file>dark/pentobi-forward.svg</file>
 <file>dark/pentobi-newgame.svg</file>
 <file>dark/pentobi-next-variation.svg</file>
@@ -105,10 +107,12 @@
 <file>light/linesegment-red.svg</file>
 <file>light/linesegment-yellow.svg</file>
 <file>light/menu.svg</file>
+<file>light/pentobi-backward10.svg</file>
 <file>light/pentobi-backward.svg</file>
 <file>light/pentobi-beginning.svg</file>
 <file>light/pentobi-computer-colors.svg</file>
 <file>light/pentobi-end.svg</file>
+<file>light/pentobi-forward10.svg</file>
 <file>light/pentobi-forward.svg</file>
 <file>light/pentobi-newgame.svg</file>
 <file>light/pentobi-next-variation.svg</file>

@@ -87,6 +87,14 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
+        imageSource: theme.getImage("pentobi-backward10")
+        action: actions.actionBackward10
+        autoRepeat: true
+        ToolTip.text: qsTr("Go ten moves backward")
+    }
+    Pentobi.Button {
+        visible: isDesktop
+        padding: buttonPadding
         imageSource: theme.getImage("pentobi-backward")
         action: actions.actionBackward
         autoRepeat: true
@@ -99,6 +107,14 @@ RowLayout {
         action: actions.actionForward
         autoRepeat: true
         ToolTip.text: qsTr("Go one move forward")
+    }
+    Pentobi.Button {
+        visible: isDesktop
+        padding: buttonPadding
+        imageSource: theme.getImage("pentobi-forward10")
+        action: actions.actionForward10
+        autoRepeat: true
+        ToolTip.text: qsTr("Go ten moves forward")
     }
     Pentobi.Button {
         visible: isDesktop
