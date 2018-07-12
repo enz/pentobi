@@ -33,7 +33,7 @@ qtquick_compiler_add_resources(pentobi_qml_RC_SRCS
     qml/themes/themes.qrc
     ../books/pentobi_books.qrc
     ../icon/pentobi_icon.qrc
-    ../pentobi/help.qrc
+    ../../doc/help.qrc
     )
 
 add_executable(pentobi_qml WIN32
