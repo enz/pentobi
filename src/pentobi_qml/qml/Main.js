@@ -592,7 +592,7 @@ function save() {
 function saveAs() {
     if (saveDialog.status === Loader.Null)
         saveDialog.source = saveDialog.url
-    saveDialog.item.fileUrl = gameModel.suggestFileName(rootWindow.folder)
+    saveDialog.item.name = gameModel.suggestFileName(rootWindow.folder)
     saveDialog.item.open()
 }
 

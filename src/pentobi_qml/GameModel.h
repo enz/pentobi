@@ -244,7 +244,7 @@ public:
 
     Q_INVOKABLE QUrl getDefaultFolder() const;
 
-    Q_INVOKABLE QUrl suggestFileName(const QUrl& folder);
+    Q_INVOKABLE QString suggestFileName(const QUrl& folder);
 
 
     QByteArray getSgf() const;

@@ -10,8 +10,9 @@ Pentobi.Dialog {
     id: root
 
     property bool selectExisting: true
+    property alias name: nameField.text
     property url folder
-    property url fileUrl: folderModel.folder
+    property url fileUrl
     property string nameFilterText
     property string nameFilter
 
@@ -29,27 +30,31 @@ Pentobi.Dialog {
         }
     }
 
-    onVisibleChanged: {
+    onVisibleChanged:
         if (visible) {
+            var pos = name.lastIndexOf(".")
+            if (pos < 0)
+                nameField.selectAll()
+            else
+                nameField.select(0, pos)
             view.currentIndex = -1
-            textField.text = Logic.getFileFromUrl(fileUrl)
         }
-    }
     onAccepted: {
-        fileUrl = "file://" + textField.text
         folder = folderModel.folder
+        fileUrl = folder + "/" + name
     }
 
     Column {
-        width: Math.min(textField.height * 20, 0.9 * rootWindow.width)
+        width: Math.min(nameField.height * 20, 0.9 * rootWindow.width)
         spacing: Math.round(Screen.pixelDensity * 1.5)
 
         TextField {
-            id: textField
+            id: nameField
 
+            focus: ! selectExisting
             width: parent.width
             enabled: ! selectExisting
-            Component.onCompleted: textField.cursorPosition = textField.length
+            Component.onCompleted: nameField.cursorPosition = nameField.length
         }
         RowLayout {
             width: parent.width
@@ -63,19 +68,20 @@ Pentobi.Dialog {
                     if (hasParent) {
                         folderModel.folder = folderModel.parentFolder
                         view.currentIndex = -1
-                        textField.text = Logic.getFileFromUrl(folderModel.folder)
-                        if (! textField.text.endsWith("/"))
-                            textField.text += "/"
-                        textField.cursorPosition = textField.length
                     }
             }
-            ComboBox {
+            Label {
+                text: Logic.getFileFromUrl(folderModel.folder)
+                elide: Text.ElideRight
                 Layout.fillWidth: true
-                model: [ nameFilterText, qsTr("All files (*)") ]
-                onCurrentIndexChanged:
-                    if (currentIndex == 0) folderModel.nameFilters = [ root.nameFilter ]
-                    else folderModel.nameFilters = [ "*" ]
             }
+        }
+        ComboBox {
+            width: parent.width
+            model: [ nameFilterText, qsTr("All files (*)") ]
+            onCurrentIndexChanged:
+                if (currentIndex == 0) folderModel.nameFilters = [ root.nameFilter ]
+                else folderModel.nameFilters = [ "*" ]
         }
         ListView {
             id: view
@@ -107,13 +113,9 @@ Pentobi.Dialog {
                             folderModel.folder = folderModel.folder + "/"
                         folderModel.folder = folderModel.folder + fileName
                         view.currentIndex = -1
-                        textField.text = Logic.getFileFromUrl(folderModel.folder) + "/"
-                        textField.cursorPosition = textField.length
                     }
-                    else {
-                        textField.text = filePath
-                        textField.cursorPosition = textField.length
-                    }
+                    else
+                        name = fileName
                 }
                 onDoubleClicked: root.accept()
             }

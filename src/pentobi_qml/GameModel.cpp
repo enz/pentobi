@@ -1453,7 +1453,7 @@ void GameModel::setUtf8()
     m_textCodec = QTextCodec::codecForName("UTF-8");
 }
 
-QUrl GameModel::suggestFileName(const QUrl& folder)
+QString GameModel::suggestFileName(const QUrl& folder)
 {
     QString file;
     if (! m_file.isEmpty())
@@ -1476,7 +1476,7 @@ QUrl GameModel::suggestFileName(const QUrl& folder)
                     break;
             }
     }
-    return QUrl::fromLocalFile(file);
+    return QUrl::fromLocalFile(file).fileName();
 }
 
 void GameModel::truncate()
