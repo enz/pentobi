@@ -275,8 +275,11 @@ function init() {
     }
     analyzeGameModel.loadAutoSave(gameModel)
     // initialFile is a context property set from command line argument
-    if (initialFile)
-        verify(function() { openFile(initialFile) })
+    if (initialFile) {
+        if (gameModel.isModified)
+            rootWindow.show()
+        verify(function() { openFileBlocking(initialFile) })
+    }
     else if (wasGenMoveRunning)
         checkComputerMove()
 }
@@ -399,28 +402,30 @@ function openRatedGameNoVerify(byteArray) {
 }
 
 function openFile(file) {
-    lengthyCommand.run(function() {
-        var oldGameVariant = gameModel.gameVariant
-        var oldEnableAnimations = gameDisplay.enableAnimations
-        gameDisplay.enableAnimations = false
-        if (! gameModel.openFile(file))
-            showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-        else
-            setComputerNone()
-        if (gameModel.gameVariant != oldGameVariant) {
-            gameDisplay.destroyPieces()
-            gameDisplay.createPieces()
-        }
-        gameDisplay.showToPlay()
-        gameDisplay.enableAnimations = oldEnableAnimations
-        gameDisplay.setupMode = false
-        isRated = false
-        analyzeGameModel.clear()
-        if (gameModel.comment.length > 0)
-            gameDisplay.showComment()
-        else
-            gameDisplay.showPieces()
-    })
+    lengthyCommand.run(function() { openFileBlocking(file) })
+}
+
+function openFileBlocking(file) {
+    var oldGameVariant = gameModel.gameVariant
+    var oldEnableAnimations = gameDisplay.enableAnimations
+    gameDisplay.enableAnimations = false
+    if (! gameModel.openFile(file))
+        showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
+    else
+        setComputerNone()
+    if (gameModel.gameVariant != oldGameVariant) {
+        gameDisplay.destroyPieces()
+        gameDisplay.createPieces()
+    }
+    gameDisplay.showToPlay()
+    gameDisplay.enableAnimations = oldEnableAnimations
+    gameDisplay.setupMode = false
+    isRated = false
+    analyzeGameModel.clear()
+    if (gameModel.comment.length > 0)
+        gameDisplay.showComment()
+    else
+        gameDisplay.showPieces()
 }
 
 function openFileUrl() {
