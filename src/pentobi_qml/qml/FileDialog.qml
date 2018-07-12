@@ -32,11 +32,13 @@ Pentobi.Dialog {
 
     onVisibleChanged:
         if (visible) {
-            var pos = name.lastIndexOf(".")
-            if (pos < 0)
-                nameField.selectAll()
-            else
-                nameField.select(0, pos)
+            if (! isAndroid) {
+                var pos = name.lastIndexOf(".")
+                if (pos < 0)
+                    nameField.selectAll()
+                else
+                    nameField.select(0, pos)
+            }
             view.currentIndex = -1
         }
     onAccepted: {
@@ -51,7 +53,7 @@ Pentobi.Dialog {
         TextField {
             id: nameField
 
-            focus: ! selectExisting
+            focus: ! selectExisting && ! isAndroid
             width: parent.width
             enabled: ! selectExisting
             Component.onCompleted: nameField.cursorPosition = nameField.length
