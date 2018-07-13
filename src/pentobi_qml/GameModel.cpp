@@ -199,10 +199,7 @@ void GameModel::addSetup(PieceModel* pieceModel, QPointF coord)
     Color c(static_cast<Color::IntType>(pieceModel->color()));
     Move mv;
     if (! findMove(*pieceModel, pieceModel->state(), coord, mv))
-    {
-        qWarning("GameModel: move not found");
         return;
-    }
     preparePositionChange();
     preparePieceGameCoord(pieceModel, mv);
     pieceModel->setIsPlayed(true);
