@@ -52,4 +52,6 @@ MenuItem {
         }
         Item { implicitWidth: root.arrow.width }
     }
+    // On Android, currentIndex is not reset when closing menu (last tested with Qt 5.11.1)
+    onVisibleChanged: currentIndex = -1
 }
