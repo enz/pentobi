@@ -59,6 +59,10 @@ ApplicationWindow {
         show()
     }
     Component.onDestruction: Logic.autoSave()
+    // Drop picked piece to avoid it reaction to Space key is used in menu
+    // or dialog button (QTBUG-69447)
+    overlay.onChildrenChanged: gameDisplay.pickedPiece = null
+
 
     MouseArea {
         anchors.fill: parent

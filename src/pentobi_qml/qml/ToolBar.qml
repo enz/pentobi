@@ -188,10 +188,6 @@ RowLayout {
         Pentobi.Menu {
             id: menu
 
-            // Drop picked piece to avoid it reacting to Space key if menu
-            // is navigated with keyboard (QTBUG-69447)
-            onOpened: gameDisplay.pickedPiece = null
-
             MenuGame { }
             MenuGo {
                 // Note: it's not good enough to set enabled in MenuGo because
