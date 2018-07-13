@@ -11,4 +11,6 @@ Menu {
         border.color: "black"
         radius: 2
     }
+    // On Android, currentIndex is not reset when closing menu (last tested with Qt 5.11.1)
+    onVisibleChanged: if (isAndroid) currentIndex = -1
 }
