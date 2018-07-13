@@ -53,10 +53,7 @@ Item
     function showAnalyzeGame() { pickedPiece = null }
     function showComment() { pickedPiece = null }
     function showPieces() { }
-    function dropCommentFocus() {
-        if (comment.activeFocus)
-            forceActiveFocus()
-    }
+    function dropCommentFocus() { comment.focus = false }
     function showMove(move) { Logic.showMove(move) }
     function getBoard() { return board }
     function showTemporaryMessage(text) {
@@ -124,9 +121,7 @@ Item
                     height: isTrigon ? Math.sqrt(3) / 2 * width : width
                     anchors.verticalCenter: parent.verticalCenter
                     onClicked: {
-                        // Give the user an option to remove the focus from
-                        // the comment textfield by clicking on the board
-                        focus = true
+                        dropCommentFocus()
                         if (! setupMode) return
                         var mv = gameModel.addEmpty(pos)
                         showMove(mv)

@@ -69,9 +69,7 @@ ApplicationWindow {
     }
     MouseArea {
         anchors.fill: parent
-        // Give the user an option to remove the focus from
-        // the comment textfield by clicking on the board
-        onClicked: focus = true
+        onClicked: gameDisplay.dropCommentFocus()
     }
     ColumnLayout {
         property bool altKeyPressed
