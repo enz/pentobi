@@ -48,7 +48,7 @@ ApplicationWindow {
                                         || lengthyCommand.isRunning
                                         || playerModel.isGenMoveRunning
                                         || analyzeGameModel.isRunning
-    property string initialFileAbsolutePath
+
     property Actions actions: Actions { }
 
     minimumWidth: isDesktop ? 560 : 240

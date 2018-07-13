@@ -20,12 +20,6 @@ function analyzeGame() {
 }
 
 function autoSaveAndQuit() {
-    if (! gameModel.isModified && initialFileAbsolutePath !== ""
-            && gameModel.file === initialFileAbsolutePath) {
-        // Don't autosave unmodified file from command line argument
-        Qt.quit()
-        return true
-    }
     if (gameModel.checkAutosaveModifiedOutside()) {
         if (! gameModel.isModified || gameModel.isGameEmpty)
             return true
@@ -301,10 +295,7 @@ function init() {
     if (initialFile) {
         if (gameModel.isModified)
             rootWindow.show()
-        verify(function() {
-            openFileBlocking(initialFile)
-            initialFileAbsolutePath = gameModel.file
-        })
+        verify(function() { openFileBlocking(initialFile) })
     }
     if (wasGenMoveRunning || isRated)
         checkComputerMove()
