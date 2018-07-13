@@ -280,7 +280,7 @@ function init() {
             rootWindow.show()
         verify(function() { openFileBlocking(initialFile) })
     }
-    else if (wasGenMoveRunning)
+    if (wasGenMoveRunning || isRated)
         checkComputerMove()
 }
 
