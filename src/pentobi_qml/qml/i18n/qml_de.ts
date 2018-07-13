@@ -1049,10 +1049,12 @@
     <name>MenuItem</name>
     <message>
         <source>Ctrl</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
         <translation>Strg</translation>
     </message>
     <message>
         <source>Shift</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
         <translation>Umschalt</translation>
     </message>
 </context>
@@ -1384,7 +1386,7 @@
     </message>
     <message>
         <source>Leave setup</source>
-        <translation>Aufbau beenden</translation>
+        <translation type="vanished">Aufbau beenden</translation>
     </message>
     <message>
         <source>Start a new game</source>
@@ -1433,6 +1435,18 @@
     <message>
         <source>Go ten moves forward</source>
         <translation>Zehn Züge vorwärts gehen</translation>
+    </message>
+    <message>
+        <source>Setup</source>
+        <translation>Aufbau</translation>
+    </message>
+    <message>
+        <source>Setup mode</source>
+        <translation>Stellungsaufbau</translation>
+    </message>
+    <message>
+        <source>Rated game</source>
+        <translation>Gewertetes Spiel</translation>
     </message>
 </context>
 <context>

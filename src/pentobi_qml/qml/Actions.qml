@@ -127,9 +127,9 @@ QtObject {
     property Action actionNew: Action {
         shortcut: "Ctrl+N"
         text: Logic.removeShortcut(qsTr("&New"))
-        enabled: ! (gameModel.isGameEmpty && gameModel.file === ""
-                    && ! gameModel.isModified && ! isRated)
-                 && ! gameDisplay.setupMode
+        enabled: gameDisplay.setupMode
+                 || ! (gameModel.isGameEmpty && gameModel.file === ""
+                       && ! gameModel.isModified && ! isRated)
         onTriggered: Logic.newGame()
     }
     property Action actionNewRated: Action {

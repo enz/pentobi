@@ -15,19 +15,20 @@ RowLayout {
     spacing: 0
 
     Label {
+        // Like the label used for desktop after the toolbuttons, but with
+        // shorter text for small smartphone screens and a message box instead
+        // of a tooltip for showing the full file path because tooltips are
+        // not wrapped if larger than screen (last tested with Qt 5.11.1)
         visible: ! isDesktop
-
-        text: {
-            if (isRated) return qsTr("Rated")
-            if (gameDisplay.setupMode) return qsTr("Leave setup")
-            if (gameModel.file === "") return ""
-            return Logic.getFileLabel(gameModel.file, gameModel.isModified)
-        }
         Layout.fillWidth: true
         Layout.leftMargin: root.height / 10
         color: theme.toolBarTextColor
         elide: Text.ElideRight
-
+        text: {
+            if (gameDisplay.setupMode) return qsTr("Setup")
+            if (isRated) return qsTr("Rated")
+            return Logic.getFileLabel(gameModel.file, gameModel.isModified)
+        }
         MouseArea {
             anchors.fill: parent
             onClicked:
@@ -137,27 +138,12 @@ RowLayout {
         action: actions.actionNextVar
         ToolTip.text: qsTr("Go to next variation")
     }
-    ToolButton {
-        visible: isDesktop && gameDisplay.setupMode
-        contentItem: Text {
-            color: theme.messageTextColor
-            text: qsTr("Leave setup")
-        }
-        background: Rectangle {
-            anchors.fill: parent
-            color: parent.pressed ? theme.backgroundButtonPressed : theme.messageBackgroundColor
-        }
-        onClicked:
-            if (gameDisplay.setupMode) {
-                gameDisplay.setupMode = false
-                Logic.setComputerNone()
-            }
-    }
     Item { Layout.preferredWidth: parent.height / 2 }
     Label {
-        visible: isDesktop && (isRated || gameModel.file !== "")
+        visible: isDesktop && (isRated || gameModel.file !== "" || gameDisplay.setupMode)
         text: {
-            if (isRated) return qsTr("Rated")
+            if (gameDisplay.setupMode) return qsTr("Setup mode")
+            if (isRated) return qsTr("Rated game")
             return Logic.getFileLabel(gameModel.file, gameModel.isModified)
         }
         color: theme.toolBarTextColor
@@ -165,7 +151,7 @@ RowLayout {
             anchors.fill: parent
             hoverEnabled: true
             ToolTip.text: Logic.getFileInfo(gameModel.file, gameModel.isModified)
-            ToolTip.visible: containsMouse && gameModel.file !== ""
+            ToolTip.visible: containsMouse && gameModel.file !== "" && ! gameDisplay.setupMode
             ToolTip.delay: 700
             ToolTip.timeout: 9000
         }

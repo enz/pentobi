@@ -1013,10 +1013,12 @@
     <name>MenuItem</name>
     <message>
         <source>Ctrl</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Shift</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1311,10 +1313,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Leave setup</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Start a new game</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1360,6 +1358,18 @@
     </message>
     <message>
         <source>Go ten moves forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Setup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Setup mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rated game</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
