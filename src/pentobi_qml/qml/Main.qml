@@ -60,6 +60,12 @@ ApplicationWindow {
     }
     Component.onDestruction: Logic.autoSave()
 
+    MouseArea {
+        anchors.fill: parent
+        // Give the user an option to remove the focus from
+        // the comment textfield by clicking on the board
+        onClicked: focus = true
+    }
     ColumnLayout {
         property bool altKeyPressed
 

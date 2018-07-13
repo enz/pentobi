@@ -17,7 +17,12 @@ Grid {
 
             width: root.width / columns; height: width
             visible: ! modelData.pieceModel.isPlayed
-            onClicked: piecePicked(modelData)
+            onClicked: {
+                // Move away the focus from the comment textfield if the user
+                // clicks on a piece
+                focus = true
+                piecePicked(modelData)
+            }
             hoverEnabled: isDesktop
             scale: isDesktop && containsMouse
                    && ! playerModel.isGenMoveRunning && ! gameModel.isGameOver
