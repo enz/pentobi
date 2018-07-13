@@ -1428,11 +1428,11 @@
     </message>
     <message>
         <source>Go ten moves backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Gå ti trekk tilbake</translation>
     </message>
     <message>
         <source>Go ten moves forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Gå ti trekk forover</translation>
     </message>
 </context>
 <context>
