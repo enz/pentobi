@@ -500,10 +500,10 @@ bool GameModel::findNextCommentContinueFromRoot()
     return true;
 }
 
-PieceModel* GameModel::findPieceModel(Color c, Piece piece)
+PieceModel* GameModel::findUnplayedPieceModel(Color c, Piece piece)
 {
     for (auto pieceModel : getPieceModels(c))
-        if (pieceModel->getPiece() == piece)
+        if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
             return pieceModel;
     return nullptr;
 }
@@ -969,7 +969,7 @@ PieceModel* GameModel::nextPiece(PieceModel* currentPickedPiece)
             break;
         ++i;
     }
-    return findPieceModel(c, Piece(i));
+    return findUnplayedPieceModel(c, Piece(i));
 }
 
 void GameModel::newGame()
@@ -1107,7 +1107,7 @@ PieceModel* GameModel::pickNamedPiece(const QString& name,
                 piece = *pos;
         }
     }
-    return findPieceModel(c, piece);
+    return findUnplayedPieceModel(c, piece);
 }
 
 QQmlListProperty<PieceModel> GameModel::pieceModels0()
@@ -1216,7 +1216,7 @@ PieceModel* GameModel::previousPiece(PieceModel* currentPickedPiece)
         if (bd.is_piece_left(c, Piece(i)))
             break;
     }
-    return findPieceModel(c, Piece(i));
+    return findUnplayedPieceModel(c, Piece(i));
 }
 
 bool GameModel::restoreAutoSaveLocation()

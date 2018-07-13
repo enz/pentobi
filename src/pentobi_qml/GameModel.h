@@ -659,7 +659,7 @@ private:
     bool findMove(const PieceModel& pieceModel, const QString& state,
                   QPointF coord, Move& mv) const;
 
-    PieceModel* findPieceModel(Color c, Piece piece);
+    PieceModel* findUnplayedPieceModel(Color c, Piece piece);
 
     QList<PieceModel*>& getPieceModels(Color c);
 
