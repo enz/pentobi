@@ -10,7 +10,7 @@ RowLayout {
 
     property real buttonPadding: Math.round(1.5 * Screen.pixelDensity)
 
-    function clickMenuButton() { menuButton.onClicked() }
+    function clickMenuButton() { menu.currentIndex = 0; menuButton.onClicked() }
 
     spacing: 0
 
