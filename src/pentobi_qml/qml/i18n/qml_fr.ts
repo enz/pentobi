@@ -669,6 +669,10 @@
         <source>%1 (modified)</source>
         <translation>%1 (modifié)</translation>
     </message>
+    <message>
+        <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
+        <translation>Jeu sauvé automatiquement a été changé par une autre instance de Pentobi. Remplacer ?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

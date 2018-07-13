@@ -19,13 +19,30 @@ function analyzeGame() {
     analyzeGameModel.start(gameModel, playerModel)
 }
 
-function autoSave() {
+function autoSaveAndQuit() {
+    if (gameModel.checkAutosaveModifiedOutside()) {
+        if (! gameModel.isModified || gameModel.isGameEmpty)
+            return true
+        showQuestion(qsTr("Autosaved game was changed by another instance of Pentobi. Overwrite?"),
+                     autoSaveNoVerifyAndQuit)
+        return false
+    }
+    autoSaveNoVerify()
+    return true
+}
+
+function autoSaveNoVerify() {
     wasGenMoveRunning =
             (playerModel.isGenMoveRunning
              || delayedCheckComputerMove.running)
             && ! isPlaySingleMoveRunning
     gameModel.autoSave()
     analyzeGameModel.autoSave(gameModel)
+}
+
+function autoSaveNoVerifyAndQuit() {
+    autoSaveNoVerify()
+    Qt.quit()
 }
 
 function cancelRunning() {

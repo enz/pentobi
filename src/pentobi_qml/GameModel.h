@@ -233,6 +233,8 @@ public:
 
     Q_INVOKABLE bool checkFileModifiedOutside();
 
+    Q_INVOKABLE bool checkAutosaveModifiedOutside();
+
     Q_INVOKABLE GameMove* findMove();
 
     Q_INVOKABLE PieceModel* pickNamedPiece(const QString& name,
@@ -547,6 +549,8 @@ private:
     QStringList m_recentFiles;
 
     QDateTime m_fileDate;
+
+    QDateTime m_autosaveDate;
 
     int m_nuColors;
 

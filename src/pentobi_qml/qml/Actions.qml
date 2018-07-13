@@ -202,7 +202,7 @@ QtObject {
     property Action actionQuit: Action {
         shortcut: "Ctrl+Q"
         text: Logic.removeShortcut(qsTr("&Quit"))
-        onTriggered: Qt.quit()
+        onTriggered: Logic.autoSaveAndQuit()
     }
     property Action actionRating: Action {
         shortcut: "F7"

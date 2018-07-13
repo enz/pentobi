@@ -669,6 +669,10 @@
         <source>%1 (modified)</source>
         <translation>%1 (endret)</translation>
     </message>
+    <message>
+        <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

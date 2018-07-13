@@ -268,6 +268,7 @@ void GameModel::autoSave()
     settings.setValue("file", m_file);
     settings.setValue("fileDate", m_fileDate);
     settings.setValue("isModified", m_isModified);
+    settings.setValue("autosaveDate", QDateTime::currentDateTime());
 
     QVariantList location;
     uint depth = 0;
@@ -300,6 +301,14 @@ void GameModel::changeGameVariant(const QString& gameVariant)
     initGameVariant(variant);
     setIsModified(false);
     setFile("");
+}
+
+bool GameModel::checkAutosaveModifiedOutside()
+{
+    QSettings settings;
+    auto autosaveDate = settings.value("autosaveDate").toDateTime();
+    return m_autosaveDate.isValid() && autosaveDate.isValid()
+            && m_autosaveDate != autosaveDate;
 }
 
 bool GameModel::checkFileDeletedOutside()
@@ -884,9 +893,13 @@ bool GameModel::loadAutoSave()
 {
     QSettings settings;
     if (! openByteArray(settings.value("autosave", "").toByteArray()))
+    {
+        m_autosaveDate = QDateTime();
         return false;
+    }
     setFile(settings.value("file").toString());
     m_fileDate = settings.value("fileDate").toDateTime();
+    m_autosaveDate = settings.value("autosaveDate").toDateTime();
     setIsModified(settings.value("isModified").toBool());
     restoreAutoSaveLocation();
     updateProperties();

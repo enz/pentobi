@@ -59,12 +59,14 @@ ApplicationWindow {
     color: theme.backgroundColor
     //: Main window title if no file is loaded.
     title: qsTr("Pentobi")
+    onClosing: {
+        if ( ! Logic.autoSaveAndQuit())
+            close.accepted = false
+    }
     Component.onCompleted: {
         Logic.init()
         show()
     }
-    Component.onDestruction: Logic.autoSave()
-
     MouseArea {
         anchors.fill: parent
         // Give the user an option to remove the focus from
@@ -288,6 +290,6 @@ ApplicationWindow {
         target: Qt.application
         onStateChanged:
             if (Qt.application.state === Qt.ApplicationSuspended)
-                Logic.autoSave()
+                Logic.autoSaveNoVerify()
     }
 }
