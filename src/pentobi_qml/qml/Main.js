@@ -517,7 +517,7 @@ function ratedGameCheckFirstGame() {
 function ratedGameNoVerify()
 {
     var player = ratingModel.getNextHumanPlayer()
-    var level = ratingModel.getNextLevel(maxLevel)
+    var level = ratingModel.getNextLevel(playerModel.maxLevel)
     var gameVariant = gameModel.gameVariant
     var msg
     switch (player) {
@@ -561,7 +561,7 @@ function ratedGameStart() {
         computerPlays2 = computerPlays0
         computerPlays3 = computerPlays1
     }
-    playerModel.level = ratingModel.getNextLevel(maxLevel)
+    playerModel.level = ratingModel.getNextLevel(playerModel.maxLevel)
     gameModel.newGame()
     gameDisplay.setupMode = false
     gameDisplay.showToPlay()

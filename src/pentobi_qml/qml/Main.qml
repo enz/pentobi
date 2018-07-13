@@ -20,7 +20,6 @@ ApplicationWindow {
     // Assume larger screen with landscape orientation and mouse input.
     property bool isDesktop: ! isAndroid
 
-    property int maxLevel: 7
     property alias gameDisplay: gameDisplayLoader.item
 
     // Was computer thinking on regular game move when game was autosaved?
