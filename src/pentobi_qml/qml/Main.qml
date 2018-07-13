@@ -83,12 +83,14 @@ ApplicationWindow {
                 }
             }
             else if (event.key === Qt.Key_Back) {
-                // Note that we cannot use an action with shortcut Back because
-                // as of Qt 5.11.1 the action would always receive the Back key
-                // even if a Controls2.Dialog is open that could be closed with
-                // the back key if the Action did not exist.
                 if (visibility === Window.FullScreen) {
                     visibility = Window.AutomaticVisibility
+                    if (isAndroid) {
+                        // Leaving fullscreen doesn't always work on Android
+                        // but leaves a white area between the window top and
+                        // the Android status bar (last tested with Qt 5.11.1)
+                        rootWindow.x = 0; rootWindow.y = 0
+                    }
                     event.accepted = true
                 }
         }
