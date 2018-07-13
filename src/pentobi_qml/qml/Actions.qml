@@ -139,8 +139,10 @@ QtObject {
         onTriggered: Logic.ratedGame()
     }
     property Action actionNextOrientation: Action {
+        // Disable if dialog is open to prevent stealing the Space key from
+        // menu or dialog button (QTBUG-69447)
+        enabled: gameDisplay.pickedPiece && overlay.children.length === 0
         shortcut: "Space"
-        enabled: gameDisplay.pickedPiece
         onTriggered: gameDisplay.pickedPiece.pieceModel.nextOrientation()
     }
     property Action actionNextPiece: Action {
@@ -184,6 +186,9 @@ QtObject {
         onTriggered: gameModel.goPrevVar()
     }
     property Action actionPlayPickedPiece: Action {
+        // Disable if dialog is open to prevent stealing the Return key from
+        // GotoMoveDialog (QTBUG-69345)
+        enabled: overlay.children.length === 0
         shortcut: "Return"
         onTriggered:
             // Ignore return key if popups exist because textfields (e.g. in
