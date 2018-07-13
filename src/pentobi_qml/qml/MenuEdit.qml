@@ -122,6 +122,9 @@ Pentobi.Menu {
     }
     Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("&Next Color"))
-        onTriggered: gameModel.nextColor()
+        onTriggered: {
+            gameDisplay.pickedPiece = null
+            gameModel.nextColor()
+        }
     }
 }
