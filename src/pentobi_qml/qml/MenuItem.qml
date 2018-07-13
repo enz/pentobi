@@ -14,7 +14,21 @@ MenuItem {
         width: root.width - 2; height: root.height - 2
         color: root.highlighted ? "#e0e0e0" : "transparent"
     }
+    indicator: Item {
+        implicitWidth: 1.5 * font.pixelSize; implicitHeight: implicitWidth
+        anchors.verticalCenter: parent.verticalCenter
+
+        Image {
+            width: 1.2 * font.pixelSize; height: width
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            visible: root.checked
+            source: theme.getImage("menu-indicator")
+            sourceSize { width: width; height: height }
+        }
+    }
     contentItem: RowLayout {
+        spacing: 0
         opacity: enabled ? 1.0 : 0.3
 
         Item { implicitWidth: root.indicator.width }
@@ -48,7 +62,7 @@ MenuItem {
             font: root.font
             color: "#666"
         }
-        Item { implicitWidth: root.arrow.width }
+        Item { implicitWidth: root.arrow.width + 3 }
     }
     // On Android, currentIndex is not reset when closing menu (last tested with Qt 5.11.1)
     onVisibleChanged: if (isAndroid) currentIndex = -1
