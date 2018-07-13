@@ -12,7 +12,7 @@ MenuItem {
     background: Rectangle {
         x: 1; y: 1
         width: root.width - 2; height: root.height - 2
-        color: root.highlighted ? "#f0f0f0" : "transparent"
+        color: root.highlighted ? "#e0e0e0" : "transparent"
     }
     contentItem: RowLayout {
         opacity: enabled ? 1.0 : 0.3
