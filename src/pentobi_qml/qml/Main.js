@@ -27,7 +27,7 @@ function autoSaveAndQuit() {
                      autoSaveNoVerifyAndQuit)
         return false
     }
-    autoSaveNoVerify()
+    autoSaveNoVerifyAndQuit()
     return true
 }
 
