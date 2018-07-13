@@ -172,8 +172,10 @@ QtObject {
         onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
     }
     property Action actionPrevOrientation: Action {
+        // Disable if dialog is open to prevent stealing the Space key from
+        // menu or dialog button (QTBUG-69447)
+        enabled: gameDisplay.pickedPiece && overlay.children.length === 0
         shortcut: "Shift+Space"
-        enabled: gameDisplay.pickedPiece
         onTriggered: gameDisplay.pickedPiece.pieceModel.previousOrientation()
     }
     property Action actionPrevPiece: Action {
