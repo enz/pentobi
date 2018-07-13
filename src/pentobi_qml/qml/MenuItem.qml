@@ -8,6 +8,12 @@ MenuItem {
 
     // implicitWidth should be the same as in Pentobi.Menu
     implicitWidth: Math.min(font.pixelSize * (isDesktop ? 21 : 18), rootWindow.width)
+    implicitHeight: (isDesktop ? 2 : 2.2) * font.pixelSize
+    background: Rectangle {
+        x: 1; y: 1
+        width: root.width - 2; height: root.height - 2
+        color: root.highlighted ? "#f0f0f0" : "transparent"
+    }
     contentItem: RowLayout {
         opacity: enabled ? 1.0 : 0.3
 
@@ -25,6 +31,7 @@ MenuItem {
             }
             font: root.font
             elide: Text.ElideRight
+            color: "black"
             Layout.fillWidth: true
         }
         Text {
