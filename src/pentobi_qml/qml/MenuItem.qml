@@ -7,7 +7,7 @@ MenuItem {
     id: root
 
     // implicitWidth should be the same as in Pentobi.Menu
-    implicitWidth: Math.min(font.pixelSize * (isDesktop ? 21 : 18), rootWindow.width)
+    implicitWidth: Math.min(font.pixelSize * (isDesktop ? 22 : 18), rootWindow.width)
     implicitHeight: (isDesktop ? 2 : 2.2) * font.pixelSize
     background: Rectangle {
         x: 1; y: 1
