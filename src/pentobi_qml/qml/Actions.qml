@@ -211,7 +211,7 @@ QtObject {
         onTriggered: {
             // Never reuse RatingDialog
             // See comment in Main.qml at ratingModel.onHistoryChanged
-            ratingDialog.source = ""
+            ratingDialog.sourceComponent = null
             ratingDialog.open()
         }
     }
