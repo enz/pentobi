@@ -37,6 +37,12 @@ function autoSaveNoVerify() {
              || delayedCheckComputerMove.running)
             && ! isPlaySingleMoveRunning
     gameModel.autoSave()
+    settings.computerPlays0 = rootWindow.computerPlays0
+    settings.computerPlays1 = rootWindow.computerPlays1
+    settings.computerPlays2 = rootWindow.computerPlays2
+    settings.computerPlays3 = rootWindow.computerPlays3
+    settings.isRated = rootWindow.isRated
+    settings.wasGenMoveRunning = rootWindow.wasGenMoveRunning
     analyzeGameModel.autoSave(gameModel)
 }
 
@@ -279,6 +285,12 @@ function help() {
 
 function init() {
     gameModel.loadAutoSave()
+    rootWindow.computerPlays0 = settings.computerPlays0
+    rootWindow.computerPlays1 = settings.computerPlays1
+    rootWindow.computerPlays2 = settings.computerPlays2
+    rootWindow.computerPlays3 = settings.computerPlays3
+    rootWindow.isRated = settings.isRated
+    rootWindow.wasGenMoveRunning = settings.wasGenMoveRunning
     gameDisplay.createPieces()
     if (gameModel.checkFileDeletedOutside())
     {

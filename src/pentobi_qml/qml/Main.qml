@@ -141,22 +141,26 @@ ApplicationWindow {
     }
 
     Settings {
+        id: settings
+
         property alias x: rootWindow.x
         property alias y: rootWindow.y
         property alias width: rootWindow.width
         property alias height: rootWindow.height
         property alias folder: rootWindow.folder
-        property alias computerPlays0: rootWindow.computerPlays0
-        property alias computerPlays1: rootWindow.computerPlays1
-        property alias computerPlays2: rootWindow.computerPlays2
-        property alias computerPlays3: rootWindow.computerPlays3
-        property alias initComputerColorsOnNewGame: rootWindow.initComputerColorsOnNewGame;
-        property alias isRated: rootWindow.isRated
         property alias themeName: rootWindow.themeName
         property alias isDesktop: rootWindow.isDesktop
-        property alias wasGenMoveRunning: rootWindow.wasGenMoveRunning
         property alias exportImageWidth: rootWindow.exportImageWidth
         property alias showVariations: gameModel.showVariations
+        property alias initComputerColorsOnNewGame: rootWindow.initComputerColorsOnNewGame
+
+        // Settings related to autosaved game (no aliases)
+        property bool computerPlays0
+        property bool computerPlays1
+        property bool computerPlays2
+        property bool computerPlays3
+        property bool isRated
+        property bool wasGenMoveRunning
     }
     GameModel {
         id: gameModel
