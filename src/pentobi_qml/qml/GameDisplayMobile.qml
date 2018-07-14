@@ -49,10 +49,7 @@ Item
     function showAnalyzeGame() { pickedPiece = null; swipeView.currentIndex = 2 }
     function showComment() { pickedPiece = null; swipeView.currentIndex = 1 }
     function showPieces() { swipeView.currentIndex = 0 }
-    function dropCommentFocus() {
-        if (navigationPanel.activeFocusComment)
-            forceActiveFocus()
-    }
+    function dropCommentFocus() { navigationPanel.dropCommentFocus() }
     function showMove(move) { Logic.showMove(move) }
     function getBoard() { return board }
     function showTemporaryMessage(text) { message.showTemporary(text) }
