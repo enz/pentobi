@@ -233,7 +233,11 @@ ApplicationWindow {
     DialogLoader { id: saveDialog; component: Component { SaveDialog { } } }
     DialogLoader { id: infoMessage; component: Component { Pentobi.MessageDialog { } } }
     DialogLoader { id: questionMessage; component: Component { Pentobi.QuestionDialog { } } }
-    Loader { id: helpWindowLoader }
+    Loader {
+        id: helpWindow
+
+        property Component component: Component { HelpWindow { } }
+    }
 
     // Used to delay calls to Logic.checkComputerMove such that the computer
     // starts thinking and the busy indicator is visible after the current move

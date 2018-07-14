@@ -277,10 +277,10 @@ function getFileLabel(file, isModified) {
 }
 
 function help() {
-    if (helpWindowLoader.status === Loader.Null)
-        helpWindowLoader.source = "HelpWindow.qml"
-    helpWindowLoader.item.show()
-    helpWindowLoader.item.init()
+    if (helpWindow.status === Loader.Null)
+        helpWindow.sourceComponent = helpWindow.component
+    helpWindow.item.show()
+    helpWindow.item.init()
 }
 
 function init() {
