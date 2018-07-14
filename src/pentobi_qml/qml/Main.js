@@ -619,10 +619,9 @@ function save() {
 }
 
 function saveAs() {
-    if (saveDialog.status === Loader.Null)
-        saveDialog.source = saveDialog.url
-    saveDialog.item.name = gameModel.suggestFileName(rootWindow.folder)
-    saveDialog.item.open()
+    var dialog = saveDialog.get()
+    dialog.name = gameModel.suggestFileName(rootWindow.folder)
+    dialog.open()
 }
 
 function saveCurrentFile() {
