@@ -656,23 +656,17 @@ function showComputerColorDialog() {
 }
 
 function showInfo(text) {
-    if (infoMessageLoader.status === Loader.Null)
-        infoMessageLoader.sourceComponent = infoMessageComponent
-    var dialog = infoMessageLoader.item
+    var dialog = infoMessage.get()
     dialog.text = text
     dialog.open()
 }
 
 function showInfoWithCallback(text, acceptedFunc) {
-    if (infoMessageLoader.status === Loader.Null)
-        infoMessageLoader.sourceComponent = infoMessageComponent
-    infoMessageLoader.item.openWithCallback(text, acceptedFunc)
+    infoMessage.get().openWithCallback(text, acceptedFunc)
 }
 
 function showQuestion(text, acceptedFunc) {
-    if (questionMessageLoader.status === Loader.Null)
-        questionMessageLoader.sourceComponent = questionMessageComponent
-    questionMessageLoader.item.openWithCallback(text, acceptedFunc)
+    questionMessage.get().openWithCallback(text, acceptedFunc)
 }
 
 function showTemporaryMessage(text) {

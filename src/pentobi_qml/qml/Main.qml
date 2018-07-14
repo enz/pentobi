@@ -231,19 +231,9 @@ ApplicationWindow {
     DialogLoader { id: gotoMoveDialog; component: Component { GotoMoveDialog { } } }
     DialogLoader { id: ratingDialog; component: Component { RatingDialog { } } }
     DialogLoader { id: saveDialog; component: Component { SaveDialog { } } }
+    DialogLoader { id: infoMessage; component: Component { Pentobi.MessageDialog { } } }
+    DialogLoader { id: questionMessage; component: Component { Pentobi.QuestionDialog { } } }
     Loader { id: helpWindowLoader }
-    Loader { id: infoMessageLoader }
-    Component {
-        id: infoMessageComponent
-
-        Pentobi.MessageDialog { }
-    }
-    Loader { id: questionMessageLoader }
-    Component {
-        id: questionMessageComponent
-
-        Pentobi.QuestionDialog { }
-    }
 
     // Used to delay calls to Logic.checkComputerMove such that the computer
     // starts thinking and the busy indicator is visible after the current move

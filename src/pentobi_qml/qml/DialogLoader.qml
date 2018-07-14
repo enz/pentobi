@@ -3,9 +3,10 @@ import QtQuick 2.0
 Loader {
     property Component component
 
-    function open() {
+    function get() {
         if (status === Loader.Null)
             sourceComponent = component
-        item.open()
+        return item
     }
+    function open() { get().open() }
 }
