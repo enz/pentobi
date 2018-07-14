@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>&amp;Find Move</source>
-        <translation>Zug &amp;finden</translation>
+        <translation>&amp;Zug finden</translation>
     </message>
     <message>
         <source>&amp;Game Info</source>
@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>&amp;Open...</source>
-        <translation>Öffn&amp;en ...</translation>
+        <translation>Ö&amp;ffnen ...</translation>
     </message>
     <message>
         <source>Play &amp;Single Move</source>
@@ -972,7 +972,7 @@
     </message>
     <message>
         <source>Open R&amp;ecent</source>
-        <translation>&amp;Zuletzt benutzte Dateien</translation>
+        <translation>Zuletzt &amp;benutzte Dateien</translation>
     </message>
     <message>
         <source>&amp;Rated Game</source>
@@ -1085,7 +1085,7 @@
     </message>
     <message>
         <source>&amp;Clear Rating</source>
-        <translation>Wertung lö&amp;schen</translation>
+        <translation>W&amp;ertung löschen</translation>
     </message>
     <message>
         <source>Clear A&amp;nalysis</source>
@@ -1108,7 +1108,7 @@
     </message>
     <message>
         <source>&amp;Move Marking</source>
-        <translation>&amp;Zugmarkierung</translation>
+        <translation>Zug&amp;markierung</translation>
     </message>
     <message>
         <source>Last With &amp;Dot</source>
