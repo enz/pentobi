@@ -82,11 +82,12 @@ QtObject {
         text: Logic.removeShortcut(qsTr("&Fullscreen"))
         checkable: true
         checked: visibility === Window.FullScreen
-        onTriggered:
+        onTriggered: {
             if (visibility !== Window.FullScreen)
                 visibility = Window.FullScreen
             else
                 visibility = Window.AutomaticVisibility
+        }
     }
     property Action actionGameInfo: Action {
         shortcut: "Ctrl+I"

@@ -44,13 +44,21 @@ Pentobi.Menu {
         text: Logic.removeShortcut(qsTr("&Coordinates"))
         checkable: true
         checked: gameDisplay.showCoordinates
-        onTriggered: gameDisplay.showCoordinates = checked
+        onTriggered: {
+            // Set checked explicitely because of QTBUG-69401
+            checked = ! gameDisplay.showCoordinates
+            gameDisplay.showCoordinates = checked
+        }
     }
     Pentobi.MenuItem {
         text: Logic.removeShortcut(qsTr("Show &Variations"))
         checkable: true
         checked: gameModel.showVariations
-        onTriggered: gameModel.showVariations = checked
+        onTriggered: {
+            // Set checked explicitely because of QTBUG-69401
+            checked = ! gameModel.showVariations
+            gameModel.showVariations = checked
+        }
     }
     MenuSeparator { }
     Pentobi.Menu {
@@ -119,7 +127,11 @@ Pentobi.Menu {
         text: Logic.removeShortcut(qsTr("&Animate Pieces"))
         checkable: true
         checked: gameDisplay.enableAnimations
-        onTriggered: gameDisplay.enableAnimations = checked
+        onTriggered: {
+            // Set checked explicitely because of QTBUG-69401
+            checked = ! gameDisplay.enableAnimations
+            gameDisplay.enableAnimations = checked
+        }
     }
     MenuSeparator { }
     Pentobi.MenuItem { action: actions.actionFullscreen }

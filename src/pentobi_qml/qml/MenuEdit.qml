@@ -113,6 +113,8 @@ Pentobi.Menu {
                  && gameModel.moveNumber === 0
         checked: gameDisplay.setupMode
         onTriggered: {
+            // Set checked explicitely because of QTBUG-69401
+            checked = ! gameDisplay.setupMode
             gameDisplay.setupMode = checked
             if (checked)
                 gameDisplay.showPieces()
