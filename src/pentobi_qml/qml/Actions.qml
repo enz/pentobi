@@ -5,12 +5,18 @@ import QtQuick.Window 2.1
 import "Main.js" as Logic
 
 QtObject {
+    // There are currently several bugs in Qt where a control in a dialog
+    // handles a key but does not consume the key event (e.g. QTBUG-69447,
+    // QTBUG-69345), so we disable many shortcuts if this property is true,
+    // that is when any QtQuickControls2 Popup is open.
+    property bool noPopupOpen: overlay.children.length === 0
+
     property Instantiator actionsPickedNamedPiece: Instantiator {
         model: [ "1", "2", "A", "C", "E", "F", "G", "H", "I", "J", "L",
             "N", "O", "P", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
 
         Action {
-            shortcut: modelData
+            shortcut: noPopupOpen ? modelData : ""
             onTriggered: Logic.pickNamedPiece(modelData)
         }
     }
@@ -52,7 +58,7 @@ QtObject {
         onTriggered: gameModel.goEnd()
     }
     property Action actionDropPickedPiece: Action {
-        shortcut: "0"
+        shortcut: noPopupOpen ? "0" : ""
         onTriggered: gameDisplay.pickedPiece = null
     }
     property Action actionFindMove: Action {
@@ -105,24 +111,20 @@ QtObject {
         text: Logic.removeShortcut(qsTr("Pentobi &Help"))
         onTriggered: Logic.help()
     }
-    property Action actionMenuKey: Action {
-        shortcut: "Menu"
-        onTriggered: toolBar.clickMenuButton()
-    }
     property Action actionMovePieceDown: Action {
-        shortcut: "Down"
+        shortcut: noPopupOpen ? "Down" : ""
         onTriggered: gameDisplay.movePieceDown()
     }
     property Action actionMovePieceLeft: Action {
-        shortcut: "Left"
+        shortcut: noPopupOpen ? "Left" : ""
         onTriggered: gameDisplay.movePieceLeft()
     }
     property Action actionMovePieceRight: Action {
-        shortcut: "Right"
+        shortcut: noPopupOpen ? "Right" : ""
         onTriggered: gameDisplay.movePieceRight()
     }
     property Action actionMovePieceUp: Action {
-        shortcut: "Up"
+        shortcut: noPopupOpen ? "Up" : ""
         onTriggered: gameDisplay.movePieceUp()
     }
     property Action actionNew: Action {
@@ -140,14 +142,12 @@ QtObject {
         onTriggered: Logic.ratedGame()
     }
     property Action actionNextOrientation: Action {
-        // Disable if dialog is open to prevent stealing the Space key from
-        // menu or dialog button (QTBUG-69447)
-        enabled: gameDisplay.pickedPiece && overlay.children.length === 0
-        shortcut: "Space"
+        enabled: gameDisplay.pickedPiece
+        shortcut: noPopupOpen ? "Space" : ""
         onTriggered: gameDisplay.pickedPiece.pieceModel.nextOrientation()
     }
     property Action actionNextPiece: Action {
-        shortcut: "+"
+        shortcut: noPopupOpen ? "+" : ""
         onTriggered: Logic.nextPiece()
     }
     property Action actionNextVar: Action {
@@ -173,14 +173,12 @@ QtObject {
         onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
     }
     property Action actionPrevOrientation: Action {
-        // Disable if dialog is open to prevent stealing the Space key from
-        // menu or dialog button (QTBUG-69447)
-        enabled: gameDisplay.pickedPiece && overlay.children.length === 0
-        shortcut: "Shift+Space"
+        enabled: gameDisplay.pickedPiece
+        shortcut: noPopupOpen ? "Shift+Space" : ""
         onTriggered: gameDisplay.pickedPiece.pieceModel.previousOrientation()
     }
     property Action actionPrevPiece: Action {
-        shortcut: "-"
+        shortcut: noPopupOpen ? "-" : ""
         onTriggered: Logic.prevPiece()
     }
     property Action actionPrevVar: Action {
@@ -189,16 +187,8 @@ QtObject {
         onTriggered: gameModel.goPrevVar()
     }
     property Action actionPlayPickedPiece: Action {
-        // Disable if dialog is open to prevent stealing the Return key from
-        // GotoMoveDialog (QTBUG-69345)
-        enabled: overlay.children.length === 0
-        shortcut: "Return"
-        onTriggered:
-            // Ignore return key if popups exist because textfields (e.g. in
-            // the Go To Move dialog don't handle and consume the Return key
-            // if an action with this shortkey exists (QTBUG-69345)
-            if (rootWindow.overlay.children.length === 0)
-                gameDisplay.playPickedPiece()
+        shortcut: noPopupOpen ? "Return" : ""
+        onTriggered: gameDisplay.playPickedPiece()
     }
     property Action actionQuit: Action {
         shortcut: "Ctrl+Q"
