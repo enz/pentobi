@@ -1,11 +1,11 @@
 import QtQuick 2.0
 
 Loader {
-    property url url
+    property Component component
 
     function open() {
         if (status === Loader.Null)
-            source = url
+            sourceComponent = component
         item.open()
     }
 }

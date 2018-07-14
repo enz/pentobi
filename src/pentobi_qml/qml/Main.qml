@@ -222,15 +222,15 @@ ApplicationWindow {
             }
         }
     }
-    DialogLoader { id: gameInfoDialog; url: "GameInfoDialog.qml" }
-    DialogLoader { id: initialRatingDialog; url: "InitialRatingDialog.qml" }
-    DialogLoader { id: openDialog; url: "OpenDialog.qml" }
-    DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
-    DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
-    DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }
-    DialogLoader { id: gotoMoveDialog; url: "GotoMoveDialog.qml" }
-    DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
-    DialogLoader { id: saveDialog; url: "SaveDialog.qml" }
+    DialogLoader { id: gameInfoDialog; component: Component { GameInfoDialog { } } }
+    DialogLoader { id: initialRatingDialog; component: Component { InitialRatingDialog { } } }
+    DialogLoader { id: openDialog; component: Component { OpenDialog { } } }
+    DialogLoader { id: exportImageDialog; component: Component { ExportImageDialog { } } }
+    DialogLoader { id: imageSaveDialog; component: Component { ImageSaveDialog { } } }
+    DialogLoader { id: asciiArtSaveDialog; component: Component { AsciiArtSaveDialog { } } }
+    DialogLoader { id: gotoMoveDialog; component: Component { GotoMoveDialog { } } }
+    DialogLoader { id: ratingDialog; component: Component { RatingDialog { } } }
+    DialogLoader { id: saveDialog; component: Component { SaveDialog { } } }
     Loader { id: helpWindowLoader }
     Loader { id: infoMessageLoader }
     Component {
