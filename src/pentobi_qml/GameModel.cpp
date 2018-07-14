@@ -264,11 +264,11 @@ void GameModel::autoSave()
     QSettings settings;
     settings.setValue("variant", to_string_id(m_game.get_variant()));
     settings.setValue("autosave", getSgf());
-
     settings.setValue("file", m_file);
     settings.setValue("fileDate", m_fileDate);
     settings.setValue("isModified", m_isModified);
-    settings.setValue("autosaveDate", QDateTime::currentDateTime());
+    m_autosaveDate = QDateTime::currentDateTime();
+    settings.setValue("autosaveDate", m_autosaveDate);
 
     QVariantList location;
     uint depth = 0;
