@@ -1180,14 +1180,13 @@ PieceModel* GameModel::preparePiece(GameMove* move)
     if (mv.is_null())
         return nullptr;
     auto piece = getBoard().get_move_piece(mv.move);
-    for (auto pieceModel : getPieceModels(mv.color))
-        if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
-        {
-            preparePieceTransform(pieceModel, mv.move);
-            preparePieceGameCoord(pieceModel, mv.move);
-            return pieceModel;
-        }
-    return nullptr;
+    auto pieceModel = findUnplayedPieceModel(mv.color, piece);
+    if (pieceModel != nullptr)
+    {
+        preparePieceTransform(pieceModel, mv.move);
+        preparePieceGameCoord(pieceModel, mv.move);
+    }
+    return pieceModel;
 }
 
 void GameModel::preparePieceGameCoord(PieceModel* pieceModel, Move mv)
