@@ -671,7 +671,7 @@
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisk lagret spill ble endret av en annen kjørende utgave av Pentobi. Overskriv?</translation>
     </message>
 </context>
 <context>
