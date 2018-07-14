@@ -35,7 +35,8 @@ QtObject {
                 || name.startsWith("quarter-square-")
                 || name.startsWith("square-")
                 || name.startsWith("triangle-")
-                || name.startsWith("menu-"))
+                || name.startsWith("menu-")
+                || name.startsWith("filedialog-"))
             return "themes/light/" + name + ".svg"
         return "themes/dark/" + name + ".svg"
     }

@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.11
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
@@ -65,12 +65,17 @@ Pentobi.Dialog {
                 property bool hasParent: ! folderModel.folder.toString().endsWith(":///")
 
                 enabled: hasParent
-                text: "<"
                 onClicked:
                     if (hasParent) {
                         folderModel.folder = folderModel.parentFolder
                         view.currentIndex = -1
                     }
+                Image {
+                    anchors.centerIn: parent
+                    width: 1.2 * font.pixelSize; height: width
+                    source: theme.getImage("filedialog-parent")
+                    sourceSize { width: width; height: height }
+                }
             }
             Label {
                 text: Logic.getFileFromUrl(folderModel.folder)
@@ -92,21 +97,31 @@ Pentobi.Dialog {
             width: parent.width
             clip: true
             model: folderModel
+            boundsBehavior: Flickable.StopAtBounds
+            highlight: Rectangle { color: "#ddd" }
+            highlightMoveDuration: 0
             delegate: Button {
                 width: view.width
                 height: 2 * font.pixelSize
                 flat: true
                 onActiveFocusChanged: if (activeFocus) view.currentIndex = index
-                contentItem: Text {
-                    text: {
-                        if (index < 0) return ""
-                        if (folderModel.isFolder(index)) return "> " + fileName
-                        return fileName
+                contentItem: Row {
+                    Image {
+                        anchors.verticalCenter: parent.verticalCenter
+                        visible: folderModel.isFolder(index)
+                        width: 0.8 * font.pixelSize; height: width
+                        source: theme.getImage("filedialog-folder")
+                        sourceSize { width: width; height: height }
                     }
-                    color: parent.activeFocus ? "blue" : "black"
-                    horizontalAlignment: Text.AlignHLeft
-                    verticalAlignment: Text.AlignVCenter
-                    elide: Text.ElideRight
+                    Text {
+                        text: index < 0 ? "" : fileName
+                        anchors.verticalCenter: parent.verticalCenter
+                        leftPadding: 0.2 * font.pixelSize
+                        color: "black"
+                        horizontalAlignment: Text.AlignHLeft
+                        verticalAlignment: Text.AlignVCenter
+                        elide: Text.ElideRight
+                    }
                 }
                 onClicked: {
                     view.currentIndex = index
