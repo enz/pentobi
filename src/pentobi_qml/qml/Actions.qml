@@ -73,6 +73,16 @@ QtObject {
         enabled: gameModel.canGoForward || gameModel.canGoBackward
         onTriggered: Logic.findNextComment()
     }
+    property Action actionFlipX: Action {
+        shortcut: noPopupOpen ? "Shift+Up" : ""
+        enabled: gameDisplay.pickedPiece
+        onTriggered: gameDisplay.pickedPiece.pieceModel.flipAcrossX()
+    }
+    property Action actionFlipY: Action {
+        shortcut: noPopupOpen ? "Shift+Down" : ""
+        enabled: gameDisplay.pickedPiece
+        onTriggered: gameDisplay.pickedPiece.pieceModel.flipAcrossY()
+    }
     property Action actionForward: Action {
         shortcut: "Ctrl+Right"
         enabled: gameModel.canGoForward
@@ -204,6 +214,16 @@ QtObject {
             ratingDialog.sourceComponent = null
             ratingDialog.open()
         }
+    }
+    property Action actionRotateLeft: Action {
+        shortcut: noPopupOpen ? "Shift+Left" : ""
+        enabled: gameDisplay.pickedPiece
+        onTriggered: gameDisplay.pickedPiece.pieceModel.rotateLeft()
+    }
+    property Action actionRotateRight: Action {
+        shortcut: noPopupOpen ? "Shift+Right" : ""
+        enabled: gameDisplay.pickedPiece
+        onTriggered: gameDisplay.pickedPiece.pieceModel.rotateRight()
     }
     property Action actionSave: Action {
         shortcut: "Ctrl+S"
