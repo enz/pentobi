@@ -1,26 +1,23 @@
 import QtQuick 2.0
-import QtQuick.Window 2.0
-import QtQuick.Controls 2.0
+import QtQuick.Window 2.2
+import QtQuick.Controls 2.3
 
-/** Button that supports an automatically scaled image.
-    The image source should be a SVG file with size 22x22. */
-Button {
+ToolButton {
     id: root
 
-    property alias imageSource: image.source
+    // Icon size 22x22, pixel-alignment optimized for this size
+    property url imageSource
 
-    focusPolicy: Qt.NoFocus
-    contentItem: Image {
-        id: image
-
-        sourceSize {
-            // Try to use 22x22, unless high DPI
-            width: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
-            height: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
-        }
-        fillMode: Image.PreserveAspectFit
-        opacity: root.enabled ? 1 : 0.4
+    opacity: root.enabled ? 1 : 0.5
+    display: AbstractButton.IconOnly
+    icon {
+        source: imageSource
+        color: theme.colorIcon
+        width: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
+        height: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
     }
+    focusPolicy: Qt.NoFocus
+    flat: true
     background: Rectangle {
         anchors.fill: root
         visible: down

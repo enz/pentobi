@@ -23,7 +23,7 @@ MenuItem {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             visible: root.checked
-            source: theme.getImage("menu-indicator")
+            source: "icons/menu-indicator.svg"
             sourceSize { width: width; height: height }
         }
     }

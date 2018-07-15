@@ -12,34 +12,34 @@ Row
     Pentobi.Button {
         id: buttonBeginning
 
-        imageSource: theme.getImage("pentobi-beginning")
+        imageSource: "icons/pentobi-beginning.svg"
         width: buttonWidth; height: buttonHeight
         action: actions.actionBeginning
     }
     Pentobi.Button {
-        imageSource: theme.getImage("pentobi-backward")
+        imageSource: "icons/pentobi-backward.svg"
         width: buttonWidth; height: buttonHeight
         action: actions.actionBackward
         autoRepeat: true
     }
     Pentobi.Button {
-        imageSource: theme.getImage("pentobi-forward")
+        imageSource: "icons/pentobi-forward.svg"
         width: buttonWidth; height: buttonHeight
         action: actions.actionForward
         autoRepeat: true
     }
     Pentobi.Button {
-        imageSource: theme.getImage("pentobi-end")
+        imageSource: "icons/pentobi-end.svg"
         width: buttonWidth; height: buttonHeight
         action: actions.actionEnd
     }
     Pentobi.Button {
-        imageSource: theme.getImage("pentobi-previous-variation")
+        imageSource: "icons/pentobi-previous-variation.svg"
         width: buttonWidth; height: buttonHeight
         action: actions.actionPrevVar
     }
     Pentobi.Button {
-        imageSource: theme.getImage("pentobi-next-variation")
+        imageSource: "icons/pentobi-next-variation.svg"
         width: buttonWidth; height: buttonHeight
         action: actions.actionNextVar
     }

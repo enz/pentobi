@@ -17,6 +17,7 @@ QtObject {
     property color colorPurple: "#a12CCF"
     property color colorOrange: "#F09217"
     property color colorStartingPoint: "#767074"
+    property color colorIcon: "#848484"
     property color backgroundButtonPressed: Qt.darker(backgroundColor, 1.1)
     property color selectionColor: "#645f5c"
     property color selectedTextColor: backgroundColor

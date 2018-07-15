@@ -72,7 +72,7 @@ Pentobi.Dialog {
                         view.currentIndex = -1
                     }
                 icon {
-                    source: theme.getImage("filedialog-parent")
+                    source: "icons/filedialog-parent.svg"
                     width: 16; height: 16
                 }
             }
@@ -109,7 +109,7 @@ Pentobi.Dialog {
                         anchors.verticalCenter: parent.verticalCenter
                         visible: folderModel.isFolder(index)
                         width: 0.8 * font.pixelSize; height: width
-                        source: theme.getImage("filedialog-folder")
+                        source: "icons/filedialog-folder.svg"
                         sourceSize { width: width; height: height }
                     }
                     Text {

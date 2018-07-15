@@ -17,6 +17,7 @@ QtObject {
     property color colorPurple: "#a12CCF"
     property color colorOrange: "#F09217"
     property color colorStartingPoint: "#82777E"
+    property color colorIcon: "#777"
     property color backgroundButtonPressed: Qt.lighter(backgroundColor, 3)
     property color selectionColor: "#96918f"
     property color selectedTextColor: backgroundColor
@@ -34,9 +35,7 @@ QtObject {
                 || name.startsWith("piece-manipulator")
                 || name.startsWith("quarter-square-")
                 || name.startsWith("square-")
-                || name.startsWith("triangle-")
-                || name.startsWith("menu-")
-                || name.startsWith("filedialog-"))
+                || name.startsWith("triangle-"))
             return "themes/light/" + name + ".svg"
         return "themes/dark/" + name + ".svg"
     }

@@ -42,28 +42,28 @@ RowLayout {
     }
     Pentobi.Button {
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-newgame")
+        imageSource: "icons/pentobi-newgame.svg"
         action: actions.actionNew
         visible: ! isAndroid || enabled
         ToolTip.text: qsTr("Start a new game")
     }
     Pentobi.Button {
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-undo")
+        imageSource: "icons/pentobi-undo.svg"
         action: actions.actionUndo
         visible: ! isAndroid || enabled
         ToolTip.text: action.text.replace("&", "")
     }
     Pentobi.Button {
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-computer-colors")
+        imageSource: "icons/pentobi-computer-colors.svg"
         action: actions.actionComputerColors
         visible: ! isAndroid || enabled
         ToolTip.text: qsTr("Set the colors played by the computer")
     }
     Pentobi.Button {
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-play")
+        imageSource: "icons/pentobi-play.svg"
         action: actions.actionPlay
         visible: ! isAndroid || enabled
         ToolTip.text: {
@@ -81,14 +81,14 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-beginning")
+        imageSource: "icons/pentobi-beginning.svg"
         action: actions.actionBeginning
         ToolTip.text: qsTr("Go to beginning of game")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-backward10")
+        imageSource: "icons/pentobi-backward10.svg"
         action: actions.actionBackward10
         autoRepeat: true
         ToolTip.text: qsTr("Go ten moves backward")
@@ -96,7 +96,7 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-backward")
+        imageSource: "icons/pentobi-backward.svg"
         action: actions.actionBackward
         autoRepeat: true
         ToolTip.text: qsTr("Go one move backward")
@@ -104,7 +104,7 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-forward")
+        imageSource: "icons/pentobi-forward.svg"
         action: actions.actionForward
         autoRepeat: true
         ToolTip.text: qsTr("Go one move forward")
@@ -112,7 +112,7 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-forward10")
+        imageSource: "icons/pentobi-forward10.svg"
         action: actions.actionForward10
         autoRepeat: true
         ToolTip.text: qsTr("Go ten moves forward")
@@ -120,25 +120,28 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-end")
+        imageSource: "icons/pentobi-end.svg"
         action: actions.actionEnd
         ToolTip.text: qsTr("Go to end of moves")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-previous-variation")
+        imageSource: "icons/pentobi-previous-variation.svg"
         action: actions.actionPrevVar
         ToolTip.text: qsTr("Go to previous variation")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        imageSource: theme.getImage("pentobi-next-variation")
+        imageSource: "icons/pentobi-next-variation.svg"
         action: actions.actionNextVar
         ToolTip.text: qsTr("Go to next variation")
     }
-    Item { Layout.preferredWidth: parent.height / 2 }
+    Item {
+        visible: isDesktop
+        Layout.preferredWidth: parent.height / 2
+    }
     Label {
         visible: isDesktop && (isRated || gameModel.file !== "" || gameDisplay.setupMode)
         text: {
@@ -164,7 +167,7 @@ RowLayout {
         id: menuButton
 
         padding: buttonPadding
-        imageSource: theme.getImage("menu")
+        imageSource: "icons/menu.svg"
         checkable: true
         down: menu.opened
         onClicked: if (menu.opened) menu.close();
