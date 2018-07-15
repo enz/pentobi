@@ -185,6 +185,7 @@ Item
 
                 opacity: 0
                 color: theme.fontColorPosInfo
+                leftPadding: 0.4 * font.pixelSize
                 padding: 0.2 * font.pixelSize
 
                 Behavior on opacity { NumberAnimation { duration: 110 } }
@@ -195,6 +196,7 @@ Item
 
                 text: gameModel.positionInfoShort
                 color: theme.fontColorPosInfo
+                rightPadding: 0.4 * font.pixelSize
                 padding: 0.2 * font.pixelSize
             }
             Timer {
