@@ -113,7 +113,7 @@ QtObject {
     property Action actionGoto: Action {
         shortcut: "Ctrl+G"
         text: Logic.removeShortcut(qsTr("&Go to Move..."))
-        enabled: gameModel.moveNumber + gameModel.movesLeft > 1
+        enabled: gameModel.moveNumber + gameModel.movesLeft >= 1
         onTriggered: gotoMoveDialog.open()
     }
     property Action actionHelp: Action {
