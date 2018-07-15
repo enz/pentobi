@@ -11,5 +11,6 @@ Pentobi.MenuItem {
     checked: playerModel.level === level
     onTriggered: {
         playerModel.level = level
+        gameDisplay.showTemporaryMessage(text.replace("&", ""))
     }
 }
