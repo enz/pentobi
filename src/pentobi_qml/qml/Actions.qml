@@ -58,7 +58,7 @@ QtObject {
         onTriggered: gameModel.goEnd()
     }
     property Action actionDropPickedPiece: Action {
-        shortcut: noPopupOpen ? "0" : ""
+        shortcut: noPopupOpen ? "Escape" : ""
         onTriggered: gameDisplay.pickedPiece = null
     }
     property Action actionFindMove: Action {
