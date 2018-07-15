@@ -37,7 +37,7 @@
     </message>
     <message>
         <source>&amp;Go to Move...</source>
-        <translation>&amp;Gehe zu Zug ...</translation>
+        <translation>Gehe zu &amp;Zug ...</translation>
     </message>
     <message>
         <source>Pentobi &amp;Help</source>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>Beginning of Bran&amp;ch</source>
-        <translation>Anfang der Verz&amp;weigung</translation>
+        <translation>Anfang der &amp;Verzweigung</translation>
     </message>
     <message>
         <source>Find Next &amp;Comment</source>
