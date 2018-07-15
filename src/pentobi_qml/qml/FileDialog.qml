@@ -70,11 +70,9 @@ Pentobi.Dialog {
                         folderModel.folder = folderModel.parentFolder
                         view.currentIndex = -1
                     }
-                Image {
-                    anchors.centerIn: parent
-                    width: 1.2 * font.pixelSize; height: width
+                icon {
                     source: theme.getImage("filedialog-parent")
-                    sourceSize { width: width; height: height }
+                    width: 16; height: 16
                 }
             }
             Label {
