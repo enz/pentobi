@@ -9,5 +9,7 @@ Pentobi.MenuItem {
     checkable: true
     autoExclusive: true
     checked: playerModel.level === level
-    onTriggered: playerModel.level = level
+    onTriggered: {
+        playerModel.level = level
+    }
 }

@@ -4,7 +4,7 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: Logic.removeShortcut(qsTr("G&o"))
+    title: qsTr("G&o")
 
     Pentobi.MenuItem { action: actions.actionGoto }
     Pentobi.MenuItem { action: actions.actionBackToMainVar }

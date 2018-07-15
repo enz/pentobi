@@ -5,14 +5,14 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: Logic.removeShortcut(qsTr("&Computer"))
+    title: qsTr("&Computer")
 
     Pentobi.MenuItem { action: actions.actionComputerColors }
     Pentobi.MenuItem { action: actions.actionPlay }
     MenuSeparator { }
     Pentobi.MenuItem { action: actions.actionPlaySingle }
     Pentobi.MenuItem {
-        text: Logic.removeShortcut(qsTr("St&op"))
+        text: qsTr("St&op")
         enabled: (playerModel.isGenMoveRunning
                   || delayedCheckComputerMove.running
                   || analyzeGameModel.isRunning)
@@ -26,24 +26,24 @@ Pentobi.Menu {
         title:
             switch (gameModel.gameVariant)
             {
-            case "classic": return Logic.removeShortcut(qsTr("&Level (Classic, 4 Players)"))
-            case "classic_2": return Logic.removeShortcut(qsTr("&Level (Classic, 2 Players)"))
-            case "classic_3": return Logic.removeShortcut(qsTr("&Level (Classic, 3 Players)"))
-            case "duo": return Logic.removeShortcut(qsTr("&Level (Duo)"))
-            case "junior": return Logic.removeShortcut(qsTr("&Level (Junior)"))
-            case "trigon": return Logic.removeShortcut(qsTr("&Level (Trigon, 4 Players)"))
-            case "trigon_2": return Logic.removeShortcut(qsTr("&Level (Trigon, 2 Players)"))
-            case "trigon_3": return Logic.removeShortcut(qsTr("&Level (Trigon, 3 Players)"))
-            case "nexos": return Logic.removeShortcut(qsTr("&Level (Nexos, 4 Players)"))
-            case "nexos_2": return Logic.removeShortcut(qsTr("&Level (Nexos, 2 Players)"))
-            case "callisto": return Logic.removeShortcut(qsTr("&Level (Callisto, 4 Players)"))
-            case "callisto_2": return Logic.removeShortcut(qsTr("&Level (Callisto, 2 Players, 2 Colors)"))
-            case "callisto_2_4": return Logic.removeShortcut(qsTr("&Level (Callisto, 2 Players, 4 Colors)"))
-            case "callisto_3": return Logic.removeShortcut(qsTr("&Level (Callisto, 3 Players)"))
-            case "gembloq": return Logic.removeShortcut(qsTr("&Level (GembloQ, 4 Players)"))
-            case "gembloq_2": return Logic.removeShortcut(qsTr("&Level (GembloQ, 2 Players, 2 Colors)"))
-            case "gembloq_2_4": return Logic.removeShortcut(qsTr("&Level (GembloQ, 2 Players, 4 Colors)"))
-            case "gembloq_3": return Logic.removeShortcut(qsTr("&Level (GembloQ, 3 Players)"))
+            case "classic": return qsTr("&Level (Classic, 4 Players)")
+            case "classic_2": return qsTr("&Level (Classic, 2 Players)")
+            case "classic_3": return qsTr("&Level (Classic, 3 Players)")
+            case "duo": return qsTr("&Level (Duo)")
+            case "junior": return qsTr("&Level (Junior)")
+            case "trigon": return qsTr("&Level (Trigon, 4 Players)")
+            case "trigon_2": return qsTr("&Level (Trigon, 2 Players)")
+            case "trigon_3": return qsTr("&Level (Trigon, 3 Players)")
+            case "nexos": return qsTr("&Level (Nexos, 4 Players)")
+            case "nexos_2": return qsTr("&Level (Nexos, 2 Players)")
+            case "callisto": return qsTr("&Level (Callisto, 4 Players)")
+            case "callisto_2": return qsTr("&Level (Callisto, 2 Players, 2 Colors)")
+            case "callisto_2_4": return qsTr("&Level (Callisto, 2 Players, 4 Colors)")
+            case "callisto_3": return qsTr("&Level (Callisto, 3 Players)")
+            case "gembloq": return qsTr("&Level (GembloQ, 4 Players)")
+            case "gembloq_2": return qsTr("&Level (GembloQ, 2 Players, 2 Colors)")
+            case "gembloq_2_4": return qsTr("&Level (GembloQ, 2 Players, 4 Colors)")
+            case "gembloq_3": return qsTr("&Level (GembloQ, 3 Players)")
             }
 
         Instantiator {

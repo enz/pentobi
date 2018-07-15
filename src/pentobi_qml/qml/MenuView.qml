@@ -4,13 +4,13 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: Logic.removeShortcut(qsTr("&View"))
+    title: qsTr("&View")
 
     Pentobi.Menu {
-        title: Logic.removeShortcut(qsTr("&Move Marking"))
+        title: qsTr("&Move Marking")
 
         Pentobi.MenuItem {
-            text: Logic.removeShortcut(qsTr("Last With &Dot"))
+            text: qsTr("Last With &Dot")
             checkable: true
             autoExclusive: true
             checked: gameDisplay.moveMarking !== "last_number"
@@ -19,21 +19,21 @@ Pentobi.Menu {
             onTriggered: gameDisplay.moveMarking = "last_dot"
         }
         Pentobi.MenuItem {
-            text: Logic.removeShortcut(qsTr("Last With &Number"))
+            text: qsTr("Last With &Number")
             checkable: true
             autoExclusive: true
             checked: gameDisplay.moveMarking === "last_number"
             onTriggered: gameDisplay.moveMarking = "last_number"
         }
         Pentobi.MenuItem {
-            text: Logic.removeShortcut(qsTr("&All With Number"))
+            text: qsTr("&All With Number")
             checkable: true
             autoExclusive: true
             checked: gameDisplay.moveMarking === "all_number"
             onTriggered: gameDisplay.moveMarking = "all_number"
         }
         Pentobi.MenuItem {
-            text: Logic.removeShortcut(qsTr("N&one"))
+            text: qsTr("N&one")
             checkable: true
             autoExclusive: true
             checked: gameDisplay.moveMarking === "none"
@@ -41,7 +41,7 @@ Pentobi.Menu {
         }
     }
     Pentobi.MenuItem {
-        text: Logic.removeShortcut(qsTr("&Coordinates"))
+        text: qsTr("&Coordinates")
         checkable: true
         checked: gameDisplay.showCoordinates
         onTriggered: {
@@ -51,7 +51,7 @@ Pentobi.Menu {
         }
     }
     Pentobi.MenuItem {
-        text: Logic.removeShortcut(qsTr("Show &Variations"))
+        text: qsTr("Show &Variations")
         checkable: true
         checked: gameModel.showVariations
         onTriggered: {
@@ -62,17 +62,17 @@ Pentobi.Menu {
     }
     MenuSeparator { }
     Pentobi.Menu {
-        title: Logic.removeShortcut(qsTr("&Theme"))
+        title: qsTr("&Theme")
 
         Pentobi.MenuItem {
-            text: Logic.removeShortcut(qsTr("&Light"))
+            text: qsTr("&Light")
             checkable: true
             autoExclusive: true
             checked: themeName === "light"
             onTriggered: themeName = "light"
         }
         Pentobi.MenuItem {
-            text: Logic.removeShortcut(qsTr("&Dark"))
+            text: qsTr("&Dark")
             checkable: true
             autoExclusive: true
             checked: themeName === "dark"
@@ -80,7 +80,7 @@ Pentobi.Menu {
         }
         Pentobi.MenuItem {
             //: Name of light theme optimized for colorblindness.
-            text: Logic.removeShortcut(qsTr("&Colorblind Light"))
+            text: qsTr("&Colorblind Light")
             checkable: true
             autoExclusive: true
             checked: themeName === "colorblind-light"
@@ -88,7 +88,7 @@ Pentobi.Menu {
         }
         Pentobi.MenuItem {
             //: Name of dark theme optimized for colorblindness.
-            text: Logic.removeShortcut(qsTr("Colorblind D&ark"))
+            text: qsTr("Colorblind D&ark")
             checkable: true
             autoExclusive: true
             checked: themeName === "colorblind-dark"
@@ -96,11 +96,11 @@ Pentobi.Menu {
         }
     }
     Pentobi.Menu {
-        title: Logic.removeShortcut(qsTr("&Layout"))
+        title: qsTr("&Layout")
         enabled: ! isAndroid
         Pentobi.MenuItem {
             //: Name of window layout optimized for desktop.
-            text: Logic.removeShortcut(qsTr("&Desktop"))
+            text: qsTr("&Desktop")
             checkable: true
             autoExclusive: true
             checked: isDesktop
@@ -112,7 +112,7 @@ Pentobi.Menu {
         }
         Pentobi.MenuItem {
             //: Name of window layout optimized for smartphones.
-            text: Logic.removeShortcut(qsTr("&Mobile"))
+            text: qsTr("&Mobile")
             checkable: true
             autoExclusive: true
             checked: ! isDesktop
@@ -124,7 +124,7 @@ Pentobi.Menu {
         }
     }
     Pentobi.MenuItem {
-        text: Logic.removeShortcut(qsTr("&Animate Pieces"))
+        text: qsTr("&Animate Pieces")
         checkable: true
         checked: gameDisplay.enableAnimations
         onTriggered: {

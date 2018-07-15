@@ -4,11 +4,11 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: Logic.removeShortcut(qsTr("&Help"))
+    title: qsTr("&Help")
 
     Pentobi.MenuItem { action: actions.actionHelp }
     Pentobi.MenuItem {
-        text: Logic.removeShortcut(qsTr("&About Pentobi"))
+        text: qsTr("&About Pentobi")
         onTriggered: Logic.about()
     }
 }

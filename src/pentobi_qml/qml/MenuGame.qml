@@ -5,105 +5,105 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: Logic.removeShortcut(qsTr("&Game"))
+    title: qsTr("&Game")
 
     Pentobi.MenuItem { action: actions.actionNew }
     Pentobi.MenuItem { action: actions.actionNewRated }
     MenuSeparator { }
     Pentobi.Menu {
-        title: Logic.removeShortcut(qsTr("Game &Variant"))
+        title: qsTr("Game &Variant")
 
         ButtonGroup { id: groupGameVariant }
         Pentobi.Menu {
-            title: Logic.removeShortcut(qsTr("&Classic"))
+            title: qsTr("&Classic")
 
             MenuItemGameVariant {
                 gameVariant: "classic_2"
-                text: Logic.removeShortcut(qsTr("Classic (&2 Players)"))
+                text: qsTr("Classic (&2 Players)")
             }
             MenuItemGameVariant {
                 gameVariant: "classic_3"
-                text: Logic.removeShortcut(qsTr("Classic (&3 Players)"))
+                text: qsTr("Classic (&3 Players)")
             }
             MenuItemGameVariant {
                 gameVariant: "classic"
-                text: Logic.removeShortcut(qsTr("Classic (&4 Players)"))
+                text: qsTr("Classic (&4 Players)")
             }
         }
         MenuItemGameVariant {
             gameVariant: "duo"
-            text: Logic.removeShortcut(qsTr("&Duo"))
+            text: qsTr("&Duo")
         }
         MenuItemGameVariant {
             gameVariant: "junior"
-            text: Logic.removeShortcut(qsTr("&Junior"))
+            text: qsTr("&Junior")
         }
         Pentobi.Menu {
-            title: Logic.removeShortcut(qsTr("&Trigon"))
+            title: qsTr("&Trigon")
 
             MenuItemGameVariant {
                 gameVariant: "trigon_2"
-                text: Logic.removeShortcut(qsTr("Trigon (&2 Players)"))
+                text: qsTr("Trigon (&2 Players)")
             }
             MenuItemGameVariant {
                 gameVariant: "trigon_3"
-                text: Logic.removeShortcut(qsTr("Trigon (&3 Players)"))
+                text: qsTr("Trigon (&3 Players)")
             }
             MenuItemGameVariant {
                 gameVariant: "trigon"
-                text: Logic.removeShortcut(qsTr("Trigon (&4 Players)"))
+                text: qsTr("Trigon (&4 Players)")
             }
         }
         Pentobi.Menu {
-            title: Logic.removeShortcut(qsTr("&Nexos"))
+            title: qsTr("&Nexos")
 
             MenuItemGameVariant {
                 gameVariant: "nexos_2"
-                text: Logic.removeShortcut(qsTr("Nexos (&2 Players)"))
+                text: qsTr("Nexos (&2 Players)")
             }
             MenuItemGameVariant {
                 gameVariant: "nexos"
-                text: Logic.removeShortcut(qsTr("Nexos (&4 Players)"))
+                text: qsTr("Nexos (&4 Players)")
             }
         }
         Pentobi.Menu {
-            title: Logic.removeShortcut(qsTr("&GembloQ"))
+            title: qsTr("&GembloQ")
 
             MenuItemGameVariant {
                 gameVariant: "gembloq_2"
-                text: Logic.removeShortcut(qsTr("GembloQ (&2 Players, 2 Colors)"))
+                text: qsTr("GembloQ (&2 Players, 2 Colors)")
             }
             MenuItemGameVariant {
                 gameVariant: "gembloq_2_4"
-                text: Logic.removeShortcut(qsTr("GembloQ (2 &Players, 4 Colors)"))
+                text: qsTr("GembloQ (2 &Players, 4 Colors)")
             }
             MenuItemGameVariant {
                 gameVariant: "gembloq_3"
-                text: Logic.removeShortcut(qsTr("GembloQ (&3 Players)"))
+                text: qsTr("GembloQ (&3 Players)")
             }
             MenuItemGameVariant {
                 gameVariant: "gembloq"
-                text: Logic.removeShortcut(qsTr("GembloQ (&4 Players)"))
+                text: qsTr("GembloQ (&4 Players)")
             }
         }
         Pentobi.Menu {
-            title: Logic.removeShortcut(qsTr("C&allisto"))
+            title: qsTr("C&allisto")
 
             MenuItemGameVariant {
                 gameVariant: "callisto_2"
-                text: Logic.removeShortcut(qsTr("Callisto (&2 Players, 2 Colors)"))
+                text: qsTr("Callisto (&2 Players, 2 Colors)")
             }
             MenuItemGameVariant {
                 gameVariant: "callisto_2_4"
-                text: Logic.removeShortcut(qsTr("Callisto (2 &Players, 4 Colors)"))
+                text: qsTr("Callisto (2 &Players, 4 Colors)")
             }
             MenuItemGameVariant {
                 gameVariant: "callisto_3"
-                text: Logic.removeShortcut(qsTr("Callisto (&3 Players)"))
+                text: qsTr("Callisto (&3 Players)")
             }
             MenuItemGameVariant {
                 gameVariant: "callisto"
-                text: Logic.removeShortcut(qsTr("Callisto (&4 Players)"))
+                text: qsTr("Callisto (&4 Players)")
             }
         }
     }
@@ -116,7 +116,7 @@ Pentobi.Menu {
     Pentobi.Menu {
         id: recentFiles
 
-        title: Logic.removeShortcut(qsTr("Open R&ecent"))
+        title: qsTr("Open R&ecent")
         enabled: gameModel.recentFiles.length > 0
 
         Instantiator {
@@ -136,20 +136,20 @@ Pentobi.Menu {
         }
     }
     Pentobi.MenuItem {
-        text: Logic.removeShortcut(qsTr("Open from &Clipboard"))
+        text: qsTr("Open from &Clipboard")
         onTriggered: Logic.openClipboard()
     }
     Pentobi.MenuItem { action: actions.actionSave }
     Pentobi.MenuItem { action: actions.actionSaveAs }
     Pentobi.Menu {
-        title: Logic.removeShortcut(qsTr("&Export"))
+        title: qsTr("&Export")
 
         Pentobi.MenuItem {
-            text: Logic.removeShortcut(qsTr("&Image"))
+            text: qsTr("&Image")
             onTriggered: exportImageDialog.open()
         }
         Pentobi.MenuItem {
-            text: Logic.removeShortcut(qsTr("&ASCII Art"))
+            text: qsTr("&ASCII Art")
             onTriggered: asciiArtSaveDialog.open()
         }
     }
