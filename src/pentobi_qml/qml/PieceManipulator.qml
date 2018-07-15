@@ -15,7 +15,7 @@ Item {
     property real buttonSize: (isDesktop ? 0.14 : 0.20) * root.width
 
     property real animationsDuration:
-        ! visible || ! gameDisplay.enableAnimations ? 0 : fastMove ? 20 : 300
+        ! visible || ! gameDisplay.enableAnimations ? 0 : fastMove ? 50 : 300
 
     signal piecePlayed
 
