@@ -77,14 +77,13 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 0
         Keys.onPressed: altKeyPressed = (event.key === Qt.Key_Alt)
-        Keys.onReleased:
+        Keys.onReleased: {
             if (event.key === Qt.Key_Alt) {
                 // We want the Alt key open the menu but not if it is used in a
                 // combination used by the window manager (e.g. Alt-Tab)
                 if (altKeyPressed)  {
                     toolBar.clickMenuButton()
                     event.accepted = true
-                    altKeyPressed = false
                 }
             }
             else if (event.key === Qt.Key_Back) {
@@ -98,6 +97,8 @@ ApplicationWindow {
                     }
                     event.accepted = true
                 }
+            }
+            altKeyPressed = false
         }
 
         Pentobi.ToolBar {

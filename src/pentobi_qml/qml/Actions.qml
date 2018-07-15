@@ -74,12 +74,12 @@ QtObject {
         onTriggered: Logic.findNextComment()
     }
     property Action actionFlipX: Action {
-        shortcut: noPopupOpen ? "Shift+Up" : ""
+        shortcut: noPopupOpen ? "Alt+Up" : ""
         enabled: gameDisplay.pickedPiece
         onTriggered: gameDisplay.pickedPiece.pieceModel.flipAcrossX()
     }
     property Action actionFlipY: Action {
-        shortcut: noPopupOpen ? "Shift+Down" : ""
+        shortcut: noPopupOpen ? "Alt+Down" : ""
         enabled: gameDisplay.pickedPiece
         onTriggered: gameDisplay.pickedPiece.pieceModel.flipAcrossY()
     }
@@ -216,12 +216,12 @@ QtObject {
         }
     }
     property Action actionRotateLeft: Action {
-        shortcut: noPopupOpen ? "Shift+Left" : ""
+        shortcut: noPopupOpen ? "Alt+Left" : ""
         enabled: gameDisplay.pickedPiece
         onTriggered: gameDisplay.pickedPiece.pieceModel.rotateLeft()
     }
     property Action actionRotateRight: Action {
-        shortcut: noPopupOpen ? "Shift+Right" : ""
+        shortcut: noPopupOpen ? "Alt+Right" : ""
         enabled: gameDisplay.pickedPiece
         onTriggered: gameDisplay.pickedPiece.pieceModel.rotateRight()
     }
