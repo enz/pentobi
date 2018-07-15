@@ -118,9 +118,13 @@ function movePiece(x, y) {
                     board,
                     pieceManipulator.width / 2 + x - pieceManipulator.x,
                     pieceManipulator.height / 2 + y - pieceManipulator.y)
-        if (! board.contains(pos))
-            // Would be outside board after moving
-            return
+        pos.x = Math.max(0, pos.x)
+        pos.x = Math.min(board.width - 1, pos.x)
+        pos.y = Math.max(0, pos.y)
+        pos.y = Math.min(board.height - 1, pos.y)
+        pos = mapFromItem(board, pos.x, pos.y)
+        x = pos.x - pieceManipulator.width / 2
+        y = pos.y - pieceManipulator.height / 2
         fastMove = true
     }
     pieceManipulator.fastMove = fastMove
@@ -129,20 +133,14 @@ function movePiece(x, y) {
     pieceManipulator.fastMove = false
 }
 
-function movePieceDown() {
-    movePiece(pieceManipulator.x, pieceManipulator.y + board.gridHeight / 2)
+function shiftPiece(dx, dy) {
+    movePiece(pieceManipulator.x + dx * board.gridWidth / 2,
+              pieceManipulator.y + dy * board.gridHeight / 2)
 }
 
-function movePieceLeft() {
-    movePiece(pieceManipulator.x - board.gridWidth / 2, pieceManipulator.y)
-}
-
-function movePieceRight() {
-    movePiece(pieceManipulator.x + board.gridWidth / 2, pieceManipulator.y)
-}
-
-function movePieceUp() {
-    movePiece(pieceManipulator.x, pieceManipulator.y - board.gridHeight / 2)
+function shiftPieceFast(dx, dy) {
+    movePiece(pieceManipulator.x + dx * board.width / 4,
+              pieceManipulator.y + dy * board.height / 4)
 }
 
 function pickPiece(piece) {

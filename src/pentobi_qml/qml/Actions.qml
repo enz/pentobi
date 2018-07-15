@@ -123,19 +123,35 @@ QtObject {
     }
     property Action actionMovePieceDown: Action {
         shortcut: noPopupOpen ? "Down" : ""
-        onTriggered: gameDisplay.movePieceDown()
+        onTriggered: gameDisplay.shiftPiece(0, 1)
+    }
+    property Action actionMovePieceDownFast: Action {
+        shortcut: noPopupOpen ? "Shift+Down" : ""
+        onTriggered: gameDisplay.shiftPieceFast(0, 1)
     }
     property Action actionMovePieceLeft: Action {
         shortcut: noPopupOpen ? "Left" : ""
-        onTriggered: gameDisplay.movePieceLeft()
+        onTriggered: gameDisplay.shiftPiece(-1, 0)
+    }
+    property Action actionMovePieceLeftFast: Action {
+        shortcut: noPopupOpen ? "Shift+Left" : ""
+        onTriggered: gameDisplay.shiftPieceFast(-1, 0)
     }
     property Action actionMovePieceRight: Action {
         shortcut: noPopupOpen ? "Right" : ""
-        onTriggered: gameDisplay.movePieceRight()
+        onTriggered: gameDisplay.shiftPiece(1, 0)
+    }
+    property Action actionMovePieceRightFast: Action {
+        shortcut: noPopupOpen ? "Shift+Right" : ""
+        onTriggered: gameDisplay.shiftPieceFast(1, 0)
     }
     property Action actionMovePieceUp: Action {
         shortcut: noPopupOpen ? "Up" : ""
-        onTriggered: gameDisplay.movePieceUp()
+        onTriggered: gameDisplay.shiftPiece(0, -1)
+    }
+    property Action actionMovePieceUpFast: Action {
+        shortcut: noPopupOpen ? "Shift+Up" : ""
+        onTriggered: gameDisplay.shiftPieceFast(0, -1)
     }
     property Action actionNew: Action {
         shortcut: "Ctrl+N"

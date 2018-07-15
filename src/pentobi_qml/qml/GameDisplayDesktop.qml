@@ -44,10 +44,8 @@ Item
     function destroyPieces() { Logic.destroyPieces() }
     function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
     function pickPieceAtBoard(piece) { Logic.pickPieceAtBoard(piece) }
-    function movePieceDown() { Logic.movePieceDown() }
-    function movePieceLeft() { Logic.movePieceLeft() }
-    function movePieceRight() { Logic.movePieceRight() }
-    function movePieceUp() { Logic.movePieceUp() }
+    function shiftPiece(dx, dy) { Logic.shiftPiece(dx, dy) }
+    function shiftPieceFast(dx, dy) { Logic.shiftPieceFast(dx, dy) }
     function playPickedPiece() { Logic.playPickedPiece() }
     function showToPlay() { }
     function showAnalyzeGame() { pickedPiece = null }
