@@ -56,6 +56,7 @@ Pentobi.Dialog {
             focus: ! selectExisting && ! isAndroid
             width: parent.width
             enabled: ! selectExisting
+            onAccepted: if (name.trim().length > 0) root.accept()
             Component.onCompleted: nameField.cursorPosition = nameField.length
         }
         RowLayout {
