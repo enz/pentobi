@@ -33,6 +33,7 @@ MenuItem {
     contentItem: RowLayout {
         spacing: 0
         opacity: enabled ? 1.0 : 0.3
+        anchors.fill: parent
 
         Item { implicitWidth: root.indicator.width }
         Text {
@@ -49,6 +50,7 @@ MenuItem {
             font: root.font
             elide: Text.ElideRight
             color: "black"
+            Layout.alignment: Qt.AlignVCenter
             Layout.fillWidth: true
         }
         Text {
@@ -64,6 +66,7 @@ MenuItem {
             }
             font: root.font
             color: "#666"
+            Layout.alignment: Qt.AlignVCenter
         }
         Item { implicitWidth: root.arrow.width + 3 }
     }
