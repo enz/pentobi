@@ -60,7 +60,7 @@ Pentobi.Dialog {
 
     Column {
         width: Math.min(nameField.height * 20, 0.9 * rootWindow.width)
-        spacing: Math.round(Screen.pixelDensity * 1.5)
+        spacing: 0.2 * font.pixelSize
 
         TextField {
             id: nameField
@@ -104,17 +104,16 @@ Pentobi.Dialog {
         ListView {
             id: view
 
-            height: Math.min(Screen.pixelDensity * 80, 0.4 * rootWindow.height)
+            height: Math.min(font.pixelSize* 40, 0.4 * rootWindow.height)
             width: parent.width
             clip: true
             model: folderModel
             boundsBehavior: Flickable.StopAtBounds
             highlight: Rectangle { color: "#ddd" }
             highlightMoveDuration: 0
-            delegate: Button {
+            delegate: AbstractButton {
                 width: view.width
                 height: 2 * font.pixelSize
-                flat: true
                 onActiveFocusChanged: if (activeFocus) view.currentIndex = index
                 contentItem: Row {
                     Image {

@@ -20,7 +20,7 @@ Pentobi.Dialog {
 
     Column
     {
-        spacing: Screen.pixelDensity * 2
+        spacing: 0.3 * font.pixelSize
 
         GridLayout {
             columns: 2
@@ -71,12 +71,13 @@ Pentobi.Dialog {
                 Layout.fillWidth: true
             }
         }
-
+        Item { height: 0.3 * font.pixelSize }
         Column {
+            spacing: Math.round(0.3 * font.pixelSize)
+
             Label {
                 visible: history.length > 1
                 text: qsTr("Recent development:")
-                Layout.topMargin: Math.round(Screen.pixelDensity)
             }
             RatingGraph {
                 visible: history.length > 1

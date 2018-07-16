@@ -16,7 +16,7 @@ Pentobi.Dialog {
     Column
     {
         width: Math.min(initialRatingLabel.height * 25, 0.9 * rootWindow.width)
-        spacing: Screen.pixelDensity * 2
+        spacing: 0.3 * font.pixelSize
 
         Label {
             text: qsTr("You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.")

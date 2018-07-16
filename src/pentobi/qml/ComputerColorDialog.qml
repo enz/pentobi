@@ -13,7 +13,7 @@ Pentobi.Dialog {
     footer: OkCancelButtons { }
 
     Column {
-        spacing: Math.round(Screen.pixelDensity * 1.5)
+        spacing: 0.1 * font.pixelSize
         width: Math.min(label.height * 15, 0.9 * rootWindow.width)
 
         Label {
