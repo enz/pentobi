@@ -3,7 +3,7 @@ import QtQuick.Controls 2.2
 import "." as Pentobi
 
 Pentobi.Dialog {
-    title: isAndroid ? "" : qsTr("Export Image")
+    title: isDesktop ? qsTr("Export Image") : ""
     footer: OkCancelButtons { }
     onAccepted: {
         exportImageWidth = parseInt(textField.text)

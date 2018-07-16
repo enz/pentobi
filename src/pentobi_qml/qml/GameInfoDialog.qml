@@ -14,7 +14,7 @@ Pentobi.Dialog {
     property alias round: textFieldRound.text
     property string gameVariant: gameModel.gameVariant
 
-    title: isAndroid ? "" : qsTr("Game Info")
+    title: isDesktop ? qsTr("Game Info") : ""
     footer: OkCancelButtons { }
     onAccepted: {
         gameModel.playerName0 = playerName0

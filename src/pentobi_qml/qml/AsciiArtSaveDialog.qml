@@ -3,7 +3,7 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.FileDialog {
-    title: isAndroid ? "" : qsTr("Export ASCII Art")
+    title: isDesktop ? qsTr("Export ASCII Art") : ""
     selectExisting: false
     nameFilterText: qsTr("Text files (*.txt)")
     nameFilter: "*.png"

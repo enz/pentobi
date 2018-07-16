@@ -9,7 +9,7 @@ Pentobi.Dialog {
     property alias computerPlays2: checkBox2.checked
     property alias computerPlays3: checkBox3.checked
 
-    title: isAndroid ? "" : qsTr("Computer Colors")
+    title: isDesktop ? qsTr("Computer Colors") : ""
     footer: OkCancelButtons { }
 
     Column {

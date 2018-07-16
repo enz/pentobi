@@ -10,7 +10,7 @@ Pentobi.Dialog {
     property var history: ratingModel.history
 
     //: Window title for the rating dialog.
-    title: isAndroid ? "" : qsTr("Rating")
+    title: isDesktop ? qsTr("Rating") : ""
     footer: OkButton { }
     onVisibleChanged:
         if (! visible) {

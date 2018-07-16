@@ -6,7 +6,7 @@ import "." as Pentobi
 import "Main.js" as Logic
 
 Pentobi.Dialog {
-    title: isAndroid ? "" : qsTr("Initial Rating")
+    title: isDesktop ? qsTr("Initial Rating") : ""
     footer: OkCancelButtons { }
     onAccepted: {
         ratingModel.setInitialRating(Math.round(slider.value))

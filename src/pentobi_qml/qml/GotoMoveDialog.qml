@@ -5,7 +5,7 @@ import "." as Pentobi
 Pentobi.Dialog {
     id: root
 
-    title: isAndroid ? "" : qsTr("Go to Move")
+    title: isDesktop ? qsTr("Go to Move") : ""
     footer: OkCancelButtons { }
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
