@@ -53,7 +53,6 @@ AnalyzeGameModel::~AnalyzeGameModel()
 
 void AnalyzeGameModel::asyncRun(const Game* game, Search* search)
 {
-    size_t nuSimulations = 3000;
     auto progressCallback =
         [&](unsigned movesAnalyzed, unsigned totalMoves)
         {
@@ -63,7 +62,7 @@ void AnalyzeGameModel::asyncRun(const Game* game, Search* search)
             QMetaObject::invokeMethod(this, "updateElements",
                                       Qt::BlockingQueuedConnection);
         };
-    m_analyzeGame.run(*game, *search, nuSimulations, progressCallback);
+    m_analyzeGame.run(*game, *search, m_nuSimulations, progressCallback);
 }
 
 void AnalyzeGameModel::autoSave(GameModel* gameModel)
@@ -238,8 +237,12 @@ void AnalyzeGameModel::setMarkMoveNumber(int markMoveNumber)
     emit markMoveNumberChanged();
 }
 
-void AnalyzeGameModel::start(GameModel* gameModel, PlayerModel* playerModel)
+void AnalyzeGameModel::start(GameModel* gameModel, PlayerModel* playerModel,
+                             int nuSimulations)
 {
+    if (nuSimulations <= 0)
+        return;
+    m_nuSimulations = static_cast<size_t>(nuSimulations);
     cancel();
     clear_abort();
     auto future = QtConcurrent::run(this, &AnalyzeGameModel::asyncRun,

@@ -234,6 +234,7 @@ ApplicationWindow {
     DialogLoader { id: saveDialog; component: Component { SaveDialog { } } }
     DialogLoader { id: infoMessage; component: Component { Pentobi.MessageDialog { } } }
     DialogLoader { id: questionMessage; component: Component { Pentobi.QuestionDialog { } } }
+    DialogLoader { id: analyzeDialog; component: Component { Pentobi.AnalyzeDialog { } } }
     Loader {
         id: helpWindow
 

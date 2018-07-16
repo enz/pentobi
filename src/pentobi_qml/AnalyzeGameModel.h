@@ -73,7 +73,8 @@ public:
 
     Q_INVOKABLE void markCurrentMove(GameModel* gameModel);
 
-    Q_INVOKABLE void start(GameModel* gameModel, PlayerModel* playerModel);
+    Q_INVOKABLE void start(GameModel* gameModel, PlayerModel* playerModel,
+                           int nuSimulations);
 
 
     bool isRunning() const { return m_isRunning; }
@@ -95,6 +96,8 @@ private:
     bool m_isRunning = false;
 
     int m_markMoveNumber = -1;
+
+    size_t m_nuSimulations;
 
     QList<AnalyzeGameElement*> m_elements;
 

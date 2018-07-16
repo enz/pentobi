@@ -81,6 +81,29 @@
     </message>
 </context>
 <context>
+    <name>AnalyzeDialog</name>
+    <message>
+        <source>Analyze Game</source>
+        <translation>Analyser spill</translation>
+    </message>
+    <message>
+        <source>Analysis speed:</source>
+        <translation>Analysehastighet:</translation>
+    </message>
+    <message>
+        <source>Fast</source>
+        <translation>Rask</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>Normal</translation>
+    </message>
+    <message>
+        <source>Slow</source>
+        <translation>Treg</translation>
+    </message>
+</context>
+<context>
     <name>AnalyzeGame</name>
     <message>
         <source>(No analysis)</source>
@@ -1027,7 +1050,7 @@
     </message>
     <message>
         <source>2</source>
-        <extracomment>Mnemonic for menu item Classic/Trigon/Nexos (2 Players) and GambloQ/Callisto (&amp;2 Players, 2 Colors). Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Classic/Trigon/Nexos (2 Players) and GambloQ/Callisto (2 Players, 2 Colors). Leave empty for no mnemonic.</extracomment>
         <translation>2</translation>
     </message>
     <message>

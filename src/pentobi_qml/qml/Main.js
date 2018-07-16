@@ -9,14 +9,14 @@ function about() {
              "<br><a href=\"" + url + "\">" + url + "</a></p>")
 }
 
-function analyzeGame() {
+function analyzeGame(nuSimulations) {
     if (! gameModel.isMainVar) {
         showInfo(qsTr("Game analysis is only possible in main variation."))
         return
     }
     gameDisplay.showAnalyzeGame()
     Logic.cancelRunning()
-    analyzeGameModel.start(gameModel, playerModel)
+    analyzeGameModel.start(gameModel, playerModel, nuSimulations)
 }
 
 function autoSaveAndQuit() {
