@@ -6,6 +6,10 @@
 
 #include "GameModel.h"
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <cerrno>
 #include <cmath>
 #include <cstring>

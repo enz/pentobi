@@ -7,6 +7,11 @@
 #ifndef PENTOBI_QML_HELP_FILE_EXTRACTOR_H
 #define PENTOBI_QML_HELP_FILE_EXTRACTOR_H
 
+// Needed in the header because moc_*.cpp does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <QObject>
 #include <QUrl>
 

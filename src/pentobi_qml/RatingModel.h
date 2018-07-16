@@ -7,8 +7,12 @@
 #ifndef PENTOBI_QML_RATING_MODEL_H
 #define PENTOBI_QML_PLAYER_MODEL_H
 
-#include <QObject>
+// Needed in the header because moc_*.cpp does not include config.h
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
+#include <QObject>
 #include "libboardgame_base/Rating.h"
 
 class GameModel;
