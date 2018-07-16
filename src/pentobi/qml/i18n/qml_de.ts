@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Slow</source>
-        <translation>Slow</translation>
+        <translation>Langsam</translation>
     </message>
 </context>
 <context>
