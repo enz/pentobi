@@ -52,7 +52,7 @@ ApplicationWindow {
         Logic.init()
         show()
     }
-    Component.onDestruction: Logic.autoSave()
+    Component.onDestruction: { Logic.cancelRunning(); Logic.autoSave() }
 
     ColumnLayout {
         anchors.fill: parent

@@ -7,6 +7,7 @@ Desktop version:
 
 Android version:
 
+* Program could hang or crash if quit during running game analysis.
 * Board was not updated if it became empty after opening a file failed.
 * Running computer move was not aborted after opening a file failed.
 * Disable menu item Analyze Game if game has no moves.
