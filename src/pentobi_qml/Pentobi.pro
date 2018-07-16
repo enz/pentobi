@@ -1,3 +1,9 @@
+#############################################################################
+# The preferred way of building Pentobi is using CMake. This project file
+# exists only because building, deploying and debugging for Android is not
+# yet functional for CMake projects in QtCreator.
+#############################################################################
+
 lessThan(QT_MAJOR_VERSION, 5) {
     error("Qt >=5.11 required")
 }
