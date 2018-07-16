@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="16" width="16" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
- <rect x="4" y=".5" width="8" height="2" fill="#9b9f95" stroke="#878A84"/>
- <path d="m6 13-5-11 .5-1.5h2.5l6 12z" fill="#babdb6" stroke="#878A84" stroke-linejoin="round"/>
- <path d="m10 13 5-11-.5-1.5h-2.5l-6 12z" fill="#babdb6" stroke="#878A84" stroke-linejoin="round"/>
- <circle cy="11" cx="8" r="5" fill="#a08300"/>
- <circle stroke="#edd400" cy="11" cx="8" r="3.5" fill="#fce94f"/>
-</svg>

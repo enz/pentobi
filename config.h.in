@@ -19,12 +19,3 @@
 
 /* Build for systems with low memory and slow CPU. */
 #cmakedefine01 PENTOBI_LOW_RESOURCES
-
-/* Directory containing opening books. */
-#cmakedefine PENTOBI_BOOKS_DIR "@PENTOBI_BOOKS_DIR@"
-
-/** Location of the Pentobi user manual. */
-#cmakedefine PENTOBI_HELP_DIR "@PENTOBI_HELP_DIR@"
-
-/** Location of the translations directory. */
-#cmakedefine PENTOBI_TRANSLATIONS "@PENTOBI_TRANSLATIONS@"

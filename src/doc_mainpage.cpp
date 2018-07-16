@@ -37,29 +37,14 @@
       Tool for learning the weights used for move priors in the
       Monte-Carlo tree search in libpentobi_mcts
 
-    @section mainpage_gui Pentobi QWidgets GUI Modules
+    @section mainpage_gui Pentobi GUI Modules
 
-    The Pentobi QtWidgets GUI modules implement a user interface based on
-    <a href="http://qt.digia.com/">Qt</a>/QtWidgets.
-    They are currently used for the desktop versions of Pentobi.
-    They may become obsolete in the future, once the QML GUI modules
-    (@ref mainpage_gui_qml) provide the same functionality.
+    The Pentobi GUI modules implement a user interface based on
+    <a href="https://www.qt.io/">Qt</a>/QtQuick.
+    They are used for the desktop versions of Pentobi.
 
     - convert -
       Small helper program to convert SVG icons to bitmaps at build time
-    - libpentobi_gui -
-      GUI functionality that could be reused for other projects
     - pentobi -
-      Main program that provides a GUI for the player in libpentobi_mcts
-
-    @section mainpage_gui_qml Pentobi QML GUI Modules
-
-    The Pentobi QML GUI modules implement a user interface based on
-    Qt Quick / QML. They currently support only a subset of the features
-    of the QWidgets-based GUI (@ref mainpage_gui) but provide fluid
-    animations and are usable on touch-screens. They are currently
-    used for the Android version of Pentobi.
-
-    - pentobi_qml -
       Main program that provides a GUI for the player in libpentobi_mcts
 */

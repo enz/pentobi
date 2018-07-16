@@ -25,10 +25,5 @@ endif()
 
 if (PENTOBI_BUILD_GUI)
   add_subdirectory(convert)
-  add_subdirectory(libpentobi_gui)
   add_subdirectory(pentobi)
-endif()
-
-if (PENTOBI_BUILD_QML)
-  add_subdirectory(pentobi_qml)
 endif()

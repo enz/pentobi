@@ -1,5 +1,0 @@
-# Config file to test the executable without installation
-BooksDir=@CMAKE_SOURCE_DIR@/src/books
-HelpDir=@CMAKE_SOURCE_DIR@/src/pentobi/help
-TranslationsPentobiDir=@CMAKE_BINARY_DIR@/src/pentobi
-TranslationsLibPentobiGuiDir=@CMAKE_BINARY_DIR@/src/libpentobi_gui

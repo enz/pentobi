@@ -1,15 +1,28 @@
 Version 15.UNKNOWN (master)
 ===========================
 
-Desktop version:
-
+* The desktop version of Pentobi now uses the same QtQuick-based GUI as
+  the Android version, which makes the desktop version support all
+  features of the Android version like piece animations, dark and light
+  themes and more of the state saved between sessions (e.g. position in
+  game tree, modifications to loaded file, current analysis)
+* The minimum required Qt version is now 5.11 also for the desktop version
+  See INSTALL for the new run-time and compile-time dependencies.
+* The installation directory /usr/share/pentobi does not exist anymore.
+  The translations, opening books and user manual are compiled as resources
+  into the binary executable.
 * Gnome and KDE thumbnailers have been removed because they depended on
-  the code of the QWidgets-based GUI, which will be replaced by the
-  QtQuick-based GUI of the Android version in one of the next releases.
-
-Android version:
-
-* New theme with colors optimized for colorblindness.
+  the code of the old QWidgets-based GUI.
+* New themes optimized for colorblindness.
+* Additional warning dialogs to reduce the likelihood that an autosaved
+  game is lost, for example because it was changed by another instance
+  of Pentobi.
+* Analysis speed dialog is now also available on Android (only fast and
+  normal speed)
+* The translation source strings for menu items and actions no longer use
+  an ampersand to mark a mnemonic but a separate translation string for
+  the mnemonic. Ampersands caused problems with searches in Weblate
+  (https://github.com/WeblateOrg/weblate/issues/1861)
 
 
 Version 15.0.UNKNOWN (v15-fixes)
