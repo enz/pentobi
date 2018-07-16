@@ -101,60 +101,62 @@ Pentobi.Dialog {
                 if (currentIndex == 0) folderModel.nameFilters = [ root.nameFilter ]
                 else folderModel.nameFilters = [ "*" ]
         }
-        ListView {
-            id: view
-
+        Rectangle {
             height: Math.min(font.pixelSize* 40, 0.4 * rootWindow.height)
             width: parent.width
-            clip: true
-            model: folderModel
-            boundsBehavior: Flickable.StopAtBounds
-            delegate: AbstractButton {
-                width: view.width
-                height: 2 * font.pixelSize
-                onActiveFocusChanged: if (activeFocus) view.currentIndex = index
-                background: Rectangle {
-                    anchors.fill: parent
-                    color: view.currentIndex == index ? "#ddd" : "white"
-                }
-                contentItem: Row {
-                    Image {
-                        anchors.verticalCenter: parent.verticalCenter
-                        visible: folderModel.isFolder(index)
-                        width: 0.8 * font.pixelSize; height: width
-                        source: "icons/filedialog-folder.svg"
-                        sourceSize { width: width; height: height }
-                    }
-                    Text {
-                        text: index < 0 ? "" : fileName
-                        anchors.verticalCenter: parent.verticalCenter
-                        leftPadding: 0.2 * font.pixelSize
-                        color: "black"
-                        horizontalAlignment: Text.AlignHLeft
-                        verticalAlignment: Text.AlignVCenter
-                        elide: Text.ElideRight
-                    }
-                }
-                onClicked: {
-                    view.currentIndex = index
-                    if (folderModel.isFolder(index)) {
-                        if (! folderModel.folder.toString().endsWith("/"))
-                            folderModel.folder = folderModel.folder + "/"
-                        folderModel.folder = folderModel.folder + fileName
-                        view.currentIndex = -1
-                    }
-                    else
-                        name = fileName
-                }
-                onDoubleClicked: root.accept()
-            }
+            color: "white"
+            ListView {
+                id: view
 
-            FolderListModel {
-                id: folderModel
+                anchors.fill: parent
+                clip: true
+                model: folderModel
+                boundsBehavior: Flickable.StopAtBounds
+                highlight: Rectangle { color: "#ddd" }
+                highlightMoveDuration: 0
+                delegate: AbstractButton {
+                    width: view.width
+                    height: 2 * font.pixelSize
+                    onActiveFocusChanged: if (activeFocus) view.currentIndex = index
+                    contentItem: Row {
+                        Image {
+                            anchors.verticalCenter: parent.verticalCenter
+                            visible: folderModel.isFolder(index)
+                            width: 0.8 * font.pixelSize; height: width
+                            source: "icons/filedialog-folder.svg"
+                            sourceSize { width: width; height: height }
+                        }
+                        Text {
+                            text: index < 0 ? "" : fileName
+                            anchors.verticalCenter: parent.verticalCenter
+                            leftPadding: 0.2 * font.pixelSize
+                            color: "black"
+                            horizontalAlignment: Text.AlignHLeft
+                            verticalAlignment: Text.AlignVCenter
+                            elide: Text.ElideRight
+                        }
+                    }
+                    onClicked: {
+                        view.currentIndex = index
+                        if (folderModel.isFolder(index)) {
+                            if (! folderModel.folder.toString().endsWith("/"))
+                                folderModel.folder = folderModel.folder + "/"
+                            folderModel.folder = folderModel.folder + fileName
+                            view.currentIndex = -1
+                        }
+                        else
+                            name = fileName
+                    }
+                    onDoubleClicked: root.accept()
+                }
 
-                folder: root.folder
-                nameFilters: [ root.nameFilter ]
-                showDirsFirst: true
+                FolderListModel {
+                    id: folderModel
+
+                    folder: root.folder
+                    nameFilters: [ root.nameFilter ]
+                    showDirsFirst: true
+                }
             }
         }
     }
