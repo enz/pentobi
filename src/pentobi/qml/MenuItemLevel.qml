@@ -5,7 +5,7 @@ Pentobi.MenuItem {
     property int level
 
     enabled: ! isRated
-    text: qsTr("Level &%1").arg(level)
+    text: addMnemonic(qsTr("Level %1").arg(level), level.toString())
     checkable: true
     autoExclusive: true
     checked: playerModel.level === level

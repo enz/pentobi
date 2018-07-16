@@ -1229,8 +1229,8 @@
 <context>
     <name>MenuItemLevel</name>
     <message>
-        <source>Level &amp;%1</source>
-        <translation>Nivå &amp;%1</translation>
+        <source>Level %1</source>
+        <translation>Nivå %1</translation>
     </message>
 </context>
 <context>

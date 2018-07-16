@@ -13,7 +13,7 @@ equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 11) {
 
 TEMPLATE = app
 
-QT += qml quick svg concurrent webview
+QT += qml quick svg concurrent webview quickcontrols2
 android {
     QT += androidextras
 }

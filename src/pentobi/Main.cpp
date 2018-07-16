@@ -11,6 +11,7 @@
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QTranslator>
+#include <QtQuickControls2/QQuickStyle>
 #include <QtQml>
 #include <QtWebView/QtWebView>
 #include "AnalyzeGameModel.h"
@@ -115,6 +116,9 @@ int main(int argc, char *argv[])
             throw runtime_error("Too many arguments");
         if (! args.empty())
             initialFile = args.at(0);
+#ifndef Q_OS_ANDROID
+        QQuickStyle::setStyle("Fusion");
+#endif
         QQmlApplicationEngine engine;
         engine.rootContext()->setContextProperty("initialFile", initialFile);
         engine.load(QUrl("qrc:///qml/Main.qml"));

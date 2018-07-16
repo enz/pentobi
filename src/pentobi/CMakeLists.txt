@@ -73,6 +73,7 @@ target_link_libraries(pentobi
     Qt5::Concurrent
     Qt5::Gui
     Qt5::Qml
+    Qt5::QuickControls2
     Qt5::Svg
     Qt5::WebView
     Threads::Threads
