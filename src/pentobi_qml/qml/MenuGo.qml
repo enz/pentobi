@@ -4,11 +4,33 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: qsTr("G&o")
+    title: addMnemonic(qsTr("Go"),
+                       //: Mnemonic for menu Go. Leave empty for no mnemonic.
+                       qsTr("O"))
 
-    Pentobi.MenuItem { action: actions.actionGoto }
-    Pentobi.MenuItem { action: actions.actionBackToMainVar }
-    Pentobi.MenuItem { action: actions.actionBeginningOfBranch }
+    Pentobi.MenuItem {
+        action: actions.actionGoto
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Go to Move. Leave empty for no mnemonic.
+                          qsTr("G"))
+    }
+    Pentobi.MenuItem {
+        action: actions.actionBackToMainVar
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Back to Main Variation. Leave empty for no mnemonic.
+                          qsTr("M"))
+    }
+    Pentobi.MenuItem {
+        action: actions.actionBeginningOfBranch
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Beginning Of Branch. Leave empty for no mnemonic.
+                          qsTr("B"))
+    }
     MenuSeparator { }
-    Pentobi.MenuItem { action: actions.actionFindNextComment }
+    Pentobi.MenuItem {
+        action: actions.actionFindNextComment
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Find Next Comment. Leave empty for no mnemonic.
+                          qsTr("C"))
+    }
 }

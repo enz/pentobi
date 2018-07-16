@@ -5,6 +5,7 @@ import QtQuick.Window 2.0
 import Qt.labs.folderlistmodel 2.1
 import "." as Pentobi
 import "Main.js" as Logic
+import "Controls.js" as PentobiControls
 
 Pentobi.Dialog {
     id: root
@@ -22,11 +23,22 @@ Pentobi.Dialog {
     footer: DialogButtonBox {
         Button {
             enabled: name.trim().length > 0
-            text: Logic.removeShortcut(selectExisting ? qsTr("&Open") : qsTr("&Save"))
+            text: selectExisting ?
+                      PentobiControls.addMnemonic(
+                          qsTr("Open"),
+                          //: Mnemonic for button Open. Leave empty for no mnemonic.
+                          qsTr("O")) :
+                      PentobiControls.addMnemonic(
+                          qsTr("Save"),
+                          //: Mnemonic for button Save. Leave empty for no mnemonic.
+                          qsTr("S"))
             DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
         }
         Button {
-            text: Logic.removeShortcut(qsTr("&Cancel"))
+            text: PentobiControls.addMnemonic(
+                      qsTr("Cancel"),
+                      //: Mnemonic for button Cancel. Leave empty for no mnemonic.
+                      qsTr("C"))
             DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
         }
     }

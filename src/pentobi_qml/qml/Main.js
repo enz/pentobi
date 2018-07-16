@@ -604,12 +604,6 @@ function reloadFile() {
     openFile(gameModel.file)
 }
 
-// Removes ampersand from menu text.
-// On Android, we don't need shortcuts.
-function removeShortcut(text) {
-    return isAndroid ? text.replace("&", "") : text
-}
-
 function save() {
     if (gameModel.checkFileModifiedOutside())
         showQuestion(qsTr("File has been modified by another application. Save anyway?"),

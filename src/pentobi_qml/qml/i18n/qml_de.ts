@@ -4,80 +4,80 @@
 <context>
     <name>Actions</name>
     <message>
-        <source>Computer &amp;Colors</source>
-        <translation>Computer-&amp;Farben</translation>
+        <source>New</source>
+        <translation>Neu</translation>
     </message>
     <message>
-        <source>&amp;New</source>
-        <translation>&amp;Neu</translation>
+        <source>Play</source>
+        <translation>Spielen</translation>
     </message>
     <message>
-        <source>&amp;Play</source>
-        <translation>&amp;Spielen</translation>
+        <source>Rated Game</source>
+        <translation>Gewertetes Spiel</translation>
     </message>
     <message>
-        <source>&amp;Quit</source>
-        <translation>&amp;Beenden</translation>
+        <source>Game Info</source>
+        <translation>Spielinformation</translation>
     </message>
     <message>
-        <source>&amp;Undo Move</source>
-        <translation>Zug &amp;rückgängig</translation>
+        <source>Undo Move</source>
+        <translation>Zug rückgängig</translation>
     </message>
     <message>
-        <source>Back to &amp;Main Variation</source>
-        <translation>Zurück zu &amp;Hauptvariante</translation>
+        <source>Find Move</source>
+        <translation>Zug finden</translation>
     </message>
     <message>
-        <source>&amp;Find Move</source>
-        <translation>&amp;Zug finden</translation>
+        <source>Open...</source>
+        <translation>Öffnen ...</translation>
     </message>
     <message>
-        <source>&amp;Game Info</source>
-        <translation>Spielinf&amp;ormation</translation>
+        <source>Quit</source>
+        <translation>Beenden</translation>
     </message>
     <message>
-        <source>&amp;Go to Move...</source>
-        <translation>Gehe zu &amp;Zug ...</translation>
+        <source>Save</source>
+        <translation>Speichern</translation>
     </message>
     <message>
-        <source>Pentobi &amp;Help</source>
-        <translation>Pentobi-&amp;Hilfe</translation>
+        <source>Save As...</source>
+        <translation>Speichern unter ...</translation>
     </message>
     <message>
-        <source>&amp;Rated Game</source>
-        <translation>Ge&amp;wertetes Spiel</translation>
+        <source>Pentobi Help</source>
+        <translation>Pentobi-Hilfe</translation>
     </message>
     <message>
-        <source>&amp;Open...</source>
-        <translation>Ö&amp;ffnen ...</translation>
+        <source>Back to Main Variation</source>
+        <translation>Zurück zu Hauptvariante</translation>
     </message>
     <message>
-        <source>Play &amp;Single Move</source>
-        <translation>&amp;Einzelnen Zug spielen</translation>
+        <source>Beginning of Branch</source>
+        <translation>Anfang der Verzweigung</translation>
     </message>
     <message>
-        <source>&amp;Rating</source>
-        <translation>&amp;Wertung</translation>
+        <source>Find Next Comment</source>
+        <translation>Nächsten Kommentar finden</translation>
     </message>
     <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Speichern</translation>
+        <source>Go to Move...</source>
+        <translation>Gehe zu Zug ...</translation>
     </message>
     <message>
-        <source>Save &amp;As...</source>
-        <translation>Speichern &amp;unter ...</translation>
+        <source>Computer Colors</source>
+        <translation>Computer-Farben</translation>
     </message>
     <message>
-        <source>Beginning of Bran&amp;ch</source>
-        <translation>Anfang der &amp;Verzweigung</translation>
+        <source>Play Single Move</source>
+        <translation>Einzelnen Zug spielen</translation>
     </message>
     <message>
-        <source>Find Next &amp;Comment</source>
-        <translation>Nächsten &amp;Kommentar finden</translation>
+        <source>Rating</source>
+        <translation>Wertung</translation>
     </message>
     <message>
-        <source>&amp;Fullscreen</source>
-        <translation>Voll&amp;bild</translation>
+        <source>Fullscreen</source>
+        <translation>Vollbild</translation>
     </message>
 </context>
 <context>
@@ -96,10 +96,6 @@
     <message>
         <source>Text files (*.txt)</source>
         <translation>Textdateien (*.txt)</translation>
-    </message>
-    <message>
-        <source>All files (*)</source>
-        <translation type="vanished">Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
@@ -163,16 +159,31 @@
         <translation>Alle Dateien (*)</translation>
     </message>
     <message>
-        <source>&amp;Open</source>
-        <translation>Öff&amp;nen</translation>
+        <source>Open</source>
+        <translation>Öffnen</translation>
     </message>
     <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Speichern</translation>
+        <source>O</source>
+        <extracomment>Mnemonic for button Open. Leave empty for no mnemonic.</extracomment>
+        <translation>F</translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <source>Save</source>
+        <translation>Speichern</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <extracomment>Mnemonic for button Save. Leave empty for no mnemonic.</extracomment>
+        <translation>S</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -455,10 +466,6 @@
         <translation>Grafik speichern</translation>
     </message>
     <message>
-        <source>All files (*)</source>
-        <translation type="vanished">Alle Dateien (*)</translation>
-    </message>
-    <message>
         <source>PNG image files (*.png)</source>
         <translation>PNG-Bilddateien (*.png)</translation>
     </message>
@@ -650,10 +657,6 @@
         <translation>Datei wurde von einer anderen Anwendung gelöscht.</translation>
     </message>
     <message>
-        <source>Overwrite existing file?</source>
-        <translation type="vanished">Existierende Datei überschreiben?</translation>
-    </message>
-    <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
         <translation>Gewertetes Spiel mit Lila gegen Pentobi Spielstufe %1 beginnen?</translation>
     </message>
@@ -677,376 +680,514 @@
 <context>
     <name>MenuComputer</name>
     <message>
-        <source>&amp;Computer</source>
-        <translation>&amp;Computer</translation>
+        <source>P</source>
+        <extracomment>Mnemonic for menu item Play. Leave empty for no mnemonic.</extracomment>
+        <translation>S</translation>
     </message>
     <message>
-        <source>Computer &amp;Colors</source>
-        <translation type="vanished">Computer-&amp;Farben</translation>
+        <source>Computer</source>
+        <translation>Computer</translation>
     </message>
     <message>
-        <source>&amp;Play</source>
-        <translation type="vanished">&amp;Spielen</translation>
+        <source>C</source>
+        <extracomment>Mnemonic for menu Computer. Leave empty for no mnemonic.</extracomment>
+        <translation>C</translation>
     </message>
     <message>
-        <source>&amp;Level (Classic, 4 Players)</source>
-        <translation>Spielst&amp;ufe (Klassisch, 4 Spieler)</translation>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Computer Colors. Leave empty for no mnemonic.</extracomment>
+        <translation>F</translation>
     </message>
     <message>
-        <source>&amp;Level (Classic, 2 Players)</source>
-        <translation>Spielst&amp;ufe (Klassisch, 2 Spieler)</translation>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Play Single Move. Leave empty for no mnemonic.</extracomment>
+        <translation>E</translation>
     </message>
     <message>
-        <source>&amp;Level (Classic, 3 Players)</source>
-        <translation>Spielst&amp;ufe (Klassisch, 3 Spieler)</translation>
+        <source>Stop</source>
+        <translation>Stopp</translation>
     </message>
     <message>
-        <source>&amp;Level (Duo)</source>
-        <translation>Spielst&amp;ufe (Duo)</translation>
+        <source>S</source>
+        <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
+        <translation>O</translation>
     </message>
     <message>
-        <source>&amp;Level (Junior)</source>
-        <translation>Spielst&amp;ufe (Junior)</translation>
+        <source>Level (Classic, 4 Players)</source>
+        <translation>Spielstufe (Klassisch, 4 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Level (Trigon, 4 Players)</source>
-        <translation>Spielst&amp;ufe (Trigon, 4 Spieler)</translation>
+        <source>L</source>
+        <extracomment>Mnemonic for menu item Level. Leave empty for no mnemonic.</extracomment>
+        <translation>U</translation>
     </message>
     <message>
-        <source>&amp;Level (Trigon, 2 Players)</source>
-        <translation>Spielst&amp;ufe (Trigon, 2 Spieler)</translation>
+        <source>Level (Classic, 2 Players)</source>
+        <translation>Spielstufe (Klassisch, 2 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Level (Trigon, 3 Players)</source>
-        <translation>Spielst&amp;ufe (Trigon, 3 Spieler)</translation>
+        <source>Level (Classic, 3 Players)</source>
+        <translation>Spielstufe (Klassisch, 3 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Level (Nexos, 4 Players)</source>
-        <translation>Spielst&amp;ufe (Nexos, 4 Spieler)</translation>
+        <source>Level (Duo)</source>
+        <translation>Spielstufe (Duo)</translation>
     </message>
     <message>
-        <source>&amp;Level (Nexos, 2 Players)</source>
-        <translation>Spielst&amp;ufe (Nexos, 2 Spieler)</translation>
+        <source>Level (Junior)</source>
+        <translation>Spielstufe (Junior)</translation>
     </message>
     <message>
-        <source>&amp;Level (Callisto, 4 Players)</source>
-        <translation>Spielst&amp;ufe (Callisto, 4 Spieler)</translation>
+        <source>Level (Trigon, 4 Players)</source>
+        <translation>Spielstufe (Trigon, 4 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Level (Callisto, 3 Players)</source>
-        <translation>Spielst&amp;ufe (Callisto, 3 Spieler)</translation>
+        <source>Level (Trigon, 2 Players)</source>
+        <translation>Spielstufe (Trigon, 2 Spieler)</translation>
     </message>
     <message>
-        <source>Play &amp;Single Move</source>
-        <translation type="vanished">&amp;Einzelnen Zug spielen</translation>
+        <source>Level (Trigon, 3 Players)</source>
+        <translation>Spielstufe (Trigon, 3 Spieler)</translation>
     </message>
     <message>
-        <source>St&amp;op</source>
-        <translation>St&amp;opp</translation>
+        <source>Level (Nexos, 4 Players)</source>
+        <translation>Spielstufe (Nexos, 4 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Level (GembloQ, 4 Players)</source>
-        <translation>Spielst&amp;ufe (GembloQ, 2 Spieler)</translation>
+        <source>Level (Nexos, 2 Players)</source>
+        <translation>Spielstufe (Nexos, 2 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Level (GembloQ, 3 Players)</source>
-        <translation>Spielst&amp;ufe (GembloQ, 3 Spieler)</translation>
+        <source>Level (Callisto, 4 Players)</source>
+        <translation>Spielstufe (Callisto, 4 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Level (GembloQ, 2 Players, 2 Colors)</source>
-        <translation>Spielst&amp;ufe (GembloQ, 2 Spieler, 2 Farben)</translation>
+        <source>Level (Callisto, 2 Players, 2 Colors)</source>
+        <translation>Spielstufe (Callisto, 2 Spieler, 2 Farben)</translation>
     </message>
     <message>
-        <source>&amp;Level (GembloQ, 2 Players, 4 Colors)</source>
-        <translation>Spielst&amp;ufe (GembloQ, 2 Spieler, 4 Farben)</translation>
+        <source>Level (Callisto, 2 Players, 4 Colors)</source>
+        <translation>Spielstufe (Callisto, 2 Spieler, 4 Farben)</translation>
     </message>
     <message>
-        <source>&amp;Level (Callisto, 2 Players, 2 Colors)</source>
-        <translation>Spielst&amp;ufe (Callisto, 2 Spieler, 2 Farben)</translation>
+        <source>Level (Callisto, 3 Players)</source>
+        <translation>Spielstufe (Callisto, 3 Spieler)</translation>
     </message>
     <message>
-        <source>&amp;Level (Callisto, 2 Players, 4 Colors)</source>
-        <translation>Spielst&amp;ufe (Callisto, 2 Spieler, 4 Farben)</translation>
+        <source>Level (GembloQ, 4 Players)</source>
+        <translation>Spielstufe (GembloQ, 4 Spieler)</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 2 Players, 2 Colors)</source>
+        <translation>Spielstufe (GembloQ, 2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 2 Players, 4 Colors)</source>
+        <translation>Spielstufe (GembloQ, 2 Spieler, 4 Farben)</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 3 Players)</source>
+        <translation>Spielstufe (GembloQ, 3 Spieler)</translation>
     </message>
 </context>
 <context>
     <name>MenuEdit</name>
     <message>
-        <source>&amp;Edit</source>
-        <translation>&amp;Bearbeiten</translation>
-    </message>
-    <message>
-        <source>Make &amp;Main Variation</source>
-        <translation>Zu &amp;Hauptvariante machen</translation>
-    </message>
-    <message>
-        <source>Move Variation &amp;Up</source>
-        <translation>Variante nach &amp;oben schieben</translation>
-    </message>
-    <message>
-        <source>Move Variation &amp;Down</source>
-        <translation>Variante nach &amp;unten schieben</translation>
-    </message>
-    <message>
-        <source>&amp;Truncate</source>
-        <translation>&amp;Abschneiden</translation>
-    </message>
-    <message>
-        <source>Truncate &amp;Children</source>
-        <translation>&amp;Kindknoten abschneiden</translation>
-    </message>
-    <message>
-        <source>&amp;Delete All Variations</source>
-        <translation>Alle &amp;Varianten löschen</translation>
-    </message>
-    <message>
-        <source>&amp;Next Color</source>
-        <translation>&amp;Nächste Farbe</translation>
-    </message>
-    <message>
-        <source>&amp;Keep Only Position</source>
-        <translation>Nur &amp;Brettstellung behalten</translation>
-    </message>
-    <message>
-        <source>Keep Only &amp;Subtree</source>
-        <translation>Nur &amp;Teilbaum behalten</translation>
-    </message>
-    <message>
-        <source>Move &amp;Annotation</source>
-        <translation>&amp;Zugkommentierung</translation>
-    </message>
-    <message>
-        <source>&amp;None</source>
-        <translation>&amp;Keine</translation>
-    </message>
-    <message>
-        <source>&amp;Very good</source>
-        <translation>&amp;Sehr gut</translation>
-    </message>
-    <message>
-        <source>&amp;Good</source>
-        <translation>&amp;Gut</translation>
-    </message>
-    <message>
-        <source>&amp;Doubtful</source>
-        <translation>&amp;Zweifelhaft</translation>
-    </message>
-    <message>
-        <source>&amp;Bad</source>
-        <translation>S&amp;chlecht</translation>
-    </message>
-    <message>
-        <source>Very B&amp;ad</source>
-        <translation>Se&amp;hr schlecht</translation>
-    </message>
-    <message>
-        <source>Int&amp;eresting</source>
-        <translation>Int&amp;eressant</translation>
-    </message>
-    <message>
-        <source>S&amp;etup Mode</source>
-        <translation>&amp;Stellungsaufbau</translation>
-    </message>
-    <message>
         <source>Made main variation.</source>
         <translation>Zu Hauptvariante gemacht.</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Bearbeiten</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <extracomment>Mnemonic for menu Edit. Leave empty for no mnemonic.</extracomment>
+        <translation>B</translation>
+    </message>
+    <message>
+        <source>Make Main Variation</source>
+        <translation>Zu Hauptvariante machen</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
+        <translation>H</translation>
+    </message>
+    <message>
+        <source>Move Variation Up</source>
+        <translation>Variante nach oben schieben</translation>
+    </message>
+    <message>
+        <source>U</source>
+        <extracomment>Mnemonic for menu item Move Variation Up. Leave empty for no mnemonic.</extracomment>
+        <translation>O</translation>
+    </message>
+    <message>
+        <source>Move Variation Down</source>
+        <translation>Variante nach unten schieben</translation>
+    </message>
+    <message>
+        <source>W</source>
+        <extracomment>Mnemonic for menu item Move Variation Down. Leave empty for no mnemonic.</extracomment>
+        <translation>U</translation>
+    </message>
+    <message>
+        <source>Delete All Variations</source>
+        <translation>Alle Varianten löschen</translation>
+    </message>
+    <message>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Delete All Variations. Leave empty for no mnemonic.</extracomment>
+        <translation>V</translation>
+    </message>
+    <message>
+        <source>Truncate</source>
+        <translation>Abschneiden</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <extracomment>Mnemonic for menu item Truncate. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
+    </message>
+    <message>
+        <source>Truncate Children</source>
+        <translation>Kindknoten abschneiden</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Truncate Children. Leave empty for no mnemonic.</extracomment>
+        <translation>K</translation>
+    </message>
+    <message>
+        <source>Keep Only Position</source>
+        <translation>Nur Brettstellung behalten</translation>
+    </message>
+    <message>
+        <source>P</source>
+        <extracomment>Mnemonic for menu item Keep Only Position. Leave empty for no mnemonic.</extracomment>
+        <translation>B</translation>
+    </message>
+    <message>
+        <source>Keep Only Subtree</source>
+        <translation>Nur Teilbaum behalten</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <extracomment>Mnemonic for menu item Keep Only Subtree. Leave empty for no mnemonic.</extracomment>
+        <translation>T</translation>
+    </message>
+    <message>
+        <source>Setup Mode</source>
+        <translation>Stellungsaufbau</translation>
+    </message>
+    <message>
+        <source>Next Color</source>
+        <translation>Nächste Farbe</translation>
+    </message>
+    <message>
+        <source>N</source>
+        <extracomment>Mnemonic for menu item Next Color. Leave empty for no mnemonic.</extracomment>
+        <translation>N</translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Setup Mode. Leave empty for no mnemonic.</extracomment>
+        <translation>E</translation>
+    </message>
+</context>
+<context>
+    <name>MenuExport</name>
+    <message>
+        <source>Export</source>
+        <translation>Exportieren</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <extracomment>Mnemonic for menu Export. Leave empty for no mnemonic.</extracomment>
+        <translation>E</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation>Grafik</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Image. Leave empty for no mnemonic.</extracomment>
+        <translation>G</translation>
+    </message>
+    <message>
+        <source>ASCII Art</source>
+        <translation>ASCII-Art</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
     </message>
 </context>
 <context>
     <name>MenuGame</name>
     <message>
-        <source>&amp;Game</source>
-        <translation>&amp;Spiel</translation>
+        <source>Game</source>
+        <translation>Spiel</translation>
     </message>
     <message>
-        <source>&amp;New</source>
-        <translation type="vanished">&amp;Neu</translation>
+        <source>R</source>
+        <extracomment>Mnemonic for menu item Rated Game. Leave empty for no mnemonic.</extracomment>
+        <translation>W</translation>
     </message>
     <message>
-        <source>Game &amp;Variant</source>
-        <translation>Spiel&amp;variante</translation>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Open from Clipboard. Leave empty for no mnemonic.</extracomment>
+        <translation>Z</translation>
     </message>
     <message>
-        <source>Classic (&amp;3 Players)</source>
-        <translation>Klassisch (&amp;3 Spieler)</translation>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Save As. Leave empty for no mnemonic.</extracomment>
+        <translation>U</translation>
     </message>
     <message>
-        <source>Classic (&amp;4 Players)</source>
-        <translation>Klassisch (&amp;4 Spieler)</translation>
+        <source>G</source>
+        <extracomment>Mnemonic for menu Game. Leave empty for no mnemonic.</extracomment>
+        <translation>S</translation>
     </message>
     <message>
-        <source>&amp;Duo</source>
-        <translation>&amp;Duo</translation>
+        <source>N</source>
+        <extracomment>Mnemonic for menu item New. Leave empty for no mnemonic.</extracomment>
+        <translation>N</translation>
     </message>
     <message>
-        <source>&amp;Junior</source>
-        <translation>&amp;Junior</translation>
+        <source>I</source>
+        <extracomment>Mnemonic for menu item Game Info. Leave empty for no mnemonic.</extracomment>
+        <translation>O</translation>
     </message>
     <message>
-        <source>&amp;Undo Move</source>
-        <translation type="vanished">Zug &amp;rückgängig</translation>
+        <source>U</source>
+        <extracomment>Mnemonic for menu item Undo. Leave empty for no mnemonic.</extracomment>
+        <translation>R</translation>
     </message>
     <message>
-        <source>&amp;Find Move</source>
-        <translation type="vanished">Zug &amp;finden</translation>
+        <source>F</source>
+        <extracomment>Mnemonic for menu item Find Move. Leave empty for no mnemonic.</extracomment>
+        <translation>U</translation>
     </message>
     <message>
-        <source>&amp;Open...</source>
-        <translation type="vanished">Öffn&amp;en ...</translation>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Open. Leave empty for no mnemonic.</extracomment>
+        <translation>F</translation>
     </message>
     <message>
-        <source>&amp;Quit</source>
-        <translation type="vanished">&amp;Beenden</translation>
+        <source>Open Recent</source>
+        <translation>Zuletzt benutzte Dateien</translation>
     </message>
     <message>
-        <source>&amp;Classic</source>
-        <translation>&amp;Klassisch</translation>
+        <source>Open from Clipboard</source>
+        <translation>Aus Zwischenablage öffnen</translation>
     </message>
     <message>
-        <source>Classic (&amp;2 Players)</source>
-        <translation>Klassisch (&amp;2 Spieler)</translation>
+        <source>P</source>
+        <extracomment>Mnemonic for menu Open Recent. Leave empty for no mnemonic.</extracomment>
+        <translation>B</translation>
     </message>
     <message>
-        <source>&amp;Trigon</source>
-        <translation>&amp;Trigon</translation>
+        <source>S</source>
+        <extracomment>Mnemonic for menu item Save. Leave empty for no mnemonic.</extracomment>
+        <translation>S</translation>
     </message>
     <message>
-        <source>Trigon (&amp;2 Players)</source>
-        <translation>Trigon (&amp;2 Spieler)</translation>
+        <source>Q</source>
+        <extracomment>Mnemonic for menu item Quit. Leave empty for no mnemonic.</extracomment>
+        <translation>B</translation>
+    </message>
+</context>
+<context>
+    <name>MenuGameVariant</name>
+    <message>
+        <source>Game Variant</source>
+        <translation>Spielvariante</translation>
     </message>
     <message>
-        <source>Trigon (&amp;3 Players)</source>
-        <translation>Trigon (&amp;3 Spieler)</translation>
+        <source>V</source>
+        <extracomment>Mnemonic for menu Game Variant. Leave empty for no mnemonic.</extracomment>
+        <translation>V</translation>
     </message>
     <message>
-        <source>Trigon (&amp;4 Players)</source>
-        <translation>Trigon (&amp;4 Spieler)</translation>
+        <source>Classic</source>
+        <translation>Klassisch</translation>
     </message>
     <message>
-        <source>&amp;Nexos</source>
-        <translation>&amp;Nexos</translation>
+        <source>C</source>
+        <extracomment>Mnemonic for menu Classic. Leave empty for no mnemonic.</extracomment>
+        <translation>K</translation>
     </message>
     <message>
-        <source>Nexos (&amp;2 Players)</source>
-        <translation>Nexos (&amp;2 Spieler)</translation>
+        <source>Classic (%1 Players)</source>
+        <translation>Klassisch (%1 Spieler)</translation>
     </message>
     <message>
-        <source>Nexos (&amp;4 Players)</source>
-        <translation>Nexos (&amp;4 Spieler)</translation>
+        <source>2</source>
+        <extracomment>Mnemonic for menu item Classic/Trigon/Nexos (2 Players) and GambloQ/Callisto (&amp;2 Players, 2 Colors). Leave empty for no mnemonic.</extracomment>
+        <translation>2</translation>
     </message>
     <message>
-        <source>C&amp;allisto</source>
-        <translation>&amp;Callisto</translation>
+        <source>3</source>
+        <extracomment>Mnemonic for menu item Classic/Trigon/GembloQ/Callisto (3 Players). Leave empty for no mnemonic.</extracomment>
+        <translation>3</translation>
     </message>
     <message>
-        <source>Callisto (&amp;3 Players)</source>
-        <translation>Callisto (&amp;3 Spieler)</translation>
+        <source>4</source>
+        <extracomment>Mnemonic for menu item Classic/Trigon/Nexos/GembloQ/Callisto (4 Players). Leave empty for no mnemonic.</extracomment>
+        <translation>4</translation>
     </message>
     <message>
-        <source>Callisto (&amp;4 Players)</source>
-        <translation>Callisto (&amp;4 Spieler)</translation>
+        <source>Duo</source>
+        <translation>Duo</translation>
     </message>
     <message>
-        <source>&amp;Export</source>
-        <translation>&amp;Exportieren</translation>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Duo. Leave empty for no mnemonic.</extracomment>
+        <translation>D</translation>
     </message>
     <message>
-        <source>&amp;Image</source>
-        <translation>&amp;Grafik</translation>
+        <source>Junior</source>
+        <translation>Junior</translation>
     </message>
     <message>
-        <source>&amp;ASCII Art</source>
-        <translation>&amp;ASCII-Art</translation>
+        <source>J</source>
+        <extracomment>Mnemonic for menu item Junior. Leave empty for no mnemonic.</extracomment>
+        <translation>J</translation>
     </message>
     <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">&amp;Speichern</translation>
+        <source>Trigon</source>
+        <translation>Trigon</translation>
     </message>
     <message>
-        <source>Save &amp;As...</source>
-        <translation type="vanished">Speichern &amp;unter ...</translation>
+        <source>T</source>
+        <extracomment>Mnemonic for menu Trigon. Leave empty for no mnemonic.</extracomment>
+        <translation>T</translation>
     </message>
     <message>
-        <source>&amp;Game Info</source>
-        <translation type="vanished">Spielinf&amp;ormation</translation>
+        <source>Nexos</source>
+        <translation>Nexos</translation>
     </message>
     <message>
-        <source>Open R&amp;ecent</source>
-        <translation>Zuletzt &amp;benutzte Dateien</translation>
+        <source>N</source>
+        <extracomment>Mnemonic for menu Nexos. Leave empty for no mnemonic.</extracomment>
+        <translation>N</translation>
     </message>
     <message>
-        <source>&amp;Rated Game</source>
-        <translation type="vanished">Ge&amp;wertetes Spiel</translation>
+        <source>GembloQ</source>
+        <translation>GembloQ</translation>
     </message>
     <message>
-        <source>Open from &amp;Clipboard</source>
-        <translation>Aus Zwischen&amp;ablage öffnen</translation>
+        <source>Callisto</source>
+        <translation>Callisto</translation>
     </message>
     <message>
-        <source>&amp;GembloQ</source>
-        <translation>&amp;GembloQ</translation>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Callisto. Leave empty for no mnemonic.</extracomment>
+        <translation>C</translation>
     </message>
     <message>
-        <source>GembloQ (&amp;2 Players, 2 Colors)</source>
-        <translation>GembloQ (&amp;2 Spieler, 2 Farben)</translation>
+        <source>G</source>
+        <extracomment>Mnemonic for menu GembloQ. Leave empty for no mnemonic.</extracomment>
+        <translation>G</translation>
     </message>
     <message>
-        <source>GembloQ (2 &amp;Players, 4 Colors)</source>
-        <translation>GembloQ (2 &amp;Spieler, 4 Farben)</translation>
+        <source>Trigon (%1 Players)</source>
+        <translation>Trigon (%1 Spieler)</translation>
     </message>
     <message>
-        <source>GembloQ (&amp;3 Players)</source>
-        <translation>GembloQ (&amp;3 Spieler)</translation>
+        <source>Nexos (%1 Players)</source>
+        <translation>Nexos (%1 Spieler)</translation>
     </message>
     <message>
-        <source>GembloQ (&amp;4 Players)</source>
-        <translation>GembloQ (&amp;4 Spieler)</translation>
+        <source>GembloQ (2 Players, 2 Colors)</source>
+        <translation>GembloQ (2 Spieler, 2 Farben)</translation>
     </message>
     <message>
-        <source>Callisto (&amp;2 Players, 2 Colors)</source>
-        <translation>Callisto (&amp;2 Spieler, 2 Farben)</translation>
+        <source>GembloQ (2 Players, 4 Colors)</source>
+        <translation>GembloQ (2 Spieler, 4 Farben)</translation>
     </message>
     <message>
-        <source>Callisto (2 &amp;Players, 4 Colors)</source>
-        <translation>Callisto (2 &amp;Spieler, 4 Farben)</translation>
+        <source>GembloQ (%1 Players)</source>
+        <translation>GembloQ (%1 Spieler)</translation>
+    </message>
+    <message>
+        <source>Callisto (2 Players, 2 Colors)</source>
+        <translation>Callisto (2 Spieler, 2 Farben)</translation>
+    </message>
+    <message>
+        <source>Callisto (2 Players, 4 Colors)</source>
+        <translation>Callisto (2 Spieler, 4 Farben)</translation>
+    </message>
+    <message>
+        <source>Callisto (%1 Players)</source>
+        <translation>Callisto (%1 Spieler)</translation>
+    </message>
+    <message>
+        <source>P</source>
+        <extracomment>Mnemonic for menu item GembloQ/Callisto (2 Players, 4 Colors). Leave empty for no mnemonic.</extracomment>
+        <translation>F</translation>
     </message>
 </context>
 <context>
     <name>MenuGo</name>
     <message>
-        <source>G&amp;o</source>
-        <translation>&amp;Gehe zu</translation>
+        <source>Go</source>
+        <translation>Gehe zu</translation>
     </message>
     <message>
-        <source>Back to &amp;Main Variation</source>
-        <translation type="vanished">Zurück zu &amp;Hauptvariante</translation>
+        <source>O</source>
+        <extracomment>Mnemonic for menu Go. Leave empty for no mnemonic.</extracomment>
+        <translation>G</translation>
     </message>
     <message>
-        <source>&amp;Go to Move...</source>
-        <translation type="vanished">&amp;Gehe zu Zug ...</translation>
+        <source>G</source>
+        <extracomment>Mnemonic for menu item Go to Move. Leave empty for no mnemonic.</extracomment>
+        <translation>G</translation>
     </message>
     <message>
-        <source>Beginning of Bran&amp;ch</source>
-        <translation type="vanished">Anfang der Verz&amp;weigung</translation>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Back to Main Variation. Leave empty for no mnemonic.</extracomment>
+        <translation>H</translation>
     </message>
     <message>
-        <source>Find Next &amp;Comment</source>
-        <translation type="vanished">Nächsten &amp;Kommentar finden</translation>
+        <source>B</source>
+        <extracomment>Mnemonic for menu item Beginning Of Branch. Leave empty for no mnemonic.</extracomment>
+        <translation>V</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Find Next Comment. Leave empty for no mnemonic.</extracomment>
+        <translation>K</translation>
     </message>
 </context>
 <context>
     <name>MenuHelp</name>
     <message>
-        <source>&amp;Help</source>
-        <translation>&amp;Hilfe</translation>
+        <source>Help</source>
+        <translation>Hilfe</translation>
     </message>
     <message>
-        <source>&amp;About Pentobi</source>
-        <translation>Über &amp;Pentobi</translation>
+        <source>H</source>
+        <extracomment>Mnemonic for menu Help. Leave empty for no mnemonic.</extracomment>
+        <translation>H</translation>
     </message>
     <message>
-        <source>Pentobi &amp;Help</source>
-        <translation type="vanished">Pentobi-&amp;Hilfe</translation>
+        <source>P</source>
+        <extracomment>Mnemonic for menu item Pentobi Help. Leave empty for no mnemonic.</extracomment>
+        <translation>H</translation>
+    </message>
+    <message>
+        <source>About Pentobi</source>
+        <translation>Über Pentobi</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.</extracomment>
+        <translation>P</translation>
     </message>
 </context>
 <context>
@@ -1070,139 +1211,326 @@
     </message>
 </context>
 <context>
+    <name>MenuMoveAnnotation</name>
+    <message>
+        <source>Move Annotation</source>
+        <translation>Zugkommentierung</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Keine</translation>
+    </message>
+    <message>
+        <source>N</source>
+        <extracomment>Mnemonic for menu item Move Annotation/None. Leave empty for no mnemonic.</extracomment>
+        <translation>K</translation>
+    </message>
+    <message>
+        <source>Very good</source>
+        <translation>Sehr gut</translation>
+    </message>
+    <message>
+        <source>V</source>
+        <extracomment>Mnemonic for menu item Very good. Leave empty for no mnemonic.</extracomment>
+        <translation>S</translation>
+    </message>
+    <message>
+        <source>Good</source>
+        <translation>Gut</translation>
+    </message>
+    <message>
+        <source>G</source>
+        <extracomment>Mnemonic for menu item Good. Leave empty for no mnemonic.</extracomment>
+        <translation>G</translation>
+    </message>
+    <message>
+        <source>Interesting</source>
+        <translation>Interessant</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <extracomment>Mnemonic for menu item Interesting. Leave empty for no mnemonic.</extracomment>
+        <translation>E</translation>
+    </message>
+    <message>
+        <source>Doubtful</source>
+        <translation>Zweifelhaft</translation>
+    </message>
+    <message>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Doubtful. Leave empty for no mnemonic.</extracomment>
+        <translation>Z</translation>
+    </message>
+    <message>
+        <source>Bad</source>
+        <translation>Schlecht</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <extracomment>Mnemonic for menu item Bad. Leave empty for no mnemonic.</extracomment>
+        <translation>C</translation>
+    </message>
+    <message>
+        <source>Very Bad</source>
+        <translation>Sehr schlecht</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu Move Annotation. Leave empty for no mnemonic.</extracomment>
+        <translation>Z</translation>
+    </message>
+    <message>
+        <source>R</source>
+        <extracomment>Mnemonic for menu item Very Bad. Leave empty for no mnemonic.</extracomment>
+        <translation>H</translation>
+    </message>
+</context>
+<context>
+    <name>MenuMoveMarking</name>
+    <message>
+        <source>Move Marking</source>
+        <translation>Zugmarkierung</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <extracomment>Mnemonic for menu Move Marking. Leave empty for no mnemonic.</extracomment>
+        <translation>Z</translation>
+    </message>
+    <message>
+        <source>Last With Dot</source>
+        <translation>Letzter mit Punkt</translation>
+    </message>
+    <message>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Last With Dot. Leave empty for no mnemonic.</extracomment>
+        <translation>P</translation>
+    </message>
+    <message>
+        <source>Last With Number</source>
+        <translation>Letzter mit Nummer</translation>
+    </message>
+    <message>
+        <source>N</source>
+        <extracomment>Mnemonic for menu item Last With Number. Leave empty for no mnemonic.</extracomment>
+        <translation>N</translation>
+    </message>
+    <message>
+        <source>All With Number</source>
+        <translation>Alle mit Nummer</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item All With Number. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Keine</translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Move Marking/None. Leave empty for no mnemonic.</extracomment>
+        <translation>K</translation>
+    </message>
+</context>
+<context>
+    <name>MenuTheme</name>
+    <message>
+        <source>Theme</source>
+        <translation>Erscheinungsbild</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <extracomment>Mnemonic for menu Theme. Leave empty for no mnemonic.</extracomment>
+        <translation>E</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>Hell</translation>
+    </message>
+    <message>
+        <source>L</source>
+        <extracomment>Mnemonic for menu item Theme/Light. Leave empty for no mnemonic.</extracomment>
+        <translation>H</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation>Dunkel</translation>
+    </message>
+    <message>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Theme/Dark. Leave empty for no mnemonic.</extracomment>
+        <translation>D</translation>
+    </message>
+    <message>
+        <source>Colorblind Light</source>
+        <extracomment>Name of light theme optimized for colorblindness.</extracomment>
+        <translation>Farbenblind hell</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Colorblind Light. Leave empty for no mnemonic.</extracomment>
+        <translation>F</translation>
+    </message>
+    <message>
+        <source>Colorblind Dark</source>
+        <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
+        <translation>Farbenblind dunkel</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Colorblind Dark. Leave empty for no mnemonic.</extracomment>
+        <translation>U</translation>
+    </message>
+</context>
+<context>
     <name>MenuTools</name>
     <message>
-        <source>&amp;Tools</source>
-        <translation>&amp;Extras</translation>
+        <source>Tools</source>
+        <translation>Extras</translation>
     </message>
     <message>
-        <source>&amp;Analyze Game</source>
-        <translation>Spiel &amp;analysieren</translation>
+        <source>T</source>
+        <extracomment>Mnemonic for menu Tools. Leave empty for no mnemonic.</extracomment>
+        <translation>E</translation>
     </message>
     <message>
-        <source>&amp;Rating</source>
-        <translation type="vanished">&amp;Wertung</translation>
+        <source>R</source>
+        <extracomment>Mnemonic for menu item Rating. Leave empty for no mnemonic.</extracomment>
+        <translation>W</translation>
     </message>
     <message>
-        <source>&amp;Clear Rating</source>
-        <translation>W&amp;ertung löschen</translation>
+        <source>Clear Rating</source>
+        <translation>Wertung löschen</translation>
     </message>
     <message>
-        <source>Clear A&amp;nalysis</source>
-        <translation>A&amp;nalyse löschen</translation>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Clear Rating. Leave empty for no mnemonic.</extracomment>
+        <translation>E</translation>
+    </message>
+    <message>
+        <source>Analyze Game</source>
+        <translation>Spiel analysieren</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Analyze Game. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
+    </message>
+    <message>
+        <source>Clear Analysis</source>
+        <translation>Analyse löschen</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <extracomment>Mnemonic for menu item Clear Analysis. Leave empty for no mnemonic.</extracomment>
+        <translation>N</translation>
     </message>
 </context>
 <context>
     <name>MenuView</name>
     <message>
-        <source>&amp;View</source>
-        <translation>&amp;Ansicht</translation>
+        <source>View</source>
+        <translation>Ansicht</translation>
     </message>
     <message>
-        <source>&amp;Animate Pieces</source>
-        <translation>Spielsteine &amp;animieren</translation>
+        <source>V</source>
+        <extracomment>Mnemonic for menu View. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
     </message>
     <message>
-        <source>&amp;Coordinates</source>
-        <translation>&amp;Koordinaten</translation>
+        <source>Coordinates</source>
+        <translation>Koordinaten</translation>
     </message>
     <message>
-        <source>&amp;Move Marking</source>
-        <translation>Zug&amp;markierung</translation>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Coordinates. Leave empty for no mnemonic.</extracomment>
+        <translation>K</translation>
     </message>
     <message>
-        <source>Last With &amp;Dot</source>
-        <translation>Letzter mit &amp;Punkt</translation>
+        <source>Show Variations</source>
+        <translation>Varianten zeigen</translation>
     </message>
     <message>
-        <source>Last With &amp;Number</source>
-        <translation>Letzter mit &amp;Nummer</translation>
+        <source>Layout</source>
+        <translation>Layout</translation>
     </message>
     <message>
-        <source>&amp;All With Number</source>
-        <translation>&amp;Alle mit Nummer</translation>
+        <source>L</source>
+        <extracomment>Mnemonic for menu Layout. Leave empty for no mnemonic.</extracomment>
+        <translation>L</translation>
     </message>
     <message>
-        <source>N&amp;one</source>
-        <translation>&amp;Keine</translation>
-    </message>
-    <message>
-        <source>Show &amp;Variations</source>
-        <translation>&amp;Varianten zeigen</translation>
-    </message>
-    <message>
-        <source>&amp;Fullscreen</source>
-        <translation type="vanished">Voll&amp;bild</translation>
-    </message>
-    <message>
-        <source>&amp;Theme</source>
-        <translation>&amp;Erscheinungsbild</translation>
-    </message>
-    <message>
-        <source>&amp;Light</source>
-        <translation>&amp;Hell</translation>
-    </message>
-    <message>
-        <source>&amp;Dark</source>
-        <translation>&amp;Dunkel</translation>
-    </message>
-    <message>
-        <source>&amp;Colorblind</source>
-        <extracomment>Name of theme optimized for colorblindness.</extracomment>
-        <translation type="vanished">&amp;Farbenblind</translation>
-    </message>
-    <message>
-        <source>&amp;Colorblind Light</source>
-        <extracomment>Name of light theme optimized for colorblindness.</extracomment>
-        <translation>&amp;Farbenblind hell</translation>
-    </message>
-    <message>
-        <source>Colorblind D&amp;ark</source>
-        <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
-        <translation>Farbenblind d&amp;unkel</translation>
-    </message>
-    <message>
-        <source>&amp;Layout</source>
-        <translation>&amp;Layout</translation>
-    </message>
-    <message>
-        <source>&amp;Desktop</source>
+        <source>Desktop</source>
         <extracomment>Name of window layout optimized for desktop.</extracomment>
-        <translation>&amp;Desktop</translation>
+        <translation>Desktop</translation>
     </message>
     <message>
-        <source>&amp;Mobile</source>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Desktop. Leave empty for no mnemonic.</extracomment>
+        <translation>D</translation>
+    </message>
+    <message>
+        <source>Mobile</source>
         <extracomment>Name of window layout optimized for smartphones.</extracomment>
-        <translation>&amp;Mobil</translation>
-    </message>
-</context>
-<context>
-    <name>MessageDialog</name>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="vanished">&amp;OK</translation>
+        <translation>Mobil</translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Abbrechen</translation>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Mobile. Leave empty for no mnemonic.</extracomment>
+        <translation>M</translation>
+    </message>
+    <message>
+        <source>Animate Pieces</source>
+        <translation>Spielsteine animieren</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Animate Pieces. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
+    </message>
+    <message>
+        <source>F</source>
+        <extracomment>Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.</extracomment>
+        <translation>B</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <extracomment>Mnemonic for menu item Show Variations. Leave empty for no mnemonic.</extracomment>
+        <translation>V</translation>
     </message>
 </context>
 <context>
     <name>OkButton</name>
     <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
+        <translation>O</translation>
     </message>
 </context>
 <context>
     <name>OkCancelButtons</name>
     <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <source>OK</source>
+        <translation>OK</translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Abbrechen</translation>
+        <source>O</source>
+        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
+        <translation>O</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -1214,10 +1542,6 @@
     <message>
         <source>Blokus games (*.blksgf)</source>
         <translation>Blokus-Partien (*.blksgf)</translation>
-    </message>
-    <message>
-        <source>All files (*)</source>
-        <translation type="vanished">Alle Dateien (*)</translation>
     </message>
 </context>
 <context>
@@ -1366,10 +1690,6 @@
         <translation>Blokus-Partien (*.blksgf)</translation>
     </message>
     <message>
-        <source>All files (*)</source>
-        <translation type="vanished">Alle Dateien (*)</translation>
-    </message>
-    <message>
         <source>Overwrite existing file?</source>
         <translation>Existierende Datei überschreiben?</translation>
     </message>
@@ -1377,20 +1697,8 @@
 <context>
     <name>ToolBar</name>
     <message>
-        <source>File (modified): %1</source>
-        <translation type="vanished">Datei (geändert): %1</translation>
-    </message>
-    <message>
-        <source>File: %1</source>
-        <translation type="vanished">Datei: %1</translation>
-    </message>
-    <message>
         <source>Rated</source>
         <translation>Gewertet</translation>
-    </message>
-    <message>
-        <source>Leave setup</source>
-        <translation type="vanished">Aufbau beenden</translation>
     </message>
     <message>
         <source>Start a new game</source>
@@ -1451,17 +1759,6 @@
     <message>
         <source>Rated game</source>
         <translation>Gewertetes Spiel</translation>
-    </message>
-</context>
-<context>
-    <name>main</name>
-    <message>
-        <source>Not enough memory.</source>
-        <translation type="vanished">Nicht genügend Speicher.</translation>
-    </message>
-    <message>
-        <source>Pentobi</source>
-        <translation type="vanished">Pentobi</translation>
     </message>
 </context>
 </TS>

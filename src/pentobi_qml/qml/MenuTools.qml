@@ -4,23 +4,36 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: qsTr("&Tools")
+    title: addMnemonic(qsTr("Tools"),
+                       //: Mnemonic for menu Tools. Leave empty for no mnemonic.
+                       qsTr("T"))
 
-    Pentobi.MenuItem { action: actions.actionRating }
+    Pentobi.MenuItem {
+        action: actions.actionRating
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Rating. Leave empty for no mnemonic.
+                          qsTr("R"))
+    }
     Pentobi.MenuItem {
         enabled:  ! isRated && ratingModel.numberGames > 0
-        text: qsTr("&Clear Rating")
+        text: addMnemonic(qsTr("Clear Rating"),
+                          //: Mnemonic for menu item Clear Rating. Leave empty for no mnemonic.
+                          qsTr("C"))
         onTriggered: Logic.clearRating()
     }
     MenuSeparator { }
     Pentobi.MenuItem {
         enabled: ! isRated && (gameModel.canGoBackward || gameModel.canGoForward)
-        text: qsTr("&Analyze Game")
+        text: addMnemonic(qsTr("Analyze Game"),
+                          //: Mnemonic for menu item Analyze Game. Leave empty for no mnemonic.
+                          qsTr("A"))
         onTriggered: Logic.analyzeGame()
     }
     Pentobi.MenuItem {
         enabled: analyzeGameModel.elements.length !== 0
-        text: qsTr("Clear A&nalysis")
+        text: addMnemonic(qsTr("Clear Analysis"),
+                          //: Mnemonic for menu item Clear Analysis. Leave empty for no mnemonic.
+                          qsTr("E"))
         onTriggered: analyzeGameModel.clear()
     }
 }

@@ -5,14 +5,32 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: qsTr("&Computer")
+    title: addMnemonic(qsTr("Computer"),
+                       //: Mnemonic for menu Computer. Leave empty for no mnemonic.
+                       qsTr("C"))
 
-    Pentobi.MenuItem { action: actions.actionComputerColors }
-    Pentobi.MenuItem { action: actions.actionPlay }
-    MenuSeparator { }
-    Pentobi.MenuItem { action: actions.actionPlaySingle }
     Pentobi.MenuItem {
-        text: qsTr("St&op")
+        action: actions.actionComputerColors
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Computer Colors. Leave empty for no mnemonic.
+                          qsTr("O"))
+    }
+    Pentobi.MenuItem {
+        action: actions.actionPlay
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Play. Leave empty for no mnemonic.
+                          qsTr("P"))
+    }
+    Pentobi.MenuItem {
+        action: actions.actionPlaySingle
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Play Single Move. Leave empty for no mnemonic.
+                          qsTr("M"))
+    }
+    Pentobi.MenuItem {
+        text: addMnemonic(qsTr("Stop"),
+                          //: Mnemonic for menu item Stop. Leave empty for no mnemonic.
+                          qsTr("S"))
         enabled: (playerModel.isGenMoveRunning
                   || delayedCheckComputerMove.running
                   || analyzeGameModel.isRunning)
@@ -26,24 +44,27 @@ Pentobi.Menu {
         title:
             switch (gameModel.gameVariant)
             {
-            case "classic": return qsTr("&Level (Classic, 4 Players)")
-            case "classic_2": return qsTr("&Level (Classic, 2 Players)")
-            case "classic_3": return qsTr("&Level (Classic, 3 Players)")
-            case "duo": return qsTr("&Level (Duo)")
-            case "junior": return qsTr("&Level (Junior)")
-            case "trigon": return qsTr("&Level (Trigon, 4 Players)")
-            case "trigon_2": return qsTr("&Level (Trigon, 2 Players)")
-            case "trigon_3": return qsTr("&Level (Trigon, 3 Players)")
-            case "nexos": return qsTr("&Level (Nexos, 4 Players)")
-            case "nexos_2": return qsTr("&Level (Nexos, 2 Players)")
-            case "callisto": return qsTr("&Level (Callisto, 4 Players)")
-            case "callisto_2": return qsTr("&Level (Callisto, 2 Players, 2 Colors)")
-            case "callisto_2_4": return qsTr("&Level (Callisto, 2 Players, 4 Colors)")
-            case "callisto_3": return qsTr("&Level (Callisto, 3 Players)")
-            case "gembloq": return qsTr("&Level (GembloQ, 4 Players)")
-            case "gembloq_2": return qsTr("&Level (GembloQ, 2 Players, 2 Colors)")
-            case "gembloq_2_4": return qsTr("&Level (GembloQ, 2 Players, 4 Colors)")
-            case "gembloq_3": return qsTr("&Level (GembloQ, 3 Players)")
+            case "classic":
+                return addMnemonic(qsTr("Level (Classic, 4 Players)"),
+                                   //: Mnemonic for menu item Level. Leave empty for no mnemonic.
+                                   qsTr("L"))
+            case "classic_2": return addMnemonic(qsTr("Level (Classic, 2 Players)"), qsTr("L"))
+            case "classic_3": return addMnemonic(qsTr("Level (Classic, 3 Players)"), qsTr("L"))
+            case "duo": return addMnemonic(qsTr("Level (Duo)"), qsTr("L"))
+            case "junior": return addMnemonic(qsTr("Level (Junior)"), qsTr("L"))
+            case "trigon": return addMnemonic(qsTr("Level (Trigon, 4 Players)"), qsTr("L"))
+            case "trigon_2": return addMnemonic(qsTr("Level (Trigon, 2 Players)"), qsTr("L"))
+            case "trigon_3": return addMnemonic(qsTr("Level (Trigon, 3 Players)"), qsTr("L"))
+            case "nexos": return addMnemonic(qsTr("Level (Nexos, 4 Players)"), qsTr("L"))
+            case "nexos_2": return addMnemonic(qsTr("Level (Nexos, 2 Players)"), qsTr("L"))
+            case "callisto": return addMnemonic(qsTr("Level (Callisto, 4 Players)"), qsTr("L"))
+            case "callisto_2": return addMnemonic(qsTr("Level (Callisto, 2 Players, 2 Colors)"), qsTr("L"))
+            case "callisto_2_4": return addMnemonic(qsTr("Level (Callisto, 2 Players, 4 Colors)"), qsTr("L"))
+            case "callisto_3": return addMnemonic(qsTr("Level (Callisto, 3 Players)"), qsTr("L"))
+            case "gembloq": return addMnemonic(qsTr("Level (GembloQ, 4 Players)"), qsTr("L"))
+            case "gembloq_2": return addMnemonic(qsTr("Level (GembloQ, 2 Players, 2 Colors)"), qsTr("L"))
+            case "gembloq_2_4": return addMnemonic(qsTr("Level (GembloQ, 2 Players, 4 Colors)"), qsTr("L"))
+            case "gembloq_3": return addMnemonic(qsTr("Level (GembloQ, 3 Players)"), qsTr("L"))
             }
 
         Instantiator {

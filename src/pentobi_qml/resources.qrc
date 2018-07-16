@@ -24,6 +24,7 @@
         <file>qml/Button.qml</file>
         <file>qml/ComputerColorDialog.qml</file>
         <file>qml/Comment.qml</file>
+        <file>qml/Controls.js</file>
         <file>qml/Dialog.qml</file>
         <file>qml/DialogLoader.qml</file>
         <file>qml/ExportImageDialog.qml</file>
@@ -41,12 +42,17 @@
         <file>qml/Menu.qml</file>
         <file>qml/MenuComputer.qml</file>
         <file>qml/MenuEdit.qml</file>
+        <file>qml/MenuExport.qml</file>
         <file>qml/MenuGame.qml</file>
+        <file>qml/MenuGameVariant.qml</file>
         <file>qml/MenuGo.qml</file>
         <file>qml/MenuHelp.qml</file>
         <file>qml/MenuItem.qml</file>
         <file>qml/MenuItemGameVariant.qml</file>
         <file>qml/MenuItemLevel.qml</file>
+        <file>qml/MenuMoveAnnotation.qml</file>
+        <file>qml/MenuMoveMarking.qml</file>
+        <file>qml/MenuTheme.qml</file>
         <file>qml/MenuTools.qml</file>
         <file>qml/MenuView.qml</file>
         <file>qml/NavigationButtons.qml</file>

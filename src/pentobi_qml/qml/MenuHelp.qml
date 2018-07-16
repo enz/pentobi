@@ -4,11 +4,20 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: qsTr("&Help")
+    title: addMnemonic(qsTr("Help"),
+                       //: Mnemonic for menu Help. Leave empty for no mnemonic.
+                       qsTr("H"))
 
-    Pentobi.MenuItem { action: actions.actionHelp }
     Pentobi.MenuItem {
-        text: qsTr("&About Pentobi")
+        action: actions.actionHelp
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Pentobi Help. Leave empty for no mnemonic.
+                          qsTr("P"))
+    }
+    Pentobi.MenuItem {
+        text: addMnemonic(qsTr("About Pentobi"),
+                          //: Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.
+                          qsTr("A"))
         onTriggered: Logic.about()
     }
 }

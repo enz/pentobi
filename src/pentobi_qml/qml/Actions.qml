@@ -22,7 +22,7 @@ QtObject {
     }
     property Action actionBackToMainVar: Action {
         shortcut: "Ctrl+M"
-        text: qsTr("Back to &Main Variation")
+        text: qsTr("Back to Main Variation")
         enabled: ! gameModel.isMainVar
         onTriggered: gameModel.backToMainVar()
     }
@@ -43,13 +43,13 @@ QtObject {
     }
     property Action actionBeginningOfBranch: Action {
         shortcut: "Ctrl+B"
-        text: qsTr("Beginning of Bran&ch")
+        text: qsTr("Beginning of Branch")
         enabled: gameModel.hasEarlierVar
         onTriggered: gameModel.gotoBeginningOfBranch()
     }
     property Action actionComputerColors: Action {
         shortcut: "Ctrl+U"
-        text: qsTr("Computer &Colors")
+        text: qsTr("Computer Colors")
         onTriggered: Logic.showComputerColorDialog()
     }
     property Action actionEnd: Action {
@@ -63,13 +63,13 @@ QtObject {
     }
     property Action actionFindMove: Action {
         shortcut: "F6"
-        text: qsTr("&Find Move")
+        text: qsTr("Find Move")
         enabled: ! gameModel.isGameOver
         onTriggered: Logic.findMove()
     }
     property Action actionFindNextComment: Action {
         shortcut: "F3"
-        text: qsTr("Find Next &Comment")
+        text: qsTr("Find Next Comment")
         enabled: gameModel.canGoForward || gameModel.canGoBackward
         onTriggered: Logic.findNextComment()
     }
@@ -95,7 +95,7 @@ QtObject {
     }
     property Action actionFullscreen: Action {
         shortcut: "F11"
-        text: qsTr("&Fullscreen")
+        text: qsTr("Fullscreen")
         checkable: true
         checked: visibility === Window.FullScreen
         onTriggered: {
@@ -107,18 +107,18 @@ QtObject {
     }
     property Action actionGameInfo: Action {
         shortcut: "Ctrl+I"
-        text: qsTr("&Game Info")
+        text: qsTr("Game Info")
         onTriggered: Logic.openGameInfoDialog()
     }
     property Action actionGoto: Action {
         shortcut: "Ctrl+G"
-        text: qsTr("&Go to Move...")
+        text: qsTr("Go to Move...")
         enabled: gameModel.moveNumber + gameModel.movesLeft >= 1
         onTriggered: gotoMoveDialog.open()
     }
     property Action actionHelp: Action {
         shortcut: "F1"
-        text: qsTr("Pentobi &Help")
+        text: qsTr("Pentobi Help")
         onTriggered: Logic.help()
     }
     property Action actionMovePieceDown: Action {
@@ -155,7 +155,7 @@ QtObject {
     }
     property Action actionNew: Action {
         shortcut: "Ctrl+N"
-        text: qsTr("&New")
+        text: qsTr("New")
         enabled: gameDisplay.setupMode
                  || ! (gameModel.isGameEmpty && gameModel.file === ""
                        && ! gameModel.isModified && ! isRated)
@@ -163,7 +163,7 @@ QtObject {
     }
     property Action actionNewRated: Action {
         shortcut: "Ctrl+Shift+N"
-        text: qsTr("&Rated Game")
+        text: qsTr("Rated Game")
         enabled: ! isRated
         onTriggered: Logic.ratedGame()
     }
@@ -183,18 +183,18 @@ QtObject {
     }
     property Action actionOpen: Action {
         shortcut: "Ctrl+O"
-        text: qsTr("&Open...")
+        text: qsTr("Open...")
         onTriggered: Logic.open()
     }
     property Action actionPlay: Action {
         shortcut: "Ctrl+L"
-        text: qsTr("&Play")
+        text: qsTr("Play")
         enabled: ! gameModel.isGameOver && ! isRated
         onTriggered: Logic.computerPlay()
     }
     property Action actionPlaySingle: Action {
         shortcut: "Ctrl+Shift+L"
-        text: qsTr("Play &Single Move")
+        text: qsTr("Play Single Move")
         enabled: ! gameModel.isGameOver && ! isRated
         onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
     }
@@ -218,12 +218,12 @@ QtObject {
     }
     property Action actionQuit: Action {
         shortcut: "Ctrl+Q"
-        text: qsTr("&Quit")
+        text: qsTr("Quit")
         onTriggered: Logic.autoSaveAndQuit()
     }
     property Action actionRating: Action {
         shortcut: "F7"
-        text: qsTr("&Rating")
+        text: qsTr("Rating")
         onTriggered: {
             // Never reuse RatingDialog
             // See comment in Main.qml at ratingModel.onHistoryChanged
@@ -243,18 +243,18 @@ QtObject {
     }
     property Action actionSave: Action {
         shortcut: "Ctrl+S"
-        text: qsTr("&Save")
+        text: qsTr("Save")
         enabled: ! gameModel.isGameEmpty && gameModel.isModified
         onTriggered: if (gameModel.file !== "") Logic.save(); else Logic.saveAs()
     }
     property Action actionSaveAs: Action {
         shortcut: "Ctrl+Shift+S"
-        text: qsTr("Save &As...")
+        text: qsTr("Save As...")
         enabled: ! gameModel.isGameEmpty
         onTriggered: Logic.saveAs()
     }
     property Action actionUndo: Action {
-        text: qsTr("&Undo Move")
+        text: qsTr("Undo Move")
         enabled: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
         onTriggered: Logic.undo()
     }

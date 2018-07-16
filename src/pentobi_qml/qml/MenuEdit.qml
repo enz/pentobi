@@ -4,65 +4,16 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: qsTr("&Edit")
+    title: addMnemonic(qsTr("Edit"),
+                       //: Mnemonic for menu Edit. Leave empty for no mnemonic.
+                       qsTr("E"))
 
-    Pentobi.Menu {
-        title: qsTr("Move &Annotation")
-        enabled: gameModel.moveNumber > 0
-
-        Pentobi.MenuItem {
-            text: qsTr("&None")
-            checkable: true
-            autoExclusive: true
-            checked: gameModel.moveAnnotation === ""
-            onTriggered: gameModel.moveAnnotation = ""
-        }
-        Pentobi.MenuItem {
-            text: qsTr("&Very good")
-            checkable: true
-            autoExclusive: true
-            checked: gameModel.moveAnnotation === "!!"
-            onTriggered: gameModel.moveAnnotation = "!!"
-        }
-        Pentobi.MenuItem {
-            text: qsTr("&Good")
-            checkable: true
-            autoExclusive: true
-            checked: gameModel.moveAnnotation === "!"
-            onTriggered: gameModel.moveAnnotation = "!"
-        }
-        Pentobi.MenuItem {
-            text: qsTr("Int&eresting")
-            checkable: true
-            autoExclusive: true
-            checked: gameModel.moveAnnotation === "!?"
-            onTriggered: gameModel.moveAnnotation = "!?"
-        }
-        Pentobi.MenuItem {
-            text: qsTr("&Doubtful")
-            checkable: true
-            autoExclusive: true
-            checked: gameModel.moveAnnotation === "?!"
-            onTriggered: gameModel.moveAnnotation = "?!"
-        }
-        Pentobi.MenuItem {
-            text: qsTr("&Bad")
-            checkable: true
-            autoExclusive: true
-            checked: gameModel.moveAnnotation === "?"
-            onTriggered: gameModel.moveAnnotation = "?"
-        }
-        Pentobi.MenuItem {
-            text: qsTr("Very B&ad")
-            checkable: true
-            autoExclusive: true
-            checked: gameModel.moveAnnotation === "??"
-            onTriggered: gameModel.moveAnnotation = "??"
-        }
-    }
+    MenuMoveAnnotation { }
     MenuSeparator { }
     Pentobi.MenuItem {
-        text: qsTr("Make &Main Variation")
+        text: addMnemonic(qsTr("Make Main Variation"),
+                          //: Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.
+                          qsTr("M"))
         enabled: ! gameModel.isMainVar
         onTriggered: {
             gameModel.makeMainVar()
@@ -70,51 +21,66 @@ Pentobi.Menu {
         }
     }
     Pentobi.MenuItem {
-        text: qsTr("Move Variation &Up")
+        text: addMnemonic(qsTr("Move Variation Up"),
+                          //: Mnemonic for menu item Move Variation Up. Leave empty for no mnemonic.
+                          qsTr("U"))
         enabled: gameModel.hasPrevVar
         onTriggered: Logic.moveUpVar()
     }
     Pentobi.MenuItem {
-        text: qsTr("Move Variation &Down")
+        text: addMnemonic(qsTr("Move Variation Down"),
+                          //: Mnemonic for menu item Move Variation Down. Leave empty for no mnemonic.
+                          qsTr("W"))
         enabled: gameModel.hasNextVar
         onTriggered: Logic.moveDownVar()
     }
-    MenuSeparator { }
     Pentobi.MenuItem {
-        text: qsTr("&Delete All Variations")
+        text: addMnemonic(qsTr("Delete All Variations"),
+                          //: Mnemonic for menu item Delete All Variations. Leave empty for no mnemonic.
+                          qsTr("D"))
         enabled: gameModel.hasVariations
         onTriggered: Logic.deleteAllVar()
     }
+    MenuSeparator { }
     Pentobi.MenuItem {
-        text: qsTr("&Truncate")
+        text: addMnemonic(qsTr("Truncate"),
+                          //: Mnemonic for menu item Truncate. Leave empty for no mnemonic.
+                          qsTr("T"))
         enabled: gameModel.canGoBackward
         onTriggered: Logic.truncate()
     }
     Pentobi.MenuItem {
-        text: qsTr("Truncate &Children")
+        text: addMnemonic(qsTr("Truncate Children"),
+                          //: Mnemonic for menu item Truncate Children. Leave empty for no mnemonic.
+                          qsTr("C"))
         enabled: gameModel.canGoForward
         onTriggered: Logic.truncateChildren()
     }
     Pentobi.MenuItem {
-        text: qsTr("&Keep Only Position")
+        text: addMnemonic(qsTr("Keep Only Position"),
+                          //: Mnemonic for menu item Keep Only Position. Leave empty for no mnemonic.
+                          qsTr("P"))
         enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward)
         onTriggered: Logic.keepOnlyPosition()
     }
     Pentobi.MenuItem {
-        text: qsTr("Keep Only &Subtree")
+        text: addMnemonic(qsTr("Keep Only Subtree"),
+                          //: Mnemonic for menu item Keep Only Subtree. Leave empty for no mnemonic.
+                          qsTr("S"))
         enabled: gameModel.canGoBackward && gameModel.canGoForward
         onTriggered: Logic.keepOnlySubtree()
     }
     MenuSeparator { }
     Pentobi.MenuItem {
-        text: qsTr("S&etup Mode")
+        text: addMnemonic(qsTr("Setup Mode"),
+                          //: Mnemonic for menu item Setup Mode. Leave empty for no mnemonic.
+                          qsTr("O"))
         checkable: true
         enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
                  && gameModel.moveNumber === 0
         checked: gameDisplay.setupMode
         onTriggered: {
-            // Set checked explicitely because of QTBUG-69401
-            checked = ! gameDisplay.setupMode
+            checked = ! gameDisplay.setupMode // Workaround for QTBUG-69401
             gameDisplay.setupMode = checked
             if (checked)
                 gameDisplay.showPieces()
@@ -123,7 +89,9 @@ Pentobi.Menu {
         }
     }
     Pentobi.MenuItem {
-        text: qsTr("&Next Color")
+        text: addMnemonic(qsTr("Next Color"),
+                          //: Mnemonic for menu item Next Color. Leave empty for no mnemonic.
+                          qsTr("N"))
         onTriggered: {
             gameDisplay.pickedPiece = null
             gameModel.nextColor()

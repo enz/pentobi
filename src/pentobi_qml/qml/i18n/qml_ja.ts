@@ -4,80 +4,80 @@
 <context>
     <name>Actions</name>
     <message>
-        <source>Computer &amp;Colors</source>
+        <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;New</source>
-        <translation>新規対局</translation>
-    </message>
-    <message>
-        <source>&amp;Play</source>
+        <source>Rated Game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Quit</source>
-        <translation>終了</translation>
-    </message>
-    <message>
-        <source>&amp;Undo Move</source>
+        <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Back to &amp;Main Variation</source>
-        <translation>本手順へ戻る</translation>
+        <source>Game Info</source>
+        <translation type="unfinished">対局情報</translation>
     </message>
     <message>
-        <source>&amp;Find Move</source>
+        <source>Undo Move</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Game Info</source>
-        <translation>対局情報</translation>
-    </message>
-    <message>
-        <source>&amp;Go to Move...</source>
-        <translation>N手目へ移動...</translation>
-    </message>
-    <message>
-        <source>Pentobi &amp;Help</source>
-        <translation>ヘルプ</translation>
-    </message>
-    <message>
-        <source>&amp;Rated Game</source>
+        <source>Find Move</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Open...</source>
-        <translation>開く...</translation>
-    </message>
-    <message>
-        <source>Play &amp;Single Move</source>
-        <translation>1手打つ</translation>
-    </message>
-    <message>
-        <source>&amp;Rating</source>
+        <source>Open...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Save</source>
-        <translation>上書き保存</translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation>名前を付けて保存...</translation>
-    </message>
-    <message>
-        <source>Beginning of Bran&amp;ch</source>
+        <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find Next &amp;Comment</source>
-        <translation>次のコメントを検索</translation>
+        <source>Save</source>
+        <translation type="unfinished">上書き保存</translation>
     </message>
     <message>
-        <source>&amp;Fullscreen</source>
-        <translation>フルスクリーン</translation>
+        <source>Save As...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pentobi Help</source>
+        <translation type="unfinished">Pentobi ヘルプ</translation>
+    </message>
+    <message>
+        <source>Back to Main Variation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beginning of Branch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find Next Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to Move...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Computer Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play Single Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -159,15 +159,30 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Open</source>
+        <source>Open</source>
+        <translation type="unfinished">開く</translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for button Open. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Save</source>
+        <source>Save</source>
         <translation type="unfinished">上書き保存</translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
+        <source>S</source>
+        <extracomment>Mnemonic for button Save. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -665,352 +680,514 @@
 <context>
     <name>MenuComputer</name>
     <message>
-        <source>&amp;Computer</source>
+        <source>P</source>
+        <extracomment>Mnemonic for menu item Play. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Classic, 4 Players)</source>
+        <source>Computer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Classic, 2 Players)</source>
+        <source>C</source>
+        <extracomment>Mnemonic for menu Computer. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Classic, 3 Players)</source>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Computer Colors. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Duo)</source>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Play Single Move. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Junior)</source>
+        <source>Stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Trigon, 4 Players)</source>
+        <source>S</source>
+        <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Trigon, 2 Players)</source>
+        <source>Level (Classic, 4 Players)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Trigon, 3 Players)</source>
+        <source>L</source>
+        <extracomment>Mnemonic for menu item Level. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Nexos, 4 Players)</source>
+        <source>Level (Classic, 2 Players)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Nexos, 2 Players)</source>
+        <source>Level (Classic, 3 Players)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Callisto, 4 Players)</source>
+        <source>Level (Duo)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Callisto, 3 Players)</source>
+        <source>Level (Junior)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play &amp;Single Move</source>
-        <translation type="vanished">1手打つ</translation>
-    </message>
-    <message>
-        <source>St&amp;op</source>
-        <translation>割り込み</translation>
-    </message>
-    <message>
-        <source>&amp;Level (GembloQ, 4 Players)</source>
+        <source>Level (Trigon, 4 Players)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (GembloQ, 3 Players)</source>
+        <source>Level (Trigon, 2 Players)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (GembloQ, 2 Players, 2 Colors)</source>
+        <source>Level (Trigon, 3 Players)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (GembloQ, 2 Players, 4 Colors)</source>
+        <source>Level (Nexos, 4 Players)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Callisto, 2 Players, 2 Colors)</source>
+        <source>Level (Nexos, 2 Players)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Level (Callisto, 2 Players, 4 Colors)</source>
+        <source>Level (Callisto, 4 Players)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 2 Players, 2 Colors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 2 Players, 4 Colors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 3 Players)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 4 Players)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 2 Players, 2 Colors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 2 Players, 4 Colors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 3 Players)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MenuEdit</name>
     <message>
-        <source>&amp;Edit</source>
-        <translation>編集</translation>
-    </message>
-    <message>
-        <source>Make &amp;Main Variation</source>
-        <translation>本手順にする</translation>
-    </message>
-    <message>
-        <source>Move Variation &amp;Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move Variation &amp;Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Truncate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Truncate &amp;Children</source>
-        <translation>子ノードの削除</translation>
-    </message>
-    <message>
-        <source>&amp;Delete All Variations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Next Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Keep Only Position</source>
-        <translation>位置のみ保存</translation>
-    </message>
-    <message>
-        <source>Keep Only &amp;Subtree</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move &amp;Annotation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Very good</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Good</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Doubtful</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Bad</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Very B&amp;ad</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Int&amp;eresting</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S&amp;etup Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Made main variation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make Main Variation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Variation Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>U</source>
+        <extracomment>Mnemonic for menu item Move Variation Up. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Variation Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>W</source>
+        <extracomment>Mnemonic for menu item Move Variation Down. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete All Variations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Delete All Variations. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Truncate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T</source>
+        <extracomment>Mnemonic for menu item Truncate. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Truncate Children</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Truncate Children. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keep Only Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P</source>
+        <extracomment>Mnemonic for menu item Keep Only Position. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keep Only Subtree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S</source>
+        <extracomment>Mnemonic for menu item Keep Only Subtree. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Setup Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>N</source>
+        <extracomment>Mnemonic for menu item Next Color. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E</source>
+        <extracomment>Mnemonic for menu Edit. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Setup Mode. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MenuExport</name>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E</source>
+        <extracomment>Mnemonic for menu Export. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Image. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ASCII Art</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MenuGame</name>
     <message>
-        <source>&amp;Game</source>
-        <translation>対局情報</translation>
-    </message>
-    <message>
-        <source>&amp;New</source>
-        <translation type="vanished">新規対局</translation>
-    </message>
-    <message>
-        <source>Game &amp;Variant</source>
+        <source>Game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Classic (&amp;3 Players)</source>
+        <source>R</source>
+        <extracomment>Mnemonic for menu item Rated Game. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Classic (&amp;4 Players)</source>
+        <source>G</source>
+        <extracomment>Mnemonic for menu Game. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Duo</source>
+        <source>N</source>
+        <extracomment>Mnemonic for menu item New. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Junior</source>
+        <source>I</source>
+        <extracomment>Mnemonic for menu item Game Info. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Open...</source>
-        <translation type="vanished">開く...</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation type="vanished">終了</translation>
-    </message>
-    <message>
-        <source>&amp;Classic</source>
+        <source>U</source>
+        <extracomment>Mnemonic for menu item Undo. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Classic (&amp;2 Players)</source>
+        <source>F</source>
+        <extracomment>Mnemonic for menu item Find Move. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Trigon</source>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Open. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Trigon (&amp;2 Players)</source>
+        <source>Open Recent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Trigon (&amp;3 Players)</source>
+        <source>Open from Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Trigon (&amp;4 Players)</source>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Open from Clipboard. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Nexos</source>
+        <source>P</source>
+        <extracomment>Mnemonic for menu Open Recent. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nexos (&amp;2 Players)</source>
+        <source>S</source>
+        <extracomment>Mnemonic for menu item Save. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nexos (&amp;4 Players)</source>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Save As. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>C&amp;allisto</source>
+        <source>Q</source>
+        <extracomment>Mnemonic for menu item Quit. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MenuGameVariant</name>
+    <message>
+        <source>Game Variant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Callisto (&amp;3 Players)</source>
+        <source>V</source>
+        <extracomment>Mnemonic for menu Game Variant. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Callisto (&amp;4 Players)</source>
+        <source>Classic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Export</source>
-        <translation>エクスポート</translation>
-    </message>
-    <message>
-        <source>&amp;Image</source>
+        <source>C</source>
+        <extracomment>Mnemonic for menu Classic. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;ASCII Art</source>
+        <source>Classic (%1 Players)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Save</source>
-        <translation type="vanished">上書き保存</translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation type="vanished">名前を付けて保存...</translation>
-    </message>
-    <message>
-        <source>&amp;Game Info</source>
-        <translation type="vanished">対局情報</translation>
-    </message>
-    <message>
-        <source>Open R&amp;ecent</source>
-        <translation>最近使ったファイル</translation>
-    </message>
-    <message>
-        <source>Open from &amp;Clipboard</source>
+        <source>2</source>
+        <extracomment>Mnemonic for menu item Classic/Trigon/Nexos (2 Players) and GambloQ/Callisto (&amp;2 Players, 2 Colors). Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;GembloQ</source>
+        <source>3</source>
+        <extracomment>Mnemonic for menu item Classic/Trigon/GembloQ/Callisto (3 Players). Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>GembloQ (&amp;2 Players, 2 Colors)</source>
+        <source>4</source>
+        <extracomment>Mnemonic for menu item Classic/Trigon/Nexos/GembloQ/Callisto (4 Players). Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>GembloQ (2 &amp;Players, 4 Colors)</source>
+        <source>Duo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>GembloQ (&amp;3 Players)</source>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Duo. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>GembloQ (&amp;4 Players)</source>
+        <source>Junior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Callisto (&amp;2 Players, 2 Colors)</source>
+        <source>J</source>
+        <extracomment>Mnemonic for menu item Junior. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Callisto (2 &amp;Players, 4 Colors)</source>
+        <source>Trigon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T</source>
+        <extracomment>Mnemonic for menu Trigon. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nexos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>N</source>
+        <extracomment>Mnemonic for menu Nexos. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GembloQ</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Callisto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Callisto. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>G</source>
+        <extracomment>Mnemonic for menu GembloQ. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trigon (%1 Players)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nexos (%1 Players)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GembloQ (2 Players, 2 Colors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GembloQ (2 Players, 4 Colors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GembloQ (%1 Players)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Callisto (2 Players, 2 Colors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Callisto (2 Players, 4 Colors)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Callisto (%1 Players)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P</source>
+        <extracomment>Mnemonic for menu item GembloQ/Callisto (2 Players, 4 Colors). Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MenuGo</name>
     <message>
-        <source>G&amp;o</source>
-        <translation>移動</translation>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Back to &amp;Main Variation</source>
-        <translation type="vanished">本手順へ戻る</translation>
+        <source>O</source>
+        <extracomment>Mnemonic for menu Go. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Go to Move...</source>
-        <translation type="vanished">N手目へ移動...</translation>
+        <source>G</source>
+        <extracomment>Mnemonic for menu item Go to Move. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find Next &amp;Comment</source>
-        <translation type="vanished">次のコメントを検索</translation>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Back to Main Variation. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B</source>
+        <extracomment>Mnemonic for menu item Beginning Of Branch. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Find Next Comment. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MenuHelp</name>
     <message>
-        <source>&amp;Help</source>
-        <translation>ヘルプ</translation>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;About Pentobi</source>
-        <translation>Pentobiについて</translation>
+        <source>H</source>
+        <extracomment>Mnemonic for menu Help. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pentobi &amp;Help</source>
-        <translation type="vanished">ヘルプ</translation>
+        <source>P</source>
+        <extracomment>Mnemonic for menu item Pentobi Help. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Pentobi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1034,118 +1211,325 @@
     </message>
 </context>
 <context>
+    <name>MenuMoveAnnotation</name>
+    <message>
+        <source>Move Annotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>N</source>
+        <extracomment>Mnemonic for menu item Move Annotation/None. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very good</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V</source>
+        <extracomment>Mnemonic for menu item Very good. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Good</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>G</source>
+        <extracomment>Mnemonic for menu item Good. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interesting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E</source>
+        <extracomment>Mnemonic for menu item Interesting. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Doubtful</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Doubtful. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>B</source>
+        <extracomment>Mnemonic for menu item Bad. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very Bad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu Move Annotation. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>R</source>
+        <extracomment>Mnemonic for menu item Very Bad. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MenuMoveMarking</name>
+    <message>
+        <source>Move Marking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M</source>
+        <extracomment>Mnemonic for menu Move Marking. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last With Dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Last With Dot. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last With Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>N</source>
+        <extracomment>Mnemonic for menu item Last With Number. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All With Number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item All With Number. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Move Marking/None. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MenuTheme</name>
+    <message>
+        <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T</source>
+        <extracomment>Mnemonic for menu Theme. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>L</source>
+        <extracomment>Mnemonic for menu item Theme/Light. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Theme/Dark. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Colorblind Light</source>
+        <extracomment>Name of light theme optimized for colorblindness.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Colorblind Light. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Colorblind Dark</source>
+        <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Colorblind Dark. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MenuTools</name>
     <message>
-        <source>&amp;Tools</source>
-        <translation>ツール</translation>
-    </message>
-    <message>
-        <source>&amp;Analyze Game</source>
+        <source>Tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Clear Rating</source>
+        <source>T</source>
+        <extracomment>Mnemonic for menu Tools. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clear A&amp;nalysis</source>
+        <source>R</source>
+        <extracomment>Mnemonic for menu item Rating. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Rating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Clear Rating. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Analyze Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Analyze Game. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Analysis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E</source>
+        <extracomment>Mnemonic for menu item Clear Analysis. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MenuView</name>
     <message>
-        <source>&amp;View</source>
-        <translation>表示</translation>
-    </message>
-    <message>
-        <source>&amp;Animate Pieces</source>
+        <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Coordinates</source>
+        <source>V</source>
+        <extracomment>Mnemonic for menu View. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Move Marking</source>
+        <source>Coordinates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Last With &amp;Dot</source>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Coordinates. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Last With &amp;Number</source>
+        <source>Show Variations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;All With Number</source>
+        <source>Layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>N&amp;one</source>
+        <source>L</source>
+        <extracomment>Mnemonic for menu Layout. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show &amp;Variations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Fullscreen</source>
-        <translation type="vanished">フルスクリーン</translation>
-    </message>
-    <message>
-        <source>&amp;Theme</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Light</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Dark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Colorblind Light</source>
-        <extracomment>Name of light theme optimized for colorblindness.</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colorblind D&amp;ark</source>
-        <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Layout</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Desktop</source>
+        <source>Desktop</source>
         <extracomment>Name of window layout optimized for desktop.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Mobile</source>
+        <source>D</source>
+        <extracomment>Mnemonic for menu item Desktop. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mobile</source>
         <extracomment>Name of window layout optimized for smartphones.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Mobile. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Animate Pieces</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Animate Pieces. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F</source>
+        <extracomment>Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S</source>
+        <extracomment>Mnemonic for menu item Show Variations. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>OkButton</name>
     <message>
-        <source>&amp;OK</source>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>OkCancelButtons</name>
     <message>
-        <source>&amp;OK</source>
+        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
+        <source>O</source>
+        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>

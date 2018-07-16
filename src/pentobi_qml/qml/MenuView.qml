@@ -4,103 +4,45 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: qsTr("&View")
+    title: addMnemonic(qsTr("View"),
+                       //: Mnemonic for menu View. Leave empty for no mnemonic.
+                       qsTr("V"))
 
-    Pentobi.Menu {
-        title: qsTr("&Move Marking")
-
-        Pentobi.MenuItem {
-            text: qsTr("Last With &Dot")
-            checkable: true
-            autoExclusive: true
-            checked: gameDisplay.moveMarking !== "last_number"
-                     && gameDisplay.moveMarking !== "all_number"
-                     && gameDisplay.moveMarking !== "none"
-            onTriggered: gameDisplay.moveMarking = "last_dot"
-        }
-        Pentobi.MenuItem {
-            text: qsTr("Last With &Number")
-            checkable: true
-            autoExclusive: true
-            checked: gameDisplay.moveMarking === "last_number"
-            onTriggered: gameDisplay.moveMarking = "last_number"
-        }
-        Pentobi.MenuItem {
-            text: qsTr("&All With Number")
-            checkable: true
-            autoExclusive: true
-            checked: gameDisplay.moveMarking === "all_number"
-            onTriggered: gameDisplay.moveMarking = "all_number"
-        }
-        Pentobi.MenuItem {
-            text: qsTr("N&one")
-            checkable: true
-            autoExclusive: true
-            checked: gameDisplay.moveMarking === "none"
-            onTriggered: gameDisplay.moveMarking = "none"
-        }
-    }
+    MenuMoveMarking { }
     Pentobi.MenuItem {
-        text: qsTr("&Coordinates")
+        text: addMnemonic(qsTr("Coordinates"),
+                          //: Mnemonic for menu item Coordinates. Leave empty for no mnemonic.
+                          qsTr("C"))
         checkable: true
         checked: gameDisplay.showCoordinates
         onTriggered: {
-            // Set checked explicitely because of QTBUG-69401
-            checked = ! gameDisplay.showCoordinates
+            checked = ! gameDisplay.showCoordinates // Workaround for QTBUG-69401
             gameDisplay.showCoordinates = checked
         }
     }
     Pentobi.MenuItem {
-        text: qsTr("Show &Variations")
+        text: addMnemonic(qsTr("Show Variations"),
+                          //: Mnemonic for menu item Show Variations. Leave empty for no mnemonic.
+                          qsTr("S"))
         checkable: true
         checked: gameModel.showVariations
         onTriggered: {
-            // Set checked explicitely because of QTBUG-69401
-            checked = ! gameModel.showVariations
+            checked = ! gameModel.showVariations // Workaround for QTBUG-69401
             gameModel.showVariations = checked
         }
     }
     MenuSeparator { }
+    MenuTheme { }
     Pentobi.Menu {
-        title: qsTr("&Theme")
-
-        Pentobi.MenuItem {
-            text: qsTr("&Light")
-            checkable: true
-            autoExclusive: true
-            checked: themeName === "light"
-            onTriggered: themeName = "light"
-        }
-        Pentobi.MenuItem {
-            text: qsTr("&Dark")
-            checkable: true
-            autoExclusive: true
-            checked: themeName === "dark"
-            onTriggered: themeName = "dark"
-        }
-        Pentobi.MenuItem {
-            //: Name of light theme optimized for colorblindness.
-            text: qsTr("&Colorblind Light")
-            checkable: true
-            autoExclusive: true
-            checked: themeName === "colorblind-light"
-            onTriggered: themeName = "colorblind-light"
-        }
-        Pentobi.MenuItem {
-            //: Name of dark theme optimized for colorblindness.
-            text: qsTr("Colorblind D&ark")
-            checkable: true
-            autoExclusive: true
-            checked: themeName === "colorblind-dark"
-            onTriggered: themeName = "colorblind-dark"
-        }
-    }
-    Pentobi.Menu {
-        title: qsTr("&Layout")
+        title: addMnemonic(qsTr("Layout"),
+                          //: Mnemonic for menu Layout. Leave empty for no mnemonic.
+                          qsTr("L"))
         enabled: ! isAndroid
         Pentobi.MenuItem {
             //: Name of window layout optimized for desktop.
-            text: qsTr("&Desktop")
+            text: addMnemonic(qsTr("Desktop"),
+                              //: Mnemonic for menu item Desktop. Leave empty for no mnemonic.
+                              qsTr("D"))
             checkable: true
             autoExclusive: true
             checked: isDesktop
@@ -112,7 +54,9 @@ Pentobi.Menu {
         }
         Pentobi.MenuItem {
             //: Name of window layout optimized for smartphones.
-            text: qsTr("&Mobile")
+            text: addMnemonic(qsTr("Mobile"),
+                              //: Mnemonic for menu item Mobile. Leave empty for no mnemonic.
+                              qsTr("M"))
             checkable: true
             autoExclusive: true
             checked: ! isDesktop
@@ -124,15 +68,21 @@ Pentobi.Menu {
         }
     }
     Pentobi.MenuItem {
-        text: qsTr("&Animate Pieces")
+        text: addMnemonic(qsTr("Animate Pieces"),
+                          //: Mnemonic for menu item Animate Pieces. Leave empty for no mnemonic.
+                          qsTr("A"))
         checkable: true
         checked: gameDisplay.enableAnimations
         onTriggered: {
-            // Set checked explicitely because of QTBUG-69401
-            checked = ! gameDisplay.enableAnimations
+            checked = ! gameDisplay.enableAnimations // Workaround for QTBUG-69401
             gameDisplay.enableAnimations = checked
         }
     }
     MenuSeparator { }
-    Pentobi.MenuItem { action: actions.actionFullscreen }
+    Pentobi.MenuItem {
+        action: actions.actionFullscreen
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.
+                          qsTr("F"))
+    }
 }

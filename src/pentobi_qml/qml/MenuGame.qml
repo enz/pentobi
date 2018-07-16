@@ -5,118 +5,56 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: qsTr("&Game")
+    title: addMnemonic(qsTr("Game"),
+                       //: Mnemonic for menu Game. Leave empty for no mnemonic.
+                       qsTr("G"))
 
-    Pentobi.MenuItem { action: actions.actionNew }
-    Pentobi.MenuItem { action: actions.actionNewRated }
-    MenuSeparator { }
-    Pentobi.Menu {
-        title: qsTr("Game &Variant")
-
-        ButtonGroup { id: groupGameVariant }
-        Pentobi.Menu {
-            title: qsTr("&Classic")
-
-            MenuItemGameVariant {
-                gameVariant: "classic_2"
-                text: qsTr("Classic (&2 Players)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "classic_3"
-                text: qsTr("Classic (&3 Players)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "classic"
-                text: qsTr("Classic (&4 Players)")
-            }
-        }
-        MenuItemGameVariant {
-            gameVariant: "duo"
-            text: qsTr("&Duo")
-        }
-        MenuItemGameVariant {
-            gameVariant: "junior"
-            text: qsTr("&Junior")
-        }
-        Pentobi.Menu {
-            title: qsTr("&Trigon")
-
-            MenuItemGameVariant {
-                gameVariant: "trigon_2"
-                text: qsTr("Trigon (&2 Players)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "trigon_3"
-                text: qsTr("Trigon (&3 Players)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "trigon"
-                text: qsTr("Trigon (&4 Players)")
-            }
-        }
-        Pentobi.Menu {
-            title: qsTr("&Nexos")
-
-            MenuItemGameVariant {
-                gameVariant: "nexos_2"
-                text: qsTr("Nexos (&2 Players)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "nexos"
-                text: qsTr("Nexos (&4 Players)")
-            }
-        }
-        Pentobi.Menu {
-            title: qsTr("&GembloQ")
-
-            MenuItemGameVariant {
-                gameVariant: "gembloq_2"
-                text: qsTr("GembloQ (&2 Players, 2 Colors)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "gembloq_2_4"
-                text: qsTr("GembloQ (2 &Players, 4 Colors)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "gembloq_3"
-                text: qsTr("GembloQ (&3 Players)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "gembloq"
-                text: qsTr("GembloQ (&4 Players)")
-            }
-        }
-        Pentobi.Menu {
-            title: qsTr("C&allisto")
-
-            MenuItemGameVariant {
-                gameVariant: "callisto_2"
-                text: qsTr("Callisto (&2 Players, 2 Colors)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "callisto_2_4"
-                text: qsTr("Callisto (2 &Players, 4 Colors)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "callisto_3"
-                text: qsTr("Callisto (&3 Players)")
-            }
-            MenuItemGameVariant {
-                gameVariant: "callisto"
-                text: qsTr("Callisto (&4 Players)")
-            }
-        }
+    Pentobi.MenuItem {
+        action: actions.actionNew
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item New. Leave empty for no mnemonic.
+                          qsTr("N"))
     }
-    Pentobi.MenuItem { action: actions.actionGameInfo }
+    Pentobi.MenuItem {
+        action: actions.actionNewRated
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Rated Game. Leave empty for no mnemonic.
+                          qsTr("R"))
+    }
     MenuSeparator { }
-    Pentobi.MenuItem { action: actions.actionUndo }
-    Pentobi.MenuItem { action: actions.actionFindMove }
+    MenuGameVariant { }
+    Pentobi.MenuItem {
+        action: actions.actionGameInfo
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Game Info. Leave empty for no mnemonic.
+                          qsTr("I"))
+    }
     MenuSeparator { }
-    Pentobi.MenuItem { action: actions.actionOpen }
+    Pentobi.MenuItem {
+        action: actions.actionUndo
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Undo. Leave empty for no mnemonic.
+                          qsTr("U"))
+    }
+    Pentobi.MenuItem {
+        action: actions.actionFindMove
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Find Move. Leave empty for no mnemonic.
+                          qsTr("F"))
+    }
+    MenuSeparator { }
+    Pentobi.MenuItem {
+        action: actions.actionOpen
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Open. Leave empty for no mnemonic.
+                          qsTr("O"))
+    }
     Pentobi.Menu {
         id: recentFiles
 
-        title: qsTr("Open R&ecent")
+        title: addMnemonic(qsTr("Open Recent"),
+                           //: Mnemonic for menu Open Recent. Leave empty for no mnemonic.
+                           qsTr("P"))
         enabled: gameModel.recentFiles.length > 0
 
         Instantiator {
@@ -136,23 +74,29 @@ Pentobi.Menu {
         }
     }
     Pentobi.MenuItem {
-        text: qsTr("Open from &Clipboard")
+        text: addMnemonic(qsTr("Open from Clipboard"),
+                          //: Mnemonic for menu item Open from Clipboard. Leave empty for no mnemonic.
+                          qsTr("C"))
         onTriggered: Logic.openClipboard()
     }
-    Pentobi.MenuItem { action: actions.actionSave }
-    Pentobi.MenuItem { action: actions.actionSaveAs }
-    Pentobi.Menu {
-        title: qsTr("&Export")
-
-        Pentobi.MenuItem {
-            text: qsTr("&Image")
-            onTriggered: exportImageDialog.open()
-        }
-        Pentobi.MenuItem {
-            text: qsTr("&ASCII Art")
-            onTriggered: asciiArtSaveDialog.open()
-        }
+    Pentobi.MenuItem {
+        action: actions.actionSave
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Save. Leave empty for no mnemonic.
+                          qsTr("S"))
     }
+    Pentobi.MenuItem {
+        action: actions.actionSaveAs
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Save As. Leave empty for no mnemonic.
+                          qsTr("A"))
+    }
+    MenuExport { }
     MenuSeparator { }
-    Pentobi.MenuItem { action: actions.actionQuit }
+    Pentobi.MenuItem {
+        action: actions.actionQuit
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item Quit. Leave empty for no mnemonic.
+                          qsTr("Q"))
+    }
 }

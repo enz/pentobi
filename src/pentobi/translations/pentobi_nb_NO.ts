@@ -686,10 +686,6 @@
         <translation>Kun behold undertreet</translation>
     </message>
     <message>
-        <source>[*]%1</source>
-        <translation type="vanished">[*]%1</translation>
-    </message>
-    <message>
         <source>Setup mode cannot be used if moves have been played.</source>
         <translation>Oppsettsmodus kan ikke brukes hvis trekk har blitt spilt.</translation>
     </message>
