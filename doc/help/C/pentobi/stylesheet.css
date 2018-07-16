@@ -21,6 +21,10 @@ body {
   color:purple;
 }
 
+:focus {
+  outline-color: darkorange;
+}
+
 img {
   width: auto;
   height: auto;
