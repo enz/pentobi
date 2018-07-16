@@ -31,7 +31,7 @@ MenuItem {
         }
     }
     contentItem: RowLayout {
-        spacing: 0
+        spacing: 0.2 * font.pixelSize
         opacity: enabled ? 1.0 : 0.3
         anchors.fill: parent
 
