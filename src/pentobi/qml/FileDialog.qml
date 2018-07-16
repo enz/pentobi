@@ -109,12 +109,14 @@ Pentobi.Dialog {
             clip: true
             model: folderModel
             boundsBehavior: Flickable.StopAtBounds
-            highlight: Rectangle { color: "#ddd" }
-            highlightMoveDuration: 0
             delegate: AbstractButton {
                 width: view.width
                 height: 2 * font.pixelSize
                 onActiveFocusChanged: if (activeFocus) view.currentIndex = index
+                background: Rectangle {
+                    anchors.fill: parent
+                    color: view.currentIndex == index ? "#ddd" : "white"
+                }
                 contentItem: Row {
                     Image {
                         anchors.verticalCenter: parent.verticalCenter
