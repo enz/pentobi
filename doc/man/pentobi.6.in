@@ -1,25 +1,23 @@
-.TH PENTOBI 6 "2018-05-03" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
-
+.TH PENTOBI 6 "2018-07-17" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
 .SH NAME
 pentobi \- computer opponent for the board game Blokus
-
 .SH SYNOPSIS
 .B pentobi
 .RI [ options ] " [file]"
 .br
-
 .SH DESCRIPTION
-
 .B pentobi
 is the command to invoke the program Pentobi, which is a graphical user
 interface and computer opponent to play the board game Blokus.
-
+.PP
 The command can take the name of a game file to open at startup as an optional
 argument.
 The game file is expected to be in Pentobi's SGF format as documented in
 doc/blksgf/Pentobi-SGF.html in the Pentobi source package.
-
 .SH OPTIONS
+.TP
+.B \-h, \-\-help
+Display help and exit.
 .TP
 .B \-\-maxlevel
 Set the maximum playing level. Reducing this value reduces the amount
@@ -29,9 +27,6 @@ By default, Pentobi currently allocates up to 2 GB (but not more than a quarter
 of the physical memory available on the system).
 Reducing the maximum level to 8 currently reduces this amount by a factor
 of 3 to 4 and lower maximum levels even more.
-.TP
-.B \-h, \-\-help
-Display help and exit.
 .TP
 .B \-\-nobook
 Do not use opening books.
@@ -56,9 +51,19 @@ in higher playing levels.
 .B \-\-verbose
 Print internal information about the move generation and other debugging
 information to standard error.
-
+.PP
+Standard options for Qt applications:
+.TP
+.B \-display
+Switches displays on X11.
+.TP
+.B \-geometry
+Window geometry using the X11 syntax.
+.TP
+.B \-style
+Set the style for the GUI elements of QQuickControls 2. If no style is chosen,
+the default is Fusion.
 .SH SEE ALSO
 .BR pentobi-thumbnailer (6)
-
 .SH AUTHOR
 Markus Enzenberger <enz@users.sourceforge.net>
