@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.2
 import "." as Pentobi
 
@@ -10,17 +11,33 @@ Pentobi.Dialog {
         imageSaveDialog.open()
     }
 
-    Column {
-        width: Math.min(textField.height * 8, 0.9 * rootWindow.width)
+    Item {
+        implicitWidth: {
+            var w = rowLayout.implicitWidth
+            // Avoid too small width because Default style in Qt 5.11 makes
+            // footer no wider than content, which can cause elided text on
+            // dialog buttons
+            w = Math.max(w, font.pixelSize * 18)
+            w = Math.min(w, 0.85 * rootWindow.width)
+            return w
+        }
+        implicitHeight: rowLayout.implicitHeight
 
-        Label { text: qsTr("Image width:") }
-        TextField {
-            id: textField
+        RowLayout {
+            id: rowLayout
 
-            text: exportImageWidth
-            width: parent.width
-            inputMethodHints: Qt.ImhDigitsOnly
-            validator: IntValidator{ bottom: 0; top: 32767 }
+            anchors.fill: parent
+
+            Label { text: qsTr("Image width:") }
+            TextField {
+                id: textField
+
+                text: exportImageWidth
+                inputMethodHints: Qt.ImhDigitsOnly
+                validator: IntValidator{ bottom: 0; top: 32767 }
+                Layout.preferredWidth: font.pixelSize * 7
+            }
+            Item { Layout.fillWidth: true }
         }
     }
 }

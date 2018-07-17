@@ -27,84 +27,92 @@ Pentobi.Dialog {
         gameModel.round = round
     }
 
-    GridLayout {
-        columns: 2
+    Item {
+        implicitWidth: Math.min(font.pixelSize * 25, 0.85 * rootWindow.width)
+        implicitHeight: gridLayout.implicitHeight
 
-        Label {
-            text: {
-                if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                      return qsTr("Player Blue/Red:")
-                if (gameModel.gameVariant === "duo")
-                    return qsTr("Player Purple:")
-                if (gameModel.gameVariant === "junior")
-                    return qsTr("Player Green:")
-                return qsTr("Player Blue:")
+        GridLayout {
+            id: gridLayout
+
+            anchors.fill: parent
+            columns: 2
+
+            Label {
+                text: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return qsTr("Player Blue/Red:")
+                    if (gameModel.gameVariant === "duo")
+                        return qsTr("Player Purple:")
+                    if (gameModel.gameVariant === "junior")
+                        return qsTr("Player Green:")
+                    return qsTr("Player Blue:")
+                }
             }
-        }
-        TextField {
-            id: textFieldPlayerName0
+            TextField {
+                id: textFieldPlayerName0
 
-            Layout.maximumWidth: font.pixelSize * 12
-        }
-        Label {
-            text: {
-                if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                    return qsTr("Player Yellow/Green:")
-                if (gameModel.gameVariant === "duo" || gameModel.gameVariant === "junior")
-                    return qsTr("Player Orange:")
-                if (gameModel.nuColors === 2)
-                    return qsTr("Player Green:")
-                return qsTr("Player Yellow:")
+                Layout.fillWidth: true
             }
-        }
-        TextField {
-            id: textFieldPlayerName1
+            Label {
+                text: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return qsTr("Player Yellow/Green:")
+                    if (gameModel.gameVariant === "duo" || gameModel.gameVariant === "junior")
+                        return qsTr("Player Orange:")
+                    if (gameModel.nuColors === 2)
+                        return qsTr("Player Green:")
+                    return qsTr("Player Yellow:")
+                }
+            }
+            TextField {
+                id: textFieldPlayerName1
 
-            Layout.maximumWidth: font.pixelSize * 12
-        }
-        Label {
-            visible: textFieldPlayerName2.visible
-            text: qsTr("Player Red:")
-        }
-        TextField {
-            id: textFieldPlayerName2
+                Layout.fillWidth: true
+            }
+            Label {
+                visible: textFieldPlayerName2.visible
+                text: qsTr("Player Red:")
+            }
+            TextField {
+                id: textFieldPlayerName2
 
-            visible: gameModel.nuPlayers > 2
-            Layout.maximumWidth: font.pixelSize * 12
-        }
-        Label {
-            visible: textFieldPlayerName3.visible
-            text: qsTr("Player Green:")
-        }
-        TextField {
-            id: textFieldPlayerName3
+                visible: gameModel.nuPlayers > 2
+                Layout.fillWidth: true
+            }
+            Label {
+                visible: textFieldPlayerName3.visible
+                text: qsTr("Player Green:")
+            }
+            TextField {
+                id: textFieldPlayerName3
 
-            visible: gameModel.nuPlayers > 3
-            Layout.maximumWidth: font.pixelSize * 12
-        }
-        Label { text: qsTr("Date:") }
-        TextField {
-            id: textFieldDate
+                visible: gameModel.nuPlayers > 3
+                Layout.fillWidth: true
+            }
+            Label { text: qsTr("Date:") }
+            TextField {
+                id: textFieldDate
 
-            Layout.maximumWidth: font.pixelSize * 12
-        }
-        Label { text: qsTr("Time:") }
-        TextField {
-            id: textFieldTime
+                Layout.fillWidth: true
+            }
+            Label { text: qsTr("Time:") }
+            TextField {
+                id: textFieldTime
 
-            Layout.maximumWidth: font.pixelSize * 12
-        }
-        Label { text: qsTr("Event:") }
-        TextField {
-            id: textFieldEvent
+                Layout.fillWidth: true
+            }
+            Label { text: qsTr("Event:") }
+            TextField {
+                id: textFieldEvent
 
-            Layout.maximumWidth: font.pixelSize * 12
-        }
-        Label { text: qsTr("Round:") }
-        TextField {
-            id: textFieldRound
+                Layout.fillWidth: true
+            }
+            Label { text: qsTr("Round:") }
+            TextField {
+                id: textFieldRound
 
-            Layout.maximumWidth: font.pixelSize * 12
+                Layout.fillWidth: true
+            }
         }
     }
 }
