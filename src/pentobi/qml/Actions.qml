@@ -23,28 +23,28 @@ QtObject {
     property Action actionBackToMainVar: Action {
         shortcut: "Ctrl+M"
         text: qsTr("Back to Main Variation")
-        enabled: ! gameModel.isMainVar
+        enabled: ! isRated && ! gameModel.isMainVar
         onTriggered: gameModel.backToMainVar()
     }
     property Action actionBackward: Action {
         shortcut: "Ctrl+Left"
-        enabled: gameModel.canGoBackward
+        enabled: gameModel.canGoBackward && ! isRated
         onTriggered: gameModel.goBackward()
     }
     property Action actionBackward10: Action {
         shortcut: "Ctrl+Shift+Left"
-        enabled: gameModel.canGoBackward
+        enabled: gameModel.canGoBackward && ! isRated
         onTriggered: gameModel.goBackward10()
     }
     property Action actionBeginning: Action {
         shortcut: "Ctrl+Home"
-        enabled: gameModel.canGoBackward
+        enabled: gameModel.canGoBackward && ! isRated
         onTriggered: gameModel.goBeginning()
     }
     property Action actionBeginningOfBranch: Action {
         shortcut: "Ctrl+B"
         text: qsTr("Beginning of Branch")
-        enabled: gameModel.hasEarlierVar
+        enabled: ! isRated && gameModel.hasEarlierVar
         onTriggered: gameModel.gotoBeginningOfBranch()
     }
     property Action actionComputerColors: Action {
@@ -54,7 +54,7 @@ QtObject {
     }
     property Action actionEnd: Action {
         shortcut: "Ctrl+End"
-        enabled: gameModel.canGoForward
+        enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goEnd()
     }
     property Action actionDropPickedPiece: Action {
@@ -70,7 +70,7 @@ QtObject {
     property Action actionFindNextComment: Action {
         shortcut: "F3"
         text: qsTr("Find Next Comment")
-        enabled: gameModel.canGoForward || gameModel.canGoBackward
+        enabled: ! isRated && (gameModel.canGoForward || gameModel.canGoBackward)
         onTriggered: Logic.findNextComment()
     }
     property Action actionFlipX: Action {
@@ -85,12 +85,12 @@ QtObject {
     }
     property Action actionForward: Action {
         shortcut: "Ctrl+Right"
-        enabled: gameModel.canGoForward
+        enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goForward()
     }
     property Action actionForward10: Action {
         shortcut: "Ctrl+Shift+Right"
-        enabled: gameModel.canGoForward
+        enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goForward10()
     }
     property Action actionFullscreen: Action {
@@ -113,7 +113,7 @@ QtObject {
     property Action actionGoto: Action {
         shortcut: "Ctrl+G"
         text: qsTr("Go to Move...")
-        enabled: gameModel.moveNumber + gameModel.movesLeft >= 1
+        enabled: ! isRated && (gameModel.moveNumber + gameModel.movesLeft >= 1)
         onTriggered: gotoMoveDialog.open()
     }
     property Action actionHelp: Action {
@@ -178,7 +178,7 @@ QtObject {
     }
     property Action actionNextVar: Action {
         shortcut: "Ctrl+Down"
-        enabled: gameModel.hasNextVar
+        enabled: gameModel.hasNextVar && ! isRated
         onTriggered: gameModel.goNextVar()
     }
     property Action actionOpen: Action {
@@ -209,7 +209,7 @@ QtObject {
     }
     property Action actionPrevVar: Action {
         shortcut: "Ctrl+Up"
-        enabled: gameModel.hasPrevVar
+        enabled: gameModel.hasPrevVar && ! isRated
         onTriggered: gameModel.goPrevVar()
     }
     property Action actionPlayPickedPiece: Action {

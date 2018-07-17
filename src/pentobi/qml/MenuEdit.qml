@@ -14,7 +14,7 @@ Pentobi.Menu {
         text: addMnemonic(qsTr("Make Main Variation"),
                           //: Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.
                           qsTr("M"))
-        enabled: ! gameModel.isMainVar
+        enabled: ! gameModel.isMainVar && ! isRated
         onTriggered: {
             gameModel.makeMainVar()
             Logic.showTemporaryMessage(qsTr("Made main variation."))
@@ -24,21 +24,21 @@ Pentobi.Menu {
         text: addMnemonic(qsTr("Move Variation Up"),
                           //: Mnemonic for menu item Move Variation Up. Leave empty for no mnemonic.
                           qsTr("U"))
-        enabled: gameModel.hasPrevVar
+        enabled: gameModel.hasPrevVar && ! isRated
         onTriggered: Logic.moveUpVar()
     }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Move Variation Down"),
                           //: Mnemonic for menu item Move Variation Down. Leave empty for no mnemonic.
                           qsTr("W"))
-        enabled: gameModel.hasNextVar
+        enabled: gameModel.hasNextVar && ! isRated
         onTriggered: Logic.moveDownVar()
     }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Delete All Variations"),
                           //: Mnemonic for menu item Delete All Variations. Leave empty for no mnemonic.
                           qsTr("D"))
-        enabled: gameModel.hasVariations
+        enabled: gameModel.hasVariations && ! isRated
         onTriggered: Logic.deleteAllVar()
     }
     MenuSeparator { }
@@ -46,28 +46,28 @@ Pentobi.Menu {
         text: addMnemonic(qsTr("Truncate"),
                           //: Mnemonic for menu item Truncate. Leave empty for no mnemonic.
                           qsTr("T"))
-        enabled: gameModel.canGoBackward
+        enabled: gameModel.canGoBackward && ! isRated
         onTriggered: Logic.truncate()
     }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Truncate Children"),
                           //: Mnemonic for menu item Truncate Children. Leave empty for no mnemonic.
                           qsTr("C"))
-        enabled: gameModel.canGoForward
+        enabled: gameModel.canGoForward && ! isRated
         onTriggered: Logic.truncateChildren()
     }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Keep Only Position"),
                           //: Mnemonic for menu item Keep Only Position. Leave empty for no mnemonic.
                           qsTr("P"))
-        enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward)
+        enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward) && ! isRated
         onTriggered: Logic.keepOnlyPosition()
     }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Keep Only Subtree"),
                           //: Mnemonic for menu item Keep Only Subtree. Leave empty for no mnemonic.
                           qsTr("S"))
-        enabled: gameModel.canGoBackward && gameModel.canGoForward
+        enabled: gameModel.canGoBackward && gameModel.canGoForward && ! isRated
         onTriggered: Logic.keepOnlySubtree()
     }
     MenuSeparator { }
@@ -77,7 +77,7 @@ Pentobi.Menu {
                           qsTr("O"))
         checkable: true
         enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
-                 && gameModel.moveNumber === 0
+                 && gameModel.moveNumber === 0 && ! isRated
         checked: gameDisplay.setupMode
         onTriggered: {
             checked = ! gameDisplay.setupMode // Workaround for QTBUG-69401
@@ -92,6 +92,7 @@ Pentobi.Menu {
         text: addMnemonic(qsTr("Next Color"),
                           //: Mnemonic for menu item Next Color. Leave empty for no mnemonic.
                           qsTr("N"))
+        enabled: ! isRated
         onTriggered: {
             gameDisplay.pickedPiece = null
             gameModel.nextColor()
