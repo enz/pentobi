@@ -117,7 +117,8 @@ int main(int argc, char *argv[])
         if (! args.empty())
             initialFile = args.at(0);
 #ifndef Q_OS_ANDROID
-        QQuickStyle::setStyle("Fusion");
+        if (QQuickStyle::name().isEmpty())
+            QQuickStyle::setStyle("Fusion");
 #endif
         QQmlApplicationEngine engine;
         engine.rootContext()->setContextProperty("initialFile", initialFile);
