@@ -36,7 +36,7 @@ Pentobi.Dialog {
                 focus: true
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{
-                    bottom: 1
+                    bottom: 0
                     top: gameModel.moveNumber + gameModel.movesLeft
                 }
                 onVisibleChanged: if (visible) selectAll()

@@ -817,7 +817,9 @@ void GameModel::gotoBeginningOfBranch()
 
 void GameModel::gotoMove(int n)
 {
-    if (n > 0)
+    if (n == 0)
+        goBeginning();
+    else if (n > 0)
         gotoNode(get_move_node(m_game.get_tree(), m_game.get_current(), n));
 }
 
