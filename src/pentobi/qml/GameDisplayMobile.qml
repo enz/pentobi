@@ -84,12 +84,7 @@ Item
 
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
-                dropCommentFocus()
-                if (! setupMode) return
-                var mv = gameModel.addEmpty(pos)
-                showMove(mv)
-            }
+            onClicked: Logic.onBoardClicked(pos)
         }
         SwipeView {
             id: swipeView

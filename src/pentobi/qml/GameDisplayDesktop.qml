@@ -118,12 +118,7 @@ Item
                     width: 0.53 * parent.width
                     height: isTrigon ? Math.sqrt(3) / 2 * width : width
                     anchors.verticalCenter: parent.verticalCenter
-                    onClicked: {
-                        dropCommentFocus()
-                        if (! setupMode) return
-                        var mv = gameModel.addEmpty(pos)
-                        showMove(mv)
-                    }
+                    onClicked: Logic.onBoardClicked(pos)
                 }
                 Column {
                     id: rightColumn

@@ -133,6 +133,13 @@ function movePiece(x, y) {
     pieceManipulator.fastMove = false
 }
 
+function onBoardClicked(pos) {
+    dropCommentFocus()
+    if (! setupMode) return
+    var mv = gameModel.addEmpty(pos)
+    showMove(mv)
+}
+
 function shiftPiece(dx, dy) {
     movePiece(pieceManipulator.x + dx * board.gridWidth / 2,
               pieceManipulator.y + dy * board.gridHeight / 2)
