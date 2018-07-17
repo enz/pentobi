@@ -139,8 +139,7 @@ Item
                         id: pieceSelector
 
                         width: parent.width
-                        height: 0.61 * parent.height
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        height: 0.63 * parent.height
                         gameVariant: gameModel.gameVariant
                         toPlay: gameModel.toPlay
                         nuColors: gameModel.nuColors

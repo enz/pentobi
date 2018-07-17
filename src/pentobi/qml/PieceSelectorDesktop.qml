@@ -18,8 +18,9 @@ Item {
     signal piecePicked(var piece)
 
     Column {
-        width: Math.min(parent.width, parent.height / 8 * columns)
-        height: Math.min(parent.height, parent.width / columns * 8)
+        width: Math.min(parent.width, parent.height / 8.15 * columns)
+        height: Math.min(parent.height, parent.width / columns * 8.15)
+        spacing: height / 8 * 0.05
         anchors.centerIn: parent
 
         PieceList {
