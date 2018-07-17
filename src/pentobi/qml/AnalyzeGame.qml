@@ -55,8 +55,8 @@ Item {
             ctx.translate(margin, margin)
             w -= 2 * margin
             h -= 2 * margin
-            // Use the whole width unless few moves (0.7 * maxMoves) have been played
-            var nuBins = Math.ceil(Math.max(nuMoves, 0.7 * gameDisplay.pieces0.length * gameModel.nuColors))
+            // Use the whole width unless few moves have been played
+            var nuBins = Math.ceil(Math.max(nuMoves, 60))
             var d = w / nuBins
             dist = d
 
