@@ -247,7 +247,7 @@ ApplicationWindow {
     Timer {
         id: delayedCheckComputerMove
 
-        interval: 400
+        interval: 500
         onTriggered: Logic.checkComputerMove()
     }
 
