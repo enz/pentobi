@@ -135,9 +135,17 @@ function movePiece(x, y) {
 
 function onBoardClicked(pos) {
     dropCommentFocus()
-    if (! setupMode) return
-    var mv = gameModel.addEmpty(pos)
-    showMove(mv)
+    if (! setupMode)
+        return
+    var pieceModel = gameModel.addEmpty(pos)
+    if (! pieceModel)
+        return
+    var piece = findPiece(pieceModel)
+    pos = mapFromItem(piece, (piece.width - pieceManipulator.width) / 2,
+                      (piece.height - pieceManipulator.height) / 2)
+    pieceManipulator.x = pos.x
+    pieceManipulator.y = pos.y
+    pickedPiece = piece
 }
 
 function shiftPiece(dx, dy) {

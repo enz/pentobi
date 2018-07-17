@@ -135,9 +135,9 @@ public:
     /** Remove a piece from the board.
         Updates setup properties in the current node.
         @param pos The point on the board in game coordinates.
-        @return The corresponding move or null if there is no piece at this
-        location. */
-    Q_INVOKABLE GameMove* addEmpty(const QPoint& pos);
+        @return The PieceModel corresponding to the removed piece or null if
+        there is no piece at this location. */
+    Q_INVOKABLE PieceModel* addEmpty(const QPoint& pos);
 
     /** Request the Android media scanner to scan a file.
         Ensures that the file will be visible via MTP. This function is
@@ -179,10 +179,6 @@ public:
     Q_INVOKABLE void playPiece(PieceModel* pieceModel, QPointF coord);
 
     Q_INVOKABLE void playMove(GameMove* move);
-
-    /** Find the piece model for a given move and set its transform and game
-        coordinates accordingly but do not set its status to played yet. */
-    Q_INVOKABLE PieceModel* preparePiece(GameMove* move);
 
     Q_INVOKABLE void newGame();
 

@@ -159,7 +159,7 @@ GameModel::GameModel(QObject* parent)
 
 GameModel::~GameModel() = default;
 
-GameMove* GameModel::addEmpty(const QPoint& pos)
+PieceModel* GameModel::addEmpty(const QPoint& pos)
 {
     if (! checkSetupAllowed())
         return nullptr;
@@ -178,11 +178,19 @@ GameMove* GameModel::addEmpty(const QPoint& pos)
     auto c = s.to_color();
     auto mv = bd.get_move_at(p);
     LIBBOARDGAME_ASSERT(bd.get_setup().placements[c].contains(mv));
+    auto gameCoord = getGameCoord(bd, mv);
+    PieceModel* result = nullptr;
+    for (auto pieceModel : getPieceModels(c))
+        if (compareGameCoord(pieceModel->gameCoord(), gameCoord))
+        {
+            result = pieceModel;
+            break;
+        }
     preparePositionChange();
     m_game.remove_setup(c, mv);
     setSetupPlayer();
     updateProperties();
-    return new GameMove(this, ColorMove(c, mv));
+    return result;
 }
 
 void GameModel::addRecentFile(const QString& file)
@@ -1174,23 +1182,6 @@ void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
     preparePieceTransform(pieceModel, mv);
     m_game.play(c, mv, false);
     updateProperties();
-}
-
-PieceModel* GameModel::preparePiece(GameMove* move)
-{
-    if (move == nullptr)
-        return nullptr;
-    auto mv = move->get();
-    if (mv.is_null())
-        return nullptr;
-    auto piece = getBoard().get_move_piece(mv.move);
-    auto pieceModel = findUnplayedPieceModel(mv.color, piece);
-    if (pieceModel != nullptr)
-    {
-        preparePieceTransform(pieceModel, mv.move);
-        preparePieceGameCoord(pieceModel, mv.move);
-    }
-    return pieceModel;
 }
 
 void GameModel::preparePieceGameCoord(PieceModel* pieceModel, Move mv)
