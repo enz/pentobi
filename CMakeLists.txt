@@ -5,6 +5,7 @@ set(PENTOBI_VERSION 15.UNKNOWN)
 set(PENTOBI_RELEASE_DATE 2018-06-28)
 
 cmake_policy(SET CMP0043 NEW)
+cmake_policy(SET CMP0071 NEW)
 
 include(CheckIncludeFiles)
 include(GNUInstallDirs)
