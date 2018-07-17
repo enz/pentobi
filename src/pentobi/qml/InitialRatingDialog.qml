@@ -13,19 +13,28 @@ Pentobi.Dialog {
         Logic.ratedGameNoVerify()
     }
 
-    Column
+    ColumnLayout
     {
-        width: Math.min(initialRatingLabel.height * 25, 0.9 * rootWindow.width)
-        spacing: 0.3 * font.pixelSize
+        Item {
+            implicitWidth: {
+                // Wrap long text
+                var w = font.pixelSize * 25
+                w = Math.min(w, 0.85 * rootWindow.width)
+                return w
+            }
+            implicitHeight: textLabel.implicitHeight
+            Layout.fillWidth: true
 
-        Label {
-            text: qsTr("You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.")
-            width: 0.9 * parent.width
-            wrapMode: Text.Wrap
+            Label {
+                id: textLabel
+
+                anchors.fill: parent
+                text: qsTr("You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.")
+                wrapMode: Text.Wrap
+            }
         }
         RowLayout {
             Label {
-                id: initialRatingLabel
                 text: qsTr("Your initial rating:")
             }
             Label {
@@ -36,19 +45,16 @@ Pentobi.Dialog {
         Slider {
             id: slider
 
-            width: 0.9 * parent.width
             value: 1000
             from: 1000; to: 2000; stepSize: 100
+            Layout.fillWidth: true
         }
         RowLayout {
-            width: parent.width
+            Layout.fillWidth: true
 
-            Label {
-                text: qsTr("Beginner")
-            }
-            Label {
-                text: qsTr("Expert")
-            }
+            Label { text: qsTr("Beginner") }
+            Item { Layout.fillWidth: true }
+            Label { text: qsTr("Expert") }
         }
     }
 }

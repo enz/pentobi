@@ -21,14 +21,24 @@ Pentobi.Dialog {
 
     footer: OkButton { }
 
-    Column
-    {
-        width: Math.min(label.font.pixelSize * 30, 0.9 * rootWindow.width)
+    Item {
+        implicitWidth: {
+            var w = label.implicitWidth
+            // Wrap long text
+            w = Math.min(w, font.pixelSize * 25)
+            // Avoid too small width because Default style in Qt 5.11 makes
+            // footer no wider than content, which can cause elided text on
+            // dialog buttons
+            w = Math.max(w, font.pixelSize * 18)
+            w = Math.min(w, 0.85 * rootWindow.width)
+            return w
+        }
+        implicitHeight: label.implicitHeight
 
         Label {
             id: label
 
-            width: 0.9 * parent.width
+            anchors.fill: parent
             wrapMode: Text.Wrap
         }
     }

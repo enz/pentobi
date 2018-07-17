@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.0
 import "." as Pentobi
@@ -12,63 +13,75 @@ Pentobi.Dialog {
     title: isDesktop ? qsTr("Computer Colors") : ""
     footer: OkCancelButtons { }
 
-    Column {
-        spacing: 0.1 * font.pixelSize
-        width: Math.min(label.height * 15, 0.9 * rootWindow.width)
-
-        Label {
-            id: label
-
-            width: parent.width
-            text: qsTr("Computer plays:")
+    Item {
+        implicitWidth: {
+            var w = columnLayout.implicitWidth
+            // Avoid too small width because Default style in Qt 5.11 makes
+            // footer no wider than content, which can cause elided text on
+            // dialog buttons
+            w = Math.max(w, font.pixelSize * 18)
+            w = Math.min(w, 0.85 * rootWindow.width)
+            return w
         }
-        CheckBox {
-            id: checkBox0
+        implicitHeight: columnLayout.implicitHeight
 
-            enabled: ! isRated
-            text: {
-                if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
-                      return qsTr("Blue/Red")
-                if (gameModel.gameVariant === "duo")
-                    return qsTr("Purple")
-                if (gameModel.gameVariant === "junior")
-                    return qsTr("Green")
-                return qsTr("Blue")
+        ColumnLayout {
+            id: columnLayout
+
+            anchors.fill: parent
+
+            Label {
+                text: qsTr("Computer plays:")
             }
-            onClicked:
-                if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
-                    computerPlays2 = checked
-        }
-        CheckBox {
-            id: checkBox1
+            CheckBox {
+                id: checkBox0
 
-            enabled: ! isRated
-            text: {
-                if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
-                    return qsTr("Yellow/Green")
-                if (gameModel.gameVariant === "duo" || gameModel.gameVariant === "junior")
-                    return qsTr("Orange")
-                if (gameModel.nuColors == 2)
-                    return qsTr("Green")
-                return qsTr("Yellow")
+                enabled: ! isRated
+                text: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return qsTr("Blue/Red")
+                    if (gameModel.gameVariant === "duo")
+                        return qsTr("Purple")
+                    if (gameModel.gameVariant === "junior")
+                        return qsTr("Green")
+                    return qsTr("Blue")
+                }
+                onClicked:
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        computerPlays2 = checked
             }
-            onClicked:
-                if (gameModel.nuColors == 4 && gameModel.nuPlayers == 2)
-                    computerPlays3 = checked
-        }
-        CheckBox {
-            id: checkBox2
+            CheckBox {
+                id: checkBox1
 
-            enabled: ! isRated
-            text: qsTr("Red")
-            visible: gameModel.nuPlayers > 2
-        }
-        CheckBox {
-            id: checkBox3
+                enabled: ! isRated
+                text: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return qsTr("Yellow/Green")
+                    if (gameModel.gameVariant === "duo"
+                            || gameModel.gameVariant === "junior")
+                        return qsTr("Orange")
+                    if (gameModel.nuColors === 2)
+                        return qsTr("Green")
+                    return qsTr("Yellow")
+                }
+                onClicked:
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        computerPlays3 = checked
+            }
+            CheckBox {
+                id: checkBox2
 
-            enabled: ! isRated
-            text: qsTr("Green")
-            visible: gameModel.nuPlayers > 3
+                enabled: ! isRated
+                text: qsTr("Red")
+                visible: gameModel.nuPlayers > 2
+            }
+            CheckBox {
+                id: checkBox3
+
+                enabled: ! isRated
+                text: qsTr("Green")
+                visible: gameModel.nuPlayers > 3
+            }
         }
     }
 }

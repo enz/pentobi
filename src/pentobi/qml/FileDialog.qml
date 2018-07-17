@@ -17,9 +17,6 @@ Pentobi.Dialog {
     property string nameFilterText
     property string nameFilter
 
-    // We don't use standardButtons because on Android, QtCreator does not
-    // automatically include the qtbase translations and Dialog in Qt 5.11
-    // has no mnemonics for the buttons.
     footer: DialogButtonBox {
         Button {
             enabled: name.trim().length > 0
@@ -58,104 +55,115 @@ Pentobi.Dialog {
         fileUrl = folder + "/" + name
     }
 
-    Column {
-        width: Math.min(nameField.height * 20, 0.9 * rootWindow.width)
-        spacing: 0.2 * font.pixelSize
+    Item {
+        implicitWidth: Math.min(font.pixelSize * 30, 0.85 * rootWindow.width)
+        implicitHeight: columnLayout.implicitHeight
 
-        TextField {
-            id: nameField
+        ColumnLayout
+        {
+            id: columnLayout
 
-            focus: ! selectExisting && ! isAndroid
-            width: parent.width
-            enabled: ! selectExisting
-            onAccepted: if (name.trim().length > 0) root.accept()
-            Component.onCompleted: nameField.cursorPosition = nameField.length
-        }
-        RowLayout {
-            width: parent.width
+            anchors.fill: parent
 
-            ToolButton {
-                property bool hasParent: ! folderModel.folder.toString().endsWith(":///")
+            TextField {
+                id: nameField
 
-                enabled: hasParent
-                onClicked:
-                    if (hasParent) {
-                        folderModel.folder = folderModel.parentFolder
-                        view.currentIndex = -1
-                    }
-                icon {
-                    source: "icons/filedialog-parent.svg"
-                    width: 16; height: 16
-                }
-            }
-            Label {
-                text: Logic.getFileFromUrl(folderModel.folder)
-                elide: Text.ElideRight
+                focus: ! selectExisting && ! isAndroid
+                enabled: ! selectExisting
+                onAccepted: if (name.trim().length > 0) root.accept()
                 Layout.fillWidth: true
+                Component.onCompleted: nameField.cursorPosition = nameField.length
             }
-        }
-        ComboBox {
-            width: parent.width
-            model: [ nameFilterText, qsTr("All files (*)") ]
-            onCurrentIndexChanged:
-                if (currentIndex == 0) folderModel.nameFilters = [ root.nameFilter ]
-                else folderModel.nameFilters = [ "*" ]
-        }
-        Rectangle {
-            height: Math.min(font.pixelSize* 40, 0.4 * rootWindow.height)
-            width: parent.width
-            color: "white"
-            ListView {
-                id: view
+            RowLayout {
+                Layout.fillWidth: true
 
-                anchors.fill: parent
-                clip: true
-                model: folderModel
-                boundsBehavior: Flickable.StopAtBounds
-                highlight: Rectangle { color: "#ddd" }
-                highlightMoveDuration: 0
-                delegate: AbstractButton {
-                    width: view.width
-                    height: 2 * font.pixelSize
-                    onActiveFocusChanged: if (activeFocus) view.currentIndex = index
-                    contentItem: Row {
-                        Image {
-                            anchors.verticalCenter: parent.verticalCenter
-                            visible: folderModel.isFolder(index)
-                            width: 0.8 * font.pixelSize; height: width
-                            source: "icons/filedialog-folder.svg"
-                            sourceSize { width: width; height: height }
-                        }
-                        Text {
-                            text: index < 0 ? "" : fileName
-                            anchors.verticalCenter: parent.verticalCenter
-                            leftPadding: 0.2 * font.pixelSize
-                            color: "black"
-                            horizontalAlignment: Text.AlignHLeft
-                            verticalAlignment: Text.AlignVCenter
-                            elide: Text.ElideRight
-                        }
-                    }
-                    onClicked: {
-                        view.currentIndex = index
-                        if (folderModel.isFolder(index)) {
-                            if (! folderModel.folder.toString().endsWith("/"))
-                                folderModel.folder = folderModel.folder + "/"
-                            folderModel.folder = folderModel.folder + fileName
+                ToolButton {
+                    property bool hasParent: ! folderModel.folder.toString().endsWith(":///")
+
+                    enabled: hasParent
+                    onClicked:
+                        if (hasParent) {
+                            folderModel.folder = folderModel.parentFolder
                             view.currentIndex = -1
                         }
-                        else
-                            name = fileName
+                    icon {
+                        source: "icons/filedialog-parent.svg"
+                        width: 16; height: 16
                     }
-                    onDoubleClicked: root.accept()
                 }
+                Label {
+                    text: Logic.getFileFromUrl(folderModel.folder)
+                    elide: Text.ElideLeft
+                    Layout.fillWidth: true
+                }
+            }
+            ComboBox {
+                model: [ nameFilterText, qsTr("All files (*)") ]
+                onCurrentIndexChanged:
+                    if (currentIndex == 0) folderModel.nameFilters = [ root.nameFilter ]
+                    else folderModel.nameFilters = [ "*" ]
+                // Default style in Qt 5.11 does not always set implictWidth of
+                // ComboBox large enough to fit its content.
+                Layout.preferredWidth: font.pixelSize * 18
+                Layout.alignment: Qt.AlignRight
+            }
+            Rectangle {
+                color: "white"
+                Layout.fillWidth: true
+                Layout.preferredHeight: Math.min(font.pixelSize* 40, 0.4 * rootWindow.height)
 
-                FolderListModel {
-                    id: folderModel
+                ListView {
+                    id: view
 
-                    folder: root.folder
-                    nameFilters: [ root.nameFilter ]
-                    showDirsFirst: true
+                    anchors.fill: parent
+                    clip: true
+                    model: folderModel
+                    boundsBehavior: Flickable.StopAtBounds
+                    highlight: Rectangle { color: "#ddd" }
+                    highlightMoveDuration: 0
+                    delegate: AbstractButton {
+                        width: view.width
+                        height: 2 * font.pixelSize
+                        onActiveFocusChanged: if (activeFocus) view.currentIndex = index
+                        contentItem: Row {
+                            Image {
+                                anchors.verticalCenter: parent.verticalCenter
+                                visible: folderModel.isFolder(index)
+                                width: 0.8 * font.pixelSize; height: width
+                                source: "icons/filedialog-folder.svg"
+                                sourceSize { width: width; height: height }
+                            }
+                            Text {
+                                text: index < 0 ? "" : fileName
+                                anchors.verticalCenter: parent.verticalCenter
+                                leftPadding: 0.2 * font.pixelSize
+                                color: "black"
+                                horizontalAlignment: Text.AlignHLeft
+                                verticalAlignment: Text.AlignVCenter
+                                elide: Text.ElideRight
+                            }
+                        }
+                        onClicked: {
+                            view.currentIndex = index
+                            if (folderModel.isFolder(index)) {
+                                if (! folderModel.folder.toString().endsWith("/"))
+                                    folderModel.folder = folderModel.folder + "/"
+                                folderModel.folder = folderModel.folder + fileName
+                                view.currentIndex = -1
+                            }
+                            else
+                                name = fileName
+                        }
+                        onDoubleClicked: root.accept()
+                    }
+
+                    FolderListModel {
+                        id: folderModel
+
+                        folder: root.folder
+                        nameFilters: [ root.nameFilter ]
+                        showDirsFirst: true
+                    }
                 }
             }
         }

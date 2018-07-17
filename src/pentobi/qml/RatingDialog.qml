@@ -18,178 +18,184 @@ Pentobi.Dialog {
             close()
         }
 
-    Column
-    {
-        spacing: 0.3 * font.pixelSize
+    Item {
+        // Make it wide enough to show a the graph
+        implicitWidth: Math.min(font.pixelSize * 30, 0.85 * rootWindow.width)
+        implicitHeight: columnLayout.implicitHeight
 
-        GridLayout {
-            columns: 2
-
-            Label {
-                id: labelYourRating
-
-                text: qsTr("Your rating:")
-            }
-            Label {
-                text: ratingModel.numberGames === 0 ?
-                          "--" : Math.round(ratingModel.rating).toString()
-                Layout.fillWidth: true
-                font.bold: true
-            }
-            Label { text: qsTr("Game variant:") }
-            Label {
-                text: switch (ratingModel.gameVariant) {
-                      case "classic_2": return qsTr("Classic (2 players)")
-                      case "classic_3": return qsTr("Classic (3 players)")
-                      case "classic": return qsTr("Classic (4 players)")
-                      case "duo": return qsTr("Duo")
-                      case "junior": return qsTr("Junior")
-                      case "trigon_2": return qsTr("Trigon (2 players)")
-                      case "trigon_3": return qsTr("Trigon (3 players)")
-                      case "trigon": return qsTr("Trigon (4 players)")
-                      case "nexos_2": return qsTr("Nexos (2 players)")
-                      case "nexos": return qsTr("Nexos (4 players)")
-                      case "callisto_2": return qsTr("Callisto (2 players)")
-                      case "callisto_3": return qsTr("Callisto (3 players)")
-                      case "callisto": return qsTr("Callisto (4 players)")
-                      case "gembloq": return qsTr("GembloQ (4 players)")
-                      case "gembloq_2": return qsTr("GembloQ (2 players, 2 colors)")
-                      case "gembloq_2_4": return qsTr("GembloQ (2 players, 4 colors)")
-                      case "gembloq_3": return qsTr("GembloQ (3 players)")
-                      default: return ""
-                      }
-                Layout.fillWidth: true
-            }
-            Label { text: qsTr("Rated games:") }
-            Label {
-                text: numberGames
-                Layout.fillWidth: true
-            }
-            Label { text: qsTr("Best previous rating:") }
-            Label {
-                text: numberGames < 2 ? "--" : Math.round(ratingModel.bestRating).toString()
-                Layout.fillWidth: true
-            }
-        }
-        Item { height: 0.3 * font.pixelSize }
-        Column {
-            spacing: Math.round(0.3 * font.pixelSize)
-
-            Label {
-                visible: history.length > 1
-                text: qsTr("Recent development:")
-            }
-            RatingGraph {
-                visible: history.length > 1
-                history: ratingModel.history
-                implicitWidth: Math.min(labelYourRating.font.pixelSize * 25, 0.9 * rootWindow.width)
-                implicitHeight: implicitWidth / 3
-            }
-        }
-
-        ScrollView
+        ColumnLayout
         {
-            visible: history.length > 0
-            implicitWidth: Math.min(labelYourRating.font.pixelSize * 25, 0.9 * rootWindow.width)
-            implicitHeight: implicitWidth / 3
-            clip: true
+            id: columnLayout
 
-            Item
+            anchors.fill: parent
+
+            GridLayout {
+                columns: 2
+
+                Label {
+                    id: labelYourRating
+
+                    text: qsTr("Your rating:")
+                }
+                Label {
+                    text: ratingModel.numberGames === 0 ?
+                              "--" : Math.round(ratingModel.rating).toString()
+                    Layout.fillWidth: true
+                    font.bold: true
+                }
+                Label { text: qsTr("Game variant:") }
+                Label {
+                    text: switch (ratingModel.gameVariant) {
+                          case "classic_2": return qsTr("Classic (2 players)")
+                          case "classic_3": return qsTr("Classic (3 players)")
+                          case "classic": return qsTr("Classic (4 players)")
+                          case "duo": return qsTr("Duo")
+                          case "junior": return qsTr("Junior")
+                          case "trigon_2": return qsTr("Trigon (2 players)")
+                          case "trigon_3": return qsTr("Trigon (3 players)")
+                          case "trigon": return qsTr("Trigon (4 players)")
+                          case "nexos_2": return qsTr("Nexos (2 players)")
+                          case "nexos": return qsTr("Nexos (4 players)")
+                          case "callisto_2": return qsTr("Callisto (2 players)")
+                          case "callisto_3": return qsTr("Callisto (3 players)")
+                          case "callisto": return qsTr("Callisto (4 players)")
+                          case "gembloq": return qsTr("GembloQ (4 players)")
+                          case "gembloq_2": return qsTr("GembloQ (2 players, 2 colors)")
+                          case "gembloq_2_4": return qsTr("GembloQ (2 players, 4 colors)")
+                          case "gembloq_3": return qsTr("GembloQ (3 players)")
+                          default: return ""
+                          }
+                    Layout.fillWidth: true
+                }
+                Label { text: qsTr("Rated games:") }
+                Label {
+                    text: numberGames
+                    Layout.fillWidth: true
+                }
+                Label { text: qsTr("Best previous rating:") }
+                Label {
+                    text: numberGames < 2 ? "--" : Math.round(ratingModel.bestRating).toString()
+                    Layout.fillWidth: true
+                }
+            }
+            ColumnLayout {
+                Layout.fillWidth: true
+
+                Label {
+                    visible: history.length > 1
+                    text: qsTr("Recent development:")
+                }
+                RatingGraph {
+                    visible: history.length > 1
+                    history: ratingModel.history
+                    Layout.preferredHeight: font.pixelSize * 8
+                    Layout.fillWidth: true
+                }
+            }
+            ScrollView
             {
-                implicitHeight: grid.height
-                implicitWidth: grid.width
+                visible: history.length > 0
+                clip: true
+                Layout.fillWidth: true
+                Layout.preferredHeight: font.pixelSize * 8
 
-                GridLayout {
-                    id: grid
+                Item
+                {
+                    implicitHeight: grid.height
+                    implicitWidth: grid.width
 
-                    rows: history.length + 1
-                    flow: Grid.TopToBottom
+                    GridLayout {
+                        id: grid
 
-                    Label {
-                        id: gameHeader
-
-                        font.underline: true
-                        text: qsTr("Game")
-                    }
-                    Repeater {
-                        id: gameRepeater
-
-                        model: history
-
-                        Label { text: modelData.number }
-                    }
-                    Label { font.underline: true; text: qsTr("Result") }
-                    Repeater {
-                        model: history
+                        rows: history.length + 1
+                        flow: Grid.TopToBottom
 
                         Label {
-                            text: switch (modelData.result) {
-                                  case 1:
-                                      //: Result of rated game is a win
-                                      return qsTr("Win")
-                                  case 0:
-                                      //: Result of rated game is a loss
-                                      return qsTr("Loss")
-                                  case 0.5:
-                                      //: Result of rated game is a tie. Abbreviate long translations to
-                                      //: ensure that all columns of rated games list are visible on
-                                      //: mobile devices with small screens.
-                                      return qsTr("Tie")
-                                  }
+                            id: gameHeader
+
+                            font.underline: true
+                            text: qsTr("Game")
+                        }
+                        Repeater {
+                            id: gameRepeater
+
+                            model: history
+
+                            Label { text: modelData.number }
+                        }
+                        Label { font.underline: true; text: qsTr("Result") }
+                        Repeater {
+                            model: history
+
+                            Label {
+                                text: switch (modelData.result) {
+                                      case 1:
+                                          //: Result of rated game is a win
+                                          return qsTr("Win")
+                                      case 0:
+                                          //: Result of rated game is a loss
+                                          return qsTr("Loss")
+                                      case 0.5:
+                                          //: Result of rated game is a tie. Abbreviate long translations to
+                                          //: ensure that all columns of rated games list are visible on
+                                          //: mobile devices with small screens.
+                                          return qsTr("Tie")
+                                      }
+                            }
+                        }
+                        Label { font.underline: true; text: qsTr("Level") }
+                        Repeater {
+                            model: history
+
+                            Label { text: modelData.level }
+                        }
+                        Label { font.underline: true; text: qsTr("Your Color") }
+                        Repeater {
+                            model: history
+
+                            Label { text: gameModel.getPlayerString(modelData.color) }
+                        }
+                        Label { font.underline: true; text: qsTr("Date") }
+                        Repeater {
+                            model: history
+
+                            Label { text: modelData.date }
                         }
                     }
-                    Label { font.underline: true; text: qsTr("Level") }
-                    Repeater {
-                        model: history
+                    MouseArea {
+                        function openMenu(x, y) {
+                            if (y < gameHeader.height)
+                                return
+                            var n = history.length
+                            var i
+                            for (i = 1; i < n; ++i)
+                                if (y < gameRepeater.itemAt(i).y)
+                                    break
+                            menu.row = i - 1
+                            menu.popup()
+                        }
 
-                        Label { text: modelData.level }
+                        anchors.fill: grid
+                        acceptedButtons: Qt.LeftButton | Qt.RightButton
+                        onClicked: openMenu(mouseX, mouseY)
+                        onPressAndHold: openMenu(mouseX, mouseY)
                     }
-                    Label { font.underline: true; text: qsTr("Your Color") }
-                    Repeater {
-                        model: history
-
-                        Label { text: gameModel.getPlayerString(modelData.color) }
-                    }
-                    Label { font.underline: true; text: qsTr("Date") }
-                    Repeater {
-                        model: history
-
-                        Label { text: modelData.date }
-                    }
-                }
-                MouseArea {
-                    function openMenu(x, y) {
-                        if (y < gameHeader.height)
-                            return
-                        var n = history.length
-                        var i
-                        for (i = 1; i < n; ++i)
-                            if (y < gameRepeater.itemAt(i).y)
-                                break
-                        menu.row = i - 1
-                        menu.popup()
-                    }
-
-                    anchors.fill: grid
-                    acceptedButtons: Qt.LeftButton | Qt.RightButton
-                    onClicked: openMenu(mouseX, mouseY)
-                    onPressAndHold: openMenu(mouseX, mouseY)
                 }
             }
-        }
-        Menu {
-            id: menu
+            Menu {
+                id: menu
 
-            property int row
+                property int row
 
-            Pentobi.MenuItem {
-                text: history && menu.row < history.length ?
-                          qsTr("Open Game %1").arg(history[menu.row].number) : ""
-                onTriggered: {
-                    queuedOpenRatedGame.byteArray = history[menu.row].sgf
-                    queuedOpenRatedGame.restart()
-                    // See comment in Main.qml at ratingModel.onHistoryChanged
-                    close()
+                Pentobi.MenuItem {
+                    text: history && menu.row < history.length ?
+                              qsTr("Open Game %1").arg(history[menu.row].number) : ""
+                    onTriggered: {
+                        queuedOpenRatedGame.byteArray = history[menu.row].sgf
+                        queuedOpenRatedGame.restart()
+                        // See comment in Main.qml at ratingModel.onHistoryChanged
+                        close()
+                    }
                 }
             }
         }

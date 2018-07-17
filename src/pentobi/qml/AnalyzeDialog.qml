@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.0
 import "Main.js" as Logic
@@ -17,22 +18,36 @@ Pentobi.Dialog {
         Logic.analyzeGame(nuSimulations)
     }
 
-    Column {
-        spacing: 0.3 * font.pixelSize
-        width: Math.min(15 * font.pixelSize, 0.9 * rootWindow.width)
-
-        Label {
-            id: label
-
-            width: parent.width
-            text: qsTr("Analysis speed:")
+    Item {
+        implicitWidth: {
+            var w = columnLayout.implicitWidth
+            // Avoid too small width because Default style in Qt 5.11 makes
+            // footer no wider than content, which can cause elided text on
+            // dialog buttons
+            w = Math.max(w, font.pixelSize * 18)
+            w = Math.min(w, 0.85 * rootWindow.width)
+            return w
         }
-        ComboBox {
-            id: comboBox
+        implicitHeight: columnLayout.implicitHeight
 
-            width: parent.width
-            model: isAndroid ? [ qsTr("Fast"), qsTr("Normal") ]
-                             : [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
+        ColumnLayout {
+            id: columnLayout
+
+            anchors.fill: parent
+
+            Label {
+                id: label
+
+                width: parent.width
+                text: qsTr("Analysis speed:")
+            }
+            ComboBox {
+                id: comboBox
+
+                width: parent.width
+                model: isAndroid ? [ qsTr("Fast"), qsTr("Normal") ]
+                                 : [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
+            }
         }
     }
 }
