@@ -1,5 +1,5 @@
 import QtQuick 2.11
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
 import Qt.labs.folderlistmodel 2.1
@@ -59,6 +59,10 @@ Pentobi.Dialog {
         implicitWidth: Math.min(font.pixelSize * 30, 0.85 * rootWindow.width)
         implicitHeight: columnLayout.implicitHeight
 
+        Action {
+            shortcut: "Alt+Left"
+            onTriggered: backButton.onClicked()
+        }
         ColumnLayout
         {
             id: columnLayout
@@ -68,8 +72,8 @@ Pentobi.Dialog {
             TextField {
                 id: nameField
 
-                focus: ! selectExisting && ! isAndroid
-                enabled: ! selectExisting
+                visible: ! selectExisting
+                focus: ! isAndroid
                 onAccepted: if (name.trim().length > 0) root.accept()
                 Layout.fillWidth: true
                 Component.onCompleted: nameField.cursorPosition = nameField.length
@@ -78,6 +82,8 @@ Pentobi.Dialog {
                 Layout.fillWidth: true
 
                 ToolButton {
+                    id: backButton
+
                     property bool hasParent: ! folderModel.folder.toString().endsWith(":///")
 
                     enabled: hasParent
@@ -97,21 +103,17 @@ Pentobi.Dialog {
                     Layout.fillWidth: true
                 }
             }
-            ComboBox {
-                model: [ nameFilterText, qsTr("All files (*)") ]
-                onCurrentIndexChanged:
-                    if (currentIndex == 0) folderModel.nameFilters = [ root.nameFilter ]
-                    else folderModel.nameFilters = [ "*" ]
-                // Default style in Qt 5.11 does not always set implictWidth of
-                // ComboBox large enough to fit its content.
-                Layout.preferredWidth: font.pixelSize * 18
-                Layout.alignment: Qt.AlignRight
-            }
-            Rectangle {
-                color: "white"
+            Frame {
+                id: frame
+
+                padding: 0.1 * font.pixelSize
                 Layout.fillWidth: true
                 Layout.preferredHeight: Math.min(font.pixelSize* 40, 0.4 * rootWindow.height)
 
+                Rectangle {
+                    anchors.fill: parent
+                    color: frame.palette.base
+                }
                 ListView {
                     id: view
 
@@ -119,7 +121,7 @@ Pentobi.Dialog {
                     clip: true
                     model: folderModel
                     boundsBehavior: Flickable.StopAtBounds
-                    highlight: Rectangle { color: "#ddd" }
+                    highlight: Rectangle { color: frame.palette.highlight }
                     highlightMoveDuration: 0
                     delegate: AbstractButton {
                         width: view.width
@@ -137,7 +139,9 @@ Pentobi.Dialog {
                                 text: index < 0 ? "" : fileName
                                 anchors.verticalCenter: parent.verticalCenter
                                 leftPadding: 0.2 * font.pixelSize
-                                color: "black"
+                                color: view.currentIndex == index ?
+                                           frame.palette.highlightedText :
+                                           frame.palette.text
                                 horizontalAlignment: Text.AlignHLeft
                                 verticalAlignment: Text.AlignVCenter
                                 elide: Text.ElideRight
@@ -165,6 +169,16 @@ Pentobi.Dialog {
                         showDirsFirst: true
                     }
                 }
+            }
+            ComboBox {
+                model: [ nameFilterText, qsTr("All files (*)") ]
+                onCurrentIndexChanged:
+                    if (currentIndex == 0) folderModel.nameFilters = [ root.nameFilter ]
+                    else folderModel.nameFilters = [ "*" ]
+                // Default style in Qt 5.11 does not always set implictWidth of
+                // ComboBox large enough to fit its content.
+                Layout.preferredWidth: font.pixelSize * 18
+                Layout.alignment: Qt.AlignRight
             }
         }
     }
