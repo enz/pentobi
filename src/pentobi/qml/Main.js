@@ -637,8 +637,8 @@ function setComputerNone() {
     computerPlays3 = false
 }
 
-function showComputerColorDialog() {
-    var dialog = computerColorDialogLoader.get()
+function showComputerDialog() {
+    var dialog = computerDialogLoader.get()
     dialog.computerPlays0 = computerPlays0
     dialog.computerPlays1 = computerPlays1
     dialog.computerPlays2 = computerPlays2

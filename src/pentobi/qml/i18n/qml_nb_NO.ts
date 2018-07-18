@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Computer Colors</source>
-        <translation>Datamaskinfarger</translation>
+        <translation type="vanished">Datamaskinfarger</translation>
     </message>
     <message>
         <source>Play Single Move</source>
@@ -78,6 +78,10 @@
     <message>
         <source>Fullscreen</source>
         <translation>Fullskjermsvisning</translation>
+    </message>
+    <message>
+        <source>Computer Settings...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -125,43 +129,43 @@
     <name>ComputerColorDialog</name>
     <message>
         <source>Computer Colors</source>
-        <translation>Datamaskinfarger</translation>
+        <translation type="vanished">Datamaskinfarger</translation>
     </message>
     <message>
         <source>Computer plays:</source>
-        <translation>Datamaskinen spiller:</translation>
+        <translation type="vanished">Datamaskinen spiller:</translation>
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation>Blå/rød</translation>
+        <translation type="vanished">Blå/rød</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>Blå</translation>
+        <translation type="vanished">Blå</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>Gul/grønn</translation>
+        <translation type="vanished">Gul/grønn</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>Grønn</translation>
+        <translation type="vanished">Grønn</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>Gul</translation>
+        <translation type="vanished">Gul</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>Rød</translation>
+        <translation type="vanished">Rød</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>Lilla</translation>
+        <translation type="vanished">Lilla</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>Oransje</translation>
+        <translation type="vanished">Oransje</translation>
     </message>
     <message>
         <source>Level (Classic, 4 players):</source>
@@ -237,7 +241,54 @@
     </message>
     <message>
         <source>Level:</source>
-        <translation>Nivå:</translation>
+        <translation type="vanished">Nivå:</translation>
+    </message>
+</context>
+<context>
+    <name>ComputerDialog</name>
+    <message>
+        <source>Computer Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Computer plays:</source>
+        <translation type="unfinished">Datamaskinen spiller:</translation>
+    </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation type="unfinished">Blå/rød</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation type="unfinished">Lilla</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation type="unfinished">Grønn</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation type="unfinished">Blå</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation type="unfinished">Gul/grønn</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation type="unfinished">Oransje</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation type="unfinished">Gul</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation type="unfinished">Rød</translation>
+    </message>
+    <message>
+        <source>Level:</source>
+        <translation type="unfinished">Nivå:</translation>
     </message>
 </context>
 <context>

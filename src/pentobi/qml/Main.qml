@@ -200,19 +200,19 @@ ApplicationWindow {
         onHistoryChanged: if (ratingDialog.item) ratingDialog.item.close()
     }
     DialogLoader {
-        id: computerColorDialogLoader
+        id: computerDialogLoader
 
         component: Component {
-            ComputerColorDialog {
-                id: computerColorDialog
+            ComputerDialog {
+                id: computerDialog
 
                 onAccepted: {
-                    rootWindow.computerPlays0 = computerColorDialog.computerPlays0
-                    rootWindow.computerPlays1 = computerColorDialog.computerPlays1
-                    rootWindow.computerPlays2 = computerColorDialog.computerPlays2
-                    rootWindow.computerPlays3 = computerColorDialog.computerPlays3
+                    rootWindow.computerPlays0 = computerDialog.computerPlays0
+                    rootWindow.computerPlays1 = computerDialog.computerPlays1
+                    rootWindow.computerPlays2 = computerDialog.computerPlays2
+                    rootWindow.computerPlays3 = computerDialog.computerPlays3
                     initComputerColorsOnNewGame = Logic.computerPlaysAny()
-                    playerModel.level = computerColorDialog.level
+                    playerModel.level = computerDialog.level
                     if (! Logic.isComputerToPlay())
                         Logic.cancelRunning()
                     else if (! gameModel.isGameOver)

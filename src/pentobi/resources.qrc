@@ -22,7 +22,7 @@
         <file>qml/Board.qml</file>
         <file>qml/BusyIndicator.qml</file>
         <file>qml/Button.qml</file>
-        <file>qml/ComputerColorDialog.qml</file>
+        <file>qml/ComputerDialog.qml</file>
         <file>qml/Comment.qml</file>
         <file>qml/Controls.js</file>
         <file>qml/Dialog.qml</file>

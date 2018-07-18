@@ -11,7 +11,7 @@ Pentobi.Dialog {
     property alias computerPlays3: checkBox3.checked
     property alias level: spinBox.value
 
-    title: isDesktop ? qsTr("Computer Colors") : ""
+    title: isDesktop ? qsTr("Computer Settings") : ""
     footer: OkCancelButtons { }
 
     Item {

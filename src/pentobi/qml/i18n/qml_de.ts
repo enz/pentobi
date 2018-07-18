@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Computer Colors</source>
-        <translation>Computer-Farben</translation>
+        <translation type="vanished">Computer-Farben</translation>
     </message>
     <message>
         <source>Play Single Move</source>
@@ -78,6 +78,14 @@
     <message>
         <source>Fullscreen</source>
         <translation>Vollbild</translation>
+    </message>
+    <message>
+        <source>Computer Settings</source>
+        <translation type="vanished">Computer-Einstellungen</translation>
+    </message>
+    <message>
+        <source>Computer Settings...</source>
+        <translation>Computer-Einstellungen …</translation>
     </message>
 </context>
 <context>
@@ -125,43 +133,43 @@
     <name>ComputerColorDialog</name>
     <message>
         <source>Computer Colors</source>
-        <translation>Computer-Farben</translation>
+        <translation type="vanished">Computer-Farben</translation>
     </message>
     <message>
         <source>Computer plays:</source>
-        <translation>Computer spielt:</translation>
+        <translation type="vanished">Computer spielt:</translation>
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation>Blau/Rot</translation>
+        <translation type="vanished">Blau/Rot</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>Blau</translation>
+        <translation type="vanished">Blau</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>Gelb/Grün</translation>
+        <translation type="vanished">Gelb/Grün</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>Grün</translation>
+        <translation type="vanished">Grün</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>Gelb</translation>
+        <translation type="vanished">Gelb</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>Rot</translation>
+        <translation type="vanished">Rot</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>Lila</translation>
+        <translation type="vanished">Lila</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>Orange</translation>
+        <translation type="vanished">Orange</translation>
     </message>
     <message>
         <source>Level (Classic, 4 players):</source>
@@ -237,11 +245,58 @@
     </message>
     <message>
         <source>Level:</source>
-        <translation>Spielstufe:</translation>
+        <translation type="vanished">Spielstufe:</translation>
     </message>
     <message>
         <source>Computer level:</source>
         <translation type="vanished">Computer-Spielstufe:</translation>
+    </message>
+</context>
+<context>
+    <name>ComputerDialog</name>
+    <message>
+        <source>Computer Settings</source>
+        <translation>Computer-Einstellungen</translation>
+    </message>
+    <message>
+        <source>Computer plays:</source>
+        <translation>Computer spielt:</translation>
+    </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation>Blau/Rot</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Lila</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Grün</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>Blau</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation>Gelb/Grün</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Gelb</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rot</translation>
+    </message>
+    <message>
+        <source>Level:</source>
+        <translation>Spielstufe:</translation>
     </message>
 </context>
 <context>

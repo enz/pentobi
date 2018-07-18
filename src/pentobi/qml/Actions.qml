@@ -49,8 +49,8 @@ QtObject {
     }
     property Action actionComputerColors: Action {
         shortcut: "Ctrl+U"
-        text: qsTr("Computer Colors")
-        onTriggered: Logic.showComputerColorDialog()
+        text: qsTr("Computer Settings...")
+        onTriggered: Logic.showComputerDialog()
     }
     property Action actionEnd: Action {
         shortcut: "Ctrl+End"
