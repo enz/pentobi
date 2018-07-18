@@ -5,6 +5,8 @@ import QtQuick.Window 2.0
 import "." as Pentobi
 
 Pentobi.Dialog {
+    id: root
+
     property alias computerPlays0: checkBox0.checked
     property alias computerPlays1: checkBox1.checked
     property alias computerPlays2: checkBox2.checked
@@ -96,7 +98,8 @@ Pentobi.Dialog {
                     }
                 }
             }
-            ColumnLayout {
+            Item { Layout.preferredWidth: 0.5 * root.font.pixelSize }
+            RowLayout {
                 Label { text: qsTr("Level:") }
                 SpinBox {
                     id: spinBox
