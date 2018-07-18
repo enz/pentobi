@@ -601,6 +601,17 @@ function ratedGameStart() {
     checkComputerMove()
 }
 
+function rating() {
+    if (ratingModel.numberGames === 0) {
+        showInfo(qsTr("You have not yet played rated games in this game variant."))
+        return
+    }
+    // Never reuse RatingDialog
+    // See comment in Main.qml at ratingModel.onHistoryChanged
+    ratingDialog.sourceComponent = null
+    ratingDialog.open()
+}
+
 function reloadFile() {
     openFile(gameModel.file)
 }

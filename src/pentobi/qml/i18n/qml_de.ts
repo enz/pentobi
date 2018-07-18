@@ -877,6 +877,10 @@
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
         <translation>Automatisch gespeichertes Spiel wurde von einer anderen Instanz von Pentobi geändert. Überschreiben?</translation>
     </message>
+    <message>
+        <source>You have not yet played rated games in this game variant.</source>
+        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

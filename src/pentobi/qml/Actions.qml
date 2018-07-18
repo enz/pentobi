@@ -224,12 +224,7 @@ QtObject {
     property Action actionRating: Action {
         shortcut: "F7"
         text: qsTr("Rating")
-        onTriggered: {
-            // Never reuse RatingDialog
-            // See comment in Main.qml at ratingModel.onHistoryChanged
-            ratingDialog.sourceComponent = null
-            ratingDialog.open()
-        }
+        onTriggered: Logic.rating()
     }
     property Action actionRotateLeft: Action {
         shortcut: noPopupOpen ? "Alt+Left" : ""
