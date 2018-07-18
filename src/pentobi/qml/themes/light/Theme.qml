@@ -23,8 +23,8 @@ QtObject {
     property color selectedTextColor: backgroundColor
     property color toolBarTextColor: "black"
     property color analyzeBackgroundColor: backgroundColor
-    property color analyzeLineColor: "black"
-    property color analyzeMiddleLineColor: "grey"
+    property color analyzeLineColor: commentBorderColor
+    property color analyzeMiddleLineColor: commentBorderColor
     property real pieceListOpacity: 1
     property real toPlayColorLighter: 0.5
 

@@ -2,7 +2,7 @@ import QtQml 2.2
 
 QtObject {
     property color busyIndicatorColor: fontColorScore
-    property color commentBorderColor: "#64615f"
+    property color commentBorderColor: "#5a5756"
     property color commentBorderColorFocus: "#0066ff"
     property color messageTextColor: fontColorPosInfo
     property color messageBackgroundColor: "#333"
@@ -22,9 +22,9 @@ QtObject {
     property color selectionColor: "#96918f"
     property color selectedTextColor: backgroundColor
     property color toolBarTextColor: fontColorPosInfo
-    property color analyzeBackgroundColor: "#222"
-    property color analyzeLineColor: "#888"
-    property color analyzeMiddleLineColor: "#555"
+    property color analyzeBackgroundColor: backgroundColor
+    property color analyzeLineColor: commentBorderColor
+    property color analyzeMiddleLineColor: commentBorderColor
     property real pieceListOpacity: 0.94
     property real toPlayColorLighter: 1.7
 
