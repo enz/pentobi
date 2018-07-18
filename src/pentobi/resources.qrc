@@ -32,6 +32,7 @@
         <file>qml/GameDisplayMobile.qml</file>
         <file>qml/GameDisplayDesktop.qml</file>
         <file>qml/GameInfoDialog.qml</file>
+        <file>qml/GameVariantDialog.qml</file>
         <file>qml/GotoMoveDialog.qml</file>
         <file>qml/HelpWindow.qml</file>
         <file>qml/ImageSaveDialog.qml</file>
@@ -44,11 +45,9 @@
         <file>qml/MenuEdit.qml</file>
         <file>qml/MenuExport.qml</file>
         <file>qml/MenuGame.qml</file>
-        <file>qml/MenuGameVariant.qml</file>
         <file>qml/MenuGo.qml</file>
         <file>qml/MenuHelp.qml</file>
         <file>qml/MenuItem.qml</file>
-        <file>qml/MenuItemGameVariant.qml</file>
         <file>qml/MenuMoveAnnotation.qml</file>
         <file>qml/MenuMoveMarking.qml</file>
         <file>qml/MenuTheme.qml</file>

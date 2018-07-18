@@ -221,6 +221,7 @@ ApplicationWindow {
             }
         }
     }
+    DialogLoader { id: gameVariantDialog; component: Component { GameVariantDialog { } } }
     DialogLoader { id: gameInfoDialog; component: Component { GameInfoDialog { } } }
     DialogLoader { id: initialRatingDialog; component: Component { InitialRatingDialog { } } }
     DialogLoader { id: openDialog; component: Component { OpenDialog { } } }

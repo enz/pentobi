@@ -22,7 +22,16 @@ Pentobi.Menu {
                           qsTr("R"))
     }
     MenuSeparator { }
-    MenuGameVariant { }
+    MenuItem {
+        text: addMnemonic(qsTr("Game Variant"),
+                          //: Mnemonic for menu item Game Variant. Leave empty for no mnemonic.
+                          qsTr("V"))
+        onTriggered: {
+            var dialog = gameVariantDialog.get()
+            dialog.gameVariant = gameModel.gameVariant
+            gameVariantDialog.open()
+        }
+    }
     Pentobi.MenuItem {
         action: actions.actionGameInfo
         text: addMnemonic(action.text,

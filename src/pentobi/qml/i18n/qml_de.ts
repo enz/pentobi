@@ -537,6 +537,49 @@
     </message>
 </context>
 <context>
+    <name>GameVariantDialog</name>
+    <message>
+        <source>Game Variant</source>
+        <translation>Spielvariante</translation>
+    </message>
+    <message>
+        <source>Classic</source>
+        <translation>Klassisch</translation>
+    </message>
+    <message>
+        <source>Duo</source>
+        <translation>Duo</translation>
+    </message>
+    <message>
+        <source>Junior</source>
+        <translation>Junior</translation>
+    </message>
+    <message>
+        <source>Trigon</source>
+        <translation>Trigon</translation>
+    </message>
+    <message>
+        <source>Nexos</source>
+        <translation>Nexos</translation>
+    </message>
+    <message>
+        <source>GembloQ</source>
+        <translation>GembloQ</translation>
+    </message>
+    <message>
+        <source>Callisto</source>
+        <translation>Callisto</translation>
+    </message>
+    <message>
+        <source>Players</source>
+        <translation>Spieler</translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation>Farben</translation>
+    </message>
+</context>
+<context>
     <name>GotoMoveDialog</name>
     <message>
         <source>Go to Move</source>
@@ -1018,136 +1061,145 @@
         <extracomment>Mnemonic for menu item Quit. Leave empty for no mnemonic.</extracomment>
         <translation>B</translation>
     </message>
-</context>
-<context>
-    <name>MenuGameVariant</name>
     <message>
         <source>Game Variant</source>
         <translation>Spielvariante</translation>
     </message>
     <message>
         <source>V</source>
+        <extracomment>Mnemonic for menu item Game Variant. Leave empty for no mnemonic.</extracomment>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>MenuGameVariant</name>
+    <message>
+        <source>Game Variant</source>
+        <translation type="vanished">Spielvariante</translation>
+    </message>
+    <message>
+        <source>V</source>
         <extracomment>Mnemonic for menu Game Variant. Leave empty for no mnemonic.</extracomment>
-        <translation>V</translation>
+        <translation type="vanished">V</translation>
     </message>
     <message>
         <source>Classic</source>
-        <translation>Klassisch</translation>
+        <translation type="vanished">Klassisch</translation>
     </message>
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu Classic. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
+        <translation type="vanished">K</translation>
     </message>
     <message>
         <source>Classic (%1 Players)</source>
-        <translation>Klassisch (%1 Spieler)</translation>
+        <translation type="vanished">Klassisch (%1 Spieler)</translation>
     </message>
     <message>
         <source>2</source>
         <extracomment>Mnemonic for menu item Classic/Trigon/Nexos (2 Players) and GambloQ/Callisto (2 Players, 2 Colors). Leave empty for no mnemonic.</extracomment>
-        <translation>2</translation>
+        <translation type="vanished">2</translation>
     </message>
     <message>
         <source>3</source>
         <extracomment>Mnemonic for menu item Classic/Trigon/GembloQ/Callisto (3 Players). Leave empty for no mnemonic.</extracomment>
-        <translation>3</translation>
+        <translation type="vanished">3</translation>
     </message>
     <message>
         <source>4</source>
         <extracomment>Mnemonic for menu item Classic/Trigon/Nexos/GembloQ/Callisto (4 Players). Leave empty for no mnemonic.</extracomment>
-        <translation>4</translation>
+        <translation type="vanished">4</translation>
     </message>
     <message>
         <source>Duo</source>
-        <translation>Duo</translation>
+        <translation type="vanished">Duo</translation>
     </message>
     <message>
         <source>D</source>
         <extracomment>Mnemonic for menu item Duo. Leave empty for no mnemonic.</extracomment>
-        <translation>D</translation>
+        <translation type="vanished">D</translation>
     </message>
     <message>
         <source>Junior</source>
-        <translation>Junior</translation>
+        <translation type="vanished">Junior</translation>
     </message>
     <message>
         <source>J</source>
         <extracomment>Mnemonic for menu item Junior. Leave empty for no mnemonic.</extracomment>
-        <translation>J</translation>
+        <translation type="vanished">J</translation>
     </message>
     <message>
         <source>Trigon</source>
-        <translation>Trigon</translation>
+        <translation type="vanished">Trigon</translation>
     </message>
     <message>
         <source>T</source>
         <extracomment>Mnemonic for menu Trigon. Leave empty for no mnemonic.</extracomment>
-        <translation>T</translation>
+        <translation type="vanished">T</translation>
     </message>
     <message>
         <source>Nexos</source>
-        <translation>Nexos</translation>
+        <translation type="vanished">Nexos</translation>
     </message>
     <message>
         <source>N</source>
         <extracomment>Mnemonic for menu Nexos. Leave empty for no mnemonic.</extracomment>
-        <translation>N</translation>
+        <translation type="vanished">N</translation>
     </message>
     <message>
         <source>GembloQ</source>
-        <translation>GembloQ</translation>
+        <translation type="vanished">GembloQ</translation>
     </message>
     <message>
         <source>Callisto</source>
-        <translation>Callisto</translation>
+        <translation type="vanished">Callisto</translation>
     </message>
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu item Callisto. Leave empty for no mnemonic.</extracomment>
-        <translation>C</translation>
+        <translation type="vanished">C</translation>
     </message>
     <message>
         <source>G</source>
         <extracomment>Mnemonic for menu GembloQ. Leave empty for no mnemonic.</extracomment>
-        <translation>G</translation>
+        <translation type="vanished">G</translation>
     </message>
     <message>
         <source>Trigon (%1 Players)</source>
-        <translation>Trigon (%1 Spieler)</translation>
+        <translation type="vanished">Trigon (%1 Spieler)</translation>
     </message>
     <message>
         <source>Nexos (%1 Players)</source>
-        <translation>Nexos (%1 Spieler)</translation>
+        <translation type="vanished">Nexos (%1 Spieler)</translation>
     </message>
     <message>
         <source>GembloQ (2 Players, 2 Colors)</source>
-        <translation>GembloQ (2 Spieler, 2 Farben)</translation>
+        <translation type="vanished">GembloQ (2 Spieler, 2 Farben)</translation>
     </message>
     <message>
         <source>GembloQ (2 Players, 4 Colors)</source>
-        <translation>GembloQ (2 Spieler, 4 Farben)</translation>
+        <translation type="vanished">GembloQ (2 Spieler, 4 Farben)</translation>
     </message>
     <message>
         <source>GembloQ (%1 Players)</source>
-        <translation>GembloQ (%1 Spieler)</translation>
+        <translation type="vanished">GembloQ (%1 Spieler)</translation>
     </message>
     <message>
         <source>Callisto (2 Players, 2 Colors)</source>
-        <translation>Callisto (2 Spieler, 2 Farben)</translation>
+        <translation type="vanished">Callisto (2 Spieler, 2 Farben)</translation>
     </message>
     <message>
         <source>Callisto (2 Players, 4 Colors)</source>
-        <translation>Callisto (2 Spieler, 4 Farben)</translation>
+        <translation type="vanished">Callisto (2 Spieler, 4 Farben)</translation>
     </message>
     <message>
         <source>Callisto (%1 Players)</source>
-        <translation>Callisto (%1 Spieler)</translation>
+        <translation type="vanished">Callisto (%1 Spieler)</translation>
     </message>
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu item GembloQ/Callisto (2 Players, 4 Colors). Leave empty for no mnemonic.</extracomment>
-        <translation>F</translation>
+        <translation type="vanished">F</translation>
     </message>
 </context>
 <context>
