@@ -57,6 +57,7 @@ Pentobi.Dialog {
                           case "nexos_2": return qsTr("Nexos (2 players)")
                           case "nexos": return qsTr("Nexos (4 players)")
                           case "callisto_2": return qsTr("Callisto (2 players)")
+                          case "callisto_2_4": return qsTr("Callisto (2 players, 4 colors)")
                           case "callisto_3": return qsTr("Callisto (3 players)")
                           case "callisto": return qsTr("Callisto (4 players)")
                           case "gembloq": return qsTr("GembloQ (4 players)")
