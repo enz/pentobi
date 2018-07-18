@@ -34,8 +34,7 @@ Pentobi.Dialog {
             ColumnLayout {
                 Label { text: qsTr("Computer plays:") }
                 GridLayout {
-                    rows: 2
-                    flow: GridLayout.TopToBottom
+                    columns: 2; rows: 2
 
                     CheckBox {
                         id: checkBox0
@@ -53,6 +52,8 @@ Pentobi.Dialog {
                         onClicked:
                             if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
                                 computerPlays2 = checked
+                        Layout.column: 0
+                        Layout.row: 0
                     }
                     CheckBox {
                         id: checkBox1
@@ -71,6 +72,8 @@ Pentobi.Dialog {
                         onClicked:
                             if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
                                 computerPlays3 = checked
+                        Layout.column: gameModel.nuPlayers === 2 ? 0 : 1
+                        Layout.row: gameModel.nuPlayers === 2 ? 1 : 0
                     }
                     CheckBox {
                         id: checkBox2
@@ -78,6 +81,9 @@ Pentobi.Dialog {
                         enabled: ! isRated
                         text: qsTr("Red")
                         visible: gameModel.nuPlayers > 2
+                        Layout.column: gameModel.nuColors === 3 ? 0 : 1
+                        Layout.row: gameModel.nuColors === 3 ? 1 : 1
+                        Layout.rowSpan: gameModel.nuColors === 3 ? 2 : 1
                     }
                     CheckBox {
                         id: checkBox3
@@ -85,6 +91,8 @@ Pentobi.Dialog {
                         enabled: ! isRated
                         text: qsTr("Green")
                         visible: gameModel.nuPlayers > 3
+                        Layout.column: 0
+                        Layout.row: 1
                     }
                 }
             }
