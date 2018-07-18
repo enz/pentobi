@@ -1699,6 +1699,10 @@
         <source>GembloQ (3 players)</source>
         <translation>GembloQ (3 spillere)</translation>
     </message>
+    <message>
+        <source>Callisto (2 players, 4 colors)</source>
+        <translation>Callisto (2 spillere, 4 farger)</translation>
+    </message>
 </context>
 <context>
     <name>SaveDialog</name>
