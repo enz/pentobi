@@ -163,6 +163,78 @@
         <source>Orange</source>
         <translation>Orange</translation>
     </message>
+    <message>
+        <source>Level (Classic, 4 players):</source>
+        <translation>Spielstufe (Klassisch, 4 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (Classic, 2 players):</source>
+        <translation>Spielstufe (Klassisch, 2 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (Classic, 3 players):</source>
+        <translation>Spielstufe (Klassisch, 3 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (Duo):</source>
+        <translation>Spielstufe (Duo):</translation>
+    </message>
+    <message>
+        <source>Level (Junior):</source>
+        <translation>Spielstufe (Junior):</translation>
+    </message>
+    <message>
+        <source>Level (Trigon, 4 players):</source>
+        <translation>Spielstufe (Trigon, 4 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (Trigon, 2 players):</source>
+        <translation>Spielstufe (Trigon, 2 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (Trigon, 3 players):</source>
+        <translation>Spielstufe (Trigon, 3 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (Nexos, 4 players):</source>
+        <translation>Spielstufe (Nexos, 4 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (Nexos, 2 players):</source>
+        <translation>Spielstufe (Nexos, 2 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 4 players):</source>
+        <translation>Spielstufe (Callisto, 4 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 2 players, 2 colors):</source>
+        <translation>Spielstufe (Callisto, 2 Spieler, 2 Farben):</translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 2 players, 4 colors):</source>
+        <translation>Spielstufe (Callisto, 2 Spieler, 4 Farben):</translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 3 players):</source>
+        <translation>Spielstufe (Callisto, 3 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 4 players):</source>
+        <translation>Spielstufe (GembloQ, 4 Spieler):</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 2 players, 2 colors):</source>
+        <translation>Spielstufe (GembloQ, 2 Spieler, 2 Farben):</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 2 players, 4 colors):</source>
+        <translation>Spielstufe (GembloQ, 2 Spieler, 4 Farben):</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 3 players):</source>
+        <translation>Spielstufe (GembloQ, 3 Spieler):</translation>
+    </message>
 </context>
 <context>
     <name>ExportImageDialog</name>
@@ -735,83 +807,6 @@
         <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
         <translation>O</translation>
     </message>
-    <message>
-        <source>Level (Classic, 4 Players)</source>
-        <translation>Spielstufe (Klassisch, 4 Spieler)</translation>
-    </message>
-    <message>
-        <source>L</source>
-        <extracomment>Mnemonic for menu item Level. Leave empty for no mnemonic.</extracomment>
-        <translation>U</translation>
-    </message>
-    <message>
-        <source>Level (Classic, 2 Players)</source>
-        <translation>Spielstufe (Klassisch, 2 Spieler)</translation>
-    </message>
-    <message>
-        <source>Level (Classic, 3 Players)</source>
-        <translation>Spielstufe (Klassisch, 3 Spieler)</translation>
-    </message>
-    <message>
-        <source>Level (Duo)</source>
-        <translation>Spielstufe (Duo)</translation>
-    </message>
-    <message>
-        <source>Level (Junior)</source>
-        <translation>Spielstufe (Junior)</translation>
-    </message>
-    <message>
-        <source>Level (Trigon, 4 Players)</source>
-        <translation>Spielstufe (Trigon, 4 Spieler)</translation>
-    </message>
-    <message>
-        <source>Level (Trigon, 2 Players)</source>
-        <translation>Spielstufe (Trigon, 2 Spieler)</translation>
-    </message>
-    <message>
-        <source>Level (Trigon, 3 Players)</source>
-        <translation>Spielstufe (Trigon, 3 Spieler)</translation>
-    </message>
-    <message>
-        <source>Level (Nexos, 4 Players)</source>
-        <translation>Spielstufe (Nexos, 4 Spieler)</translation>
-    </message>
-    <message>
-        <source>Level (Nexos, 2 Players)</source>
-        <translation>Spielstufe (Nexos, 2 Spieler)</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 4 Players)</source>
-        <translation>Spielstufe (Callisto, 4 Spieler)</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 2 Players, 2 Colors)</source>
-        <translation>Spielstufe (Callisto, 2 Spieler, 2 Farben)</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 2 Players, 4 Colors)</source>
-        <translation>Spielstufe (Callisto, 2 Spieler, 4 Farben)</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 3 Players)</source>
-        <translation>Spielstufe (Callisto, 3 Spieler)</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 4 Players)</source>
-        <translation>Spielstufe (GembloQ, 4 Spieler)</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 2 Players, 2 Colors)</source>
-        <translation>Spielstufe (GembloQ, 2 Spieler, 2 Farben)</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 2 Players, 4 Colors)</source>
-        <translation>Spielstufe (GembloQ, 2 Spieler, 4 Farben)</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 3 Players)</source>
-        <translation>Spielstufe (GembloQ, 3 Spieler)</translation>
-    </message>
 </context>
 <context>
     <name>MenuEdit</name>
@@ -1214,26 +1209,6 @@
     </message>
 </context>
 <context>
-    <name>MenuItem</name>
-    <message>
-        <source>Ctrl</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Strg</translation>
-    </message>
-    <message>
-        <source>Shift</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Umschalt</translation>
-    </message>
-</context>
-<context>
-    <name>MenuItemLevel</name>
-    <message>
-        <source>Level %1</source>
-        <translation>Stufe %1</translation>
-    </message>
-</context>
-<context>
     <name>MenuMoveAnnotation</name>
     <message>
         <source>Move Annotation</source>
@@ -1473,35 +1448,6 @@
     <message>
         <source>Show Variations</source>
         <translation>Varianten zeigen</translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation>Layout</translation>
-    </message>
-    <message>
-        <source>L</source>
-        <extracomment>Mnemonic for menu Layout. Leave empty for no mnemonic.</extracomment>
-        <translation>L</translation>
-    </message>
-    <message>
-        <source>Desktop</source>
-        <extracomment>Name of window layout optimized for desktop.</extracomment>
-        <translation>Desktop</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <extracomment>Mnemonic for menu item Desktop. Leave empty for no mnemonic.</extracomment>
-        <translation>D</translation>
-    </message>
-    <message>
-        <source>Mobile</source>
-        <extracomment>Name of window layout optimized for smartphones.</extracomment>
-        <translation>Mobil</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <extracomment>Mnemonic for menu item Mobile. Leave empty for no mnemonic.</extracomment>
-        <translation>M</translation>
     </message>
     <message>
         <source>Animate Pieces</source>

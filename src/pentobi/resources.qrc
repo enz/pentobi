@@ -49,7 +49,6 @@
         <file>qml/MenuHelp.qml</file>
         <file>qml/MenuItem.qml</file>
         <file>qml/MenuItemGameVariant.qml</file>
-        <file>qml/MenuItemLevel.qml</file>
         <file>qml/MenuMoveAnnotation.qml</file>
         <file>qml/MenuMoveMarking.qml</file>
         <file>qml/MenuTheme.qml</file>

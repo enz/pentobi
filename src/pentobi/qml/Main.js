@@ -638,14 +638,12 @@ function setComputerNone() {
 }
 
 function showComputerColorDialog() {
-    if (computerColorDialogLoader.status === Loader.Null)
-        computerColorDialogLoader.sourceComponent =
-                computerColorDialogComponent
-    var dialog = computerColorDialogLoader.item
+    var dialog = computerColorDialogLoader.get()
     dialog.computerPlays0 = computerPlays0
     dialog.computerPlays1 = computerPlays1
     dialog.computerPlays2 = computerPlays2
     dialog.computerPlays3 = computerPlays3
+    dialog.level = playerModel.level
     dialog.open()
 }
 

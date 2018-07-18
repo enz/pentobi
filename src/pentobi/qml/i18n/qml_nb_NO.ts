@@ -163,6 +163,78 @@
         <source>Orange</source>
         <translation>Oransje</translation>
     </message>
+    <message>
+        <source>Level (Classic, 4 players):</source>
+        <translation>Nivå (klassisk, 4 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (Classic, 2 players):</source>
+        <translation>Nivå (klassisk, 2 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (Classic, 3 players):</source>
+        <translation>Nivå (klassisk, 3 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (Duo):</source>
+        <translation>Nivå (Duo):</translation>
+    </message>
+    <message>
+        <source>Level (Junior):</source>
+        <translation>Nivå (Junior):</translation>
+    </message>
+    <message>
+        <source>Level (Trigon, 4 players):</source>
+        <translation>Nivå (Trigon, 4 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (Trigon, 2 players):</source>
+        <translation>Nivå (Trigon, 2 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (Trigon, 3 players):</source>
+        <translation>Nivå (Trigon, 3 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (Nexos, 4 players):</source>
+        <translation>Nivå (Nexos, 4 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (Nexos, 2 players):</source>
+        <translation>Nivå (Nexos, 2 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 4 players):</source>
+        <translation>Nivå (Callisto, 4 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 2 players, 2 colors):</source>
+        <translation>Nivå (Callisto, 2 spillere, 2 farger):</translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 2 players, 4 colors):</source>
+        <translation>Nivå (Callisto, 2 spillere, 4 farger):</translation>
+    </message>
+    <message>
+        <source>Level (Callisto, 3 players):</source>
+        <translation>Nivå (Callisto, 3 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 4 players):</source>
+        <translation>Nivå (GembloQ, 4 spillere):</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 2 players, 2 colors):</source>
+        <translation>Nivå (GembloQ, 2 spillere, 2 farger):</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 2 players, 4 colors):</source>
+        <translation>Nivå (GembloQ, 2 spillere, 4 farger):</translation>
+    </message>
+    <message>
+        <source>Level (GembloQ, 3 players):</source>
+        <translation>Nivå (GembloQ, 3 spillere):</translation>
+    </message>
 </context>
 <context>
     <name>ExportImageDialog</name>
@@ -735,83 +807,6 @@
         <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
         <translation>O</translation>
     </message>
-    <message>
-        <source>Level (Classic, 4 Players)</source>
-        <translation>Nivå (klassisk, 4 spillere)</translation>
-    </message>
-    <message>
-        <source>L</source>
-        <extracomment>Mnemonic for menu item Level. Leave empty for no mnemonic.</extracomment>
-        <translation>N</translation>
-    </message>
-    <message>
-        <source>Level (Classic, 2 Players)</source>
-        <translation>Nivå (klassisk, 2 spillere)</translation>
-    </message>
-    <message>
-        <source>Level (Classic, 3 Players)</source>
-        <translation>Nivå (klassisk, 3 spillere)</translation>
-    </message>
-    <message>
-        <source>Level (Duo)</source>
-        <translation>Nivå (Duo)</translation>
-    </message>
-    <message>
-        <source>Level (Junior)</source>
-        <translation>Nivå (Junior)</translation>
-    </message>
-    <message>
-        <source>Level (Trigon, 4 Players)</source>
-        <translation>Nivå (Trigon, 4 spillere)</translation>
-    </message>
-    <message>
-        <source>Level (Trigon, 2 Players)</source>
-        <translation>Nivå (Trigon, 2 spillere)</translation>
-    </message>
-    <message>
-        <source>Level (Trigon, 3 Players)</source>
-        <translation>Nivå (Trigon, 3 spillere)</translation>
-    </message>
-    <message>
-        <source>Level (Nexos, 4 Players)</source>
-        <translation>Nivå (Nexos, 4 spillere)</translation>
-    </message>
-    <message>
-        <source>Level (Nexos, 2 Players)</source>
-        <translation>Nivå (Nexos, 2 spillere)</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 4 Players)</source>
-        <translation>Nivå (Callisto, 4 spillere)</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 2 Players, 2 Colors)</source>
-        <translation>Nivå (Callisto, 2 spillere, 2 farger)</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 2 Players, 4 Colors)</source>
-        <translation>Nivå (Callisto, 2 spillere, 4 farger)</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 3 Players)</source>
-        <translation>Nivå (Callisto, 3 spillere)</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 4 Players)</source>
-        <translation>Nivå (GembloQ, 4 spillere)</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 2 Players, 2 Colors)</source>
-        <translation>Nivå (GembloQ, 2 spillere, 2 farger)</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 2 Players, 4 Colors)</source>
-        <translation>Nivå (GembloQ, 2 spillere, 4 farger)</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 3 Players)</source>
-        <translation>Nivå (GembloQ, 3 spillere)</translation>
-    </message>
 </context>
 <context>
     <name>MenuEdit</name>
@@ -1214,26 +1209,6 @@
     </message>
 </context>
 <context>
-    <name>MenuItem</name>
-    <message>
-        <source>Ctrl</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Ctrl</translation>
-    </message>
-    <message>
-        <source>Shift</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Shift</translation>
-    </message>
-</context>
-<context>
-    <name>MenuItemLevel</name>
-    <message>
-        <source>Level %1</source>
-        <translation>Nivå %1</translation>
-    </message>
-</context>
-<context>
     <name>MenuMoveAnnotation</name>
     <message>
         <source>Move Annotation</source>
@@ -1473,35 +1448,6 @@
     <message>
         <source>Show Variations</source>
         <translation>Vis variasjoner</translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation>Oppsett</translation>
-    </message>
-    <message>
-        <source>L</source>
-        <extracomment>Mnemonic for menu Layout. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
-    </message>
-    <message>
-        <source>Desktop</source>
-        <extracomment>Name of window layout optimized for desktop.</extracomment>
-        <translation>Skrivebord</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <extracomment>Mnemonic for menu item Desktop. Leave empty for no mnemonic.</extracomment>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>Mobile</source>
-        <extracomment>Name of window layout optimized for smartphones.</extracomment>
-        <translation>Mobil</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <extracomment>Mnemonic for menu item Mobile. Leave empty for no mnemonic.</extracomment>
-        <translation>M</translation>
     </message>
     <message>
         <source>Animate Pieces</source>
