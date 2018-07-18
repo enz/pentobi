@@ -62,6 +62,8 @@ int main(int argc, char *argv[])
                                       QString::number(PlayerModel::maxLevel));
     parser.addOption(optionMaxLevel);
     QCommandLineOption optionNoBook("nobook", "Do not use opening books.");
+    QCommandLineOption optionMobile("mobile", "Use layout optimized for smartphones.");
+    parser.addOption(optionMobile);
     parser.addOption(optionNoBook);
     QCommandLineOption optionNoDelay(
                 "nodelay", "Do not delay fast computer moves.");
@@ -110,6 +112,13 @@ int main(int argc, char *argv[])
                 throw runtime_error("--threads must be a positive number");
             PlayerModel::nuThreads = nuThreads;
         }
+#ifdef Q_OS_ANDROID
+        bool isDesktop = false;
+#else
+        bool isDesktop = true;
+#endif
+        if (parser.isSet(optionMobile))
+            isDesktop = false;
         QString initialFile;
         auto args = parser.positionalArguments();
         if (args.size() > 1)
@@ -122,6 +131,7 @@ int main(int argc, char *argv[])
 #endif
         QQmlApplicationEngine engine;
         engine.rootContext()->setContextProperty("initialFile", initialFile);
+        engine.rootContext()->setContextProperty("isDesktop", isDesktop);
         engine.load(QUrl("qrc:///qml/Main.qml"));
         if (engine.rootObjects().empty())
             return 1;

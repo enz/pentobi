@@ -1,4 +1,4 @@
-.TH PENTOBI 6 "2018-07-17" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+.TH PENTOBI 6 "2018-07-18" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
 .SH NAME
 pentobi \- computer opponent for the board game Blokus
 .SH SYNOPSIS
@@ -27,6 +27,10 @@ By default, Pentobi currently allocates up to 2 GB (but not more than a quarter
 of the physical memory available on the system).
 Reducing the maximum level to 8 currently reduces this amount by a factor
 of 3 to 4 and lower maximum levels even more.
+.TP
+.B \-\-mobile
+Use a window layout optimized for smartphones. If this option is not used,
+the default layout depends on the platform.
 .TP
 .B \-\-nobook
 Do not use opening books.

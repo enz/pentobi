@@ -33,41 +33,6 @@ Pentobi.Menu {
     }
     MenuSeparator { }
     MenuTheme { }
-    Pentobi.Menu {
-        title: addMnemonic(qsTr("Layout"),
-                          //: Mnemonic for menu Layout. Leave empty for no mnemonic.
-                          qsTr("L"))
-
-        Pentobi.MenuItem {
-            //: Name of window layout optimized for desktop.
-            text: addMnemonic(qsTr("Desktop"),
-                              //: Mnemonic for menu item Desktop. Leave empty for no mnemonic.
-                              qsTr("D"))
-            enabled: ! isAndroid
-            checkable: true
-            autoExclusive: true
-            checked: isDesktop
-            onTriggered: {
-                gameDisplay.destroyPieces()
-                isDesktop = true
-                gameDisplay.createPieces()
-            }
-        }
-        Pentobi.MenuItem {
-            //: Name of window layout optimized for smartphones.
-            text: addMnemonic(qsTr("Mobile"),
-                              //: Mnemonic for menu item Mobile. Leave empty for no mnemonic.
-                              qsTr("M"))
-            checkable: true
-            autoExclusive: true
-            checked: ! isDesktop
-            onTriggered: {
-                gameDisplay.destroyPieces()
-                isDesktop = false
-                gameDisplay.createPieces()
-            }
-        }
-    }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Animate Pieces"),
                           //: Mnemonic for menu item Animate Pieces. Leave empty for no mnemonic.

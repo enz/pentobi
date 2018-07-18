@@ -17,9 +17,6 @@ ApplicationWindow {
     property bool isPlaySingleMoveRunning
     property bool isRated
 
-    // Assume larger screen with landscape orientation and mouse input.
-    property bool isDesktop: ! isAndroid
-
     property alias gameDisplay: gameDisplayLoader.item
 
     // Was computer thinking on regular game move when game was autosaved?
@@ -150,7 +147,6 @@ ApplicationWindow {
         property alias height: rootWindow.height
         property alias folder: rootWindow.folder
         property alias themeName: rootWindow.themeName
-        property alias isDesktop: rootWindow.isDesktop
         property alias exportImageWidth: rootWindow.exportImageWidth
         property alias showVariations: gameModel.showVariations
         property alias initComputerColorsOnNewGame: rootWindow.initComputerColorsOnNewGame
