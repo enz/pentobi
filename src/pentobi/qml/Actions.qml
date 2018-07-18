@@ -47,7 +47,7 @@ QtObject {
         enabled: ! isRated && gameModel.hasEarlierVar
         onTriggered: gameModel.gotoBeginningOfBranch()
     }
-    property Action actionComputerColors: Action {
+    property Action actionComputerSettings: Action {
         shortcut: "Ctrl+U"
         text: qsTr("Computer Settings...")
         onTriggered: Logic.showComputerDialog()

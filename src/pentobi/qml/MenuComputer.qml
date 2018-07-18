@@ -7,10 +7,10 @@ Pentobi.Menu {
                        qsTr("C"))
 
     Pentobi.MenuItem {
-        action: actions.actionComputerColors
+        action: actions.actionComputerSettings
         text: addMnemonic(action.text,
-                          //: Mnemonic for menu item Computer Colors. Leave empty for no mnemonic.
-                          qsTr("O"))
+                          //: Mnemonic for menu item Computer Settings. Leave empty for no mnemonic.
+                          qsTr("S"))
     }
     Pentobi.MenuItem {
         action: actions.actionPlay
@@ -27,7 +27,7 @@ Pentobi.Menu {
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Stop"),
                           //: Mnemonic for menu item Stop. Leave empty for no mnemonic.
-                          qsTr("S"))
+                          qsTr("O"))
         enabled: (playerModel.isGenMoveRunning
                   || delayedCheckComputerMove.running
                   || analyzeGameModel.isRunning)

@@ -892,8 +892,8 @@
     </message>
     <message>
         <source>O</source>
-        <extracomment>Mnemonic for menu item Computer Colors. Leave empty for no mnemonic.</extracomment>
-        <translation>C</translation>
+        <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
     </message>
     <message>
         <source>M</source>
@@ -906,8 +906,8 @@
     </message>
     <message>
         <source>S</source>
-        <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
+        <extracomment>Mnemonic for menu item Computer Settings. Leave empty for no mnemonic.</extracomment>
+        <translation>C</translation>
     </message>
 </context>
 <context>

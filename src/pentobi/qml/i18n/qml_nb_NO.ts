@@ -252,43 +252,43 @@
     </message>
     <message>
         <source>Computer plays:</source>
-        <translation type="unfinished">Datamaskinen spiller:</translation>
+        <translation>Datamaskinen spiller:</translation>
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation type="unfinished">Blå/rød</translation>
+        <translation>Blå/rød</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation type="unfinished">Lilla</translation>
+        <translation>Lilla</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="unfinished">Grønn</translation>
+        <translation>Grønn</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="unfinished">Blå</translation>
+        <translation>Blå</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation type="unfinished">Gul/grønn</translation>
+        <translation>Gul/grønn</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation type="unfinished">Oransje</translation>
+        <translation>Oransje</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation type="unfinished">Gul</translation>
+        <translation>Gul</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="unfinished">Rød</translation>
+        <translation>Rød</translation>
     </message>
     <message>
         <source>Level:</source>
-        <translation type="unfinished">Nivå:</translation>
+        <translation>Nivå:</translation>
     </message>
 </context>
 <context>
@@ -888,8 +888,8 @@
     </message>
     <message>
         <source>O</source>
-        <extracomment>Mnemonic for menu item Computer Colors. Leave empty for no mnemonic.</extracomment>
-        <translation>F</translation>
+        <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
+        <translation>O</translation>
     </message>
     <message>
         <source>M</source>
@@ -902,8 +902,8 @@
     </message>
     <message>
         <source>S</source>
-        <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <extracomment>Mnemonic for menu item Computer Settings. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

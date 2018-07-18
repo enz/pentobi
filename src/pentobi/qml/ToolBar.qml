@@ -57,7 +57,7 @@ RowLayout {
     Pentobi.Button {
         padding: buttonPadding
         imageSource: "icons/pentobi-computer-colors.svg"
-        action: actions.actionComputerColors
+        action: actions.actionComputerSettings
         visible: ! isAndroid || enabled
         ToolTip.text: qsTr("Set the colors played by the computer")
     }
