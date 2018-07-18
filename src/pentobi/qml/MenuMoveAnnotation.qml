@@ -4,9 +4,9 @@ Pentobi.Menu {
     title: addMnemonic(qsTr("Move Annotation"),
                        //: Mnemonic for menu Move Annotation. Leave empty for no mnemonic.
                        qsTr("A"))
-    enabled: gameModel.moveNumber > 0
 
     Pentobi.MenuItem {
+        enabled: gameModel.moveNumber > 0
         text: addMnemonic(qsTr("None"),
                           //: Mnemonic for menu item Move Annotation/None. Leave empty for no mnemonic.
                           qsTr("N"))
@@ -16,6 +16,7 @@ Pentobi.Menu {
         onTriggered: gameModel.moveAnnotation = ""
     }
     Pentobi.MenuItem {
+        enabled: gameModel.moveNumber > 0
         text: addMnemonic(qsTr("Very good"),
                           //: Mnemonic for menu item Very good. Leave empty for no mnemonic.
                           qsTr("V"))
@@ -25,6 +26,7 @@ Pentobi.Menu {
         onTriggered: gameModel.moveAnnotation = "!!"
     }
     Pentobi.MenuItem {
+        enabled: gameModel.moveNumber > 0
         text: addMnemonic(qsTr("Good"),
                           //: Mnemonic for menu item Good. Leave empty for no mnemonic.
                           qsTr("G"))
@@ -34,6 +36,7 @@ Pentobi.Menu {
         onTriggered: gameModel.moveAnnotation = "!"
     }
     Pentobi.MenuItem {
+        enabled: gameModel.moveNumber > 0
         text: addMnemonic(qsTr("Interesting"),
                           //: Mnemonic for menu item Interesting. Leave empty for no mnemonic.
                           qsTr("E"))
@@ -43,6 +46,7 @@ Pentobi.Menu {
         onTriggered: gameModel.moveAnnotation = "!?"
     }
     Pentobi.MenuItem {
+        enabled: gameModel.moveNumber > 0
         text: addMnemonic(qsTr("Doubtful"),
                           //: Mnemonic for menu item Doubtful. Leave empty for no mnemonic.
                           qsTr("D"))
@@ -52,6 +56,7 @@ Pentobi.Menu {
         onTriggered: gameModel.moveAnnotation = "?!"
     }
     Pentobi.MenuItem {
+        enabled: gameModel.moveNumber > 0
         text: addMnemonic(qsTr("Bad"),
                           //: Mnemonic for menu item Bad. Leave empty for no mnemonic.
                           qsTr("B"))
@@ -61,6 +66,7 @@ Pentobi.Menu {
         onTriggered: gameModel.moveAnnotation = "?"
     }
     Pentobi.MenuItem {
+        enabled: gameModel.moveNumber > 0
         text: addMnemonic(qsTr("Very Bad"),
                           //: Mnemonic for menu item Very Bad. Leave empty for no mnemonic.
                           qsTr("R"))
