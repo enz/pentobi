@@ -34,7 +34,8 @@ Pentobi.Dialog {
             ColumnLayout {
                 Label { text: qsTr("Computer plays:") }
                 GridLayout {
-                    columns: 2
+                    rows: 2
+                    flow: GridLayout.TopToBottom
 
                     CheckBox {
                         id: checkBox0
