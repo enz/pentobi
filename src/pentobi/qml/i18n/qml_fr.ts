@@ -165,75 +165,83 @@
     </message>
     <message>
         <source>Level (Classic, 4 players):</source>
-        <translation>Niveau (Classique, 4 joueurs) :</translation>
+        <translation type="vanished">Niveau (Classique, 4 joueurs) :</translation>
     </message>
     <message>
         <source>Level (Classic, 2 players):</source>
-        <translation>Niveau (Classique, 2 joueurs) :</translation>
+        <translation type="vanished">Niveau (Classique, 2 joueurs) :</translation>
     </message>
     <message>
         <source>Level (Classic, 3 players):</source>
-        <translation>Niveau (Classique, 3 joueurs) :</translation>
+        <translation type="vanished">Niveau (Classique, 3 joueurs) :</translation>
     </message>
     <message>
         <source>Level (Duo):</source>
-        <translation>Niveau (Duo) :</translation>
+        <translation type="vanished">Niveau (Duo) :</translation>
     </message>
     <message>
         <source>Level (Junior):</source>
-        <translation>Niveau (Junior) :</translation>
+        <translation type="vanished">Niveau (Junior) :</translation>
     </message>
     <message>
         <source>Level (Trigon, 4 players):</source>
-        <translation>Niveau (Trigon, 4 joueurs) :</translation>
+        <translation type="vanished">Niveau (Trigon, 4 joueurs) :</translation>
     </message>
     <message>
         <source>Level (Trigon, 2 players):</source>
-        <translation>Niveau (Trigon, 2 joueurs) :</translation>
+        <translation type="vanished">Niveau (Trigon, 2 joueurs) :</translation>
     </message>
     <message>
         <source>Level (Trigon, 3 players):</source>
-        <translation>Niveau (Trigon, 3 joueurs) :</translation>
+        <translation type="vanished">Niveau (Trigon, 3 joueurs) :</translation>
     </message>
     <message>
         <source>Level (Nexos, 4 players):</source>
-        <translation>Niveau (Nexos, 4 joueurs) :</translation>
+        <translation type="vanished">Niveau (Nexos, 4 joueurs) :</translation>
     </message>
     <message>
         <source>Level (Nexos, 2 players):</source>
-        <translation>Niveau (Nexos, 2 joueurs) :</translation>
+        <translation type="vanished">Niveau (Nexos, 2 joueurs) :</translation>
     </message>
     <message>
         <source>Level (Callisto, 4 players):</source>
-        <translation>Niveau (Callisto, 4 joueurs) :</translation>
+        <translation type="vanished">Niveau (Callisto, 4 joueurs) :</translation>
     </message>
     <message>
         <source>Level (Callisto, 2 players, 2 colors):</source>
-        <translation>Niveau (Callisto, 2 joueurs, 2 couleurs) :</translation>
+        <translation type="vanished">Niveau (Callisto, 2 joueurs, 2 couleurs) :</translation>
     </message>
     <message>
         <source>Level (Callisto, 2 players, 4 colors):</source>
-        <translation>Niveau (Callisto, 2 joueurs, 4 couleurs) :</translation>
+        <translation type="vanished">Niveau (Callisto, 2 joueurs, 4 couleurs) :</translation>
     </message>
     <message>
         <source>Level (Callisto, 3 players):</source>
-        <translation>Niveau (Callisto, 3 joueurs) :</translation>
+        <translation type="vanished">Niveau (Callisto, 3 joueurs) :</translation>
     </message>
     <message>
         <source>Level (GembloQ, 4 players):</source>
-        <translation>Niveau (GembloQ, 4 joueurs) :</translation>
+        <translation type="vanished">Niveau (GembloQ, 4 joueurs) :</translation>
     </message>
     <message>
         <source>Level (GembloQ, 2 players, 2 colors):</source>
-        <translation>Niveau (GembloQ, 2 joueurs, 2 couleurs) :</translation>
+        <translation type="vanished">Niveau (GembloQ, 2 joueurs, 2 couleurs) :</translation>
     </message>
     <message>
         <source>Level (GembloQ, 2 players, 4 colors):</source>
-        <translation>Niveau (GembloQ, 2 joueurs, 4 couleurs) :</translation>
+        <translation type="vanished">Niveau (GembloQ, 2 joueurs, 4 couleurs) :</translation>
     </message>
     <message>
         <source>Level (GembloQ, 3 players):</source>
-        <translation>Niveau (GembloQ, 3 joueurs) :</translation>
+        <translation type="vanished">Niveau (GembloQ, 3 joueurs) :</translation>
+    </message>
+    <message>
+        <source>Level:</source>
+        <translation>Niveau :</translation>
+    </message>
+    <message>
+        <source>Computer level:</source>
+        <translation type="vanished">Niveau de l&apos;ordinateur :</translation>
     </message>
 </context>
 <context>
@@ -1582,15 +1590,15 @@
     </message>
     <message>
         <source>Classic (2 players)</source>
-        <translation>Classique (2 joueurs)</translation>
+        <translation type="vanished">Classique (2 joueurs)</translation>
     </message>
     <message>
         <source>Classic (3 players)</source>
-        <translation>Classique (3 joueurs)</translation>
+        <translation type="vanished">Classique (3 joueurs)</translation>
     </message>
     <message>
         <source>Classic (4 players)</source>
-        <translation>Classique (4 joueurs)</translation>
+        <translation type="vanished">Classique (4 joueurs)</translation>
     </message>
     <message>
         <source>Duo</source>
@@ -1602,35 +1610,35 @@
     </message>
     <message>
         <source>Trigon (2 players)</source>
-        <translation>Trigon (2 joueurs)</translation>
+        <translation type="vanished">Trigon (2 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (3 players)</source>
-        <translation>Trigon (3 joueurs)</translation>
+        <translation type="vanished">Trigon (3 joueurs)</translation>
     </message>
     <message>
         <source>Trigon (4 players)</source>
-        <translation>Trigon (4 joueurs)</translation>
+        <translation type="vanished">Trigon (4 joueurs)</translation>
     </message>
     <message>
         <source>Nexos (2 players)</source>
-        <translation>Nexos (2 joueurs)</translation>
+        <translation type="vanished">Nexos (2 joueurs)</translation>
     </message>
     <message>
         <source>Nexos (4 players)</source>
-        <translation>Nexos (4 joueurs)</translation>
+        <translation type="vanished">Nexos (4 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (2 players)</source>
-        <translation>Callisto (2 joueurs)</translation>
+        <translation type="vanished">Callisto (2 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (3 players)</source>
-        <translation>Callisto (3 joueurs)</translation>
+        <translation type="vanished">Callisto (3 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (4 players)</source>
-        <translation>Callisto (4 joueurs)</translation>
+        <translation type="vanished">Callisto (4 joueurs)</translation>
     </message>
     <message>
         <source>Game variant:</source>
@@ -1685,23 +1693,103 @@
     </message>
     <message>
         <source>GembloQ (4 players)</source>
-        <translation>GembloQ (4 joueurs)</translation>
+        <translation type="vanished">GembloQ (4 joueurs)</translation>
     </message>
     <message>
         <source>GembloQ (2 players, 2 colors)</source>
-        <translation>GembloQ (2 joueurs, 2 couleurs)</translation>
+        <translation type="vanished">GembloQ (2 joueurs, 2 couleurs)</translation>
     </message>
     <message>
         <source>GembloQ (2 players, 4 colors)</source>
-        <translation>GembloQ (2 joueurs, 4 couleurs)</translation>
+        <translation type="vanished">GembloQ (2 joueurs, 4 couleurs)</translation>
     </message>
     <message>
         <source>GembloQ (3 players)</source>
-        <translation>GembloQ (3 joueurs)</translation>
+        <translation type="vanished">GembloQ (3 joueurs)</translation>
     </message>
     <message>
         <source>Callisto (2 players, 4 colors)</source>
-        <translation>Callisto (2 joueurs, 4 couleurs)</translation>
+        <translation type="vanished">Callisto (2 joueurs, 4 couleurs)</translation>
+    </message>
+    <message>
+        <source>Classic (2)</source>
+        <extracomment>Short for Classic (2 players)</extracomment>
+        <translation>Classique (2)</translation>
+    </message>
+    <message>
+        <source>Classic (3)</source>
+        <extracomment>Short for Classic (3 players)</extracomment>
+        <translation>Classique (3)</translation>
+    </message>
+    <message>
+        <source>Classic (4)</source>
+        <extracomment>Short for Classic (4 players)</extracomment>
+        <translation>Classique (4)</translation>
+    </message>
+    <message>
+        <source>Trigon (2)</source>
+        <extracomment>Short for Trigon (2 players)</extracomment>
+        <translation>Trigon (2)</translation>
+    </message>
+    <message>
+        <source>Trigon (3)</source>
+        <extracomment>Short for Trigon (3 players)</extracomment>
+        <translation>Trigon (3)</translation>
+    </message>
+    <message>
+        <source>Trigon (4)</source>
+        <extracomment>Short for Trigon (4 players)</extracomment>
+        <translation>Trigon (4)</translation>
+    </message>
+    <message>
+        <source>Nexos (2)</source>
+        <extracomment>Short for Nexos (2 players)</extracomment>
+        <translation>Nexos (2)</translation>
+    </message>
+    <message>
+        <source>Nexos (4)</source>
+        <extracomment>Short for Nexos (4 players)</extracomment>
+        <translation>Nexos (4)</translation>
+    </message>
+    <message>
+        <source>Callisto (2)</source>
+        <extracomment>Short for Callisto (2 players, 2 colors)</extracomment>
+        <translation>Callisto (2)</translation>
+    </message>
+    <message>
+        <source>Callisto (2/4)</source>
+        <extracomment>Short for Callisto (2 players, 4 colors)</extracomment>
+        <translation>Callisto (2/4)</translation>
+    </message>
+    <message>
+        <source>Callisto (3)</source>
+        <extracomment>Short for Callisto (3 players)</extracomment>
+        <translation>Callisto (3)</translation>
+    </message>
+    <message>
+        <source>Callisto (4)</source>
+        <extracomment>Short for Callisto (4 players)</extracomment>
+        <translation>Callisto (4)</translation>
+    </message>
+    <message>
+        <source>GembloQ (4)</source>
+        <extracomment>Short for GembloQ (4 players)</extracomment>
+        <translation>GembloQ (4)</translation>
+    </message>
+    <message>
+        <source>GembloQ (2)</source>
+        <extracomment>Short for GembloQ (2 players, 2 colors)</extracomment>
+        <translation>GembloQ (2)</translation>
+    </message>
+    <message>
+        <source>GembloQ (2/4)</source>
+        <extracomment>Short for GembloQ (2 players, 4 colors)</extracomment>
+        <translation>GembloQ (2/4)</translation>
+    </message>
+    <message>
+        <source>GembloQ (3)</source>
+        <extracomment>Short for GembloQ (3 players)</extracomment>
+        <translation>GembloQ (3)</translation>
     </message>
 </context>
 <context>

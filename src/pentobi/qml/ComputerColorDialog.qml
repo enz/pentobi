@@ -88,30 +88,7 @@ Pentobi.Dialog {
                 }
             }
             ColumnLayout {
-                Label {
-                    text:
-                        switch (gameModel.gameVariant)
-                        {
-                        case "classic": return qsTr("Level (Classic, 4 players):")
-                        case "classic_2": return qsTr("Level (Classic, 2 players):")
-                        case "classic_3": return qsTr("Level (Classic, 3 players):")
-                        case "duo": return qsTr("Level (Duo):")
-                        case "junior": return qsTr("Level (Junior):")
-                        case "trigon": return qsTr("Level (Trigon, 4 players):")
-                        case "trigon_2": return qsTr("Level (Trigon, 2 players):")
-                        case "trigon_3": return qsTr("Level (Trigon, 3 players):")
-                        case "nexos": return qsTr("Level (Nexos, 4 players):")
-                        case "nexos_2": return qsTr("Level (Nexos, 2 players):")
-                        case "callisto": return qsTr("Level (Callisto, 4 players):")
-                        case "callisto_2": return qsTr("Level (Callisto, 2 players, 2 colors):")
-                        case "callisto_2_4": return qsTr("Level (Callisto, 2 players, 4 colors):")
-                        case "callisto_3": return qsTr("Level (Callisto, 3 players):")
-                        case "gembloq": return qsTr("Level (GembloQ, 4 players):")
-                        case "gembloq_2": return qsTr("Level (GembloQ, 2 players, 2 colors):")
-                        case "gembloq_2_4": return qsTr("Level (GembloQ, 2 players, 4 colors):")
-                        case "gembloq_3": return qsTr("Level (GembloQ, 3 players):")
-                        }
-                }
+                Label { text: qsTr("Level:") }
                 SpinBox {
                     id: spinBox
 

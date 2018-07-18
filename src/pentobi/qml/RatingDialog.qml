@@ -46,24 +46,58 @@ Pentobi.Dialog {
                 Label { text: qsTr("Game variant:") }
                 Label {
                     text: switch (ratingModel.gameVariant) {
-                          case "classic_2": return qsTr("Classic (2 players)")
-                          case "classic_3": return qsTr("Classic (3 players)")
-                          case "classic": return qsTr("Classic (4 players)")
-                          case "duo": return qsTr("Duo")
-                          case "junior": return qsTr("Junior")
-                          case "trigon_2": return qsTr("Trigon (2 players)")
-                          case "trigon_3": return qsTr("Trigon (3 players)")
-                          case "trigon": return qsTr("Trigon (4 players)")
-                          case "nexos_2": return qsTr("Nexos (2 players)")
-                          case "nexos": return qsTr("Nexos (4 players)")
-                          case "callisto_2": return qsTr("Callisto (2 players)")
-                          case "callisto_2_4": return qsTr("Callisto (2 players, 4 colors)")
-                          case "callisto_3": return qsTr("Callisto (3 players)")
-                          case "callisto": return qsTr("Callisto (4 players)")
-                          case "gembloq": return qsTr("GembloQ (4 players)")
-                          case "gembloq_2": return qsTr("GembloQ (2 players, 2 colors)")
-                          case "gembloq_2_4": return qsTr("GembloQ (2 players, 4 colors)")
-                          case "gembloq_3": return qsTr("GembloQ (3 players)")
+                          case "classic_2":
+                              //: Short for Classic (2 players)
+                              return qsTr("Classic (2)")
+                          case "classic_3":
+                              //: Short for Classic (3 players)
+                              return qsTr("Classic (3)")
+                          case "classic":
+                              //: Short for Classic (4 players)
+                              return qsTr("Classic (4)")
+                          case "duo":
+                              return qsTr("Duo")
+                          case "junior":
+                              return qsTr("Junior")
+                          case "trigon_2":
+                              //: Short for Trigon (2 players)
+                              return qsTr("Trigon (2)")
+                          case "trigon_3":
+                              //: Short for Trigon (3 players)
+                              return qsTr("Trigon (3)")
+                          case "trigon":
+                              //: Short for Trigon (4 players)
+                              return qsTr("Trigon (4)")
+                          case "nexos_2":
+                              //: Short for Nexos (2 players)
+                              return qsTr("Nexos (2)")
+                          case "nexos":
+                              //: Short for Nexos (4 players)
+                              return qsTr("Nexos (4)")
+                          case "callisto_2":
+                              //: Short for Callisto (2 players, 2 colors)
+                              return qsTr("Callisto (2)")
+                          case "callisto_2_4":
+                              //: Short for Callisto (2 players, 4 colors)
+                              return qsTr("Callisto (2/4)")
+                          case "callisto_3":
+                              //: Short for Callisto (3 players)
+                              return qsTr("Callisto (3)")
+                          case "callisto":
+                              //: Short for Callisto (4 players)
+                              return qsTr("Callisto (4)")
+                          case "gembloq":
+                              //: Short for GembloQ (4 players)
+                              return qsTr("GembloQ (4)")
+                          case "gembloq_2":
+                              //: Short for GembloQ (2 players, 2 colors)
+                              return qsTr("GembloQ (2)")
+                          case "gembloq_2_4":
+                              //: Short for GembloQ (2 players, 4 colors)
+                              return qsTr("GembloQ (2/4)")
+                          case "gembloq_3":
+                              //: Short for GembloQ (3 players)
+                              return qsTr("GembloQ (3)")
                           default: return ""
                           }
                     Layout.fillWidth: true
