@@ -107,9 +107,13 @@ Pentobi.Dialog {
                     text: numberGames
                     Layout.fillWidth: true
                 }
-                Label { text: qsTr("Best previous rating:") }
                 Label {
-                    text: numberGames < 2 ? "" : Math.round(ratingModel.bestRating).toString()
+                    visible: numberGames > 1
+                    text: qsTr("Best previous rating:")
+                }
+                Label {
+                    visible: numberGames > 1
+                    text: Math.round(ratingModel.bestRating).toString()
                     Layout.fillWidth: true
                 }
             }
