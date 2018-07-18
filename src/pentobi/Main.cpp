@@ -125,10 +125,8 @@ int main(int argc, char *argv[])
             throw runtime_error("Too many arguments");
         if (! args.empty())
             initialFile = args.at(0);
-#ifndef Q_OS_ANDROID
-        if (QQuickStyle::name().isEmpty())
+        if (QQuickStyle::name().isEmpty() && isDesktop)
             QQuickStyle::setStyle("Fusion");
-#endif
         QQmlApplicationEngine engine;
         engine.rootContext()->setContextProperty("initialFile", initialFile);
         engine.rootContext()->setContextProperty("isDesktop", isDesktop);
