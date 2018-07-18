@@ -1122,12 +1122,16 @@
     </message>
     <message>
         <source>Game Variant</source>
-        <translation>Variante du jeu</translation>
+        <translation type="vanished">Variante du jeu</translation>
     </message>
     <message>
         <source>V</source>
         <extracomment>Mnemonic for menu item Game Variant. Leave empty for no mnemonic.</extracomment>
         <translation>V</translation>
+    </message>
+    <message>
+        <source>Game Variant...</source>
+        <translation>Variante du jeu…</translation>
     </message>
 </context>
 <context>
