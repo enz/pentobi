@@ -6,7 +6,6 @@ import "Controls.js" as PentobiControls
 MenuItem {
     id: root
 
-    // See PentobiControls.addMnemonic()
     function addMnemonic(text, mnemonic) { return PentobiControls.addMnemonic(text, mnemonic) }
 
     // implicitWidth should be the same as in Pentobi.Menu
