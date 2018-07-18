@@ -546,6 +546,10 @@
         <source>Start rated game with Orange against Pentobi level %1?</source>
         <translation>Commencer une partie classée avec orange contre Pentobi niveau %1 ?</translation>
     </message>
+    <message>
+        <source>Not enough memory.</source>
+        <translation>Mémoire insuffisante.</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -1152,6 +1156,10 @@
         <source>GembloQ (3 players)</source>
         <translation>GembloQ (3 joueurs)</translation>
     </message>
+    <message>
+        <source>Callisto (2 players, 4 colors)</source>
+        <translation>Callisto (2 joueurs, 4 couleurs)</translation>
+    </message>
 </context>
 <context>
     <name>SaveDialog</name>
@@ -1195,11 +1203,7 @@
     <name>main</name>
     <message>
         <source>Not enough memory.</source>
-        <translation>Mémoire insuffisante.</translation>
-    </message>
-    <message>
-        <source>Pentobi</source>
-        <translation></translation>
+        <translation type="vanished">Mémoire insuffisante.</translation>
     </message>
 </context>
 </TS>

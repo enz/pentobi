@@ -546,6 +546,10 @@
         <source>Start rated game with Orange against Pentobi level %1?</source>
         <translation>Start vurdert spill med oransje mot Pentobi nivå %1?</translation>
     </message>
+    <message>
+        <source>Not enough memory.</source>
+        <translation>Ikke nok minne.</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -1152,6 +1156,10 @@
         <source>GembloQ (3 players)</source>
         <translation>GembloQ (3 spillere)</translation>
     </message>
+    <message>
+        <source>Callisto (2 players, 4 colors)</source>
+        <translation>Callisto (2 spillere, 4 farger)</translation>
+    </message>
 </context>
 <context>
     <name>SaveDialog</name>
@@ -1195,11 +1203,11 @@
     <name>main</name>
     <message>
         <source>Not enough memory.</source>
-        <translation>Ikke nok minne.</translation>
+        <translation type="vanished">Ikke nok minne.</translation>
     </message>
     <message>
         <source>Pentobi</source>
-        <translation>Pentobi</translation>
+        <translation type="vanished">Pentobi</translation>
     </message>
 </context>
 </TS>
