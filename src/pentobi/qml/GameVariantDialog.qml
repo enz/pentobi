@@ -126,7 +126,12 @@ Pentobi.Dialog {
             RowLayout {
                 RadioButton {
                     text: "2"
-                    opacity: enabled
+                    opacity: gameVariant === "duo"
+                             || gameVariant === "junior"
+                             || gameVariant === "gembloq_2"
+                             || gameVariant === "gembloq_2_4"
+                             || gameVariant === "callisto_2"
+                             || gameVariant === "callisto_2_4"
                     enabled: gameVariant === "duo"
                              || gameVariant === "junior"
                              || gameVariant.startsWith("gembloq")
@@ -145,7 +150,7 @@ Pentobi.Dialog {
                 }
                 RadioButton {
                     text: "3"
-                    opacity: enabled
+                    opacity: checked
                     enabled: gameVariant.startsWith("trigon")
                              || gameVariant.startsWith("gembloq")
                              || gameVariant.startsWith("callisto")
@@ -164,7 +169,16 @@ Pentobi.Dialog {
                 }
                 RadioButton {
                     text: "4"
-                    opacity: enabled
+                    opacity: gameVariant.startsWith("classic")
+                             || gameVariant === "trigon"
+                             || gameVariant === "trigon_2"
+                             || gameVariant.startsWith("nexos")
+                             || gameVariant === "gembloq"
+                             || gameVariant === "gembloq_2"
+                             || gameVariant === "gembloq_2_4"
+                             || gameVariant === "callisto"
+                             || gameVariant === "callisto_2"
+                             || gameVariant === "callisto_2_4"
                     enabled: gameVariant.startsWith("classic")
                              || gameVariant.startsWith("trigon")
                              || gameVariant.startsWith("nexos")
