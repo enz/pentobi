@@ -426,11 +426,11 @@ GameMove* GameModel::findMove()
     if (bd.is_game_over())
         return new GameMove(this, ColorMove(c, Move::null()));
     if (! m_legalMoves)
-        m_legalMoves.reset(new MoveList);
+        m_legalMoves = make_unique<MoveList>();
     if (m_legalMoves->empty())
     {
         if (! m_marker)
-            m_marker.reset(new MoveMarker);
+            m_marker = make_unique<MoveMarker>();
         bd.gen_moves(c, *m_marker, *m_legalMoves);
         m_marker->clear(*m_legalMoves);
         sort(m_legalMoves->begin(), m_legalMoves->end(),
