@@ -12,5 +12,5 @@ Menu {
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     delegate: Pentobi.MenuItem { }
     // On Android, currentIndex is not reset when closing menu (last tested with Qt 5.11.1)
-    onVisibleChanged: if (isAndroid) currentIndex = -1
+    onOpened: if (isAndroid) currentIndex = -1
 }
