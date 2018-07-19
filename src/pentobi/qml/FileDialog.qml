@@ -55,7 +55,16 @@ Pentobi.Dialog {
     }
 
     Item {
-        implicitWidth: Math.min(font.pixelSize * 30, 0.85 * rootWindow.width)
+        implicitWidth: {
+            // Qt 5.11 doesn't correctly handle dialog sizing if dialog (incl.
+            // frame) is wider than window and Default style never makes footer
+            // wider than content (potentially eliding button texts).
+            var w = columnLayout.implicitWidth
+            w = Math.min(w, font.pixelSize * 30)
+            w = Math.max(w, font.pixelSize * 18)
+            w = Math.min(w, 0.9 * rootWindow.width)
+            return w
+        }
         implicitHeight: columnLayout.implicitHeight
 
         Action {
@@ -174,9 +183,7 @@ Pentobi.Dialog {
                 onCurrentIndexChanged:
                     if (currentIndex == 0) folderModel.nameFilters = [ root.nameFilter ]
                     else folderModel.nameFilters = [ "*" ]
-                // Default style in Qt 5.11 does not always set implictWidth of
-                // ComboBox large enough to fit its content.
-                Layout.preferredWidth: font.pixelSize * 18
+                Layout.preferredWidth: Math.min(font.pixelSize * 18, 0.9 * rootWindow.width)
                 Layout.alignment: Qt.AlignRight
             }
         }

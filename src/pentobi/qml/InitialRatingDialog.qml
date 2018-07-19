@@ -19,7 +19,7 @@ Pentobi.Dialog {
             implicitWidth: {
                 // Wrap long text
                 var w = font.pixelSize * 25
-                w = Math.min(w, 0.85 * rootWindow.width)
+                w = Math.min(w, 0.9 * rootWindow.width)
                 return w
             }
             implicitHeight: textLabel.implicitHeight

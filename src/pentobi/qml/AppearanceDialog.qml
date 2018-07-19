@@ -50,7 +50,7 @@ Pentobi.Dialog {
     }
 
     Flickable {
-        implicitWidth: Math.min(font.pixelSize * 18, 0.85 * rootWindow.width)
+        implicitWidth: Math.min(font.pixelSize * 18, 0.9 * rootWindow.width)
         implicitHeight: Math.min(columnLayout.implicitHeight, 0.7 * rootWindow.height)
         contentHeight: columnLayout.implicitHeight
         clip: true

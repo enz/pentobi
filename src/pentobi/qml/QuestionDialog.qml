@@ -23,14 +23,14 @@ Pentobi.Dialog {
 
     Item {
         implicitWidth: {
+            // Qt 5.11 doesn't correctly handle dialog sizing if dialog (incl.
+            // frame) is wider than window and Default style never makes footer
+            // wider than content (potentially eliding button texts).
             var w = label.implicitWidth
             // Wrap long text
             w = Math.min(w, font.pixelSize * 25)
-            // Avoid too small width because Default style in Qt 5.11 makes
-            // footer no wider than content, which can cause elided text on
-            // dialog buttons
             w = Math.max(w, font.pixelSize * 18)
-            w = Math.min(w, 0.85 * rootWindow.width)
+            w = Math.min(w, 0.9 * rootWindow.width)
             return w
         }
         implicitHeight: label.implicitHeight
