@@ -43,7 +43,8 @@ const SgfNode& PentobiTree::add_setup(const SgfNode& node, Color c, Move mv)
         set_setup_property(*result, "AE", add_empty);
     auto id = get_setup_prop_id(c);
     auto add_color = get_setup_property(*result, id);
-    if (! add_color.contains(mv) && add_color.size() < add_color.max_size)
+    if (! add_color.contains(mv)
+            && add_color.size() < Setup::PlacementList::max_size)
     {
         add_color.push_back(mv);
         set_setup_property(*result, id, add_color);
@@ -124,7 +125,7 @@ Setup::PlacementList PentobiTree::get_setup_property(const SgfNode& node,
     if (node.has_property(id))
         for (auto& s : node.get_multi_property(id))
         {
-            if (result.size() == result.max_size)
+            if (result.size() == Setup::PlacementList::max_size)
                 throw InvalidProperty(id, s);
             try
             {
@@ -246,7 +247,8 @@ const SgfNode& PentobiTree::remove_setup(const SgfNode& node, Color c,
     else
     {
         auto add_empty = get_setup_property(*result, "AE");
-        if (! add_empty.contains(mv) && add_empty.size() < add_empty.max_size)
+        if (! add_empty.contains(mv)
+                && add_empty.size() < Setup::PlacementList::max_size)
         {
             add_empty.push_back(mv);
             set_setup_property(*result, "AE", add_empty);

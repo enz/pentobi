@@ -107,7 +107,7 @@ const SgfNode* Book::select_child(const Board& bd, Color c,
             LIBBOARDGAME_LOG("WARNING: Book contains illegal move");
             continue;
         }
-        if (m_tree.get_good_move(child) > 0)
+        if (SgfTree::get_good_move(child) > 0)
         {
             LIBBOARDGAME_LOG(bd.to_string(mv), " !");
             good_moves.push_back(&child);

@@ -1143,7 +1143,7 @@ Move BoardConst::from_string(const string& s) const
         Point p;
         if (! m_geo.from_string(begin, end, p))
             throw runtime_error("illegal move (invalid point)");
-        if (points.size() == points.max_size)
+        if (points.size() == MovePoints::max_size)
             throw runtime_error("illegal move (too many points)");
         points.push_back(p);
         if (end == s.end())

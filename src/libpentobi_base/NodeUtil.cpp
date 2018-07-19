@@ -158,7 +158,7 @@ bool get_move(const SgfNode& node, Variant variant, Color& c,
                 ++end;
             Point p;
             if (! geo.from_string(begin, end, p)
-                    || points.size() == points.max_size)
+                    || points.size() == MovePoints::max_size)
                 throw InvalidProperty(id, string(begin, end));
             points.push_back(p);
             if (end == s.end())

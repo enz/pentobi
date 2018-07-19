@@ -31,17 +31,17 @@ int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
     QtWebView::initialize();
-    app.setOrganizationName("Pentobi");
-    app.setApplicationName("Pentobi");
+    QCoreApplication::setOrganizationName("Pentobi");
+    QCoreApplication::setApplicationName("Pentobi");
 #ifdef VERSION
-    app.setApplicationVersion(VERSION);
+    QCoreApplication::setApplicationVersion(VERSION);
 #endif    
     QIcon icon;
     icon.addFile(":/pentobi_icon/pentobi.svg");
     icon.addFile(":/pentobi_icon/pentobi-16.svg");
     icon.addFile(":/pentobi_icon/pentobi-32.svg");
     icon.addFile(":/pentobi_icon/pentobi-64.svg");
-    app.setWindowIcon(icon);
+    QGuiApplication::setWindowIcon(icon);
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<HelpFileExtractor>("pentobi", 1, 0, "HelpFileExtractor");
@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     QString locale = QLocale::system().name();
     QTranslator translatorPentobi;
     translatorPentobi.load("qml_" + locale, ":qml/i18n");
-    app.installTranslator(&translatorPentobi);
+    QCoreApplication::installTranslator(&translatorPentobi);
     QCommandLineParser parser;
     auto maxSupportedLevel = Player::max_supported_level;
     QCommandLineOption optionMaxLevel("maxlevel",
@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
         engine.load(QUrl("qrc:///qml/Main.qml"));
         if (engine.rootObjects().empty())
             return 1;
-        return app.exec();
+        return QGuiApplication::exec();
     }
     catch (const exception& e)
     {
