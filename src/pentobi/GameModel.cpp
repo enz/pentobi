@@ -1566,8 +1566,7 @@ void GameModel::updateIsModified()
 
 void GameModel::updateMoveAnnotation()
 {
-    QString moveAnnotation =
-            get_move_annotation(m_game.get_tree(), m_game.get_current());
+    QString moveAnnotation = get_move_annotation(m_game.get_current());
     set(m_moveAnnotation, moveAnnotation, &GameModel::moveAnnotationChanged);
 }
 
@@ -1657,7 +1656,7 @@ void GameModel::updatePieces()
         unsigned moveIndex;
         if (m_showVariations && getVariationIndex(tree, node, moveIndex))
             label.append(get_letter_coord(moveIndex).c_str());
-        label.append(get_move_annotation(tree, node));
+        label.append(get_move_annotation(node));
         pieceModel->setMoveLabel(label);
     }
     if (pieceModel != m_lastMovePieceModel)

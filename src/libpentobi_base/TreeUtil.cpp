@@ -99,10 +99,9 @@ string get_position_info(const PentobiTree& tree, const SgfNode& node)
     auto left = get_moves_left(tree, node);
     auto total = move + left;
     auto variation = get_variation_string(node);
-    auto annotation = get_move_annotation(tree, node);
     ostringstream s;
     if (left > 0 || move > 0)
-        s << move << annotation;
+        s << move << get_move_annotation(node);
     if (left > 0)
         s << '/' << total;
     if (! variation.empty())

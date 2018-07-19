@@ -39,7 +39,7 @@ void get_path_from_root(const SgfNode& node, vector<const SgfNode*>& path);
 const SgfNode& get_last_node(const SgfNode& node);
 
 /** Get a string representation of move annotation properties. */
-const char* get_move_annotation(const SgfTree& tree, const SgfNode& node);
+const char* get_move_annotation(const SgfNode& node);
 
 /** Get next node for iteration through complete tree. */
 const SgfNode* get_next_node(const SgfNode& node);
