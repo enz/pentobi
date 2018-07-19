@@ -52,7 +52,6 @@ using libpentobi_base::TransfTrigonRot120;
 using libpentobi_base::TransfTrigonRot180;
 using libpentobi_base::TransfTrigonRot240;
 using libpentobi_base::TransfTrigonRot300;
-using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 

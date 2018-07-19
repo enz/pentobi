@@ -22,7 +22,6 @@
 #include "libboardgame_util/Log.h"
 
 using libboardgame_util::RandomGenerator;
-using libboardgame_util::to_string;
 
 //-----------------------------------------------------------------------------
 
@@ -96,7 +95,7 @@ int main(int argc, char *argv[])
         auto maxLevel = parser.value(optionMaxLevel).toUInt(&ok);
         if (! ok || maxLevel < 1 || maxLevel > maxSupportedLevel)
             throw runtime_error("--maxlevel must be between 1 and "
-                                + to_string(maxSupportedLevel));
+                                + libboardgame_util::to_string(maxSupportedLevel));
         PlayerModel::maxLevel = maxLevel;
         if (parser.isSet(optionSeed))
         {
