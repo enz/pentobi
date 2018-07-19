@@ -4,27 +4,27 @@ import QtQuick.Layouts 1.0
 import "." as Pentobi
 
 Pentobi.Dialog {
-    property alias playerName0: textFieldPlayerName0.text
-    property alias playerName1: textFieldPlayerName1.text
-    property alias playerName2: textFieldPlayerName2.text
-    property alias playerName3: textFieldPlayerName3.text
-    property alias date: textFieldDate.text
-    property alias time: textFieldTime.text
-    property alias event: textFieldEvent.text
-    property alias round: textFieldRound.text
-    property string gameVariant: gameModel.gameVariant
-
     title: isDesktop ? qsTr("Game Info") : ""
     footer: OkCancelButtons { }
+    onOpened: {
+        textFieldPlayerName0.text = gameModel.playerName0
+        textFieldPlayerName1.text = gameModel.playerName1
+        textFieldPlayerName2.text = gameModel.playerName2
+        textFieldPlayerName3.text = gameModel.playerName3
+        textFieldDate.text = gameModel.date
+        textFieldTime.text = gameModel.time
+        textFieldEvent.text = gameModel.event
+        textFieldRound.text = gameModel.round
+    }
     onAccepted: {
-        gameModel.playerName0 = playerName0
-        gameModel.playerName1 = playerName1
-        gameModel.playerName2 = playerName2
-        gameModel.playerName3 = playerName3
-        gameModel.date = date
-        gameModel.time = time
-        gameModel.event = event
-        gameModel.round = round
+        gameModel.playerName0 = textFieldPlayerName0.text
+        gameModel.playerName1 = textFieldPlayerName1.text
+        gameModel.playerName2 = textFieldPlayerName2.text
+        gameModel.playerName3 = textFieldPlayerName3.text
+        gameModel.date = textFieldDate.text
+        gameModel.time = textFieldTime.text
+        gameModel.event = textFieldEvent.text
+        gameModel.round = textFieldRound.text
     }
 
     Flickable {

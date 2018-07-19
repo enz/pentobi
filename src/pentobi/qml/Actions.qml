@@ -108,7 +108,7 @@ QtObject {
     property Action actionGameInfo: Action {
         shortcut: "Ctrl+I"
         text: qsTr("Game Info")
-        onTriggered: Logic.openGameInfoDialog()
+        onTriggered: gameInfoDialog.open()
     }
     property Action actionGoto: Action {
         shortcut: "Ctrl+G"
