@@ -82,7 +82,7 @@ GtpConnection::GtpConnection(const string& command)
     pid_t pid;
     if ((pid = fork()) < 0)
         throw runtime_error("GtpConnection: fork failed");
-    else if (pid > 0) // Parent
+    if (pid > 0) // Parent
     {
         close(fd1[0]);
         close(fd2[1]);
@@ -90,31 +90,28 @@ GtpConnection::GtpConnection(const string& command)
         m_out = make_unique<FdOutStream>(fd1[1]);
         return;
     }
-    else // Child
-    {
-        close(fd1[1]);
-        close(fd2[0]);
-        if (fd1[0] != STDIN_FILENO)
-            if (dup2(fd1[0], STDIN_FILENO) != STDIN_FILENO)
-            {
-                close(fd1[0]);
-                terminate_child("GtpConnection: dup2 to stdin failed");
-            }
-        if (fd2[1] != STDOUT_FILENO)
-            if (dup2(fd2[1], STDOUT_FILENO) != STDOUT_FILENO)
-            {
-                close(fd2[1]);
-                terminate_child("GtpConnection: dup2 to stdout failed");
-            }
-        vector<char*> argv;
-        argv.reserve(args.size() + 1);
-        for (size_t i = 0; i < args.size(); ++i)
-            argv.push_back(const_cast<char*>(args[i].c_str()));
-        argv.push_back(nullptr);
-        execvp(args[0].c_str(), &(*argv.begin()));
-        terminate_child("Could not execute '" + command + "': "
-                        + strerror(errno));
-    }
+    // Child
+    close(fd1[1]);
+    close(fd2[0]);
+    if (fd1[0] != STDIN_FILENO)
+        if (dup2(fd1[0], STDIN_FILENO) != STDIN_FILENO)
+        {
+            close(fd1[0]);
+            terminate_child("GtpConnection: dup2 to stdin failed");
+        }
+    if (fd2[1] != STDOUT_FILENO)
+        if (dup2(fd2[1], STDOUT_FILENO) != STDOUT_FILENO)
+        {
+            close(fd2[1]);
+            terminate_child("GtpConnection: dup2 to stdout failed");
+        }
+    vector<char*> argv;
+    argv.reserve(args.size() + 1);
+    for (size_t i = 0; i < args.size(); ++i)
+        argv.push_back(const_cast<char*>(args[i].c_str()));
+    argv.push_back(nullptr);
+    execvp(args[0].c_str(), &(*argv.begin()));
+    terminate_child("Could not execute '" + command + "': " + strerror(errno));
 }
 
 GtpConnection::~GtpConnection() = default; // Non-inline to avoid GCC -Winline warning

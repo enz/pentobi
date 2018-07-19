@@ -22,14 +22,11 @@ void Arguments::check_size(unsigned n) const
         return;
     if (n == 0)
         throw Failure("no arguments allowed");
-    else if (n == 1)
+    if (n == 1)
         throw Failure("command needs one argument");
-    else
-    {
-        ostringstream msg;
-        msg << "command needs " << n << " arguments";
-        throw Failure(msg.str());
-    }
+    ostringstream msg;
+    msg << "command needs " << n << " arguments";
+    throw Failure(msg.str());
 }
 
 void Arguments::check_size_less_equal(unsigned n) const
@@ -38,12 +35,9 @@ void Arguments::check_size_less_equal(unsigned n) const
         return;
     if (n == 1)
         throw Failure("command needs at most one argument");
-    else
-    {
-        ostringstream msg;
-        msg << "command needs at most " << n << " arguments";
-        throw Failure(msg.str());
-    }
+    ostringstream msg;
+    msg << "command needs at most " << n << " arguments";
+    throw Failure(msg.str());
 }
 
 CmdLineRange Arguments::get(unsigned i) const

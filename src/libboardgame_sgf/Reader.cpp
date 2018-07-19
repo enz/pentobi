@@ -102,7 +102,7 @@ bool Reader::read(istream& in, bool check_single_tree)
                 throw ReadError("Input has multiple game trees");
             return true;
         }
-        else if (is_ascii_space(c))
+        if (is_ascii_space(c))
             m_in->get();
         else
             throw ReadError("Extra characters after end of tree.");
