@@ -12,7 +12,7 @@ Pentobi.Dialog {
     onOpened: {
         checkBoxCoordinates.checked = gameDisplay.showCoordinates
         checkBoxShowVariations.checked = gameModel.showVariations
-        checkBoxAnimatePieces = gameDisplay.enableAnimations
+        checkBoxAnimatePieces.checked = gameDisplay.enableAnimations
         if (themeName === "light")
             comboBoxTheme.currentIndex = 0
         else if (themeName === "dark")
@@ -34,7 +34,7 @@ Pentobi.Dialog {
     onAccepted: {
         gameDisplay.showCoordinates = checkBoxCoordinates.checked
         gameModel.showVariations = checkBoxShowVariations.checked
-        gameDisplay.enableAnimations = checkBoxAnimatePieces
+        gameDisplay.enableAnimations = checkBoxAnimatePieces.checked
         switch (comboBoxTheme.currentIndex) {
         case 0: themeName = "light"; break
         case 1: themeName = "dark"; break
