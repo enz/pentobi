@@ -1137,22 +1137,22 @@ PieceModel* GameModel::pickNamedPiece(const QString& name,
 
 QQmlListProperty<PieceModel> GameModel::pieceModels0()
 {
-    return QQmlListProperty<PieceModel>(this, m_pieceModels0);
+    return {this, m_pieceModels0};
 }
 
 QQmlListProperty<PieceModel> GameModel::pieceModels1()
 {
-    return QQmlListProperty<PieceModel>(this, m_pieceModels1);
+    return {this, m_pieceModels1};
 }
 
 QQmlListProperty<PieceModel> GameModel::pieceModels2()
 {
-    return QQmlListProperty<PieceModel>(this, m_pieceModels2);
+    return {this, m_pieceModels2};
 }
 
 QQmlListProperty<PieceModel> GameModel::pieceModels3()
 {
-    return QQmlListProperty<PieceModel>(this, m_pieceModels3);
+    return {this, m_pieceModels3};
 }
 
 void GameModel::playMove(GameMove* move)

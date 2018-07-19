@@ -53,14 +53,14 @@ CoordPoint TransfGembloQRot90::get_transformed(CoordPoint p) const
         x -= static_cast<int>(p.y % 2 == 0);
         break;
     }
-    return CoordPoint(x, y);
+    return {x, y};
 }
 
 //-----------------------------------------------------------------------------
 
 CoordPoint TransfGembloQRot180::get_transformed(CoordPoint p) const
 {
-    return CoordPoint(-p.x, -p.y);
+    return {-p.x, -p.y};
 }
 
 //-----------------------------------------------------------------------------
@@ -80,14 +80,14 @@ CoordPoint TransfGembloQRot270::get_transformed(CoordPoint p) const
         x += static_cast<int>(p.y % 2 == 0);
         break;
     }
-    return CoordPoint(x, y);
+    return {x, y};
 }
 
 //-----------------------------------------------------------------------------
 
 CoordPoint TransfGembloQRefl::get_transformed(CoordPoint p) const
 {
-    return CoordPoint(-p.x, p.y);
+    return {-p.x, p.y};
 }
 
 //-----------------------------------------------------------------------------
@@ -107,14 +107,14 @@ CoordPoint TransfGembloQRot90Refl::get_transformed(CoordPoint p) const
         x -= static_cast<int>(p.y % 2 == 0);
         break;
     }
-    return CoordPoint(x, y);
+    return {x, y};
 }
 
 //-----------------------------------------------------------------------------
 
 CoordPoint TransfGembloQRot180Refl::get_transformed(CoordPoint p) const
 {
-    return CoordPoint(p.x, -p.y);
+    return {p.x, -p.y};
 }
 
 //-----------------------------------------------------------------------------
@@ -134,7 +134,7 @@ CoordPoint TransfGembloQRot270Refl::get_transformed(CoordPoint p) const
         x += static_cast<int>(p.y % 2 == 0);
         break;
     }
-    return CoordPoint(x, y);
+    return {x, y};
 }
 
 //-----------------------------------------------------------------------------

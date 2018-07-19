@@ -274,7 +274,7 @@ QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
         sumX += centerX;
         sumY += centerY;
     }
-    return QPointF(sumX / n, sumY / n);
+    return {sumX / n, sumY / n};
 }
 
 bool PieceModel::isLastMove() const

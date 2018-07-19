@@ -111,7 +111,7 @@ void AnalyzeGameModel::clear()
 
 QQmlListProperty<AnalyzeGameElement> AnalyzeGameModel::elements()
 {
-    return QQmlListProperty<AnalyzeGameElement>(this, m_elements);
+    return {this, m_elements};
 }
 
 void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)

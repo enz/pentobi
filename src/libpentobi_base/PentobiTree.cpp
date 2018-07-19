@@ -74,7 +74,7 @@ ColorMove PentobiTree::get_move(const SgfNode& node) const
     Move mv;
     if (! m_bc->find_move(points, mv))
         throw SgfError("Tree contains illegal move");
-    return ColorMove(c, mv);
+    return {c, mv};
 }
 
 const SgfNode* PentobiTree::get_node_before_move_number(
