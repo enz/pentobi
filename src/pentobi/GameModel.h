@@ -176,6 +176,8 @@ public:
 
     Q_INVOKABLE bool openFile(const QString& file);
 
+    Q_INVOKABLE PieceModel* preparePiece(GameMove* move);
+
     Q_INVOKABLE void playPiece(PieceModel* pieceModel, QPointF coord);
 
     Q_INVOKABLE void playMove(GameMove* move);

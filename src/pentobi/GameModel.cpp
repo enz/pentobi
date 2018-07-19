@@ -1186,6 +1186,23 @@ void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
     updateProperties();
 }
 
+PieceModel* GameModel::preparePiece(GameMove* move)
+{
+    if (move == nullptr || move->get().is_null())
+        return nullptr;
+    auto c = move->get().color;
+    auto mv = move->get().move;
+    auto piece = getBoard().get_move_piece(mv);
+    for (auto pieceModel : getPieceModels(c))
+        if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
+        {
+            preparePieceTransform(pieceModel, mv);
+            preparePieceGameCoord(pieceModel, mv);
+            return pieceModel;
+        }
+    return nullptr;
+}
+
 void GameModel::preparePieceGameCoord(PieceModel* pieceModel, Move mv)
 {
     pieceModel->setGameCoord(getGameCoord(getBoard(), mv));
