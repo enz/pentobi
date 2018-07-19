@@ -25,7 +25,9 @@ ToolButton {
     }
     onPressed: if (isDesktop) toolTipSuppressTimer.restart()
     hoverEnabled: true
-    ToolTip.visible: ToolTip.text && isDesktop && hovered && ! toolTipSuppressTimer.running
+    ToolTip.visible:
+        ToolTip.text && isDesktop && hovered && ! toolTipSuppressTimer.running
+        && ! overlay.children.length === 0
     ToolTip.delay: 900
     ToolTip.timeout: 9000
 
