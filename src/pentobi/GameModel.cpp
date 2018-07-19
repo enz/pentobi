@@ -483,7 +483,7 @@ bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
     }
     else
         offX = static_cast<int>(round(dx));
-    int offY = static_cast<int>(round(dy));
+    auto offY = static_cast<int>(round(dy));
     auto& geo = bd.get_geometry();
     if (geo.get_point_type(offX, offY) != pointType)
         return false;
@@ -582,12 +582,11 @@ QList<PieceModel*>& GameModel::getPieceModels(Color c)
 {
     if (c == Color(0))
         return m_pieceModels0;
-    else if (c == Color(1))
+    if (c == Color(1))
         return m_pieceModels1;
-    else if (c == Color(2))
+    if (c == Color(2))
         return m_pieceModels2;
-    else
-        return m_pieceModels3;
+    return m_pieceModels3;
 }
 
 QString GameModel::getResultMessage()
