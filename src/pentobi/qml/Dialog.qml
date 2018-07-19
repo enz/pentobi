@@ -12,6 +12,7 @@ Dialog {
 
     focus: true
     clip: true
+    onOpened: centerDialog()
     onWidthChanged: centerDialog()
     onHeightChanged: centerDialog()
     ApplicationWindow.onWindowChanged:
