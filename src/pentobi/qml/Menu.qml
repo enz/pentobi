@@ -15,6 +15,8 @@ Menu {
     onOpened: if (isAndroid) currentIndex = -1
     // Workaround for QTBUG-69540 (Menu highlights disabled item on click)
     onCurrentIndexChanged: {
+        if (isAndroid || currentIndex < 0)
+            return
         for (var i = currentIndex; i < count; ++i) {
             var item = itemAt(i)
             if (item && item.enabled) {
