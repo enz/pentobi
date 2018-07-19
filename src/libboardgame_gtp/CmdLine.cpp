@@ -79,7 +79,7 @@ CmdLineRange CmdLine::get_trimmed_line_after_elem(unsigned i) const
     auto end = m_line.end();
     while (end > begin && isspace(static_cast<unsigned char>(*(end - 1))) != 0)
         --end;
-    return CmdLineRange(begin, end);
+    return {begin, end};
 }
 
 void CmdLine::init(const string& line)
