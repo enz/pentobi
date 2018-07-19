@@ -20,7 +20,7 @@
 
 namespace {
 
-void terminate_child(const string& message)
+[[noreturn]] void terminate_child(const string& message)
 {
     LIBBOARDGAME_LOG(message);
     exit(1);
