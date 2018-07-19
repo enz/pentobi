@@ -648,16 +648,6 @@ function setComputerNone() {
     computerPlays3 = false
 }
 
-function showComputerDialog() {
-    var dialog = computerDialogLoader.get()
-    dialog.computerPlays0 = computerPlays0
-    dialog.computerPlays1 = computerPlays1
-    dialog.computerPlays2 = computerPlays2
-    dialog.computerPlays3 = computerPlays3
-    dialog.level = playerModel.level
-    dialog.open()
-}
-
 function showInfo(text) {
     var dialog = infoMessage.get()
     dialog.text = text

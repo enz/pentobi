@@ -50,7 +50,7 @@ QtObject {
     property Action actionComputerSettings: Action {
         shortcut: "Ctrl+U"
         text: qsTr("Computer Settings...")
-        onTriggered: Logic.showComputerDialog()
+        onTriggered: computerDialog.open()
     }
     property Action actionEnd: Action {
         shortcut: "Ctrl+End"

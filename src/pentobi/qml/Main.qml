@@ -199,28 +199,7 @@ ApplicationWindow {
         // force it to be recreated if the history changed or it is closed.
         onHistoryChanged: if (ratingDialog.item) ratingDialog.item.close()
     }
-    DialogLoader {
-        id: computerDialogLoader
-
-        component: Component {
-            ComputerDialog {
-                id: computerDialog
-
-                onAccepted: {
-                    rootWindow.computerPlays0 = computerDialog.computerPlays0
-                    rootWindow.computerPlays1 = computerDialog.computerPlays1
-                    rootWindow.computerPlays2 = computerDialog.computerPlays2
-                    rootWindow.computerPlays3 = computerDialog.computerPlays3
-                    initComputerColorsOnNewGame = Logic.computerPlaysAny()
-                    playerModel.level = computerDialog.level
-                    if (! Logic.isComputerToPlay())
-                        Logic.cancelRunning()
-                    else if (! gameModel.isGameOver)
-                        Logic.checkComputerMove()
-                }
-            }
-        }
-    }
+    DialogLoader { id: computerDialog; component: ComputerDialog { } }
     DialogLoader { id: gameVariantDialog; component: Component { GameVariantDialog { } } }
     DialogLoader { id: gameInfoDialog; component: Component { GameInfoDialog { } } }
     DialogLoader { id: initialRatingDialog; component: Component { InitialRatingDialog { } } }

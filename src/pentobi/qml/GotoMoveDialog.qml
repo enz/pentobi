@@ -8,6 +8,7 @@ Pentobi.Dialog {
 
     title: isDesktop ? qsTr("Go to Move") : ""
     footer: OkCancelButtons { }
+    onOpened: textField.selectAll()
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
     Item {
@@ -39,7 +40,6 @@ Pentobi.Dialog {
                     bottom: 0
                     top: gameModel.moveNumber + gameModel.movesLeft
                 }
-                onVisibleChanged: if (visible) selectAll()
                 onAccepted: root.accept()
                 Layout.preferredWidth: font.pixelSize * 5
             }

@@ -10,6 +10,7 @@ Pentobi.Dialog {
     title: isDesktop ? qsTr("Game Variant") : ""
     footer: OkCancelButtons { }
     onOpened: {
+        gameVariant = gameModel.gameVariant
         if (gameVariant.startsWith("classic")) comboBox.currentIndex = 0
         else if (gameVariant === "duo") comboBox.currentIndex = 1
         else if (gameVariant === "junior") comboBox.currentIndex = 2

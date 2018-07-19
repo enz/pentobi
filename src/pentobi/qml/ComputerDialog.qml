@@ -2,19 +2,32 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
 import QtQuick.Window 2.0
+import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Dialog {
     id: root
 
-    property alias computerPlays0: checkBox0.checked
-    property alias computerPlays1: checkBox1.checked
-    property alias computerPlays2: checkBox2.checked
-    property alias computerPlays3: checkBox3.checked
-    property alias level: spinBox.value
-
     title: isDesktop ? qsTr("Computer Settings") : ""
     footer: OkCancelButtons { }
+    onOpened: {
+        checkBox0.checked = computerPlays0
+        checkBox1.checked = computerPlays1
+        checkBox2.checked = computerPlays2
+        checkBox3.checked = computerPlays3
+        spinBox.value = playerModel.level
+    }
+    onAccepted: {
+        computerPlays0 = checkBox0.checked
+        computerPlays1 = checkBox1.checked
+        computerPlays2 = checkBox2.checked
+        computerPlays3 = checkBox3.checked
+        playerModel.level = spinBox.value
+        if (! Logic.isComputerToPlay())
+            Logic.cancelRunning()
+        else if (! gameModel.isGameOver)
+            Logic.checkComputerMove()
+    }
 
     Item {
         implicitWidth: {

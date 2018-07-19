@@ -39,17 +39,16 @@ Pentobi.Dialog {
             DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
         }
     }
-    onVisibleChanged:
-        if (visible) {
-            if (! isAndroid) {
-                var pos = name.lastIndexOf(".")
-                if (pos < 0)
-                    nameField.selectAll()
-                else
-                    nameField.select(0, pos)
-            }
-            view.currentIndex = -1
+    onOpened: {
+        if (! isAndroid) {
+            var pos = name.lastIndexOf(".")
+            if (pos < 0)
+                nameField.selectAll()
+            else
+                nameField.select(0, pos)
         }
+        view.currentIndex = -1
+    }
     onAccepted: {
         folder = folderModel.folder
         fileUrl = folder + "/" + name
