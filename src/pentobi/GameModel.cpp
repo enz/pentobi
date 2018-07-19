@@ -77,7 +77,7 @@ namespace {
 // against epsilon is also safe.
 bool compareGameCoord(const QPointF& p1, const QPointF& p2)
 {
-    return (p1 - p2).manhattanLength() < 0.01f;
+    return (p1 - p2).manhattanLength() < qreal(0.01);
 }
 
 bool compareTransform(const PieceInfo& pieceInfo, const Transform* t1,
@@ -98,7 +98,7 @@ QPointF getGameCoord(const Board& bd, Move mv)
 
 /** Simple heuristic used for sorting the list used in GameModel::findMove().
     Prefers larger pieces, and moves of the same piece (in that order). */
-double getHeuristic(const Board& bd, Move mv)
+float getHeuristic(const Board& bd, Move mv)
 {
     auto piece = bd.get_move_piece(mv);
     auto points = bd.get_piece_info(piece).get_score_points();
@@ -481,9 +481,9 @@ bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
         // In GembloQ, every piece has at least one full square, so we can use
         // half the x resolution, which makes positioning easier for the user.
         if (pointType == 0 || pointType == 2)
-            offX = static_cast<int>(round(dx * 0.5f)) * 2;
+            offX = static_cast<int>(round(dx * qreal(0.5))) * 2;
         else
-            offX = static_cast<int>(round((dx - 1) * 0.5f)) * 2 + 1;
+            offX = static_cast<int>(round((dx - 1) * qreal(0.5))) * 2 + 1;
     }
     else
         offX = static_cast<int>(round(dx));

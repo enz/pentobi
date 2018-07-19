@@ -109,7 +109,7 @@ public:
 
     Q_INVOKABLE int getNextLevel(int maxLevel) const;
 
-    Q_INVOKABLE void setInitialRating(float rating);
+    Q_INVOKABLE void setInitialRating(double rating);
 
 
     double bestRating() const { return m_bestRating.get(); }

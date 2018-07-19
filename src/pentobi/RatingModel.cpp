@@ -187,8 +187,8 @@ void RatingModel::setGameVariant(const QString& gameVariant)
         return;
     m_gameVariant = gameVariant;
     QSettings settings;
-    auto rating = static_cast<float>(settings.value("rating_" + gameVariant, 1000).toDouble());
-    auto bestRating = static_cast<float>(settings.value("best_rating_" + gameVariant, 0).toDouble());
+    auto rating = settings.value("rating_" + gameVariant, 1000).toDouble();
+    auto bestRating = settings.value("best_rating_" + gameVariant, 0).toDouble();
 
     // Use same keys as Pentobi 12.x to be compatible
     setRating(rating);
@@ -220,7 +220,7 @@ void RatingModel::setGameVariant(const QString& gameVariant)
     emit gameVariantChanged();
 }
 
-void RatingModel::setInitialRating(float rating)
+void RatingModel::setInitialRating(double rating)
 {
     setRating(rating);
     setBestRating(rating);
