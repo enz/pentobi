@@ -12,11 +12,6 @@ Pentobi.Dialog {
     //: Window title for the rating dialog.
     title: isDesktop ? qsTr("Rating") : ""
     footer: OkButton { }
-    onVisibleChanged:
-        if (! visible) {
-            // See comment in Main.qml at ratingModel.onHistoryChanged
-            close()
-        }
 
     Item {
         // Make it wide enough to show a the graph
@@ -127,7 +122,9 @@ Pentobi.Dialog {
                 RatingGraph {
                     visible: history.length > 1
                     history: ratingModel.history
-                    Layout.preferredHeight: font.pixelSize * 8
+                    Layout.preferredHeight:
+                        Math.min(Math.min(font.pixelSize * 8, 0.22 * rootWindow.width),
+                                 0.22 * rootWindow.height)
                     Layout.fillWidth: true
                 }
             }
@@ -136,7 +133,9 @@ Pentobi.Dialog {
                 visible: history.length > 0
                 clip: true
                 Layout.fillWidth: true
-                Layout.preferredHeight: font.pixelSize * 8
+                Layout.preferredHeight:
+                    Math.min(Math.min(font.pixelSize * 8, 0.22 * rootWindow.width),
+                             0.22 * rootWindow.height)
 
                 Item
                 {
@@ -211,29 +210,29 @@ Pentobi.Dialog {
                                 if (y < gameRepeater.itemAt(i).y)
                                     break
                             menu.row = i - 1
-                            menu.popup()
+                            menu.popup(mouseX, mouseY)
                         }
 
                         anchors.fill: grid
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
                         onClicked: openMenu(mouseX, mouseY)
                         onPressAndHold: openMenu(mouseX, mouseY)
-                    }
-                }
-            }
-            Menu {
-                id: menu
 
-                property int row
+                        Menu {
+                            id: menu
 
-                Pentobi.MenuItem {
-                    text: history && menu.row < history.length ?
-                              qsTr("Open Game %1").arg(history[menu.row].number) : ""
-                    onTriggered: {
-                        queuedOpenRatedGame.byteArray = history[menu.row].sgf
-                        queuedOpenRatedGame.restart()
-                        // See comment in Main.qml at ratingModel.onHistoryChanged
-                        close()
+                            property int row
+
+                            Pentobi.MenuItem {
+                                text: history && menu.row < history.length ?
+                                          qsTr("Open Game %1").arg(history[menu.row].number) : ""
+                                onTriggered: {
+                                    queuedOpenRatedGame.byteArray = history[menu.row].sgf
+                                    queuedOpenRatedGame.restart()
+                                    close()
+                                }
+                            }
+                        }
                     }
                 }
             }

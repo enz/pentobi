@@ -191,13 +191,6 @@ ApplicationWindow {
         id: ratingModel
 
         gameVariant: gameModel.gameVariant
-        // There is a bug in the combination of ScrollView, GridLayout and
-        // Repeater, which makes the rating dialog not reusable if the history
-        // changes or the dialog is closed and opened again because empty rows
-        // will appear in the GridLayout (last tested with Qt 5.8-rc, some bugs
-        // only happen on Android, some also on Linux). As a workaround, we
-        // force it to be recreated if the history changed or it is closed.
-        onHistoryChanged: if (ratingDialog.item) ratingDialog.item.close()
     }
     DialogLoader { id: computerDialog; component: ComputerDialog { } }
     DialogLoader { id: gameVariantDialog; component: Component { GameVariantDialog { } } }
