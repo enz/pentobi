@@ -11,6 +11,17 @@ Menu {
     cascade: isDesktop
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     delegate: Pentobi.MenuItem { }
-    // On Android, currentIndex is not reset when closing menu (last tested with Qt 5.11.1)
+    // Workaround for QTBUG-69541 (Opened Menu highlights last used item on Android)
     onOpened: if (isAndroid) currentIndex = -1
+    // Workaround for QTBUG-69540 (Menu highlights disabled item on click)
+    onCurrentIndexChanged: {
+        for (var i = currentIndex; i < count; ++i) {
+            var item = itemAt(i)
+            if (item && item.enabled) {
+                currentIndex = i
+                return
+            }
+        }
+        currentIndex = -1
+    }
 }
