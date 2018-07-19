@@ -64,10 +64,6 @@
         <translation>Gå til trekk…</translation>
     </message>
     <message>
-        <source>Computer Colors</source>
-        <translation type="vanished">Datamaskinfarger</translation>
-    </message>
-    <message>
         <source>Play Single Move</source>
         <translation>Spill enkelttrekk</translation>
     </message>
@@ -115,6 +111,66 @@
     </message>
 </context>
 <context>
+    <name>AppearanceDialog</name>
+    <message>
+        <source>Appearance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coordinates</source>
+        <translation>Koordinater</translation>
+    </message>
+    <message>
+        <source>Show variations</source>
+        <translation>Vis variasjoner</translation>
+    </message>
+    <message>
+        <source>Animate pieces</source>
+        <translation>Animer brikker</translation>
+    </message>
+    <message>
+        <source>Theme:</source>
+        <translation>Drakt:</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>Lys</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation>Mørk</translation>
+    </message>
+    <message>
+        <source>Colorblind light</source>
+        <translation>Fargeblind lys</translation>
+    </message>
+    <message>
+        <source>Colorblind dark</source>
+        <translation>Fargeblind mørk</translation>
+    </message>
+    <message>
+        <source>Move marking:</source>
+        <translation>Flytt markering:</translation>
+    </message>
+    <message>
+        <source>Last with dot</source>
+        <translation>Siste med punkt</translation>
+    </message>
+    <message>
+        <source>Last with number</source>
+        <translation>Siste med nummer</translation>
+    </message>
+    <message>
+        <source>All with number</source>
+        <translation>Alle med nummer</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <extracomment>Move marking/None</extracomment>
+        <translation>Ingen</translation>
+    </message>
+</context>
+<context>
     <name>AsciiArtSaveDialog</name>
     <message>
         <source>Export ASCII Art</source>
@@ -123,125 +179,6 @@
     <message>
         <source>Text files (*.txt)</source>
         <translation>Tekstfiler (*.txt)</translation>
-    </message>
-</context>
-<context>
-    <name>ComputerColorDialog</name>
-    <message>
-        <source>Computer Colors</source>
-        <translation type="vanished">Datamaskinfarger</translation>
-    </message>
-    <message>
-        <source>Computer plays:</source>
-        <translation type="vanished">Datamaskinen spiller:</translation>
-    </message>
-    <message>
-        <source>Blue/Red</source>
-        <translation type="vanished">Blå/rød</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">Blå</translation>
-    </message>
-    <message>
-        <source>Yellow/Green</source>
-        <translation type="vanished">Gul/grønn</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">Grønn</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">Gul</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">Rød</translation>
-    </message>
-    <message>
-        <source>Purple</source>
-        <translation type="vanished">Lilla</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="vanished">Oransje</translation>
-    </message>
-    <message>
-        <source>Level (Classic, 4 players):</source>
-        <translation type="vanished">Nivå (klassisk, 4 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (Classic, 2 players):</source>
-        <translation type="vanished">Nivå (klassisk, 2 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (Classic, 3 players):</source>
-        <translation type="vanished">Nivå (klassisk, 3 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (Duo):</source>
-        <translation type="vanished">Nivå (Duo):</translation>
-    </message>
-    <message>
-        <source>Level (Junior):</source>
-        <translation type="vanished">Nivå (Junior):</translation>
-    </message>
-    <message>
-        <source>Level (Trigon, 4 players):</source>
-        <translation type="vanished">Nivå (Trigon, 4 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (Trigon, 2 players):</source>
-        <translation type="vanished">Nivå (Trigon, 2 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (Trigon, 3 players):</source>
-        <translation type="vanished">Nivå (Trigon, 3 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (Nexos, 4 players):</source>
-        <translation type="vanished">Nivå (Nexos, 4 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (Nexos, 2 players):</source>
-        <translation type="vanished">Nivå (Nexos, 2 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 4 players):</source>
-        <translation type="vanished">Nivå (Callisto, 4 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 2 players, 2 colors):</source>
-        <translation type="vanished">Nivå (Callisto, 2 spillere, 2 farger):</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 2 players, 4 colors):</source>
-        <translation type="vanished">Nivå (Callisto, 2 spillere, 4 farger):</translation>
-    </message>
-    <message>
-        <source>Level (Callisto, 3 players):</source>
-        <translation type="vanished">Nivå (Callisto, 3 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 4 players):</source>
-        <translation type="vanished">Nivå (GembloQ, 4 spillere):</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 2 players, 2 colors):</source>
-        <translation type="vanished">Nivå (GembloQ, 2 spillere, 2 farger):</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 2 players, 4 colors):</source>
-        <translation type="vanished">Nivå (GembloQ, 2 spillere, 4 farger):</translation>
-    </message>
-    <message>
-        <source>Level (GembloQ, 3 players):</source>
-        <translation type="vanished">Nivå (GembloQ, 3 spillere):</translation>
-    </message>
-    <message>
-        <source>Level:</source>
-        <translation type="vanished">Nivå:</translation>
     </message>
 </context>
 <context>
@@ -626,12 +563,12 @@
         <translation>Callisto</translation>
     </message>
     <message>
-        <source>Players</source>
-        <translation>Spillere</translation>
+        <source>Players:</source>
+        <translation>Spillere:</translation>
     </message>
     <message>
-        <source>Colors</source>
-        <translation>Farger</translation>
+        <source>Colors:</source>
+        <translation>Farger:</translation>
     </message>
 </context>
 <context>
@@ -1121,10 +1058,6 @@
         <translation>T</translation>
     </message>
     <message>
-        <source>Game Variant</source>
-        <translation type="vanished">Spillvariant</translation>
-    </message>
-    <message>
         <source>V</source>
         <extracomment>Mnemonic for menu item Game Variant. Leave empty for no mnemonic.</extracomment>
         <translation>V</translation>
@@ -1132,137 +1065,6 @@
     <message>
         <source>Game Variant...</source>
         <translation>Spillvariant…</translation>
-    </message>
-</context>
-<context>
-    <name>MenuGameVariant</name>
-    <message>
-        <source>Game Variant</source>
-        <translation type="vanished">Spillvariant</translation>
-    </message>
-    <message>
-        <source>V</source>
-        <extracomment>Mnemonic for menu Game Variant. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">V</translation>
-    </message>
-    <message>
-        <source>Classic</source>
-        <translation type="vanished">Klassisk</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Mnemonic for menu Classic. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">K</translation>
-    </message>
-    <message>
-        <source>Classic (%1 Players)</source>
-        <translation type="vanished">Klassisk (%1 spillere)</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <extracomment>Mnemonic for menu item Classic/Trigon/Nexos (2 Players) and GambloQ/Callisto (2 Players, 2 Colors). Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">2</translation>
-    </message>
-    <message>
-        <source>3</source>
-        <extracomment>Mnemonic for menu item Classic/Trigon/GembloQ/Callisto (3 Players). Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">3</translation>
-    </message>
-    <message>
-        <source>4</source>
-        <extracomment>Mnemonic for menu item Classic/Trigon/Nexos/GembloQ/Callisto (4 Players). Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">4</translation>
-    </message>
-    <message>
-        <source>Duo</source>
-        <translation type="vanished">Duo</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <extracomment>Mnemonic for menu item Duo. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">D</translation>
-    </message>
-    <message>
-        <source>Junior</source>
-        <translation type="vanished">Junior</translation>
-    </message>
-    <message>
-        <source>J</source>
-        <extracomment>Mnemonic for menu item Junior. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">J</translation>
-    </message>
-    <message>
-        <source>Trigon</source>
-        <translation type="vanished">Trigon</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <extracomment>Mnemonic for menu Trigon. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">T</translation>
-    </message>
-    <message>
-        <source>Nexos</source>
-        <translation type="vanished">Nexos</translation>
-    </message>
-    <message>
-        <source>N</source>
-        <extracomment>Mnemonic for menu Nexos. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">N</translation>
-    </message>
-    <message>
-        <source>GembloQ</source>
-        <translation type="vanished">GembloQ</translation>
-    </message>
-    <message>
-        <source>Callisto</source>
-        <translation type="vanished">Callisto</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <extracomment>Mnemonic for menu item Callisto. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">C</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <extracomment>Mnemonic for menu GembloQ. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">G</translation>
-    </message>
-    <message>
-        <source>Trigon (%1 Players)</source>
-        <translation type="vanished">Trigon (%1 spillere)</translation>
-    </message>
-    <message>
-        <source>Nexos (%1 Players)</source>
-        <translation type="vanished">Nexos (%1 spillere)</translation>
-    </message>
-    <message>
-        <source>GembloQ (2 Players, 2 Colors)</source>
-        <translation type="vanished">GembloQ (2 spillere, 2 farger)</translation>
-    </message>
-    <message>
-        <source>GembloQ (2 Players, 4 Colors)</source>
-        <translation type="vanished">GembloQ (2 spillere, 4 farger)</translation>
-    </message>
-    <message>
-        <source>GembloQ (%1 Players)</source>
-        <translation type="vanished">GembloQ (%1 spillere)</translation>
-    </message>
-    <message>
-        <source>Callisto (2 Players, 2 Colors)</source>
-        <translation type="vanished">Callisto (2 spillere, 2 farger)</translation>
-    </message>
-    <message>
-        <source>Callisto (2 Players, 4 Colors)</source>
-        <translation type="vanished">Callisto (2 spillere, 4 farger)</translation>
-    </message>
-    <message>
-        <source>Callisto (%1 Players)</source>
-        <translation type="vanished">Callisto (%1 spillere)</translation>
-    </message>
-    <message>
-        <source>P</source>
-        <extracomment>Mnemonic for menu item GembloQ/Callisto (2 Players, 4 Colors). Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">F</translation>
     </message>
 </context>
 <context>
@@ -1399,104 +1201,6 @@
     </message>
 </context>
 <context>
-    <name>MenuMoveMarking</name>
-    <message>
-        <source>Move Marking</source>
-        <translation>Flytt markering</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <extracomment>Mnemonic for menu Move Marking. Leave empty for no mnemonic.</extracomment>
-        <translation>F</translation>
-    </message>
-    <message>
-        <source>Last With Dot</source>
-        <translation>Siste med punkt</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <extracomment>Mnemonic for menu item Last With Dot. Leave empty for no mnemonic.</extracomment>
-        <translation>P</translation>
-    </message>
-    <message>
-        <source>Last With Number</source>
-        <translation>Siste med nummer</translation>
-    </message>
-    <message>
-        <source>N</source>
-        <extracomment>Mnemonic for menu item Last With Number. Leave empty for no mnemonic.</extracomment>
-        <translation>N</translation>
-    </message>
-    <message>
-        <source>All With Number</source>
-        <translation>Alle med nummer</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <extracomment>Mnemonic for menu item All With Number. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Ingen</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Mnemonic for menu item Move Marking/None. Leave empty for no mnemonic.</extracomment>
-        <translation>I</translation>
-    </message>
-</context>
-<context>
-    <name>MenuTheme</name>
-    <message>
-        <source>Theme</source>
-        <translation>Drakt</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <extracomment>Mnemonic for menu Theme. Leave empty for no mnemonic.</extracomment>
-        <translation>D</translation>
-    </message>
-    <message>
-        <source>Light</source>
-        <translation>Lys</translation>
-    </message>
-    <message>
-        <source>L</source>
-        <extracomment>Mnemonic for menu item Theme/Light. Leave empty for no mnemonic.</extracomment>
-        <translation>L</translation>
-    </message>
-    <message>
-        <source>Dark</source>
-        <translation>Mørk</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <extracomment>Mnemonic for menu item Theme/Dark. Leave empty for no mnemonic.</extracomment>
-        <translation>M</translation>
-    </message>
-    <message>
-        <source>Colorblind Light</source>
-        <extracomment>Name of light theme optimized for colorblindness.</extracomment>
-        <translation>Fargeblind lys</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Mnemonic for menu item Colorblind Light. Leave empty for no mnemonic.</extracomment>
-        <translation>F</translation>
-    </message>
-    <message>
-        <source>Colorblind Dark</source>
-        <extracomment>Name of dark theme optimized for colorblindness.</extracomment>
-        <translation>Fargeblind mørk</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <extracomment>Mnemonic for menu item Colorblind Dark. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
-    </message>
-</context>
-<context>
     <name>MenuTools</name>
     <message>
         <source>Tools</source>
@@ -1549,29 +1253,12 @@
     <message>
         <source>V</source>
         <extracomment>Mnemonic for menu View. Leave empty for no mnemonic.</extracomment>
-        <translation>V</translation>
-    </message>
-    <message>
-        <source>Coordinates</source>
-        <translation>Koordinater</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Mnemonic for menu item Coordinates. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
-    </message>
-    <message>
-        <source>Show Variations</source>
-        <translation>Vis variasjoner</translation>
-    </message>
-    <message>
-        <source>Animate Pieces</source>
-        <translation>Animer brikker</translation>
+        <translation type="unfinished">V</translation>
     </message>
     <message>
         <source>A</source>
-        <extracomment>Mnemonic for menu item Animate Pieces. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
+        <extracomment>Mnemonic for menu Appearance. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>F</source>
@@ -1579,9 +1266,8 @@
         <translation>U</translation>
     </message>
     <message>
-        <source>S</source>
-        <extracomment>Mnemonic for menu item Show Variations. Leave empty for no mnemonic.</extracomment>
-        <translation>V</translation>
+        <source>Appearance...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1644,56 +1330,12 @@
         <translation>Beste tidligere vurdering:</translation>
     </message>
     <message>
-        <source>Classic (2 players)</source>
-        <translation type="vanished">Klassisk (2 spillere)</translation>
-    </message>
-    <message>
-        <source>Classic (3 players)</source>
-        <translation type="vanished">Klassisk (3 spillere)</translation>
-    </message>
-    <message>
-        <source>Classic (4 players)</source>
-        <translation type="vanished">Klassisk (4 spillere)</translation>
-    </message>
-    <message>
         <source>Duo</source>
         <translation>Duo</translation>
     </message>
     <message>
         <source>Junior</source>
         <translation>Junior</translation>
-    </message>
-    <message>
-        <source>Trigon (2 players)</source>
-        <translation type="vanished">Trigon (2 spillere)</translation>
-    </message>
-    <message>
-        <source>Trigon (3 players)</source>
-        <translation type="vanished">Trigon (3 spillere)</translation>
-    </message>
-    <message>
-        <source>Trigon (4 players)</source>
-        <translation type="vanished">Trigon (4 spillere)</translation>
-    </message>
-    <message>
-        <source>Nexos (2 players)</source>
-        <translation type="vanished">Nexos (2 spillere)</translation>
-    </message>
-    <message>
-        <source>Nexos (4 players)</source>
-        <translation type="vanished">Nexos (4 spillere)</translation>
-    </message>
-    <message>
-        <source>Callisto (2 players)</source>
-        <translation type="vanished">Callisto (2 spillere)</translation>
-    </message>
-    <message>
-        <source>Callisto (3 players)</source>
-        <translation type="vanished">Callisto (3 spillere)</translation>
-    </message>
-    <message>
-        <source>Callisto (4 players)</source>
-        <translation type="vanished">Callisto (4 spillere)</translation>
     </message>
     <message>
         <source>Game variant:</source>
@@ -1745,26 +1387,6 @@
     <message>
         <source>Open Game %1</source>
         <translation>Åpne spill %1</translation>
-    </message>
-    <message>
-        <source>GembloQ (4 players)</source>
-        <translation type="vanished">GembloQ (4 spillere)</translation>
-    </message>
-    <message>
-        <source>GembloQ (2 players, 2 colors)</source>
-        <translation type="vanished">GembloQ (2 spillere, 2 farger)</translation>
-    </message>
-    <message>
-        <source>GembloQ (2 players, 4 colors)</source>
-        <translation type="vanished">GembloQ (2 spillere, 4 farger)</translation>
-    </message>
-    <message>
-        <source>GembloQ (3 players)</source>
-        <translation type="vanished">GembloQ (3 spillere)</translation>
-    </message>
-    <message>
-        <source>Callisto (2 players, 4 colors)</source>
-        <translation type="vanished">Callisto (2 spillere, 4 farger)</translation>
     </message>
     <message>
         <source>Classic (2)</source>

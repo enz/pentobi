@@ -41,7 +41,7 @@ Pentobi.Dialog {
         GridLayout {
             columns: 2
 
-            Label { text: qsTr("Players") }
+            Label { text: qsTr("Players:") }
             RowLayout {
                 RadioButton {
                     text: "2"
@@ -122,7 +122,7 @@ Pentobi.Dialog {
                     }
                 }
             }
-            Label { text: qsTr("Colors") }
+            Label { text: qsTr("Colors:") }
             RowLayout {
                 RadioButton {
                     text: "2"

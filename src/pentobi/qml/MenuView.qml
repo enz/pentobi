@@ -8,41 +8,11 @@ Pentobi.Menu {
                        //: Mnemonic for menu View. Leave empty for no mnemonic.
                        qsTr("V"))
 
-    MenuMoveMarking { }
     Pentobi.MenuItem {
-        text: addMnemonic(qsTr("Coordinates"),
-                          //: Mnemonic for menu item Coordinates. Leave empty for no mnemonic.
-                          qsTr("C"))
-        checkable: true
-        checked: gameDisplay.showCoordinates
-        onTriggered: {
-            checked = ! gameDisplay.showCoordinates // Workaround for QTBUG-69401
-            gameDisplay.showCoordinates = checked
-        }
-    }
-    Pentobi.MenuItem {
-        text: addMnemonic(qsTr("Show Variations"),
-                          //: Mnemonic for menu item Show Variations. Leave empty for no mnemonic.
-                          qsTr("S"))
-        checkable: true
-        checked: gameModel.showVariations
-        onTriggered: {
-            checked = ! gameModel.showVariations // Workaround for QTBUG-69401
-            gameModel.showVariations = checked
-        }
-    }
-    MenuSeparator { }
-    MenuTheme { }
-    Pentobi.MenuItem {
-        text: addMnemonic(qsTr("Animate Pieces"),
-                          //: Mnemonic for menu item Animate Pieces. Leave empty for no mnemonic.
+        text: addMnemonic(qsTr("Appearance..."),
+                          //: Mnemonic for menu Appearance. Leave empty for no mnemonic.
                           qsTr("A"))
-        checkable: true
-        checked: gameDisplay.enableAnimations
-        onTriggered: {
-            checked = ! gameDisplay.enableAnimations // Workaround for QTBUG-69401
-            gameDisplay.enableAnimations = checked
-        }
+        onTriggered: appearanceDialog.open()
     }
     MenuSeparator { }
     Pentobi.MenuItem {

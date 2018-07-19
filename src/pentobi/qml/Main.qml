@@ -231,9 +231,10 @@ ApplicationWindow {
     DialogLoader { id: gotoMoveDialog; component: Component { GotoMoveDialog { } } }
     DialogLoader { id: ratingDialog; component: Component { RatingDialog { } } }
     DialogLoader { id: saveDialog; component: Component { SaveDialog { } } }
-    DialogLoader { id: infoMessage; component: Component { Pentobi.MessageDialog { } } }
-    DialogLoader { id: questionMessage; component: Component { Pentobi.QuestionDialog { } } }
-    DialogLoader { id: analyzeDialog; component: Component { Pentobi.AnalyzeDialog { } } }
+    DialogLoader { id: infoMessage; component: Component { MessageDialog { } } }
+    DialogLoader { id: questionMessage; component: Component { QuestionDialog { } } }
+    DialogLoader { id: analyzeDialog; component: Component { AnalyzeDialog { } } }
+    DialogLoader { id: appearanceDialog; component: Component { AppearanceDialog{ } } }
     Loader {
         id: helpWindow
 

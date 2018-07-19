@@ -18,6 +18,7 @@
         <file>qml/Actions.qml</file>
         <file>qml/AnalyzeDialog.qml</file>
         <file>qml/AnalyzeGame.qml</file>
+        <file>qml/AppearanceDialog.qml</file>
         <file>qml/AsciiArtSaveDialog.qml</file>
         <file>qml/Board.qml</file>
         <file>qml/BusyIndicator.qml</file>
@@ -49,8 +50,6 @@
         <file>qml/MenuHelp.qml</file>
         <file>qml/MenuItem.qml</file>
         <file>qml/MenuMoveAnnotation.qml</file>
-        <file>qml/MenuMoveMarking.qml</file>
-        <file>qml/MenuTheme.qml</file>
         <file>qml/MenuTools.qml</file>
         <file>qml/MenuView.qml</file>
         <file>qml/NavigationButtons.qml</file>
