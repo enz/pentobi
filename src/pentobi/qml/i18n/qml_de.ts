@@ -1243,6 +1243,15 @@
         <extracomment>Mnemonic for menu item Clear Analysis. Leave empty for no mnemonic.</extracomment>
         <translation>N</translation>
     </message>
+    <message>
+        <source>Abort Analysis</source>
+        <translation>Analyse abbrechen</translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Abort Analysis. Leave empty for no mnemonic.</extracomment>
+        <translation>B</translation>
+    </message>
 </context>
 <context>
     <name>MenuView</name>

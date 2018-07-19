@@ -30,6 +30,13 @@ Pentobi.Menu {
         onTriggered: analyzeDialog.open()
     }
     Pentobi.MenuItem {
+        enabled: analyzeGameModel.isRunning
+        text: addMnemonic(qsTr("Abort Analysis"),
+                          //: Mnemonic for menu item Abort Analysis. Leave empty for no mnemonic.
+                          qsTr("O"))
+        onTriggered: Logic.cancelRunning()
+    }
+    Pentobi.MenuItem {
         enabled: analyzeGameModel.elements.length !== 0
         text: addMnemonic(qsTr("Clear Analysis"),
                           //: Mnemonic for menu item Clear Analysis. Leave empty for no mnemonic.
