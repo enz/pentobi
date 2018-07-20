@@ -191,6 +191,11 @@
         <source>Move Annotation</source>
         <translation>Annotation courante</translation>
     </message>
+    <message>
+        <source>Move Annotation (%1)</source>
+        <extracomment>The argument is the annotation symbol for the current move</extracomment>
+        <translation>Annotation courante (%1)</translation>
+    </message>
 </context>
 <context>
     <name>ComputerDialog</name>
