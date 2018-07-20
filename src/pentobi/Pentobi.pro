@@ -40,6 +40,7 @@ gcc {
 
 SOURCES += \
     AnalyzeGameModel.cpp \
+    AndroidUtils.cpp \
     GameModel.cpp \
     HelpFileExtractor.cpp \
     Main.cpp \
@@ -120,6 +121,7 @@ RESOURCES += \
 
 HEADERS += \
     AnalyzeGameModel.h \
+    AndroidUtils.h \
     GameModel.h \
     HelpFileExtractor.h \
     PieceModel.h \

@@ -15,6 +15,7 @@
 #include <QtQml>
 #include <QtWebView/QtWebView>
 #include "AnalyzeGameModel.h"
+#include "AndroidUtils.h"
 #include "GameModel.h"
 #include "HelpFileExtractor.h"
 #include "PlayerModel.h"
@@ -43,6 +44,7 @@ int main(int argc, char *argv[])
     icon.addFile(":/pentobi_icon/pentobi-64.svg");
     QGuiApplication::setWindowIcon(icon);
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
+    qmlRegisterType<AndroidUtils>("pentobi", 1, 0, "AndroidUtils");
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<HelpFileExtractor>("pentobi", 1, 0, "HelpFileExtractor");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");

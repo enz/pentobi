@@ -198,6 +198,7 @@ ApplicationWindow {
 
         gameVariant: gameModel.gameVariant
     }
+    AndroidUtils { id: androidUtils }
     DialogLoader { id: computerDialog; component: ComputerDialog { } }
     DialogLoader { id: gameVariantDialog; component: Component { GameVariantDialog { } } }
     DialogLoader { id: gameInfoDialog; component: Component { GameInfoDialog { } } }

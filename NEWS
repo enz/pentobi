@@ -26,6 +26,8 @@ Version 15.UNKNOWN (master)
   backwards through the list of legal moves.
 * Analysis speed dialog is now also available on Android (only fast and
   normal speed)
+* The Android version now shows an error before open/save if permission
+  to access storage have not been granted.
 * The translation source strings for menu items and actions no longer use
   an ampersand to mark a mnemonic but a separate translation string for
   the mnemonic. Ampersands caused problems with searches in Weblate

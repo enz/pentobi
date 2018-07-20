@@ -20,8 +20,8 @@
 using libboardgame_sgf::is_main_variation;
 using libboardgame_sgf::find_root;
 using libboardgame_util::clear_abort;
-using libboardgame_util::ArrayList;
 using libboardgame_util::set_abort;
+using libboardgame_util::ArrayList;
 using libpentobi_base::ColorMove;
 
 //-----------------------------------------------------------------------------
@@ -56,8 +56,8 @@ void AnalyzeGameModel::asyncRun(const Game* game, Search* search)
     auto progressCallback =
         [&](unsigned movesAnalyzed, unsigned totalMoves)
         {
-            LIBBOARDGAME_UNUSED(movesAnalyzed);
-            LIBBOARDGAME_UNUSED(totalMoves);
+            Q_UNUSED(movesAnalyzed);
+            Q_UNUSED(totalMoves);
             // Use invokeMethod() because callback runs in different thread
             QMetaObject::invokeMethod(this, "updateElements",
                                       Qt::BlockingQueuedConnection);

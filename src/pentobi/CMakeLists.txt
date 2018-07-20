@@ -42,6 +42,8 @@ add_executable(pentobi WIN32
     ${pentobi_RC_TRANSL_SRCS}
     AnalyzeGameModel.h
     AnalyzeGameModel.cpp
+    AndroidUtils.h
+    AndroidUtils.cpp
     GameModel.h
     GameModel.cpp
     HelpFileExtractor.h

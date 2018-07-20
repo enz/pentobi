@@ -121,6 +121,14 @@ function checkComputerMove() {
     genMove()
 }
 
+function checkStoragePermission() {
+    if (! androidUtils.checkPermission("android.permission.WRITE_EXTERNAL_STORAGE")) {
+        showInfo(qsTr("No permission to access storage"))
+        return false
+    }
+    return true
+}
+
 function clearRating() {
     showQuestion(qsTr("Delete all rating information for the current game variant?"),
                  clearRatingNoVerify)
@@ -211,13 +219,19 @@ function deleteAllVarNoVerify() {
 }
 
 function exportAsciiArt(fileUrl) {
+    if (! checkStoragePermission())
+        return
     if (! gameModel.saveAsciiArt(getFileFromUrl(fileUrl)))
         showInfo(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
-    else
+    else {
+        androidUtils.scanFile(file)
         showTemporaryMessage(qsTr("File saved."))
+    }
 }
 
 function exportImage(fileUrl) {
+    if (! checkStoragePermission())
+        return
     var board = gameDisplay.getBoard()
     var size = Qt.size(exportImageWidth, exportImageWidth * board.height / board.width)
     if (! board.grabToImage(function(result) {
@@ -225,7 +239,7 @@ function exportImage(fileUrl) {
         if (! result.saveToFile(file))
             showInfo(qsTr("Saving image failed."))
         else {
-            gameModel.androidScanFile(file)
+            androidUtils.scanFile(file)
             showTemporaryMessage(qsTr("Image saved."))
         }
     }, size))
@@ -401,6 +415,8 @@ function nextPiece() {
 }
 
 function open() {
+    if (! checkStoragePermission())
+        return
     verify(openNoVerify)
 }
 
@@ -606,6 +622,8 @@ function reloadFile() {
 }
 
 function save() {
+    if (! checkStoragePermission())
+        return
     if (gameModel.checkFileModifiedOutside())
         showQuestion(qsTr("File has been modified by another application. Save anyway?"),
                      saveCurrentFile)
@@ -614,6 +632,8 @@ function save() {
 }
 
 function saveAs() {
+    if (! checkStoragePermission())
+        return
     var dialog = saveDialog.get()
     dialog.name = gameModel.suggestFileName(rootWindow.folder)
     dialog.open()

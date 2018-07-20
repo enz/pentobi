@@ -21,17 +21,13 @@
 #include <QSettings>
 #include <QStandardPaths>
 #include <QTextCodec>
+#include "AndroidUtils.h"
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
-
-#ifdef Q_OS_ANDROID
-#include <QtAndroidExtras/QtAndroid>
-#include <QtAndroidExtras/QAndroidJniObject>
-#endif
 
 using namespace std;
 using libboardgame_sgf::SgfError;
@@ -215,47 +211,6 @@ void GameModel::addSetup(PieceModel* pieceModel, QPointF coord)
     }
     setSetupPlayer();
     updateProperties();
-}
-
-/** Request the Android media scanner to scan a file.
-    This ensures that the file will be visible via MTP. */
-void GameModel::androidScanFile(const QString& pathname)
-{
-#ifdef Q_OS_ANDROID
-    // Corresponding Java code:
-    //   sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-    //                       Uri.fromFile(File(pathname).getCanonicalFile())));
-    auto ACTION_MEDIA_SCANNER_SCAN_FILE =
-            QAndroidJniObject::getStaticObjectField<jstring>(
-                "android/content/Intent", "ACTION_MEDIA_SCANNER_SCAN_FILE");
-    if (! ACTION_MEDIA_SCANNER_SCAN_FILE.isValid())
-        return;
-    auto pathnameString = QAndroidJniObject::fromString(pathname);
-    QAndroidJniObject file("java/io/File", "(Ljava/lang/String;)V",
-                           pathnameString.object<jstring>());
-    if (! file.isValid())
-        return;
-    auto absoluteFile = file.callObjectMethod(
-                "getCanonicalFile", "()Ljava/io/File;", file.object());
-    if (! absoluteFile.isValid())
-        return;
-    auto uri = QAndroidJniObject::callStaticObjectMethod(
-                "android/net/Uri", "fromFile",
-                "(Ljava/io/File;)Landroid/net/Uri;", absoluteFile.object());
-    if (! uri.isValid())
-        return;
-    QAndroidJniObject intent("android/content/Intent",
-                             "(Ljava/lang/String;Landroid/net/Uri;)V",
-                             ACTION_MEDIA_SCANNER_SCAN_FILE.object<jstring>(),
-                             uri.object());
-    if (! intent.isValid())
-        return;
-    auto activity = QtAndroid::androidActivity();
-    activity.callMethod<void>("sendBroadcast", "(Landroid/content/Intent;)V",
-                              intent.object());
-#else
-    LIBBOARDGAME_UNUSED(pathname);
-#endif
 }
 
 void GameModel::autoSave()
@@ -1348,7 +1303,7 @@ bool GameModel::save(const QString& file)
             return false;
         }
     }
-    androidScanFile(file);
+    AndroidUtils::scanFile(file);
     updateFileInfo(file);
     setIsModified(false);
     addRecentFile(file);
@@ -1364,7 +1319,7 @@ bool GameModel::saveAsciiArt(const QString& file)
         m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
-    androidScanFile(file);
+    AndroidUtils::scanFile(file);
     return true;
 }
 

@@ -826,6 +826,10 @@
         <source>You have not yet played rated games in this game variant.</source>
         <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
     </message>
+    <message>
+        <source>No permission to access storage</source>
+        <translation>Keine Berechtigung zu Zugriff auf Speicher</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
