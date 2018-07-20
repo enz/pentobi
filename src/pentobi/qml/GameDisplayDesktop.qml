@@ -49,8 +49,8 @@ Item
     function shiftPieceFast(dx, dy) { Logic.shiftPieceFast(dx, dy) }
     function playPickedPiece() { Logic.playPickedPiece() }
     function showToPlay() { }
-    function showAnalyzeGame() { pickedPiece = null }
-    function showComment() { pickedPiece = null }
+    function showAnalyzeGame() { }
+    function showComment() { }
     function showPieces() { }
     function dropCommentFocus() { comment.focus = false }
     function showMove(move) { Logic.showMove(move) }

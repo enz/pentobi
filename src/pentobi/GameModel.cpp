@@ -355,14 +355,6 @@ bool GameModel::checkSetupAllowed() const
     return true;
 }
 
-void GameModel::clearLegalMoves()
-{
-    if (! m_legalMoves)
-        return;
-    m_legalMoves->clear();
-    m_legalMoveIndex = 0;
-}
-
 void GameModel::createPieceModels()
 {
     createPieceModels(Color(0), m_pieceModels0);
@@ -1257,7 +1249,7 @@ void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
 
 void GameModel::preparePositionChange()
 {
-    clearLegalMoves();
+    resetFindMove();
     emit positionAboutToChange();
 }
 
@@ -1283,6 +1275,14 @@ PieceModel* GameModel::previousPiece(PieceModel* currentPickedPiece)
             break;
     }
     return findUnplayedPieceModel(c, Piece(i));
+}
+
+void GameModel::resetFindMove()
+{
+    if (! m_legalMoves)
+        return;
+    m_legalMoves->clear();
+    m_legalMoveIndex = 0;
 }
 
 bool GameModel::restoreAutoSaveLocation()

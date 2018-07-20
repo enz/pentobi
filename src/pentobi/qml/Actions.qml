@@ -59,7 +59,10 @@ QtObject {
     }
     property Action actionDropPickedPiece: Action {
         shortcut: noPopupOpen ? "Escape" : ""
-        onTriggered: gameDisplay.pickedPiece = null
+        onTriggered: {
+            gameDisplay.pickedPiece = null
+            gameModel.resetFindMove()
+        }
     }
     property Action actionFindMove: Action {
         shortcut: "F6"
