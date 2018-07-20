@@ -154,7 +154,11 @@ function onBoardRightClicked(pos) {
     if (n < 0)
         return
     boardContextMenu.moveNumber = n
-    boardContextMenu.popup()
+    if (isDesktop)
+        boardContextMenu.popup()
+    else
+        boardContextMenu.popup(board.mapFromGameX(pos.x + 0.5),
+                               board.mapFromGameY(pos.y + 0.5))
 }
 
 function shiftPiece(dx, dy) {

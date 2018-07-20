@@ -283,6 +283,12 @@ Item {
     MouseArea {
         anchors.fill: root
         acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onPressAndHold: {
+            var pos = mapToGame(Qt.point(mouseX, mouseY))
+            pos.x = Math.floor(pos.x)
+            pos.y = Math.floor(pos.y)
+            root.rightClicked(pos)
+        }
         onClicked: {
             var pos = mapToGame(Qt.point(mouseX, mouseY))
             pos.x = Math.floor(pos.x)
