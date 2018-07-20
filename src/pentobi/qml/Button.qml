@@ -24,7 +24,7 @@ ToolButton {
     hoverEnabled: true
     ToolTip.visible:
         ToolTip.text && isDesktop && hovered && ! toolTipSuppressTimer.running
-        && ! overlay.children.length === 0
+        && overlay.children.length === 0
     ToolTip.delay: 900
     ToolTip.timeout: 9000
 
