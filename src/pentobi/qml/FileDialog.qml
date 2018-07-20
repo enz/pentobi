@@ -158,6 +158,7 @@ Pentobi.Dialog {
                                 sourceSize { width: width; height: height }
                             }
                             Text {
+                                width: parent.width - parent.spacing - parent.leftPadding
                                 text: index < 0 ? "" : fileName
                                 anchors.verticalCenter: parent.verticalCenter
                                 color: view.currentIndex == index ?
