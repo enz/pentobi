@@ -122,7 +122,7 @@ Pentobi.Dialog {
                 Layout.preferredHeight: Math.min(font.pixelSize* 40, 0.4 * rootWindow.height)
                 background: Rectangle {
                     color: frame.palette.base
-                    border.color: frame.activeFocus ? frame.palette.highlight : frame.palette.dark
+                    border.color: frame.activeFocus ? frame.palette.highlight : frame.palette.mid
                     radius: 2
                 }
                 ListView {
