@@ -2,16 +2,13 @@ import QtQuick 2.0
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.3
 
+// Icon size should be 22x22, pixel-alignment optimized for this size
 ToolButton {
     id: root
-
-    // Icon size 22x22, pixel-alignment optimized for this size
-    property url imageSource
 
     opacity: root.enabled ? 1 : 0.5
     display: AbstractButton.IconOnly
     icon {
-        source: imageSource
         color: theme.colorIcon
         width: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
         height: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
