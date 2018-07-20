@@ -8,6 +8,7 @@ Menu {
     onOpened: _annotation = gameModel.getMoveAnnotation(moveNumber)
 
     MenuItem {
+        enabled: moveNumber !== gameModel.moveNumber
         text: qsTr("Go to Move %1").arg(moveNumber)
         onTriggered: gameModel.gotoMove(moveNumber)
     }
