@@ -215,10 +215,13 @@ function showMove(move) {
     var pieceModel = gameModel.preparePiece(move)
     if (pieceModel === null)
         return
+    var newPickedPiece = findPiece(pieceModel)
+    if (gameDisplay.pickedPiece && newPickedPiece !== gameDisplay.pickedPiece)
+        pickedPiece = null
     var pos = board.mapToItem(pieceManipulator.parent,
                               board.mapFromGameX(pieceModel.gameCoord.x),
                               board.mapFromGameY(pieceModel.gameCoord.y))
     pieceManipulator.x = pos.x - pieceManipulator.width / 2
     pieceManipulator.y = pos.y - pieceManipulator.height / 2
-    pickedPiece = findPiece(pieceModel)
+    pickedPiece = newPickedPiece
 }
