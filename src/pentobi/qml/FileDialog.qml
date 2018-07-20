@@ -104,7 +104,9 @@ Pentobi.Dialog {
                         }
                     icon {
                         source: "icons/filedialog-parent.svg"
-                        width: 16; height: 16
+                        // Icon size is 16x16
+                        width: font.pixelSize < 20 ? 16 : font.pixelSize
+                        color: frame.palette.buttonText
                     }
                 }
                 Label {
@@ -149,7 +151,9 @@ Pentobi.Dialog {
                             Image {
                                 anchors.verticalCenter: parent.verticalCenter
                                 visible: folderModel.isFolder(index)
-                                width: font.pixelSize; height: width
+                                // Icon size is 16x16
+                                width: font.pixelSize < 20 ? 16 : font.pixelSize
+                                height: width
                                 source: "icons/filedialog-folder.svg"
                                 sourceSize { width: width; height: height }
                             }
