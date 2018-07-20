@@ -403,31 +403,27 @@ QByteArray GameModel::encode(const QString& s) const
     return m_textCodec->fromUnicode(s);
 }
 
-GameMove* GameModel::findMove()
+GameMove* GameModel::findMoveNext()
 {
-    auto& bd = getBoard();
-    auto c = bd.get_to_play();
-    if (bd.is_game_over())
-        return new GameMove(this, ColorMove(c, Move::null()));
-    if (! m_legalMoves)
-        m_legalMoves = make_unique<MoveList>();
+    prepareFindMove();
     if (m_legalMoves->empty())
-    {
-        if (! m_marker)
-            m_marker = make_unique<MoveMarker>();
-        bd.gen_moves(c, *m_marker, *m_legalMoves);
-        m_marker->clear(*m_legalMoves);
-        sort(m_legalMoves->begin(), m_legalMoves->end(),
-             [&](Move mv1, Move mv2) {
-                 return getHeuristic(bd, mv1) > getHeuristic(bd, mv2);
-             });
-    }
+        return nullptr;
+    auto i = m_legalMoveIndex >= m_legalMoves->size() ? 0 : m_legalMoveIndex;
+    auto mv = (*m_legalMoves)[i];
+    m_legalMoveIndex = i + 1;
+    return new GameMove(this, ColorMove(getBoard().get_to_play(), mv));
+}
+
+GameMove* GameModel::findMovePrevious()
+{
+    prepareFindMove();
     if (m_legalMoves->empty())
-        return new GameMove(this, ColorMove(c, Move::null()));
-    if (m_legalMoveIndex >= m_legalMoves->size())
-        m_legalMoveIndex = 0;
-    auto mv = (*m_legalMoves)[m_legalMoveIndex++];
-    return new GameMove(this, ColorMove(c, mv));
+        return nullptr;
+    auto i = m_legalMoveIndex > 1 ? m_legalMoveIndex - 2
+                                  : m_legalMoves->size() - 1;
+    auto mv = (*m_legalMoves)[i];
+    m_legalMoveIndex = i + 1;
+    return new GameMove(this, ColorMove(getBoard().get_to_play(), mv));
 }
 
 bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
@@ -1214,6 +1210,26 @@ void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
     preparePieceTransform(pieceModel, mv);
     m_game.play(c, mv, false);
     updateProperties();
+}
+
+void GameModel::prepareFindMove()
+{
+    auto& bd = getBoard();
+    auto c = bd.get_to_play();
+    if (! m_legalMoves)
+        m_legalMoves = make_unique<MoveList>();
+    if (m_legalMoves->empty())
+    {
+        if (! m_marker)
+            m_marker = make_unique<MoveMarker>();
+        bd.gen_moves(c, *m_marker, *m_legalMoves);
+        m_marker->clear(*m_legalMoves);
+        sort(m_legalMoves->begin(), m_legalMoves->end(),
+             [&](Move mv1, Move mv2) {
+                 return getHeuristic(bd, mv1) > getHeuristic(bd, mv2);
+             });
+        m_legalMoveIndex = 0;
+    }
 }
 
 PieceModel* GameModel::preparePiece(GameMove* move)

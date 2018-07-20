@@ -246,7 +246,9 @@ public:
 
     Q_INVOKABLE bool checkAutosaveModifiedOutside();
 
-    Q_INVOKABLE GameMove* findMove();
+    Q_INVOKABLE GameMove* findMoveNext();
+
+    Q_INVOKABLE GameMove* findMovePrevious();
 
     Q_INVOKABLE PieceModel* pickNamedPiece(const QString& name,
                                            PieceModel* currentPickedPiece);
@@ -681,6 +683,8 @@ private:
     void loadRecentFiles();
 
     bool openStream(istream& in);
+
+    void prepareFindMove();
 
     void preparePieceGameCoord(PieceModel* pieceModel, Move mv);
 

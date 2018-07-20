@@ -226,10 +226,6 @@ function exportImage(fileUrl) {
         showInfo(qsTr("Creating image failed."))
 }
 
-function findMove() {
-    gameDisplay.showMove(gameModel.findMove())
-}
-
 function findNextComment() {
     if (gameModel.findNextComment()) {
         gameDisplay.showComment()

@@ -68,7 +68,12 @@ QtObject {
         shortcut: "F6"
         text: qsTr("Find Move")
         enabled: ! gameModel.isGameOver
-        onTriggered: Logic.findMove()
+        onTriggered: gameDisplay.showMove(gameModel.findMoveNext())
+    }
+    property Action actionFindMovePrevious: Action {
+        shortcut: "Shift+F6"
+        enabled: ! gameModel.isGameOver
+        onTriggered: gameDisplay.showMove(gameModel.findMovePrevious())
     }
     property Action actionFindNextComment: Action {
         shortcut: "F3"
