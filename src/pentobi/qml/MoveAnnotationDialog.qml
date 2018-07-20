@@ -54,7 +54,11 @@ Pentobi.Dialog {
 
             anchors.fill: parent
 
-            Label { text: gameModel.positionInfo }
+            Label {
+                text: gameModel.positionInfo
+                elide: Text.ElideRight
+                Layout.fillWidth: true
+            }
             Item { Layout.preferredHeight: 0.5 * font.pixelSize }
             Label { text: qsTr("Annotation:") }
             ComboBox {
