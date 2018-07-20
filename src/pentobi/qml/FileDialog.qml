@@ -59,9 +59,7 @@ Pentobi.Dialog {
             // Qt 5.11 doesn't correctly handle dialog sizing if dialog (incl.
             // frame) is wider than window and Default style never makes footer
             // wider than content (potentially eliding button texts).
-            var w = columnLayout.implicitWidth
-            w = Math.min(w, font.pixelSize * 30)
-            w = Math.max(w, font.pixelSize * 18)
+            var w = font.pixelSize * 30
             w = Math.min(w, 0.9 * rootWindow.width)
             return w
         }
@@ -115,6 +113,7 @@ Pentobi.Dialog {
                 id: frame
 
                 padding: 0.1 * font.pixelSize
+                focusPolicy: Qt.TabFocus
                 Layout.fillWidth: true
                 Layout.preferredHeight: Math.min(font.pixelSize* 40, 0.4 * rootWindow.height)
 
@@ -131,10 +130,11 @@ Pentobi.Dialog {
                     boundsBehavior: Flickable.StopAtBounds
                     highlight: Rectangle { color: frame.palette.highlight }
                     highlightMoveDuration: 0
+                    focus: true
                     delegate: AbstractButton {
                         width: view.width
                         height: 2 * font.pixelSize
-                        onActiveFocusChanged: if (activeFocus) view.currentIndex = index
+                        focusPolicy: Qt.NoFocus
                         contentItem: Row {
                             Image {
                                 anchors.verticalCenter: parent.verticalCenter
@@ -179,6 +179,8 @@ Pentobi.Dialog {
                 }
             }
             ComboBox {
+                id: comboBoxNameFilter
+
                 model: [ nameFilterText, qsTr("All files (*)") ]
                 onCurrentIndexChanged:
                     if (currentIndex == 0) folderModel.nameFilters = [ root.nameFilter ]
