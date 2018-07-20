@@ -8,6 +8,6 @@ MenuItem {
 
     function addMnemonic(text, mnemonic) { return PentobiControls.addMnemonic(text, mnemonic) }
 
-    // implicitWidth should be the same as in Pentobi.Menu
-    implicitWidth: Math.min(font.pixelSize * (isDesktop ? 22 : 18), rootWindow.width)
+    // width should be the same as in Pentobi.Menu
+    width: Math.min(font.pixelSize * (isDesktop ? 22 : 18), rootWindow.width)
 }
