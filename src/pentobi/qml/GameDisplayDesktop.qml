@@ -10,7 +10,7 @@ Item
 {
     id: gameDisplay // Referenced by Piece*.qml
 
-    property var pickedPiece: null
+    property Item pickedPiece
 
     // Values: "last_dot", "last_number", "all_number", "none"
     property string moveMarking: "last_dot"
