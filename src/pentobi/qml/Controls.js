@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------
+/** @file pentobi/qml/Controls.js
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
 // Helper function to add a mnemonic without using an ampersand in the
 // translatable MenuItem text or in the Action text.
 // Ampersands in texts cause problems for translation with Weblate because

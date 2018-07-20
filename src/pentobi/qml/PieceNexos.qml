@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------
+/** @file pentobi/qml/PieceNexos.qml
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
 import QtQuick 2.3
 
 // Piece for Nexos. See PieceClassic for comments.

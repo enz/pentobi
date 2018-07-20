@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------
+/** @file pentobi/qml/GameDisplay.js
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
 function createColorPieces(component, pieceModels) {
     if (pieceModels.length === 0)
         return []

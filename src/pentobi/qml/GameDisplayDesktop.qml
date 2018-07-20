@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------
+/** @file pentobi/qml/GameDisplayDesktop.qml
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
 import QtQuick 2.11
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0

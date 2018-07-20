@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------
+/** @file pentobi/qml/themes/dark/Theme.qml
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
 import QtQml 2.2
 
 QtObject {

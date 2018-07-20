@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------
+/** @file pentobi/qml/Main.js
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
 function about() {
     var url = "https://pentobi.sourceforge.io"
     // Don't use &copy; or &ndash;, this is currently not rendered in the label

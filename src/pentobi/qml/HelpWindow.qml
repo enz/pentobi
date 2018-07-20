@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------
+/** @file pentobi/qml/HelpWindow.qml
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.1
 import QtQuick.Controls 2.3
