@@ -19,6 +19,7 @@ Item
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
     property bool setupMode
+    property alias boardContextMenu: boardContextMenu
 
     // Dummy for compatibility with GameDisplayMobile
     property bool busyIndicatorRunning
@@ -119,6 +120,9 @@ Item
                     height: isTrigon ? Math.sqrt(3) / 2 * width : width
                     anchors.verticalCenter: parent.verticalCenter
                     onClicked: Logic.onBoardClicked(pos)
+                    onRightClicked: Logic.onBoardRightClicked(pos)
+
+                    BoardContextMenu { id: boardContextMenu }
                 }
                 Column {
                     id: rightColumn

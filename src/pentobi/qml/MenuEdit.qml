@@ -13,7 +13,11 @@ Pentobi.Menu {
                           //: Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.
                           qsTr("M"))
         enabled: gameModel.moveNumber > 0
-        onTriggered: moveAnnotationDialog.open()
+        onTriggered: {
+            var dialog = moveAnnotationDialog.get()
+            dialog.moveNumber = gameModel.moveNumber
+            moveAnnotationDialog.open()
+        }
     }
     MenuSeparator { }
     Pentobi.MenuItem {

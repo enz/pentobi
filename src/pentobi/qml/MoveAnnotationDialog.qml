@@ -7,34 +7,39 @@ import "." as Pentobi
 Pentobi.Dialog {
     id: root
 
+    property int moveNumber
+
     title: isDesktop ? qsTr("Move Annotation") : ""
     footer: OkCancelButtons { }
     onOpened: {
-        if (gameModel.moveAnnotation === "")
+        var annotation = gameModel.getMoveAnnotation(moveNumber)
+        if (annotation === "")
             comboBox.currentIndex = 0;
-        else if (gameModel.moveAnnotation === "!!")
+        else if (annotation === "!!")
             comboBox.currentIndex = 1;
-        else if (gameModel.moveAnnotation === "!")
+        else if (annotation === "!")
             comboBox.currentIndex = 2;
-        else if (gameModel.moveAnnotation === "!?")
+        else if (annotation === "!?")
             comboBox.currentIndex = 3;
-        else if (gameModel.moveAnnotation === "?!")
+        else if (annotation === "?!")
             comboBox.currentIndex = 4;
-        else if (gameModel.moveAnnotation === "?")
+        else if (annotation === "?")
             comboBox.currentIndex = 5;
-        else if (gameModel.moveAnnotation === "??")
+        else if (annotation === "??")
             comboBox.currentIndex = 6;
     }
     onAccepted: {
+        var annotation
         switch (comboBox.currentIndex) {
-        case 0: gameModel.moveAnnotation = ""; break
-        case 1: gameModel.moveAnnotation = "!!"; break
-        case 2: gameModel.moveAnnotation = "!"; break
-        case 3: gameModel.moveAnnotation = "!?"; break
-        case 4: gameModel.moveAnnotation = "?!"; break
-        case 5: gameModel.moveAnnotation = "?"; break
-        case 6: gameModel.moveAnnotation = "??"; break
+        case 0: annotation = ""; break
+        case 1: annotation = "!!"; break
+        case 2: annotation = "!"; break
+        case 3: annotation = "!?"; break
+        case 4: annotation = "?!"; break
+        case 5: annotation = "?"; break
+        case 6: annotation = "??"; break
         }
+        gameModel.setMoveAnnotation(moveNumber, annotation)
     }
 
     Item {
@@ -54,11 +59,7 @@ Pentobi.Dialog {
 
             anchors.fill: parent
 
-            Label {
-                text: gameModel.positionInfo
-                elide: Text.ElideRight
-                Layout.fillWidth: true
-            }
+            Label { text: qsTr("Move %1").arg(moveNumber) }
             Item { Layout.preferredHeight: 0.5 * font.pixelSize }
             Label { text: qsTr("Annotation:") }
             ComboBox {

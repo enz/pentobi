@@ -148,6 +148,15 @@ function onBoardClicked(pos) {
     pickedPiece = piece
 }
 
+function onBoardRightClicked(pos) {
+    dropCommentFocus()
+    var n = gameModel.getMoveNumberAt(pos)
+    if (n < 0)
+        return
+    boardContextMenu.moveNumber = n
+    boardContextMenu.popup()
+}
+
 function shiftPiece(dx, dy) {
     movePiece(pieceManipulator.x + dx * board.gridWidth / 2,
               pieceManipulator.y + dy * board.gridHeight / 2)

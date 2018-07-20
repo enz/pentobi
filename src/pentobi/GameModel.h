@@ -68,7 +68,6 @@ class GameModel
     Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
     Q_PROPERTY(QString lastInputOutputError READ lastInputOutputError)
     Q_PROPERTY(QString file READ file NOTIFY fileChanged)
-    Q_PROPERTY(QString moveAnnotation READ moveAnnotation WRITE setMoveAnnotation NOTIFY moveAnnotationChanged)
     Q_PROPERTY(QStringList recentFiles READ recentFiles NOTIFY recentFilesChanged)
     Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(int nuPlayers READ nuPlayers NOTIFY nuPlayersChanged)
@@ -153,6 +152,8 @@ public:
 
     Q_INVOKABLE bool findNextCommentContinueFromRoot();
 
+    Q_INVOKABLE int getMoveNumberAt(const QPoint& pos);
+
     Q_INVOKABLE QString getPlayerString(int color);
 
     Q_INVOKABLE QString getVariationInfo() const;
@@ -186,6 +187,8 @@ public:
 
     Q_INVOKABLE void undo();
 
+    Q_INVOKABLE QString getMoveAnnotation(int moveNumber);
+
     Q_INVOKABLE void goBeginning();
 
     Q_INVOKABLE void goBackward();
@@ -217,6 +220,9 @@ public:
     Q_INVOKABLE bool save(const QString& file);
 
     Q_INVOKABLE bool saveAsciiArt(const QString& file);
+
+    Q_INVOKABLE void setMoveAnnotation(int moveNumber,
+                                       const QString& annotation);
 
     Q_INVOKABLE void makeMainVar();
 
@@ -273,8 +279,6 @@ public:
     const QString& lastInputOutputError() const { return m_lastInputOutputError; }
 
     const QString& file() const { return m_file; }
-
-    const QString& moveAnnotation() const { return m_moveAnnotation; }
 
     const QString& comment() const { return m_comment; }
 
@@ -371,7 +375,8 @@ public:
 
     void setIsModified(bool isModified);
 
-    void setMoveAnnotation(const QString& annotation);
+    void setMoveAnnotationAtNode(const SgfNode& node,
+                                 const QString& annotation);
 
     void setPlayerName0(const QString& name);
 
@@ -419,8 +424,6 @@ signals:
     void altPlayerChanged();
 
     void fileChanged();
-
-    void moveAnnotationChanged();
 
     void points0Changed();
 
@@ -530,8 +533,6 @@ private:
     QString m_lastInputOutputError;
 
     QString m_file;
-
-    QString m_moveAnnotation;
 
     QString m_playerName0;
 
@@ -668,6 +669,8 @@ private:
 
     PieceModel* findUnplayedPieceModel(Color c, Piece piece);
 
+    ColorMove getMoveAt(const QPoint& pos) const;
+
     QList<PieceModel*>& getPieceModels(Color c);
 
     void initGame(Variant variant);
@@ -702,8 +705,6 @@ private:
     void updateIsGameEmpty();
 
     void updateIsModified();
-
-    void updateMoveAnnotation();
 
     PieceModel* updatePiece(Color c, Move mv,
                             array<bool, Board::max_pieces>& isPlayed);

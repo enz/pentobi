@@ -159,20 +159,12 @@ PieceModel* GameModel::addEmpty(const QPoint& pos)
 {
     if (! checkSetupAllowed())
         return nullptr;
+    auto move = getMoveAt(pos);
+    if (move.is_null())
+        return nullptr;
+    auto c = move.color;
+    auto mv = move.move;
     auto& bd = getBoard();
-    auto& geo = bd.get_geometry();
-    if (pos.x() < 0 || pos.y() < 0)
-        return nullptr;
-    auto x = static_cast<unsigned>(pos.x());
-    auto y = static_cast<unsigned>(pos.y());
-    if (! geo.is_onboard(x, y))
-        return nullptr;
-    auto p = geo.get_point(x, y);
-    auto s = bd.get_point_state(p);
-    if (s.is_empty())
-        return nullptr;
-    auto c = s.to_color();
-    auto mv = bd.get_move_at(p);
     LIBBOARDGAME_ASSERT(bd.get_setup().placements[c].contains(mv));
     auto gameCoord = getGameCoord(bd, mv);
     PieceModel* result = nullptr;
@@ -576,6 +568,57 @@ Variant GameModel::getInitialGameVariant()
     if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
         variant = Variant::duo;
     return variant;
+}
+
+QString GameModel::getMoveAnnotation(int moveNumber)
+{
+    if (moveNumber <= 0)
+        return {};
+    auto node = get_move_node(m_game.get_tree(), m_game.get_current(),
+                              static_cast<unsigned>(moveNumber));
+    if (node == nullptr)
+        return {};
+    return get_move_annotation(*node);
+}
+
+ColorMove GameModel::getMoveAt(const QPoint& pos) const
+{
+    auto& bd = getBoard();
+    auto& geo = bd.get_geometry();
+    if (pos.x() < 0 || pos.y() < 0)
+        return ColorMove::null();
+    if (! geo.is_onboard(pos.x(), pos.y()))
+        return ColorMove::null();
+    auto p = geo.get_point(static_cast<unsigned>(pos.x()),
+                           static_cast<unsigned>(pos.y()));
+    auto s = bd.get_point_state(p);
+    if (s.is_empty())
+        return ColorMove::null();
+    auto c = s.to_color();
+    auto mv = bd.get_move_at(p);
+    return {c, mv};
+}
+
+int GameModel::getMoveNumberAt(const QPoint& pos)
+{
+    auto move = getMoveAt(pos);
+    if (move.is_null())
+        return -1;
+    auto n = m_moveNumber;
+    auto& tree = m_game.get_tree();
+    auto node = &m_game.get_current();
+    do
+    {
+        if (tree.has_move(*node))
+        {
+            if (tree.get_move(*node) == move)
+                return n;
+            --n;
+        }
+        node = node->get_parent_or_null();
+    }
+    while (node != nullptr);
+    return -1;
 }
 
 QList<PieceModel*>& GameModel::getPieceModels(Color c)
@@ -1370,24 +1413,35 @@ void GameModel::setIsModified(bool isModified)
     updateIsModified();
 }
 
-void GameModel::setMoveAnnotation(const QString& annotation)
+void GameModel::setMoveAnnotationAtNode(const SgfNode& node,
+                                        const QString& annotation)
 {
-    m_game.remove_move_annotation();
+    m_game.remove_move_annotation(node);
     if (annotation == "!")
-        m_game.set_good_move();
+        m_game.set_good_move(node);
     else if (annotation == "!!")
-        m_game.set_good_move(2);
+        m_game.set_good_move(node, 2);
     else if (annotation == "?")
-        m_game.set_bad_move();
+        m_game.set_bad_move(node);
     else if (annotation == "??")
-        m_game.set_bad_move(2);
+        m_game.set_bad_move(node, 2);
     else if (annotation == "!?")
-        m_game.set_interesting_move();
+        m_game.set_interesting_move(node);
     else if (annotation == "?!")
-        m_game.set_doubtful_move();
-    updateMoveAnnotation();
+        m_game.set_doubtful_move(node);
     updatePositionInfo();
     updatePieces();
+}
+
+void GameModel::setMoveAnnotation(int moveNumber, const QString& annotation)
+{
+    if (moveNumber <= 0)
+        return;
+    auto node = get_move_node(m_game.get_tree(), m_game.get_current(),
+                              static_cast<unsigned>(moveNumber));
+    if (node == nullptr)
+        return;
+    setMoveAnnotationAtNode(*node, annotation);
 }
 
 void GameModel::setPlayerName0(const QString& name)
@@ -1562,12 +1616,6 @@ void GameModel::updateIsModified()
             && (! libboardgame_sgf::is_empty(m_game.get_tree())
                 || ! m_file.isEmpty());
     set(m_isModified, isModified, &GameModel::isModifiedChanged);
-}
-
-void GameModel::updateMoveAnnotation()
-{
-    QString moveAnnotation = get_move_annotation(m_game.get_current());
-    set(m_moveAnnotation, moveAnnotation, &GameModel::moveAnnotationChanged);
 }
 
 PieceModel* GameModel::updatePiece(Color c, Move mv,
@@ -1816,7 +1864,6 @@ void GameModel::updateProperties()
     set(m_isGameOver, isGameOver, &GameModel::isGameOverChanged);
     updateIsGameEmpty();
     updateIsModified();
-    updateMoveAnnotation();
     updatePieces();
     set(m_comment, decode(m_game.get_comment()), &GameModel::commentChanged);
     set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int(),

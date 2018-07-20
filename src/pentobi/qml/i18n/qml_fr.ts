@@ -182,6 +182,17 @@
     </message>
 </context>
 <context>
+    <name>BoardContextMenu</name>
+    <message>
+        <source>Go to Move %1</source>
+        <translation>Aller au coup %1</translation>
+    </message>
+    <message>
+        <source>Move Annotation</source>
+        <translation>Annotation courante</translation>
+    </message>
+</context>
+<context>
     <name>ComputerDialog</name>
     <message>
         <source>Computer Settings</source>
@@ -1247,6 +1258,10 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>Very Bad</source>
         <translation>Très mauvais</translation>
+    </message>
+    <message>
+        <source>Move %1</source>
+        <translation>Coup %1</translation>
     </message>
 </context>
 <context>

@@ -18,6 +18,7 @@ Item
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
     property bool setupMode
+    property alias boardContextMenu: boardContextMenu
     property alias busyIndicatorRunning: busyIndicator.running
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
@@ -85,6 +86,9 @@ Item
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: Logic.onBoardClicked(pos)
+            onRightClicked: Logic.onBoardRightClicked(pos)
+
+            BoardContextMenu { id: boardContextMenu }
         }
         SwipeView {
             id: swipeView

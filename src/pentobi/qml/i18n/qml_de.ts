@@ -182,6 +182,17 @@
     </message>
 </context>
 <context>
+    <name>BoardContextMenu</name>
+    <message>
+        <source>Go to Move %1</source>
+        <translation>Gehe zu Zug %1</translation>
+    </message>
+    <message>
+        <source>Move Annotation</source>
+        <translation>Zugkommentierung</translation>
+    </message>
+</context>
+<context>
     <name>ComputerDialog</name>
     <message>
         <source>Computer Settings</source>
@@ -871,7 +882,7 @@
         <extracomment>Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.
 ----------
 Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
-        <translation>H</translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>Move Variation Up</source>
@@ -1247,6 +1258,10 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>Very Bad</source>
         <translation>Sehr schlecht</translation>
+    </message>
+    <message>
+        <source>Move %1</source>
+        <translation>Zug %1</translation>
     </message>
 </context>
 <context>

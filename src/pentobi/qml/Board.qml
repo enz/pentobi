@@ -69,6 +69,7 @@ Item {
     }
 
     signal clicked(point pos)
+    signal rightClicked(point pos)
 
     function mapFromGameX(x) {
         if (isTrigon) return image.x + (x + 0.5) * gridWidth
@@ -281,11 +282,15 @@ Item {
     }
     MouseArea {
         anchors.fill: root
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked: {
             var pos = mapToGame(Qt.point(mouseX, mouseY))
             pos.x = Math.floor(pos.x)
             pos.y = Math.floor(pos.y)
-            root.clicked(pos)
+            if (mouse.button & Qt.RightButton)
+                root.rightClicked(pos)
+            else
+                root.clicked(pos)
         }
     }
 }
