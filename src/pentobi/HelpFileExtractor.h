@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi_qml/HelpFileExtractor.h
+/** @file pentobi/HelpFileExtractor.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

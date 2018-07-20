@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi_qml/PieceModel.h
+/** @file pentobi/PieceModel.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

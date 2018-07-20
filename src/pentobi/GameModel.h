@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi_qml/GameModel.h
+/** @file pentobi/GameModel.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
