@@ -115,7 +115,7 @@ class GameModel
     Q_PROPERTY(QString playerName3 READ playerName3 WRITE setPlayerName3 NOTIFY playerName3Changed)
     Q_PROPERTY(QString date READ date WRITE setDate NOTIFY dateChanged)
     Q_PROPERTY(QString time READ time WRITE setTime NOTIFY timeChanged)
-    Q_PROPERTY(QString event READ event WRITE setEvent NOTIFY eventChanged)
+    Q_PROPERTY(QString event READ getEvent WRITE setEvent NOTIFY eventChanged)
     Q_PROPERTY(QString round READ getRound WRITE setRound NOTIFY roundChanged)
 
 public:
@@ -366,7 +366,8 @@ public:
 
     const QString& time() const { return m_time; }
 
-    const QString& event() const { return m_event; }
+    // Avoid conflict with
+    const QString& getEvent() const { return m_event; }
 
     // Avoid conflict with round(), which cannot be resolved by using fully
     // qualified std::round(), because with many GCC versions it's in the
