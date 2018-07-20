@@ -66,7 +66,7 @@ Pentobi.Dialog {
                         }
                         onClicked:
                             if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                                computerPlays2 = checked
+                                checkBox2.checked = checked
                         Layout.column: 0
                         Layout.row: 0
                     }
@@ -86,7 +86,7 @@ Pentobi.Dialog {
                         }
                         onClicked:
                             if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                                computerPlays3 = checked
+                                checkBox3.checked = checked
                         Layout.column: gameModel.nuPlayers === 2 ? 0 : 1
                         Layout.row: gameModel.nuPlayers === 2 ? 1 : 0
                     }
