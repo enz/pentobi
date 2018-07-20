@@ -166,7 +166,7 @@ Pentobi.Dialog {
                                            frame.palette.text
                                 horizontalAlignment: Text.AlignHLeft
                                 verticalAlignment: Text.AlignVCenter
-                                elide: Text.ElideRight
+                                elide: Text.ElideMiddle
                             }
                         }
                         onClicked: {
