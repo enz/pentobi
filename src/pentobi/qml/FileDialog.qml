@@ -2,7 +2,7 @@ import QtQuick 2.11
 import QtQuick.Controls 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
-import Qt.labs.folderlistmodel 2.1
+import Qt.labs.folderlistmodel 2.11
 import "." as Pentobi
 import "Main.js" as Logic
 import "Controls.js" as PentobiControls
@@ -16,6 +16,8 @@ Pentobi.Dialog {
     property url fileUrl
     property string nameFilterText
     property string nameFilter
+
+    property url _lastFolder
 
     footer: DialogButtonBox {
         Button {
@@ -95,8 +97,10 @@ Pentobi.Dialog {
                     enabled: hasParent
                     onClicked:
                         if (hasParent) {
+                            _lastFolder = folderModel.folder
                             folderModel.folder = folderModel.parentFolder
-                            view.currentIndex = -1
+                            if (selectExisting)
+                                name = ""
                         }
                     icon {
                         source: "icons/filedialog-parent.svg"
@@ -131,6 +135,9 @@ Pentobi.Dialog {
                     highlight: Rectangle { color: frame.palette.highlight }
                     highlightMoveDuration: 0
                     focus: true
+                    onActiveFocusChanged:
+                        if (activeFocus && currentIndex < 0 && count)
+                            currentIndex = 0
                     delegate: AbstractButton {
                         width: view.width
                         height: 2 * font.pixelSize
@@ -162,11 +169,15 @@ Pentobi.Dialog {
                                     folderModel.folder = folderModel.folder + "/"
                                 folderModel.folder = folderModel.folder + fileName
                                 view.currentIndex = -1
+                                if (selectExisting)
+                                    name = ""
                             }
                             else
                                 name = fileName
                         }
-                        onDoubleClicked: root.accept()
+                        onDoubleClicked:
+                            if (! (folderModel.isFolder(index)))
+                                root.accept()
                     }
 
                     FolderListModel {
@@ -175,6 +186,12 @@ Pentobi.Dialog {
                         folder: root.folder
                         nameFilters: [ root.nameFilter ]
                         showDirsFirst: true
+                        onStatusChanged:
+                            if (status === FolderListModel.Ready) {
+                                var i = folderModel.indexOf(_lastFolder)
+                                if (i >= 0)
+                                    view.currentIndex = i
+                            }
                     }
                 }
             }
