@@ -207,6 +207,7 @@ ApplicationWindow {
     DialogLoader { id: questionMessage; component: Component { QuestionDialog { } } }
     DialogLoader { id: analyzeDialog; component: Component { AnalyzeDialog { } } }
     DialogLoader { id: appearanceDialog; component: Component { AppearanceDialog{ } } }
+    DialogLoader { id: moveAnnotationDialog; component: Component { MoveAnnotationDialog{ } } }
     Loader {
         id: helpWindow
 

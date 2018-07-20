@@ -868,7 +868,9 @@
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.
+----------
+Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
         <translation>H</translation>
     </message>
     <message>
@@ -951,6 +953,10 @@
         <source>O</source>
         <extracomment>Mnemonic for menu item Setup Mode. Leave empty for no mnemonic.</extracomment>
         <translation>O</translation>
+    </message>
+    <message>
+        <source>Move Annotation...</source>
+        <translation>Flytt anmerkning…</translation>
     </message>
 </context>
 <context>
@@ -1126,81 +1132,6 @@
     </message>
 </context>
 <context>
-    <name>MenuMoveAnnotation</name>
-    <message>
-        <source>Move Annotation</source>
-        <translation>Flytt anmerkning</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Ingen</translation>
-    </message>
-    <message>
-        <source>N</source>
-        <extracomment>Mnemonic for menu item Move Annotation/None. Leave empty for no mnemonic.</extracomment>
-        <translation>I</translation>
-    </message>
-    <message>
-        <source>Very good</source>
-        <translation>Veldig god</translation>
-    </message>
-    <message>
-        <source>V</source>
-        <extracomment>Mnemonic for menu item Very good. Leave empty for no mnemonic.</extracomment>
-        <translation>V</translation>
-    </message>
-    <message>
-        <source>Good</source>
-        <translation>God</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <extracomment>Mnemonic for menu item Good. Leave empty for no mnemonic.</extracomment>
-        <translation>G</translation>
-    </message>
-    <message>
-        <source>Interesting</source>
-        <translation>Interessant</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <extracomment>Mnemonic for menu item Interesting. Leave empty for no mnemonic.</extracomment>
-        <translation>E</translation>
-    </message>
-    <message>
-        <source>Doubtful</source>
-        <translation>Tvilsom</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <extracomment>Mnemonic for menu item Doubtful. Leave empty for no mnemonic.</extracomment>
-        <translation>T</translation>
-    </message>
-    <message>
-        <source>Bad</source>
-        <translation>Dårlig</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <extracomment>Mnemonic for menu item Bad. Leave empty for no mnemonic.</extracomment>
-        <translation>D</translation>
-    </message>
-    <message>
-        <source>Very Bad</source>
-        <translation>Veldig dårlig</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <extracomment>Mnemonic for menu Move Annotation. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
-    </message>
-    <message>
-        <source>R</source>
-        <extracomment>Mnemonic for menu item Very Bad. Leave empty for no mnemonic.</extracomment>
-        <translation>R</translation>
-    </message>
-</context>
-<context>
     <name>MenuTools</name>
     <message>
         <source>Tools</source>
@@ -1277,6 +1208,45 @@
     <message>
         <source>Appearance...</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MoveAnnotationDialog</name>
+    <message>
+        <source>Move Annotation</source>
+        <translation>Flytt anmerkning</translation>
+    </message>
+    <message>
+        <source>Annotation:</source>
+        <translation>Anmerkning:</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation>Ingen</translation>
+    </message>
+    <message>
+        <source>Very good</source>
+        <translation>Veldig god</translation>
+    </message>
+    <message>
+        <source>Good</source>
+        <translation>God</translation>
+    </message>
+    <message>
+        <source>Interesting</source>
+        <translation>Interessant</translation>
+    </message>
+    <message>
+        <source>Doubtful</source>
+        <translation>Tvilsom</translation>
+    </message>
+    <message>
+        <source>Bad</source>
+        <translation>Dårlig</translation>
+    </message>
+    <message>
+        <source>Very Bad</source>
+        <translation>Veldig dårlig</translation>
     </message>
 </context>
 <context>

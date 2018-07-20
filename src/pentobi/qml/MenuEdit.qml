@@ -8,7 +8,13 @@ Pentobi.Menu {
                        //: Mnemonic for menu Edit. Leave empty for no mnemonic.
                        qsTr("E"))
 
-    MenuMoveAnnotation { }
+    Pentobi.MenuItem {
+        text: addMnemonic(qsTr("Move Annotation..."),
+                          //: Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.
+                          qsTr("M"))
+        enabled: gameModel.moveNumber > 0
+        onTriggered: moveAnnotationDialog.open()
+    }
     MenuSeparator { }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Make Main Variation"),

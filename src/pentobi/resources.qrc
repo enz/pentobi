@@ -49,9 +49,9 @@
         <file>qml/MenuGo.qml</file>
         <file>qml/MenuHelp.qml</file>
         <file>qml/MenuItem.qml</file>
-        <file>qml/MenuMoveAnnotation.qml</file>
         <file>qml/MenuTools.qml</file>
         <file>qml/MenuView.qml</file>
+        <file>qml/MoveAnnotationDialog.qml</file>
         <file>qml/NavigationButtons.qml</file>
         <file>qml/NavigationPanel.qml</file>
         <file>qml/OkButton.qml</file>
