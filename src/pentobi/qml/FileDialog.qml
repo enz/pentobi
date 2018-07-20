@@ -120,10 +120,10 @@ Pentobi.Dialog {
                 focusPolicy: Qt.TabFocus
                 Layout.fillWidth: true
                 Layout.preferredHeight: Math.min(font.pixelSize* 40, 0.4 * rootWindow.height)
-
-                Rectangle {
-                    anchors.fill: parent
+                background: Rectangle {
                     color: frame.palette.base
+                    border.color: frame.activeFocus ? frame.palette.highlight : frame.palette.dark
+                    radius: 2
                 }
                 ListView {
                     id: view
@@ -143,17 +143,19 @@ Pentobi.Dialog {
                         height: 2 * font.pixelSize
                         focusPolicy: Qt.NoFocus
                         contentItem: Row {
+                            spacing: 0.3 * font.pixelSize
+                            leftPadding: 0.2 * font.pixelSize
+
                             Image {
                                 anchors.verticalCenter: parent.verticalCenter
                                 visible: folderModel.isFolder(index)
-                                width: 0.8 * font.pixelSize; height: width
+                                width: font.pixelSize; height: width
                                 source: "icons/filedialog-folder.svg"
                                 sourceSize { width: width; height: height }
                             }
                             Text {
                                 text: index < 0 ? "" : fileName
                                 anchors.verticalCenter: parent.verticalCenter
-                                leftPadding: 0.2 * font.pixelSize
                                 color: view.currentIndex == index ?
                                            frame.palette.highlightedText :
                                            frame.palette.text
@@ -167,8 +169,8 @@ Pentobi.Dialog {
                             if (folderModel.isFolder(index)) {
                                 if (! folderModel.folder.toString().endsWith("/"))
                                     folderModel.folder = folderModel.folder + "/"
+                                _lastFolder = ""
                                 folderModel.folder = folderModel.folder + fileName
-                                view.currentIndex = -1
                                 if (selectExisting)
                                     name = ""
                             }
@@ -191,6 +193,8 @@ Pentobi.Dialog {
                                 var i = folderModel.indexOf(_lastFolder)
                                 if (i >= 0)
                                     view.currentIndex = i
+                                else
+                                    view.currentIndex = -1
                             }
                     }
                 }
