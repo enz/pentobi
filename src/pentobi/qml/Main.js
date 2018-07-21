@@ -309,6 +309,17 @@ function init() {
     rootWindow.isRated = settings.isRated
     rootWindow.wasGenMoveRunning = settings.wasGenMoveRunning
     gameDisplay.createPieces()
+    if (isAndroid) {
+        // Reset default folder if user navigated outside external storage
+        // directory. This might not always appropriate because there are
+        // app-specific writable directories that could be used for storing
+        // files, but those files will be deleted if the app is uninstalled,
+        // we don't want to encourage using them and help unexperienced users
+        // who navigated in the system file tree.
+        var defaultFolder = androidUtils.getDefaultFolder()
+        if (! folder.toString().startsWith(defaultFolder.toString()))
+            folder = defaultFolder
+    }
     if (gameModel.checkFileDeletedOutside())
     {
         showInfo(qsTr("File was deleted by another application."))
