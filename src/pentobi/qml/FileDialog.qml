@@ -25,6 +25,17 @@ Pentobi.Dialog {
 
     property url _lastFolder
 
+    function _selectNameField() {
+        if (! isAndroid) {
+            var pos = name.lastIndexOf(".")
+            if (pos < 0)
+                nameField.selectAll()
+            else
+                nameField.select(0, pos)
+        }
+        view.currentIndex = -1
+    }
+
     footer: DialogButtonBox {
         Button {
             enabled: name.trim().length > 0
@@ -47,16 +58,7 @@ Pentobi.Dialog {
             DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
         }
     }
-    onOpened: {
-        if (! isAndroid) {
-            var pos = name.lastIndexOf(".")
-            if (pos < 0)
-                nameField.selectAll()
-            else
-                nameField.select(0, pos)
-        }
-        view.currentIndex = -1
-    }
+    onOpened: _selectNameField()
     onAccepted: {
         folder = folderModel.folder
         fileUrl = folder + "/" + name
@@ -189,12 +191,18 @@ Pentobi.Dialog {
                                 if (selectExisting)
                                     name = ""
                             }
-                            else
+                            else if (selectExisting)
                                 name = fileName
                         }
                         onDoubleClicked:
-                            if (! (folderModel.isFolder(index)))
-                                root.accept()
+                            if (! (folderModel.isFolder(index))) {
+                                if (selectExisting)
+                                    root.accept()
+                                else {
+                                    name = fileName
+                                    _selectNameField()
+                                }
+                            }
                     }
 
                     FolderListModel {
