@@ -4,8 +4,8 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef PENTOBI_QML_HELP_FILE_EXTRACTOR_H
-#define PENTOBI_QML_HELP_FILE_EXTRACTOR_H
+#ifndef PENTOBI_HELP_FILE_EXTRACTOR_H
+#define PENTOBI_HELP_FILE_EXTRACTOR_H
 
 // Needed in the header because moc_*.cpp does not include config.h
 #ifdef HAVE_CONFIG_H
@@ -32,4 +32,4 @@ public:
 
 //-----------------------------------------------------------------------------
 
-#endif // PENTOBI_QML_HELP_FILE_EXTRACTOR_H
+#endif // PENTOBI_HELP_FILE_EXTRACTOR_H

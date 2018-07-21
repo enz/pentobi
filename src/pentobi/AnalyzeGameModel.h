@@ -4,8 +4,8 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef PENTOBI_QML_ANALYZE_GAME_MODEL_H
-#define PENTOBI_QML_ANALYZE_GAME_MODEL_H
+#ifndef PENTOBI_ANALYZE_GAME_MODEL_H
+#define PENTOBI_ANALYZE_GAME_MODEL_H
 
 // Needed in the header because moc_*.cpp does not include config.h
 #ifdef HAVE_CONFIG_H
@@ -118,4 +118,4 @@ private:
 
 //-----------------------------------------------------------------------------
 
-#endif // PENTOBI_QML_ANALYZE_GAME_MODEL_H
+#endif // PENTOBI_ANALYZE_GAME_MODEL_H
