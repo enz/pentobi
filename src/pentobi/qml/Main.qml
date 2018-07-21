@@ -37,7 +37,7 @@ ApplicationWindow {
     property bool isAndroid: Qt.platform.os === "android"
     property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
-    property url folder: gameModel.getDefaultFolder()
+    property url folder: androidUtils.getDefaultFolder()
 
     property real defaultWidth:
         isAndroid ? Screen.desktopAvailableWidth

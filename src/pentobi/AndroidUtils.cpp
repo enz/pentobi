@@ -10,6 +10,8 @@
 
 #include "AndroidUtils.h"
 
+#include <QStandardPaths>
+
 #ifdef Q_OS_ANDROID
 #include <QtAndroidExtras/QtAndroid>
 #include <QtAndroidExtras/QAndroidJniObject>
@@ -25,6 +27,26 @@ bool AndroidUtils::checkPermission(const QString& permission)
 #else
     Q_UNUSED(permission);
     return true;
+#endif
+}
+
+QUrl AndroidUtils::getDefaultFolder()
+{
+#ifdef Q_OS_ANDROID
+    QUrl fallback("file:///sdcard");
+    auto file = QAndroidJniObject::callStaticObjectMethod(
+                "android/os/Environment", "getExternalStorageDirectory",
+                "()Ljava/io/File;");
+    if (! file.isValid())
+        return fallback;
+    auto fileString = file.callObjectMethod("toString",
+                                            "()Ljava/lang/String;");
+    if (! fileString.isValid())
+        return fallback;
+    return QUrl::fromLocalFile(fileString.toString());
+#else
+    return QUrl::fromLocalFile(
+                QStandardPaths::writableLocation(QStandardPaths::HomeLocation));
 #endif
 }
 
@@ -45,7 +67,7 @@ void AndroidUtils::scanFile(const QString& pathname)
     if (! file.isValid())
         return;
     auto absoluteFile = file.callObjectMethod(
-                "getCanonicalFile", "()Ljava/io/File;", file.object());
+                "getAbsolutePath", "()Ljava/io/File;", file.object());
     if (! absoluteFile.isValid())
         return;
     auto uri = QAndroidJniObject::callStaticObjectMethod(

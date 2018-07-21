@@ -14,6 +14,8 @@
 
 #include <QObject>
 
+#include <QUrl>
+
 //-----------------------------------------------------------------------------
 
 class AndroidUtils
@@ -27,6 +29,13 @@ public:
     /** Calls QtAndroid::checkPermission().
         On platforms other than Android, always returns true. */
     Q_INVOKABLE static bool checkPermission(const QString& permission);
+
+    /** Return a directory for storing files.
+        Avoids a dependency on qt.labs.platform only for StandardPaths and
+        handles Android better. On Android, it returns
+        android.os.Environment.getExternalStorageDirectory(). On other
+        platforms, it returns QStandardPaths::HomeLocation */
+    Q_INVOKABLE static QUrl getDefaultFolder();
 
     /** Request the Android media scanner to scan a file.
         Ensures that the file will be visible via MTP. On platforms other
