@@ -140,7 +140,7 @@ Pentobi.Dialog {
                     clip: true
                     model: folderModel
                     boundsBehavior: Flickable.StopAtBounds
-                    highlight: Rectangle { color: frame.palette.highlight }
+                    highlight: Rectangle { color: frame.palette.mid }
                     highlightMoveDuration: 0
                     focus: true
                     onActiveFocusChanged:
@@ -151,7 +151,7 @@ Pentobi.Dialog {
                         height: 2 * font.pixelSize
                         focusPolicy: Qt.NoFocus
                         background: Rectangle {
-                            color: down ? frame.palette.highlight : "transparent"
+                            color: down ? frame.palette.mid : "transparent"
                         }
                         contentItem: Row {
                             spacing: 0.3 * font.pixelSize
@@ -171,7 +171,7 @@ Pentobi.Dialog {
                                 text: index < 0 ? "" : fileName
                                 anchors.verticalCenter: parent.verticalCenter
                                 color: view.currentIndex == index || down ?
-                                           frame.palette.highlightedText :
+                                           frame.palette.buttonText :
                                            frame.palette.text
                                 horizontalAlignment: Text.AlignHLeft
                                 verticalAlignment: Text.AlignVCenter
