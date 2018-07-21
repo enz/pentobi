@@ -117,12 +117,10 @@ Pentobi.Dialog {
                     }
                 }
             }
-            Item { Layout.preferredHeight: 0.5 * root.font.pixelSize }
             RowLayout {
                 Layout.fillWidth: true
 
                 Label { text: qsTr("Level %1").arg(slider.value) }
-                Item { Layout.preferredWidth: 0.3 * root.font.pixelSize }
                 Slider {
                     id: slider
 
