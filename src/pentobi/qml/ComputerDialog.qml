@@ -28,10 +28,10 @@ Pentobi.Dialog {
         computerPlays1 = checkBox1.checked
         computerPlays2 = checkBox2.checked
         computerPlays3 = checkBox3.checked
-        playerModel.level = slider.value
-        if (! Logic.isComputerToPlay())
+        if (! Logic.isComputerToPlay() || playerModel.level !== slider.value)
             Logic.cancelRunning()
-        else if (! gameModel.isGameOver)
+        playerModel.level = slider.value
+        if (! gameModel.isGameOver)
             Logic.checkComputerMove()
     }
 
