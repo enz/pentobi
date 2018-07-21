@@ -15,7 +15,7 @@ ToolButton {
     opacity: root.enabled ? 1 : 0.5
     display: AbstractButton.IconOnly
     icon {
-        color: theme.colorIcon
+        color: theme.colorSubduedText
         width: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
         height: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
     }
@@ -24,7 +24,7 @@ ToolButton {
     background: Rectangle {
         anchors.fill: root
         visible: down
-        color: theme.backgroundButtonPressed
+        color: theme.colorButtonPressed
     }
     onPressed: if (isDesktop) toolTipSuppressTimer.restart()
     hoverEnabled: true

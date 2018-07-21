@@ -247,7 +247,7 @@ Item {
 
         Text {
             text: getColumnCoord(index)
-            color: theme.fontColorCoordinates
+            color: theme.colorCoordinates
             font.pixelSize: coordinateFontSize
             x: mapFromGameX(index) + (gridWidth - width) / 2
             y: mapFromGameY(-1) + (gridHeight - height) / 2
@@ -258,7 +258,7 @@ Item {
 
         Text {
             text: getColumnCoord(index)
-            color: theme.fontColorCoordinates
+            color: theme.colorCoordinates
             font.pixelSize: coordinateFontSize
             x: mapFromGameX(index) + (gridWidth - width) / 2
             y: mapFromGameY(rows) + (gridHeight - height) / 2
@@ -269,7 +269,7 @@ Item {
 
         Text {
             text: index + 1
-            color: theme.fontColorCoordinates
+            color: theme.colorCoordinates
             font.pixelSize: coordinateFontSize
             x: mapFromGameX(isTrigon ? -1.5 : -1) + (gridWidth - width) / 2
             y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
@@ -280,7 +280,7 @@ Item {
 
         Text {
             text: index + 1
-            color: theme.fontColorCoordinates
+            color: theme.colorCoordinates
             font.pixelSize: coordinateFontSize
             x: mapFromGameX(isTrigon ? columns + 0.5 : columns) + (gridWidth - width) / 2
             y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2

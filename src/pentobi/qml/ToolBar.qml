@@ -28,7 +28,7 @@ RowLayout {
         visible: ! isDesktop
         Layout.fillWidth: true
         Layout.leftMargin: root.height / 10
-        color: theme.toolBarTextColor
+        color: theme.colorText
         elide: Text.ElideRight
         text: {
             if (gameDisplay.setupMode) return qsTr("Setup")
@@ -155,7 +155,7 @@ RowLayout {
             if (isRated) return qsTr("Rated game")
             return Logic.getFileLabel(gameModel.file, gameModel.isModified)
         }
-        color: theme.toolBarTextColor
+        color: theme.colorText
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true

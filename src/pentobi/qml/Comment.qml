@@ -15,15 +15,15 @@ ScrollView {
 
         text: gameModel.comment
         onTextChanged: gameModel.comment = text
-        color: theme.fontColorPosInfo
-        selectionColor: theme.selectionColor
-        selectedTextColor: theme.selectedTextColor
+        color: theme.colorText
+        selectionColor: theme.colorSelection
+        selectedTextColor: theme.colorSelectedText
         selectByMouse: isDesktop
         wrapMode: TextEdit.Wrap
         background: Rectangle {
-            color: theme.backgroundColor
+            color: theme.colorBackground
             border.color: textArea.activeFocus ?
-                              theme.commentBorderColorFocus : theme.commentBorderColor
+                              theme.colorCommentFocus : theme.colorSubduedText
         }
         Keys.onPressed:
             if (event.key === Qt.Key_Tab)

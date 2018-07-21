@@ -59,7 +59,7 @@ ApplicationWindow {
     width: defaultWidth; height: defaultHeight
     x: (Screen.width - defaultWidth) / 2
     y: (Screen.height - defaultHeight) / 2
-    color: theme.backgroundColor
+    color: theme.colorBackground
     //: Main window title if no file is loaded.
     title: qsTr("Pentobi")
     onClosing: {

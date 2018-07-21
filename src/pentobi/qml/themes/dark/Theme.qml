@@ -7,30 +7,25 @@
 import QtQml 2.2
 
 QtObject {
-    property color busyIndicatorColor: fontColorScore
-    property color commentBorderColor: "#5a5756"
-    property color commentBorderColorFocus: "#0066ff"
-    property color messageTextColor: fontColorPosInfo
-    property color messageBackgroundColor: "#333"
-    property color backgroundColor: "#131313"
-    property color fontColorScore: "#C8C1BE"
-    property color fontColorCoordinates: "#A09B99"
-    property color fontColorPosInfo: "#C8C1BE"
+    property color colorBackground: "#131313"
     property color colorBlue: "#0077D2"
-    property color colorYellow: "#e8c616"
-    property color colorRed: "#E63E2C"
+    property color colorButtonPressed: Qt.lighter(colorBackground, 3)
+    property color colorCommentFocus: "#0066ff"
+    property color colorCoordinates: "#A09B99"
     property color colorGreen: "#00C000"
-    property color colorPurple: "#a12CCF"
+    property color colorMessageText: colorText
+    property color colorMessageBase: "#333"
     property color colorOrange: "#F09217"
+    property color colorPurple: "#a12CCF"
+    property color colorRed: "#E63E2C"
+    property color colorScore: "#C8C1BE"
+    property color colorSelectedText: colorBackground
+    property color colorSelection: "#96918f"
     property color colorStartingPoint: "#82777E"
-    property color colorIcon: "#777"
-    property color backgroundButtonPressed: Qt.lighter(backgroundColor, 3)
-    property color selectionColor: "#96918f"
-    property color selectedTextColor: backgroundColor
-    property color toolBarTextColor: fontColorPosInfo
-    property color analyzeBackgroundColor: backgroundColor
-    property color analyzeLineColor: commentBorderColor
-    property color analyzeMiddleLineColor: commentBorderColor
+    property color colorSubduedText: "#777"
+    property color colorText: "#C8C1BE"
+    property color colorYellow: "#e8c616"
+
     property real pieceListOpacity: 0.94
     property real toPlayColorLighter: 1.7
 

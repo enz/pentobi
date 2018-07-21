@@ -54,7 +54,7 @@ Item {
             var h = height
             var ctx = getContext("2d")
 
-            ctx.fillStyle = theme.analyzeBackgroundColor
+            ctx.fillStyle = theme.colorBackground
             ctx.fillRect(0, 0, w, h)
 
             ctx.save()
@@ -74,14 +74,14 @@ Item {
             var bottom =  makeCrispY(h, root.y + margin)
             ctx.moveTo(0, bottom)
             ctx.lineTo(w, bottom)
-            ctx.strokeStyle = theme.analyzeLineColor
+            ctx.strokeStyle = theme.colorSubduedText
             ctx.stroke()
 
             ctx.beginPath()
             var middle =  makeCrispY(h / 2, root.y + margin)
             ctx.moveTo(0, middle)
             ctx.lineTo(w, middle)
-            ctx.strokeStyle = theme.analyzeMiddleLineColor
+            ctx.strokeStyle = theme.colorSubduedText
             ctx.stroke()
 
             var i = root.markMoveNumber
@@ -89,7 +89,7 @@ Item {
                 ctx.beginPath()
                 ctx.moveTo(i * d, 0)
                 ctx.lineTo(i* d, h)
-                ctx.strokeStyle = theme.analyzeLineColor
+                ctx.strokeStyle = theme.colorSubduedText
                 ctx.stroke()
             }
 
@@ -108,7 +108,7 @@ Item {
     Text {
         visible: elements.length === 0 && ! analyzeGameModel.isRunning
         anchors.centerIn: parent
-        color: theme.fontColorPosInfo
+        color: theme.colorSubduedText
         text: qsTr("(No analysis)")
     }
     MouseArea {

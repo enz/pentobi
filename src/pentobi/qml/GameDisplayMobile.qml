@@ -178,7 +178,7 @@ Item
         x: (gameDisplay.width - width) / 2
         y: column.y + swipeView.y + (swipeView.height - height) / 2
         radius: 0.1 * height
-        color: theme.messageBackgroundColor
+        color: theme.colorMessageBase
         implicitWidth: messageText.implicitWidth + 0.5 * messageText.implicitHeight
         implicitHeight: 1.5 * messageText.implicitHeight
 
@@ -188,7 +188,7 @@ Item
             id: messageText
 
             anchors.centerIn: parent
-            color: theme.messageTextColor
+            color: theme.colorMessageText
         }
         Timer {
             id: messageTimer

@@ -188,7 +188,7 @@ Item
                 id: statusText
 
                 opacity: 0
-                color: theme.fontColorPosInfo
+                color: theme.colorText
                 leftPadding: 0.4 * font.pixelSize
                 padding: 0.2 * font.pixelSize
 
@@ -199,7 +199,7 @@ Item
                 id: posInfoText
 
                 text: gameModel.positionInfoShort
-                color: theme.fontColorPosInfo
+                color: theme.colorText
                 rightPadding: 0.4 * font.pixelSize
                 padding: 0.2 * font.pixelSize
             }

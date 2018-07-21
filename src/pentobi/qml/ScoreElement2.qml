@@ -50,7 +50,7 @@ Item {
             else
                 return isFinal ? "<u>%L1</u>".arg(value) : "%L1".arg(value)
         }
-        color: theme.fontColorScore
+        color: theme.colorScore
         width: root.width - point1.width - point2.width - anchors.leftMargin
         anchors {
             left: point2.right

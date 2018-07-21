@@ -32,7 +32,7 @@ BusyIndicator {
                     y: item.height / 2 - height / 2
                     width: 0.15 * item.width; height: width
                     radius: width / 2
-                    color: theme.busyIndicatorColor
+                    color: theme.colorSubduedText
                     transform: [
                         Translate {
                             y: -item.width / 2 + width
