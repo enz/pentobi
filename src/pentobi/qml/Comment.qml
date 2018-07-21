@@ -23,7 +23,7 @@ ScrollView {
         background: Rectangle {
             color: theme.colorBackground
             border.color: textArea.activeFocus ?
-                              theme.colorCommentFocus : theme.colorSubduedText
+                              theme.colorCommentFocus : theme.colorCommentBorder
         }
         Keys.onPressed:
             if (event.key === Qt.Key_Tab)

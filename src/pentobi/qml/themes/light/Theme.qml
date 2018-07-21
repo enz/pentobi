@@ -10,6 +10,7 @@ QtObject {
     property color colorBackground: "#dcdad6"
     property color colorBlue: "#0077D2"
     property color colorButtonPressed: Qt.darker(colorBackground, 1.1)
+    property color colorCommentBorder: "#b4b3b3"
     property color colorCommentFocus: "#0066ff"
     property color colorCoordinates: "#64615E"
     property color colorGreen: "#00C000"
