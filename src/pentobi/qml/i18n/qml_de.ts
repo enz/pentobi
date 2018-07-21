@@ -241,7 +241,11 @@
     </message>
     <message>
         <source>Level:</source>
-        <translation>Spielstufe:</translation>
+        <translation type="vanished">Spielstufe:</translation>
+    </message>
+    <message>
+        <source>Level %1</source>
+        <translation>Stufe %1</translation>
     </message>
 </context>
 <context>

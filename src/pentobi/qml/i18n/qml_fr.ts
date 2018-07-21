@@ -241,7 +241,11 @@
     </message>
     <message>
         <source>Level:</source>
-        <translation>Niveau :</translation>
+        <translation type="vanished">Niveau :</translation>
+    </message>
+    <message>
+        <source>Level %1</source>
+        <translation>Niveau %1</translation>
     </message>
 </context>
 <context>
@@ -828,7 +832,7 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas d&apos;autorisation d&apos;accès au stockage</translation>
     </message>
 </context>
 <context>

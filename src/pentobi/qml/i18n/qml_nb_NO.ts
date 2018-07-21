@@ -241,7 +241,11 @@
     </message>
     <message>
         <source>Level:</source>
-        <translation>Nivå:</translation>
+        <translation type="vanished">Nivå:</translation>
+    </message>
+    <message>
+        <source>Level %1</source>
+        <translation>Nivå %1</translation>
     </message>
 </context>
 <context>
