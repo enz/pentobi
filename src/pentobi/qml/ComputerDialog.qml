@@ -21,14 +21,14 @@ Pentobi.Dialog {
         checkBox1.checked = computerPlays1
         checkBox2.checked = computerPlays2
         checkBox3.checked = computerPlays3
-        spinBox.value = playerModel.level
+        slider.value = playerModel.level
     }
     onAccepted: {
         computerPlays0 = checkBox0.checked
         computerPlays1 = checkBox1.checked
         computerPlays2 = checkBox2.checked
         computerPlays3 = checkBox3.checked
-        playerModel.level = spinBox.value
+        playerModel.level = slider.value
         if (! Logic.isComputerToPlay())
             Logic.cancelRunning()
         else if (! gameModel.isGameOver)
@@ -117,14 +117,18 @@ Pentobi.Dialog {
                     }
                 }
             }
-            Item { Layout.preferredWidth: 0.5 * root.font.pixelSize }
+            Item { Layout.preferredHeight: 0.5 * root.font.pixelSize }
             RowLayout {
-                Label { text: qsTr("Level:") }
-                SpinBox {
-                    id: spinBox
+                Layout.fillWidth: true
+
+                Label { text: qsTr("Level %1").arg(slider.value) }
+                Item { Layout.preferredWidth: 0.3 * root.font.pixelSize }
+                Slider {
+                    id: slider
 
                     enabled: ! isRated
                     from: 1; to: playerModel.maxLevel; stepSize: 1
+                    Layout.fillWidth: true
                 }
             }
         }
