@@ -169,7 +169,7 @@ Pentobi.Dialog {
                                 source: "icons/filedialog-folder.svg"
                                 sourceSize { width: width; height: height }
                             }
-                            Text {
+                            Label {
                                 width: parent.width - parent.spacing - parent.leftPadding
                                 text: index < 0 ? "" : fileName
                                 anchors.verticalCenter: parent.verticalCenter
