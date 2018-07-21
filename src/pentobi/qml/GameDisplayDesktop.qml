@@ -89,7 +89,11 @@ Item
         showStatus(text)
     }
 
-    function showStatus(text) { statusText.text = text; statusText.opacity = 1 }
+    function showStatus(text) {
+        messageTimer.stop()
+        statusText.text = text
+        statusText.opacity = 1
+    }
     function clearStatus() { statusText.opacity = 0 }
 
     onWidthChanged: pickedPiece = null
