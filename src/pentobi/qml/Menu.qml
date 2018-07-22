@@ -17,6 +17,13 @@ Menu {
     cascade: isDesktop
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     delegate: Pentobi.MenuItem { }
+    background: Rectangle {
+        // Note that MenuItem in Qt 5.11 does neither fully use the system
+        // palette, nor make its actually used colors available in its own
+        // palette.
+        color: isDesktop ? palette.window : palette.base
+        border.color: palette.dark
+    }
     // Workaround for QTBUG-69541 (Opened Menu highlights last used item on Android)
     onOpened: if (isAndroid) currentIndex = -1
     // Workaround for QTBUG-69540 (Menu highlights disabled item on click)
