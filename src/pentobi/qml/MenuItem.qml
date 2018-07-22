@@ -33,7 +33,6 @@ MenuItem {
     }
     contentItem: RowLayout {
         spacing: 0.2 * font.pixelSize
-        opacity: enabled ? 1.0 : 0.5
         anchors.fill: parent
 
         Item { implicitWidth: root.indicator.width + 1.1 * spacing }
