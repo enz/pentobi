@@ -834,6 +834,10 @@
         <source>No permission to access storage</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>File was deleted by another application. Discard game?</source>
+        <translation>Filen ble slettet av et annet program. Forkast spill?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

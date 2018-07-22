@@ -713,5 +713,10 @@ function verify(callback)
         showQuestion(qsTr("Discard game?"), callback)
         return
     }
+    else if (gameModel.checkFileDeletedOutside()) {
+        showQuestion(qsTr("File was deleted by another application. Discard game?"),
+                     callback)
+        return
+    }
     callback()
 }

@@ -834,6 +834,10 @@
         <source>No permission to access storage</source>
         <translation>Keine Berechtigung zu Zugriff auf Speicher</translation>
     </message>
+    <message>
+        <source>File was deleted by another application. Discard game?</source>
+        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Spiel verwerfen?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
