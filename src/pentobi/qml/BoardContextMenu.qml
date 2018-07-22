@@ -16,7 +16,7 @@ Pentobi.Menu {
 
     Pentobi.MenuItem {
         width: parent.width
-        enabled: moveNumber !== gameModel.moveNumber
+        enabled: moveNumber !== gameModel.moveNumber && ! isRated
         text: qsTr("Go to Move %1").arg(moveNumber)
         onTriggered: gameModel.gotoMove(moveNumber)
     }
