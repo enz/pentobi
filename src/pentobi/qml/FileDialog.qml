@@ -227,7 +227,7 @@ Pentobi.Dialog {
 
                         property string folderName
 
-                        interval: 150
+                        interval: 100
 
                         onTriggered: {
                             if (! folderModel.folder.toString().endsWith("/"))
