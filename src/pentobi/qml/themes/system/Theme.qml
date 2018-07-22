@@ -21,6 +21,7 @@ Light.Theme {
     property color colorText: palette.text
 
     property real lighterToPlay: 1.5 - colorBackground.hslLightness
+    property real opacityPieceList: colorBackground.hslLightness < 0.5 ? 0.94 : 1
     property real opacitySubduedText: 0.4
 
     function getImage(name) {

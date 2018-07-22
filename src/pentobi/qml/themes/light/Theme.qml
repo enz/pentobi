@@ -26,9 +26,9 @@ Item {
 
     property real lighterToPlay: 0.5
     property real opacityCoordinates: 0.5
+    property real opacityPieceList: 1
     property real opacityScore: 0.7
     property real opacitySubduedText: 0.5
-    property real opacityPieceList: 1
 
     function getImage(name) { return "themes/light/" + name + ".svg" }
 }

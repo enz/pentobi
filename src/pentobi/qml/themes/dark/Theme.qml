@@ -26,9 +26,9 @@ Item {
 
     property real lighterToPlay: 1.7
     property real opacityCoordinates: 0.5
+    property real opacityPieceList: 0.94
     property real opacityScore: 0.7
     property real opacitySubduedText: 0.5
-    property real opacityPieceList: 0.94
 
     function getImage(name) {
         if (name.startsWith("frame-")
