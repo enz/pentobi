@@ -108,6 +108,7 @@ ApplicationWindow {
             id: toolBar
 
             visible: ! (visibility === Window.FullScreen && isAndroid)
+            Layout.fillWidth: true
         }
         Loader {
             id: gameDisplayLoader

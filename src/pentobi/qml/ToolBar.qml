@@ -156,6 +156,9 @@ RowLayout {
             return Logic.getFileLabel(gameModel.file, gameModel.isModified)
         }
         color: theme.colorText
+        elide: Text.ElideRight
+        Layout.fillWidth: true
+
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
@@ -164,10 +167,6 @@ RowLayout {
             ToolTip.delay: 700
             ToolTip.timeout: 9000
         }
-    }
-    Item {
-        visible: isDesktop
-        Layout.fillWidth: true
     }
     Pentobi.Button {
         id: menuButton
