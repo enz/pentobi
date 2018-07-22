@@ -18,7 +18,7 @@ ColumnLayout {
     }
     Text {
         text: gameModel.positionInfo
-        color: theme.colorSubduedText
+        color: theme.colorText
         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     }
     NavigationButtons {
