@@ -54,8 +54,8 @@ ApplicationWindow {
 
     property Actions actions: Actions { }
 
-    minimumWidth: isDesktop ? 560 : 240
-    minimumHeight: isDesktop ? 315 : 301
+    minimumWidth: isDesktop ? 597 : 240
+    minimumHeight: isDesktop ? 365 : 301
     width: defaultWidth; height: defaultHeight
     x: (Screen.width - defaultWidth) / 2
     y: (Screen.height - defaultHeight) / 2
