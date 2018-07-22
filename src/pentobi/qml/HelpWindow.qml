@@ -26,8 +26,8 @@ Window {
             return "qrc:///qml/help/" + lang + "/pentobi/index.html"
         return helpFileExtractor.extract(lang)
     }
-    property real defaultWidth: Math.min(font.pixelSize * 50, Screen.desktopAvailableWidth)
-    property real defaultHeight: Math.min(font.pixelSize * 60, Screen.desktopAvailableHeight)
+    property real defaultWidth: Math.min(font.pixelSize * 40, Screen.desktopAvailableWidth)
+    property real defaultHeight: Math.min(font.pixelSize * 45, Screen.desktopAvailableHeight)
 
     // Instead of initializing webView.url with startUrl, we provide an init
     // function that needs to be called after show() to work around an issue
@@ -36,6 +36,7 @@ Window {
     function init() { if (isAndroid) webView.url = startUrl }
 
     width: defaultWidth; height: defaultHeight
+    minimumWidth: 128; minimumHeight: 128
     x: (Screen.width - defaultWidth) / 2
     y: (Screen.height - defaultHeight) / 2
     title: qsTr("Pentobi Help")
