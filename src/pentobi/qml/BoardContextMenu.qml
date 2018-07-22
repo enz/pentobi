@@ -4,21 +4,24 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick.Controls 2.3
+import "." as Pentobi
 
-Menu {
+Pentobi.Menu {
     property int moveNumber
 
     property string _annotation;
 
+    width: Math.min(font.pixelSize * 15, rootWindow.width)
     onOpened: _annotation = gameModel.getMoveAnnotation(moveNumber)
 
-    MenuItem {
+    Pentobi.MenuItem {
+        width: parent.width
         enabled: moveNumber !== gameModel.moveNumber
         text: qsTr("Go to Move %1").arg(moveNumber)
         onTriggered: gameModel.gotoMove(moveNumber)
     }
-    MenuItem {
+    Pentobi.MenuItem {
+        width: parent.width
         text: _annotation === "" ?
                   qsTr("Move Annotation") :
                   //: The argument is the annotation symbol for the current move
