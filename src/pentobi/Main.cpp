@@ -11,9 +11,9 @@
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QTranslator>
-#include <QtQuickControls2/QQuickStyle>
+#include <QQuickStyle>
 #include <QtQml>
-#include <QtWebView/QtWebView>
+#include <QtWebView>
 #include "AnalyzeGameModel.h"
 #include "AndroidUtils.h"
 #include "GameModel.h"
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("Pentobi");
 #ifdef VERSION
     QCoreApplication::setApplicationVersion(VERSION);
-#endif    
+#endif
     QIcon icon;
     icon.addFile(":/pentobi_icon/pentobi.svg");
     icon.addFile(":/pentobi_icon/pentobi-16.svg");
