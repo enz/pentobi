@@ -136,106 +136,111 @@ Pentobi.Dialog {
                     border.color: frame.activeFocus ? frame.palette.highlight : frame.palette.mid
                     radius: 2
                 }
-                ListView {
-                    id: view
-
+                ScrollView {
                     anchors.fill: parent
-                    clip: true
-                    model: folderModel
-                    boundsBehavior: Flickable.StopAtBounds
-                    highlight: Rectangle {
-                        // Should logically use palette.highlight, but in most
-                        // styles other than the desktop style Fusion,
-                        // palette.highlight is a too flashy color.
-                        color: isDesktop ? palette.highlight : palette.midlight
-                    }
-                    highlightMoveDuration: 0
-                    focus: true
-                    onActiveFocusChanged:
-                        if (activeFocus && currentIndex < 0 && count)
-                            currentIndex = 0
-                    delegate: AbstractButton {
-                        width: view.width
-                        height: 2 * font.pixelSize
-                        focusPolicy: Qt.NoFocus
-                        contentItem: Row {
-                            spacing: 0.3 * font.pixelSize
-                            leftPadding: 0.2 * font.pixelSize
 
-                            Image {
-                                anchors.verticalCenter: parent.verticalCenter
-                                visible: folderModel.isFolder(index)
-                                // Icon size is 16x16
-                                width: font.pixelSize < 20 ? 16 : font.pixelSize
-                                height: width
-                                source: "icons/filedialog-folder.svg"
-                                sourceSize { width: width; height: height }
-                            }
-                            Label {
-                                width: parent.width - parent.spacing - parent.leftPadding
-                                text: index < 0 ? "" : fileName
-                                anchors.verticalCenter: parent.verticalCenter
-                                color: view.currentIndex == index ?
-                                           // See comment at highlight
-                                           (isDesktop ? frame.palette.highlightedText : frame.palette.buttonText) :
-                                           frame.palette.text
-                                horizontalAlignment: Text.AlignHLeft
-                                verticalAlignment: Text.AlignVCenter
-                                elide: Text.ElideMiddle
-                            }
+                    ListView {
+                        id: view
+
+                        anchors.fill: parent
+                        clip: true
+                        model: folderModel
+                        boundsBehavior: Flickable.StopAtBounds
+                        highlight: Rectangle {
+                            // Should logically use palette.highlight, but in
+                            // most styles other than the desktop style Fusion,
+                            // palette.highlight is a too flashy color.
+                            color: isDesktop ? palette.highlight : palette.midlight
                         }
-                        onClicked: {
-                            view.currentIndex = index
-                            if (folderModel.isFolder(index)) {
-                                delayedOpenFolderTimer.folderName = fileName
-                                delayedOpenFolderTimer.restart()
-                            }
-                            else if (selectExisting)
-                                name = fileName
-                        }
-                        onDoubleClicked:
-                            if (! (folderModel.isFolder(index))) {
-                                if (selectExisting)
-                                    root.accept()
-                                else {
-                                    name = fileName
-                                    _selectNameField()
+                        highlightMoveDuration: 0
+                        focus: true
+                        onActiveFocusChanged:
+                            if (activeFocus && currentIndex < 0 && count)
+                                currentIndex = 0
+                        delegate: AbstractButton {
+                            width: view.width
+                            height: 2 * font.pixelSize
+                            focusPolicy: Qt.NoFocus
+                            contentItem: Row {
+                                spacing: 0.3 * font.pixelSize
+                                leftPadding: 0.2 * font.pixelSize
+
+                                Image {
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    visible: folderModel.isFolder(index)
+                                    // Icon size is 16x16
+                                    width: font.pixelSize < 20 ? 16 : font.pixelSize
+                                    height: width
+                                    source: "icons/filedialog-folder.svg"
+                                    sourceSize { width: width; height: height }
+                                }
+                                Label {
+                                    width: parent.width - parent.spacing - parent.leftPadding
+                                    text: index < 0 ? "" : fileName
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    color: view.currentIndex == index ?
+                                               // See comment at highlight
+                                               (isDesktop ? frame.palette.highlightedText
+                                                          : frame.palette.buttonText) :
+                                               frame.palette.text
+                                    horizontalAlignment: Text.AlignHLeft
+                                    verticalAlignment: Text.AlignVCenter
+                                    elide: Text.ElideMiddle
                                 }
                             }
-                    }
-                    FolderListModel {
-                        id: folderModel
-
-                        folder: root.folder
-                        nameFilters: [ root.nameFilter ]
-                        showDirsFirst: true
-                        onStatusChanged:
-                            if (status === FolderListModel.Ready) {
-                                var i = folderModel.indexOf(_lastFolder)
-                                if (i >= 0)
-                                    view.currentIndex = i
-                                else
-                                    view.currentIndex = -1
+                            onClicked: {
+                                view.currentIndex = index
+                                if (folderModel.isFolder(index)) {
+                                    delayedOpenFolderTimer.folderName = fileName
+                                    delayedOpenFolderTimer.restart()
+                                }
+                                else if (selectExisting)
+                                    name = fileName
                             }
-                    }
-                    // Open folder with small delay such that the folder name
-                    // is visibly highlighted when clicked before it opens. We
-                    // can't set view.currentIndex in onPressed, otherwise the
-                    // item is unwantedly highlighted when flicking the list.
-                    Timer {
-                        id: delayedOpenFolderTimer
+                            onDoubleClicked:
+                                if (! (folderModel.isFolder(index))) {
+                                    if (selectExisting)
+                                        root.accept()
+                                    else {
+                                        name = fileName
+                                        _selectNameField()
+                                    }
+                                }
+                        }
+                        FolderListModel {
+                            id: folderModel
 
-                        property string folderName
+                            folder: root.folder
+                            nameFilters: [ root.nameFilter ]
+                            showDirsFirst: true
+                            onStatusChanged:
+                                if (status === FolderListModel.Ready) {
+                                    var i = folderModel.indexOf(_lastFolder)
+                                    if (i >= 0)
+                                        view.currentIndex = i
+                                    else
+                                        view.currentIndex = -1
+                                }
+                        }
+                        // Open folder with small delay such that the folder name
+                        // is visibly highlighted when clicked before it opens. We
+                        // can't set view.currentIndex in onPressed, otherwise the
+                        // item is unwantedly highlighted when flicking the list.
+                        Timer {
+                            id: delayedOpenFolderTimer
 
-                        interval: 100
+                            property string folderName
 
-                        onTriggered: {
-                            if (! folderModel.folder.toString().endsWith("/"))
-                                folderModel.folder = folderModel.folder + "/"
-                            _lastFolder = ""
-                            folderModel.folder = folderModel.folder + folderName
-                            if (selectExisting)
-                                name = ""
+                            interval: 100
+
+                            onTriggered: {
+                                if (! folderModel.folder.toString().endsWith("/"))
+                                    folderModel.folder = folderModel.folder + "/"
+                                _lastFolder = ""
+                                folderModel.folder = folderModel.folder + folderName
+                                if (selectExisting)
+                                    name = ""
+                            }
                         }
                     }
                 }
