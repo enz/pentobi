@@ -20,8 +20,8 @@ Light.Theme {
     property color colorSelection: palette.highlight
     property color colorText: palette.text
 
+    property real lighterToPlay: 1.5 - colorBackground.hslLightness
     property real opacitySubduedText: 0.4
-    property real toPlayColorLighter: 1.5 - colorBackground.hslLightness
 
     function getImage(name) {
         if (name === "pentobi-rated-game" && colorText.hslLightness > 0.5)

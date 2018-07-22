@@ -24,7 +24,7 @@ Item {
         opacity: isAltColor && isFinal ? 0 : 1
         width: (isToPlay ? 1.3 : 1) * pointSize
         border {
-            color: Qt.lighter(color1, theme.toPlayColorLighter)
+            color: Qt.lighter(color1, theme.lighterToPlay)
             width: isToPlay ? Math.max(0.15 * pointSize, 1) : 0
         }
         height: width

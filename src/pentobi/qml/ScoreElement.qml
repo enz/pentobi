@@ -21,7 +21,7 @@ Item {
 
         width: (isToPlay ? 1.3 : 1) * pointSize
         border {
-            color: Qt.lighter(color, theme.toPlayColorLighter)
+            color: Qt.lighter(color, theme.lighterToPlay)
             width: isToPlay ? Math.max(0.15 * pointSize, 1) : 0
         }
         height: width

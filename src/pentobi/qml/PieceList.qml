@@ -13,7 +13,7 @@ Grid {
 
     signal piecePicked(var piece)
 
-    opacity: theme.pieceListOpacity
+    opacity: theme.opacityPieceList
 
     Repeater {
         model: pieces
