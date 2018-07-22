@@ -34,7 +34,8 @@ Item {
         text: ! isFinal ?
                   "%L1".arg(value) :
                   "%1<u>%L2</u>".arg(bonus > 0 ? "*" : "").arg(value)
-        color: theme.colorScore
+        color: theme.colorText
+        opacity: theme.opacityScore
         anchors {
             left: point.right
             leftMargin: (isToPlay ? 0.2 : 0.4) * point.width

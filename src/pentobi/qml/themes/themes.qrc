@@ -135,5 +135,6 @@
 <file>light/triangle-green.svg</file>
 <file>light/triangle-red.svg</file>
 <file>light/triangle-yellow.svg</file>
+<file>system/Theme.qml</file>
 </qresource>
 </RCC>

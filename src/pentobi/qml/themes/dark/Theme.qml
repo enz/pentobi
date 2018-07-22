@@ -4,29 +4,29 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQml 2.2
+import QtQuick 2.11
 
-QtObject {
+Item {
     property color colorBackground: "#131313"
     property color colorBlue: "#0077D2"
     property color colorButtonPressed: Qt.lighter(colorBackground, 3)
     property color colorCommentBorder: "#5a5756"
     property color colorCommentFocus: colorText
-    property color colorCoordinates: "#A09B99"
     property color colorGreen: "#00C000"
     property color colorMessageText: colorText
     property color colorMessageBase: "#333"
     property color colorOrange: "#F09217"
     property color colorPurple: "#a12CCF"
     property color colorRed: "#E63E2C"
-    property color colorScore: "#C8C1BE"
     property color colorSelectedText: colorBackground
     property color colorSelection: "#96918f"
     property color colorStartingPoint: "#82777E"
-    property color colorSubduedText: "#777"
     property color colorText: "#C8C1BE"
     property color colorYellow: "#e8c616"
 
+    property real opacityCoordinates: 0.5
+    property real opacityScore: 0.7
+    property real opacitySubduedText: 0.5
     property real pieceListOpacity: 0.94
     property real toPlayColorLighter: 1.7
 

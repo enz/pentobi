@@ -169,6 +169,11 @@
         <extracomment>Move marking/None</extracomment>
         <translation>Ingen</translation>
     </message>
+    <message>
+        <source>System</source>
+        <extracomment>Name of theme using default system colors</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AsciiArtSaveDialog</name>

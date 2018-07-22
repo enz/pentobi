@@ -202,9 +202,9 @@ function createTheme(themeName) {
     var source = "themes/" + themeName + "/Theme.qml"
     var component = Qt.createComponent(source)
     if (component.status !== Component.Ready) {
-        // In case the settings contained an invalid theme name
-        var source = "themes/light/Theme.qml"
-        var component = Qt.createComponent(source)
+        console.warn("Could not load", source)
+        source = "themes/light/Theme.qml"
+        component = Qt.createComponent(source)
     }
     return component.createObject(rootWindow)
 }

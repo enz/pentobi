@@ -35,7 +35,7 @@ ApplicationWindow {
     property bool initComputerColorsOnNewGame: true
 
     property bool isAndroid: Qt.platform.os === "android"
-    property string themeName: isAndroid ? "dark" : "light"
+    property string themeName: isAndroid ? "dark" : "system"
     property QtObject theme: Logic.createTheme(themeName)
     property url folder: androidUtils.getDefaultFolder()
 

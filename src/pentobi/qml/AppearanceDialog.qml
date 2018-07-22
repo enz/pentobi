@@ -27,6 +27,8 @@ Pentobi.Dialog {
             comboBoxTheme.currentIndex = 2
         else if (themeName === "colorblind-dark")
             comboBoxTheme.currentIndex = 3
+        else if (themeName === "system")
+            comboBoxTheme.currentIndex = 4
         if (gameDisplay.moveMarking === "last_dot")
             comboBoxMoveMarking.currentIndex = 0
         else if (gameDisplay.moveMarking === "last_number")
@@ -46,6 +48,7 @@ Pentobi.Dialog {
         case 1: themeName = "dark"; break
         case 2: themeName = "colorblind-light"; break
         case 3: themeName = "colorblind-light"; break
+        case 4: themeName = "system"; break
         }
         switch (comboBoxMoveMarking.currentIndex) {
         case 0: gameDisplay.moveMarking = "last_dot"; break
@@ -89,7 +92,9 @@ Pentobi.Dialog {
                     qsTr("Light"),
                     qsTr("Dark"),
                     qsTr("Colorblind light"),
-                    qsTr("Colorblind dark")
+                    qsTr("Colorblind dark"),
+                    //: Name of theme using default system colors
+                    qsTr("System"),
                 ]
                 Layout.preferredWidth: font.pixelSize * 15
 

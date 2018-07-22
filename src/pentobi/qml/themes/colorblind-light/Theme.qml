@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQml 2.2
+import QtQml 2.11
 import "../light" as Light
 
 Light.Theme {

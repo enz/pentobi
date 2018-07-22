@@ -66,6 +66,9 @@ Item {
             var d = w / nuBins
             dist = d
 
+            ctx.save()
+            ctx.strokeStyle = theme.colorText
+            ctx.globalAlpha = theme.opacitySubduedText
             ctx.beginPath()
             ctx.lineWidth = Math.max(1, 0.2 * Screen.pixelDensity)
             var top =  makeCrispY(0, root.y + margin)
@@ -74,24 +77,20 @@ Item {
             var bottom =  makeCrispY(h, root.y + margin)
             ctx.moveTo(0, bottom)
             ctx.lineTo(w, bottom)
-            ctx.strokeStyle = theme.colorSubduedText
             ctx.stroke()
-
             ctx.beginPath()
             var middle =  makeCrispY(h / 2, root.y + margin)
             ctx.moveTo(0, middle)
             ctx.lineTo(w, middle)
-            ctx.strokeStyle = theme.colorSubduedText
             ctx.stroke()
-
             var i = root.markMoveNumber
             if (markMoveNumber >= 0 && markMoveNumber <= nuMoves) {
                 ctx.beginPath()
                 ctx.moveTo(i * d, 0)
                 ctx.lineTo(i* d, h)
-                ctx.strokeStyle = theme.colorSubduedText
                 ctx.stroke()
             }
+            ctx.restore()
 
             var value
             var radius = d / 2
@@ -108,7 +107,8 @@ Item {
     Text {
         visible: elements.length === 0 && ! analyzeGameModel.isRunning
         anchors.centerIn: parent
-        color: theme.colorSubduedText
+        color: theme.colorText
+        opacity: theme.opacitySubduedText
         text: qsTr("(No analysis)")
     }
     MouseArea {

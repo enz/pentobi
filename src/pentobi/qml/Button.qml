@@ -12,10 +12,10 @@ import QtQuick.Controls 2.3
 ToolButton {
     id: root
 
-    opacity: root.enabled ? 1 : 0.5
+    opacity: root.enabled ? theme.opacitySubduedText : 0.5 * theme.opacitySubduedText
     display: AbstractButton.IconOnly
     icon {
-        color: theme.colorSubduedText
+        color: theme.colorText
         width: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
         height: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
     }
