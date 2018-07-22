@@ -143,7 +143,12 @@ Pentobi.Dialog {
                     clip: true
                     model: folderModel
                     boundsBehavior: Flickable.StopAtBounds
-                    highlight: Rectangle { color: frame.palette.highlight }
+                    highlight: Rectangle {
+                        // Should logically use palette.highlight, but in most
+                        // styles other than the desktop style Fusion,
+                        // palette.highlight is a too flashy color.
+                        color: isDesktop ? palette.highlight : palette.midlight
+                    }
                     highlightMoveDuration: 0
                     focus: true
                     onActiveFocusChanged:
@@ -154,7 +159,8 @@ Pentobi.Dialog {
                         height: 2 * font.pixelSize
                         focusPolicy: Qt.NoFocus
                         background: Rectangle {
-                            color: down ? frame.palette.highlight : "transparent"
+                            color: down ? (isDesktop ? palette.highlight : palette.midlight)
+                                        : "transparent"
                         }
                         contentItem: Row {
                             spacing: 0.3 * font.pixelSize
@@ -174,7 +180,8 @@ Pentobi.Dialog {
                                 text: index < 0 ? "" : fileName
                                 anchors.verticalCenter: parent.verticalCenter
                                 color: view.currentIndex == index || down ?
-                                           frame.palette.highlightedText :
+                                           // See comment at highlight
+                                           (isDesktop ? frame.palette.highlightedText : frame.palette.buttonText) :
                                            frame.palette.text
                                 horizontalAlignment: Text.AlignHLeft
                                 verticalAlignment: Text.AlignVCenter
