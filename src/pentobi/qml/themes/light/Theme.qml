@@ -7,7 +7,7 @@
 import QtQuick 2.11
 
 Item {
-    property color colorBackground: "#dcdad6"
+    property color colorBackground: "#f3f3f3"
     property color colorBlue: "#0077D2"
     property color colorButtonPressed: Qt.darker(colorBackground, 1.1)
     property color colorCommentBorder: "#b4b3b3"
