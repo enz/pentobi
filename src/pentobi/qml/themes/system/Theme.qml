@@ -22,4 +22,10 @@ Light.Theme {
 
     property real opacitySubduedText: 0.4
     property real toPlayColorLighter: 1.5 - colorBackground.hslLightness
+
+    function getImage(name) {
+        if (name === "pentobi-rated-game" && colorText.hslLightness > 0.5)
+            return "themes/dark/" + name + ".svg"
+        return "themes/light/" + name + ".svg"
+    }
 }
