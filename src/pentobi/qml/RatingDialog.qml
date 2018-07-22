@@ -224,12 +224,15 @@ Pentobi.Dialog {
                         onClicked: openMenu(mouseX, mouseY)
                         onPressAndHold: openMenu(mouseX, mouseY)
 
-                        Menu {
+                        Pentobi.Menu {
                             id: menu
 
                             property int row
 
+                            width: Math.min(font.pixelSize * 14, rootWindow.width)
+
                             Pentobi.MenuItem {
+                                width: parent.width
                                 text: history && menu.row < history.length ?
                                           qsTr("Open Game %1").arg(history[menu.row].number) : ""
                                 onTriggered: {
