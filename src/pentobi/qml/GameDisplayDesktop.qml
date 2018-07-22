@@ -162,7 +162,6 @@ Item
                     Column {
                         width: parent.width
                         height: parent.height - scoreDisplay.height - pieceSelector.height - 2 * parent.spacing
-                        spacing: parent.spacing
 
                         Comment {
                             id: comment
