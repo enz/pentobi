@@ -1561,5 +1561,9 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>Rated game</source>
         <translation>Vurdert spill</translation>
     </message>
+    <message>
+        <source>Start a rated game</source>
+        <translation>Start vurdert spill</translation>
+    </message>
 </context>
 </TS>

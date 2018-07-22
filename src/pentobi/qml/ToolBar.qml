@@ -54,6 +54,13 @@ RowLayout {
         ToolTip.text: qsTr("Start a new game")
     }
     Pentobi.Button {
+        visible: isDesktop
+        padding: buttonPadding
+        icon.source: "icons/pentobi-rated-game.svg"
+        action: actions.actionNewRated
+        ToolTip.text: qsTr("Start a rated game")
+    }
+    Pentobi.Button {
         padding: buttonPadding
         icon.source: "icons/pentobi-undo.svg"
         action: actions.actionUndo

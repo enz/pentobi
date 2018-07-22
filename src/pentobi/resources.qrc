@@ -14,6 +14,7 @@
         <file>qml/icons/pentobi-next-variation.svg</file>
         <file>qml/icons/pentobi-play.svg</file>
         <file>qml/icons/pentobi-previous-variation.svg</file>
+        <file>qml/icons/pentobi-rated-game.svg</file>
         <file>qml/icons/pentobi-undo.svg</file>
         <file>qml/Actions.qml</file>
         <file>qml/AnalyzeDialog.qml</file>
