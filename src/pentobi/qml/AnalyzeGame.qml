@@ -68,7 +68,6 @@ Item {
 
             ctx.save()
             ctx.strokeStyle = theme.colorText
-            ctx.globalAlpha = theme.opacitySubduedText
             ctx.beginPath()
             ctx.lineWidth = Math.max(1, 0.2 * Screen.pixelDensity)
             var top =  makeCrispY(0, root.y + margin)
