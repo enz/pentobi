@@ -50,7 +50,7 @@ RowLayout {
         padding: buttonPadding
         icon.source: "icons/pentobi-newgame.svg"
         action: actions.actionNew
-        visible: ! isAndroid || enabled
+        visible: isDesktop || enabled
         ToolTip.text: qsTr("Start a new game")
     }
     Pentobi.Button {
@@ -64,21 +64,21 @@ RowLayout {
         padding: buttonPadding
         icon.source: "icons/pentobi-undo.svg"
         action: actions.actionUndo
-        visible: ! isAndroid || enabled
+        visible: isDesktop || enabled
         ToolTip.text: action.text.replace("&", "")
     }
     Pentobi.Button {
         padding: buttonPadding
         icon.source: "icons/pentobi-computer-colors.svg"
         action: actions.actionComputerSettings
-        visible: ! isAndroid || enabled
+        visible: isDesktop || enabled
         ToolTip.text: qsTr("Set the colors played by the computer")
     }
     Pentobi.Button {
         padding: buttonPadding
         icon.source: "icons/pentobi-play.svg"
         action: actions.actionPlay
-        visible: ! isAndroid || enabled
+        visible: isDesktop || enabled
         ToolTip.text: {
             var toPlay = gameModel.toPlay
             if (gameModel.gameVariant === "classic_3" && toPlay === 3)
