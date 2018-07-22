@@ -149,7 +149,7 @@ RowLayout {
         Layout.preferredWidth: parent.height / 2
     }
     Label {
-        visible: isDesktop && (isRated || gameModel.file !== "" || gameDisplay.setupMode)
+        visible: isDesktop
         text: {
             if (gameDisplay.setupMode) return qsTr("Setup mode")
             if (isRated) return qsTr("Rated game")
