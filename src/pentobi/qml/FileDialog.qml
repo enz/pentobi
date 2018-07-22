@@ -158,10 +158,6 @@ Pentobi.Dialog {
                         width: view.width
                         height: 2 * font.pixelSize
                         focusPolicy: Qt.NoFocus
-                        background: Rectangle {
-                            color: down ? (isDesktop ? palette.highlight : palette.midlight)
-                                        : "transparent"
-                        }
                         contentItem: Row {
                             spacing: 0.3 * font.pixelSize
                             leftPadding: 0.2 * font.pixelSize
@@ -179,7 +175,7 @@ Pentobi.Dialog {
                                 width: parent.width - parent.spacing - parent.leftPadding
                                 text: index < 0 ? "" : fileName
                                 anchors.verticalCenter: parent.verticalCenter
-                                color: view.currentIndex == index || down ?
+                                color: view.currentIndex == index ?
                                            // See comment at highlight
                                            (isDesktop ? frame.palette.highlightedText : frame.palette.buttonText) :
                                            frame.palette.text
@@ -188,8 +184,8 @@ Pentobi.Dialog {
                                 elide: Text.ElideMiddle
                             }
                         }
-                        onPressed: view.currentIndex = index
                         onClicked: {
+                            view.currentIndex = index
                             if (folderModel.isFolder(index)) {
                                 if (! folderModel.folder.toString().endsWith("/"))
                                     folderModel.folder = folderModel.folder + "/"
