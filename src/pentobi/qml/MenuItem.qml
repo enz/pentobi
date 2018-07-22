@@ -16,7 +16,7 @@ MenuItem {
     function addMnemonic(text, mnemonic) { return PentobiControls.addMnemonic(text, mnemonic) }
 
     // width should be the same as in Pentobi.Menu
-    width: Math.min(font.pixelSize * (isDesktop ? 22 : 18), rootWindow.width)
+    width: Math.min(font.pixelSize * (isDesktop ? 23 : 18), rootWindow.width)
     height: font.pixelSize * (isDesktop ? 1.9 : 2.2)
     background: Rectangle {
         anchors.fill: parent

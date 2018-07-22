@@ -13,7 +13,7 @@ Menu {
     function addMnemonic(text, mnemonic) { return PentobiControls.addMnemonic(text, mnemonic) }
 
     // width should be the same as in Pentobi.MenuItem
-    width: Math.min(font.pixelSize * (isDesktop ? 22 : 18), rootWindow.width)
+    width: Math.min(font.pixelSize * (isDesktop ? 23 : 18), rootWindow.width)
     cascade: isDesktop
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     delegate: Pentobi.MenuItem { }
