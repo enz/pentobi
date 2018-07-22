@@ -48,7 +48,7 @@ RowLayout {
     }
     Pentobi.Button {
         padding: buttonPadding
-        icon.source: "icons/pentobi-newgame.svg"
+        icon.source: theme.getImage("pentobi-newgame")
         action: actions.actionNew
         visible: isDesktop || enabled
         ToolTip.text: qsTr("Start a new game")
@@ -56,27 +56,27 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        icon.source: "icons/pentobi-rated-game.svg"
+        icon.source: theme.getImage("pentobi-rated-game")
         action: actions.actionNewRated
         ToolTip.text: qsTr("Start a rated game")
     }
     Pentobi.Button {
         padding: buttonPadding
-        icon.source: "icons/pentobi-undo.svg"
+        icon.source: theme.getImage("pentobi-undo")
         action: actions.actionUndo
         visible: isDesktop || enabled
         ToolTip.text: action.text.replace("&", "")
     }
     Pentobi.Button {
         padding: buttonPadding
-        icon.source: "icons/pentobi-computer-colors.svg"
+        icon.source: theme.getImage("pentobi-computer-colors")
         action: actions.actionComputerSettings
         visible: isDesktop || enabled
         ToolTip.text: qsTr("Set the colors played by the computer")
     }
     Pentobi.Button {
         padding: buttonPadding
-        icon.source: "icons/pentobi-play.svg"
+        icon.source: theme.getImage("pentobi-play")
         action: actions.actionPlay
         visible: isDesktop || enabled
         ToolTip.text: {
@@ -94,14 +94,14 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        icon.source: "icons/pentobi-beginning.svg"
+        icon.source: theme.getImage("pentobi-beginning")
         action: actions.actionBeginning
         ToolTip.text: qsTr("Go to beginning of game")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        icon.source: "icons/pentobi-backward10.svg"
+        icon.source: theme.getImage("pentobi-backward10")
         action: actions.actionBackward10
         autoRepeat: true
         ToolTip.text: qsTr("Go ten moves backward")
@@ -109,7 +109,7 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        icon.source: "icons/pentobi-backward.svg"
+        icon.source: theme.getImage("pentobi-backward")
         action: actions.actionBackward
         autoRepeat: true
         ToolTip.text: qsTr("Go one move backward")
@@ -117,7 +117,7 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        icon.source: "icons/pentobi-forward.svg"
+        icon.source: theme.getImage("pentobi-forward")
         action: actions.actionForward
         autoRepeat: true
         ToolTip.text: qsTr("Go one move forward")
@@ -125,7 +125,7 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        icon.source: "icons/pentobi-forward10.svg"
+        icon.source: theme.getImage("pentobi-forward10")
         action: actions.actionForward10
         autoRepeat: true
         ToolTip.text: qsTr("Go ten moves forward")
@@ -133,21 +133,21 @@ RowLayout {
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        icon.source: "icons/pentobi-end.svg"
+        icon.source: theme.getImage("pentobi-end")
         action: actions.actionEnd
         ToolTip.text: qsTr("Go to end of moves")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        icon.source: "icons/pentobi-previous-variation.svg"
+        icon.source: theme.getImage("pentobi-previous-variation")
         action: actions.actionPrevVar
         ToolTip.text: qsTr("Go to previous variation")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
-        icon.source: "icons/pentobi-next-variation.svg"
+        icon.source: theme.getImage("pentobi-next-variation")
         action: actions.actionNextVar
         ToolTip.text: qsTr("Go to next variation")
     }
@@ -179,7 +179,7 @@ RowLayout {
         id: menuButton
 
         padding: buttonPadding
-        icon.source: "icons/menu.svg"
+        icon.source: theme.getImage("menu")
         checkable: true
         down: menu.opened
         onClicked: if (menu.opened) menu.close();

@@ -2,20 +2,6 @@
     <qresource prefix="/">
         <file>qml/icons/filedialog-folder.svg</file>
         <file>qml/icons/filedialog-parent.svg</file>
-        <file>qml/icons/menu.svg</file>
-        <file>qml/icons/pentobi-backward.svg</file>
-        <file>qml/icons/pentobi-backward10.svg</file>
-        <file>qml/icons/pentobi-beginning.svg</file>
-        <file>qml/icons/pentobi-computer-colors.svg</file>
-        <file>qml/icons/pentobi-end.svg</file>
-        <file>qml/icons/pentobi-forward.svg</file>
-        <file>qml/icons/pentobi-forward10.svg</file>
-        <file>qml/icons/pentobi-newgame.svg</file>
-        <file>qml/icons/pentobi-next-variation.svg</file>
-        <file>qml/icons/pentobi-play.svg</file>
-        <file>qml/icons/pentobi-previous-variation.svg</file>
-        <file>qml/icons/pentobi-rated-game.svg</file>
-        <file>qml/icons/pentobi-undo.svg</file>
         <file>qml/Actions.qml</file>
         <file>qml/AnalyzeDialog.qml</file>
         <file>qml/AnalyzeGame.qml</file>

@@ -37,7 +37,9 @@ QtObject {
                 || name.startsWith("piece-manipulator")
                 || name.startsWith("quarter-square-")
                 || name.startsWith("square-")
-                || name.startsWith("triangle-"))
+                || name.startsWith("triangle-")
+                || (name.startsWith("pentobi-") && name !== "pentobi-rated-game")
+                || name === "menu")
             return "themes/light/" + name + ".svg"
         return "themes/dark/" + name + ".svg"
     }
