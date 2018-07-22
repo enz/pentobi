@@ -832,7 +832,7 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation>Pas d&apos;autorisation d&apos;accès au stockage</translation>
+        <translation>Aucune autorisation d&apos;accès au stockage</translation>
     </message>
 </context>
 <context>
