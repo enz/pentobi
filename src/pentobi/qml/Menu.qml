@@ -22,7 +22,7 @@ Menu {
         // palette, nor make its actually used colors available in its own
         // palette.
         color: isDesktop ? palette.window : palette.base
-        border.color: palette.dark
+        border.color: palette.mid
     }
     // Workaround for QTBUG-69541 (Opened Menu highlights last used item on Android)
     onOpened: if (isAndroid) currentIndex = -1
