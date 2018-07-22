@@ -187,12 +187,8 @@ Pentobi.Dialog {
                         onClicked: {
                             view.currentIndex = index
                             if (folderModel.isFolder(index)) {
-                                if (! folderModel.folder.toString().endsWith("/"))
-                                    folderModel.folder = folderModel.folder + "/"
-                                _lastFolder = ""
-                                folderModel.folder = folderModel.folder + fileName
-                                if (selectExisting)
-                                    name = ""
+                                delayedOpenFolderTimer.folderName = fileName
+                                delayedOpenFolderTimer.restart()
                             }
                             else if (selectExisting)
                                 name = fileName
@@ -207,7 +203,6 @@ Pentobi.Dialog {
                                 }
                             }
                     }
-
                     FolderListModel {
                         id: folderModel
 
@@ -222,6 +217,26 @@ Pentobi.Dialog {
                                 else
                                     view.currentIndex = -1
                             }
+                    }
+                    // Open folder with small delay such that the folder name
+                    // is visibly highlighted when clicked before it opens. We
+                    // can't set view.currentIndex in onPressed, otherwise the
+                    // item is unwantedly highlighted when flicking the list.
+                    Timer {
+                        id: delayedOpenFolderTimer
+
+                        property string folderName
+
+                        interval: 150
+
+                        onTriggered: {
+                            if (! folderModel.folder.toString().endsWith("/"))
+                                folderModel.folder = folderModel.folder + "/"
+                            _lastFolder = ""
+                            folderModel.folder = folderModel.folder + folderName
+                            if (selectExisting)
+                                name = ""
+                        }
                     }
                 }
             }
