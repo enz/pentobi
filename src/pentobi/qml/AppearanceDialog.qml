@@ -64,7 +64,7 @@ Pentobi.Dialog {
             currentMoveMarkingIndex = 0
         comboBoxMoveMarking.currentIndex = currentMoveMarkingIndex
     }
-    onApplied: {
+    onAccepted: {
         gameDisplay.showCoordinates = checkBoxCoordinates.checked
         gameModel.showVariations = checkBoxShowVariations.checked
         gameDisplay.enableAnimations = checkBoxAnimatePieces.checked
@@ -82,7 +82,10 @@ Pentobi.Dialog {
         case 3: gameDisplay.moveMarking = "none"; break
         }
     }
-    onAccepted: onApplied()
+    onApplied: {
+        onAccepted()
+        onOpened()
+    }
 
     Flickable {
         implicitWidth: Math.min(font.pixelSize * 18, 0.9 * rootWindow.width)
