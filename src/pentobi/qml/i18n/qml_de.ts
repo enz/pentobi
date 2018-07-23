@@ -203,6 +203,30 @@
     </message>
 </context>
 <context>
+    <name>ButtonCancel</name>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
+    </message>
+</context>
+<context>
+    <name>ButtonOk</name>
+    <message>
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
+        <translation>O</translation>
+    </message>
+</context>
+<context>
     <name>ComputerDialog</name>
     <message>
         <source>Computer Settings</source>
@@ -243,10 +267,6 @@
     <message>
         <source>Red</source>
         <translation>Rot</translation>
-    </message>
-    <message>
-        <source>Level:</source>
-        <translation type="vanished">Spielstufe:</translation>
     </message>
     <message>
         <source>Level %1</source>
@@ -1297,39 +1317,6 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>Move %1</source>
         <translation>Zug %1</translation>
-    </message>
-</context>
-<context>
-    <name>OkButton</name>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
-    </message>
-</context>
-<context>
-    <name>OkCancelButtons</name>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
     </message>
 </context>
 <context>

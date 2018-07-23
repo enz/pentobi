@@ -16,7 +16,10 @@ Pentobi.Dialog {
     property int moveNumber
 
     title: isDesktop ? qsTr("Move Annotation") : ""
-    footer: OkCancelButtons { }
+    footer: DialogButtonBox {
+        Pentobi.ButtonCancel { }
+        Pentobi.ButtonOk { }
+    }
     onOpened: {
         var annotation = gameModel.getMoveAnnotation(moveNumber)
         if (annotation === "")

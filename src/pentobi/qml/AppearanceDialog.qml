@@ -14,7 +14,10 @@ Pentobi.Dialog {
     id: root
 
     title: isDesktop ? qsTr("Appearance") : ""
-    footer: OkCancelButtons { }
+    footer: DialogButtonBox {
+        Pentobi.ButtonCancel { }
+        Pentobi.ButtonOk { }
+    }
     onOpened: {
         checkBoxCoordinates.checked = gameDisplay.showCoordinates
         checkBoxShowVariations.checked = gameModel.showVariations

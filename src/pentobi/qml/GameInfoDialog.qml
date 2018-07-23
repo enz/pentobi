@@ -11,7 +11,10 @@ import "." as Pentobi
 
 Pentobi.Dialog {
     title: isDesktop ? qsTr("Game Info") : ""
-    footer: OkCancelButtons { }
+    footer: DialogButtonBox {
+        Pentobi.ButtonCancel { }
+        Pentobi.ButtonOk { }
+    }
     onOpened: {
         textFieldPlayerName0.text = gameModel.playerName0
         textFieldPlayerName1.text = gameModel.playerName1

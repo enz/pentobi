@@ -25,7 +25,7 @@ Pentobi.Dialog {
         timer.restart()
     }
 
-    footer: OkButton { }
+    footer: DialogButtonBox { Pentobi.ButtonOk { } }
 
     Item {
         implicitWidth: {

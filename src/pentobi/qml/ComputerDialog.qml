@@ -15,7 +15,10 @@ Pentobi.Dialog {
     id: root
 
     title: isDesktop ? qsTr("Computer Settings") : ""
-    footer: OkCancelButtons { }
+    footer: DialogButtonBox {
+        Pentobi.ButtonCancel { }
+        Pentobi.ButtonOk { }
+    }
     onOpened: {
         checkBox0.checked = computerPlays0
         checkBox1.checked = computerPlays1

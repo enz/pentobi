@@ -13,7 +13,10 @@ Pentobi.Dialog {
     id: root
 
     title: isDesktop ? qsTr("Go to Move") : ""
-    footer: OkCancelButtons { }
+    footer: DialogButtonBox {
+        Pentobi.ButtonCancel { }
+        Pentobi.ButtonOk { }
+    }
     onOpened: textField.selectAll()
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
