@@ -62,6 +62,7 @@ Pentobi.Dialog {
             TextField {
                 id: textFieldPlayerName0
 
+                selectByMouse: true
                 Layout.fillWidth: true
             }
             Label {
@@ -78,6 +79,7 @@ Pentobi.Dialog {
             TextField {
                 id: textFieldPlayerName1
 
+                selectByMouse: true
                 Layout.fillWidth: true
             }
             Label {
@@ -88,6 +90,7 @@ Pentobi.Dialog {
                 id: textFieldPlayerName2
 
                 visible: gameModel.nuPlayers > 2
+                selectByMouse: true
                 Layout.fillWidth: true
             }
             Label {
@@ -98,30 +101,35 @@ Pentobi.Dialog {
                 id: textFieldPlayerName3
 
                 visible: gameModel.nuPlayers > 3
+                selectByMouse: true
                 Layout.fillWidth: true
             }
             Label { text: qsTr("Date:") }
             TextField {
                 id: textFieldDate
 
+                selectByMouse: true
                 Layout.fillWidth: true
             }
             Label { text: qsTr("Time:") }
             TextField {
                 id: textFieldTime
 
+                selectByMouse: true
                 Layout.fillWidth: true
             }
             Label { text: qsTr("Event:") }
             TextField {
                 id: textFieldEvent
 
+                selectByMouse: true
                 Layout.fillWidth: true
             }
             Label { text: qsTr("Round:") }
             TextField {
                 id: textFieldRound
 
+                selectByMouse: true
                 Layout.fillWidth: true
             }
         }

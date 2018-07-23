@@ -44,6 +44,7 @@ Pentobi.Dialog {
                 text: exportImageWidth
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{ bottom: 0; top: 32767 }
+                selectByMouse: true
                 Layout.preferredWidth: font.pixelSize * 7
             }
             Item { Layout.fillWidth: true }

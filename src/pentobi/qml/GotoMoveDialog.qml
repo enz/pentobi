@@ -44,6 +44,7 @@ Pentobi.Dialog {
                 text: gameModel.moveNumber === 0 ?
                           gameModel.moveNumber + gameModel.movesLeft : gameModel.moveNumber
                 focus: true
+                selectByMouse: true
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{
                     bottom: 0
