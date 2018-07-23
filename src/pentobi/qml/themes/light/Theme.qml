@@ -23,8 +23,6 @@ Item {
     property color colorStartingPoint: "#767074"
     property color colorText: "#282625"
     property color colorYellow: "#e8c616"
-
-    property real lighterToPlay: 0.5
     property real opacityCoordinates: 0.5
     property real opacityPieceList: 1
     property real opacityScore: 0.7
