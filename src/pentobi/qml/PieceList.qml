@@ -13,7 +13,10 @@ Grid {
 
     signal piecePicked(var piece)
 
-    opacity: theme.opacityPieceList
+    // We want to show the unplayed pieces in slightly less bright colors
+    // than the pieces on the board, but not if colorBackground is light
+    // otherwise the contrast to the yellow pieces is not strong enough.
+    opacity: 0.94 + 0.06 * theme.colorBackground.hslLightness
 
     Repeater {
         model: pieces

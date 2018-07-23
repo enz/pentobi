@@ -19,7 +19,6 @@ Light.Theme {
     property color colorSelectedText: palette.highlightedText
     property color colorSelection: palette.highlight
     property color colorText: palette.text
-    property real opacityPieceList: colorBackground.hslLightness < 0.5 ? 0.94 : 1
     property real opacitySubduedText: 0.4
 
     function getImage(name) {
