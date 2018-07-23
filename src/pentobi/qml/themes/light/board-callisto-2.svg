@@ -1,128 +1,128 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="224" width="224" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="224" height="224" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
  <g id="a" transform="translate(98)">
-  <rect width="14" fill="#9a9298" height="14"/>
+  <rect width="14" height="14" fill="#9a9298"/>
   <path d="m0.5 13.5v-13h13l-0.5 0.5h-12v12z" fill="#767074"/>
   <path d="m0.5 13.5h13v-13l-0.5 0.5v12h-12z" fill="#b2acb0"/>
  </g>
- <use xlink:href="#a" transform="translate(-98 98)"/>
- <use xlink:href="#a" transform="translate(-98 112)"/>
- <use xlink:href="#a" transform="translate(-70 70)"/>
- <use xlink:href="#a" transform="translate(-70 140)"/>
- <use xlink:href="#a" transform="translate(-56 56)"/>
- <use xlink:href="#a" transform="translate(-56 70)"/>
- <use xlink:href="#a" transform="translate(-56 140)"/>
- <use xlink:href="#a" transform="translate(-56 154)"/>
- <use xlink:href="#a" transform="translate(-42 42)"/>
- <use xlink:href="#a" transform="translate(-42 56)"/>
- <use xlink:href="#a" transform="translate(-42 70)"/>
- <use xlink:href="#a" transform="translate(-42 140)"/>
- <use xlink:href="#a" transform="translate(-42 154)"/>
- <use xlink:href="#a" transform="translate(-42 168)"/>
- <use xlink:href="#a" transform="translate(-28 28)"/>
- <use xlink:href="#a" transform="translate(-28 42)"/>
- <use xlink:href="#a" transform="translate(-28 56)"/>
- <use xlink:href="#a" transform="translate(-28 70)"/>
- <use xlink:href="#a" transform="translate(-28 84)"/>
- <use xlink:href="#a" transform="translate(-28 126)"/>
- <use xlink:href="#a" transform="translate(-28 140)"/>
- <use xlink:href="#a" transform="translate(-28 154)"/>
- <use xlink:href="#a" transform="translate(-28 168)"/>
- <use xlink:href="#a" transform="translate(-28 182)"/>
- <use xlink:href="#a" transform="translate(-14 70)"/>
- <use xlink:href="#a" transform="translate(-14 140)"/>
- <use xlink:href="#a" transform="translate(0 210)"/>
- <use xlink:href="#a" transform="translate(14)"/>
- <use xlink:href="#a" transform="translate(14 210)"/>
- <use xlink:href="#a" transform="translate(28 70)"/>
- <use xlink:href="#a" transform="translate(28 140)"/>
- <use xlink:href="#a" transform="translate(42 28)"/>
- <use xlink:href="#a" transform="translate(42 42)"/>
- <use xlink:href="#a" transform="translate(42 56)"/>
- <use xlink:href="#a" transform="translate(42 70)"/>
- <use xlink:href="#a" transform="translate(42 84)"/>
- <use xlink:href="#a" transform="translate(42 126)"/>
- <use xlink:href="#a" transform="translate(42 140)"/>
- <use xlink:href="#a" transform="translate(42 154)"/>
- <use xlink:href="#a" transform="translate(42 168)"/>
- <use xlink:href="#a" transform="translate(42 182)"/>
- <use xlink:href="#a" transform="translate(56 42)"/>
- <use xlink:href="#a" transform="translate(56 56)"/>
- <use xlink:href="#a" transform="translate(56 70)"/>
- <use xlink:href="#a" transform="translate(56 140)"/>
- <use xlink:href="#a" transform="translate(56 154)"/>
- <use xlink:href="#a" transform="translate(56 168)"/>
- <use xlink:href="#a" transform="translate(70 56)"/>
- <use xlink:href="#a" transform="translate(70 70)"/>
- <use xlink:href="#a" transform="translate(70 140)"/>
- <use xlink:href="#a" transform="translate(70 154)"/>
- <use xlink:href="#a" transform="translate(84 70)"/>
- <use xlink:href="#a" transform="translate(84 140)"/>
- <use xlink:href="#a" transform="translate(112,98)"/>
- <use xlink:href="#a" transform="translate(112,112)"/>
+ <use transform="translate(-98 98)" xlink:href="#a"/>
+ <use transform="translate(-98 112)" xlink:href="#a"/>
+ <use transform="translate(-70 70)" xlink:href="#a"/>
+ <use transform="translate(-70 140)" xlink:href="#a"/>
+ <use transform="translate(-56 56)" xlink:href="#a"/>
+ <use transform="translate(-56 70)" xlink:href="#a"/>
+ <use transform="translate(-56 140)" xlink:href="#a"/>
+ <use transform="translate(-56 154)" xlink:href="#a"/>
+ <use transform="translate(-42 42)" xlink:href="#a"/>
+ <use transform="translate(-42 56)" xlink:href="#a"/>
+ <use transform="translate(-42 70)" xlink:href="#a"/>
+ <use transform="translate(-42 140)" xlink:href="#a"/>
+ <use transform="translate(-42 154)" xlink:href="#a"/>
+ <use transform="translate(-42 168)" xlink:href="#a"/>
+ <use transform="translate(-28 28)" xlink:href="#a"/>
+ <use transform="translate(-28 42)" xlink:href="#a"/>
+ <use transform="translate(-28 56)" xlink:href="#a"/>
+ <use transform="translate(-28 70)" xlink:href="#a"/>
+ <use transform="translate(-28 84)" xlink:href="#a"/>
+ <use transform="translate(-28 126)" xlink:href="#a"/>
+ <use transform="translate(-28 140)" xlink:href="#a"/>
+ <use transform="translate(-28 154)" xlink:href="#a"/>
+ <use transform="translate(-28 168)" xlink:href="#a"/>
+ <use transform="translate(-28 182)" xlink:href="#a"/>
+ <use transform="translate(-14 70)" xlink:href="#a"/>
+ <use transform="translate(-14 140)" xlink:href="#a"/>
+ <use transform="translate(0 210)" xlink:href="#a"/>
+ <use transform="translate(14)" xlink:href="#a"/>
+ <use transform="translate(14 210)" xlink:href="#a"/>
+ <use transform="translate(28 70)" xlink:href="#a"/>
+ <use transform="translate(28 140)" xlink:href="#a"/>
+ <use transform="translate(42 28)" xlink:href="#a"/>
+ <use transform="translate(42 42)" xlink:href="#a"/>
+ <use transform="translate(42 56)" xlink:href="#a"/>
+ <use transform="translate(42 70)" xlink:href="#a"/>
+ <use transform="translate(42 84)" xlink:href="#a"/>
+ <use transform="translate(42 126)" xlink:href="#a"/>
+ <use transform="translate(42 140)" xlink:href="#a"/>
+ <use transform="translate(42 154)" xlink:href="#a"/>
+ <use transform="translate(42 168)" xlink:href="#a"/>
+ <use transform="translate(42 182)" xlink:href="#a"/>
+ <use transform="translate(56 42)" xlink:href="#a"/>
+ <use transform="translate(56 56)" xlink:href="#a"/>
+ <use transform="translate(56 70)" xlink:href="#a"/>
+ <use transform="translate(56 140)" xlink:href="#a"/>
+ <use transform="translate(56 154)" xlink:href="#a"/>
+ <use transform="translate(56 168)" xlink:href="#a"/>
+ <use transform="translate(70 56)" xlink:href="#a"/>
+ <use transform="translate(70 70)" xlink:href="#a"/>
+ <use transform="translate(70 140)" xlink:href="#a"/>
+ <use transform="translate(70 154)" xlink:href="#a"/>
+ <use transform="translate(84 70)" xlink:href="#a"/>
+ <use transform="translate(84 140)" xlink:href="#a"/>
+ <use transform="translate(112,98)" xlink:href="#a"/>
+ <use transform="translate(112,112)" xlink:href="#a"/>
  <g id="b" transform="translate(98 70)">
-  <rect width="14" fill="#9a9298" height="14"/>
-  <rect height="12" width="12" y="1" x="1" fill="#696267"/>
+  <rect width="14" height="14" fill="#9a9298"/>
+  <rect x="1" y="1" width="12" height="12" fill="#696267"/>
   <path d="m0.5 13.5v-13h13l-0.5 0.5h-12v12z" fill="#5a5458"/>
   <path d="m0.5 13.5h13v-13l-0.5 0.5v12h-12z" fill="#797276"/>
  </g>
- <use xlink:href="#b" transform="translate(-28,28)"/>
- <use xlink:href="#b" transform="translate(-28,42)"/>
- <use xlink:href="#b" transform="translate(-14,14)"/>
- <use xlink:href="#b" transform="translate(-14,28)"/>
- <use xlink:href="#b" transform="translate(-14,42)"/>
- <use xlink:href="#b" transform="translate(-14,56)"/>
- <use xlink:href="#b" transform="translate(0,14)"/>
- <use xlink:href="#b" transform="translate(0,28)"/>
- <use xlink:href="#b" transform="translate(0,42)"/>
- <use xlink:href="#b" transform="translate(0,56)"/>
- <use xlink:href="#b" transform="translate(0,70)"/>
- <use xlink:href="#b" transform="translate(14)"/>
- <use xlink:href="#b" transform="translate(14,14)"/>
- <use xlink:href="#b" transform="translate(14,28)"/>
- <use xlink:href="#b" transform="translate(14,42)"/>
- <use xlink:href="#b" transform="translate(14,56)"/>
- <use xlink:href="#b" transform="translate(14,70)"/>
- <use xlink:href="#b" transform="translate(28,14)"/>
- <use xlink:href="#b" transform="translate(28,28)"/>
- <use xlink:href="#b" transform="translate(28,42)"/>
- <use xlink:href="#b" transform="translate(28,56)"/>
- <use xlink:href="#b" transform="translate(42,28)"/>
- <use xlink:href="#b" transform="translate(42,42)"/>
+ <use transform="translate(-28,28)" xlink:href="#b"/>
+ <use transform="translate(-28,42)" xlink:href="#b"/>
+ <use transform="translate(-14,14)" xlink:href="#b"/>
+ <use transform="translate(-14,28)" xlink:href="#b"/>
+ <use transform="translate(-14,42)" xlink:href="#b"/>
+ <use transform="translate(-14,56)" xlink:href="#b"/>
+ <use transform="translate(0,14)" xlink:href="#b"/>
+ <use transform="translate(0,28)" xlink:href="#b"/>
+ <use transform="translate(0,42)" xlink:href="#b"/>
+ <use transform="translate(0,56)" xlink:href="#b"/>
+ <use transform="translate(0,70)" xlink:href="#b"/>
+ <use transform="translate(14)" xlink:href="#b"/>
+ <use transform="translate(14,14)" xlink:href="#b"/>
+ <use transform="translate(14,28)" xlink:href="#b"/>
+ <use transform="translate(14,42)" xlink:href="#b"/>
+ <use transform="translate(14,56)" xlink:href="#b"/>
+ <use transform="translate(14,70)" xlink:href="#b"/>
+ <use transform="translate(28,14)" xlink:href="#b"/>
+ <use transform="translate(28,28)" xlink:href="#b"/>
+ <use transform="translate(28,42)" xlink:href="#b"/>
+ <use transform="translate(28,56)" xlink:href="#b"/>
+ <use transform="translate(42,28)" xlink:href="#b"/>
+ <use transform="translate(42,42)" xlink:href="#b"/>
  <g id="d">
-  <use id="c" xlink:href="#a" transform="translate(-14 14)"/>
-  <use xlink:href="#c" transform="translate(14)" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(28)" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(42)" y="0" x="0"/>
+  <use id="c" transform="translate(-14 14)" xlink:href="#a"/>
+  <use transform="translate(14)" xlink:href="#c"/>
+  <use transform="translate(28)" xlink:href="#c"/>
+  <use transform="translate(42)" xlink:href="#c"/>
  </g>
- <use xlink:href="#d" transform="translate(0,14)" y="0" x="0"/>
- <use xlink:href="#d" transform="translate(0,28)" y="0" x="0"/>
- <use xlink:href="#d" transform="translate(0,42)" y="0" x="0"/>
+ <use transform="translate(0,14)" xlink:href="#d"/>
+ <use transform="translate(0,28)" xlink:href="#d"/>
+ <use transform="translate(0,42)" xlink:href="#d"/>
  <g transform="translate(0,140)">
-  <use xlink:href="#a" width="100%" transform="translate(-14,14)" height="100%" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(14)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(28)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(42)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#d" transform="translate(0,14)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#d" transform="translate(0,28)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#d" transform="translate(0,42)" height="100%" width="100%" y="0" x="0"/>
+  <use transform="translate(-14,14)" width="100%" height="100%" xlink:href="#a"/>
+  <use transform="translate(14)" width="100%" height="100%" xlink:href="#c"/>
+  <use transform="translate(28)" width="100%" height="100%" xlink:href="#c"/>
+  <use transform="translate(42)" width="100%" height="100%" xlink:href="#c"/>
+  <use transform="translate(0,14)" width="100%" height="100%" xlink:href="#d"/>
+  <use transform="translate(0,28)" width="100%" height="100%" xlink:href="#d"/>
+  <use transform="translate(0,42)" width="100%" height="100%" xlink:href="#d"/>
  </g>
  <g transform="translate(70,70)">
-  <use width="100%" xlink:href="#a" transform="translate(-14,14)" height="100%" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(14)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(28)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(42)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#d" transform="translate(0,14)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#d" transform="translate(0,28)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#d" transform="translate(0,42)" height="100%" width="100%" y="0" x="0"/>
+  <use transform="translate(-14,14)" width="100%" height="100%" xlink:href="#a"/>
+  <use transform="translate(14)" width="100%" height="100%" xlink:href="#c"/>
+  <use transform="translate(28)" width="100%" height="100%" xlink:href="#c"/>
+  <use transform="translate(42)" width="100%" height="100%" xlink:href="#c"/>
+  <use transform="translate(0,14)" width="100%" height="100%" xlink:href="#d"/>
+  <use transform="translate(0,28)" width="100%" height="100%" xlink:href="#d"/>
+  <use transform="translate(0,42)" width="100%" height="100%" xlink:href="#d"/>
  </g>
  <g transform="translate(-70,70)">
-  <use xlink:href="#a" width="100%" transform="translate(-14,14)" height="100%" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(14)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(28)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#c" transform="translate(42)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#d" transform="translate(0,14)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#d" transform="translate(0,28)" height="100%" width="100%" y="0" x="0"/>
-  <use xlink:href="#d" transform="translate(0,42)" height="100%" width="100%" y="0" x="0"/>
+  <use transform="translate(-14,14)" width="100%" height="100%" xlink:href="#a"/>
+  <use transform="translate(14)" width="100%" height="100%" xlink:href="#c"/>
+  <use transform="translate(28)" width="100%" height="100%" xlink:href="#c"/>
+  <use transform="translate(42)" width="100%" height="100%" xlink:href="#c"/>
+  <use transform="translate(0,14)" width="100%" height="100%" xlink:href="#d"/>
+  <use transform="translate(0,28)" width="100%" height="100%" xlink:href="#d"/>
+  <use transform="translate(0,42)" width="100%" height="100%" xlink:href="#d"/>
  </g>
 </svg>
