@@ -58,12 +58,9 @@ Pentobi.Dialog {
             ColumnLayout {
                 Label { text: qsTr("Computer plays:") }
                 GridLayout {
-                    columns: 2; rows: 2
+                    columns: gameModel.nuPlayers <= 2 ? 1 : 2
 
                     Row {
-                        Layout.column: 0
-                        Layout.row: 0
-
                         Rectangle {
                             width: font.pixelSize; height: width
                             radius: width / 2
@@ -105,9 +102,6 @@ Pentobi.Dialog {
                         }
                     }
                     Row {
-                        Layout.column: gameModel.nuPlayers === 2 ? 0 : 1
-                        Layout.row: gameModel.nuPlayers === 2 ? 1 : 0
-
                         Rectangle {
                             width: font.pixelSize; height: width
                             radius: width / 2
@@ -151,28 +145,7 @@ Pentobi.Dialog {
                         }
                     }
                     Row {
-                        visible: gameModel.nuPlayers > 2
-                        Layout.row: gameModel.nuColors === 3 ? 1 : 1
-                        Layout.column: gameModel.nuColors === 3 ? 0 : 1
-                        Layout.rowSpan: gameModel.nuColors === 3 ? 2 : 1
-
-                        Rectangle {
-                            width: font.pixelSize; height: width
-                            radius: width / 2
-                            anchors.verticalCenter: parent.verticalCenter
-                            color: theme.colorRed
-                        }
-                        CheckBox {
-                            id: checkBox2
-
-                            enabled: ! isRated
-                            text: qsTr("Red")
-                        }
-                    }
-                    Row {
                         visible: gameModel.nuPlayers > 3
-                        Layout.column: 0
-                        Layout.row: 1
 
                         Rectangle {
                             width: font.pixelSize; height: width
@@ -185,6 +158,22 @@ Pentobi.Dialog {
 
                             enabled: ! isRated
                             text: qsTr("Green")
+                        }
+                    }
+                    Row {
+                        visible: gameModel.nuPlayers > 2
+
+                        Rectangle {
+                            width: font.pixelSize; height: width
+                            radius: width / 2
+                            anchors.verticalCenter: parent.verticalCenter
+                            color: theme.colorRed
+                        }
+                        CheckBox {
+                            id: checkBox2
+
+                            enabled: ! isRated
+                            text: qsTr("Red")
                         }
                     }
                 }
