@@ -21,18 +21,12 @@ Item {
         theme.colorRed,
         theme.colorGreen
     ]
-    property real margin: makeCrispY(width / 60, y)
     property int markMoveNumber: analyzeGameModel.markMoveNumber
     property QtObject theme
 
+    property real margin
     // Distance between moves on the x axis
     property real dist
-
-    // Modify dy, such that y + dy is an odd multiple of 0.5 for crisp
-    // horizontal lines with linewidth 1
-    function makeCrispY(dy, y) {
-        return dy - ((y + dy) - Math.floor((y + dy) * Screen.devicePixelRatio) / Screen.devicePixelRatio) + 0.5
-    }
 
     onElementsChanged: {
         analyzeGameModel.markCurrentMove(gameModel)
@@ -52,55 +46,47 @@ Item {
             var nuMoves = elements.length
             var w = width
             var h = height
+            var m = 0.015 * width
             var ctx = getContext("2d")
-
             ctx.fillStyle = theme.colorBackground
             ctx.fillRect(0, 0, w, h)
-
+            ctx.strokeStyle = theme.colorCommentBorder
+            ctx.beginPath()
+            ctx.moveTo(0, m)
+            ctx.lineTo(w, m)
+            ctx.moveTo(0, h - m)
+            ctx.lineTo(w, h - m)
+            ctx.stroke()
+            ctx.beginPath()
+            ctx.moveTo(0, h / 2)
+            ctx.lineTo(w, h / 2)
+            ctx.stroke()
             ctx.save()
-            ctx.translate(margin, margin)
-            w -= 2 * margin
-            h -= 2 * margin
+            w -= 2 * m
+            h -= 2 * m
             // Use the whole width unless few moves have been played
             var nuBins = Math.ceil(Math.max(nuMoves, 60))
             var d = w / nuBins
-            dist = d
-
-            ctx.save()
-            ctx.strokeStyle = theme.colorText
-            ctx.beginPath()
-            ctx.lineWidth = Math.max(1, 0.2 * Screen.pixelDensity)
-            var top =  makeCrispY(0, root.y + margin)
-            ctx.moveTo(0, top)
-            ctx.lineTo(w, top)
-            var bottom =  makeCrispY(h, root.y + margin)
-            ctx.moveTo(0, bottom)
-            ctx.lineTo(w, bottom)
-            ctx.stroke()
-            ctx.beginPath()
-            var middle =  makeCrispY(h / 2, root.y + margin)
-            ctx.moveTo(0, middle)
-            ctx.lineTo(w, middle)
-            ctx.stroke()
-            var i = root.markMoveNumber
-            if (markMoveNumber >= 0 && markMoveNumber <= nuMoves) {
+            ctx.translate(m, m)
+            var n = markMoveNumber
+            if (n >= 0 && n <= nuMoves) {
                 ctx.beginPath()
-                ctx.moveTo(i * d, 0)
-                ctx.lineTo(i* d, h)
+                ctx.moveTo(n * d, 0)
+                ctx.lineTo(n * d, h)
                 ctx.stroke()
             }
-            ctx.restore()
-
-            var value
             var radius = d / 2
+            var i
             for (i = 0; i < nuMoves; ++i) {
                 ctx.beginPath()
                 ctx.fillStyle = color[elements[i].moveColor]
-                ctx.arc(i * d, h - elements[i].value * h, radius, 0, 2 * Math.PI)
+                ctx.arc(i * d, h - elements[i].value * h,
+                        radius, 0, 2 * Math.PI)
                 ctx.fill()
             }
-
             ctx.restore()
+            dist = d
+            margin = m
         }
     }
     Text {
