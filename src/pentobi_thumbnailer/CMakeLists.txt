@@ -10,6 +10,6 @@ target_link_libraries(pentobi-thumbnailer
   boardgame_sys
   )
 
-target_link_libraries(pentobi-thumbnailer Qt5::Widgets)
+target_link_libraries(pentobi-thumbnailer Qt5::Gui)
 
 install(TARGETS pentobi-thumbnailer DESTINATION ${CMAKE_INSTALL_BINDIR})
