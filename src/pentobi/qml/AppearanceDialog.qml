@@ -16,7 +16,14 @@ Pentobi.Dialog {
 
     property DialogButtonBox footerDesktop: DialogButtonBox {
         Pentobi.ButtonCancel { }
-        Pentobi.ButtonApply { }
+        Pentobi.ButtonApply {
+            enabled:
+                checkBoxCoordinates.checked !== gameDisplay.showCoordinates
+                || checkBoxShowVariations.checked !== gameModel.showVariations
+                || checkBoxAnimatePieces.checked !== gameDisplay.enableAnimations
+                || comboBoxTheme.currentIndex !== currentThemeIndex
+                || comboBoxMoveMarking.currentIndex !== currentMoveMarkingIndex
+        }
         Pentobi.ButtonOk { }
     }
     // Mobile layout may not have enough screen space for apply button and the
@@ -25,6 +32,8 @@ Pentobi.Dialog {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }
+    property int currentThemeIndex
+    property int currentMoveMarkingIndex
 
     title: isDesktop ? qsTr("Appearance") : ""
     footer: isDesktop ? footerDesktop : footerMobile
@@ -32,25 +41,28 @@ Pentobi.Dialog {
         checkBoxCoordinates.checked = gameDisplay.showCoordinates
         checkBoxShowVariations.checked = gameModel.showVariations
         checkBoxAnimatePieces.checked = gameDisplay.enableAnimations
-        if (themeName === "light")
-            comboBoxTheme.currentIndex = 0
-        else if (themeName === "dark")
-            comboBoxTheme.currentIndex = 1
+        if (themeName === "dark")
+            currentThemeIndex = 1
         else if (themeName === "colorblind-light")
-            comboBoxTheme.currentIndex = 2
+            currentThemeIndex = 2
         else if (themeName === "colorblind-dark")
-            comboBoxTheme.currentIndex = 3
+            currentThemeIndex = 3
         else if (themeName === "system")
-            comboBoxTheme.currentIndex = 4
+            currentThemeIndex = 4
+        else
+            currentThemeIndex = 0
+        comboBoxTheme.currentIndex = currentThemeIndex
         if (gameDisplay.moveMarking === "last_dot")
-            comboBoxMoveMarking.currentIndex = 0
+            currentMoveMarkingIndex = 0
         else if (gameDisplay.moveMarking === "last_number")
-            comboBoxMoveMarking.currentIndex = 1
+            currentMoveMarkingIndex = 1
         else if (gameDisplay.moveMarking === "all_number")
-            comboBoxMoveMarking.currentIndex = 2
+            currentMoveMarkingIndex = 2
         else if (gameDisplay.moveMarking === "none")
-            comboBoxMoveMarking.currentIndex = 3
-
+            currentMoveMarkingIndex = 3
+        else
+            currentMoveMarkingIndex = 0
+        comboBoxMoveMarking.currentIndex = currentMoveMarkingIndex
     }
     onApplied: {
         gameDisplay.showCoordinates = checkBoxCoordinates.checked
