@@ -60,63 +60,132 @@ Pentobi.Dialog {
                 GridLayout {
                     columns: 2; rows: 2
 
-                    CheckBox {
-                        id: checkBox0
-
-                        enabled: ! isRated
-                        text: {
-                            if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                                return qsTr("Blue/Red")
-                            if (gameModel.gameVariant === "duo")
-                                return qsTr("Purple")
-                            if (gameModel.gameVariant === "junior")
-                                return qsTr("Green")
-                            return qsTr("Blue")
-                        }
-                        onClicked:
-                            if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                                checkBox2.checked = checked
+                    Row {
                         Layout.column: 0
                         Layout.row: 0
-                    }
-                    CheckBox {
-                        id: checkBox1
 
-                        enabled: ! isRated
-                        text: {
-                            if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                                return qsTr("Yellow/Green")
-                            if (gameModel.gameVariant === "duo"
-                                    || gameModel.gameVariant === "junior")
-                                return qsTr("Orange")
-                            if (gameModel.nuColors === 2)
-                                return qsTr("Green")
-                            return qsTr("Yellow")
+                        Rectangle {
+                            width: font.pixelSize; height: width
+                            radius: width / 2
+                            anchors.verticalCenter: parent.verticalCenter
+                            color: {
+                                if (gameModel.gameVariant === "duo")
+                                    return theme.colorPurple
+                                if (gameModel.gameVariant === "junior")
+                                    return theme.colorGreen
+                                return theme.colorBlue
+                            }
                         }
-                        onClicked:
-                            if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                                checkBox3.checked = checked
+                        Rectangle {
+                            visible: gameModel.nuColors === 4
+                                     && gameModel.nuPlayers === 2
+                            width: font.pixelSize; height: width
+                            radius: width / 2
+                            anchors.verticalCenter: parent.verticalCenter
+                            color: theme.colorRed
+                        }
+                        CheckBox {
+                            id: checkBox0
+
+                            enabled: ! isRated
+                            text: {
+                                if (gameModel.nuColors === 4
+                                        && gameModel.nuPlayers === 2)
+                                    return qsTr("Blue/Red")
+                                if (gameModel.gameVariant === "duo")
+                                    return qsTr("Purple")
+                                if (gameModel.gameVariant === "junior")
+                                    return qsTr("Green")
+                                return qsTr("Blue")
+                            }
+                            onClicked:
+                                if (gameModel.nuColors === 4
+                                        && gameModel.nuPlayers === 2)
+                                    checkBox2.checked = checked
+                        }
+                    }
+                    Row {
                         Layout.column: gameModel.nuPlayers === 2 ? 0 : 1
                         Layout.row: gameModel.nuPlayers === 2 ? 1 : 0
-                    }
-                    CheckBox {
-                        id: checkBox2
 
-                        enabled: ! isRated
-                        text: qsTr("Red")
+                        Rectangle {
+                            width: font.pixelSize; height: width
+                            radius: width / 2
+                            anchors.verticalCenter: parent.verticalCenter
+                            color: {
+                                if (gameModel.gameVariant === "duo"
+                                        || gameModel.gameVariant === "junior")
+                                    return theme.colorOrange
+                                if (gameModel.nuColors === 2)
+                                    return theme.colorGreen
+                                return theme.colorYellow
+                            }
+                        }
+                        Rectangle {
+                            visible: gameModel.nuColors === 4
+                                     && gameModel.nuPlayers === 2
+                            width: font.pixelSize; height: width
+                            radius: width / 2
+                            anchors.verticalCenter: parent.verticalCenter
+                            color: theme.colorGreen
+                        }
+                        CheckBox {
+                            id: checkBox1
+
+                            enabled: ! isRated
+                            text: {
+                                if (gameModel.nuColors === 4
+                                        && gameModel.nuPlayers === 2)
+                                    return qsTr("Yellow/Green")
+                                if (gameModel.gameVariant === "duo"
+                                        || gameModel.gameVariant === "junior")
+                                    return qsTr("Orange")
+                                if (gameModel.nuColors === 2)
+                                    return qsTr("Green")
+                                return qsTr("Yellow")
+                            }
+                            onClicked:
+                                if (gameModel.nuColors === 4
+                                        && gameModel.nuPlayers === 2)
+                                    checkBox3.checked = checked
+                        }
+                    }
+                    Row {
                         visible: gameModel.nuPlayers > 2
-                        Layout.column: gameModel.nuColors === 3 ? 0 : 1
                         Layout.row: gameModel.nuColors === 3 ? 1 : 1
+                        Layout.column: gameModel.nuColors === 3 ? 0 : 1
                         Layout.rowSpan: gameModel.nuColors === 3 ? 2 : 1
-                    }
-                    CheckBox {
-                        id: checkBox3
 
-                        enabled: ! isRated
-                        text: qsTr("Green")
+                        Rectangle {
+                            width: font.pixelSize; height: width
+                            radius: width / 2
+                            anchors.verticalCenter: parent.verticalCenter
+                            color: theme.colorRed
+                        }
+                        CheckBox {
+                            id: checkBox2
+
+                            enabled: ! isRated
+                            text: qsTr("Red")
+                        }
+                    }
+                    Row {
                         visible: gameModel.nuPlayers > 3
                         Layout.column: 0
                         Layout.row: 1
+
+                        Rectangle {
+                            width: font.pixelSize; height: width
+                            radius: width / 2
+                            anchors.verticalCenter: parent.verticalCenter
+                            color: theme.colorGreen
+                        }
+                        CheckBox {
+                            id: checkBox3
+
+                            enabled: ! isRated
+                            text: qsTr("Green")
+                        }
                     }
                 }
             }
