@@ -145,7 +145,7 @@ Item
             ColumnLayout {
                 AnalyzeGame {
                     theme: rootWindow.theme
-                    Layout.margins: 0.05 * parent.height
+                    Layout.margins: 0.01 * parent.width
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                 }
