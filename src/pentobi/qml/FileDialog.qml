@@ -50,13 +50,7 @@ Pentobi.Dialog {
                           qsTr("S"))
             DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
         }
-        Button {
-            text: PentobiControls.addMnemonic(
-                      qsTr("Cancel"),
-                      //: Mnemonic for button Cancel. Leave empty for no mnemonic.
-                      qsTr("C"))
-            DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
-        }
+        Pentobi.ButtonCancel { }
     }
     onOpened: _selectNameField()
     onAccepted: {
