@@ -4,6 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQml 2.2
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
@@ -13,11 +14,20 @@ import "." as Pentobi
 Pentobi.Dialog {
     id: root
 
-    title: isDesktop ? qsTr("Appearance") : ""
-    footer: DialogButtonBox {
+    property DialogButtonBox footerDesktop: DialogButtonBox {
+        Pentobi.ButtonCancel { }
+        Pentobi.ButtonApply { }
+        Pentobi.ButtonOk { }
+    }
+    // Mobile layout may not have enough screen space for apply button and the
+    // immovable dialog will cover most of the screen anyway
+    property DialogButtonBox footerMobile: DialogButtonBox {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }
+
+    title: isDesktop ? qsTr("Appearance") : ""
+    footer: isDesktop ? footerDesktop : footerMobile
     onOpened: {
         checkBoxCoordinates.checked = gameDisplay.showCoordinates
         checkBoxShowVariations.checked = gameModel.showVariations
@@ -42,7 +52,7 @@ Pentobi.Dialog {
             comboBoxMoveMarking.currentIndex = 3
 
     }
-    onAccepted: {
+    onApplied: {
         gameDisplay.showCoordinates = checkBoxCoordinates.checked
         gameModel.showVariations = checkBoxShowVariations.checked
         gameDisplay.enableAnimations = checkBoxAnimatePieces.checked
@@ -60,6 +70,7 @@ Pentobi.Dialog {
         case 3: gameDisplay.moveMarking = "none"; break
         }
     }
+    onAccepted: onApplied()
 
     Flickable {
         implicitWidth: Math.min(font.pixelSize * 18, 0.9 * rootWindow.width)

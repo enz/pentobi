@@ -11,6 +11,7 @@
         <file>qml/BoardContextMenu.qml</file>
         <file>qml/BusyIndicator.qml</file>
         <file>qml/Button.qml</file>
+        <file>qml/ButtonApply.qml</file>
         <file>qml/ButtonCancel.qml</file>
         <file>qml/ButtonOk.qml</file>
         <file>qml/ComputerDialog.qml</file>

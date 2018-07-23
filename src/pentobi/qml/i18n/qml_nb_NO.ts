@@ -203,6 +203,18 @@
     </message>
 </context>
 <context>
+    <name>ButtonApply</name>
+    <message>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for button Apply. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ButtonCancel</name>
     <message>
         <source>Cancel</source>
