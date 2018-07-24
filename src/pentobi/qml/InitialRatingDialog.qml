@@ -54,8 +54,8 @@ Pentobi.Dialog {
         Slider {
             id: slider
 
-            value: 1000
-            from: 1000; to: 2000; stepSize: 100
+            value: 800
+            from: 800; to: 2000; stepSize: 100
             Layout.fillWidth: true
         }
         RowLayout {
