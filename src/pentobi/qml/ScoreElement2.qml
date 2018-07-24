@@ -51,7 +51,7 @@ Item {
                 return isFinal ? "<u>%L1</u>".arg(value) : "%L1".arg(value)
         }
         color: theme.colorText
-        opacity: theme.opacityScore
+        opacity: 0.85 - 0.1 * theme.colorBackground.hslLightness
         width: root.width - point1.width - point2.width - anchors.leftMargin
         anchors {
             left: point2.right
