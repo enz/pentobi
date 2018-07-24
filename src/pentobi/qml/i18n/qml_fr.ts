@@ -227,6 +227,18 @@
     </message>
 </context>
 <context>
+    <name>ButtonClose</name>
+    <message>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
+        <translation>F</translation>
+    </message>
+</context>
+<context>
     <name>ButtonOk</name>
     <message>
         <source>OK</source>
@@ -322,12 +334,12 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Annuler</translation>
+        <translation type="vanished">Annuler</translation>
     </message>
     <message>
         <source>C</source>
         <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
+        <translation type="vanished">A</translation>
     </message>
 </context>
 <context>

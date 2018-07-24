@@ -17,7 +17,7 @@ Pentobi.Dialog {
 
     //: Window title for the rating dialog.
     title: isDesktop ? qsTr("Rating") : ""
-    footer: DialogButtonBox { Pentobi.ButtonOk { } }
+    footer: DialogButtonBox { Pentobi.ButtonClose { } }
 
     Item {
         // Make it wide enough to show a the graph
