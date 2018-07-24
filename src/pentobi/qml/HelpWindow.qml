@@ -50,7 +50,7 @@ Window {
         id: webView
 
         // See comment at init()
-        url: isAndroid ? undefined : startUrl
+        url: isAndroid ? "" : startUrl
         anchors.fill: parent
     }
     Action {
