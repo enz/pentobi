@@ -53,7 +53,6 @@ Window {
         url: isAndroid ? undefined : startUrl
         anchors.fill: parent
     }
-    HelpFileExtractor { id: helpFileExtractor }
     Action {
         shortcut: "Ctrl+W"
         onTriggered: close()

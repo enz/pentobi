@@ -26,22 +26,30 @@ QUrl HelpFileExtractor::extract(const QString& language)
 {
     QDir tmpDir(QStandardPaths::writableLocation(QStandardPaths::TempLocation)
                 + "/pentobi/help/" + language + "/pentobi");
-    QDirIterator it(":qml/help/" + language + "/pentobi");
-    while (it.hasNext())
+    qDebug() << "m_extractedLanguages.size()" << m_extractedLanguages.size();
+    if (! m_extractedLanguages.contains(language))
     {
-        auto src = it.next();
-        QFileInfo fileInfo(src);
-        if (! fileInfo.isFile())
-            continue;
-        auto dest = QFileInfo(tmpDir.absolutePath() + "/" + fileInfo.fileName());
-        dest.dir().mkpath(".");
-        QFile::remove(dest.absoluteFilePath());
-        QFile::copy(src, dest.absoluteFilePath());
+        m_extractedLanguages.append(language);
+        qDebug() << "m_extractedLanguages.size()" << m_extractedLanguages.size();
+        QDirIterator it(":qml/help/" + language + "/pentobi");
+        while (it.hasNext())
+        {
+            auto src = it.next();
+            QFileInfo fileInfo(src);
+            if (! fileInfo.isFile())
+                continue;
+            auto dest = QFileInfo(tmpDir.absolutePath() + "/"
+                                  + fileInfo.fileName());
+            dest.dir().mkpath(".");
+            QFile::remove(dest.absoluteFilePath());
+            QFile::copy(src, dest.absoluteFilePath());
+        }
+        if (language != "C")
+            // Other languages use pictures from C
+            extract("C");
     }
-    if (language != "C")
-        // Other languages use pictures from C
-        extract("C");
-    auto file = QFileInfo(tmpDir.absolutePath() + "/index.html").absoluteFilePath();
+    auto file = QFileInfo(tmpDir.absolutePath()
+                          + "/index.html").absoluteFilePath();
     return QUrl::fromLocalFile(file);
 }
 

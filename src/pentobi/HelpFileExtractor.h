@@ -14,6 +14,7 @@
 
 #include <QObject>
 #include <QUrl>
+#include <QVector>
 
 //-----------------------------------------------------------------------------
 
@@ -28,6 +29,9 @@ public:
     explicit HelpFileExtractor(QObject* parent = nullptr);
 
     Q_INVOKABLE QUrl extract(const QString& language);
+
+private:
+    QVector<QString> m_extractedLanguages;
 };
 
 //-----------------------------------------------------------------------------
