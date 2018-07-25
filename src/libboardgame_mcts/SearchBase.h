@@ -28,6 +28,7 @@
 #include "libboardgame_util/TimeIntervalChecker.h"
 #include "libboardgame_util/Timer.h"
 #include "libboardgame_util/Unused.h"
+#include "libboardgame_sys/Compiler.h"
 
 namespace libboardgame_mcts {
 
