@@ -35,7 +35,7 @@ Item {
                   "%L1".arg(value) :
                   "%1<u>%L2</u>".arg(bonus > 0 ? "*" : "").arg(value)
         color: theme.colorText
-        opacity: 0.85 - 0.1 * theme.colorBackground.hslLightness
+        opacity: 0.9 - 0.15 * theme.colorBackground.hslLightness
         anchors {
             left: point.right
             leftMargin: (isToPlay ? 0.2 : 0.4) * point.width
