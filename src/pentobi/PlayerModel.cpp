@@ -77,7 +77,7 @@ PlayerModel::GenMoveResult PlayerModel::asyncGenMove(
     auto elapsed = timer.elapsed();
     // Enforce minimum thinking time of 1 sec
     if (elapsed < 1000 && ! noDelay)
-        QThread::msleep(1000 - elapsed);
+        QThread::msleep(static_cast<unsigned long>(1000 - elapsed));
     return result;
 }
 
