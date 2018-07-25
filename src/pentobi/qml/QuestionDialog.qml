@@ -18,9 +18,6 @@ Pentobi.Dialog {
 
     function openWithCallback(text, acceptedFunc) {
         label.text = text
-        if (root.acceptedFunc)
-            accepted.disconnect(root.acceptedFunc)
-        accepted.connect(acceptedFunc)
         root.acceptedFunc = acceptedFunc
         open()
     }
@@ -29,6 +26,7 @@ Pentobi.Dialog {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }
+    onAccepted: acceptedFunc()
 
     Item {
         implicitWidth: {
