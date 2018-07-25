@@ -21,6 +21,7 @@
         <file>qml/Dialog.qml</file>
         <file>qml/DialogLoader.qml</file>
         <file>qml/ExportImageDialog.qml</file>
+        <file>qml/FatalMessage.qml</file>
         <file>qml/FileDialog.qml</file>
         <file>qml/GameDisplayMobile.qml</file>
         <file>qml/GameDisplayDesktop.qml</file>

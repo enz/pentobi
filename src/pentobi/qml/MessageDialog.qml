@@ -14,16 +14,8 @@ Pentobi.Dialog {
     id: root
 
     property alias text: label.text
-    property var acceptedFunc
-
-    function openWithCallback(text, acceptedFunc) {
-        label.text = text
-        root.acceptedFunc = acceptedFunc
-        open()
-    }
 
     footer: DialogButtonBox { Pentobi.ButtonOk { } }
-    onAccepted: if (acceptedFunc) acceptedFunc()
 
     Item {
         implicitWidth: {

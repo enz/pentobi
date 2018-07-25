@@ -668,14 +668,16 @@ function setComputerNone() {
     computerPlays3 = false
 }
 
-function showInfo(text) {
-    var dialog = infoMessage.get()
+function showFatal(text) {
+    var dialog = fatalMessage.get()
     dialog.text = text
     dialog.open()
 }
 
-function showInfoWithCallback(text, acceptedFunc) {
-    infoMessage.get().openWithCallback(text, acceptedFunc)
+function showInfo(text) {
+    var dialog = infoMessage.get()
+    dialog.text = text
+    dialog.open()
 }
 
 function showQuestion(text, acceptedFunc) {

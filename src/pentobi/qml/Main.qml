@@ -191,7 +191,7 @@ ApplicationWindow {
             else gameDisplay.endSearch()
         Component.onCompleted:
             if (notEnoughMemory())
-                Logic.showInfoWithCallback(qsTr("Not enough memory."), Qt.quit)
+                Logic.showFatal(qsTr("Not enough memory."))
     }
     AnalyzeGameModel { id: analyzeGameModel }
     RatingModel {
@@ -201,6 +201,7 @@ ApplicationWindow {
     }
     AndroidUtils { id: androidUtils }
     DialogLoader { id: computerDialog; component: ComputerDialog { } }
+    DialogLoader { id: fatalMessage; component: Component { FatalMessage { } } }
     DialogLoader { id: gameVariantDialog; component: Component { GameVariantDialog { } } }
     DialogLoader { id: gameInfoDialog; component: Component { GameInfoDialog { } } }
     DialogLoader { id: initialRatingDialog; component: Component { InitialRatingDialog { } } }
