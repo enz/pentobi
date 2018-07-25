@@ -125,7 +125,7 @@ Pentobi.Dialog {
                 padding: 0.1 * font.pixelSize
                 focusPolicy: Qt.TabFocus
                 Layout.fillWidth: true
-                Layout.preferredHeight: Math.min(font.pixelSize* 40, 0.4 * rootWindow.height)
+                Layout.preferredHeight: Math.min(font.pixelSize * 20, 0.4 * rootWindow.height)
                 background: Rectangle {
                     color: frame.palette.base
                     border.color: frame.activeFocus ? frame.palette.highlight : frame.palette.mid
@@ -133,11 +133,12 @@ Pentobi.Dialog {
                 }
                 ScrollView {
                     anchors.fill: parent
+                    contentHeight: view.implicitHeight
+                    contentWidth: width
 
                     ListView {
                         id: view
 
-                        anchors.fill: parent
                         clip: true
                         model: folderModel
                         boundsBehavior: Flickable.StopAtBounds
