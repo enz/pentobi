@@ -23,7 +23,7 @@ Pentobi.Dialog {
     }
 
     footer: DialogButtonBox { Pentobi.ButtonOk { } }
-    onAccepted: acceptedFunc()
+    onAccepted: if (acceptedFunc) acceptedFunc()
 
     Item {
         implicitWidth: {
