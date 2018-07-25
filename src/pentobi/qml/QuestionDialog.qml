@@ -13,20 +13,19 @@ import "." as Pentobi
 Pentobi.Dialog {
     id: root
 
-    property alias text: label.text
-    property var acceptedFunc
-
     function openWithCallback(text, acceptedFunc) {
         label.text = text
-        root.acceptedFunc = acceptedFunc
+        _acceptedFunc = acceptedFunc
         open()
     }
+
+    property var _acceptedFunc
 
     footer: DialogButtonBox {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }
-    onAccepted: acceptedFunc()
+    onAccepted: _acceptedFunc()
 
     Item {
         implicitWidth: {
