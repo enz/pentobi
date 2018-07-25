@@ -26,6 +26,21 @@ QtObject {
             onTriggered: Logic.pickNamedPiece(modelData)
         }
     }
+    property Action actionBackKey: Action {
+        shortcut: isAndroid && noPopupOpen ? "Back" : ""
+        onTriggered: {
+            if (visibility === Window.FullScreen) {
+                visibility = Window.AutomaticVisibility
+                // Leaving fullscreen doesn't always work on Android but leaves
+                // a white area between the window top and the Android status
+                // bar (last tested with Qt 5.11.1)
+                rootWindow.x = 0
+                rootWindow.y = 0
+            }
+            else
+                Qt.quit()
+        }
+    }
     property Action actionBackToMainVar: Action {
         shortcut: "Ctrl+M"
         text: qsTr("Back to Main Variation")

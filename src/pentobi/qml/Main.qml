@@ -77,19 +77,6 @@ ApplicationWindow {
     ColumnLayout {
         anchors.fill: parent
         spacing: 0
-        Keys.onReleased:
-            if (event.key === Qt.Key_Back) {
-                if (visibility === Window.FullScreen) {
-                    visibility = Window.AutomaticVisibility
-                    if (isAndroid) {
-                        // Leaving fullscreen doesn't always work on Android
-                        // but leaves a white area between the window top and
-                        // the Android status bar (last tested with Qt 5.11.1)
-                        rootWindow.x = 0; rootWindow.y = 0
-                    }
-                    event.accepted = true
-                }
-            }
 
         Pentobi.ToolBar {
             id: toolBar
