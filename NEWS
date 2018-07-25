@@ -25,8 +25,6 @@ Version 15.UNKNOWN (master)
   on the board and for rotating and flipping it.
 * New shortcut Shift+F6, which behaves like F6 (Find Move) but iterates
   backwards through the list of legal moves.
-* Analysis speed dialog is now also available on Android (only fast and
-  normal speed)
 * The Android version now shows an error before open/save if permission
   to access storage have not been granted.
 * The Android version now pauses running move generations or game analyses

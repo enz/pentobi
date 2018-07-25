@@ -33,7 +33,12 @@ Pentobi.Menu {
         text: addMnemonic(qsTr("Analyze Game"),
                           //: Mnemonic for menu item Analyze Game. Leave empty for no mnemonic.
                           qsTr("A"))
-        onTriggered: analyzeDialog.open()
+        onTriggered: {
+            if (isAndroid)
+                Logic.analyzeGame(3000)
+            else
+                analyzeDialog.open()
+        }
     }
     Pentobi.MenuItem {
         enabled: analyzeGameModel.isRunning
