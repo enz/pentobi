@@ -208,7 +208,7 @@ function playPickedPiece() {
     var pos = pieceManipulator.mapToItem(board, pieceManipulator.width / 2,
                                          pieceManipulator.height / 2)
     if (! board.contains(pos)) {
-        gameDisplay.pickedPiece = null
+        pickedPiece = null
         gameModel.resetFindMove()
     }
     else if (setupMode)
@@ -222,7 +222,7 @@ function showMove(move) {
     if (pieceModel === null)
         return
     var newPickedPiece = findPiece(pieceModel)
-    if (gameDisplay.pickedPiece && newPickedPiece !== gameDisplay.pickedPiece)
+    if (pickedPiece && newPickedPiece !== pickedPiece)
         pickedPiece = null
     var pos = board.mapToItem(pieceManipulator.parent,
                               board.mapFromGameX(pieceModel.gameCoord.x),
