@@ -181,7 +181,10 @@ Pentobi.Dialog {
             RowLayout {
                 Layout.fillWidth: true
 
-                Label { text: qsTr("Level %1").arg(slider.value) }
+                Label {
+                    enabled: ! isRated
+                    text: qsTr("Level %1").arg(slider.value)
+                }
                 Slider {
                     id: slider
 
