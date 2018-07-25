@@ -236,8 +236,7 @@ Pentobi.Dialog {
                                 text: history && menu.row < history.length ?
                                           qsTr("Open Game %1").arg(history[menu.row].number) : ""
                                 onTriggered: {
-                                    queuedOpenRatedGame.byteArray = history[menu.row].sgf
-                                    queuedOpenRatedGame.restart()
+                                    Logic.openRatedGame(history[menu.row].sgf)
                                     close()
                                 }
                             }

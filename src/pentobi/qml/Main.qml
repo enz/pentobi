@@ -233,7 +233,7 @@ ApplicationWindow {
         onTriggered: Logic.checkComputerMove()
     }
 
-    // Delay lengthy function calls such that the busy indicator is visible
+    // Delay lengthy blocking function calls such that busy indicator is visible
     Timer {
         id: lengthyCommand
 
@@ -251,19 +251,6 @@ ApplicationWindow {
             func()
             isRunning = false
         }
-    }
-
-    // Runs the openRatedGame() callback from RatingDialog in a new event
-    // because RatingDialog destroys itself before the callback and otherwise
-    // the environment for the callback is undefined (at least if another
-    // verify abort game dialog is shown first).
-    Timer {
-        id: queuedOpenRatedGame
-
-        property var byteArray
-
-        interval: 0
-        onTriggered: Logic.openRatedGame(byteArray)
     }
 
     Connections {

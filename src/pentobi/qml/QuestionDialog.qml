@@ -22,7 +22,7 @@ Pentobi.Dialog {
             accepted.disconnect(root.acceptedFunc)
         accepted.connect(acceptedFunc)
         root.acceptedFunc = acceptedFunc
-        timer.restart()
+        open()
     }
 
     footer: DialogButtonBox {
@@ -51,16 +51,5 @@ Pentobi.Dialog {
             wrapMode: Text.Wrap
             topPadding: isDesktop ? 0.3 * font.pixelSize : 0
         }
-    }
-
-    // Used to open the dialog in a new event from the Qt event loop to prevent
-    // problems if openWithCallback() is called in the current onAccepted
-    // callback (e.g. two questions shown in a row) otherwise the dialog
-    // won't be visible.
-    Timer {
-        id: timer
-
-        interval: 0
-        onTriggered: open()
     }
 }
