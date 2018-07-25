@@ -20,7 +20,7 @@ function analyzeGame(nuSimulations) {
         showInfo(qsTr("Game analysis is only possible in main variation."))
         return
     }
-    gameDisplay.showAnalyzeGame()
+    gameDisplay.startAnalysis();
     Logic.cancelRunning()
     analyzeGameModel.start(gameModel, playerModel, nuSimulations)
 }

@@ -356,6 +356,10 @@
         <source>Computer is thinking... (up to %1 minutes remaining)</source>
         <translation>Datamaskinen tenker… (opptil %1 minutter gjenstår)</translation>
     </message>
+    <message>
+        <source>Running game analysis...</source>
+        <translation>Kjører spillanalyse…</translation>
+    </message>
 </context>
 <context>
     <name>GameInfoDialog</name>

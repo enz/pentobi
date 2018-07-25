@@ -194,7 +194,11 @@ ApplicationWindow {
             if (notEnoughMemory())
                 Logic.showFatal(qsTr("Not enough memory."))
     }
-    AnalyzeGameModel { id: analyzeGameModel }
+    AnalyzeGameModel {
+        id: analyzeGameModel
+
+        onIsRunningChanged: if (! isRunning) gameDisplay.endAnalysis()
+    }
     RatingModel {
         id: ratingModel
 

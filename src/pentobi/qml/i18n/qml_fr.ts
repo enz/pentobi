@@ -356,6 +356,10 @@
         <source>Computer is thinking... (up to %1 minutes remaining)</source>
         <translation>L&apos;ordinateur pense… (jusqu’à %1 minutes restantes)</translation>
     </message>
+    <message>
+        <source>Running game analysis...</source>
+        <translation>Exécution de l&apos;analyse de la partie…</translation>
+    </message>
 </context>
 <context>
     <name>GameInfoDialog</name>

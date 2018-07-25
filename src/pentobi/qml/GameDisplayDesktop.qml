@@ -67,6 +67,8 @@ Item
     }
     function startSearch() { showStatus(qsTr("Computer is thinking...")) }
     function endSearch() { if (! messageTimer.running) clearStatus() }
+    function startAnalysis() { showStatus(qsTr("Running game analysis...")) }
+    function endAnalysis() { if (! messageTimer.running) clearStatus() }
     function searchCallback(elapsedSeconds, remainingSeconds) {
         // If the search is longer than 10 sec, we show the (maximum) remaining
         // time (only during a move generation, ignore search callbacks during
