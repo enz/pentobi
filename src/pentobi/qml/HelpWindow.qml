@@ -4,6 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQuick 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.1
 import QtQuick.Controls 2.3
@@ -50,9 +51,9 @@ Window {
     WebView {
         id: webView
 
-        // See comment at init()
-        url: isAndroid ? "" : startUrl
         anchors.fill: parent
+        // See comment at init()
+        Component.onCompleted: if (! isAndroid) url = startUrl
     }
     Action {
         shortcut: "Ctrl+W"
