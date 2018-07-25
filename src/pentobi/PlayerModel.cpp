@@ -56,6 +56,18 @@ PlayerModel::PlayerModel(QObject* parent)
     });
     connect(&m_watcher, &QFutureWatcher<GenMoveResult>::finished,
             this, &PlayerModel::genMoveFinished);
+    QSettings settings;
+    m_level = settings.value("level", 1).toUInt();
+    if (m_level < 1)
+    {
+        qDebug() << "Invalid level in settings:" << m_level;
+        m_level = 1;
+    }
+    else if (m_level > maxLevel)
+    {
+        qDebug() << "Level in settings too high, using" << maxLevel;
+        m_level = maxLevel;
+    }
 }
 
 PlayerModel::~PlayerModel()
@@ -131,47 +143,10 @@ void PlayerModel::loadBook(Variant variant)
     m_player->load_book(in);
 }
 
-bool PlayerModel::getLevelKey(const QString& gameVariant, QString& key)
-{
-    Variant variant;
-    if (! parse_variant_id(gameVariant.toLocal8Bit().constData(), variant))
-    {
-        qWarning("PlayerModel: invalid game variant");
-        return false;
-    }
-    key = QString("level_%1").arg(to_string_id(variant));
-    return true;
-}
-
-void PlayerModel::loadLevel(const QString& gameVariant)
-{
-    QString key;
-    if (! getLevelKey(gameVariant, key))
-        return;
-    QSettings settings;
-    auto level = settings.value(key, 1).toUInt();
-    if (level < 1)
-    {
-        qDebug() << "PlayerModel: invalid level in settings:" << level;
-        level = 1;
-    }
-    else if (level > maxLevel)
-    {
-        qDebug() << "PlayerModel: level in settings too high, using" << maxLevel;
-        level = maxLevel;
-    }
-    if (m_level != level)
-    {
-        m_level = level;
-        emit levelChanged();
-    }
-}
-
 void PlayerModel::setGameVariant(const QString& gameVariant)
 {
     if (m_gameVariant == gameVariant)
         return;
-    loadLevel(gameVariant);
     m_gameVariant = gameVariant;
     emit gameVariantChanged();
 }
@@ -188,12 +163,9 @@ void PlayerModel::setLevel(unsigned level)
 {
     if (m_level == level)
         return;
-    QString key;
-    if (! getLevelKey(m_gameVariant, key))
-        return;
     {
         QSettings settings;
-        settings.setValue(key, level);
+        settings.setValue("level", level);
     }
     m_level = level;
     emit levelChanged();
@@ -210,8 +182,6 @@ void PlayerModel::setPaused(bool paused)
 void PlayerModel::startGenMove(GameModel* gm)
 {
     auto& bd = gm->getBoard();
-    if (gm->gameVariant() != m_gameVariant)
-        loadLevel(gm->gameVariant());
     cancelGenMove();
     m_player->set_level(min(m_level, maxLevel));
     auto variant = gm->getBoard().get_variant();

@@ -148,11 +148,7 @@ private:
 
     void genMoveFinished();
 
-    bool getLevelKey(const QString& gameVariant, QString& key);
-
     void loadBook(Variant variant);
-
-    void loadLevel(const QString& gameVariant);
 
     void setIsGenMoveRunning(bool isGenMoveRunning);
 

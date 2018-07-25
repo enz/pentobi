@@ -18,7 +18,8 @@ Version 15.UNKNOWN (master)
 * Additional warning dialogs to reduce the likelihood that an autosaved
   game is lost, for example because it was changed by another instance
   of Pentobi.
-* The computer level is now set in the computer colors dialog.
+* The computer level is now set in the computer colors dialog. It is no
+  longer stored in the settings separately for each game variant.
 * Reintroduced forward10/backward10 toolbuttons on desktop.
 * New shortcut keys for moving the selected piece in larger steps
   on the board and for rotating and flipping it.
