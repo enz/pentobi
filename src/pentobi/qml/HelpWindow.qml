@@ -32,7 +32,8 @@ Window {
     // Instead of initializing webView.url with startUrl, we provide an init
     // function that needs to be called after show() to work around an issue
     // with the initial zoom factor of WebView sometimes very large on Android
-    // (last tested with Qt 5.9.2)
+    // Note that this workaround only reduced the likelihood for this bug to
+    // occur (QTBUG-58290, last occured with Qt 5.11.1)
     function init() { if (isAndroid) webView.url = startUrl }
 
     width: defaultWidth; height: defaultHeight
