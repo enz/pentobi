@@ -682,7 +682,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(
         LIBBOARDGAME_LOG_THREAD(thread_state, "Search aborted");
         return true;
     }
-    while (get_pause() && ! get_abort())
+    while (get_pause())
         this_thread::sleep_for(500ms);
     static_assert(numeric_limits<Float>::radix == 2, "");
     auto count = m_tree.get_root().get_visit_count();
