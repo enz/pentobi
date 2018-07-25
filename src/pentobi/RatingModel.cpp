@@ -53,16 +53,17 @@ void RatingModel::addResult(GameModel* gameModel, int level)
     auto color = getNextHumanPlayer();
     gameModel->getBoard().get_place(Color(static_cast<Color::IntType>(color)),
                                     place, isPlaceShared);
-    float gameResult;
+    double gameResult;
     if (place == 0 && ! isPlaceShared)
         gameResult = 1;
     else if (place == 0 && isPlaceShared)
         gameResult = 0.5;
     else
         gameResult = 0;
-    auto nuOpponents = get_nu_players(variant) - 1;
-    Rating opponentRating = Player::get_rating(variant, level);
-    float kValue = (m_numberGames < 30 ? 40.f : 20.f);
+    auto nuOpponents = static_cast<unsigned>(get_nu_players(variant) - 1);
+    Rating opponentRating =
+            Player::get_rating(variant, static_cast<unsigned>(level));
+    double kValue = (m_numberGames < 30 ? 40 : 20);
     Rating rating = m_rating;
     rating.update(gameResult, opponentRating, kValue, nuOpponents);
     setRating(rating.get());
@@ -99,7 +100,7 @@ int RatingModel::getNextHumanPlayer() const
     if (! parse_variant_id(m_gameVariant.toLocal8Bit().constData(), variant))
         return 0;
     mt19937 generator;
-    generator.discard(m_numberGames);
+    generator.discard(static_cast<unsigned>(m_numberGames));
     uniform_int_distribution<> distribution(0, get_nu_players(variant) - 1);
     return distribution(generator);
 }
@@ -113,7 +114,9 @@ int RatingModel::getNextLevel(int maxLevel) const
     double minDiff = 0; // Initialize to avoid compiler warning
     for (int i = 1; i <= maxLevel; ++i)
     {
-        auto diff = abs(m_rating.get() - Player::get_rating(variant, i).get());
+        auto diff =
+                abs(m_rating.get()
+                    - Player::get_rating(variant, static_cast<unsigned>(i)).get());
         if (i == 1 || diff < minDiff)
         {
             minDiff = diff;
@@ -175,8 +178,6 @@ void RatingModel::saveSettings() const
 
 void RatingModel::setBestRating(double rating)
 {
-    if (m_bestRating.get() == rating)
-        return;
     m_bestRating = Rating(rating);
     emit bestRatingChanged();
 }
@@ -242,8 +243,6 @@ void RatingModel::setNumberGames(int numberGames)
 
 void RatingModel::setRating(double rating)
 {
-    if (m_rating.get() == rating)
-        return;
     m_rating = Rating(rating);
     emit ratingChanged();
 }

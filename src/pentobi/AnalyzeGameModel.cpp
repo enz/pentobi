@@ -119,6 +119,9 @@ void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)
     if (moveNumber < 0
             || moveNumber >= static_cast<int>(m_analyzeGame.get_nu_moves()))
         return;
+    auto n = static_cast<unsigned>(moveNumber);
+    if (n >= m_analyzeGame.get_nu_moves())
+        return;
     auto& game = gameModel->getGame();
     if (game.get_variant() != m_analyzeGame.get_variant())
         return;
@@ -130,7 +133,7 @@ void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)
         setMarkMoveNumber(-1);
         return;
     }
-    for (int i = 0; i < moveNumber; ++i)
+    for (unsigned i = 0; i < n; ++i)
     {
         auto mv = m_analyzeGame.get_move(i);
         bool found = false;
@@ -215,7 +218,7 @@ void AnalyzeGameModel::markCurrentMove(GameModel* gameModel)
             for (unsigned i = 0; i < moves.size(); ++i)
                 if (moves[i] != m_analyzeGame.get_move(i))
                     return;
-            moveNumber = moves.size();
+            moveNumber = static_cast<int>(moves.size());
         }
     }
     setMarkMoveNumber(moveNumber);
