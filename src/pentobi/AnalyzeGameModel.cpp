@@ -116,8 +116,7 @@ QQmlListProperty<AnalyzeGameElement> AnalyzeGameModel::elements()
 
 void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)
 {
-    if (moveNumber < 0
-            || moveNumber >= static_cast<int>(m_analyzeGame.get_nu_moves()))
+    if (moveNumber < 0)
         return;
     auto n = static_cast<unsigned>(moveNumber);
     if (n >= m_analyzeGame.get_nu_moves())
