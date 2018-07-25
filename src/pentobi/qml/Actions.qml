@@ -200,6 +200,10 @@ QtObject {
         text: qsTr("Open...")
         onTriggered: Logic.open()
     }
+    property Action actionOpenMenu: Action {
+        shortcut: noPopupOpen ? "Alt+M" : ""
+        onTriggered: toolBar.clickMenuButton()
+    }
     property Action actionPlay: Action {
         shortcut: "Ctrl+L"
         text: qsTr("Play")
