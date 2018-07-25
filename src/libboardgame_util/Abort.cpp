@@ -14,9 +14,9 @@
 
 namespace libboardgame_util {
 
-using namespace std;
-
 atomic<bool> abort(false);
+
+atomic<bool> pause(false);
 
 //----------------------------------------------------------------------------
 

@@ -184,6 +184,7 @@ ApplicationWindow {
         id: playerModel
 
         gameVariant: gameModel.gameVariant
+        paused: Qt.application.state === Qt.ApplicationInactive
         onMoveGenerated: Logic.moveGenerated(move)
         onSearchCallback: gameDisplay.searchCallback(elapsedSeconds, remainingSeconds)
         onIsGenMoveRunningChanged:

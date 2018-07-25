@@ -199,6 +199,14 @@ void PlayerModel::setLevel(unsigned level)
     emit levelChanged();
 }
 
+void PlayerModel::setPaused(bool paused)
+{
+    if (paused)
+        libboardgame_util::set_pause();
+    else
+        libboardgame_util::clear_pause();
+}
+
 void PlayerModel::startGenMove(GameModel* gm)
 {
     auto& bd = gm->getBoard();
