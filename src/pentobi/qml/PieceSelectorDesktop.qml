@@ -9,13 +9,10 @@ import QtQuick 2.0
 Item {
     id: root
 
-    property string gameVariant
-    property int toPlay
     property alias pieces0: pieceList0.pieces
     property alias pieces1: pieceList1.pieces
     property alias pieces2: pieceList2.pieces
     property alias pieces3: pieceList3.pieces
-    property int nuColors
     property int columns: pieces0 ? Math.ceil(pieces0.length / 2) : 11
 
     /** Dummy for compatibility with PieceSelectorMobile */

@@ -132,7 +132,6 @@ Item
                     spacingPieceLists: rows < 3 ? 0 : height - rows * (width / columns)
 
                     anchors.horizontalCenter: parent.horizontalCenter
-                    gameVariant: gameModel.gameVariant
                     toPlay: gameModel.toPlay
                     nuColors: gameModel.nuColors
                     transitionsEnabled: false

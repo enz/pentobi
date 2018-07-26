@@ -9,7 +9,6 @@ import QtQuick 2.0
 Flickable {
     id: root
 
-    property string gameVariant
     property int toPlay
     property alias pieces0: pieceList0.pieces
     property alias pieces1: pieceList1.pieces

@@ -156,9 +156,6 @@ Item
 
                         width: parent.width
                         height: 0.63 * parent.height
-                        gameVariant: gameModel.gameVariant
-                        toPlay: gameModel.toPlay
-                        nuColors: gameModel.nuColors
                         onPiecePicked: Logic.pickPiece(piece)
                     }
                     Column {
