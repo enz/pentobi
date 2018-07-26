@@ -21,7 +21,7 @@ function analyzeGame(nuSimulations) {
         return
     }
     gameDisplay.startAnalysis();
-    Logic.cancelRunning()
+    cancelRunning()
     analyzeGameModel.start(gameModel, playerModel, nuSimulations)
 }
 
@@ -50,7 +50,7 @@ function autoSaveNoVerify() {
     settings.isRated = rootWindow.isRated
     settings.wasGenMoveRunning = rootWindow.wasGenMoveRunning
     analyzeGameModel.autoSave(gameModel)
-    Logic.cancelRunning()
+    cancelRunning()
 }
 
 function autoSaveNoVerifyAndQuit() {
@@ -58,14 +58,16 @@ function autoSaveNoVerifyAndQuit() {
     Qt.quit()
 }
 
-function cancelRunning() {
+function cancelRunning(showMessage) {
     if (analyzeGameModel.isRunning) {
         analyzeGameModel.cancel()
-        showTemporaryMessage(qsTr("Game analysis aborted."))
+        if (showMessage)
+            showTemporaryMessage(qsTr("Game analysis aborted."))
     }
     if (playerModel.isGenMoveRunning) {
         playerModel.cancelGenMove()
-        showTemporaryMessage(qsTr("Computer move aborted."))
+        if (showMessage)
+            showTemporaryMessage(qsTr("Computer move aborted."))
     }
     delayedCheckComputerMove.stop()
 }
@@ -269,7 +271,7 @@ function findNextCommentContinueFromRoot() {
 }
 
 function genMove() {
-    Logic.cancelRunning()
+    cancelRunning()
     gameDisplay.pickedPiece = null
     gameDisplay.showToPlay()
     playerModel.startGenMove(gameModel)

@@ -143,7 +143,7 @@ ApplicationWindow {
     GameModel {
         id: gameModel
 
-        onPositionAboutToChange: Logic.cancelRunning()
+        onPositionAboutToChange: Logic.cancelRunning(true)
         onPositionChanged: {
             gameDisplay.pickedPiece = null
             if (gameModel.canGoBackward || gameModel.canGoForward

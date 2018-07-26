@@ -38,6 +38,6 @@ Pentobi.Menu {
                   || delayedCheckComputerMove.running
                   || analyzeGameModel.isRunning)
                  && ! isRated
-        onTriggered: Logic.cancelRunning()
+        onTriggered: Logic.cancelRunning(true)
     }
 }
