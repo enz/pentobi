@@ -224,18 +224,15 @@ Pentobi.Dialog {
                                     delayedOpenFolderTimer.folderName = fileName
                                     delayedOpenFolderTimer.restart()
                                 }
-                                else if (selectExisting)
+                                else {
                                     name = fileName
+                                    if (! selectExisting)
+                                        selectNameField()
+                                }
                             }
                             onDoubleClicked:
-                                if (! (folderModel.isFolder(index))) {
-                                    if (selectExisting)
-                                        root.accept()
-                                    else {
-                                        name = fileName
-                                        selectNameField()
-                                    }
-                                }
+                                if (! folderModel.isFolder(index))
+                                    root.accept()
                         }
                         FolderListModel {
                             id: folderModel
