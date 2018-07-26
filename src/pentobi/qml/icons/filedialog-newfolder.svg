@@ -8,14 +8,14 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="SVGRoot"
-   width="22"
-   height="22"
+   width="16px"
+   height="16px"
    version="1.1"
-   viewBox="0 0 22 22"
+   viewBox="0 0 16 16"
    sodipodi:docname="filedialog-newfolder.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
   <metadata
-     id="metadata11">
+     id="metadata9">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -27,7 +27,7 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs9" />
+     id="defs7" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -37,36 +37,36 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1613"
-     inkscape:window-height="995"
-     id="namedview7"
+     inkscape:window-width="949"
+     inkscape:window-height="480"
+     id="namedview5"
      showgrid="true"
-     inkscape:snap-global="true"
-     inkscape:zoom="36.272727"
-     inkscape:cx="11"
-     inkscape:cy="11"
+     inkscape:zoom="14.75"
+     inkscape:cx="8"
+     inkscape:cy="8"
      inkscape:window-x="67"
      inkscape:window-y="27"
-     inkscape:window-maximized="1"
+     inkscape:window-maximized="0"
      inkscape:current-layer="SVGRoot">
     <inkscape:grid
        type="xygrid"
-       id="grid818" />
+       id="grid819" />
   </sodipodi:namedview>
-  <path
-     d="m 2.5,9.5 h 13 v -2 h -9 v -1 h -4 z"
-     id="path2"
-     inkscape:connector-curvature="0"
-     style="fill:#ffffff;stroke:#404040;stroke-width:1px;stroke-linejoin:round" />
-  <path
-     d="m 1.5,9.4999997 h 15 V 19.5 h -15 z"
-     id="path4"
-     inkscape:connector-curvature="0"
-     style="fill:#bfbfbf;stroke:#404040;stroke-width:1px;stroke-linejoin:round" />
-  <path
-     style="fill:#ffffff;fill-rule:evenodd;stroke:#404040;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
-     d="m 13.5,4.5 v -4 h 4 v 4 h 4 v 4 h -4 v 4 h -4 v -4 h -4 v -4 z"
-     id="path1911"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="ccccccccccccc" />
+  <rect
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+     id="rect821"
+     width="3"
+     height="12"
+     x="6"
+     y="2"
+     ry="0" />
+  <rect
+     ry="0"
+     y="-13.5"
+     x="6.5"
+     height="12"
+     width="3"
+     id="rect814"
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+     transform="rotate(90)" />
 </svg>

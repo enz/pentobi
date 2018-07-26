@@ -129,10 +129,10 @@ Pentobi.Dialog {
                     visible: ! selectExisting
                     icon {
                         source: "icons/filedialog-newfolder.svg"
-                        // Icon size is 22x22
-                        width: font.pixelSize < 20 ? 22 : 1.2 * font.pixelSize
-                        height: font.pixelSize < 20 ? 22 : 1.2 * font.pixelSize
-                        color: "transparent"
+                        // Icon size is 16x16
+                        width: font.pixelSize < 20 ? 16 : font.pixelSize
+                        height: font.pixelSize < 20 ? 16 : font.pixelSize
+                        color: frame.palette.buttonText
                     }
                     onClicked: {
                         var dialog = newFolderDialog.get()
