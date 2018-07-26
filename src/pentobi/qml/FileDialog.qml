@@ -111,7 +111,7 @@ Pentobi.Dialog {
                         ! folderModel.folder.toString().endsWith(":///")
                         && ! (isAndroid && folderModel.folder === defaultFolder)
 
-                    visible: hasParent
+                    opacity: hasParent ? 1 : 0.5
                     onClicked:
                         if (hasParent) {
                             _lastFolder = folderModel.folder
