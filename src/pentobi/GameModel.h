@@ -254,6 +254,8 @@ public:
     Q_INVOKABLE QString suggestFileName(const QUrl& folder,
                                         const QString& fileEnding);
 
+    Q_INVOKABLE QString suggestGameFileName(const QUrl& folder);
+
     Q_INVOKABLE QString suggestNewFolderName(const QUrl& folder);
 
 

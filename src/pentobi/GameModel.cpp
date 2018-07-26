@@ -1521,6 +1521,13 @@ QString GameModel::suggestFileName(const QUrl& folder,
     return QUrl::fromLocalFile(file).fileName();
 }
 
+QString GameModel::suggestGameFileName(const QUrl& folder)
+{
+    if (! m_file.isEmpty())
+        return QUrl::fromLocalFile(m_file).fileName();
+    return suggestFileName(folder, "blksgf");
+}
+
 QString GameModel::suggestNewFolderName(const QUrl& folder)
 {
     auto localFolder = folder.toLocalFile();
