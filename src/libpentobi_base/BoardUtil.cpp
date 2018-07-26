@@ -11,7 +11,7 @@
 #include "BoardUtil.h"
 
 #include "PentobiSgfUtil.h"
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 #include <sstream>
 #endif
 
@@ -21,7 +21,7 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 string dump(const Board& bd)
 {
     ostringstream s;

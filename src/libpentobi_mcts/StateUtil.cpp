@@ -41,7 +41,7 @@ bool check_symmetry_broken(const Board& bd)
     Geometry::Iterator begin = geo.begin();
     LIBBOARDGAME_ASSERT(geo.get_range() % 2 == 0);
     Geometry::Iterator end(static_cast<Point::IntType>(geo.get_range() / 2));
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     for (auto p = begin; p != end; ++p)
         LIBBOARDGAME_ASSERT(symmetric_points[*p].to_int() >= (*end).to_int());
 #endif

@@ -43,7 +43,7 @@ struct NormalizedPoints
     }
 };
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 /** Check consistency of transformations.
     Checks that the point list (which must be already sorted) has no
     duplicates. */

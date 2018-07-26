@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
     QCommandLineOption optionThreads("threads", "Use <n> threads (0=auto).",
                                      "n");
     parser.addOption(optionThreads);
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
     QCommandLineOption optionVerbose(
                 "verbose", "Print logging information to standard error.");
     parser.addOption(optionVerbose);
@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
     parser.process(app);
     try
     {
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
         if (! parser.isSet(optionVerbose))
             libboardgame_util::disable_logging();
 #endif

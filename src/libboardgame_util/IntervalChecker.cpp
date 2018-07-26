@@ -12,17 +12,12 @@
 
 #include <limits>
 #include "Assert.h"
-#if LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
+
+#ifdef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
 #include "Log.h"
 #endif
 
 namespace libboardgame_util {
-
-//-----------------------------------------------------------------------------
-
-#ifndef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
-#define LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG 0
-#endif
 
 //-----------------------------------------------------------------------------
 
@@ -32,7 +27,7 @@ IntervalChecker::IntervalChecker(TimeSource& time_source, double time_interval,
       m_time_interval(time_interval),
       m_function(f)
 {
-#if LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
+#ifdef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
     log(format("IntervalChecker::IntervalChecker: time_interval=%1%")
             % time_interval);
 #endif
@@ -73,7 +68,7 @@ bool IntervalChecker::check_expensive()
         else
             m_count_interval = static_cast<unsigned>(new_count_interval);
         m_result = m_function();
-#if LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
+#ifdef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
         log(format("IntervalChecker::check_expensive: "
                    "diff=%1% adjust_factor=%2% count_interval=%3%")
             % diff % adjust_factor % m_count_interval);
@@ -81,7 +76,7 @@ bool IntervalChecker::check_expensive()
     }
     else
     {
-#if LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
+#ifdef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
         log("IntervalChecker::check_expensive: is_first_check");
 #endif
         m_is_first_check = false;

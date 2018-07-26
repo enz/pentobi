@@ -16,20 +16,20 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
 extern ostream* _log_stream;
 #endif
 
 inline void disable_logging()
 {
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
     _log_stream = nullptr;
 #endif
 }
 
 inline ostream* get_log_stream()
 {
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
     return _log_stream;
 #else
     return nullptr;
@@ -38,7 +38,7 @@ inline ostream* get_log_stream()
 
 inline void flush_log()
 {
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
     if (_log_stream != nullptr)
         _log_stream->flush();
 #endif
@@ -46,7 +46,7 @@ inline void flush_log()
 
 //-----------------------------------------------------------------------------
 
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
 
 /** Initializes the logging functionality.
     This is necessary to call on some platforms at the start of the program
@@ -100,14 +100,14 @@ class LogInitializer
 public:
     LogInitializer()
     {
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
         _log_init();
 #endif
     }
 
     ~LogInitializer()
     {
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
         _log_close();
 #endif
     }
@@ -119,7 +119,7 @@ public:
 
 //-----------------------------------------------------------------------------
 
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
 #define LIBBOARDGAME_LOG(...) libboardgame_util::_log(__VA_ARGS__)
 #else
 #define LIBBOARDGAME_LOG(...) (static_cast<void>(0))

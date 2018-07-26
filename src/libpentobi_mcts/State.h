@@ -99,7 +99,7 @@ public:
     /** Check if RAVE value for this move should not be updated. */
     bool skip_rave(Move mv) const;
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     string dump() const;
 #endif
 

@@ -242,7 +242,7 @@ void Node<M, F, MT>::init(const Move& mv, Float value, Float count,
 template<typename M, typename F, bool MT>
 void Node<M, F, MT>::init_root()
 {
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     m_move = Move::null();
 #endif
     m_visit_count.store(0, memory_order_relaxed);

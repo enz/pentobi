@@ -81,7 +81,7 @@ private:
 
 inline Move::Move()
 {
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     m_i = value_uninitialized;
 #endif
 }

@@ -85,7 +85,7 @@ private:
 template<unsigned M, unsigned W, unsigned H, typename I>
 inline Point<M, W, H, I>::Point()
 {
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     m_i = value_uninitialized;
 #endif
 }

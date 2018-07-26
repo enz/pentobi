@@ -1099,7 +1099,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
         {
             if (log_move_creation)
             {
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
                 auto& transform = *transforms[i];
                 LIBBOARDGAME_LOG("Transformation ", get_type_name(transform));
 #endif

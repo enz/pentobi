@@ -17,7 +17,7 @@
 #include <unistd.h>
 #endif
 // sysctl() is unsupported on Linux with x32 ABI (last checked on Ubuntu 14.10)
-#if HAVE_SYS_SYSCTL_H && ! (defined __x86_64__ && defined __ILP32__)
+#if defined HAVE_SYS_SYSCTL_H && ! (defined __x86_64__ && defined __ILP32__)
 #include <sys/sysctl.h>
 #endif
 

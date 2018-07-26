@@ -93,7 +93,7 @@ public:
 
         const Node* m_best_child;
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
         Float m_child_min_count;
 
         Float m_max_move_prior;
@@ -191,7 +191,7 @@ inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
       m_best_child(nullptr)
 {
     LIBBOARDGAME_ASSERT(thread_id < tree.m_nu_threads);
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     m_child_min_count = child_min_count;
     m_max_move_prior = max_move_prior;
 #else

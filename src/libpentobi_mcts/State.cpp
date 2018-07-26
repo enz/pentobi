@@ -12,7 +12,7 @@
 
 #include "libboardgame_util/MathUtil.h"
 #include "libpentobi_base/ScoreUtil.h"
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 #include "libpentobi_base/BoardUtil.h"
 #endif
 
@@ -186,7 +186,7 @@ inline bool State::check_move(Move mv, const MoveInfo<MAX_SIZE>& info,
                 playout_features, total_gamma);
 }
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 string State::dump() const
 {
     ostringstream s;
@@ -856,7 +856,7 @@ void State::start_search()
 
 void State::start_simulation(size_t n)
 {
-#if LIBBOARDGAME_DISABLE_LOG
+#ifdef LIBBOARDGAME_DISABLE_LOG
     LIBBOARDGAME_UNUSED(n);
 #endif
     if (log_simulations)

@@ -177,7 +177,7 @@ private:
 
     string m_string[Point::range];
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     bool is_valid(Point p) const;
 #endif
 };
@@ -301,7 +301,7 @@ bool Geometry<P>::is_onboard(CoordPoint p) const
     return p.is_onboard(m_width, m_height) && ! get_point(p.x, p.y).is_null();
 }
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 
 template<class P>
 inline bool Geometry<P>::is_valid(Point p) const

@@ -16,7 +16,7 @@ using libboardgame_sgf::Writer;
 
 //-----------------------------------------------------------------------------
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 string dump(const Board& bd);
 #endif
 

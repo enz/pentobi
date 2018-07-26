@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#if ! LIBBOARDGAME_DISABLE_LOG
+#ifndef LIBBOARDGAME_DISABLE_LOG
 
 //-----------------------------------------------------------------------------
 

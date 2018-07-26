@@ -178,7 +178,7 @@ void Engine::cmd_version(Response& response)
         version.append(__DATE__);
         version.append(")");
     }
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     version.append(" (dbg)");
 #endif
     response.set(version);

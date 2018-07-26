@@ -311,7 +311,7 @@ public:
 
     const Tree& get_tree() const;
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     string dump() const;
 #endif
 
@@ -371,7 +371,7 @@ protected:
     virtual void on_start_search(bool is_followup);
 
 private:
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     class AssertionHandler
         : public libboardgame_util::AssertionHandler
     {
@@ -528,7 +528,7 @@ private:
 
     Tree m_tmp_tree;
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     AssertionHandler m_assertion_handler;
 #endif
 
@@ -639,7 +639,7 @@ void SearchBase<S, M, R>::Thread::wait_search_finished()
 }
 
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 template<class S, class M, class R>
 SearchBase<S, M, R>::AssertionHandler::AssertionHandler(
         const SearchBase& search)
@@ -661,7 +661,7 @@ SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
       m_nu_threads(nu_threads),
       m_exploration_constant(0),
       m_tmp_tree(memory / 2, m_nu_threads)
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
       , m_assertion_handler(*this)
 #endif
 { }
@@ -672,7 +672,7 @@ SearchBase<S, M, R>::~SearchBase() = default; // Non-inline to avoid GCC -Winlin
 template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state) const
 {
-#if LIBBOARDGAME_DISABLE_LOG
+#ifdef LIBBOARDGAME_DISABLE_LOG
     LIBBOARDGAME_UNUSED(thread_state);
 #endif
     if (m_max_count > 0 && m_tree.get_root().get_visit_count() >= m_max_count)
@@ -742,7 +742,7 @@ template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_cannot_change(ThreadState& thread_state,
                                               Float remaining) const
 {
-#if LIBBOARDGAME_DISABLE_LOG
+#ifdef LIBBOARDGAME_DISABLE_LOG
     LIBBOARDGAME_UNUSED(thread_state);
 #endif
     // select_final() selects move with highest number of wins.
@@ -814,7 +814,7 @@ void SearchBase<S, M, R>::create_threads()
     }
 }
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 template<class S, class M, class R>
 string SearchBase<S, M, R>::dump() const
 {
@@ -1027,7 +1027,7 @@ bool SearchBase<S, M, R>::prune(TimeSource& time_source, double time,
                                 Float prune_min_count,
                                 Float& new_prune_min_count)
 {
-#if LIBBOARDGAME_DISABLE_LOG
+#ifdef LIBBOARDGAME_DISABLE_LOG
     LIBBOARDGAME_UNUSED(time);
 #endif
     Timer timer(time_source);

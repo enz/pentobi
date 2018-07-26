@@ -85,7 +85,7 @@ Board::Board(Variant variant)
     });
     init_variant(variant);
     init();
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     m_snapshot.moves_size =
             numeric_limits<decltype(m_snapshot.moves_size)>::max();
 #endif

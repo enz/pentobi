@@ -35,7 +35,7 @@ public:
         increase the number of lists and the total memory used for all lists.
         Therefore, the optimal value for speeding up the matching depends on
         the CPU cache size. */
-#if PENTOBI_LOW_RESOURCES
+#ifdef PENTOBI_LOW_RESOURCES
     static const unsigned adj_status_nu_adj = 5;
 #else
     static const unsigned adj_status_nu_adj = 6;

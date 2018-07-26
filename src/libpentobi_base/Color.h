@@ -98,7 +98,7 @@ private:
 
 inline Color::Color()
 {
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
     m_i = value_uninitialized;
 #endif
 }

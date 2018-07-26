@@ -12,7 +12,7 @@
 
 #include <list>
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 #include <algorithm>
 #include <functional>
 #include <sstream>
@@ -21,7 +21,7 @@
 #include "Log.h"
 #endif
 
-#if LIBBOARDGAME_DISABLE_LOG
+#ifdef LIBBOARDGAME_DISABLE_LOG
 #include "Unused.h"
 #endif
 
@@ -55,12 +55,12 @@ AssertionHandler::~AssertionHandler()
 
 //----------------------------------------------------------------------------
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 
 void handle_assertion(const char* expression, const char* file, int line)
 {
     static bool is_during_handle_assertion = false;
-#if LIBBOARDGAME_DISABLE_LOG
+#ifdef LIBBOARDGAME_DISABLE_LOG
     LIBBOARDGAME_UNUSED(expression);
     LIBBOARDGAME_UNUSED(file);
     LIBBOARDGAME_UNUSED(line);

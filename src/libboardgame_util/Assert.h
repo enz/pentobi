@@ -26,7 +26,7 @@ public:
     virtual void run() = 0;
 };
 
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 
 /** Function used by the LIBBOARDGAME_ASSERT macro to run all assertion
     handlers. */
@@ -47,7 +47,7 @@ public:
     allows the user to register assertion handlers that are executed before the
     program is aborted. Assertions are only enabled if the macro
     LIBBOARDGAME_DEBUG is true. */
-#if LIBBOARDGAME_DEBUG
+#ifdef LIBBOARDGAME_DEBUG
 #define LIBBOARDGAME_ASSERT(expr)                                       \
     ((expr) ? (static_cast<void>(0))                                    \
      : libboardgame_util::handle_assertion(#expr, __FILE__, __LINE__))
