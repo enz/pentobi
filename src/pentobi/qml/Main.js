@@ -50,7 +50,6 @@ function autoSaveNoVerify() {
     settings.isRated = rootWindow.isRated
     settings.wasGenMoveRunning = rootWindow.wasGenMoveRunning
     analyzeGameModel.autoSave(gameModel)
-    cancelRunning()
 }
 
 function autoSaveNoVerifyAndQuit() {
