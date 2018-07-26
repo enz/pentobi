@@ -684,6 +684,10 @@
         <source>PNG image files</source>
         <translation>PNG-bildefiler</translation>
     </message>
+    <message>
+        <source>JPEG image files</source>
+        <translation>JPEG-bildefiler</translation>
+    </message>
 </context>
 <context>
     <name>InitialRatingDialog</name>

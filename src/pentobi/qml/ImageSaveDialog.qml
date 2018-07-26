@@ -11,8 +11,14 @@ import "." as Pentobi
 Pentobi.FileDialog {
     title: isDesktop ? qsTr("Save Image") : ""
     selectExisting: false
-    nameFilterLabels: [ qsTr("PNG image files") ]
-    nameFilters: [ [ "*.png", "*.PNG" ] ]
+    nameFilterLabels: [
+        qsTr("PNG image files"),
+        qsTr("JPEG image files")
+    ]
+    nameFilters: [
+        [ "*.png", "*.PNG" ],
+        [ "*.jpg", "*.JPG", "*.jpeg", "*.JPEG" ]
+    ]
     folder: rootWindow.folder
     onAccepted: {
         rootWindow.folder = folder
