@@ -10,8 +10,8 @@ import "." as Pentobi
 
 Pentobi.FileDialog {
     title: isDesktop ? qsTr("Open") : ""
-    nameFilterText: qsTr("Blokus games (*.blksgf)")
-    nameFilter: "*.blksgf"
+    nameFilterLabels: [ qsTr("Blokus games") ]
+    nameFilters: [ [ "*.blksgf", "*.BLKSGF" ] ]
     folder: rootWindow.folder
     onOpened: name = ""
     onAccepted: {

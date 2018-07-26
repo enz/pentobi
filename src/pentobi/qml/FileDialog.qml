@@ -20,8 +20,8 @@ Pentobi.Dialog {
     property alias name: nameField.text
     property url folder
     property url fileUrl
-    property string nameFilterText
-    property string nameFilter
+    property var nameFilterLabels
+    property var nameFilters
 
     property url _lastFolder
 
@@ -244,11 +244,17 @@ Pentobi.Dialog {
             ComboBox {
                 id: comboBoxNameFilter
 
-                model: [ nameFilterText, qsTr("All files (*)") ]
+                model: {
+                    var result = nameFilterLabels
+                    nameFilterLabels.push(qsTr("All files"))
+                    return result
+                }
                 onCurrentIndexChanged:
-                    if (currentIndex == 0) folderModel.nameFilters = [ root.nameFilter ]
-                    else folderModel.nameFilters = [ "*" ]
-                Layout.preferredWidth: Math.min(font.pixelSize * 18, 0.9 * rootWindow.width)
+                    if (currentIndex < root.nameFilters.length)
+                        folderModel.nameFilters = root.nameFilters[currentIndex]
+                    else
+                        folderModel.nameFilters = [ "*" ]
+                Layout.preferredWidth: Math.min(font.pixelSize * 14, 0.9 * rootWindow.width)
                 Layout.alignment: Qt.AlignRight
             }
         }

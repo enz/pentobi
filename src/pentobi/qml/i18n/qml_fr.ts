@@ -183,7 +183,11 @@
     </message>
     <message>
         <source>Text files (*.txt)</source>
-        <translation>Fichiers texte (*.txt)</translation>
+        <translation type="vanished">Fichiers texte (*.txt)</translation>
+    </message>
+    <message>
+        <source>Text files</source>
+        <translation>Fichiers texte</translation>
     </message>
 </context>
 <context>
@@ -312,7 +316,7 @@
     <name>FileDialog</name>
     <message>
         <source>All files (*)</source>
-        <translation>Tous les fichiers (*)</translation>
+        <translation type="vanished">Tous les fichiers (*)</translation>
     </message>
     <message>
         <source>Open</source>
@@ -340,6 +344,10 @@
         <source>C</source>
         <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
         <translation type="vanished">A</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Tous les fichiers</translation>
     </message>
 </context>
 <context>
@@ -670,7 +678,11 @@
     </message>
     <message>
         <source>PNG image files (*.png)</source>
-        <translation>Image PNG (*.png)</translation>
+        <translation type="vanished">Image PNG (*.png)</translation>
+    </message>
+    <message>
+        <source>PNG image files</source>
+        <translation>Image PNG</translation>
     </message>
 </context>
 <context>
@@ -741,7 +753,7 @@
     </message>
     <message>
         <source>Saving image failed.</source>
-        <translation>Impossible d&apos;enregistrer l&apos;image.</translation>
+        <translation type="vanished">Impossible d&apos;enregistrer l&apos;image.</translation>
     </message>
     <message>
         <source>Creating image failed.</source>
@@ -890,6 +902,10 @@
     <message>
         <source>File was deleted by another application. Discard game?</source>
         <translation>Le fichier a été supprimé par une autre application. Abandonner la partie ?</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format.</source>
+        <translation>Impossible d&apos;enregistrer l&apos;image ou format d&apos;image non pris en charge.</translation>
     </message>
 </context>
 <context>
@@ -1355,7 +1371,11 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
-        <translation>Parties de Blokus (*.blksgf)</translation>
+        <translation type="vanished">Parties de Blokus (*.blksgf)</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Parties de Blokus</translation>
     </message>
 </context>
 <context>
@@ -1521,11 +1541,15 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
-        <translation>Parties de Blokus (*.blksgf)</translation>
+        <translation type="vanished">Parties de Blokus (*.blksgf)</translation>
     </message>
     <message>
         <source>Overwrite existing file?</source>
         <translation>Remplacer le fichier existant ?</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Parties de Blokus</translation>
     </message>
 </context>
 <context>

@@ -11,8 +11,8 @@ import "." as Pentobi
 Pentobi.FileDialog {
     title: isDesktop ? qsTr("Export ASCII Art") : ""
     selectExisting: false
-    nameFilterText: qsTr("Text files (*.txt)")
-    nameFilter: "*.txt"
+    nameFilterLabels: [ qsTr("Text files") ]
+    nameFilters: [ [ "*.txt", "*.TXT" ] ]
     folder: rootWindow.folder
     onAccepted: {
         rootWindow.folder = folder

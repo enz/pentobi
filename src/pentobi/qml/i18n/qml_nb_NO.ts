@@ -183,7 +183,11 @@
     </message>
     <message>
         <source>Text files (*.txt)</source>
-        <translation>Tekstfiler (*.txt)</translation>
+        <translation type="vanished">Tekstfiler (*.txt)</translation>
+    </message>
+    <message>
+        <source>Text files</source>
+        <translation>Tekstfiler</translation>
     </message>
 </context>
 <context>
@@ -312,7 +316,7 @@
     <name>FileDialog</name>
     <message>
         <source>All files (*)</source>
-        <translation>Alle filer (*)</translation>
+        <translation type="vanished">Alle filer (*)</translation>
     </message>
     <message>
         <source>Open</source>
@@ -340,6 +344,10 @@
         <source>C</source>
         <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
         <translation type="vanished">A</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Alle filer</translation>
     </message>
 </context>
 <context>
@@ -670,7 +678,11 @@
     </message>
     <message>
         <source>PNG image files (*.png)</source>
-        <translation>PNG-bildefiler (*.png)</translation>
+        <translation type="vanished">PNG-bildefiler (*.png)</translation>
+    </message>
+    <message>
+        <source>PNG image files</source>
+        <translation>PNG-bildefiler</translation>
     </message>
 </context>
 <context>
@@ -741,7 +753,7 @@
     </message>
     <message>
         <source>Saving image failed.</source>
-        <translation>Lagring av bilde mislyktes.</translation>
+        <translation type="vanished">Lagring av bilde mislyktes.</translation>
     </message>
     <message>
         <source>Creating image failed.</source>
@@ -890,6 +902,10 @@
     <message>
         <source>File was deleted by another application. Discard game?</source>
         <translation>Filen ble slettet av et annet program. Forkast spill?</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1355,7 +1371,11 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
-        <translation>Blokus-spill (*.blksgf)</translation>
+        <translation type="vanished">Blokus-spill (*.blksgf)</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Blokus-spill</translation>
     </message>
 </context>
 <context>
@@ -1521,11 +1541,15 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
-        <translation>Blokus-spill (*.blksgf)</translation>
+        <translation type="vanished">Blokus-spill (*.blksgf)</translation>
     </message>
     <message>
         <source>Overwrite existing file?</source>
         <translation>Overskriv eksisterende fil?</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Blokus-spill</translation>
     </message>
 </context>
 <context>

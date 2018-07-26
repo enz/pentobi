@@ -11,8 +11,8 @@ import "." as Pentobi
 Pentobi.FileDialog {
     title: isDesktop ? qsTr("Save") : ""
     selectExisting: false
-    nameFilterText: qsTr("Blokus games (*.blksgf)")
-    nameFilter: "*.blksgf"
+    nameFilterLabels: [ qsTr("Blokus games") ]
+    nameFilters: [ [ "*.blksgf", "*.BLKSGF" ] ]
     folder: rootWindow.folder
     onAccepted: {
         rootWindow.folder = folder

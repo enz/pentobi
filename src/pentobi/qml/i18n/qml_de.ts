@@ -183,7 +183,11 @@
     </message>
     <message>
         <source>Text files (*.txt)</source>
-        <translation>Textdateien (*.txt)</translation>
+        <translation type="vanished">Textdateien (*.txt)</translation>
+    </message>
+    <message>
+        <source>Text files</source>
+        <translation>Textdateien</translation>
     </message>
 </context>
 <context>
@@ -312,7 +316,7 @@
     <name>FileDialog</name>
     <message>
         <source>All files (*)</source>
-        <translation>Alle Dateien (*)</translation>
+        <translation type="vanished">Alle Dateien (*)</translation>
     </message>
     <message>
         <source>Open</source>
@@ -340,6 +344,10 @@
         <source>C</source>
         <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
         <translation type="vanished">A</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Alle Dateien</translation>
     </message>
 </context>
 <context>
@@ -670,7 +678,11 @@
     </message>
     <message>
         <source>PNG image files (*.png)</source>
-        <translation>PNG-Bilddateien (*.png)</translation>
+        <translation type="vanished">PNG-Bilddateien (*.png)</translation>
+    </message>
+    <message>
+        <source>PNG image files</source>
+        <translation>PNG-Bilddateien</translation>
     </message>
 </context>
 <context>
@@ -741,7 +753,7 @@
     </message>
     <message>
         <source>Saving image failed.</source>
-        <translation>Grafik konnte nicht gespeichert werden.</translation>
+        <translation type="vanished">Grafik konnte nicht gespeichert werden.</translation>
     </message>
     <message>
         <source>Creating image failed.</source>
@@ -890,6 +902,10 @@
     <message>
         <source>File was deleted by another application. Discard game?</source>
         <translation>Datei wurde von einer anderen Anwendung bearbeitet. Spiel verwerfen?</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format.</source>
+        <translation>Grafik konnte nicht gespeichert werden oder Bildformat nicht unterstützt.</translation>
     </message>
 </context>
 <context>
@@ -1355,7 +1371,11 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
-        <translation>Blokus-Partien (*.blksgf)</translation>
+        <translation type="vanished">Blokus-Partien (*.blksgf)</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Blokus-Partien</translation>
     </message>
 </context>
 <context>
@@ -1521,11 +1541,15 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Blokus games (*.blksgf)</source>
-        <translation>Blokus-Partien (*.blksgf)</translation>
+        <translation type="vanished">Blokus-Partien (*.blksgf)</translation>
     </message>
     <message>
         <source>Overwrite existing file?</source>
         <translation>Existierende Datei überschreiben?</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Blokus-Partien</translation>
     </message>
 </context>
 <context>
