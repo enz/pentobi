@@ -259,13 +259,21 @@ public:
     Float get_exploration_constant() const { return m_exploration_constant; }
 
     /** Reuse the subtree from the previous search if the current position is
-        a follow-up position of the previous one. */
+        a follow-up position of the previous one.
+        It will also reuse the tree if it is the same position but the last
+        search was aborted. The default value is true, because this is
+        the usually preferred behavior during games to save search time.
+        @see set_reuse_tree() */
     void set_reuse_subtree(bool enable);
 
     bool get_reuse_subtree() const;
 
     /** Reuse the tree from the previous search if the current position is
-        the same position as the previous one. */
+        the same position as the previous one.
+        The default value is false, because the usually preferred behavior
+        is to see if the search generates different moves when doing subsequent
+        searches in the same position.
+        @see set_subreuse_tree() */
     void set_reuse_tree(bool enable);
 
     bool get_reuse_tree() const;
@@ -488,6 +496,8 @@ private:
 
     /** Time of last search. */
     double m_last_time;
+
+    bool m_last_aborted = false;
 
     Float m_rave_parent_max = 50000;
 
@@ -1098,13 +1108,14 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     else
         for (PlayerInt i = 0; i < m_nu_players; ++i)
             m_root_val[i].init(SearchParamConst::tie_value, 1);
-    if ((m_reuse_subtree && is_followup) || (m_reuse_tree && is_same))
+    if ((m_reuse_subtree && (is_followup || m_last_aborted))
+            || (m_reuse_tree && is_same))
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
         if (m_followup_sequence.empty())
         {
             if (tree_nodes > 1)
-                LIBBOARDGAME_LOG("Reusing all ", tree_nodes, "nodes (count=",
+                LIBBOARDGAME_LOG("Reusing all ", tree_nodes, " nodes (count=",
                                  m_tree.get_root().get_visit_count(), ")");
         }
         else
@@ -1216,6 +1227,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     LIBBOARDGAME_LOG(get_info());
     bool result = select_move(mv);
     m_time_source = nullptr;
+    m_last_aborted = get_abort();
     return result;
 }
 
