@@ -43,12 +43,12 @@ function autoSaveNoVerify() {
              || delayedCheckComputerMove.running)
             && ! isPlaySingleMoveRunning
     gameModel.autoSave()
-    settings.computerPlays0 = rootWindow.computerPlays0
-    settings.computerPlays1 = rootWindow.computerPlays1
-    settings.computerPlays2 = rootWindow.computerPlays2
-    settings.computerPlays3 = rootWindow.computerPlays3
-    settings.isRated = rootWindow.isRated
-    settings.wasGenMoveRunning = rootWindow.wasGenMoveRunning
+    settings.computerPlays0 = computerPlays0
+    settings.computerPlays1 = computerPlays1
+    settings.computerPlays2 = computerPlays2
+    settings.computerPlays3 = computerPlays3
+    settings.isRated = isRated
+    settings.wasGenMoveRunning = wasGenMoveRunning
     analyzeGameModel.autoSave(gameModel)
 }
 
@@ -303,12 +303,12 @@ function help() {
 
 function init() {
     gameModel.loadAutoSave()
-    rootWindow.computerPlays0 = settings.computerPlays0
-    rootWindow.computerPlays1 = settings.computerPlays1
-    rootWindow.computerPlays2 = settings.computerPlays2
-    rootWindow.computerPlays3 = settings.computerPlays3
-    rootWindow.isRated = settings.isRated
-    rootWindow.wasGenMoveRunning = settings.wasGenMoveRunning
+    computerPlays0 = settings.computerPlays0
+    computerPlays1 = settings.computerPlays1
+    computerPlays2 = settings.computerPlays2
+    computerPlays3 = settings.computerPlays3
+    isRated = settings.isRated
+    wasGenMoveRunning = settings.wasGenMoveRunning
     gameDisplay.createPieces()
     if (isAndroid) {
         // Reset default folder if user navigated outside external storage
@@ -335,7 +335,7 @@ function init() {
     // initialFile is a context property set from command line argument
     if (initialFile) {
         if (gameModel.isModified)
-            rootWindow.show()
+            show()
         verify(function() { openFileBlocking(initialFile) })
     }
     if (wasGenMoveRunning || isRated)
@@ -647,7 +647,7 @@ function saveAs() {
     if (! checkStoragePermission())
         return
     var dialog = saveDialog.get()
-    dialog.name = gameModel.suggestFileName(rootWindow.folder)
+    dialog.name = gameModel.suggestFileName(folder)
     dialog.open()
 }
 
