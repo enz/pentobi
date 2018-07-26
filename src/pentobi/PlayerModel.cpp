@@ -56,18 +56,6 @@ PlayerModel::PlayerModel(QObject* parent)
     });
     connect(&m_watcher, &QFutureWatcher<GenMoveResult>::finished,
             this, &PlayerModel::genMoveFinished);
-    QSettings settings;
-    m_level = settings.value("level", 1).toUInt();
-    if (m_level < 1)
-    {
-        qDebug() << "Invalid level in settings:" << m_level;
-        m_level = 1;
-    }
-    else if (m_level > maxLevel)
-    {
-        qDebug() << "Level in settings too high, using" << maxLevel;
-        m_level = maxLevel;
-    }
 }
 
 PlayerModel::~PlayerModel()
@@ -163,10 +151,6 @@ void PlayerModel::setLevel(unsigned level)
 {
     if (m_level == level)
         return;
-    {
-        QSettings settings;
-        settings.setValue("level", level);
-    }
     m_level = level;
     emit levelChanged();
 }
@@ -183,7 +167,18 @@ void PlayerModel::startGenMove(GameModel* gm)
 {
     auto& bd = gm->getBoard();
     cancelGenMove();
-    m_player->set_level(min(m_level, maxLevel));
+    auto level = m_level;
+    if (level < 1)
+    {
+        qDebug() << "Invalid level:" << level << "using 1";
+        level = 1;
+    }
+    else if (level > maxLevel)
+    {
+        qDebug() << "Invalid level:" << level << "using" << maxLevel;
+        level = maxLevel;
+    }
+    m_player->set_level(level);
     auto variant = gm->getBoard().get_variant();
     if (! m_player->is_book_loaded(variant))
         loadBook(variant);

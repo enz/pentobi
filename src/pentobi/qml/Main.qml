@@ -131,6 +131,7 @@ ApplicationWindow {
         property alias exportImageWidth: rootWindow.exportImageWidth
         property alias showVariations: gameModel.showVariations
         property alias initComputerColorsOnNewGame: rootWindow.initComputerColorsOnNewGame
+        property alias level: playerModel.level
 
         // Settings related to autosaved game (no aliases)
         property bool computerPlays0
