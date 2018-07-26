@@ -610,12 +610,12 @@
     </message>
     <message>
         <source>Untitled Game</source>
-        <translation>Partie sans nom</translation>
+        <translation type="vanished">Partie sans nom</translation>
     </message>
     <message>
         <source>Untitled Game %1</source>
         <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation>Partie sans nom %1</translation>
+        <translation type="vanished">Partie sans nom %1</translation>
     </message>
     <message>
         <source>New Folder</source>
@@ -625,6 +625,15 @@
         <source>New Folder %1</source>
         <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
         <translation>Nouveau dossier %1</translation>
+    </message>
+    <message>
+        <source>Untitled</source>
+        <translation>Sans nom</translation>
+    </message>
+    <message>
+        <source>Untitled %1</source>
+        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
+        <translation>Sans nom %1</translation>
     </message>
 </context>
 <context>

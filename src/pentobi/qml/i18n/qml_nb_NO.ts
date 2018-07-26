@@ -610,12 +610,12 @@
     </message>
     <message>
         <source>Untitled Game</source>
-        <translation>Spill uten tittel</translation>
+        <translation type="vanished">Spill uten tittel</translation>
     </message>
     <message>
         <source>Untitled Game %1</source>
         <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation>Spill uten tittel %1</translation>
+        <translation type="vanished">Spill uten tittel %1</translation>
     </message>
     <message>
         <source>New Folder</source>
@@ -625,6 +625,15 @@
         <source>New Folder %1</source>
         <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Untitled</source>
+        <translation>Uten tittel</translation>
+    </message>
+    <message>
+        <source>Untitled %1</source>
+        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
+        <translation>Uten tittel %1</translation>
     </message>
 </context>
 <context>

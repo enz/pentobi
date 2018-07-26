@@ -1507,13 +1507,13 @@ QString GameModel::suggestFileName(const QUrl& folder,
     QString suffix = ! fileEnding.isEmpty() && ! fileEnding.startsWith(".") ?
                 "." + fileEnding : fileEnding;
     auto localFolder = folder.toLocalFile();
-    QString file = localFolder + '/' + tr("Untitled Game") + suffix;
+    QString file = localFolder + '/' + tr("Untitled") + suffix;
     if (QFileInfo::exists(file))
         for (unsigned i = 1; ; ++i)
         {
             //: The argument is a number, which will be increased if a
             //: file with the same name already exists
-            file = localFolder + '/' + tr("Untitled Game %1").arg(i)
+            file = localFolder + '/' + tr("Untitled %1").arg(i)
                     + suffix;
             if (! QFileInfo::exists(file))
                 break;
