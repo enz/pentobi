@@ -17,6 +17,7 @@
 #include <QClipboard>
 #include <QGuiApplication>
 #include <QDebug>
+#include <QDir>
 #include <QFileInfo>
 #include <QSettings>
 #include <QTextCodec>
@@ -304,6 +305,15 @@ bool GameModel::checkSetupAllowed() const
     if (m_canGoBackward || m_canGoForward || m_moveNumber > 0)
     {
         qWarning("GameModel: setup only supported in root node");
+        return false;
+    }
+    return true;
+}
+
+bool GameModel::createFolder(const QUrl& folder)
+{
+    if (! QDir().mkdir(folder.toLocalFile())) {
+        m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
     return true;
@@ -1493,24 +1503,36 @@ void GameModel::setUtf8()
 QString GameModel::suggestFileName(const QUrl& folder,
                                    const QString& fileEnding)
 {
-    QString file;
-    if (! m_file.isEmpty())
-        file = m_file;
-    else
-    {
-        auto localFolder = folder.toLocalFile();
-        file = localFolder + '/' + tr("Untitled Game") + '.' + fileEnding;
-        if (QFileInfo::exists(file))
-            for (unsigned i = 1; ; ++i)
-            {
-                //: The argument is a number, which will be increased if a
-                //: file with the same name already exists
-                file = localFolder + '/' + tr("Untitled Game %1").arg(i) +
-                        '.' + fileEnding;
-                if (! QFileInfo::exists(file))
-                    break;
-            }
-    }
+    QString suffix = ! fileEnding.isEmpty() && ! fileEnding.startsWith(".") ?
+                "." + fileEnding : fileEnding;
+    auto localFolder = folder.toLocalFile();
+    QString file = localFolder + '/' + tr("Untitled Game") + suffix;
+    if (QFileInfo::exists(file))
+        for (unsigned i = 1; ; ++i)
+        {
+            //: The argument is a number, which will be increased if a
+            //: file with the same name already exists
+            file = localFolder + '/' + tr("Untitled Game %1").arg(i)
+                    + suffix;
+            if (! QFileInfo::exists(file))
+                break;
+        }
+    return QUrl::fromLocalFile(file).fileName();
+}
+
+QString GameModel::suggestNewFolderName(const QUrl& folder)
+{
+    auto localFolder = folder.toLocalFile();
+    QString file = localFolder + '/' + tr("New Folder");
+    if (QFileInfo::exists(file))
+        for (unsigned i = 1; ; ++i)
+        {
+            //: The argument is a number, which will be increased if a
+            //: folder with the same name already exists
+            file = localFolder + '/' + tr("New Folder %1").arg(i);
+            if (! QFileInfo::exists(file))
+                break;
+        }
     return QUrl::fromLocalFile(file).fileName();
 }
 

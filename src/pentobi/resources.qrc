@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/icons/filedialog-folder.svg</file>
+        <file>qml/icons/filedialog-newfolder.svg</file>
         <file>qml/icons/filedialog-parent.svg</file>
         <file>qml/Actions.qml</file>
         <file>qml/AnalyzeDialog.qml</file>
@@ -47,6 +48,7 @@
         <file>qml/MoveAnnotationDialog.qml</file>
         <file>qml/NavigationButtons.qml</file>
         <file>qml/NavigationPanel.qml</file>
+        <file>qml/NewFolderDialog.qml</file>
         <file>qml/OpenDialog.qml</file>
         <file>qml/PieceCallisto.qml</file>
         <file>qml/PieceClassic.qml</file>

@@ -116,6 +116,7 @@ Pentobi.Dialog {
                         source: "icons/filedialog-parent.svg"
                         // Icon size is 16x16
                         width: font.pixelSize < 20 ? 16 : font.pixelSize
+                        height: font.pixelSize < 20 ? 16 : font.pixelSize
                         color: frame.palette.buttonText
                     }
                 }
@@ -124,6 +125,21 @@ Pentobi.Dialog {
                     elide: Text.ElideLeft
                     Layout.fillWidth: true
                 }
+                ToolButton {
+                    visible: ! selectExisting
+                    icon {
+                        source: "icons/filedialog-newfolder.svg"
+                        // Icon size is 22x22
+                        width: font.pixelSize < 20 ? 22 : 1.2 * font.pixelSize
+                        height: font.pixelSize < 20 ? 22 : 1.2 * font.pixelSize
+                        color: "transparent"
+                    }
+                    onClicked: {
+                        var dialog = newFolderDialog.get()
+                        dialog.folder = folderModel.folder
+                        dialog.open()
+                    }
+                }
             }
             Frame {
                 id: frame
@@ -131,7 +147,7 @@ Pentobi.Dialog {
                 padding: 0.1 * font.pixelSize
                 focusPolicy: Qt.TabFocus
                 Layout.fillWidth: true
-                Layout.preferredHeight: Math.min(font.pixelSize * 20, 0.4 * rootWindow.height)
+                Layout.preferredHeight: Math.min(font.pixelSize * 20, 0.3 * rootWindow.height)
                 background: Rectangle {
                     color: frame.palette.base
                     border.color: frame.activeFocus ? frame.palette.highlight : frame.palette.mid

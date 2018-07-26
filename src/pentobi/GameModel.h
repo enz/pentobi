@@ -138,6 +138,8 @@ public:
         there is no piece at this location. */
     Q_INVOKABLE PieceModel* addEmpty(const QPoint& pos);
 
+    Q_INVOKABLE bool createFolder(const QUrl& folder);
+
     Q_INVOKABLE void deleteAllVar();
 
     Q_INVOKABLE bool findNextComment();
@@ -251,6 +253,8 @@ public:
 
     Q_INVOKABLE QString suggestFileName(const QUrl& folder,
                                         const QString& fileEnding);
+
+    Q_INVOKABLE QString suggestNewFolderName(const QUrl& folder);
 
 
     QByteArray getSgf() const;

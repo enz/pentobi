@@ -185,6 +185,7 @@ ApplicationWindow {
     DialogLoader { id: gameVariantDialog; component: Component { GameVariantDialog { } } }
     DialogLoader { id: gameInfoDialog; component: Component { GameInfoDialog { } } }
     DialogLoader { id: initialRatingDialog; component: Component { InitialRatingDialog { } } }
+    DialogLoader { id: newFolderDialog; component: Component { NewFolderDialog { } } }
     DialogLoader { id: openDialog; component: Component { OpenDialog { } } }
     DialogLoader { id: exportImageDialog; component: Component { ExportImageDialog { } } }
     DialogLoader { id: imageSaveDialog; component: Component { ImageSaveDialog { } } }
