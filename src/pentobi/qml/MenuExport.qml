@@ -21,6 +21,11 @@ Pentobi.Menu {
         text: addMnemonic(qsTr("ASCII Art"),
                           //: Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.
                           qsTr("A"))
-        onTriggered: asciiArtSaveDialog.open()
+        onTriggered: {
+            var dialog = asciiArtSaveDialog.get()
+            dialog.name = gameModel.suggestFileName(folder, "txt")
+            dialog.selectNameFilter(0)
+            dialog.open()
+        }
     }
 }

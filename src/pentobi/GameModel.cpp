@@ -1490,7 +1490,8 @@ void GameModel::setUtf8()
     m_textCodec = QTextCodec::codecForName("UTF-8");
 }
 
-QString GameModel::suggestFileName(const QUrl& folder)
+QString GameModel::suggestFileName(const QUrl& folder,
+                                   const QString& fileEnding)
 {
     QString file;
     if (! m_file.isEmpty())
@@ -1498,17 +1499,14 @@ QString GameModel::suggestFileName(const QUrl& folder)
     else
     {
         auto localFolder = folder.toLocalFile();
-        file = localFolder;
-        file.append('/');
-        file.append(tr("Untitled Game.blksgf"));
+        file = localFolder + '/' + tr("Untitled Game") + '.' + fileEnding;
         if (QFileInfo::exists(file))
             for (unsigned i = 1; ; ++i)
             {
-                file = localFolder;
-                file.append('/');
                 //: The argument is a number, which will be increased if a
                 //: file with the same name already exists
-                file.append(tr("Untitled Game %1.blksgf").arg(i));
+                file = localFolder + '/' + tr("Untitled Game %1").arg(i) +
+                        '.' + fileEnding;
                 if (! QFileInfo::exists(file))
                     break;
             }

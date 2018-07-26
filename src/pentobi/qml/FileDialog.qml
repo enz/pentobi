@@ -23,6 +23,10 @@ Pentobi.Dialog {
     property var nameFilterLabels
     property var nameFilters
 
+    function selectNameFilter(index) {
+        comboBoxNameFilter.currentIndex = index
+    }
+
     property url _lastFolder
 
     function _selectNameField() {

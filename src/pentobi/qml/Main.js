@@ -647,7 +647,7 @@ function saveAs() {
     if (! checkStoragePermission())
         return
     var dialog = saveDialog.get()
-    dialog.name = gameModel.suggestFileName(folder)
+    dialog.name = gameModel.suggestFileName(folder, "blksgf")
     dialog.open()
 }
 

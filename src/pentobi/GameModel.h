@@ -249,7 +249,8 @@ public:
 
     Q_INVOKABLE PieceModel* previousPiece(PieceModel* currentPickedPiece);
 
-    Q_INVOKABLE QString suggestFileName(const QUrl& folder);
+    Q_INVOKABLE QString suggestFileName(const QUrl& folder,
+                                        const QString& fileEnding);
 
 
     QByteArray getSgf() const;

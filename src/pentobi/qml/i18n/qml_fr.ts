@@ -601,12 +601,21 @@
     </message>
     <message>
         <source>Untitled Game.blksgf</source>
-        <translation>Partie sans nom.blksgf</translation>
+        <translation type="vanished">Partie sans nom.blksgf</translation>
     </message>
     <message>
         <source>Untitled Game %1.blksgf</source>
         <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation>Partie sans nom %1.blksgf</translation>
+        <translation type="vanished">Partie sans nom %1.blksgf</translation>
+    </message>
+    <message>
+        <source>Untitled Game</source>
+        <translation>Partie sans nom</translation>
+    </message>
+    <message>
+        <source>Untitled Game %1</source>
+        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
+        <translation>Partie sans nom %1</translation>
     </message>
 </context>
 <context>
