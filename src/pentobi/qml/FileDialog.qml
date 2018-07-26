@@ -23,13 +23,7 @@ Pentobi.Dialog {
     property var nameFilterLabels
     property var nameFilters
 
-    function selectNameFilter(index) {
-        comboBoxNameFilter.currentIndex = index
-    }
-
-    property url _lastFolder
-
-    function _selectNameField() {
+    function selectNameField() {
         if (! isAndroid) {
             var pos = name.lastIndexOf(".")
             if (pos < 0)
@@ -39,6 +33,14 @@ Pentobi.Dialog {
         }
         view.currentIndex = -1
     }
+
+    function selectNameFilter(index) {
+        comboBoxNameFilter.currentIndex = index
+    }
+
+    signal nameFilterChanged(int index)
+
+    property url _lastFolder
 
     footer: DialogButtonBox {
         Button {
@@ -56,7 +58,7 @@ Pentobi.Dialog {
         }
         Pentobi.ButtonCancel { }
     }
-    onOpened: _selectNameField()
+    onOpened: selectNameField()
     onAccepted: {
         folder = folderModel.folder
         fileUrl = folder + "/" + name
@@ -203,7 +205,7 @@ Pentobi.Dialog {
                                         root.accept()
                                     else {
                                         name = fileName
-                                        _selectNameField()
+                                        selectNameField()
                                     }
                                 }
                         }
@@ -253,11 +255,13 @@ Pentobi.Dialog {
                     nameFilterLabels.push(qsTr("All files"))
                     return result
                 }
-                onCurrentIndexChanged:
+                onCurrentIndexChanged: {
                     if (currentIndex < root.nameFilters.length)
                         folderModel.nameFilters = root.nameFilters[currentIndex]
                     else
                         folderModel.nameFilters = [ "*" ]
+                    nameFilterChanged(currentIndex)
+                }
                 Layout.preferredWidth: Math.min(font.pixelSize * 14, 0.9 * rootWindow.width)
                 Layout.alignment: Qt.AlignRight
             }
