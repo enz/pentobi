@@ -22,6 +22,7 @@ Pentobi.Dialog {
     property url fileUrl
     property var nameFilterLabels
     property var nameFilters
+    readonly property url defaultFolder: androidUtils.getDefaultFolder()
 
     function selectNameField() {
         if (! isAndroid) {
@@ -58,7 +59,11 @@ Pentobi.Dialog {
         }
         Pentobi.ButtonCancel { }
     }
-    onOpened: selectNameField()
+    onOpened: {
+        if (isAndroid && ! folder.toString().startsWith(defaultFolder.toString()))
+            folder = defaultFolder
+        selectNameField()
+    }
     onAccepted: {
         folder = folderModel.folder
         fileUrl = folder + "/" + name
@@ -102,9 +107,11 @@ Pentobi.Dialog {
                 ToolButton {
                     id: backButton
 
-                    property bool hasParent: ! folderModel.folder.toString().endsWith(":///")
+                    property bool hasParent:
+                        ! folderModel.folder.toString().endsWith(":///")
+                        && ! (isAndroid && folderModel.folder === defaultFolder)
 
-                    enabled: hasParent
+                    visible: hasParent
                     onClicked:
                         if (hasParent) {
                             _lastFolder = folderModel.folder
@@ -121,12 +128,17 @@ Pentobi.Dialog {
                     }
                 }
                 Label {
-                    text: Logic.getFileFromUrl(folderModel.folder)
+                    text: {
+                        if (isAndroid
+                                && folderModel.folder.toString().startsWith(defaultFolder.toString()))
+                            return folderModel.folder.toString().substr(defaultFolder.toString().length + 1)
+                        Logic.getFileFromUrl(folderModel.folder)
+                    }
                     elide: Text.ElideLeft
                     Layout.fillWidth: true
                 }
                 ToolButton {
-                    visible: ! selectExisting
+                    visible: ! selectExisting && ! isAndroid
                     icon {
                         source: "icons/filedialog-newfolder.svg"
                         // Icon size is 16x16

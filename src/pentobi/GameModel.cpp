@@ -312,7 +312,8 @@ bool GameModel::checkSetupAllowed() const
 
 bool GameModel::createFolder(const QUrl& folder)
 {
-    if (! QDir().mkdir(folder.toLocalFile())) {
+    auto localFolder = folder.toLocalFile();
+    if (! QDir().mkdir(localFolder)) {
         m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
