@@ -219,7 +219,6 @@ Pentobi.Dialog {
                                 }
                             }
                             onClicked: {
-                                view.currentIndex = index
                                 if (folderModel.isFolder(index)) {
                                     delayedOpenFolderTimer.folderName = fileName
                                     delayedOpenFolderTimer.restart()
@@ -229,6 +228,7 @@ Pentobi.Dialog {
                                     if (! selectExisting)
                                         selectNameField()
                                 }
+                                view.currentIndex = index
                             }
                             onDoubleClicked:
                                 if (! folderModel.isFolder(index))
