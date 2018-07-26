@@ -238,7 +238,7 @@ function exportImage(fileUrl) {
     if (! board.grabToImage(function(result) {
         var file = getFileFromUrl(fileUrl)
         if (! result.saveToFile(file))
-            showInfo(qsTr("Saving image failed."))
+            showInfo(qsTr("Saving image failed or unsupported image format."))
         else {
             androidUtils.scanFile(file)
             showTemporaryMessage(qsTr("Image saved."))
