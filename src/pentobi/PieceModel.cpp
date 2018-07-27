@@ -66,7 +66,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
     bool isCallisto = (bd.get_piece_set() == PieceSet::callisto);
     auto& info = bd.get_piece_info(piece);
     auto& points = info.get_points();
-    m_elements.reserve(points.size());
+    m_elements.reserve(static_cast<int>(points.size()));
     for (auto& p : points)
     {
         if (isNexos && geo.get_point_type(p) == 0)
@@ -75,7 +75,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
     }
     if (isNexos)
     {
-        ArrayList<CoordPoint, 2 * PieceInfo::max_scored_size> candidates;
+        ArrayList<CoordPoint, 2 * PieceInfo::max_scored_size, int> candidates;
         for (auto& p : points)
         {
             auto pointType = geo.get_point_type(p);
