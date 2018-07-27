@@ -16,7 +16,7 @@ Pentobi.Dialog {
     property int moveNumber
 
     title: isDesktop ? qsTr("Move Annotation") : ""
-    footer: DialogButtonBox {
+    footer: Pentobi.DialogButtonBox {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }
@@ -52,15 +52,8 @@ Pentobi.Dialog {
     }
 
     Item {
-        implicitWidth: {
-            // Qt 5.11 doesn't correctly handle dialog sizing if dialog (incl.
-            // frame) is wider than window and Default style never makes footer
-            // wider than content (potentially eliding button texts).
-            var w = columnLayout.implicitWidth
-            w = Math.max(w, font.pixelSize * 18)
-            w = Math.min(w, 0.9 * rootWindow.width)
-            return w
-        }
+        implicitWidth: Math.min(columnLayout.implicitWidth,
+                                0.9 * rootWindow.width)
         implicitHeight: columnLayout.implicitHeight
 
         ColumnLayout {

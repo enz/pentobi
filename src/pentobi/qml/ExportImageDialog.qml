@@ -11,7 +11,7 @@ import "." as Pentobi
 
 Pentobi.Dialog {
     title: isDesktop ? qsTr("Export Image") : ""
-    footer: DialogButtonBox {
+    footer: Pentobi.DialogButtonBox {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }

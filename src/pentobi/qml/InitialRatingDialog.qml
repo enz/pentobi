@@ -13,7 +13,7 @@ import "Main.js" as Logic
 
 Pentobi.Dialog {
     title: isDesktop ? qsTr("Initial Rating") : ""
-    footer: DialogButtonBox {
+    footer: Pentobi.DialogButtonBox {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }

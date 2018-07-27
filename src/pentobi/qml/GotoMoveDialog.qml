@@ -13,7 +13,7 @@ Pentobi.Dialog {
     id: root
 
     title: isDesktop ? qsTr("Go to Move") : ""
-    footer: DialogButtonBox {
+    footer: Pentobi.DialogButtonBox {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }
@@ -21,15 +21,8 @@ Pentobi.Dialog {
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
     Item {
-        implicitWidth: {
-            // Qt 5.11 doesn't correctly handle dialog sizing if dialog (incl.
-            // frame) is wider than window and Default style never makes footer
-            // wider than content (potentially eliding button texts).
-            var w = rowLayout.implicitWidth
-            w = Math.max(w, font.pixelSize * 18)
-            w = Math.min(w, 0.9 * rootWindow.width)
-            return w
-        }
+        implicitWidth: Math.min(rowLayout.implicitWidth,
+                                0.9 * rootWindow.width)
         implicitHeight: rowLayout.implicitHeight
 
         RowLayout {

@@ -43,7 +43,7 @@ Pentobi.Dialog {
 
     property url _lastFolder
 
-    footer: DialogButtonBox {
+    footer: Pentobi.DialogButtonBox {
         Button {
             enabled: name.trim().length > 0
             text: selectExisting ?
@@ -70,14 +70,7 @@ Pentobi.Dialog {
     }
 
     Item {
-        implicitWidth: {
-            // Qt 5.11 doesn't correctly handle dialog sizing if dialog (incl.
-            // frame) is wider than window and Default style never makes footer
-            // wider than content (potentially eliding button texts).
-            var w = font.pixelSize * 30
-            w = Math.min(w, 0.9 * rootWindow.width)
-            return w
-        }
+        implicitWidth: Math.min(font.pixelSize * 30, 0.9 * rootWindow.width)
         implicitHeight: columnLayout.implicitHeight
 
         Action {

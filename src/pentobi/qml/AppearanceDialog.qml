@@ -19,7 +19,7 @@ Pentobi.Dialog {
     // the same ButtonBox for both and setting visible to false for ButtonApply
     // if not desktop causes a binding loop for implicitWidth in Qt 5.11 and
     // elided Text on the dialog buttons.
-    property DialogButtonBox footerDesktop: DialogButtonBox {
+    property DialogButtonBox footerDesktop: Pentobi.DialogButtonBox {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonApply {
             enabled:
@@ -31,7 +31,7 @@ Pentobi.Dialog {
         }
         Pentobi.ButtonOk { }
     }
-    property DialogButtonBox footerMobile: DialogButtonBox {
+    property DialogButtonBox footerMobile: Pentobi.DialogButtonBox {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }
@@ -91,7 +91,7 @@ Pentobi.Dialog {
     }
 
     Flickable {
-        implicitWidth: Math.min(font.pixelSize * 18, 0.9 * rootWindow.width)
+        implicitWidth: Math.min(columnLayout.implicitWidth, 0.9 * rootWindow.width)
         implicitHeight: Math.min(columnLayout.implicitHeight, 0.7 * rootWindow.height)
         contentHeight: columnLayout.implicitHeight
         clip: true

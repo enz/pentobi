@@ -14,7 +14,7 @@ Pentobi.Dialog {
     property string gameVariant
 
     title: isDesktop ? qsTr("Game Variant") : ""
-    footer: DialogButtonBox {
+    footer: Pentobi.DialogButtonBox {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }

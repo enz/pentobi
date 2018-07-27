@@ -11,7 +11,7 @@ import "." as Pentobi
 
 Pentobi.Dialog {
     title: isDesktop ? qsTr("Game Info") : ""
-    footer: DialogButtonBox {
+    footer: Pentobi.DialogButtonBox {
         Pentobi.ButtonCancel { }
         Pentobi.ButtonOk { }
     }
