@@ -164,7 +164,7 @@ PieceModel* GameModel::addEmpty(const QPoint& pos)
     LIBBOARDGAME_ASSERT(bd.get_setup().placements[c].contains(mv));
     auto gameCoord = getGameCoord(bd, mv);
     PieceModel* result = nullptr;
-    for (auto pieceModel : getPieceModels(c))
+    for (auto pieceModel : qAsConst(getPieceModels(c)))
         if (compareGameCoord(pieceModel->gameCoord(), gameCoord))
         {
             result = pieceModel;
@@ -466,7 +466,7 @@ bool GameModel::findNextCommentContinueFromRoot()
 
 PieceModel* GameModel::findUnplayedPieceModel(Color c, Piece piece)
 {
-    for (auto pieceModel : getPieceModels(c))
+    for (auto pieceModel : qAsConst(getPieceModels(c)))
         if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
             return pieceModel;
     return nullptr;
@@ -988,13 +988,13 @@ void GameModel::newGame()
     initGame(m_game.get_variant());
     setIsModified(false);
     setFile("");
-    for (auto pieceModel : m_pieceModels0)
+    for (auto pieceModel : qAsConst(m_pieceModels0))
         pieceModel->setDefaultState();
-    for (auto pieceModel : m_pieceModels1)
+    for (auto pieceModel : qAsConst(m_pieceModels1))
         pieceModel->setDefaultState();
-    for (auto pieceModel : m_pieceModels2)
+    for (auto pieceModel : qAsConst(m_pieceModels2))
         pieceModel->setDefaultState();
-    for (auto pieceModel : m_pieceModels3)
+    for (auto pieceModel : qAsConst(m_pieceModels3))
         pieceModel->setDefaultState();
     updateProperties();
 }
@@ -1194,7 +1194,7 @@ PieceModel* GameModel::preparePiece(GameMove* move)
     auto c = move->get().color;
     auto mv = move->get().move;
     auto piece = getBoard().get_move_piece(mv);
-    for (auto pieceModel : getPieceModels(c))
+    for (auto pieceModel : qAsConst(getPieceModels(c)))
         if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
         {
             preparePieceTransform(pieceModel, mv);
