@@ -619,12 +619,12 @@
     </message>
     <message>
         <source>New Folder</source>
-        <translation>Neues Verzeichnis</translation>
+        <translation>Neuer Ordner</translation>
     </message>
     <message>
         <source>New Folder %1</source>
         <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation>Neues Verzeichnis %1</translation>
+        <translation>Neuer Ordner %1</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -1398,7 +1398,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <name>NewFolderDialog</name>
     <message>
         <source>Folder name:</source>
-        <translation>Verzeichnisname:</translation>
+        <translation>Name des Ordners:</translation>
     </message>
 </context>
 <context>
