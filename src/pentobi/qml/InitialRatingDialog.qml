@@ -13,10 +13,7 @@ import "Main.js" as Logic
 
 Pentobi.Dialog {
     title: isDesktop ? qsTr("Initial Rating") : ""
-    footer: Pentobi.DialogButtonBox {
-        Pentobi.ButtonCancel { }
-        Pentobi.ButtonOk { }
-    }
+    footer: DialogButtonBoxOkCancel { }
     onAccepted: {
         ratingModel.setInitialRating(Math.round(slider.value))
         Logic.ratedGameNoVerify()

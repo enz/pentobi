@@ -14,10 +14,7 @@ Pentobi.Dialog {
     property string gameVariant
 
     title: isDesktop ? qsTr("Game Variant") : ""
-    footer: Pentobi.DialogButtonBox {
-        Pentobi.ButtonCancel { }
-        Pentobi.ButtonOk { }
-    }
+    footer: DialogButtonBoxOkCancel { }
     onOpened: {
         gameVariant = gameModel.gameVariant
         if (gameVariant.startsWith("classic")) comboBox.currentIndex = 0

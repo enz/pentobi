@@ -16,8 +16,8 @@ Pentobi.Dialog {
     property url folder
 
     footer: Pentobi.DialogButtonBox {
-        Pentobi.ButtonCancel { }
-        Pentobi.ButtonOk { enabled: textField.text.trim().length > 0 }
+        ButtonCancel { }
+        ButtonOk { enabled: textField.text.trim().length > 0 }
     }
     onOpened: {
         textField.text = gameModel.suggestNewFolderName(folder)

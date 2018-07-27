@@ -13,10 +13,7 @@ import "." as Pentobi
 
 Pentobi.Dialog {
     title: isDesktop ? qsTr("Analyze Game") : ""
-    footer: Pentobi.DialogButtonBox {
-        Pentobi.ButtonCancel { }
-        Pentobi.ButtonOk { }
-    }
+    footer: DialogButtonBoxOkCancel { }
     onAccepted: {
         var nuSimulations
         switch (comboBox.currentIndex) {

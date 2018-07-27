@@ -21,6 +21,7 @@
         <file>qml/Controls.js</file>
         <file>qml/Dialog.qml</file>
         <file>qml/DialogButtonBox.qml</file>
+        <file>qml/DialogButtonBoxOkCancel.qml</file>
         <file>qml/DialogLoader.qml</file>
         <file>qml/ExportImageDialog.qml</file>
         <file>qml/FatalMessage.qml</file>

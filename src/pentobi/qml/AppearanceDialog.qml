@@ -20,8 +20,8 @@ Pentobi.Dialog {
     // if not desktop causes a binding loop for implicitWidth in Qt 5.11 and
     // elided Text on the dialog buttons.
     property DialogButtonBox footerDesktop: Pentobi.DialogButtonBox {
-        Pentobi.ButtonCancel { }
-        Pentobi.ButtonApply {
+        ButtonCancel { }
+        ButtonApply {
             enabled:
                 checkBoxCoordinates.checked !== gameDisplay.showCoordinates
                 || checkBoxShowVariations.checked !== gameModel.showVariations
@@ -29,12 +29,9 @@ Pentobi.Dialog {
                 || comboBoxTheme.currentIndex !== currentThemeIndex
                 || comboBoxMoveMarking.currentIndex !== currentMoveMarkingIndex
         }
-        Pentobi.ButtonOk { }
+        ButtonOk { }
     }
-    property DialogButtonBox footerMobile: Pentobi.DialogButtonBox {
-        Pentobi.ButtonCancel { }
-        Pentobi.ButtonOk { }
-    }
+    property DialogButtonBox footerMobile: DialogButtonBoxOkCancel { }
     property int currentThemeIndex
     property int currentMoveMarkingIndex
 

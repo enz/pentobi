@@ -11,10 +11,7 @@ import "." as Pentobi
 
 Pentobi.Dialog {
     title: isDesktop ? qsTr("Export Image") : ""
-    footer: Pentobi.DialogButtonBox {
-        Pentobi.ButtonCancel { }
-        Pentobi.ButtonOk { }
-    }
+    footer: DialogButtonBoxOkCancel { }
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
         var dialog = imageSaveDialog.get()

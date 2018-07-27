@@ -57,7 +57,7 @@ Pentobi.Dialog {
                           qsTr("S"))
             DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
         }
-        Pentobi.ButtonCancel { }
+        ButtonCancel { }
     }
     onOpened: {
         if (isAndroid && ! folder.toString().startsWith(defaultFolder.toString()))

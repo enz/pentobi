@@ -21,10 +21,7 @@ Pentobi.Dialog {
 
     property var _acceptedFunc
 
-    footer: Pentobi.DialogButtonBox {
-        Pentobi.ButtonCancel { }
-        Pentobi.ButtonOk { }
-    }
+    footer: DialogButtonBoxOkCancel { }
     onAccepted: _acceptedFunc()
 
     Item {
