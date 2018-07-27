@@ -16,11 +16,6 @@ Pentobi.FileDialog {
     folder: rootWindow.folder
     onAccepted: {
         rootWindow.folder = folder
-        if (gameModel.checkFileExists(Logic.getFileFromUrl(fileUrl)))
-            Logic.showQuestion(qsTr("Overwrite existing file?"), save)
-        else
-            save()
+        Logic.saveFile(Logic.getFileFromUrl(fileUrl))
     }
-
-    function save() { Logic.saveFile(Logic.getFileFromUrl(fileUrl)) }
 }

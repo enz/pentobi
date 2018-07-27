@@ -43,6 +43,19 @@ Pentobi.Dialog {
 
     property url _lastFolder
 
+    function _checkAccept() {
+        if (name.trim().length === 0)
+            return
+        folder = folderModel.folder
+        fileUrl = folder + "/" + name
+        if (! selectExisting
+                && gameModel.checkFileExists(Logic.getFileFromUrl(fileUrl))) {
+            Logic.showQuestion(qsTr("Overwrite existing file?"), accept)
+            return
+        }
+        accept()
+    }
+
     footer: Pentobi.DialogButtonBox {
         Button {
             enabled: name.trim().length > 0
@@ -55,7 +68,7 @@ Pentobi.Dialog {
                           qsTr("Save"),
                           //: Mnemonic for button Save. Leave empty for no mnemonic.
                           qsTr("S"))
-            DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+            onClicked: _checkAccept()
         }
         ButtonCancel { }
     }
@@ -63,10 +76,6 @@ Pentobi.Dialog {
         if (isAndroid && ! folder.toString().startsWith(defaultFolder.toString()))
             folder = defaultFolder
         selectNameField()
-    }
-    onAccepted: {
-        folder = folderModel.folder
-        fileUrl = folder + "/" + name
     }
 
     Item {
@@ -91,7 +100,7 @@ Pentobi.Dialog {
                 selectByMouse: true
                 Layout.fillWidth: true
                 Component.onCompleted: nameField.cursorPosition = nameField.length
-                onAccepted: if (name.trim().length > 0) root.accept()
+                onAccepted: _checkAccept()
                 onTextEdited: view.currentIndex = -1
             }
             RowLayout {
@@ -225,7 +234,7 @@ Pentobi.Dialog {
                             }
                             onDoubleClicked:
                                 if (! folderModel.isFolder(index))
-                                    root.accept()
+                                    _checkAccept()
                         }
                         FolderListModel {
                             id: folderModel
