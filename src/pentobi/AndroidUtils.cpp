@@ -67,7 +67,7 @@ void AndroidUtils::scanFile(const QString& pathname)
     if (! file.isValid())
         return;
     auto absoluteFile = file.callObjectMethod(
-                "getAbsolutePath", "()Ljava/io/File;", file.object());
+                "getAbsoluteFile", "()Ljava/io/File;", file.object());
     if (! absoluteFile.isValid())
         return;
     auto uri = QAndroidJniObject::callStaticObjectMethod(
