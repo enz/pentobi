@@ -9,7 +9,7 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.FileDialog {
-    title: isDesktop ? qsTr("Save Image") : ""
+    title: qsTr("Save Image")
     selectExisting: false
     nameFilterLabels: [
         qsTr("PNG image files"),

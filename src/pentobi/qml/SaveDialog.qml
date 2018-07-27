@@ -9,7 +9,7 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.FileDialog {
-    title: isDesktop ? qsTr("Save") : ""
+    title: qsTr("Save")
     selectExisting: false
     nameFilterLabels: [ qsTr("Blokus games") ]
     nameFilters: [ [ "*.blksgf", "*.BLKSGF" ] ]

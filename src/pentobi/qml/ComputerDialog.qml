@@ -14,7 +14,7 @@ import "." as Pentobi
 Pentobi.Dialog {
     id: root
 
-    title: isDesktop ? qsTr("Computer Settings") : ""
+    title: qsTr("Computer Settings")
     footer: DialogButtonBoxOkCancel { }
     onOpened: {
         checkBox0.checked = computerPlays0

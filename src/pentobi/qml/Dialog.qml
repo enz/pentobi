@@ -4,6 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQuick 2.11
 import QtQuick.Controls 2.2
 
 Dialog {
@@ -26,4 +27,8 @@ Dialog {
             ApplicationWindow.window.onWidthChanged.connect(centerDialog)
             ApplicationWindow.window.onHeightChanged.connect(centerDialog)
         }
+    Component.onCompleted:
+        if (! isDesktop)
+            // Save some screen space on smartphones
+            title = ""
 }

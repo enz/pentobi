@@ -13,7 +13,7 @@ import "." as Pentobi
 Pentobi.Dialog {
     property string gameVariant
 
-    title: isDesktop ? qsTr("Game Variant") : ""
+    title: qsTr("Game Variant")
     footer: DialogButtonBoxOkCancel { }
     onOpened: {
         gameVariant = gameModel.gameVariant

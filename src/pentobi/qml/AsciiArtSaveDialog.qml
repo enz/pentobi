@@ -9,7 +9,7 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.FileDialog {
-    title: isDesktop ? qsTr("Export ASCII Art") : ""
+    title: qsTr("Export ASCII Art")
     selectExisting: false
     nameFilterLabels: [ qsTr("Text files") ]
     nameFilters: [ [ "*.txt", "*.TXT" ] ]

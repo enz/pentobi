@@ -12,7 +12,7 @@ import "." as Pentobi
 Pentobi.Dialog {
     id: root
 
-    title: isDesktop ? qsTr("Go to Move") : ""
+    title: qsTr("Go to Move")
     footer: DialogButtonBoxOkCancel { }
     onOpened: textField.selectAll()
     onAccepted: gameModel.gotoMove(parseInt(textField.text))

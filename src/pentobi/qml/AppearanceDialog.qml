@@ -35,7 +35,7 @@ Pentobi.Dialog {
     property int currentThemeIndex
     property int currentMoveMarkingIndex
 
-    title: isDesktop ? qsTr("Appearance") : ""
+    title: qsTr("Appearance")
     footer: isDesktop ? footerDesktop : footerMobile
     onOpened: {
         checkBoxCoordinates.checked = gameDisplay.showCoordinates

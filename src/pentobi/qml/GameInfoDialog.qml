@@ -10,7 +10,7 @@ import QtQuick.Layouts 1.0
 import "." as Pentobi
 
 Pentobi.Dialog {
-    title: isDesktop ? qsTr("Game Info") : ""
+    title: qsTr("Game Info")
     footer: DialogButtonBoxOkCancel { }
     onOpened: {
         textFieldPlayerName0.text = gameModel.playerName0
