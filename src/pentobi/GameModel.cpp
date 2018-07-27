@@ -1674,7 +1674,7 @@ void GameModel::updatePieces()
     {
         if (tree.has_move(*node))
             nodes.push_back(node);
-        if (has_setup(*node) || nodes.size() == nodes.max_size)
+        if (has_setup(*node) || nodes.size() == decltype(nodes)::max_size)
             break;
         node = node->get_parent_or_null();
     }
