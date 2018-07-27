@@ -39,7 +39,7 @@ AnalyzeGameElement::AnalyzeGameElement(QObject* parent, int moveColor,
 AnalyzeGameModel::AnalyzeGameModel(QObject* parent)
     : QObject(parent)
 {
-    connect(&m_watcher, &QFutureWatcher<void>::finished, [this]
+    connect(&m_watcher, &QFutureWatcher<void>::finished, this, [this]
     {
         setIsRunning(false);
         updateElements();
