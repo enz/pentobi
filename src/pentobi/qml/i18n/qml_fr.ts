@@ -349,6 +349,10 @@
         <source>All files</source>
         <translation>Tous les fichiers</translation>
     </message>
+    <message>
+        <source>Overwrite existing file?</source>
+        <translation>Remplacer le fichier existant ?</translation>
+    </message>
 </context>
 <context>
     <name>GameDisplayDesktop</name>
@@ -1583,7 +1587,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation>Remplacer le fichier existant ?</translation>
+        <translation type="vanished">Remplacer le fichier existant ?</translation>
     </message>
     <message>
         <source>Blokus games</source>
