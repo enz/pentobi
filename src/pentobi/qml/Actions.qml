@@ -102,16 +102,6 @@ QtObject {
         enabled: ! isRated && (gameModel.canGoForward || gameModel.canGoBackward)
         onTriggered: Logic.findNextComment()
     }
-    property Action actionFlipX: Action {
-        shortcut: noPopupOpen ? "Ctrl+F" : ""
-        enabled: gameDisplay.pickedPiece
-        onTriggered: gameDisplay.pickedPiece.pieceModel.flipAcrossX()
-    }
-    property Action actionFlipY: Action {
-        shortcut: noPopupOpen ? "Ctrl+Shift+F" : ""
-        enabled: gameDisplay.pickedPiece
-        onTriggered: gameDisplay.pickedPiece.pieceModel.flipAcrossY()
-    }
     property Action actionForward: Action {
         shortcut: "Ctrl+Right"
         enabled: gameModel.canGoForward && ! isRated
@@ -258,16 +248,6 @@ QtObject {
         shortcut: "F7"
         text: qsTr("Rating")
         onTriggered: Logic.rating()
-    }
-    property Action actionRotateLeft: Action {
-        shortcut: noPopupOpen ? "Ctrl+Shift+R" : ""
-        enabled: gameDisplay.pickedPiece
-        onTriggered: gameDisplay.pickedPiece.pieceModel.rotateLeft()
-    }
-    property Action actionRotateRight: Action {
-        shortcut: noPopupOpen ? "Ctrl+R" : ""
-        enabled: gameDisplay.pickedPiece
-        onTriggered: gameDisplay.pickedPiece.pieceModel.rotateRight()
     }
     property Action actionSave: Action {
         shortcut: "Ctrl+S"
