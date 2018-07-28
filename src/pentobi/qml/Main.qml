@@ -202,7 +202,11 @@ ApplicationWindow {
     Loader {
         id: helpWindow
 
-        property Component component: Component { HelpWindow { } }
+        Component {
+            id: helpWindowComponent
+
+            HelpWindow { }
+        }
     }
     HelpFileExtractor { id: helpFileExtractor }
 

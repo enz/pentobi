@@ -284,8 +284,8 @@ function getFileLabel(file, isModified) {
 }
 
 function help() {
-    if (helpWindow.status === Loader.Null)
-        helpWindow.sourceComponent = helpWindow.component
+    if (! helpWindow.item)
+        helpWindow.sourceComponent = helpWindowComponent
     helpWindow.item.show()
     helpWindow.item.init()
 }
