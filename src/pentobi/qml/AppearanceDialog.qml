@@ -14,12 +14,10 @@ import "." as Pentobi
 Pentobi.Dialog {
     id: root
 
-    // Mobile layout may not have enough screen space for apply button and the
-    // immovable dialog will cover most of the screen anyway. Note that using
-    // the same ButtonBox for both and setting visible to false for ButtonApply
-    // if not desktop causes a binding loop for implicitWidth in Qt 5.11 and
-    // elided Text on the dialog buttons.
-    property DialogButtonBox footerDesktop: Pentobi.DialogButtonBox {
+    property int currentThemeIndex
+    property int currentMoveMarkingIndex
+
+    footer: Pentobi.DialogButtonBox {
         ButtonCancel { }
         ButtonApply {
             enabled:
@@ -31,11 +29,6 @@ Pentobi.Dialog {
         }
         ButtonOk { }
     }
-    property DialogButtonBox footerMobile: DialogButtonBoxOkCancel { }
-    property int currentThemeIndex
-    property int currentMoveMarkingIndex
-
-    footer: isDesktop ? footerDesktop : footerMobile
     onOpened: {
         checkBoxCoordinates.checked = gameDisplay.showCoordinates
         checkBoxShowVariations.checked = gameModel.showVariations
