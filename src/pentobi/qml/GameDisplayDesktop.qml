@@ -25,7 +25,6 @@ Item
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
     property bool setupMode
-    property alias boardContextMenu: boardContextMenu
 
     // Dummy for compatibility with GameDisplayMobile
     property bool busyIndicatorRunning
@@ -90,6 +89,15 @@ Item
         }
         showStatus(text)
     }
+    function openBoardContextMenu(moveNumber, x, y) {
+        if (! boardContextMenu.item)
+            boardContextMenu.sourceComponent = boardContextMenuComponent
+        boardContextMenu.item.moveNumber = moveNumber
+        if (isDesktop)
+            boardContextMenu.item.popup()
+        else
+            boardContextMenu.item.popup(x, y)
+    }
 
     function showStatus(text) {
         messageTimer.stop()
@@ -134,7 +142,15 @@ Item
                     onClicked: Logic.onBoardClicked(pos)
                     onRightClicked: Logic.onBoardRightClicked(pos)
 
-                    BoardContextMenu { id: boardContextMenu }
+                    Loader {
+                        id: boardContextMenu
+
+                        Component {
+                            id: boardContextMenuComponent
+
+                            BoardContextMenu { }
+                        }
+                    }
                 }
                 Column {
                     id: rightColumn

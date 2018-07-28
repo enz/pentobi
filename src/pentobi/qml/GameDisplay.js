@@ -159,12 +159,8 @@ function onBoardRightClicked(pos) {
     var n = gameModel.getMoveNumberAt(pos)
     if (n < 0)
         return
-    boardContextMenu.moveNumber = n
-    if (isDesktop)
-        boardContextMenu.popup()
-    else
-        boardContextMenu.popup(board.mapFromGameX(pos.x + 0.5),
-                               board.mapFromGameY(pos.y + 0.5))
+    gameDisplay.openBoardContextMenu(n, board.mapFromGameX(pos.x + 0.5),
+                                     board.mapFromGameY(pos.y + 0.5))
 }
 
 function shiftPiece(dx, dy) {

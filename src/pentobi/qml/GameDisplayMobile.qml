@@ -63,6 +63,15 @@ Item
     function endSearch() { }
     function startAnalysis() { showAnalyzeGame() }
     function endAnalysis() { }
+    function openBoardContextMenu(moveNumber, x, y) {
+        if (! boardContextMenu.item)
+            boardContextMenu.sourceComponent = boardContextMenuComponent
+        boardContextMenu.item.moveNumber = moveNumber
+        if (isDesktop)
+            boardContextMenu.item.popup()
+        else
+            boardContextMenu.item.popup(x, y)
+    }
 
     onWidthChanged: pickedPiece = null
     onHeightChanged: pickedPiece = null
@@ -94,7 +103,15 @@ Item
             onClicked: Logic.onBoardClicked(pos)
             onRightClicked: Logic.onBoardRightClicked(pos)
 
-            BoardContextMenu { id: boardContextMenu }
+            Loader {
+                id: boardContextMenu
+
+                Component {
+                    id: boardContextMenuComponent
+
+                    BoardContextMenu { }
+                }
+            }
         }
         SwipeView {
             id: swipeView

@@ -181,21 +181,31 @@ RowLayout {
         padding: buttonPadding
         icon.source: theme.getImage("menu")
         checkable: true
-        down: menu.opened
-        onClicked: if (menu.opened) menu.close();
-                   else if (isAndroid) menu.popup()
-                   else menu.popup(0, height)
+        down: menu.item && menu.item.opened
+        onClicked: {
+            if (! menu.item)
+                menu.sourceComponent = menuComponent
+            if (menu.item.opened) menu.item.close();
+            else if (isAndroid) menu.item.popup()
+            else menu.item.popup(0, height)
+        }
 
-        Pentobi.Menu {
+        Loader {
             id: menu
 
-            MenuGame { }
-            MenuGo { }
-            MenuEdit { }
-            MenuView { }
-            MenuComputer { }
-            MenuTools { }
-            MenuHelp { }
+            Component {
+                id: menuComponent
+
+                Pentobi.Menu {
+                    MenuGame { }
+                    MenuGo { }
+                    MenuEdit { }
+                    MenuView { }
+                    MenuComputer { }
+                    MenuTools { }
+                    MenuHelp { }
+                }
+            }
         }
     }
 }
