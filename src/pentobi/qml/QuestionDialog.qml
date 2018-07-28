@@ -39,7 +39,6 @@ Pentobi.Dialog {
 
             anchors.fill: parent
             wrapMode: Text.Wrap
-            topPadding: isDesktop ? 0.3 * font.pixelSize : 0
         }
     }
 }
