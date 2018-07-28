@@ -317,6 +317,7 @@ bool GameModel::createFolder(const QUrl& folder)
         m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
+    AndroidUtils::scanFile(localFolder);
     return true;
 }
 

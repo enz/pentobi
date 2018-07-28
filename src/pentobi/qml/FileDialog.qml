@@ -140,7 +140,7 @@ Pentobi.Dialog {
                     Layout.fillWidth: true
                 }
                 ToolButton {
-                    visible: ! selectExisting && ! isAndroid
+                    visible: ! selectExisting
                     icon {
                         source: "icons/filedialog-newfolder.svg"
                         // Icon size is 16x16
