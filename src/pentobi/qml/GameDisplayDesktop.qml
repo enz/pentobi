@@ -182,15 +182,25 @@ Item
                             id: comment
 
                             width: parent.width
-                            height: analyzeGame.visible ? 0.4 * (parent.height - parent.spacing) : parent.height
+                            height: analyzeGame.item ? 0.4 * (parent.height - parent.spacing) : parent.height
                         }
-                        AnalyzeGame {
+                        Loader {
                             id: analyzeGame
 
-                            visible: elements.length !== 0 || analyzeGameModel.isRunning
-                            theme: rootWindow.theme
+                            sourceComponent:
+                                analyzeGameModel.elements.length > 0
+                                || analyzeGameModel.isRunning ?
+                                    analyzeGameComponent : null
                             width: parent.width
                             height: 0.6 * (parent.height - parent.spacing)
+
+                            Component {
+                                id: analyzeGameComponent
+
+                                AnalyzeGame {
+                                    theme: rootWindow.theme
+                                }
+                            }
                         }
                     }
                 }
