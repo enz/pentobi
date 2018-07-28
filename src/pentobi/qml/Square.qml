@@ -14,7 +14,7 @@ Item {
 
     Loader {
         function loadImage() {
-            if (opacity > 0 && status === Loader.Null)
+            if (opacity > 0 && ! item)
                 sourceComponent = component0
         }
 
@@ -34,7 +34,7 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity > 0 && status === Loader.Null)
+            if (opacity > 0 && ! item)
                 sourceComponent = component90
         }
 
@@ -55,7 +55,7 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity > 0 && status === Loader.Null)
+            if (opacity > 0 && ! item)
                 sourceComponent = component180
         }
 
@@ -76,7 +76,7 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity > 0 && status === Loader.Null)
+            if (opacity > 0 && ! item)
                 sourceComponent = component270
         }
 

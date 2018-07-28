@@ -10,7 +10,7 @@ Loader {
     property Component component
 
     function get() {
-        if (status === Loader.Null)
+        if (! item)
             sourceComponent = component
         return item
     }

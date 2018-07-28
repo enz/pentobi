@@ -16,7 +16,7 @@ Item {
         id: loaderTop
 
         function loadImage() {
-            if (opacity > 0 && status === Loader.Null)
+            if (opacity > 0 && ! item)
                 sourceComponent = componentTop
         }
 
@@ -51,7 +51,7 @@ Item {
     }
     Loader {
         function loadImage() {
-            if (opacity > 0 && status === Loader.Null)
+            if (opacity > 0 && ! item)
                 sourceComponent = componentBottom
         }
 
