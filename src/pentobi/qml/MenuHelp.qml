@@ -24,6 +24,6 @@ Pentobi.Menu {
         text: addMnemonic(qsTr("About Pentobi"),
                           //: Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.
                           qsTr("A"))
-        onTriggered: Logic.about()
+        onTriggered: aboutDialog.open()
     }
 }

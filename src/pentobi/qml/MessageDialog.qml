@@ -32,7 +32,6 @@ Pentobi.Dialog {
 
             anchors.fill: parent
             wrapMode: Text.Wrap
-            onLinkActivated: Qt.openUrlExternally(link)
         }
     }
 }

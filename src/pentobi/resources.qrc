@@ -3,6 +3,7 @@
         <file>qml/icons/filedialog-folder.svg</file>
         <file>qml/icons/filedialog-newfolder.svg</file>
         <file>qml/icons/filedialog-parent.svg</file>
+        <file>qml/AboutDialog.qml</file>
         <file>qml/Actions.qml</file>
         <file>qml/AnalyzeDialog.qml</file>
         <file>qml/AnalyzeGame.qml</file>

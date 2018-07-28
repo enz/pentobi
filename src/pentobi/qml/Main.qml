@@ -180,6 +180,7 @@ ApplicationWindow {
         gameVariant: gameModel.gameVariant
     }
     AndroidUtils { id: androidUtils }
+    DialogLoader { id: aboutDialog; component: Component { AboutDialog { } } }
     DialogLoader { id: computerDialog; component: ComputerDialog { } }
     DialogLoader { id: fatalMessage; component: Component { FatalMessage { } } }
     DialogLoader { id: gameVariantDialog; component: Component { GameVariantDialog { } } }
