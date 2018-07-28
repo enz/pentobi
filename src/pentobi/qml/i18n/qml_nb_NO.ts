@@ -1223,6 +1223,11 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>Game Variant...</source>
         <translation>Spillvariant…</translation>
     </message>
+    <message>
+        <source>%1. %2</source>
+        <extracomment>Format in recent files menu. First argument is the file number, second argument the file name.</extracomment>
+        <translation>%1. %2</translation>
+    </message>
 </context>
 <context>
     <name>MenuGo</name>

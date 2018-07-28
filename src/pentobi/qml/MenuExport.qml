@@ -15,12 +15,14 @@ Pentobi.Menu {
         text: addMnemonic(qsTr("Image"),
                           //: Mnemonic for menu item Image. Leave empty for no mnemonic.
                           qsTr("M"))
+        noIndicatorSpace: true
         onTriggered: exportImageDialog.open()
     }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("ASCII Art"),
                           //: Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.
                           qsTr("A"))
+        noIndicatorSpace: true
         onTriggered: {
             var dialog = asciiArtSaveDialog.get()
             dialog.name = gameModel.suggestFileName(folder, "txt")

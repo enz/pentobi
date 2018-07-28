@@ -77,9 +77,13 @@ Pentobi.Menu {
                 text: {
                     var result = modelData.substring(modelData.lastIndexOf("/") + 1)
                     if (! isAndroid)
-                        result = "&" + (index + 1) + ". " + result
+                        //: Format in recent files menu. First argument is the
+                        //: file number, second argument the file name.
+                        result = addMnemonic(qsTr("%1. %2").arg(index + 1).arg(result),
+                                             (index + 1).toString())
                     return result
                 }
+                noIndicatorSpace: true
                 onTriggered: Logic.openRecentFile(modelData)
             }
         }

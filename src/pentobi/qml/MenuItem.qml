@@ -13,6 +13,9 @@ import "Controls.js" as PentobiControls
 MenuItem {
     id: root
 
+    // Indicates that all items in the current menu are not checkable
+    property bool noIndicatorSpace
+
     function addMnemonic(text, mnemonic) { return PentobiControls.addMnemonic(text, mnemonic) }
 
     // width should be the same as in Pentobi.Menu
@@ -35,13 +38,16 @@ MenuItem {
         spacing: 0.2 * font.pixelSize
         anchors.fill: parent
 
-        Item { implicitWidth: root.indicator.width + 1.1 * spacing }
+        Item {
+            implicitWidth:
+                (noIndicatorSpace ? 0 : root.indicator.width) + 1.1 * spacing
+        }
         Label {
             id: labelText
 
             text: {
                 if (isAndroid)
-                    return root.text.replace("&", "")
+                    return root.text
                 var pos = root.text.indexOf("&")
                 if (pos < 0 || pos === root.text.length - 1)
                     return root.text
