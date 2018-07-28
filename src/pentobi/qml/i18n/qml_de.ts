@@ -2,6 +2,21 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>AboutDialog</name>
+    <message>
+        <source>Pentobi</source>
+        <translation>Pentobi</translation>
+    </message>
+    <message>
+        <source>Computer opponent for the board game Blokus.</source>
+        <translation>Computer-Gegner für das Brettspiel Blokus.</translation>
+    </message>
+    <message>
+        <source>Copyright © 2011–%1 Markus Enzenberger</source>
+        <translation>Copyright © 2011–%1 Markus Enzenberger</translation>
+    </message>
+</context>
+<context>
     <name>Actions</name>
     <message>
         <source>New</source>
@@ -772,11 +787,11 @@
     </message>
     <message>
         <source>Version %1</source>
-        <translation>Version %1</translation>
+        <translation type="vanished">Version %1</translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus.</source>
-        <translation>Computer-Gegner für das Brettspiel Blokus.</translation>
+        <translation type="vanished">Computer-Gegner für das Brettspiel Blokus.</translation>
     </message>
     <message>
         <source>Keep only position?</source>
@@ -864,7 +879,7 @@
     </message>
     <message>
         <source>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</source>
-        <translation>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</translation>
+        <translation type="vanished">Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</translation>
     </message>
     <message>
         <source>Game analysis aborted.</source>
