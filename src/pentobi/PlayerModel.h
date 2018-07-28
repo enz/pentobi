@@ -41,7 +41,6 @@ class PlayerModel
 
     Q_PROPERTY(unsigned level READ level WRITE setLevel NOTIFY levelChanged)
     Q_PROPERTY(bool isGenMoveRunning READ isGenMoveRunning NOTIFY isGenMoveRunningChanged)
-    Q_PROPERTY(bool paused READ paused WRITE setPaused)
     Q_PROPERTY(unsigned maxLevel MEMBER maxLevel CONSTANT)
 
 public:
@@ -96,10 +95,6 @@ public:
     unsigned level() const { return m_level; }
 
     void setLevel(unsigned level);
-
-    unsigned paused() const { return libboardgame_util::get_pause(); }
-
-    void setPaused(bool paused);
 
     bool isGenMoveRunning() const { return m_isGenMoveRunning; }
 

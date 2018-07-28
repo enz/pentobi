@@ -18,23 +18,11 @@ using namespace std;
 
 extern atomic<bool> abort;
 
-extern atomic<bool> pause;
-
-inline void clear_pause() { pause = false; }
-
-inline void clear_abort()
-{
-    abort = false;
-    clear_pause();
-}
+inline void clear_abort() { abort = false; }
 
 inline bool get_abort() { return abort; }
 
 inline void set_abort() { abort = true; }
-
-inline bool get_pause() { return pause; }
-
-inline void set_pause() { pause = true; }
 
 //-----------------------------------------------------------------------------
 

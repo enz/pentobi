@@ -35,7 +35,6 @@ namespace libboardgame_mcts {
 using namespace std;
 using libboardgame_mcts::tree_util::find_node;
 using libboardgame_util::get_abort;
-using libboardgame_util::get_pause;
 using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
 using libboardgame_util::ArrayList;
@@ -692,8 +691,6 @@ bool SearchBase<S, M, R>::check_abort_expensive(
         LIBBOARDGAME_LOG_THREAD(thread_state, "Search aborted");
         return true;
     }
-    while (get_pause())
-        this_thread::sleep_for(500ms);
     static_assert(numeric_limits<Float>::radix == 2, "");
     auto count = m_tree.get_root().get_visit_count();
     if (count >= (size_t(1) << numeric_limits<Float>::digits) - 1)
