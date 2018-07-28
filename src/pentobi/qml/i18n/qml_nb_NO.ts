@@ -358,7 +358,11 @@
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation>Overskriv eksisterende fil?</translation>
+        <translation type="vanished">Overskriv eksisterende fil?</translation>
+    </message>
+    <message>
+        <source>Overwrite file?</source>
+        <translation>Overskriv fil?</translation>
     </message>
 </context>
 <context>
@@ -630,12 +634,12 @@
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>New Folder %1</source>
         <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -747,11 +751,15 @@
     </message>
     <message>
         <source>Your initial rating:</source>
-        <translation>Din startvurdering:</translation>
+        <translation type="vanished">Din startvurdering:</translation>
     </message>
     <message>
-        <source>Estimate your playing strength to initialize your rating for this game variant.</source>
-        <translation type="unfinished"></translation>
+        <source>Initialize your rating for this game variant.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Initial rating:</source>
+        <translation>Startsvurdering:</translation>
     </message>
 </context>
 <context>

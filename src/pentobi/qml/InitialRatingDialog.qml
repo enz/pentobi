@@ -34,13 +34,13 @@ Pentobi.Dialog {
                 id: textLabel
 
                 anchors.fill: parent
-                text: qsTr("Estimate your playing strength to initialize your rating for this game variant.")
+                text: qsTr("Initialize your rating for this game variant.")
                 wrapMode: Text.Wrap
             }
         }
         RowLayout {
             Label {
-                text: qsTr("Your initial rating:")
+                text: qsTr("Initial rating:")
             }
             Label {
                 text: Math.round(slider.value)

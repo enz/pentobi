@@ -366,7 +366,11 @@
     </message>
     <message>
         <source>Overwrite existing file?</source>
-        <translation>Remplacer le fichier existant ?</translation>
+        <translation type="vanished">Remplacer le fichier existant ?</translation>
+    </message>
+    <message>
+        <source>Overwrite file?</source>
+        <translation>Remplacer le fichier ?</translation>
     </message>
 </context>
 <context>
@@ -755,11 +759,19 @@
     </message>
     <message>
         <source>Your initial rating:</source>
-        <translation>Votre classement initial :</translation>
+        <translation type="vanished">Votre classement initial :</translation>
     </message>
     <message>
         <source>Estimate your playing strength to initialize your rating for this game variant.</source>
-        <translation>Estimez votre niveau pour initialiser votre classement pour cette variante du jeu.</translation>
+        <translation type="vanished">Estimez votre niveau pour initialiser votre classement pour cette variante du jeu.</translation>
+    </message>
+    <message>
+        <source>Initialize your rating for this game variant.</source>
+        <translation>Initialisez votre classement pour cette variante du jeu.</translation>
+    </message>
+    <message>
+        <source>Initial rating:</source>
+        <translation>Classement initial :</translation>
     </message>
 </context>
 <context>

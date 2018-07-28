@@ -50,7 +50,7 @@ Pentobi.Dialog {
         fileUrl = folder + "/" + name
         if (! selectExisting
                 && gameModel.checkFileExists(Logic.getFileFromUrl(fileUrl))) {
-            Logic.showQuestion(qsTr("Overwrite existing file?"), accept)
+            Logic.showQuestion(qsTr("Overwrite file?"), accept)
             return
         }
         accept()
