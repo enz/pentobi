@@ -12,7 +12,6 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Dialog {
-    title: qsTr("Analyze Game")
     footer: DialogButtonBoxOkCancel { }
     onAccepted: {
         var nuSimulations

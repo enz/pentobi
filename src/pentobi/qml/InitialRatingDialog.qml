@@ -12,7 +12,6 @@ import "." as Pentobi
 import "Main.js" as Logic
 
 Pentobi.Dialog {
-    title: qsTr("Initial Rating")
     footer: DialogButtonBoxOkCancel { }
     onAccepted: {
         ratingModel.setInitialRating(Math.round(slider.value))

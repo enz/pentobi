@@ -15,8 +15,6 @@ Pentobi.Dialog {
     property int numberGames: ratingModel.numberGames
     property var history: ratingModel.history
 
-    //: Window title for the rating dialog.
-    title: qsTr("Rating")
     footer: Pentobi.DialogButtonBox { ButtonClose { } }
 
     Item {

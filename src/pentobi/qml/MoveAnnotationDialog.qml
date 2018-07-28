@@ -15,7 +15,6 @@ Pentobi.Dialog {
 
     property int moveNumber
 
-    title: qsTr("Move Annotation")
     footer: DialogButtonBoxOkCancel { }
     onOpened: {
         var annotation = gameModel.getMoveAnnotation(moveNumber)
