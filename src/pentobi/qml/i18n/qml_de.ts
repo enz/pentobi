@@ -99,7 +99,7 @@
     <name>AnalyzeDialog</name>
     <message>
         <source>Analyze Game</source>
-        <translation>Spiel analysieren</translation>
+        <translation type="vanished">Spiel analysieren</translation>
     </message>
     <message>
         <source>Analysis speed:</source>
@@ -129,7 +129,7 @@
     <name>AppearanceDialog</name>
     <message>
         <source>Appearance</source>
-        <translation>Erscheinungsbild</translation>
+        <translation type="vanished">Erscheinungsbild</translation>
     </message>
     <message>
         <source>Coordinates</source>
@@ -273,7 +273,7 @@
     <name>ComputerDialog</name>
     <message>
         <source>Computer Settings</source>
-        <translation>Computer-Einstellungen</translation>
+        <translation type="vanished">Computer-Einstellungen</translation>
     </message>
     <message>
         <source>Computer plays:</source>
@@ -320,7 +320,7 @@
     <name>ExportImageDialog</name>
     <message>
         <source>Export Image</source>
-        <translation>Grafik exportieren</translation>
+        <translation type="vanished">Grafik exportieren</translation>
     </message>
     <message>
         <source>Image width:</source>
@@ -392,7 +392,7 @@
     <name>GameInfoDialog</name>
     <message>
         <source>Game Info</source>
-        <translation>Spielinformation</translation>
+        <translation type="vanished">Spielinformation</translation>
     </message>
     <message>
         <source>Player Blue/Red:</source>
@@ -659,7 +659,7 @@
     <name>GameVariantDialog</name>
     <message>
         <source>Game Variant</source>
-        <translation>Spielvariante</translation>
+        <translation type="vanished">Spielvariante</translation>
     </message>
     <message>
         <source>Classic</source>
@@ -702,7 +702,7 @@
     <name>GotoMoveDialog</name>
     <message>
         <source>Go to Move</source>
-        <translation>Gehe zu Zug</translation>
+        <translation type="vanished">Gehe zu Zug</translation>
     </message>
     <message>
         <source>Move number:</source>
@@ -739,11 +739,11 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initial Rating</source>
-        <translation>Anfangswertung</translation>
+        <translation type="vanished">Anfangswertung</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt. Schätzen Sie Ihre Spielstärke, um Ihre Wertung zu initialisieren.</translation>
+        <translation type="vanished">Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt. Schätzen Sie Ihre Spielstärke, um Ihre Wertung zu initialisieren.</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -756,6 +756,10 @@
     <message>
         <source>Your initial rating:</source>
         <translation>Ihre Anfangswertung:</translation>
+    </message>
+    <message>
+        <source>Estimate your playing strength to initialize your rating for this game variant.</source>
+        <translation>Schätzen Sie Ihre Spielstärke, um Ihre Wertung für diese Spielvariante zu initialisieren.</translation>
     </message>
 </context>
 <context>
@@ -1374,7 +1378,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <name>MoveAnnotationDialog</name>
     <message>
         <source>Move Annotation</source>
-        <translation>Zugkommentierung</translation>
+        <translation type="vanished">Zugkommentierung</translation>
     </message>
     <message>
         <source>Annotation:</source>
@@ -1440,7 +1444,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>Rating</source>
         <extracomment>Window title for the rating dialog.</extracomment>
-        <translation>Wertung</translation>
+        <translation type="vanished">Wertung</translation>
     </message>
     <message>
         <source>Your rating:</source>

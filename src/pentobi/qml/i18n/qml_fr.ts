@@ -99,7 +99,7 @@
     <name>AnalyzeDialog</name>
     <message>
         <source>Analyze Game</source>
-        <translation>Analyser la partie</translation>
+        <translation type="vanished">Analyser la partie</translation>
     </message>
     <message>
         <source>Analysis speed:</source>
@@ -129,7 +129,7 @@
     <name>AppearanceDialog</name>
     <message>
         <source>Appearance</source>
-        <translation>Apparence</translation>
+        <translation type="vanished">Apparence</translation>
     </message>
     <message>
         <source>Coordinates</source>
@@ -273,7 +273,7 @@
     <name>ComputerDialog</name>
     <message>
         <source>Computer Settings</source>
-        <translation>Configuration de l&apos;ordinateur</translation>
+        <translation type="vanished">Configuration de l&apos;ordinateur</translation>
     </message>
     <message>
         <source>Computer plays:</source>
@@ -320,7 +320,7 @@
     <name>ExportImageDialog</name>
     <message>
         <source>Export Image</source>
-        <translation>Exporter une image</translation>
+        <translation type="vanished">Exporter une image</translation>
     </message>
     <message>
         <source>Image width:</source>
@@ -392,7 +392,7 @@
     <name>GameInfoDialog</name>
     <message>
         <source>Game Info</source>
-        <translation>Info sur la partie</translation>
+        <translation type="vanished">Info sur la partie</translation>
     </message>
     <message>
         <source>Player Blue/Red:</source>
@@ -659,7 +659,7 @@
     <name>GameVariantDialog</name>
     <message>
         <source>Game Variant</source>
-        <translation>Variante du jeu</translation>
+        <translation type="vanished">Variante du jeu</translation>
     </message>
     <message>
         <source>Classic</source>
@@ -702,7 +702,7 @@
     <name>GotoMoveDialog</name>
     <message>
         <source>Go to Move</source>
-        <translation>Aller au coup</translation>
+        <translation type="vanished">Aller au coup</translation>
     </message>
     <message>
         <source>Move number:</source>
@@ -739,11 +739,11 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initial Rating</source>
-        <translation>Classement initial</translation>
+        <translation type="vanished">Classement initial</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation>Vous n&apos;avez pas encore joué des parties classées dans cette variante du jeu. Estimez votre niveau pour initialiser votre classement.</translation>
+        <translation type="vanished">Vous n&apos;avez pas encore joué des parties classées dans cette variante du jeu. Estimez votre niveau pour initialiser votre classement.</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -756,6 +756,10 @@
     <message>
         <source>Your initial rating:</source>
         <translation>Votre classement initial :</translation>
+    </message>
+    <message>
+        <source>Estimate your playing strength to initialize your rating for this game variant.</source>
+        <translation>Estimez votre niveau pour initialiser votre classement pour cette variante du jeu.</translation>
     </message>
 </context>
 <context>
@@ -1366,7 +1370,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <name>MoveAnnotationDialog</name>
     <message>
         <source>Move Annotation</source>
-        <translation>Annotation courante</translation>
+        <translation type="vanished">Annotation courante</translation>
     </message>
     <message>
         <source>Annotation:</source>
@@ -1432,7 +1436,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>Rating</source>
         <extracomment>Window title for the rating dialog.</extracomment>
-        <translation>Classement</translation>
+        <translation type="vanished">Classement</translation>
     </message>
     <message>
         <source>Your rating:</source>

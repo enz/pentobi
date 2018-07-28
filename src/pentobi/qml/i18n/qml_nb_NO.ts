@@ -99,7 +99,7 @@
     <name>AnalyzeDialog</name>
     <message>
         <source>Analyze Game</source>
-        <translation>Analyser spill</translation>
+        <translation type="vanished">Analyser spill</translation>
     </message>
     <message>
         <source>Analysis speed:</source>
@@ -127,10 +127,6 @@
 </context>
 <context>
     <name>AppearanceDialog</name>
-    <message>
-        <source>Appearance</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Coordinates</source>
         <translation>Koordinater</translation>
@@ -272,10 +268,6 @@
 <context>
     <name>ComputerDialog</name>
     <message>
-        <source>Computer Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Computer plays:</source>
         <translation>Datamaskinen spiller:</translation>
     </message>
@@ -320,7 +312,7 @@
     <name>ExportImageDialog</name>
     <message>
         <source>Export Image</source>
-        <translation>Eksporter bilde</translation>
+        <translation type="vanished">Eksporter bilde</translation>
     </message>
     <message>
         <source>Image width:</source>
@@ -392,7 +384,7 @@
     <name>GameInfoDialog</name>
     <message>
         <source>Game Info</source>
-        <translation>Spillinfo</translation>
+        <translation type="vanished">Spillinfo</translation>
     </message>
     <message>
         <source>Player Blue/Red:</source>
@@ -659,7 +651,7 @@
     <name>GameVariantDialog</name>
     <message>
         <source>Game Variant</source>
-        <translation>Spillvariant</translation>
+        <translation type="vanished">Spillvariant</translation>
     </message>
     <message>
         <source>Classic</source>
@@ -702,7 +694,7 @@
     <name>GotoMoveDialog</name>
     <message>
         <source>Go to Move</source>
-        <translation>Gå til trekk</translation>
+        <translation type="vanished">Gå til trekk</translation>
     </message>
     <message>
         <source>Move number:</source>
@@ -739,11 +731,11 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initial Rating</source>
-        <translation>Oppstartsvurdering</translation>
+        <translation type="vanished">Oppstartsvurdering</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation>Du har ikke spillt noen vurderte spill i denne varianten enda. Anslå din spillerstyrke for å anta din vurdering.</translation>
+        <translation type="vanished">Du har ikke spillt noen vurderte spill i denne varianten enda. Anslå din spillerstyrke for å anta din vurdering.</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -756,6 +748,10 @@
     <message>
         <source>Your initial rating:</source>
         <translation>Din startvurdering:</translation>
+    </message>
+    <message>
+        <source>Estimate your playing strength to initialize your rating for this game variant.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1374,7 +1370,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <name>MoveAnnotationDialog</name>
     <message>
         <source>Move Annotation</source>
-        <translation>Flytt anmerkning</translation>
+        <translation type="vanished">Flytt anmerkning</translation>
     </message>
     <message>
         <source>Annotation:</source>
@@ -1440,7 +1436,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>Rating</source>
         <extracomment>Window title for the rating dialog.</extracomment>
-        <translation>Vurdering</translation>
+        <translation type="vanished">Vurdering</translation>
     </message>
     <message>
         <source>Your rating:</source>

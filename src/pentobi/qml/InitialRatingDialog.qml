@@ -34,7 +34,7 @@ Pentobi.Dialog {
                 id: textLabel
 
                 anchors.fill: parent
-                text: qsTr("You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.")
+                text: qsTr("Estimate your playing strength to initialize your rating for this game variant.")
                 wrapMode: Text.Wrap
             }
         }
