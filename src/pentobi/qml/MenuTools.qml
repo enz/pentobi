@@ -52,6 +52,9 @@ Pentobi.Menu {
         text: addMnemonic(qsTr("Clear Analysis"),
                           //: Mnemonic for menu item Clear Analysis. Leave empty for no mnemonic.
                           qsTr("E"))
-        onTriggered: analyzeGameModel.clear()
+        onTriggered: {
+            analyzeGameModel.clear()
+            dismiss() // QTBUG-69682
+        }
     }
 }

@@ -15,10 +15,14 @@ Pentobi.Menu {
                        qsTr("G"))
 
     Pentobi.MenuItem {
-        action: actions.actionNew
-        text: addMnemonic(action.text,
+        enabled: actions.actionNew.enabled
+        text: addMnemonic(actions.actionNew.text,
                           //: Mnemonic for menu item New. Leave empty for no mnemonic.
                           qsTr("N"))
+        onTriggered: {
+            actions.actionNew.onTriggered()
+            dismiss() // QTBUG-69682
+        }
     }
     Pentobi.MenuItem {
         action: actions.actionNewRated
@@ -41,10 +45,14 @@ Pentobi.Menu {
     }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
-        action: actions.actionUndo
-        text: addMnemonic(action.text,
+        enabled: actions.actionUndo.enabled
+        text: addMnemonic(actions.actionUndo.text,
                           //: Mnemonic for menu item Undo. Leave empty for no mnemonic.
                           qsTr("U"))
+        onTriggered: {
+            actions.actionUndo.onTriggered()
+            dismiss() // QTBUG-69682
+        }
     }
     Pentobi.MenuItem {
         action: actions.actionFindMove

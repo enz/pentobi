@@ -21,16 +21,24 @@ Pentobi.Menu {
                           qsTr("G"))
     }
     Pentobi.MenuItem {
-        action: actions.actionBackToMainVar
-        text: addMnemonic(action.text,
+        enabled: actions.actionBackToMainVar.enabled
+        text: addMnemonic(actions.actionBackToMainVar.text,
                           //: Mnemonic for menu item Back to Main Variation. Leave empty for no mnemonic.
                           qsTr("M"))
+        onTriggered: {
+            actions.actionBackToMainVar.onTriggered()
+            dismiss() // QTBUG-69682
+        }
     }
     Pentobi.MenuItem {
-        action: actions.actionBeginningOfBranch
-        text: addMnemonic(action.text,
+        enabled: actions.actionBeginningOfBranch.enabled
+        text: addMnemonic(actions.actionBeginningOfBranch.text,
                           //: Mnemonic for menu item Beginning Of Branch. Leave empty for no mnemonic.
                           qsTr("B"))
+        onTriggered: {
+            actions.actionBeginningOfBranch.onTriggered()
+            dismiss() // QTBUG-69682
+        }
     }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
