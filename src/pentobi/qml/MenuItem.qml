@@ -18,11 +18,9 @@ MenuItem {
     }
 
     property bool _hasMenuIndicators: {
-        for (var i = 0; i < menu.count; ++i) {
-            var item = menu.itemAt(i)
-            if (item.checkable)
+        for (var i = 0; i < menu.count; ++i)
+            if (menu.itemAt(i).checkable)
                 return true
-        }
         return false
     }
     property bool _hasMenuArrows: {

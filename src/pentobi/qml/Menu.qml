@@ -36,13 +36,11 @@ Menu {
     onCurrentIndexChanged: {
         if (isAndroid || currentIndex < 0)
             return
-        for (var i = currentIndex; i < count; ++i) {
-            var item = itemAt(i)
-            if (item && item.enabled) {
+        for (var i = currentIndex; i < count; ++i)
+            if (itemAt(i).enabled) {
                 currentIndex = i
                 return
             }
-        }
         currentIndex = -1
     }
 }
