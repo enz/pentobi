@@ -25,6 +25,7 @@ Pentobi.Menu {
         text: addMnemonic(actions.actionBackToMainVar.text,
                           //: Mnemonic for menu item Back to Main Variation. Leave empty for no mnemonic.
                           qsTr("M"))
+        shortcut: actions.actionBackToMainVar.shortcut
         onTriggered: {
             actions.actionBackToMainVar.onTriggered()
             dismiss() // QTBUG-69682
@@ -35,6 +36,7 @@ Pentobi.Menu {
         text: addMnemonic(actions.actionBeginningOfBranch.text,
                           //: Mnemonic for menu item Beginning Of Branch. Leave empty for no mnemonic.
                           qsTr("B"))
+        shortcut: actions.actionBeginningOfBranch.shortcut
         onTriggered: {
             actions.actionBeginningOfBranch.onTriggered()
             dismiss() // QTBUG-69682

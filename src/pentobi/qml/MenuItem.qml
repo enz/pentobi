@@ -13,6 +13,8 @@ import "Controls.js" as PentobiControls
 MenuItem {
     id: root
 
+    property string shortcut: action && action.shortcut ? action.shortcut : ""
+
     function addMnemonic(text, mnemonic) {
         return PentobiControls.addMnemonic(text, mnemonic)
     }
@@ -85,9 +87,7 @@ MenuItem {
         Label {
             visible: isDesktop
             text: {
-                if (! root.action || ! root.action.shortcut)
-                    return ""
-                var text = root.action.shortcut
+                var text = shortcut
                 //: Shortcut modifier key as displayed in menu item text (abbreviate if long)
                 text = text.replace("Ctrl", qsTr("Ctrl"))
                 //: Shortcut modifier key as displayed in menu item text (abbreviate if long)

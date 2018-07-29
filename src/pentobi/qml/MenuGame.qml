@@ -19,6 +19,7 @@ Pentobi.Menu {
         text: addMnemonic(actions.actionNew.text,
                           //: Mnemonic for menu item New. Leave empty for no mnemonic.
                           qsTr("N"))
+        shortcut: actions.actionNew.shortcut
         onTriggered: {
             actions.actionNew.onTriggered()
             dismiss() // QTBUG-69682
