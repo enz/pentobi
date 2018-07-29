@@ -98,12 +98,8 @@ MenuItem {
             Layout.alignment: Qt.AlignVCenter
         }
         Item {
-            implicitWidth: {
-                var result = 0.1 * font.pixelSize
-                if (_hasMenuArrows)
-                    result += root.arrow.width
-                return result
-            }
+            implicitWidth:
+                _hasMenuArrows ? root.arrow.width : 0.1 * font.pixelSize
         }
     }
 }
