@@ -1075,20 +1075,20 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Keep Only Position</source>
-        <translation>Kun behold posisjon</translation>
+        <translation type="vanished">Kun behold posisjon</translation>
     </message>
     <message>
         <source>P</source>
-        <extracomment>Mnemonic for menu item Keep Only Position. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Keep Position. Leave empty for no mnemonic.</extracomment>
         <translation>K</translation>
     </message>
     <message>
         <source>Keep Only Subtree</source>
-        <translation>Kun behold undertreet</translation>
+        <translation type="vanished">Kun behold undertreet</translation>
     </message>
     <message>
         <source>S</source>
-        <extracomment>Mnemonic for menu item Keep Only Subtree. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Keep Subtree. Leave empty for no mnemonic.</extracomment>
         <translation>N</translation>
     </message>
     <message>
@@ -1112,6 +1112,14 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>Move Annotation...</source>
         <translation>Flytt anmerkning…</translation>
+    </message>
+    <message>
+        <source>Keep Position</source>
+        <translation>Behold posisjon</translation>
+    </message>
+    <message>
+        <source>Keep Subtree</source>
+        <translation>Behold undertreet</translation>
     </message>
 </context>
 <context>

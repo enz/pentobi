@@ -73,15 +73,15 @@ Pentobi.Menu {
         onTriggered: Logic.truncateChildren()
     }
     Pentobi.MenuItem {
-        text: addMnemonic(qsTr("Keep Only Position"),
-                          //: Mnemonic for menu item Keep Only Position. Leave empty for no mnemonic.
+        text: addMnemonic(qsTr("Keep Position"),
+                          //: Mnemonic for menu item Keep Position. Leave empty for no mnemonic.
                           qsTr("P"))
         enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward) && ! isRated
         onTriggered: Logic.keepOnlyPosition()
     }
     Pentobi.MenuItem {
-        text: addMnemonic(qsTr("Keep Only Subtree"),
-                          //: Mnemonic for menu item Keep Only Subtree. Leave empty for no mnemonic.
+        text: addMnemonic(qsTr("Keep Subtree"),
+                          //: Mnemonic for menu item Keep Subtree. Leave empty for no mnemonic.
                           qsTr("S"))
         enabled: gameModel.canGoBackward && gameModel.canGoForward && ! isRated
         onTriggered: Logic.keepOnlySubtree()
