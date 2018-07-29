@@ -42,5 +42,5 @@ Blokus files (*.blksgf). On Debian-based distributions with install prefix
 == Building the Android version ==
 
 Because building, deploying and debugging for Android is not yet functional
-for CMake projects in QtCreator, there exists a project file Pentobi.pro
-for building the Android app.
+for CMake projects in QtCreator, there exists a project file in
+src/pentobi/Pentobi.pro for building the Android app.
