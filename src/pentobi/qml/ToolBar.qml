@@ -17,6 +17,7 @@ RowLayout {
     property real buttonPadding: Math.round(1.5 * Screen.pixelDensity)
 
     function clickMenuButton() {
+        menuButton.checked = true
         menuButton.onClicked()
         menu.item.currentIndex = 0
     }
@@ -186,19 +187,30 @@ RowLayout {
             ToolTip.timeout: 9000
         }
     }
+    // We want to open/close the menu by button clicks and support auto-closing
+    // with escape/outside clicks, which is suprisingly difficult because
+    // auto-close events close the menu before the button signal handlers are
+    // called. The current code almost works, except for the use case of
+    // opening the menu with a click and closing it with escape, which leaves
+    // the button checked and needs two clicks to open the menu again.
     Pentobi.Button {
         id: menuButton
 
         padding: buttonPadding
         icon.source: theme.getImage("menu")
+        checkable: true
+        hoverEnabled: isDesktop
+        onHoveredChanged: checked = (menu.item && menu.item.opened)
         down: pressed || (menu.item && menu.item.opened)
         onClicked: {
             if (! menu.item)
                 menu.sourceComponent = menuComponent
-            if (isAndroid)
-                menu.item.popup()
-            else
-                menu.item.popup(0, height)
+            if (checked) {
+                if (isAndroid)
+                    menu.item.popup()
+                else
+                    menu.item.popup(0, height)
+            }
         }
 
         Loader {
@@ -208,6 +220,10 @@ RowLayout {
                 id: menuComponent
 
                 Pentobi.Menu {
+                    onClosed:
+                        if (! menuButton.hovered)
+                            menuButton.checked = false
+
                     MenuGame { }
                     MenuGo { }
                     MenuEdit { }
