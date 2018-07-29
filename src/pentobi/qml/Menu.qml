@@ -12,8 +12,10 @@ import "." as Pentobi
 Menu {
     function addMnemonic(text, mnemonic) { return PentobiControls.addMnemonic(text, mnemonic) }
 
+    property bool dynamicWidth: isDesktop
+
     width: {
-        if (! isDesktop)
+        if (! dynamicWidth)
             return Math.min(font.pixelSize * 18, rootWindow.width)
         var maxWidth = 0
         for (var i = 0; i < count; ++i)

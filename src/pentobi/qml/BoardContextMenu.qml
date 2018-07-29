@@ -11,6 +11,7 @@ Pentobi.Menu {
 
     property string _annotation;
 
+    dynamicWidth: true
     onOpened: _annotation = gameModel.getMoveAnnotation(moveNumber)
 
     Pentobi.MenuItem {
