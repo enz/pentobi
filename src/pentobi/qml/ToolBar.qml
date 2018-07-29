@@ -192,13 +192,14 @@ RowLayout {
         padding: buttonPadding
         icon.source: theme.getImage("menu")
         checkable: true
-        down: menu.item && menu.item.opened
+        down: pressed || (menu.item && menu.item.opened)
         onClicked: {
             if (! menu.item)
                 menu.sourceComponent = menuComponent
-            if (menu.item.opened) menu.item.close();
-            else if (isAndroid) menu.item.popup()
-            else menu.item.popup(0, height)
+            if (isAndroid)
+                menu.item.popup()
+            else
+                menu.item.popup(0, height)
         }
 
         Loader {
