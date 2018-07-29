@@ -464,6 +464,7 @@ function openFileBlocking(file) {
         gameDisplay.showComment()
     else
         gameDisplay.showPieces()
+    toolBar.destroyMenu()
 }
 
 function openFileUrl() {

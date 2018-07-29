@@ -67,9 +67,6 @@ Pentobi.Menu {
                            //: Mnemonic for menu Open Recent. Leave empty for no mnemonic.
                            qsTr("P"))
         enabled: gameModel.recentFiles.length > 0
-        // Automatic sizing of Pentobi.Menu doesn't work with dynamic menus
-        // (why? last tested with Qt 5.11.1)
-        width: Math.min(font.pixelSize * 18, rootWindow.width)
 
         Instantiator {
             model: gameModel.recentFiles
@@ -77,8 +74,6 @@ Pentobi.Menu {
             onObjectRemoved: recentFiles.removeItem(object)
 
             Pentobi.MenuItem {
-                width: recentFiles.width
-                height: font.pixelSize * (isDesktop ? 1.9 : 2.2)
                 text: {
                     var result = modelData.substring(modelData.lastIndexOf("/") + 1)
                     if (isDesktop)
