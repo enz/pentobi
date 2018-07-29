@@ -119,7 +119,7 @@ class GameModel
     Q_PROPERTY(QString round READ getRound WRITE setRound NOTIFY roundChanged)
 
 public:
-    static const int maxRecentFiles = 10;
+    static const int maxRecentFiles = 9;
 
     static Variant getInitialGameVariant();
 
