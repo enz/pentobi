@@ -20,7 +20,6 @@ Pentobi.Menu {
                           qsTr("A"))
         onTriggered: appearanceDialog.open()
     }
-    MenuSeparator { }
     Pentobi.MenuItem {
         action: actions.actionFullscreen
         text: addMnemonic(action.text,

@@ -26,7 +26,7 @@ Pentobi.Menu {
                           //: Mnemonic for menu item Rated Game. Leave empty for no mnemonic.
                           qsTr("R"))
     }
-    MenuSeparator { }
+    Pentobi.MenuSeparator { }
     Action {
         text: addMnemonic(qsTr("Game Variant..."),
                           //: Mnemonic for menu item Game Variant. Leave empty for no mnemonic.
@@ -39,7 +39,7 @@ Pentobi.Menu {
                           //: Mnemonic for menu item Game Info. Leave empty for no mnemonic.
                           qsTr("I"))
     }
-    MenuSeparator { }
+    Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
         action: actions.actionUndo
         text: addMnemonic(action.text,
@@ -52,7 +52,7 @@ Pentobi.Menu {
                           //: Mnemonic for menu item Find Move. Leave empty for no mnemonic.
                           qsTr("F"))
     }
-    MenuSeparator { }
+    Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
         action: actions.actionOpen
         text: addMnemonic(action.text,
@@ -79,7 +79,7 @@ Pentobi.Menu {
                           qsTr("A"))
     }
     MenuExport { }
-    MenuSeparator { }
+    Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
         action: actions.actionQuit
         text: addMnemonic(action.text,

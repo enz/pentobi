@@ -32,7 +32,7 @@ Pentobi.Menu {
                           //: Mnemonic for menu item Beginning Of Branch. Leave empty for no mnemonic.
                           qsTr("B"))
     }
-    MenuSeparator { }
+    Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
         action: actions.actionFindNextComment
         text: addMnemonic(action.text,

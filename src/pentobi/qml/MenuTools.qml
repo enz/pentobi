@@ -27,7 +27,7 @@ Pentobi.Menu {
                           qsTr("C"))
         onTriggered: Logic.clearRating()
     }
-    MenuSeparator { }
+    Pentobi.MenuSeparator { }
     Action {
         enabled: ! isRated && (gameModel.canGoBackward || gameModel.canGoForward)
         text: addMnemonic(qsTr("Analyze Game"),

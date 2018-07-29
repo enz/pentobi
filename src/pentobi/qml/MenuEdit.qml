@@ -25,7 +25,7 @@ Pentobi.Menu {
             moveAnnotationDialog.open()
         }
     }
-    MenuSeparator { }
+    Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Make Main Variation"),
                           //: Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.
@@ -57,7 +57,7 @@ Pentobi.Menu {
         enabled: gameModel.hasVariations && ! isRated
         onTriggered: Logic.deleteAllVar()
     }
-    MenuSeparator { }
+    Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Truncate"),
                           //: Mnemonic for menu item Truncate. Leave empty for no mnemonic.
@@ -86,7 +86,7 @@ Pentobi.Menu {
         enabled: gameModel.canGoBackward && gameModel.canGoForward && ! isRated
         onTriggered: Logic.keepOnlySubtree()
     }
-    MenuSeparator { }
+    Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Setup Mode"),
                           //: Mnemonic for menu item Setup Mode. Leave empty for no mnemonic.
