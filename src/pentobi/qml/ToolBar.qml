@@ -191,7 +191,6 @@ RowLayout {
 
         padding: buttonPadding
         icon.source: theme.getImage("menu")
-        checkable: true
         down: pressed || (menu.item && menu.item.opened)
         onClicked: {
             if (! menu.item)
