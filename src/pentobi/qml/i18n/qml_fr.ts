@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>Find Next Comment</source>
-        <translation>Trouver le commentaire suivant</translation>
+        <translation type="vanished">Trouver le commentaire suivant</translation>
     </message>
     <message>
         <source>Go to Move...</source>
@@ -93,6 +93,10 @@
     <message>
         <source>Computer Settings...</source>
         <translation>Configuration de l&apos;ordinateur…</translation>
+    </message>
+    <message>
+        <source>Next Comment</source>
+        <translation>Commentaire suivant</translation>
     </message>
 </context>
 <context>
@@ -1265,7 +1269,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu item Find Next Comment. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Next Comment. Leave empty for no mnemonic.</extracomment>
         <translation>C</translation>
     </message>
 </context>

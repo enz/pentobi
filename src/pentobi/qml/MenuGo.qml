@@ -44,7 +44,7 @@ Pentobi.Menu {
     Pentobi.MenuItem {
         action: actions.actionFindNextComment
         text: addMnemonic(action.text,
-                          //: Mnemonic for menu item Find Next Comment. Leave empty for no mnemonic.
+                          //: Mnemonic for menu item Next Comment. Leave empty for no mnemonic.
                           qsTr("C"))
     }
 }

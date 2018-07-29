@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>Find Next Comment</source>
-        <translation>Nächsten Kommentar finden</translation>
+        <translation type="vanished">Nächsten Kommentar finden</translation>
     </message>
     <message>
         <source>Go to Move...</source>
@@ -93,6 +93,10 @@
     <message>
         <source>Computer Settings...</source>
         <translation>Computer-Einstellungen …</translation>
+    </message>
+    <message>
+        <source>Next Comment</source>
+        <translation>Nächster Kommentar</translation>
     </message>
 </context>
 <context>
@@ -1273,7 +1277,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu item Find Next Comment. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Next Comment. Leave empty for no mnemonic.</extracomment>
         <translation>K</translation>
     </message>
 </context>
@@ -1320,7 +1324,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <name>MenuRecentFiles</name>
     <message>
         <source>Open Recent</source>
-        <translation>Zuletzt benutzte Dateien</translation>
+        <translation>Zuletzt benutzt</translation>
     </message>
     <message>
         <source>P</source>

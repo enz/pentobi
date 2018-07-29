@@ -98,7 +98,7 @@ QtObject {
     }
     property Action actionFindNextComment: Action {
         shortcut: "Ctrl+T"
-        text: qsTr("Find Next Comment")
+        text: qsTr("Next Comment")
         enabled: ! isRated && (gameModel.canGoForward || gameModel.canGoBackward)
         onTriggered: Logic.findNextComment()
     }
