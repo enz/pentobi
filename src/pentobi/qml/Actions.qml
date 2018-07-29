@@ -86,18 +86,18 @@ QtObject {
         }
     }
     property Action actionFindMove: Action {
-        shortcut: "F6"
+        shortcut: "Ctrl+H"
         text: qsTr("Find Move")
         enabled: ! gameModel.isGameOver
         onTriggered: gameDisplay.showMove(gameModel.findMoveNext())
     }
     property Action actionFindMovePrevious: Action {
-        shortcut: "Shift+F6"
+        shortcut: "Ctrl+Shift+H"
         enabled: ! gameModel.isGameOver
         onTriggered: gameDisplay.showMove(gameModel.findMovePrevious())
     }
     property Action actionFindNextComment: Action {
-        shortcut: "F3"
+        shortcut: "Ctrl+T"
         text: qsTr("Find Next Comment")
         enabled: ! isRated && (gameModel.canGoForward || gameModel.canGoBackward)
         onTriggered: Logic.findNextComment()
@@ -243,11 +243,6 @@ QtObject {
         shortcut: "Ctrl+Q"
         text: qsTr("Quit")
         onTriggered: Logic.autoSaveAndQuit()
-    }
-    property Action actionRating: Action {
-        shortcut: "F7"
-        text: qsTr("Rating")
-        onTriggered: Logic.rating()
     }
     property Action actionSave: Action {
         shortcut: "Ctrl+S"

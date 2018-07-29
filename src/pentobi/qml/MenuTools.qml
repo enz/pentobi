@@ -15,10 +15,10 @@ Pentobi.Menu {
                        qsTr("T"))
 
     Pentobi.MenuItem {
-        action: actions.actionRating
-        text: addMnemonic(action.text,
+        text: addMnemonic(qsTr("Rating"),
                           //: Mnemonic for menu item Rating. Leave empty for no mnemonic.
                           qsTr("R"))
+        onTriggered: Logic.rating()
     }
     Action {
         enabled: ! isRated && ratingModel.numberGames > 0

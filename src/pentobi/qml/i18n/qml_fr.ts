@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>Rating</source>
-        <translation>Classement</translation>
+        <translation type="vanished">Classement</translation>
     </message>
     <message>
         <source>Fullscreen</source>
@@ -1355,6 +1355,10 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>O</source>
         <extracomment>Mnemonic for menu item Abort Analysis. Leave empty for no mnemonic.</extracomment>
         <translation>O</translation>
+    </message>
+    <message>
+        <source>Rating</source>
+        <translation>Classement</translation>
     </message>
 </context>
 <context>
