@@ -85,7 +85,7 @@ MenuItem {
             Layout.fillWidth: true
         }
         Label {
-            visible: isDesktop
+            visible: isDesktop && shortcut !== ""
             text: {
                 var text = shortcut
                 //: Shortcut modifier key as displayed in menu item text (abbreviate if long)
