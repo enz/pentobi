@@ -310,6 +310,14 @@ bool GameModel::checkSetupAllowed() const
     return true;
 }
 
+void GameModel::clearRecentFiles()
+{
+    m_recentFiles.clear();
+    QSettings settings;
+    settings.setValue("recentFiles", m_recentFiles);
+    emit recentFilesChanged();
+}
+
 bool GameModel::createFolder(const QUrl& folder)
 {
     auto localFolder = folder.toLocalFile();

@@ -23,6 +23,7 @@ Version 15.UNKNOWN (master)
 * Reintroduced forward10/backward10 toolbuttons on desktop.
 * New shortcut keys for moving the selected piece in larger steps
   on the board and for rotating and flipping it.
+* New menu item Recent Files/Clear List.
 * New shortcut Ctrl+Shift+H, which behaves like Find Move (Ctrl+H) but
   iterates backwards through the list of legal moves.
 * The Android version now shows an error before open/save if permission

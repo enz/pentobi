@@ -4,7 +4,6 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQml 2.2
 import QtQuick 2.0
 import QtQuick.Controls 2.3
 import "Main.js" as Logic
@@ -60,33 +59,7 @@ Pentobi.Menu {
                           //: Mnemonic for menu item Open. Leave empty for no mnemonic.
                           qsTr("O"))
     }
-    Pentobi.Menu {
-        id: recentFiles
-
-        title: addMnemonic(qsTr("Open Recent"),
-                           //: Mnemonic for menu Open Recent. Leave empty for no mnemonic.
-                           qsTr("P"))
-        enabled: gameModel.recentFiles.length > 0
-
-        Instantiator {
-            model: gameModel.recentFiles
-            onObjectAdded: recentFiles.insertItem(index, object)
-            onObjectRemoved: recentFiles.removeItem(object)
-
-            Pentobi.MenuItem {
-                text: {
-                    var result = modelData.substring(modelData.lastIndexOf("/") + 1)
-                    if (isDesktop)
-                        //: Format in recent files menu. First argument is the
-                        //: file number, second argument the file name.
-                        result = addMnemonic(qsTr("%1. %2").arg(index + 1).arg(result),
-                                             (index + 1).toString())
-                    return result
-                }
-                onTriggered: Logic.openRecentFile(modelData)
-            }
-        }
-    }
+    MenuRecentFiles { }
     Action {
         text: addMnemonic(qsTr("Open from Clipboard"),
                           //: Mnemonic for menu item Open from Clipboard. Leave empty for no mnemonic.

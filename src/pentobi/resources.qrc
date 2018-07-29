@@ -46,6 +46,7 @@
         <file>qml/MenuGo.qml</file>
         <file>qml/MenuHelp.qml</file>
         <file>qml/MenuItem.qml</file>
+        <file>qml/MenuRecentFiles.qml</file>
         <file>qml/MenuTools.qml</file>
         <file>qml/MenuView.qml</file>
         <file>qml/MoveAnnotationDialog.qml</file>

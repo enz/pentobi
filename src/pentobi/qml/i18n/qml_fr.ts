@@ -1026,7 +1026,7 @@
         <extracomment>Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.
 ----------
 Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
-        <translation>P</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Move Variation Up</source>
@@ -1197,7 +1197,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Open Recent</source>
-        <translation>Fichiers récents</translation>
+        <translation type="vanished">Fichiers récents</translation>
     </message>
     <message>
         <source>Open from Clipboard</source>
@@ -1206,7 +1206,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu Open Recent. Leave empty for no mnemonic.</extracomment>
-        <translation>E</translation>
+        <translation type="vanished">E</translation>
     </message>
     <message>
         <source>S</source>
@@ -1230,7 +1230,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>%1. %2</source>
         <extracomment>Format in recent files menu. First argument is the file number, second argument the file name.</extracomment>
-        <translation>%1. %2</translation>
+        <translation type="vanished">%1. %2</translation>
     </message>
 </context>
 <context>
@@ -1302,6 +1302,33 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>Shift</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
         <translation>Maj</translation>
+    </message>
+</context>
+<context>
+    <name>MenuRecentFiles</name>
+    <message>
+        <source>Open Recent</source>
+        <translation>Fichiers récents</translation>
+    </message>
+    <message>
+        <source>P</source>
+        <extracomment>Mnemonic for menu Open Recent. Leave empty for no mnemonic.</extracomment>
+        <translation>F</translation>
+    </message>
+    <message>
+        <source>%1. %2</source>
+        <extracomment>Format in recent files menu. First argument is the file number, second argument the file name.</extracomment>
+        <translation>%1. %2</translation>
+    </message>
+    <message>
+        <source>Clear List</source>
+        <extracomment>Menu item for clearing the recent files list</extracomment>
+        <translation>Effacer la liste</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Recent Files/Clear List. Leave empty for no mnemonic.</extracomment>
+        <translation>E</translation>
     </message>
 </context>
 <context>
