@@ -12,7 +12,7 @@
 // in Action texts used in a MenuItem as global shortcuts (last occurred with
 // Qt 5.11.1)
 function addMnemonic(text, mnemonic) {
-    if (isAndroid || mnemonic === "")
+    if (! isDesktop || mnemonic === "")
         return text
     mnemonic = mnemonic.toLowerCase()
     var textLower = text.toLowerCase()

@@ -13,13 +13,25 @@ import "Controls.js" as PentobiControls
 MenuItem {
     id: root
 
-    // Indicates that all items in the current menu are not checkable
-    property bool noIndicatorSpace
+    function addMnemonic(text, mnemonic) {
+        return PentobiControls.addMnemonic(text, mnemonic)
+    }
 
-    function addMnemonic(text, mnemonic) { return PentobiControls.addMnemonic(text, mnemonic) }
+    property bool _hasMenuIndicators: {
+        for (var i = 0; i < menu.count; ++i) {
+            var item = menu.itemAt(i)
+            if (item.checkable)
+                return true
+        }
+        return false
+    }
+    property bool _hasMenuArrows: {
+        for (var i = 0; i < menu.count; ++i)
+            if (menu.menuAt(i))
+                return true
+        return false
+    }
 
-    // width should be the same as in Pentobi.Menu
-    width: Math.min(font.pixelSize * (isDesktop ? 23 : 18), rootWindow.width)
     height: font.pixelSize * (isDesktop ? 1.9 : 2.2)
     background: Rectangle {
         anchors.fill: parent
@@ -35,18 +47,21 @@ MenuItem {
         }
     }
     contentItem: RowLayout {
-        spacing: 0.2 * font.pixelSize
         anchors.fill: parent
 
         Item {
-            implicitWidth:
-                (noIndicatorSpace ? 0 : root.indicator.width) + 1.1 * spacing
+            implicitWidth: {
+                var result = 0.1 * font.pixelSize
+                if (_hasMenuIndicators)
+                    result += root.indicator.width + 0.2 * font.pixelSize
+                return result
+            }
         }
         Label {
             id: labelText
 
             text: {
-                if (isAndroid)
+                if (! isDesktop)
                     return root.text
                 var pos = root.text.indexOf("&")
                 if (pos < 0 || pos === root.text.length - 1)
@@ -80,6 +95,13 @@ MenuItem {
             opacity: 0.6
             Layout.alignment: Qt.AlignVCenter
         }
-        Item { implicitWidth: root.arrow.width }
+        Item {
+            implicitWidth: {
+                var result = 0.1 * font.pixelSize
+                if (_hasMenuArrows)
+                    result += root.arrow.width
+                return result
+            }
+        }
     }
 }

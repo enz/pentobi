@@ -6,7 +6,7 @@
 
 import QtQml 2.2
 import QtQuick 2.0
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import "Main.js" as Logic
 import "." as Pentobi
 
@@ -28,7 +28,7 @@ Pentobi.Menu {
                           qsTr("R"))
     }
     MenuSeparator { }
-    Pentobi.MenuItem {
+    Action {
         text: addMnemonic(qsTr("Game Variant..."),
                           //: Mnemonic for menu item Game Variant. Leave empty for no mnemonic.
                           qsTr("V"))
@@ -70,25 +70,24 @@ Pentobi.Menu {
 
         Instantiator {
             model: gameModel.recentFiles
-            onObjectAdded: recentFiles.insertItem(index, object)
-            onObjectRemoved: recentFiles.removeItem(object)
+            onObjectAdded: recentFiles.insertAction(index, object)
+            onObjectRemoved: recentFiles.removeAction(object)
 
-            Pentobi.MenuItem {
+            Action {
                 text: {
                     var result = modelData.substring(modelData.lastIndexOf("/") + 1)
-                    if (! isAndroid)
+                    if (isDesktop)
                         //: Format in recent files menu. First argument is the
                         //: file number, second argument the file name.
                         result = addMnemonic(qsTr("%1. %2").arg(index + 1).arg(result),
                                              (index + 1).toString())
                     return result
                 }
-                noIndicatorSpace: true
                 onTriggered: Logic.openRecentFile(modelData)
             }
         }
     }
-    Pentobi.MenuItem {
+    Action {
         text: addMnemonic(qsTr("Open from Clipboard"),
                           //: Mnemonic for menu item Open from Clipboard. Leave empty for no mnemonic.
                           qsTr("C"))

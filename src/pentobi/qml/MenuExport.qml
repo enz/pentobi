@@ -4,6 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQuick.Controls 2.3
 import "." as Pentobi
 
 Pentobi.Menu {
@@ -11,18 +12,16 @@ Pentobi.Menu {
                        //: Mnemonic for menu Export. Leave empty for no mnemonic.
                        qsTr("E"))
 
-    Pentobi.MenuItem {
+    Action {
         text: addMnemonic(qsTr("Image"),
                           //: Mnemonic for menu item Image. Leave empty for no mnemonic.
                           qsTr("M"))
-        noIndicatorSpace: true
         onTriggered: exportImageDialog.open()
     }
-    Pentobi.MenuItem {
+    Action {
         text: addMnemonic(qsTr("ASCII Art"),
                           //: Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.
                           qsTr("A"))
-        noIndicatorSpace: true
         onTriggered: {
             var dialog = asciiArtSaveDialog.get()
             dialog.name = gameModel.suggestFileName(folder, "txt")

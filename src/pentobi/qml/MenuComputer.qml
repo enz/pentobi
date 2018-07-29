@@ -4,6 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQuick.Controls 2.3
 import "Main.js" as Logic
 import "." as Pentobi
 
@@ -30,7 +31,7 @@ Pentobi.Menu {
                           //: Mnemonic for menu item Play Single Move. Leave empty for no mnemonic.
                           qsTr("M"))
     }
-    Pentobi.MenuItem {
+    Action {
         text: addMnemonic(qsTr("Stop"),
                           //: Mnemonic for menu item Stop. Leave empty for no mnemonic.
                           qsTr("O"))

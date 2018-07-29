@@ -12,8 +12,14 @@ import "." as Pentobi
 Menu {
     function addMnemonic(text, mnemonic) { return PentobiControls.addMnemonic(text, mnemonic) }
 
-    // width should be the same as in Pentobi.MenuItem
-    width: Math.min(font.pixelSize * (isDesktop ? 23 : 18), rootWindow.width)
+    width: {
+        if (! isDesktop)
+            return Math.min(font.pixelSize * 18, rootWindow.width)
+        var maxWidth = 0
+        for (var i = 0; i < count; ++i)
+            maxWidth = Math.max(maxWidth, itemAt(i).implicitWidth)
+        return Math.min(maxWidth, rootWindow.width)
+    }
     cascade: isDesktop
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     delegate: Pentobi.MenuItem { }

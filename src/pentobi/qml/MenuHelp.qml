@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.0
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.3
 import "Main.js" as Logic
 import "." as Pentobi
 
@@ -20,7 +20,7 @@ Pentobi.Menu {
                           //: Mnemonic for menu item Pentobi Help. Leave empty for no mnemonic.
                           qsTr("P"))
     }
-    Pentobi.MenuItem {
+    Action {
         text: addMnemonic(qsTr("About Pentobi"),
                           //: Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.
                           qsTr("A"))
