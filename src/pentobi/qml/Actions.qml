@@ -124,11 +124,6 @@ QtObject {
                 visibility = Window.AutomaticVisibility
         }
     }
-    property Action actionGameInfo: Action {
-        shortcut: "Ctrl+I"
-        text: qsTr("Game Info")
-        onTriggered: gameInfoDialog.open()
-    }
     property Action actionGoto: Action {
         shortcut: "Ctrl+G"
         text: qsTr("Go to Move...")

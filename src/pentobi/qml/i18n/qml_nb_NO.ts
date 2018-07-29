@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Game Info</source>
-        <translation>Spillinfo</translation>
+        <translation type="vanished">Spillinfo</translation>
     </message>
     <message>
         <source>Undo Move</source>
@@ -1227,6 +1227,10 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>%1. %2</source>
         <extracomment>Format in recent files menu. First argument is the file number, second argument the file name.</extracomment>
         <translation type="vanished">%1. %2</translation>
+    </message>
+    <message>
+        <source>Game Info</source>
+        <translation>Spillinfo</translation>
     </message>
 </context>
 <context>
