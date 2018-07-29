@@ -18,12 +18,16 @@ MenuItem {
     }
 
     property bool _hasMenuIndicators: {
+        if (! menu)
+            return false
         for (var i = 0; i < menu.count; ++i)
             if (menu.itemAt(i).checkable)
                 return true
         return false
     }
     property bool _hasMenuArrows: {
+        if (! menu)
+            return false
         for (var i = 0; i < menu.count; ++i)
             if (menu.menuAt(i))
                 return true
