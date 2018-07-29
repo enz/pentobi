@@ -220,6 +220,7 @@ RowLayout {
                 id: menuComponent
 
                 Pentobi.Menu {
+                    dynamicWidth: false
                     onClosed:
                         if (! menuButton.hovered)
                             menuButton.checked = false
