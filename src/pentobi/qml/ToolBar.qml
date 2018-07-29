@@ -61,7 +61,7 @@ RowLayout {
     Pentobi.Button {
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-newgame")
-        action: actions.actionNew
+        action: actions.newGame
         visible: isDesktop || enabled
         ToolTip.text: qsTr("Start a new game")
     }
@@ -69,27 +69,27 @@ RowLayout {
         visible: isDesktop
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-rated-game")
-        action: actions.actionNewRated
+        action: actions.newGameRated
         ToolTip.text: qsTr("Start a rated game")
     }
     Pentobi.Button {
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-undo")
-        action: actions.actionUndo
+        action: actions.undo
         visible: isDesktop || enabled
         ToolTip.text: action.text.replace("&", "")
     }
     Pentobi.Button {
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-computer-colors")
-        action: actions.actionComputerSettings
+        action: actions.computerSettings
         visible: isDesktop || enabled
         ToolTip.text: qsTr("Set the colors played by the computer")
     }
     Pentobi.Button {
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-play")
-        action: actions.actionPlay
+        action: actions.play
         visible: isDesktop || enabled
         ToolTip.text: {
             var toPlay = gameModel.toPlay
@@ -107,14 +107,14 @@ RowLayout {
         visible: isDesktop
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-beginning")
-        action: actions.actionBeginning
+        action: actions.beginning
         ToolTip.text: qsTr("Go to beginning of game")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-backward10")
-        action: actions.actionBackward10
+        action: actions.backward10
         autoRepeat: true
         ToolTip.text: qsTr("Go ten moves backward")
     }
@@ -122,7 +122,7 @@ RowLayout {
         visible: isDesktop
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-backward")
-        action: actions.actionBackward
+        action: actions.backward
         autoRepeat: true
         ToolTip.text: qsTr("Go one move backward")
     }
@@ -130,7 +130,7 @@ RowLayout {
         visible: isDesktop
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-forward")
-        action: actions.actionForward
+        action: actions.forward
         autoRepeat: true
         ToolTip.text: qsTr("Go one move forward")
     }
@@ -138,7 +138,7 @@ RowLayout {
         visible: isDesktop
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-forward10")
-        action: actions.actionForward10
+        action: actions.forward10
         autoRepeat: true
         ToolTip.text: qsTr("Go ten moves forward")
     }
@@ -146,21 +146,21 @@ RowLayout {
         visible: isDesktop
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-end")
-        action: actions.actionEnd
+        action: actions.end
         ToolTip.text: qsTr("Go to end of moves")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-previous-variation")
-        action: actions.actionPrevVar
+        action: actions.prevVar
         ToolTip.text: qsTr("Go to previous variation")
     }
     Pentobi.Button {
         visible: isDesktop
         padding: buttonPadding
         icon.source: theme.getImage("pentobi-next-variation")
-        action: actions.actionNextVar
+        action: actions.nextVar
         ToolTip.text: qsTr("Go to next variation")
     }
     Item {

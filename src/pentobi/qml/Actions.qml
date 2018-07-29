@@ -17,7 +17,7 @@ QtObject {
     // that is when any QtQuickControls2 Popup is open.
     property bool noPopupOpen: overlay.children.length === 0
 
-    property Instantiator actionsPickedNamedPiece: Instantiator {
+    property Instantiator pickedNamedPiece: Instantiator {
         model: [ "1", "2", "A", "C", "E", "F", "G", "H", "I", "J", "L",
             "N", "O", "P", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
 
@@ -26,7 +26,7 @@ QtObject {
             onTriggered: Logic.pickNamedPiece(modelData)
         }
     }
-    property Action actionBackKey: Action {
+    property Action backKey: Action {
         shortcut: isAndroid && noPopupOpen ? "Back" : ""
         onTriggered: {
             if (visibility === Window.FullScreen) {
@@ -41,78 +41,78 @@ QtObject {
                 Qt.quit()
         }
     }
-    property Action actionBackToMainVar: Action {
+    property Action backToMainVar: Action {
         shortcut: "Ctrl+M"
         text: qsTr("Back to Main Variation")
         enabled: ! isRated && ! gameModel.isMainVar
         onTriggered: gameModel.backToMainVar()
     }
-    property Action actionBackward: Action {
+    property Action backward: Action {
         shortcut: "Ctrl+Left"
         enabled: gameModel.canGoBackward && ! isRated
         onTriggered: gameModel.goBackward()
     }
-    property Action actionBackward10: Action {
+    property Action backward10: Action {
         shortcut: "Ctrl+Shift+Left"
         enabled: gameModel.canGoBackward && ! isRated
         onTriggered: gameModel.goBackward10()
     }
-    property Action actionBeginning: Action {
+    property Action beginning: Action {
         shortcut: "Ctrl+Home"
         enabled: gameModel.canGoBackward && ! isRated
         onTriggered: gameModel.goBeginning()
     }
-    property Action actionBeginningOfBranch: Action {
+    property Action beginningOfBranch: Action {
         shortcut: "Ctrl+B"
         text: qsTr("Beginning of Branch")
         enabled: ! isRated && gameModel.hasEarlierVar
         onTriggered: gameModel.gotoBeginningOfBranch()
     }
-    property Action actionComputerSettings: Action {
+    property Action computerSettings: Action {
         shortcut: "Ctrl+U"
         text: qsTr("Computer Settings...")
         onTriggered: computerDialog.open()
     }
-    property Action actionEnd: Action {
+    property Action end: Action {
         shortcut: "Ctrl+End"
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goEnd()
     }
-    property Action actionDropPickedPiece: Action {
+    property Action dropPickedPiece: Action {
         shortcut: noPopupOpen ? "Escape" : ""
         onTriggered: {
             gameDisplay.pickedPiece = null
             gameModel.resetFindMove()
         }
     }
-    property Action actionFindMove: Action {
+    property Action findMove: Action {
         shortcut: "Ctrl+H"
         text: qsTr("Find Move")
         enabled: ! gameModel.isGameOver
         onTriggered: gameDisplay.showMove(gameModel.findMoveNext())
     }
-    property Action actionFindMovePrevious: Action {
+    property Action findMovePrevious: Action {
         shortcut: "Ctrl+Shift+H"
         enabled: ! gameModel.isGameOver
         onTriggered: gameDisplay.showMove(gameModel.findMovePrevious())
     }
-    property Action actionFindNextComment: Action {
+    property Action nextComment: Action {
         shortcut: "Ctrl+T"
         text: qsTr("Next Comment")
         enabled: ! isRated && (gameModel.canGoForward || gameModel.canGoBackward)
         onTriggered: Logic.findNextComment()
     }
-    property Action actionForward: Action {
+    property Action forward: Action {
         shortcut: "Ctrl+Right"
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goForward()
     }
-    property Action actionForward10: Action {
+    property Action forward10: Action {
         shortcut: "Ctrl+Shift+Right"
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goForward10()
     }
-    property Action actionFullscreen: Action {
+    property Action fullscreen: Action {
         shortcut: "F11"
         text: qsTr("Fullscreen")
         checkable: true
@@ -124,50 +124,50 @@ QtObject {
                 visibility = Window.AutomaticVisibility
         }
     }
-    property Action actionGoto: Action {
+    property Action gotoMove: Action {
         shortcut: "Ctrl+G"
         text: qsTr("Go to Move...")
         enabled: ! isRated && (gameModel.moveNumber + gameModel.movesLeft >= 1)
         onTriggered: gotoMoveDialog.open()
     }
-    property Action actionHelp: Action {
+    property Action help: Action {
         shortcut: "F1"
         text: qsTr("Pentobi Help")
         onTriggered: Logic.help()
     }
-    property Action actionMovePieceDown: Action {
+    property Action movePieceDown: Action {
         shortcut: noPopupOpen ? "Down" : ""
         onTriggered: gameDisplay.shiftPiece(0, 1)
     }
-    property Action actionMovePieceDownFast: Action {
+    property Action movePieceDownFast: Action {
         shortcut: noPopupOpen ? "Shift+Down" : ""
         onTriggered: gameDisplay.shiftPieceFast(0, 1)
     }
-    property Action actionMovePieceLeft: Action {
+    property Action movePieceLeft: Action {
         shortcut: noPopupOpen ? "Left" : ""
         onTriggered: gameDisplay.shiftPiece(-1, 0)
     }
-    property Action actionMovePieceLeftFast: Action {
+    property Action movePieceLeftFast: Action {
         shortcut: noPopupOpen ? "Shift+Left" : ""
         onTriggered: gameDisplay.shiftPieceFast(-1, 0)
     }
-    property Action actionMovePieceRight: Action {
+    property Action movePieceRight: Action {
         shortcut: noPopupOpen ? "Right" : ""
         onTriggered: gameDisplay.shiftPiece(1, 0)
     }
-    property Action actionMovePieceRightFast: Action {
+    property Action movePieceRightFast: Action {
         shortcut: noPopupOpen ? "Shift+Right" : ""
         onTriggered: gameDisplay.shiftPieceFast(1, 0)
     }
-    property Action actionMovePieceUp: Action {
+    property Action movePieceUp: Action {
         shortcut: noPopupOpen ? "Up" : ""
         onTriggered: gameDisplay.shiftPiece(0, -1)
     }
-    property Action actionMovePieceUpFast: Action {
+    property Action movePieceUpFast: Action {
         shortcut: noPopupOpen ? "Shift+Up" : ""
         onTriggered: gameDisplay.shiftPieceFast(0, -1)
     }
-    property Action actionNew: Action {
+    property Action newGame: Action {
         shortcut: "Ctrl+N"
         text: qsTr("New")
         enabled: gameDisplay.setupMode
@@ -175,83 +175,83 @@ QtObject {
                        && ! gameModel.isModified && ! isRated)
         onTriggered: Logic.newGame()
     }
-    property Action actionNewRated: Action {
+    property Action newGameRated: Action {
         shortcut: "Ctrl+Shift+N"
         text: qsTr("Rated Game")
         enabled: ! isRated
         onTriggered: Logic.ratedGame()
     }
-    property Action actionNextOrientation: Action {
+    property Action nextOrientation: Action {
         enabled: gameDisplay.pickedPiece
         shortcut: noPopupOpen ? "Space" : ""
         onTriggered: gameDisplay.pickedPiece.pieceModel.nextOrientation()
     }
-    property Action actionNextPiece: Action {
+    property Action nextPiece: Action {
         shortcut: noPopupOpen ? "+" : ""
         onTriggered: Logic.nextPiece()
     }
-    property Action actionNextVar: Action {
+    property Action nextVar: Action {
         shortcut: "Ctrl+Down"
         enabled: gameModel.hasNextVar && ! isRated
         onTriggered: gameModel.goNextVar()
     }
-    property Action actionOpen: Action {
+    property Action open: Action {
         shortcut: "Ctrl+O"
         text: qsTr("Open...")
         onTriggered: Logic.open()
     }
-    property Action actionOpenMenu: Action {
+    property Action openMenu: Action {
         shortcut: noPopupOpen ? "Alt+M" : ""
         onTriggered: toolBar.clickMenuButton()
     }
-    property Action actionPlay: Action {
+    property Action play: Action {
         shortcut: "Ctrl+L"
         text: qsTr("Play")
         enabled: ! gameModel.isGameOver && ! isRated
         onTriggered: Logic.computerPlay()
     }
-    property Action actionPlaySingle: Action {
+    property Action playSingle: Action {
         shortcut: "Ctrl+Shift+L"
         text: qsTr("Play Single Move")
         enabled: ! gameModel.isGameOver && ! isRated
         onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
     }
-    property Action actionPrevOrientation: Action {
+    property Action prevOrientation: Action {
         enabled: gameDisplay.pickedPiece
         shortcut: noPopupOpen ? "Shift+Space" : ""
         onTriggered: gameDisplay.pickedPiece.pieceModel.previousOrientation()
     }
-    property Action actionPrevPiece: Action {
+    property Action prevPiece: Action {
         shortcut: noPopupOpen ? "-" : ""
         onTriggered: Logic.prevPiece()
     }
-    property Action actionPrevVar: Action {
+    property Action prevVar: Action {
         shortcut: "Ctrl+Up"
         enabled: gameModel.hasPrevVar && ! isRated
         onTriggered: gameModel.goPrevVar()
     }
-    property Action actionPlayPickedPiece: Action {
+    property Action playPickedPiece: Action {
         shortcut: noPopupOpen ? "Return" : ""
         onTriggered: gameDisplay.playPickedPiece()
     }
-    property Action actionQuit: Action {
+    property Action quit: Action {
         shortcut: "Ctrl+Q"
         text: qsTr("Quit")
         onTriggered: Logic.autoSaveAndQuit()
     }
-    property Action actionSave: Action {
+    property Action save: Action {
         shortcut: "Ctrl+S"
         text: qsTr("Save")
         enabled: ! gameModel.isGameEmpty && gameModel.isModified
         onTriggered: if (gameModel.file !== "") Logic.save(); else Logic.saveAs()
     }
-    property Action actionSaveAs: Action {
+    property Action saveAs: Action {
         shortcut: "Ctrl+Shift+S"
         text: qsTr("Save As...")
         enabled: ! gameModel.isGameEmpty
         onTriggered: Logic.saveAs()
     }
-    property Action actionUndo: Action {
+    property Action undo: Action {
         text: qsTr("Undo Move")
         enabled: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
         onTriggered: Logic.undo()

@@ -20,33 +20,33 @@ Row
 
         icon.source: theme.getImage("pentobi-beginning")
         width: buttonWidth; height: buttonHeight
-        action: actions.actionBeginning
+        action: actions.beginning
     }
     Pentobi.Button {
         icon.source: theme.getImage("pentobi-backward")
         width: buttonWidth; height: buttonHeight
-        action: actions.actionBackward
+        action: actions.backward
         autoRepeat: true
     }
     Pentobi.Button {
         icon.source: theme.getImage("pentobi-forward")
         width: buttonWidth; height: buttonHeight
-        action: actions.actionForward
+        action: actions.forward
         autoRepeat: true
     }
     Pentobi.Button {
         icon.source: theme.getImage("pentobi-end")
         width: buttonWidth; height: buttonHeight
-        action: actions.actionEnd
+        action: actions.end
     }
     Pentobi.Button {
         icon.source: theme.getImage("pentobi-previous-variation")
         width: buttonWidth; height: buttonHeight
-        action: actions.actionPrevVar
+        action: actions.prevVar
     }
     Pentobi.Button {
         icon.source: theme.getImage("pentobi-next-variation")
         width: buttonWidth; height: buttonHeight
-        action: actions.actionNextVar
+        action: actions.nextVar
     }
 }

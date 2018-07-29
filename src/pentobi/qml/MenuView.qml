@@ -21,7 +21,7 @@ Pentobi.Menu {
         onTriggered: appearanceDialog.open()
     }
     Pentobi.MenuItem {
-        action: actions.actionFullscreen
+        action: actions.fullscreen
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.
                           qsTr("F"))

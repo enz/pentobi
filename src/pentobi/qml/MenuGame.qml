@@ -15,18 +15,18 @@ Pentobi.Menu {
                        qsTr("G"))
 
     Pentobi.MenuItem {
-        enabled: actions.actionNew.enabled
-        text: addMnemonic(actions.actionNew.text,
+        enabled: actions.newGame.enabled
+        text: addMnemonic(actions.newGame.text,
                           //: Mnemonic for menu item New. Leave empty for no mnemonic.
                           qsTr("N"))
-        shortcut: actions.actionNew.shortcut
+        shortcut: actions.newGame.shortcut
         onTriggered: {
-            actions.actionNew.onTriggered()
+            actions.newGame.onTriggered()
             dismiss() // QTBUG-69682
         }
     }
     Pentobi.MenuItem {
-        action: actions.actionNewRated
+        action: actions.newGameRated
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Rated Game. Leave empty for no mnemonic.
                           qsTr("R"))
@@ -46,24 +46,24 @@ Pentobi.Menu {
     }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
-        enabled: actions.actionUndo.enabled
-        text: addMnemonic(actions.actionUndo.text,
+        enabled: actions.undo.enabled
+        text: addMnemonic(actions.undo.text,
                           //: Mnemonic for menu item Undo. Leave empty for no mnemonic.
                           qsTr("U"))
         onTriggered: {
-            actions.actionUndo.onTriggered()
+            actions.undo.onTriggered()
             dismiss() // QTBUG-69682
         }
     }
     Pentobi.MenuItem {
-        action: actions.actionFindMove
+        action: actions.findMove
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Find Move. Leave empty for no mnemonic.
                           qsTr("F"))
     }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
-        action: actions.actionOpen
+        action: actions.open
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Open. Leave empty for no mnemonic.
                           qsTr("O"))
@@ -76,13 +76,13 @@ Pentobi.Menu {
         onTriggered: Logic.openClipboard()
     }
     Pentobi.MenuItem {
-        action: actions.actionSave
+        action: actions.save
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Save. Leave empty for no mnemonic.
                           qsTr("S"))
     }
     Pentobi.MenuItem {
-        action: actions.actionSaveAs
+        action: actions.saveAs
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Save As. Leave empty for no mnemonic.
                           qsTr("A"))
@@ -90,7 +90,7 @@ Pentobi.Menu {
     MenuExport { }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
-        action: actions.actionQuit
+        action: actions.quit
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Quit. Leave empty for no mnemonic.
                           qsTr("Q"))

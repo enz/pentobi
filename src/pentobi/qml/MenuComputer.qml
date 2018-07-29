@@ -14,19 +14,19 @@ Pentobi.Menu {
                        qsTr("C"))
 
     Pentobi.MenuItem {
-        action: actions.actionComputerSettings
+        action: actions.computerSettings
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Computer Settings. Leave empty for no mnemonic.
                           qsTr("S"))
     }
     Pentobi.MenuItem {
-        action: actions.actionPlay
+        action: actions.play
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Play. Leave empty for no mnemonic.
                           qsTr("P"))
     }
     Pentobi.MenuItem {
-        action: actions.actionPlaySingle
+        action: actions.playSingle
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Play Single Move. Leave empty for no mnemonic.
                           qsTr("M"))
