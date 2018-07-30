@@ -79,7 +79,7 @@ Pentobi.Dialog {
     }
 
     Item {
-        implicitWidth: Math.min(font.pixelSize * 30, 0.9 * rootWindow.width)
+        implicitWidth: Math.min(font.pixelSize * 30, maxContentWidth)
         implicitHeight: columnLayout.implicitHeight
 
         Action {
@@ -289,7 +289,8 @@ Pentobi.Dialog {
                         folderModel.nameFilters = [ "*" ]
                     nameFilterChanged(currentIndex)
                 }
-                Layout.preferredWidth: Math.min(font.pixelSize * 14, 0.9 * rootWindow.width)
+                Layout.preferredWidth:
+                    Math.min(font.pixelSize * 14, maxContentWidth)
                 Layout.alignment: Qt.AlignRight
             }
         }

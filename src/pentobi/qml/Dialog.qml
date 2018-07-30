@@ -8,6 +8,9 @@ import QtQuick 2.11
 import QtQuick.Controls 2.2
 
 Dialog {
+    property real maxContentWidth:
+        rootWindow.width - leftPadding - rightPadding
+
     function centerDialog() {
         // Don't bind x and y because that can cause a binding loop if the
         // application window is interactively resized

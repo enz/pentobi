@@ -26,7 +26,7 @@ Pentobi.Dialog {
             // wider than content (potentially eliding button texts).
             var w = rowLayout.implicitWidth
             w = Math.max(w, font.pixelSize * 18)
-            w = Math.min(w, 0.9 * rootWindow.width)
+            w = Math.min(w, maxContentWidth)
             return w
         }
         implicitHeight: rowLayout.implicitHeight

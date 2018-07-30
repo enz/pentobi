@@ -37,7 +37,7 @@ Pentobi.Dialog {
     ColumnLayout {
         id: columnLayout
 
-        implicitWidth: Math.min(font.pixelSize * 16, 0.9 * rootWindow.width)
+        implicitWidth: Math.min(font.pixelSize * 16, maxContentWidth)
         implicitHeight: columnLayout.implicitHeight
         anchors.fill: parent
 

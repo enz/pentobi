@@ -24,8 +24,7 @@ Pentobi.Dialog {
     }
 
     Item {
-        implicitWidth: Math.min(columnLayout.implicitWidth,
-                                0.9 * rootWindow.width)
+        implicitWidth: Math.min(columnLayout.implicitWidth, maxContentWidth)
         implicitHeight: columnLayout.implicitHeight
 
         ColumnLayout {

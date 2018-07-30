@@ -19,7 +19,7 @@ Pentobi.Dialog {
 
     Item {
         // Make it wide enough to show a the graph
-        implicitWidth: Math.min(font.pixelSize * 22, 0.9 * rootWindow.width)
+        implicitWidth: Math.min(font.pixelSize * 22, maxContentWidth)
         implicitHeight: columnLayout.implicitHeight
 
         ColumnLayout
@@ -227,7 +227,8 @@ Pentobi.Dialog {
 
                             property int row
 
-                            width: Math.min(font.pixelSize * 14, rootWindow.width)
+                            width:
+                                Math.min(font.pixelSize * 14, maxContentWidth)
 
                             Pentobi.MenuItem {
                                 width: parent.width

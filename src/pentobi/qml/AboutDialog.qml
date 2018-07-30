@@ -9,7 +9,7 @@ Pentobi.Dialog {
     footer: Pentobi.DialogButtonBox { ButtonClose { } }
 
     Item {
-        implicitWidth: Math.min(column.implicitWidth, 0.9 * rootWindow.width)
+        implicitWidth: Math.min(column.implicitWidth, maxContentWidth)
         implicitHeight: column.implicitHeight
 
         Column {
@@ -38,14 +38,14 @@ Pentobi.Dialog {
                 text: qsTr("Computer opponent for the board game Blokus.")
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
-                width: Math.min(implicitWidth, 0.9 * rootWindow.width)
+                width: Math.min(implicitWidth, maxContentWidth)
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
                 text: "<a href=\"https://pentobi.sourceforge.io\">pentobi.sourceforge.io</a>"
                 elide: Qt.ElideRight
                 onLinkActivated: Qt.openUrlExternally(link)
-                width: Math.min(implicitWidth, 0.9 * rootWindow.width)
+                width: Math.min(implicitWidth, maxContentWidth)
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
@@ -54,7 +54,7 @@ Pentobi.Dialog {
                 opacity: 0.8
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
-                width: Math.min(implicitWidth, 0.9 * rootWindow.width)
+                width: Math.min(implicitWidth, maxContentWidth)
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }
