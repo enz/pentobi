@@ -1,4 +1,4 @@
-.TH PENTOBI 6 "2018-07-18" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+.TH PENTOBI 6 "2018-07-30" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
 .SH NAME
 pentobi \- computer opponent for the board game Blokus
 .SH SYNOPSIS
@@ -29,10 +29,11 @@ Reducing the maximum level to 8 currently reduces this amount by a factor
 of 3 to 4 and lower maximum levels even more.
 .TP
 .B \-\-mobile
-Use a window layout optimized for smartphones. If this option is not used,
-the default layout depends on the platform. Using this option also changes
-the default style for GUI elements of QQuickControls 2 to Default if the style
-is not explicitely set with option \-style.
+Use a window layout optimized for smartphones and apply some user interface
+changes that assume that a touchscreen is the main input device. If this option
+is not used, the default layout depends on the platform. Using this option also
+changes the default style for GUI elements of QQuickControls 2 to Default if
+the style is not explicitely set with option \-style.
 .TP
 .B \-\-nobook
 Do not use opening books.
