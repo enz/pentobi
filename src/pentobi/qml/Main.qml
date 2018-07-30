@@ -75,10 +75,7 @@ ApplicationWindow {
         onClicked: gameDisplay.dropCommentFocus()
     }
     ColumnLayout {
-        anchors {
-            fill: parent
-            margins: isDesktop ? 1 : 0
-        }
+        anchors.fill: parent
         spacing: 0
 
         Pentobi.ToolBar {
