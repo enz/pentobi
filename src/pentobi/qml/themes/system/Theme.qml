@@ -11,7 +11,8 @@ Light.Theme {
     SystemPalette { id: palette }
 
     property color colorBackground: palette.window
-    property color colorButtonPressed: palette.dark
+    property color colorButtonPressed: palette.mid
+    property color colorButtonHovered: palette.shadow
     property color colorCommentBorder: palette.mid
     property color colorCommentFocus: palette.highlight
     property color colorMessageText: colorText

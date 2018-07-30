@@ -23,13 +23,14 @@ ToolButton {
     flat: true
     background: Rectangle {
         anchors.fill: root
-        visible: down
-        color: theme.colorButtonPressed
+        radius: 0.05 * width
+        color: down ? theme.colorButtonPressed : "transparent"
+        border.color: hovered || down ? theme.colorButtonHovered : "transparent"
     }
     onPressed: if (isDesktop) toolTipSuppressTimer.restart()
-    hoverEnabled: true
+    hoverEnabled: isDesktop
     ToolTip.visible:
-        ToolTip.text && isDesktop && hovered && ! toolTipSuppressTimer.running
+        ToolTip.text && hovered && ! toolTipSuppressTimer.running
         && overlay.children.length === 0
     ToolTip.delay: 900
     ToolTip.timeout: 9000
