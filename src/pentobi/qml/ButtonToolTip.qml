@@ -13,7 +13,7 @@ import QtQuick.Controls 2.4
 MouseArea {
     property AbstractButton button
 
-    visible: button.visible
+    visible: button.visible && isDesktop
     x: button.x
     y: button.y
     width: button.width
