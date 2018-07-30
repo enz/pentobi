@@ -28,19 +28,4 @@ ToolButton {
                       hovered ? theme.colorButtonHovered : "transparent"
         border.color: down || hovered ? theme.colorButtonBorder : "transparent"
     }
-    onPressed: if (isDesktop) toolTipSuppressTimer.restart()
-    hoverEnabled: isDesktop
-    ToolTip.visible:
-        ToolTip.text && hovered && ! toolTipSuppressTimer.running
-        && overlay.children.length === 0
-    ToolTip.delay: 900
-    ToolTip.timeout: 9000
-
-    // If the button is pressed and released, we don't want to show the tooltip
-    // to show again
-    Timer {
-        id: toolTipSuppressTimer
-
-        interval: 9000
-    }
 }
