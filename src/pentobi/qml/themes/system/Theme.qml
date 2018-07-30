@@ -13,6 +13,7 @@ Light.Theme {
     property color colorBackground: palette.window
     property color colorButtonPressed: palette.mid
     property color colorButtonHovered: palette.light
+    property color colorButtonBorder: palette.dark
     property color colorCommentBorder: palette.mid
     property color colorCommentFocus: palette.highlight
     property color colorMessageText: colorText

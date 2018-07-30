@@ -9,8 +9,9 @@ import QtQuick 2.11
 Item {
     property color colorBackground: "#131313"
     property color colorBlue: "#0077D2"
-    property color colorButtonPressed: Qt.lighter(colorBackground, 5)
-    property color colorButtonHovered: Qt.lighter(colorBackground, 3)
+    property color colorButtonPressed: Qt.lighter(colorBackground, 4)
+    property color colorButtonHovered: Qt.lighter(colorBackground, 2)
+    property color colorButtonBorder: Qt.lighter(colorBackground, 5)
     property color colorCommentBorder: "#5a5756"
     property color colorCommentFocus: colorText
     property color colorGreen: "#00C000"

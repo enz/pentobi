@@ -26,6 +26,7 @@ ToolButton {
         radius: 0.05 * width
         color: down ? theme.colorButtonPressed :
                       hovered ? theme.colorButtonHovered : "transparent"
+        border.color: down || hovered ? theme.colorButtonBorder : "transparent"
     }
     onPressed: if (isDesktop) toolTipSuppressTimer.restart()
     hoverEnabled: isDesktop
