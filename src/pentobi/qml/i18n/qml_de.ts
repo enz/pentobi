@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>Theme:</source>
-        <translation>Farbthema:</translation>
+        <translation>Thema:</translation>
     </message>
     <message>
         <source>Light</source>
