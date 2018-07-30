@@ -174,6 +174,7 @@ RowLayout {
         }
         color: theme.colorText
         elide: Text.ElideRight
+        Layout.maximumWidth: implicitWidth
         Layout.fillWidth: true
 
         MouseArea {
@@ -184,6 +185,10 @@ RowLayout {
             ToolTip.delay: 700
             ToolTip.timeout: 9000
         }
+    }
+    Item {
+        visible: isDesktop
+        Layout.fillWidth: true
     }
     Pentobi.Button {
         id: menuButton
