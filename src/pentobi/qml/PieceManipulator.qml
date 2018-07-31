@@ -25,65 +25,21 @@ Item {
 
     signal piecePlayed
 
-    Rectangle {
-        anchors.fill: parent
-        opacity: ! legal ? 0.37 : 0
-        radius: width / 2
-        color: theme.colorPieceManipulatorBase
-        border {
-            width: buttonSize
-            color: theme.colorPieceManipulatorBorder
-        }
-        Behavior on opacity { NumberAnimation { duration: 100 } }
-    }
-    Rectangle {
-        anchors.fill: parent
-        opacity: legal ? 0.37 : 0
-        radius: width / 2
-        color: theme.colorPieceManipulatorLegal
-        border {
-            width: buttonSize
-            color: theme.colorPieceManipulatorBorder
-        }
+    Image {
+        anchors.fill: root
+        source: isDesktop ? theme.getImage("piece-manipulator-desktop")
+                              : theme.getImage("piece-manipulator")
+        sourceSize { width: width; height: height }
+        opacity: ! legal ? 0.4 : 0
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     Image {
-        anchors {
-            top: root.top
-            horizontalCenter: root.horizontalCenter
-        }
-        source: theme.getImage("piece-manipulator-rotate")
-        sourceSize { width: buttonSize; height: buttonSize }
-        opacity: 0.5
-    }
-    Image {
-        anchors {
-            left: root.left
-            verticalCenter: root.verticalCenter
-        }
-        source: theme.getImage("piece-manipulator-rotate")
-        mirror: true
-        sourceSize { width: buttonSize; height: buttonSize }
-        opacity: 0.5
-    }
-    Image {
-        anchors {
-            right: root.right
-            verticalCenter: root.verticalCenter
-        }
-        source: theme.getImage("piece-manipulator-flip")
-        sourceSize { width: buttonSize; height: buttonSize }
-        opacity: 0.5
-    }
-    Image {
-        anchors {
-            bottom: root.bottom
-            horizontalCenter: root.horizontalCenter
-        }
-        source: theme.getImage("piece-manipulator-flip")
-        rotation: 90
-        sourceSize { width: buttonSize; height: buttonSize }
-        opacity: 0.5
+        anchors.fill: root
+        source: isDesktop ? theme.getImage("piece-manipulator-desktop-legal")
+                              : theme.getImage("piece-manipulator-legal")
+        sourceSize { width: width; height: height }
+        opacity: legal ? 0.4 : 0
+        Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     MouseArea {
         id: dragArea

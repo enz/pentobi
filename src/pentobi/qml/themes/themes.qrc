@@ -110,8 +110,10 @@
 <file>light/pentobi-previous-variation.svg</file>
 <file>light/pentobi-rated-game.svg</file>
 <file>light/pentobi-undo.svg</file>
-<file>light/piece-manipulator-flip.svg</file>
-<file>light/piece-manipulator-rotate.svg</file>
+<file>light/piece-manipulator-desktop-legal.svg</file>
+<file>light/piece-manipulator-desktop.svg</file>
+<file>light/piece-manipulator-legal.svg</file>
+<file>light/piece-manipulator.svg</file>
 <file>light/quarter-square-blue.svg</file>
 <file>light/quarter-square-bottom-blue.svg</file>
 <file>light/quarter-square-bottom-green.svg</file>
