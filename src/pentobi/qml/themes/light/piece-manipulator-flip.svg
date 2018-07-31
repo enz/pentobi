@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26" height="26" version="1.1" viewBox="0 0 6.8792 6.8792" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(0 -290.12)">
+  <g id="a" transform="matrix(0 .17198 -.17198 0 34.396 276.36)">
+   <path d="m120 180a20 20 0 0 1-40 0 20 20 0 1 1 40 0z" fill="#fafafa"/>
+   <path d="m95 170-10 10 10 9.9375v-6.9375h10v7l10-10-10-9.9375v6.9375h-10z" fill="#555753"/>
+  </g>
+ </g>
+</svg>
