@@ -254,7 +254,7 @@ Item
                                         pickedPiece.pieceModel.state,
                                         board.mapToGame(pos))
         }
-        width: (board.isNexos ? 10.4 : board.isGembloQ ? 10.1 : 7.1) * board.gridHeight; height: width
+        width: (board.isNexos ? 12.5 : board.isGembloQ ? 12.1 : 8.5) * board.gridHeight; height: width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
         onPiecePlayed: Logic.playPickedPiece()
