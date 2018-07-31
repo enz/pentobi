@@ -12,7 +12,12 @@ import QtQuick.Controls 2.3
 ToolButton {
     id: root
 
+    // See ButtonToolTip
+    property bool buttonToolTipHovered
+    property bool effectiveHovered: hoverEnabled && (hovered || buttonToolTipHovered)
+
     opacity: root.enabled ? theme.opacitySubduedText : 0.5 * theme.opacitySubduedText
+    hoverEnabled: enabled && Qt.styleHints.useHoverEffects && isDesktop
     display: AbstractButton.IconOnly
     icon {
         color: theme.colorText
@@ -25,7 +30,9 @@ ToolButton {
         anchors.fill: root
         radius: 0.05 * width
         color: down ? theme.colorButtonPressed :
-                      hovered ? theme.colorButtonHovered : "transparent"
-        border.color: down || hovered ? theme.colorButtonBorder : "transparent"
+                      effectiveHovered ? theme.colorButtonHovered
+                                       : "transparent"
+        border.color: down || effectiveHovered ? theme.colorButtonBorder
+                                               : "transparent"
     }
 }

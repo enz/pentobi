@@ -6,12 +6,13 @@
 
 import QtQuick 2.11
 import QtQuick.Controls 2.4
+import "." as Pentobi
 
 // Used instead of attached tooltip because of QTBUG-30801 (tooltip not shown
 // when the button is disabled). Must be declared such that x and y have the
 // same meaning as in the button (e.g. same parent).
 MouseArea {
-    property AbstractButton button
+    property Pentobi.Button button
 
     visible: button.visible && isDesktop
     x: button.x
@@ -23,8 +24,14 @@ MouseArea {
     ToolTip.text: button.ToolTip.text
     ToolTip.delay: 1000
     ToolTip.timeout: 7000
-    onEntered: ToolTip.visible = true
-    onExited: ToolTip.visible = false
+    onEntered: {
+        ToolTip.visible = true
+        button.buttonToolTipHovered = true
+    }
+    onExited: {
+        ToolTip.visible = false
+        button.buttonToolTipHovered = false
+    }
 
     Connections {
         target: button
