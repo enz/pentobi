@@ -20,7 +20,7 @@ Item {
     property color colorMessageBase: "#cac9c9"
     property color colorOrange: "#F09217"
     property color colorPieceManipulatorBase: "#a0a0a0"
-    property color colorPieceManipulatorBorder: "#5f5f5f"
+    property color colorPieceManipulatorBorder: "#555555"
     property color colorPieceManipulatorLegal: "#ffffff"
     property color colorPurple: "#a12CCF"
     property color colorRed: "#E63E2C"
