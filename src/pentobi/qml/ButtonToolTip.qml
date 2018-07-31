@@ -12,6 +12,8 @@ import "." as Pentobi
 // when the button is disabled). Must be declared such that x and y have the
 // same meaning as in the button (e.g. same parent).
 MouseArea {
+    id: root
+
     property Pentobi.Button button
 
     visible: button.visible && isDesktop
@@ -22,19 +24,15 @@ MouseArea {
     acceptedButtons: Qt.NoButton
     hoverEnabled: true
     ToolTip.text: button.ToolTip.text
+    ToolTip.visible: containsMouse
     ToolTip.delay: 1000
     ToolTip.timeout: 7000
-    onEntered: {
-        ToolTip.visible = true
-        button.buttonToolTipHovered = true
-    }
-    onExited: {
-        ToolTip.visible = false
-        button.buttonToolTipHovered = false
-    }
+    Component.onCompleted:
+        button.buttonToolTipHovered = Qt.binding(function() {
+            return containsMouse })
 
     Connections {
         target: button
-        onPressed: parent.ToolTip.visible = false
+        onPressed: root.ToolTip.visible = false
     }
 }
