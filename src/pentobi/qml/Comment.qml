@@ -14,17 +14,18 @@ ScrollView {
         id: textArea
 
         text: gameModel.comment
-        onTextChanged: gameModel.comment = text
         color: theme.colorText
         selectionColor: theme.colorSelection
         selectedTextColor: theme.colorSelectedText
         selectByMouse: isDesktop
         wrapMode: TextEdit.Wrap
         background: Rectangle {
-            color: theme.colorBackground
+            color: textArea.activeFocus || textArea.text !== "" ?
+                       theme.colorCommentBase : theme.colorBackground
             border.color: textArea.activeFocus ?
                               theme.colorCommentFocus : theme.colorCommentBorder
         }
+        onTextChanged: gameModel.comment = text
         Keys.onPressed:
             if (event.key === Qt.Key_Tab)
             {

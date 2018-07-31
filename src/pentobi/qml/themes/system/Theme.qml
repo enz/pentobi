@@ -14,6 +14,7 @@ Item {
     property color colorButtonPressed: palette.mid
     property color colorButtonHovered: palette.light
     property color colorButtonBorder: palette.shadow
+    property color colorCommentBase: palette.base
     property color colorCommentBorder: palette.mid
     property color colorCommentFocus: palette.highlight
     property color colorGreen: _isDark ? dark.colorGreen : light.colorGreen

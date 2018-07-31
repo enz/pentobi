@@ -12,6 +12,7 @@ Item {
     property color colorButtonPressed: Qt.lighter(colorBackground, 4)
     property color colorButtonHovered: Qt.lighter(colorBackground, 2)
     property color colorButtonBorder: Qt.lighter(colorBackground, 5)
+    property color colorCommentBase: "#1e2028"
     property color colorCommentBorder: "#5a5756"
     property color colorCommentFocus: colorText
     property color colorGreen: "#00C000"
