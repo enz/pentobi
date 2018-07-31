@@ -18,7 +18,7 @@ Item {
     property bool fastMove: false
 
     // Manipulator buttons are smaller on desktop with mouse usage
-    property real buttonSize: (isDesktop ? 0.14 : 0.17) * root.width
+    property real buttonSize: (isDesktop ? 0.12 : 0.17) * root.width
 
     property real animationsDuration:
         ! visible || ! gameDisplay.enableAnimations ? 0 : fastMove ? 50 : 300
@@ -54,7 +54,7 @@ Item {
         }
         source: theme.getImage("piece-manipulator-rotate")
         sourceSize { width: buttonSize; height: buttonSize }
-        opacity: 0.7
+        opacity: 0.5
     }
     Image {
         anchors {
@@ -64,7 +64,7 @@ Item {
         source: theme.getImage("piece-manipulator-rotate")
         mirror: true
         sourceSize { width: buttonSize; height: buttonSize }
-        opacity: 0.7
+        opacity: 0.5
     }
     Image {
         anchors {
@@ -73,7 +73,7 @@ Item {
         }
         source: theme.getImage("piece-manipulator-flip")
         sourceSize { width: buttonSize; height: buttonSize }
-        opacity: 0.7
+        opacity: 0.5
     }
     Image {
         anchors {
@@ -83,7 +83,7 @@ Item {
         source: theme.getImage("piece-manipulator-flip")
         rotation: 90
         sourceSize { width: buttonSize; height: buttonSize }
-        opacity: 0.7
+        opacity: 0.5
     }
     MouseArea {
         id: dragArea
