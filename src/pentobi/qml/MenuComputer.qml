@@ -39,9 +39,7 @@ Pentobi.Menu {
                   || delayedCheckComputerMove.running
                   || analyzeGameModel.isRunning)
                  && ! isRated
-        onTriggered: {
-            Logic.cancelRunning(true)
-            dismiss() // QTBUG-69682
-        }
+        onTriggered:
+            Qt.callLater(function() { Logic.cancelRunning(true) }) // QTBUG-69682
     }
 }

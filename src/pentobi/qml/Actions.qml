@@ -45,7 +45,7 @@ QtObject {
         shortcut: "Ctrl+M"
         text: qsTr("Back to Main Variation")
         enabled: ! isRated && ! gameModel.isMainVar
-        onTriggered: gameModel.backToMainVar()
+        onTriggered: Qt.callLater(function() { gameModel.backToMainVar() }) // QTBUG-69682
     }
     property Action backward: Action {
         shortcut: "Ctrl+Left"
@@ -66,7 +66,7 @@ QtObject {
         shortcut: "Ctrl+B"
         text: qsTr("Beginning of Branch")
         enabled: ! isRated && gameModel.hasEarlierVar
-        onTriggered: gameModel.gotoBeginningOfBranch()
+        onTriggered: Qt.callLater(function() { gameModel.gotoBeginningOfBranch() }) // QTBUG-69682
     }
     property Action computerSettings: Action {
         shortcut: "Ctrl+U"
@@ -173,7 +173,7 @@ QtObject {
         enabled: gameDisplay.setupMode
                  || ! (gameModel.isGameEmpty && gameModel.file === ""
                        && ! gameModel.isModified && ! isRated)
-        onTriggered: Logic.newGame()
+        onTriggered: Qt.callLater(function() { Logic.newGame() }) // QTBUG-69682
     }
     property Action newGameRated: Action {
         shortcut: "Ctrl+Shift+N"
@@ -254,6 +254,6 @@ QtObject {
     property Action undo: Action {
         text: qsTr("Undo Move")
         enabled: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
-        onTriggered: Logic.undo()
+        onTriggered: Qt.callLater(function() { Logic.undo() }) // QTBUG-69682
     }
 }

@@ -15,15 +15,10 @@ Pentobi.Menu {
                        qsTr("G"))
 
     Pentobi.MenuItem {
-        enabled: actions.newGame.enabled
+        action: actions.newGame
         text: addMnemonic(actions.newGame.text,
                           //: Mnemonic for menu item New. Leave empty for no mnemonic.
                           qsTr("N"))
-        shortcut: actions.newGame.shortcut
-        onTriggered: {
-            actions.newGame.onTriggered()
-            dismiss() // QTBUG-69682
-        }
     }
     Pentobi.MenuItem {
         action: actions.newGameRated
@@ -46,14 +41,10 @@ Pentobi.Menu {
     }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
-        enabled: actions.undo.enabled
+        action: actions.undo
         text: addMnemonic(actions.undo.text,
                           //: Mnemonic for menu item Undo. Leave empty for no mnemonic.
                           qsTr("U"))
-        onTriggered: {
-            actions.undo.onTriggered()
-            dismiss() // QTBUG-69682
-        }
     }
     Pentobi.MenuItem {
         action: actions.findMove
