@@ -229,6 +229,9 @@ Item
                                         pickedPiece.pieceModel.state,
                                         board.mapToGame(pos))
         }
+        isOutsideBoard:
+            ! board.contains(parent.mapToItem(board, x + width / 2,
+                                              y + height / 2))
         width: 0.6 * board.width; height: width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null

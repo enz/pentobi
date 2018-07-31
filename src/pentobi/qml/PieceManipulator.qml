@@ -17,6 +17,8 @@ Item {
     // before the next auto-repeat keyboard command
     property bool fastMove: false
 
+    property bool isOutsideBoard
+
     // Manipulator buttons are smaller on desktop with mouse usage
     property real buttonSize: (isDesktop ? 0.12 : 0.17) * root.width
 
@@ -30,7 +32,7 @@ Item {
         source: isDesktop ? theme.getImage("piece-manipulator-desktop")
                               : theme.getImage("piece-manipulator")
         sourceSize { width: width; height: height }
-        opacity: ! legal ? 0.46 : 0
+        opacity: ! legal * (isOutsideBoard ? 0.65 : 0.4)
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     Image {
@@ -38,7 +40,7 @@ Item {
         source: isDesktop ? theme.getImage("piece-manipulator-desktop-legal")
                               : theme.getImage("piece-manipulator-legal")
         sourceSize { width: width; height: height }
-        opacity: legal ? 0.46 : 0
+        opacity: legal * 0.4
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     MouseArea {
