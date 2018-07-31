@@ -27,7 +27,7 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        opacity: ! legal ? 0.33 : 0
+        opacity: ! legal ? 0.34 : 0
         radius: width / 2
         color: theme.colorPieceManipulatorBase
         border {
@@ -38,7 +38,7 @@ Item {
     }
     Rectangle {
         anchors.fill: parent
-        opacity: legal ? 0.33 : 0
+        opacity: legal ? 0.34 : 0
         radius: width / 2
         color: theme.colorPieceManipulatorLegal
         border {
