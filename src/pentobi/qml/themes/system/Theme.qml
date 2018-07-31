@@ -21,15 +21,6 @@ Item {
     property color colorMessageText: colorText
     property color colorMessageBase: palette.base
     property color colorOrange: _isDark ? dark.colorOrange : light.colorOrange
-    property color colorPieceManipulatorBase:
-        _isDark ? dark.colorPieceManipulatorBase
-                : light.colorPieceManipulatorBase
-    property color colorPieceManipulatorBorder:
-        _isDark ? dark.colorPieceManipulatorBorder
-                : light.colorPieceManipulatorBorder
-    property color colorPieceManipulatorLegal:
-        _isDark ? dark.colorPieceManipulatorLegal
-                : light.colorPieceManipulatorLegal
     property color colorPurple: _isDark ? dark.colorPurple : light.colorPurple
     property color colorRed: _isDark ? dark.colorRed : light.colorRed
     property color colorSelectedText: palette.highlightedText

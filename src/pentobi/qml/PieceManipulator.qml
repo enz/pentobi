@@ -30,7 +30,7 @@ Item {
         source: isDesktop ? theme.getImage("piece-manipulator-desktop")
                               : theme.getImage("piece-manipulator")
         sourceSize { width: width; height: height }
-        opacity: ! legal ? 0.4 : 0
+        opacity: ! legal ? 0.5 : 0
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     Image {
@@ -38,7 +38,7 @@ Item {
         source: isDesktop ? theme.getImage("piece-manipulator-desktop-legal")
                               : theme.getImage("piece-manipulator-legal")
         sourceSize { width: width; height: height }
-        opacity: legal ? 0.4 : 0
+        opacity: legal ? 0.5 : 0
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     MouseArea {
