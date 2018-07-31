@@ -58,6 +58,8 @@
 <file>dark/board-trigon-3.svg</file>
 <file>dark/board-trigon.svg</file>
 <file>dark/pentobi-rated-game.svg</file>
+<file>dark/piece-manipulator-flip.svg</file>
+<file>dark/piece-manipulator-rotate.svg</file>
 <file>dark/Theme.qml</file>
 <file>light/board-callisto-2.svg</file>
 <file>light/board-callisto-3.svg</file>

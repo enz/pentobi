@@ -18,6 +18,9 @@ Item {
     property color colorMessageText: colorText
     property color colorMessageBase: "#333"
     property color colorOrange: "#F09217"
+    property color colorPieceManipulatorBase: "#666666"
+    property color colorPieceManipulatorBorder: "#999999"
+    property color colorPieceManipulatorLegal: "#c8c8c8"
     property color colorPurple: "#a12CCF"
     property color colorRed: "#E63E2C"
     property color colorSelectedText: colorBackground
@@ -31,7 +34,6 @@ Item {
         if (name.startsWith("frame-")
                 || name.startsWith("junction-")
                 || name.startsWith("linesegment-")
-                || name.startsWith("piece-manipulator")
                 || name.startsWith("quarter-square-")
                 || name.startsWith("square-")
                 || name.startsWith("triangle-")
