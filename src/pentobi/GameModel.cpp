@@ -261,14 +261,15 @@ void GameModel::changeGameVariant(const QString& gameVariant)
 bool GameModel::checkAutosaveModifiedOutside()
 {
     // Check if autosaved game has a different time stamp than the one we
-    // loaded because then it would have been written by another instance
-    // of GameModel. Also check that the changed autosaved game has the
-    // isModified flag. Otherwise, we don't care if it gets overwritten.
+    // loaded because then it would have been written by another instance of
+    // GameModel. Also check that the changed autosaved game is different from
+    // what we would write. Otherwise, we don't care if it gets overwritten.
     QSettings settings;
     auto autosaveDate = settings.value("autosaveDate").toDateTime();
-    bool isModified = settings.value("isModified").toBool();
-    return isModified && m_autosaveDate.isValid() && autosaveDate.isValid()
-            && m_autosaveDate != autosaveDate;
+    if (! m_autosaveDate.isValid() || ! autosaveDate.isValid()
+            || m_autosaveDate == autosaveDate)
+        return false;
+    return settings.value("autosave").toByteArray() != getSgf();
 }
 
 bool GameModel::checkFileDeletedOutside()
