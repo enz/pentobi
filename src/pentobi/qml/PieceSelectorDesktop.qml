@@ -20,39 +20,73 @@ Item {
 
     signal piecePicked(var piece)
 
-    Column {
-        width: Math.min(parent.width, parent.height / 8.15 * columns)
-        height: Math.min(parent.height, parent.width / columns * 8.15)
-        spacing: height / 8 * 0.05
+    property real toPlayIndicatorWidth: 3
+
+    Row {
+        // Set size sich that width/height ration fits the number of columns,
+        // taking toPlayIndicator and column spacing into account
+        width: Math.min(parent.width - toPlayIndicatorWidth,
+                        parent.height / 8.15 * columns)
+        height: Math.min(parent.height,
+                         (parent.width - toPlayIndicatorWidth) / columns * 8.15)
         anchors.centerIn: parent
 
-        PieceList {
-            id: pieceList0
-
-            width: parent.width
-            columns: root.columns
-            onPiecePicked: root.piecePicked(piece)
+        Rectangle {
+            visible: ! gameModel.isGameOver
+            x: 0
+            y:
+                switch (gameModel.toPlay) {
+                case 0: return column.mapToItem(parent, 0, pieceList0.y).y
+                case 1: return column.mapToItem(parent, 0, pieceList1.y).y
+                case 2: return column.mapToItem(parent, 0, pieceList2.y).y
+                case 3: return column.mapToItem(parent, 0, pieceList3.y).y
+                }
+            width: toPlayIndicatorWidth
+            height:
+                switch (gameModel.toPlay) {
+                case 0: return pieceList0.height
+                case 1: return pieceList1.height
+                case 2: return pieceList2.height
+                case 3: return pieceList3.height
+                }
+            radius: width / 2
+            color: theme.colorText
+            opacity: theme.opacitySubduedText
         }
-        PieceList {
-            id: pieceList1
+        Column {
+            id: column
 
-            width: parent.width
-            columns: root.columns
-            onPiecePicked: root.piecePicked(piece)
-        }
-        PieceList {
-            id: pieceList2
+            width: parent.width - toPlayIndicatorWidth
+            spacing: height / 8 * 0.05
 
-            width: parent.width
-            columns: root.columns
-            onPiecePicked: root.piecePicked(piece)
-        }
-        PieceList {
-            id: pieceList3
+            PieceList {
+                id: pieceList0
 
-            width: parent.width
-            columns: root.columns
-            onPiecePicked: root.piecePicked(piece)
+                width: parent.width
+                columns: root.columns
+                onPiecePicked: root.piecePicked(piece)
+            }
+            PieceList {
+                id: pieceList1
+
+                width: parent.width
+                columns: root.columns
+                onPiecePicked: root.piecePicked(piece)
+            }
+            PieceList {
+                id: pieceList2
+
+                width: parent.width
+                columns: root.columns
+                onPiecePicked: root.piecePicked(piece)
+            }
+            PieceList {
+                id: pieceList3
+
+                width: parent.width
+                columns: root.columns
+                onPiecePicked: root.piecePicked(piece)
+            }
         }
     }
 }

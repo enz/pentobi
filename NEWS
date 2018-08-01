@@ -28,6 +28,9 @@ Version 15.UNKNOWN (master)
   iterates backwards through the list of legal moves.
 * The Android version now shows an error before open/save if permission
   to access storage have not been granted.
+* Android: color dot of the color to play is no longer surrounded by a border
+  because the color to play is already indicated by having its unplayed pieces
+  at the top.
 * The translation source strings for menu items and actions no longer use
   an ampersand to mark a mnemonic but a separate translation string for
   the mnemonic. Ampersands caused problems with searches in Weblate

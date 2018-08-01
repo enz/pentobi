@@ -12,7 +12,6 @@ Item {
     property color color1
     property color color2
     property bool isFinal
-    property bool isToPlay
     property bool isAltColor
     property real value
     property real pointSize
@@ -22,11 +21,7 @@ Item {
 
         color: color1
         opacity: isAltColor && isFinal ? 0 : 1
-        width: (isToPlay ? 1.3 : 1) * pointSize
-        border {
-            color: Qt.lighter(color1, 1.5 - theme.colorBackground.hslLightness)
-            width: isToPlay ? Math.max(0.15 * pointSize, 1) : 0
-        }
+        width: pointSize
         height: width
         radius: width / 2
         anchors.verticalCenter: root.verticalCenter
@@ -55,7 +50,7 @@ Item {
         width: root.width - point1.width - point2.width - anchors.leftMargin
         anchors {
             left: point2.right
-            leftMargin: (isToPlay ? 0.2 : 0.4) * point1.width
+            leftMargin: 0.4 * point1.width
             verticalCenter: root.verticalCenter
         }
         verticalAlignment: Text.AlignVCenter
