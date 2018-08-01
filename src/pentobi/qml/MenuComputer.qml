@@ -31,15 +31,10 @@ Pentobi.Menu {
                           //: Mnemonic for menu item Play Single Move. Leave empty for no mnemonic.
                           qsTr("M"))
     }
-    Action {
-        text: addMnemonic(qsTr("Stop"),
+    Pentobi.MenuItem {
+        action: actions.stop
+        text: addMnemonic(action.stop,
                           //: Mnemonic for menu item Stop. Leave empty for no mnemonic.
                           qsTr("O"))
-        enabled: (playerModel.isGenMoveRunning
-                  || delayedCheckComputerMove.running
-                  || analyzeGameModel.isRunning)
-                 && ! isRated
-        onTriggered:
-            Qt.callLater(function() { Logic.cancelRunning(true) }) // QTBUG-69682
     }
 }

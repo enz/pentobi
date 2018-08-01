@@ -251,6 +251,15 @@ QtObject {
         enabled: ! gameModel.isGameEmpty
         onTriggered: Logic.saveAs()
     }
+    property Action stop: Action {
+        text: qsTr("Stop")
+        enabled: (playerModel.isGenMoveRunning
+                  || delayedCheckComputerMove.running
+                  || analyzeGameModel.isRunning)
+                 && ! isRated
+        onTriggered:
+            Qt.callLater(function() { Logic.cancelRunning(true) }) // QTBUG-69682
+    }
     property Action undo: Action {
         text: qsTr("Undo Move")
         enabled: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
