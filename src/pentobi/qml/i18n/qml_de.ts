@@ -985,6 +985,14 @@
         <source>Saving image failed or unsupported image format.</source>
         <translation>Grafik konnte nicht gespeichert werden oder Bildformat nicht unterstützt.</translation>
     </message>
+    <message>
+        <source>Continuing rated game.</source>
+        <translation>Gewertetes Spiel wird fortgesetzt.</translation>
+    </message>
+    <message>
+        <source>Continue computer move?</source>
+        <translation>Computer-Zug fortsetzen?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

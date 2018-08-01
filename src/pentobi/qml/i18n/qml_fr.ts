@@ -977,6 +977,14 @@
         <source>Saving image failed or unsupported image format.</source>
         <translation>Impossible d&apos;enregistrer l&apos;image ou format d&apos;image non pris en charge.</translation>
     </message>
+    <message>
+        <source>Continuing rated game.</source>
+        <translation>Partie classée est continuée.</translation>
+    </message>
+    <message>
+        <source>Continue computer move?</source>
+        <translation>Coninuer le coup de l&apos;ordinateur ?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

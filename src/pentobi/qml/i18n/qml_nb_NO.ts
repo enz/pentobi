@@ -973,6 +973,14 @@
         <source>Saving image failed or unsupported image format.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Continuing rated game.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continue computer move?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

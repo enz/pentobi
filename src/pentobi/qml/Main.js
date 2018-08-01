@@ -316,8 +316,13 @@ function init() {
             show()
         verify(function() { openFileBlocking(initialFile) })
     }
-    if (wasGenMoveRunning || isRated)
+    if (isRated) {
+        showInfo(qsTr("Continuing rated game."))
         checkComputerMove()
+        return
+    }
+    if (wasGenMoveRunning)
+        showQuestion(qsTr("Continue computer move?"), checkComputerMove)
 }
 
 function initComputerColors() {
