@@ -16,7 +16,7 @@ Grid {
     // We want to show the unplayed pieces in slightly less bright colors
     // than the pieces on the board, but not if colorBackground is light
     // otherwise the contrast to the yellow pieces is not strong enough.
-    opacity: 0.94 + 0.06 * theme.colorBackground.hslLightness
+    opacity: Math.min(0.94 + 0.08 * theme.colorBackground.hslLightness, 1)
 
     Repeater {
         model: pieces
