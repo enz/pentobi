@@ -33,7 +33,7 @@ Pentobi.Menu {
     }
     Pentobi.MenuItem {
         action: actions.stop
-        text: addMnemonic(action.stop.text,
+        text: addMnemonic(action.text,
                           //: Mnemonic for menu item Stop. Leave empty for no mnemonic.
                           qsTr("O"))
     }
