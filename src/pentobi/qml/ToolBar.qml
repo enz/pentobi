@@ -208,6 +208,7 @@ Item {
             }
             color: theme.colorText
             elide: Text.ElideRight
+            Layout.preferredWidth: implicitWidth
             Layout.maximumWidth: implicitWidth
             Layout.fillWidth: true
 
@@ -224,6 +225,7 @@ Item {
         }
         Item {
             visible: isDesktop
+            Layout.preferredWidth: 0
             Layout.fillWidth: true
         }
         Pentobi.Button {
