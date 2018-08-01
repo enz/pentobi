@@ -24,7 +24,7 @@ MouseArea {
     acceptedButtons: Qt.NoButton
     hoverEnabled: true
     ToolTip.text: button.ToolTip.text
-    ToolTip.visible: containsMouse
+    ToolTip.visible: containsMouse && ToolTip.text
     ToolTip.delay: 1000
     ToolTip.timeout: 7000
     Component.onCompleted:

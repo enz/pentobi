@@ -283,4 +283,5 @@ Item {
     ButtonToolTip { button: end }
     ButtonToolTip { button: prevVar }
     ButtonToolTip { button: nextVar }
+    ButtonToolTip { button: menuButton }
 }
