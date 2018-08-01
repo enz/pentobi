@@ -126,17 +126,19 @@ Item
             Row {
                 id: row
 
-                width: Math.min(parent.width - leftPadding - rightPadding, parent.height / 0.53)
-                height: Math.min(parent.height, (parent.width - leftPadding - rightPadding) * 0.53)
+                property real relativeBoardWidth: 0.52
+
+                width: Math.min(parent.width - leftPadding - rightPadding, parent.height / relativeBoardWidth)
+                height: Math.min(parent.height, (parent.width - leftPadding - rightPadding) * relativeBoardWidth)
                 leftPadding: spacing
                 rightPadding: spacing
                 anchors.centerIn: parent
-                spacing: Math.ceil(0.01 * parent.width)
+                spacing: 5
 
                 Board {
                     id: board
 
-                    width: 0.53 * parent.width
+                    width: row.relativeBoardWidth * parent.width
                     height: isTrigon ? Math.sqrt(3) / 2 * width : width
                     anchors.verticalCenter: parent.verticalCenter
                     onClicked: Logic.onBoardClicked(pos)
@@ -171,7 +173,7 @@ Item
                         id: pieceSelector
 
                         width: parent.width
-                        height: 0.63 * parent.height
+                        height: 0.67 * parent.height
                         transitionsEnabled: false
                         onPiecePicked: Logic.pickPiece(piece)
                     }
@@ -183,7 +185,7 @@ Item
                             id: comment
 
                             width: parent.width
-                            height: analyzeGame.item ? 0.4 * (parent.height - parent.spacing) : parent.height
+                            height: analyzeGame.item ? 0.5 * (parent.height - parent.spacing) : parent.height
                         }
                         Loader {
                             id: analyzeGame
@@ -193,7 +195,7 @@ Item
                                 || analyzeGameModel.isRunning ?
                                     analyzeGameComponent : null
                             width: parent.width
-                            height: 0.6 * (parent.height - parent.spacing)
+                            height: 0.5 * (parent.height - parent.spacing)
 
                             Component {
                                 id: analyzeGameComponent
