@@ -91,10 +91,6 @@
         <translation>Fullskjermsvisning</translation>
     </message>
     <message>
-        <source>Computer Settings...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Next Comment</source>
         <translation type="unfinished"></translation>
     </message>
@@ -109,6 +105,11 @@
     <message>
         <source>Move Number...</source>
         <translation>Trekknummer…</translation>
+    </message>
+    <message>
+        <source>Settings...</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Computer Settings...</source>
-        <translation>Configuration de l&apos;ordinateur…</translation>
+        <translation type="vanished">Configuration de l&apos;ordinateur…</translation>
     </message>
     <message>
         <source>Next Comment</source>
@@ -109,6 +109,11 @@
     <message>
         <source>Move Number...</source>
         <translation>Numéro de coup…</translation>
+    </message>
+    <message>
+        <source>Settings...</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation>Configuration…</translation>
     </message>
 </context>
 <context>

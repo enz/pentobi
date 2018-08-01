@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Computer Settings...</source>
-        <translation>Computer-Einstellungen …</translation>
+        <translation type="vanished">Computer-Einstellungen …</translation>
     </message>
     <message>
         <source>Next Comment</source>
@@ -108,7 +108,12 @@
     </message>
     <message>
         <source>Move Number...</source>
-        <translation>Zugnummer…</translation>
+        <translation>Zugnummer …</translation>
+    </message>
+    <message>
+        <source>Settings...</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation>Einstellungen …</translation>
     </message>
 </context>
 <context>
