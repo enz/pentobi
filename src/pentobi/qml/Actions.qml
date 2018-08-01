@@ -43,7 +43,7 @@ QtObject {
     }
     property Action backToMainVar: Action {
         shortcut: "Ctrl+M"
-        text: qsTr("Back to Main Variation")
+        text: qsTr("Main Variation")
         enabled: ! isRated && ! gameModel.isMainVar
         onTriggered: Qt.callLater(function() { gameModel.backToMainVar() }) // QTBUG-69682
     }

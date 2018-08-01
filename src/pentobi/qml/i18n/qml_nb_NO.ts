@@ -64,7 +64,7 @@
     </message>
     <message>
         <source>Back to Main Variation</source>
-        <translation>Tilbake til hovedvariasjon</translation>
+        <translation type="vanished">Tilbake til hovedvariasjon</translation>
     </message>
     <message>
         <source>Beginning of Branch</source>
@@ -97,6 +97,14 @@
     <message>
         <source>Next Comment</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main Variation</source>
+        <translation>Hovedvariasjon</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Stopp</translation>
     </message>
 </context>
 <context>
@@ -994,7 +1002,7 @@
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stopp</translation>
+        <translation type="vanished">Stopp</translation>
     </message>
     <message>
         <source>S</source>
