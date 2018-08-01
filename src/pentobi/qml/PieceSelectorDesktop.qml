@@ -20,7 +20,8 @@ Item {
 
     signal piecePicked(var piece)
 
-    property real toPlayIndicatorWidth: 3
+    property real toPlayIndicatorWidth:
+        Math.max(Math.min(parent.width / columns, parent.height / 8.15) / 10, 2)
 
     Row {
         // Set size sich that width/height ration fits the number of columns,
