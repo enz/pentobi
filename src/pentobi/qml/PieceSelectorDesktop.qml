@@ -32,7 +32,7 @@ Item {
         anchors.centerIn: parent
 
         Rectangle {
-            visible: ! gameModel.isGameOver
+            opacity: gameModel.isGameOver ? 0 : theme.opacitySubduedText
             x: 0
             y:
                 switch (gameModel.toPlay) {
@@ -51,7 +51,6 @@ Item {
                 }
             radius: width / 2
             color: theme.colorText
-            opacity: theme.opacitySubduedText
             Behavior on y {
                 NumberAnimation {
                     duration: transitionsEnabled ? 80 : 0
