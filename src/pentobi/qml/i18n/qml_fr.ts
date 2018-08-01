@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>Go to Move...</source>
-        <translation>Aller au coup...</translation>
+        <translation type="vanished">Aller au coup...</translation>
     </message>
     <message>
         <source>Play Single Move</source>
@@ -105,6 +105,10 @@
     <message>
         <source>Stop</source>
         <translation>Arrêter</translation>
+    </message>
+    <message>
+        <source>Move Number...</source>
+        <translation>Numéro de coup…</translation>
     </message>
 </context>
 <context>

@@ -126,7 +126,7 @@ QtObject {
     }
     property Action gotoMove: Action {
         shortcut: "Ctrl+G"
-        text: qsTr("Go to Move...")
+        text: qsTr("Move Number...")
         enabled: ! isRated && (gameModel.moveNumber + gameModel.movesLeft >= 1)
         onTriggered: gotoMoveDialog.open()
     }

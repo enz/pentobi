@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>Go to Move...</source>
-        <translation>Gehe zu Zug ...</translation>
+        <translation type="vanished">Gehe zu Zug ...</translation>
     </message>
     <message>
         <source>Play Single Move</source>
@@ -105,6 +105,10 @@
     <message>
         <source>Stop</source>
         <translation>Stopp</translation>
+    </message>
+    <message>
+        <source>Move Number...</source>
+        <translation>Zugnummer…</translation>
     </message>
 </context>
 <context>
