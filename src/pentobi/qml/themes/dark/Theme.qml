@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.11
+import "../light" as Light
 
 Item {
     property color colorBackground: "#131313"
@@ -37,7 +38,9 @@ Item {
                 || name.startsWith("triangle-")
                 || (name.startsWith("pentobi-") && name !== "pentobi-rated-game")
                 || name === "menu")
-            return "themes/light/" + name + ".svg"
+            return light.getImage(name)
         return "themes/dark/" + name + ".svg"
     }
+
+    Light.Theme { id: light }
 }

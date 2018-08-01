@@ -27,6 +27,8 @@ Light.Theme {
                 || name.startsWith("square-")
                 || name.startsWith("triangle-"))
             return "themes/colorblind-light/" + name + ".svg"
-        return "themes/light/" + name + ".svg"
+        return light.getImage(name)
     }
+
+    Light.Theme { id: light }
 }

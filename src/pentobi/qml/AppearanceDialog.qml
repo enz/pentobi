@@ -71,7 +71,7 @@ Pentobi.Dialog {
         case 0: themeName = "light"; break
         case 1: themeName = "dark"; break
         case 2: themeName = "colorblind-light"; break
-        case 3: themeName = "colorblind-light"; break
+        case 3: themeName = "colorblind-dark"; break
         case 4: themeName = "system"; break
         }
         switch (comboBoxMoveMarking.currentIndex) {
