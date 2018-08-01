@@ -1027,7 +1027,7 @@
     <message>
         <source>M</source>
         <extracomment>Mnemonic for menu item Play Single Move. Leave empty for no mnemonic.</extracomment>
-        <translation>E</translation>
+        <translation>Z</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -1036,7 +1036,7 @@
     <message>
         <source>S</source>
         <extracomment>Mnemonic for menu item Computer Settings. Leave empty for no mnemonic.</extracomment>
-        <translation>C</translation>
+        <translation>E</translation>
     </message>
 </context>
 <context>
