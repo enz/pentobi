@@ -172,6 +172,7 @@ Item
 
                         width: parent.width
                         height: 0.63 * parent.height
+                        transitionsEnabled: false
                         onPiecePicked: Logic.pickPiece(piece)
                     }
                     Column {

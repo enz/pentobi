@@ -15,7 +15,6 @@ Item {
     property alias pieces3: pieceList3.pieces
     property int columns: pieces0 ? Math.ceil(pieces0.length / 2) : 11
 
-    /** Dummy for compatibility with PieceSelectorMobile */
     property bool transitionsEnabled
 
     signal piecePicked(var piece)
@@ -53,6 +52,12 @@ Item {
             radius: width / 2
             color: theme.colorText
             opacity: theme.opacitySubduedText
+            Behavior on y {
+                NumberAnimation {
+                    duration: transitionsEnabled ? 80 : 0
+                    easing.type: Easing.InOutSine
+                }
+            }
         }
         Column {
             id: column
