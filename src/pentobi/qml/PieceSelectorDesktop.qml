@@ -54,7 +54,7 @@ Item {
             Behavior on y {
                 NumberAnimation {
                     duration: transitionsEnabled ? 80 : 0
-                    easing.type: Easing.InOutSine
+                    easing.type: Easing.InSine
                 }
             }
         }
