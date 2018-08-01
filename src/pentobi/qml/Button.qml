@@ -14,10 +14,11 @@ ToolButton {
 
     // See ButtonToolTip
     property bool buttonToolTipHovered
-    property bool effectiveHovered: hoverEnabled && (hovered || buttonToolTipHovered)
+    property bool effectiveHovered:
+        Qt.styleHints.useHoverEffects && isDesktop && buttonToolTipHovered
 
     opacity: root.enabled ? theme.opacitySubduedText : 0.5 * theme.opacitySubduedText
-    hoverEnabled: enabled && Qt.styleHints.useHoverEffects && isDesktop
+    hoverEnabled: false
     display: AbstractButton.IconOnly
     icon {
         color: theme.colorText
