@@ -27,7 +27,7 @@ Item {
     property color colorStartingPoint: "#82777E"
     property color colorText: "#C8C1BE"
     property color colorYellow: "#e8c616"
-    property real opacitySubduedText: 0.6 - 0.2 * theme.colorBackground.hslLightness
+    property real opacitySubduedText: 0.59
 
     function getImage(name) {
         if (name.startsWith("frame-")

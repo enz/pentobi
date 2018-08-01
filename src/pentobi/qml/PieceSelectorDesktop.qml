@@ -32,7 +32,7 @@ Item {
         anchors.centerIn: parent
 
         Rectangle {
-            opacity: gameModel.isGameOver ? 0 : theme.opacitySubduedText
+            opacity: gameModel.isGameOver ? 0 : 0.7 * theme.opacitySubduedText
             x: 0
             y:
                 switch (gameModel.toPlay) {
