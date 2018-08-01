@@ -9,7 +9,17 @@ import "../dark" as Dark
 import "../light" as Light
 
 Item {
-    property color colorBackground: palette.window
+    property color colorBackground: {
+        // If the contrast to yellow is too bad, we use a slightly modified
+        // system background color
+        var c = _contrast(palette.window, colorYellow)
+        if (c > 0 && c < 0.12)
+            return Qt.lighter(palette.window, 1.1)
+        if (c < 0 && c > -0.12)
+            return Qt.darker(palette.window, 1.5)
+        return palette.window
+    }
+
     property color colorBlue: _isDark ? dark.colorBlue : light.colorBlue
     property color colorButtonPressed: palette.mid
     property color colorButtonHovered: palette.light
@@ -32,10 +42,15 @@ Item {
     property real opacitySubduedText:
         0.55 - 0.2 * theme.colorBackground.hslLightness
 
-    property bool _isDark: colorBackground.hslLightness < 0.5
+    property bool _isDark: palette.window.hslLightness < 0.5
 
     function getImage(name) {
         return _isDark ? dark.getImage(name) : light.getImage(name)
+    }
+
+    function _contrast(color1, color2) {
+        return 0.30 * (color1.r - color2.r) + 0.59 * (color1.g - color2.g)
+                + 0.11 * (color1.b - color2.b)
     }
 
     SystemPalette { id: palette }
