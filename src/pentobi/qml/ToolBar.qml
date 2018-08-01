@@ -208,8 +208,10 @@ Item {
             }
             color: theme.colorText
             elide: Text.ElideRight
-            Layout.preferredWidth: implicitWidth
-            Layout.maximumWidth: implicitWidth
+            // There is a bug in Qt 5.11 that in some situations elides the
+            // text even if there is enough room for it. It doesn't occur if
+            // we use implicitWidth + 1 instead if implicitWidth
+            Layout.maximumWidth: implicitWidth + 1
             Layout.fillWidth: true
 
             MouseArea {
@@ -225,7 +227,6 @@ Item {
         }
         Item {
             visible: isDesktop
-            Layout.preferredWidth: 0
             Layout.fillWidth: true
         }
         Pentobi.Button {
