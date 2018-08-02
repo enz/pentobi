@@ -47,8 +47,7 @@ ApplicationWindow {
                   : Math.min(Screen.desktopAvailableHeight, 680)
 
     property int exportImageWidth: 400
-    property bool busyIndicatorRunning: gameDisplay.pieces0 === undefined
-                                        || lengthyCommand.isRunning
+    property bool busyIndicatorRunning: lengthyCommand.isRunning
                                         || playerModel.isGenMoveRunning
                                         || analyzeGameModel.isRunning
 
