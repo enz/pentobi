@@ -209,6 +209,7 @@ Item
                                              1 : pressed ? 0.8 : 0.6)
                                         * theme.opacitySubduedText
                                 }
+                                onCurrentIndexChanged: dropCommentFocus()
                             }
                         }
                         Control {
