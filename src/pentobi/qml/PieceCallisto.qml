@@ -78,7 +78,7 @@ Item
                    - width / 2
                 y: (modelData.y - pieceModel.center.y) * gridHeight
                    + (gridHeight - height) / 2
-                sourceSize: imageSourceSize
+                sourceSize { width: width; height: height }
             }
             // Down junction
             PieceElementImage {
@@ -91,7 +91,7 @@ Item
                    + (gridWidth - width) / 2
                 y: (modelData.y - pieceModel.center.y + 1) * gridHeight
                    - height / 2
-                sourceSize: imageSourceSize
+                sourceSize { width: width; height: height }
             }
         }
     }

@@ -56,8 +56,6 @@ Item
         model: pieceModel.elements
 
         Square {
-            width: gridWidth
-            height: gridHeight
             x: (modelData.x - pieceModel.center.x) * gridWidth
             y: (modelData.y - pieceModel.center.y) * gridHeight
         }

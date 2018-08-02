@@ -60,9 +60,7 @@ Item
     Repeater {
         model: pieceModel.elements
 
-        QuarterSquare {            
-            width: 2 * gridWidth
-            height: gridHeight
+        QuarterSquare {
             x: (modelData.x - pieceModel.center.x) * gridWidth
             y: (modelData.y - pieceModel.center.y) * gridHeight
             pointType: {
