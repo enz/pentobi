@@ -57,17 +57,6 @@ Item {
             Layout.maximumWidth: implicitWidth + 1
             Layout.fillWidth: true
             Layout.leftMargin: root.height / 10
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked:
-                    if (gameDisplay.setupMode) {
-                        gameDisplay.setupMode = false
-                        Logic.setComputerNone()
-                    }
-                    else if (gameModel.file !== "")
-                        Logic.showInfo(Logic.getFileInfo(gameModel.file, gameModel.isModified))
-            }
         }
         Item {
             visible: ! isDesktop
