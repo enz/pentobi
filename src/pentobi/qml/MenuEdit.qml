@@ -37,22 +37,24 @@ Pentobi.Menu {
         }
     }
     Pentobi.MenuItem {
-        text: addMnemonic(qsTr("Move Variation Up"),
-                          //: Mnemonic for menu item Move Variation Up. Leave empty for no mnemonic.
+        //: Short for Move Variation Up
+        text: addMnemonic(qsTr("Variation Up"),
+                          //: Mnemonic for menu item Variation Up. Leave empty for no mnemonic.
                           qsTr("U"))
         enabled: gameModel.hasPrevVar && ! isRated
         onTriggered: Logic.moveUpVar()
     }
     Pentobi.MenuItem {
-        text: addMnemonic(qsTr("Move Variation Down"),
-                          //: Mnemonic for menu item Move Variation Down. Leave empty for no mnemonic.
+        //: Short for Move Variation Down
+        text: addMnemonic(qsTr("Variation Down"),
+                          //: Mnemonic for menu item Variation Down. Leave empty for no mnemonic.
                           qsTr("W"))
         enabled: gameModel.hasNextVar && ! isRated
         onTriggered: Logic.moveDownVar()
     }
     Pentobi.MenuItem {
-        text: addMnemonic(qsTr("Delete All Variations"),
-                          //: Mnemonic for menu item Delete All Variations. Leave empty for no mnemonic.
+        text: addMnemonic(qsTr("Delete Variations"),
+                          //: Mnemonic for menu item Delete Variations. Leave empty for no mnemonic.
                           qsTr("D"))
         enabled: gameModel.hasVariations && ! isRated
         onTriggered: Logic.deleteAllVar()

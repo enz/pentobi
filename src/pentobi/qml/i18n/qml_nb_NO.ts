@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>Play Single Move</source>
-        <translation>Spill enkelttrekk</translation>
+        <translation type="vanished">Spill enkelttrekk</translation>
     </message>
     <message>
         <source>Rating</source>
@@ -109,6 +109,10 @@
     <message>
         <source>Settings...</source>
         <extracomment>Menu item Computer/Settings</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play One Move</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1010,7 +1014,7 @@
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Play Single Move. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Play One Move. Leave empty for no mnemonic.</extracomment>
         <translation>E</translation>
     </message>
     <message>
@@ -1051,29 +1055,29 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Move Variation Up</source>
-        <translation>Flytt variasjon oppover</translation>
+        <translation type="vanished">Flytt variasjon oppover</translation>
     </message>
     <message>
         <source>U</source>
-        <extracomment>Mnemonic for menu item Move Variation Up. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Variation Up. Leave empty for no mnemonic.</extracomment>
         <translation>O</translation>
     </message>
     <message>
         <source>Move Variation Down</source>
-        <translation>Flytt variasjon nedover</translation>
+        <translation type="vanished">Flytt variasjon nedover</translation>
     </message>
     <message>
         <source>W</source>
-        <extracomment>Mnemonic for menu item Move Variation Down. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Variation Down. Leave empty for no mnemonic.</extracomment>
         <translation>N</translation>
     </message>
     <message>
         <source>Delete All Variations</source>
-        <translation>Slett alle variasjoner</translation>
+        <translation type="vanished">Slett alle variasjoner</translation>
     </message>
     <message>
         <source>D</source>
-        <extracomment>Mnemonic for menu item Delete All Variations. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Delete Variations. Leave empty for no mnemonic.</extracomment>
         <translation>S</translation>
     </message>
     <message>
@@ -1142,6 +1146,20 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>Keep Subtree</source>
         <translation>Behold undertreet</translation>
     </message>
+    <message>
+        <source>Variation Up</source>
+        <extracomment>Short for Move Variation Up</extracomment>
+        <translation>Variasjon oppover</translation>
+    </message>
+    <message>
+        <source>Variation Down</source>
+        <extracomment>Short for Move Variation Down</extracomment>
+        <translation>Variasjon nedover</translation>
+    </message>
+    <message>
+        <source>Delete Variations</source>
+        <translation>Slett variasjoner</translation>
+    </message>
 </context>
 <context>
     <name>MenuExport</name>
@@ -1196,7 +1214,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu item Open from Clipboard. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Open Clipboard. Leave empty for no mnemonic.</extracomment>
         <translation>K</translation>
     </message>
     <message>
@@ -1230,7 +1248,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Open from Clipboard</source>
-        <translation>Åpne fra utklippstavle</translation>
+        <translation type="vanished">Åpne fra utklippstavle</translation>
     </message>
     <message>
         <source>P</source>
@@ -1264,6 +1282,10 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>Game Info</source>
         <translation>Spillinfo</translation>
+    </message>
+    <message>
+        <source>Open Clipboard</source>
+        <translation>Åpne utklippstavle</translation>
     </message>
 </context>
 <context>

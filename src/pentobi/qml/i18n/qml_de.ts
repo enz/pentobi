@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>Play Single Move</source>
-        <translation>Einzelnen Zug spielen</translation>
+        <translation type="vanished">Einzelnen Zug spielen</translation>
     </message>
     <message>
         <source>Rating</source>
@@ -114,6 +114,10 @@
         <source>Settings...</source>
         <extracomment>Menu item Computer/Settings</extracomment>
         <translation>Einstellungen …</translation>
+    </message>
+    <message>
+        <source>Play One Move</source>
+        <translation>Einen Zug spielen</translation>
     </message>
 </context>
 <context>
@@ -1026,7 +1030,7 @@
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Play Single Move. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Play One Move. Leave empty for no mnemonic.</extracomment>
         <translation>Z</translation>
     </message>
     <message>
@@ -1067,29 +1071,29 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Move Variation Up</source>
-        <translation>Variante nach oben schieben</translation>
+        <translation type="vanished">Variante nach oben schieben</translation>
     </message>
     <message>
         <source>U</source>
-        <extracomment>Mnemonic for menu item Move Variation Up. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Variation Up. Leave empty for no mnemonic.</extracomment>
         <translation>O</translation>
     </message>
     <message>
         <source>Move Variation Down</source>
-        <translation>Variante nach unten schieben</translation>
+        <translation type="vanished">Variante nach unten schieben</translation>
     </message>
     <message>
         <source>W</source>
-        <extracomment>Mnemonic for menu item Move Variation Down. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Variation Down. Leave empty for no mnemonic.</extracomment>
         <translation>U</translation>
     </message>
     <message>
         <source>Delete All Variations</source>
-        <translation>Alle Varianten löschen</translation>
+        <translation type="vanished">Alle Varianten löschen</translation>
     </message>
     <message>
         <source>D</source>
-        <extracomment>Mnemonic for menu item Delete All Variations. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Delete Variations. Leave empty for no mnemonic.</extracomment>
         <translation>V</translation>
     </message>
     <message>
@@ -1158,6 +1162,20 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>Keep Subtree</source>
         <translation>Teilbaum behalten</translation>
     </message>
+    <message>
+        <source>Variation Up</source>
+        <extracomment>Short for Move Variation Up</extracomment>
+        <translation>Variante nach oben</translation>
+    </message>
+    <message>
+        <source>Variation Down</source>
+        <extracomment>Short for Move Variation Down</extracomment>
+        <translation>Variante nach unten</translation>
+    </message>
+    <message>
+        <source>Delete Variations</source>
+        <translation>Varianten löschen</translation>
+    </message>
 </context>
 <context>
     <name>MenuExport</name>
@@ -1202,7 +1220,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu item Open from Clipboard. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Open Clipboard. Leave empty for no mnemonic.</extracomment>
         <translation>Z</translation>
     </message>
     <message>
@@ -1246,7 +1264,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     </message>
     <message>
         <source>Open from Clipboard</source>
-        <translation>Aus Zwischenablage öffnen</translation>
+        <translation type="vanished">Aus Zwischenablage öffnen</translation>
     </message>
     <message>
         <source>P</source>
@@ -1280,6 +1298,10 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>Game Info</source>
         <translation>Spielinformation</translation>
+    </message>
+    <message>
+        <source>Open Clipboard</source>
+        <translation>Zwischenablage öffnen</translation>
     </message>
 </context>
 <context>

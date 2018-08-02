@@ -61,8 +61,8 @@ Pentobi.Menu {
     }
     MenuRecentFiles { }
     Action {
-        text: addMnemonic(qsTr("Open from Clipboard"),
-                          //: Mnemonic for menu item Open from Clipboard. Leave empty for no mnemonic.
+        text: addMnemonic(qsTr("Open Clipboard"),
+                          //: Mnemonic for menu item Open Clipboard. Leave empty for no mnemonic.
                           qsTr("C"))
         onTriggered: Logic.openClipboard()
     }
