@@ -54,8 +54,7 @@ Item
     function shiftPieceFast(dx, dy) { Logic.shiftPieceFast(dx, dy) }
     function playPickedPiece() { Logic.playPickedPiece() }
     function showToPlay() { }
-    function showAnalyzeGame() { }
-    function showComment() { }
+    function showComment() { pageIndicator.currentIndex = 0 }
     function showPieces() { }
     function dropCommentFocus() { comment.focus = false }
     function showMove(move) { Logic.showMove(move) }
@@ -66,7 +65,10 @@ Item
     }
     function startSearch() { showStatus(qsTr("Computer is thinking...")) }
     function endSearch() { if (! messageTimer.running) clearStatus() }
-    function startAnalysis() { showStatus(qsTr("Running game analysis...")) }
+    function startAnalysis() {
+        pageIndicator.currentIndex = 1
+        showStatus(qsTr("Running game analysis..."))
+    }
     function endAnalysis() { if (! messageTimer.running) clearStatus() }
     function searchCallback(elapsedSeconds, remainingSeconds) {
         // If the search is longer than 10 sec, we show the (maximum) remaining
@@ -177,31 +179,62 @@ Item
                         transitionsEnabled: false
                         onPiecePicked: Logic.pickPiece(piece)
                     }
-                    Column {
+                    ColumnLayout {
                         width: parent.width
-                        height: parent.height - scoreDisplay.height - pieceSelector.height - 2 * parent.spacing
+                        height: parent.height - scoreDisplay.height
+                                - pieceSelector.height - 2 * parent.spacing
+                        spacing: analyzeGame.item ? 0.1 * font.pixelSize : 0
 
-                        Comment {
-                            id: comment
+                        Item {
+                            visible: analyzeGame.item
+                            implicitHeight: pageIndicator.height
+                            Layout.fillWidth: true
 
-                            width: parent.width
-                            height: analyzeGame.item ? 0.5 * (parent.height - parent.spacing) : parent.height
+                            PageIndicator {
+                                id: pageIndicator
+
+                                anchors.centerIn: parent
+                                count: 2
+                                interactive: true
+                                delegate: Rectangle {
+                                    implicitWidth: 0.65 * font.pixelSize
+                                    implicitHeight: implicitWidth
+                                    radius: width / 2
+                                    color: theme.colorText
+                                    opacity:
+                                        (index === pageIndicator.currentIndex ?
+                                             1 : pressed ? 0.8 : 0.6)
+                                        * theme.opacitySubduedText
+                                }
+                            }
                         }
-                        Loader {
-                            id: analyzeGame
+                        Control {
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
 
-                            sourceComponent:
-                                analyzeGameModel.elements.length > 0
-                                || analyzeGameModel.isRunning ?
-                                    analyzeGameComponent : null
-                            width: parent.width
-                            height: 0.5 * (parent.height - parent.spacing)
+                            Comment {
+                                id: comment
 
-                            Component {
-                                id: analyzeGameComponent
+                                visible: pageIndicator.currentIndex === 0
+                                anchors.fill: parent
+                            }
+                            Loader {
+                                id: analyzeGame
 
-                                AnalyzeGame {
-                                    theme: rootWindow.theme
+                                visible: pageIndicator.currentIndex === 1
+                                anchors.fill: parent
+                                sourceComponent:
+                                    analyzeGameModel.elements.length > 0
+                                    || analyzeGameModel.isRunning ?
+                                        analyzeGameComponent : null
+                                onSourceComponentChanged:
+                                    if (! sourceComponent)
+                                        showComment()
+
+                                Component {
+                                    id: analyzeGameComponent
+
+                                    AnalyzeGame { theme: rootWindow.theme }
                                 }
                             }
                         }
