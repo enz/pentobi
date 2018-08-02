@@ -13,15 +13,9 @@ Item {
     property bool isHorizontal
 
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component0
-        }
-
         anchors.fill: root
         opacity: imageOpacity0
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component0 : null
 
         Component {
             id: component0
@@ -35,15 +29,9 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component90
-        }
-
         anchors.fill: root
         opacity: imageOpacity90
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component90 : null
 
         Component {
             id: component90
@@ -57,15 +45,9 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component180
-        }
-
         anchors.fill: root
         opacity: imageOpacity180
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component180 : null
 
         Component {
             id: component180
@@ -79,15 +61,9 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component270
-        }
-
         anchors.fill: root
         opacity: imageOpacity270
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component270 : null
 
         Component {
             id: component270

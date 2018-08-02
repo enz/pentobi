@@ -11,14 +11,8 @@ Item {
     property bool isDownward
 
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component0
-        }
-
         opacity: imageOpacity0
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component0 : null
 
         Component {
             id: component0
@@ -31,14 +25,8 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component60
-        }
-
         opacity: imageOpacity60
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component60 : null
 
         Component {
             id: component60
@@ -61,14 +49,8 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component120
-        }
-
         opacity: imageOpacity120
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component120 : null
 
         Component {
             id: component120
@@ -88,14 +70,8 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component180
-        }
-
         opacity: imageOpacity180
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component180 : null
 
         Component {
             id: component180
@@ -109,14 +85,8 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component240
-        }
-
         opacity: imageOpacity240
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component240 : null
 
         Component {
             id: component240
@@ -136,14 +106,8 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component300
-        }
-
         opacity: imageOpacity300
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component300 : null
 
         Component {
             id: component300

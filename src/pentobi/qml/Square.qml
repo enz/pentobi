@@ -11,14 +11,8 @@ import QtQuick 2.3
 // rotations and interpolating between them with an opacity animation.
 Item {
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component0
-        }
-
         opacity: imageOpacity0
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component0 : null
 
         Component {
             id: component0
@@ -30,14 +24,8 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component90
-        }
-
         opacity: imageOpacity90
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component90 : null
 
         Component {
             id: component90
@@ -50,14 +38,8 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component180
-        }
-
         opacity: imageOpacity180
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component180 : null
 
         Component {
             id: component180
@@ -70,14 +52,8 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = component270
-        }
-
         opacity: imageOpacity270
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? component270 : null
 
         Component {
             id: component270

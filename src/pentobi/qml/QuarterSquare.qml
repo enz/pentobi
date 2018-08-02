@@ -11,21 +11,13 @@ Item {
     property int pointType
 
     Loader {
-        id: loaderTop
-
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = componentTop
-        }
-
         opacity: switch (pointType) {
                  case 0: return imageOpacity0
                  case 1: return imageOpacity180
                  case 2: return imageOpacity90
                  case 3: return imageOpacity270
                  }
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? componentTop : null
 
         Component {
             id: componentTop
@@ -47,19 +39,13 @@ Item {
         }
     }
     Loader {
-        function loadImage() {
-            if (opacity > 0 && ! item)
-                sourceComponent = componentBottom
-        }
-
         opacity: switch (pointType) {
                  case 0: return imageOpacity180
                  case 1: return imageOpacity0
                  case 2: return imageOpacity270
                  case 3: return imageOpacity90
                  }
-        onOpacityChanged: loadImage()
-        Component.onCompleted: loadImage()
+        sourceComponent: opacity > 0 || item ? componentBottom : null
 
         Component {
             id: componentBottom
