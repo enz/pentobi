@@ -34,7 +34,6 @@ Item
     property real imageOpacity180: imageOpacity(pieceAngle, 180)
     property real imageOpacity270: imageOpacity(pieceAngle, 270)
 
-    z: 1
     transform: [
         Rotation {
             id: flipX

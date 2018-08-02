@@ -43,7 +43,6 @@ Item
         return -Math.sin(angle * Math.PI / 180)
     }
 
-    z: 1
     transform: [
         Rotation {
             id: flipX
