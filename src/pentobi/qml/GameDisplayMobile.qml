@@ -98,7 +98,7 @@ Item
             // Ensures that at least 3 rows are shown in pieceSelector
             width: Math.min(
                        parent.width,
-                       gameDisplay.height / (1.05 + 0.85 / pieceSelector.columns * 3))
+                       gameDisplay.height / (1.065 + 0.85 / pieceSelector.columns * 3))
 
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
@@ -118,7 +118,7 @@ Item
         SwipeView {
             id: swipeView
 
-            width: board.width
+            width: Math.min(1.3 * board.width, gameDisplay.width)
             height: Math.min(gameDisplay.height - board.height, board.height)
             clip: true
             anchors.horizontalCenter: board.horizontalCenter
@@ -127,7 +127,7 @@ Item
                 ScoreDisplay {
                     id: scoreDisplay
 
-                    height: 0.05 * board.width
+                    height: 0.05 * swipeView.width
                     pointSize: 0.6 * height
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
@@ -135,14 +135,14 @@ Item
                     id: pieceSelector
 
                     // How many full rows can we show if we use 85% of the board width?
-                    property int rows: Math.floor(height / (0.85 * swipeView.width / columns))
+                    property int rows: Math.floor(height / (0.85 * board.width / columns))
 
                     columns: gameModel.gameVariant.startsWith("classic")
                              || gameModel.gameVariant.startsWith("callisto")
                              || gameModel.gameVariant === "duo" ? 7 : 8
 
                     // Show at least 1 row
-                    width: rows < 1 ? columns * height : 0.85 * swipeView.width
+                    width: rows < 1 ? columns * height : 0.85 * board.width
 
                     height: swipeView.height - scoreDisplay.height
 
