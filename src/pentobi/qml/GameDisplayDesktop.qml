@@ -114,8 +114,11 @@ Item
     Settings {
         property alias enableAnimations: gameDisplay.enableAnimations
         property alias moveMarking: gameDisplay.moveMarking
+        property alias pageIndicatorCurrentIndex: pageIndicator.currentIndex
         property alias showCoordinates: gameDisplay.showCoordinates
         property alias setupMode: gameDisplay.setupMode
+
+        category: "GameDisplayDesktop"
     }
     ColumnLayout {
         anchors.fill: parent

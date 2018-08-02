@@ -82,6 +82,8 @@ Item
         property alias showCoordinates: gameDisplay.showCoordinates
         property alias swipeViewCurrentIndex: swipeView.currentIndex
         property alias setupMode: gameDisplay.setupMode
+
+        category: "GameDisplayMobile"
     }
     Column {
         id: column
