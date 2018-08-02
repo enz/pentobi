@@ -213,8 +213,6 @@ public:
 
     Q_INVOKABLE bool loadAutoSave();
 
-    Q_INVOKABLE void resetFindMove();
-
     Q_INVOKABLE bool save(const QString& file);
 
     Q_INVOKABLE bool saveAsciiArt(const QString& file);

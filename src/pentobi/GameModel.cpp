@@ -1230,7 +1230,11 @@ void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
 
 void GameModel::preparePositionChange()
 {
-    resetFindMove();
+    if (m_legalMoves)
+    {
+        m_legalMoves->clear();
+        m_legalMoveIndex = 0;
+    }
     emit positionAboutToChange();
 }
 
@@ -1256,14 +1260,6 @@ PieceModel* GameModel::previousPiece(PieceModel* currentPickedPiece)
             break;
     }
     return findUnplayedPieceModel(c, Piece(i));
-}
-
-void GameModel::resetFindMove()
-{
-    if (! m_legalMoves)
-        return;
-    m_legalMoves->clear();
-    m_legalMoveIndex = 0;
 }
 
 bool GameModel::restoreAutoSaveLocation()

@@ -76,10 +76,8 @@ QtObject {
     property Action escape: Action {
         shortcut: noPopupOpen ? "Escape" : ""
         onTriggered:
-            if (gameDisplay.pickedPiece) {
+            if (gameDisplay.pickedPiece)
                 gameDisplay.pickedPiece = null
-                gameModel.resetFindMove()
-            }
             else if (visibility === Window.FullScreen)
                 Logic.leaveFullscreen()
     }
