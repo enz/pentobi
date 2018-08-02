@@ -233,7 +233,7 @@ ApplicationWindow {
             restart()
         }
 
-        interval: isDesktop ? 0 : 400
+        interval: 400
         onTriggered: {
             func()
             isRunning = false
