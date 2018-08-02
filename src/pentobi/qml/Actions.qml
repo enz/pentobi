@@ -29,14 +29,8 @@ QtObject {
     property Action backKey: Action {
         shortcut: isAndroid && noPopupOpen ? "Back" : ""
         onTriggered: {
-            if (visibility === Window.FullScreen) {
-                visibility = Window.AutomaticVisibility
-                // Leaving fullscreen doesn't always work on Android but leaves
-                // a white area between the window top and the Android status
-                // bar (last tested with Qt 5.11.1)
-                rootWindow.x = 0
-                rootWindow.y = 0
-            }
+            if (visibility === Window.FullScreen)
+                Logic.leaveFullscreen()
             else
                 Qt.quit()
         }
@@ -79,12 +73,15 @@ QtObject {
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goEnd()
     }
-    property Action dropPickedPiece: Action {
+    property Action escape: Action {
         shortcut: noPopupOpen ? "Escape" : ""
-        onTriggered: {
-            gameDisplay.pickedPiece = null
-            gameModel.resetFindMove()
-        }
+        onTriggered:
+            if (gameDisplay.pickedPiece) {
+                gameDisplay.pickedPiece = null
+                gameModel.resetFindMove()
+            }
+            else if (visibility === Window.FullScreen)
+                Logic.leaveFullscreen()
     }
     property Action findMove: Action {
         shortcut: "Ctrl+H"
