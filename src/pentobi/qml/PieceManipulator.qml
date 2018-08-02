@@ -32,7 +32,7 @@ Item {
         source: isDesktop ? theme.getImage("piece-manipulator-desktop")
                               : theme.getImage("piece-manipulator")
         sourceSize { width: width; height: height }
-        opacity: ! legal * (isOutsideBoard ? 0.65 : 0.4)
+        opacity: ! legal * (isOutsideBoard ? 0.65 : 0.45)
         Behavior on opacity { NumberAnimation { duration: 100 } }
     }
     Image {
