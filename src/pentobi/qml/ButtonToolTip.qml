@@ -12,9 +12,9 @@ import "." as Pentobi
 // when the button is disabled). Must be declared such that x and y have the
 // same meaning as in the button (e.g. same parent).
 MouseArea {
-    id: root
-
     property Pentobi.Button button
+
+    property bool _inhibitAfterPress
 
     visible: button.visible && isDesktop
     x: button.x
@@ -23,8 +23,9 @@ MouseArea {
     height: button.height
     acceptedButtons: Qt.NoButton
     hoverEnabled: true
+    onExited: _inhibitAfterPress = false
     ToolTip.text: button.ToolTip.text
-    ToolTip.visible: containsMouse && ToolTip.text
+    ToolTip.visible: containsMouse && ToolTip.text && ! _inhibitAfterPress
     ToolTip.delay: 1000
     ToolTip.timeout: 7000
     Component.onCompleted:
@@ -33,6 +34,6 @@ MouseArea {
 
     Connections {
         target: button
-        onPressed: root.ToolTip.visible = false
+        onPressed: _inhibitAfterPress = true
     }
 }
