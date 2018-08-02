@@ -112,7 +112,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play One Move</source>
+        <source>Play Move</source>
+        <extracomment>Play a single move</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1014,8 +1015,8 @@
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Play One Move. Leave empty for no mnemonic.</extracomment>
-        <translation>E</translation>
+        <extracomment>Mnemonic for menu item Play Move. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Stop</source>
@@ -1302,7 +1303,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>G</source>
         <extracomment>Mnemonic for menu item Go to Move. Leave empty for no mnemonic.</extracomment>
-        <translation>G</translation>
+        <translation type="vanished">G</translation>
     </message>
     <message>
         <source>M</source>
@@ -1318,6 +1319,11 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>C</source>
         <extracomment>Mnemonic for menu item Next Comment. Leave empty for no mnemonic.</extracomment>
         <translation>K</translation>
+    </message>
+    <message>
+        <source>N</source>
+        <extracomment>Mnemonic for menu item Go/Move Number. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished">N</translation>
     </message>
 </context>
 <context>

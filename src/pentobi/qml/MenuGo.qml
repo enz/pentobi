@@ -17,8 +17,8 @@ Pentobi.Menu {
     Pentobi.MenuItem {
         action: actions.gotoMove
         text: addMnemonic(action.text,
-                          //: Mnemonic for menu item Go to Move. Leave empty for no mnemonic.
-                          qsTr("G"))
+                          //: Mnemonic for menu item Go/Move Number. Leave empty for no mnemonic.
+                          qsTr("N"))
     }
     Pentobi.MenuItem {
         action: actions.backToMainVar

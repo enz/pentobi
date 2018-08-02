@@ -213,7 +213,8 @@ QtObject {
     }
     property Action playSingle: Action {
         shortcut: "Ctrl+Shift+L"
-        text: qsTr("Play One Move")
+        //: Play a single move
+        text: qsTr("Play Move")
         enabled: ! gameModel.isGameOver && ! isRated
         onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
     }

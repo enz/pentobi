@@ -28,7 +28,7 @@ Pentobi.Menu {
     Pentobi.MenuItem {
         action: actions.playSingle
         text: addMnemonic(action.text,
-                          //: Mnemonic for menu item Play One Move. Leave empty for no mnemonic.
+                          //: Mnemonic for menu item Play Move. Leave empty for no mnemonic.
                           qsTr("M"))
     }
     Pentobi.MenuItem {
