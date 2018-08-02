@@ -158,7 +158,7 @@ Item
                     id: rightColumn
 
                     width: parent.width - board.width - row.spacing - row.leftPadding - row.rightPadding
-                    height: board.height
+                    height: board.rows * board.gridHeight
                     anchors.verticalCenter: board.verticalCenter
                     spacing: 0.02 * width
 
