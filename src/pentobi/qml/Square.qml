@@ -10,15 +10,12 @@ import QtQuick 2.3
 // Simulates lighting by using different images for the lighting at different
 // rotations and interpolating between them with an opacity animation.
 Item {
-    id: root
-
     Loader {
         function loadImage() {
             if (opacity > 0 && ! item)
                 sourceComponent = component0
         }
 
-        anchors.fill: root
         opacity: imageOpacity0
         onOpacityChanged: loadImage()
         Component.onCompleted: loadImage()
@@ -38,7 +35,6 @@ Item {
                 sourceComponent = component90
         }
 
-        anchors.fill: root
         opacity: imageOpacity90
         onOpacityChanged: loadImage()
         Component.onCompleted: loadImage()
@@ -59,7 +55,6 @@ Item {
                 sourceComponent = component180
         }
 
-        anchors.fill: root
         opacity: imageOpacity180
         onOpacityChanged: loadImage()
         Component.onCompleted: loadImage()
@@ -80,7 +75,6 @@ Item {
                 sourceComponent = component270
         }
 
-        anchors.fill: root
         opacity: imageOpacity270
         onOpacityChanged: loadImage()
         Component.onCompleted: loadImage()

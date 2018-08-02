@@ -8,8 +8,6 @@ import QtQuick 2.3
 
 // Piece element used in Trigon. See Square.qml for comments
 Item {
-    id: root
-
     property bool isDownward
 
     Loader {
@@ -18,7 +16,6 @@ Item {
                 sourceComponent = component0
         }
 
-        anchors.fill: root
         opacity: imageOpacity0
         onOpacityChanged: loadImage()
         Component.onCompleted: loadImage()
@@ -39,7 +36,6 @@ Item {
                 sourceComponent = component60
         }
 
-        anchors.fill: root
         opacity: imageOpacity60
         onOpacityChanged: loadImage()
         Component.onCompleted: loadImage()
@@ -70,7 +66,6 @@ Item {
                 sourceComponent = component120
         }
 
-        anchors.fill: root
         opacity: imageOpacity120
         onOpacityChanged: loadImage()
         Component.onCompleted: loadImage()
@@ -98,7 +93,6 @@ Item {
                 sourceComponent = component180
         }
 
-        anchors.fill: root
         opacity: imageOpacity180
         onOpacityChanged: loadImage()
         Component.onCompleted: loadImage()
@@ -120,7 +114,6 @@ Item {
                 sourceComponent = component240
         }
 
-        anchors.fill: root
         opacity: imageOpacity240
         onOpacityChanged: loadImage()
         Component.onCompleted: loadImage()
@@ -148,7 +141,6 @@ Item {
                 sourceComponent = component300
         }
 
-        anchors.fill: root
         opacity: imageOpacity300
         onOpacityChanged: loadImage()
         Component.onCompleted: loadImage()

@@ -8,8 +8,6 @@ import QtQuick 2.3
 
 // Piece element used in GembloQ. See Square.qml for comments
 Item {
-    id: root
-
     property int pointType
 
     Loader {
@@ -20,7 +18,6 @@ Item {
                 sourceComponent = componentTop
         }
 
-        anchors.fill: root
         opacity: switch (pointType) {
                  case 0: return imageOpacity0
                  case 1: return imageOpacity180
@@ -55,7 +52,6 @@ Item {
                 sourceComponent = componentBottom
         }
 
-        anchors.fill: root
         opacity: switch (pointType) {
                  case 0: return imageOpacity180
                  case 1: return imageOpacity0
