@@ -44,8 +44,6 @@ Item {
             // of a tooltip for showing the full file path because tooltips are
             // not wrapped if larger than screen (last tested with Qt 5.11.1)
             visible: ! isDesktop
-            Layout.fillWidth: true
-            Layout.leftMargin: root.height / 10
             color: theme.colorText
             elide: Text.ElideRight
             text: {
@@ -53,6 +51,13 @@ Item {
                 if (isRated) return qsTr("Rated")
                 return Logic.getFileLabel(gameModel.file, gameModel.isModified)
             }
+            // There is a bug in Qt 5.11 that in some situations elides the
+            // text even if there is enough room for it. It doesn't occur if
+            // we use implicitWidth + 1 instead if implicitWidth
+            Layout.maximumWidth: implicitWidth + 1
+            Layout.fillWidth: true
+            Layout.leftMargin: root.height / 10
+
             MouseArea {
                 anchors.fill: parent
                 onClicked:
@@ -63,6 +68,10 @@ Item {
                     else if (gameModel.file !== "")
                         Logic.showInfo(Logic.getFileInfo(gameModel.file, gameModel.isModified))
             }
+        }
+        Item {
+            visible: ! isDesktop
+            Layout.fillWidth: true
         }
         Pentobi.Button {
             id: newGame
@@ -208,9 +217,7 @@ Item {
             }
             color: theme.colorText
             elide: Text.ElideRight
-            // There is a bug in Qt 5.11 that in some situations elides the
-            // text even if there is enough room for it. It doesn't occur if
-            // we use implicitWidth + 1 instead if implicitWidth
+            // See comment at Layout.maximumWidth of first label
             Layout.maximumWidth: implicitWidth + 1
             Layout.fillWidth: true
 
