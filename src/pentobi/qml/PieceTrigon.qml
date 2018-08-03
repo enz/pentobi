@@ -22,14 +22,13 @@ Item
     property string imageName: theme.getImage("triangle-" + colorName)
     property string imageNameDownward:
         theme.getImage("triangle-down-" + colorName)
+    property bool flippedX: Math.abs(flipX.angle % 360 - 180) < 90
+    property bool flippedY: Math.abs(flipY.angle % 360 - 180) < 90
     property real pieceAngle: {
-        var flX = Math.abs(flipX.angle % 360 - 180) < 90
-        var flY = Math.abs(flipY.angle % 360 - 180) < 90
-        var angle = rotation
-        if (flX && flY) angle += 180
-        else if (flX) angle += 120
-        else if (flY) angle += 300
-        return angle
+        if (! flippedY && ! flippedX) return rotation
+        if (! flippedY && flippedX) return rotation + 120
+        if (flippedY && flippedX) return rotation + 180
+        return rotation + 300
     }
     property real imageOpacity0: imageOpacity(pieceAngle, 0)
     property real imageOpacity60: imageOpacity(pieceAngle, 60)

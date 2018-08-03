@@ -20,14 +20,13 @@ Item
     property bool isMarked
     property string label
     property string imageName: theme.getImage("linesegment-" + colorName)
+    property bool flippedX: Math.abs(flipX.angle % 360 - 180) < 90
+    property bool flippedY: Math.abs(flipY.angle % 360 - 180) < 90
     property real pieceAngle: {
-        var flX = Math.abs(flipX.angle % 360 - 180) < 90
-        var flY = Math.abs(flipY.angle % 360 - 180) < 90
-        var angle = rotation
-        if (flX && flY) angle += 180
-        else if (flX) angle += 90
-        else if (flY) angle += 270
-        return angle
+        if (! flippedY && ! flippedX) return rotation
+        if (! flippedY && flippedX) return rotation + 90
+        if (flippedY && flippedX) return rotation + 180
+        return rotation + 270
     }
     property real imageOpacity0: imageOpacity(pieceAngle, 0)
     property real imageOpacity90: imageOpacity(pieceAngle, 90)
