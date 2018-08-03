@@ -32,7 +32,7 @@ QtObject {
             if (visibility === Window.FullScreen)
                 Logic.leaveFullscreen()
             else
-                Qt.quit()
+                Logic.autoSaveAndQuit()
         }
     }
     property Action backToMainVar: Action {
