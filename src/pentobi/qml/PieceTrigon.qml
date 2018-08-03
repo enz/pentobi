@@ -27,7 +27,7 @@ Item
     property real pieceAngle: {
         if (! flippedY && ! flippedX) return rotation
         if (! flippedY && flippedX) return rotation + 120
-        if (flippedY && flippedX) return rotation + 180
+        if (flippedX) return rotation + 180
         return rotation + 300
     }
     property real imageOpacity0: imageOpacity(pieceAngle, 0)
