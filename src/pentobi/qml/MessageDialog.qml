@@ -18,13 +18,9 @@ Pentobi.Dialog {
     footer: Pentobi.DialogButtonBox { ButtonOk { } }
 
     Item {
-        implicitWidth: {
-            var w = label.implicitWidth
+        implicitWidth:
             // Wrap long text
-            w = Math.min(w, font.pixelSize * 25)
-            w = Math.min(w, maxContentWidth)
-            return w
-        }
+            Math.min(label.implicitWidth, font.pixelSize * 25, maxContentWidth)
         implicitHeight: label.implicitHeight
 
         Label {

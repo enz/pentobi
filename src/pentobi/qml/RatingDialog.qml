@@ -127,7 +127,7 @@ Pentobi.Dialog {
                     visible: history.length > 1
                     history: ratingModel.history
                     Layout.preferredHeight:
-                        Math.min(Math.min(font.pixelSize * 8, 0.22 * rootWindow.width),
+                        Math.min(font.pixelSize * 8, 0.22 * rootWindow.width,
                                  0.22 * rootWindow.height)
                     Layout.fillWidth: true
                 }
@@ -138,7 +138,7 @@ Pentobi.Dialog {
                 clip: true
                 Layout.fillWidth: true
                 Layout.preferredHeight:
-                    Math.min(Math.min(font.pixelSize * 8, 0.22 * rootWindow.width),
+                    Math.min(font.pixelSize * 8, 0.22 * rootWindow.width,
                              0.22 * rootWindow.height)
 
                 Item
