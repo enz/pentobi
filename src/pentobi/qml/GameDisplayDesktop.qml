@@ -56,6 +56,10 @@ Item
     function showToPlay() { }
     function showComment() { pageIndicator.currentIndex = 0 }
     function showPieces() { }
+    function switchView() {
+        if (analyzeGame.item)
+            pageIndicator.currentIndex = (pageIndicator.currentIndex + 1) % 2
+    }
     function dropCommentFocus() { comment.focus = false }
     function showMove(move) { Logic.showMove(move) }
     function getBoard() { return board }

@@ -93,7 +93,7 @@ QtObject {
         onTriggered: gameDisplay.showMove(gameModel.findMovePrevious())
     }
     property Action nextComment: Action {
-        shortcut: "Ctrl+T"
+        shortcut: "Ctrl+E"
         text: qsTr("Next Comment")
         enabled: ! isRated && (gameModel.canGoForward || gameModel.canGoBackward)
         onTriggered: Logic.findNextComment()
@@ -256,6 +256,11 @@ QtObject {
                  && ! isRated
         onTriggered:
             Qt.callLater(function() { Logic.cancelRunning(true) }) // QTBUG-69682
+    }
+    property Action switchView: Action {
+        shortcut: "Ctrl+T"
+        enabled: isDesktop
+        onTriggered: gameDisplay.switchView()
     }
     property Action undo: Action {
         text: qsTr("Undo Move")
