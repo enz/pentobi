@@ -9,7 +9,7 @@ import QtQuick 2.0
 Item {
     id: root
 
-    property var pieceModel
+    property QtObject pieceModel
     // True if piece manipulator is at a board location that is a legal move
     property bool legal
 

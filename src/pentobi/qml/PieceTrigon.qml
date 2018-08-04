@@ -11,7 +11,7 @@ Item
 {
     id: root
 
-    property var pieceModel
+    property QtObject pieceModel
     property string colorName
     property bool isPicked
     property Item parentUnplayed
