@@ -11,8 +11,6 @@ Version 15.UNKNOWN (master)
 * The installation directory /usr/share/pentobi does not exist anymore.
   The translations, opening books and user manual are compiled as resources
   into the binary executable.
-* Gnome and KDE thumbnailers have been removed because they depended on
-  the code of the old QWidgets-based GUI.
 * New themes optimized for colorblindness.
 * New context menu to go to any played move on board or edit its annotation.
 * Additional warning dialogs to reduce the likelihood that an autosaved

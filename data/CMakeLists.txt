@@ -1,7 +1,7 @@
-if(PENTOBI_BUILD_GUI AND NOT WIN32)
+if(PENTOBI_BUILD_GUI)
 
 foreach(icon application-x-blokus-sgf application-x-blokus-sgf-16
-	application-x-blokus-sgf-32 application-x-blokus-sgf-64)
+        application-x-blokus-sgf-32 application-x-blokus-sgf-64)
   set(icon_svg "${CMAKE_CURRENT_SOURCE_DIR}/${icon}.svg")
   set(icon_png "${CMAKE_CURRENT_BINARY_DIR}/${icon}.png")
   add_custom_command(OUTPUT "${icon_png}"
@@ -52,4 +52,17 @@ install(FILES pentobi-mime.xml
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
 
-endif(PENTOBI_BUILD_GUI AND NOT WIN32)
+endif(PENTOBI_BUILD_GUI)
+
+if(PENTOBI_BUILD_GNOME_THUMBNAILER)
+  configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/thumbnailers)
+endif()
+
+if(PENTOBI_BUILD_KDE_THUMBNAILER)
+  configure_file(io.sourceforge.pentobi.kde-thumbnailer.metainfo.xml.in
+    io.sourceforge.pentobi.kde-thumbnailer.metainfo.xml @ONLY)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.kde-thumbnailer.metainfo.xml
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
+endif()

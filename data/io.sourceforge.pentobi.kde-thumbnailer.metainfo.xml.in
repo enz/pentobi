@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="addon">
+  <id>io.sourceforge.pentobi.kde-thumnailer</id>
+  <extends>org.kde.dolphin.desktop</extends>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <name>Pentobi KDE Thumbnailer</name>
+  <name xml:lang="de">Pentobi-Vorschaubilder unter KDE</name>
+  <summary>Enables previews of game files written by Pentobi on KDE</summary>
+  <summary xml:lang="de">Ermöglicht Vorschaubilder von Spieldateien, die von Pentobi geschrieben wurden, unter KDE</summary>
+
+  <description>
+    <p>Plugin that enables previews of Blokus game files as written by the
+    program Pentobi in the Dolphin file manager of the KDE desktop
+    environment.</p>
+    <p xml:lang="de">Plug-in, das Vorschaubilder von Blokus-Spieldateien,
+    wie vom Programm Pentobi erzeugt, im Dateimanager Dolphin der
+    KDE-Desktop-Umgebung ermöglicht.</p>
+  </description>
+
+  <screenshots>
+    <screenshot type="default">
+      <image width="1248" height="702">
+      https://pentobi.sourceforge.io/pentobi-kde-thumbnailer.png</image>
+      <caption>Game file previews in Dolphin</caption>
+      <caption xml:lang="de">Vorschaubilder von Spieldateien in Dolphin</caption>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">https://pentobi.sourceforge.io/</url>
+  <url type="bugtracker">https://sourceforge.net/p/pentobi/bugs/</url>
+  <url type="donation">https://sourceforge.net/p/pentobi/donate/</url>
+  <developer_name>Markus Enzenberger</developer_name>
+  <update_contact>enz@users.sourceforge.net</update_contact>
+
+  <releases>
+     <release version="@PENTOBI_VERSION@" date="@PENTOBI_RELEASE_DATE@"/>
+  </releases>
+</component>

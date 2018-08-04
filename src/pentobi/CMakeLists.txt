@@ -7,8 +7,6 @@ find_package(Qt5LinguistTools 5.11 REQUIRED)
 find_package(Qt5Svg 5.11 REQUIRED)
 find_package(Qt5WebView 5.11 REQUIRED)
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-
 qt5_add_translation(pentobi_QM
     qml/i18n/qml_de.ts
     qml/i18n/qml_fr.ts
