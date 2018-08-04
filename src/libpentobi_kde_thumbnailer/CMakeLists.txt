@@ -12,6 +12,8 @@
 # exceptions (which should be fine as long as no exceptions are thrown
 # from the thumbnailer plugin functions).
 
+find_package(Qt5Gui 5.9 REQUIRED)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_SHARED_LIBRARY_CXX_FLAGS}")
 
 add_library(pentobi_kde_thumbnailer STATIC
@@ -31,8 +33,6 @@ add_library(pentobi_kde_thumbnailer STATIC
   ../libpentobi_base/StartingPoints.cpp
   ../libpentobi_base/TrigonGeometry.cpp
   ../libpentobi_base/Variant.cpp
-  ../libpentobi_gui/BoardPainter.cpp
-  ../libpentobi_gui/Util.cpp
   ../libpentobi_thumbnail/BoardPainter.cpp
   ../libpentobi_thumbnail/CreateThumbnail.cpp
   ../libpentobi_thumbnail/Util.cpp

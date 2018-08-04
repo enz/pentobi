@@ -1,6 +1,6 @@
 set(CMAKE_AUTOMOC TRUE)
 
-find_package(Qt5Gui 5.11 REQUIRED)
+find_package(Qt5Gui 5.9 REQUIRED)
 
 add_library(pentobi_thumbnail STATIC
   BoardPainter.h
