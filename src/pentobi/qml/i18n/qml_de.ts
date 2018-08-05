@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -19,32 +17,58 @@
 <context>
     <name>Actions</name>
     <message>
-        <source>New</source>
-        <translation>Neu</translation>
+        <source>Main Variation</source>
+        <translation>Hauptvariante</translation>
     </message>
     <message>
-        <source>Play</source>
-        <translation>Spielen</translation>
+        <source>Beginning of Branch</source>
+        <translation>Verzweigungsanfang</translation>
     </message>
     <message>
-        <source>Rated Game</source>
-        <translation>Gewertetes Spiel</translation>
-    </message>
-    <message>
-        <source>Game Info</source>
-        <translation type="vanished">Spielinformation</translation>
-    </message>
-    <message>
-        <source>Undo Move</source>
-        <translation>Zug rückgängig</translation>
+        <source>Settings...</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation>Einstellungen …</translation>
     </message>
     <message>
         <source>Find Move</source>
         <translation>Zug finden</translation>
     </message>
     <message>
+        <source>Next Comment</source>
+        <translation>Nächster Kommentar</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation>Vollbild</translation>
+    </message>
+    <message>
+        <source>Move Number...</source>
+        <translation>Zugnummer …</translation>
+    </message>
+    <message>
+        <source>Pentobi Help</source>
+        <translation>Pentobi-Hilfe</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Neu</translation>
+    </message>
+    <message>
+        <source>Rated Game</source>
+        <translation>Gewertetes Spiel</translation>
+    </message>
+    <message>
         <source>Open...</source>
         <translation>Öffnen ...</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation>Spielen</translation>
+    </message>
+    <message>
+        <source>Play Move</source>
+        <extracomment>Play a single move</extracomment>
+        <translation>Zug spielen</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -59,78 +83,16 @@
         <translation>Speichern unter ...</translation>
     </message>
     <message>
-        <source>Pentobi Help</source>
-        <translation>Pentobi-Hilfe</translation>
-    </message>
-    <message>
-        <source>Back to Main Variation</source>
-        <translation type="vanished">Zurück zu Hauptvariante</translation>
-    </message>
-    <message>
-        <source>Beginning of Branch</source>
-        <translation>Anfang der Verzweigung</translation>
-    </message>
-    <message>
-        <source>Find Next Comment</source>
-        <translation type="vanished">Nächsten Kommentar finden</translation>
-    </message>
-    <message>
-        <source>Go to Move...</source>
-        <translation type="vanished">Gehe zu Zug ...</translation>
-    </message>
-    <message>
-        <source>Play Single Move</source>
-        <translation type="vanished">Einzelnen Zug spielen</translation>
-    </message>
-    <message>
-        <source>Rating</source>
-        <translation type="vanished">Wertung</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation>Vollbild</translation>
-    </message>
-    <message>
-        <source>Computer Settings...</source>
-        <translation type="vanished">Computer-Einstellungen …</translation>
-    </message>
-    <message>
-        <source>Next Comment</source>
-        <translation>Nächster Kommentar</translation>
-    </message>
-    <message>
-        <source>Main Variation</source>
-        <translation>Hauptvariante</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Stopp</translation>
     </message>
     <message>
-        <source>Move Number...</source>
-        <translation>Zugnummer …</translation>
-    </message>
-    <message>
-        <source>Settings...</source>
-        <extracomment>Menu item Computer/Settings</extracomment>
-        <translation>Einstellungen …</translation>
-    </message>
-    <message>
-        <source>Play One Move</source>
-        <translation type="vanished">Einen Zug spielen</translation>
-    </message>
-    <message>
-        <source>Play Move</source>
-        <extracomment>Play a single move</extracomment>
-        <translation>Zug spielen</translation>
+        <source>Undo Move</source>
+        <translation>Zug rückgängig</translation>
     </message>
 </context>
 <context>
     <name>AnalyzeDialog</name>
-    <message>
-        <source>Analyze Game</source>
-        <translation type="vanished">Spiel analysieren</translation>
-    </message>
     <message>
         <source>Analysis speed:</source>
         <translation>Analysegeschwindigkeit:</translation>
@@ -157,10 +119,6 @@
 </context>
 <context>
     <name>AppearanceDialog</name>
-    <message>
-        <source>Appearance</source>
-        <translation type="vanished">Erscheinungsbild</translation>
-    </message>
     <message>
         <source>Coordinates</source>
         <translation>Koordinaten</translation>
@@ -194,6 +152,11 @@
         <translation>Farbenblind dunkel</translation>
     </message>
     <message>
+        <source>System</source>
+        <extracomment>Name of theme using default system colors</extracomment>
+        <translation>System</translation>
+    </message>
+    <message>
         <source>Move marking:</source>
         <translation>Zugmarkierung:</translation>
     </message>
@@ -214,21 +177,12 @@
         <extracomment>Move marking/None</extracomment>
         <translation>Keine</translation>
     </message>
-    <message>
-        <source>System</source>
-        <extracomment>Name of theme using default system colors</extracomment>
-        <translation>System</translation>
-    </message>
 </context>
 <context>
     <name>AsciiArtSaveDialog</name>
     <message>
         <source>Export ASCII Art</source>
         <translation>ASCII-Art exportieren</translation>
-    </message>
-    <message>
-        <source>Text files (*.txt)</source>
-        <translation type="vanished">Textdateien (*.txt)</translation>
     </message>
     <message>
         <source>Text files</source>
@@ -260,7 +214,7 @@
     <message>
         <source>A</source>
         <extracomment>Mnemonic for button Apply. Leave empty for no mnemonic.</extracomment>
-        <translation>N</translation>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -272,7 +226,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
+        <translation>L</translation>
     </message>
 </context>
 <context>
@@ -284,7 +238,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
-        <translation>S</translation>
+        <translation>L</translation>
     </message>
 </context>
 <context>
@@ -301,10 +255,6 @@
 </context>
 <context>
     <name>ComputerDialog</name>
-    <message>
-        <source>Computer Settings</source>
-        <translation type="vanished">Computer-Einstellungen</translation>
-    </message>
     <message>
         <source>Computer plays:</source>
         <translation>Computer spielt:</translation>
@@ -349,10 +299,6 @@
 <context>
     <name>ExportImageDialog</name>
     <message>
-        <source>Export Image</source>
-        <translation type="vanished">Grafik exportieren</translation>
-    </message>
-    <message>
         <source>Image width:</source>
         <translation>Bildbreite:</translation>
     </message>
@@ -360,8 +306,8 @@
 <context>
     <name>FileDialog</name>
     <message>
-        <source>All files (*)</source>
-        <translation type="vanished">Alle Dateien (*)</translation>
+        <source>Overwrite file?</source>
+        <translation>Datei überschreiben?</translation>
     </message>
     <message>
         <source>Open</source>
@@ -370,7 +316,7 @@
     <message>
         <source>O</source>
         <extracomment>Mnemonic for button Open. Leave empty for no mnemonic.</extracomment>
-        <translation>F</translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>Save</source>
@@ -379,28 +325,11 @@
     <message>
         <source>S</source>
         <extracomment>Mnemonic for button Save. Leave empty for no mnemonic.</extracomment>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Abbrechen</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">A</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>All files</source>
         <translation>Alle Dateien</translation>
-    </message>
-    <message>
-        <source>Overwrite existing file?</source>
-        <translation type="vanished">Existierende Datei überschreiben?</translation>
-    </message>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>Datei überschreiben?</translation>
     </message>
 </context>
 <context>
@@ -410,6 +339,10 @@
         <translation>Computer denkt …</translation>
     </message>
     <message>
+        <source>Running game analysis...</source>
+        <translation>Spiel wird analysiert …</translation>
+    </message>
+    <message>
         <source>Computer is thinking... (up to %1 seconds remaining)</source>
         <translation>Computer denkt … (maximal %1 Sekunden verbleibend)</translation>
     </message>
@@ -417,20 +350,20 @@
         <source>Computer is thinking... (up to %1 minutes remaining)</source>
         <translation>Computer denkt … (maximal %1 Minuten verbleibend)</translation>
     </message>
-    <message>
-        <source>Running game analysis...</source>
-        <translation>Spiel wird analysiert …</translation>
-    </message>
 </context>
 <context>
     <name>GameInfoDialog</name>
     <message>
-        <source>Game Info</source>
-        <translation type="vanished">Spielinformation</translation>
-    </message>
-    <message>
         <source>Player Blue/Red:</source>
         <translation>Spieler Blau/Rot:</translation>
+    </message>
+    <message>
+        <source>Player Purple:</source>
+        <translation>Spieler Lila:</translation>
+    </message>
+    <message>
+        <source>Player Green:</source>
+        <translation>Spieler Grün:</translation>
     </message>
     <message>
         <source>Player Blue:</source>
@@ -441,8 +374,8 @@
         <translation>Spieler Gelb/Grün:</translation>
     </message>
     <message>
-        <source>Player Green:</source>
-        <translation>Spieler Grün:</translation>
+        <source>Player Orange:</source>
+        <translation>Spieler Orange:</translation>
     </message>
     <message>
         <source>Player Yellow:</source>
@@ -468,37 +401,60 @@
         <source>Round:</source>
         <translation>Runde:</translation>
     </message>
-    <message>
-        <source>Player Purple:</source>
-        <translation>Spieler Lila:</translation>
-    </message>
-    <message>
-        <source>Player Orange:</source>
-        <translation>Spieler Orange:</translation>
-    </message>
 </context>
 <context>
     <name>GameModel</name>
     <message>
-        <source>(Setup)</source>
-        <translation>(Stellung)</translation>
+        <source>Blue/Red</source>
+        <translation>Blau/Rot</translation>
     </message>
     <message>
-        <source>(No moves)</source>
-        <translation>(Keine Züge)</translation>
+        <source>Purple</source>
+        <translation>Lila</translation>
     </message>
     <message>
-        <source>Move %1</source>
-        <extracomment>The argument is the current move number.</extracomment>
-        <translation>Zug %1</translation>
+        <source>Green</source>
+        <translation>Grün</translation>
     </message>
     <message>
-        <source>Blue wins with 1 point.</source>
-        <translation>Blau gewinnt mit 1 Punkt.</translation>
+        <source>Blue</source>
+        <translation>Blau</translation>
     </message>
     <message>
-        <source>Blue wins with %L1 points.</source>
-        <translation>Blau gewinnt mit %L1 Punkten.</translation>
+        <source>Yellow/Green</source>
+        <translation>Gelb/Grün</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Gelb</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rot</translation>
+    </message>
+    <message>
+        <source>Purple wins with 1 point.</source>
+        <translation>Lila gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Purple wins with %L1 points.</source>
+        <translation>Lila gewinnt mit %L1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Orange wins with 1 point.</source>
+        <translation>Orange gewinnt mit 1 Punkt.</translation>
+    </message>
+    <message>
+        <source>Orange wins with %L1 points.</source>
+        <translation>Orange gewinnt mit %L1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Game ends in a tie.</source>
+        <translation>Spiel endet unentschieden.</translation>
     </message>
     <message>
         <source>Green wins with 1 point.</source>
@@ -509,12 +465,16 @@
         <translation>Grün gewinnt mit %L1 Punkten.</translation>
     </message>
     <message>
-        <source>Green wins (tie resolved).</source>
-        <translation>Grün gewinnt (Unentschieden aufgelöst).</translation>
+        <source>Blue wins with 1 point.</source>
+        <translation>Blau gewinnt mit 1 Punkt.</translation>
     </message>
     <message>
-        <source>Game ends in a tie.</source>
-        <translation>Spiel endet unentschieden.</translation>
+        <source>Blue wins with %L1 points.</source>
+        <translation>Blau gewinnt mit %L1 Punkten.</translation>
+    </message>
+    <message>
+        <source>Green wins (tie resolved).</source>
+        <translation>Grün gewinnt (Unentschieden aufgelöst).</translation>
     </message>
     <message>
         <source>Blue/Red wins with 1 point.</source>
@@ -593,34 +553,6 @@
         <translation>Spiel endet unentschieden zwischen Gelb, Rot und Grün.</translation>
     </message>
     <message>
-        <source>Clipboard is empty.</source>
-        <translation>Zwischenablage ist leer.</translation>
-    </message>
-    <message>
-        <source>Blue/Red</source>
-        <translation>Blau/Rot</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation>Blau</translation>
-    </message>
-    <message>
-        <source>Yellow/Green</source>
-        <translation>Gelb/Grün</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation>Grün</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation>Gelb</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation>Rot</translation>
-    </message>
-    <message>
         <source>Invalid Blokus SGF file. (%1)</source>
         <translation>Ungültige Blokus-SGF-Datei. (%1)</translation>
     </message>
@@ -629,46 +561,17 @@
         <translation>Datei hat nicht unterstützten Zeichensatz.</translation>
     </message>
     <message>
-        <source>Purple</source>
-        <translation>Lila</translation>
+        <source>Clipboard is empty.</source>
+        <translation>Zwischenablage ist leer.</translation>
     </message>
     <message>
-        <source>Orange</source>
-        <translation>Orange</translation>
+        <source>Untitled</source>
+        <translation>Unbenannt</translation>
     </message>
     <message>
-        <source>Purple wins with 1 point.</source>
-        <translation>Lila gewinnt mit 1 Punkt.</translation>
-    </message>
-    <message>
-        <source>Purple wins with %L1 points.</source>
-        <translation>Lila gewinnt mit %L1 Punkten.</translation>
-    </message>
-    <message>
-        <source>Orange wins with 1 point.</source>
-        <translation>Orange gewinnt mit 1 Punkt.</translation>
-    </message>
-    <message>
-        <source>Orange wins with %L1 points.</source>
-        <translation>Orange gewinnt mit %L1 Punkten.</translation>
-    </message>
-    <message>
-        <source>Untitled Game.blksgf</source>
-        <translation type="vanished">Unbenanntes Spiel.blksgf</translation>
-    </message>
-    <message>
-        <source>Untitled Game %1.blksgf</source>
+        <source>Untitled %1</source>
         <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation type="vanished">Unbenanntes Spiel %1.blksgf</translation>
-    </message>
-    <message>
-        <source>Untitled Game</source>
-        <translation type="vanished">Unbenanntes Spiel</translation>
-    </message>
-    <message>
-        <source>Untitled Game %1</source>
-        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation type="vanished">Unbenanntes Spiel %1</translation>
+        <translation>Unbenannt %1</translation>
     </message>
     <message>
         <source>New Folder</source>
@@ -680,21 +583,21 @@
         <translation>Neuer Ordner %1</translation>
     </message>
     <message>
-        <source>Untitled</source>
-        <translation>Unbenannt</translation>
+        <source>(Setup)</source>
+        <translation>(Stellung)</translation>
     </message>
     <message>
-        <source>Untitled %1</source>
-        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation>Unbenannt %1</translation>
+        <source>(No moves)</source>
+        <translation>(Keine Züge)</translation>
+    </message>
+    <message>
+        <source>Move %1</source>
+        <extracomment>The argument is the current move number.</extracomment>
+        <translation>Zug %1</translation>
     </message>
 </context>
 <context>
     <name>GameVariantDialog</name>
-    <message>
-        <source>Game Variant</source>
-        <translation type="vanished">Spielvariante</translation>
-    </message>
     <message>
         <source>Classic</source>
         <translation>Klassisch</translation>
@@ -735,10 +638,6 @@
 <context>
     <name>GotoMoveDialog</name>
     <message>
-        <source>Go to Move</source>
-        <translation type="vanished">Gehe zu Zug</translation>
-    </message>
-    <message>
         <source>Move number:</source>
         <translation>Zugnummer:</translation>
     </message>
@@ -757,10 +656,6 @@
         <translation>Grafik speichern</translation>
     </message>
     <message>
-        <source>PNG image files (*.png)</source>
-        <translation type="vanished">PNG-Bilddateien (*.png)</translation>
-    </message>
-    <message>
         <source>PNG image files</source>
         <translation>PNG-Bilddateien</translation>
     </message>
@@ -772,12 +667,12 @@
 <context>
     <name>InitialRatingDialog</name>
     <message>
-        <source>Initial Rating</source>
-        <translation type="vanished">Anfangswertung</translation>
+        <source>Initialize your rating for this game variant.</source>
+        <translation>Initialisieren Sie Ihre Wertung für diese Spielvariante.</translation>
     </message>
     <message>
-        <source>You have not yet played rated games in this game variant. Estimate your playing strength to initialize your rating.</source>
-        <translation type="vanished">Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt. Schätzen Sie Ihre Spielstärke, um Ihre Wertung zu initialisieren.</translation>
+        <source>Initial rating:</source>
+        <translation>Anfangswertung:</translation>
     </message>
     <message>
         <source>Beginner</source>
@@ -786,22 +681,6 @@
     <message>
         <source>Expert</source>
         <translation>Experte</translation>
-    </message>
-    <message>
-        <source>Your initial rating:</source>
-        <translation type="vanished">Ihre Anfangswertung:</translation>
-    </message>
-    <message>
-        <source>Estimate your playing strength to initialize your rating for this game variant.</source>
-        <translation type="vanished">Schätzen Sie Ihre Spielstärke, um Ihre Wertung für diese Spielvariante zu initialisieren.</translation>
-    </message>
-    <message>
-        <source>Initialize your rating for this game variant.</source>
-        <translation>Initialisieren Sie Ihre Wertung für diese Spielvariante.</translation>
-    </message>
-    <message>
-        <source>Initial rating:</source>
-        <translation>Anfangswertung:</translation>
     </message>
 </context>
 <context>
@@ -812,92 +691,24 @@
         <translation>Pentobi</translation>
     </message>
     <message>
-        <source>Open failed.</source>
-        <translation>Öffnen fehlgeschlagen.</translation>
-    </message>
-    <message>
-        <source>Save failed.</source>
-        <translation>Speichern fehlgeschlagen.</translation>
-    </message>
-    <message>
-        <source>Truncate this subtree?</source>
-        <translation>Diesen Teilbaum abschneiden?</translation>
-    </message>
-    <message>
-        <source>Truncate children?</source>
-        <translation>Kindknoten abschneiden?</translation>
-    </message>
-    <message>
-        <source>Delete all variations?</source>
-        <translation>Alle Varianten löschen?</translation>
-    </message>
-    <message>
-        <source>Version %1</source>
-        <translation type="vanished">Version %1</translation>
-    </message>
-    <message>
-        <source>Computer opponent for the board game Blokus.</source>
-        <translation type="vanished">Computer-Gegner für das Brettspiel Blokus.</translation>
-    </message>
-    <message>
-        <source>Keep only position?</source>
-        <translation>Nur Brettstellung behalten?</translation>
-    </message>
-    <message>
-        <source>Keep only subtree?</source>
-        <translation>Nur Teilbaum behalten?</translation>
-    </message>
-    <message>
-        <source>Saving image failed.</source>
-        <translation type="vanished">Grafik konnte nicht gespeichert werden.</translation>
-    </message>
-    <message>
-        <source>Creating image failed.</source>
-        <translation>Grafik konnte nicht erzeugt werden.</translation>
+        <source>Not enough memory.</source>
+        <translation>Nicht genügend Speicher.</translation>
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
         <translation>Spielanalyse ist nur in Hauptvariante möglich.</translation>
     </message>
     <message>
-        <source>File has been modified by another application. Reload?</source>
-        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Neu laden?</translation>
+        <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
+        <translation>Automatisch gespeichertes Spiel wurde von einer anderen Instanz von Pentobi geändert. Überschreiben?</translation>
     </message>
     <message>
-        <source>File has been modified by another application. Save anyway?</source>
-        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Trotzdem speichern?</translation>
+        <source>Game analysis aborted.</source>
+        <translation>Spielanalyse abgebrochen.</translation>
     </message>
     <message>
-        <source>End of tree was reached. Continue search from start of the tree?</source>
-        <translation>Ende des Spielbaums erreicht. Suche vom Start des Spielbaums fortsetzen?</translation>
-    </message>
-    <message>
-        <source>No comment found</source>
-        <translation>Kein Kommentar gefunden</translation>
-    </message>
-    <message>
-        <source>Start rated game with Blue/Red against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Blau/Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
-    </message>
-    <message>
-        <source>Start rated game with Blue against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Blau gegen Pentobi Spielstufe %1 beginnen?</translation>
-    </message>
-    <message>
-        <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Gelb/Grün gegen Pentobi Spielstufe %1 beginnen?</translation>
-    </message>
-    <message>
-        <source>Start rated game with Green against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Grün gegen Pentobi Spielstufe %1 beginnen?</translation>
-    </message>
-    <message>
-        <source>Start rated game with Yellow against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Gelb gegen Pentobi Spielstufe %1 beginnen?</translation>
-    </message>
-    <message>
-        <source>Start rated game with Red against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
+        <source>Computer move aborted.</source>
+        <translation>Computer-Zug abgebrochen.</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
@@ -912,6 +723,10 @@
         <translation>Ihre Wertung bleibt bei %1.</translation>
     </message>
     <message>
+        <source>No permission to access storage</source>
+        <translation>Keine Berechtigung zu Zugriff auf Speicher</translation>
+    </message>
+    <message>
         <source>Delete all rating information for the current game variant?</source>
         <translation>Alle Wertungsinformationen für die gegenwärtige Spielvariante löschen?</translation>
     </message>
@@ -920,88 +735,52 @@
         <translation>Wertungsinformationen gelöscht.</translation>
     </message>
     <message>
-        <source>File saved.</source>
-        <translation>Datei gespeichert.</translation>
-    </message>
-    <message>
-        <source>Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</source>
-        <translation type="vanished">Copyright 2011-%1 Markus&amp;nbsp;Enzenberger</translation>
-    </message>
-    <message>
-        <source>Game analysis aborted.</source>
-        <translation>Spielanalyse abgebrochen.</translation>
-    </message>
-    <message>
-        <source>Computer move aborted.</source>
-        <translation>Computer-Zug abgebrochen.</translation>
+        <source>Delete all variations?</source>
+        <translation>Alle Varianten löschen?</translation>
     </message>
     <message>
         <source>Variations deleted.</source>
         <translation>Varianten gelöscht.</translation>
     </message>
     <message>
+        <source>Save failed.</source>
+        <translation>Speichern fehlgeschlagen.</translation>
+    </message>
+    <message>
+        <source>File saved.</source>
+        <translation>Datei gespeichert.</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format.</source>
+        <translation>Grafik konnte nicht gespeichert werden oder Bildformat nicht unterstützt.</translation>
+    </message>
+    <message>
         <source>Image saved.</source>
         <translation>Grafik gespeichert.</translation>
     </message>
     <message>
-        <source>Kept only position.</source>
-        <translation>Nur Brettstellung behalten.</translation>
+        <source>Creating image failed.</source>
+        <translation>Grafik konnte nicht erzeugt werden.</translation>
     </message>
     <message>
-        <source>Kept only subtree.</source>
-        <translation>Nur Teilbaum behalten.</translation>
+        <source>End of tree was reached. Continue search from start of the tree?</source>
+        <translation>Ende des Spielbaums erreicht. Suche vom Start des Spielbaums fortsetzen?</translation>
     </message>
     <message>
-        <source>Children truncated.</source>
-        <translation>Kindknoten abgeschnitten.</translation>
-    </message>
-    <message>
-        <source>Variation is now %1.</source>
-        <translation>Variante ist jetzt %1.</translation>
-    </message>
-    <message>
-        <source>Discard game?</source>
-        <translation>Spiel verwerfen?</translation>
-    </message>
-    <message>
-        <source>File was deleted by another application.</source>
-        <translation>Datei wurde von einer anderen Anwendung gelöscht.</translation>
-    </message>
-    <message>
-        <source>Start rated game with Purple against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Lila gegen Pentobi Spielstufe %1 beginnen?</translation>
-    </message>
-    <message>
-        <source>Start rated game with Orange against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Orange gegen Pentobi Spielstufe %1 beginnen?</translation>
-    </message>
-    <message>
-        <source>Not enough memory.</source>
-        <translation>Nicht genügend Speicher.</translation>
+        <source>No comment found</source>
+        <translation>Kein Kommentar gefunden</translation>
     </message>
     <message>
         <source>%1 (modified)</source>
         <translation>%1 (geändert)</translation>
     </message>
     <message>
-        <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
-        <translation>Automatisch gespeichertes Spiel wurde von einer anderen Instanz von Pentobi geändert. Überschreiben?</translation>
+        <source>File was deleted by another application.</source>
+        <translation>Datei wurde von einer anderen Anwendung gelöscht.</translation>
     </message>
     <message>
-        <source>You have not yet played rated games in this game variant.</source>
-        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
-    </message>
-    <message>
-        <source>No permission to access storage</source>
-        <translation>Keine Berechtigung zu Zugriff auf Speicher</translation>
-    </message>
-    <message>
-        <source>File was deleted by another application. Discard game?</source>
-        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Spiel verwerfen?</translation>
-    </message>
-    <message>
-        <source>Saving image failed or unsupported image format.</source>
-        <translation>Grafik konnte nicht gespeichert werden oder Bildformat nicht unterstützt.</translation>
+        <source>File has been modified by another application. Reload?</source>
+        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Neu laden?</translation>
     </message>
     <message>
         <source>Continuing rated game.</source>
@@ -1011,14 +790,93 @@
         <source>Continue computer move?</source>
         <translation>Computer-Zug fortsetzen?</translation>
     </message>
+    <message>
+        <source>Keep only position?</source>
+        <translation>Nur Brettstellung behalten?</translation>
+    </message>
+    <message>
+        <source>Kept only position.</source>
+        <translation>Nur Brettstellung behalten.</translation>
+    </message>
+    <message>
+        <source>Keep only subtree?</source>
+        <translation>Nur Teilbaum behalten?</translation>
+    </message>
+    <message>
+        <source>Kept only subtree.</source>
+        <translation>Nur Teilbaum behalten.</translation>
+    </message>
+    <message>
+        <source>Open failed.</source>
+        <translation>Öffnen fehlgeschlagen.</translation>
+    </message>
+    <message>
+        <source>Start rated game with Purple against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Lila gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Green against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Grün gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue/Red against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Blau/Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Blau gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Orange against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Orange gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Gelb/Grün gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Gelb gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Red against Pentobi level %1?</source>
+        <translation>Gewertetes Spiel mit Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
+    </message>
+    <message>
+        <source>You have not yet played rated games in this game variant.</source>
+        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Save anyway?</source>
+        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Trotzdem speichern?</translation>
+    </message>
+    <message>
+        <source>Variation is now %1.</source>
+        <translation>Variante ist jetzt %1.</translation>
+    </message>
+    <message>
+        <source>Truncate this subtree?</source>
+        <translation>Diesen Teilbaum abschneiden?</translation>
+    </message>
+    <message>
+        <source>Truncate children?</source>
+        <translation>Kindknoten abschneiden?</translation>
+    </message>
+    <message>
+        <source>Children truncated.</source>
+        <translation>Kindknoten abgeschnitten.</translation>
+    </message>
+    <message>
+        <source>Discard game?</source>
+        <translation>Spiel verwerfen?</translation>
+    </message>
+    <message>
+        <source>File was deleted by another application. Discard game?</source>
+        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Spiel verwerfen?</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
-    <message>
-        <source>P</source>
-        <extracomment>Mnemonic for menu item Play. Leave empty for no mnemonic.</extracomment>
-        <translation>S</translation>
-    </message>
     <message>
         <source>Computer</source>
         <translation>Computer</translation>
@@ -1026,34 +884,31 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu Computer. Leave empty for no mnemonic.</extracomment>
-        <translation>C</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <extracomment>Mnemonic for menu item Play Move. Leave empty for no mnemonic.</extracomment>
-        <translation>Z</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="vanished">Stopp</translation>
+        <translation>L</translation>
     </message>
     <message>
         <source>S</source>
         <extracomment>Mnemonic for menu item Computer Settings. Leave empty for no mnemonic.</extracomment>
         <translation>E</translation>
     </message>
+    <message>
+        <source>P</source>
+        <extracomment>Mnemonic for menu item Play. Leave empty for no mnemonic.</extracomment>
+        <translation>S</translation>
+    </message>
+    <message>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Play Move. Leave empty for no mnemonic.</extracomment>
+        <translation>G</translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
+        <translation>O</translation>
+    </message>
 </context>
 <context>
     <name>MenuEdit</name>
-    <message>
-        <source>Made main variation.</source>
-        <translation>Zu Hauptvariante gemacht.</translation>
-    </message>
     <message>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
@@ -1064,28 +919,32 @@
         <translation>B</translation>
     </message>
     <message>
+        <source>M</source>
+        <extracomment>Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
+        <translation>G</translation>
+    </message>
+    <message>
         <source>Make Main Variation</source>
         <translation>Zu Hauptvariante machen</translation>
     </message>
     <message>
-        <source>M</source>
-        <extracomment>Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.
-----------
-Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
-        <translation>M</translation>
+        <source>Made main variation.</source>
+        <translation>Zu Hauptvariante gemacht.</translation>
     </message>
     <message>
-        <source>Move Variation Up</source>
-        <translation type="vanished">Variante nach oben schieben</translation>
+        <source>Variation Up</source>
+        <extracomment>Short for Move Variation Up</extracomment>
+        <translation>Variante nach oben</translation>
     </message>
     <message>
         <source>U</source>
         <extracomment>Mnemonic for menu item Variation Up. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>R</translation>
     </message>
     <message>
-        <source>Move Variation Down</source>
-        <translation type="vanished">Variante nach unten schieben</translation>
+        <source>Variation Down</source>
+        <extracomment>Short for Move Variation Down</extracomment>
+        <translation>Variante nach unten</translation>
     </message>
     <message>
         <source>W</source>
@@ -1093,8 +952,8 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <translation>U</translation>
     </message>
     <message>
-        <source>Delete All Variations</source>
-        <translation type="vanished">Alle Varianten löschen</translation>
+        <source>Delete Variations</source>
+        <translation>Varianten löschen</translation>
     </message>
     <message>
         <source>D</source>
@@ -1117,29 +976,34 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Truncate Children. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
+        <translation>L</translation>
     </message>
     <message>
-        <source>Keep Only Position</source>
-        <translation type="vanished">Nur Brettstellung behalten</translation>
+        <source>Keep Position</source>
+        <translation>Brettstellung behalten</translation>
     </message>
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu item Keep Position. Leave empty for no mnemonic.</extracomment>
-        <translation>B</translation>
+        <translation>S</translation>
     </message>
     <message>
-        <source>Keep Only Subtree</source>
-        <translation type="vanished">Nur Teilbaum behalten</translation>
+        <source>Keep Subtree</source>
+        <translation>Teilbaum behalten</translation>
     </message>
     <message>
         <source>S</source>
         <extracomment>Mnemonic for menu item Keep Subtree. Leave empty for no mnemonic.</extracomment>
-        <translation>T</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>Setup Mode</source>
         <translation>Stellungsaufbau</translation>
+    </message>
+    <message>
+        <source>O</source>
+        <extracomment>Mnemonic for menu item Setup Mode. Leave empty for no mnemonic.</extracomment>
+        <translation>O</translation>
     </message>
     <message>
         <source>Next Color</source>
@@ -1151,35 +1015,13 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <translation>N</translation>
     </message>
     <message>
-        <source>O</source>
-        <extracomment>Mnemonic for menu item Setup Mode. Leave empty for no mnemonic.</extracomment>
-        <translation>E</translation>
+        <source>Annotation...</source>
+        <translation>Annotierung …</translation>
     </message>
     <message>
-        <source>Move Annotation...</source>
-        <translation>Zugkommentierung …</translation>
-    </message>
-    <message>
-        <source>Keep Position</source>
-        <translation>Brettstellung behalten</translation>
-    </message>
-    <message>
-        <source>Keep Subtree</source>
-        <translation>Teilbaum behalten</translation>
-    </message>
-    <message>
-        <source>Variation Up</source>
-        <extracomment>Short for Move Variation Up</extracomment>
-        <translation>Variante nach oben</translation>
-    </message>
-    <message>
-        <source>Variation Down</source>
-        <extracomment>Short for Move Variation Down</extracomment>
-        <translation>Variante nach unten</translation>
-    </message>
-    <message>
-        <source>Delete Variations</source>
-        <translation>Varianten löschen</translation>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -1191,7 +1033,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>E</source>
         <extracomment>Mnemonic for menu Export. Leave empty for no mnemonic.</extracomment>
-        <translation>E</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>Image</source>
@@ -1219,21 +1061,6 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <translation>Spiel</translation>
     </message>
     <message>
-        <source>R</source>
-        <extracomment>Mnemonic for menu item Rated Game. Leave empty for no mnemonic.</extracomment>
-        <translation>W</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Mnemonic for menu item Open Clipboard. Leave empty for no mnemonic.</extracomment>
-        <translation>Z</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <extracomment>Mnemonic for menu item Save As. Leave empty for no mnemonic.</extracomment>
-        <translation>U</translation>
-    </message>
-    <message>
         <source>G</source>
         <extracomment>Mnemonic for menu Game. Leave empty for no mnemonic.</extracomment>
         <translation>S</translation>
@@ -1242,6 +1069,24 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>N</source>
         <extracomment>Mnemonic for menu item New. Leave empty for no mnemonic.</extracomment>
         <translation>N</translation>
+    </message>
+    <message>
+        <source>R</source>
+        <extracomment>Mnemonic for menu item Rated Game. Leave empty for no mnemonic.</extracomment>
+        <translation>W</translation>
+    </message>
+    <message>
+        <source>Game Variant...</source>
+        <translation>Spielvariante …</translation>
+    </message>
+    <message>
+        <source>V</source>
+        <extracomment>Mnemonic for menu item Game Variant. Leave empty for no mnemonic.</extracomment>
+        <translation>V</translation>
+    </message>
+    <message>
+        <source>Game Info</source>
+        <translation>Spielinformation</translation>
     </message>
     <message>
         <source>I</source>
@@ -1256,57 +1101,36 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>F</source>
         <extracomment>Mnemonic for menu item Find Move. Leave empty for no mnemonic.</extracomment>
-        <translation>U</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>O</source>
         <extracomment>Mnemonic for menu item Open. Leave empty for no mnemonic.</extracomment>
-        <translation>F</translation>
+        <translation>O</translation>
     </message>
     <message>
-        <source>Open Recent</source>
-        <translation type="vanished">Zuletzt benutzte Dateien</translation>
+        <source>Open Clipboard</source>
+        <translation>Zwischenablage öffnen</translation>
     </message>
     <message>
-        <source>Open from Clipboard</source>
-        <translation type="vanished">Aus Zwischenablage öffnen</translation>
-    </message>
-    <message>
-        <source>P</source>
-        <extracomment>Mnemonic for menu Open Recent. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">B</translation>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item Open Clipboard. Leave empty for no mnemonic.</extracomment>
+        <translation>L</translation>
     </message>
     <message>
         <source>S</source>
         <extracomment>Mnemonic for menu item Save. Leave empty for no mnemonic.</extracomment>
-        <translation>S</translation>
+        <translation>E</translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Save As. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
     </message>
     <message>
         <source>Q</source>
         <extracomment>Mnemonic for menu item Quit. Leave empty for no mnemonic.</extracomment>
         <translation>B</translation>
-    </message>
-    <message>
-        <source>V</source>
-        <extracomment>Mnemonic for menu item Game Variant. Leave empty for no mnemonic.</extracomment>
-        <translation></translation>
-    </message>
-    <message>
-        <source>Game Variant...</source>
-        <translation>Spielvariante …</translation>
-    </message>
-    <message>
-        <source>%1. %2</source>
-        <extracomment>Format in recent files menu. First argument is the file number, second argument the file name.</extracomment>
-        <translation type="vanished">%1. %2</translation>
-    </message>
-    <message>
-        <source>Game Info</source>
-        <translation>Spielinformation</translation>
-    </message>
-    <message>
-        <source>Open Clipboard</source>
-        <translation>Zwischenablage öffnen</translation>
     </message>
 </context>
 <context>
@@ -1318,17 +1142,17 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>O</source>
         <extracomment>Mnemonic for menu Go. Leave empty for no mnemonic.</extracomment>
-        <translation>G</translation>
+        <translation>O</translation>
     </message>
     <message>
-        <source>G</source>
-        <extracomment>Mnemonic for menu item Go to Move. Leave empty for no mnemonic.</extracomment>
-        <translation type="vanished">G</translation>
+        <source>N</source>
+        <extracomment>Mnemonic for menu item Go/Move Number. Leave empty for no mnemonic.</extracomment>
+        <translation>N</translation>
     </message>
     <message>
         <source>M</source>
         <extracomment>Mnemonic for menu item Back to Main Variation. Leave empty for no mnemonic.</extracomment>
-        <translation>H</translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>B</source>
@@ -1338,12 +1162,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Next Comment. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
-    </message>
-    <message>
-        <source>N</source>
-        <extracomment>Mnemonic for menu item Go/Move Number. Leave empty for no mnemonic.</extracomment>
-        <translation>Z</translation>
+        <translation>L</translation>
     </message>
 </context>
 <context>
@@ -1360,7 +1179,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu item Pentobi Help. Leave empty for no mnemonic.</extracomment>
-        <translation>H</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>About Pentobi</source>
@@ -1369,7 +1188,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.</extracomment>
-        <translation>P</translation>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -1394,7 +1213,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu Open Recent. Leave empty for no mnemonic.</extracomment>
-        <translation>B</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>%1. %2</source>
@@ -1421,7 +1240,11 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>T</source>
         <extracomment>Mnemonic for menu Tools. Leave empty for no mnemonic.</extracomment>
-        <translation>E</translation>
+        <translation>A</translation>
+    </message>
+    <message>
+        <source>Rating</source>
+        <translation>Wertung</translation>
     </message>
     <message>
         <source>R</source>
@@ -1435,7 +1258,7 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Clear Rating. Leave empty for no mnemonic.</extracomment>
-        <translation>E</translation>
+        <translation>L</translation>
     </message>
     <message>
         <source>Analyze Game</source>
@@ -1447,26 +1270,22 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <translation>A</translation>
     </message>
     <message>
-        <source>Clear Analysis</source>
-        <translation>Analyse löschen</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <extracomment>Mnemonic for menu item Clear Analysis. Leave empty for no mnemonic.</extracomment>
-        <translation>N</translation>
-    </message>
-    <message>
         <source>Abort Analysis</source>
         <translation>Analyse abbrechen</translation>
     </message>
     <message>
         <source>O</source>
         <extracomment>Mnemonic for menu item Abort Analysis. Leave empty for no mnemonic.</extracomment>
-        <translation>B</translation>
+        <translation>O</translation>
     </message>
     <message>
-        <source>Rating</source>
-        <translation>Wertung</translation>
+        <source>Clear Analysis</source>
+        <translation>Analyse löschen</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <extracomment>Mnemonic for menu item Clear Analysis. Leave empty for no mnemonic.</extracomment>
+        <translation>B</translation>
     </message>
 </context>
 <context>
@@ -1478,28 +1297,28 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>V</source>
         <extracomment>Mnemonic for menu View. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
+        <translation>V</translation>
+    </message>
+    <message>
+        <source>Appearance...</source>
+        <translation>Erscheinungsbild …</translation>
     </message>
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu Appearance. Leave empty for no mnemonic.</extracomment>
-        <translation>E</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>F</source>
         <extracomment>Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.</extracomment>
         <translation>B</translation>
     </message>
-    <message>
-        <source>Appearance...</source>
-        <translation>Erscheinungsbild …</translation>
-    </message>
 </context>
 <context>
     <name>MoveAnnotationDialog</name>
     <message>
-        <source>Move Annotation</source>
-        <translation type="vanished">Zugkommentierung</translation>
+        <source>Move %1</source>
+        <translation>Zug %1</translation>
     </message>
     <message>
         <source>Annotation:</source>
@@ -1533,10 +1352,6 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>Very Bad</source>
         <translation>Sehr schlecht</translation>
     </message>
-    <message>
-        <source>Move %1</source>
-        <translation>Zug %1</translation>
-    </message>
 </context>
 <context>
     <name>NewFolderDialog</name>
@@ -1552,10 +1367,6 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <translation>Öffnen</translation>
     </message>
     <message>
-        <source>Blokus games (*.blksgf)</source>
-        <translation type="vanished">Blokus-Partien (*.blksgf)</translation>
-    </message>
-    <message>
         <source>Blokus games</source>
         <translation>Blokus-Partien</translation>
     </message>
@@ -1563,76 +1374,12 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
 <context>
     <name>RatingDialog</name>
     <message>
-        <source>Rating</source>
-        <extracomment>Window title for the rating dialog.</extracomment>
-        <translation type="vanished">Wertung</translation>
-    </message>
-    <message>
         <source>Your rating:</source>
         <translation>Ihre Wertung:</translation>
     </message>
     <message>
-        <source>Best previous rating:</source>
-        <translation>Beste frühere Wertung:</translation>
-    </message>
-    <message>
-        <source>Duo</source>
-        <translation>Duo</translation>
-    </message>
-    <message>
-        <source>Junior</source>
-        <translation>Junior</translation>
-    </message>
-    <message>
         <source>Game variant:</source>
         <translation>Spielvariante:</translation>
-    </message>
-    <message>
-        <source>Rated games:</source>
-        <translation>Gewertete Spiele:</translation>
-    </message>
-    <message>
-        <source>Game</source>
-        <translation>Spiel</translation>
-    </message>
-    <message>
-        <source>Your Color</source>
-        <translation>Ihre Farbe</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <translation>Stufe</translation>
-    </message>
-    <message>
-        <source>Result</source>
-        <translation>Ergebnis</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Datum</translation>
-    </message>
-    <message>
-        <source>Win</source>
-        <extracomment>Result of rated game is a win</extracomment>
-        <translation>Gewinn</translation>
-    </message>
-    <message>
-        <source>Loss</source>
-        <extracomment>Result of rated game is a loss</extracomment>
-        <translation>Verlust</translation>
-    </message>
-    <message>
-        <source>Tie</source>
-        <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
-        <translation>Unentsch.</translation>
-    </message>
-    <message>
-        <source>Recent development:</source>
-        <translation>Aktuelle Entwicklung:</translation>
-    </message>
-    <message>
-        <source>Open Game %1</source>
-        <translation>Spiel %1 öffnen</translation>
     </message>
     <message>
         <source>Classic (2)</source>
@@ -1648,6 +1395,14 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <source>Classic (4)</source>
         <extracomment>Short for Classic (4 players)</extracomment>
         <translation>Klassisch (4)</translation>
+    </message>
+    <message>
+        <source>Duo</source>
+        <translation>Duo</translation>
+    </message>
+    <message>
+        <source>Junior</source>
+        <translation>Junior</translation>
     </message>
     <message>
         <source>Trigon (2)</source>
@@ -1714,20 +1469,63 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <extracomment>Short for GembloQ (3 players)</extracomment>
         <translation>GembloQ (3)</translation>
     </message>
+    <message>
+        <source>Rated games:</source>
+        <translation>Gewertete Spiele:</translation>
+    </message>
+    <message>
+        <source>Best previous rating:</source>
+        <translation>Beste frühere Wertung:</translation>
+    </message>
+    <message>
+        <source>Recent development:</source>
+        <translation>Aktuelle Entwicklung:</translation>
+    </message>
+    <message>
+        <source>Game</source>
+        <translation>Spiel</translation>
+    </message>
+    <message>
+        <source>Result</source>
+        <translation>Ergebnis</translation>
+    </message>
+    <message>
+        <source>Win</source>
+        <extracomment>Result of rated game is a win</extracomment>
+        <translation>Gewinn</translation>
+    </message>
+    <message>
+        <source>Loss</source>
+        <extracomment>Result of rated game is a loss</extracomment>
+        <translation>Verlust</translation>
+    </message>
+    <message>
+        <source>Tie</source>
+        <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
+        <translation>Unentsch.</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation>Stufe</translation>
+    </message>
+    <message>
+        <source>Your Color</source>
+        <translation>Ihre Farbe</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <source>Open Game %1</source>
+        <translation>Spiel %1 öffnen</translation>
+    </message>
 </context>
 <context>
     <name>SaveDialog</name>
     <message>
         <source>Save</source>
         <translation>Speichern</translation>
-    </message>
-    <message>
-        <source>Blokus games (*.blksgf)</source>
-        <translation type="vanished">Blokus-Partien (*.blksgf)</translation>
-    </message>
-    <message>
-        <source>Overwrite existing file?</source>
-        <translation type="vanished">Existierende Datei überschreiben?</translation>
     </message>
     <message>
         <source>Blokus games</source>
@@ -1737,12 +1535,20 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
 <context>
     <name>ToolBar</name>
     <message>
+        <source>Setup</source>
+        <translation>Aufbau</translation>
+    </message>
+    <message>
         <source>Rated</source>
         <translation>Gewertet</translation>
     </message>
     <message>
         <source>Start a new game</source>
         <translation>Ein neues Spiel beginnen</translation>
+    </message>
+    <message>
+        <source>Start a rated game</source>
+        <translation>Ein gewertetes Spiel beginnen</translation>
     </message>
     <message>
         <source>Set the colors played by the computer</source>
@@ -1761,12 +1567,20 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <translation>Zum Anfang des Spiels gehen</translation>
     </message>
     <message>
+        <source>Go ten moves backward</source>
+        <translation>Zehn Züge zurück gehen</translation>
+    </message>
+    <message>
         <source>Go one move backward</source>
         <translation>Einen Zug zurück gehen</translation>
     </message>
     <message>
         <source>Go one move forward</source>
         <translation>Einen Zug vorwärts gehen</translation>
+    </message>
+    <message>
+        <source>Go ten moves forward</source>
+        <translation>Zehn Züge vorwärts gehen</translation>
     </message>
     <message>
         <source>Go to end of moves</source>
@@ -1781,28 +1595,12 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
         <translation>Zur nächsten Variante gehen</translation>
     </message>
     <message>
-        <source>Go ten moves backward</source>
-        <translation>Zehn Züge zurück gehen</translation>
-    </message>
-    <message>
-        <source>Go ten moves forward</source>
-        <translation>Zehn Züge vorwärts gehen</translation>
-    </message>
-    <message>
-        <source>Setup</source>
-        <translation>Aufbau</translation>
-    </message>
-    <message>
         <source>Setup mode</source>
         <translation>Stellungsaufbau</translation>
     </message>
     <message>
         <source>Rated game</source>
         <translation>Gewertetes Spiel</translation>
-    </message>
-    <message>
-        <source>Start a rated game</source>
-        <translation>Ein gewertetes Spiel beginnen</translation>
     </message>
 </context>
 </TS>
