@@ -98,7 +98,7 @@ class RatingModel
     Q_PROPERTY(double rating READ rating NOTIFY ratingChanged)
 
 public:
-    explicit RatingModel(QObject* parent = nullptr);
+    using QObject::QObject;
 
 
     Q_INVOKABLE void addResult(GameModel* gameModel, int level);

@@ -38,11 +38,6 @@ RatedGameInfo::RatedGameInfo(QObject* parent, int number, int color,
 
 //-----------------------------------------------------------------------------
 
-RatingModel::RatingModel(QObject* parent)
-    : QObject(parent)
-{
-}
-
 void RatingModel::addResult(GameModel* gameModel, int level)
 {
     Variant variant;
