@@ -921,14 +921,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Move Annotation...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.
-----------
-Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1020,6 +1014,15 @@ Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extrac
     <message>
         <source>N</source>
         <extracomment>Mnemonic for menu item Next Color. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Annotation...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
