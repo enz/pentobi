@@ -61,7 +61,8 @@ endif()
 
 target_compile_definitions(pentobi PRIVATE
     -DQT_DEPRECATED_WARNINGS
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x051100)
+    -DQT_DISABLE_DEPRECATED_BEFORE=0x051100
+    -DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
 
 target_link_libraries(pentobi
     pentobi_mcts

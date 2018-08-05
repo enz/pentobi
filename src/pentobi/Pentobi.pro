@@ -13,7 +13,7 @@ equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 11) {
 
 TEMPLATE = app
 
-QT += qml quick svg concurrent webview quickcontrols2
+QT += concurrent quickcontrols2 svg webview
 android {
     QT += androidextras
 }
@@ -23,6 +23,7 @@ CONFIG += c++14
 CONFIG += qtquickcompiler
 DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x051100
+DEFINES += QT_NO_NARROWING_CONVERSIONS_IN_CONNECT
 DEFINES += VERSION=\"\\\"15.UNKNOWN\\\"\"
 android {
     DEFINES += PENTOBI_LOW_RESOURCES
