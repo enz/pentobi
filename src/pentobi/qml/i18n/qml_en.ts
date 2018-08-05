@@ -130,10 +130,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Animate pieces</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Theme:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -177,6 +173,10 @@
     <message>
         <source>None</source>
         <extracomment>Move marking/None</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Animations</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

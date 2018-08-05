@@ -128,10 +128,6 @@
         <translation>Afficher les variations</translation>
     </message>
     <message>
-        <source>Animate pieces</source>
-        <translation>Animer les pièces</translation>
-    </message>
-    <message>
         <source>Theme:</source>
         <translation>Thème :</translation>
     </message>
@@ -176,6 +172,10 @@
         <source>None</source>
         <extracomment>Move marking/None</extracomment>
         <translation>Aucune</translation>
+    </message>
+    <message>
+        <source>Animations</source>
+        <translation>Animations</translation>
     </message>
 </context>
 <context>

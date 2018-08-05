@@ -110,7 +110,7 @@ Pentobi.Dialog {
             CheckBox {
                 id: checkBoxAnimatePieces
 
-                text: qsTr("Animate pieces")
+                text: qsTr("Animations")
             }
             Label { text: qsTr("Theme:") }
             ComboBox {
