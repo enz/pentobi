@@ -65,7 +65,7 @@ QtObject {
     property Action computerSettings: Action {
         shortcut: "Ctrl+U"
         //: Menu item Computer/Settings
-        text: qsTr("Settings...")
+        text: qsTr("Settings…")
         onTriggered: computerDialog.open()
     }
     property Action end: Action {
@@ -122,7 +122,7 @@ QtObject {
     }
     property Action gotoMove: Action {
         shortcut: "Ctrl+G"
-        text: qsTr("Move Number...")
+        text: qsTr("Move Number…")
         enabled: ! isRated && (gameModel.moveNumber + gameModel.movesLeft >= 1)
         onTriggered: gotoMoveDialog.open()
     }
@@ -193,7 +193,7 @@ QtObject {
     }
     property Action open: Action {
         shortcut: "Ctrl+O"
-        text: qsTr("Open...")
+        text: qsTr("Open…")
         onTriggered: Logic.open()
     }
     property Action openMenu: Action {
@@ -244,7 +244,7 @@ QtObject {
     }
     property Action saveAs: Action {
         shortcut: "Ctrl+Shift+S"
-        text: qsTr("Save As...")
+        text: qsTr("Save As…")
         enabled: ! gameModel.isGameEmpty
         onTriggered: Logic.saveAs()
     }

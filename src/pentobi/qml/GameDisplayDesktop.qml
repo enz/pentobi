@@ -67,11 +67,11 @@ Item
         showStatus(text)
         messageTimer.restart()
     }
-    function startSearch() { showStatus(qsTr("Computer is thinking...")) }
+    function startSearch() { showStatus(qsTr("Computer is thinking…")) }
     function endSearch() { if (! messageTimer.running) clearStatus() }
     function startAnalysis() {
         pageIndicator.currentIndex = 1
-        showStatus(qsTr("Running game analysis..."))
+        showStatus(qsTr("Running game analysis…"))
     }
     function endAnalysis() { if (! messageTimer.running) clearStatus() }
     function searchCallback(elapsedSeconds, remainingSeconds) {
@@ -84,13 +84,13 @@ Item
         var seconds = Math.ceil(remainingSeconds);
         if (seconds < 90)
             text =
-                qsTr("Computer is thinking... (up to %1 seconds remaining)")
+                qsTr("Computer is thinking… (up to %1 seconds remaining)")
                 .arg(seconds);
         else
         {
             var minutes = Math.ceil(remainingSeconds / 60);
             text =
-                qsTr("Computer is thinking... (up to %1 minutes remaining)")
+                qsTr("Computer is thinking… (up to %1 minutes remaining)")
                 .arg(minutes);
         }
         showStatus(text)

@@ -25,7 +25,7 @@
         <translation>Verzweigungsanfang</translation>
     </message>
     <message>
-        <source>Settings...</source>
+        <source>Settings…</source>
         <extracomment>Menu item Computer/Settings</extracomment>
         <translation>Einstellungen …</translation>
     </message>
@@ -42,7 +42,7 @@
         <translation>Vollbild</translation>
     </message>
     <message>
-        <source>Move Number...</source>
+        <source>Move Number…</source>
         <translation>Zugnummer …</translation>
     </message>
     <message>
@@ -58,8 +58,8 @@
         <translation>Gewertetes Spiel</translation>
     </message>
     <message>
-        <source>Open...</source>
-        <translation>Öffnen ...</translation>
+        <source>Open…</source>
+        <translation>Öffnen …</translation>
     </message>
     <message>
         <source>Play</source>
@@ -79,8 +79,8 @@
         <translation>Speichern</translation>
     </message>
     <message>
-        <source>Save As...</source>
-        <translation>Speichern unter ...</translation>
+        <source>Save As…</source>
+        <translation>Speichern unter …</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -335,19 +335,19 @@
 <context>
     <name>GameDisplayDesktop</name>
     <message>
-        <source>Computer is thinking...</source>
+        <source>Computer is thinking…</source>
         <translation>Computer denkt …</translation>
     </message>
     <message>
-        <source>Running game analysis...</source>
+        <source>Running game analysis…</source>
         <translation>Spiel wird analysiert …</translation>
     </message>
     <message>
-        <source>Computer is thinking... (up to %1 seconds remaining)</source>
+        <source>Computer is thinking… (up to %1 seconds remaining)</source>
         <translation>Computer denkt … (maximal %1 Sekunden verbleibend)</translation>
     </message>
     <message>
-        <source>Computer is thinking... (up to %1 minutes remaining)</source>
+        <source>Computer is thinking… (up to %1 minutes remaining)</source>
         <translation>Computer denkt … (maximal %1 Minuten verbleibend)</translation>
     </message>
 </context>
@@ -1015,7 +1015,7 @@
         <translation>N</translation>
     </message>
     <message>
-        <source>Annotation...</source>
+        <source>Annotation…</source>
         <translation>Annotierung …</translation>
     </message>
     <message>
@@ -1076,7 +1076,7 @@
         <translation>W</translation>
     </message>
     <message>
-        <source>Game Variant...</source>
+        <source>Game Variant…</source>
         <translation>Spielvariante …</translation>
     </message>
     <message>
@@ -1300,7 +1300,7 @@
         <translation>V</translation>
     </message>
     <message>
-        <source>Appearance...</source>
+        <source>Appearance…</source>
         <translation>Erscheinungsbild …</translation>
     </message>
     <message>

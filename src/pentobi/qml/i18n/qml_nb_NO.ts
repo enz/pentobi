@@ -25,7 +25,7 @@
         <translation>Begynnelse av forgreining</translation>
     </message>
     <message>
-        <source>Settings...</source>
+        <source>Settings…</source>
         <extracomment>Menu item Computer/Settings</extracomment>
         <translation type="unfinished"/>
     </message>
@@ -42,7 +42,7 @@
         <translation>Fullskjermsvisning</translation>
     </message>
     <message>
-        <source>Move Number...</source>
+        <source>Move Number…</source>
         <translation>Trekknummer…</translation>
     </message>
     <message>
@@ -58,7 +58,7 @@
         <translation>Vurdert spill</translation>
     </message>
     <message>
-        <source>Open...</source>
+        <source>Open…</source>
         <translation>Åpne…</translation>
     </message>
     <message>
@@ -79,7 +79,7 @@
         <translation>Lagre</translation>
     </message>
     <message>
-        <source>Save As...</source>
+        <source>Save As…</source>
         <translation>Lagre som…</translation>
     </message>
     <message>
@@ -335,19 +335,19 @@
 <context>
     <name>GameDisplayDesktop</name>
     <message>
-        <source>Computer is thinking...</source>
+        <source>Computer is thinking…</source>
         <translation>Datamaskinen tenker…</translation>
     </message>
     <message>
-        <source>Running game analysis...</source>
+        <source>Running game analysis…</source>
         <translation>Kjører spillanalyse…</translation>
     </message>
     <message>
-        <source>Computer is thinking... (up to %1 seconds remaining)</source>
+        <source>Computer is thinking… (up to %1 seconds remaining)</source>
         <translation>Datamaskinen tenker… (opptil %1 sekunder gjenstår)</translation>
     </message>
     <message>
-        <source>Computer is thinking... (up to %1 minutes remaining)</source>
+        <source>Computer is thinking… (up to %1 minutes remaining)</source>
         <translation>Datamaskinen tenker… (opptil %1 minutter gjenstår)</translation>
     </message>
 </context>
@@ -1015,7 +1015,7 @@
         <translation>N</translation>
     </message>
     <message>
-        <source>Annotation...</source>
+        <source>Annotation…</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1076,7 +1076,7 @@
         <translation>U</translation>
     </message>
     <message>
-        <source>Game Variant...</source>
+        <source>Game Variant…</source>
         <translation>Spillvariant…</translation>
     </message>
     <message>
@@ -1300,7 +1300,7 @@
         <translation>V</translation>
     </message>
     <message>
-        <source>Appearance...</source>
+        <source>Appearance…</source>
         <translation type="unfinished"/>
     </message>
     <message>

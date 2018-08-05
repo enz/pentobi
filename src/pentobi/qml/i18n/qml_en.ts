@@ -27,7 +27,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings...</source>
+        <source>Settings…</source>
         <extracomment>Menu item Computer/Settings</extracomment>
         <translation type="unfinished"></translation>
     </message>
@@ -44,7 +44,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Move Number...</source>
+        <source>Move Number…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -60,7 +60,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open...</source>
+        <source>Open…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -81,7 +81,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save As...</source>
+        <source>Save As…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -337,19 +337,19 @@
 <context>
     <name>GameDisplayDesktop</name>
     <message>
-        <source>Computer is thinking...</source>
+        <source>Computer is thinking…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Running game analysis...</source>
+        <source>Running game analysis…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Computer is thinking... (up to %1 seconds remaining)</source>
+        <source>Computer is thinking… (up to %1 seconds remaining)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Computer is thinking... (up to %1 minutes remaining)</source>
+        <source>Computer is thinking… (up to %1 minutes remaining)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1017,7 +1017,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Annotation...</source>
+        <source>Annotation…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1078,7 +1078,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Game Variant...</source>
+        <source>Game Variant…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1302,7 +1302,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Appearance...</source>
+        <source>Appearance…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
