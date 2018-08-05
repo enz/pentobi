@@ -44,8 +44,6 @@ add_executable(pentobi WIN32
     AndroidUtils.cpp
     GameModel.h
     GameModel.cpp
-    HelpFileExtractor.h
-    HelpFileExtractor.cpp
     Main.cpp
     PieceModel.h
     PieceModel.cpp
