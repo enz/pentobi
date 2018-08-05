@@ -23,7 +23,7 @@ Pentobi.Menu {
     Pentobi.MenuItem {
         action: actions.backToMainVar
         text: addMnemonic(actions.backToMainVar.text,
-                          //: Mnemonic for menu item Back to Main Variation. Leave empty for no mnemonic.
+                          //: Mnemonic for menu item Go/Main Variation. Leave empty for no mnemonic.
                           qsTr("M"))
     }
     Pentobi.MenuItem {
