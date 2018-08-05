@@ -16,7 +16,7 @@ Pentobi.Menu {
 
     Pentobi.MenuItem {
         text: addMnemonic(qsTr("Annotation…"),
-                          //: Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.
+                          //: Mnemonic for menu item Annotation. Leave empty for no mnemonic.
                           qsTr("A"))
         enabled: gameModel.moveNumber > 0
         onTriggered: {
