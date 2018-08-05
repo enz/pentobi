@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -886,12 +884,12 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu Computer. Leave empty for no mnemonic.</extracomment>
-        <translation>C</translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>S</source>
         <extracomment>Mnemonic for menu item Computer Settings. Leave empty for no mnemonic.</extracomment>
-        <translation>S</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>P</source>
@@ -906,7 +904,7 @@
     <message>
         <source>O</source>
         <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -941,7 +939,7 @@
     <message>
         <source>U</source>
         <extracomment>Mnemonic for menu item Variation Up. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
+        <translation>H</translation>
     </message>
     <message>
         <source>Variation Down</source>
@@ -978,7 +976,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Truncate Children. Leave empty for no mnemonic.</extracomment>
-        <translation>C</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>Keep Position</source>
@@ -987,7 +985,7 @@
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu item Keep Position. Leave empty for no mnemonic.</extracomment>
-        <translation>J</translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>Keep Subtree</source>
@@ -1022,8 +1020,8 @@
     </message>
     <message>
         <source>A</source>
-        <extracomment>Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.</extracomment>
-        <translation>P</translation>
+        <extracomment>Mnemonic for menu item Annotation. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -1035,7 +1033,7 @@
     <message>
         <source>E</source>
         <extracomment>Mnemonic for menu Export. Leave empty for no mnemonic.</extracomment>
-        <translation>N</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>Image</source>
@@ -1044,7 +1042,7 @@
     <message>
         <source>M</source>
         <extracomment>Mnemonic for menu item Image. Leave empty for no mnemonic.</extracomment>
-        <translation>P</translation>
+        <translation>I</translation>
     </message>
     <message>
         <source>ASCII Art</source>
@@ -1053,7 +1051,7 @@
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.</extracomment>
-        <translation>P</translation>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -1084,7 +1082,7 @@
     <message>
         <source>V</source>
         <extracomment>Mnemonic for menu item Game Variant. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
+        <translation>V</translation>
     </message>
     <message>
         <source>Game Info</source>
@@ -1117,17 +1115,17 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Open Clipboard. Leave empty for no mnemonic.</extracomment>
-        <translation>C</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>S</source>
         <extracomment>Mnemonic for menu item Save. Leave empty for no mnemonic.</extracomment>
-        <translation>S</translation>
+        <translation>R</translation>
     </message>
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu item Save As. Leave empty for no mnemonic.</extracomment>
-        <translation>P</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>Q</source>
@@ -1144,7 +1142,7 @@
     <message>
         <source>O</source>
         <extracomment>Mnemonic for menu Go. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>N</source>
@@ -1153,7 +1151,7 @@
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Back to Main Variation. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Go/Main Variation. Leave empty for no mnemonic.</extracomment>
         <translation>P</translation>
     </message>
     <message>
@@ -1181,7 +1179,7 @@
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu item Pentobi Help. Leave empty for no mnemonic.</extracomment>
-        <translation>J</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>About Pentobi</source>
@@ -1215,7 +1213,7 @@
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu Open Recent. Leave empty for no mnemonic.</extracomment>
-        <translation>J</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>%1. %2</source>
@@ -1230,7 +1228,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Recent Files/Clear List. Leave empty for no mnemonic.</extracomment>
-        <translation>C</translation>
+        <translation>E</translation>
     </message>
 </context>
 <context>
@@ -1242,7 +1240,7 @@
     <message>
         <source>T</source>
         <extracomment>Mnemonic for menu Tools. Leave empty for no mnemonic.</extracomment>
-        <translation>C</translation>
+        <translation>U</translation>
     </message>
     <message>
         <source>Rating</source>
@@ -1260,7 +1258,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Clear Rating. Leave empty for no mnemonic.</extracomment>
-        <translation>C</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>Analyze Game</source>
@@ -1269,7 +1267,7 @@
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu item Analyze Game. Leave empty for no mnemonic.</extracomment>
-        <translation>P</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Abort Analysis</source>
@@ -1308,12 +1306,12 @@
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu Appearance. Leave empty for no mnemonic.</extracomment>
-        <translation>P</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>F</source>
         <extracomment>Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.</extracomment>
-        <translation>T</translation>
+        <translation>P</translation>
     </message>
 </context>
 <context>
