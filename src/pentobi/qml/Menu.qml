@@ -45,4 +45,31 @@ Menu {
             }
         currentIndex = -1
     }
+    Component.onCompleted: {
+        // Sanity checks for mnemonics
+        if (! isDesktop)
+            return
+        var allMnemonics = []
+        var i, j, text, pos, mnemonic, textWithoutMnemonic
+        for (i = 0; i < count; ++i) {
+            if (itemAt(i))
+                text = itemAt(i).text
+            else if (menuAt(i))
+                text = menuAt(i).title
+            if (! text)
+                continue
+            pos = text.indexOf("&")
+            if (pos < 0 || pos === text.length - 1) {
+                textWithoutMnemonic = text
+                continue
+            }
+            mnemonic = text.substr(pos + 1, 1).toLowerCase()
+            for (j = 0; j < allMnemonics.length; ++j)
+                if (allMnemonics[j] === mnemonic)
+                    console.warn("Duplicate mnemonic:", text)
+            allMnemonics.push(mnemonic)
+        }
+        if (allMnemonics.length > 0 && textWithoutMnemonic)
+            console.warn("No mnemonic:", textWithoutMnemonic)
+    }
 }
