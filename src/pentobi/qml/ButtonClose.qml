@@ -10,7 +10,7 @@ import "Controls.js" as PentobiControls
 Button {
     text: PentobiControls.addMnemonic(
               qsTr("Close"),
-              //: Mnemonic for button OK. Leave empty for no mnemonic.
+              //: Mnemonic for button Close. Leave empty for no mnemonic.
               qsTr("C"))
     DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
 }
