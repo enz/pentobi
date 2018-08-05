@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nb_NO">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nb_NO" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -29,7 +27,7 @@
     <message>
         <source>Settings…</source>
         <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Find Move</source>
@@ -37,7 +35,7 @@
     </message>
     <message>
         <source>Next Comment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Fullscreen</source>
@@ -70,7 +68,7 @@
     <message>
         <source>Play Move</source>
         <extracomment>Play a single move</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Quit</source>
@@ -156,7 +154,7 @@
     <message>
         <source>System</source>
         <extracomment>Name of theme using default system colors</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Move marking:</source>
@@ -211,7 +209,7 @@
     <name>ButtonApply</name>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>A</source>
@@ -235,7 +233,7 @@
     <name>ButtonClose</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>C</source>
@@ -318,7 +316,7 @@
     <message>
         <source>O</source>
         <extracomment>Mnemonic for button Open. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>Save</source>
@@ -577,12 +575,12 @@
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>New Folder %1</source>
         <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>(Setup)</source>
@@ -670,7 +668,7 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initialize your rating for this game variant.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Initial rating:</source>
@@ -726,7 +724,7 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
@@ -754,7 +752,7 @@
     </message>
     <message>
         <source>Saving image failed or unsupported image format.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Image saved.</source>
@@ -786,11 +784,11 @@
     </message>
     <message>
         <source>Continuing rated game.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Continue computer move?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Keep only position?</source>
@@ -886,7 +884,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu Computer. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>S</source>
@@ -896,7 +894,7 @@
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu item Play. Leave empty for no mnemonic.</extracomment>
-        <translation>Y</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>M</source>
@@ -918,12 +916,12 @@
     <message>
         <source>E</source>
         <extracomment>Mnemonic for menu Edit. Leave empty for no mnemonic.</extracomment>
-        <translation>N</translation>
+        <translation>R</translation>
     </message>
     <message>
         <source>M</source>
         <extracomment>Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
-        <translation>B</translation>
+        <translation>H</translation>
     </message>
     <message>
         <source>Make Main Variation</source>
@@ -941,7 +939,7 @@
     <message>
         <source>U</source>
         <extracomment>Mnemonic for menu item Variation Up. Leave empty for no mnemonic.</extracomment>
-        <translation>A</translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>Variation Down</source>
@@ -969,7 +967,7 @@
     <message>
         <source>T</source>
         <extracomment>Mnemonic for menu item Truncate. Leave empty for no mnemonic.</extracomment>
-        <translation>E</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>Truncate Children</source>
@@ -978,7 +976,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Truncate Children. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
+        <translation>U</translation>
     </message>
     <message>
         <source>Keep Position</source>
@@ -987,7 +985,7 @@
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu item Keep Position. Leave empty for no mnemonic.</extracomment>
-        <translation>Y</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>Keep Subtree</source>
@@ -996,7 +994,7 @@
     <message>
         <source>S</source>
         <extracomment>Mnemonic for menu item Keep Subtree. Leave empty for no mnemonic.</extracomment>
-        <translation>L</translation>
+        <translation>T</translation>
     </message>
     <message>
         <source>Setup Mode</source>
@@ -1005,7 +1003,7 @@
     <message>
         <source>O</source>
         <extracomment>Mnemonic for menu item Setup Mode. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>Next Color</source>
@@ -1014,16 +1012,16 @@
     <message>
         <source>N</source>
         <extracomment>Mnemonic for menu item Next Color. Leave empty for no mnemonic.</extracomment>
-        <translation>N</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>Annotation…</source>
-        <translation type="unfinished"></translation>
+        <translation>Anmerkning…</translation>
     </message>
     <message>
         <source>A</source>
-        <extracomment>Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <extracomment>Mnemonic for menu item Annotation. Leave empty for no mnemonic.</extracomment>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -1035,7 +1033,7 @@
     <message>
         <source>E</source>
         <extracomment>Mnemonic for menu Export. Leave empty for no mnemonic.</extracomment>
-        <translation>N</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>Image</source>
@@ -1053,7 +1051,7 @@
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -1103,12 +1101,12 @@
     <message>
         <source>F</source>
         <extracomment>Mnemonic for menu item Find Move. Leave empty for no mnemonic.</extracomment>
-        <translation>U</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>O</source>
         <extracomment>Mnemonic for menu item Open. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>Open Clipboard</source>
@@ -1127,7 +1125,7 @@
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu item Save As. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>Q</source>
@@ -1144,7 +1142,7 @@
     <message>
         <source>O</source>
         <extracomment>Mnemonic for menu Go. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>N</source>
@@ -1153,8 +1151,8 @@
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Back to Main Variation. Leave empty for no mnemonic.</extracomment>
-        <translation>B</translation>
+        <extracomment>Mnemonic for menu item Go/Main Variation. Leave empty for no mnemonic.</extracomment>
+        <translation>H</translation>
     </message>
     <message>
         <source>B</source>
@@ -1181,7 +1179,7 @@
     <message>
         <source>P</source>
         <extracomment>Mnemonic for menu item Pentobi Help. Leave empty for no mnemonic.</extracomment>
-        <translation>Y</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>About Pentobi</source>
@@ -1225,7 +1223,7 @@
     <message>
         <source>Clear List</source>
         <extracomment>Menu item for clearing the recent files list</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>C</source>
@@ -1260,7 +1258,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Clear Rating. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>Analyze Game</source>
@@ -1269,11 +1267,11 @@
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu item Analyze Game. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Abort Analysis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>O</source>
@@ -1303,7 +1301,7 @@
     </message>
     <message>
         <source>Appearance…</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>A</source>
@@ -1313,7 +1311,7 @@
     <message>
         <source>F</source>
         <extracomment>Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.</extracomment>
-        <translation>U</translation>
+        <translation>F</translation>
     </message>
 </context>
 <context>
@@ -1359,7 +1357,7 @@
     <name>NewFolderDialog</name>
     <message>
         <source>Folder name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
