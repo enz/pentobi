@@ -208,7 +208,6 @@ ApplicationWindow {
             HelpWindow { }
         }
     }
-    HelpFileExtractor { id: helpFileExtractor }
 
     // Used to delay calls to Logic.checkComputerMove such that the computer
     // starts thinking and the busy indicator is visible after the current move

@@ -25,7 +25,7 @@ Window {
         // qrc urls work in WebView on Linux but not on Android
         if (isDesktop)
             return "qrc:///qml/help/" + lang + "/pentobi/index.html"
-        return helpFileExtractor.extract(lang)
+        return androidUtils.extractHelp(lang)
     }
     property real defaultWidth: Math.min(font.pixelSize * 40, Screen.desktopAvailableWidth)
     property real defaultHeight: Math.min(font.pixelSize * 45, Screen.desktopAvailableHeight)

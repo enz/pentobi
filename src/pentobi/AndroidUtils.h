@@ -30,6 +30,8 @@ public:
         On platforms other than Android, always returns true. */
     Q_INVOKABLE static bool checkPermission(const QString& permission);
 
+    Q_INVOKABLE QUrl extractHelp(const QString& language);
+
     /** Return a directory for storing files.
         Avoids a dependency on qt.labs.platform only for StandardPaths and
         handles Android better. On Android, it returns

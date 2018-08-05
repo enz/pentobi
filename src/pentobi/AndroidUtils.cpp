@@ -10,9 +10,12 @@
 
 #include "AndroidUtils.h"
 
+#include <QCoreApplication>
 #include <QStandardPaths>
 
 #ifdef Q_OS_ANDROID
+#include <QDir>
+#include <QDirIterator>
 #include <QtAndroidExtras/QtAndroid>
 #include <QtAndroidExtras/QAndroidJniObject>
 #endif
@@ -27,6 +30,51 @@ bool AndroidUtils::checkPermission(const QString& permission)
 #else
     Q_UNUSED(permission);
     return true;
+#endif
+}
+
+QUrl AndroidUtils::extractHelp(const QString& language)
+{
+#ifdef Q_OS_ANDROID
+    if (language != "C")
+        // Other languages use pictures from C
+        extractHelp("C");
+    auto activity = QtAndroid::androidActivity();
+    auto filesDir =
+            activity.callObjectMethod("getFilesDir", "()Ljava/io/File;");
+    if (! filesDir.isValid())
+        return {};
+    auto filesDirString = filesDir.callObjectMethod("toString",
+                                                    "()Ljava/lang/String;");
+    if (! filesDirString.isValid())
+        return {};
+    QDir dir(filesDirString.toString() + "/help/"
+             + QCoreApplication::applicationVersion() + "/" + language
+             + "/pentobi");
+    auto dirPath = dir.path();
+    if (QFileInfo::exists(dirPath + "/index.html"))
+        return QUrl::fromLocalFile(dirPath + "/index.html");
+    if (! QFileInfo::exists(filesDirString.toString() + "/help/"
+                            + QCoreApplication::applicationVersion()
+                            + "/C/pentobi/index.html"))
+        // No need to keep files from older versions around
+        QDir(filesDirString.toString() + "/help").removeRecursively();
+    QDirIterator it(":qml/help/" + language + "/pentobi");
+    while (it.hasNext())
+    {
+        auto src = it.next();
+        QFileInfo fileInfo(src);
+        if (! fileInfo.isFile())
+            continue;
+        auto dest = QFileInfo(dirPath + "/" + fileInfo.fileName());
+        dest.dir().mkpath(".");
+        QFile::remove(dest.absoluteFilePath());
+        QFile::copy(src, dest.absoluteFilePath());
+    }
+    auto file = QFileInfo(dirPath + "/index.html").absoluteFilePath();
+    return QUrl::fromLocalFile(file);
+#else
+    return {};
 #endif
 }
 

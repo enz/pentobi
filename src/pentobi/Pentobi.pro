@@ -43,7 +43,6 @@ SOURCES += \
     AnalyzeGameModel.cpp \
     AndroidUtils.cpp \
     GameModel.cpp \
-    HelpFileExtractor.cpp \
     Main.cpp \
     PieceModel.cpp \
     PlayerModel.cpp \
@@ -124,7 +123,6 @@ HEADERS += \
     AnalyzeGameModel.h \
     AndroidUtils.h \
     GameModel.h \
-    HelpFileExtractor.h \
     PieceModel.h \
     PlayerModel.h \
     RatingModel.h \
