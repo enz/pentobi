@@ -8,8 +8,41 @@
 <body>
 <p align="right"><a href="become_stronger.html">Zurück</a> | <a href=
 "index.html">Inhalt</a> | <a href="shortcuts.html">Weiter</a></p>
-<h2>Das Fenstermenü</h2>
-<h3>Spiel</h3>
+<h2>Fenstermenü und Werkzeugleiste</h2>
+<h3>Navigations-Buttons in der Werkzeugleiste</h3>
+<dl>
+<dt>Anfang</dt>
+<dd>Geht zum Anfang des Spiels.</dd>
+<dt>Zurück 10</dt>
+<dd>Geht zehn Züge in der gegenwärtigen Variante zurück. Der Button unterstützt
+automatische Wiederholung, wenn er gedrückt gehalten wird.</dd>
+<dt>Zurück</dt>
+<dd>Geht einen Zug in der gegenwärtigen Variante zurück. Der Button unterstützt
+automatische Wiederholung, wenn er gedrückt gehalten wird.</dd>
+<dt>Vorwärts</dt>
+<dd>Geht einen Zug in der gegenwärtigen Variante vorwärts. Wenn die
+gegenwärtige Brettstellung mehrerer nachfolgende Varianten hat (d.&nbsp;h. der
+gegenwärtige Knoten im Spielbaum mehrere Kindknoten hat), wird die erste
+Variante benutzt. Der Button unterstützt automatische Wiederholung, wenn er
+gedrückt gehalten wird.</dd>
+<dt>Vorwärts 10</dt>
+<dd>Geht zehn Züge in der gegenwärtigen Variante vorwärts. Wenn eine
+Brettstellung mehrerer nachfolgende Varianten hat (d.&nbsp;h. der gegenwärtige
+Knoten im Spielbaum mehrere Kindknoten hat), wird die erste Variante benutzt.
+Der Button unterstützt automatische Wiederholung, wenn er gedrückt gehalten
+wird.</dd>
+<dt>Ende</dt>
+<dd>Geht zum Ende der gegenwärtigen Variante. Wie bei <i>Vorwärts</i> wird auch
+hier jeweils die erste Variante benutzt, wenn die Brettstellung mehrere
+nachfolgende Varianten hat.</dd>
+<dt>Nächste Variante</dt>
+<dd>Geht zur nächsten Variante zum zuletzt gespielten Zug (d.&nbsp;h. zum
+nächsten Geschwisterknoten des gegenwärtigen Knotens im Spielbaum).</dd>
+<dt>Vorherige Variante</dt>
+<dd>Geht zur vorherigen Variante zum zuletzt gespielten Zug (d.&nbsp;h. zum
+vorherigen Geschwisterknoten des gegenwärtigen Knotens im Spielbaum).</dd>
+</dl>
+<h3>Spiel-Menü</h3>
 <dl>
 <dt>Neu</dt>
 <dd>Beginnt ein neues Spiel.</dd>
@@ -43,7 +76,7 @@ die Datei ein Blokus-Problem als aufgebaute Brettstellung enthält mit der
 Lösung in der Hauptvariante.</dd>
 <dt>Zuletzt benutzte Dateien</dt>
 <dd>Lädt ein kürzlich benutztes Spiel.</dd>
-<dt>Aus Zwischenablage öffnen</dt>
+<dt>Zwischenablage öffnen</dt>
 <dd>Öffnet ein Spiel von einem Text, der in die Zwischenablage kopiert wurde.
 Der Text muss ein gültiges Spiel im Pentobi-SGF-Dateiformat sein.</dd>
 <dt>Speichern</dt>
@@ -60,48 +93,26 @@ sollte mit einer Schriftart fester Breite betrachtet werden.</dd>
 <dt>Beenden</dt>
 <dd>Beendet Pentobi.</dd>
 </dl>
-<h3>Gehe zu</h3>
+<h3>Gehe-zu-Menü</h3>
 <dl>
-<dt>Anfang</dt>
-<dd>Geht zum Anfang des Spiels.</dd>
-<dt>Zurück</dt>
-<dd>Geht einen Zug in der gegenwärtigen Variante zurück. Der entsprechende
-Button in der Werkzeugleiste unterstützt automatische Wiederholung, wenn er
-gedrückt gehalten wird.</dd>
-<dt>Vorwärts</dt>
-<dd>Geht einen Zug in der gegenwärtigen Variante vorwärts. Wenn die
-gegenwärtige Brettstellung mehrerer nachfolgende Varianten hat (d.&nbsp;h. der
-gegenwärtige Knoten im Spielbaum mehrere Kindknoten hat), wird die erste
-Variante benutzt. Der entsprechende Button in der Werkzeugleiste unterstützt
-automatische Wiederholung, wenn er gedrückt gehalten wird.</dd>
-<dt>Ende</dt>
-<dd>Geht zum Ende der gegenwärtigen Variante. Wie bei <i>Vorwärts</i> wird auch
-hier jeweils die erste Variante benutzt, wenn die Brettstellung mehrere
-nachfolgende Varianten hat.</dd>
-<dt>Nächste Variante</dt>
-<dd>Geht zur nächsten Variante zum zuletzt gespielten Zug (d.&nbsp;h. zum
-nächsten Geschwisterknoten des gegenwärtigen Knotens im Spielbaum).</dd>
-<dt>Vorherige Variante</dt>
-<dd>Geht zur vorherigen Variante zum zuletzt gespielten Zug (d.&nbsp;h. zum
-vorherigen Geschwisterknoten des gegenwärtigen Knotens im Spielbaum).</dd>
-<dt>Gehe zu Zug</dt>
+<dt>Zugnummer</dt>
 <dd>Geht zum Zug mit einer bestimmten Nummer in der gegenwärtigen
 Variante.</dd>
-<dt>Zurück zu Hauptvariante</dt>
+<dt>Hauptvariante</dt>
 <dd>Kehrt zur letzten Brettstellung in der gegenwärtigen Variante zurück, die
 zur Hauptvariante gehörte.</dd>
 <dt>Anfang der Verzweigung</dt>
 <dd>Kehrt zur letzten Brettstellung in der gegenwärtigen Variante zurück, die
 einen alternativen Zug hatte.</dd>
-<dt>Nächsten Kommentar finden</dt>
+<dt>Nächster Kommentar</dt>
 <dd>Geht zur nächsten Brettstellung, die einen Kommentar besitzt. Wenn das
 Kommentarfeld nicht sichtbar ist, wird es sichtbar gemacht. Das wiederholte
 Auswählen dieses Menüpunkts zeigt nacheinander alle Brettstellungen mit
 Kommentaren im Spielbaum.</dd>
 </dl>
-<h3>Bearbeiten</h3>
+<h3>Bearbeiten-Menü</h3>
 <dl>
-<dt>Zugkommentierung</dt>
+<dt>Annotierung</dt>
 <dd>Fügt ein wie in der Schachnotation benutztes Symbol (z.&nbsp;B. !!) zum
 gegenwärtigen Zug hinzu. Die Symbole werden an die Zugnummern in der
 Statusleiste angehängt und, abhängig von der Einstellung von
@@ -110,15 +121,15 @@ Statusleiste angehängt und, abhängig von der Einstellung von
 <dd>Macht die gegenwärtige Variante zur Hauptvariante des Spiels. Dies ordnet
 die Knoten im Spielbaum so um, dass die gegenwärtige Variante zur Hauptvariante
 wird.</dd>
-<dt>Variante nach oben schieben</dt>
+<dt>Variante nach oben</dt>
 <dd>Ändert die Reihenfolge der Varianten so, dass die gegenwärtige
 Brettstellung beim Durchlaufen der Varianten mit <i>Nächste/Vorherige
 Variante</i> früher erscheint.</dd>
-<dt>Variante nach unten schieben</dt>
+<dt>Variante nach unten</dt>
 <dd>Ändert die Reihenfolge der Varianten so, dass die gegenwärtige
 Brettstellung beim Durchlaufen der Varianten mit <i>Nächste/Vorherige
 Variante</i> später erscheint.</dd>
-<dt>Alle Varianten löschen</dt>
+<dt>Varianten löschen</dt>
 <dd>Löscht alle Varianten außer der Hauptvariante. Wenn sich die gegenwärtige
 Brettstellung nicht in der Hauptvariante befindet, wird zuvor zu einer
 Brettstellung in der Hauptvariante gewechselt wie in <i>Zurück zu
@@ -129,12 +140,12 @@ auf ihn folgenden Teilbaum aus dem Spielbaum.</dd>
 <dt>Kindknoten abschneiden</dt>
 <dd>Entfernt alle Kindknoten des Knotens mit der gegenwärtigen Brettstellung
 aus dem Spielbaum.</dd>
-<dt>Nur Brettstellung behalten</dt>
+<dt>Brettstellung behalten</dt>
 <dd>Löscht alle Züge und behält nur die gegenwärtige Brettstellung als feste
 Stellung. Dies kann zur Erzeugung von Dateien benutzt werden, die mit einer
 festgelegten Brettstellung beginnen.</dd>
-<dt>Nur Teilbaum behalten</dt>
-<dd>Wie <i>Nur Brettstellung behalten</i>, aber die Züge nach der gegenwärtigen
+<dt>Teilbaum behalten</dt>
+<dd>Wie <i>Brettstellung behalten</i>, aber die Züge nach der gegenwärtigen
 Brettstellung werden nicht gelöscht.</dd>
 <dt>Stellungsaufbau</dt>
 <dd>Aktiviert oder deaktiviert den Stellungsaufbau-Modus. Im
@@ -151,16 +162,11 @@ Beispiel benutzt werden, um Partien einzugeben, bei denen Züge einer Farbe
 übersprungen wurden, da die Farbe aufgrund einer Bedenkzeitüberschreitung vom
 Weiterspielen ausgeschlossen wurde.</dd>
 </dl>
-<h3>Ansicht</h3>
+<h3>Ansicht-Menü</h3>
 <dl>
 <dt>Erscheinungsbild</dt>
-<dt>Ändert die Art, in der das Spielbrett angezeigt wird:</dt>
 <dd>
 <dl>
-<dt>Zugmarkierung</dt>
-<dd>Ändert die Markierung von Zügen auf dem Spielbrett. Die Optionen sind, den
-zuletzt gespielten Zug mit einem Punkt oder einer Nummer zu markieren, oder die
-Nummern aller Züge zu zeigen oder gar keine Markierung zu zeigen.</dd>
 <dt>Koordinaten</dt>
 <dd>Zeigt Koordinaten an den Rändern des Spielbretts für die Felder auf dem
 Spielbrett. Die Konvention für die Koordinaten ist dieselbe wie im von Pentobi
@@ -170,6 +176,10 @@ benutzten Blokus-SGF-Dateiformat.</dd>
 Varianten besitzt. Wenn Züge mit einem Punkt statt einer Nummer markiert
 werden, wird ein Kreis statt ein Punkt für Züge verwendet, die nicht in der
 Hauptvariante sind.</dd>
+<dt>Zugmarkierung</dt>
+<dd>Ändert die Markierung von Zügen auf dem Spielbrett. Die Optionen sind, den
+zuletzt gespielten Zug mit einem Punkt oder einer Nummer zu markieren, oder die
+Nummern aller Züge zu zeigen oder gar keine Markierung zu zeigen.</dd>
 </dl>
 </dd>
 <dt>Vollbild</dt>
@@ -177,9 +187,9 @@ Hauptvariante sind.</dd>
 Vollbildmodus. Um den Vollbildmodus ohne das Benutzen des Fenstermenüs zu
 verlassen, drücken Sie die F11-Taste.</dd>
 </dl>
-<h3>Computer</h3>
+<h3>Computer-Menü</h3>
 <dl>
-<dt>Computer-Einstellungen</dt>
+<dt>Einstellungen</dt>
 <dd>Wählt aus, welche Farben vom Computer gespielt werden und die Spielstärke
 des Computers. Höhere Spielstufen sind stärker, können aber die Bedenkzeiten
 des Computers auf langsamen Computern sehr verlängern.</dd>
@@ -189,14 +199,14 @@ zum Ändern der Computer-Farbe benutzt werden oder um nach dem Navigieren im
 Spielbaum mit dem Spielen fortzufahren. Wenn der Computer die gegenwärtige
 Farbe nicht bereits spielte, wird er diese Farbe (und nur diese) im weiteren
 Spielverlauf spielen.</dd>
-<dt>Einzelnen Zug spielen</dt>
+<dt>Zug spielen</dt>
 <dd>Lässt den Computer einen einzelnen Zug für die gegenwärtige Farbe spielen
 ohne die vom Computer gespielten Farben zu ändern.</dd>
 <dt>Stopp</dt>
 <dd>Bricht die gegenwärtige Zuggenerierung ab. Sie können den Computer
 weiterspielen lassen, indem Sie <i>Spielen</i> auswählen.</dd>
 </dl>
-<h3>Extras</h3>
+<h3>Extras-Menü</h3>
 <dl>
 <dt>Wertung</dt>
 <dd>Zeigt ein Dialogfenster mit der <a href=
@@ -206,7 +216,7 @@ Spielvariante.</dd>
 <dd>Führt eine <a href="become_stronger.html#analysis">Spielanalyse</a>
 durch.</dd>
 </dl>
-<h3>Hilfe</h3>
+<h3>Hilfe-Menü</h3>
 <dl>
 <dt>Pentobi-Hilfe</dt>
 <dd>Zeigt ein Fenster mit dem Pentobi-Benutzerhandbuch.</dd>

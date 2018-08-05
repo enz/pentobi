@@ -8,8 +8,38 @@
 <body>
 <p align="right"><a href="become_stronger.html">Previous</a> | <a href=
 "index.html">Contents</a> | <a href="shortcuts.html">Next</a></p>
-<h2>The Window Menu</h2>
-<h3>Game</h3>
+<h2>Window Menu and Toolbar</h2>
+<h3>Navigation Buttons in Toolbar</h3>
+<dl>
+<dt>Beginning</dt>
+<dd>Go to the beginning of the game.</dd>
+<dt>Backward 10</dt>
+<dd>Go ten moves backward in the current variation. The button supports
+autorepeat if pressed and held.</dd>
+<dt>Backward</dt>
+<dd>Go one move backward in the current variation. The button supports
+autorepeat if pressed and held.</dd>
+<dt>Forward</dt>
+<dd>Go one move forward in the current variation. If the current position has
+several follow-up variations (i.e. the current node in the game tree has
+several child nodes), the first variation will be used. The button supports
+autorepeat if pressed and held.</dd>
+<dt>Forward 10</dt>
+<dd>Go ten moves forward in the current variation. If a position has several
+follow-up variations (i.e. the current node in the game tree has several child
+nodes), the first variation will be used. The button supports autorepeat if
+pressed and held.</dd>
+<dt>End</dt>
+<dd>Go to the end of the current variation. Like <i>Forward</i>, this also uses
+the first variation in positions with several follow-up variations.</dd>
+<dt>Next Variation</dt>
+<dd>Go to the next variation to the last move played (i.e. the next sibling
+node of the current node in the game tree).</dd>
+<dt>Previous Variation</dt>
+<dd>Go to the previous variation to the last move played (i.e. the previous
+sibling node of the current node in the game tree).</dd>
+</dl>
+<h3>Game Menu</h3>
 <dl>
 <dt>New</dt>
 <dd>Start a new game.</dd>
@@ -37,7 +67,7 @@ instead. This avoids that solutions are immediately shown if the file contains
 a Blokus puzzle as a setup with the solution as the main variation.</dd>
 <dt>Open Recent</dt>
 <dd>Load a recently used game.</dd>
-<dt>Open From Clipboard</dt>
+<dt>Open Clipboard</dt>
 <dd>Open a game from a text copied to the clipboard. The text must be a valid
 game in Pentobi SGF file format.</dd>
 <dt>Save</dt>
@@ -54,43 +84,24 @@ viewed using a monospace font.</dd>
 <dt>Quit</dt>
 <dd>Quit Pentobi.</dd>
 </dl>
-<h3>Go</h3>
+<h3>Go Menu</h3>
 <dl>
-<dt>Beginning</dt>
-<dd>Go to the beginning of the game.</dd>
-<dt>Backward</dt>
-<dd>Go one move backward in the current variation. The corresponding button in
-the toolbar supports autorepeat if pressed and held.</dd>
-<dt>Forward</dt>
-<dd>Go one move forward in the current variation. If the current position has
-several follow-up variations (i.e. the current node in the game tree has
-several child nodes), the first variation will be used. The corresponding
-button in the toolbar supports autorepeat if pressed and held.</dd>
-<dt>End</dt>
-<dd>Go to the end of the current variation. Like <i>Forward</i>, this also uses
-the first variation in positions with several follow-up variations.</dd>
-<dt>Next Variation</dt>
-<dd>Go to the next variation to the last move played (i.e. the next sibling
-node of the current node in the game tree).</dd>
-<dt>Previous Variation</dt>
-<dd>Go to the previous variation to the last move played (i.e. the previous
-sibling node of the current node in the game tree).</dd>
-<dt>Go to Move</dt>
+<dt>Move Number</dt>
 <dd>Go to the move with a given move number in the current variation.</dd>
-<dt>Back to Main Variation</dt>
+<dt>Main Variation</dt>
 <dd>Go back to the last position in the current variation that belonged to the
 main variation.</dd>
 <dt>Beginning of Branch</dt>
 <dd>Go back to the last position in the current variation that had an
 alternative move.</dd>
-<dt>Find Next Comment</dt>
+<dt>Next Comment</dt>
 <dd>Go to the next position that has a comment. If the comment text field was
 not visible, it will become visible. Selecting this item repeatedly will show
 all positions with comments in the game tree.</dd>
 </dl>
-<h3>Edit</h3>
+<h3>Edit Menu</h3>
 <dl>
-<dt>Move Annotation</dt>
+<dt>Annotation</dt>
 <dd>Add a chess-style annotation symbol (e.g. !!) to the current move. The
 symbols are appended to the move numbers in the status bar and, depending on
 the configuration of <i>Move Marking</i>, on the board.</dd>
@@ -98,15 +109,15 @@ the configuration of <i>Move Marking</i>, on the board.</dd>
 <dd>Make the current variation the main variation of the game. This reorders
 the nodes in the game tree such that the current variation becomes the main
 variation.</dd>
-<dt>Move Variation Up</dt>
+<dt>Variation Up</dt>
 <dd>Changes the order of variations such that the current position will appear
 earlier when iterating over the variations with <i>Next/Previous
 Variation</i>.</dd>
-<dt>Move Variation Down</dt>
+<dt>Variation Down</dt>
 <dd>Changes the order of variations such that the current position will appear
 later when iterating over the variations with <i>Next/Previous
 Variation</i>.</dd>
-<dt>Delete All Variations</dt>
+<dt>Delete Variations</dt>
 <dd>Delete all variations but the main variation. If the current position is
 not in the main variation, it will first be changed to a position as in <i>Back
 to Main Variation</i>.</dd>
@@ -116,12 +127,12 @@ game tree.</dd>
 <dt>Truncate Children</dt>
 <dd>Remove all child nodes of the node with the current position from the game
 tree.</dd>
-<dt>Keep Only Position</dt>
+<dt>Keep Position</dt>
 <dd>Delete all moves and keep only the current position as a setup. This can be
 used to create files that start with a given fixed position.</dd>
-<dt>Keep Only Subtree</dt>
-<dd>Like <i>Keep Only Position</i> but does not delete the moves after the
-current position.</dd>
+<dt>Keep Subtree</dt>
+<dd>Like <i>Keep Position</i> but does not delete the moves after the current
+position.</dd>
 <dt>Setup Mode</dt>
 <dd>Enter or leave setup mode. In setup mode, pieces can be placed anywhere on
 the board, even in violation of the game rules. Existing pieces can be removed
@@ -135,15 +146,11 @@ yet.</dd>
 enter game records, in which moves of a color were skipped because the color
 ran out of time.</dd>
 </dl>
-<h3>View</h3>
+<h3>View Menu</h3>
 <dl>
 <dt>Appearance</dt>
-<dd>Change the way the board is displayed:
+<dd>
 <dl>
-<dt>Move marking</dt>
-<dd>Change the way moves are marked on the board. The options are to mark the
-last move played with a dot or with a number, or to show the numbers of all
-moves, or not to show any marks.</dd>
 <dt>Coordinates</dt>
 <dd>Display coordinates around the board for the fields on the board. The
 convention for the coordinates is the same as in the Blokus SGF file format
@@ -152,15 +159,19 @@ used by Pentobi.</dd>
 <dd>Appends a letter to the move number on the board if the move has
 variations. If moves are marked with dots instead of numbers, a circle will be
 used instead of a dot for moves not in the main variation.</dd>
+<dt>Move marking</dt>
+<dd>Change the way moves are marked on the board. The options are to mark the
+last move played with a dot or with a number, or to show the numbers of all
+moves, or not to show any marks.</dd>
 </dl>
 </dd>
 <dt>Fullscreen</dt>
 <dd>Make the main window full screen or leave full screen mode. To leave full
 screen mode without using the window menu, press the F11 key.</dd>
 </dl>
-<h3>Computer</h3>
+<h3>Computer Menu</h3>
 <dl>
-<dt>Computer Settings</dt>
+<dt>Settings</dt>
 <dd>Select which colors are played by the computer and the playing strength for
 the computer. Higher levels are stronger but can make the computer take a long
 time for playing moves on slow computers.</dd>
@@ -169,14 +180,14 @@ time for playing moves on slow computers.</dd>
 change the color the computer plays or to resume playing after navigating in
 the game tree. If the computer did not already play the current color, it will
 play this color (and only this color) from now on.</dd>
-<dt>Play Single Move</dt>
+<dt>Play Move</dt>
 <dd>Make the computer play a single move for the current color without changing
 the colors played by the computer.</dd>
 <dt>Stop</dt>
 <dd>Abort the current move generation. You can make the computer continue to
 play by selecting <i>Play</i>.</dd>
 </dl>
-<h3>Tools</h3>
+<h3>Tools Menu</h3>
 <dl>
 <dt>Rating</dt>
 <dd>Show a dialog window with the <a href=
@@ -185,7 +196,7 @@ variant.</dd>
 <dt>Analyze Game</dt>
 <dd>Perform a <a href="become_stronger.html#analysis">game analysis</a>.</dd>
 </dl>
-<h3>Help</h3>
+<h3>Help Menu</h3>
 <dl>
 <dt>Pentobi Help</dt>
 <dd>Show a window to browse the Pentobi user manual.</dd>
