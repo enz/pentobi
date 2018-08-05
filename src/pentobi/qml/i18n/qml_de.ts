@@ -1020,7 +1020,7 @@
     </message>
     <message>
         <source>A</source>
-        <extracomment>Mnemonic for menu item Move Annotation. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Annotation. Leave empty for no mnemonic.</extracomment>
         <translation>N</translation>
     </message>
 </context>
@@ -1151,7 +1151,7 @@
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Back to Main Variation. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for menu item Go/Main Variation. Leave empty for no mnemonic.</extracomment>
         <translation>H</translation>
     </message>
     <message>
@@ -1162,7 +1162,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Next Comment. Leave empty for no mnemonic.</extracomment>
-        <translation>N</translation>
+        <translation>K</translation>
     </message>
 </context>
 <context>
