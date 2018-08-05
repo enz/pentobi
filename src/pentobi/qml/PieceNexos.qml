@@ -124,7 +124,7 @@ Item
            * gridWidth - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5)
            * gridHeight - height / 2
-        Behavior on opacity { NumberAnimation { duration: 80 } }
+        Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     Text {
         opacity: label == "" ? 0 : 1
@@ -151,7 +151,7 @@ Item
                 angle: -root.rotation
             }
         ]
-        Behavior on opacity { NumberAnimation { duration: 80 } }
+        Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     StateGroup {
         state: pieceModel.state

@@ -92,7 +92,7 @@ Item
             else y += gridHeight / 2
             return y
         }
-        Behavior on opacity { NumberAnimation { duration: 80 } }
+        Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     Text {
         opacity: label == "" ? 0 : 1
@@ -133,7 +133,7 @@ Item
                 angle: -root.rotation
             }
         ]
-        Behavior on opacity { NumberAnimation { duration: 80 } }
+        Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     StateGroup {
         state: pieceModel.state
@@ -255,7 +255,7 @@ Item
                 via: gameDisplay
                 NumberAnimation {
                     properties: "x,y,scale"
-                    duration: 300
+                    duration: animationDurationMove
                     easing.type: Easing.InOutSine
                 }
             }

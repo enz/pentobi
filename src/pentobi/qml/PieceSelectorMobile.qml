@@ -203,9 +203,14 @@ Flickable {
                 PropertyAction {
                     target: pieceList3; property: "y"; value: pieceList3.y }
                 // Delay showing new color because of piece placement animation
-                PauseAnimation { duration: 200 }
+                PauseAnimation {
+                    duration: animationDurationMove - animationDurationFast
+                }
                 NumberAnimation {
-                    target: root; property: "opacity"; to: 0; duration: 100
+                    target: root
+                    property: "opacity"
+                    to: 0
+                    duration: animationDurationFast
                 }
                 PropertyAction { target: pieceList0; property: "y" }
                 PropertyAction { target: pieceList1; property: "y" }
@@ -213,7 +218,10 @@ Flickable {
                 PropertyAction { target: pieceList3; property: "y" }
                 PropertyAction { target: root; property: "contentY"; value: 0 }
                 NumberAnimation {
-                    target: root; property: "opacity"; to: 1; duration: 100
+                    target: root
+                    property: "opacity"
+                    to: 1
+                    duration: animationDurationFast
                 }
             }
     }

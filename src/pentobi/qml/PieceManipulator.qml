@@ -22,8 +22,9 @@ Item {
     // Manipulator buttons are smaller on desktop with mouse usage
     property real buttonSize: (isDesktop ? 0.12 : 0.17) * root.width
 
-    property real animationsDuration:
-        ! visible || ! gameDisplay.enableAnimations ? 0 : fastMove ? 50 : 300
+    property real animationDuration:
+        ! visible || ! gameDisplay.enableAnimations ?
+            0 : fastMove ? 50 : animationDurationMove
 
     signal piecePlayed
 
@@ -33,7 +34,7 @@ Item {
                               : theme.getImage("piece-manipulator")
         sourceSize { width: width; height: height }
         opacity: ! legal * (isOutsideBoard ? 0.65 : 0.45)
-        Behavior on opacity { NumberAnimation { duration: 100 } }
+        Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     Image {
         anchors.fill: root
@@ -41,7 +42,7 @@ Item {
                               : theme.getImage("piece-manipulator-legal")
         sourceSize { width: width; height: height }
         opacity: legal * 0.4
-        Behavior on opacity { NumberAnimation { duration: 100 } }
+        Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     MouseArea {
         id: dragArea
@@ -92,6 +93,16 @@ Item {
         }
     }
 
-    Behavior on x { NumberAnimation { duration: animationsDuration; easing.type: Easing.InOutSine } }
-    Behavior on y { NumberAnimation { duration: animationsDuration; easing.type: Easing.InOutSine } }
+    Behavior on x {
+        NumberAnimation {
+            duration: animationDuration
+            easing.type: Easing.InOutSine
+        }
+    }
+    Behavior on y {
+        NumberAnimation {
+            duration: animationDuration
+            easing.type: Easing.InOutSine
+        }
+    }
 }

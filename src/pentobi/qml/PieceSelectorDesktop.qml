@@ -53,7 +53,7 @@ Item {
             color: theme.colorText
             Behavior on y {
                 NumberAnimation {
-                    duration: transitionsEnabled ? 80 : 0
+                    duration: transitionsEnabled ? animationDurationFast : 0
                     easing.type: Easing.InSine
                 }
             }

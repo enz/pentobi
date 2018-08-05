@@ -24,6 +24,8 @@ Item
     property QtObject theme
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
+    property real animationDurationMove: enableAnimations ? 300 : 0
+    property real animationDurationFast: enableAnimations ? 80 : 0
     property bool setupMode
 
     // Dummy for compatibility with GameDisplayMobile
@@ -264,7 +266,11 @@ Item
                 leftPadding: 0.4 * font.pixelSize
                 padding: 0.2 * font.pixelSize
 
-                Behavior on opacity { NumberAnimation { duration: 110 } }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: animationDurationFast
+                    }
+                }
             }
             Item { Layout.fillWidth: true }
             Text {

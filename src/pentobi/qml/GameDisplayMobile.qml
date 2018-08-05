@@ -23,6 +23,8 @@ Item
     property QtObject theme
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
+    property real animationDurationMove: enableAnimations ? 300 : 0
+    property real animationDurationFast: enableAnimations ? 80 : 0
     property bool setupMode
     property alias boardContextMenu: boardContextMenu
     property alias busyIndicatorRunning: busyIndicator.running
@@ -201,7 +203,11 @@ Item
         implicitWidth: messageText.implicitWidth + 0.5 * messageText.implicitHeight
         implicitHeight: 1.5 * messageText.implicitHeight
 
-        Behavior on opacity { NumberAnimation { duration: 200 } }
+        Behavior on opacity {
+            NumberAnimation {
+                duration: animationDurationFast
+            }
+        }
 
         Text {
             id: messageText

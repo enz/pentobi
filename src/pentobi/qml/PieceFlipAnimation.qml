@@ -7,7 +7,7 @@
 import QtQuick 2.0
 
 RotationAnimation {
-    duration: 300
+    duration: animationDurationMove
     direction: RotationAnimation.Shortest
     property: "angle"
 }
