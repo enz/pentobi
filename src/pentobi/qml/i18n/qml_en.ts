@@ -239,7 +239,7 @@
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for button Close. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>

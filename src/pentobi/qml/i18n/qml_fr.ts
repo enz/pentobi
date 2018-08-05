@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fr">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -237,7 +239,7 @@
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for button Close. Leave empty for no mnemonic.</extracomment>
         <translation>C</translation>
     </message>
 </context>

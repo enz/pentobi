@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="nb_NO" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="nb_NO">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -27,7 +29,7 @@
     <message>
         <source>Settings…</source>
         <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Find Move</source>
@@ -35,7 +37,7 @@
     </message>
     <message>
         <source>Next Comment</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fullscreen</source>
@@ -68,7 +70,7 @@
     <message>
         <source>Play Move</source>
         <extracomment>Play a single move</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Quit</source>
@@ -154,7 +156,7 @@
     <message>
         <source>System</source>
         <extracomment>Name of theme using default system colors</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Move marking:</source>
@@ -209,7 +211,7 @@
     <name>ButtonApply</name>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A</source>
@@ -233,11 +235,11 @@
     <name>ButtonClose</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Mnemonic for button Close. Leave empty for no mnemonic.</extracomment>
         <translation>K</translation>
     </message>
 </context>
@@ -575,12 +577,12 @@
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New Folder %1</source>
         <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>(Setup)</source>
@@ -668,7 +670,7 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initialize your rating for this game variant.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Initial rating:</source>
@@ -724,7 +726,7 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
@@ -752,7 +754,7 @@
     </message>
     <message>
         <source>Saving image failed or unsupported image format.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Image saved.</source>
@@ -784,11 +786,11 @@
     </message>
     <message>
         <source>Continuing rated game.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Continue computer move?</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Keep only position?</source>
@@ -1016,7 +1018,7 @@
     </message>
     <message>
         <source>Annotation…</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A</source>
@@ -1223,7 +1225,7 @@
     <message>
         <source>Clear List</source>
         <extracomment>Menu item for clearing the recent files list</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>C</source>
@@ -1271,7 +1273,7 @@
     </message>
     <message>
         <source>Abort Analysis</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>O</source>
@@ -1301,7 +1303,7 @@
     </message>
     <message>
         <source>Appearance…</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A</source>
@@ -1357,7 +1359,7 @@
     <name>NewFolderDialog</name>
     <message>
         <source>Folder name:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
