@@ -8,7 +8,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.0
 
 ColumnLayout {
-    function dropCommentFocus() { comment.focus = false }
+    function dropCommentFocus() { comment.dropFocus() }
 
     Comment {
         id: comment

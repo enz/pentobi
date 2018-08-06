@@ -7,30 +7,69 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 
-ScrollView {
-    clip: true
+Item {
+    function dropFocus() { if (loader.item) loader.item.dropFocus() }
 
-    TextArea {
-        id: textArea
+    function _createTextArea(forceActiveFocus) {
+        if (loader.item)
+            return
+        loader.sourceComponent = loaderComponent
+        if (forceActiveFocus)
+            loader.item.forceActiveFocus()
+    }
 
-        text: gameModel.comment
-        color: theme.colorText
-        selectionColor: theme.colorSelection
-        selectedTextColor: theme.colorSelectedText
-        selectByMouse: isDesktop
-        wrapMode: TextEdit.Wrap
+    // Placeholder to delay more expensive creation of TextArea
+    AbstractButton {
+        visible: ! loader.item
+        anchors.fill: parent
         background: Rectangle {
-            color: textArea.activeFocus || textArea.text !== "" ?
-                       theme.colorCommentBase : theme.colorBackground
-            border.color: textArea.activeFocus ?
-                              theme.colorCommentFocus : theme.colorCommentBorder
+            color: theme.colorBackground
+            border.color: theme.colorCommentBorder
         }
-        onTextChanged: gameModel.comment = text
-        Keys.onPressed:
-            if (event.key === Qt.Key_Tab)
-            {
-                focus = false
-                event.accepted = true
+        onActiveFocusChanged: _createTextArea(true)
+        onClicked: _createTextArea(true)
+    }
+    Loader {
+        id: loader
+
+        anchors.fill: parent
+
+        Component {
+            id: loaderComponent
+
+            ScrollView {
+                function forceActiveFocus() { textArea.forceActiveFocus() }
+                function dropFocus() { textArea.focus = false }
+
+                clip: true
+
+                TextArea {
+                    id: textArea
+
+                    text: gameModel.comment
+                    color: theme.colorText
+                    selectionColor: theme.colorSelection
+                    selectedTextColor: theme.colorSelectedText
+                    selectByMouse: isDesktop
+                    wrapMode: TextEdit.Wrap
+                    onTextChanged: gameModel.comment = text
+                    background: Rectangle {
+                        color:
+                            textArea.text !== "" || textArea.activeFocus ?
+                                theme.colorCommentBase : theme.colorBackground
+                        border.color:
+                            textArea.activeFocus ?
+                                theme.colorCommentFocus :
+                                theme.colorCommentBorder
+                    }
+                    Keys.onPressed:
+                        if (event.key === Qt.Key_Tab)
+                        {
+                            focus = false
+                            event.accepted = true
+                        }
+                }
             }
+        }
     }
 }

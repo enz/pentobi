@@ -62,7 +62,7 @@ Item
         if (analyzeGame.item)
             pageIndicator.currentIndex = (pageIndicator.currentIndex + 1) % 2
     }
-    function dropCommentFocus() { comment.focus = false }
+    function dropCommentFocus() { comment.dropFocus() }
     function showMove(move) { Logic.showMove(move) }
     function getBoard() { return board }
     function showTemporaryMessage(text) {
