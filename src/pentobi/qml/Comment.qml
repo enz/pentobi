@@ -29,6 +29,10 @@ Item {
         onActiveFocusChanged: _createTextArea(true)
         onClicked: _createTextArea(true)
     }
+    Connections {
+        target: gameModel
+        onCommentChanged: if (gameModel.comment !== "") _createTextArea(false)
+    }
     Loader {
         id: loader
 
