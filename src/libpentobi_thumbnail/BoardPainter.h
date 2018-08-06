@@ -23,7 +23,6 @@ using libpentobi_base::MovePoints;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::Point;
 using libpentobi_base::PointState;
-using libpentobi_base::StartingPoints;
 
 //-----------------------------------------------------------------------------
 
@@ -35,19 +34,6 @@ using libpentobi_base::StartingPoints;
 class BoardPainter
 {
 public:
-    enum
-    {
-        dot = 1 << 1,
-
-        circle = 1 << 2
-    };
-
-    BoardPainter();
-
-    void setCoordinates(bool enable) { m_coordinates = enable; }
-
-    void setCoordinateColor(const QColor& color) { m_coordinateColor = color; }
-
     /** Paint the board.
         This function must be called before painting any pieces because it
         initializes some members that are used by the piece painting
@@ -62,29 +48,9 @@ public:
         the point is empty or contain a unique value for segments of the same
         piece. */
     void paintPieces(QPainter& painter, const Grid<PointState>& pointState,
-                     const Grid<unsigned>& pieceId,
-                     const Grid<QString>* labels = nullptr,
-                     const Grid<int>* marks = nullptr);
-
-    /** Paint the selected piece.
-        Paints the selected piece either transparent (if not legal) or opaque
-        (if legal). */
-    void paintSelectedPiece(QPainter& painter, Color c,
-                            const MovePoints& points, bool isOnePiece,
-                            bool isLegal);
-
-    /** Get the corresponding board coordinates of a pixel.
-        @return The board coordinates or CoordPoint::null() if paint() was
-        not called yet or the pixel is outside the board. */
-    CoordPoint getCoordPoint(int x, int y);
-
-    bool hasPainted() const { return m_hasPainted; }
+                     const Grid<unsigned>& pieceId);
 
 private:
-    bool m_hasPainted = false;
-
-    bool m_coordinates = false;
-
     bool m_isTrigon;
 
     bool m_isNexos;
@@ -103,44 +69,17 @@ private:
     /** The height of the last board painted. */
     int m_height;
 
-    QColor m_coordinateColor = Qt::black;
-
     qreal m_fieldWidth;
 
     qreal m_fieldHeight;
 
     QPointF m_boardOffset;
 
-    QFont m_font;
-
-    QFont m_fontCondensed;
-
-    QFont m_fontSemiCondensed;
-
-    QFont m_fontCoordLabels;
-
-    StartingPoints m_startingPoints;
-
-
-    void paintCoordinates(QPainter& painter);
 
     void paintJunction(QPainter& painter, Variant variant,
                        const Grid<PointState>& pointState,
                        const Grid<unsigned>& pieceId, int x, int y,
                        qreal fieldX, qreal fieldY);
-
-    void paintLabel(QPainter& painter, qreal x, qreal y, qreal width,
-                    qreal height, const QString& label, bool isCoordLabel);
-
-    void paintLabels(QPainter& painter, const Grid<PointState>& pointState,
-                     Variant variant, const Grid<QString>& labels);
-
-    void paintMarks(QPainter& painter, const Grid<PointState>& pointState,
-                    Variant variant, const Grid<int>& marks);
-
-    void paintStartingPoints(QPainter& painter, Variant variant,
-                             const Grid<PointState>& pointState,
-                             ColorMap<bool> isFirstPiece);
 };
 
 //-----------------------------------------------------------------------------
