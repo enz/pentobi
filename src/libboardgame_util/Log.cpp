@@ -81,7 +81,7 @@ AndroidBuf android_buffer;
 
 //-----------------------------------------------------------------------------
 
-ostream* _log_stream = &cerr;
+ostream* _log_stream = nullptr;
 
 //-----------------------------------------------------------------------------
 
@@ -113,6 +113,7 @@ void _log_init()
 #if defined ANDROID || defined __ANDROID__
     cerr.rdbuf(&android_buffer);
 #endif
+    _log_stream = &cerr;
 }
 
 //-----------------------------------------------------------------------------
