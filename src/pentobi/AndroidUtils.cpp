@@ -74,6 +74,7 @@ QUrl AndroidUtils::extractHelp(const QString& language)
     auto file = QFileInfo(dirPath + "/index.html").absoluteFilePath();
     return QUrl::fromLocalFile(file);
 #else
+    Q_UNUSED(language);
     return {};
 #endif
 }
