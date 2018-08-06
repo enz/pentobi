@@ -43,6 +43,7 @@ using libboardgame_sgf::is_main_variation;
 using libboardgame_util::ArrayList;
 using libboardgame_util::get_letter_coord;
 using libpentobi_base::to_string_id;
+using libpentobi_base::BoardType;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
@@ -1762,6 +1763,7 @@ void GameModel::updateProperties()
     auto& geo = bd.get_geometry();
     auto& tree = m_game.get_tree();
     bool isTrigon = (bd.get_piece_set() == PieceSet::trigon);
+    bool isNexos = (bd.get_board_type() == BoardType::nexos);
     set(m_points0, bd.get_points(Color(0)), &GameModel::points0Changed);
     set(m_points1, bd.get_points(Color(1)), &GameModel::points1Changed);
     set(m_bonus0, bd.get_bonus(Color(0)), &GameModel::bonus0Changed);
@@ -1785,7 +1787,9 @@ void GameModel::updateProperties()
     if (bd.is_first_piece(Color(0)))
     {
         isFirstPieceAny = true;
-        if (! isTrigon)
+        if (isNexos)
+            m_tmpPoints.append(QPointF(4, 4));
+        else if (! isTrigon)
             for (Point p : bd.get_starting_points(Color(0)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
     }
@@ -1794,7 +1798,9 @@ void GameModel::updateProperties()
     if (bd.is_first_piece(Color(1)))
     {
         isFirstPieceAny = true;
-        if (! isTrigon)
+        if (isNexos)
+            m_tmpPoints.append(QPointF(20, 4));
+        else if (! isTrigon)
             for (Point p : bd.get_starting_points(Color(1)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
     }
@@ -1803,7 +1809,9 @@ void GameModel::updateProperties()
     if (m_nuColors > 2 && bd.is_first_piece(Color(2)))
     {
         isFirstPieceAny = true;
-        if (! isTrigon)
+        if (isNexos)
+            m_tmpPoints.append(QPointF(20, 20));
+        else if (! isTrigon)
             for (Point p : bd.get_starting_points(Color(2)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
     }
@@ -1812,7 +1820,9 @@ void GameModel::updateProperties()
     if (m_nuColors > 3 && bd.is_first_piece(Color(3)))
     {
         isFirstPieceAny = true;
-        if (! isTrigon)
+        if (isNexos)
+            m_tmpPoints.append(QPointF(4, 20));
+        else if (! isTrigon)
             for (Point p : bd.get_starting_points(Color(3)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
     }
