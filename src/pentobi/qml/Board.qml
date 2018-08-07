@@ -78,13 +78,13 @@ Item {
     signal rightClicked(point pos)
 
     function mapFromGameX(x) {
-        if (isTrigon) return grabImageTarget.x + image.x + (x + 0.5) * gridWidth
-        if (isNexos) return grabImageTarget.x + image.x + (x - 0.25) * gridWidth
-        return grabImageTarget.x + image.x + x * gridWidth
+        if (isTrigon) return image.x + grabImageTarget.x + (x + 0.5) * gridWidth
+        if (isNexos) return image.x + grabImageTarget.x + (x - 0.25) * gridWidth
+        return image.x + grabImageTarget.x + x * gridWidth
     }
     function mapFromGameY(y) {
-        if (isNexos) return grabImageTarget.y + image.y + (y - 0.25) * gridHeight
-        return grabImageTarget.y + image.y + y * gridHeight
+        if (isNexos) return image.y + grabImageTarget.y + (y - 0.25) * gridHeight
+        return image.y + grabImageTarget.y + y * gridHeight
     }
     function mapToGame(pos) {
         if (isTrigon)
@@ -98,7 +98,7 @@ Item {
     }
     // Needs all arguments for dependencies
     function getStartingPointX(x, gridWidth, pointSize, isGembloQ) {
-        var sx = mapFromGameX(x) + (gridWidth - pointSize) / 2
+        var sx = mapFromGameX(x) - grabImageTarget.x + (gridWidth - pointSize) / 2
         if (isGembloQ) {
             if (x % 2 == 0) sx -= gridWidth / 2
             else sx += gridWidth / 2
@@ -107,7 +107,7 @@ Item {
     }
     // Needs all arguments for dependencies
     function getStartingPointY(y, gridHeight, pointSize, isGembloQ) {
-        var sy = mapFromGameY(y) + (gridHeight - pointSize) / 2
+        var sy = mapFromGameY(y) - grabImageTarget.y + (gridHeight - pointSize) / 2
         if (isGembloQ) {
             if (y % 2 == 0) sy += gridHeight / 2
             else sy -= gridHeight / 2
@@ -197,137 +197,148 @@ Item {
             verticalAlignment: Image.AlignTop
             cache: false
         }
-    }
-    Repeater {
-        model: gameModel.startingPoints0
+        Repeater {
+            model: gameModel.startingPoints0
 
-        Rectangle {
-            visible: image.status == Image.Ready
-            color: gameVariant === "duo" ?
-                       theme.colorPurple : gameVariant === "junior" ?
-                           theme.colorGreen : theme.colorBlue
-            width: startingPointSize; height: width
-            radius: width / 2
-            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            Rectangle {
+                visible: image.status == Image.Ready
+                color: gameVariant === "duo" ?
+                           theme.colorPurple : gameVariant === "junior" ?
+                               theme.colorGreen : theme.colorBlue
+                width: startingPointSize; height: width
+                radius: width / 2
+                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            }
         }
-    }
-    Repeater {
-        model: gameModel.startingPoints1
+        Repeater {
+            model: gameModel.startingPoints1
 
-        Rectangle {
-            visible: image.status == Image.Ready
-            color: gameVariant === "duo" || gameVariant === "junior" ?
-                       theme.colorOrange : gameModel.nuColors === 2 ?
-                           theme.colorGreen : theme.colorYellow
-            width: startingPointSize; height: width
-            radius: width / 2
-            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            Rectangle {
+                visible: image.status == Image.Ready
+                color: gameVariant === "duo" || gameVariant === "junior" ?
+                           theme.colorOrange : gameModel.nuColors === 2 ?
+                               theme.colorGreen : theme.colorYellow
+                width: startingPointSize; height: width
+                radius: width / 2
+                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            }
         }
-    }
-    Repeater {
-        model: gameModel.startingPoints2
+        Repeater {
+            model: gameModel.startingPoints2
 
-        Rectangle {
-            visible: image.status == Image.Ready
-            color: theme.colorRed
-            width: startingPointSize; height: width
-            radius: width / 2
-            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            Rectangle {
+                visible: image.status == Image.Ready
+                color: theme.colorRed
+                width: startingPointSize; height: width
+                radius: width / 2
+                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            }
         }
-    }
-    Repeater {
-        model: gameModel.startingPoints3
+        Repeater {
+            model: gameModel.startingPoints3
 
-        Rectangle {
-            visible: image.status == Image.Ready
-            color: theme.colorGreen
-            width: startingPointSize; height: width
-            radius: width / 2
-            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            Rectangle {
+                visible: image.status == Image.Ready
+                color: theme.colorGreen
+                width: startingPointSize; height: width
+                radius: width / 2
+                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            }
         }
-    }
-    Repeater {
-        model: gameModel.startingPointsAll
+        Repeater {
+            model: gameModel.startingPointsAll
 
-        Rectangle {
-            visible: image.status == Image.Ready
-            color: theme.colorStartingPoint
-            width: startingPointSize; height: width
-            radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
-            y: mapFromGameY(modelData.y) + getCenterYTrigon(modelData)
-               - height / 2
+            Rectangle {
+                visible: image.status == Image.Ready
+                color: theme.colorStartingPoint
+                width: startingPointSize; height: width
+                radius: width / 2
+                x: mapFromGameX(modelData.x) - grabImageTarget.x
+                   + (gridWidth - width) / 2
+                y: mapFromGameY(modelData.y) - grabImageTarget.y
+                   + getCenterYTrigon(modelData) - height / 2
+            }
         }
-    }
-    Repeater {
-        model: showCoordinates ? columns : 0
+        Repeater {
+            model: showCoordinates ? columns : 0
 
-        Text {
-            text: getColumnCoord(index)
-            color: theme.colorText
-            opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-            font.pixelSize: coordinateFontSize
-            x: mapFromGameX(index) + (gridWidth - width) / 2
-            y: mapFromGameY(-1) + (gridHeight - height) / 2
+            Text {
+                text: getColumnCoord(index)
+                color: theme.colorText
+                opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
+                font.pixelSize: coordinateFontSize
+                x: mapFromGameX(index) - grabImageTarget.x
+                   + (gridWidth - width) / 2
+                y: mapFromGameY(-1) - grabImageTarget.y
+                   + (gridHeight - height) / 2
+            }
         }
-    }
-    Repeater {
-        model: showCoordinates ? columns : 0
+        Repeater {
+            model: showCoordinates ? columns : 0
 
-        Text {
-            text: getColumnCoord(index)
-            color: theme.colorText
-            opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-            font.pixelSize: coordinateFontSize
-            x: mapFromGameX(index) + (gridWidth - width) / 2
-            y: mapFromGameY(rows) + (gridHeight - height) / 2
+            Text {
+                text: getColumnCoord(index)
+                color: theme.colorText
+                opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
+                font.pixelSize: coordinateFontSize
+                x: mapFromGameX(index) - grabImageTarget.x
+                   + (gridWidth - width) / 2
+                y: mapFromGameY(rows) - grabImageTarget.y
+                   + (gridHeight - height) / 2
+            }
         }
-    }
-    Repeater {
-        model: showCoordinates ? rows : 0
+        Repeater {
+            model: showCoordinates ? rows : 0
 
-        Text {
-            text: index + 1
-            color: theme.colorText
-            opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-            font.pixelSize: coordinateFontSize
-            x: mapFromGameX(isTrigon ? -1.5 : -1) + (gridWidth - width) / 2
-            y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
+            Text {
+                text: index + 1
+                color: theme.colorText
+                opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
+                font.pixelSize: coordinateFontSize
+                x: mapFromGameX(isTrigon ? -1.5 : -1) - grabImageTarget.x
+                   + (gridWidth - width) / 2
+                y: mapFromGameY(rows - index - 1) - grabImageTarget.y
+                   + (gridHeight - height) / 2
+            }
         }
-    }
-    Repeater {
-        model: showCoordinates ? rows : 0
+        Repeater {
+            model: showCoordinates ? rows : 0
 
-        Text {
-            text: index + 1
-            color: theme.colorText
-            opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-            font.pixelSize: coordinateFontSize
-            x: mapFromGameX(isTrigon ? columns + 0.5 : columns) + (gridWidth - width) / 2
-            y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
+            Text {
+                text: index + 1
+                color: theme.colorText
+                opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
+                font.pixelSize: coordinateFontSize
+                x: mapFromGameX(isTrigon ? columns + 0.5 : columns)
+                    - grabImageTarget.x + (gridWidth - width) / 2
+                y: mapFromGameY(rows - index - 1) - grabImageTarget.y
+                   + (gridHeight - height) / 2
+            }
         }
-    }
-    MouseArea {
-        anchors.fill: root
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
-        onPressAndHold: {
-            var pos = mapToGame(Qt.point(mouseX, mouseY))
-            pos.x = Math.floor(pos.x)
-            pos.y = Math.floor(pos.y)
-            root.rightClicked(pos)
-        }
-        onClicked: {
-            var pos = mapToGame(Qt.point(mouseX, mouseY))
-            pos.x = Math.floor(pos.x)
-            pos.y = Math.floor(pos.y)
-            if (mouse.button & Qt.RightButton)
+        MouseArea {
+            anchors.fill: parent
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
+            onPressAndHold: {
+                var pos = mapToGame(Qt.point(mouseX + grabImageTarget.x,
+                                             mouseY + grabImageTarget.y))
+                pos.x = Math.floor(pos.x)
+                pos.y = Math.floor(pos.y)
                 root.rightClicked(pos)
-            else
-                root.clicked(pos)
+            }
+            onClicked: {
+                var pos = mapToGame(Qt.point(mouseX + grabImageTarget.x,
+                                             mouseY + grabImageTarget.y))
+                pos.x = Math.floor(pos.x)
+                pos.y = Math.floor(pos.y)
+                if (mouse.button & Qt.RightButton)
+                    root.rightClicked(pos)
+                else
+                    root.clicked(pos)
+            }
         }
     }
 }

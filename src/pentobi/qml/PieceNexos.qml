@@ -242,9 +242,9 @@ Item
 
             ParentChange {
                 target: root
-                parent: board
-                x: board.mapFromGameX(pieceModel.gameCoord.x)
-                y: board.mapFromGameY(pieceModel.gameCoord.y)
+                parent: board.grabImageTarget
+                x: board.mapFromGameX(pieceModel.gameCoord.x) - board.grabImageTarget.x
+                y: board.mapFromGameY(pieceModel.gameCoord.y) - board.grabImageTarget.y
             }
         },
         State {

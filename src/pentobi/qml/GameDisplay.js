@@ -159,8 +159,9 @@ function onBoardRightClicked(pos) {
     var n = gameModel.getMoveNumberAt(pos)
     if (n < 0)
         return
-    gameDisplay.openBoardContextMenu(n, board.mapFromGameX(pos.x + 0.5),
-                                     board.mapFromGameY(pos.y + 0.5))
+    gameDisplay.openBoardContextMenu(
+                n, board.mapFromGameX(pos.x + 0.5),
+                board.mapFromGameY(pos.y + 0.5))
 }
 
 function shiftPiece(dx, dy) {
@@ -218,9 +219,10 @@ function showMove(move) {
     var newPickedPiece = findPiece(pieceModel)
     if (pickedPiece && newPickedPiece !== pickedPiece)
         pickedPiece = null
-    var pos = board.mapToItem(pieceManipulator.parent,
-                              board.mapFromGameX(pieceModel.gameCoord.x),
-                              board.mapFromGameY(pieceModel.gameCoord.y))
+    var pos = board.mapToItem(
+                pieceManipulator.parent,
+                board.mapFromGameX(pieceModel.gameCoord.x),
+                board.mapFromGameY(pieceModel.gameCoord.y))
     pieceManipulator.x = pos.x - pieceManipulator.width / 2
     pieceManipulator.y = pos.y - pieceManipulator.height / 2
     pickedPiece = newPickedPiece
