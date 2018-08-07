@@ -91,6 +91,26 @@ QPointF getGameCoord(const Board& bd, Move mv)
     return PieceModel::findCenter(bd, movePoints, false);
 }
 
+/** Board uses 4 starting points per Color in GembloQ for technical reasons,
+    GameModel only needs one for diplaying the colored dot, shifted to the
+    center of a square. */
+QPointF getGembloQStartingPoint(const Board& bd, Color c)
+{
+    auto p = bd.get_starting_points(c)[0];
+    auto& geo = bd.get_geometry();
+    qreal x = geo.get_x(p);
+    qreal y = geo.get_y(p);
+    if (geo.get_x(p) % 2 == 0)
+        x -= 0.5;
+    else
+        x += 0.5;
+    if (geo.get_y(p) % 2 == 0)
+        y += 0.5;
+    else
+        y -= 0.5;
+    return {x, y};
+}
+
 /** Simple heuristic used for sorting the list used in GameModel::findMove().
     Prefers larger pieces, and moves of the same piece (in that order). */
 float getHeuristic(const Board& bd, Move mv)
@@ -1762,6 +1782,7 @@ void GameModel::updateProperties()
     auto& bd = getBoard();
     auto& geo = bd.get_geometry();
     auto& tree = m_game.get_tree();
+    bool isGembloQ = (bd.get_piece_set() == PieceSet::gembloq);
     bool isTrigon = (bd.get_piece_set() == PieceSet::trigon);
     bool isNexos = (bd.get_board_type() == BoardType::nexos);
     set(m_points0, bd.get_points(Color(0)), &GameModel::points0Changed);
@@ -1789,6 +1810,8 @@ void GameModel::updateProperties()
         isFirstPieceAny = true;
         if (isNexos)
             m_tmpPoints.append(QPointF(4, 4));
+        else if (isGembloQ)
+            m_tmpPoints.append(getGembloQStartingPoint(bd, Color(0)));
         else if (! isTrigon)
             for (Point p : bd.get_starting_points(Color(0)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
@@ -1800,6 +1823,8 @@ void GameModel::updateProperties()
         isFirstPieceAny = true;
         if (isNexos)
             m_tmpPoints.append(QPointF(20, 4));
+        else if (isGembloQ)
+            m_tmpPoints.append(getGembloQStartingPoint(bd, Color(1)));
         else if (! isTrigon)
             for (Point p : bd.get_starting_points(Color(1)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
@@ -1811,6 +1836,8 @@ void GameModel::updateProperties()
         isFirstPieceAny = true;
         if (isNexos)
             m_tmpPoints.append(QPointF(20, 20));
+        else if (isGembloQ)
+            m_tmpPoints.append(getGembloQStartingPoint(bd, Color(2)));
         else if (! isTrigon)
             for (Point p : bd.get_starting_points(Color(2)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
@@ -1822,6 +1849,8 @@ void GameModel::updateProperties()
         isFirstPieceAny = true;
         if (isNexos)
             m_tmpPoints.append(QPointF(4, 20));
+        else if (isGembloQ)
+            m_tmpPoints.append(getGembloQStartingPoint(bd, Color(3)));
         else if (! isTrigon)
             for (Point p : bd.get_starting_points(Color(3)))
                 m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));

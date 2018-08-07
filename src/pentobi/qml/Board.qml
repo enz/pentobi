@@ -98,21 +98,11 @@ Item {
     }
     // Needs all arguments for dependencies
     function getStartingPointX(x, gridWidth, pointSize, isGembloQ) {
-        var sx = mapFromGameX(x) - grabImageTarget.x + (gridWidth - pointSize) / 2
-        if (isGembloQ) {
-            if (x % 2 == 0) sx -= gridWidth / 2
-            else sx += gridWidth / 2
-        }
-        return sx
+        return mapFromGameX(x) - grabImageTarget.x + (gridWidth - pointSize) / 2
     }
     // Needs all arguments for dependencies
     function getStartingPointY(y, gridHeight, pointSize, isGembloQ) {
-        var sy = mapFromGameY(y) - grabImageTarget.y + (gridHeight - pointSize) / 2
-        if (isGembloQ) {
-            if (y % 2 == 0) sy += gridHeight / 2
-            else sy -= gridHeight / 2
-        }
-        return sy
+        return mapFromGameY(y) - grabImageTarget.y + (gridHeight - pointSize) / 2
     }
     function getCenterYTrigon(pos) {
 
