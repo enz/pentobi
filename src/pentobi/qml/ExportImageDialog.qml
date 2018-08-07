@@ -10,6 +10,8 @@ import QtQuick.Controls 2.2
 import "." as Pentobi
 
 Pentobi.Dialog {
+    id: root
+
     footer: DialogButtonBoxOkCancel { }
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
@@ -36,6 +38,7 @@ Pentobi.Dialog {
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{ bottom: 0; top: 32767 }
                 selectByMouse: true
+                onAccepted: root.accept()
                 Layout.preferredWidth: font.pixelSize * 5
             }
             Item { Layout.fillWidth: true }
