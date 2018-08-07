@@ -64,7 +64,6 @@ Item {
     }
     property real startingPointSize: {
         if (isTrigon) return 0.27 * gridHeight
-        if (isNexos) return 0.4 * gridHeight
         if (isGembloQ) return 0.45 * gridHeight
         return 0.35 * gridHeight
     }
