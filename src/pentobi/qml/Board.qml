@@ -133,8 +133,6 @@ Item {
         height: {
             if (! showCoordinates)
                 return image.height
-            if (isTrigon)
-                return image.height + 3 * gridHeight
             return image.height + 2 * gridHeight
         }
 
