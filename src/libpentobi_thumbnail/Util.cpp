@@ -16,19 +16,19 @@
 
 namespace {
 
-const QColor blue(0, 115, 207);
+const QColor blue(0, 119, 210);
 
 const QColor green(0, 192, 0);
 
 const QColor red(230, 62, 44);
 
-const QColor yellow(235, 205, 35);
+const QColor yellow(232, 198, 22);
 
 const QColor purple(161, 44, 207);
 
-const QColor orange(240, 173, 26);
+const QColor orange(240, 146, 23);
 
-const QColor gray(174, 167, 172);
+const QColor gray(154, 146, 152);
 
 void setAlphaSaturation(QColor& c, qreal alpha, qreal saturation)
 {
