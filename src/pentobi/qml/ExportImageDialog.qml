@@ -20,15 +20,7 @@ Pentobi.Dialog {
     }
 
     Item {
-        implicitWidth: {
-            // Qt 5.11 doesn't correctly handle dialog sizing if dialog (incl.
-            // frame) is wider than window and Default style never makes footer
-            // wider than content (potentially eliding button texts).
-            var w = rowLayout.implicitWidth
-            w = Math.max(w, font.pixelSize * 18)
-            w = Math.min(w, maxContentWidth)
-            return w
-        }
+        implicitWidth: Math.min(rowLayout.implicitWidth, maxContentWidth)
         implicitHeight: rowLayout.implicitHeight
 
         RowLayout {
@@ -44,7 +36,7 @@ Pentobi.Dialog {
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{ bottom: 0; top: 32767 }
                 selectByMouse: true
-                Layout.preferredWidth: font.pixelSize * 7
+                Layout.preferredWidth: font.pixelSize * 5
             }
             Item { Layout.fillWidth: true }
         }
