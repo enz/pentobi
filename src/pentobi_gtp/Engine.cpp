@@ -169,15 +169,6 @@ void Engine::cmd_version(Response& response)
 #else
     version = "unknown";
 #endif
-    // By convention, the version string of unreleased versions contains the
-    // string x (appended to the last released version). In this case, or
-    // if VERSION was undefined, we append the build date.
-    if (version == "unknown" || version.find("x") != string::npos)
-    {
-        version.append(" (");
-        version.append(__DATE__);
-        version.append(")");
-    }
 #ifdef LIBBOARDGAME_DEBUG
     version.append(" (dbg)");
 #endif
