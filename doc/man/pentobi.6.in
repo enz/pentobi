@@ -33,7 +33,7 @@ Use a window layout optimized for smartphones and apply some user interface
 changes that assume that a touchscreen is the main input device. If this option
 is not used, the default layout depends on the platform. Using this option also
 changes the default style for GUI elements of QQuickControls 2 to Default if
-the style is not explicitely set with option \-style.
+the style is not explicitly set with option \-style.
 .TP
 .B \-\-nobook
 Do not use opening books.
