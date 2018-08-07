@@ -46,7 +46,7 @@ ApplicationWindow {
         isAndroid ? Screen.desktopAvailableHeight
                   : Math.min(Screen.desktopAvailableHeight, 680)
 
-    property int exportImageWidth: 400
+    property int exportImageWidth: 420
     property bool busyIndicatorRunning: lengthyCommand.isRunning
                                         || playerModel.isGenMoveRunning
                                         || analyzeGameModel.isRunning
