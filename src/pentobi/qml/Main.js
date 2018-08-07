@@ -224,7 +224,7 @@ function exportImage(fileUrl) {
         return
     var board = gameDisplay.getBoard()
     var size = Qt.size(exportImageWidth, exportImageWidth * board.height / board.width)
-    if (! board.grabToImage(function(result) {
+    if (! board.grabImageTarget.grabToImage(function(result) {
         var file = getFileFromUrl(fileUrl)
         if (! result.saveToFile(file))
             showInfo(qsTr("Saving image failed or unsupported image format."))

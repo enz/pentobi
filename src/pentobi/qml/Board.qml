@@ -72,6 +72,7 @@ Item {
         if (isGembloQ) return 0.35 * gridHeight
         return 0.6 * gridHeight
     }
+    property Item grabImageTarget: grabImageTarget
 
     signal clicked(point pos)
     signal rightClicked(point pos)
@@ -127,166 +128,187 @@ Item {
         return String.fromCharCode("A".charCodeAt(0) + x)
     }
 
-    Image {
-        id: image
+    Item {
+        id: grabImageTarget
+
+        anchors.centerIn: parent
 
         width: {
-            if (isTrigon) return gridWidth * (columns + 1)
-            if (isNexos) return gridWidth * (columns - 0.5)
-            return gridWidth * columns
+            if (! showCoordinates)
+                return image.width
+            if (isTrigon)
+                return image.width + 3 * gridWidth
+            return image.width + 2 * gridWidth
         }
         height: {
-            if (isNexos) return gridHeight * (rows - 0.5)
-            return gridHeight * rows
+            if (! showCoordinates)
+                return image.height
+            if (isTrigon)
+                return image.height + 3 * gridHeight
+            return image.height + 2 * gridHeight
         }
-        anchors.centerIn: root
-        source: {
-            switch (gameVariant) {
-            case "trigon":
-            case "trigon_2":
-                return theme.getImage("board-trigon")
-            case "trigon_3":
-                return theme.getImage("board-trigon-3")
-            case "nexos":
-            case "nexos_2":
-                return theme.getImage("board-nexos")
-            case "callisto":
-            case "callisto_2_4":
-                return theme.getImage("board-callisto")
-            case "callisto_2":
-                return theme.getImage("board-callisto-2")
-            case "callisto_3":
-                return theme.getImage("board-callisto-3")
-            case "gembloq":
-            case "gembloq_2_4":
-                return theme.getImage("board-gembloq")
-            case "gembloq_2":
-                return theme.getImage("board-gembloq-2")
-            case "gembloq_3":
-                return theme.getImage("board-gembloq-3")
-            case "duo":
-            case "junior":
-                return theme.getImage("board-duo")
-            default:
-                return theme.getImage("board-classic")
+
+        Image {
+            id: image
+
+            width: {
+                if (isTrigon) return gridWidth * (columns + 1)
+                if (isNexos) return gridWidth * (columns - 0.5)
+                return gridWidth * columns
+            }
+            height: {
+                if (isNexos) return gridHeight * (rows - 0.5)
+                return gridHeight * rows
+            }
+            anchors.centerIn: parent
+            source: {
+                switch (gameVariant) {
+                case "trigon":
+                case "trigon_2":
+                    return theme.getImage("board-trigon")
+                case "trigon_3":
+                    return theme.getImage("board-trigon-3")
+                case "nexos":
+                case "nexos_2":
+                    return theme.getImage("board-nexos")
+                case "callisto":
+                case "callisto_2_4":
+                    return theme.getImage("board-callisto")
+                case "callisto_2":
+                    return theme.getImage("board-callisto-2")
+                case "callisto_3":
+                    return theme.getImage("board-callisto-3")
+                case "gembloq":
+                case "gembloq_2_4":
+                    return theme.getImage("board-gembloq")
+                case "gembloq_2":
+                    return theme.getImage("board-gembloq-2")
+                case "gembloq_3":
+                    return theme.getImage("board-gembloq-3")
+                case "duo":
+                case "junior":
+                    return theme.getImage("board-duo")
+                default:
+                    return theme.getImage("board-classic")
+                }
+            }
+            sourceSize { width: width; height: height }
+            horizontalAlignment: Image.AlignLeft
+            verticalAlignment: Image.AlignTop
+            cache: false
+        }
+        Repeater {
+            model: gameModel.startingPoints0
+
+            Rectangle {
+                visible: image.status == Image.Ready
+                color: gameVariant === "duo" ?
+                           theme.colorPurple : gameVariant === "junior" ?
+                               theme.colorGreen : theme.colorBlue
+                width: startingPointSize; height: width
+                radius: width / 2
+                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
             }
         }
-        sourceSize { width: width; height: height }
-        horizontalAlignment: Image.AlignLeft
-        verticalAlignment: Image.AlignTop
-        cache: false
-    }
-    Repeater {
-        model: gameModel.startingPoints0
+        Repeater {
+            model: gameModel.startingPoints1
 
-        Rectangle {
-            visible: image.status == Image.Ready
-            color: gameVariant === "duo" ?
-                       theme.colorPurple : gameVariant === "junior" ?
-                           theme.colorGreen : theme.colorBlue
-            width: startingPointSize; height: width
-            radius: width / 2
-            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            Rectangle {
+                visible: image.status == Image.Ready
+                color: gameVariant === "duo" || gameVariant === "junior" ?
+                           theme.colorOrange : gameModel.nuColors === 2 ?
+                               theme.colorGreen : theme.colorYellow
+                width: startingPointSize; height: width
+                radius: width / 2
+                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            }
         }
-    }
-    Repeater {
-        model: gameModel.startingPoints1
+        Repeater {
+            model: gameModel.startingPoints2
 
-        Rectangle {
-            visible: image.status == Image.Ready
-            color: gameVariant === "duo" || gameVariant === "junior" ?
-                       theme.colorOrange : gameModel.nuColors === 2 ?
-                           theme.colorGreen : theme.colorYellow
-            width: startingPointSize; height: width
-            radius: width / 2
-            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            Rectangle {
+                visible: image.status == Image.Ready
+                color: theme.colorRed
+                width: startingPointSize; height: width
+                radius: width / 2
+                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            }
         }
-    }
-    Repeater {
-        model: gameModel.startingPoints2
+        Repeater {
+            model: gameModel.startingPoints3
 
-        Rectangle {
-            visible: image.status == Image.Ready
-            color: theme.colorRed
-            width: startingPointSize; height: width
-            radius: width / 2
-            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            Rectangle {
+                visible: image.status == Image.Ready
+                color: theme.colorGreen
+                width: startingPointSize; height: width
+                radius: width / 2
+                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
+                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            }
         }
-    }
-    Repeater {
-        model: gameModel.startingPoints3
+        Repeater {
+            model: gameModel.startingPointsAll
 
-        Rectangle {
-            visible: image.status == Image.Ready
-            color: theme.colorGreen
-            width: startingPointSize; height: width
-            radius: width / 2
-            x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-            y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+            Rectangle {
+                visible: image.status == Image.Ready
+                color: theme.colorStartingPoint
+                width: startingPointSize; height: width
+                radius: width / 2
+                x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
+                y: mapFromGameY(modelData.y) + getCenterYTrigon(modelData)
+                   - height / 2
+            }
         }
-    }
-    Repeater {
-        model: gameModel.startingPointsAll
+        Repeater {
+            model: showCoordinates ? columns : 0
 
-        Rectangle {
-            visible: image.status == Image.Ready
-            color: theme.colorStartingPoint
-            width: startingPointSize; height: width
-            radius: width / 2
-            x: mapFromGameX(modelData.x) + (gridWidth - width) / 2
-            y: mapFromGameY(modelData.y) + getCenterYTrigon(modelData)
-               - height / 2
+            Text {
+                text: getColumnCoord(index)
+                color: theme.colorText
+                opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
+                font.pixelSize: coordinateFontSize
+                x: mapFromGameX(index) + (gridWidth - width) / 2
+                y: mapFromGameY(-1) + (gridHeight - height) / 2
+            }
         }
-    }
-    Repeater {
-        model: showCoordinates ? columns : 0
+        Repeater {
+            model: showCoordinates ? columns : 0
 
-        Text {
-            text: getColumnCoord(index)
-            color: theme.colorText
-            opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-            font.pixelSize: coordinateFontSize
-            x: mapFromGameX(index) + (gridWidth - width) / 2
-            y: mapFromGameY(-1) + (gridHeight - height) / 2
+            Text {
+                text: getColumnCoord(index)
+                color: theme.colorText
+                opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
+                font.pixelSize: coordinateFontSize
+                x: mapFromGameX(index) + (gridWidth - width) / 2
+                y: mapFromGameY(rows) + (gridHeight - height) / 2
+            }
         }
-    }
-    Repeater {
-        model: showCoordinates ? columns : 0
+        Repeater {
+            model: showCoordinates ? rows : 0
 
-        Text {
-            text: getColumnCoord(index)
-            color: theme.colorText
-            opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-            font.pixelSize: coordinateFontSize
-            x: mapFromGameX(index) + (gridWidth - width) / 2
-            y: mapFromGameY(rows) + (gridHeight - height) / 2
+            Text {
+                text: index + 1
+                color: theme.colorText
+                opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
+                font.pixelSize: coordinateFontSize
+                x: mapFromGameX(isTrigon ? -1.5 : -1) + (gridWidth - width) / 2
+                y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
+            }
         }
-    }
-    Repeater {
-        model: showCoordinates ? rows : 0
+        Repeater {
+            model: showCoordinates ? rows : 0
 
-        Text {
-            text: index + 1
-            color: theme.colorText
-            opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-            font.pixelSize: coordinateFontSize
-            x: mapFromGameX(isTrigon ? -1.5 : -1) + (gridWidth - width) / 2
-            y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
-        }
-    }
-    Repeater {
-        model: showCoordinates ? rows : 0
-
-        Text {
-            text: index + 1
-            color: theme.colorText
-            opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-            font.pixelSize: coordinateFontSize
-            x: mapFromGameX(isTrigon ? columns + 0.5 : columns) + (gridWidth - width) / 2
-            y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
+            Text {
+                text: index + 1
+                color: theme.colorText
+                opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
+                font.pixelSize: coordinateFontSize
+                x: mapFromGameX(isTrigon ? columns + 0.5 : columns) + (gridWidth - width) / 2
+                y: mapFromGameY(rows - index - 1) + (gridHeight - height) / 2
+            }
         }
     }
     MouseArea {
