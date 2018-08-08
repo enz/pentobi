@@ -305,7 +305,14 @@ Item
         isOutsideBoard:
             ! board.contains(parent.mapToItem(board, x + width / 2,
                                               y + height / 2))
-        width: (board.isNexos ? 12.5 : board.isGembloQ ? 12.1 : 8.5) * board.gridHeight; height: width
+        width: {
+            if (board.isTrigon) return 7 * board.gridHeight
+            if (board.isNexos) return 11 * board.gridHeight
+            if (board.isGembloQ) return 10.5 * board.gridHeight
+            if (board.isCallisto) return 6.5 * board.gridHeight
+            return 7.3 * board.gridHeight
+        }
+        height: width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
         onPiecePlayed: Logic.playPickedPiece()
