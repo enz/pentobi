@@ -189,7 +189,6 @@ Item {
             model: gameModel.startingPoints0
 
             Rectangle {
-                visible: image.status == Image.Ready
                 color: gameVariant === "duo" ?
                            theme.colorPurple : gameVariant === "junior" ?
                                theme.colorGreen : theme.colorBlue
@@ -203,7 +202,6 @@ Item {
             model: gameModel.startingPoints1
 
             Rectangle {
-                visible: image.status == Image.Ready
                 color: gameVariant === "duo" || gameVariant === "junior" ?
                            theme.colorOrange : gameModel.nuColors === 2 ?
                                theme.colorGreen : theme.colorYellow
@@ -217,7 +215,6 @@ Item {
             model: gameModel.startingPoints2
 
             Rectangle {
-                visible: image.status == Image.Ready
                 color: theme.colorRed
                 width: startingPointSize; height: width
                 radius: width / 2
@@ -229,7 +226,6 @@ Item {
             model: gameModel.startingPoints3
 
             Rectangle {
-                visible: image.status == Image.Ready
                 color: theme.colorGreen
                 width: startingPointSize; height: width
                 radius: width / 2
@@ -241,7 +237,6 @@ Item {
             model: gameModel.startingPointsAll
 
             Rectangle {
-                visible: image.status == Image.Ready
                 color: theme.colorStartingPoint
                 width: startingPointSize; height: width
                 radius: width / 2
