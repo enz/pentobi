@@ -97,11 +97,11 @@ Item {
                         (pos.y - grabImageTarget.y - image.y) / gridHeight)
     }
     // Needs all arguments for dependencies
-    function getStartingPointX(x, gridWidth, pointSize, isGembloQ) {
+    function getStartingPointX(x, gridWidth, pointSize) {
         return mapFromGameX(x) - grabImageTarget.x + (gridWidth - pointSize) / 2
     }
     // Needs all arguments for dependencies
-    function getStartingPointY(y, gridHeight, pointSize, isGembloQ) {
+    function getStartingPointY(y, gridHeight, pointSize) {
         return mapFromGameY(y) - grabImageTarget.y + (gridHeight - pointSize) / 2
     }
     function getCenterYTrigon(pos) {
@@ -192,8 +192,8 @@ Item {
                                theme.colorGreen : theme.colorBlue
                 width: startingPointSize; height: width
                 radius: width / 2
-                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+                x: getStartingPointX(modelData.x, gridWidth, width)
+                y: getStartingPointY(modelData.y, gridHeight, height)
             }
         }
         Repeater {
@@ -205,8 +205,8 @@ Item {
                                theme.colorGreen : theme.colorYellow
                 width: startingPointSize; height: width
                 radius: width / 2
-                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+                x: getStartingPointX(modelData.x, gridWidth, width)
+                y: getStartingPointY(modelData.y, gridHeight, height)
             }
         }
         Repeater {
@@ -216,8 +216,8 @@ Item {
                 color: theme.colorRed
                 width: startingPointSize; height: width
                 radius: width / 2
-                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+                x: getStartingPointX(modelData.x, gridWidth, width)
+                y: getStartingPointY(modelData.y, gridHeight, height)
             }
         }
         Repeater {
@@ -227,8 +227,8 @@ Item {
                 color: theme.colorGreen
                 width: startingPointSize; height: width
                 radius: width / 2
-                x: getStartingPointX(modelData.x, gridWidth, width, isGembloQ)
-                y: getStartingPointY(modelData.y, gridHeight, height, isGembloQ)
+                x: getStartingPointX(modelData.x, gridWidth, width)
+                y: getStartingPointY(modelData.y, gridHeight, height)
             }
         }
         Repeater {
