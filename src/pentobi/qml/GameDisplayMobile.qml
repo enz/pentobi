@@ -240,7 +240,16 @@ Item
         isOutsideBoard:
             ! board.contains(parent.mapToItem(board, x + width / 2,
                                               y + height / 2))
-        width: 0.6 * board.width; height: width
+        width: {
+            var f
+            if (board.isTrigon) f = 7
+            else if (board.isNexos) f = 12.5
+            else if (board.isGembloQ) f = 12
+            else if (board.isCallisto) f = 6.7
+            else f = 8.7
+            return Math.max(200, f * board.gridHeight)
+        }
+        height: width
         visible: pickedPiece !== null
         pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
         onPiecePlayed: Logic.playPickedPiece()
