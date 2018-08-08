@@ -181,8 +181,6 @@ Item {
                 }
             }
             sourceSize { width: width; height: height }
-            horizontalAlignment: Image.AlignLeft
-            verticalAlignment: Image.AlignTop
             cache: false
         }
         Repeater {
