@@ -13,7 +13,8 @@ and libraries can be installed with the command:
     make qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \
     qml-module-qtquick2 qml-module-qtquick-controls2 \
     qml-module-qtquick-layouts qml-module-qtquick-window2 qtbase5-dev \
-    qtdeclarative5-dev qttools5-dev qttools5-dev-tools
+    qtdeclarative5-dev qtquickcontrols2-5-dev qttools5-dev \
+    qttools5-dev-tools
 
 
 == Building ==
@@ -38,7 +39,7 @@ can enable previews for Blokus game file in the Dolphin file manager in
 
 == Installing ==
 
-On Linux, Pentobi can be installed after compilation with the shell command:
+On Linux, Pentobi can be installed after compilation with the command:
 
   sudo make install
 
