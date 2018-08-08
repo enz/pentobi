@@ -75,8 +75,8 @@ Item
             boardContextMenu.item.popup(x, y)
     }
 
-    onWidthChanged: pickedPiece = null
-    onHeightChanged: pickedPiece = null
+    onWidthChanged: Logic.dropPieceFast()
+    onHeightChanged: Logic.dropPieceFast()
 
     Settings {
         property alias enableAnimations: gameDisplay.enableAnimations

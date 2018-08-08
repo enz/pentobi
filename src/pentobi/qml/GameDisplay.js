@@ -90,6 +90,15 @@ function destroyPieces() {
     destroyColorPieces(pieces3); pieces3 = []
 }
 
+function dropPieceFast() {
+    if (! pickedPiece)
+        return
+    var old = enableAnimations
+    enableAnimations = false
+    pickedPiece = null
+    enableAnimations = old
+}
+
 function findPiece(pieceModel) {
     var pieces
     switch (pieceModel.color) {
