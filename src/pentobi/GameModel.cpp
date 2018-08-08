@@ -1019,6 +1019,14 @@ void GameModel::newGame()
     initGame(m_game.get_variant());
     setIsModified(false);
     setFile("");
+    for (auto pieceModel : qAsConst(m_pieceModels0))
+        pieceModel->setDefaultState();
+    for (auto pieceModel : qAsConst(m_pieceModels1))
+        pieceModel->setDefaultState();
+    for (auto pieceModel : qAsConst(m_pieceModels2))
+        pieceModel->setDefaultState();
+    for (auto pieceModel : qAsConst(m_pieceModels3))
+        pieceModel->setDefaultState();
     updateProperties();
 }
 
