@@ -257,7 +257,6 @@ Item
             enabled: enableAnimations
 
             ParentAnimation {
-                via: gameDisplay
                 NumberAnimation {
                     properties: "x,y,scale"
                     duration: animationDurationMove
