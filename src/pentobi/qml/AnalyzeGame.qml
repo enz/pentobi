@@ -89,7 +89,7 @@ Item {
             margin = m
         }
     }
-    Text {
+    Label {
         visible: elements.length === 0 && ! analyzeGameModel.isRunning
         anchors.centerIn: parent
         color: theme.colorText

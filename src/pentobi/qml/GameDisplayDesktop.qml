@@ -258,7 +258,7 @@ Item
             height: 1.5 * statusText.font.pixelSize
             Layout.fillWidth: true
 
-            Text {
+            Label {
                 id: statusText
 
                 opacity: 0
@@ -273,7 +273,7 @@ Item
                 }
             }
             Item { Layout.fillWidth: true }
-            Text {
+            Label {
                 text: gameModel.positionInfoShort
                 color: theme.colorText
                 rightPadding: 0.4 * font.pixelSize
