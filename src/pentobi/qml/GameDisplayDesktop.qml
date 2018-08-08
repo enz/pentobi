@@ -274,8 +274,6 @@ Item
             }
             Item { Layout.fillWidth: true }
             Text {
-                id: posInfoText
-
                 text: gameModel.positionInfoShort
                 color: theme.colorText
                 rightPadding: 0.4 * font.pixelSize
