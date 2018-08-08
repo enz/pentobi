@@ -306,11 +306,13 @@ Item
             ! board.contains(parent.mapToItem(board, x + width / 2,
                                               y + height / 2))
         width: {
-            if (board.isTrigon) return 7 * board.gridHeight
-            if (board.isNexos) return 11 * board.gridHeight
-            if (board.isGembloQ) return 10.5 * board.gridHeight
-            if (board.isCallisto) return 6.5 * board.gridHeight
-            return 7.3 * board.gridHeight
+            var f
+            if (board.isTrigon) f = 7
+            else if (board.isNexos) f = 11
+            else if (board.isGembloQ) f = 10.5
+            else if (board.isCallisto) f = 6.5
+            else f = 7.3
+            return Math.max(200, f * board.gridHeight)
         }
         height: width
         visible: pickedPiece !== null
