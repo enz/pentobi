@@ -127,7 +127,7 @@ Item {
         NumberAnimation {
             target: toPlayIndicator
             property: "y"
-            duration: animationDurationFast
+            duration: 0.6 * animationDurationFast
         }
     }
 }
