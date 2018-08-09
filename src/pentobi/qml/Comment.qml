@@ -58,6 +58,8 @@ Item {
                     wrapMode: TextEdit.Wrap
                     onTextChanged: gameModel.comment = text
                     background: Rectangle {
+                        width: parent.width - 1
+                        height: parent.height - 1
                         color:
                             textArea.text !== "" || textArea.activeFocus ?
                                 theme.colorCommentBase : theme.colorBackground
