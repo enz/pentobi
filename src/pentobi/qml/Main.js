@@ -191,7 +191,7 @@ function createTheme(themeName) {
     var source = "themes/" + themeName + "/Theme.qml"
     var component = Qt.createComponent(source)
     if (component.status !== Component.Ready) {
-        console.warn("Could not load", source)
+        console.warn(component.errorString())
         source = "themes/light/Theme.qml"
         component = Qt.createComponent(source)
     }

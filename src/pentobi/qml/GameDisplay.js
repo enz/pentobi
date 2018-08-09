@@ -65,6 +65,8 @@ function createPieces() {
     else
         file = "PieceClassic.qml"
     var component = Qt.createComponent(file)
+    if (component.status !== Component.Ready)
+        console.warn(component.errorString())
     pieces0 = createColorPieces(component, gameModel.pieceModels0)
     pieces1 = createColorPieces(component, gameModel.pieceModels1)
     pieces2 = createColorPieces(component, gameModel.pieceModels2)
