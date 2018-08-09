@@ -87,7 +87,7 @@ Item {
             icon.source: theme.getImage("pentobi-undo")
             action: actions.undo
             visible: isDesktop || enabled
-            ToolTip.text: action.text.replace("&", "")
+            ToolTip.text: action.text
         }
         Pentobi.Button {
             id: computerSettings
