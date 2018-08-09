@@ -46,7 +46,6 @@ Item
     signal play(var pieceModel, point gameCoord)
 
     function createPieces() { Logic.createPieces() }
-    function destroyPieces() { Logic.destroyPieces() }
     function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
     function pickPieceAtBoard(piece) { Logic.pickPieceAtBoard(piece) }
     function shiftPiece(dx, dy) { Logic.shiftPiece(dx, dy) }

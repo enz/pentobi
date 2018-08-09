@@ -69,7 +69,6 @@ function changeGameVariant(gameVariant) {
 function changeGameVariantNoVerify(gameVariant) {
     cancelRunning()
     lengthyCommand.run(function() {
-        gameDisplay.destroyPieces()
         gameModel.changeGameVariant(gameVariant)
         gameDisplay.createPieces()
         gameDisplay.showToPlay()
@@ -440,10 +439,8 @@ function openRatedGameNoVerify(byteArray) {
         if (! gameModel.openByteArray(byteArray))
             showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
         setComputerNone()
-        if (gameModel.gameVariant != oldGameVariant) {
-            gameDisplay.destroyPieces()
+        if (gameModel.gameVariant != oldGameVariant)
             gameDisplay.createPieces()
-        }
         gameDisplay.showToPlay()
         gameDisplay.setupMode = false
         isRated = false
@@ -465,10 +462,8 @@ function openFileBlocking(file) {
         showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
     else
         setComputerNone()
-    if (gameModel.gameVariant != oldGameVariant) {
-        gameDisplay.destroyPieces()
+    if (gameModel.gameVariant != oldGameVariant)
         gameDisplay.createPieces()
-    }
     gameDisplay.showToPlay()
     gameDisplay.enableAnimations = oldEnableAnimations
     gameDisplay.setupMode = false
@@ -498,10 +493,8 @@ function openClipboardNoVerify() {
             showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
         else
             setComputerNone()
-        if (gameModel.gameVariant != oldGameVariant) {
-            gameDisplay.destroyPieces()
+        if (gameModel.gameVariant != oldGameVariant)
             gameDisplay.createPieces()
-        }
         gameDisplay.showToPlay()
         gameDisplay.enableAnimations = oldEnableAnimations
         gameDisplay.setupMode = false

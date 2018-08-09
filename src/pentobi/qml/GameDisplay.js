@@ -51,6 +51,7 @@ function startsWith(s, s1) {
 }
 
 function createPieces() {
+    destroyPieces()
     var file
     var gameVariant = gameModel.gameVariant
     if (startsWith(gameVariant, "trigon"))
