@@ -62,13 +62,9 @@ Item {
                             textArea.text !== "" || textArea.activeFocus ?
                                 theme.colorCommentBase : theme.colorBackground
                         radius: 2
-                        border {
-                            color:
-                                textArea.activeFocus ?
-                                    theme.colorCommentFocus :
-                                    theme.colorCommentBorder
-                            width: textArea.activeFocus ? 2 : 1
-                        }
+                        border.color:
+                            textArea.activeFocus ? theme.colorCommentFocus
+                                                 : theme.colorCommentBorder
                     }
                     Keys.onPressed:
                         if (event.key === Qt.Key_Tab)
