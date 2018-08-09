@@ -14,8 +14,7 @@ Item {
     property alias pieces2: pieceList2.pieces
     property alias pieces3: pieceList3.pieces
     property int columns: pieces0 ? Math.ceil(pieces0.length / 2) : 11
-
-    property bool transitionsEnabled
+    property alias transitionsEnabled: transition.enabled
 
     signal piecePicked(var piece)
 
@@ -32,31 +31,13 @@ Item {
         anchors.centerIn: parent
 
         Rectangle {
+            id: toPlayIndicator
+
             opacity: gameModel.isGameOver ? 0 : 0.7 * theme.opacitySubduedText
             x: 0
-            y:
-                switch (gameModel.toPlay) {
-                case 0: return column.mapToItem(parent, 0, pieceList0.y).y
-                case 1: return column.mapToItem(parent, 0, pieceList1.y).y
-                case 2: return column.mapToItem(parent, 0, pieceList2.y).y
-                case 3: return column.mapToItem(parent, 0, pieceList3.y).y
-                }
             width: toPlayIndicatorWidth
-            height:
-                switch (gameModel.toPlay) {
-                case 0: return pieceList0.height
-                case 1: return pieceList1.height
-                case 2: return pieceList2.height
-                case 3: return pieceList3.height
-                }
             radius: width / 2
             color: theme.colorText
-            Behavior on y {
-                NumberAnimation {
-                    duration: transitionsEnabled ? animationDurationFast : 0
-                    easing.type: Easing.InSine
-                }
-            }
         }
         Column {
             id: column
@@ -92,6 +73,61 @@ Item {
                 columns: root.columns
                 onPiecePicked: root.piecePicked(piece)
             }
+        }
+    }
+
+    // It would be much simpler to use bindings for y/height and a Behavior for
+    // the y animation, but I haven't found a way to disable the animation if a
+    // game loaded at startup has toPlay != 0
+    states: [
+        State {
+            name: "toPlay0"
+            when: gameModel.toPlay === 0
+
+            PropertyChanges {
+                target: toPlayIndicator
+                y: column.mapToItem(parent, 0, pieceList0.y).y
+                height: pieceList0.height
+            }
+        },
+        State {
+            name: "toPlay1"
+            when: gameModel.toPlay === 1
+
+            PropertyChanges {
+                target: toPlayIndicator
+                y: column.mapToItem(parent, 0, pieceList1.y).y
+                height: pieceList1.height
+            }
+        },
+        State {
+            name: "toPlay2"
+            when: gameModel.toPlay === 2
+
+            PropertyChanges {
+                target: toPlayIndicator
+                y: column.mapToItem(parent, 0, pieceList2.y).y
+                height: pieceList2.height
+            }
+        },
+        State {
+            name: "toPlay3"
+            when: gameModel.toPlay === 3
+
+            PropertyChanges {
+                target: toPlayIndicator
+                y: column.mapToItem(parent, 0, pieceList3.y).y
+                height: pieceList0.height
+            }
+        }
+    ]
+    transitions: Transition {
+        id: transition
+
+        NumberAnimation {
+            target: toPlayIndicator
+            property: "y"
+            duration: animationDurationFast
         }
     }
 }
