@@ -46,6 +46,7 @@ Item {
                 function dropFocus() { textArea.focus = false }
 
                 clip: true
+                ScrollBar.vertical.minimumSize: 0.2
 
                 TextArea {
                     id: textArea
