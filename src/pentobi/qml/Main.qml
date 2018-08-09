@@ -89,7 +89,6 @@ ApplicationWindow {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            focus: true
             sourceComponent: isDesktop ? componentGameDisplayDesktop : componentGameDisplayMobile
 
             Component {
