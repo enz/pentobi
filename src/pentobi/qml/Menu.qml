@@ -47,7 +47,7 @@ Menu {
     }
     Component.onCompleted: {
         // Sanity checks for mnemonics
-        if (! isDesktop)
+        if (! isDebug || ! isDesktop)
             return
         var allMnemonics = []
         var i, j, text, pos, mnemonic, textWithoutMnemonic

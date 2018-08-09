@@ -129,6 +129,11 @@ int main(int argc, char *argv[])
         QQmlApplicationEngine engine;
         engine.rootContext()->setContextProperty("initialFile", initialFile);
         engine.rootContext()->setContextProperty("isDesktop", isDesktop);
+#ifdef QT_DEBUG
+        engine.rootContext()->setContextProperty("isDebug", true);
+#else
+        engine.rootContext()->setContextProperty("isDebug", false);
+#endif
         engine.load(QUrl("qrc:///qml/Main.qml"));
         if (engine.rootObjects().empty())
             return 1;
