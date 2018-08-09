@@ -21,6 +21,12 @@ Pentobi.Menu {
                           qsTr("P"))
     }
     Action {
+        text: addMnemonic(qsTr("Report Bug"),
+                          //: Mnemonic for menu item Report Bug. Leave empty for no mnemonic.
+                          qsTr("B"))
+        onTriggered: Qt.openUrlExternally("https://sourceforge.net/p/pentobi/bugs/")
+    }
+    Action {
         text: addMnemonic(qsTr("About Pentobi"),
                           //: Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.
                           qsTr("A"))

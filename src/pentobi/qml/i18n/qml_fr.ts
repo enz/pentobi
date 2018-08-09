@@ -1190,6 +1190,15 @@
         <extracomment>Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.</extracomment>
         <translation>P</translation>
     </message>
+    <message>
+        <source>Report Bug</source>
+        <translation>Rapportez une erreur</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <extracomment>Mnemonic for menu item Report Bug. Leave empty for no mnemonic.</extracomment>
+        <translation>R</translation>
+    </message>
 </context>
 <context>
     <name>MenuItem</name>
