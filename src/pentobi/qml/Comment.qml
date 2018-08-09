@@ -59,6 +59,7 @@ Item {
                     wrapMode: TextEdit.Wrap
                     onTextChanged: gameModel.comment = text
                     background: Rectangle {
+                        anchors.centerIn: parent
                         width: parent.width - 1
                         height: parent.height - 1
                         color:
