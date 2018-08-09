@@ -6,7 +6,7 @@
 
 import QtQuick 2.0
 
-Flow {
+Grid {
     id: root
 
     property var pieces

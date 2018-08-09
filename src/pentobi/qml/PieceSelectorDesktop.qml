@@ -49,24 +49,28 @@ Item {
                 id: pieceList0
 
                 width: parent.width
+                columns: root.columns
                 onPiecePicked: root.piecePicked(piece)
             }
             PieceList {
                 id: pieceList1
 
                 width: parent.width
+                columns: root.columns
                 onPiecePicked: root.piecePicked(piece)
             }
             PieceList {
                 id: pieceList2
 
                 width: parent.width
+                columns: root.columns
                 onPiecePicked: root.piecePicked(piece)
             }
             PieceList {
                 id: pieceList3
 
                 width: parent.width
+                columns: root.columns
                 onPiecePicked: root.piecePicked(piece)
             }
         }
