@@ -46,7 +46,7 @@ Window {
     // We'd like to hide the window instead of closing it but it doesn't work on
     // Android to make it visible again (problem with WebView? Last tested with
     // Qt 5.8-rc), so for now we destroy it and recreate it when needed.
-    onClosing: if (isAndroid) helpWindow.sourceComponent = null
+    onClosing: if (isAndroid) helpWindow.source = ""
 
     WebView {
         id: webView

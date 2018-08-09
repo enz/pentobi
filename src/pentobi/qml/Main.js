@@ -284,7 +284,7 @@ function getFileLabel(file, isModified) {
 
 function help() {
     if (! helpWindow.item)
-        helpWindow.sourceComponent = helpWindowComponent
+        helpWindow.source = "HelpWindow.qml"
     helpWindow.item.show()
     helpWindow.item.init()
 }

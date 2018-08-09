@@ -179,34 +179,26 @@ ApplicationWindow {
         gameVariant: gameModel.gameVariant
     }
     AndroidUtils { id: androidUtils }
-    DialogLoader { id: aboutDialog; Component { AboutDialog { } } }
-    DialogLoader { id: computerDialog; Component { ComputerDialog { } } }
-    DialogLoader { id: fatalMessage; Component { FatalMessage { } } }
-    DialogLoader { id: gameVariantDialog; Component { GameVariantDialog { } } }
-    DialogLoader { id: gameInfoDialog; Component { GameInfoDialog { } } }
-    DialogLoader { id: initialRatingDialog; Component { InitialRatingDialog { } } }
-    DialogLoader { id: newFolderDialog; Component { NewFolderDialog { } } }
-    DialogLoader { id: openDialog; Component { OpenDialog { } } }
-    DialogLoader { id: exportImageDialog; Component { ExportImageDialog { } } }
-    DialogLoader { id: imageSaveDialog; Component { ImageSaveDialog { } } }
-    DialogLoader { id: asciiArtSaveDialog; Component { AsciiArtSaveDialog { } } }
-    DialogLoader { id: gotoMoveDialog; Component { GotoMoveDialog { } } }
-    DialogLoader { id: ratingDialog; Component { RatingDialog { } } }
-    DialogLoader { id: saveDialog; Component { SaveDialog { } } }
-    DialogLoader { id: infoMessage; Component { MessageDialog { } } }
-    DialogLoader { id: questionMessage; Component { QuestionDialog { } } }
-    DialogLoader { id: analyzeDialog; Component { AnalyzeDialog { } } }
-    DialogLoader { id: appearanceDialog; Component { AppearanceDialog{ } } }
-    DialogLoader { id: moveAnnotationDialog; Component { MoveAnnotationDialog{ } } }
-    Loader {
-        id: helpWindow
-
-        Component {
-            id: helpWindowComponent
-
-            HelpWindow { }
-        }
-    }
+    DialogLoader { id: aboutDialog; url: "AboutDialog.qml" }
+    DialogLoader { id: computerDialog; url: "ComputerDialog.qml" }
+    DialogLoader { id: fatalMessage; url: "FatalMessage.qml" }
+    DialogLoader { id: gameVariantDialog; url: "GameVariantDialog.qml" }
+    DialogLoader { id: gameInfoDialog; url: "GameInfoDialog.qml" }
+    DialogLoader { id: initialRatingDialog; url: "InitialRatingDialog.qml" }
+    DialogLoader { id: newFolderDialog; url: "NewFolderDialog.qml" }
+    DialogLoader { id: openDialog; url: "OpenDialog.qml" }
+    DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
+    DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
+    DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }
+    DialogLoader { id: gotoMoveDialog; url: "GotoMoveDialog.qml" }
+    DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
+    DialogLoader { id: saveDialog; url: "SaveDialog.qml" }
+    DialogLoader { id: infoMessage; url: "MessageDialog.qml" }
+    DialogLoader { id: questionMessage; url: "QuestionDialog.qml" }
+    DialogLoader { id: analyzeDialog; url: "AnalyzeDialog.qml" }
+    DialogLoader { id: appearanceDialog; url: "AppearanceDialog.qml" }
+    DialogLoader { id: moveAnnotationDialog; url: "MoveAnnotationDialog.qml" }
+    Loader { id: helpWindow }
 
     // Used to delay calls to Logic.checkComputerMove such that the computer
     // starts thinking and the busy indicator is visible after the current move
