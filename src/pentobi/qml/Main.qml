@@ -180,25 +180,25 @@ ApplicationWindow {
         gameVariant: gameModel.gameVariant
     }
     AndroidUtils { id: androidUtils }
-    DialogLoader { id: aboutDialog; component: Component { AboutDialog { } } }
-    DialogLoader { id: computerDialog; component: ComputerDialog { } }
-    DialogLoader { id: fatalMessage; component: Component { FatalMessage { } } }
-    DialogLoader { id: gameVariantDialog; component: Component { GameVariantDialog { } } }
-    DialogLoader { id: gameInfoDialog; component: Component { GameInfoDialog { } } }
-    DialogLoader { id: initialRatingDialog; component: Component { InitialRatingDialog { } } }
-    DialogLoader { id: newFolderDialog; component: Component { NewFolderDialog { } } }
-    DialogLoader { id: openDialog; component: Component { OpenDialog { } } }
-    DialogLoader { id: exportImageDialog; component: Component { ExportImageDialog { } } }
-    DialogLoader { id: imageSaveDialog; component: Component { ImageSaveDialog { } } }
-    DialogLoader { id: asciiArtSaveDialog; component: Component { AsciiArtSaveDialog { } } }
-    DialogLoader { id: gotoMoveDialog; component: Component { GotoMoveDialog { } } }
-    DialogLoader { id: ratingDialog; component: Component { RatingDialog { } } }
-    DialogLoader { id: saveDialog; component: Component { SaveDialog { } } }
-    DialogLoader { id: infoMessage; component: Component { MessageDialog { } } }
-    DialogLoader { id: questionMessage; component: Component { QuestionDialog { } } }
-    DialogLoader { id: analyzeDialog; component: Component { AnalyzeDialog { } } }
-    DialogLoader { id: appearanceDialog; component: Component { AppearanceDialog{ } } }
-    DialogLoader { id: moveAnnotationDialog; component: Component { MoveAnnotationDialog{ } } }
+    DialogLoader { id: aboutDialog; Component { AboutDialog { } } }
+    DialogLoader { id: computerDialog; Component { ComputerDialog { } } }
+    DialogLoader { id: fatalMessage; Component { FatalMessage { } } }
+    DialogLoader { id: gameVariantDialog; Component { GameVariantDialog { } } }
+    DialogLoader { id: gameInfoDialog; Component { GameInfoDialog { } } }
+    DialogLoader { id: initialRatingDialog; Component { InitialRatingDialog { } } }
+    DialogLoader { id: newFolderDialog; Component { NewFolderDialog { } } }
+    DialogLoader { id: openDialog; Component { OpenDialog { } } }
+    DialogLoader { id: exportImageDialog; Component { ExportImageDialog { } } }
+    DialogLoader { id: imageSaveDialog; Component { ImageSaveDialog { } } }
+    DialogLoader { id: asciiArtSaveDialog; Component { AsciiArtSaveDialog { } } }
+    DialogLoader { id: gotoMoveDialog; Component { GotoMoveDialog { } } }
+    DialogLoader { id: ratingDialog; Component { RatingDialog { } } }
+    DialogLoader { id: saveDialog; Component { SaveDialog { } } }
+    DialogLoader { id: infoMessage; Component { MessageDialog { } } }
+    DialogLoader { id: questionMessage; Component { QuestionDialog { } } }
+    DialogLoader { id: analyzeDialog; Component { AnalyzeDialog { } } }
+    DialogLoader { id: appearanceDialog; Component { AppearanceDialog{ } } }
+    DialogLoader { id: moveAnnotationDialog; Component { MoveAnnotationDialog{ } } }
     Loader {
         id: helpWindow
 

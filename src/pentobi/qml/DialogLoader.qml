@@ -7,11 +7,9 @@
 import QtQuick 2.0
 
 Loader {
-    property Component component
-
     function get() {
         if (! item)
-            sourceComponent = component
+            sourceComponent = resources[0]
         return item
     }
     function open() { get().open() }
