@@ -14,6 +14,7 @@ Android version:
 * Show a meaningful error message if startup fails due to low memory.
 * Show a warning if current game has unsaved changes before opening
   a file from clipboard.
+* Changed text color on purple pieces to white to make it more readable.
 * Rating dialog did not show game variant in Callisto (2 players, 4 colors)
 
 
