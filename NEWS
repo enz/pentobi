@@ -60,6 +60,7 @@ Android version:
 * Show a warning if current game has unsaved changes before opening
   a file from clipboard.
 * Changed text color on purple pieces to white to make it more readable.
+* Game info was not updated after loading a file.
 * Rating dialog did not show game variant in Callisto (2 players, 4 colors)
 
 

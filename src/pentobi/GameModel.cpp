@@ -1079,6 +1079,7 @@ bool GameModel::openStream(istream& in)
     if (variant != m_gameVariant)
         initGameVariant(m_game.get_variant());
     setIsModified(false);
+    updateGameInfo();
     updateProperties();
     return result;
 }
