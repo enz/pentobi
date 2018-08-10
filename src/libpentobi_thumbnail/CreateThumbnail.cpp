@@ -179,8 +179,9 @@ bool createThumbnail(const QString& path, int width, int height, QImage& image)
         preferredHeight = height;
     }
     QPainter painter(&image);
-    painter.translate((width - preferredWidth) / 2,
-                      (height - preferredHeight) / 2);
+    auto offX = (width - preferredWidth) / 2;
+    auto offY = (height - preferredHeight) / 2;
+    painter.translate(offX, offY);
     BoardPainter boardPainter;
     boardPainter.paintEmptyBoard(painter,
                                  static_cast<unsigned>(preferredWidth),
