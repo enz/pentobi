@@ -65,17 +65,17 @@ public:
 
     PieceModel(QObject* parent, const Board& bd, Piece piece, Color c);
 
-    int color();
+    int color() { return m_color.to_int(); }
 
-    QString state() const;
+    QString state() const { return m_state; }
 
-    bool isPlayed() const;
+    bool isPlayed() const { return m_isPlayed; }
 
-    bool isLastMove() const;
+    bool isLastMove() const { return m_isLastMove; }
 
-    QString moveLabel() const;
+    QString moveLabel() const { return m_moveLabel; }
 
-    QPointF gameCoord() const;
+    QPointF gameCoord() const { return m_gameCoord; }
 
     Piece getPiece() const { return m_piece; }
 

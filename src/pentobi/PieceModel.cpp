@@ -148,11 +148,6 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
     m_labelPos = QPointF(info.get_label_pos().x, info.get_label_pos().y);
 }
 
-int PieceModel::color()
-{
-    return m_color.to_int();
-}
-
 void PieceModel::flipAcrossX()
 {
     setTransform(m_bd.get_transforms().get_mirrored_vertically(getTransform()));
@@ -161,11 +156,6 @@ void PieceModel::flipAcrossX()
 void PieceModel::flipAcrossY()
 {
     setTransform(m_bd.get_transforms().get_mirrored_horizontally(getTransform()));
-}
-
-QPointF PieceModel::gameCoord() const
-{
-    return m_gameCoord;
 }
 
 const Transform* PieceModel::getTransform(const QString& state) const
@@ -275,21 +265,6 @@ QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
         sumY += centerY;
     }
     return {sumX / n, sumY / n};
-}
-
-bool PieceModel::isLastMove() const
-{
-    return m_isLastMove;
-}
-
-bool PieceModel::isPlayed() const
-{
-    return m_isPlayed;
-}
-
-QString PieceModel::moveLabel() const
-{
-    return m_moveLabel;
 }
 
 void PieceModel::nextOrientation()
@@ -433,11 +408,6 @@ void PieceModel::setTransform(const Transform* transform)
         return;
     m_state = state;
     emit stateChanged();
-}
-
-QString PieceModel::state() const
-{
-    return m_state;
 }
 
 //-----------------------------------------------------------------------------
