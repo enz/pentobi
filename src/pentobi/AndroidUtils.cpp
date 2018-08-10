@@ -36,9 +36,9 @@ bool AndroidUtils::checkPermission(const QString& permission)
 QUrl AndroidUtils::extractHelp(const QString& language)
 {
 #ifdef Q_OS_ANDROID
-    if (language != "C")
+    if (language != QStringLiteral("C"))
         // Other languages use pictures from C
-        extractHelp("C");
+        extractHelp(QStringLiteral("C"));
     auto activity = QtAndroid::androidActivity();
     auto filesDir =
             activity.callObjectMethod("getFilesDir", "()Ljava/io/File;");
@@ -67,7 +67,7 @@ QUrl AndroidUtils::extractHelp(const QString& language)
         if (! fileInfo.isFile())
             continue;
         auto dest = QFileInfo(dirPath + "/" + fileInfo.fileName());
-        dest.dir().mkpath(".");
+        dest.dir().mkpath(QStringLiteral("."));
         QFile::remove(dest.absoluteFilePath());
         QFile::copy(src, dest.absoluteFilePath());
     }
@@ -82,7 +82,7 @@ QUrl AndroidUtils::extractHelp(const QString& language)
 QUrl AndroidUtils::getDefaultFolder()
 {
 #ifdef Q_OS_ANDROID
-    QUrl fallback("file:///sdcard");
+    QUrl fallback(QStringLiteral("file:///sdcard"));
     auto file = QAndroidJniObject::callStaticObjectMethod(
                 "android/os/Environment", "getExternalStorageDirectory",
                 "()Ljava/io/File;");
