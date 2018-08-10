@@ -336,7 +336,10 @@ bool GameModel::checkSetupAllowed() const
 
 void GameModel::clearFile()
 {
-    setFile(QStringLiteral(""));
+    if (m_file.isEmpty())
+        return;
+    m_file.clear();
+    emit fileChanged();
 }
 
 void GameModel::clearRecentFiles()
