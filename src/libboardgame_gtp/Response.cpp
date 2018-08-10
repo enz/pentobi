@@ -14,7 +14,11 @@ namespace libboardgame_gtp {
 
 //-----------------------------------------------------------------------------
 
-ostringstream Response::s_dummy;
+void Response::clear()
+{
+    m_stream.str(string());
+    m_stream.copyfmt(m_dummy);
+}
 
 void Response::write(ostream& out, string& buffer) const
 {

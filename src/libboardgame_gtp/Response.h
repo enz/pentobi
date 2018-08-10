@@ -19,18 +19,12 @@ using namespace std;
 class Response
 {
 public:
-    ~Response() = default;
-
-    /** Conversion to output stream.
-        Returns reference to response stream. */
-    operator ostream&();
-
     /** Get response.
         @return A copy of the internal response string stream */
-    string to_string() const;
+    string to_string() const { return m_stream.str(); }
 
     /** Set response. */
-    void set(const string& response);
+    void set(const string& response) { m_stream.str(response); }
 
     void clear();
 
@@ -40,44 +34,16 @@ public:
         "\n \n") and adds "\n\n" add the end of the response. */
     void write(ostream& out, string& buffer) const;
 
-private:
-    /** Dummy stream for copying default formatting settings. */
-    static ostringstream s_dummy;
+    template<typename TYPE>
+    Response& operator<<(const TYPE& t) { m_stream << t; return *this; }
 
+private:
     /** Response stream */
     ostringstream m_stream;
+
+    /** Dummy for restoring default format flags*/
+    ios m_dummy{nullptr};
 };
-
-inline Response::operator ostream&()
-{
-    return m_stream;
-}
-
-inline void Response::clear()
-{
-    m_stream.str("");
-    m_stream.copyfmt(s_dummy);
-}
-
-inline string Response::to_string() const
-{
-    return m_stream.str();
-}
-
-inline void Response::set(const string& response)
-{
-    m_stream.str(response);
-}
-
-//-----------------------------------------------------------------------------
-
-/** @relates libboardgame_gtp::Response */
-template<typename TYPE>
-inline Response& operator<<(Response& r, const TYPE& t)
-{
-    static_cast<ostream&>(r) << t;
-    return r;
-}
 
 //-----------------------------------------------------------------------------
 
