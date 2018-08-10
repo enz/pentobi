@@ -656,6 +656,8 @@ private:
 
     bool checkSetupAllowed() const;
 
+    void clearFile();
+
     void createPieceModels();
 
     void createPieceModels(Color c, QList<PieceModel*>& pieceModels);

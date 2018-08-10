@@ -31,16 +31,16 @@ int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
     QtWebView::initialize();
-    QCoreApplication::setOrganizationName("Pentobi");
-    QCoreApplication::setApplicationName("Pentobi");
+    QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
+    QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
 #ifdef VERSION
-    QCoreApplication::setApplicationVersion(VERSION);
+    QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif
     QIcon icon;
-    icon.addFile(":/pentobi_icon/pentobi.svg");
-    icon.addFile(":/pentobi_icon/pentobi-16.svg");
-    icon.addFile(":/pentobi_icon/pentobi-32.svg");
-    icon.addFile(":/pentobi_icon/pentobi-64.svg");
+    icon.addFile(QStringLiteral(":/pentobi_icon/pentobi.svg"));
+    icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-16.svg"));
+    icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-32.svg"));
+    icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-64.svg"));
     QGuiApplication::setWindowIcon(icon);
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
     qmlRegisterType<AndroidUtils>("pentobi", 1, 0, "AndroidUtils");
@@ -52,33 +52,47 @@ int main(int argc, char *argv[])
     qmlRegisterInterface<PieceModel>("PieceModel");
     QString locale = QLocale::system().name();
     QTranslator translatorPentobi;
-    translatorPentobi.load("qml_" + locale, ":qml/i18n");
+    translatorPentobi.load("qml_" + locale, QStringLiteral(":qml/i18n"));
     QCoreApplication::installTranslator(&translatorPentobi);
     QCommandLineParser parser;
     auto maxSupportedLevel = Player::max_supported_level;
-    QCommandLineOption optionMaxLevel("maxlevel",
-                                      "Set maximum level to <n>.", "n",
-                                      QString::number(PlayerModel::maxLevel));
+    QCommandLineOption optionMaxLevel(
+                QStringLiteral("maxlevel"),
+                QStringLiteral("Set maximum level to <n>."),
+                QStringLiteral("n"),
+                QString::number(PlayerModel::maxLevel));
     parser.addOption(optionMaxLevel);
-    QCommandLineOption optionNoBook("nobook", "Do not use opening books.");
-    QCommandLineOption optionMobile("mobile", "Use layout optimized for smartphones.");
+    QCommandLineOption optionNoBook(
+                QStringLiteral("nobook"),
+                QStringLiteral("Do not use opening books."));
+    QCommandLineOption optionMobile(
+                QStringLiteral("mobile"),
+                QStringLiteral("Use layout optimized for smartphones."));
     parser.addOption(optionMobile);
     parser.addOption(optionNoBook);
     QCommandLineOption optionNoDelay(
-                "nodelay", "Do not delay fast computer moves.");
+                QStringLiteral("nodelay"),
+                QStringLiteral("Do not delay fast computer moves."));
     parser.addOption(optionNoDelay);
-    QCommandLineOption optionSeed("seed", "Set random seed to <n>.", "n");
+    QCommandLineOption optionSeed(
+                QStringLiteral("seed"),
+                QStringLiteral("Set random seed to <n>."),
+                QStringLiteral("n"));
     parser.addOption(optionSeed);
-    QCommandLineOption optionThreads("threads", "Use <n> threads (0=auto).",
-                                     "n");
+    QCommandLineOption optionThreads(
+                QStringLiteral("threads"),
+                QStringLiteral("Use <n> threads (0=auto)."),
+                QStringLiteral("n"));
     parser.addOption(optionThreads);
 #ifndef LIBBOARDGAME_DISABLE_LOG
     QCommandLineOption optionVerbose(
-                "verbose", "Print logging information to standard error.");
+                QStringLiteral("verbose"),
+                QStringLiteral("Print logging information to standard error."));
     parser.addOption(optionVerbose);
 #endif
-    parser.addPositionalArgument("file.blksgf",
-                                 "Blokus SGF file to open (optional).");
+    parser.addPositionalArgument(
+                QStringLiteral("file.blksgf"),
+                QStringLiteral("Blokus SGF file to open (optional)."));
     parser.addHelpOption();
     parser.process(app);
     try
@@ -125,16 +139,20 @@ int main(int argc, char *argv[])
         if (! args.empty())
             initialFile = args.at(0);
         if (QQuickStyle::name().isEmpty() && isDesktop)
-            QQuickStyle::setStyle("Fusion");
+            QQuickStyle::setStyle(QStringLiteral("Fusion"));
         QQmlApplicationEngine engine;
-        engine.rootContext()->setContextProperty("initialFile", initialFile);
-        engine.rootContext()->setContextProperty("isDesktop", isDesktop);
+        engine.rootContext()->setContextProperty(QStringLiteral("initialFile"),
+                                                 initialFile);
+        engine.rootContext()->setContextProperty(QStringLiteral("isDesktop"),
+                                                 isDesktop);
 #ifdef QT_DEBUG
-        engine.rootContext()->setContextProperty("isDebug", true);
+        engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
+                                                 true);
 #else
-        engine.rootContext()->setContextProperty("isDebug", false);
+        engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
+                                                 false);
 #endif
-        engine.load(QUrl("qrc:///qml/Main.qml"));
+        engine.load(QUrl(QStringLiteral("qrc:///qml/Main.qml")));
         if (engine.rootObjects().empty())
             return 1;
         return QGuiApplication::exec();

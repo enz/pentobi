@@ -73,7 +73,7 @@ void AnalyzeGameModel::autoSave(GameModel* gameModel)
     auto nuMoves = m_analyzeGame.get_nu_moves();
     QSettings settings;
     if (nuMoves == 0 || m_analyzeGame.get_variant() != variant)
-        settings.remove("analyzeGame");
+        settings.remove(QStringLiteral("analyzeGame"));
     else
     {
         list.append(to_string_id(variant));
@@ -85,7 +85,8 @@ void AnalyzeGameModel::autoSave(GameModel* gameModel)
             list.append(bd.to_string(mv.move).c_str());
             list.append(m_analyzeGame.get_value(i));
         }
-        settings.setValue("analyzeGame", QVariant::fromValue(list));
+        settings.setValue(QStringLiteral("analyzeGame"),
+                          QVariant::fromValue(list));
     }
 }
 
@@ -156,7 +157,9 @@ void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)
 void AnalyzeGameModel::loadAutoSave(GameModel* gameModel)
 {
     QSettings settings;
-    auto list = settings.value("analyzeGame").value<QVariantList>();
+    auto list =
+            settings.value(
+                QStringLiteral("analyzeGame")).value<QVariantList>();
     int size = list.size();
     int index = 0;
     if (index >= size)

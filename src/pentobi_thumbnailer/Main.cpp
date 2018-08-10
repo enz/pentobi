@@ -22,13 +22,18 @@ int main(int argc, char* argv[])
     try
     {
         QCommandLineParser parser;
-        QCommandLineOption optionSize(QStringList() << "s" << "size",
-                    "Generate image with height and width <size>.",
-                    "size", "128");
+        QCommandLineOption optionSize(
+                    QStringList() << QStringLiteral("s")
+                    << QStringLiteral("size"),
+                    QStringLiteral(
+                        "Generate image with height and width <size>."),
+                    QStringLiteral("size"), QStringLiteral("128"));
         parser.addOption(optionSize);
         parser.addHelpOption();
-        parser.addPositionalArgument("input.blksgf", "Blokus SGF input file");
-        parser.addPositionalArgument("output.png", "PNG image output file");
+        parser.addPositionalArgument(QStringLiteral("input.blksgf"),
+                                     QStringLiteral("Blokus SGF input file"));
+        parser.addPositionalArgument(QStringLiteral("output.png"),
+                                     QStringLiteral("PNG image output file"));
         parser.process(app);
         auto args = parser.positionalArguments();
         bool ok;

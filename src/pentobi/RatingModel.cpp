@@ -65,7 +65,7 @@ void RatingModel::addResult(GameModel* gameModel, int level)
     auto numberGames = m_numberGames + 1;
     if (numberGames == 1 || rating.get() > m_bestRating.get())
         setBestRating(rating.get());
-    auto date = QDate::currentDate().toString("yyyy-MM-dd");
+    auto date = QDate::currentDate().toString(QStringLiteral("yyyy-MM-dd"));
     m_history.prepend(new RatedGameInfo(this, numberGames, color, gameResult,
                                        date, level, m_rating.get(),
                                        gameModel->getSgf()));
@@ -160,13 +160,13 @@ void RatingModel::saveSettings() const
         if (info.number() < m_numberGames - maxSavedGames)
             continue;
         settings.setArrayIndex(n++);
-        settings.setValue("number", info.number());
-        settings.setValue("color", info.color());
-        settings.setValue("result", info.result());
-        settings.setValue("date", info.date());
-        settings.setValue("level", info.level());
-        settings.setValue("rating", info.rating());
-        settings.setValue("sgf", info.sgf());
+        settings.setValue(QStringLiteral("number"), info.number());
+        settings.setValue(QStringLiteral("color"), info.color());
+        settings.setValue(QStringLiteral("result"), info.result());
+        settings.setValue(QStringLiteral("date"), info.date());
+        settings.setValue(QStringLiteral("level"), info.level());
+        settings.setValue(QStringLiteral("rating"), info.rating());
+        settings.setValue(QStringLiteral("sgf"), info.sgf());
     }
     settings.endArray();
 }
@@ -194,13 +194,13 @@ void RatingModel::setGameVariant(const QString& gameVariant)
     for (int i = 0; i < size; ++i)
     {
         settings.setArrayIndex(i);
-        auto number = settings.value("number").toInt();
-        auto color = settings.value("color").toInt();
-        auto result = settings.value("result").toDouble();
-        auto date = settings.value("date").toString();
-        auto level = settings.value("level").toInt();
-        auto rating = settings.value("rating").toDouble();
-        auto sgf = settings.value("sgf").toByteArray();
+        auto number = settings.value(QStringLiteral("number")).toInt();
+        auto color = settings.value(QStringLiteral("color")).toInt();
+        auto result = settings.value(QStringLiteral("result")).toDouble();
+        auto date = settings.value(QStringLiteral("date")).toString();
+        auto level = settings.value(QStringLiteral("level")).toInt();
+        auto rating = settings.value(QStringLiteral("rating")).toDouble();
+        auto sgf = settings.value(QStringLiteral("sgf")).toByteArray();
         m_history.append(new RatedGameInfo(this, number, color, result, date,
                                            level, rating, sgf));
     }

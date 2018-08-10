@@ -205,7 +205,7 @@ void GameModel::addRecentFile(const QString& file)
     while (m_recentFiles.length() > maxRecentFiles)
         m_recentFiles.removeLast();
     QSettings settings;
-    settings.setValue("recentFiles", m_recentFiles);
+    settings.setValue(QStringLiteral("recentFiles"), m_recentFiles);
     emit recentFilesChanged();
 }
 
@@ -238,13 +238,14 @@ void GameModel::autoSave()
 {
     auto& tree = m_game.get_tree();
     QSettings settings;
-    settings.setValue("variant", to_string_id(m_game.get_variant()));
-    settings.setValue("autosave", getSgf());
-    settings.setValue("file", m_file);
-    settings.setValue("fileDate", m_fileDate);
-    settings.setValue("isModified", m_isModified);
+    settings.setValue(QStringLiteral("variant"),
+                      to_string_id(m_game.get_variant()));
+    settings.setValue(QStringLiteral("autosave"), getSgf());
+    settings.setValue(QStringLiteral("file"), m_file);
+    settings.setValue(QStringLiteral("fileDate"), m_fileDate);
+    settings.setValue(QStringLiteral("isModified"), m_isModified);
     m_autosaveDate = QDateTime::currentDateTime();
-    settings.setValue("autosaveDate", m_autosaveDate);
+    settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
 
     QVariantList location;
     uint depth = 0;
@@ -258,7 +259,7 @@ void GameModel::autoSave()
         ++depth;
     }
     location.prepend(depth);
-    settings.setValue("autosaveLocation", location);
+    settings.setValue(QStringLiteral("autosaveLocation"), location);
 }
 
 void GameModel::backToMainVar()
@@ -276,7 +277,7 @@ void GameModel::changeGameVariant(const QString& gameVariant)
     }
     initGameVariant(variant);
     setIsModified(false);
-    setFile("");
+    clearFile();
 }
 
 bool GameModel::checkAutosaveModifiedOutside()
@@ -286,11 +287,12 @@ bool GameModel::checkAutosaveModifiedOutside()
     // GameModel. Also check that the changed autosaved game is different from
     // what we would write. Otherwise, we don't care if it gets overwritten.
     QSettings settings;
-    auto autosaveDate = settings.value("autosaveDate").toDateTime();
+    auto autosaveDate =
+            settings.value(QStringLiteral("autosaveDate")).toDateTime();
     if (! m_autosaveDate.isValid() || ! autosaveDate.isValid()
             || m_autosaveDate == autosaveDate)
         return false;
-    return settings.value("autosave").toByteArray() != getSgf();
+    return settings.value(QStringLiteral("autosave")).toByteArray() != getSgf();
 }
 
 bool GameModel::checkFileDeletedOutside()
@@ -332,11 +334,16 @@ bool GameModel::checkSetupAllowed() const
     return true;
 }
 
+void GameModel::clearFile()
+{
+    setFile(QStringLiteral(""));
+}
+
 void GameModel::clearRecentFiles()
 {
     m_recentFiles.clear();
     QSettings settings;
-    settings.setValue("recentFiles", m_recentFiles);
+    settings.setValue(QStringLiteral("recentFiles"), m_recentFiles);
     emit recentFilesChanged();
 }
 
@@ -531,13 +538,14 @@ QString GameModel::getPlayerString(int player)
     case 3:
         return tr("Green");
     }
-    return "";
+    return QStringLiteral("");
 }
 
 Variant GameModel::getInitialGameVariant()
 {
     QSettings settings;
-    auto variantString = settings.value("variant", "").toString();
+    auto variantString =
+            settings.value(QStringLiteral("variant"), QStringLiteral("")).toString();
     Variant variant;
     if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
         variant = Variant::duo;
@@ -923,15 +931,17 @@ void GameModel::keepOnlySubtree()
 bool GameModel::loadAutoSave()
 {
     QSettings settings;
-    if (! openByteArray(settings.value("autosave", "").toByteArray()))
+    if (! openByteArray(settings.value(QStringLiteral("autosave"),
+                                       QStringLiteral("")).toByteArray()))
     {
         m_autosaveDate = QDateTime();
         return false;
     }
-    setFile(settings.value("file").toString());
-    m_fileDate = settings.value("fileDate").toDateTime();
-    m_autosaveDate = settings.value("autosaveDate").toDateTime();
-    setIsModified(settings.value("isModified").toBool());
+    setFile(settings.value(QStringLiteral("file")).toString());
+    m_fileDate = settings.value(QStringLiteral("fileDate")).toDateTime();
+    m_autosaveDate =
+            settings.value(QStringLiteral("autosaveDate")).toDateTime();
+    setIsModified(settings.value(QStringLiteral("isModified")).toBool());
     restoreAutoSaveLocation();
     updateProperties();
     return true;
@@ -940,7 +950,8 @@ bool GameModel::loadAutoSave()
 void GameModel::loadRecentFiles()
 {
     QSettings settings;
-    m_recentFiles = settings.value("recentFiles", "").toStringList();
+    m_recentFiles = settings.value(QStringLiteral("recentFiles"),
+                                   QStringLiteral("")).toStringList();
     QMutableListIterator<QString> i(m_recentFiles);
     while (i.hasNext()) {
         auto file = i.next();
@@ -955,7 +966,7 @@ void GameModel::loadRecentFiles()
 bool GameModel::openByteArray(const QByteArray& byteArray)
 {
     istringstream in(byteArray.constData());
-    setFile("");
+    clearFile();
     if (! openStream(in))
         return false;
     goEnd();
@@ -1018,7 +1029,7 @@ void GameModel::newGame()
     preparePositionChange();
     initGame(m_game.get_variant());
     setIsModified(false);
-    setFile("");
+    clearFile();
     for (auto pieceModel : qAsConst(m_pieceModels0))
         pieceModel->setDefaultState();
     for (auto pieceModel : qAsConst(m_pieceModels1))
@@ -1090,7 +1101,7 @@ bool GameModel::openFile(const QString& file)
             goEnd();
         return true;
     }
-    setFile("");
+    clearFile();
     return false;
 }
 
@@ -1110,7 +1121,7 @@ bool GameModel::openClipboard()
             goEnd();
         return true;
     }
-    setFile("");
+    clearFile();
     return false;
 }
 
@@ -1286,7 +1297,8 @@ PieceModel* GameModel::previousPiece(PieceModel* currentPickedPiece)
 bool GameModel::restoreAutoSaveLocation()
 {
     QSettings settings;
-    auto location = settings.value("autosaveLocation").value<QVariantList>();
+    auto location =
+            settings.value(QStringLiteral("autosaveLocation")).value<QVariantList>();
     if (location.empty())
         return false;
     int index = 0;
@@ -1415,17 +1427,17 @@ void GameModel::setMoveAnnotationAtNode(const SgfNode& node,
                                         const QString& annotation)
 {
     m_game.remove_move_annotation(node);
-    if (annotation == "!")
+    if (annotation == QStringLiteral("!"))
         m_game.set_good_move(node);
-    else if (annotation == "!!")
+    else if (annotation == QStringLiteral("!!"))
         m_game.set_good_move(node, 2);
-    else if (annotation == "?")
+    else if (annotation == QStringLiteral("?"))
         m_game.set_bad_move(node);
-    else if (annotation == "??")
+    else if (annotation == QStringLiteral("??"))
         m_game.set_bad_move(node, 2);
-    else if (annotation == "!?")
+    else if (annotation == QStringLiteral("!?"))
         m_game.set_interesting_move(node);
-    else if (annotation == "?!")
+    else if (annotation == QStringLiteral("?!"))
         m_game.set_doubtful_move(node);
     updatePositionInfo();
     updatePieces();
@@ -1531,8 +1543,10 @@ void GameModel::setUtf8()
 QString GameModel::suggestFileName(const QUrl& folder,
                                    const QString& fileEnding)
 {
-    QString suffix = ! fileEnding.isEmpty() && ! fileEnding.startsWith(".") ?
-                "." + fileEnding : fileEnding;
+    QString suffix =
+            ! fileEnding.isEmpty()
+            && ! fileEnding.startsWith(QStringLiteral(".")) ?
+                QStringLiteral(".") + fileEnding : fileEnding;
     auto localFolder = folder.toLocalFile();
     QString file = localFolder + '/' + tr("Untitled") + suffix;
     if (QFileInfo::exists(file))
@@ -1552,7 +1566,7 @@ QString GameModel::suggestGameFileName(const QUrl& folder)
 {
     if (! m_file.isEmpty())
         return QUrl::fromLocalFile(m_file).fileName();
-    return suggestFileName(folder, "blksgf");
+    return suggestFileName(folder, QStringLiteral("blksgf"));
 }
 
 QString GameModel::suggestNewFolderName(const QUrl& folder)
@@ -1687,7 +1701,7 @@ void GameModel::updatePieces()
         for (Move mv : bd.get_setup().placements[c])
         {
             auto pieceModel = updatePiece(c, mv, isPlayed[c]);
-            pieceModel->setMoveLabel("");
+            pieceModel->setMoveLabel(QStringLiteral(""));
         }
     }
 
@@ -1740,7 +1754,7 @@ void GameModel::updatePieces()
             {
                 pieceModels[i]->setDefaultState();
                 pieceModels[i]->setIsPlayed(false);
-                pieceModels[i]->setMoveLabel("");
+                pieceModels[i]->setMoveLabel(QStringLiteral(""));
             }
     }
 }
@@ -1756,7 +1770,8 @@ void GameModel::updatePositionInfo()
     if (positionInfo.isEmpty())
     {
         positionInfo = bd.has_setup() ? tr("(Setup)") : tr("(No moves)");
-        positionInfoShort = bd.has_setup() ? tr("(Setup)") : "";
+        positionInfoShort = bd.has_setup() ? tr("(Setup)")
+                                           : QStringLiteral("");
     }
     else
     {
