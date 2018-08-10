@@ -61,9 +61,9 @@ struct TestRegistrar
 
 //-----------------------------------------------------------------------------
 
-#define LIBBOARDGAME_TEST_CASE(name)                                    \
-    void name();                                                        \
-    libboardgame_test::TestRegistrar name##_registrar(#name, name);     \
+#define LIBBOARDGAME_TEST_CASE(name)                                       \
+    static void name();                                                    \
+    static libboardgame_test::TestRegistrar name##_registrar(#name, name); \
     void name()
 
 
