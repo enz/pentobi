@@ -163,7 +163,7 @@ bool createThumbnail(const QString& path, int width, int height, QImage& image)
                                           * (geoWidth - 0.5));
         preferredHeight = preferredWidth;
     }
-    if (pieceSet == PieceSet::gembloq)
+    else if (pieceSet == PieceSet::gembloq)
     {
         preferredWidth = (2 * width) / (2 * geoWidth) * geoWidth;
         preferredHeight = preferredWidth;
