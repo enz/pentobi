@@ -146,12 +146,12 @@ int main(int argc, char *argv[])
         engine.rootContext()->setContextProperty(QStringLiteral("isDesktop"),
                                                  isDesktop);
 #ifdef QT_DEBUG
-        engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
-                                                 true);
+        bool isDebug = true;
 #else
-        engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
-                                                 false);
+        bool isDebug = false;
 #endif
+        engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
+                                                 isDebug);
         engine.load(QUrl(QStringLiteral("qrc:///qml/Main.qml")));
         if (engine.rootObjects().empty())
             return 1;
