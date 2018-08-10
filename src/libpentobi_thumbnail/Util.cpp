@@ -349,7 +349,7 @@ QColor Util::getMarkColor(Variant variant, PointState s)
     Color c = s.to_color();
     QColor paintColor = getPaintColor(variant, c);
     if (paintColor == yellow || paintColor == green)
-        return QColor(51, 51, 51);
+        return {51, 51, 51};
     return Qt::white;
 }
 
