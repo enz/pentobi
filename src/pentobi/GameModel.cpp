@@ -682,7 +682,7 @@ QString GameModel::getResultMessage()
     }
     if (m_nuPlayers == 3)
     {
-        auto maxPoints = max(max(m_points0, m_points1), m_points2);
+        auto maxPoints = max({m_points0, m_points1, m_points2});
         unsigned nuWinners = 0;
         if (m_points0 == maxPoints)
             ++nuWinners;
@@ -710,7 +710,7 @@ QString GameModel::getResultMessage()
             return tr("Game ends in a tie between Yellow and Red.");
         return tr("Game ends in a tie between all players.");
     }
-    auto maxPoints = max(max(m_points0, m_points1), max(m_points2, m_points3));
+    auto maxPoints = max({m_points0, m_points1, m_points2, m_points3});
     unsigned nuWinners = 0;
     if (m_points0 == maxPoints)
         ++nuWinners;
