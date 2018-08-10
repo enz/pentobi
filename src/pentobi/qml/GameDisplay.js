@@ -80,7 +80,7 @@ function destroyColorPieces(pieces) {
         return
     for (var i = 0; i < pieces.length; ++i) {
         pieces[i].visible = false
-        pieces[i].destroy(1000)
+        pieces[i].destroy()
     }
 }
 
