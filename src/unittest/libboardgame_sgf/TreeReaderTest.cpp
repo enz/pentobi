@@ -69,7 +69,7 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_unicode)
 {
     SgfNode root;
     const char* id = "C";
-    const char* value = "\xc3\xbc"; // German u-umlaut as UTF-8
+    const char* value = "ü";
     root.set_property(id, value);
     ostringstream out;
     TreeWriter writer(out, root);
