@@ -608,6 +608,8 @@ function ratedGameStart() {
         gameModel.playerName2 = computerPlays2 ? computerName : humanName
     if (gameModel.nuPlayers > 3)
         gameModel.playerName3 = computerPlays3 ? computerName : humanName
+    gameModel.event = qsTr("Rated game")
+    gameModel.round = ratingModel.numberGames + 1
     gameDisplay.setupMode = false
     gameDisplay.showToPlay()
     gameDisplay.showPieces()

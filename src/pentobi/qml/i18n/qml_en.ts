@@ -886,6 +886,10 @@
         <extracomment>Player name for game info in rated game.</extracomment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Rated game</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

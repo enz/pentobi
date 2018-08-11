@@ -884,6 +884,10 @@
         <extracomment>Player name for game info in rated game.</extracomment>
         <translation>Mensch</translation>
     </message>
+    <message>
+        <source>Rated game</source>
+        <translation>Gewertetes Spiel</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
