@@ -69,9 +69,8 @@ Item
             PieceElementImage {
                 visible: pieceModel.junctionType[index] === 0
                          || pieceModel.junctionType[index] === 1
-                source: theme.getImage("junction-all-" + colorName)
-                width: 0.1 * gridWidth
-                height: 0.85 * gridHeight
+                source: theme.getImage("junction-straight-" + colorName)
+                width: 0.1 * gridWidth; height: 1.4 * gridHeight
                 x: (modelData.x - pieceModel.center.x + 1) * gridWidth
                    - width / 2
                 y: (modelData.y - pieceModel.center.y) * gridHeight
@@ -82,9 +81,9 @@ Item
             PieceElementImage {
                 visible: pieceModel.junctionType[index] === 0
                          || pieceModel.junctionType[index] === 2
-                source: theme.getImage("junction-all-" + colorName)
-                width: 0.85 * gridWidth
-                height: 0.1 * gridHeight
+                source: theme.getImage("junction-straight-" + colorName)
+                rotation: 90
+                width: 0.1 * gridWidth; height: 1.4 * gridHeight
                 x: (modelData.x - pieceModel.center.x) * gridWidth
                    + (gridWidth - width) / 2
                 y: (modelData.y - pieceModel.center.y + 1) * gridHeight
