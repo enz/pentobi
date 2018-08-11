@@ -46,7 +46,7 @@ Item {
     }
     Rectangle {
         anchors.centerIn: parent
-        opacity: pieceModel && legal ? 0.45 : 0
+        opacity: pieceModel && legal ? 0.3 : 0
         color: theme.colorPieceManipulatorLegal
         width: (isDesktop ? 0.74 : 0.64) * root.width; height: width
         radius: width / 2
@@ -55,11 +55,7 @@ Item {
     }
     Rectangle {
         anchors.centerIn: parent
-        opacity: {
-            if (! pieceModel || legal) return 0
-            if (isOutsideBoard) return 0.35
-            return 0.45
-        }
+        opacity: pieceModel && ! legal ? 0.3 : 0
         color: isOutsideBoard ? theme.colorBackground : theme.colorPieceManipulator
         width: (isDesktop ? 0.74 : 0.64) * root.width; height: width
         radius: width / 2
