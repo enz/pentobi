@@ -100,7 +100,7 @@ Item
         opacity: text === "" ? 0 : 1
         color: colorName == "blue" || colorName == "red" ?
                    "white" : "#333333"
-        font.pixelSize: 0.5 * gridHeight
+        font.pixelSize: 0.7 * gridHeight
         width: 0
         height: 0
         verticalAlignment: Text.AlignVCenter
