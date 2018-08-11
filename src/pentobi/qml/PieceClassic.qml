@@ -228,6 +228,8 @@ Item
                     property: "z"; value: 1
                 }
                 ParentAnimation {
+                    via: isDesktop ? null : gameDisplay
+
                     NumberAnimation {
                         properties: "x,y,scale"
                         duration: animationDurationMove
