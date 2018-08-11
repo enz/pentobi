@@ -194,7 +194,7 @@ function pickPieceAt(piece, coord) {
     if (playerModel.isGenMoveRunning || gameModel.isGameOver
             || (piece.pieceModel.color !== gameModel.toPlay && ! setupMode))
         return
-    if (! pieceManipulator.visible) {
+    if (! pieceManipulator.pieceModel) {
         // Position pieceManipulator at center of piece if possible, but
         // make sure it is completely visible
         var x = coord.x - pieceManipulator.width / 2

@@ -23,25 +23,49 @@ Item {
     property real buttonSize: (isDesktop ? 0.12 : 0.17) * root.width
 
     property real animationDuration:
-        ! visible || ! gameDisplay.enableAnimations ?
+        ! pieceModel || ! gameDisplay.enableAnimations ?
             0 : fastMove ? 50 : animationDurationMove
 
     signal piecePlayed
 
+    enabled: pieceModel
+
     Image {
         anchors.fill: root
         source: isDesktop ? theme.getImage("piece-manipulator-desktop")
-                              : theme.getImage("piece-manipulator")
+                          : theme.getImage("piece-manipulator")
         sourceSize { width: width; height: height }
-        opacity: ! legal * (isOutsideBoard ? 0.65 : 0.45)
+        opacity: {
+            if (! pieceModel) return 0
+            if (isOutsideBoard) return 0.7
+            if (legal) return 0.4
+            return 0.5
+        }
+
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
-    Image {
-        anchors.fill: root
-        source: isDesktop ? theme.getImage("piece-manipulator-desktop-legal")
-                              : theme.getImage("piece-manipulator-legal")
-        sourceSize { width: width; height: height }
-        opacity: legal * 0.4
+    Rectangle {
+        id: circleLegal
+
+        anchors.centerIn: parent
+        opacity: pieceModel && legal ? 0.45 : 0
+        color: theme.colorPieceManipulatorLegal
+        width: (isDesktop ? 0.74 : 0.64) * root.width; height: width
+        radius: width / 2
+
+        Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
+    }
+    Rectangle {
+        anchors.centerIn: parent
+        opacity: {
+            if (! pieceModel || legal) return 0
+            if (isOutsideBoard) return 0.35
+            return 0.45
+        }
+        color: isOutsideBoard ? theme.colorBackground : theme.colorPieceManipulator
+        width: (isDesktop ? 0.74 : 0.64) * root.width; height: width
+        radius: width / 2
+
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     MouseArea {

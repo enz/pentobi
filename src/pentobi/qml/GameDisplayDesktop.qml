@@ -314,8 +314,7 @@ Item
             return Math.max(200, f * board.gridHeight)
         }
         height: width
-        visible: pickedPiece !== null
-        pieceModel: pickedPiece !== null ? pickedPiece.pieceModel : null
+        pieceModel: pickedPiece ? pickedPiece.pieceModel : null
         onPiecePlayed: Logic.playPickedPiece()
     }
 }

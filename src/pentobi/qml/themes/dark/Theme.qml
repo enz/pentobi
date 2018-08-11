@@ -20,6 +20,8 @@ Item {
     property color colorMessageText: colorText
     property color colorMessageBase: "#333"
     property color colorOrange: "#F09217"
+    property color colorPieceManipulator: "#222222"
+    property color colorPieceManipulatorLegal: "#a8a8a8"
     property color colorPurple: "#a12CCF"
     property color colorRed: "#E63E2C"
     property color colorSelectedText: colorBackground

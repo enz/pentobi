@@ -58,9 +58,7 @@
 <file>dark/board-trigon-3.svg</file>
 <file>dark/board-trigon.svg</file>
 <file>dark/pentobi-rated-game.svg</file>
-<file>dark/piece-manipulator-desktop-legal.svg</file>
 <file>dark/piece-manipulator-desktop.svg</file>
-<file>dark/piece-manipulator-legal.svg</file>
 <file>dark/piece-manipulator.svg</file>
 <file>dark/Theme.qml</file>
 <file>light/board-callisto-2.svg</file>
@@ -112,9 +110,7 @@
 <file>light/pentobi-previous-variation.svg</file>
 <file>light/pentobi-rated-game.svg</file>
 <file>light/pentobi-undo.svg</file>
-<file>light/piece-manipulator-desktop-legal.svg</file>
 <file>light/piece-manipulator-desktop.svg</file>
-<file>light/piece-manipulator-legal.svg</file>
 <file>light/piece-manipulator.svg</file>
 <file>light/quarter-square-blue.svg</file>
 <file>light/quarter-square-bottom-blue.svg</file>
