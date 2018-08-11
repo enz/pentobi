@@ -367,7 +367,7 @@ public:
 
     const QString& time() const { return m_time; }
 
-    // Avoid conflict with
+    // Avoid conflict with QObject::event()
     const QString& getEvent() const { return m_event; }
 
     // Avoid conflict with round(), which cannot be resolved by using fully
