@@ -45,8 +45,6 @@ Item {
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     Rectangle {
-        id: circleLegal
-
         anchors.centerIn: parent
         opacity: pieceModel && legal ? 0.45 : 0
         color: theme.colorPieceManipulatorLegal
