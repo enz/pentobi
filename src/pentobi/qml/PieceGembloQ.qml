@@ -13,12 +13,12 @@ Item
 
     property QtObject pieceModel
     property string colorName
-    property bool isPicked
+    property alias isPicked: statePicked.when
     property Item parentUnplayed
     property real gridWidth: board.gridWidth
     property real gridHeight: board.gridHeight
     property bool isMarked
-    property string label
+    property alias label: labelText.text
     property string imageName: theme.getImage("quarter-square-" + colorName)
     property string imageNameBottom: theme.getImage("quarter-square-bottom-" + colorName)
     property bool flippedX: Math.abs(flipX.angle % 360 - 180) < 90
@@ -95,8 +95,9 @@ Item
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     Text {
-        opacity: label == "" ? 0 : 1
-        text: label
+        id: labelText
+
+        opacity: text === "" ? 0 : 1
         color: colorName == "blue" || colorName == "red" ?
                    "white" : "#333333"
         font.pixelSize: 0.5 * gridHeight
@@ -208,8 +209,9 @@ Item
 
     states: [
         State {
+            id: statePicked
+
             name: "picked"
-            when: isPicked
 
             ParentChange {
                 target: root
