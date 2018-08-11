@@ -128,10 +128,6 @@
         <translation>Vis variasjoner</translation>
     </message>
     <message>
-        <source>Animate pieces</source>
-        <translation>Animer brikker</translation>
-    </message>
-    <message>
         <source>Theme:</source>
         <translation>Drakt:</translation>
     </message>
@@ -176,6 +172,10 @@
         <source>None</source>
         <extracomment>Move marking/None</extracomment>
         <translation>Ingen</translation>
+    </message>
+    <message>
+        <source>Animations</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -874,6 +874,16 @@
         <source>File was deleted by another application. Discard game?</source>
         <translation>Filen ble slettet av et annet program. Forkast spill?</translation>
     </message>
+    <message>
+        <source>Pentobi %1 (level %2)</source>
+        <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
+        <translation>Pentobi %1 (nivå %2)</translation>
+    </message>
+    <message>
+        <source>Human</source>
+        <extracomment>Player name for game info in rated game.</extracomment>
+        <translation>Menneske</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -1189,6 +1199,15 @@
         <source>A</source>
         <extracomment>Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.</extracomment>
         <translation>O</translation>
+    </message>
+    <message>
+        <source>Report Bug</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>B</source>
+        <extracomment>Mnemonic for menu item Report Bug. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

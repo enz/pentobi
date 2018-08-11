@@ -593,8 +593,21 @@ function ratedGameStart() {
         computerPlays2 = computerPlays0
         computerPlays3 = computerPlays1
     }
-    playerModel.level = ratingModel.getNextLevel(playerModel.maxLevel)
+    var level = ratingModel.getNextLevel(playerModel.maxLevel)
+    playerModel.level = level
     gameModel.newGame()
+    //: Player name for game info in rated game. First argument is version of
+    //: Pentobi, second argument is level.
+    var computerName =
+            qsTr("Pentobi %1 (level %2)").arg(Qt.application.version).arg(level)
+    //: Player name for game info in rated game.
+    var humanName = qsTr("Human")
+    gameModel.playerName0 = computerPlays0 ? computerName : humanName
+    gameModel.playerName1 = computerPlays1 ? computerName : humanName
+    if (gameModel.nuPlayers > 2)
+        gameModel.playerName2 = computerPlays2 ? computerName : humanName
+    if (gameModel.nuPlayers > 3)
+        gameModel.playerName3 = computerPlays3 ? computerName : humanName
     gameDisplay.setupMode = false
     gameDisplay.showToPlay()
     gameDisplay.showPieces()

@@ -874,6 +874,16 @@
         <source>File was deleted by another application. Discard game?</source>
         <translation>Datei wurde von einer anderen Anwendung bearbeitet. Spiel verwerfen?</translation>
     </message>
+    <message>
+        <source>Pentobi %1 (level %2)</source>
+        <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
+        <translation>Pentobi %1 (Stufe %2)</translation>
+    </message>
+    <message>
+        <source>Human</source>
+        <extracomment>Player name for game info in rated game.</extracomment>
+        <translation>Mensch</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
