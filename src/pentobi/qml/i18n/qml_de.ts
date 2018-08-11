@@ -812,35 +812,35 @@
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Lila gegen Pentobi Spielstufe %1 beginnen?</translation>
+        <translation>Gewertetes Spiel mit Lila gegen Pentobi Stufe %1 beginnen?</translation>
     </message>
     <message>
         <source>Start rated game with Green against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Grün gegen Pentobi Spielstufe %1 beginnen?</translation>
+        <translation>Gewertetes Spiel mit Grün gegen Pentobi Stufe %1 beginnen?</translation>
     </message>
     <message>
         <source>Start rated game with Blue/Red against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Blau/Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
+        <translation>Gewertetes Spiel mit Blau/Rot gegen Pentobi Stufe %1 beginnen?</translation>
     </message>
     <message>
         <source>Start rated game with Blue against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Blau gegen Pentobi Spielstufe %1 beginnen?</translation>
+        <translation>Gewertetes Spiel mit Blau gegen Pentobi Stufe %1 beginnen?</translation>
     </message>
     <message>
         <source>Start rated game with Orange against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Orange gegen Pentobi Spielstufe %1 beginnen?</translation>
+        <translation>Gewertetes Spiel mit Orange gegen Pentobi Stufe %1 beginnen?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Gelb/Grün gegen Pentobi Spielstufe %1 beginnen?</translation>
+        <translation>Gewertetes Spiel mit Gelb/Grün gegen Pentobi Stufe %1 beginnen?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Gelb gegen Pentobi Spielstufe %1 beginnen?</translation>
+        <translation>Gewertetes Spiel mit Gelb gegen Pentobi Stufe %1 beginnen?</translation>
     </message>
     <message>
         <source>Start rated game with Red against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Rot gegen Pentobi Spielstufe %1 beginnen?</translation>
+        <translation>Gewertetes Spiel mit Rot gegen Pentobi Stufe %1 beginnen?</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant.</source>
