@@ -34,10 +34,10 @@ Pentobi.Menu {
         onTriggered: gameVariantDialog.open()
     }
     Pentobi.MenuItem {
-        text: addMnemonic(qsTr("Game Info"),
+        action: actions.gameInfo
+        text: addMnemonic(action.text,
                           //: Mnemonic for menu item Game Info. Leave empty for no mnemonic.
                           qsTr("I"))
-        onTriggered: gameInfoDialog.open()
     }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {

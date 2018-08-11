@@ -90,6 +90,10 @@
         <source>Undo Move</source>
         <translation>Angre trekk</translation>
     </message>
+    <message>
+        <source>Game Info</source>
+        <translation>Spillinfo</translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeDialog</name>
@@ -1097,10 +1101,6 @@
         <source>V</source>
         <extracomment>Mnemonic for menu item Game Variant. Leave empty for no mnemonic.</extracomment>
         <translation>V</translation>
-    </message>
-    <message>
-        <source>Game Info</source>
-        <translation>Spillinfo</translation>
     </message>
     <message>
         <source>I</source>

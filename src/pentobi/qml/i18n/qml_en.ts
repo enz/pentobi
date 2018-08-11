@@ -92,6 +92,10 @@
         <source>Undo Move</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Game Info</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeDialog</name>
@@ -1098,10 +1102,6 @@
     <message>
         <source>V</source>
         <extracomment>Mnemonic for menu item Game Variant. Leave empty for no mnemonic.</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Game Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
