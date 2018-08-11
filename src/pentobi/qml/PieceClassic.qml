@@ -220,11 +220,23 @@ Item
             from: "unplayed,picked,played"; to: from
             enabled: enableAnimations
 
-            ParentAnimation {
-                NumberAnimation {
-                    properties: "x,y,scale"
-                    duration: animationDurationMove
-                    easing.type: Easing.InOutSine
+            SequentialAnimation {
+                // Avoid piece being overlapped by pieces of different color
+                // during ParentAnimation
+                PropertyAction {
+                    target: parentUnplayed.parent
+                    property: "z"; value: 1
+                }
+                ParentAnimation {
+                    NumberAnimation {
+                        properties: "x,y,scale"
+                        duration: animationDurationMove
+                        easing.type: Easing.InOutSine
+                    }
+                }
+                PropertyAction {
+                    target: parentUnplayed.parent
+                    property: "z"; value: 0
                 }
             }
     }
