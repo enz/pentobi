@@ -50,7 +50,7 @@ Item {
         width: root.width - point1.width - point2.width - anchors.leftMargin
         anchors {
             left: point2.right
-            leftMargin: 0.4 * point1.width
+            leftMargin: 0.2 * pointSize
             verticalCenter: root.verticalCenter
         }
         verticalAlignment: Text.AlignVCenter

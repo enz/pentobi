@@ -33,7 +33,7 @@ Item {
         opacity: 0.9 - 0.15 * theme.colorBackground.hslLightness
         anchors {
             left: point.right
-            leftMargin: 0.4 * point.width
+            leftMargin: 0.2 * point.width
             verticalCenter: root.verticalCenter
         }
         verticalAlignment: Text.AlignVCenter
