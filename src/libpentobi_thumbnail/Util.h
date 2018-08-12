@@ -26,29 +26,22 @@ QColor getPaintColor(Variant variant, Color c);
 
 /** Paint piece segment in Nexos. */
 void paintColorSegment(QPainter& painter, Variant variant, Color c,
-                       bool isHorizontal, qreal x, qreal y, qreal size,
-                       qreal alpha = 1, qreal saturation = 1,
-                       bool flat = false);
+                       bool isHorizontal, qreal x, qreal y, qreal size);
 
 void paintColorSquare(QPainter& painter, Variant variant, Color c,
-                      qreal x, qreal y, qreal size, qreal alpha = 1,
-                      qreal saturation = 1, bool flat = false);
+                      qreal x, qreal y, qreal size);
 
 void paintColorSquareCallisto(QPainter& painter, Variant variant, Color c,
                               qreal x, qreal y, qreal size, bool hasRight,
-                              bool hasDown, bool isOnePiece, qreal alpha = 1,
-                              qreal saturation = 1, bool flat = false);
+                              bool hasDown, bool isOnePiece);
 
 void paintColorTriangle(QPainter& painter, Variant variant,
                         Color c, bool isUpward, qreal x, qreal y, qreal width,
-                        qreal height, qreal alpha = 1, qreal saturation = 1,
-                        bool flat = false);
+                        qreal height);
 
 /** Paint empty triangle (quarter square) in GembloQ. */
 void paintColorGembloQ(QPainter& painter, Variant variant, Color c,
-                       unsigned pointType, qreal x, qreal y, qreal width,
-                       qreal alpha = 1, qreal saturation = 1,
-                       bool flat = false);
+                       unsigned pointType, qreal x, qreal y, qreal width);
 
 /** Paint empty triangle (quarter square) in GembloQ. */
 void paintEmptyGembloQ(QPainter& painter, unsigned pointType, qreal x,
@@ -73,8 +66,7 @@ void paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x, qreal y,
 
 void paintJunction(QPainter& painter, Variant variant, Color c, qreal x,
                    qreal y, qreal width, qreal height, bool hasLeft,
-                   bool hasRight, bool hasUp, bool hasDown, qreal alpha = 1,
-                   qreal saturation = 1);
+                   bool hasRight, bool hasUp, bool hasDown);
 
 } // namespace Util
 

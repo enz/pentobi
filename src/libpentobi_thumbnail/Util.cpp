@@ -30,26 +30,14 @@ const QColor orange(240, 146, 23);
 
 const QColor gray(154, 146, 152);
 
-void setAlphaSaturation(QColor& c, qreal alpha, qreal saturation)
-{
-    if (saturation != 1)
-        c.setHsv(c.hue(), static_cast<int>(saturation * c.saturation()),
-                 c.value());
-    if (alpha != 1)
-        c.setAlphaF(alpha);
-}
-
 void paintGembloQ(QPainter& painter, unsigned pointType, qreal x, qreal y,
                   qreal width, const QColor& color, const QColor& upColor,
-                  const QColor& downColor, bool flat)
+                  const QColor& downColor)
 {
     painter.save();
     painter.translate(x, y);
     qreal border = 0.2 * width;
-    if (flat)
-        painter.setPen(Qt::NoPen);
-    else
-        painter.setPen(color);
+    painter.setPen(color);
     painter.setBrush(color);
     switch (pointType)
     {
@@ -294,25 +282,11 @@ void paintSquareFrame(QPainter& painter, qreal x, qreal y, qreal size,
 }
 
 void paintColorSquareFrame(QPainter& painter, Variant variant, Color c,
-                           qreal x, qreal y, qreal size, qreal alpha,
-                           qreal saturation, bool flat)
+                           qreal x, qreal y, qreal size)
 {
     auto color = Util::getPaintColor(variant, c);
-    QColor upLeftColor;
-    QColor downRightColor;
-    if (flat)
-    {
-        upLeftColor = color;
-        downRightColor = color;
-    }
-    else
-    {
-        upLeftColor = color.lighter(130);
-        downRightColor = color.darker(160);
-    }
-    setAlphaSaturation(color, alpha, saturation);
-    setAlphaSaturation(upLeftColor, alpha, saturation);
-    setAlphaSaturation(downRightColor, alpha, saturation);
+    QColor upLeftColor = color.lighter(130);
+    QColor downRightColor = color.darker(160);
     paintSquareFrame(painter, x, y, size, color, upLeftColor, downRightColor);
 }
 
@@ -339,25 +313,11 @@ QColor Util::getPaintColor(Variant variant, Color c)
 }
 
 void Util::paintColorSegment(QPainter& painter, Variant variant, Color c,
-                             bool isHorizontal, qreal x, qreal y, qreal size,
-                             qreal alpha, qreal saturation, bool flat)
+                             bool isHorizontal, qreal x, qreal y, qreal size)
 {
     auto color = getPaintColor(variant, c);
-    QColor upLeftColor;
-    QColor downRightColor;
-    if (flat)
-    {
-        upLeftColor = color;
-        downRightColor = color;
-    }
-    else
-    {
-        upLeftColor = color.lighter(130);
-        downRightColor = color.darker(160);
-    }
-    setAlphaSaturation(color, alpha, saturation);
-    setAlphaSaturation(upLeftColor, alpha, saturation);
-    setAlphaSaturation(downRightColor, alpha, saturation);
+    QColor upLeftColor = color.lighter(130);
+    QColor downRightColor = color.darker(160);
     if (isHorizontal)
         paintSquare(painter, x - size / 4, y + size / 4, 1.5 * size, size / 2,
                     color, upLeftColor, downRightColor);
@@ -367,60 +327,29 @@ void Util::paintColorSegment(QPainter& painter, Variant variant, Color c,
 }
 
 void Util::paintColorGembloQ(QPainter& painter, Variant variant, Color c,
-                             unsigned pointType, qreal x, qreal y, qreal width,
-                             qreal alpha, qreal saturation, bool flat)
+                             unsigned pointType, qreal x, qreal y, qreal width)
 {
     auto color = getPaintColor(variant, c);
-    QColor upColor;
-    QColor downColor;
-    if (flat)
-    {
-        upColor = color;
-        downColor = color;
-    }
-    else
-    {
-        upColor = color.lighter(125);
-        downColor = color.darker(130);
-    }
-    setAlphaSaturation(color, alpha, saturation);
-    setAlphaSaturation(upColor, alpha, saturation);
-    setAlphaSaturation(downColor, alpha, saturation);
-    paintGembloQ(painter, pointType, x, y, width, color, upColor, downColor,
-                 flat);
+    QColor upColor = color.lighter(125);
+    QColor downColor = color.darker(130);
+    paintGembloQ(painter, pointType, x, y, width, color, upColor, downColor);
 }
 
 void Util::paintColorSquare(QPainter& painter, Variant variant, Color c,
-                            qreal x, qreal y, qreal size, qreal alpha,
-                            qreal saturation, bool flat)
+                            qreal x, qreal y, qreal size)
 {
     auto color = getPaintColor(variant, c);
-    QColor upLeftColor;
-    QColor downRightColor;
-    if (flat)
-    {
-        upLeftColor = color;
-        downRightColor = color;
-    }
-    else
-    {
-        upLeftColor = color.lighter(130);
-        downRightColor = color.darker(160);
-    }
-    setAlphaSaturation(color, alpha, saturation);
-    setAlphaSaturation(upLeftColor, alpha, saturation);
-    setAlphaSaturation(downRightColor, alpha, saturation);
+    QColor upLeftColor = color.lighter(130);
+    QColor downRightColor = color.darker(160);
     paintSquare(painter, x, y, size, size, color, upLeftColor, downRightColor);
 }
 
 void Util::paintColorSquareCallisto(QPainter& painter, Variant variant,
                                     Color c, qreal x, qreal y, qreal size,
                                     bool hasRight, bool hasDown,
-                                    bool isOnePiece, qreal alpha,
-                                    qreal saturation, bool flat)
+                                    bool isOnePiece)
 {
     auto color = getPaintColor(variant, c);
-    setAlphaSaturation(color, alpha, saturation);
     if (hasRight)
         painter.fillRect(QRectF(x + 0.96 * size, y + 0.07 * size,
                                 0.08 * size, 0.86 * size), color);
@@ -429,34 +358,19 @@ void Util::paintColorSquareCallisto(QPainter& painter, Variant variant,
                                 0.86 * size, 0.08 * size), color);
     if (isOnePiece)
         paintColorSquareFrame(painter, variant, c, x + 0.04 * size,
-                              y + 0.04 * size, 0.92 * size, alpha, saturation,
-                              flat);
+                              y + 0.04 * size, 0.92 * size);
     else
         paintColorSquare(painter, variant, c, x + 0.04 * size, y + 0.04 * size,
-                         0.92 * size, alpha, saturation, flat);
+                         0.92 * size);
 }
 
 void Util::paintColorTriangle(QPainter& painter, Variant variant,
                               Color c, bool isUpward, qreal x, qreal y,
-                              qreal width, qreal height, qreal alpha,
-                              qreal saturation, bool flat)
+                              qreal width, qreal height)
 {
     auto color = getPaintColor(variant, c);
-    QColor upLeftColor;
-    QColor downRightColor;
-    if (flat)
-    {
-        upLeftColor = color;
-        downRightColor = color;
-    }
-    else
-    {
-        upLeftColor = color.lighter(130);
-        downRightColor = color.darker(160);
-    }
-    setAlphaSaturation(color, alpha, saturation);
-    setAlphaSaturation(upLeftColor, alpha, saturation);
-    setAlphaSaturation(downRightColor, alpha, saturation);
+    QColor upLeftColor = color.lighter(130);
+    QColor downRightColor = color.darker(160);
     paintTriangle(painter, isUpward, x, y, width, height, color, upLeftColor,
                   downRightColor);
 }
@@ -465,7 +379,7 @@ void Util::paintEmptyGembloQ(QPainter& painter, unsigned pointType, qreal x,
                              qreal y, qreal width)
 {
     paintGembloQ(painter, pointType, x, y, width, gray, gray.darker(130),
-                 gray.lighter(115), false);
+                 gray.lighter(115));
 }
 
 void Util::paintEmptyJunction(QPainter& painter, qreal x, qreal y, qreal size)
@@ -518,11 +432,9 @@ void Util::paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x,
 
 void Util::paintJunction(QPainter& painter, Variant variant, Color c, qreal x,
                          qreal y, qreal width, qreal height, bool hasLeft,
-                         bool hasRight, bool hasUp, bool hasDown, qreal alpha,
-                         qreal saturation)
+                         bool hasRight, bool hasUp, bool hasDown)
 {
     auto color = getPaintColor(variant, c);
-    setAlphaSaturation(color, alpha, saturation);
     painter.save();
     painter.translate(x + 0.25 * width, y + 0.25 * height);
     width *= 0.5;
