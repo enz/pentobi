@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.11
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
 import "." as Pentobi
@@ -17,6 +17,8 @@ Pentobi.Dialog {
 
             anchors.fill: parent
             spacing: 0.5 * font.pixelSize
+            leftPadding: spacing
+            rightPadding: leftPadding
 
             Image {
                 source: "qrc:pentobi_icon/pentobi-64.svg"
