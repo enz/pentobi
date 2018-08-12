@@ -6,12 +6,12 @@
         <translation>Pentobi</translation>
     </message>
     <message>
-        <source>Computer opponent for the board game Blokus.</source>
-        <translation>Un adversaire d&apos;ordinateur pour le jeu Blokus.</translation>
-    </message>
-    <message>
         <source>Copyright © 2011–%1 Markus Enzenberger</source>
         <translation>Copyright © 2011–%1 Markus Enzenberger</translation>
+    </message>
+    <message>
+        <source>Computer opponent for the board game Blokus</source>
+        <translation>Un adversaire d&apos;ordinateur pour le jeu Blokus</translation>
     </message>
 </context>
 <context>

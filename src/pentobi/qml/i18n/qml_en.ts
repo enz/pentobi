@@ -8,11 +8,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Computer opponent for the board game Blokus.</source>
+        <source>Copyright © 2011–%1 Markus Enzenberger</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copyright © 2011–%1 Markus Enzenberger</source>
+        <source>Computer opponent for the board game Blokus</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
