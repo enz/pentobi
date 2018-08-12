@@ -39,17 +39,6 @@ void setAlphaSaturation(QColor& c, qreal alpha, qreal saturation)
         c.setAlphaF(alpha);
 }
 
-void paintDot(QPainter& painter, const QColor& color, qreal x, qreal y,
-              qreal width, qreal height, qreal size)
-{
-    painter.save();
-    painter.translate(x, y);
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(color);
-    painter.drawEllipse(QPointF(0.5 * width, 0.5 * height), size, size);
-    painter.restore();
-}
-
 void paintGembloQ(QPainter& painter, unsigned pointType, qreal x, qreal y,
                   qreal width, const QColor& color, const QColor& upColor,
                   const QColor& downColor, bool flat)
@@ -331,28 +320,6 @@ void paintColorSquareFrame(QPainter& painter, Variant variant, Color c,
 
 //-----------------------------------------------------------------------------
 
-QColor Util::getLabelColor(Variant variant, PointState s)
-{
-    if (s.is_empty())
-        return Qt::black;
-    Color c = s.to_color();
-    QColor paintColor = getPaintColor(variant, c);
-    if (paintColor == yellow || paintColor == green)
-        return Qt::black;
-    return Qt::white;
-}
-
-QColor Util::getMarkColor(Variant variant, PointState s)
-{
-    if (s.is_empty())
-        return Qt::white;
-    Color c = s.to_color();
-    QColor paintColor = getPaintColor(variant, c);
-    if (paintColor == yellow || paintColor == green)
-        return {51, 51, 51};
-    return Qt::white;
-}
-
 QColor Util::getPaintColor(Variant variant, Color c)
 {
     if (variant == Variant::duo)
@@ -369,30 +336,6 @@ QColor Util::getPaintColor(Variant variant, Color c)
         return red;
     LIBBOARDGAME_ASSERT(c == Color(3));
     return green;
-}
-
-QString Util::getPlayerString(Variant variant, Color c)
-{
-    auto i = c.to_int();
-    if (variant == Variant::duo)
-        return i == 0 ? qApp->translate("Util", "Purple")
-                      : qApp->translate("Util", "Orange");
-    if (variant == Variant::junior)
-        return i == 0 ? qApp->translate("Util", "Green")
-                      : qApp->translate("Util", "Orange");
-    if (get_nu_colors(variant) == 2)
-        return i == 0 ? qApp->translate("Util", "Blue")
-                      : qApp->translate("Util", "Green");
-    if (get_nu_players(variant) == 2)
-        return i == 0 || i == 2 ? qApp->translate("Util", "Blue/Red")
-                                : qApp->translate("Util", "Yellow/Green");
-    if (i == 0)
-        return qApp->translate("Util", "Blue");
-    if (i == 1)
-        return qApp->translate("Util", "Yellow");
-    if (i == 2)
-        return qApp->translate("Util", "Red");
-    return qApp->translate("Util", "Green");
 }
 
 void Util::paintColorSegment(QPainter& painter, Variant variant, Color c,
@@ -566,31 +509,6 @@ void Util::paintEmptySquareCallistoCenter(QPainter& painter, qreal x, qreal y,
                 gray.lighter(95), false);
 }
 
-void Util::paintGembloQStartingPoint(QPainter& painter, unsigned pointType,
-                                     Variant variant, Color c, qreal x,
-                                     qreal y, qreal width)
-{
-    switch (pointType)
-    {
-    case 0:
-        x -= width;
-        y -= width;
-        break;
-    case 1:
-        y += width;
-        break;
-    case 2:
-        x -= width;
-        y += width;
-        break;
-    case 3:
-        y -= width;
-        break;
-    }
-    paintDot(painter, getPaintColor(variant, c), x, y,
-             2 * width, 2 * width, 0.4 * width);
-}
-
 void Util::paintEmptyTriangle(QPainter& painter, bool isUpward, qreal x,
                               qreal y, qreal width, qreal height)
 {
@@ -651,31 +569,6 @@ void Util::paintJunction(QPainter& painter, Variant variant, Color c, qreal x,
             painter.fillRect(QRectF(0.5 * width , 0.25 * height, width, 0.5 * height), color);
     }
     painter.restore();
-}
-
-void Util::paintSegmentStartingPoint(QPainter& painter, Variant variant,
-                                          Color c, qreal x, qreal y,
-                                     qreal size)
-{
-    paintDot(painter, getPaintColor(variant, c), x, y, size, size,
-             0.15 * size);
-}
-
-void Util::paintSquareStartingPoint(QPainter& painter, Variant variant,
-                                    Color c, qreal x, qreal y, qreal size)
-{
-    paintDot(painter, getPaintColor(variant, c), x, y, size, size,
-             0.13 * size);
-}
-
-void Util::paintTriangleStartingPoint(QPainter& painter, bool isUpward,
-                                      qreal x, qreal y, qreal width,
-                                      qreal height)
-{
-    if (isUpward)
-        y += 0.333 * height;
-    height = 0.666 * height;
-    paintDot(painter, gray.darker(130), x, y, width, height, 0.17 * width);
 }
 
 //-----------------------------------------------------------------------------

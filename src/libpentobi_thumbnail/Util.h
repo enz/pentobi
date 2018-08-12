@@ -24,10 +24,6 @@ namespace Util {
 
 QColor getPaintColor(Variant variant, Color c);
 
-QColor getLabelColor(Variant variant, PointState s);
-
-QColor getMarkColor(Variant variant, PointState s);
-
 /** Paint piece segment in Nexos. */
 void paintColorSegment(QPainter& painter, Variant variant, Color c,
                        bool isHorizontal, qreal x, qreal y, qreal size,
@@ -79,26 +75,6 @@ void paintJunction(QPainter& painter, Variant variant, Color c, qreal x,
                    qreal y, qreal width, qreal height, bool hasLeft,
                    bool hasRight, bool hasUp, bool hasDown, qreal alpha = 1,
                    qreal saturation = 1);
-
-void paintGembloQStartingPoint(QPainter& painter, unsigned pointType,
-                               Variant variant, Color c, qreal x, qreal y,
-                               qreal width);
-
-/** Paint starting point in Nexos. */
-void paintSegmentStartingPoint(QPainter& painter, Variant variant, Color c,
-                               qreal x, qreal y, qreal size);
-
-void paintSquareStartingPoint(QPainter& painter, Variant variant, Color c,
-                              qreal x, qreal y, qreal size);
-
-void paintTriangleStartingPoint(QPainter& painter, bool isUpward, qreal x,
-                                qreal y, qreal width, qreal height);
-
-/** Get a translated string identifying a player, like "Blue" or "Blue/Red".
-    @param variant The game variant
-    @param c The player color or one of the player colors in game variants
-    with multiple colors per player. */
-QString getPlayerString(Variant variant, Color c);
 
 } // namespace Util
 
