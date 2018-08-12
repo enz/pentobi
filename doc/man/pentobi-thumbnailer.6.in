@@ -1,33 +1,38 @@
-.TH PENTOBI-THUMBNAILER 6 "2018-08-07" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+.TH PENTOBI-THUMBNAILER 6 "2017-04-17" "Pentobi @PENTOBI_VERSION@" "Pentobi command reference"
+
 .SH NAME
 pentobi-thumbnailer \- thumbnailer for game records for the board game Blokus as used by the program Pentobi
+
 .SH SYNOPSIS
 .B pentobi-thumbnailer
 .RI [ options ] " input-file output-file"
 .br
+
 .SH DESCRIPTION
+
 .B pentobi-thumbnailer
 is part of the program Pentobi and intended to be used as a thumbnailer for
 the Gnome desktop environment to generate previews of game files written by
 Pentobi.
-.PP
+
 The input file is a game file in Pentobi's SGF format as documented in
 doc/blksgf/Pentobi-SGF.html in the Pentobi source package.
 The output file is a thumbnail in PNG format.
+
 .SH OPTIONS
 .TP
 .B \-s, \-\-size
-The size of the thumbnail. The default is 128. The rendered board might be
-smaller tham the image and surrounded by a transparent border because the
-thumbnailer will use a whole number of pixels for the fields on the board if it
-does not reduce the size of the board by more than 10 percent.
+The size of the thumbnail. The default is 128.
 .TP
 .B \-h, \-\-help
 Display help and exit.
+
 .SH EXIT STATUS
 .TP
 0 if the thumbnail generation succeeds, 1 on error.
+
 .SH SEE ALSO
 .BR pentobi (6)
+
 .SH AUTHOR
 Markus Enzenberger <enz@users.sourceforge.net>

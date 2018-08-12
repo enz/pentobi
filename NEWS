@@ -33,9 +33,6 @@ Version 15.UNKNOWN (master)
   an ampersand to mark a mnemonic but a separate translation string for
   the mnemonic. Ampersands caused problems with searches in Weblate
   (https://github.com/WeblateOrg/weblate/issues/1861)
-* The thumbnailer now produces crisper images because it will use a whole
-  number of pixels for the fields on the board if it does not reduce the
-  size of the board by more than 10 percent.
 
 Bug fixes:
 

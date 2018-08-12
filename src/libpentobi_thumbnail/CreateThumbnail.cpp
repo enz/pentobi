@@ -135,7 +135,8 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
 
 //-----------------------------------------------------------------------------
 
-bool createThumbnail(const QString& path, int width, int height, QImage& image)
+bool createThumbnail(const QString& path, int width, int height,
+                     QImage& image)
 {
     TreeReader reader;
     reader.set_read_only_main_variation(true);
@@ -151,42 +152,9 @@ bool createThumbnail(const QString& path, int width, int height, QImage& image)
         cerr << "Not a valid Blokus SGF file\n";
         return false;
     }
-    // Prefer pixel alignment if it doesn't reduce the size by more than 10%
-    auto geoWidth = static_cast<int>(geo->get_width());
-    auto geoHeight = static_cast<int>(geo->get_height());
-    int preferredWidth;
-    int preferredHeight;
-    auto pieceSet = get_piece_set(variant);
-    if (pieceSet == PieceSet::nexos)
-    {
-        preferredWidth = static_cast<int>(floor(width / (geoWidth - 0.5))
-                                          * (geoWidth - 0.5));
-        preferredHeight = preferredWidth;
-    }
-    else if (pieceSet == PieceSet::gembloq)
-    {
-        preferredWidth = (2 * width) / (2 * geoWidth) * geoWidth;
-        preferredHeight = preferredWidth;
-    }
-    else
-    {
-        preferredWidth = width / geoWidth * geoWidth;
-        preferredHeight = height / geoHeight * geoHeight;
-    }
-    if (preferredWidth < 0.9 * width)
-    {
-        preferredWidth = width;
-        preferredHeight = height;
-    }
     QPainter painter(&image);
-    auto offX = (width - preferredWidth) / 2;
-    auto offY = (height - preferredHeight) / 2;
-    painter.translate(offX, offY);
     BoardPainter boardPainter;
-    boardPainter.paintEmptyBoard(painter,
-                                 static_cast<unsigned>(preferredWidth),
-                                 static_cast<unsigned>(preferredHeight),
-                                 variant, *geo);
+    boardPainter.paintEmptyBoard(painter, width, height, variant, *geo);
     boardPainter.paintPieces(painter, pointState, pieceId);
     return true;
 }
