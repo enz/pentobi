@@ -31,8 +31,8 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5.9 * pointSize
-        color1: theme.colorBlue
-        color2: theme.colorRed
+        color1: gameDisplay.color0
+        color2: gameDisplay.color2
     }
     ScoreElement2 {
         visible: gameModel.nuColors == 4 && gameModel.nuPlayers == 2
@@ -41,8 +41,8 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5.9 * pointSize
-        color1: theme.colorYellow
-        color2: theme.colorGreen
+        color1: gameDisplay.color1
+        color2: gameDisplay.color3
     }
     ScoreElement {
         value: points0
@@ -51,9 +51,7 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: gameModel.gameVariant === "duo" ?
-                   theme.colorPurple : gameModel.gameVariant === "junior" ?
-                       theme.colorGreen : theme.colorBlue
+        color: color0
     }
     ScoreElement {
         value: points1
@@ -62,9 +60,7 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: gameModel.gameVariant === "duo" || gameModel.gameVariant === "junior" ?
-                   theme.colorOrange : gameModel.nuColors === 2 ?
-                       theme.colorGreen : theme.colorYellow
+        color: color1
     }
     ScoreElement {
         visible: gameModel.nuColors > 2
@@ -74,7 +70,7 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: theme.colorRed
+        color: color2
     }
     ScoreElement {
         visible: gameModel.nuColors > 3 && gameModel.gameVariant != "classic_3"
@@ -84,7 +80,7 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: theme.colorGreen
+        color: color3
     }
     ScoreElement2 {
         visible: gameModel.gameVariant == "classic_3"
@@ -97,9 +93,9 @@ Row {
         color1: theme.colorGreen
         color2:
             switch (altPlayer) {
-            case 0: return theme.colorBlue
-            case 1: return theme.colorYellow
-            case 2: return theme.colorRed
+            case 0: return gameDisplay.color0
+            case 1: return gameDisplay.color1
+            case 2: return gameDisplay.color2
             }
     }
 }

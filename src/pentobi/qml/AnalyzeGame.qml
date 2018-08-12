@@ -12,16 +12,7 @@ Item {
     id: root
 
     property var elements: analyzeGameModel.elements
-    property var color: [
-        (gameModel.gameVariant === "duo" ?
-             theme.colorPurple : gameModel.gameVariant === "junior" ?
-                 theme.colorGreen : theme.colorBlue),
-        (gameModel.gameVariant === "duo" || gameModel.gameVariant === "junior" ?
-             theme.colorOrange : gameModel.nuColors === 2 ?
-                 theme.colorGreen : theme.colorYellow),
-        theme.colorRed,
-        theme.colorGreen
-    ]
+    property var color: [ color0, color1, color2, color3 ]
     property int markMoveNumber: analyzeGameModel.markMoveNumber
     property QtObject theme
 

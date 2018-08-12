@@ -51,13 +51,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: {
-                            if (gameModel.gameVariant === "duo")
-                                return theme.colorPurple
-                            if (gameModel.gameVariant === "junior")
-                                return theme.colorGreen
-                            return theme.colorBlue
-                        }
+                        color: gameDisplay.color0
                     }
                     Rectangle {
                         visible: gameModel.nuColors === 4
@@ -65,7 +59,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: theme.colorRed
+                        color: gameDisplay.color2
                     }
                     CheckBox {
                         id: checkBox0
@@ -92,14 +86,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: {
-                            if (gameModel.gameVariant === "duo"
-                                    || gameModel.gameVariant === "junior")
-                                return theme.colorOrange
-                            if (gameModel.nuColors === 2)
-                                return theme.colorGreen
-                            return theme.colorYellow
-                        }
+                        color: gameDisplay.color1
                     }
                     Rectangle {
                         visible: gameModel.nuColors === 4
@@ -107,7 +94,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: theme.colorGreen
+                        color: gameDisplay.color3
                     }
                     CheckBox {
                         id: checkBox1
@@ -137,7 +124,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: theme.colorGreen
+                        color: gameDisplay.color3
                     }
                     CheckBox {
                         id: checkBox3
@@ -153,7 +140,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: theme.colorRed
+                        color: gameDisplay.color2
                     }
                     CheckBox {
                         id: checkBox2

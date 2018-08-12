@@ -13,7 +13,7 @@ import "GameDisplay.js" as Logic
 
 Item
 {
-    id: gameDisplay // Referenced by Piece*.qml
+    id: root
 
     property Item pickedPiece
 
@@ -42,6 +42,19 @@ Item
     property alias pieces1: pieceSelector.pieces1
     property alias pieces2: pieceSelector.pieces2
     property alias pieces3: pieceSelector.pieces3
+    property color color0: {
+        if (gameModel.gameVariant === "duo") return theme.colorPurple
+        if (gameModel.gameVariant === "junior") return theme.colorGreen
+        return theme.colorBlue
+    }
+    property color color1: {
+        if (gameModel.gameVariant === "duo"
+                || gameModel.gameVariant === "junior") return theme.colorOrange
+        if (gameModel.nuColors === 2) return theme.colorGreen
+        return theme.colorYellow
+    }
+    property color color2: theme.colorRed
+    property color color3: theme.colorGreen
 
     signal play(var pieceModel, point gameCoord)
 
@@ -78,11 +91,11 @@ Item
     onHeightChanged: Logic.dropPieceFast()
 
     Settings {
-        property alias enableAnimations: gameDisplay.enableAnimations
-        property alias moveMarking: gameDisplay.moveMarking
-        property alias showCoordinates: gameDisplay.showCoordinates
+        property alias enableAnimations: root.enableAnimations
+        property alias moveMarking: root.moveMarking
+        property alias showCoordinates: root.showCoordinates
         property alias swipeViewCurrentIndex: swipeView.currentIndex
-        property alias setupMode: gameDisplay.setupMode
+        property alias setupMode: root.setupMode
 
         category: "GameDisplayMobile"
     }

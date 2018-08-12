@@ -187,9 +187,7 @@ Item {
             model: gameModel.startingPoints0
 
             Rectangle {
-                color: gameVariant === "duo" ?
-                           theme.colorPurple : gameVariant === "junior" ?
-                               theme.colorGreen : theme.colorBlue
+                color: color0
                 width: startingPointSize; height: width
                 radius: width / 2
                 x: getStartingPointX(modelData.x, gridWidth, width)
@@ -200,9 +198,7 @@ Item {
             model: gameModel.startingPoints1
 
             Rectangle {
-                color: gameVariant === "duo" || gameVariant === "junior" ?
-                           theme.colorOrange : gameModel.nuColors === 2 ?
-                               theme.colorGreen : theme.colorYellow
+                color: color1
                 width: startingPointSize; height: width
                 radius: width / 2
                 x: getStartingPointX(modelData.x, gridWidth, width)
@@ -213,7 +209,7 @@ Item {
             model: gameModel.startingPoints2
 
             Rectangle {
-                color: theme.colorRed
+                color: color2
                 width: startingPointSize; height: width
                 radius: width / 2
                 x: getStartingPointX(modelData.x, gridWidth, width)
@@ -224,7 +220,7 @@ Item {
             model: gameModel.startingPoints3
 
             Rectangle {
-                color: theme.colorGreen
+                color: color3
                 width: startingPointSize; height: width
                 radius: width / 2
                 x: getStartingPointX(modelData.x, gridWidth, width)
