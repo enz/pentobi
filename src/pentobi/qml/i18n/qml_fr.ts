@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Computer opponent for the board game Blokus</source>
-        <translation>Un adversaire d&apos;ordinateur pour le jeu Blokus</translation>
+        <translation>Un adversaire d’ordinateur pour le jeu Blokus</translation>
     </message>
 </context>
 <context>
@@ -261,7 +261,7 @@
     <name>ComputerDialog</name>
     <message>
         <source>Computer plays:</source>
-        <translation>L&apos;ordinateur joue :</translation>
+        <translation>L’ordinateur joue :</translation>
     </message>
     <message>
         <source>Blue/Red</source>
@@ -304,7 +304,7 @@
     <name>ExportImageDialog</name>
     <message>
         <source>Image width:</source>
-        <translation>Largeur de l&apos;image :</translation>
+        <translation>Largeur de l’image :</translation>
     </message>
 </context>
 <context>
@@ -340,19 +340,19 @@
     <name>GameDisplayDesktop</name>
     <message>
         <source>Computer is thinking…</source>
-        <translation>L&apos;ordinateur pense…</translation>
+        <translation>L’ordinateur pense…</translation>
     </message>
     <message>
         <source>Running game analysis…</source>
-        <translation>Exécution de l&apos;analyse de la partie…</translation>
+        <translation>Exécution de l’analyse de la partie…</translation>
     </message>
     <message>
         <source>Computer is thinking… (up to %1 seconds remaining)</source>
-        <translation>L&apos;ordinateur pense… (jusqu’à %1 secondes restantes)</translation>
+        <translation>L’ordinateur pense… (jusqu’à %1 secondes restantes)</translation>
     </message>
     <message>
         <source>Computer is thinking… (up to %1 minutes remaining)</source>
-        <translation>L&apos;ordinateur pense… (jusqu’à %1 minutes restantes)</translation>
+        <translation>L’ordinateur pense… (jusqu’à %1 minutes restantes)</translation>
     </message>
 </context>
 <context>
@@ -657,7 +657,7 @@
     <name>ImageSaveDialog</name>
     <message>
         <source>Save Image</source>
-        <translation>Enregistrer l&apos;image</translation>
+        <translation>Enregistrer l’image</translation>
     </message>
     <message>
         <source>PNG image files</source>
@@ -700,7 +700,7 @@
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
-        <translation>L&apos;analyse de la partie n&apos;est possible que dans la variation principale.</translation>
+        <translation>L’analyse de la partie n’est possible que dans la variation principale.</translation>
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
@@ -712,7 +712,7 @@
     </message>
     <message>
         <source>Computer move aborted.</source>
-        <translation>Coup de l&apos;ordinateur abandonné.</translation>
+        <translation>Coup de l’ordinateur abandonné.</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
@@ -728,11 +728,11 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation>Aucune autorisation d&apos;accès au stockage</translation>
+        <translation>Aucune autorisation d’accès au stockage</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
-        <translation>Supprimer toutes les informations de classement de l&apos;actuelle variante du jeu ?</translation>
+        <translation>Supprimer toutes les informations de classement de l’actuelle variante du jeu ?</translation>
     </message>
     <message>
         <source>Rating information deleted.</source>
@@ -756,7 +756,7 @@
     </message>
     <message>
         <source>Saving image failed or unsupported image format.</source>
-        <translation>Impossible d&apos;enregistrer l&apos;image ou format d&apos;image non pris en charge.</translation>
+        <translation>Impossible d’enregistrer l’image ou format de l’image non pris en charge.</translation>
     </message>
     <message>
         <source>Image saved.</source>
@@ -768,7 +768,7 @@
     </message>
     <message>
         <source>End of tree was reached. Continue search from start of the tree?</source>
-        <translation>La fin de l&apos;arbre est atteinte. Continuer la recherche depuis la racine ?</translation>
+        <translation>La fin de l’arbre est atteinte. Continuer la recherche depuis la racine ?</translation>
     </message>
     <message>
         <source>No comment found</source>
@@ -792,7 +792,7 @@
     </message>
     <message>
         <source>Continue computer move?</source>
-        <translation>Coninuer le coup de l&apos;ordinateur ?</translation>
+        <translation>Coninuer le coup de l’ordinateur ?</translation>
     </message>
     <message>
         <source>Keep only position?</source>
@@ -812,7 +812,7 @@
     </message>
     <message>
         <source>Open failed.</source>
-        <translation>Échec de l&apos;ouverture.</translation>
+        <translation>Échec de l’ouverture.</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
@@ -848,7 +848,7 @@
     </message>
     <message>
         <source>You have not yet played rated games in this game variant.</source>
-        <translation>Vous n&apos;avez pas encore joué des parties classées dans cette variante du jeu.</translation>
+        <translation>Vous n’avez pas encore joué des parties classées dans cette variante du jeu.</translation>
     </message>
     <message>
         <source>File has been modified by another application. Save anyway?</source>
@@ -1294,7 +1294,7 @@
     </message>
     <message>
         <source>Abort Analysis</source>
-        <translation>Abandonner l&apos;analyse</translation>
+        <translation>Abandonner l’analyse</translation>
     </message>
     <message>
         <source>O</source>
@@ -1303,7 +1303,7 @@
     </message>
     <message>
         <source>Clear Analysis</source>
-        <translation>Effacer l&apos;analyse</translation>
+        <translation>Effacer l’analyse</translation>
     </message>
     <message>
         <source>E</source>
@@ -1575,7 +1575,7 @@
     </message>
     <message>
         <source>Set the colors played by the computer</source>
-        <translation>Définir les couleurs joué par l&apos;ordinateur</translation>
+        <translation>Définir les couleurs joué par l’ordinateur</translation>
     </message>
     <message>
         <source>Make the computer continue to play the current color</source>
@@ -1599,7 +1599,7 @@
     </message>
     <message>
         <source>Go one move forward</source>
-        <translation>Avancer d&apos;un coup</translation>
+        <translation>Avancer d’un coup</translation>
     </message>
     <message>
         <source>Go ten moves forward</source>
