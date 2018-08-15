@@ -21,8 +21,6 @@ Light.Theme {
     property color colorCommentFocus: colorText
     property color colorMessageText: colorText
     property color colorMessageBase: "#333"
-    property color colorPieceManipulator: "#333333"
-    property color colorPieceManipulatorLegal: "#a8a8a8"
     property color colorSelectedText: colorBackground
     property color colorSelection: "#96918f"
     property color colorStartingPoint: "#82777E"

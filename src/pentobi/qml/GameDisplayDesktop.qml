@@ -314,9 +314,6 @@ Item
                                         pickedPiece.pieceModel.state,
                                         board.mapToGame(pos))
         }
-        isOutsideBoard:
-            ! board.contains(parent.mapToItem(board, x + width / 2,
-                                              y + height / 2))
         width: {
             var f
             if (board.isTrigon) f = 7

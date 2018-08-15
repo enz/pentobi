@@ -34,8 +34,6 @@ Item {
     property color colorCommentFocus: colorText
     property color colorMessageText: "black"
     property color colorMessageBase: "#cac9c9"
-    property color colorPieceManipulator: "#aaaaaa"
-    property color colorPieceManipulatorLegal: "#ffffff"
     property color colorSelectedText: colorBackground
     property color colorSelection: "#645f5c"
     property color colorStartingPoint: "#767074"

@@ -4,7 +4,9 @@
 <file>colorblind-light/Theme.qml</file>
 <file>dark/pentobi-rated-game.svg</file>
 <file>dark/piece-manipulator-desktop.svg</file>
+<file>dark/piece-manipulator-desktop-legal.svg</file>
 <file>dark/piece-manipulator.svg</file>
+<file>dark/piece-manipulator-legal.svg</file>
 <file>dark/Theme.qml</file>
 <file>light/menu.svg</file>
 <file>light/pentobi-backward.svg</file>
@@ -21,7 +23,9 @@
 <file>light/pentobi-rated-game.svg</file>
 <file>light/pentobi-undo.svg</file>
 <file>light/piece-manipulator-desktop.svg</file>
+<file>light/piece-manipulator-desktop-legal.svg</file>
 <file>light/piece-manipulator.svg</file>
+<file>light/piece-manipulator-legal.svg</file>
 <file>light/Theme.qml</file>
 <file>system/Theme.qml</file>
 </qresource>

@@ -37,8 +37,6 @@ Item {
     property color colorCommentFocus: palette.highlight
     property color colorMessageText: colorText
     property color colorMessageBase: palette.base
-    property color colorPieceManipulator: _isDark ? dark.colorPieceManipulator : light.colorPieceManipulator
-    property color colorPieceManipulatorLegal: _isDark ? dark.colorPieceManipulatorLegal : light.colorPieceManipulatorLegal
     property color colorSelectedText: palette.highlightedText
     property color colorSelection: palette.highlight
     property color colorStartingPoint:
