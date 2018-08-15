@@ -28,7 +28,8 @@ Light.Theme {
     property real opacitySubduedText: 0.59
 
     function getImage(name) {
-        if (name === "pentobi-rated-game")
+        if (name === "pentobi-rated-game"
+                || name.startsWith("piece-manipulator"))
             return "themes/dark/" + name + ".svg"
         return light.getImage(name)
     }
