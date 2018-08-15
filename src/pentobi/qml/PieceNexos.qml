@@ -91,10 +91,7 @@ Item
                 case 5:
                 case 6:
                     return  "image://pentobi/junction-straight/" + color[0]
-                case 7:
-                case 8:
-                case 9:
-                case 10:
+                default:
                     return  "image://pentobi/junction-right/" + color[0]
                 }
             }
