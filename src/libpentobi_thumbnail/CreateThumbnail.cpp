@@ -33,6 +33,7 @@ void handleSetup(const char* id, Color c, const SgfNode& node,
         return;
     for (auto& s : node.get_multi_property(id))
     {
+        ++currentPieceId;
         auto begin = s.begin();
         auto end = begin;
         while (true)

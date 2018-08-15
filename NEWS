@@ -46,6 +46,7 @@ Version 15.0.UNKNOWN (v15-fixes)
 Desktop version:
 
 * Avoid duplicate menu mnemonics and fixed minor errors in translations.
+* Thumbnailer did not paint junctions of setup pieces in Nexos and Callisto.
 
 Android version:
 
