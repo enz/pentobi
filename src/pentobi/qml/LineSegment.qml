@@ -20,9 +20,32 @@ Item {
         Component {
             id: component0
 
-            PieceElementImage {
+            Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                antialiasing: true
+                mirror: ! isHorizontal
+                rotation: isHorizontal ? 0 : -90
+            }
+        }
+    }
+    Loader {
+        anchors.fill: root
+        opacity: imageOpacitySmall0
+        sourceComponent: opacity > 0 || item ? componentSmall0 : null
+
+        Component {
+            id: componentSmall0
+
+            Image {
+                source: imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
+                sourceSize {
+                    width: scaleUnplayed * imageSourceSize.width
+                    height: scaleUnplayed * imageSourceSize.height
+                }
+                antialiasing: true
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? 0 : -90
             }
@@ -36,9 +59,32 @@ Item {
         Component {
             id: component90
 
-            PieceElementImage {
+            Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                antialiasing: true
+                mirror: isHorizontal
+                rotation: isHorizontal ? -180 : -90
+            }
+        }
+    }
+    Loader {
+        anchors.fill: root
+        opacity: imageOpacitySmall90
+        sourceComponent: opacity > 0 || item ? componentSmall90 : null
+
+        Component {
+            id: componentSmall90
+
+            Image {
+                source: imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
+                sourceSize {
+                    width: scaleUnplayed * imageSourceSize.width
+                    height: scaleUnplayed * imageSourceSize.height
+                }
+                antialiasing: true
                 mirror: isHorizontal
                 rotation: isHorizontal ? -180 : -90
             }
@@ -52,9 +98,32 @@ Item {
         Component {
             id: component180
 
-            PieceElementImage {
+            Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                antialiasing: true
+                mirror: ! isHorizontal
+                rotation: isHorizontal ? -180 : -270
+            }
+        }
+    }
+    Loader {
+        anchors.fill: root
+        opacity: imageOpacitySmall180
+        sourceComponent: opacity > 0 || item ? componentSmall180 : null
+
+        Component {
+            id: componentSmall180
+
+            Image {
+                source: imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
+                sourceSize {
+                    width: scaleUnplayed * imageSourceSize.width
+                    height: scaleUnplayed * imageSourceSize.height
+                }
+                antialiasing: true
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? -180 : -270
             }
@@ -68,9 +137,32 @@ Item {
         Component {
             id: component270
 
-            PieceElementImage {
+            Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                antialiasing: true
+                mirror: isHorizontal
+                rotation: isHorizontal ? 0 : -270
+            }
+        }
+    }
+    Loader {
+        anchors.fill: root
+        opacity: imageOpacitySmall270
+        sourceComponent: opacity > 0 || item ? componentSmall270 : null
+
+        Component {
+            id: componentSmall270
+
+            Image {
+                source: imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
+                antialiasing: true
+                sourceSize {
+                    width: scaleUnplayed * imageSourceSize.width
+                    height: scaleUnplayed * imageSourceSize.height
+                }
                 mirror: isHorizontal
                 rotation: isHorizontal ? 0 : -270
             }

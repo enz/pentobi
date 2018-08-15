@@ -12,16 +12,24 @@ Item
     id: root
 
     property QtObject pieceModel
-    property string colorName
-    property alias isPicked: statePicked.when
+    property var color:
+        switch (this.pieceModel.color) {
+        case 0: return color0
+        case 1: return color1
+        case 2: return color2
+        case 3: return color3
+        }
     property Item parentUnplayed
     property real gridWidth: board.gridWidth
     property real gridHeight: board.gridHeight
-    property bool isMarked
-    property alias label: labelText.text
-    property string imageName: theme.getImage("triangle-" + colorName)
+    property string imageName:
+        "image://pentobi/triangle/" + color[0] + "/" + color[1] + "/"
+        + color[2]
     property string imageNameDownward:
-        theme.getImage("triangle-down-" + colorName)
+        "image://pentobi/triangle-down/" + color[0] + "/" + color[1] + "/"
+        + color[2]
+    property real scaleUnplayed:
+        parentUnplayed ? 0.13 * parentUnplayed.width / gridWidth : 0
     property bool flippedX: Math.abs(flipX.angle % 360 - 180) < 90
     property bool flippedY: Math.abs(flipY.angle % 360 - 180) < 90
     property real pieceAngle: {
@@ -30,12 +38,18 @@ Item
         if (flippedX) return rotation + 180
         return rotation + 300
     }
-    property real imageOpacity0: imageOpacity(pieceAngle, 0)
-    property real imageOpacity60: imageOpacity(pieceAngle, 60)
-    property real imageOpacity120: imageOpacity(pieceAngle, 120)
-    property real imageOpacity180: imageOpacity(pieceAngle, 180)
-    property real imageOpacity240: imageOpacity(pieceAngle, 240)
-    property real imageOpacity300: imageOpacity(pieceAngle, 300)
+    property real imageOpacity0: imageOpacity(pieceAngle, 0) * (scale > 0.5)
+    property real imageOpacity60: imageOpacity(pieceAngle, 60) * (scale > 0.5)
+    property real imageOpacity120: imageOpacity(pieceAngle, 120) * (scale > 0.5)
+    property real imageOpacity180: imageOpacity(pieceAngle, 180) * (scale > 0.5)
+    property real imageOpacity240: imageOpacity(pieceAngle, 240) * (scale > 0.5)
+    property real imageOpacity300: imageOpacity(pieceAngle, 300) * (scale > 0.5)
+    property real imageOpacitySmall0: imageOpacity(pieceAngle, 0) * (scale <= 0.5)
+    property real imageOpacitySmall60: imageOpacity(pieceAngle, 60) * (scale <= 0.5)
+    property real imageOpacitySmall120: imageOpacity(pieceAngle, 120) * (scale <= 0.5)
+    property real imageOpacitySmall180: imageOpacity(pieceAngle, 180) * (scale <= 0.5)
+    property real imageOpacitySmall240: imageOpacity(pieceAngle, 240) * (scale <= 0.5)
+    property real imageOpacitySmall300: imageOpacity(pieceAngle, 300) * (scale <= 0.5)
 
     transform: [
         Rotation {
@@ -68,10 +82,9 @@ Item
         }
     }
     Rectangle {
-        opacity: isMarked ? 0.5 : 0
+        opacity: moveMarking == "last_dot" && pieceModel.isLastMove ? 0.5 : 0
         color: gameModel.showVariations && ! gameModel.isMainVar ? "transparent" : border.color
-        border.width: 0.2 * width
-        border.color: colorName == "blue" || colorName == "red" ? "white" : "#333333"
+        border { width: 0.2 * width; color: root.color[3] }
         width: 0.3 * gridHeight
         height: width
         radius: width / 2
@@ -83,11 +96,11 @@ Item
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     Text {
-        id: labelText
-
+        text: moveMarking == "all_number"
+              || (moveMarking == "last_number" && pieceModel.isLastMove) ?
+                  pieceModel.moveLabel : ""
         opacity: text === "" ? 0 : 1
-        color: colorName == "blue" || colorName == "red" ?
-                   "white" : "#333333"
+        color: root.color[3]
         font.pixelSize: 0.5 * gridHeight
         width: 0
         height: 0
@@ -214,9 +227,8 @@ Item
 
     states: [
         State {
-            id: statePicked
-
             name: "picked"
+            when: root === pickedPiece
 
             ParentChange {
                 target: root
@@ -240,9 +252,9 @@ Item
             name: "unplayed"
             when: parentUnplayed != null
 
-           PropertyChanges {
-               target: root
-               scale: 0.13 * parentUnplayed.width / gridWidth
+            PropertyChanges {
+                target: root
+                scale: scaleUnplayed
             }
             ParentChange {
                 target: root
@@ -255,27 +267,27 @@ Item
 
     transitions:
         Transition {
-            from: "unplayed,picked,played"; to: from
-            enabled: enableAnimations
+        from: "unplayed,picked,played"; to: from
+        enabled: enableAnimations
 
-            SequentialAnimation {
-                PropertyAction {
-                    target: parentUnplayed.parent
-                    property: "z"; value: 1
-                }
-                ParentAnimation {
-                    via: isDesktop ? null : gameDisplay
+        SequentialAnimation {
+            PropertyAction {
+                target: parentUnplayed.parent
+                property: "z"; value: 1
+            }
+            ParentAnimation {
+                via: isDesktop ? null : gameDisplay
 
-                    NumberAnimation {
-                        properties: "x,y,scale"
-                        duration: animationDurationMove
-                        easing.type: Easing.InOutSine
-                    }
-                }
-                PropertyAction {
-                    target: parentUnplayed.parent
-                    property: "z"; value: 0
+                NumberAnimation {
+                    properties: "x,y,scale"
+                    duration: animationDurationMove
+                    easing.type: Easing.InOutSine
                 }
             }
+            PropertyAction {
+                target: parentUnplayed.parent
+                property: "z"; value: 0
+            }
+        }
     }
 }

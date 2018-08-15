@@ -43,6 +43,7 @@ SOURCES += \
     AnalyzeGameModel.cpp \
     AndroidUtils.cpp \
     GameModel.cpp \
+    ImageProvider.cpp \
     Main.cpp \
     PieceModel.cpp \
     PlayerModel.cpp \
@@ -109,7 +110,8 @@ SOURCES += \
     ../libpentobi_mcts/SharedConst.cpp \
     ../libpentobi_mcts/State.cpp \
     ../libpentobi_mcts/Util.cpp \
-    ../libpentobi_mcts/StateUtil.cpp
+    ../libpentobi_mcts/StateUtil.cpp \
+    ../libpentobi_paint/Paint.cpp
 
 RESOURCES += \
     ../books/pentobi_books.qrc \
@@ -123,6 +125,7 @@ HEADERS += \
     AnalyzeGameModel.h \
     AndroidUtils.h \
     GameModel.h \
+    ImageProvider.h \
     PieceModel.h \
     PlayerModel.h \
     RatingModel.h \
@@ -226,7 +229,8 @@ HEADERS += \
     ../libpentobi_mcts/SharedConst.h \
     ../libpentobi_mcts/State.h \
     ../libpentobi_mcts/StateUtil.h \
-    ../libpentobi_mcts/Util.h
+    ../libpentobi_mcts/Util.h \
+    ../libpentobi_paint/Paint.h
 
 lupdate_only {
 SOURCES += \

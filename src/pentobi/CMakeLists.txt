@@ -44,6 +44,8 @@ add_executable(pentobi WIN32
     AndroidUtils.cpp
     GameModel.h
     GameModel.cpp
+    ImageProvider.h
+    ImageProvider.cpp
     Main.cpp
     PieceModel.h
     PieceModel.cpp
@@ -63,6 +65,7 @@ target_compile_definitions(pentobi PRIVATE
     -DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
 
 target_link_libraries(pentobi
+    pentobi_paint
     pentobi_mcts
     pentobi_base
     boardgame_base

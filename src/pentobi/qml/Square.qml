@@ -8,7 +8,11 @@ import QtQuick 2.3
 
 // Piece element (square) with pseudo-3D effect.
 // Simulates lighting by using different images for the lighting at different
-// rotations and interpolating between them with an opacity animation.
+// rotations and interpolating between them with an opacity animation. All
+// images have two versions with the sourceSize optimzed for the statically
+// displayed states on the board and in the piece selector, which produces
+// better results than using Image.mipmap and avoids a mipmap bug with Nvidia
+// cards (QTBUG-57845).
 Item {
     Loader {
         opacity: imageOpacity0
@@ -17,9 +21,27 @@ Item {
         Component {
             id: component0
 
-            PieceElementImage {
+            Image {
                 source: imageName
                 sourceSize: imageSourceSize
+            }
+        }
+    }
+    Loader {
+        opacity: imageOpacitySmall0
+        sourceComponent: opacity > 0 || item ? componentSmall0 : null
+
+        Component {
+            id: componentSmall0
+
+            Image {
+                source: imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
+                sourceSize {
+                    width: scaleUnplayed * imageSourceSize.width
+                    height: scaleUnplayed * imageSourceSize.height
+                }
             }
         }
     }
@@ -30,9 +52,28 @@ Item {
         Component {
             id: component90
 
-            PieceElementImage {
+            Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                rotation: -90
+            }
+        }
+    }
+    Loader {
+        opacity: imageOpacitySmall90
+        sourceComponent: opacity > 0 || item ? componentSmall90 : null
+
+        Component {
+            id: componentSmall90
+
+            Image {
+                source: imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
+                sourceSize {
+                    width: scaleUnplayed * imageSourceSize.width
+                    height: scaleUnplayed * imageSourceSize.height
+                }
                 rotation: -90
             }
         }
@@ -44,9 +85,28 @@ Item {
         Component {
             id: component180
 
-            PieceElementImage {
+            Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                rotation: -180
+            }
+        }
+    }
+    Loader {
+        opacity: imageOpacitySmall180
+        sourceComponent: opacity > 0 || item ? componentSmall180 : null
+
+        Component {
+            id: componentSmall180
+
+            Image {
+                source: imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
+                sourceSize {
+                    width: scaleUnplayed * imageSourceSize.width
+                    height: scaleUnplayed * imageSourceSize.height
+                }
                 rotation: -180
             }
         }
@@ -58,9 +118,28 @@ Item {
         Component {
             id: component270
 
-            PieceElementImage {
+            Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                rotation: -270
+            }
+        }
+    }
+    Loader {
+        opacity: imageOpacitySmall270
+        sourceComponent: opacity > 0 || item ? componentSmall270 : null
+
+        Component {
+            id: componentSmall270
+
+            Image {
+                source: imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
+                sourceSize {
+                    width: scaleUnplayed * imageSourceSize.width
+                    height: scaleUnplayed * imageSourceSize.height
+                }
                 rotation: -270
             }
         }

@@ -31,8 +31,8 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5.9 * pointSize
-        color1: gameDisplay.color0
-        color2: gameDisplay.color2
+        color1: gameDisplay.color0[0]
+        color2: gameDisplay.color2[0]
     }
     ScoreElement2 {
         visible: gameModel.nuColors == 4 && gameModel.nuPlayers == 2
@@ -41,8 +41,8 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5.9 * pointSize
-        color1: gameDisplay.color1
-        color2: gameDisplay.color3
+        color1: gameDisplay.color1[0]
+        color2: gameDisplay.color3[0]
     }
     ScoreElement {
         value: points0
@@ -51,7 +51,7 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: color0
+        color: color0[0]
     }
     ScoreElement {
         value: points1
@@ -60,7 +60,7 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: color1
+        color: color1[0]
     }
     ScoreElement {
         visible: gameModel.nuColors > 2
@@ -70,7 +70,7 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: color2
+        color: color2[0]
     }
     ScoreElement {
         visible: gameModel.nuColors > 3 && gameModel.gameVariant != "classic_3"
@@ -80,7 +80,7 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5 * pointSize
-        color: color3
+        color: color3[0]
     }
     ScoreElement2 {
         visible: gameModel.gameVariant == "classic_3"
@@ -90,12 +90,12 @@ Row {
         pointSize: root.pointSize
         height: root.height
         width: 5.9 * pointSize
-        color1: theme.colorGreen
+        color1: theme.colorGreen[0]
         color2:
             switch (altPlayer) {
-            case 0: return gameDisplay.color0
-            case 1: return gameDisplay.color1
-            case 2: return gameDisplay.color2
+            case 0: return gameDisplay.color0[0]
+            case 1: return gameDisplay.color1[0]
+            case 2: return gameDisplay.color2[0]
             }
     }
 }

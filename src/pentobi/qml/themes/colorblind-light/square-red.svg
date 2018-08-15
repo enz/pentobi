@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="20" height="20" version="1.1" xmlns="http://www.w3.org/2000/svg">
- <rect width="20" height="20" fill="#984326"/>
- <path d="m0 20h20v-20l-1 1v18h-18z" fill="#692e19"/>
- <path d="m0 20 1-1v-18h18l1-1h-20z" fill="#ca5a30"/>
-</svg>

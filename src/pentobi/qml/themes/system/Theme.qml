@@ -8,6 +8,7 @@ import QtQuick 2.11
 import "../dark" as Dark
 import "../light" as Light
 
+// See themes/light/Theme.qml for comments
 Item {
     property color colorBackground: {
         // If the contrast to yellow is too bad, we use a slightly modified
@@ -20,27 +21,29 @@ Item {
         return palette.window
     }
 
-    property color colorBlue: _isDark ? dark.colorBlue : light.colorBlue
+    property var colorBlue: _isDark ? dark.colorBlue : light.colorBlue
+    property var colorBoard: _isDark ? dark.colorBoard : light.colorBoard
+    property var colorGreen: _isDark ? dark.colorGreen : light.colorGreen
+    property var colorOrange: _isDark ? dark.colorOrange : light.colorOrange
+    property var colorPurple: _isDark ? dark.colorPurple : light.colorPurple
+    property var colorRed: _isDark ? dark.colorRed : light.colorRed
+    property var colorYellow: _isDark ? dark.colorYellow : light.colorYellow
+
     property color colorButtonPressed: palette.mid
     property color colorButtonHovered: palette.light
     property color colorButtonBorder: palette.shadow
     property color colorCommentBase: palette.base
     property color colorCommentBorder: palette.mid
     property color colorCommentFocus: palette.highlight
-    property color colorGreen: _isDark ? dark.colorGreen : light.colorGreen
     property color colorMessageText: colorText
     property color colorMessageBase: palette.base
-    property color colorOrange: _isDark ? dark.colorOrange : light.colorOrange
-    property color colorPurple: _isDark ? dark.colorPurple : light.colorPurple
     property color colorPieceManipulator: _isDark ? dark.colorPieceManipulator : light.colorPieceManipulator
     property color colorPieceManipulatorLegal: _isDark ? dark.colorPieceManipulatorLegal : light.colorPieceManipulatorLegal
-    property color colorRed: _isDark ? dark.colorRed : light.colorRed
     property color colorSelectedText: palette.highlightedText
     property color colorSelection: palette.highlight
     property color colorStartingPoint:
         _isDark ? dark.colorStartingPoint : light.colorStartingPoint
     property color colorText: palette.text
-    property color colorYellow: _isDark ? dark.colorYellow : light.colorYellow
     property real opacitySubduedText:
         0.55 - 0.2 * theme.colorBackground.hslLightness
 

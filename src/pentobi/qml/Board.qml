@@ -149,37 +149,12 @@ Item {
                 return gridHeight * rows
             }
             anchors.centerIn: parent
-            source: {
-                switch (gameVariant) {
-                case "trigon":
-                case "trigon_2":
-                    return theme.getImage("board-trigon")
-                case "trigon_3":
-                    return theme.getImage("board-trigon-3")
-                case "nexos":
-                case "nexos_2":
-                    return theme.getImage("board-nexos")
-                case "callisto":
-                case "callisto_2_4":
-                    return theme.getImage("board-callisto")
-                case "callisto_2":
-                    return theme.getImage("board-callisto-2")
-                case "callisto_3":
-                    return theme.getImage("board-callisto-3")
-                case "gembloq":
-                case "gembloq_2_4":
-                    return theme.getImage("board-gembloq")
-                case "gembloq_2":
-                    return theme.getImage("board-gembloq-2")
-                case "gembloq_3":
-                    return theme.getImage("board-gembloq-3")
-                case "duo":
-                case "junior":
-                    return theme.getImage("board-duo")
-                default:
-                    return theme.getImage("board-classic")
-                }
-            }
+            source: width > 0 && height > 0 ?
+                        "image://pentobi/board/" + gameVariant + "/"
+                        + theme.colorBoard[0] + "/" + theme.colorBoard[1] + "/"
+                        + theme.colorBoard[2] + "/" + theme.colorBoard[3] + "/"
+                        + theme.colorBoard[4] + "/" + theme.colorBoard[5] :
+                        ""
             sourceSize { width: width; height: height }
             cache: false
         }
@@ -187,7 +162,7 @@ Item {
             model: gameModel.startingPoints0
 
             Rectangle {
-                color: color0
+                color: color0[0]
                 width: startingPointSize; height: width
                 radius: width / 2
                 x: getStartingPointX(modelData.x, gridWidth, width)
@@ -198,7 +173,7 @@ Item {
             model: gameModel.startingPoints1
 
             Rectangle {
-                color: color1
+                color: color1[0]
                 width: startingPointSize; height: width
                 radius: width / 2
                 x: getStartingPointX(modelData.x, gridWidth, width)
@@ -209,7 +184,7 @@ Item {
             model: gameModel.startingPoints2
 
             Rectangle {
-                color: color2
+                color: color2[0]
                 width: startingPointSize; height: width
                 radius: width / 2
                 x: getStartingPointX(modelData.x, gridWidth, width)
@@ -220,7 +195,7 @@ Item {
             model: gameModel.startingPoints3
 
             Rectangle {
-                color: color3
+                color: color3[0]
                 width: startingPointSize; height: width
                 radius: width / 2
                 x: getStartingPointX(modelData.x, gridWidth, width)

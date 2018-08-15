@@ -17,6 +17,7 @@
 #include "AnalyzeGameModel.h"
 #include "AndroidUtils.h"
 #include "GameModel.h"
+#include "ImageProvider.h"
 #include "PlayerModel.h"
 #include "RatingModel.h"
 #include "libboardgame_util/Log.h"
@@ -141,6 +142,7 @@ int main(int argc, char *argv[])
         if (QQuickStyle::name().isEmpty() && isDesktop)
             QQuickStyle::setStyle(QStringLiteral("Fusion"));
         QQmlApplicationEngine engine;
+        engine.addImageProvider(QLatin1String("pentobi"), new ImageProvider);
         engine.rootContext()->setContextProperty(QStringLiteral("initialFile"),
                                                  initialFile);
         engine.rootContext()->setContextProperty(QStringLiteral("isDesktop"),

@@ -8,20 +8,20 @@ import QtQuick 2.11
 import "../colorblind-light" as ColorblindLight
 import "../dark" as Dark
 
+// See themes/light/Theme.qml for comments
 Dark.Theme {
-    property color colorBlue: "#008f9d"
-    property color colorYellow: "#bb7031"
-    property color colorRed: "#984326"
-    property color colorGreen: "#72a074"
-    property color colorPurple: colorBlue
-    property color colorOrange: colorRed
+    property var colorBlue: [ "#008f9d", "#006069", "#00bcce", "#ffffff" ]
+    property var colorGreen: [ "#72a074", "#4e7450", "#9cbc9e", "#ffffff" ]
+    property var colorOrange: colorRed
+    property var colorPurple: colorBlue
+    property var colorRed: [ "#984326", "#692e19", "#ca5a30", "#ffffff" ]
+    property var colorYellow: [ "#bb7031", "#8c5525", "#d28b4f", "#ffffff" ]
 
     function getImage(name) {
         if (name.startsWith("frame-")
                 || name.startsWith("junction-")
                 || name.startsWith("linesegment-")
                 || name.startsWith("quarter-square-")
-                || name.startsWith("square-")
                 || name.startsWith("triangle-"))
             return colorblindLight.getImage(name)
         return dark.getImage(name)

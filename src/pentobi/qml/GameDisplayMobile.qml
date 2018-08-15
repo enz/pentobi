@@ -42,19 +42,19 @@ Item
     property alias pieces1: pieceSelector.pieces1
     property alias pieces2: pieceSelector.pieces2
     property alias pieces3: pieceSelector.pieces3
-    property color color0: {
+    property var color0: {
         if (gameModel.gameVariant === "duo") return theme.colorPurple
         if (gameModel.gameVariant === "junior") return theme.colorGreen
         return theme.colorBlue
     }
-    property color color1: {
+    property var color1: {
         if (gameModel.gameVariant === "duo"
                 || gameModel.gameVariant === "junior") return theme.colorOrange
         if (gameModel.nuColors === 2) return theme.colorGreen
         return theme.colorYellow
     }
-    property color color2: theme.colorRed
-    property color color3: theme.colorGreen
+    property var color2: theme.colorRed
+    property var color3: theme.colorGreen
 
     signal play(var pieceModel, point gameCoord)
 

@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
         QImage image(size, size, QImage::Format_ARGB32);
         image.fill(Qt::transparent);
         if (! createThumbnail(args.at(0), size, size, image))
-            throw runtime_error("Thumbnail generation failed");
+            throw runtime_error("Not a valid Blokus SGF file");
         QImageWriter writer(args.at(1), "png");
         if (! writer.write(image))
             throw runtime_error(writer.errorString().toLocal8Bit().constData());

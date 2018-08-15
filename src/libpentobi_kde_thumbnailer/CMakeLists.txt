@@ -33,9 +33,8 @@ add_library(pentobi_kde_thumbnailer STATIC
   ../libpentobi_base/StartingPoints.cpp
   ../libpentobi_base/TrigonGeometry.cpp
   ../libpentobi_base/Variant.cpp
-  ../libpentobi_thumbnail/BoardPainter.cpp
+  ../libpentobi_paint/Paint.cpp
   ../libpentobi_thumbnail/CreateThumbnail.cpp
-  ../libpentobi_thumbnail/Util.cpp
 )
 
 target_compile_definitions(pentobi_kde_thumbnailer PRIVATE

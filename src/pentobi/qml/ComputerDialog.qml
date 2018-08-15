@@ -51,7 +51,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: gameDisplay.color0
+                        color: gameDisplay.color0[0]
                     }
                     Rectangle {
                         visible: gameModel.nuColors === 4
@@ -59,7 +59,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: gameDisplay.color2
+                        color: gameDisplay.color2[0]
                     }
                     CheckBox {
                         id: checkBox0
@@ -86,7 +86,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: gameDisplay.color1
+                        color: gameDisplay.color1[0]
                     }
                     Rectangle {
                         visible: gameModel.nuColors === 4
@@ -94,7 +94,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: gameDisplay.color3
+                        color: gameDisplay.color3[0]
                     }
                     CheckBox {
                         id: checkBox1
@@ -124,7 +124,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: gameDisplay.color3
+                        color: gameDisplay.color3[0]
                     }
                     CheckBox {
                         id: checkBox3
@@ -140,7 +140,7 @@ Pentobi.Dialog {
                         width: font.pixelSize; height: width
                         radius: width / 2
                         anchors.verticalCenter: parent.verticalCenter
-                        color: gameDisplay.color2
+                        color: gameDisplay.color2[0]
                     }
                     CheckBox {
                         id: checkBox2

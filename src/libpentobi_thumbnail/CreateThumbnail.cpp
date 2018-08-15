@@ -6,17 +6,20 @@
 
 #include "CreateThumbnail.h"
 
-#include <iostream>
-#include "BoardPainter.h"
+#include <QPainter>
 #include "libboardgame_sgf/TreeReader.h"
 #include "libpentobi_base/NodeUtil.h"
+#include "libpentobi_paint/Paint.h"
 
 using namespace std;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
+using libpentobi_base::Color;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;
+using libpentobi_base::MovePoints;
 using libpentobi_base::PieceSet;
+using libpentobi_base::Point;
 using libpentobi_base::PointState;
 using libpentobi_base::Variant;
 
@@ -136,27 +139,30 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
 
 //-----------------------------------------------------------------------------
 
-bool createThumbnail(const QString& path, int width, int height,
-                     QImage& image)
+bool createThumbnail(const QString& path, int width, int height, QImage& image)
 {
     TreeReader reader;
     reader.set_read_only_main_variation(true);
     reader.read(path.toLocal8Bit().constData());
-    auto variant =
-        Variant::classic; // Initialize to avoid compiler warning
+    auto variant = Variant::classic; // Init to avoid compiler warning
     const Geometry* geo;
     Grid<PointState> pointState;
     Grid<unsigned> pieceId;
     if (! getFinalPosition(reader.get_tree(), variant, geo, pointState,
                            pieceId))
-    {
-        cerr << "Not a valid Blokus SGF file\n";
         return false;
-    }
+    qreal ratio;
+    if (get_piece_set(variant) == PieceSet::trigon)
+        ratio = geo->get_height() * 1.732 / geo->get_width();
+    else
+        ratio = 1;
+    qreal paintWidth = min(static_cast<qreal>(width), height / ratio);
+    qreal paintHeight = ratio * paintWidth;
     QPainter painter(&image);
-    BoardPainter boardPainter;
-    boardPainter.paintEmptyBoard(painter, width, height, variant, *geo);
-    boardPainter.paintPieces(painter, pointState, pieceId);
+    painter.translate(QPointF((width - paintWidth) / 2,
+                              (height - paintHeight) / 2));
+    libpentobi_paint::paint(painter, paintWidth, paintHeight, variant, *geo,
+                            pointState, pieceId);
     return true;
 }
 

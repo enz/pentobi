@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="20" height="20" version="1.1" xmlns="http://www.w3.org/2000/svg">
- <path d="m10 20 10-20h-20z" fill="#bb7031"/>
- <path d="m0 0 1.6 0.96 8.4 16.8v2.2z" fill="#c77733"/>
- <path d="m0 0 1.6 0.96h16.8l1.6-0.96z" fill="#d28b4f"/>
- <path d="m20 0-10 20v-2.2l8.4-16.8z" fill="#8c5525"/>
-</svg>
