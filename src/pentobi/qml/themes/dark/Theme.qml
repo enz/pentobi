@@ -30,15 +30,9 @@ Light.Theme {
     property real opacitySubduedText: 0.59
 
     function getImage(name) {
-        if (name.startsWith("frame-")
-                || name.startsWith("junction-")
-                || name.startsWith("linesegment-")
-                || name.startsWith("quarter-square-")
-                || name.startsWith("triangle-")
-                || (name.startsWith("pentobi-") && name !== "pentobi-rated-game")
-                || name === "menu")
-            return light.getImage(name)
-        return "themes/dark/" + name + ".svg"
+        if (name === "pentobi-rated-game")
+            return "themes/dark/" + name + ".svg"
+        return light.getImage(name)
     }
 
     Light.Theme { id: light }
