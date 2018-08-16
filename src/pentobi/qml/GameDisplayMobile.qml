@@ -109,11 +109,7 @@ Item
         Board {
             id: board
 
-            // Ensures that at least 3 rows are shown in pieceSelector
-            width: Math.min(
-                       parent.width,
-                       gameDisplay.height / (1.065 + 0.85 / pieceSelector.columns * 3))
-
+            width: Math.min(parent.width, 0.7 * gameDisplay.height)
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: Logic.onBoardClicked(pos)
