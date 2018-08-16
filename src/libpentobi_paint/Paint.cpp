@@ -30,6 +30,20 @@ namespace libpentobi_paint {
 
 namespace {
 
+void paintQuarterSquareBase(QPainter& painter, qreal x, qreal y, qreal width,
+                            qreal height, const QColor& base)
+{
+    const QPointF polygon[3] =
+    {
+        QPointF(x, y),
+        QPointF(x + width, y),
+        QPointF(x, y + height)
+    };
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(base);
+    painter.drawConvexPolygon(polygon, 3);
+}
+
 void paintQuarterSquareFrame(QPainter& painter, qreal x, qreal y, qreal width,
                              qreal height, const QColor& light)
 {
@@ -52,29 +66,41 @@ void paintSquareFrame(QPainter& painter, qreal x, qreal y, qreal width,
     painter.save();
     painter.translate(x, y);
     qreal border = 0.05 * max(width, height);
-    const QPointF downRight[6] =
+    const QPointF down[4] =
         {
             QPointF(border, height - border),
             QPointF(width - border, height - border),
-            QPointF(width - border, border),
-            QPointF(width, 0),
             QPointF(width, height),
             QPointF(0, height)
         };
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(dark);
-    painter.drawPolygon(downRight, 6);
-    const QPointF upLeft[6] =
+    const QPointF right[4] =
+        {
+            QPointF(width - border, height - border),
+            QPointF(width - border, border),
+            QPointF(width, 0),
+            QPointF(width, height)
+        };
+    const QPointF up[4] =
         {
             QPointF(0, 0),
             QPointF(width, 0),
             QPointF(width - border, border),
+            QPointF(border, border)
+        };
+    const QPointF left[4] =
+        {
+            QPointF(0, 0),
             QPointF(border, border),
             QPointF(border, height - border),
             QPointF(0, height)
         };
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(dark);
+    painter.drawConvexPolygon(down, 4);
+    painter.drawConvexPolygon(right, 4);
     painter.setBrush(light);
-    painter.drawPolygon(upLeft, 6);
+    painter.drawConvexPolygon(up, 4);
+    painter.drawConvexPolygon(left, 4);
     painter.restore();
 }
 
@@ -111,7 +137,7 @@ void paintTriangleDownFrame(QPainter& painter, qreal x, qreal y, qreal width,
     painter.drawConvexPolygon(left, 4);
     painter.drawConvexPolygon(right, 4);
     painter.setBrush(light);
-    painter.drawPolygon(up, 4);
+    painter.drawConvexPolygon(up, 4);
     painter.restore();
 }
 
@@ -226,6 +252,34 @@ void paintBoardGembloQ(QPainter& painter, qreal width, qreal height,
 {
     auto gridWidth = width / geo.get_width();
     auto gridHeight = height / geo.get_height();
+    qreal distX, distY;
+    switch (geo.get_height())
+    {
+    case 22:
+    case 26:
+        distX = 14 * gridWidth;
+        distY = 7 * gridHeight;
+        break;
+    default:
+        LIBBOARDGAME_ASSERT(geo.get_height() == 28);
+        distX = 2 * gridWidth;
+        distY = gridHeight;
+        break;
+    }
+    const QPointF board[8] =
+    {
+        QPointF(distX, 0),
+        QPointF(width - distX, 0),
+        QPointF(width, distY),
+        QPointF(width, height - distY),
+        QPointF(width - distX, height),
+        QPointF(distX, height),
+        QPointF(0, height - distY),
+        QPointF(0, distY)
+    };
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(base);
+    painter.drawConvexPolygon(board, 8);
     for (auto p : geo)
     {
         painter.save();
@@ -253,8 +307,8 @@ void paintBoardGembloQ(QPainter& painter, qreal width, qreal height,
             painter.translate(0, -gridWidth);
             break;
         }
-        paintQuarterSquare(painter, 0, 0, 2 * gridWidth, gridHeight, base,
-                           border);
+        paintQuarterSquareFrame(painter, 0, 0, 2 * gridWidth, gridHeight,
+                                border);
         painter.restore();
     }
 }
@@ -277,7 +331,7 @@ void paintBoardTrigon(QPainter& painter, qreal width, qreal height,
     };
     painter.setPen(Qt::NoPen);
     painter.setBrush(base);
-    painter.drawPolygon(board, 6);
+    painter.drawConvexPolygon(board, 6);
     for (auto p : geo)
         if (geo.get_point_type(p) == 0)
             paintTriangleUpFrame(painter, geo.get_x(p) * gridWidth - 0.5,
@@ -395,7 +449,12 @@ void paintPiecesGembloQ(
             painter.translate(0, -gridWidth);
             break;
         }
-        paintQuarterSquare(painter, 0, 0, 2 * gridWidth, gridHeight, base[c],
+        // Antialiasing cause unwanted seams between quarter squares
+        painter.setRenderHint(QPainter::Antialiasing, false);
+        paintQuarterSquareBase(painter, 0, 0, 2 * gridWidth, gridHeight,
+                               base[c]);
+        painter.setRenderHint(QPainter::Antialiasing);
+        paintQuarterSquareFrame(painter, 0, 0, 2 * gridWidth, gridHeight,
                            border);
         painter.restore();
     }
@@ -620,15 +679,13 @@ void paint(QPainter& painter, qreal width, qreal height, Variant variant,
            const Geometry& geo, const Grid<PointState>& pointState,
            const Grid<unsigned>& pieceId)
 {
-    // Antialiasing cause unwanted seams between quarter squares in GembloQ
-    if (get_piece_set(variant) != PieceSet::gembloq)
-        painter.setRenderHint(QPainter::Antialiasing);
     const QColor boardBase("#9a9298");
     const QColor boardLight("#b2acb0");
     const QColor boardDark("#767074");
     const QColor centerBase("#696267");
     const QColor centerLight("#797276");
     const QColor centerDark("#5a5458");
+    painter.setRenderHint(QPainter::Antialiasing);
     paintBoard(painter, width, height, variant, boardBase, boardLight,
                boardDark, centerBase, centerLight, centerDark);
     array<QColor, 3> blue{"#0073cf", "#0e94ff", "#004881"};
@@ -805,15 +862,7 @@ void paintJunctionT(QPainter& painter, qreal x, qreal y, qreal width,
 void paintQuarterSquare(QPainter& painter, qreal x, qreal y, qreal width,
                         qreal height, const QColor& base, const QColor& light)
 {
-    const QPointF polygon[3] =
-    {
-        QPointF(x, y),
-        QPointF(x + width, y),
-        QPointF(x, y + height)
-    };
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(base);
-    painter.drawConvexPolygon(polygon, 3);
+    paintQuarterSquareBase(painter, x, y, width, height, base);
     paintQuarterSquareFrame(painter, x, y, width, height, light);
 }
 
