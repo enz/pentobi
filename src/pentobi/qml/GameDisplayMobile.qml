@@ -141,29 +141,26 @@ Item
                 ScoreDisplay {
                     id: scoreDisplay
 
-                    height: 0.05 * swipeView.width
+                    height:
+                        (gameModel.nuPlayers === 2 && gameModel.nuColors > 2) ?
+                            0.05 * swipeView.width : 0.06 * swipeView.width
                     pointSize: 0.6 * height
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
                 PieceSelectorMobile {
                     id: pieceSelector
 
-                    // How many full rows can we show if we use 85% of the board width?
-                    property int rows: Math.floor(height / (0.85 * board.width / columns))
-
                     columns: gameModel.gameVariant.startsWith("classic")
                              || gameModel.gameVariant.startsWith("callisto")
                              || gameModel.gameVariant === "duo" ? 7 : 8
-
-                    // Show at least 1 row
-                    width: rows < 1 ? columns * height : 0.85 * board.width
-
+                    width:
+                        // Show at least 3 rows
+                        Math.min(board.width / columns, height / 3) * columns
                     height: swipeView.height - scoreDisplay.height
-
-                    // Try not to show partial piece rows unless we cannot even
-                    // show all pieces of one color (3 rows)
-                    spacingPieceLists: rows < 3 ? 0 : height - rows * (width / columns)
-
+                    spacingPieceLists:
+                        // Don't show partial pieces
+                        height - Math.floor(height / (width / columns))
+                        * (width / columns)
                     anchors.horizontalCenter: parent.horizontalCenter
                     toPlay: gameModel.toPlay
                     nuColors: gameModel.nuColors
