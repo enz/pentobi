@@ -150,9 +150,7 @@ Item
                 PieceSelectorMobile {
                     id: pieceSelector
 
-                    columns: gameModel.gameVariant.startsWith("classic")
-                             || gameModel.gameVariant.startsWith("callisto")
-                             || gameModel.gameVariant === "duo" ? 7 : 8
+                    columns: pieces0 && pieces0.length <= 21 ? 7 : 8
                     width:
                         // Show at least 3 rows
                         Math.min(board.width / columns, height / 3) * columns
