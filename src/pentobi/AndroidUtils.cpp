@@ -62,14 +62,13 @@ QUrl AndroidUtils::extractHelp(const QString& language)
     QDirIterator it(":qml/help/" + language + "/pentobi");
     while (it.hasNext())
     {
-        auto src = it.next();
-        QFileInfo fileInfo(src);
-        if (! fileInfo.isFile())
+        it.next();
+        if (! it.fileInfo().isFile())
             continue;
-        auto dest = QFileInfo(dirPath + "/" + fileInfo.fileName());
-        dest.dir().mkpath(QStringLiteral("."));
-        QFile::remove(dest.absoluteFilePath());
-        QFile::copy(src, dest.absoluteFilePath());
+        QFile dest(dirPath + "/" + it.fileName());
+        QFileInfo(dest).dir().mkpath(QStringLiteral("."));
+        dest.remove();
+        QFile::copy(it.filePath(), dest.fileName());
     }
     auto file = QFileInfo(dirPath + "/index.html").absoluteFilePath();
     return QUrl::fromLocalFile(file);
