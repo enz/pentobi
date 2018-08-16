@@ -13,10 +13,13 @@ Grid {
 
     signal piecePicked(var piece)
 
-    // We want to show the unplayed pieces in slightly less bright colors
-    // than the pieces on the board, but not if colorBackground is light
-    // otherwise the contrast to the yellow pieces is not strong enough.
-    opacity: Math.min(0.94 + 0.08 * theme.colorBackground.hslLightness, 1)
+    // Show unplayed pieces in slightly less bright colors, such that they
+    // don't distract from the pieces on board, but not in desktop mode, where
+    // the unplayed pieces are relatively small, or if the background is bright
+    // to avoid bad contrast with yellow pieces.
+    opacity:
+        isDesktop ? 1 :
+                    Math.min(0.9 + 0.1 * theme.colorBackground.hslLightness, 1)
 
     Repeater {
         model: pieces
