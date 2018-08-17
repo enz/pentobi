@@ -67,6 +67,9 @@ function changeGameVariant(gameVariant) {
 function changeGameVariantNoVerify(gameVariant) {
     cancelRunning()
     lengthyCommand.run(function() {
+        // Destroy pieces before changing game variant to avoid flickering
+        // in PieceSelectorMobile if toPlay != 0
+        gameDisplay.destroyPieces()
         gameModel.changeGameVariant(gameVariant)
         gameDisplay.createPieces()
         gameDisplay.showToPlay()
