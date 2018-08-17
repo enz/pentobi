@@ -204,7 +204,9 @@ Flickable {
                     target: pieceList3; property: "y"; value: pieceList3.y }
                 // Delay showing new color because of piece placement animation
                 PauseAnimation {
-                    duration: animationDurationMove - animationDurationFast
+                    duration:
+                        Math.max(animationDurationMove - animationDurationFast,
+                                 0)
                 }
                 NumberAnimation {
                     target: root
