@@ -1,11 +1,11 @@
 html {
-  background-color: #eee;
+  background-color: white;
 }
 
 body {
   color: black;
   background-color: white;
-  max-width: 40em;
+  max-width: device-width;
   margin:auto;
   padding: 0.5em;
   min-height: 100vh;
