@@ -89,6 +89,7 @@ SOURCES += \
     ../libpentobi_base/PentobiSgfUtil.cpp \
     ../libpentobi_base/PentobiTreeWriter.cpp \
     ../libpentobi_base/PieceInfo.cpp \
+    ../libpentobi_base/PieceTransforms.cpp \
     ../libpentobi_base/PieceTransformsClassic.cpp \
     ../libpentobi_base/PieceTransformsGembloQ.cpp \
     ../libpentobi_base/PieceTransformsTrigon.cpp \

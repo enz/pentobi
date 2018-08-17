@@ -20,7 +20,7 @@ using libboardgame_base::Transform;
 class PieceTransforms
 {
 public:
-    virtual ~PieceTransforms() = default;
+    virtual ~PieceTransforms();
 
 
     virtual const Transform* get_mirrored_horizontally(
