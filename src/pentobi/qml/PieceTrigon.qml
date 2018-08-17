@@ -31,13 +31,7 @@ Item
     property real scaleUnplayed:
         parentUnplayed ? 0.13 * parentUnplayed.width / gridWidth : 0
     property bool flippedX: Math.abs(flipX.angle - 180) < 90
-    property bool flippedY: flipY.angle > 90
-    property real pieceAngle: {
-        if (! flippedY && ! flippedX) return rotation
-        if (! flippedY && flippedX) return rotation + 120
-        if (flippedX) return rotation + 180
-        return rotation + 300
-    }
+    property real pieceAngle: flippedX ? rotation + 180 : rotation
     property real imageOpacity0: imageOpacity(pieceAngle, 0) * (scale > 0.5)
     property real imageOpacity60: imageOpacity(pieceAngle, 60) * (scale > 0.5)
     property real imageOpacity120: imageOpacity(pieceAngle, 120) * (scale > 0.5)
