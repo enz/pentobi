@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>qml/HelpWindow.qml</file>
-    </qresource>
-</RCC>

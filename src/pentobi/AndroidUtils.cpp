@@ -41,9 +41,7 @@ QUrl AndroidUtils::extractHelp(const QString& language)
         extractHelp(QStringLiteral("C"));
     auto activity = QtAndroid::androidActivity();
     auto filesDir =
-            activity.callObjectMethod("getExternalFilesDir",
-                                      "(Ljava/lang/String;)Ljava/io/File;",
-                                      nullptr);
+            activity.callObjectMethod("getFilesDir", "()Ljava/io/File;");
     if (! filesDir.isValid())
         return {};
     auto filesDirString = filesDir.callObjectMethod("toString",

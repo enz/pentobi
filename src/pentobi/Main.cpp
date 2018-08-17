@@ -10,10 +10,10 @@
 
 #include <QApplication>
 #include <QCommandLineParser>
-#include <QIcon>
 #include <QTranslator>
 #include <QQuickStyle>
 #include <QtQml>
+#include <QtWebView>
 #include "AnalyzeGameModel.h"
 #include "AndroidUtils.h"
 #include "GameModel.h"
@@ -21,10 +21,6 @@
 #include "PlayerModel.h"
 #include "RatingModel.h"
 #include "libboardgame_util/Log.h"
-
-#ifndef Q_OS_ANDROID
-#include <QtWebView>
-#endif
 
 using libboardgame_util::RandomGenerator;
 
@@ -35,9 +31,7 @@ int main(int argc, char *argv[])
     libboardgame_util::LogInitializer log_initializer;
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
-#ifndef Q_OS_ANDROID
     QtWebView::initialize();
-#endif
     QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
     QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
 #ifdef VERSION

@@ -13,12 +13,9 @@ equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 11) {
 
 TEMPLATE = app
 
-QT += concurrent quickcontrols2 svg
+QT += concurrent quickcontrols2 svg webview
 android {
     QT += androidextras
-}
-!android {
-    QT += webview
 }
 
 INCLUDEPATH += ..
@@ -124,9 +121,6 @@ RESOURCES += \
     qml/themes/themes.qrc \
     qml/i18n/translations.qrc \
     resources.qrc
-!android {
-    RESOURCES += helpwindow.qrc
-}
 
 HEADERS += \
     AnalyzeGameModel.h \

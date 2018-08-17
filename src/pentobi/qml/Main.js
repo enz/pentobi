@@ -284,21 +284,10 @@ function getFileLabel(file, isModified) {
 }
 
 function help() {
-    var lang = Qt.locale().name
-    var pos = lang.indexOf("_")
-    if (pos >= 0)
-        lang = lang.substr(0, pos)
-    if (lang !== "C" && lang !== "de")
-        lang = "C"
-
-    if (isAndroid) {
-        Qt.openUrlExternally(androidUtils.extractHelp(lang))
-        return
-    }
     if (! helpWindow.item)
         helpWindow.source = "HelpWindow.qml"
-    helpWindow.item.url = "qrc:///qml/help/" + lang + "/pentobi/index.html"
     helpWindow.item.show()
+    helpWindow.item.init()
 }
 
 function init() {

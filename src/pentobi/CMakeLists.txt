@@ -28,7 +28,6 @@ qt5_add_resources(pentobi_RC_TRANSL_SRCS
 
 qtquick_compiler_add_resources(pentobi_RC_SRCS
     resources.qrc
-    helpwindow.qrc
     qml/themes/themes.qrc
     ../books/pentobi_books.qrc
     ../icon/pentobi_icon.qrc
