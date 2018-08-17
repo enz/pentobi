@@ -30,8 +30,10 @@ Item
     property real scaleUnplayed:
         parentUnplayed ? Math.floor(0.25 * parentUnplayed.width) / gridWidth
                        : 0
+    // We  only use flipX.angle [0..360]
     property bool flippedX: Math.abs(flipX.angle - 180) < 90
-    property bool flippedY: Math.abs(flipY.angle - 180) < 90
+    // We  only use flipY.angle [0..180]
+    property bool flippedY: flipY.angle > 90
     property real pieceAngle: {
         if (! flippedY && ! flippedX) return rotation
         if (! flippedY && flippedX) return rotation + 90
