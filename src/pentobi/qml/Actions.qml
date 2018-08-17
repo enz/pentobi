@@ -32,7 +32,7 @@ QtObject {
             if (visibility === Window.FullScreen)
                 Logic.leaveFullscreen()
             else
-                Logic.autoSaveAndQuit()
+                rootWindow.close()
         }
     }
     property Action backToMainVar: Action {
@@ -239,7 +239,7 @@ QtObject {
     property Action quit: Action {
         shortcut: "Ctrl+Q"
         text: qsTr("Quit")
-        onTriggered: Logic.autoSaveAndQuit()
+        onTriggered: rootWindow.close()
     }
     property Action save: Action {
         shortcut: "Ctrl+S"

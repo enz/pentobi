@@ -55,20 +55,11 @@ ApplicationWindow {
 
     minimumWidth: isDesktop ? 597 : 240
     minimumHeight: isDesktop ? 365 : 301
-    width: defaultWidth; height: defaultHeight
-    x: (Screen.width - defaultWidth) / 2
-    y: (Screen.height - defaultHeight) / 2
     color: theme.colorBackground
     //: Main window title if no file is loaded.
     title: qsTr("Pentobi")
-    onClosing: {
-        if ( ! Logic.autoSaveAndQuit())
-            close.accepted = false
-    }
-    Component.onCompleted: {
-        Logic.init()
-        show()
-    }
+    onClosing: if ( ! Logic.quit()) close.accepted = false
+    Component.onCompleted: Logic.init()
     MouseArea {
         anchors.fill: parent
         onClicked: gameDisplay.dropCommentFocus()
@@ -121,10 +112,11 @@ ApplicationWindow {
     Settings {
         id: settings
 
-        property alias x: rootWindow.x
-        property alias y: rootWindow.y
-        property alias width: rootWindow.width
-        property alias height: rootWindow.height
+        property real x: (Screen.width - defaultWidth) / 2
+        property real y: (Screen.height - defaultHeight) / 2
+        property real width: defaultWidth
+        property real height: defaultHeight
+        property int visibility
         property alias folder: rootWindow.folder
         property alias themeName: rootWindow.themeName
         property alias exportImageWidth: rootWindow.exportImageWidth

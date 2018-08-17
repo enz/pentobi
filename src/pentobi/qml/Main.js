@@ -14,18 +14,6 @@ function analyzeGame(nuSimulations) {
     analyzeGameModel.start(gameModel, playerModel, nuSimulations)
 }
 
-function autoSaveAndQuit() {
-    if (gameModel.checkAutosaveModifiedOutside()) {
-        if (! gameModel.isModified || gameModel.isGameEmpty)
-            return true
-        showQuestion(qsTr("Autosaved game was changed by another instance of Pentobi. Overwrite?"),
-                     autoSaveNoVerifyAndQuit)
-        return false
-    }
-    autoSaveNoVerifyAndQuit()
-    return true
-}
-
 function autoSaveNoVerify() {
     wasGenMoveRunning =
             (playerModel.isGenMoveRunning
@@ -39,11 +27,16 @@ function autoSaveNoVerify() {
     settings.isRated = isRated
     settings.wasGenMoveRunning = wasGenMoveRunning
     analyzeGameModel.autoSave(gameModel)
-}
-
-function autoSaveNoVerifyAndQuit() {
-    autoSaveNoVerify()
-    Qt.quit()
+    // This will lose the geometry if the user has changed it, maximized the
+    // window and then closed it before returning to windowed state. But better
+    // than overwriting the geometry with the maximized/fullscreen one.
+    if (visibility === Window.Windowed) {
+        settings.x = x
+        settings.y = y
+        settings.width = width
+        settings.height = height
+    }
+    settings.visibility = visibility
 }
 
 function cancelRunning(showMessage) {
@@ -322,6 +315,15 @@ function init() {
     }
     if (wasGenMoveRunning)
         showQuestion(qsTr("Continue computer move?"), checkComputerMove)
+    x = settings.x
+    y = settings.y
+    width = settings.width
+    height = settings.height
+    switch (settings.visibility) {
+    case Window.Maximized: showMaximized(); break
+    case Window.FullScreen: showFullScreen(); break
+    default: show(); break
+    }
 }
 
 function initComputerColors() {
@@ -532,6 +534,18 @@ function prevPiece() {
     var pieceModel = gameModel.previousPiece(currentPickedPiece)
     if (pieceModel)
         gameDisplay.pickPieceAtBoard(gameDisplay.findPiece(pieceModel))
+}
+
+function quit() {
+    if (gameModel.checkAutosaveModifiedOutside()) {
+        if (! gameModel.isModified || gameModel.isGameEmpty)
+            return true
+        showQuestion(qsTr("Autosaved game was changed by another instance of Pentobi. Overwrite?"),
+                     autoSaveNoVerify)
+        return false
+    }
+    autoSaveNoVerify()
+    return true
 }
 
 function ratedGame()
