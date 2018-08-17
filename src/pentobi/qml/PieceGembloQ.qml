@@ -32,8 +32,8 @@ Item
     property string imageNameBottom:
         "image://pentobi/quarter-square-bottom/" + color[0] + "/" + color[1] +
         "/" + color[2]
-    property bool flippedX: Math.abs(flipX.angle % 360 - 180) < 90
-    property bool flippedY: Math.abs(flipY.angle % 360 - 180) < 90
+    property bool flippedX: Math.abs(flipX.angle - 180) < 90
+    property bool flippedY: Math.abs(flipY.angle - 180) < 90
     property real pieceAngle: {
         if (! flippedY && ! flippedX) return rotation
         if (! flippedY && flippedX) return rotation + 90
