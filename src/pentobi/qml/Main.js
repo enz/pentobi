@@ -39,6 +39,11 @@ function autoSaveNoVerify() {
     settings.visibility = visibility
 }
 
+function autoSaveNoVerifyAndQuit() {
+    autoSaveNoVerify()
+    Qt.quit()
+}
+
 function cancelRunning(showMessage) {
     if (analyzeGameModel.isRunning) {
         analyzeGameModel.cancel()
@@ -541,7 +546,7 @@ function quit() {
         if (! gameModel.isModified || gameModel.isGameEmpty)
             return true
         showQuestion(qsTr("Autosaved game was changed by another instance of Pentobi. Overwrite?"),
-                     autoSaveNoVerify)
+                     autoSaveNoVerifyAndQuit)
         return false
     }
     autoSaveNoVerify()
