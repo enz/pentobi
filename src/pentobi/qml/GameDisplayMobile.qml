@@ -147,15 +147,16 @@ Item
                 PieceSelectorMobile {
                     id: pieceSelector
 
-                    columns: pieces0 && pieces0.length <= 21 ? 7 : 8
-                    width:
+                    property real elementSize:
                         // Show at least 3 rows
-                        Math.min(board.width / columns, height / 3) * columns
+                        Math.min(board.width / columns, height / 3)
+
+                    columns: pieces0 && pieces0.length <= 21 ? 7 : 8
+                    width: elementSize * columns
                     height: swipeView.height - scoreDisplay.height
                     spacingPieceLists:
                         // Don't show partial pieces
-                        height - Math.floor(height / (width / columns))
-                        * (width / columns)
+                        height - Math.floor(height / elementSize) * elementSize
                     anchors.horizontalCenter: parent.horizontalCenter
                     toPlay: gameModel.toPlay
                     nuColors: gameModel.nuColors
