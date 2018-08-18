@@ -15,9 +15,16 @@ import Qt.labs.settings 1.0
 Window {
     id: root
 
-    property alias url: webView.url
+    property url startUrl
     property real defaultWidth: Math.min(font.pixelSize * 40, Screen.desktopAvailableWidth)
     property real defaultHeight: Math.min(font.pixelSize * 45, Screen.desktopAvailableHeight)
+
+    // Instead of initializing webView.url, we provide an init function that
+    // needs to be called after show() to work around an issue with the initial
+    // zoom factor of WebView sometimes very large on Android. Note that this
+    // workaround only reduces the likelihood for this bug to occur
+    // (QTBUG-58290, last occured with Qt 5.11.2)
+    function init() { webView.url = startUrl }
 
     width: defaultWidth; height: defaultHeight
     minimumWidth: 128; minimumHeight: 128

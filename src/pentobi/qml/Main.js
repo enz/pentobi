@@ -298,9 +298,10 @@ function help() {
         url = "qrc:///qml/help/" + lang + "/pentobi/index.html"
     if (! helpWindow.item) {
         helpWindow.source = "HelpWindow.qml"
-        helpWindow.item.url = url
+        helpWindow.item.startUrl = url
     }
     helpWindow.item.show()
+    helpWindow.item.init()
 }
 
 function init() {
