@@ -16,8 +16,8 @@ Window {
     id: root
 
     property url startUrl
-    property real defaultWidth: Math.min(font.pixelSize * 40, Screen.desktopAvailableWidth)
-    property real defaultHeight: Math.min(font.pixelSize * 45, Screen.desktopAvailableHeight)
+    property real defaultWidth: Math.min(font.pixelSize * 48, Screen.desktopAvailableWidth)
+    property real defaultHeight: Math.min(font.pixelSize * 57, Screen.desktopAvailableHeight)
 
     // Instead of initializing webView.url, we provide an init function that
     // needs to be called after show() to work around an issue with the initial
