@@ -23,10 +23,10 @@ PieceTransformsGembloQ::PieceTransformsGembloQ()
     m_all.push_back(&m_rot90);
     m_all.push_back(&m_rot180);
     m_all.push_back(&m_rot270);
-    m_all.push_back(&m_refl);
     m_all.push_back(&m_rot90refl);
     m_all.push_back(&m_rot180refl);
     m_all.push_back(&m_rot270refl);
+    m_all.push_back(&m_refl);
 }
 
 const Transform* PieceTransformsGembloQ::get_default() const

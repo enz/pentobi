@@ -25,12 +25,12 @@ PieceTransformsTrigon::PieceTransformsTrigon()
     m_all.push_back(&m_rot180);
     m_all.push_back(&m_rot240);
     m_all.push_back(&m_rot300);
-    m_all.push_back(&m_refl);
     m_all.push_back(&m_refl_rot60);
     m_all.push_back(&m_refl_rot120);
     m_all.push_back(&m_refl_rot180);
     m_all.push_back(&m_refl_rot240);
     m_all.push_back(&m_refl_rot300);
+    m_all.push_back(&m_refl);
 }
 
 const Transform* PieceTransformsTrigon::get_default() const
