@@ -52,6 +52,7 @@ SOURCES += \
     ../libboardgame_base/Rating.cpp \
     ../libboardgame_base/RectTransform.cpp \
     ../libboardgame_base/StringRep.cpp \
+    ../libboardgame_base/Transform.cpp \
     ../libboardgame_util/Abort.cpp \
     ../libboardgame_util/Assert.cpp \
     ../libboardgame_util/Barrier.cpp \

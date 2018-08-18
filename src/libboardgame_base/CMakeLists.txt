@@ -17,5 +17,6 @@ add_library(boardgame_base STATIC
   StringRep.h
   StringRep.cpp
   Transform.h
+  Transform.cpp
 )
 
