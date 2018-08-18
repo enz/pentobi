@@ -9,7 +9,6 @@
 #endif
 
 #include <QApplication>
-#include <QCommandLineParser>
 #include <QTranslator>
 #include <QQuickStyle>
 #include <QtQml>
@@ -22,39 +21,47 @@
 #include "RatingModel.h"
 #include "libboardgame_util/Log.h"
 
-using libboardgame_util::RandomGenerator;
+#ifndef Q_OS_ANDROID
+#include <QCommandLineParser>
+#endif
 
 //-----------------------------------------------------------------------------
 
-int main(int argc, char *argv[])
+namespace {
+
+#ifdef Q_OS_ANDROID
+
+int mainAndroid()
 {
-    libboardgame_util::LogInitializer log_initializer;
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
-    QtWebView::initialize();
-    QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
-    QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
-#ifdef VERSION
-    QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
+    QQmlApplicationEngine engine;
+    engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
+    engine.rootContext()->setContextProperty(QStringLiteral("initialFile"),
+                                             QStringLiteral(""));
+    engine.rootContext()->setContextProperty(QStringLiteral("isDesktop"),
+                                             QVariant(false));
+#ifdef QT_DEBUG
+    engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
+                                             QVariant(true));
+#else
+    engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
+                                             QVariant(false));
 #endif
+    engine.load(QUrl(QStringLiteral("qrc:///qml/Main.qml")));
+    if (engine.rootObjects().empty())
+        return 1;
+    return QGuiApplication::exec();
+}
+
+#else // ! defined(Q_OS_ANDROID)
+
+int mainDesktop()
+{
     QIcon icon;
     icon.addFile(QStringLiteral(":/pentobi_icon/pentobi.svg"));
     icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-16.svg"));
     icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-32.svg"));
     icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-64.svg"));
     QGuiApplication::setWindowIcon(icon);
-    qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
-    qmlRegisterType<AndroidUtils>("pentobi", 1, 0, "AndroidUtils");
-    qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
-    qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
-    qmlRegisterType<RatingModel>("pentobi", 1, 0, "RatingModel");
-    qmlRegisterInterface<AnalyzeGameElement>("AnalyzeGameElement");
-    qmlRegisterInterface<GameMove>("GameModelMove");
-    qmlRegisterInterface<PieceModel>("PieceModel");
-    QString locale = QLocale::system().name();
-    QTranslator translatorPentobi;
-    translatorPentobi.load("qml_" + locale, QStringLiteral(":qml/i18n"));
-    QCoreApplication::installTranslator(&translatorPentobi);
     QCommandLineParser parser;
     auto maxSupportedLevel = Player::max_supported_level;
     QCommandLineOption optionMaxLevel(
@@ -95,7 +102,7 @@ int main(int argc, char *argv[])
                 QStringLiteral("file.blksgf"),
                 QStringLiteral("Blokus SGF file to open (optional)."));
     parser.addHelpOption();
-    parser.process(app);
+    parser.process(*QCoreApplication::instance());
     try
     {
 #ifndef LIBBOARDGAME_DISABLE_LOG
@@ -117,7 +124,7 @@ int main(int argc, char *argv[])
             auto seed = parser.value(optionSeed).toUInt(&ok);
             if (! ok)
                 throw runtime_error("--seed must be a positive number");
-            RandomGenerator::set_global_seed(seed);
+            libboardgame_util::RandomGenerator::set_global_seed(seed);
         }
         if (parser.isSet(optionThreads))
         {
@@ -126,13 +133,7 @@ int main(int argc, char *argv[])
                 throw runtime_error("--threads must be a positive number");
             PlayerModel::nuThreads = nuThreads;
         }
-#ifdef Q_OS_ANDROID
-        bool isDesktop = false;
-#else
-        bool isDesktop = true;
-#endif
-        if (parser.isSet(optionMobile))
-            isDesktop = false;
+        bool isDesktop = ! parser.isSet(optionMobile);
         QString initialFile;
         auto args = parser.positionalArguments();
         if (args.size() > 1)
@@ -142,18 +143,18 @@ int main(int argc, char *argv[])
         if (QQuickStyle::name().isEmpty() && isDesktop)
             QQuickStyle::setStyle(QStringLiteral("Fusion"));
         QQmlApplicationEngine engine;
-        engine.addImageProvider(QLatin1String("pentobi"), new ImageProvider);
+        engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
         engine.rootContext()->setContextProperty(QStringLiteral("initialFile"),
                                                  initialFile);
         engine.rootContext()->setContextProperty(QStringLiteral("isDesktop"),
                                                  isDesktop);
 #ifdef QT_DEBUG
-        bool isDebug = true;
-#else
-        bool isDebug = false;
-#endif
         engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
-                                                 isDebug);
+                                                 QVariant(true));
+#else
+        engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
+                                                 QVariant(false));
+#endif
         engine.load(QUrl(QStringLiteral("qrc:///qml/Main.qml")));
         if (engine.rootObjects().empty())
             return 1;
@@ -161,9 +162,45 @@ int main(int argc, char *argv[])
     }
     catch (const exception& e)
     {
-        cerr << "Error: " << e.what() << '\n';
+        LIBBOARDGAME_LOG("Error: ", e.what());
         return 1;
     }
+}
+
+#endif // Q_OS_ANDROID
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
+int main(int argc, char *argv[])
+{
+    libboardgame_util::LogInitializer log_initializer;
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication app(argc, argv);
+    QtWebView::initialize();
+    QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
+    QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
+#ifdef VERSION
+    QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
+#endif
+    qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
+    qmlRegisterType<AndroidUtils>("pentobi", 1, 0, "AndroidUtils");
+    qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
+    qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
+    qmlRegisterType<RatingModel>("pentobi", 1, 0, "RatingModel");
+    qmlRegisterInterface<AnalyzeGameElement>("AnalyzeGameElement");
+    qmlRegisterInterface<GameMove>("GameModelMove");
+    qmlRegisterInterface<PieceModel>("PieceModel");
+    QString locale = QLocale::system().name();
+    QTranslator translator;
+    translator.load("qml_" + locale, QStringLiteral(":qml/i18n"));
+    QCoreApplication::installTranslator(&translator);
+#ifdef Q_OS_ANDROID
+    return mainAndroid();
+#else
+    return mainDesktop();
+#endif
 }
 
 //-----------------------------------------------------------------------------
