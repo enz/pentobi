@@ -50,7 +50,7 @@ Item
     property real imageOpacitySmall270: imageOpacity(pieceAngle, 270) * (scale <= 0.5)
 
     function imageOpacity(pieceAngle, imgAngle) {
-        var angle = ((pieceAngle - imgAngle) % 360 + 360) % 360
+        var angle = (pieceAngle - imgAngle + 360) % 360
         if (angle <= 90) return 0
         if (angle <= 180) return -Math.cos(angle * Math.PI / 180)
         if (angle <= 270) return 1

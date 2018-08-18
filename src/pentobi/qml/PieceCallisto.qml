@@ -63,7 +63,7 @@ Item
     ]
 
     function imageOpacity(pieceAngle, imgAngle) {
-        var angle = ((pieceAngle - imgAngle) % 360 + 360) % 360
+        var angle = (pieceAngle - imgAngle + 360) % 360
         return angle >= 90 && angle <= 270 ? 0 : Math.cos(angle * Math.PI / 180)
     }
 

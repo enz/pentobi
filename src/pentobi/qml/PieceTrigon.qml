@@ -60,7 +60,7 @@ Item
 
     function _isDownward(pos) { return (pos.x % 2 == 0) != (pos.y % 2 == 0) }
     function imageOpacity(pieceAngle, imgAngle) {
-        var angle = ((pieceAngle - imgAngle) % 360 + 360) % 360
+        var angle = (pieceAngle - imgAngle + 360) % 360
         return angle >= 60 && angle <= 300 ? 0 : 2 * Math.cos(angle * Math.PI / 180) - 1
     }
 
