@@ -20,14 +20,12 @@ Item
     // Values: "last_dot", "last_number", "all_number", "none"
     property string moveMarking: "last_dot"
 
-    property QtObject theme
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
     property real animationDurationMove: enableAnimations ? 300 : 0
     property real animationDurationFast: enableAnimations ? 80 : 0
     property bool setupMode
     property alias boardContextMenu: boardContextMenu
-    property alias busyIndicatorRunning: busyIndicator.running
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
         if (board.isTrigon || board.isGembloQ)
@@ -185,6 +183,7 @@ Item
     Pentobi.BusyIndicator {
         id: busyIndicator
 
+        running: busyIndicatorRunning
         width: Math.min(0.2 * swipeView.width, swipeView.height)
         height: width
         x: (gameDisplay.width - width) / 2

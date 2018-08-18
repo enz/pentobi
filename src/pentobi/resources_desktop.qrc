@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/GameDisplayDesktop.qml</file>
+        <file>qml/PieceSelectorDesktop.qml</file>
+    </qresource>
+</RCC>

@@ -80,25 +80,12 @@ ApplicationWindow {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            sourceComponent: isDesktop ? componentGameDisplayDesktop : componentGameDisplayMobile
+            source:
+                isDesktop ? "GameDisplayDesktop.qml" : "GameDisplayMobile.qml"
 
-            Component {
-                id: componentGameDisplayDesktop
-
-                GameDisplayDesktop {
-                    theme: rootWindow.theme
-                    busyIndicatorRunning: rootWindow.busyIndicatorRunning
-                    onPlay: Logic.play(pieceModel, gameCoord)
-                }
-            }
-            Component {
-                id: componentGameDisplayMobile
-
-                GameDisplayMobile {
-                    theme: rootWindow.theme
-                    busyIndicatorRunning: rootWindow.busyIndicatorRunning
-                    onPlay: Logic.play(pieceModel, gameCoord)
-                }
+            Connections {
+                target: gameDisplayLoader.item
+                onPlay: Logic.play(pieceModel, gameCoord)
             }
         }
     }

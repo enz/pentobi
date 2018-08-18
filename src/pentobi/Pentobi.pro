@@ -123,6 +123,12 @@ RESOURCES += \
     qml/i18n/translations.qrc \
     resources.qrc
 
+!android {
+    RESOURCES += \
+        ../icon/pentobi_icon_desktop.qrc \
+        resources_desktop.qrc
+}
+
 HEADERS += \
     AnalyzeGameModel.h \
     AndroidUtils.h \

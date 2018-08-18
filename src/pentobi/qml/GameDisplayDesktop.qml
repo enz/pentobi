@@ -21,15 +21,11 @@ Item
     // Values: "last_dot", "last_number", "all_number", "none"
     property string moveMarking: "last_dot"
 
-    property QtObject theme
     property alias showCoordinates: board.showCoordinates
     property bool enableAnimations: true
     property real animationDurationMove: enableAnimations ? 300 : 0
     property real animationDurationFast: enableAnimations ? 80 : 0
     property bool setupMode
-
-    // Dummy for compatibility with GameDisplayMobile
-    property bool busyIndicatorRunning
 
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight

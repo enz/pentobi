@@ -29,7 +29,6 @@
         <file>qml/FatalMessage.qml</file>
         <file>qml/FileDialog.qml</file>
         <file>qml/GameDisplayMobile.qml</file>
-        <file>qml/GameDisplayDesktop.qml</file>
         <file>qml/GameInfoDialog.qml</file>
         <file>qml/GameVariantDialog.qml</file>
         <file>qml/GotoMoveDialog.qml</file>
@@ -64,7 +63,6 @@
         <file>qml/PieceManipulator.qml</file>
         <file>qml/PieceNexos.qml</file>
         <file>qml/PieceRotationAnimation.qml</file>
-        <file>qml/PieceSelectorDesktop.qml</file>
         <file>qml/PieceSelectorMobile.qml</file>
         <file>qml/PieceSwitchedFlipAnimation.qml</file>
         <file>qml/PieceTrigon.qml</file>
