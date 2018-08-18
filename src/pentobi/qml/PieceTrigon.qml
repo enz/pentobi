@@ -32,18 +32,19 @@ Item
         parentUnplayed ? 0.13 * parentUnplayed.width / gridWidth : 0
     property bool flippedX: Math.abs(flipX.angle - 180) < 90
     property real pieceAngle: flippedX ? rotation + 180 : rotation
-    property real imageOpacity0: imageOpacity(pieceAngle, 0) * (scale > 0.5)
-    property real imageOpacity60: imageOpacity(pieceAngle, 60) * (scale > 0.5)
-    property real imageOpacity120: imageOpacity(pieceAngle, 120) * (scale > 0.5)
-    property real imageOpacity180: imageOpacity(pieceAngle, 180) * (scale > 0.5)
-    property real imageOpacity240: imageOpacity(pieceAngle, 240) * (scale > 0.5)
-    property real imageOpacity300: imageOpacity(pieceAngle, 300) * (scale > 0.5)
-    property real imageOpacitySmall0: imageOpacity(pieceAngle, 0) * (scale <= 0.5)
-    property real imageOpacitySmall60: imageOpacity(pieceAngle, 60) * (scale <= 0.5)
-    property real imageOpacitySmall120: imageOpacity(pieceAngle, 120) * (scale <= 0.5)
-    property real imageOpacitySmall180: imageOpacity(pieceAngle, 180) * (scale <= 0.5)
-    property real imageOpacitySmall240: imageOpacity(pieceAngle, 240) * (scale <= 0.5)
-    property real imageOpacitySmall300: imageOpacity(pieceAngle, 300) * (scale <= 0.5)
+    property real isSmall: scale < 0.5 ? 1 : 0
+    property real imageOpacity0: imageOpacity(pieceAngle, 0) * (1 - isSmall)
+    property real imageOpacity60: imageOpacity(pieceAngle, 60) * (1 - isSmall)
+    property real imageOpacity120: imageOpacity(pieceAngle, 120) * (1 - isSmall)
+    property real imageOpacity180: imageOpacity(pieceAngle, 180) * (1 - isSmall)
+    property real imageOpacity240: imageOpacity(pieceAngle, 240) * (1 - isSmall)
+    property real imageOpacity300: imageOpacity(pieceAngle, 300) * (1 - isSmall)
+    property real imageOpacitySmall0: imageOpacity(pieceAngle, 0) * isSmall
+    property real imageOpacitySmall60: imageOpacity(pieceAngle, 60) * isSmall
+    property real imageOpacitySmall120: imageOpacity(pieceAngle, 120) * isSmall
+    property real imageOpacitySmall180: imageOpacity(pieceAngle, 180) * isSmall
+    property real imageOpacitySmall240: imageOpacity(pieceAngle, 240) * isSmall
+    property real imageOpacitySmall300: imageOpacity(pieceAngle, 300) * isSmall
 
     transform: [
         Rotation {

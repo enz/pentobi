@@ -40,14 +40,15 @@ Item
         if (flippedX) return rotation + 180
         return rotation + 270
     }
-    property real imageOpacity0: imageOpacity(pieceAngle, 0) * (scale > 0.5)
-    property real imageOpacity90: imageOpacity(pieceAngle, 90) * (scale > 0.5)
-    property real imageOpacity180: imageOpacity(pieceAngle, 180) * (scale > 0.5)
-    property real imageOpacity270: imageOpacity(pieceAngle, 270) * (scale > 0.5)
-    property real imageOpacitySmall0: imageOpacity(pieceAngle, 0) * (scale <= 0.5)
-    property real imageOpacitySmall90: imageOpacity(pieceAngle, 90) * (scale <= 0.5)
-    property real imageOpacitySmall180: imageOpacity(pieceAngle, 180) * (scale <= 0.5)
-    property real imageOpacitySmall270: imageOpacity(pieceAngle, 270) * (scale <= 0.5)
+    property real isSmall: scale < 0.5 ? 1 : 0
+    property real imageOpacity0: imageOpacity(pieceAngle, 0) * (1 - isSmall)
+    property real imageOpacity90: imageOpacity(pieceAngle, 90) * (1 - isSmall)
+    property real imageOpacity180: imageOpacity(pieceAngle, 180) * (1 - isSmall)
+    property real imageOpacity270: imageOpacity(pieceAngle, 270) * (1 - isSmall)
+    property real imageOpacitySmall0: imageOpacity(pieceAngle, 0) * isSmall
+    property real imageOpacitySmall90: imageOpacity(pieceAngle, 90) * isSmall
+    property real imageOpacitySmall180: imageOpacity(pieceAngle, 180) * isSmall
+    property real imageOpacitySmall270: imageOpacity(pieceAngle, 270) * isSmall
 
     transform: [
         Rotation {
