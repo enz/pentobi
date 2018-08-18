@@ -39,8 +39,8 @@ QPixmap ImageProvider::requestPixmap(const QString& id, QSize* size,
         return pixmap;
     QPainter painter(&pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
-    auto splitRef = id.splitRef("/");
-    if (splitRef.size() == 0)
+    auto splitRef = id.splitRef(QStringLiteral("/"));
+    if (splitRef.empty())
         return pixmap;
     auto name = splitRef[0];
     if (name == "board" && splitRef.size() == 8)

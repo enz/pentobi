@@ -21,7 +21,6 @@ using libpentobi_base::CallistoGeometry;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
 using libpentobi_base::Geometry;
-using libpentobi_base::PieceSet;
 using libpentobi_base::Point;
 
 namespace libpentobi_paint {
@@ -319,7 +318,7 @@ void paintBoardTrigon(QPainter& painter, qreal width, qreal height,
 {
     auto gridWidth = width / (geo.get_width() + 1);
     auto gridHeight = height / geo.get_height();
-    auto dist = (geo.get_width() + 1 - geo.get_height()) / 2 * gridWidth;
+    auto dist = (geo.get_width() + 1 - geo.get_height()) * gridWidth/ 2;
     const QPointF board[6] =
     {
         QPointF(dist, 0),
