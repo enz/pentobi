@@ -11,7 +11,6 @@
 #include "PieceModel.h"
 
 #include "libboardgame_base/RectTransform.h"
-#include "libboardgame_sys/Compiler.h"
 #include "libpentobi_base/Board.h"
 #include "libpentobi_base/GembloQTransform.h"
 #include "libpentobi_base/TrigonTransform.h"
