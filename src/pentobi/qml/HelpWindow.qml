@@ -15,27 +15,9 @@ import Qt.labs.settings 1.0
 Window {
     id: root
 
-    property url startUrl: {
-        var lang = Qt.locale().name
-        var pos = lang.indexOf("_")
-        if (pos >= 0)
-            lang = lang.substr(0, pos)
-        if (lang !== "C" && lang !== "de")
-            lang = "C"
-        // qrc urls work in WebView on Linux but not on Android
-        if (isDesktop)
-            return "qrc:///qml/help/" + lang + "/pentobi/index.html"
-        return androidUtils.extractHelp(lang)
-    }
+    property alias url: webView.url
     property real defaultWidth: Math.min(font.pixelSize * 40, Screen.desktopAvailableWidth)
     property real defaultHeight: Math.min(font.pixelSize * 45, Screen.desktopAvailableHeight)
-
-    // Instead of initializing webView.url with startUrl, we provide an init
-    // function that needs to be called after show() to work around an issue
-    // with the initial zoom factor of WebView sometimes very large on Android
-    // Note that this workaround only reduced the likelihood for this bug to
-    // occur (QTBUG-58290, last occured with Qt 5.11.1)
-    function init() { if (isAndroid) webView.url = startUrl }
 
     width: defaultWidth; height: defaultHeight
     minimumWidth: 128; minimumHeight: 128
@@ -52,8 +34,6 @@ Window {
         id: webView
 
         anchors.fill: parent
-        // See comment at init()
-        Component.onCompleted: if (! isAndroid) url = startUrl
     }
     Action {
         shortcut: "Ctrl+W"

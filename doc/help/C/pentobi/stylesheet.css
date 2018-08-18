@@ -1,10 +1,9 @@
 html {
-  background-color: #eee;
+  background-color: white;
 }
 
 body {
   color: black;
-  background-color: white;
   max-width: 40em;
   margin:auto;
   padding: 0.5em;

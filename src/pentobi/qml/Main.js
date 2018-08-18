@@ -284,10 +284,23 @@ function getFileLabel(file, isModified) {
 }
 
 function help() {
-    if (! helpWindow.item)
+    var lang = Qt.locale().name
+    var pos = lang.indexOf("_")
+    if (pos >= 0)
+        lang = lang.substr(0, pos)
+    if (lang !== "C" && lang !== "de")
+        lang = "C"
+    var url
+    // qrc urls work in WebView on Linux but not on Android
+    if (isAndroid)
+        url = androidUtils.extractHelp(lang)
+    else
+        url = "qrc:///qml/help/" + lang + "/pentobi/index.html"
+    if (! helpWindow.item) {
         helpWindow.source = "HelpWindow.qml"
+        helpWindow.item.url = url
+    }
     helpWindow.item.show()
-    helpWindow.item.init()
 }
 
 function init() {
