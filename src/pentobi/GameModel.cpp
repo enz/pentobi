@@ -844,7 +844,8 @@ void GameModel::gotoMove(int n)
     if (n == 0)
         goBeginning();
     else if (n > 0)
-        gotoNode(get_move_node(m_game.get_tree(), m_game.get_current(), n));
+        gotoNode(get_move_node(m_game.get_tree(), m_game.get_current(),
+                               static_cast<unsigned>(n)));
 }
 
 void GameModel::gotoNode(const SgfNode& node)
