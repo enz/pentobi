@@ -122,6 +122,11 @@ public:
         off-board. */
     Point get_point(unsigned x, unsigned y) const;
 
+    /** Return the point at a given coordinate.
+        @return The point or Point::null() if this coordinates are
+        off-board. */
+    Point get_point(int x, int y) const;
+
     unsigned get_width() const { return m_width; }
 
     unsigned get_height() const { return m_height; }
@@ -225,6 +230,15 @@ inline auto Geometry<P>::get_point(unsigned x, unsigned y) const -> Point
 {
     LIBBOARDGAME_ASSERT(x < m_width);
     LIBBOARDGAME_ASSERT(y < m_height);
+    return m_points[x][y];
+}
+
+template<class P>
+inline auto Geometry<P>::get_point(int x, int y) const -> Point
+{
+    if (x < 0 || static_cast<unsigned>(x) >= m_width
+            || y < 0 || static_cast<unsigned>(y) >= m_height)
+        return Point::null();
     return m_points[x][y];
 }
 
