@@ -9,6 +9,7 @@
 
 #include <limits>
 #include <iosfwd>
+#include "libboardgame_util/Assert.h"
 
 namespace libboardgame_base {
 
@@ -30,6 +31,8 @@ struct CoordPoint
     CoordPoint() = default;
 
     CoordPoint(int x, int y);
+
+    CoordPoint(unsigned x, unsigned y);
 
     bool operator==(CoordPoint p) const;
 
@@ -54,6 +57,14 @@ inline CoordPoint::CoordPoint(int x, int y)
 {
     this->x = x;
     this->y = y;
+}
+
+inline CoordPoint::CoordPoint(unsigned x, unsigned y)
+{
+    LIBBOARDGAME_ASSERT(x < numeric_limits<int>::max());
+    LIBBOARDGAME_ASSERT(y < numeric_limits<int>::max());
+    this->x = static_cast<int>(x);
+    this->y = static_cast<int>(y);
 }
 
 inline bool CoordPoint::operator==(CoordPoint p) const
