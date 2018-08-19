@@ -623,7 +623,7 @@ QString GameModel::getResultMessage()
     auto variant = bd.get_variant();
     if (variant == Variant::duo)
     {
-        auto score = m_points0 - m_points1;
+        auto score = static_cast<double>(m_points0 - m_points1);
         if (score == 1)
             return tr("Purple wins with 1 point.");
         if (score > 0)
@@ -636,7 +636,7 @@ QString GameModel::getResultMessage()
     }
     if (variant == Variant::junior)
     {
-        auto score = m_points0 - m_points1;
+        auto score = static_cast<double>(m_points0 - m_points1);
         if (score == 1)
             return tr("Green wins with 1 point.");
         if (score > 0)
@@ -650,7 +650,7 @@ QString GameModel::getResultMessage()
     bool breakTies = (bd.get_piece_set() == PieceSet::callisto);
     if (m_nuColors == 2)
     {
-        auto score = m_points0 - m_points1;
+        auto score = static_cast<double>(m_points0 - m_points1);
         if (score == 1)
             return tr("Blue wins with 1 point.");
         if (score > 0)
@@ -666,7 +666,8 @@ QString GameModel::getResultMessage()
     }
     if (m_nuColors == 4 && m_nuPlayers == 2)
     {
-        auto score = m_points0 + m_points2 - m_points1 - m_points3;
+        auto score = static_cast<double>(m_points0 + m_points2
+                                         - m_points1 - m_points3);
         if (score == 1)
             return tr("Blue/Red wins with 1 point.");
         if (score > 0)
