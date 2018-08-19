@@ -7,8 +7,8 @@
 #ifndef LIBPENTOBI_BASE_ENGINE_H
 #define LIBPENTOBI_BASE_ENGINE_H
 
-#include "libpentobi_base/Game.h"
-#include "libpentobi_base/PlayerBase.h"
+#include "Game.h"
+#include "PlayerBase.h"
 #include "libboardgame_base/Engine.h"
 
 namespace libpentobi_base {

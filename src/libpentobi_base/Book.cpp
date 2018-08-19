@@ -10,9 +10,9 @@
 
 #include "Book.h"
 
+#include "BoardUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_util/Log.h"
-#include "libpentobi_base/BoardUtil.h"
 
 //-----------------------------------------------------------------------------
 

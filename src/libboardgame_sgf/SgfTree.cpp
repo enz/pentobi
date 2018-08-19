@@ -13,7 +13,7 @@
 #include <ctime>
 #include <cstdio>
 #include <cstdlib>
-#include "libboardgame_sgf/SgfUtil.h"
+#include "SgfUtil.h"
 #include "libboardgame_util/StringUtil.h"
 
 namespace libboardgame_sgf {

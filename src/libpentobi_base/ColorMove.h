@@ -7,8 +7,8 @@
 #ifndef LIBPENTOBI_BASE_COLOR_MOVE_H
 #define LIBPENTOBI_BASE_COLOR_MOVE_H
 
+#include "Color.h"
 #include "Move.h"
-#include "libpentobi_base/Color.h"
 
 namespace libpentobi_base {
 

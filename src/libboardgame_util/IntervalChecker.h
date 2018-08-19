@@ -8,7 +8,7 @@
 #define LIBBOARDGAME_UTIL_INTERVAL_CHECKER_H
 
 #include <functional>
-#include "libboardgame_util/TimeSource.h"
+#include "TimeSource.h"
 
 namespace libboardgame_util {
 
