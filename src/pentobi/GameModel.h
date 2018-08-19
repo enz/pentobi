@@ -69,10 +69,10 @@ class GameModel
     Q_PROPERTY(QString lastInputOutputError READ lastInputOutputError)
     Q_PROPERTY(QString file READ file NOTIFY fileChanged)
     Q_PROPERTY(QStringList recentFiles READ recentFiles NOTIFY recentFilesChanged)
-    Q_PROPERTY(int nuColors READ nuColors NOTIFY nuColorsChanged)
-    Q_PROPERTY(int nuPlayers READ nuPlayers NOTIFY nuPlayersChanged)
-    Q_PROPERTY(int toPlay READ toPlay NOTIFY toPlayChanged)
-    Q_PROPERTY(int altPlayer READ altPlayer NOTIFY altPlayerChanged)
+    Q_PROPERTY(unsigned nuColors READ nuColors NOTIFY nuColorsChanged)
+    Q_PROPERTY(unsigned nuPlayers READ nuPlayers NOTIFY nuPlayersChanged)
+    Q_PROPERTY(unsigned toPlay READ toPlay NOTIFY toPlayChanged)
+    Q_PROPERTY(unsigned altPlayer READ altPlayer NOTIFY altPlayerChanged)
     Q_PROPERTY(int moveNumber READ moveNumber NOTIFY moveNumberChanged)
     Q_PROPERTY(int movesLeft READ movesLeft NOTIFY movesLeftChanged)
     Q_PROPERTY(float points0 READ points0 NOTIFY points0Changed)
@@ -283,13 +283,13 @@ public:
 
     const QString& comment() const { return m_comment; }
 
-    int nuColors() const { return m_nuColors; }
+    unsigned nuColors() const { return m_nuColors; }
 
-    int nuPlayers() const { return m_nuPlayers; }
+    unsigned nuPlayers() const { return m_nuPlayers; }
 
-    int toPlay() const { return m_toPlay; }
+    unsigned toPlay() const { return m_toPlay; }
 
-    int altPlayer() const { return m_altPlayer; }
+    unsigned altPlayer() const { return m_altPlayer; }
 
     int moveNumber() const { return m_moveNumber; }
 
@@ -558,13 +558,13 @@ private:
 
     QDateTime m_autosaveDate;
 
-    int m_nuColors;
+    unsigned m_nuColors;
 
-    int m_nuPlayers;
+    unsigned m_nuPlayers;
 
-    int m_toPlay = 0;
+    unsigned m_toPlay = 0;
 
-    int m_altPlayer = 0;
+    unsigned m_altPlayer = 0;
 
     int m_moveNumber = 0;
 

@@ -887,8 +887,9 @@ void GameModel::initGameVariant(Variant variant)
     if (m_game.get_variant() != variant)
         initGame(variant);
     auto& bd = getBoard();
-    set(m_nuColors, static_cast<int>(bd.get_nu_colors()), &GameModel::nuColorsChanged);
-    set(m_nuPlayers, static_cast<int>(bd.get_nu_players()), &GameModel::nuPlayersChanged);
+    set(m_nuColors, static_cast<unsigned>(bd.get_nu_colors()),
+        &GameModel::nuColorsChanged);
+    set(m_nuPlayers, bd.get_nu_players(), &GameModel::nuPlayersChanged);
     m_lastMovePieceModel = nullptr;
     createPieceModels();
     m_gameVariant = to_string_id(variant);
@@ -1918,10 +1919,10 @@ void GameModel::updateProperties()
     updateIsModified();
     updatePieces();
     set(m_comment, decode(m_game.get_comment()), &GameModel::commentChanged);
-    set(m_toPlay, m_isGameOver ? 0 : bd.get_effective_to_play().to_int(),
+    set(m_toPlay, m_isGameOver ? 0u : bd.get_effective_to_play().to_int(),
         &GameModel::toPlayChanged);
     set(m_altPlayer,
-        bd.get_variant() == Variant::classic_3 ? bd.get_alt_player() : 0,
+        bd.get_variant() == Variant::classic_3 ? bd.get_alt_player() : 0u,
         &GameModel::altPlayerChanged);
 
     emit positionChanged();
