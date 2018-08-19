@@ -358,16 +358,16 @@ void paintPiecesCallisto(
         auto x = geo.get_x(p);
         auto y = geo.get_y(p);
         bool hasLeft =
-                (geo.is_onboard(static_cast<int>(x - 1), static_cast<int>(y))
+                (geo.is_onboard(x - 1, y)
                  && pieceId[p] == pieceId[geo.get_point(x - 1, y)]);
         bool hasRight =
-                (geo.is_onboard(static_cast<int>(x + 1), static_cast<int>(y))
+                (geo.is_onboard(x + 1, y)
                  && pieceId[p] == pieceId[geo.get_point(x + 1, y)]);
         bool hasUp =
-                (geo.is_onboard(static_cast<int>(x), static_cast<int>(y - 1))
+                (geo.is_onboard(x, y - 1)
                  && pieceId[p] == pieceId[geo.get_point(x, y - 1)]);
         bool hasDown =
-                (geo.is_onboard(static_cast<int>(x), static_cast<int>(y + 1))
+                (geo.is_onboard(x, y + 1)
                  && pieceId[p] == pieceId[geo.get_point(x, y + 1)]);
         if (! hasLeft && ! hasRight && ! hasUp && ! hasDown)
         {

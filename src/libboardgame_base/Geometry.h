@@ -111,6 +111,8 @@ public:
 
     bool is_onboard(CoordPoint p) const;
 
+    bool is_onboard(unsigned x, unsigned y) const;
+
     bool is_onboard(int x, int y) const { return is_onboard(CoordPoint(x, y)); }
 
     /** Return the point at a given coordinate.
@@ -293,6 +295,12 @@ void Geometry<P>::init(unsigned width, unsigned height)
                 m_diag[i].push_back(get_point(p.x, p.y));
         m_point_type[i] = get_point_type(x, y);
     }
+}
+
+template<class P>
+bool Geometry<P>::is_onboard(unsigned x, unsigned y) const
+{
+    return x < m_width && y < m_height && ! get_point(x, y).is_null();
 }
 
 template<class P>
