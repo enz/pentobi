@@ -55,7 +55,7 @@ void Engine::cmd_move_values(Response& response)
     children.reserve(tree.get_root().get_nu_children());
     for (auto& i : tree.get_root_children())
         children.push_back(&i);
-    sort(children.begin(), children.end(), libpentobi_mcts::util::compare_node);
+    sort(children.begin(), children.end(), libpentobi_mcts::compare_node);
     response << fixed;
     for (auto node : children)
         response << setprecision(0) << node->get_visit_count() << ' '
@@ -75,7 +75,7 @@ void Engine::cmd_save_tree(Arguments args)
     if (! search.get_last_history().is_valid())
         throw Failure("no search tree");
     ofstream out(args.get());
-    libpentobi_mcts::util::dump_tree(out, search);
+    libpentobi_mcts::dump_tree(out, search);
 }
 
 /** Let the engine play a number of games against itself.

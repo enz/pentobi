@@ -17,8 +17,7 @@ namespace libpentobi_mcts {
 //-----------------------------------------------------------------------------
 
 Search::Search(Variant initial_variant, unsigned nu_threads, size_t memory)
-    : SearchBase(nu_threads == 0 ? util::get_nu_threads() : nu_threads,
-                 memory),
+    : SearchBase(nu_threads == 0 ? get_nu_threads() : nu_threads, memory),
       m_variant(initial_variant),
       m_shared_const(m_to_play)
 {

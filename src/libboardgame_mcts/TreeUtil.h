@@ -10,7 +10,6 @@
 #include "Tree.h"
 
 namespace libboardgame_mcts {
-namespace tree_util {
 
 //-----------------------------------------------------------------------------
 
@@ -35,7 +34,6 @@ const N* find_node(const Tree<N>& tree, const S& sequence)
 
 //-----------------------------------------------------------------------------
 
-} // namespace tree_util
 } // namespace libboardgame_mcts
 
 #endif // LIBBOARDGAME_MCTS_TREE_UTIL_H

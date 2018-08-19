@@ -10,7 +10,6 @@
 #include "Search.h"
 
 namespace libpentobi_mcts {
-namespace util {
 
 using namespace std;
 
@@ -29,7 +28,6 @@ unsigned get_nu_threads();
 
 //-----------------------------------------------------------------------------
 
-} // namespace util
 } // namespace libpentobi_mcts
 
 #endif // LIBPENTOBI_MCTS_UTIL_H

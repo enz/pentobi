@@ -17,7 +17,6 @@
 #include "libpentobi_base/PentobiSgfUtil.h"
 
 namespace libpentobi_mcts {
-namespace util {
 
 using libboardgame_sgf::Writer;
 using libpentobi_base::write_setup;
@@ -114,5 +113,4 @@ unsigned get_nu_threads()
 
 //-----------------------------------------------------------------------------
 
-} // namespace util
 } // namespace libpentobi_mcts
