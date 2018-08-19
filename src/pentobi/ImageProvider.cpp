@@ -28,15 +28,14 @@ QPixmap ImageProvider::requestPixmap(const QString& id, QSize* size,
     // Piece element images are always created with a user-defined sourceSize,
     // requestedSize can only become 0 temporarily when changing the game
     // variant (when scaleUnplayed of a piece becomes 0). In this case, we
-    // quickly return a 1x1 transparent pixmap (0x0 would cause a
-    // QQuickImageProvider warning).
+    // return a 1x1 pixmap (0x0 would cause a QQuickImageProvider warning).
     int width = max(requestedSize.width(), 1);
     int height = max(requestedSize.height(), 1);
     *size = QSize(width, height);
     QPixmap pixmap(width, height);
-    pixmap.fill(Qt::transparent);
     if (requestedSize.width() == 0 || requestedSize.height() == 0)
         return pixmap;
+    pixmap.fill(Qt::transparent);
     QPainter painter(&pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
     auto splitRef = id.splitRef(QStringLiteral("/"));
