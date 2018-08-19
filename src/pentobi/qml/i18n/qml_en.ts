@@ -853,10 +853,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File has been modified by another application. Save anyway?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Variation is now %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -892,6 +888,10 @@
     </message>
     <message>
         <source>Rated game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Overwrite?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

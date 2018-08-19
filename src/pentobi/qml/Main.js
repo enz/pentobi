@@ -677,7 +677,7 @@ function save() {
     if (! checkStoragePermission())
         return
     if (gameModel.checkFileModifiedOutside())
-        showQuestion(qsTr("File has been modified by another application. Save anyway?"),
+        showQuestion(qsTr("File has been modified by another application. Overwrite?"),
                      saveCurrentFile)
     else
         saveCurrentFile()

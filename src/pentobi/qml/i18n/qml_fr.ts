@@ -851,10 +851,6 @@
         <translation>Vous n’avez pas encore joué des parties classées dans cette variante du jeu.</translation>
     </message>
     <message>
-        <source>File has been modified by another application. Save anyway?</source>
-        <translation>Le fichier a été modifié par une autre application. Enregistrer de toute façon ?</translation>
-    </message>
-    <message>
         <source>Variation is now %1.</source>
         <translation>La variation est maintenant %1.</translation>
     </message>
@@ -891,6 +887,10 @@
     <message>
         <source>Rated game</source>
         <translation>Partie classée</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Overwrite?</source>
+        <translation>Le fichier a été modifié par une autre application. Remplacer ?</translation>
     </message>
 </context>
 <context>

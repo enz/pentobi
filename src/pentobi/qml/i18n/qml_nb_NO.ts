@@ -851,10 +851,6 @@
         <translation>Du har ikke spillt noen vurderte spill i denne varianten enda.</translation>
     </message>
     <message>
-        <source>File has been modified by another application. Save anyway?</source>
-        <translation>Filen har blitt endret av et annet program. Lagre uansett?</translation>
-    </message>
-    <message>
         <source>Variation is now %1.</source>
         <translation>Varianten er nå %1.</translation>
     </message>
@@ -891,6 +887,10 @@
     <message>
         <source>Rated game</source>
         <translation>Vurdert spill</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Overwrite?</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

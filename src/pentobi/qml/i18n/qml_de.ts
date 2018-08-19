@@ -851,10 +851,6 @@
         <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
     </message>
     <message>
-        <source>File has been modified by another application. Save anyway?</source>
-        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Trotzdem speichern?</translation>
-    </message>
-    <message>
         <source>Variation is now %1.</source>
         <translation>Variante ist jetzt %1.</translation>
     </message>
@@ -891,6 +887,10 @@
     <message>
         <source>Rated game</source>
         <translation>Gewertetes Spiel</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Overwrite?</source>
+        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Überschreiben?</translation>
     </message>
 </context>
 <context>
