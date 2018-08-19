@@ -310,6 +310,10 @@ function init() {
     computerPlays1 = settings.computerPlays1
     computerPlays2 = settings.computerPlays2
     computerPlays3 = settings.computerPlays3
+    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) {
+        computerPlays2 = computerPlays0
+        computerPlays3 = computerPlays1
+    }
     isRated = settings.isRated
     wasGenMoveRunning = settings.wasGenMoveRunning
     gameDisplay.createPieces()
