@@ -1058,7 +1058,7 @@ bool GameModel::openStream(istream& in)
     catch (const runtime_error& e)
     {
         m_lastInputOutputError =
-                QString(tr("Invalid Blokus SGF file. (%1)"))
+                tr("Invalid Blokus SGF file. (%1)")
                 .arg(QString::fromLocal8Bit(e.what()));
         result = false;
     }
@@ -1070,7 +1070,7 @@ bool GameModel::openStream(istream& in)
     if (! m_textCodec)
     {
         m_textCodec = QTextCodec::codecForName("ISO 8859-1");
-        m_lastInputOutputError = QString(tr("File has unsupported character set."));
+        m_lastInputOutputError = tr("File has unsupported character set.");
         result = false;
     }
     if (! result)
