@@ -563,10 +563,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File has unsupported character set.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Clipboard is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -599,6 +595,10 @@
     <message>
         <source>Move %1</source>
         <extracomment>The argument is the current move number.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsupported character set</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

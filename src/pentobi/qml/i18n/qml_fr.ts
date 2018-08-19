@@ -561,10 +561,6 @@
         <translation>Le fichier n’est pas un fichier Blokus SGF valable. (%1)</translation>
     </message>
     <message>
-        <source>File has unsupported character set.</source>
-        <translation>Codage des caractères de fichier non supporté.</translation>
-    </message>
-    <message>
         <source>Clipboard is empty.</source>
         <translation>Le presse-papiers est vide.</translation>
     </message>
@@ -598,6 +594,10 @@
         <source>Move %1</source>
         <extracomment>The argument is the current move number.</extracomment>
         <translation>Coup %1</translation>
+    </message>
+    <message>
+        <source>Unsupported character set</source>
+        <translation>Codage des caractères non supporté</translation>
     </message>
 </context>
 <context>

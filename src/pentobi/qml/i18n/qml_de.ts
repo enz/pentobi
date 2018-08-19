@@ -561,10 +561,6 @@
         <translation>Ungültige Blokus-SGF-Datei. (%1)</translation>
     </message>
     <message>
-        <source>File has unsupported character set.</source>
-        <translation>Datei hat nicht unterstützten Zeichensatz.</translation>
-    </message>
-    <message>
         <source>Clipboard is empty.</source>
         <translation>Zwischenablage ist leer.</translation>
     </message>
@@ -598,6 +594,10 @@
         <source>Move %1</source>
         <extracomment>The argument is the current move number.</extracomment>
         <translation>Zug %1</translation>
+    </message>
+    <message>
+        <source>Unsupported character set</source>
+        <translation>Zeichensatz nicht unterstützt</translation>
     </message>
 </context>
 <context>

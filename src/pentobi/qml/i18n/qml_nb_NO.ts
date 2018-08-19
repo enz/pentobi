@@ -561,10 +561,6 @@
         <translation>Ugyldig Blokus SGF-fil. (%1)</translation>
     </message>
     <message>
-        <source>File has unsupported character set.</source>
-        <translation>Filen har et ustøttet tegnsett.</translation>
-    </message>
-    <message>
         <source>Clipboard is empty.</source>
         <translation>Utklippstavlen er tom.</translation>
     </message>
@@ -598,6 +594,10 @@
         <source>Move %1</source>
         <extracomment>The argument is the current move number.</extracomment>
         <translation>Trekk %1</translation>
+    </message>
+    <message>
+        <source>Unsupported character set</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

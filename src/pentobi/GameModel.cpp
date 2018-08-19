@@ -1073,7 +1073,7 @@ bool GameModel::openStream(istream& in)
     if (! m_textCodec)
     {
         m_textCodec = QTextCodec::codecForName("ISO 8859-1");
-        m_lastInputOutputError = tr("File has unsupported character set.");
+        m_lastInputOutputError = tr("Unsupported character set");
         result = false;
     }
     if (! result)
