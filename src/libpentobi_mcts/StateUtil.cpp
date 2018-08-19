@@ -22,8 +22,7 @@ using libpentobi_base::PointState;
 
 namespace {
 
-array<Color, Color::range> symmetric_state{
-    { Color(1), Color(0), Color(3), Color(2) }};
+array<Color::IntType, Color::range> symmetric_state{1, 0, 3, 2};
 
 } // namespace
 
@@ -56,7 +55,7 @@ bool check_symmetry_broken(const Board& bd)
             {
                 Point symm_p = symmetric_points[*p];
                 PointState s2 = bd.get_point_state(symm_p);
-                if (s2 != symmetric_state[s1.to_int()])
+                if (s2.to_int() != symmetric_state[s1.to_int()])
                     return true;
             }
         }
@@ -86,7 +85,7 @@ bool check_symmetry_broken(const Board& bd)
             if (! s1.is_empty())
             {
                 PointState s2 = bd.get_point_state(symmetric_points[*p]);
-                if (s2 != symmetric_state[s1.to_int()]
+                if (s2.to_int() != symmetric_state[s1.to_int()]
                         && ! points.contains(*p))
                     return true;
             }
