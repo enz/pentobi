@@ -57,6 +57,9 @@ add_executable(pentobi WIN32
     RatingModel.cpp
     )
 
+file(GLOB qml_SRC "qml/*.qml" "qml/*.js" "qml/i18n/*.ts" "qml/themes/*/*.qml")
+target_sources(pentobi PRIVATE ${qml_SRC})
+
 if(MINGW AND (CMAKE_SIZEOF_VOID_P EQUAL "4"))
     set_target_properties(pentobi PROPERTIES LINK_FLAGS -Wl,--large-address-aware)
 endif()
@@ -84,5 +87,3 @@ target_link_libraries(pentobi
     )
 
 install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})
-
-add_subdirectory(qml)
