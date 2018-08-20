@@ -1,5 +1,6 @@
 set(CMAKE_AUTOMOC TRUE)
 
+find_package(Threads)
 find_package(Qt5Concurrent 5.11 REQUIRED)
 find_package(Qt5QuickCompiler REQUIRED)
 find_package(Qt5QuickControls2 REQUIRED)

@@ -45,8 +45,6 @@ if(PENTOBI_BUILD_TESTS)
   enable_testing()
 endif()
 
-find_package(Threads)
-
 if(UNIX)
   add_custom_target(dist
     COMMAND git archive --prefix=pentobi-${PENTOBI_VERSION}/ HEAD

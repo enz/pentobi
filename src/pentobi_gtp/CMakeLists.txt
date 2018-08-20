@@ -1,3 +1,5 @@
+find_package(Threads)
+
 add_executable(pentobi-gtp
   Engine.h
   Engine.cpp

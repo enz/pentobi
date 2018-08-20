@@ -1,3 +1,5 @@
+find_package(Threads)
+
 add_executable(unittest_libpentobi_mcts
   SearchTest.cpp
 )
