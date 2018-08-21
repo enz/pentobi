@@ -13,7 +13,7 @@ include(GNUInstallDirs)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build GUI" ON)
 option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
-option(PENTOBI_BUILD_GNOME_THUMBNAILER "Build Gnome thumbnailer" ON)
+option(PENTOBI_BUILD_THUMBNAILER "Build Gnome thumbnailer" ON)
 option(PENTOBI_BUILD_KDE_THUMBNAILER "Build KDE thumbnailer" OFF)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)

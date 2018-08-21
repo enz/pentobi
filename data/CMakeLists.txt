@@ -54,7 +54,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml
 
 endif(PENTOBI_BUILD_GUI)
 
-if(PENTOBI_BUILD_GNOME_THUMBNAILER)
+if(PENTOBI_BUILD_THUMBNAILER)
   configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/thumbnailers)
