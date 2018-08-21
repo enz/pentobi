@@ -1,3 +1,6 @@
+set(LIBPENTOBI_MCTS_FLOAT_TYPE "float" CACHE STRING
+    "Floating-point type for MCTS values")
+
 add_library(pentobi_mcts STATIC
   AnalyzeGame.h
   AnalyzeGame.cpp
@@ -23,6 +26,11 @@ add_library(pentobi_mcts STATIC
   Util.h
   Util.cpp
 )
+
+if(NOT LIBPENTOBI_MCTS_FLOAT_TYPE STREQUAL "float")
+  target_compile_definitions(pentobi_mcts PUBLIC
+      "-DLIBPENTOBI_MCTS_FLOAT_TYPE=${LIBPENTOBI_MCTS_FLOAT_TYPE}")
+endif()
 
 target_include_directories(pentobi_mcts PUBLIC ..)
 

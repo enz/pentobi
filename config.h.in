@@ -13,6 +13,3 @@
 /* Define if the MCTS search does not need to support multi-threading.
    This makes the search slightly faster on single-threaded systems. */
 #cmakedefine LIBBOARDGAME_MCTS_SINGLE_THREAD
-
-/* Floating type for Monte-Carlo tree search values (float|double) */
-#define LIBPENTOBI_MCTS_FLOAT_TYPE @LIBPENTOBI_MCTS_FLOAT_TYPE@

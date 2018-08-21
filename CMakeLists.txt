@@ -30,10 +30,6 @@ check_include_files(unistd.h HAVE_UNISTD_H)
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
 
-if(NOT DEFINED LIBPENTOBI_MCTS_FLOAT_TYPE)
-  set(LIBPENTOBI_MCTS_FLOAT_TYPE float)
-endif()
-
 configure_file(config.h.in config.h)
 add_definitions(-DHAVE_CONFIG_H)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
