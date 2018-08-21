@@ -33,6 +33,9 @@ add_library(boardgame_util STATIC
   WallTimeSource.cpp
 )
 
+target_compile_options(boardgame_util PUBLIC
+    "$<$<CONFIG:DEBUG>:-DLIBBOARDGAME_DEBUG>")
+
 target_include_directories(boardgame_util PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
