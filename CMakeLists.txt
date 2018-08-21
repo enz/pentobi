@@ -25,10 +25,6 @@ if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
   add_compile_options(-ffast-math -Wall -Wextra)
 endif()
 
-configure_file(config.h.in config.h)
-add_definitions(-DHAVE_CONFIG_H)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
 if(PENTOBI_BUILD_TESTS)
   enable_testing()
 endif()

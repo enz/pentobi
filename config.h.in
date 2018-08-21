@@ -1,2 +1,0 @@
-/* Version number of package */
-#define VERSION "@PENTOBI_VERSION@"

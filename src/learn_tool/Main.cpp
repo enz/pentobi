@@ -7,10 +7,6 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <fstream>
 #include <random>
 #include "libboardgame_sgf/TreeReader.h"

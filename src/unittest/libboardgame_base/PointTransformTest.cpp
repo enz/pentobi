@@ -4,10 +4,6 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "libboardgame_base/Point.h"
 #include "libboardgame_base/PointTransform.h"
 #include "libboardgame_base/RectGeometry.h"

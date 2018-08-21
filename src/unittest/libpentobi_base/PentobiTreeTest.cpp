@@ -4,10 +4,6 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_test/Test.h"
 #include "libpentobi_base/PentobiTree.h"

@@ -7,13 +7,7 @@
 #ifndef PENTOBI_ANDROID_UTILS_H
 #define PENTOBI_ANDROID_UTILS_H
 
-// Needed in the header because moc_*.cpp does not include config.h
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <QObject>
-
 #include <QUrl>
 
 //-----------------------------------------------------------------------------

@@ -6,10 +6,6 @@
 
 #include "AnalyzeGameModel.h"
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
-
 #include <QSettings>
 #include <QtConcurrentRun>
 #include "GameModel.h"
