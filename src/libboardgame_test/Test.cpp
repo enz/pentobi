@@ -100,6 +100,7 @@ bool run_test(const string& name)
 
 int test_main(int argc, char* argv[])
 {
+    libboardgame_util::LogInitializer log_initializer;
     if (argc < 2)
         return run_all_tests() ? 0 : 1;
     int result = 0;

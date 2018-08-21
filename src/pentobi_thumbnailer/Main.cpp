@@ -10,6 +10,7 @@
 #include <QImage>
 #include <QImageWriter>
 #include <QString>
+#include "libboardgame_util/Log.h"
 #include "libpentobi_thumbnail/CreateThumbnail.h"
 
 using namespace std;
@@ -18,6 +19,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+    libboardgame_util::LogInitializer log_initializer;
     QCoreApplication app(argc, argv);
     try
     {

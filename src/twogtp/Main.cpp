@@ -24,6 +24,7 @@ using libpentobi_base::Variant;
 
 int main(int argc, char** argv)
 {
+    libboardgame_util::LogInitializer log_initializer;
     atomic<int> result(0);
     try
     {

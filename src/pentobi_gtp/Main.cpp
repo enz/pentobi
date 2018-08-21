@@ -48,6 +48,7 @@ string get_application_dir_path(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
+    libboardgame_util::LogInitializer log_initializer;
     string application_dir_path = get_application_dir_path(argc, argv);
     try
     {

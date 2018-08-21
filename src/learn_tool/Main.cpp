@@ -505,6 +505,7 @@ void train(const string& file_list, unsigned steps)
 
 int main(int argc, char** argv)
 {
+    libboardgame_util::LogInitializer log_initializer;
     try
     {
         vector<string> specs = {
