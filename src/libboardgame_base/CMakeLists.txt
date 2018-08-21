@@ -31,5 +31,4 @@ if (PENTOBI_BUILD_GTP)
     target_link_libraries(boardgame_base boardgame_gtp)
 endif()
 
-target_include_directories(boardgame_base PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/..")
+target_include_directories(boardgame_base PUBLIC ..)

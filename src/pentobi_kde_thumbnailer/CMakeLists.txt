@@ -12,8 +12,7 @@ add_library(pentobi-thumbnail MODULE
   PentobiThumbCreator.cpp
 )
 
-target_include_directories(pentobi-thumbnail PRIVATE
-    "${CMAKE_SOURCE_DIR}/src")
+target_include_directories(pentobi-thumbnail PRIVATE "${CMAKE_SOURCE_DIR}/src")
 
 target_link_libraries(pentobi-thumbnail
   pentobi_kde_thumbnailer

@@ -83,7 +83,6 @@ endif()
 
 add_library(pentobi_base STATIC ${pentobi_base_SRCS})
 
-target_include_directories(pentobi_base PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/..")
+target_include_directories(pentobi_base PUBLIC ..)
 
 target_link_libraries(pentobi_base boardgame_sgf boardgame_base)

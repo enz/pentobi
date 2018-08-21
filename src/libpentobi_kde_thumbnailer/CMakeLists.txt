@@ -37,8 +37,7 @@ add_library(pentobi_kde_thumbnailer STATIC
   ../libpentobi_thumbnail/CreateThumbnail.cpp
 )
 
-target_include_directories(pentobi_kde_thumbnailer PRIVATE
-    "${CMAKE_SOURCE_DIR}/src")
+target_include_directories(pentobi_kde_thumbnailer PRIVATE ..)
 
 target_compile_definitions(pentobi_kde_thumbnailer PRIVATE
     -DQT_DEPRECATED_WARNINGS

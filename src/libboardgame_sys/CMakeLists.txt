@@ -6,5 +6,4 @@ add_library(boardgame_sys STATIC
   Memory.cpp
 )
 
-target_include_directories(boardgame_sys PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/..")
+target_include_directories(boardgame_sys PUBLIC ..)
