@@ -7,7 +7,6 @@ set(PENTOBI_RELEASE_DATE 2018-06-28)
 cmake_policy(SET CMP0043 NEW)
 cmake_policy(SET CMP0071 NEW)
 
-include(CheckIncludeFiles)
 include(GNUInstallDirs)
 
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
@@ -25,10 +24,6 @@ set(CMAKE_CXX_STANDARD 14)
 if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
   add_compile_options(-ffast-math -Wall -Wextra)
 endif()
-
-check_include_files(unistd.h HAVE_UNISTD_H)
-check_include_files(sys/times.h HAVE_SYS_TIMES_H)
-check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
 
 configure_file(config.h.in config.h)
 add_definitions(-DHAVE_CONFIG_H)

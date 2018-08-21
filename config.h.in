@@ -1,11 +1,2 @@
-/* Define to 1 if you have the <unistd.h> header file. */
-#cmakedefine HAVE_UNISTD_H
-
-/* Define to 1 if you have the <sys/times.h> header file. */
-#cmakedefine HAVE_SYS_TIMES_H
-
-/* Define to 1 if you have the <sys/sysctl.h> header file. */
-#cmakedefine HAVE_SYS_SYSCTL_H
-
 /* Version number of package */
 #define VERSION "@PENTOBI_VERSION@"
