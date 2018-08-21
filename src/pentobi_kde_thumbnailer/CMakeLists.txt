@@ -1,5 +1,5 @@
 find_package(ECM REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
 include(KDECompilerSettings)
@@ -7,12 +7,13 @@ include(KDECMakeSettings)
 
 find_package(KF5 REQUIRED COMPONENTS KIO)
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-
 add_library(pentobi-thumbnail MODULE
   PentobiThumbCreator.h
   PentobiThumbCreator.cpp
 )
+
+target_include_directories(pentobi-thumbnail PRIVATE
+    "${CMAKE_SOURCE_DIR}/src")
 
 target_link_libraries(pentobi-thumbnail
   pentobi_kde_thumbnailer

@@ -8,13 +8,8 @@ add_executable(unittest_libpentobi_base
 )
 
 target_link_libraries(unittest_libpentobi_base
-  boardgame_test_main
-  pentobi_base
-  boardgame_base
-  boardgame_sgf
-  boardgame_test
-  boardgame_util
-  boardgame_sys
-  )
+    boardgame_test_main
+    pentobi_base
+    )
 
 add_test(libpentobi_base unittest_libpentobi_base)

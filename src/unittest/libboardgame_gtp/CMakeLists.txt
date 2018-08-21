@@ -6,10 +6,8 @@ add_executable(unittest_libboardgame_gtp
 )
 
 target_link_libraries(unittest_libboardgame_gtp
-  boardgame_test_main
-  boardgame_test
-  boardgame_util
-  boardgame_gtp
-  )
+    boardgame_test_main
+    boardgame_gtp
+    )
 
 add_test(libboardgame_gtp unittest_libboardgame_gtp)

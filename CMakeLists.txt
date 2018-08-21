@@ -39,8 +39,6 @@ configure_file(config.h.in config.h)
 add_definitions(-DHAVE_CONFIG_H)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-
 if(PENTOBI_BUILD_TESTS)
   enable_testing()
 endif()

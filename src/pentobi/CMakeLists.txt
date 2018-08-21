@@ -61,10 +61,6 @@ add_executable(pentobi WIN32
 file(GLOB qml_SRC "qml/*.qml" "qml/*.js" "qml/i18n/*.ts" "qml/themes/*/*.qml")
 target_sources(pentobi PRIVATE ${qml_SRC})
 
-if(MINGW AND (CMAKE_SIZEOF_VOID_P EQUAL "4"))
-    set_target_properties(pentobi PROPERTIES LINK_FLAGS -Wl,--large-address-aware)
-endif()
-
 target_compile_definitions(pentobi PRIVATE
     -DQT_DEPRECATED_WARNINGS
     -DQT_DISABLE_DEPRECATED_BEFORE=0x051100
@@ -73,13 +69,7 @@ target_compile_definitions(pentobi PRIVATE
 target_link_libraries(pentobi
     pentobi_paint
     pentobi_mcts
-    pentobi_base
-    boardgame_base
-    boardgame_sgf
-    boardgame_util
-    boardgame_sys
     Qt5::Concurrent
-    Qt5::Gui
     Qt5::Qml
     Qt5::QuickControls2
     Qt5::Svg

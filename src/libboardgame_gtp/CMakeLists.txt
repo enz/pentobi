@@ -10,3 +10,6 @@ add_library(boardgame_gtp STATIC
   Response.h
   Response.cpp
 )
+
+target_include_directories(boardgame_gtp PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/..")

@@ -32,3 +32,8 @@ add_library(boardgame_util STATIC
   WallTimeSource.h
   WallTimeSource.cpp
 )
+
+target_include_directories(boardgame_util PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/..")
+
+target_link_libraries(boardgame_util boardgame_sys)
