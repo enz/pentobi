@@ -30,7 +30,6 @@ add_library(pentobi_kde_thumbnailer STATIC
   ../libpentobi_base/GembloQGeometry.cpp
   ../libpentobi_base/NexosGeometry.cpp
   ../libpentobi_base/NodeUtil.cpp
-  ../libpentobi_base/StartingPoints.cpp
   ../libpentobi_base/TrigonGeometry.cpp
   ../libpentobi_base/Variant.cpp
   ../libpentobi_paint/Paint.cpp
