@@ -25,7 +25,7 @@ const NexosGeometry& NexosGeometry::get()
     static unique_ptr<NexosGeometry> s_geometry;
 
     if (! s_geometry)
-        s_geometry.reset(new NexosGeometry());
+        s_geometry = make_unique<NexosGeometry>();
     return *s_geometry;
 }
 
