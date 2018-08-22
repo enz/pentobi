@@ -148,11 +148,14 @@ function onBoardRightClicked(pos) {
 }
 
 function shiftPiece(dx, dy) {
-    // In GembloQ, every piece has at least one full square, so we can use
-    // half the x resolution, which makes positioning easier for the user.
     if (gameModel.gameVariant.startsWith("gembloq"))
+        // In GembloQ, every piece has at least one full square, so we can use
+        // half the x resolution, which makes positioning easier for the user
         movePiece(pieceManipulator.x + dx * board.gridWidth,
                   pieceManipulator.y + dy * board.gridHeight / 2)
+    else if (gameModel.gameVariant.startsWith("nexos"))
+        movePiece(pieceManipulator.x + dx * board.gridWidth,
+                  pieceManipulator.y + dy * board.gridHeight)
     else
         movePiece(pieceManipulator.x + dx * board.gridWidth / 2,
                   pieceManipulator.y + dy * board.gridHeight / 2)
