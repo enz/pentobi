@@ -6,6 +6,7 @@
 
 #include "NexosGeometry.h"
 
+#include <memory>
 #include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
@@ -14,20 +15,17 @@ using libboardgame_base::CoordPoint;
 
 //-----------------------------------------------------------------------------
 
-map<unsigned, shared_ptr<NexosGeometry>> NexosGeometry::s_geometry;
-
-NexosGeometry::NexosGeometry(unsigned sz)
+NexosGeometry::NexosGeometry()
 {
-    Geometry::init(sz * 2 - 1, sz * 2 - 1);
+    Geometry::init(25, 25);
 }
 
-const NexosGeometry& NexosGeometry::get(unsigned sz)
+const NexosGeometry& NexosGeometry::get()
 {
-    auto pos = s_geometry.find(sz);
-    if (pos != s_geometry.end())
-        return *pos->second;
-    shared_ptr<NexosGeometry> geometry(new NexosGeometry(sz));
-    return *s_geometry.insert(make_pair(sz, geometry)).first->second;
+    static unique_ptr<NexosGeometry> s_geometry;
+    if (! s_geometry)
+        s_geometry.reset(new NexosGeometry());
+    return *s_geometry.get();
 }
 
 auto NexosGeometry::get_adj_coord(int x, int y) const -> AdjCoordList
@@ -80,7 +78,8 @@ unsigned NexosGeometry::get_point_type(int x, int y) const
 
 bool NexosGeometry::init_is_onboard(unsigned x, unsigned y) const
 {
-    return x < get_width() && y < get_height() && get_point_type(x, y) != 3;
+    return x < get_width() && y < get_height()
+            && get_point_type(static_cast<int>(x), static_cast<int>(y)) != 3;
 }
 
 //-----------------------------------------------------------------------------

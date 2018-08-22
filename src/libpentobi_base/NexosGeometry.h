@@ -7,8 +7,6 @@
 #ifndef LIBPENTOBI_BASE_NEXOS_GEOMETRY_H
 #define LIBPENTOBI_BASE_NEXOS_GEOMETRY_H
 
-#include <map>
-#include <memory>
 #include "Geometry.h"
 
 namespace libpentobi_base {
@@ -41,9 +39,8 @@ class NexosGeometry final
     : public Geometry
 {
 public:
-    /** Create or reuse an already created geometry with a given size.
-        @param sz The number of segments in a row or column. */
-    static const NexosGeometry& get(unsigned sz);
+    /** Create or reuse an already created geometry. */
+    static const NexosGeometry& get();
 
 
     AdjCoordList get_adj_coord(int x, int y) const override;
@@ -60,11 +57,7 @@ protected:
     bool init_is_onboard(unsigned x, unsigned y) const override;
 
 private:
-    /** Stores already created geometries by size. */
-    static map<unsigned, shared_ptr<NexosGeometry>> s_geometry;
-
-
-    explicit NexosGeometry(unsigned sz);
+    NexosGeometry();
 };
 
 //-----------------------------------------------------------------------------

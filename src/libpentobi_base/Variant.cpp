@@ -104,7 +104,7 @@ const Geometry& get_geometry(BoardType board_type)
         result = &TrigonGeometry::get(8);
         break;
     case BoardType::nexos:
-        result = &NexosGeometry::get(13);
+        result = &NexosGeometry::get();
         break;
     case BoardType::callisto:
         result = &CallistoGeometry::get(4);
