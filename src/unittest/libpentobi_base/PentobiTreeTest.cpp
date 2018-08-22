@@ -36,7 +36,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
-        LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(0));
+        LIBBOARDGAME_CHECK_EQUAL(mv.color.to_int(), 0);
         auto points = bc.get_move_points(mv.move);
         LIBBOARDGAME_CHECK(points.contains(geo.get_point(0, 4)));
         LIBBOARDGAME_CHECK(points.contains(geo.get_point(0, 3)));
@@ -48,7 +48,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
-        LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(1));
+        LIBBOARDGAME_CHECK_EQUAL(mv.color.to_int(), 1);
         auto points = bc.get_move_points(mv.move);
         LIBBOARDGAME_CHECK(points.contains(geo.get_point(18, 3)));
         LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 3)));
@@ -60,7 +60,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
-        LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(2));
+        LIBBOARDGAME_CHECK_EQUAL(mv.color.to_int(), 2);
         auto points = bc.get_move_points(mv.move);
         LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 19)));
         LIBBOARDGAME_CHECK(points.contains(geo.get_point(19, 18)));
@@ -72,7 +72,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     {
         auto mv = tree.get_move(*node);
         LIBBOARDGAME_CHECK(! mv.is_null());
-        LIBBOARDGAME_CHECK_EQUAL(mv.color, Color(3));
+        LIBBOARDGAME_CHECK_EQUAL(mv.color.to_int(), 3);
         auto points = bc.get_move_points(mv.move);
         LIBBOARDGAME_CHECK(points.contains(geo.get_point(0, 19)));
         LIBBOARDGAME_CHECK(points.contains(geo.get_point(1, 19)));

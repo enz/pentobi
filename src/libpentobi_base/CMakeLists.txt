@@ -12,7 +12,6 @@ set(pentobi_base_SRCS
   CallistoGeometry.h
   CallistoGeometry.cpp
   Color.h
-  Color.cpp
   ColorMap.h
   ColorMove.h
   Game.h
@@ -56,7 +55,6 @@ set(pentobi_base_SRCS
   Point.h
   PointList.h
   PointState.h
-  PointState.cpp
   PrecompMoves.h
   ScoreUtil.h
   Setup.h

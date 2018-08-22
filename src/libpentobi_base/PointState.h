@@ -133,10 +133,6 @@ inline PointState::IntType PointState::to_int() const
 
 //-----------------------------------------------------------------------------
 
-ostream& operator<<(ostream& out, PointState s);
-
-//-----------------------------------------------------------------------------
-
 } // namespace libpentobi_base
 
 #endif // LIBPENTOBI_BASE_POINTSTATE_H

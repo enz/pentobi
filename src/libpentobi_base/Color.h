@@ -8,7 +8,6 @@
 #define LIBPENTOBI_BASE_COLOR_H
 
 #include <cstdint>
-#include <iosfwd>
 #include "libboardgame_util/Assert.h"
 
 namespace libpentobi_base {
@@ -148,12 +147,6 @@ inline Color::IntType Color::to_int() const
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;
 }
-
-//-----------------------------------------------------------------------------
-
-/** Output string representation of color.
-    The strings "1", "2", ... are used for the colors. */
-ostream& operator<<(ostream& out, Color c);
 
 //-----------------------------------------------------------------------------
 

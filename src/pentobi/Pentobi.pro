@@ -81,7 +81,6 @@ SOURCES += \
     ../libpentobi_base/BoardUtil.cpp \
     ../libpentobi_base/Book.cpp \
     ../libpentobi_base/CallistoGeometry.cpp \
-    ../libpentobi_base/Color.cpp \
     ../libpentobi_base/Game.cpp \
     ../libpentobi_base/GembloQGeometry.cpp \
     ../libpentobi_base/GembloQTransform.cpp \
@@ -94,7 +93,6 @@ SOURCES += \
     ../libpentobi_base/PieceTransformsClassic.cpp \
     ../libpentobi_base/PieceTransformsGembloQ.cpp \
     ../libpentobi_base/PieceTransformsTrigon.cpp \
-    ../libpentobi_base/PointState.cpp \
     ../libpentobi_base/StartingPoints.cpp \
     ../libpentobi_base/SymmetricPoints.cpp \
     ../libpentobi_base/TreeUtil.cpp \
