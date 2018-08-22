@@ -6,6 +6,8 @@
 
 #include "GembloQGeometry.h"
 
+#include <map>
+#include <memory>
 #include "libboardgame_util/MathUtil.h"
 #include "libboardgame_util/Unused.h"
 
@@ -15,8 +17,6 @@ using libboardgame_base::CoordPoint;
 using libboardgame_util::mod;
 
 //-----------------------------------------------------------------------------
-
-map<unsigned, shared_ptr<GembloQGeometry>> GembloQGeometry::s_geometry;
 
 GembloQGeometry::GembloQGeometry(unsigned nu_players)
 {
@@ -42,6 +42,8 @@ GembloQGeometry::GembloQGeometry(unsigned nu_players)
 
 const GembloQGeometry& GembloQGeometry::get(unsigned nu_players)
 {
+    static map<unsigned, shared_ptr<GembloQGeometry>> s_geometry;
+
     auto pos = s_geometry.find(nu_players);
     if (pos != s_geometry.end())
         return *pos->second;

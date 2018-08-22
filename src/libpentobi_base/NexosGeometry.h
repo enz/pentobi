@@ -43,6 +43,8 @@ public:
     static const NexosGeometry& get();
 
 
+    NexosGeometry();
+
     AdjCoordList get_adj_coord(int x, int y) const override;
 
     DiagCoordList get_diag_coord(int x, int y) const override;
@@ -55,9 +57,6 @@ public:
 
 protected:
     bool init_is_onboard(unsigned x, unsigned y) const override;
-
-private:
-    NexosGeometry();
 };
 
 //-----------------------------------------------------------------------------

@@ -7,8 +7,6 @@
 #ifndef LIBPENTOBI_BASE_CALLISTO_GEOMETRY_H
 #define LIBPENTOBI_BASE_CALLISTO_GEOMETRY_H
 
-#include <map>
-#include <memory>
 #include "Geometry.h"
 
 namespace libpentobi_base {
@@ -46,10 +44,6 @@ protected:
     bool init_is_onboard(unsigned x, unsigned y) const override;
 
 private:
-    /** Stores already created geometries by number of colors. */
-    static map<unsigned, shared_ptr<CallistoGeometry>> s_geometry;
-
-
     unsigned m_edge;
 
 

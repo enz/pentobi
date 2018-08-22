@@ -23,6 +23,7 @@ NexosGeometry::NexosGeometry()
 const NexosGeometry& NexosGeometry::get()
 {
     static unique_ptr<NexosGeometry> s_geometry;
+
     if (! s_geometry)
         s_geometry.reset(new NexosGeometry());
     return *s_geometry.get();

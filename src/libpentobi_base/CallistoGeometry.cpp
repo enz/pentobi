@@ -6,6 +6,8 @@
 
 #include "CallistoGeometry.h"
 
+#include <map>
+#include <memory>
 #include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
@@ -45,8 +47,6 @@ bool is_onboard_callisto(unsigned x, unsigned y, unsigned width,
 
 //-----------------------------------------------------------------------------
 
-map<unsigned, shared_ptr<CallistoGeometry>> CallistoGeometry::s_geometry;
-
 CallistoGeometry::CallistoGeometry(unsigned nu_colors)
 {
     unsigned sz = get_size_callisto(nu_colors);
@@ -56,6 +56,8 @@ CallistoGeometry::CallistoGeometry(unsigned nu_colors)
 
 const CallistoGeometry& CallistoGeometry::get(unsigned nu_colors)
 {
+    static map<unsigned, shared_ptr<CallistoGeometry>> s_geometry;
+
     auto pos = s_geometry.find(nu_colors);
     if (pos != s_geometry.end())
         return *pos->second;

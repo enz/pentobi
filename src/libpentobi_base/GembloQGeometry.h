@@ -7,8 +7,6 @@
 #ifndef LIBPENTOBI_BASE_GEMBLOQ_GEOMETRY_H
 #define LIBPENTOBI_BASE_GEMBLOQ_GEOMETRY_H
 
-#include <map>
-#include <memory>
 #include "Geometry.h"
 
 namespace libpentobi_base {
@@ -38,6 +36,8 @@ public:
     static const GembloQGeometry& get(unsigned nu_players);
 
 
+    explicit GembloQGeometry(unsigned nu_players);
+
     AdjCoordList get_adj_coord(int x, int y) const override;
 
     DiagCoordList get_diag_coord(int x, int y) const override;
@@ -52,14 +52,7 @@ protected:
     bool init_is_onboard(unsigned x, unsigned y) const override;
 
 private:
-    /** Stores already created geometries by number of players. */
-    static map<unsigned, shared_ptr<GembloQGeometry>> s_geometry;
-
-
     unsigned m_edge;
-
-
-    explicit GembloQGeometry(unsigned nu_players);
 };
 
 //-----------------------------------------------------------------------------

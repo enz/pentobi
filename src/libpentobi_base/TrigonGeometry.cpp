@@ -6,13 +6,14 @@
 
 #include "TrigonGeometry.h"
 
+#include <map>
+#include <memory>
+
 namespace libpentobi_base {
 
 using libboardgame_base::CoordPoint;
 
 //-----------------------------------------------------------------------------
-
-map<unsigned, shared_ptr<TrigonGeometry>> TrigonGeometry::s_geometry;
 
 TrigonGeometry::TrigonGeometry(unsigned sz)
 {
@@ -22,6 +23,8 @@ TrigonGeometry::TrigonGeometry(unsigned sz)
 
 const TrigonGeometry& TrigonGeometry::get(unsigned sz)
 {
+    static map<unsigned, shared_ptr<TrigonGeometry>> s_geometry;
+
     auto pos = s_geometry.find(sz);
     if (pos != s_geometry.end())
         return *pos->second;
