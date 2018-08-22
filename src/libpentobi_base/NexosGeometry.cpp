@@ -26,7 +26,7 @@ const NexosGeometry& NexosGeometry::get()
 
     if (! s_geometry)
         s_geometry.reset(new NexosGeometry());
-    return *s_geometry.get();
+    return *s_geometry;
 }
 
 auto NexosGeometry::get_adj_coord(int x, int y) const -> AdjCoordList
