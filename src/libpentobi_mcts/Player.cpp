@@ -279,7 +279,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
     case BoardType::classic: // Measured for classic_2
         {
             // Anchor 1000, scale 0.6
-            static float elo[Player::max_supported_level] =
+            static double elo[Player::max_supported_level] =
                 { 1000, 1142, 1283, 1425, 1567, 1708, 1850, 1951, 2030 };
             result = Rating(elo[level - 1]);
         }
@@ -287,7 +287,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
     case BoardType::duo:
         {
             // Anchor 1100, scale 0.68
-            static float elo[Player::max_supported_level] =
+            static double elo[Player::max_supported_level] =
                 { 1100, 1273, 1447, 1620, 1793, 1967, 2140, 2187, 2209 };
             result = Rating(elo[level - 1]);
         }
@@ -295,7 +295,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
     case BoardType::callisto_2:
         {
             // Anchor 1000, scale 0.49
-            static float elo[Player::max_supported_level] =
+            static double elo[Player::max_supported_level] =
                 { 1000, 1113, 1225, 1338, 1450, 1563, 1675, 1783, 1868 };
             result = Rating(elo[level - 1]);
         }
@@ -304,7 +304,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
     case BoardType::trigon_3:
         {
             // Anchor 1000, scale 0.48
-            static float elo[Player::max_supported_level] =
+            static double elo[Player::max_supported_level] =
                 { 1000, 1110, 1220, 1330, 1440, 1550, 1660, 1765, 1897 };
             result = Rating(elo[level - 1]);
         }
@@ -317,7 +317,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
     case BoardType::gembloq_3:
         {
             // Anchor 1000, scale 0.60
-            static float elo[Player::max_supported_level] =
+            static double elo[Player::max_supported_level] =
                 { 1000, 1101, 1202, 1304, 1406, 1507, 1608, 1698, 1799 };
             result = Rating(elo[level - 1]);
         }
