@@ -324,6 +324,7 @@ function init() {
     }
     if (gameModel.checkFileModifiedOutside())
     {
+        showWindow()
         showQuestion(qsTr("File has been modified by another application. Reload?"), reloadFile)
         return
     }
@@ -331,9 +332,10 @@ function init() {
     // initialFile is a context property set from command line argument
     if (initialFile) {
         if (gameModel.isModified)
-            show()
+            showWindow()
         verify(function() { openFileBlocking(initialFile) })
     }
+    showWindow()
     if (isRated) {
         showInfo(qsTr("Continuing rated game."))
         checkComputerMove()
@@ -341,15 +343,6 @@ function init() {
     }
     if (wasGenMoveRunning)
         showQuestion(qsTr("Continue computer move?"), checkComputerMove)
-    x = settings.x
-    y = settings.y
-    width = settings.width
-    height = settings.height
-    switch (settings.visibility) {
-    case Window.Maximized: showMaximized(); break
-    case Window.FullScreen: showFullScreen(); break
-    default: show(); break
-    }
 }
 
 function initComputerColors() {
@@ -731,6 +724,20 @@ function showTemporaryMessage(text) {
 
 function showVariationInfo() {
     showTemporaryMessage(qsTr("Variation is now %1.").arg(gameModel.getVariationInfo()))
+}
+
+function showWindow() {
+    if (visible)
+        return
+    x = settings.x
+    y = settings.y
+    width = settings.width
+    height = settings.height
+    switch (settings.visibility) {
+    case Window.Maximized: showMaximized(); break
+    case Window.FullScreen: showFullScreen(); break
+    default: show()
+    }
 }
 
 function truncate() {
