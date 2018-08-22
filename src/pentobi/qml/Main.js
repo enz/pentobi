@@ -138,7 +138,7 @@ function computerPlay() {
     if (! isComputerToPlay()) {
         setComputerNone()
         var variant = gameModel.gameVariant
-        if (variant == "classic_3" && gameModel.toPlay == 3) {
+        if (variant == "classic_3" && gameModel.toPlay === 3) {
             switch (gameModel.altPlayer) {
             case 0: computerPlays0 = true; break
             case 1: computerPlays1 = true; break
@@ -310,7 +310,7 @@ function init() {
     computerPlays1 = settings.computerPlays1
     computerPlays2 = settings.computerPlays2
     computerPlays3 = settings.computerPlays3
-    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) {
+    if (isMultiColor()) {
         computerPlays2 = computerPlays0
         computerPlays3 = computerPlays1
     }
@@ -358,14 +358,13 @@ function initComputerColors() {
 }
 
 function isComputerToPlay() {
-    if (gameModel.gameVariant == "classic_3" && gameModel.toPlay == 3)
+    if (gameModel.gameVariant == "classic_3" && gameModel.toPlay === 3)
         return computerPlays(gameModel.altPlayer)
     return computerPlays(gameModel.toPlay)
 }
 
 function isMultiColor() {
-    return gameModel.nuColors == 4 && gameModel.nuPlayers == 2
-
+    return gameModel.nuColors === 4 && gameModel.nuPlayers === 2
 }
 
 function keepOnlyPosition() {
