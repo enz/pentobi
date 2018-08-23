@@ -726,8 +726,6 @@ function showVariationInfo() {
 }
 
 function showWindow() {
-    if (visible)
-        return
     x = settings.x
     y = settings.y
     width = settings.width
