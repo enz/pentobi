@@ -317,10 +317,7 @@ function init() {
     isRated = settings.isRated
     wasGenMoveRunning = settings.wasGenMoveRunning
     gameDisplay.createPieces()
-    if (gameModel.file !== "" && ! gameModel.checkFileExists(gameModel.file)
-            && ! gameModel.isModified)
-        newGameNoVerify()
-    else if (gameModel.checkFileModifiedOutside())
+    if (gameModel.checkFileModifiedOutside())
     {
         showWindow()
         showQuestion(qsTr("File has been modified by another application. Reload?"), reloadFile)
