@@ -536,8 +536,7 @@ QString GameModel::getPlayerString(int player)
 Variant GameModel::getInitialGameVariant()
 {
     QSettings settings;
-    auto variantString =
-            settings.value(QStringLiteral("variant"), QStringLiteral("")).toString();
+    auto variantString = settings.value(QStringLiteral("variant")).toString();
     Variant variant;
     if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
         variant = Variant::duo;
@@ -947,8 +946,8 @@ void GameModel::loadAutoSave()
 void GameModel::loadRecentFiles()
 {
     QSettings settings;
-    m_recentFiles = settings.value(QStringLiteral("recentFiles"),
-                                   QStringLiteral("")).toStringList();
+    m_recentFiles =
+            settings.value(QStringLiteral("recentFiles")).toStringList();
     QMutableListIterator<QString> i(m_recentFiles);
     while (i.hasNext()) {
         auto file = i.next();
