@@ -317,18 +317,16 @@ function init() {
     isRated = settings.isRated
     wasGenMoveRunning = settings.wasGenMoveRunning
     gameDisplay.createPieces()
-    if (gameModel.checkFileDeletedOutside())
-    {
-        showInfo(qsTr("File was deleted by another application."))
-        gameModel.isModified = true
-    }
-    if (gameModel.checkFileModifiedOutside())
+    if (gameModel.checkFileDeletedOutside() && ! gameModel.isModified)
+        newGameNoVerify()
+    else if (gameModel.checkFileModifiedOutside())
     {
         showWindow()
         showQuestion(qsTr("File has been modified by another application. Reload?"), reloadFile)
         return
     }
-    analyzeGameModel.loadAutoSave(gameModel)
+    else
+        analyzeGameModel.loadAutoSave(gameModel)
     // initialFile is a context property set from command line argument
     if (initialFile) {
         if (gameModel.isModified)
@@ -758,11 +756,6 @@ function verify(callback)
 {
     if (gameModel.isModified) {
         showQuestion(qsTr("Discard game?"), callback)
-        return
-    }
-    else if (gameModel.checkFileDeletedOutside()) {
-        showQuestion(qsTr("File was deleted by another application. Discard game?"),
-                     callback)
         return
     }
     callback()
