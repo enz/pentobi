@@ -24,6 +24,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                smooth: false
             }
         }
     }
@@ -42,6 +43,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                smooth: false
             }
         }
     }
@@ -55,6 +57,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                smooth: false
                 rotation: -90
             }
         }
@@ -74,6 +77,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                smooth: false
                 rotation: -90
             }
         }
@@ -88,6 +92,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                smooth: false
                 rotation: -180
             }
         }
@@ -107,6 +112,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                smooth: false
                 rotation: -180
             }
         }
@@ -121,6 +127,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                smooth: false
                 rotation: -270
             }
         }
@@ -140,6 +147,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                smooth: false
                 rotation: -270
             }
         }

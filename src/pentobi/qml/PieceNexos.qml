@@ -120,6 +120,7 @@ Item
                 width: imageSourceSize.width / 3
                 height: imageSourceSize.height
             }
+            smooth: false
         }
     }
     Rectangle {

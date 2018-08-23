@@ -23,6 +23,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                smooth: false
                 antialiasing: true
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? 0 : -90
@@ -45,6 +46,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                smooth: false
                 antialiasing: true
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? 0 : -90
@@ -62,6 +64,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                smooth: false
                 antialiasing: true
                 mirror: isHorizontal
                 rotation: isHorizontal ? -180 : -90
@@ -84,6 +87,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                smooth: false
                 antialiasing: true
                 mirror: isHorizontal
                 rotation: isHorizontal ? -180 : -90
@@ -101,6 +105,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                smooth: false
                 antialiasing: true
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? -180 : -270
@@ -123,6 +128,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                smooth: false
                 antialiasing: true
                 mirror: ! isHorizontal
                 rotation: isHorizontal ? -180 : -270
@@ -140,6 +146,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                smooth: false
                 antialiasing: true
                 mirror: isHorizontal
                 rotation: isHorizontal ? 0 : -270
@@ -158,6 +165,7 @@ Item {
                 source: imageName
                 width: imageSourceSize.width
                 height: imageSourceSize.height
+                smooth: false
                 antialiasing: true
                 sourceSize {
                     width: scaleUnplayed * imageSourceSize.width
