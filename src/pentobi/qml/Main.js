@@ -317,7 +317,8 @@ function init() {
     isRated = settings.isRated
     wasGenMoveRunning = settings.wasGenMoveRunning
     gameDisplay.createPieces()
-    if (gameModel.checkFileDeletedOutside() && ! gameModel.isModified)
+    if (gameModel.file !== "" && ! gameModel.checkFileExists(gameModel.file)
+            && ! gameModel.isModified)
         newGameNoVerify()
     else if (gameModel.checkFileModifiedOutside())
     {

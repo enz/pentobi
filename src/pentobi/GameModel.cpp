@@ -291,13 +291,6 @@ bool GameModel::checkAutosaveModifiedOutside()
     return settings.value(QStringLiteral("autosave")).toByteArray() != getSgf();
 }
 
-bool GameModel::checkFileDeletedOutside()
-{
-    if (m_file.isEmpty() || ! m_fileDate.isValid())
-        return false;
-    return ! QFileInfo::exists(m_file);
-}
-
 bool GameModel::checkFileExists(const QString& file)
 {
     return QFileInfo::exists(file);
