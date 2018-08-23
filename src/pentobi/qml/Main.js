@@ -305,6 +305,7 @@ function help() {
 }
 
 function init() {
+    gameModel.loadAutoSave()
     computerPlays0 = settings.computerPlays0
     computerPlays1 = settings.computerPlays1
     computerPlays2 = settings.computerPlays2

@@ -163,28 +163,6 @@ GameModel::GameModel(QObject* parent)
     loadRecentFiles();
     initGame(m_game.get_variant());
     createPieceModels();
-    QSettings settings;
-    auto file = settings.value(QStringLiteral("file")).toString();
-    auto isModified = settings.value(QStringLiteral("isModified")).toBool();
-    // If autosaved game was not modified and corresponding file was deleted
-    // externally, silently discard it
-    if (! file.isEmpty() && ! isModified && ! checkFileExists(file))
-    {
-        updateProperties();
-        return;
-    }
-    if (! openByteArray(settings.value(
-                            QStringLiteral("autosave")).toByteArray()))
-    {
-        updateProperties();
-        return;
-    }
-    setFile(file);
-    m_fileDate = settings.value(QStringLiteral("fileDate")).toDateTime();
-    m_autosaveDate =
-            settings.value(QStringLiteral("autosaveDate")).toDateTime();
-    setIsModified(isModified);
-    restoreAutoSaveLocation();
     updateProperties();
 }
 
@@ -942,6 +920,27 @@ void GameModel::keepOnlyPosition()
 void GameModel::keepOnlySubtree()
 {
     m_game.keep_only_subtree();
+    updateProperties();
+}
+
+void GameModel::loadAutoSave()
+{
+    QSettings settings;
+    auto file = settings.value(QStringLiteral("file")).toString();
+    auto isModified = settings.value(QStringLiteral("isModified")).toBool();
+    // If autosaved game was not modified and corresponding file was deleted
+    // externally, silently discard it
+    if (! file.isEmpty() && ! isModified && ! checkFileExists(file))
+        return;
+    if (! openByteArray(
+                settings.value(QStringLiteral("autosave")).toByteArray()))
+        return;
+    setFile(file);
+    m_fileDate = settings.value(QStringLiteral("fileDate")).toDateTime();
+    m_autosaveDate =
+            settings.value(QStringLiteral("autosaveDate")).toDateTime();
+    setIsModified(isModified);
+    restoreAutoSaveLocation();
     updateProperties();
 }
 
