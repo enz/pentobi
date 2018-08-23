@@ -173,8 +173,8 @@ GameModel::GameModel(QObject* parent)
         updateProperties();
         return;
     }
-    if (! openByteArray(settings.value(QStringLiteral("autosave"),
-                                       QStringLiteral("")).toByteArray()))
+    if (! openByteArray(settings.value(
+                            QStringLiteral("autosave")).toByteArray()))
     {
         updateProperties();
         return;
