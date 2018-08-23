@@ -317,6 +317,11 @@ function init() {
     isRated = settings.isRated
     wasGenMoveRunning = settings.wasGenMoveRunning
     gameDisplay.createPieces()
+    if (gameModel.checkFileDeletedOutside())
+    {
+        showInfo(qsTr("File was deleted by another application."))
+        gameModel.isModified = true
+    }
     if (gameModel.checkFileModifiedOutside())
     {
         showWindow()
@@ -753,6 +758,11 @@ function verify(callback)
 {
     if (gameModel.isModified) {
         showQuestion(qsTr("Discard game?"), callback)
+        return
+    }
+    else if (gameModel.checkFileDeletedOutside()) {
+        showQuestion(qsTr("File was deleted by another application. Discard game?"),
+                     callback)
         return
     }
     callback()
