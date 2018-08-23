@@ -72,6 +72,29 @@ Item
         model: pieceModel.elements
 
         Item {
+            // Right junction
+            Rectangle {
+                visible: pieceModel.junctionType[index] === 0
+                         || pieceModel.junctionType[index] === 1
+                color: root.color[0]
+                width: 0.12 * gridWidth; height: 0.8 * gridHeight
+                x: (modelData.x - pieceModel.center.x + 1) * gridWidth
+                   - width / 2
+                y: (modelData.y - pieceModel.center.y) * gridHeight
+                   + (gridHeight - height) / 2
+            }
+            // Down junction
+            Rectangle {
+                visible: pieceModel.junctionType[index] === 0
+                         || pieceModel.junctionType[index] === 2
+                color: root.color[0]
+                rotation: 90
+                width: 0.12 * gridWidth; height: 0.8 * gridHeight
+                x: (modelData.x - pieceModel.center.x) * gridWidth
+                   + (gridWidth - width) / 2
+                y: (modelData.y - pieceModel.center.y + 1) * gridHeight
+                   - height / 2
+            }
             Square {
                 width: 0.9 * gridWidth
                 height: 0.9 * gridHeight
@@ -79,37 +102,6 @@ Item
                    + (gridWidth - width) / 2
                 y: (modelData.y - pieceModel.center.y) * gridHeight
                    + (gridHeight - height) / 2
-            }
-            // Right junction
-            Image {
-                visible: pieceModel.junctionType[index] === 0
-                         || pieceModel.junctionType[index] === 1
-                source: "image://pentobi/junction-straight/" + color[0]
-                width: 0.1 * gridWidth; height: 1.4 * gridHeight
-                x: (modelData.x - pieceModel.center.x + 1) * gridWidth
-                   - width / 2
-                y: (modelData.y - pieceModel.center.y) * gridHeight
-                   + (gridHeight - height) / 2
-                sourceSize {
-                    width: 0.1 * (imageSourceSize.width / 0.9)
-                    height: 1.4 * (imageSourceSize.height / 0.9)
-                }
-            }
-            // Down junction
-            Image {
-                visible: pieceModel.junctionType[index] === 0
-                         || pieceModel.junctionType[index] === 2
-                source: "image://pentobi/junction-straight/" + color[0]
-                rotation: 90
-                width: 0.1 * gridWidth; height: 1.4 * gridHeight
-                x: (modelData.x - pieceModel.center.x) * gridWidth
-                   + (gridWidth - width) / 2
-                y: (modelData.y - pieceModel.center.y + 1) * gridHeight
-                   - height / 2
-                sourceSize {
-                    width: 0.1 * (imageSourceSize.width / 0.9)
-                    height: 1.4 * (imageSourceSize.height / 0.9)
-                }
             }
         }
     }
