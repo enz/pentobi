@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.3
+import QtQuick.Window 2.2
 
 // See PieceClassic.qml for comments
 Item
@@ -77,7 +78,8 @@ Item
                 visible: pieceModel.junctionType[index] === 0
                          || pieceModel.junctionType[index] === 1
                 color: root.color[0]
-                width: 0.12 * gridWidth; height: 0.8 * gridHeight
+                width: gridWidth - square.width
+                height: 0.8 * gridHeight
                 x: (modelData.x - pieceModel.center.x + 1) * gridWidth
                    - width / 2
                 y: (modelData.y - pieceModel.center.y) * gridHeight
@@ -88,16 +90,21 @@ Item
                 visible: pieceModel.junctionType[index] === 0
                          || pieceModel.junctionType[index] === 2
                 color: root.color[0]
-                rotation: 90
-                width: 0.12 * gridWidth; height: 0.8 * gridHeight
+                width: 0.8 * gridWidth
+                height: gridHeight - square.height
                 x: (modelData.x - pieceModel.center.x) * gridWidth
                    + (gridWidth - width) / 2
                 y: (modelData.y - pieceModel.center.y + 1) * gridHeight
                    - height / 2
             }
             Square {
-                width: 0.9 * gridWidth
-                height: 0.9 * gridHeight
+                id: square
+
+                // Avoid fractional piece element size
+                width: Math.round(0.9 * gridWidth * Screen.devicePixelRatio)
+                       / Screen.devicePixelRatio
+                height: Math.round(0.9 * gridHeight * Screen.devicePixelRatio)
+                            / Screen.devicePixelRatio
                 x: (modelData.x - pieceModel.center.x) * gridWidth
                    + (gridWidth - width) / 2
                 y: (modelData.y - pieceModel.center.y) * gridHeight
