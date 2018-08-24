@@ -315,12 +315,7 @@ bool GameModel::checkFileModifiedOutside()
     move number).*/
 bool GameModel::checkSetupAllowed() const
 {
-    if (m_canGoBackward || m_canGoForward || m_moveNumber > 0)
-    {
-        qWarning("GameModel: setup only supported in root node");
-        return false;
-    }
-    return true;
+    return ! m_canGoBackward && ! m_canGoForward && m_moveNumber == 0;
 }
 
 void GameModel::clearFile()
