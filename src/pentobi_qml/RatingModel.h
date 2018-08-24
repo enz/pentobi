@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_QML_RATING_MODEL_H
-#define PENTOBI_QML_PLAYER_MODEL_H
+#define PENTOBI_QML_RATING_MODEL_H
 
 #include <QObject>
 
@@ -151,4 +151,4 @@ private:
 
 //-----------------------------------------------------------------------------
 
-#endif // PENTOBI_QML_PLAYER_MODEL_H
+#endif // PENTOBI_QML_RATING_MODEL_H
