@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #ifndef PENTOBI_RATING_MODEL_H
-#define PENTOBI_PLAYER_MODEL_H
+#define PENTOBI_RATING_MODEL_H
 
 #include <QObject>
 #include "libboardgame_base/Rating.h"
@@ -150,4 +150,4 @@ private:
 
 //-----------------------------------------------------------------------------
 
-#endif // PENTOBI_PLAYER_MODEL_H
+#endif // PENTOBI_RATING_MODEL_H
