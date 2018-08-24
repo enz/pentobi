@@ -28,4 +28,4 @@ class Failure
 
 } // namespace libboardgame_gtp
 
-#endif // LIBBOARDGAME_GTP_ENGINE_H
+#endif // LIBBOARDGAME_GTP_FAILURE_H

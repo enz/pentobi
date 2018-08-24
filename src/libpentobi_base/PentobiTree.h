@@ -153,4 +153,4 @@ inline void PentobiTree::set_move(const SgfNode& node, ColorMove mv)
 
 } // namespace libpentobi_base
 
-#endif // LIBPENTOBI_BASE_PENTOBI_SGF_TREE_H
+#endif // LIBPENTOBI_BASE_PENTOBI_TREE_H

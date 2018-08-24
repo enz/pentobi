@@ -4,8 +4,8 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_PIECE_TRANSFORMS_CLASSIC_H
-#define LIBPENTOBI_PIECE_TRANSFORMS_CLASSIC_H
+#ifndef LIBPENTOBI_BASE_PIECE_TRANSFORMS_CLASSIC_H
+#define LIBPENTOBI_BASE_PIECE_TRANSFORMS_CLASSIC_H
 
 #include "PieceTransforms.h"
 #include "libboardgame_base/RectTransform.h"
@@ -63,4 +63,4 @@ private:
 
 } // namespace libpentobi_base
 
-#endif // LIBPENTOBI_PIECE_TRANSFORMS_CLASSIC_H
+#endif // LIBPENTOBI_BASE_PIECE_TRANSFORMS_CLASSIC_H

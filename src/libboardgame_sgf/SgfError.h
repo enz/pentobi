@@ -4,8 +4,8 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_ERROR_H
-#define LIBBOARDGAME_SGF_ERROR_H
+#ifndef LIBBOARDGAME_SGF_SGF_ERROR_H
+#define LIBBOARDGAME_SGF_SGF_ERROR_H
 
 #include <sstream>
 #include <stdexcept>
@@ -72,4 +72,4 @@ string InvalidProperty::get_message(const string& id, const T& value)
 
 } // namespace libboardgame_sgf
 
-#endif // LIBBOARDGAME_SGF_ERROR_H
+#endif // LIBBOARDGAME_SGF_SGF_ERROR_H

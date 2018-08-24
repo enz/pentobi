@@ -4,8 +4,8 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_PIECE_TRANSFORMS_TRIGON_H
-#define LIBPENTOBI_PIECE_TRANSFORMS_TRIGON_H
+#ifndef LIBPENTOBI_BASE_PIECE_TRANSFORMS_TRIGON_H
+#define LIBPENTOBI_BASE_PIECE_TRANSFORMS_TRIGON_H
 
 #include "PieceTransforms.h"
 #include "TrigonTransform.h"
@@ -64,4 +64,4 @@ private:
 
 } // namespace libpentobi_base
 
-#endif // LIBPENTOBI_PIECE_TRANSFORMS_TRIGON_H
+#endif // LIBPENTOBI_BASE_PIECE_TRANSFORMS_TRIGON_H

@@ -4,8 +4,8 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_BASE_POINTSTATE_H
-#define LIBPENTOBI_BASE_POINTSTATE_H
+#ifndef LIBPENTOBI_BASE_POINT_STATE_H
+#define LIBPENTOBI_BASE_POINT_STATE_H
 
 #include "Color.h"
 
@@ -135,4 +135,4 @@ inline PointState::IntType PointState::to_int() const
 
 } // namespace libpentobi_base
 
-#endif // LIBPENTOBI_BASE_POINTSTATE_H
+#endif // LIBPENTOBI_BASE_POINT_STATE_H

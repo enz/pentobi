@@ -4,8 +4,8 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_BASE_BOARDUTIL_H
-#define LIBPENTOBI_BASE_BOARDUTIL_H
+#ifndef LIBPENTOBI_BASE_BOARD_UTIL_H
+#define LIBPENTOBI_BASE_BOARD_UTIL_H
 
 #include "Board.h"
 #include "libboardgame_sgf/Writer.h"
@@ -35,4 +35,4 @@ Move get_transformed(const Board& bd, Move mv,
 
 } // namespace libpentobi_base
 
-#endif // LIBPENTOBI_BASE_BOARDUTIL_H
+#endif // LIBPENTOBI_BASE_BOARD_UTIL_H
