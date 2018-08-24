@@ -55,6 +55,8 @@ add_executable(pentobi WIN32
     RatingModel.cpp
     )
 
+add_dependencies(pentobi translations_qrc)
+
 file(GLOB qml_SRC "qml/*.qml" "qml/*.js" "qml/i18n/*.ts" "qml/themes/*/*.qml")
 target_sources(pentobi PRIVATE ${qml_SRC})
 
