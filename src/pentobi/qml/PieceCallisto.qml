@@ -84,6 +84,7 @@ Item
                    - width / 2
                 y: (modelData.y - pieceModel.center.y) * gridHeight
                    + (gridHeight - height) / 2
+                antialiasing: true
             }
             // Down junction
             Rectangle {
@@ -96,6 +97,7 @@ Item
                    + (gridWidth - width) / 2
                 y: (modelData.y - pieceModel.center.y + 1) * gridHeight
                    - height / 2
+                antialiasing: true
             }
             Square {
                 id: square
@@ -109,6 +111,7 @@ Item
                    + (gridWidth - width) / 2
                 y: (modelData.y - pieceModel.center.y) * gridHeight
                    + (gridHeight - height) / 2
+                antialiasing: true
             }
         }
     }

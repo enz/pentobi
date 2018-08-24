@@ -14,6 +14,8 @@ import QtQuick 2.3
 // better results than using Image.mipmap and avoids a mipmap bug with Nvidia
 // cards (QTBUG-57845).
 Item {
+    id: root
+
     Loader {
         opacity: imageOpacity0
         sourceComponent: opacity > 0 || item ? component0 : null
@@ -24,6 +26,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                antialiasing: root.antialiasing
                 smooth: false
             }
         }
@@ -43,6 +46,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                antialiasing: root.antialiasing
                 smooth: false
             }
         }
@@ -57,6 +61,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                antialiasing: root.antialiasing
                 smooth: false
                 rotation: -90
             }
@@ -77,6 +82,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                antialiasing: root.antialiasing
                 smooth: false
                 rotation: -90
             }
@@ -92,6 +98,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                antialiasing: root.antialiasing
                 smooth: false
                 rotation: -180
             }
@@ -112,6 +119,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                antialiasing: root.antialiasing
                 smooth: false
                 rotation: -180
             }
@@ -127,6 +135,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
+                antialiasing: root.antialiasing
                 smooth: false
                 rotation: -270
             }
@@ -147,6 +156,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
+                antialiasing: root.antialiasing
                 smooth: false
                 rotation: -270
             }
