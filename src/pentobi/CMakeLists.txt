@@ -17,17 +17,10 @@ add_custom_command(
     OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/qml/i18n/translations.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}"
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/qml/i18n/translations.qrc"
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/qml/i18n/translations.qrc" ${pentobi_QM}
     )
-add_custom_target(translations ALL DEPENDS ${pentobi_QM})
-add_custom_target(translations_qrc ALL
-    DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc")
-add_dependencies(translations_qrc translations)
 
-qtquick_compiler_add_resources(pentobi_RC_SRCS
-    resources.qrc
-    resources_desktop.qrc
-    qml/themes/themes.qrc
+qt5_add_resources(pentobi_RC_SRCS
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     ../books/pentobi_books.qrc
     ../icon/pentobi_icon.qrc
@@ -35,9 +28,15 @@ qtquick_compiler_add_resources(pentobi_RC_SRCS
     ../../doc/help.qrc
     )
 
+qtquick_compiler_add_resources(pentobi_RC_SRCS_QML
+    resources.qrc
+    resources_desktop.qrc
+    qml/themes/themes.qrc
+    )
+
 add_executable(pentobi WIN32
     ${pentobi_RC_SRCS}
-    ${pentobi_RC_TRANSL_SRCS}
+    ${pentobi_RC_SRCS_QML}
     AnalyzeGameModel.h
     AnalyzeGameModel.cpp
     AndroidUtils.h
@@ -54,8 +53,6 @@ add_executable(pentobi WIN32
     RatingModel.h
     RatingModel.cpp
     )
-
-add_dependencies(pentobi translations_qrc)
 
 file(GLOB qml_SRC "qml/*.qml" "qml/*.js" "qml/i18n/*.ts" "qml/themes/*/*.qml")
 target_sources(pentobi PRIVATE ${qml_SRC})
