@@ -20,7 +20,6 @@ Item {
             Image {
                 source: isDownward ? imageNameDownward : imageName
                 sourceSize: imageSourceSize
-                smooth: false
                 antialiasing: true
             }
         }
@@ -40,7 +39,6 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
-                smooth: false
                 antialiasing: true
             }
         }
@@ -55,7 +53,6 @@ Item {
             Image {
                 source: isDownward ? imageName : imageNameDownward
                 sourceSize: imageSourceSize
-                smooth: false
                 antialiasing: true
                 transform: [
                     Rotation {
@@ -85,7 +82,6 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
-                smooth: false
                 antialiasing: true
                 transform: [
                     Rotation {
@@ -111,7 +107,6 @@ Item {
                 source: isDownward ? imageNameDownward : imageName
                 sourceSize: imageSourceSize
                 antialiasing: true
-                smooth: false
                 transform: Rotation {
                     angle: -120
                     origin {
@@ -138,7 +133,6 @@ Item {
                     height: scaleUnplayed * imageSourceSize.height
                 }
                 antialiasing: true
-                smooth: false
                 transform: Rotation {
                     angle: -120
                     origin {
@@ -159,7 +153,6 @@ Item {
             Image {
                 source: isDownward ? imageName : imageNameDownward
                 sourceSize: imageSourceSize
-                smooth: false
                 antialiasing: true
                 rotation: -180
             }
@@ -180,7 +173,6 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
-                smooth: false
                 antialiasing: true
                 rotation: -180
             }
@@ -196,7 +188,6 @@ Item {
             Image {
                 source: isDownward ? imageNameDownward : imageName
                 sourceSize: imageSourceSize
-                smooth: false
                 antialiasing: true
                 transform: Rotation {
                     angle: -240
@@ -223,7 +214,6 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
-                smooth: false
                 antialiasing: true
                 transform: Rotation {
                     angle: -240
@@ -246,7 +236,6 @@ Item {
                 source: isDownward ? imageName : imageNameDownward
                 sourceSize: imageSourceSize
                 antialiasing: true
-                smooth: false
                 transform: [
                     Rotation {
                         angle: -300
@@ -276,7 +265,6 @@ Item {
                     height: scaleUnplayed * imageSourceSize.height
                 }
                 antialiasing: true
-                smooth: false
                 transform: [
                     Rotation {
                         angle: -300

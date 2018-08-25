@@ -25,7 +25,6 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
-                smooth: false
                 // Don't set antialiasing, vertex antialiasing causes unwanted
                 // seams between edges of the quarter squares
                 antialiasing: false
@@ -59,7 +58,6 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
-                smooth: false
                 // Don't set antialiasing, see above
                 antialiasing: false
                 rotation: switch (pointType) {
@@ -87,7 +85,6 @@ Item {
             Image {
                 source: imageNameBottom
                 sourceSize: imageSourceSize
-                smooth: false
                 // Don't set antialiasing, see above
                 antialiasing: false
                 rotation: switch (pointType) {
@@ -120,7 +117,6 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
-                smooth: false
                 // Don't set antialiasing, see above
                 antialiasing: false
                 rotation: switch (pointType) {

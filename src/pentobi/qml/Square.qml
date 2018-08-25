@@ -27,7 +27,6 @@ Item {
                 source: imageName
                 sourceSize: imageSourceSize
                 antialiasing: root.antialiasing
-                smooth: false
             }
         }
     }
@@ -47,7 +46,6 @@ Item {
                     height: scaleUnplayed * imageSourceSize.height
                 }
                 antialiasing: root.antialiasing
-                smooth: false
             }
         }
     }
@@ -62,7 +60,6 @@ Item {
                 source: imageName
                 sourceSize: imageSourceSize
                 antialiasing: root.antialiasing
-                smooth: false
                 rotation: -90
             }
         }
@@ -83,7 +80,6 @@ Item {
                     height: scaleUnplayed * imageSourceSize.height
                 }
                 antialiasing: root.antialiasing
-                smooth: false
                 rotation: -90
             }
         }
@@ -99,7 +95,6 @@ Item {
                 source: imageName
                 sourceSize: imageSourceSize
                 antialiasing: root.antialiasing
-                smooth: false
                 rotation: -180
             }
         }
@@ -120,7 +115,6 @@ Item {
                     height: scaleUnplayed * imageSourceSize.height
                 }
                 antialiasing: root.antialiasing
-                smooth: false
                 rotation: -180
             }
         }
@@ -136,7 +130,6 @@ Item {
                 source: imageName
                 sourceSize: imageSourceSize
                 antialiasing: root.antialiasing
-                smooth: false
                 rotation: -270
             }
         }
@@ -157,7 +150,6 @@ Item {
                     height: scaleUnplayed * imageSourceSize.height
                 }
                 antialiasing: root.antialiasing
-                smooth: false
                 rotation: -270
             }
         }
