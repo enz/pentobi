@@ -26,7 +26,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
-                antialiasing: root.antialiasing
+                antialiasing: true
             }
         }
     }
@@ -45,7 +45,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
-                antialiasing: root.antialiasing
+                antialiasing: true
             }
         }
     }
@@ -59,7 +59,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
-                antialiasing: root.antialiasing
+                antialiasing: true
                 rotation: -90
             }
         }
@@ -79,7 +79,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
-                antialiasing: root.antialiasing
+                antialiasing: true
                 rotation: -90
             }
         }
@@ -94,7 +94,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
-                antialiasing: root.antialiasing
+                antialiasing: true
                 rotation: -180
             }
         }
@@ -114,7 +114,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
-                antialiasing: root.antialiasing
+                antialiasing: true
                 rotation: -180
             }
         }
@@ -129,7 +129,7 @@ Item {
             Image {
                 source: imageName
                 sourceSize: imageSourceSize
-                antialiasing: root.antialiasing
+                antialiasing: true
                 rotation: -270
             }
         }
@@ -149,7 +149,7 @@ Item {
                     width: scaleUnplayed * imageSourceSize.width
                     height: scaleUnplayed * imageSourceSize.height
                 }
-                antialiasing: root.antialiasing
+                antialiasing: true
                 rotation: -270
             }
         }

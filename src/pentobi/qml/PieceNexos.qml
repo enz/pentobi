@@ -120,6 +120,7 @@ Item
                 width: imageSourceSize.width / 3
                 height: imageSourceSize.height
             }
+            antialiasing: true
         }
     }
     Rectangle {

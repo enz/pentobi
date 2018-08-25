@@ -111,7 +111,6 @@ Item
                    + (gridWidth - width) / 2
                 y: (modelData.y - pieceModel.center.y) * gridHeight
                    + (gridHeight - height) / 2
-                antialiasing: true
             }
         }
     }
