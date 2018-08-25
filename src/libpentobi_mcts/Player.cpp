@@ -286,9 +286,9 @@ Rating Player::get_rating(Variant variant, unsigned level)
         break;
     case BoardType::duo:
         {
-            // Anchor 1100, scale 0.68
+            // Anchor 1000, scale 0.74
             static double elo[Player::max_supported_level] =
-                { 1100, 1273, 1447, 1620, 1793, 1967, 2140, 2187, 2209 };
+                { 1000, 1189, 1378, 1567, 1755, 1945, 2134, 2185, 2209 };
             result = Rating(elo[level - 1]);
         }
         break;
