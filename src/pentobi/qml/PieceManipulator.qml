@@ -49,7 +49,10 @@ Item {
     MouseArea {
         id: dragArea
 
-        anchors.fill: root
+        anchors.centerIn: root
+        // Make drag area a bit larger than image to avoid accidental
+        // flicking in PieceSelectorMobile when wanting to drag
+        width: root.width + buttonSize; height: width
         drag {
             target: root
             filterChildren: true
@@ -65,6 +68,7 @@ Item {
         MouseArea {
             anchors {
                 top: dragArea.top
+                margins: (dragArea.width - root.width) / 2
                 horizontalCenter: dragArea.horizontalCenter
             }
             width: buttonSize; height: width
@@ -73,6 +77,7 @@ Item {
         MouseArea {
             anchors {
                 right: dragArea.right
+                margins: (dragArea.width - root.width) / 2
                 verticalCenter: dragArea.verticalCenter
             }
             width: buttonSize; height: width
@@ -81,13 +86,18 @@ Item {
         MouseArea {
             anchors {
                 bottom: dragArea.bottom
+                margins: (dragArea.width - root.width) / 2
                 horizontalCenter: dragArea.horizontalCenter
             }
             width: buttonSize; height: width
             onClicked: pieceModel.flipAcrossY()
         }
         MouseArea {
-            anchors { left: dragArea.left; verticalCenter: dragArea.verticalCenter }
+            anchors {
+                left: dragArea.left
+                margins: (dragArea.width - root.width) / 2
+                verticalCenter: dragArea.verticalCenter
+            }
             width: buttonSize; height: width
             onClicked: pieceModel.rotateLeft()
         }
