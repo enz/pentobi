@@ -38,7 +38,7 @@ Item {
     property color colorSelection: "#645f5c"
     property color colorStartingPoint: "#767074"
     property color colorText: "#282625"
-    property real opacitySubduedText: 0.4
+    property real opacitySubduedText: 0.41
 
     function getImage(name) { return "themes/light/" + name + ".svg" }
 }

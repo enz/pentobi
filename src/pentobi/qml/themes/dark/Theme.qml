@@ -25,7 +25,7 @@ Light.Theme {
     property color colorSelection: "#96918f"
     property color colorStartingPoint: "#82777E"
     property color colorText: "#C8C1BE"
-    property real opacitySubduedText: 0.59
+    property real opacitySubduedText: 0.55
 
     function getImage(name) {
         if (name === "pentobi-rated-game"

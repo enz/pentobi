@@ -43,7 +43,7 @@ Item {
         _isDark ? dark.colorStartingPoint : light.colorStartingPoint
     property color colorText: palette.text
     property real opacitySubduedText:
-        0.55 - 0.2 * theme.colorBackground.hslLightness
+        0.55 - 0.15 * theme.colorBackground.hslLightness
 
     property bool _isDark: palette.window.hslLightness < 0.5
 
