@@ -59,7 +59,7 @@ Item {
             minimumX: -width / 2; maximumX: root.parent.width - width / 2
             minimumY: -height / 2; maximumY: root.parent.height - height / 2
         }
-        // Consume mouse hover events in case it is over PieceList
+        // Consume mouse hover events in case it is over toolbar
         hoverEnabled: isDesktop
 
         MouseArea {
