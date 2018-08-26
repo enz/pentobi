@@ -14,8 +14,8 @@ and libraries can be installed with the command:
     qml-module-qt-labs-settings qml-module-qtquick2 \
     qml-module-qtquick-controls2 qml-module-qtquick-layouts \
     qml-module-qtquick-window2 qml-module-qtwebengine \
-    qml-module-qtwebview qtbase5-dev qtdeclarative5-dev \
-    qtquickcontrols2-5-dev qttools5-dev qttools5-dev-tools
+    qml-module-qtwebview qtdeclarative5-dev qtquickcontrols2-5-dev \
+    qttools5-dev
 
 
 == Building ==
