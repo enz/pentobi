@@ -233,8 +233,20 @@ QtObject {
         onTriggered: gameModel.goPrevVar()
     }
     property Action playPickedPiece: Action {
-        shortcut: noPopupOpen ? "Return" : ""
-        onTriggered: gameDisplay.playPickedPiece()
+        shortcut: "Return"
+        onTriggered: {
+            // QtQuickControls 2 doesn't support default dialog buttons yet,
+            // so we assume that Return should close the dialog
+            if (rootWindow.dialogs.length > 0) {
+                var dialog = rootWindow.dialogs[rootWindow.dialogs.length - 1]
+                if (dialog instanceof FileDialog)
+                    dialog.checkAccept()
+                else
+                    dialog.accept()
+            }
+            else if (noPopupOpen)
+                gameDisplay.playPickedPiece()
+        }
     }
     property Action quit: Action {
         shortcut: "Ctrl+Q"

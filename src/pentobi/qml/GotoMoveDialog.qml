@@ -38,7 +38,6 @@ Pentobi.Dialog {
                     bottom: 0
                     top: gameModel.moveNumber + gameModel.movesLeft
                 }
-                onAccepted: root.accept()
                 Layout.preferredWidth: font.pixelSize * 5
             }
             Item { Layout.fillWidth: true }

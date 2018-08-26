@@ -53,6 +53,8 @@ ApplicationWindow {
 
     property Actions actions: Actions { }
 
+    property var dialogs: []
+
     minimumWidth: isDesktop ? 597 : 240
     minimumHeight: isDesktop ? 365 : 301
     color: theme.colorBackground

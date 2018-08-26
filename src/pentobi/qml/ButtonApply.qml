@@ -8,9 +8,6 @@ import QtQuick.Controls 2.2
 import "Controls.js" as PentobiControls
 
 Button {
-    text: PentobiControls.addMnemonic(
-              qsTr("Apply"),
-              //: Mnemonic for button Apply. Leave empty for no mnemonic.
-              qsTr("A"))
+    text: qsTr("Apply")
     DialogButtonBox.buttonRole: DialogButtonBox.ApplyRole
 }

@@ -43,7 +43,7 @@ Pentobi.Dialog {
 
     property url _lastFolder
 
-    function _checkAccept() {
+    function checkAccept() {
         if (name.trim().length === 0)
             return
         folder = folderModel.folder
@@ -59,16 +59,8 @@ Pentobi.Dialog {
     footer: Pentobi.DialogButtonBox {
         Button {
             enabled: name.trim().length > 0
-            text: selectExisting ?
-                      PentobiControls.addMnemonic(
-                          qsTr("Open"),
-                          //: Mnemonic for button Open. Leave empty for no mnemonic.
-                          qsTr("O")) :
-                      PentobiControls.addMnemonic(
-                          qsTr("Save"),
-                          //: Mnemonic for button Save. Leave empty for no mnemonic.
-                          qsTr("S"))
-            onClicked: _checkAccept()
+            text: selectExisting ? qsTr("Open") : qsTr("Save")
+            onClicked: checkAccept()
         }
         ButtonCancel { }
     }
@@ -100,7 +92,6 @@ Pentobi.Dialog {
                 selectByMouse: true
                 Layout.fillWidth: true
                 Component.onCompleted: nameField.cursorPosition = nameField.length
-                onAccepted: _checkAccept()
                 onTextEdited: view.currentIndex = -1
             }
             RowLayout {
@@ -189,6 +180,11 @@ Pentobi.Dialog {
                         onActiveFocusChanged:
                             if (activeFocus && currentIndex < 0 && count)
                                 currentIndex = 0
+                        onCurrentIndexChanged:
+                            if (selectExisting
+                                    && ! folderModel.isFolder(currentIndex))
+                                name = folderModel.get(currentIndex, "fileName")
+
                         delegate: AbstractButton {
                             width: view.width
                             height: 2 * font.pixelSize
@@ -234,7 +230,7 @@ Pentobi.Dialog {
                             }
                             onDoubleClicked:
                                 if (! folderModel.isFolder(index))
-                                    _checkAccept()
+                                    checkAccept()
                         }
                         FolderListModel {
                             id: folderModel

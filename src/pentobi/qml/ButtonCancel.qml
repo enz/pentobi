@@ -8,9 +8,6 @@ import QtQuick.Controls 2.2
 import "Controls.js" as PentobiControls
 
 Button {
-    text: PentobiControls.addMnemonic(
-              qsTr("Cancel"),
-              //: Mnemonic for button Cancel. Leave empty for no mnemonic.
-              qsTr("C"))
+    text: qsTr("Cancel")
     DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
 }
