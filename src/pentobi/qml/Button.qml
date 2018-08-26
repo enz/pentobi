@@ -14,8 +14,8 @@ ToolButton {
 
     // See ButtonToolTip
     property bool buttonToolTipHovered
-    property bool effectiveHovered:
-        Qt.styleHints.useHoverEffects && isDesktop && buttonToolTipHovered
+    property bool effectiveHovered: Qt.styleHints.useHoverEffects && isDesktop
+                                    && buttonToolTipHovered && enabled
 
     opacity: root.enabled ? theme.opacitySubduedText : 0.5 * theme.opacitySubduedText
     hoverEnabled: false
