@@ -39,7 +39,7 @@ Menu {
         if (isAndroid || currentIndex < 0)
             return
         for (var i = currentIndex; i < count; ++i)
-            if (itemAt(i).enabled) {
+            if (itemAt(i) instanceof MenuItem && itemAt(i).enabled) {
                 currentIndex = i
                 return
             }
