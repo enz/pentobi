@@ -21,6 +21,10 @@
 #include <QCommandLineParser>
 #endif
 
+#ifdef Q_OS_LINUX
+#include <QQuickWindow>
+#endif
+
 //-----------------------------------------------------------------------------
 
 namespace {
@@ -52,6 +56,12 @@ int mainAndroid()
 
 int mainDesktop()
 {
+#ifdef Q_OS_LINUX
+    // Native text rendering produces better-looking text but has only been
+    // tested on Linux. On other platforms, it might be problematic (e.g. on
+    // Android 4.2, it causes too small fonts or faulty rendering).
+    QQuickWindow::setTextRenderType(QQuickWindow::NativeTextRendering);
+#endif
     QIcon icon;
     icon.addFile(QStringLiteral(":/pentobi_icon/pentobi.svg"));
     icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-16.svg"));
