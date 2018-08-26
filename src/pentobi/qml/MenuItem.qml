@@ -37,6 +37,9 @@ MenuItem {
     }
 
     height: font.pixelSize * (isDesktop ? 1.9 : 2.2)
+    // Explicitely set hoverEnabled to true, otherwise hover highlighting and
+    // submenu opening doesn't work in KDE on Ubuntu 18.10 (bug in Qt?)
+    hoverEnabled: true
     background: Rectangle {
         anchors.fill: parent
         // Don't overdraw menu background border
