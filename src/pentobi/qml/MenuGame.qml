@@ -68,6 +68,7 @@ Pentobi.Menu {
     }
     Pentobi.MenuItem {
         action: actions.save
+        enabled: actions.save.enabled && gameModel.file !== ""
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Save. Leave empty for no mnemonic.
                           qsTr("S"))
