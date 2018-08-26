@@ -106,7 +106,7 @@ class GameModel
     Q_PROPERTY(QVariantList startingPoints1 READ startingPoints1 NOTIFY startingPoints1Changed)
     Q_PROPERTY(QVariantList startingPoints2 READ startingPoints2 NOTIFY startingPoints2Changed)
     Q_PROPERTY(QVariantList startingPoints3 READ startingPoints3 NOTIFY startingPoints3Changed)
-    Q_PROPERTY(QVariantList startingPointsAll READ startingPointsAll NOTIFY startingPointsAllChanged)
+    Q_PROPERTY(QVariantList startingPointsAny READ startingPointsAny NOTIFY startingPointsAnyChanged)
     Q_PROPERTY(QString playerName0 READ playerName0 WRITE setPlayerName0 NOTIFY playerName0Changed)
     Q_PROPERTY(QString playerName1 READ playerName1 WRITE setPlayerName1 NOTIFY playerName1Changed)
     Q_PROPERTY(QString playerName2 READ playerName2 WRITE setPlayerName2 NOTIFY playerName2Changed)
@@ -349,7 +349,7 @@ public:
 
     const QVariantList& startingPoints3() const { return m_startingPoints3; }
 
-    const QVariantList& startingPointsAll() const { return m_startingPointsAll; }
+    const QVariantList& startingPointsAny() const { return m_startingPointsAny; }
 
     const QString& playerName0() const { return m_playerName0; }
 
@@ -497,7 +497,7 @@ signals:
 
     void startingPoints3Changed();
 
-    void startingPointsAllChanged();
+    void startingPointsAnyChanged();
 
     void playerName0Changed();
 
@@ -634,7 +634,7 @@ private:
 
     QVariantList m_startingPoints3;
 
-    QVariantList m_startingPointsAll;
+    QVariantList m_startingPointsAny;
 
     QVariantList m_tmpPoints;
 

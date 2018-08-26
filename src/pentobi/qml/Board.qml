@@ -203,7 +203,7 @@ Item {
             }
         }
         Repeater {
-            model: gameModel.startingPointsAll
+            model: gameModel.startingPointsAny
 
             Rectangle {
                 color: theme.colorStartingPoint

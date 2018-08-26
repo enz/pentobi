@@ -1839,8 +1839,8 @@ void GameModel::updateProperties()
     if (isTrigon && isFirstPieceAny)
         for (Point p : bd.get_starting_points(Color(0)))
             m_tmpPoints.append(QPointF(geo.get_x(p), geo.get_y(p)));
-    set(m_startingPointsAll, m_tmpPoints,
-        &GameModel::startingPointsAllChanged);
+    set(m_startingPointsAny, m_tmpPoints,
+        &GameModel::startingPointsAnyChanged);
     auto& current = m_game.get_current();
     set(m_canUndo,
            ! current.has_children() && tree.has_move(current)
