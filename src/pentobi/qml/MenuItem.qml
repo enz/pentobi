@@ -7,6 +7,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
+import QtQuick.Window 2.2
 import "Controls.js" as PentobiControls
 
 // Custom menu item that displays shortcuts (MenuItem in Qt 5.11 does not).
@@ -36,7 +37,8 @@ MenuItem {
         return false
     }
 
-    height: font.pixelSize * (isDesktop ? 1.9 : 2.2)
+    height: Math.round(font.pixelSize * (isDesktop ? 1.9 : 2.2)
+                       * Screen.devicePixelRatio) / Screen.devicePixelRatio
     // Explicitely set hoverEnabled to true, otherwise hover highlighting and
     // submenu opening doesn't work in KDE on Ubuntu 18.10 (bug in Qt?)
     hoverEnabled: true
