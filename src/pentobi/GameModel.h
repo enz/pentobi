@@ -36,7 +36,10 @@ class GameMove
     Q_PROPERTY(int color READ color CONSTANT)
 
 public:
-    GameMove(QObject* parent, ColorMove mv);
+    GameMove(QObject* parent, ColorMove mv)
+        : QObject(parent),
+          m_move(mv)
+    { }
 
 
     Q_INVOKABLE bool isNull() const { return m_move.is_null(); }
@@ -256,13 +259,13 @@ public:
 
     void setComment(const QString& comment);
 
-    QQmlListProperty<PieceModel> pieceModels0();
+    QQmlListProperty<PieceModel> pieceModels0() { return {this, m_pieceModels0}; }
 
-    QQmlListProperty<PieceModel> pieceModels1();
+    QQmlListProperty<PieceModel> pieceModels1() { return {this, m_pieceModels1}; }
 
-    QQmlListProperty<PieceModel> pieceModels2();
+    QQmlListProperty<PieceModel> pieceModels2() { return {this, m_pieceModels2}; }
 
-    QQmlListProperty<PieceModel> pieceModels3();
+    QQmlListProperty<PieceModel> pieceModels3() { return {this, m_pieceModels3}; }
 
     const QString& gameVariant() const { return m_gameVariant; }
 

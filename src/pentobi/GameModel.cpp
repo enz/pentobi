@@ -145,14 +145,6 @@ bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
 
 //-----------------------------------------------------------------------------
 
-GameMove::GameMove(QObject* parent, ColorMove mv)
-    : QObject(parent),
-      m_move(mv)
-{
-}
-
-//-----------------------------------------------------------------------------
-
 GameModel::GameModel(QObject* parent)
     : QObject(parent),
       m_game(getInitialGameVariant()),
@@ -1152,26 +1144,6 @@ PieceModel* GameModel::pickNamedPiece(const QString& name,
         }
     }
     return findUnplayedPieceModel(c, piece);
-}
-
-QQmlListProperty<PieceModel> GameModel::pieceModels0()
-{
-    return {this, m_pieceModels0};
-}
-
-QQmlListProperty<PieceModel> GameModel::pieceModels1()
-{
-    return {this, m_pieceModels1};
-}
-
-QQmlListProperty<PieceModel> GameModel::pieceModels2()
-{
-    return {this, m_pieceModels2};
-}
-
-QQmlListProperty<PieceModel> GameModel::pieceModels3()
-{
-    return {this, m_pieceModels3};
 }
 
 void GameModel::playMove(GameMove* move)
