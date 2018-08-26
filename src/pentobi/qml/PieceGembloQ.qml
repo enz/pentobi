@@ -115,7 +115,7 @@ Item
                   pieceModel.moveLabel : ""
         opacity: text === "" ? 0 : 1
         color: root.color[3]
-        font.pixelSize: 0.7 * gridHeight
+        font { pixelSize: 0.7 * gridHeight; preferShaping: false }
         width: 0
         height: 0
         verticalAlignment: Text.AlignVCenter

@@ -222,7 +222,7 @@ Item {
                 text: getColumnCoord(index)
                 color: theme.colorText
                 opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-                font.pixelSize: coordinateFontSize
+                font { pixelSize: coordinateFontSize; preferShaping: false }
                 x: mapFromGameX(index) - grabImageTarget.x
                    + (gridWidth - width) / 2
                 y: mapFromGameY(-1) - grabImageTarget.y
@@ -236,7 +236,7 @@ Item {
                 text: getColumnCoord(index)
                 color: theme.colorText
                 opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-                font.pixelSize: coordinateFontSize
+                font { pixelSize: coordinateFontSize; preferShaping: false }
                 x: mapFromGameX(index) - grabImageTarget.x
                    + (gridWidth - width) / 2
                 y: mapFromGameY(rows) - grabImageTarget.y
@@ -250,7 +250,7 @@ Item {
                 text: index + 1
                 color: theme.colorText
                 opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-                font.pixelSize: coordinateFontSize
+                font { pixelSize: coordinateFontSize; preferShaping: false }
                 x: mapFromGameX(isTrigon ? -1.5 : -1) - grabImageTarget.x
                    + (gridWidth - width) / 2
                 y: mapFromGameY(rows - index - 1) - grabImageTarget.y
@@ -264,7 +264,7 @@ Item {
                 text: index + 1
                 color: theme.colorText
                 opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
-                font.pixelSize: coordinateFontSize
+                font { pixelSize: coordinateFontSize; preferShaping: false }
                 x: mapFromGameX(isTrigon ? columns + 0.5 : columns)
                     - grabImageTarget.x + (gridWidth - width) / 2
                 y: mapFromGameY(rows - index - 1) - grabImageTarget.y
