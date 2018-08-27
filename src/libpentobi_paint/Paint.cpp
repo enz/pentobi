@@ -284,20 +284,20 @@ void paintBoardGembloQ(QPainter& painter, qreal width, qreal height,
         switch (geo.get_point_type(p))
         {
         case 0:
-            border = dark;
+            border = light;
             break;
         case 1:
-            border = light;
+            border = dark;
             painter.rotate(180);
             painter.translate(-gridWidth, -gridHeight);
             break;
         case 2:
-            border = light;
+            border = dark;
             painter.rotate(270);
             painter.translate(-gridHeight, 0);
             break;
         case 3:
-            border = dark;
+            border = light;
             painter.rotate(90);
             painter.translate(0, -gridWidth);
             break;
