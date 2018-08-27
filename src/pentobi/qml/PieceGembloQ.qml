@@ -33,13 +33,7 @@ Item
         "image://pentobi/quarter-square-bottom/" + color[0] + "/" + color[1] +
         "/" + color[2]
     property bool flippedX: Math.abs(flipX.angle - 180) < 90
-    property bool flippedY: flipY.angle > 90
-    property real pieceAngle: {
-        if (! flippedY && ! flippedX) return rotation
-        if (! flippedY && flippedX) return rotation + 90
-        if (flippedX) return rotation + 180
-        return rotation + 270
-    }
+    property real pieceAngle: flippedX ? rotation + 180 : rotation
     property real isSmall: scale < 0.5 ? 1 : 0
     property real imageOpacity0: imageOpacity(pieceAngle, 0) * (1 - isSmall)
     property real imageOpacity90: imageOpacity(pieceAngle, 90) * (1 - isSmall)
