@@ -17,12 +17,7 @@ Item
     property string imageNameBottom: theme.getImage("quarter-square-bottom-" + colorName)
     property real pieceAngle: {
         var flX = Math.abs(flipX.angle % 360 - 180) < 90
-        var flY = Math.abs(flipY.angle % 360 - 180) < 90
-        var angle = rotation
-        if (flX && flY) angle += 180
-        else if (flX) angle += 90
-        else if (flY) angle += 270
-        return angle
+        return flX ? rotation + 180 : rotation
     }
     property real imageOpacity0: imageOpacity(pieceAngle, 0)
     property real imageOpacity90: imageOpacity(pieceAngle, 90)
@@ -54,7 +49,7 @@ Item
     Repeater {
         model: pieceModel.elements
 
-        QuarterSquare {            
+        QuarterSquare {
             width: 2 * gridWidth
             height: gridHeight
             x: (modelData.x - pieceModel.center.x) * gridWidth
