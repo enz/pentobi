@@ -34,11 +34,18 @@ Menu {
     }
     // Workaround for QTBUG-69541 (Opened Menu highlights last used item on Android)
     onOpened: if (isAndroid) currentIndex = -1
-    // Workaround for QTBUG-69540 (Menu highlights disabled item on click)
+    // Workaround for QTBUG-69540 (Menu highlights disabled item on click).
+    // Also part of workaround for QTBUG-70181, see Pentobi.MenuItem.Keys.onPressed
     onCurrentIndexChanged: {
         if (isAndroid || currentIndex < 0)
             return
-        for (var i = currentIndex; i < count; ++i)
+        var i
+        for (i = currentIndex; i < count; ++i)
+            if (itemAt(i) instanceof MenuItem && itemAt(i).enabled) {
+                currentIndex = i
+                return
+            }
+        for (i = currentIndex - 1; i >= 0; --i)
             if (itemAt(i) instanceof MenuItem && itemAt(i).enabled) {
                 currentIndex = i
                 return
