@@ -215,22 +215,12 @@
         <source>Apply</source>
         <translation type="unfinished"/>
     </message>
-    <message>
-        <source>A</source>
-        <extracomment>Mnemonic for button Apply. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
-    </message>
 </context>
 <context>
     <name>ButtonCancel</name>
     <message>
         <source>Cancel</source>
         <translation>Avbryt</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
     </message>
 </context>
 <context>
@@ -239,22 +229,12 @@
         <source>Close</source>
         <translation type="unfinished"/>
     </message>
-    <message>
-        <source>C</source>
-        <extracomment>Mnemonic for button Close. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
-    </message>
 </context>
 <context>
     <name>ButtonOk</name>
     <message>
         <source>OK</source>
         <translation>OK</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
     </message>
 </context>
 <context>
@@ -318,18 +298,8 @@
         <translation>Åpne</translation>
     </message>
     <message>
-        <source>O</source>
-        <extracomment>Mnemonic for button Open. Leave empty for no mnemonic.</extracomment>
-        <translation>P</translation>
-    </message>
-    <message>
         <source>Save</source>
         <translation>Lagre</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <extracomment>Mnemonic for button Save. Leave empty for no mnemonic.</extracomment>
-        <translation>L</translation>
     </message>
     <message>
         <source>All files</source>
@@ -691,7 +661,7 @@
     <name>Main</name>
     <message>
         <source>Pentobi</source>
-        <extracomment>Main window title if no file is loaded.</extracomment>
+        <extracomment>Window title if no file is loaded.</extracomment>
         <translation>Pentobi</translation>
     </message>
     <message>
@@ -777,10 +747,6 @@
     <message>
         <source>%1 (modified)</source>
         <translation>%1 (endret)</translation>
-    </message>
-    <message>
-        <source>File was deleted by another application.</source>
-        <translation>Filen ble slettet av et annet program.</translation>
     </message>
     <message>
         <source>File has been modified by another application. Reload?</source>
@@ -871,10 +837,6 @@
         <translation>Forkast spill?</translation>
     </message>
     <message>
-        <source>File was deleted by another application. Discard game?</source>
-        <translation>Filen ble slettet av et annet program. Forkast spill?</translation>
-    </message>
-    <message>
         <source>Pentobi %1 (level %2)</source>
         <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
         <translation>Pentobi %1 (nivå %2)</translation>
@@ -891,6 +853,11 @@
     <message>
         <source>File has been modified by another application. Overwrite?</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>%1 - Pentobi</source>
+        <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
+        <translation>%1 - Pentobi</translation>
     </message>
 </context>
 <context>
@@ -1618,11 +1585,11 @@
         <translation>Gå til neste variasjon</translation>
     </message>
     <message>
-        <source>Setup mode</source>
+        <source>Setup Mode</source>
         <translation>Oppsettsmodus</translation>
     </message>
     <message>
-        <source>Rated game</source>
+        <source>Rated Game</source>
         <translation>Vurdert spill</translation>
     </message>
 </context>

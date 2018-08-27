@@ -177,8 +177,8 @@ Item {
         Label {
             visible: isDesktop
             text: {
-                if (gameDisplay.setupMode) return qsTr("Setup mode")
-                if (isRated) return qsTr("Rated game")
+                if (gameDisplay.setupMode) return qsTr("Setup Mode")
+                if (isRated) return qsTr("Rated Game")
                 return Logic.getFileLabel(gameModel.file, gameModel.isModified)
             }
             color: theme.colorText

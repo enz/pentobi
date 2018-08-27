@@ -217,21 +217,11 @@
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>A</source>
-        <extracomment>Mnemonic for button Apply. Leave empty for no mnemonic.</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ButtonCancel</name>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Mnemonic for button Cancel. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -241,21 +231,11 @@
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>C</source>
-        <extracomment>Mnemonic for button Close. Leave empty for no mnemonic.</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ButtonOk</name>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Mnemonic for button OK. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -320,17 +300,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>O</source>
-        <extracomment>Mnemonic for button Open. Leave empty for no mnemonic.</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>S</source>
-        <extracomment>Mnemonic for button Save. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -693,7 +663,7 @@
     <name>Main</name>
     <message>
         <source>Pentobi</source>
-        <extracomment>Main window title if no file is loaded.</extracomment>
+        <extracomment>Window title if no file is loaded.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -778,10 +748,6 @@
     </message>
     <message>
         <source>%1 (modified)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File was deleted by another application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -873,10 +839,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File was deleted by another application. Discard game?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Pentobi %1 (level %2)</source>
         <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
         <translation type="unfinished"></translation>
@@ -892,6 +854,11 @@
     </message>
     <message>
         <source>File has been modified by another application. Overwrite?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - Pentobi</source>
+        <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1620,11 +1587,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Setup mode</source>
+        <source>Setup Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rated game</source>
+        <source>Rated Game</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
