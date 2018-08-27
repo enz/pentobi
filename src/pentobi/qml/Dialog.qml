@@ -19,6 +19,13 @@ Dialog {
             y = (ApplicationWindow.window.height - height) / 2
         }
     }
+    // Has any dialog button the active focus (see also Pentobi.Actions.returnKey)
+    function hasButtonFocus() {
+        for (var i = 0; i < footer.contentChildren.length; ++i)
+            if (footer.contentChildren[i].activeFocus)
+                return true
+        return false
+    }
 
     focus: true
     clip: true
