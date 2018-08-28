@@ -61,8 +61,8 @@ if(PENTOBI_BUILD_THUMBNAILER)
 endif()
 
 if(PENTOBI_BUILD_KDE_THUMBNAILER)
-  configure_file(io.sourceforge.pentobi.kde-thumbnailer.metainfo.xml.in
-    io.sourceforge.pentobi.kde-thumbnailer.metainfo.xml @ONLY)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.kde-thumbnailer.metainfo.xml
+  configure_file(io.sourceforge.pentobi.kde_thumbnailer.metainfo.xml.in
+    io.sourceforge.pentobi.kde_thumbnailer.metainfo.xml @ONLY)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.kde_thumbnailer.metainfo.xml
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
 endif()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="addon">
-  <id>io.sourceforge.pentobi.kde-thumnailer</id>
+  <id>io.sourceforge.pentobi.kde_thumnailer</id>
   <extends>org.kde.dolphin.desktop</extends>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
