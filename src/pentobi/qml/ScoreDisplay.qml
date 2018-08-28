@@ -25,7 +25,7 @@ Row {
     property bool hasMoves3: gameModel.hasMoves3
 
     ScoreElement2 {
-        visible: gameModel.nuColors == 4 && gameModel.nuPlayers == 2
+        visible: gameModel.nuColors === 4 && gameModel.nuPlayers === 2
         value: points0 + points2
         isFinal: ! hasMoves0 && ! hasMoves2
         pointSize: root.pointSize
@@ -35,7 +35,7 @@ Row {
         color2: gameDisplay.color2[0]
     }
     ScoreElement2 {
-        visible: gameModel.nuColors == 4 && gameModel.nuPlayers == 2
+        visible: gameModel.nuColors === 4 && gameModel.nuPlayers === 2
         value: points1 + points3
         isFinal: ! hasMoves1 && ! hasMoves3
         pointSize: root.pointSize
@@ -73,7 +73,7 @@ Row {
         color: color2[0]
     }
     ScoreElement {
-        visible: gameModel.nuColors > 3 && gameModel.gameVariant != "classic_3"
+        visible: gameModel.nuColors > 3 && gameModel.gameVariant !== "classic_3"
         value: points3
         bonus: bonus3
         isFinal: ! hasMoves3
@@ -83,7 +83,7 @@ Row {
         color: color3[0]
     }
     ScoreElement2 {
-        visible: gameModel.gameVariant == "classic_3"
+        visible: gameModel.gameVariant === "classic_3"
         value: points3
         isAltColor: true
         isFinal: ! hasMoves3
