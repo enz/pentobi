@@ -244,7 +244,7 @@ Item
                                 anchors.fill: parent
                                 sourceComponent:
                                     analyzeGameModel.elements.length > 0
-                                    || analyzeGameModel.isRunning || item ?
+                                    || analyzeGameModel.isRunning ?
                                         analyzeGameComponent : null
                                 onSourceComponentChanged:
                                     if (! sourceComponent)
