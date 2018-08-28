@@ -128,7 +128,8 @@ void TwoGtp::play_game(unsigned game_number)
                 resign = true;
                 break;
             }
-            mv = m_bd.from_string(response);
+            if (! m_bd.from_string(mv, response))
+                throw runtime_error("invalid move");
         }
         sgf.begin_node();
         sgf.write_property(string(1, static_cast<char>(toupper(color[0]))),

@@ -143,11 +143,7 @@ void Engine::cmd_move_info(Arguments args, Response& response)
     }
     catch (const Failure&)
     {
-        try
-        {
-            mv = bd.from_string(args.get());
-        }
-        catch (const runtime_error&)
+        if (! bd.from_string(mv, args.get()))
         {
             ostringstream msg;
             msg << "invalid argument '" << args.get()
@@ -334,16 +330,15 @@ void Engine::play(Color c, Arguments args, unsigned arg_move_begin)
     if (bd.get_nu_moves() >= Board::max_moves)
         throw Failure("too many moves");
     Move mv;
-    try
+    if (arg_move_begin == 0)
     {
-        if (arg_move_begin == 0)
-            mv = bd.from_string(args.get_line());
-        else
-            mv = bd.from_string(args.get_remaining_line(arg_move_begin - 1));
+        if (! bd.from_string(mv, args.get_line()))
+            throw Failure("invalid move ");
     }
-    catch (const runtime_error& e)
+    else
     {
-        throw Failure(e.what());
+        if (! bd.from_string(mv, args.get_remaining_line(arg_move_begin - 1)))
+            throw Failure("invalid move ");
     }
     if (mv.is_null())
         throw Failure("play pass not supported (anymore)");

@@ -123,14 +123,10 @@ Setup::PlacementList PentobiTree::get_setup_property(const SgfNode& node,
         {
             if (result.size() == Setup::PlacementList::max_size)
                 throw InvalidProperty(id, s);
-            try
-            {
-                result.push_back(m_bc->from_string(s));
-            }
-            catch (const runtime_error&)
-            {
+            Move mv;
+            if (! m_bc->from_string(mv, s))
                 throw InvalidProperty(id, s);
-            }
+            result.push_back(mv);
         }
     return result;
 }

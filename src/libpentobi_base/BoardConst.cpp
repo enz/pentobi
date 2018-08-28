@@ -1127,10 +1127,13 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
     }
 }
 
-Move BoardConst::from_string(const string& s) const
+bool BoardConst::from_string(Move& mv, const string& s) const
 {
     if (s == "null")
-        return Move::null();
+    {
+        mv = Move::null();
+        return true;
+    }
     MovePoints points;
     auto begin = s.begin();
     auto end = begin;
@@ -1140,19 +1143,16 @@ Move BoardConst::from_string(const string& s) const
             ++end;
         Point p;
         if (! m_geo.from_string(begin, end, p))
-            throw runtime_error("illegal move (invalid point)");
+            return false;
         if (points.size() == MovePoints::max_size)
-            throw runtime_error("illegal move (too many points)");
+            return false;
         points.push_back(p);
         if (end == s.end())
             break;
         ++end;
         begin = end;
     }
-    Move mv;
-    if (! find_move(points, mv))
-        throw runtime_error("illegal move");
-    return mv;
+    return find_move(points, mv);
 }
 
 const BoardConst& BoardConst::get(Variant variant)

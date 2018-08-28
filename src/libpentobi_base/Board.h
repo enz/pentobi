@@ -289,7 +289,8 @@ public:
     string to_string(Move mv, bool with_piece_name = false) const;
 
     /** See BoardConst::from_string() */
-    Move from_string(const string& s) const;
+    bool from_string(Move& mv, const string& s) const {
+        return m_bc->from_string(mv, s); }
 
     bool find_move(const MovePoints& points, Move& mv) const;
 
@@ -498,11 +499,6 @@ inline bool Board::find_move(const MovePoints& points, Piece piece,
                              Move& mv) const
 {
     return m_bc->find_move(points, piece, mv);
-}
-
-inline Move Board::from_string(const string& s) const
-{
-    return m_bc->from_string(s);
 }
 
 inline unsigned Board::get_adj_status(Point p, Color c) const

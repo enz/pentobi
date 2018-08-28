@@ -35,14 +35,8 @@ void handle_setup_property(const SgfNode& node, const char* id, Color c,
     for (auto& s : node.get_multi_property(id))
     {
         Move mv;
-        try
-        {
-            mv = bd.from_string(s);
-        }
-        catch (const runtime_error& e)
-        {
-            throw SgfError(e.what());
-        }
+        if (! bd.from_string(mv, s))
+            throw SgfError("invalid move " + s);
         Piece piece = bd.get_move_piece(mv);
         if (! pieces_left[c].remove(piece))
             throw SgfError("piece played twice");
@@ -59,14 +53,8 @@ void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
     for (auto& s : node.get_multi_property("AE"))
     {
         Move mv;
-        try
-        {
-            mv = bd.from_string(s);
-        }
-        catch (const runtime_error& e)
-        {
-            throw SgfError(e.what());
-        }
+        if (! bd.from_string(mv, s))
+            throw SgfError("invalid move " + s);
         for (Color c : bd.get_colors())
         {
             if (setup.placements[c].remove(mv))

@@ -20,7 +20,8 @@ using namespace libpentobi_base;
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_const_move_string)
 {
     auto& bc = BoardConst::get(Variant::duo);
-    Move mv = bc.from_string("h7,i7,i6,j6,j5");
+    Move mv;
+    LIBBOARDGAME_CHECK(bc.from_string(mv, "h7,i7,i6,j6,j5"));
     LIBBOARDGAME_CHECK_EQUAL(bc.to_string(mv), "j5,i6,j6,h7,i7");
 }
 
@@ -28,11 +29,12 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_const_move_string)
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_const_symmetry_info)
 {
     auto& bc = BoardConst::get(Variant::trigon_2);
-    auto& info_ext_2 =
-        bc.get_move_info_ext_2(bc.from_string("q9,q10,r10,q11,r11,s11"));
+    Move mv;
+    LIBBOARDGAME_CHECK(bc.from_string(mv, "q9,q10,r10,q11,r11,s11"));
+    auto& info_ext_2 = bc.get_move_info_ext_2(mv);
     LIBBOARDGAME_CHECK(! info_ext_2.breaks_symmetry);
-    LIBBOARDGAME_CHECK_EQUAL(info_ext_2.symmetric_move.to_int(),
-                             bc.from_string("q8,r8,s8,r9,s9,s10").to_int());
+    LIBBOARDGAME_CHECK(bc.from_string(mv, "q8,r8,s8,r9,s9,s10"));
+    LIBBOARDGAME_CHECK_EQUAL(info_ext_2.symmetric_move.to_int(), mv.to_int());
 }
 
 //-----------------------------------------------------------------------------

@@ -18,7 +18,11 @@ namespace {
 
 void play(Board& bd, Color c, const char* s)
 {
-    bd.play(c, bd.from_string(s));
+    Move mv;
+    auto ok = bd.from_string(mv, s);
+    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(ok);
+    LIBBOARDGAME_ASSERT(ok);
+    bd.play(c, mv);
 }
 
 } // namespace

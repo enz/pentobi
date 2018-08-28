@@ -150,7 +150,7 @@ public:
         files and GTP interface used by Pentobi (version >= 0.2). */
     string to_string(Move mv, bool with_piece_name = false) const;
 
-    Move from_string(const string& s) const;
+    bool from_string(Move& mv, const string& s) const;
 
     /** Sort move points using the ordering used in blksgf files. */
     void sort(MovePoints& points) const;
