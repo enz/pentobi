@@ -9,7 +9,7 @@ function analyzeGame(nuSimulations) {
         showInfo(qsTr("Game analysis is only possible in main variation."))
         return
     }
-    gameDisplay.startAnalysis();
+    gameDisplay.startAnalysis()
     cancelRunning()
     analyzeGameModel.start(gameModel, playerModel, nuSimulations)
 }
