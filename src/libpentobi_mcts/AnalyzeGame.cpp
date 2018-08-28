@@ -59,7 +59,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
             {
                 // Root shouldn't contain moves in SGF files
                 m_moves.push_back(mv);
-                m_values.push_back(tie_value);
+                m_values.push_back(static_cast<double>(tie_value));
             }
             else
             {
@@ -82,7 +82,8 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                     if (get_abort())
                         break;
                     m_moves.push_back(mv);
-                    m_values.push_back(search.get_root_val().get_mean());
+                    m_values.push_back(static_cast<double>(
+                                           search.get_root_val().get_mean()));
                 }
                 catch (const SgfError&)
                 {
