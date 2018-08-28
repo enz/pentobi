@@ -175,14 +175,21 @@ void AnalyzeGameModel::loadAutoSave(GameModel* gameModel)
         if (index >= size)
             return;
         auto moveString = list[index++].toString();
-        auto mv = bd.from_string(moveString.toLatin1().constData());
-        if (mv.is_null())
+        try
+        {
+            auto mv = bd.from_string(moveString.toLatin1().constData());
+            if (mv.is_null())
+                return;
+            if (index >= size)
+                return;
+            auto value = list[index++].toDouble();
+            moves.push_back(ColorMove(Color(static_cast<Color::IntType>(color)), mv));
+            values.push_back(value);
+        }
+        catch (runtime_error&)
+        {
             return;
-        if (index >= size)
-            return;
-        auto value = list[index++].toDouble();
-        moves.push_back(ColorMove(Color(static_cast<Color::IntType>(color)), mv));
-        values.push_back(value);
+        }
     }
     m_analyzeGame.set(bd.get_variant(), moves, values);
     updateElements();

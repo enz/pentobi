@@ -18,6 +18,7 @@ Android version:
 * Changed text color on purple pieces to white to make it more readable.
 * Game info was not updated after loading a file.
 * Rating dialog did not show game variant in Callisto (2 players, 4 colors)
+* Don't crash if game analysis stored in settings was not valid.
 
 
 Version 15.0 (28 Jun 2018)
