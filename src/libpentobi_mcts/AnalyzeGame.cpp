@@ -50,6 +50,14 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     node = &root;
     unsigned move_number = 0;
     auto tie_value = Search::SearchParamConst::tie_value;
+    const auto max_count = Float(nu_simulations);
+    double max_time = 0;
+    // Set min_simulations to a reasonable value because nu_simulations can be
+    // reached without having that many value updates if a subtree from a
+    // previous search is reused (which re-initializes the value and value
+    // count of the new root from the best child)
+    size_t min_simulations = min(size_t(100), nu_simulations);
+    Move dummy;
     do
     {
         auto mv = tree.get_move(*node);
@@ -68,16 +76,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                 {
                     updater.update(*bd, tree, node->get_parent());
                     LIBBOARDGAME_LOG("Analyzing move ", bd->get_nu_moves());
-                    const auto max_count = Float(nu_simulations);
-                    double max_time = 0;
-                    // Set min_simulations to a reasonable value because
-                    // nu_simulations can be reached without having that many
-                    // value updates if a subtree from a previous search is
-                    // reused (which re-initializes the value and value count
-                    // of the new root from the best child)
-                    size_t min_simulations = min(size_t(100), nu_simulations);
-                    Move computer_mv;
-                    search.search(computer_mv, *bd, mv.color, max_count,
+                    search.search(dummy, *bd, mv.color, max_count,
                                   min_simulations, max_time, time_source);
                     if (get_abort())
                         break;
@@ -87,12 +86,30 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                 }
                 catch (const SgfError&)
                 {
-                    // BoardUpdater::update() can throw on invalid SGF tree
-                    // read from external file. We simply abort the analysis.
                     break;
                 }
             }
             ++move_number;
+        }
+        if (! node->has_children())
+        {
+            updater.update(*bd, tree, *node);
+            LIBBOARDGAME_LOG("Analyzing last position");
+            Color c;
+            if (bd->is_game_over() && ! m_moves.empty())
+                // If game is over, analyze last position from viewpoint of
+                // color that played the last move to avoid using a color that
+                // might have run out of moves much earlier.
+                c = m_moves.back().color;
+            else
+                c = bd->get_effective_to_play();
+            search.search(dummy, *bd, c, max_count, min_simulations, max_time,
+                          time_source);
+            if (get_abort())
+                break;
+            m_moves.emplace_back(c, Move::null());
+            m_values.push_back(static_cast<double>(
+                                   search.get_root_val().get_mean()));
         }
         node = node->get_first_child_or_null();
     }

@@ -85,6 +85,7 @@ Item
         showStatus(qsTr("Running game analysis…"))
     }
     function endAnalysis() { if (! messageTimer.running) clearStatus() }
+    function analysisAutoloaded() { pageIndicator.currentIndex = 1 }
     function searchCallback(elapsedSeconds, remainingSeconds) {
         // If the search is longer than 10 sec, we show the (maximum) remaining
         // time (only during a move generation, ignore search callbacks during
@@ -129,7 +130,6 @@ Item
     Settings {
         property alias enableAnimations: root.enableAnimations
         property alias moveMarking: root.moveMarking
-        property alias pageIndicatorCurrentIndex: pageIndicator.currentIndex
         property alias showCoordinates: root.showCoordinates
         property alias setupMode: root.setupMode
 

@@ -76,6 +76,7 @@ Item
     function endSearch() { }
     function startAnalysis() { showAnalyzeGame() }
     function endAnalysis() { }
+    function analysisAutoloaded() { }
     function openBoardContextMenu(moveNumber, x, y) {
         if (! boardContextMenu.item)
             boardContextMenu.sourceComponent = boardContextMenuComponent

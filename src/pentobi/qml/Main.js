@@ -323,8 +323,9 @@ function init() {
         showQuestion(qsTr("File has been modified by another application. Reload?"), reloadFile)
         return
     }
-    else
-        analyzeGameModel.loadAutoSave(gameModel)
+    analyzeGameModel.loadAutoSave(gameModel)
+    if (analyzeGameModel.elements.length > 0)
+        gameDisplay.analysisAutoloaded()
     // initialFile is a context property set from command line argument
     if (initialFile) {
         if (gameModel.isModified)

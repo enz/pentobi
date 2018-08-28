@@ -1129,6 +1129,8 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
 
 Move BoardConst::from_string(const string& s) const
 {
+    if (s == "null")
+        return Move::null();
     MovePoints points;
     auto begin = s.begin();
     auto end = begin;
