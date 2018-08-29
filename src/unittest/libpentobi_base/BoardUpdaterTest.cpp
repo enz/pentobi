@@ -79,7 +79,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_inner_node)
     LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(1)), ScoreType(10));
 }
 
-/** Test removing a piece with the AE property. */
+/** Test removing a piece of Color(0) with the AE property. */
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty)
 {
     istringstream in("(;GM[Blokus Duo]"
@@ -99,6 +99,28 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty)
     LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_moves(), 0u);
     LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(0)), ScoreType(0));
     LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(1)), ScoreType(5));
+}
+
+/** Test removing a piece of Color(1) with the AE property. */
+LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty_1)
+{
+    istringstream in("(;GM[Blokus Duo]"
+                     " ;W[e8,e9,f9,d10,e10]"
+                     " ;B[j7,j8,j9,k9,j10]"
+                     " ;AE[e8,e9,f9,d10,e10])");
+    TreeReader reader;
+    reader.read(in);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
+    auto bd = make_unique<Board>(tree.get_variant());
+    BoardUpdater updater;
+    auto& node = get_last_node(tree.get_root());
+    updater.update(*bd, tree, node);
+    // BoardUpdater merges setup properties with existing position, so
+    // get_nu_moves() should return the number of moves played after the setup
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_moves(), 0u);
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(0)), ScoreType(5));
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(1)), ScoreType(0));
 }
 
 //-----------------------------------------------------------------------------

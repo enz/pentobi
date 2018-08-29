@@ -1,6 +1,10 @@
 Version 15.0.UNKNOWN (v15-fixes)
 ================================
 
+General:
+
+* Fixed bug in handling AddEmpty SGF property.
+
 Desktop version:
 
 * Avoid duplicate menu mnemonics and fixed minor errors in translations.

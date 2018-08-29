@@ -80,7 +80,6 @@ void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
                 pieces_left[c].push_back(piece);
                 break;
             }
-            throw SgfError("invalid value for AE property");
         }
     }
 }
