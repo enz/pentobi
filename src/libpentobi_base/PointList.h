@@ -14,7 +14,7 @@ namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
-using PointList = ArrayList<Point, Point::range_onboard>;
+using PointList = libboardgame_util::ArrayList<Point, Point::range_onboard>;
 
 //-----------------------------------------------------------------------------
 

@@ -9,6 +9,7 @@
 
 #include "ColorMap.h"
 #include "Move.h"
+#include "libboardgame_util/ArrayList.h"
 
 namespace libpentobi_base {
 
@@ -22,7 +23,7 @@ struct Setup
     /** Maximum number of pieces on board per color. */
     static const unsigned max_pieces = 24;
 
-    using PlacementList = ArrayList<Move, max_pieces>;
+    using PlacementList = libboardgame_util::ArrayList<Move, max_pieces>;
 
 
     Color to_play = Color(0);

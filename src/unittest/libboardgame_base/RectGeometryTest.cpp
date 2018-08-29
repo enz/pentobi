@@ -15,7 +15,7 @@ using namespace std;
 using Point = libboardgame_base::Point<19 * 19, 19, 19, unsigned short>;
 using Geometry = libboardgame_base::Geometry<Point>;
 using RectGeometry = libboardgame_base::RectGeometry<Point>;
-using PointList = libboardgame_base::ArrayList<Point, Point::range_onboard>;
+using PointList = libboardgame_util::ArrayList<Point, Point::range_onboard>;
 
 //-----------------------------------------------------------------------------
 
