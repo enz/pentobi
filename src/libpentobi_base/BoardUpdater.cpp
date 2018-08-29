@@ -59,15 +59,8 @@ void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
             if (setup.placements[c].remove(mv))
             {
                 Piece piece = bd.get_move_piece(mv);
-                unsigned n = 0;
-                for (auto p : pieces_left[c])
-                    if (p == piece)
-                        ++n;
-                if (n < bd.get_nu_piece_instances(piece))
-                {
-                    pieces_left[c].push_back(piece);
-                    break;
-                }
+                pieces_left[c].push_back(piece);
+                break;
             }
     }
 }
