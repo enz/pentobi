@@ -36,7 +36,6 @@ Item {
             leftMargin: 0.2 * point.width
             verticalCenter: root.verticalCenter
         }
-        verticalAlignment: Text.AlignVCenter
         font { pixelSize: 1.4 * pointSize; preferShaping: false }
     }
 }
