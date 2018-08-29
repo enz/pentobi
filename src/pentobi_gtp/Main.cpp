@@ -92,7 +92,7 @@ int main(int argc, char** argv)
 #ifdef VERSION
             cout << "Pentobi " << VERSION << '\n';
 #else
-            cout << "Pentobi UNKNONW";
+            cout << "Pentobi unknown version";
 #endif
             return 0;
         }

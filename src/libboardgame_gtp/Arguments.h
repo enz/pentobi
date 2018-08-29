@@ -65,13 +65,13 @@ public:
     template<typename T>
     T parse() const;
 
-    /** Get argument converted to a type and check against a minum value.
+    /** Get argument converted to a type and check against a minimum value.
         The type must implement operator<< and operator<
         @param i Argument index starting with 0
         @param min Minimum allowed value
         @return Argument value
         @throws Failure If no such argument, argument cannot be converted
-        or smaller than the mimimum value */
+        or smaller than the minimum value */
     template<typename T>
     T parse_min(unsigned i, T min) const;
 

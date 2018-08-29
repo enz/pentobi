@@ -114,7 +114,7 @@ struct TestRegistrar
         catch (...)                                                     \
         {                                                               \
             throw TestFail(__FILE__, __LINE__,                          \
-                           "Unexcpected exception was thrown");         \
+                           "Unexpected exception was thrown");         \
         }                                                               \
     }
 

@@ -352,7 +352,7 @@ public:
         This cannot be done in the constructor because it uses the virtual
         function create_state(). This function will automatically be called
         before a search if the threads have not been constructed yet, but it
-        is advisable to explicitely call it in the constructor of the subclass
+        is advisable to explicitly call it in the constructor of the subclass
         to save some time at the first move generation where the game clock
         might already be running. */
     void create_threads();

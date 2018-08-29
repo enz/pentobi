@@ -40,7 +40,7 @@ using libpentobi_base::Variant;
     class.
     This class incrementally keeps track of the legal moves.
     The randomization in the playouts is done by assigning a heuristically
-    tuned gamma value to each move. The gamma value determines the probabilty
+    tuned gamma value to each move. The gamma value determines the probability
     that a move is played in the playout phase. */
 class State
 {

@@ -38,7 +38,7 @@ public:
     /** Set seed to last seed for all currently existing and future
         generators.
         Sets the seed to the last seed that was set with set_seed(). If no seed
-        was explicitely defined with set_seed(), then this function does
+        was explicitly defined with set_seed(), then this function does
         nothing. */
     static void set_global_seed_last();
 

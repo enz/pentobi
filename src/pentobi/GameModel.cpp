@@ -88,7 +88,7 @@ QPointF getGameCoord(const Board& bd, Move mv)
 }
 
 /** Board uses 4 starting points per Color in GembloQ for technical reasons,
-    GameModel only needs one for diplaying the colored dot, shifted to the
+    GameModel only needs one for displaying the colored dot, shifted to the
     center of a square. */
 QPointF getGembloQStartingPoint(const Board& bd, Color c)
 {
@@ -301,7 +301,7 @@ bool GameModel::checkFileModifiedOutside()
 }
 
 /** Check if setup is allowed in the current position.
-    Currently, we supprt setup mode only if no moves have been played. It
+    Currently, we support setup mode only if no moves have been played. It
     should also work in inner nodes but this might be confusing for users and
     violate some assumptions in the user interface (e.g. node depth is equal to
     move number).*/

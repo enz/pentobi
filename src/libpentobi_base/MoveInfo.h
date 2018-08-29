@@ -105,8 +105,8 @@ struct MoveInfoExt2
     uint_least8_t scored_points_size;
 
     /** The rotational-symmetric counterpart to this move.
-        Only initalized for game variants that have rotational-symmetric boards
-        and starting points. */
+        Only initialized for game variants that have rotational-symmetric
+        boards and starting points. */
     Move symmetric_move;
 
     Point label_pos;

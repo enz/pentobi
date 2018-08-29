@@ -344,7 +344,7 @@ void Engine::play(Color c, Arguments args, unsigned arg_move_begin)
         throw Failure("play pass not supported (anymore)");
     // Board::play() can handle illegal moves at arbitrary positions, even
     // overlapping, but it does not check (for performance reasons) if the
-    // piece-left count is alreay zero.
+    // piece-left count is already zero.
     if (! bd.is_piece_left(c, bd.get_move_piece(mv)))
         throw Failure("piece already played");
     if (! m_accept_illegal && ! bd.is_legal(c, mv))

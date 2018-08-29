@@ -136,7 +136,7 @@ public:
     }
 
     /** Only initialized in game variants with central symmetry of board
-        including startign points. */
+        including starting points. */
     const SymmetricPoints& get_symmetrc_points() const
     {
         return m_symmetric_points;

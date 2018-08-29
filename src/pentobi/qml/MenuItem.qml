@@ -39,7 +39,7 @@ MenuItem {
 
     height: Math.round(font.pixelSize * (isDesktop ? 1.9 : 2.2)
                        * Screen.devicePixelRatio) / Screen.devicePixelRatio
-    // Explicitely set hoverEnabled to true, otherwise hover highlighting and
+    // Explicitly set hoverEnabled to true, otherwise hover highlighting and
     // submenu opening doesn't work in KDE on Ubuntu 18.10 (bug in Qt?)
     hoverEnabled: true
     Keys.onPressed:

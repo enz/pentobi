@@ -20,7 +20,7 @@ class Game
 {
 public:
     /** Determine a sensible value for the color to play at the current node.
-        If the color was explicitely set with a setup property, it will be
+        If the color was explicitly set with a setup property, it will be
         used. Otherwise, the effective color to play will be used, starting
         with the next color of the color of the last move (see
         Board::get_effective_to_play(Color))  */
@@ -68,7 +68,7 @@ public:
     /** Update game state to a node in the tree.
         @throws InvalidTree, if the game was constructed with an
         external SGF tree and the tree contained invalid property values
-        (syntactically or sematically, like moves on occupied points). If an
+        (syntactically or semantically, like moves on occupied points). If an
         exception is thrown, the current node is not changed. */
     void goto_node(const SgfNode& node);
 

@@ -26,7 +26,7 @@ using libpentobi_base::Variant;
 
     Keeps statistics of the average game result for each move and player.
     This class can also speed up playing test games by generating opening moves
-    according to the measured probability distributions. With some probabilty,
+    according to the measured probability distributions. With some probability,
     which decreases with the number of times a position was visited but stays
     non-zero, the player generates a real move, which is used to update the
     distributions, otherwise a move from the tree is played. In the limit, the
