@@ -123,4 +123,24 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty_1)
     LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(1)), ScoreType(0));
 }
 
+/** Test removing a piece in a game variant with multiple instances per
+    piece. */
+LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty_multi_instance)
+{
+    istringstream in("(;GM[Blokus Junior];B[e10];W[j5];B[f9];AE[f9][e10])");
+    TreeReader reader;
+    reader.read(in);
+    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    PentobiTree tree(root);
+    auto bd = make_unique<Board>(tree.get_variant());
+    BoardUpdater updater;
+    auto& node = get_last_node(tree.get_root());
+    updater.update(*bd, tree, node);
+    // BoardUpdater merges setup properties with existing position, so
+    // get_nu_moves() should return the number of moves played after the setup
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_moves(), 0u);
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(0)), ScoreType(0));
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(1)), ScoreType(1));
+}
+
 //-----------------------------------------------------------------------------
