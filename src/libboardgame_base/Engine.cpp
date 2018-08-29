@@ -28,7 +28,7 @@ Engine::Engine()
 void Engine::cmd_cputime(Response& response)
 {
     double time = libboardgame_sys::cpu_time();
-    if (time == -1)
+    if (time < 0)
         throw Failure("cannot determine cpu time");
     response << time;
 }

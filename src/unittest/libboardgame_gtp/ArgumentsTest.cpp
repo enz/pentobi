@@ -62,7 +62,7 @@ LIBBOARDGAME_TEST_CASE(gtp_arguments_float)
     CmdLine line("command abc 5.5");
     Arguments args(line);
     LIBBOARDGAME_CHECK_THROW(args.parse<float>(0), Failure);
-    LIBBOARDGAME_CHECK_CLOSE(5.5f, args.parse<float>(1), 1e-4);
+    LIBBOARDGAME_CHECK_CLOSE(5.5f, args.parse<float>(1), 1e-4f);
 }
 
 LIBBOARDGAME_TEST_CASE(gtp_arguments_int)

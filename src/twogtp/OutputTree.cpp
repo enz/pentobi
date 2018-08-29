@@ -25,7 +25,7 @@ using libpentobi_base::get_transformed;
 namespace {
 
 void add(PentobiTree& tree, const SgfNode& node, bool is_player_black,
-         bool is_real_move, float result)
+         bool is_real_move, double result)
 {
     unsigned index = is_player_black ? 0 : 1;
     array<unsigned, 2> count;
@@ -103,8 +103,9 @@ OutputTree::OutputTree(Variant variant)
 
 OutputTree::~OutputTree() = default; // Non-inline to avoid GCC -Winline warning
 
-void OutputTree::add_game(const Board& bd, unsigned player_black, float result,
-                          const array<bool, Board::max_moves>& is_real_move)
+void OutputTree::add_game(const Board& bd, unsigned player_black,
+                          double result, const array<bool,
+                          Board::max_moves>& is_real_move)
 {
     if (bd.has_setup())
         throw runtime_error("OutputTree: setup not supported");

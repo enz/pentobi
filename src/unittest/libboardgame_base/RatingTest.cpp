@@ -35,8 +35,8 @@ LIBBOARDGAME_TEST_CASE(boardgame_rating_update_1)
     Rating new_b = b;
     new_a.update(0, b, 10);
     new_b.update(1, a, 10);
-    LIBBOARDGAME_CHECK_CLOSE_EPS(new_a.get(), 2798.f, 1);
-    LIBBOARDGAME_CHECK_CLOSE_EPS(new_b.get(), 2585.f, 1);
+    LIBBOARDGAME_CHECK_CLOSE_EPS(new_a.get(), 2798, 1);
+    LIBBOARDGAME_CHECK_CLOSE_EPS(new_b.get(), 2585, 1);
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_rating_update_2)
@@ -47,8 +47,8 @@ LIBBOARDGAME_TEST_CASE(boardgame_rating_update_2)
     Rating new_b = b;
     new_a.update(1, b, 10);
     new_b.update(0, a, 10);
-    LIBBOARDGAME_CHECK_CLOSE_EPS(new_a.get(), 2808.f, 1);
-    LIBBOARDGAME_CHECK_CLOSE_EPS(new_b.get(), 2575.f, 1);
+    LIBBOARDGAME_CHECK_CLOSE_EPS(new_a.get(), 2808, 1);
+    LIBBOARDGAME_CHECK_CLOSE_EPS(new_b.get(), 2575, 1);
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_rating_update_3)
@@ -59,8 +59,8 @@ LIBBOARDGAME_TEST_CASE(boardgame_rating_update_3)
     Rating new_b = b;
     new_a.update(0.5, b, 10);
     new_b.update(0.5, a, 10);
-    LIBBOARDGAME_CHECK_CLOSE_EPS(new_a.get(), 2803.f, 1);
-    LIBBOARDGAME_CHECK_CLOSE_EPS(new_b.get(), 2580.f, 1);
+    LIBBOARDGAME_CHECK_CLOSE_EPS(new_a.get(), 2803, 1);
+    LIBBOARDGAME_CHECK_CLOSE_EPS(new_b.get(), 2580, 1);
 }
 
 //-----------------------------------------------------------------------------

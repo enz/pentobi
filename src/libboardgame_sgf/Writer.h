@@ -66,7 +66,7 @@ private:
 
     int m_indent = 0;
 
-    int m_current_indent = 0;
+    unsigned m_current_indent = 0;
 
     unsigned m_level = 0;
 
@@ -120,8 +120,8 @@ void Writer::write_property(const string& id, const vector<T>& values)
                 && ! is_first_value && m_indent >= 0)
         {
             m_out << '\n';
-            auto indent = static_cast<int>(m_current_indent + 1 + id.size());
-            for (int i = 0; i < indent; ++i)
+            auto indent = m_current_indent + 1 + id.size();
+            for (unsigned i = 0; i < indent; ++i)
                 m_out << ' ';
         }
         m_out << '[' << get_escaped(to_string(i)) << ']';

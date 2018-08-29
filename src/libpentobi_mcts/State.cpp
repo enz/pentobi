@@ -536,8 +536,8 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score)
 inline Float State::get_quality_bonus_attach_twocolor()
 {
     LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
-    int n = m_bd.get_attach_points(Color(0)).size()
-            - m_bd.get_attach_points(Color(1)).size();
+    int n = static_cast<int>(m_bd.get_attach_points(Color(0)).size())
+            - static_cast<int>(m_bd.get_attach_points(Color(1)).size());
     for (Point p : m_bd.get_attach_points(Color(0)))
         n -= static_cast<int>(m_bd.is_forbidden(p, Color(0)));
     for (Point p : m_bd.get_attach_points(Color(1)))
@@ -556,10 +556,10 @@ inline Float State::get_quality_bonus_attach_multicolor()
 {
     LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
     LIBBOARDGAME_ASSERT(m_bd.get_nu_colors() == 4);
-    int n = m_bd.get_attach_points(Color(0)).size()
-            + m_bd.get_attach_points(Color(2)).size()
-            - m_bd.get_attach_points(Color(1)).size()
-            - m_bd.get_attach_points(Color(3)).size();
+    int n = static_cast<int>(m_bd.get_attach_points(Color(0)).size())
+            + static_cast<int>(m_bd.get_attach_points(Color(2)).size())
+            - static_cast<int>(m_bd.get_attach_points(Color(1)).size())
+            - static_cast<int>(m_bd.get_attach_points(Color(3)).size());
     for (Point p : m_bd.get_attach_points(Color(0)))
         n -= static_cast<int>(m_bd.is_forbidden(p, Color(0)));
     for (Point p : m_bd.get_attach_points(Color(2)))

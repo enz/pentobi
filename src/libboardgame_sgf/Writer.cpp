@@ -28,8 +28,8 @@ void Writer::begin_tree()
     write_indent();
     m_out << '(';
     // Don't indent the first level
-    if (m_level > 0)
-        m_current_indent += m_indent;
+    if (m_level > 0 && m_indent >= 0)
+        m_current_indent += static_cast<unsigned>(m_indent);
     ++m_level;
     if (m_indent >= 0)
         m_out << '\n';
@@ -44,8 +44,8 @@ void Writer::end_node()
 void Writer::end_tree()
 {
     --m_level;
-    if (m_level > 0)
-        m_current_indent -= m_indent;
+    if (m_level > 0 && m_indent >= 0)
+        m_current_indent -= static_cast<unsigned>(m_indent);
     write_indent();
     m_out << ')';
     if (m_indent >= 0)
@@ -71,7 +71,7 @@ string Writer::get_escaped(const string& s)
 void Writer::write_indent()
 {
     if (m_indent >= 0)
-        for (int i = 0; i < m_current_indent; ++i)
+        for (unsigned i = 0; i < m_current_indent; ++i)
             m_out << ' ';
 }
 

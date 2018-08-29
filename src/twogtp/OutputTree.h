@@ -56,7 +56,7 @@ public:
                        Move& mv);
 
     /** Add the moves of a game to the tree and update the move counters. */
-    void add_game(const Board& bd, unsigned player_black, float result,
+    void add_game(const Board& bd, unsigned player_black, double result,
                   const array<bool, Board::max_moves>& is_real_move);
 
 private:

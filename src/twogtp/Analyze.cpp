@@ -40,7 +40,7 @@ void analyze(const string& file)
     ifstream in(file);
     Statistics<> stat_result;
     map<unsigned, Statistics<>> stat_result_player;
-    map<float, unsigned> result_count;
+    map<double, unsigned> result_count;
     StatisticsExt<> stat_length;
     StatisticsExt<> stat_cpu_b;
     StatisticsExt<> stat_cpu_w;
@@ -54,11 +54,11 @@ void analyze(const string& file)
         auto columns = split(line, '\t');
         if (columns.empty())
             continue;
-        float result;
+        double result;
         unsigned length;
         unsigned player;
-        float cpu_b;
-        float cpu_w;
+        double cpu_b;
+        double cpu_w;
         unsigned fast_open;
         if (columns.size() != 7
                 || ! from_string(columns[1], result)

@@ -109,9 +109,9 @@ void Engine::cmd_loadsgf(Arguments args)
 {
     args.check_size_less_equal(2);
     string file = args.get(0);
-    int move_number = -1;
+    unsigned move_number = 0;
     if (args.get_size() == 2)
-        move_number = args.parse_min<int>(1, 1) - 1;
+        move_number = args.parse_min<unsigned>(1, 1);
     try
     {
         TreeReader reader;
@@ -119,8 +119,8 @@ void Engine::cmd_loadsgf(Arguments args)
         auto tree = reader.get_tree_transfer_ownership();
         m_game.init(tree);
         const SgfNode* node = nullptr;
-        if (move_number != -1)
-            node = m_game.get_tree().get_node_before_move_number(move_number);
+        if (move_number > 0)
+            node = m_game.get_tree().get_node_before_move_number(move_number - 1);
         if (node == nullptr)
             node = &get_last_node(m_game.get_root());
         m_game.goto_node(*node);
@@ -204,7 +204,7 @@ void Engine::cmd_play(Arguments args)
 void Engine::cmd_point_integers(Response& response)
 {
     auto& geo = get_board().get_geometry();
-    Grid<int> grid;
+    Grid<Point::IntType> grid;
     for (Point p : geo)
         grid[p] = p.to_int();
     response << '\n' << grid.to_string(geo);

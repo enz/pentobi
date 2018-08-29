@@ -40,35 +40,20 @@ struct CmdLineRange
         return equal(m_begin, m_end, s.begin(), s.end());
     }
 
-    bool operator!=(const string& s) const
-    {
-        return ! operator==(s);
-    }
+    bool operator!=(const string& s) const { return ! operator==(s); }
 
-    operator string() const
-    {
-        return string(m_begin, m_end);
-    }
+    operator string() const { return string(m_begin, m_end); }
 
-    string::const_iterator begin() const
-    {
-        return m_begin;
-    }
+    string::const_iterator begin() const { return m_begin; }
 
-    string::const_iterator end() const
-    {
-        return m_end;
-    }
+    string::const_iterator end() const { return m_end; }
 
     string::size_type size() const
     {
-        return m_end - m_begin;
+        return static_cast<string::size_type>(m_end - m_begin);
     }
 
-    void write(ostream& o) const
-    {
-        o << string(*this);
-    }
+    void write(ostream& o) const { o << string(*this); }
 };
 
 //-----------------------------------------------------------------------------

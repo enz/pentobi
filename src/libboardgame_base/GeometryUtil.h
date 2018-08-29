@@ -41,8 +41,8 @@ void normalize_offset(T begin, T end, unsigned& width, unsigned& height,
         if (i->y > max_y)
             max_y = i->y;
     }
-    width = max_x - min_x + 1;
-    height = max_y - min_y + 1;
+    width = static_cast<unsigned>(max_x - min_x + 1);
+    height = static_cast<unsigned>(max_y - min_y + 1);
     offset = CoordPoint(min_x, min_y);
     for (auto i = begin; i != end; ++i)
         *i -= offset;

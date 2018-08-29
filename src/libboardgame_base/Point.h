@@ -68,7 +68,7 @@ public:
     bool is_null() const;
 
     /** Return point as an integer between 0 and Point::range */
-    unsigned to_int() const;
+    IntType to_int() const;
 
 private:
     static const IntType value_uninitialized = range;
@@ -139,7 +139,7 @@ inline auto Point<M, W, H, I>::null() -> Point
 }
 
 template<unsigned M, unsigned W, unsigned H, typename I>
-inline unsigned Point<M, W, H, I>::to_int() const
+inline auto Point<M, W, H, I>::to_int() const -> IntType
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i;

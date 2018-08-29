@@ -42,23 +42,25 @@ public:
 
     void init(const CmdLine& c);
 
-    const string& get_line() const;
+    const string& get_line() const { return m_line; }
 
     /** Get command name. */
-    CmdLineRange get_name() const;
+    CmdLineRange get_name() const { return m_elem[m_idx_name]; }
+
 
     void write_id(ostream& out) const;
 
     CmdLineRange get_trimmed_line_after_elem(unsigned i) const;
 
-    const vector<CmdLineRange>& get_elements() const;
+    const vector<CmdLineRange>& get_elements() const { return m_elem; }
+
 
     const CmdLineRange& get_element(unsigned i) const;
 
-    int get_idx_name() const;
+    unsigned get_idx_name() const { return m_idx_name; }
 
 private:
-    int m_idx_name;
+    unsigned m_idx_name;
 
     /** Full command line. */
     string m_line;
@@ -72,30 +74,10 @@ private:
     void parse_id();
 };
 
-inline const vector<CmdLineRange>& CmdLine::get_elements() const
-{
-    return m_elem;
-}
-
 inline const CmdLineRange& CmdLine::get_element(unsigned i) const
 {
     assert(i < m_elem.size());
     return m_elem[i];
-}
-
-inline int CmdLine::get_idx_name() const
-{
-    return m_idx_name;
-}
-
-inline const string& CmdLine::get_line() const
-{
-    return m_line;
-}
-
-inline CmdLineRange CmdLine::get_name() const
-{
-    return m_elem[m_idx_name];
 }
 
 inline void CmdLine::write_id(ostream& out) const

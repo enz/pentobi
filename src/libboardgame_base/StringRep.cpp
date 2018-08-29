@@ -32,7 +32,7 @@ bool StdStringRep::read(string::const_iterator begin,
         c = tolower(*(p++));
         if (c < 'a' || c > 'z')
             return false;
-        x = 26 * x + (c - 'a' + 1);
+        x = 26 * x + static_cast<unsigned>(c - 'a' + 1);
         if (x > width)
             return false;
         read_x = true;
@@ -45,7 +45,7 @@ bool StdStringRep::read(string::const_iterator begin,
     while (p != end && isdigit(*p) != 0)
     {
         c = *(p++);
-        y = 10 * y + (c - '0');
+        y = 10 * y + static_cast<unsigned>((c - '0'));
         if (y > height)
             return false;
         read_y = true;

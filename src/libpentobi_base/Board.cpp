@@ -575,22 +575,23 @@ void Board::write(ostream& out, bool mark_last_move) const
         if (n > 0)
             last_mv = get_move(n - 1);
     }
-    int width = m_geo->get_width();
-    int height = m_geo->get_height();
+    auto width = m_geo->get_width();
+    auto height = m_geo->get_height();
     bool is_info_location_right = (width <= 20);
     bool is_trigon = (m_piece_set == PieceSet::trigon);
     bool is_nexos = (m_piece_set == PieceSet::nexos);
     bool is_gembloq = (m_piece_set == PieceSet::gembloq);
-    for (int y = 0; y < height; ++y)
+    for (unsigned y = 0; y < height; ++y)
     {
         if (height - y < 10)
             out << ' ';
         out << (height - y) << ' ';
-        for (int x = 0; x < width; ++x)
+        for (unsigned x = 0; x < width; ++x)
         {
             Point p = m_geo->get_point(x, y);
             bool is_offboard = p.is_null();
-            auto point_type = m_geo->get_point_type(x, y);
+            auto point_type = m_geo->get_point_type(static_cast<int>(x),
+                                                    static_cast<int>(y));
             if ((x > 0 || (is_trigon && x == 0 && m_geo->is_onboard(x + 1, y)))
                     && ! is_offboard)
             {
@@ -723,7 +724,9 @@ void Board::write(ostream& out, bool mark_last_move) const
             if (m_geo->is_onboard(width - 1, y))
             {
                 set_color(out, "\x1B[1;30;47m");
-                out << (m_geo->get_point_type(width - 1, y) != 1 ? '\\' : '/');
+                out << (m_geo->get_point_type(static_cast<int>(width - 1),
+                                              static_cast<int>(y)) != 1 ?
+                            '\\' : '/');
             }
             else
             {

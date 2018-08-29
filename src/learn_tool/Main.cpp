@@ -82,13 +82,13 @@ struct Features
 
     void operator+=(const Features& f)
     {
-        for (int i = 0; i < _nu_features; ++i)
+        for (unsigned i = 0; i < _nu_features; ++i)
              feature[i] = static_cast<IntType>(feature[i] + f.feature[i]);
     }
 
     void operator|=(const Features& f)
     {
-        for (int i = 0; i < _nu_features; ++i)
+        for (unsigned i = 0; i < _nu_features; ++i)
              feature[i] = feature[i] | f.feature[i];
     }
 };
@@ -364,7 +364,7 @@ void gen_train_data(const string& file, Variant& variant)
     while (has_more);
 }
 
-void print_weight(int i, const char* name, bool is_member = true)
+void print_weight(unsigned i, const char* name, bool is_member = true)
 {
     if (is_member)
         cout << "m_";
@@ -409,7 +409,7 @@ void print_weights()
 
 void init_weights()
 {
-    normal_distribution<Float> distribution(0.f, 0.01f);
+    normal_distribution<Float> distribution(0, 0.01);
     for (auto& w : weights)
         w = distribution(rand_gen);
 }
@@ -430,7 +430,7 @@ void train_step(unsigned step, bool print)
         {
             auto& feature = sample.features[i].feature;
             probs[i] = 0;
-            for (int j = 0; j < _nu_features; ++j)
+            for (unsigned j = 0; j < _nu_features; ++j)
                 probs[i] += weights[j] * feature[j];
             probs[i] = exp(probs[i]);
             sum += probs[i];
@@ -443,12 +443,12 @@ void train_step(unsigned step, bool print)
             auto& feature = sample.features[i].feature;
             if (i == sample.played_move)
             {
-                for (int j = 0; j < _nu_features; ++j)
+                for (unsigned j = 0; j < _nu_features; ++j)
                     grad_weights[j] -= (1 - p) * feature[j];
             }
             else
             {
-                for (int j = 0; j < _nu_features; ++j)
+                for (unsigned j = 0; j < _nu_features; ++j)
                     grad_weights[j] -= (-p) * feature[j];
             }
         }
@@ -457,7 +457,7 @@ void train_step(unsigned step, bool print)
 
     auto nu_samples = static_cast<Float>(samples.size());
     Float decay = 1e-3;
-    for (int i = 0; i < _nu_features; ++i)
+    for (unsigned i = 0; i < _nu_features; ++i)
     {
         auto& w = weights[i];
         auto dw = grad_weights[i] / nu_samples + decay * w;
