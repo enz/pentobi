@@ -44,6 +44,10 @@ Bug fixes:
 Version 15.0.UNKNOWN (v15-fixes)
 ================================
 
+General:
+
+* Fixed bugs in handling AE (add empty) SGF property.
+
 Desktop version:
 
 * Avoid duplicate menu mnemonics and fixed minor errors in translations.

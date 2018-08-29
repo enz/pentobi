@@ -56,16 +56,19 @@ void handle_setup_empty(const SgfNode& node, const Board& bd, Setup& setup,
         if (! bd.from_string(mv, s))
             throw SgfError("invalid move " + s);
         for (Color c : bd.get_colors())
-        {
             if (setup.placements[c].remove(mv))
             {
                 Piece piece = bd.get_move_piece(mv);
-                LIBBOARDGAME_ASSERT(! pieces_left[c].contains(piece));
-                pieces_left[c].push_back(piece);
-                break;
+                unsigned n = 0;
+                for (auto p : pieces_left[c])
+                    if (p == piece)
+                        ++n;
+                if (n < bd.get_nu_piece_instances(piece))
+                {
+                    pieces_left[c].push_back(piece);
+                    break;
+                }
             }
-            throw SgfError("invalid value for AE property");
-        }
     }
 }
 
