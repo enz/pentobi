@@ -7,10 +7,8 @@
 #ifndef LIBPENTOBI_BASE_BOARD_CONST_H
 #define LIBPENTOBI_BASE_BOARD_CONST_H
 
-#include "Geometry.h"
 #include "MoveInfo.h"
 #include "PieceInfo.h"
-#include "PieceTransforms.h"
 #include "PrecompMoves.h"
 #include "SymmetricPoints.h"
 #include "Variant.h"

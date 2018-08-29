@@ -11,7 +11,6 @@
 #include "PieceTransformsClassic.h"
 #include "PieceTransformsGembloQ.h"
 #include "PieceTransformsTrigon.h"
-#include "libboardgame_base/Transform.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_sys/Compiler.h"
 
