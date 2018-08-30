@@ -59,10 +59,10 @@ file(GLOB qml_SRC "qml/*.qml" "qml/*.js" "qml/i18n/*.ts" "qml/themes/*/*.qml")
 target_sources(pentobi PRIVATE ${qml_SRC})
 
 target_compile_definitions(pentobi PRIVATE
-    -DQT_DEPRECATED_WARNINGS
-    -DQT_DISABLE_DEPRECATED_BEFORE=0x051100
-    -DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT
-    -DVERSION="${PENTOBI_VERSION}"
+    QT_DEPRECATED_WARNINGS
+    QT_DISABLE_DEPRECATED_BEFORE=0x051100
+    QT_NO_NARROWING_CONVERSIONS_IN_CONNECT
+    VERSION="${PENTOBI_VERSION}"
     )
 
 target_link_libraries(pentobi

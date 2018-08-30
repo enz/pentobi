@@ -7,7 +7,7 @@ add_library(boardgame_mcts INTERFACE)
 
 if(LIBBOARDGAME_MCTS_SINGLE_THREAD)
   target_compile_definitions(boardgame_mcts INTERFACE
-      "-DLIBBOARDGAME_MCTS_SINGLE_THREAD")
+      LIBBOARDGAME_MCTS_SINGLE_THREAD)
 endif()
 
 target_include_directories(boardgame_mcts INTERFACE ..)

@@ -29,7 +29,7 @@ add_library(pentobi_mcts STATIC
 
 if(NOT LIBPENTOBI_MCTS_FLOAT_TYPE STREQUAL "float")
   target_compile_definitions(pentobi_mcts PUBLIC
-      "-DLIBPENTOBI_MCTS_FLOAT_TYPE=${LIBPENTOBI_MCTS_FLOAT_TYPE}")
+      LIBPENTOBI_MCTS_FLOAT_TYPE=${LIBPENTOBI_MCTS_FLOAT_TYPE})
 endif()
 
 target_include_directories(pentobi_mcts PUBLIC ..)
