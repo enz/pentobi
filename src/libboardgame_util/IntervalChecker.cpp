@@ -9,10 +9,6 @@
 #include <limits>
 #include "Assert.h"
 
-#ifdef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
-#include "Log.h"
-#endif
-
 namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
@@ -23,10 +19,6 @@ IntervalChecker::IntervalChecker(TimeSource& time_source, double time_interval,
       m_time_interval(time_interval),
       m_function(f)
 {
-#ifdef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
-    log(format("IntervalChecker::IntervalChecker: time_interval=%1%")
-            % time_interval);
-#endif
     LIBBOARDGAME_ASSERT(time_interval > 0);
 }
 
@@ -64,17 +56,9 @@ bool IntervalChecker::check_expensive()
         else
             m_count_interval = static_cast<unsigned>(new_count_interval);
         m_result = m_function();
-#ifdef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
-        log(format("IntervalChecker::check_expensive: "
-                   "diff=%1% adjust_factor=%2% count_interval=%3%")
-            % diff % adjust_factor % m_count_interval);
-#endif
     }
     else
     {
-#ifdef LIBBOARDGAME_UTIL_INTERVAL_CHECKER_DEBUG
-        log("IntervalChecker::check_expensive: is_first_check");
-#endif
         m_is_first_check = false;
     }
     m_last_time = time;
