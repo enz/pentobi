@@ -30,7 +30,7 @@ QtObject {
         shortcut: isAndroid && noPopupOpen ? "Back" : ""
         onTriggered: {
             if (visibility === Window.FullScreen)
-                Logic.leaveFullscreen()
+                rootWindow.visibility = Window.AutomaticVisibility
             else
                 rootWindow.close()
         }
@@ -79,7 +79,7 @@ QtObject {
             if (gameDisplay.pickedPiece)
                 gameDisplay.pickedPiece = null
             else if (visibility === Window.FullScreen)
-                Logic.leaveFullscreen()
+                rootWindow.visibility = Window.AutomaticVisibility
     }
     property Action findMove: Action {
         shortcut: "Ctrl+H"
