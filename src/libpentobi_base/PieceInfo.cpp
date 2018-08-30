@@ -153,30 +153,6 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
         m_score_points = static_cast<ScoreType>(points.size());
 }
 
-bool PieceInfo::can_flip_horizontally(const Transform* transform) const
-{
-    transform = get_equivalent_transform(transform);
-    auto flip = get_equivalent_transform(
-                           m_transforms->get_mirrored_horizontally(transform));
-    return flip != transform;
-}
-
-bool PieceInfo::can_flip_vertically(const Transform* transform) const
-{
-    transform = get_equivalent_transform(transform);
-    auto flip = get_equivalent_transform(
-                             m_transforms->get_mirrored_vertically(transform));
-    return flip != transform;
-}
-
-bool PieceInfo::can_rotate() const
-{
-    auto transform = m_uniq_transforms[0];
-    auto rotate = get_equivalent_transform(
-                                m_transforms->get_rotated_clockwise(transform));
-    return rotate != transform;
-}
-
 const Transform* PieceInfo::find_transform(const Geometry& geo,
                                            const Points& points) const
 {

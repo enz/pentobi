@@ -140,19 +140,6 @@ Variant PentobiTree::get_variant(const SgfNode& root)
     return variant;
 }
 
-bool PentobiTree::has_main_variation_moves() const
-{
-    auto node = &get_root();
-    do
-    {
-        if (has_move(*node))
-            return true;
-        node = node->get_first_child_or_null();
-    }
-    while (node != nullptr);
-    return false;
-}
-
 void PentobiTree::init(unique_ptr<SgfNode>& root)
 {
     Variant variant = get_variant(*root);

@@ -29,11 +29,6 @@ PieceTransformsTrigon::PieceTransformsTrigon()
     m_all.push_back(&m_refl);
 }
 
-const Transform* PieceTransformsTrigon::get_default() const
-{
-    return &m_identity;
-}
-
 const Transform* PieceTransformsTrigon::get_mirrored_horizontally(
                                                  const Transform* transf) const
 {

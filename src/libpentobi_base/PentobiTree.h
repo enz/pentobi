@@ -70,10 +70,6 @@ public:
 
     const BoardConst& get_board_const() const;
 
-    /** Check if any node in the main variation has a move.
-        Invalid move properties are ignored. */
-    bool has_main_variation_moves() const;
-
     void keep_only_subtree(const SgfNode& node);
 
     /** Add a piece as setup.

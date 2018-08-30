@@ -98,12 +98,6 @@ public:
         to a given transform. */
     const Transform* get_equivalent_transform(const Transform* transform) const;
 
-    bool can_rotate() const;
-
-    bool can_flip_horizontally(const Transform* transform) const;
-
-    bool can_flip_vertically(const Transform* transform) const;
-
     const Transform* find_transform(const Geometry& geo,
                                     const Points& points) const;
 

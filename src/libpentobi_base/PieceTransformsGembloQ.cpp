@@ -25,11 +25,6 @@ PieceTransformsGembloQ::PieceTransformsGembloQ()
     m_all.push_back(&m_refl);
 }
 
-const Transform* PieceTransformsGembloQ::get_default() const
-{
-    return &m_identity;
-}
-
 const Transform* PieceTransformsGembloQ::get_mirrored_horizontally(
                                                  const Transform* transf) const
 {

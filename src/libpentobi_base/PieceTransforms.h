@@ -35,8 +35,6 @@ public:
     virtual const Transform* get_rotated_clockwise(
                                             const Transform* transf) const = 0;
 
-    virtual const Transform* get_default() const;
-
     const vector<const Transform*>& get_all() const;
 
     /** Find the transform by its class.
@@ -59,11 +57,6 @@ const Transform* PieceTransforms::find() const
         if (dynamic_cast<const T*>(t))
             return t;
     return nullptr;
-}
-
-inline const Transform* PieceTransforms::get_default() const
-{
-    return m_all[0];
 }
 
 inline const vector<const Transform*>& PieceTransforms::get_all() const
