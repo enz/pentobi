@@ -6,3 +6,7 @@ add_library(boardgame_test STATIC
 target_include_directories(boardgame_test PUBLIC ..)
 
 target_link_libraries(boardgame_test boardgame_util)
+
+add_library(boardgame_test_main STATIC Main.cpp)
+
+target_link_libraries(boardgame_test_main boardgame_test)
