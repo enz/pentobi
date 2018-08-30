@@ -20,21 +20,19 @@ MenuItem {
         return PentobiControls.addMnemonic(text, mnemonic)
     }
 
-    property bool _hasMenuIndicators: {
-        if (! menu)
-            return false
-        for (var i = 0; i < menu.count; ++i)
-            if (menu.itemAt(i).checkable)
-                return true
-        return false
+    property real _anyItemIndicatorWidth: {
+        if (menu)
+            for (var i = 0; i < menu.count; ++i)
+                if (menu.itemAt(i).checkable)
+                    return menu.itemAt(i).indicator.width
+        return 0
     }
-    property bool _hasMenuArrows: {
-        if (! menu)
-            return false
-        for (var i = 0; i < menu.count; ++i)
-            if (menu.menuAt(i))
-                return true
-        return false
+    property real _anyItemArrowWidth: {
+        if (menu)
+            for (var i = 0; i < menu.count; ++i)
+                if (menu.menuAt(i))
+                    return menu.itemAt(i).arrow.width
+        return 0
     }
 
     height: Math.round(font.pixelSize * (isDesktop ? 1.9 : 2.2)
@@ -71,12 +69,8 @@ MenuItem {
         anchors.fill: parent
 
         Item {
-            implicitWidth: {
-                var result = 0.1 * font.pixelSize
-                if (_hasMenuIndicators)
-                    result += root.indicator.width + 0.2 * font.pixelSize
-                return result
-            }
+            implicitWidth: 0.1 * font.pixelSize + _anyItemIndicatorWidth
+                           + 0.2 * font.pixelSize
         }
         Label {
             id: labelText
@@ -115,8 +109,8 @@ MenuItem {
             Layout.alignment: Qt.AlignVCenter
         }
         Item {
-            implicitWidth:
-                _hasMenuArrows ? root.arrow.width : 0.1 * font.pixelSize
+            implicitWidth: _anyItemArrowWidth > 0 ? _anyItemArrowWidth
+                                                  : 0.1 * font.pixelSize
         }
     }
 }

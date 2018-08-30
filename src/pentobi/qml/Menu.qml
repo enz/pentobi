@@ -16,7 +16,7 @@ Menu {
 
     width: {
         if (! dynamicWidth)
-            return Math.min(font.pixelSize * 17, rootWindow.width)
+            return Math.min(font.pixelSize * 18, rootWindow.width)
         var maxWidth = 0
         for (var i = 0; i < count; ++i)
             maxWidth = Math.max(maxWidth, itemAt(i).implicitWidth)
