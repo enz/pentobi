@@ -331,6 +331,19 @@ function init() {
     }
     showWindow()
     if (isRated) {
+        // Game-related properties in settings could be inconsistent with
+        // autosaved game (see comment in gameSettingsChanged()), better
+        // initialize with info from ratingModel
+        var player = ratingModel.getNextHumanPlayer()
+        computerPlays0 = (player !== 0)
+        computerPlays1 = (player !== 1)
+        computerPlays2 = (player !== 2)
+        computerPlays3 = (player !== 3)
+        if (isMultiColor()) {
+            computerPlays2 = computerPlays0
+            computerPlays3 = computerPlays1
+        }
+        playerModel.level = ratingModel.getNextLevel(playerModel.maxLevel)
         showInfo(qsTr("Continuing rated game."))
         checkComputerMove()
         return
