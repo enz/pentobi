@@ -313,7 +313,6 @@ function init() {
         computerPlays2 = computerPlays0
         computerPlays3 = computerPlays1
     }
-    isRated = settings.isRated
     gameDisplay.createPieces()
     if (gameModel.checkFileModifiedOutside())
     {
