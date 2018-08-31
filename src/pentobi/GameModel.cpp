@@ -1346,7 +1346,6 @@ void GameModel::setComment(const QString& comment)
     m_game.set_comment(encode(comment).constData());
     m_comment = comment;
     emit commentChanged();
-    updateIsGameEmpty();
     updateIsModified();
 }
 
@@ -1369,7 +1368,6 @@ void GameModel::setEvent(const QString& event)
     m_event = event;
     m_game.set_event(encode(event).constData());
     emit eventChanged();
-    updateIsGameEmpty();
     updateIsModified();
 }
 
@@ -1425,7 +1423,6 @@ void GameModel::setPlayerName0(const QString& name)
     m_playerName0 = name;
     m_game.set_player_name(Color(0), encode(name).constData());
     emit playerName0Changed();
-    updateIsGameEmpty();
     updateIsModified();
 }
 
@@ -1436,7 +1433,6 @@ void GameModel::setPlayerName1(const QString& name)
     m_playerName1 = name;
     m_game.set_player_name(Color(1), encode(name).constData());
     emit playerName1Changed();
-    updateIsGameEmpty();
     updateIsModified();
 }
 
@@ -1447,7 +1443,6 @@ void GameModel::setPlayerName2(const QString& name)
     m_playerName2 = name;
     m_game.set_player_name(Color(2), encode(name).constData());
     emit playerName2Changed();
-    updateIsGameEmpty();
     updateIsModified();
 }
 
@@ -1458,7 +1453,6 @@ void GameModel::setPlayerName3(const QString& name)
     m_playerName3 = name;
     m_game.set_player_name(Color(3), encode(name).constData());
     emit playerName3Changed();
-    updateIsGameEmpty();
     updateIsModified();
 }
 
@@ -1469,7 +1463,6 @@ void GameModel::setRound(const QString& round)
     m_round = round;
     m_game.set_round(encode(round).constData());
     emit roundChanged();
-    updateIsGameEmpty();
     updateIsModified();
 }
 
@@ -1494,7 +1487,6 @@ void GameModel::setTime(const QString& time)
     m_time = time;
     m_game.set_time(encode(time).constData());
     emit playerName3Changed();
-    updateIsGameEmpty();
     updateIsModified();
 }
 
@@ -1594,21 +1586,9 @@ void GameModel::updateGameInfo()
     setRound(decode(m_game.get_round()));
 }
 
-void GameModel::updateIsGameEmpty()
-{
-    set(m_isGameEmpty, libboardgame_sgf::is_empty(m_game.get_tree()),
-        &GameModel::isGameEmptyChanged);
-}
-
 void GameModel::updateIsModified()
 {
-    // Don't consider modified game tree as modified if it is empty and no
-    // file is associated.
-    bool isModified =
-            m_game.is_modified()
-            && (! libboardgame_sgf::is_empty(m_game.get_tree())
-                || ! m_file.isEmpty());
-    set(m_isModified, isModified, &GameModel::isModifiedChanged);
+    set(m_isModified, m_game.is_modified(), &GameModel::isModifiedChanged);
 }
 
 PieceModel* GameModel::updatePiece(Color c, Move mv,
@@ -1874,7 +1854,6 @@ void GameModel::updateProperties()
     set(m_isBoardEmpty, bd.get_nu_onboard_pieces() == 0,
         &GameModel::isBoardEmptyChanged);
     set(m_isGameOver, isGameOver, &GameModel::isGameOverChanged);
-    updateIsGameEmpty();
     updateIsModified();
     updatePieces();
     set(m_comment, decode(m_game.get_comment()), &GameModel::commentChanged);

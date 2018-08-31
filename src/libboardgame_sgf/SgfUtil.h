@@ -64,10 +64,6 @@ const SgfNode& back_to_main_variation(const SgfNode& node);
 
 bool has_comment(const SgfNode& node);
 
-/** Check if a tree doesn't contain nodes apart from the root node
-    or properties apart from some trivial properties (GM, CA, AP or DT) */
-bool is_empty(const SgfTree& tree);
-
 //-----------------------------------------------------------------------------
 
 } // namespace libboardgame_sgf

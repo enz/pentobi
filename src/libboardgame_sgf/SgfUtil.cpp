@@ -181,20 +181,6 @@ bool has_earlier_variation(const SgfNode& node)
     }
 }
 
-bool is_empty(const SgfTree& tree)
-{
-    auto& root = tree.get_root();
-    if (root.has_children())
-        return false;
-    for (auto& p : root.get_properties())
-    {
-        auto& id = p.id;
-        if (id != "GM" && id != "CA" && id != "AP" && id != "DT")
-            return false;
-    }
-    return true;
-}
-
 bool is_main_variation(const SgfNode& node)
 {
     auto current = &node;
