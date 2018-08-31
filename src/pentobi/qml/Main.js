@@ -257,6 +257,7 @@ function findNextCommentContinueFromRoot() {
 // comments and variations can be large). To reduce the likelihood of such
 // inconsistencies, call gameSettingsChanged() after changing game-related
 // settings, starting a new game, changing the game variant, etc.
+// See also QTBUG-70291
 function gameSettingsChanged() {
     autoSaveNoVerify()
 }
