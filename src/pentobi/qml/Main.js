@@ -21,6 +21,7 @@ function autoSaveNoVerify() {
     syncSettings.setValueBool("computerPlays2", computerPlays2)
     syncSettings.setValueBool("computerPlays3", computerPlays3)
     syncSettings.setValueBool("isRated", isRated)
+    syncSettings.setValueBool("initComputerColorsOnNewGame", initComputerColorsOnNewGame)
     syncSettings.setValueInt("level", playerModel.level)
     syncSettings.sync()
     analyzeGameModel.autoSave(gameModel)
@@ -308,6 +309,7 @@ function init() {
     computerPlays2 = syncSettings.valueBool("computerPlays2", true)
     computerPlays3 = syncSettings.valueBool("computerPlays3", true)
     isRated = syncSettings.valueBool("isRated", false)
+    initComputerColorsOnNewGame = syncSettings.valueBool("initComputerColorsOnNewGame", true)
     playerModel.level = syncSettings.valueInt("level", 1)
     if (isMultiColor()) {
         computerPlays2 = computerPlays0

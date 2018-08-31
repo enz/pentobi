@@ -111,7 +111,6 @@ ApplicationWindow {
         property alias themeName: rootWindow.themeName
         property alias exportImageWidth: rootWindow.exportImageWidth
         property alias showVariations: gameModel.showVariations
-        property alias initComputerColorsOnNewGame: rootWindow.initComputerColorsOnNewGame
     }
     GameModel {
         id: gameModel
