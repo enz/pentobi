@@ -1688,16 +1688,16 @@ void GameModel::updatePieces()
     int moveNumber = 1;
     for (auto i = nodes.size(); i > 0; --i)
     {
-        auto& node = *nodes[i - 1];
-        auto mv = tree.get_move(node);
+        node = nodes[i - 1];
+        auto mv = tree.get_move(*node);
         auto c = mv.color;
         pieceModel = updatePiece(c, mv.move, isPlayed[c]);
         QString label = QString::number(moveNumber);
         ++moveNumber;
         unsigned moveIndex;
-        if (m_showVariations && getVariationIndex(tree, node, moveIndex))
+        if (m_showVariations && getVariationIndex(tree, *node, moveIndex))
             label.append(get_letter_coord(moveIndex).c_str());
-        label.append(get_move_annotation(node));
+        label.append(get_move_annotation(*node));
         pieceModel->setMoveLabel(label);
     }
     if (pieceModel != m_lastMovePieceModel)
