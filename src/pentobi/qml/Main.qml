@@ -25,10 +25,6 @@ ApplicationWindow {
 
     property alias gameDisplay: gameDisplayLoader.item
 
-    // Was computer thinking on regular game move when game was autosaved?
-    // If yes, it will automatically start a move generation on startup.
-    property bool wasGenMoveRunning
-
     // If the user manually disabled all computer colors in the dialog, we
     // assume that they want to edit games rather than play, and we will not
     // initialize the computer colors on New Game but only clear the board.
@@ -125,7 +121,6 @@ ApplicationWindow {
         property bool computerPlays2: true
         property bool computerPlays3: true
         property bool isRated
-        property bool wasGenMoveRunning
     }
     GameModel {
         id: gameModel

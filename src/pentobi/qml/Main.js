@@ -15,17 +15,12 @@ function analyzeGame(nuSimulations) {
 }
 
 function autoSaveNoVerify() {
-    wasGenMoveRunning =
-            (playerModel.isGenMoveRunning
-             || delayedCheckComputerMove.running)
-            && ! isPlaySingleMoveRunning
     gameModel.autoSave()
     settings.computerPlays0 = computerPlays0
     settings.computerPlays1 = computerPlays1
     settings.computerPlays2 = computerPlays2
     settings.computerPlays3 = computerPlays3
     settings.isRated = isRated
-    settings.wasGenMoveRunning = wasGenMoveRunning
     analyzeGameModel.autoSave(gameModel)
     // This will lose the geometry if the user has changed it, maximized the
     // window and then closed it before returning to windowed state. But better
@@ -315,7 +310,6 @@ function init() {
         computerPlays3 = computerPlays1
     }
     isRated = settings.isRated
-    wasGenMoveRunning = settings.wasGenMoveRunning
     gameDisplay.createPieces()
     if (gameModel.checkFileModifiedOutside())
     {
@@ -338,7 +332,7 @@ function init() {
         checkComputerMove()
         return
     }
-    if (wasGenMoveRunning)
+    if (isComputerToPlay() && ! gameModel.canGoForward)
         showQuestion(qsTr("Continue computer move?"), checkComputerMove)
 }
 
