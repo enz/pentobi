@@ -211,11 +211,11 @@ ApplicationWindow {
             isRunning = false
         }
     }
-
     Connections {
         target: Qt.application
+        enabled: isAndroid
         onStateChanged:
-            if (isAndroid && Qt.application.state === Qt.ApplicationSuspended) {
+            if (Qt.application.state === Qt.ApplicationSuspended) {
                 Logic.autoSaveNoVerify()
                 // On Android, the app can be killed after being suspended,
                 // which causes the destructor of QQmlSettings not being called
