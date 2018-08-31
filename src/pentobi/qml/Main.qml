@@ -17,9 +17,9 @@ ApplicationWindow {
     id: rootWindow
 
     property bool computerPlays0
-    property bool computerPlays1: true
-    property bool computerPlays2: true
-    property bool computerPlays3: true
+    property bool computerPlays1
+    property bool computerPlays2
+    property bool computerPlays3
     property bool isPlaySingleMoveRunning
     property bool isRated
 
@@ -102,7 +102,6 @@ ApplicationWindow {
     Settings {
         id: settings
 
-        // See also the comment in Logic.gameSettingsChanged()
         property real x: (Screen.width - defaultWidth) / 2
         property real y: (Screen.height - defaultHeight) / 2
         property real width: defaultWidth
@@ -113,12 +112,6 @@ ApplicationWindow {
         property alias exportImageWidth: rootWindow.exportImageWidth
         property alias showVariations: gameModel.showVariations
         property alias initComputerColorsOnNewGame: rootWindow.initComputerColorsOnNewGame
-        property alias level: playerModel.level
-        property alias computerPlays0: rootWindow.computerPlays0
-        property alias computerPlays1: rootWindow.computerPlays1
-        property alias computerPlays2: rootWindow.computerPlays2
-        property alias computerPlays3: rootWindow.computerPlays3
-        property alias isRated: rootWindow.isRated
     }
     GameModel {
         id: gameModel
@@ -159,6 +152,7 @@ ApplicationWindow {
         gameVariant: gameModel.gameVariant
     }
     AndroidUtils { id: androidUtils }
+    SyncSettings { id: syncSettings }
     DialogLoader { id: aboutDialog; url: "AboutDialog.qml" }
     DialogLoader { id: computerDialog; url: "ComputerDialog.qml" }
     DialogLoader { id: fatalMessage; url: "FatalMessage.qml" }

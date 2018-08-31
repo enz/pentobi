@@ -15,6 +15,7 @@
 #include "ImageProvider.h"
 #include "PlayerModel.h"
 #include "RatingModel.h"
+#include "SyncSettings.h"
 #include "libboardgame_util/Log.h"
 
 #ifndef Q_OS_ANDROID
@@ -195,6 +196,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterType<RatingModel>("pentobi", 1, 0, "RatingModel");
+    qmlRegisterType<SyncSettings>("pentobi", 1, 0, "SyncSettings");
     qmlRegisterInterface<AnalyzeGameElement>("AnalyzeGameElement");
     qmlRegisterInterface<GameMove>("GameModelMove");
     qmlRegisterInterface<PieceModel>("PieceModel");

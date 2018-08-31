@@ -30,7 +30,6 @@ Pentobi.Dialog {
         if (! Logic.isComputerToPlay() || playerModel.level !== slider.value)
             Logic.cancelRunning()
         playerModel.level = slider.value
-        Logic.gameSettingsChanged()
         if (! gameModel.isGameOver)
             Logic.checkComputerMove()
     }

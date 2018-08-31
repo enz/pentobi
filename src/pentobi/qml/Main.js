@@ -16,6 +16,13 @@ function analyzeGame(nuSimulations) {
 
 function autoSaveNoVerify() {
     gameModel.autoSave()
+    syncSettings.setValueBool("computerPlays0", computerPlays0)
+    syncSettings.setValueBool("computerPlays1", computerPlays1)
+    syncSettings.setValueBool("computerPlays2", computerPlays2)
+    syncSettings.setValueBool("computerPlays3", computerPlays3)
+    syncSettings.setValueBool("isRated", isRated)
+    syncSettings.setValueInt("level", playerModel.level)
+    syncSettings.sync()
     analyzeGameModel.autoSave(gameModel)
     // This will lose the geometry if the user has changed it, maximized the
     // window and then closed it before returning to windowed state. But better
@@ -68,7 +75,6 @@ function changeGameVariantNoVerify(gameVariant) {
         analyzeGameModel.clear()
         gameDisplay.showPieces()
         initComputerColors()
-        gameSettingsChanged()
     })
 }
 
@@ -249,19 +255,6 @@ function findNextCommentContinueFromRoot() {
     showInfo(qsTr("No comment found"))
 }
 
-// QQmlSettings are not guaranteed to be flushed if app is killed on Android
-// after being suspended. So we need to make game-related settings (like
-// isRated) alias properties that are written soon after being changed. But
-// this can cause an inconsistency of game-related settings and the autosaved
-// game (which we don't want to save after each move because a game file with
-// comments and variations can be large). To reduce the likelihood of such
-// inconsistencies, call gameSettingsChanged() after changing game-related
-// settings, starting a new game, changing the game variant, etc.
-// See also QTBUG-70291
-function gameSettingsChanged() {
-    autoSaveNoVerify()
-}
-
 function genMove() {
     cancelRunning()
     gameDisplay.pickedPiece = null
@@ -310,6 +303,12 @@ function help() {
 
 function init() {
     gameModel.loadAutoSave()
+    computerPlays0 = syncSettings.valueBool("computerPlays0", false)
+    computerPlays1 = syncSettings.valueBool("computerPlays1", true)
+    computerPlays2 = syncSettings.valueBool("computerPlays2", true)
+    computerPlays3 = syncSettings.valueBool("computerPlays3", true)
+    isRated = syncSettings.valueBool("isRated", false)
+    playerModel.level = syncSettings.valueInt("level", 1)
     if (isMultiColor()) {
         computerPlays2 = computerPlays0
         computerPlays3 = computerPlays1
@@ -333,8 +332,7 @@ function init() {
     showWindow()
     if (isRated) {
         // Game-related properties in settings could be inconsistent with
-        // autosaved game (see comment in gameSettingsChanged()), better
-        // initialize with info from ratingModel
+        // autosaved game, better initialize with info from ratingModel
         var player = ratingModel.getNextHumanPlayer()
         computerPlays0 = (player !== 0)
         computerPlays1 = (player !== 1)
@@ -425,7 +423,6 @@ function newGameNoVerify()
     isRated = false
     analyzeGameModel.clear()
     initComputerColors()
-    gameSettingsChanged()
 }
 
 function nextPiece() {

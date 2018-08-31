@@ -135,6 +135,7 @@ HEADERS += \
     PieceModel.h \
     PlayerModel.h \
     RatingModel.h \
+    SyncSettings.h \
     ../libboardgame_base/CoordPoint.h \
     ../libboardgame_base/Geometry.h \
     ../libboardgame_base/GeometryUtil.h \

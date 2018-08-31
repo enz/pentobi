@@ -53,6 +53,7 @@ add_executable(pentobi WIN32
     PlayerModel.cpp
     RatingModel.h
     RatingModel.cpp
+    SyncSettings.h
     )
 
 file(GLOB qml_SRC "qml/*.qml" "qml/*.js" "qml/i18n/*.ts" "qml/themes/*/*.qml")
