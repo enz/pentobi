@@ -171,7 +171,9 @@ QtObject {
     property Action newGame: Action {
         shortcut: "Ctrl+N"
         text: qsTr("New")
-        enabled: gameDisplay.setupMode || gameModel.isModified || isRated
+        enabled: gameDisplay.setupMode
+                 || ! (gameModel.isGameEmpty && gameModel.file === ""
+                       && ! gameModel.isModified && ! isRated)
         onTriggered: Qt.callLater(function() { Logic.newGame() }) // QTBUG-69682
     }
     property Action newGameRated: Action {
@@ -256,13 +258,13 @@ QtObject {
     property Action save: Action {
         shortcut: "Ctrl+S"
         text: qsTr("Save")
-        enabled: gameModel.isModified
+        enabled: ! gameModel.isGameEmpty && gameModel.isModified
         onTriggered: if (gameModel.file !== "") Logic.save(); else Logic.saveAs()
     }
     property Action saveAs: Action {
         shortcut: "Ctrl+Shift+S"
         text: qsTr("Save As…")
-        enabled: gameModel.isModified
+        enabled: ! gameModel.isGameEmpty
         onTriggered: Logic.saveAs()
     }
     property Action stop: Action {

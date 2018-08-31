@@ -88,6 +88,7 @@ class GameModel
     Q_PROPERTY(bool isBoardEmpty READ isBoardEmpty NOTIFY isBoardEmptyChanged)
     Q_PROPERTY(bool isGameOver READ isGameOver NOTIFY isGameOverChanged)
     Q_PROPERTY(bool isModified READ isModified WRITE setIsModified NOTIFY isModifiedChanged)
+    Q_PROPERTY(bool isGameEmpty READ isGameEmpty NOTIFY isGameEmptyChanged)
     Q_PROPERTY(bool canUndo READ canUndo NOTIFY canUndoChanged)
     Q_PROPERTY(bool canGoBackward READ canGoBackward NOTIFY canGoBackwardChanged)
     Q_PROPERTY(bool canGoForward READ canGoForward NOTIFY canGoForwardChanged)
@@ -318,6 +319,8 @@ public:
 
     bool isGameOver() const { return m_isGameOver; }
 
+    bool isGameEmpty() const { return m_isGameEmpty; }
+
     bool isModified() const { return m_isModified; }
 
     bool canUndo() const { return m_canUndo; }
@@ -451,6 +454,8 @@ signals:
     void isBoardEmptyChanged();
 
     void isGameOverChanged();
+
+    void isGameEmptyChanged();
 
     void isModifiedChanged();
 
@@ -591,6 +596,8 @@ private:
 
     bool m_isGameOver = false;
 
+    bool m_isGameEmpty = true;
+
     bool m_isModified = false;
 
     bool m_canUndo = false;
@@ -694,6 +701,8 @@ private:
     void updateFileInfo(const QString& file);
 
     void updateGameInfo();
+
+    void updateIsGameEmpty();
 
     void updateIsModified();
 
