@@ -215,13 +215,7 @@ ApplicationWindow {
         target: Qt.application
         enabled: isAndroid
         onStateChanged:
-            if (Qt.application.state === Qt.ApplicationSuspended) {
+            if (Qt.application.state === Qt.ApplicationSuspended)
                 Logic.autoSaveNoVerify()
-                // On Android, the app can be killed after being suspended,
-                // which causes the destructor of QQmlSettings not being called
-                // and pending changes not being written to disk. So we better
-                // quit right now.
-                Qt.quit()
-            }
     }
 }
