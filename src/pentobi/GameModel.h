@@ -208,7 +208,7 @@ public:
 
     Q_INVOKABLE void autoSave();
 
-    Q_INVOKABLE void loadAutoSave();
+    Q_INVOKABLE bool loadAutoSave();
 
     Q_INVOKABLE bool save(const QString& file);
 

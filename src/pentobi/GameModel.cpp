@@ -904,7 +904,7 @@ void GameModel::keepOnlySubtree()
     updateProperties();
 }
 
-void GameModel::loadAutoSave()
+bool GameModel::loadAutoSave()
 {
     QSettings settings;
     auto file = settings.value(QStringLiteral("file")).toString();
@@ -912,7 +912,7 @@ void GameModel::loadAutoSave()
     if (! file.isEmpty() && ! isModified)
     {
         if (! checkFileExists(file) || ! openFile(file))
-            return;
+            return false;
         updateFileInfo(file);
         m_autosaveDate = m_fileDate;
         settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
@@ -921,7 +921,7 @@ void GameModel::loadAutoSave()
     {
         if (! openByteArray(
                     settings.value(QStringLiteral("autosave")).toByteArray()))
-            return;
+            return false;
         m_fileDate = settings.value(QStringLiteral("fileDate")).toDateTime();
         m_autosaveDate =
                 settings.value(QStringLiteral("autosaveDate")).toDateTime();
@@ -930,6 +930,7 @@ void GameModel::loadAutoSave()
     setIsModified(isModified);
     restoreAutoSaveLocation();
     updateProperties();
+    return true;
 }
 
 void GameModel::loadRecentFiles()

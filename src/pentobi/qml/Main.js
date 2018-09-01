@@ -303,13 +303,20 @@ function help() {
 }
 
 function init() {
-    gameModel.loadAutoSave()
-    computerPlays0 = syncSettings.valueBool("computerPlays0", false)
-    computerPlays1 = syncSettings.valueBool("computerPlays1", true)
-    computerPlays2 = syncSettings.valueBool("computerPlays2", true)
-    computerPlays3 = syncSettings.valueBool("computerPlays3", true)
-    isRated = syncSettings.valueBool("isRated", false)
-    initComputerColorsOnNewGame = syncSettings.valueBool("initComputerColorsOnNewGame", true)
+    if (gameModel.loadAutoSave()) {
+        computerPlays0 =
+                syncSettings.valueBool("computerPlays0", computerPlays0)
+        computerPlays1 =
+                syncSettings.valueBool("computerPlays1", computerPlays1)
+        computerPlays2 =
+                syncSettings.valueBool("computerPlays2", computerPlays2)
+        computerPlays3 =
+                syncSettings.valueBool("computerPlays3", computerPlays3)
+        isRated = syncSettings.valueBool("isRated", isRated)
+        initComputerColorsOnNewGame =
+                syncSettings.valueBool("initComputerColorsOnNewGame",
+                                       initComputerColorsOnNewGame)
+    }
     playerModel.level = syncSettings.valueInt("level", 1)
     if (isMultiColor()) {
         computerPlays2 = computerPlays0
