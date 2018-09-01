@@ -680,7 +680,7 @@ private:
 
     void preparePositionChange();
 
-    bool restoreAutoSaveLocation();
+    void restoreAutoSaveLocation();
 
     template<typename T>
     bool set(T& target, const T& value, void (GameModel::*changedSignal)());

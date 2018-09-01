@@ -228,7 +228,10 @@ void GameModel::autoSave()
     QSettings settings;
     settings.setValue(QStringLiteral("variant"),
                       to_string_id(m_game.get_variant()));
-    settings.setValue(QStringLiteral("autosave"), getSgf());
+    if (! m_file.isEmpty() && ! m_isModified)
+        settings.setValue(QStringLiteral("autosave"), QByteArray());
+    else
+        settings.setValue(QStringLiteral("autosave"), getSgf());
     settings.setValue(QStringLiteral("file"), m_file);
     settings.setValue(QStringLiteral("fileDate"), m_fileDate);
     settings.setValue(QStringLiteral("isModified"), m_isModified);
@@ -270,17 +273,11 @@ void GameModel::changeGameVariant(const QString& gameVariant)
 
 bool GameModel::checkAutosaveModifiedOutside()
 {
-    // Check if autosaved game has a different time stamp than the one we
-    // loaded because then it would have been written by another instance of
-    // GameModel. Also check that the changed autosaved game is different from
-    // what we would write. Otherwise, we don't care if it gets overwritten.
     QSettings settings;
     auto autosaveDate =
             settings.value(QStringLiteral("autosaveDate")).toDateTime();
-    if (! m_autosaveDate.isValid() || ! autosaveDate.isValid()
-            || m_autosaveDate == autosaveDate)
-        return false;
-    return settings.value(QStringLiteral("autosave")).toByteArray() != getSgf();
+    return m_autosaveDate.isValid() && autosaveDate.isValid()
+            && m_autosaveDate != autosaveDate;
 }
 
 bool GameModel::checkFileExists(const QString& file)
@@ -294,8 +291,6 @@ bool GameModel::checkFileModifiedOutside()
         return false;
     QFileInfo fileInfo(m_file);
     if (! fileInfo.exists())
-        // We handle deleted files as not modified, no reason to ask the user
-        // what to do if they want to save a file in this case.
         return false;
     return fileInfo.lastModified() != m_fileDate;
 }
@@ -914,17 +909,24 @@ void GameModel::loadAutoSave()
     QSettings settings;
     auto file = settings.value(QStringLiteral("file")).toString();
     auto isModified = settings.value(QStringLiteral("isModified")).toBool();
-    // If autosaved game was not modified and corresponding file was deleted
-    // externally, silently discard it
-    if (! file.isEmpty() && ! isModified && ! checkFileExists(file))
-        return;
-    if (! openByteArray(
-                settings.value(QStringLiteral("autosave")).toByteArray()))
-        return;
-    setFile(file);
-    m_fileDate = settings.value(QStringLiteral("fileDate")).toDateTime();
-    m_autosaveDate =
-            settings.value(QStringLiteral("autosaveDate")).toDateTime();
+    if (! file.isEmpty() && ! isModified)
+    {
+        if (! checkFileExists(file) || ! openFile(file))
+            return;
+        updateFileInfo(file);
+        m_autosaveDate = m_fileDate;
+        settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+    }
+    else
+    {
+        if (! openByteArray(
+                    settings.value(QStringLiteral("autosave")).toByteArray()))
+            return;
+        m_fileDate = settings.value(QStringLiteral("fileDate")).toDateTime();
+        m_autosaveDate =
+                settings.value(QStringLiteral("autosaveDate")).toDateTime();
+        setFile(file);
+    }
     setIsModified(isModified);
     restoreAutoSaveLocation();
     updateProperties();
@@ -1258,39 +1260,38 @@ PieceModel* GameModel::previousPiece(PieceModel* currentPickedPiece)
     return findUnplayedPieceModel(c, Piece(i));
 }
 
-bool GameModel::restoreAutoSaveLocation()
+void GameModel::restoreAutoSaveLocation()
 {
     QSettings settings;
     auto location =
             settings.value(QStringLiteral("autosaveLocation")).value<QVariantList>();
     if (location.empty())
-        return false;
+        return;
     int index = 0;
     bool ok;
     auto depth = location[index++].toUInt(&ok);
     if (! ok)
-        return false;
+        return;
     auto node = &m_game.get_root();
     while (depth > 0)
     {
         auto nuChildren = node->get_nu_children();
         if (nuChildren == 0)
-            return false;
+            break;
         if (nuChildren == 1)
             node = &node->get_first_child();
         else
         {
             if (index >= location.size())
-                return false;
+                break;
             auto child = location[index++].toUInt(&ok);
             if (! ok || child >= nuChildren)
-                return false;
+                break;
             node = &node->get_child(child);
         }
         --depth;
     }
     gotoNode(*node);
-    return true;
 }
 
 bool GameModel::save(const QString& file)
