@@ -25,15 +25,12 @@ Pentobi.Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
-                text: qsTr("Pentobi")
+                //: The argument is the application version.
+                text: qsTr("Pentobi %1").arg(Qt.application.version)
                 font {
                     bold: true
                     pixelSize: 1.3 * root.font.pixelSize
                 }
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-            Label {
-                text: Qt.application.version
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
