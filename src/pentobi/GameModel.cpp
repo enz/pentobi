@@ -272,6 +272,8 @@ void GameModel::changeGameVariant(const QString& gameVariant)
 
 bool GameModel::checkAutosaveModifiedOutside()
 {
+    if (! m_isModified)
+        return false;
     QSettings settings;
     auto autosaveDate =
             settings.value(QStringLiteral("autosaveDate")).toDateTime();
