@@ -349,7 +349,8 @@ function init() {
         checkComputerMove()
         return
     }
-    if (isComputerToPlay() && ! gameModel.canGoForward)
+    if (isComputerToPlay() && ! gameModel.canGoForward
+            && ! gameModel.isGameOver)
         showQuestion(qsTr("Continue computer move?"), checkComputerMove)
 }
 
