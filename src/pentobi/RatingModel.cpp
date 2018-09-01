@@ -86,7 +86,7 @@ void RatingModel::clearRating()
 {
     for (int i = m_numberGames - maxSavedGames; i < m_numberGames; ++i)
         QFile(getFile(i + 1)).remove();
-    QDir(getDir()).rmdir(QStringLiteral("."));
+    QDir(getDir()).rmdir(getDir());
     if (! m_history.isEmpty())
     {
         m_history.clear();
