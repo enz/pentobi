@@ -84,14 +84,12 @@ void RatingModel::addResult(GameModel* gameModel, int level)
 
 void RatingModel::clearRating()
 {
-    for (int i = m_numberGames - maxSavedGames; i < m_numberGames; ++i)
-        QFile(getFile(i + 1)).remove();
-    QDir(getDir()).rmdir(getDir());
     if (! m_history.isEmpty())
     {
         m_history.clear();
         emit historyChanged();
     }
+    QDir(getDir()).removeRecursively();
     setRating(1000);
     setBestRating(1000);
     setNumberGames(0);
