@@ -171,7 +171,8 @@ QtObject {
     property Action newGame: Action {
         shortcut: "Ctrl+N"
         text: qsTr("New")
-        enabled: gameDisplay.setupMode || gameModel.isModified || isRated
+        enabled: gameDisplay.setupMode || gameModel.isModified
+                 || gameModel.file !== "" || isRated
         onTriggered: Qt.callLater(function() { Logic.newGame() }) // QTBUG-69682
     }
     property Action newGameRated: Action {
