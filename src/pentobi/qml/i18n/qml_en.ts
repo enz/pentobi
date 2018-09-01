@@ -4,15 +4,16 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>Pentobi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Copyright © 2011–%1 Markus Enzenberger</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pentobi %1</source>
+        <extracomment>The argument is the application version.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -667,23 +668,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Not enough memory.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Game analysis is only possible in main variation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Game analysis aborted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Computer move aborted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -707,35 +696,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rating information deleted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delete all variations?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Variations deleted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File saved.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Saving image failed or unsupported image format.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Image saved.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Creating image failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -755,10 +720,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Continuing rated game.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Continue computer move?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -767,15 +728,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Kept only position.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Keep only subtree?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kept only subtree.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -819,19 +772,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Variation is now %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Truncate this subtree?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Truncate children?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Children truncated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -859,6 +804,62 @@
     <message>
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not enough memory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Game analysis aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Computer move aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rating information deleted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Variations deleted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creating image failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Continuing rated game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kept only position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kept only subtree</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Variation is now %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Children truncated</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -912,10 +913,6 @@
     </message>
     <message>
         <source>Make Main Variation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Made main variation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1008,6 +1005,10 @@
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu item Annotation. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Made main variation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -2,16 +2,17 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>Pentobi</source>
-        <translation>Pentobi</translation>
-    </message>
-    <message>
         <source>Copyright © 2011–%1 Markus Enzenberger</source>
         <translation>Copyright © 2011–%1 Markus Enzenberger</translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus</source>
         <translation>Computer-Gegner für das Brettspiel Blokus</translation>
+    </message>
+    <message>
+        <source>Pentobi %1</source>
+        <extracomment>The argument is the application version.</extracomment>
+        <translation>Pentobi %1</translation>
     </message>
 </context>
 <context>
@@ -665,24 +666,12 @@
         <translation>Pentobi</translation>
     </message>
     <message>
-        <source>Not enough memory.</source>
-        <translation>Nicht genügend Speicher.</translation>
-    </message>
-    <message>
         <source>Game analysis is only possible in main variation.</source>
         <translation>Spielanalyse ist nur in Hauptvariante möglich.</translation>
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
         <translation>Automatisch gespeichertes Spiel wurde von einer anderen Instanz von Pentobi geändert. Überschreiben?</translation>
-    </message>
-    <message>
-        <source>Game analysis aborted.</source>
-        <translation>Spielanalyse abgebrochen.</translation>
-    </message>
-    <message>
-        <source>Computer move aborted.</source>
-        <translation>Computer-Zug abgebrochen.</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
@@ -705,36 +694,12 @@
         <translation>Alle Wertungsinformationen für die gegenwärtige Spielvariante löschen?</translation>
     </message>
     <message>
-        <source>Rating information deleted.</source>
-        <translation>Wertungsinformationen gelöscht.</translation>
-    </message>
-    <message>
         <source>Delete all variations?</source>
         <translation>Alle Varianten löschen?</translation>
     </message>
     <message>
-        <source>Variations deleted.</source>
-        <translation>Varianten gelöscht.</translation>
-    </message>
-    <message>
         <source>Save failed.</source>
         <translation>Speichern fehlgeschlagen.</translation>
-    </message>
-    <message>
-        <source>File saved.</source>
-        <translation>Datei gespeichert.</translation>
-    </message>
-    <message>
-        <source>Saving image failed or unsupported image format.</source>
-        <translation>Grafik konnte nicht gespeichert werden oder Bildformat nicht unterstützt.</translation>
-    </message>
-    <message>
-        <source>Image saved.</source>
-        <translation>Grafik gespeichert.</translation>
-    </message>
-    <message>
-        <source>Creating image failed.</source>
-        <translation>Grafik konnte nicht erzeugt werden.</translation>
     </message>
     <message>
         <source>End of tree was reached. Continue search from start of the tree?</source>
@@ -753,10 +718,6 @@
         <translation>Datei wurde von einer anderen Anwendung bearbeitet. Neu laden?</translation>
     </message>
     <message>
-        <source>Continuing rated game.</source>
-        <translation>Gewertetes Spiel wird fortgesetzt.</translation>
-    </message>
-    <message>
         <source>Continue computer move?</source>
         <translation>Computer-Zug fortsetzen?</translation>
     </message>
@@ -765,16 +726,8 @@
         <translation>Nur Brettstellung behalten?</translation>
     </message>
     <message>
-        <source>Kept only position.</source>
-        <translation>Nur Brettstellung behalten.</translation>
-    </message>
-    <message>
         <source>Keep only subtree?</source>
         <translation>Nur Teilbaum behalten?</translation>
-    </message>
-    <message>
-        <source>Kept only subtree.</source>
-        <translation>Nur Teilbaum behalten.</translation>
     </message>
     <message>
         <source>Open failed.</source>
@@ -817,20 +770,12 @@
         <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
     </message>
     <message>
-        <source>Variation is now %1.</source>
-        <translation>Variante ist jetzt %1.</translation>
-    </message>
-    <message>
         <source>Truncate this subtree?</source>
         <translation>Diesen Teilbaum abschneiden?</translation>
     </message>
     <message>
         <source>Truncate children?</source>
         <translation>Kindknoten abschneiden?</translation>
-    </message>
-    <message>
-        <source>Children truncated.</source>
-        <translation>Kindknoten abgeschnitten.</translation>
     </message>
     <message>
         <source>Discard game?</source>
@@ -858,6 +803,62 @@
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
         <translation>%1 - Pentobi</translation>
+    </message>
+    <message>
+        <source>Not enough memory</source>
+        <translation>Nicht genügend Speicher</translation>
+    </message>
+    <message>
+        <source>Game analysis aborted</source>
+        <translation>Spielanalyse abgebrochen</translation>
+    </message>
+    <message>
+        <source>Computer move aborted</source>
+        <translation>Computer-Zug abgebrochen</translation>
+    </message>
+    <message>
+        <source>Rating information deleted</source>
+        <translation>Wertungsinformationen gelöscht</translation>
+    </message>
+    <message>
+        <source>Variations deleted</source>
+        <translation>Varianten gelöscht</translation>
+    </message>
+    <message>
+        <source>File saved</source>
+        <translation>Datei gespeichert</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format</source>
+        <translation>Grafik konnte nicht gespeichert werden oder Bildformat nicht unterstützt</translation>
+    </message>
+    <message>
+        <source>Image saved</source>
+        <translation>Grafik gespeichert</translation>
+    </message>
+    <message>
+        <source>Creating image failed</source>
+        <translation>Grafik konnte nicht erzeugt werden</translation>
+    </message>
+    <message>
+        <source>Continuing rated game</source>
+        <translation>Gewertetes Spiel wird fortgesetzt</translation>
+    </message>
+    <message>
+        <source>Kept only position</source>
+        <translation>Nur Brettstellung behalten</translation>
+    </message>
+    <message>
+        <source>Kept only subtree</source>
+        <translation>Nur Teilbaum behalten</translation>
+    </message>
+    <message>
+        <source>Variation is now %1</source>
+        <translation>Variante ist jetzt %1</translation>
+    </message>
+    <message>
+        <source>Children truncated</source>
+        <translation>Kindknoten abgeschnitten</translation>
     </message>
 </context>
 <context>
@@ -911,10 +912,6 @@
     <message>
         <source>Make Main Variation</source>
         <translation>Zu Hauptvariante machen</translation>
-    </message>
-    <message>
-        <source>Made main variation.</source>
-        <translation>Zu Hauptvariante gemacht.</translation>
     </message>
     <message>
         <source>Variation Up</source>
@@ -1007,6 +1004,10 @@
         <source>A</source>
         <extracomment>Mnemonic for menu item Annotation. Leave empty for no mnemonic.</extracomment>
         <translation>N</translation>
+    </message>
+    <message>
+        <source>Made main variation</source>
+        <translation>Zu Hauptvariante gemacht</translation>
     </message>
 </context>
 <context>

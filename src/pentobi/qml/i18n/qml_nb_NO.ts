@@ -2,16 +2,17 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>Pentobi</source>
-        <translation>Pentobi</translation>
-    </message>
-    <message>
         <source>Copyright © 2011–%1 Markus Enzenberger</source>
         <translation>Copyright © 2011–%1 Markus Enzenberger</translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus</source>
         <translation>Datamaskinmotstander for brettspillet Blokus</translation>
+    </message>
+    <message>
+        <source>Pentobi %1</source>
+        <extracomment>The argument is the application version.</extracomment>
+        <translation>Pentobi %1</translation>
     </message>
 </context>
 <context>
@@ -665,24 +666,12 @@
         <translation>Pentobi</translation>
     </message>
     <message>
-        <source>Not enough memory.</source>
-        <translation>Ikke nok minne.</translation>
-    </message>
-    <message>
         <source>Game analysis is only possible in main variation.</source>
         <translation>Spillanalyse er kun tilgjengelig i hovedvariasjonen.</translation>
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
         <translation>Automatisk lagret spill ble endret av en annen kjørende utgave av Pentobi. Overskriv?</translation>
-    </message>
-    <message>
-        <source>Game analysis aborted.</source>
-        <translation>Spillanalyse avbrutt.</translation>
-    </message>
-    <message>
-        <source>Computer move aborted.</source>
-        <translation>Datamaskintrekk avbrutt.</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
@@ -705,36 +694,12 @@
         <translation>Slett all vurderingsinformasjon fra nåværende spillvariant?</translation>
     </message>
     <message>
-        <source>Rating information deleted.</source>
-        <translation>Vurderingsinformasjon slettet.</translation>
-    </message>
-    <message>
         <source>Delete all variations?</source>
         <translation>Slett alle variasjoner?</translation>
     </message>
     <message>
-        <source>Variations deleted.</source>
-        <translation>Variasjoner slettet.</translation>
-    </message>
-    <message>
         <source>Save failed.</source>
         <translation>Lagring mislyktes.</translation>
-    </message>
-    <message>
-        <source>File saved.</source>
-        <translation>Fil lagret.</translation>
-    </message>
-    <message>
-        <source>Saving image failed or unsupported image format.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Image saved.</source>
-        <translation>Bilde lagret.</translation>
-    </message>
-    <message>
-        <source>Creating image failed.</source>
-        <translation>Oppretting av bilde mislyktes.</translation>
     </message>
     <message>
         <source>End of tree was reached. Continue search from start of the tree?</source>
@@ -753,10 +718,6 @@
         <translation>Filen har blitt endret av et annet program. Last inn på nytt?</translation>
     </message>
     <message>
-        <source>Continuing rated game.</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Continue computer move?</source>
         <translation type="unfinished"/>
     </message>
@@ -765,16 +726,8 @@
         <translation>Kun behold posisjonen?</translation>
     </message>
     <message>
-        <source>Kept only position.</source>
-        <translation>Beholdt kun posisjonen.</translation>
-    </message>
-    <message>
         <source>Keep only subtree?</source>
         <translation>Kun behold undertreet?</translation>
-    </message>
-    <message>
-        <source>Kept only subtree.</source>
-        <translation>Beholdte kun undertre.</translation>
     </message>
     <message>
         <source>Open failed.</source>
@@ -817,20 +770,12 @@
         <translation>Du har ikke spillt noen vurderte spill i denne varianten enda.</translation>
     </message>
     <message>
-        <source>Variation is now %1.</source>
-        <translation>Varianten er nå %1.</translation>
-    </message>
-    <message>
         <source>Truncate this subtree?</source>
         <translation>Forkort dette undertreet?</translation>
     </message>
     <message>
         <source>Truncate children?</source>
         <translation>Forkort underprosess?</translation>
-    </message>
-    <message>
-        <source>Children truncated.</source>
-        <translation>Underprosess forkortet.</translation>
     </message>
     <message>
         <source>Discard game?</source>
@@ -858,6 +803,62 @@
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
         <translation>%1 - Pentobi</translation>
+    </message>
+    <message>
+        <source>Not enough memory</source>
+        <translation>Ikke nok minne</translation>
+    </message>
+    <message>
+        <source>Game analysis aborted</source>
+        <translation>Spillanalyse avbrutt</translation>
+    </message>
+    <message>
+        <source>Computer move aborted</source>
+        <translation>Datamaskintrekk avbrutt</translation>
+    </message>
+    <message>
+        <source>Rating information deleted</source>
+        <translation>Vurderingsinformasjon slettet</translation>
+    </message>
+    <message>
+        <source>Variations deleted</source>
+        <translation>Variasjoner slettet</translation>
+    </message>
+    <message>
+        <source>File saved</source>
+        <translation>Fil lagret</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Image saved</source>
+        <translation>Bilde lagret</translation>
+    </message>
+    <message>
+        <source>Creating image failed</source>
+        <translation>Oppretting av bilde mislyktes</translation>
+    </message>
+    <message>
+        <source>Continuing rated game</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Kept only position</source>
+        <translation>Beholdt kun posisjonen</translation>
+    </message>
+    <message>
+        <source>Kept only subtree</source>
+        <translation>Beholdte kun undertre</translation>
+    </message>
+    <message>
+        <source>Variation is now %1</source>
+        <translation>Varianten er nå %1</translation>
+    </message>
+    <message>
+        <source>Children truncated</source>
+        <translation>Underprosess forkortet</translation>
     </message>
 </context>
 <context>
@@ -911,10 +912,6 @@
     <message>
         <source>Make Main Variation</source>
         <translation>Gjør til hovedvariasjon</translation>
-    </message>
-    <message>
-        <source>Made main variation.</source>
-        <translation>Gjort til hovedvariasjon.</translation>
     </message>
     <message>
         <source>Variation Up</source>
@@ -1007,6 +1004,10 @@
         <source>A</source>
         <extracomment>Mnemonic for menu item Annotation. Leave empty for no mnemonic.</extracomment>
         <translation>A</translation>
+    </message>
+    <message>
+        <source>Made main variation</source>
+        <translation>Gjort til hovedvariasjon</translation>
     </message>
 </context>
 <context>

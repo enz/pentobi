@@ -31,7 +31,7 @@ Pentobi.Menu {
         enabled: ! gameModel.isMainVar && ! isRated
         onTriggered: {
             gameModel.makeMainVar()
-            Logic.showTemporaryMessage(qsTr("Made main variation."))
+            Logic.showTemporaryMessage(qsTr("Made main variation"))
         }
     }
     Pentobi.MenuItem {

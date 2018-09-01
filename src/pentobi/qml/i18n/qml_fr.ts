@@ -2,16 +2,17 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>Pentobi</source>
-        <translation>Pentobi</translation>
-    </message>
-    <message>
         <source>Copyright © 2011–%1 Markus Enzenberger</source>
         <translation>Copyright © 2011–%1 Markus Enzenberger</translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus</source>
         <translation>Un adversaire d’ordinateur pour le jeu Blokus</translation>
+    </message>
+    <message>
+        <source>Pentobi %1</source>
+        <extracomment>The argument is the application version.</extracomment>
+        <translation>Pentobi %1</translation>
     </message>
 </context>
 <context>
@@ -665,24 +666,12 @@
         <translation>Pentobi</translation>
     </message>
     <message>
-        <source>Not enough memory.</source>
-        <translation>Mémoire insuffisante.</translation>
-    </message>
-    <message>
         <source>Game analysis is only possible in main variation.</source>
         <translation>L’analyse de la partie n’est possible que dans la variation principale.</translation>
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
         <translation>Jeu sauvé automatiquement a été changé par une autre instance de Pentobi. Remplacer ?</translation>
-    </message>
-    <message>
-        <source>Game analysis aborted.</source>
-        <translation>Analyse de la partie abandonnée.</translation>
-    </message>
-    <message>
-        <source>Computer move aborted.</source>
-        <translation>Coup de l’ordinateur abandonné.</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
@@ -705,36 +694,12 @@
         <translation>Supprimer toutes les informations de classement de l’actuelle variante du jeu ?</translation>
     </message>
     <message>
-        <source>Rating information deleted.</source>
-        <translation>Informations de classement supprimées.</translation>
-    </message>
-    <message>
         <source>Delete all variations?</source>
         <translation>Détruire toutes les variations ?</translation>
     </message>
     <message>
-        <source>Variations deleted.</source>
-        <translation>Variations supprimées.</translation>
-    </message>
-    <message>
         <source>Save failed.</source>
         <translation>Échec de l’enregistrement.</translation>
-    </message>
-    <message>
-        <source>File saved.</source>
-        <translation>Fichier enregistré.</translation>
-    </message>
-    <message>
-        <source>Saving image failed or unsupported image format.</source>
-        <translation>Impossible d’enregistrer l’image ou format de l’image non pris en charge.</translation>
-    </message>
-    <message>
-        <source>Image saved.</source>
-        <translation>Image enregistrée.</translation>
-    </message>
-    <message>
-        <source>Creating image failed.</source>
-        <translation>La création d’image a échoué.</translation>
     </message>
     <message>
         <source>End of tree was reached. Continue search from start of the tree?</source>
@@ -753,10 +718,6 @@
         <translation>Le fichier a été modifié par une autre application. Recharger ?</translation>
     </message>
     <message>
-        <source>Continuing rated game.</source>
-        <translation>Partie classée est continuée.</translation>
-    </message>
-    <message>
         <source>Continue computer move?</source>
         <translation>Coninuer le coup de l’ordinateur ?</translation>
     </message>
@@ -765,16 +726,8 @@
         <translation>Garder seulement la position ?</translation>
     </message>
     <message>
-        <source>Kept only position.</source>
-        <translation>Gardé seulement la position.</translation>
-    </message>
-    <message>
         <source>Keep only subtree?</source>
         <translation>Garder seulement le sous-arbre ?</translation>
-    </message>
-    <message>
-        <source>Kept only subtree.</source>
-        <translation>Gardé seulement le sous-arbre.</translation>
     </message>
     <message>
         <source>Open failed.</source>
@@ -817,20 +770,12 @@
         <translation>Vous n’avez pas encore joué des parties classées dans cette variante du jeu.</translation>
     </message>
     <message>
-        <source>Variation is now %1.</source>
-        <translation>La variation est maintenant %1.</translation>
-    </message>
-    <message>
         <source>Truncate this subtree?</source>
         <translation>Élaguer la branche actuelle ?</translation>
     </message>
     <message>
         <source>Truncate children?</source>
         <translation>Élaguer les branches filles ?</translation>
-    </message>
-    <message>
-        <source>Children truncated.</source>
-        <translation>Nœuds fils coupé.</translation>
     </message>
     <message>
         <source>Discard game?</source>
@@ -858,6 +803,62 @@
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
         <translation>%1 - Pentobi</translation>
+    </message>
+    <message>
+        <source>Not enough memory</source>
+        <translation>Mémoire insuffisante</translation>
+    </message>
+    <message>
+        <source>Game analysis aborted</source>
+        <translation>Analyse de la partie abandonnée</translation>
+    </message>
+    <message>
+        <source>Computer move aborted</source>
+        <translation>Coup de l&apos;ordinateur abandonné</translation>
+    </message>
+    <message>
+        <source>Rating information deleted</source>
+        <translation>Informations de classement supprimées</translation>
+    </message>
+    <message>
+        <source>Variations deleted</source>
+        <translation>Variations supprimées</translation>
+    </message>
+    <message>
+        <source>File saved</source>
+        <translation>Fichier enregistré</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format</source>
+        <translation>Impossible d’enregistrer l’image ou format de l’image non pris en charge</translation>
+    </message>
+    <message>
+        <source>Image saved</source>
+        <translation>Image enregistrée</translation>
+    </message>
+    <message>
+        <source>Creating image failed</source>
+        <translation>La création d’image a échoué</translation>
+    </message>
+    <message>
+        <source>Continuing rated game</source>
+        <translation>Partie classée est continuée</translation>
+    </message>
+    <message>
+        <source>Kept only position</source>
+        <translation>Gardé seulement la position</translation>
+    </message>
+    <message>
+        <source>Kept only subtree</source>
+        <translation>Gardé seulement le sous-arbre</translation>
+    </message>
+    <message>
+        <source>Variation is now %1</source>
+        <translation>La variation est maintenant %1</translation>
+    </message>
+    <message>
+        <source>Children truncated</source>
+        <translation>Nœuds fils coupé</translation>
     </message>
 </context>
 <context>
@@ -911,10 +912,6 @@
     <message>
         <source>Make Main Variation</source>
         <translation>Choisir comme variation principale</translation>
-    </message>
-    <message>
-        <source>Made main variation.</source>
-        <translation>Choisi comme variation principale.</translation>
     </message>
     <message>
         <source>Variation Up</source>
@@ -1007,6 +1004,10 @@
         <source>A</source>
         <extracomment>Mnemonic for menu item Annotation. Leave empty for no mnemonic.</extracomment>
         <translation>A</translation>
+    </message>
+    <message>
+        <source>Made main variation</source>
+        <translation>Choisi comme variation principale</translation>
     </message>
 </context>
 <context>

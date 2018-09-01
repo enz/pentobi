@@ -138,7 +138,7 @@ ApplicationWindow {
             else gameDisplay.endSearch()
         Component.onCompleted:
             if (notEnoughMemory())
-                Logic.showFatal(qsTr("Not enough memory."))
+                Logic.showFatal(qsTr("Not enough memory"))
     }
     AnalyzeGameModel {
         id: analyzeGameModel
