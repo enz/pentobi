@@ -229,7 +229,7 @@ void GameModel::autoSave()
     settings.setValue(QStringLiteral("variant"),
                       to_string_id(m_game.get_variant()));
     if (! m_file.isEmpty() && ! m_isModified)
-        settings.setValue(QStringLiteral("autosave"), QByteArray());
+        settings.remove(QStringLiteral("autosave"));
     else
         settings.setValue(QStringLiteral("autosave"), getSgf());
     settings.setValue(QStringLiteral("file"), m_file);
@@ -237,7 +237,6 @@ void GameModel::autoSave()
     settings.setValue(QStringLiteral("isModified"), m_isModified);
     m_autosaveDate = QDateTime::currentDateTime();
     settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
-
     QVariantList location;
     uint depth = 0;
     auto node = &m_game.get_current();
