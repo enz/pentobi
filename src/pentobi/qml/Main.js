@@ -646,7 +646,6 @@ function ratedGameStart() {
     gameDisplay.showPieces()
     isRated = true
     analyzeGameModel.clear()
-    gameSettingsChanged()
     checkComputerMove()
 }
 
