@@ -272,13 +272,12 @@ void GameModel::changeGameVariant(const QString& gameVariant)
 
 bool GameModel::checkAutosaveModifiedOutside()
 {
-    if (! m_isModified)
-        return false;
     QSettings settings;
     auto autosaveDate =
             settings.value(QStringLiteral("autosaveDate")).toDateTime();
     return m_autosaveDate.isValid() && autosaveDate.isValid()
             && m_autosaveDate != autosaveDate
+            && settings.value(QStringLiteral("isModified")).toBool()
             && settings.value(QStringLiteral("autosave")).toByteArray() != getSgf();
 }
 

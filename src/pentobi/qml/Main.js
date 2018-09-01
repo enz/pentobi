@@ -540,6 +540,8 @@ function prevPiece() {
 
 function quit() {
     if (gameModel.checkAutosaveModifiedOutside()) {
+        if (! gameModel.isModified)
+            return true
         showQuestion(qsTr("Autosaved game was changed by another instance of Pentobi. Overwrite?"),
                      autoSaveNoVerifyAndQuit)
         return false
