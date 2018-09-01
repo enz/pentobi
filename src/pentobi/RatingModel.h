@@ -41,13 +41,9 @@ class RatedGameInfo
     /** The rating of the human after the game. */
     Q_PROPERTY(double rating READ rating CONSTANT)
 
-    /** The SGF game tree. */
-    Q_PROPERTY(QByteArray sgf READ sgf CONSTANT)
-
 public:
     RatedGameInfo(QObject* parent, int number, int color, double result,
-                  const QString& date, int level, double rating,
-                  const QByteArray& sgf);
+                  const QString& date, int level, double rating);
 
     int number() const { return m_number; }
 
@@ -61,8 +57,6 @@ public:
 
     double rating() const { return m_rating; }
 
-    const QByteArray& sgf() const { return m_sgf; }
-
 private:
     int m_number;
 
@@ -75,8 +69,6 @@ private:
     double m_rating;
 
     QString m_date;
-
-    QByteArray m_sgf;
 };
 
 //-----------------------------------------------------------------------------
@@ -105,6 +97,8 @@ public:
     Q_INVOKABLE int getNextLevel(int maxLevel) const;
 
     Q_INVOKABLE void setInitialRating(double rating);
+
+    Q_INVOKABLE QString getFile(int gameNumber) const;
 
 
     double bestRating() const { return m_bestRating.get(); }
@@ -139,7 +133,10 @@ private:
 
     QList<QObject*> m_history;
 
-    void saveSettings() const;
+
+    QString getDir() const;
+
+    void saveSettings();
 
     void setBestRating(double rating);
 

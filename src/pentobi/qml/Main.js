@@ -447,29 +447,6 @@ function openNoVerify() {
     openDialog.open()
 }
 
-function openRatedGame(byteArray) {
-    verify(function() { openRatedGameNoVerify(byteArray) })
-}
-
-function openRatedGameNoVerify(byteArray) {
-    lengthyCommand.run(function() {
-        var oldGameVariant = gameModel.gameVariant
-        var oldEnableAnimations = gameDisplay.enableAnimations
-        gameDisplay.enableAnimations = false
-        if (! gameModel.openByteArray(byteArray))
-            showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
-        setComputerNone()
-        if (gameModel.gameVariant != oldGameVariant)
-            gameDisplay.createPieces()
-        gameDisplay.showToPlay()
-        gameDisplay.setupMode = false
-        isRated = false
-        analyzeGameModel.clear()
-        gameDisplay.showToPlay()
-        gameDisplay.enableAnimations = oldEnableAnimations
-    })
-}
-
 function openFile(file) {
     lengthyCommand.run(function() { openFileBlocking(file) })
 }
