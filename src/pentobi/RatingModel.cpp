@@ -157,11 +157,11 @@ void RatingModel::saveSettings()
     QList<QObject*> newHistory;
     for (auto& i : m_history)
     {
-        auto info = dynamic_cast<RatedGameInfo*>(i);
-        if (info->number() <= m_numberGames - maxSavedGames)
-            QFile::remove(getFile(info->number()));
+        auto& info = dynamic_cast<RatedGameInfo&>(*i);
+        if (info.number() <= m_numberGames - maxSavedGames)
+            QFile::remove(getFile(info.number()));
         else
-            newHistory.append(info);
+            newHistory.append(&info);
     }
     if (newHistory.size() != m_history.size())
     {
