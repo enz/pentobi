@@ -25,7 +25,7 @@ Item {
     property var colorYellow: [ "#e8c616", "#a0880f", "#ffe658", "#333333" ]
     /// @}
 
-    property color colorBackground: "#f3f3f3"
+    property color colorBackground: "#e8e8e8"
     property color colorButtonPressed: Qt.darker(colorBackground, 1.1)
     property color colorButtonHovered: Qt.lighter(colorBackground, 3)
     property color colorButtonBorder: Qt.darker(colorBackground, 2)
@@ -37,7 +37,7 @@ Item {
     property color colorSelectedText: colorBackground
     property color colorSelection: "#645f5c"
     property color colorStartingPoint: "#767074"
-    property color colorText: "#282625"
+    property color colorText: "#111111"
     property real opacitySubduedText: 0.41
 
     function getImage(name) { return "themes/light/" + name + ".svg" }
