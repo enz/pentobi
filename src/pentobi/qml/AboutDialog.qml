@@ -41,7 +41,8 @@ Pentobi.Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
-                text: "<a href=\"https://pentobi.sourceforge.io\">pentobi.sourceforge.io</a>"
+                text: "<a href=\"https://pentobi.sourceforge.io\" style=\"text-decoration:none\">pentobi.sourceforge.io</a>"
+                textFormat: Text.RichText
                 elide: Qt.ElideRight
                 onLinkActivated: Qt.openUrlExternally(link)
                 width: Math.min(implicitWidth, maxContentWidth)
