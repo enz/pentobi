@@ -674,12 +674,12 @@ void paint(QPainter& painter, qreal width, qreal height, Variant variant,
            const Geometry& geo, const Grid<PointState>& pointState,
            const Grid<unsigned>& pieceId)
 {
-    const QColor boardBase(154, 146, 152);
-    const QColor boardLight(178, 172, 176);
-    const QColor boardDark(118, 112, 116);
-    const QColor centerBase(105, 98, 103);
-    const QColor centerLight(121, 114, 118);
-    const QColor centerDark(90, 84, 88);
+    const QColor boardBase(174, 167, 172);
+    const QColor boardLight(199, 191, 197);
+    const QColor boardDark(134, 128, 132);
+    const QColor centerBase(145, 139, 143);
+    const QColor centerLight(160, 154, 159);
+    const QColor centerDark(124, 119, 123);
     painter.setRenderHint(QPainter::Antialiasing);
     paintBoard(painter, width, height, variant, boardBase, boardLight,
                boardDark, centerBase, centerLight, centerDark);

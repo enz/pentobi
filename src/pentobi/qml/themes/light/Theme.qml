@@ -16,8 +16,8 @@ Item {
         for painting markup. */
     /// @{
     property var colorBlue: [ "#0073cf", "#004881", "#0e94ff", "#ffffff" ]
-    property var colorBoard: [ "#9a9298", "#767074", "#b2acb0",
-                               "#696267", "#5a5458", "#797276"]
+    property var colorBoard: [ "#aea7ac", "#868084", "#c7bfc5",
+                               "#918b8f", "#7c777b", "#a09a9f"]
     property var colorGreen: [ "#00c000", "#007800", "#00fa00", "#333333" ]
     property var colorOrange: [ "#f09217", "#9d5e0b", "#f5b563", "#333333" ]
     property var colorPurple: [ "#a12ccf", "#6d2787", "#b86cd4", "#ffffff" ]
