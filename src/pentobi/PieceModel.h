@@ -56,7 +56,7 @@ class PieceModel
 
 public:
     static QPointF findCenter(const Board& bd, const PiecePoints& points,
-                              bool isOriginDownward);
+                              bool usePieceInfoPointTypes);
 
     PieceModel(QObject* parent, const Board& bd, Piece piece, Color c);
 

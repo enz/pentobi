@@ -23,6 +23,7 @@ using libboardgame_base::TransfRectRot180Refl;
 using libboardgame_base::TransfRectRot270Refl;
 using libboardgame_util::ArrayList;
 using libpentobi_base::BoardType;
+using libpentobi_base::GeometryType;
 using libpentobi_base::PieceInfo;
 using libpentobi_base::PieceSet;
 using libpentobi_base::TransfGembloQIdentity;
@@ -136,8 +137,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
                 junctionType = 3;
             m_junctionType.append(junctionType);
         }
-    bool isOriginDownward = (m_bd.get_board_type() == BoardType::trigon_3);
-    m_center = findCenter(bd, points, isOriginDownward);
+    m_center = findCenter(bd, points, true);
     m_labelPos = QPointF(info.get_label_pos().x, info.get_label_pos().y);
 }
 
@@ -219,35 +219,46 @@ const Transform* PieceModel::getTransform(const QString& state) const
 }
 
 QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
-                               bool isOriginDownward)
+                               bool usePieceInfoPointTypes)
 {
-    auto pieceSet = bd.get_piece_set();
-    bool isTrigon = (pieceSet == PieceSet::trigon);
-    bool isNexos = (pieceSet == PieceSet::nexos);
+    auto geoType = bd.get_geometry_type();
+    bool isTrigon = (geoType == GeometryType::trigon);
+    bool isGembloQ = (geoType == GeometryType::gembloq);
+    bool isNexos = (geoType == GeometryType::nexos);
+    bool isOriginDownward = (usePieceInfoPointTypes
+                             && bd.get_board_type() == BoardType::trigon_3);
     auto& geo = bd.get_geometry();
     qreal sumX = 0;
     qreal sumY = 0;
     qreal n = 0;
     for (auto& p : points)
     {
-        if (isNexos && geo.get_point_type(p) == 0)
+        auto pointType = geo.get_point_type(p);
+        if (isNexos && pointType == 0)
             continue;
-        ++n;
-        qreal centerX = p.x + 0.5;
-        qreal centerY;
+        qreal centerX, centerY;
         if (isTrigon)
         {
-            bool isDownward =
-                    (geo.get_point_type(p) == (isOriginDownward ? 0 : 1));
-            if (isDownward)
-                centerY = p.y + static_cast<qreal>(1) / 3;
-            else
-                centerY = p.y + static_cast<qreal>(2) / 3;
+            bool isDownward = (pointType == (isOriginDownward ? 0 : 1));
+            centerX = 0.5;
+            centerY = isDownward ?
+                        static_cast<qreal>(1) / 3 : static_cast<qreal>(2) / 3;
+        }
+        else if (isGembloQ)
+        {
+            centerX = (pointType == 1 || pointType == 3) ?
+                        static_cast<qreal>(1) / 3 : static_cast<qreal>(2) / 3;
+            centerY = (pointType == 0 || pointType == 3) ?
+                        static_cast<qreal>(1) / 3 : static_cast<qreal>(2) / 3;
         }
         else
-            centerY = p.y + 0.5;
-        sumX += centerX;
-        sumY += centerY;
+        {
+            centerX = 0.5;
+            centerY = 0.5;
+        }
+        sumX += (p.x + centerX);
+        sumY += (p.y + centerY);
+        ++n;
     }
     return {sumX / n, sumY / n};
 }
