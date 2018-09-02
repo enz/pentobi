@@ -140,6 +140,8 @@ Item
         spacing: 0
 
         Item {
+            id: mainContent
+
             Layout.fillWidth: true
             Layout.fillHeight: true
 
@@ -147,18 +149,25 @@ Item
                 id: row
 
                 property real relativeBoardWidth: 0.52
+                property real minSpacing: 5
 
-                width: Math.min(parent.width - leftPadding - rightPadding, parent.height / relativeBoardWidth)
-                height: Math.min(parent.height, (parent.width - leftPadding - rightPadding) * relativeBoardWidth)
-                leftPadding: spacing
-                rightPadding: spacing
+                leftPadding: 5
+                rightPadding: 5
                 anchors.centerIn: parent
-                spacing: 5
+                spacing:
+                    Math.min(
+                        Math.max(minSpacing,
+                                 mainContent.width - board.width
+                                 - rightColumn.width - leftPadding
+                                 - rightPadding),
+                        0.04 * board.width)
 
                 Board {
                     id: board
 
-                    width: row.relativeBoardWidth * parent.width
+                    width: Math.min(row.relativeBoardWidth
+                                    * (mainContent.width - row.leftPadding - row.rightPadding - row.minSpacing),
+                                    mainContent.height)
                     height: isTrigon ? Math.sqrt(3) / 2 * width : width
                     anchors.verticalCenter: parent.verticalCenter
                     onClicked: Logic.onBoardClicked(pos)
@@ -177,7 +186,7 @@ Item
                 Column {
                     id: rightColumn
 
-                    width: parent.width - board.width - row.spacing - row.leftPadding - row.rightPadding
+                    width: board.width * (1 / row.relativeBoardWidth - 1)
                     height: board.grabImageTarget.height
                     anchors.verticalCenter: board.verticalCenter
                     spacing: 0.02 * width
