@@ -566,6 +566,12 @@ vector<PieceInfo> create_pieces_junior(const Geometry& geo,
     return pieces;
 }
 
+// Note that the pieces for Trigon are currently used for both trigon_3 and
+// the other Trigon variants even if the point types of their geometries are
+// not compatible (e.g. whether the point with coordinates 0,0 is an upward or
+// downward triangle). This requires special handling of Trigon at several
+// places. In the future, we should probably use a separate set of Trigon
+// pieces for even-sized and odd-sized boards instead.
 vector<PieceInfo> create_pieces_trigon(const Geometry& geo,
                                        const PieceTransforms& transforms)
 {
