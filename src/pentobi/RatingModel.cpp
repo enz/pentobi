@@ -152,7 +152,8 @@ void RatingModel::saveSettings()
     {
         settings.setValue("rated_games_" + m_gameVariant, m_numberGames);
         settings.setValue("rating_" + m_gameVariant, m_rating.get());
-        settings.setValue("best_rating_" + m_gameVariant, m_bestRating.get());
+        settings.setValue("best_rating_" + m_gameVariant,
+                          round(m_bestRating.get()));
     }
     QList<QObject*> newHistory;
     for (auto& i : m_history)
@@ -184,7 +185,7 @@ void RatingModel::saveSettings()
             settings.setValue(QStringLiteral("result"), info.result());
             settings.setValue(QStringLiteral("date"), info.date());
             settings.setValue(QStringLiteral("level"), info.level());
-            settings.setValue(QStringLiteral("rating"), info.rating());
+            settings.setValue(QStringLiteral("rating"), round(info.rating()));
         }
         settings.endArray();
     }
