@@ -181,7 +181,7 @@ Pentobi.Dialog {
                             if (activeFocus && currentIndex < 0 && count)
                                 currentIndex = 0
                         onCurrentIndexChanged:
-                            if (selectExisting
+                            if (selectExisting && currentIndex >= 0
                                     && ! folderModel.isFolder(currentIndex))
                                 name = folderModel.get(currentIndex, "fileName")
 
