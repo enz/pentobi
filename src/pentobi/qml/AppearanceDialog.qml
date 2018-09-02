@@ -47,7 +47,7 @@ Pentobi.Dialog {
         else if (themeName === "colorblind-dark")
             currentThemeIndex = 3
         else if (themeName === "system")
-            currentThemeIndex = 4
+            currentThemeIndex = isAndroid ? 1 : 4
         else
             currentThemeIndex = 0
         comboBoxTheme.currentIndex = currentThemeIndex
@@ -116,14 +116,21 @@ Pentobi.Dialog {
             ComboBox {
                 id: comboBoxTheme
 
-                model: [
-                    qsTr("Light"),
-                    qsTr("Dark"),
-                    qsTr("Colorblind light"),
-                    qsTr("Colorblind dark"),
-                    //: Name of theme using default system colors
-                    qsTr("System"),
-                ]
+                model: isAndroid ?
+                           [
+                               qsTr("Light"),
+                               qsTr("Dark"),
+                               qsTr("Colorblind light"),
+                               qsTr("Colorblind dark")
+                           ] :
+                           [
+                               qsTr("Light"),
+                               qsTr("Dark"),
+                               qsTr("Colorblind light"),
+                               qsTr("Colorblind dark"),
+                               //: Name of theme using default system colors
+                               qsTr("System")
+                           ]
                 Layout.preferredWidth: font.pixelSize * 15
 
             }
