@@ -12,11 +12,11 @@
 
 using namespace std;
 using libboardgame_util::ArrayList;
-using libpentobi_base::BoardType;
 using libpentobi_base::CallistoGeometry;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
 using libpentobi_base::Geometry;
+using libpentobi_base::GeometryType;
 using libpentobi_base::Point;
 
 namespace libpentobi_paint {
@@ -740,31 +740,25 @@ void paint(QPainter& painter, qreal width, qreal height, Variant variant,
     piecesBase[Color(3)] = green[0];
     piecesLight[Color(3)] = green[1];
     piecesDark[Color(3)] = green[2];
-    switch (get_board_type(variant))
+    switch (get_geometry_type(variant))
     {
-    case BoardType::classic:
-    case BoardType::duo:
+    case GeometryType::classic:
         paintPiecesClassic(painter, width, height, geo, pointState, piecesBase,
                            piecesLight, piecesDark);
         break;
-    case BoardType::trigon:
-    case BoardType::trigon_3:
+    case GeometryType::trigon:
         paintPiecesTrigon(painter, width, height, geo, pointState, piecesBase,
                           piecesLight, piecesDark);
         break;
-    case BoardType::nexos:
+    case GeometryType::nexos:
         paintPiecesNexos(painter, width, height, geo, pointState, pieceId,
                          piecesBase, piecesLight, piecesDark);
         break;
-    case BoardType::callisto:
-    case BoardType::callisto_2:
-    case BoardType::callisto_3:
+    case GeometryType::callisto:
         paintPiecesCallisto(painter, width, height, geo, pointState, pieceId,
                             piecesBase, piecesLight, piecesDark);
         break;
-    case BoardType::gembloq:
-    case BoardType::gembloq_2:
-    case BoardType::gembloq_3:
+    case GeometryType::gembloq:
         paintPiecesGembloQ(painter, width, height, geo, pointState, piecesBase,
                            piecesLight, piecesDark);
         break;
@@ -777,29 +771,23 @@ void paintBoard(QPainter& painter, qreal width, qreal height, Variant variant,
                 const QColor& centerDark)
 {
     auto& geo = get_geometry(variant);
-    switch (get_board_type(variant))
+    switch (get_geometry_type(variant))
     {
-    case BoardType::classic:
-    case BoardType::duo:
+    case GeometryType::classic:
         paintBoardClassic(painter, width, height, geo, base, light, dark);
         break;
-    case BoardType::trigon:
-    case BoardType::trigon_3:
+    case GeometryType::trigon:
         paintBoardTrigon(painter, width, height, geo, base, light, dark);
         break;
-    case BoardType::nexos:
+    case GeometryType::nexos:
         paintBoardNexos(painter, width, height, geo, base, light, dark);
         break;
-    case BoardType::callisto:
-    case BoardType::callisto_2:
-    case BoardType::callisto_3:
+    case GeometryType::callisto:
         paintBoardCallisto(painter, width, height, geo, get_nu_colors(variant),
                            base, light, dark, centerBase, centerLight,
                            centerDark);
         break;
-    case BoardType::gembloq:
-    case BoardType::gembloq_2:
-    case BoardType::gembloq_3:
+    case GeometryType::gembloq:
         paintBoardGembloQ(painter, width, height, geo, base, light, dark);
         break;
     }
