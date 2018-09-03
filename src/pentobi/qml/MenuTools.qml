@@ -29,7 +29,9 @@ Pentobi.Menu {
     Pentobi.MenuSeparator { }
     Action {
         enabled: ! isRated && (gameModel.canGoBackward || gameModel.canGoForward)
-        text: addMnemonic(qsTr("Analyze Game"),
+        // Text needs to end with ellipsis on desktop because it opens a
+        // dialog asking for analysis speed, but not on Android
+        text: addMnemonic(isAndroid ? qsTr("Analyze Game") : qsTr("Analyze Game…"),
                           //: Mnemonic for menu item Analyze Game. Leave empty for no mnemonic.
                           qsTr("A"))
         onTriggered: {

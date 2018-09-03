@@ -1278,6 +1278,10 @@
         <extracomment>Mnemonic for menu item Clear Analysis. Leave empty for no mnemonic.</extracomment>
         <translation>C</translation>
     </message>
+    <message>
+        <source>Analyze Game…</source>
+        <translation>Spiel analysieren …</translation>
+    </message>
 </context>
 <context>
     <name>MenuView</name>
