@@ -32,9 +32,11 @@ Window {
     y: (Screen.height - defaultHeight) / 2
     title: qsTr("Pentobi Help")
 
-    // We'd like to hide the window instead of closing it but it doesn't work on
-    // Android to make it visible again (problem with WebView? Last tested with
-    // Qt 5.8-rc), so for now we destroy it and recreate it when needed.
+    // Note that Android doesn't actually support multiple windows, but using
+    // WebView in a window works around a bug related to QTBUG-62409, which
+    // makes WebView consume Back button events, so we cannot close the help
+    // window with the back key. But we need to detroy the window after closing
+    // otherwise it doesn't show when made visible again.
     onClosing: if (isAndroid) helpWindow.source = ""
 
     WebView {
