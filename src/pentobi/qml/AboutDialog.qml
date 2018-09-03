@@ -44,9 +44,17 @@ Pentobi.Dialog {
                 text: "<a href=\"https://pentobi.sourceforge.io\" style=\"text-decoration:none\">pentobi.sourceforge.io</a>"
                 textFormat: Text.RichText
                 elide: Qt.ElideRight
-                onLinkActivated: Qt.openUrlExternally(link)
                 width: Math.min(implicitWidth, maxContentWidth)
                 anchors.horizontalCenter: parent.horizontalCenter
+                onLinkActivated: Qt.openUrlExternally(link)
+
+                MouseArea {
+                    enabled: isDesktop
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    acceptedButtons: Qt.NoButton
+                    cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
+                }
             }
             Label {
                 text: qsTr("Copyright © 2011–%1 Markus Enzenberger").arg(2018)
