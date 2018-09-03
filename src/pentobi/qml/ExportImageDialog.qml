@@ -13,6 +13,7 @@ Pentobi.Dialog {
     id: root
 
     footer: DialogButtonBoxOkCancel { }
+    onOpened: textField.selectAll()
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
         var dialog = imageSaveDialog.get()
