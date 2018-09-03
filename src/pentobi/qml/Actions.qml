@@ -263,7 +263,7 @@ QtObject {
     property Action saveAs: Action {
         shortcut: "Ctrl+Shift+S"
         text: qsTr("Save As…")
-        enabled: gameModel.isModified
+        enabled: gameModel.isModified || gameModel.file !== ""
         onTriggered: Logic.saveAs()
     }
     property Action stop: Action {
