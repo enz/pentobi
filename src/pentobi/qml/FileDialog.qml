@@ -43,11 +43,16 @@ Pentobi.Dialog {
 
     property url _lastFolder
 
+    function isValidName(name) {
+        return name.trim().length > 0
+                && ! (! selectExisting && name.trim().startsWith("."))
+    }
+
     function checkAccept() {
-        if (name.trim().length === 0)
+        if (! isValidName(name))
             return
         folder = folderModel.folder
-        fileUrl = folder + "/" + name
+        fileUrl = folder + "/" + name.trim()
         if (! selectExisting
                 && gameModel.checkFileExists(Logic.getFileFromUrl(fileUrl))) {
             Logic.showQuestion(qsTr("Overwrite file?"), accept)
@@ -58,7 +63,7 @@ Pentobi.Dialog {
 
     footer: Pentobi.DialogButtonBox {
         Button {
-            enabled: name.trim().length > 0
+            enabled: isValidName(name)
             text: selectExisting ? qsTr("Open") : qsTr("Save")
             onClicked: checkAccept()
         }
