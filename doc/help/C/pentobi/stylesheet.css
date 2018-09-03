@@ -1,36 +1,51 @@
 html {
-  background-color: white;
+background-color: white;
 }
 
 body {
-  color: black;
-  max-width: 60em;
-  margin:auto;
-  padding: 0.5em;
-  min-height: 100vh;
+color: black;
+max-width: 60em;
+margin: auto;
+padding: 0.5em;
+min-height: 100vh;
 }
 
 :link {
-  text-decoration: none;
-  color:blue;
+text-decoration: none;
+color: blue;
 }
 
 :visited {
-  text-decoration: none;
-  color:purple;
+text-decoration: none;
+color: purple;
 }
 
 :focus {
-  outline-color: darkorange;
+outline-color: darkorange;
 }
 
-img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 90%;
+.fig {
+text-align: center;
 }
 
-div.caption {
-  font-size: small;
+.fig img {
+width: auto;
+height: auto;
+max-width: 90%;
+max-height: 90%;
+margin: 0.5em;
+}
+
+.caption {
+width: 75%;
+font-size: 90%;
+text-align: center;
+margin-left: 15%;
+margin-right: 15%;
+}
+
+.nav {
+text-align: right;
+margin-top: 0.5em;
+margin-bottom: 0.5em;
 }

@@ -27,7 +27,7 @@ Window {
     function init() { webView.url = startUrl }
 
     width: defaultWidth; height: defaultHeight
-    minimumWidth: 128; minimumHeight: 128
+    minimumWidth: 240; minimumHeight: 240
     x: (Screen.width - defaultWidth) / 2
     y: (Screen.height - defaultHeight) / 2
     title: qsTr("Pentobi Help")
