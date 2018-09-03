@@ -1024,21 +1024,21 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>M</source>
         <extracomment>Mnemonic for menu item Image. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>ASCII Art</source>
+        <source>A</source>
+        <extracomment>Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A</source>
-        <extracomment>Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.</extracomment>
+        <source>Image…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ASCII Art…</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -13,13 +13,13 @@ Pentobi.Menu {
                        qsTr("E"))
 
     Action {
-        text: addMnemonic(qsTr("Image"),
+        text: addMnemonic(qsTr("Image…"),
                           //: Mnemonic for menu item Image. Leave empty for no mnemonic.
                           qsTr("M"))
         onTriggered: exportImageDialog.open()
     }
     Action {
-        text: addMnemonic(qsTr("ASCII Art"),
+        text: addMnemonic(qsTr("ASCII Art…"),
                           //: Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.
                           qsTr("A"))
         onTriggered: {

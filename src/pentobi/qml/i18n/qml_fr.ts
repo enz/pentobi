@@ -1022,22 +1022,22 @@
         <translation>E</translation>
     </message>
     <message>
-        <source>Image</source>
-        <translation>Image</translation>
-    </message>
-    <message>
         <source>M</source>
         <extracomment>Mnemonic for menu item Image. Leave empty for no mnemonic.</extracomment>
         <translation>I</translation>
     </message>
     <message>
-        <source>ASCII Art</source>
-        <translation>Art ASCII</translation>
-    </message>
-    <message>
         <source>A</source>
         <extracomment>Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.</extracomment>
         <translation>A</translation>
+    </message>
+    <message>
+        <source>Image…</source>
+        <translation>Image…</translation>
+    </message>
+    <message>
+        <source>ASCII Art…</source>
+        <translation>Art ASCII…</translation>
     </message>
 </context>
 <context>
