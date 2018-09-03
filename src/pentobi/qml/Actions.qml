@@ -238,6 +238,7 @@ QtObject {
     }
     property Action returnKey: Action {
         shortcut: "Return"
+        enabled: ! isAndroid
         onTriggered: {
             // QtQuickControls 2 doesn't support default dialog buttons yet,
             // so we assume that Return should close the dialog
