@@ -7,7 +7,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
-import QtQuick.Window 2.0
 import "Main.js" as Logic
 import "." as Pentobi
 
@@ -18,7 +17,7 @@ Pentobi.Dialog {
         switch (comboBox.currentIndex) {
         case 2: nuSimulations = 75000; break
         case 1: nuSimulations = 15000; break
-        default: nuSimulations = 3000; break
+        default: nuSimulations = 3000
         }
         Logic.analyzeGame(nuSimulations)
     }
@@ -42,8 +41,7 @@ Pentobi.Dialog {
                 id: comboBox
 
                 width: parent.width
-                model: isAndroid ? [ qsTr("Fast"), qsTr("Normal") ]
-                                 : [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
+                model: [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
             }
         }
     }
