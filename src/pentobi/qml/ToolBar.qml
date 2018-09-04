@@ -172,7 +172,8 @@ Item {
         }
         Item {
             visible: isDesktop
-            Layout.preferredWidth: parent.height / 2
+            Layout.fillWidth: true
+            Layout.maximumWidth: 0.6 * parent.height
         }
         Label {
             visible: isDesktop
