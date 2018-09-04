@@ -10,6 +10,14 @@ import QtQuick.Controls 2.2
 Dialog {
     property real maxContentWidth:
         rootWindow.width - leftPadding - rightPadding
+    property real maxContentHeight: {
+        var h = rootWindow.height - topPadding - bottomPadding
+        if (header && header.visible)
+            h -= header.implicitHeight
+        if (footer && footer.visible)
+            h -= footer.implicitHeight
+        return h
+    }
 
     function centerDialog() {
         // Don't bind x and y because that can cause a binding loop if the

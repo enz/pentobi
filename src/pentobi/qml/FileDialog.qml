@@ -77,7 +77,7 @@ Pentobi.Dialog {
 
     Item {
         implicitWidth: Math.min(font.pixelSize * 30, maxContentWidth)
-        implicitHeight: columnLayout.implicitHeight
+        implicitHeight: Math.min(font.pixelSize * 30, maxContentHeight)
 
         Action {
             shortcut: "Alt+Left"
@@ -157,7 +157,7 @@ Pentobi.Dialog {
                 padding: 0.1 * font.pixelSize
                 focusPolicy: Qt.TabFocus
                 Layout.fillWidth: true
-                Layout.preferredHeight: Math.min(font.pixelSize * 20, 0.3 * rootWindow.height)
+                Layout.fillHeight: true
                 background: Rectangle {
                     color: frame.palette.base
                     border.color: frame.activeFocus ? frame.palette.highlight : frame.palette.mid
