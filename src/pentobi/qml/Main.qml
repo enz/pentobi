@@ -95,7 +95,7 @@ ApplicationWindow {
     }
     MouseArea {
         visible: isDesktop
-        enabled: false // only for setting cursor shape
+        acceptedButtons: Qt.NoButton // only for setting cursor shape
         anchors.fill: parent
         cursorShape: busyIndicatorRunning ? Qt.BusyCursor : Qt.ArrowCursor
     }
