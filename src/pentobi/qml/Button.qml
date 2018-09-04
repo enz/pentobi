@@ -16,7 +16,7 @@ ToolButton {
     property bool effectiveHovered: Qt.styleHints.useHoverEffects && isDesktop
                                     && buttonToolTipHovered && enabled
 
-    // We use SVG icon sources of size 22x22 and want the icon about 1.63x the
+    // We use SVG icon sources of size 22x22 and want the icon about 1.5x the
     // font size, but use multipliers in quarter-size  steps (5.5) for better
     // pixel alignment. Minimum size is half the source size. Note that on some
     // Android 4.2 devices, Qt 5.11 reports a much too low pixelDensity (e.g.
@@ -26,7 +26,7 @@ ToolButton {
     function getIconSize() {
         return Math.max(
                     Math.round(
-                        1.63 * font.pixelSize * Screen.devicePixelRatio / 5.5)
+                        1.54 * font.pixelSize * Screen.devicePixelRatio / 5.5)
                     / Screen.devicePixelRatio * 5.5,
                     Screen.devicePixelRatio * 11)
     }
