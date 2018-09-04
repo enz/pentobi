@@ -51,8 +51,8 @@ ApplicationWindow {
 
     property var dialogs: []
 
-    minimumWidth: isDesktop ? 515 : 240
-    minimumHeight: isDesktop ? 320 : 301
+    minimumWidth: isDesktop ? 480 : 240
+    minimumHeight: isDesktop ? 300 : 301
     color: theme.colorBackground
     title:
         gameModel.file === "" ?
