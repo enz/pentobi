@@ -44,7 +44,7 @@ Item {
             // Workaround for QTBUG-69102 (Canvas does not work correctly),
             // which seems to appear only on low-density Android devices
             if (isAndroid && Screen.devicePixelRatio < 1)
-                ctx.scale(1, 0.75)
+                ctx.scale(0.75, 0.75)
             ctx.fillStyle = theme.colorBackground
             ctx.fillRect(0, 0, w, h)
             ctx.strokeStyle = theme.colorCommentBorder
