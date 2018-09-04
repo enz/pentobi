@@ -8,7 +8,6 @@ import QtQuick 2.0
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.3
 
-// Icon size should be 22x22, pixel-alignment optimized for this size
 ToolButton {
     id: root
 
@@ -17,13 +16,24 @@ ToolButton {
     property bool effectiveHovered: Qt.styleHints.useHoverEffects && isDesktop
                                     && buttonToolTipHovered && enabled
 
+    // We use SVG icon sources of size 22x22 and want the icon about 1.5 times
+    // the font size, but use a multiplier that is integer or half-integer for
+    // better pixel alignment. Minimum size is half the source size.
+    function getIconSize() {
+        return Math.max(
+                    Math.round(
+                        1.5 * font.pixelSize * Screen.devicePixelRatio / 11)
+                    / Screen.devicePixelRatio * 11,
+                    Screen.devicePixelRatio * 11)
+    }
+
     opacity: root.enabled ? theme.opacitySubduedText : 0.5 * theme.opacitySubduedText
     hoverEnabled: false
     display: AbstractButton.IconOnly
     icon {
         color: theme.colorText
-        width: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
-        height: Screen.pixelDensity < 5 ? 22 : 5 * Screen.pixelDensity
+        width: getIconSize()
+        height: getIconSize()
     }
     focusPolicy: Qt.NoFocus
     flat: true
