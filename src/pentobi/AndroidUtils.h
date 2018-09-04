@@ -33,6 +33,9 @@ public:
         platforms, it returns QStandardPaths::HomeLocation */
     Q_INVOKABLE static QUrl getDefaultFolder();
 
+    /** Return DisplayMetrics.density or -1 on error. */
+    Q_INVOKABLE static float getDisplayDensity();
+
     /** Request the Android media scanner to scan a file.
         Ensures that the file will be visible via MTP. On platforms other
         than Android, this function does nothing. */

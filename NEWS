@@ -39,6 +39,8 @@ Bug fixes:
 
 * Picking up a piece from board in setup mode sometimes switched piece
   instances in game variants with multiple instances per piece.
+* Workaround for a bug that made the analysis graph only partially visible
+  on Android low-density devices (QTBUG-69102)
 
 
 Version 15.0.UNKNOWN (v15-fixes)

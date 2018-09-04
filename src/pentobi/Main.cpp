@@ -177,7 +177,14 @@ int mainDesktop()
 int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
+#ifdef Q_OS_ANDROID
+    // Don't use EnableHighDpiScaling on Android low-density devices to avoid
+    // QTBUG-69102 (Canvas does not work correctly)
+    if (AndroidUtils::getDisplayDensity() > 1)
+        QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#else
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
     QGuiApplication app(argc, argv);
     QtWebView::initialize();
     QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
