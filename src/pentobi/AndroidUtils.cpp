@@ -117,10 +117,9 @@ void AndroidUtils::scanFile(const QString& pathname)
     // Corresponding Java code:
     //   sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
     //                       Uri.fromFile(File(pathname).getCanonicalFile())));
-    auto ACTION_MEDIA_SCANNER_SCAN_FILE =
-            QAndroidJniObject::getStaticObjectField<jstring>(
+    auto action = QAndroidJniObject::getStaticObjectField<jstring>(
                 "android/content/Intent", "ACTION_MEDIA_SCANNER_SCAN_FILE");
-    if (! ACTION_MEDIA_SCANNER_SCAN_FILE.isValid())
+    if (! action.isValid())
         return;
     auto pathnameString = QAndroidJniObject::fromString(pathname);
     QAndroidJniObject file("java/io/File", "(Ljava/lang/String;)V",
@@ -128,7 +127,7 @@ void AndroidUtils::scanFile(const QString& pathname)
     if (! file.isValid())
         return;
     auto absoluteFile = file.callObjectMethod(
-                "getAbsoluteFile", "()Ljava/io/File;", file.object());
+                "getAbsoluteFile", "()Ljava/io/File;");
     if (! absoluteFile.isValid())
         return;
     auto uri = QAndroidJniObject::callStaticObjectMethod(
@@ -138,13 +137,12 @@ void AndroidUtils::scanFile(const QString& pathname)
         return;
     QAndroidJniObject intent("android/content/Intent",
                              "(Ljava/lang/String;Landroid/net/Uri;)V",
-                             ACTION_MEDIA_SCANNER_SCAN_FILE.object<jstring>(),
-                             uri.object());
+                             action.object<jstring>(), uri.object());
     if (! intent.isValid())
         return;
-    auto activity = QtAndroid::androidActivity();
-    activity.callMethod<void>("sendBroadcast", "(Landroid/content/Intent;)V",
-                              intent.object());
+    QtAndroid::androidActivity().callMethod<void>(
+                "sendBroadcast", "(Landroid/content/Intent;)V",
+                intent.object());
 #else
     Q_UNUSED(pathname);
 #endif
