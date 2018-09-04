@@ -19,6 +19,9 @@ ToolButton {
     // We use SVG icon sources of size 22x22 and want the icon about 1.5 times
     // the font size, but use a multiplier that is integer or half-integer for
     // better pixel alignment. Minimum size is half the source size.
+    // Note that on some Android 4.2 devices, Qt 5.11 reports a much too low
+    // pixelDensity but uses a reasonable font size, so deriving the size
+    // directly from Screen.pixelDensity is not a good idea.
     function getIconSize() {
         return Math.max(
                     Math.round(
