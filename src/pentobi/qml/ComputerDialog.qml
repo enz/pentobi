@@ -50,11 +50,7 @@ Pentobi.Dialog {
 
                 Label { text: qsTr("Computer plays:") }
                 GridLayout {
-                    // Two checkboxes in game variants with two colors per
-                    // player might not fit in same row on small screens
-                    columns:
-                        gameModel.nuPlayers === 2
-                        && maxContentWidth < font.pixelSize * 20 ? 1 : 2
+                    columns: gameModel.nuPlayers === 2 ? 1 : 2
                     Layout.fillWidth: true
 
                     Row {
