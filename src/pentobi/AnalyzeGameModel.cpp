@@ -137,11 +137,11 @@ void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)
     {
         auto mv = m_analyzeGame.get_move(i);
         bool found = false;
-        for (auto& i : node->get_children())
-            if (tree.get_move(i) == mv)
+        for (auto& child : node->get_children())
+            if (tree.get_move(child) == mv)
             {
                 found = true;
-                node = &i;
+                node = &child;
                 break;
             }
         if (! found)
