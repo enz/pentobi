@@ -51,7 +51,7 @@ public:
     bool has_move(const SgfNode& node) const;
 
     /** Return move or ColorMove::null() if node has no move property.
-        @throws InvalidTree if the node has a move property with an invalid
+        @throws SgfError if the node has a move property with an invalid
         value. */
     ColorMove get_move(const SgfNode& node) const;
 

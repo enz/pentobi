@@ -22,9 +22,7 @@ using namespace std;
     (game-independent) syntax errors, but not for semantic errors (e.g. illegal
     moves) because that would be too expensive when loading large trees and
     not allow the user to partially use a tree if there is an error only in
-    some variations. As a consequence, functions that use the tree may cause
-    errors later (e.g. when trying to update the game state to a node in the
-    tree). In this case, they should throw InvalidTree. */
+    some variations. */
 class SgfError
     : public runtime_error
 {
