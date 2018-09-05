@@ -73,6 +73,7 @@ Pentobi.Dialog {
                     qsTr("Bad"),
                     qsTr("Very Bad")
                 ]
+                Layout.fillWidth: true
             }
         }
     }

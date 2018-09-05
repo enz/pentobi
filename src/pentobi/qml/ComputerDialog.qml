@@ -50,9 +50,12 @@ Pentobi.Dialog {
 
                 Label { text: qsTr("Computer plays:") }
                 GridLayout {
-                    columns: gameModel.nuPlayers <= 2 ? 1 : 2
+                    columns: 2
+                    Layout.fillWidth: true
 
                     Row {
+                        Layout.fillWidth: true
+
                         Rectangle {
                             width: font.pixelSize; height: width
                             radius: width / 2
@@ -88,6 +91,8 @@ Pentobi.Dialog {
                         }
                     }
                     Row {
+                        Layout.fillWidth: true
+
                         Rectangle {
                             width: font.pixelSize; height: width
                             radius: width / 2
@@ -125,6 +130,7 @@ Pentobi.Dialog {
                     }
                     Row {
                         visible: gameModel.nuPlayers > 3
+                        Layout.fillWidth: true
 
                         Rectangle {
                             width: font.pixelSize; height: width
@@ -141,6 +147,7 @@ Pentobi.Dialog {
                     }
                     Row {
                         visible: gameModel.nuPlayers > 2
+                        Layout.fillWidth: true
 
                         Rectangle {
                             width: font.pixelSize; height: width

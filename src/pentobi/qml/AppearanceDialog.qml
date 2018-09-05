@@ -134,7 +134,7 @@ Pentobi.Dialog {
                                qsTr("System")
                            ]
                 Layout.preferredWidth: font.pixelSize * 15
-
+                Layout.fillWidth: true
             }
             Label { text: qsTr("Move marking:") }
             ComboBox {
@@ -148,7 +148,7 @@ Pentobi.Dialog {
                     qsTr("None")
                 ]
                 Layout.preferredWidth: font.pixelSize * 15
-
+                Layout.fillWidth: true
             }
         }
     }

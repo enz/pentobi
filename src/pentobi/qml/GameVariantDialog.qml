@@ -36,6 +36,8 @@ Pentobi.Dialog {
         ColumnLayout {
             id: columnLayout
 
+            anchors.fill: parent
+
             ComboBox {
                 id: comboBox
 
@@ -74,12 +76,19 @@ Pentobi.Dialog {
                             gameVariant = "callisto_2"
                         break
                     }
+                Layout.fillWidth: true
             }
             GridLayout {
                 columns: 2
+                Layout.fillWidth: true
 
-                Label { text: qsTr("Players:") }
+                Label {
+                    text: qsTr("Players:")
+                    Layout.fillWidth: true
+                }
                 RowLayout {
+                    Layout.fillWidth: true
+
                     RadioButton {
                         text: "2"
                         checked: gameVariant === "classic_2"
@@ -107,6 +116,7 @@ Pentobi.Dialog {
                                 else if (gameVariant === "gembloq_3")
                                     gameVariant = "gembloq_2"
                             }
+                        Layout.fillWidth: true
                     }
                     RadioButton {
                         text: "3"
@@ -130,6 +140,7 @@ Pentobi.Dialog {
                                 else if (gameVariant.startsWith("callisto"))
                                     gameVariant = "callisto_3"
                             }
+                        Layout.fillWidth: true
                     }
                     RadioButton {
                         text: "4"
@@ -157,10 +168,16 @@ Pentobi.Dialog {
                                 else if (gameVariant.startsWith("callisto"))
                                     gameVariant = "callisto"
                             }
+                        Layout.fillWidth: true
                     }
                 }
-                Label { text: qsTr("Colors:") }
+                Label {
+                    text: qsTr("Colors:")
+                    Layout.fillWidth: true
+                }
                 RowLayout {
+                    Layout.fillWidth: true
+
                     RadioButton {
                         text: "2"
                         opacity: gameVariant === "duo"
@@ -184,6 +201,7 @@ Pentobi.Dialog {
                                 else if (gameVariant.startsWith("gembloq"))
                                     gameVariant = "gembloq_2"
                             }
+                        Layout.fillWidth: true
                     }
                     RadioButton {
                         text: "3"
@@ -203,6 +221,7 @@ Pentobi.Dialog {
                                 else if (gameVariant.startsWith("callisto"))
                                     gameVariant = "callisto_3"
                             }
+                        Layout.fillWidth: true
                     }
                     RadioButton {
                         text: "4"
@@ -244,6 +263,7 @@ Pentobi.Dialog {
                                 else if (gameVariant === "callisto_3")
                                     gameVariant = "callisto"
                             }
+                        Layout.fillWidth: true
                     }
                 }
             }
