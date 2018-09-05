@@ -35,14 +35,19 @@ Pentobi.Dialog {
     }
 
     Item {
-        implicitWidth: Math.max(Math.min(font.pixelSize * 16, maxContentWidth),
-                                minContentWidth)
+        implicitWidth:
+            Math.max(Math.min(font.pixelSize * 16, maxContentWidth),
+                     minContentWidth)
         implicitHeight: columnLayout.implicitHeight
 
         ColumnLayout {
             id: columnLayout
 
+            anchors.fill: parent
+
             ColumnLayout {
+                Layout.fillWidth: true
+
                 Label { text: qsTr("Computer plays:") }
                 GridLayout {
                     columns: gameModel.nuPlayers <= 2 ? 1 : 2
