@@ -39,12 +39,8 @@ Item {
         }
     }
     Text {
-        text: {
-            if (isAltColor)
-                return isFinal ? "(<u>%L1</u>)".arg(value) : "(%L1)".arg(value)
-            else
-                return isFinal ? "<u>%L1</u>".arg(value) : "%L1".arg(value)
-        }
+        text: isAltColor ? ""
+                         : isFinal ? "<u>%L1</u>".arg(value) : "%L1".arg(value)
         color: theme.colorText
         opacity: 0.9 - 0.15 * theme.colorBackground.hslLightness
         width: root.width - point1.width - point2.width - anchors.leftMargin
