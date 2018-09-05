@@ -37,7 +37,7 @@ Pentobi.Dialog {
     Item {
         implicitWidth:
             Math.max(Math.min(font.pixelSize * 16, maxContentWidth),
-                     minContentWidth)
+                     columnLayout.implicitWidth, minContentWidth)
         implicitHeight: columnLayout.implicitHeight
 
         ColumnLayout {
@@ -50,7 +50,11 @@ Pentobi.Dialog {
 
                 Label { text: qsTr("Computer plays:") }
                 GridLayout {
-                    columns: 2
+                    // Two checkboxes in game variants with two colors per
+                    // player might not fit in same row on small screens
+                    columns:
+                        gameModel.nuPlayers === 2
+                        && maxContentWidth < font.pixelSize * 20 ? 1 : 2
                     Layout.fillWidth: true
 
                     Row {
@@ -169,6 +173,8 @@ Pentobi.Dialog {
                 Layout.fillWidth: true
 
                 Label {
+                    id: labelLevel
+
                     enabled: ! isRated
                     text: qsTr("Level %1").arg(slider.value)
                 }
@@ -177,6 +183,13 @@ Pentobi.Dialog {
 
                     enabled: ! isRated
                     from: 1; to: playerModel.maxLevel; stepSize: 1
+                    // Implicit width of main contentItem might not fully fit
+                    // on small screens if 2x2 check boxes are displayed. In
+                    // this case, there is no need to clip the slider also,
+                    // which expands to the dialog width if ! isDesktop
+                    Layout.maximumWidth:
+                        maxContentWidth - labelLevel.implicitWidth
+                        - parent.spacing
                     Layout.fillWidth: true
                 }
             }
