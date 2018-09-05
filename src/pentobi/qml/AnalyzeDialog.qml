@@ -44,6 +44,8 @@ Pentobi.Dialog {
 
                 width: parent.width
                 model: [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
+                Layout.fillWidth: true
+                Layout.preferredWidth: font.pixelSize * 15
             }
         }
     }

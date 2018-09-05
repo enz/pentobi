@@ -59,8 +59,10 @@ Pentobi.Dialog {
             anchors.fill: parent
 
             Label { text: qsTr("Move %1").arg(moveNumber) }
-            Item { Layout.preferredHeight: 0.5 * font.pixelSize }
-            Label { text: qsTr("Annotation:") }
+            Label {
+                text: qsTr("Annotation:")
+                Layout.topMargin: 0.5 * font.pixelSize
+            }
             ComboBox {
                 id: comboBox
 
@@ -73,6 +75,7 @@ Pentobi.Dialog {
                     qsTr("Bad"),
                     qsTr("Very Bad")
                 ]
+                Layout.preferredWidth: 15 * font.pixelSize
                 Layout.fillWidth: true
             }
         }

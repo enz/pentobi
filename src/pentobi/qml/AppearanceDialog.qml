@@ -133,7 +133,7 @@ Pentobi.Dialog {
                                //: Name of theme using default system colors
                                qsTr("System")
                            ]
-                Layout.preferredWidth: font.pixelSize * 15
+                Layout.preferredWidth: font.pixelSize * 20
                 Layout.fillWidth: true
             }
             Label { text: qsTr("Move marking:") }
@@ -147,7 +147,7 @@ Pentobi.Dialog {
                     //: Move marking/None
                     qsTr("None")
                 ]
-                Layout.preferredWidth: font.pixelSize * 15
+                Layout.preferredWidth: font.pixelSize * 20
                 Layout.fillWidth: true
             }
         }
