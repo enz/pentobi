@@ -165,6 +165,7 @@ Pentobi.Dialog {
                 }
             }
             RowLayout {
+                Layout.topMargin: 0.6 * font.pixelSize
                 Layout.fillWidth: true
 
                 Label {
