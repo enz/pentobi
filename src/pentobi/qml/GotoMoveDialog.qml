@@ -17,7 +17,9 @@ Pentobi.Dialog {
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
     Item {
-        implicitWidth: Math.min(rowLayout.implicitWidth, maxContentWidth)
+        implicitWidth:
+            Math.max(Math.min(rowLayout.implicitWidth, maxContentWidth),
+                     minContentWidth)
         implicitHeight: rowLayout.implicitHeight
 
         RowLayout {

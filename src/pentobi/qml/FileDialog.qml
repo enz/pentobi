@@ -76,7 +76,8 @@ Pentobi.Dialog {
     }
 
     Item {
-        implicitWidth: Math.min(font.pixelSize * 30, maxContentWidth)
+        implicitWidth: Math.max(Math.min(font.pixelSize * 30, maxContentWidth),
+                                minContentWidth)
         implicitHeight: Math.min(font.pixelSize * 30, maxContentHeight)
 
         Action {

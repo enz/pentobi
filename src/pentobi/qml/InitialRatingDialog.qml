@@ -21,7 +21,9 @@ Pentobi.Dialog {
     ColumnLayout
     {
         Item {
-            implicitWidth: Math.min(textLabel.implicitWidth, maxContentWidth)
+            implicitWidth:
+                Math.max(Math.min(textLabel.implicitWidth, maxContentWidth),
+                         minContentWidth)
             implicitHeight: textLabel.implicitHeight
             Layout.fillWidth: true
 

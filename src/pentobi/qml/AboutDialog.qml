@@ -9,7 +9,9 @@ Pentobi.Dialog {
     footer: Pentobi.DialogButtonBox { ButtonClose { } }
 
     Item {
-        implicitWidth: Math.min(column.implicitWidth, maxContentWidth)
+        implicitWidth:
+            Math.max(Math.min(column.implicitWidth, maxContentWidth),
+                     minContentWidth)
         implicitHeight: column.implicitHeight
 
         Column {

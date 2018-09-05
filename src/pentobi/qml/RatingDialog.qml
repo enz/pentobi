@@ -18,8 +18,8 @@ Pentobi.Dialog {
     footer: Pentobi.DialogButtonBox { ButtonClose { } }
 
     Item {
-        // Make it wide enough to show a the graph
-        implicitWidth: Math.min(font.pixelSize * 22, maxContentWidth)
+        implicitWidth: Math.max(Math.min(font.pixelSize * 22, maxContentWidth),
+                                minContentWidth)
         implicitHeight: columnLayout.implicitHeight
 
         ColumnLayout

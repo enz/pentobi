@@ -18,6 +18,9 @@ Dialog {
             h -= footer.implicitHeight
         return h
     }
+    property real minContentWidth:
+        // Match window width on mobile devices within reason
+        isDesktop ? 0 : Math.min(60 * font.pixelSize, maxContentWidth)
 
     function centerDialog() {
         // Don't bind x and y because that can cause a binding loop if the

@@ -27,7 +27,9 @@ Pentobi.Dialog {
                     Logic.showInfo(gameModel.lastInputOutputError)
 
     Item {
-        implicitWidth: Math.min(rowLayout.implicitWidth, maxContentWidth)
+        implicitWidth:
+            Math.max(Math.min(rowLayout.implicitWidth, maxContentWidth),
+                     minContentWidth)
         implicitHeight: rowLayout.implicitHeight
 
         ColumnLayout {
