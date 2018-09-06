@@ -171,9 +171,12 @@ function pickPiece(piece) {
 }
 
 function pickPieceAt(piece, coord) {
-    if (playerModel.isGenMoveRunning || gameModel.isGameOver
-            || (piece.pieceModel.color !== gameModel.toPlay && ! setupMode))
+    if (playerModel.isGenMoveRunning || gameModel.isGameOver)
         return
+    if (piece.pieceModel.color !== gameModel.toPlay && ! setupMode) {
+        gameDisplay.showToPlay()
+        return
+    }
     if (! pieceManipulator.pieceModel) {
         // Position pieceManipulator at center of piece if possible, but
         // make sure it is completely visible
