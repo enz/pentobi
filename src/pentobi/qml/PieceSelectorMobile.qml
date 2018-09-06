@@ -16,13 +16,13 @@ Flickable {
     property alias pieces3: pieceList3.pieces
     property int nuColors
     property int columns
-    property real spacingPieceLists
+    property real rowSpacing
     property alias transitionsEnabled: transition.enabled
 
     signal piecePicked(var piece)
 
     contentHeight: pieceList0.height + pieceList1.height + pieceList2.height
-                   + pieceList3.height + (nuColors + 1) * 0.5 * spacingPieceLists
+                   + pieceList3.height + (nuColors + 1) * 0.5 * rowSpacing
     flickableDirection: Flickable.VerticalFlick
     clip: true
 
@@ -31,6 +31,7 @@ Flickable {
 
         width: root.width
         columns: root.columns
+        rowSpacing: root.rowSpacing
         onPiecePicked: root.piecePicked(piece)
     }
     PieceList {
@@ -38,6 +39,7 @@ Flickable {
 
         width: root.width
         columns: root.columns
+        rowSpacing: root.rowSpacing
         onPiecePicked: root.piecePicked(piece)
     }
     PieceList {
@@ -45,6 +47,7 @@ Flickable {
 
         width: root.width
         columns: root.columns
+        rowSpacing: root.rowSpacing
         onPiecePicked: root.piecePicked(piece)
     }
     PieceList {
@@ -52,6 +55,7 @@ Flickable {
 
         width: root.width
         columns: root.columns
+        rowSpacing: root.rowSpacing
         onPiecePicked: root.piecePicked(piece)
     }
 
@@ -66,27 +70,27 @@ Flickable {
 
             PropertyChanges {
                 target: pieceList0
-                y: 0.5 * spacingPieceLists
+                y: 0.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList1
                 y: {
                     if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList0.height + pieceList2.height + 1.5 * spacingPieceLists
-                    return pieceList0.height + spacingPieceLists
+                        return pieceList0.height + pieceList2.height + 1.5 * rowSpacing
+                    return pieceList0.height + rowSpacing
                 }
             }
             PropertyChanges {
                 target: pieceList2
                 y: {
                     if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList0.height + spacingPieceLists
-                    return pieceList0.height + pieceList1.height  + 1.5 * spacingPieceLists
+                        return pieceList0.height + rowSpacing
+                    return pieceList0.height + pieceList1.height  + 1.5 * rowSpacing
                 }
             }
             PropertyChanges {
                 target: pieceList3
-                y: pieceList0.height + pieceList1.height + pieceList2.height + 2 * spacingPieceLists
+                y: pieceList0.height + pieceList1.height + pieceList2.height + 2 * rowSpacing
             }
         },
         State {
@@ -95,32 +99,32 @@ Flickable {
 
             PropertyChanges {
                 target: pieceList1
-                y: 0.5 * spacingPieceLists
+                y: 0.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList2
                 y: {
                     if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList1.height + pieceList3.height + 1.5 * spacingPieceLists
-                    return pieceList1.height + spacingPieceLists
+                        return pieceList1.height + pieceList3.height + 1.5 * rowSpacing
+                    return pieceList1.height + rowSpacing
                 }
             }
             PropertyChanges {
                 target: pieceList3
                 y: {
                     if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList1.height + spacingPieceLists
-                    return pieceList1.height + pieceList2.height + 1.5 * spacingPieceLists
+                        return pieceList1.height + rowSpacing
+                    return pieceList1.height + pieceList2.height + 1.5 * rowSpacing
                 }
             }
             PropertyChanges {
                 target: pieceList0
                 y: {
                     if (gameModel.nuColors === 2)
-                        return pieceList1.height + pieceList2.height + pieceList3.height + spacingPieceLists
+                        return pieceList1.height + pieceList2.height + pieceList3.height + rowSpacing
                     if (gameModel.nuColors === 3)
-                        return pieceList1.height + pieceList2.height + pieceList3.height + 1.5 * spacingPieceLists
-                    return pieceList1.height + pieceList2.height + pieceList3.height + 2 * spacingPieceLists
+                        return pieceList1.height + pieceList2.height + pieceList3.height + 1.5 * rowSpacing
+                    return pieceList1.height + pieceList2.height + pieceList3.height + 2 * rowSpacing
                 }
             }
         },
@@ -130,32 +134,32 @@ Flickable {
 
             PropertyChanges {
                 target: pieceList2
-                y: 0.5 * spacingPieceLists
+                y: 0.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList3
                 y: {
                     if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList2.height + pieceList0.height + 1.5 * spacingPieceLists
-                    return pieceList2.height + spacingPieceLists
+                        return pieceList2.height + pieceList0.height + 1.5 * rowSpacing
+                    return pieceList2.height + rowSpacing
                 }
             }
             PropertyChanges {
                 target: pieceList0
                 y: {
                     if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList2.height + spacingPieceLists
+                        return pieceList2.height + rowSpacing
                     if (gameModel.nuColors === 3)
-                        return pieceList2.height + pieceList3.height + spacingPieceLists
-                    return pieceList2.height + pieceList3.height + 1.5 * spacingPieceLists
+                        return pieceList2.height + pieceList3.height + rowSpacing
+                    return pieceList2.height + pieceList3.height + 1.5 * rowSpacing
                 }
             }
             PropertyChanges {
                 target: pieceList1
                 y: {
                     if (gameModel.nuColors === 3)
-                        return pieceList2.height + pieceList3.height + pieceList0.height + 1.5 * spacingPieceLists
-                    return pieceList2.height + pieceList3.height + pieceList0.height + 2 * spacingPieceLists
+                        return pieceList2.height + pieceList3.height + pieceList0.height + 1.5 * rowSpacing
+                    return pieceList2.height + pieceList3.height + pieceList0.height + 2 * rowSpacing
                 }
             }
         },
@@ -165,27 +169,27 @@ Flickable {
 
             PropertyChanges {
                 target: pieceList3
-                y: 0.5 * spacingPieceLists
+                y: 0.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList0
                 y: {
                     if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList3.height + pieceList1.height + 1.5 * spacingPieceLists
-                    return pieceList3.height + spacingPieceLists
+                        return pieceList3.height + pieceList1.height + 1.5 * rowSpacing
+                    return pieceList3.height + rowSpacing
                 }
             }
             PropertyChanges {
                 target: pieceList1
                 y: {
                     if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList3.height + spacingPieceLists
-                    return pieceList3.height + pieceList0.height + 1.5 * spacingPieceLists
+                        return pieceList3.height + rowSpacing
+                    return pieceList3.height + pieceList0.height + 1.5 * rowSpacing
                 }
             }
             PropertyChanges {
                 target: pieceList2
-                y: pieceList3.height + pieceList0.height + pieceList1.height + 2 * spacingPieceLists
+                y: pieceList3.height + pieceList0.height + pieceList1.height + 2 * rowSpacing
             }
         }
     ]

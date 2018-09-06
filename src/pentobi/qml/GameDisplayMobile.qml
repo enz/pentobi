@@ -151,9 +151,11 @@ Item
                     columns: pieces0 && pieces0.length <= 21 ? 7 : 8
                     width: elementSize * columns
                     height: swipeView.height - scoreDisplay.height
-                    spacingPieceLists:
+                    rowSpacing: {
                         // Don't show partial pieces
-                        height - Math.floor(height / elementSize) * elementSize
+                        var n = Math.floor(height / elementSize)
+                        return (height - n * elementSize) / n
+                    }
                     anchors.horizontalCenter: parent.horizontalCenter
                     toPlay: gameModel.toPlay
                     nuColors: gameModel.nuColors
