@@ -45,6 +45,6 @@ RowLayout {
         opacity: 0.9 - 0.15 * theme.colorBackground.hslLightness
         font { pixelSize: fontSize; preferShaping: false }
         Layout.leftMargin: 0.14 * fontSize
-        Layout.minimumWidth: isAltColor ? 0 : 2 * fontSize
+        Layout.minimumWidth: isAltColor ? 0 : 1.5 * fontSize
     }
 }
