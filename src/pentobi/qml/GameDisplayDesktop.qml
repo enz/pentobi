@@ -194,8 +194,8 @@ Item
                     ScoreDisplay {
                         id: scoreDisplay
 
+                        width: parent.width
                         height: 0.05 * parent.width
-                        pointSize: 0.6 * height
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
                     PieceSelectorDesktop {

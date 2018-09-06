@@ -137,10 +137,8 @@ Item
                 ScoreDisplay {
                     id: scoreDisplay
 
-                    height:
-                        (gameModel.nuPlayers === 2 && gameModel.nuColors > 2) ?
-                            0.05 * swipeView.width : 0.06 * swipeView.width
-                    pointSize: 0.6 * height
+                    width: swipeView.width
+                    height: 0.06 * swipeView.width
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
                 PieceSelectorMobile {
