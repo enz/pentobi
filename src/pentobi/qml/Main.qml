@@ -61,7 +61,8 @@ ApplicationWindow {
             //: Window title if file is loaded. The argument is the file name
             //: prepended with a star if the file has been modified.
             qsTr("%1 - Pentobi").arg(Logic.getFileLabel(gameModel.file,
-                                                        gameModel.isModified))
+                                                        gameModel.isModified,
+                                                        true))
     onClosing: if ( ! Logic.quit()) close.accepted = false
     Component.onCompleted: Logic.init()
     MouseArea {

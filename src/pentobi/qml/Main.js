@@ -274,11 +274,14 @@ function getFileInfo(file, isModified) {
     return file
 }
 
-function getFileLabel(file, isModified) {
+function getFileLabel(file, isModified, withFileEnding) {
     if (file === "")
         return ""
     var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"))
-    return (isModified ? "*" : "") + file.substring(pos + 1)
+    var label = file.substring(pos + 1)
+    if (! withFileEnding && label.toLowerCase().endsWith(".blksgf"))
+        label = label.substring(0, label.length - ".blksgf".length)
+    return (isModified ? "*" : "") + label
 }
 
 function help() {

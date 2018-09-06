@@ -49,7 +49,8 @@ Item {
             text: {
                 if (gameDisplay.setupMode) return qsTr("Setup")
                 if (isRated) return qsTr("Rated")
-                return Logic.getFileLabel(gameModel.file, gameModel.isModified)
+                return Logic.getFileLabel(gameModel.file, gameModel.isModified,
+                                          false)
             }
             // There is a bug in Qt 5.11 that in some situations elides the
             // text even if there is enough room for it. It doesn't occur if
@@ -180,7 +181,8 @@ Item {
             text: {
                 if (gameDisplay.setupMode) return qsTr("Setup Mode")
                 if (isRated) return qsTr("Rated Game")
-                return Logic.getFileLabel(gameModel.file, gameModel.isModified)
+                return Logic.getFileLabel(gameModel.file, gameModel.isModified,
+                                          false)
             }
             color: theme.colorText
             elide: Text.ElideRight
