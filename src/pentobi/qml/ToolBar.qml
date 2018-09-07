@@ -38,20 +38,14 @@ Item {
         anchors.fill: parent
         spacing: 0
 
+        // Like the label used for desktop after the toolbuttons, but with
+        // shorter text for small smartphone screens
         Label {
-            // Like the label used for desktop after the toolbuttons, but with
-            // shorter text for small smartphone screens and a message box instead
-            // of a tooltip for showing the full file path because tooltips are
-            // not wrapped if larger than screen (last tested with Qt 5.11.1)
             visible: ! isDesktop
             color: theme.colorText
             elide: Text.ElideRight
-            text: {
-                if (gameDisplay.setupMode) return qsTr("Setup")
-                if (isRated) return qsTr("Rated")
-                return Logic.getFileLabel(gameModel.file, gameModel.isModified,
-                                          false)
-            }
+            text:
+                Logic.getGameLabel(gameModel.file, gameModel.isModified, true)
             // There is a bug in Qt 5.11 that in some situations elides the
             // text even if there is enough room for it. It doesn't occur if
             // we use implicitWidth + 1 instead if implicitWidth
@@ -178,12 +172,8 @@ Item {
         }
         Label {
             visible: isDesktop
-            text: {
-                if (gameDisplay.setupMode) return qsTr("Setup Mode")
-                if (isRated) return qsTr("Rated Game")
-                return Logic.getFileLabel(gameModel.file, gameModel.isModified,
-                                          false)
-            }
+            text:
+                Logic.getGameLabel(gameModel.file, gameModel.isModified, false)
             color: theme.colorText
             elide: Text.ElideRight
             // See comment at Layout.maximumWidth of first label

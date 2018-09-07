@@ -54,15 +54,7 @@ ApplicationWindow {
     minimumWidth: isDesktop ? 480 : 240
     minimumHeight: isDesktop ? 300 : 301
     color: theme.colorBackground
-    title:
-        gameModel.file === "" ?
-            //: Window title if no file is loaded.
-            qsTr("Pentobi") :
-            //: Window title if file is loaded. The argument is the file name
-            //: prepended with a star if the file has been modified.
-            qsTr("%1 - Pentobi").arg(Logic.getFileLabel(gameModel.file,
-                                                        gameModel.isModified,
-                                                        true))
+    title: Logic.getWindowTitle(gameModel.file, gameModel.isModified)
     onClosing: if ( ! Logic.quit()) close.accepted = false
     Component.onCompleted: Logic.init()
     MouseArea {

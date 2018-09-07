@@ -860,6 +860,35 @@
         <source>Children truncated</source>
         <translation>Nœuds fils coupé</translation>
     </message>
+    <message>
+        <source>Setup</source>
+        <extracomment>Small-screen label for setup mode (short for &quot;Setup Mode&quot;).</extracomment>
+        <translation>Position</translation>
+    </message>
+    <message>
+        <source>Setup Mode</source>
+        <translation>Position</translation>
+    </message>
+    <message>
+        <source>Rated</source>
+        <extracomment>Small-screen label for ongoing rated game (short for &quot;Rated Game&quot;).</extracomment>
+        <translation>Classée</translation>
+    </message>
+    <message>
+        <source>Rated Game</source>
+        <extracomment>Label for ongoing rated game</extracomment>
+        <translation>Partie classée</translation>
+    </message>
+    <message>
+        <source>Rated %1</source>
+        <extracomment>Small-screen label for finished rated game (short for &quot;Rated Game&quot;). The argument is the game number.</extracomment>
+        <translation>Classée %1</translation>
+    </message>
+    <message>
+        <source>Rated Game %1</source>
+        <extracomment>Label for finished rated game. The argument is the game number.</extracomment>
+        <translation>Partie classée %1</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
@@ -1530,14 +1559,6 @@
 <context>
     <name>ToolBar</name>
     <message>
-        <source>Setup</source>
-        <translation>Position</translation>
-    </message>
-    <message>
-        <source>Rated</source>
-        <translation>Classée</translation>
-    </message>
-    <message>
         <source>Start a new game</source>
         <translation>Commencer une nouvelle partie</translation>
     </message>
@@ -1588,14 +1609,6 @@
     <message>
         <source>Go to next variation</source>
         <translation>Aller à la variation suivante</translation>
-    </message>
-    <message>
-        <source>Setup Mode</source>
-        <translation>Position</translation>
-    </message>
-    <message>
-        <source>Rated Game</source>
-        <translation>Partie classée</translation>
     </message>
 </context>
 </TS>

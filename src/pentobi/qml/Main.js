@@ -274,14 +274,52 @@ function getFileInfo(file, isModified) {
     return file
 }
 
-function getFileLabel(file, isModified, withFileEnding) {
+function getGameLabel(file, isModified, short) {
+    if (gameDisplay.setupMode)
+        return short ?
+                    //: Small-screen label for setup mode (short for
+                    //: "Setup Mode").
+                    qsTr("Setup")
+                  : qsTr("Setup Mode")
+    if (isRated)
+        return short ?
+                    //: Small-screen label for ongoing rated game (short for
+                    //: "Rated Game").
+                    qsTr("Rated")
+                    //: Label for ongoing rated game
+                  : qsTr("Rated Game")
     if (file === "")
         return ""
-    var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"))
-    var label = file.substring(pos + 1)
-    if (! withFileEnding && label.toLowerCase().endsWith(".blksgf"))
-        label = label.substring(0, label.length - ".blksgf".length)
+    var label
+    var n = ratingModel.getGameNumberOfFile(file)
+    if (n > 0)
+        label = short ?
+                    //: Small-screen label for finished rated game (short for
+                    //: "Rated Game"). The argument is the game number.
+                    qsTr("Rated %1").arg(n)
+                    //: Label for finished rated game. The argument is the game
+                    //: number.
+                  : qsTr("Rated Game %1").arg(n)
+    else {
+        var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"))
+        label = file.substring(pos + 1)
+        if (label.toLowerCase().endsWith(".blksgf"))
+            label = label.substring(0, label.length - ".blksgf".length)
+    }
     return (isModified ? "*" : "") + label
+}
+
+function getWindowTitle(file, isModified) {
+    if (file === "")
+        //: Window title if no file is loaded.
+        return qsTr("Pentobi")
+    var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"))
+    var name = file.substring(pos + 1)
+    if (isModified)
+        name = "*" + name
+    //: Window title if file is loaded. The argument is the file name
+    //: prepended with a star if the file has been modified.
+    return qsTr("%1 - Pentobi").arg(name)
 }
 
 function help() {

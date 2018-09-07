@@ -107,6 +107,23 @@ QString RatingModel::getFile(int gameNumber) const
     return getDir() + "/" + QString::number(gameNumber) + ".blksgf";
 }
 
+int RatingModel::getGameNumberOfFile(const QString& file) const
+{
+    QString left = getDir() + QStringLiteral("/");
+    if (! file.startsWith(left))
+        return 0;
+    QString right = QStringLiteral(".blksgf");
+    if (! file.endsWith(right))
+        return 0;
+    auto leftLen = left.length();
+    auto rightLen = right.length();
+    int n;
+    bool ok;
+    n = QStringRef(&file, leftLen,
+                   file.length() - leftLen - rightLen).toInt(&ok);
+    return ok && n >= 1 && n <= m_numberGames ? n : 0;
+}
+
 int RatingModel::getNextHumanPlayer() const
 {
     Variant variant;
