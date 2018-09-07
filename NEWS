@@ -8,7 +8,6 @@ Version 15.UNKNOWN (master)
   game tree, modifications to loaded file, current analysis)
 * The minimum required Qt version is now 5.11 also for the desktop version
   See INSTALL for the new run-time and compile-time dependencies.
-* The minimum required Android version is now 4.2.
 * The installation directory /usr/share/pentobi does not exist anymore.
   The translations, opening books and user manual are compiled as resources
   into the binary executable.
