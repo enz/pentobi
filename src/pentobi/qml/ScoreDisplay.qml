@@ -28,10 +28,9 @@ Item {
         id: rowLayout
 
         width: root.width
-        height: gameModel.nuPlayers === 2 && gameModel.nuColors > 2 ?
-                    Math.min(root.height, 0.04 * root.width)
-                  : Math.min(root.height, 0.05 * root.width)
+        height: Math.min(root.height, 0.045 * root.width)
         anchors.centerIn: parent
+        spacing: 0
 
         Item { Layout.fillWidth: true }
         ScoreElement2 {
