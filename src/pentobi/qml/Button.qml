@@ -13,8 +13,8 @@ ToolButton {
 
     // See ButtonToolTip
     property bool buttonToolTipHovered
-    property bool effectiveHovered: Qt.styleHints.useHoverEffects && isDesktop
-                                    && buttonToolTipHovered && enabled
+    property bool effectiveHovered:
+        isDesktop && buttonToolTipHovered && enabled
 
     // We use SVG icon sources of size 22x22 and want the icon about 1.5x the
     // font size, but use multipliers in quarter-size  steps (5.5) for better
