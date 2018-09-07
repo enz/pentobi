@@ -38,6 +38,8 @@ Dialog {
         return false
     }
 
+    modal: true
+    dim: false
     focus: true
     clip: true
     closePolicy: Popup.CloseOnEscape
