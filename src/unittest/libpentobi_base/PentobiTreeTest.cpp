@@ -82,8 +82,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_tree_backward_compatibility_0_1)
     }
 }
 
-/** Check that Tree constructor throws InvalidPropertyValue on unknown GM
-    property value. */
+/** Check that Tree constructor throws InvalidProperty on unknown GM property
+    value. */
 LIBBOARDGAME_TEST_CASE(pentobi_base_tree_invalid_game)
 {
     istringstream in("(;GM[1])");

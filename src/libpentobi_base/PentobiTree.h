@@ -32,7 +32,7 @@ class PentobiTree
 public:
     /** Parse the GM property of a root node.
         @throws MissingProperty
-        @throws InvalidPropertyValue */
+        @throws InvalidProperty */
     static Variant get_variant(const SgfNode& root);
 
 

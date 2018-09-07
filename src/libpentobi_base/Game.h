@@ -75,9 +75,9 @@ public:
         @pre get_tree().has_move(get_current())
         @pre get_current()->has_parent()
         @note Even if the implementation of this function calls goto_node(),
-        it cannot throw an InvalidPropertyValue because the class Game ensures
-        that the current node is always reachable via a path of nodes with
-        valid move properties. */
+        it cannot throw an InvalidProperty because the class Game ensures that
+        the current node is always reachable via a path of nodes with valid
+        move properties. */
     void undo();
 
     /** Set the current color to play.

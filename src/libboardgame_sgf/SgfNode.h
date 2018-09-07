@@ -133,12 +133,13 @@ public:
     const vector<string>& get_multi_property(const string& id) const;
 
     /** Get property parsed as a type.
-        @throws InvalidPropertyValue, MissingProperty */
+        @throws InvalidProperty
+        @throws MissingProperty */
     template<typename T>
     T parse_property(const string& id) const;
 
     /** Get property parsed as a type with default value.
-        @throws InvalidPropertyValue */
+        @throws InvalidProperty */
     template<typename T>
     T parse_property(const string& id, const T& default_value) const;
 
