@@ -36,6 +36,8 @@ Pentobi.Dialog {
             }
         }
         RowLayout {
+            Layout.topMargin: 0.6 * font.pixelSize
+
             Label {
                 text: qsTr("Initial rating:")
             }
