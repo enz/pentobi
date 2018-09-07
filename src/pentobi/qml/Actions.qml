@@ -15,7 +15,7 @@ QtObject {
     // handles a key but does not consume the key event (e.g. QTBUG-69447,
     // QTBUG-69345), so we disable many shortcuts if this property is true,
     // that is when any QtQuickControls2 Popup is open.
-    property bool noPopupOpen: overlay.children.length === 0
+    property bool noPopupOpen: rootWindow.Overlay.overlay.children.length === 0
 
     property Instantiator pickedNamedPiece: Instantiator {
         model: [ "1", "2", "A", "C", "E", "F", "G", "H", "I", "J", "L",
