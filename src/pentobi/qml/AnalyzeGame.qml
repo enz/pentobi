@@ -40,11 +40,6 @@ Item {
             var h = height
             var m = 0.015 * width
             var ctx = getContext("2d")
-            ctx.save()
-            // Workaround for QTBUG-69102 (Canvas does not work correctly),
-            // which seems to appear only on low-density Android devices
-            if (isAndroid && Screen.devicePixelRatio < 1)
-                ctx.scale(0.75, 0.75)
             ctx.fillStyle = theme.colorBackground
             ctx.fillRect(0, 0, w, h)
             ctx.strokeStyle = theme.colorCommentBorder
@@ -81,7 +76,6 @@ Item {
                         radius, 0, 2 * Math.PI)
                 ctx.fill()
             }
-            ctx.restore()
             ctx.restore()
             dist = d
             margin = m
