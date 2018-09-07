@@ -24,6 +24,10 @@ Pentobi.Dialog {
     property var nameFilters
     readonly property url defaultFolder: androidUtils.getDefaultFolder()
 
+    function returnPressed() {
+        if (! hasButtonFocus())
+            checkAccept()
+    }
     function selectNameField() {
         if (! isAndroid) {
             var pos = name.lastIndexOf(".")

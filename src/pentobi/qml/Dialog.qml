@@ -30,7 +30,17 @@ Dialog {
             y = (ApplicationWindow.window.height - height) / 2
         }
     }
-    // Has any dialog button the active focus (see also Pentobi.Actions.returnKey)
+    // Qt 5.11 doesn't support default buttons yet, this function can be
+    // called as a replacement if the Return key is pressed and should be
+    // reimplemented if needed in derived dialogs.
+    // We don't handle the return key inside the dialog because the dialog will
+    // not consume the event in Qt 5.11 even if it accepts the key event and
+    // might therefore trigger global actions.
+    function returnPressed() {
+        if (! hasButtonFocus())
+            accept()
+    }
+    // Has any button in the footer the active focus
     function hasButtonFocus() {
         for (var i = 0; i < footer.contentChildren.length; ++i)
             if (footer.contentChildren[i].activeFocus)

@@ -240,16 +240,9 @@ QtObject {
         shortcut: "Return"
         enabled: ! isAndroid
         onTriggered: {
-            // QtQuickControls 2 doesn't support default dialog buttons yet,
-            // so we assume that Return should close the dialog
             if (rootWindow.dialogs.length > 0) {
                 var dialog = rootWindow.dialogs[rootWindow.dialogs.length - 1]
-                if (dialog.hasButtonFocus())
-                    return
-                if (dialog instanceof FileDialog)
-                    dialog.checkAccept()
-                else
-                    dialog.accept()
+                dialog.returnPressed()
             }
             else if (noPopupOpen)
                 gameDisplay.playPickedPiece()
