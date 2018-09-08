@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="22" height="22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
- <path id="a" d="m13 5.0029a2 2 0 0 1-1.9993 2 2 2 0 0 1-2.0007-1.9986 2 2 0 0 1 1.9979-2.0014 2 2 0 0 1 2.0021 1.9971" style="paint-order:fill markers stroke"/>
- <use transform="translate(1.4101e-7 6)" width="100%" height="100%" xlink:href="#a"/>
- <use transform="translate(1.4101e-7 12)" width="100%" height="100%" xlink:href="#a"/>
+<svg width="16" height="16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <path id="a" d="M 10,2 A 2,2 0 0 1 8.0007,4 2,2 0 0 1 6,2.0014 2,2 0 0 1 7.9979,0 2,2 0 0 1 10,1.9971" style="paint-order:fill markers stroke"/>
+ <use transform="translate(0,6.0029)" width="100%" height="100%" xlink:href="#a"/>
+ <use transform="translate(0 12.003)" width="100%" height="100%" xlink:href="#a"/>
 </svg>

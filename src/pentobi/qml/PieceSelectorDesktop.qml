@@ -33,11 +33,11 @@ Item {
         Rectangle {
             id: toPlayIndicator
 
-            opacity: gameModel.isGameOver ? 0 : 0.7 * theme.opacitySubduedText
+            opacity: gameModel.isGameOver ? 0 : 0.6
             x: 0
             width: toPlayIndicatorWidth
             radius: width / 2
-            color: theme.colorText
+            color: theme.colorIcons
         }
         Column {
             id: column

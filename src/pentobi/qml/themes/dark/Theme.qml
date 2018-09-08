@@ -18,14 +18,15 @@ Light.Theme {
     property color colorButtonBorder: Qt.lighter(colorBackground, 5)
     property color colorCommentBase: "#1e2028"
     property color colorCommentBorder: "#5a5756"
-    property color colorCommentFocus: colorText
-    property color colorMessageText: colorText
-    property color colorMessageBase: "#333"
+    property color colorCommentFocus: "#C8C1BE"
+    property color colorCommentText: "#C8C1BE"
+    property color colorMessageText: "#C8C1BE"
+    property color colorMessageBase: "#333333"
+    property color colorIcons: "#82787f"
     property color colorSelectedText: colorBackground
     property color colorSelection: "#96918f"
     property color colorStartingPoint: "#82777E"
-    property color colorText: "#C8C1BE"
-    property real opacitySubduedText: 0.55
+    property color colorText: "#a0949c"
 
     function getImage(name) {
         if (name === "pentobi-rated-game"

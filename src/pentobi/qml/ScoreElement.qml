@@ -32,7 +32,6 @@ RowLayout {
                   "%L1".arg(value) :
                   "%1<u>%L2</u>".arg(bonus > 0 ? "★" : "").arg(value)
         color: theme.colorText
-        opacity: 0.9 - 0.15 * theme.colorBackground.hslLightness
         font { pixelSize: fontSize; preferShaping: false }
         Layout.leftMargin: 0.14 * fontSize
         Layout.minimumWidth: 1.5 * fontSize

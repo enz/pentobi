@@ -14,7 +14,7 @@ import "Main.js" as Logic
 Item {
     id: root
 
-    property real buttonPadding: isDesktop ? 5 : 8
+    property real buttonPadding: isDesktop ? 7 : 11
 
     function clickMenuButton() {
         menuButton.checked = true

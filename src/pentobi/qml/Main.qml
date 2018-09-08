@@ -37,10 +37,10 @@ ApplicationWindow {
 
     property real defaultWidth:
         isAndroid ? Screen.desktopAvailableWidth
-                  : Math.min(Screen.desktopAvailableWidth, 1169)
+                  : Math.min(Screen.desktopAvailableWidth, 1170)
     property real defaultHeight:
         isAndroid ? Screen.desktopAvailableHeight
-                  : Math.min(Screen.desktopAvailableHeight, 659)
+                  : Math.min(Screen.desktopAvailableHeight, 657)
 
     property int exportImageWidth: 420
     property bool busyIndicatorRunning: lengthyCommand.isRunning

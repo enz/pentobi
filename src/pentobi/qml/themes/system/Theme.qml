@@ -30,20 +30,20 @@ Item {
     property var colorYellow: _isDark ? dark.colorYellow : light.colorYellow
 
     property color colorButtonPressed: palette.mid
-    property color colorButtonHovered: palette.light
-    property color colorButtonBorder: palette.dark
+    property color colorButtonHovered: palette.window
+    property color colorButtonBorder: palette.mid
     property color colorCommentBase: palette.base
     property color colorCommentBorder: palette.mid
     property color colorCommentFocus: palette.highlight
+    property color colorCommentText: colorText
     property color colorMessageText: colorText
     property color colorMessageBase: palette.base
+    property color colorIcons: Qt.rgba(colorText.r, colorText.g, colorText.b, 0.55 - 0.1 * theme.colorBackground.hslLightness)
     property color colorSelectedText: palette.highlightedText
     property color colorSelection: palette.highlight
     property color colorStartingPoint:
         _isDark ? dark.colorStartingPoint : light.colorStartingPoint
     property color colorText: palette.text
-    property real opacitySubduedText:
-        0.55 - 0.15 * theme.colorBackground.hslLightness
 
     property bool _isDark: palette.window.hslLightness < 0.5
 

@@ -25,20 +25,21 @@ Item {
     property var colorYellow: [ "#e8c616", "#a0880f", "#ffe658", "#333333" ]
     /// @}
 
-    property color colorBackground: isDesktop ? "#e8e8e8" : "#c8c8c8"
+    property color colorBackground: "#c8c8c8"
     property color colorButtonPressed: Qt.darker(colorBackground, 1.1)
     property color colorButtonHovered: Qt.lighter(colorBackground, 3)
     property color colorButtonBorder: Qt.darker(colorBackground, 2)
     property color colorCommentBase: "#ffffff"
     property color colorCommentBorder: "#b4b3b3"
     property color colorCommentFocus: colorText
+    property color colorCommentText: colorText
     property color colorMessageText: "black"
     property color colorMessageBase: "#cac9c9"
+    property color colorIcons: "#827d81"
     property color colorSelectedText: colorBackground
     property color colorSelection: "#645f5c"
     property color colorStartingPoint: "#767074"
     property color colorText: "#111111"
-    property real opacitySubduedText: 0.41
 
     function getImage(name) { return "themes/light/" + name + ".svg" }
 }

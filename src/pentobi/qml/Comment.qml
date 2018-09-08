@@ -52,7 +52,7 @@ Item {
                     id: textArea
 
                     text: gameModel.comment
-                    color: theme.colorText
+                    color: theme.colorCommentText
                     selectionColor: theme.colorSelection
                     selectedTextColor: theme.colorSelectedText
                     selectByMouse: isDesktop
