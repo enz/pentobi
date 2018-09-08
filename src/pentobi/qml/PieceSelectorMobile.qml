@@ -25,6 +25,7 @@ Flickable {
                    + pieceList3.height + (nuColors + 1) * 0.5 * rowSpacing
     flickableDirection: Flickable.VerticalFlick
     clip: true
+    Behavior on contentY { NumberAnimation { duration: animationDurationFast } }
 
     PieceList {
         id: pieceList0
