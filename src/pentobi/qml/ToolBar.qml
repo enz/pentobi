@@ -42,6 +42,8 @@ Item {
         // Like the label used for desktop after the toolbuttons, but with
         // shorter text for small smartphone screens
         Label {
+            id: mobileLabel
+
             visible: ! isDesktop
             color: theme.colorText
             opacity: 0.8
@@ -54,6 +56,13 @@ Item {
             Layout.maximumWidth: implicitWidth + 1
             Layout.fillWidth: true
             Layout.leftMargin: root.height / 10
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: if (mobileLabel.truncated) ToolTip.visible = true
+                ToolTip.text: mobileLabel.text
+                ToolTip.timeout: 7000
+            }
         }
         Item {
             visible: ! isDesktop
