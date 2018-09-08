@@ -38,28 +38,27 @@ Item {
             var nuMoves = elements.length
             var w = width
             var h = height
-            var m = 0.015 * width
+            // Use the whole width unless few moves have been played
+            var nuBins = Math.ceil(Math.max(nuMoves, 50))
+            var d = w / (nuBins + 2)
             var ctx = getContext("2d")
             ctx.fillStyle = theme.colorBackground
             ctx.fillRect(0, 0, w, h)
             ctx.strokeStyle = theme.colorCommentBorder
+            ctx.save()
+            ctx.translate(d / 2, d / 2)
+            w -= d
+            h -= d
             ctx.beginPath()
-            ctx.moveTo(0, m)
-            ctx.lineTo(w, m)
-            ctx.moveTo(0, h - m)
-            ctx.lineTo(w, h - m)
+            ctx.moveTo(0, 0)
+            ctx.lineTo(w, 0)
+            ctx.moveTo(0, h)
+            ctx.lineTo(w, h)
             ctx.stroke()
             ctx.beginPath()
             ctx.moveTo(0, h / 2)
             ctx.lineTo(w, h / 2)
             ctx.stroke()
-            ctx.save()
-            w -= 2 * m
-            h -= 2 * m
-            // Use the whole width unless few moves have been played
-            var nuBins = Math.ceil(Math.max(nuMoves, 60))
-            var d = w / nuBins
-            ctx.translate(m, m)
             var n = markMoveNumber
             if (n >= 0 && n <= nuMoves) {
                 ctx.beginPath()
@@ -78,7 +77,7 @@ Item {
             }
             ctx.restore()
             dist = d
-            margin = m
+            margin = d / 2
         }
     }
     Label {
