@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="16" height="16" version="1.1" xmlns="http://www.w3.org/2000/svg">
- <path d="m5 16v-4h-5v-8h5v-4l8 8z" stroke-width=".94281"/>
- <rect x="13" y="1" width="3" height="14" stroke-width=".96077" style="paint-order:fill markers stroke"/>
+ <rect transform="scale(-1,1)" x="-14" y="2" width="3" height="12" stroke-width=".96077" style="paint-order:fill markers stroke"/>
+ <path id="a" d="m1.9947 1.9961v12.007l9.0053-6.0035z" stroke-width=".94336"/>
 </svg>

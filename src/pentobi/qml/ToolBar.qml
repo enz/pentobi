@@ -119,7 +119,7 @@ Item {
         Item {
             visible: isDesktop
             Layout.fillWidth: true
-            Layout.maximumWidth: 0.2 * parent.height
+            Layout.maximumWidth: 0.3 * parent.height
         }
         Pentobi.Button {
             id: beginning
@@ -175,6 +175,11 @@ Item {
             icon.source: theme.getImage("pentobi-end")
             action: actions.end
         }
+        Item {
+            visible: isDesktop
+            Layout.fillWidth: true
+            Layout.maximumWidth: 0.3 * parent.height
+        }
         Pentobi.Button {
             id: prevVar
 
@@ -198,7 +203,7 @@ Item {
         Item {
             visible: isDesktop
             Layout.fillWidth: true
-            Layout.maximumWidth: 0.2 * parent.height
+            Layout.maximumWidth: 0.3 * parent.height
         }
         Label {
             visible: isDesktop
@@ -224,7 +229,7 @@ Item {
         }
         Item {
             Layout.fillWidth: true
-            Layout.maximumWidth: isDesktop ? root.width : 0.2 * parent.height
+            Layout.maximumWidth: isDesktop ? root.width : 0.3 * parent.height
         }
         Pentobi.Button {
             id: menuButton
