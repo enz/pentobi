@@ -8,6 +8,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.0
 
 ColumnLayout {
+    id: root
+
     function dropCommentFocus() { comment.dropFocus() }
 
     Comment {
@@ -23,6 +25,6 @@ ColumnLayout {
     }
     NavigationButtons {
         Layout.fillWidth: true
-        Layout.preferredHeight: Math.min(implicitButtonWidth, parent.width / 6)
+        Layout.maximumHeight: Math.min(43, root.width / 6)
     }
 }
