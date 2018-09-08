@@ -15,7 +15,7 @@ Item {
     id: root
 
     property real buttonPadding:
-        isDesktop ? 7 : rootWindow.width <= 320 ? 8 : 11
+        isDesktop ? 7 : rootWindow.width <= 320 ? 8 : 14
 
     function clickMenuButton() {
         menuButton.checked = true
