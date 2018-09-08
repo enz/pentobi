@@ -28,7 +28,10 @@ Item {
         id: rowLayout
 
         width: root.width
-        height: Math.min(root.height, 0.045 * root.width)
+        height: ! isDesktop
+                && (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
+                    Math.min(root.height, 0.045 * root.width)
+                  : Math.min(root.height, 0.05 * root.width)
         anchors.centerIn: parent
         spacing: 0
 

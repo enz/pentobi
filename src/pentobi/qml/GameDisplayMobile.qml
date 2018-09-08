@@ -134,6 +134,10 @@ Item
             anchors.horizontalCenter: board.horizontalCenter
 
             Column {
+                id: columnPieces
+
+                spacing: 2
+
                 ScoreDisplay {
                     id: scoreDisplay
 
@@ -151,6 +155,7 @@ Item
                     columns: pieces0 && pieces0.length <= 21 ? 7 : 8
                     width: elementSize * columns
                     height: swipeView.height - scoreDisplay.height
+                            - columnPieces.spacing
                     rowSpacing: {
                         // Don't show partial pieces
                         var n = Math.floor(height / elementSize)

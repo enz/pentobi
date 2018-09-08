@@ -97,6 +97,11 @@ Item {
             action: actions.play
             visible: isDesktop || enabled
         }
+        Item {
+            visible: isDesktop
+            Layout.fillWidth: true
+            Layout.maximumWidth: 0.35 * parent.height
+        }
         Pentobi.Button {
             id: beginning
 
@@ -174,7 +179,7 @@ Item {
         Item {
             visible: isDesktop
             Layout.fillWidth: true
-            Layout.maximumWidth: 0.6 * parent.height
+            Layout.maximumWidth: 0.35 * parent.height
         }
         Label {
             visible: isDesktop

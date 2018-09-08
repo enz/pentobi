@@ -25,7 +25,7 @@ Item {
     property var colorYellow: [ "#e8c616", "#a0880f", "#ffe658", "#333333" ]
     /// @}
 
-    property color colorBackground: "#e8e8e8"
+    property color colorBackground: isDesktop ? "#e8e8e8" : "#c8c8c8"
     property color colorButtonPressed: Qt.darker(colorBackground, 1.1)
     property color colorButtonHovered: Qt.lighter(colorBackground, 3)
     property color colorButtonBorder: Qt.darker(colorBackground, 2)
