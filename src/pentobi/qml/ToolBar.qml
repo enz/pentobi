@@ -14,7 +14,8 @@ import "Main.js" as Logic
 Item {
     id: root
 
-    property real buttonPadding: isDesktop ? 7 : 11
+    property real buttonPadding:
+        isDesktop ? 7 : rootWindow.width <= 320 ? 8 : 11
 
     function clickMenuButton() {
         menuButton.checked = true
@@ -98,10 +99,17 @@ Item {
             action: actions.play
             visible: isDesktop || enabled
         }
+        Pentobi.Button {
+            id: stop
+
+            padding: buttonPadding
+            icon.source: theme.getImage("pentobi-stop")
+            action: actions.stop
+        }
         Item {
             visible: isDesktop
             Layout.fillWidth: true
-            Layout.maximumWidth: 0.35 * parent.height
+            Layout.maximumWidth: 0.2 * parent.height
         }
         Pentobi.Button {
             id: beginning
@@ -180,7 +188,7 @@ Item {
         Item {
             visible: isDesktop
             Layout.fillWidth: true
-            Layout.maximumWidth: 0.35 * parent.height
+            Layout.maximumWidth: 0.2 * parent.height
         }
         Label {
             visible: isDesktop
@@ -205,8 +213,8 @@ Item {
             }
         }
         Item {
-            visible: isDesktop
             Layout.fillWidth: true
+            Layout.maximumWidth: isDesktop ? root.width : 0.2 * parent.height
         }
         Pentobi.Button {
             id: menuButton
@@ -279,6 +287,10 @@ Item {
                 return qsTr("Make the computer continue to play the current color")
             return qsTr("Make the computer play the current color")
         }
+    }
+    ButtonToolTip {
+        button: stop
+        ToolTip.text: actions.stop.text
     }
     ButtonToolTip {
         button: beginning
