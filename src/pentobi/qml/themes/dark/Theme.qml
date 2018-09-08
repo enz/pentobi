@@ -25,7 +25,7 @@ Light.Theme {
     property color colorSelectedText: colorBackground
     property color colorSelection: "#96918f"
     property color colorStartingPoint: "#82777E"
-    property color colorText: "#a0949c"
+    property color colorText: "#e6d5e1"
 
     function getImage(name) {
         if (name === "pentobi-rated-game"

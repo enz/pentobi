@@ -293,6 +293,7 @@ Item
             Label {
                 text: gameModel.positionInfoShort
                 color: theme.colorText
+                opacity: 0.8
                 rightPadding: 0.4 * font.pixelSize
                 padding: 0.2 * font.pixelSize
             }

@@ -43,6 +43,7 @@ Item {
         Label {
             visible: ! isDesktop
             color: theme.colorText
+            opacity: 0.8
             elide: Text.ElideRight
             text:
                 Logic.getGameLabel(gameModel.file, gameModel.isModified, true)
@@ -186,6 +187,7 @@ Item {
             text:
                 Logic.getGameLabel(gameModel.file, gameModel.isModified, false)
             color: theme.colorText
+            opacity: 0.8
             elide: Text.ElideRight
             // See comment at Layout.maximumWidth of first label
             Layout.maximumWidth: implicitWidth + 1
