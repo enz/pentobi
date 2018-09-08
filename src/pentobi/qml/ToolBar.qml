@@ -237,8 +237,10 @@ Item {
                     menu.sourceComponent = menuComponent
                 if (menu.item.opened)
                     menu.item.close()
-                else
+                else {
+                    gameDisplay.dropCommentFocus()
                     menu.item.popup(0, isDesktop ? height : 0)
+                }
             }
 
             Loader {

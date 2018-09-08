@@ -18,7 +18,7 @@ Light.Theme {
     property color colorButtonBorder: Qt.lighter(colorBackground, 5)
     property color colorCommentBase: "#1e2028"
     property color colorCommentBorder: "#5a5756"
-    property color colorCommentFocus: "#C8C1BE"
+    property color colorCommentFocus: "#787472"
     property color colorCommentText: "#C8C1BE"
     property color colorMessageText: "#C8C1BE"
     property color colorMessageBase: "#333333"
