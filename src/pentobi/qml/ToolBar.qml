@@ -114,6 +114,7 @@ Item {
             padding: buttonPadding
             icon.source: theme.getImage("pentobi-stop")
             action: actions.stop
+            visible: isDesktop || ! isRated
         }
         Item {
             visible: isDesktop
