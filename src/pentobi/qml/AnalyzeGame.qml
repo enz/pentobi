@@ -40,7 +40,7 @@ Item {
             var h = height
             // Use the whole width unless few moves have been played
             var nuBins = Math.ceil(Math.max(nuMoves, 50))
-            var d = w / (nuBins + 2)
+            var d = w / nuBins
             var ctx = getContext("2d")
             ctx.fillStyle = theme.colorBackground
             ctx.fillRect(0, 0, w, h)
