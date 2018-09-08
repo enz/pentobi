@@ -35,7 +35,6 @@ Item {
     property color colorCommentText: colorText
     property color colorMessageText: "black"
     property color colorMessageBase: "#cac9c9"
-    property color colorIcons: "#827d81"
     property color colorSelectedText: colorBackground
     property color colorSelection: "#645f5c"
     property color colorStartingPoint: "#767074"

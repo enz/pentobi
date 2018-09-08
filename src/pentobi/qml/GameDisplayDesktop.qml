@@ -227,10 +227,10 @@ Item
                                     implicitWidth: 0.65 * font.pixelSize
                                     implicitHeight: implicitWidth
                                     radius: width / 2
-                                    color: theme.colorIcons
+                                    color: theme.colorText
                                     opacity:
                                         index === pageIndicator.currentIndex ?
-                                            1 : pressed ? 0.4 : 0.3
+                                            0.5 : pressed ? 0.2 : 0.15
                                 }
                                 onCurrentIndexChanged: dropCommentFocus()
                             }

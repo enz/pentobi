@@ -36,8 +36,8 @@ BusyIndicator {
                     y: item.height / 2 - height / 2
                     width: 0.15 * item.width; height: width
                     radius: width / 2
-                    color: theme.colorIcons
-                    opacity: 0.8
+                    color: theme.colorText
+                    opacity: 0.5
                     transform: [
                         Translate {
                             y: -item.width / 2 + width

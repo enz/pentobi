@@ -22,7 +22,6 @@ Light.Theme {
     property color colorCommentText: "#C8C1BE"
     property color colorMessageText: "#C8C1BE"
     property color colorMessageBase: "#333333"
-    property color colorIcons: "#82787f"
     property color colorSelectedText: colorBackground
     property color colorSelection: "#96918f"
     property color colorStartingPoint: "#82777E"

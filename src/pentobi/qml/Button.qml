@@ -31,11 +31,11 @@ ToolButton {
                     Screen.devicePixelRatio * 8)
     }
 
-    opacity: root.enabled ? 1 : 0.5
+    opacity: root.enabled ? 0.5 : 0.25
     hoverEnabled: false
     display: AbstractButton.IconOnly
     icon {
-        color: theme.colorIcons
+        color: theme.colorText
         width: getIconSize()
         height: getIconSize()
     }

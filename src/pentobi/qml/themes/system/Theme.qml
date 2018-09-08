@@ -38,7 +38,6 @@ Item {
     property color colorCommentText: colorText
     property color colorMessageText: colorText
     property color colorMessageBase: palette.base
-    property color colorIcons: Qt.rgba(colorText.r, colorText.g, colorText.b, 0.55 - 0.1 * theme.colorBackground.hslLightness)
     property color colorSelectedText: palette.highlightedText
     property color colorSelection: palette.highlight
     property color colorStartingPoint:
