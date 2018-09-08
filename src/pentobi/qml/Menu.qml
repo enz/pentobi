@@ -23,7 +23,9 @@ Menu {
         return Math.min(maxWidth, rootWindow.width)
     }
     cascade: isDesktop
-    closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+    closePolicy: isDesktop ?
+                     Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+                   : Popup.CloseOnEscape | Popup.CloseOnPressOutside
     delegate: Pentobi.MenuItem { }
     background: Rectangle {
         // Note that MenuItem in Qt 5.11 does neither fully use the system

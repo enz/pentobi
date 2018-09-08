@@ -215,12 +215,6 @@ Item {
             onClicked: {
                 if (! menu.item)
                     menu.sourceComponent = menuComponent
-                // If cascade is false, we don't know if a submenu is open even
-                // if opened of the top-level menu is false. To avoid opening
-                // the menu over an opened submenu, we ignore the click if any
-                // popup is open.
-                if (rootWindow.overlay.children.length > 0)
-                    return
                 if (menu.item.opened)
                     menu.item.close()
                 else
