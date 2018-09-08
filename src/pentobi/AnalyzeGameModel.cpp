@@ -247,6 +247,7 @@ void AnalyzeGameModel::start(GameModel* gameModel, PlayerModel* playerModel,
 {
     if (nuSimulations <= 0)
         return;
+    m_markMoveNumber = -1;
     m_nuSimulations = static_cast<size_t>(nuSimulations);
     cancel();
     clear_abort();
