@@ -61,7 +61,7 @@ Item {
                 anchors.fill: parent
                 onClicked: if (mobileLabel.truncated) ToolTip.visible = true
                 ToolTip.text: mobileLabel.text
-                ToolTip.timeout: 7000
+                ToolTip.timeout: 2000
             }
         }
         Item {
