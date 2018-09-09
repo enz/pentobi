@@ -202,10 +202,10 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                ToolTip.text:
-                    Logic.getFileInfo(gameModel.file, gameModel.isModified)
-                ToolTip.visible: containsMouse && gameModel.file !== ""
-                                 && ! gameDisplay.setupMode
+                ToolTip.text: Logic.getFileInfo(isRated, gameModel.file,
+                                                gameModel.isModified)
+                ToolTip.visible: containsMouse && ! gameDisplay.setupMode
+                                 && (gameModel.file !== "" || isRated)
                 ToolTip.delay: 1000
                 ToolTip.timeout: 7000
             }

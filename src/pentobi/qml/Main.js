@@ -269,8 +269,12 @@ function getFileFromUrl(fileUrl) {
     return decodeURIComponent(file)
 }
 
-function getFileInfo(file, isModified) {
-    if (isModified) return qsTr("%1 (modified)").arg(file)
+function getFileInfo(isRated, file, isModified) {
+    if (isRated)
+        //: Label for rated game. The argument is the game number.
+        return qsTr("Rated Game %1").arg(ratingModel.numberGames + 1)
+    if (isModified)
+        return qsTr("%1 (modified)").arg(file)
     return file
 }
 
@@ -282,12 +286,8 @@ function getGameLabel(file, isModified, short) {
                     qsTr("Setup")
                   : qsTr("Setup Mode")
     if (isRated)
-        return short ?
-                    //: Small-screen label for ongoing rated game (short for
-                    //: "Rated Game").
-                    qsTr("Rated")
-                    //: Label for ongoing rated game
-                  : qsTr("Rated Game")
+        //: Label for ongoing rated game
+        return qsTr("Rated")
     if (file === "")
         return ""
     var label
@@ -297,8 +297,6 @@ function getGameLabel(file, isModified, short) {
                     //: Small-screen label for finished rated game (short for
                     //: "Rated Game"). The argument is the game number.
                     qsTr("Rated %1").arg(n)
-                    //: Label for finished rated game. The argument is the game
-                    //: number.
                   : qsTr("Rated Game %1").arg(n)
     else {
         var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"))
