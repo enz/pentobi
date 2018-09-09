@@ -15,7 +15,7 @@ RowLayout {
     property bool isFinal
     property bool isAltColor
     property real value
-    property int fontSize
+    property alias fontSize: text.font.pixelSize
 
     spacing: 0
 
@@ -43,7 +43,7 @@ RowLayout {
                          : isFinal ? "<u>%L1</u>".arg(value) : "%L1".arg(value)
         color: theme.colorText
         opacity: 0.8
-        font { pixelSize: fontSize; preferShaping: false }
+        font.preferShaping: false
         Layout.leftMargin: 0.14 * fontSize
         Layout.minimumWidth: isAltColor ? 0 : 1.5 * fontSize
     }

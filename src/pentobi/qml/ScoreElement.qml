@@ -14,7 +14,7 @@ RowLayout {
     property bool isFinal
     property real value
     property real bonus
-    property int fontSize
+    property alias fontSize: text.font.pixelSize
 
     spacing: 0
 
@@ -33,7 +33,7 @@ RowLayout {
                   "%1<u>%L2</u>".arg(bonus > 0 ? "★" : "").arg(value)
         color: theme.colorText
         opacity: 0.8
-        font { pixelSize: fontSize; preferShaping: false }
+        font.preferShaping: false
         Layout.leftMargin: 0.14 * fontSize
         Layout.minimumWidth: 1.5 * fontSize
     }
