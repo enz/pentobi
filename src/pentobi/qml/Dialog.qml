@@ -9,9 +9,9 @@ import QtQuick.Controls 2.2
 
 Dialog {
     property real maxContentWidth:
-        rootWindow.width - leftPadding - rightPadding
+        rootWindow.contentItem.width - leftPadding - rightPadding
     property real maxContentHeight: {
-        var h = rootWindow.height - topPadding - bottomPadding
+        var h = rootWindow.contentItem.height - topPadding - bottomPadding
         if (header && header.visible)
             h -= header.implicitHeight
         if (footer && footer.visible)

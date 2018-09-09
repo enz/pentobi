@@ -17,7 +17,7 @@ ToolButton {
         isDesktop && buttonToolTipHovered && enabled
 
     implicitWidth: Math.min(getIconSize() + (isDesktop ? 14 : 30),
-                            0.1 * rootWindow.height)
+                            0.1 * rootWindow.contentItem.height)
     implicitHeight: implicitWidth
 
     // We use SVG icon sources of size 16x16 and want the icon about the same

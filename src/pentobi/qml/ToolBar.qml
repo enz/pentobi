@@ -241,7 +241,7 @@ Item {
                     Pentobi.Menu {
                         dynamicWidth: false
                         width: Math.min(font.pixelSize * (isDesktop ? 11 : 17),
-                                        rootWindow.width)
+                                        rootWindow.contentItem.width)
                         closePolicy: Popup.CloseOnPressOutsideParent
                                      | Popup.CloseOnEscape
 

@@ -16,11 +16,11 @@ Menu {
 
     width: {
         if (! dynamicWidth)
-            return Math.min(font.pixelSize * 18, rootWindow.width)
+            return Math.min(font.pixelSize * 18, rootWindow.contentItem.width)
         var maxWidth = 0
         for (var i = 0; i < count; ++i)
             maxWidth = Math.max(maxWidth, itemAt(i).implicitWidth)
-        return Math.min(maxWidth, rootWindow.width)
+        return Math.min(maxWidth, rootWindow.contentItem.width)
     }
     cascade: isDesktop
     closePolicy: isDesktop ?
