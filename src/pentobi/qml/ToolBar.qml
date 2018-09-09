@@ -43,7 +43,7 @@ Item {
 
             visible: ! isDesktop
             color: theme.colorText
-            opacity: 0.8
+            opacity: isRated ? 0.6 : 0.8
             elide: Text.ElideRight
             text:
                 Logic.getGameLabel(gameModel.file, gameModel.isModified, true)
