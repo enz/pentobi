@@ -1290,15 +1290,6 @@
         <translation>A</translation>
     </message>
     <message>
-        <source>Abort Analysis</source>
-        <translation>Analyse abbrechen</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Mnemonic for menu item Abort Analysis. Leave empty for no mnemonic.</extracomment>
-        <translation>B</translation>
-    </message>
-    <message>
         <source>Clear Analysis</source>
         <translation>Analyse löschen</translation>
     </message>
@@ -1609,6 +1600,14 @@
     <message>
         <source>Go to next variation</source>
         <translation>Zur nächsten Variante gehen</translation>
+    </message>
+    <message>
+        <source>Abort game analysis</source>
+        <translation>Spielanalyse abbrechen</translation>
+    </message>
+    <message>
+        <source>Abort computer move</source>
+        <translation>Computer-Zug abbrechen</translation>
     </message>
 </context>
 </TS>

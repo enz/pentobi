@@ -1290,15 +1290,6 @@
         <translation>A</translation>
     </message>
     <message>
-        <source>Abort Analysis</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Mnemonic for menu item Abort Analysis. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
-    </message>
-    <message>
         <source>Clear Analysis</source>
         <translation>Tøm analyse</translation>
     </message>
@@ -1609,6 +1600,14 @@
     <message>
         <source>Go to next variation</source>
         <translation>Gå til neste variasjon</translation>
+    </message>
+    <message>
+        <source>Abort game analysis</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Abort computer move</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

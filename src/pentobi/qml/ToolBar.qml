@@ -307,7 +307,9 @@ Item {
     }
     ButtonToolTip {
         button: stop
-        ToolTip.text: actions.stop.text
+        ToolTip.text: analyzeGameModel.isRunning ?
+                          qsTr("Abort game analysis")
+                        : qsTr("Abort computer move")
     }
     ButtonToolTip {
         button: beginning
