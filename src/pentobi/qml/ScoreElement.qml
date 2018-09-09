@@ -25,6 +25,12 @@ RowLayout {
         Layout.preferredWidth: 0.7 * fontSize
         Layout.preferredHeight: 0.7 * fontSize
     }
+    // Spacer, which will shrink if the available width is small
+    Item {
+        Layout.fillWidth: true
+        Layout.preferredWidth: 0.14 * fontSize
+        Layout.maximumWidth: 0.14 * fontSize
+    }
     Text {
         id: text
 
@@ -34,7 +40,8 @@ RowLayout {
         color: theme.colorText
         opacity: 0.8
         font.preferShaping: false
-        Layout.leftMargin: 0.14 * fontSize
+        // Minimum width to avoid early position change when the number of
+        // digits in the score changes from 1 to 2
         Layout.minimumWidth: 1.5 * fontSize
     }
 }

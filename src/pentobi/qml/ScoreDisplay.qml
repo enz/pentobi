@@ -28,10 +28,7 @@ Item {
         id: rowLayout
 
         width: root.width
-        height: ! isDesktop
-                && (gameModel.nuColors === 4 && gameModel.nuPlayers === 2) ?
-                    Math.min(root.height, 0.045 * root.width)
-                  : Math.min(root.height, 0.05 * root.width)
+        height: Math.min(root.height, 0.05 * root.width)
         anchors.centerIn: parent
         spacing: 0
 
@@ -45,6 +42,7 @@ Item {
             fontSize: rowLayout.height
             color1: gameDisplay.color0[0]
             color2: gameDisplay.color2[0]
+            Layout.fillWidth: true
         }
         Item { visible: playerScore0.visible; Layout.fillWidth: true }
         ScoreElement2 {
@@ -56,6 +54,7 @@ Item {
             fontSize: rowLayout.height
             color1: gameDisplay.color1[0]
             color2: gameDisplay.color3[0]
+            Layout.fillWidth: true
         }
         Item { visible: playerScore1.visible; Layout.fillWidth: true }
         ScoreElement {
@@ -66,6 +65,7 @@ Item {
             isFinal: ! hasMoves0
             fontSize: rowLayout.height
             color: color0[0]
+            Layout.fillWidth: true
         }
         Item { visible: colorScore0.visible; Layout.fillWidth: true }
         ScoreElement {
@@ -76,6 +76,7 @@ Item {
             isFinal: ! hasMoves1
             fontSize: rowLayout.height
             color: color1[0]
+            Layout.fillWidth: true
         }
         Item { visible: colorScore1.visible; Layout.fillWidth: true }
         ScoreElement {
@@ -87,6 +88,7 @@ Item {
             isFinal: ! hasMoves2
             fontSize: rowLayout.height
             color: color2[0]
+            Layout.fillWidth: true
         }
         Item { visible: colorScore2.visible; Layout.fillWidth: true }
         ScoreElement {
@@ -99,6 +101,7 @@ Item {
             isFinal: ! hasMoves3
             fontSize: rowLayout.height
             color: color3[0]
+            Layout.fillWidth: true
         }
         Item { visible: colorScore3.visible; Layout.fillWidth: true }
         ScoreElement2 {
@@ -116,6 +119,7 @@ Item {
                 case 1: return gameDisplay.color1[0]
                 case 2: return gameDisplay.color2[0]
                 }
+            Layout.fillWidth: true
         }
         Item { visible: altColorIndicator.visible; Layout.fillWidth: true }
     }
