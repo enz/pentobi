@@ -285,7 +285,8 @@ Item {
     }
     ButtonToolTip {
         button: undo
-        ToolTip.text: undo.action.text
+        //: Tooltip for Undo button
+        ToolTip.text: qsTr("Undo move")
     }
     ButtonToolTip {
         button: computerSettings

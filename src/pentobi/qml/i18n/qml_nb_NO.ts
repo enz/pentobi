@@ -1609,5 +1609,10 @@
         <source>Abort computer move</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>Undo move</source>
+        <extracomment>Tooltip for Undo button</extracomment>
+        <translation>Angre trekk</translation>
+    </message>
 </context>
 </TS>

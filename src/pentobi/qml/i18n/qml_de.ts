@@ -1609,5 +1609,10 @@
         <source>Abort computer move</source>
         <translation>Computer-Zug abbrechen</translation>
     </message>
+    <message>
+        <source>Undo move</source>
+        <extracomment>Tooltip for Undo button</extracomment>
+        <translation>Zug rückgängig</translation>
+    </message>
 </context>
 </TS>

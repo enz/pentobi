@@ -1609,5 +1609,10 @@
         <source>Abort computer move</source>
         <translation>Abandonner le coup de l&apos;ordinateur</translation>
     </message>
+    <message>
+        <source>Undo move</source>
+        <extracomment>Tooltip for Undo button</extracomment>
+        <translation>Annuler le coup</translation>
+    </message>
 </context>
 </TS>
