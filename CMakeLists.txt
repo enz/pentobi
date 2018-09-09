@@ -26,6 +26,9 @@ if(CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID MATCHES "Clang"))
 endif()
 
 if(PENTOBI_BUILD_TESTS)
+  if(PENTOBI_BUILD_KDE_THUMBNAILER)
+    configure_file(CTestCustom.cmake ${CMAKE_BINARY_DIR} COPYONLY)
+  endif()
   enable_testing()
 endif()
 
