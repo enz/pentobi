@@ -26,6 +26,7 @@ ColumnLayout {
     }
     NavigationButtons {
         Layout.fillWidth: true
-        Layout.maximumHeight: Math.min(50, 0.3 * parent.height, root.width / 6)
+        Layout.maximumHeight:
+            Math.min(50, 0.08 * rootWindow.height, root.width / 6)
     }
 }
