@@ -16,6 +16,10 @@ ToolButton {
     property bool effectiveHovered:
         isDesktop && buttonToolTipHovered && enabled
 
+    implicitWidth: Math.min(getIconSize() + (isDesktop ? 14 : 30),
+                            0.1 * rootWindow.height)
+    implicitHeight: implicitWidth
+
     // We use SVG icon sources of size 16x16 and want the icon about the same
     // size as the font, but use multipliers in quarter-size steps (4) for
     // better pixel alignment. Minimum size is 8. Note that on some Android 4.2

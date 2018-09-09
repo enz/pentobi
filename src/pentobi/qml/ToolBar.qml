@@ -14,9 +14,6 @@ import "Main.js" as Logic
 Item {
     id: root
 
-    property real buttonPadding:
-        isDesktop ? 7 : rootWindow.width <= 240 ? 8 : 14
-
     function clickMenuButton() {
         menuButton.checked = true
         menuButton.onClicked()
@@ -71,7 +68,6 @@ Item {
         Pentobi.Button {
             id: newGame
 
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-newgame")
             action: actions.newGame
             visible: isDesktop || enabled
@@ -80,14 +76,12 @@ Item {
             id: newGameRated
 
             visible: isDesktop
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-rated-game")
             action: actions.newGameRated
         }
         Pentobi.Button {
             id: undo
 
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-undo")
             action: actions.undo
             visible: isDesktop || enabled
@@ -95,7 +89,6 @@ Item {
         Pentobi.Button {
             id: computerSettings
 
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-computer-colors")
             action: actions.computerSettings
             visible: isDesktop || enabled
@@ -103,7 +96,6 @@ Item {
         Pentobi.Button {
             id: play
 
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-play")
             action: actions.play
             visible: isDesktop || enabled
@@ -111,7 +103,6 @@ Item {
         Pentobi.Button {
             id: stop
 
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-stop")
             action: actions.stop
             visible: isDesktop || ! isRated
@@ -125,7 +116,6 @@ Item {
             id: beginning
 
             visible: isDesktop
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-beginning")
             action: actions.beginning
         }
@@ -133,7 +123,6 @@ Item {
             id: backward10
 
             visible: isDesktop
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-backward10")
             action: actions.backward10
             autoRepeat: true
@@ -143,7 +132,6 @@ Item {
             id: backward
 
             visible: isDesktop
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-backward")
             action: actions.backward
             autoRepeat: true
@@ -152,7 +140,6 @@ Item {
             id: forward
 
             visible: isDesktop
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-forward")
             action: actions.forward
             autoRepeat: true
@@ -161,7 +148,6 @@ Item {
             id: forward10
 
             visible: isDesktop
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-forward10")
             action: actions.forward10
             autoRepeat: true
@@ -171,7 +157,6 @@ Item {
             id: end
 
             visible: isDesktop
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-end")
             action: actions.end
         }
@@ -184,7 +169,6 @@ Item {
             id: prevVar
 
             visible: isDesktop
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-previous-variation")
             action: actions.prevVar
             autoRepeat: true
@@ -194,7 +178,6 @@ Item {
             id: nextVar
 
             visible: isDesktop
-            padding: buttonPadding
             icon.source: theme.getImage("pentobi-next-variation")
             action: actions.nextVar
             autoRepeat: true
@@ -234,7 +217,6 @@ Item {
         Pentobi.Button {
             id: menuButton
 
-            padding: buttonPadding
             icon.source: theme.getImage("menu")
             down: pressed || (isDesktop && menu.item && menu.item.opened)
             onClicked: {
