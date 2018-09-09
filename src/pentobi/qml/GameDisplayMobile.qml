@@ -181,7 +181,8 @@ Item
                 NavigationButtons
                 {
                     Layout.fillWidth: true
-                    Layout.maximumHeight: Math.min(43, root.width / 6)
+                    Layout.maximumHeight:
+                        Math.min(50, 0.3 * parent.height, root.width / 6)
                 }
             }
         }
