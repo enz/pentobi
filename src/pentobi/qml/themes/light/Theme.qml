@@ -31,12 +31,12 @@ Item {
     property color colorButtonBorder: Qt.darker(colorBackground, 2)
     property color colorCommentBase: "#ffffff"
     property color colorCommentBorder: "#b4b3b3"
-    property color colorCommentFocus: "#a0a0a0"
+    property color colorCommentFocus: "#4799cc"
     property color colorCommentText: colorText
     property color colorMessageText: "black"
     property color colorMessageBase: "#cac9c9"
     property color colorSelectedText: colorBackground
-    property color colorSelection: "#645f5c"
+    property color colorSelection: "#4799cc"
     property color colorStartingPoint: "#767074"
     property color colorText: "#111111"
 
