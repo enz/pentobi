@@ -178,14 +178,6 @@ function computerPlays(color) {
     }
 }
 
-function computerPlaysAny() {
-    if (computerPlays0) return true
-    if (computerPlays1) return true
-    if (gameModel.nuColors > 2 && computerPlays2) return true
-    if (gameModel.nuColors > 3 && computerPlays3) return true
-    return false
-}
-
 function createTheme(themeName) {
     var source = "themes/" + themeName + "/Theme.qml"
     var component = Qt.createComponent(source)
