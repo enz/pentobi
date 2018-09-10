@@ -20,15 +20,13 @@ Item
         case 3: return color3
         }
     property Item parentUnplayed
-    property real gridWidth: board.gridWidth
-    property real gridHeight: board.gridHeight
     property string imageName:
         "image://pentobi/quarter-square/" + color[0] + "/" + color[1] + "/" +
         color[2]
     // Avoid fractional sizes for square piece elements
     property real scaleUnplayed:
         parentUnplayed ? Math.floor(0.08 * 2 * parentUnplayed.width)
-                         / (2 * gridWidth) : 0
+                         / (2 * board.gridWidth) : 0
     property string imageNameBottom:
         "image://pentobi/quarter-square-bottom/" + color[0] + "/" + color[1] +
         "/" + color[2]
@@ -69,8 +67,8 @@ Item
         model: pieceModel.elements
 
         QuarterSquare {
-            x: (modelData.x - pieceModel.center.x) * gridWidth
-            y: (modelData.y - pieceModel.center.y) * gridHeight
+            x: (modelData.x - pieceModel.center.x) * board.gridWidth
+            y: (modelData.y - pieceModel.center.y) * board.gridHeight
             pointType: {
                 var t = modelData.x
                 if (modelData.y % 2 != 0) t += 2
@@ -82,23 +80,25 @@ Item
         opacity: moveMarking == "last_dot" && pieceModel.isLastMove ? 0.5 : 0
         color: gameModel.showVariations && ! gameModel.isMainVar ? "transparent" : border.color
         border { width: 0.2 * width; color: root.color[3] }
-        width: 0.45 * gridHeight
+        width: 0.45 * board.gridHeight
         height: width
         radius: width / 2
         x: {
             var labelX = pieceModel.labelPos.x
             var labelY = pieceModel.labelPos.y
-            var x = (labelX - pieceModel.center.x + 0.5) * gridWidth - width / 2
-            if (labelX % 2 == 0) x -= gridWidth / 2
-            else x += gridWidth / 2
+            var x = (labelX - pieceModel.center.x + 0.5) * board.gridWidth
+                    - width / 2
+            if (labelX % 2 == 0) x -= board.gridWidth / 2
+            else x += board.gridWidth / 2
             return x
         }
         y: {
             var labelX = pieceModel.labelPos.x
             var labelY = pieceModel.labelPos.y
-            var y = (labelY - pieceModel.center.y + 0.5) * gridHeight - height / 2
-            if (labelY % 2 == 0) y -= gridHeight / 2
-            else y += gridHeight / 2
+            var y = (labelY - pieceModel.center.y + 0.5) * board.gridHeight
+                    - height / 2
+            if (labelY % 2 == 0) y -= board.gridHeight / 2
+            else y += board.gridHeight / 2
             return y
         }
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
@@ -109,7 +109,7 @@ Item
                   pieceModel.moveLabel : ""
         opacity: text === "" ? 0 : 1
         color: root.color[3]
-        font { pixelSize: 0.7 * gridHeight; preferShaping: false }
+        font { pixelSize: 0.7 * board.gridHeight; preferShaping: false }
         width: 0
         height: 0
         verticalAlignment: Text.AlignVCenter
@@ -117,17 +117,17 @@ Item
         x: {
             var labelX = pieceModel.labelPos.x
             var labelY = pieceModel.labelPos.y
-            var x = (labelX - pieceModel.center.x + 0.5) * gridWidth
-            if (labelX % 2 == 0) x -= gridWidth / 2
-            else x += gridWidth / 2
+            var x = (labelX - pieceModel.center.x + 0.5) * board.gridWidth
+            if (labelX % 2 == 0) x -= board.gridWidth / 2
+            else x += board.gridWidth / 2
             return x
         }
         y: {
             var labelX = pieceModel.labelPos.x
             var labelY = pieceModel.labelPos.y
-            var y = (labelY - pieceModel.center.y + 0.5) * gridHeight
-            if (labelY % 2 == 0) y -= gridHeight / 2
-            else y += gridHeight / 2
+            var y = (labelY - pieceModel.center.y + 0.5) * board.gridHeight
+            if (labelY % 2 == 0) y -= board.gridHeight / 2
+            else y += board.gridHeight / 2
             return y
         }
         transform: [

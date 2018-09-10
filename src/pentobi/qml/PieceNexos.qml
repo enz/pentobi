@@ -20,14 +20,12 @@ Item
         case 3: return color3
         }
     property Item parentUnplayed
-    property real gridWidth: board.gridWidth
-    property real gridHeight: board.gridHeight
     property string imageName:
         "image://pentobi/square/" + color[0] + "/" + color[1] + "/" + color[2]
     // Avoid fractional sizes for square piece elements
     property real scaleUnplayed:
-        parentUnplayed ? Math.floor(0.12 * parentUnplayed.width) / gridWidth
-                       : 0
+        parentUnplayed ?
+            Math.floor(0.12 * parentUnplayed.width) / board.gridWidth : 0
     property bool flippedX: Math.abs(flipX.angle - 180) < 90
     property bool flippedY: flipY.angle > 90
     property real pieceAngle: {
@@ -70,10 +68,10 @@ Item
 
         LineSegment {
             isHorizontal: root.isHorizontal(modelData)
-            width: 1.5 * gridWidth
-            height: 0.5 * gridHeight
-            x: (modelData.x - pieceModel.center.x - 0.25) * gridWidth
-            y: (modelData.y - pieceModel.center.y + 0.25) * gridHeight
+            width: 1.5 * board.gridWidth
+            height: 0.5 * board.gridHeight
+            x: (modelData.x - pieceModel.center.x - 0.25) * board.gridWidth
+            y: (modelData.y - pieceModel.center.y + 0.25) * board.gridHeight
         }
     }
     Repeater {
@@ -112,10 +110,10 @@ Item
                     return 0
                 }
             }
-            width: 0.5 * gridWidth
-            height: 0.5 * gridHeight
-            x: (modelData.x - pieceModel.center.x + 0.25) * gridWidth
-            y: (modelData.y - pieceModel.center.y + 0.25) * gridHeight
+            width: 0.5 * board.gridWidth
+            height: 0.5 * board.gridHeight
+            x: (modelData.x - pieceModel.center.x + 0.25) * board.gridWidth
+            y: (modelData.y - pieceModel.center.y + 0.25) * board.gridHeight
             sourceSize {
                 width: imageSourceSize.width / 3
                 height: imageSourceSize.height
@@ -127,13 +125,13 @@ Item
         opacity: moveMarking == "last_dot" && pieceModel.isLastMove ? 0.5 : 0
         color: gameModel.showVariations && ! gameModel.isMainVar ? "transparent" : border.color
         border { width: 0.2 * width; color: root.color[3] }
-        width: 0.3 * gridHeight
+        width: 0.3 * board.gridHeight
         height: width
         radius: width / 2
         x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-           * gridWidth - width / 2
+           * board.gridWidth - width / 2
         y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5)
-           * gridHeight - height / 2
+           * board.gridHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     Text {
@@ -142,13 +140,15 @@ Item
                   pieceModel.moveLabel : ""
         opacity: text === "" ? 0 : 1
         color: root.color[3]
-        font { pixelSize: 0.5 * gridHeight; preferShaping: false }
+        font { pixelSize: 0.5 * board.gridHeight; preferShaping: false }
         width: 0
         height: 0
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
-        x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5) * gridWidth
-        y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5) * gridHeight
+        x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
+           * board.gridWidth
+        y: (pieceModel.labelPos.y - pieceModel.center.y + 0.5)
+           * board.gridHeight
         transform: [
             Rotation {
                 axis { x: 0; y: 1; z: 0 }
