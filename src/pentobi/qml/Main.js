@@ -278,8 +278,8 @@ function getFileInfo(isRated, file, isModified) {
     return file
 }
 
-function getGameLabel(file, isModified, short) {
-    if (gameDisplay.setupMode)
+function getGameLabel(setupMode, isRated, file, isModified, short) {
+    if (setupMode)
         return short ?
                     //: Small-screen label for setup mode (short for
                     //: "Setup Mode").

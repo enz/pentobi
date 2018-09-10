@@ -45,8 +45,8 @@ Item {
             color: theme.colorText
             opacity: isRated ? 0.6 : 0.8
             elide: Text.ElideRight
-            text:
-                Logic.getGameLabel(gameModel.file, gameModel.isModified, true)
+            text: Logic.getGameLabel(gameDisplay.setupMode, isRated,
+                                     gameModel.file, gameModel.isModified, true)
             // There is a bug in Qt 5.11 that in some situations elides the
             // text even if there is enough room for it. It doesn't occur if
             // we use implicitWidth + 1 instead if implicitWidth
@@ -190,8 +190,8 @@ Item {
         }
         Label {
             visible: isDesktop
-            text:
-                Logic.getGameLabel(gameModel.file, gameModel.isModified, false)
+            text: Logic.getGameLabel(gameDisplay.setupMode, isRated,
+                                     gameModel.file, gameModel.isModified, false)
             color: theme.colorText
             opacity: 0.8
             elide: Text.ElideRight
