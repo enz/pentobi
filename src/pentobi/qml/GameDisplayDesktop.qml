@@ -183,34 +183,35 @@ Item
                         }
                     }
                 }
-                Column {
+                ColumnLayout {
                     id: rightColumn
 
                     width: board.width * (1 / row.relativeBoardWidth - 1)
                     height: board.grabImageTarget.height
                     anchors.verticalCenter: board.verticalCenter
-                    spacing: 0.02 * width
+                    spacing: 0
 
                     ScoreDisplay {
                         id: scoreDisplay
 
-                        width: parent.width
-                        height: 0.04 * parent.width
-                        anchors.horizontalCenter: parent.horizontalCenter
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 0.04 * parent.width
                     }
                     PieceSelectorDesktop {
                         id: pieceSelector
 
-                        width: parent.width
-                        height: 0.67 * parent.height
                         transitionsEnabled: false
+                        Layout.topMargin:0.02 * width
+                        Layout.fillWidth: true
+                        Layout.preferredHeight:
+                            (board.isTrigon ? 0.7 : 0.75) * parent.width
                         onPiecePicked: Logic.pickPiece(piece)
                     }
                     ColumnLayout {
-                        width: parent.width
-                        height: parent.height - scoreDisplay.height
-                                - pieceSelector.height - 2 * parent.spacing
                         spacing: analyzeGame.item ? 0.1 * font.pixelSize : 0
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.topMargin:0.01 * width
 
                         Item {
                             visible: analyzeGame.item

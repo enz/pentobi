@@ -25,9 +25,10 @@ Item {
         // Set size sich that width/height ration fits the number of columns,
         // taking toPlayIndicator and column spacing into account
         width: Math.min(parent.width - toPlayIndicatorWidth,
-                        parent.height / 8.15 * columns)
-        height: Math.min(parent.height,
-                         (parent.width - toPlayIndicatorWidth) / columns * 8.15)
+                        parent.height / 8.21 * columns)
+        height:
+            Math.min(parent.height,
+                     (parent.width - toPlayIndicatorWidth) / columns * 8.21)
         anchors.centerIn: parent
 
         Rectangle {
@@ -43,7 +44,7 @@ Item {
             id: column
 
             width: parent.width - toPlayIndicatorWidth
-            spacing: height / 8 * 0.05
+            spacing: height / 8 * 0.07
 
             PieceList {
                 id: pieceList0
