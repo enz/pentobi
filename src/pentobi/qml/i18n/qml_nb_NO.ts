@@ -871,13 +871,8 @@
     </message>
     <message>
         <source>Rated</source>
-        <extracomment>Small-screen label for ongoing rated game (short for &quot;Rated Game&quot;).</extracomment>
-        <translation>Vurdert</translation>
-    </message>
-    <message>
-        <source>Rated Game</source>
         <extracomment>Label for ongoing rated game</extracomment>
-        <translation>Vurdert spill</translation>
+        <translation>Vurdert</translation>
     </message>
     <message>
         <source>Rated %1</source>
@@ -886,7 +881,7 @@
     </message>
     <message>
         <source>Rated Game %1</source>
-        <extracomment>Label for finished rated game. The argument is the game number.</extracomment>
+        <extracomment>Label for rated game. The argument is the game number.</extracomment>
         <translation>Vurdert spill %1</translation>
     </message>
 </context>
@@ -1336,14 +1331,6 @@
         <translation>Trekk %1</translation>
     </message>
     <message>
-        <source>Annotation:</source>
-        <translation>Anmerkning:</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Ingen</translation>
-    </message>
-    <message>
         <source>Very good</source>
         <translation>Veldig god</translation>
     </message>
@@ -1366,6 +1353,10 @@
     <message>
         <source>Very Bad</source>
         <translation>Veldig dårlig</translation>
+    </message>
+    <message>
+        <source>No annotation</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

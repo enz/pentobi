@@ -871,13 +871,8 @@
     </message>
     <message>
         <source>Rated</source>
-        <extracomment>Small-screen label for ongoing rated game (short for &quot;Rated Game&quot;).</extracomment>
-        <translation>Classée</translation>
-    </message>
-    <message>
-        <source>Rated Game</source>
         <extracomment>Label for ongoing rated game</extracomment>
-        <translation>Partie classée</translation>
+        <translation>Classée</translation>
     </message>
     <message>
         <source>Rated %1</source>
@@ -886,7 +881,7 @@
     </message>
     <message>
         <source>Rated Game %1</source>
-        <extracomment>Label for finished rated game. The argument is the game number.</extracomment>
+        <extracomment>Label for rated game. The argument is the game number.</extracomment>
         <translation>Partie classée %1</translation>
     </message>
 </context>
@@ -1336,14 +1331,6 @@
         <translation>Coup %1</translation>
     </message>
     <message>
-        <source>Annotation:</source>
-        <translation>Annotation :</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Aucune</translation>
-    </message>
-    <message>
         <source>Very good</source>
         <translation>Très bon</translation>
     </message>
@@ -1366,6 +1353,10 @@
     <message>
         <source>Very Bad</source>
         <translation>Très mauvais</translation>
+    </message>
+    <message>
+        <source>No annotation</source>
+        <translation>Aucune annotation</translation>
     </message>
 </context>
 <context>

@@ -873,11 +873,6 @@
     </message>
     <message>
         <source>Rated</source>
-        <extracomment>Small-screen label for ongoing rated game (short for &quot;Rated Game&quot;).</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rated Game</source>
         <extracomment>Label for ongoing rated game</extracomment>
         <translation type="unfinished"></translation>
     </message>
@@ -888,7 +883,7 @@
     </message>
     <message>
         <source>Rated Game %1</source>
-        <extracomment>Label for finished rated game. The argument is the game number.</extracomment>
+        <extracomment>Label for rated game. The argument is the game number.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1338,14 +1333,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Annotation:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Very good</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1367,6 +1354,10 @@
     </message>
     <message>
         <source>Very Bad</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No annotation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
