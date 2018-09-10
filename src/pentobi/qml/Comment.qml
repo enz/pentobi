@@ -25,6 +25,7 @@ Item {
         background: Rectangle {
             color: theme.colorBackground
             border.color: theme.colorCommentBorder
+            radius: 3
         }
         onActiveFocusChanged: _createTextArea(true)
         onClicked: _createTextArea(true)
@@ -65,7 +66,7 @@ Item {
                         color:
                             textArea.text !== "" || textArea.activeFocus ?
                                 theme.colorCommentBase : theme.colorBackground
-                        radius: 2
+                        radius: 3
                         border.color:
                             textArea.activeFocus ? theme.colorCommentFocus
                                                  : theme.colorCommentBorder
