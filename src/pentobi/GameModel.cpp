@@ -537,19 +537,25 @@ QString GameModel::getMoveAnnotation(int moveNumber)
 
 QString GameModel::getMoveAnnotationAtNode(const SgfNode& node) const
 {
-    auto& tree = m_game.get_tree();
-    if (tree.get_good_move(node) == 2)
-        return "‼";
-    if (tree.get_good_move(node) == 1)
-        return "!";
-    if (tree.is_interesting_move(node))
-        return "⁉";
-    if (tree.is_doubtful_move(node))
-        return "⁈";
-    if (tree.get_bad_move(node) == 1)
-        return "?";
-    if (tree.get_bad_move(node) == 2)
-        return "⁇";
+    try
+    {
+        if (m_game.get_good_move(node) == 2)
+            return "‼";
+        if (m_game.get_good_move(node) == 1)
+            return "!";
+        if (m_game.is_interesting_move(node))
+            return "⁉";
+        if (m_game.is_doubtful_move(node))
+            return "⁈";
+        if (m_game.get_bad_move(node) == 1)
+            return "?";
+        if (m_game.get_bad_move(node) == 2)
+            return "⁇";
+    }
+    catch (const SgfError&)
+    {
+        // Silently ignore GM, BM properties with invalid value
+    }
     return {};
 }
 
