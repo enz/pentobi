@@ -88,41 +88,63 @@ Item
            * board.gridHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
-    Text {
-        text: moveMarking == "all_number"
-              || (moveMarking == "last_number" && pieceModel.isLastMove) ?
-                  pieceModel.moveLabel : ""
-        opacity: text === "" ? 0 : 1
-        color: root.color[3]
-        width: board.gridWidth
-        height: board.gridHeight
-        fontSizeMode: Text.Fit
-        font { pixelSize: 0.5 * board.gridHeight; preferShaping: false }
-        minimumPixelSize: 5
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
-        x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-           * board.gridWidth - width / 2
-        y: (pieceModel.labelPos.y - pieceModel.center.y
-            + (_isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
-           * board.gridHeight - height / 2
-        transform: [
-            Rotation {
-                origin { x: board.gridWidth / 2; y: board.gridHeight / 2 }
-                axis { x: 0; y: 1; z: 0 }
-                angle: -flipY.angle
-            },
-            Rotation {
-                origin { x: board.gridWidth / 2; y: board.gridHeight / 2 }
-                axis { x: 1; y: 0; z: 0 }
-                angle: -flipX.angle
-            },
-            Rotation {
-                origin { x: board.gridWidth / 2; y: board.gridHeight / 2 }
-                angle: -root.rotation
+    Loader {
+        sourceComponent: moveMarking === "all_number"
+                         || moveMarking === "last_number" || item ?
+                             textComponent : null
+
+        Component {
+            id: textComponent
+
+            Text {
+                text: moveMarking == "all_number"
+                      || (moveMarking == "last_number"
+                          && pieceModel.isLastMove) ?
+                          pieceModel.moveLabel : ""
+                opacity: text === "" ? 0 : 1
+                color: root.color[3]
+                width: board.gridWidth
+                height: board.gridHeight
+                fontSizeMode: Text.Fit
+                font {
+                    pixelSize: 0.5 * board.gridHeight
+                    preferShaping: false
+                }
+                minimumPixelSize: 5
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
+                   * board.gridWidth - width / 2
+                y: (pieceModel.labelPos.y - pieceModel.center.y
+                    + (_isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
+                   * board.gridHeight - height / 2
+                transform: [
+                    Rotation {
+                        origin {
+                            x: board.gridWidth / 2; y: board.gridHeight / 2
+                        }
+                        axis { x: 0; y: 1; z: 0 }
+                        angle: -flipY.angle
+                    },
+                    Rotation {
+                        origin {
+                            x: board.gridWidth / 2; y: board.gridHeight / 2
+                        }
+                        axis { x: 1; y: 0; z: 0 }
+                        angle: -flipX.angle
+                    },
+                    Rotation {
+                        origin {
+                            x: board.gridWidth / 2; y: board.gridHeight / 2
+                        }
+                        angle: -root.rotation
+                    }
+                ]
+                Behavior on opacity {
+                    NumberAnimation { duration: animationDurationFast }
+                }
             }
-        ]
-        Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
+        }
     }
     StateGroup {
         state: pieceModel.state
