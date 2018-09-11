@@ -137,10 +137,6 @@
         <translation>Varianten zeigen</translation>
     </message>
     <message>
-        <source>Theme:</source>
-        <translation>Thema:</translation>
-    </message>
-    <message>
         <source>Light</source>
         <translation>Hell</translation>
     </message>
@@ -204,6 +200,10 @@
         <source>Never</source>
         <extracomment>Show-comment mode</extracomment>
         <translation>Nie</translation>
+    </message>
+    <message>
+        <source>Color theme:</source>
+        <translation>Farbthema:</translation>
     </message>
 </context>
 <context>

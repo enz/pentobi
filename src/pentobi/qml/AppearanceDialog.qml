@@ -131,7 +131,7 @@ Pentobi.Dialog {
 
                 text: qsTr("Animations")
             }
-            Label { text: qsTr("Theme:") }
+            Label { text: qsTr("Color theme:") }
             ComboBox {
                 id: comboBoxTheme
 

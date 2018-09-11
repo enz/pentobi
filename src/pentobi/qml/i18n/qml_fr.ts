@@ -137,10 +137,6 @@
         <translation>Afficher les variations</translation>
     </message>
     <message>
-        <source>Theme:</source>
-        <translation>Thème :</translation>
-    </message>
-    <message>
         <source>Light</source>
         <translation>Clair</translation>
     </message>
@@ -204,6 +200,10 @@
         <source>Never</source>
         <extracomment>Show-comment mode</extracomment>
         <translation>Jamais</translation>
+    </message>
+    <message>
+        <source>Color theme:</source>
+        <translation>Thème de couleur :</translation>
     </message>
 </context>
 <context>

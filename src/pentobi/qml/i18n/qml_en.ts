@@ -139,10 +139,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Theme:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Light</source>
         <translation type="unfinished"></translation>
     </message>
@@ -205,6 +201,10 @@
     <message>
         <source>Never</source>
         <extracomment>Show-comment mode</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Color theme:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

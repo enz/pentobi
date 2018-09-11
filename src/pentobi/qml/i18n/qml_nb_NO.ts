@@ -137,10 +137,6 @@
         <translation>Vis variasjoner</translation>
     </message>
     <message>
-        <source>Theme:</source>
-        <translation>Drakt:</translation>
-    </message>
-    <message>
         <source>Light</source>
         <translation>Lys</translation>
     </message>
@@ -203,6 +199,10 @@
     <message>
         <source>Never</source>
         <extracomment>Show-comment mode</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Color theme:</source>
         <translation type="unfinished"/>
     </message>
 </context>
