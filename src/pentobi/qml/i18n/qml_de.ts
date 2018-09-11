@@ -184,7 +184,7 @@
     </message>
     <message>
         <source>Show comment:</source>
-        <translation>Kommentar zeigen</translation>
+        <translation>Kommentar zeigen:</translation>
     </message>
     <message>
         <source>Always</source>
