@@ -95,15 +95,11 @@ Item
         var text;
         var seconds = Math.ceil(remainingSeconds);
         if (seconds < 90)
-            text =
-                qsTr("Computer is thinking… (up to %1 seconds remaining)")
-                .arg(seconds);
+            text = qsTr("Computer is thinking… (up to %1 seconds remaining)").arg(seconds);
         else
         {
             var minutes = Math.ceil(remainingSeconds / 60);
-            text =
-                qsTr("Computer is thinking… (up to %1 minutes remaining)")
-                .arg(minutes);
+            text = qsTr("Computer is thinking… (up to %1 minutes remaining)").arg(minutes);
         }
         showStatus(text)
     }
@@ -150,108 +146,103 @@ Item
         anchors.fill: parent
         spacing: 0
 
-        Item {
-            id: mainContent
+        Row {
+            id: row
 
+            property real relativeBoardWidth: 0.51
+            property real minSpacing: 5
+
+            leftPadding: 5
+            rightPadding: 5
+            spacing:
+                Math.min(
+                    Math.max(minSpacing,
+                             row.width - board.width
+                             - rightColumn.width - leftPadding
+                             - rightPadding),
+                    0.04 * board.width)
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            Row {
-                id: row
+            Board {
+                id: board
 
-                property real relativeBoardWidth: 0.51
-                property real minSpacing: 5
+                width: Math.min(row.relativeBoardWidth
+                                * (row.width - row.leftPadding
+                                   - row.rightPadding - row.minSpacing),
+                                row.height)
+                height: isTrigon ? Math.sqrt(3) / 2 * width : width
+                anchors.verticalCenter: parent.verticalCenter
+                onClicked: Logic.onBoardClicked(pos)
+                onRightClicked: Logic.onBoardRightClicked(pos)
 
-                leftPadding: 5
-                rightPadding: 5
-                anchors.centerIn: parent
-                spacing:
-                    Math.min(
-                        Math.max(minSpacing,
-                                 mainContent.width - board.width
-                                 - rightColumn.width - leftPadding
-                                 - rightPadding),
-                        0.04 * board.width)
+                Loader {
+                    id: boardContextMenu
 
-                Board {
-                    id: board
+                    Component {
+                        id: boardContextMenuComponent
 
-                    width: Math.min(row.relativeBoardWidth
-                                    * (mainContent.width - row.leftPadding - row.rightPadding - row.minSpacing),
-                                    mainContent.height)
-                    height: isTrigon ? Math.sqrt(3) / 2 * width : width
-                    anchors.verticalCenter: parent.verticalCenter
-                    onClicked: Logic.onBoardClicked(pos)
-                    onRightClicked: Logic.onBoardRightClicked(pos)
-
-                    Loader {
-                        id: boardContextMenu
-
-                        Component {
-                            id: boardContextMenuComponent
-
-                            BoardContextMenu { }
-                        }
+                        BoardContextMenu { }
                     }
                 }
-                ColumnLayout {
-                    id: rightColumn
+            }
+            ColumnLayout {
+                id: rightColumn
 
-                    width: board.width * (1 / row.relativeBoardWidth - 1)
-                    height: board.grabImageTarget.height
-                    anchors.verticalCenter: board.verticalCenter
-                    spacing: 0
+                width: board.width * (1 / row.relativeBoardWidth - 1)
+                height: board.grabImageTarget.height
+                anchors.verticalCenter: board.verticalCenter
+                spacing: 0
 
-                    ScoreDisplay {
-                        id: scoreDisplay
+                ScoreDisplay {
+                    id: scoreDisplay
 
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 0.035 * parent.width
-                    }
-                    PieceSelectorDesktop {
-                        id: pieceSelector
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 0.035 * parent.width
+                }
+                PieceSelectorDesktop {
+                    id: pieceSelector
 
-                        transitionsEnabled: false
-                        Layout.topMargin: 0.01 * width
-                        Layout.fillWidth: true
-                        Layout.preferredHeight:
-                            (board.isTrigon ? 0.7 : 0.75) * parent.width
-                        onPiecePicked: Logic.pickPiece(piece)
-                    }
-                    Control {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        Layout.topMargin:0.01 * width
+                    transitionsEnabled: false
+                    Layout.topMargin: 0.01 * width
+                    Layout.fillWidth: true
+                    Layout.preferredHeight:
+                        (board.isTrigon ? 0.7 : 0.75) * parent.width
+                    onPiecePicked: Logic.pickPiece(piece)
+                }
+                Control {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.topMargin:0.01 * width
 
-                        Loader {
-                            id: comment
+                    Loader {
+                        id: comment
 
-                            anchors.fill: parent
-                            visible: false
-                            sourceComponent:
-                                visible || item ? commentComponent : null
+                        anchors.fill: parent
+                        visible: false
+                        sourceComponent:
+                            visible || item ? commentComponent : null
 
-                            Component {
-                                id: commentComponent
+                        Component {
+                            id: commentComponent
 
-                                Comment { }
-                            }
+                            Comment { }
                         }
-                        Loader {
-                            id: analyzeGame
+                    }
+                    Loader {
+                        id: analyzeGame
 
-                            anchors.fill: parent
-                            visible: ! comment.visible
-                                     && (analyzeGameModel.elements.length > 0
-                                         || analyzeGameModel.isRunning)
-                            sourceComponent:
-                                visible || item ? analyzeGameComponent : null
+                        anchors.fill: parent
+                        visible: ! comment.visible
+                                 && (analyzeGameModel.elements.length > 0
+                                     || analyzeGameModel.isRunning)
+                        sourceComponent:
+                            visible || item ? analyzeGameComponent : null
 
-                            Component {
-                                id: analyzeGameComponent
+                        Component {
+                            id: analyzeGameComponent
 
-                                AnalyzeGame { theme: rootWindow.theme }
-                            }
+                            AnalyzeGame { theme: rootWindow.theme }
                         }
                     }
                 }
