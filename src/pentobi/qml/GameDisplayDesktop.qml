@@ -159,7 +159,7 @@ Item
             Row {
                 id: row
 
-                property real relativeBoardWidth: 0.52
+                property real relativeBoardWidth: 0.51
                 property real minSpacing: 5
 
                 leftPadding: 5
@@ -206,13 +206,13 @@ Item
                         id: scoreDisplay
 
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 0.04 * parent.width
+                        Layout.preferredHeight: 0.035 * parent.width
                     }
                     PieceSelectorDesktop {
                         id: pieceSelector
 
                         transitionsEnabled: false
-                        Layout.topMargin:0.02 * width
+                        Layout.topMargin: 0.01 * width
                         Layout.fillWidth: true
                         Layout.preferredHeight:
                             (board.isTrigon ? 0.7 : 0.75) * parent.width

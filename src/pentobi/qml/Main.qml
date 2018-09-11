@@ -37,7 +37,7 @@ ApplicationWindow {
 
     property real defaultWidth:
         isAndroid ? Screen.desktopAvailableWidth
-                  : Math.min(Screen.desktopAvailableWidth, 1170)
+                  : Math.min(Screen.desktopAvailableWidth, 1192)
     property real defaultHeight:
         isAndroid ? Screen.desktopAvailableHeight
                   : Math.min(Screen.desktopAvailableHeight, 657)
