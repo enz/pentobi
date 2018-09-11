@@ -109,9 +109,11 @@ Item
                   pieceModel.moveLabel : ""
         opacity: text === "" ? 0 : 1
         color: root.color[3]
+        width: board.gridWidth
+        height: board.gridHeight
+        fontSizeMode: Text.Fit
         font { pixelSize: 0.7 * board.gridHeight; preferShaping: false }
-        width: 0
-        height: 0
+        minimumPixelSize: 5
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         x: {
@@ -120,7 +122,7 @@ Item
             var x = (labelX - pieceModel.center.x + 0.5) * board.gridWidth
             if (labelX % 2 == 0) x -= board.gridWidth / 2
             else x += board.gridWidth / 2
-            return x
+            return x - width / 2
         }
         y: {
             var labelX = pieceModel.labelPos.x
@@ -128,18 +130,21 @@ Item
             var y = (labelY - pieceModel.center.y + 0.5) * board.gridHeight
             if (labelY % 2 == 0) y -= board.gridHeight / 2
             else y += board.gridHeight / 2
-            return y
+            return y - height / 2
         }
         transform: [
             Rotation {
+                origin { x: board.gridWidth / 2; y: board.gridHeight / 2 }
                 axis { x: 0; y: 1; z: 0 }
                 angle: -flipY.angle
             },
             Rotation {
+                origin { x: board.gridWidth / 2; y: board.gridHeight / 2 }
                 axis { x: 1; y: 0; z: 0 }
                 angle: -flipX.angle
             },
             Rotation {
+                origin { x: board.gridWidth / 2; y: board.gridHeight / 2 }
                 angle: -root.rotation
             }
         ]
