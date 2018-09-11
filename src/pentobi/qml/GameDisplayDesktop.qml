@@ -250,8 +250,8 @@ Item
         }
         // Status bar
         RowLayout {
-            height: 1.5 * statusText.font.pixelSize
             Layout.fillWidth: true
+            Layout.preferredHeight: 1.5 * statusText.font.pixelSize
 
             Label {
                 id: statusText
