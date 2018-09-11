@@ -81,25 +81,6 @@ unsigned get_depth(const SgfNode& node)
     return depth;
 }
 
-const char* get_move_annotation(const SgfNode& node)
-{
-    double goodMove = SgfTree::get_good_move(node);
-    if (goodMove > 1)
-        return "!!";
-    if (goodMove > 0)
-        return "!";
-    double badMove = SgfTree::get_bad_move(node);
-    if (badMove > 1)
-        return "??";
-    if (badMove > 0)
-        return "?";
-    if (SgfTree::is_interesting_move(node))
-        return "!?";
-    if (SgfTree::is_doubtful_move(node))
-        return "?!";
-    return "";
-}
-
 const SgfNode* get_next_earlier_variation(const SgfNode& node)
 {
     auto child = &node;

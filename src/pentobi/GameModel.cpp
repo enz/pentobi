@@ -32,7 +32,6 @@ using libboardgame_sgf::back_to_main_variation;
 using libboardgame_sgf::beginning_of_branch;
 using libboardgame_sgf::find_next_comment;
 using libboardgame_sgf::get_last_node;
-using libboardgame_sgf::get_move_annotation;
 using libboardgame_sgf::has_comment;
 using libboardgame_sgf::has_earlier_variation;
 using libboardgame_sgf::is_main_variation;
@@ -56,7 +55,6 @@ using libpentobi_base::has_setup;
 using libpentobi_base::get_move_number;
 using libpentobi_base::get_moves_left;
 using libpentobi_base::get_move_node;
-using libpentobi_base::get_position_info;
 
 //-----------------------------------------------------------------------------
 
@@ -534,7 +532,25 @@ QString GameModel::getMoveAnnotation(int moveNumber)
                               static_cast<unsigned>(moveNumber));
     if (node == nullptr)
         return {};
-    return get_move_annotation(*node);
+    return getMoveAnnotationAtNode(*node);
+}
+
+QString GameModel::getMoveAnnotationAtNode(const SgfNode& node) const
+{
+    auto& tree = m_game.get_tree();
+    if (tree.get_good_move(node) == 2)
+        return "‼";
+    if (tree.get_good_move(node) == 1)
+        return "!";
+    if (tree.is_interesting_move(node))
+        return "⁉";
+    if (tree.is_doubtful_move(node))
+        return "⁈";
+    if (tree.get_bad_move(node) == 1)
+        return "?";
+    if (tree.get_bad_move(node) == 2)
+        return "⁇";
+    return {};
 }
 
 ColorMove GameModel::getMoveAt(const QPoint& pos) const
@@ -1392,15 +1408,15 @@ void GameModel::setMoveAnnotationAtNode(const SgfNode& node,
     m_game.remove_move_annotation(node);
     if (annotation == QStringLiteral("!"))
         m_game.set_good_move(node);
-    else if (annotation == QStringLiteral("!!"))
+    else if (annotation == QStringLiteral("‼"))
         m_game.set_good_move(node, 2);
     else if (annotation == QStringLiteral("?"))
         m_game.set_bad_move(node);
-    else if (annotation == QStringLiteral("??"))
+    else if (annotation == QStringLiteral("⁇"))
         m_game.set_bad_move(node, 2);
-    else if (annotation == QStringLiteral("!?"))
+    else if (annotation == QStringLiteral("⁉"))
         m_game.set_interesting_move(node);
-    else if (annotation == QStringLiteral("?!"))
+    else if (annotation == QStringLiteral("⁈"))
         m_game.set_doubtful_move(node);
     updatePositionInfo();
     updatePieces();
@@ -1684,7 +1700,7 @@ void GameModel::updatePieces()
         unsigned moveIndex;
         if (m_showVariations && getVariationIndex(tree, *node, moveIndex))
             label.append(get_letter_coord(moveIndex).c_str());
-        label.append(get_move_annotation(*node));
+        label.append(getMoveAnnotationAtNode(*node));
         pieceModel->setMoveLabel(label);
     }
     if (pieceModel != m_lastMovePieceModel)
@@ -1715,8 +1731,24 @@ void GameModel::updatePositionInfo()
     auto& tree = m_game.get_tree();
     auto& current = m_game.get_current();
     auto& bd = m_game.get_board();
-    auto positionInfo
-            = QString::fromLocal8Bit(get_position_info(tree, current).c_str());
+    auto move = get_move_number(tree, current);
+    auto left = get_moves_left(tree, current);
+    auto total = move + left;
+    auto variation = get_variation_string(current);
+    QString positionInfo = QString::number(move);
+    if (left > 0 || move > 0)
+        positionInfo.append(getMoveAnnotationAtNode(current));
+    if (left > 0)
+    {
+        positionInfo.append('/');
+        positionInfo.append(QString::number(total));
+    }
+    if (! variation.empty())
+    {
+        positionInfo.append(" (");
+        positionInfo.append(QString::fromLocal8Bit(variation.c_str()));
+        positionInfo.append(')');
+    }
     auto positionInfoShort = positionInfo;
     if (positionInfo.isEmpty())
     {

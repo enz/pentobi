@@ -28,12 +28,6 @@ unsigned get_move_number(const PentobiTree& tree, const SgfNode& node);
     properties. Invalid moves are ignored. */
 unsigned get_moves_left(const PentobiTree& tree, const SgfNode& node);
 
-/** Return a single line that describes the location of the current move
-    in the tree.
-    Includes the move number, move annotationm symbols, the total number of
-    moves in this variation, and a string describing the variation. */
-string get_position_info(const PentobiTree& tree, const SgfNode& node);
-
 //-----------------------------------------------------------------------------
 
 } // namespace libpentobi_base

@@ -20,29 +20,29 @@ Pentobi.Dialog {
         var annotation = gameModel.getMoveAnnotation(moveNumber)
         if (annotation === "")
             comboBox.currentIndex = 0;
-        else if (annotation === "!!")
+        else if (annotation === "‼")
             comboBox.currentIndex = 1;
         else if (annotation === "!")
             comboBox.currentIndex = 2;
-        else if (annotation === "!?")
+        else if (annotation === "⁉")
             comboBox.currentIndex = 3;
-        else if (annotation === "?!")
+        else if (annotation === "⁈")
             comboBox.currentIndex = 4;
         else if (annotation === "?")
             comboBox.currentIndex = 5;
-        else if (annotation === "??")
+        else if (annotation === "⁇")
             comboBox.currentIndex = 6;
     }
     onAccepted: {
         var annotation
         switch (comboBox.currentIndex) {
         case 0: annotation = ""; break
-        case 1: annotation = "!!"; break
+        case 1: annotation = "‼"; break
         case 2: annotation = "!"; break
-        case 3: annotation = "!?"; break
-        case 4: annotation = "?!"; break
+        case 3: annotation = "⁉"; break
+        case 4: annotation = "⁈"; break
         case 5: annotation = "?"; break
-        case 6: annotation = "??"; break
+        case 6: annotation = "⁇"; break
         }
         gameModel.setMoveAnnotation(moveNumber, annotation)
     }

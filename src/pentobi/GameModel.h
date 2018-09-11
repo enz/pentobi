@@ -660,6 +660,8 @@ private:
 
     PieceModel* findUnplayedPieceModel(Color c, Piece piece);
 
+    QString getMoveAnnotationAtNode(const SgfNode& node) const;
+
     ColorMove getMoveAt(const QPoint& pos) const;
 
     QList<PieceModel*>& getPieceModels(Color c);
