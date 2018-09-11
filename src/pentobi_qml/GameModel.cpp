@@ -1233,6 +1233,7 @@ void GameModel::setMoveAnnotation(const QString& annotation)
     else if (annotation == "?!")
         m_game.set_doubtful_move();
     updateMoveAnnotation();
+    updateIsModified();
     updatePositionInfo();
     updatePieces();
 }
