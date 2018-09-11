@@ -53,6 +53,7 @@ Item
     }
     property var color2: theme.colorRed
     property var color3: theme.colorGreen
+    property bool isCommentVisible: swipeView.currentIndex === 1
 
     signal play(var pieceModel, point gameCoord)
 

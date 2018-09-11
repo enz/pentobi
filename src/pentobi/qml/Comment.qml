@@ -7,78 +7,37 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 
-Item {
-    function dropFocus() { if (loader.item) loader.item.dropFocus() }
+ScrollView {
+    function dropFocus() { textArea.focus = false }
 
-    function _createTextArea(forceActiveFocus) {
-        if (loader.item)
-            return
-        loader.sourceComponent = loaderComponent
-        if (forceActiveFocus)
-            loader.item.forceActiveFocus()
-    }
+    clip: true
+    ScrollBar.vertical.minimumSize: 0.2
 
-    // Placeholder to delay more expensive creation of TextArea
-    AbstractButton {
-        visible: ! loader.item
-        anchors.fill: parent
+    TextArea {
+        id: textArea
+
+        text: gameModel.comment
+        color: theme.colorCommentText
+        selectionColor: theme.colorSelection
+        selectedTextColor: theme.colorSelectedText
+        selectByMouse: isDesktop
+        wrapMode: TextEdit.Wrap
+        onTextChanged: gameModel.comment = text
         background: Rectangle {
-            color: theme.colorBackground
-            border.color: theme.colorCommentBorder
-            radius: 3
+            anchors.centerIn: parent
+            width: parent.width - 1
+            height: parent.height - 1
+            color: theme.colorCommentBase
+            radius: 2
+            border.color:
+                textArea.activeFocus ? theme.colorCommentFocus
+                                     : theme.colorCommentBorder
         }
-        onActiveFocusChanged: _createTextArea(true)
-        onClicked: _createTextArea(true)
-    }
-    Connections {
-        target: gameModel
-        onCommentChanged: if (gameModel.comment !== "") _createTextArea(false)
-    }
-    Loader {
-        id: loader
-
-        anchors.fill: parent
-
-        Component {
-            id: loaderComponent
-
-            ScrollView {
-                function forceActiveFocus() { textArea.forceActiveFocus() }
-                function dropFocus() { textArea.focus = false }
-
-                clip: true
-                ScrollBar.vertical.minimumSize: 0.2
-
-                TextArea {
-                    id: textArea
-
-                    text: gameModel.comment
-                    color: theme.colorCommentText
-                    selectionColor: theme.colorSelection
-                    selectedTextColor: theme.colorSelectedText
-                    selectByMouse: isDesktop
-                    wrapMode: TextEdit.Wrap
-                    onTextChanged: gameModel.comment = text
-                    background: Rectangle {
-                        anchors.centerIn: parent
-                        width: parent.width - 1
-                        height: parent.height - 1
-                        color:
-                            textArea.text !== "" || textArea.activeFocus ?
-                                theme.colorCommentBase : theme.colorBackground
-                        radius: 3
-                        border.color:
-                            textArea.activeFocus ? theme.colorCommentFocus
-                                                 : theme.colorCommentBorder
-                    }
-                    Keys.onPressed:
-                        if (event.key === Qt.Key_Tab)
-                        {
-                            focus = false
-                            event.accepted = true
-                        }
-                }
+        Keys.onPressed:
+            if (event.key === Qt.Key_Tab)
+            {
+                focus = false
+                event.accepted = true
             }
-        }
     }
 }

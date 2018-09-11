@@ -19,6 +19,12 @@ Pentobi.Menu {
         onTriggered: appearanceDialog.open()
     }
     Pentobi.MenuItem {
+        action: actions.comment
+        text: addMnemonic(action.text,
+                          //: Mnemonic for menu item View/Comment. Leave empty for no mnemonic.
+                          qsTr("C"))
+    }
+    Pentobi.MenuItem {
         action: actions.fullscreen
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.

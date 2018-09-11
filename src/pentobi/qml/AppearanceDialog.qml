@@ -28,12 +28,14 @@ Pentobi.Dialog {
                 || checkBoxAnimatePieces.checked !== gameDisplay.enableAnimations
                 || comboBoxTheme.currentIndex !== currentThemeIndex
                 || comboBoxMoveMarking.currentIndex !== currentMoveMarkingIndex
+                || comboBoxComment.currentIndex !== currentCommentIndex
         }
         ButtonOk { }
     }
     property DialogButtonBox footerMobile: DialogButtonBoxOkCancel { }
     property int currentThemeIndex
     property int currentMoveMarkingIndex
+    property int currentCommentIndex
 
     footer: isDesktop ? footerDesktop : footerMobile
     onOpened: {
@@ -62,6 +64,15 @@ Pentobi.Dialog {
         else
             currentMoveMarkingIndex = 0
         comboBoxMoveMarking.currentIndex = currentMoveMarkingIndex
+        if (isDesktop) {
+            if (gameDisplay.commentMode === "always")
+                currentCommentIndex = 0
+            else if (gameDisplay.commentMode === "never")
+                currentCommentIndex = 2
+            else
+                currentCommentIndex = 1
+        }
+        comboBoxComment.currentIndex = currentCommentIndex
     }
     onAccepted: {
         gameDisplay.showCoordinates = checkBoxCoordinates.checked
@@ -80,6 +91,12 @@ Pentobi.Dialog {
         case 2: gameDisplay.moveMarking = "all_number"; break
         case 3: gameDisplay.moveMarking = "none"; break
         }
+        if (isDesktop)
+            switch (comboBoxComment.currentIndex) {
+            case 0: gameDisplay.commentMode = "always"; break
+            case 1: gameDisplay.commentMode = "as_needed"; break
+            case 2: gameDisplay.commentMode = "never"; break
+            }
     }
     onApplied: {
         onAccepted()
@@ -146,6 +163,25 @@ Pentobi.Dialog {
                     qsTr("All with number"),
                     //: Move marking/None
                     qsTr("None")
+                ]
+                Layout.preferredWidth: font.pixelSize * 20
+                Layout.fillWidth: true
+            }
+            Label {
+                visible: isDesktop
+                text: qsTr("Show comment:")
+            }
+            ComboBox {
+                id: comboBoxComment
+
+                visible: isDesktop
+                model: [
+                    //: Show-comment mode
+                    qsTr("Always"),
+                    //: Show-comment mode
+                    qsTr("As needed"),
+                    //: Show-comment mode
+                    qsTr("Never")
                 ]
                 Layout.preferredWidth: font.pixelSize * 20
                 Layout.fillWidth: true

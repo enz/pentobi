@@ -12,6 +12,8 @@ Version 15.UNKNOWN (master)
   The translations, opening books and user manual are compiled as resources
   into the binary executable.
 * New themes optimized for colorblindness.
+* New appearance option in desktop mode that handles the comment visibility
+  after a position change.
 * New context menu to go to any played move on board or edit its annotation.
 * Additional warning dialogs to reduce the likelihood that an autosaved
   game is lost, for example because it was changed by another instance

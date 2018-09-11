@@ -26,6 +26,7 @@ Item
     property real animationDurationMove: enableAnimations ? 300 : 0
     property real animationDurationFast: enableAnimations ? 80 : 0
     property bool setupMode
+    property string commentMode: "as_needed"
 
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
@@ -54,6 +55,7 @@ Item
     }
     property var color2: theme.colorRed
     property var color3: theme.colorGreen
+    property alias isCommentVisible: comment.visible
 
     signal play(var pieceModel, point gameCoord)
 
@@ -65,13 +67,10 @@ Item
     function shiftPieceFast(dx, dy) { Logic.shiftPieceFast(dx, dy) }
     function playPickedPiece() { Logic.playPickedPiece() }
     function showToPlay() { }
-    function showComment() { pageIndicator.currentIndex = 0 }
+    function showComment() { comment.visible = true }
+    function setCommentVisible(visible) { comment.visible = visible }
     function showPieces() { }
-    function switchView() {
-        if (analyzeGame.item)
-            pageIndicator.currentIndex = (pageIndicator.currentIndex + 1) % 2
-    }
-    function dropCommentFocus() { comment.dropFocus() }
+    function dropCommentFocus() { if (comment.item) comment.item.dropFocus() }
     function showMove(move) { Logic.showMove(move) }
     function getBoard() { return board }
     function showTemporaryMessage(text) {
@@ -81,11 +80,11 @@ Item
     function startSearch() { showStatus(qsTr("Computer is thinking…")) }
     function endSearch() { if (! messageTimer.running) clearStatus() }
     function startAnalysis() {
-        pageIndicator.currentIndex = 1
         showStatus(qsTr("Running game analysis…"))
+        comment.visible = false
     }
     function endAnalysis() { if (! messageTimer.running) clearStatus() }
-    function analysisAutoloaded() { pageIndicator.currentIndex = 1 }
+    function analysisAutoloaded() { comment.visible = false }
     function searchCallback(elapsedSeconds, remainingSeconds) {
         // If the search is longer than 10 sec, we show the (maximum) remaining
         // time (only during a move generation, ignore search callbacks during
@@ -124,14 +123,25 @@ Item
     }
     function clearStatus() { statusText.opacity = 0 }
 
+    function _updateCommentVisible() {
+        if (commentMode === "always")
+            comment.visible = true
+        else if (commentMode === "never")
+            comment.visible = false
+        else
+            comment.visible = gameModel.comment !== ""
+    }
+
     onWidthChanged: Logic.dropPieceFast()
     onHeightChanged: Logic.dropPieceFast()
+    onCommentModeChanged: _updateCommentVisible()
 
     Settings {
         property alias enableAnimations: root.enableAnimations
         property alias moveMarking: root.moveMarking
         property alias showCoordinates: root.showCoordinates
         property alias setupMode: root.setupMode
+        property alias commentMode: root.commentMode
 
         category: "GameDisplayDesktop"
     }
@@ -207,70 +217,45 @@ Item
                             (board.isTrigon ? 0.7 : 0.75) * parent.width
                         onPiecePicked: Logic.pickPiece(piece)
                     }
-                    ColumnLayout {
-                        spacing: analyzeGame.item ? 0.1 * font.pixelSize : 0
+                    Control {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         Layout.topMargin:0.01 * width
 
-                        Item {
-                            visible: analyzeGame.item
-                            implicitHeight: pageIndicator.height
-                            Layout.fillWidth: true
+                        Loader {
+                            id: comment
 
-                            PageIndicator {
-                                id: pageIndicator
+                            anchors.fill: parent
+                            visible: false
+                            sourceComponent:
+                                visible || item ? commentComponent : null
 
-                                anchors.centerIn: parent
-                                count: 2
-                                interactive: true
-                                delegate: Rectangle {
-                                    implicitWidth: 0.65 * font.pixelSize
-                                    implicitHeight: implicitWidth
-                                    radius: width / 2
-                                    color: theme.colorText
-                                    opacity:
-                                        index === pageIndicator.currentIndex ?
-                                            0.5 : pressed ? 0.2 : 0.15
-                                }
-                                onCurrentIndexChanged: dropCommentFocus()
+                            Component {
+                                id: commentComponent
+
+                                Comment { }
                             }
                         }
-                        Control {
-                            Layout.fillHeight: true
-                            Layout.fillWidth: true
+                        Loader {
+                            id: analyzeGame
 
-                            Comment {
-                                id: comment
+                            anchors.fill: parent
+                            visible: ! comment.visible
+                                     && (analyzeGameModel.elements.length > 0
+                                         || analyzeGameModel.isRunning)
+                            sourceComponent:
+                                visible || item ? analyzeGameComponent : null
 
-                                visible: pageIndicator.currentIndex === 0
-                                anchors.fill: parent
-                            }
-                            Loader {
-                                id: analyzeGame
+                            Component {
+                                id: analyzeGameComponent
 
-                                visible: pageIndicator.currentIndex === 1
-                                anchors.fill: parent
-                                sourceComponent:
-                                    analyzeGameModel.elements.length > 0
-                                    || analyzeGameModel.isRunning ?
-                                        analyzeGameComponent : null
-                                onSourceComponentChanged:
-                                    if (! sourceComponent)
-                                        showComment()
-
-                                Component {
-                                    id: analyzeGameComponent
-
-                                    AnalyzeGame { theme: rootWindow.theme }
-                                }
+                                AnalyzeGame { theme: rootWindow.theme }
                             }
                         }
                     }
                 }
             }
         }
-
         // Status bar
         RowLayout {
             height: 1.5 * statusText.font.pixelSize
@@ -333,5 +318,14 @@ Item
         height: width
         pieceModel: pickedPiece ? pickedPiece.pieceModel : null
         onPiecePlayed: Logic.playPickedPiece()
+    }
+    Connections {
+        target: gameModel
+        onPositionChanged:
+            if (analyzeGameModel.elements.length > 0
+                    || analyzeGameModel.isRunning)
+                comment.visible = false
+            else
+                _updateCommentVisible()
     }
 }

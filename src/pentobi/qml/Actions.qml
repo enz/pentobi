@@ -62,6 +62,21 @@ QtObject {
         enabled: ! isRated && gameModel.hasEarlierVar
         onTriggered: Qt.callLater(function() { gameModel.gotoBeginningOfBranch() }) // QTBUG-69682
     }
+    property Action comment: Action {
+        shortcut: "Ctrl+T"
+        text: qsTr("Comment")
+        checkable: true
+        checked: gameDisplay.isCommentVisible
+        onTriggered:
+            if (isDesktop)
+                gameDisplay.setCommentVisible(checked)
+            else {
+                if (checked)
+                    gameDisplay.showComment()
+                else
+                    gameDisplay.showPieces()
+            }
+    }
     property Action computerSettings: Action {
         shortcut: "Ctrl+U"
         //: Menu item Computer/Settings
@@ -268,11 +283,6 @@ QtObject {
                  && ! isRated
         onTriggered:
             Qt.callLater(function() { Logic.cancelRunning(true) }) // QTBUG-69682
-    }
-    property Action switchView: Action {
-        shortcut: "Ctrl+T"
-        enabled: isDesktop
-        onTriggered: gameDisplay.switchView()
     }
     property Action undo: Action {
         text: qsTr("Undo Move")

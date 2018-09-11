@@ -95,6 +95,10 @@
         <source>Game Info</source>
         <translation>Info sur la partie</translation>
     </message>
+    <message>
+        <source>Comment</source>
+        <translation>Commentaire</translation>
+    </message>
 </context>
 <context>
     <name>AnalyzeDialog</name>
@@ -181,6 +185,25 @@
     <message>
         <source>Animations</source>
         <translation>Animations</translation>
+    </message>
+    <message>
+        <source>Show comment:</source>
+        <translation>Afficher le commentaire :</translation>
+    </message>
+    <message>
+        <source>Always</source>
+        <extracomment>Show-comment mode</extracomment>
+        <translation>Toujours</translation>
+    </message>
+    <message>
+        <source>As needed</source>
+        <extracomment>Show-comment mode</extracomment>
+        <translation>Comme requis</translation>
+    </message>
+    <message>
+        <source>Never</source>
+        <extracomment>Show-comment mode</extracomment>
+        <translation>Jamais</translation>
     </message>
 </context>
 <context>
@@ -1322,6 +1345,11 @@
         <source>F</source>
         <extracomment>Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.</extracomment>
         <translation>P</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <extracomment>Mnemonic for menu item View/Comment. Leave empty for no mnemonic.</extracomment>
+        <translation>C</translation>
     </message>
 </context>
 <context>
