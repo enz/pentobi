@@ -1418,6 +1418,7 @@ void GameModel::setMoveAnnotationAtNode(const SgfNode& node,
         m_game.set_interesting_move(node);
     else if (annotation == QStringLiteral("⁈"))
         m_game.set_doubtful_move(node);
+    updateIsModified();
     updatePositionInfo();
     updatePieces();
 }
