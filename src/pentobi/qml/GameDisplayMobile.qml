@@ -77,6 +77,7 @@ Item
     function endSearch() { }
     function startAnalysis() { showAnalyzeGame() }
     function endAnalysis() { }
+    function deleteAnalysis() { if (swipeView.currentIndex === 2) showPieces() }
     function analysisAutoloaded() { }
     function openBoardContextMenu(moveNumber, x, y) {
         if (! boardContextMenu.item)

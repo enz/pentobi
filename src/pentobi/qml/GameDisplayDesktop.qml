@@ -84,6 +84,7 @@ Item
         comment.visible = false
     }
     function endAnalysis() { if (! messageTimer.running) clearStatus() }
+    function deleteAnalysis() { }
     function analysisAutoloaded() { comment.visible = false }
     function searchCallback(elapsedSeconds, remainingSeconds) {
         // If the search is longer than 10 sec, we show the (maximum) remaining
