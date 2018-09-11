@@ -131,7 +131,12 @@ Pentobi.Dialog {
 
                 text: qsTr("Animations")
             }
-            Label { text: qsTr("Color theme:") }
+            Label {
+                text: qsTr("Color theme:")
+                Layout.topMargin: 0.5 * font.pixelSize
+
+
+            }
             ComboBox {
                 id: comboBoxTheme
 
@@ -153,7 +158,12 @@ Pentobi.Dialog {
                 Layout.preferredWidth: font.pixelSize * 20
                 Layout.fillWidth: true
             }
-            Label { text: qsTr("Move marking:") }
+            Label {
+                text: qsTr("Move marking:")
+                Layout.topMargin: 0.5 * font.pixelSize
+
+
+            }
             ComboBox {
                 id: comboBoxMoveMarking
 
@@ -170,6 +180,9 @@ Pentobi.Dialog {
             Label {
                 visible: isDesktop
                 text: qsTr("Show comment:")
+                Layout.topMargin: 0.5 * font.pixelSize
+
+
             }
             ComboBox {
                 id: comboBoxComment
