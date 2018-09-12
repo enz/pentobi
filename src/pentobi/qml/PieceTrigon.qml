@@ -81,11 +81,9 @@ Item
         width: 0.3 * board.gridHeight
         height: width
         radius: width / 2
-        x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-           * board.gridWidth - width / 2
-        y: (pieceModel.labelPos.y - pieceModel.center.y
-            + (_isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
-           * board.gridHeight - height / 2
+        x: pieceModel.labelPos.x * board.gridWidth - width / 2
+        y: pieceModel.labelPos.y * board.gridHeight - height / 2
+
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     Loader {
@@ -113,11 +111,8 @@ Item
                 minimumPixelSize: 5
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                x: (pieceModel.labelPos.x - pieceModel.center.x + 0.5)
-                   * board.gridWidth - width / 2
-                y: (pieceModel.labelPos.y - pieceModel.center.y
-                    + (_isDownward(pieceModel.labelPos) ? 1 : 2) / 3)
-                   * board.gridHeight - height / 2
+                x: pieceModel.labelPos.x * board.gridWidth - width / 2
+                y: pieceModel.labelPos.y * board.gridHeight - height / 2
                 transform: [
                     Rotation {
                         origin {

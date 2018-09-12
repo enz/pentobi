@@ -83,24 +83,8 @@ Item
         width: 0.45 * board.gridHeight
         height: width
         radius: width / 2
-        x: {
-            var labelX = pieceModel.labelPos.x
-            var labelY = pieceModel.labelPos.y
-            var x = (labelX - pieceModel.center.x + 0.5) * board.gridWidth
-                    - width / 2
-            if (labelX % 2 == 0) x -= board.gridWidth / 2
-            else x += board.gridWidth / 2
-            return x
-        }
-        y: {
-            var labelX = pieceModel.labelPos.x
-            var labelY = pieceModel.labelPos.y
-            var y = (labelY - pieceModel.center.y + 0.5) * board.gridHeight
-                    - height / 2
-            if (labelY % 2 == 0) y -= board.gridHeight / 2
-            else y += board.gridHeight / 2
-            return y
-        }
+        x: pieceModel.labelPos.x * board.gridWidth - width / 2
+        y: pieceModel.labelPos.y * board.gridHeight - height / 2
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
     Loader {
@@ -128,24 +112,8 @@ Item
                 minimumPixelSize: 5
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                x: {
-                    var labelX = pieceModel.labelPos.x
-                    var labelY = pieceModel.labelPos.y
-                    var x = (labelX - pieceModel.center.x + 0.5)
-                            * board.gridWidth
-                    if (labelX % 2 == 0) x -= board.gridWidth / 2
-                    else x += board.gridWidth / 2
-                    return x - width / 2
-                }
-                y: {
-                    var labelX = pieceModel.labelPos.x
-                    var labelY = pieceModel.labelPos.y
-                    var y = (labelY - pieceModel.center.y + 0.5)
-                            * board.gridHeight
-                    if (labelY % 2 == 0) y -= board.gridHeight / 2
-                    else y += board.gridHeight / 2
-                    return y - height / 2
-                }
+                x: pieceModel.labelPos.x * board.gridWidth - width / 2
+                y: pieceModel.labelPos.y * board.gridHeight - height / 2
                 transform: [
                     Rotation {
                         origin {

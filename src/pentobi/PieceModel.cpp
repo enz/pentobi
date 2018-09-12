@@ -56,8 +56,11 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
       m_piece(piece)
 {
     auto& geo = bd.get_geometry();
-    bool isNexos = (bd.get_piece_set() == PieceSet::nexos);
-    bool isCallisto = (bd.get_piece_set() == PieceSet::callisto);
+    auto geoType = bd.get_geometry_type();
+    bool isCallisto = (geoType == GeometryType::callisto);
+    bool isGembloQ = (geoType == GeometryType::gembloq);
+    bool isNexos = (geoType == GeometryType::nexos);
+    bool isTrigon = (geoType == GeometryType::trigon);
     auto& info = bd.get_piece_info(piece);
     auto& points = info.get_points();
     m_elements.reserve(static_cast<int>(points.size()));
@@ -138,7 +141,31 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
             m_junctionType.append(junctionType);
         }
     m_center = findCenter(bd, points, true);
-    m_labelPos = QPointF(info.get_label_pos().x, info.get_label_pos().y);
+    auto& labelPos = info.get_label_pos();
+    qreal labelX = labelPos.x - m_center.x();
+    qreal labelY = labelPos.y - m_center.y();
+    if (isGembloQ)
+    {
+        if (labelPos.x % 2 != 0)
+            labelX += 1;
+        if (labelPos.y % 2 != 0)
+            labelY += 1;
+    }
+    else if (isTrigon)
+    {
+        labelX += 0.5;
+        if ((labelPos.x % 2 == 0) != (labelPos.y % 2 == 0))
+            // Downward
+            labelY += 1. / 3;
+        else
+            labelY += 2. / 3;
+    }
+    else
+    {
+        labelX += 0.5;
+        labelY += 0.5;
+    }
+    m_labelPos = QPointF(labelX, labelY);
 }
 
 void PieceModel::flipAcrossX()

@@ -47,7 +47,10 @@ class PieceModel
     Q_PROPERTY(QVariantList junctionType MEMBER m_junctionType CONSTANT)
 
     Q_PROPERTY(QPointF center MEMBER m_center CONSTANT)
+
+    /** Position of the label in board coordinates relative to center. */
     Q_PROPERTY(QPointF labelPos MEMBER m_labelPos CONSTANT)
+
     Q_PROPERTY(QString state READ state NOTIFY stateChanged)
     Q_PROPERTY(bool isPlayed READ isPlayed NOTIFY isPlayedChanged)
     Q_PROPERTY(bool isLastMove READ isLastMove NOTIFY isLastMoveChanged)
