@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.0
-import QtQuick.Window 2.0
 
 Canvas {
     property var history
@@ -48,7 +47,6 @@ Canvas {
             maxY = minY + 100
 
         ctx.beginPath()
-        ctx.lineWidth = Math.max(1, 0.2 * Screen.pixelDensity)
         var top =  0
         ctx.moveTo(0, top)
         ctx.lineTo(w, top)
