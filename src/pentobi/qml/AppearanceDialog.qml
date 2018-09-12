@@ -4,11 +4,9 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQml 2.2
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
-import QtQuick.Window 2.0
 import "." as Pentobi
 
 Pentobi.Dialog {

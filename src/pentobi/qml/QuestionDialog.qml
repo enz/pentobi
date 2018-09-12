@@ -6,7 +6,6 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 2.2
-import QtQuick.Window 2.0
 import "Main.js" as Logic
 import "." as Pentobi
 

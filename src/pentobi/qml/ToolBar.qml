@@ -7,7 +7,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
-import QtQuick.Window 2.0
 import "." as Pentobi
 import "Main.js" as Logic
 
