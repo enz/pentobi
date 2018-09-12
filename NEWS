@@ -23,8 +23,8 @@ Version 15.UNKNOWN (master)
 * New toolbar button to stop computer play or game analysis.
 * Play and undo buttons now support autorepeat.
 * Reintroduced forward10/backward10 toolbuttons on desktop.
-* New shortcut keys for moving the selected piece in larger steps
-  on the board and for rotating and flipping it.
+* New shortcut keys for moving the selected piece in larger steps on the
+  board.
 * New menu item Recent Files/Clear List.
 * New shortcut Ctrl+Shift+H, which behaves like Find Move (Ctrl+H) but
   iterates backwards through the list of legal moves.
