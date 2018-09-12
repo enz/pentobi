@@ -9,5 +9,4 @@ import QtQuick 2.0
 RotationAnimation {
     duration: animationDurationMove
     direction: RotationAnimation.Shortest
-    property: "rotation"
 }
