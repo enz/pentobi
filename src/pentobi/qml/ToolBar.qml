@@ -86,7 +86,10 @@ Item {
             action: actions.undo
             visible: isDesktop || enabled
             autoRepeat: true
-            autoRepeatInterval: 600
+            autoRepeatInterval:
+                rootWindow.gameDisplay.item ?
+                    2 * rootWindow.gameDisplay.item.animationDuration : 400
+
         }
         Pentobi.Button {
             id: computerSettings
@@ -102,6 +105,9 @@ Item {
             action: actions.play
             visible: isDesktop || enabled
             autoRepeat: true
+            autoRepeatInterval:
+                rootWindow.gameDisplay.item ?
+                    rootWindow.gameDisplay.item.animationDuration : 200
         }
         Pentobi.Button {
             id: stop
@@ -129,7 +135,9 @@ Item {
             icon.source: theme.getImage("pentobi-backward10")
             action: actions.backward10
             autoRepeat: true
-            autoRepeatInterval: 750
+            autoRepeatInterval:
+                rootWindow.gameDisplay.item ?
+                    rootWindow.gameDisplay.item.animationDuration : 200
         }
         Pentobi.Button {
             id: backward
@@ -154,7 +162,9 @@ Item {
             icon.source: theme.getImage("pentobi-forward10")
             action: actions.forward10
             autoRepeat: true
-            autoRepeatInterval: 750
+            autoRepeatInterval:
+                rootWindow.gameDisplay.item ?
+                    rootWindow.gameDisplay.item.animationDuration : 200
         }
         Pentobi.Button {
             id: end
@@ -175,7 +185,9 @@ Item {
             icon.source: theme.getImage("pentobi-previous-variation")
             action: actions.prevVar
             autoRepeat: true
-            autoRepeatInterval: 750
+            autoRepeatInterval:
+                rootWindow.gameDisplay.item ?
+                    2 * rootWindow.gameDisplay.item.animationDuration : 400
         }
         Pentobi.Button {
             id: nextVar
@@ -184,7 +196,9 @@ Item {
             icon.source: theme.getImage("pentobi-next-variation")
             action: actions.nextVar
             autoRepeat: true
-            autoRepeatInterval: 750
+            autoRepeatInterval:
+                rootWindow.gameDisplay.item ?
+                    2 * rootWindow.gameDisplay.item.animationDuration : 400
         }
         Item {
             visible: isDesktop
