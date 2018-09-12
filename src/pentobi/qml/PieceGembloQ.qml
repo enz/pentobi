@@ -96,6 +96,8 @@ Item
             id: textComponent
 
             Text {
+                property bool flippedY: Math.abs(flipY.angle - 180) < 90
+
                 text: moveMarking == "all_number"
                       || (moveMarking == "last_number"
                           && pieceModel.isLastMove) ?
@@ -116,23 +118,17 @@ Item
                 y: pieceModel.labelPos.y * board.gridHeight - height / 2
                 transform: [
                     Rotation {
-                        origin {
-                            x: board.gridWidth; y: board.gridHeight
-                        }
+                        origin { x: board.gridWidth; y: board.gridHeight }
                         axis { x: 0; y: 1; z: 0 }
-                        angle: -flipY.angle
+                        angle: flippedY ? -180 : 0
                     },
                     Rotation {
-                        origin {
-                            x: board.gridWidth; y: board.gridHeight
-                        }
+                        origin { x: board.gridWidth; y: board.gridHeight }
                         axis { x: 1; y: 0; z: 0 }
-                        angle: -flipX.angle
+                        angle: flippedX ? -180 : 0
                     },
                     Rotation {
-                        origin {
-                            x: board.gridWidth; y: board.gridHeight
-                        }
+                        origin { x: board.gridWidth; y: board.gridHeight }
                         angle: -root.rotation
                     }
                 ]

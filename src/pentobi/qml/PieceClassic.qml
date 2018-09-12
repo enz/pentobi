@@ -113,14 +113,14 @@ Item
                             x: board.gridWidth / 2; y: board.gridHeight / 2
                         }
                         axis { x: 0; y: 1; z: 0 }
-                        angle: -flipY.angle
+                        angle: flippedY ? -180 : 0
                     },
                     Rotation {
                         origin {
                             x: board.gridWidth / 2; y: board.gridHeight / 2
                         }
                         axis { x: 1; y: 0; z: 0 }
-                        angle: -flipX.angle
+                        angle: flippedX ? -180 : 0
                     },
                     Rotation {
                         origin {
