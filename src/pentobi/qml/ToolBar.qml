@@ -99,6 +99,7 @@ Item {
             icon.source: theme.getImage("pentobi-play")
             action: actions.play
             visible: isDesktop || enabled
+            autoRepeat: true
         }
         Pentobi.Button {
             id: stop
