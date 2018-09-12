@@ -86,6 +86,7 @@ Item {
             action: actions.undo
             visible: isDesktop || enabled
             autoRepeat: true
+            autoRepeatInterval: 600
         }
         Pentobi.Button {
             id: computerSettings
