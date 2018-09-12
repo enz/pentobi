@@ -1,5 +1,4 @@
 import QtQuick 2.11
-import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
 import "." as Pentobi
 
