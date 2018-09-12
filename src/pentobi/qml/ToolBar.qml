@@ -85,6 +85,7 @@ Item {
             icon.source: theme.getImage("pentobi-undo")
             action: actions.undo
             visible: isDesktop || enabled
+            autoRepeat: true
         }
         Pentobi.Button {
             id: computerSettings
