@@ -36,13 +36,12 @@ Pentobi.Dialog {
             Label {
                 id: label
 
-                width: parent.width
+                Layout.fillWidth: true
                 text: qsTr("Analysis speed:")
             }
             ComboBox {
                 id: comboBox
 
-                width: parent.width
                 model: [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
                 Layout.fillWidth: true
                 Layout.preferredWidth: font.pixelSize * 15
