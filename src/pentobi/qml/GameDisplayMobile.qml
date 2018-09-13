@@ -104,14 +104,14 @@ Item
     Column {
         id: column
 
-        width: gameDisplay.width
-        anchors.centerIn: gameDisplay
+        width: root.width
+        anchors.centerIn: root
         spacing: 0.01 * board.width
 
         Board {
             id: board
 
-            width: Math.min(parent.width, 0.7 * gameDisplay.height)
+            width: Math.min(parent.width, 0.7 * root.height)
             height: isTrigon ? Math.sqrt(3) / 2 * width : width
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: Logic.onBoardClicked(pos)
@@ -130,8 +130,8 @@ Item
         SwipeView {
             id: swipeView
 
-            width: Math.min(1.3 * board.width, gameDisplay.width)
-            height: Math.min(gameDisplay.height - board.height, board.height)
+            width: Math.min(1.3 * board.width, root.width)
+            height: Math.min(root.height - board.height, board.height)
             clip: width < rootWindow.contentItem.width
             anchors.horizontalCenter: board.horizontalCenter
 
@@ -196,7 +196,7 @@ Item
         running: busyIndicatorRunning
         width: Math.min(0.2 * swipeView.width, swipeView.height)
         height: width
-        x: (gameDisplay.width - width) / 2
+        x: (root.width - width) / 2
         y: column.y + swipeView.y + (swipeView.height - height) / 2
         opacity: 0.7
     }
@@ -210,7 +210,7 @@ Item
         }
 
         opacity: 0
-        x: (gameDisplay.width - width) / 2
+        x: (root.width - width) / 2
         y: column.y + swipeView.y + (swipeView.height - height) / 2
         radius: 0.1 * height
         color: theme.colorMessageBase
