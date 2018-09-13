@@ -53,9 +53,6 @@ MenuItem {
             event.accepted = true
         }
     background: Rectangle {
-        anchors.fill: parent
-        // Don't overdraw menu background border
-        anchors.margins: 1
         color: {
             if (! root.highlighted)
                 return "transparent"
@@ -66,8 +63,6 @@ MenuItem {
         }
     }
     contentItem: RowLayout {
-        anchors.fill: parent
-
         Item {
             implicitWidth: 0.1 * font.pixelSize + _anyItemIndicatorWidth
                            + 0.2 * font.pixelSize
