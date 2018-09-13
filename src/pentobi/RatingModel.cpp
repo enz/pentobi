@@ -173,6 +173,7 @@ void RatingModel::saveSettings()
                           round(m_bestRating.get()));
     }
     QList<QObject*> newHistory;
+    newHistory.reserve(m_history.size());
     for (auto& i : m_history)
     {
         auto& info = dynamic_cast<RatedGameInfo&>(*i);

@@ -7,11 +7,8 @@
 #include "TreeUtil.h"
 
 #include "NodeUtil.h"
-#include "libboardgame_sgf/SgfUtil.h"
 
 namespace libpentobi_base {
-
-using libboardgame_sgf::get_variation_string;
 
 //-----------------------------------------------------------------------------
 

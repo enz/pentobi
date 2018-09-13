@@ -540,17 +540,17 @@ QString GameModel::getMoveAnnotationAtNode(const SgfNode& node) const
     try
     {
         if (m_game.get_good_move(node) == 2)
-            return "‼";
+            return QStringLiteral("‼");
         if (m_game.get_good_move(node) == 1)
-            return "!";
+            return QStringLiteral("!");
         if (m_game.is_interesting_move(node))
-            return "⁉";
+            return QStringLiteral("⁉");
         if (m_game.is_doubtful_move(node))
-            return "⁈";
+            return QStringLiteral("⁈");
         if (m_game.get_bad_move(node) == 1)
-            return "?";
+            return QStringLiteral("?");
         if (m_game.get_bad_move(node) == 2)
-            return "⁇";
+            return QStringLiteral("⁇");
     }
     catch (const SgfError&)
     {
