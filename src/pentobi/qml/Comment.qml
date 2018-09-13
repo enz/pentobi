@@ -8,7 +8,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 
 ScrollView {
-    function dropFocus() { textArea.focus = false }
+    function dropFocus() { if (textArea.activeFocus) textArea.focus = false }
 
     clip: true
     ScrollBar.vertical.minimumSize: 0.2
@@ -22,6 +22,7 @@ ScrollView {
         selectedTextColor: theme.colorSelectedText
         selectByMouse: isDesktop
         wrapMode: TextEdit.Wrap
+        focus: true
         onTextChanged: gameModel.comment = text
         background: Rectangle {
             anchors.centerIn: parent
