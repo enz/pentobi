@@ -51,7 +51,6 @@ ToolButton {
     focusPolicy: Qt.NoFocus
     flat: true
     background: Rectangle {
-        anchors.fill: root
         radius: 0.05 * width
         color: down ? theme.colorButtonPressed :
                       effectiveHovered ? theme.colorButtonHovered
