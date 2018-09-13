@@ -257,8 +257,7 @@ Item
 
                 opacity: 0
                 color: theme.colorText
-                leftPadding: 0.4 * font.pixelSize
-                padding: 0.2 * font.pixelSize
+                Layout.leftMargin: 0.4 * font.pixelSize
 
                 Behavior on opacity {
                     NumberAnimation {
@@ -271,8 +270,7 @@ Item
                 text: gameModel.positionInfoShort
                 color: theme.colorText
                 opacity: 0.8
-                rightPadding: 0.4 * font.pixelSize
-                padding: 0.2 * font.pixelSize
+                Layout.rightMargin: 0.4 * font.pixelSize
             }
             Timer {
                 id: messageTimer
