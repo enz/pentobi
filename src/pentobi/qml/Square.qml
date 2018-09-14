@@ -14,8 +14,6 @@ import QtQuick 2.3
 // better results than using Image.mipmap and avoids a mipmap bug with Nvidia
 // cards (QTBUG-57845).
 Item {
-    id: root
-
     Loader {
         opacity: imageOpacity0
         sourceComponent: opacity > 0 || item ? component0 : null
