@@ -63,10 +63,6 @@ MenuItem {
         }
     }
     contentItem: RowLayout {
-        Item {
-            implicitWidth: 0.1 * font.pixelSize + _anyItemIndicatorWidth
-                           + 0.2 * font.pixelSize
-        }
         Label {
             id: labelText
 
@@ -87,8 +83,9 @@ MenuItem {
                     return isDesktop ? palette.highlightedText : palette.buttonText
                 return palette.text
             }
-            Layout.alignment: Qt.AlignVCenter
             Layout.fillWidth: true
+            Layout.leftMargin: 0.1 * font.pixelSize + _anyItemIndicatorWidth
+                               + 0.2 * font.pixelSize
         }
         Label {
             visible: isDesktop && shortcut !== ""
@@ -101,11 +98,8 @@ MenuItem {
             }
             color: labelText.color
             opacity: 0.6
-            Layout.alignment: Qt.AlignVCenter
-        }
-        Item {
-            implicitWidth: _anyItemArrowWidth > 0 ? _anyItemArrowWidth
-                                                  : 0.1 * font.pixelSize
+            Layout.rightMargin: _anyItemArrowWidth > 0 ? _anyItemArrowWidth
+                                                       : 0.1 * font.pixelSize
         }
     }
 }
