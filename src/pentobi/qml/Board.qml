@@ -121,7 +121,12 @@ Item {
     Item {
         id: grabImageTarget
 
-        anchors.centerIn: parent
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            // Align to bottom for better widget alignment if the image is
+            // smaller than it could be due to using a integers for field sizes
+            bottom: parent.bottom
+        }
 
         width: {
             if (! showCoordinates)

@@ -141,117 +141,111 @@ Item
 
         category: "GameDisplayDesktop"
     }
-    ColumnLayout {
-        anchors.fill: parent
-        spacing: 0
+    Column {
+        anchors {
+            fill: parent
+            margins: 5
+        }
 
-        Row {
-            id: row
+        Item {
+            width: parent.width
+            height: parent.height - statusBar.height
 
-            property real relativeBoardWidth: 0.51
-            property real minSpacing: 5
+            RowLayout {
+                id: row
 
-            leftPadding: 5
-            rightPadding: 5
-            spacing:
-                Math.min(
-                    Math.max(minSpacing,
-                             row.width - board.width
-                             - rightColumn.width - leftPadding
-                             - rightPadding),
-                    0.04 * board.width)
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            Board {
-                id: board
-
-                width: Math.min(row.relativeBoardWidth
-                                * (row.width - row.leftPadding
-                                   - row.rightPadding - row.minSpacing),
-                                row.height)
-                height: isTrigon ? Math.sqrt(3) / 2 * width : width
-                anchors.verticalCenter: parent.verticalCenter
-                onClicked: Logic.onBoardClicked(pos)
-                onRightClicked: Logic.onBoardRightClicked(pos)
-
-                Loader {
-                    id: boardContextMenu
-
-                    Component {
-                        id: boardContextMenuComponent
-
-                        BoardContextMenu { }
-                    }
+                width: Math.min(parent.width, 2 * parent.height)
+                height: {
+                    var height = width / 2
+                    if (board.isTrigon)
+                        height *= Math.sqrt(3) / 2
+                    return height
                 }
-            }
-            ColumnLayout {
-                id: rightColumn
+                anchors.centerIn: parent
 
-                width: board.width * (1 / row.relativeBoardWidth - 1)
-                height: board.grabImageTarget.height
-                anchors.verticalCenter: board.verticalCenter
-                spacing: 0
+                Board {
+                    id: board
 
-                ScoreDisplay {
-                    id: scoreDisplay
-
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 0.035 * parent.width
-                }
-                PieceSelectorDesktop {
-                    id: pieceSelector
-
-                    transitionsEnabled: false
-                    Layout.topMargin: 0.01 * width
-                    Layout.fillWidth: true
-                    Layout.preferredHeight:
-                        (board.isTrigon ? 0.7 : 0.75) * parent.width
-                    onPiecePicked: Logic.pickPiece(piece)
-                }
-                Control {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    Layout.topMargin:0.01 * width
+                    onClicked: Logic.onBoardClicked(pos)
+                    onRightClicked: Logic.onBoardRightClicked(pos)
 
                     Loader {
-                        id: comment
-
-                        anchors.fill: parent
-                        visible: false
-                        sourceComponent:
-                            visible || item ? commentComponent : null
+                        id: boardContextMenu
 
                         Component {
-                            id: commentComponent
+                            id: boardContextMenuComponent
 
-                            Comment { }
+                            BoardContextMenu { }
                         }
                     }
-                    Loader {
-                        id: analyzeGame
+                }
+                ColumnLayout {
+                    id: rightColumn
 
-                        anchors.fill: parent
-                        visible: ! comment.visible
-                                 && (analyzeGameModel.elements.length > 0
-                                     || analyzeGameModel.isRunning)
-                        sourceComponent:
-                            visible || item ? analyzeGameComponent : null
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
 
-                        Component {
-                            id: analyzeGameComponent
+                    ScoreDisplay {
+                        id: scoreDisplay
 
-                            AnalyzeGame { theme: rootWindow.theme }
+                        Layout.fillWidth: true
+                        Layout.topMargin: 0.04 * row.height
+                        Layout.preferredHeight: 0.035 * row.height
+                    }
+                    PieceSelectorDesktop {
+                        id: pieceSelector
+
+                        transitionsEnabled: false
+                        Layout.topMargin: 0.01 * row.height
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 0.7 * row.height
+                        onPiecePicked: Logic.pickPiece(piece)
+                    }
+                    Item {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+
+                        Loader {
+                            id: comment
+
+                            anchors.fill: parent
+                            visible: false
+                            sourceComponent:
+                                visible || item ? commentComponent : null
+
+                            Component {
+                                id: commentComponent
+
+                                Comment { }
+                            }
+                        }
+                        Loader {
+                            id: analyzeGame
+
+                            anchors.fill: parent
+                            visible: ! comment.visible
+                                     && (analyzeGameModel.elements.length > 0
+                                         || analyzeGameModel.isRunning)
+                            sourceComponent:
+                                visible || item ? analyzeGameComponent : null
+
+                            Component {
+                                id: analyzeGameComponent
+
+                                AnalyzeGame { theme: rootWindow.theme }
+                            }
                         }
                     }
                 }
             }
         }
-        // Status bar
         RowLayout {
-            Layout.fillWidth: true
-            Layout.minimumHeight: 1.7 * statusText.font.pixelSize
-            Layout.preferredHeight: 1.7 * statusText.font.pixelSize
+            id: statusBar
+
+            width: parent.width
+            height: 1.7 * statusText.font.pixelSize
 
             Label {
                 id: statusText

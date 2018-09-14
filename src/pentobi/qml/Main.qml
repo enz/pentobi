@@ -37,10 +37,10 @@ ApplicationWindow {
 
     property real defaultWidth:
         isAndroid ? Screen.desktopAvailableWidth
-                  : Math.min(Screen.desktopAvailableWidth, 1192)
+                  : Math.min(Screen.desktopAvailableWidth, 1178)
     property real defaultHeight:
         isAndroid ? Screen.desktopAvailableHeight
-                  : Math.min(Screen.desktopAvailableHeight, 658)
+                  : Math.min(Screen.desktopAvailableHeight, 648)
 
     property int exportImageWidth: 420
     property bool busyIndicatorRunning: lengthyCommand.isRunning
@@ -70,7 +70,7 @@ ApplicationWindow {
 
             visible: ! (visibility === Window.FullScreen && isAndroid)
             Layout.fillWidth: true
-            Layout.margins: isDesktop ? 2 : 0
+            Layout.margins: isDesktop ? 1 : 0
         }
         Loader {
             id: gameDisplayLoader
