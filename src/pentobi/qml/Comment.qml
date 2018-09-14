@@ -25,8 +25,6 @@ ScrollView {
         focus: true
         onTextChanged: gameModel.comment = text
         background: Rectangle {
-            width: parent.width
-            height: parent.height
             color: theme.colorCommentBase
             radius: 2
             border.color:
