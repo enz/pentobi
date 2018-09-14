@@ -70,7 +70,7 @@ ApplicationWindow {
 
             visible: ! (visibility === Window.FullScreen && isAndroid)
             Layout.fillWidth: true
-            Layout.margins: isDesktop ? 1 : 0
+            Layout.margins: isDesktop ? 2 : 0
         }
         Loader {
             id: gameDisplayLoader
