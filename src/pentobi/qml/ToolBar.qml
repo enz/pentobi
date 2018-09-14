@@ -249,6 +249,10 @@ Item {
             Loader {
                 id: menu
 
+                // Having the loader fill the button together with
+                // CloseOnPressOutsideParent and the function used in onClicked
+                // seems to be the only way to make a click on the button close
+                // the menu if it is already open. Is there a better way?
                 anchors.fill: parent
 
                 Component {
