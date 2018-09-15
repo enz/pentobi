@@ -6,7 +6,6 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.1
 import QtQuick.Window 2.1
 import Qt.labs.settings 1.0
 import pentobi 1.0
@@ -37,10 +36,10 @@ ApplicationWindow {
 
     property real defaultWidth:
         isAndroid ? Screen.desktopAvailableWidth
-                  : Math.min(Screen.desktopAvailableWidth, 1174)
+                  : Math.min(Screen.desktopAvailableWidth, 1188)
     property real defaultHeight:
         isAndroid ? Screen.desktopAvailableHeight
-                  : Math.min(Screen.desktopAvailableHeight, 650)
+                  : Math.min(Screen.desktopAvailableHeight, 663)
 
     property int exportImageWidth: 420
     property bool busyIndicatorRunning: lengthyCommand.isRunning
@@ -51,39 +50,44 @@ ApplicationWindow {
 
     property var dialogs: []
 
-    minimumWidth: isDesktop ? 480 : 240
-    minimumHeight: isDesktop ? 300 : 301
+    minimumWidth: isDesktop ? 481 : 240
+    minimumHeight: isDesktop ? 303 : 301
     color: theme.colorBackground
     title: Logic.getWindowTitle(gameModel.file, gameModel.isModified)
     onClosing: if ( ! Logic.quit()) close.accepted = false
     Component.onCompleted: Logic.init()
+
     MouseArea {
         anchors.fill: parent
         onClicked: gameDisplay.dropCommentFocus()
     }
-    ColumnLayout {
-        anchors.fill: parent
-        spacing: 0
+    Pentobi.ToolBar {
+        id: toolBar
 
-        Pentobi.ToolBar {
-            id: toolBar
-
-            visible: ! (visibility === Window.FullScreen && isAndroid)
-            Layout.fillWidth: true
-            Layout.margins: isDesktop ? 2 : 0
+        visible: ! (visibility === Window.FullScreen && isAndroid)
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+            margins: isDesktop ? 3 : 0
         }
-        Loader {
-            id: gameDisplayLoader
+    }
+    Loader {
+        id: gameDisplayLoader
 
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            source:
-                isDesktop ? "GameDisplayDesktop.qml" : "GameDisplayMobile.qml"
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: toolBar.bottom
+            bottom: parent.bottom
+            margins: isDesktop ? 2 : 0
+        }
+        source:
+            isDesktop ? "GameDisplayDesktop.qml" : "GameDisplayMobile.qml"
 
-            Connections {
-                target: gameDisplayLoader.item
-                onPlay: Logic.play(pieceModel, gameCoord)
-            }
+        Connections {
+            target: gameDisplayLoader.item
+            onPlay: Logic.play(pieceModel, gameCoord)
         }
     }
     MouseArea {

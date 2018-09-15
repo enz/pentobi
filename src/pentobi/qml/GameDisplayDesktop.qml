@@ -6,7 +6,6 @@
 
 import QtQuick 2.11
 import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.0
 import Qt.labs.settings 1.0
 import "." as Pentobi
 import "GameDisplay.js" as Logic
@@ -55,6 +54,8 @@ Item
     property var color2: theme.colorRed
     property var color3: theme.colorGreen
     property alias isCommentVisible: comment.visible
+
+    readonly property real _relativeBoardWidth: 0.51
 
     signal play(var pieceModel, point gameCoord)
 
@@ -141,138 +142,176 @@ Item
 
         category: "GameDisplayDesktop"
     }
-    Column {
+    Item {
+        id: mainContent
+
         anchors {
-            fill: parent
-            margins: 5
+            left: parent.left
+            right: parent.right
+            leftMargin: 3
+            rightMargin: 3
+            topMargin: 2
+            top: parent.top
+            bottom: statusBar.top
         }
 
         Item {
-            width: parent.width
-            height: parent.height - statusBar.height
+            anchors.centerIn: parent
+            width: Math.min(parent.width, parent.height / _relativeBoardWidth)
+            height: {
+                var height = width * _relativeBoardWidth
+                if (board.isTrigon)
+                    height *= Math.sqrt(3) / 2
+                return height
+            }
 
-            RowLayout {
-                id: row
+            Board {
+                id: board
 
-                width: Math.min(parent.width, 2 * parent.height)
-                height: {
-                    var height = width / 2
-                    if (board.isTrigon)
-                        height *= Math.sqrt(3) / 2
-                    return height
+                anchors {
+                    left: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
                 }
-                anchors.centerIn: parent
+                width: _relativeBoardWidth * parent.width
+                onClicked: Logic.onBoardClicked(pos)
+                onRightClicked: Logic.onBoardRightClicked(pos)
 
-                Board {
-                    id: board
+                Loader {
+                    id: boardContextMenu
 
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    onClicked: Logic.onBoardClicked(pos)
-                    onRightClicked: Logic.onBoardRightClicked(pos)
+                    Component {
+                        id: boardContextMenuComponent
+
+                        BoardContextMenu { }
+                    }
+                }
+            }
+            Item {
+                anchors {
+                    left: board.right
+                    right: parent.right
+                    leftMargin:
+                        Math.min(
+                            Math.max(
+                                2,
+                                mainContent.width
+                                - mainContent.height / _relativeBoardWidth),
+                            0.03 * board.width)
+                }
+                height: board.grabImageTarget.height
+
+                ScoreDisplay {
+                    id: scoreDisplay
+
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: parent.top
+                    }
+                    height: 0.035 * parent.height
+                }
+                PieceSelectorDesktop {
+                    id: pieceSelector
+
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: scoreDisplay.bottom
+                        topMargin: 0.01 * parent.height
+                    }
+                    height: (board.isTrigon ? 0.75 : 0.7) * parent.height
+                    transitionsEnabled: false
+                    onPiecePicked: Logic.pickPiece(piece)
+                }
+                Item {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: pieceSelector.bottom
+                        bottom: parent.bottom
+                        leftMargin: 5
+                        rightMargin: 5
+                    }
 
                     Loader {
-                        id: boardContextMenu
+                        id: comment
+
+                        anchors.fill: parent
+                        visible: false
+                        sourceComponent:
+                            visible || item ? commentComponent : null
 
                         Component {
-                            id: boardContextMenuComponent
+                            id: commentComponent
 
-                            BoardContextMenu { }
+                            Comment { }
                         }
                     }
-                }
-                ColumnLayout {
-                    id: rightColumn
+                    Loader {
+                        id: analyzeGame
 
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
+                        anchors.fill: parent
+                        visible: ! comment.visible
+                                 && (analyzeGameModel.elements.length > 0
+                                     || analyzeGameModel.isRunning)
+                        sourceComponent:
+                            visible || item ? analyzeGameComponent : null
 
-                    ScoreDisplay {
-                        id: scoreDisplay
+                        Component {
+                            id: analyzeGameComponent
 
-                        Layout.fillWidth: true
-                        Layout.topMargin: 0.04 * row.height
-                        Layout.preferredHeight: 0.035 * row.height
-                    }
-                    PieceSelectorDesktop {
-                        id: pieceSelector
-
-                        transitionsEnabled: false
-                        Layout.topMargin: 0.01 * row.height
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 0.7 * row.height
-                        onPiecePicked: Logic.pickPiece(piece)
-                    }
-                    Item {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-
-                        Loader {
-                            id: comment
-
-                            anchors.fill: parent
-                            visible: false
-                            sourceComponent:
-                                visible || item ? commentComponent : null
-
-                            Component {
-                                id: commentComponent
-
-                                Comment { }
-                            }
-                        }
-                        Loader {
-                            id: analyzeGame
-
-                            anchors.fill: parent
-                            visible: ! comment.visible
-                                     && (analyzeGameModel.elements.length > 0
-                                         || analyzeGameModel.isRunning)
-                            sourceComponent:
-                                visible || item ? analyzeGameComponent : null
-
-                            Component {
-                                id: analyzeGameComponent
-
-                                AnalyzeGame { theme: rootWindow.theme }
-                            }
+                            AnalyzeGame { theme: rootWindow.theme }
                         }
                     }
                 }
             }
         }
-        RowLayout {
-            id: statusBar
+    }
+    Item {
+        id: statusBar
 
-            width: parent.width
-            height: 1.7 * statusText.font.pixelSize
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: 1.7 * statusText.font.pixelSize
 
-            Label {
-                id: statusText
+        Label {
+            id: statusText
 
-                opacity: 0
-                color: theme.colorText
-                Layout.leftMargin: 0.4 * font.pixelSize
+            anchors {
+                left: parent.left
+                top: top.right
+                bottom: parent.bottom
+                leftMargin: 5
+            }
+            opacity: 0
+            color: theme.colorText
 
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: animationDurationFast
-                    }
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: animationDurationFast
                 }
             }
-            Item { Layout.fillWidth: true }
-            Label {
-                text: gameModel.positionInfoShort
-                color: theme.colorText
-                opacity: 0.8
-                Layout.rightMargin: 0.4 * font.pixelSize
+        }
+        Label {
+            anchors {
+                right: parent.right
+                top: top.right
+                bottom: parent.bottom
+                rightMargin: 5
             }
-            Timer {
-                id: messageTimer
+            text: gameModel.positionInfoShort
+            color: theme.colorText
+            opacity: 0.8
+        }
+        Timer {
+            id: messageTimer
 
-                interval: 3000
-                onTriggered: clearStatus()
-            }
+            interval: 3000
+            onTriggered: clearStatus()
         }
     }
     PieceManipulator {
