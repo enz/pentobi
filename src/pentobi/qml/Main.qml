@@ -69,7 +69,7 @@ ApplicationWindow {
             left: parent.left
             right: parent.right
             top: parent.top
-            margins: isDesktop ? 3 : 0
+            margins: isDesktop ? 2 : 0
         }
     }
     Loader {
