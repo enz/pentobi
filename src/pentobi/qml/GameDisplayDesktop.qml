@@ -219,7 +219,7 @@ Item
                         left: parent.left
                         right: parent.right
                         top: scoreDisplay.bottom
-                        topMargin: 0.01 * parent.height
+                        topMargin: 0.02 * parent.height
                     }
                     height: (board.isTrigon ? 0.75 : 0.7) * parent.height
                     transitionsEnabled: false
