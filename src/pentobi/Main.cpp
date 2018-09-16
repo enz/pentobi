@@ -177,14 +177,14 @@ int mainDesktop()
 int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
-    QtWebView::initialize();
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
     QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
 #ifdef VERSION
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif
+    QGuiApplication app(argc, argv);
+    QtWebView::initialize();
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
     qmlRegisterType<AndroidUtils>("pentobi", 1, 0, "AndroidUtils");
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
