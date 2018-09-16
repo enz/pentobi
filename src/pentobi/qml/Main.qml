@@ -64,7 +64,7 @@ ApplicationWindow {
     Pentobi.ToolBar {
         id: toolBar
 
-        visible: ! (visibility === Window.FullScreen && isAndroid)
+        visible: ! (visibility === Window.FullScreen && ! isDesktop)
         anchors {
             left: parent.left
             right: parent.right
@@ -78,7 +78,7 @@ ApplicationWindow {
         anchors {
             left: parent.left
             right: parent.right
-            top: toolBar.bottom
+            top: toolBar.visible ? toolBar.bottom : parent.top
             bottom: parent.bottom
             margins: isDesktop ? 2 : 0
         }
