@@ -16,8 +16,6 @@ Pentobi.Menu {
                        //: Mnemonic for menu Open Recent. Leave empty for no mnemonic.
                        qsTr("P"))
     enabled: gameModel.recentFiles.length > 0
-    // Dynamic sizing of Pentobi.Menu doesn't work with Instantiator
-    dynamicWidth: false
 
     Instantiator {
         model: gameModel.recentFiles
