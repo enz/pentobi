@@ -27,7 +27,7 @@ Item
         "image://pentobi/triangle-down/" + color[0] + "/" + color[1] + "/"
         + color[2]
     property real scaleUnplayed:
-        parentUnplayed ? 0.13 * parentUnplayed.width / board.gridWidth : 0
+        parentUnplayed ? 0.14 * parentUnplayed.width / board.gridWidth : 0
     property bool flippedX: Math.abs(flipX.angle - 180) < 90
     property real pieceAngle: flippedX ? rotation + 180 : rotation
     property real isSmall: scale < 0.5 ? 1 : 0

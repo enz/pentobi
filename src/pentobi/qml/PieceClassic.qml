@@ -24,7 +24,7 @@ Item
     // Avoid fractional sizes for square piece elements
     property real scaleUnplayed:
         parentUnplayed ?
-            Math.floor(0.2 * parentUnplayed.width) / board.gridWidth : 0
+            Math.floor(0.19 * parentUnplayed.width) / board.gridWidth : 0
     property bool flippedX: Math.abs(flipX.angle - 180) < 90
     property bool flippedY: flipY.angle > 90
     property real pieceAngle: {
