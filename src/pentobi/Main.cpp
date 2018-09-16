@@ -63,6 +63,8 @@ int mainDesktop()
     icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-32.svg"));
     icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-64.svg"));
     QGuiApplication::setWindowIcon(icon);
+    QGuiApplication::setDesktopFileName(
+                QStringLiteral("io.sourceforge.pentobi"));
     QCommandLineParser parser;
     auto maxSupportedLevel = Player::max_supported_level;
     QCommandLineOption optionMaxLevel(
