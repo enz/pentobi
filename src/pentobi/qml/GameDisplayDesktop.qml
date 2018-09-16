@@ -198,6 +198,7 @@ Item
                                 mainContent.width
                                 - mainContent.height / _relativeBoardWidth),
                             0.03 * board.width)
+                    verticalCenter: board.verticalCenter
                 }
                 height: board.grabImageTarget.height
 
