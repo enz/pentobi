@@ -231,8 +231,6 @@ Item
                         right: parent.right
                         top: pieceSelector.bottom
                         bottom: parent.bottom
-                        leftMargin: 5
-                        rightMargin: 5
                     }
 
                     Loader {
