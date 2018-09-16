@@ -55,7 +55,7 @@ Item
     property var color3: theme.colorGreen
     property alias isCommentVisible: comment.visible
 
-    readonly property real _relativeBoardWidth: 0.51
+    readonly property real _relativeBoardWidth: 0.52
 
     signal play(var pieceModel, point gameCoord)
 
