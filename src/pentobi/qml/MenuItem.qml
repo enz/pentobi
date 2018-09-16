@@ -76,7 +76,6 @@ MenuItem {
                         + root.text.substring(pos + 1, pos + 2)
                         + "</u>" + root.text.substring(pos + 2)
             }
-            elide: Text.ElideRight
             color: {
                 // See comment at background
                 if (root.highlighted)
