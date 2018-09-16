@@ -19,16 +19,16 @@ Item {
     signal piecePicked(var piece)
 
     property real toPlayIndicatorWidth:
-        Math.max(Math.min(parent.width / columns, parent.height / 8.06) / 10, 2)
+        Math.max(Math.min(parent.width / columns, parent.height / 8.3) / 10, 2)
 
     Row {
         // Set size sich that width/height ration fits the number of columns,
         // taking toPlayIndicator and column spacing into account
         width: Math.min(parent.width - toPlayIndicatorWidth,
-                        parent.height / 8.06 * columns)
+                        parent.height / 8.3 * columns)
         height:
             Math.min(parent.height,
-                     (parent.width - toPlayIndicatorWidth) / columns * 8.06)
+                     (parent.width - toPlayIndicatorWidth) / columns * 8.3)
         anchors.centerIn: parent
 
         Rectangle {
@@ -44,7 +44,7 @@ Item {
             id: column
 
             width: parent.width - toPlayIndicatorWidth
-            spacing: parent.height / 8.06 * 0.02
+            spacing: parent.height / 8.3 * 0.1
 
             PieceList {
                 id: pieceList0
