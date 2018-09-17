@@ -88,7 +88,6 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
     : m_nu_instances(nu_instances),
       m_points(points),
       m_label_pos(label_pos),
-      m_transforms(&transforms),
       m_name(name)
 {
     LIBBOARDGAME_ASSERT(nu_instances > 0);

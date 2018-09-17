@@ -110,8 +110,6 @@ private:
 
     ScoreType m_score_points;
 
-    const PieceTransforms* m_transforms;
-
     string m_name;
 
     vector<const Transform*> m_uniq_transforms;
