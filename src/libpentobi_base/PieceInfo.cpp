@@ -98,7 +98,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
     auto& all_transforms = transforms.get_all();
     vector<NormalizedPoints> all_transformed_points;
     all_transformed_points.reserve(all_transforms.size());
-    m_uniq_transforms.reserve(all_transforms.size()); // Upper limit
+    m_transforms.reserve(all_transforms.size()); // Upper limit
     PiecePoints transformed_points;
     for (auto transform : all_transforms)
     {
@@ -127,9 +127,9 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
         else
         {
             if (log_piece_creation)
-                LIBBOARDGAME_LOG("New (", m_uniq_transforms.size(), ")");
+                LIBBOARDGAME_LOG("New (", m_transforms.size(), ")");
             m_equivalent_transform[transform] = transform;
-            m_uniq_transforms.push_back(transform);
+            m_transforms.push_back(transform);
         }
         all_transformed_points.push_back(normalized);
     }
@@ -180,8 +180,8 @@ const Transform* PieceInfo::get_equivalent_transform(
 const Transform* PieceInfo::get_next_transform(const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
-    auto begin = m_uniq_transforms.begin();
-    auto end = m_uniq_transforms.end();
+    auto begin = m_transforms.begin();
+    auto end = m_transforms.end();
     auto pos = find(begin, end, transform);
     LIBBOARDGAME_ASSERT(pos != end);
     if (pos + 1 == end)
@@ -193,8 +193,8 @@ const Transform* PieceInfo::get_previous_transform(
                                               const Transform* transform) const
 {
     transform = get_equivalent_transform(transform);
-    auto begin = m_uniq_transforms.begin();
-    auto end = m_uniq_transforms.end();
+    auto begin = m_transforms.begin();
+    auto end = m_transforms.end();
     auto pos = find(begin, end, transform);
     LIBBOARDGAME_ASSERT(pos != end);
     if (pos == begin)

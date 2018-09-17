@@ -83,10 +83,8 @@ public:
         The list has the same order as PieceTransforms::get_all() but
         transformations that are equivalent to a previous transformation
         (because of a symmetry of the piece) are omitted. */
-    const vector<const Transform*>& get_transforms() const
-    {
-        return m_uniq_transforms;
-    }
+    const vector<const Transform*>&
+    get_transforms() const { return m_transforms; }
 
     /** Get next transform from the list of unique transforms. */
     const Transform* get_next_transform(const Transform* transform) const;
@@ -112,9 +110,9 @@ private:
 
     string m_name;
 
-    vector<const Transform*> m_uniq_transforms;
+    vector<const Transform*> m_transforms;
 
-    map<const Transform*,const Transform*> m_equivalent_transform;
+    map<const Transform*, const Transform*> m_equivalent_transform;
 };
 
 //-----------------------------------------------------------------------------
