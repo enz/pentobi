@@ -83,12 +83,6 @@ Pentobi.Menu {
         text: getText(gameModel.recentFiles, 8)
         onTriggered: Logic.openRecentFile(gameModel.recentFiles[8])
     }
-    Pentobi.MenuItem {
-        visible: gameModel.recentFiles.length > 9
-        height: visible ? implicitHeight : 0
-        text: getText(gameModel.recentFiles, 9)
-        onTriggered: Logic.openRecentFile(gameModel.recentFiles[9])
-    }
 
     Pentobi.MenuSeparator { }
     Action {
