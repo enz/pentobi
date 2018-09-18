@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="nb_NO" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS language="nb_NO" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -28,7 +30,7 @@
     <message>
         <source>Settings…</source>
         <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="unfinished"/>
+        <translation>Innstillinger</translation>
     </message>
     <message>
         <source>Find Move</source>
@@ -36,7 +38,7 @@
     </message>
     <message>
         <source>Next Comment</source>
-        <translation type="unfinished"/>
+        <translation>Neste kommentar</translation>
     </message>
     <message>
         <source>Fullscreen</source>
@@ -69,7 +71,7 @@
     <message>
         <source>Play Move</source>
         <extracomment>Play a single move</extracomment>
-        <translation type="unfinished"/>
+        <translation>Spill enkelt trekk</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -97,7 +99,7 @@
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"/>
+        <translation>Kommentar</translation>
     </message>
 </context>
 <context>
@@ -155,7 +157,7 @@
     <message>
         <source>System</source>
         <extracomment>Name of theme using default system colors</extracomment>
-        <translation type="unfinished"/>
+        <translation>System</translation>
     </message>
     <message>
         <source>Move marking:</source>
@@ -180,30 +182,30 @@
     </message>
     <message>
         <source>Animations</source>
-        <translation type="unfinished"/>
+        <translation>Animasjoner</translation>
     </message>
     <message>
         <source>Show comment:</source>
-        <translation type="unfinished"/>
+        <translation>Vis kommentar:</translation>
     </message>
     <message>
         <source>Always</source>
         <extracomment>Show-comment mode</extracomment>
-        <translation type="unfinished"/>
+        <translation>Alltid</translation>
     </message>
     <message>
         <source>As needed</source>
         <extracomment>Show-comment mode</extracomment>
-        <translation type="unfinished"/>
+        <translation>Ved behov</translation>
     </message>
     <message>
         <source>Never</source>
         <extracomment>Show-comment mode</extracomment>
-        <translation type="unfinished"/>
+        <translation>Aldri</translation>
     </message>
     <message>
         <source>Color theme:</source>
-        <translation type="unfinished"/>
+        <translation>Fargepalett:</translation>
     </message>
 </context>
 <context>
@@ -237,7 +239,7 @@
     <name>ButtonApply</name>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"/>
+        <translation>Bruk</translation>
     </message>
 </context>
 <context>
@@ -251,7 +253,7 @@
     <name>ButtonClose</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Lukk</translation>
     </message>
 </context>
 <context>
@@ -569,12 +571,12 @@
     </message>
     <message>
         <source>New Folder</source>
-        <translation type="unfinished"/>
+        <translation>Ny mappe</translation>
     </message>
     <message>
         <source>New Folder %1</source>
         <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation type="unfinished"/>
+        <translation>Ny mappe %1</translation>
     </message>
     <message>
         <source>(Setup)</source>
@@ -591,7 +593,7 @@
     </message>
     <message>
         <source>Unsupported character set</source>
-        <translation type="unfinished"/>
+        <translation>Ustøttet tegnsett</translation>
     </message>
 </context>
 <context>
@@ -666,7 +668,7 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initialize your rating for this game variant.</source>
-        <translation type="unfinished"/>
+        <translation>Hent din vurdering for denne spillvarianten.</translation>
     </message>
     <message>
         <source>Initial rating:</source>
@@ -710,7 +712,7 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation type="unfinished"/>
+        <translation>Mangler lagringstilgang</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
@@ -742,7 +744,7 @@
     </message>
     <message>
         <source>Continue computer move?</source>
-        <translation type="unfinished"/>
+        <translation>Fortsett datamaskintrekk?</translation>
     </message>
     <message>
         <source>Keep only position?</source>
@@ -820,7 +822,7 @@
     </message>
     <message>
         <source>File has been modified by another application. Overwrite?</source>
-        <translation type="unfinished"/>
+        <translation>Filen har blitt endret av et annet program. Overskriv?</translation>
     </message>
     <message>
         <source>%1 - Pentobi</source>
@@ -853,7 +855,7 @@
     </message>
     <message>
         <source>Saving image failed or unsupported image format</source>
-        <translation type="unfinished"/>
+        <translation>Lagring av bilde mislyktes, eller ustøttet bildeformat</translation>
     </message>
     <message>
         <source>Image saved</source>
@@ -865,7 +867,7 @@
     </message>
     <message>
         <source>Continuing rated game</source>
-        <translation type="unfinished"/>
+        <translation>Fortsetter vurdert spill</translation>
     </message>
     <message>
         <source>Kept only position</source>
@@ -1221,12 +1223,12 @@
     </message>
     <message>
         <source>Report Bug</source>
-        <translation type="unfinished"/>
+        <translation>Innrapporter feil</translation>
     </message>
     <message>
         <source>B</source>
         <extracomment>Mnemonic for menu item Report Bug. Leave empty for no mnemonic.</extracomment>
-        <translation type="unfinished"/>
+        <translation>R</translation>
     </message>
 </context>
 <context>
@@ -1261,7 +1263,7 @@
     <message>
         <source>Clear List</source>
         <extracomment>Menu item for clearing the recent files list</extracomment>
-        <translation type="unfinished"/>
+        <translation>Tøm liste</translation>
     </message>
     <message>
         <source>C</source>
@@ -1334,7 +1336,7 @@
     </message>
     <message>
         <source>Appearance…</source>
-        <translation type="unfinished"/>
+        <translation>Utseende…</translation>
     </message>
     <message>
         <source>A</source>
@@ -1349,7 +1351,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item View/Comment. Leave empty for no mnemonic.</extracomment>
-        <translation type="unfinished"/>
+        <translation>K</translation>
     </message>
 </context>
 <context>
@@ -1384,14 +1386,14 @@
     </message>
     <message>
         <source>No annotation</source>
-        <translation type="unfinished"/>
+        <translation>Ingen tilknytning</translation>
     </message>
 </context>
 <context>
     <name>NewFolderDialog</name>
     <message>
         <source>Folder name:</source>
-        <translation type="unfinished"/>
+        <translation>Mappenavn:</translation>
     </message>
 </context>
 <context>
@@ -1622,11 +1624,11 @@
     </message>
     <message>
         <source>Abort game analysis</source>
-        <translation type="unfinished"/>
+        <translation>Avbryt spillanalyse</translation>
     </message>
     <message>
         <source>Abort computer move</source>
-        <translation type="unfinished"/>
+        <translation>Avbryt datamaskintrekk</translation>
     </message>
     <message>
         <source>Undo move</source>
