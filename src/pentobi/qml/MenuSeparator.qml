@@ -7,5 +7,6 @@
 import QtQuick.Controls 2.3
 
 MenuSeparator {
+    // Qt 5.12.0 alpha doesn't set the width of menu items
     width: parent.width
 }

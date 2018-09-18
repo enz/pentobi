@@ -35,6 +35,7 @@ MenuItem {
         return 0
     }
 
+    // Qt 5.12.0 alpha doesn't set the width of menu items
     width: menu.width
     height: Math.round(font.pixelSize * (isDesktop ? 1.9 : 2.2)
                        * Screen.devicePixelRatio) / Screen.devicePixelRatio
