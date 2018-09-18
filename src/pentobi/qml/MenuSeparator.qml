@@ -7,6 +7,5 @@
 import QtQuick.Controls 2.3
 
 MenuSeparator {
-    // implicitWidth of MenuSeparator in Qt 5.11 is too large
-    implicitWidth: 5 * font.pixelSize
+    width: parent.width
 }

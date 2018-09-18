@@ -35,6 +35,7 @@ MenuItem {
         return 0
     }
 
+    width: menu.width
     height: Math.round(font.pixelSize * (isDesktop ? 1.9 : 2.2)
                        * Screen.devicePixelRatio) / Screen.devicePixelRatio
     // Explicitly set hoverEnabled to true, otherwise hover highlighting and
