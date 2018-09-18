@@ -5,13 +5,13 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.11
-import QtQuick.Controls 2.2
+import QtQuick.Controls 2.4
 
 Dialog {
     property real maxContentWidth:
-        rootWindow.contentItem.width - leftPadding - rightPadding
+        Overlay.overlay.width - leftPadding - rightPadding
     property real maxContentHeight: {
-        var h = rootWindow.contentItem.height - topPadding - bottomPadding
+        var h = Overlay.overlay.height - topPadding - bottomPadding
         if (header && header.visible)
             h -= header.implicitHeight
         if (footer && footer.visible)
@@ -25,9 +25,9 @@ Dialog {
     function centerDialog() {
         // Don't bind x and y because that can cause a binding loop if the
         // application window is interactively resized
-        if (ApplicationWindow.window) {
-            x = (ApplicationWindow.window.width - width) / 2
-            y = (ApplicationWindow.window.height - height) / 2
+        if (Overlay.overlay) {
+            x = (Overlay.overlay.width - width) / 2
+            y = (Overlay.overlay.height - height) / 2
         }
     }
     // Qt 5.11 doesn't support default buttons yet, this function can be
@@ -48,6 +48,7 @@ Dialog {
         return false
     }
 
+    parent: Overlay.overlay
     modal: true
     focus: true
     clip: true
