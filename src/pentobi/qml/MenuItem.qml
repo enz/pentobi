@@ -37,8 +37,9 @@ MenuItem {
 
     // Qt 5.12.0 alpha doesn't set the width of menu items
     width: menu.width
-    height: Math.round(font.pixelSize * (isDesktop ? 1.9 : 2.2)
-                       * Screen.devicePixelRatio) / Screen.devicePixelRatio
+    implicitHeight:
+        Math.round(font.pixelSize * (isDesktop ? 1.9 : 2.2)
+                   * Screen.devicePixelRatio) / Screen.devicePixelRatio
     // Explicitly set hoverEnabled to true, otherwise hover highlighting and
     // submenu opening doesn't work in KDE on Ubuntu 18.10 (bug in Qt?)
     hoverEnabled: true

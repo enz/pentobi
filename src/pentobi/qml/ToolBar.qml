@@ -19,13 +19,6 @@ Item {
         menu.item.currentIndex = 0
     }
 
-    // Automatic width in Pentobi.Menu doesn't work with dynamic menus and even
-    // if we used a fixed width for the recent files menu, there is a bug
-    // (tested with Qt 5.11.1) that makes item texts not vertically centered
-    // after insertItem(). So we should call this function to enforce a new
-    // menu creation whenever gameModel.recentFiles has changed.
-    function destroyMenu() { menu.sourceComponent = null }
-
     implicitWidth: rowLayout.implicitWidth
     implicitHeight: rowLayout.implicitHeight
 

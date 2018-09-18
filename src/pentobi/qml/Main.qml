@@ -122,7 +122,6 @@ ApplicationWindow {
             gameDisplay.dropCommentFocus()
         }
         onInvalidSgfFile: Logic.showInfo(gameModel.lastInputOutputError)
-        onRecentFilesChanged: toolBar.destroyMenu()
     }
     PlayerModel {
         id: playerModel
