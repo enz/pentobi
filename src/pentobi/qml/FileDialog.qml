@@ -89,8 +89,6 @@ Pentobi.Dialog {
         }
         ColumnLayout
         {
-            id: columnLayout
-
             anchors.fill: parent
 
             TextField {
