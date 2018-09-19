@@ -21,43 +21,49 @@ Flickable {
 
     signal piecePicked(var piece)
 
-    contentHeight: pieceList0.height + pieceList1.height + pieceList2.height
-                   + pieceList3.height + (nuColors + 1) * 0.5 * rowSpacing
     flickableDirection: Flickable.VerticalFlick
+    contentHeight: column.height
     clip: true
+
     Behavior on contentY { NumberAnimation { duration: animationDurationFast } }
 
-    PieceList {
-        id: pieceList0
+    Column {
+        id: column
 
-        width: root.width
-        columns: root.columns
-        rowSpacing: root.rowSpacing
-        onPiecePicked: root.piecePicked(piece)
-    }
-    PieceList {
-        id: pieceList1
+        spacing: root.rowSpacing
 
-        width: root.width
-        columns: root.columns
-        rowSpacing: root.rowSpacing
-        onPiecePicked: root.piecePicked(piece)
-    }
-    PieceList {
-        id: pieceList2
+        PieceList {
+            id: pieceList0
 
-        width: root.width
-        columns: root.columns
-        rowSpacing: root.rowSpacing
-        onPiecePicked: root.piecePicked(piece)
-    }
-    PieceList {
-        id: pieceList3
+            width: root.width
+            columns: root.columns
+            rowSpacing: root.rowSpacing
+            onPiecePicked: root.piecePicked(piece)
+        }
+        PieceList {
+            id: pieceList1
 
-        width: root.width
-        columns: root.columns
-        rowSpacing: root.rowSpacing
-        onPiecePicked: root.piecePicked(piece)
+            width: root.width
+            columns: root.columns
+            rowSpacing: root.rowSpacing
+            onPiecePicked: root.piecePicked(piece)
+        }
+        PieceList {
+            id: pieceList2
+
+            width: root.width
+            columns: root.columns
+            rowSpacing: root.rowSpacing
+            onPiecePicked: root.piecePicked(piece)
+        }
+        PieceList {
+            id: pieceList3
+
+            width: root.width
+            columns: root.columns
+            rowSpacing: root.rowSpacing
+            onPiecePicked: root.piecePicked(piece)
+        }
     }
 
     // States order the piece lists such that the color to play is on top. If a
