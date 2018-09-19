@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.0
+import QtQuick 2.11
 
 Flickable {
     id: root
@@ -31,6 +31,8 @@ Flickable {
         id: column
 
         spacing: root.rowSpacing
+        topPadding: 0.5 * root.rowSpacing
+        bottomPadding: 0.5 * root.rowSpacing
 
         PieceList {
             id: pieceList0
