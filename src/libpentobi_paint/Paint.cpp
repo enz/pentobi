@@ -694,7 +694,7 @@ void paint(QPainter& painter, qreal width, qreal height, Variant variant,
     array<QColor, 3> red{ {
         QColor(230, 62, 44), QColor(250, 98, 83), QColor(144, 38, 27)} };
     array<QColor, 3> yellow{ {
-        QColor(232, 198, 22), QColor(255, 230, 88), QColor(160, 136, 15)} };
+        QColor(245, 195, 32), QColor(255, 219, 88), QColor(170, 133, 22)} };
     ColorMap<QColor> piecesBase;
     ColorMap<QColor> piecesLight;
     ColorMap<QColor> piecesDark;

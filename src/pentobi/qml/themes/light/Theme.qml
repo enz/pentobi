@@ -22,7 +22,7 @@ Item {
     property var colorOrange: [ "#f09217", "#9d5e0b", "#f5b563", "#333333" ]
     property var colorPurple: [ "#a12ccf", "#6d2787", "#b86cd4", "#ffffff" ]
     property var colorRed: [ "#e63e2c", "#90261b", "#fa6253", "#ffffff" ]
-    property var colorYellow: [ "#e8c616", "#a0880f", "#ffe658", "#333333" ]
+    property var colorYellow: [ "#f5c320", "#aa8516", "#ffdb58", "#333333" ]
     /// @}
 
     property color colorBackground: "#e8e8e8"
