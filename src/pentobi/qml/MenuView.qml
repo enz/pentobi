@@ -13,7 +13,7 @@ Pentobi.Menu {
                        qsTr("V"))
 
     Action {
-        text: addMnemonic(qsTr("Appearance…"),
+        text: addMnemonic(qsTr("Appearance"),
                           //: Mnemonic for menu Appearance. Leave empty for no mnemonic.
                           qsTr("A"))
         onTriggered: appearanceDialog.open()
