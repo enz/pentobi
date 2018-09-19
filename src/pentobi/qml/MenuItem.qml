@@ -100,6 +100,7 @@ MenuItem {
             }
             color: labelText.color
             opacity: 0.6
+            Layout.leftMargin: 0.4 * font.pixelSize
             Layout.rightMargin: _anyItemArrowWidth > 0 ? _anyItemArrowWidth
                                                        : 0.1 * font.pixelSize
         }
