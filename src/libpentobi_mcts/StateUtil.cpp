@@ -18,7 +18,7 @@ using libpentobi_base::PointState;
 
 namespace {
 
-array<Color::IntType, Color::range> symmetric_state{1, 0, 3, 2};
+array<Color::IntType, Color::range> symmetric_state{ {1, 0, 3, 2} };
 
 } // namespace
 
