@@ -20,7 +20,10 @@ Flickable {
     signal piecePicked(var piece)
 
     flickableDirection: Flickable.VerticalFlick
-    contentHeight: column.height
+    contentHeight: Math.max(pieceList0.y + pieceList0.height,
+                            pieceList1.y + pieceList1.height,
+                            pieceList2.y + pieceList2.height,
+                            pieceList3.y + pieceList3.height)
     clip: true
 
     Behavior on contentY { NumberAnimation { duration: animationDurationFast } }
