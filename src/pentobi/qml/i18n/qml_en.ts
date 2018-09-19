@@ -28,11 +28,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings…</source>
-        <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Find Move</source>
         <translation type="unfinished"></translation>
     </message>
@@ -99,6 +94,11 @@
     </message>
     <message>
         <source>Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1335,10 +1335,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Appearance…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>A</source>
         <extracomment>Mnemonic for menu Appearance. Leave empty for no mnemonic.</extracomment>
         <translation type="unfinished"></translation>
@@ -1351,6 +1347,10 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item View/Comment. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS language="nb_NO" version="2.1">
+<TS version="2.1" language="nb_NO">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -30,7 +30,7 @@
     <message>
         <source>Settings…</source>
         <extracomment>Menu item Computer/Settings</extracomment>
-        <translation>Innstillinger</translation>
+        <translation type="vanished">Innstillinger</translation>
     </message>
     <message>
         <source>Find Move</source>
@@ -100,6 +100,11 @@
     <message>
         <source>Comment</source>
         <translation>Kommentar</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation>Innstillinger</translation>
     </message>
 </context>
 <context>
@@ -1336,7 +1341,7 @@
     </message>
     <message>
         <source>Appearance…</source>
-        <translation>Utseende…</translation>
+        <translation type="vanished">Utseende…</translation>
     </message>
     <message>
         <source>A</source>
@@ -1352,6 +1357,10 @@
         <source>C</source>
         <extracomment>Mnemonic for menu item View/Comment. Leave empty for no mnemonic.</extracomment>
         <translation>K</translation>
+    </message>
+    <message>
+        <source>Appearance</source>
+        <translation>Utseende</translation>
     </message>
 </context>
 <context>
