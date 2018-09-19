@@ -80,7 +80,7 @@ QtObject {
     property Action computerSettings: Action {
         shortcut: "Ctrl+U"
         //: Menu item Computer/Settings
-        text: qsTr("Settings…")
+        text: qsTr("Settings")
         onTriggered: computerDialog.open()
     }
     property Action end: Action {
