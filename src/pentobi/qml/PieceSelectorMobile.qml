@@ -9,12 +9,10 @@ import QtQuick 2.11
 Flickable {
     id: root
 
-    property int toPlay
     property alias pieces0: pieceList0.pieces
     property alias pieces1: pieceList1.pieces
     property alias pieces2: pieceList2.pieces
     property alias pieces3: pieceList3.pieces
-    property int nuColors
     property int columns
     property real rowSpacing
     property alias transitionsEnabled: transition.enabled
@@ -75,7 +73,7 @@ Flickable {
     states: [
         State {
             name: "toPlay0"
-            when: toPlay === 0
+            when: gameModel.toPlay === 0
 
             PropertyChanges {
                 target: pieceList0
@@ -104,7 +102,7 @@ Flickable {
         },
         State {
             name: "toPlay1"
-            when: toPlay === 1
+            when: gameModel.toPlay === 1
 
             PropertyChanges {
                 target: pieceList1
@@ -139,7 +137,7 @@ Flickable {
         },
         State {
             name: "toPlay2"
-            when: toPlay === 2
+            when: gameModel.toPlay === 2
 
             PropertyChanges {
                 target: pieceList2
@@ -174,7 +172,7 @@ Flickable {
         },
         State {
             name: "toPlay3"
-            when: toPlay === 3
+            when: gameModel.toPlay === 3
 
             PropertyChanges {
                 target: pieceList3

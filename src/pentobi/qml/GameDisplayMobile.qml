@@ -164,8 +164,6 @@ Item
                         return (height - n * elementSize) / n
                     }
                     anchors.horizontalCenter: parent.horizontalCenter
-                    toPlay: gameModel.toPlay
-                    nuColors: gameModel.nuColors
                     transitionsEnabled: false
                     onPiecePicked: Logic.pickPiece(piece)
                 }
