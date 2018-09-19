@@ -85,7 +85,9 @@ MenuItem {
                     return isDesktop ? palette.highlightedText : palette.buttonText
                 return palette.text
             }
+            verticalAlignment: Text.AlignVCenter
             Layout.fillWidth: true
+            Layout.fillHeight: true
             Layout.leftMargin: 0.1 * font.pixelSize + _anyItemIndicatorWidth
                                + 0.2 * font.pixelSize
         }
@@ -100,6 +102,8 @@ MenuItem {
             }
             color: labelText.color
             opacity: 0.6
+            verticalAlignment: Text.AlignVCenter
+            Layout.fillHeight: true
             Layout.leftMargin: 0.4 * font.pixelSize
             Layout.rightMargin: _anyItemArrowWidth > 0 ? _anyItemArrowWidth
                                                        : 0.1 * font.pixelSize
