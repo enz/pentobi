@@ -684,7 +684,7 @@ void paint(QPainter& painter, qreal width, qreal height, Variant variant,
     paintBoard(painter, width, height, variant, boardBase, boardLight,
                boardDark, centerBase, centerLight, centerDark);
     array<QColor, 3> blue{ {
-        QColor(0, 115, 207), QColor(14, 148, 255), QColor(0, 72, 129)} };
+        QColor(0, 115, 207), QColor(20, 153, 255), QColor(0, 72, 129)} };
     array<QColor, 3> green{ {
         QColor(0, 192, 0), QColor(0, 250, 0), QColor(0, 120, 0)} };
     array<QColor, 3> orange{ {
@@ -692,7 +692,7 @@ void paint(QPainter& painter, qreal width, qreal height, Variant variant,
     array<QColor, 3> purple{ {
         QColor(161, 44, 207), QColor(184, 108, 212), QColor(109, 39, 135)} };
     array<QColor, 3> red{ {
-        QColor(230, 62, 44), QColor(250, 98, 83), QColor(144, 38, 27)} };
+        QColor(230, 62, 44), QColor(255, 101, 90), QColor(144, 38, 27)} };
     array<QColor, 3> yellow{ {
         QColor(245, 195, 32), QColor(255, 219, 88), QColor(170, 133, 22)} };
     ColorMap<QColor> piecesBase;
