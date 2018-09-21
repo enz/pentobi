@@ -31,10 +31,10 @@ struct Atomic<T, false>
 {
     T val;
 
-    T operator=(T t)
+    Atomic& operator=(T t)
     {
         val = t;
-        return val;
+        return *this;
     }
 
     T load(memory_order order = memory_order_seq_cst) const
@@ -67,10 +67,10 @@ struct Atomic<T, true>
 {
     atomic<T> val;
 
-    T operator=(T t)
+    Atomic& operator=(T t)
     {
         val.store(t);
-        return val;
+        return *this;
     }
 
     T load(memory_order order = memory_order_seq_cst) const
