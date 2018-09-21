@@ -53,7 +53,7 @@ class AnalyzeGameModel
 public:
     explicit AnalyzeGameModel(QObject* parent = nullptr);
 
-    ~AnalyzeGameModel();
+    ~AnalyzeGameModel() override;
 
 
     Q_INVOKABLE void autoSave(GameModel* gameModel);

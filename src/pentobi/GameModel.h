@@ -123,7 +123,7 @@ public:
 
     explicit GameModel(QObject* parent = nullptr);
 
-    ~GameModel();
+    ~GameModel() override;
 
 
     Q_INVOKABLE void addSetup(PieceModel* pieceModel, QPointF coord);

@@ -64,7 +64,7 @@ public:
 
     explicit PlayerModel(QObject* parent = nullptr);
 
-    ~PlayerModel();
+    ~PlayerModel() override;
 
 
     /** Check if the player creation failed because of low memory.
