@@ -147,7 +147,7 @@ public:
 
     Q_INVOKABLE int getMoveNumberAt(const QPoint& pos);
 
-    Q_INVOKABLE QString getPlayerString(int color);
+    Q_INVOKABLE QString getPlayerString(int player);
 
     Q_INVOKABLE QString getVariationInfo() const;
 

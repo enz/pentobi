@@ -151,9 +151,9 @@ void PlayerModel::setLevel(unsigned level)
     emit levelChanged();
 }
 
-void PlayerModel::startGenMove(GameModel* gm)
+void PlayerModel::startGenMove(GameModel* gameModel)
 {
-    auto& bd = gm->getBoard();
+    auto& bd = gameModel->getBoard();
     cancelGenMove();
     auto level = m_level;
     if (level < 1)
@@ -167,13 +167,13 @@ void PlayerModel::startGenMove(GameModel* gm)
         level = maxLevel;
     }
     m_player->set_level(level);
-    auto variant = gm->getBoard().get_variant();
+    auto variant = gameModel->getBoard().get_variant();
     if (! m_player->is_book_loaded(variant))
         loadBook(variant);
     clear_abort();
     ++m_genMoveId;
     QFuture<GenMoveResult> future =
-            QtConcurrent::run(this, &PlayerModel::asyncGenMove, gm,
+            QtConcurrent::run(this, &PlayerModel::asyncGenMove, gameModel,
                               bd.get_effective_to_play(), m_genMoveId);
     m_watcher.setFuture(future);
     setIsGenMoveRunning(true);
