@@ -74,8 +74,7 @@ public:
     {
         auto& range = m_moves_range[p][adj_status][piece];
         auto begin = move_lists_begin() + range.begin();
-        auto end = begin + range.size();
-        return Range(begin, end);
+        return {begin, begin + range.size()};
     }
 
     bool has_moves(Piece piece, Point p, unsigned adj_status) const

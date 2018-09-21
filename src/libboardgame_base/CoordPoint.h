@@ -86,7 +86,7 @@ inline bool CoordPoint::operator!=(CoordPoint p) const
 
 inline CoordPoint CoordPoint::operator+(CoordPoint p) const
 {
-    return CoordPoint(x + p.x, y + p.y);
+    return {x + p.x, y + p.y};
 }
 
 inline CoordPoint& CoordPoint::operator+=(CoordPoint p)
@@ -97,7 +97,7 @@ inline CoordPoint& CoordPoint::operator+=(CoordPoint p)
 
 inline CoordPoint CoordPoint::operator-(CoordPoint p) const
 {
-    return CoordPoint(x - p.x, y - p.y);
+    return {x - p.x, y - p.y};
 }
 
 inline CoordPoint& CoordPoint::operator-=(CoordPoint p)
@@ -108,7 +108,7 @@ inline CoordPoint& CoordPoint::operator-=(CoordPoint p)
 
 inline CoordPoint CoordPoint::null()
 {
-    return CoordPoint(numeric_limits<int>::max(), numeric_limits<int>::max());
+    return {numeric_limits<int>::max(), numeric_limits<int>::max()};
 }
 
 inline bool CoordPoint::is_onboard(int x, int y, unsigned width,

@@ -66,7 +66,7 @@ inline bool ColorMove::is_null() const
 
 inline ColorMove ColorMove::null()
 {
-    return ColorMove(Color(0), Move::null());
+    return {Color(0), Move::null()};
 }
 
 //-----------------------------------------------------------------------------

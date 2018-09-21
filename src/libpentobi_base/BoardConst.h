@@ -296,21 +296,21 @@ inline Range<const Point> BoardConst::get_move_points(Move mv) const
     if (m_max_piece_size == 5)
     {
         auto& info = get_move_info<5>(mv);
-        return Range<const Point>(info.begin(), info.end());
+        return {info.begin(), info.end()};
     }
     if (m_max_piece_size == 6)
     {
         auto& info = get_move_info<6>(mv);
-        return Range<const Point>(info.begin(), info.end());
+        return {info.begin(), info.end()};
     }
     if (m_max_piece_size == 7)
     {
         auto& info = get_move_info<7>(mv);
-        return Range<const Point>(info.begin(), info.end());
+        return {info.begin(), info.end()};
     }
     LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
     auto& info = get_move_info<22>(mv);
-    return Range<const Point>(info.begin(), info.end());
+    return {info.begin(), info.end()};
 }
 
 inline const Point* BoardConst::get_move_points_begin(Move mv) const

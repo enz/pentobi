@@ -61,9 +61,9 @@ CoordPoint type_match_offset(const Geometry<P>& geo, unsigned point_type)
     for (unsigned y = 0; y < geo.get_period_y(); ++y)
         for (unsigned x = 0; x < geo.get_period_x(); ++x)
             if (geo.get_point_type(x, y) == point_type)
-                return CoordPoint(x, y);
+                return {x, y};
     LIBBOARDGAME_ASSERT(false);
-    return CoordPoint(0, 0);
+    return {0, 0};
 }
 
 /** Apply type_match_offset() to a list of points.
