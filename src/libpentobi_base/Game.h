@@ -210,7 +210,7 @@ inline void Game::clear_modified()
 
 inline double Game::get_bad_move(const SgfNode& node) const
 {
-    return m_tree.get_bad_move(node);
+    return SgfTree::get_bad_move(node);
 }
 
 inline const Board& Game::get_board() const
@@ -240,7 +240,7 @@ inline const SgfNode& Game::get_current() const
 
 inline double Game::get_good_move(const SgfNode& node) const
 {
-    return m_tree.get_good_move(node);
+    return SgfTree::get_good_move(node);
 }
 
 inline ColorMove Game::get_move() const
@@ -295,12 +295,12 @@ inline void Game::init()
 
 inline bool Game::is_doubtful_move(const SgfNode& node) const
 {
-    return m_tree.is_doubtful_move(node);
+    return SgfTree::is_doubtful_move(node);
 }
 
 inline bool Game::is_interesting_move(const SgfNode& node) const
 {
-    return m_tree.is_interesting_move(node);
+    return SgfTree::is_interesting_move(node);
 }
 
 inline bool Game::is_modified() const
