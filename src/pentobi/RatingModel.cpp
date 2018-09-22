@@ -161,19 +161,19 @@ int RatingModel::getNextLevel(int maxLevel) const
 
 void RatingModel::saveSettings()
 {
-    QSettings settings;
+    QSettings settings(QString("%1/%2.ini").arg(getDir(), m_gameVariantName),
+                       QSettings::IniFormat);
     if (m_numberGames == 0)
     {
-        settings.remove("rated_games_" + m_gameVariant);
-        settings.remove("rating_" + m_gameVariant);
-        settings.remove("best_rating_" + m_gameVariant);
+        settings.remove("rated_games");
+        settings.remove("rating");
+        settings.remove("best_rating");
     }
     else
     {
-        settings.setValue("rated_games_" + m_gameVariant, m_numberGames);
-        settings.setValue("rating_" + m_gameVariant, m_rating.get());
-        settings.setValue("best_rating_" + m_gameVariant,
-                          round(m_bestRating.get()));
+        settings.setValue("rated_games", m_numberGames);
+        settings.setValue("rating", m_rating.get());
+        settings.setValue("best_rating", round(m_bestRating.get()));
     }
     QList<QObject*> newHistory;
     newHistory.reserve(m_history.size());
@@ -190,10 +190,10 @@ void RatingModel::saveSettings()
         m_history = newHistory;
         emit historyChanged();
     }
-    settings.remove("rated_game_info_" + m_gameVariant);
+    settings.remove("rated_game_info");
     if (m_numberGames > 0)
     {
-        settings.beginWriteArray("rated_game_info_" + m_gameVariant);
+        settings.beginWriteArray("rated_game_info");
         int n = 0;
         for (auto& i : m_history)
         {
@@ -232,15 +232,14 @@ void RatingModel::setGameVariant(const QString& gameVariant)
     m_gameVariant = gameVariant;
     m_gameVariantName =
             QString::fromLocal8Bit(libpentobi_base::to_string(variant));
-    QSettings settings;
-    auto currentRating =
-            settings.value("rating_" + gameVariant, 1000).toDouble();
-    auto bestRating =
-            settings.value("best_rating_" + gameVariant, 0).toDouble();
+    QSettings settings(QString("%1/%2.ini").arg(getDir(), m_gameVariantName),
+                       QSettings::IniFormat);
+    auto currentRating = settings.value("rating", 1000).toDouble();
+    auto bestRating = settings.value("best_rating", 0).toDouble();
     setRating(currentRating);
     setBestRating(bestRating);
     m_history.clear();
-    auto size = settings.beginReadArray("rated_game_info_" + m_gameVariant);
+    auto size = settings.beginReadArray("rated_game_info");
     for (int i = 0; i < size; ++i)
     {
         settings.setArrayIndex(i);
@@ -261,7 +260,7 @@ void RatingModel::setGameVariant(const QString& gameVariant)
                      > dynamic_cast<const RatedGameInfo&>(*o2).number();
          });
     emit historyChanged();
-    setNumberGames(settings.value("rated_games_" + gameVariant, 0).toInt());
+    setNumberGames(settings.value("rated_games", 0).toInt());
     emit gameVariantChanged();
 }
 
