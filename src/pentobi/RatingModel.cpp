@@ -94,7 +94,6 @@ void RatingModel::clearRating()
     setRating(1000);
     setBestRating(1000);
     setNumberGames(0);
-    saveSettings();
 }
 
 QString RatingModel::getDir() const
