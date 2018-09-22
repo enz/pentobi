@@ -90,6 +90,7 @@ MenuItem {
             Layout.fillHeight: true
             Layout.leftMargin: 0.1 * font.pixelSize + _anyItemIndicatorWidth
                                + 0.2 * font.pixelSize
+            Layout.rightMargin: 0.4 * font.pixelSize
         }
         Label {
             visible: isDesktop && shortcut !== ""
@@ -104,7 +105,6 @@ MenuItem {
             opacity: 0.6
             verticalAlignment: Text.AlignVCenter
             Layout.fillHeight: true
-            Layout.leftMargin: 0.4 * font.pixelSize
             Layout.rightMargin: _anyItemArrowWidth > 0 ? _anyItemArrowWidth
                                                        : 0.1 * font.pixelSize
         }
