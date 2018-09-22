@@ -135,6 +135,8 @@ private:
 
     QString m_gameVariant;
 
+    QString m_gameVariantName;
+
     QList<QObject*> m_history;
 
 

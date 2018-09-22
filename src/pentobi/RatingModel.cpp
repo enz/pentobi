@@ -7,6 +7,7 @@
 #include "RatingModel.h"
 
 #include <random>
+#include <QDebug>
 #include <QDir>
 #include <QFileInfo>
 #include <QSettings>
@@ -98,18 +99,20 @@ void RatingModel::clearRating()
 
 QString RatingModel::getDir() const
 {
-    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
-            + "/rated_games/" + m_gameVariant;
+    return QString("%1/Rated Games/%2").arg(
+                QStandardPaths::writableLocation(QStandardPaths::AppDataLocation),
+                m_gameVariantName);
 }
 
 QString RatingModel::getFile(int gameNumber) const
 {
-    return getDir() + "/" + QString::number(gameNumber) + ".blksgf";
+    return QString("%1/%2 %3.blksgf").arg(
+                getDir(), m_gameVariantName, QString::number(gameNumber));
 }
 
 int RatingModel::getGameNumberOfFile(const QString& file) const
 {
-    QString left = getDir() + QStringLiteral("/");
+    QString left = QString("%1/%2 ").arg(getDir(), m_gameVariantName);
     if (! file.startsWith(left))
         return 0;
     QString right = QStringLiteral(".blksgf");
@@ -219,7 +222,16 @@ void RatingModel::setGameVariant(const QString& gameVariant)
 {
     if (m_gameVariant == gameVariant)
         return;
+    Variant variant;
+    if (! libpentobi_base::parse_variant_id(
+                gameVariant.toLocal8Bit().constData(), variant))
+    {
+        qDebug() << "Invalid game variant" << gameVariant;
+        return;
+    }
     m_gameVariant = gameVariant;
+    m_gameVariantName =
+            QString::fromLocal8Bit(libpentobi_base::to_string(variant));
     QSettings settings;
     auto currentRating =
             settings.value("rating_" + gameVariant, 1000).toDouble();
