@@ -207,6 +207,11 @@
         <source>Color theme:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Move number</source>
+        <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AsciiArtSaveDialog</name>

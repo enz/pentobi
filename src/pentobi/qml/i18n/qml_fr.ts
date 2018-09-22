@@ -212,6 +212,11 @@
         <source>Color theme:</source>
         <translation>Thème de couleur :</translation>
     </message>
+    <message>
+        <source>Move number</source>
+        <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
+        <translation>Numéro de coup</translation>
+    </message>
 </context>
 <context>
     <name>AsciiArtSaveDialog</name>

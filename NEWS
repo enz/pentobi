@@ -20,6 +20,8 @@ Version 15.UNKNOWN (master)
   of Pentobi.
 * The computer level is now set in the computer colors dialog. It is no
   longer stored in the settings separately for each game variant.
+* The visibility of the move number and variation information in the status
+  bar can now be configured in the appearance dialog and is off by default.
 * New toolbar button to stop computer play or game analysis.
 * Play and undo buttons now support autorepeat.
 * Reintroduced forward10/backward10 toolbuttons on desktop.

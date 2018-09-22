@@ -25,6 +25,7 @@ Item
     property real animationDurationFast: enableAnimations ? 80 : 0
     property bool setupMode
     property string commentMode: "as_needed"
+    property bool showMoveNumber
 
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
@@ -137,6 +138,7 @@ Item
         property alias enableAnimations: root.enableAnimations
         property alias moveMarking: root.moveMarking
         property alias showCoordinates: root.showCoordinates
+        property alias showMoveNumber: root.showMoveNumber
         property alias setupMode: root.setupMode
         property alias commentMode: root.commentMode
 
@@ -296,6 +298,7 @@ Item
             }
         }
         Label {
+            visible: root.showMoveNumber
             anchors {
                 right: parent.right
                 top: top.right

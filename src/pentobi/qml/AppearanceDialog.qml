@@ -39,6 +39,7 @@ Pentobi.Dialog {
     onOpened: {
         checkBoxCoordinates.checked = gameDisplay.showCoordinates
         checkBoxShowVariations.checked = gameModel.showVariations
+        checkBoxMoveNumber.checked = gameDisplay.showMoveNumber
         checkBoxAnimatePieces.checked = gameDisplay.enableAnimations
         if (themeName === "dark")
             currentThemeIndex = 1
@@ -75,6 +76,7 @@ Pentobi.Dialog {
     onAccepted: {
         gameDisplay.showCoordinates = checkBoxCoordinates.checked
         gameModel.showVariations = checkBoxShowVariations.checked
+        gameDisplay.showMoveNumber = checkBoxMoveNumber.checked
         gameDisplay.enableAnimations = checkBoxAnimatePieces.checked
         switch (comboBoxTheme.currentIndex) {
         case 0: themeName = "light"; break
@@ -123,6 +125,14 @@ Pentobi.Dialog {
                 id: checkBoxShowVariations
 
                 text: qsTr("Show variations")
+            }
+            CheckBox {
+                id: checkBoxMoveNumber
+
+                visible: isDesktop
+                //: Check box in appearance dialog whether to show the
+                //: move number in the status bar.
+                text: qsTr("Move number")
             }
             CheckBox {
                 id: checkBoxAnimatePieces

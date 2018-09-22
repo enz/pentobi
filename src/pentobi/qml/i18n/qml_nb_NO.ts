@@ -212,6 +212,11 @@
         <source>Color theme:</source>
         <translation>Fargepalett:</translation>
     </message>
+    <message>
+        <source>Move number</source>
+        <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
+        <translation>Trekknummer</translation>
+    </message>
 </context>
 <context>
     <name>AsciiArtSaveDialog</name>
