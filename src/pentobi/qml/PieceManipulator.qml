@@ -56,8 +56,10 @@ Item {
         drag {
             target: root
             filterChildren: true
-            minimumX: -width / 2; maximumX: root.parent.width - width / 2
-            minimumY: -height / 2; maximumY: root.parent.height - height / 2
+            minimumX: -root.width / 2
+            maximumX: root.parent.width - root.width / 2
+            minimumY: -root.height / 2
+            maximumY: root.parent.height - root.height / 2
         }
         // Consume mouse hover events in case it is over toolbar
         hoverEnabled: isDesktop
