@@ -99,20 +99,20 @@ void RatingModel::clearRating()
 
 QString RatingModel::getDir() const
 {
-    return QString("%1/Rated Games/%2").arg(
+    return QStringLiteral("%1/Rated Games/%2").arg(
                 QStandardPaths::writableLocation(QStandardPaths::AppDataLocation),
                 m_gameVariantName);
 }
 
 QString RatingModel::getFile(int gameNumber) const
 {
-    return QString("%1/%2 %3.blksgf").arg(
+    return QStringLiteral("%1/%2 %3.blksgf").arg(
                 getDir(), m_gameVariantName, QString::number(gameNumber));
 }
 
 int RatingModel::getGameNumberOfFile(const QString& file) const
 {
-    QString left = QString("%1/%2 ").arg(getDir(), m_gameVariantName);
+    QString left = QStringLiteral("%1/%2 ").arg(getDir(), m_gameVariantName);
     if (! file.startsWith(left))
         return 0;
     QString right = QStringLiteral(".blksgf");
@@ -161,19 +161,21 @@ int RatingModel::getNextLevel(int maxLevel) const
 
 void RatingModel::saveSettings()
 {
-    QSettings settings(QString("%1/%2.ini").arg(getDir(), m_gameVariantName),
+    QSettings settings(QStringLiteral("%1/%2.ini").arg(getDir(),
+                                                       m_gameVariantName),
                        QSettings::IniFormat);
     if (m_numberGames == 0)
     {
-        settings.remove("rated_games");
-        settings.remove("rating");
-        settings.remove("best_rating");
+        settings.remove(QStringLiteral("rated_games"));
+        settings.remove(QStringLiteral("rating"));
+        settings.remove(QStringLiteral("best_rating"));
     }
     else
     {
-        settings.setValue("rated_games", m_numberGames);
-        settings.setValue("rating", m_rating.get());
-        settings.setValue("best_rating", round(m_bestRating.get()));
+        settings.setValue(QStringLiteral("rated_games"), m_numberGames);
+        settings.setValue(QStringLiteral("rating"), m_rating.get());
+        settings.setValue(QStringLiteral("best_rating"),
+                          round(m_bestRating.get()));
     }
     QList<QObject*> newHistory;
     newHistory.reserve(m_history.size());
@@ -190,10 +192,10 @@ void RatingModel::saveSettings()
         m_history = newHistory;
         emit historyChanged();
     }
-    settings.remove("rated_game_info");
+    settings.remove(QStringLiteral("rated_game_info"));
     if (m_numberGames > 0)
     {
-        settings.beginWriteArray("rated_game_info");
+        settings.beginWriteArray(QStringLiteral("rated_game_info"));
         int n = 0;
         for (auto& i : m_history)
         {
@@ -232,14 +234,17 @@ void RatingModel::setGameVariant(const QString& gameVariant)
     m_gameVariant = gameVariant;
     m_gameVariantName =
             QString::fromLocal8Bit(libpentobi_base::to_string(variant));
-    QSettings settings(QString("%1/%2.ini").arg(getDir(), m_gameVariantName),
+    QSettings settings(QStringLiteral("%1/%2.ini").arg(getDir(),
+                                                       m_gameVariantName),
                        QSettings::IniFormat);
-    auto currentRating = settings.value("rating", 1000).toDouble();
-    auto bestRating = settings.value("best_rating", 0).toDouble();
+    auto currentRating =
+            settings.value(QStringLiteral("rating"), 1000).toDouble();
+    auto bestRating =
+            settings.value(QStringLiteral("best_rating"), 0).toDouble();
     setRating(currentRating);
     setBestRating(bestRating);
     m_history.clear();
-    auto size = settings.beginReadArray("rated_game_info");
+    auto size = settings.beginReadArray(QStringLiteral("rated_game_info"));
     for (int i = 0; i < size; ++i)
     {
         settings.setArrayIndex(i);
@@ -260,7 +265,7 @@ void RatingModel::setGameVariant(const QString& gameVariant)
                      > dynamic_cast<const RatedGameInfo&>(*o2).number();
          });
     emit historyChanged();
-    setNumberGames(settings.value("rated_games", 0).toInt());
+    setNumberGames(settings.value(QStringLiteral("rated_games"), 0).toInt());
     emit gameVariantChanged();
 }
 

@@ -19,18 +19,16 @@ int main(int argc, char* argv[])
     try
     {
         if (argc != 3)
-            throw QString(QStringLiteral("Need two arguments"));
+            throw QStringLiteral("Need two arguments");
         auto in = QString::fromLocal8Bit(argv[1]);
         auto out = QString::fromLocal8Bit(argv[2]);
         QImageReader reader(in);
         QImage image = reader.read();
         if (image.isNull())
-            throw QString(QStringLiteral("%1: %2")).arg(in,
-                                                        reader.errorString());
+            throw QStringLiteral("%1: %2").arg(in, reader.errorString());
         QImageWriter writer(out);
         if (! writer.write(image))
-            throw QString(QStringLiteral("%1: %2")).arg(out,
-                                                        writer.errorString());
+            throw QStringLiteral("%1: %2").arg(out, writer.errorString());
     }
     catch (const QString& msg)
     {
