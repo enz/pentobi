@@ -19,7 +19,7 @@ Item {
     property var colorBoard: [ "#aea7ac", "#868084", "#c7bfc5",
                                "#918b8f", "#7c777b", "#a09a9f"]
     property var colorGreen: [ "#00c000", "#007800", "#00fa00", "#333333" ]
-    property var colorOrange: [ "#f09217", "#9d5e0b", "#f5b563", "#333333" ]
+    property var colorOrange: [ "#f09217", "#9d5e0b", "#ffbb67", "#333333" ]
     property var colorPurple: [ "#a12ccf", "#6d2787", "#b86cd4", "#ffffff" ]
     property var colorRed: [ "#e63e2c", "#90261b", "#ff655a", "#ffffff" ]
     property var colorYellow: [ "#f5c320", "#aa8516", "#ffdb58", "#333333" ]
