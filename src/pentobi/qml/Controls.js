@@ -20,7 +20,7 @@ function addMnemonic(text, mnemonic) {
     // Prefer beginning of word
     while (pos >= 0 && pos < textLower.length) {
         if (pos === 0 || textLower.charAt(pos - 1) === " ")
-            break;
+            break
         pos = textLower.indexOf(mnemonic, pos + 1)
     }
     if (pos < 0 || pos >= textLower.length)

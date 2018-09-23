@@ -92,15 +92,15 @@ Item
         // time (only during a move generation, ignore search callbacks during
         // game analysis)
         if (! playerModel.isGenMoveRunning || elapsedSeconds < 10)
-            return;
-        var text;
-        var seconds = Math.ceil(remainingSeconds);
+            return
+        var text
+        var seconds = Math.ceil(remainingSeconds)
         if (seconds < 90)
-            text = qsTr("Computer is thinking… (up to %1 seconds remaining)").arg(seconds);
+            text = qsTr("Computer is thinking… (up to %1 seconds remaining)").arg(seconds)
         else
         {
-            var minutes = Math.ceil(remainingSeconds / 60);
-            text = qsTr("Computer is thinking… (up to %1 minutes remaining)").arg(minutes);
+            var minutes = Math.ceil(remainingSeconds / 60)
+            text = qsTr("Computer is thinking… (up to %1 minutes remaining)").arg(minutes)
         }
         showStatus(text)
     }
