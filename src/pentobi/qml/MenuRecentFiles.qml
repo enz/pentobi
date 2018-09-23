@@ -27,7 +27,7 @@ Pentobi.Menu {
         return text
     }
 
-    // Using Instantiator doesn't work reliably with Qt 5.11 or 5.12.0 alpha
+    // Instantiator in Menu doesn't work reliably with Qt 5.11 or 5.12.0 alpha
     Pentobi.MenuItem {
         visible: gameModel.recentFiles.length > 0
         // Invisible menu item still use space in Qt 5.11
