@@ -213,7 +213,7 @@ void GameModel::addSetup(PieceModel* pieceModel, QPointF coord)
     }
     catch (const SgfError& error)
     {
-        m_lastInputOutputError = error.what();
+        m_error = error.what();
         emit invalidSgfFile();
     }
     setSetupPlayer();
@@ -324,7 +324,7 @@ bool GameModel::createFolder(const QUrl& folder)
 {
     auto localFolder = folder.toLocalFile();
     if (! QDir().mkdir(localFolder)) {
-        m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
+        m_error = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
     AndroidUtils::scanFile(localFolder);
@@ -852,7 +852,7 @@ void GameModel::gotoNode(const SgfNode& node)
     }
     catch (const SgfError& error)
     {
-        m_lastInputOutputError = error.what();
+        m_error = error.what();
         emit invalidSgfFile();
     }
     updateProperties();
@@ -1063,7 +1063,7 @@ bool GameModel::openStream(istream& in)
     }
     catch (const runtime_error& e)
     {
-        m_lastInputOutputError =
+        m_error =
                 tr("Invalid Blokus SGF file. (%1)")
                 .arg(QString::fromLocal8Bit(e.what()));
         result = false;
@@ -1076,7 +1076,7 @@ bool GameModel::openStream(istream& in)
     if (! m_textCodec)
     {
         m_textCodec = QTextCodec::codecForName("ISO 8859-1");
-        m_lastInputOutputError = tr("Unsupported character set");
+        m_error = tr("Unsupported character set");
         result = false;
     }
     if (! result)
@@ -1096,7 +1096,7 @@ bool GameModel::openFile(const QString& file)
     ifstream in(absoluteFile.toLocal8Bit().constData());
     if (! in)
     {
-        m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
+        m_error = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
     if (openStream(in))
@@ -1120,7 +1120,7 @@ bool GameModel::openClipboard()
     auto text = QGuiApplication::clipboard()->text();
     if (text.isEmpty())
     {
-        m_lastInputOutputError = tr("Clipboard is empty.");
+        m_error = tr("Clipboard is empty.");
         return false;
     }
     istringstream in(text.toLocal8Bit().constData());
@@ -1327,7 +1327,7 @@ bool GameModel::save(const QString& file)
         writer.write();
         if (! out)
         {
-            m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
+            m_error = QString::fromLocal8Bit(strerror(errno));
             return false;
         }
     }
@@ -1344,7 +1344,7 @@ bool GameModel::saveAsciiArt(const QString& file)
     getBoard().write(out, false);
     if (! out)
     {
-        m_lastInputOutputError = QString::fromLocal8Bit(strerror(errno));
+        m_error = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
     AndroidUtils::scanFile(file);

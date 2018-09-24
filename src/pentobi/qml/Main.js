@@ -202,7 +202,7 @@ function exportAsciiArt(fileUrl) {
     if (! checkStoragePermission())
         return
     if (! gameModel.saveAsciiArt(getFileFromUrl(fileUrl)))
-        showInfo(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
+        showInfo(qsTr("Save failed.") + "\n" + gameModel.getError())
     else {
         androidUtils.scanFile(file)
         showTemporaryMessage(qsTr("File saved"))
@@ -494,7 +494,7 @@ function openFileBlocking(file) {
     var oldEnableAnimations = gameDisplay.enableAnimations
     gameDisplay.enableAnimations = false
     if (! gameModel.openFile(file))
-        showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
+        showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
     else
         setComputerNone()
     if (gameModel.gameVariant != oldGameVariant)
@@ -525,7 +525,7 @@ function openClipboardNoVerify() {
         var oldEnableAnimations = gameDisplay.enableAnimations
         gameDisplay.enableAnimations = false
         if (! gameModel.openClipboard())
-            showInfo(qsTr("Open failed.") + "\n" + gameModel.lastInputOutputError)
+            showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
         else
             setComputerNone()
         if (gameModel.gameVariant != oldGameVariant)
@@ -704,7 +704,7 @@ function saveCurrentFile() {
 
 function saveFile(file) {
     if (! gameModel.save(file))
-        showInfo(qsTr("Save failed.") + "\n" + gameModel.lastInputOutputError)
+        showInfo(qsTr("Save failed.") + "\n" + gameModel.getError())
     else
         showTemporaryMessage(qsTr("File saved"))
 }

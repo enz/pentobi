@@ -24,7 +24,7 @@ Pentobi.Dialog {
         textField.selectAll()
     }
     onAccepted: if (! gameModel.createFolder(folder + "/" + textField.text))
-                    Logic.showInfo(gameModel.lastInputOutputError)
+                    Logic.showInfo(gameModel.getError())
 
     Item {
         implicitWidth:

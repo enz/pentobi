@@ -64,7 +64,6 @@ class GameModel
     Q_PROPERTY(QString positionInfo READ positionInfo NOTIFY positionInfoChanged)
     Q_PROPERTY(QString positionInfoShort READ positionInfoShort NOTIFY positionInfoShortChanged)
     Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
-    Q_PROPERTY(QString lastInputOutputError READ lastInputOutputError)
     Q_PROPERTY(QString file READ file NOTIFY fileChanged)
     Q_PROPERTY(QStringList recentFiles READ recentFiles NOTIFY recentFilesChanged)
     Q_PROPERTY(unsigned nuColors READ nuColors NOTIFY nuColorsChanged)
@@ -253,6 +252,8 @@ public:
 
     Q_INVOKABLE QString suggestNewFolderName(const QUrl& folder);
 
+    Q_INVOKABLE QString getError() const { return m_error; }
+
 
     QByteArray getSgf() const;
 
@@ -271,8 +272,6 @@ public:
     const QString& positionInfo() const { return m_positionInfo; }
 
     const QString& positionInfoShort() const { return m_positionInfoShort; }
-
-    const QString& lastInputOutputError() const { return m_lastInputOutputError; }
 
     const QString& file() const { return m_file; }
 
@@ -403,7 +402,7 @@ signals:
     /** Loaded Blokus SGF file has invalid syntax.
         Triggered when a loaded SGF file causes a problem later than at load
         time (e.g. invalid move property value in a side variation). The
-        reason is store in lastInputOutputError.*/
+        reason can be retrieved with in getError().*/
     void invalidSgfFile();
 
     /** Position is about to change due to new game or navigation or editing of
@@ -523,7 +522,7 @@ private:
 
     QString m_comment;
 
-    QString m_lastInputOutputError;
+    QString m_error;
 
     QString m_file;
 
