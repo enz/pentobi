@@ -944,7 +944,7 @@
     <message>
         <source>M</source>
         <extracomment>Mnemonic for menu item Play Move. Leave empty for no mnemonic.</extracomment>
-        <translation>B</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>O</source>
@@ -1278,7 +1278,7 @@
     <message>
         <source>C</source>
         <extracomment>Mnemonic for menu item Recent Files/Clear List. Leave empty for no mnemonic.</extracomment>
-        <translation>K</translation>
+        <translation>T</translation>
     </message>
 </context>
 <context>
@@ -1351,7 +1351,7 @@
     <message>
         <source>A</source>
         <extracomment>Mnemonic for menu Appearance. Leave empty for no mnemonic.</extracomment>
-        <translation>O</translation>
+        <translation>U</translation>
     </message>
     <message>
         <source>F</source>
