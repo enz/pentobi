@@ -1367,6 +1367,15 @@
         <source>Appearance</source>
         <translation>Utseende</translation>
     </message>
+    <message>
+        <source>Toolbar</source>
+        <translation>Verktøyslinje</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <extracomment>Mnemonic for menu item View/Toolbar. Leave empty for no mnemonic.</extracomment>
+        <translation>E</translation>
+    </message>
 </context>
 <context>
     <name>MoveAnnotationDialog</name>

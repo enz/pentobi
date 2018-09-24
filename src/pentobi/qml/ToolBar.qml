@@ -13,6 +13,9 @@ import "Main.js" as Logic
 Item {
     id: root
 
+    // Show toolbar content (menu button is always shown)
+    property bool showContent: true
+
     function clickMenuButton() {
         menuButton.checked = true
         menuButton.onClicked()
@@ -33,7 +36,7 @@ Item {
         Label {
             id: mobileLabel
 
-            visible: ! isDesktop
+            visible: ! isDesktop && showContent
             color: theme.colorText
             opacity: isRated ? 0.6 : 0.8
             elide: Text.ElideRight
@@ -62,12 +65,12 @@ Item {
 
             icon.source: theme.getImage("pentobi-newgame")
             action: actions.newGame
-            visible: isDesktop || enabled
+            visible: showContent && (isDesktop || enabled)
         }
         Pentobi.Button {
             id: newGameRated
 
-            visible: isDesktop
+            visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-rated-game")
             action: actions.newGameRated
         }
@@ -76,7 +79,7 @@ Item {
 
             icon.source: theme.getImage("pentobi-undo")
             action: actions.undo
-            visible: isDesktop || enabled
+            visible: showContent && (isDesktop || enabled)
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameDisplay.item ?
@@ -88,14 +91,14 @@ Item {
 
             icon.source: theme.getImage("pentobi-computer-colors")
             action: actions.computerSettings
-            visible: isDesktop || enabled
+            visible: showContent && (isDesktop || enabled)
         }
         Pentobi.Button {
             id: play
 
             icon.source: theme.getImage("pentobi-play")
             action: actions.play
-            visible: isDesktop || enabled
+            visible: showContent && (isDesktop || enabled)
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameDisplay.item ?
@@ -106,7 +109,7 @@ Item {
 
             icon.source: theme.getImage("pentobi-stop")
             action: actions.stop
-            visible: isDesktop || ! isRated
+            visible: showContent && (isDesktop || ! isRated)
         }
         Item {
             visible: isDesktop
@@ -116,14 +119,14 @@ Item {
         Pentobi.Button {
             id: beginning
 
-            visible: isDesktop
+            visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-beginning")
             action: actions.beginning
         }
         Pentobi.Button {
             id: backward10
 
-            visible: isDesktop
+            visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-backward10")
             action: actions.backward10
             autoRepeat: true
@@ -134,7 +137,7 @@ Item {
         Pentobi.Button {
             id: backward
 
-            visible: isDesktop
+            visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-backward")
             action: actions.backward
             autoRepeat: true
@@ -142,7 +145,7 @@ Item {
         Pentobi.Button {
             id: forward
 
-            visible: isDesktop
+            visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-forward")
             action: actions.forward
             autoRepeat: true
@@ -150,7 +153,7 @@ Item {
         Pentobi.Button {
             id: forward10
 
-            visible: isDesktop
+            visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-forward10")
             action: actions.forward10
             autoRepeat: true
@@ -161,7 +164,7 @@ Item {
         Pentobi.Button {
             id: end
 
-            visible: isDesktop
+            visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-end")
             action: actions.end
         }
@@ -173,7 +176,7 @@ Item {
         Pentobi.Button {
             id: prevVar
 
-            visible: isDesktop
+            visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-previous-variation")
             action: actions.prevVar
             autoRepeat: true
@@ -184,7 +187,7 @@ Item {
         Pentobi.Button {
             id: nextVar
 
-            visible: isDesktop
+            visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-next-variation")
             action: actions.nextVar
             autoRepeat: true
@@ -198,7 +201,7 @@ Item {
             Layout.maximumWidth: 0.3 * parent.height
         }
         Label {
-            visible: isDesktop
+            visible: showContent && isDesktop
             text: Logic.getGameLabel(gameDisplay.setupMode, isRated,
                                      gameModel.file, gameModel.isModified, false)
             color: theme.colorText

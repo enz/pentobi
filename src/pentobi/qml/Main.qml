@@ -45,6 +45,7 @@ ApplicationWindow {
     property bool busyIndicatorRunning: lengthyCommand.isRunning
                                         || playerModel.isGenMoveRunning
                                         || analyzeGameModel.isRunning
+    property bool showToolBar: true
 
     property Actions actions: Actions { }
 
@@ -64,7 +65,9 @@ ApplicationWindow {
     Pentobi.ToolBar {
         id: toolBar
 
-        visible: ! (visibility === Window.FullScreen && ! isDesktop)
+        visible: isDesktop || visibility !== Window.FullScreen
+        showContent: ! isDesktop
+                     || (showToolBar && visibility !== Window.FullScreen)
         anchors {
             left: parent.left
             right: parent.right
@@ -107,6 +110,7 @@ ApplicationWindow {
         property alias folder: rootWindow.folder
         property alias themeName: rootWindow.themeName
         property alias exportImageWidth: rootWindow.exportImageWidth
+        property alias showToolBar: rootWindow.showToolBar
         property alias showVariations: gameModel.showVariations
     }
     GameModel {

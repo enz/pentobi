@@ -1358,6 +1358,15 @@
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T</source>
+        <extracomment>Mnemonic for menu item View/Toolbar. Leave empty for no mnemonic.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MoveAnnotationDialog</name>

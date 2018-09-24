@@ -1367,6 +1367,15 @@
         <source>Appearance</source>
         <translation>Apparence</translation>
     </message>
+    <message>
+        <source>Toolbar</source>
+        <translation>Barre d’outils</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <extracomment>Mnemonic for menu item View/Toolbar. Leave empty for no mnemonic.</extracomment>
+        <translation>B</translation>
+    </message>
 </context>
 <context>
     <name>MoveAnnotationDialog</name>
