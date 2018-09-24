@@ -14,17 +14,36 @@ Pentobi.Dialog {
     id: root
 
     property url folder
+    property alias name: textField.text
+
+    function returnPressed() {
+        if (! hasButtonFocus())
+            checkAccept()
+    }
+    function checkAccept() {
+        if (! isValidName(name))
+            return
+        if (! gameModel.createFolder(folder + "/" + name)) {
+            Logic.showInfo(gameModel.getError())
+            return
+        }
+        accept()
+    }
+
+    function isValidName(name) { return name.trim().length > 0 }
 
     footer: Pentobi.DialogButtonBox {
+        Button {
+            enabled: isValidName(name)
+            text: qsTr("OK")
+            onClicked: checkAccept()
+        }
         ButtonCancel { }
-        ButtonOk { enabled: textField.text.trim().length > 0 }
     }
     onOpened: {
-        textField.text = gameModel.suggestNewFolderName(folder)
+        name = gameModel.suggestNewFolderName(folder)
         textField.selectAll()
     }
-    onAccepted: if (! gameModel.createFolder(folder + "/" + textField.text))
-                    Logic.showInfo(gameModel.getError())
 
     Item {
         implicitWidth:
@@ -43,7 +62,7 @@ Pentobi.Dialog {
 
                 focus: true
                 selectByMouse: true
-                onAccepted: if (textField.text.trim().length > 0) root.accept()
+                onAccepted: checkAccept()
                 Layout.fillWidth: true
             }
             Item { Layout.fillWidth: true }
