@@ -690,7 +690,7 @@ void paint(QPainter& painter, qreal width, qreal height, Variant variant,
     array<QColor, 3> orange{ {
         QColor(240, 146, 23), QColor(255, 187, 103), QColor(157, 94, 11)} };
     array<QColor, 3> purple{ {
-        QColor(161, 44, 207), QColor(184, 108, 212), QColor(109, 39, 135)} };
+        QColor(161, 44, 207), QColor(190, 112, 220), QColor(109, 39, 135)} };
     array<QColor, 3> red{ {
         QColor(230, 62, 44), QColor(255, 101, 90), QColor(144, 38, 27)} };
     array<QColor, 3> yellow{ {
