@@ -33,10 +33,10 @@ Pentobi.Dialog {
     function isValidName(name) { return name.trim().length > 0 }
 
     footer: Pentobi.DialogButtonBox {
-        Button {
+        ButtonOk {
             enabled: isValidName(name)
-            text: qsTr("OK")
             onClicked: checkAccept()
+            DialogButtonBox.buttonRole: DialogButtonBox.InvalidRole
         }
         ButtonCancel { }
     }
