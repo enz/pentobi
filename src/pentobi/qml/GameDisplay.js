@@ -33,10 +33,10 @@ function createPieces() {
     var component = Qt.createComponent(file)
     if (component.status !== Component.Ready)
         console.warn(component.errorString())
-    pieces0 = createColorPieces(component, gameModel.pieceModels0)
-    pieces1 = createColorPieces(component, gameModel.pieceModels1)
-    pieces2 = createColorPieces(component, gameModel.pieceModels2)
-    pieces3 = createColorPieces(component, gameModel.pieceModels3)
+    pieces0 = createColorPieces(component, gameModel.getPieceModels(0))
+    pieces1 = createColorPieces(component, gameModel.getPieceModels(1))
+    pieces2 = createColorPieces(component, gameModel.getPieceModels(2))
+    pieces3 = createColorPieces(component, gameModel.getPieceModels(3))
     pieceSelector.transitionsEnabled =
             Qt.binding(function() { return enableAnimations })
 }

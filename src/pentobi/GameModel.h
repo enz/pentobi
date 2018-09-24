@@ -8,7 +8,6 @@
 #define PENTOBI_GAME_MODEL_H
 
 #include <QDateTime>
-#include <QQmlListProperty>
 #include <QUrl>
 #include "PieceModel.h"
 #include "libpentobi_base/Game.h"
@@ -17,6 +16,7 @@ class QTextCodec;
 
 using namespace std;
 using libboardgame_sgf::SgfNode;
+using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Board;
 using libpentobi_base::Game;
@@ -96,10 +96,6 @@ class GameModel
     Q_PROPERTY(bool hasEarlierVar READ hasEarlierVar NOTIFY hasEarlierVarChanged)
     Q_PROPERTY(bool isMainVar READ isMainVar NOTIFY isMainVarChanged)
     Q_PROPERTY(bool showVariations MEMBER m_showVariations WRITE setShowVariations NOTIFY showVariationsChanged)
-    Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels0 READ pieceModels0)
-    Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels1 READ pieceModels1)
-    Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels2 READ pieceModels2)
-    Q_PROPERTY(QQmlListProperty<PieceModel> pieceModels3 READ pieceModels3)
     Q_PROPERTY(QVariantList startingPoints0 READ startingPoints0 NOTIFY startingPoints0Changed)
     Q_PROPERTY(QVariantList startingPoints1 READ startingPoints1 NOTIFY startingPoints1Changed)
     Q_PROPERTY(QVariantList startingPoints2 READ startingPoints2 NOTIFY startingPoints2Changed)
@@ -254,18 +250,12 @@ public:
 
     Q_INVOKABLE QString getError() const { return m_error; }
 
+    Q_INVOKABLE QVariantList getPieceModels(int color);
+
 
     QByteArray getSgf() const;
 
     void setComment(const QString& comment);
-
-    QQmlListProperty<PieceModel> pieceModels0() { return {this, m_pieceModels0}; }
-
-    QQmlListProperty<PieceModel> pieceModels1() { return {this, m_pieceModels1}; }
-
-    QQmlListProperty<PieceModel> pieceModels2() { return {this, m_pieceModels2}; }
-
-    QQmlListProperty<PieceModel> pieceModels3() { return {this, m_pieceModels3}; }
 
     const QString& gameVariant() const { return m_gameVariant; }
 
@@ -608,13 +598,7 @@ private:
 
     bool m_showVariations = true;
 
-    QList<PieceModel*> m_pieceModels0;
-
-    QList<PieceModel*> m_pieceModels1;
-
-    QList<PieceModel*> m_pieceModels2;
-
-    QList<PieceModel*> m_pieceModels3;
+    ColorMap<QVariantList> m_pieceModels;
 
     PieceModel* m_lastMovePieceModel = nullptr;
 
@@ -648,7 +632,7 @@ private:
 
     void createPieceModels();
 
-    void createPieceModels(Color c, QList<PieceModel*>& pieceModels);
+    void createPieceModels(Color c);
 
     QString decode(const string& s) const;
 
@@ -662,8 +646,6 @@ private:
     QString getMoveAnnotationAtNode(const SgfNode& node) const;
 
     ColorMove getMoveAt(const QPoint& pos) const;
-
-    QList<PieceModel*>& getPieceModels(Color c);
 
     void initGame(Variant variant);
 

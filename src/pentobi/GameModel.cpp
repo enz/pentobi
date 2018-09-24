@@ -171,12 +171,15 @@ PieceModel* GameModel::addEmpty(const QPoint& pos)
     LIBBOARDGAME_ASSERT(bd.get_setup().placements[c].contains(mv));
     auto gameCoord = getGameCoord(bd, mv);
     PieceModel* result = nullptr;
-    for (auto pieceModel : qAsConst(getPieceModels(c)))
+    for (auto variant : qAsConst(m_pieceModels[c]))
+    {
+        auto pieceModel = qvariant_cast<PieceModel*>(variant);
         if (compareGameCoord(pieceModel->gameCoord(), gameCoord))
         {
             result = pieceModel;
             break;
         }
+    }
     preparePositionChange();
     m_game.remove_setup(c, mv);
     setSetupPlayer();
@@ -333,30 +336,34 @@ bool GameModel::createFolder(const QUrl& folder)
 
 void GameModel::createPieceModels()
 {
-    createPieceModels(Color(0), m_pieceModels0);
-    createPieceModels(Color(1), m_pieceModels1);
+    createPieceModels(Color(0));
+    createPieceModels(Color(1));
     if (m_nuColors > 2)
-        createPieceModels(Color(2), m_pieceModels2);
+        createPieceModels(Color(2));
     else
-        m_pieceModels2.clear();
+        m_pieceModels[Color(2)].clear();
     if (m_nuColors > 3)
-        createPieceModels(Color(3), m_pieceModels3);
+        createPieceModels(Color(3));
     else
-        m_pieceModels3.clear();
+        m_pieceModels[Color(3)].clear();
 }
 
-void GameModel::createPieceModels(Color c, QList<PieceModel*>& pieceModels)
+void GameModel::createPieceModels(Color c)
 {
     auto& bd = getBoard();
     auto nuPieces = bd.get_nu_uniq_pieces();
-    pieceModels.clear();
-    pieceModels.reserve(nuPieces);
+    m_pieceModels[c].clear();
+    m_pieceModels[c].reserve(nuPieces);
     for (Piece::IntType i = 0; i < nuPieces; ++i)
     {
         Piece piece(i);
-        for (unsigned j = 0; j < bd.get_piece_info(piece).get_nu_instances();
-             ++j)
-            pieceModels.append(new PieceModel(this, bd, piece, c));
+        auto nuInstances = bd.get_piece_info(piece).get_nu_instances();
+        for (unsigned j = 0; j < nuInstances; ++j)
+        {
+            auto variant =
+                    QVariant::fromValue(new PieceModel(this, bd, piece, c));
+            m_pieceModels[c].append(variant);
+        }
     }
 }
 
@@ -477,10 +484,20 @@ bool GameModel::findNextCommentContinueFromRoot()
 
 PieceModel* GameModel::findUnplayedPieceModel(Color c, Piece piece)
 {
-    for (auto pieceModel : qAsConst(getPieceModels(c)))
+    for (auto variant : qAsConst(m_pieceModels[c]))
+    {
+        auto pieceModel = qvariant_cast<PieceModel*>(variant);
         if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
             return pieceModel;
+    }
     return nullptr;
+}
+
+QVariantList GameModel::getPieceModels(int color)
+{
+    if (color <= Color::range)
+        return m_pieceModels[Color(static_cast<Color::IntType>(color))];
+    return m_pieceModels[Color(0)];
 }
 
 QString GameModel::getPlayerString(int player)
@@ -597,17 +614,6 @@ int GameModel::getMoveNumberAt(const QPoint& pos)
     }
     while (node != nullptr);
     return -1;
-}
-
-QList<PieceModel*>& GameModel::getPieceModels(Color c)
-{
-    if (c == Color(0))
-        return m_pieceModels0;
-    if (c == Color(1))
-        return m_pieceModels1;
-    if (c == Color(2))
-        return m_pieceModels2;
-    return m_pieceModels3;
 }
 
 QString GameModel::getResultMessage()
@@ -1039,14 +1045,12 @@ void GameModel::newGame()
     initGame(m_game.get_variant());
     setIsModified(false);
     clearFile();
-    for (auto pieceModel : qAsConst(m_pieceModels0))
-        pieceModel->setDefaultState();
-    for (auto pieceModel : qAsConst(m_pieceModels1))
-        pieceModel->setDefaultState();
-    for (auto pieceModel : qAsConst(m_pieceModels2))
-        pieceModel->setDefaultState();
-    for (auto pieceModel : qAsConst(m_pieceModels3))
-        pieceModel->setDefaultState();
+    for (Color c : Color::Range(Color::range))
+        for (auto variant : qAsConst(m_pieceModels[c]))
+        {
+            auto pieceModel = qvariant_cast<PieceModel*>(variant);
+            pieceModel->setDefaultState();
+        }
     updateProperties();
 }
 
@@ -1226,13 +1230,16 @@ PieceModel* GameModel::preparePiece(GameMove* move)
     auto c = move->get().color;
     auto mv = move->get().move;
     auto piece = getBoard().get_move_piece(mv);
-    for (auto pieceModel : qAsConst(getPieceModels(c)))
+    for (auto variant : qAsConst(m_pieceModels[c]))
+    {
+        auto pieceModel = qvariant_cast<PieceModel*>(variant);
         if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
         {
             preparePieceTransform(pieceModel, mv);
             preparePieceGameCoord(pieceModel, mv);
             return pieceModel;
         }
+    }
     return nullptr;
 }
 
@@ -1632,36 +1639,42 @@ PieceModel* GameModel::updatePiece(Color c, Move mv,
     auto& pieceInfo = bd.get_piece_info(piece);
     auto gameCoord = getGameCoord(bd, mv);
     auto transform = bd.find_transform(mv);
-    auto& pieceModels = getPieceModels(c);
+    auto& pieceModels = m_pieceModels[c];
     // Prefer piece models already played with the given gameCoord and
     // transform because class Board doesn't make a distinction between
     // instances of the same piece (in Junior) and we want to avoid
     // unwanted piece movement animations to switch instances.
     for (int i = 0; i < pieceModels.length(); ++i)
-        if (pieceModels[i]->getPiece() == piece
-                && pieceModels[i]->isPlayed()
-                && compareGameCoord(pieceModels[i]->gameCoord(), gameCoord)
-                && compareTransform(pieceInfo, pieceModels[i]->getTransform(),
+    {
+        auto pieceModel = qvariant_cast<PieceModel*>(pieceModels[i]);
+        if (pieceModel->getPiece() == piece
+                && pieceModel->isPlayed()
+                && compareGameCoord(pieceModel->gameCoord(), gameCoord)
+                && compareTransform(pieceInfo, pieceModel->getTransform(),
                                     transform))
         {
             isPlayed[i] = true;
-            return pieceModels[i];
+            return pieceModel;
         }
+    }
     for (int i = 0; i < pieceModels.length(); ++i)
-        if (pieceModels[i]->getPiece() == piece && ! isPlayed[i])
+    {
+        auto pieceModel = qvariant_cast<PieceModel*>(pieceModels[i]);
+        if (pieceModel->getPiece() == piece && ! isPlayed[i])
         {
             isPlayed[i] = true;
             // Set PieceModel.isPlayed temporarily to false, such that there is
             // always a state transition animation (e.g. if the piece stays
             // on the board but changes its coordinates when navigating through
             // move variations).
-            pieceModels[i]->setIsPlayed(false);
+            pieceModel->setIsPlayed(false);
             // Set gameCoord before isPlayed because the animation needs it.
-            pieceModels[i]->setGameCoord(gameCoord);
-            pieceModels[i]->setIsPlayed(true);
-            pieceModels[i]->setTransform(transform);
-            return pieceModels[i];
+            pieceModel->setGameCoord(gameCoord);
+            pieceModel->setIsPlayed(true);
+            pieceModel->setTransform(transform);
+            return pieceModel;
         }
+    }
     LIBBOARDGAME_ASSERT(false);
     return nullptr;
 }
@@ -1724,16 +1737,16 @@ void GameModel::updatePieces()
 
     // Update pieces not on board
     for (Color c : bd.get_colors())
-    {
-        auto& pieceModels = getPieceModels(c);
-        for (int i = 0; i < pieceModels.length(); ++i)
-            if (! isPlayed[c][i] && pieceModels[i]->isPlayed())
+        for (int i = 0; i < m_pieceModels[c].length(); ++i)
+        {
+            auto pieceModel = qvariant_cast<PieceModel*>(m_pieceModels[c][i]);
+            if (! isPlayed[c][i] && pieceModel->isPlayed())
             {
-                pieceModels[i]->setDefaultState();
-                pieceModels[i]->setIsPlayed(false);
-                pieceModels[i]->setMoveLabel(QString());
+                pieceModel->setDefaultState();
+                pieceModel->setIsPlayed(false);
+                pieceModel->setMoveLabel(QString());
             }
-    }
+        }
 }
 
 void GameModel::updatePositionInfo()
