@@ -1552,7 +1552,10 @@ QString GameModel::suggestGameFileName(const QUrl& folder)
 QString GameModel::suggestNewFolderName(const QUrl& folder)
 {
     auto localFolder = folder.toLocalFile();
-    QString file = localFolder + '/' + tr("New Folder");
+    QString file = localFolder;
+    if (! file.endsWith('/'))
+        file.append('/');
+    file.append(tr("New Folder"));
     if (QFileInfo::exists(file))
         for (unsigned i = 1; ; ++i)
         {
