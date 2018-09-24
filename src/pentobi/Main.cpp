@@ -37,7 +37,7 @@ int mainAndroid()
     QQmlApplicationEngine engine;
     engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
     engine.rootContext()->setContextProperty(QStringLiteral("initialFile"),
-                                             QStringLiteral(""));
+                                             QString());
     engine.rootContext()->setContextProperty(QStringLiteral("isDesktop"),
                                              QVariant(false));
 #ifdef QT_DEBUG

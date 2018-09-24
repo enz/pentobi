@@ -511,7 +511,7 @@ QString GameModel::getPlayerString(int player)
     case 3:
         return tr("Green");
     }
-    return QStringLiteral("");
+    return {};
 }
 
 Variant GameModel::getInitialGameVariant()
@@ -1675,7 +1675,7 @@ void GameModel::updatePieces()
         for (Move mv : bd.get_setup().placements[c])
         {
             auto pieceModel = updatePiece(c, mv, isPlayed[c]);
-            pieceModel->setMoveLabel(QStringLiteral(""));
+            pieceModel->setMoveLabel(QString());
         }
     }
 
@@ -1728,7 +1728,7 @@ void GameModel::updatePieces()
             {
                 pieceModels[i]->setDefaultState();
                 pieceModels[i]->setIsPlayed(false);
-                pieceModels[i]->setMoveLabel(QStringLiteral(""));
+                pieceModels[i]->setMoveLabel(QString());
             }
     }
 }
@@ -1760,8 +1760,7 @@ void GameModel::updatePositionInfo()
     if (positionInfo.isEmpty())
     {
         positionInfo = bd.has_setup() ? tr("(Setup)") : tr("(No moves)");
-        positionInfoShort = bd.has_setup() ? tr("(Setup)")
-                                           : QStringLiteral("");
+        positionInfoShort = bd.has_setup() ? tr("(Setup)") : QString();
     }
     else
     {
