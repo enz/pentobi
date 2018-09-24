@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick.Controls 2.3
+import QtQuick.Window 2.1
 import "." as Pentobi
 
 Pentobi.Menu {
@@ -22,6 +23,7 @@ Pentobi.Menu {
         visible: isDesktop
         // Invisible menu item still use space in Qt 5.11
         height: visible ? implicitHeight : 0
+        enabled: visibility !== Window.FullScreen
         text: addMnemonic(qsTr("Toolbar"),
                           //: Mnemonic for menu item View/Toolbar. Leave empty for no mnemonic.
                           qsTr("T"))
