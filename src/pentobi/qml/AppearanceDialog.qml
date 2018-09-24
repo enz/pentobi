@@ -24,6 +24,7 @@ Pentobi.Dialog {
                 checkBoxCoordinates.checked !== gameDisplay.showCoordinates
                 || checkBoxShowVariations.checked !== gameModel.showVariations
                 || checkBoxAnimatePieces.checked !== gameDisplay.enableAnimations
+                || checkBoxMoveNumber.checked !== gameDisplay.showMoveNumber
                 || comboBoxTheme.currentIndex !== currentThemeIndex
                 || comboBoxMoveMarking.currentIndex !== currentMoveMarkingIndex
                 || comboBoxComment.currentIndex !== currentCommentIndex
@@ -39,8 +40,6 @@ Pentobi.Dialog {
     onOpened: {
         checkBoxCoordinates.checked = gameDisplay.showCoordinates
         checkBoxShowVariations.checked = gameModel.showVariations
-        if (isDesktop)
-            checkBoxMoveNumber.checked = gameDisplay.showMoveNumber
         checkBoxAnimatePieces.checked = gameDisplay.enableAnimations
         if (themeName === "dark")
             currentThemeIndex = 1
@@ -65,20 +64,19 @@ Pentobi.Dialog {
             currentMoveMarkingIndex = 0
         comboBoxMoveMarking.currentIndex = currentMoveMarkingIndex
         if (isDesktop) {
+            checkBoxMoveNumber.checked = gameDisplay.showMoveNumber
             if (gameDisplay.commentMode === "always")
                 currentCommentIndex = 0
             else if (gameDisplay.commentMode === "never")
                 currentCommentIndex = 2
             else
                 currentCommentIndex = 1
+            comboBoxComment.currentIndex = currentCommentIndex
         }
-        comboBoxComment.currentIndex = currentCommentIndex
     }
     onAccepted: {
         gameDisplay.showCoordinates = checkBoxCoordinates.checked
         gameModel.showVariations = checkBoxShowVariations.checked
-        if (isDesktop)
-            gameDisplay.showMoveNumber = checkBoxMoveNumber.checked
         gameDisplay.enableAnimations = checkBoxAnimatePieces.checked
         switch (comboBoxTheme.currentIndex) {
         case 0: themeName = "light"; break
@@ -94,6 +92,7 @@ Pentobi.Dialog {
         case 3: gameDisplay.moveMarking = "none"; break
         }
         if (isDesktop)
+            gameDisplay.showMoveNumber = checkBoxMoveNumber.checked
             switch (comboBoxComment.currentIndex) {
             case 0: gameDisplay.commentMode = "always"; break
             case 1: gameDisplay.commentMode = "as_needed"; break
