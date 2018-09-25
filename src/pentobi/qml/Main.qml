@@ -66,8 +66,7 @@ ApplicationWindow {
         id: toolBar
 
         visible: isDesktop || visibility !== Window.FullScreen
-        showContent: ! isDesktop
-                     || (showToolBar && visibility !== Window.FullScreen)
+        showContent: ! isDesktop || showToolBar
         anchors {
             left: parent.left
             right: parent.right
