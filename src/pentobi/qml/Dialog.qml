@@ -40,11 +40,15 @@ Dialog {
         if (! hasButtonFocus())
             accept()
     }
-    // Has any button in the footer the active focus
+    // Check if any button in the footer the focus. We don't want to handle
+    // the return key as accept (see comemnt above) if any button has the
+    // visual focus because the user might expect that pressing return triggers
+    // the button with the focus.
     function hasButtonFocus() {
-        for (var i = 0; i < footer.contentChildren.length; ++i)
-            if (footer.contentChildren[i].activeFocus)
+        for (var i = 0; i < footer.contentChildren.length; ++i) {
+            if (footer.contentChildren[i].visualFocus)
                 return true
+        }
         return false
     }
 
