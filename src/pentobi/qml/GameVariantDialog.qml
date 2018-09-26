@@ -108,8 +108,9 @@ Pentobi.Dialog {
                                     gameVariant = "trigon_2"
                                 else if (gameVariant.startsWith("nexos"))
                                     gameVariant = "nexos_2"
-                                else if (gameVariant.startsWith("callisto")
-                                         && gameVariant !== "callisto_2_4")
+                                else if (gameVariant === "callisto")
+                                    gameVariant = "callisto_2_4"
+                                else if (gameVariant === "callisto_3")
                                     gameVariant = "callisto_2"
                                 else if (gameVariant === "gembloq")
                                     gameVariant = "gembloq_2_4"
