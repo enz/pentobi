@@ -38,12 +38,14 @@ public:
         than Android, this function does nothing. */
     Q_INVOKABLE static void scanFile(const QString& pathname);
 
+#ifdef Q_OS_ANDROID
     /** Return the logical density of the display.
         Returns android.util.DisplayMetrics.density. This should be the same as
         Screen.devicePixelRatio, but can be used before QGuiApplication is
         constructed.
         @return The density or 0 on error. */
     static float getDensity();
+#endif
 };
 
 //-----------------------------------------------------------------------------
