@@ -33,17 +33,17 @@ public:
         platforms, it returns QStandardPaths::HomeLocation */
     Q_INVOKABLE static QUrl getDefaultFolder();
 
+    /** Request the Android media scanner to scan a file.
+        Ensures that the file will be visible via MTP. On platforms other
+        than Android, this function does nothing. */
+    Q_INVOKABLE static void scanFile(const QString& pathname);
+
     /** Return the logical density of the display.
         Returns android.util.DisplayMetrics.density. This should be the same as
         Screen.devicePixelRatio, but can be used before QGuiApplication is
         constructed.
         @return The density or 0 on error. */
-    Q_INVOKABLE static float getDensity();
-
-    /** Request the Android media scanner to scan a file.
-        Ensures that the file will be visible via MTP. On platforms other
-        than Android, this function does nothing. */
-    Q_INVOKABLE static void scanFile(const QString& pathname);
+    static float getDensity();
 };
 
 //-----------------------------------------------------------------------------
