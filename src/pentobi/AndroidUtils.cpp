@@ -94,6 +94,19 @@ QUrl AndroidUtils::getDefaultFolder()
 #endif
 }
 
+float AndroidUtils::getDensity()
+{
+    auto resources = QtAndroid::androidActivity().callObjectMethod(
+                "getResources", "()Landroid/content/res/Resources;");
+    if (! resources.isValid())
+        return 0;
+    auto metrics = resources.callObjectMethod(
+                "getDisplayMetrics", "()Landroid/util/DisplayMetrics;");
+    if (! metrics.isValid())
+        return 0;
+    return metrics.getField<jfloat>("density");
+}
+
 void AndroidUtils::scanFile(const QString& pathname)
 {
 #ifdef Q_OS_ANDROID

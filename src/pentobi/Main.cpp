@@ -179,7 +179,15 @@ int mainDesktop()
 int main(int argc, char *argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
+#ifdef Q_OS_ANDROID
+    // We don't use HighDpiScaling on low-DPI Android devices because of
+    // QTBUG-69102 and other bugs
+    auto density = AndroidUtils::getDensity();
+    if (density == 0 || density > 0.99)
+        QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#else
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
     QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
     QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
 #ifdef VERSION
