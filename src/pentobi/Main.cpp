@@ -183,7 +183,7 @@ int main(int argc, char *argv[])
     // We don't use HighDpiScaling on low-DPI Android devices because of
     // QTBUG-69102 and other bugs
     auto density = AndroidUtils::getDensity();
-    if (density == 0 || density > 0.99)
+    if (density == 0 || density > 1)
         QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #else
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
