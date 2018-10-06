@@ -200,9 +200,8 @@ int main(int argc, char *argv[])
     qmlRegisterInterface<AnalyzeGameElement>("AnalyzeGameElement");
     qmlRegisterInterface<GameMove>("GameModelMove");
     qmlRegisterInterface<PieceModel>("PieceModel");
-    QString locale = QLocale::system().name();
     QTranslator translator;
-    translator.load("qml_" + locale, QStringLiteral(":qml/i18n"));
+    translator.load(":qml/i18n/qml_" + QLocale::system().name());
     QCoreApplication::installTranslator(&translator);
 #ifdef Q_OS_ANDROID
     return mainAndroid();
