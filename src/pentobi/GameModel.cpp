@@ -171,7 +171,7 @@ PieceModel* GameModel::addEmpty(const QPoint& pos)
     LIBBOARDGAME_ASSERT(bd.get_setup().placements[c].contains(mv));
     auto gameCoord = getGameCoord(bd, mv);
     PieceModel* result = nullptr;
-    for (auto variant : qAsConst(m_pieceModels[c]))
+    for (auto& variant : qAsConst(m_pieceModels[c]))
     {
         auto pieceModel = qvariant_cast<PieceModel*>(variant);
         if (compareGameCoord(pieceModel->gameCoord(), gameCoord))
@@ -484,7 +484,7 @@ bool GameModel::findNextCommentContinueFromRoot()
 
 PieceModel* GameModel::findUnplayedPieceModel(Color c, Piece piece)
 {
-    for (auto variant : qAsConst(m_pieceModels[c]))
+    for (auto& variant : qAsConst(m_pieceModels[c]))
     {
         auto pieceModel = qvariant_cast<PieceModel*>(variant);
         if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
@@ -1046,7 +1046,7 @@ void GameModel::newGame()
     setIsModified(false);
     clearFile();
     for (Color c : Color::Range(Color::range))
-        for (auto variant : qAsConst(m_pieceModels[c]))
+        for (auto& variant : qAsConst(m_pieceModels[c]))
         {
             auto pieceModel = qvariant_cast<PieceModel*>(variant);
             pieceModel->setDefaultState();
@@ -1230,7 +1230,7 @@ PieceModel* GameModel::preparePiece(GameMove* move)
     auto c = move->get().color;
     auto mv = move->get().move;
     auto piece = getBoard().get_move_piece(mv);
-    for (auto variant : qAsConst(m_pieceModels[c]))
+    for (auto& variant : qAsConst(m_pieceModels[c]))
     {
         auto pieceModel = qvariant_cast<PieceModel*>(variant);
         if (pieceModel->getPiece() == piece && ! pieceModel->isPlayed())
