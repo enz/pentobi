@@ -87,7 +87,7 @@ QtObject {
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goEnd()
     }
-    property Action escape: Action {
+    property Action escapeKey: Action {
         shortcut: noPopupOpen ? "Escape" : ""
         onTriggered:
             if (gameDisplay.pickedPiece)
