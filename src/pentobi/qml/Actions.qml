@@ -5,35 +5,18 @@
 //-----------------------------------------------------------------------------
 
 import QtQml 2.2
+import QtQuick 2.11
 import QtQuick.Controls 2.3
 import QtQuick.Window 2.1
 import "Main.js" as Logic
 
-QtObject {
+Item {
     // There are currently several bugs in Qt where a control in a dialog
     // handles a key but does not consume the key event (e.g. QTBUG-69447,
     // QTBUG-69345), so we disable many shortcuts if this property is true,
     // that is when any QtQuickControls2 Popup is open.
     property bool noPopupOpen: rootWindow.Overlay.overlay.children.length === 0
 
-    property Instantiator pickedNamedPiece: Instantiator {
-        model: [ "1", "2", "A", "C", "E", "F", "G", "H", "I", "J", "L",
-            "N", "O", "P", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
-
-        Action {
-            shortcut: noPopupOpen ? modelData : ""
-            onTriggered: Logic.pickNamedPiece(modelData)
-        }
-    }
-    property Action backKey: Action {
-        shortcut: isAndroid && noPopupOpen ? "Back" : ""
-        onTriggered: {
-            if (visibility === Window.FullScreen)
-                rootWindow.visibility = Window.AutomaticVisibility
-            else
-                rootWindow.close()
-        }
-    }
     property Action backToMainVar: Action {
         shortcut: "Ctrl+M"
         text: qsTr("Main Variation")
@@ -87,24 +70,11 @@ QtObject {
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goEnd()
     }
-    property Action escapeKey: Action {
-        shortcut: noPopupOpen ? "Escape" : ""
-        onTriggered:
-            if (gameDisplay.pickedPiece)
-                gameDisplay.pickedPiece = null
-            else if (visibility === Window.FullScreen)
-                rootWindow.visibility = Window.AutomaticVisibility
-    }
     property Action findMove: Action {
         shortcut: "Ctrl+H"
         text: qsTr("Find Move")
         enabled: ! gameModel.isGameOver
         onTriggered: gameDisplay.showMove(gameModel.findMoveNext())
-    }
-    property Action findMovePrevious: Action {
-        shortcut: "Ctrl+Shift+H"
-        enabled: ! gameModel.isGameOver
-        onTriggered: gameDisplay.showMove(gameModel.findMovePrevious())
     }
     property Action nextComment: Action {
         shortcut: "Ctrl+E"
@@ -150,38 +120,6 @@ QtObject {
         text: qsTr("Pentobi Help")
         onTriggered: Logic.help()
     }
-    property Action movePieceDown: Action {
-        shortcut: noPopupOpen ? "Down" : ""
-        onTriggered: gameDisplay.shiftPiece(0, 1)
-    }
-    property Action movePieceDownFast: Action {
-        shortcut: noPopupOpen ? "Shift+Down" : ""
-        onTriggered: gameDisplay.shiftPieceFast(0, 1)
-    }
-    property Action movePieceLeft: Action {
-        shortcut: noPopupOpen ? "Left" : ""
-        onTriggered: gameDisplay.shiftPiece(-1, 0)
-    }
-    property Action movePieceLeftFast: Action {
-        shortcut: noPopupOpen ? "Shift+Left" : ""
-        onTriggered: gameDisplay.shiftPieceFast(-1, 0)
-    }
-    property Action movePieceRight: Action {
-        shortcut: noPopupOpen ? "Right" : ""
-        onTriggered: gameDisplay.shiftPiece(1, 0)
-    }
-    property Action movePieceRightFast: Action {
-        shortcut: noPopupOpen ? "Shift+Right" : ""
-        onTriggered: gameDisplay.shiftPieceFast(1, 0)
-    }
-    property Action movePieceUp: Action {
-        shortcut: noPopupOpen ? "Up" : ""
-        onTriggered: gameDisplay.shiftPiece(0, -1)
-    }
-    property Action movePieceUpFast: Action {
-        shortcut: noPopupOpen ? "Shift+Up" : ""
-        onTriggered: gameDisplay.shiftPieceFast(0, -1)
-    }
     property Action newGame: Action {
         shortcut: "Ctrl+N"
         text: qsTr("New")
@@ -195,15 +133,6 @@ QtObject {
         enabled: ! isRated
         onTriggered: Logic.ratedGame()
     }
-    property Action nextOrientation: Action {
-        enabled: gameDisplay.pickedPiece
-        shortcut: noPopupOpen ? "Space" : ""
-        onTriggered: gameDisplay.pickedPiece.pieceModel.nextOrientation()
-    }
-    property Action nextPiece: Action {
-        shortcut: noPopupOpen ? "+" : ""
-        onTriggered: Logic.nextPiece()
-    }
     property Action nextVar: Action {
         shortcut: "Ctrl+Down"
         enabled: gameModel.hasNextVar && ! isRated
@@ -213,10 +142,6 @@ QtObject {
         shortcut: "Ctrl+O"
         text: qsTr("Open…")
         onTriggered: Logic.open()
-    }
-    property Action openMenu: Action {
-        shortcut: noPopupOpen ? "Alt+M" : ""
-        onTriggered: toolBar.clickMenuButton()
     }
     property Action play: Action {
         shortcut: "Ctrl+L"
@@ -231,15 +156,6 @@ QtObject {
         enabled: ! gameModel.isGameOver && ! isRated
         onTriggered: { isPlaySingleMoveRunning = true; Logic.genMove() }
     }
-    property Action prevOrientation: Action {
-        enabled: gameDisplay.pickedPiece
-        shortcut: noPopupOpen ? "Shift+Space" : ""
-        onTriggered: gameDisplay.pickedPiece.pieceModel.previousOrientation()
-    }
-    property Action prevPiece: Action {
-        shortcut: noPopupOpen ? "-" : ""
-        onTriggered: Logic.prevPiece()
-    }
     property Action prevVar: Action {
         shortcut: "Ctrl+Up"
         enabled: gameModel.hasPrevVar && ! isRated
@@ -249,18 +165,6 @@ QtObject {
         shortcut: "Ctrl+Q"
         text: qsTr("Quit")
         onTriggered: rootWindow.close()
-    }
-    property Action returnKey: Action {
-        shortcut: "Return"
-        enabled: ! isAndroid
-        onTriggered: {
-            if (rootWindow.dialogs.length > 0) {
-                var dialog = rootWindow.dialogs[rootWindow.dialogs.length - 1]
-                dialog.returnPressed()
-            }
-            else if (noPopupOpen)
-                gameDisplay.playPickedPiece()
-        }
     }
     property Action save: Action {
         shortcut: "Ctrl+S"
@@ -287,5 +191,103 @@ QtObject {
         text: qsTr("Undo Move")
         enabled: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
         onTriggered: Qt.callLater(function() { Logic.undo() }) // QTBUG-69682
+    }
+
+    Instantiator {
+        model: [ "1", "2", "A", "C", "E", "F", "G", "H", "I", "J", "L",
+            "N", "O", "P", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
+
+        Shortcut {
+            sequence: noPopupOpen ? modelData : ""
+            onActivated: Logic.pickNamedPiece(modelData)
+        }
+    }
+    Shortcut {
+        sequence: isAndroid && noPopupOpen ? "Back" : ""
+        onActivated: {
+            if (visibility === Window.FullScreen)
+                rootWindow.visibility = Window.AutomaticVisibility
+            else
+                rootWindow.close()
+        }
+    }
+    Shortcut {
+        sequence: "Return"
+        enabled: ! isAndroid
+        onActivated: {
+            if (rootWindow.dialogs.length > 0) {
+                var dialog = rootWindow.dialogs[rootWindow.dialogs.length - 1]
+                dialog.returnPressed()
+            }
+            else if (noPopupOpen)
+                gameDisplay.playPickedPiece()
+        }
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "Escape" : ""
+        onActivated:
+            if (gameDisplay.pickedPiece)
+                gameDisplay.pickedPiece = null
+            else if (visibility === Window.FullScreen)
+                rootWindow.visibility = Window.AutomaticVisibility
+    }
+    Shortcut {
+        sequence: "Ctrl+Shift+H"
+        enabled: ! gameModel.isGameOver
+        onActivated: gameDisplay.showMove(gameModel.findMovePrevious())
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "Down" : ""
+        onActivated: gameDisplay.shiftPiece(0, 1)
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "Shift+Down" : ""
+        onActivated: gameDisplay.shiftPieceFast(0, 1)
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "Left" : ""
+        onActivated: gameDisplay.shiftPiece(-1, 0)
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "Shift+Left" : ""
+        onActivated: gameDisplay.shiftPieceFast(-1, 0)
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "Right" : ""
+        onActivated: gameDisplay.shiftPiece(1, 0)
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "Shift+Right" : ""
+        onActivated: gameDisplay.shiftPieceFast(1, 0)
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "Up" : ""
+        onActivated: gameDisplay.shiftPiece(0, -1)
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "Shift+Up" : ""
+        onActivated: gameDisplay.shiftPieceFast(0, -1)
+    }
+    Shortcut {
+        enabled: gameDisplay.pickedPiece
+        sequence: noPopupOpen ? "Space" : ""
+        onActivated: gameDisplay.pickedPiece.pieceModel.nextOrientation()
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "+" : ""
+        onActivated: Logic.nextPiece()
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "Alt+M" : ""
+        onActivated: toolBar.clickMenuButton()
+    }
+    Shortcut {
+        enabled: gameDisplay.pickedPiece
+        sequence: noPopupOpen ? "Shift+Space" : ""
+        onActivated: gameDisplay.pickedPiece.pieceModel.previousOrientation()
+    }
+    Shortcut {
+        sequence: noPopupOpen ? "-" : ""
+        onActivated: Logic.prevPiece()
     }
 }
