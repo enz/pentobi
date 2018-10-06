@@ -22,10 +22,6 @@
 #include <QCommandLineParser>
 #endif
 
-#ifdef Q_OS_LINUX
-#include <QQuickWindow>
-#endif
-
 //-----------------------------------------------------------------------------
 
 namespace {
