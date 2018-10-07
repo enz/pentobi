@@ -71,6 +71,7 @@ Dialog {
 
     Shortcut {
         sequence: "Return"
+        enabled: visible
         onActivated: returnPressed()
     }
 }
