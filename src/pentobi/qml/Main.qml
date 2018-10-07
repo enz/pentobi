@@ -401,7 +401,7 @@ ApplicationWindow {
 
         shortcut: "Ctrl+Q"
         text: qsTr("Quit")
-        onTriggered: rootWindow.close()
+        onTriggered: close()
     }
     Action {
         id: actionSave
@@ -451,9 +451,9 @@ ApplicationWindow {
         enabled: isAndroid
         onActivated: {
             if (visibility === Window.FullScreen)
-                rootWindow.visibility = Window.AutomaticVisibility
+                visibility = Window.AutomaticVisibility
             else
-                rootWindow.close()
+                close()
         }
     }
     Shortcut {
