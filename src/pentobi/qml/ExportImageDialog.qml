@@ -12,7 +12,13 @@ import "." as Pentobi
 Pentobi.Dialog {
     id: root
 
-    footer: DialogButtonBoxOkCancel { }
+    footer: Pentobi.DialogButtonBox {
+        ButtonOk {
+            enabled: textField.acceptableInput
+            onClicked: checkAccept()
+        }
+        ButtonCancel { }
+    }
     onOpened: textField.selectAll()
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
@@ -20,6 +26,11 @@ Pentobi.Dialog {
         dialog.name = gameModel.suggestFileName(folder, "png")
         dialog.selectNameFilter(0)
         dialog.open()
+    }
+
+    function returnPressed() {
+        if (! hasButtonFocus() && textField.acceptableInput)
+            accept()
     }
 
     Item {
@@ -38,10 +49,10 @@ Pentobi.Dialog {
                 id: textField
 
                 text: exportImageWidth
+                focus: true
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{ bottom: 0; top: 32767 }
                 selectByMouse: true
-                onAccepted: root.accept()
                 Layout.preferredWidth: font.pixelSize * 5
             }
             Item { Layout.fillWidth: true }
