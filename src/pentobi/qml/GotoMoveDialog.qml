@@ -12,9 +12,20 @@ import "." as Pentobi
 Pentobi.Dialog {
     id: root
 
-    footer: DialogButtonBoxOkCancel { }
+    footer: Pentobi.DialogButtonBox {
+        ButtonOk {
+            enabled: textField.acceptableInput
+            onClicked: checkAccept()
+        }
+        ButtonCancel { }
+    }
     onOpened: textField.selectAll()
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
+
+    function returnPressed() {
+        if (! hasButtonFocus() && textField.acceptableInput)
+            accept()
+    }
 
     Item {
         implicitWidth:
