@@ -56,11 +56,7 @@ Dialog {
     focus: true
     clip: true
     closePolicy: Popup.CloseOnEscape
-    onOpened: {
-        centerDialog()
-        rootWindow.dialogs.push(this)
-    }
-    onClosed: rootWindow.dialogs.splice(rootWindow.dialogs.indexOf(this), 1)
+    onOpened: centerDialog()
     onWidthChanged: centerDialog()
     onHeightChanged: centerDialog()
     ApplicationWindow.onWindowChanged:
@@ -72,4 +68,9 @@ Dialog {
         if (! isDesktop)
             // Save some screen space on smartphones
             title = ""
+
+    Shortcut {
+        sequence: "Return"
+        onActivated: returnPressed()
+    }
 }

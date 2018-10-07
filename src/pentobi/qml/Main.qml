@@ -47,13 +47,6 @@ ApplicationWindow {
                                         || playerModel.isGenMoveRunning
                                         || analyzeGameModel.isRunning
     property bool showToolBar: true
-    property var dialogs: []
-
-    // There are currently several bugs in Qt where a control in a dialog
-    // handles a key but does not consume the key event (e.g. QTBUG-69447,
-    // QTBUG-69345), so we disable many shortcuts if this property is true,
-    // that is when any QtQuickControls2 Popup is open.
-    property bool noPopupOpen: Overlay.overlay.children.length === 0
 
     minimumWidth: isDesktop ? 481 : 240
     minimumHeight: isDesktop ? 303 : 301
@@ -449,12 +442,13 @@ ApplicationWindow {
             "N", "O", "P", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
 
         Shortcut {
-            sequence: noPopupOpen ? modelData : ""
+            sequence: modelData
             onActivated: Logic.pickNamedPiece(modelData)
         }
     }
     Shortcut {
-        sequence: isAndroid && noPopupOpen ? "Back" : ""
+        sequence: "Back"
+        enabled: isAndroid
         onActivated: {
             if (visibility === Window.FullScreen)
                 rootWindow.visibility = Window.AutomaticVisibility
@@ -465,22 +459,15 @@ ApplicationWindow {
     Shortcut {
         sequence: "Return"
         enabled: ! isAndroid
-        onActivated: {
-            if (rootWindow.dialogs.length > 0) {
-                var dialog = rootWindow.dialogs[rootWindow.dialogs.length - 1]
-                dialog.returnPressed()
-            }
-            else if (noPopupOpen)
-                gameDisplay.playPickedPiece()
-        }
+        onActivated: gameDisplay.playPickedPiece()
     }
     Shortcut {
-        sequence: noPopupOpen ? "Escape" : ""
+        sequence: "Escape"
         onActivated:
             if (gameDisplay.pickedPiece)
                 gameDisplay.pickedPiece = null
             else if (visibility === Window.FullScreen)
-                rootWindow.visibility = Window.AutomaticVisibility
+                visibility = Window.AutomaticVisibility
     }
     Shortcut {
         sequence: "Ctrl+Shift+H"
@@ -488,57 +475,57 @@ ApplicationWindow {
         onActivated: gameDisplay.showMove(gameModel.findMovePrevious())
     }
     Shortcut {
-        sequence: noPopupOpen ? "Down" : ""
+        sequence: "Down"
         onActivated: gameDisplay.shiftPiece(0, 1)
     }
     Shortcut {
-        sequence: noPopupOpen ? "Shift+Down" : ""
+        sequence: "Shift+Down"
         onActivated: gameDisplay.shiftPieceFast(0, 1)
     }
     Shortcut {
-        sequence: noPopupOpen ? "Left" : ""
+        sequence: "Left"
         onActivated: gameDisplay.shiftPiece(-1, 0)
     }
     Shortcut {
-        sequence: noPopupOpen ? "Shift+Left" : ""
+        sequence: "Shift+Left"
         onActivated: gameDisplay.shiftPieceFast(-1, 0)
     }
     Shortcut {
-        sequence: noPopupOpen ? "Right" : ""
+        sequence: "Right"
         onActivated: gameDisplay.shiftPiece(1, 0)
     }
     Shortcut {
-        sequence: noPopupOpen ? "Shift+Right" : ""
+        sequence: "Shift+Right"
         onActivated: gameDisplay.shiftPieceFast(1, 0)
     }
     Shortcut {
-        sequence: noPopupOpen ? "Up" : ""
+        sequence: "Up"
         onActivated: gameDisplay.shiftPiece(0, -1)
     }
     Shortcut {
-        sequence: noPopupOpen ? "Shift+Up" : ""
+        sequence: "Shift+Up"
         onActivated: gameDisplay.shiftPieceFast(0, -1)
     }
     Shortcut {
         enabled: gameDisplay.pickedPiece
-        sequence: noPopupOpen ? "Space" : ""
+        sequence: "Space"
         onActivated: gameDisplay.pickedPiece.pieceModel.nextOrientation()
     }
     Shortcut {
-        sequence: noPopupOpen ? "+" : ""
+        sequence: "+"
         onActivated: Logic.nextPiece()
     }
     Shortcut {
-        sequence: noPopupOpen ? "Alt+M" : ""
+        sequence: "Alt+M"
         onActivated: toolBar.clickMenuButton()
     }
     Shortcut {
         enabled: gameDisplay.pickedPiece
-        sequence: noPopupOpen ? "Shift+Space" : ""
+        sequence: "Shift+Space"
         onActivated: gameDisplay.pickedPiece.pieceModel.previousOrientation()
     }
     Shortcut {
-        sequence: noPopupOpen ? "-" : ""
+        sequence: "-"
         onActivated: Logic.prevPiece()
     }
 }
