@@ -12,26 +12,26 @@ Pentobi.Menu {
                        qsTr("O"))
 
     Pentobi.MenuItem {
-        action: actions.gotoMove
+        action: actionGotoMove
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Go/Move Number. Leave empty for no mnemonic.
                           qsTr("N"))
     }
     Pentobi.MenuItem {
-        action: actions.backToMainVar
-        text: addMnemonic(actions.backToMainVar.text,
+        action: actionBackToMainVar
+        text: addMnemonic(actionBackToMainVar.text,
                           //: Mnemonic for menu item Go/Main Variation. Leave empty for no mnemonic.
                           qsTr("M"))
     }
     Pentobi.MenuItem {
-        action: actions.beginningOfBranch
-        text: addMnemonic(actions.beginningOfBranch.text,
+        action: actionBeginningOfBranch
+        text: addMnemonic(actionBeginningOfBranch.text,
                           //: Mnemonic for menu item Beginning Of Branch. Leave empty for no mnemonic.
                           qsTr("B"))
     }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
-        action: actions.nextComment
+        action: actionNextComment
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Next Comment. Leave empty for no mnemonic.
                           qsTr("C"))

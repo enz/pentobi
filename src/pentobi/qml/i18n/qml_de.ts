@@ -21,11 +21,11 @@
     <name>Actions</name>
     <message>
         <source>Main Variation</source>
-        <translation>Hauptvariante</translation>
+        <translation type="vanished">Hauptvariante</translation>
     </message>
     <message>
         <source>Beginning of Branch</source>
-        <translation>Verzweigungsanfang</translation>
+        <translation type="vanished">Verzweigungsanfang</translation>
     </message>
     <message>
         <source>Settings…</source>
@@ -34,77 +34,77 @@
     </message>
     <message>
         <source>Find Move</source>
-        <translation>Zug finden</translation>
+        <translation type="vanished">Zug finden</translation>
     </message>
     <message>
         <source>Next Comment</source>
-        <translation>Nächster Kommentar</translation>
+        <translation type="vanished">Nächster Kommentar</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation>Vollbild</translation>
+        <translation type="vanished">Vollbild</translation>
     </message>
     <message>
         <source>Move Number…</source>
-        <translation>Zugnummer …</translation>
+        <translation type="vanished">Zugnummer …</translation>
     </message>
     <message>
         <source>Pentobi Help</source>
-        <translation>Pentobi-Hilfe</translation>
+        <translation type="vanished">Pentobi-Hilfe</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Neu</translation>
+        <translation type="vanished">Neu</translation>
     </message>
     <message>
         <source>Rated Game</source>
-        <translation>Gewertetes Spiel</translation>
+        <translation type="vanished">Gewertetes Spiel</translation>
     </message>
     <message>
         <source>Open…</source>
-        <translation>Öffnen …</translation>
+        <translation type="vanished">Öffnen …</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Spielen</translation>
+        <translation type="vanished">Spielen</translation>
     </message>
     <message>
         <source>Play Move</source>
         <extracomment>Play a single move</extracomment>
-        <translation>Zug spielen</translation>
+        <translation type="vanished">Zug spielen</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Beenden</translation>
+        <translation type="vanished">Beenden</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation type="vanished">Speichern</translation>
     </message>
     <message>
         <source>Save As…</source>
-        <translation>Speichern unter …</translation>
+        <translation type="vanished">Speichern unter …</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stopp</translation>
+        <translation type="vanished">Stopp</translation>
     </message>
     <message>
         <source>Undo Move</source>
-        <translation>Zug rückgängig</translation>
+        <translation type="vanished">Zug rückgängig</translation>
     </message>
     <message>
         <source>Game Info</source>
-        <translation>Spielinformation</translation>
+        <translation type="vanished">Spielinformation</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Kommentar</translation>
+        <translation type="vanished">Kommentar</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Menu item Computer/Settings</extracomment>
-        <translation>Einstellungen</translation>
+        <translation type="vanished">Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -918,6 +918,88 @@
         <source>Rated Game %1</source>
         <extracomment>Label for rated game. The argument is the game number.</extracomment>
         <translation>Gewertetes Spiel %1</translation>
+    </message>
+    <message>
+        <source>Main Variation</source>
+        <translation>Hauptvariante</translation>
+    </message>
+    <message>
+        <source>Beginning of Branch</source>
+        <translation>Verzweigungsanfang</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Kommentar</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation>Einstellungen</translation>
+    </message>
+    <message>
+        <source>Find Move</source>
+        <translation>Zug finden</translation>
+    </message>
+    <message>
+        <source>Next Comment</source>
+        <translation>Nächster Kommentar</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation>Vollbild</translation>
+    </message>
+    <message>
+        <source>Game Info</source>
+        <translation>Spielinformation</translation>
+    </message>
+    <message>
+        <source>Move Number…</source>
+        <translation>Zugnummer …</translation>
+    </message>
+    <message>
+        <source>Pentobi Help</source>
+        <translation>Pentobi-Hilfe</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Neu</translation>
+    </message>
+    <message>
+        <source>Rated Game</source>
+        <translation>Gewertetes Spiel</translation>
+    </message>
+    <message>
+        <source>Open…</source>
+        <translation>Öffnen …</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation>Spielen</translation>
+    </message>
+    <message>
+        <source>Play Move</source>
+        <extracomment>Play a single move</extracomment>
+        <translation>Zug spielen</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Beenden</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Speichern</translation>
+    </message>
+    <message>
+        <source>Save As…</source>
+        <translation>Speichern unter …</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Stopp</translation>
+    </message>
+    <message>
+        <source>Undo Move</source>
+        <translation>Zug rückgängig</translation>
     </message>
 </context>
 <context>

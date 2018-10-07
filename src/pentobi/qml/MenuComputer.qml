@@ -12,25 +12,25 @@ Pentobi.Menu {
                        qsTr("C"))
 
     Pentobi.MenuItem {
-        action: actions.computerSettings
+        action: actionComputerSettings
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Computer Settings. Leave empty for no mnemonic.
                           qsTr("S"))
     }
     Pentobi.MenuItem {
-        action: actions.play
-        text: addMnemonic(action.text,
+        action: actionPlay
+        text: addMnemonic(actionPlay.text,
                           //: Mnemonic for menu item Play. Leave empty for no mnemonic.
                           qsTr("P"))
     }
     Pentobi.MenuItem {
-        action: actions.playSingle
+        action: actionPlaySingle
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Play Move. Leave empty for no mnemonic.
                           qsTr("M"))
     }
     Pentobi.MenuItem {
-        action: actions.stop
+        action: actionStop
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Stop. Leave empty for no mnemonic.
                           qsTr("O"))

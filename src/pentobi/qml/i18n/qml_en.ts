@@ -18,91 +18,6 @@
     </message>
 </context>
 <context>
-    <name>Actions</name>
-    <message>
-        <source>Main Variation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Beginning of Branch</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Find Move</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Next Comment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move Number…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pentobi Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rated Game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Play Move</source>
-        <extracomment>Play a single move</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save As…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Undo Move</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Game Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>AnalyzeDialog</name>
     <message>
         <source>Analysis speed:</source>
@@ -912,6 +827,88 @@
     <message>
         <source>Rated Game %1</source>
         <extracomment>Label for rated game. The argument is the game number.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Main Variation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beginning of Branch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next Comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Game Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Number…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pentobi Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rated Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play Move</source>
+        <extracomment>Play a single move</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save As…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo Move</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

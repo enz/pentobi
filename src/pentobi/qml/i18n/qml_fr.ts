@@ -21,11 +21,11 @@
     <name>Actions</name>
     <message>
         <source>Main Variation</source>
-        <translation>Variation principale</translation>
+        <translation type="vanished">Variation principale</translation>
     </message>
     <message>
         <source>Beginning of Branch</source>
-        <translation>Au début de la branche</translation>
+        <translation type="vanished">Au début de la branche</translation>
     </message>
     <message>
         <source>Settings…</source>
@@ -34,77 +34,77 @@
     </message>
     <message>
         <source>Find Move</source>
-        <translation>Trouver un coup</translation>
+        <translation type="vanished">Trouver un coup</translation>
     </message>
     <message>
         <source>Next Comment</source>
-        <translation>Commentaire suivant</translation>
+        <translation type="vanished">Commentaire suivant</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation>Plein écran</translation>
+        <translation type="vanished">Plein écran</translation>
     </message>
     <message>
         <source>Move Number…</source>
-        <translation>Numéro de coup…</translation>
+        <translation type="vanished">Numéro de coup…</translation>
     </message>
     <message>
         <source>Pentobi Help</source>
-        <translation>Aide de Pentobi</translation>
+        <translation type="vanished">Aide de Pentobi</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nouveau</translation>
+        <translation type="vanished">Nouveau</translation>
     </message>
     <message>
         <source>Rated Game</source>
-        <translation>Partie classée</translation>
+        <translation type="vanished">Partie classée</translation>
     </message>
     <message>
         <source>Open…</source>
-        <translation>Ouvrir…</translation>
+        <translation type="vanished">Ouvrir…</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Jouer</translation>
+        <translation type="vanished">Jouer</translation>
     </message>
     <message>
         <source>Play Move</source>
         <extracomment>Play a single move</extracomment>
-        <translation>Jouer un coup</translation>
+        <translation type="vanished">Jouer un coup</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Quitter</translation>
+        <translation type="vanished">Quitter</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Enregistrer</translation>
+        <translation type="vanished">Enregistrer</translation>
     </message>
     <message>
         <source>Save As…</source>
-        <translation>Enregistrer sous…</translation>
+        <translation type="vanished">Enregistrer sous…</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Arrêter</translation>
+        <translation type="vanished">Arrêter</translation>
     </message>
     <message>
         <source>Undo Move</source>
-        <translation>Annuler le coup</translation>
+        <translation type="vanished">Annuler le coup</translation>
     </message>
     <message>
         <source>Game Info</source>
-        <translation>Info sur la partie</translation>
+        <translation type="vanished">Info sur la partie</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Commentaire</translation>
+        <translation type="vanished">Commentaire</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Menu item Computer/Settings</extracomment>
-        <translation>Configuration</translation>
+        <translation type="vanished">Configuration</translation>
     </message>
 </context>
 <context>
@@ -918,6 +918,88 @@
         <source>Rated Game %1</source>
         <extracomment>Label for rated game. The argument is the game number.</extracomment>
         <translation>Partie classée %1</translation>
+    </message>
+    <message>
+        <source>Main Variation</source>
+        <translation>Variation principale</translation>
+    </message>
+    <message>
+        <source>Beginning of Branch</source>
+        <translation>Au début de la branche</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Commentaire</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation>Configuration</translation>
+    </message>
+    <message>
+        <source>Find Move</source>
+        <translation>Trouver un coup</translation>
+    </message>
+    <message>
+        <source>Next Comment</source>
+        <translation>Commentaire suivant</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation>Plein écran</translation>
+    </message>
+    <message>
+        <source>Game Info</source>
+        <translation>Info sur la partie</translation>
+    </message>
+    <message>
+        <source>Move Number…</source>
+        <translation>Numéro de coup…</translation>
+    </message>
+    <message>
+        <source>Pentobi Help</source>
+        <translation>Aide de Pentobi</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Nouveau</translation>
+    </message>
+    <message>
+        <source>Rated Game</source>
+        <translation>Partie classée</translation>
+    </message>
+    <message>
+        <source>Open…</source>
+        <translation>Ouvrir…</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation>Jouer</translation>
+    </message>
+    <message>
+        <source>Play Move</source>
+        <extracomment>Play a single move</extracomment>
+        <translation>Jouer un coup</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Quitter</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Enregistrer</translation>
+    </message>
+    <message>
+        <source>Save As…</source>
+        <translation>Enregistrer sous…</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Arrêter</translation>
+    </message>
+    <message>
+        <source>Undo Move</source>
+        <translation>Annuler le coup</translation>
     </message>
 </context>
 <context>

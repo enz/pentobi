@@ -64,7 +64,7 @@ Item {
             id: newGame
 
             icon.source: theme.getImage("pentobi-newgame")
-            action: actions.newGame
+            action: actionNew
             visible: showContent && (isDesktop || enabled)
         }
         Pentobi.Button {
@@ -72,13 +72,13 @@ Item {
 
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-rated-game")
-            action: actions.newGameRated
+            action: actionNewRated
         }
         Pentobi.Button {
             id: undo
 
             icon.source: theme.getImage("pentobi-undo")
-            action: actions.undo
+            action: actionUndo
             visible: showContent && (isDesktop || enabled)
             autoRepeat: true
             autoRepeatInterval:
@@ -90,14 +90,14 @@ Item {
             id: computerSettings
 
             icon.source: theme.getImage("pentobi-computer-colors")
-            action: actions.computerSettings
+            action: actionComputerSettings
             visible: showContent && (isDesktop || enabled)
         }
         Pentobi.Button {
             id: play
 
             icon.source: theme.getImage("pentobi-play")
-            action: actions.play
+            action: actionPlay
             visible: showContent && (isDesktop || enabled)
             autoRepeat: true
             autoRepeatInterval:
@@ -108,7 +108,7 @@ Item {
             id: stop
 
             icon.source: theme.getImage("pentobi-stop")
-            action: actions.stop
+            action: actionStop
             visible: showContent && (isDesktop || ! isRated)
         }
         Item {
@@ -121,14 +121,14 @@ Item {
 
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-beginning")
-            action: actions.beginning
+            action: actionBeginning
         }
         Pentobi.Button {
             id: backward10
 
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-backward10")
-            action: actions.backward10
+            action: actionBackward10
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameDisplay.item ?
@@ -139,7 +139,7 @@ Item {
 
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-backward")
-            action: actions.backward
+            action: actionBackward
             autoRepeat: true
         }
         Pentobi.Button {
@@ -147,7 +147,7 @@ Item {
 
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-forward")
-            action: actions.forward
+            action: actionForward
             autoRepeat: true
         }
         Pentobi.Button {
@@ -155,7 +155,7 @@ Item {
 
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-forward10")
-            action: actions.forward10
+            action: actionForward10
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameDisplay.item ?
@@ -166,7 +166,7 @@ Item {
 
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-end")
-            action: actions.end
+            action: actionEnd
         }
         Item {
             visible: isDesktop
@@ -178,7 +178,7 @@ Item {
 
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-previous-variation")
-            action: actions.prevVar
+            action: actionPrevVar
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameDisplay.item ?
@@ -189,7 +189,7 @@ Item {
 
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-next-variation")
-            action: actions.nextVar
+            action: actionNextVar
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameDisplay.item ?

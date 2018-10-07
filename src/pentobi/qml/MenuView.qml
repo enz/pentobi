@@ -31,13 +31,13 @@ Pentobi.Menu {
         onTriggered: rootWindow.showToolBar = checked
     }
     Pentobi.MenuItem {
-        action: actions.comment
-        text: addMnemonic(action.text,
+        action: actionComment
+        text: addMnemonic(actionComment.text,
                           //: Mnemonic for menu item View/Comment. Leave empty for no mnemonic.
                           qsTr("C"))
     }
     Pentobi.MenuItem {
-        action: actions.fullscreen
+        action: actionFullscreen
         text: addMnemonic(action.text,
                           //: Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.
                           qsTr("F"))

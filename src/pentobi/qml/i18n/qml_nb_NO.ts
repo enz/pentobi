@@ -21,11 +21,11 @@
     <name>Actions</name>
     <message>
         <source>Main Variation</source>
-        <translation>Hovedvariasjon</translation>
+        <translation type="vanished">Hovedvariasjon</translation>
     </message>
     <message>
         <source>Beginning of Branch</source>
-        <translation>Begynnelse av forgreining</translation>
+        <translation type="vanished">Begynnelse av forgreining</translation>
     </message>
     <message>
         <source>Settings…</source>
@@ -34,77 +34,77 @@
     </message>
     <message>
         <source>Find Move</source>
-        <translation>Finn trekk</translation>
+        <translation type="vanished">Finn trekk</translation>
     </message>
     <message>
         <source>Next Comment</source>
-        <translation>Neste kommentar</translation>
+        <translation type="vanished">Neste kommentar</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation>Fullskjermsvisning</translation>
+        <translation type="vanished">Fullskjermsvisning</translation>
     </message>
     <message>
         <source>Move Number…</source>
-        <translation>Trekknummer…</translation>
+        <translation type="vanished">Trekknummer…</translation>
     </message>
     <message>
         <source>Pentobi Help</source>
-        <translation>Pentobi-hjelp</translation>
+        <translation type="vanished">Pentobi-hjelp</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Ny</translation>
+        <translation type="vanished">Ny</translation>
     </message>
     <message>
         <source>Rated Game</source>
-        <translation>Vurdert spill</translation>
+        <translation type="vanished">Vurdert spill</translation>
     </message>
     <message>
         <source>Open…</source>
-        <translation>Åpne…</translation>
+        <translation type="vanished">Åpne…</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Spill</translation>
+        <translation type="vanished">Spill</translation>
     </message>
     <message>
         <source>Play Move</source>
         <extracomment>Play a single move</extracomment>
-        <translation>Spill enkelt trekk</translation>
+        <translation type="vanished">Spill enkelt trekk</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Avslutt</translation>
+        <translation type="vanished">Avslutt</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Lagre</translation>
+        <translation type="vanished">Lagre</translation>
     </message>
     <message>
         <source>Save As…</source>
-        <translation>Lagre som…</translation>
+        <translation type="vanished">Lagre som…</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stopp</translation>
+        <translation type="vanished">Stopp</translation>
     </message>
     <message>
         <source>Undo Move</source>
-        <translation>Angre trekk</translation>
+        <translation type="vanished">Angre trekk</translation>
     </message>
     <message>
         <source>Game Info</source>
-        <translation>Spillinfo</translation>
+        <translation type="vanished">Spillinfo</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Kommentar</translation>
+        <translation type="vanished">Kommentar</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Menu item Computer/Settings</extracomment>
-        <translation>Innstillinger</translation>
+        <translation type="vanished">Innstillinger</translation>
     </message>
 </context>
 <context>
@@ -918,6 +918,88 @@
         <source>Rated Game %1</source>
         <extracomment>Label for rated game. The argument is the game number.</extracomment>
         <translation>Vurdert spill %1</translation>
+    </message>
+    <message>
+        <source>Main Variation</source>
+        <translation>Hovedvariasjon</translation>
+    </message>
+    <message>
+        <source>Beginning of Branch</source>
+        <translation>Begynnelse av forgreining</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Kommentar</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation>Innstillinger</translation>
+    </message>
+    <message>
+        <source>Find Move</source>
+        <translation>Finn trekk</translation>
+    </message>
+    <message>
+        <source>Next Comment</source>
+        <translation>Neste kommentar</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation>Fullskjermsvisning</translation>
+    </message>
+    <message>
+        <source>Game Info</source>
+        <translation>Spillinfo</translation>
+    </message>
+    <message>
+        <source>Move Number…</source>
+        <translation>Trekknummer…</translation>
+    </message>
+    <message>
+        <source>Pentobi Help</source>
+        <translation>Pentobi-hjelp</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Ny</translation>
+    </message>
+    <message>
+        <source>Rated Game</source>
+        <translation>Vurdert spill</translation>
+    </message>
+    <message>
+        <source>Open…</source>
+        <translation>Åpne…</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation>Spill</translation>
+    </message>
+    <message>
+        <source>Play Move</source>
+        <extracomment>Play a single move</extracomment>
+        <translation>Spill enkelt trekk</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Avslutt</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Lagre</translation>
+    </message>
+    <message>
+        <source>Save As…</source>
+        <translation>Lagre som…</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Stopp</translation>
+    </message>
+    <message>
+        <source>Undo Move</source>
+        <translation>Angre trekk</translation>
     </message>
 </context>
 <context>

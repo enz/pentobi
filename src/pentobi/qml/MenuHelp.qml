@@ -13,8 +13,8 @@ Pentobi.Menu {
                        qsTr("H"))
 
     Pentobi.MenuItem {
-        action: actions.help
-        text: addMnemonic(action.text,
+        action: actionHelp
+        text: addMnemonic(actionHelp.text,
                           //: Mnemonic for menu item Pentobi Help. Leave empty for no mnemonic.
                           qsTr("P"))
     }
