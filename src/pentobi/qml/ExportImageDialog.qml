@@ -16,6 +16,7 @@ Pentobi.Dialog {
         ButtonOk {
             enabled: textField.acceptableInput
             onClicked: checkAccept()
+            DialogButtonBox.buttonRole: DialogButtonBox.InvalidRole
         }
         ButtonCancel { }
     }
@@ -29,7 +30,11 @@ Pentobi.Dialog {
     }
 
     function returnPressed() {
-        if (! hasButtonFocus() && textField.acceptableInput)
+        if (! hasButtonFocus())
+            checkAccept()
+    }
+    function checkAccept() {
+        if (textField.acceptableInput)
             accept()
     }
 
