@@ -188,10 +188,9 @@ Pentobi.Dialog {
                             if (activeFocus && currentIndex < 0 && count)
                                 currentIndex = 0
                         onCurrentIndexChanged:
-                            if (selectExisting && currentIndex >= 0
+                            if (currentIndex >= 0
                                     && ! folderModel.isFolder(currentIndex))
                                 name = folderModel.get(currentIndex, "fileName")
-
                         delegate: AbstractButton {
                             width: view.width
                             height: 2 * font.pixelSize
