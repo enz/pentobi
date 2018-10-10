@@ -1,5 +1,5 @@
-Version 15.UNKNOWN (master)
-===========================
+Version 16.0 (10 Oct 2018)
+==========================
 
 * The desktop version of Pentobi now uses the same QtQuick-based GUI as
   the Android version, which makes the desktop version support all
@@ -43,28 +43,16 @@ Version 15.UNKNOWN (master)
   an ampersand to mark a mnemonic but a separate translation string for
   the mnemonic.
 
-Bug fixes:
+Bug fixes (both desktop and Android version of Pentobi 15.0):
+
+* Fixed bugs in handling AE (add empty) SGF property.
+
+Bug fixes (Android version of Pentobi 15.0):
 
 * Picking up a piece from board in setup mode sometimes switched piece
   instances in game variants with multiple instances per piece.
 * Workaround for a bug that made the analysis graph only partially visible
   on Android low-density devices (QTBUG-69102)
-
-
-Version 15.0.UNKNOWN (v15-fixes)
-================================
-
-General:
-
-* Fixed bugs in handling AE (add empty) SGF property.
-
-Desktop version:
-
-* Avoid duplicate menu mnemonics and fixed minor errors in translations.
-* Thumbnailer did not paint junctions of setup pieces in Nexos and Callisto.
-
-Android version:
-
 * Program could hang or crash if quit during running game analysis.
 * Board was not updated if it became empty after opening a file failed.
 * Running computer move was not aborted after opening a file failed.
