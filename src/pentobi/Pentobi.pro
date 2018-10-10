@@ -20,8 +20,11 @@ android {
 
 INCLUDEPATH += ..
 CONFIG += c++14
-# Enable qtquickcompiler once QTBUG-70976 is fixed
-#CONFIG += qtquickcompiler
+# Currently we use qtquickcompiler only for Qt 5.11 because of QTBUG-70976
+# in Qt 5.12beta
+equals(QT_MAJOR_VERSION, 5):equals(QT_MINOR_VERSION, 11) {
+    CONFIG += qtquickcompiler
+}
 DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x051100
 DEFINES += QT_NO_NARROWING_CONVERSIONS_IN_CONNECT
