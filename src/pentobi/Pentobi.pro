@@ -20,7 +20,8 @@ android {
 
 INCLUDEPATH += ..
 CONFIG += c++14
-CONFIG += qtquickcompiler
+# Enable qtquickcompiler once QTBUG-70976 is fixed
+#CONFIG += qtquickcompiler
 DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x051100
 DEFINES += QT_NO_NARROWING_CONVERSIONS_IN_CONNECT
