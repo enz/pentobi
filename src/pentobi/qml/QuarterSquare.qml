@@ -24,6 +24,8 @@ Item {
 
             Image {
                 source: imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 // Don't set antialiasing, vertex antialiasing causes unwanted
                 // seams between edges of the quarter squares
@@ -84,6 +86,8 @@ Item {
 
             Image {
                 source: imageNameBottom
+                width: imageSourceSize.width
+                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 // Don't set antialiasing, see above
                 antialiasing: false
