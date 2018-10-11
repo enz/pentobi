@@ -19,6 +19,8 @@ Item {
 
             Image {
                 source: isDownward ? imageNameDownward : imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
             }
@@ -52,6 +54,8 @@ Item {
 
             Image {
                 source: isDownward ? imageName : imageNameDownward
+                width: imageSourceSize.width
+                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 transform: [
@@ -105,6 +109,8 @@ Item {
 
             Image {
                 source: isDownward ? imageNameDownward : imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 transform: Rotation {
@@ -152,6 +158,8 @@ Item {
 
             Image {
                 source: isDownward ? imageName : imageNameDownward
+                width: imageSourceSize.width
+                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 rotation: -180
@@ -187,6 +195,8 @@ Item {
 
             Image {
                 source: isDownward ? imageNameDownward : imageName
+                width: imageSourceSize.width
+                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 transform: Rotation {
@@ -234,6 +244,8 @@ Item {
 
             Image {
                 source: isDownward ? imageName : imageNameDownward
+                width: imageSourceSize.width
+                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 transform: [
