@@ -1,7 +1,7 @@
-Version 16.0.x (v16-fixes)
-========================
+Version 16.1 (11 Oct 2018)
+==========================
 
-* Fixed minor alignment issues of pieces on board.
+* Fixed alignment issues of pieces on board if high-DPI scaling is used.
 
 
 Version 16.0 (10 Oct 2018)
