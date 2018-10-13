@@ -7,7 +7,9 @@ Version 16.x (master)
 Version 16.1.x (v16-fixes)
 ==========================
 
-* Status message was not shown after Export/ASCII Art saved file.
+* Status message was not shown after successful Export/ASCII Art and
+  Android Media Scanner was not informed to make the saved file
+  immediately visible to MTP-connected devices.
 
 
 Version 16.1 (11 Oct 2018)
