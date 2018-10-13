@@ -201,7 +201,8 @@ function deleteAllVarNoVerify() {
 function exportAsciiArt(fileUrl) {
     if (! checkStoragePermission())
         return
-    if (! gameModel.saveAsciiArt(getFileFromUrl(fileUrl)))
+    var file = getFileFromUrl(fileUrl)
+    if (! gameModel.saveAsciiArt(file))
         showInfo(qsTr("Save failed.") + "\n" + gameModel.getError())
     else {
         androidUtils.scanFile(file)
