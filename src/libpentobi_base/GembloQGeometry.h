@@ -11,8 +11,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** Geometry for the board game GembloQ.

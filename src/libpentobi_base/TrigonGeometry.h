@@ -11,8 +11,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** Geometry as used in the game Blokus Trigon.
