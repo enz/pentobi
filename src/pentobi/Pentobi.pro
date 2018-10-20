@@ -192,6 +192,7 @@ HEADERS += \
     ../libpentobi_base/BoardUpdater.h \
     ../libpentobi_base/BoardUtil.h \
     ../libpentobi_base/Book.h \
+    ../libpentobi_base/CallistoGeometry.h \
     ../libpentobi_base/Color.h \
     ../libpentobi_base/ColorMap.h \
     ../libpentobi_base/ColorMove.h \
