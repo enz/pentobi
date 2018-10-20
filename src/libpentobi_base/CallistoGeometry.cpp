@@ -12,6 +12,7 @@
 
 namespace libpentobi_base {
 
+using namespace std;
 using libboardgame_base::CoordPoint;
 
 //-----------------------------------------------------------------------------
