@@ -185,10 +185,10 @@ void paintBoardCallisto(QPainter& painter, qreal width, qreal height,
     {
         auto x = geo.get_x(p);
         auto y = geo.get_y(p);
+        painter.fillRect(QRectF(x * gridWidth, y * gridHeight, gridWidth,
+                                gridHeight), base);
         if (CallistoGeometry::is_center_section(x, y, nuColors))
         {
-            painter.fillRect(QRectF(x * gridWidth, y * gridHeight, gridWidth,
-                                    gridHeight), base);
             painter.fillRect(QRectF(x * gridWidth + 0.05 * gridWidth,
                                     y * gridHeight + 0.05 * gridHeight,
                                     0.9 * gridWidth, 0.9 * gridHeight),
@@ -199,13 +199,9 @@ void paintBoardCallisto(QPainter& painter, qreal width, qreal height,
                              centerLight);
         }
         else
-        {
-            painter.fillRect(QRectF(x * gridWidth, y * gridHeight, gridWidth,
-                                    gridHeight), base);
             paintSquareFrame(painter, x * gridWidth + 0.05 * gridWidth,
                              y * gridHeight + 0.05 * gridHeight,
                              0.9 * gridWidth, 0.9 * gridHeight, dark, light);
-        }
     }
 }
 
