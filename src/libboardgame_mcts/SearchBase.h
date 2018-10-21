@@ -991,7 +991,7 @@ string SearchBase<S, M, R>::get_info() const
 {
     auto& root = m_tree.get_root();
     if (m_threads.empty())
-        return string();
+        return {};
     auto& thread_state = m_threads[0]->thread_state;
     ostringstream s;
     s << fixed << setprecision(2) << "Val: " << get_root_val().get_mean()
@@ -1016,7 +1016,7 @@ string SearchBase<S, M, R>::get_info() const
 template<class S, class M, class R>
 string SearchBase<S, M, R>::get_info_ext() const
 {
-    return string();
+    return {};
 }
 
 template<class S, class M, class R>

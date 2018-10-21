@@ -141,10 +141,10 @@ void Search::set_default_param(Variant variant)
 string Search::get_info() const
 {
     if (get_nu_simulations() == 0)
-        return string();
+        return {};
     auto& root = get_tree().get_root();
     if (! root.has_children())
-        return string();
+        return {};
     ostringstream s;
     s << SearchBase::get_info()
       << "Mov: " << root.get_nu_children() << ", ";

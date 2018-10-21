@@ -70,7 +70,7 @@ auto CallistoGeometry::get_adj_coord(int x, int y) const -> AdjCoordList
 {
     LIBBOARDGAME_UNUSED(x);
     LIBBOARDGAME_UNUSED(y);
-    return AdjCoordList();
+    return {};
 }
 
 auto CallistoGeometry::get_diag_coord(int x, int y) const -> DiagCoordList
