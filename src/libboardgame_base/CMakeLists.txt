@@ -1,4 +1,4 @@
-set(boardgame_base_SRCS
+add_library(boardgame_base STATIC
     CoordPoint.h
     CoordPoint.cpp
     Geometry.h
@@ -17,17 +17,13 @@ set(boardgame_base_SRCS
     Transform.h
     Transform.cpp
     )
-if (PENTOBI_BUILD_GTP)
-    set(boardgame_base_SRCS ${boardgame_base_SRCS}
+target_link_libraries(boardgame_base boardgame_util)
+
+if(PENTOBI_BUILD_GTP)
+    target_sources(boardgame_base PRIVATE
         Engine.cpp
         Engine.h
         )
-endif()
-
-add_library(boardgame_base STATIC ${boardgame_base_SRCS})
-
-target_link_libraries(boardgame_base boardgame_util)
-if (PENTOBI_BUILD_GTP)
     target_link_libraries(boardgame_base boardgame_gtp)
 endif()
 

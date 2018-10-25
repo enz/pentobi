@@ -1,4 +1,4 @@
-set(pentobi_base_SRCS
+add_library(pentobi_base STATIC
   BoardConst.h
   BoardConst.cpp
   Board.h
@@ -72,15 +72,12 @@ set(pentobi_base_SRCS
   Variant.cpp
 )
 
-if (PENTOBI_BUILD_GTP)
-  set(pentobi_base_SRCS ${pentobi_base_SRCS}
-    Engine.cpp
-    Engine.h
-  )
+if(PENTOBI_BUILD_GTP)
+    target_sources(pentobi_base PRIVATE
+        Engine.cpp
+        Engine.h
+        )
 endif()
 
-add_library(pentobi_base STATIC ${pentobi_base_SRCS})
-
-target_include_directories(pentobi_base PUBLIC ..)
-
 target_link_libraries(pentobi_base boardgame_sgf boardgame_base)
+target_include_directories(pentobi_base PUBLIC ..)
