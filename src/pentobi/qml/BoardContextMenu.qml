@@ -15,13 +15,11 @@ Pentobi.Menu {
     onOpened: _annotation = gameModel.getMoveAnnotation(moveNumber)
 
     Pentobi.MenuItem {
-        width: parent.width
         enabled: moveNumber !== gameModel.moveNumber && ! isRated
         text: qsTr("Go to Move %1").arg(moveNumber)
         onTriggered: gameModel.gotoMove(moveNumber)
     }
     Pentobi.MenuItem {
-        width: parent.width
         text: _annotation === "" ?
                   qsTr("Move Annotation") :
                   //: The argument is the annotation symbol for the current move
