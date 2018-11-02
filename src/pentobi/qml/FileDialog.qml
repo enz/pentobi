@@ -10,7 +10,6 @@ import QtQuick.Layouts 1.1
 import Qt.labs.folderlistmodel 2.11
 import "." as Pentobi
 import "Main.js" as Logic
-import "Controls.js" as PentobiControls
 
 Pentobi.Dialog {
     id: root

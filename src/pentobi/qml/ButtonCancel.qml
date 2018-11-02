@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick.Controls 2.2
-import "Controls.js" as PentobiControls
 
 Button {
     text: qsTr("Cancel")
