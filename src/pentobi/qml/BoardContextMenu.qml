@@ -20,7 +20,6 @@ Pentobi.Menu {
     }
 
     Pentobi.MenuItem {
-        width: parent.width
         enabled: moveNumber !== gameModel.moveNumber && ! isRated
         text: qsTr("Go to Move %1").arg(moveNumber)
         onTriggered: gameModel.gotoMove(moveNumber)
@@ -28,7 +27,6 @@ Pentobi.Menu {
     Pentobi.MenuItem {
         id: itemAnnotation
 
-        width: parent.width
         onTriggered: {
             var dialog = moveAnnotationDialog.get()
             dialog.moveNumber = moveNumber
