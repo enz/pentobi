@@ -35,8 +35,8 @@ Window {
     // Note that Android doesn't actually support multiple windows, but using
     // WebView in a window works around a bug related to QTBUG-62409, which
     // makes WebView consume Back button events, so we cannot close the help
-    // window with the back key. But we need to detroy the window after closing
-    // otherwise it doesn't show when made visible again.
+    // window with the back key. But we need to destroy the window after
+    // closing, otherwise it doesn't show when made visible again.
     onClosing: if (isAndroid) helpWindow.source = ""
 
     WebView {
