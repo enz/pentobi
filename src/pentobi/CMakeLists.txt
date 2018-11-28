@@ -6,9 +6,7 @@ find_package(Qt5QuickControls2 5.11 REQUIRED)
 find_package(Qt5LinguistTools 5.11 REQUIRED)
 find_package(Qt5Svg 5.11 REQUIRED)
 find_package(Qt5WebView 5.11 REQUIRED)
-
-# Uncomment once QTBUG-70976 is fixed
-#find_package(Qt5QuickCompiler REQUIRED)
+find_package(Qt5QuickCompiler REQUIRED)
 
 qt5_add_translation(pentobi_QM
     qml/i18n/qml_de.ts
@@ -31,8 +29,7 @@ qt5_add_resources(pentobi_RC_SRCS
     ../../doc/help.qrc
     )
 
-# Replace with qtquick_compiler_add_resources once QTBUG-70976 is fixed
-qt5_add_resources(pentobi_RC_SRCS_QML
+qtquick_compiler_add_resources(pentobi_RC_SRCS_QML
     resources.qrc
     resources_desktop.qrc
     qml/themes/themes.qrc
