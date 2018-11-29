@@ -9,8 +9,8 @@ add_library(boardgame_sys STATIC
 )
 
 check_include_files(sys/sysctl.h HAVE_SYS_SYSCTL_H)
-if(HAVE_UNISTD_H)
-    target_compile_definitions(boardgame_sys PRIVATE HAVE_UNISTD_H)
+if(HAVE_SYS_SYSCTL_H)
+    target_compile_definitions(boardgame_sys PRIVATE HAVE_SYS_SYSCTL_H)
 endif()
 check_include_files(sys/times.h HAVE_SYS_TIMES_H)
 if(HAVE_SYS_TIMES_H)
