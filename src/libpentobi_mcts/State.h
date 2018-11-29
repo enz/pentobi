@@ -366,7 +366,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
     {
         if (log_simulations)
             LIBBOARDGAME_LOG("Playing last good reply 2");
-        mv = PlayerMove<Move>(player, lgr2);
+        mv = PlayerMove(player, lgr2);
         return true;
     }
     Move lgr1 = lgr.get_lgr1(player, last);
@@ -374,7 +374,7 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
     {
         if (log_simulations)
             LIBBOARDGAME_LOG("Playing last good reply 1");
-        mv = PlayerMove<Move>(player, lgr1);
+        mv = PlayerMove(player, lgr1);
         return true;
     }
     return gen_playout_move_full(mv);
