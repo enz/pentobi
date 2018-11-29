@@ -45,7 +45,7 @@ public:
         game variant. */
     static const unsigned max_move_lists_sum_length =
             adj_status_nu_adj == 5 ? 2356736 : 2628840;
-    static_assert(adj_status_nu_adj == 5 || adj_status_nu_adj == 6, "");
+    static_assert(adj_status_nu_adj == 5 || adj_status_nu_adj == 6);
 
     /** The range of values for the adjacent status. */
     static const unsigned nu_adj_status = 1 << adj_status_nu_adj;
@@ -99,7 +99,7 @@ private:
         CompressedRange(unsigned begin, unsigned size)
         {
             LIBBOARDGAME_ASSERT(begin + size <= max_move_lists_sum_length);
-            static_assert(max_move_lists_sum_length < (1 << 24), "");
+            static_assert(max_move_lists_sum_length < (1 << 24));
             LIBBOARDGAME_ASSERT(size < (1 << 8));
             m_val = size;
             if (size != 0)

@@ -583,7 +583,7 @@ void State::init_gamma()
     const auto piece_set = bd.get_piece_set();
     if (piece_set == PieceSet::gembloq)
     {
-        static_assert(PlayoutFeatures::max_local + 1 >= 20, "");
+        static_assert(PlayoutFeatures::max_local + 1 >= 20);
         m_gamma_local[0] = 1;
         m_gamma_local[1] = 1e6f;
         m_gamma_local[2] = 1e6f;
@@ -609,7 +609,7 @@ void State::init_gamma()
     }
     else if (piece_set == PieceSet::trigon)
     {
-        static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
+        static_assert(PlayoutFeatures::max_local + 1 >= 5);
         m_gamma_local[0] = 1;
         m_gamma_local[1] = 1e6f;
         m_gamma_local[2] = 1e12f;
@@ -620,7 +620,7 @@ void State::init_gamma()
     }
     else if (piece_set == PieceSet::nexos)
     {
-        static_assert(PlayoutFeatures::max_local + 1 >= 4, "");
+        static_assert(PlayoutFeatures::max_local + 1 >= 4);
         m_gamma_local[0] = 1;
         m_gamma_local[1] = 1e6f;
         m_gamma_local[2] = 1e12f;
@@ -630,7 +630,7 @@ void State::init_gamma()
     }
     else
     {
-        static_assert(PlayoutFeatures::max_local + 1 >= 5, "");
+        static_assert(PlayoutFeatures::max_local + 1 >= 5);
         m_gamma_local[0] = 1;
         m_gamma_local[1] = 1e6f;
         m_gamma_local[2] = 1e12f;

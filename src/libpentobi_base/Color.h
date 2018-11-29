@@ -154,7 +154,7 @@ inline Color::IntType Color::to_int() const
 template<class FUNCTION>
 inline void for_each_color(FUNCTION f)
 {
-    static_assert(Color::range == 4, "");
+    static_assert(Color::range == 4);
     f(Color(0));
     f(Color(1));
     f(Color(2));

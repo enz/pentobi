@@ -35,7 +35,7 @@ class ArrayList
 public:
     using IntType = I;
 
-    static_assert(numeric_limits<IntType>::is_integer, "");
+    static_assert(numeric_limits<IntType>::is_integer);
 
     static const IntType max_size = M;
 

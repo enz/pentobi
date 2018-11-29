@@ -1607,7 +1607,7 @@ void GameModel::updateFileInfo(const QString& file)
 
 void GameModel::updateGameInfo()
 {
-    static_assert(Color::range == 4, "");
+    static_assert(Color::range == 4);
     setPlayerName0(decode(m_game.get_player_name(Color(0))));
     setPlayerName1(decode(m_game.get_player_name(Color(1))));
     if (m_nuPlayers > 2)

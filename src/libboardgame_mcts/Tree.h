@@ -450,7 +450,7 @@ void Tree<N>::swap(Tree& tree)
         unique_ptr<ThreadStorage> m_thread_storage;
         unique_ptr<Node[]> m_nodes;
     };
-    static_assert(sizeof(Tree) == sizeof(Dummy), "");
+    static_assert(sizeof(Tree) == sizeof(Dummy));
     std::swap(m_nu_threads, tree.m_nu_threads);
     std::swap(m_max_nodes, tree.m_max_nodes);
     std::swap(m_nodes_per_thread, tree.m_nodes_per_thread);

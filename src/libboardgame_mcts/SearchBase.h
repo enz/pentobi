@@ -196,7 +196,7 @@ public:
     static const size_t lgr_hash_table_size =
             SearchParamConst::lgr_hash_table_size;
 
-    static_assert(! SearchParamConst::use_lgr || lgr_hash_table_size > 0, "");
+    static_assert(! SearchParamConst::use_lgr || lgr_hash_table_size > 0);
 
 
     /** Constructor.
@@ -691,7 +691,7 @@ bool SearchBase<S, M, R>::check_abort_expensive(
         LIBBOARDGAME_LOG_THREAD(thread_state, "Search aborted");
         return true;
     }
-    static_assert(numeric_limits<Float>::radix == 2, "");
+    static_assert(numeric_limits<Float>::radix == 2);
     auto count = m_tree.get_root().get_visit_count();
     if (count >= (size_t(1) << numeric_limits<Float>::digits) - 1)
     {
@@ -1275,7 +1275,7 @@ inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
     auto parent_count = node.get_visit_count();
     Float bias_factor = m_exploration_constant * sqrt(parent_count);
-    static_assert(SearchParamConst::child_min_count > 0, "");
+    static_assert(SearchParamConst::child_min_count > 0);
     auto bias_limit =
             bias_factor * SearchParamConst::max_move_prior
             / SearchParamConst::child_min_count;

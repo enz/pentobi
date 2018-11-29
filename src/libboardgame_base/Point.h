@@ -43,11 +43,9 @@ public:
 
     static const unsigned max_height = W;
 
-    static_assert(numeric_limits<I>::is_integer, "");
-
-    static_assert(! numeric_limits<I>::is_signed, "");
-
-    static_assert(range_onboard <= max_width * max_height, "");
+    static_assert(numeric_limits<I>::is_integer);
+    static_assert(! numeric_limits<I>::is_signed);
+    static_assert(range_onboard <= max_width * max_height);
 
     static const unsigned range = range_onboard + 1;
 

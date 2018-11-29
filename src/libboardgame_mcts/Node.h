@@ -161,7 +161,7 @@ void Node<M, F, MT>::copy_data_from(const Node& node)
         Move m_move;
         NodeIdx m_first_child;
     };
-    static_assert(sizeof(Node) == sizeof(Dummy), "");
+    static_assert(sizeof(Node) == sizeof(Dummy));
 
     m_move = node.m_move;
     m_move_prior = node.m_move_prior;
