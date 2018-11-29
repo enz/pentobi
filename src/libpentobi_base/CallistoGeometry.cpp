@@ -8,7 +8,6 @@
 
 #include <map>
 #include <memory>
-#include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
 
@@ -66,10 +65,9 @@ const CallistoGeometry& CallistoGeometry::get(unsigned nu_colors)
     return *s_geometry.insert(make_pair(nu_colors, geometry)).first->second;
 }
 
-auto CallistoGeometry::get_adj_coord(int x, int y) const -> AdjCoordList
+auto CallistoGeometry::get_adj_coord(
+        [[maybe_unused]] int x, [[maybe_unused]] int y) const -> AdjCoordList
 {
-    LIBBOARDGAME_UNUSED(x);
-    LIBBOARDGAME_UNUSED(y);
     return {};
 }
 
@@ -93,10 +91,9 @@ unsigned CallistoGeometry::get_period_y() const
     return 1;
 }
 
-unsigned CallistoGeometry::get_point_type(int x, int y) const
+unsigned CallistoGeometry::get_point_type(
+        [[maybe_unused]] int x, [[maybe_unused]] int y) const
 {
-    LIBBOARDGAME_UNUSED(x);
-    LIBBOARDGAME_UNUSED(y);
     return 0;
 }
 

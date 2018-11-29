@@ -10,7 +10,6 @@
 #include <cstdio>
 #include <fstream>
 #include "libboardgame_util/Assert.h"
-#include "libboardgame_util/Unused.h"
 
 namespace libboardgame_sgf {
 
@@ -29,11 +28,9 @@ bool is_ascii_space(int c)
 
 //-----------------------------------------------------------------------------
 
-void Reader::consume_char(char expected)
+void Reader::consume_char([[maybe_unused]] char expected)
 {
-    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(expected);
-    char c = read_char();
-    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(c);
+    [[maybe_unused]] char c = read_char();
     LIBBOARDGAME_ASSERT(c == expected);
 }
 
@@ -43,16 +40,14 @@ void Reader::consume_whitespace()
         m_in->get();
 }
 
-void Reader::on_begin_node(bool is_root)
+void Reader::on_begin_node([[maybe_unused]] bool is_root)
 {
     // Default implementation does nothing
-    LIBBOARDGAME_UNUSED(is_root);
 }
 
-void Reader::on_begin_tree(bool is_root)
+void Reader::on_begin_tree([[maybe_unused]] bool is_root)
 {
     // Default implementation does nothing
-    LIBBOARDGAME_UNUSED(is_root);
 }
 
 void Reader::on_end_node()
@@ -60,17 +55,15 @@ void Reader::on_end_node()
     // Default implementation does nothing
 }
 
-void Reader::on_end_tree(bool is_root)
+void Reader::on_end_tree([[maybe_unused]] bool is_root)
 {
     // Default implementation does nothing
-    LIBBOARDGAME_UNUSED(is_root);
 }
 
-void Reader::on_property(const string& id, const vector<string>& values)
+void Reader::on_property([[maybe_unused]] const string& id,
+                         [[maybe_unused]] const vector<string>& values)
 {
     // Default implementation does nothing
-    LIBBOARDGAME_UNUSED(id);
-    LIBBOARDGAME_UNUSED(values);
 }
 
 char Reader::peek()

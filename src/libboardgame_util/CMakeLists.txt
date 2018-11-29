@@ -28,7 +28,6 @@ add_library(boardgame_util STATIC
   Timer.cpp
   TimeSource.h
   TimeSource.cpp
-  Unused.h
   WallTimeSource.h
   WallTimeSource.cpp
 )

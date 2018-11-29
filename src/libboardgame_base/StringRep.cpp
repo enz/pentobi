@@ -9,7 +9,6 @@
 #include <cstdio>
 #include <iostream>
 #include "libboardgame_util/StringUtil.h"
-#include "libboardgame_util/Unused.h"
 
 namespace libboardgame_base {
 
@@ -59,10 +58,10 @@ bool StdStringRep::read(string::const_iterator begin,
     return true;
 }
 
-void StdStringRep::write(ostream& out, unsigned x, unsigned y, unsigned width,
-                         unsigned height) const
+void StdStringRep::write(
+        ostream& out, unsigned x, unsigned y, [[maybe_unused]] unsigned width,
+        unsigned height) const
 {
-    LIBBOARDGAME_UNUSED(width);
     out << get_letter_coord(x) << (height - y);
 }
 

@@ -54,8 +54,7 @@ void set_piece_considered(const BoardConst& bc, const char* name,
                           bool is_considered = true)
 {
     Piece piece;
-    bool found = bc.get_piece_by_name(name, piece);
-    LIBBOARDGAME_UNUSED_IF_NOT_DEBUG(found);
+    [[maybe_unused]] bool found = bc.get_piece_by_name(name, piece);
     LIBBOARDGAME_ASSERT(found);
     is_piece_considered[piece] = is_considered;
 }

@@ -10,7 +10,6 @@
 #include <map>
 #include <memory>
 #include "Geometry.h"
-#include "libboardgame_util/Unused.h"
 
 namespace libboardgame_base {
 
@@ -106,18 +105,16 @@ unsigned RectGeometry<P>::get_period_y() const
 }
 
 template<class P>
-unsigned RectGeometry<P>::get_point_type(int x, int y) const
+unsigned RectGeometry<P>::get_point_type(
+        [[maybe_unused]] int x, [[maybe_unused]] int y) const
 {
-    LIBBOARDGAME_UNUSED(x);
-    LIBBOARDGAME_UNUSED(y);
     return 0;
 }
 
 template<class P>
-bool RectGeometry<P>::init_is_onboard(unsigned x, unsigned y) const
+bool RectGeometry<P>::init_is_onboard(
+        [[maybe_unused]] unsigned x, [[maybe_unused]] unsigned y) const
 {
-    LIBBOARDGAME_UNUSED(x);
-    LIBBOARDGAME_UNUSED(y);
     return true;
 }
 

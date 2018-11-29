@@ -17,10 +17,6 @@
 #include "Log.h"
 #endif
 
-#ifdef LIBBOARDGAME_DISABLE_LOG
-#include "Unused.h"
-#endif
-
 namespace libboardgame_util {
 
 using namespace std;
@@ -53,16 +49,12 @@ AssertionHandler::~AssertionHandler()
 
 #ifdef LIBBOARDGAME_DEBUG
 
-void handle_assertion(const char* expression, const char* file, int line)
+void handle_assertion(
+        [[maybe_unused]] const char* expression,
+        [[maybe_unused]] const char* file, [[maybe_unused]] int line)
 {
     static bool is_during_handle_assertion = false;
-#ifdef LIBBOARDGAME_DISABLE_LOG
-    LIBBOARDGAME_UNUSED(expression);
-    LIBBOARDGAME_UNUSED(file);
-    LIBBOARDGAME_UNUSED(line);
-#else
     LIBBOARDGAME_LOG(file, ":", line, ": Assertion '", expression, "' failed");
-#endif
     flush_log();
     if (! is_during_handle_assertion)
     {

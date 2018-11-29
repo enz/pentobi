@@ -8,7 +8,6 @@
 #define LIBBOARDGAME_MCTS_ATOMIC_H
 
 #include <atomic>
-#include "libboardgame_util/Unused.h"
 
 namespace libboardgame_mcts {
 
@@ -37,15 +36,13 @@ struct Atomic<T, false>
         return *this;
     }
 
-    T load(memory_order order = memory_order_seq_cst) const
+    T load([[maybe_unused]] memory_order order = memory_order_seq_cst) const
     {
-        LIBBOARDGAME_UNUSED(order);
         return val;
     }
 
-    void store(T t, memory_order order = memory_order_seq_cst)
+    void store(T t, [[maybe_unused]] memory_order order = memory_order_seq_cst)
     {
-        LIBBOARDGAME_UNUSED(order);
         val = t;
     }
 

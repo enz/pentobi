@@ -7,7 +7,6 @@
 #include "NexosGeometry.h"
 
 #include <memory>
-#include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
 
@@ -30,10 +29,9 @@ const NexosGeometry& NexosGeometry::get()
     return *s_geometry;
 }
 
-auto NexosGeometry::get_adj_coord(int x, int y) const -> AdjCoordList
+auto NexosGeometry::get_adj_coord(
+        [[maybe_unused]] int x, [[maybe_unused]] int y) const -> AdjCoordList
 {
-    LIBBOARDGAME_UNUSED(x);
-    LIBBOARDGAME_UNUSED(y);
     return {};
 }
 

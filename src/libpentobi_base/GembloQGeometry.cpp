@@ -9,7 +9,6 @@
 #include <map>
 #include <memory>
 #include "libboardgame_util/MathUtil.h"
-#include "libboardgame_util/Unused.h"
 
 namespace libpentobi_base {
 

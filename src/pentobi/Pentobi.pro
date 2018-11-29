@@ -170,7 +170,6 @@ HEADERS += \
     ../libboardgame_util/TimeIntervalChecker.h \
     ../libboardgame_util/Timer.h \
     ../libboardgame_util/TimeSource.h \
-    ../libboardgame_util/Unused.h \
     ../libboardgame_util/WallTimeSource.h \
     ../libboardgame_sgf/Reader.h \
     ../libboardgame_sgf/SgfError.h \

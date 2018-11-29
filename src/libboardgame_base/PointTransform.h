@@ -9,7 +9,6 @@
 
 #include <cmath>
 #include "Geometry.h"
-#include "libboardgame_util/Unused.h"
 
 namespace libboardgame_base {
 
@@ -43,9 +42,9 @@ public:
 
 
 template<class P>
-P PointTransfIdent<P>::get_transformed(Point p, const Geometry<P>& geo) const
+P PointTransfIdent<P>::get_transformed(
+        Point p, [[maybe_unused]] const Geometry<P>& geo) const
 {
-    LIBBOARDGAME_UNUSED(geo);
     return p;
 }
 

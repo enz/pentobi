@@ -27,7 +27,6 @@
 #include "libboardgame_util/StringUtil.h"
 #include "libboardgame_util/TimeIntervalChecker.h"
 #include "libboardgame_util/Timer.h"
-#include "libboardgame_util/Unused.h"
 #include "libboardgame_sys/Compiler.h"
 
 namespace libboardgame_mcts {
@@ -669,11 +668,9 @@ template<class S, class M, class R>
 SearchBase<S, M, R>::~SearchBase() = default; // Non-inline to avoid GCC -Winline warning
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::check_abort(const ThreadState& thread_state) const
+bool SearchBase<S, M, R>::check_abort(
+        [[maybe_unused]] const ThreadState& thread_state) const
 {
-#ifdef LIBBOARDGAME_DISABLE_LOG
-    LIBBOARDGAME_UNUSED(thread_state);
-#endif
     if (m_max_count > 0 && m_tree.get_root().get_visit_count() >= m_max_count)
     {
         LIBBOARDGAME_LOG_THREAD(thread_state, "Maximum count reached");
@@ -736,12 +733,9 @@ bool SearchBase<S, M, R>::check_abort_expensive(
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::check_cannot_change(ThreadState& thread_state,
-                                              Float remaining) const
+bool SearchBase<S, M, R>::check_cannot_change(
+        [[maybe_unused]] ThreadState& thread_state, Float remaining) const
 {
-#ifdef LIBBOARDGAME_DISABLE_LOG
-    LIBBOARDGAME_UNUSED(thread_state);
-#endif
     // select_final() selects move with highest number of wins.
     Float max_wins = 0;
     Float second_max = 0;
@@ -779,9 +773,9 @@ bool SearchBase<S, M, R>::check_cannot_change(ThreadState& thread_state,
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::check_followup(ArrayList<Move, max_moves>& sequence)
+bool SearchBase<S, M, R>::check_followup(
+        [[maybe_unused]] ArrayList<Move, max_moves>& sequence)
 {
-    LIBBOARDGAME_UNUSED(sequence);
     return false;
 }
 
@@ -923,10 +917,9 @@ inline auto SearchBase<S, M, R>::get_tree() const -> const Tree&
 }
 
 template<class S, class M, class R>
-void SearchBase<S, M, R>::on_start_search(bool is_followup)
+void SearchBase<S, M, R>::on_start_search([[maybe_unused]] bool is_followup)
 {
     // Default implementation does nothing
-    LIBBOARDGAME_UNUSED(is_followup);
 }
 
 template<class S, class M, class R>
@@ -1020,13 +1013,10 @@ string SearchBase<S, M, R>::get_info_ext() const
 }
 
 template<class S, class M, class R>
-bool SearchBase<S, M, R>::prune(TimeSource& time_source, double time,
-                                Float prune_min_count,
-                                Float& new_prune_min_count)
+bool SearchBase<S, M, R>::prune(
+        TimeSource& time_source, [[maybe_unused]] double time,
+        Float prune_min_count, Float& new_prune_min_count)
 {
-#ifdef LIBBOARDGAME_DISABLE_LOG
-    LIBBOARDGAME_UNUSED(time);
-#endif
     Timer timer(time_source);
     m_tmp_tree.clear();
     m_tree.copy_subtree(m_tmp_tree, m_tmp_tree.get_root(), m_tree.get_root(),

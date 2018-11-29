@@ -54,10 +54,9 @@ AnalyzeGameModel::~AnalyzeGameModel()
 void AnalyzeGameModel::asyncRun(const Game* game, Search* search)
 {
     auto progressCallback =
-        [&](unsigned movesAnalyzed, unsigned totalMoves)
+        [&]([[maybe_unused]] unsigned movesAnalyzed,
+            [[maybe_unused]] unsigned totalMoves)
         {
-            Q_UNUSED(movesAnalyzed);
-            Q_UNUSED(totalMoves);
             // Use invokeMethod() because callback runs in different thread
             QMetaObject::invokeMethod(this, "updateElements",
                                       Qt::BlockingQueuedConnection);

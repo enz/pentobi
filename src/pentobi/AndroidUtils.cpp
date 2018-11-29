@@ -18,18 +18,17 @@
 
 //-----------------------------------------------------------------------------
 
-bool AndroidUtils::checkPermission(const QString& permission)
+bool AndroidUtils::checkPermission([[maybe_unused]] const QString& permission)
 {
 #ifdef Q_OS_ANDROID
     return QtAndroid::checkPermission(permission) ==
            QtAndroid::PermissionResult::Granted;
 #else
-    Q_UNUSED(permission);
     return true;
 #endif
 }
 
-QUrl AndroidUtils::extractHelp(const QString& language)
+QUrl AndroidUtils::extractHelp([[maybe_unused]] const QString& language)
 {
 #ifdef Q_OS_ANDROID
     if (language != QStringLiteral("C"))
@@ -69,7 +68,6 @@ QUrl AndroidUtils::extractHelp(const QString& language)
     auto file = QFileInfo(dirPath + "/index.html").absoluteFilePath();
     return QUrl::fromLocalFile(file);
 #else
-    Q_UNUSED(language);
     return {};
 #endif
 }
@@ -109,7 +107,7 @@ float AndroidUtils::getDensity()
 }
 #endif
 
-void AndroidUtils::scanFile(const QString& pathname)
+void AndroidUtils::scanFile([[maybe_unused]] const QString& pathname)
 {
 #ifdef Q_OS_ANDROID
     // Corresponding Java code:
@@ -141,8 +139,6 @@ void AndroidUtils::scanFile(const QString& pathname)
     QtAndroid::androidActivity().callMethod<void>(
                 "sendBroadcast", "(Landroid/content/Intent;)V",
                 intent.object());
-#else
-    Q_UNUSED(pathname);
 #endif
 }
 

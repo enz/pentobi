@@ -492,9 +492,8 @@ inline void State::play_playout(Move mv)
         LIBBOARDGAME_LOG(m_bd);
 }
 
-inline bool State::skip_rave(Move mv) const
+inline bool State::skip_rave([[maybe_unused]] Move mv) const
 {
-    LIBBOARDGAME_UNUSED(mv);
     return false;
 }
 

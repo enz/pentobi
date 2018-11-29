@@ -850,11 +850,8 @@ void State::start_search()
     init_gamma();
 }
 
-void State::start_simulation(size_t n)
+void State::start_simulation([[maybe_unused]] size_t n)
 {
-#ifdef LIBBOARDGAME_DISABLE_LOG
-    LIBBOARDGAME_UNUSED(n);
-#endif
     if (log_simulations)
         LIBBOARDGAME_LOG("=================================================\n",
                          "Simulation ", n, "\n",

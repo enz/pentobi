@@ -183,9 +183,9 @@ private:
 };
 
 template<typename N>
-inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
-                                           Float child_min_count,
-                                           Float max_move_prior)
+inline Tree<N>::NodeExpander::NodeExpander(
+        unsigned thread_id, Tree& tree, [[maybe_unused]] Float child_min_count,
+        [[maybe_unused]] Float max_move_prior)
     : m_thread_storage(tree.m_thread_storage[thread_id]),
       m_first_child(m_thread_storage.next),
       m_best_child(nullptr)
@@ -194,9 +194,6 @@ inline Tree<N>::NodeExpander::NodeExpander(unsigned thread_id, Tree& tree,
 #ifdef LIBBOARDGAME_DEBUG
     m_child_min_count = child_min_count;
     m_max_move_prior = max_move_prior;
-#else
-    LIBBOARDGAME_UNUSED(child_min_count);
-    LIBBOARDGAME_UNUSED(max_move_prior);
 #endif
 }
 
