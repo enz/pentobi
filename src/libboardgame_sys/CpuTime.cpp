@@ -10,11 +10,11 @@
 #include <windows.h>
 #endif
 
-#ifdef HAVE_UNISTD_H
+#if __has_include(<unistd.h>)
 #include <unistd.h>
 #endif
 
-#ifdef HAVE_SYS_TIMES_H
+#if __has_include(<sys/times.h>)
 #include <sys/times.h>
 #endif
 
@@ -38,7 +38,7 @@ double cpu_time()
     user_int.LowPart = user.dwLowDateTime;
     user_int.HighPart = user.dwHighDateTime;
     return (sys_int.QuadPart + user_int.QuadPart) * 1e-7;
-#elif defined HAVE_UNISTD_H && defined HAVE_SYS_TIMES_H
+#elif __has_include(<unistd.h>) && __has_include(<sys/times.h>)
     static auto ticks_per_second = double(sysconf(_SC_CLK_TCK));
     struct tms buf;
     if (times(&buf) == clock_t(-1))
