@@ -173,7 +173,7 @@ void SgfNode::make_first_child()
 bool SgfNode::move_property_to_front(const string& id)
 {
     auto i = m_properties.begin();
-    forward_list<Property>::const_iterator previous = m_properties.end();
+    auto previous = m_properties.end();
     for ( ; i != m_properties.end(); ++i)
         if (i->id == id)
             break;
@@ -246,7 +246,7 @@ void SgfNode::move_up()
 
 bool SgfNode::remove_property(const string& id)
 {
-    forward_list<Property>::const_iterator previous = m_properties.end();
+    auto previous = m_properties.end();
     for (auto i = m_properties.begin() ; i != m_properties.end(); ++i)
         if (i->id == id)
         {
