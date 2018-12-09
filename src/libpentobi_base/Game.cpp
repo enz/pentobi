@@ -46,7 +46,7 @@ Color Game::get_to_play_default(const Game& game)
     auto& tree = game.get_tree();
     auto& bd = game.get_board();
     auto node = &game.get_current();
-    auto next = Color(0);
+    Color next(0);
     do
     {
         auto mv = tree.get_move(*node);
