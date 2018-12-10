@@ -518,7 +518,7 @@ private:
 
     TimeSource* m_time_source;
 
-    Float m_exploration_constant;
+    Float m_exploration_constant = 0;
 
     Timer m_timer;
 
@@ -657,7 +657,6 @@ template<class S, class M, class R>
 SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
     : m_tree(memory / 2, nu_threads),
       m_nu_threads(nu_threads),
-      m_exploration_constant(0),
       m_tmp_tree(memory / 2, m_nu_threads)
 #ifdef LIBBOARDGAME_DEBUG
       , m_assertion_handler(*this)
