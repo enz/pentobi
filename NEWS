@@ -7,6 +7,9 @@ Version 16.1.x (v16-fixes)
 * Fixed compilation on systems without sys/sysctl.h header.
 * Enabled QML compiler again, now that QTBUG-70976 has been fixed, which
   broke translations in Qt 5.12 beta releases.
+* Changed android.app_extract_android_style in Android manifest from none
+  to minimal, which is recommended for Quick Controls 2 apps (see
+  QTBUG-69810 and comments in QTBUG-71902)
 
 
 Version 16.1 (11 Oct 2018)
