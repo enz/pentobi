@@ -133,9 +133,7 @@ inline void Grid<P, T>::fill_all(const T& val)
 template<class P, typename T>
 void Grid<P, T>::memcpy_from(const Grid& grid, const Geometry& geo)
 {
-#if ! (__GNUC__ && __GNUC__ < 5)
     static_assert(is_trivially_copyable<T>::value);
-#endif
     memcpy(&m_a, grid.m_a, geo.get_range() * sizeof(T));
 }
 

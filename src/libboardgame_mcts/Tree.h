@@ -351,9 +351,7 @@ void Tree<N>::copy_recurse(Tree& target, const Node& target_node,
     target.non_const(target_node).link_children_st(target_first_child,
                                                    nu_children);
     thread_storage.next += nu_children;
-    // Parenthesis around thread_storage.next are needed because of a bug
-    // with GCC 4 ("parse error in template argument list")
-    LIBBOARDGAME_ASSERT((thread_storage.next) < thread_storage.end);
+    LIBBOARDGAME_ASSERT(thread_storage.next < thread_storage.end);
     auto end = &first_child + node.get_nu_children();
     for (auto i = &first_child; i != end; ++i, ++target_child)
     {
