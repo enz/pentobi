@@ -61,12 +61,12 @@ const RectGeometry<P>& RectGeometry<P>::get(unsigned width, unsigned height)
 {
     static map<pair<unsigned, unsigned>, shared_ptr<RectGeometry>> s_geometry;
 
-    auto key = make_pair(width, height);
+    auto key = pair(width, height);
     auto pos = s_geometry.find(key);
     if (pos != s_geometry.end())
         return *pos->second;
     auto geometry = make_shared<RectGeometry>(width, height);
-    return *s_geometry.insert(make_pair(key, geometry)).first->second;
+    return *s_geometry.insert(pair(key, geometry)).first->second;
 }
 
 template<class P>

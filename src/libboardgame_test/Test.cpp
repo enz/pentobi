@@ -44,7 +44,7 @@ void add_test(const string& name, const TestFunction& function)
 {
     auto& all_tests = get_all_tests();
     LIBBOARDGAME_ASSERT(all_tests.find(name) == all_tests.end());
-    all_tests.insert(make_pair(name, function));
+    all_tests.insert(pair(name, function));
 }
 
 bool run_all_tests()

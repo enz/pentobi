@@ -46,7 +46,7 @@ Output::Output(Variant variant, const string& prefix, bool create_tree)
         unsigned game_number;
         if (! from_string(columns[0], game_number))
             throw runtime_error("Output: expected game number");
-        m_games.insert(make_pair(game_number, line));
+        m_games.insert(pair(game_number, line));
     }
     while (m_games.count(m_next) != 0)
         ++m_next;
@@ -70,7 +70,7 @@ void Output::add_result(unsigned n, float result, const Board& bd,
                         const array<bool, Board::max_moves>& is_real_move)
 {
     {
-        lock_guard<mutex> lock(m_mutex);
+        lock_guard lock(m_mutex);
         unsigned nu_fast_open = 0;
         for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
             if (! is_real_move[i])
@@ -83,7 +83,7 @@ void Output::add_result(unsigned n, float result, const Board& bd,
              << setprecision(5) << cpu_black << '\t'
              << cpu_white << '\t'
              << nu_fast_open;
-        m_games.insert(make_pair(n, line.str()));
+        m_games.insert(pair(n, line.str()));
         m_sgf_buffer << sgf;
         if (m_create_tree)
             m_output_tree.add_game(bd, player_black, result, is_real_move);
@@ -103,14 +103,14 @@ bool Output::check_sentinel()
 bool Output::generate_fast_open_move(bool is_player_black, const Board& bd,
                                      Color to_play, Move& mv)
 {
-    lock_guard<mutex> lock(m_mutex);
+    lock_guard lock(m_mutex);
     m_output_tree.generate_move(is_player_black, bd, to_play, mv);
     return ! mv.is_null();
 }
 
 unsigned Output::get_next()
 {
-    lock_guard<mutex> lock(m_mutex);
+    lock_guard lock(m_mutex);
     unsigned n = m_next;
     do
        ++m_next;
@@ -120,7 +120,7 @@ unsigned Output::get_next()
 
 void Output::save()
 {
-    lock_guard<mutex> lock(m_mutex);
+    lock_guard lock(m_mutex);
     {
         ofstream out(m_prefix + ".dat");
         out << "# Game\tResult\tLength\tPlayerB\tCpuB\tCpuW\tFast\n";

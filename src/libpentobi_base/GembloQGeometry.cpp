@@ -48,7 +48,7 @@ const GembloQGeometry& GembloQGeometry::get(unsigned nu_players)
     if (pos != s_geometry.end())
         return *pos->second;
     shared_ptr<GembloQGeometry> geometry(new GembloQGeometry(nu_players));
-    return *s_geometry.insert(make_pair(nu_players, geometry)).first->second;
+    return *s_geometry.insert(pair(nu_players, geometry)).first->second;
 }
 
 auto GembloQGeometry::get_adj_coord(int x, int y) const -> AdjCoordList

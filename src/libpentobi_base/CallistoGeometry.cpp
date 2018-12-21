@@ -62,7 +62,7 @@ const CallistoGeometry& CallistoGeometry::get(unsigned nu_colors)
     if (pos != s_geometry.end())
         return *pos->second;
     shared_ptr<CallistoGeometry> geometry(new CallistoGeometry(nu_colors));
-    return *s_geometry.insert(make_pair(nu_colors, geometry)).first->second;
+    return *s_geometry.insert(pair(nu_colors, geometry)).first->second;
 }
 
 auto CallistoGeometry::get_adj_coord(

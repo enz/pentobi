@@ -579,7 +579,7 @@ SearchBase<S, M, R>::Thread::~Thread()
         return;
     m_quit = true;
     {
-        lock_guard<mutex> lock(m_start_search_mutex);
+        lock_guard lock(m_start_search_mutex);
         m_start_search_flag = true;
     }
     m_start_search_cond.notify_one();
@@ -599,7 +599,7 @@ void SearchBase<S, M, R>::Thread::start_search()
     LIBBOARDGAME_ASSERT(m_thread.joinable());
     m_search_finished_lock.lock();
     {
-        lock_guard<mutex> lock(m_start_search_mutex);
+        lock_guard lock(m_start_search_mutex);
         m_start_search_flag = true;
     }
     m_start_search_cond.notify_one();
@@ -619,7 +619,7 @@ void SearchBase<S, M, R>::Thread::thread_main()
             break;
         m_search_func(thread_state);
         {
-            lock_guard<mutex> lock(m_search_finished_mutex);
+            lock_guard lock(m_search_finished_mutex);
             m_search_finished_flag = true;
         }
         m_search_finished_cond.notify_one();
