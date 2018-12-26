@@ -65,7 +65,7 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_unicode)
 {
     SgfNode root;
     const char* id = "C";
-    const char* value = "ü";
+    const char* value = u8"ü";
     root.set_property(id, value);
     ostringstream out;
     TreeWriter writer(out, root);
