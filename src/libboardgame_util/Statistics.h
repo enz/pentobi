@@ -327,7 +327,7 @@ void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, unsigned precision,
         out << std::fixed;
     out << get_mean();
     if (with_error)
-        out << "+-" << get_error();
+        out << u8"±" << get_error();
     out << " dev=" << get_deviation();
     if (integer_values)
         out << setprecision(0);
