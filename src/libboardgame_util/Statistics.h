@@ -39,8 +39,7 @@ public:
 
     FLOAT get_mean() const;
 
-    void write(ostream& out, bool fixed = false,
-               unsigned precision = 6) const;
+    void write(ostream& out, bool fixed = false, int precision = 6) const;
 
 private:
     FLOAT m_count;
@@ -85,7 +84,7 @@ inline FLOAT StatisticsBase<FLOAT>::get_mean() const
 
 template<typename FLOAT>
 void StatisticsBase<FLOAT>::write(ostream& out, bool fixed,
-                                  unsigned precision) const
+                                  int precision) const
 {
     FmtSaver saver(out);
     if (fixed)
@@ -115,8 +114,7 @@ public:
 
     FLOAT get_variance() const;
 
-    void write(ostream& out, bool fixed = false,
-               unsigned precision = 6) const;
+    void write(ostream& out, bool fixed = false, int precision = 6) const;
 
 private:
     StatisticsBase<FLOAT> m_statistics_base;
@@ -190,8 +188,7 @@ inline FLOAT Statistics<FLOAT>::get_variance() const
 }
 
 template<typename FLOAT>
-void Statistics<FLOAT>::write(ostream& out, bool fixed,
-                              unsigned precision) const
+void Statistics<FLOAT>::write(ostream& out, bool fixed, int precision) const
 {
     FmtSaver saver(out);
     if (fixed)
@@ -226,10 +223,10 @@ public:
 
     FLOAT get_variance() const;
 
-    void write(ostream& out, bool fixed = false, unsigned precision = 6,
+    void write(ostream& out, bool fixed = false, int precision = 6,
                bool integer_values = false, bool with_error = false) const;
 
-    string to_string(bool fixed = false, unsigned precision = 6,
+    string to_string(bool fixed = false, int precision = 6,
                      bool integer_values = false,
                      bool with_error = false) const;
 
@@ -308,7 +305,7 @@ inline FLOAT StatisticsExt<FLOAT>::get_variance() const
 }
 
 template<typename FLOAT>
-string StatisticsExt<FLOAT>::to_string(bool fixed, unsigned precision,
+string StatisticsExt<FLOAT>::to_string(bool fixed, int precision,
                                        bool integer_values,
                                        bool with_error) const
 {
@@ -318,7 +315,7 @@ string StatisticsExt<FLOAT>::to_string(bool fixed, unsigned precision,
 }
 
 template<typename FLOAT>
-void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, unsigned precision,
+void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, int precision,
                                  bool integer_values, bool with_error) const
 {
     FmtSaver saver(out);
@@ -371,8 +368,7 @@ public:
 
     FLOAT get_mean() const;
 
-    void write(ostream& out, bool fixed = false,
-               unsigned precision = 6) const;
+    void write(ostream& out, bool fixed = false, int precision = 6) const;
 
 private:
     atomic<FLOAT> m_count;
@@ -433,7 +429,7 @@ inline void StatisticsDirtyLockFree<FLOAT>::init(FLOAT mean, FLOAT count)
 
 template<typename FLOAT>
 void StatisticsDirtyLockFree<FLOAT>::write(ostream& out, bool fixed,
-                                           unsigned precision) const
+                                           int precision) const
 {
     FmtSaver saver(out);
     if (fixed)
