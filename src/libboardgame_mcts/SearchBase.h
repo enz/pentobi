@@ -155,10 +155,11 @@ struct SearchParamConstDefault
     It is weaker than the original RAVE at a low number of simulations but
     seems to be equally good or even better at a high number of simulations.
 
-    The exploration term is not as in original UCT but has the form
-    @f$ c * P_{move} * \sqrt{N_{parent}}/N_{child} @f$ with an exploration
-    constant c and a prior move value P (similar as used in AlphaGo
-    @ref libboardgame_doc_alphago_2016).
+    The exploration term is similar as used in AlphaGo
+    (@ref libboardgame_doc_alphago_2016) and has the form
+    @f$ c P_{move} \sqrt{N_{parent}} / N_{child} @f$
+    with an exploration constant c and a move priors P. It assumes that
+    children counts are initialized greater than 0.
 
     @tparam S The game-dependent state of a simulation. The state provides
     functions for move generation, evaluation of terminal positions, etc. The
@@ -248,10 +249,7 @@ public:
     /** @name Parameters */
     /** @{ */
 
-    /** Constant used in the exploration term.
-        The exploration term has the form c * sqrt(parent_count) / child_count
-        with a configurable constant c. It assumes that children counts are
-        initialized greater than 0. */
+    /** See class description for the exploration term. */
     void set_exploration_constant(Float c) { m_exploration_constant = c; }
 
     Float get_exploration_constant() const { return m_exploration_constant; }
