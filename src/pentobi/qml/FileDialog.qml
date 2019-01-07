@@ -82,9 +82,9 @@ Pentobi.Dialog {
                                 minContentWidth)
         implicitHeight: Math.min(font.pixelSize * 30, maxContentHeight)
 
-        Action {
-            shortcut: "Alt+Left"
-            onTriggered: backButton.onClicked()
+        Shortcut {
+            sequence: "Alt+Left"
+            onActivated: backButton.onClicked()
         }
         ColumnLayout
         {

@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.2
+import QtQuick 2.11
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.1
 import QtQuick.Controls 2.3
@@ -44,17 +44,17 @@ Window {
 
         anchors.fill: parent
     }
-    Action {
-        shortcut: "Ctrl+W"
-        onTriggered: close()
+    Shortcut {
+        sequence: "Ctrl+W"
+        onActivated: close()
     }
-    Action {
-        shortcut: "Alt+Left"
-        onTriggered: webView.goBack()
+    Shortcut {
+        sequence: "Alt+Left"
+        onActivated: webView.goBack()
     }
-    Action {
-        shortcut: "Alt+Right"
-        onTriggered: webView.goForward()
+    Shortcut {
+        sequence: "Alt+Right"
+        onActivated: webView.goForward()
     }
     Settings {
         property alias x: root.x
