@@ -7,6 +7,7 @@ Version 16.x (master)
 Version 16.1.x (v16-fixes)
 ==========================
 
+* Fixed keyboard navigation in file dialog.
 * Status message was not shown after successful Export/ASCII Art and
   Android Media Scanner was not informed to make the saved file
   immediately visible to MTP-connected devices.
