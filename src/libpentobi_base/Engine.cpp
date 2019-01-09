@@ -108,10 +108,10 @@ void Engine::cmd_get_place(Arguments args, Response& response)
 void Engine::cmd_loadsgf(Arguments args)
 {
     args.check_size_less_equal(2);
-    auto file = args.parse<string>(0);
+    auto file = args.get<string>(0);
     unsigned move_number = 0;
     if (args.get_size() == 2)
-        move_number = args.parse_min<unsigned>(1, 1);
+        move_number = args.get_min<unsigned>(1, 1);
     try
     {
         TreeReader reader;
@@ -139,11 +139,11 @@ void Engine::cmd_move_info(Arguments args, Response& response)
     Move mv;
     try
     {
-        mv = Move(args.parse<Move::IntType>());
+        mv = Move(args.get<Move::IntType>());
     }
     catch (const Failure&)
     {
-        if (! bd.from_string(mv, args.parse<string>()))
+        if (! bd.from_string(mv, args.get<string>()))
         {
             ostringstream msg;
             msg << "invalid argument '" << args.get()
@@ -184,9 +184,9 @@ void Engine::cmd_param_base(Arguments args, Response& response)
         args.check_size(2);
         auto name = args.get(0);
         if (name == "accept_illegal")
-            m_accept_illegal = args.parse<bool>(1);
+            m_accept_illegal = args.get<bool>(1);
         else if (name == "resign")
-            m_resign = args.parse<bool>(1);
+            m_resign = args.get<bool>(1);
         else
         {
             ostringstream msg;
@@ -221,7 +221,7 @@ void Engine::cmd_reg_genmove(Arguments args, Response& response)
 
 void Engine::cmd_savesgf(Arguments args)
 {
-    ofstream out(args.parse<string>());
+    ofstream out(args.get<string>());
     PentobiTreeWriter writer(out, m_game.get_tree());
     writer.set_indent(1);
     writer.write();

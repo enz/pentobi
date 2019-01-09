@@ -38,7 +38,7 @@ void Engine::cmd_cputime(Response& response)
     Arguments: random seed */
 void Engine::cmd_set_random_seed(Arguments args)
 {
-    RandomGenerator::set_global_seed(args.parse<RandomGenerator::ResultType>());
+    RandomGenerator::set_global_seed(args.get<RandomGenerator::ResultType>());
 }
 
 void Engine::on_handle_cmd_begin()

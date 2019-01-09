@@ -36,6 +36,7 @@ void Arguments::check_size_less_equal(unsigned n) const
     throw Failure(msg.str());
 }
 
+template<>
 string_view Arguments::get(unsigned i) const
 {
     if (i < get_size())
@@ -45,9 +46,16 @@ string_view Arguments::get(unsigned i) const
     throw Failure(msg.str());
 }
 
+template<>
+string Arguments::get(unsigned i) const
+{
+    auto s = get(i);
+    return string(&*s.begin(), s.size());
+}
+
 string Arguments::get_tolower(unsigned i) const
 {
-    string value(get(i));
+    auto value = get<string>(i);
     for (auto& c : value)
         c = static_cast<char>(tolower(c));
     return value;

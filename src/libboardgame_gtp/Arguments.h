@@ -28,17 +28,19 @@ public:
         @param line The command line (@ref libboardgame_doc_storesref) */
     explicit Arguments(const CmdLine& line);
 
-    /** Get argument.
+    /** Get argument.        
         @param i Argument index starting with 0
-        @return Argument value
-        @throws Failure If no such argument */
-    string_view get(unsigned i) const;
+        @return Argument value        
+        @throws Failure If no such argument
+        @tparam T The type the argument should be converted to. The type
+        must implement operator<< */
+    template<typename T = string_view>
+    T get(unsigned i) const;
 
-    /** Get single argument.
-        @return Argument value
-        @throws Failure If no such argument or command has more than one
-        arguments */
-    string_view get() const;
+    /** Get single argument.        
+        Like get(unsigned) but throws if there is not exactly one argument. */
+    template<typename T = string_view>
+    T get() const;
 
     /** Get argument converted to lowercase.
         @param i Argument index starting with 0
@@ -49,45 +51,23 @@ public:
     /** Get single argument converted to lowercase. */
     string get_tolower() const;
 
-    /** Get argument converted to a type.
-        The type must implement operator<<(istream)
-        @param i Argument index starting with 0
-        @return The converted argument
-        @throws Failure If no such argument, or argument cannot be converted */
+    /** Get argument and check against a minimum value.
+        Like get(unsigned) but throws if the argument is less than the minimum
+        value. */
     template<typename T>
-    T parse(unsigned i) const;
+    T get_min(unsigned i, T min) const;
 
-    /** Get single argument converted to a type.
-        The type must implement operator<<(istream)
-        @return The converted argument
-        @throws Failure If no such argument, or argument cannot be converted,
-        or command has more than one arguments */
+    /** Get argument and check against a range.
+        Like get(unsigned) but throws if the argument is not within the
+        range. */
     template<typename T>
-    T parse() const;
+    T get_min_max(unsigned i, T min, T max) const;
 
-    /** Get argument converted to a type and check against a minimum value.
-        The type must implement operator<< and operator<
-        @param i Argument index starting with 0
-        @param min Minimum allowed value
-        @return Argument value
-        @throws Failure If no such argument, argument cannot be converted
-        or smaller than the minimum value */
+    /** Get single argument and check against a range.
+        Like get_min_max(unsigned) but throws if there is not exactly one
+        argument. */
     template<typename T>
-    T parse_min(unsigned i, T min) const;
-
-    /** Get argument converted to a type and check against a range.
-        The type must implement operator<< and operator<
-        @param i Argument index starting with 0
-        @param min Minimum allowed value
-        @param max Maximum allowed value
-        @return Argument value
-        @throws Failure If no such argument, argument cannot be converted
-        or not in range */
-    template<typename T>
-    T parse_min_max(unsigned i, T min, T max) const;
-
-    template<typename T>
-    T parse_min_max(T min, T max) const;
+    T get_min_max(T min, T max) const;
 
     /** Check that command has no arguments.
         @throws Failure If command has arguments
@@ -138,12 +118,6 @@ inline void Arguments::check_empty() const
     check_size(0);
 }
 
-inline string_view Arguments::get() const
-{
-    check_size(1);
-    return get(0);
-}
-
 inline string_view Arguments::get_line() const
 {
     return m_line.get_trimmed_line_after_elem(m_line.get_idx_name());
@@ -174,17 +148,23 @@ string Arguments::get_type_name()
 }
 
 template<typename T>
-T Arguments::parse() const
+T Arguments::get() const
 {
     check_size(1);
-    return parse<T>(0);
+    return get<T>(0);
 }
 
+template<>
+string_view Arguments::get(unsigned i) const;
+
+template<>
+string Arguments::get(unsigned i) const;
+
 template<typename T>
-T Arguments::parse(unsigned i) const
+T Arguments::get(unsigned i) const
 {
-    auto s = get(i);
-    istringstream in(string(&*s.begin(), s.size()));
+    auto s = get<string>(i);
+    istringstream in(s);
     T result;
     in >> result;
     if (! in)
@@ -198,9 +178,9 @@ T Arguments::parse(unsigned i) const
 }
 
 template<typename T>
-T Arguments::parse_min(unsigned i, T min) const
+T Arguments::get_min(unsigned i, T min) const
 {
-    auto result = parse<T>(i);
+    auto result = get<T>(i);
     if (result < min)
     {
         ostringstream msg;
@@ -211,16 +191,16 @@ T Arguments::parse_min(unsigned i, T min) const
 }
 
 template<typename T>
-T Arguments::parse_min_max(T min, T max) const
+T Arguments::get_min_max(T min, T max) const
 {
     check_size(1);
-    return parse_min_max<T>(0, min, max);
+    return get_min_max(0, min, max);
 }
 
 template<typename T>
-T Arguments::parse_min_max(unsigned i, T min, T max) const
+T Arguments::get_min_max(unsigned i, T min, T max) const
 {
-    T result = parse_min(i, min);
+    auto result = get_min(i, min);
     if (max < result)
     {
         ostringstream msg;

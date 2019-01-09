@@ -33,27 +33,27 @@ LIBBOARDGAME_TEST_CASE(gtp_arguments_bool)
     {
         CmdLine line("command 0");
         Arguments args(line);
-        LIBBOARDGAME_CHECK(! args.parse<bool>(0));
+        LIBBOARDGAME_CHECK(! args.get<bool>(0));
     }
     {
         CmdLine line("command 1");
         Arguments args(line);
-        LIBBOARDGAME_CHECK(args.parse<bool>(0));
+        LIBBOARDGAME_CHECK(args.get<bool>(0));
     }
     {
         CmdLine line("command 2");
         Arguments args(line);
-        LIBBOARDGAME_CHECK_THROW(args.parse<bool>(0), Failure);
+        LIBBOARDGAME_CHECK_THROW(args.get<bool>(0), Failure);
     }
     {
         CmdLine line("command arg1");
         Arguments args(line);
-        LIBBOARDGAME_CHECK_THROW(args.parse<bool>(0), Failure);
+        LIBBOARDGAME_CHECK_THROW(args.get<bool>(0), Failure);
     }
     {
         CmdLine line("command");
         Arguments args(line);
-        LIBBOARDGAME_CHECK_THROW(args.parse<bool>(0), Failure);
+        LIBBOARDGAME_CHECK_THROW(args.get<bool>(0), Failure);
     }
 }
 
@@ -61,33 +61,33 @@ LIBBOARDGAME_TEST_CASE(gtp_arguments_float)
 {
     CmdLine line("command abc 5.5");
     Arguments args(line);
-    LIBBOARDGAME_CHECK_THROW(args.parse<float>(0), Failure);
-    LIBBOARDGAME_CHECK_CLOSE(5.5f, args.parse<float>(1), 1e-4f);
+    LIBBOARDGAME_CHECK_THROW(args.get<float>(0), Failure);
+    LIBBOARDGAME_CHECK_CLOSE(5.5f, args.get<float>(1), 1e-4f);
 }
 
 LIBBOARDGAME_TEST_CASE(gtp_arguments_int)
 {
     CmdLine line("command 5 arg");
     Arguments args(line);
-    LIBBOARDGAME_CHECK_EQUAL(5, args.parse<int>(0));
-    LIBBOARDGAME_CHECK_THROW(args.parse<int>(1), Failure);
+    LIBBOARDGAME_CHECK_EQUAL(5, args.get<int>(0));
+    LIBBOARDGAME_CHECK_THROW(args.get<int>(1), Failure);
 }
 
 LIBBOARDGAME_TEST_CASE(gtp_arguments_min_int)
 {
     CmdLine line("command 5");
     Arguments args(line);
-    LIBBOARDGAME_CHECK_EQUAL(5, args.parse_min<int>(0, 3));
-    LIBBOARDGAME_CHECK_THROW(args.parse_min<int>(0, 7), Failure);
+    LIBBOARDGAME_CHECK_EQUAL(5, args.get_min<int>(0, 3));
+    LIBBOARDGAME_CHECK_THROW(args.get_min<int>(0, 7), Failure);
 }
 
 LIBBOARDGAME_TEST_CASE(gtp_arguments_min_max_int)
 {
     CmdLine line("command 5");
     Arguments args(line);
-    LIBBOARDGAME_CHECK_EQUAL(5, args.parse_min_max<int>(0, 3, 10));
-    LIBBOARDGAME_CHECK_THROW(args.parse_min_max<int>(0, 0, 4), Failure);
-    LIBBOARDGAME_CHECK_THROW(args.parse_min_max<int>(0, 10, 20), Failure);
+    LIBBOARDGAME_CHECK_EQUAL(5, args.get_min_max<int>(0, 3, 10));
+    LIBBOARDGAME_CHECK_THROW(args.get_min_max<int>(0, 0, 4), Failure);
+    LIBBOARDGAME_CHECK_THROW(args.get_min_max<int>(0, 10, 20), Failure);
 }
 
 LIBBOARDGAME_TEST_CASE(gtp_arguments_single_int)
@@ -95,12 +95,12 @@ LIBBOARDGAME_TEST_CASE(gtp_arguments_single_int)
     {
         CmdLine line("command 5");
         Arguments args(line);
-        LIBBOARDGAME_CHECK_EQUAL(5, args.parse<int>());
+        LIBBOARDGAME_CHECK_EQUAL(5, args.get<int>());
     }
     {
         CmdLine line("command 5 10");
         Arguments args(line);
-        LIBBOARDGAME_CHECK_THROW(args.parse<int>(), Failure);
+        LIBBOARDGAME_CHECK_THROW(args.get<int>(), Failure);
     }
 }
 

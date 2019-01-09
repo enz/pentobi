@@ -88,7 +88,7 @@ void Engine::add(const string& name, const HandlerNoArgsNoResponse& f)
 /** Return @c true if command is known, @c false otherwise. */
 void Engine::cmd_known_command(Arguments args, Response& response)
 {
-    response.set(contains(string(args.get())) ? "true" : "false");
+    response.set(contains(args.get<string>()) ? "true" : "false");
 }
 
 /** List all known commands. */

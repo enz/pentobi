@@ -70,7 +70,7 @@ void Engine::cmd_save_tree(Arguments args)
     auto& search = get_search();
     if (! search.get_last_history().is_valid())
         throw Failure("no search tree");
-    ofstream out(args.parse<string>());
+    ofstream out(args.get<string>());
     libpentobi_mcts::dump_tree(out, search);
 }
 
@@ -82,8 +82,8 @@ void Engine::cmd_save_tree(Arguments args)
 void Engine::cmd_selfplay(Arguments args)
 {
     args.check_size(2);
-    auto nu_games = args.parse<int>(0);
-    ofstream out(args.parse<string>(1));
+    auto nu_games = args.get<int>(0);
+    ofstream out(args.get<string>(1));
     auto variant = get_board().get_variant();
     auto variant_str = to_string(variant);
     Board bd(variant);
@@ -133,21 +133,21 @@ void Engine::cmd_param(Arguments args, Response& response)
         args.check_size(2);
         auto name = args.get(0);
         if (name == "avoid_symmetric_draw")
-            s.set_avoid_symmetric_draw(args.parse<bool>(1));
+            s.set_avoid_symmetric_draw(args.get<bool>(1));
         else if (name == "exploration_constant")
-            s.set_exploration_constant(args.parse<Float>(1));
+            s.set_exploration_constant(args.get<Float>(1));
         else if (name == "fixed_simulations")
-            p.set_fixed_simulations(args.parse<Float>(1));
+            p.set_fixed_simulations(args.get<Float>(1));
         else if (name == "rave_child_max")
-            s.set_rave_child_max(args.parse<Float>(1));
+            s.set_rave_child_max(args.get<Float>(1));
         else if (name == "rave_parent_max")
-            s.set_rave_parent_max(args.parse<Float>(1));
+            s.set_rave_parent_max(args.get<Float>(1));
         else if (name == "rave_weight")
-            s.set_rave_weight(args.parse<Float>(1));
+            s.set_rave_weight(args.get<Float>(1));
         else if (name == "reuse_subtree")
-            s.set_reuse_subtree(args.parse<bool>(1));
+            s.set_reuse_subtree(args.get<bool>(1));
         else if (name == "use_book")
-            p.set_use_book(args.parse<bool>(1));
+            p.set_use_book(args.get<bool>(1));
         else
         {
             ostringstream msg;
