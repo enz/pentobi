@@ -88,7 +88,7 @@ void Engine::add(const string& name, const HandlerNoArgsNoResponse& f)
 /** Return @c true if command is known, @c false otherwise. */
 void Engine::cmd_known_command(Arguments args, Response& response)
 {
-    response.set(contains(args.get()) ? "true" : "false");
+    response.set(contains(string(args.get())) ? "true" : "false");
 }
 
 /** List all known commands. */
@@ -163,7 +163,7 @@ bool Engine::handle_cmd(CmdLine& line, ostream* out, Response& response,
     try
     {
         response.clear();
-        auto pos = m_handlers.find(line.get_name());
+        auto pos = m_handlers.find(string(line.get_name()));
         if (pos != m_handlers.end())
         {
             Arguments args(line);

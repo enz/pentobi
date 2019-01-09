@@ -70,7 +70,7 @@ void Engine::cmd_save_tree(Arguments args)
     auto& search = get_search();
     if (! search.get_last_history().is_valid())
         throw Failure("no search tree");
-    ofstream out(args.get());
+    ofstream out(args.parse<string>());
     libpentobi_mcts::dump_tree(out, search);
 }
 
@@ -83,7 +83,7 @@ void Engine::cmd_selfplay(Arguments args)
 {
     args.check_size(2);
     auto nu_games = args.parse<int>(0);
-    ofstream out(args.get(1));
+    ofstream out(args.parse<string>(1));
     auto variant = get_board().get_variant();
     auto variant_str = to_string(variant);
     Board bd(variant);
@@ -131,7 +131,7 @@ void Engine::cmd_param(Arguments args, Response& response)
     else
     {
         args.check_size(2);
-        string name = args.get(0);
+        auto name = args.get(0);
         if (name == "avoid_symmetric_draw")
             s.set_avoid_symmetric_draw(args.parse<bool>(1));
         else if (name == "exploration_constant")

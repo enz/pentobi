@@ -36,7 +36,7 @@ void Arguments::check_size_less_equal(unsigned n) const
     throw Failure(msg.str());
 }
 
-CmdLineRange Arguments::get(unsigned i) const
+string_view Arguments::get(unsigned i) const
 {
     if (i < get_size())
         return m_line.get_element(m_line.get_idx_name() + i + 1);
@@ -47,7 +47,7 @@ CmdLineRange Arguments::get(unsigned i) const
 
 string Arguments::get_tolower(unsigned i) const
 {
-    string value = get(i);
+    string value(get(i));
     for (auto& c : value)
         c = static_cast<char>(tolower(c));
     return value;
@@ -59,7 +59,7 @@ string Arguments::get_tolower() const
     return get_tolower(0);
 }
 
-CmdLineRange Arguments::get_remaining_line(unsigned i) const
+string_view Arguments::get_remaining_line(unsigned i) const
 {
     if (i < get_size())
         return m_line.get_trimmed_line_after_elem(m_line.get_idx_name() + i

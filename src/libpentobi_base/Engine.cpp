@@ -108,7 +108,7 @@ void Engine::cmd_get_place(Arguments args, Response& response)
 void Engine::cmd_loadsgf(Arguments args)
 {
     args.check_size_less_equal(2);
-    string file = args.get(0);
+    auto file = args.parse<string>(0);
     unsigned move_number = 0;
     if (args.get_size() == 2)
         move_number = args.parse_min<unsigned>(1, 1);
@@ -143,7 +143,7 @@ void Engine::cmd_move_info(Arguments args, Response& response)
     }
     catch (const Failure&)
     {
-        if (! bd.from_string(mv, args.get()))
+        if (! bd.from_string(mv, args.parse<string>()))
         {
             ostringstream msg;
             msg << "invalid argument '" << args.get()
@@ -182,7 +182,7 @@ void Engine::cmd_param_base(Arguments args, Response& response)
     else
     {
         args.check_size(2);
-        string name = args.get(0);
+        auto name = args.get(0);
         if (name == "accept_illegal")
             m_accept_illegal = args.parse<bool>(1);
         else if (name == "resign")
@@ -221,7 +221,7 @@ void Engine::cmd_reg_genmove(Arguments args, Response& response)
 
 void Engine::cmd_savesgf(Arguments args)
 {
-    ofstream out(args.get());
+    ofstream out(args.parse<string>());
     PentobiTreeWriter writer(out, m_game.get_tree());
     writer.set_indent(1);
     writer.write();
@@ -238,7 +238,8 @@ void Engine::cmd_savesgf(Arguments args)
 void Engine::cmd_set_game(Arguments args)
 {
     Variant variant;
-    if (! parse_variant(args.get_line(), variant))
+    string line(&*args.get_line().begin(), args.get_line().size());
+    if (! parse_variant(line, variant))
         throw Failure("invalid argument");
     m_game.init(variant);
     board_changed();
@@ -332,12 +333,14 @@ void Engine::play(Color c, Arguments args, unsigned arg_move_begin)
     Move mv;
     if (arg_move_begin == 0)
     {
-        if (! bd.from_string(mv, args.get_line()))
+        auto line = args.get_line();
+        if (! bd.from_string(mv, string(&*line.begin(), line.size())))
             throw Failure("invalid move ");
     }
     else
     {
-        if (! bd.from_string(mv, args.get_remaining_line(arg_move_begin - 1)))
+        auto line = args.get_remaining_line(arg_move_begin - 1);
+        if (! bd.from_string(mv, string(&*line.begin(), line.size())))
             throw Failure("invalid move ");
     }
     if (mv.is_null())

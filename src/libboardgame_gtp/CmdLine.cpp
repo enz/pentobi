@@ -26,7 +26,7 @@ void CmdLine::add_elem(string::const_iterator begin,
     // Ignore command line elements greater UINT_MAX because we use unsigned
     // for element indices.
     if (m_elem.size() < numeric_limits<unsigned>::max())
-        m_elem.emplace_back(begin, end);
+        m_elem.emplace_back(&*begin, end - begin);
 }
 
 /** Find elements (ID, command name, arguments).
@@ -53,29 +53,28 @@ void CmdLine::find_elem()
         else if (isspace(static_cast<unsigned char>(c)) != 0 && ! is_in_string)
         {
             if (i > begin)
-                m_elem.emplace_back(begin, i);
+                m_elem.emplace_back(&*begin, i - begin);
             begin = i + 1;
         }
         escape = (c == '\\' && ! escape);
     }
     if (i > begin)
-        m_elem.emplace_back(begin, m_line.end());
+        m_elem.emplace_back(&*begin, m_line.end() - begin);
 }
 
-CmdLineRange CmdLine::get_trimmed_line_after_elem(unsigned i) const
+string_view CmdLine::get_trimmed_line_after_elem(unsigned i) const
 {
     assert(i < m_elem.size());
     auto& e = m_elem[i];
     auto begin = e.end();
-    if (begin < m_line.end() && *begin == '"')
+    auto end = &*m_line.end();
+    if (begin < end && *begin == '"')
         ++begin;
-    while (begin < m_line.end()
-           && isspace(static_cast<unsigned char>(*begin)) != 0)
+    while (begin < end && isspace(static_cast<unsigned char>(*begin)) != 0)
         ++begin;
-    auto end = m_line.end();
     while (end > begin && isspace(static_cast<unsigned char>(*(end - 1))) != 0)
         --end;
-    return {begin, end};
+    return {begin, static_cast<string_view::size_type>(end - begin)};
 }
 
 void CmdLine::init(const string& line)
@@ -94,9 +93,9 @@ void CmdLine::init(const CmdLine& c)
     m_elem.clear();
     for (auto& i : c.m_elem)
     {
-        auto begin = m_line.begin() + (i.begin() - c.m_line.begin());
-        auto end = m_line.begin() + (i.end() - c.m_line.begin());
-        m_elem.emplace_back(begin, end);
+        auto begin = m_line.begin() + (&*i.begin() - &*c.m_line.begin());
+        auto end = m_line.begin() + (&*i.end() - &*c.m_line.begin());
+        m_elem.emplace_back(&*begin, end - begin);
     }
 }
 
@@ -105,7 +104,7 @@ void CmdLine::parse_id()
     m_idx_name = 0;
     if (m_elem.size() < 2)
         return;
-    istringstream in(m_elem[0]);
+    istringstream in(string(&*m_elem[0].begin(), m_elem[0].size()));
     int id;
     in >> id;
     if (in)

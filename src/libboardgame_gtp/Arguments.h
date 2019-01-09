@@ -32,13 +32,13 @@ public:
         @param i Argument index starting with 0
         @return Argument value
         @throws Failure If no such argument */
-    CmdLineRange get(unsigned i) const;
+    string_view get(unsigned i) const;
 
     /** Get single argument.
         @return Argument value
         @throws Failure If no such argument or command has more than one
         arguments */
-    CmdLineRange get() const;
+    string_view get() const;
 
     /** Get argument converted to lowercase.
         @param i Argument index starting with 0
@@ -108,7 +108,7 @@ public:
         Get all arguments as a line.
         No modfications to the line were made apart from trimmimg leading
         and trailing white spaces. */
-    CmdLineRange get_line() const;
+    string_view get_line() const;
 
     /** Get number of arguments. */
     unsigned get_size() const;
@@ -119,7 +119,7 @@ public:
         from leading and trailing whitespaces, which are trimmed. Quotation
         marks are not handled.
         @throws Failure If no such argument */
-    CmdLineRange get_remaining_line(unsigned i) const;
+    string_view get_remaining_line(unsigned i) const;
 
 private:
     const CmdLine& m_line;
@@ -138,13 +138,13 @@ inline void Arguments::check_empty() const
     check_size(0);
 }
 
-inline CmdLineRange Arguments::get() const
+inline string_view Arguments::get() const
 {
     check_size(1);
     return get(0);
 }
 
-inline CmdLineRange Arguments::get_line() const
+inline string_view Arguments::get_line() const
 {
     return m_line.get_trimmed_line_after_elem(m_line.get_idx_name());
 }
@@ -183,8 +183,8 @@ T Arguments::parse() const
 template<typename T>
 T Arguments::parse(unsigned i) const
 {
-    string s = get(i);
-    istringstream in(s);
+    auto s = get(i);
+    istringstream in(string(&*s.begin(), s.size()));
     T result;
     in >> result;
     if (! in)

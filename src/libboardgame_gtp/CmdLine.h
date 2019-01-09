@@ -12,7 +12,6 @@
 #include <string>
 #include <iterator>
 #include <vector>
-#include "CmdLineRange.h"
 
 namespace libboardgame_gtp {
 
@@ -45,17 +44,17 @@ public:
     const string& get_line() const { return m_line; }
 
     /** Get command name. */
-    CmdLineRange get_name() const { return m_elem[m_idx_name]; }
+    string_view get_name() const { return m_elem[m_idx_name]; }
 
 
     void write_id(ostream& out) const;
 
-    CmdLineRange get_trimmed_line_after_elem(unsigned i) const;
+    string_view get_trimmed_line_after_elem(unsigned i) const;
 
-    const vector<CmdLineRange>& get_elements() const { return m_elem; }
+    const vector<string_view>& get_elements() const { return m_elem; }
 
 
-    const CmdLineRange& get_element(unsigned i) const;
+    const string_view& get_element(unsigned i) const;
 
     unsigned get_idx_name() const { return m_idx_name; }
 
@@ -65,7 +64,7 @@ private:
     /** Full command line. */
     string m_line;
 
-    vector<CmdLineRange> m_elem;
+    vector<string_view> m_elem;
 
     void add_elem(string::const_iterator begin, string::const_iterator end);
 
@@ -74,7 +73,7 @@ private:
     void parse_id();
 };
 
-inline const CmdLineRange& CmdLine::get_element(unsigned i) const
+inline const string_view& CmdLine::get_element(unsigned i) const
 {
     assert(i < m_elem.size());
     return m_elem[i];
