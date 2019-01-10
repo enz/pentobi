@@ -140,21 +140,10 @@ T Arguments::get() const
 }
 
 template<>
-inline string_view Arguments::get(unsigned i) const
-{
-    if (i < get_size())
-        return m_line.get_element(m_line.get_idx_name() + i + 1);
-    ostringstream msg;
-    msg << "missing argument " << (i + 1);
-    throw Failure(msg.str());
-}
+string_view Arguments::get(unsigned i) const;
 
 template<>
-inline string Arguments::get(unsigned i) const
-{
-    auto s = get(i);
-    return string(&*s.begin(), s.size());
-}
+string Arguments::get(unsigned i) const;
 
 template<typename T>
 T Arguments::get(unsigned i) const
