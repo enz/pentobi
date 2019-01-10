@@ -5,6 +5,8 @@ Version 16.1.x (v16-fixes)
 * Status message was not shown after successful Export/ASCII Art and
   Android Media Scanner was not informed to make the saved file
   immediately visible to MTP-connected devices.
+* Changed new-game icon, which looked too much like a favorites/bookmarks
+  icon.
 * Fixed compilation on systems without sys/sysctl.h header.
 * Enabled QML compiler again, now that QTBUG-70976 has been fixed, which
   broke translations in Qt 5.12 beta releases.
