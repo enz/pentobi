@@ -57,18 +57,6 @@ public:
     template<typename T>
     T get_min(unsigned i, T min) const;
 
-    /** Get argument and check against a range.
-        Like get(unsigned) but throws if the argument is not within the
-        range. */
-    template<typename T>
-    T get_min_max(unsigned i, T min, T max) const;
-
-    /** Get single argument and check against a range.
-        Like get_min_max(unsigned) but throws if there is not exactly one
-        argument. */
-    template<typename T>
-    T get_min_max(T min, T max) const;
-
     /** Check that command has no arguments.
         @throws Failure If command has arguments
     */
@@ -196,26 +184,6 @@ T Arguments::get_min(unsigned i, T min) const
     {
         ostringstream msg;
         msg << "argument " << (i + 1) << " must be greater or equal " << min;
-        throw Failure(msg.str());
-    }
-    return result;
-}
-
-template<typename T>
-T Arguments::get_min_max(T min, T max) const
-{
-    check_size(1);
-    return get_min_max(0, min, max);
-}
-
-template<typename T>
-T Arguments::get_min_max(unsigned i, T min, T max) const
-{
-    auto result = get_min(i, min);
-    if (max < result)
-    {
-        ostringstream msg;
-        msg << "argument " << (i + 1) << " must be less or equal " << max;
         throw Failure(msg.str());
     }
     return result;

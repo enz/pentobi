@@ -81,15 +81,6 @@ LIBBOARDGAME_TEST_CASE(gtp_arguments_min_int)
     LIBBOARDGAME_CHECK_THROW(args.get_min<int>(0, 7), Failure);
 }
 
-LIBBOARDGAME_TEST_CASE(gtp_arguments_min_max_int)
-{
-    CmdLine line("command 5");
-    Arguments args(line);
-    LIBBOARDGAME_CHECK_EQUAL(5, args.get_min_max<int>(0, 3, 10));
-    LIBBOARDGAME_CHECK_THROW(args.get_min_max<int>(0, 0, 4), Failure);
-    LIBBOARDGAME_CHECK_THROW(args.get_min_max<int>(0, 10, 20), Failure);
-}
-
 LIBBOARDGAME_TEST_CASE(gtp_arguments_single_int)
 {
     {
