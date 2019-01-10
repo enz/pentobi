@@ -204,8 +204,6 @@ void State::evaluate_multicolor(array<Float, 6>& result)
     if (! m_is_symmetry_broken
             && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
     {
-        if (log_simulations)
-            LIBBOARDGAME_LOG("Result: 0.5 (symmetry)");
         result[0] = result[1] = result[2] = result[3] = 0.5;
         return;
     }
@@ -218,12 +216,8 @@ void State::evaluate_multicolor(array<Float, 6>& result)
         res = 0;
     else
         res = 0.5;
-    if (log_simulations)
-        LIBBOARDGAME_LOG("Result color 0: sco=", s, " game_res=", res);
     res += get_quality_bonus(Color(0), res, s)
             + get_quality_bonus_attach_multicolor();
-    if (log_simulations)
-        LIBBOARDGAME_LOG("res=", res);
     result[0] = result[2] = res;
     result[1] = result[3] = 1.f - res;
 }
@@ -251,9 +245,6 @@ void State::evaluate_multiplayer(array<Float, 6>& result)
         Color c(i);
         auto s = m_bd.get_score_multiplayer(c);
         result[i] = game_result[i] + get_quality_bonus(c, game_result[i], s);
-        if (log_simulations)
-            LIBBOARDGAME_LOG("Result sco=", s, " game_res=", game_result[i],
-                             " res=", result[i]);
     }
     if (m_bd.get_variant() == Variant::classic_3)
     {
@@ -272,8 +263,6 @@ void State::evaluate_twocolor(array<Float, 6>& result)
     if (! m_is_symmetry_broken
             && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
     {
-        if (log_simulations)
-            LIBBOARDGAME_LOG("Symmetry not broken");
         s = 0;
     }
     else
@@ -285,13 +274,9 @@ void State::evaluate_twocolor(array<Float, 6>& result)
         res = 0;
     else
         res = 0.5;
-    if (log_simulations)
-        LIBBOARDGAME_LOG("Result sco=", s, " game_res=", res);
     res += get_quality_bonus(Color(0), res, s);
     if (m_is_callisto)
         res += get_quality_bonus_attach_twocolor();
-    if (log_simulations)
-        LIBBOARDGAME_LOG("res=", res);
     result[0] = res;
     result[1] = 1.f - res;
 }
@@ -435,8 +420,6 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
         if (m_check_terminate_early && m_bd.get_score_twoplayer(to_play) < 0
             && ! m_has_moves[m_bd.get_second_color(to_play)])
         {
-            if (log_simulations)
-                LIBBOARDGAME_LOG("Terminate early (no moves and neg. score)");
             return false;
         }
         to_play = to_play.get_next(m_nu_colors);
@@ -448,9 +431,6 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
     auto& moves = m_moves[to_play];
     LIBBOARDGAME_ASSERT(! moves.empty());
     auto total_gamma = m_cumulative_gamma[moves.size() - 1];
-    if (log_simulations)
-        LIBBOARDGAME_LOG("Moves: ", moves.size(), ", total_gamma: ",
-                         total_gamma);
     auto begin = m_cumulative_gamma.begin();
     auto end = begin + moves.size();
     auto random = m_random.generate_float(0, total_gamma);
@@ -785,8 +765,6 @@ void State::init_moves_without_gamma(Color c)
 
 void State::play_expanded_child(Move mv)
 {
-    if (log_simulations)
-        LIBBOARDGAME_LOG("Playing expanded child");
     if (! mv.is_null())
         play_playout(mv);
     else
@@ -798,8 +776,6 @@ void State::play_expanded_child(Move mv)
         // symmetry detection only as a heuristic (playouts and move value
         // initialization)
         m_is_symmetry_broken = true;
-        if (log_simulations)
-            LIBBOARDGAME_LOG(m_bd);
     }
 }
 
@@ -852,13 +828,7 @@ void State::start_search()
 
 void State::start_simulation(size_t n)
 {
-#ifdef LIBBOARDGAME_DISABLE_LOG
     LIBBOARDGAME_UNUSED(n);
-#endif
-    if (log_simulations)
-        LIBBOARDGAME_LOG("=================================================\n",
-                         "Simulation ", n, "\n",
-                         "=================================================");
     m_bd.restore_snapshot();
     m_force_consider_all_pieces = false;
     auto& geo = m_bd.get_geometry();
