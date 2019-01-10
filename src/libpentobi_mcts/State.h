@@ -13,7 +13,6 @@
 #include "StateUtil.h"
 #include "libboardgame_mcts/LastGoodReply.h"
 #include "libboardgame_mcts/PlayerMove.h"
-#include "libboardgame_util/Log.h"
 #include "libboardgame_util/RandomGenerator.h"
 #include "libboardgame_util/Statistics.h"
 
@@ -106,8 +105,6 @@ public:
     string get_info() const;
 
 private:
-    static const bool log_simulations = false;
-
     /** The cumulative gamma value of the moves in m_moves. */
     array<float, MoveList::max_size> m_cumulative_gamma;
 
@@ -341,8 +338,6 @@ inline void State::evaluate_playout(array<Float, 6>& result)
 
 inline void State::finish_in_tree()
 {
-    if (log_simulations)
-        LIBBOARDGAME_LOG("Finish in-tree");
     if (m_check_symmetric_draw)
         m_is_symmetry_broken = check_symmetry_broken(m_bd);
 }
@@ -354,26 +349,18 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
         return false;
     if (! m_is_symmetry_broken
             && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
-    {
         // See also the comment in evaluate_playout()
-        if (log_simulations)
-            LIBBOARDGAME_LOG("Terminate playout. Symmetry not broken.");
         return false;
-    }
     PlayerInt player = get_player();
     Move lgr2 = lgr.get_lgr2(player, last, second_last);
     if (check_lgr(lgr2))
     {
-        if (log_simulations)
-            LIBBOARDGAME_LOG("Playing last good reply 2");
         mv = PlayerMove(player, lgr2);
         return true;
     }
     Move lgr1 = lgr.get_lgr1(player, last);
     if (check_lgr(lgr1))
     {
-        if (log_simulations)
-            LIBBOARDGAME_LOG("Playing last good reply 1");
         mv = PlayerMove(player, lgr1);
         return true;
     }
@@ -449,8 +436,6 @@ inline void State::play_in_tree(Move mv)
         ++m_nu_passes;
         m_bd.set_to_play(to_play.get_next(m_nu_colors));
     }
-    if (log_simulations)
-        LIBBOARDGAME_LOG(m_bd);
 }
 
 inline void State::play_playout(Move mv)
@@ -488,8 +473,6 @@ inline void State::play_playout(Move mv)
     ++m_nu_new_moves[to_play];
     m_last_move[to_play] = mv;
     m_nu_passes = 0;
-    if (log_simulations)
-        LIBBOARDGAME_LOG(m_bd);
 }
 
 inline bool State::skip_rave([[maybe_unused]] Move mv) const
