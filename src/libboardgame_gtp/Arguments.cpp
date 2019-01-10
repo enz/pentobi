@@ -44,12 +44,6 @@ string Arguments::get_tolower(unsigned i) const
     return value;
 }
 
-string Arguments::get_tolower() const
-{
-    check_size(1);
-    return get_tolower(0);
-}
-
 string_view Arguments::get_remaining_line(unsigned i) const
 {
     if (i < get_size())

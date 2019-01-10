@@ -48,9 +48,6 @@ public:
         @throws Failure If no such argument */
     string get_tolower(unsigned i) const;
 
-    /** Get single argument converted to lowercase. */
-    string get_tolower() const;
-
     /** Get argument and check against a minimum value.
         Like get(unsigned) but throws if the argument is less than the minimum
         value. */
