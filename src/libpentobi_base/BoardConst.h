@@ -279,18 +279,6 @@ inline Piece BoardConst::get_move_piece(Move mv) const
     return get_move_info<MAX_SIZE>(mv).get_piece();
 }
 
-inline Piece BoardConst::get_move_piece(Move mv) const
-{
-    if (m_max_piece_size == 5)
-        return get_move_piece<5>(mv);
-    if (m_max_piece_size == 6)
-        return get_move_piece<6>(mv);
-    if (m_max_piece_size == 7)
-        return get_move_piece<7>(mv);
-    LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
-    return get_move_piece<22>(mv);
-}
-
 inline Range<const Point> BoardConst::get_move_points(Move mv) const
 {
     if (m_max_piece_size == 5)
