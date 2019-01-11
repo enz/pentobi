@@ -31,7 +31,6 @@ public:
     void cmd_final_score(Response& response);
     void cmd_g(Response& response);
     void cmd_genmove(Arguments args, Response& response);
-    void cmd_get_place(Arguments args, Response& response);
     void cmd_loadsgf(Arguments args);
     void cmd_move_info(Arguments args, Response& response);
     void cmd_p(Arguments args);
