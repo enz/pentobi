@@ -58,7 +58,7 @@ void RatingModel::addResult(GameModel* gameModel, int level)
     double gameResult;
     if (place == 0 && ! isPlaceShared)
         gameResult = 1;
-    else if (place == 0 && isPlaceShared)
+    else if (place == 0)
         gameResult = 0.5;
     else
         gameResult = 0;
