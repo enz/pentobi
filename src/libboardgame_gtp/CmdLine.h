@@ -7,10 +7,8 @@
 #ifndef LIBBOARDGAME_GTP_CMDLINE_H
 #define LIBBOARDGAME_GTP_CMDLINE_H
 
-#include <algorithm>
 #include <cassert>
 #include <string>
-#include <iterator>
 #include <vector>
 
 namespace libboardgame_gtp {
@@ -83,8 +81,7 @@ inline void CmdLine::write_id(ostream& out) const
 {
     if (m_idx_name == 0)
         return;
-    auto& e = m_elem[0];
-    copy(e.begin(), e.end(), ostream_iterator<char>(out));
+    out << m_elem[0];
 }
 
 //-----------------------------------------------------------------------------
