@@ -79,9 +79,8 @@ inline const string_view& CmdLine::get_element(unsigned i) const
 
 inline void CmdLine::write_id(ostream& out) const
 {
-    if (m_idx_name == 0)
-        return;
-    out << m_elem[0];
+    if (m_idx_name != 0)
+        out << m_elem[0];
 }
 
 //-----------------------------------------------------------------------------
