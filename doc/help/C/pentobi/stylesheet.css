@@ -1,12 +1,13 @@
 html {
-background-color: white;
+background-color: #eee;
 }
 
 body {
 color: black;
+background-color: white;
 max-width: 60em;
 margin: auto;
-padding: 0.5em;
+padding: 0.7em;
 min-height: 100vh;
 }
 

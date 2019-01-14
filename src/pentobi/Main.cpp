@@ -5,10 +5,10 @@
 //-----------------------------------------------------------------------------
 
 #include <QApplication>
-#include <QTranslator>
+#include <QIcon>
 #include <QQuickStyle>
 #include <QtQml>
-#include <QtWebView>
+#include <QTranslator>
 #include "AnalyzeGameModel.h"
 #include "AndroidUtils.h"
 #include "GameModel.h"
@@ -22,6 +22,10 @@
 #include <QCommandLineParser>
 #endif
 
+#ifndef PENTOBI_OPEN_HELP_EXTERNALLY
+#include <QtWebView>
+#endif
+
 //-----------------------------------------------------------------------------
 
 namespace {
@@ -32,18 +36,16 @@ int mainAndroid()
 {
     QQmlApplicationEngine engine;
     engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
-    engine.rootContext()->setContextProperty(QStringLiteral("initialFile"),
-                                             QString());
-    engine.rootContext()->setContextProperty(QStringLiteral("isDesktop"),
-                                             QVariant(false));
+    auto ctx = engine.rootContext();
+    ctx->setContextProperty(QStringLiteral("initialFile"), QString());
+    ctx->setContextProperty(QStringLiteral("isDesktop"), false);
 #ifdef QT_DEBUG
-    engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
-                                             QVariant(true));
+    ctx->setContextProperty(QStringLiteral("isDebug"), true);
 #else
-    engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
-                                             QVariant(false));
+    ctx->setContextProperty(QStringLiteral("isDebug"), false);
 #endif
-    engine.load(QUrl(QStringLiteral("qrc:///qml/Main.qml")));
+    ctx->setContextProperty(QStringLiteral("openHelpExternally"), false);
+    engine.load(QStringLiteral("qrc:///qml/Main.qml"));
     if (engine.rootObjects().empty())
         return 1;
     return QGuiApplication::exec();
@@ -143,18 +145,26 @@ int mainDesktop()
             QQuickStyle::setStyle(QStringLiteral("Fusion"));
         QQmlApplicationEngine engine;
         engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
-        engine.rootContext()->setContextProperty(QStringLiteral("initialFile"),
-                                                 initialFile);
-        engine.rootContext()->setContextProperty(QStringLiteral("isDesktop"),
-                                                 isDesktop);
+        auto ctx = engine.rootContext();
+        ctx->setContextProperty(QStringLiteral("initialFile"), initialFile);
+        ctx->setContextProperty(QStringLiteral("isDesktop"), isDesktop);
 #ifdef QT_DEBUG
-        engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
-                                                 QVariant(true));
+        ctx->setContextProperty(QStringLiteral("isDebug"), true);
 #else
-        engine.rootContext()->setContextProperty(QStringLiteral("isDebug"),
-                                                 QVariant(false));
+        ctx->setContextProperty(QStringLiteral("isDebug"), false);
 #endif
-        engine.load(QUrl(QStringLiteral("qrc:///qml/Main.qml")));
+#ifdef PENTOBI_HELP_DIR
+        ctx->setContextProperty(QStringLiteral("helpDir"),
+                                QString::fromLocal8Bit(PENTOBI_HELP_DIR));
+#else
+        ctx->setContextProperty(QStringLiteral("helpDir"), QString());
+#endif
+#ifdef PENTOBI_OPEN_HELP_EXTERNALLY
+        ctx->setContextProperty(QStringLiteral("openHelpExternally"), true);
+#else
+        ctx->setContextProperty(QStringLiteral("openHelpExternally"), false);
+#endif
+        engine.load(QStringLiteral("qrc:///qml/Main.qml"));
         if (engine.rootObjects().empty())
             return 1;
         return QGuiApplication::exec();
@@ -190,7 +200,9 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif
     QGuiApplication app(argc, argv);
+#ifndef PENTOBI_OPEN_HELP_EXTERNALLY
     QtWebView::initialize();
+#endif
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
     qmlRegisterType<AndroidUtils>("pentobi", 1, 0, "AndroidUtils");
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
