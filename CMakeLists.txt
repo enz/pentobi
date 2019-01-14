@@ -14,6 +14,7 @@ option(PENTOBI_BUILD_GUI "Build GUI" ON)
 option(PENTOBI_BUILD_TESTS "Build unit tests" OFF)
 option(PENTOBI_BUILD_THUMBNAILER "Build Gnome thumbnailer" ON)
 option(PENTOBI_BUILD_KDE_THUMBNAILER "Build KDE thumbnailer" OFF)
+option(PENTOBI_OPEN_HELP_EXTERNALLY "Force using web browser for displaying help" OFF)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "No build type selected, default to Release")

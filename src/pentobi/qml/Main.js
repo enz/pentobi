@@ -321,11 +321,16 @@ function help() {
     if (lang !== "C" && lang !== "de")
         lang = "C"
     var url
-    // qrc urls work in WebView on Linux but not on Android
     if (isAndroid)
         url = androidUtils.extractHelp(lang)
+    else if (helpDir)
+        url = "file://" + helpDir + "/" + lang + "/pentobi/index.html"
     else
         url = "qrc:///qml/help/" + lang + "/pentobi/index.html"
+    if (openHelpExternally) {
+        Qt.openUrlExternally(url)
+        return
+    }
     if (! helpWindow.item) {
         helpWindow.source = "HelpWindow.qml"
         helpWindow.item.startUrl = url
