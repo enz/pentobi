@@ -7,10 +7,12 @@ Version 16.x (master)
 Version 16.1.x (v16-fixes)
 ==========================
 
-* The desktop version of Pentobi can now be built on platforms that do
-  not support Qt5WebView. If Qt5WebView is not found or the cmake option
-  -DPENTOBI_OPEN_HELP_EXTERNALLY=1 is used explicitly, the help files will
-  be displayed in an external web browser.
+* As a workaround for platforms without support for Qt5WebView, Pentobi can
+  now be built such that the help is displayed in an external web browser.
+  This option will automatically be used if Qt5WebView is not found or if the
+  cmake option -DPENTOBI_OPEN_HELP_EXTERNALLY=ON is used. It requires that a
+  web browser is installed, otherwise opening the help will fail or show a
+  text editor with the HTML sources instead.
 * The help files are no longer compiled into the resources but installed
   again in DATAROOTDIR/help.
 * Fixed keyboard navigation in file dialog.
