@@ -495,7 +495,7 @@ PieceModel* GameModel::findUnplayedPieceModel(Color c, Piece piece)
 
 QVariantList GameModel::getPieceModels(int color)
 {
-    if (color <= Color::range)
+    if (color >= 0 && color <= static_cast<int>(Color::range))
         return m_pieceModels[Color(static_cast<Color::IntType>(color))];
     return m_pieceModels[Color(0)];
 }
