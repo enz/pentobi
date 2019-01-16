@@ -58,7 +58,7 @@ Pentobi.Dialog {
                 }
             }
             Label {
-                text: qsTr("Copyright © 2011–%1 Markus Enzenberger").arg(2018)
+                text: qsTr("Copyright © 2011–%1 Markus Enzenberger").arg(2019)
                 font.pixelSize: 0.9 * root.font.pixelSize
                 opacity: 0.8
                 wrapMode: Text.Wrap
