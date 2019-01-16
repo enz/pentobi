@@ -4,22 +4,27 @@ Version 16.x (master)
 * The compiler now needs to support C++17.
 
 
-Version 16.1.x (v16-fixes)
+Version 16.2.x (v16-fixes)
+==========================
+
+*
+
+
+Version 16.2 (16 Jan 2019)
 ==========================
 
 * As a workaround for platforms without support for Qt5WebView, Pentobi can
   now be built such that the help is displayed in an external web browser.
   This option will automatically be used if Qt5WebView is not found or if the
-  cmake option -DPENTOBI_OPEN_HELP_EXTERNALLY=ON is used. It requires that a
-  web browser is installed, otherwise opening the help will fail or show a
-  text editor with the HTML sources instead.
+  cmake option -DPENTOBI_OPEN_HELP_EXTERNALLY=ON is used. Note that this
+  requires that a web browser is installed.
 * The help files are no longer compiled into the resources but installed
   again in DATAROOTDIR/help.
 * Fixed keyboard navigation in file dialog.
 * Status message was not shown after successful Export/ASCII Art and
   Android Media Scanner was not informed to make the saved file
   immediately visible to MTP-connected devices.
-* Changed new-game icon, which looked too much like a favorites/bookmarks
+* Changed new-game icon, which looked too much like a ratings/bookmarks
   icon.
 * Fixed compilation on systems without sys/sysctl.h header.
 * Enabled QML compiler again, now that QTBUG-70976 has been fixed, which
