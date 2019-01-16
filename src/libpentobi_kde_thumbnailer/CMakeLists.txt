@@ -40,6 +40,6 @@ target_include_directories(pentobi_kde_thumbnailer PRIVATE ..)
 
 target_compile_definitions(pentobi_kde_thumbnailer PRIVATE
     QT_DEPRECATED_WARNINGS
-    QT_DISABLE_DEPRECATED_BEFORE=0x051100)
+    QT_DISABLE_DEPRECATED_BEFORE=0x051200)
 
 target_link_libraries(pentobi_kde_thumbnailer Qt5::Gui)
