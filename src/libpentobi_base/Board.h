@@ -331,8 +331,6 @@ public:
         if the game variant is classic_3. */
     Color get_second_color(Color c) const;
 
-    bool is_same_player(Color c1, Color c2) const;
-
     Move get_move_at(Point p) const;
 
     /** Remember the board state to quickly restore it later.
@@ -781,11 +779,6 @@ inline bool Board::is_piece_left(Color c, Piece piece) const
 {
     LIBBOARDGAME_ASSERT(piece.to_int() < get_nu_uniq_pieces());
     return m_state_color[c].nu_left_piece[piece] > 0;
-}
-
-inline bool Board::is_same_player(Color c1, Color c2) const
-{
-    return c1 == c2 || c1 == m_second_color[c2];
 }
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
