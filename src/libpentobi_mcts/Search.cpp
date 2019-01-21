@@ -105,14 +105,14 @@ void Search::set_default_param(Variant variant)
     case Variant::gembloq_2_4:
     case Variant::gembloq_3:
         // Tuned for classic_2
-        set_exploration_constant(4.5f);
+        set_exploration_constant(0.4f);
         set_rave_parent_max(50000);
         break;
     case Variant::duo:
     case Variant::junior:
     case Variant::gembloq_2:
         // Tuned for duo
-        set_exploration_constant(4.0f);
+        set_exploration_constant(0.5f);
         set_rave_parent_max(25000);
         break;
     case Variant::trigon:
@@ -122,17 +122,17 @@ void Search::set_default_param(Variant variant)
     case Variant::callisto_2_4:
     case Variant::callisto_3:
         // Tuned for trigon_2
-        set_exploration_constant(6.0f);
+        set_exploration_constant(0.87f);
         set_rave_parent_max(50000);
         break;
     case Variant::nexos:
     case Variant::nexos_2:
         // Tuned for nexos_2
-        set_exploration_constant(3.7f);
+        set_exploration_constant(0.55f);
         set_rave_parent_max(50000);
         break;
     case Variant::callisto_2:
-        set_exploration_constant(4.0f);
+        set_exploration_constant(0.4f);
         set_rave_parent_max(25000);
         break;
     }

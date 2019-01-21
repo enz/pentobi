@@ -155,11 +155,12 @@ struct SearchParamConstDefault
     It is weaker than the original RAVE at a low number of simulations but
     seems to be equally good or even better at a high number of simulations.
 
-    The exploration term is similar as used in AlphaGo
-    (@ref libboardgame_doc_alphago_2016) and has the form
-    @f$ c P_{move} \sqrt{N_{parent}} / N_{child} @f$
-    with an exploration constant c and a move priors P. It assumes that
-    children counts are initialized greater than 0.
+    The exploration term is a variation of the one used in AlphaGo
+    (@ref libboardgame_doc_alphago_2016), which produced better results in
+    Pentobi (in Blokus and some similar games). It has the form
+    @f$ c P_{move} \sqrt{N_{parent}} \log(N_{parent} + 1) / N_{child} @f$
+    with an exploration constant c and a move priors P. Children counts are
+    assumed to be initialized greater than 0.
 
     @tparam S The game-dependent state of a simulation. The state provides
     functions for move generation, evaluation of terminal positions, etc. The
@@ -1261,29 +1262,32 @@ template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
 {
     auto parent_count = node.get_visit_count();
-    Float bias_factor = m_exploration_constant * sqrt(parent_count);
+    // See class description for the exploration term
+    Float expl_factor =
+            m_exploration_constant * sqrt(parent_count)
+            * log(parent_count + 1);
     static_assert(SearchParamConst::child_min_count > 0);
-    auto bias_limit =
-            bias_factor * SearchParamConst::max_move_prior
+    auto expl_limit =
+            expl_factor * SearchParamConst::max_move_prior
             / SearchParamConst::child_min_count;
     auto children = m_tree.get_children_nonempty(node);
     auto i = children.begin();
     auto value =
             i->get_value()
-            + i->get_move_prior() * bias_factor / i->get_value_count();
+            + i->get_move_prior() * expl_factor / i->get_value_count();
     auto best_value = value;
-    auto limit = best_value - bias_limit;
+    auto limit = best_value - expl_limit;
     auto best_child = i;
     while (++i != children.end())
     {
         value = i->get_value();
         if (value <= limit)
             continue;
-        value += i->get_move_prior() * bias_factor / i->get_value_count();
+        value += i->get_move_prior() * expl_factor / i->get_value_count();
         if (value > best_value)
         {
             best_value = value;
-            limit = best_value - bias_limit;
+            limit = best_value - expl_limit;
             best_child = i;
         }
     }

@@ -1,6 +1,7 @@
 Version 16.x (master)
 =====================
 
+* Small increase in playing strength, mainly in Callisto and Classic.
 * The compiler now needs to support C++17.
 
 
