@@ -14,20 +14,18 @@
 function addMnemonic(text, mnemonic) {
     if (! isDesktop || mnemonic === "")
         return text
-    mnemonic = mnemonic.toLowerCase()
-    var textLower = text.toLowerCase()
-    var pos = textLower.indexOf(mnemonic)
+    mnemonic = mnemonic.toUpperCase()
+    var textUpper = text.toUpperCase()
+    var pos = textUpper.indexOf(mnemonic)
     // Prefer beginning of word
-    while (pos >= 0 && pos < textLower.length) {
-        if (pos === 0 || textLower.charAt(pos - 1) === " ")
+    while (pos >= 0 && pos < textUpper.length) {
+        if (pos === 0 || textUpper.charAt(pos - 1) === " ")
             break
-        pos = textLower.indexOf(mnemonic, pos + 1)
+        pos = textUpper.indexOf(mnemonic, pos + 1)
     }
-    if (pos < 0 || pos >= textLower.length)
-        pos = textLower.indexOf(mnemonic)
-    if (pos < 0) {
-        console.warn("mnemonic", mnemonic, "not found in", text)
-        return text
-    }
-    return text.substring(0, pos) + "&" + text.substring(pos)
+    if (pos < 0 || pos >= textUpper.length)
+        pos = textUpper.indexOf(mnemonic)
+    if (pos >= 0)
+        return text.substring(0, pos) + "&" + text.substring(pos)
+    return text + " (&" + mnemonic + ")"
 }
