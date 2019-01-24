@@ -827,7 +827,7 @@
     <message>
         <source>Rated Game %1</source>
         <extracomment>Label for rated game. The argument is the game number.</extracomment>
-        <translation>等级赛 第%局</translation>
+        <translation>等级赛 第%1局</translation>
     </message>
     <message>
         <source>Main Variation</source>
