@@ -214,8 +214,11 @@ int main(int argc, char *argv[])
     qmlRegisterInterface<PieceModel>("PieceModel");
     QTranslator translator;
     auto localeName = QLocale::system().name();
-    if (localeName == QStringLiteral("zh_CN"))
-        localeName = QStringLiteral("zh_Hans"); // File name used by Weblate
+    // We currently only have zh_Hans for Chinese but Qt doesn't know how to
+    // handle this (last tested with Qt 5.12.0)
+    if (localeName == QStringLiteral("zh")
+            || localeName.startsWith(QStringLiteral("zh_")))
+        localeName = QStringLiteral("zh_Hans");
     translator.load(":qml/i18n/qml_" + localeName);
     QCoreApplication::installTranslator(&translator);
 #ifdef Q_OS_ANDROID
