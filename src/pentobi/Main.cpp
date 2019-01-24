@@ -214,10 +214,9 @@ int main(int argc, char *argv[])
     qmlRegisterInterface<PieceModel>("PieceModel");
     QTranslator translator;
     auto localeName = QLocale::system().name();
-    // We currently only have zh_Hans for Chinese but Qt doesn't know how to
-    // handle this (last tested with Qt 5.12.0)
-    if (localeName == QStringLiteral("zh")
-            || localeName.startsWith(QStringLiteral("zh_")))
+    // Qt doesn't know that zh_Hans, as created by Weblate, is a parent of
+    // zh_CN (last tested with Qt 5.12.0)
+    if (localeName == QStringLiteral("zh_CN"))
         localeName = QStringLiteral("zh_Hans");
     translator.load(":qml/i18n/qml_" + localeName);
     QCoreApplication::installTranslator(&translator);
