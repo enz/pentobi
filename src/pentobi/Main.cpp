@@ -213,12 +213,7 @@ int main(int argc, char *argv[])
     qmlRegisterInterface<GameMove>("GameModelMove");
     qmlRegisterInterface<PieceModel>("PieceModel");
     QTranslator translator;
-    auto localeName = QLocale::system().name();
-    // Qt doesn't know that zh_Hans, as created by Weblate, is a parent of
-    // zh_CN (last tested with Qt 5.12.0)
-    if (localeName == QStringLiteral("zh_CN"))
-        localeName = QStringLiteral("zh_Hans");
-    translator.load(":qml/i18n/qml_" + localeName);
+    translator.load(":qml/i18n/qml_" + QLocale::system().name());
     QCoreApplication::installTranslator(&translator);
 #ifdef Q_OS_ANDROID
     return mainAndroid();

@@ -3,6 +3,6 @@
         <file>qml_de.qm</file>
         <file>qml_fr.qm</file>
         <file>qml_nb_NO.qm</file>
-        <file>qml_zh_Hans.qm</file>
+        <file>qml_zh_CN.qm</file>
     </qresource>
 </RCC>
