@@ -247,7 +247,8 @@ SOURCES += \
 TRANSLATIONS = \
     qml/i18n/qml_de.ts \
     qml/i18n/qml_fr.ts \
-    qml/i18n/qml_nb_NO.ts
+    qml/i18n/qml_nb_NO.ts \
+    qml/i18n/qml_zh_Hans.ts
 
 qtPrepareTool(LRELEASE, lrelease)
 updateqm.input = TRANSLATIONS

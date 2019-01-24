@@ -2,6 +2,7 @@ Version 16.x (master)
 =====================
 
 * Small increase in playing strength, mainly in Callisto and Classic.
+* New UI translation: Simplified Chinese (thanks to Cherry)
 * The compiler now needs to support C++17.
 
 

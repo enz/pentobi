@@ -213,7 +213,10 @@ int main(int argc, char *argv[])
     qmlRegisterInterface<GameMove>("GameModelMove");
     qmlRegisterInterface<PieceModel>("PieceModel");
     QTranslator translator;
-    translator.load(":qml/i18n/qml_" + QLocale::system().name());
+    auto localeName = QLocale::system().name();
+    if (localeName == QStringLiteral("zh_CN"))
+        localeName = QStringLiteral("zh_Hans"); // File name used by Weblate
+    translator.load(":qml/i18n/qml_" + localeName);
     QCoreApplication::installTranslator(&translator);
 #ifdef Q_OS_ANDROID
     return mainAndroid();
