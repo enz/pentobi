@@ -540,7 +540,7 @@
     </message>
     <message>
         <source>GembloQ</source>
-        <translation type="unfinished"></translation>
+        <translation>宝石阵Q</translation>
     </message>
     <message>
         <source>Callisto</source>
@@ -1261,7 +1261,7 @@
     <message>
         <source>%1. %2</source>
         <extracomment>Format in recent files menu. First argument is the file number, second argument the file name.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>(%1) %2</translation>
     </message>
     <message>
         <source>Clear List</source>
@@ -1500,22 +1500,22 @@
     <message>
         <source>GembloQ (4)</source>
         <extracomment>Short for GembloQ (4 players)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>宝石阵Q （4人）</translation>
     </message>
     <message>
         <source>GembloQ (2)</source>
         <extracomment>Short for GembloQ (2 players, 2 colors)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>宝石阵Q （2人）</translation>
     </message>
     <message>
         <source>GembloQ (2/4)</source>
         <extracomment>Short for GembloQ (2 players, 4 colors)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>宝石阵Q（2人4色）</translation>
     </message>
     <message>
         <source>GembloQ (3)</source>
         <extracomment>Short for GembloQ (3 players)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>宝石阵Q（3人）</translation>
     </message>
     <message>
         <source>Rated games:</source>
