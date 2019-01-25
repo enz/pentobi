@@ -49,8 +49,6 @@ string to_lower(string s);
 
 string trim(const string& s);
 
-string trim_right(const string& s);
-
 //-----------------------------------------------------------------------------
 
 } // namespace libboardgame_util

@@ -82,12 +82,4 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_trim)
     LIBBOARDGAME_CHECK_EQUAL(trim(""), "");
 }
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_trim_right)
-{
-    LIBBOARDGAME_CHECK_EQUAL(trim_right("aa bb"), "aa bb");
-    LIBBOARDGAME_CHECK_EQUAL(trim_right(" \t\r\naa bb"), " \t\r\naa bb");
-    LIBBOARDGAME_CHECK_EQUAL(trim_right("aa bb \t\r\n"), "aa bb");
-    LIBBOARDGAME_CHECK_EQUAL(trim_right(""), "");
-}
-
 //----------------------------------------------------------------------------
