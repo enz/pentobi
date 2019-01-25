@@ -967,7 +967,7 @@ void GameModel::loadRecentFiles()
     QSettings settings;
     m_recentFiles =
             settings.value(QStringLiteral("recentFiles")).toStringList();
-    QMutableListIterator<QString> i(m_recentFiles);
+    QMutableListIterator i(m_recentFiles);
     while (i.hasNext()) {
         auto file = i.next();
         if (file.isEmpty() || ! QFileInfo::exists(file))
