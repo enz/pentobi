@@ -16,8 +16,8 @@ MenuItem {
 
     property string shortcut: action && action.shortcut ? action.shortcut : ""
 
-    function addMnemonic(text, mnemonic) {
-        return PentobiControls.addMnemonic(text, mnemonic)
+    function addShortcut(text, shortcut) {
+        return PentobiControls.addShortcut(text, shortcut)
     }
 
     property real _anyItemIndicatorWidth: {

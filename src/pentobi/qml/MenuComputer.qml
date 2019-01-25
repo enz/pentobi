@@ -7,32 +7,32 @@
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: addMnemonic(qsTr("Computer"),
-                       //: Mnemonic for menu Computer. Leave empty for no mnemonic.
+    title: addShortcut(qsTr("Computer"),
+                       //: Keyboard shortcut for menu Computer. Leave empty for no shortcut.
                        qsTr("C"))
 
     Pentobi.MenuItem {
         action: actionComputerSettings
-        text: addMnemonic(action.text,
-                          //: Mnemonic for menu item Computer Settings. Leave empty for no mnemonic.
+        text: addShortcut(action.text,
+                          //: Keyboard shortcut for menu item Computer Settings. Leave empty for no shortcut.
                           qsTr("S"))
     }
     Pentobi.MenuItem {
         action: actionPlay
-        text: addMnemonic(actionPlay.text,
-                          //: Mnemonic for menu item Play. Leave empty for no mnemonic.
+        text: addShortcut(actionPlay.text,
+                          //: Keyboard shortcut for menu item Play. Leave empty for no shortcut.
                           qsTr("P"))
     }
     Pentobi.MenuItem {
         action: actionPlaySingle
-        text: addMnemonic(action.text,
-                          //: Mnemonic for menu item Play Move. Leave empty for no mnemonic.
+        text: addShortcut(action.text,
+                          //: Keyboard shortcut for menu item Play Move. Leave empty for no shortcut.
                           qsTr("M"))
     }
     Pentobi.MenuItem {
         action: actionStop
-        text: addMnemonic(action.text,
-                          //: Mnemonic for menu item Stop. Leave empty for no mnemonic.
+        text: addShortcut(action.text,
+                          //: Keyboard shortcut for menu item Stop. Leave empty for no shortcut.
                           qsTr("O"))
     }
 }

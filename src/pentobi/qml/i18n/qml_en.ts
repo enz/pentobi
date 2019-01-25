@@ -920,27 +920,27 @@
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu Computer. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu Computer. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>S</source>
-        <extracomment>Mnemonic for menu item Computer Settings. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Computer Settings. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>P</source>
-        <extracomment>Mnemonic for menu item Play. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Play. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Play Move. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Play Move. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>O</source>
-        <extracomment>Mnemonic for menu item Stop. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Stop. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -952,12 +952,12 @@
     </message>
     <message>
         <source>E</source>
-        <extracomment>Mnemonic for menu Edit. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu Edit. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Make Main Variation. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Make Main Variation. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -971,7 +971,7 @@
     </message>
     <message>
         <source>U</source>
-        <extracomment>Mnemonic for menu item Variation Up. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Variation Up. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -981,7 +981,7 @@
     </message>
     <message>
         <source>W</source>
-        <extracomment>Mnemonic for menu item Variation Down. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Variation Down. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -990,7 +990,7 @@
     </message>
     <message>
         <source>D</source>
-        <extracomment>Mnemonic for menu item Delete Variations. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Delete Variations. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -999,7 +999,7 @@
     </message>
     <message>
         <source>T</source>
-        <extracomment>Mnemonic for menu item Truncate. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Truncate. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1008,7 +1008,7 @@
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu item Truncate Children. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Truncate Children. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1017,7 +1017,7 @@
     </message>
     <message>
         <source>P</source>
-        <extracomment>Mnemonic for menu item Keep Position. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Keep Position. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1026,7 +1026,7 @@
     </message>
     <message>
         <source>S</source>
-        <extracomment>Mnemonic for menu item Keep Subtree. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Keep Subtree. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1035,7 +1035,7 @@
     </message>
     <message>
         <source>O</source>
-        <extracomment>Mnemonic for menu item Setup Mode. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Setup Mode. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1044,7 +1044,7 @@
     </message>
     <message>
         <source>N</source>
-        <extracomment>Mnemonic for menu item Next Color. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Next Color. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1053,7 +1053,7 @@
     </message>
     <message>
         <source>A</source>
-        <extracomment>Mnemonic for menu item Annotation. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Annotation. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1069,17 +1069,17 @@
     </message>
     <message>
         <source>E</source>
-        <extracomment>Mnemonic for menu Export. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu Export. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Image. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Image. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A</source>
-        <extracomment>Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item ASCII Art. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1099,17 +1099,17 @@
     </message>
     <message>
         <source>G</source>
-        <extracomment>Mnemonic for menu Game. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu Game. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>N</source>
-        <extracomment>Mnemonic for menu item New. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item New. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>R</source>
-        <extracomment>Mnemonic for menu item Rated Game. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Rated Game. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1118,27 +1118,27 @@
     </message>
     <message>
         <source>V</source>
-        <extracomment>Mnemonic for menu item Game Variant. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Game Variant. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>I</source>
-        <extracomment>Mnemonic for menu item Game Info. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Game Info. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>U</source>
-        <extracomment>Mnemonic for menu item Undo. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Undo. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>F</source>
-        <extracomment>Mnemonic for menu item Find Move. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Find Move. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>O</source>
-        <extracomment>Mnemonic for menu item Open. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Open. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1147,22 +1147,22 @@
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu item Open Clipboard. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Open Clipboard. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>S</source>
-        <extracomment>Mnemonic for menu item Save. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Save. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A</source>
-        <extracomment>Mnemonic for menu item Save As. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Save As. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Q</source>
-        <extracomment>Mnemonic for menu item Quit. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Quit. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1174,27 +1174,27 @@
     </message>
     <message>
         <source>O</source>
-        <extracomment>Mnemonic for menu Go. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu Go. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>N</source>
-        <extracomment>Mnemonic for menu item Go/Move Number. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Go/Move Number. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>M</source>
-        <extracomment>Mnemonic for menu item Go/Main Variation. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Go/Main Variation. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>B</source>
-        <extracomment>Mnemonic for menu item Beginning Of Branch. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Beginning Of Branch. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu item Next Comment. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Next Comment. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1206,12 +1206,12 @@
     </message>
     <message>
         <source>H</source>
-        <extracomment>Mnemonic for menu Help. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu Help. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>P</source>
-        <extracomment>Mnemonic for menu item Pentobi Help. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Pentobi Help. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1220,7 +1220,7 @@
     </message>
     <message>
         <source>A</source>
-        <extracomment>Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item About Pentobi. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1229,7 +1229,7 @@
     </message>
     <message>
         <source>B</source>
-        <extracomment>Mnemonic for menu item Report Bug. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Report Bug. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1254,7 +1254,7 @@
     </message>
     <message>
         <source>P</source>
-        <extracomment>Mnemonic for menu Open Recent. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu Open Recent. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1269,7 +1269,7 @@
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu item Recent Files/Clear List. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Recent Files/Clear List. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1281,7 +1281,7 @@
     </message>
     <message>
         <source>T</source>
-        <extracomment>Mnemonic for menu Tools. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu Tools. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1290,7 +1290,7 @@
     </message>
     <message>
         <source>R</source>
-        <extracomment>Mnemonic for menu item Rating. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Rating. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1299,7 +1299,7 @@
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu item Clear Rating. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Clear Rating. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1308,7 +1308,7 @@
     </message>
     <message>
         <source>A</source>
-        <extracomment>Mnemonic for menu item Analyze Game. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Analyze Game. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1317,7 +1317,7 @@
     </message>
     <message>
         <source>E</source>
-        <extracomment>Mnemonic for menu item Clear Analysis. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Clear Analysis. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1333,22 +1333,22 @@
     </message>
     <message>
         <source>V</source>
-        <extracomment>Mnemonic for menu View. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu View. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>A</source>
-        <extracomment>Mnemonic for menu Appearance. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu Appearance. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>F</source>
-        <extracomment>Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item Fullscreen. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>C</source>
-        <extracomment>Mnemonic for menu item View/Comment. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item View/Comment. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1361,7 +1361,7 @@
     </message>
     <message>
         <source>T</source>
-        <extracomment>Mnemonic for menu item View/Toolbar. Leave empty for no mnemonic.</extracomment>
+        <extracomment>Keyboard shortcut for menu item View/Toolbar. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>

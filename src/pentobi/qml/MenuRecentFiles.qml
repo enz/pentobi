@@ -9,8 +9,8 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: addMnemonic(qsTr("Open Recent"),
-                       //: Mnemonic for menu Open Recent. Leave empty for no mnemonic.
+    title: addShortcut(qsTr("Open Recent"),
+                       //: Keyboard shortcut for menu Open Recent. Leave empty for no shortcut.
                        qsTr("P"))
     enabled: gameModel.recentFiles.length > 0
 
@@ -22,7 +22,7 @@ Pentobi.Menu {
         if (isDesktop)
             //: Format in recent files menu. First argument is the
             //: file number, second argument the file name.
-            text = addMnemonic(qsTr("%1. %2").arg(index + 1).arg(text),
+            text = addShortcut(qsTr("%1. %2").arg(index + 1).arg(text),
                                (index + 1).toString())
         return text
     }
@@ -87,8 +87,8 @@ Pentobi.Menu {
     Pentobi.MenuSeparator { }
     Action {
         //: Menu item for clearing the recent files list
-        text: addMnemonic(qsTr("Clear List"),
-                          //: Mnemonic for menu item Recent Files/Clear List. Leave empty for no mnemonic.
+        text: addShortcut(qsTr("Clear List"),
+                          //: Keyboard shortcut for menu item Recent Files/Clear List. Leave empty for no shortcut.
                           qsTr("C"))
         onTriggered: Qt.callLater(function() { // QTBUG-69682
             gameModel.clearRecentFiles()

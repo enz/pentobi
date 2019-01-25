@@ -10,7 +10,7 @@ import "Controls.js" as PentobiControls
 import "." as Pentobi
 
 Menu {
-    function addMnemonic(text, mnemonic) { return PentobiControls.addMnemonic(text, mnemonic) }
+    function addShortcut(text, shortcut) { return PentobiControls.addShortcut(text, shortcut) }
 
     property bool dynamicWidth: isDesktop
 
@@ -55,11 +55,11 @@ Menu {
         currentIndex = -1
     }
     Component.onCompleted: {
-        // Sanity checks for mnemonics
+        // Sanity checks for shortcuts
         if (! isDebug || ! isDesktop)
             return
-        var allMnemonics = []
-        var i, j, text, pos, mnemonic, textWithoutMnemonic
+        var allShortcuts = []
+        var i, j, text, pos, shortcut, textWithoutShortcut
         for (i = 0; i < count; ++i) {
             if (itemAt(i))
                 text = itemAt(i).text
@@ -69,16 +69,16 @@ Menu {
                 continue
             pos = text.indexOf("&")
             if (pos < 0 || pos === text.length - 1) {
-                textWithoutMnemonic = text
+                textWithoutShortcut = text
                 continue
             }
-            mnemonic = text.substr(pos + 1, 1).toLowerCase()
-            for (j = 0; j < allMnemonics.length; ++j)
-                if (allMnemonics[j] === mnemonic)
-                    console.warn("Duplicate mnemonic:", text)
-            allMnemonics.push(mnemonic)
+            shortcut = text.substr(pos + 1, 1).toLowerCase()
+            for (j = 0; j < allShortcuts.length; ++j)
+                if (allShortcuts[j] === shortcut)
+                    console.warn("Duplicate menu shortcut:", text)
+            allShortcuts.push(shortcut)
         }
-        if (allMnemonics.length > 0 && textWithoutMnemonic)
-            console.warn("No mnemonic:", textWithoutMnemonic)
+        if (allShortcuts.length > 0 && textWithoutShortcut)
+            console.warn("Missing menu shortcut:", textWithoutShortcut)
     }
 }

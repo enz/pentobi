@@ -8,25 +8,25 @@ import QtQuick.Controls 2.3
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: addMnemonic(qsTr("Help"),
-                       //: Mnemonic for menu Help. Leave empty for no mnemonic.
+    title: addShortcut(qsTr("Help"),
+                       //: Keyboard shortcut for menu Help. Leave empty for no shortcut.
                        qsTr("H"))
 
     Pentobi.MenuItem {
         action: actionHelp
-        text: addMnemonic(actionHelp.text,
-                          //: Mnemonic for menu item Pentobi Help. Leave empty for no mnemonic.
+        text: addShortcut(actionHelp.text,
+                          //: Keyboard shortcut for menu item Pentobi Help. Leave empty for no shortcut.
                           qsTr("P"))
     }
     Action {
-        text: addMnemonic(qsTr("Report Bug"),
-                          //: Mnemonic for menu item Report Bug. Leave empty for no mnemonic.
+        text: addShortcut(qsTr("Report Bug"),
+                          //: Keyboard shortcut for menu item Report Bug. Leave empty for no shortcut.
                           qsTr("B"))
         onTriggered: Qt.openUrlExternally("https://sourceforge.net/p/pentobi/bugs/")
     }
     Action {
-        text: addMnemonic(qsTr("About Pentobi"),
-                          //: Mnemonic for menu item About Pentobi. Leave empty for no mnemonic.
+        text: addShortcut(qsTr("About Pentobi"),
+                          //: Keyboard shortcut for menu item About Pentobi. Leave empty for no shortcut.
                           qsTr("A"))
         onTriggered: aboutDialog.open()
     }

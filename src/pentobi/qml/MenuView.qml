@@ -9,13 +9,13 @@ import QtQuick.Window 2.1
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: addMnemonic(qsTr("View"),
-                       //: Mnemonic for menu View. Leave empty for no mnemonic.
+    title: addShortcut(qsTr("View"),
+                       //: Keyboard shortcut for menu View. Leave empty for no shortcut.
                        qsTr("V"))
 
     Action {
-        text: addMnemonic(qsTr("Appearance"),
-                          //: Mnemonic for menu Appearance. Leave empty for no mnemonic.
+        text: addShortcut(qsTr("Appearance"),
+                          //: Keyboard shortcut for menu Appearance. Leave empty for no shortcut.
                           qsTr("A"))
         onTriggered: appearanceDialog.open()
     }
@@ -23,8 +23,8 @@ Pentobi.Menu {
         visible: isDesktop
         // Invisible menu item still use space in Qt 5.11
         height: visible ? implicitHeight : 0
-        text: addMnemonic(qsTr("Toolbar"),
-                          //: Mnemonic for menu item View/Toolbar. Leave empty for no mnemonic.
+        text: addShortcut(qsTr("Toolbar"),
+                          //: Keyboard shortcut for menu item View/Toolbar. Leave empty for no shortcut.
                           qsTr("T"))
         checkable: true
         checked: rootWindow.showToolBar
@@ -32,14 +32,14 @@ Pentobi.Menu {
     }
     Pentobi.MenuItem {
         action: actionComment
-        text: addMnemonic(actionComment.text,
-                          //: Mnemonic for menu item View/Comment. Leave empty for no mnemonic.
+        text: addShortcut(actionComment.text,
+                          //: Keyboard shortcut for menu item View/Comment. Leave empty for no shortcut.
                           qsTr("C"))
     }
     Pentobi.MenuItem {
         action: actionFullscreen
-        text: addMnemonic(action.text,
-                          //: Mnemonic for menu item Fullscreen. Leave empty for no mnemonic.
+        text: addShortcut(action.text,
+                          //: Keyboard shortcut for menu item Fullscreen. Leave empty for no shortcut.
                           qsTr("F"))
     }
 }

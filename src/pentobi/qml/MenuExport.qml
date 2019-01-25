@@ -8,19 +8,19 @@ import QtQuick.Controls 2.3
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: addMnemonic(qsTr("Export"),
-                       //: Mnemonic for menu Export. Leave empty for no mnemonic.
+    title: addShortcut(qsTr("Export"),
+                       //: Keyboard shortcut for menu Export. Leave empty for no shortcut.
                        qsTr("E"))
 
     Action {
-        text: addMnemonic(qsTr("Image…"),
-                          //: Mnemonic for menu item Image. Leave empty for no mnemonic.
+        text: addShortcut(qsTr("Image…"),
+                          //: Keyboard shortcut for menu item Image. Leave empty for no shortcut.
                           qsTr("M"))
         onTriggered: exportImageDialog.open()
     }
     Action {
-        text: addMnemonic(qsTr("ASCII Art…"),
-                          //: Mnemonic for menu item ASCII Art. Leave empty for no mnemonic.
+        text: addShortcut(qsTr("ASCII Art…"),
+                          //: Keyboard shortcut for menu item ASCII Art. Leave empty for no shortcut.
                           qsTr("A"))
         onTriggered: {
             var dialog = asciiArtSaveDialog.get()
