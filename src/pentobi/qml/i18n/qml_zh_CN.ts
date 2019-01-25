@@ -1500,12 +1500,12 @@
     <message>
         <source>GembloQ (4)</source>
         <extracomment>Short for GembloQ (4 players)</extracomment>
-        <translation>宝石阵Q （4人）</translation>
+        <translation>宝石阵Q（4人）</translation>
     </message>
     <message>
         <source>GembloQ (2)</source>
         <extracomment>Short for GembloQ (2 players, 2 colors)</extracomment>
-        <translation>宝石阵Q （2人）</translation>
+        <translation>宝石阵Q（2人）</translation>
     </message>
     <message>
         <source>GembloQ (2/4)</source>
