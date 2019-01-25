@@ -267,6 +267,7 @@ function getFileInfo(isRated, file, isModified) {
         //: Label for rated game. The argument is the game number.
         return qsTr("Rated Game %1").arg(ratingModel.numberGames + 1)
     if (isModified)
+        //: Label for modified loaded game. The argument is the file name.
         return qsTr("%1 (modified)").arg(file)
     return file
 }

@@ -656,6 +656,7 @@
     </message>
     <message>
         <source>%1 (modified)</source>
+        <extracomment>Label for modified loaded game. The argument is the file name.</extracomment>
         <translation>%1 （已修改）</translation>
     </message>
     <message>
