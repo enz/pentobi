@@ -976,21 +976,21 @@ string SearchBase<S, M, R>::get_info() const
         return {};
     auto& thread_state = m_threads[0]->thread_state;
     ostringstream s;
-    s << fixed << setprecision(2) << "Val: " << get_root_val().get_mean()
-      << setprecision(0) << ", ValCnt: " << get_root_val().get_count()
-      << ", VstCnt: " << get_root_visit_count()
-      << ", Sim: " << m_nu_simulations;
+    s << fixed << setprecision(2) << "Val " << get_root_val().get_mean()
+      << setprecision(0) << ", ValCnt " << get_root_val().get_count()
+      << ", Vst " << get_root_visit_count()
+      << ", Sim " << m_nu_simulations;
     auto child = select_final();
     if (child && root.get_visit_count() > 0)
-        s << setprecision(1) << ", Chld: "
+        s << setprecision(1) << ", Chld "
           << (100 * child->get_visit_count() / root.get_visit_count())
           << '%';
-    s << "\nNds: " << m_tree.get_nu_nodes()
-      << ", Tm: " << time_to_string(m_last_time)
-      << setprecision(0) << ", Sim/s: "
+    s << "\nNds " << m_tree.get_nu_nodes()
+      << ", Tm " << time_to_string(m_last_time)
+      << setprecision(0) << ", Sim/s "
       << (double(m_nu_simulations) / m_last_time)
-      << ", Len: " << thread_state.stat_len.to_string(true, 1, true)
-      << "\nDp: " << thread_state.stat_in_tree_len.to_string(true, 1, true)
+      << ", Len " << thread_state.stat_len.to_string(true, 1, true)
+      << "\nDp " << thread_state.stat_in_tree_len.to_string(true, 1, true)
       << "\n";
     return s.str();
 }

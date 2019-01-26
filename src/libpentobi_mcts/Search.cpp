@@ -147,10 +147,10 @@ string Search::get_info() const
         return {};
     ostringstream s;
     s << SearchBase::get_info()
-      << "Mov: " << root.get_nu_children() << ", ";
+      << "Mov " << root.get_nu_children() << ", ";
     if (libpentobi_base::get_nu_players(m_variant) > 2)
     {
-        s << "All:";
+        s << "All";
         for (PlayerInt i = 0; i < libpentobi_base::get_nu_colors(m_variant);
              ++i)
         {

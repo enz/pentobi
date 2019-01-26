@@ -445,7 +445,7 @@ string State::get_info() const
     ostringstream s;
     if (m_bd.get_nu_players() == 2)
     {
-        s << "Sco: ";
+        s << "Sco ";
         m_stat_score[Color(0)].write(s, true, 1);
     }
     s << '\n';
