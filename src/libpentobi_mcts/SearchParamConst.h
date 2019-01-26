@@ -58,8 +58,6 @@ struct SearchParamConst
 
     static constexpr bool virtual_loss = true;
 
-    static constexpr bool use_unlikely_change = true;
-
     static constexpr Float child_min_count = 3;
 
     static constexpr Float max_move_prior = 1;

@@ -101,10 +101,6 @@ struct SearchParamConstDefault
         See Chaslot et al.: Parallel Monte-Carlo Tree Search. 2008. */
     static constexpr bool virtual_loss = false;
 
-    /** Terminate search early if move is unlikely to change.
-        See implementation of check_cannot_change(). */
-    static constexpr bool use_unlikely_change = true;
-
     /** The minimum count used in prior knowledge initialization of
         the children of an expanded node.
         The value must be greater 0 (it may be a positive epsilon) because
@@ -747,24 +743,19 @@ bool SearchBase<S, M, R>::check_cannot_change(
         }
     }
     Float diff = max_wins - second_max;
-    if (SearchParamConst::use_unlikely_change)
+    // Weight remaining number of simulations with current global win rate,
+    // but not less than 10%
+    auto& root_val = m_root_val[m_player];
+    Float win_rate;
+    if (root_val.get_count() > 100)
     {
-        // Weight remaining number of simulations with current global win rate,
-        // but not less than 10%
-        auto& root_val = m_root_val[m_player];
-        Float win_rate;
-        if (root_val.get_count() > 100)
-        {
-            win_rate = root_val.get_mean();
-            if (win_rate < 0.1f)
-                win_rate = 0.1f;
-        }
-        else
-            win_rate = 1; // Not enough statistics
-        if (diff < win_rate * remaining)
-            return false;
+        win_rate = root_val.get_mean();
+        if (win_rate < 0.1f)
+            win_rate = 0.1f;
     }
-    else if (diff < remaining)
+    else
+        win_rate = 1; // Not enough statistics
+    if (diff < win_rate * remaining)
         return false;
     LIBBOARDGAME_LOG_THREAD(thread_state, "Move will not change");
     return true;
