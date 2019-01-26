@@ -61,6 +61,40 @@ const float counts_nexos[Player::max_supported_level] =
 const float counts_callisto_2[Player::max_supported_level] =
     { 30, 87, 300, 1017, 4729, 20435, 122778, 613905, 3069529 };
 
+/** Suggest how much memory to use for the trees depending on the maximum
+    level used. */
+size_t get_memory(unsigned max_level)
+{
+    size_t available = libboardgame_sys::get_memory();
+    if (available == 0)
+    {
+        LIBBOARDGAME_LOG("WARNING: could not determine system memory"
+                         " (assuming 512MB)");
+        available = 512000000;
+    }
+    // Don't use all of the available memory
+    size_t reasonable = available / 4;
+    size_t wanted = 2000000000;
+    if (max_level < Player::max_supported_level)
+    {
+        // We don't need so much memory if m_max_level is smaller than
+        // max_supported_level. Trigon has the highest relative number of
+        // simulations on lower levels compared to the highest level. The
+        // memory used in a search is not proportional to the number of
+        // simulations (e.g. because the expand threshold increases with the
+        // depth). We approximate this by adding an exponent to the ratio
+        // and not taking into account if m_max_level is very small.
+        LIBBOARDGAME_ASSERT(Player::max_supported_level >= 5);
+        auto factor = pow(counts_trigon[Player::max_supported_level - 1]
+                          / counts_trigon[max(max_level, 5u) - 1], 0.8);
+        wanted = static_cast<size_t>(double(wanted) / factor);
+    }
+    size_t memory = min(wanted, reasonable);
+    LIBBOARDGAME_LOG("Using ", memory / 1000000, " MB of ",
+                     available / 1000000, " MB");
+    return memory;
+}
+
 } // namespace
 
 //-----------------------------------------------------------------------------
@@ -74,9 +108,7 @@ Player::Player(Variant initial_variant, unsigned max_level,
       m_max_level(max_level),
       m_level(4),
       m_fixed_simulations(0),
-      m_resign_threshold(0.09f),
-      m_resign_min_simulations(500),
-      m_search(initial_variant, nu_threads, get_memory()),
+      m_search(initial_variant, nu_threads, get_memory(max_level)),
       m_book(initial_variant),
       m_time_source(new WallTimeSource)
 {
@@ -219,44 +251,10 @@ Move Player::genmove(const Board& bd, Color c)
         return Move::null();
     // Resign only in two-player game variants
     if (get_nu_players(variant) == 2)
-        if (m_search.get_root_visit_count() > m_resign_min_simulations
-                && m_search.get_root_val().get_mean() < m_resign_threshold)
+        if (m_search.get_root_visit_count() > 500
+                && m_search.get_root_val().get_mean() < 0.09f)
             m_resign = true;
     return mv;
-}
-
-/** Suggest how much memory to use for the trees depending on the maximum
-    level used. */
-size_t Player::get_memory()
-{
-    size_t available = libboardgame_sys::get_memory();
-    if (available == 0)
-    {
-        LIBBOARDGAME_LOG("WARNING: could not determine system memory"
-                         " (assuming 512MB)");
-        available = 512000000;
-    }
-    // Don't use all of the available memory
-    size_t reasonable = available / 4;
-    size_t wanted = 2000000000;
-    if (m_max_level < max_supported_level)
-    {
-        // We don't need so much memory if m_max_level is smaller than
-        // max_supported_level. Trigon has the highest relative number of
-        // simulations on lower levels compared to the highest level. The
-        // memory used in a search is not proportional to the number of
-        // simulations (e.g. because the expand threshold increases with the
-        // depth). We approximate this by adding an exponent to the ratio
-        // and not taking into account if m_max_level is very small.
-        LIBBOARDGAME_ASSERT(max_supported_level >= 5);
-        auto factor = pow(counts_trigon[max_supported_level - 1]
-                          / counts_trigon[max(m_max_level, 5u) - 1], 0.8);
-        wanted = static_cast<size_t>(double(wanted) / factor);
-    }
-    size_t memory = min(wanted, reasonable);
-    LIBBOARDGAME_LOG("Using ", memory / 1000000, " MB of ",
-                     available / 1000000, " MB");
-    return memory;
 }
 
 Rating Player::get_rating(Variant variant, unsigned level)
@@ -271,7 +269,6 @@ Rating Player::get_rating(Variant variant, unsigned level)
     // variants are calibrated and the ratings are also used for other game
     // variants that we assume have comparable strength (e.g. multi-player on
     // the same board).
-    auto max_supported_level = Player::max_supported_level;
     level = min(max(level, 1u), max_supported_level);
     Rating result;
     switch (get_board_type(variant))
@@ -279,7 +276,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
     case BoardType::classic: // Measured for classic_2
         {
             // Anchor 1000, scale 0.6
-            static double elo[Player::max_supported_level] =
+            static double elo[max_supported_level] =
                 { 1000, 1142, 1283, 1425, 1567, 1708, 1850, 1951, 2030 };
             result = Rating(elo[level - 1]);
         }
@@ -287,7 +284,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
     case BoardType::duo:
         {
             // Anchor 1000, scale 0.74
-            static double elo[Player::max_supported_level] =
+            static double elo[max_supported_level] =
                 { 1000, 1189, 1378, 1567, 1755, 1945, 2134, 2185, 2209 };
             result = Rating(elo[level - 1]);
         }
@@ -295,7 +292,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
     case BoardType::callisto_2:
         {
             // Anchor 1000, scale 0.49
-            static double elo[Player::max_supported_level] =
+            static double elo[max_supported_level] =
                 { 1000, 1113, 1225, 1338, 1450, 1563, 1675, 1783, 1868 };
             result = Rating(elo[level - 1]);
         }
@@ -304,7 +301,7 @@ Rating Player::get_rating(Variant variant, unsigned level)
     case BoardType::trigon_3:
         {
             // Anchor 1000, scale 0.48
-            static double elo[Player::max_supported_level] =
+            static double elo[max_supported_level] =
                 { 1000, 1110, 1220, 1330, 1440, 1550, 1660, 1765, 1897 };
             result = Rating(elo[level - 1]);
         }

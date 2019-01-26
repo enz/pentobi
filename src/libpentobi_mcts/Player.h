@@ -25,7 +25,7 @@ class Player final
     : public PlayerBase
 {
 public:
-    static const unsigned max_supported_level = 9;
+    static constexpr unsigned max_supported_level = 9;
 
     /** Constructor.
         @param initial_variant Game variant to initialize the internal
@@ -111,10 +111,6 @@ private:
 
     Float m_fixed_simulations;
 
-    Float m_resign_threshold;
-
-    Float m_resign_min_simulations;
-
     double m_fixed_time;
 
     Search m_search;
@@ -123,8 +119,6 @@ private:
 
     unique_ptr<TimeSource> m_time_source;
 
-
-    size_t get_memory();
 
     void init_settings();
 
