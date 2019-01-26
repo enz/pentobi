@@ -31,7 +31,7 @@ SgfNode& SgfNode::create_new_child()
 {
     auto node = make_unique<SgfNode>();
     node->m_parent = this;
-    SgfNode& result = *(node.get());
+    auto& result = *(node.get());
     auto last_child = get_last_child();
     if (last_child == nullptr)
         m_first_child = move(node);
@@ -160,7 +160,7 @@ void SgfNode::make_first_child()
         auto sibling = current_child->m_sibling.get();
         if (sibling == this)
         {
-            unique_ptr<SgfNode> tmp = move(m_parent->m_first_child);
+            auto tmp = move(m_parent->m_first_child);
             m_parent->m_first_child = move(current_child->m_sibling);
             current_child->m_sibling = move(m_sibling);
             m_sibling = move(tmp);
@@ -193,7 +193,7 @@ void SgfNode::move_down()
     auto current = m_parent->m_first_child.get();
     if (current == this)
     {
-        unique_ptr<SgfNode> tmp = move(m_parent->m_first_child);
+        auto tmp = move(m_parent->m_first_child);
         m_parent->m_first_child = move(m_sibling);
         m_sibling = move(m_parent->m_first_child->m_sibling);
         m_parent->m_first_child->m_sibling = move(tmp);
@@ -206,7 +206,7 @@ void SgfNode::move_down()
         {
             if (! m_sibling)
                 return;
-            unique_ptr<SgfNode> tmp = move(current->m_sibling);
+            auto tmp = move(current->m_sibling);
             current->m_sibling = move(m_sibling);
             m_sibling = move(current->m_sibling->m_sibling);
             current->m_sibling->m_sibling = move(tmp);
@@ -233,7 +233,7 @@ void SgfNode::move_up()
                 make_first_child();
                 return;
             }
-            unique_ptr<SgfNode> tmp = move(prev->m_sibling);
+            auto tmp = move(prev->m_sibling);
             prev->m_sibling = move(current->m_sibling);
             current->m_sibling = move(m_sibling);
             m_sibling = move(tmp);
@@ -269,7 +269,7 @@ unique_ptr<SgfNode> SgfNode::remove_child(SgfNode& child)
     {
         if (node->get() == &child)
         {
-            unique_ptr<SgfNode> result = move(*node);
+            auto result = move(*node);
             if (previous == nullptr)
                 m_first_child = move(child.m_sibling);
             else
