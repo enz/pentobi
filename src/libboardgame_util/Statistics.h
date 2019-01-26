@@ -193,7 +193,7 @@ void Statistics<FLOAT>::write(ostream& out, bool fixed, int precision) const
     FmtSaver saver(out);
     if (fixed)
         out << std::fixed;
-    out << setprecision(precision) << get_mean() << " dev="
+    out << setprecision(precision) << get_mean() << u8" σ="
         << get_deviation();
 }
 
@@ -325,19 +325,14 @@ void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, int precision,
     out << get_mean();
     if (with_error)
         out << u8"±" << get_error();
-    out << " dev=" << get_deviation();
-    if (integer_values)
-        out << setprecision(0);
-    out << " min=";
-    if (m_min == numeric_limits<FLOAT>::max())
-        out << "-";
-    else
-        out << m_min;
-    out << " max=";
-    if (m_max == -numeric_limits<FLOAT>::max())
-        out << "-";
-    else
-        out << m_max;
+    out << u8" σ=" << get_deviation();
+    if (m_min != numeric_limits<FLOAT>::max()
+            && m_max != -numeric_limits<FLOAT>::max() && m_min != m_max)
+    {
+        if (integer_values)
+            out << setprecision(0);
+        out << " [" << m_min << u8"…" << m_max << ']';
+    }
 }
 
 //----------------------------------------------------------------------------
