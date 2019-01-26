@@ -6,16 +6,9 @@
 
 #include "Timer.h"
 
-#include "Assert.h"
-
 namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
-
-Timer::Timer(TimeSource& time_source)
-    : m_start(time_source()),
-      m_time_source(&time_source)
-{ }
 
 double Timer::operator()() const
 {
