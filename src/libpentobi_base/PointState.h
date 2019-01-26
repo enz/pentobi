@@ -21,9 +21,9 @@ class PointState
 public:
     using IntType = Color::IntType;
 
-    static const IntType range = Color::range + 1;
+    static constexpr IntType range = Color::range + 1;
 
-    static const IntType value_empty = range - 1;
+    static constexpr IntType value_empty = range - 1;
 
 
     PointState();
@@ -51,7 +51,7 @@ public:
     Color to_color() const;
 
 private:
-    static const IntType value_uninitialized = range;
+    static constexpr IntType value_uninitialized = range;
 
     IntType m_i;
 

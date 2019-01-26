@@ -37,7 +37,7 @@ public:
 
     static_assert(numeric_limits<IntType>::is_integer);
 
-    static const IntType max_size = M;
+    static constexpr IntType max_size = M;
 
     using iterator = typename array<T, max_size>::iterator;
 

@@ -23,7 +23,7 @@ using libboardgame_util::ArrayList;
 class StartingPoints
 {
 public:
-    static const unsigned max_starting_points = 16;
+    static constexpr unsigned max_starting_points = 16;
 
     void init(Variant variant, const Geometry& geo);
 

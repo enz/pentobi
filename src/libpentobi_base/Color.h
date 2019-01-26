@@ -68,7 +68,7 @@ public:
         IntType m_nu_colors;
     };
 
-    static const IntType range = 4;
+    static constexpr IntType range = 4;
 
     Color();
 
@@ -87,7 +87,7 @@ public:
     Color get_previous(IntType nu_colors) const;
 
 private:
-    static const IntType value_uninitialized = range;
+    static constexpr IntType value_uninitialized = range;
 
     IntType m_i;
 

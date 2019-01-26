@@ -27,7 +27,7 @@ struct SearchParamConst
     using Float = libpentobi_mcts::Float;
 
 
-    static const PlayerInt max_players = 6;
+    static constexpr PlayerInt max_players = 6;
 
     /** The maximum number of moves in a simulation.
         This needs to include pass moves because in the in-tree phase pass
@@ -35,30 +35,30 @@ struct SearchParamConst
         passed in a row. Therefore, the maximum number of moves is reached in
         case that a piece move is followed by (Color::range-1) pass moves and
         an extra Color::range pass moves at the end. */
-    static const unsigned max_moves =
+    static constexpr unsigned max_moves =
             Color::range * (Color::range * Board::max_pieces + 1);
 
 #ifdef LIBBOARDGAME_MCTS_SINGLE_THREAD
-    static const bool multithread = false;
+    static constexpr bool multithread = false;
 #else
-    static const bool multithread = true;
+    static constexpr bool multithread = true;
 #endif
 
-    static const bool rave = true;
+    static constexpr bool rave = true;
 
-    static const bool rave_dist_weighting = true;
+    static constexpr bool rave_dist_weighting = true;
 
-    static const bool use_lgr = true;
+    static constexpr bool use_lgr = true;
 
 #ifdef PENTOBI_LOW_RESOURCES
-    static const size_t lgr_hash_table_size = (1 << 20);
+    static constexpr size_t lgr_hash_table_size = (1 << 20);
 #else
-    static const size_t lgr_hash_table_size = (1 << 21);
+    static constexpr size_t lgr_hash_table_size = (1 << 21);
 #endif
 
-    static const bool virtual_loss = true;
+    static constexpr bool virtual_loss = true;
 
-    static const bool use_unlikely_change = true;
+    static constexpr bool use_unlikely_change = true;
 
     static constexpr Float child_min_count = 3;
 

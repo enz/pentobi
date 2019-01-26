@@ -36,7 +36,7 @@ protected:
     int sync() override;
 
 private:
-    static const unsigned buffer_size = 8192;
+    static constexpr unsigned buffer_size = 8192;
 
     char m_buffer[buffer_size];
 };

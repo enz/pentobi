@@ -24,13 +24,13 @@ public:
     using IntType = uint_fast8_t;
 
     /** Maximum number of unique pieces per color. */
-    static const IntType max_pieces = 24;
+    static constexpr IntType max_pieces = 24;
 
     /** Integer range used for unique pieces without the null piece. */
-    static const IntType range_not_null = max_pieces;
+    static constexpr IntType range_not_null = max_pieces;
 
     /** Integer range used for unique pieces including the null piece */
-    static const IntType range = max_pieces + 1;
+    static constexpr IntType range = max_pieces + 1;
 
 
     static Piece null();
@@ -50,9 +50,9 @@ public:
     IntType to_int() const;
 
 private:
-    static const IntType value_null = range - 1;
+    static constexpr IntType value_null = range - 1;
 
-    static const IntType value_uninitialized = range;
+    static constexpr IntType value_uninitialized = range;
 
     IntType m_i;
 

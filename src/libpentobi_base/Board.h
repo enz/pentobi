@@ -37,14 +37,14 @@ public:
     using PointStateGrid = Grid<PointState>;
 
     /** Maximum number of pieces per player in any game variant. */
-    static const unsigned max_pieces = Setup::max_pieces;
+    static constexpr unsigned max_pieces = Setup::max_pieces;
 
     using PiecesLeftList = ArrayList<Piece, Piece::max_pieces>;
 
-    static const unsigned max_player_moves = max_pieces;
+    static constexpr unsigned max_player_moves = max_pieces;
 
     /** Maximum number of moves in any game variant. */
-    static const unsigned max_moves = Color::range * max_player_moves;
+    static constexpr unsigned max_moves = Color::range * max_player_moves;
 
     /** Use ANSI escape sequences for colored text output in operator>> */
     static bool color_output;

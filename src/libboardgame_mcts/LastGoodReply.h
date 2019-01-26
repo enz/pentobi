@@ -42,9 +42,9 @@ public:
     using Move = M;
 
 
-    static const unsigned max_players = P;
+    static constexpr unsigned max_players = P;
 
-    static const size_t hash_table_size = S;
+    static constexpr size_t hash_table_size = S;
 
 
     LastGoodReply();

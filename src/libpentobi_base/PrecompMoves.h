@@ -36,19 +36,19 @@ public:
         Therefore, the optimal value for speeding up the matching depends on
         the CPU cache size. */
 #ifdef PENTOBI_LOW_RESOURCES
-    static const unsigned adj_status_nu_adj = 5;
+    static constexpr unsigned adj_status_nu_adj = 5;
 #else
-    static const unsigned adj_status_nu_adj = 6;
+    static constexpr unsigned adj_status_nu_adj = 6;
 #endif
 
     /** The maximum sum of the sizes of all precomputed move lists in any
         game variant. */
-    static const unsigned max_move_lists_sum_length =
+    static constexpr unsigned max_move_lists_sum_length =
             adj_status_nu_adj == 5 ? 2356736 : 2628840;
     static_assert(adj_status_nu_adj == 5 || adj_status_nu_adj == 6);
 
     /** The range of values for the adjacent status. */
-    static const unsigned nu_adj_status = 1 << adj_status_nu_adj;
+    static constexpr unsigned nu_adj_status = 1 << adj_status_nu_adj;
 
     /** Begin/end range for lists with moves at a given point. */
     using Range = libboardgame_util::Range<const Move>;

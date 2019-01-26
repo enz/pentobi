@@ -50,7 +50,7 @@ public:
     /** The maximum number of local points for a move.
         The number can be higher than PieceInfo::max_size (see class
         description). */
-    static const unsigned max_local = 2 * PieceInfo::max_size;
+    static constexpr unsigned max_local = 2 * PieceInfo::max_size;
     static_assert(max_local < 0x01000u); // Value for forbidden status
     static_assert(PieceInfo::max_size <= 0xff); // Mask for forbidden status
 

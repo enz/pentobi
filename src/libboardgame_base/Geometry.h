@@ -35,9 +35,9 @@ public:
 
     using IntType = typename Point::IntType;
 
-    static const unsigned max_adj = 4;
+    static constexpr unsigned max_adj = 4;
 
-    static const unsigned max_diag = 11;
+    static constexpr unsigned max_diag = 11;
 
     /** On-board adjacent neighbors of a point. */
     using AdjList = ArrayList<Point, max_adj, unsigned short>;

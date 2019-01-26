@@ -37,17 +37,17 @@ class Point
 public:
     using IntType = I;
 
-    static const unsigned range_onboard = M;
+    static constexpr unsigned range_onboard = M;
 
-    static const unsigned max_width = W;
+    static constexpr unsigned max_width = W;
 
-    static const unsigned max_height = W;
+    static constexpr unsigned max_height = W;
 
     static_assert(numeric_limits<I>::is_integer);
     static_assert(! numeric_limits<I>::is_signed);
     static_assert(range_onboard <= max_width * max_height);
 
-    static const unsigned range = range_onboard + 1;
+    static constexpr unsigned range = range_onboard + 1;
 
 
     static Point null();
@@ -69,9 +69,9 @@ public:
     IntType to_int() const;
 
 private:
-    static const IntType value_uninitialized = range;
+    static constexpr IntType value_uninitialized = range;
 
-    static const IntType value_null = range - 1;
+    static constexpr IntType value_null = range - 1;
 
 
     IntType m_i;

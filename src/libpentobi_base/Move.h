@@ -25,34 +25,34 @@ public:
         Therefore it uses uint_least16_t, not uint_fast16_t. */
     using IntType = uint_least16_t;
 
-    static const IntType onboard_moves_classic = 30433;
+    static constexpr IntType onboard_moves_classic = 30433;
 
-    static const IntType onboard_moves_trigon = 32131;
+    static constexpr IntType onboard_moves_trigon = 32131;
 
-    static const IntType onboard_moves_trigon_3 = 24859;
+    static constexpr IntType onboard_moves_trigon_3 = 24859;
 
-    static const IntType onboard_moves_duo = 13729;
+    static constexpr IntType onboard_moves_duo = 13729;
 
-    static const IntType onboard_moves_junior = 7217;
+    static constexpr IntType onboard_moves_junior = 7217;
 
-    static const IntType onboard_moves_nexos = 15157;
+    static constexpr IntType onboard_moves_nexos = 15157;
 
-    static const IntType onboard_moves_callisto = 9433;
+    static constexpr IntType onboard_moves_callisto = 9433;
 
-    static const IntType onboard_moves_callisto_2 = 4265;
+    static constexpr IntType onboard_moves_callisto_2 = 4265;
 
-    static const IntType onboard_moves_callisto_3 = 6885;
+    static constexpr IntType onboard_moves_callisto_3 = 6885;
 
-    static const IntType onboard_moves_gembloq = 31254;
+    static constexpr IntType onboard_moves_gembloq = 31254;
 
-    static const IntType onboard_moves_gembloq_2 = 15018;
+    static constexpr IntType onboard_moves_gembloq_2 = 15018;
 
-    static const IntType onboard_moves_gembloq_3 = 23518;
+    static constexpr IntType onboard_moves_gembloq_3 = 23518;
 
     /** Integer range of moves.
         The maximum is given by the number of on-board moves in any game
         variant, plus a null move. */
-    static const IntType range = onboard_moves_trigon + 1;
+    static constexpr IntType range = onboard_moves_trigon + 1;
 
     static Move null();
 
@@ -72,7 +72,7 @@ public:
     IntType to_int() const;
 
 private:
-    static const IntType value_uninitialized = range;
+    static constexpr IntType value_uninitialized = range;
 
     IntType m_i;
 

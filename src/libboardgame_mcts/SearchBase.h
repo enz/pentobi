@@ -70,40 +70,40 @@ struct SearchParamConstDefault
 
 
     /** The maximum number of players. */
-    static const PlayerInt max_players = 2;
+    static constexpr PlayerInt max_players = 2;
 
     /** The maximum length of a game. */
-    static const unsigned max_moves = 1000;
+    static constexpr unsigned max_moves = 1000;
 
     /** Compile with support for multi-threaded search.
         Disabling this slightly increases the performance if support for a
         multi-threaded search is not needed. */
-    static const bool multithread = true;
+    static constexpr bool multithread = true;
 
     /** Use RAVE. */
-    static const bool rave = false;
+    static constexpr bool rave = false;
 
     /** Enable distance weighting of RAVE updates.
         The weight decreases linearly from the start to the end of a
         simulation. The distance weight is applied in addition to the normal
         RAVE weight. */
-    static const bool rave_dist_weighting = false;
+    static constexpr bool rave_dist_weighting = false;
 
     /** Enable Last-Good-Reply heuristic.
         @see LastGoodReply */
-    static const bool use_lgr = false;
+    static constexpr bool use_lgr = false;
 
     /** See LastGoodReply::hash_table_size.
         Must be greater 0 if use_lgr is true. */
-    static const size_t lgr_hash_table_size = 0;
+    static constexpr size_t lgr_hash_table_size = 0;
 
     /** Use virtual loss in multi-threaded mode.
         See Chaslot et al.: Parallel Monte-Carlo Tree Search. 2008. */
-    static const bool virtual_loss = false;
+    static constexpr bool virtual_loss = false;
 
     /** Terminate search early if move is unlikely to change.
         See implementation of check_cannot_change(). */
-    static const bool use_unlikely_change = true;
+    static constexpr bool use_unlikely_change = true;
 
     /** The minimum count used in prior knowledge initialization of
         the children of an expanded node.
@@ -179,7 +179,7 @@ public:
 
     using SearchParamConst = R;
 
-    static const bool multithread = SearchParamConst::multithread;
+    static constexpr bool multithread = SearchParamConst::multithread;
 
     using Float = typename SearchParamConst::Float;
 
@@ -190,11 +190,11 @@ public:
     using PlayerMove = libboardgame_mcts::PlayerMove<M>;
 
 
-    static const PlayerInt max_players = SearchParamConst::max_players;
+    static constexpr PlayerInt max_players = SearchParamConst::max_players;
 
-    static const unsigned max_moves = SearchParamConst::max_moves;
+    static constexpr unsigned max_moves = SearchParamConst::max_moves;
 
-    static const size_t lgr_hash_table_size =
+    static constexpr size_t lgr_hash_table_size =
             SearchParamConst::lgr_hash_table_size;
 
     static_assert(! SearchParamConst::use_lgr || lgr_hash_table_size > 0);

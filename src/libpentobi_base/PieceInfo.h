@@ -34,16 +34,16 @@ class PieceInfo
 {
 public:
     /** Maximum number of points in a piece. */
-    static const unsigned max_size = 22;
+    static constexpr unsigned max_size = 22;
 
     /** Maximum number of scored points in a piece.
         Currently the same as max_size, needed for GembloQ. If Nexos was the
         game with the largest pieces, some memory could be saved because
         junction points in Nexos are not scored. */
-    static const unsigned max_scored_size = 22;
+    static constexpr unsigned max_scored_size = 22;
 
     /** Maximum number of instances of a piece per player. */
-    static const unsigned max_instances = 3;
+    static constexpr unsigned max_instances = 3;
 
     using Points = ArrayList<CoordPoint, max_size>;
 
