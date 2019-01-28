@@ -17,6 +17,8 @@ template<typename T>
 class Range
 {
 public:
+    Range() = default;
+
     Range(T* begin, T* end)
         : m_begin(begin),
           m_end(end)

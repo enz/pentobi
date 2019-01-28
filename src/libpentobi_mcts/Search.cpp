@@ -63,6 +63,10 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
                     Float max_count, size_t min_simulations,
                     double max_time, TimeSource& time_source)
 {
+    // We need to be sure that the maximum number of legal moves fits into
+    // the integer type used in Node. Currently, this is even true for all
+    // moves, which is an upper limit to all legal moves.
+    LIBBOARDGAME_ASSERT(bd.get_board_const().get_range() <= Node::max_children);
     m_shared_const.board = &bd;
     m_to_play = to_play;
     auto variant = bd.get_variant();
@@ -143,11 +147,11 @@ string Search::get_info() const
     if (get_nu_simulations() == 0)
         return {};
     auto& root = get_tree().get_root();
-    if (! root.has_children())
+    auto nu_children = root.get_nu_children();
+    if (nu_children <= 0)
         return {};
     ostringstream s;
-    s << SearchBase::get_info()
-      << "Mov " << root.get_nu_children() << ", ";
+    s << SearchBase::get_info() << "Mov " << nu_children << ", ";
     if (libpentobi_base::get_nu_players(m_variant) > 2)
     {
         s << "All";

@@ -110,16 +110,16 @@ public:
 
     Children get_children(const Node& node) const;
 
-    Children get_children_nonempty(const Node& node) const;
-
     Children get_root_children() const { return get_children(get_root()); }
 
     size_t get_nu_nodes() const;
 
     const Node& get_node(NodeIdx i) const;
 
+    void set_expanding(const Node& node) { non_const(node).set_expanding(); }
+
     void link_children(const Node& node, const Node* first_child,
-                       unsigned short nu_children);
+                       unsigned nu_children);
 
     void add_value(const Node& node, Float v);
 
@@ -233,17 +233,12 @@ template<typename N>
 inline auto Tree<N>::get_children(const Node& node) const -> Children
 {
     auto nu_children = node.get_nu_children();
-    auto begin = nu_children != 0 ? &get_node(node.get_first_child()) : nullptr;
-    auto end = begin + nu_children;
-    return Children(begin, end);
-}
-
-template<typename N>
-inline auto Tree<N>::get_children_nonempty(const Node& node) const -> Children
-{
-    auto begin = &get_node(node.get_first_child());
-    auto end = begin + node.get_nu_children();
-    return Children(begin, end);
+    if (nu_children > 0)
+    {
+        auto begin = &get_node(node.get_first_child());
+        return Children(begin, begin + nu_children);
+    }
+    return Children(nullptr, 0);
 }
 
 template<typename N>
@@ -256,7 +251,7 @@ template<typename N>
 inline void Tree<N>::NodeExpander::link_children(Tree& tree, const Node& node)
 {
     auto nu_children =
-            static_cast<unsigned short>(m_thread_storage.next - m_first_child);
+            static_cast<unsigned>(m_thread_storage.next - m_first_child);
     tree.link_children(node, m_first_child, nu_children);
 }
 
@@ -325,7 +320,7 @@ void Tree<N>::copy_subtree(Tree& target, const Node& target_node,
                            const Node& node, Float min_count) const
 {
     target.non_const(target_node).copy_data_from(node);
-    if (node.has_children())
+    if (node.get_nu_children() > 0)
         copy_recurse(target, target_node, node, min_count);
     else
         target.non_const(target_node).unlink_children_st();
@@ -338,7 +333,8 @@ void Tree<N>::copy_recurse(Tree& target, const Node& target_node,
     LIBBOARDGAME_ASSERT(target.m_max_nodes == m_max_nodes);
     LIBBOARDGAME_ASSERT(target.m_nu_threads == m_nu_threads);
     LIBBOARDGAME_ASSERT(contains(node));
-    auto nu_children = node.get_nu_children();
+    LIBBOARDGAME_ASSERT(node.get_nu_children() > 0);
+    auto nu_children = static_cast<unsigned>(node.get_nu_children());
     auto& first_child = get_node(node.get_first_child());
     // Create target children in the equivalent thread storage as in source.
     // This ensures that the thread storage will not overflow (because the
@@ -352,11 +348,11 @@ void Tree<N>::copy_recurse(Tree& target, const Node& target_node,
                                                    nu_children);
     thread_storage.next += nu_children;
     LIBBOARDGAME_ASSERT(thread_storage.next < thread_storage.end);
-    auto end = &first_child + node.get_nu_children();
+    auto end = &first_child + nu_children;
     for (auto i = &first_child; i != end; ++i, ++target_child)
     {
         target_child->copy_data_from(*i);
-        if (! i->has_children() || i->get_visit_count() < min_count)
+        if (i->get_nu_children() <= 0 || i->get_visit_count() < min_count)
         {
             target_child->unlink_children_st();
             continue;
@@ -371,7 +367,7 @@ void Tree<N>::extract_subtree(Tree& target, const Node& node) const
     LIBBOARDGAME_ASSERT(contains(node));
     LIBBOARDGAME_ASSERT(&target != this);
     LIBBOARDGAME_ASSERT(target.m_max_nodes == m_max_nodes);
-    LIBBOARDGAME_ASSERT(! target.get_root().has_children());
+    LIBBOARDGAME_ASSERT(target.get_root().get_nu_children() <= 0);
     copy_subtree(target, target.m_nodes[0], node, 0);
 }
 
@@ -409,7 +405,7 @@ inline void Tree<N>::inc_visit_count(const Node& node)
 
 template<typename N>
 inline void Tree<N>::link_children(const Node& node, const Node* first_child,
-                                   unsigned short nu_children)
+                                   unsigned nu_children)
 {
     auto first_child_idx = static_cast<NodeIdx>(first_child - m_nodes.get());
     LIBBOARDGAME_ASSERT(first_child_idx > 0);

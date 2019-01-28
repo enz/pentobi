@@ -552,7 +552,8 @@ private:
 
     void search_loop(ThreadState& thread_state);
 
-    const Node* select_child(const Node& node);
+    const Node* select_child(const Node& node,
+                             const typename Tree::Children& children);
 
     void update_lgr(ThreadState& thread_state);
 
@@ -941,9 +942,10 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     auto& root = m_tree.get_root();
     auto node = &root;
     Float expansion_threshold = SearchParamConst::expansion_threshold;
-    while (node->has_children())
+    typename Tree::Children children;
+    while (! (children = m_tree.get_children(*node)).empty())
     {
-        node = select_child(*node);
+        node = select_child(*node, children);
         if (multithread && SearchParamConst::virtual_loss)
             m_tree.add_value(*node, 0);
         simulation.nodes.push_back(node);
@@ -953,8 +955,9 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
         expansion_threshold += SearchParamConst::expansion_threshold_inc;
     }
     state.finish_in_tree();
-    if (node->get_visit_count() > expansion_threshold)
+    if (node->get_visit_count() > expansion_threshold && node->is_unexpanded())
     {
+        m_tree.set_expanding(*node);
         if (! expand_node(thread_state, *node, node))
             thread_state.is_out_of_mem = true;
         else if (node)
@@ -1166,7 +1169,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
 
     auto& thread_state_0 = m_threads[0]->thread_state;
     auto& root = m_tree.get_root();
-    if (! root.has_children())
+    if (root.get_nu_children() <= 0)
     {
         const Node* best_child;
         thread_state_0.state->start_simulation(0);
@@ -1174,9 +1177,10 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         expand_node(thread_state_0, root, best_child);
     }
 
-    if (root.get_nu_children() == 0)
+    auto nu_children = root.get_nu_children();
+    if (nu_children <= 0)
         LIBBOARDGAME_LOG("No legal moves at root");
-    else if (root.get_nu_children() == 1 && min_simulations == 0)
+    else if (nu_children == 1 && min_simulations == 0)
         LIBBOARDGAME_LOG("Root has only one child");
     else
         while (true)
@@ -1249,8 +1253,17 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
     }
 }
 
+/** Select child in in-tree phase of the search.
+    @param node The parent node.
+    @param children The children. This is passed as an argument because due to
+    the lock-free it can occur that the parent was already expanded by one
+    thread but is set to expanding state again by another thread. This is no
+    problem because nodes are never deleted during the parallel search.
+    @pre ! children.empty() */
 template<class S, class M, class R>
-inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
+inline auto SearchBase<S, M, R>::select_child(
+        const Node& node,
+        const typename Tree::Children& children) -> const Node*
 {
     auto parent_count = node.get_visit_count();
     // See class description for the exploration term
@@ -1261,7 +1274,6 @@ inline auto SearchBase<S, M, R>::select_child(const Node& node) -> const Node*
     auto expl_limit =
             expl_factor * SearchParamConst::max_move_prior
             / SearchParamConst::child_min_count;
-    auto children = m_tree.get_children_nonempty(node);
     auto i = children.begin();
     auto value =
             i->get_value()
@@ -1289,7 +1301,7 @@ template<class S, class M, class R>
 auto SearchBase<S, M, R>::select_final() const-> const Node*
 {
     // Select the child with the highest number of wins
-    auto children = m_tree.get_children_nonempty(m_tree.get_root());
+    auto children = m_tree.get_children(m_tree.get_root());
     if (children.empty())
         return nullptr;
     auto i = children.begin();
@@ -1428,23 +1440,19 @@ void SearchBase<S, M, R>::update_rave(ThreadState& thread_state)
         Float dist_factor;
         if (SearchParamConst::rave_dist_weighting)
             dist_factor = 1 / static_cast<Float>(nu_moves - i);
-        auto children = m_tree.get_children_nonempty(*node);
-        LIBBOARDGAME_ASSERT(! children.empty());
-        auto it = children.begin();
-        do
+        for (auto& it : m_tree.get_children(*node))
         {
-            auto mv = it->get_move();
+            auto mv = it.get_move();
             if (was_played[mv.to_int()] != player
-                    || it->get_value_count() > m_rave_child_max)
+                    || it.get_value_count() > m_rave_child_max)
                 continue;
             auto first = first_play[mv.to_int()];
             LIBBOARDGAME_ASSERT(first > i);
             Float weight = m_rave_weight;
             if (SearchParamConst::rave_dist_weighting)
                 weight *= 1 - static_cast<Float>(first - i) * dist_factor;
-            m_tree.add_value(*it, thread_state.simulation.eval[player], weight);
+            m_tree.add_value(it, thread_state.simulation.eval[player], weight);
         }
-        while (++it != children.end());
         if (i == 0)
             break;
         if (! state.skip_rave(mv.move))

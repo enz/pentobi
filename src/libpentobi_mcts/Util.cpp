@@ -33,13 +33,16 @@ void dump_tree_recurse(Writer& writer, Variant variant,
             << "\nCnt:   " << node.get_value_count();
     writer.write_property("C", comment.str());
     writer.end_node();
-    Color next_to_play = to_play.get_next(get_nu_colors(variant));
-    vector<const Search::Node*> children;
-    children.reserve(node.get_nu_children());
+    auto children = tree.get_children(node);
+    if (children.empty())
+        return;
+    Color next_to_play = to_play.get_next(get_nu_colors(variant));    
+    vector<const Search::Node*> sorted_children;
+    sorted_children.reserve(children.size());
     for (auto& i : tree.get_children(node))
-        children.push_back(&i);
-    sort(children.begin(), children.end(), compare_node);
-    for (const auto i : children)
+        sorted_children.push_back(&i);
+    sort(sorted_children.begin(), sorted_children.end(), compare_node);
+    for (const auto i : sorted_children)
     {
         writer.begin_tree();
         writer.begin_node();

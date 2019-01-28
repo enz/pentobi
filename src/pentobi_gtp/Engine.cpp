@@ -44,16 +44,17 @@ void Engine::cmd_get_value(Response& response)
 
 void Engine::cmd_move_values(Response& response)
 {
-    auto& search = get_search();
-    auto& tree = search.get_tree();
+    auto children = get_search().get_tree().get_root_children();
+    if (children.empty())
+        return;
     auto& bd = get_board();
-    vector<const Search::Node*> children;
-    children.reserve(tree.get_root().get_nu_children());
-    for (auto& i : tree.get_root_children())
-        children.push_back(&i);
-    sort(children.begin(), children.end(), libpentobi_mcts::compare_node);
+    vector<const Search::Node*> sorted_children;
+    sorted_children.reserve(children.size());
+    for (auto& i : children)
+        sorted_children.push_back(&i);
+    sort(sorted_children.begin(), sorted_children.end(), libpentobi_mcts::compare_node);
     response << fixed;
-    for (auto node : children)
+    for (auto node : sorted_children)
         response << setprecision(0) << node->get_visit_count() << ' '
                  << setprecision(1) << node->get_value_count() << ' '
                  << setprecision(3) << node->get_value() << ' '
