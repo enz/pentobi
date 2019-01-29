@@ -113,8 +113,6 @@ private:
 
         Move move;
 
-        unsigned genMoveId;
-
         GameModel* gameModel;
     };
 
@@ -127,14 +125,12 @@ private:
 
     unsigned m_level = 1;
 
-    unsigned m_genMoveId = 0;
-
     unique_ptr<Player> m_player;
 
     QFutureWatcher<GenMoveResult> m_watcher;
 
 
-    GenMoveResult asyncGenMove(GameModel* gm, Color c, unsigned genMoveId);
+    GenMoveResult asyncGenMove(GameModel* gm, Color c);
 
     void genMoveFinished();
 

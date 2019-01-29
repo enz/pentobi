@@ -14,6 +14,7 @@
 
 using namespace std;
 using libboardgame_util::clear_abort;
+using libboardgame_util::get_abort;
 using libboardgame_util::set_abort;
 
 //-----------------------------------------------------------------------------
@@ -59,15 +60,13 @@ PlayerModel::~PlayerModel()
     cancelGenMove();
 }
 
-PlayerModel::GenMoveResult PlayerModel::asyncGenMove(
-        GameModel* gm, Color c, unsigned genMoveId)
+PlayerModel::GenMoveResult PlayerModel::asyncGenMove(GameModel* gm, Color c)
 {
     QElapsedTimer timer;
     timer.start();
     auto& bd = gm->getBoard();
     GenMoveResult result;
     result.color = c;
-    result.genMoveId = genMoveId;
     result.gameModel = gm;
     result.move = m_player->genmove(bd, bd.get_effective_to_play());
     auto elapsed = timer.elapsed();
@@ -81,10 +80,6 @@ void PlayerModel::cancelGenMove()
 {
     if (! m_isGenMoveRunning)
         return;
-    // After waitForFinished() returns, we can be sure that the move generation
-    // is no longer running, but we will still receive the finished event.
-    // Increasing m_genMoveId will make genMoveFinished() ignore the event.
-    ++m_genMoveId;
     set_abort();
     m_watcher.waitForFinished();
     setIsGenMoveRunning(false);
@@ -93,8 +88,7 @@ void PlayerModel::cancelGenMove()
 void PlayerModel::genMoveFinished()
 {
     auto result = m_watcher.future().result();
-    if (result.genMoveId != m_genMoveId)
-        // Callback from a canceled move generation
+    if (get_abort())
         return;
     setIsGenMoveRunning(false);
     auto& bd = result.gameModel->getBoard();
@@ -171,10 +165,9 @@ void PlayerModel::startGenMove(GameModel* gameModel)
     if (! m_player->is_book_loaded(variant))
         loadBook(variant);
     clear_abort();
-    ++m_genMoveId;
     QFuture<GenMoveResult> future =
             QtConcurrent::run(this, &PlayerModel::asyncGenMove, gameModel,
-                              bd.get_effective_to_play(), m_genMoveId);
+                              bd.get_effective_to_play());
     m_watcher.setFuture(future);
     setIsGenMoveRunning(true);
 }
