@@ -13,9 +13,6 @@
 #include "GameModel.h"
 
 using namespace std;
-using libboardgame_util::clear_abort;
-using libboardgame_util::get_abort;
-using libboardgame_util::set_abort;
 
 //-----------------------------------------------------------------------------
 
@@ -80,7 +77,7 @@ void PlayerModel::cancelGenMove()
 {
     if (! m_isGenMoveRunning)
         return;
-    set_abort();
+    m_player->get_search().abort();
     m_watcher.waitForFinished();
     setIsGenMoveRunning(false);
 }
@@ -88,7 +85,7 @@ void PlayerModel::cancelGenMove()
 void PlayerModel::genMoveFinished()
 {
     auto result = m_watcher.future().result();
-    if (get_abort())
+    if (m_player->get_search().was_aborted())
         return;
     setIsGenMoveRunning(false);
     auto& bd = result.gameModel->getBoard();
@@ -164,7 +161,6 @@ void PlayerModel::startGenMove(GameModel* gameModel)
     auto variant = gameModel->getBoard().get_variant();
     if (! m_player->is_book_loaded(variant))
         loadBook(variant);
-    clear_abort();
     QFuture<GenMoveResult> future =
             QtConcurrent::run(this, &PlayerModel::asyncGenMove, gameModel,
                               bd.get_effective_to_play());

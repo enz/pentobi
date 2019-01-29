@@ -11,12 +11,9 @@
 #include "GameModel.h"
 #include "PlayerModel.h"
 #include "libboardgame_sgf/SgfUtil.h"
-#include "libboardgame_util/Abort.h"
 
 using libboardgame_sgf::is_main_variation;
 using libboardgame_sgf::find_root;
-using libboardgame_util::clear_abort;
-using libboardgame_util::set_abort;
 using libboardgame_util::ArrayList;
 using libpentobi_base::ColorMove;
 
@@ -51,7 +48,7 @@ AnalyzeGameModel::~AnalyzeGameModel()
     cancel();
 }
 
-void AnalyzeGameModel::asyncRun(const Game* game, Search* search)
+void AnalyzeGameModel::asyncRun(const Game* game)
 {
     auto progressCallback =
         [&]([[maybe_unused]] unsigned movesAnalyzed,
@@ -61,7 +58,7 @@ void AnalyzeGameModel::asyncRun(const Game* game, Search* search)
             QMetaObject::invokeMethod(this, "updateElements",
                                       Qt::BlockingQueuedConnection);
         };
-    m_analyzeGame.run(*game, *search, m_nuSimulations, progressCallback);
+    m_analyzeGame.run(*game, *m_search, m_nuSimulations, progressCallback);
 }
 
 void AnalyzeGameModel::autoSave(GameModel* gameModel)
@@ -93,7 +90,7 @@ void AnalyzeGameModel::cancel()
 {
     if (! m_isRunning)
         return;
-    set_abort();
+    m_search->abort();
     m_watcher.waitForFinished();
     setIsRunning(false);
 }
@@ -249,10 +246,9 @@ void AnalyzeGameModel::start(GameModel* gameModel, PlayerModel* playerModel,
     m_markMoveNumber = -1;
     m_nuSimulations = static_cast<size_t>(nuSimulations);
     cancel();
-    clear_abort();
+    m_search = &playerModel->getSearch();
     auto future = QtConcurrent::run(this, &AnalyzeGameModel::asyncRun,
-                                    &gameModel->getGame(),
-                                    &playerModel->getSearch());
+                                    &gameModel->getGame());
     m_watcher.setFuture(future);
     setIsRunning(true);
 }

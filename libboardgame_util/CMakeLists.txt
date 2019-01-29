@@ -1,6 +1,4 @@
 add_library(boardgame_util STATIC
-  Abort.h
-  Abort.cpp
   ArrayList.h
   Assert.h
   Assert.cpp

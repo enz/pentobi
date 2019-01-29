@@ -52,7 +52,6 @@ SOURCES += \
     ../libboardgame_base/RectTransform.cpp \
     ../libboardgame_base/StringRep.cpp \
     ../libboardgame_base/Transform.cpp \
-    ../libboardgame_util/Abort.cpp \
     ../libboardgame_util/Assert.cpp \
     ../libboardgame_util/Barrier.cpp \
     ../libboardgame_util/CpuTimeSource.cpp \
@@ -154,7 +153,6 @@ HEADERS += \
     ../libboardgame_mcts/SearchBase.h \
     ../libboardgame_mcts/Tree.h \
     ../libboardgame_mcts/TreeUtil.h \
-    ../libboardgame_util/Abort.h \
     ../libboardgame_util/ArrayList.h \
     ../libboardgame_util/Assert.h \
     ../libboardgame_util/Barrier.h \

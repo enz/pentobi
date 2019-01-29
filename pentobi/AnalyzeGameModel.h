@@ -100,11 +100,13 @@ private:
 
     AnalyzeGame m_analyzeGame;
 
+    Search* m_search;
+
 
     Q_INVOKABLE void updateElements();
 
 
-    void asyncRun(const Game* game, Search* search);
+    void asyncRun(const Game* game);
 
     void setIsRunning(bool isRunning);
 

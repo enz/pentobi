@@ -13,8 +13,6 @@
 namespace libpentobi_mcts {
 
 using libboardgame_sgf::SgfError;
-using libboardgame_util::clear_abort;
-using libboardgame_util::get_abort;
 using libboardgame_util::WallTimeSource;
 using libpentobi_base::BoardUpdater;
 
@@ -46,7 +44,6 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     }
     while (node != nullptr);
     WallTimeSource time_source;
-    clear_abort();
     node = &root;
     unsigned move_number = 0;
     auto tie_value = Search::SearchParamConst::tie_value;
@@ -78,7 +75,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                     LIBBOARDGAME_LOG("Analyzing move ", bd->get_nu_moves());
                     search.search(dummy, *bd, mv.color, max_count,
                                   min_simulations, max_time, time_source);
-                    if (get_abort())
+                    if (search.was_aborted())
                         break;
                     m_moves.push_back(mv);
                     m_values.push_back(static_cast<double>(
@@ -105,7 +102,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                 c = bd->get_effective_to_play();
             search.search(dummy, *bd, c, max_count, min_simulations, max_time,
                           time_source);
-            if (get_abort())
+            if (search.was_aborted())
                 break;
             m_moves.emplace_back(c, Move::null());
             m_values.push_back(static_cast<double>(

@@ -17,7 +17,6 @@
 #include "PlayerMove.h"
 #include "Tree.h"
 #include "TreeUtil.h"
-#include "libboardgame_util/Abort.h"
 #include "libboardgame_util/ArrayList.h"
 #include "libboardgame_util/Barrier.h"
 #include "libboardgame_util/IntervalChecker.h"
@@ -33,7 +32,6 @@ namespace libboardgame_mcts {
 
 using namespace std;
 using libboardgame_mcts::find_node;
-using libboardgame_util::get_abort;
 using libboardgame_util::time_to_string;
 using libboardgame_util::to_string;
 using libboardgame_util::ArrayList;
@@ -342,6 +340,13 @@ public:
         of a subtree reused from the previous search. */
     Float get_root_visit_count() const;
 
+    /** Abort a running search befor the time limit or maximum number
+        of simulations is reached. */
+    void abort() { m_abort = true; }
+
+    /** Was the last search aborted? */
+    bool was_aborted() const { return m_abort; }
+
     /** Create the threads used in the search.
         This cannot be done in the constructor because it uses the virtual
         function create_state(). This function will automatically be called
@@ -490,7 +495,7 @@ private:
     /** Time of last search. */
     double m_last_time;
 
-    bool m_last_aborted = false;
+    atomic<bool> m_abort;
 
     Float m_rave_parent_max = 50000;
 
@@ -678,7 +683,7 @@ template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_abort_expensive(
         ThreadState& thread_state) const
 {
-    if (get_abort())
+    if (m_abort)
     {
         LIBBOARDGAME_LOG_THREAD(thread_state, "Search aborted");
         return true;
@@ -1087,7 +1092,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     else
         for (PlayerInt i = 0; i < m_nu_players; ++i)
             m_root_val[i].init(SearchParamConst::tie_value, 1);
-    if ((m_reuse_subtree && (is_followup || m_last_aborted))
+    if ((m_reuse_subtree && (is_followup || m_abort))
             || (m_reuse_tree && is_same))
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
@@ -1136,6 +1141,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
 
     m_timer.reset(time_source);
     m_time_source = &time_source;
+    m_abort = false;
     if (SearchParamConst::use_lgr && ! is_followup)
         m_lgr.init(m_nu_players);
     for (auto& i : m_threads)
@@ -1207,7 +1213,6 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     LIBBOARDGAME_LOG(get_info());
     bool result = select_move(mv);
     m_time_source = nullptr;
-    m_last_aborted = get_abort();
     return result;
 }
 
