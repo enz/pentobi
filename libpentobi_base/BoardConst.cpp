@@ -11,12 +11,12 @@
 #include "PieceTransformsClassic.h"
 #include "PieceTransformsGembloQ.h"
 #include "PieceTransformsTrigon.h"
+#include "libboardgame_util/Compiler.h"
 #include "libboardgame_util/Log.h"
-#include "libboardgame_sys/Compiler.h"
 
 namespace libpentobi_base {
 
-using libboardgame_sys::get_type_name;
+using libboardgame_util::get_type_name;
 
 //-----------------------------------------------------------------------------
 

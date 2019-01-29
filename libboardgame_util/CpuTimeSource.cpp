@@ -6,7 +6,7 @@
 
 #include "CpuTimeSource.h"
 
-#include "libboardgame_sys/CpuTime.h"
+#include "libboardgame_util/CpuTime.h"
 
 namespace libboardgame_util {
 
@@ -14,7 +14,7 @@ namespace libboardgame_util {
 
 double CpuTimeSource::operator()()
 {
-    return libboardgame_sys::cpu_time();
+    return cpu_time();
 }
 
 //----------------------------------------------------------------------------

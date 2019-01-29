@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sys/Compiler.h
+/** @file libboardgame_util/Compiler.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SYS_COMPILER_H
-#define LIBBOARDGAME_SYS_COMPILER_H
+#ifndef LIBBOARDGAME_UTIL_COMPILER_H
+#define LIBBOARDGAME_UTIL_COMPILER_H
 
 #include <string>
 #include <typeinfo>
@@ -14,7 +14,7 @@
 #include <cxxabi.h>
 #endif
 
-namespace libboardgame_sys {
+namespace libboardgame_util {
 
 using namespace std;
 
@@ -61,6 +61,6 @@ string get_type_name(const T& t)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sys
+} // namespace libboardgame_util
 
-#endif // LIBBOARDGAME_SYS_COMPILER_H
+#endif // LIBBOARDGAME_UTIL_COMPILER_H

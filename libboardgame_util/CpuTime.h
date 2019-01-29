@@ -1,26 +1,23 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sys/Memory.h
+/** @file libboardgame_util/CpuTime.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SYS_MEMORY_H
-#define LIBBOARDGAME_SYS_MEMORY_H
+#ifndef LIBBOARDGAME_UTIL_CPU_TIME_H
+#define LIBBOARDGAME_UTIL_CPU_TIME_H
 
-#include <cstddef>
-
-namespace libboardgame_sys {
-
-using namespace std;
+namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
 
-/** Get the physical memory available on the system.
-    @return The memory in bytes or 0 if the memory could not be determined. */
-size_t get_memory();
+/** Return the CPU time of the current process.
+    @return The CPU time of the current process in seconds or -1, if the
+    CPU time cannot be determined. */
+double cpu_time();
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sys
+} // namespace libboardgame_util
 
-#endif // LIBBOARDGAME_SYS_MEMORY_H
+#endif // LIBBOARDGAME_UTIL_CPU_TIME_H

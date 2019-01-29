@@ -13,12 +13,11 @@
 #include <string>
 #include <vector>
 #include "StringUtil.h"
-#include "libboardgame_sys/Compiler.h"
+#include "libboardgame_util/Compiler.h"
 
 namespace libboardgame_util {
 
 using namespace std;
-using libboardgame_sys::get_type_name;
 
 //----------------------------------------------------------------------------
 

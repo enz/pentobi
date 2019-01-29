@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sys/Memory.cpp
+/** @file libboardgame_util/Memory.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -18,7 +18,7 @@
 #include <sys/sysctl.h>
 #endif
 
-namespace libboardgame_sys {
+namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
 
@@ -64,4 +64,4 @@ size_t get_memory()
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sys
+} // namespace libboardgame_util

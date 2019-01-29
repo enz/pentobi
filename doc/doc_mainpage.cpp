@@ -7,8 +7,6 @@
 
     - libboardgame_gtp -
       Implementation of the Go Text Protocol GTP (@ref libboardgame_doc_gtp)
-    - libboardgame_sys -
-      Platform-dependent functionality
     - libboardgame_util -
       General utilities not specific to board games
     - libboardgame_sgf -

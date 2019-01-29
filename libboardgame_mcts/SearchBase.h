@@ -19,6 +19,7 @@
 #include "TreeUtil.h"
 #include "libboardgame_util/ArrayList.h"
 #include "libboardgame_util/Barrier.h"
+#include "libboardgame_util/Compiler.h"
 #include "libboardgame_util/IntervalChecker.h"
 #include "libboardgame_util/Log.h"
 #include "libboardgame_util/RandomGenerator.h"
@@ -26,7 +27,6 @@
 #include "libboardgame_util/StringUtil.h"
 #include "libboardgame_util/TimeIntervalChecker.h"
 #include "libboardgame_util/Timer.h"
-#include "libboardgame_sys/Compiler.h"
 
 namespace libboardgame_mcts {
 

@@ -40,7 +40,6 @@ if(UNIX)
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
 
-add_subdirectory(libboardgame_sys)
 add_subdirectory(libboardgame_util)
 add_subdirectory(libboardgame_sgf)
 add_subdirectory(libboardgame_base)

@@ -4,6 +4,9 @@ add_library(boardgame_util STATIC
   Assert.cpp
   Barrier.h
   Barrier.cpp
+  Compiler.h
+  CpuTime.h
+  CpuTime.cpp
   CpuTimeSource.h
   CpuTimeSource.cpp
   FmtSaver.h
@@ -12,6 +15,8 @@ add_library(boardgame_util STATIC
   Log.h
   Log.cpp
   MathUtil.h
+  Memory.h
+  Memory.cpp
   Options.h
   Options.cpp
   RandomGenerator.h
@@ -35,4 +40,3 @@ target_compile_options(boardgame_util PUBLIC
 
 target_include_directories(boardgame_util PUBLIC ..)
 
-target_link_libraries(boardgame_util boardgame_sys)

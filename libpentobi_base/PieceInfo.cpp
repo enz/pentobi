@@ -9,14 +9,14 @@
 #include <algorithm>
 #include "libboardgame_base/GeometryUtil.h"
 #include "libboardgame_util/Assert.h"
+#include "libboardgame_util/Compiler.h"
 #include "libboardgame_util/Log.h"
-#include "libboardgame_sys/Compiler.h"
 
 namespace libpentobi_base {
 
 using libboardgame_base::geometry_util::normalize_offset;
 using libboardgame_base::geometry_util::type_match_shift;
-using libboardgame_sys::get_type_name;
+using libboardgame_util::get_type_name;
 
 //-----------------------------------------------------------------------------
 

@@ -54,9 +54,11 @@ SOURCES += \
     ../libboardgame_base/Transform.cpp \
     ../libboardgame_util/Assert.cpp \
     ../libboardgame_util/Barrier.cpp \
+    ../libboardgame_util/CpuTime.cpp \
     ../libboardgame_util/CpuTimeSource.cpp \
     ../libboardgame_util/IntervalChecker.cpp \
     ../libboardgame_util/Log.cpp \
+    ../libboardgame_util/Memory.cpp \
     ../libboardgame_util/RandomGenerator.cpp \
     ../libboardgame_util/StringUtil.cpp \
     ../libboardgame_util/TimeIntervalChecker.cpp \
@@ -71,8 +73,6 @@ SOURCES += \
     ../libboardgame_sgf/TreeReader.cpp \
     ../libboardgame_sgf/TreeWriter.cpp \
     ../libboardgame_sgf/Writer.cpp \
-    ../libboardgame_sys/CpuTime.cpp \
-    ../libboardgame_sys/Memory.cpp \
     ../libpentobi_base/Board.cpp \
     ../libpentobi_base/BoardConst.cpp \
     ../libpentobi_base/BoardUpdater.cpp \
@@ -156,11 +156,14 @@ HEADERS += \
     ../libboardgame_util/ArrayList.h \
     ../libboardgame_util/Assert.h \
     ../libboardgame_util/Barrier.h \
+    ../libboardgame_util/Compiler.h \
+    ../libboardgame_util/CpuTime.h \
     ../libboardgame_util/CpuTimeSource.h \
     ../libboardgame_util/FmtSaver.h \
     ../libboardgame_util/IntervalChecker.h \
     ../libboardgame_util/Log.h \
     ../libboardgame_util/MathUtil.h \
+    ../libboardgame_util/Memory.h \
     ../libboardgame_util/Options.h \
     ../libboardgame_util/RandomGenerator.h \
     ../libboardgame_util/Statistics.h \
@@ -176,9 +179,6 @@ HEADERS += \
     ../libboardgame_sgf/SgfUtil.h \
     ../libboardgame_sgf/TreeReader.h \
     ../libboardgame_sgf/Writer.h \
-    ../libboardgame_sys/Compiler.h \
-    ../libboardgame_sys/CpuTime.h \
-    ../libboardgame_sys/Memory.h \
     ../libpentobi_base/Board.h \
     ../libpentobi_base/BoardConst.h \
     ../libpentobi_base/BoardUpdater.h \
