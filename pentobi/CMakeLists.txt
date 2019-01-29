@@ -84,3 +84,7 @@ else()
 endif()
 
 install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(DIRECTORY help DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}
+    FILES_MATCHING PATTERN "*.css" PATTERN "*.html" PATTERN "*.png"
+    PATTERN "*.jpg")
+
