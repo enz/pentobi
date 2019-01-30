@@ -28,9 +28,9 @@ void add(PentobiTree& tree, const SgfNode& node, bool is_player_black,
          bool is_real_move, float result)
 {
     unsigned index = is_player_black ? 0 : 1;
-    array<unsigned, 2> count;
+    array<unsigned short, 2> count;
     array<float, 2> avg_result;
-    array<unsigned, 2> real_count;
+    array<unsigned short, 2> real_count;
     auto comment = tree.get_comment(node);
     if (comment.empty())
     {
