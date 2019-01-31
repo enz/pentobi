@@ -16,3 +16,5 @@ target_link_libraries(boardgame_mcts INTERFACE
     boardgame_util
     Threads::Threads
     )
+
+add_subdirectory(tests)

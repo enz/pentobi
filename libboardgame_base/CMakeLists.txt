@@ -28,3 +28,5 @@ if(PENTOBI_BUILD_GTP)
 endif()
 
 target_include_directories(boardgame_base PUBLIC ..)
+
+add_subdirectory(tests)

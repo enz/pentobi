@@ -35,3 +35,5 @@ endif()
 target_include_directories(pentobi_mcts PUBLIC ..)
 
 target_link_libraries(pentobi_mcts pentobi_base boardgame_mcts)
+
+add_subdirectory(tests)

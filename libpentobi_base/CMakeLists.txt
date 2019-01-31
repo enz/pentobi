@@ -81,3 +81,5 @@ endif()
 
 target_link_libraries(pentobi_base boardgame_sgf boardgame_base)
 target_include_directories(pentobi_base PUBLIC ..)
+
+add_subdirectory(tests)

@@ -20,3 +20,5 @@ add_library(boardgame_sgf STATIC
 target_include_directories(boardgame_sgf PUBLIC ..)
 
 target_link_libraries(boardgame_sgf boardgame_util)
+
+add_subdirectory(tests)
