@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Needs Debian packages xsltproc docbook5-xml docbook-xsl-ns
+
+cd `dirname "$0"`
+if test $# -eq 0 ; then
+    languages="C de"
+else
+    languages="$@"
+fi
+for lang in $languages; do
+  case "$lang" in
+  C)
+    xsltproc --nonet \
+      --path /usr/share/xml/docbook/stylesheet/docbook-xsl/html \
+      -o ../help/C/pentobi/ custom.xsl index.docbook
+    ;;
+  *)
+    po2xml index.docbook po/$lang.po > index_$lang.docbook
+    xsltproc --nonet \
+      --path "/usr/share/xml/docbook/stylesheet/docbook-xsl/html" \
+      --stringparam l10n.gentext.language $lang \
+      -o ../help/$lang/pentobi/ custom.xsl index_$lang.docbook
+    rm -f index_$lang.docbook
+    ;;
+  esac
+done

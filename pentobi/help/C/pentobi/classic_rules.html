@@ -1,57 +1,112 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="en">
+<html>
 <head>
-<title>Pentobi Help</title>
-<link rel="stylesheet" type="text/css" href="stylesheet.css">
-<meta name="viewport" content="width=device-width">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Classic Rules</title>
+<link rel="stylesheet" type="text/css" href="../../C/pentobi/stylesheet.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="index.html" title="Pentobi">
+<link rel="up" href="index.html" title="Pentobi">
+<link rel="prev" href="overview.html" title="Overview">
+<link rel="next" href="duo_rules.html" title="Duo Rules">
 </head>
-<body>
-<div class="nav"><a href="index.html">Previous</a> | <a href=
-"index.html">Contents</a> | <a href="duo_rules.html">Next</a></div>
-<h2>Classic Rules</h2>
-<p>There are four players, Blue, Yellow, Red and Green, and a board consisting
-of 20×20 squares.</p>
-<p>Each player has a set of 21 pieces of his color shaped like the polyominoes
-up to size five. A polyomino is a shape built from a number of squares
-connected along the edges.</p>
-<div class="fig"><img src="pieces.png" alt=""></div>
-<div class="caption">The 21 pieces</div>
-<p>The players alternate in placing one of their pieces on the board. The first
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header"><tr>
+<td width="20%" align="left">
+<a accesskey="p" href="overview.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="duo_rules.html">Next</a>
+</td>
+</tr></table>
+<hr>
+</div>
+<div class="chapter">
+<div class="titlepage"><div><div><h1 class="title">
+<a name="classic_rules"></a>Classic Rules</h1></div></div></div>
+<p>
+There are four players, Blue, Yellow, Red and Green, and a board consisting of
+20×20 squares. Each player has a set of 21 pieces of his color shaped like the
+polyominoes up to size five. A polyomino is a shape built from a number of
+squares connected along the edges.
+</p>
+<div class="informalfigure"><div class="mediaobject">
+<img src="../../C/pentobi/pieces.png"><div class="caption"><p>The 21 pieces</p></div>
+</div></div>
+<p>
+The players alternate in placing one of their pieces on the board. The first
 piece of a player must cover its starting square. The starting squares are
-located in the corners of the board.</p>
-<div class="fig"><img src="board_classic.png" alt=""></div>
-<div class="caption">The 20×20 board with the starting squares marked with
-colored dots</div>
-<p>The following pieces must be placed on empty squares such that the new piece
+located in the corners of the board.
+</p>
+<div class="informalfigure"><div class="mediaobject">
+<img src="../../C/pentobi/board_classic.png"><div class="caption"><p>
+The 20×20 board with the starting squares marked with colored dots
+</p></div>
+</div></div>
+<p>
+The following pieces must be placed on empty squares such that the new piece
 touches at least one piece of its own color corner-to-corner but does not touch
 any piece of its own color along the edges. The new piece may touch edges of
-pieces of the opponent colors.</p>
-<div class="fig"><img src="position_classic.png" alt=""></div>
-<div class="caption">An example position after a few moves</div>
-<p>When the player of a color cannot place any more pieces, the player passes
-and the next color continues.</p>
-<p>When none of the players can place any more pieces, the player with the
-highest score wins. The score of a color is the number of squares on the board
-occupied by the color, plus a bonus of 15 points if the color could place all
-of its pieces, plus an additional bonus of 5 points if the color could place
-all pieces and the last piece played was the one-square piece.</p>
-<h3>Rules for Two Players</h3>
-<p>The game can be played with two players. The first player plays both Blue
-and Red, the second player Yellow and Green. The points of both colors played
-by a player are added up.</p>
-<h3>Rules for Three Players</h3>
-<p>The game can also be played with three players. The players take turns
-playing the fourth color (Green). At the end of the game, the score of Green is
-ignored.</p>
-<h3>Colorless starting points</h3>
-<p>Note that the original Blokus Classic rules used colorless starting points.
+pieces of the opponent colors.
+</p>
+<div class="informalfigure"><div class="mediaobject">
+<img src="../../C/pentobi/position_classic.png"><div class="caption"><p>An example position after a few moves</p></div>
+</div></div>
+<p>
+When the player of a color cannot place any more pieces, the player passes and
+the next color continues. When none of the players can place any more pieces,
+the player with the highest score wins. The score of a color is the number of
+squares on the board occupied by the color, plus a bonus of 15 points if the
+color could place all of its pieces, plus an additional bonus of 5 points if
+the color could place all pieces and the last piece played was the one-square
+piece.
+</p>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm30"></a>Rules for Two Players</h2></div></div></div>
+<p>
+The game can be played with two players. The first player plays both Blue and
+Red, the second player Yellow and Green. The points of both colors played by a
+player are added up.
+</p>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm33"></a>Rules for Three Players</h2></div></div></div>
+<p>
+The game can also be played with three players. The players take turns playing
+the fourth color (Green). At the end of the game, the score of Green is
+ignored.
+</p>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm36"></a>Colorless starting points</h2></div></div></div>
+<p>
+Note that the original Blokus Classic rules used colorless starting points.
 This means that each color may freely choose, which of the remaining unoccupied
 starting points to use for its first move. Pentobi currently only supports the
 rule variant with colored starting points because this rule variant was used on
 the Blokus online server at blokus.com and in most of the past Blokus
-tournaments.</p>
-<div class="nav"><a href="index.html">Previous</a> | <a href=
-"index.html">Contents</a> | <a href="duo_rules.html">Next</a></div>
+tournaments.
+</p>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="overview.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="duo_rules.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top"> </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> </td>
+</tr>
+</table>
+</div>
 </body>
 </html>

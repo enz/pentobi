@@ -11,6 +11,10 @@ padding: 0.7em;
 min-height: 100vh;
 }
 
+hr {
+color: #eee;
+}
+
 :link {
 text-decoration: none;
 color: blue;
@@ -25,18 +29,6 @@ color: purple;
 outline-color: darkorange;
 }
 
-.fig {
-text-align: center;
-}
-
-.fig img {
-width: auto;
-height: auto;
-max-width: 90%;
-max-height: 90%;
-margin: 0.5em;
-}
-
 .caption {
 font-size: 90%;
 text-align: center;
@@ -44,8 +36,30 @@ margin-left: 15%;
 margin-right: 15%;
 }
 
-.nav {
-text-align: right;
-margin-top: 0.5em;
-margin-bottom: 0.5em;
+.guibutton {
+font-style: italic;
+}
+
+.guilabel {
+font-style: italic;
+}
+
+.guimenu {
+font-style: italic;
+}
+
+.guimenuitem {
+font-style: italic;
+}
+
+.informalfigure {
+text-align: center;
+}
+
+.informalfigure img {
+width: auto;
+height: auto;
+max-width: 90%;
+max-height: 90%;
+margin: 0.5em;
 }

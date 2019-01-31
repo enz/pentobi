@@ -1,222 +1,384 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="en">
+<html>
 <head>
-<title>Pentobi Help</title>
-<link rel="stylesheet" type="text/css" href="stylesheet.css">
-<meta name="viewport" content="width=device-width">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Window Menu and Toolbar</title>
+<link rel="stylesheet" type="text/css" href="../../C/pentobi/stylesheet.css">
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<link rel="home" href="index.html" title="Pentobi">
+<link rel="up" href="index.html" title="Pentobi">
+<link rel="prev" href="become_stronger.html" title="Become a Stronger Player">
+<link rel="next" href="shortcuts.html" title="Keyboard Shortcuts">
 </head>
-<body>
-<div class="nav"><a href="become_stronger.html">Previous</a> | <a href=
-"index.html">Contents</a> | <a href="shortcuts.html">Next</a></div>
-<h2>Window Menu and Toolbar</h2>
-<h3>Navigation Buttons in Toolbar</h3>
-<dl>
-<dt>Beginning</dt>
-<dd>Go to the beginning of the game.</dd>
-<dt>Backward 10</dt>
-<dd>Go ten moves backward in the current variation. The button supports
-autorepeat if pressed and held.</dd>
-<dt>Backward</dt>
-<dd>Go one move backward in the current variation. The button supports
-autorepeat if pressed and held.</dd>
-<dt>Forward</dt>
-<dd>Go one move forward in the current variation. If the current position has
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<div class="navheader">
+<table width="100%" summary="Navigation header"><tr>
+<td width="20%" align="left">
+<a accesskey="p" href="become_stronger.html">Prev</a> </td>
+<th width="60%" align="center"> </th>
+<td width="20%" align="right"> <a accesskey="n" href="shortcuts.html">Next</a>
+</td>
+</tr></table>
+<hr>
+</div>
+<div class="chapter">
+<div class="titlepage"><div><div><h1 class="title">
+<a name="window_menu"></a>Window Menu and Toolbar</h1></div></div></div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm237"></a>Navigation Buttons in Toolbar</h2></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><span class="guibutton">Beginning</span></span></dt>
+<dd><p>
+Go to the beginning of the game.
+</p></dd>
+<dt><span class="term"><span class="guibutton">Backward 10</span></span></dt>
+<dd><p>
+Go ten moves backward in the current variation. The button supports autorepeat
+if pressed and held.
+</p></dd>
+<dt><span class="term"><span class="guibutton">Backward</span></span></dt>
+<dd><p>
+Go one move backward in the current variation. The button supports autorepeat
+if pressed and held.
+</p></dd>
+<dt><span class="term"><span class="guibutton">Forward</span></span></dt>
+<dd><p>
+Go one move forward in the current variation. If the current position has
 several follow-up variations (i.e. the current node in the game tree has
 several child nodes), the first variation will be used. The button supports
-autorepeat if pressed and held.</dd>
-<dt>Forward 10</dt>
-<dd>Go ten moves forward in the current variation. If a position has several
+autorepeat if pressed and held.
+</p></dd>
+<dt><span class="term"><span class="guibutton">Forward 10</span></span></dt>
+<dd><p>
+Go ten moves forward in the current variation. If a position has several
 follow-up variations (i.e. the current node in the game tree has several child
 nodes), the first variation will be used. The button supports autorepeat if
-pressed and held.</dd>
-<dt>End</dt>
-<dd>Go to the end of the current variation. Like <i>Forward</i>, this also uses
-the first variation in positions with several follow-up variations.</dd>
-<dt>Next Variation</dt>
-<dd>Go to the next variation to the last move played (i.e. the next sibling
-node of the current node in the game tree).</dd>
-<dt>Previous Variation</dt>
-<dd>Go to the previous variation to the last move played (i.e. the previous
-sibling node of the current node in the game tree).</dd>
-</dl>
-<h3>Game Menu</h3>
-<dl>
-<dt>New</dt>
-<dd>Start a new game.</dd>
-<dt>Rated Game</dt>
-<dd>Start a new <a href="become_stronger.html#rating">rated game</a> against
-the computer.</dd>
-<dt>Game Variant</dt>
-<dd>Select a game variant and start a new game of this game variant.</dd>
-<dt>Game Info</dt>
-<dd>Display or edit additional information about the game like the name of the
-players or the date when the game was played.</dd>
-<dt>Undo Move</dt>
-<dd>Undo the last move played and remove it from the game tree. Undoing a move
-is only possible if it is the last move in the current variation (i.e. a leaf
-node in the game tree; use <i>Edit/Truncate</i> to remove inner nodes of the
-game tree).</dd>
-<dt>Find Move</dt>
-<dd>Find a legal move for the current color and display it for a few seconds on
-the board. Selecting this item repeatedly will show all legal moves.</dd>
-<dt>Open</dt>
-<dd>Load a saved game. The board position after loading will be the last
-position in the main variation unless the game starts with a setup position. If
-the game starts with a setup, the board position will be the first position
-instead. This avoids that solutions are immediately shown if the file contains
-a Blokus puzzle as a setup with the solution as the main variation.</dd>
-<dt>Open Recent</dt>
-<dd>Load a recently used game.</dd>
-<dt>Open Clipboard</dt>
-<dd>Open a game from a text copied to the clipboard. The text must be a valid
-game in Pentobi SGF file format.</dd>
-<dt>Save</dt>
-<dd>Save the current game.</dd>
-<dt>Save As</dt>
-<dd>Save the current game under a new file name.</dd>
-<dt>Export/Image</dt>
-<dd>Save the current position as an image file. Several image file formats are
+pressed and held.
+</p></dd>
+<dt><span class="term"><span class="guibutton">End</span></span></dt>
+<dd><p>
+Go to the end of the current variation. Like <span class="guibutton">Forward</span>,
+this also uses the first variation in positions with several follow-up
+variations.
+</p></dd>
+<dt><span class="term"><span class="guibutton">Next Variation</span></span></dt>
+<dd><p>
+Go to the next variation to the last move played (i.e. the next sibling
+node of the current node in the game tree).
+</p></dd>
+<dt><span class="term"><span class="guibutton">Previous Variation</span></span></dt>
+<dd><p>
+Go to the previous variation to the last move played (i.e. the previous
+sibling node of the current node in the game tree).
+</p></dd>
+</dl></div>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm281"></a><span class="guimenu">Game</span> Menu</h2></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><span class="guimenuitem">New</span>
+</span></dt>
+<dd><p>
+Start a new game.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Rated Game</span></span></dt>
+<dd><p>
+Start a new <a class="link" href="become_stronger.html#rating" title="Determine Your Rating">rated game</a> against the computer.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Game Variant</span></span></dt>
+<dd><p>
+Select a game variant and start a new game of this game variant.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Game Info</span></span></dt>
+<dd><p>
+Display or edit additional information about the game like the name of the
+players or the date when the game was played.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Undo Move</span></span></dt>
+<dd><p>
+Undo the last move played and remove it from the game tree. Undoing a move is
+only possible if it is the last move in the current variation (i.e. a leaf node
+in the game tree; use
+<span class="guimenu">Edit</span>/<span class="guimenuitem">Truncate</span> to remove inner
+nodes of the game tree).
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Find Move</span></span></dt>
+<dd><p>
+Find a legal move for the current color and display it for a few seconds on the
+board. Selecting this item repeatedly will show all legal moves.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Open</span></span></dt>
+<dd><p>
+Load a saved game. The board position after loading will be the last position
+in the main variation unless the game starts with a setup position. If the game
+starts with a setup, the board position will be the first position instead.
+This avoids that solutions are immediately shown if the file contains a Blokus
+puzzle as a setup with the solution as the main variation.
+</p></dd>
+<dt><span class="term"><span class="guimenu">Open Recent</span></span></dt>
+<dd><p>
+Load a recently used game.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Open Clipboard</span></span></dt>
+<dd><p>
+Open a game from a text copied to the clipboard. The text must be a valid game
+in Pentobi SGF file format.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Save</span></span></dt>
+<dd><p>
+Save the current game.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Save As</span></span></dt>
+<dd><p>
+Save the current game under a new file name.
+</p></dd>
+<dt><span class="term"><span class="guimenu">Export</span>/<span class="guimenuitem">Image</span></span></dt>
+<dd><p>
+Save the current position as an image file. Several image file formats are
 supported, the file format is derived from the file name ending (e.g. ".png"
 for the PNG format). For a crisp image, the image width should be an integer
-multiple of the number of board columns in the current game variant.</dd>
-<dt>Export/ASCII Art</dt>
-<dd>Save the current position as a text diagram. The text diagram should be
-viewed using a monospace font.</dd>
-<dt>Quit</dt>
-<dd>Quit Pentobi.</dd>
-</dl>
-<h3>Go Menu</h3>
-<dl>
-<dt>Move Number</dt>
-<dd>Go to the move with a given move number in the current variation.</dd>
-<dt>Main Variation</dt>
-<dd>Go back to the last position in the current variation that belonged to the
-main variation.</dd>
-<dt>Beginning of Branch</dt>
-<dd>Go back to the last position in the current variation that had an
-alternative move.</dd>
-<dt>Next Comment</dt>
-<dd>Go to the next position that has a comment. If the comment text field was
-not visible, it will become visible. Selecting this item repeatedly will show
-all positions with comments in the game tree.</dd>
-</dl>
-<h3>Edit Menu</h3>
-<dl>
-<dt>Annotation</dt>
-<dd>Add a chess-style annotation symbol (e.g. !!) to the current move. The
-symbols are appended to the move numbers in the status bar and, depending on
-the configuration of <i>Move Marking</i>, on the board.</dd>
-<dt>Make Main Variation</dt>
-<dd>Make the current variation the main variation of the game. This reorders
-the nodes in the game tree such that the current variation becomes the main
-variation.</dd>
-<dt>Variation Up</dt>
-<dd>Changes the order of variations such that the current position will appear
-earlier when iterating over the variations with <i>Next/Previous
-Variation</i>.</dd>
-<dt>Variation Down</dt>
-<dd>Changes the order of variations such that the current position will appear
-later when iterating over the variations with <i>Next/Previous
-Variation</i>.</dd>
-<dt>Delete Variations</dt>
-<dd>Delete all variations but the main variation. If the current position is
-not in the main variation, it will first be changed to a position as in <i>Back
-to Main Variation</i>.</dd>
-<dt>Truncate</dt>
-<dd>Remove the node with the current position, including any subtree, from the
-game tree.</dd>
-<dt>Truncate Children</dt>
-<dd>Remove all child nodes of the node with the current position from the game
-tree.</dd>
-<dt>Keep Position</dt>
-<dd>Delete all moves and keep only the current position as a setup. This can be
-used to create files that start with a given fixed position.</dd>
-<dt>Keep Subtree</dt>
-<dd>Like <i>Keep Position</i> but does not delete the moves after the current
-position.</dd>
-<dt>Setup Mode</dt>
-<dd>Enter or leave setup mode. In setup mode, pieces can be placed anywhere on
-the board, even in violation of the game rules. Existing pieces can be removed
-from the board by clicking on them. The currently selected color also
-determines the color to play after the setup is finished. It can be changed
-with <i>Next Color</i> or by clicking on the orientation selector while no
-piece is selected. Setup mode can only be used if no moves have been played
-yet.</dd>
-<dt>Next Color</dt>
-<dd>Choose the next color for selecting pieces. This can be used for example to
+multiple of the number of board columns in the current game variant.
+</p></dd>
+<dt><span class="term"><span class="guimenu">Export</span>/<span class="guimenuitem">ASCII Art</span></span></dt>
+<dd><p>
+Save the current position as a text diagram. The text diagram should be viewed
+using a monospace font.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Quit</span></span></dt>
+<dd><p>
+Quit Pentobi.
+</p></dd>
+</dl></div>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm360"></a><span class="guimenu">Go</span> Menu</h2></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><span class="guimenuitem">Move Number</span></span></dt>
+<dd><p>
+Go to the move with a given move number in the current variation.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Main Variation</span></span></dt>
+<dd><p>
+Go back to the last position in the current variation that belonged to the main
+variation.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Beginning of Branch</span></span></dt>
+<dd><p>
+Go back to the last position in the current variation that had an alternative
+move.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Next Comment</span></span></dt>
+<dd><p>
+Go to the next position that has a comment. If the comment text field was not
+visible, it will become visible. Selecting this item repeatedly will show all
+positions with comments in the game tree.
+</p></dd>
+</dl></div>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm384"></a><span class="guimenu">Edit</span> Menu</h2></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><span class="guimenuitem">Annotation</span></span></dt>
+<dd><p>
+Add a chess-style annotation symbol (e.g. ‼) to the current move. The symbols
+are appended to the move numbers in the status bar and, depending on the
+configuration of <span class="guilabel">Move Marking</span>, on the board.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Make Main Variation</span></span></dt>
+<dd><p>
+Make the current variation the main variation of the game. This reorders the
+nodes in the game tree such that the current variation becomes the main
+variation.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Variation Up</span></span></dt>
+<dd><p>
+Changes the order of variations such that the current position will appear
+earlier when iterating over the variations with
+<span class="guibutton">Next Variation</span>
+/<span class="guibutton">Previous Variation</span>.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Variation Down</span></span></dt>
+<dd><p>
+Changes the order of variations such that the current position will appear
+later when iterating over the variations with
+<span class="guibutton">Next Variation</span>
+/<span class="guibutton">Previous Variation</span>.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Delete Variations</span></span></dt>
+<dd><p>
+Delete all variations but the main variation. If the current position is not in
+the main variation, it will first be changed to a position as in
+<span class="guimenuitem">Back to Main Variation</span>.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Truncate</span></span></dt>
+<dd><p>
+Remove the node with the current position, including any subtree, from the game
+tree.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Truncate Children</span></span></dt>
+<dd><p>
+Remove all child nodes of the node with the current position from the game
+tree.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Keep Position</span></span></dt>
+<dd><p>
+Delete all moves and keep only the current position as a setup. This can be
+used to create files that start with a given fixed position.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Keep Subtree</span></span></dt>
+<dd><p>
+Like <span class="guimenuitem">Keep Position</span> but does not delete the moves
+after the current position.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Setup Mode</span></span></dt>
+<dd><p>
+Enter or leave setup mode. In setup mode, pieces can be placed anywhere on the
+board, even in violation of the game rules. Existing pieces can be removed from
+the board by clicking on them. The currently selected color also determines the
+color to play after the setup is finished. It can be changed with
+<span class="guimenuitem">Next Color</span> or by clicking on the orientation
+selector while no piece is selected. Setup mode can only be used if no moves
+have been played yet.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Next Color</span></span></dt>
+<dd><p>
+Choose the next color for selecting pieces. This can be used for example to
 enter game records, in which moves of a color were skipped because the color
-ran out of time.</dd>
-</dl>
-<h3>View Menu</h3>
-<dl>
-<dt>Appearance</dt>
+ran out of time.
+</p></dd>
+</dl></div>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm451"></a><span class="guimenu">View</span> Menu</h2></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><span class="guimenuitem">Appearance</span></span></dt>
 <dd>
-<dl>
-<dt>Coordinates</dt>
-<dd>Display coordinates around the board for the fields on the board. The
+<p>
+</p>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><span class="guilabel">Coordinates</span></span></dt>
+<dd><p>
+Display coordinates around the board for the fields on the board. The
 convention for the coordinates is the same as in the Blokus SGF file format
-used by Pentobi.</dd>
-<dt>Show variations</dt>
-<dd>Appends a letter to the move number on the board if the move has
-variations. If moves are marked with dots instead of numbers, a circle will be
-used instead of a dot for moves not in the main variation.</dd>
-<dt>Move number</dt>
-<dd>This option exists only in desktop mode and shows the move number, move
-annotation and variation information at the right side of the status bar.</dd>
-<dt>Move marking</dt>
-<dd>Change the way moves are marked on the board. The options are to mark the
-last move played with a dot or with a number, or to show the numbers of all
-moves, or not to show any marks.</dd>
-<dt>Show comment</dt>
-<dd>This option exists only in desktop mode and configures the visibility of
-the comment area when the position changes. By default, the comment area is
-only shown if a comment exists for the current position.</dd>
-</dl>
+used by Pentobi.
+</p></dd>
+<dt><span class="term"><span class="guilabel">Show variations</span></span></dt>
+<dd><p>
+Appends a letter to the move number on the board if the move has variations.
+If moves are marked with dots instead of numbers, a circle will be used instead
+of a dot for moves not in the main variation.
+</p></dd>
+<dt><span class="term"><span class="guilabel">Move number</span></span></dt>
+<dd><p>
+This option exists only in desktop mode and shows the move number, move
+annotation and variation information at the right side of the status bar.
+</p></dd>
+<dt><span class="term"><span class="guilabel">Move marking</span></span></dt>
+<dd><p>
+Change the way moves are marked on the board. The options are to mark the last
+move played with a dot or with a number, or to show the numbers of all moves,
+or not to show any marks.
+</p></dd>
+<dt><span class="term"><span class="guilabel">Show comment</span></span></dt>
+<dd><p>
+This option exists only in desktop mode and configures the visibility of the
+comment area when the position changes. By default, the comment area is only
+shown if a comment exists for the current position.
+</p></dd>
+</dl></div>
+<p>
+</p>
 </dd>
-<dt>Comment</dt>
-<dd>Toggle the visibility of the comment area in the current position.</dd>
-</dl>
-<dl>
-<dt>Fullscreen</dt>
-<dd>Make the main window full screen or leave full screen mode. To leave full
-screen mode without using the window menu, press the F11 key.</dd>
-</dl>
-<h3>Computer Menu</h3>
-<dl>
-<dt>Settings</dt>
-<dd>Select which colors are played by the computer and the playing strength for
-the computer. Higher levels are stronger but can make the computer take a long
-time for playing moves on slow computers.</dd>
-<dt>Play</dt>
-<dd>Make the computer play a move for the current color. This can be used to
-change the color the computer plays or to resume playing after navigating in
-the game tree. If the computer did not already play the current color, it will
-play this color (and only this color) from now on.</dd>
-<dt>Play Move</dt>
-<dd>Make the computer play a single move for the current color without changing
-the colors played by the computer.</dd>
-<dt>Stop</dt>
-<dd>Abort the current move generation. You can make the computer continue to
-play by selecting <i>Play</i>.</dd>
-</dl>
-<h3>Tools Menu</h3>
-<dl>
-<dt>Rating</dt>
-<dd>Show a dialog window with the <a href=
-"become_stronger.html#rating">rating</a> of the user in the current game
-variant.</dd>
-<dt>Analyze Game</dt>
-<dd>Perform a <a href="become_stronger.html#analysis">game analysis</a>.</dd>
-</dl>
-<h3>Help Menu</h3>
-<dl>
-<dt>Pentobi Help</dt>
-<dd>Show a window to browse the Pentobi user manual.</dd>
-<dt>About Pentobi</dt>
-<dd>Show an info dialog with information about this version of Pentobi.</dd>
-</dl>
-<div class="nav"><a href="become_stronger.html">Previous</a> | <a href=
-"index.html">Contents</a> | <a href="shortcuts.html">Next</a></div>
+<dt><span class="term"><span class="guimenuitem">Comment</span></span></dt>
+<dd><p>
+Toggle the visibility of the comment area in the current position.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Fullscreen</span></span></dt>
+<dd><p>
+Make the main window full screen or leave full screen mode. To leave fullscreen
+mode without using the window menu, press the F11 key.
+</p></dd>
+</dl></div>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm496"></a><span class="guimenu">Computer</span> Menu</h2></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><span class="guimenuitem">Settings</span></span></dt>
+<dd><p>
+Select which colors are played by the computer and the playing strength for the
+computer. Higher levels are stronger but can make the computer take a long time
+for playing moves on slow computers.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Play</span></span></dt>
+<dd><p>
+Make the computer play a move for the current color. This can be used to change
+the color the computer plays or to resume playing after navigating in the game
+tree. If the computer did not already play the current color, it will play this
+color (and only this color) from now on.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Play Move</span></span></dt>
+<dd><p>
+Make the computer play a single move for the current color without changing the
+colors played by the computer.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Stop</span></span></dt>
+<dd><p>
+Abort the current move generation. You can make the computer continue to play
+by selecting <span class="guimenuitem">Play</span>.
+</p></dd>
+</dl></div>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm521"></a><span class="guimenu">Tools</span> Menu</h2></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><span class="guimenuitem">Rating</span></span></dt>
+<dd><p>
+Show a dialog window with the <a class="link" href="become_stronger.html#rating" title="Determine Your Rating">rating</a> of the user
+in the current game variant.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">Analyze Game</span></span></dt>
+<dd><p>
+Perform a <a class="link" href="become_stronger.html#analysis" title="Game Analysis">game analysis</a>.
+</p></dd>
+</dl></div>
+</div>
+<div class="sect1">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">
+<a name="idm537"></a><span class="guimenu">Help</span> Menu</h2></div></div></div>
+<div class="variablelist"><dl class="variablelist">
+<dt><span class="term"><span class="guimenuitem">Pentobi Help</span></span></dt>
+<dd><p>
+Show a window to browse the Pentobi user manual.
+</p></dd>
+<dt><span class="term"><span class="guimenuitem">About Pentobi</span></span></dt>
+<dd><p>
+Show an info dialog with information about this version of Pentobi.
+</p></dd>
+</dl></div>
+</div>
+</div>
+<div class="navfooter">
+<hr>
+<table width="100%" summary="Navigation footer">
+<tr>
+<td width="40%" align="left">
+<a accesskey="p" href="become_stronger.html">Prev</a> </td>
+<td width="20%" align="center"> </td>
+<td width="40%" align="right"> <a accesskey="n" href="shortcuts.html">Next</a>
+</td>
+</tr>
+<tr>
+<td width="40%" align="left" valign="top"> </td>
+<td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+<td width="40%" align="right" valign="top"> </td>
+</tr>
+</table>
+</div>
 </body>
 </html>
