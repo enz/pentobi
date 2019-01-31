@@ -25,8 +25,8 @@ add_custom_command(
 qt5_add_resources(pentobi_RC_SRCS
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     ../books/pentobi_books.qrc
-    ../icon/pentobi_icon.qrc
-    ../icon/pentobi_icon_desktop.qrc
+    icon/pentobi_icon.qrc
+    icon/pentobi_icon_desktop.qrc
     )
 
 qtquick_compiler_add_resources(pentobi_RC_SRCS_QML
@@ -96,7 +96,7 @@ foreach(icon application-x-blokus-sgf application-x-blokus-sgf-16
   list(APPEND png_icons "${icon_png}")
 endforeach()
 foreach(icon pentobi pentobi-16 pentobi-32 pentobi-64)
-  set(icon_svg "${CMAKE_SOURCE_DIR}/icon/${icon}.svg")
+  set(icon_svg "${CMAKE_CURRENT_SOURCE_DIR}/icon/${icon}.svg")
   set(icon_png "${CMAKE_CURRENT_BINARY_DIR}/${icon}.png")
   add_custom_command(OUTPUT "${icon_png}"
     COMMAND convert "${icon_svg}" "${icon_png}" DEPENDS "${icon_svg}")
@@ -119,7 +119,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-32.png
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-64.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/apps
   RENAME pentobi.png)
-install(FILES ${CMAKE_SOURCE_DIR}/icon/pentobi.svg
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/icon/pentobi.svg
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/mimetypes)
