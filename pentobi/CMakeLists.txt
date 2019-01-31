@@ -85,6 +85,7 @@ endif()
 
 configure_file(io.sourceforge.pentobi.desktop.in io.sourceforge.pentobi.desktop @ONLY)
 configure_file(io.sourceforge.pentobi.appdata.xml.in io.sourceforge.pentobi.appdata.xml @ONLY)
+configure_file(pentobi.6.in pentobi.6 @ONLY)
 
 foreach(icon application-x-blokus-sgf application-x-blokus-sgf-16
         application-x-blokus-sgf-32 application-x-blokus-sgf-64)
@@ -139,3 +140,5 @@ install(FILES pentobi-mime.xml
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/mime/packages)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.6
+    DESTINATION ${CMAKE_INSTALL_MANDIR}/man6)
