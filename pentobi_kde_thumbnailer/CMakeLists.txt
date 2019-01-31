@@ -19,5 +19,10 @@ target_link_libraries(pentobi-thumbnail
   KF5::KIOWidgets
 )
 
+configure_file(io.sourceforge.pentobi.kde_thumbnailer.metainfo.xml.in
+  io.sourceforge.pentobi.kde_thumbnailer.metainfo.xml @ONLY)
+
 install(TARGETS pentobi-thumbnail DESTINATION ${PLUGIN_INSTALL_DIR})
 install(FILES pentobi-thumbnail.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.kde_thumbnailer.metainfo.xml
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)

@@ -78,5 +78,4 @@ if(PENTOBI_BUILD_KDE_THUMBNAILER)
     add_subdirectory(pentobi_kde_thumbnailer)
 endif()
 add_subdirectory(doc)
-add_subdirectory(data)
 
