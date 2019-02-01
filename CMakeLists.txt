@@ -28,7 +28,8 @@ endif()
 
 if(PENTOBI_BUILD_TESTS)
   if(PENTOBI_BUILD_KDE_THUMBNAILER)
-    configure_file(CTestCustom.cmake ${CMAKE_BINARY_DIR} COPYONLY)
+    configure_file(pentobi_kde_thumbnailer/CTestCustom.cmake
+        ${CMAKE_BINARY_DIR} COPYONLY)
   endif()
   enable_testing()
 endif()
