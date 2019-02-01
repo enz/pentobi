@@ -167,7 +167,7 @@ msgstr ""
 #. Tag: title
 #: index.docbook:90
 #, no-c-format
-msgid "Colorless starting points"
+msgid "Colorless Starting Points"
 msgstr "Farblose Startfelder"
 
 #. Tag: para

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-01 08:23+0000\n"
+"POT-Creation-Date: 2019-02-01 09:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -134,7 +134,7 @@ msgstr ""
 #. Tag: title
 #: index.docbook:90
 #, no-c-format
-msgid "Colorless starting points"
+msgid "Colorless Starting Points"
 msgstr ""
 
 #. Tag: para
