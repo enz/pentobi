@@ -50,7 +50,7 @@ The GUI modules implement the user interface. They depend on the
 
 * pentobi --
   Main program that provides a GUI for the player in libpentobi_mcts
-* convert --
+* convert_svg --
   Helper program to convert SVG icons to bitmaps at build time
 * libpentobi_paint --
   Common functionality for painting board and pieces both used in the
