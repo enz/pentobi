@@ -40,4 +40,6 @@ target_compile_options(boardgame_util PUBLIC
 
 target_include_directories(boardgame_util PUBLIC ..)
 
-add_subdirectory(tests)
+if(PENTOBI_BUILD_TESTS)
+    add_subdirectory(tests)
+endif()

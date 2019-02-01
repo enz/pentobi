@@ -12,4 +12,6 @@ add_library(boardgame_gtp STATIC
 
 target_include_directories(boardgame_gtp PUBLIC ..)
 
-add_subdirectory(tests)
+if(PENTOBI_BUILD_TESTS)
+    add_subdirectory(tests)
+endif()

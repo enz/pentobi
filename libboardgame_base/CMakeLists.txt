@@ -29,4 +29,6 @@ endif()
 
 target_include_directories(boardgame_base PUBLIC ..)
 
-add_subdirectory(tests)
+if(PENTOBI_BUILD_TESTS)
+    add_subdirectory(tests)
+endif()
