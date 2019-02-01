@@ -973,6 +973,22 @@ annotation and variation information at the right side of the status bar.
 </listitem>
 </varlistentry>
 <varlistentry>
+<term><guilabel>Animations</guilabel></term>
+<listitem>
+<para>
+Enables or disables the piece rotation, flipping and placement animations.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Color theme</guilabel></term>
+<listitem>
+<para>
+Changes the colors of the window, board and pieces.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
 <term><guilabel>Move marking</guilabel></term>
 <listitem>
 <para>
@@ -1072,10 +1088,26 @@ in the current game variant.
 </listitem>
 </varlistentry>
 <varlistentry>
+<term><guimenuitem>Clear Rating</guimenuitem></term>
+<listitem>
+<para>
+Deletes the rating information and history for the current game variant.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
 <term><guimenuitem>Analyze Game</guimenuitem></term>
 <listitem>
 <para>
 Perform a <link linkend="analysis">game analysis</link>.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Clear Analysis</guimenuitem></term>
+<listitem>
+<para>
+Deletes the analysis for the current game.
 </para>
 </listitem>
 </varlistentry>

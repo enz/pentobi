@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-01-31 10:45+0000\n"
+"POT-Creation-Date: 2019-02-01 08:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -1341,11 +1341,36 @@ msgstr ""
 #. Tag: guilabel
 #: index.docbook:976
 #, no-c-format
-msgid "Move marking"
+msgid "Animations"
 msgstr ""
 
 #. Tag: para
 #: index.docbook:978
+#, no-c-format
+msgid ""
+"Enables or disables the piece rotation, flipping and placement animations."
+msgstr ""
+
+#. Tag: guilabel
+#: index.docbook:984
+#, no-c-format
+msgid "Color theme"
+msgstr ""
+
+#. Tag: para
+#: index.docbook:986
+#, no-c-format
+msgid "Changes the colors of the window, board and pieces."
+msgstr ""
+
+#. Tag: guilabel
+#: index.docbook:992
+#, no-c-format
+msgid "Move marking"
+msgstr ""
+
+#. Tag: para
+#: index.docbook:994
 #, no-c-format
 msgid ""
 "Change the way moves are marked on the board. The options are to mark the "
@@ -1354,13 +1379,13 @@ msgid ""
 msgstr ""
 
 #. Tag: guilabel
-#: index.docbook:986
+#: index.docbook:1002
 #, no-c-format
 msgid "Show comment"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:988
+#: index.docbook:1004
 #, no-c-format
 msgid ""
 "This option exists only in desktop mode and configures the visibility of the "
@@ -1369,25 +1394,25 @@ msgid ""
 msgstr ""
 
 #. Tag: guimenuitem
-#: index.docbook:1000
+#: index.docbook:1016
 #, no-c-format
 msgid "Comment"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1002
+#: index.docbook:1018
 #, no-c-format
 msgid "Toggle the visibility of the comment area in the current position."
 msgstr ""
 
 #. Tag: guimenuitem
-#: index.docbook:1008
+#: index.docbook:1024
 #, no-c-format
 msgid "Fullscreen"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1010
+#: index.docbook:1026
 #, no-c-format
 msgid ""
 "Make the main window full screen or leave full screen mode. To leave "
@@ -1395,19 +1420,19 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: index.docbook:1019
+#: index.docbook:1035
 #, no-c-format
 msgid "<guimenu>Computer</guimenu> Menu"
 msgstr ""
 
 #. Tag: guimenuitem
-#: index.docbook:1022
+#: index.docbook:1038
 #, no-c-format
 msgid "Settings"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1024
+#: index.docbook:1040
 #, no-c-format
 msgid ""
 "Select which colors are played by the computer and the playing strength for "
@@ -1416,13 +1441,13 @@ msgid ""
 msgstr ""
 
 #. Tag: guimenuitem
-#: index.docbook:1032
+#: index.docbook:1048
 #, no-c-format
 msgid "Play"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1034
+#: index.docbook:1050
 #, no-c-format
 msgid ""
 "Make the computer play a move for the current color. This can be used to "
@@ -1432,13 +1457,13 @@ msgid ""
 msgstr ""
 
 #. Tag: guimenuitem
-#: index.docbook:1043
+#: index.docbook:1059
 #, no-c-format
 msgid "Play Move"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1045
+#: index.docbook:1061
 #, no-c-format
 msgid ""
 "Make the computer play a single move for the current color without changing "
@@ -1446,13 +1471,13 @@ msgid ""
 msgstr ""
 
 #. Tag: guimenuitem
-#: index.docbook:1052
+#: index.docbook:1068
 #, no-c-format
 msgid "Stop"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1054
+#: index.docbook:1070
 #, no-c-format
 msgid ""
 "Abort the current move generation. You can make the computer continue to "
@@ -1460,19 +1485,19 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: index.docbook:1063
+#: index.docbook:1079
 #, no-c-format
 msgid "<guimenu>Tools</guimenu> Menu"
 msgstr ""
 
 #. Tag: guimenuitem
-#: index.docbook:1066
+#: index.docbook:1082
 #, no-c-format
 msgid "Rating"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1068
+#: index.docbook:1084
 #, no-c-format
 msgid ""
 "Show a dialog window with the <link linkend=\"rating\">rating</link> of the "
@@ -1480,55 +1505,80 @@ msgid ""
 msgstr ""
 
 #. Tag: guimenuitem
-#: index.docbook:1075
+#: index.docbook:1091
+#, no-c-format
+msgid "Clear Rating"
+msgstr ""
+
+#. Tag: para
+#: index.docbook:1093
+#, no-c-format
+msgid ""
+"Deletes the rating information and history for the current game variant."
+msgstr ""
+
+#. Tag: guimenuitem
+#: index.docbook:1099
 #, no-c-format
 msgid "Analyze Game"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1077
+#: index.docbook:1101
 #, no-c-format
 msgid "Perform a <link linkend=\"analysis\">game analysis</link>."
 msgstr ""
 
+#. Tag: guimenuitem
+#: index.docbook:1107
+#, no-c-format
+msgid "Clear Analysis"
+msgstr ""
+
+#. Tag: para
+#: index.docbook:1109
+#, no-c-format
+msgid "Deletes the analysis for the current game."
+msgstr ""
+
 #. Tag: title
-#: index.docbook:1085
+#: index.docbook:1117
 #, no-c-format
 msgid "<guimenu>Help</guimenu> Menu"
 msgstr ""
 
 #. Tag: guimenuitem
-#: index.docbook:1088
+#: index.docbook:1120
 #, no-c-format
 msgid "Pentobi Help"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1090
+#: index.docbook:1122
 #, no-c-format
 msgid "Show a window to browse the Pentobi user manual."
 msgstr ""
 
 #. Tag: guimenuitem
-#: index.docbook:1096
+#: index.docbook:1128
 #, no-c-format
 msgid "About Pentobi"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1098
+#: index.docbook:1130
 #, no-c-format
 msgid "Show an info dialog with information about this version of Pentobi."
 msgstr ""
 
 #. Tag: title
-#: index.docbook:1108
+#: index.docbook:1140
 #, no-c-format
 msgid "Keyboard Shortcuts"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1109
+#: index.docbook:1141
 #, no-c-format
 msgid ""
 "In addition to the shortcut keys, which are shown in the window menu, the "
@@ -1538,265 +1588,265 @@ msgid ""
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1117
+#: index.docbook:1149
 #, no-c-format
 msgid "Plus"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1119
+#: index.docbook:1151
 #, no-c-format
 msgid "Select next piece"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1125
+#: index.docbook:1157
 #, no-c-format
 msgid "Minus"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1127
+#: index.docbook:1159
 #, no-c-format
 msgid "Select previous piece"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1133
+#: index.docbook:1165
 #, no-c-format
 msgid "Escape"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1135
+#: index.docbook:1167
 #, no-c-format
 msgid "Clear selected piece"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1141
+#: index.docbook:1173
 #, no-c-format
 msgid "Left"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1142
+#: index.docbook:1174
 #, no-c-format
 msgid "Right"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1143
+#: index.docbook:1175
 #, no-c-format
 msgid "<term>Up</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1144
+#: index.docbook:1176
 #, no-c-format
 msgid "Down"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1145
+#: index.docbook:1177
 #, no-c-format
 msgid "Shift+Left"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1146
+#: index.docbook:1178
 #, no-c-format
 msgid "Shift+Right"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1147
+#: index.docbook:1179
 #, no-c-format
 msgid "Shift+Up"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1148
+#: index.docbook:1180
 #, no-c-format
 msgid "Shift+Down"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1150
+#: index.docbook:1182
 #, no-c-format
 msgid "Move the selected piece. The Shift key makes the piece move faster."
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1156
+#: index.docbook:1188
 #, no-c-format
 msgid "Space"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1158
+#: index.docbook:1190
 #, no-c-format
 msgid "Next orientation of the selected piece"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1164
+#: index.docbook:1196
 #, no-c-format
 msgid "Shift+Space"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1166
+#: index.docbook:1198
 #, no-c-format
 msgid "Previous orientation of the selected piece"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1172
+#: index.docbook:1204
 #, no-c-format
 msgid "Enter"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1174
+#: index.docbook:1206
 #, no-c-format
 msgid "Play the selected piece"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1180
+#: index.docbook:1212
 #, no-c-format
 msgid "<term>1</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1181
+#: index.docbook:1213
 #, no-c-format
 msgid "<term>2</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1182
+#: index.docbook:1214
 #, no-c-format
 msgid "<term>A</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1183
+#: index.docbook:1215
 #, no-c-format
 msgid "<term>C</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1184
+#: index.docbook:1216
 #, no-c-format
 msgid "<term>E</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1185
+#: index.docbook:1217
 #, no-c-format
 msgid "<term>F</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1186
+#: index.docbook:1218
 #, no-c-format
 msgid "<term>G</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1187
+#: index.docbook:1219
 #, no-c-format
 msgid "<term>H</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1188
+#: index.docbook:1220
 #, no-c-format
 msgid "<term>I</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1189
+#: index.docbook:1221
 #, no-c-format
 msgid "<term>J</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1190
+#: index.docbook:1222
 #, no-c-format
 msgid "<term>L</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1191
+#: index.docbook:1223
 #, no-c-format
 msgid "<term>N</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1192
+#: index.docbook:1224
 #, no-c-format
 msgid "<term>O</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1193
+#: index.docbook:1225
 #, no-c-format
 msgid "<term>P</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1194
+#: index.docbook:1226
 #, no-c-format
 msgid "<term>S</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1195
+#: index.docbook:1227
 #, no-c-format
 msgid "<term>T</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1196
+#: index.docbook:1228
 #, no-c-format
 msgid "<term>U</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1197
+#: index.docbook:1229
 #, no-c-format
 msgid "<term>V</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1198
+#: index.docbook:1230
 #, no-c-format
 msgid "<term>W</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1199
+#: index.docbook:1231
 #, no-c-format
 msgid "<term>X</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1200
+#: index.docbook:1232
 #, no-c-format
 msgid "<term>Y</term>"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1201
+#: index.docbook:1233
 #, no-c-format
 msgid "<term>Z</term>"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1203
+#: index.docbook:1235
 #, no-c-format
 msgid ""
 "Select piece according to commonly used piece names. If there are multiple "
@@ -1807,55 +1857,55 @@ msgid ""
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1213
+#: index.docbook:1245
 #, no-c-format
 msgid "Ctrl+Home"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1214
+#: index.docbook:1246
 #, no-c-format
 msgid "Ctrl+Shift+Left"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1215
+#: index.docbook:1247
 #, no-c-format
 msgid "Ctrl+Left"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1216
+#: index.docbook:1248
 #, no-c-format
 msgid "Ctrl+Right"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1217
+#: index.docbook:1249
 #, no-c-format
 msgid "Ctrl+Shift+Right"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1218
+#: index.docbook:1250
 #, no-c-format
 msgid "Ctrl+End"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1219
+#: index.docbook:1251
 #, no-c-format
 msgid "Ctrl+Up"
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1220
+#: index.docbook:1252
 #, no-c-format
 msgid "Ctrl+Down"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1222
+#: index.docbook:1254
 #, no-c-format
 msgid ""
 "Navigate in the game: beginning, ten moves backward, backward, forward, ten "
@@ -1863,13 +1913,13 @@ msgid ""
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1229
+#: index.docbook:1261
 #, no-c-format
 msgid "Ctrl+Shift+H"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1231
+#: index.docbook:1263
 #, no-c-format
 msgid ""
 "Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards "
@@ -1877,43 +1927,43 @@ msgid ""
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1238
+#: index.docbook:1270
 #, no-c-format
 msgid "Ctrl+T"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1240
+#: index.docbook:1272
 #, no-c-format
 msgid "Switch view between comment and game analysis."
 msgstr ""
 
 #. Tag: term
-#: index.docbook:1246
+#: index.docbook:1278
 #, no-c-format
 msgid "Alt+M"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1248
+#: index.docbook:1280
 #, no-c-format
 msgid "Open menu."
 msgstr ""
 
 #. Tag: title
-#: index.docbook:1257
+#: index.docbook:1289
 #, no-c-format
 msgid "System Requirements"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1258
+#: index.docbook:1290
 #, no-c-format
 msgid "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1261
+#: index.docbook:1293
 #, no-c-format
 msgid ""
 "Recommended for playing level 9: 4&nbsp;GB RAM, 2.5&nbsp;GHz dual-core or "
@@ -1921,7 +1971,7 @@ msgid ""
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1265
+#: index.docbook:1297
 #, no-c-format
 msgid ""
 "Pentobi will also work on systems that do not meet the minimum requirements "
@@ -1931,19 +1981,19 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: index.docbook:1273
+#: index.docbook:1305
 #, no-c-format
 msgid "License"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1274
+#: index.docbook:1306
 #, no-c-format
 msgid "Copyright © 2011–2018 Markus Enzenberger"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1277
+#: index.docbook:1309
 #, no-c-format
 msgid ""
 "This program is free software: you can redistribute it and/or modify it "
@@ -1953,7 +2003,7 @@ msgid ""
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1283
+#: index.docbook:1315
 #, no-c-format
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
@@ -1963,13 +2013,13 @@ msgid ""
 msgstr ""
 
 #. Tag: title
-#: index.docbook:1290
+#: index.docbook:1322
 #, no-c-format
 msgid "Trademark Disclaimer"
 msgstr ""
 
 #. Tag: para
-#: index.docbook:1291
+#: index.docbook:1323
 #, no-c-format
 msgid ""
 "The trademark Blokus and other trademarks referred to are property of their "
