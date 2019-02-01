@@ -24,7 +24,7 @@ add_custom_command(
 
 qt5_add_resources(pentobi_RC_SRCS
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
-    ../books/pentobi_books.qrc
+    ../opening_books/pentobi_books.qrc
     icon/pentobi_icon.qrc
     icon/pentobi_icon_desktop.qrc
     )
@@ -92,14 +92,14 @@ foreach(icon application-x-blokus-sgf application-x-blokus-sgf-16
   set(icon_svg "${CMAKE_CURRENT_SOURCE_DIR}/${icon}.svg")
   set(icon_png "${CMAKE_CURRENT_BINARY_DIR}/${icon}.png")
   add_custom_command(OUTPUT "${icon_png}"
-    COMMAND convert "${icon_svg}" "${icon_png}" DEPENDS "${icon_svg}")
+    COMMAND convert-svg "${icon_svg}" "${icon_png}" DEPENDS "${icon_svg}")
   list(APPEND png_icons "${icon_png}")
 endforeach()
 foreach(icon pentobi pentobi-16 pentobi-32 pentobi-64)
   set(icon_svg "${CMAKE_CURRENT_SOURCE_DIR}/icon/${icon}.svg")
   set(icon_png "${CMAKE_CURRENT_BINARY_DIR}/${icon}.png")
   add_custom_command(OUTPUT "${icon_png}"
-    COMMAND convert "${icon_svg}" "${icon_png}" DEPENDS "${icon_svg}")
+    COMMAND convert-svg "${icon_svg}" "${icon_png}" DEPENDS "${icon_svg}")
   list(APPEND png_icons "${icon_png}")
 endforeach()
 add_custom_target(data_icons ALL DEPENDS ${png_icons})

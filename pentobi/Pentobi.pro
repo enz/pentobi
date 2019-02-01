@@ -112,7 +112,7 @@ SOURCES += \
     ../libpentobi_paint/Paint.cpp
 
 RESOURCES += \
-    ../books/pentobi_books.qrc \
+    ../opening_books/pentobi_books.qrc \
     icon/pentobi_icon.qrc \
     help.qrc \
     qml/themes/themes.qrc \
@@ -121,7 +121,7 @@ RESOURCES += \
 
 !android {
     RESOURCES += \
-        ../icon/pentobi_icon_desktop.qrc \
+        icon/pentobi_icon_desktop.qrc \
         resources_desktop.qrc
 }
 
