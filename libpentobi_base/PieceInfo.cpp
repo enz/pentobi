@@ -14,8 +14,8 @@
 
 namespace libpentobi_base {
 
-using libboardgame_base::geometry_util::normalize_offset;
-using libboardgame_base::geometry_util::type_match_shift;
+using libboardgame_base::normalize_offset;
+using libboardgame_base::type_match_shift;
 using libboardgame_util::get_type_name;
 
 //-----------------------------------------------------------------------------

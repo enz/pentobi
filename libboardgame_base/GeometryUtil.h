@@ -10,7 +10,6 @@
 #include "Geometry.h"
 
 namespace libboardgame_base {
-namespace geometry_util {
 
 //-----------------------------------------------------------------------------
 
@@ -83,7 +82,6 @@ void type_match_shift(const Geometry<P>& geo, T begin, T end,
 
 //-----------------------------------------------------------------------------
 
-} // namespace geometry_util
 } // namespace libboardgame_base
 
 #endif // LIBBOARDGAME_BASE_GEOMETRY_UTIL_H
