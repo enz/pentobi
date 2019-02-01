@@ -61,4 +61,4 @@ The GUI modules implement the user interface. They depend on the
 * pentobi_thumbnailer --
   Thumbnailer for the [Gnome](http://www.gnome.org) desktop
 * pentobi_kde_thumbnailer --
-  Theumbnailer plugin the [KDE](http://www.kde.org) desktop
+  Thumbnailer plugin the [KDE](http://www.kde.org) desktop
