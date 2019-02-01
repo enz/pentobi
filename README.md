@@ -16,7 +16,7 @@ available at the Pentobi homepage at https://pentobi.sourceforge.io.
 License
 -------
 
-Copyright (C) 2011-2019 Markus Enzenberger <enz@users.sourceforge.net>
+Copyright &copy; 2011--2019 Markus Enzenberger <enz@users.sourceforge.net>
 See [AUTHORS.md](AUTHORS.md) for a full list of authors.
 
 This program is free software: you can redistribute it and/or modify it
