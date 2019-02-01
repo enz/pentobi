@@ -1,27 +1,27 @@
-Version 16.x (master)
+Pentobi release notes
 =====================
+
+Version 16.x (master)
+---------------------
 
 * Small increase in playing strength, mainly in Callisto and Classic.
 * New UI translation: Simplified Chinese (thanks to Cherry)
-* The source for the user manual is now in DocBook format, which makes it
-  translatable (using xml2pot and gettext).
+* The source for the user manual is now in DocBook format, which makes
+  it translatable (using xml2pot and gettext).
 * The compiler now needs to support C++17.
 
-
 Version 16.2.x (v16-fixes)
-==========================
-
-*
+--------------------------
 
 
 Version 16.2 (16 Jan 2019)
-==========================
+--------------------------
 
-* As a workaround for platforms without support for Qt5WebView, Pentobi can
-  now be built such that the help is displayed in an external web browser.
-  This option will automatically be used if Qt5WebView is not found or if the
-  cmake option -DPENTOBI_OPEN_HELP_EXTERNALLY=ON is used. Note that this
-  requires that a web browser is installed.
+* As a workaround for platforms without support for Qt5WebView, Pentobi
+  can now be built such that the help is displayed in an external web
+  browser. This option will automatically be used if Qt5WebView is not
+  found or if the cmake option -DPENTOBI_OPEN_HELP_EXTERNALLY=ON is
+  used. Note that this requires that a web browser is installed.
 * The help files are no longer compiled into the resources but installed
   again in DATAROOTDIR/help.
 * Fixed keyboard navigation in file dialog.
@@ -33,72 +33,73 @@ Version 16.2 (16 Jan 2019)
 * Fixed compilation on systems without sys/sysctl.h header.
 * Enabled QML compiler again, now that QTBUG-70976 has been fixed, which
   broke translations in Qt 5.12 beta releases.
-* Changed android.app_extract_android_style in Android manifest from none
-  to minimal, which is recommended for Quick Controls 2 apps (see
+* Changed android.app_extract_android_style in Android manifest from
+  none to minimal, which is recommended for Quick Controls 2 apps (see
   QTBUG-69810 and comments in QTBUG-71902)
 
-
 Version 16.1 (11 Oct 2018)
-==========================
+--------------------------
 
 * Fixed alignment issues of pieces on board if high-DPI scaling is used.
 
-
 Version 16.0 (10 Oct 2018)
-==========================
+--------------------------
 
 * The desktop version of Pentobi now uses the same QtQuick-based GUI as
   the Android version, which makes the desktop version support all
   features of the Android version like piece animations, dark and light
   themes and more of the state saved between sessions (e.g. position in
   game tree, modifications to loaded file, current analysis)
-* The minimum required Qt version is now 5.11 also for the desktop version
-  See INSTALL for the new run-time and compile-time dependencies.
+* The minimum required Qt version is now 5.11 also for the desktop
+  version. See INSTALL for the new run-time and compile-time
+  dependencies.
 * The installation directory /usr/share/pentobi does not exist anymore.
-  The translations, opening books and user manual are compiled as resources
-  into the binary executable.
+  The translations, opening books and user manual are compiled as
+  resources into the binary executable.
 * New themes optimized for colorblindness.
-* New appearance option in desktop mode that handles the comment visibility
-  after a position change.
-* New context menu to go to any played move on board or edit its annotation.
+* New appearance option in desktop mode that handles the comment
+  visibility after a position change.
+* New context menu to go to any played move on board or edit its
+  annotation.
 * Additional warning dialogs to reduce the likelihood that an autosaved
   game is lost, for example because it was changed by another instance
   of Pentobi.
 * The computer level is now set in the computer colors dialog. It is no
   longer stored in the settings separately for each game variant.
-* The visibility of the move number and variation information in the status
-  bar can now be configured in the appearance dialog and is off by default.
+* The visibility of the move number and variation information in the
+  status bar can now be configured in the appearance dialog and is off
+  by default.
 * New toolbar button to stop computer play or game analysis.
 * Play and undo buttons now support autorepeat.
 * Reintroduced forward10/backward10 toolbuttons on desktop.
 * New shortcut keys for moving the selected piece in larger steps on the
   board.
 * New menu item Recent Files/Clear List.
-* The locations and file format for the rated game history is not compatible
-  with Pentobi 15.0, the rating history will be lost.
+* The locations and file format for the rated game history is not
+  compatible with Pentobi 15.0, the rating history will be lost.
 * New shortcut Ctrl+Shift+H, which behaves like Find Move (Ctrl+H) but
   iterates backwards through the list of legal moves.
 * The game analysis now always contains a value for the position after
   the last move, which is useful for analyzing unfinished games.
 * The Android version now shows an error before open/save if permission
   to access storage have not been granted.
-* Android: color dot of the color to play is no longer surrounded by a border
-  because the color to play is already indicated by having its unplayed pieces
-  at the top.
-* The translation source strings for menu items and actions no longer use
-  an ampersand to mark a mnemonic but a separate translation string for
-  the mnemonic.
+* Android: color dot of the color to play is no longer surrounded by a
+  border because the color to play is already indicated by having its
+  unplayed pieces at the top.
+* The translation source strings for menu items and actions no longer
+  use an ampersand to mark a mnemonic but a separate translation string
+  for the mnemonic.
 
-Bug fixes (both desktop and Android version of Pentobi 15.0):
+### Bug fixes (both desktop and Android version of Pentobi 15.0)
 
 * Fixed bugs in handling AE (add empty) SGF property.
 
-Bug fixes (Android version of Pentobi 15.0):
+### Bug fixes (Android version of Pentobi 15.0)
 
 * Picking up a piece from board in setup mode sometimes switched piece
   instances in game variants with multiple instances per piece.
-* Workaround for a bug that made the analysis graph only partially visible
-  on Android low-density devices (QTBUG-69102)
+* Workaround for a bug that made the analysis graph only partially
+  visible on Android low-density devices (QTBUG-69102)
 * Program could hang or crash if quit during running game analysis.
 * Board was not updated if it became empty after opening a file failed.
 * Running computer move was not aborted after opening a file failed.
@@ -108,52 +109,52 @@ Bug fixes (Android version of Pentobi 15.0):
   a file from clipboard.
 * Changed text color on purple pieces to white to make it more readable.
 * Game info was not updated after loading a file.
-* Rating dialog did not show game variant in Callisto (2 players, 4 colors)
+* Rating dialog did not show game variant in Callisto (2 players,
+  4 colors)
 * Don't crash if game analysis stored in settings was not valid.
 * Game was not marked as modified after changing move annotation.
 
-
 Version 15.0 (28 Jun 2018)
-==========================
+--------------------------
 
-General:
+### General
 
 * New UI translations: French, Norsk bokmål (thanks to Allan Nordhøy)
 * Added a workaround for a compiler issue with GCC 7/8, which slowed
   down the startup time of Pentobi.
 * Disable menu item "Keep Only Position" if board is empty.
 
-Android version:
+### Android version
 
 * The minimum required Qt version is now 5.11.
 * Games table in rating dialog did not show the correct level used.
-* Saved files should now immediately be visible from computers connecting
-  with the Android device via MTP (might not work on all devices).
+* Saved files should now immediately be visible from computers
+  connecting with the Android device via MTP (might not work on all
+  devices).
 * An error message is now shown when an invalid loaded SGF file causes
-  a problem later (e.g. invalid move property value in a side variation).
-
+  a problem later (e.g. invalid move property value in a side
+  variation).
 
 Version 14.1 (03 Jan 2018)
-==========================
+--------------------------
 
-General:
+### General
 
 * Fixed a potential race condition during move generation.
 * Reduced maximum memory usage to a quarter instead of a third of the
   total system memory.
 * Made unit tests work again.
 
-Android version:
+### Android version
 
 * Migrated QML files from Qt 5.6 to Qt >=5.7.
 * The binary translation files are now automatically created by the
   qmake project file.
 
-
 Version 14.0 (26 Oct 2017)
-==========================
+--------------------------
 
-General:
+### General
 
 * Increased playing strength in almost all game variants (except for
   Nexos), especially in Trigon, GembloQ and Callisto.
@@ -161,7 +162,7 @@ General:
 * Junior now uses the colors green/orange.
 * File format: accept whitespaces before and after property identifiers.
 
-Desktop version:
+### Desktop version
 
 * Minimum required Qt version is now 5.6.
 * Bugfix: dot indicating color to play in orientation selector was not
@@ -169,74 +170,75 @@ Desktop version:
   variant.
 * Bugfix: added missing include that broke compilation on FreeBSD 11.
 
-
 Version 13.1 (06 Jun 2017)
-==========================
+--------------------------
 
-General:
+### General
 
 * Fixed some crashes that could be triggered by invalid SGF files.
 
-Desktop version:
+### Desktop version
 
 * Callisto: selected piece was wrongly rendered as one-piece in some
   situations if partially outside board.
 * Fixed Leave Fullscreen button positioning if multiple screens exist.
-* Window close button did not work in message dialogs with detailed text.
+* Window close button did not work in message dialogs with detailed
+  text.
 * Ctrl-W now closes application.
 * Use reverse-domain file names for appstream and desktop file.
 * Removed no longer needed workaround for disabling appstreamtest
   added by KDECMakeSettings.
 
-Android version:
+###  Android version
 
 * Displayed game variant was not changed when loading a file of a
   different game variant with SGF errors.
 
-
 Version 13.0 (17 Mar 2017)
-==========================
+--------------------------
 
-General:
+### General
 
 * New game variant GembloQ.
 * New game subvariant Callisto Two-Player Four-Color.
 * Slightly increased playing strength in Callisto, Trigon and Nexos.
 * New menu item Game/Open From Clipboard.
-* The engine now uses up to 8 threads (instead of 4) by default if the CPU
-  has enough hardware threads.
+* The engine now uses up to 8 threads (instead of 4) by default if the
+  CPU has enough hardware threads.
 * Support for SGF file encodings other than ISO-8859-1 and UTF-8.
 
-Desktop version:
+### Desktop version
 
-* Install AppData file to /usr/share/metainfo instead of /usr/share/appdata.
+* Install AppData file to /usr/share/metainfo instead of
+  /usr/share/appdata.
 * Added AppStream file for the KDE thumbnailer.
-* Disabled AppStream tests added by KDECMakeSettings that are broken in some
-  versions of KDE and made the project tests fail.
+* Disabled AppStream tests added by KDECMakeSettings that are broken in
+  some versions of KDE and made the project tests fail.
 * The compilation now requires CMake >=3.1.0.
 
-Android version:
+### Android version
 
 * The Android version now supports most features of the desktop version,
-  including comments, move annotations, setup positions, game analysis (only
-  a very fast mode) and rated games. The playing levels are still restricted
-  to 1-7 because the top levels would be too slow on mobile devices.
-* Current game position, associated file name and file modification status
-  are now remembered between sessions.
+  including comments, move annotations, setup positions, game analysis
+  (only a very fast mode) and rated games. The playing levels are still
+  restricted to 1-7 because the top levels would be too slow on mobile
+  devices.
+* Current game position, associated file name and file modification
+  status are now remembered between sessions.
 * Opened games now show the initial instead of the last position if the
   initial position contains either a setup or a comment.
 * Game/Find Move now behaves like in the desktop version and will cycle
   through all legal moves if called repeatedly.
 * Added a light theme in addition to the default dark theme.
-* New menu item View/Fullscreen to make better use of small-screen displays.
+* New menu item View/Fullscreen to make better use of small-screen
+  displays.
 * Bugfix: game variant Junior erroneously used level set for Classic.
 * The minimum required Android version is now 4.1.
 
-
 Version 12.2 (05 Jan 2017)
-==========================
+--------------------------
 
-Desktop version:
+### Desktop version
 
 * Added patterns for Nexos and Callisto SGF files to MIME type
   specification for detecting them independently of the file ending.
@@ -244,63 +246,62 @@ Desktop version:
   text in the game info dialog was deleted.
 * New Game/Save As was not enabled if no move had been played but game
   was modified by editing the comment in the root node or the game info.
-* Fixed a race condition in updating the analysis window that could cause
-  a crash while a game analysis was running.
+* Fixed a race condition in updating the analysis window that could
+  cause a crash while a game analysis was running.
 * Game analysis progress dialog was not closed if analysis was canceled.
 
-Android version:
+### Android version
 
 * Toolbuttons were too small on very high DPI devices.
 * Open/Save did not show error message on failure.
 
-
 Version 12.1 (30 Nov 2016)
-==========================
+--------------------------
 
-General:
+### General
 
-* Loading a file with a setup position in Nexos did not always work correctly
-  or could cause a crash.
-* SGF files for two-player Callisto did not use B/W properties as documented
-  but 1/2 as in multi-player variants. Files written by Pentobi 12.0 can still
-  be read and will be converted if saved again.
+* Loading a file with a setup position in Nexos did not always work
+  correctly or could cause a crash.
+* SGF files for two-player Callisto did not use B/W properties as
+  documented but 1/2 as in multi-player variants. Files written by
+  Pentobi 12.0 can still be read and will be converted if saved again.
 
-Desktop version:
+### Desktop version
 
 * Compilation on Windows is no longer tested or supported.
-* Keep Only Position and Keep Only Subtree did not work correctly in Nexos and
-  in multi-player Callisto.
+* Keep Only Position and Keep Only Subtree did not work correctly in
+  Nexos and in multi-player Callisto.
 * Delete All Variations did not mark the file as modified.
 * Missing semicolon in desktop entry file (bug #12).
 * Fixed ambiguous shortcut overload.
-* Saving a file will now remember the directory and use it as a default for
-  file dialogs.
-
+* Saving a file will now remember the directory and use it as a default
+  for file dialogs.
 
 Version 12.0 (10 Apr 2016)
-==========================
+--------------------------
 
-General:
+### General
 
 * New game variant Callisto.
 * Thinking time of level 7 (the highest level supported on Android) was
   increased in most game variants to better match the CPU speed of
   typical mobile hardware.
-* Starting points are no longer shown after color played its first piece.
+* Starting points are no longer shown after color played its first
+  piece.
 
-Desktop version:
+### Desktop version
 
 * The compilation now requires at least Qt 5.2.
 * High-DPI scaling is now automatically used if compiled with Qt 5.6.
 * Setting Move Marking to Last now only marks the last move even if the
   computer played several moves in a row.
 
-Bug fixes desktop version:
+### Bug fixes desktop version
 
 * Icon for undo did not have a high-DPI version.
 * Option --verbose was broken on Windows.
 
-Android version:
+### Android version
 
 * The compilation now requires Qt 5.6.
 * Support for game variant Nexos.
@@ -309,7 +310,7 @@ Android version:
 * Actions with buttons in action bar are no longer shown in menu.
 * Forward/backward buttons now support autorepeat.
 
-Bug fixes Android version:
+### Bug fixes Android version
 
 * Fixed crash that could occur when switching game variants while a
   piece was selected.
@@ -318,17 +319,16 @@ Bug fixes Android version:
 * Move generation was not properly aborted if some Edit menu items were
   selected while the computer was thinking.
 
-
 Version 11.0 (29 Dec 2015)
-==========================
+--------------------------
 
-General:
+### General
 
 * Slightly increased playing strength, mainly in Trigon.
 * The compilation requires now at least Qt 5.1 and GCC 4.9 or MSVC 2015.
 * The score display now shows stars at scores that contain bonuses.
 
-Desktop version:
+### Desktop version
 
 * New game variant Nexos (2 or 4 players).
 * If a piece is removed from the board in setup mode, it will now
@@ -341,7 +341,7 @@ Desktop version:
   specification from freedesktop.org. Added a 64x64 app icon but no
   longer an xpm icon (Debian AppStream Guidelines).
 
-Bug fixes desktop version:
+### Bug fixes desktop version
 
 * Message dialog about discarding unsaved current game was not shown if
   a file was loaded by clicking on a game in the rating dialog.
@@ -353,29 +353,30 @@ Bug fixes desktop version:
   were left, even if setup mode is also intended to be used for
   setting up illegal positions (e.g. for Blokus art).
 
-Android version:
+### Android version
 
-* Initial support for loading/saving, variations and game tree navigation.
-* The piece area now has enough room for all pieces of one color. It also
-  removes rows that become empty and orders the colors such that the color
-  to play is always on top.
+* Initial support for loading/saving, variations and game tree
+  navigation.
+* The piece area now has enough room for all pieces of one color. It
+  also removes rows that become empty and orders the colors such that
+  the color to play is always on top.
 * Action buttons and menu items are now only shown if the action is
   enabled in the current position.
 
-
 Version 10.1 (15 Oct 2015)
-==========================
+--------------------------
 
-Desktop version:
+### Desktop version
 
 * New toolbar button for Undo Move.
-* Annotations are now also appended to the move number in the status line.
+* Annotations are now also appended to the move number in the status
+  line.
 * Don't show move number in status line if no moves have been played.
 * Show an error message instead of the crash dialog if the startup
   fails due to low memory.
 * The Windows installer is now built with Qt 5 and dynamic libraries.
 
-Android version:
+### Android version
 
 * New action bar button for Undo Move.
 * Reduced memory requirements. A meaningful error message is now shown
@@ -386,9 +387,8 @@ Android version:
 * Changed snapping behavior of the piece area to make it easier to flick
   vertically between colors with multiple movements on small screens.
 
-
 Version 10.0 (01 Jul 2015)
-==========================
+--------------------------
 
 * Increased playing strength and more opening variety in Trigon.
 * The Backward10/Forward10 toolbar buttons were replaced by autorepeat
@@ -403,34 +403,35 @@ Version 10.0 (01 Jul 2015)
 * The Pentobi help browser now uses a larger font on Windows
 * Regional language subvariants en_GB, en_CA are no longer supported.
 
-Bug fixes:
+### Bug fixes
 
-* Fixed a build failure when generating the PNG icons from the SVG sources
-  if the path contained non-ASCII characters.
-* Fixed failure to open a file given as a command line argument to pentobi
-  (including the case when Pentobi is used as a handler for blksgf files
-  in file browsers) if the path contained non-ASCII characters.
+* Fixed a build failure when generating the PNG icons from the SVG
+  sources if the path contained non-ASCII characters.
+* Fixed failure to open a file given as a command line argument to
+  pentobi (including the case when Pentobi is used as a handler for
+  blksgf files in file browsers) if the path contained non-ASCII
+  characters.
 * Changed the file dialog filter for "All files" from *.* to * such that
   really all files are shown even if they have no file ending.
   Added an "All files" filter to the Export/ASCII Art file dialog.
 * Remembering the playing level separately for each game variant did not
   work if the game variant was implicitly changed by opening a file.
-* "View/Move Numbers/Last" did not behave correctly after all colors were
-  enabled in the Computer Colors dialog while a move generation was running.
+* "View/Move Numbers/Last" did not behave correctly after all colors
+  were enabled in the Computer Colors dialog while a move generation was
+  running.
 * Fixed build failure with MSVC if MinGW was not also installed (because
   windres.exe was used)
 
-
 Version 9.0 (10 Dec 2014)
-=========================
+-------------------------
 
 * Newly supported game variant Classic for 3 players, in which the
   players take turns playing the fourth color.
 * Increased playing strength, mainly in game variant Trigon.
 * There are now 9 levels and the playing strength increases more evenly
-  with the level. Ratings in rated games are still comparable to previous
-  versions of Pentobi apart from Trigon at lower levels because Trigon
-  starts now with a higher playing strength at level 1.
+  with the level. Ratings in rated games are still comparable to
+  previous versions of Pentobi apart from Trigon at lower levels because
+  Trigon starts now with a higher playing strength at level 1.
 * The computer is now better at playing moves that maximize the score
   as long as they do not lead into riskier positions.
 * The computer now remembers the playing level separately for each game
@@ -444,32 +445,31 @@ Version 9.0 (10 Dec 2014)
   because the play button is disabled in rated games.
 * It is no longer possible to select and play a piece while the computer
   is thinking, the thinking must be aborted first with Computer/Stop.
-* Bugfix: program crashed if computer colors dialog was opened and closed
-  with OK while computer was thinking.
+* Bugfix: program crashed if computer colors dialog was opened and
+  closed with OK while computer was thinking.
 * Experimental support for Android. The Android version supports only a
   subset of the features of the desktop version and only playing levels
   1 to 7. There are still known issues with the user interface due to
-  bugs in Qt for Android. The Android version is currently only available
-  as an APK file for devices with an ARMv7 CPU from the download section
-  of http://pentobi.sourceforge.net
+  bugs in Qt for Android. The Android version is currently only
+  available as an APK file for devices with an ARMv7 CPU from the
+  download section of http://pentobi.sourceforge.net
 
 
 Version 8.2 (05 Sep 2014)
-=========================
+-------------------------
 
 * Fixed remaining link errors on some platforms (Debian bug #759852)
 
-
 Version 8.1 (31 Aug 2014)
-=========================
+-------------------------
 
 * Fixed link error on some platforms if Pentobi is compiled with
   PENTOBI_BUILD_TESTS (Debian bug #759852)
-* Slightly improved some icons and use icons from theme for more menu items
-
+* Slightly improved some icons and use icons from theme for more menu
+  items
 
 Version 8.0 (02 Mar 2014)
-=========================
+-------------------------
 
 * Increased playing strength, especially in game variant Trigon.
 * Improved performance on multi-core CPUs: Previously, the move
@@ -494,9 +494,8 @@ Version 8.0 (02 Mar 2014)
   For building with MinGW, a version of MinGW with support for
   std::thread is now required (e.g. from mingwbuilds.sf.net).
 
-
 Version 7.2 (30 Jan 2014)
-=========================
+-------------------------
 
 * Hyphens used as minus signs in manpage (bug #9)
 * Added keywords section to desktop entry to silence lintian
@@ -511,9 +510,8 @@ Version 7.2 (30 Jan 2014)
 * Fixed a compilation error on 64-bit Linux with X32 ABI
 * Fixed a compilation error with Cygwin
 
-
 Version 7.1 (13 Aug 2013)
-=========================
+-------------------------
 
 * Fixed the version string. The released file pentobi-7.0.tar.gz was
   erroneously built from git version c5247c56 just before the version
@@ -521,40 +519,41 @@ Version 7.1 (13 Aug 2013)
 * The color played by the human in rated games is now randomly assigned
 * The mouse wheel is now disabled while the computer is thinking
 
-
 Version 7.0 (25 Jun 2013)
-=========================
+-------------------------
 
-* Support for compilation with version 5 of the Qt libraries (see INSTALL
-  for details)
+* Support for compilation with version 5 of the Qt libraries (see
+  INSTALL for details)
 * Slightly increased playing strength at higher levels (mainly in game
   variant Duo)
-* The default settings in game variants with more than two players are now
-  that the human plays the first color and the computer all other colors
-* Fixed a crash that could occur if the window was put in fullscreen mode
-  by a method of the window manager (e.g. title bar menu on KDE) and then
-  returned to normal mode by a different method (e.g. pressing Escape)
-
+* The default settings in game variants with more than two players are
+  now that the human plays the first color and the computer all other
+  colors
+* Fixed a crash that could occur if the window was put in fullscreen
+  mode by a method of the window manager (e.g. title bar menu on KDE)
+  and then returned to normal mode by a different method (e.g. pressing
+  Escape)
 
 Version 6.0 (4 Mar 2013)
-========================
+------------------------
 
 * Increased playing strength at higher levels. The search algorithm used
   for move generation is now parallelized and can take advantage of
   multi-core CPUs (up to 4 cores). There is a new playing level 8, which
-  has a 2 GHz dual-core CPU or faster as the recommended system requirement.
+  has a 2 GHz dual-core CPU or faster as the recommended system
+  requirement.
 * New menu item Toolbar Text to configure the toolbar button appearance
   independent of the system settings
 * More SGF game info properties (event, round, time) were added to the
   game info dialog
 * The source code now requires at least GCC 4.7 (because a larger subset
   of C++11 features is used)
-* The CMake module GNUInstallDirs is now used for setting the installation
-  directories on Unix. Note that the defaults for bindir and datadir are
-  now CMAKE_INSTALL_PREFIX/bin and CMAKE_INSTALL_PREFIX/share instead of
-  CMAKE_INSTALL_PREFIX/games and CMAKE_INSTALL_PREFIX/share/games.
-  They can be changed by setting CMAKE_INSTALL_BINDIR and
-  CMAKE_INSTALL_DATADIR (bug #7)
+* The CMake module GNUInstallDirs is now used for setting the
+  installation directories on Unix. Note that the defaults for bindir
+  and datadir are now CMAKE_INSTALL_PREFIX/bin and
+  CMAKE_INSTALL_PREFIX/share instead of CMAKE_INSTALL_PREFIX/games and
+  CMAKE_INSTALL_PREFIX/share/games. They can be changed by setting
+  CMAKE_INSTALL_BINDIR and CMAKE_INSTALL_DATADIR (bug #7)
 * The source code no longer depends on the Boost libraries. However, it
   is still possible to use Boost.Thread instead of std::thread by
   configuring with USE_BOOST_THREAD=ON (e.g. needed on MinGW GCC 4.7,
@@ -562,26 +561,24 @@ Version 6.0 (4 Mar 2013)
 * Thumbnailer registration for blksgf files is no longer supported for
   Gnome 2
 
-
 Version 5.0 (10 Dec 2012)
-=========================
+-------------------------
 
-* Small increase in overall playing strength at higher levels in all game
-  variants (especially Trigon)
-* The computer now knows about the possibility of rotational-symmetric tied
-  games in game variant Trigon Two-Player (like it already knew in the
-  variants Duo and Junior) and will prevent the second player from enforcing
-  such a tie
-* If the move generation takes longer than 10 seconds, the maximum remaining
-  time is now shown in the status bar
+* Small increase in overall playing strength at higher levels in all
+  game variants (especially Trigon)
+* The computer now knows about the possibility of rotational-symmetric
+  tied games in game variant Trigon Two-Player (like it already knew in
+  the variants Duo and Junior) and will prevent the second player from
+  enforcing such a tie
+* If the move generation takes longer than 10 seconds, the maximum
+  remaining time is now shown in the status bar
 * Removed less frequently used buttons (Open, Save) from the tool bar
 * Re-organized menu bar
 * The menu bar and tool bar are no longer shown in fullscreen mode
 * Avoided some window flickering at startup
 
-
 Version 4.3 (2 Nov 2012)
-========================
+------------------------
 
 * Setting the computer color for Red with the computer colors dialog did
   not work for game variant Trigon Three-Player
@@ -589,28 +586,25 @@ Version 4.3 (2 Nov 2012)
 * Fixed an assertion at end of move generation in Trigon Three-Player if
   Pentobi was compiled in debug mode
 
-
 Version 4.2 (7 Oct 2012)
-========================
+------------------------
 
 * Fixed crash when opening game info dialog in game variants Classic
   Two-Player or Trigon Two-Player
 
-
 Version 4.1 (5 Oct 2012)
-========================
+------------------------
 
 * Result of rated game was counted wrongly in four-color/two-player game
   variants if the first player had a higher score than the second player
   but the first color a lower score than the second color.
-* Fixed potential crash if Undo, Truncate or Truncate Children is selected
-  while the computer is thinking.
-* Automatic continuing of computer play did not work in some cases if the
-  computer was thinking while the Computer Color dialog was used.
-
+* Fixed potential crash if Undo, Truncate or Truncate Children is
+  selected while the computer is thinking.
+* Automatic continuing of computer play did not work in some cases if
+  the computer was thinking while the Computer Color dialog was used.
 
 Version 4.0 (4 Oct 2012)
-========================
+------------------------
 
 * New menu item "Beginning of Branch"
 * The rating dialog now also shows the best previous rating and has
@@ -621,16 +615,15 @@ Version 4.0 (4 Oct 2012)
   under the GPLv3+ and include SVG sources. No icons from the Tango icon
   set are used anymore.
 
-
 Version 3.1 (2 Aug 2012)
-========================
+------------------------
 
-* Fixed a bug in version 3.0 in the replacement of obsolete move properties
-  in old files that corrupted files in game variants with 3 or 4 colors.
-
+* Fixed a bug in version 3.0 in the replacement of obsolete move
+  properties in old files that corrupted files in game variants with 3
+  or 4 colors.
 
 Version 3.0 (1 Aug 2012)
-========================
+------------------------
 
 * New functionality to compute a player rating for the user by playing
   rated games against the computer
@@ -639,18 +632,17 @@ Version 3.0 (1 Aug 2012)
   without changing the colors played by the computer
 * The mouse wheel can now be used to navigate in the current variation
   if no piece is selected
-* Files written by older versions of Pentobi that use a deprecated format
-  for move properties are now automatically converted to the current format
-  on write
-
+* Files written by older versions of Pentobi that use a deprecated
+  format for move properties are now automatically converted to the
+  current format on write
 
 Version 2.1 (1 Jul 2012)
-========================
+------------------------
 
 * Bugfix: File was erroneously marked as modified if a multiline comment
   was shown and the platform that was used to create the file had
-  Windows-style end of line convention and the platform on which the file
-  was shown had Unix-style.
+  Windows-style end of line convention and the platform on which the
+  file was shown had Unix-style.
 * Fixed the corruption of non-ASCII characters in game files on some
   platforms.
 * Fixed a case where the program froze instead of showing an error on
@@ -658,9 +650,8 @@ Version 2.1 (1 Jul 2012)
 * Fixed duplicate menu shortcut in German translation
 * Fixed too high floating point tolerance in unit tests.
 
-
 Version 2.0 (22 May 2012)
-=========================
+-------------------------
 
 * No more popup messages if a color has no more moves;
   instead, score points of this color are underlined
@@ -690,9 +681,8 @@ Version 2.0 (22 May 2012)
   memory at the cost of reduced playing strength.
 * Use standard icons from theme
 
-
 Version 1.2 (17 Apr 2012)
-=========================
+-------------------------
 
 * Bugfix: program sometimes hung or crashed when generating a
   move in early game Trigon positions especially when there
@@ -709,9 +699,8 @@ Version 1.2 (17 Apr 2012)
 * Made the code compile without warnings with GCC -Wunused
 * Made "make post-install" continue even if some commands fail.
 
-
 Version 1.1 (10 Mar 2012)
-=========================
+-------------------------
 
 * File is now immediately visible in Recent Files menu after
   saving under a new name.
@@ -738,9 +727,8 @@ Version 1.1 (10 Mar 2012)
   The file pentobi.svg was moved from data to src/pentobi and is
   now used for setting the window icon of Pentobi
 
-
 Version 1.0 (1 Jan 2012)
-========================
+------------------------
 
 * Support for game variant Trigon Three-Player
 * Change directory for autosave file to use AppData
@@ -775,40 +763,41 @@ Version 1.0 (1 Jan 2012)
 * Install man pages for pentobi and pentobi-thumbnailer on Unix
   systems
 
-
 Version 0.3 (2 Dec 2011)
-========================
+------------------------
 
 * Support for the game variants Trigon and Trigon Two-Player
-* Fixed saving/opening files if file name contained non-ASCII characters and
-  the system used an encoding other than Latin1
-* The score numbers now show the total player and color scores instead of
-  on-board and bonus points separately (feature request #3431039)
-* New menu item "Edit/Select Next Color" that allows to enter moves independent
-  of the color to play on the board (feature request #3441299)
-* Slightly changed file format to use single-valued move properties as used in
-  other games supported by SGF. Files written by Pentobi 0.2 can still be read.
-
+* Fixed saving/opening files if file name contained non-ASCII characters
+  and the system used an encoding other than Latin1
+* The score numbers now show the total player and color scores instead
+  of on-board and bonus points separately (feature request #3431039)
+* New menu item "Edit/Select Next Color" that allows to enter moves
+  independent of the color to play on the board (feature request
+  #3441299)
+* Slightly changed file format to use single-valued move properties as
+  used in other games supported by SGF. Files written by Pentobi 0.2 can
+  still be read.
 
 Version 0.2 (17 Oct 2011)
-=========================
+-------------------------
 
 * German translation
-* Display sum score for both player colors in game variant Classic Two-Player
-* Slightly changed file format to conform to the proposed version 5 of SGF that
-  requires digits for move properties in multi-player games. Files written by
-  Pentobi 0.1 can still be read.
+* Display sum score for both player colors in game variant Classic
+  Two-Player
+* Slightly changed file format to conform to the proposed version 5 of
+  SGF that requires digits for move properties in multi-player games.
+  Files written by Pentobi 0.1 can still be read.
 * Support for move annotation symbols
 * Store and edit additional game information (player names, date)
 * New menu items Ten Moves Backward/Forward, Go to Move, Undo Move
 * Underline move numbers if there are alternative variations
-* Show move number, total number of moves and current variation in status bar
+* Show move number, total number of moves and current variation in
+  status bar
 * Faster play in higher levels, especially of opening moves
 * Make thumbnailer for Blokus files work under Gnome 3
 * Fix broken compilation with GCC 4.6.1 (bug #3420555)
 
-
 Version 0.1 (15 Jul 2011)
-=========================
+-------------------------
 
-Initial release.
+* Initial release.
