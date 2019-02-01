@@ -110,28 +110,18 @@ install(DIRECTORY help DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}
     PATTERN "*.jpg")
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-16.png
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/apps
-  RENAME pentobi.png)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-32.png
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps
-  RENAME pentobi.png)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-64.png
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/apps
-  RENAME pentobi.png)
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/icon/pentobi.svg
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf.png
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/mimetypes)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-16.png
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/16x16/mimetypes
-  RENAME application-x-blokus-sgf.png)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-32.png
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/mimetypes
-  RENAME application-x-blokus-sgf.png)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-64.png
-  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/mimetypes
-  RENAME application-x-blokus-sgf.png)
+foreach(size 16 32 64)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-${size}.png
+        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${size}x${size}/apps
+        RENAME pentobi.png)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-${size}.png
+        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${size}x${size}/mimetypes
+        RENAME application-x-blokus-sgf.png)
+endforeach()
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/icon/pentobi.svg
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps)
 install(FILES application-x-blokus-sgf.svg
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/mimetypes)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.desktop
