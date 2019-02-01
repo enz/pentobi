@@ -6,9 +6,9 @@ strong Blokus engine with 9 different playing levels. The supported
 game variants are Classic, Duo, Trigon, Junior, Nexos, GembloQ and
 Callisto.
 
-See [INSTALL.md](INSTALL.md) for instructions how to build and install
-the program from the sources. See [NEWS.md](NEWS.md) for release notes.
-See [HACKING.md](HACKING.md) for an overview of the source code. Further
+See [INSTALL](INSTALL.md) for instructions how to build and install
+the program from the sources. See [NEWS](NEWS.md) for release notes.
+See [HACKING](HACKING.md) for an overview of the source code. Further
 information, links to the bug tracker, development mailing list, source
 code repository, and information about contributing translations are
 available at the Pentobi homepage at https://pentobi.sourceforge.io.
@@ -17,7 +17,7 @@ License
 -------
 
 Copyright &copy; 2011--2019 Markus Enzenberger <enz@users.sourceforge.net>
-See [AUTHORS.md](AUTHORS.md) for a full list of authors.
+See [AUTHORS](AUTHORS.md) for a full list of authors.
 
 This program is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
@@ -29,7 +29,7 @@ WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details. You should have received
 a copy of the GNU General Public License along with this program (see
-[LICENSE.md](LICENSE.md)). If not, see <https://www.gnu.org/licenses/>.
+[LICENSE](LICENSE.md)). If not, see <https://www.gnu.org/licenses/>.
 
 ### Trademark Disclaimer
 
