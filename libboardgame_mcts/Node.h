@@ -23,7 +23,8 @@ using NodeIdx = uint_least32_t;
 
 /** %Node in a MCTS tree.
     For details about how the nodes are used in lock-free multi-threaded mode,
-    see @ref libboardgame_doc_enz_2009. */
+    see M. Enzenberger, M. Mueller: A Lock-free Multithreaded Monte-Carlo Tree
+    Search Algorithm. Advances in Computer Games 2009. */
 template<typename M, typename F, bool MT>
 class Node
 {

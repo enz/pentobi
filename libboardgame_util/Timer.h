@@ -25,7 +25,8 @@ public:
     }
 
     /** Constructor with time_source.
-        @param time_source (@ref libboardgame_doc_storesref) */
+        @param time_source The time source. The lifetime of this
+        parameter must exceed the lifetime of the class instance. */
     explicit Timer(TimeSource& time_source) { reset(time_source); }
 
     /** Get time since construction or last reset */
@@ -35,7 +36,8 @@ public:
     void reset();
 
     /** Set time source and reset timer.
-        @param time_source (@ref libboardgame_doc_storesref) */
+        @param time_source The time source. The lifetime of this
+        parameter must exceed the lifetime of the class instance. */
     void reset(TimeSource& time_source);
 
 private:

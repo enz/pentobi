@@ -13,8 +13,7 @@ namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
 
-/** CPU time.
-    @ref libboardgame_doc_threadsafe_after_construction */
+/** CPU time. */
 class CpuTimeSource
     : public TimeSource
 {

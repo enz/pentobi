@@ -13,8 +13,7 @@ namespace libboardgame_util {
 
 //-----------------------------------------------------------------------------
 
-/** Wall time.
-    @ref libboardgame_doc_threadsafe_after_construction */
+/** Wall time. */
 class WallTimeSource
     : public TimeSource
 {

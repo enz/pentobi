@@ -25,7 +25,8 @@ class Arguments
 {
 public:
     /** Constructor.
-        @param line The command line (@ref libboardgame_doc_storesref) */
+        @param line The command line. The lifetime of this parameter
+        must exceed the lifetime of the class instance. */
     explicit Arguments(const CmdLine& line);
 
     /** Get argument.        

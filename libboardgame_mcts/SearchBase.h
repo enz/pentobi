@@ -141,17 +141,21 @@ struct SearchParamConstDefault
     Game-dependent functionality is added by implementing some pure virtual
     functions and by template parameters.
 
-    RAVE (see @ref libboardgame_doc_rave) is implemented differently from
-    the algorithm described in the original paper: RAVE values are not stored
-    separately in the nodes but added to the normal values with a certain
-    (constant) weight and up to a maximum visit count of the parent node. This
-    saves memory in the tree and speeds up move selection in the in-tree phase.
-    It is weaker than the original RAVE at a low number of simulations but
-    seems to be equally good or even better at a high number of simulations.
+    RAVE (see S. Gelly, D. Silver: Combining Online and Offline Knowledge in
+    UCT. Proceedings of the 24th international conference on Machine learning,
+    pp. 273-280, 2007) is implemented differently from the algorithm described
+    in the original paper: RAVE values are not stored separately in the nodes
+    but added to the normal values with a certain (constant) weight and up to a
+    maximum visit count of the parent node. This saves memory in the tree and
+    speeds up move selection in the in-tree phase. It is weaker than the
+    original RAVE at a low number of simulations but seems to be equally good
+    or even better at a high number of simulations.
 
-    The exploration term is a variation of the one used in AlphaGo
-    (@ref libboardgame_doc_alphago_2016), which produced better results in
-    Pentobi (in Blokus and some similar games). It has the form
+    The exploration term is a variation of the one used in AlphaGo (see
+    D. Silver, A. Huang, et al.: Mastering the game of Go with deep neural
+    networks and tree search. Nature 529 (7587), pp. 484-489, 2016), which
+    produced better results in Pentobi (in Blokus and some similar games).
+    It has the form
     @f$ c P_{move} \sqrt{N_{parent}} \log(N_{parent} + 1) / N_{child} @f$
     with an exploration constant c and a move priors P. Children counts are
     assumed to be initialized greater than 0.

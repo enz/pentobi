@@ -30,7 +30,11 @@ class MoveMarker;
     For the same reason, it does not provide an undo function, but instead
     a snapshot state that can can be restored quickly at the start of each
     MCTS simulation.
-    @note @ref libboardgame_avoid_stack_allocation */
+
+    @note The size of this class is large because it contains large members
+    that are not allocated on the heap to avoid dereferencing pointers for
+    speed reasons. It should be avoided to create instances of this class on
+    the stack. */
 class Board
 {
 public:

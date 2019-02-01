@@ -60,7 +60,9 @@ public:
         @param initial_variant Game variant to initialize the internal
         board with (may avoid unnecessary BoardConst creation for game variant
         that is never used)
-        @param shared_const (@ref libboardgame_doc_storesref) */
+        @param shared_const The state shared between all threads, which
+        ist not modified during the search. The lifetime of this
+        parameter must exceed the lifetime of the class instance. */
     State(Variant initial_variant, const SharedConst& shared_const);
 
     State& operator=(const State&) = delete;

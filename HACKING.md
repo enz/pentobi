@@ -30,12 +30,12 @@ The engine modules contain code that is specific to Blokus and the
 computer player used in Pentobi.
 
 * libpentobi_base --
-  General Blokus-specific functionality
+  General Blokus-specific functionality.
 * libpentobi_mcts --
   Blokus player based on Monte-Carlo tree search (using
   libboardgame_mcts)
 * pentobi_gtp --
-  GTP interface to the player in libpentobi_mcts
+  GTP interface to the player in libpentobi_mcts.
 * twogtp --
   Tool for playing games between two GTP engines (currently only
   supported on Linux/GCC)

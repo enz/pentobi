@@ -26,7 +26,8 @@ class IntervalChecker
 {
 public:
     /** Constructor.
-        @param time_source (@ref libboardgame_doc_storesref)
+        @param time_source The time source. The lifetime of this
+        parameter must exceed the lifetime of the class instance.
         @param time_interval The time interval in seconds
         @param f The expensive function */
     IntervalChecker(TimeSource& time_source, double time_interval,

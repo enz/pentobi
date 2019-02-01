@@ -44,7 +44,8 @@ public:
     void cmd_undo();
 
     /** Set the player.
-        @param player The player (@ref libboardgame_doc_storesref) */
+        @param player The player. The lifetime of this parameter must
+        exceed the lifetime of the class instance. */
     void set_player(PlayerBase& player);
 
     void set_accept_illegal(bool enable);

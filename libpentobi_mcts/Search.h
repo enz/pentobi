@@ -33,7 +33,11 @@ using libpentobi_base::Setup;
     Some user-changeable parameters that have different optimal values for
     different game variants are automatically changed whenever the game variant
     changes.
-    @note @ref libboardgame_avoid_stack_allocation */
+
+    @note The size of this class is large because it contains large members
+    that are not allocated on the heap to avoid dereferencing pointers for
+    speed reasons. It should be avoided to create instances of this class on
+    the stack. */
 class Search final
     : public libboardgame_mcts::SearchBase<State, Move, SearchParamConst>
 {

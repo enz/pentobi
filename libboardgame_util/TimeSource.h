@@ -15,8 +15,7 @@ namespace libboardgame_util {
     Typical implementations are wall time, CPU time or mock time sources
     for unit tests. They do not need to provide high resolutions (but should
     support at least 100 ms) and should support maximum times of days (or even
-    months).
-    @ref libboardgame_doc_threadsafe_after_construction */
+    months). */
 class TimeSource
 {
 public:

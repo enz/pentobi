@@ -34,7 +34,6 @@ void Engine::cmd_cputime(Response& response)
 }
 
 /** Set global random seed.
-    Compatible with @ref libboardgame_doc_gnugo <br>
     Arguments: random seed */
 void Engine::cmd_set_random_seed(Arguments args)
 {
