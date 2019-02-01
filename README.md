@@ -31,7 +31,7 @@ GNU General Public License for more details. You should have received
 a copy of the GNU General Public License along with this program (see
 [LICENSE.md](LICENSE.md)). If not, see <https://www.gnu.org/licenses/>.
 
-### Trademark disclaimer
+### Trademark Disclaimer
 
 The trademark Blokus and other trademarks referred to are property of
 their respective trademark holders. The trademark holders are not

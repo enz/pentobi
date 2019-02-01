@@ -1,7 +1,7 @@
-Pentobi source code overview
+Pentobi Source Code Overview
 ============================
 
-Libboardgame modules
+Libboardgame Modules
 --------------------
 
 The Libboardgame modules contain code that is not specific to Blokus and
@@ -23,7 +23,7 @@ could be reused for other board games.
 * libboardgame_test --
   Functionality for unit tests
 
-Pentobi engine modules
+Pentobi Engine Modules
 ----------------------
 
 The engine modules contain code that is specific to Blokus and the
@@ -42,7 +42,7 @@ computer player used in Pentobi.
 * learn_tool --
   Tool for learning the weights used for move priors in libpentobi_mcts
 
-Pentobi GUI modules
+Pentobi GUI Modules
 -------------------
 
 The GUI modules implement the user interface. They depend on the

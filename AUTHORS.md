@@ -1,7 +1,7 @@
-Pentobi authors
+Pentobi Authors
 ===============
 
-Main developer
+Main Developer
 --------------
 
 * Markus Enzenberger <enz@users.sourceforge.net>

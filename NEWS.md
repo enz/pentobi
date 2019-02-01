@@ -1,4 +1,4 @@
-Pentobi release notes
+Pentobi Release Notes
 =====================
 
 Version 16.x (master)
@@ -90,11 +90,11 @@ Version 16.0 (10 Oct 2018)
   use an ampersand to mark a mnemonic but a separate translation string
   for the mnemonic.
 
-### Bug fixes (both desktop and Android version of Pentobi 15.0)
+### Bug Fixes (Both Desktop and Android Version of Pentobi 15.0)
 
 * Fixed bugs in handling AE (add empty) SGF property.
 
-### Bug fixes (Android version of Pentobi 15.0)
+### Bug Fixes (Android Version of Pentobi 15.0)
 
 * Picking up a piece from board in setup mode sometimes switched piece
   instances in game variants with multiple instances per piece.
@@ -124,7 +124,7 @@ Version 15.0 (28 Jun 2018)
   down the startup time of Pentobi.
 * Disable menu item "Keep Only Position" if board is empty.
 
-### Android version
+### Android Version
 
 * The minimum required Qt version is now 5.11.
 * Games table in rating dialog did not show the correct level used.
@@ -145,7 +145,7 @@ Version 14.1 (03 Jan 2018)
   total system memory.
 * Made unit tests work again.
 
-### Android version
+### Android Version
 
 * Migrated QML files from Qt 5.6 to Qt >=5.7.
 * The binary translation files are now automatically created by the
@@ -162,7 +162,7 @@ Version 14.0 (26 Oct 2017)
 * Junior now uses the colors green/orange.
 * File format: accept whitespaces before and after property identifiers.
 
-### Desktop version
+### Desktop Version
 
 * Minimum required Qt version is now 5.6.
 * Bugfix: dot indicating color to play in orientation selector was not
@@ -177,7 +177,7 @@ Version 13.1 (06 Jun 2017)
 
 * Fixed some crashes that could be triggered by invalid SGF files.
 
-### Desktop version
+### Desktop Version
 
 * Callisto: selected piece was wrongly rendered as one-piece in some
   situations if partially outside board.
@@ -189,7 +189,7 @@ Version 13.1 (06 Jun 2017)
 * Removed no longer needed workaround for disabling appstreamtest
   added by KDECMakeSettings.
 
-###  Android version
+### Android Version
 
 * Displayed game variant was not changed when loading a file of a
   different game variant with SGF errors.
@@ -207,7 +207,7 @@ Version 13.0 (17 Mar 2017)
   CPU has enough hardware threads.
 * Support for SGF file encodings other than ISO-8859-1 and UTF-8.
 
-### Desktop version
+### Desktop Version
 
 * Install AppData file to /usr/share/metainfo instead of
   /usr/share/appdata.
@@ -216,7 +216,7 @@ Version 13.0 (17 Mar 2017)
   some versions of KDE and made the project tests fail.
 * The compilation now requires CMake >=3.1.0.
 
-### Android version
+### Android Version
 
 * The Android version now supports most features of the desktop version,
   including comments, move annotations, setup positions, game analysis
@@ -238,7 +238,7 @@ Version 13.0 (17 Mar 2017)
 Version 12.2 (05 Jan 2017)
 --------------------------
 
-### Desktop version
+### Desktop Version
 
 * Added patterns for Nexos and Callisto SGF files to MIME type
   specification for detecting them independently of the file ending.
@@ -250,7 +250,7 @@ Version 12.2 (05 Jan 2017)
   cause a crash while a game analysis was running.
 * Game analysis progress dialog was not closed if analysis was canceled.
 
-### Android version
+### Android Version
 
 * Toolbuttons were too small on very high DPI devices.
 * Open/Save did not show error message on failure.
@@ -266,7 +266,7 @@ Version 12.1 (30 Nov 2016)
   documented but 1/2 as in multi-player variants. Files written by
   Pentobi 12.0 can still be read and will be converted if saved again.
 
-### Desktop version
+### Desktop Version
 
 * Compilation on Windows is no longer tested or supported.
 * Keep Only Position and Keep Only Subtree did not work correctly in
@@ -289,19 +289,19 @@ Version 12.0 (10 Apr 2016)
 * Starting points are no longer shown after color played its first
   piece.
 
-### Desktop version
+### Desktop Version
 
 * The compilation now requires at least Qt 5.2.
 * High-DPI scaling is now automatically used if compiled with Qt 5.6.
 * Setting Move Marking to Last now only marks the last move even if the
   computer played several moves in a row.
 
-### Bug fixes desktop version
+### Bug Fixes Desktop Version
 
 * Icon for undo did not have a high-DPI version.
 * Option --verbose was broken on Windows.
 
-### Android version
+### Android Version
 
 * The compilation now requires Qt 5.6.
 * Support for game variant Nexos.
@@ -310,7 +310,7 @@ Version 12.0 (10 Apr 2016)
 * Actions with buttons in action bar are no longer shown in menu.
 * Forward/backward buttons now support autorepeat.
 
-### Bug fixes Android version
+### Bug Fixes Android Version
 
 * Fixed crash that could occur when switching game variants while a
   piece was selected.
@@ -328,7 +328,7 @@ Version 11.0 (29 Dec 2015)
 * The compilation requires now at least Qt 5.1 and GCC 4.9 or MSVC 2015.
 * The score display now shows stars at scores that contain bonuses.
 
-### Desktop version
+### Desktop Version
 
 * New game variant Nexos (2 or 4 players).
 * If a piece is removed from the board in setup mode, it will now
@@ -341,7 +341,7 @@ Version 11.0 (29 Dec 2015)
   specification from freedesktop.org. Added a 64x64 app icon but no
   longer an xpm icon (Debian AppStream Guidelines).
 
-### Bug fixes desktop version
+### Bug Fixes Desktop Version
 
 * Message dialog about discarding unsaved current game was not shown if
   a file was loaded by clicking on a game in the rating dialog.
@@ -353,7 +353,7 @@ Version 11.0 (29 Dec 2015)
   were left, even if setup mode is also intended to be used for
   setting up illegal positions (e.g. for Blokus art).
 
-### Android version
+### Android Version
 
 * Initial support for loading/saving, variations and game tree
   navigation.
@@ -366,7 +366,7 @@ Version 11.0 (29 Dec 2015)
 Version 10.1 (15 Oct 2015)
 --------------------------
 
-### Desktop version
+### Desktop Version
 
 * New toolbar button for Undo Move.
 * Annotations are now also appended to the move number in the status
@@ -376,7 +376,7 @@ Version 10.1 (15 Oct 2015)
   fails due to low memory.
 * The Windows installer is now built with Qt 5 and dynamic libraries.
 
-### Android version
+### Android Version
 
 * New action bar button for Undo Move.
 * Reduced memory requirements. A meaningful error message is now shown
@@ -403,7 +403,7 @@ Version 10.0 (01 Jul 2015)
 * The Pentobi help browser now uses a larger font on Windows
 * Regional language subvariants en_GB, en_CA are no longer supported.
 
-### Bug fixes
+### Bug Fixes
 
 * Fixed a build failure when generating the PNG icons from the SVG
   sources if the path contained non-ASCII characters.

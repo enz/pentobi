@@ -1,4 +1,4 @@
-Compiling and installing Pentobi from the sources
+Compiling and Installing Pentobi From the Sources
 =================================================
 
 Requirements
@@ -26,7 +26,7 @@ cmake -DCMAKE_BUILD_TYPE=Release .
 make
 ```
 
-Building the KDE thumbnailer plugin
+Building the KDE Thumbnailer Plugin
 -----------------------------------
 
 A thumbnailer plugin for KDE can be built by using the cmake option
@@ -54,8 +54,8 @@ sudo update-mime-database /usr/local/share/mime
 sudo update-desktop-database /usr/local/share/applications
 ```
 
-Building the Android version
-----------------------------
+Building the Android App
+------------------------
 
 Because building, deploying and debugging for Android is not yet
 functional for CMake projects in QtCreator, there exists a project file
