@@ -1,7 +1,7 @@
 Pentobi README
 ==============
 
-![Pentobi Screenshot](https://pentobi.sourceforge.io/pentobi-classic-small.png)
+![Screenshot](https://pentobi.sourceforge.io/pentobi-classic-small.png)
 
 Pentobi is a computer opponent for the board game Blokus. It has a
 strong Blokus engine with different playing levels. The supported
@@ -13,7 +13,7 @@ the program from the sources. See [NEWS](NEWS.md) for release notes.
 See [HACKING](HACKING.md) for an overview of the source code. Further
 information, links to the bug tracker, development mailing list, source
 code repository, and information about contributing translations are
-available at the Pentobi homepage at https://pentobi.sourceforge.io.
+available at the [Pentobi homepage](https://pentobi.sourceforge.io/).
 
 License
 -------
