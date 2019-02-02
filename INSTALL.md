@@ -4,8 +4,8 @@ Compiling and Installing Pentobi From the Sources
 Requirements
 ------------
 
-Pentobi requires the Qt libraries (>=5.12). The C++ compiler needs
-C++17 support (GCC >=5.1). The build system uses CMake (>=3.1.0).
+Pentobi requires the Qt libraries (>=5.11). The C++ compiler needs
+C++17 support (GCC >=5). The build system uses CMake (>=3.1.0).
 
 In Debian-based distributions that support Qt >=5.12, the necessary
 tools and libraries can be installed with the command
