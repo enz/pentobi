@@ -29,7 +29,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <div class="navheader">
 <table width="100%" summary="Navigation header">
 <tr>
-<td width="40%" align="{$direction.align.start}">
+<td align="{$direction.align.start}">
 <xsl:if test="count($prev)>0">
 <a accesskey="p">
 <xsl:attribute name="href">
@@ -44,7 +44,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 </xsl:if>
 <xsl:text>&#160;</xsl:text>
 </td>
-<td width="20%" align="center">
+<td align="center">
 <xsl:choose>
 <xsl:when test="$home != . or $nav.context = 'toc'">
 <a accesskey="h">
@@ -61,7 +61,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <xsl:otherwise>&#160;</xsl:otherwise>
 </xsl:choose>
 </td>
-<td width="40%" align="{$direction.align.end}">
+<td align="{$direction.align.end}">
 <xsl:text>&#160;</xsl:text>
 <xsl:if test="count($next)>0">
 <a accesskey="n">
@@ -91,7 +91,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <hr/>
 <table width="100%" summary="Navigation footer">
 <tr>
-<td width="40%" align="{$direction.align.start}">
+<td align="{$direction.align.start}">
 <xsl:if test="count($prev)>0">
 <a accesskey="p">
 <xsl:attribute name="href">
@@ -106,7 +106,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 </xsl:if>
 <xsl:text>&#160;</xsl:text>
 </td>
-<td width="20%" align="center">
+<td align="center">
 <xsl:choose>
 <xsl:when test="$home != . or $nav.context = 'toc'">
 <a accesskey="h">
@@ -123,7 +123,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <xsl:otherwise>&#160;</xsl:otherwise>
 </xsl:choose>
 </td>
-<td width="40%" align="{$direction.align.end}">
+<td align="{$direction.align.end}">
 <xsl:text>&#160;</xsl:text>
 <xsl:if test="count($next)>0">
 <a accesskey="n">
