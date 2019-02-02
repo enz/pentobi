@@ -37,15 +37,6 @@ public:
     using HandlerNoArgsNoResponse = function<void()>;
 
 
-    /** @page libboardgame_gtp_commands libboardgame_gtp::Engine GTP commands
-        <dl>
-        <dt>@link cmd_known_command() @c known_command @endlink</dt>
-        <dd>@copydoc cmd_known_command() </dd>
-        <dt>@link cmd_list_commands() @c list_commands @endlink</dt>
-        <dd>@copydoc cmd_list_commands() </dd>
-        <dt>@link cmd_quit() @c quit @endlink</dt>
-        <dd>@copydoc cmd_quit() </dd>
-        </dl> */
     /** @name Command handlers */
     /** @{ */
     void cmd_known_command(Arguments args, Response& response);
