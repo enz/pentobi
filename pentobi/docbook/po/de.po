@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-02-02 10:04+0000\n"
-"PO-Revision-Date: 2019-02-02 11:05+0100\n"
+"POT-Creation-Date: 2019-02-02 16:55+0000\n"
+"PO-Revision-Date: 2019-02-02 17:56+0100\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -2386,8 +2386,8 @@ msgstr "Lizenz"
 #. Tag: para
 #: index.docbook:1306
 #, no-c-format
-msgid "Copyright © 2011–2018 Markus Enzenberger"
-msgstr "Copyright © 2011–2018 Markus Enzenberger"
+msgid "Copyright © 2011–2019 Markus Enzenberger"
+msgstr "Copyright © 2011–2019 Markus Enzenberger"
 
 #. Tag: para
 #: index.docbook:1309
@@ -2435,6 +2435,9 @@ msgstr ""
 "Der Markenname Blokus und andere erwähnte Marken sind Eigentum ihrer "
 "jeweiligen Markeninhaber. Die Markeninhaber stehen in keiner Verbindung mit "
 "dem Autor des Programms Pentobi."
+
+#~ msgid "Copyright © 2011–2018 Markus Enzenberger"
+#~ msgstr "Copyright © 2011–2018 Markus Enzenberger"
 
 #~ msgid "<term>Up</term>"
 #~ msgstr "<term>Oben</term>"

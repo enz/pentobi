@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-02 10:04+0000\n"
+"POT-Creation-Date: 2019-02-02 16:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -1989,7 +1989,7 @@ msgstr ""
 #. Tag: para
 #: index.docbook:1306
 #, no-c-format
-msgid "Copyright © 2011–2018 Markus Enzenberger"
+msgid "Copyright © 2011–2019 Markus Enzenberger"
 msgstr ""
 
 #. Tag: para
