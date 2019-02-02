@@ -47,7 +47,7 @@ private:
 
 //-----------------------------------------------------------------------------
 
-/** Output stream buffer from a file descriptor. */
+/** %Output stream buffer from a file descriptor. */
 class FdOutBuf
     : public streambuf
 {
@@ -69,7 +69,7 @@ private:
 
 //-----------------------------------------------------------------------------
 
-/** Output stream from a file descriptor. */
+/** %Output stream from a file descriptor. */
 class FdOutStream final
     : public ostream
 {
