@@ -7,8 +7,8 @@ Requirements
 Pentobi requires the Qt libraries (>=5.11). The C++ compiler needs
 C++17 support (GCC >=5). The build system uses CMake (>=3.1.0).
 
-In Debian-based distributions that support Qt >=5.12, the necessary
-tools and libraries can be installed with the command
+In Debian-based distributions, the necessary tools and libraries can be
+installed with the command
 ```
 sudo apt-get install cmake g++ libqt5svg5-dev libqt5webview5-dev make \
   qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \  
