@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-01 09:10+0000\n"
+"POT-Creation-Date: 2019-02-02 10:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -1587,7 +1587,7 @@ msgid ""
 "focus can be switched away from the comment text with the Tab key."
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1149
 #, no-c-format
 msgid "Plus"
@@ -1599,7 +1599,7 @@ msgstr ""
 msgid "Select next piece"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1157
 #, no-c-format
 msgid "Minus"
@@ -1611,7 +1611,7 @@ msgstr ""
 msgid "Select previous piece"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1165
 #, no-c-format
 msgid "Escape"
@@ -1623,49 +1623,49 @@ msgstr ""
 msgid "Clear selected piece"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1173
 #, no-c-format
 msgid "Left"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1174
 #, no-c-format
 msgid "Right"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1175
 #, no-c-format
-msgid "<term>Up</term>"
+msgid "<keysym>Up</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1176
 #, no-c-format
 msgid "Down"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1177
 #, no-c-format
 msgid "Shift+Left"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1178
 #, no-c-format
 msgid "Shift+Right"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1179
 #, no-c-format
 msgid "Shift+Up"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1180
 #, no-c-format
 msgid "Shift+Down"
@@ -1677,7 +1677,7 @@ msgstr ""
 msgid "Move the selected piece. The Shift key makes the piece move faster."
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1188
 #, no-c-format
 msgid "Space"
@@ -1689,7 +1689,7 @@ msgstr ""
 msgid "Next orientation of the selected piece"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1196
 #, no-c-format
 msgid "Shift+Space"
@@ -1701,7 +1701,7 @@ msgstr ""
 msgid "Previous orientation of the selected piece"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1204
 #, no-c-format
 msgid "Enter"
@@ -1713,136 +1713,136 @@ msgstr ""
 msgid "Play the selected piece"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1212
 #, no-c-format
-msgid "<term>1</term>"
+msgid "<keysym>1</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1213
 #, no-c-format
-msgid "<term>2</term>"
+msgid "<keysym>2</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1214
 #, no-c-format
-msgid "<term>A</term>"
+msgid "<keysym>A</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1215
 #, no-c-format
-msgid "<term>C</term>"
+msgid "<keysym>C</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1216
 #, no-c-format
-msgid "<term>E</term>"
+msgid "<keysym>E</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1217
 #, no-c-format
-msgid "<term>F</term>"
+msgid "<keysym>F</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1218
 #, no-c-format
-msgid "<term>G</term>"
+msgid "<keysym>G</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1219
 #, no-c-format
-msgid "<term>H</term>"
+msgid "<keysym>H</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1220
 #, no-c-format
-msgid "<term>I</term>"
+msgid "<keysym>I</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1221
 #, no-c-format
-msgid "<term>J</term>"
+msgid "<keysym>J</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1222
 #, no-c-format
-msgid "<term>L</term>"
+msgid "<keysym>L</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1223
 #, no-c-format
-msgid "<term>N</term>"
+msgid "<keysym>N</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1224
 #, no-c-format
-msgid "<term>O</term>"
+msgid "<keysym>O</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1225
 #, no-c-format
-msgid "<term>P</term>"
+msgid "<keysym>P</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1226
 #, no-c-format
-msgid "<term>S</term>"
+msgid "<keysym>S</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1227
 #, no-c-format
-msgid "<term>T</term>"
+msgid "<keysym>T</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1228
 #, no-c-format
-msgid "<term>U</term>"
+msgid "<keysym>U</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1229
 #, no-c-format
-msgid "<term>V</term>"
+msgid "<keysym>V</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1230
 #, no-c-format
-msgid "<term>W</term>"
+msgid "<keysym>W</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1231
 #, no-c-format
-msgid "<term>X</term>"
+msgid "<keysym>X</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1232
 #, no-c-format
-msgid "<term>Y</term>"
+msgid "<keysym>Y</keysym>"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1233
 #, no-c-format
-msgid "<term>Z</term>"
+msgid "<keysym>Z</keysym>"
 msgstr ""
 
 #. Tag: para
@@ -1856,49 +1856,49 @@ msgid ""
 "as \"lobster\" and \"triangle\")."
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1245
 #, no-c-format
 msgid "Ctrl+Home"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1246
 #, no-c-format
 msgid "Ctrl+Shift+Left"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1247
 #, no-c-format
 msgid "Ctrl+Left"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1248
 #, no-c-format
 msgid "Ctrl+Right"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1249
 #, no-c-format
 msgid "Ctrl+Shift+Right"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1250
 #, no-c-format
 msgid "Ctrl+End"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1251
 #, no-c-format
 msgid "Ctrl+Up"
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1252
 #, no-c-format
 msgid "Ctrl+Down"
@@ -1912,7 +1912,7 @@ msgid ""
 "moves forward, end, previous variation, next variation."
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1261
 #, no-c-format
 msgid "Ctrl+Shift+H"
@@ -1926,7 +1926,7 @@ msgid ""
 "through the list of legal moves."
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1270
 #, no-c-format
 msgid "Ctrl+T"
@@ -1938,7 +1938,7 @@ msgstr ""
 msgid "Switch view between comment and game analysis."
 msgstr ""
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1278
 #, no-c-format
 msgid "Alt+M"

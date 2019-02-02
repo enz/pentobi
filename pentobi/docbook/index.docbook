@@ -1146,7 +1146,7 @@ can be switched away from the comment text with the Tab key.
 </para>
 <variablelist>
 <varlistentry>
-<term>Plus</term>
+<term><keysym>Plus</keysym></term>
 <listitem>
 <para>
 Select next piece
@@ -1154,7 +1154,7 @@ Select next piece
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Minus</term>
+<term><keysym>Minus</keysym></term>
 <listitem>
 <para>
 Select previous piece
@@ -1162,7 +1162,7 @@ Select previous piece
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Escape</term>
+<term><keysym>Escape</keysym></term>
 <listitem>
 <para>
 Clear selected piece
@@ -1170,14 +1170,14 @@ Clear selected piece
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Left</term>
-<term>Right</term>
-<term>Up</term>
-<term>Down</term>
-<term>Shift+Left</term>
-<term>Shift+Right</term>
-<term>Shift+Up</term>
-<term>Shift+Down</term>
+<term><keysym>Left</keysym></term>
+<term><keysym>Right</keysym></term>
+<term><keysym>Up</keysym></term>
+<term><keysym>Down</keysym></term>
+<term><keysym>Shift+Left</keysym></term>
+<term><keysym>Shift+Right</keysym></term>
+<term><keysym>Shift+Up</keysym></term>
+<term><keysym>Shift+Down</keysym></term>
 <listitem>
 <para>
 Move the selected piece. The Shift key makes the piece move faster.
@@ -1185,7 +1185,7 @@ Move the selected piece. The Shift key makes the piece move faster.
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Space</term>
+<term><keysym>Space</keysym></term>
 <listitem>
 <para>
 Next orientation of the selected piece
@@ -1193,7 +1193,7 @@ Next orientation of the selected piece
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Shift+Space</term>
+<term><keysym>Shift+Space</keysym></term>
 <listitem>
 <para>
 Previous orientation of the selected piece
@@ -1201,7 +1201,7 @@ Previous orientation of the selected piece
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Enter</term>
+<term><keysym>Enter</keysym></term>
 <listitem>
 <para>
 Play the selected piece
@@ -1209,28 +1209,28 @@ Play the selected piece
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>1</term>
-<term>2</term>
-<term>A</term>
-<term>C</term>
-<term>E</term>
-<term>F</term>
-<term>G</term>
-<term>H</term>
-<term>I</term>
-<term>J</term>
-<term>L</term>
-<term>N</term>
-<term>O</term>
-<term>P</term>
-<term>S</term>
-<term>T</term>
-<term>U</term>
-<term>V</term>
-<term>W</term>
-<term>X</term>
-<term>Y</term>
-<term>Z</term>
+<term><keysym>1</keysym></term>
+<term><keysym>2</keysym></term>
+<term><keysym>A</keysym></term>
+<term><keysym>C</keysym></term>
+<term><keysym>E</keysym></term>
+<term><keysym>F</keysym></term>
+<term><keysym>G</keysym></term>
+<term><keysym>H</keysym></term>
+<term><keysym>I</keysym></term>
+<term><keysym>J</keysym></term>
+<term><keysym>L</keysym></term>
+<term><keysym>N</keysym></term>
+<term><keysym>O</keysym></term>
+<term><keysym>P</keysym></term>
+<term><keysym>S</keysym></term>
+<term><keysym>T</keysym></term>
+<term><keysym>U</keysym></term>
+<term><keysym>V</keysym></term>
+<term><keysym>W</keysym></term>
+<term><keysym>X</keysym></term>
+<term><keysym>Y</keysym></term>
+<term><keysym>Z</keysym></term>
 <listitem>
 <para>
 Select piece according to commonly used piece names. If there are multiple
@@ -1242,14 +1242,14 @@ A is used only in Trigon for the pieces A6 and A4 (also known as "lobster" and
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Ctrl+Home</term>
-<term>Ctrl+Shift+Left</term>
-<term>Ctrl+Left</term>
-<term>Ctrl+Right</term>
-<term>Ctrl+Shift+Right</term>
-<term>Ctrl+End</term>
-<term>Ctrl+Up</term>
-<term>Ctrl+Down</term>
+<term><keysym>Ctrl+Home</keysym></term>
+<term><keysym>Ctrl+Shift+Left</keysym></term>
+<term><keysym>Ctrl+Left</keysym></term>
+<term><keysym>Ctrl+Right</keysym></term>
+<term><keysym>Ctrl+Shift+Right</keysym></term>
+<term><keysym>Ctrl+End</keysym></term>
+<term><keysym>Ctrl+Up</keysym></term>
+<term><keysym>Ctrl+Down</keysym></term>
 <listitem>
 <para>
 Navigate in the game: beginning, ten moves backward, backward, forward, ten
@@ -1258,7 +1258,7 @@ moves forward, end, previous variation, next variation.
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Ctrl+Shift+H</term>
+<term><keysym>Ctrl+Shift+H</keysym></term>
 <listitem>
 <para>
 Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards
@@ -1267,7 +1267,7 @@ through the list of legal moves.
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Ctrl+T</term>
+<term><keysym>Ctrl+T</keysym></term>
 <listitem>
 <para>
 Switch view between comment and game analysis.
@@ -1275,7 +1275,7 @@ Switch view between comment and game analysis.
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Alt+M</term>
+<term><keysym>Alt+M</keysym></term>
 <listitem>
 <para>
 Open menu.

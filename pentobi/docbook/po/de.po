@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-02-01 08:23+0000\n"
-"PO-Revision-Date: 2019-02-01 09:27+0100\n"
+"POT-Creation-Date: 2019-02-02 10:04+0000\n"
+"PO-Revision-Date: 2019-02-02 11:05+0100\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -1966,7 +1966,7 @@ msgstr ""
 "besitzt. In diesem Fall kann der Fokus vom Kommentartext durch die Tabulator-"
 "Taste entfernt werden."
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1149
 #, no-c-format
 msgid "Plus"
@@ -1978,7 +1978,7 @@ msgstr "Plus"
 msgid "Select next piece"
 msgstr "Nächsten Spielstein auswählen"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1157
 #, no-c-format
 msgid "Minus"
@@ -1990,7 +1990,7 @@ msgstr "Minus"
 msgid "Select previous piece"
 msgstr "Vorherigen Spielstein auswählen"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1165
 #, no-c-format
 msgid "Escape"
@@ -2002,49 +2002,49 @@ msgstr "Escape"
 msgid "Clear selected piece"
 msgstr "Spielsteinauswahl löschen"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1173
 #, no-c-format
 msgid "Left"
 msgstr "Links"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1174
 #, no-c-format
 msgid "Right"
 msgstr "Rechts"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1175
 #, no-c-format
-msgid "<term>Up</term>"
-msgstr "<term>Oben</term>"
+msgid "<keysym>Up</keysym>"
+msgstr "<keysym>Oben</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1176
 #, no-c-format
 msgid "Down"
 msgstr "Unten"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1177
 #, no-c-format
 msgid "Shift+Left"
 msgstr "Umschalt+Links"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1178
 #, no-c-format
 msgid "Shift+Right"
 msgstr "Umschalt+Rechts"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1179
 #, no-c-format
 msgid "Shift+Up"
 msgstr "Umschalt+Oben"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1180
 #, no-c-format
 msgid "Shift+Down"
@@ -2058,7 +2058,7 @@ msgstr ""
 "Bewegen des ausgewählten Spielsteins. Mit der Umschalttaste wird der "
 "Spielstein schneller bewegt."
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1188
 #, no-c-format
 msgid "Space"
@@ -2070,7 +2070,7 @@ msgstr "Leertaste"
 msgid "Next orientation of the selected piece"
 msgstr "Nächste Ausrichtung des ausgewählten Spielsteins"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1196
 #, no-c-format
 msgid "Shift+Space"
@@ -2082,7 +2082,7 @@ msgstr "Umschalt+Leertaste"
 msgid "Previous orientation of the selected piece"
 msgstr "Vorherige Ausrichtung des ausgewählten Spielsteins"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1204
 #, no-c-format
 msgid "Enter"
@@ -2094,137 +2094,137 @@ msgstr "Enter"
 msgid "Play the selected piece"
 msgstr "Spielen des ausgewählten Spielsteins."
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1212
 #, no-c-format
-msgid "<term>1</term>"
-msgstr "<term>1</term>"
+msgid "<keysym>1</keysym>"
+msgstr "<keysym>1</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1213
 #, no-c-format
-msgid "<term>2</term>"
-msgstr "<term>2</term>"
+msgid "<keysym>2</keysym>"
+msgstr "<keysym>2</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1214
 #, no-c-format
-msgid "<term>A</term>"
-msgstr "<term>A</term>"
+msgid "<keysym>A</keysym>"
+msgstr "<keysym>A</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1215
 #, no-c-format
-msgid "<term>C</term>"
-msgstr "<term>C</term>"
+msgid "<keysym>C</keysym>"
+msgstr "<keysym>C</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1216
 #, no-c-format
-msgid "<term>E</term>"
-msgstr "<term>E</term>"
+msgid "<keysym>E</keysym>"
+msgstr "<keysym>E</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1217
 #, no-c-format
-msgid "<term>F</term>"
-msgstr "<term>F</term>"
+msgid "<keysym>F</keysym>"
+msgstr "<keysym>F</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1218
 #, no-c-format
-msgid "<term>G</term>"
-msgstr "<term>G</term>"
+msgid "<keysym>G</keysym>"
+msgstr "<keysym>G</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1219
 #, no-c-format
-msgid "<term>H</term>"
-msgstr "<term>H</term>"
+msgid "<keysym>H</keysym>"
+msgstr "<keysym>H</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1220
 #, no-c-format
-msgid "<term>I</term>"
-msgstr "<term>I</term>"
+msgid "<keysym>I</keysym>"
+msgstr "<keysym>I</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1221
 #, no-c-format
-msgid "<term>J</term>"
-msgstr "<term>J</term>"
+msgid "<keysym>J</keysym>"
+msgstr "<keysym>J</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1222
 #, no-c-format
-msgid "<term>L</term>"
-msgstr "<term>L</term>"
+msgid "<keysym>L</keysym>"
+msgstr "<keysym>L</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1223
 #, no-c-format
-msgid "<term>N</term>"
-msgstr "<term>N</term>"
+msgid "<keysym>N</keysym>"
+msgstr "<keysym>N</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1224
 #, no-c-format
-msgid "<term>O</term>"
-msgstr "<term>O</term>"
+msgid "<keysym>O</keysym>"
+msgstr "<keysym>O</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1225
 #, no-c-format
-msgid "<term>P</term>"
-msgstr "<term>P</term>"
+msgid "<keysym>P</keysym>"
+msgstr "<keysym>P</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1226
 #, no-c-format
-msgid "<term>S</term>"
-msgstr "<term>S</term>"
+msgid "<keysym>S</keysym>"
+msgstr "<keysym>S</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1227
 #, no-c-format
-msgid "<term>T</term>"
-msgstr "<term>T</term>"
+msgid "<keysym>T</keysym>"
+msgstr "<keysym>T</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1228
 #, no-c-format
-msgid "<term>U</term>"
-msgstr "<term>U</term>"
+msgid "<keysym>U</keysym>"
+msgstr "<keysym>U</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1229
 #, no-c-format
-msgid "<term>V</term>"
-msgstr "<term>V</term>"
+msgid "<keysym>V</keysym>"
+msgstr "<keysym>V</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1230
 #, no-c-format
-msgid "<term>W</term>"
-msgstr "<term>W</term>"
+msgid "<keysym>W</keysym>"
+msgstr "<keysym>W</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1231
 #, no-c-format
-msgid "<term>X</term>"
-msgstr "<term>X</term>"
+msgid "<keysym>X</keysym>"
+msgstr "<keysym>X</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1232
 #, no-c-format
-msgid "<term>Y</term>"
-msgstr "<term>Y</term>"
+msgid "<keysym>Y</keysym>"
+msgstr "<keysym>Y</keysym>"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1233
 #, no-c-format
-msgid "<term>Z</term>"
-msgstr "<term>Z</term>"
+msgid "<keysym>Z</keysym>"
+msgstr "<keysym>Z</keysym>"
 
 #. Tag: para
 #: index.docbook:1235
@@ -2243,49 +2243,49 @@ msgstr ""
 "benutzt. Zum Beispiel wird A nur in Trigon für die Spielsteine A6 und A4 "
 "benutzt (auch bekannt als „Hummer“ und „Dreieck“)."
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1245
 #, no-c-format
 msgid "Ctrl+Home"
 msgstr "Strg+Pos1"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1246
 #, no-c-format
 msgid "Ctrl+Shift+Left"
 msgstr "Strg+Umschalt+Links"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1247
 #, no-c-format
 msgid "Ctrl+Left"
 msgstr "Strg+Links"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1248
 #, no-c-format
 msgid "Ctrl+Right"
 msgstr "Strg+Rechts"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1249
 #, no-c-format
 msgid "Ctrl+Shift+Right"
 msgstr "Strg+Umschalt+Rechts"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1250
 #, no-c-format
 msgid "Ctrl+End"
 msgstr "Strg+Ende"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1251
 #, no-c-format
 msgid "Ctrl+Up"
 msgstr "Strg+Oben"
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1252
 #, no-c-format
 msgid "Ctrl+Down"
@@ -2301,7 +2301,7 @@ msgstr ""
 "Im Spiel navigieren: Anfang, zehn Züge zurück, zurück, vorwärts, zehn Züge "
 "vorwärts, Ende, vorherige Variante, nächste Variante."
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1261
 #, no-c-format
 msgid "Ctrl+Shift+H"
@@ -2317,7 +2317,7 @@ msgstr ""
 "Wie <guimenuitem>Zug finden</guimenuitem> (Strg+H), jedoch wird rückwärts "
 "durch die Liste der legalen Züge iteriert."
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1270
 #, no-c-format
 msgid "Ctrl+T"
@@ -2329,7 +2329,7 @@ msgstr "Strg+T"
 msgid "Switch view between comment and game analysis."
 msgstr "Ansicht zwischen Kommentar und Spielanalyse umschalten."
 
-#. Tag: term
+#. Tag: keysym
 #: index.docbook:1278
 #, no-c-format
 msgid "Alt+M"
@@ -2435,3 +2435,72 @@ msgstr ""
 "Der Markenname Blokus und andere erwähnte Marken sind Eigentum ihrer "
 "jeweiligen Markeninhaber. Die Markeninhaber stehen in keiner Verbindung mit "
 "dem Autor des Programms Pentobi."
+
+#~ msgid "<term>Up</term>"
+#~ msgstr "<term>Oben</term>"
+
+#~ msgid "<term>1</term>"
+#~ msgstr "<term>1</term>"
+
+#~ msgid "<term>2</term>"
+#~ msgstr "<term>2</term>"
+
+#~ msgid "<term>A</term>"
+#~ msgstr "<term>A</term>"
+
+#~ msgid "<term>C</term>"
+#~ msgstr "<term>C</term>"
+
+#~ msgid "<term>E</term>"
+#~ msgstr "<term>E</term>"
+
+#~ msgid "<term>F</term>"
+#~ msgstr "<term>F</term>"
+
+#~ msgid "<term>G</term>"
+#~ msgstr "<term>G</term>"
+
+#~ msgid "<term>H</term>"
+#~ msgstr "<term>H</term>"
+
+#~ msgid "<term>I</term>"
+#~ msgstr "<term>I</term>"
+
+#~ msgid "<term>J</term>"
+#~ msgstr "<term>J</term>"
+
+#~ msgid "<term>L</term>"
+#~ msgstr "<term>L</term>"
+
+#~ msgid "<term>N</term>"
+#~ msgstr "<term>N</term>"
+
+#~ msgid "<term>O</term>"
+#~ msgstr "<term>O</term>"
+
+#~ msgid "<term>P</term>"
+#~ msgstr "<term>P</term>"
+
+#~ msgid "<term>S</term>"
+#~ msgstr "<term>S</term>"
+
+#~ msgid "<term>T</term>"
+#~ msgstr "<term>T</term>"
+
+#~ msgid "<term>U</term>"
+#~ msgstr "<term>U</term>"
+
+#~ msgid "<term>V</term>"
+#~ msgstr "<term>V</term>"
+
+#~ msgid "<term>W</term>"
+#~ msgstr "<term>W</term>"
+
+#~ msgid "<term>X</term>"
+#~ msgstr "<term>X</term>"
+
+#~ msgid "<term>Y</term>"
+#~ msgstr "<term>Y</term>"
+
+#~ msgid "<term>Z</term>"
+#~ msgstr "<term>Z</term>"
