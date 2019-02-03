@@ -21,6 +21,6 @@ target_include_directories(boardgame_sgf PUBLIC ..)
 
 target_link_libraries(boardgame_sgf boardgame_util)
 
-if(PENTOBI_BUILD_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()

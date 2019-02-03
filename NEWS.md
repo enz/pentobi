@@ -9,6 +9,8 @@ Version 16.x (master)
 * The source for the user manual is now in DocBook format, which makes
   it translatable (using xml2pot and gettext).
 * The compiler now needs to support C++17.
+* Renamed build configuration option PENTOBI_BUILD_TESTS to
+  BUILD_TESTING for compatibility with CTest.
 
 Version 16.2.x (v16-fixes)
 --------------------------

@@ -17,6 +17,6 @@ target_link_libraries(boardgame_mcts INTERFACE
     Threads::Threads
     )
 
-if(PENTOBI_BUILD_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()

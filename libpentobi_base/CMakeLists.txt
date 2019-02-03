@@ -82,6 +82,6 @@ endif()
 target_link_libraries(pentobi_base boardgame_sgf boardgame_base)
 target_include_directories(pentobi_base PUBLIC ..)
 
-if(PENTOBI_BUILD_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
