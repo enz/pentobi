@@ -5,24 +5,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2019-02-02 16:55+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2019-02-04 21:10+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/pentobi/"
+"pentobi-manual/nb_NO/>\n"
 "Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.5-dev\n"
 
 #. Tag: title
 #: index.docbook:5
 #, no-c-format
 msgid "Pentobi"
-msgstr ""
+msgstr "Pentobi"
 
 #. Tag: title
 #: index.docbook:8
 #, no-c-format
 msgid "Overview"
-msgstr ""
+msgstr "Oversikt"
 
 #. Tag: para
 #: index.docbook:9
@@ -39,7 +43,7 @@ msgstr ""
 #: index.docbook:18
 #, no-c-format
 msgid "Classic Rules"
-msgstr ""
+msgstr "Klassiske regler"
 
 #. Tag: para
 #: index.docbook:19
@@ -55,7 +59,7 @@ msgstr ""
 #: index.docbook:30 index.docbook:290 index.docbook:354
 #, no-c-format
 msgid "The 21 pieces"
-msgstr ""
+msgstr "De 21 brikkene"
 
 #. Tag: para
 #: index.docbook:33
@@ -86,7 +90,7 @@ msgstr ""
 #: index.docbook:61 index.docbook:261 index.docbook:321 index.docbook:384
 #, no-c-format
 msgid "An example position after a few moves"
-msgstr ""
+msgstr "En eksempelposisjon etter et par trekk"
 
 #. Tag: para
 #: index.docbook:64
@@ -105,7 +109,7 @@ msgstr ""
 #: index.docbook:74 index.docbook:179 index.docbook:269
 #, no-c-format
 msgid "Rules for Two Players"
-msgstr ""
+msgstr "Regler for to spillere"
 
 #. Tag: para
 #: index.docbook:75
@@ -120,7 +124,7 @@ msgstr ""
 #: index.docbook:82 index.docbook:186
 #, no-c-format
 msgid "Rules for Three Players"
-msgstr ""
+msgstr "Regler for tre spillere"
 
 #. Tag: para
 #: index.docbook:83
@@ -135,7 +139,7 @@ msgstr ""
 #: index.docbook:90
 #, no-c-format
 msgid "Colorless Starting Points"
-msgstr ""
+msgstr "Fargeløse startpoeng"
 
 #. Tag: para
 #: index.docbook:91
@@ -153,7 +157,7 @@ msgstr ""
 #: index.docbook:103
 #, no-c-format
 msgid "Duo Rules"
-msgstr ""
+msgstr "Duo-regler"
 
 #. Tag: para
 #: index.docbook:104
@@ -863,19 +867,19 @@ msgstr ""
 #: index.docbook:654
 #, no-c-format
 msgid "<guimenuitem>New</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Nytt</guimenuitem>"
 
 #. Tag: para
 #: index.docbook:657
 #, no-c-format
 msgid "Start a new game."
-msgstr ""
+msgstr "Start et nytt spill"
 
 #. Tag: guimenuitem
 #: index.docbook:663
 #, no-c-format
 msgid "Rated Game"
-msgstr ""
+msgstr "Vurdert spill"
 
 #. Tag: para
 #: index.docbook:665
@@ -944,7 +948,7 @@ msgstr ""
 #: index.docbook:707
 #, no-c-format
 msgid "Open"
-msgstr ""
+msgstr "Åpne"
 
 #. Tag: para
 #: index.docbook:709
@@ -962,19 +966,19 @@ msgstr ""
 #: index.docbook:719
 #, no-c-format
 msgid "Open Recent"
-msgstr ""
+msgstr "Åpne nylige"
 
 #. Tag: para
 #: index.docbook:721
 #, no-c-format
 msgid "Load a recently used game."
-msgstr ""
+msgstr "Last inn et nylig avholdt spill."
 
 #. Tag: guimenuitem
 #: index.docbook:727
 #, no-c-format
 msgid "Open Clipboard"
-msgstr ""
+msgstr "Åpne utklippstavle"
 
 #. Tag: para
 #: index.docbook:729
@@ -988,25 +992,25 @@ msgstr ""
 #: index.docbook:736
 #, no-c-format
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 #. Tag: para
 #: index.docbook:738
 #, no-c-format
 msgid "Save the current game."
-msgstr ""
+msgstr "Lagre nåværende spill."
 
 #. Tag: guimenuitem
 #: index.docbook:744
 #, no-c-format
 msgid "Save As"
-msgstr ""
+msgstr "Lagre som"
 
 #. Tag: para
 #: index.docbook:746
-#, no-c-format
+#, fuzzy, no-c-format
 msgid "Save the current game under a new file name."
-msgstr ""
+msgstr "Lagre nåværende spill under et nytt filnavn."
 
 #. Tag: term
 #: index.docbook:752
