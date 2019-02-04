@@ -85,7 +85,7 @@ Options::Options(int argc, const char** argv, const vector<string>& specs)
                         throw OptionError("Unknown option -" + string(1, c));
                     if (needs_arg || ! value.empty())
                         break;
-                    m_map.insert(pair(name, ""));
+                    m_map.insert({name, ""});
                 }
             }
             if (needs_arg)
@@ -101,7 +101,7 @@ Options::Options(int argc, const char** argv, const vector<string>& specs)
                 if (! value_found)
                     throw OptionError("Option --" + name + " needs value");
             }
-            m_map.insert(pair(name, value));
+            m_map.insert({name, value});
         }
         else
             m_args.push_back(arg);

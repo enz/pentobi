@@ -46,7 +46,7 @@ Output::Output(Variant variant, const string& prefix, bool create_tree)
         unsigned game_number;
         if (! from_string(columns[0], game_number))
             throw runtime_error("Output: expected game number");
-        m_games.insert(pair(game_number, line));
+        m_games.insert({game_number, line});
     }
     while (m_games.count(m_next) != 0)
         ++m_next;
@@ -83,7 +83,7 @@ void Output::add_result(unsigned n, float result, const Board& bd,
              << setprecision(5) << cpu_black << '\t'
              << cpu_white << '\t'
              << nu_fast_open;
-        m_games.insert(pair(n, line.str()));
+        m_games.insert({n, line.str()});
         m_sgf_buffer << sgf;
         if (m_create_tree)
             m_output_tree.add_game(bd, player_black, result, is_real_move);
