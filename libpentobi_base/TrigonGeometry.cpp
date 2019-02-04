@@ -29,8 +29,9 @@ const TrigonGeometry& TrigonGeometry::get(unsigned sz)
     auto pos = s_geometry.find(sz);
     if (pos != s_geometry.end())
         return *pos->second;
-    shared_ptr<TrigonGeometry> geometry(new TrigonGeometry(sz));
-    return *s_geometry.insert(pair(sz, geometry)).first->second;
+    auto geometry = make_shared<TrigonGeometry>(sz);
+    s_geometry.insert({sz, geometry});
+    return *geometry;
 }
 
 auto TrigonGeometry::get_adj_coord(int x, int y) const -> AdjCoordList

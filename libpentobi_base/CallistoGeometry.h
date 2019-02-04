@@ -28,6 +28,8 @@ public:
     static bool is_center_section(unsigned x, unsigned y, unsigned nu_colors);
 
 
+    explicit CallistoGeometry(unsigned nu_colors);
+
     AdjCoordList get_adj_coord(int x, int y) const override;
 
     DiagCoordList get_diag_coord(int x, int y) const override;
@@ -43,9 +45,6 @@ protected:
 
 private:
     unsigned m_edge;
-
-
-    explicit CallistoGeometry(unsigned nu_colors);
 };
 
 //-----------------------------------------------------------------------------

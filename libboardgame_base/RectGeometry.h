@@ -31,10 +31,11 @@ public:
     using DiagCoordList = typename Geometry<P>::DiagCoordList;
 
 
-    RectGeometry(unsigned width, unsigned height);
-
     /** Create or reuse an already created geometry with a given size. */
     static const RectGeometry& get(unsigned width, unsigned height);
+
+
+    RectGeometry(unsigned width, unsigned height);
 
     AdjCoordList get_adj_coord(int x, int y) const override;
 
@@ -61,12 +62,13 @@ const RectGeometry<P>& RectGeometry<P>::get(unsigned width, unsigned height)
 {
     static map<pair<unsigned, unsigned>, shared_ptr<RectGeometry>> s_geometry;
 
-    auto key = pair(width, height);
+    pair key(width, height);
     auto pos = s_geometry.find(key);
     if (pos != s_geometry.end())
         return *pos->second;
     auto geometry = make_shared<RectGeometry>(width, height);
-    return *s_geometry.insert(pair(key, geometry)).first->second;
+    s_geometry.insert({key, geometry});
+    return *geometry;
 }
 
 template<class P>

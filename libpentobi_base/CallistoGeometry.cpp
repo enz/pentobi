@@ -61,8 +61,9 @@ const CallistoGeometry& CallistoGeometry::get(unsigned nu_colors)
     auto pos = s_geometry.find(nu_colors);
     if (pos != s_geometry.end())
         return *pos->second;
-    shared_ptr<CallistoGeometry> geometry(new CallistoGeometry(nu_colors));
-    return *s_geometry.insert(pair(nu_colors, geometry)).first->second;
+    auto geometry = make_shared<CallistoGeometry>(nu_colors);
+    s_geometry.insert({nu_colors, geometry});
+    return *geometry;
 }
 
 auto CallistoGeometry::get_adj_coord(
