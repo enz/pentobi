@@ -51,7 +51,8 @@ public:
     static constexpr unsigned max_moves = Color::range * max_player_moves;
 
     /** Use ANSI escape sequences for colored text output in operator>> */
-    static bool color_output;
+    static inline bool color_output = false;
+
 
     explicit Board(Variant variant);
 

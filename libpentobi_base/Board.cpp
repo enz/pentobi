@@ -68,8 +68,6 @@ void set_color(ostream& out, const char* esc_sequence)
 
 //-----------------------------------------------------------------------------
 
-bool Board::color_output = false;
-
 Board::Board(Variant variant)
 {
     m_color_char[Color(0)] = 'X';

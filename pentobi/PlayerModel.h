@@ -42,24 +42,28 @@ public:
     /** Global variable to disable opening books.
         Must be set before creating any instances of PlayerModel and not be
         changed afterwards. */
-    static bool noBook;
+    static inline bool noBook = false;
 
     /** Global variable to disable the minimum thinking time.
         Must be set before creating any instances of PlayerModel and not be
         changed afterwards. */
-    static bool noDelay;
+    static inline bool noDelay = false;
 
     /** Global variable to set the number of threads the player is constructed
         with.
         The default value 0 means that the number of threads depends on the
         hardware. Must be set before creating any instances of PlayerModel and
         not be changed afterwards. */
-    static unsigned nuThreads;
+    static inline unsigned nuThreads = 0;
 
     /** Global variable to set the maximum level.
         Must be set before creating any instances of PlayerModel and not be
         changed afterwards. */
-    static unsigned maxLevel;
+#ifdef Q_OS_ANDROID
+    static inline unsigned maxLevel = 7;
+#else
+    static inline unsigned maxLevel = 9;
+#endif
 
 
     explicit PlayerModel(QObject* parent = nullptr);

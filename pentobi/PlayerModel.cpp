@@ -16,18 +16,6 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-bool PlayerModel::noBook = false;
-
-bool PlayerModel::noDelay = false;
-
-unsigned PlayerModel::nuThreads = 0;
-
-#ifdef Q_OS_ANDROID
-unsigned PlayerModel::maxLevel = 7;
-#else
-unsigned PlayerModel::maxLevel = 9;
-#endif
-
 PlayerModel::PlayerModel(QObject* parent)
     : QObject(parent)
 {
