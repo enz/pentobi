@@ -17,6 +17,8 @@ Version 16.x (master)
 Version 16.2.x (v16-fixes)
 --------------------------
 
+* Shared MIME Info was missing a pattern for detecting Classic 3-player
+  game files independent of the file extension.
 
 Version 16.2 (16 Jan 2019)
 --------------------------
