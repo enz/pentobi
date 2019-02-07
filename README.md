@@ -11,9 +11,22 @@ Trigon, Junior, Nexos, GembloQ and Callisto.
 See [INSTALL](INSTALL.md) for instructions how to build and install
 the program from the sources. See [NEWS](NEWS.md) for release notes.
 See [HACKING](HACKING.md) for an overview of the source code. Further
-information, links to the bug tracker, development mailing list, source
-code repository, and information about contributing translations are
-available at the [Pentobi homepage](https://pentobi.sourceforge.io/).
+information is available at the
+[Pentobi homepage](https://pentobi.sourceforge.io/).
+
+Contact
+-------
+
+The maintainer of Pentobi is Markus Enzenberger. Please use the
+[SourceForge bug tracker](https://sourceforge.net/p/pentobi/bugs/) and
+[user forum](https://sourceforge.net/p/pentobi/discussion/) for contact
+regarding bugs in released versions of Pentobi or questions about
+released versions.
+
+For bugs in unreleased source code and development-related
+discussions, please use the
+[GitHub issue tracker](https://github.com/enz/pentobi/issues) and
+[development mailing list](https://sourceforge.net/projects/pentobi/lists/pentobi-devel).
 
 License
 -------
