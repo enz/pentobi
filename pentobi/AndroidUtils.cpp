@@ -12,6 +12,7 @@
 #ifdef Q_OS_ANDROID
 #include <QDir>
 #include <QDirIterator>
+#include <QHash>
 #include <QtAndroidExtras/QtAndroid>
 #include <QtAndroidExtras/QAndroidJniObject>
 #endif
@@ -21,11 +22,16 @@
 bool AndroidUtils::checkPermission([[maybe_unused]] const QString& permission)
 {
 #ifdef Q_OS_ANDROID
-    return QtAndroid::checkPermission(permission) ==
-           QtAndroid::PermissionResult::Granted;
-#else
-    return true;
+    auto r = QtAndroid::checkPermission(permission);
+    if (r == QtAndroid::PermissionResult::Denied)
+    {
+        QtAndroid::requestPermissionsSync(QStringList() << permission);
+        r = QtAndroid::checkPermission(permission);
+        if (r == QtAndroid::PermissionResult::Denied)
+            return false;
+    }
 #endif
+    return true;
 }
 
 QUrl AndroidUtils::extractHelp([[maybe_unused]] const QString& language)

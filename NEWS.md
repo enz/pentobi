@@ -12,6 +12,8 @@ Version 16.x (master)
   at build time from the DocBook sources, but included in the sources
   because it is also needed by the Android project, which does not use
   CMake yet.
+* The Android version now interactively asks for permission when opening
+  or saving a game if storage permission has not yet been granted.
 * The compiler now needs to support C++17.
 * Renamed build configuration option PENTOBI_BUILD_TESTS to
   BUILD_TESTING for compatibility with CTest.
