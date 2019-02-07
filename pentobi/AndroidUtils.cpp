@@ -22,12 +22,13 @@
 bool AndroidUtils::checkPermission([[maybe_unused]] const QString& permission)
 {
 #ifdef Q_OS_ANDROID
-    auto r = QtAndroid::checkPermission(permission);
-    if (r == QtAndroid::PermissionResult::Denied)
+    using QtAndroid::PermissionResult;
+    if (QtAndroid::checkPermission(permission) == PermissionResult::Denied)
     {
-        QtAndroid::requestPermissionsSync(QStringList() << permission);
-        r = QtAndroid::checkPermission(permission);
-        if (r == QtAndroid::PermissionResult::Denied)
+        QStringList permissions;
+        permissions << permission;
+        auto result = QtAndroid::requestPermissionsSync(permissions);
+        if (result[permission] == PermissionResult::Denied)
             return false;
     }
 #endif
