@@ -1,6 +1,12 @@
 Pentobi Source Code Overview
 ============================
 
+Git Repository
+--------------
+
+The source code repository is at https://github.com/enz/pentobi.
+
+
 Libboardgame Modules
 --------------------
 
