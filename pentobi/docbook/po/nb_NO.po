@@ -3,13 +3,13 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2019-02-02 16:55+0000\n"
 "PO-Revision-Date: 2019-02-04 21:10+0000\n"
-"Last-Translator: Markus Enzenberger <markus.enzenberger@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/pentobi/"
-"pentobi-manual/de/>\n"
-"Language: de\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/pentobi/"
+"pentobi-manual/nb_NO/>\n"
+"Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,7 +26,7 @@ msgstr "Pentobi"
 #: index.docbook:8
 #, no-c-format
 msgid "Overview"
-msgstr "Übersicht"
+msgstr "Oversikt"
 
 #. Tag: para
 #: index.docbook:9
@@ -38,17 +38,12 @@ msgid ""
 "players and the game variants Duo, Trigon, Junior, Nexos, GembloQ and "
 "Callisto."
 msgstr ""
-"Pentobi ist ein Computer-Gegner für das Brettspiel Blokus. In diesem Spiel "
-"setzen vier Spieler Spielsteine, die ähnlich den Spielsteinen des "
-"Computerspiels Tetris sind, auf ein 20×20-Brett. Pentobi unterstützt auch "
-"die Spielvarianten für zwei oder drei Spieler und die Spielvarianten Duo, "
-"Trigon, Junior, Nexos, GembloQ und Callisto."
 
 #. Tag: title
 #: index.docbook:18
 #, no-c-format
 msgid "Classic Rules"
-msgstr "Klassische Regeln"
+msgstr "Klassiske regler"
 
 #. Tag: para
 #: index.docbook:19
@@ -59,17 +54,12 @@ msgid ""
 "like the polyominoes up to size five. A polyomino is a shape built from a "
 "number of squares connected along the edges."
 msgstr ""
-"Es gibt vier Spieler, Blau, Gelb, Rot und Grün, und ein Brett, das aus 20×20 "
-"Quadraten besteht. Jeder Spieler besitzt 21 Spielsteine seiner Farbe, die "
-"die Form von Polyominos bis zur Größe fünf haben. Ein Polyomino ist eine "
-"Figur, die aus einer Anzahl von Quadraten besteht, die entlang der Kanten "
-"verbunden sind."
 
 #. Tag: para
 #: index.docbook:30 index.docbook:290 index.docbook:354
 #, no-c-format
 msgid "The 21 pieces"
-msgstr "Die 21 Spielsteine"
+msgstr "De 21 brikkene"
 
 #. Tag: para
 #: index.docbook:33
@@ -79,15 +69,12 @@ msgid ""
 "piece of a player must cover its starting square. The starting squares are "
 "located in the corners of the board."
 msgstr ""
-"Die Spieler setzen abwechselnd einen ihrer Spielsteine aufs Brett. Der erste "
-"Spielstein eines Spielers muss sein Startfeld abdecken. Die Startfelder "
-"befinden sich in den Ecken des Bretts."
 
 #. Tag: para
 #: index.docbook:44
 #, no-c-format
 msgid "The 20×20 board with the starting squares marked with colored dots"
-msgstr "Das 20×20-Brett mit den durch farbige Punkte markierten Startfeldern"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:50
@@ -98,16 +85,12 @@ msgid ""
 "touch any piece of its own color along the edges. The new piece may touch "
 "edges of pieces of the opponent colors."
 msgstr ""
-"Die folgenden Spielsteine müssen so auf leere Quadrate gesetzt werden, dass "
-"der neue Spielstein mindestens einen Spielstein der eigenen Farbe Ecke an "
-"Ecke berührt, aber keinen Spielstein der eigenen Farbe entlang der Kanten. "
-"Der neue Spielstein darf die Kanten von gegnerischen Spielsteinen berühren."
 
 #. Tag: para
 #: index.docbook:61 index.docbook:261 index.docbook:321 index.docbook:384
 #, no-c-format
 msgid "An example position after a few moves"
-msgstr "Eine Beispielstellung nach ein paar Zügen"
+msgstr "En eksempelposisjon etter et par trekk"
 
 #. Tag: para
 #: index.docbook:64
@@ -121,20 +104,12 @@ msgid ""
 "of 5 points if the color could place all pieces and the last piece played "
 "was the one-square piece."
 msgstr ""
-"Wenn der Spieler einer Farbe keine Spielsteine mehr setzen kann, muss der "
-"Spieler aussetzen und die nächste Farbe ist am Zug. Wenn keiner der Spieler "
-"mehr einen Spielstein setzen kann, gewinnt der Spieler mit der höchsten "
-"Punktzahl. Die Punktzahl einer Farbe ist die Anzahl der Quadrate auf dem "
-"Brett, die von der Farbe besetzt sind, plus ein Bonus von 15 Punkten, wenn "
-"die Farbe alle ihre Spielsteine setzen konnte, plus ein zusätzlicher Bonus "
-"von 5 Punkten, wenn die Farbe alle Spielsteine setzen konnte und der zuletzt "
-"gespielte Spielstein der Spielstein war, der aus einem Quadrat besteht."
 
 #. Tag: title
 #: index.docbook:74 index.docbook:179 index.docbook:269
 #, no-c-format
 msgid "Rules for Two Players"
-msgstr "Regeln für zwei Spieler"
+msgstr "Regler for to spillere"
 
 #. Tag: para
 #: index.docbook:75
@@ -144,15 +119,12 @@ msgid ""
 "and Red, the second player Yellow and Green. The points of both colors "
 "played by a player are added up."
 msgstr ""
-"Das Spiel kann mit zwei Spielern gespielt werden. Der erste Spieler spielt "
-"Blau und Rot, der zweite Spieler Gelb und Grün. Die Punkte beider Farben "
-"eines Spielers werden addiert."
 
 #. Tag: title
 #: index.docbook:82 index.docbook:186
 #, no-c-format
 msgid "Rules for Three Players"
-msgstr "Regeln für drei Spieler"
+msgstr "Regler for tre spillere"
 
 #. Tag: para
 #: index.docbook:83
@@ -162,15 +134,12 @@ msgid ""
 "playing the fourth color (Green). At the end of the game, the score of Green "
 "is ignored."
 msgstr ""
-"Das Spiel kann auch mit drei Spielern gespielt werden. Die Spieler wechseln "
-"sich beim Spielen der vierten Farbe (Grün) ab. Am Spielende wird die "
-"Punktzahl von Grün ignoriert."
 
 #. Tag: title
 #: index.docbook:90
 #, no-c-format
 msgid "Colorless Starting Points"
-msgstr "Farblose Startfelder"
+msgstr "Fargeløse startpoeng"
 
 #. Tag: para
 #: index.docbook:91
@@ -183,18 +152,12 @@ msgid ""
 "variant was used on the Blokus online server at blokus.com and in most of "
 "the past Blokus tournaments."
 msgstr ""
-"Beachten Sie, dass die ursprünglichen klassischen Regeln für Blokus farblose "
-"Startfelder benutzen. Dies bedeutet, dass jede Farbe frei wählen darf, "
-"welches der verbleibenden noch freien Startfelder sie für ihren ersten Zug "
-"benutzt. Pentobi unterstützt zur Zeit nur die Regelvariante mit farbigen "
-"Startfeldern, weil diese Variante auf dem Blokus-Online-Server auf blokus."
-"com und in den meisten bisherigen Blokus-Turnieren verwendet wurde."
 
 #. Tag: title
 #: index.docbook:103
 #, no-c-format
 msgid "Duo Rules"
-msgstr "Duo-Regeln"
+msgstr "Duo-regler"
 
 #. Tag: para
 #: index.docbook:104
@@ -206,11 +169,6 @@ msgid ""
 "but on the square with the coordinates (5,10) for Purple, and on (10,5) for "
 "Orange."
 msgstr ""
-"Die Spielvariante Duo ist eine andere Spielvariante für zwei Spieler. Das "
-"Spiel wird auf einem kleineren Brett mit 14×14 Quadraten gespielt. Es gibt "
-"eine Farbe pro Spieler (Lila und Orange) und die Startfelder befinden sich "
-"nicht in den Ecken, sondern auf dem Feld mit den Koordinaten (5,10) für Lila "
-"und auf (10,5) für Orange."
 
 #. Tag: para
 #: index.docbook:115
@@ -219,20 +177,18 @@ msgid ""
 "The 14×14 board used in game variant Duo with the starting squares marked "
 "with colored dots"
 msgstr ""
-"Das 14×14-Brett, das in der Spielvariante Duo benutzt wird, mit den durch "
-"farbige Punkte markierten Startfeldern"
 
 #. Tag: para
 #: index.docbook:127
 #, no-c-format
 msgid "An example position in game variant Duo"
-msgstr "Eine Beispielstellung in der Spielvariante Duo"
+msgstr ""
 
 #. Tag: title
 #: index.docbook:133
 #, no-c-format
 msgid "Trigon Rules"
-msgstr "Trigon-Regeln"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:134
@@ -244,18 +200,12 @@ msgid ""
 "polyiamond is a shape built from a number of equilateral triangles connected "
 "along the edges."
 msgstr ""
-"Trigon ist eine weitere Spielvariante. Die Regeln sind ähnlich wie in der "
-"Spielvariante Klassisch, aber es werden ein anders geformtes Brett und "
-"andere Spielsteine verwendet. Jede Farbe benutzt 22 Spielsteine, die wie die "
-"Polyiamonds bis zur Größe sechs geformt sind. Ein Polyiamond ist eine Figur, "
-"die aus einer Anzahl von gleichseitigen Dreiecken besteht, die entlang der "
-"Kanten verbunden sind."
 
 #. Tag: para
 #: index.docbook:146
 #, no-c-format
 msgid "The 22 Trigon pieces"
-msgstr "Die 22 Trigon-Spielsteine"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:149
@@ -264,14 +214,12 @@ msgid ""
 "The board also consists of triangles and is shaped like a hexagon with an "
 "edge size of nine triangles."
 msgstr ""
-"Das Spielbrett besteht ebenfalls aus Dreiecken und hat die Form eines "
-"Sechsecks mit jeweils neun Dreiecken pro Kante."
 
 #. Tag: para
 #: index.docbook:159
 #, no-c-format
 msgid "The board with the starting fields marked with gray dots"
-msgstr "Das Brett mit den durch graue Punkte markierten Startfeldern"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:163
@@ -282,16 +230,12 @@ msgid ""
 "the players may freely choose a starting point for the first piece of a "
 "color."
 msgstr ""
-"Es gibt sechs Startfelder auf dem Brett, jedes in der Mitte der vierten "
-"Reihe von jeder Kante aus gesehen. Die Startfelder sind nicht farbig und die "
-"Spieler dürfen das Startfeld für den ersten Spielstein einer Farbe frei "
-"wählen."
 
 #. Tag: para
 #: index.docbook:173
 #, no-c-format
 msgid "An example position in game variant Trigon"
-msgstr "Eine Beispielstellung in der Spielvariante Trigon"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:180
@@ -300,8 +244,6 @@ msgid ""
 "Like game variant Classic, Trigon can be played with two players by having "
 "one player play Blue and Red and the other player Yellow and Green."
 msgstr ""
-"Wie die Spielvariante Klassisch kann Trigon mit zwei Spielern gespielt "
-"werden, indem ein Spieler Blau und Rot und der andere Gelb und Grün spielt."
 
 #. Tag: para
 #: index.docbook:187
@@ -312,17 +254,12 @@ msgid ""
 "an edge size of eight triangles. The starting points are located in the "
 "middle of the third row away from each edge."
 msgstr ""
-"Trigon kann mit drei Spielern gespielt werden, wobei dieselben Regeln wie "
-"für die Variante mit vier Spielern benutzt werden. Die Variante für drei "
-"Spieler wird auf einem kleineren Spielbrett mit einer Kantenlänge von acht "
-"Dreiecken gespielt. Die Startfelder sind in der Mitte der dritten Reihe von "
-"jeder Kante aus gesehen."
 
 #. Tag: title
 #: index.docbook:197
 #, no-c-format
 msgid "Junior Rules"
-msgstr "Junior-Regeln"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:198
@@ -333,28 +270,24 @@ msgid ""
 "polyominoes up to size five and the players get two of each of those "
 "polyominoes."
 msgstr ""
-"Junior ist eine vereinfachte Spielvariante für zwei Spieler. Es wird auf dem "
-"gleichen 14×14-Brett gespielt wie die Spielvariante Duo, benutzt aber nur "
-"eine Teilmenge der Polyominos bis zur Größe fünf und die Spieler bekommen "
-"zwei von jedem dieser Polyominos."
 
 #. Tag: para
 #: index.docbook:208
 #, no-c-format
 msgid "The 24 pieces used in Junior"
-msgstr "Die 24 Spielsteine, die in Junior benutzt werden"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:211
 #, no-c-format
 msgid "Bonus points are not used in Junior."
-msgstr "Bonuspunkte werden in Junior nicht benutzt."
+msgstr ""
 
 #. Tag: title
 #: index.docbook:217
 #, no-c-format
 msgid "Nexos Rules"
-msgstr "Nexos-Regeln"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:218
@@ -364,15 +297,12 @@ msgid ""
 "line grid. Each color uses 24 pieces that consist of up to four connected "
 "line segments."
 msgstr ""
-"Nexos ist ein Brettspiel ähnlich wie Blokus. Das Spielbrett ist ein "
-"rechtwinkliges 13×13-Liniengitter. Jede Farbe benutzt 24 Spielsteine, die "
-"aus bis zu vier verbundenen Liniensegmenten bestehen."
 
 #. Tag: para
 #: index.docbook:228
 #, no-c-format
 msgid "The 24 pieces"
-msgstr "Die 24 Spielsteine"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:231
@@ -382,8 +312,6 @@ msgid ""
 "lines close to a corner. The first piece must touch the starting "
 "intersection."
 msgstr ""
-"Jede Farbe hat einen Startkreuzungspunkt auf der Kreuzung der dritten Linien "
-"nahe einer Ecke. Der erste Spielstein muss den Startkreuzungspunkt berühren."
 
 #. Tag: para
 #: index.docbook:241
@@ -391,8 +319,6 @@ msgstr ""
 msgid ""
 "The board for Nexos with the starting intersections marked with colored dots"
 msgstr ""
-"Das Brett für Nexos mit den durch farbige Punkte markierten "
-"Startkreuzungspunkten"
 
 #. Tag: para
 #: index.docbook:247
@@ -406,15 +332,6 @@ msgid ""
 "junctions of different pieces can cover the same intersection without "
 "overlapping, but straight junctions cannot."
 msgstr ""
-"Die folgenden Spielsteine müssen so auf leere Liniensegmente gesetzt werden, "
-"dass ein Segment des neuen Spielsteins einen Kreuzungspunkt berührt, den "
-"bereits ein Segment derselben Farbe berührt. Es spielt keine Rolle, ob "
-"Spielsteine anderer Farbe denselben Kreuzungspunkt berühren oder bedecken. "
-"Allerdings dürfen sich Spielsteine nicht überlappen. Die Verbindungen "
-"zwischen den Segmenten innerhalb eines Spielsteins sind so, dass zwei "
-"rechtwinklige Verbindungen verschiedener Spielsteine denselben "
-"Kreuzungspunkt bedecken können ohne sich zu überlappen, während gerade "
-"Verbindungen das nicht können."
 
 #. Tag: para
 #: index.docbook:264
@@ -424,9 +341,6 @@ msgid ""
 "the color, plus a bonus of 10 points if the color could place all of its "
 "pieces."
 msgstr ""
-"Die Punktzahl einer Farbe ist die Anzahl der Liniensegmente auf dem Brett, "
-"die von der Farbe bedeckt sind, plus ein Bonus von 10 Punkten, wenn die "
-"Farbe alle ihre Spielsteine setzen konnte."
 
 #. Tag: para
 #: index.docbook:270
@@ -435,14 +349,12 @@ msgid ""
 "Like Blokus, Nexos can be played with two players by having one player play "
 "Blue and Red and the other player Yellow and Green."
 msgstr ""
-"Wie Blokus kann Nexos von zwei Spielern gespielt werden, indem ein Spieler "
-"Rot und Blau, und der andere Spieler Gelb und Grün spielt."
 
 #. Tag: title
 #: index.docbook:278
 #, no-c-format
 msgid "GembloQ Rules"
-msgstr "GembloQ-Regeln"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:279
@@ -453,10 +365,6 @@ msgid ""
 "addition to the full squares, the edges also contain half squares such that "
 "the edges are straight lines."
 msgstr ""
-"GembloQ ist ein Brettspiel ähnlich wie Blokus. Die quadratischen Spielfelder "
-"des Bretts sind um 45 Grad gedreht. Die Diagonale des Bretts hat eine Größe "
-"von 27 Quadraten. Zusätzlich zu den vollen Quadraten enthalten die Ränder "
-"noch halbe Quadrate, so dass die Ränder gerade Linien sind."
 
 #. Tag: para
 #: index.docbook:293
@@ -465,16 +373,12 @@ msgid ""
 "Each player has a set of 21 pieces, which include a subset of the pieces "
 "used in Blokus, but also some pieces that contain a half square."
 msgstr ""
-"Jeder Spieler besitzt 21 Spielsteine, unter denen eine Teilmenge der in "
-"Blokus benutzten Spielsteine ist, jedoch zusätzlich einige Spielsteine, die "
-"ein halbes Quadrat beinhalten."
 
 #. Tag: para
 #: index.docbook:303
 #, no-c-format
 msgid "The board for GembloQ with the starting points marked with colored dots"
 msgstr ""
-"Das Brett für GembloQ mit den durch farbige Punkte markierten Startfeldern"
 
 #. Tag: para
 #: index.docbook:309
@@ -486,11 +390,6 @@ msgid ""
 "also legal, if a vertex of a half square touches an edge of a piece of the "
 "same color."
 msgstr ""
-"Wie in Blokus sind die Startfelder in den Ecken, der erste Zug muss das "
-"Startfeld der Farbe vollständig abdecken und folgende Züge müssen einen "
-"Spielstein der Farbe am Zug an einer Ecke berühren, jedoch noch entlang der "
-"Kanten. Züge sind auch legal, wenn eine Spitze eines halben Quadrats die "
-"Kante eines Spielsteins der selben Farbe berührt."
 
 #. Tag: para
 #: index.docbook:324
@@ -501,17 +400,12 @@ msgid ""
 "described in the official GembloQ rules, is currently not supported by "
 "Pentobi."
 msgstr ""
-"Die Punktzahl am Spielende wird wie in Blokus ermittelt, wobei halbe "
-"Quadrate 0,5 Punkte zählen. Bonuspunkte werden nicht verwendet. Ein Auflösen "
-"von Unentschieden durch Zuweisen von zusätzlichen Werten zu den "
-"Spielsteinen, wie in den offiziellen GembloQ-Regeln beschrieben, wird von "
-"Pentobi gegenwärtig nicht unterstützt."
 
 #. Tag: title
 #: index.docbook:330 index.docbook:393
 #, no-c-format
 msgid "Rules for Two and Three Players"
-msgstr "Regeln für zwei und drei Spieler"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:331
@@ -522,16 +416,12 @@ msgid ""
 "Pentobi also supports a game variant for two players like in Blokus, in "
 "which each player plays two colors."
 msgstr ""
-"Die Spielvarianten für zwei und drei Spieler benutzen kleinere Spielbretter "
-"und andere Positionen für die Startfelder. Zusätzlich zur Standardvariante "
-"für zwei Spieler unterstützt Pentobi auch eine Spielvariante für zwei "
-"Spieler wie in Blokus, in der jeder Spieler zwei Farben spielt."
 
 #. Tag: title
 #: index.docbook:341
 #, no-c-format
 msgid "Callisto Rules"
-msgstr "Callisto-Regeln"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:342
@@ -543,12 +433,6 @@ msgid ""
 "polyominoes up to size five. They include three 1×1 pieces per player that "
 "play a special role."
 msgstr ""
-"Callisto ist ein weiteres Brettspiel ähnlich wie Blokus. Das Spielbrett ist "
-"vom klassischen 20×20-Blokus-Spielbrett abgeleitet, indem die Ecken entfernt "
-"werden, sodass ein Achteck verbleibt mit einer oberen Kantenlänge von sechs. "
-"Die Spielsteine sind eine Untermenge der Polyominos bis zur Größe fünf. Sie "
-"beinhalten drei 1×1-Spielsteine pro Spieler, die eine besondere Rolle "
-"spielen."
 
 #. Tag: para
 #: index.docbook:357
@@ -559,17 +443,12 @@ msgid ""
 "size two. The first two moves of a player must use a 1×1 piece, the third "
 "1×1 piece may be played anytime later."
 msgstr ""
-"Die 1×1-Spielsteine dürfen überall auf dem Spielbrett gesetzt werden außer "
-"im Zentrum des Spielbretts. Das Zentrums besteht aus einem Achteck mit "
-"Breite sechs und oberer Kantenlänge zwei. Die ersten zwei Züge eines "
-"Spielers müssen einen 1×1-Spielstein benutzen, der dritte 1×1-Spielstein "
-"kann jederzeit später gespielt werden."
 
 #. Tag: para
 #: index.docbook:369
 #, no-c-format
 msgid "The board with the center having a darker color"
-msgstr "Das Brett mit einer dunkleren Farbe im Zentrum"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:375
@@ -578,9 +457,6 @@ msgid ""
 "All larger pieces may be placed anywhere on the board but must touch an "
 "existing piece of the same color edge-to-edge."
 msgstr ""
-"Alle größeren Spielsteine dürfen überall auf dem Brett gesetzt werden, "
-"müssen aber einen existierenden Spielstein der selben Farbe Kante an Kante "
-"berühren."
 
 #. Tag: para
 #: index.docbook:387
@@ -590,10 +466,6 @@ msgid ""
 "color not counting 1×1 pieces. Bonus points are not used. Unlike in Blokus, "
 "ties are broken in favor of the player who started later."
 msgstr ""
-"Die Punktzahl einer Farbe ist die Anzahl der Quadrate auf dem Brett, die von "
-"der Farbe bedeckt sind, wobei die 1×1-Spielsteine nicht gezählt werden. "
-"Bonuspunkte werden nicht verwendet. Anders als in Blokus werden "
-"Unentschieden zugunsten des Spielers aufgelöst, der später begonnen hat."
 
 #. Tag: para
 #: index.docbook:394
@@ -606,25 +478,18 @@ msgid ""
 "two-player variant, Pentobi also supports a game variant for two players "
 "like in Blokus, in which each player plays two colors."
 msgstr ""
-"Das Spiel kann mit weniger als vier Spielern gespielt werden, indem ein "
-"kleineres Spielbrett verwendet wird. Für drei Spieler ist das Brett ein "
-"Achteck mit Breite 20 und obererer Kantenlänge zwei. Für zwei Spieler ist "
-"das Brett ein Achteck mit Breite 16 und obererer Kantenlänge zwei. Die Größe "
-"des Zentrums bleibt gleich. Zusätzlich zur Standardvariante für zwei Spieler "
-"unterstützt Pentobi auch eine Spielvariante für zwei Spieler wie in Blokus, "
-"in der jeder Spieler zwei Farben spielt."
 
 #. Tag: title
 #: index.docbook:406
 #, no-c-format
 msgid "How to Use Pentobi"
-msgstr "Wie Sie Pentobi benutzen"
+msgstr ""
 
 #. Tag: title
 #: index.docbook:408
 #, no-c-format
 msgid "Board"
-msgstr "Spielbrett"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:409
@@ -635,12 +500,6 @@ msgid ""
 "dragging them to a place that corresponds to a legal move with the mouse or "
 "arrow keys and pressing the left mouse button or the Enter key."
 msgstr ""
-"Spielsteine können durch Klicken auf einen ungespielten Spielstein "
-"ausgewählt werden oder durch Benutzen von <link linkend=\"shortcuts"
-"\">Tastenkürzeln</link>. Spielsteine können gespielt werden, indem sie mit "
-"der Maus oder den Pfeiltasten an eine Position gebracht werden, die einem "
-"legalen Zug entspricht, und dann die linke Maustaste oder die Eingabetaste "
-"gedrückt wird."
 
 #. Tag: para
 #: index.docbook:415
@@ -650,10 +509,6 @@ msgid ""
 "number in which the piece was played. A letter after the move number "
 "indicates that there exists a variation to this move (see below)."
 msgstr ""
-"Auf den gespielten Spielsteinen auf dem Brett können sich Nummern befinden, "
-"die die Zugnummer angeben, zu der der Spielstein gespielt wurde. Ein "
-"Buchstabe nach der Zugnummer zeigt an, dass zu diesem Zug eine Variante "
-"existiert (siehe unten)."
 
 #. Tag: para
 #: index.docbook:420
@@ -664,17 +519,12 @@ msgid ""
 "underlined if they are final because the color cannot play more pieces. A "
 "small star indicates that the points include a bonus."
 msgstr ""
-"Die Punkteanzeige zeigt die gegenwärtigen Punkte für jede Farbe oder jeden "
-"Spieler an. Die Punkte sind die Summe aus den Punkten auf dem Spielbrett und "
-"den Bonuspunkten. Punkte sind unterstrichen, wenn sie endgültig sind, weil "
-"die Farbe keine Spielsteine mehr spielen kann. Eine kleiner Stern zeigt an, "
-"dass die Punkte einen Bonus beinhalten."
 
 #. Tag: title
 #: index.docbook:428
 #, no-c-format
 msgid "Playing Against the Computer"
-msgstr "Gegen den Computer spielen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:429
@@ -684,9 +534,6 @@ msgid ""
 "for playing games against the computer. In games against the computer, the "
 "computer can play any (or several) of the colors."
 msgstr ""
-"Das Spielbrett kann benutzt werden, um Partien einzugeben, die von Menschen "
-"gespielt werden, oder um Spiele gegen den Computer zu spielen. In Spielen "
-"gegen den Computer kann der Computer jede der Farben (oder mehrere) spielen."
 
 #. Tag: para
 #: index.docbook:434
@@ -697,11 +544,6 @@ msgid ""
 "<guimenuitem>Settings</guimenuitem> from the <guimenu>Computer</guimenu> "
 "menu or toolbar and select the colors the computer should play."
 msgstr ""
-"Wenn Sie ein neues Spiel beginnen, ist voreingestellt, dass der Mensch die "
-"Farbe(n) des ersten Spielers spielt und der Computer alle anderen Farben. Um "
-"dies zu ändern, benutzen Sie <guimenuitem>Einstellungen</guimenuitem> aus "
-"dem Menü <guimenu>Computer</guimenu> oder der Werkzeugleiste und wählen Sie "
-"die Farben, die der Computer spielen soll."
 
 #. Tag: para
 #: index.docbook:440
@@ -713,12 +555,6 @@ msgid ""
 "entering move sequences or similar editing tasks. After loading a saved "
 "game, the computer also plays no color by default."
 msgstr ""
-"Die Ausnahme ist, dass es voreingestellt ist, dass der Computer keine Farbe "
-"spielt, wenn er im letzten Spiel keine Farbe gespielt hat. Damit wird "
-"vermieden, dass der Computer unbeabsichtigt automatisch zu spielen beginnt, "
-"wenn der Benutzer das Spielbrett hauptsächlich zum Eingeben von Zugsequenzen "
-"oder für ähnliche Aufgaben benutzen will. Nach dem Laden eines Spiels ist "
-"ebenfalls voreingestellt, dass der Computer keine Farbe spielt."
 
 #. Tag: para
 #: index.docbook:447
@@ -730,17 +566,12 @@ msgid ""
 "will also make the computer play this color (and only this color) from now "
 "on."
 msgstr ""
-"Die Auswahl von <guimenuitem>Spielen</guimenuitem> aus dem Menü "
-"<guimenu>Computer</guimenu> oder der Werkzeugleiste lässt den Computer immer "
-"einen Zug für die gegenwärtige Farbe spielen. Wenn der Computer diese Farbe "
-"bisher nicht gespielt hat, wird er außerdem im weiteren Spielverlauf diese "
-"Farbe (und nur diese Farbe) spielen."
 
 #. Tag: title
 #: index.docbook:456
 #, no-c-format
 msgid "Move Variations and the Game Tree"
-msgstr "Zugvarianten und der Spielbaum"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:457
@@ -756,16 +587,6 @@ msgid ""
 "tree with the items in the <guimenu>Go</guimenu> menu and the navigation "
 "buttons."
 msgstr ""
-"Wenn Sie ein Spiel spielen, wird Pentobi die Abfolge der Züge speichern und "
-"es ist jederzeit möglich, zu einer früheren Brettstellung zurückzugehen und "
-"anders zu spielen. Wenn Sie das tun, wird die neue Zugfolgen als eine "
-"alternative Zugfolge (genannt Variante) gespeichert. Varianten können auch "
-"von Kommentatoren benutzt werden, um Kommentierungen zu existierenden "
-"Spielen hinzuzufügen. Varianten können in jeder Brettstellung existieren und "
-"ihrerseits Untervarianten besitzen. Das Spiel kann daher zu einem Spielbaum "
-"werden, in dem jeder Knoten eine Brettstellung repräsentiert. Sie können im "
-"Spielbaum mit den Menüpunkten des Menüs <guimenu>Gehe zu</guimenu> und den "
-"Navigations-Buttons navigieren."
 
 #. Tag: para
 #: index.docbook:467
@@ -778,18 +599,12 @@ msgid ""
 "variation, select <guimenuitem>Make Main Variation</guimenuitem> from the "
 "<guimenu>Edit</guimenu> menu."
 msgstr ""
-"Die Hauptvariante ist die Zugfolge, die in der Startstellung beginnt und "
-"immer den ersten Kindknoten in jeder Brettstellung wählt (z. B. indem Sie "
-"den Vorwärts-Button drücken). Die Hauptvariante sollte das wirklich "
-"gespielte Spiel darstellen. Wenn Sie eine Nebenvariante zur Hauptvariante "
-"machen wollen, wählen Sie <guimenuitem>Zu Hauptvariante machen</guimenuitem> "
-"aus dem Menü <guimenu>Bearbeiten</guimenu>."
 
 #. Tag: title
 #: index.docbook:479
 #, no-c-format
 msgid "Become a Stronger Player"
-msgstr "Ein stärkerer Spieler werden"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:480
@@ -798,14 +613,12 @@ msgid ""
 "Pentobi has functionality that can help you to become a stronger Blokus "
 "player."
 msgstr ""
-"Pentobi besitzt Funktionen, die Ihnen helfen können, ein stärkerer Blokus-"
-"Spieler zu werden."
 
 #. Tag: title
 #: index.docbook:484
 #, no-c-format
 msgid "Game Analysis"
-msgstr "Spielanalyse"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:485
@@ -816,17 +629,12 @@ msgid ""
 "evaluate each position in the main variation. The result is displayed in a "
 "window with a diagram of colored dots."
 msgstr ""
-"Sie können ein Spiel analysieren, indem Sie <guimenuitem>Spiel analysieren</"
-"guimenuitem> aus dem Menü <guimenu>Extras</guimenu> wählen. Dies lässt den "
-"Computer eine Bewertung jeder Brettstellung der Hauptvariante ausführen. Das "
-"Ergebnis wird in einem Fenster mit einem Diagramm farbiger Punkte "
-"dargestellt."
 
 #. Tag: para
 #: index.docbook:497
 #, no-c-format
 msgid "Analysis of a game of variant Classic (2 players)"
-msgstr "Analyse eines Spiels der Spielvariante Klassisch (2 Spieler)"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:501
@@ -837,10 +645,6 @@ msgid ""
 "represents the estimated probability of winning the game for the color to "
 "play. Mouse clicks in the diagram will go to the corresponding position."
 msgstr ""
-"Jeder Punkt repräsentiert eine Spielstellung, in der die Farbe des Punkts am "
-"Zug war. Die Punkte sind horizontal nach Zugnummer angeordnet. Die vertikale "
-"Achse repräsentiert die Wahrscheinlichkeit, dass die Farbe das Spiel "
-"gewinnt. Mausklicks im Diagramm gehen zur jeweiligen Stellung."
 
 #. Tag: para
 #: index.docbook:507
@@ -853,19 +657,12 @@ msgid ""
 "have played by selecting <guimenuitem>Play Single Move</guimenuitem> from "
 "the <guimenu>Computer</guimenu> menu."
 msgstr ""
-"Die Werte stellen nur Schätzwerte dar und der Computer wird manchmal "
-"Stellungen nicht korrekt bewerten. Aber ein plötzliches Abfallen des Wertes "
-"kann Ihnen dabei helfen, Züge zu finden, die möglicherweise schlecht waren. "
-"Sie können zur Stellung vor dem Zug zurückgehen und versuchen, einen "
-"besseren Zug zu finden oder den Computer fragen, was er gespielt hätte, "
-"indem Sie <guimenuitem>Einzelnen Zug spielen</guimenuitem> aus dem Menü "
-"<guimenu>Computer</guimenu> auswählen."
 
 #. Tag: title
 #: index.docbook:517
 #, no-c-format
 msgid "Determine Your Rating"
-msgstr "Ihre Wertung ermitteln"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:518
@@ -875,10 +672,6 @@ msgid ""
 "game results are used to determine your current rating. The rating is a "
 "number that represents your playing strength."
 msgstr ""
-"Sie können Ihre Fortschritte verfolgen, indem Sie gewertete Spiele gegen den "
-"Computer spielen. Die Spielergebnisse werden benutzt, um Ihre gegenwärtige "
-"Wertung zu ermitteln. Die Wertung ist eine Zahl, die Ihre Spielstärke "
-"darstellt."
 
 #. Tag: para
 #: index.docbook:523
@@ -890,13 +683,6 @@ msgid ""
 "value, which can reduce the number of games needed for determining your real "
 "rating. If you are a beginner, leave the start value at 800."
 msgstr ""
-"Ein gewertetes Spiel wird mit <guimenuitem>Gewertetes Spiel</guimenuitem> "
-"aus dem Menü <guimenu>Spiel</guimenu> oder der Werkzeugleiste gestartet. "
-"Wenn Sie in der gegenwärtigen Spielvariante noch keine gewerteten Spiele "
-"gespielt haben, werden Sie gefragt, eine Anfangswertung zu wählen, wodurch "
-"die Anzahl der Spiele reduziert wird, die nötig ist, um Ihre wirkliche "
-"Wertung zu bestimmen. Falls Sie Anfänger sind, belassen Sie die "
-"Anfangswertung auf 800."
 
 #. Tag: para
 #: index.docbook:530
@@ -906,9 +692,6 @@ msgid ""
 "computer opponent according to your current rating. The color you play will "
 "be randomly chosen in each game."
 msgstr ""
-"Für jedes gewertete Spiel wird der Computer eine Spielstufe für den "
-"Computerspieler gemäß Ihrer gegenwärtigen Wertung wählen. Die Farbe, die Sie "
-"spielen, wird in jedem Spiel zufällig ausgewählt."
 
 #. Tag: para
 #: index.docbook:535
@@ -919,11 +702,6 @@ msgid ""
 "colors or change the playing level. To get an accurate rating, you should "
 "always play rated games until the end."
 msgstr ""
-"Während eines gewerteten Spiels sind die meisten Funktionen, die nicht zum "
-"Spielen benötigt werden, deaktiviert: Sie können nicht Züge zurücknehmen, im "
-"Spiel navigieren, die Computer-Farben ändern oder die Spielstufe ändern. Um "
-"eine akkurate Wertung zu erhalten, sollten Sie gewertete Spiele immer bis "
-"zum Ende spielen."
 
 #. Tag: para
 #: index.docbook:541
@@ -934,16 +712,12 @@ msgid ""
 "the game was won, lost or a tie. The exact number of score points does not "
 "matter."
 msgstr ""
-"Nachdem das Spiel beendet ist, wird Ihre Wertung in Abhängigkeit vom "
-"Spielergebnis und der Spielstufe aktualisiert. Für das Spielergebnis zählt "
-"nur, ob Sie gewonnen oder verloren haben, oder ob das Spiel in einem "
-"Unentschieden endete. Die genaue Anzahl der Spielpunkte spielt keine Rolle."
 
 #. Tag: para
 #: index.docbook:553
 #, no-c-format
 msgid "Window with rating graph"
-msgstr "Fenster mit Wertungsgraph"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:557
@@ -955,42 +729,36 @@ msgid ""
 "graph. The last 50 games are automatically saved and can be loaded by "
 "opening a context menu in the game table below the graph."
 msgstr ""
-"Sie können Ihre aktuelle Wertung jederzeit mit <guimenuitem>Wertung</"
-"guimenuitem> aus dem Menü <guimenu>Extras</guimenu> sehen. Dies öffnet ein "
-"Fenster, in dem die Entwicklung Ihrer Wertung während der letzten 50 Spiele "
-"als Graph gezeigt wird. Die letzten 50 Spiele werden automatisch gespeichert "
-"und können durch Öffnen eines Kontextmenüs in der Spieltabelle unter dem "
-"Graph geladen werden."
 
 #. Tag: title
 #: index.docbook:568
 #, no-c-format
 msgid "Window Menu and Toolbar"
-msgstr "Fenstermenü und Werkzeugleiste"
+msgstr ""
 
 #. Tag: title
 #: index.docbook:570
 #, no-c-format
 msgid "Navigation Buttons in Toolbar"
-msgstr "Navigations-Buttons in der Werkzeugleiste"
+msgstr ""
 
 #. Tag: guibutton
 #: index.docbook:573
 #, no-c-format
 msgid "Beginning"
-msgstr "Anfang"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:575
 #, no-c-format
 msgid "Go to the beginning of the game."
-msgstr "Geht zum Anfang des Spiels."
+msgstr ""
 
 #. Tag: guibutton
 #: index.docbook:581
 #, no-c-format
 msgid "Backward 10"
-msgstr "Zurück 10"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:583
@@ -999,14 +767,12 @@ msgid ""
 "Go ten moves backward in the current variation. The button supports "
 "autorepeat if pressed and held."
 msgstr ""
-"Geht zehn Züge in der gegenwärtigen Variante zurück. Der Button unterstützt "
-"automatische Wiederholung, wenn er gedrückt gehalten wird."
 
 #. Tag: guibutton
 #: index.docbook:590
 #, no-c-format
 msgid "Backward"
-msgstr "Zurück"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:592
@@ -1015,14 +781,12 @@ msgid ""
 "Go one move backward in the current variation. The button supports "
 "autorepeat if pressed and held."
 msgstr ""
-"Geht einen Zug in der gegenwärtigen Variante zurück. Der Button unterstützt "
-"automatische Wiederholung, wenn er gedrückt gehalten wird."
 
 #. Tag: guibutton
 #: index.docbook:599
 #, no-c-format
 msgid "Forward"
-msgstr "Vorwärts"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:601
@@ -1033,17 +797,12 @@ msgid ""
 "several child nodes), the first variation will be used. The button supports "
 "autorepeat if pressed and held."
 msgstr ""
-"Geht einen Zug in der gegenwärtigen Variante vorwärts. Wenn die gegenwärtige "
-"Brettstellung mehrerer nachfolgende Varianten hat (d. h. der gegenwärtige "
-"Knoten im Spielbaum mehrere Kindknoten hat), wird die erste Variante "
-"benutzt. Der Button unterstützt automatische Wiederholung, wenn er gedrückt "
-"gehalten wird."
 
 #. Tag: guibutton
 #: index.docbook:610
 #, no-c-format
 msgid "Forward 10"
-msgstr "Vorwärts 10"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:612
@@ -1054,17 +813,12 @@ msgid ""
 "child nodes), the first variation will be used. The button supports "
 "autorepeat if pressed and held."
 msgstr ""
-"Geht zehn Züge in der gegenwärtigen Variante vorwärts. Wenn eine "
-"Brettstellung mehrerer nachfolgende Varianten hat (d. h. der gegenwärtige "
-"Knoten im Spielbaum mehrere Kindknoten hat), wird die erste Variante "
-"benutzt. Der Button unterstützt automatische Wiederholung, wenn er gedrückt "
-"gehalten wird."
 
 #. Tag: guibutton
 #: index.docbook:621
 #, no-c-format
 msgid "<guibutton>End</guibutton>"
-msgstr "<guibutton>Ende</guibutton>"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:623
@@ -1074,15 +828,12 @@ msgid ""
 "this also uses the first variation in positions with several follow-up "
 "variations."
 msgstr ""
-"Geht zum Ende der gegenwärtigen Variante. Wie bei <guibutton>Vorwärts</"
-"guibutton> wird auch hier jeweils die erste Variante benutzt, wenn die "
-"Brettstellung mehrere nachfolgende Varianten hat."
 
 #. Tag: guibutton
 #: index.docbook:631
 #, no-c-format
 msgid "Next Variation"
-msgstr "Nächste Variante"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:633
@@ -1091,14 +842,12 @@ msgid ""
 "Go to the next variation to the last move played (i.e. the next sibling node "
 "of the current node in the game tree)."
 msgstr ""
-"Geht zur nächsten Variante zum zuletzt gespielten Zug (d. h. zum nächsten "
-"Geschwisterknoten des gegenwärtigen Knotens im Spielbaum)."
 
 #. Tag: guibutton
 #: index.docbook:640
 #, no-c-format
 msgid "Previous Variation"
-msgstr "Vorherige Variante"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:642
@@ -1107,32 +856,30 @@ msgid ""
 "Go to the previous variation to the last move played (i.e. the previous "
 "sibling node of the current node in the game tree)."
 msgstr ""
-"Geht zur vorherigen Variante zum zuletzt gespielten Zug (d. h. zum "
-"vorherigen Geschwisterknoten des gegenwärtigen Knotens im Spielbaum)."
 
 #. Tag: title
 #: index.docbook:651
 #, no-c-format
 msgid "<guimenu>Game</guimenu> Menu"
-msgstr "<guimenu>Spiel</guimenu>-Menü"
+msgstr ""
 
 #. Tag: guimenuitem
 #: index.docbook:654
 #, no-c-format
 msgid "<guimenuitem>New</guimenuitem>"
-msgstr "<guimenuitem>Neu</guimenuitem>"
+msgstr "<guimenuitem>Nytt</guimenuitem>"
 
 #. Tag: para
 #: index.docbook:657
 #, no-c-format
 msgid "Start a new game."
-msgstr "Beginnt ein neues Spiel."
+msgstr "Start et nytt spill"
 
 #. Tag: guimenuitem
 #: index.docbook:663
 #, no-c-format
 msgid "Rated Game"
-msgstr "Gewertetes Spiel"
+msgstr "Vurdert spill"
 
 #. Tag: para
 #: index.docbook:665
@@ -1140,27 +887,24 @@ msgstr "Gewertetes Spiel"
 msgid ""
 "Start a new <link linkend=\"rating\">rated game</link> against the computer."
 msgstr ""
-"Beginnt ein neues <link linkend=\"rating\">gewertetes Spiel</link> gegen den "
-"Computer."
 
 #. Tag: guimenuitem
 #: index.docbook:671
 #, no-c-format
 msgid "Game Variant"
-msgstr "Spielvariante"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:673
 #, no-c-format
 msgid "Select a game variant and start a new game of this game variant."
 msgstr ""
-"Wählt eine Spielvariante und beginnt ein neues Spiel dieser Spielvariante."
 
 #. Tag: guimenuitem
 #: index.docbook:678
 #, no-c-format
 msgid "Game Info"
-msgstr "Spielinformation"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:680
@@ -1169,15 +913,12 @@ msgid ""
 "Display or edit additional information about the game like the name of the "
 "players or the date when the game was played."
 msgstr ""
-"Öffnet ein Dialogfenster zum Anzeigen oder Bearbeiten zusätzlicher "
-"Informationen über das Spiel, wie die Namen der Spieler oder das Datum, an "
-"dem das Spiel gespielt wurde."
 
 #. Tag: guimenuitem
 #: index.docbook:686
 #, no-c-format
 msgid "Undo Move"
-msgstr "Zug rückgängig"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:688
@@ -1188,17 +929,12 @@ msgid ""
 "leaf node in the game tree; use <guimenu>Edit</guimenu>/"
 "<guimenuitem>Truncate</guimenuitem> to remove inner nodes of the game tree)."
 msgstr ""
-"Nimmt den zuletzt gespielten Zug zurück und entfernt ihn aus dem Spielbaum. "
-"Das Zurücknehmen eines Zugs ist nur möglich, wenn er der letzte Zug der "
-"gegenwärtigen Variante ist (d. h. ein Endknoten im Spielbaum; benutzen Sie "
-"<guimenu>Bearbeiten</guimenu>/<guimenuitem>Abschneiden</guimenuitem> zum "
-"Entfernen innerer Knoten aus dem Spielbaum)."
 
 #. Tag: guimenuitem
 #: index.docbook:698
 #, no-c-format
 msgid "Find Move"
-msgstr "Zug finden"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:700
@@ -1207,15 +943,12 @@ msgid ""
 "Find a legal move for the current color and display it for a few seconds on "
 "the board. Selecting this item repeatedly will show all legal moves."
 msgstr ""
-"Findet einen legalen Zug für die gegenwärtige Farbe und zeigt ihn für ein "
-"paar Sekunden auf dem Spielbrett. Das wiederholte Auswählen dieses "
-"Menüpunkts zeigt alle legalen Züge."
 
 #. Tag: guimenuitem
 #: index.docbook:707
 #, no-c-format
 msgid "Open"
-msgstr "Öffnen"
+msgstr "Åpne"
 
 #. Tag: para
 #: index.docbook:709
@@ -1228,31 +961,24 @@ msgid ""
 "file contains a Blokus puzzle as a setup with the solution as the main "
 "variation."
 msgstr ""
-"Lädt ein gespeichertes Spiel. Die Brettstellung nach dem Laden ist die "
-"letzte Stellung in der Hauptvariante, sofern das Spiel nicht mit einer "
-"aufgebauten Brettstellung beginnt. Wenn das Spiel mit einer aufgebauten "
-"Brettstellung beginnt, ist die Stellung nach dem Laden stattdessen die "
-"Anfangsstellung. Dies vermeidet, dass Lösungen sofort angezeigt werden, wenn "
-"die Datei ein Blokus-Problem als aufgebaute Brettstellung enthält mit der "
-"Lösung in der Hauptvariante."
 
 #. Tag: guimenu
 #: index.docbook:719
 #, no-c-format
 msgid "Open Recent"
-msgstr "Zuletzt benutzt"
+msgstr "Åpne nylige"
 
 #. Tag: para
 #: index.docbook:721
 #, no-c-format
 msgid "Load a recently used game."
-msgstr "Lädt ein kürzlich benutztes Spiel."
+msgstr "Last inn et nylig avholdt spill."
 
 #. Tag: guimenuitem
 #: index.docbook:727
 #, no-c-format
 msgid "Open Clipboard"
-msgstr "Zwischenablage öffnen"
+msgstr "Åpne utklippstavle"
 
 #. Tag: para
 #: index.docbook:729
@@ -1261,38 +987,36 @@ msgid ""
 "Open a game from a text copied to the clipboard. The text must be a valid "
 "game in Pentobi SGF file format."
 msgstr ""
-"Öffnet ein Spiel von einem Text, der in die Zwischenablage kopiert wurde. "
-"Der Text muss ein gültiges Spiel im Pentobi-SGF-Dateiformat sein."
 
 #. Tag: guimenuitem
 #: index.docbook:736
 #, no-c-format
 msgid "Save"
-msgstr "Speichern"
+msgstr "Lagre"
 
 #. Tag: para
 #: index.docbook:738
 #, no-c-format
 msgid "Save the current game."
-msgstr "Speichert das gegenwärtige Spiel."
+msgstr "Lagre nåværende spill."
 
 #. Tag: guimenuitem
 #: index.docbook:744
 #, no-c-format
 msgid "Save As"
-msgstr "Speichern unter"
+msgstr "Lagre som"
 
 #. Tag: para
 #: index.docbook:746
-#, no-c-format
+#, fuzzy, no-c-format
 msgid "Save the current game under a new file name."
-msgstr "Speichert das gegenwärtige Spiel unter einem neuen Dateinamen."
+msgstr "Lagre nåværende spill under et nytt filnavn."
 
 #. Tag: term
 #: index.docbook:752
 #, no-c-format
 msgid "<guimenu>Export</guimenu>/<guimenuitem>Image</guimenuitem>"
-msgstr "<guimenu>Exportieren</guimenu>/<guimenuitem>Grafik</guimenuitem>"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:754
@@ -1303,17 +1027,12 @@ msgid ""
 "\" for the PNG format). For a crisp image, the image width should be an "
 "integer multiple of the number of board columns in the current game variant."
 msgstr ""
-"Speichert die gegenwärtige Brettstellung als eine Grafikdatei. Mehrere "
-"Grafikdateiformate werden unterstützt, das Dateiformat wird von der "
-"Dateiendung abgeleitet (z. B. „.png“ für das PNG-Format). Für ein gestochen "
-"scharfes Bild sollte die Bildbreite ein ganzzahliges Vielfaches der "
-"Spaltenanzahl des Bretts in der gegenwärtigen Spielvariante sein."
 
 #. Tag: term
 #: index.docbook:763
 #, no-c-format
 msgid "<guimenu>Export</guimenu>/<guimenuitem>ASCII Art</guimenuitem>"
-msgstr "<guimenu>Exportieren</guimenu>/<guimenuitem>ASCII-Art</guimenuitem>"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:765
@@ -1322,45 +1041,42 @@ msgid ""
 "Save the current position as a text diagram. The text diagram should be "
 "viewed using a monospace font."
 msgstr ""
-"Speichert die gegenwärtige Brettstellung als Textdiagramm. Das Textdiagramm "
-"sollte mit einer Schriftart fester Breite betrachtet werden."
 
 #. Tag: guimenuitem
 #: index.docbook:772
 #, no-c-format
 msgid "Quit"
-msgstr "Beenden"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:774
 #, no-c-format
 msgid "Quit Pentobi."
-msgstr "Beendet Pentobi."
+msgstr ""
 
 #. Tag: title
 #: index.docbook:782
 #, no-c-format
 msgid "<guimenu>Go</guimenu> Menu"
-msgstr "<guimenu>Gehe-zu</guimenu>-Menü"
+msgstr ""
 
 #. Tag: guimenuitem
 #: index.docbook:785
 #, no-c-format
 msgid "Move Number"
-msgstr "Zugnummer"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:787
 #, no-c-format
 msgid "Go to the move with a given move number in the current variation."
 msgstr ""
-"Geht zum Zug mit einer bestimmten Nummer in der gegenwärtigen Variante."
 
 #. Tag: guimenuitem
 #: index.docbook:793
 #, no-c-format
 msgid "Main Variation"
-msgstr "Hauptvariante"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:795
@@ -1369,14 +1085,12 @@ msgid ""
 "Go back to the last position in the current variation that belonged to the "
 "main variation."
 msgstr ""
-"Kehrt zur letzten Brettstellung in der gegenwärtigen Variante zurück, die "
-"zur Hauptvariante gehörte."
 
 #. Tag: guimenuitem
 #: index.docbook:802
 #, no-c-format
 msgid "Beginning of Branch"
-msgstr "Verzweigungsanfang"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:804
@@ -1385,14 +1099,12 @@ msgid ""
 "Go back to the last position in the current variation that had an "
 "alternative move."
 msgstr ""
-"Kehrt zur letzten Brettstellung in der gegenwärtigen Variante zurück, die "
-"einen alternativen Zug hatte."
 
 #. Tag: guimenuitem
 #: index.docbook:811
 #, no-c-format
 msgid "Next Comment"
-msgstr "Nächster Kommentar"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:813
@@ -1402,22 +1114,18 @@ msgid ""
 "not visible, it will become visible. Selecting this item repeatedly will "
 "show all positions with comments in the game tree."
 msgstr ""
-"Geht zur nächsten Brettstellung, die einen Kommentar besitzt. Wenn das "
-"Kommentarfeld nicht sichtbar ist, wird es sichtbar gemacht. Das wiederholte "
-"Auswählen dieses Menüpunkts zeigt nacheinander alle Brettstellungen mit "
-"Kommentaren im Spielbaum."
 
 #. Tag: title
 #: index.docbook:823
 #, no-c-format
 msgid "<guimenu>Edit</guimenu> Menu"
-msgstr "<guimenu>Bearbeiten</guimenu>-Menü"
+msgstr ""
 
 #. Tag: guimenuitem
 #: index.docbook:826
 #, no-c-format
 msgid "Annotation"
-msgstr "Annotierung"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:828
@@ -1427,16 +1135,12 @@ msgid ""
 "symbols are appended to the move numbers in the status bar and, depending on "
 "the configuration of <guilabel>Move Marking</guilabel>, on the board."
 msgstr ""
-"Fügt ein wie in der Schachnotation benutztes Symbol (z. B. ‼) zum "
-"gegenwärtigen Zug hinzu. Die Symbole werden an die Zugnummern in der "
-"Statusleiste angehängt und, abhängig von der Einstellung von "
-"<guilabel>Zugmarkierung</guilabel>, an die auf dem Spielbrett."
 
 #. Tag: guimenuitem
 #: index.docbook:836
 #, no-c-format
 msgid "Make Main Variation"
-msgstr "Zu Hauptvariante machen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:838
@@ -1446,15 +1150,12 @@ msgid ""
 "nodes in the game tree such that the current variation becomes the main "
 "variation."
 msgstr ""
-"Macht die gegenwärtige Variante zur Hauptvariante des Spiels. Dies ordnet "
-"die Knoten im Spielbaum so um, dass die gegenwärtige Variante zur "
-"Hauptvariante wird."
 
 #. Tag: guimenuitem
 #: index.docbook:846
 #, no-c-format
 msgid "Variation Up"
-msgstr "Variante nach oben"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:848
@@ -1464,15 +1165,12 @@ msgid ""
 "earlier when iterating over the variations with <guibutton>Next Variation</"
 "guibutton> /<guibutton>Previous Variation</guibutton>."
 msgstr ""
-"Ändert die Reihenfolge der Varianten so, dass die gegenwärtige Brettstellung "
-"beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> /"
-"<guibutton>Vorherige Variante</guibutton> früher erscheint."
 
 #. Tag: guimenuitem
 #: index.docbook:857
 #, no-c-format
 msgid "Variation Down"
-msgstr "Variante nach unten"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:859
@@ -1482,15 +1180,12 @@ msgid ""
 "later when iterating over the variations with <guibutton>Next Variation</"
 "guibutton> /<guibutton>Previous Variation</guibutton>."
 msgstr ""
-"Ändert die Reihenfolge der Varianten so, dass die gegenwärtige Brettstellung "
-"beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> /"
-"<guibutton>Vorherige Variante</guibutton> später erscheint."
 
 #. Tag: guimenuitem
 #: index.docbook:868
 #, no-c-format
 msgid "Delete Variations"
-msgstr "Varianten löschen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:870
@@ -1500,16 +1195,12 @@ msgid ""
 "in the main variation, it will first be changed to a position as in "
 "<guimenuitem>Back to Main Variation</guimenuitem>."
 msgstr ""
-"Löscht alle Varianten außer der Hauptvariante. Wenn sich die gegenwärtige "
-"Brettstellung nicht in der Hauptvariante befindet, wird zuvor zu einer "
-"Brettstellung in der Hauptvariante gewechselt wie in <guimenuitem>Zurück zu "
-"Hauptvariante</guimenuitem>."
 
 #. Tag: guimenuitem
 #: index.docbook:878
 #, no-c-format
 msgid "Truncate"
-msgstr "Abschneiden"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:880
@@ -1518,14 +1209,12 @@ msgid ""
 "Remove the node with the current position, including any subtree, from the "
 "game tree."
 msgstr ""
-"Entfernt den Knoten mit der gegenwärtigen Brettstellung zusammen mit dem auf "
-"ihn folgenden Teilbaum aus dem Spielbaum."
 
 #. Tag: guimenuitem
 #: index.docbook:887
 #, no-c-format
 msgid "Truncate Children"
-msgstr "Kindknoten abschneiden"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:889
@@ -1534,14 +1223,12 @@ msgid ""
 "Remove all child nodes of the node with the current position from the game "
 "tree."
 msgstr ""
-"Entfernt alle Kindknoten des Knotens mit der gegenwärtigen Brettstellung aus "
-"dem Spielbaum."
 
 #. Tag: guimenuitem
 #: index.docbook:896
 #, no-c-format
 msgid "Keep Position"
-msgstr "Brettstellung behalten"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:898
@@ -1550,15 +1237,12 @@ msgid ""
 "Delete all moves and keep only the current position as a setup. This can be "
 "used to create files that start with a given fixed position."
 msgstr ""
-"Löscht alle Züge und behält nur die gegenwärtige Brettstellung als feste "
-"Stellung. Dies kann zur Erzeugung von Dateien benutzt werden, die mit einer "
-"festgelegten Brettstellung beginnen."
 
 #. Tag: guimenuitem
 #: index.docbook:905
 #, no-c-format
 msgid "Keep Subtree"
-msgstr "Teilbaum behalten"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:907
@@ -1567,14 +1251,12 @@ msgid ""
 "Like <guimenuitem>Keep Position</guimenuitem> but does not delete the moves "
 "after the current position."
 msgstr ""
-"Wie <guimenuitem>Brettstellung behalten</guimenuitem>, aber die Züge nach "
-"der gegenwärtigen Brettstellung werden nicht gelöscht."
 
 #. Tag: guimenuitem
 #: index.docbook:914
 #, no-c-format
 msgid "Setup Mode"
-msgstr "Stellungsaufbau"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:916
@@ -1588,21 +1270,12 @@ msgid ""
 "orientation selector while no piece is selected. Setup mode can only be used "
 "if no moves have been played yet."
 msgstr ""
-"Aktiviert oder deaktiviert den Stellungsaufbau-Modus. Im Stellungsaufbau-"
-"Modus können Spielsteine überall auf dem Brett abgelegt werden, auch unter "
-"Verletzung der Spielregeln. Existierende Spielsteine können durch Anklicken "
-"vom Brett entfernt werden. Die gegenwärtig gewählte Farbe legt auch die "
-"Farbe fest, die nach Beenden des Stellungsaufbaus am Zug ist. Sie kann mit "
-"<guimenuitem>Nächste Farbe</guimenuitem> oder durch Klicken auf die "
-"Orientierungsauswahl während kein Spielstein ausgewählt ist geändert werden. "
-"Der Stellungsaufbau-Modus kann nur benutzt werden, wenn noch keine Züge "
-"gespielt wurden."
 
 #. Tag: guimenuitem
 #: index.docbook:928
 #, no-c-format
 msgid "Next Color"
-msgstr "Nächste Farbe"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:930
@@ -1612,28 +1285,24 @@ msgid ""
 "enter game records, in which moves of a color were skipped because the color "
 "ran out of time."
 msgstr ""
-"Wählt die nächste Farbe zum Auswählen eines Spielsteins. Dies kann zum "
-"Beispiel benutzt werden, um Partien einzugeben, bei denen Züge einer Farbe "
-"übersprungen wurden, da die Farbe aufgrund einer Bedenkzeitüberschreitung "
-"vom Weiterspielen ausgeschlossen wurde."
 
 #. Tag: title
 #: index.docbook:940
 #, no-c-format
 msgid "<guimenu>View</guimenu> Menu"
-msgstr "<guimenu>Ansicht</guimenu>-Menü"
+msgstr ""
 
 #. Tag: guimenuitem
 #: index.docbook:942
 #, no-c-format
 msgid "Appearance"
-msgstr "Erscheinungsbild"
+msgstr ""
 
 #. Tag: guilabel
 #: index.docbook:947
 #, no-c-format
 msgid "Coordinates"
-msgstr "Koordinaten"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:949
@@ -1643,15 +1312,12 @@ msgid ""
 "convention for the coordinates is the same as in the Blokus SGF file format "
 "used by Pentobi."
 msgstr ""
-"Zeigt Koordinaten an den Rändern des Spielbretts für die Felder auf dem "
-"Spielbrett. Die Konvention für die Koordinaten ist dieselbe wie im von "
-"Pentobi benutzten Blokus-SGF-Dateiformat."
 
 #. Tag: guilabel
 #: index.docbook:957
 #, no-c-format
 msgid "Show variations"
-msgstr "Varianten zeigen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:959
@@ -1661,16 +1327,12 @@ msgid ""
 "If moves are marked with dots instead of numbers, a circle will be used "
 "instead of a dot for moves not in the main variation."
 msgstr ""
-"Fügt einen Buchstaben an die Zugnummer auf dem Spielbrett an, wenn der Zug "
-"Varianten besitzt. Wenn Züge mit einem Punkt statt einer Nummer markiert "
-"werden, wird ein Kreis statt ein Punkt für Züge verwendet, die nicht in der "
-"Hauptvariante sind."
 
 #. Tag: guilabel
 #: index.docbook:967
 #, no-c-format
 msgid "Move number"
-msgstr "Zugnummer"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:969
@@ -1679,15 +1341,12 @@ msgid ""
 "This option exists only in desktop mode and shows the move number, move "
 "annotation and variation information at the right side of the status bar."
 msgstr ""
-"Diese Option existiert nur im Desktop-Modus und zeigt die Zugnummer, "
-"Zugannotierung und Varianteninformation auf der rechten Seite der "
-"Statusleiste an."
 
 #. Tag: guilabel
 #: index.docbook:976
 #, no-c-format
 msgid "Animations"
-msgstr "Animationen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:978
@@ -1695,26 +1354,24 @@ msgstr "Animationen"
 msgid ""
 "Enables or disables the piece rotation, flipping and placement animations."
 msgstr ""
-"Aktiviert oder deaktiviert die Animationen für Drehen, Umdrehen und "
-"Platzieren der Spielsteine."
 
 #. Tag: guilabel
 #: index.docbook:984
 #, no-c-format
 msgid "Color theme"
-msgstr "Farbthema"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:986
 #, no-c-format
 msgid "Changes the colors of the window, board and pieces."
-msgstr "Ändert die Farben des Fensters, des Spielbretts und der Spielsteine."
+msgstr ""
 
 #. Tag: guilabel
 #: index.docbook:992
 #, no-c-format
 msgid "Move marking"
-msgstr "Zugmarkierung"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:994
@@ -1724,15 +1381,12 @@ msgid ""
 "last move played with a dot or with a number, or to show the numbers of all "
 "moves, or not to show any marks."
 msgstr ""
-"Ändert die Markierung von Zügen auf dem Spielbrett. Die Optionen sind, den "
-"zuletzt gespielten Zug mit einem Punkt oder einer Nummer zu markieren, oder "
-"die Nummern aller Züge zu zeigen oder gar keine Markierung zu zeigen."
 
 #. Tag: guilabel
 #: index.docbook:1002
 #, no-c-format
 msgid "Show comment"
-msgstr "Kommentar zeigen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1004
@@ -1742,30 +1396,24 @@ msgid ""
 "comment area when the position changes. By default, the comment area is only "
 "shown if a comment exists for the current position."
 msgstr ""
-"Diese Option existiert nur im Desktop-Modus und konfiguriert die "
-"Sichtbarkeit des Kommentarbereichs, wenn sich die Stellung ändert. Die "
-"Standardeinstellung ist, dass der Kommentarbereich nur sichtbar ist, wenn "
-"ein Kommentar zur aktuellen Stellung existiert."
 
 #. Tag: guimenuitem
 #: index.docbook:1016
 #, no-c-format
 msgid "Comment"
-msgstr "Kommentar"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1018
 #, no-c-format
 msgid "Toggle the visibility of the comment area in the current position."
 msgstr ""
-"Mach den Kommentarbereich in der aktuellen Stellung sichtbar oder nicht "
-"sichtbar."
 
 #. Tag: guimenuitem
 #: index.docbook:1024
 #, no-c-format
 msgid "Fullscreen"
-msgstr "Vollbild"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1026
@@ -1774,21 +1422,18 @@ msgid ""
 "Make the main window full screen or leave full screen mode. To leave "
 "fullscreen mode without using the window menu, press the F11 key."
 msgstr ""
-"Schaltet das Hauptfenster in den Vollbildmodus oder verlässt den "
-"Vollbildmodus. Um den Vollbildmodus ohne das Benutzen des Fenstermenüs zu "
-"verlassen, drücken Sie die F11-Taste."
 
 #. Tag: title
 #: index.docbook:1035
 #, no-c-format
 msgid "<guimenu>Computer</guimenu> Menu"
-msgstr "<guimenu>Computer</guimenu>-Menü"
+msgstr ""
 
 #. Tag: guimenuitem
 #: index.docbook:1038
 #, no-c-format
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1040
@@ -1798,15 +1443,12 @@ msgid ""
 "the computer. Higher levels are stronger but can make the computer take a "
 "long time for playing moves on slow computers."
 msgstr ""
-"Wählt aus, welche Farben vom Computer gespielt werden und die Spielstärke "
-"des Computers. Höhere Spielstufen sind stärker, können aber die Bedenkzeiten "
-"des Computers auf langsamen Computern sehr verlängern."
 
 #. Tag: guimenuitem
 #: index.docbook:1048
 #, no-c-format
 msgid "Play"
-msgstr "Spielen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1050
@@ -1817,17 +1459,12 @@ msgid ""
 "the game tree. If the computer did not already play the current color, it "
 "will play this color (and only this color) from now on."
 msgstr ""
-"Lässt den Computer einen Zug für die gegenwärtige Farbe spielen. Dies kann "
-"zum Ändern der Computer-Farbe benutzt werden oder um nach dem Navigieren im "
-"Spielbaum mit dem Spielen fortzufahren. Wenn der Computer die gegenwärtige "
-"Farbe nicht bereits spielte, wird er diese Farbe (und nur diese) im weiteren "
-"Spielverlauf spielen."
 
 #. Tag: guimenuitem
 #: index.docbook:1059
 #, no-c-format
 msgid "Play Move"
-msgstr "Zug spielen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1061
@@ -1836,14 +1473,12 @@ msgid ""
 "Make the computer play a single move for the current color without changing "
 "the colors played by the computer."
 msgstr ""
-"Lässt den Computer einen einzelnen Zug für die gegenwärtige Farbe spielen "
-"ohne die vom Computer gespielten Farben zu ändern."
 
 #. Tag: guimenuitem
 #: index.docbook:1068
 #, no-c-format
 msgid "Stop"
-msgstr "Stopp"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1070
@@ -1852,20 +1487,18 @@ msgid ""
 "Abort the current move generation. You can make the computer continue to "
 "play by selecting <guimenuitem>Play</guimenuitem>."
 msgstr ""
-"Bricht die gegenwärtige Zuggenerierung ab. Sie können den Computer "
-"weiterspielen lassen, indem Sie <guimenuitem>Spielen</guimenuitem> auswählen."
 
 #. Tag: title
 #: index.docbook:1079
 #, no-c-format
 msgid "<guimenu>Tools</guimenu> Menu"
-msgstr "<guimenu>Extras</guimenu>-Menü"
+msgstr ""
 
 #. Tag: guimenuitem
 #: index.docbook:1082
 #, no-c-format
 msgid "Rating"
-msgstr "Wertung"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1084
@@ -1874,14 +1507,12 @@ msgid ""
 "Show a dialog window with the <link linkend=\"rating\">rating</link> of the "
 "user in the current game variant."
 msgstr ""
-"Zeigt ein Dialogfenster mit der <link linkend=\"rating\">Wertung</link> des "
-"Benutzers in der gegenwärtigen Spielvariante."
 
 #. Tag: guimenuitem
 #: index.docbook:1091
 #, no-c-format
 msgid "Clear Rating"
-msgstr "Wertung löschen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1093
@@ -1889,69 +1520,66 @@ msgstr "Wertung löschen"
 msgid ""
 "Deletes the rating information and history for the current game variant."
 msgstr ""
-"Löscht die Wertungsinformationen und -entwicklung zur gegenwärtigen "
-"Spielvariante."
 
 #. Tag: guimenuitem
 #: index.docbook:1099
 #, no-c-format
 msgid "Analyze Game"
-msgstr "Spiel analysieren"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1101
 #, no-c-format
 msgid "Perform a <link linkend=\"analysis\">game analysis</link>."
-msgstr "Führt eine <link linkend=\"analysis\">Spielanalyse</link> durch."
+msgstr ""
 
 #. Tag: guimenuitem
 #: index.docbook:1107
 #, no-c-format
 msgid "Clear Analysis"
-msgstr "Analyse löschen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1109
 #, no-c-format
 msgid "Deletes the analysis for the current game."
-msgstr "Löscht die Analyse des gegenwärtigen Spiels."
+msgstr ""
 
 #. Tag: title
 #: index.docbook:1117
 #, no-c-format
 msgid "<guimenu>Help</guimenu> Menu"
-msgstr "<guimenu>Hilfe</guimenu>-Menü"
+msgstr ""
 
 #. Tag: guimenuitem
 #: index.docbook:1120
 #, no-c-format
 msgid "Pentobi Help"
-msgstr "Pentobi-Hilfe"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1122
 #, no-c-format
 msgid "Show a window to browse the Pentobi user manual."
-msgstr "Zeigt ein Fenster mit dem Pentobi-Benutzerhandbuch."
+msgstr ""
 
 #. Tag: guimenuitem
 #: index.docbook:1128
 #, no-c-format
 msgid "About Pentobi"
-msgstr "Über Pentobi"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1130
 #, no-c-format
 msgid "Show an info dialog with information about this version of Pentobi."
 msgstr ""
-"Zeigt eine Dialogfenster mit Informationen über diese Version von Pentobi."
 
 #. Tag: title
 #: index.docbook:1140
 #, no-c-format
 msgid "Keyboard Shortcuts"
-msgstr "Tastenkürzel"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1141
@@ -1962,271 +1590,264 @@ msgid ""
 "are not active when the comment text field has the focus. In this case, the "
 "focus can be switched away from the comment text with the Tab key."
 msgstr ""
-"Zusätzlich zu den Tastenkürzeln, die im Fenstermenü gezeigt werden, werden "
-"die folgenden weiteren Tastenkürzel von Pentobi unterstützt. Beachten Sie, "
-"dass diese Tastenkürzel nicht aktiv sind, wenn das Kommentarfeld den Fokus "
-"besitzt. In diesem Fall kann der Fokus vom Kommentartext durch die Tabulator-"
-"Taste entfernt werden."
 
 #. Tag: keysym
 #: index.docbook:1149
 #, no-c-format
 msgid "Plus"
-msgstr "Plus"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1151
 #, no-c-format
 msgid "Select next piece"
-msgstr "Nächsten Spielstein auswählen"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1157
 #, no-c-format
 msgid "Minus"
-msgstr "Minus"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1159
 #, no-c-format
 msgid "Select previous piece"
-msgstr "Vorherigen Spielstein auswählen"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1165
 #, no-c-format
 msgid "Escape"
-msgstr "Escape"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1167
 #, no-c-format
 msgid "Clear selected piece"
-msgstr "Spielsteinauswahl löschen"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1173
 #, no-c-format
 msgid "Left"
-msgstr "Links"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1174
 #, no-c-format
 msgid "Right"
-msgstr "Rechts"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1175
 #, no-c-format
 msgid "<keysym>Up</keysym>"
-msgstr "<keysym>Oben</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1176
 #, no-c-format
 msgid "Down"
-msgstr "Unten"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1177
 #, no-c-format
 msgid "Shift+Left"
-msgstr "Umschalt+Links"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1178
 #, no-c-format
 msgid "Shift+Right"
-msgstr "Umschalt+Rechts"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1179
 #, no-c-format
 msgid "Shift+Up"
-msgstr "Umschalt+Oben"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1180
 #, no-c-format
 msgid "Shift+Down"
-msgstr "Umschalt+Unten"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1182
 #, no-c-format
 msgid "Move the selected piece. The Shift key makes the piece move faster."
 msgstr ""
-"Bewegen des ausgewählten Spielsteins. Mit der Umschalttaste wird der "
-"Spielstein schneller bewegt."
 
 #. Tag: keysym
 #: index.docbook:1188
 #, no-c-format
 msgid "Space"
-msgstr "Leertaste"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1190
 #, no-c-format
 msgid "Next orientation of the selected piece"
-msgstr "Nächste Ausrichtung des ausgewählten Spielsteins"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1196
 #, no-c-format
 msgid "Shift+Space"
-msgstr "Umschalt+Leertaste"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1198
 #, no-c-format
 msgid "Previous orientation of the selected piece"
-msgstr "Vorherige Ausrichtung des ausgewählten Spielsteins"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1204
 #, no-c-format
 msgid "Enter"
-msgstr "Enter"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1206
 #, no-c-format
 msgid "Play the selected piece"
-msgstr "Spielen des ausgewählten Spielsteins"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1212
 #, no-c-format
 msgid "<keysym>1</keysym>"
-msgstr "<keysym>1</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1213
 #, no-c-format
 msgid "<keysym>2</keysym>"
-msgstr "<keysym>2</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1214
 #, no-c-format
 msgid "<keysym>A</keysym>"
-msgstr "<keysym>A</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1215
 #, no-c-format
 msgid "<keysym>C</keysym>"
-msgstr "<keysym>C</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1216
 #, no-c-format
 msgid "<keysym>E</keysym>"
-msgstr "<keysym>E</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1217
 #, no-c-format
 msgid "<keysym>F</keysym>"
-msgstr "<keysym>F</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1218
 #, no-c-format
 msgid "<keysym>G</keysym>"
-msgstr "<keysym>G</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1219
 #, no-c-format
 msgid "<keysym>H</keysym>"
-msgstr "<keysym>H</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1220
 #, no-c-format
 msgid "<keysym>I</keysym>"
-msgstr "<keysym>I</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1221
 #, no-c-format
 msgid "<keysym>J</keysym>"
-msgstr "<keysym>J</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1222
 #, no-c-format
 msgid "<keysym>L</keysym>"
-msgstr "<keysym>L</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1223
 #, no-c-format
 msgid "<keysym>N</keysym>"
-msgstr "<keysym>N</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1224
 #, no-c-format
 msgid "<keysym>O</keysym>"
-msgstr "<keysym>O</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1225
 #, no-c-format
 msgid "<keysym>P</keysym>"
-msgstr "<keysym>P</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1226
 #, no-c-format
 msgid "<keysym>S</keysym>"
-msgstr "<keysym>S</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1227
 #, no-c-format
 msgid "<keysym>T</keysym>"
-msgstr "<keysym>T</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1228
 #, no-c-format
 msgid "<keysym>U</keysym>"
-msgstr "<keysym>U</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1229
 #, no-c-format
 msgid "<keysym>V</keysym>"
-msgstr "<keysym>V</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1230
 #, no-c-format
 msgid "<keysym>W</keysym>"
-msgstr "<keysym>W</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1231
 #, no-c-format
 msgid "<keysym>X</keysym>"
-msgstr "<keysym>X</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1232
 #, no-c-format
 msgid "<keysym>Y</keysym>"
-msgstr "<keysym>Y</keysym>"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1233
 #, no-c-format
 msgid "<keysym>Z</keysym>"
-msgstr "<keysym>Z</keysym>"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1235
@@ -2238,60 +1859,54 @@ msgid ""
 "For example, A is used only in Trigon for the pieces A6 and A4 (also known "
 "as \"lobster\" and \"triangle\")."
 msgstr ""
-"Einen Spielstein entsprechend den üblicherweise benutzten Spielsteinnamen "
-"auswählen. Wenn es mehrere Spielsteine mit dem Buchstaben gibt (z. B. I3, "
-"I4, I5), dann kann durch mehrmaliges Drücken der Taste zwischen ihnen "
-"gewechselt werden. Einige Buchstaben werden nur in bestimmten Spielvarianten "
-"benutzt. Zum Beispiel wird A nur in Trigon für die Spielsteine A6 und A4 "
-"benutzt (auch bekannt als „Hummer“ und „Dreieck“)."
 
 #. Tag: keysym
 #: index.docbook:1245
 #, no-c-format
 msgid "Ctrl+Home"
-msgstr "Strg+Pos1"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1246
 #, no-c-format
 msgid "Ctrl+Shift+Left"
-msgstr "Strg+Umschalt+Links"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1247
 #, no-c-format
 msgid "Ctrl+Left"
-msgstr "Strg+Links"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1248
 #, no-c-format
 msgid "Ctrl+Right"
-msgstr "Strg+Rechts"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1249
 #, no-c-format
 msgid "Ctrl+Shift+Right"
-msgstr "Strg+Umschalt+Rechts"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1250
 #, no-c-format
 msgid "Ctrl+End"
-msgstr "Strg+Ende"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1251
 #, no-c-format
 msgid "Ctrl+Up"
-msgstr "Strg+Oben"
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1252
 #, no-c-format
 msgid "Ctrl+Down"
-msgstr "Strg+Unten"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1254
@@ -2300,14 +1915,12 @@ msgid ""
 "Navigate in the game: beginning, ten moves backward, backward, forward, ten "
 "moves forward, end, previous variation, next variation."
 msgstr ""
-"Im Spiel navigieren: Anfang, zehn Züge zurück, zurück, vorwärts, zehn Züge "
-"vorwärts, Ende, vorherige Variante, nächste Variante."
 
 #. Tag: keysym
 #: index.docbook:1261
 #, no-c-format
 msgid "Ctrl+Shift+H"
-msgstr "Strg+Umschalt+H"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1263
@@ -2316,44 +1929,42 @@ msgid ""
 "Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards "
 "through the list of legal moves."
 msgstr ""
-"Wie <guimenuitem>Zug finden</guimenuitem> (Strg+H), jedoch wird rückwärts "
-"durch die Liste der legalen Züge iteriert."
 
 #. Tag: keysym
 #: index.docbook:1270
 #, no-c-format
 msgid "Ctrl+T"
-msgstr "Strg+T"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1272
 #, no-c-format
 msgid "Switch view between comment and game analysis."
-msgstr "Ansicht zwischen Kommentar und Spielanalyse umschalten."
+msgstr ""
 
 #. Tag: keysym
 #: index.docbook:1278
 #, no-c-format
 msgid "Alt+M"
-msgstr "Alt+M"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1280
 #, no-c-format
 msgid "Open menu."
-msgstr "Menü öffnen."
+msgstr ""
 
 #. Tag: title
 #: index.docbook:1289
 #, no-c-format
 msgid "System Requirements"
-msgstr "Systemvoraussetzungen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1290
 #, no-c-format
 msgid "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
-msgstr "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1293
@@ -2362,8 +1973,6 @@ msgid ""
 "Recommended for playing level 9: 4&nbsp;GB RAM, 2.5&nbsp;GHz dual-core or "
 "faster CPU"
 msgstr ""
-"Empfohlen für Spielstufe 9: 4&nbsp;GB RAM, 2,5&nbsp;GHz Dual-Core- oder "
-"schnellere CPU"
 
 #. Tag: para
 #: index.docbook:1297
@@ -2374,22 +1983,18 @@ msgid ""
 "is too slow) or have a reduced playing strength (if there is not enough "
 "memory)."
 msgstr ""
-"Pentobi funktioniert auch auf Systemen, die das Systemminimum nicht "
-"erfüllen, aber die höchste Spielstufe kann auf diesen Systemen sehr langsam "
-"sein (wenn die CPU zu langsam ist) oder eine reduzierte Spielstärke haben "
-"(wenn nicht genügend Arbeitsspeicher vorhanden ist)."
 
 #. Tag: title
 #: index.docbook:1305
 #, no-c-format
 msgid "License"
-msgstr "Lizenz"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1306
 #, no-c-format
 msgid "Copyright © 2011–2019 Markus Enzenberger"
-msgstr "Copyright © 2011–2019 Markus Enzenberger"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1309
@@ -2400,10 +2005,6 @@ msgid ""
 "Software Foundation, either version 3 of the License, or (at your option) "
 "any later version."
 msgstr ""
-"Dieses Programm ist freie Software. Sie können es unter den Bedingungen der "
-"GNU General Public License, wie von der Free Software Foundation "
-"veröffentlicht, weitergeben und/oder modifizieren, entweder gemäß Version 3 "
-"der Lizenz oder (nach Ihrer Wahl) jeder späteren Version."
 
 #. Tag: para
 #: index.docbook:1315
@@ -2414,17 +2015,12 @@ msgid ""
 "FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for "
 "more details."
 msgstr ""
-"Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, dass es Ihnen "
-"von Nutzen sein wird, aber OHNE IRGENDEINE GARANTIE, insbesondere ohne eine "
-"implizite Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN "
-"BESTIMMTEN ZWECK. Nähere Angaben finden Sie in der GNU General Public "
-"License."
 
 #. Tag: title
 #: index.docbook:1322
 #, no-c-format
 msgid "Trademark Disclaimer"
-msgstr "Hinweis zu Markennamen"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1323
@@ -2434,78 +2030,3 @@ msgid ""
 "respective trademark holders. The trademark holders are not affiliated with "
 "the author of the program Pentobi."
 msgstr ""
-"Der Markenname Blokus und andere erwähnte Marken sind Eigentum ihrer "
-"jeweiligen Markeninhaber. Die Markeninhaber stehen in keiner Verbindung mit "
-"dem Autor des Programms Pentobi."
-
-#~ msgid "Copyright © 2011–2018 Markus Enzenberger"
-#~ msgstr "Copyright © 2011–2018 Markus Enzenberger"
-
-#~ msgid "<term>Up</term>"
-#~ msgstr "<term>Oben</term>"
-
-#~ msgid "<term>1</term>"
-#~ msgstr "<term>1</term>"
-
-#~ msgid "<term>2</term>"
-#~ msgstr "<term>2</term>"
-
-#~ msgid "<term>A</term>"
-#~ msgstr "<term>A</term>"
-
-#~ msgid "<term>C</term>"
-#~ msgstr "<term>C</term>"
-
-#~ msgid "<term>E</term>"
-#~ msgstr "<term>E</term>"
-
-#~ msgid "<term>F</term>"
-#~ msgstr "<term>F</term>"
-
-#~ msgid "<term>G</term>"
-#~ msgstr "<term>G</term>"
-
-#~ msgid "<term>H</term>"
-#~ msgstr "<term>H</term>"
-
-#~ msgid "<term>I</term>"
-#~ msgstr "<term>I</term>"
-
-#~ msgid "<term>J</term>"
-#~ msgstr "<term>J</term>"
-
-#~ msgid "<term>L</term>"
-#~ msgstr "<term>L</term>"
-
-#~ msgid "<term>N</term>"
-#~ msgstr "<term>N</term>"
-
-#~ msgid "<term>O</term>"
-#~ msgstr "<term>O</term>"
-
-#~ msgid "<term>P</term>"
-#~ msgstr "<term>P</term>"
-
-#~ msgid "<term>S</term>"
-#~ msgstr "<term>S</term>"
-
-#~ msgid "<term>T</term>"
-#~ msgstr "<term>T</term>"
-
-#~ msgid "<term>U</term>"
-#~ msgstr "<term>U</term>"
-
-#~ msgid "<term>V</term>"
-#~ msgstr "<term>V</term>"
-
-#~ msgid "<term>W</term>"
-#~ msgstr "<term>W</term>"
-
-#~ msgid "<term>X</term>"
-#~ msgstr "<term>X</term>"
-
-#~ msgid "<term>Y</term>"
-#~ msgstr "<term>Y</term>"
-
-#~ msgid "<term>Z</term>"
-#~ msgstr "<term>Z</term>"
