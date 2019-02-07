@@ -4,17 +4,19 @@ Compiling and Installing Pentobi From the Sources
 Requirements
 ------------
 
-Pentobi requires the Qt libraries (>=5.11). The C++ compiler needs
-C++17 support (GCC >=5). The build system uses CMake (>=3.1.0).
+Pentobi requires the Qt libraries (>=5.11). The C++ compiler needs C++17
+support (GCC >=5). The build system uses CMake (>=3.1.0). On Unix,
+gettext and itstool are needed at build time.
 
 In Debian-based distributions, the necessary tools and libraries can be
 installed with the command
 ```
-sudo apt-get install cmake g++ libqt5svg5-dev libqt5webview5-dev make \
-  qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \  
-  qml-module-qtquick2 qml-module-qtquick-controls2 \  
-  qml-module-qtquick-layouts qml-module-qtquick-window2 \  
-  qml-module-qtwebview qtquickcontrols2-5-dev qttools5-dev
+sudo apt-get install cmake g++ gettext itstool libqt5svg5-dev \
+  libqt5webview5-dev make qml-module-qt-labs-folderlistmodel \
+  qml-module-qt-labs-settings qml-module-qtquick2 \
+  qml-module-qtquick-controls2 qml-module-qtquick-layouts \
+  qml-module-qtquick-window2 qml-module-qtwebview \
+  qtquickcontrols2-5-dev qttools5-dev
 ```
 
 Building

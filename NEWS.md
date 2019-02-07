@@ -6,10 +6,12 @@ Version 16.x (master)
 
 * Small increase in playing strength, mainly in Callisto and Classic.
 * New UI translation: Simplified Chinese (thanks to Cherry)
-* The user manual is now in DocBook format, which makes it translatable.
-  The generated HTML files are still included in the sources for
-  technical reasons (because they are also needed by the Android
-  project, which does not use CMake yet).
+* The user manual and desktop files (desktop entry, AppData, Shared MIME
+  Info) are now translatable. This adds new build-time dependiencies on
+  gettext and itstool. The HTML user manual is currently not generated
+  at build time from the DocBook sources, but included in the sources
+  because it is also needed by the Android project, which does not use
+  CMake yet.
 * The compiler now needs to support C++17.
 * Renamed build configuration option PENTOBI_BUILD_TESTS to
   BUILD_TESTING for compatibility with CTest.

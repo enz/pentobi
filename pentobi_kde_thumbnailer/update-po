@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Needs Debian package gettext
+
+if test $# -eq 0 ; then
+    languages=`cat po/LINGUAS`
+else
+    languages="$@"
+fi
+cd `dirname "$0"`
+for lang in $languages; do
+  msgmerge --update --no-fuzzy-matching --backup=none \
+    po/$lang.po pentobi-unix.pot
+done

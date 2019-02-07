@@ -1,92 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop-application">
-  <id>io.sourceforge.pentobi.desktop</id>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-3.0+</project_license>
-  <name>Pentobi</name>
-  <name xml:lang="de">Pentobi</name>
-  <summary>Computer opponent for the board game Blokus</summary>
-  <summary xml:lang="de">Computer-Gegner für das Brettspiel Blokus</summary>
-
-  <description>
-    <p>Pentobi is a computer opponent for the board game Blokus. It has a
-    strong Blokus engine with 9 different playing levels. The supported game
-    variants are: Classic, Duo, Trigon, Junior, Nexos, Callisto, GembloQ.</p>
-    <p xml:lang="de">Pentobi ist ein Computer-Gegner für das Brettspiel Blokus.
-    Es hat eine spielstarke Blokus-Engine mit 9 verschiedenen Spielstufen.
-    Die unterstützten Spielvarianten sind : Klassisch, Duo, Trigon, Junior,
-    Nexos, Callisto, GembloQ.</p>
-
-    <p>Players can determine their strength by playing rated games against the
-    computer and use a game analysis function. Games can be saved in Smart Game
-    Format with comments and move variations.</p>
-    <p xml:lang="de">Spieler können ihre Spielstärke ermitteln, indem sie
-    gewertete Spiele gegen den Computer spielen, und eine Spielanalysefunktion
-    benutzen. Spiele können im Smart-Game-Format gespeichert werden mit
-    Kommentaren und Zugvarianten.</p>
-
-    <p>System requirements: 1 GB RAM, 1 GHz CPU (4 GB RAM, 2.5 GHz dual-core or
-    faster CPU recommended for playing level 9).</p>
-    <p xml:lang="de">Systemminima: 1 GB RAM, 1 GHz CPU (4 GB RAM, 2,5 GHz
-    Dual-Core- oder schnellere CPU empfohlen für Spielstufe 9).</p>
-
-    <p>Trademark disclaimer: The trademark Blokus and other trademarks referred
-    to are property of their respective trademark holders. The trademark
-    holders are not affiliated with the author of the program Pentobi.</p>
-    <p xml:lang="de">Hinweis zu Markennamen: Der Markenname Blokus und andere
-    erwähnte Marken sind Eigentum ihrer jeweiligen Markeninhaber. Die
-    Markeninhaber stehen in keiner Verbindung mit dem Autor des Programms
-    Pentobi.</p>
-  </description>
-
-  <screenshots>
-    <screenshot type="default">
-      <image width="1248" height="702">
-      https://pentobi.sourceforge.io/pentobi-classic.png</image>
-      <caption>Game variant Classic</caption>
-      <caption xml:lang="de">Spielvariante Klassisch</caption>
-    </screenshot>
-    <screenshot>
-      <image width="1248" height="702">
-      https://pentobi.sourceforge.io/pentobi-duo.png</image>
-      <caption>Game variant Duo</caption>
-      <caption xml:lang="de">Spielvariante Duo</caption>
-    </screenshot>
-    <screenshot>
-      <image width="1248" height="702">
-      https://pentobi.sourceforge.io/pentobi-trigon.png</image>
-      <caption>Game variant Trigon</caption>
-      <caption xml:lang="de">Spielvariante Trigon</caption>
-    </screenshot>
-    <screenshot>
-      <image width="1248" height="702">
-      https://pentobi.sourceforge.io/pentobi-nexos.png</image>
-      <caption>Game variant Nexos</caption>
-      <caption xml:lang="de">Spielvariante Nexos</caption>
-    </screenshot>
-    <screenshot>
-      <image width="1248" height="702">
-      https://pentobi.sourceforge.io/pentobi-gembloq.png</image>
-      <caption>Game variant GembloQ</caption>
-      <caption xml:lang="de">Spielvariante GembloQ</caption>
-    </screenshot>
-  </screenshots>
-
-  <url type="homepage">https://pentobi.sourceforge.io/</url>
-  <url type="bugtracker">https://sourceforge.net/p/pentobi/bugs/</url>
-  <url type="donation">https://sourceforge.net/p/pentobi/donate/</url>
-  <developer_name>Markus Enzenberger</developer_name>
-  <update_contact>enz@users.sourceforge.net</update_contact>
-
-  <provides>
-    <binary>pentobi</binary>
-  </provides>
-  <mimetypes>
-    <mimetype>application/x-blokus-sgf</mimetype>
-  </mimetypes>
-  <translation type="qt">pentobi</translation>
-
-  <releases>
-     <release version="@PENTOBI_VERSION@" date="@PENTOBI_RELEASE_DATE@"/>
-  </releases>
+<id>io.sourceforge.pentobi.desktop</id>
+<metadata_license>CC0-1.0</metadata_license>
+<project_license>GPL-3.0+</project_license>
+<name>Pentobi</name>
+<summary>Computer opponent for the board game Blokus</summary>
+<description>
+<p>
+Pentobi is a computer opponent for the board game Blokus. It has a
+strong Blokus engine with different playing levels. The supported game
+variants are Classic, Duo, Trigon, Junior, Nexos, Callisto and GembloQ.
+</p>
+<p>
+Players can determine their strength by playing rated games against the
+computer and use a game analysis function. Games can be saved in Smart
+Game Format with comments and move variations.
+</p>
+<p>
+System requirements: 1 GB RAM, 1 GHz CPU (4 GB RAM, 2.5 GHz dual-core or
+faster CPU recommended for playing level 9).
+</p>
+<p>
+Trademark disclaimer: The trademark Blokus and other trademarks referred
+to are property of their respective trademark holders. The trademark
+holders are not affiliated with the author of the program Pentobi.
+</p>
+</description>
+<screenshots>
+<screenshot type="default">
+<image width="1248" height="702">
+https://pentobi.sourceforge.io/pentobi-classic.png</image>
+<caption>Game variant Classic</caption>
+</screenshot>
+<screenshot>
+<image width="1248" height="702">
+https://pentobi.sourceforge.io/pentobi-duo.png</image>
+<caption>Game variant Duo</caption>
+</screenshot>
+<screenshot>
+<image width="1248" height="702">
+https://pentobi.sourceforge.io/pentobi-trigon.png</image>
+<caption>Game variant Trigon</caption>
+</screenshot>
+<screenshot>
+<image width="1248" height="702">
+https://pentobi.sourceforge.io/pentobi-nexos.png</image>
+<caption>Game variant Nexos</caption>
+</screenshot>
+<screenshot>
+<image width="1248" height="702">
+https://pentobi.sourceforge.io/pentobi-gembloq.png</image>
+<caption>Game variant GembloQ</caption>
+</screenshot>
+</screenshots>
+<url type="homepage">https://pentobi.sourceforge.io/</url>
+<url type="bugtracker">https://sourceforge.net/p/pentobi/bugs/</url>
+<url type="donation">https://sourceforge.net/p/pentobi/donate/</url>
+<developer_name>Markus Enzenberger</developer_name>
+<update_contact>enz@users.sourceforge.net</update_contact>
+<provides>
+<binary>pentobi</binary>
+</provides>
+<mimetypes>
+<mimetype>application/x-blokus-sgf</mimetype>
+</mimetypes>
+<translation type="qt">pentobi</translation>
+<releases>
+<release version="@PENTOBI_VERSION@" date="@PENTOBI_RELEASE_DATE@"/>
+</releases>
 </component>
