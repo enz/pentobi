@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd $(dirname "$0")
+if test $# -eq 0 ; then
+    languages=`cat po/LINGUAS`
+else
+    languages="$@"
+fi
+for lang in $languages; do
+  msgmerge --update --no-fuzzy-matching --backup=none \
+    po/$lang.po pentobi-thumbnailer.pot
+done

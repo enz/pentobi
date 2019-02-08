@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<article>
+<refentry>
+<refmeta>
+<refentrytitle>pentobi-thumbnailer</refentrytitle>
+<manvolnum>6</manvolnum>
+<refmiscinfo class="source-name">Pentobi</refmiscinfo>
+<refmiscinfo class="version">Pentobi @PENTOBI_VERSION@</refmiscinfo>
+<refmiscinfo class="manual">Pentobi Command Reference</refmiscinfo>
+</refmeta>
+<info>
+<author>
+<personname>
+<firstname>Markus</firstname> <surname>Enzenberger</surname>
+</personname>
+</author>
+</info>
+
+<refnamediv>
+<refname>pentobi-thumbnailer</refname>
+<refpurpose>
+thumbnailer for game records for the board game Blokus as used by the program
+Pentobi
+</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis>
+<command>pentobi-thumbnailer</command>
+<group>
+<arg><option>-s</option> <replaceable>n</replaceable></arg>
+<arg><option>--size</option> <replaceable>n</replaceable></arg>
+</group>
+<arg choice="plain"><replaceable>inputfile</replaceable></arg>
+<arg choice="plain"><replaceable>outputfile</replaceable></arg>
+</cmdsynopsis>
+<cmdsynopsis>
+<command>pentobi</command>
+<arg><option>-h</option></arg>
+<arg><option>--help</option></arg>
+</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection>
+<title>Description</title>
+<para>
+<command>pentobi-thumbnailer</command> is  part  of the program Pentobi and
+intended to be used as a thumbnailer for the Gnome desktop environment to
+generate previews of game files written by Pentobi.
+</para>
+<para>
+The input file is a game file in Pentobi's SGF format as documented in
+Pentobi-SGF.html in the Pentobi source package. The output file is a thumbnail
+in PNG format.
+</para>
+</refsection>
+
+<refsection>
+<title>Options</title>
+<variablelist>
+<varlistentry>
+<term><option>-h</option></term>
+<term><option>--help</option></term>
+<listitem>
+<para>
+Display help and exit.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>-s</option> <replaceable>n</replaceable></term>
+<term><option>--size</option> <replaceable>n</replaceable></term>
+<listitem>
+<para>
+The size of the thumbnail. The default is 128.
+</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsection>
+
+<refsection>
+<title>Exit Status</title>
+<para>
+0 if the thumbnail generation succeeds, 1 on error.
+</para>
+</refsection>
+
+<refsection>
+<title>See Also</title>
+<para>
+<command>pentobi</command>
+</para>
+</refsection>
+
+</refentry>
+</article>

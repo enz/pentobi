@@ -5,5 +5,4 @@
 <its:translateRule selector="//refname" translate="no"/>
 <its:translateRule selector="//command" translate="no"/>
 <its:translateRule selector="//option" translate="no"/>
-<its:translateRule selector="//replaceable" translate="no"/>
 </its:rules>

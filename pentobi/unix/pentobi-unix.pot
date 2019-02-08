@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 21:34+0100\n"
+"POT-Creation-Date: 2019-02-08 22:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,6 +45,16 @@ msgstr ""
 msgid "computer opponent for the board game Blokus"
 msgstr ""
 
+#. (itstool) path: refsynopsisdiv/cmdsynopsis
+#: pentobi-manpage.docbook.in:27
+msgid ""
+"<_:command-1/> <group> <arg><_:option-2/> <replaceable>n</replaceable></arg> "
+"<arg><_:option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/></arg> "
+"<arg><_:option-6/> <replaceable>n</replaceable></arg> <arg><_:option-7/> "
+"<replaceable>n</replaceable></arg> <arg><_:option-8/></arg> </group> "
+"<arg><replaceable>file.blksgf</replaceable></arg>"
+msgstr ""
+
 #. (itstool) path: refsection/title
 #: pentobi-manpage.docbook.in:48
 msgid "Description"
@@ -73,6 +83,12 @@ msgstr ""
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:68
 msgid "Display help and exit."
+msgstr ""
+
+#. (itstool) path: varlistentry/term
+#: pentobi-manpage.docbook.in:74 pentobi-manpage.docbook.in:120
+#: pentobi-manpage.docbook.in:130
+msgid "<_:option-1/> <replaceable>n</replaceable>"
 msgstr ""
 
 #. (itstool) path: listitem/para
@@ -147,14 +163,29 @@ msgid ""
 "Additionally, any options supported by Qt applications can be used, such as:"
 msgstr ""
 
+#. (itstool) path: varlistentry/term
+#: pentobi-manpage.docbook.in:161
+msgid "<_:option-1/> <replaceable>d</replaceable>"
+msgstr ""
+
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:163
 msgid "Switches displays on X11."
 msgstr ""
 
+#. (itstool) path: varlistentry/term
+#: pentobi-manpage.docbook.in:169
+msgid "<_:option-1/> <replaceable>g</replaceable>"
+msgstr ""
+
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:171
 msgid "Window geometry using the X11 syntax."
+msgstr ""
+
+#. (itstool) path: varlistentry/term
+#: pentobi-manpage.docbook.in:177
+msgid "<_:option-1/> <replaceable>s</replaceable>"
 msgstr ""
 
 #. (itstool) path: listitem/para
