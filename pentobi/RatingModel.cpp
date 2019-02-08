@@ -257,12 +257,6 @@ void RatingModel::setGameVariant(const QString& gameVariant)
                                            level, rating));
     }
     settings.endArray();
-    sort(m_history.begin(), m_history.end(),
-         [](const QObject* o1, const QObject* o2)
-         {
-             return dynamic_cast<const RatedGameInfo&>(*o1).number()
-                     > dynamic_cast<const RatedGameInfo&>(*o2).number();
-         });
     emit historyChanged();
     setNumberGames(settings.value(QStringLiteral("rated_games"), 0).toInt());
     emit gameVariantChanged();
