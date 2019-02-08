@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cd `dirname "$0"`
-xgettext -o pentobi-unix.pot \
-  io.sourceforge.pentobi.appdata.xml \
+cd $(dirname "$0")
+itstool -i manpage.its pentobi-manpage.docbook.in > pentobi-unix.pot
+xgettext -j -o pentobi-unix.pot \
+  io.sourceforge.pentobi.appdata.xml.in \
   io.sourceforge.pentobi.desktop.in
-# gettext 0.19 does not come with ITS rules for shared mime info
 xgettext -j -o pentobi-unix.pot --its=mime.its pentobi-mime.xml.in

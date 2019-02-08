@@ -3,17 +3,33 @@ find_program(ITSTOOL itstool)
 if(NOT ITSTOOL)
     message(FATAL_ERROR "itstool not found")
 endif()
+find_program(XSLTPROC xsltproc)
+if(NOT XSLTPROC)
+    message(FATAL_ERROR "xsltproc not found")
+endif()
+find_path(DOCBOOK_XSL "manpages/docbook.xsl"
+    HINTS "/usr/share/xml/docbook/stylesheet/docbook-xsl")
+if(NOT DOCBOOK_XSL)
+    message(FATAL_ERROR "docbook-xsl not found")
+endif()
+
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
+string(REGEX REPLACE "\n" ";" linguas "${linguas}")
+
+set(man_files "${CMAKE_CURRENT_BINARY_DIR}/pentobi.6")
+foreach(lang ${linguas})
+    list(APPEND man_files
+        "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi.6")
+endforeach()
 
 add_custom_target(pentobi-unix ALL DEPENDS
     ${png_icons}
     "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.desktop"
     "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml"
     "${CMAKE_CURRENT_BINARY_DIR}/pentobi-mime.xml"
-    "${CMAKE_CURRENT_BINARY_DIR}/pentobi.6"
+    "${man_files}"
     )
 
-file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
-string(REGEX REPLACE "\n" ";" linguas "${linguas}")
 foreach(lang ${linguas})
     add_custom_command(OUTPUT ${lang}.mo
         COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" -o ${lang}.mo
@@ -69,10 +85,33 @@ install(FILES pentobi-mime.xml
 
 # Man page
 
-configure_file(pentobi.6.in pentobi.6 @ONLY)
-
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.6
+configure_file(pentobi-manpage.docbook.in pentobi-manpage.docbook @ONLY)
+add_custom_command(OUTPUT pentobi.6
+    COMMAND "${XSLTPROC}" "${DOCBOOK_XSL}/manpages/docbook.xsl"
+    pentobi-manpage.docbook
+    DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
+    )
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi.6"
     DESTINATION ${CMAKE_INSTALL_MANDIR}/man6)
+
+foreach(lang ${linguas})
+    add_custom_command(OUTPUT manpage-${lang}/pentobi-manpage.docbook
+        COMMAND mkdir -p manpage-${lang}/
+        COMMAND "${ITSTOOL}" -l ${lang} -m ${lang}.mo
+        -o manpage-${lang}/pentobi-manpage.docbook
+        -i "${CMAKE_CURRENT_SOURCE_DIR}/manpage.its"
+        pentobi-manpage.docbook
+        DEPENDS ${lang}.mo "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
+        )
+    add_custom_command(OUTPUT manpage-${lang}/pentobi.6
+        COMMAND "${XSLTPROC}" -o manpage-${lang}/
+        "${DOCBOOK_XSL}/manpages/docbook.xsl"
+        manpage-${lang}/pentobi-manpage.docbook
+        DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi-manpage.docbook"
+        )
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi.6"
+        DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")
+endforeach()
 
 # App and mimetype icons
 

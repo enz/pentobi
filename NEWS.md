@@ -6,12 +6,11 @@ Version 16.x (master)
 
 * Small increase in playing strength, mainly in Callisto and Classic.
 * New UI translation: Simplified Chinese (thanks to Cherry)
-* The user manual and desktop files (desktop entry, AppData, Shared MIME
-  Info) are now translatable. This adds new build-time dependiencies on
-  gettext and itstool. The HTML user manual is currently not generated
-  at build time from the DocBook sources, but included in the sources
-  because it is also needed by the Android project, which does not use
-  CMake yet.
+* The user manual, desktop entry, AppData, MIME info and man pages are
+  now translatable (issue #6). See INSTALL for the new build-time
+  dependencies. The HTML manual is currently not generated at build time
+  from DocBook, but additionally included in the sources because it is
+  also needed by the Android project, which does not use CMake yet.
 * The Android version now interactively asks for permission when opening
   or saving a game if storage permission has not yet been granted.
 * The compiler now needs to support C++17.

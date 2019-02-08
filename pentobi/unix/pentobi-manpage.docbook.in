@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<article>
+<refentry>
+<refmeta>
+<refentrytitle>pentobi</refentrytitle>
+<manvolnum>6</manvolnum>
+<refmiscinfo class="source-name">Pentobi</refmiscinfo>
+<refmiscinfo class="version">Pentobi @PENTOBI_VERSION@</refmiscinfo>
+<refmiscinfo class="manual">Pentobi Command Reference</refmiscinfo>
+</refmeta>
+<info>
+<author>
+<personname>
+<firstname>Markus</firstname> <surname>Enzenberger</surname>
+</personname>
+</author>
+</info>
+
+<refnamediv>
+<refname>pentobi</refname>
+<refpurpose>
+computer opponent for the board game Blokus
+</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+<cmdsynopsis>
+<command>pentobi</command>
+<group>
+<arg><option>--maxlevel</option> <replaceable>n</replaceable></arg>
+<arg><option>--mobile</option></arg>
+<arg><option>--nobook</option></arg>
+<arg><option>--nodelay</option></arg>
+<arg><option>--seed</option> <replaceable>n</replaceable></arg>
+<arg><option>--threads</option> <replaceable>n</replaceable></arg>
+<arg><option>--verbose</option></arg>
+</group>
+<arg><replaceable>file.blksgf</replaceable></arg>
+</cmdsynopsis>
+<cmdsynopsis>
+<command>pentobi</command>
+<arg><option>-h</option></arg>
+<arg><option>--help</option></arg>
+</cmdsynopsis>
+</refsynopsisdiv>
+
+<refsection>
+<title>Description</title>
+<para>
+<command>pentobi</command> is the command to invoke the program Pentobi,
+which is a graphical user interface and computer opponent for the board
+game Blokus.
+</para>
+<para>
+The command can take the name of a game file to open at startup as an
+optional argument. The game file is expected to be in Pentobi's SGF
+format as documented in Pentobi-SGF.html in the Pentobi source package.
+</para>
+</refsection>
+
+<refsection>
+<title>Options</title>
+<variablelist>
+<varlistentry>
+<term><option>-h</option></term>
+<term><option>--help</option></term>
+<listitem>
+<para>
+Display help and exit.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--maxlevel</option> <replaceable>n</replaceable></term>
+<listitem>
+<para>
+Set the maximum playing level. Reducing this value reduces the amount of
+memory used by the  search, which can be useful to run Pentobi on
+systems that have low memory or are too slow to use the highest levels.
+By default, Pentobi currently allocates up to 2 GB (but not more than a
+quarter of the physical  memory available on the system). Reducing the
+maximum level to 8 currently reduces this amount by a factor of 3 to 4
+and lower maximum levels even more.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--mobile</option></term>
+<listitem>
+<para>
+Use a window layout optimized for smartphones and apply some user
+interface changes that assume that a touchscreen is the main input
+device. If this option is not used, the default layout depends on the
+platform. Using this option also changes the default style for GUI
+elements of QQuickControls 2 to Default if the style is not explicitly
+set with option <option>-style</option>.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--nobook</option></term>
+<listitem>
+<para>
+Do not use opening books.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--nodelay</option></term>
+<listitem>
+<para>
+Do not delay fast computer moves. By default, the computer player adds a
+small delay if the move generation took less than a second to make it
+easier for the human to follow the game if the computer plays several
+moves in a row.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--seed</option> <replaceable>n</replaceable></term>
+<listitem>
+<para>
+Set the seed for the random generator. Using a fixed seed makes the move
+generation deterministic if no multi-threading is used (see option
+<option>--threads</option>).
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--threads</option> <replaceable>n</replaceable></term>
+<listitem>
+<para>
+The number of threads to use in the search. By default, up to 8 threads
+are used in the search depending on the number of hardware threads
+supported by the current system.  Using more threads will speed up the
+move generation but using a very high number of threads (e.g. more than
+8) can degrade the playing strength in higher playing levels.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>--verbose</option></term>
+<listitem>
+<para>
+Print internal information about the move generation and other debugging
+information to standard error.
+</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsection>
+
+<refsection>
+<title>Standard Qt Options</title>
+<para>
+Additionally, any options supported by Qt applications can be used,
+such as:
+</para>
+<variablelist>
+<varlistentry>
+<term><option>-display</option> <replaceable>d</replaceable></term>
+<listitem>
+<para>
+Switches displays on X11.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>-geometry</option> <replaceable>g</replaceable></term>
+<listitem>
+<para>
+Window geometry using the X11 syntax.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>-style</option> <replaceable>s</replaceable></term>
+<listitem>
+<para>
+Set the style for the GUI elements of QQuickControls 2. If no style is
+chosen, the default style is Default if option <option>--mobile</option>
+is set and Fusion otherwise.
+</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</refsection>
+
+<refsection>
+<title>See Also</title>
+<para>
+<command>pentobi-thumbnailer</command>
+</para>
+</refsection>
+
+</refentry>
+</article>
