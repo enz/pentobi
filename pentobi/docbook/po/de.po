@@ -5,10 +5,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2019-02-08 17:13+0100\n"
-"PO-Revision-Date: 2019-02-04 21:10+0000\n"
+"PO-Revision-Date: 2019-02-08 20:03+0000\n"
 "Last-Translator: Markus Enzenberger <markus.enzenberger@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/pentobi/pentobi-"
-"manual/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/pentobi/"
+"pentobi-manual/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -890,7 +890,7 @@ msgstr "Navigations-Buttons in der Werkzeugleiste"
 #. (itstool) path: varlistentry/term
 #: index.docbook:573
 msgid "<guibutton>Beginning</guibutton>"
-msgstr ""
+msgstr "<guibutton>Anfang</guibutton>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:575
@@ -900,7 +900,7 @@ msgstr "Geht zum Anfang des Spiels."
 #. (itstool) path: varlistentry/term
 #: index.docbook:581
 msgid "<guibutton>Backward 10</guibutton>"
-msgstr ""
+msgstr "<guibutton>Zurück 10</guibutton>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:583
@@ -914,7 +914,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:590
 msgid "<guibutton>Backward</guibutton>"
-msgstr ""
+msgstr "<guibutton>Zurück</guibutton>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:592
@@ -928,7 +928,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:599
 msgid "<guibutton>Forward</guibutton>"
-msgstr ""
+msgstr "<guibutton>Vorwärts</guibutton>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:601
@@ -947,7 +947,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:610
 msgid "<guibutton>Forward 10</guibutton>"
-msgstr ""
+msgstr "<guibutton>Vorwärts 10</guibutton>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:612
@@ -982,7 +982,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:631
 msgid "<guibutton>Next Variation</guibutton>"
-msgstr ""
+msgstr "<guibutton>Nächste Variante</guibutton>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:633
@@ -996,7 +996,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:640
 msgid "<guibutton>Previous Variation</guibutton>"
-msgstr ""
+msgstr "<guibutton>Vorherige Variante</guibutton>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:642
@@ -1025,7 +1025,7 @@ msgstr "Beginnt ein neues Spiel."
 #. (itstool) path: varlistentry/term
 #: index.docbook:663
 msgid "<guimenuitem>Rated Game</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Gewertetes Spiel</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:665
@@ -1038,7 +1038,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:671
 msgid "<guimenuitem>Game Variant</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Spielvariante</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:673
@@ -1049,7 +1049,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:678
 msgid "<guimenuitem>Game Info</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Spielinformation</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:680
@@ -1064,7 +1064,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:686
 msgid "<guimenuitem>Undo Move</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Zug rückgängig</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:688
@@ -1083,7 +1083,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:698
 msgid "<guimenuitem>Find Move</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Zug finden</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:700
@@ -1098,7 +1098,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:707
 msgid "<guimenuitem>Open</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Öffnen</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:709
@@ -1121,7 +1121,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:719
 msgid "<guimenu>Open Recent</guimenu>"
-msgstr ""
+msgstr "<guimenu>Zuletzt benutzt</guimenu>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:721
@@ -1131,7 +1131,7 @@ msgstr "Lädt ein kürzlich benutztes Spiel."
 #. (itstool) path: varlistentry/term
 #: index.docbook:727
 msgid "<guimenuitem>Open Clipboard</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Zwischenablage öffnen</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:729
@@ -1145,7 +1145,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:736
 msgid "<guimenuitem>Save</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Speichern</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:738
@@ -1155,7 +1155,7 @@ msgstr "Speichert das gegenwärtige Spiel."
 #. (itstool) path: varlistentry/term
 #: index.docbook:744
 msgid "<guimenuitem>Save As</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Speichern unter</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:746
@@ -1198,7 +1198,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:772
 msgid "<guimenuitem>Quit</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Beenden</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:774
@@ -1213,7 +1213,7 @@ msgstr "<guimenu>Gehe-zu</guimenu>-Menü"
 #. (itstool) path: varlistentry/term
 #: index.docbook:785
 msgid "<guimenuitem>Move Number</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Zugnummer</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:787
@@ -1224,7 +1224,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:793
 msgid "<guimenuitem>Main Variation</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Hauptvariante</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:795
@@ -1238,7 +1238,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:802
 msgid "<guimenuitem>Beginning of Branch</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Verzweigungsanfang</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:804
@@ -1252,7 +1252,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:811
 msgid "<guimenuitem>Next Comment</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Nächster Kommentar</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:813
@@ -1274,7 +1274,7 @@ msgstr "<guimenu>Bearbeiten</guimenu>-Menü"
 #. (itstool) path: varlistentry/term
 #: index.docbook:826
 msgid "<guimenuitem>Annotation</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Annotierung</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:828
@@ -1291,7 +1291,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:836
 msgid "<guimenuitem>Make Main Variation</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Zu Hauptvariante machen</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:838
@@ -1307,7 +1307,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:846
 msgid "<guimenuitem>Variation Up</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Variante nach oben</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:848
@@ -1323,7 +1323,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:857
 msgid "<guimenuitem>Variation Down</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Variante nach unten</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:859
@@ -1339,7 +1339,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:868
 msgid "<guimenuitem>Delete Variations</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Varianten löschen</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:870
@@ -1356,7 +1356,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:878
 msgid "<guimenuitem>Truncate</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Abschneiden</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:880
@@ -1370,7 +1370,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:887
 msgid "<guimenuitem>Truncate Children</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Kindknoten abschneiden</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:889
@@ -1384,7 +1384,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:896
 msgid "<guimenuitem>Keep Position</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Brettstellung behalten</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:898
@@ -1399,7 +1399,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:905
 msgid "<guimenuitem>Keep Subtree</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Teilbaum behalten</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:907
@@ -1413,7 +1413,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:914
 msgid "<guimenuitem>Setup Mode</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Stellungsaufbau</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:916
@@ -1439,7 +1439,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:928
 msgid "<guimenuitem>Next Color</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Nächste Farbe</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:930
@@ -1461,12 +1461,12 @@ msgstr "<guimenu>Ansicht</guimenu>-Menü"
 #. (itstool) path: varlistentry/term
 #: index.docbook:942
 msgid "<guimenuitem>Appearance</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Erscheinungsbild</guimenuitem>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:947
 msgid "<guilabel>Coordinates</guilabel>"
-msgstr ""
+msgstr "<guilabel>Koordinaten</guilabel>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:949
@@ -1482,7 +1482,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:957
 msgid "<guilabel>Show variations</guilabel>"
-msgstr ""
+msgstr "<guilabel>Varianten zeigen</guilabel>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:959
@@ -1499,7 +1499,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:967
 msgid "<guilabel>Move number</guilabel>"
-msgstr ""
+msgstr "<guilabel>Zugnummer</guilabel>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:969
@@ -1514,7 +1514,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:976
 msgid "<guilabel>Animations</guilabel>"
-msgstr ""
+msgstr "<guilabel>Animationen</guilabel>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:978
@@ -1527,7 +1527,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:984
 msgid "<guilabel>Color theme</guilabel>"
-msgstr ""
+msgstr "<guilabel>Farbthema</guilabel>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:986
@@ -1537,7 +1537,7 @@ msgstr "Ändert die Farben des Fensters, des Spielbretts und der Spielsteine."
 #. (itstool) path: varlistentry/term
 #: index.docbook:992
 msgid "<guilabel>Move marking</guilabel>"
-msgstr ""
+msgstr "<guilabel>Zugmarkierung</guilabel>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:994
@@ -1553,7 +1553,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1002
 msgid "<guilabel>Show comment</guilabel>"
-msgstr ""
+msgstr "<guilabel>Kommentar zeigen</guilabel>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1004
@@ -1570,7 +1570,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1016
 msgid "<guimenuitem>Comment</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Kommentar</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1018
@@ -1582,7 +1582,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1024
 msgid "<guimenuitem>Fullscreen</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Vollbild</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1026
@@ -1602,7 +1602,7 @@ msgstr "<guimenu>Computer</guimenu>-Menü"
 #. (itstool) path: varlistentry/term
 #: index.docbook:1038
 msgid "<guimenuitem>Settings</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Einstellungen</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1040
@@ -1618,7 +1618,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1048
 msgid "<guimenuitem>Play</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Spielen</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1050
@@ -1637,7 +1637,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1059
 msgid "<guimenuitem>Play Move</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Zug spielen</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1061
@@ -1651,7 +1651,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1068
 msgid "<guimenuitem>Stop</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Stopp</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1070
@@ -1670,7 +1670,7 @@ msgstr "<guimenu>Extras</guimenu>-Menü"
 #. (itstool) path: varlistentry/term
 #: index.docbook:1082
 msgid "<guimenuitem>Rating</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Wertung</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1084
@@ -1684,7 +1684,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1091
 msgid "<guimenuitem>Clear Rating</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Wertung löschen</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1093
@@ -1697,7 +1697,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1099
 msgid "<guimenuitem>Analyze Game</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Spiel analysieren</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1101
@@ -1707,7 +1707,7 @@ msgstr "Führt eine <link linkend=\"analysis\">Spielanalyse</link> durch."
 #. (itstool) path: varlistentry/term
 #: index.docbook:1107
 msgid "<guimenuitem>Clear Analysis</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Analyse löschen</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1109
@@ -1722,7 +1722,7 @@ msgstr "<guimenu>Hilfe</guimenu>-Menü"
 #. (itstool) path: varlistentry/term
 #: index.docbook:1120
 msgid "<guimenuitem>Pentobi Help</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Pentobi-Hilfe</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1122
@@ -1732,7 +1732,7 @@ msgstr "Zeigt ein Fenster mit dem Pentobi-Benutzerhandbuch."
 #. (itstool) path: varlistentry/term
 #: index.docbook:1128
 msgid "<guimenuitem>About Pentobi</guimenuitem>"
-msgstr ""
+msgstr "<guimenuitem>Über Pentobi</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1130
@@ -1762,7 +1762,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1149
 msgid "<keysym>Plus</keysym>"
-msgstr ""
+msgstr "<keysym>Plus</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1151
@@ -1772,7 +1772,7 @@ msgstr "Nächsten Spielstein auswählen"
 #. (itstool) path: varlistentry/term
 #: index.docbook:1157
 msgid "<keysym>Minus</keysym>"
-msgstr ""
+msgstr "<keysym>Minus</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1159
@@ -1782,7 +1782,7 @@ msgstr "Vorherigen Spielstein auswählen"
 #. (itstool) path: varlistentry/term
 #: index.docbook:1165
 msgid "<keysym>Escape</keysym>"
-msgstr ""
+msgstr "<keysym>Escape</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1167
@@ -1792,12 +1792,12 @@ msgstr "Spielsteinauswahl löschen"
 #. (itstool) path: varlistentry/term
 #: index.docbook:1173
 msgid "<keysym>Left</keysym>"
-msgstr ""
+msgstr "<keysym>Links</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1174
 msgid "<keysym>Right</keysym>"
-msgstr ""
+msgstr "<keysym>Rechts</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1175
@@ -1807,27 +1807,27 @@ msgstr "<keysym>Oben</keysym>"
 #. (itstool) path: varlistentry/term
 #: index.docbook:1176
 msgid "<keysym>Down</keysym>"
-msgstr ""
+msgstr "<keysym>Unten</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1177
 msgid "<keysym>Shift+Left</keysym>"
-msgstr ""
+msgstr "<keysym>Umschalt+Links</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1178
 msgid "<keysym>Shift+Right</keysym>"
-msgstr ""
+msgstr "<keysym>Umschalt+Rechts</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1179
 msgid "<keysym>Shift+Up</keysym>"
-msgstr ""
+msgstr "<keysym>Umschalt+Oben</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1180
 msgid "<keysym>Shift+Down</keysym>"
-msgstr ""
+msgstr "<keysym>Umschalt+Unten</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1182
@@ -1839,7 +1839,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1188
 msgid "<keysym>Space</keysym>"
-msgstr ""
+msgstr "<keysym>Leertaste</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1190
@@ -1849,7 +1849,7 @@ msgstr "Nächste Ausrichtung des ausgewählten Spielsteins"
 #. (itstool) path: varlistentry/term
 #: index.docbook:1196
 msgid "<keysym>Shift+Space</keysym>"
-msgstr ""
+msgstr "<keysym>Umschalt+Leertaste</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1198
@@ -1859,7 +1859,7 @@ msgstr "Vorherige Ausrichtung des ausgewählten Spielsteins"
 #. (itstool) path: varlistentry/term
 #: index.docbook:1204
 msgid "<keysym>Enter</keysym>"
-msgstr ""
+msgstr "<keysym>Enter</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1206
@@ -1995,42 +1995,42 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1245
 msgid "<keysym>Ctrl+Home</keysym>"
-msgstr ""
+msgstr "<keysym>Strg+Pos1</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1246
 msgid "<keysym>Ctrl+Shift+Left</keysym>"
-msgstr ""
+msgstr "<keysym>Strg+Umschalt+Links</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1247
 msgid "<keysym>Ctrl+Left</keysym>"
-msgstr ""
+msgstr "<keysym>Strg+Links</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1248
 msgid "<keysym>Ctrl+Right</keysym>"
-msgstr ""
+msgstr "<keysym>Strg+Rechts</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1249
 msgid "<keysym>Ctrl+Shift+Right</keysym>"
-msgstr ""
+msgstr "<keysym>Strg+Umschalt+Rechts</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1250
 msgid "<keysym>Ctrl+End</keysym>"
-msgstr ""
+msgstr "<keysym>Strg+Ende</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1251
 msgid "<keysym>Ctrl+Up</keysym>"
-msgstr ""
+msgstr "<keysym>Strg+Oben</keysym>"
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1252
 msgid "<keysym>Ctrl+Down</keysym>"
-msgstr ""
+msgstr "<keysym>Strg+Unten</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1254
@@ -2044,7 +2044,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1261
 msgid "<keysym>Ctrl+Shift+H</keysym>"
-msgstr ""
+msgstr "<keysym>Strg+Umschalt+H</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1263
@@ -2058,7 +2058,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: index.docbook:1270
 msgid "<keysym>Ctrl+T</keysym>"
-msgstr ""
+msgstr "<keysym>Strg+T</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1272
@@ -2068,7 +2068,7 @@ msgstr "Ansicht zwischen Kommentar und Spielanalyse umschalten."
 #. (itstool) path: varlistentry/term
 #: index.docbook:1278
 msgid "<keysym>Alt+M</keysym>"
-msgstr ""
+msgstr "<keysym>Alt+M</keysym>"
 
 #. (itstool) path: listitem/para
 #: index.docbook:1280
@@ -2083,13 +2083,14 @@ msgstr "Systemvoraussetzungen"
 #. (itstool) path: chapter/para
 #: index.docbook:1290
 msgid "Minimum: 1 GB RAM, 1 GHz CPU"
-msgstr ""
+msgstr "Minimum: 1 GB RAM, 1 GHz CPU"
 
 #. (itstool) path: chapter/para
 #: index.docbook:1293
 msgid ""
 "Recommended for playing level 9: 4 GB RAM, 2.5 GHz dual-core or faster CPU"
 msgstr ""
+"Empfohlen für Spielstufe 9: 4 GB RAM, 2,5 GHz Dual-Core- oder schnellere CPU"
 
 #. (itstool) path: chapter/para
 #: index.docbook:1297
