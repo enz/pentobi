@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-02-08 15:44+0000\n"
+"POT-Creation-Date: 2019-02-08 16:48+0100\n"
 "PO-Revision-Date: 2019-02-04 21:10+0000\n"
 "Last-Translator: Markus Enzenberger <markus.enzenberger@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/pentobi/pentobi-"
@@ -16,21 +16,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 3.5-dev\n"
 
-#. Tag: title
+#. (itstool) path: book/title
 #: index.docbook:5
-#, no-c-format
 msgid "Pentobi"
 msgstr "Pentobi"
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:8
-#, no-c-format
 msgid "Overview"
 msgstr "Übersicht"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:9
-#, no-c-format
 msgid ""
 "Pentobi is a computer opponent for the board game Blokus. In this game, four "
 "players place pieces similar to the pieces of the computer game Tetris on a "
@@ -44,15 +41,13 @@ msgstr ""
 "die Spielvarianten für zwei oder drei Spieler und die Spielvarianten Duo, "
 "Trigon, Junior, Nexos, GembloQ und Callisto."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:18
-#, no-c-format
 msgid "Classic Rules"
 msgstr "Klassische Regeln"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:19
-#, no-c-format
 msgid ""
 "There are four players, Blue, Yellow, Red and Green, and a board consisting "
 "of 20×20 squares. Each player has a set of 21 pieces of his color shaped "
@@ -65,15 +60,23 @@ msgstr ""
 "Figur, die aus einer Anzahl von Quadraten besteht, die entlang der Kanten "
 "verbunden sind."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:28
+msgctxt "_"
+msgid "external ref='../../C/pentobi/pieces.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:30 index.docbook:290 index.docbook:354
-#, no-c-format
 msgid "The 21 pieces"
 msgstr "Die 21 Spielsteine"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:33
-#, no-c-format
 msgid ""
 "The players alternate in placing one of their pieces on the board. The first "
 "piece of a player must cover its starting square. The starting squares are "
@@ -83,15 +86,23 @@ msgstr ""
 "Spielstein eines Spielers muss sein Startfeld abdecken. Die Startfelder "
 "befinden sich in den Ecken des Bretts."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:41
+msgctxt "_"
+msgid "external ref='../../C/pentobi/board_classic.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:44
-#, no-c-format
 msgid "The 20×20 board with the starting squares marked with colored dots"
 msgstr "Das 20×20-Brett mit den durch farbige Punkte markierten Startfeldern"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:50
-#, no-c-format
 msgid ""
 "The following pieces must be placed on empty squares such that the new piece "
 "touches at least one piece of its own color corner-to-corner but does not "
@@ -103,15 +114,23 @@ msgstr ""
 "Ecke berührt, aber keinen Spielstein der eigenen Farbe entlang der Kanten. "
 "Der neue Spielstein darf die Kanten von gegnerischen Spielsteinen berühren."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:59
+msgctxt "_"
+msgid "external ref='../../C/pentobi/position_classic.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:61 index.docbook:261 index.docbook:321 index.docbook:384
-#, no-c-format
 msgid "An example position after a few moves"
 msgstr "Eine Beispielstellung nach ein paar Zügen"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:64
-#, no-c-format
 msgid ""
 "When the player of a color cannot place any more pieces, the player passes "
 "and the next color continues. When none of the players can place any more "
@@ -130,15 +149,13 @@ msgstr ""
 "von 5 Punkten, wenn die Farbe alle Spielsteine setzen konnte und der zuletzt "
 "gespielte Spielstein der Spielstein war, der aus einem Quadrat besteht."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:74 index.docbook:179 index.docbook:269
-#, no-c-format
 msgid "Rules for Two Players"
 msgstr "Regeln für zwei Spieler"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:75
-#, no-c-format
 msgid ""
 "The game can be played with two players. The first player plays both Blue "
 "and Red, the second player Yellow and Green. The points of both colors "
@@ -148,15 +165,13 @@ msgstr ""
 "Blau und Rot, der zweite Spieler Gelb und Grün. Die Punkte beider Farben "
 "eines Spielers werden addiert."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:82 index.docbook:186
-#, no-c-format
 msgid "Rules for Three Players"
 msgstr "Regeln für drei Spieler"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:83
-#, no-c-format
 msgid ""
 "The game can also be played with three players. The players take turns "
 "playing the fourth color (Green). At the end of the game, the score of Green "
@@ -166,15 +181,13 @@ msgstr ""
 "sich beim Spielen der vierten Farbe (Grün) ab. Am Spielende wird die "
 "Punktzahl von Grün ignoriert."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:90
-#, no-c-format
 msgid "Colorless Starting Points"
 msgstr "Farblose Startfelder"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:91
-#, no-c-format
 msgid ""
 "Note that the original Blokus Classic rules used colorless starting points. "
 "This means that each color may freely choose, which of the remaining "
@@ -190,15 +203,13 @@ msgstr ""
 "Startfeldern, weil diese Variante auf dem Blokus-Online-Server auf blokus."
 "com und in den meisten bisherigen Blokus-Turnieren verwendet wurde."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:103
-#, no-c-format
 msgid "Duo Rules"
 msgstr "Duo-Regeln"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:104
-#, no-c-format
 msgid ""
 "The game variant Duo is another game variant for two players. The game is "
 "played on a smaller board with 14×14 squares. There is only one color per "
@@ -212,9 +223,18 @@ msgstr ""
 "nicht in den Ecken, sondern auf dem Feld mit den Koordinaten (5,10) für Lila "
 "und auf (10,5) für Orange."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:113
+msgctxt "_"
+msgid "external ref='../../C/pentobi/board_duo.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:115
-#, no-c-format
 msgid ""
 "The 14×14 board used in game variant Duo with the starting squares marked "
 "with colored dots"
@@ -222,21 +242,28 @@ msgstr ""
 "Das 14×14-Brett, das in der Spielvariante Duo benutzt wird, mit den durch "
 "farbige Punkte markierten Startfeldern"
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:125
+msgctxt "_"
+msgid "external ref='../../C/pentobi/position_duo.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:127
-#, no-c-format
 msgid "An example position in game variant Duo"
 msgstr "Eine Beispielstellung in der Spielvariante Duo"
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:133
-#, no-c-format
 msgid "Trigon Rules"
 msgstr "Trigon-Regeln"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:134
-#, no-c-format
 msgid ""
 "Trigon is another game variant. The rules a similar to game variant Classic "
 "but it uses a differently shaped board and a different set of pieces. Each "
@@ -251,15 +278,23 @@ msgstr ""
 "die aus einer Anzahl von gleichseitigen Dreiecken besteht, die entlang der "
 "Kanten verbunden sind."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:144
+msgctxt "_"
+msgid "external ref='../../C/pentobi/pieces_trigon.jpg' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:146
-#, no-c-format
 msgid "The 22 Trigon pieces"
 msgstr "Die 22 Trigon-Spielsteine"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:149
-#, no-c-format
 msgid ""
 "The board also consists of triangles and is shaped like a hexagon with an "
 "edge size of nine triangles."
@@ -267,15 +302,23 @@ msgstr ""
 "Das Spielbrett besteht ebenfalls aus Dreiecken und hat die Form eines "
 "Sechsecks mit jeweils neun Dreiecken pro Kante."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:156
+msgctxt "_"
+msgid "external ref='../../C/pentobi/board_trigon.jpg' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:159
-#, no-c-format
 msgid "The board with the starting fields marked with gray dots"
 msgstr "Das Brett mit den durch graue Punkte markierten Startfeldern"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:163
-#, no-c-format
 msgid ""
 "There are six starting points on the board, each located in the middle of "
 "the fourth row away from each edge. The starting points are not colored and "
@@ -287,15 +330,23 @@ msgstr ""
 "Spieler dürfen das Startfeld für den ersten Spielstein einer Farbe frei "
 "wählen."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:171
+msgctxt "_"
+msgid "external ref='../../C/pentobi/position_trigon.jpg' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:173
-#, no-c-format
 msgid "An example position in game variant Trigon"
 msgstr "Eine Beispielstellung in der Spielvariante Trigon"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:180
-#, no-c-format
 msgid ""
 "Like game variant Classic, Trigon can be played with two players by having "
 "one player play Blue and Red and the other player Yellow and Green."
@@ -303,9 +354,8 @@ msgstr ""
 "Wie die Spielvariante Klassisch kann Trigon mit zwei Spielern gespielt "
 "werden, indem ein Spieler Blau und Rot und der andere Gelb und Grün spielt."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:187
-#, no-c-format
 msgid ""
 "Trigon can be played with three players using the same rules as for the four-"
 "player variant. The three-player variant is played on a smaller board with "
@@ -318,15 +368,13 @@ msgstr ""
 "Dreiecken gespielt. Die Startfelder sind in der Mitte der dritten Reihe von "
 "jeder Kante aus gesehen."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:197
-#, no-c-format
 msgid "Junior Rules"
 msgstr "Junior-Regeln"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:198
-#, no-c-format
 msgid ""
 "Junior is a simplified game variant for two players. It is played on the "
 "same 14×14 board as game variant Duo but uses only a subset of the "
@@ -338,27 +386,33 @@ msgstr ""
 "eine Teilmenge der Polyominos bis zur Größe fünf und die Spieler bekommen "
 "zwei von jedem dieser Polyominos."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:206
+msgctxt "_"
+msgid "external ref='../../C/pentobi/pieces_junior.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:208
-#, no-c-format
 msgid "The 24 pieces used in Junior"
 msgstr "Die 24 Spielsteine, die in Junior benutzt werden"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:211
-#, no-c-format
 msgid "Bonus points are not used in Junior."
 msgstr "Bonuspunkte werden in Junior nicht benutzt."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:217
-#, no-c-format
 msgid "Nexos Rules"
 msgstr "Nexos-Regeln"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:218
-#, no-c-format
 msgid ""
 "Nexos is a board game similar to Blokus. The board is a rectangular 13×13 "
 "line grid. Each color uses 24 pieces that consist of up to four connected "
@@ -368,15 +422,23 @@ msgstr ""
 "rechtwinkliges 13×13-Liniengitter. Jede Farbe benutzt 24 Spielsteine, die "
 "aus bis zu vier verbundenen Liniensegmenten bestehen."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:226
+msgctxt "_"
+msgid "external ref='../../C/pentobi/pieces_nexos.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:228
-#, no-c-format
 msgid "The 24 pieces"
 msgstr "Die 24 Spielsteine"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:231
-#, no-c-format
 msgid ""
 "Each color has a starting intersection on the intersection of the third "
 "lines close to a corner. The first piece must touch the starting "
@@ -385,18 +447,26 @@ msgstr ""
 "Jede Farbe hat einen Startkreuzungspunkt auf der Kreuzung der dritten Linien "
 "nahe einer Ecke. Der erste Spielstein muss den Startkreuzungspunkt berühren."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:238
+msgctxt "_"
+msgid "external ref='../../C/pentobi/board_nexos.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:241
-#, no-c-format
 msgid ""
 "The board for Nexos with the starting intersections marked with colored dots"
 msgstr ""
 "Das Brett für Nexos mit den durch farbige Punkte markierten "
 "Startkreuzungspunkten"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:247
-#, no-c-format
 msgid ""
 "The following pieces must be placed on empty line segments such that a "
 "segment of the new piece touches an intersection that is already touched by "
@@ -416,9 +486,18 @@ msgstr ""
 "Kreuzungspunkt bedecken können ohne sich zu überlappen, während gerade "
 "Verbindungen das nicht können."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:259
+msgctxt "_"
+msgid "external ref='../../C/pentobi/position_nexos.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: chapter/para
 #: index.docbook:264
-#, no-c-format
 msgid ""
 "The score of a color is the number of line segments on the board covered by "
 "the color, plus a bonus of 10 points if the color could place all of its "
@@ -428,9 +507,8 @@ msgstr ""
 "die von der Farbe bedeckt sind, plus ein Bonus von 10 Punkten, wenn die "
 "Farbe alle ihre Spielsteine setzen konnte."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:270
-#, no-c-format
 msgid ""
 "Like Blokus, Nexos can be played with two players by having one player play "
 "Blue and Red and the other player Yellow and Green."
@@ -438,15 +516,13 @@ msgstr ""
 "Wie Blokus kann Nexos von zwei Spielern gespielt werden, indem ein Spieler "
 "Rot und Blau, und der andere Spieler Gelb und Grün spielt."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:278
-#, no-c-format
 msgid "GembloQ Rules"
 msgstr "GembloQ-Regeln"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:279
-#, no-c-format
 msgid ""
 "GembloQ is a board game similar to Blokus. The squares of the board are "
 "rotated by 45 degrees. The board has a diagonal size of 27 squares. In "
@@ -458,9 +534,18 @@ msgstr ""
 "von 27 Quadraten. Zusätzlich zu den vollen Quadraten enthalten die Ränder "
 "noch halbe Quadrate, so dass die Ränder gerade Linien sind."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:288
+msgctxt "_"
+msgid "external ref='../../C/pentobi/pieces_gembloq.jpg' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: chapter/para
 #: index.docbook:293
-#, no-c-format
 msgid ""
 "Each player has a set of 21 pieces, which include a subset of the pieces "
 "used in Blokus, but also some pieces that contain a half square."
@@ -469,16 +554,24 @@ msgstr ""
 "Blokus benutzten Spielsteine ist, jedoch zusätzlich einige Spielsteine, die "
 "ein halbes Quadrat beinhalten."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:300
+msgctxt "_"
+msgid "external ref='../../C/pentobi/board_gembloq.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:303
-#, no-c-format
 msgid "The board for GembloQ with the starting points marked with colored dots"
 msgstr ""
 "Das Brett für GembloQ mit den durch farbige Punkte markierten Startfeldern"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:309
-#, no-c-format
 msgid ""
 "As in Blokus, the starting squares are in the corners, the first move must "
 "fully cover the starting square of the color and subsequent moves must touch "
@@ -492,9 +585,18 @@ msgstr ""
 "Kanten. Züge sind auch legal, wenn eine Spitze eines halben Quadrats die "
 "Kante eines Spielsteins der selben Farbe berührt."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:319
+msgctxt "_"
+msgid "external ref='../../C/pentobi/position_gembloq.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: chapter/para
 #: index.docbook:324
-#, no-c-format
 msgid ""
 "Scoring is done like in Blokus, half squares count 0.5 points. Bonus points "
 "are not used. Tie breaking by assigning additional values to the pieces, as "
@@ -507,15 +609,13 @@ msgstr ""
 "Spielsteinen, wie in den offiziellen GembloQ-Regeln beschrieben, wird von "
 "Pentobi gegenwärtig nicht unterstützt."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:330 index.docbook:393
-#, no-c-format
 msgid "Rules for Two and Three Players"
 msgstr "Regeln für zwei und drei Spieler"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:331
-#, no-c-format
 msgid ""
 "The game variants for two and three players use smaller boards and different "
 "starting point locations. In addition to the standard two-player variant, "
@@ -527,15 +627,13 @@ msgstr ""
 "für zwei Spieler unterstützt Pentobi auch eine Spielvariante für zwei "
 "Spieler wie in Blokus, in der jeder Spieler zwei Farben spielt."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:341
-#, no-c-format
 msgid "Callisto Rules"
 msgstr "Callisto-Regeln"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:342
-#, no-c-format
 msgid ""
 "Callisto is a another board game similar to Blokus. The board is derived "
 "from the classic 20×20 Blokus board by removing the corners such that an "
@@ -550,9 +648,18 @@ msgstr ""
 "beinhalten drei 1×1-Spielsteine pro Spieler, die eine besondere Rolle "
 "spielen."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:352
+msgctxt "_"
+msgid "external ref='../../C/pentobi/pieces_callisto.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: chapter/para
 #: index.docbook:357
-#, no-c-format
 msgid ""
 "The 1×1 pieces may be placed anywhere on the board apart from the center of "
 "the board. The center consists of an octagon with width six and top edge "
@@ -565,15 +672,23 @@ msgstr ""
 "Spielers müssen einen 1×1-Spielstein benutzen, der dritte 1×1-Spielstein "
 "kann jederzeit später gespielt werden."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:366
+msgctxt "_"
+msgid "external ref='../../C/pentobi/board_callisto.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:369
-#, no-c-format
 msgid "The board with the center having a darker color"
 msgstr "Das Brett mit einer dunkleren Farbe im Zentrum"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:375
-#, no-c-format
 msgid ""
 "All larger pieces may be placed anywhere on the board but must touch an "
 "existing piece of the same color edge-to-edge."
@@ -582,9 +697,18 @@ msgstr ""
 "müssen aber einen existierenden Spielstein der selben Farbe Kante an Kante "
 "berühren."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:382
+msgctxt "_"
+msgid "external ref='../../C/pentobi/position_callisto.png' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: chapter/para
 #: index.docbook:387
-#, no-c-format
 msgid ""
 "The score of a color is the number of squares on the board occupied by the "
 "color not counting 1×1 pieces. Bonus points are not used. Unlike in Blokus, "
@@ -595,9 +719,8 @@ msgstr ""
 "Bonuspunkte werden nicht verwendet. Anders als in Blokus werden "
 "Unentschieden zugunsten des Spielers aufgelöst, der später begonnen hat."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:394
-#, no-c-format
 msgid ""
 "The game can be played with less than four players by using a smaller board. "
 "For three players, the board is an octagon with width 20 and top edge size "
@@ -614,21 +737,18 @@ msgstr ""
 "unterstützt Pentobi auch eine Spielvariante für zwei Spieler wie in Blokus, "
 "in der jeder Spieler zwei Farben spielt."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:406
-#, no-c-format
 msgid "How to Use Pentobi"
 msgstr "Wie Sie Pentobi benutzen"
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:408
-#, no-c-format
 msgid "Board"
 msgstr "Spielbrett"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:409
-#, no-c-format
 msgid ""
 "Pieces can be selected by clicking on one of the unplayed pieces or by using "
 "<link linkend=\"shortcuts\">shortcut keys</link>. Pieces can be played by "
@@ -642,9 +762,8 @@ msgstr ""
 "legalen Zug entspricht, und dann die linke Maustaste oder die Eingabetaste "
 "gedrückt wird."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:415
-#, no-c-format
 msgid ""
 "Played pieces on the board can have numbers on them that indicate the move "
 "number in which the piece was played. A letter after the move number "
@@ -655,9 +774,8 @@ msgstr ""
 "Buchstabe nach der Zugnummer zeigt an, dass zu diesem Zug eine Variante "
 "existiert (siehe unten)."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:420
-#, no-c-format
 msgid ""
 "The score display shows the current points for each color or player. The "
 "points are the sum of on-board points and bonus points. Points are "
@@ -670,15 +788,13 @@ msgstr ""
 "die Farbe keine Spielsteine mehr spielen kann. Eine kleiner Stern zeigt an, "
 "dass die Punkte einen Bonus beinhalten."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:428
-#, no-c-format
 msgid "Playing Against the Computer"
 msgstr "Gegen den Computer spielen"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:429
-#, no-c-format
 msgid ""
 "The board can be used for creating game records of games played by humans or "
 "for playing games against the computer. In games against the computer, the "
@@ -688,9 +804,8 @@ msgstr ""
 "gespielt werden, oder um Spiele gegen den Computer zu spielen. In Spielen "
 "gegen den Computer kann der Computer jede der Farben (oder mehrere) spielen."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:434
-#, no-c-format
 msgid ""
 "When you start a new game, the human will play the color(s) of the first "
 "player by default and the computer all other colors. To change this, use "
@@ -703,9 +818,8 @@ msgstr ""
 "dem Menü <guimenu>Computer</guimenu> oder der Werkzeugleiste und wählen Sie "
 "die Farben, die der Computer spielen soll."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:440
-#, no-c-format
 msgid ""
 "The exception is that the computer will play no color by default if it "
 "played no color in the previous game. This prevents the computer from "
@@ -720,9 +834,8 @@ msgstr ""
 "oder für ähnliche Aufgaben benutzen will. Nach dem Laden eines Spiels ist "
 "ebenfalls voreingestellt, dass der Computer keine Farbe spielt."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:447
-#, no-c-format
 msgid ""
 "Selecting <guimenuitem>Play</guimenuitem> from the <guimenu>Computer</"
 "guimenu> menu or the toolbar always makes the computer play a move for the "
@@ -736,15 +849,13 @@ msgstr ""
 "bisher nicht gespielt hat, wird er außerdem im weiteren Spielverlauf diese "
 "Farbe (und nur diese Farbe) spielen."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:456
-#, no-c-format
 msgid "Move Variations and the Game Tree"
 msgstr "Zugvarianten und der Spielbaum"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:457
-#, no-c-format
 msgid ""
 "When you play a game, Pentobi will store the sequence of moves and it is "
 "always possible to go back to a previous position and play differently. If "
@@ -767,9 +878,8 @@ msgstr ""
 "Spielbaum mit den Menüpunkten des Menüs <guimenu>Gehe zu</guimenu> und den "
 "Navigations-Buttons navigieren."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:467
-#, no-c-format
 msgid ""
 "The main variation is the sequence of moves that starts at the start "
 "position and always selects the first child node in each position (e.g. by "
@@ -785,15 +895,13 @@ msgstr ""
 "machen wollen, wählen Sie <guimenuitem>Zu Hauptvariante machen</guimenuitem> "
 "aus dem Menü <guimenu>Bearbeiten</guimenu>."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:479
-#, no-c-format
 msgid "Become a Stronger Player"
 msgstr "Ein stärkerer Spieler werden"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:480
-#, no-c-format
 msgid ""
 "Pentobi has functionality that can help you to become a stronger Blokus "
 "player."
@@ -801,15 +909,13 @@ msgstr ""
 "Pentobi besitzt Funktionen, die Ihnen helfen können, ein stärkerer Blokus-"
 "Spieler zu werden."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:484
-#, no-c-format
 msgid "Game Analysis"
 msgstr "Spielanalyse"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:485
-#, no-c-format
 msgid ""
 "A game can be analyzed by selecting <guimenuitem>Analyze Game</guimenuitem> "
 "from the <guimenu>Tools</guimenu> menu. This will make the computer player "
@@ -822,15 +928,23 @@ msgstr ""
 "Ergebnis wird in einem Fenster mit einem Diagramm farbiger Punkte "
 "dargestellt."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:494
+msgctxt "_"
+msgid "external ref='../../C/pentobi/analysis.jpg' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:497
-#, no-c-format
 msgid "Analysis of a game of variant Classic (2 players)"
 msgstr "Analyse eines Spiels der Spielvariante Klassisch (2 Spieler)"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:501
-#, no-c-format
 msgid ""
 "Each dot represents a game position in which the color of the dot was to "
 "play. The dots are ordered horizontally by move number. The vertical axis "
@@ -842,9 +956,8 @@ msgstr ""
 "Achse repräsentiert die Wahrscheinlichkeit, dass die Farbe das Spiel "
 "gewinnt. Mausklicks im Diagramm gehen zur jeweiligen Stellung."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:507
-#, no-c-format
 msgid ""
 "The position values are only estimates and the computer will sometimes "
 "evaluate positions incorrectly. But sudden drops in the value can help you "
@@ -861,15 +974,13 @@ msgstr ""
 "indem Sie <guimenuitem>Einzelnen Zug spielen</guimenuitem> aus dem Menü "
 "<guimenu>Computer</guimenu> auswählen."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:517
-#, no-c-format
 msgid "Determine Your Rating"
 msgstr "Ihre Wertung ermitteln"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:518
-#, no-c-format
 msgid ""
 "You can track your progress by playing rated games against the computer. The "
 "game results are used to determine your current rating. The rating is a "
@@ -880,9 +991,8 @@ msgstr ""
 "Wertung zu ermitteln. Die Wertung ist eine Zahl, die Ihre Spielstärke "
 "darstellt."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:523
-#, no-c-format
 msgid ""
 "A rated game is started with <guimenuitem>Rated Game</guimenuitem> from the "
 "<guimenu>Game</guimenu> menu or the toolbar. If you have not played any "
@@ -898,9 +1008,8 @@ msgstr ""
 "Wertung zu bestimmen. Falls Sie Anfänger sind, belassen Sie die "
 "Anfangswertung auf 800."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:530
-#, no-c-format
 msgid ""
 "For each rated game, the computer will choose a playing level for the "
 "computer opponent according to your current rating. The color you play will "
@@ -910,9 +1019,8 @@ msgstr ""
 "Computerspieler gemäß Ihrer gegenwärtigen Wertung wählen. Die Farbe, die Sie "
 "spielen, wird in jedem Spiel zufällig ausgewählt."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:535
-#, no-c-format
 msgid ""
 "During a rated game, most of the functions not needed for playing are "
 "disabled: you cannot undo moves, navigate in the game, change the computer "
@@ -925,9 +1033,8 @@ msgstr ""
 "eine akkurate Wertung zu erhalten, sollten Sie gewertete Spiele immer bis "
 "zum Ende spielen."
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:541
-#, no-c-format
 msgid ""
 "After the game has ended, your rating will be updated depending on the game "
 "result and the computer level. For the game result, it only matters whether "
@@ -939,15 +1046,23 @@ msgstr ""
 "nur, ob Sie gewonnen oder verloren haben, oder ob das Spiel in einem "
 "Unentschieden endete. Die genaue Anzahl der Spielpunkte spielt keine Rolle."
 
-#. Tag: para
+#. (itstool) path: imageobject/imagedata
+#. This is a reference to an external file such as an image or video. When
+#. the file changes, the md5 hash will change to let you know you need to
+#. update your localized copy. The msgstr is not used at all. Set it to
+#. whatever you like once you have updated your copy of the file.
+#: index.docbook:550
+msgctxt "_"
+msgid "external ref='../../C/pentobi/rating.jpg' md5='__failed__'"
+msgstr ""
+
+#. (itstool) path: caption/para
 #: index.docbook:553
-#, no-c-format
 msgid "Window with rating graph"
 msgstr "Fenster mit Wertungsgraph"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:557
-#, no-c-format
 msgid ""
 "You can always see your current rating by selecting <guimenuitem>Rating</"
 "guimenuitem> from the <guimenu>Tools</guimenu> menu. This will open a window "
@@ -962,39 +1077,33 @@ msgstr ""
 "und können durch Öffnen eines Kontextmenüs in der Spieltabelle unter dem "
 "Graph geladen werden."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:568
-#, no-c-format
 msgid "Window Menu and Toolbar"
 msgstr "Fenstermenü und Werkzeugleiste"
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:570
-#, no-c-format
 msgid "Navigation Buttons in Toolbar"
 msgstr "Navigations-Buttons in der Werkzeugleiste"
 
-#. Tag: guibutton
+#. (itstool) path: varlistentry/term
 #: index.docbook:573
-#, no-c-format
-msgid "Beginning"
-msgstr "Anfang"
+msgid "<guibutton>Beginning</guibutton>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:575
-#, no-c-format
 msgid "Go to the beginning of the game."
 msgstr "Geht zum Anfang des Spiels."
 
-#. Tag: guibutton
+#. (itstool) path: varlistentry/term
 #: index.docbook:581
-#, no-c-format
-msgid "Backward 10"
-msgstr "Zurück 10"
+msgid "<guibutton>Backward 10</guibutton>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:583
-#, no-c-format
 msgid ""
 "Go ten moves backward in the current variation. The button supports "
 "autorepeat if pressed and held."
@@ -1002,15 +1111,13 @@ msgstr ""
 "Geht zehn Züge in der gegenwärtigen Variante zurück. Der Button unterstützt "
 "automatische Wiederholung, wenn er gedrückt gehalten wird."
 
-#. Tag: guibutton
+#. (itstool) path: varlistentry/term
 #: index.docbook:590
-#, no-c-format
-msgid "Backward"
-msgstr "Zurück"
+msgid "<guibutton>Backward</guibutton>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:592
-#, no-c-format
 msgid ""
 "Go one move backward in the current variation. The button supports "
 "autorepeat if pressed and held."
@@ -1018,15 +1125,13 @@ msgstr ""
 "Geht einen Zug in der gegenwärtigen Variante zurück. Der Button unterstützt "
 "automatische Wiederholung, wenn er gedrückt gehalten wird."
 
-#. Tag: guibutton
+#. (itstool) path: varlistentry/term
 #: index.docbook:599
-#, no-c-format
-msgid "Forward"
-msgstr "Vorwärts"
+msgid "<guibutton>Forward</guibutton>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:601
-#, no-c-format
 msgid ""
 "Go one move forward in the current variation. If the current position has "
 "several follow-up variations (i.e. the current node in the game tree has "
@@ -1039,15 +1144,13 @@ msgstr ""
 "benutzt. Der Button unterstützt automatische Wiederholung, wenn er gedrückt "
 "gehalten wird."
 
-#. Tag: guibutton
+#. (itstool) path: varlistentry/term
 #: index.docbook:610
-#, no-c-format
-msgid "Forward 10"
-msgstr "Vorwärts 10"
+msgid "<guibutton>Forward 10</guibutton>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:612
-#, no-c-format
 msgid ""
 "Go ten moves forward in the current variation. If a position has several "
 "follow-up variations (i.e. the current node in the game tree has several "
@@ -1060,15 +1163,13 @@ msgstr ""
 "benutzt. Der Button unterstützt automatische Wiederholung, wenn er gedrückt "
 "gehalten wird."
 
-#. Tag: guibutton
+#. (itstool) path: varlistentry/term
 #: index.docbook:621
-#, no-c-format
 msgid "<guibutton>End</guibutton>"
 msgstr "<guibutton>Ende</guibutton>"
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:623
-#, no-c-format
 msgid ""
 "Go to the end of the current variation. Like <guibutton>Forward</guibutton>, "
 "this also uses the first variation in positions with several follow-up "
@@ -1078,15 +1179,13 @@ msgstr ""
 "guibutton> wird auch hier jeweils die erste Variante benutzt, wenn die "
 "Brettstellung mehrere nachfolgende Varianten hat."
 
-#. Tag: guibutton
+#. (itstool) path: varlistentry/term
 #: index.docbook:631
-#, no-c-format
-msgid "Next Variation"
-msgstr "Nächste Variante"
+msgid "<guibutton>Next Variation</guibutton>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:633
-#, no-c-format
 msgid ""
 "Go to the next variation to the last move played (i.e. the next sibling node "
 "of the current node in the game tree)."
@@ -1094,15 +1193,13 @@ msgstr ""
 "Geht zur nächsten Variante zum zuletzt gespielten Zug (d. h. zum nächsten "
 "Geschwisterknoten des gegenwärtigen Knotens im Spielbaum)."
 
-#. Tag: guibutton
+#. (itstool) path: varlistentry/term
 #: index.docbook:640
-#, no-c-format
-msgid "Previous Variation"
-msgstr "Vorherige Variante"
+msgid "<guibutton>Previous Variation</guibutton>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:642
-#, no-c-format
 msgid ""
 "Go to the previous variation to the last move played (i.e. the previous "
 "sibling node of the current node in the game tree)."
@@ -1110,61 +1207,52 @@ msgstr ""
 "Geht zur vorherigen Variante zum zuletzt gespielten Zug (d. h. zum "
 "vorherigen Geschwisterknoten des gegenwärtigen Knotens im Spielbaum)."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:651
-#, no-c-format
 msgid "<guimenu>Game</guimenu> Menu"
 msgstr "<guimenu>Spiel</guimenu>-Menü"
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:654
-#, no-c-format
 msgid "<guimenuitem>New</guimenuitem>"
 msgstr "<guimenuitem>Neu</guimenuitem>"
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:657
-#, no-c-format
 msgid "Start a new game."
 msgstr "Beginnt ein neues Spiel."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:663
-#, no-c-format
-msgid "Rated Game"
-msgstr "Gewertetes Spiel"
+msgid "<guimenuitem>Rated Game</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:665
-#, no-c-format
 msgid ""
 "Start a new <link linkend=\"rating\">rated game</link> against the computer."
 msgstr ""
 "Beginnt ein neues <link linkend=\"rating\">gewertetes Spiel</link> gegen den "
 "Computer."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:671
-#, no-c-format
-msgid "Game Variant"
-msgstr "Spielvariante"
+msgid "<guimenuitem>Game Variant</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:673
-#, no-c-format
 msgid "Select a game variant and start a new game of this game variant."
 msgstr ""
 "Wählt eine Spielvariante und beginnt ein neues Spiel dieser Spielvariante."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:678
-#, no-c-format
-msgid "Game Info"
-msgstr "Spielinformation"
+msgid "<guimenuitem>Game Info</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:680
-#, no-c-format
 msgid ""
 "Display or edit additional information about the game like the name of the "
 "players or the date when the game was played."
@@ -1173,15 +1261,13 @@ msgstr ""
 "Informationen über das Spiel, wie die Namen der Spieler oder das Datum, an "
 "dem das Spiel gespielt wurde."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:686
-#, no-c-format
-msgid "Undo Move"
-msgstr "Zug rückgängig"
+msgid "<guimenuitem>Undo Move</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:688
-#, no-c-format
 msgid ""
 "Undo the last move played and remove it from the game tree. Undoing a move "
 "is only possible if it is the last move in the current variation (i.e. a "
@@ -1194,15 +1280,13 @@ msgstr ""
 "<guimenu>Bearbeiten</guimenu>/<guimenuitem>Abschneiden</guimenuitem> zum "
 "Entfernen innerer Knoten aus dem Spielbaum)."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:698
-#, no-c-format
-msgid "Find Move"
-msgstr "Zug finden"
+msgid "<guimenuitem>Find Move</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:700
-#, no-c-format
 msgid ""
 "Find a legal move for the current color and display it for a few seconds on "
 "the board. Selecting this item repeatedly will show all legal moves."
@@ -1211,15 +1295,13 @@ msgstr ""
 "paar Sekunden auf dem Spielbrett. Das wiederholte Auswählen dieses "
 "Menüpunkts zeigt alle legalen Züge."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:707
-#, no-c-format
-msgid "Open"
-msgstr "Öffnen"
+msgid "<guimenuitem>Open</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:709
-#, no-c-format
 msgid ""
 "Load a saved game. The board position after loading will be the last "
 "position in the main variation unless the game starts with a setup position. "
@@ -1236,27 +1318,23 @@ msgstr ""
 "die Datei ein Blokus-Problem als aufgebaute Brettstellung enthält mit der "
 "Lösung in der Hauptvariante."
 
-#. Tag: guimenu
+#. (itstool) path: varlistentry/term
 #: index.docbook:719
-#, no-c-format
-msgid "Open Recent"
-msgstr "Zuletzt benutzt"
+msgid "<guimenu>Open Recent</guimenu>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:721
-#, no-c-format
 msgid "Load a recently used game."
 msgstr "Lädt ein kürzlich benutztes Spiel."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:727
-#, no-c-format
-msgid "Open Clipboard"
-msgstr "Zwischenablage öffnen"
+msgid "<guimenuitem>Open Clipboard</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:729
-#, no-c-format
 msgid ""
 "Open a game from a text copied to the clipboard. The text must be a valid "
 "game in Pentobi SGF file format."
@@ -1264,39 +1342,33 @@ msgstr ""
 "Öffnet ein Spiel von einem Text, der in die Zwischenablage kopiert wurde. "
 "Der Text muss ein gültiges Spiel im Pentobi-SGF-Dateiformat sein."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:736
-#, no-c-format
-msgid "Save"
-msgstr "Speichern"
+msgid "<guimenuitem>Save</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:738
-#, no-c-format
 msgid "Save the current game."
 msgstr "Speichert das gegenwärtige Spiel."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:744
-#, no-c-format
-msgid "Save As"
-msgstr "Speichern unter"
+msgid "<guimenuitem>Save As</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:746
-#, no-c-format
 msgid "Save the current game under a new file name."
 msgstr "Speichert das gegenwärtige Spiel unter einem neuen Dateinamen."
 
-#. Tag: term
+#. (itstool) path: varlistentry/term
 #: index.docbook:752
-#, no-c-format
 msgid "<guimenu>Export</guimenu>/<guimenuitem>Image</guimenuitem>"
 msgstr "<guimenu>Exportieren</guimenu>/<guimenuitem>Grafik</guimenuitem>"
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:754
-#, no-c-format
 msgid ""
 "Save the current position as an image file. Several image file formats are "
 "supported, the file format is derived from the file name ending (e.g. \".png"
@@ -1309,15 +1381,13 @@ msgstr ""
 "scharfes Bild sollte die Bildbreite ein ganzzahliges Vielfaches der "
 "Spaltenanzahl des Bretts in der gegenwärtigen Spielvariante sein."
 
-#. Tag: term
+#. (itstool) path: varlistentry/term
 #: index.docbook:763
-#, no-c-format
 msgid "<guimenu>Export</guimenu>/<guimenuitem>ASCII Art</guimenuitem>"
 msgstr "<guimenu>Exportieren</guimenu>/<guimenuitem>ASCII-Art</guimenuitem>"
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:765
-#, no-c-format
 msgid ""
 "Save the current position as a text diagram. The text diagram should be "
 "viewed using a monospace font."
@@ -1325,46 +1395,39 @@ msgstr ""
 "Speichert die gegenwärtige Brettstellung als Textdiagramm. Das Textdiagramm "
 "sollte mit einer Schriftart fester Breite betrachtet werden."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:772
-#, no-c-format
-msgid "Quit"
-msgstr "Beenden"
+msgid "<guimenuitem>Quit</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:774
-#, no-c-format
 msgid "Quit Pentobi."
 msgstr "Beendet Pentobi."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:782
-#, no-c-format
 msgid "<guimenu>Go</guimenu> Menu"
 msgstr "<guimenu>Gehe-zu</guimenu>-Menü"
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:785
-#, no-c-format
-msgid "Move Number"
-msgstr "Zugnummer"
+msgid "<guimenuitem>Move Number</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:787
-#, no-c-format
 msgid "Go to the move with a given move number in the current variation."
 msgstr ""
 "Geht zum Zug mit einer bestimmten Nummer in der gegenwärtigen Variante."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:793
-#, no-c-format
-msgid "Main Variation"
-msgstr "Hauptvariante"
+msgid "<guimenuitem>Main Variation</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:795
-#, no-c-format
 msgid ""
 "Go back to the last position in the current variation that belonged to the "
 "main variation."
@@ -1372,15 +1435,13 @@ msgstr ""
 "Kehrt zur letzten Brettstellung in der gegenwärtigen Variante zurück, die "
 "zur Hauptvariante gehörte."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:802
-#, no-c-format
-msgid "Beginning of Branch"
-msgstr "Verzweigungsanfang"
+msgid "<guimenuitem>Beginning of Branch</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:804
-#, no-c-format
 msgid ""
 "Go back to the last position in the current variation that had an "
 "alternative move."
@@ -1388,15 +1449,13 @@ msgstr ""
 "Kehrt zur letzten Brettstellung in der gegenwärtigen Variante zurück, die "
 "einen alternativen Zug hatte."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:811
-#, no-c-format
-msgid "Next Comment"
-msgstr "Nächster Kommentar"
+msgid "<guimenuitem>Next Comment</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:813
-#, no-c-format
 msgid ""
 "Go to the next position that has a comment. If the comment text field was "
 "not visible, it will become visible. Selecting this item repeatedly will "
@@ -1407,21 +1466,18 @@ msgstr ""
 "Auswählen dieses Menüpunkts zeigt nacheinander alle Brettstellungen mit "
 "Kommentaren im Spielbaum."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:823
-#, no-c-format
 msgid "<guimenu>Edit</guimenu> Menu"
 msgstr "<guimenu>Bearbeiten</guimenu>-Menü"
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:826
-#, no-c-format
-msgid "Annotation"
-msgstr "Annotierung"
+msgid "<guimenuitem>Annotation</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:828
-#, no-c-format
 msgid ""
 "Add a chess-style annotation symbol (e.g. ‼) to the current move. The "
 "symbols are appended to the move numbers in the status bar and, depending on "
@@ -1432,15 +1488,13 @@ msgstr ""
 "Statusleiste angehängt und, abhängig von der Einstellung von "
 "<guilabel>Zugmarkierung</guilabel>, an die auf dem Spielbrett."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:836
-#, no-c-format
-msgid "Make Main Variation"
-msgstr "Zu Hauptvariante machen"
+msgid "<guimenuitem>Make Main Variation</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:838
-#, no-c-format
 msgid ""
 "Make the current variation the main variation of the game. This reorders the "
 "nodes in the game tree such that the current variation becomes the main "
@@ -1450,15 +1504,13 @@ msgstr ""
 "die Knoten im Spielbaum so um, dass die gegenwärtige Variante zur "
 "Hauptvariante wird."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:846
-#, no-c-format
-msgid "Variation Up"
-msgstr "Variante nach oben"
+msgid "<guimenuitem>Variation Up</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:848
-#, no-c-format
 msgid ""
 "Changes the order of variations such that the current position will appear "
 "earlier when iterating over the variations with <guibutton>Next Variation</"
@@ -1468,15 +1520,13 @@ msgstr ""
 "beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> /"
 "<guibutton>Vorherige Variante</guibutton> früher erscheint."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:857
-#, no-c-format
-msgid "Variation Down"
-msgstr "Variante nach unten"
+msgid "<guimenuitem>Variation Down</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:859
-#, no-c-format
 msgid ""
 "Changes the order of variations such that the current position will appear "
 "later when iterating over the variations with <guibutton>Next Variation</"
@@ -1486,15 +1536,13 @@ msgstr ""
 "beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> /"
 "<guibutton>Vorherige Variante</guibutton> später erscheint."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:868
-#, no-c-format
-msgid "Delete Variations"
-msgstr "Varianten löschen"
+msgid "<guimenuitem>Delete Variations</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:870
-#, no-c-format
 msgid ""
 "Delete all variations but the main variation. If the current position is not "
 "in the main variation, it will first be changed to a position as in "
@@ -1505,15 +1553,13 @@ msgstr ""
 "Brettstellung in der Hauptvariante gewechselt wie in <guimenuitem>Zurück zu "
 "Hauptvariante</guimenuitem>."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:878
-#, no-c-format
-msgid "Truncate"
-msgstr "Abschneiden"
+msgid "<guimenuitem>Truncate</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:880
-#, no-c-format
 msgid ""
 "Remove the node with the current position, including any subtree, from the "
 "game tree."
@@ -1521,15 +1567,13 @@ msgstr ""
 "Entfernt den Knoten mit der gegenwärtigen Brettstellung zusammen mit dem auf "
 "ihn folgenden Teilbaum aus dem Spielbaum."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:887
-#, no-c-format
-msgid "Truncate Children"
-msgstr "Kindknoten abschneiden"
+msgid "<guimenuitem>Truncate Children</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:889
-#, no-c-format
 msgid ""
 "Remove all child nodes of the node with the current position from the game "
 "tree."
@@ -1537,15 +1581,13 @@ msgstr ""
 "Entfernt alle Kindknoten des Knotens mit der gegenwärtigen Brettstellung aus "
 "dem Spielbaum."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:896
-#, no-c-format
-msgid "Keep Position"
-msgstr "Brettstellung behalten"
+msgid "<guimenuitem>Keep Position</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:898
-#, no-c-format
 msgid ""
 "Delete all moves and keep only the current position as a setup. This can be "
 "used to create files that start with a given fixed position."
@@ -1554,15 +1596,13 @@ msgstr ""
 "Stellung. Dies kann zur Erzeugung von Dateien benutzt werden, die mit einer "
 "festgelegten Brettstellung beginnen."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:905
-#, no-c-format
-msgid "Keep Subtree"
-msgstr "Teilbaum behalten"
+msgid "<guimenuitem>Keep Subtree</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:907
-#, no-c-format
 msgid ""
 "Like <guimenuitem>Keep Position</guimenuitem> but does not delete the moves "
 "after the current position."
@@ -1570,15 +1610,13 @@ msgstr ""
 "Wie <guimenuitem>Brettstellung behalten</guimenuitem>, aber die Züge nach "
 "der gegenwärtigen Brettstellung werden nicht gelöscht."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:914
-#, no-c-format
-msgid "Setup Mode"
-msgstr "Stellungsaufbau"
+msgid "<guimenuitem>Setup Mode</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:916
-#, no-c-format
 msgid ""
 "Enter or leave setup mode. In setup mode, pieces can be placed anywhere on "
 "the board, even in violation of the game rules. Existing pieces can be "
@@ -1598,15 +1636,13 @@ msgstr ""
 "Der Stellungsaufbau-Modus kann nur benutzt werden, wenn noch keine Züge "
 "gespielt wurden."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:928
-#, no-c-format
-msgid "Next Color"
-msgstr "Nächste Farbe"
+msgid "<guimenuitem>Next Color</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:930
-#, no-c-format
 msgid ""
 "Choose the next color for selecting pieces. This can be used for example to "
 "enter game records, in which moves of a color were skipped because the color "
@@ -1617,27 +1653,23 @@ msgstr ""
 "übersprungen wurden, da die Farbe aufgrund einer Bedenkzeitüberschreitung "
 "vom Weiterspielen ausgeschlossen wurde."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:940
-#, no-c-format
 msgid "<guimenu>View</guimenu> Menu"
 msgstr "<guimenu>Ansicht</guimenu>-Menü"
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:942
-#, no-c-format
-msgid "Appearance"
-msgstr "Erscheinungsbild"
+msgid "<guimenuitem>Appearance</guimenuitem>"
+msgstr ""
 
-#. Tag: guilabel
+#. (itstool) path: varlistentry/term
 #: index.docbook:947
-#, no-c-format
-msgid "Coordinates"
-msgstr "Koordinaten"
+msgid "<guilabel>Coordinates</guilabel>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:949
-#, no-c-format
 msgid ""
 "Display coordinates around the board for the fields on the board. The "
 "convention for the coordinates is the same as in the Blokus SGF file format "
@@ -1647,15 +1679,13 @@ msgstr ""
 "Spielbrett. Die Konvention für die Koordinaten ist dieselbe wie im von "
 "Pentobi benutzten Blokus-SGF-Dateiformat."
 
-#. Tag: guilabel
+#. (itstool) path: varlistentry/term
 #: index.docbook:957
-#, no-c-format
-msgid "Show variations"
-msgstr "Varianten zeigen"
+msgid "<guilabel>Show variations</guilabel>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:959
-#, no-c-format
 msgid ""
 "Appends a letter to the move number on the board if the move has variations. "
 "If moves are marked with dots instead of numbers, a circle will be used "
@@ -1666,15 +1696,13 @@ msgstr ""
 "werden, wird ein Kreis statt ein Punkt für Züge verwendet, die nicht in der "
 "Hauptvariante sind."
 
-#. Tag: guilabel
+#. (itstool) path: varlistentry/term
 #: index.docbook:967
-#, no-c-format
-msgid "Move number"
-msgstr "Zugnummer"
+msgid "<guilabel>Move number</guilabel>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:969
-#, no-c-format
 msgid ""
 "This option exists only in desktop mode and shows the move number, move "
 "annotation and variation information at the right side of the status bar."
@@ -1683,42 +1711,36 @@ msgstr ""
 "Zugannotierung und Varianteninformation auf der rechten Seite der "
 "Statusleiste an."
 
-#. Tag: guilabel
+#. (itstool) path: varlistentry/term
 #: index.docbook:976
-#, no-c-format
-msgid "Animations"
-msgstr "Animationen"
+msgid "<guilabel>Animations</guilabel>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:978
-#, no-c-format
 msgid ""
 "Enables or disables the piece rotation, flipping and placement animations."
 msgstr ""
 "Aktiviert oder deaktiviert die Animationen für Drehen, Umdrehen und "
 "Platzieren der Spielsteine."
 
-#. Tag: guilabel
+#. (itstool) path: varlistentry/term
 #: index.docbook:984
-#, no-c-format
-msgid "Color theme"
-msgstr "Farbthema"
+msgid "<guilabel>Color theme</guilabel>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:986
-#, no-c-format
 msgid "Changes the colors of the window, board and pieces."
 msgstr "Ändert die Farben des Fensters, des Spielbretts und der Spielsteine."
 
-#. Tag: guilabel
+#. (itstool) path: varlistentry/term
 #: index.docbook:992
-#, no-c-format
-msgid "Move marking"
-msgstr "Zugmarkierung"
+msgid "<guilabel>Move marking</guilabel>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:994
-#, no-c-format
 msgid ""
 "Change the way moves are marked on the board. The options are to mark the "
 "last move played with a dot or with a number, or to show the numbers of all "
@@ -1728,15 +1750,13 @@ msgstr ""
 "zuletzt gespielten Zug mit einem Punkt oder einer Nummer zu markieren, oder "
 "die Nummern aller Züge zu zeigen oder gar keine Markierung zu zeigen."
 
-#. Tag: guilabel
+#. (itstool) path: varlistentry/term
 #: index.docbook:1002
-#, no-c-format
-msgid "Show comment"
-msgstr "Kommentar zeigen"
+msgid "<guilabel>Show comment</guilabel>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1004
-#, no-c-format
 msgid ""
 "This option exists only in desktop mode and configures the visibility of the "
 "comment area when the position changes. By default, the comment area is only "
@@ -1747,29 +1767,25 @@ msgstr ""
 "Standardeinstellung ist, dass der Kommentarbereich nur sichtbar ist, wenn "
 "ein Kommentar zur aktuellen Stellung existiert."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1016
-#, no-c-format
-msgid "Comment"
-msgstr "Kommentar"
+msgid "<guimenuitem>Comment</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1018
-#, no-c-format
 msgid "Toggle the visibility of the comment area in the current position."
 msgstr ""
 "Mach den Kommentarbereich in der aktuellen Stellung sichtbar oder nicht "
 "sichtbar."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1024
-#, no-c-format
-msgid "Fullscreen"
-msgstr "Vollbild"
+msgid "<guimenuitem>Fullscreen</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1026
-#, no-c-format
 msgid ""
 "Make the main window full screen or leave full screen mode. To leave "
 "fullscreen mode without using the window menu, press the F11 key."
@@ -1778,21 +1794,18 @@ msgstr ""
 "Vollbildmodus. Um den Vollbildmodus ohne das Benutzen des Fenstermenüs zu "
 "verlassen, drücken Sie die F11-Taste."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:1035
-#, no-c-format
 msgid "<guimenu>Computer</guimenu> Menu"
 msgstr "<guimenu>Computer</guimenu>-Menü"
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1038
-#, no-c-format
-msgid "Settings"
-msgstr "Einstellungen"
+msgid "<guimenuitem>Settings</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1040
-#, no-c-format
 msgid ""
 "Select which colors are played by the computer and the playing strength for "
 "the computer. Higher levels are stronger but can make the computer take a "
@@ -1802,15 +1815,13 @@ msgstr ""
 "des Computers. Höhere Spielstufen sind stärker, können aber die Bedenkzeiten "
 "des Computers auf langsamen Computern sehr verlängern."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1048
-#, no-c-format
-msgid "Play"
-msgstr "Spielen"
+msgid "<guimenuitem>Play</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1050
-#, no-c-format
 msgid ""
 "Make the computer play a move for the current color. This can be used to "
 "change the color the computer plays or to resume playing after navigating in "
@@ -1823,15 +1834,13 @@ msgstr ""
 "Farbe nicht bereits spielte, wird er diese Farbe (und nur diese) im weiteren "
 "Spielverlauf spielen."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1059
-#, no-c-format
-msgid "Play Move"
-msgstr "Zug spielen"
+msgid "<guimenuitem>Play Move</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1061
-#, no-c-format
 msgid ""
 "Make the computer play a single move for the current color without changing "
 "the colors played by the computer."
@@ -1839,15 +1848,13 @@ msgstr ""
 "Lässt den Computer einen einzelnen Zug für die gegenwärtige Farbe spielen "
 "ohne die vom Computer gespielten Farben zu ändern."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1068
-#, no-c-format
-msgid "Stop"
-msgstr "Stopp"
+msgid "<guimenuitem>Stop</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1070
-#, no-c-format
 msgid ""
 "Abort the current move generation. You can make the computer continue to "
 "play by selecting <guimenuitem>Play</guimenuitem>."
@@ -1855,21 +1862,18 @@ msgstr ""
 "Bricht die gegenwärtige Zuggenerierung ab. Sie können den Computer "
 "weiterspielen lassen, indem Sie <guimenuitem>Spielen</guimenuitem> auswählen."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:1079
-#, no-c-format
 msgid "<guimenu>Tools</guimenu> Menu"
 msgstr "<guimenu>Extras</guimenu>-Menü"
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1082
-#, no-c-format
-msgid "Rating"
-msgstr "Wertung"
+msgid "<guimenuitem>Rating</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1084
-#, no-c-format
 msgid ""
 "Show a dialog window with the <link linkend=\"rating\">rating</link> of the "
 "user in the current game variant."
@@ -1877,85 +1881,72 @@ msgstr ""
 "Zeigt ein Dialogfenster mit der <link linkend=\"rating\">Wertung</link> des "
 "Benutzers in der gegenwärtigen Spielvariante."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1091
-#, no-c-format
-msgid "Clear Rating"
-msgstr "Wertung löschen"
+msgid "<guimenuitem>Clear Rating</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1093
-#, no-c-format
 msgid ""
 "Deletes the rating information and history for the current game variant."
 msgstr ""
 "Löscht die Wertungsinformationen und -entwicklung zur gegenwärtigen "
 "Spielvariante."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1099
-#, no-c-format
-msgid "Analyze Game"
-msgstr "Spiel analysieren"
+msgid "<guimenuitem>Analyze Game</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1101
-#, no-c-format
 msgid "Perform a <link linkend=\"analysis\">game analysis</link>."
 msgstr "Führt eine <link linkend=\"analysis\">Spielanalyse</link> durch."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1107
-#, no-c-format
-msgid "Clear Analysis"
-msgstr "Analyse löschen"
+msgid "<guimenuitem>Clear Analysis</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1109
-#, no-c-format
 msgid "Deletes the analysis for the current game."
 msgstr "Löscht die Analyse des gegenwärtigen Spiels."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:1117
-#, no-c-format
 msgid "<guimenu>Help</guimenu> Menu"
 msgstr "<guimenu>Hilfe</guimenu>-Menü"
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1120
-#, no-c-format
-msgid "Pentobi Help"
-msgstr "Pentobi-Hilfe"
+msgid "<guimenuitem>Pentobi Help</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1122
-#, no-c-format
 msgid "Show a window to browse the Pentobi user manual."
 msgstr "Zeigt ein Fenster mit dem Pentobi-Benutzerhandbuch."
 
-#. Tag: guimenuitem
+#. (itstool) path: varlistentry/term
 #: index.docbook:1128
-#, no-c-format
-msgid "About Pentobi"
-msgstr "Über Pentobi"
+msgid "<guimenuitem>About Pentobi</guimenuitem>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1130
-#, no-c-format
 msgid "Show an info dialog with information about this version of Pentobi."
 msgstr ""
 "Zeigt eine Dialogfenster mit Informationen über diese Version von Pentobi."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:1140
-#, no-c-format
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkürzel"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:1141
-#, no-c-format
 msgid ""
 "In addition to the shortcut keys, which are shown in the window menu, the "
 "following shortcut keys are supported by Pentobi. Note that these shortcuts "
@@ -1968,269 +1959,225 @@ msgstr ""
 "besitzt. In diesem Fall kann der Fokus vom Kommentartext durch die Tabulator-"
 "Taste entfernt werden."
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1149
-#, no-c-format
-msgid "Plus"
-msgstr "Plus"
+msgid "<keysym>Plus</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1151
-#, no-c-format
 msgid "Select next piece"
 msgstr "Nächsten Spielstein auswählen"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1157
-#, no-c-format
-msgid "Minus"
-msgstr "Minus"
+msgid "<keysym>Minus</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1159
-#, no-c-format
 msgid "Select previous piece"
 msgstr "Vorherigen Spielstein auswählen"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1165
-#, no-c-format
-msgid "Escape"
-msgstr "Escape"
+msgid "<keysym>Escape</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1167
-#, no-c-format
 msgid "Clear selected piece"
 msgstr "Spielsteinauswahl löschen"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1173
-#, no-c-format
-msgid "Left"
-msgstr "Links"
+msgid "<keysym>Left</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1174
-#, no-c-format
-msgid "Right"
-msgstr "Rechts"
+msgid "<keysym>Right</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1175
-#, no-c-format
 msgid "<keysym>Up</keysym>"
 msgstr "<keysym>Oben</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1176
-#, no-c-format
-msgid "Down"
-msgstr "Unten"
+msgid "<keysym>Down</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1177
-#, no-c-format
-msgid "Shift+Left"
-msgstr "Umschalt+Links"
+msgid "<keysym>Shift+Left</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1178
-#, no-c-format
-msgid "Shift+Right"
-msgstr "Umschalt+Rechts"
+msgid "<keysym>Shift+Right</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1179
-#, no-c-format
-msgid "Shift+Up"
-msgstr "Umschalt+Oben"
+msgid "<keysym>Shift+Up</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1180
-#, no-c-format
-msgid "Shift+Down"
-msgstr "Umschalt+Unten"
+msgid "<keysym>Shift+Down</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1182
-#, no-c-format
 msgid "Move the selected piece. The Shift key makes the piece move faster."
 msgstr ""
 "Bewegen des ausgewählten Spielsteins. Mit der Umschalttaste wird der "
 "Spielstein schneller bewegt."
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1188
-#, no-c-format
-msgid "Space"
-msgstr "Leertaste"
+msgid "<keysym>Space</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1190
-#, no-c-format
 msgid "Next orientation of the selected piece"
 msgstr "Nächste Ausrichtung des ausgewählten Spielsteins"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1196
-#, no-c-format
-msgid "Shift+Space"
-msgstr "Umschalt+Leertaste"
+msgid "<keysym>Shift+Space</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1198
-#, no-c-format
 msgid "Previous orientation of the selected piece"
 msgstr "Vorherige Ausrichtung des ausgewählten Spielsteins"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1204
-#, no-c-format
-msgid "Enter"
-msgstr "Enter"
+msgid "<keysym>Enter</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1206
-#, no-c-format
 msgid "Play the selected piece"
 msgstr "Spielen des ausgewählten Spielsteins"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1212
-#, no-c-format
 msgid "<keysym>1</keysym>"
 msgstr "<keysym>1</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1213
-#, no-c-format
 msgid "<keysym>2</keysym>"
 msgstr "<keysym>2</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1214
-#, no-c-format
 msgid "<keysym>A</keysym>"
 msgstr "<keysym>A</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1215
-#, no-c-format
 msgid "<keysym>C</keysym>"
 msgstr "<keysym>C</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1216
-#, no-c-format
 msgid "<keysym>E</keysym>"
 msgstr "<keysym>E</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1217
-#, no-c-format
 msgid "<keysym>F</keysym>"
 msgstr "<keysym>F</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1218
-#, no-c-format
 msgid "<keysym>G</keysym>"
 msgstr "<keysym>G</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1219
-#, no-c-format
 msgid "<keysym>H</keysym>"
 msgstr "<keysym>H</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1220
-#, no-c-format
 msgid "<keysym>I</keysym>"
 msgstr "<keysym>I</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1221
-#, no-c-format
 msgid "<keysym>J</keysym>"
 msgstr "<keysym>J</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1222
-#, no-c-format
 msgid "<keysym>L</keysym>"
 msgstr "<keysym>L</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1223
-#, no-c-format
 msgid "<keysym>N</keysym>"
 msgstr "<keysym>N</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1224
-#, no-c-format
 msgid "<keysym>O</keysym>"
 msgstr "<keysym>O</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1225
-#, no-c-format
 msgid "<keysym>P</keysym>"
 msgstr "<keysym>P</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1226
-#, no-c-format
 msgid "<keysym>S</keysym>"
 msgstr "<keysym>S</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1227
-#, no-c-format
 msgid "<keysym>T</keysym>"
 msgstr "<keysym>T</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1228
-#, no-c-format
 msgid "<keysym>U</keysym>"
 msgstr "<keysym>U</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1229
-#, no-c-format
 msgid "<keysym>V</keysym>"
 msgstr "<keysym>V</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1230
-#, no-c-format
 msgid "<keysym>W</keysym>"
 msgstr "<keysym>W</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1231
-#, no-c-format
 msgid "<keysym>X</keysym>"
 msgstr "<keysym>X</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1232
-#, no-c-format
 msgid "<keysym>Y</keysym>"
 msgstr "<keysym>Y</keysym>"
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1233
-#, no-c-format
 msgid "<keysym>Z</keysym>"
 msgstr "<keysym>Z</keysym>"
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1235
-#, no-c-format
 msgid ""
 "Select piece according to commonly used piece names. If there are multiple "
 "pieces with the letter (e.g. I3, I4, I5), pressing the key several times "
@@ -2245,57 +2192,48 @@ msgstr ""
 "benutzt. Zum Beispiel wird A nur in Trigon für die Spielsteine A6 und A4 "
 "benutzt (auch bekannt als „Hummer“ und „Dreieck“)."
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1245
-#, no-c-format
-msgid "Ctrl+Home"
-msgstr "Strg+Pos1"
+msgid "<keysym>Ctrl+Home</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1246
-#, no-c-format
-msgid "Ctrl+Shift+Left"
-msgstr "Strg+Umschalt+Links"
+msgid "<keysym>Ctrl+Shift+Left</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1247
-#, no-c-format
-msgid "Ctrl+Left"
-msgstr "Strg+Links"
+msgid "<keysym>Ctrl+Left</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1248
-#, no-c-format
-msgid "Ctrl+Right"
-msgstr "Strg+Rechts"
+msgid "<keysym>Ctrl+Right</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1249
-#, no-c-format
-msgid "Ctrl+Shift+Right"
-msgstr "Strg+Umschalt+Rechts"
+msgid "<keysym>Ctrl+Shift+Right</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1250
-#, no-c-format
-msgid "Ctrl+End"
-msgstr "Strg+Ende"
+msgid "<keysym>Ctrl+End</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1251
-#, no-c-format
-msgid "Ctrl+Up"
-msgstr "Strg+Oben"
+msgid "<keysym>Ctrl+Up</keysym>"
+msgstr ""
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1252
-#, no-c-format
-msgid "Ctrl+Down"
-msgstr "Strg+Unten"
+msgid "<keysym>Ctrl+Down</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1254
-#, no-c-format
 msgid ""
 "Navigate in the game: beginning, ten moves backward, backward, forward, ten "
 "moves forward, end, previous variation, next variation."
@@ -2303,15 +2241,13 @@ msgstr ""
 "Im Spiel navigieren: Anfang, zehn Züge zurück, zurück, vorwärts, zehn Züge "
 "vorwärts, Ende, vorherige Variante, nächste Variante."
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1261
-#, no-c-format
-msgid "Ctrl+Shift+H"
-msgstr "Strg+Umschalt+H"
+msgid "<keysym>Ctrl+Shift+H</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1263
-#, no-c-format
 msgid ""
 "Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards "
 "through the list of legal moves."
@@ -2319,53 +2255,44 @@ msgstr ""
 "Wie <guimenuitem>Zug finden</guimenuitem> (Strg+H), jedoch wird rückwärts "
 "durch die Liste der legalen Züge iteriert."
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1270
-#, no-c-format
-msgid "Ctrl+T"
-msgstr "Strg+T"
+msgid "<keysym>Ctrl+T</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1272
-#, no-c-format
 msgid "Switch view between comment and game analysis."
 msgstr "Ansicht zwischen Kommentar und Spielanalyse umschalten."
 
-#. Tag: keysym
+#. (itstool) path: varlistentry/term
 #: index.docbook:1278
-#, no-c-format
-msgid "Alt+M"
-msgstr "Alt+M"
+msgid "<keysym>Alt+M</keysym>"
+msgstr ""
 
-#. Tag: para
+#. (itstool) path: listitem/para
 #: index.docbook:1280
-#, no-c-format
 msgid "Open menu."
 msgstr "Menü öffnen."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:1289
-#, no-c-format
 msgid "System Requirements"
 msgstr "Systemvoraussetzungen"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:1290
-#, no-c-format
-msgid "Minimum: 1&#160;GB RAM, 1&#160;GHz CPU"
+msgid "Minimum: 1 GB RAM, 1 GHz CPU"
 msgstr ""
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:1293
-#, no-c-format
 msgid ""
-"Recommended for playing level 9: 4&#160;GB RAM, 2.5&#160;GHz dual-core or "
-"faster CPU"
+"Recommended for playing level 9: 4 GB RAM, 2.5 GHz dual-core or faster CPU"
 msgstr ""
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:1297
-#, no-c-format
 msgid ""
 "Pentobi will also work on systems that do not meet the minimum requirements "
 "but the highest playing level will be very slow on those systems (if the CPU "
@@ -2377,21 +2304,18 @@ msgstr ""
 "sein (wenn die CPU zu langsam ist) oder eine reduzierte Spielstärke haben "
 "(wenn nicht genügend Arbeitsspeicher vorhanden ist)."
 
-#. Tag: title
+#. (itstool) path: chapter/title
 #: index.docbook:1305
-#, no-c-format
 msgid "License"
 msgstr "Lizenz"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:1306
-#, no-c-format
 msgid "Copyright © 2011–2019 Markus Enzenberger"
 msgstr "Copyright © 2011–2019 Markus Enzenberger"
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:1309
-#, no-c-format
 msgid ""
 "This program is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -2403,9 +2327,8 @@ msgstr ""
 "veröffentlicht, weitergeben und/oder modifizieren, entweder gemäß Version 3 "
 "der Lizenz oder (nach Ihrer Wahl) jeder späteren Version."
 
-#. Tag: para
+#. (itstool) path: chapter/para
 #: index.docbook:1315
-#, no-c-format
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -2418,15 +2341,13 @@ msgstr ""
 "BESTIMMTEN ZWECK. Nähere Angaben finden Sie in der GNU General Public "
 "License."
 
-#. Tag: title
+#. (itstool) path: sect1/title
 #: index.docbook:1322
-#, no-c-format
 msgid "Trademark Disclaimer"
 msgstr "Hinweis zu Markennamen"
 
-#. Tag: para
+#. (itstool) path: sect1/para
 #: index.docbook:1323
-#, no-c-format
 msgid ""
 "The trademark Blokus and other trademarks referred to are property of their "
 "respective trademark holders. The trademark holders are not affiliated with "
@@ -2435,6 +2356,237 @@ msgstr ""
 "Der Markenname Blokus und andere erwähnte Marken sind Eigentum ihrer "
 "jeweiligen Markeninhaber. Die Markeninhaber stehen in keiner Verbindung mit "
 "dem Autor des Programms Pentobi."
+
+#~ msgid "Beginning"
+#~ msgstr "Anfang"
+
+#~ msgid "Backward 10"
+#~ msgstr "Zurück 10"
+
+#~ msgid "Backward"
+#~ msgstr "Zurück"
+
+#~ msgid "Forward"
+#~ msgstr "Vorwärts"
+
+#~ msgid "Forward 10"
+#~ msgstr "Vorwärts 10"
+
+#~ msgid "Next Variation"
+#~ msgstr "Nächste Variante"
+
+#~ msgid "Previous Variation"
+#~ msgstr "Vorherige Variante"
+
+#~ msgid "Rated Game"
+#~ msgstr "Gewertetes Spiel"
+
+#~ msgid "Game Variant"
+#~ msgstr "Spielvariante"
+
+#~ msgid "Game Info"
+#~ msgstr "Spielinformation"
+
+#~ msgid "Undo Move"
+#~ msgstr "Zug rückgängig"
+
+#~ msgid "Find Move"
+#~ msgstr "Zug finden"
+
+#~ msgid "Open"
+#~ msgstr "Öffnen"
+
+#~ msgid "Open Recent"
+#~ msgstr "Zuletzt benutzt"
+
+#~ msgid "Open Clipboard"
+#~ msgstr "Zwischenablage öffnen"
+
+#~ msgid "Save"
+#~ msgstr "Speichern"
+
+#~ msgid "Save As"
+#~ msgstr "Speichern unter"
+
+#~ msgid "Quit"
+#~ msgstr "Beenden"
+
+#~ msgid "Move Number"
+#~ msgstr "Zugnummer"
+
+#~ msgid "Main Variation"
+#~ msgstr "Hauptvariante"
+
+#~ msgid "Beginning of Branch"
+#~ msgstr "Verzweigungsanfang"
+
+#~ msgid "Next Comment"
+#~ msgstr "Nächster Kommentar"
+
+#~ msgid "Annotation"
+#~ msgstr "Annotierung"
+
+#~ msgid "Make Main Variation"
+#~ msgstr "Zu Hauptvariante machen"
+
+#~ msgid "Variation Up"
+#~ msgstr "Variante nach oben"
+
+#~ msgid "Variation Down"
+#~ msgstr "Variante nach unten"
+
+#~ msgid "Delete Variations"
+#~ msgstr "Varianten löschen"
+
+#~ msgid "Truncate"
+#~ msgstr "Abschneiden"
+
+#~ msgid "Truncate Children"
+#~ msgstr "Kindknoten abschneiden"
+
+#~ msgid "Keep Position"
+#~ msgstr "Brettstellung behalten"
+
+#~ msgid "Keep Subtree"
+#~ msgstr "Teilbaum behalten"
+
+#~ msgid "Setup Mode"
+#~ msgstr "Stellungsaufbau"
+
+#~ msgid "Next Color"
+#~ msgstr "Nächste Farbe"
+
+#~ msgid "Appearance"
+#~ msgstr "Erscheinungsbild"
+
+#~ msgid "Coordinates"
+#~ msgstr "Koordinaten"
+
+#~ msgid "Show variations"
+#~ msgstr "Varianten zeigen"
+
+#~ msgid "Move number"
+#~ msgstr "Zugnummer"
+
+#~ msgid "Animations"
+#~ msgstr "Animationen"
+
+#~ msgid "Color theme"
+#~ msgstr "Farbthema"
+
+#~ msgid "Move marking"
+#~ msgstr "Zugmarkierung"
+
+#~ msgid "Show comment"
+#~ msgstr "Kommentar zeigen"
+
+#~ msgid "Comment"
+#~ msgstr "Kommentar"
+
+#~ msgid "Fullscreen"
+#~ msgstr "Vollbild"
+
+#~ msgid "Settings"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Play"
+#~ msgstr "Spielen"
+
+#~ msgid "Play Move"
+#~ msgstr "Zug spielen"
+
+#~ msgid "Stop"
+#~ msgstr "Stopp"
+
+#~ msgid "Rating"
+#~ msgstr "Wertung"
+
+#~ msgid "Clear Rating"
+#~ msgstr "Wertung löschen"
+
+#~ msgid "Analyze Game"
+#~ msgstr "Spiel analysieren"
+
+#~ msgid "Clear Analysis"
+#~ msgstr "Analyse löschen"
+
+#~ msgid "Pentobi Help"
+#~ msgstr "Pentobi-Hilfe"
+
+#~ msgid "About Pentobi"
+#~ msgstr "Über Pentobi"
+
+#~ msgid "Plus"
+#~ msgstr "Plus"
+
+#~ msgid "Minus"
+#~ msgstr "Minus"
+
+#~ msgid "Escape"
+#~ msgstr "Escape"
+
+#~ msgid "Left"
+#~ msgstr "Links"
+
+#~ msgid "Right"
+#~ msgstr "Rechts"
+
+#~ msgid "Down"
+#~ msgstr "Unten"
+
+#~ msgid "Shift+Left"
+#~ msgstr "Umschalt+Links"
+
+#~ msgid "Shift+Right"
+#~ msgstr "Umschalt+Rechts"
+
+#~ msgid "Shift+Up"
+#~ msgstr "Umschalt+Oben"
+
+#~ msgid "Shift+Down"
+#~ msgstr "Umschalt+Unten"
+
+#~ msgid "Space"
+#~ msgstr "Leertaste"
+
+#~ msgid "Shift+Space"
+#~ msgstr "Umschalt+Leertaste"
+
+#~ msgid "Enter"
+#~ msgstr "Enter"
+
+#~ msgid "Ctrl+Home"
+#~ msgstr "Strg+Pos1"
+
+#~ msgid "Ctrl+Shift+Left"
+#~ msgstr "Strg+Umschalt+Links"
+
+#~ msgid "Ctrl+Left"
+#~ msgstr "Strg+Links"
+
+#~ msgid "Ctrl+Right"
+#~ msgstr "Strg+Rechts"
+
+#~ msgid "Ctrl+Shift+Right"
+#~ msgstr "Strg+Umschalt+Rechts"
+
+#~ msgid "Ctrl+End"
+#~ msgstr "Strg+Ende"
+
+#~ msgid "Ctrl+Up"
+#~ msgstr "Strg+Oben"
+
+#~ msgid "Ctrl+Down"
+#~ msgstr "Strg+Unten"
+
+#~ msgid "Ctrl+Shift+H"
+#~ msgstr "Strg+Umschalt+H"
+
+#~ msgid "Ctrl+T"
+#~ msgstr "Strg+T"
+
+#~ msgid "Alt+M"
+#~ msgstr "Alt+M"
 
 #~ msgid "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
 #~ msgstr "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Needs Debian packages xsltproc docbook5-xml docbook-xsl-ns
+# Needs Debian packages: docbook5-xml docbook-xsl-ns gettext itstool
+# xsltproc
 
 cd `dirname "$0"`
 if test $# -eq 0 ; then
@@ -16,12 +17,13 @@ for lang in $languages; do
       -o ../help/C/pentobi/ custom.xsl index.docbook
     ;;
   *)
-    po2xml index.docbook po/$lang.po > index_$lang.docbook
+    msgfmt -o $lang.mo po/$lang.po
+    itstool -m $lang.mo -o index_$lang.docbook index.docbook
     xsltproc --nonet \
       --path "/usr/share/xml/docbook/stylesheet/docbook-xsl/html" \
       --stringparam l10n.gentext.language $lang \
       -o ../help/$lang/pentobi/ custom.xsl index_$lang.docbook
-    rm -f index_$lang.docbook
+    rm -f $lang.mo index_$lang.docbook
     ;;
   esac
 done

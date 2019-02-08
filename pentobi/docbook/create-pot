@@ -1,11 +1,4 @@
 #!/bin/bash
 
-# Needs Debian package poxml
-
 cd `dirname "$0"`
-# Filter Report-Msgid-Bugs-To and Language-Team, which are set to KDE-specific
-# values by xml2pot
-xml2pot index.docbook \
-| grep -v '"Report-Msgid-Bugs-To:' \
-| grep -v '"Language-Team:' \
-> pentobi-manual.pot
+itstool index.docbook > pentobi-manual.pot

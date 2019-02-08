@@ -3,7 +3,7 @@
 # Needs Debian package gettext
 
 if test $# -eq 0 ; then
-    languages="de"
+    languages="de nb_NO"
 else
     languages="$@"
 fi
