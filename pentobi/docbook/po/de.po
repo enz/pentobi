@@ -4,11 +4,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-02-02 16:55+0000\n"
+"POT-Creation-Date: 2019-02-08 15:44+0000\n"
 "PO-Revision-Date: 2019-02-04 21:10+0000\n"
 "Last-Translator: Markus Enzenberger <markus.enzenberger@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/pentobi/"
-"pentobi-manual/de/>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/pentobi/pentobi-"
+"manual/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2352,18 +2352,16 @@ msgstr "Systemvoraussetzungen"
 #. Tag: para
 #: index.docbook:1290
 #, no-c-format
-msgid "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
-msgstr "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
+msgid "Minimum: 1&#160;GB RAM, 1&#160;GHz CPU"
+msgstr ""
 
 #. Tag: para
 #: index.docbook:1293
 #, no-c-format
 msgid ""
-"Recommended for playing level 9: 4&nbsp;GB RAM, 2.5&nbsp;GHz dual-core or "
+"Recommended for playing level 9: 4&#160;GB RAM, 2.5&#160;GHz dual-core or "
 "faster CPU"
 msgstr ""
-"Empfohlen für Spielstufe 9: 4&nbsp;GB RAM, 2,5&nbsp;GHz Dual-Core- oder "
-"schnellere CPU"
 
 #. Tag: para
 #: index.docbook:1297
@@ -2437,6 +2435,16 @@ msgstr ""
 "Der Markenname Blokus und andere erwähnte Marken sind Eigentum ihrer "
 "jeweiligen Markeninhaber. Die Markeninhaber stehen in keiner Verbindung mit "
 "dem Autor des Programms Pentobi."
+
+#~ msgid "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
+#~ msgstr "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
+
+#~ msgid ""
+#~ "Recommended for playing level 9: 4&nbsp;GB RAM, 2.5&nbsp;GHz dual-core or "
+#~ "faster CPU"
+#~ msgstr ""
+#~ "Empfohlen für Spielstufe 9: 4&nbsp;GB RAM, 2,5&nbsp;GHz Dual-Core- oder "
+#~ "schnellere CPU"
 
 #~ msgid "Copyright © 2011–2018 Markus Enzenberger"
 #~ msgstr "Copyright © 2011–2018 Markus Enzenberger"

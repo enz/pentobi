@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-02 16:55+0000\n"
+"POT-Creation-Date: 2019-02-08 15:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -1959,14 +1959,14 @@ msgstr ""
 #. Tag: para
 #: index.docbook:1290
 #, no-c-format
-msgid "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
+msgid "Minimum: 1&#160;GB RAM, 1&#160;GHz CPU"
 msgstr ""
 
 #. Tag: para
 #: index.docbook:1293
 #, no-c-format
 msgid ""
-"Recommended for playing level 9: 4&nbsp;GB RAM, 2.5&nbsp;GHz dual-core or "
+"Recommended for playing level 9: 4&#160;GB RAM, 2.5&#160;GHz dual-core or "
 "faster CPU"
 msgstr ""
 
