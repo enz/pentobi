@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd `dirname "$0"`
-itstool index.docbook > pentobi-manual.pot
+itstool -i docbook.its index.docbook > pentobi-manual.pot

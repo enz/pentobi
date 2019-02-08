@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-08 16:48+0100\n"
+"POT-Creation-Date: 2019-02-08 17:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,16 +34,6 @@ msgstr ""
 msgid "There are four players, Blue, Yellow, Red and Green, and a board consisting of 20×20 squares. Each player has a set of 21 pieces of his color shaped like the polyominoes up to size five. A polyomino is a shape built from a number of squares connected along the edges."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:28
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:30
 #: index.docbook:290
@@ -56,16 +46,6 @@ msgstr ""
 msgid "The players alternate in placing one of their pieces on the board. The first piece of a player must cover its starting square. The starting squares are located in the corners of the board."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:41
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_classic.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:44
 msgid "The 20×20 board with the starting squares marked with colored dots"
@@ -74,16 +54,6 @@ msgstr ""
 #. (itstool) path: chapter/para
 #: index.docbook:50
 msgid "The following pieces must be placed on empty squares such that the new piece touches at least one piece of its own color corner-to-corner but does not touch any piece of its own color along the edges. The new piece may touch edges of pieces of the opponent colors."
-msgstr ""
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:59
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_classic.png' md5='__failed__'"
 msgstr ""
 
 #. (itstool) path: caption/para
@@ -142,29 +112,9 @@ msgstr ""
 msgid "The game variant Duo is another game variant for two players. The game is played on a smaller board with 14×14 squares. There is only one color per player (Purple and Orange) and the starting squares are not in the corners, but on the square with the coordinates (5,10) for Purple, and on (10,5) for Orange."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:113
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_duo.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:115
 msgid "The 14×14 board used in game variant Duo with the starting squares marked with colored dots"
-msgstr ""
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:125
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_duo.png' md5='__failed__'"
 msgstr ""
 
 #. (itstool) path: caption/para
@@ -182,16 +132,6 @@ msgstr ""
 msgid "Trigon is another game variant. The rules a similar to game variant Classic but it uses a differently shaped board and a different set of pieces. Each color uses 22 pieces that are shaped like the polyiamonds up to size six. A polyiamond is a shape built from a number of equilateral triangles connected along the edges."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:144
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces_trigon.jpg' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:146
 msgid "The 22 Trigon pieces"
@@ -202,16 +142,6 @@ msgstr ""
 msgid "The board also consists of triangles and is shaped like a hexagon with an edge size of nine triangles."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:156
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_trigon.jpg' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:159
 msgid "The board with the starting fields marked with gray dots"
@@ -220,16 +150,6 @@ msgstr ""
 #. (itstool) path: chapter/para
 #: index.docbook:163
 msgid "There are six starting points on the board, each located in the middle of the fourth row away from each edge. The starting points are not colored and the players may freely choose a starting point for the first piece of a color."
-msgstr ""
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:171
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_trigon.jpg' md5='__failed__'"
 msgstr ""
 
 #. (itstool) path: caption/para
@@ -257,16 +177,6 @@ msgstr ""
 msgid "Junior is a simplified game variant for two players. It is played on the same 14×14 board as game variant Duo but uses only a subset of the polyominoes up to size five and the players get two of each of those polyominoes."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:206
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces_junior.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:208
 msgid "The 24 pieces used in Junior"
@@ -287,16 +197,6 @@ msgstr ""
 msgid "Nexos is a board game similar to Blokus. The board is a rectangular 13×13 line grid. Each color uses 24 pieces that consist of up to four connected line segments."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:226
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces_nexos.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:228
 msgid "The 24 pieces"
@@ -307,16 +207,6 @@ msgstr ""
 msgid "Each color has a starting intersection on the intersection of the third lines close to a corner. The first piece must touch the starting intersection."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:238
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_nexos.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:241
 msgid "The board for Nexos with the starting intersections marked with colored dots"
@@ -325,16 +215,6 @@ msgstr ""
 #. (itstool) path: chapter/para
 #: index.docbook:247
 msgid "The following pieces must be placed on empty line segments such that a segment of the new piece touches an intersection that is already touched by a segment of the same color. It does not matter if pieces of other colors touch or cover the same intersection. However, pieces may not overlap. The junctions between the segments within a piece are such that two rectangular junctions of different pieces can cover the same intersection without overlapping, but straight junctions cannot."
-msgstr ""
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:259
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_nexos.png' md5='__failed__'"
 msgstr ""
 
 #. (itstool) path: chapter/para
@@ -357,29 +237,9 @@ msgstr ""
 msgid "GembloQ is a board game similar to Blokus. The squares of the board are rotated by 45 degrees. The board has a diagonal size of 27 squares. In addition to the full squares, the edges also contain half squares such that the edges are straight lines."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:288
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces_gembloq.jpg' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: chapter/para
 #: index.docbook:293
 msgid "Each player has a set of 21 pieces, which include a subset of the pieces used in Blokus, but also some pieces that contain a half square."
-msgstr ""
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:300
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_gembloq.png' md5='__failed__'"
 msgstr ""
 
 #. (itstool) path: caption/para
@@ -390,16 +250,6 @@ msgstr ""
 #. (itstool) path: chapter/para
 #: index.docbook:309
 msgid "As in Blokus, the starting squares are in the corners, the first move must fully cover the starting square of the color and subsequent moves must touch a piece of the player color at a vertex, but not edge-to-edge. Moves are also legal, if a vertex of a half square touches an edge of a piece of the same color."
-msgstr ""
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:319
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_gembloq.png' md5='__failed__'"
 msgstr ""
 
 #. (itstool) path: chapter/para
@@ -428,29 +278,9 @@ msgstr ""
 msgid "Callisto is a another board game similar to Blokus. The board is derived from the classic 20×20 Blokus board by removing the corners such that an octagon with a top edge of size six remains. The pieces are a subset of the polyominoes up to size five. They include three 1×1 pieces per player that play a special role."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:352
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces_callisto.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: chapter/para
 #: index.docbook:357
 msgid "The 1×1 pieces may be placed anywhere on the board apart from the center of the board. The center consists of an octagon with width six and top edge size two. The first two moves of a player must use a 1×1 piece, the third 1×1 piece may be played anytime later."
-msgstr ""
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:366
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_callisto.png' md5='__failed__'"
 msgstr ""
 
 #. (itstool) path: caption/para
@@ -461,16 +291,6 @@ msgstr ""
 #. (itstool) path: chapter/para
 #: index.docbook:375
 msgid "All larger pieces may be placed anywhere on the board but must touch an existing piece of the same color edge-to-edge."
-msgstr ""
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:382
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_callisto.png' md5='__failed__'"
 msgstr ""
 
 #. (itstool) path: chapter/para
@@ -568,16 +388,6 @@ msgstr ""
 msgid "A game can be analyzed by selecting <guimenuitem>Analyze Game</guimenuitem> from the <guimenu>Tools</guimenu> menu. This will make the computer player evaluate each position in the main variation. The result is displayed in a window with a diagram of colored dots."
 msgstr ""
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:494
-msgctxt "_"
-msgid "external ref='../../C/pentobi/analysis.jpg' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:497
 msgid "Analysis of a game of variant Classic (2 players)"
@@ -621,16 +431,6 @@ msgstr ""
 #. (itstool) path: sect1/para
 #: index.docbook:541
 msgid "After the game has ended, your rating will be updated depending on the game result and the computer level. For the game result, it only matters whether the game was won, lost or a tie. The exact number of score points does not matter."
-msgstr ""
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:550
-msgctxt "_"
-msgid "external ref='../../C/pentobi/rating.jpg' md5='__failed__'"
 msgstr ""
 
 #. (itstool) path: caption/para

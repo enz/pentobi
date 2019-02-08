@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-02-08 16:48+0100\n"
+"POT-Creation-Date: 2019-02-08 17:13+0100\n"
 "PO-Revision-Date: 2019-02-04 21:10+0000\n"
 "Last-Translator: Markus Enzenberger <markus.enzenberger@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/pentobi/pentobi-"
@@ -60,16 +60,6 @@ msgstr ""
 "Figur, die aus einer Anzahl von Quadraten besteht, die entlang der Kanten "
 "verbunden sind."
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:28
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:30 index.docbook:290 index.docbook:354
 msgid "The 21 pieces"
@@ -85,16 +75,6 @@ msgstr ""
 "Die Spieler setzen abwechselnd einen ihrer Spielsteine aufs Brett. Der erste "
 "Spielstein eines Spielers muss sein Startfeld abdecken. Die Startfelder "
 "befinden sich in den Ecken des Bretts."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:41
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_classic.png' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: caption/para
 #: index.docbook:44
@@ -113,16 +93,6 @@ msgstr ""
 "der neue Spielstein mindestens einen Spielstein der eigenen Farbe Ecke an "
 "Ecke berührt, aber keinen Spielstein der eigenen Farbe entlang der Kanten. "
 "Der neue Spielstein darf die Kanten von gegnerischen Spielsteinen berühren."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:59
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_classic.png' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: caption/para
 #: index.docbook:61 index.docbook:261 index.docbook:321 index.docbook:384
@@ -223,16 +193,6 @@ msgstr ""
 "nicht in den Ecken, sondern auf dem Feld mit den Koordinaten (5,10) für Lila "
 "und auf (10,5) für Orange."
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:113
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_duo.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:115
 msgid ""
@@ -241,16 +201,6 @@ msgid ""
 msgstr ""
 "Das 14×14-Brett, das in der Spielvariante Duo benutzt wird, mit den durch "
 "farbige Punkte markierten Startfeldern"
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:125
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_duo.png' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: caption/para
 #: index.docbook:127
@@ -278,16 +228,6 @@ msgstr ""
 "die aus einer Anzahl von gleichseitigen Dreiecken besteht, die entlang der "
 "Kanten verbunden sind."
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:144
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces_trigon.jpg' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:146
 msgid "The 22 Trigon pieces"
@@ -301,16 +241,6 @@ msgid ""
 msgstr ""
 "Das Spielbrett besteht ebenfalls aus Dreiecken und hat die Form eines "
 "Sechsecks mit jeweils neun Dreiecken pro Kante."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:156
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_trigon.jpg' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: caption/para
 #: index.docbook:159
@@ -329,16 +259,6 @@ msgstr ""
 "Reihe von jeder Kante aus gesehen. Die Startfelder sind nicht farbig und die "
 "Spieler dürfen das Startfeld für den ersten Spielstein einer Farbe frei "
 "wählen."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:171
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_trigon.jpg' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: caption/para
 #: index.docbook:173
@@ -386,16 +306,6 @@ msgstr ""
 "eine Teilmenge der Polyominos bis zur Größe fünf und die Spieler bekommen "
 "zwei von jedem dieser Polyominos."
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:206
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces_junior.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:208
 msgid "The 24 pieces used in Junior"
@@ -422,16 +332,6 @@ msgstr ""
 "rechtwinkliges 13×13-Liniengitter. Jede Farbe benutzt 24 Spielsteine, die "
 "aus bis zu vier verbundenen Liniensegmenten bestehen."
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:226
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces_nexos.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:228
 msgid "The 24 pieces"
@@ -446,16 +346,6 @@ msgid ""
 msgstr ""
 "Jede Farbe hat einen Startkreuzungspunkt auf der Kreuzung der dritten Linien "
 "nahe einer Ecke. Der erste Spielstein muss den Startkreuzungspunkt berühren."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:238
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_nexos.png' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: caption/para
 #: index.docbook:241
@@ -485,16 +375,6 @@ msgstr ""
 "rechtwinklige Verbindungen verschiedener Spielsteine denselben "
 "Kreuzungspunkt bedecken können ohne sich zu überlappen, während gerade "
 "Verbindungen das nicht können."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:259
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_nexos.png' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: chapter/para
 #: index.docbook:264
@@ -534,16 +414,6 @@ msgstr ""
 "von 27 Quadraten. Zusätzlich zu den vollen Quadraten enthalten die Ränder "
 "noch halbe Quadrate, so dass die Ränder gerade Linien sind."
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:288
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces_gembloq.jpg' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: chapter/para
 #: index.docbook:293
 msgid ""
@@ -553,16 +423,6 @@ msgstr ""
 "Jeder Spieler besitzt 21 Spielsteine, unter denen eine Teilmenge der in "
 "Blokus benutzten Spielsteine ist, jedoch zusätzlich einige Spielsteine, die "
 "ein halbes Quadrat beinhalten."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:300
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_gembloq.png' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: caption/para
 #: index.docbook:303
@@ -584,16 +444,6 @@ msgstr ""
 "Spielstein der Farbe am Zug an einer Ecke berühren, jedoch noch entlang der "
 "Kanten. Züge sind auch legal, wenn eine Spitze eines halben Quadrats die "
 "Kante eines Spielsteins der selben Farbe berührt."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:319
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_gembloq.png' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: chapter/para
 #: index.docbook:324
@@ -648,16 +498,6 @@ msgstr ""
 "beinhalten drei 1×1-Spielsteine pro Spieler, die eine besondere Rolle "
 "spielen."
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:352
-msgctxt "_"
-msgid "external ref='../../C/pentobi/pieces_callisto.png' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: chapter/para
 #: index.docbook:357
 msgid ""
@@ -671,16 +511,6 @@ msgstr ""
 "Breite sechs und oberer Kantenlänge zwei. Die ersten zwei Züge eines "
 "Spielers müssen einen 1×1-Spielstein benutzen, der dritte 1×1-Spielstein "
 "kann jederzeit später gespielt werden."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:366
-msgctxt "_"
-msgid "external ref='../../C/pentobi/board_callisto.png' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: caption/para
 #: index.docbook:369
@@ -696,16 +526,6 @@ msgstr ""
 "Alle größeren Spielsteine dürfen überall auf dem Brett gesetzt werden, "
 "müssen aber einen existierenden Spielstein der selben Farbe Kante an Kante "
 "berühren."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:382
-msgctxt "_"
-msgid "external ref='../../C/pentobi/position_callisto.png' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: chapter/para
 #: index.docbook:387
@@ -928,16 +748,6 @@ msgstr ""
 "Ergebnis wird in einem Fenster mit einem Diagramm farbiger Punkte "
 "dargestellt."
 
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:494
-msgctxt "_"
-msgid "external ref='../../C/pentobi/analysis.jpg' md5='__failed__'"
-msgstr ""
-
 #. (itstool) path: caption/para
 #: index.docbook:497
 msgid "Analysis of a game of variant Classic (2 players)"
@@ -1045,16 +855,6 @@ msgstr ""
 "Spielergebnis und der Spielstufe aktualisiert. Für das Spielergebnis zählt "
 "nur, ob Sie gewonnen oder verloren haben, oder ob das Spiel in einem "
 "Unentschieden endete. Die genaue Anzahl der Spielpunkte spielt keine Rolle."
-
-#. (itstool) path: imageobject/imagedata
-#. This is a reference to an external file such as an image or video. When
-#. the file changes, the md5 hash will change to let you know you need to
-#. update your localized copy. The msgstr is not used at all. Set it to
-#. whatever you like once you have updated your copy of the file.
-#: index.docbook:550
-msgctxt "_"
-msgid "external ref='../../C/pentobi/rating.jpg' md5='__failed__'"
-msgstr ""
 
 #. (itstool) path: caption/para
 #: index.docbook:553
