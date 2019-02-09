@@ -35,7 +35,7 @@ Pentobi
 <arg choice="plain"><replaceable>outputfile</replaceable></arg>
 </cmdsynopsis>
 <cmdsynopsis>
-<command>pentobi</command>
+<command>pentobi-thumbnailer</command>
 <arg><option>-h</option></arg>
 <arg><option>--help</option></arg>
 </cmdsynopsis>

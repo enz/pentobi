@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-08 22:35+0100\n"
-"PO-Revision-Date: 2019-02-08 22:36+0100\n"
+"PO-Revision-Date: 2019-02-09 07:52+0100\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -74,7 +74,7 @@ msgid ""
 "graphical user interface and computer opponent for the board game Blokus."
 msgstr ""
 "<_:command-1/> ist der Befehl zu Starten des Programms Pentobi, das eine "
-"grafische Oberfläche und ein Computer-Gegners für das Brettspiel Blokus ist."
+"grafische Oberfläche und ein Computer-Gegner für das Brettspiel Blokus ist."
 
 #. (itstool) path: refsection/para
 #: pentobi-manpage.docbook.in:54
@@ -115,14 +115,14 @@ msgid ""
 "currently reduces this amount by a factor of 3 to 4 and lower maximum levels "
 "even more."
 msgstr ""
-"Setzen der maximalen Spielstufe. Wird dieser Wert verkleinert, wird der "
-"Speicherbedarf der Suche verringert, was nützlich sein kann, um Pentobi auf "
-"Systemen laufen zu lassen, die wenig Speicher besitzen oder zu langsam sind, "
-"um die höchsten Spielstufen zu verwenden. Standardmäßig belegt Pentobi bis "
-"zu 2 GB (aber nicht mehr als ein Viertel des auf dem System verfügbaren "
-"physischen Speichers). Ein Verringern der maximalen Spielstufe auf 8 "
-"vermindert gegenwärtig den Bedarf um den Faktor 3 bis 4 und geringere "
-"maximale Spielstufen sogar noch mehr."
+"Setzen der maximalen Spielstufe. Wird dieser Wert verkleinert, verringert "
+"sich der Speicherbedarf der Suche, was nützlich sein kann, um Pentobi auf "
+"Systemen laufen zu lassen, die wenig Speicher besitzen oder zu langsam für "
+"die höchsten Spielstufen sind. Standardmäßig belegt Pentobi bis zu 2 GB "
+"(aber nicht mehr als ein Viertel des auf dem System verfügbaren physischen "
+"Speichers). Ein Verringern der maximalen Spielstufe auf 8 vermindert "
+"gegenwärtig den Speicherbedarf um den Faktor 3 bis 4 und geringere maximale "
+"Spielstufen sogar noch mehr."
 
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:90
@@ -136,9 +136,9 @@ msgstr ""
 "Ein Fensterlayout benutzen, das für Smartphones optimiert ist und einige "
 "Änderungen der Benutzerpberfläche vornehmen, die annehmen, dass ein "
 "Touchscreen als primäres Eingabegerät verwendet wird. Das Benutzen dieser "
-"Option ändert auch den voreingestellen Style für Elemente der "
-"Benutzeroberfläche von QQuickControls 2 nach Default, wenn der Style nicht "
-"explizit mit der Option <_:option-1/> gesetzt wird."
+"Option ändert auch den voreingestellen Style für Benutzeroberflächenelemente "
+"von QQuickControls 2 nach Default, wenn der Style nicht explizit mit der "
+"Option <_:option-1/> gesetzt wird."
 
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:103
@@ -154,9 +154,9 @@ msgid ""
 "row."
 msgstr ""
 "Computer-Züge nicht verzögern. Voreingestellt ist, dass der Computer-Spieler "
-"Züge, die schneller als in einer Sekunde generiert werden, ein wenig "
-"verzögert, um es dem Benutzer leichter zu machen, dem Spiel zu folgen, wenn "
-"der Computer mehrere Züge nacheinander generiert."
+"Züge ein wenig verzögert, die schneller als innerhalb einer Sekunde "
+"generiert werden, um es dem Benutzer leichter zu machen, dem Spiel zu "
+"folgen, wenn der Computer mehrere Züge nacheinander generiert."
 
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:122
@@ -181,8 +181,8 @@ msgstr ""
 "Die Anzahl der Threads, die bei der Suche verwendet werden. Voreingestellt "
 "ist, dass die Suche bis zu 8 Threads verwendet, abhängig von Anzahl der auf "
 "dem System verfügbaren Hardware-Threads. Mehr Threads machen die Suche "
-"schneller, aber das Benutzen einer sehr hohen Anzahl (z. B. mehr als 8) kann "
-"die Spielstärke in höheren Spielstufen beeinträchtigen."
+"schneller, aber eine sehr hohen Anzahl (z. B. mehr als 8) kann die "
+"Spielstärke in höheren Spielstufen beeinträchtigen."
 
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:144
@@ -191,7 +191,7 @@ msgid ""
 "information to standard error."
 msgstr ""
 "Interne Informationen zur Zuggenerierung und andere Debugging-Informationen "
-"auf den Standard-Error-Stream ausgeben."
+"auf dem Standard-Error-Stream ausgeben."
 
 #. (itstool) path: refsection/title
 #: pentobi-manpage.docbook.in:154
