@@ -18,8 +18,7 @@ string(REGEX REPLACE "\n" ";" linguas "${linguas}")
 
 set(man_files "${CMAKE_CURRENT_BINARY_DIR}/pentobi.6")
 foreach(lang ${linguas})
-    list(APPEND man_files
-        "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi.6")
+    list(APPEND man_files "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi.6")
 endforeach()
 
 foreach(icon application-x-blokus-sgf application-x-blokus-sgf-16
@@ -115,23 +114,23 @@ add_custom_command(OUTPUT pentobi.6
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi.6"
     DESTINATION "${CMAKE_INSTALL_MANDIR}/man6")
 foreach(lang ${linguas})
-    add_custom_command(OUTPUT manpage-${lang}/pentobi-manpage.docbook
-        COMMAND mkdir -p manpage-${lang}/
+    add_custom_command(OUTPUT ${lang}/pentobi-manpage.docbook
+        COMMAND mkdir -p ${lang}
         COMMAND "${ITSTOOL}" -l ${lang} -m ${lang}.mo
-        -o manpage-${lang}/pentobi-manpage.docbook
+        -o ${lang}/pentobi-manpage.docbook
         -i "${CMAKE_CURRENT_SOURCE_DIR}/manpage.its"
         pentobi-manpage.docbook
         DEPENDS ${lang}.mo "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
         )
-    add_custom_command(OUTPUT manpage-${lang}/pentobi.6
+    add_custom_command(OUTPUT ${lang}/pentobi.6
         COMMAND "${XSLTPROC}"  --nonet --path "${DOCBOOK_XSL}/manpages"
-        -o manpage-${lang}/ "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
-        manpage-${lang}/pentobi-manpage.docbook
+        -o ${lang}/ "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
+        ${lang}/pentobi-manpage.docbook
         DEPENDS
         "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
-        "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi-manpage.docbook"
+        "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-manpage.docbook"
         )
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi.6"
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi.6"
         DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")
 endforeach()
 

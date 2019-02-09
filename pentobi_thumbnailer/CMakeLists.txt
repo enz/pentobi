@@ -19,7 +19,7 @@ string(REGEX REPLACE "\n" ";" linguas "${linguas}")
 set(man_files "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer.6")
 foreach(lang ${linguas})
     list(APPEND man_files
-        "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi-thumbnailer.6")
+        "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-thumbnailer.6")
 endforeach()
 
 foreach(lang ${linguas})
@@ -58,24 +58,23 @@ add_custom_command(OUTPUT pentobi-thumbnailer.6
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer.6"
     DESTINATION "${CMAKE_INSTALL_MANDIR}/man6")
 foreach(lang ${linguas})
-    add_custom_command(OUTPUT manpage-${lang}/pentobi-thumbnailer-manpage.docbook
-        COMMAND mkdir -p manpage-${lang}/
+    add_custom_command(OUTPUT ${lang}/pentobi-thumbnailer-manpage.docbook
+        COMMAND mkdir -p ${lang}
         COMMAND "${ITSTOOL}" -l ${lang} -m ${lang}.mo
-        -o manpage-${lang}/pentobi-thumbnailer-manpage.docbook
+        -o ${lang}/pentobi-thumbnailer-manpage.docbook
         -i "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.its"
         pentobi-thumbnailer-manpage.docbook
         DEPENDS ${lang}.mo "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer-manpage.docbook"
         )
-    add_custom_command(OUTPUT manpage-${lang}/pentobi-thumbnailer.6
+    add_custom_command(OUTPUT ${lang}/pentobi-thumbnailer.6
         COMMAND "${XSLTPROC}"  --nonet --path "${DOCBOOK_XSL}/manpages"
-        -o manpage-${lang}/
-        "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
-        manpage-${lang}/pentobi-thumbnailer-manpage.docbook
+        -o ${lang}/ "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
+        ${lang}/pentobi-thumbnailer-manpage.docbook
         DEPENDS
-        "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi-thumbnailer-manpage.docbook"
+        "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-thumbnailer-manpage.docbook"
         "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
         )
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi-thumbnailer.6"
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-thumbnailer.6"
         DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")
 endforeach()
 
