@@ -106,13 +106,14 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-mime.xml"
 
 configure_file(pentobi-manpage.docbook.in pentobi-manpage.docbook @ONLY)
 add_custom_command(OUTPUT pentobi.6
-    COMMAND "${XSLTPROC}" "${DOCBOOK_XSL}/manpages/docbook.xsl"
-    pentobi-manpage.docbook
-    DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
+    COMMAND "${XSLTPROC}" --nonet --path "${DOCBOOK_XSL}/manpages"
+    "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl" pentobi-manpage.docbook
+    DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
+    "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
     )
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi.6"
-    DESTINATION ${CMAKE_INSTALL_MANDIR}/man6)
-
+    DESTINATION "${CMAKE_INSTALL_MANDIR}/man6")
 foreach(lang ${linguas})
     add_custom_command(OUTPUT manpage-${lang}/pentobi-manpage.docbook
         COMMAND mkdir -p manpage-${lang}/
@@ -123,10 +124,12 @@ foreach(lang ${linguas})
         DEPENDS ${lang}.mo "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
         )
     add_custom_command(OUTPUT manpage-${lang}/pentobi.6
-        COMMAND "${XSLTPROC}" -o manpage-${lang}/
-        "${DOCBOOK_XSL}/manpages/docbook.xsl"
+        COMMAND "${XSLTPROC}"  --nonet --path "${DOCBOOK_XSL}/manpages"
+        -o manpage-${lang}/ "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
         manpage-${lang}/pentobi-manpage.docbook
-        DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi-manpage.docbook"
+        DEPENDS
+        "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
+        "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi-manpage.docbook"
         )
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi.6"
         DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")

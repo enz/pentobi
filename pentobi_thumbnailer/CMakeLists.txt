@@ -48,13 +48,15 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
 configure_file(pentobi-thumbnailer-manpage.docbook.in
     pentobi-thumbnailer-manpage.docbook @ONLY)
 add_custom_command(OUTPUT pentobi-thumbnailer.6
-    COMMAND "${XSLTPROC}" "${DOCBOOK_XSL}/manpages/docbook.xsl"
+    COMMAND "${XSLTPROC}" --nonet --path "${DOCBOOK_XSL}/manpages"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
     pentobi-thumbnailer-manpage.docbook
-    DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer-manpage.docbook"
-    )
+    DEPENDS
+    "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer-manpage.docbook"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
+)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer.6"
-    DESTINATION ${CMAKE_INSTALL_MANDIR}/man6)
-
+    DESTINATION "${CMAKE_INSTALL_MANDIR}/man6")
 foreach(lang ${linguas})
     add_custom_command(OUTPUT manpage-${lang}/pentobi-thumbnailer-manpage.docbook
         COMMAND mkdir -p manpage-${lang}/
@@ -65,10 +67,13 @@ foreach(lang ${linguas})
         DEPENDS ${lang}.mo "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer-manpage.docbook"
         )
     add_custom_command(OUTPUT manpage-${lang}/pentobi-thumbnailer.6
-        COMMAND "${XSLTPROC}" -o manpage-${lang}/
-        "${DOCBOOK_XSL}/manpages/docbook.xsl"
+        COMMAND "${XSLTPROC}"  --nonet --path "${DOCBOOK_XSL}/manpages"
+        -o manpage-${lang}/
+        "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
         manpage-${lang}/pentobi-thumbnailer-manpage.docbook
-        DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi-thumbnailer-manpage.docbook"
+        DEPENDS
+        "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi-thumbnailer-manpage.docbook"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
         )
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/manpage-${lang}/pentobi-thumbnailer.6"
         DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")
