@@ -4,13 +4,17 @@ Compiling and Installing Pentobi From the Sources
 Requirements
 ------------
 
-Pentobi requires the Qt libraries (>=5.11). The C++ compiler needs C++17
-support (GCC >=5). The build system uses CMake (>=3.1.0). On Unix,
-GNU gettext, the ITS Tool, xsltproc, and the DocBooc XSL stylesheets are
-needed at build time.
+Building Pentobi requires the following tools and libraries:
 
-In Debian-based distributions, the necessary tools and libraries can be
-installed with the command
+* C++ compiler with C++17 support (e.g. GCC >=5)
+* [Qt libraries](https://www.qt.io/) (>=5.11)
+* [CMake] (https://cmake.org/) (>=3.1.0)
+* [GNU gettext](https://www.gnu.org/software/gettext/)
+* [ITS Tool](http://itstool.org/)
+* [xsltproc](http://xmlsoft.org/XSLT/xsltproc.html)
+* [DocBooc XSL](http://www.sagehill.net/docbookxsl/)
+
+In Debian-based distributions, they can be installed with the command
 ```
 sudo apt-get install cmake docbook-xsl g++ gettext itstool \
   libqt5svg5-dev libqt5webview5-dev make \
