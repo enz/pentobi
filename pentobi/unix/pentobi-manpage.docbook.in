@@ -4,7 +4,7 @@
 <refmeta>
 <refentrytitle>pentobi</refentrytitle>
 <manvolnum>6</manvolnum>
-<refmiscinfo class="source-name">Pentobi</refmiscinfo>
+<refmiscinfo class="source">Pentobi</refmiscinfo>
 <refmiscinfo class="version">@PENTOBI_VERSION@</refmiscinfo>
 <refmiscinfo class="manual">Pentobi Command Reference</refmiscinfo>
 </refmeta>
