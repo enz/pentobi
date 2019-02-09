@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-02-08 22:34+0100\n"
+"POT-Creation-Date: 2019-02-09 08:31+0100\n"
 "PO-Revision-Date: 2019-02-09 07:56+0100\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>\n"
 "Language-Team: \n"
@@ -17,26 +17,12 @@ msgid "Pentobi"
 msgstr "Pentobi"
 
 #. (itstool) path: refmeta/refmiscinfo
-#: pentobi-thumbnailer-manpage.docbook.in:8
-msgid "Pentobi @PENTOBI_VERSION@"
-msgstr "Pentobi @PENTOBI_VERSION@"
-
-#. (itstool) path: refmeta/refmiscinfo
 #: pentobi-thumbnailer-manpage.docbook.in:9
 msgid "Pentobi Command Reference"
 msgstr "Pentobi Befehlsreferenz"
 
-#. (itstool) path: info/author
-#: pentobi-thumbnailer-manpage.docbook.in:12
-msgid ""
-"<personname> <firstname>Markus</firstname> <surname>Enzenberger</surname> </"
-"personname>"
-msgstr ""
-"<personname> <firstname>Markus</firstname> <surname>Enzenberger</surname> </"
-"personname>"
-
 #. (itstool) path: refnamediv/refpurpose
-#: pentobi-thumbnailer-manpage.docbook.in:21
+#: pentobi-thumbnailer-manpage.docbook.in:17
 msgid ""
 "thumbnailer for game records for the board game Blokus as used by the "
 "program Pentobi"
@@ -45,7 +31,7 @@ msgstr ""
 "Programm Pentobi verwendet"
 
 #. (itstool) path: refsynopsisdiv/cmdsynopsis
-#: pentobi-thumbnailer-manpage.docbook.in:28
+#: pentobi-thumbnailer-manpage.docbook.in:24
 msgid ""
 "<_:command-1/> <group> <arg><_:option-2/> <replaceable>n</replaceable></arg> "
 "<arg><_:option-3/> <replaceable>n</replaceable></arg> </group> <arg choice="
@@ -58,12 +44,12 @@ msgstr ""
 "\"><replaceable>Ausgabedatei</replaceable></arg>"
 
 #. (itstool) path: refsection/title
-#: pentobi-thumbnailer-manpage.docbook.in:45
+#: pentobi-thumbnailer-manpage.docbook.in:41
 msgid "Description"
 msgstr "Beschreibung"
 
 #. (itstool) path: refsection/para
-#: pentobi-thumbnailer-manpage.docbook.in:46
+#: pentobi-thumbnailer-manpage.docbook.in:42
 msgid ""
 "<_:command-1/> is part of the program Pentobi and intended to be used as a "
 "thumbnailer for the Gnome desktop environment to generate previews of game "
@@ -74,7 +60,7 @@ msgstr ""
 "die von Pentobi gespeichert werden."
 
 #. (itstool) path: refsection/para
-#: pentobi-thumbnailer-manpage.docbook.in:51
+#: pentobi-thumbnailer-manpage.docbook.in:47
 msgid ""
 "The input file is a game file in Pentobi's SGF format as documented in "
 "Pentobi-SGF.html in the Pentobi source package. The output file is a "
@@ -85,38 +71,48 @@ msgstr ""
 "Vorschaubild im PNG-Format."
 
 #. (itstool) path: refsection/title
-#: pentobi-thumbnailer-manpage.docbook.in:59
+#: pentobi-thumbnailer-manpage.docbook.in:55
 msgid "Options"
 msgstr "Optionen"
 
 #. (itstool) path: listitem/para
-#: pentobi-thumbnailer-manpage.docbook.in:65
+#: pentobi-thumbnailer-manpage.docbook.in:61
 msgid "Display help and exit."
 msgstr "Hilfe anzeigen und Programm beenden."
 
 #. (itstool) path: varlistentry/term
-#: pentobi-thumbnailer-manpage.docbook.in:71
-#: pentobi-thumbnailer-manpage.docbook.in:72
+#: pentobi-thumbnailer-manpage.docbook.in:67
+#: pentobi-thumbnailer-manpage.docbook.in:68
 msgid "<_:option-1/> <replaceable>n</replaceable>"
 msgstr "<_:option-1/> <replaceable>n</replaceable>"
 
 #. (itstool) path: listitem/para
-#: pentobi-thumbnailer-manpage.docbook.in:74
+#: pentobi-thumbnailer-manpage.docbook.in:70
 msgid "The size of the thumbnail. The default is 128."
 msgstr "Die Größe des Vorschaubildes. Voreingestellt ist 128."
 
 #. (itstool) path: refsection/title
-#: pentobi-thumbnailer-manpage.docbook.in:83
+#: pentobi-thumbnailer-manpage.docbook.in:79
 msgid "Exit Status"
 msgstr "Rückgabewert"
 
 #. (itstool) path: refsection/para
-#: pentobi-thumbnailer-manpage.docbook.in:84
+#: pentobi-thumbnailer-manpage.docbook.in:80
 msgid "0 if the thumbnail generation succeeds, 1 on error."
 msgstr ""
 "0, wenn die Generierung des Vorschaubildes erfolgreich ist, 1 im Fehlerfall."
 
 #. (itstool) path: refsection/title
-#: pentobi-thumbnailer-manpage.docbook.in:90
+#: pentobi-thumbnailer-manpage.docbook.in:86
 msgid "See Also"
 msgstr "Siehe auch"
+
+#~ msgid "Pentobi @PENTOBI_VERSION@"
+#~ msgstr "Pentobi @PENTOBI_VERSION@"
+
+#~ msgid ""
+#~ "<personname> <firstname>Markus</firstname> <surname>Enzenberger</surname> "
+#~ "</personname>"
+#~ msgstr ""
+#~ "<personname> <firstname>Markus</firstname> <surname>Enzenberger</surname> "
+#~ "</personname>"

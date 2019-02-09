@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-08 22:35+0100\n"
+"POT-Creation-Date: 2019-02-09 08:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,29 +24,17 @@ msgid "Pentobi"
 msgstr ""
 
 #. (itstool) path: refmeta/refmiscinfo
-#: pentobi-manpage.docbook.in:8
-msgid "Pentobi @PENTOBI_VERSION@"
-msgstr ""
-
-#. (itstool) path: refmeta/refmiscinfo
 #: pentobi-manpage.docbook.in:9
 msgid "Pentobi Command Reference"
 msgstr ""
 
-#. (itstool) path: info/author
-#: pentobi-manpage.docbook.in:12
-msgid ""
-"<personname> <firstname>Markus</firstname> <surname>Enzenberger</surname> </"
-"personname>"
-msgstr ""
-
 #. (itstool) path: refnamediv/refpurpose
-#: pentobi-manpage.docbook.in:21
+#: pentobi-manpage.docbook.in:17
 msgid "computer opponent for the board game Blokus"
 msgstr ""
 
 #. (itstool) path: refsynopsisdiv/cmdsynopsis
-#: pentobi-manpage.docbook.in:27
+#: pentobi-manpage.docbook.in:23
 msgid ""
 "<_:command-1/> <group> <arg><_:option-2/> <replaceable>n</replaceable></arg> "
 "<arg><_:option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/></arg> "
@@ -56,19 +44,19 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: refsection/title
-#: pentobi-manpage.docbook.in:48
+#: pentobi-manpage.docbook.in:44
 msgid "Description"
 msgstr ""
 
 #. (itstool) path: refsection/para
-#: pentobi-manpage.docbook.in:49
+#: pentobi-manpage.docbook.in:45
 msgid ""
 "<_:command-1/> is the command to invoke the program Pentobi, which is a "
 "graphical user interface and computer opponent for the board game Blokus."
 msgstr ""
 
 #. (itstool) path: refsection/para
-#: pentobi-manpage.docbook.in:54
+#: pentobi-manpage.docbook.in:50
 msgid ""
 "The command can take the name of a game file to open at startup as an "
 "optional argument. The game file is expected to be in Pentobi's SGF format "
@@ -76,23 +64,23 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: refsection/title
-#: pentobi-manpage.docbook.in:62
+#: pentobi-manpage.docbook.in:58
 msgid "Options"
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:68
+#: pentobi-manpage.docbook.in:64
 msgid "Display help and exit."
 msgstr ""
 
 #. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:74 pentobi-manpage.docbook.in:120
-#: pentobi-manpage.docbook.in:130
+#: pentobi-manpage.docbook.in:70 pentobi-manpage.docbook.in:116
+#: pentobi-manpage.docbook.in:126
 msgid "<_:option-1/> <replaceable>n</replaceable>"
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:76
+#: pentobi-manpage.docbook.in:72
 msgid ""
 "Set the maximum playing level. Reducing this value reduces the amount of "
 "memory used by the search, which can be useful to run Pentobi on systems "
@@ -104,7 +92,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:90
+#: pentobi-manpage.docbook.in:86
 msgid ""
 "Use a window layout optimized for smartphones and apply some user interface "
 "changes that assume that a touchscreen is the main input device. If this "
@@ -114,12 +102,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:103
+#: pentobi-manpage.docbook.in:99
 msgid "Do not use opening books."
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:111
+#: pentobi-manpage.docbook.in:107
 msgid ""
 "Do not delay fast computer moves. By default, the computer player adds a "
 "small delay if the move generation took less than a second to make it easier "
@@ -128,7 +116,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:122
+#: pentobi-manpage.docbook.in:118
 msgid ""
 "Set the seed for the random generator. Using a fixed seed makes the move "
 "generation deterministic if no multi-threading is used (see option <_:"
@@ -136,7 +124,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:132
+#: pentobi-manpage.docbook.in:128
 msgid ""
 "The number of threads to use in the search. By default, up to 8 threads are "
 "used in the search depending on the number of hardware threads supported by "
@@ -146,50 +134,50 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:144
+#: pentobi-manpage.docbook.in:140
 msgid ""
 "Print internal information about the move generation and other debugging "
 "information to standard error."
 msgstr ""
 
 #. (itstool) path: refsection/title
-#: pentobi-manpage.docbook.in:154
+#: pentobi-manpage.docbook.in:150
 msgid "Standard Qt Options"
 msgstr ""
 
 #. (itstool) path: refsection/para
-#: pentobi-manpage.docbook.in:155
+#: pentobi-manpage.docbook.in:151
 msgid ""
 "Additionally, any options supported by Qt applications can be used, such as:"
 msgstr ""
 
 #. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:161
+#: pentobi-manpage.docbook.in:157
 msgid "<_:option-1/> <replaceable>d</replaceable>"
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:163
+#: pentobi-manpage.docbook.in:159
 msgid "Switches displays on X11."
 msgstr ""
 
 #. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:169
+#: pentobi-manpage.docbook.in:165
 msgid "<_:option-1/> <replaceable>g</replaceable>"
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:171
+#: pentobi-manpage.docbook.in:167
 msgid "Window geometry using the X11 syntax."
 msgstr ""
 
 #. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:177
+#: pentobi-manpage.docbook.in:173
 msgid "<_:option-1/> <replaceable>s</replaceable>"
 msgstr ""
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:179
+#: pentobi-manpage.docbook.in:175
 msgid ""
 "Set the style for the GUI elements of QQuickControls 2. If no style is "
 "chosen, the default style is Default if option <_:option-1/> is set and "
@@ -197,7 +185,7 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: refsection/title
-#: pentobi-manpage.docbook.in:190
+#: pentobi-manpage.docbook.in:186
 msgid "See Also"
 msgstr ""
 

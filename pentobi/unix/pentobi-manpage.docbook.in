@@ -5,15 +5,11 @@
 <refentrytitle>pentobi</refentrytitle>
 <manvolnum>6</manvolnum>
 <refmiscinfo class="source-name">Pentobi</refmiscinfo>
-<refmiscinfo class="version">Pentobi @PENTOBI_VERSION@</refmiscinfo>
+<refmiscinfo class="version">@PENTOBI_VERSION@</refmiscinfo>
 <refmiscinfo class="manual">Pentobi Command Reference</refmiscinfo>
 </refmeta>
 <info>
-<author>
-<personname>
-<firstname>Markus</firstname> <surname>Enzenberger</surname>
-</personname>
-</author>
+<date>@PENTOBI_RELEASE_DATE@</date>
 </info>
 
 <refnamediv>
