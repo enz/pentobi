@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-02-09 21:12+0100\n"
-"PO-Revision-Date: 2019-02-09 21:13+0100\n"
+"POT-Creation-Date: 2019-02-09 21:28+0100\n"
+"PO-Revision-Date: 2019-02-09 21:28+0100\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -33,23 +33,25 @@ msgstr ""
 #. (itstool) path: refsynopsisdiv/cmdsynopsis
 #: pentobi-thumbnailer-manpage.docbook.in:24
 msgid ""
-"<_:command-1/> <arg><_:option-2/> <replaceable>n</replaceable></arg> <arg><_:"
-"option-3/> <replaceable>n</replaceable></arg> <arg choice=\"plain"
+"<_:command-1/> <arg> <group choice=\"plain\"> <arg choice=\"plain\"><_:"
+"option-2/></arg> <arg choice=\"plain\"><_:option-3/></arg> </group> "
+"<replaceable>n</replaceable> </arg> <arg choice=\"plain"
 "\"><replaceable>inputfile</replaceable></arg> <arg choice=\"plain"
 "\"><replaceable>outputfile</replaceable></arg>"
 msgstr ""
-"<_:command-1/> <arg><_:option-2/> <replaceable>n</replaceable></arg> <arg><_:"
-"option-3/> <replaceable>n</replaceable></arg> <arg choice=\"plain"
+"<_:command-1/> <arg> <group choice=\"plain\"> <arg choice=\"plain\"><_:"
+"option-2/></arg> <arg choice=\"plain\"><_:option-3/></arg> </group> "
+"<replaceable>n</replaceable> </arg> <arg choice=\"plain"
 "\"><replaceable>Eingabedatei</replaceable></arg> <arg choice=\"plain"
 "\"><replaceable>Ausgabedatei</replaceable></arg>"
 
 #. (itstool) path: refsection/title
-#: pentobi-thumbnailer-manpage.docbook.in:39
+#: pentobi-thumbnailer-manpage.docbook.in:46
 msgid "Description"
 msgstr "Beschreibung"
 
 #. (itstool) path: refsection/para
-#: pentobi-thumbnailer-manpage.docbook.in:40
+#: pentobi-thumbnailer-manpage.docbook.in:47
 msgid ""
 "<_:command-1/> is part of the program Pentobi and intended to be used as a "
 "thumbnailer for the Gnome desktop environment to generate previews of game "
@@ -60,7 +62,7 @@ msgstr ""
 "die von Pentobi gespeichert werden."
 
 #. (itstool) path: refsection/para
-#: pentobi-thumbnailer-manpage.docbook.in:45
+#: pentobi-thumbnailer-manpage.docbook.in:52
 msgid ""
 "The input file is a game file in Pentobi's SGF format as documented in "
 "Pentobi-SGF.html in the Pentobi source package. The output file is a "
@@ -71,41 +73,52 @@ msgstr ""
 "Vorschaubild im PNG-Format."
 
 #. (itstool) path: refsection/title
-#: pentobi-thumbnailer-manpage.docbook.in:53
+#: pentobi-thumbnailer-manpage.docbook.in:60
 msgid "Options"
 msgstr "Optionen"
 
 #. (itstool) path: listitem/para
-#: pentobi-thumbnailer-manpage.docbook.in:59
+#: pentobi-thumbnailer-manpage.docbook.in:66
 msgid "Display help and exit."
 msgstr "Hilfe anzeigen und Programm beenden."
 
 #. (itstool) path: varlistentry/term
-#: pentobi-thumbnailer-manpage.docbook.in:65
-#: pentobi-thumbnailer-manpage.docbook.in:66
+#: pentobi-thumbnailer-manpage.docbook.in:72
+#: pentobi-thumbnailer-manpage.docbook.in:73
 msgid "<_:option-1/> <replaceable>n</replaceable>"
 msgstr "<_:option-1/> <replaceable>n</replaceable>"
 
 #. (itstool) path: listitem/para
-#: pentobi-thumbnailer-manpage.docbook.in:68
+#: pentobi-thumbnailer-manpage.docbook.in:75
 msgid "The size of the thumbnail. The default is 128."
 msgstr "Die Größe des Vorschaubildes. Voreingestellt ist 128."
 
 #. (itstool) path: refsection/title
-#: pentobi-thumbnailer-manpage.docbook.in:77
+#: pentobi-thumbnailer-manpage.docbook.in:84
 msgid "Exit Status"
 msgstr "Rückgabewert"
 
 #. (itstool) path: refsection/para
-#: pentobi-thumbnailer-manpage.docbook.in:78
+#: pentobi-thumbnailer-manpage.docbook.in:85
 msgid "0 if the thumbnail generation succeeds, 1 on error."
 msgstr ""
 "0, wenn die Generierung des Vorschaubildes erfolgreich ist, 1 im Fehlerfall."
 
 #. (itstool) path: refsection/title
-#: pentobi-thumbnailer-manpage.docbook.in:84
+#: pentobi-thumbnailer-manpage.docbook.in:91
 msgid "See Also"
 msgstr "Siehe auch"
+
+#~ msgid ""
+#~ "<_:command-1/> <arg><_:option-2/> <replaceable>n</replaceable></arg> "
+#~ "<arg><_:option-3/> <replaceable>n</replaceable></arg> <arg choice=\"plain"
+#~ "\"><replaceable>inputfile</replaceable></arg> <arg choice=\"plain"
+#~ "\"><replaceable>outputfile</replaceable></arg>"
+#~ msgstr ""
+#~ "<_:command-1/> <arg><_:option-2/> <replaceable>n</replaceable></arg> "
+#~ "<arg><_:option-3/> <replaceable>n</replaceable></arg> <arg choice=\"plain"
+#~ "\"><replaceable>Eingabedatei</replaceable></arg> <arg choice=\"plain"
+#~ "\"><replaceable>Ausgabedatei</replaceable></arg>"
 
 #~ msgid ""
 #~ "<_:command-1/> <group> <arg><_:option-2/> <replaceable>n</replaceable></"

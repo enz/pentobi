@@ -33,8 +33,10 @@ computer opponent for the board game Blokus
 </cmdsynopsis>
 <cmdsynopsis>
 <command>pentobi</command>
-<arg><option>-h</option></arg>
-<arg><option>--help</option></arg>
+<group choice="plain">
+<arg choice="plain"><option>-h</option></arg>
+<arg choice="plain"><option>--help</option></arg>
+</group>
 </cmdsynopsis>
 </refsynopsisdiv>
 
