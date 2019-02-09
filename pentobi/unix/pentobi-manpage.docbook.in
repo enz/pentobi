@@ -22,7 +22,6 @@ computer opponent for the board game Blokus
 <refsynopsisdiv>
 <cmdsynopsis>
 <command>pentobi</command>
-<group>
 <arg><option>--maxlevel</option> <replaceable>n</replaceable></arg>
 <arg><option>--mobile</option></arg>
 <arg><option>--nobook</option></arg>
@@ -30,7 +29,6 @@ computer opponent for the board game Blokus
 <arg><option>--seed</option> <replaceable>n</replaceable></arg>
 <arg><option>--threads</option> <replaceable>n</replaceable></arg>
 <arg><option>--verbose</option></arg>
-</group>
 <arg><replaceable>file.blksgf</replaceable></arg>
 </cmdsynopsis>
 <cmdsynopsis>

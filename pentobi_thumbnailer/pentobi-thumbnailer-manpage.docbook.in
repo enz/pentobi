@@ -23,10 +23,8 @@ Pentobi
 <refsynopsisdiv>
 <cmdsynopsis>
 <command>pentobi-thumbnailer</command>
-<group>
 <arg><option>-s</option> <replaceable>n</replaceable></arg>
 <arg><option>--size</option> <replaceable>n</replaceable></arg>
-</group>
 <arg choice="plain"><replaceable>inputfile</replaceable></arg>
 <arg choice="plain"><replaceable>outputfile</replaceable></arg>
 </cmdsynopsis>
