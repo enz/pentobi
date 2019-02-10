@@ -376,7 +376,7 @@ bool State::gen_children(Tree::NodeExpander& expander, Float root_val)
                 root_val);
 }
 
-bool State::gen_playout_move_full(PlayerMove<Move>& mv)
+bool State::gen_playout_move_full(PlayerMove& mv)
 {
     Color to_play = m_bd.get_to_play();
     while (true)

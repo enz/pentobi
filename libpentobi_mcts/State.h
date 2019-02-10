@@ -20,7 +20,6 @@ namespace libpentobi_mcts {
 
 using libboardgame_mcts::LastGoodReply;
 using libboardgame_mcts::PlayerInt;
-using libboardgame_mcts::PlayerMove;
 using libboardgame_util::RandomGenerator;
 using libboardgame_util::Statistics;
 using libpentobi_base::BoardConst;
@@ -54,6 +53,8 @@ public:
                                          SearchParamConst::max_players,
                                          SearchParamConst::lgr_hash_table_size,
                                          SearchParamConst::multithread>;
+
+    using PlayerMove = libboardgame_mcts::PlayerMove<Move>;
 
 
     /** Constructor.
@@ -91,7 +92,7 @@ public:
         @return @c false if end of game was reached, and no move was
         generated. */
     bool gen_playout_move(const LastGoodReply& lgr, Move last,
-                          Move second_last, PlayerMove<Move>& mv);
+                          Move second_last, PlayerMove& mv);
 
     void evaluate_playout(array<Float, 6>& result);
 
@@ -278,7 +279,7 @@ private:
                     const PlayoutFeatures& playout_features,
                     float& total_gamma);
 
-    bool gen_playout_move_full(PlayerMove<Move>& mv);
+    bool gen_playout_move_full(PlayerMove& mv);
 
     template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
     void update_moves(Color c);
@@ -345,7 +346,7 @@ inline void State::finish_in_tree()
 }
 
 inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
-                                    Move second_last, PlayerMove<Move>& mv)
+                                    Move second_last, PlayerMove& mv)
 {
     if (m_nu_passes == m_nu_colors)
         return false;
