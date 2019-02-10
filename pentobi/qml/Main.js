@@ -301,6 +301,38 @@ function getGameLabel(setupMode, isRated, file, isModified, short) {
     return (isModified ? "*" : "") + label
 }
 
+function getPlayerString(variant, player)
+{
+    var isMultiColor = (variant === "classic_2" || variant === "trigon_2"
+                        || variant === "nexos_2" || variant === "callisto_2_4"
+                        || variant === "gembloq_2_4")
+    switch (player) {
+    case 0:
+        if (isMultiColor)
+            return qsTr("Blue/Red");
+        else if (variant === "duo")
+            return qsTr("Purple");
+        else if (variant === "junior")
+            return qsTr("Green");
+        else
+            return qsTr("Blue");
+    case 1:
+        if (isMultiColor)
+            return qsTr("Yellow/Green");
+        else if (variant === "duo" || variant === "junior")
+            return qsTr("Orange");
+        else if (variant === "callisto_2" || variant === "gembloq_2")
+            return qsTr("Green");
+        else
+            return qsTr("Yellow");
+    case 2:
+        return qsTr("Red");
+    case 3:
+        return qsTr("Green");
+    }
+    return "";
+}
+
 function getWindowTitle(file, isModified) {
     if (file === "")
         //: Window title if no file is loaded.

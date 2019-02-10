@@ -281,35 +281,35 @@
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation>Bleu/rouge</translation>
+        <translation type="vanished">Bleu/rouge</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>Violet</translation>
+        <translation type="vanished">Violet</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>Vert</translation>
+        <translation type="vanished">Vert</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>Bleu</translation>
+        <translation type="vanished">Bleu</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>Jaune/vert</translation>
+        <translation type="vanished">Jaune/vert</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>Orange</translation>
+        <translation type="vanished">Orange</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>Jaune</translation>
+        <translation type="vanished">Jaune</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>Rouge</translation>
+        <translation type="vanished">Rouge</translation>
     </message>
     <message>
         <source>Level %1</source>
@@ -416,35 +416,35 @@
     <name>GameModel</name>
     <message>
         <source>Blue/Red</source>
-        <translation>Bleu/rouge</translation>
+        <translation type="vanished">Bleu/rouge</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>Violet</translation>
+        <translation type="vanished">Violet</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>Vert</translation>
+        <translation type="vanished">Vert</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>Bleu</translation>
+        <translation type="vanished">Bleu</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>Jaune/vert</translation>
+        <translation type="vanished">Jaune/vert</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>Orange</translation>
+        <translation type="vanished">Orange</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>Jaune</translation>
+        <translation type="vanished">Jaune</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>Rouge</translation>
+        <translation type="vanished">Rouge</translation>
     </message>
     <message>
         <source>Purple wins with 1 point.</source>
@@ -1001,6 +1001,38 @@
     <message>
         <source>Undo Move</source>
         <translation>Annuler le coup</translation>
+    </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation>Bleu/rouge</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Violet</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Vert</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>Bleu</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation>Jaune/vert</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Jaune</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rouge</translation>
     </message>
 </context>
 <context>

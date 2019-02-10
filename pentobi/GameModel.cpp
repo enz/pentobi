@@ -500,37 +500,6 @@ QVariantList GameModel::getPieceModels(int color)
     return m_pieceModels[Color(0)];
 }
 
-QString GameModel::getPlayerString(int player)
-{
-    auto variant = m_game.get_variant();
-    bool isMulticolor = (m_nuColors > m_nuPlayers && variant != Variant::classic_3);
-    switch (player) {
-    case 0:
-        if (isMulticolor)
-            return tr("Blue/Red");
-        else if (variant == Variant::duo)
-            return tr("Purple");
-        else if (variant == Variant::junior)
-            return tr("Green");
-        else
-            return tr("Blue");
-    case 1:
-        if (isMulticolor)
-            return tr("Yellow/Green");
-        else if (variant == Variant::duo || variant == Variant::junior)
-            return tr("Orange");
-        else if (m_nuColors == 2)
-            return tr("Green");
-        else
-            return tr("Yellow");
-    case 2:
-        return tr("Red");
-    case 3:
-        return tr("Green");
-    }
-    return {};
-}
-
 Variant GameModel::getInitialGameVariant()
 {
     QSettings settings;

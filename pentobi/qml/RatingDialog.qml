@@ -196,7 +196,11 @@ Pentobi.Dialog {
                         Repeater {
                             model: history
 
-                            Label { text: gameModel.getPlayerString(modelData.color) }
+                            Label {
+                                text:
+                                    Logic.getPlayerString(
+                                        gameModel.gameVariant, modelData.color)
+                            }
                         }
                         Label { font.underline: true; text: qsTr("Date") }
                         Repeater {

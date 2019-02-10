@@ -191,35 +191,35 @@
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation>蓝/红</translation>
+        <translation type="vanished">蓝/红</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>紫色</translation>
+        <translation type="vanished">紫色</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>绿色</translation>
+        <translation type="vanished">绿色</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>蓝色</translation>
+        <translation type="vanished">蓝色</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>黄/绿</translation>
+        <translation type="vanished">黄/绿</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>橙色</translation>
+        <translation type="vanished">橙色</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>黄色</translation>
+        <translation type="vanished">黄色</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>红色</translation>
+        <translation type="vanished">红色</translation>
     </message>
     <message>
         <source>Level %1</source>
@@ -326,35 +326,35 @@
     <name>GameModel</name>
     <message>
         <source>Blue/Red</source>
-        <translation>蓝/红</translation>
+        <translation type="vanished">蓝/红</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>紫色</translation>
+        <translation type="vanished">紫色</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>绿色</translation>
+        <translation type="vanished">绿色</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>蓝色</translation>
+        <translation type="vanished">蓝色</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>黄/绿</translation>
+        <translation type="vanished">黄/绿</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>橙色</translation>
+        <translation type="vanished">橙色</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>黄色</translation>
+        <translation type="vanished">黄色</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>红色</translation>
+        <translation type="vanished">红色</translation>
     </message>
     <message>
         <source>Purple wins with 1 point.</source>
@@ -911,6 +911,38 @@
     <message>
         <source>Undo Move</source>
         <translation>撤销一步</translation>
+    </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation>蓝/红</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>紫色</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>绿色</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>蓝色</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation>黄/绿</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>橙色</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>黄色</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>红色</translation>
     </message>
 </context>
 <context>

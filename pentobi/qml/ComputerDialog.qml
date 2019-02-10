@@ -73,16 +73,8 @@ Pentobi.Dialog {
                             id: checkBox0
 
                             enabled: ! isRated
-                            text: {
-                                if (gameModel.nuColors === 4
-                                        && gameModel.nuPlayers === 2)
-                                    return qsTr("Blue/Red")
-                                if (gameModel.gameVariant === "duo")
-                                    return qsTr("Purple")
-                                if (gameModel.gameVariant === "junior")
-                                    return qsTr("Green")
-                                return qsTr("Blue")
-                            }
+                            text:
+                                Logic.getPlayerString(gameModel.gameVariant, 0)
                             onClicked:
                                 if (gameModel.nuColors === 4
                                         && gameModel.nuPlayers === 2)
@@ -110,17 +102,8 @@ Pentobi.Dialog {
                             id: checkBox1
 
                             enabled: ! isRated
-                            text: {
-                                if (gameModel.nuColors === 4
-                                        && gameModel.nuPlayers === 2)
-                                    return qsTr("Yellow/Green")
-                                if (gameModel.gameVariant === "duo"
-                                        || gameModel.gameVariant === "junior")
-                                    return qsTr("Orange")
-                                if (gameModel.nuColors === 2)
-                                    return qsTr("Green")
-                                return qsTr("Yellow")
-                            }
+                            text:
+                                Logic.getPlayerString(gameModel.gameVariant, 1)
                             onClicked:
                                 if (gameModel.nuColors === 4
                                         && gameModel.nuPlayers === 2)
@@ -141,7 +124,8 @@ Pentobi.Dialog {
                             id: checkBox3
 
                             enabled: ! isRated
-                            text: qsTr("Green")
+                            text:
+                                Logic.getPlayerString(gameModel.gameVariant, 3)
                         }
                     }
                     Row {
@@ -158,7 +142,8 @@ Pentobi.Dialog {
                             id: checkBox2
 
                             enabled: ! isRated
-                            text: qsTr("Red")
+                            text:
+                                Logic.getPlayerString(gameModel.gameVariant, 2)
                         }
                     }
                 }

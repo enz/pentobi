@@ -281,35 +281,35 @@
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation>Blå/rød</translation>
+        <translation type="vanished">Blå/rød</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>Lilla</translation>
+        <translation type="vanished">Lilla</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>Grønn</translation>
+        <translation type="vanished">Grønn</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>Blå</translation>
+        <translation type="vanished">Blå</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>Gul/grønn</translation>
+        <translation type="vanished">Gul/grønn</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>Oransje</translation>
+        <translation type="vanished">Oransje</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>Gul</translation>
+        <translation type="vanished">Gul</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>Rød</translation>
+        <translation type="vanished">Rød</translation>
     </message>
     <message>
         <source>Level %1</source>
@@ -416,35 +416,35 @@
     <name>GameModel</name>
     <message>
         <source>Blue/Red</source>
-        <translation>Blå/rød</translation>
+        <translation type="vanished">Blå/rød</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>Lilla</translation>
+        <translation type="vanished">Lilla</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>Grønn</translation>
+        <translation type="vanished">Grønn</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>Blå</translation>
+        <translation type="vanished">Blå</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>Gul/grønn</translation>
+        <translation type="vanished">Gul/grønn</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>Oransje</translation>
+        <translation type="vanished">Oransje</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>Gul</translation>
+        <translation type="vanished">Gul</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>Rød</translation>
+        <translation type="vanished">Rød</translation>
     </message>
     <message>
         <source>Purple wins with 1 point.</source>
@@ -1001,6 +1001,38 @@
     <message>
         <source>Undo Move</source>
         <translation>Angre trekk</translation>
+    </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation>Blå/rød</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Lilla</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Grønn</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>Blå</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation>Gul/grønn</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Oransje</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Gul</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rød</translation>
     </message>
 </context>
 <context>
