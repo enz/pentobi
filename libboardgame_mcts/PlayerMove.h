@@ -23,14 +23,6 @@ struct PlayerMove
     PlayerInt player;
 
     MOVE move;
-
-    PlayerMove() = default;
-
-    PlayerMove(PlayerInt player, MOVE move)
-    {
-        this->player = player;
-        this->move = move;
-    }
 };
 
 //-----------------------------------------------------------------------------

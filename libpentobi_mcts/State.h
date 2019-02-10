@@ -357,13 +357,13 @@ inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
     Move lgr2 = lgr.get_lgr2(player, last, second_last);
     if (check_lgr(lgr2))
     {
-        mv = PlayerMove(player, lgr2);
+        mv = {player, lgr2};
         return true;
     }
     Move lgr1 = lgr.get_lgr1(player, last);
     if (check_lgr(lgr1))
     {
-        mv = PlayerMove(player, lgr1);
+        mv = {player, lgr1};
         return true;
     }
     return gen_playout_move_full(mv);

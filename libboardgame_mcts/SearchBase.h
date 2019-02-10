@@ -959,7 +959,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
             m_tree.add_value(*node, 0);
         simulation.nodes.push_back(node);
         Move mv = node->get_move();
-        simulation.moves.push_back(PlayerMove(state.get_player(), mv));
+        simulation.moves.push_back({state.get_player(), mv});
         state.play_in_tree(mv);
         expansion_threshold += SearchParamConst::expansion_threshold_inc;
     }
@@ -973,7 +973,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
         {
             simulation.nodes.push_back(node);
             Move mv = node->get_move();
-            simulation.moves.push_back(PlayerMove(state.get_player(), mv));
+            simulation.moves.push_back({state.get_player(), mv});
             state.play_expanded_child(mv);
         }
     }

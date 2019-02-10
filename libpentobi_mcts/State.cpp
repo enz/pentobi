@@ -436,7 +436,7 @@ bool State::gen_playout_move_full(PlayerMove<Move>& mv)
     auto random = m_random.generate_float(0, total_gamma);
     auto pos = lower_bound(begin, end, random);
     LIBBOARDGAME_ASSERT(pos != end);
-    mv = PlayerMove(get_player(), moves[static_cast<unsigned>(pos - begin)]);
+    mv = {get_player(), moves[static_cast<unsigned>(pos - begin)]};
     return true;
 }
 
