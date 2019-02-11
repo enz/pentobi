@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-11 17:31+0100\n"
+"POT-Creation-Date: 2019-02-11 17:37+0100\n"
 "PO-Revision-Date: 2019-02-04 21:10+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/pentobi/"
@@ -132,7 +132,7 @@ msgid ""
 "This means that each color may freely choose, which of the remaining "
 "unoccupied starting points to use for its first move. Pentobi currently only "
 "supports the rule variant with colored starting points because this rule "
-"variant was used in the first Blokus online servers and Blokus tournaments."
+"variant was used at the first Blokus online servers and Blokus tournaments."
 msgstr ""
 
 #. (itstool) path: chapter/title

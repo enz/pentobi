@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-11 17:31+0100\n"
+"POT-Creation-Date: 2019-02-11 17:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,7 +99,7 @@ msgstr ""
 
 #. (itstool) path: sect1/para
 #: index.docbook:91
-msgid "Note that the original Blokus Classic rules used colorless starting points. This means that each color may freely choose, which of the remaining unoccupied starting points to use for its first move. Pentobi currently only supports the rule variant with colored starting points because this rule variant was used in the first Blokus online servers and Blokus tournaments."
+msgid "Note that the original Blokus Classic rules used colorless starting points. This means that each color may freely choose, which of the remaining unoccupied starting points to use for its first move. Pentobi currently only supports the rule variant with colored starting points because this rule variant was used at the first Blokus online servers and Blokus tournaments."
 msgstr ""
 
 #. (itstool) path: chapter/title
