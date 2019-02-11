@@ -233,7 +233,7 @@ Pentobi.Dialog {
                             if (! folderModel.isFolder(index))
                                 checkAccept()
                     }
-                    ScrollBar.vertical: ScrollBar { active: true }
+                    ScrollBar.vertical: ScrollBar { }
 
                     FolderListModel {
                         id: folderModel
