@@ -92,9 +92,8 @@ ignored.
 Note that the original Blokus Classic rules used colorless starting points.
 This means that each color may freely choose, which of the remaining unoccupied
 starting points to use for its first move. Pentobi currently only supports the
-rule variant with colored starting points because this rule variant was used on
-the Blokus online server at blokus.com and in most of the past Blokus
-tournaments.
+rule variant with colored starting points because this rule variant was used in
+the first Blokus online servers and Blokus tournaments.
 </para>
 </sect1>
 </chapter>
