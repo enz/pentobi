@@ -9,6 +9,5 @@ else
 fi
 cd `dirname "$0"`
 for lang in $languages; do
-  msgmerge --update --no-fuzzy-matching --backup=none \
-    po/$lang.po pentobi-manual.pot
+  msgmerge --update --backup=none po/$lang.po pentobi-manual.pot
 done
