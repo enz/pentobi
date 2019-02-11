@@ -128,8 +128,10 @@ const char* to_string(Variant variant);
 
 /** Get a short lowercase string without spaces that can be used as
     a identifier for a game variant.
-    The strings used are "classic", "classic_2", "duo", "trigon", "trigon_2",
-    "trigon_3", "junior" */
+    The strings used are "classic", "classic_2", "classic_3", "duo", "junior",
+    "trigon", "trigon_2", "trigon_3", "nexos", "nexos_2", "callisto",
+    "callisto_2", "callisto_2_4", "callisto_3", "gembloq", "gembloq_2",
+    "gembloq_2_4", "gembloq_3". */
 const char* to_string_id(Variant variant);
 
 /** Parse name of game variant as in the GM property in Blokus SGF files.
