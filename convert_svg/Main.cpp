@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file convert/Main.cpp
+/** @file convert_svg/Main.cpp
     Converts images using the Qt library.
     Used for creating PNG icons from the SVG sources at build time.
     @author Markus Enzenberger
