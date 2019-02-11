@@ -43,6 +43,9 @@ Window {
         id: webView
 
         anchors.fill: parent
+        onLoadingChanged:
+            if (loadRequest.status === WebView.LoadFailedStatus)
+                loadHtml(loadRequest.errorString + "<br/>" + loadRequest.url)
     }
     Shortcut {
         sequence: "Ctrl+W"
