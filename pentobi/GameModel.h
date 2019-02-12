@@ -670,8 +670,6 @@ private:
 
     void setSetupPlayer();
 
-    void setUtf8();
-
     void updateFileInfo(const QString& file);
 
     void updateGameInfo();

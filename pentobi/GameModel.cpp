@@ -848,7 +848,8 @@ void GameModel::initGame(Variant variant)
     m_game.set_application("Pentobi");
 #endif
     m_game.set_date_today();
-    setUtf8();
+    m_game.set_charset("UTF-8");
+    m_textCodec = QTextCodec::codecForName("UTF-8");
     updateGameInfo();
 }
 
@@ -1488,12 +1489,6 @@ void GameModel::setTime(const QString& time)
     m_game.set_time(encode(time).constData());
     emit playerName3Changed();
     updateIsModified();
-}
-
-void GameModel::setUtf8()
-{
-    m_game.set_charset("UTF-8");
-    m_textCodec = QTextCodec::codecForName("UTF-8");
 }
 
 QString GameModel::suggestFileName(const QUrl& folder,
