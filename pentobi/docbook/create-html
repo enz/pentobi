@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Needs Debian packages: docbook5-xml docbook-xsl-ns gettext itstool
-# xsltproc
+# Needs Debian packages: docbook-xml docbook-xsl gettext itstool xsltproc
 
 cd `dirname "$0"`
 if test $# -eq 0 ; then
