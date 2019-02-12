@@ -116,7 +116,6 @@ RESOURCES += \
     icon/pentobi_icon.qrc \
     help.qrc \
     qml/themes/themes.qrc \
-    qml/i18n/translations.qrc \
     resources.qrc
 
 !android {
@@ -249,11 +248,18 @@ TRANSLATIONS = \
     qml/i18n/qml_zh_CN.ts
 
 qtPrepareTool(LRELEASE, lrelease)
-updateqm.input = TRANSLATIONS
-updateqm.output = ${QMAKE_FILE_PATH}/${QMAKE_FILE_BASE}.qm
-updateqm.commands = $$LRELEASE -removeidentical -nounfinished ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_OUT}
-updateqm.CONFIG += no_link target_predeps
-QMAKE_EXTRA_COMPILERS += updateqm
+update_qm.input = TRANSLATIONS
+update_qm.output = $$OUT_PWD/${QMAKE_FILE_BASE}.qm
+update_qm.commands = $$LRELEASE -removeidentical -nounfinished ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_OUT}
+update_qm.CONFIG += no_link target_predeps
+QMAKE_EXTRA_COMPILERS += update_qm
+
+COPY_QRC = qml/i18n/translations.qrc
+copy_qrc.input = COPY_QRC
+copy_qrc.output = $$OUT_PWD/${QMAKE_FILE_BASE}.qrc
+copy_qrc.commands = cp ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
+copy_qrc.variable_out = RESOURCES
+QMAKE_EXTRA_COMPILERS += copy_qrc
 
 OTHER_FILES += \
     android/AndroidManifest.xml
