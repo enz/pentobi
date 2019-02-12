@@ -17,7 +17,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::SgfTree;
 

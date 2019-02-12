@@ -11,8 +11,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** State of an on-board point, which can be a color or empty */

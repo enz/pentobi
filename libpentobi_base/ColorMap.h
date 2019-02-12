@@ -12,8 +12,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** Container mapping a color to another element type.

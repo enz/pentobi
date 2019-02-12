@@ -12,6 +12,7 @@
 #include "libboardgame_util/Statistics.h"
 #include "libboardgame_util/StringUtil.h"
 
+using namespace std;
 using libboardgame_util::from_string;
 using libboardgame_util::split;
 using libboardgame_util::trim;

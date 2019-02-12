@@ -13,8 +13,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 #ifdef LIBBOARDGAME_DEBUG

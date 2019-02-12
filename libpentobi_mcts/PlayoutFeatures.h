@@ -12,7 +12,6 @@
 
 namespace libpentobi_mcts {
 
-using namespace std;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::Color;

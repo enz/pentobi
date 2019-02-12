@@ -12,8 +12,6 @@
 
 namespace libboardgame_sgf {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** Return the last node in the current variation that had a sibling. */

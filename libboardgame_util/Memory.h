@@ -11,13 +11,11 @@
 
 namespace libboardgame_util {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** Get the physical memory available on the system.
     @return The memory in bytes or 0 if the memory could not be determined. */
-size_t get_memory();
+std::size_t get_memory();
 
 //-----------------------------------------------------------------------------
 

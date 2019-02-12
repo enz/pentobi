@@ -13,7 +13,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
 using libboardgame_gtp::Arguments;
 using libboardgame_gtp::Response;
 

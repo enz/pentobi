@@ -11,7 +11,6 @@
 
 namespace libpentobi_mcts {
 
-using namespace std;
 using libpentobi_base::Board;
 
 //-----------------------------------------------------------------------------

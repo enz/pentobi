@@ -12,8 +12,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 class Move
@@ -23,7 +21,7 @@ public:
         This class is optimized for size not for speed because there are
         large precomputed data structures that store moves and move lists.
         Therefore it uses uint_least16_t, not uint_fast16_t. */
-    using IntType = uint_least16_t;
+    using IntType = std::uint_least16_t;
 
     static constexpr IntType onboard_moves_classic = 30433;
 

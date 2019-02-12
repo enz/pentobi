@@ -9,11 +9,9 @@
 
 #include <string>
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
-void analyze(const string& file);
+void analyze(const std::string& file);
 
 //-----------------------------------------------------------------------------
 

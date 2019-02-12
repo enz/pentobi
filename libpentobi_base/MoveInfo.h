@@ -14,8 +14,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** Most frequently accessed move info.

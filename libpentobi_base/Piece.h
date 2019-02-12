@@ -12,8 +12,6 @@
 
 namespace libpentobi_base {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** Wrapper around an integer representing a piece type in a certain
@@ -21,7 +19,7 @@ using namespace std;
 class Piece
 {
 public:
-    using IntType = uint_fast8_t;
+    using IntType = std::uint_fast8_t;
 
     /** Maximum number of unique pieces per color. */
     static constexpr IntType max_pieces = 24;

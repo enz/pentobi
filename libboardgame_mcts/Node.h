@@ -13,8 +13,6 @@
 
 namespace libboardgame_mcts {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 using NodeIdx = uint_least32_t;

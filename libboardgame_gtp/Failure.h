@@ -11,15 +11,13 @@
 
 namespace libboardgame_gtp {
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 /** GTP failure.
     Command handlers generate a GTP error response by throwing an instance
     of Failure. */
 class Failure
-    : public runtime_error
+    : public std::runtime_error
 {
     using runtime_error::runtime_error;
 };
