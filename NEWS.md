@@ -15,6 +15,9 @@ Version 16.x (master)
 * The Android version now interactively asks for permission when opening
   or saving a game if storage permission has not yet been granted.
 * The compiler now needs to support C++17.
+* The SVG to bitmap conversions at build time are now done using
+  LibRsvg instead of a custom compiled Qt-based build helper to make
+  cross-compilation easier.
 * Renamed build configuration option PENTOBI_BUILD_TESTS to
   BUILD_TESTING for compatibility with CTest.
 

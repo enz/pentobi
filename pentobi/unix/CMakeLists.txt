@@ -3,6 +3,10 @@ find_program(ITSTOOL itstool)
 if(NOT ITSTOOL)
     message(FATAL_ERROR "itstool not found")
 endif()
+find_program(RSVG_CONVERT rsvg-convert)
+if(NOT RSVG_CONVERT)
+    message(FATAL_ERROR "rsvg-convert not found")
+endif()
 find_program(XSLTPROC xsltproc)
 if(NOT XSLTPROC)
     message(FATAL_ERROR "xsltproc not found")
@@ -26,7 +30,7 @@ foreach(icon application-x-blokus-sgf application-x-blokus-sgf-16
     set(icon_svg "${CMAKE_CURRENT_SOURCE_DIR}/${icon}.svg")
     set(icon_png "${CMAKE_CURRENT_BINARY_DIR}/${icon}.png")
     add_custom_command(OUTPUT "${icon_png}"
-        COMMAND convert-svg "${icon_svg}" "${icon_png}"
+        COMMAND "${RSVG_CONVERT}" "${icon_svg}" > "${icon_png}"
         DEPENDS "${icon_svg}")
     list(APPEND png_icons "${icon_png}")
 endforeach()
@@ -34,7 +38,7 @@ foreach(icon pentobi pentobi-16 pentobi-32 pentobi-64)
   set(icon_svg "${CMAKE_CURRENT_SOURCE_DIR}/../icon/${icon}.svg")
   set(icon_png "${CMAKE_CURRENT_BINARY_DIR}/${icon}.png")
   add_custom_command(OUTPUT "${icon_png}"
-    COMMAND convert-svg "${icon_svg}" "${icon_png}"
+    COMMAND "${RSVG_CONVERT}" "${icon_svg}" > "${icon_png}"
     DEPENDS "${icon_svg}")
   list(APPEND png_icons "${icon_png}")
 endforeach()
