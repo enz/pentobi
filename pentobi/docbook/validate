@@ -3,6 +3,7 @@
 # Needs Debian packages xmllint docbook-xml
 
 cd `dirname "$0"`
-xmllint --noout --dtdvalid /usr/share/xml/docbook/schema/dtd/4.5/docbookx.dtd \
+xmllint --noout --nonet --dtdvalid \
+  /usr/share/xml/docbook/schema/dtd/4.5/docbookx.dtd \
   index.docbook
 
