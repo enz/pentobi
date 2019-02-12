@@ -257,7 +257,7 @@ QMAKE_EXTRA_COMPILERS += update_qm
 COPY_QRC = qml/i18n/translations.qrc
 copy_qrc.input = COPY_QRC
 copy_qrc.output = $$OUT_PWD/${QMAKE_FILE_BASE}.qrc
-copy_qrc.commands = cp ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
+copy_qrc.commands = $$QMAKE_COPY_FILE ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
 copy_qrc.variable_out = RESOURCES
 QMAKE_EXTRA_COMPILERS += copy_qrc
 
