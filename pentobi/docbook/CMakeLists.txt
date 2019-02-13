@@ -12,11 +12,6 @@ find_path(DOCBOOK_XSL "manpages/docbook.xsl"
 if(NOT DOCBOOK_XSL)
     message(FATAL_ERROR "docbook-xsl not found")
 endif()
-find_path(DOCBOOK_DTD "docbookx.dtd"
-    HINTS "/usr/share/xml/docbook/schema/dtd/4.5")
-if(NOT DOCBOOK_DTD)
-    message(FATAL_ERROR "docbookx.dtd not found")
-endif()
 
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
 string(REGEX REPLACE "\n" ";" linguas "${linguas}")
@@ -34,7 +29,7 @@ foreach(lang ${linguas})
         DEPENDS index.docbook ${lang}.mo
         )
     add_custom_command(OUTPUT "help/${lang}/pentobi/index.html"
-        COMMAND "${XSLTPROC}" --nonet --path "${DOCBOOK_XSL}/html"
+        COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOK_XSL}/html"
         --stringparam l10n.gentext.language ${lang}
         -o "help/${lang}/pentobi/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
         index_${lang}.docbook
@@ -69,7 +64,7 @@ set(DOCBOOK_SRC
     )
 
 add_custom_command(OUTPUT "help/C/pentobi/index.html"
-    COMMAND "${XSLTPROC}" --nonet --path "${DOCBOOK_XSL}/html"
+    COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOK_XSL}/html"
     -o "help/C/pentobi/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
     "${CMAKE_CURRENT_SOURCE_DIR}/index.docbook"
     COMMAND ${CMAKE_COMMAND} -E copy

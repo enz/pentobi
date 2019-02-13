@@ -12,13 +12,12 @@ Building Pentobi requires the following tools and libraries:
 * [GNU gettext](https://www.gnu.org/software/gettext/)
 * [ITS Tool](http://itstool.org/)
 * [xsltproc](http://xmlsoft.org/XSLT/xsltproc.html)
-* [DocBook DTD](https://docbook.org/)
 * [DocBooc XSL](http://www.sagehill.net/docbookxsl/)
 * [LibRsvg](https://wiki.gnome.org/Projects/LibRsvg)
 
 In Debian-based distributions, they can be installed with the command
 ```
-sudo apt-get install cmake docbook-xml docbook-xsl g++ gettext itstool \
+sudo apt-get install cmake docbook-xsl g++ gettext itstool \
   libqt5svg5-dev libqt5webview5-dev librsvg2-bin make \
   qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \
   qml-module-qtquick2 qml-module-qtquick-controls2 \
