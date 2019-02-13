@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <article>
+<articleinfo><date>@PENTOBI_RELEASE_DATE@</date></articleinfo>
+
 <refentry>
 <refmeta>
 <refentrytitle>pentobi</refentrytitle>
@@ -8,10 +12,6 @@
 <refmiscinfo class="version">@PENTOBI_VERSION@</refmiscinfo>
 <refmiscinfo class="manual">Pentobi Command Reference</refmiscinfo>
 </refmeta>
-<info>
-<date>@PENTOBI_RELEASE_DATE@</date>
-</info>
-
 <refnamediv>
 <refname>pentobi</refname>
 <refpurpose>
