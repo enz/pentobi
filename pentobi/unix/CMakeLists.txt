@@ -44,12 +44,11 @@ foreach(icon pentobi pentobi-16 pentobi-32 pentobi-64)
 endforeach()
 
 add_custom_target(pentobi-unix ALL DEPENDS
-    ${png_icons}
     "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.desktop"
     "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml"
     "${CMAKE_CURRENT_BINARY_DIR}/pentobi-mime.xml"
-    "${man_files}"
-    "${png_icons}"
+    ${png_icons}
+    ${man_files}
     )
 
 foreach(lang ${linguas})
