@@ -14,9 +14,7 @@ equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 11) {
 TEMPLATE = app
 
 QT += concurrent quickcontrols2 svg webview
-android {
-    QT += androidextras
-}
+android { QT += androidextras }
 
 INCLUDEPATH += ..
 CONFIG += c++17 qtquickcompiler
@@ -114,7 +112,6 @@ SOURCES += \
 RESOURCES += \
     ../opening_books/pentobi_books.qrc \
     icon/pentobi_icon.qrc \
-    help.qrc \
     qml/themes/themes.qrc \
     resources.qrc
 
@@ -250,18 +247,28 @@ TRANSLATIONS = \
 qtPrepareTool(LRELEASE, lrelease)
 update_qm.input = TRANSLATIONS
 update_qm.output = $$OUT_PWD/${QMAKE_FILE_BASE}.qm
-update_qm.commands = $$LRELEASE -removeidentical -nounfinished ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_OUT}
+update_qm.commands = $$LRELEASE -removeidentical -nounfinished \
+    ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_OUT}
 update_qm.CONFIG += no_link target_predeps
 QMAKE_EXTRA_COMPILERS += update_qm
 
-COPY_QRC = qml/i18n/translations.qrc
+COPY_QRC = \
+    qml/i18n/translations.qrc \
+    docbook/help.qrc
 copy_qrc.input = COPY_QRC
 copy_qrc.output = $$OUT_PWD/${QMAKE_FILE_BASE}.qrc
 copy_qrc.commands = $$QMAKE_COPY_FILE ${QMAKE_FILE_IN} ${QMAKE_FILE_OUT}
 copy_qrc.variable_out = RESOURCES
 QMAKE_EXTRA_COMPILERS += copy_qrc
 
-OTHER_FILES += \
-    android/AndroidManifest.xml
+GEN_HELP_INPUT = docbook/index.docbook
+# Currently ignores dependencies on figures, custom.xml, and po files
+gen_help.input = GEN_HELP_INPUT
+gen_help.output = $$OUT_PWD/help/C/pentobi/index.html
+gen_help.commands = ${QMAKE_FILE_IN_PATH}/create-html $$OUT_PWD
+gen_help.CONFIG += no_link target_predeps
+QMAKE_EXTRA_COMPILERS += gen_help
+
+OTHER_FILES += android/AndroidManifest.xml
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

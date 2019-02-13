@@ -1,28 +1,32 @@
 #!/bin/bash
 
-# Needs Debian packages: docbook-xml docbook-xsl gettext itstool xsltproc
+# Invoked by the Android qmake project. This duplicates the code in the cmake
+# file and using a bash script is not very portable. But once QtCreator has
+# better support for using cmake for Android projects, the qmake project and
+# this script will no longer be needed anyway.
+
+if [ $# -ne 1 ]; then
+    echo "Need output directory as argument"
+    exit 1
+fi
+OUTDIR=$1
 
 cd `dirname "$0"`
-if test $# -eq 0 ; then
-    languages="C de"
-else
-    languages="$@"
-fi
-for lang in $languages; do
+for lang in C de; do
   case "$lang" in
   C)
     xsltproc --nonet \
-      --path /usr/share/xml/docbook/stylesheet/docbook-xsl/html \
-      -o ../help/C/pentobi/ custom.xsl index.docbook
+      --path "/usr/share/xml/docbook/stylesheet/docbook-xsl/html" \
+      -o "$OUTDIR/help/C/pentobi/" custom.xsl index.docbook
+    cp figures/*.{png,jpg,css} "$OUTDIR/help/C/pentobi/"
     ;;
   *)
-    msgfmt -o $lang.mo po/$lang.po
-    itstool -m $lang.mo -o index_$lang.docbook index.docbook
+    msgfmt -o "$OUTDIR/$lang.mo" po/$lang.po
+    itstool -m "$OUTDIR/$lang.mo" -o "$OUTDIR/index_$lang.docbook" index.docbook
     xsltproc --nonet \
       --path "/usr/share/xml/docbook/stylesheet/docbook-xsl/html" \
       --stringparam l10n.gentext.language $lang \
-      -o ../help/$lang/pentobi/ custom.xsl index_$lang.docbook
-    rm -f $lang.mo index_$lang.docbook
+      -o "$OUTDIR/help/$lang/pentobi/" custom.xsl "$OUTDIR/index_$lang.docbook"
     ;;
   esac
 done
