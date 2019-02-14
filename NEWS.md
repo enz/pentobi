@@ -12,6 +12,8 @@ Version 16.x (master)
 * New manpages translation: German
 * The Android version now interactively asks for permission when opening
   or saving a game if storage permission has not yet been granted.
+* Added --version command line options to pentobi and
+  pentobi-thumbnailer.
 * The compiler now needs to support C++17.
 * The SVG to bitmap conversions at build time are now done using
   LibRsvg instead of a custom compiled Qt-based build helper to make

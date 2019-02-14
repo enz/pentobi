@@ -36,6 +36,12 @@ add_executable(pentobi-thumbnailer Main.cpp ${man_files})
 
 target_link_libraries(pentobi-thumbnailer pentobi_thumbnail)
 
+target_compile_definitions(pentobi-thumbnailer PRIVATE
+    QT_DEPRECATED_WARNINGS
+    QT_DISABLE_DEPRECATED_BEFORE=0x051200
+    VERSION="${PENTOBI_VERSION}"
+    )
+
 configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
 
 install(TARGETS pentobi-thumbnailer DESTINATION ${CMAKE_INSTALL_BINDIR})

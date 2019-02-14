@@ -103,6 +103,7 @@ int mainDesktop()
                 QStringLiteral("file.blksgf"),
                 QStringLiteral("Blokus SGF file to open (optional)."));
     parser.addHelpOption();
+    parser.addVersionOption();
     parser.process(*QCoreApplication::instance());
     try
     {

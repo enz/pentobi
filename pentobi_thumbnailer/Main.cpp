@@ -20,6 +20,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
     libboardgame_util::LogInitializer log_initializer;
+    QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
     QCoreApplication app(argc, argv);
     try
     {
@@ -32,6 +33,7 @@ int main(int argc, char* argv[])
                     QStringLiteral("size"), QStringLiteral("128"));
         parser.addOption(optionSize);
         parser.addHelpOption();
+        parser.addVersionOption();
         parser.addPositionalArgument(QStringLiteral("input.blksgf"),
                                      QStringLiteral("Blokus SGF input file"));
         parser.addPositionalArgument(QStringLiteral("output.png"),

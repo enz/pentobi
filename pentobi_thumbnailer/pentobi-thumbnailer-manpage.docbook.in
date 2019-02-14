@@ -41,6 +41,13 @@ Pentobi
 <arg choice="plain"><option>--help</option></arg>
 </group>
 </cmdsynopsis>
+<cmdsynopsis>
+<command>pentobi-thumbnailer</command>
+<group choice="plain">
+<arg choice="plain"><option>-v</option></arg>
+<arg choice="plain"><option>--version</option></arg>
+</group>
+</cmdsynopsis>
 </refsynopsisdiv>
 
 <refsection>
@@ -79,6 +86,15 @@ The size of the thumbnail. The default is 128.
 </listitem>
 </varlistentry>
 </variablelist>
+<varlistentry>
+<term><option>-v</option></term>
+<term><option>--version</option></term>
+<listitem>
+<para>
+Display version and exit.
+</para>
+</listitem>
+</varlistentry>
 </refsection>
 
 <refsection>

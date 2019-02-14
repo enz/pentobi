@@ -38,6 +38,13 @@ computer opponent for the board game Blokus
 <arg choice="plain"><option>--help</option></arg>
 </group>
 </cmdsynopsis>
+<cmdsynopsis>
+<command>pentobi</command>
+<group choice="plain">
+<arg choice="plain"><option>-v</option></arg>
+<arg choice="plain"><option>--version</option></arg>
+</group>
+</cmdsynopsis>
 </refsynopsisdiv>
 
 <refsection>
@@ -176,6 +183,15 @@ Window geometry using the X11 syntax.
 Set the style for the GUI elements of QQuickControls 2. If no style is
 chosen, the default style is Default if option <option>--mobile</option>
 is set and Fusion otherwise.
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><option>-v</option></term>
+<term><option>--version</option></term>
+<listitem>
+<para>
+Display version and exit.
 </para>
 </listitem>
 </varlistentry>
