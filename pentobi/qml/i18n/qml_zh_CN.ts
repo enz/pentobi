@@ -608,7 +608,7 @@
     <message>
         <source>Pentobi</source>
         <extracomment>Window title if no file is loaded.</extracomment>
-        <translation>角斗士</translation>
+        <translation type="unfinished">角斗士</translation>
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
@@ -748,7 +748,7 @@
     <message>
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
-        <translation>%1 - 角斗士</translation>
+        <translation type="unfinished">%1 - 角斗士</translation>
     </message>
     <message>
         <source>Not enough memory</source>
