@@ -28,7 +28,7 @@ development-related issues.
 License
 -------
 
-Copyright &copy; 2011-2019 Markus Enzenberger <enz@users.sourceforge.net>.
+Copyright &copy; 2011-2019 Markus Enzenberger.
 See [AUTHORS](AUTHORS.md) for a full list of authors.
 
 This program is free software: you can redistribute it and/or modify it
