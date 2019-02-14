@@ -16,10 +16,9 @@ endif()
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
 string(REGEX REPLACE "\n" ";" linguas "${linguas}")
 
-set(man_files "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer.6")
+set(man_files "pentobi-thumbnailer.6")
 foreach(lang ${linguas})
-    list(APPEND man_files
-        "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-thumbnailer.6")
+    list(APPEND man_files ${lang}/pentobi-thumbnailer.6)
 endforeach()
 
 foreach(lang ${linguas})

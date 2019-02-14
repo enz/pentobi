@@ -77,8 +77,7 @@ add_custom_command(OUTPUT "help/C/pentobi/index.html"
     )
 
 add_custom_target(pentobi-help ALL DEPENDS
-    "${CMAKE_CURRENT_BINARY_DIR}/help/C/pentobi/index.html"
-    ${index_files}
+    "help/C/pentobi/index.html" ${index_files}
     )
 
 install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/help"

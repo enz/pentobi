@@ -20,33 +20,35 @@ endif()
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
 string(REGEX REPLACE "\n" ";" linguas "${linguas}")
 
-set(man_files "${CMAKE_CURRENT_BINARY_DIR}/pentobi.6")
+set(man_files "pentobi.6")
 foreach(lang ${linguas})
-    list(APPEND man_files "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi.6")
+    list(APPEND man_files "${lang}/pentobi.6")
 endforeach()
 
 foreach(icon application-x-blokus-sgf application-x-blokus-sgf-16
         application-x-blokus-sgf-32 application-x-blokus-sgf-64)
-    set(icon_svg "${CMAKE_CURRENT_SOURCE_DIR}/${icon}.svg")
-    set(icon_png "${CMAKE_CURRENT_BINARY_DIR}/${icon}.png")
+    set(icon_svg "${icon}.svg")
+    set(icon_png "${icon}.png")
     add_custom_command(OUTPUT "${icon_png}"
-        COMMAND "${RSVG_CONVERT}" "${icon_svg}" > "${icon_png}"
+        COMMAND "${RSVG_CONVERT}" "${CMAKE_CURRENT_SOURCE_DIR}/${icon_svg}"
+        > "${icon_png}"
         DEPENDS "${icon_svg}")
     list(APPEND png_icons "${icon_png}")
 endforeach()
 foreach(icon pentobi pentobi-16 pentobi-32 pentobi-64)
-  set(icon_svg "${CMAKE_CURRENT_SOURCE_DIR}/../icon/${icon}.svg")
-  set(icon_png "${CMAKE_CURRENT_BINARY_DIR}/${icon}.png")
+  set(icon_svg "../icon/${icon}.svg")
+  set(icon_png "${icon}.png")
   add_custom_command(OUTPUT "${icon_png}"
-    COMMAND "${RSVG_CONVERT}" "${icon_svg}" > "${icon_png}"
+    COMMAND "${RSVG_CONVERT}" "${CMAKE_CURRENT_SOURCE_DIR}/${icon_svg}"
+    > "${icon_png}"
     DEPENDS "${icon_svg}")
   list(APPEND png_icons "${icon_png}")
 endforeach()
 
 add_custom_target(pentobi-unix ALL DEPENDS
-    "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.desktop"
-    "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml"
-    "${CMAKE_CURRENT_BINARY_DIR}/pentobi-mime.xml"
+    "io.sourceforge.pentobi.desktop"
+    "io.sourceforge.pentobi.appdata.xml"
+    "pentobi-mime.xml"
     ${png_icons}
     ${man_files}
     )
@@ -127,8 +129,7 @@ foreach(lang ${linguas})
         --path "${DOCBOOK_XSL}/manpages" -o ${lang}/
         "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
         ${lang}/pentobi-manpage.docbook
-        DEPENDS manpage.xsl
-        "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-manpage.docbook"
+        DEPENDS manpage.xsl ${lang}/pentobi-manpage.docbook
         )
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi.6"
         DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")

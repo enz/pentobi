@@ -16,9 +16,9 @@ qt5_add_translation(pentobi_QM
     OPTIONS -removeidentical -nounfinished
     )
 add_custom_command(
-    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
-    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/qml/i18n/translations.qrc"
-    "${CMAKE_CURRENT_BINARY_DIR}"
+    OUTPUT "translations.qrc"
+    COMMAND ${CMAKE_COMMAND} -E copy
+    "${CMAKE_CURRENT_SOURCE_DIR}/qml/i18n/translations.qrc" .
     DEPENDS qml/i18n/translations.qrc ${pentobi_QM}
     )
 
