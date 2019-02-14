@@ -64,44 +64,67 @@ int mainDesktop()
     QGuiApplication::setDesktopFileName(
                 QStringLiteral("io.sourceforge.pentobi"));
     QCommandLineParser parser;
+    parser.setApplicationDescription(
+                QCoreApplication::translate(
+                    "main",
+                    "computer opponent for the board game Blokus"));
     auto maxSupportedLevel = Player::max_supported_level;
     QCommandLineOption optionMaxLevel(
                 QStringLiteral("maxlevel"),
-                QStringLiteral("Set maximum level to <n>."),
+                //: Description for command line option --maxlevel
+                QCoreApplication::translate(
+                    "main", "Set maximum level to <n>."),
                 QStringLiteral("n"),
                 QString::number(PlayerModel::maxLevel));
     parser.addOption(optionMaxLevel);
     QCommandLineOption optionNoBook(
                 QStringLiteral("nobook"),
-                QStringLiteral("Do not use opening books."));
+                //: Description for command line option --nobook
+                QCoreApplication::translate(
+                    "main", "Do not use opening books."));
     QCommandLineOption optionMobile(
                 QStringLiteral("mobile"),
-                QStringLiteral("Use layout optimized for smartphones."));
+                //: Description for command line option --mobile
+                QCoreApplication::translate(
+                    "main", "Use layout optimized for smartphones."));
     parser.addOption(optionMobile);
     parser.addOption(optionNoBook);
     QCommandLineOption optionNoDelay(
                 QStringLiteral("nodelay"),
-                QStringLiteral("Do not delay fast computer moves."));
+                //: Description for command line option --nodelay
+                QCoreApplication::translate(
+                    "main", "Do not delay fast computer moves."));
     parser.addOption(optionNoDelay);
     QCommandLineOption optionSeed(
                 QStringLiteral("seed"),
-                QStringLiteral("Set random seed to <n>."),
+                //: Description for command line option --seed
+                QCoreApplication::translate(
+                    "main", "Set random seed to <n>."),
                 QStringLiteral("n"));
     parser.addOption(optionSeed);
     QCommandLineOption optionThreads(
                 QStringLiteral("threads"),
-                QStringLiteral("Use <n> threads (0=auto)."),
+                //: Description for command line option --threads
+                QCoreApplication::translate(
+                    "main", "Use <n> threads (0=auto)."),
                 QStringLiteral("n"));
     parser.addOption(optionThreads);
 #ifndef LIBBOARDGAME_DISABLE_LOG
     QCommandLineOption optionVerbose(
                 QStringLiteral("verbose"),
-                QStringLiteral("Print logging information to standard error."));
+                //: Description for command line option --verbose
+                QCoreApplication::translate(
+                    "main",
+                    "Print logging information to standard error."));
     parser.addOption(optionVerbose);
 #endif
     parser.addPositionalArgument(
-                QStringLiteral("file.blksgf"),
-                QStringLiteral("Blokus SGF file to open (optional)."));
+                //: Name of command line argument.
+                QCoreApplication::translate("main", "file.blksgf"),
+                QCoreApplication::translate(
+                    "main",
+                    //: Description of command line argument.
+                    "Blokus SGF file to open (optional)."));
     parser.addHelpOption();
     parser.addVersionOption();
     parser.process(*QCoreApplication::instance());
@@ -118,28 +141,31 @@ int mainDesktop()
         bool ok;
         auto maxLevel = parser.value(optionMaxLevel).toUInt(&ok);
         if (! ok || maxLevel < 1 || maxLevel > maxSupportedLevel)
-            throw runtime_error("--maxlevel must be between 1 and "
-                                + libboardgame_util::to_string(maxSupportedLevel));
+            throw QCoreApplication::translate(
+                    "main", "--maxlevel must be between 1 and %1")
+                .arg(maxSupportedLevel);
         PlayerModel::maxLevel = maxLevel;
         if (parser.isSet(optionSeed))
         {
             auto seed = parser.value(optionSeed).toUInt(&ok);
             if (! ok)
-                throw runtime_error("--seed must be a positive number");
+                throw QCoreApplication::translate(
+                        "main", "--seed must be a positive number");
             libboardgame_util::RandomGenerator::set_global_seed(seed);
         }
         if (parser.isSet(optionThreads))
         {
             auto nuThreads = parser.value(optionThreads).toUInt(&ok);
             if (! ok)
-                throw runtime_error("--threads must be a positive number");
+                throw QCoreApplication::translate(
+                        "main", "--threads must be a positive number");
             PlayerModel::nuThreads = nuThreads;
         }
         bool isDesktop = ! parser.isSet(optionMobile);
         QString initialFile;
         auto args = parser.positionalArguments();
         if (args.size() > 1)
-            throw runtime_error("Too many arguments");
+            throw QCoreApplication::translate("main", "Too many arguments");
         if (! args.empty())
             initialFile = args.at(0);
         if (QQuickStyle::name().isEmpty() && isDesktop)
@@ -170,9 +196,14 @@ int mainDesktop()
             return 1;
         return QGuiApplication::exec();
     }
+    catch (const QString& s)
+    {
+        cerr << s.toLocal8Bit().constData() << '\n';
+        return 1;
+    }
     catch (const exception& e)
     {
-        LIBBOARDGAME_LOG("Error: ", e.what());
+        cerr << e.what() << '\n';
         return 1;
     }
 }
@@ -213,6 +244,14 @@ int main(int argc, char *argv[])
     qmlRegisterInterface<AnalyzeGameElement>("AnalyzeGameElement");
     qmlRegisterInterface<GameMove>("GameModelMove");
     qmlRegisterInterface<PieceModel>("PieceModel");
+#ifndef Q_OS_ANDROID
+    // Qt translations needed for QCommandLineParser
+    QTranslator qtTranslator;
+    qtTranslator.load(
+                "qt_" + QLocale::system().name(),
+                QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    QCoreApplication::installTranslator(&qtTranslator);
+#endif
     QTranslator translator;
     translator.load(":qml/i18n/qml_" + QLocale::system().name());
     QCoreApplication::installTranslator(&translator);

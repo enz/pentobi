@@ -60,7 +60,7 @@ generate previews of game files written by Pentobi.
 <para>
 The input file is a game file in Pentobi's SGF format as documented in
 Pentobi-SGF.html in the Pentobi source package. The output file is a thumbnail
-in PNG format.
+image. The wanted file format of the image is
 </para>
 </refsection>
 

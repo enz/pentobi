@@ -9,7 +9,10 @@
 #include <QCoreApplication>
 #include <QImage>
 #include <QImageWriter>
+#include <QLocale>
+#include <QLibraryInfo>
 #include <QString>
+#include <QTranslator>
 #include "libboardgame_util/Log.h"
 #include "libpentobi_thumbnail/CreateThumbnail.h"
 
@@ -22,39 +25,69 @@ int main(int argc, char* argv[])
     libboardgame_util::LogInitializer log_initializer;
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
     QCoreApplication app(argc, argv);
+    QTranslator qtTranslator;
+    qtTranslator.load(
+                "qt_" + QLocale::system().name(),
+                QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+    QCoreApplication::installTranslator(&qtTranslator);
     try
     {
         QCommandLineParser parser;
+        parser.setApplicationDescription(
+                    QCoreApplication::translate(
+                        "main",
+                        "thumbnailer for Blokus game records as used by Pentobi"));
         QCommandLineOption optionSize(
                     QStringList() << QStringLiteral("s")
                     << QStringLiteral("size"),
-                    QStringLiteral(
+                    //: Description for command line option --size
+                    QCoreApplication::translate(
+                        "main",
                         "Generate image with height and width <size>."),
-                    QStringLiteral("size"), QStringLiteral("128"));
+                    //: Value name for command line option --size
+                    QCoreApplication::translate("main", "size"),
+                    QStringLiteral("128"));
         parser.addOption(optionSize);
         parser.addHelpOption();
         parser.addVersionOption();
-        parser.addPositionalArgument(QStringLiteral("input.blksgf"),
-                                     QStringLiteral("Blokus SGF input file"));
-        parser.addPositionalArgument(QStringLiteral("output.png"),
-                                     QStringLiteral("PNG image output file"));
+        parser.addPositionalArgument(
+                    //: Name of input file command line argument.
+                    QCoreApplication::translate("main", "input.blksgf"),
+                    QCoreApplication::translate(
+                        "main",
+                        //: Description of input file command line argument.
+                        "Blokus SGF input file."));
+        parser.addPositionalArgument(
+                    //: Name of output image file command line argument.
+                    QCoreApplication::translate("main", "output.png"),
+                    QCoreApplication::translate(
+                        "main",
+                        //: Description of output file command line argument.
+                        "PNG image output file."));
         parser.process(app);
         auto args = parser.positionalArguments();
         bool ok;
         int size = parser.value(optionSize).toInt(&ok);
         if (! ok || size <= 0)
-            throw runtime_error("Invalid image size");
+            throw QCoreApplication::translate("main", "Invalid image size");
         if (args.size() > 2)
-            throw runtime_error("Too many arguments");
+            throw QCoreApplication::translate("main", "Too many arguments");
         if (args.size() < 2)
-            throw runtime_error("Need input and output file argument");
+            throw QCoreApplication::translate(
+                    "main", "Need input and output file argument");
         QImage image(size, size, QImage::Format_ARGB32);
         image.fill(Qt::transparent);
         if (! createThumbnail(args.at(0), size, size, image))
-            throw runtime_error("Not a valid Blokus SGF file");
+            throw QCoreApplication::translate(
+                    "main", "Not a valid Blokus SGF file");
         QImageWriter writer(args.at(1), "png");
         if (! writer.write(image))
-            throw runtime_error(writer.errorString().toLocal8Bit().constData());
+            throw writer.errorString();
+    }
+    catch (const QString& s)
+    {
+        cerr << s.toLocal8Bit().constData() << '\n';
+        return 1;
     }
     catch (const exception& e)
     {
