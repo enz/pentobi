@@ -107,7 +107,7 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-mime.xml"
 
 configure_file(pentobi-manpage.docbook.in pentobi-manpage.docbook @ONLY)
 add_custom_command(OUTPUT pentobi.6
-    COMMAND "${XSLTPROC}" --nonet --path "${DOCBOOK_XSL}/manpages"
+    COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOK_XSL}/manpages"
     "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl" pentobi-manpage.docbook
     DEPENDS manpage.xsl "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
     )
@@ -123,8 +123,9 @@ foreach(lang ${linguas})
         DEPENDS ${lang}.mo "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
         )
     add_custom_command(OUTPUT ${lang}/pentobi.6
-        COMMAND "${XSLTPROC}"  --nonet --path "${DOCBOOK_XSL}/manpages"
-        -o ${lang}/ "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
+        COMMAND "${XSLTPROC}" --nonet --novalid
+        --path "${DOCBOOK_XSL}/manpages" -o ${lang}/
+        "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
         ${lang}/pentobi-manpage.docbook
         DEPENDS manpage.xsl
         "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-manpage.docbook"
