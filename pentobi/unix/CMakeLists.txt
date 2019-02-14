@@ -117,7 +117,7 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi.6"
     DESTINATION "${CMAKE_INSTALL_MANDIR}/man6")
 foreach(lang ${linguas})
     add_custom_command(OUTPUT ${lang}/pentobi-manpage.docbook
-        COMMAND mkdir -p ${lang}
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${lang}
         COMMAND "${ITSTOOL}" -l ${lang} -m ${lang}.mo
         -o ${lang}/pentobi-manpage.docbook
         -i "${CMAKE_CURRENT_SOURCE_DIR}/manpage.its"

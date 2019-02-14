@@ -63,7 +63,7 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer.6"
     DESTINATION "${CMAKE_INSTALL_MANDIR}/man6")
 foreach(lang ${linguas})
     add_custom_command(OUTPUT ${lang}/pentobi-thumbnailer-manpage.docbook
-        COMMAND mkdir -p ${lang}
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${lang}
         COMMAND "${ITSTOOL}" -l ${lang} -m ${lang}.mo
         -o ${lang}/pentobi-thumbnailer-manpage.docbook
         -i "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.its"
