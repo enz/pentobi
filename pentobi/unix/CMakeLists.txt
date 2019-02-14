@@ -55,7 +55,7 @@ foreach(lang ${linguas})
     add_custom_command(OUTPUT ${lang}.mo
         COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" -o ${lang}.mo
         "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
-        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
+        DEPENDS po/${lang}.po
         )
     list(APPEND po_files po/${lang}.po)
     list(APPEND mo_files ${lang}.mo)
@@ -71,7 +71,7 @@ add_custom_command(OUTPUT io.sourceforge.pentobi.desktop
     --template io.sourceforge.pentobi.desktop.in.2
     -o io.sourceforge.pentobi.desktop
     DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.desktop.in.2"
-    ${po_files} "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS")
+    ${po_files} po/LINGUAS)
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.desktop
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
@@ -85,7 +85,7 @@ add_custom_command(OUTPUT io.sourceforge.pentobi.appdata.xml
     -j io.sourceforge.pentobi.appdata.xml.in.2
     -o io.sourceforge.pentobi.appdata.xml ${mo_files}
     DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml.in.2"
-    ${mo_files} "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS"
+    ${mo_files} po/LINGUAS
     )
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml
@@ -97,8 +97,7 @@ add_custom_command(OUTPUT pentobi-mime.xml
     COMMAND "${ITSTOOL}"
     -j "${CMAKE_CURRENT_SOURCE_DIR}/pentobi-mime.xml.in"
     -o pentobi-mime.xml ${mo_files}
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/pentobi-mime.xml.in" ${mo_files}
-    "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS"
+    DEPENDS pentobi-mime.xml.in ${mo_files} po/LINGUAS
     )
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-mime.xml"
@@ -110,9 +109,7 @@ configure_file(pentobi-manpage.docbook.in pentobi-manpage.docbook @ONLY)
 add_custom_command(OUTPUT pentobi.6
     COMMAND "${XSLTPROC}" --nonet --path "${DOCBOOK_XSL}/manpages"
     "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl" pentobi-manpage.docbook
-    DEPENDS
-    "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
-    "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
+    DEPENDS manpage.xsl "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
     )
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi.6"
     DESTINATION "${CMAKE_INSTALL_MANDIR}/man6")
@@ -129,8 +126,7 @@ foreach(lang ${linguas})
         COMMAND "${XSLTPROC}"  --nonet --path "${DOCBOOK_XSL}/manpages"
         -o ${lang}/ "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
         ${lang}/pentobi-manpage.docbook
-        DEPENDS
-        "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
+        DEPENDS manpage.xsl
         "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-manpage.docbook"
         )
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi.6"

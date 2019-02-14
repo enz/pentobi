@@ -20,7 +20,7 @@ foreach(lang ${linguas})
     add_custom_command(OUTPUT ${lang}.mo
         COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" -o ${lang}.mo
         "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
-        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
+        DEPENDS po/${lang}.po
         )
     list(APPEND index_files "help/${lang}/pentobi/index.html")
     add_custom_command(OUTPUT "index_${lang}.docbook"

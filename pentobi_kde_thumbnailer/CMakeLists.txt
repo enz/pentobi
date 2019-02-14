@@ -39,7 +39,7 @@ foreach(lang ${linguas})
     add_custom_command(OUTPUT ${lang}.mo
         COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" -o ${lang}.mo
         "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
-        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
+        DEPENDS po/${lang}.po
         )
     list(APPEND mo_files ${lang}.mo)
 endforeach()
@@ -52,7 +52,7 @@ add_custom_command(
     -j io.sourceforge.pentobi.kde_thumbnailer.metainfo.xml.in.2
     -o io.sourceforge.pentobi.kde_thumbnailer.metainfo.xml ${mo_files}
     DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.kde_thumbnailer.metainfo.xml.in.2"
-    ${mo_files} "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS"
+    ${mo_files} po/LINGUAS
     )
 
 install(

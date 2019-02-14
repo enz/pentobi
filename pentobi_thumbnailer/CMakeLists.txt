@@ -26,7 +26,7 @@ foreach(lang ${linguas})
     add_custom_command(OUTPUT ${lang}.mo
         COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" -o ${lang}.mo
         "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
-        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
+        DEPENDS po/${lang}.po
         )
     list(APPEND po_files po/${lang}.po)
     list(APPEND mo_files ${lang}.mo)
@@ -52,7 +52,7 @@ add_custom_command(OUTPUT pentobi-thumbnailer.6
     pentobi-thumbnailer-manpage.docbook
     DEPENDS
     "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer-manpage.docbook"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
+    ../pentobi/unix/manpage.xsl
 )
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-thumbnailer.6"
     DESTINATION "${CMAKE_INSTALL_MANDIR}/man6")
@@ -71,7 +71,7 @@ foreach(lang ${linguas})
         ${lang}/pentobi-thumbnailer-manpage.docbook
         DEPENDS
         "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-thumbnailer-manpage.docbook"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
+        ../pentobi/unix/manpage.xsl
         )
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-thumbnailer.6"
         DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")

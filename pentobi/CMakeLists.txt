@@ -19,7 +19,7 @@ add_custom_command(
     OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/qml/i18n/translations.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}"
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/qml/i18n/translations.qrc" ${pentobi_QM}
+    DEPENDS qml/i18n/translations.qrc ${pentobi_QM}
     )
 
 qt5_add_resources(pentobi_RC_SRCS
