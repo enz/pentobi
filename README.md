@@ -1,4 +1,4 @@
-Pentobi README
+Pentobi Readme
 ==============
 
 ![Screenshot](https://pentobi.sourceforge.io/pentobi-classic-small.png)
@@ -19,19 +19,16 @@ The homepage of Pentobi is at https://pentobi.sourceforge.io/.
 
 The maintainer of Pentobi is Markus Enzenberger. Please use the
 [SourceForge bug tracker](https://sourceforge.net/p/pentobi/bugs/) and
-[user forum](https://sourceforge.net/p/pentobi/discussion/) for contact
-regarding bugs in released versions of Pentobi or questions about
-released versions.
-
-For bugs in unreleased source code and development-related
-discussions, please use the
-[GitHub issue tracker](https://github.com/enz/pentobi/issues) and
-[development mailing list](https://sourceforge.net/projects/pentobi/lists/pentobi-devel).
+[user forum](https://sourceforge.net/p/pentobi/discussion/) for bugs
+and questions about released versions of Pentobi, and the
+[development mailing list](https://sourceforge.net/projects/pentobi/lists/pentobi-devel)
+and [GitHub tracker](https://github.com/enz/pentobi/issues) for
+development-related issues.
 
 License
 -------
 
-Copyright &copy; 2011--2019 Markus Enzenberger <enz@users.sourceforge.net>.
+Copyright &copy; 2011-2019 Markus Enzenberger <enz@users.sourceforge.net>.
 See [AUTHORS](AUTHORS.md) for a full list of authors.
 
 This program is free software: you can redistribute it and/or modify it
