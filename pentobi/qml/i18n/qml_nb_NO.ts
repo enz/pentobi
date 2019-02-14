@@ -1774,4 +1774,71 @@
         <translation>Angre trekk</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>computer opponent for the board game Blokus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set maximum level to &lt;n&gt;.</source>
+        <extracomment>Description for command line option --maxlevel</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not use opening books.</source>
+        <extracomment>Description for command line option --nobook</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use layout optimized for smartphones.</source>
+        <extracomment>Description for command line option --mobile</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not delay fast computer moves.</source>
+        <extracomment>Description for command line option --nodelay</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set random seed to &lt;n&gt;.</source>
+        <extracomment>Description for command line option --seed</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use &lt;n&gt; threads (0=auto).</source>
+        <extracomment>Description for command line option --threads</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Print logging information to standard error.</source>
+        <extracomment>Description for command line option --verbose</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file.blksgf</source>
+        <extracomment>Name of command line argument.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blokus SGF file to open (optional).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>--maxlevel must be between 1 and %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>--seed must be a positive number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>--threads must be a positive number</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Too many arguments</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>
