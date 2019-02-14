@@ -1778,67 +1778,67 @@
     <name>main</name>
     <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"></translation>
+        <translation>Computer-Gegner für das Brettspiel Blokus</translation>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Maximale Spielstufe auf &lt;n&gt; setzen.</translation>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Keine Eröffnungsbibliotheken benutzen.</translation>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Für Smartphones optimiertes Layout benutzen.</translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Schnelle Computer-Züge nicht verzögern.</translation>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Seed für Zufallszahlen auf &lt;n&gt; setzen.</translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>&lt;n&gt; Threads benutzen (0= automatisch).</translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Log-Informationen auf Standard-Error ausgeben.</translation>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Datei.blksgf</translation>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu öffnende Blokus-SGF-Datei (optional).</translation>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"></translation>
+        <translation>--maxlevel muss zwischen 1 und %1 sein</translation>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"></translation>
+        <translation>--seed muss eine positive Zahle sein</translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"></translation>
+        <translation>--threads muss eine positive Zahle sein</translation>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu viele Argumente</translation>
     </message>
 </context>
 </TS>
