@@ -29,7 +29,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <xsl:param name="nav.context"/>
 <xsl:variable name="home" select="/*[1]"/>
 <div class="navheader">
-<table width="100%" summary="Navigation header">
+<table width="100%">
 <tr>
 <td width="34%" align="{$direction.align.start}">
 <xsl:if test="count($prev)>0">
@@ -91,7 +91,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <xsl:variable name="home" select="/*[1]"/>
 <div class="navheader">
 <hr/>
-<table width="100%" summary="Navigation footer">
+<table width="100%">
 <tr>
 <td width="34%" align="{$direction.align.start}">
 <xsl:if test="count($prev)>0">
