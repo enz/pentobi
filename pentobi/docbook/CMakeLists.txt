@@ -16,27 +16,6 @@ endif()
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
 string(REGEX REPLACE "\n" ";" linguas "${linguas}")
 
-foreach(lang ${linguas})
-    add_custom_command(OUTPUT ${lang}.mo
-        COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" -o ${lang}.mo
-        "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
-        DEPENDS po/${lang}.po
-        )
-    list(APPEND index_files "help/${lang}/pentobi/index.html")
-    add_custom_command(OUTPUT "index_${lang}.docbook"
-        COMMAND "${ITSTOOL}" -m ${lang}.mo -o "index_${lang}.docbook"
-        "${CMAKE_CURRENT_SOURCE_DIR}/index.docbook"
-        DEPENDS index.docbook ${lang}.mo
-        )
-    add_custom_command(OUTPUT "help/${lang}/pentobi/index.html"
-        COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOK_XSL}/html"
-        --stringparam l10n.gentext.language ${lang}
-        -o "help/${lang}/pentobi/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
-        index_${lang}.docbook
-        DEPENDS "index_${lang}.docbook" ${DOCBOOK_SRC}
-        )
-endforeach()
-
 set(DOCBOOK_SRC
     custom.xsl
     index.docbook
@@ -62,6 +41,27 @@ set(DOCBOOK_SRC
     figures/rating.jpg
     figures/stylesheet.css
     )
+
+foreach(lang ${linguas})
+    add_custom_command(OUTPUT ${lang}.mo
+        COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" -o ${lang}.mo
+        "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
+        DEPENDS po/${lang}.po
+        )
+    list(APPEND index_files "help/${lang}/pentobi/index.html")
+    add_custom_command(OUTPUT "index_${lang}.docbook"
+        COMMAND "${ITSTOOL}" -m ${lang}.mo -o "index_${lang}.docbook"
+        "${CMAKE_CURRENT_SOURCE_DIR}/index.docbook"
+        DEPENDS index.docbook ${lang}.mo
+        )
+    add_custom_command(OUTPUT "help/${lang}/pentobi/index.html"
+        COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOK_XSL}/html"
+        --stringparam l10n.gentext.language ${lang}
+        -o "help/${lang}/pentobi/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
+        index_${lang}.docbook
+        DEPENDS "index_${lang}.docbook" ${DOCBOOK_SRC}
+        )
+endforeach()
 
 add_custom_command(OUTPUT "help/C/pentobi/index.html"
     COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOK_XSL}/html"
