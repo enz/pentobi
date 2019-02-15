@@ -33,7 +33,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <tr>
 <td width="34%" align="{$direction.align.start}">
 <xsl:if test="count($prev)>0">
-<a accesskey="p">
+<a>
 <xsl:attribute name="href">
 <xsl:call-template name="href.target">
 <xsl:with-param name="object" select="$prev"/>
@@ -49,7 +49,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <td width="32%" align="center">
 <xsl:choose>
 <xsl:when test="$home != . or $nav.context = 'toc'">
-<a accesskey="h">
+<a>
 <xsl:attribute name="href">
 <xsl:call-template name="href.target">
 <xsl:with-param name="object" select="$home"/>
@@ -66,7 +66,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <td width="34%" align="{$direction.align.end}">
 <xsl:text>&#160;</xsl:text>
 <xsl:if test="count($next)>0">
-<a accesskey="n">
+<a>
 <xsl:attribute name="href">
 <xsl:call-template name="href.target">
 <xsl:with-param name="object" select="$next"/>
@@ -95,7 +95,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <tr>
 <td width="34%" align="{$direction.align.start}">
 <xsl:if test="count($prev)>0">
-<a accesskey="p">
+<a>
 <xsl:attribute name="href">
 <xsl:call-template name="href.target">
 <xsl:with-param name="object" select="$prev"/>
@@ -111,7 +111,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <td width="32%" align="center">
 <xsl:choose>
 <xsl:when test="$home != . or $nav.context = 'toc'">
-<a accesskey="h">
+<a>
 <xsl:attribute name="href">
 <xsl:call-template name="href.target">
 <xsl:with-param name="object" select="$home"/>
@@ -128,7 +128,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <td width="34%" align="{$direction.align.end}">
 <xsl:text>&#160;</xsl:text>
 <xsl:if test="count($next)>0">
-<a accesskey="n">
+<a>
 <xsl:attribute name="href">
 <xsl:call-template name="href.target">
 <xsl:with-param name="object" select="$next"/>
