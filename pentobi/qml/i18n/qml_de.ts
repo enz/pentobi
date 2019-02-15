@@ -1808,7 +1808,7 @@
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation>&lt;n&gt; Threads benutzen (0= automatisch).</translation>
+        <translation>&lt;n&gt; Threads benutzen (0=automatisch).</translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
@@ -1830,11 +1830,11 @@
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation>--seed muss eine positive Zahle sein</translation>
+        <translation>--seed muss eine positive Zahl sein</translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation>--threads muss eine positive Zahle sein</translation>
+        <translation>--threads muss eine positive Zahl sein</translation>
     </message>
     <message>
         <source>Too many arguments</source>
