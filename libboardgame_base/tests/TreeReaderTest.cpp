@@ -1,17 +1,17 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_sgf/TreeReaderTest.cpp
+/** @file unittest/libboardgame_base/TreeReaderTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include "libboardgame_sgf/TreeReader.h"
+#include "libboardgame_base/TreeReader.h"
 
 #include <sstream>
-#include "libboardgame_sgf/TreeWriter.h"
+#include "libboardgame_base/TreeWriter.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
-using namespace libboardgame_sgf;
+using namespace libboardgame_base;
 
 //-----------------------------------------------------------------------------
 

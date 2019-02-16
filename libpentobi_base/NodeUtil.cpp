@@ -8,7 +8,7 @@
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::InvalidProperty;
+using libboardgame_base::InvalidProperty;
 
 //-----------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/SgfUtil.cpp
+/** @file libboardgame_base/SgfUtil.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -10,7 +10,7 @@
 #include <sstream>
 #include "libboardgame_base/StringUtil.h"
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 using libboardgame_base::get_letter_coord;
 
@@ -191,4 +191,4 @@ bool is_main_variation(const SgfNode& node)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base

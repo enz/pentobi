@@ -11,7 +11,7 @@ namespace libpentobi_base {
 //-----------------------------------------------------------------------------
 
 PentobiTreeWriter::PentobiTreeWriter(ostream& out, const PentobiTree& tree)
-    : libboardgame_sgf::TreeWriter(out, tree.get_root()),
+    : libboardgame_base::TreeWriter(out, tree.get_root()),
       m_variant(tree.get_variant())
 {
 }
@@ -39,7 +39,7 @@ void PentobiTreeWriter::write_property(const string& id,
         else
             new_id = id;
         if (values.size() < 2)
-            libboardgame_sgf::TreeWriter::write_property(new_id, values);
+            libboardgame_base::TreeWriter::write_property(new_id, values);
         else
         {
             string val = values[0];
@@ -47,7 +47,7 @@ void PentobiTreeWriter::write_property(const string& id,
                 val += "," + values[i];
             vector<string> new_values;
             new_values.push_back(val);
-            libboardgame_sgf::TreeWriter::write_property(new_id, new_values);
+            libboardgame_base::TreeWriter::write_property(new_id, new_values);
         }
         return;
     }
@@ -57,16 +57,16 @@ void PentobiTreeWriter::write_property(const string& id,
     {
         if (id == "1")
         {
-            libboardgame_sgf::TreeWriter::write_property("B", values);
+            libboardgame_base::TreeWriter::write_property("B", values);
             return;
         }
         if (id == "2")
         {
-            libboardgame_sgf::TreeWriter::write_property("W", values);
+            libboardgame_base::TreeWriter::write_property("W", values);
             return;
         }
     }
-    libboardgame_sgf::TreeWriter::write_property(id, values);
+    libboardgame_base::TreeWriter::write_property(id, values);
 }
 
 //-----------------------------------------------------------------------------

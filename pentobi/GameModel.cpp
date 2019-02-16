@@ -18,25 +18,25 @@
 #include <QSettings>
 #include <QTextCodec>
 #include "AndroidUtils.h"
-#include "libboardgame_sgf/SgfUtil.h"
-#include "libboardgame_sgf/TreeReader.h"
+#include "libboardgame_base/SgfUtil.h"
+#include "libboardgame_base/TreeReader.h"
 #include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
 
 using namespace std;
-using libboardgame_base::ArrayList;
+using libboardgame_base::back_to_main_variation;
+using libboardgame_base::beginning_of_branch;
+using libboardgame_base::find_next_comment;
+using libboardgame_base::get_last_node;
 using libboardgame_base::get_letter_coord;
-using libboardgame_sgf::SgfError;
-using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::back_to_main_variation;
-using libboardgame_sgf::beginning_of_branch;
-using libboardgame_sgf::find_next_comment;
-using libboardgame_sgf::get_last_node;
-using libboardgame_sgf::has_comment;
-using libboardgame_sgf::has_earlier_variation;
-using libboardgame_sgf::is_main_variation;
+using libboardgame_base::has_comment;
+using libboardgame_base::has_earlier_variation;
+using libboardgame_base::is_main_variation;
+using libboardgame_base::ArrayList;
+using libboardgame_base::SgfError;
+using libboardgame_base::TreeReader;
 using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;
@@ -1590,7 +1590,7 @@ void GameModel::updateIsModified()
     // file is associated.
     bool isModified =
             m_game.is_modified()
-            && (! libboardgame_sgf::is_empty(m_game.get_tree())
+            && (! libboardgame_base::is_empty(m_game.get_tree())
                 || ! m_file.isEmpty());
     set(m_isModified, isModified, &GameModel::isModifiedChanged);
 }

@@ -5,9 +5,13 @@ add_executable(unittest_libboardgame_base
     PointTransformTest.cpp
     RatingTest.cpp
     RectGeometryTest.cpp
+    SgfNodeTest.cpp
+    SgfTreeTest.cpp
+    SgfUtilTest.cpp
     StatisticsTest.cpp
     StringRepTest.cpp
     StringUtilTest.cpp
+    TreeReaderTest.cpp
     )
 
 target_link_libraries(unittest_libboardgame_base

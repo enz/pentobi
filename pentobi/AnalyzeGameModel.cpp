@@ -10,11 +10,11 @@
 #include <QtConcurrentRun>
 #include "GameModel.h"
 #include "PlayerModel.h"
-#include "libboardgame_sgf/SgfUtil.h"
+#include "libboardgame_base/SgfUtil.h"
 
 using libboardgame_base::ArrayList;
-using libboardgame_sgf::is_main_variation;
-using libboardgame_sgf::find_root;
+using libboardgame_base::is_main_variation;
+using libboardgame_base::find_root;
 using libpentobi_base::ColorMove;
 
 //-----------------------------------------------------------------------------

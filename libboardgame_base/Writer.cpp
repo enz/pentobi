@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/Writer.cpp
+/** @file libboardgame_base/Writer.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,7 +8,7 @@
 
 #include <sstream>
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
@@ -77,4 +77,4 @@ void Writer::write_indent()
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base

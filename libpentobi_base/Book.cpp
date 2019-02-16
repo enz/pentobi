@@ -7,14 +7,14 @@
 #include "Book.h"
 
 #include "BoardUtil.h"
-#include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_base/Log.h"
+#include "libboardgame_base/TreeReader.h"
 
 //-----------------------------------------------------------------------------
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::TreeReader;
+using libboardgame_base::TreeReader;
 
 //-----------------------------------------------------------------------------
 

@@ -10,11 +10,11 @@
 #include "Color.h"
 #include "MovePoints.h"
 #include "Variant.h"
-#include "libboardgame_sgf/SgfNode.h"
+#include "libboardgame_base/SgfNode.h"
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::SgfNode;
+using libboardgame_base::SgfNode;
 
 //-----------------------------------------------------------------------------
 

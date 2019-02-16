@@ -1,18 +1,18 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/TreeReader.h
+/** @file libboardgame_base/TreeReader.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_TREE_READER_H
-#define LIBBOARDGAME_SGF_TREE_READER_H
+#ifndef LIBBOARDGAME_BASE_TREE_READER_H
+#define LIBBOARDGAME_BASE_TREE_READER_H
 
 #include <memory>
 #include <stack>
 #include "Reader.h"
 #include "SgfNode.h"
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
@@ -50,6 +50,6 @@ private:
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base
 
-#endif // LIBBOARDGAME_SGF_TREE_READER_H
+#endif // LIBBOARDGAME_BASE_TREE_READER_H

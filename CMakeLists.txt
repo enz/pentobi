@@ -41,7 +41,6 @@ if(UNIX)
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 endif()
 
-add_subdirectory(libboardgame_sgf)
 add_subdirectory(libboardgame_base)
 add_subdirectory(libpentobi_base)
 if(BUILD_TESTING)

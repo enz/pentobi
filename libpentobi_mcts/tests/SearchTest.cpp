@@ -6,8 +6,8 @@
 
 #include "libpentobi_mcts/Search.h"
 
-#include "libboardgame_sgf/SgfUtil.h"
-#include "libboardgame_sgf/TreeReader.h"
+#include "libboardgame_base/SgfUtil.h"
+#include "libboardgame_base/TreeReader.h"
 #include "libboardgame_test/Test.h"
 #include "libboardgame_base/CpuTimeSource.h"
 #include "libpentobi_base/BoardUpdater.h"
@@ -16,9 +16,9 @@
 using namespace std;
 using namespace libpentobi_mcts;
 using libboardgame_base::CpuTimeSource;
-using libboardgame_sgf::SgfNode;
-using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::get_last_node;
+using libboardgame_base::SgfNode;
+using libboardgame_base::TreeReader;
+using libboardgame_base::get_last_node;
 using libpentobi_base::BoardUpdater;
 using libpentobi_base::PentobiTree;
 

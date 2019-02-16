@@ -1,16 +1,16 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/SgfUtil.h
+/** @file libboardgame_base/SgfUtil.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_SGF_UTIL_H
-#define LIBBOARDGAME_SGF_SGF_UTIL_H
+#ifndef LIBBOARDGAME_BASE_SGF_UTIL_H
+#define LIBBOARDGAME_BASE_SGF_UTIL_H
 
 #include <string>
 #include "SgfTree.h"
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
@@ -65,6 +65,6 @@ bool is_empty(const SgfTree& tree);
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base
 
-#endif // LIBBOARDGAME_SGF_SGF_UTIL_H
+#endif // LIBBOARDGAME_BASE_SGF_UTIL_H

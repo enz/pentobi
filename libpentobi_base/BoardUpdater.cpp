@@ -8,13 +8,13 @@
 
 #include "BoardUtil.h"
 #include "NodeUtil.h"
-#include "libboardgame_sgf/SgfUtil.h"
+#include "libboardgame_base/SgfUtil.h"
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::SgfError;
-using libboardgame_sgf::get_path_from_root;
 using libpentobi_base::get_current_position_as_setup;
+using libboardgame_base::SgfError;
+using libboardgame_base::get_path_from_root;
 
 //-----------------------------------------------------------------------------
 

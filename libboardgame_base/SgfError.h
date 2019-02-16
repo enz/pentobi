@@ -1,16 +1,16 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/SgfError.h
+/** @file libboardgame_base/SgfError.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_SGF_ERROR_H
-#define LIBBOARDGAME_SGF_SGF_ERROR_H
+#ifndef LIBBOARDGAME_BASE_SGF_ERROR_H
+#define LIBBOARDGAME_BASE_SGF_ERROR_H
 
 #include <sstream>
 #include <stdexcept>
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 using namespace std;
 
@@ -68,6 +68,6 @@ string InvalidProperty::get_message(const string& id, const T& value)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base
 
-#endif // LIBBOARDGAME_SGF_SGF_ERROR_H
+#endif // LIBBOARDGAME_BASE_SGF_ERROR_H

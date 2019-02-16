@@ -13,12 +13,12 @@
 #include "Variant.h"
 #include "Setup.h"
 #include "PentobiSgfUtil.h"
-#include "libboardgame_sgf/SgfTree.h"
+#include "libboardgame_base/SgfTree.h"
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::SgfNode;
-using libboardgame_sgf::SgfTree;
+using libboardgame_base::SgfNode;
+using libboardgame_base::SgfTree;
 
 //-----------------------------------------------------------------------------
 

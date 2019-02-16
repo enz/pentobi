@@ -1,15 +1,15 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_sgf/SgfNodeTest.cpp
+/** @file unittest/libboardgame_base/SgfNodeTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #include <memory>
-#include "libboardgame_sgf/SgfNode.h"
+#include "libboardgame_base/SgfNode.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
-using namespace libboardgame_sgf;
+using namespace libboardgame_base;
 
 //-----------------------------------------------------------------------------
 

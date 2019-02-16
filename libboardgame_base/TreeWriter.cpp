@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/TreeWriter.cpp
+/** @file libboardgame_base/TreeWriter.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #include "TreeWriter.h"
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
@@ -49,4 +49,4 @@ void TreeWriter::write_property(const string& id, const vector<string>& values)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base

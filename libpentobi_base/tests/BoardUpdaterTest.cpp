@@ -6,14 +6,14 @@
 
 #include "libpentobi_base/BoardUpdater.h"
 
-#include "libboardgame_sgf/SgfUtil.h"
-#include "libboardgame_sgf/TreeReader.h"
+#include "libboardgame_base/SgfUtil.h"
+#include "libboardgame_base/TreeReader.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
 using namespace libpentobi_base;
-using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::get_last_node;
+using libboardgame_base::TreeReader;
+using libboardgame_base::get_last_node;
 
 //-----------------------------------------------------------------------------
 

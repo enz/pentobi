@@ -6,14 +6,14 @@
 
 #include "Game.h"
 
-#include "libboardgame_sgf/SgfError.h"
-#include "libboardgame_sgf/SgfUtil.h"
+#include "libboardgame_base/SgfError.h"
+#include "libboardgame_base/SgfUtil.h"
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::SgfError;
-using libboardgame_sgf::back_to_main_variation;
-using libboardgame_sgf::is_main_variation;
+using libboardgame_base::back_to_main_variation;
+using libboardgame_base::is_main_variation;
+using libboardgame_base::SgfError;
 
 //-----------------------------------------------------------------------------
 

@@ -1,18 +1,18 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/Reader.h
+/** @file libboardgame_base/Reader.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_READER_H
-#define LIBBOARDGAME_SGF_READER_H
+#ifndef LIBBOARDGAME_BASE_READER_H
+#define LIBBOARDGAME_BASE_READER_H
 
 #include <iosfwd>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 using namespace std;
 
@@ -100,6 +100,6 @@ inline void Reader::set_read_only_main_variation(bool enable)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base
 
-#endif // LIBBOARDGAME_SGF_READER_H
+#endif // LIBBOARDGAME_BASE_READER_H

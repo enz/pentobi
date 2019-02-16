@@ -1,15 +1,15 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_sgf/SgfUtilTest.cpp
+/** @file unittest/libboardgame_base/SgfUtilTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include "libboardgame_sgf/SgfUtil.h"
+#include "libboardgame_base/SgfUtil.h"
 
 #include "libboardgame_test/Test.h"
 
 using namespace std;
-using namespace libboardgame_sgf;
+using namespace libboardgame_base;
 
 //-----------------------------------------------------------------------------
 

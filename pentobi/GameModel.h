@@ -15,7 +15,7 @@
 class QTextCodec;
 
 using namespace std;
-using libboardgame_sgf::SgfNode;
+using libboardgame_base::SgfNode;
 using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Board;

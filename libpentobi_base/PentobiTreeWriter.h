@@ -8,7 +8,7 @@
 #define LIBPENTOBI_BASE_PENTOBI_TREE_WRITER_H
 
 #include "PentobiTree.h"
-#include "libboardgame_sgf/TreeWriter.h"
+#include "libboardgame_base/TreeWriter.h"
 
 namespace libpentobi_base {
 
@@ -18,7 +18,7 @@ namespace libpentobi_base {
     Automatically replaces obsolete move properties as used by early versions
     of Pentobi. */
 class PentobiTreeWriter
-    : public libboardgame_sgf::TreeWriter
+    : public libboardgame_base::TreeWriter
 {
 public:
     PentobiTreeWriter(ostream& out, const PentobiTree& tree);

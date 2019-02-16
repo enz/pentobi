@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/TreeReader.cpp
+/** @file libboardgame_base/TreeReader.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 #include "TreeReader.h"
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
@@ -58,4 +58,4 @@ void TreeReader::on_property(const string& identifier,
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base

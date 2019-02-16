@@ -19,13 +19,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_SHARED_LIBRARY_CXX_FLAGS}")
 add_library(pentobi_kde_thumbnailer STATIC
   ../libboardgame_base/Assert.cpp
   ../libboardgame_base/Log.cpp
+  ../libboardgame_base/Reader.cpp
+  ../libboardgame_base/SgfError.cpp
+  ../libboardgame_base/SgfNode.cpp
+  ../libboardgame_base/SgfTree.cpp
   ../libboardgame_base/StringRep.cpp
   ../libboardgame_base/StringUtil.cpp
-  ../libboardgame_sgf/Reader.cpp
-  ../libboardgame_sgf/SgfError.cpp
-  ../libboardgame_sgf/SgfNode.cpp
-  ../libboardgame_sgf/SgfTree.cpp
-  ../libboardgame_sgf/TreeReader.cpp
+  ../libboardgame_base/TreeReader.cpp
   ../libpentobi_base/CallistoGeometry.cpp
   ../libpentobi_base/GembloQGeometry.cpp
   ../libpentobi_base/NexosGeometry.cpp

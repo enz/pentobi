@@ -6,11 +6,11 @@
 
 #include "TwoGtp.h"
 
-#include "libboardgame_sgf/Writer.h"
 #include "libboardgame_base/Log.h"
+#include "libboardgame_base/Writer.h"
 #include "libpentobi_base/ScoreUtil.h"
 
-using libboardgame_sgf::Writer;
+using libboardgame_base::Writer;
 using libpentobi_base::get_multiplayer_result;
 using libpentobi_base::Move;
 using libpentobi_base::ScoreType;

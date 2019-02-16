@@ -139,7 +139,7 @@ public:
 
     /** Delete all variations but the main variation.
         If the current node is not in the main variation it will be changed
-        to the node as in libboardgame_sgf::back_to_main_variation() */
+        to the node as in libboardgame_base::back_to_main_variation() */
     void delete_all_variations();
 
     /** Make the current node the first child of its parent. */

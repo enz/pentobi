@@ -1,15 +1,15 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/SgfTree.h
+/** @file libboardgame_base/SgfTree.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_SGF_TREE_H
-#define LIBBOARDGAME_SGF_SGF_TREE_H
+#ifndef LIBBOARDGAME_BASE_SGF_TREE_H
+#define LIBBOARDGAME_BASE_SGF_TREE_H
 
 #include "SgfNode.h"
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
@@ -275,6 +275,6 @@ inline void SgfTree::set_time(const string& time)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base
 
-#endif // LIBBOARDGAME_SGF_SGF_TREE_H
+#endif // LIBBOARDGAME_BASE_SGF_TREE_H

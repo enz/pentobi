@@ -7,14 +7,14 @@
 #include "OutputTree.h"
 
 #include <fstream>
-#include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_sgf/TreeWriter.h"
+#include "libboardgame_base/TreeReader.h"
+#include "libboardgame_base/TreeWriter.h"
 #include "libpentobi_base/BoardUtil.h"
 
 using libboardgame_base::ArrayList;
-using libboardgame_sgf::SgfNode;
-using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::TreeWriter;
+using libboardgame_base::SgfNode;
+using libboardgame_base::TreeReader;
+using libboardgame_base::TreeWriter;
 using libpentobi_base::get_transforms;
 using libpentobi_base::ColorMove;
 using libpentobi_base::MovePoints;

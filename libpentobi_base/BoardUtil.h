@@ -8,11 +8,11 @@
 #define LIBPENTOBI_BASE_BOARD_UTIL_H
 
 #include "Board.h"
-#include "libboardgame_sgf/Writer.h"
+#include "libboardgame_base/Writer.h"
 
 namespace libpentobi_base {
 
-using libboardgame_sgf::Writer;
+using libboardgame_base::Writer;
 
 //-----------------------------------------------------------------------------
 

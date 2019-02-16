@@ -7,13 +7,13 @@
 #include "CreateThumbnail.h"
 
 #include <QPainter>
-#include "libboardgame_sgf/TreeReader.h"
+#include "libboardgame_base/TreeReader.h"
 #include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_paint/Paint.h"
 
 using namespace std;
-using libboardgame_sgf::SgfNode;
-using libboardgame_sgf::TreeReader;
+using libboardgame_base::SgfNode;
+using libboardgame_base::TreeReader;
 using libpentobi_base::Color;
 using libpentobi_base::Geometry;
 using libpentobi_base::Grid;

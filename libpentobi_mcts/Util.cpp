@@ -7,14 +7,14 @@
 #include "Util.h"
 
 #include <thread>
-#include "libboardgame_sgf/Writer.h"
 #include "libboardgame_base/Log.h"
+#include "libboardgame_base/Writer.h"
 #include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/PentobiSgfUtil.h"
 
 namespace libpentobi_mcts {
 
-using libboardgame_sgf::Writer;
+using libboardgame_base::Writer;
 using libpentobi_base::write_setup;
 using libpentobi_base::get_color_id;
 

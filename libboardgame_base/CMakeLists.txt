@@ -32,9 +32,19 @@ add_library(boardgame_base STATIC
     Range.h
     Rating.h
     Rating.cpp
+    Reader.h
+    Reader.cpp
     RectGeometry.h
     RectTransform.h
     RectTransform.cpp
+    SgfError.h
+    SgfError.cpp
+    SgfNode.h
+    SgfNode.cpp
+    SgfTree.h
+    SgfTree.cpp
+    SgfUtil.h
+    SgfUtil.cpp
     Statistics.h
     StringRep.h
     StringRep.cpp
@@ -48,8 +58,14 @@ add_library(boardgame_base STATIC
     TimeSource.cpp
     Transform.h
     Transform.cpp
+    TreeReader.h
+    TreeReader.cpp
+    TreeWriter.h
+    TreeWriter.cpp
     WallTimeSource.h
     WallTimeSource.cpp
+    Writer.h
+    Writer.cpp
     )
 
 if(PENTOBI_BUILD_GTP)

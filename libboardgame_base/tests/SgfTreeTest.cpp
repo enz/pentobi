@@ -1,13 +1,13 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_sgf/SgfTreeTest.cpp
+/** @file unittest/libboardgame_base/SgfTreeTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include "libboardgame_sgf/SgfTree.h"
+#include "libboardgame_base/SgfTree.h"
 #include "libboardgame_test/Test.h"
 
-using namespace libboardgame_sgf;
+using namespace libboardgame_base;
 
 //-----------------------------------------------------------------------------
 

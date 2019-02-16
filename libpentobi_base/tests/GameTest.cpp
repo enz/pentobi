@@ -6,12 +6,12 @@
 
 #include "libpentobi_base/Game.h"
 
-#include "libboardgame_sgf/TreeReader.h"
+#include "libboardgame_base/TreeReader.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
 using namespace libpentobi_base;
-using libboardgame_sgf::TreeReader;
+using libboardgame_base::TreeReader;
 
 //-----------------------------------------------------------------------------
 

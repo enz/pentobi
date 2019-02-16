@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/SgfTree.cpp
+/** @file libboardgame_base/SgfTree.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -12,7 +12,7 @@
 #include "SgfUtil.h"
 #include "libboardgame_base/StringUtil.h"
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 using libboardgame_base::trim;
 
@@ -261,4 +261,4 @@ const SgfNode& SgfTree::truncate(const SgfNode& node)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base

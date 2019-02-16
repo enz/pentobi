@@ -1,18 +1,18 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/Writer.h
+/** @file libboardgame_base/Writer.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_WRITER_H
-#define LIBBOARDGAME_SGF_WRITER_H
+#ifndef LIBBOARDGAME_BASE_WRITER_H
+#define LIBBOARDGAME_BASE_WRITER_H
 
 #include <iosfwd>
 #include <string>
 #include <vector>
 #include "libboardgame_base/StringUtil.h"
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 using namespace std;
 using libboardgame_base::to_string;
@@ -134,6 +134,6 @@ void Writer::write_property(const string& id, const vector<T>& values)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base
 
-#endif // LIBBOARDGAME_SGF_WRITER_H
+#endif // LIBBOARDGAME_BASE_WRITER_H

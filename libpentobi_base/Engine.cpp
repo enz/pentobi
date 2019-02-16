@@ -9,17 +9,17 @@
 #include <fstream>
 #include "MoveMarker.h"
 #include "PentobiTreeWriter.h"
-#include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_base/Log.h"
 #include "libboardgame_base/RandomGenerator.h"
+#include "libboardgame_base/SgfUtil.h"
+#include "libboardgame_base/TreeReader.h"
 
 namespace libpentobi_base {
 
 using libboardgame_base::RandomGenerator;
 using libboardgame_gtp::Failure;
-using libboardgame_sgf::TreeReader;
-using libboardgame_sgf::get_last_node;
+using libboardgame_base::TreeReader;
+using libboardgame_base::get_last_node;
 
 //-----------------------------------------------------------------------------
 

@@ -12,8 +12,8 @@
 
 namespace libpentobi_mcts {
 
+using libboardgame_base::SgfError;
 using libboardgame_base::WallTimeSource;
-using libboardgame_sgf::SgfError;
 using libpentobi_base::BoardUpdater;
 
 //-----------------------------------------------------------------------------

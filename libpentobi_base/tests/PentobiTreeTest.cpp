@@ -4,15 +4,15 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include "libboardgame_sgf/TreeReader.h"
+#include "libboardgame_base/TreeReader.h"
 #include "libboardgame_test/Test.h"
 #include "libpentobi_base/PentobiTree.h"
 
 using namespace std;
 using namespace libpentobi_base;
-using libboardgame_sgf::InvalidProperty;
-using libboardgame_sgf::MissingProperty;
-using libboardgame_sgf::TreeReader;
+using libboardgame_base::InvalidProperty;
+using libboardgame_base::MissingProperty;
+using libboardgame_base::TreeReader;
 
 //-----------------------------------------------------------------------------
 

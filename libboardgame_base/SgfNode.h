@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_sgf/SgfNode.h
+/** @file libboardgame_base/SgfNode.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_SGF_SGF_NODE_H
-#define LIBBOARDGAME_SGF_SGF_NODE_H
+#ifndef LIBBOARDGAME_BASE_SGF_NODE_H
+#define LIBBOARDGAME_BASE_SGF_NODE_H
 
 #include <forward_list>
 #include <memory>
@@ -15,7 +15,7 @@
 #include "libboardgame_base/Assert.h"
 #include "libboardgame_base/StringUtil.h"
 
-namespace libboardgame_sgf {
+namespace libboardgame_base {
 
 using libboardgame_base::from_string;
 using libboardgame_base::to_string;
@@ -384,6 +384,6 @@ bool SgfNode::set_property(const string& id, const vector<T>& values)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libboardgame_sgf
+} // namespace libboardgame_base
 
-#endif // LIBBOARDGAME_SGF_SGF_NODE_H
+#endif // LIBBOARDGAME_BASE_SGF_NODE_H
