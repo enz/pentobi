@@ -13,10 +13,8 @@ Libboardgame Modules
 The Libboardgame modules contain code that is not specific to Blokus and
 could be reused for other board games.
 
-* libboardgame_util --
-  General utilities (not specific to board games)
 * libboardgame_base --
-  Functionality for board games
+  General utilities and functionality for board games
 * libboardgame_gtp --
   Implementation of the
   [Go Text Protocol](https://en.wikipedia.org/wiki/Go_Text_Protocol) (GTP)

@@ -15,8 +15,8 @@
 namespace libpentobi_mcts {
 
 using namespace std;
+using libboardgame_base::TimeSource;
 using libboardgame_mcts::PlayerInt;
-using libboardgame_util::TimeSource;
 using libpentobi_base::Setup;
 
 //-----------------------------------------------------------------------------

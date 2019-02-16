@@ -11,11 +11,11 @@
 #include <map>
 #include <mutex>
 #include "OutputTree.h"
-#include "libboardgame_util/Timer.h"
-#include "libboardgame_util/WallTimeSource.h"
+#include "libboardgame_base/Timer.h"
+#include "libboardgame_base/WallTimeSource.h"
 
-using libboardgame_util::Timer;
-using libboardgame_util::WallTimeSource;
+using libboardgame_base::Timer;
+using libboardgame_base::WallTimeSource;
 
 //-----------------------------------------------------------------------------
 

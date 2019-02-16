@@ -9,15 +9,14 @@
 
 #include "PieceInfo.h"
 #include "Point.h"
-#include "libboardgame_util/ArrayList.h"
+#include "libboardgame_base/ArrayList.h"
 
 namespace libpentobi_base {
 
-using libboardgame_util::ArrayList;
-
 //-----------------------------------------------------------------------------
 
-using MovePoints = ArrayList<Point, PieceInfo::max_size, unsigned short>;
+using MovePoints =
+    libboardgame_base::ArrayList<Point, PieceInfo::max_size, unsigned short>;
 
 //-----------------------------------------------------------------------------
 

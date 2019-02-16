@@ -11,10 +11,12 @@
 #include "NexosGeometry.h"
 #include "TrigonGeometry.h"
 #include "libboardgame_base/RectGeometry.h"
-#include "libboardgame_util/StringUtil.h"
+#include "libboardgame_base/StringUtil.h"
 
 namespace libpentobi_base {
 
+using libboardgame_base::trim;
+using libboardgame_base::to_lower;
 using libboardgame_base::PointTransfIdent;
 using libboardgame_base::PointTransfRefl;
 using libboardgame_base::PointTransfReflRot180;
@@ -32,8 +34,6 @@ using libboardgame_base::PointTransfTrigonRot120;
 using libboardgame_base::PointTransfTrigonRot240;
 using libboardgame_base::PointTransfTrigonRot300;
 using libboardgame_base::RectGeometry;
-using libboardgame_util::trim;
-using libboardgame_util::to_lower;
 
 //-----------------------------------------------------------------------------
 

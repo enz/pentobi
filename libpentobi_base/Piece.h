@@ -8,7 +8,7 @@
 #define LIBPENTOBI_BASE_PIECE_H
 
 #include <cstdint>
-#include "libboardgame_util/Assert.h"
+#include "libboardgame_base/Assert.h"
 
 namespace libpentobi_base {
 

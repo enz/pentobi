@@ -7,8 +7,8 @@
 #include "Test.h"
 
 #include <map>
-#include "libboardgame_util/Assert.h"
-#include "libboardgame_util/Log.h"
+#include "libboardgame_base/Assert.h"
+#include "libboardgame_base/Log.h"
 
 namespace libboardgame_test {
 
@@ -96,7 +96,7 @@ bool run_test(const string& name)
 
 int test_main(int argc, char* argv[])
 {
-    libboardgame_util::LogInitializer log_initializer;
+    libboardgame_base::LogInitializer log_initializer;
     if (argc < 2)
         return run_all_tests() ? 0 : 1;
     int result = 0;

@@ -18,7 +18,7 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 /** Geometry of a regular rectangular grid.
-    @tparam P An instantiation of libboardgame_base::Point */
+    @tparam P An instantiation of Point */
 template<class P>
 class RectGeometry final
     : public Geometry<P>

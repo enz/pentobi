@@ -12,11 +12,11 @@
 #include "Geometry.h"
 #include "Grid.h"
 #include "Variant.h"
-#include "libboardgame_util/ArrayList.h"
+#include "libboardgame_base/ArrayList.h"
 
 namespace libpentobi_base {
 
-using libboardgame_util::ArrayList;
+using libboardgame_base::ArrayList;
 
 //-----------------------------------------------------------------------------
 

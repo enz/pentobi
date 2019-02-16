@@ -8,7 +8,7 @@
 
 #include "BoardUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_util/Log.h"
+#include "libboardgame_base/Log.h"
 
 //-----------------------------------------------------------------------------
 

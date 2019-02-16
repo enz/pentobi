@@ -8,14 +8,14 @@
 #define LIBPENTOBI_BASE_MOVE_LIST_H
 
 #include "Move.h"
-#include "libboardgame_util/ArrayList.h"
+#include "libboardgame_base/ArrayList.h"
 
 namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------
 
 /** List that can hold all possible moves, not including Move::null() */
-using MoveList = libboardgame_util::ArrayList<Move, Move::range - 1>;
+using MoveList = libboardgame_base::ArrayList<Move, Move::range - 1>;
 
 //-----------------------------------------------------------------------------
 

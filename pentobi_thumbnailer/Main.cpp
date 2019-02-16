@@ -13,7 +13,7 @@
 #include <QLibraryInfo>
 #include <QString>
 #include <QTranslator>
-#include "libboardgame_util/Log.h"
+#include "libboardgame_base/Log.h"
 #include "libpentobi_thumbnail/CreateThumbnail.h"
 
 using namespace std;
@@ -22,7 +22,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    libboardgame_util::LogInitializer log_initializer;
+    libboardgame_base::LogInitializer log_initializer;
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
     QCoreApplication app(argc, argv);
     QTranslator qtTranslator;

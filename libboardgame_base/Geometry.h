@@ -11,12 +11,11 @@
 #include <sstream>
 #include "CoordPoint.h"
 #include "StringRep.h"
-#include "libboardgame_util/ArrayList.h"
+#include "libboardgame_base/ArrayList.h"
 
 namespace libboardgame_base {
 
 using namespace std;
-using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 
@@ -25,8 +24,7 @@ using libboardgame_util::ArrayList;
     that can restrict the shape of the board to a subset of the rectangle
     and/or to define different definitions of adjacent and diagonal neighbors
     of a point for geometries that are not rectangular grids.
-    @tparam P An instantiation of libboardgame_base::Point (or compatible
-    class) */
+    @tparam P An instantiation of Point (or compatible class) */
 template<class P>
 class Geometry
 {

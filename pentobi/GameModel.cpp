@@ -26,6 +26,8 @@
 #include "libpentobi_base/TreeUtil.h"
 
 using namespace std;
+using libboardgame_base::ArrayList;
+using libboardgame_base::get_letter_coord;
 using libboardgame_sgf::SgfError;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::back_to_main_variation;
@@ -35,8 +37,6 @@ using libboardgame_sgf::get_last_node;
 using libboardgame_sgf::has_comment;
 using libboardgame_sgf::has_earlier_variation;
 using libboardgame_sgf::is_main_variation;
-using libboardgame_util::ArrayList;
-using libboardgame_util::get_letter_coord;
 using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
 using libpentobi_base::Color;

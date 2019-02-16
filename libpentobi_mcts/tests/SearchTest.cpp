@@ -9,16 +9,16 @@
 #include "libboardgame_sgf/SgfUtil.h"
 #include "libboardgame_sgf/TreeReader.h"
 #include "libboardgame_test/Test.h"
-#include "libboardgame_util/CpuTimeSource.h"
+#include "libboardgame_base/CpuTimeSource.h"
 #include "libpentobi_base/BoardUpdater.h"
 #include "libpentobi_base/PentobiTree.h"
 
 using namespace std;
 using namespace libpentobi_mcts;
+using libboardgame_base::CpuTimeSource;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
 using libboardgame_sgf::get_last_node;
-using libboardgame_util::CpuTimeSource;
 using libpentobi_base::BoardUpdater;
 using libpentobi_base::PentobiTree;
 

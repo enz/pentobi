@@ -8,17 +8,17 @@
 
 #include <fstream>
 #include <map>
-#include "libboardgame_util/FmtSaver.h"
-#include "libboardgame_util/Statistics.h"
-#include "libboardgame_util/StringUtil.h"
+#include "libboardgame_base/FmtSaver.h"
+#include "libboardgame_base/Statistics.h"
+#include "libboardgame_base/StringUtil.h"
 
 using namespace std;
-using libboardgame_util::from_string;
-using libboardgame_util::split;
-using libboardgame_util::trim;
-using libboardgame_util::FmtSaver;
-using libboardgame_util::Statistics;
-using libboardgame_util::StatisticsExt;
+using libboardgame_base::from_string;
+using libboardgame_base::split;
+using libboardgame_base::trim;
+using libboardgame_base::FmtSaver;
+using libboardgame_base::Statistics;
+using libboardgame_base::StatisticsExt;
 
 //-----------------------------------------------------------------------------
 

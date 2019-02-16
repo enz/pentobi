@@ -10,12 +10,11 @@
 #include <cstdio>
 #include <cstdlib>
 #include "SgfUtil.h"
-#include "libboardgame_util/StringUtil.h"
+#include "libboardgame_base/StringUtil.h"
 
 namespace libboardgame_sgf {
 
-using libboardgame_sgf::find_root;
-using libboardgame_util::trim;
+using libboardgame_base::trim;
 
 //-----------------------------------------------------------------------------
 

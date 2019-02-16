@@ -8,11 +8,11 @@
 
 #include <algorithm>
 #include <sstream>
-#include "libboardgame_util/StringUtil.h"
+#include "libboardgame_base/StringUtil.h"
 
 namespace libboardgame_sgf {
 
-using libboardgame_util::get_letter_coord;
+using libboardgame_base::get_letter_coord;
 
 //-----------------------------------------------------------------------------
 

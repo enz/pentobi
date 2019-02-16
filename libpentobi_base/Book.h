@@ -11,11 +11,11 @@
 #include "Board.h"
 #include "PentobiTree.h"
 #include "libboardgame_base/PointTransform.h"
-#include "libboardgame_util/RandomGenerator.h"
+#include "libboardgame_base/RandomGenerator.h"
 
 namespace libpentobi_base {
 
-using libboardgame_util::RandomGenerator;
+using libboardgame_base::RandomGenerator;
 
 //-----------------------------------------------------------------------------
 

@@ -10,7 +10,7 @@
 #include <vector>
 #include <unistd.h>
 #include "FdStream.h"
-#include "libboardgame_util/Log.h"
+#include "libboardgame_base/Log.h"
 
 //-----------------------------------------------------------------------------
 

@@ -17,33 +17,33 @@
 #include "PlayerMove.h"
 #include "Tree.h"
 #include "TreeUtil.h"
-#include "libboardgame_util/ArrayList.h"
-#include "libboardgame_util/Barrier.h"
-#include "libboardgame_util/Compiler.h"
-#include "libboardgame_util/IntervalChecker.h"
-#include "libboardgame_util/Log.h"
-#include "libboardgame_util/RandomGenerator.h"
-#include "libboardgame_util/Statistics.h"
-#include "libboardgame_util/StringUtil.h"
-#include "libboardgame_util/TimeIntervalChecker.h"
-#include "libboardgame_util/Timer.h"
+#include "libboardgame_base/ArrayList.h"
+#include "libboardgame_base/Barrier.h"
+#include "libboardgame_base/Compiler.h"
+#include "libboardgame_base/IntervalChecker.h"
+#include "libboardgame_base/Log.h"
+#include "libboardgame_base/RandomGenerator.h"
+#include "libboardgame_base/Statistics.h"
+#include "libboardgame_base/StringUtil.h"
+#include "libboardgame_base/TimeIntervalChecker.h"
+#include "libboardgame_base/Timer.h"
 
 namespace libboardgame_mcts {
 
 using namespace std;
+using libboardgame_base::time_to_string;
+using libboardgame_base::to_string;
+using libboardgame_base::ArrayList;
+using libboardgame_base::Barrier;
+using libboardgame_base::IntervalChecker;
+using libboardgame_base::RandomGenerator;
+using libboardgame_base::StatisticsBase;
+using libboardgame_base::StatisticsDirtyLockFree;
+using libboardgame_base::StatisticsExt;
+using libboardgame_base::Timer;
+using libboardgame_base::TimeIntervalChecker;
+using libboardgame_base::TimeSource;
 using libboardgame_mcts::find_node;
-using libboardgame_util::time_to_string;
-using libboardgame_util::to_string;
-using libboardgame_util::ArrayList;
-using libboardgame_util::Barrier;
-using libboardgame_util::IntervalChecker;
-using libboardgame_util::RandomGenerator;
-using libboardgame_util::StatisticsBase;
-using libboardgame_util::StatisticsDirtyLockFree;
-using libboardgame_util::StatisticsExt;
-using libboardgame_util::Timer;
-using libboardgame_util::TimeIntervalChecker;
-using libboardgame_util::TimeSource;
 
 //-----------------------------------------------------------------------------
 
@@ -375,7 +375,7 @@ protected:
 private:
 #ifdef LIBBOARDGAME_DEBUG
     class AssertionHandler
-        : public libboardgame_util::AssertionHandler
+        : public libboardgame_base::AssertionHandler
     {
     public:
         explicit AssertionHandler(const SearchBase& search);

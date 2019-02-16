@@ -13,15 +13,15 @@
 #include "StateUtil.h"
 #include "libboardgame_mcts/LastGoodReply.h"
 #include "libboardgame_mcts/PlayerMove.h"
-#include "libboardgame_util/RandomGenerator.h"
-#include "libboardgame_util/Statistics.h"
+#include "libboardgame_base/RandomGenerator.h"
+#include "libboardgame_base/Statistics.h"
 
 namespace libpentobi_mcts {
 
+using libboardgame_base::RandomGenerator;
+using libboardgame_base::Statistics;
 using libboardgame_mcts::LastGoodReply;
 using libboardgame_mcts::PlayerInt;
-using libboardgame_util::RandomGenerator;
-using libboardgame_util::Statistics;
 using libpentobi_base::BoardConst;
 using libpentobi_base::MoveInfo;
 using libpentobi_base::MoveInfoExt;

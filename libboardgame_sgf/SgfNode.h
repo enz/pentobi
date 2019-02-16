@@ -12,13 +12,13 @@
 #include <string>
 #include <vector>
 #include "SgfError.h"
-#include "libboardgame_util/Assert.h"
-#include "libboardgame_util/StringUtil.h"
+#include "libboardgame_base/Assert.h"
+#include "libboardgame_base/StringUtil.h"
 
 namespace libboardgame_sgf {
 
-using libboardgame_util::from_string;
-using libboardgame_util::to_string;
+using libboardgame_base::from_string;
+using libboardgame_base::to_string;
 
 //-----------------------------------------------------------------------------
 

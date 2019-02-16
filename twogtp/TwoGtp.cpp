@@ -7,7 +7,7 @@
 #include "TwoGtp.h"
 
 #include "libboardgame_sgf/Writer.h"
-#include "libboardgame_util/Log.h"
+#include "libboardgame_base/Log.h"
 #include "libpentobi_base/ScoreUtil.h"
 
 using libboardgame_sgf::Writer;

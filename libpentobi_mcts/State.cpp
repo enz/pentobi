@@ -6,7 +6,7 @@
 
 #include "State.h"
 
-#include "libboardgame_util/MathUtil.h"
+#include "libboardgame_base/MathUtil.h"
 #include "libpentobi_base/ScoreUtil.h"
 #ifdef LIBBOARDGAME_DEBUG
 #include "libpentobi_base/BoardUtil.h"
@@ -14,7 +14,7 @@
 
 namespace libpentobi_mcts {
 
-using libboardgame_util::fast_exp;
+using libboardgame_base::fast_exp;
 using libpentobi_base::get_multiplayer_result;
 using libpentobi_base::BoardType;
 using libpentobi_base::PointState;

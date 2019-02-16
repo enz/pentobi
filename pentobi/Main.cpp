@@ -16,7 +16,7 @@
 #include "PlayerModel.h"
 #include "RatingModel.h"
 #include "SyncSettings.h"
-#include "libboardgame_util/Log.h"
+#include "libboardgame_base/Log.h"
 
 #ifndef Q_OS_ANDROID
 #include <QCommandLineParser>
@@ -128,7 +128,7 @@ int mainDesktop()
     {
 #ifndef LIBBOARDGAME_DISABLE_LOG
         if (! parser.isSet(optionVerbose))
-            libboardgame_util::disable_logging();
+            libboardgame_base::disable_logging();
 #endif
         if (parser.isSet(optionNoBook))
             PlayerModel::noBook = true;
@@ -147,7 +147,7 @@ int mainDesktop()
             if (! ok)
                 throw QCoreApplication::translate(
                         "main", "--seed must be a positive number");
-            libboardgame_util::RandomGenerator::set_global_seed(seed);
+            libboardgame_base::RandomGenerator::set_global_seed(seed);
         }
         if (parser.isSet(optionThreads))
         {
@@ -212,7 +212,7 @@ int mainDesktop()
 
 int main(int argc, char *argv[])
 {
-    libboardgame_util::LogInitializer log_initializer;
+    libboardgame_base::LogInitializer log_initializer;
 #ifdef Q_OS_ANDROID
     // We don't use HighDpiScaling on low-DPI Android devices because of
     // QTBUG-69102 and other bugs

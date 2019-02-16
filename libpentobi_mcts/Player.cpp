@@ -8,14 +8,14 @@
 
 #include <fstream>
 #include <iomanip>
-#include "libboardgame_util/CpuTimeSource.h"
-#include "libboardgame_util/Memory.h"
-#include "libboardgame_util/WallTimeSource.h"
+#include "libboardgame_base/CpuTimeSource.h"
+#include "libboardgame_base/Memory.h"
+#include "libboardgame_base/WallTimeSource.h"
 
 namespace libpentobi_mcts {
 
-using libboardgame_util::CpuTimeSource;
-using libboardgame_util::WallTimeSource;
+using libboardgame_base::CpuTimeSource;
+using libboardgame_base::WallTimeSource;
 using libpentobi_base::BoardType;
 
 //-----------------------------------------------------------------------------
@@ -65,7 +65,7 @@ const float counts_callisto_2[Player::max_supported_level] =
     level used. */
 size_t get_memory(unsigned max_level)
 {
-    auto available = libboardgame_util::get_memory();
+    auto available = libboardgame_base::get_memory();
     if (available == 0)
     {
         LIBBOARDGAME_LOG("WARNING: could not determine system memory"

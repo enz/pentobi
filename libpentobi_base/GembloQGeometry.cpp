@@ -8,13 +8,13 @@
 
 #include <map>
 #include <memory>
-#include "libboardgame_util/MathUtil.h"
+#include "libboardgame_base/MathUtil.h"
 
 namespace libpentobi_base {
 
 using namespace std;
+using libboardgame_base::mod;
 using libboardgame_base::CoordPoint;
-using libboardgame_util::mod;
 
 //-----------------------------------------------------------------------------
 

@@ -6,14 +6,14 @@
 
 #include <fstream>
 #include "Engine.h"
-#include "libboardgame_util/Log.h"
-#include "libboardgame_util/Options.h"
-#include "libboardgame_util/RandomGenerator.h"
+#include "libboardgame_base/Log.h"
+#include "libboardgame_base/Options.h"
+#include "libboardgame_base/RandomGenerator.h"
 
 using namespace std;
+using libboardgame_base::Options;
+using libboardgame_base::RandomGenerator;
 using libboardgame_gtp::Failure;
-using libboardgame_util::Options;
-using libboardgame_util::RandomGenerator;
 using libpentobi_base::parse_variant_id;
 using libpentobi_base::Board;
 using libpentobi_base::Variant;
@@ -44,7 +44,7 @@ string get_application_dir_path(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    libboardgame_util::LogInitializer log_initializer;
+    libboardgame_base::LogInitializer log_initializer;
     string application_dir_path = get_application_dir_path(argc, argv);
     try
     {
@@ -105,7 +105,7 @@ int main(int argc, char** argv)
         }
         Board::color_output = opt.contains("color");
         if (opt.contains("quiet"))
-            libboardgame_util::disable_logging();
+            libboardgame_base::disable_logging();
         if (opt.contains("seed"))
             RandomGenerator::set_global_seed(
                         opt.get<RandomGenerator::ResultType>("seed"));
@@ -137,7 +137,7 @@ int main(int argc, char** argv)
             ifstream in(config_file);
             if (! in)
                 throw runtime_error("Error opening " + config_file);
-            engine.exec(in, true, libboardgame_util::get_log_stream());
+            engine.exec(in, true, libboardgame_base::get_log_stream());
         }
         auto& args = opt.get_args();
         if (! args.empty())

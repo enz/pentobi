@@ -10,18 +10,18 @@
 #include <fstream>
 #include <random>
 #include "libboardgame_sgf/TreeReader.h"
-#include "libboardgame_util/FmtSaver.h"
-#include "libboardgame_util/Log.h"
-#include "libboardgame_util/Options.h"
+#include "libboardgame_base/FmtSaver.h"
+#include "libboardgame_base/Log.h"
+#include "libboardgame_base/Options.h"
 #include "libpentobi_base/Game.h"
 #include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_mcts/LocalPoints.h"
 
 using namespace std;
+using libboardgame_base::split;
+using libboardgame_base::FmtSaver;
+using libboardgame_base::Options;
 using libboardgame_sgf::TreeReader;
-using libboardgame_util::FmtSaver;
-using libboardgame_util::Options;
-using libboardgame_util::split;
 using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::Color;
@@ -501,7 +501,7 @@ void train(const string& file_list, unsigned steps)
 
 int main(int argc, char** argv)
 {
-    libboardgame_util::LogInitializer log_initializer;
+    libboardgame_base::LogInitializer log_initializer;
     try
     {
         vector<string> specs = {

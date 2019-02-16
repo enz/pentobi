@@ -12,6 +12,7 @@
 #include "libpentobi_base/TrigonTransform.h"
 
 using namespace std;
+using libboardgame_base::ArrayList;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::TransfIdentity;
 using libboardgame_base::TransfRectRot90;
@@ -21,7 +22,6 @@ using libboardgame_base::TransfRectRefl;
 using libboardgame_base::TransfRectRot90Refl;
 using libboardgame_base::TransfRectRot180Refl;
 using libboardgame_base::TransfRectRot270Refl;
-using libboardgame_util::ArrayList;
 using libpentobi_base::BoardType;
 using libpentobi_base::GeometryType;
 using libpentobi_base::PieceInfo;

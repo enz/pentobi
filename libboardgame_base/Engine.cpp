@@ -6,16 +6,14 @@
 
 #include "Engine.h"
 
-#include "libboardgame_util/CpuTime.h"
-#include "libboardgame_util/Log.h"
-#include "libboardgame_util/RandomGenerator.h"
+#include "libboardgame_base/CpuTime.h"
+#include "libboardgame_base/Log.h"
+#include "libboardgame_base/RandomGenerator.h"
 
 namespace libboardgame_base {
 
 using namespace std;
 using libboardgame_gtp::Failure;
-using libboardgame_util::flush_log;
-using libboardgame_util::RandomGenerator;
 
 //-----------------------------------------------------------------------------
 
@@ -27,7 +25,7 @@ Engine::Engine()
 
 void Engine::cmd_cputime(Response& response)
 {
-    auto time = libboardgame_util::cpu_time();
+    auto time = cpu_time();
     if (time < 0)
         throw Failure("cannot determine cpu time");
     response << time;

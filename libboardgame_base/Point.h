@@ -8,13 +8,13 @@
 #define LIBBOARDGAME_BASE_POINT_H
 
 #include <limits>
-#include "libboardgame_util/Assert.h"
-#include "libboardgame_util/Compiler.h"
+#include "libboardgame_base/Assert.h"
+#include "libboardgame_base/Compiler.h"
 
 namespace libboardgame_base {
 
 using namespace std;
-using namespace libboardgame_util;
+using namespace libboardgame_base;
 
 //-----------------------------------------------------------------------------
 

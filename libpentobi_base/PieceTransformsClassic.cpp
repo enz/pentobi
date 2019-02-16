@@ -6,7 +6,7 @@
 
 #include "PieceTransformsClassic.h"
 
-#include "libboardgame_util/Assert.h"
+#include "libboardgame_base/Assert.h"
 
 namespace libpentobi_base {
 

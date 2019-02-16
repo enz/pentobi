@@ -17,10 +17,10 @@ find_package(Qt5Gui 5.9 REQUIRED)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_SHARED_LIBRARY_CXX_FLAGS}")
 
 add_library(pentobi_kde_thumbnailer STATIC
-  ../libboardgame_util/Assert.cpp
-  ../libboardgame_util/Log.cpp
-  ../libboardgame_util/StringUtil.cpp
+  ../libboardgame_base/Assert.cpp
+  ../libboardgame_base/Log.cpp
   ../libboardgame_base/StringRep.cpp
+  ../libboardgame_base/StringUtil.cpp
   ../libboardgame_sgf/Reader.cpp
   ../libboardgame_sgf/SgfError.cpp
   ../libboardgame_sgf/SgfNode.cpp

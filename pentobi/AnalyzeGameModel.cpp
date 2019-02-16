@@ -12,9 +12,9 @@
 #include "PlayerModel.h"
 #include "libboardgame_sgf/SgfUtil.h"
 
+using libboardgame_base::ArrayList;
 using libboardgame_sgf::is_main_variation;
 using libboardgame_sgf::find_root;
-using libboardgame_util::ArrayList;
 using libpentobi_base::ColorMove;
 
 //-----------------------------------------------------------------------------

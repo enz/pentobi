@@ -8,7 +8,7 @@
 
 #include <thread>
 #include "libboardgame_sgf/Writer.h"
-#include "libboardgame_util/Log.h"
+#include "libboardgame_base/Log.h"
 #include "libpentobi_base/BoardUtil.h"
 #include "libpentobi_base/PentobiSgfUtil.h"
 

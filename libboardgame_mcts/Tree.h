@@ -14,7 +14,7 @@
 namespace libboardgame_mcts {
 
 using namespace std;
-using libboardgame_util::Range;
+using libboardgame_base::Range;
 
 //-----------------------------------------------------------------------------
 

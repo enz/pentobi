@@ -15,14 +15,14 @@
 #include "Variant.h"
 #include "libboardgame_base/CoordPoint.h"
 #include "libboardgame_base/Transform.h"
-#include "libboardgame_util/ArrayList.h"
+#include "libboardgame_base/ArrayList.h"
 
 namespace libpentobi_base {
 
 using namespace std;
+using libboardgame_base::ArrayList;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::Transform;
-using libboardgame_util::ArrayList;
 
 //-----------------------------------------------------------------------------
 

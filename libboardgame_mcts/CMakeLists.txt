@@ -12,10 +12,7 @@ endif()
 
 target_include_directories(boardgame_mcts INTERFACE ..)
 
-target_link_libraries(boardgame_mcts INTERFACE
-    boardgame_util
-    Threads::Threads
-    )
+target_link_libraries(boardgame_mcts INTERFACE Threads::Threads)
 
 if(BUILD_TESTING)
     add_subdirectory(tests)

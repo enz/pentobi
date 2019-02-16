@@ -7,13 +7,13 @@
 #include "AnalyzeGame.h"
 
 #include "Search.h"
-#include "libboardgame_util/Log.h"
-#include "libboardgame_util/WallTimeSource.h"
+#include "libboardgame_base/Log.h"
+#include "libboardgame_base/WallTimeSource.h"
 
 namespace libpentobi_mcts {
 
+using libboardgame_base::WallTimeSource;
 using libboardgame_sgf::SgfError;
-using libboardgame_util::WallTimeSource;
 using libpentobi_base::BoardUpdater;
 
 //-----------------------------------------------------------------------------

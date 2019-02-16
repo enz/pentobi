@@ -11,7 +11,7 @@
 #include "libpentobi_base/ColorMap.h"
 
 using namespace std;
-using libboardgame_util::ArrayList;
+using libboardgame_base::ArrayList;
 using libpentobi_base::CallistoGeometry;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;

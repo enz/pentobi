@@ -12,11 +12,11 @@
 #include "PrecompMoves.h"
 #include "SymmetricPoints.h"
 #include "Variant.h"
-#include "libboardgame_util/Range.h"
+#include "libboardgame_base/Range.h"
 
 namespace libpentobi_base {
 
-using libboardgame_util::Range;
+using libboardgame_base::Range;
 
 //-----------------------------------------------------------------------------
 

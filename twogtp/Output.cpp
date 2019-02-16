@@ -12,11 +12,11 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/file.h>
-#include "libboardgame_util/StringUtil.h"
+#include "libboardgame_base/StringUtil.h"
 
-using libboardgame_util::from_string;
-using libboardgame_util::split;
-using libboardgame_util::trim;
+using libboardgame_base::from_string;
+using libboardgame_base::split;
+using libboardgame_base::trim;
 
 //-----------------------------------------------------------------------------
 

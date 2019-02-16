@@ -8,19 +8,19 @@
 #include <thread>
 #include "Analyze.h"
 #include "TwoGtp.h"
-#include "libboardgame_util/Log.h"
-#include "libboardgame_util/Options.h"
+#include "libboardgame_base/Log.h"
+#include "libboardgame_base/Options.h"
 #include "libpentobi_base/Variant.h"
 
 using namespace std;
-using libboardgame_util::Options;
+using libboardgame_base::Options;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
 int main(int argc, char** argv)
 {
-    libboardgame_util::LogInitializer log_initializer;
+    libboardgame_base::LogInitializer log_initializer;
     atomic<int> result(0);
     try
     {
@@ -52,7 +52,7 @@ int main(int argc, char** argv)
         auto save_interval = opt.get<double>("saveinterval", 60);
         bool quiet = opt.contains("quiet");
         if (quiet)
-            libboardgame_util::disable_logging();
+            libboardgame_base::disable_logging();
         bool fast_open = opt.contains("fastopen");
         bool create_tree = opt.contains("tree") || fast_open;
         Variant variant;

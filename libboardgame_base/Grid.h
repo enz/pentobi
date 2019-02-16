@@ -59,8 +59,7 @@ template<class P, typename T> class GridExt;
 /** Elements assigned to on-board points.
     The elements must be default-constructible. This class is a POD if the
     element type is a POD.
-    @tparam P An instantiation of libboardgame_base::Point (or compatible
-    class)
+    @tparam P An instantiation of Point (or compatible class)
     @tparam T The element type. */
 template<class P, typename T>
 class Grid

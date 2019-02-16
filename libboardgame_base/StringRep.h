@@ -32,7 +32,7 @@ struct StringRep
 //-----------------------------------------------------------------------------
 
 /** Spreadsheet-style string representation of points.
-    Can be used as a template argument for libboardgame_base::Point.
+    Can be used as a template argument for Point.
     Columns are represented as letters including the letter 'J'. After 'Z',
     multi-letter combinations are used: 'AA', 'AB', etc. Rows are represented
     by numbers starting with '1'. Note that unlike in spreadsheets, row number

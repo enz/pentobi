@@ -6,11 +6,11 @@
 
 #include "GembloQTransform.h"
 
-#include "libboardgame_util/MathUtil.h"
+#include "libboardgame_base/MathUtil.h"
 
 namespace libpentobi_base {
 
-using libboardgame_util::mod;
+using libboardgame_base::mod;
 
 //-----------------------------------------------------------------------------
 
