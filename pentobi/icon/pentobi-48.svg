@@ -6,61 +6,61 @@
  <use transform="translate(10 9.9999)" width="100%" height="100%" xlink:href="#h"/>
  <use transform="translate(20 9.9999)" width="100%" height="100%" xlink:href="#h"/>
  <path id="n" d="m14 4.0001 1.5385 1.5384h6.9231l1.5385-1.5384z" fill="#e73b43" fill-rule="evenodd" stroke-width=".38461"/>
- <use transform="translate(7.1708e-8 9.9999)" width="100%" height="100%" xlink:href="#n"/>
+ <use transform="translate(0 9.9999)" width="100%" height="100%" xlink:href="#n"/>
  <use transform="translate(10 9.9999)" width="100%" height="100%" xlink:href="#n"/>
  <path id="m" d="m14 4.0001 1.5385 1.5384v6.923l-1.5385 1.5384z" fill="#e6323a" fill-rule="evenodd" stroke-width=".38461"/>
- <use transform="translate(7.1708e-8 9.9999)" width="100%" height="100%" xlink:href="#m"/>
+ <use transform="translate(0 9.9999)" width="100%" height="100%" xlink:href="#m"/>
  <use transform="translate(10 9.9999)" width="100%" height="100%" xlink:href="#m"/>
  <path id="c" d="m14 14-1.5385-1.5384v-6.923l1.5385-1.5384z" fill="#cd1922" fill-rule="evenodd" stroke-width=".38461"/>
  <use transform="translate(10 9.9999)" width="100%" height="100%" xlink:href="#c"/>
  <use transform="translate(10)" width="100%" height="100%" xlink:href="#c"/>
  <use transform="translate(20 9.9999)" width="100%" height="100%" xlink:href="#c"/>
- <g transform="matrix(.38462 0 0 .38461 -.61538 -.61523)" fill-rule="evenodd">
-  <path d="m14.503 14.542 1.4971 1.4577v18l-4 4v-18c0.02078-3.241 2.5029-5.4577 2.5029-5.4577z" fill="#e6323a"/>
-  <path d="m14.533 14.527 1.467 1.4727h18l4-4h-18c-3.3465 0.04519-5.467 2.5273-5.467 2.5273z" fill="#e73b42"/>
-  <path d="m64 12h44c3.9627 0.04261 7.9574 4.0799 8 8v70h-26v-52h-26z" fill="#33d17a"/>
-  <path id="g" d="m64 38 4-4h18l4 4z" fill="#27bf6c" fill-rule="evenodd"/>
+ <g fill-rule="evenodd" stroke-width=".38461">
+  <path d="m4.9627 4.9778 0.57581 0.56065v6.923l-1.5385 1.5384v-6.923c0.00799-1.2465 0.96265-2.0991 0.96265-2.0991z" fill="#e6323a"/>
+  <path d="m4.9742 4.972 0.56423 0.56642h6.9231l1.5385-1.5384h-6.9231c-1.2871 0.017381-2.1027 0.97203-2.1027 0.97203z" fill="#e73b42"/>
+  <path d="m24 4.0001h16.923c1.5241 0.016388 3.0605 1.5692 3.0769 3.0769v26.923h-10v-20h-10z" fill="#2ec27e"/>
+  <path id="g" d="m24 14 1.5385-1.5384h6.9231l1.5385 1.5384z" fill="#2ab073" fill-rule="evenodd" stroke-width=".38461"/>
  </g>
- <use transform="matrix(.38462 0 0 .38461 9.3846 -.61523)" width="100%" height="100%" xlink:href="#g"/>
- <use transform="matrix(.38462 0 0 .38461 9.3846 9.3847)" width="100%" height="100%" xlink:href="#g"/>
- <use transform="matrix(.38462 0 0 .38461 9.3846 19.385)" width="100%" height="100%" xlink:href="#g"/>
- <path id="f" d="m24 4.0001 1.5385 1.5384v6.923l-1.5385 1.5384z" fill="#42d886" fill-rule="evenodd" stroke-width=".38461"/>
+ <use transform="translate(10)" width="100%" height="100%" xlink:href="#g"/>
+ <use transform="translate(10 9.9999)" width="100%" height="100%" xlink:href="#g"/>
+ <use transform="translate(10 20)" width="100%" height="100%" xlink:href="#g"/>
+ <path id="f" d="m24 4.0001 1.5385 1.5384v6.923l-1.5385 1.5384z" fill="#30ca85" fill-rule="evenodd" stroke-width=".38461"/>
  <use transform="translate(10)" width="100%" height="100%" xlink:href="#f"/>
  <use transform="translate(10 20)" width="100%" height="100%" xlink:href="#f"/>
  <use transform="translate(10 9.9999)" width="100%" height="100%" xlink:href="#f"/>
- <path id="p" d="m24 4.0001 1.5385 1.5384h6.9231l1.5385-1.5384z" fill="#57df95" fill-rule="evenodd" stroke-width=".38461"/>
+ <path id="p" d="m24 4.0001 1.5385 1.5384h6.9231l1.5385-1.5384z" fill="#4fd398" fill-rule="evenodd" stroke-width=".38461"/>
  <use transform="translate(10 9.9999)" width="100%" height="100%" xlink:href="#p"/>
  <use transform="translate(10 20)" width="100%" height="100%" xlink:href="#p"/>
- <path id="o" d="m34 4.0001-1.5385 1.5384v6.923l1.5385 1.5384z" fill="#29cb73" fill-rule="evenodd" stroke-width=".38461"/>
+ <path id="o" d="m34 4.0001-1.5385 1.5384v6.923l1.5385 1.5384z" fill="#2fbb7c" fill-rule="evenodd" stroke-width=".38461"/>
  <use transform="translate(10 9.9999)" width="100%" height="100%" xlink:href="#o"/>
  <use transform="translate(10 20)" width="100%" height="100%" xlink:href="#o"/>
  <g transform="matrix(.38462 0 0 .38461 -.61538 -.61523)" fill-rule="evenodd">
-  <path d="m90 12 4 4h18l1.4274-1.4594s-2.4274-2.5406-5.4274-2.5406z" fill="#57df95"/>
-  <path d="m116 20c-0.0151-2.9828-2.5466-5.4534-2.5466-5.4534l-1.4534 1.4534v18l4 4z" fill="#29cb73"/>
+  <path d="m90 12 4 4h18l1.4274-1.4594s-2.4274-2.5406-5.4274-2.5406z" fill="#4fd398"/>
+  <path d="m116 20c-0.0151-2.9828-2.5466-5.4534-2.5466-5.4534l-1.4534 1.4534v18l4 4z" fill="#2fbb7c"/>
   <path d="m12 38v70c0.0213 4.0053 4 7.9997 7.984 7.9997l44.015-2e-3 9.99e-4 -25.998h-26v-52z" fill="#f6d32d"/>
   <path id="j" d="m38 64h-26l4-4h18z" fill="#e1bf09" fill-rule="evenodd"/>
  </g>
  <use transform="matrix(.38462 0 0 .38461 -.61538 9.3847)" width="100%" height="100%" xlink:href="#j"/>
  <use transform="matrix(.38462 0 0 .38461 9.3846 19.385)" width="100%" height="100%" xlink:href="#j"/>
  <path id="a" d="m14 14h-10l1.5385 1.5384h6.9231z" fill="#f9e263" fill-rule="evenodd" stroke-width=".38461"/>
- <use transform="translate(7.1708e-8 9.9999)" width="100%" height="100%" xlink:href="#a"/>
+ <use transform="translate(0 9.9999)" width="100%" height="100%" xlink:href="#a"/>
  <use transform="translate(10 20)" width="100%" height="100%" xlink:href="#a"/>
  <path id="i" d="m4 24v-9.9999l1.5385 1.5384v6.923z" fill="#f7da51" fill-rule="evenodd" stroke-width=".38461"/>
- <use transform="translate(7.1708e-8 9.9999)" width="100%" height="100%" xlink:href="#i"/>
+ <use transform="translate(0 9.9999)" width="100%" height="100%" xlink:href="#i"/>
  <use transform="translate(10 20)" width="100%" height="100%" xlink:href="#i"/>
  <path id="b" d="m14 14v9.9999l-1.5385-1.5384v-6.923z" fill="#efc70b" fill-rule="evenodd" stroke-width=".38461"/>
- <use transform="translate(7.1708e-8 9.9999)" width="100%" height="100%" xlink:href="#b"/>
+ <use transform="translate(0 9.9999)" width="100%" height="100%" xlink:href="#b"/>
  <use transform="translate(10 20)" width="100%" height="100%" xlink:href="#b"/>
- <use transform="translate(7.1708e-8 20)" width="100%" height="100%" xlink:href="#b"/>
- <use transform="translate(7.1708e-8 20)" width="100%" height="100%" xlink:href="#a"/>
- <g fill-rule="evenodd" stroke-width=".38461">
-  <path d="m4 40.923v-6.923l1.5385 1.5384v6.923l-0.55719 0.55719s-0.96488-0.7518-0.98127-2.0956z" fill="#f7da51"/>
-  <path d="m14 44h-6.9231c-1.2127 0.016384-2.0957-0.98126-2.0957-0.98126l0.55719-0.55719h6.9231z" fill="#e0bb0a"/>
-  <path d="m14 24h20v9.9999h10v6.8965c0 1.5897-1.52 3.1199-3.0769 3.1035h-16.923v-9.9999h-10z" fill="#1c71d8"/>
-  <path id="l" d="m14 34 1.5385-1.5384h6.9231l1.5385 1.5384z" fill="#1a68c7" fill-rule="evenodd" stroke-width=".38461"/>
+ <use transform="translate(0 20)" width="100%" height="100%" xlink:href="#b"/>
+ <use transform="translate(0 20)" width="100%" height="100%" xlink:href="#a"/>
+ <g transform="matrix(.38462 0 0 .38461 -.61538 -.61523)" fill-rule="evenodd">
+  <path d="m12 108v-18l4 4v18l-1.4487 1.4487s-2.5087-1.9547-2.5513-5.4487z" fill="#f7da51"/>
+  <path d="m38 116h-18c-3.1531 0.0426-5.4487-2.5513-5.4487-2.5513l1.4487-1.4487h18z" fill="#e0bb0a"/>
+  <path d="m38 64h52v26h26v17.931c0 4.1332-3.9521 8.1118-8 8.0692h-44v-26h-26z" fill="#1c71d8"/>
+  <path id="l" d="m38 90 4-4h18l4 4z" fill="#1a68c7" fill-rule="evenodd"/>
  </g>
- <use transform="translate(10)" width="100%" height="100%" xlink:href="#l"/>
- <use transform="translate(9.9996 9.9992)" width="100%" height="100%" xlink:href="#l"/>
+ <use transform="matrix(.38462 0 0 .38461 9.3846 -.61523)" width="100%" height="100%" xlink:href="#l"/>
+ <use transform="matrix(.38462 0 0 .38461 9.3842 9.3839)" width="100%" height="100%" xlink:href="#l"/>
  <path d="m34 44h6.9231c1.2127 0.01638 2.0957-0.98126 2.0957-0.98126l-0.55719-0.55719h-6.9231z" fill="#1a68c7" fill-rule="evenodd" stroke-width=".38461"/>
  <path id="e" d="m14 24 1.5385 1.5384h6.9231l1.5385-1.5384z" fill="#3585e5" fill-rule="evenodd" stroke-width=".38461"/>
  <use transform="translate(10)" width="100%" height="100%" xlink:href="#e"/>
