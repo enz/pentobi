@@ -1,5 +1,5 @@
 <RCC>
 <qresource prefix="/pentobi_icon">
-<file>pentobi-64.svg</file>
+<file>pentobi-128.svg</file>
 </qresource>
 </RCC>

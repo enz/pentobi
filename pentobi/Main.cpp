@@ -55,11 +55,7 @@ int mainAndroid()
 
 int mainDesktop()
 {
-    QIcon icon;
-    icon.addFile(QStringLiteral(":/pentobi_icon/pentobi.svg"));
-    icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-16.svg"));
-    icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-32.svg"));
-    icon.addFile(QStringLiteral(":/pentobi_icon/pentobi-64.svg"));
+    QIcon icon(QStringLiteral(":/pentobi_icon/pentobi-128.svg"));
     QGuiApplication::setWindowIcon(icon);
     QGuiApplication::setDesktopFileName(
                 QStringLiteral("io.sourceforge.pentobi"));

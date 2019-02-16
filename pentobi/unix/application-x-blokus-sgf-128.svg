@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <g>
+  <rect x="16.89" y="8.8899" width="94.22" height="110.22" ry="2.3046" fill="#f6f5f4" stroke="#b0ada6" stroke-linejoin="round" stroke-width="3.7798"/>
+  <path d="m50 64h28v-14h-14v-14h-23.692c-2.1538 0-4.3077 2.1538-4.3077 4.3077v9.6923h14z" fill="#e01b24" fill-rule="evenodd"/>
+  <path id="h" d="m36 50 2.1538-2.1538h9.6923l2.1538 2.1538z" fill="#c6161f" fill-rule="evenodd"/>
+ </g>
+ <use transform="translate(14)" width="100%" height="100%" xlink:href="#h"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#h"/>
+ <use transform="translate(28 14)" width="100%" height="100%" xlink:href="#h"/>
+ <path id="n" d="m50 36 2.1538 2.1538h9.6923l2.1538-2.1538z" fill="#e73b43" fill-rule="evenodd"/>
+ <use transform="translate(-2.007e-7 14)" width="100%" height="100%" xlink:href="#n"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#n"/>
+ <path id="m" d="m50 36 2.1538 2.1538v9.6923l-2.1538 2.1538z" fill="#e6323a" fill-rule="evenodd"/>
+ <use transform="translate(-2.007e-7 14)" width="100%" height="100%" xlink:href="#m"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#m"/>
+ <path id="c" d="m50 50-2.1538-2.1538v-9.6923l2.1538-2.1538z" fill="#cd1922" fill-rule="evenodd"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#c"/>
+ <use transform="translate(14)" width="100%" height="100%" xlink:href="#c"/>
+ <use transform="translate(28 14)" width="100%" height="100%" xlink:href="#c"/>
+ <g fill-rule="evenodd">
+  <path d="m37.348 37.369 0.80615 0.78489v9.6923l-2.1538 2.1538v-9.6923c0.01119-1.7452 1.3477-2.9387 1.3477-2.9387z" fill="#e6323a"/>
+  <path d="m37.364 37.361 0.78993 0.793h9.6923l2.1538-2.1538h-9.6923c-1.802 0.02433-2.9438 1.3608-2.9438 1.3608z" fill="#e73b42"/>
+  <path d="m64 36h23.692c2.1338 0.02294 4.2847 2.1969 4.3077 4.3077v37.692h-14v-28h-14z" fill="#33d17a"/>
+  <path id="g" d="m64 50 2.1538-2.1538h9.6923l2.1538 2.1538z" fill="#27bf6c" fill-rule="evenodd"/>
+ </g>
+ <use transform="translate(14)" width="100%" height="100%" xlink:href="#g"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#g"/>
+ <use transform="translate(14 28)" width="100%" height="100%" xlink:href="#g"/>
+ <path id="f" d="m64 36 2.1538 2.1538v9.6923l-2.1538 2.1538z" fill="#42d886" fill-rule="evenodd"/>
+ <use transform="translate(14)" width="100%" height="100%" xlink:href="#f"/>
+ <use transform="translate(14 28)" width="100%" height="100%" xlink:href="#f"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#f"/>
+ <path id="p" d="m64 36 2.1538 2.1538h9.6923l2.1538-2.1538z" fill="#57df95" fill-rule="evenodd"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#p"/>
+ <use transform="translate(14 28)" width="100%" height="100%" xlink:href="#p"/>
+ <path id="o" d="m78 36-2.1538 2.1538v9.6923l2.1538 2.1538z" fill="#29cb73" fill-rule="evenodd"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#o"/>
+ <use transform="translate(14 28)" width="100%" height="100%" xlink:href="#o"/>
+ <g fill-rule="evenodd">
+  <path d="m78 36 2.1538 2.1538h9.6923l0.76862-0.78582s-1.3071-1.368-2.9225-1.368z" fill="#57df95"/>
+  <path d="m92 40.308c-8e-3 -1.6061-1.3712-2.9365-1.3712-2.9365l-0.78263 0.78262v9.6923l2.1538 2.1538z" fill="#29cb73"/>
+  <path d="m36 50v37.692c0.01147 2.1567 2.1538 4.3075 4.2991 4.3075l23.7-9.1e-4 5.38e-4 -13.999h-14v-28z" fill="#f6d32d"/>
+  <path id="j" d="m50 64h-14l2.1538-2.1538h9.6923z" fill="#e1bf09" fill-rule="evenodd"/>
+ </g>
+ <use transform="translate(-2.007e-7 14)" width="100%" height="100%" xlink:href="#j"/>
+ <use transform="translate(14 28)" width="100%" height="100%" xlink:href="#j"/>
+ <path id="a" d="m50 50h-14l2.1538 2.1538h9.6923z" fill="#f9e263" fill-rule="evenodd"/>
+ <use transform="translate(-2.007e-7 14)" width="100%" height="100%" xlink:href="#a"/>
+ <use transform="translate(14 28)" width="100%" height="100%" xlink:href="#a"/>
+ <path id="i" d="m36 64v-14l2.1538 2.1538v9.6923z" fill="#f7da51" fill-rule="evenodd"/>
+ <use transform="translate(-2.007e-7 14)" width="100%" height="100%" xlink:href="#i"/>
+ <use transform="translate(14 28)" width="100%" height="100%" xlink:href="#i"/>
+ <path id="b" d="m50 50v14l-2.1538-2.1538v-9.6923z" fill="#efc70b" fill-rule="evenodd"/>
+ <use transform="translate(-2.007e-7 14)" width="100%" height="100%" xlink:href="#b"/>
+ <use transform="translate(14 28)" width="100%" height="100%" xlink:href="#b"/>
+ <use transform="translate(-2.007e-7 28)" width="100%" height="100%" xlink:href="#b"/>
+ <use transform="translate(-2.007e-7 28)" width="100%" height="100%" xlink:href="#a"/>
+ <g fill-rule="evenodd">
+  <path d="m36 87.692v-9.6923l2.1538 2.1538v9.6923l-0.78009 0.78009s-1.3508-1.0525-1.3738-2.9339z" fill="#f7da51"/>
+  <path d="m50 92h-9.6923c-1.6978 0.0229-2.9339-1.3738-2.9339-1.3738l0.78009-0.78009h9.6923z" fill="#e0bb0a"/>
+  <path d="m50 64h28v14h14v9.655c0 2.2255-2.128 4.3679-4.3077 4.345h-23.692v-14h-14z" fill="#3584e4"/>
+  <path id="l" d="m50 78 2.1538-2.1538h9.6923l2.1538 2.1538z" fill="#1a75e0" fill-rule="evenodd"/>
+ </g>
+ <use transform="translate(14)" width="100%" height="100%" xlink:href="#l"/>
+ <use transform="translate(13.999 13.999)" width="100%" height="100%" xlink:href="#l"/>
+ <path d="m77.999 91.999h9.6923c1.6978 0.0229 2.9339-1.3738 2.9339-1.3738l-0.78009-0.78008h-9.6923z" fill="#1e74dc" fill-rule="evenodd"/>
+ <path id="e" d="m50 64 2.1538 2.1538h9.6923l2.1538-2.1538z" fill="#4d94e9" fill-rule="evenodd"/>
+ <use transform="translate(14)" width="100%" height="100%" xlink:href="#e"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#e"/>
+ <use transform="translate(28 14)" width="100%" height="100%" xlink:href="#e"/>
+ <path id="d" d="m50 78 2.1538-2.1538v-9.6923l-2.1538-2.1538z" fill="#478fe7" fill-rule="evenodd"/>
+ <use transform="translate(14)" width="100%" height="100%" xlink:href="#d"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#d"/>
+ <use transform="translate(27.999 13.999)" width="100%" height="100%" xlink:href="#d"/>
+ <path id="k" d="m64 78-2.1538-2.1538v-9.6923l2.1538-2.1538z" fill="#277ce3" fill-rule="evenodd"/>
+ <use transform="translate(14)" width="100%" height="100%" xlink:href="#k"/>
+ <use transform="translate(14 14)" width="100%" height="100%" xlink:href="#k"/>
+ <path d="m91.999 87.691v-9.6923l-2.1538 2.1538v9.6923l0.78008 0.78008s1.3508-1.0525 1.3738-2.9339z" fill="#277ce3" fill-rule="evenodd"/>
+</svg>

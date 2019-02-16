@@ -26,7 +26,6 @@ qt5_add_resources(pentobi_RC_SRCS
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     ../opening_books/pentobi_books.qrc
     icon/pentobi_icon.qrc
-    icon/pentobi_icon_desktop.qrc
     )
 
 qtquick_compiler_add_resources(pentobi_RC_SRCS_QML

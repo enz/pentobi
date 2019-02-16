@@ -17,41 +17,10 @@ if(NOT DOCBOOK_XSL)
     message(FATAL_ERROR "docbook-xsl not found")
 endif()
 
+# Binary gettext files
+
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
 string(REGEX REPLACE "\n" ";" linguas "${linguas}")
-
-set(man_files "pentobi.6")
-foreach(lang ${linguas})
-    list(APPEND man_files "${lang}/pentobi.6")
-endforeach()
-
-foreach(icon application-x-blokus-sgf application-x-blokus-sgf-16
-        application-x-blokus-sgf-32 application-x-blokus-sgf-64)
-    set(icon_svg "${icon}.svg")
-    set(icon_png "${icon}.png")
-    add_custom_command(OUTPUT "${icon_png}"
-        COMMAND "${RSVG_CONVERT}" "${CMAKE_CURRENT_SOURCE_DIR}/${icon_svg}"
-        > "${icon_png}"
-        DEPENDS "${icon_svg}")
-    list(APPEND png_icons "${icon_png}")
-endforeach()
-foreach(icon pentobi pentobi-16 pentobi-32 pentobi-64)
-  set(icon_svg "../icon/${icon}.svg")
-  set(icon_png "${icon}.png")
-  add_custom_command(OUTPUT "${icon_png}"
-    COMMAND "${RSVG_CONVERT}" "${CMAKE_CURRENT_SOURCE_DIR}/${icon_svg}"
-    > "${icon_png}"
-    DEPENDS "${icon_svg}")
-  list(APPEND png_icons "${icon_png}")
-endforeach()
-
-add_custom_target(pentobi-unix ALL DEPENDS
-    "io.sourceforge.pentobi.desktop"
-    "io.sourceforge.pentobi.appdata.xml"
-    "pentobi-mime.xml"
-    ${png_icons}
-    ${man_files}
-    )
 
 foreach(lang ${linguas})
     add_custom_command(OUTPUT ${lang}.mo
@@ -62,6 +31,30 @@ foreach(lang ${linguas})
     list(APPEND po_files po/${lang}.po)
     list(APPEND mo_files ${lang}.mo)
 endforeach()
+
+# Icons
+
+add_custom_command(OUTPUT pentobi.png
+    COMMAND "${RSVG_CONVERT}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../icon/pentobi-48.svg"
+    > pentobi.png
+    DEPENDS ../icon/pentobi-48.svg)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi.png"
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps)
+install(FILES ../icon/pentobi-128.svg
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps
+    RENAME pentobi.svg)
+
+add_custom_command(OUTPUT application-x-blokus-sgf.png
+    COMMAND "${RSVG_CONVERT}"
+    "${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-48.svg"
+    > application-x-blokus-sgf.png
+    DEPENDS application-x-blokus-sgf-48.svg)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf.png"
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/mimetypes)
+install(FILES application-x-blokus-sgf-128.svg
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/mimetypes
+    RENAME application-x-blokus-sgf.svg)
 
 # Desktop entry
 
@@ -76,7 +69,7 @@ add_custom_command(OUTPUT io.sourceforge.pentobi.desktop
     ${po_files} po/LINGUAS)
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.desktop
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
 
 # AppData
 
@@ -90,8 +83,8 @@ add_custom_command(OUTPUT io.sourceforge.pentobi.appdata.xml
     ${mo_files} po/LINGUAS
     )
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")
 
 # Shared MIME info
 
@@ -103,9 +96,14 @@ add_custom_command(OUTPUT pentobi-mime.xml
     )
 
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-mime.xml"
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/mime/packages)
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/mime/packages")
 
 # Man page
+
+set(man_files "pentobi.6")
+foreach(lang ${linguas})
+    list(APPEND man_files "${lang}/pentobi.6")
+endforeach()
 
 configure_file(pentobi-manpage.docbook.in pentobi-manpage.docbook @ONLY)
 add_custom_command(OUTPUT pentobi.6
@@ -135,27 +133,19 @@ foreach(lang ${linguas})
         DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")
 endforeach()
 
-# App and mimetype icons
-
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.png
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/apps)
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf.png
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/48x48/mimetypes)
-foreach(size 16 32 64)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi-${size}.png
-        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${size}x${size}/apps
-        RENAME pentobi.png)
-    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-${size}.png
-        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${size}x${size}/mimetypes
-        RENAME application-x-blokus-sgf.png)
-endforeach()
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/../icon/pentobi.svg
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps)
-install(FILES application-x-blokus-sgf.svg
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/mimetypes)
-
 # User manual
 
 install(DIRECTORY help DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}
     FILES_MATCHING PATTERN "*.css" PATTERN "*.html" PATTERN "*.png"
     PATTERN "*.jpg")
+
+# Target
+
+add_custom_target(pentobi-unix ALL DEPENDS
+    io.sourceforge.pentobi.desktop
+    io.sourceforge.pentobi.appdata.xml
+    pentobi-mime.xml
+    pentobi.png
+    application-x-blokus-sgf.png
+    ${man_files}
+    )
