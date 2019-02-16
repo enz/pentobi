@@ -56,22 +56,22 @@
  <g fill-rule="evenodd">
   <path d="m12 108v-18l4 4v18l-1.4487 1.4487s-2.5087-1.9547-2.5513-5.4487z" fill="#f7da51"/>
   <path d="m38 116h-18c-3.1531 0.0426-5.4487-2.5513-5.4487-2.5513l1.4487-1.4487h18z" fill="#e0bb0a"/>
-  <path d="m38 64h52v26h26v17.931c0 4.1332-3.9521 8.1118-8 8.0692h-44v-26h-26z" fill="#3584e4"/>
-  <path id="l" d="m38 90 4-4h18l4 4z" fill="#1a75e0" fill-rule="evenodd"/>
+  <path d="m38 64h52v26h26v17.931c0 4.1332-3.9521 8.1118-8 8.0692h-44v-26h-26z" fill="#1c71d8"/>
+  <path id="l" d="m38 90 4-4h18l4 4z" fill="#1a68c7" fill-rule="evenodd"/>
  </g>
  <use transform="translate(26)" width="100%" height="100%" xlink:href="#l"/>
- <use transform="translate(25.999 25.998)" width="100%" height="100%" xlink:href="#l"/>
- <path d="m89.999 116h18c3.1531 0.0426 5.4487-2.5513 5.4487-2.5513l-1.4487-1.4487h-18z" fill="#1e74dc" fill-rule="evenodd"/>
- <path id="e" d="m38 64 4 4h18l4-4z" fill="#4d94e9" fill-rule="evenodd"/>
+ <use transform="translate(25.999,25.998)" width="100%" height="100%" xlink:href="#l"/>
+ <path d="m89.999 116h18c3.1531 0.0426 5.4487-2.5513 5.4487-2.5513l-1.4487-1.4487h-18z" fill="#1a68c7" fill-rule="evenodd"/>
+ <path id="e" d="m38 64 4 4h18l4-4z" fill="#3585e5" fill-rule="evenodd"/>
  <use transform="translate(26)" width="100%" height="100%" xlink:href="#e"/>
  <use transform="translate(26,26)" width="100%" height="100%" xlink:href="#e"/>
  <use transform="translate(52,26)" width="100%" height="100%" xlink:href="#e"/>
- <path id="d" d="m38 90 4-4v-18l-4-4z" fill="#478fe7" fill-rule="evenodd"/>
+ <path id="d" d="m38 90 4-4v-18l-4-4z" fill="#2078e2" fill-rule="evenodd"/>
  <use transform="translate(26)" width="100%" height="100%" xlink:href="#d"/>
  <use transform="translate(26,26)" width="100%" height="100%" xlink:href="#d"/>
  <use transform="translate(51.999 25.998)" width="100%" height="100%" xlink:href="#d"/>
- <path id="k" d="m64 90-4-4v-18l4-4z" fill="#277ce3" fill-rule="evenodd"/>
+ <path id="k" d="m64 90-4-4v-18l4-4z" fill="#1b6bce" fill-rule="evenodd"/>
  <use transform="translate(26)" width="100%" height="100%" xlink:href="#k"/>
  <use transform="translate(26,26)" width="100%" height="100%" xlink:href="#k"/>
- <path d="m116 108v-18l-4 4v18l1.4487 1.4487s2.5087-1.9547 2.5513-5.4487z" fill="#277ce3" fill-rule="evenodd"/>
+ <path d="m116 108v-18l-4 4v18l1.4487 1.4487s2.5087-1.9547 2.5513-5.4487z" fill="#1b6bce" fill-rule="evenodd"/>
 </svg>
