@@ -8,7 +8,7 @@
 
 #include <cstdio>
 #include <iostream>
-#include "libboardgame_base/StringUtil.h"
+#include "StringUtil.h"
 
 namespace libboardgame_base {
 

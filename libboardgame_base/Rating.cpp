@@ -7,7 +7,7 @@
 #include "Rating.h"
 
 #include <iostream>
-#include "libboardgame_base/Assert.h"
+#include "Assert.h"
 
 namespace libboardgame_base {
 

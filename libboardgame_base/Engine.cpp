@@ -6,9 +6,9 @@
 
 #include "Engine.h"
 
-#include "libboardgame_base/CpuTime.h"
-#include "libboardgame_base/Log.h"
-#include "libboardgame_base/RandomGenerator.h"
+#include "CpuTime.h"
+#include "Log.h"
+#include "RandomGenerator.h"
 
 namespace libboardgame_base {
 

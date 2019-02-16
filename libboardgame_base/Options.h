@@ -12,8 +12,8 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include "Compiler.h"
 #include "StringUtil.h"
-#include "libboardgame_base/Compiler.h"
 
 namespace libboardgame_base {
 

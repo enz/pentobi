@@ -9,7 +9,7 @@
 #include <cctype>
 #include <cstdio>
 #include <fstream>
-#include "libboardgame_base/Assert.h"
+#include "Assert.h"
 
 namespace libboardgame_base {
 

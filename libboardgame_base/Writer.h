@@ -10,12 +10,11 @@
 #include <iosfwd>
 #include <string>
 #include <vector>
-#include "libboardgame_base/StringUtil.h"
+#include "StringUtil.h"
 
 namespace libboardgame_base {
 
 using namespace std;
-using libboardgame_base::to_string;
 
 //-----------------------------------------------------------------------------
 

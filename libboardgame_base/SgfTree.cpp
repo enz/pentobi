@@ -10,11 +10,9 @@
 #include <cstdio>
 #include <cstdlib>
 #include "SgfUtil.h"
-#include "libboardgame_base/StringUtil.h"
+#include "StringUtil.h"
 
 namespace libboardgame_base {
-
-using libboardgame_base::trim;
 
 //-----------------------------------------------------------------------------
 

@@ -6,7 +6,7 @@
 
 #include "CpuTimeSource.h"
 
-#include "libboardgame_base/CpuTime.h"
+#include "CpuTime.h"
 
 namespace libboardgame_base {
 

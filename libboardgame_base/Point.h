@@ -8,8 +8,8 @@
 #define LIBBOARDGAME_BASE_POINT_H
 
 #include <limits>
-#include "libboardgame_base/Assert.h"
-#include "libboardgame_base/Compiler.h"
+#include "Assert.h"
+#include "Compiler.h"
 
 namespace libboardgame_base {
 

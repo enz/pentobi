@@ -9,9 +9,9 @@
 
 #include <memory>
 #include <sstream>
+#include "ArrayList.h"
 #include "CoordPoint.h"
 #include "StringRep.h"
-#include "libboardgame_base/ArrayList.h"
 
 namespace libboardgame_base {
 

@@ -9,7 +9,7 @@
 
 #include <limits>
 #include <iosfwd>
-#include "libboardgame_base/Assert.h"
+#include "Assert.h"
 
 namespace libboardgame_base {
 
