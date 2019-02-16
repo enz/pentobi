@@ -58,5 +58,3 @@ The GUI modules implement the user interface. They depend on the
   Common functionality for pentobi and libpentobi_thumbnail
 * libpentobi_thumbnail --
   Common functionality for pentobi_thumbnailer and pentobi_kde_thumbnailer
-* convert_svg --
-  Build tool for converting SVG icons to bitmaps
