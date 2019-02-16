@@ -1778,67 +1778,67 @@
     <name>main</name>
     <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"></translation>
+        <translation>datamaskinsmotstander for brettspillet Blokus</translation>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Sett maksimumsnivå til &lt;n&gt;.</translation>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ikke bruk åpningsbøker.</translation>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Bruk visning optimalisert for smarttelefoner.</translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ikke forsink raske datamaskintrekk.</translation>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sett tilfeldig seeding til &lt;n&gt;.</translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Bruk &lt;n&gt; tråder (0=auto).</translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Skriv loggingsinfo til forvalg for feil.</translation>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>fil.blksgf</translation>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokus SGF-fil å åpne (valgfritt).</translation>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"></translation>
+        <translation>--maxlevel må være mellom 1 og %1</translation>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"></translation>
+        <translation>--seed må være et positivt tall</translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"></translation>
+        <translation>--treads må være et positivt tall</translation>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>For mange argumenter</translation>
     </message>
 </context>
 </TS>
