@@ -45,32 +45,31 @@ SOURCES += \
     PieceModel.cpp \
     PlayerModel.cpp \
     RatingModel.cpp \
-    ../libboardgame_base/CoordPoint.cpp \
+    ../libboardgame_base/Assert.cpp \
+    ../libboardgame_base/Barrier.cpp \
+    ../libboardgame_base/CpuTime.cpp \
+    ../libboardgame_base/CpuTimeSource.cpp \
+    ../libboardgame_base/IntervalChecker.cpp \
+    ../libboardgame_base/Log.cpp \
+    ../libboardgame_base/Memory.cpp \
+    ../libboardgame_base/RandomGenerator.cpp \
     ../libboardgame_base/Rating.cpp \
+    ../libboardgame_base/Reader.cpp \
     ../libboardgame_base/RectTransform.cpp \
+    ../libboardgame_base/SgfError.cpp \
+    ../libboardgame_base/SgfNode.cpp \
+    ../libboardgame_base/SgfTree.cpp \
+    ../libboardgame_base/SgfUtil.cpp \
     ../libboardgame_base/StringRep.cpp \
+    ../libboardgame_base/StringUtil.cpp \
+    ../libboardgame_base/TimeIntervalChecker.cpp \
+    ../libboardgame_base/Timer.cpp \
+    ../libboardgame_base/TimeSource.cpp \
     ../libboardgame_base/Transform.cpp \
-    ../libboardgame_util/Assert.cpp \
-    ../libboardgame_util/Barrier.cpp \
-    ../libboardgame_util/CpuTime.cpp \
-    ../libboardgame_util/CpuTimeSource.cpp \
-    ../libboardgame_util/IntervalChecker.cpp \
-    ../libboardgame_util/Log.cpp \
-    ../libboardgame_util/Memory.cpp \
-    ../libboardgame_util/RandomGenerator.cpp \
-    ../libboardgame_util/StringUtil.cpp \
-    ../libboardgame_util/TimeIntervalChecker.cpp \
-    ../libboardgame_util/Timer.cpp \
-    ../libboardgame_util/TimeSource.cpp \
-    ../libboardgame_util/WallTimeSource.cpp \
-    ../libboardgame_sgf/Reader.cpp \
-    ../libboardgame_sgf/SgfError.cpp \
-    ../libboardgame_sgf/SgfNode.cpp \
-    ../libboardgame_sgf/SgfTree.cpp \
-    ../libboardgame_sgf/SgfUtil.cpp \
-    ../libboardgame_sgf/TreeReader.cpp \
-    ../libboardgame_sgf/TreeWriter.cpp \
-    ../libboardgame_sgf/Writer.cpp \
+    ../libboardgame_base/TreeReader.cpp \
+    ../libboardgame_base/TreeWriter.cpp \
+    ../libboardgame_base/WallTimeSource.cpp \
+    ../libboardgame_base/Writer.cpp \
     ../libpentobi_base/Board.cpp \
     ../libpentobi_base/BoardConst.cpp \
     ../libpentobi_base/BoardUpdater.cpp \
@@ -130,18 +129,37 @@ HEADERS += \
     PlayerModel.h \
     RatingModel.h \
     SyncSettings.h \
+    ../libboardgame_base/ArrayList.h \
+    ../libboardgame_base/Assert.h \
+    ../libboardgame_base/Barrier.h \
+    ../libboardgame_base/Compiler.h \
     ../libboardgame_base/CoordPoint.h \
+    ../libboardgame_base/CpuTime.h \
+    ../libboardgame_base/CpuTimeSource.h \
+    ../libboardgame_base/FmtSaver.h \
     ../libboardgame_base/Geometry.h \
     ../libboardgame_base/GeometryUtil.h \
     ../libboardgame_base/Grid.h \
+    ../libboardgame_base/IntervalChecker.h \
+    ../libboardgame_base/Log.h \
     ../libboardgame_base/Marker.h \
+    ../libboardgame_base/MathUtil.h \
+    ../libboardgame_base/Memory.h \
+    ../libboardgame_base/Options.h \
     ../libboardgame_base/Point.h \
     ../libboardgame_base/PointTransform.h \
+    ../libboardgame_base/RandomGenerator.h \
     ../libboardgame_base/Rating.h \
     ../libboardgame_base/RectGeometry.h \
     ../libboardgame_base/RectTransform.h \
+    ../libboardgame_base/Statistics.h \
     ../libboardgame_base/StringRep.h \
+    ../libboardgame_base/StringUtil.h \
+    ../libboardgame_base/TimeIntervalChecker.h \
+    ../libboardgame_base/Timer.h \
+    ../libboardgame_base/TimeSource.h \
     ../libboardgame_base/Transform.h \
+    ../libboardgame_base/WallTimeSource.h \
     ../libboardgame_mcts/Atomic.h \
     ../libboardgame_mcts/LastGoodReply.h \
     ../libboardgame_mcts/Node.h \
@@ -149,32 +167,13 @@ HEADERS += \
     ../libboardgame_mcts/SearchBase.h \
     ../libboardgame_mcts/Tree.h \
     ../libboardgame_mcts/TreeUtil.h \
-    ../libboardgame_util/ArrayList.h \
-    ../libboardgame_util/Assert.h \
-    ../libboardgame_util/Barrier.h \
-    ../libboardgame_util/Compiler.h \
-    ../libboardgame_util/CpuTime.h \
-    ../libboardgame_util/CpuTimeSource.h \
-    ../libboardgame_util/FmtSaver.h \
-    ../libboardgame_util/IntervalChecker.h \
-    ../libboardgame_util/Log.h \
-    ../libboardgame_util/MathUtil.h \
-    ../libboardgame_util/Memory.h \
-    ../libboardgame_util/Options.h \
-    ../libboardgame_util/RandomGenerator.h \
-    ../libboardgame_util/Statistics.h \
-    ../libboardgame_util/StringUtil.h \
-    ../libboardgame_util/TimeIntervalChecker.h \
-    ../libboardgame_util/Timer.h \
-    ../libboardgame_util/TimeSource.h \
-    ../libboardgame_util/WallTimeSource.h \
-    ../libboardgame_sgf/Reader.h \
-    ../libboardgame_sgf/SgfError.h \
-    ../libboardgame_sgf/SgfNode.h \
-    ../libboardgame_sgf/SgfTree.h \
-    ../libboardgame_sgf/SgfUtil.h \
-    ../libboardgame_sgf/TreeReader.h \
-    ../libboardgame_sgf/Writer.h \
+    ../libboardgame_base/Reader.h \
+    ../libboardgame_base/SgfError.h \
+    ../libboardgame_base/SgfNode.h \
+    ../libboardgame_base/SgfTree.h \
+    ../libboardgame_base/SgfUtil.h \
+    ../libboardgame_base/TreeReader.h \
+    ../libboardgame_base/Writer.h \
     ../libpentobi_base/Board.h \
     ../libpentobi_base/BoardConst.h \
     ../libpentobi_base/BoardUpdater.h \
