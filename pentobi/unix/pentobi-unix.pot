@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-17 19:52+0100\n"
+"POT-Creation-Date: 2019-02-17 20:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -259,13 +259,14 @@ msgstr ""
 msgid "Markus Enzenberger"
 msgstr ""
 
-#: io.sourceforge.pentobi.desktop.in:5
+#. TRANSLATORS: keywords in desktop entry, separate with semicolons
+#: io.sourceforge.pentobi.desktop.in:6
 msgid ""
 "Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo Q;GembloQ"
 msgstr ""
 
 #. TRANSLATORS: icon name in desktop entry, probably no need to change this
-#: io.sourceforge.pentobi.desktop.in:8
+#: io.sourceforge.pentobi.desktop.in:9
 msgid "pentobi"
 msgstr ""
 
