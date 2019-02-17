@@ -30,7 +30,7 @@ public:
 
     /** Run the analysis.
         The analysis can be aborted from a different thread with
-        libboardgame_util::set_abort().
+        Search::abort().
         @param game
         @param search
         @param nu_simulations
