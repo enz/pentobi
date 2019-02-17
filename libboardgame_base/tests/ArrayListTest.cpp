@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_util/ArrayListTest.cpp
+/** @file unittest/libboardgame_base/ArrayListTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

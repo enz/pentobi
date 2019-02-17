@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_util/StringUtilTest.cpp
+/** @file unittest/libboardgame_base/StringUtilTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -12,7 +12,7 @@ using namespace libboardgame_base;
 
 //----------------------------------------------------------------------------
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_get_letter_coord)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_get_letter_coord)
 {
     LIBBOARDGAME_CHECK_EQUAL(get_letter_coord(0), "a");
     LIBBOARDGAME_CHECK_EQUAL(get_letter_coord(1), "b");
@@ -34,7 +34,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_get_letter_coord)
     LIBBOARDGAME_CHECK_EQUAL(get_letter_coord(28 * 26 + 25), "abz");
 }
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_split)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_split)
 {
     {
         vector<string> v = split("a,b,cc,d", ',');
@@ -69,12 +69,12 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_split)
     }
 }
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_to_lower)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_to_lower)
 {
     LIBBOARDGAME_CHECK_EQUAL(to_lower("AabC "), "aabc ");
 }
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_trim)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_trim)
 {
     LIBBOARDGAME_CHECK_EQUAL(trim("aa bb"), "aa bb");
     LIBBOARDGAME_CHECK_EQUAL(trim(" \t\r\naa bb"), "aa bb");

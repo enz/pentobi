@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_util/OptionsTest.cpp
+/** @file unittest/libboardgame_base/OptionsTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -12,7 +12,7 @@ using namespace libboardgame_base;
 
 //-----------------------------------------------------------------------------
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_options_basic)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_options_basic)
 {
     vector<string> specs =
         { "first|a:", "second|b:", "third|c", "fourth", "fifth" };
@@ -34,7 +34,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_basic)
     LIBBOARDGAME_CHECK_EQUAL(args[1], "arg2");
 }
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_options_end_options)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_options_end_options)
 {
     vector<string> specs = { "first:" };
     const char* argv[] =
@@ -47,7 +47,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_end_options)
     LIBBOARDGAME_CHECK_EQUAL(args[0], "--arg1");
 }
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_options_missing_val)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_options_missing_val)
 {
     vector<string> specs = { "first:" };
     const char* argv[] = { nullptr, "--first" };
@@ -55,7 +55,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_missing_val)
     LIBBOARDGAME_CHECK_THROW(Options opt(argc, argv, specs), runtime_error);
 }
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_options_nospace)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_options_nospace)
 {
     vector<string> specs = { "first|a:", "second|b:" };
     const char* argv[] = { nullptr, "-abc" };
@@ -64,7 +64,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_nospace)
     LIBBOARDGAME_CHECK_EQUAL(opt.get("first"), "bc");
 }
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_options_multi_short_with_val)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_options_multi_short_with_val)
 {
     vector<string> specs = { "first|a", "second|b:" };
     const char* argv[] = { nullptr, "-ab", "c" };
@@ -74,7 +74,7 @@ LIBBOARDGAME_TEST_CASE(libboardgame_util_options_multi_short_with_val)
     LIBBOARDGAME_CHECK_EQUAL(opt.get("second"), "c");
 }
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_options_type)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_options_type)
 {
     vector<string> specs = { "first:", "second:" };
     const char* argv[] = { nullptr, "--first", "10", "--second", "foo" };

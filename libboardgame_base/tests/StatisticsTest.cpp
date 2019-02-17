@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_util/StatisticsTest.cpp
+/** @file unittest/libboardgame_base/StatisticsTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -12,7 +12,7 @@ using namespace libboardgame_base;
 
 //-----------------------------------------------------------------------------
 
-LIBBOARDGAME_TEST_CASE(libboardgame_util_statistics_basic)
+LIBBOARDGAME_TEST_CASE(libboardgame_base_statistics_basic)
 {
     Statistics<double> s;
     s.add(12);
