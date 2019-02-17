@@ -3,6 +3,7 @@ Name=Pentobi
 Comment=Computer opponent for the board game Blokus
 Keywords=Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo Q;GembloQ
 Exec=@CMAKE_INSTALL_FULL_BINDIR@/pentobi %f
+# TRANSLATORS: icon name in desktop entry, probably no need to change this
 Icon=pentobi
 Type=Application
 Categories=Game;BoardGame;
