@@ -2,6 +2,10 @@ find_package(ECM REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 find_package(Gettext 0.18 REQUIRED)
+find_file(METAINFO_ITS metainfo.its HINTS /usr/share/gettext/its)
+if(NOT METAINFO_ITS)
+  message(FATAL_ERROR "metainfo.its not found (appstream)")
+endif()
 
 include(KDEInstallDirs)
 include(KDECompilerSettings)

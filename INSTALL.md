@@ -10,6 +10,7 @@ Building Pentobi requires the following tools and libraries:
 * [Qt libraries](https://www.qt.io/) (>=5.11)
 * [CMake](https://cmake.org/) (>=3.1.0)
 * [GNU gettext](https://www.gnu.org/software/gettext/)
+* [AppStream](https://github.com/ximion/appstream)
 * [ITS Tool](http://itstool.org/)
 * [xsltproc](http://xmlsoft.org/XSLT/xsltproc.html)
 * [DocBooc XSL](http://www.sagehill.net/docbookxsl/)
@@ -17,7 +18,7 @@ Building Pentobi requires the following tools and libraries:
 
 In Debian-based distributions, they can be installed with the command
 ```
-sudo apt-get install cmake docbook-xsl g++ gettext itstool \
+sudo apt-get install appstream cmake docbook-xsl g++ gettext itstool \
   libqt5svg5-dev libqt5webview5-dev librsvg2-bin make \
   qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \
   qml-module-qtquick2 qml-module-qtquick-controls2 \
