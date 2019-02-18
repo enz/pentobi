@@ -85,7 +85,6 @@ The size of the thumbnail. The default is 128.
 </para>
 </listitem>
 </varlistentry>
-</variablelist>
 <varlistentry>
 <term><option>-v</option></term>
 <term><option>--version</option></term>
@@ -95,6 +94,7 @@ Display version and exit.
 </para>
 </listitem>
 </varlistentry>
+</variablelist>
 </refsection>
 
 <refsection>
