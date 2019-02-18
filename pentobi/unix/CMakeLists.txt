@@ -74,17 +74,22 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.desktop
 # AppData
 
 configure_file(io.sourceforge.pentobi.appdata.xml.in
-    io.sourceforge.pentobi.appdata.xml.in.2 @ONLY)
-add_custom_command(OUTPUT io.sourceforge.pentobi.appdata.xml
-    COMMAND "${ITSTOOL}"
-    -j io.sourceforge.pentobi.appdata.xml.in.2
-    -o io.sourceforge.pentobi.appdata.xml ${mo_files}
-    DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml.in.2"
-    ${mo_files} po/LINGUAS
+    io.sourceforge.pentobi.appdata.xml @ONLY)
+add_custom_command(OUTPUT io.sourceforge.pentobi.appdata.translated.xml
+    COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" --xml
+    -d "${CMAKE_CURRENT_SOURCE_DIR}/po"
+    --template io.sourceforge.pentobi.appdata.xml
+    -o io.sourceforge.pentobi.appdata.translated.xml
+    DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml"
+    ${po_files} po/LINGUAS
     )
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml"
-    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo")
+install(
+    FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.translated.xml"
+    DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/metainfo"
+    RENAME io.sourceforge.pentobi.appdata.xml
+    )
 
 # Shared MIME info
 
@@ -143,7 +148,7 @@ install(DIRECTORY help DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}
 
 add_custom_target(pentobi-unix ALL DEPENDS
     io.sourceforge.pentobi.desktop
-    io.sourceforge.pentobi.appdata.xml
+    io.sourceforge.pentobi.appdata.translated.xml
     pentobi-mime.xml
     pentobi.png
     application-x-blokus-sgf.png
