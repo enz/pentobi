@@ -3,7 +3,7 @@
 <its:translateRule selector="//refentrytitle" translate="no"/>
 <its:translateRule selector="//manvolnum" translate="no"/>
 <its:translateRule selector="//refmiscinfo[@class='version']" translate="no"/>
-<its:translateRule selector="//info/date" translate="no"/>
+<its:translateRule selector="//articleinfo/date" translate="no"/>
 <its:translateRule selector="//refname" translate="no"/>
 <its:translateRule selector="//command" translate="no"/>
 <its:translateRule selector="//option" translate="no"/>
