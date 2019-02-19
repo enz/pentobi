@@ -97,13 +97,14 @@ install(
 
 # Shared MIME info
 
+# Use itstool until shared-mime-info includes its/loc files for gettext (see
+# also https://gitlab.freedesktop.org/xdg/shared-mime-info/merge_requests/4)
 add_custom_command(OUTPUT pentobi-mime.xml
     COMMAND "${ITSTOOL}"
     -j "${CMAKE_CURRENT_SOURCE_DIR}/pentobi-mime.xml.in"
     -o pentobi-mime.xml ${mo_files}
     DEPENDS pentobi-mime.xml.in ${mo_files} po/LINGUAS
     )
-
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-mime.xml"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/mime/packages")
 
