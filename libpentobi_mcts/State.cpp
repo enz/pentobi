@@ -262,15 +262,17 @@ void State::evaluate_twocolor(array<Float, 6>& result)
     ScoreType s;
     if (! m_is_symmetry_broken
             && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
-    {
         s = 0;
-    }
     else
         s = m_bd.get_score_twocolor(Color(0));
     Float res;
     if (s > 0)
         res = 1;
-    else if (s < 0 || (m_is_callisto && s == 0))
+    else if (m_is_callisto && s == 0)
+        // Tie a loss for the first color in Callisto, but we use 0.1 to
+        // encourage the second color to win with a positive score
+        res = 0.1f;
+    else if (s < 0)
         res = 0;
     else
         res = 0.5;
