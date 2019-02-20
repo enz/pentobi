@@ -32,7 +32,8 @@ computer player used in Pentobi.
 * libpentobi_base --
   General Blokus-specific functionality.
 * libpentobi_gtp --
-  General Blokus-specific GTP interface based on libpentobi_base.
+  General Blokus-specific GTP interface based on libboardgame_gtp and
+  libpentobi_base.
 * libpentobi_mcts --
   Main Blokus computer player used in Pentobi based on libboardgame_mcts
 * learn_tool --
