@@ -1,13 +1,13 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_gtp/Engine.h
+/** @file libpentobi_gtp/GtpEngine.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_GTP_ENGINE_H
-#define LIBPENTOBI_GTP_ENGINE_H
+#ifndef LIBPENTOBI_GTP_GTP_ENGINE_H
+#define LIBPENTOBI_GTP_GTP_ENGINE_H
 
-#include "libboardgame_gtp/Engine.h"
+#include "libboardgame_gtp/GtpEngine.h"
 #include "libpentobi_base/Game.h"
 #include "libpentobi_base/PlayerBase.h"
 
@@ -24,11 +24,11 @@ using libboardgame_gtp::Response;
 //-----------------------------------------------------------------------------
 
 /** GTP Blokus engine. */
-class Engine
-    : public libboardgame_gtp::Engine
+class GtpEngine
+    : public libboardgame_gtp::GtpEngine
 {
 public:
-    explicit Engine(Variant variant);
+    explicit GtpEngine(Variant variant);
 
     void cmd_all_legal(Arguments args, Response& response);
     void cmd_clear_board();
@@ -54,14 +54,14 @@ public:
         exceed the lifetime of the class instance. */
     void set_player(PlayerBase& player);
 
-    void set_accept_illegal(bool enable);
+    void set_accept_illegal(bool enable) { m_accept_illegal = enable; }
 
     /** Enable or disable resigning. */
-    void set_resign(bool enable);
+    void set_resign(bool enable) { m_resign = enable; }
 
     void set_show_board(bool enable);
 
-    const Board& get_board() const;
+    const Board& get_board() const { return m_game.get_board(); }
 
 protected:
     Color get_color_arg(Arguments args, unsigned i) const;
@@ -90,23 +90,8 @@ private:
     void play(Color c, Arguments args, unsigned arg_move_begin);
 };
 
-inline const Board& Engine::get_board() const
-{
-    return m_game.get_board();
-}
-
-inline void Engine::set_accept_illegal(bool enable)
-{
-    m_accept_illegal = enable;
-}
-
-inline void Engine::set_resign(bool enable)
-{
-    m_resign = enable;
-}
-
 //-----------------------------------------------------------------------------
 
 } // namespace libpentobi_gtp
 
-#endif // LIBPENTOBI_GTP_ENGINE_H
+#endif // LIBPENTOBI_GTP_GTP_ENGINE_H

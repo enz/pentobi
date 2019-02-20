@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libboardgame_gtp/EngineTest.cpp
+/** @file unittest/libboardgame_gtp/GtpEngineTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include "libboardgame_gtp/Engine.h"
+#include "libboardgame_gtp/GtpEngine.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;
@@ -19,9 +19,9 @@ namespace {
 /** GTP engine returning invalid responses for testing class Engine.
     For testing that the base class Engine sanitizes responses of
     subclasses that contain empty lines (see
-    @ref libboardgame_gtp::Engine::exec_main_loop). */
+    @ref libboardgame_gtp::GtpEngine::exec_main_loop). */
 class InvalidResponseEngine
-    : public Engine
+    : public GtpEngine
 {
 public:
     InvalidResponseEngine();
@@ -62,7 +62,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_command)
 {
     istringstream in("known_command known_command\n");
     ostringstream out;
-    Engine engine;
+    GtpEngine engine;
     engine.exec_main_loop(in, out);
     LIBBOARDGAME_CHECK_EQUAL(string("= true\n\n"), out.str());
 }
@@ -71,7 +71,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_command_with_id)
 {
     istringstream in("10 known_command known_command\n");
     ostringstream out;
-    Engine engine;
+    GtpEngine engine;
     engine.exec_main_loop(in, out);
     LIBBOARDGAME_CHECK_EQUAL(string("=10 true\n\n"), out.str());
 }
@@ -109,7 +109,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_unknown_command)
 {
     istringstream in("unknowncommand\n");
     ostringstream out;
-    Engine engine;
+    GtpEngine engine;
     engine.exec_main_loop(in, out);
     LIBBOARDGAME_CHECK(out.str().size() >= 2);
     LIBBOARDGAME_CHECK_EQUAL(string("? "), out.str().substr(0, 2));

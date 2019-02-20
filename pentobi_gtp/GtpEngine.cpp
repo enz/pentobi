@@ -1,16 +1,14 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi_gtp/Engine.cpp
+/** @file pentobi_gtp/GtpEngine.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include "Engine.h"
+#include "GtpEngine.h"
 
 #include <fstream>
 #include "libboardgame_base/Writer.h"
 #include "libpentobi_mcts/Util.h"
-
-namespace pentobi_gtp {
 
 using libboardgame_base::Writer;
 using libboardgame_gtp::Failure;
@@ -20,29 +18,30 @@ using libpentobi_mcts::Float;
 
 //-----------------------------------------------------------------------------
 
-Engine::Engine(Variant variant, unsigned level, bool use_book,
-               const string& books_dir, unsigned nu_threads)
-    : libpentobi_gtp::Engine(variant)
+GtpEngine::GtpEngine(
+        Variant variant, unsigned level, bool use_book,
+        const string& books_dir, unsigned nu_threads)
+    : libpentobi_gtp::GtpEngine(variant)
 {
     create_player(variant, level, books_dir, nu_threads);
     get_mcts_player().set_use_book(use_book);
-    add("get_value", &Engine::cmd_get_value);
-    add("name", &Engine::cmd_name);
-    add("param", &Engine::cmd_param);
-    add("move_values", &Engine::cmd_move_values);
-    add("save_tree", &Engine::cmd_save_tree);
-    add("selfplay", &Engine::cmd_selfplay);
-    add("version", &Engine::cmd_version);
+    add("get_value", &GtpEngine::cmd_get_value);
+    add("name", &GtpEngine::cmd_name);
+    add("param", &GtpEngine::cmd_param);
+    add("move_values", &GtpEngine::cmd_move_values);
+    add("save_tree", &GtpEngine::cmd_save_tree);
+    add("selfplay", &GtpEngine::cmd_selfplay);
+    add("version", &GtpEngine::cmd_version);
 }
 
-Engine::~Engine() = default; // Non-inline to avoid GCC -Winline warning
+GtpEngine::~GtpEngine() = default; // Non-inline to avoid GCC -Winline warning
 
-void Engine::cmd_get_value(Response& response)
+void GtpEngine::cmd_get_value(Response& response)
 {
     response << get_search().get_tree().get_root().get_value();
 }
 
-void Engine::cmd_move_values(Response& response)
+void GtpEngine::cmd_move_values(Response& response)
 {
     auto children = get_search().get_tree().get_root_children();
     if (children.empty())
@@ -61,12 +60,12 @@ void Engine::cmd_move_values(Response& response)
                  << bd.to_string(node->get_move(), true) << '\n';
 }
 
-void Engine::cmd_name(Response& response)
+void GtpEngine::cmd_name(Response& response)
 {
     response.set("Pentobi");
 }
 
-void Engine::cmd_save_tree(Arguments args)
+void GtpEngine::cmd_save_tree(Arguments args)
 {
     auto& search = get_search();
     if (! search.get_last_history().is_valid())
@@ -80,7 +79,7 @@ void Engine::cmd_save_tree(Arguments args)
     because it has lower memory requirements (only one engine needed), process
     switches between the engines are avoided and parts of the search tree can
     be reused between moves of different players. */
-void Engine::cmd_selfplay(Arguments args)
+void GtpEngine::cmd_selfplay(Arguments args)
 {
     args.check_size(2);
     auto nu_games = args.get<int>(0);
@@ -115,7 +114,7 @@ void Engine::cmd_selfplay(Arguments args)
     }
 }
 
-void Engine::cmd_param(Arguments args, Response& response)
+void GtpEngine::cmd_param(Arguments args, Response& response)
 {
     auto& p = get_mcts_player();
     auto& s = get_search();
@@ -158,7 +157,7 @@ void Engine::cmd_param(Arguments args, Response& response)
     }
 }
 
-void Engine::cmd_version(Response& response)
+void GtpEngine::cmd_version(Response& response)
 {
     string version;
 #ifdef VERSION
@@ -172,7 +171,7 @@ void Engine::cmd_version(Response& response)
     response.set(version);
 }
 
-void Engine::create_player(Variant variant, unsigned level,
+void GtpEngine::create_player(Variant variant, unsigned level,
                            const string& books_dir, unsigned nu_threads)
 {
     auto max_level = level;
@@ -181,7 +180,7 @@ void Engine::create_player(Variant variant, unsigned level,
     set_player(*m_player);
 }
 
-Player& Engine::get_mcts_player()
+Player& GtpEngine::get_mcts_player()
 {
     try
     {
@@ -193,16 +192,14 @@ Player& Engine::get_mcts_player()
     }
 }
 
-Search& Engine::get_search()
+Search& GtpEngine::get_search()
 {
     return get_mcts_player().get_search();
 }
 
-void Engine::use_cpu_time(bool enable)
+void GtpEngine::use_cpu_time(bool enable)
 {
     get_mcts_player().use_cpu_time(enable);
 }
 
 //-----------------------------------------------------------------------------
-
-} // namespace pentobi_gtp

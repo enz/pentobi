@@ -1,16 +1,14 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi_gtp/Engine.h
+/** @file pentobi_gtp/GtpEngine.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef PENTOBI_GTP_ENGINE_H
-#define PENTOBI_GTP_ENGINE_H
+#ifndef PENTOBI_GTP_GTP_ENGINE_H
+#define PENTOBI_GTP_GTP_ENGINE_H
 
-#include "libpentobi_gtp/Engine.h"
+#include "libpentobi_gtp/GtpEngine.h"
 #include "libpentobi_mcts/Player.h"
-
-namespace pentobi_gtp {
 
 using namespace std;
 using libboardgame_gtp::Arguments;
@@ -22,15 +20,15 @@ using libpentobi_mcts::Search;
 
 //-----------------------------------------------------------------------------
 
-class Engine
-    : public libpentobi_gtp::Engine
+class GtpEngine
+    : public libpentobi_gtp::GtpEngine
 {
 public:
-    explicit Engine(Variant variant, unsigned level = 5,
-                    bool use_book = true, const string& books_dir = "",
-                    unsigned nu_threads = 0);
+    explicit GtpEngine(
+            Variant variant, unsigned level = 5, bool use_book = true,
+            const string& books_dir = "", unsigned nu_threads = 0);
 
-    ~Engine() override;
+    ~GtpEngine() override;
 
     void cmd_param(Arguments args, Response& response);
     void cmd_get_value(Response& response);
@@ -56,6 +54,4 @@ private:
 
 //-----------------------------------------------------------------------------
 
-} // namespace pentobi_gtp
-
-#endif // PENTOBI_GTP_ENGINE_H
+#endif // PENTOBI_GTP_GTP_ENGINE_H

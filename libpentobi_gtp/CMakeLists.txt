@@ -1,6 +1,6 @@
 add_library(pentobi_gtp STATIC
-  Engine.h
-  Engine.cpp
+  GtpEngine.h
+  GtpEngine.cpp
 )
 
 target_include_directories(pentobi_gtp PUBLIC ..)

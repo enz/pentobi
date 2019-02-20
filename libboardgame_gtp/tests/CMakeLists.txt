@@ -1,7 +1,7 @@
 add_executable(unittest_libboardgame_gtp
   ArgumentsTest.cpp
   CmdLineTest.cpp
-  EngineTest.cpp
+  GtpEngineTest.cpp
   ResponseTest.cpp
 )
 

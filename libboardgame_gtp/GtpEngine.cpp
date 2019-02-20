@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_gtp/Engine.cpp
+/** @file libboardgame_gtp/GtpEngine.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include "Engine.h"
+#include "GtpEngine.h"
 
 #include <cctype>
 #include <iostream>
@@ -48,21 +48,21 @@ bool read_cmd(CmdLine& c, istream& in)
 
 //-----------------------------------------------------------------------------
 
-Engine::Engine()
+GtpEngine::GtpEngine()
 {
-    add("known_command", &Engine::cmd_known_command);
-    add("list_commands", &Engine::cmd_list_commands);
-    add("quit", &Engine::cmd_quit);
+    add("known_command", &GtpEngine::cmd_known_command);
+    add("list_commands", &GtpEngine::cmd_list_commands);
+    add("quit", &GtpEngine::cmd_quit);
 }
 
-Engine::~Engine() = default; // Non-inline to avoid GCC -Winline warning
+GtpEngine::~GtpEngine() = default; // Non-inline to avoid GCC -Winline warning
 
-void Engine::add(const string& name, const Handler& f)
+void GtpEngine::add(const string& name, const Handler& f)
 {
     m_handlers[name] = f;
 }
 
-void Engine::add(const string& name, const HandlerNoArgs& f)
+void GtpEngine::add(const string& name, const HandlerNoArgs& f)
 {
     add(name, [f](Arguments args, Response& response) {
         args.check_empty();
@@ -70,14 +70,14 @@ void Engine::add(const string& name, const HandlerNoArgs& f)
     });
 }
 
-void Engine::add(const string& name, const HandlerNoResponse& f)
+void GtpEngine::add(const string& name, const HandlerNoResponse& f)
 {
     add(name, [f](Arguments args, Response&) {
         f(args);
     });
 }
 
-void Engine::add(const string& name, const HandlerNoArgsNoResponse& f)
+void GtpEngine::add(const string& name, const HandlerNoArgsNoResponse& f)
 {
     add(name, [f](Arguments args, Response&) {
         args.check_empty();
@@ -86,30 +86,30 @@ void Engine::add(const string& name, const HandlerNoArgsNoResponse& f)
 }
 
 /** Return @c true if command is known, @c false otherwise. */
-void Engine::cmd_known_command(Arguments args, Response& response)
+void GtpEngine::cmd_known_command(Arguments args, Response& response)
 {
     response.set(contains(args.get<string>()) ? "true" : "false");
 }
 
 /** List all known commands. */
-void Engine::cmd_list_commands(Response& response)
+void GtpEngine::cmd_list_commands(Response& response)
 {
     for (auto& i : m_handlers)
         response << i.first << '\n';
 }
 
 /** Quit command loop. */
-void Engine::cmd_quit()
+void GtpEngine::cmd_quit()
 {
     m_quit = true;
 }
 
-bool Engine::contains(const string& name) const
+bool GtpEngine::contains(const string& name) const
 {
     return m_handlers.count(name) > 0;
 }
 
-bool Engine::exec(istream& in, bool throw_on_fail, ostream* log)
+bool GtpEngine::exec(istream& in, bool throw_on_fail, ostream* log)
 {
     string line;
     Response response;
@@ -133,7 +133,7 @@ bool Engine::exec(istream& in, bool throw_on_fail, ostream* log)
     return ! in.fail();
 }
 
-void Engine::exec_main_loop(istream& in, ostream& out)
+void GtpEngine::exec_main_loop(istream& in, ostream& out)
 {
     m_quit = false;
     CmdLine cmd;
@@ -155,8 +155,8 @@ void Engine::exec_main_loop(istream& in, ostream& out)
     each function call
     @param buffer A reusable string instance to avoid memory allocation in each
     function call */
-bool Engine::handle_cmd(CmdLine& line, ostream* out, Response& response,
-                        string& buffer)
+bool GtpEngine::handle_cmd(
+        CmdLine& line, ostream* out, Response& response, string& buffer)
 {
     on_handle_cmd_begin();
     bool status = true;
@@ -191,7 +191,7 @@ bool Engine::handle_cmd(CmdLine& line, ostream* out, Response& response,
     return status;
 }
 
-void Engine::on_handle_cmd_begin()
+void GtpEngine::on_handle_cmd_begin()
 {
     // Default implementation does nothing
 }

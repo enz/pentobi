@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_gtp/Engine.cpp
+/** @file libpentobi_gtp/GtpEngine.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include "Engine.h"
+#include "GtpEngine.h"
 
 #include <fstream>
 #include <memory>
@@ -33,33 +33,33 @@ using libpentobi_base::SgfNode;
 
 //-----------------------------------------------------------------------------
 
-Engine::Engine(Variant variant)
+GtpEngine::GtpEngine(Variant variant)
     : m_game(variant)
 {
-    add("all_legal", &Engine::cmd_all_legal);
-    add("clear_board", &Engine::cmd_clear_board);
-    add("cputime", &Engine::cmd_cputime);
-    add("final_score", &Engine::cmd_final_score);
-    add("loadsgf", &Engine::cmd_loadsgf);
-    add("point_integers", &Engine::cmd_point_integers);
-    add("move_info", &Engine::cmd_move_info);
-    add("p", &Engine::cmd_p);
-    add("param_base", &Engine::cmd_param_base);
-    add("play", &Engine::cmd_play);
-    add("savesgf", &Engine::cmd_savesgf);
-    add("set_game", &Engine::cmd_set_game);
-    add("set_random_seed", &Engine::cmd_set_random_seed);
-    add("showboard", &Engine::cmd_showboard);
-    add("undo", &Engine::cmd_undo);
+    add("all_legal", &GtpEngine::cmd_all_legal);
+    add("clear_board", &GtpEngine::cmd_clear_board);
+    add("cputime", &GtpEngine::cmd_cputime);
+    add("final_score", &GtpEngine::cmd_final_score);
+    add("loadsgf", &GtpEngine::cmd_loadsgf);
+    add("point_integers", &GtpEngine::cmd_point_integers);
+    add("move_info", &GtpEngine::cmd_move_info);
+    add("p", &GtpEngine::cmd_p);
+    add("param_base", &GtpEngine::cmd_param_base);
+    add("play", &GtpEngine::cmd_play);
+    add("savesgf", &GtpEngine::cmd_savesgf);
+    add("set_game", &GtpEngine::cmd_set_game);
+    add("set_random_seed", &GtpEngine::cmd_set_random_seed);
+    add("showboard", &GtpEngine::cmd_showboard);
+    add("undo", &GtpEngine::cmd_undo);
 }
 
-void Engine::board_changed()
+void GtpEngine::board_changed()
 {
     if (m_show_board)
         LIBBOARDGAME_LOG(get_board());
 }
 
-void Engine::cmd_all_legal(Arguments args, Response& response)
+void GtpEngine::cmd_all_legal(Arguments args, Response& response)
 {
     auto& bd = get_board();
     auto moves = make_unique<MoveList>();
@@ -69,13 +69,13 @@ void Engine::cmd_all_legal(Arguments args, Response& response)
         response << bd.to_string(mv, false) << '\n';
 }
 
-void Engine::cmd_clear_board()
+void GtpEngine::cmd_clear_board()
 {
     m_game.init();
     board_changed();
 }
 
-void Engine::cmd_cputime(Response& response)
+void GtpEngine::cmd_cputime(Response& response)
 {
     auto time = libboardgame_base::cpu_time();
     if (time < 0)
@@ -83,7 +83,7 @@ void Engine::cmd_cputime(Response& response)
     response << time;
 }
 
-void Engine::cmd_final_score(Response& response)
+void GtpEngine::cmd_final_score(Response& response)
 {
     auto& bd = get_board();
     if (get_nu_players(bd.get_variant()) > 2)
@@ -103,17 +103,17 @@ void Engine::cmd_final_score(Response& response)
     }
 }
 
-void Engine::cmd_g(Response& response)
+void GtpEngine::cmd_g(Response& response)
 {
     genmove(get_board().get_effective_to_play(), response);
 }
 
-void Engine::cmd_genmove(Arguments args, Response& response)
+void GtpEngine::cmd_genmove(Arguments args, Response& response)
 {
     genmove(get_color_arg(args), response);
 }
 
-void Engine::cmd_loadsgf(Arguments args)
+void GtpEngine::cmd_loadsgf(Arguments args)
 {
     args.check_size_less_equal(2);
     auto file = args.get<string>(0);
@@ -141,7 +141,7 @@ void Engine::cmd_loadsgf(Arguments args)
 }
 
 /** Return move info of a move given by its integer or string representation. */
-void Engine::cmd_move_info(Arguments args, Response& response)
+void GtpEngine::cmd_move_info(Arguments args, Response& response)
 {
     auto& bd = get_board();
     Move mv;
@@ -176,12 +176,12 @@ void Engine::cmd_move_info(Arguments args, Response& response)
         << "SymMv:  " << bd.to_string(info_ext_2.symmetric_move);
 }
 
-void Engine::cmd_p(Arguments args)
+void GtpEngine::cmd_p(Arguments args)
 {
     play(get_board().get_to_play(), args, 0);
 }
 
-void Engine::cmd_param_base(Arguments args, Response& response)
+void GtpEngine::cmd_param_base(Arguments args, Response& response)
 {
     if (args.get_size() == 0)
         response
@@ -204,12 +204,12 @@ void Engine::cmd_param_base(Arguments args, Response& response)
     }
 }
 
-void Engine::cmd_play(Arguments args)
+void GtpEngine::cmd_play(Arguments args)
 {
     play(get_color_arg(args, 0), args, 1);
 }
 
-void Engine::cmd_point_integers(Response& response)
+void GtpEngine::cmd_point_integers(Response& response)
 {
     auto& geo = get_board().get_geometry();
     Grid<Point::IntType> grid;
@@ -218,7 +218,7 @@ void Engine::cmd_point_integers(Response& response)
     response << '\n' << grid.to_string(geo);
 }
 
-void Engine::cmd_reg_genmove(Arguments args, Response& response)
+void GtpEngine::cmd_reg_genmove(Arguments args, Response& response)
 {
     RandomGenerator::set_global_seed_last();
     Move move = get_player().genmove(get_board(), get_color_arg(args));
@@ -227,7 +227,7 @@ void Engine::cmd_reg_genmove(Arguments args, Response& response)
     response << get_board().to_string(move, false);
 }
 
-void Engine::cmd_savesgf(Arguments args)
+void GtpEngine::cmd_savesgf(Arguments args)
 {
     ofstream out(args.get<string>());
     PentobiTreeWriter writer(out, m_game.get_tree());
@@ -243,7 +243,7 @@ void Engine::cmd_savesgf(Arguments args)
     This command is similar to the command that is used by Quarry
     (http://home.gna.org/quarry/) to set a game at GTP engines that support
     multiple games. */
-void Engine::cmd_set_game(Arguments args)
+void GtpEngine::cmd_set_game(Arguments args)
 {
     Variant variant;
     string line(&*args.get_line().begin(), args.get_line().size());
@@ -255,17 +255,17 @@ void Engine::cmd_set_game(Arguments args)
 
 /** Set global random seed.
     Arguments: random seed */
-void Engine::cmd_set_random_seed(Arguments args)
+void GtpEngine::cmd_set_random_seed(Arguments args)
 {
     RandomGenerator::set_global_seed(args.get<RandomGenerator::ResultType>());
 }
 
-void Engine::cmd_showboard(Response& response)
+void GtpEngine::cmd_showboard(Response& response)
 {
     response << '\n' << get_board();
 }
 
-void Engine::cmd_undo()
+void GtpEngine::cmd_undo()
 {
     auto& bd = get_board();
     if (bd.get_nu_moves() == 0)
@@ -274,7 +274,7 @@ void Engine::cmd_undo()
     board_changed();
 }
 
-void Engine::genmove(Color c, Response& response)
+void GtpEngine::genmove(Color c, Response& response)
 {
     auto& bd = get_board();
     auto& player = get_player();
@@ -300,14 +300,14 @@ void Engine::genmove(Color c, Response& response)
     board_changed();
 }
 
-Color Engine::get_color_arg(Arguments args) const
+Color GtpEngine::get_color_arg(Arguments args) const
 {
     if (args.get_size() > 1)
         throw Failure("too many arguments");
     return get_color_arg(args, 0);
 }
 
-Color Engine::get_color_arg(Arguments args, unsigned i) const
+Color GtpEngine::get_color_arg(Arguments args, unsigned i) const
 {
     string s = args.get_tolower(i);
     auto& bd = get_board();
@@ -333,19 +333,19 @@ Color Engine::get_color_arg(Arguments args, unsigned i) const
     throw Failure("invalid color argument '" + s + "'");
 }
 
-PlayerBase& Engine::get_player() const
+PlayerBase& GtpEngine::get_player() const
 {
     if (m_player == nullptr)
         throw Failure("no player set");
     return *m_player;
 }
 
-void Engine::on_handle_cmd_begin()
+void GtpEngine::on_handle_cmd_begin()
 {
     libboardgame_base::flush_log();
 }
 
-void Engine::play(Color c, Arguments args, unsigned arg_move_begin)
+void GtpEngine::play(Color c, Arguments args, unsigned arg_move_begin)
 {
     auto& bd = get_board();
     if (bd.get_nu_moves() >= Board::max_moves)
@@ -376,15 +376,15 @@ void Engine::play(Color c, Arguments args, unsigned arg_move_begin)
     board_changed();
 }
 
-void Engine::set_player(PlayerBase& player)
+void GtpEngine::set_player(PlayerBase& player)
 {
     m_player = &player;
-    add("genmove", &Engine::cmd_genmove);
-    add("g", &Engine::cmd_g);
-    add("reg_genmove", &Engine::cmd_reg_genmove);
+    add("genmove", &GtpEngine::cmd_genmove);
+    add("g", &GtpEngine::cmd_g);
+    add("reg_genmove", &GtpEngine::cmd_reg_genmove);
 }
 
-void Engine::set_show_board(bool enable)
+void GtpEngine::set_show_board(bool enable)
 {
     if (enable && ! m_show_board)
         LIBBOARDGAME_LOG(get_board());

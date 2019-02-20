@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include <fstream>
-#include "Engine.h"
+#include "GtpEngine.h"
 #include "libboardgame_base/Log.h"
 #include "libboardgame_base/Options.h"
 #include "libboardgame_base/RandomGenerator.h"
@@ -118,8 +118,7 @@ int main(int argc, char** argv)
             throw runtime_error("invalid level");
         auto use_book = (! opt.contains("nobook"));
         const string& books_dir = application_dir_path;
-        pentobi_gtp::Engine engine(variant, level, use_book, books_dir,
-                                   threads);
+        GtpEngine engine(variant, level, use_book, books_dir, threads);
         engine.set_resign(! opt.contains("noresign"));
         if (opt.contains("showboard"))
             engine.set_show_board(true);

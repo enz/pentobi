@@ -3,8 +3,8 @@ add_library(boardgame_gtp STATIC
   Arguments.cpp
   CmdLine.h
   CmdLine.cpp
-  Engine.h
-  Engine.cpp
+  GtpEngine.h
+  GtpEngine.cpp
   Failure.h
   Response.h
   Response.cpp

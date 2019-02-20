@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file libboardgame_gtp/Engine.h
+/** @file libboardgame_gtp/GtpEngine.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBBOARDGAME_GTP_ENGINE_H
-#define LIBBOARDGAME_GTP_ENGINE_H
+#ifndef LIBBOARDGAME_GTP_GTP_ENGINE_H
+#define LIBBOARDGAME_GTP_GTP_ENGINE_H
 
 #include <functional>
 #include <iosfwd>
@@ -25,7 +25,7 @@ using namespace std;
     Commands can be added with Engine::add(). Existing commands can be
     overridden by registering a new handler for the command.
     @see @ref libboardgame_gtp_commands */
-class Engine
+class GtpEngine
 {
 public:
     using Handler = function<void(Arguments, Response&)>;
@@ -44,13 +44,13 @@ public:
     void cmd_quit();
     /** @} */ // @name
 
-    Engine();
+    GtpEngine();
 
-    Engine(const Engine&) = delete;
+    GtpEngine(const GtpEngine&) = delete;
 
-    Engine& operator=(const Engine&) const = delete;
+    GtpEngine& operator=(const GtpEngine&) const = delete;
 
-    virtual ~Engine();
+    virtual ~GtpEngine();
 
     /** Execute commands from an input stream.
         @param in The input stream
@@ -130,31 +130,31 @@ private:
 };
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)(Arguments, Response&))
+void GtpEngine::add(const string& name, void (T::*f)(Arguments, Response&))
 {
     add(name, f, dynamic_cast<T*>(this));
 }
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)(Response&))
+void GtpEngine::add(const string& name, void (T::*f)(Response&))
 {
     add(name, f, dynamic_cast<T*>(this));
 }
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)(Arguments))
+void GtpEngine::add(const string& name, void (T::*f)(Arguments))
 {
     add(name, f, dynamic_cast<T*>(this));
 }
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)())
+void GtpEngine::add(const string& name, void (T::*f)())
 {
     add(name, f, dynamic_cast<T*>(this));
 }
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)(Arguments, Response&), T* t)
+void GtpEngine::add(const string& name, void (T::*f)(Arguments, Response&), T* t)
 {
     assert(f);
     add(name,
@@ -162,21 +162,21 @@ void Engine::add(const string& name, void (T::*f)(Arguments, Response&), T* t)
 }
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)(Response&), T* t)
+void GtpEngine::add(const string& name, void (T::*f)(Response&), T* t)
 {
     assert(f);
     add(name, static_cast<HandlerNoArgs>(bind(f, t, placeholders::_1)));
 }
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)(Arguments), T* t)
+void GtpEngine::add(const string& name, void (T::*f)(Arguments), T* t)
 {
     assert(f);
     add(name, static_cast<HandlerNoResponse>(bind(f, t, placeholders::_1)));
 }
 
 template<class T>
-void Engine::add(const string& name, void (T::*f)(), T* t)
+void GtpEngine::add(const string& name, void (T::*f)(), T* t)
 {
     assert(f);
     add(name, static_cast<HandlerNoArgsNoResponse>(bind(f, t)));
@@ -186,4 +186,4 @@ void Engine::add(const string& name, void (T::*f)(), T* t)
 
 } // namespace libboardgame_gtp
 
-#endif // LIBBOARDGAME_GTP_ENGINE_H
+#endif // LIBBOARDGAME_GTP_GTP_ENGINE_H

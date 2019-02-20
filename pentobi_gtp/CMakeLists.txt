@@ -1,8 +1,8 @@
 add_executable(pentobi-gtp
-  Engine.h
-  Engine.cpp
-  Main.cpp
-)
+    GtpEngine.h
+    GtpEngine.cpp
+    Main.cpp
+    )
 
 target_compile_definitions(pentobi-gtp PRIVATE VERSION="${PENTOBI_VERSION}")
 
