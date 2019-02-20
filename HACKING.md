@@ -21,7 +21,7 @@ could be reused for other board games.
 * libboardgame_test --
   Functionality for unit tests
 * libboardgame_mcts --
-  Abstract Monte-Carlo tree search
+  Abstract Monte-Carlo tree search (MCTS)
 
 Pentobi Engine Modules
 ----------------------
@@ -30,12 +30,17 @@ The engine modules contain code that is specific to Blokus and the
 computer player used in Pentobi.
 
 * libpentobi_base --
-  General Blokus-specific functionality.
+  General Blokus-specific functionality. The board implementation is
+  optimized for fast move generation needed in MCTS. For a definition
+  of the game file format, see libpentobi_base/Pentobi-SGF.html
 * libpentobi_gtp --
   General Blokus-specific GTP interface based on libboardgame_gtp and
   libpentobi_base.
 * libpentobi_mcts --
   Main Blokus computer player used in Pentobi based on libboardgame_mcts
+* opening_books --
+  Opening moves in SGF format used by libpentobi_mcts for fast move generation
+  without search in early positions
 * learn_tool --
   Tool for learning the move priors used in libpentobi_mcts
 * pentobi_gtp --
@@ -61,3 +66,6 @@ The GUI modules implement the user interface. They depend on the
   Common functionality for pentobi and libpentobi_thumbnail
 * libpentobi_thumbnail --
   Common functionality for pentobi_thumbnailer and pentobi_kde_thumbnailer
+* libpentobi_kde_thumbnailer --
+  Only needed for technical reasons during compilation, see comment in
+  libpentobi_kde_thumbnailer/CMakeLists.txt
