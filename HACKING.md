@@ -17,7 +17,8 @@ could be reused for other board games.
   General utilities and functionality for board games
 * libboardgame_gtp --
   Implementation of the
-  [Go Text Protocol](https://en.wikipedia.org/wiki/Go_Text_Protocol) (GTP)
+  [Go Text Protocol](https://en.wikipedia.org/wiki/Go_Text_Protocol)
+  (GTP)
 * libboardgame_test --
   Functionality for unit tests
 * libboardgame_mcts --
@@ -32,20 +33,21 @@ computer player used in Pentobi.
 * libpentobi_base --
   General Blokus-specific functionality. The board implementation is
   optimized for fast move generation needed in MCTS. For a definition
-  of the game file format, see libpentobi_base/Pentobi-SGF.html
+  of the game file format, see
+  [Pentobi-SGF](libpentobi_base/Pentobi-SGF.md)
 * libpentobi_gtp --
   General Blokus-specific GTP interface based on libboardgame_gtp and
   libpentobi_base.
 * libpentobi_mcts --
   Main Blokus computer player used in Pentobi based on libboardgame_mcts
 * opening_books --
-  Opening moves in SGF format used by libpentobi_mcts for fast move generation
-  without search in early positions
+  Opening moves in SGF format used by libpentobi_mcts for fast move
+  generation without search in early positions
 * learn_tool --
   Tool for learning the move priors used in libpentobi_mcts
 * pentobi_gtp --
   GTP interface to the player in libpentobi_mcts.
-  See pentobi_gtp/Pentobi-GTP.html for more information.
+  See [Pentobi-GTP](pentobi_gtp/Pentobi-GTP.md) for more information.
 * twogtp --
   Tool for playing Blokus games between two GTP engines (currently only
   supported on Unix)
@@ -65,7 +67,8 @@ The GUI modules implement the user interface. They depend on the
 * libpentobi_paint --
   Common functionality for pentobi and libpentobi_thumbnail
 * libpentobi_thumbnail --
-  Common functionality for pentobi_thumbnailer and pentobi_kde_thumbnailer
+  Common functionality for pentobi_thumbnailer and
+  pentobi_kde_thumbnailer
 * libpentobi_kde_thumbnailer --
   Only needed for technical reasons during compilation, see comment in
   libpentobi_kde_thumbnailer/CMakeLists.txt
