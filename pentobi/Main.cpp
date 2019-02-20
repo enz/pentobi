@@ -176,12 +176,18 @@ int mainDesktop()
 #else
         ctx->setContextProperty(QStringLiteral("isDebug"), false);
 #endif
+        // Prefer help from build directory if executable was not installed
+        auto helpDir =
+                QCoreApplication::applicationDirPath() + "/docbook/help";
+        if (! QFile::exists(helpDir + "/C/pentobi/index.html"))
+        {
 #ifdef PENTOBI_HELP_DIR
-        ctx->setContextProperty(QStringLiteral("helpDir"),
-                                QString::fromLocal8Bit(PENTOBI_HELP_DIR));
+            helpDir = QString::fromLocal8Bit(PENTOBI_HELP_DIR);
 #else
-        ctx->setContextProperty(QStringLiteral("helpDir"), QString());
+            helpDir = {};
 #endif
+        }
+        ctx->setContextProperty(QStringLiteral("helpDir"), helpDir);
 #ifdef PENTOBI_OPEN_HELP_EXTERNALLY
         ctx->setContextProperty(QStringLiteral("openHelpExternally"), true);
 #else
