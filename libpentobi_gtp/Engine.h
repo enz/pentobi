@@ -1,18 +1,23 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_base/Engine.h
+/** @file libpentobi_gtp/Engine.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_BASE_ENGINE_H
-#define LIBPENTOBI_BASE_ENGINE_H
+#ifndef LIBPENTOBI_GTP_ENGINE_H
+#define LIBPENTOBI_GTP_ENGINE_H
 
-#include "Game.h"
-#include "PlayerBase.h"
-#include "libboardgame_base/Engine.h"
+#include "libboardgame_gtp/Engine.h"
+#include "libpentobi_base/Game.h"
+#include "libpentobi_base/PlayerBase.h"
 
-namespace libpentobi_base {
+namespace libpentobi_gtp {
 
+using libpentobi_base::Board;
+using libpentobi_base::Color;
+using libpentobi_base::Game;
+using libpentobi_base::PlayerBase;
+using libpentobi_base::Variant;
 using libboardgame_gtp::Arguments;
 using libboardgame_gtp::Response;
 
@@ -20,13 +25,14 @@ using libboardgame_gtp::Response;
 
 /** GTP Blokus engine. */
 class Engine
-    : public libboardgame_base::Engine
+    : public libboardgame_gtp::Engine
 {
 public:
     explicit Engine(Variant variant);
 
     void cmd_all_legal(Arguments args, Response& response);
     void cmd_clear_board();
+    void cmd_cputime(Response& response);
     void cmd_final_score(Response& response);
     void cmd_g(Response& response);
     void cmd_genmove(Arguments args, Response& response);
@@ -40,6 +46,7 @@ public:
     void cmd_reg_genmove(Arguments args, Response& response);
     void cmd_savesgf(Arguments args);
     void cmd_set_game(Arguments args);
+    void cmd_set_random_seed(Arguments args);
     void cmd_undo();
 
     /** Set the player.
@@ -60,6 +67,8 @@ protected:
     Color get_color_arg(Arguments args, unsigned i) const;
 
     Color get_color_arg(Arguments args) const;
+
+    void on_handle_cmd_begin() override;
 
 private:
     bool m_accept_illegal = false;
@@ -98,6 +107,6 @@ inline void Engine::set_resign(bool enable)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libpentobi_base
+} // namespace libpentobi_gtp
 
-#endif // LIBPENTOBI_BASE_ENGINE_H
+#endif // LIBPENTOBI_GTP_ENGINE_H

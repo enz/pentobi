@@ -6,5 +6,5 @@ add_executable(pentobi-gtp
 
 target_compile_definitions(pentobi-gtp PRIVATE VERSION="${PENTOBI_VERSION}")
 
-target_link_libraries(pentobi-gtp pentobi_mcts)
+target_link_libraries(pentobi-gtp pentobi_gtp pentobi_mcts)
 

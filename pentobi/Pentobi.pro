@@ -115,9 +115,7 @@ RESOURCES += \
     resources.qrc
 
 !android {
-    RESOURCES += \
-        icon/pentobi_icon_desktop.qrc \
-        resources_desktop.qrc
+    RESOURCES += resources_desktop.qrc
 }
 
 HEADERS += \

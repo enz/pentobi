@@ -7,7 +7,7 @@
 #ifndef PENTOBI_GTP_ENGINE_H
 #define PENTOBI_GTP_ENGINE_H
 
-#include "libpentobi_base/Engine.h"
+#include "libpentobi_gtp/Engine.h"
 #include "libpentobi_mcts/Player.h"
 
 namespace pentobi_gtp {
@@ -23,7 +23,7 @@ using libpentobi_mcts::Search;
 //-----------------------------------------------------------------------------
 
 class Engine
-    : public libpentobi_base::Engine
+    : public libpentobi_gtp::Engine
 {
 public:
     explicit Engine(Variant variant, unsigned level = 5,

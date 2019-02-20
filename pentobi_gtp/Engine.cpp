@@ -22,7 +22,7 @@ using libpentobi_mcts::Float;
 
 Engine::Engine(Variant variant, unsigned level, bool use_book,
                const string& books_dir, unsigned nu_threads)
-    : libpentobi_base::Engine(variant)
+    : libpentobi_gtp::Engine(variant)
 {
     create_player(variant, level, books_dir, nu_threads);
     get_mcts_player().set_use_book(use_book);

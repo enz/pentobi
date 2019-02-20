@@ -72,13 +72,6 @@ add_library(pentobi_base STATIC
   Variant.cpp
 )
 
-if(PENTOBI_BUILD_GTP)
-    target_sources(pentobi_base PRIVATE
-        Engine.cpp
-        Engine.h
-        )
-endif()
-
 target_link_libraries(pentobi_base boardgame_base)
 target_include_directories(pentobi_base PUBLIC ..)
 

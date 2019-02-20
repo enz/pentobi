@@ -184,7 +184,7 @@ int mainDesktop()
 #ifdef PENTOBI_HELP_DIR
             helpDir = QString::fromLocal8Bit(PENTOBI_HELP_DIR);
 #else
-            helpDir = {};
+            helpDir.clear();
 #endif
         }
         ctx->setContextProperty(QStringLiteral("helpDir"), helpDir);

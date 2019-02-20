@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_base/Engine.cpp
+/** @file libpentobi_gtp/Engine.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -7,19 +7,29 @@
 #include "Engine.h"
 
 #include <fstream>
-#include "MoveMarker.h"
-#include "PentobiTreeWriter.h"
+#include <memory>
+#include "libboardgame_base/CpuTime.h"
 #include "libboardgame_base/Log.h"
 #include "libboardgame_base/RandomGenerator.h"
 #include "libboardgame_base/SgfUtil.h"
 #include "libboardgame_base/TreeReader.h"
+#include "libpentobi_base/MoveMarker.h"
+#include "libpentobi_base/PentobiTreeWriter.h"
 
-namespace libpentobi_base {
+namespace libpentobi_gtp {
 
+using namespace std;
 using libboardgame_base::RandomGenerator;
-using libboardgame_gtp::Failure;
 using libboardgame_base::TreeReader;
 using libboardgame_base::get_last_node;
+using libboardgame_gtp::Failure;
+using libpentobi_base::Grid;
+using libpentobi_base::Move;
+using libpentobi_base::MoveList;
+using libpentobi_base::MoveMarker;
+using libpentobi_base::PentobiTreeWriter;
+using libpentobi_base::Point;
+using libpentobi_base::SgfNode;
 
 //-----------------------------------------------------------------------------
 
@@ -28,6 +38,7 @@ Engine::Engine(Variant variant)
 {
     add("all_legal", &Engine::cmd_all_legal);
     add("clear_board", &Engine::cmd_clear_board);
+    add("cputime", &Engine::cmd_cputime);
     add("final_score", &Engine::cmd_final_score);
     add("loadsgf", &Engine::cmd_loadsgf);
     add("point_integers", &Engine::cmd_point_integers);
@@ -37,6 +48,7 @@ Engine::Engine(Variant variant)
     add("play", &Engine::cmd_play);
     add("savesgf", &Engine::cmd_savesgf);
     add("set_game", &Engine::cmd_set_game);
+    add("set_random_seed", &Engine::cmd_set_random_seed);
     add("showboard", &Engine::cmd_showboard);
     add("undo", &Engine::cmd_undo);
 }
@@ -53,7 +65,7 @@ void Engine::cmd_all_legal(Arguments args, Response& response)
     auto moves = make_unique<MoveList>();
     auto marker = make_unique<MoveMarker>();
     bd.gen_moves(get_color_arg(args), *marker, *moves);
-    for (Move mv : *moves)
+    for (auto mv : *moves)
         response << bd.to_string(mv, false) << '\n';
 }
 
@@ -61,6 +73,14 @@ void Engine::cmd_clear_board()
 {
     m_game.init();
     board_changed();
+}
+
+void Engine::cmd_cputime(Response& response)
+{
+    auto time = libboardgame_base::cpu_time();
+    if (time < 0)
+        throw Failure("cannot determine cpu time");
+    response << time;
 }
 
 void Engine::cmd_final_score(Response& response)
@@ -140,7 +160,7 @@ void Engine::cmd_move_info(Arguments args, Response& response)
         }
     }
     auto& geo = bd.get_geometry();
-    Piece piece = bd.get_move_piece(mv);
+    auto piece = bd.get_move_piece(mv);
     auto& info_ext_2 = bd.get_move_info_ext_2(mv);
     response
         << "\n"
@@ -148,7 +168,7 @@ void Engine::cmd_move_info(Arguments args, Response& response)
         << "Piece:  " << static_cast<int>(piece.to_int())
         << " (" << bd.get_piece_info(piece).get_name() << ")\n"
         << "Points:";
-    for (Point p : bd.get_move_points(mv))
+    for (auto p : bd.get_move_points(mv))
         response << ' ' << geo.to_string(p);
     response
         << "\n"
@@ -233,6 +253,13 @@ void Engine::cmd_set_game(Arguments args)
     board_changed();
 }
 
+/** Set global random seed.
+    Arguments: random seed */
+void Engine::cmd_set_random_seed(Arguments args)
+{
+    RandomGenerator::set_global_seed(args.get<RandomGenerator::ResultType>());
+}
+
 void Engine::cmd_showboard(Response& response)
 {
     response << '\n' << get_board();
@@ -311,6 +338,11 @@ PlayerBase& Engine::get_player() const
     if (m_player == nullptr)
         throw Failure("no player set");
     return *m_player;
+}
+
+void Engine::on_handle_cmd_begin()
+{
+    libboardgame_base::flush_log();
 }
 
 void Engine::play(Color c, Arguments args, unsigned arg_move_begin)

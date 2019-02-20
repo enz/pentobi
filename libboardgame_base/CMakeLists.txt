@@ -68,14 +68,6 @@ add_library(boardgame_base STATIC
     Writer.cpp
     )
 
-if(PENTOBI_BUILD_GTP)
-    target_sources(boardgame_base PRIVATE
-        Engine.cpp
-        Engine.h
-        )
-    target_link_libraries(boardgame_base boardgame_gtp)
-endif()
-
 target_compile_options(boardgame_base PUBLIC
     "$<$<CONFIG:DEBUG>:-DLIBBOARDGAME_DEBUG>")
 
