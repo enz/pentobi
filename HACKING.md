@@ -13,15 +13,15 @@ Libboardgame Modules
 The Libboardgame modules contain code that is not specific to Blokus and
 could be reused for other board games.
 
+* libboardgame_base --
+  General utilities and functionality for board games
 * libboardgame_gtp --
   Implementation of the
   [Go Text Protocol](https://en.wikipedia.org/wiki/Go_Text_Protocol) (GTP)
-* libboardgame_base --
-  General utilities and functionality for board games
-* libboardgame_mcts --
-  Abstract Monte-Carlo tree search
 * libboardgame_test --
   Functionality for unit tests
+* libboardgame_mcts --
+  Abstract Monte-Carlo tree search
 
 Pentobi Engine Modules
 ----------------------
@@ -31,18 +31,18 @@ computer player used in Pentobi.
 
 * libpentobi_base --
   General Blokus-specific functionality.
-* libpentobi_mcts --
-  Blokus player based on libboardgame_mcts
 * libpentobi_gtp --
   General Blokus-specific GTP interface based on libpentobi_base.
+* libpentobi_mcts --
+  Main Blokus computer player used in Pentobi based on libboardgame_mcts
+* learn_tool --
+  Tool for learning the move priors used in libpentobi_mcts
 * pentobi_gtp --
   GTP interface to the player in libpentobi_mcts.
   See pentobi_gtp/Pentobi-GTP.html for more information.
 * twogtp --
   Tool for playing Blokus games between two GTP engines (currently only
   supported on Unix)
-* learn_tool --
-  Tool for learning the move priors used in libpentobi_mcts
 
 Pentobi GUI Modules
 -------------------
@@ -60,3 +60,4 @@ The GUI modules implement the user interface. They depend on the
   Common functionality for pentobi and libpentobi_thumbnail
 * libpentobi_thumbnail --
   Common functionality for pentobi_thumbnailer and pentobi_kde_thumbnailer
+`
