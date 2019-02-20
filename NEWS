@@ -3,6 +3,8 @@ Version 16.2.x (v16-fixes)
 
 * Shared MIME Info was missing a pattern for detecting Classic 3-player
   game files independent of the file extension.
+* Development tool twogtp did not resolve ties as a win for the second
+  player in two-player Callisto.
 
 
 Version 16.2 (16 Jan 2019)

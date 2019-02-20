@@ -57,7 +57,7 @@ float TwoGtp::get_result(unsigned player_black)
         auto score = m_bd.get_score_twoplayer(Color(0));
         if (score > 0)
             result = 1;
-        else if (score < 0)
+        else if (score < 0 || (m_bd.get_break_ties() && score == 0))
             result = 0;
         else
             result = 0.5;
