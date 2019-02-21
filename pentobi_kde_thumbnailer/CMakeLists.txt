@@ -4,7 +4,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 find_package(Gettext 0.18 REQUIRED)
 get_filename_component(GETTEXT_BIN_DIR ${GETTEXT_MSGFMT_EXECUTABLE} DIRECTORY)
 get_filename_component(GETTEXT_INSTALL_DIR ${GETTEXT_BIN_DIR} DIRECTORY)
-find_file(METAINFO_ITS metainfo.its HINTS ${GETTEXT_INSTALL_DIR}/share/gettext/its)
+find_file(METAINFO_ITS NAMES metainfo.its appdata.its
+    HINTS ${GETTEXT_INSTALL_DIR}/share/gettext/its
+    )
 if(NOT METAINFO_ITS)
     message(FATAL_ERROR "metainfo.its not found (install appstream)")
 endif()

@@ -5,7 +5,9 @@ if(NOT ITSTOOL)
 endif()
 get_filename_component(GETTEXT_BIN_DIR ${GETTEXT_MSGFMT_EXECUTABLE} DIRECTORY)
 get_filename_component(GETTEXT_INSTALL_DIR ${GETTEXT_BIN_DIR} DIRECTORY)
-find_file(METAINFO_ITS metainfo.its HINTS ${GETTEXT_INSTALL_DIR}/share/gettext/its)
+find_file(METAINFO_ITS NAMES metainfo.its appdata.its
+    HINTS ${GETTEXT_INSTALL_DIR}/share/gettext/its
+    )
 if(NOT METAINFO_ITS)
     message(FATAL_ERROR "metainfo.its not found (install appstream)")
 endif()
@@ -17,8 +19,11 @@ find_program(XSLTPROC xsltproc)
 if(NOT XSLTPROC)
     message(FATAL_ERROR "xsltproc not found")
 endif()
-find_path(DOCBOOK_XSL "manpages/docbook.xsl"
-    HINTS "/usr/share/xml/docbook/stylesheet/docbook-xsl")
+find_path(DOCBOOK_XSL manpages/docbook.xsl
+    HINTS /usr/share/xml/docbook/stylesheet/docbook-xsl
+    /usr/local/share/xml/docbook/stylesheet/docbook-xsl
+    /usr/share/xsl/docbook /usr/local/share/xsl/docbook
+    )
 if(NOT DOCBOOK_XSL)
     message(FATAL_ERROR "docbook-xsl not found")
 endif()

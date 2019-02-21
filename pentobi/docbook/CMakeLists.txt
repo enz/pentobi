@@ -7,7 +7,7 @@ find_program(XSLTPROC xsltproc)
 if(NOT XSLTPROC)
     message(FATAL_ERROR "xsltproc not found")
 endif()
-find_path(DOCBOOK_XSL manpages/docbook.xsl
+find_path(DOCBOOK_XSL html/chunk.xsl
     HINTS /usr/share/xml/docbook/stylesheet/docbook-xsl
     /usr/local/share/xml/docbook/stylesheet/docbook-xsl
     /usr/share/xsl/docbook /usr/local/share/xsl/docbook
