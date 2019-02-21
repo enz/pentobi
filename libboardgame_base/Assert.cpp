@@ -60,7 +60,7 @@ void handle_assertion(
     {
         is_during_handle_assertion = true;
         for_each(get_all_handlers().begin(), get_all_handlers().end(),
-                 mem_fun(&AssertionHandler::run));
+                 mem_fn(&AssertionHandler::run));
     }
     abort();
 }
