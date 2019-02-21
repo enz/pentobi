@@ -8,11 +8,6 @@ find_package(Qt5Svg 5.11 REQUIRED)
 find_package(Qt5QuickCompiler REQUIRED)
 find_package(Qt5WebView 5.11)
 
-if(ANDROID)
-    set(ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android
-        CACHE INTERNAL "")
-endif()
-
 qt5_add_translation(pentobi_QM
     qml/i18n/qml_de.ts
     qml/i18n/qml_fr.ts
