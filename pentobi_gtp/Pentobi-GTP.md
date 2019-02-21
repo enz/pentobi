@@ -59,7 +59,7 @@ Building
 Since the GTP engine is a developer tool, building it is not enabled by
 default. To enable it, run `cmake` with the option
 `-DPENTOBI_BUILD_GTP=ON`. After building, there will be an executable in
-the build directory named `src/pentobi_gtp/pentobi-gtp`. The GTP engine
+the build directory named `pentobi_gtp/pentobi-gtp`. The GTP engine
 requires only standard C++ and has no dependency on other libraries like
 Qt, which is needed for the GUI version of Pentobi. If you only want to
 build the GTP engine, you can disable building the GUI with
