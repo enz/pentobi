@@ -7,7 +7,7 @@
 #ifndef LIBBOARDGAME_GTP_ARGUMENTS_H
 #define LIBBOARDGAME_GTP_ARGUMENTS_H
 
-#ifdef __GNUC__
+#if defined __GNUC__ && __has_include(<cxxabi.h>)
 #include <cxxabi.h>
 #endif
 #include <sstream>
@@ -119,7 +119,7 @@ inline unsigned Arguments::get_size() const
 template<typename T>
 string Arguments::get_type_name()
 {
-#ifdef __GNUC__
+#if defined __GNUC__ && __has_include(<cxxabi.h>)
     int status;
     auto name_ptr =
         abi::__cxa_demangle(typeid(T).name(), nullptr, nullptr, &status);

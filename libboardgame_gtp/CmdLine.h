@@ -8,7 +8,9 @@
 #define LIBBOARDGAME_GTP_CMDLINE_H
 
 #include <cassert>
+#include <iostream>
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace libboardgame_gtp {

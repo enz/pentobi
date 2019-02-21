@@ -9,7 +9,7 @@
 
 #include <string>
 #include <typeinfo>
-#ifdef __GNUC__
+#if defined __GNUC__ && __has_include(<cxxabi.h>)
 #include <cstdlib>
 #include <cxxabi.h>
 #endif
@@ -45,7 +45,7 @@ using namespace std;
 template<typename T>
 string get_type_name(const T& t)
 {
-#ifdef __GNUC__
+#if defined __GNUC__ && __has_include(<cxxabi.h>)
     int status;
     char* name_ptr = abi::__cxa_demangle(typeid(t).name(), nullptr, nullptr,
                                          &status);
