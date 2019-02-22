@@ -40,7 +40,7 @@ ToolButton {
         NumberAnimation { duration: gameDisplay.animationDurationFast }
     }
 
-    opacity: root.enabled ? 0.5 : 0.25
+    opacity: root.enabled ? 0.55 : 0.25
     hoverEnabled: false
     display: AbstractButton.IconOnly
     icon {
