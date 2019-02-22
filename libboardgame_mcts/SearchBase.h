@@ -1029,7 +1029,7 @@ bool SearchBase<S, M, R>::prune(
     m_tree.swap(m_tmp_tree);
     if (percent > 50)
     {
-        if (prune_min_count >= 0.5 * numeric_limits<Float>::max())
+        if (prune_min_count >= 0.5f * numeric_limits<Float>::max())
             return false;
         new_prune_min_count = prune_min_count * 2;
         return true;
