@@ -238,7 +238,7 @@ inline auto Tree<N>::get_children(const Node& node) const -> Children
         auto begin = &get_node(node.get_first_child());
         return Children(begin, begin + nu_children);
     }
-    return Children(nullptr, 0);
+    return Children(nullptr, nullptr);
 }
 
 template<typename N>
