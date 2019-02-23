@@ -185,23 +185,22 @@ void paintBoardCallisto(QPainter& painter, qreal width, qreal height,
     {
         auto x = geo.get_x(p);
         auto y = geo.get_y(p);
-        painter.fillRect(QRectF(x * gridWidth, y * gridHeight, gridWidth,
-                                gridHeight), base);
+        painter.save();
+        painter.translate(x * gridWidth, y * gridHeight);
+        painter.scale(gridWidth, gridHeight);
+        painter.fillRect(QRectF(0, 0, 1, 1), base);
+        painter.save();
+        painter.translate(0.025, 0.025);
+        painter.scale(0.95, 0.95);
         if (CallistoGeometry::is_center_section(x, y, nuColors))
         {
-            painter.fillRect(QRectF(x * gridWidth + 0.05 * gridWidth,
-                                    y * gridHeight + 0.05 * gridHeight,
-                                    0.9 * gridWidth, 0.9 * gridHeight),
-                             centerBase);
-            paintSquareFrame(painter, x * gridWidth + 0.05 * gridWidth,
-                             y * gridHeight + 0.05 * gridHeight,
-                             0.9 * gridWidth, 0.9 * gridHeight, centerDark,
-                             centerLight);
+            painter.fillRect(QRectF(0, 0, 1, 1), centerBase);
+            paintSquareFrame(painter, 0, 0, 1, 1, centerDark, centerLight);
         }
         else
-            paintSquareFrame(painter, x * gridWidth + 0.05 * gridWidth,
-                             y * gridHeight + 0.05 * gridHeight,
-                             0.9 * gridWidth, 0.9 * gridHeight, dark, light);
+            paintSquareFrame(painter, 0, 0, 1, 1, dark, light);
+        painter.restore();
+        painter.restore();
     }
 }
 
@@ -361,27 +360,21 @@ void paintPiecesCallisto(
         bool hasDown =
                 (geo.is_onboard(x, y + 1)
                  && pieceId[p] == pieceId[geo.get_point(x, y + 1)]);
+        painter.save();
+        painter.translate((x + 0.025) * gridWidth, (y + 0.025) * gridHeight);
+        painter.scale(0.95 * gridWidth, 0.95 * gridHeight);
         if (! hasLeft && ! hasRight && ! hasUp && ! hasDown)
+            paintCallistoOnePiece(painter, 0, 0, 1, 1,
+                                  base[c], light[c], dark[c]);
+        else
         {
-            paintCallistoOnePiece(painter, x * gridWidth + 0.05 * gridWidth,
-                                  y * gridHeight + 0.05 * gridHeight,
-                                  0.9 * gridWidth, 0.9 * gridHeight, base[c],
-                                  light[c], dark[c]);
-            continue;
+            if (hasRight)
+                painter.fillRect(QRectF(1, 0, 0.05 / 0.95, 1), base[c]);
+            if (hasDown)
+                painter.fillRect(QRectF(0, 1, 1, 0.05 / 0.95), base[c]);
+            paintSquare(painter, 0, 0, 1, 1, base[c], light[c], dark[c]);
         }
-        if (hasRight)
-            painter.fillRect(
-                        QRectF(x * gridWidth + 0.96 * gridWidth,
-                               y * gridHeight + 0.07 * gridHeight,
-                               0.08 * gridWidth, 0.86 * gridHeight), base[c]);
-        if (hasDown)
-            painter.fillRect(
-                        QRectF(x * gridWidth + 0.07 * gridWidth,
-                               y * gridHeight + 0.96 * gridHeight,
-                               0.86 * gridWidth, 0.08 * gridHeight), base[c]);
-        paintSquare(painter, x * gridWidth + 0.05 * gridWidth,
-                    y * gridHeight + 0.05 * gridHeight, 0.9 * gridWidth,
-                    0.9 * gridHeight, base[c], light[c], dark[c]);
+        painter.restore();
     }
 }
 

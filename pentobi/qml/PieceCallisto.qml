@@ -77,7 +77,7 @@ Item
                          || pieceModel.junctionType[index] === 1
                 color: root.color[0]
                 width: board.gridWidth - square.width
-                height: 0.8 * board.gridHeight
+                height: 0.95 * board.gridHeight
                 x: (modelData.x - pieceModel.center.x + 1) * board.gridWidth
                    - width / 2
                 y: (modelData.y - pieceModel.center.y) * board.gridHeight
@@ -89,7 +89,7 @@ Item
                 visible: pieceModel.junctionType[index] === 0
                          || pieceModel.junctionType[index] === 2
                 color: root.color[0]
-                width: 0.8 * board.gridWidth
+                width: 0.95 * board.gridWidth
                 height: board.gridHeight - square.height
                 x: (modelData.x - pieceModel.center.x) * board.gridWidth
                    + (board.gridWidth - width) / 2
@@ -97,16 +97,23 @@ Item
                    - height / 2
                 antialiasing: true
             }
+            // Right-down junction
+            Rectangle {
+                visible: pieceModel.junctionType[index] === 0
+                color: root.color[0]
+                width: board.gridWidth - square.width
+                height: board.gridHeight - square.height
+                x: (modelData.x - pieceModel.center.x + 1) * board.gridWidth
+                   - width / 2
+                y: (modelData.y - pieceModel.center.y + 1) * board.gridHeight
+                   - height / 2
+                antialiasing: true
+            }
             Square {
                 id: square
 
-                // Avoid fractional piece element size
-                width:
-                    Math.round(0.9 * board.gridWidth * Screen.devicePixelRatio)
-                    / Screen.devicePixelRatio
-                height:
-                    Math.round(0.9 * board.gridHeight * Screen.devicePixelRatio)
-                    / Screen.devicePixelRatio
+                width: 0.95 * board.gridWidth
+                height: 0.95 * board.gridHeight
                 x: (modelData.x - pieceModel.center.x) * board.gridWidth
                    + (board.gridWidth - width) / 2
                 y: (modelData.y - pieceModel.center.y) * board.gridHeight

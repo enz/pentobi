@@ -33,7 +33,7 @@ Item
         if (board.isNexos)
             return Qt.size(1.5 * width, 1.5 * height)
         if (board.isCallisto)
-            return Qt.size(0.9 * width, 0.9 * height)
+            return Qt.size(0.95 * width, 0.95 * height)
         return Qt.size(width, height)
     }
     property alias pieces0: pieceSelector.pieces0
