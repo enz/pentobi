@@ -73,8 +73,7 @@ Item
         Item {
             // Right junction
             Rectangle {
-                visible: pieceModel.junctionType[index] === 0
-                         || pieceModel.junctionType[index] === 1
+                visible: pieceModel.junctionType[index] & 1
                 color: root.color[0]
                 width: board.gridWidth - square.width
                 height: 0.95 * board.gridHeight
@@ -86,8 +85,7 @@ Item
             }
             // Down junction
             Rectangle {
-                visible: pieceModel.junctionType[index] === 0
-                         || pieceModel.junctionType[index] === 2
+                visible: pieceModel.junctionType[index] & 2
                 color: root.color[0]
                 width: 0.95 * board.gridWidth
                 height: board.gridHeight - square.height
@@ -99,7 +97,7 @@ Item
             }
             // Right-down junction
             Rectangle {
-                visible: pieceModel.junctionType[index] === 0
+                visible: pieceModel.junctionType[index] === 3
                 color: root.color[0]
                 width: board.gridWidth - square.width
                 height: board.gridHeight - square.height

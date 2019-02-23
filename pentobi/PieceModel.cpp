@@ -129,15 +129,11 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
         {
             bool hasRight = points.contains(CoordPoint(p.x + 1, p. y));
             bool hasDown = points.contains(CoordPoint(p.x, p.y + 1));
-            int junctionType;
-            if (hasRight && hasDown)
-                junctionType = 0;
-            else if (hasRight)
-                junctionType = 1;
-            else if (hasDown)
-                junctionType = 2;
-            else
-                junctionType = 3;
+            int junctionType = 0;
+            if (hasRight)
+                junctionType |= 1;
+            if (hasDown)
+                junctionType |= 2;
             m_junctionType.append(junctionType);
         }
     m_center = findCenter(bd, points, true);
