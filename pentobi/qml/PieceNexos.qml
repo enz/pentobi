@@ -6,7 +6,6 @@
 
 import QtQuick 2.3
 
-// Piece for Nexos. See PieceClassic for comments.
 Item
 {
     id: root

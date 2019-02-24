@@ -6,7 +6,6 @@
 
 import QtQuick 2.3
 
-// Piece for GembloQ. See PieceClassic for comments.
 Item
 {
     id: root

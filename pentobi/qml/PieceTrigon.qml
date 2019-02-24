@@ -6,7 +6,6 @@
 
 import QtQuick 2.0
 
-// See PieceClassic.qml for comments
 Item
 {
     id: root
