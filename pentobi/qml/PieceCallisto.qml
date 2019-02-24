@@ -96,7 +96,7 @@ Item
             }
             // Right-down junction
             Rectangle {
-                visible: pieceModel.junctionType[index] === 3
+                visible: pieceModel.junctionType[index] === 7
                 color: root.color[0]
                 width: board.gridWidth - square.width
                 height: board.gridHeight - square.height

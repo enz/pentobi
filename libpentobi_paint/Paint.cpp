@@ -360,6 +360,9 @@ void paintPiecesCallisto(
         bool hasDown =
                 (geo.is_onboard(x, y + 1)
                  && pieceId[p] == pieceId[geo.get_point(x, y + 1)]);
+        bool hasRightDown =
+                (geo.is_onboard(x + 1, y + 1)
+                 && pieceId[p] == pieceId[geo.get_point(x + 1, y + 1)]);
         painter.save();
         painter.translate((x + 0.025) * gridWidth, (y + 0.025) * gridHeight);
         painter.scale(0.95 * gridWidth, 0.95 * gridHeight);
@@ -368,10 +371,13 @@ void paintPiecesCallisto(
                                   base[c], light[c], dark[c]);
         else
         {
+            auto d = 0.05 / 0.95;
             if (hasRight)
-                painter.fillRect(QRectF(1, 0, 0.05 / 0.95, 1), base[c]);
+                painter.fillRect(QRectF(1, 0, d, 1), base[c]);
             if (hasDown)
-                painter.fillRect(QRectF(0, 1, 1, 0.05 / 0.95), base[c]);
+                painter.fillRect(QRectF(0, 1, 1, d), base[c]);
+            if (hasRightDown)
+                painter.fillRect(QRectF(1, 1, d, d), base[c]);
             paintSquare(painter, 0, 0, 1, 1, base[c], light[c], dark[c]);
         }
         painter.restore();
