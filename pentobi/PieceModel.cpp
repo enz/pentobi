@@ -78,23 +78,23 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
             auto pointType = geo.get_point_type(p);
             if (pointType == 1)
             {
-                candidates.include(CoordPoint(p.x - 1, p. y));
-                candidates.include(CoordPoint(p.x + 1, p. y));
+                candidates.include({p.x - 1, p. y});
+                candidates.include({p.x + 1, p. y});
             }
             else if (pointType == 2)
             {
-                candidates.include(CoordPoint(p.x, p. y - 1));
-                candidates.include(CoordPoint(p.x, p. y + 1));
+                candidates.include({p.x, p. y - 1});
+                candidates.include({p.x, p. y + 1});
             }
         }
         m_junctions.reserve(candidates.size());
         m_junctionType.reserve(candidates.size());
         for (auto& p : candidates)
         {
-            bool hasLeft = points.contains(CoordPoint(p.x - 1, p. y));
-            bool hasRight = points.contains(CoordPoint(p.x + 1, p. y));
-            bool hasUp = points.contains(CoordPoint(p.x, p. y - 1));
-            bool hasDown = points.contains(CoordPoint(p.x, p. y + 1));
+            bool hasLeft = points.contains({p.x - 1, p. y});
+            bool hasRight = points.contains({p.x + 1, p. y});
+            bool hasUp = points.contains({p.x, p. y - 1});
+            bool hasDown = points.contains({p.x, p. y + 1});
             int junctionType;
             if (hasLeft && hasRight && hasUp && hasDown)
                 junctionType = 0;
@@ -127,8 +127,8 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
     if (isCallisto)
         for (auto& p : points)
         {
-            bool hasRight = points.contains(CoordPoint(p.x + 1, p. y));
-            bool hasDown = points.contains(CoordPoint(p.x, p.y + 1));
+            bool hasRight = points.contains({p.x + 1, p. y});
+            bool hasDown = points.contains({p.x, p.y + 1});
             int junctionType = 0;
             if (hasRight)
                 junctionType |= 1;

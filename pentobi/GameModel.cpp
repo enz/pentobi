@@ -81,7 +81,7 @@ QPointF getGameCoord(const Board& bd, Move mv)
     auto& geo = bd.get_geometry();
     PiecePoints movePoints;
     for (Point p : bd.get_move_points(mv))
-        movePoints.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
+        movePoints.push_back({geo.get_x(p), geo.get_y(p)});
     return PieceModel::findCenter(bd, movePoints, false);
 }
 

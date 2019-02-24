@@ -40,21 +40,21 @@ auto NexosGeometry::get_diag_coord(int x, int y) const -> DiagCoordList
     DiagCoordList l;
     if (get_point_type(x, y) == 1)
     {
-        l.push_back(CoordPoint(x - 2, y));
-        l.push_back(CoordPoint(x + 2, y));
-        l.push_back(CoordPoint(x - 1, y - 1));
-        l.push_back(CoordPoint(x + 1, y + 1));
-        l.push_back(CoordPoint(x - 1, y + 1));
-        l.push_back(CoordPoint(x + 1, y - 1));
+        l.push_back({x - 2, y});
+        l.push_back({x + 2, y});
+        l.push_back({x - 1, y - 1});
+        l.push_back({x + 1, y + 1});
+        l.push_back({x - 1, y + 1});
+        l.push_back({x + 1, y - 1});
     }
     else if (get_point_type(x, y) == 2)
     {
-        l.push_back(CoordPoint(x, y - 2));
-        l.push_back(CoordPoint(x, y + 2));
-        l.push_back(CoordPoint(x - 1, y - 1));
-        l.push_back(CoordPoint(x + 1, y + 1));
-        l.push_back(CoordPoint(x - 1, y + 1));
-        l.push_back(CoordPoint(x + 1, y - 1));
+        l.push_back({x, y - 2});
+        l.push_back({x, y + 2});
+        l.push_back({x - 1, y - 1});
+        l.push_back({x + 1, y + 1});
+        l.push_back({x - 1, y + 1});
+        l.push_back({x + 1, y - 1});
     }
     return l;
 }

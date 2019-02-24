@@ -75,10 +75,10 @@ template<class P>
 auto RectGeometry<P>::get_adj_coord(int x, int y) const -> AdjCoordList
 {
     AdjCoordList l;
-    l.push_back(CoordPoint(x, y - 1));
-    l.push_back(CoordPoint(x - 1, y));
-    l.push_back(CoordPoint(x + 1, y));
-    l.push_back(CoordPoint(x, y + 1));
+    l.push_back({x, y - 1});
+    l.push_back({x - 1, y});
+    l.push_back({x + 1, y});
+    l.push_back({x, y + 1});
     return l;
 }
 
@@ -87,10 +87,10 @@ auto RectGeometry<P>::get_diag_coord(int x, int y) const -> DiagCoordList
 {
     // See Geometry::get_diag_coord() about advantageous ordering of the list
     DiagCoordList l;
-    l.push_back(CoordPoint(x - 1, y - 1));
-    l.push_back(CoordPoint(x + 1, y + 1));
-    l.push_back(CoordPoint(x + 1, y - 1));
-    l.push_back(CoordPoint(x - 1, y + 1));
+    l.push_back({x - 1, y - 1});
+    l.push_back({x + 1, y + 1});
+    l.push_back({x + 1, y - 1});
+    l.push_back({x - 1, y + 1});
     return l;
 }
 

@@ -111,7 +111,7 @@ public:
 
     bool is_onboard(unsigned x, unsigned y) const;
 
-    bool is_onboard(int x, int y) const { return is_onboard(CoordPoint(x, y)); }
+    bool is_onboard(int x, int y) const { return is_onboard({x, y}); }
 
     /** Return the point at a given coordinate.
         @pre x < get_width()

@@ -39,15 +39,15 @@ auto TrigonGeometry::get_adj_coord(int x, int y) const -> AdjCoordList
     AdjCoordList l;
     if (get_point_type(x, y) == 0)
     {
-        l.push_back(CoordPoint(x - 1, y));
-        l.push_back(CoordPoint(x + 1, y));
-        l.push_back(CoordPoint(x, y + 1));
+        l.push_back({x - 1, y});
+        l.push_back({x + 1, y});
+        l.push_back({x, y + 1});
     }
     else
     {
-        l.push_back(CoordPoint(x, y - 1));
-        l.push_back(CoordPoint(x - 1, y));
-        l.push_back(CoordPoint(x + 1, y));
+        l.push_back({x, y - 1});
+        l.push_back({x - 1, y});
+        l.push_back({x + 1, y});
     }
     return l;
 }
@@ -58,27 +58,27 @@ auto TrigonGeometry::get_diag_coord(int x, int y) const -> DiagCoordList
     DiagCoordList l;
     if (get_point_type(x, y) == 0)
     {
-        l.push_back(CoordPoint(x - 2, y));
-        l.push_back(CoordPoint(x + 2, y));
-        l.push_back(CoordPoint(x - 1, y - 1));
-        l.push_back(CoordPoint(x + 1, y - 1));
-        l.push_back(CoordPoint(x + 1, y + 1));
-        l.push_back(CoordPoint(x - 1, y + 1));
-        l.push_back(CoordPoint(x, y - 1));
-        l.push_back(CoordPoint(x - 2, y + 1));
-        l.push_back(CoordPoint(x + 2, y + 1));
+        l.push_back({x - 2, y});
+        l.push_back({x + 2, y});
+        l.push_back({x - 1, y - 1});
+        l.push_back({x + 1, y - 1});
+        l.push_back({x + 1, y + 1});
+        l.push_back({x - 1, y + 1});
+        l.push_back({x, y - 1});
+        l.push_back({x - 2, y + 1});
+        l.push_back({x + 2, y + 1});
     }
     else
     {
-        l.push_back(CoordPoint(x - 2, y));
-        l.push_back(CoordPoint(x + 2, y));
-        l.push_back(CoordPoint(x - 1, y + 1));
-        l.push_back(CoordPoint(x + 1, y + 1));
-        l.push_back(CoordPoint(x + 1, y - 1));
-        l.push_back(CoordPoint(x - 1, y - 1));
-        l.push_back(CoordPoint(x, y + 1));
-        l.push_back(CoordPoint(x - 2, y - 1));
-        l.push_back(CoordPoint(x + 2, y - 1));
+        l.push_back({x - 2, y});
+        l.push_back({x + 2, y});
+        l.push_back({x - 1, y + 1});
+        l.push_back({x + 1, y + 1});
+        l.push_back({x + 1, y - 1});
+        l.push_back({x - 1, y - 1});
+        l.push_back({x, y + 1});
+        l.push_back({x - 2, y - 1});
+        l.push_back({x + 2, y - 1});
     }
     return l;
 }

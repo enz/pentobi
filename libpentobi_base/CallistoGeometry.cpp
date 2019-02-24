@@ -75,10 +75,10 @@ auto CallistoGeometry::get_adj_coord(
 auto CallistoGeometry::get_diag_coord(int x, int y) const -> DiagCoordList
 {
     DiagCoordList l;
-    l.push_back(CoordPoint(x, y - 1));
-    l.push_back(CoordPoint(x - 1, y));
-    l.push_back(CoordPoint(x + 1, y));
-    l.push_back(CoordPoint(x, y + 1));
+    l.push_back({x, y - 1});
+    l.push_back({x - 1, y});
+    l.push_back({x + 1, y});
+    l.push_back({x, y + 1});
     return l;
 }
 

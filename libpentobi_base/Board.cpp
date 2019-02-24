@@ -105,7 +105,7 @@ const Transform* Board::find_transform(Move mv) const
     auto& geo = get_geometry();
     PiecePoints points;
     for (Point p : get_move_points(mv))
-        points.push_back(CoordPoint(geo.get_x(p), geo.get_y(p)));
+        points.push_back({geo.get_x(p), geo.get_y(p)});
     return get_piece_info(get_move_piece(mv)).find_transform(geo, points);
 }
 

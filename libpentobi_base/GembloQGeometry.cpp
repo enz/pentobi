@@ -55,17 +55,17 @@ const GembloQGeometry& GembloQGeometry::get(unsigned nu_players)
 auto GembloQGeometry::get_adj_coord(int x, int y) const -> AdjCoordList
 {
     AdjCoordList l;
-    l.push_back(CoordPoint(x + 1, y));
-    l.push_back(CoordPoint(x - 1, y));
+    l.push_back({x + 1, y});
+    l.push_back({x - 1, y});
     switch (get_point_type(x, y))
     {
     case 0:
     case 3:
-        l.push_back(CoordPoint(x, y - 1));
+        l.push_back({x, y - 1});
         break;
     case 1:
     case 2:
-        l.push_back(CoordPoint(x, y + 1));
+        l.push_back({x, y + 1});
         break;
     }
     return l;
@@ -78,56 +78,56 @@ auto GembloQGeometry::get_diag_coord(int x, int y) const -> DiagCoordList
     switch (get_point_type(x, y))
     {
     case 0:
-        l.push_back(CoordPoint(x + 2, y - 1));
-        l.push_back(CoordPoint(x - 1, y + 1));
-        l.push_back(CoordPoint(x - 1, y - 1));
-        l.push_back(CoordPoint(x, y + 1));
-        l.push_back(CoordPoint(x + 3, y));
-        l.push_back(CoordPoint(x - 2, y + 1));
-        l.push_back(CoordPoint(x + 1, y + 1));
-        l.push_back(CoordPoint(x + 3, y - 1));
-        l.push_back(CoordPoint(x - 2, y));
-        l.push_back(CoordPoint(x + 2, y));
-        l.push_back(CoordPoint(x + 1, y - 1));
+        l.push_back({x + 2, y - 1});
+        l.push_back({x - 1, y + 1});
+        l.push_back({x - 1, y - 1});
+        l.push_back({x, y + 1});
+        l.push_back({x + 3, y});
+        l.push_back({x - 2, y + 1});
+        l.push_back({x + 1, y + 1});
+        l.push_back({x + 3, y - 1});
+        l.push_back({x - 2, y});
+        l.push_back({x + 2, y});
+        l.push_back({x + 1, y - 1});
         break;
     case 1:
-        l.push_back(CoordPoint(x - 2, y + 1));
-        l.push_back(CoordPoint(x + 1, y - 1));
-        l.push_back(CoordPoint(x + 1, y + 1));
-        l.push_back(CoordPoint(x, y - 1));
-        l.push_back(CoordPoint(x - 3, y));
-        l.push_back(CoordPoint(x + 2, y - 1));
-        l.push_back(CoordPoint(x - 1, y - 1));
-        l.push_back(CoordPoint(x - 3, y + 1));
-        l.push_back(CoordPoint(x + 2, y));
-        l.push_back(CoordPoint(x - 2, y));
-        l.push_back(CoordPoint(x - 1, y + 1));
+        l.push_back({x - 2, y + 1});
+        l.push_back({x + 1, y - 1});
+        l.push_back({x + 1, y + 1});
+        l.push_back({x, y - 1});
+        l.push_back({x - 3, y});
+        l.push_back({x + 2, y - 1});
+        l.push_back({x - 1, y - 1});
+        l.push_back({x - 3, y + 1});
+        l.push_back({x + 2, y});
+        l.push_back({x - 2, y});
+        l.push_back({x - 1, y + 1});
         break;
     case 2:
-        l.push_back(CoordPoint(x - 2, y - 1));
-        l.push_back(CoordPoint(x + 3, y + 1));
-        l.push_back(CoordPoint(x - 1, y + 1));
-        l.push_back(CoordPoint(x, y - 1));
-        l.push_back(CoordPoint(x + 3, y));
-        l.push_back(CoordPoint(x + 2, y + 1));
-        l.push_back(CoordPoint(x + 1, y - 1));
-        l.push_back(CoordPoint(x - 2, y));
-        l.push_back(CoordPoint(x + 2, y));
-        l.push_back(CoordPoint(x - 1, y - 1));
-        l.push_back(CoordPoint(x + 1, y + 1));
+        l.push_back({x - 2, y - 1});
+        l.push_back({x + 3, y + 1});
+        l.push_back({x - 1, y + 1});
+        l.push_back({x, y - 1});
+        l.push_back({x + 3, y});
+        l.push_back({x + 2, y + 1});
+        l.push_back({x + 1, y - 1});
+        l.push_back({x - 2, y});
+        l.push_back({x + 2, y});
+        l.push_back({x - 1, y - 1});
+        l.push_back({x + 1, y + 1});
         break;
     case 3:
-        l.push_back(CoordPoint(x - 3, y - 1));
-        l.push_back(CoordPoint(x + 2, y + 1));
-        l.push_back(CoordPoint(x + 1, y - 1));
-        l.push_back(CoordPoint(x, y + 1));
-        l.push_back(CoordPoint(x - 3, y));
-        l.push_back(CoordPoint(x - 2, y - 1));
-        l.push_back(CoordPoint(x - 1, y + 1));
-        l.push_back(CoordPoint(x + 2, y));
-        l.push_back(CoordPoint(x - 2, y));
-        l.push_back(CoordPoint(x + 1, y + 1));
-        l.push_back(CoordPoint(x - 1, y - 1));
+        l.push_back({x - 3, y - 1});
+        l.push_back({x + 2, y + 1});
+        l.push_back({x + 1, y - 1});
+        l.push_back({x, y + 1});
+        l.push_back({x - 3, y});
+        l.push_back({x - 2, y - 1});
+        l.push_back({x - 1, y + 1});
+        l.push_back({x + 2, y});
+        l.push_back({x - 2, y});
+        l.push_back({x + 1, y + 1});
+        l.push_back({x - 1, y - 1});
         break;
     }
     return l;
