@@ -26,6 +26,7 @@ to are property of their respective trademark holders. The trademark
 holders are not affiliated with the author of the program Pentobi.
 </p>
 </description>
+<launchable type="desktop-id">io.sourceforge.pentobi.desktop</launchable>
 <screenshots>
 <screenshot type="default">
 <image width="1248" height="702">
