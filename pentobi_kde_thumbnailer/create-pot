@@ -1,5 +1,0 @@
-#!/bin/bash
-
-cd `dirname "$0"`
-xgettext -o pentobi-kde-thumbnailer.pot \
-  io.sourceforge.pentobi.kde_thumbnailer.metainfo.xml.in

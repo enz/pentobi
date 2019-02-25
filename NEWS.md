@@ -18,6 +18,9 @@ Version 16.x (master)
 * The SVG to bitmap conversions at build time are now done using
   LibRsvg instead of a custom compiled Qt-based build helper to make
   cross-compilation easier.
+* The MetaInfo file for the KDE thumbnailer was removed as current
+  software installations GUIs do not show addons anyway and it caused
+  the Dolphin file manager appear in search results for Pentobi.
 * Renamed build configuration option PENTOBI_BUILD_TESTS to
   BUILD_TESTING for compatibility with CTest.
 
