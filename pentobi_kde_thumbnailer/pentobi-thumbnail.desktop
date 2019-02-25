@@ -1,11 +1,10 @@
 [Desktop Entry]
 Type=Service
 Name=Blokus games
+Name[de]=Blokus-Partien
+Name[fr]=Parties de Blokus
+Name[nb_NO]=Blokus-spill
+Name[zh_CN]=角斗士游戏
 ServiceTypes=ThumbCreator
 MimeType=application/x-blokus-sgf;
 X-KDE-Library=pentobi-thumbnail
-
-
-# Translations
-Name[de]=Blokus-Partien
-Name[fr]=Parties de Blokus
