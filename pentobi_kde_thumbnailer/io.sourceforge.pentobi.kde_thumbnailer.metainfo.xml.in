@@ -15,6 +15,7 @@ program Pentobi in the Dolphin file manager of the KDE desktop
 environment.
 </p>
 </description>
+<mimetypes><mimetype>application/x-blokus-sgf</mimetype></mimetypes>
 <screenshots>
 <screenshot type="default">
 <image width="1248" height="702">
