@@ -46,7 +46,7 @@ Item
         // guarantees a positive result. The simpler and faster expression
         // (pieceAngle - imgAngle + 360) % 360 can temporarily become negative
         // during transition animations if the rotate backward button is hit
-        // quickly in multiple times. In the other game variants, this only
+        // quickly multiple times. In the other game variants, this only
         // affects the pseudo-3D effect during the animation, which the user
         // won't notice, but here the opacity function would return 0, which
         // would make the piece temporarily disappear.
