@@ -23,8 +23,6 @@ Item {
 
             Image {
                 source: imageName
-                width: imageSourceSize.width
-                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
             }
@@ -58,8 +56,6 @@ Item {
 
             Image {
                 source: imageName
-                width: imageSourceSize.width
-                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 rotation: -90
@@ -95,8 +91,6 @@ Item {
 
             Image {
                 source: imageName
-                width: imageSourceSize.width
-                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 rotation: -180
@@ -132,8 +126,6 @@ Item {
 
             Image {
                 source: imageName
-                width: imageSourceSize.width
-                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 rotation: -270

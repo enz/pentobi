@@ -22,8 +22,6 @@ Item {
 
             Image {
                 source: imageName
-                width: imageSourceSize.width
-                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 mirror: ! isHorizontal
@@ -63,8 +61,6 @@ Item {
 
             Image {
                 source: imageName
-                width: imageSourceSize.width
-                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 mirror: isHorizontal
@@ -104,8 +100,6 @@ Item {
 
             Image {
                 source: imageName
-                width: imageSourceSize.width
-                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 mirror: ! isHorizontal
@@ -145,8 +139,6 @@ Item {
 
             Image {
                 source: imageName
-                width: imageSourceSize.width
-                height: imageSourceSize.height
                 sourceSize: imageSourceSize
                 antialiasing: true
                 mirror: isHorizontal
