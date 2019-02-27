@@ -41,10 +41,11 @@ Item
 
     function imageOpacity(pieceAngle, imgAngle) {
         // Don't use the faster (pieceAngle - imgAngle + 360) % 360 here. The
-        // effective angle can temporarily become negative during transitions
-        // if the rotate backward button is quickly hit multiple times, and
-        // unlike in the other game variants, the opacity function here returns
-        // 0 on negative angles, making the piece temporarily disappear.
+        // effective angle can temporarily become negative for all images
+        // during transitions if the rotate backward button is quickly hit
+        // multiple times, and unlike in the other game variants, the opacity
+        // function here returns 0 on negative angles, making the piece
+        // temporarily disappear.
         var angle = ((pieceAngle - imgAngle) % 360 + 360) % 360
         if (angle <= 90) return 0
         if (angle <= 180) return -Math.cos(angle * Math.PI / 180)
