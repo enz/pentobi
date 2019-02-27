@@ -20,15 +20,13 @@ Item
         }
     property Item parentUnplayed
     property string imageName:
-        "image://pentobi/quarter-square/" + color[0] + "/" + color[1] + "/" +
-    color[2]
+        "image://pentobi/quarter-square/" + color[0] + "/" + color[2]
+    property string imageNameBottom:
+        "image://pentobi/quarter-square/" + color[0] + "/" + color[1]
     // Avoid fractional sizes for square piece elements
     property real scaleUnplayed:
         parentUnplayed ? Math.floor(0.08 * 2 * parentUnplayed.width)
                          / (2 * board.gridWidth) : 0
-    property string imageNameBottom:
-        "image://pentobi/quarter-square-bottom/" + color[0] + "/" + color[1] +
-    "/" + color[2]
     property bool flippedX: Math.abs(flipX.angle - 180) < 90
     property real pieceAngle: flippedX ? rotation + 180 : rotation
     property real isSmall: scale < 0.5 ? 1 : 0

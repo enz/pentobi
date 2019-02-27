@@ -64,6 +64,12 @@ QPixmap ImageProvider::requestPixmap(const QString& id, QSize* size,
         else if (name == "junction-t")
             paintJunctionT(painter, 0, 0, width, height, base);
     }
+    else if (name == "quarter-square" && splitRef.size() == 3)
+    {
+        QColor base(splitRef[1]);
+        QColor light(splitRef[2]);
+        paintQuarterSquare(painter, 0, 0, width, height, base, light);
+    }
     else if (splitRef.size() == 4)
     {
         QColor base(splitRef[1]);
@@ -72,10 +78,6 @@ QPixmap ImageProvider::requestPixmap(const QString& id, QSize* size,
         if (name == "frame")
             paintCallistoOnePiece(painter, 0, 0, width, height, base, light,
                                   dark);
-        else if (name == "quarter-square")
-            paintQuarterSquare(painter, 0, 0, width, height, base, light);
-        else if (name == "quarter-square-bottom")
-            paintQuarterSquare(painter, 0, 0, width, height, base, dark);
         else if (name == "square")
             paintSquare(painter, 0, 0, width, height, base, light, dark);
         else if (name == "triangle")
