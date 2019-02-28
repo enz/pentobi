@@ -49,7 +49,10 @@ Item
         var angle = ((pieceAngle - imgAngle) % 360 + 360) % 360
         if (angle <= 90) return 0
         if (angle <= 180) return -Math.cos(angle * Math.PI / 180)
-        if (angle <= 270) return 1
+        if (angle <= 270) {
+            var o = -Math.cos(angle * Math.PI / 180)
+            return o + (1 - o) * (-Math.sin(angle * Math.PI / 180))
+        }
         return -Math.sin(angle * Math.PI / 180)
     }
 
