@@ -38,13 +38,14 @@ int mainAndroid()
     engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
     auto ctx = engine.rootContext();
     ctx->setContextProperty(QStringLiteral("initialFile"), QString());
-    ctx->setContextProperty(QStringLiteral("isDesktop"), false);
+    ctx->setContextProperty(QStringLiteral("isDesktop"), QVariant(false));
 #ifdef QT_DEBUG
-    ctx->setContextProperty(QStringLiteral("isDebug"), true);
+    ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(true));
 #else
-    ctx->setContextProperty(QStringLiteral("isDebug"), false);
+    ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(false));
 #endif
-    ctx->setContextProperty(QStringLiteral("openHelpExternally"), false);
+    ctx->setContextProperty(QStringLiteral("openHelpExternally"),
+                            QVariant(false));
     engine.load(QStringLiteral("qrc:///qml/Main.qml"));
     if (engine.rootObjects().empty())
         return 1;
@@ -147,11 +148,12 @@ int mainDesktop()
         engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
         auto ctx = engine.rootContext();
         ctx->setContextProperty(QStringLiteral("initialFile"), initialFile);
-        ctx->setContextProperty(QStringLiteral("isDesktop"), isDesktop);
+        ctx->setContextProperty(QStringLiteral("isDesktop"),
+                                QVariant(isDesktop));
 #ifdef QT_DEBUG
-        ctx->setContextProperty(QStringLiteral("isDebug"), true);
+        ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(true));
 #else
-        ctx->setContextProperty(QStringLiteral("isDebug"), false);
+        ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(false));
 #endif
 #ifdef PENTOBI_HELP_DIR
         ctx->setContextProperty(QStringLiteral("helpDir"),
@@ -160,9 +162,11 @@ int mainDesktop()
         ctx->setContextProperty(QStringLiteral("helpDir"), QString());
 #endif
 #ifdef PENTOBI_OPEN_HELP_EXTERNALLY
-        ctx->setContextProperty(QStringLiteral("openHelpExternally"), true);
+        ctx->setContextProperty(QStringLiteral("openHelpExternally"),
+                                QVariant(true));
 #else
-        ctx->setContextProperty(QStringLiteral("openHelpExternally"), false);
+        ctx->setContextProperty(QStringLiteral("openHelpExternally"),
+                                QVariant(false));
 #endif
         engine.load(QStringLiteral("qrc:///qml/Main.qml"));
         if (engine.rootObjects().empty())
