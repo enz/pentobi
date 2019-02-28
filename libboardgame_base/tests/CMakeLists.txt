@@ -1,4 +1,4 @@
-add_executable(unittest_libboardgame_base
+add_executable(test_libboardgame_base
     ArrayListTest.cpp
     MarkerTest.cpp
     OptionsTest.cpp
@@ -14,9 +14,9 @@ add_executable(unittest_libboardgame_base
     TreeReaderTest.cpp
     )
 
-target_link_libraries(unittest_libboardgame_base
+target_link_libraries(test_libboardgame_base
     boardgame_test_main
     boardgame_base
     )
 
-add_test(libboardgame_base unittest_libboardgame_base)
+add_test(libboardgame_base test_libboardgame_base)
