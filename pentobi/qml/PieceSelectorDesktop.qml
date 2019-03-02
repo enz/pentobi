@@ -13,7 +13,7 @@ Item {
     property alias pieces1: pieceList1.pieces
     property alias pieces2: pieceList2.pieces
     property alias pieces3: pieceList3.pieces
-    property int columns: pieces0 ? Math.ceil(pieces0.length / 2) : 11
+    property alias columns: pieceList0.columns
     property alias transitionsEnabled: transition.enabled
 
     signal piecePicked(var piece)
@@ -50,7 +50,7 @@ Item {
                 id: pieceList0
 
                 width: parent.width
-                columns: root.columns
+                columns: pieces0 ? Math.ceil(pieces0.length / 2) : 11
                 onPiecePicked: root.piecePicked(piece)
             }
             PieceList {

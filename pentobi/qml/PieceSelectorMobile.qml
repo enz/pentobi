@@ -13,8 +13,8 @@ Flickable {
     property alias pieces1: pieceList1.pieces
     property alias pieces2: pieceList2.pieces
     property alias pieces3: pieceList3.pieces
-    property int columns
-    property real rowSpacing
+    property alias columns: pieceList0.columns
+    property alias rowSpacing: pieceList0.rowSpacing
     property alias transitionsEnabled: transition.enabled
 
     signal piecePicked(var piece)
@@ -32,8 +32,6 @@ Flickable {
         id: pieceList0
 
         width: root.width
-        columns: root.columns
-        rowSpacing: root.rowSpacing
         onPiecePicked: root.piecePicked(piece)
     }
     PieceList {
