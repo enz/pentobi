@@ -136,7 +136,7 @@ function computerPlay() {
     if (! isComputerToPlay()) {
         setComputerNone()
         var variant = gameModel.gameVariant
-        if (variant == "classic_3" && gameModel.toPlay === 3) {
+        if (variant === "classic_3" && gameModel.toPlay === 3) {
             switch (gameModel.altPlayer) {
             case 0: computerPlays0 = true; break
             case 1: computerPlays1 = true; break
@@ -536,7 +536,7 @@ function openFileBlocking(file) {
         showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
     else
         setComputerNone()
-    if (gameModel.gameVariant != oldGameVariant)
+    if (gameModel.gameVariant !== oldGameVariant)
         gameDisplay.createPieces()
     gameDisplay.showToPlay()
     gameDisplay.enableAnimations = oldEnableAnimations
@@ -567,7 +567,7 @@ function openClipboardNoVerify() {
             showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
         else
             setComputerNone()
-        if (gameModel.gameVariant != oldGameVariant)
+        if (gameModel.gameVariant !== oldGameVariant)
             gameDisplay.createPieces()
         gameDisplay.showToPlay()
         gameDisplay.enableAnimations = oldEnableAnimations
