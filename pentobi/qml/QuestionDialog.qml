@@ -10,8 +10,6 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Dialog {
-    id: root
-
     function openWithCallback(text, acceptedFunc) {
         label.text = text
         _acceptedFunc = acceptedFunc

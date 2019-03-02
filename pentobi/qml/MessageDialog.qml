@@ -10,8 +10,6 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Dialog {
-    id: root
-
     property alias text: label.text
 
     footer: Pentobi.DialogButtonBox { ButtonOk { } }
