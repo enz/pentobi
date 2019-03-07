@@ -42,7 +42,6 @@ using libpentobi_base::BoardType;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
-using libpentobi_base::CoordPoint;
 using libpentobi_base::MovePoints;
 using libpentobi_base::PentobiTree;
 using libpentobi_base::PentobiTreeWriter;
