@@ -23,7 +23,8 @@ sudo apt-get install appstream cmake docbook-xsl g++ gettext itstool \
   qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \
   qml-module-qtquick2 qml-module-qtquick-controls2 \
   qml-module-qtquick-layouts qml-module-qtquick-window2 \
-  qml-module-qtwebview qtquickcontrols2-5-dev qttools5-dev xsltproc
+  qml-module-qtwebview qt5-default qtquickcontrols2-5-dev qttools5-dev \
+  xsltproc
 ```
 
 Building
