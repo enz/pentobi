@@ -160,6 +160,8 @@ bool createThumbnail(const QString& path, int width, int height, QImage& image)
     qreal paintWidth = min(static_cast<qreal>(width), height / ratio);
     qreal paintHeight = ratio * paintWidth;
     QPainter painter(&image);
+    if (! painter.isActive())
+        return false;
     painter.translate(QPointF((width - paintWidth) / 2,
                               (height - paintHeight) / 2));
     libpentobi_paint::paint(painter, paintWidth, paintHeight, variant, *geo,
