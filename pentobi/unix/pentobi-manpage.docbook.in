@@ -57,7 +57,7 @@ game Blokus.
 <para>
 The command can take the name of a game file to open at startup as an
 optional argument. The game file is expected to be in Pentobi's SGF
-format as documented in Pentobi-SGF.html in the Pentobi source package.
+format as documented in Pentobi-SGF.md in the Pentobi source package.
 </para>
 </refsection>
 
