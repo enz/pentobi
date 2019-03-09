@@ -578,6 +578,8 @@ function openClipboardNoVerify() {
 }
 
 function openRecentFile(file) {
+    if (! checkStoragePermission())
+        return
     verify(function() { openFile(file) })
 }
 
