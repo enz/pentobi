@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-18 12:11+0100\n"
-"PO-Revision-Date: 2019-02-18 12:13+0100\n"
+"POT-Creation-Date: 2019-03-09 10:33+0100\n"
+"PO-Revision-Date: 2019-03-09 10:34+0100\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr ""
+msgstr "Markus Enzenberger <enz@users.sourceforge.net>"
 
 #. (itstool) path: refmeta/refmiscinfo
 #: pentobi-manpage.docbook.in:11 io.sourceforge.pentobi.appdata.xml.in:6
@@ -72,12 +72,11 @@ msgstr ""
 msgid ""
 "The command can take the name of a game file to open at startup as an "
 "optional argument. The game file is expected to be in Pentobi's SGF format "
-"as documented in Pentobi-SGF.html in the Pentobi source package."
+"as documented in Pentobi-SGF.md in the Pentobi source package."
 msgstr ""
 "Der Befehl kann den Namen einer Spieldatei als optionales Argument haben, "
 "die beim Start geöffnet werden soll. Die Spieldatei muss im Pentobi-SGF-"
-"Format sein, wie beschrieben in Pentobi-SGF.html im Quelltextpaket von "
-"Pentobi."
+"Format sein, wie beschrieben in Pentobi-SGF.md im Quelltextpaket von Pentobi."
 
 #. (itstool) path: refsection/title
 #: pentobi-manpage.docbook.in:65
@@ -286,27 +285,27 @@ msgstr ""
 "sind Eigentum ihrer jeweiligen Markeninhaber. Die Markeninhaber stehen in "
 "keiner Verbindung mit dem Autor des Programms Pentobi."
 
-#: io.sourceforge.pentobi.appdata.xml.in:33
+#: io.sourceforge.pentobi.appdata.xml.in:34
 msgid "Game variant Classic"
 msgstr "Spielvariante Klassisch"
 
-#: io.sourceforge.pentobi.appdata.xml.in:38
+#: io.sourceforge.pentobi.appdata.xml.in:39
 msgid "Game variant Duo"
 msgstr "Spielvariante Duo"
 
-#: io.sourceforge.pentobi.appdata.xml.in:43
+#: io.sourceforge.pentobi.appdata.xml.in:44
 msgid "Game variant Trigon"
 msgstr "Spielvariante Trigon"
 
-#: io.sourceforge.pentobi.appdata.xml.in:48
+#: io.sourceforge.pentobi.appdata.xml.in:49
 msgid "Game variant Nexos"
 msgstr "Spielvariante Nexos"
 
-#: io.sourceforge.pentobi.appdata.xml.in:53
+#: io.sourceforge.pentobi.appdata.xml.in:54
 msgid "Game variant GembloQ"
 msgstr "Spielvariante GembloQ"
 
-#: io.sourceforge.pentobi.appdata.xml.in:59
+#: io.sourceforge.pentobi.appdata.xml.in:61
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
 
