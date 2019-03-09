@@ -23,8 +23,6 @@ bool PentobiThumbCreator::create(const QString& path, int width, int height,
                                  QImage& image)
 {
     image = QImage(width, height, QImage::Format_ARGB32);
-    if (image.isNull())
-        return false;
     return createThumbnail(path, width, height, image);
 }
 
