@@ -76,7 +76,6 @@ int main(int argc, char* argv[])
             throw QCoreApplication::translate(
                     "main", "Need input and output file argument");
         QImage image(size, size, QImage::Format_ARGB32);
-        image.fill(Qt::transparent);
         if (! createThumbnail(args.at(0), size, size, image))
             throw QCoreApplication::translate(
                     "main", "Not a valid Blokus SGF file");

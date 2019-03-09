@@ -141,6 +141,7 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
 
 bool createThumbnail(const QString& path, int width, int height, QImage& image)
 {
+    image.fill(Qt::transparent);
     TreeReader reader;
     reader.set_read_only_main_variation(true);
     reader.read(path.toLocal8Bit().constData());
