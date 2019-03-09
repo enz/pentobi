@@ -294,7 +294,7 @@ of the current value with one key/value pair per line, otherwise the
 parameter with the given key will be set to the given value. Generally
 useful parameters are:
 
-`avoid_symmetric_draw 0|1`
+`param avoid_symmetric_draw 0|1`
 In some game variants (Duo, Trigon_2), the second player can enforce a
 tie by answering each move by its symmetric counterpart if the first
 players misses the opportunity to break the symmetry in the center.
@@ -304,7 +304,7 @@ considering the first-play advantage. However, playing symmetrically
 could be considered bad style, so this behavior is avoided (value `1`)
 by default.
 
-`fixed_simulations` _n_
+`param fixed_simulations` _n_
 Use exactly _n_ MCTS simulations during a search. By default, the
 search engine uses levels, which determine how many MCTS simulations are
 run during a search, but as a function that increases with the move
@@ -313,7 +313,7 @@ game). For some experiments, it can be desirable to use a fixed number
 of simulations for each move. If this number is specified, the playing
 level is ignored.
 
-`use_book 0|1`
+`param use_book 0|1`
 Enable or disable the opening book.
 
 The other parameters are only interesting for developers.
@@ -325,14 +325,13 @@ engine. If no arguments are given, the response is a list of the current
 value with one key/value pair per line, otherwise the parameter with the
 given key will be set to the given value.
 
-`accept_illegal 0|1`
+`param_base accept_illegal 0|1`
 Accept move arguments to the `play` command that violate the rules
 of the game. If disabled, the `play` command will respond with an error,
 otherwise it will perform the moves.
 
-`resign 0|1`
-Allow the engine to respond with `resign` to the `genmove`
-command.
+`param_base resign 0|1`
+Allow the engine to respond with `resign` to the `genmove` command.
 
 `set_game` _variant_
 
