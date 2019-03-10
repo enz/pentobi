@@ -91,13 +91,14 @@ Pentobi.Dialog {
         case 2: gameDisplay.moveMarking = "all_number"; break
         case 3: gameDisplay.moveMarking = "none"; break
         }
-        if (isDesktop)
+        if (isDesktop) {
             gameDisplay.showMoveNumber = checkBoxMoveNumber.checked
             switch (comboBoxComment.currentIndex) {
             case 0: gameDisplay.commentMode = "always"; break
             case 1: gameDisplay.commentMode = "as_needed"; break
             case 2: gameDisplay.commentMode = "never"; break
             }
+        }
     }
     onApplied: {
         onAccepted()
