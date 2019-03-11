@@ -344,7 +344,7 @@ public:
         of a subtree reused from the previous search. */
     Float get_root_visit_count() const;
 
-    /** Abort a running search befor the time limit or maximum number
+    /** Abort a running search before the time limit or maximum number
         of simulations is reached. */
     void abort() { m_abort = true; }
 
