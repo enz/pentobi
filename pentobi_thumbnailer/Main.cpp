@@ -25,11 +25,18 @@ int main(int argc, char* argv[])
     libboardgame_base::LogInitializer log_initializer;
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
     QCoreApplication app(argc, argv);
+
+    // Qt translations needed for QCommandLineParser
     QTranslator qtTranslator;
     qtTranslator.load(
                 "qt_" + QLocale::system().name(),
                 QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     QCoreApplication::installTranslator(&qtTranslator);
+
+    QTranslator translator;
+    translator.load(":i18n/" + QLocale::system().name());
+    QCoreApplication::installTranslator(&translator);
+
     try
     {
         QCommandLineParser parser;

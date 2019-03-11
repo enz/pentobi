@@ -1,3 +1,5 @@
+find_package(Qt5Core 5.11 REQUIRED)
+find_package(Qt5LinguistTools 5.11 REQUIRED)
 find_package(Gettext 0.18 REQUIRED)
 find_program(ITSTOOL itstool)
 if(NOT ITSTOOL)
@@ -34,7 +36,26 @@ foreach(lang ${linguas})
     list(APPEND mo_files ${lang}.mo)
 endforeach()
 
-add_executable(pentobi-thumbnailer Main.cpp ${man_files})
+qt5_add_translation(pentobi_thumbnailer_QM
+    i18n/de.ts
+    OPTIONS -removeidentical -nounfinished
+    )
+add_custom_command(
+    OUTPUT "translations.qrc"
+    COMMAND ${CMAKE_COMMAND} -E copy
+    ${CMAKE_CURRENT_SOURCE_DIR}/i18n/translations.qrc .
+    DEPENDS i18n/translations.qrc ${pentobi_thumbnailer_QM}
+    )
+
+qt5_add_resources(pentobi_thumbnailer_RC_SRCS
+    ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
+    )
+
+add_executable(pentobi-thumbnailer
+    Main.cpp
+    ${pentobi_thumbnailer_RC_SRCS}
+    ${man_files}
+    )
 
 target_link_libraries(pentobi-thumbnailer pentobi_thumbnail)
 
