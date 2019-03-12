@@ -5,12 +5,12 @@
     <name>main</name>
     <message>
         <source>thumbnailer for Blokus game records as used by Pentobi</source>
-        <translation>Vorschaubildgenerator für Spieldateien des Brettspiels Blokus, wie vom Programm Pentobi verwendet</translation>
+        <translation>Vorschaubildgenerator für Blokus-Spieldateien, wie vom Programm Pentobi verwendet</translation>
     </message>
     <message>
         <source>Generate image with height and width &lt;size&gt;.</source>
         <extracomment>Description for command line option --size</extracomment>
-        <translation>Bilder mit Höhe un Breite &lt;Größe&gt; generieren</translation>
+        <translation>Bilder mit Höhe und Breite &lt;Größe&gt; generieren.</translation>
     </message>
     <message>
         <source>size</source>
@@ -33,7 +33,7 @@
     </message>
     <message>
         <source>PNG image output file.</source>
-        <translation>PNG-Bild-Ausgabedatei</translation>
+        <translation>PNG-Bild-Ausgabedatei.</translation>
     </message>
     <message>
         <source>Invalid image size</source>
