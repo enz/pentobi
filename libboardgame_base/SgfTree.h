@@ -39,13 +39,13 @@ public:
 
     /** Check if the tree was modified since the construction or the last call
         to init() or clear_modified() */
-    bool is_modified() const;
+    bool is_modified() const { return m_modified; }
 
-    void set_modified(bool is_modified = true);
+    void set_modified(bool is_modified = true) { m_modified = is_modified; }
 
-    void clear_modified();
+    void clear_modified() { m_modified = false; }
 
-    const SgfNode& get_root() const;
+    const SgfNode& get_root() const { return *m_root; }
 
     const SgfNode& create_new_child(const SgfNode& node);
 
@@ -140,7 +140,7 @@ public:
 
     void set_application(const string& name, const string& version = "");
 
-    string get_date() const;
+    string get_date() const { return m_root->get_property("DT", ""); }
 
     void set_date(const string& date);
 
@@ -149,15 +149,15 @@ public:
 
     void set_date_today();
 
-    string get_event() const;
+    string get_event() const { return m_root->get_property("EV", ""); }
 
     void set_event(const string& event);
 
-    string get_round() const;
+    string get_round() const { return m_root->get_property("RO", ""); }
 
     void set_round(const string& round);
 
-    string get_time() const;
+    string get_time() const { return m_root->get_property("TM", ""); }
 
     void set_time(const string& time);
 
@@ -176,41 +176,6 @@ inline void SgfTree::append(const SgfNode& node, unique_ptr<SgfNode> child)
     if (child)
         m_modified = true;
     non_const(node).append(move(child));
-}
-
-inline void SgfTree::clear_modified()
-{
-    m_modified = false;
-}
-
-inline string SgfTree::get_date() const
-{
-    return m_root->get_property("DT", "");
-}
-
-inline string SgfTree::get_event() const
-{
-    return m_root->get_property("EV", "");
-}
-
-inline bool SgfTree::is_modified() const
-{
-    return m_modified;
-}
-
-inline string SgfTree::get_round() const
-{
-    return m_root->get_property("RO", "");
-}
-
-inline const SgfNode& SgfTree::get_root() const
-{
-    return *m_root;
-}
-
-inline string SgfTree::get_time() const
-{
-    return m_root->get_property("TM", "");
 }
 
 inline SgfNode& SgfTree::non_const(const SgfNode& node)
@@ -239,11 +204,6 @@ inline void SgfTree::set_date(const string& date)
 inline void SgfTree::set_event(const string& event)
 {
     set_property_remove_empty(get_root(), "EV", event);
-}
-
-inline void SgfTree::set_modified(bool is_modified)
-{
-    m_modified = is_modified;
 }
 
 template<typename T>

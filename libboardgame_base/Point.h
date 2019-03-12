@@ -50,7 +50,7 @@ public:
     static constexpr unsigned range = range_onboard + 1;
 
 
-    static Point null();
+    static Point null() { return Point(value_null); }
 
 
     LIBBOARDGAME_FORCE_INLINE Point();
@@ -128,12 +128,6 @@ inline bool Point<M, W, H, I>::is_null() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i == value_null;
-}
-
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline auto Point<M, W, H, I>::null() -> Point
-{
-    return Point(value_null);
 }
 
 template<unsigned M, unsigned W, unsigned H, typename I>

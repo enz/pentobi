@@ -27,7 +27,7 @@ public:
     using Point = P;
 
 
-    Marker();
+    Marker() { reset(); }
 
     void clear();
 
@@ -35,7 +35,7 @@ public:
         @return true if the point was already marked. */
     bool set(Point p);
 
-    bool operator[](Point p) const;
+    bool operator[](Point p) const { return m_a[p.to_int()] == m_current; }
 
     /** Set up for overflow test (for testing purposes only).
         The function is equivalent to calling reset() and then clear()
@@ -52,18 +52,6 @@ private:
     void reset();
 };
 
-
-template<class P>
-inline Marker<P>::Marker()
-{
-    reset();
-}
-
-template<class P>
-bool Marker<P>::operator[](Point p) const
-{
-    return m_a[p.to_int()] == m_current;
-}
 
 template<class P>
 inline void Marker<P>::clear()

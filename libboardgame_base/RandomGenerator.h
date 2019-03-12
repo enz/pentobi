@@ -59,9 +59,9 @@ public:
     RandomGenerator(const RandomGenerator&) = delete;
     RandomGenerator& operator=(const RandomGenerator&) = delete;
 
-    void set_seed(ResultType seed);
+    void set_seed(ResultType seed) { m_generator.seed(seed); }
 
-    ResultType generate();
+    ResultType generate() { return m_generator(); }
 
     /** Generate a float in [a..b]. */
     float generate_float(float a, float b);
@@ -73,11 +73,6 @@ private:
     Generator m_generator;
 };
 
-inline RandomGenerator::ResultType RandomGenerator::generate()
-{
-    return m_generator();
-}
-
 inline double RandomGenerator::generate_double(double a, double b)
 {
     uniform_real_distribution<double> distribution(a, b);
@@ -88,11 +83,6 @@ inline float RandomGenerator::generate_float(float a, float b)
 {
     uniform_real_distribution<float> distribution(a, b);
     return distribution(m_generator);
-}
-
-inline void RandomGenerator::set_seed(ResultType seed)
-{
-    m_generator.seed(seed);
 }
 
 //-----------------------------------------------------------------------------

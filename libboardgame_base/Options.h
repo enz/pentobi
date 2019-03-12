@@ -81,7 +81,7 @@ public:
 
     /** Remaining command line arguments that are not an option or an option
         value. */
-    const vector<string>& get_args() const;
+    const vector<string>& get_args() const { return m_args; }
 
 private:
     set<string> m_names;
@@ -109,11 +109,6 @@ T Options::get(const string& name, const T& default_value) const
     if (! contains(name))
         return default_value;
     return get<T>(name);
-}
-
-inline const vector<string>& Options::get_args() const
-{
-    return m_args;
 }
 
 //----------------------------------------------------------------------------

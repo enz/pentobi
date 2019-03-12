@@ -27,7 +27,7 @@ public:
     /** Constructor.
         @param line The command line. The lifetime of this parameter
         must exceed the lifetime of the class instance. */
-    explicit Arguments(const CmdLine& line);
+    explicit Arguments(const CmdLine& line) : m_line(line) { }
 
     /** Get argument.        
         @param i Argument index starting with 0
@@ -58,7 +58,7 @@ public:
     /** Check that command has no arguments.
         @throws Failure If command has arguments
     */
-    void check_empty() const;
+    void check_empty() const { check_size(0); }
 
     /** Check number of arguments.
         @param n Expected number of arguments
@@ -93,16 +93,6 @@ private:
     template<typename T>
     static string get_type_name();
 };
-
-inline Arguments::Arguments(const CmdLine& line)
-    : m_line(line)
-{
-}
-
-inline void Arguments::check_empty() const
-{
-    check_size(0);
-}
 
 inline string_view Arguments::get_line() const
 {

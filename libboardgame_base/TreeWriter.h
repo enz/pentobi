@@ -32,11 +32,15 @@ public:
         Should be set before starting to write. */
     /** @{ */
 
-    void set_one_prop_per_line(bool enable);
+    void set_one_prop_per_line(bool enable) {
+        m_writer.set_one_prop_per_line(enable);
+    }
 
-    void set_one_prop_value_per_line(bool enable);
+    void set_one_prop_value_per_line(bool enable) {
+        m_writer.set_one_prop_value_per_line(enable);
+    }
 
-    void set_indent(int indent);
+    void set_indent(int indent) { m_writer.set_indent(indent); }
 
     /** @} */ // @name
 
@@ -50,21 +54,6 @@ private:
 
     void write_node(const SgfNode& node);
 };
-
-inline void TreeWriter::set_one_prop_per_line(bool enable)
-{
-    m_writer.set_one_prop_per_line(enable);
-}
-
-inline void TreeWriter::set_one_prop_value_per_line(bool enable)
-{
-    m_writer.set_one_prop_value_per_line(enable);
-}
-
-inline void TreeWriter::set_indent(int indent)
-{
-    m_writer.set_indent(indent);
-}
 
 //-----------------------------------------------------------------------------
 

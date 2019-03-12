@@ -154,9 +154,9 @@ public:
     using Geometry = libboardgame_base::Geometry<P>;
 
 
-    T& operator[](const Point& p);
+    T& operator[](const Point& p) { return m_a[p.to_int()]; }
 
-    const T& operator[](const Point& p) const;
+    const T& operator[](const Point& p) const { return m_a[p.to_int()]; }
 
     /** Fill all on-board points for a given geometry with a value. */
     void fill(const T& val, const Geometry& geo);
@@ -174,18 +174,6 @@ private:
     T m_a[Point::range];
 };
 
-
-template<class P, typename T>
-inline T& GridExt<P, T>::operator[](const Point& p)
-{
-    return m_a[p.to_int()];
-}
-
-template<class P, typename T>
-inline const T& GridExt<P, T>::operator[](const Point& p) const
-{
-    return m_a[p.to_int()];
-}
 
 template<class P, typename T>
 inline void GridExt<P, T>::fill(const T& val, const Geometry& geo)

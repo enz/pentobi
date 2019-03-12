@@ -146,7 +146,8 @@ public:
     const DiagList& get_diag(Point p) const;
 
 protected:
-    explicit Geometry(unique_ptr<StringRep> string_rep = make_unique<StdStringRep>());
+    explicit Geometry(
+            unique_ptr<StringRep> string_rep = make_unique<StdStringRep>());
 
     /** Initialize.
         Subclasses must call this function in their constructors. */
@@ -183,7 +184,7 @@ private:
     string m_string[Point::range];
 
 #ifdef LIBBOARDGAME_DEBUG
-    bool is_valid(Point p) const;
+    bool is_valid(Point p) const { return p.to_int() < m_range; }
 #endif
 };
 
@@ -320,16 +321,6 @@ bool Geometry<P>::is_onboard(CoordPoint p) const
 {
     return p.is_onboard(m_width, m_height) && ! get_point(p.x, p.y).is_null();
 }
-
-#ifdef LIBBOARDGAME_DEBUG
-
-template<class P>
-inline bool Geometry<P>::is_valid(Point p) const
-{
-    return p.to_int() < m_range;
-}
-
-#endif
 
 template<class P>
 inline const string& Geometry<P>::to_string(Point p) const

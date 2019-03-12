@@ -52,41 +52,22 @@ public:
     class Iterator
     {
     public:
-        explicit Iterator(const SgfNode* node)
-        {
-            m_node = node;
-        }
+        explicit Iterator(const SgfNode* node) { m_node = node; }
 
-        bool operator==(Iterator it) const
-        {
-            return m_node == it.m_node;
-        }
+        bool operator==(Iterator it) const { return m_node == it.m_node; }
 
-        bool operator!=(Iterator it) const
-        {
-            return m_node != it.m_node;
-        }
+        bool operator!=(Iterator it) const { return m_node != it.m_node; }
 
-        Iterator& operator++()
-        {
+        Iterator& operator++() {
             m_node = m_node->get_sibling();
             return *this;
         }
 
-        const SgfNode& operator*() const
-        {
-            return *m_node;
-        }
+        const SgfNode& operator*() const { return *m_node; }
 
-        const SgfNode* operator->() const
-        {
-            return m_node;
-        }
+        const SgfNode* operator->() const { return m_node; }
 
-        bool is_null() const
-        {
-            return m_node == nullptr;
-        }
+        bool is_null() const { return m_node == nullptr; }
 
     private:
         const SgfNode* m_node;
@@ -157,31 +138,28 @@ public:
         front. */
     bool move_property_to_front(const string& id);
 
-    const forward_list<Property>& get_properties() const
-    {
+    const forward_list<Property>& get_properties() const {
         return m_properties;
     }
 
-    Children get_children() const
-    {
-        return Children(*this);
-    }
+    Children get_children() const { return Children(*this); }
 
-    SgfNode* get_sibling();
+    SgfNode* get_sibling() { return m_sibling.get(); }
 
     SgfNode& get_first_child();
 
     const SgfNode& get_first_child() const;
 
-    SgfNode* get_first_child_or_null();
+    SgfNode* get_first_child_or_null() { return m_first_child.get(); }
 
-    const SgfNode* get_first_child_or_null() const;
+    const SgfNode* get_first_child_or_null() const {
+        return m_first_child.get(); }
 
-    const SgfNode* get_sibling() const;
+    const SgfNode* get_sibling() const { return m_sibling.get(); }
 
     const SgfNode* get_previous_sibling() const;
 
-    bool has_children() const;
+    bool has_children() const { return static_cast<bool>(m_first_child); }
 
     bool has_single_child() const;
 
@@ -196,14 +174,14 @@ public:
         @pre has_single_child() */
     const SgfNode& get_child() const;
 
-    bool has_parent() const;
+    bool has_parent() const { return m_parent != nullptr; }
 
     /** Get parent node.
         @pre has_parent() */
     const SgfNode& get_parent() const;
 
     /** Get parent node or null if node has no parent. */
-    const SgfNode* get_parent_or_null() const;
+    const SgfNode* get_parent_or_null() const { return m_parent; }
 
     SgfNode& get_parent();
 
@@ -214,7 +192,7 @@ public:
     unique_ptr<SgfNode> remove_child(SgfNode& child);
 
     /** Remove all children. */
-    void remove_children();
+    void remove_children() { m_first_child.reset(); }
 
     /** @pre has_parent() */
     void make_first_child();
@@ -268,11 +246,6 @@ inline SgfNode& SgfNode::get_parent()
     return *m_parent;
 }
 
-inline const SgfNode* SgfNode::get_parent_or_null() const
-{
-    return m_parent;
-}
-
 inline SgfNode& SgfNode::get_first_child()
 {
     LIBBOARDGAME_ASSERT(has_children());
@@ -283,36 +256,6 @@ inline const SgfNode& SgfNode::get_first_child() const
 {
     LIBBOARDGAME_ASSERT(has_children());
     return *m_first_child;
-}
-
-inline SgfNode* SgfNode::get_first_child_or_null()
-{
-    return m_first_child.get();
-}
-
-inline const SgfNode* SgfNode::get_first_child_or_null() const
-{
-    return m_first_child.get();
-}
-
-inline SgfNode* SgfNode::get_sibling()
-{
-    return m_sibling.get();
-}
-
-inline const SgfNode* SgfNode::get_sibling() const
-{
-    return m_sibling.get();
-}
-
-inline bool SgfNode::has_children() const
-{
-    return static_cast<bool>(m_first_child);
-}
-
-inline bool SgfNode::has_parent() const
-{
-    return m_parent != nullptr;
 }
 
 inline bool SgfNode::has_single_child() const
@@ -336,11 +279,6 @@ T SgfNode::parse_property(const string& id, const T& default_value) const
     if (! has_property(id))
         return default_value;
     return parse_property<T>(id);
-}
-
-inline void SgfNode::remove_children()
-{
-    m_first_child.reset();
 }
 
 template<typename T>

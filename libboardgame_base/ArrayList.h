@@ -48,7 +48,7 @@ public:
 
     ArrayList() = default;
 
-    ArrayList(const ArrayList& l);
+    ArrayList(const ArrayList& l) { *this = l; }
 
     ArrayList(const initializer_list<T>& l);
 
@@ -70,27 +70,27 @@ public:
 
     bool operator!=(const ArrayList& array_list) const;
 
-    iterator begin();
+    iterator begin() { return m_a.begin(); }
 
-    const_iterator begin() const;
+    const_iterator begin() const { return m_a.begin(); }
 
-    iterator end();
+    iterator end() { return begin() + m_size; }
 
-    const_iterator end() const;
+    const_iterator end() const { return begin() + m_size; }
 
     T& back();
 
     const T& back() const;
 
-    I size() const;
+    I size() const { return m_size; }
 
-    bool empty() const;
+    bool empty() const { return m_size == 0; }
 
     const T& pop_back();
 
     void push_back(const T& t);
 
-    void clear();
+    void clear() { m_size = 0; }
 
     void assign(const T& t);
 
@@ -127,12 +127,6 @@ private:
 
     I m_size = 0;
 };
-
-template<typename T, unsigned M, typename I>
-ArrayList<T, M, I>::ArrayList(const ArrayList& l)
-{
-    *this = l;
-}
 
 template<typename T, unsigned M, typename I>
 ArrayList<T, M, I>::ArrayList(const initializer_list<T>& l)
@@ -198,45 +192,9 @@ inline const T& ArrayList<T, M, I>::back() const
 }
 
 template<typename T, unsigned M, typename I>
-inline auto ArrayList<T, M, I>::begin() -> iterator
-{
-    return m_a.begin();
-}
-
-template<typename T, unsigned M, typename I>
-inline auto ArrayList<T, M, I>::begin() const -> const_iterator
-{
-    return m_a.begin();
-}
-
-template<typename T, unsigned M, typename I>
-inline void ArrayList<T, M, I>::clear()
-{
-    m_size = 0;
-}
-
-template<typename T, unsigned M, typename I>
 bool ArrayList<T, M, I>::contains(const T& t) const
 {
     return find(begin(), end(), t) != end();
-}
-
-template<typename T, unsigned M, typename I>
-inline bool ArrayList<T, M, I>::empty() const
-{
-    return m_size == 0;
-}
-
-template<typename T, unsigned M, typename I>
-inline auto ArrayList<T, M, I>::end() -> iterator
-{
-    return begin() + m_size;
-}
-
-template<typename T, unsigned M, typename I>
-inline auto ArrayList<T, M, I>::end() const -> const_iterator
-{
-    return begin() + m_size;
 }
 
 template<typename T, unsigned M, typename I>
@@ -319,12 +277,6 @@ inline void ArrayList<T, M, I>::resize(I size)
 {
     LIBBOARDGAME_ASSERT(size <= max_size);
     m_size = size;
-}
-
-template<typename T, unsigned M, typename I>
-inline I ArrayList<T, M, I>::size() const
-{
-    return m_size;
 }
 
 //-----------------------------------------------------------------------------

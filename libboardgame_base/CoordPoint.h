@@ -42,13 +42,13 @@ struct CoordPoint
 
     CoordPoint operator+(CoordPoint p) const;
 
-    CoordPoint operator-(CoordPoint p) const;
+    CoordPoint operator-(CoordPoint p) const { return {x - p.x, y - p.y}; }
 
     CoordPoint& operator+=(CoordPoint p);
 
     CoordPoint& operator-=(CoordPoint p);
 
-    bool is_null() const;
+    bool is_null() const { return x == numeric_limits<int>::max(); }
 
     bool is_onboard(unsigned width, unsigned height) const;
 };
@@ -95,11 +95,6 @@ inline CoordPoint& CoordPoint::operator+=(CoordPoint p)
     return *this;
 }
 
-inline CoordPoint CoordPoint::operator-(CoordPoint p) const
-{
-    return {x - p.x, y - p.y};
-}
-
 inline CoordPoint& CoordPoint::operator-=(CoordPoint p)
 {
     *this = *this - p;
@@ -121,11 +116,6 @@ inline bool CoordPoint::is_onboard(int x, int y, unsigned width,
 inline bool CoordPoint::is_onboard(unsigned width, unsigned height) const
 {
     return is_onboard(x, y, width, height);
-}
-
-inline bool CoordPoint::is_null() const
-{
-    return x == numeric_limits<int>::max();
 }
 
 //-----------------------------------------------------------------------------

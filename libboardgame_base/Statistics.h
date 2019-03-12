@@ -29,15 +29,15 @@ public:
     /** Constructor.
         @param init_val The value to return in get_mean() if count is 0. This
         value does not affect the mean returned if count is greater 0. */
-    explicit StatisticsBase(FLOAT init_val = 0);
+    explicit StatisticsBase(FLOAT init_val = 0) { clear(init_val); }
 
     void add(FLOAT val);
 
     void clear(FLOAT init_val = 0);
 
-    FLOAT get_count() const;
+    FLOAT get_count() const { return m_count; }
 
-    FLOAT get_mean() const;
+    FLOAT get_mean() const { return m_mean; }
 
     void write(ostream& out, bool fixed = false, int precision = 6) const;
 
@@ -46,12 +46,6 @@ private:
 
     FLOAT m_mean;
 };
-
-template<typename FLOAT>
-inline StatisticsBase<FLOAT>::StatisticsBase(FLOAT init_val)
-{
-    clear(init_val);
-}
 
 template<typename FLOAT>
 void StatisticsBase<FLOAT>::add(FLOAT val)
@@ -71,18 +65,6 @@ inline void StatisticsBase<FLOAT>::clear(FLOAT init_val)
 }
 
 template<typename FLOAT>
-inline FLOAT StatisticsBase<FLOAT>::get_count() const
-{
-    return m_count;
-}
-
-template<typename FLOAT>
-inline FLOAT StatisticsBase<FLOAT>::get_mean() const
-{
-    return m_mean;
-}
-
-template<typename FLOAT>
 void StatisticsBase<FLOAT>::write(ostream& out, bool fixed,
                                   int precision) const
 {
@@ -98,21 +80,21 @@ template<typename FLOAT = double>
 class Statistics
 {
 public:
-    explicit Statistics(FLOAT init_val = 0);
+    explicit Statistics(FLOAT init_val = 0) { clear(init_val); }
 
     void add(FLOAT val);
 
     void clear(FLOAT init_val = 0);
 
-    FLOAT get_mean() const;
+    FLOAT get_mean() const { return m_statistics_base.get_mean(); }
 
-    FLOAT get_count() const;
+    FLOAT get_count() const { return m_statistics_base.get_count(); }
 
     FLOAT get_deviation() const;
 
     FLOAT get_error() const;
 
-    FLOAT get_variance() const;
+    FLOAT get_variance() const { return m_variance; }
 
     void write(ostream& out, bool fixed = false, int precision = 6) const;
 
@@ -121,12 +103,6 @@ private:
 
     FLOAT m_variance;
 };
-
-template<typename FLOAT>
-inline Statistics<FLOAT>::Statistics(FLOAT init_val)
-{
-    clear(init_val);
-}
 
 template<typename FLOAT>
 void Statistics<FLOAT>::add(FLOAT val)
@@ -156,12 +132,6 @@ inline void Statistics<FLOAT>::clear(FLOAT init_val)
 }
 
 template<typename FLOAT>
-inline FLOAT Statistics<FLOAT>::get_count() const
-{
-    return m_statistics_base.get_count();
-}
-
-template<typename FLOAT>
 inline FLOAT Statistics<FLOAT>::get_deviation() const
 {
     // m_variance can become negative (due to rounding errors?)
@@ -173,18 +143,6 @@ FLOAT Statistics<FLOAT>::get_error() const
 {
     auto count = get_count();
     return count == 0 ? 0 : get_deviation() / sqrt(count);
-}
-
-template<typename FLOAT>
-inline FLOAT Statistics<FLOAT>::get_mean() const
-{
-    return m_statistics_base.get_mean();
-}
-
-template<typename FLOAT>
-inline FLOAT Statistics<FLOAT>::get_variance() const
-{
-    return m_variance;
 }
 
 template<typename FLOAT>
@@ -203,25 +161,25 @@ template<typename FLOAT = double>
 class StatisticsExt
 {
 public:
-    explicit StatisticsExt(FLOAT init_val = 0);
+    explicit StatisticsExt(FLOAT init_val = 0) { clear(init_val); }
 
     void add(FLOAT val);
 
     void clear(FLOAT init_val = 0);
 
-    FLOAT get_mean() const;
+    FLOAT get_mean() const { return m_statistics.get_mean(); }
 
-    FLOAT get_error() const;
+    FLOAT get_error() const { return m_statistics.get_error(); }
 
-    FLOAT get_count() const;
+    FLOAT get_count() const { return m_statistics.get_count(); }
 
-    FLOAT get_max() const;
+    FLOAT get_max() const { return m_max; }
 
-    FLOAT get_min() const;
+    FLOAT get_min() const { return m_min; }
 
-    FLOAT get_deviation() const;
+    FLOAT get_deviation() const { return m_statistics.get_deviation(); }
 
-    FLOAT get_variance() const;
+    FLOAT get_variance() const { return m_statistics.get_variance(); }
 
     void write(ostream& out, bool fixed = false, int precision = 6,
                bool integer_values = false, bool with_error = false) const;
@@ -239,12 +197,6 @@ private:
 };
 
 template<typename FLOAT>
-inline StatisticsExt<FLOAT>::StatisticsExt(FLOAT init_val)
-{
-    clear(init_val);
-}
-
-template<typename FLOAT>
 void StatisticsExt<FLOAT>::add(FLOAT val)
 {
     m_statistics.add(val);
@@ -260,48 +212,6 @@ inline void StatisticsExt<FLOAT>::clear(FLOAT init_val)
     m_statistics.clear(init_val);
     m_min = numeric_limits<FLOAT>::max();
     m_max = -numeric_limits<FLOAT>::max();
-}
-
-template<typename FLOAT>
-inline FLOAT StatisticsExt<FLOAT>::get_count() const
-{
-    return m_statistics.get_count();
-}
-
-template<typename FLOAT>
-inline FLOAT StatisticsExt<FLOAT>::get_deviation() const
-{
-    return m_statistics.get_deviation();
-}
-
-template<typename FLOAT>
-inline FLOAT StatisticsExt<FLOAT>::get_error() const
-{
-    return m_statistics.get_error();
-}
-
-template<typename FLOAT>
-inline FLOAT StatisticsExt<FLOAT>::get_max() const
-{
-    return m_max;
-}
-
-template<typename FLOAT>
-inline FLOAT StatisticsExt<FLOAT>::get_mean() const
-{
-    return m_statistics.get_mean();
-}
-
-template<typename FLOAT>
-inline FLOAT StatisticsExt<FLOAT>::get_min() const
-{
-    return m_min;
-}
-
-template<typename FLOAT>
-inline FLOAT StatisticsExt<FLOAT>::get_variance() const
-{
-    return m_statistics.get_variance();
 }
 
 template<typename FLOAT>
@@ -349,19 +259,19 @@ class StatisticsDirtyLockFree
 public:
     /** Constructor.
         @param init_val See StatisticBase::StatisticBase() */
-    explicit StatisticsDirtyLockFree(FLOAT init_val = 0);
+    explicit StatisticsDirtyLockFree(FLOAT init_val = 0) { clear(init_val); }
 
     StatisticsDirtyLockFree& operator=(const StatisticsDirtyLockFree& s);
 
     void add(FLOAT val, FLOAT weight = 1);
 
-    void clear(FLOAT init_val = 0);
+    void clear(FLOAT init_val = 0) { init(init_val, 0); }
 
     void init(FLOAT mean, FLOAT count);
 
-    FLOAT get_count() const;
+    FLOAT get_count() const { return m_count.load(memory_order_relaxed); }
 
-    FLOAT get_mean() const;
+    FLOAT get_mean() const { return m_mean.load(memory_order_relaxed); }
 
     void write(ostream& out, bool fixed = false, int precision = 6) const;
 
@@ -370,12 +280,6 @@ private:
 
     atomic<FLOAT> m_mean;
 };
-
-template<typename FLOAT>
-inline StatisticsDirtyLockFree<FLOAT>::StatisticsDirtyLockFree(FLOAT init_val)
-{
-    clear(init_val);
-}
 
 template<typename FLOAT>
 StatisticsDirtyLockFree<FLOAT>&
@@ -395,24 +299,6 @@ void StatisticsDirtyLockFree<FLOAT>::add(FLOAT val, FLOAT weight)
     mean +=  weight * (val - mean) / count;
     m_mean.store(mean, memory_order_relaxed);
     m_count.store(count, memory_order_relaxed);
-}
-
-template<typename FLOAT>
-inline void StatisticsDirtyLockFree<FLOAT>::clear(FLOAT init_val)
-{
-    init(init_val, 0);
-}
-
-template<typename FLOAT>
-inline FLOAT StatisticsDirtyLockFree<FLOAT>::get_count() const
-{
-    return m_count.load(memory_order_relaxed);
-}
-
-template<typename FLOAT>
-inline FLOAT StatisticsDirtyLockFree<FLOAT>::get_mean() const
-{
-    return m_mean.load(memory_order_relaxed);
 }
 
 template<typename FLOAT>

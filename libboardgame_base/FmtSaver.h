@@ -20,16 +20,9 @@ using namespace std;
 class FmtSaver
 {
 public:
-    explicit FmtSaver(ostream& out)
-        : m_out(out)
-    {
-        m_dummy.copyfmt(out);
-    }
+    explicit FmtSaver(ostream& out) : m_out(out) { m_dummy.copyfmt(out); }
 
-    ~FmtSaver()
-    {
-        m_out.copyfmt(m_dummy);
-    }
+    ~FmtSaver() { m_out.copyfmt(m_dummy); }
 
 private:
     ostream& m_out;

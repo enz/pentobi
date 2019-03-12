@@ -27,13 +27,15 @@ public:
         Should be set before starting to write. */
     /** @{ */
 
-    void set_one_prop_per_line(bool enable);
+    void set_one_prop_per_line(bool enable) { m_one_prop_per_line = enable; }
 
-    void set_one_prop_value_per_line(bool enable);
+    void set_one_prop_value_per_line(bool enable) {
+        m_one_prop_value_per_line = enable;
+    }
 
     /** @param indent The number of spaces to indent subtrees, -1 means
         to not even use newlines. */
-    void set_indent(int indent);
+    void set_indent(int indent) { m_indent = indent; }
 
     /** @} */ // @name
 
@@ -74,21 +76,6 @@ private:
 
     void write_indent();
 };
-
-inline void Writer::set_one_prop_per_line(bool enable)
-{
-    m_one_prop_per_line = enable;
-}
-
-inline void Writer::set_one_prop_value_per_line(bool enable)
-{
-    m_one_prop_value_per_line = enable;
-}
-
-inline void Writer::set_indent(int indent)
-{
-    m_indent = indent;
-}
 
 inline void Writer::write_property(const string& id, const char* value)
 {
