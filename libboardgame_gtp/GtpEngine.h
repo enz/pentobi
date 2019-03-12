@@ -23,8 +23,7 @@ using namespace std;
 
 /** Base class for GTP engines.
     Commands can be added with Engine::add(). Existing commands can be
-    overridden by registering a new handler for the command.
-    @see @ref libboardgame_gtp_commands */
+    overridden by registering a new handler for the command. */
 class GtpEngine
 {
 public:
