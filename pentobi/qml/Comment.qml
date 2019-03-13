@@ -8,7 +8,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 
 ScrollView {
-    function dropFocus() { if (textArea.activeFocus) textArea.focus = false }
+    function dropFocus() { textArea.focus = false }
 
     clip: true
     ScrollBar.vertical.minimumSize: 0.2
@@ -35,8 +35,7 @@ ScrollView {
                                      : theme.colorCommentBorder
         }
         Keys.onPressed:
-            if (event.key === Qt.Key_Tab)
-            {
+            if (event.key === Qt.Key_Tab) {
                 focus = false
                 event.accepted = true
             }
