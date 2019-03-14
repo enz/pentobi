@@ -1,3 +1,7 @@
+# Pentobi Thummbnailer.
+# This file is distributed under the same license as the pentobi package.
+# Copyright (C) 2019 Markus Enzenberger <enz@users.sourceforge.net>, 2019.
+
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -14,7 +18,7 @@ msgstr ""
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr "Markus Enzenberger <enz@users.sourceforge.net>"
+msgstr "Markus Enzenberger <enz@users.sourceforge.net>, 2019"
 
 #. (itstool) path: refmeta/refmiscinfo
 #: pentobi-thumbnailer-manpage.docbook.in:11
