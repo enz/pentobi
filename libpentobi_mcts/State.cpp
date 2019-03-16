@@ -516,7 +516,7 @@ inline Float State::get_quality_bonus(Color c, Float result, Float score)
     Trigon. */
 inline Float State::get_quality_bonus_attach_twocolor()
 {
-    LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
+    LIBBOARDGAME_ASSERT(m_bd.get_nu_colors() == 2);
     int n = static_cast<int>(m_bd.get_attach_points(Color(0)).size())
             - static_cast<int>(m_bd.get_attach_points(Color(1)).size());
     for (Point p : m_bd.get_attach_points(Color(0)))
