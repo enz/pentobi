@@ -294,7 +294,7 @@ Item
                 property: "z"; value: 1
             }
             ParentAnimation {
-                via: isDesktop ? null : gameDisplay
+                via: isDesktop ? null : gameView
 
                 NumberAnimation {
                     properties: "x,y,scale"

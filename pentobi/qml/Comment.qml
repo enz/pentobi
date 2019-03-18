@@ -26,7 +26,7 @@ ScrollView {
         onTextChanged: gameModel.comment = text
         background: Rectangle {
             // Qt 5.12.0 alpha doesn't size the background if it is in a
-            // SwipeView like in GameDisplayMobile
+            // SwipeView like in GameViewMobile
             anchors.fill: parent
             color: theme.colorCommentBase
             radius: 2

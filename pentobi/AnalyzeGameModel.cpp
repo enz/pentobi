@@ -35,7 +35,7 @@ AnalyzeGameModel::AnalyzeGameModel(QObject* parent)
     connect(&m_watcher, &QFutureWatcher<void>::finished, this, [this]
     {
         updateElements();
-        // Set isRunning after updating elements because in GameDisplayDesktop
+        // Set isRunning after updating elements because in GameViewDesktop
         // either isRunning must be true or elements.length > 0 to show the
         // analysis and we don't want it to disappear if a game with one move
         // was analyzed.

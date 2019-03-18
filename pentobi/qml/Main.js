@@ -9,7 +9,7 @@ function analyzeGame(nuSimulations) {
         showInfo(qsTr("Game analysis is only possible in main variation."))
         return
     }
-    gameDisplay.startAnalysis()
+    gameView.startAnalysis()
     cancelRunning()
     analyzeGameModel.start(gameModel, playerModel, nuSimulations)
 }
@@ -67,14 +67,14 @@ function changeGameVariantNoVerify(gameVariant) {
     lengthyCommand.run(function() {
         // Destroy pieces before changing game variant to avoid flickering
         // in PieceSelectorMobile if toPlay != 0
-        gameDisplay.destroyPieces()
+        gameView.destroyPieces()
         gameModel.changeGameVariant(gameVariant)
-        gameDisplay.createPieces()
-        gameDisplay.showToPlay()
-        gameDisplay.setupMode = false
+        gameView.createPieces()
+        gameView.showToPlay()
+        gameView.setupMode = false
         isRated = false
         analyzeGameModel.clear()
-        gameDisplay.showPieces()
+        gameView.showPieces()
         initComputerColors()
     })
 }
@@ -213,7 +213,7 @@ function exportAsciiArt(fileUrl) {
 function exportImage(fileUrl) {
     if (! checkStoragePermission())
         return
-    var board = gameDisplay.getBoard()
+    var board = gameView.getBoard()
     var size = Qt.size(exportImageWidth, exportImageWidth * board.height / board.width)
     if (! board.grabImageTarget.grabToImage(function(result) {
         var file = getFileFromUrl(fileUrl)
@@ -229,7 +229,7 @@ function exportImage(fileUrl) {
 
 function findNextComment() {
     if (gameModel.findNextComment()) {
-        gameDisplay.showComment()
+        gameView.showComment()
         return
     }
     if (gameModel.canGoBackward)
@@ -243,7 +243,7 @@ function findNextComment() {
 
 function findNextCommentContinueFromRoot() {
     if (gameModel.findNextCommentContinueFromRoot()) {
-        gameDisplay.showComment()
+        gameView.showComment()
         return
     }
     showInfo(qsTr("No comment found"))
@@ -251,8 +251,8 @@ function findNextCommentContinueFromRoot() {
 
 function genMove() {
     cancelRunning()
-    gameDisplay.pickedPiece = null
-    gameDisplay.showToPlay()
+    gameView.pickedPiece = null
+    gameView.showToPlay()
     playerModel.startGenMove(gameModel)
 }
 
@@ -392,7 +392,7 @@ function init() {
         computerPlays2 = computerPlays0
         computerPlays3 = computerPlays1
     }
-    gameDisplay.createPieces()
+    gameView.createPieces()
     if (gameModel.checkFileModifiedOutside())
     {
         showWindow()
@@ -401,7 +401,7 @@ function init() {
     }
     analyzeGameModel.loadAutoSave(gameModel)
     if (analyzeGameModel.elements.length > 0)
-        gameDisplay.analysisAutoloaded()
+        gameView.analysisAutoloaded()
     // initialFile is a context property set from command line argument
     if (initialFile) {
         if (gameModel.isModified)
@@ -497,9 +497,9 @@ function newGame()
 function newGameNoVerify()
 {
     gameModel.newGame()
-    gameDisplay.setupMode = false
-    gameDisplay.showToPlay()
-    gameDisplay.showPieces()
+    gameView.setupMode = false
+    gameView.showToPlay()
+    gameView.showPieces()
     isRated = false
     analyzeGameModel.clear()
     initComputerColors()
@@ -507,11 +507,11 @@ function newGameNoVerify()
 
 function nextPiece() {
     var currentPickedPiece = null
-    if (gameDisplay.pickedPiece)
-        currentPickedPiece = gameDisplay.pickedPiece.pieceModel
+    if (gameView.pickedPiece)
+        currentPickedPiece = gameView.pickedPiece.pieceModel
     var pieceModel = gameModel.nextPiece(currentPickedPiece)
     if (pieceModel)
-        gameDisplay.pickPieceAtBoard(gameDisplay.findPiece(pieceModel))
+        gameView.pickPieceAtBoard(gameView.findPiece(pieceModel))
 }
 
 function open() {
@@ -530,23 +530,23 @@ function openFile(file) {
 
 function openFileBlocking(file) {
     var oldGameVariant = gameModel.gameVariant
-    var oldEnableAnimations = gameDisplay.enableAnimations
-    gameDisplay.enableAnimations = false
+    var oldEnableAnimations = gameView.enableAnimations
+    gameView.enableAnimations = false
     if (! gameModel.openFile(file))
         showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
     else
         setComputerNone()
     if (gameModel.gameVariant !== oldGameVariant)
-        gameDisplay.createPieces()
-    gameDisplay.showToPlay()
-    gameDisplay.enableAnimations = oldEnableAnimations
-    gameDisplay.setupMode = false
+        gameView.createPieces()
+    gameView.showToPlay()
+    gameView.enableAnimations = oldEnableAnimations
+    gameView.setupMode = false
     isRated = false
     analyzeGameModel.clear()
     if (gameModel.comment.length > 0)
-        gameDisplay.showComment()
+        gameView.showComment()
     else
-        gameDisplay.showPieces()
+        gameView.showPieces()
 }
 
 function openFileUrl() {
@@ -561,17 +561,17 @@ function openClipboard()
 function openClipboardNoVerify() {
     lengthyCommand.run(function() {
         var oldGameVariant = gameModel.gameVariant
-        var oldEnableAnimations = gameDisplay.enableAnimations
-        gameDisplay.enableAnimations = false
+        var oldEnableAnimations = gameView.enableAnimations
+        gameView.enableAnimations = false
         if (! gameModel.openClipboard())
             showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
         else
             setComputerNone()
         if (gameModel.gameVariant !== oldGameVariant)
-            gameDisplay.createPieces()
-        gameDisplay.showToPlay()
-        gameDisplay.enableAnimations = oldEnableAnimations
-        gameDisplay.setupMode = false
+            gameView.createPieces()
+        gameView.showToPlay()
+        gameView.enableAnimations = oldEnableAnimations
+        gameView.setupMode = false
         isRated = false
         analyzeGameModel.clear()
     })
@@ -585,11 +585,11 @@ function openRecentFile(file) {
 
 function pickNamedPiece(name) {
     var currentPickedPiece = null
-    if (gameDisplay.pickedPiece)
-        currentPickedPiece = gameDisplay.pickedPiece.pieceModel
+    if (gameView.pickedPiece)
+        currentPickedPiece = gameView.pickedPiece.pieceModel
     var pieceModel = gameModel.pickNamedPiece(name, currentPickedPiece)
     if (pieceModel)
-        gameDisplay.pickPieceAtBoard(gameDisplay.findPiece(pieceModel))
+        gameView.pickPieceAtBoard(gameView.findPiece(pieceModel))
 }
 
 function play(pieceModel, gameCoord) {
@@ -603,11 +603,11 @@ function play(pieceModel, gameCoord) {
 
 function prevPiece() {
     var currentPickedPiece = null
-    if (gameDisplay.pickedPiece)
-        currentPickedPiece = gameDisplay.pickedPiece.pieceModel
+    if (gameView.pickedPiece)
+        currentPickedPiece = gameView.pickedPiece.pieceModel
     var pieceModel = gameModel.previousPiece(currentPickedPiece)
     if (pieceModel)
-        gameDisplay.pickPieceAtBoard(gameDisplay.findPiece(pieceModel))
+        gameView.pickPieceAtBoard(gameView.findPiece(pieceModel))
 }
 
 function quit() {
@@ -698,9 +698,9 @@ function ratedGameStart() {
         gameModel.playerName3 = computerPlays3 ? computerName : humanName
     gameModel.event = qsTr("Rated game")
     gameModel.round = ratingModel.numberGames + 1
-    gameDisplay.setupMode = false
-    gameDisplay.showToPlay()
-    gameDisplay.showPieces()
+    gameView.setupMode = false
+    gameView.showToPlay()
+    gameView.showPieces()
     isRated = true
     analyzeGameModel.clear()
     delayedCheckComputerMove.restart()
@@ -774,7 +774,7 @@ function showQuestion(text, acceptedFunc) {
 }
 
 function showTemporaryMessage(text) {
-    gameDisplay.showTemporaryMessage(text)
+    gameView.showTemporaryMessage(text)
 }
 
 function showVariationInfo() {

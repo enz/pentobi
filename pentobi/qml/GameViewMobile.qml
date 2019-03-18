@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/GameDisplayMobile.qml
+/** @file pentobi/qml/GameViewMobile.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -9,7 +9,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import Qt.labs.settings 1.0
 import "." as Pentobi
-import "GameDisplay.js" as Logic
+import "GameView.js" as Logic
 
 Item
 {
@@ -99,7 +99,7 @@ Item
         property alias swipeViewCurrentIndex: swipeView.currentIndex
         property alias setupMode: root.setupMode
 
-        category: "GameDisplayMobile"
+        category: "GameViewMobile"
     }
     Column {
         id: column

@@ -21,10 +21,10 @@ Pentobi.Dialog {
         ButtonCancel { }
         ButtonApply {
             enabled:
-                checkBoxCoordinates.checked !== gameDisplay.showCoordinates
+                checkBoxCoordinates.checked !== gameView.showCoordinates
                 || checkBoxShowVariations.checked !== gameModel.showVariations
-                || checkBoxAnimatePieces.checked !== gameDisplay.enableAnimations
-                || checkBoxMoveNumber.checked !== gameDisplay.showMoveNumber
+                || checkBoxAnimatePieces.checked !== gameView.enableAnimations
+                || checkBoxMoveNumber.checked !== gameView.showMoveNumber
                 || comboBoxTheme.currentIndex !== currentThemeIndex
                 || comboBoxMoveMarking.currentIndex !== currentMoveMarkingIndex
                 || comboBoxComment.currentIndex !== currentCommentIndex
@@ -38,9 +38,9 @@ Pentobi.Dialog {
 
     footer: isDesktop ? footerDesktop : footerMobile
     onOpened: {
-        checkBoxCoordinates.checked = gameDisplay.showCoordinates
+        checkBoxCoordinates.checked = gameView.showCoordinates
         checkBoxShowVariations.checked = gameModel.showVariations
-        checkBoxAnimatePieces.checked = gameDisplay.enableAnimations
+        checkBoxAnimatePieces.checked = gameView.enableAnimations
         if (themeName === "dark")
             currentThemeIndex = 1
         else if (themeName === "colorblind-light")
@@ -52,22 +52,22 @@ Pentobi.Dialog {
         else
             currentThemeIndex = 0
         comboBoxTheme.currentIndex = currentThemeIndex
-        if (gameDisplay.moveMarking === "last_dot")
+        if (gameView.moveMarking === "last_dot")
             currentMoveMarkingIndex = 0
-        else if (gameDisplay.moveMarking === "last_number")
+        else if (gameView.moveMarking === "last_number")
             currentMoveMarkingIndex = 1
-        else if (gameDisplay.moveMarking === "all_number")
+        else if (gameView.moveMarking === "all_number")
             currentMoveMarkingIndex = 2
-        else if (gameDisplay.moveMarking === "none")
+        else if (gameView.moveMarking === "none")
             currentMoveMarkingIndex = 3
         else
             currentMoveMarkingIndex = 0
         comboBoxMoveMarking.currentIndex = currentMoveMarkingIndex
         if (isDesktop) {
-            checkBoxMoveNumber.checked = gameDisplay.showMoveNumber
-            if (gameDisplay.commentMode === "always")
+            checkBoxMoveNumber.checked = gameView.showMoveNumber
+            if (gameView.commentMode === "always")
                 currentCommentIndex = 0
-            else if (gameDisplay.commentMode === "never")
+            else if (gameView.commentMode === "never")
                 currentCommentIndex = 2
             else
                 currentCommentIndex = 1
@@ -75,9 +75,9 @@ Pentobi.Dialog {
         }
     }
     onAccepted: {
-        gameDisplay.showCoordinates = checkBoxCoordinates.checked
+        gameView.showCoordinates = checkBoxCoordinates.checked
         gameModel.showVariations = checkBoxShowVariations.checked
-        gameDisplay.enableAnimations = checkBoxAnimatePieces.checked
+        gameView.enableAnimations = checkBoxAnimatePieces.checked
         switch (comboBoxTheme.currentIndex) {
         case 0: themeName = "light"; break
         case 1: themeName = "dark"; break
@@ -86,17 +86,17 @@ Pentobi.Dialog {
         case 4: themeName = "system"; break
         }
         switch (comboBoxMoveMarking.currentIndex) {
-        case 0: gameDisplay.moveMarking = "last_dot"; break
-        case 1: gameDisplay.moveMarking = "last_number"; break
-        case 2: gameDisplay.moveMarking = "all_number"; break
-        case 3: gameDisplay.moveMarking = "none"; break
+        case 0: gameView.moveMarking = "last_dot"; break
+        case 1: gameView.moveMarking = "last_number"; break
+        case 2: gameView.moveMarking = "all_number"; break
+        case 3: gameView.moveMarking = "none"; break
         }
         if (isDesktop) {
-            gameDisplay.showMoveNumber = checkBoxMoveNumber.checked
+            gameView.showMoveNumber = checkBoxMoveNumber.checked
             switch (comboBoxComment.currentIndex) {
-            case 0: gameDisplay.commentMode = "always"; break
-            case 1: gameDisplay.commentMode = "as_needed"; break
-            case 2: gameDisplay.commentMode = "never"; break
+            case 0: gameView.commentMode = "always"; break
+            case 1: gameView.commentMode = "as_needed"; break
+            case 2: gameView.commentMode = "never"; break
             }
         }
     }

@@ -37,7 +37,7 @@ ToolButton {
     }
 
     Behavior on opacity {
-        NumberAnimation { duration: gameDisplay.animationDurationFast }
+        NumberAnimation { duration: gameView.animationDurationFast }
     }
 
     opacity: root.enabled ? 0.55 : 0.25

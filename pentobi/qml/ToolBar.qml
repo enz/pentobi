@@ -40,7 +40,7 @@ Item {
             color: theme.colorText
             opacity: isRated ? 0.6 : 0.8
             elide: Text.ElideRight
-            text: Logic.getGameLabel(gameDisplay.setupMode, isRated,
+            text: Logic.getGameLabel(gameView.setupMode, isRated,
                                      gameModel.file, gameModel.isModified, true)
             // There is a bug in Qt 5.11 that in some situations elides the
             // text even if there is enough room for it. It doesn't occur if
@@ -82,8 +82,8 @@ Item {
             visible: showContent && (isDesktop || enabled)
             autoRepeat: true
             autoRepeatInterval:
-                rootWindow.gameDisplay.item ?
-                    2 * rootWindow.gameDisplay.item.animationDuration : 400
+                rootWindow.gameView.item ?
+                    2 * rootWindow.gameView.item.animationDuration : 400
 
         }
         Pentobi.Button {
@@ -101,8 +101,8 @@ Item {
             visible: showContent && (isDesktop || enabled)
             autoRepeat: true
             autoRepeatInterval:
-                rootWindow.gameDisplay.item ?
-                    rootWindow.gameDisplay.item.animationDuration : 200
+                rootWindow.gameView.item ?
+                    rootWindow.gameView.item.animationDuration : 200
         }
         Pentobi.Button {
             id: stop
@@ -131,8 +131,8 @@ Item {
             action: actionBackward10
             autoRepeat: true
             autoRepeatInterval:
-                rootWindow.gameDisplay.item ?
-                    rootWindow.gameDisplay.item.animationDuration : 200
+                rootWindow.gameView.item ?
+                    rootWindow.gameView.item.animationDuration : 200
         }
         Pentobi.Button {
             id: backward
@@ -158,8 +158,8 @@ Item {
             action: actionForward10
             autoRepeat: true
             autoRepeatInterval:
-                rootWindow.gameDisplay.item ?
-                    rootWindow.gameDisplay.item.animationDuration : 200
+                rootWindow.gameView.item ?
+                    rootWindow.gameView.item.animationDuration : 200
         }
         Pentobi.Button {
             id: end
@@ -181,8 +181,8 @@ Item {
             action: actionPrevVar
             autoRepeat: true
             autoRepeatInterval:
-                rootWindow.gameDisplay.item ?
-                    2 * rootWindow.gameDisplay.item.animationDuration : 400
+                rootWindow.gameView.item ?
+                    2 * rootWindow.gameView.item.animationDuration : 400
         }
         Pentobi.Button {
             id: nextVar
@@ -192,8 +192,8 @@ Item {
             action: actionNextVar
             autoRepeat: true
             autoRepeatInterval:
-                rootWindow.gameDisplay.item ?
-                    2 * rootWindow.gameDisplay.item.animationDuration : 400
+                rootWindow.gameView.item ?
+                    2 * rootWindow.gameView.item.animationDuration : 400
         }
         Item {
             visible: isDesktop
@@ -202,7 +202,7 @@ Item {
         }
         Label {
             visible: showContent && isDesktop
-            text: Logic.getGameLabel(gameDisplay.setupMode, isRated,
+            text: Logic.getGameLabel(gameView.setupMode, isRated,
                                      gameModel.file, gameModel.isModified, false)
             color: theme.colorText
             opacity: 0.8
@@ -216,7 +216,7 @@ Item {
                 hoverEnabled: true
                 ToolTip.text: Logic.getFileInfo(isRated, gameModel.file,
                                                 gameModel.isModified)
-                ToolTip.visible: containsMouse && ! gameDisplay.setupMode
+                ToolTip.visible: containsMouse && ! gameView.setupMode
                                  && (gameModel.file !== "" || isRated)
                 ToolTip.delay: 1000
                 ToolTip.timeout: 7000
@@ -237,7 +237,7 @@ Item {
                 if (menu.item.opened)
                     menu.item.close()
                 else {
-                    gameDisplay.dropCommentFocus()
+                    gameView.dropCommentFocus()
                     menu.item.popup(0, isDesktop ? height : 0)
                 }
             }

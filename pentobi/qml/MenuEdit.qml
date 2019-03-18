@@ -94,12 +94,12 @@ Pentobi.Menu {
         checkable: true
         enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
                  && gameModel.moveNumber === 0 && ! isRated
-        checked: gameDisplay.setupMode
+        checked: gameView.setupMode
         onTriggered: {
-            checked = ! gameDisplay.setupMode // Workaround for QTBUG-69401
-            gameDisplay.setupMode = checked
+            checked = ! gameView.setupMode // Workaround for QTBUG-69401
+            gameView.setupMode = checked
             if (checked)
-                gameDisplay.showPieces()
+                gameView.showPieces()
             else
                 Logic.setComputerNone()
         }
@@ -110,7 +110,7 @@ Pentobi.Menu {
                           qsTr("N"))
         enabled: ! isRated
         onTriggered: {
-            gameDisplay.pickedPiece = null
+            gameView.pickedPiece = null
             gameModel.nextColor()
         }
     }

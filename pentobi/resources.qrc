@@ -26,7 +26,7 @@
         <file>qml/ExportImageDialog.qml</file>
         <file>qml/FatalMessage.qml</file>
         <file>qml/FileDialog.qml</file>
-        <file>qml/GameDisplayMobile.qml</file>
+        <file>qml/GameViewMobile.qml</file>
         <file>qml/GameInfoDialog.qml</file>
         <file>qml/GameVariantDialog.qml</file>
         <file>qml/GotoMoveDialog.qml</file>
@@ -76,6 +76,6 @@
         <file>qml/ToolBar.qml</file>
         <file>qml/Triangle.qml</file>
         <file>qml/Main.js</file>
-        <file>qml/GameDisplay.js</file>
+        <file>qml/GameView.js</file>
     </qresource>
 </RCC>

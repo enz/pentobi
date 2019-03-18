@@ -40,8 +40,8 @@ Item {
             value: points0 + points2
             isFinal: ! hasMoves0 && ! hasMoves2
             fontSize: rowLayout.height
-            color1: gameDisplay.color0[0]
-            color2: gameDisplay.color2[0]
+            color1: gameView.color0[0]
+            color2: gameView.color2[0]
             // Avoid position changes unless score text gets really long
             Layout.minimumWidth: 3 * fontSize
         }
@@ -53,8 +53,8 @@ Item {
             value: points1 + points3
             isFinal: ! hasMoves1 && ! hasMoves3
             fontSize: rowLayout.height
-            color1: gameDisplay.color1[0]
-            color2: gameDisplay.color3[0]
+            color1: gameView.color1[0]
+            color2: gameView.color3[0]
             // Avoid position changes unless score text gets really long
             Layout.minimumWidth: 3 * fontSize
         }
@@ -121,9 +121,9 @@ Item {
             color1: theme.colorGreen[0]
             color2:
                 switch (altPlayer) {
-                case 0: return gameDisplay.color0[0]
-                case 1: return gameDisplay.color1[0]
-                case 2: return gameDisplay.color2[0]
+                case 0: return gameView.color0[0]
+                case 1: return gameView.color1[0]
+                case 2: return gameView.color2[0]
                 }
         }
         Item { visible: altColorIndicator.visible; Layout.fillWidth: true }

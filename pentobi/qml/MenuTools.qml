@@ -49,7 +49,7 @@ Pentobi.Menu {
         onTriggered:
             Qt.callLater(function() { // QTBUG-69682
                 analyzeGameModel.clear()
-                gameDisplay.deleteAnalysis()
+                gameView.deleteAnalysis()
             })
     }
 }

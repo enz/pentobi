@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/GameDisplayDesktop.qml
+/** @file pentobi/qml/GameViewDesktop.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,7 +8,7 @@ import QtQuick 2.11
 import QtQuick.Controls 2.0
 import Qt.labs.settings 1.0
 import "." as Pentobi
-import "GameDisplay.js" as Logic
+import "GameView.js" as Logic
 
 Item
 {
@@ -142,7 +142,7 @@ Item
         property alias setupMode: root.setupMode
         property alias commentMode: root.commentMode
 
-        category: "GameDisplayDesktop"
+        category: "GameViewDesktop"
     }
     Item {
         id: mainContent

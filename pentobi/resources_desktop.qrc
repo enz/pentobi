@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/AnalyzeDialog.qml</file>
-        <file>qml/GameDisplayDesktop.qml</file>
+        <file>qml/GameViewDesktop.qml</file>
         <file>qml/PieceSelectorDesktop.qml</file>
     </qresource>
 </RCC>

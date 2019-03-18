@@ -23,7 +23,7 @@ ApplicationWindow {
     property bool isPlaySingleMoveRunning
     property bool isRated
 
-    property alias gameDisplay: gameDisplayLoader.item
+    property alias gameView: gameViewLoader.item
 
     // If the user manually disabled all computer colors in the dialog, we
     // assume that they want to edit games rather than play, and we will not
@@ -57,7 +57,7 @@ ApplicationWindow {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: gameDisplay.dropCommentFocus()
+        onClicked: gameView.dropCommentFocus()
     }
     Pentobi.ToolBar {
         id: toolBar
@@ -72,7 +72,7 @@ ApplicationWindow {
         }
     }
     Loader {
-        id: gameDisplayLoader
+        id: gameViewLoader
 
         anchors {
             left: parent.left
@@ -82,10 +82,10 @@ ApplicationWindow {
             margins: isDesktop ? 2 : 0
         }
         source:
-            isDesktop ? "GameDisplayDesktop.qml" : "GameDisplayMobile.qml"
+            isDesktop ? "GameViewDesktop.qml" : "GameViewMobile.qml"
 
         Connections {
-            target: gameDisplayLoader.item
+            target: gameViewLoader.item
             onPlay: Logic.play(pieceModel, gameCoord)
         }
     }
@@ -114,12 +114,12 @@ ApplicationWindow {
 
         onPositionAboutToChange: Logic.cancelRunning(true)
         onPositionChanged: {
-            gameDisplay.pickedPiece = null
+            gameView.pickedPiece = null
             if (gameModel.canGoBackward || gameModel.canGoForward
                     || gameModel.moveNumber > 0)
-                gameDisplay.setupMode = false
+                gameView.setupMode = false
             analyzeGameModel.markCurrentMove(gameModel)
-            gameDisplay.dropCommentFocus()
+            gameView.dropCommentFocus()
         }
         onInvalidSgfFile: Logic.showInfo(gameModel.getError())
     }
@@ -128,10 +128,10 @@ ApplicationWindow {
 
         gameVariant: gameModel.gameVariant
         onMoveGenerated: Logic.moveGenerated(move)
-        onSearchCallback: gameDisplay.searchCallback(elapsedSeconds, remainingSeconds)
+        onSearchCallback: gameView.searchCallback(elapsedSeconds, remainingSeconds)
         onIsGenMoveRunningChanged:
-            if (isGenMoveRunning) gameDisplay.startSearch()
-            else gameDisplay.endSearch()
+            if (isGenMoveRunning) gameView.startSearch()
+            else gameView.endSearch()
         Component.onCompleted:
             if (notEnoughMemory())
                 Logic.showFatal(qsTr("Not enough memory"))
@@ -139,7 +139,7 @@ ApplicationWindow {
     AnalyzeGameModel {
         id: analyzeGameModel
 
-        onIsRunningChanged: if (! isRunning) gameDisplay.endAnalysis()
+        onIsRunningChanged: if (! isRunning) gameView.endAnalysis()
     }
     RatingModel {
         id: ratingModel
@@ -284,15 +284,15 @@ ApplicationWindow {
         shortcut: "Ctrl+T"
         text: qsTr("Comment")
         checkable: true
-        checked: gameDisplay.isCommentVisible
+        checked: gameView.isCommentVisible
         onTriggered:
             if (isDesktop)
-                gameDisplay.setCommentVisible(checked)
+                gameView.setCommentVisible(checked)
             else {
                 if (checked)
-                    gameDisplay.showComment()
+                    gameView.showComment()
                 else
-                    gameDisplay.showPieces()
+                    gameView.showPieces()
             }
     }
     Action {
@@ -309,7 +309,7 @@ ApplicationWindow {
         shortcut: "Ctrl+H"
         text: qsTr("Find Move")
         enabled: ! gameModel.isGameOver
-        onTriggered: gameDisplay.showMove(gameModel.findMoveNext())
+        onTriggered: gameView.showMove(gameModel.findMoveNext())
     }
     Action {
         id: actionNextComment
@@ -360,7 +360,7 @@ ApplicationWindow {
 
         shortcut: "Ctrl+N"
         text: qsTr("New")
-        enabled: gameDisplay.setupMode || gameModel.isModified
+        enabled: gameView.setupMode || gameModel.isModified
                  || gameModel.file !== "" || isRated
         onTriggered: Qt.callLater(function() { Logic.newGame() }) // QTBUG-69682
     }
@@ -434,7 +434,7 @@ ApplicationWindow {
         id: actionUndo
 
         text: qsTr("Undo Move")
-        enabled: gameModel.canUndo && ! gameDisplay.setupMode && ! isRated
+        enabled: gameModel.canUndo && ! gameView.setupMode && ! isRated
         onTriggered: Qt.callLater(function() { Logic.undo() }) // QTBUG-69682
     }
     Instantiator {
@@ -459,57 +459,57 @@ ApplicationWindow {
     Shortcut {
         sequence: "Return"
         enabled: ! isAndroid
-        onActivated: gameDisplay.playPickedPiece()
+        onActivated: gameView.playPickedPiece()
     }
     Shortcut {
         sequence: "Escape"
         onActivated:
-            if (gameDisplay.pickedPiece)
-                gameDisplay.pickedPiece = null
+            if (gameView.pickedPiece)
+                gameView.pickedPiece = null
             else if (visibility === Window.FullScreen)
                 visibility = Window.AutomaticVisibility
     }
     Shortcut {
         sequence: "Ctrl+Shift+H"
         enabled: ! gameModel.isGameOver
-        onActivated: gameDisplay.showMove(gameModel.findMovePrevious())
+        onActivated: gameView.showMove(gameModel.findMovePrevious())
     }
     Shortcut {
         sequence: "Down"
-        onActivated: gameDisplay.shiftPiece(0, 1)
+        onActivated: gameView.shiftPiece(0, 1)
     }
     Shortcut {
         sequence: "Shift+Down"
-        onActivated: gameDisplay.shiftPieceFast(0, 1)
+        onActivated: gameView.shiftPieceFast(0, 1)
     }
     Shortcut {
         sequence: "Left"
-        onActivated: gameDisplay.shiftPiece(-1, 0)
+        onActivated: gameView.shiftPiece(-1, 0)
     }
     Shortcut {
         sequence: "Shift+Left"
-        onActivated: gameDisplay.shiftPieceFast(-1, 0)
+        onActivated: gameView.shiftPieceFast(-1, 0)
     }
     Shortcut {
         sequence: "Right"
-        onActivated: gameDisplay.shiftPiece(1, 0)
+        onActivated: gameView.shiftPiece(1, 0)
     }
     Shortcut {
         sequence: "Shift+Right"
-        onActivated: gameDisplay.shiftPieceFast(1, 0)
+        onActivated: gameView.shiftPieceFast(1, 0)
     }
     Shortcut {
         sequence: "Up"
-        onActivated: gameDisplay.shiftPiece(0, -1)
+        onActivated: gameView.shiftPiece(0, -1)
     }
     Shortcut {
         sequence: "Shift+Up"
-        onActivated: gameDisplay.shiftPieceFast(0, -1)
+        onActivated: gameView.shiftPieceFast(0, -1)
     }
     Shortcut {
-        enabled: gameDisplay.pickedPiece
+        enabled: gameView.pickedPiece
         sequence: "Space"
-        onActivated: gameDisplay.pickedPiece.pieceModel.nextOrientation()
+        onActivated: gameView.pickedPiece.pieceModel.nextOrientation()
     }
     Shortcut {
         sequence: "+"
@@ -520,9 +520,9 @@ ApplicationWindow {
         onActivated: toolBar.clickMenuButton()
     }
     Shortcut {
-        enabled: gameDisplay.pickedPiece
+        enabled: gameView.pickedPiece
         sequence: "Shift+Space"
-        onActivated: gameDisplay.pickedPiece.pieceModel.previousOrientation()
+        onActivated: gameView.pickedPiece.pieceModel.previousOrientation()
     }
     Shortcut {
         sequence: "-"

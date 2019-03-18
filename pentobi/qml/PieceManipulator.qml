@@ -21,7 +21,7 @@ Item {
     property real buttonSize: (isDesktop ? 0.12 : 0.17) * root.width
 
     property real animationDuration:
-        ! pieceModel || ! gameDisplay.enableAnimations ?
+        ! pieceModel || ! gameView.enableAnimations ?
             0 : fastMove ? 50 : animationDurationMove
 
     signal piecePlayed

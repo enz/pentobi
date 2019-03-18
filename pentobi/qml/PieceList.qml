@@ -30,7 +30,7 @@ Grid {
             width: root.width / columns; height: width
             visible: ! modelData.pieceModel.isPlayed
             onClicked: {
-                gameDisplay.dropCommentFocus()
+                gameView.dropCommentFocus()
                 piecePicked(modelData)
             }
             Component.onCompleted: modelData.parentUnplayed = mouseArea

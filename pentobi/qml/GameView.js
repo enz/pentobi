@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/GameDisplay.js
+/** @file pentobi/qml/GameView.js
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -11,7 +11,7 @@ function createColorPieces(component, pieceModels) {
     var pieces = []
     for (var i = 0; i < pieceModels.length; ++i) {
         properties["pieceModel"] = pieceModels[i]
-        pieces.push(component.createObject(gameDisplay, properties))
+        pieces.push(component.createObject(gameView, properties))
     }
     return pieces
 }
@@ -137,7 +137,7 @@ function onBoardRightClicked(pos) {
     var n = gameModel.getMoveNumberAt(pos)
     if (n < 0)
         return
-    gameDisplay.openBoardContextMenu(
+    gameView.openBoardContextMenu(
                 n, board.mapFromGameX(pos.x + 0.5),
                 board.mapFromGameY(pos.y + 0.5))
 }
@@ -169,7 +169,7 @@ function pickPieceAt(piece, coord) {
     if (playerModel.isGenMoveRunning || gameModel.isGameOver)
         return
     if (piece.pieceModel.color !== gameModel.toPlay && ! setupMode) {
-        gameDisplay.showToPlay()
+        gameView.showToPlay()
         return
     }
     if (! pieceManipulator.pieceModel) {
