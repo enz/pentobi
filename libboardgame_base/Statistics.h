@@ -254,14 +254,14 @@ void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, int precision,
     lost. Initializing via the constructor, operator= or clear() uses
     memory_order_seq_cst */
 template<typename FLOAT = double>
-class StatisticsDirtyLockFree
+class StatisticsDirty
 {
 public:
     /** Constructor.
         @param init_val See StatisticBase::StatisticBase() */
-    explicit StatisticsDirtyLockFree(FLOAT init_val = 0) { clear(init_val); }
+    explicit StatisticsDirty(FLOAT init_val = 0) { clear(init_val); }
 
-    StatisticsDirtyLockFree& operator=(const StatisticsDirtyLockFree& s);
+    StatisticsDirty& operator=(const StatisticsDirty& s);
 
     void add(FLOAT val, FLOAT weight = 1);
 
@@ -282,8 +282,8 @@ private:
 };
 
 template<typename FLOAT>
-StatisticsDirtyLockFree<FLOAT>&
-StatisticsDirtyLockFree<FLOAT>::operator=(const StatisticsDirtyLockFree& s)
+StatisticsDirty<FLOAT>&
+StatisticsDirty<FLOAT>::operator=(const StatisticsDirty& s)
 {
     m_count = s.m_count.load();
     m_mean = s.m_mean.load();
@@ -291,7 +291,7 @@ StatisticsDirtyLockFree<FLOAT>::operator=(const StatisticsDirtyLockFree& s)
 }
 
 template<typename FLOAT>
-void StatisticsDirtyLockFree<FLOAT>::add(FLOAT val, FLOAT weight)
+void StatisticsDirty<FLOAT>::add(FLOAT val, FLOAT weight)
 {
     FLOAT count = m_count.load(memory_order_relaxed);
     FLOAT mean = m_mean.load(memory_order_relaxed);
@@ -302,14 +302,14 @@ void StatisticsDirtyLockFree<FLOAT>::add(FLOAT val, FLOAT weight)
 }
 
 template<typename FLOAT>
-inline void StatisticsDirtyLockFree<FLOAT>::init(FLOAT mean, FLOAT count)
+inline void StatisticsDirty<FLOAT>::init(FLOAT mean, FLOAT count)
 {
     m_count = count;
     m_mean = mean;
 }
 
 template<typename FLOAT>
-void StatisticsDirtyLockFree<FLOAT>::write(ostream& out, bool fixed,
+void StatisticsDirty<FLOAT>::write(ostream& out, bool fixed,
                                            int precision) const
 {
     FmtSaver saver(out);

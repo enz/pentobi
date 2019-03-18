@@ -38,7 +38,7 @@ using libboardgame_base::Barrier;
 using libboardgame_base::IntervalChecker;
 using libboardgame_base::RandomGenerator;
 using libboardgame_base::StatisticsBase;
-using libboardgame_base::StatisticsDirtyLockFree;
+using libboardgame_base::StatisticsDirty;
 using libboardgame_base::StatisticsExt;
 using libboardgame_base::Timer;
 using libboardgame_base::TimeIntervalChecker;
@@ -334,10 +334,10 @@ public:
     void set_callback(const function<void(double, double)>& callback);
 
     /** Get evaluation for a player at root node. */
-    const StatisticsDirtyLockFree<Float>& get_root_val(PlayerInt player) const;
+    const StatisticsDirty<Float>& get_root_val(PlayerInt player) const;
 
     /** Get evaluation for get_player() at root node. */
-    const StatisticsDirtyLockFree<Float>& get_root_val() const;
+    const StatisticsDirty<Float>& get_root_val() const;
 
     /** The number of times the root node was visited.
         This is equal to the number of simulations plus the visit count
@@ -471,7 +471,7 @@ private:
     Tree m_tree;
 
     /** See get_root_val(). */
-    array<StatisticsDirtyLockFree<Float>, max_players> m_root_val;
+    array<StatisticsDirty<Float>, max_players> m_root_val;
 
     LastGoodReply<Move, max_players, lgr_hash_table_size, multithread> m_lgr;
 
@@ -846,7 +846,7 @@ inline size_t SearchBase<S, M, R>::get_nu_simulations() const
 
 template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::get_root_val(PlayerInt player) const
--> const StatisticsDirtyLockFree<Float>&
+-> const StatisticsDirty<Float>&
 {
     LIBBOARDGAME_ASSERT(player < m_nu_players);
     return m_root_val[player];
@@ -854,7 +854,7 @@ inline auto SearchBase<S, M, R>::get_root_val(PlayerInt player) const
 
 template<class S, class M, class R>
 inline auto SearchBase<S, M, R>::get_root_val() const
--> const StatisticsDirtyLockFree<Float>&
+-> const StatisticsDirty<Float>&
 {
     return get_root_val(get_player());
 }
