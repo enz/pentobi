@@ -24,41 +24,17 @@ class ColorMap
 public:
     ColorMap() = default;
 
-    explicit ColorMap(const T& val);
+    explicit ColorMap(const T& val) { fill(val); }
 
-    T& operator[](Color c);
+    T& operator[](Color c) { return m_a[c.to_int()]; }
 
-    const T& operator[](Color c) const;
+    const T& operator[](Color c) const { return m_a[c.to_int()]; }
 
-    void fill(const T& val);
+    void fill(const T& val) { m_a.fill(val); }
 
 private:
     array<T, Color::range> m_a;
 };
-
-template<typename T>
-inline ColorMap<T>::ColorMap(const T& val)
-{
-    fill(val);
-}
-
-template<typename T>
-inline T& ColorMap<T>::operator[](Color c)
-{
-    return m_a[c.to_int()];
-}
-
-template<typename T>
-inline const T& ColorMap<T>::operator[](Color c) const
-{
-    return m_a[c.to_int()];
-}
-
-template<typename T>
-void ColorMap<T>::fill(const T& val)
-{
-    m_a.fill(val);
-}
 
 //-----------------------------------------------------------------------------
 

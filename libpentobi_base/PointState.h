@@ -24,23 +24,24 @@ public:
     static constexpr IntType value_empty = range - 1;
 
 
+    static PointState empty() { return PointState(value_empty); }
+
+
     PointState();
 
-    explicit PointState(Color c);
+    explicit PointState(Color c) { m_i = c.to_int(); }
 
     explicit PointState(IntType i);
 
-    bool operator==(PointState s) const;
+    bool operator==(PointState s) const { return m_i == s.m_i; }
 
-    bool operator!=(PointState s) const;
+    bool operator!=(PointState s) const { return ! operator==(s); }
 
-    bool operator==(Color c) const;
+    bool operator==(Color c) const { return m_i == c.to_int(); }
 
-    bool operator!=(Color c) const;
+    bool operator!=(Color c) const { return ! operator==(c); }
 
     IntType to_int() const;
-
-    static PointState empty();
 
     bool is_empty() const;
 
@@ -53,7 +54,10 @@ private:
 
     IntType m_i;
 
-    bool is_initialized() const;
+
+#ifdef LIBBOARDGAME_DEBUG
+    bool is_initialized() const { return m_i < value_uninitialized; }
+#endif
 };
 
 
@@ -64,45 +68,10 @@ inline PointState::PointState()
 #endif
 }
 
-inline PointState::PointState(Color c)
-{
-    m_i = c.to_int();
-}
-
 inline PointState::PointState(IntType i)
 {
     LIBBOARDGAME_ASSERT(i < range);
     m_i = i;
-}
-
-inline bool PointState::operator==(PointState s) const
-{
-    return m_i == s.m_i;
-}
-
-inline bool PointState::operator==(Color c) const
-{
-    return m_i == c.to_int();
-}
-
-inline bool PointState::operator!=(PointState s) const
-{
-    return ! operator==(s);
-}
-
-inline bool PointState::operator!=(Color c) const
-{
-    return ! operator==(c);
-}
-
-inline PointState PointState::empty()
-{
-    return PointState(value_empty);
-}
-
-inline bool PointState::is_initialized() const
-{
-    return m_i < value_uninitialized;
 }
 
 inline bool PointState::is_color() const

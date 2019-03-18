@@ -23,7 +23,7 @@ class PieceMap
 public:
     PieceMap() = default;
 
-    explicit PieceMap(const T& val);
+    explicit PieceMap(const T& val) { fill(val); }
 
     bool operator==(const PieceMap& piece_map) const;
 
@@ -31,17 +31,11 @@ public:
 
     const T& operator[](Piece piece) const;
 
-    void fill(const T& val);
+    void fill(const T& val) { m_a.fill(val); }
 
 private:
-    array<T, Piece::range_not_null> m_a;
+    std::array<T, Piece::range_not_null> m_a;
 };
-
-template<typename T>
-inline PieceMap<T>::PieceMap(const T& val)
-{
-    fill(val);
-}
 
 template<typename T>
 bool PieceMap<T>::operator==(const PieceMap& piece_map) const
@@ -61,12 +55,6 @@ inline const T& PieceMap<T>::operator[](Piece piece) const
 {
     LIBBOARDGAME_ASSERT(! piece.is_null());
     return m_a[piece.to_int()];
-}
-
-template<typename T>
-void PieceMap<T>::fill(const T& val)
-{
-    m_a.fill(val);
 }
 
 //-----------------------------------------------------------------------------

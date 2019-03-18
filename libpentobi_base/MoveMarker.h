@@ -17,25 +17,13 @@ namespace libpentobi_base {
 class MoveMarker
 {
 public:
-    MoveMarker()
-    {
-        clear();
-    }
+    MoveMarker() { clear(); }
 
-    bool operator[](Move mv) const
-    {
-        return m_a[mv.to_int()];
-    }
+    bool operator[](Move mv) const { return m_a[mv.to_int()]; }
 
-    void set(Move mv)
-    {
-        m_a[mv.to_int()] = true;
-    }
+    void set(Move mv) { m_a[mv.to_int()] = true; }
 
-    void clear(Move mv)
-    {
-        m_a[mv.to_int()] = false;
-    }
+    void clear(Move mv) { m_a[mv.to_int()] = false; }
 
     template<class T>
     void set(const T& t)
@@ -51,18 +39,12 @@ public:
             clear(mv);
     }
 
-    void set()
-    {
-        m_a.fill(true);
-    }
+    void set() { m_a.fill(true); }
 
-    void clear()
-    {
-        m_a.fill(false);
-    }
+    void clear() { m_a.fill(false); }
 
 private:
-    array<bool, Move::range> m_a;
+    std::array<bool, Move::range> m_a;
 };
 
 //-----------------------------------------------------------------------------

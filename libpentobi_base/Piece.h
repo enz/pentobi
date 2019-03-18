@@ -31,16 +31,16 @@ public:
     static constexpr IntType range = max_pieces + 1;
 
 
-    static Piece null();
+    static Piece null() { return Piece(value_null); }
 
 
     Piece();
 
     explicit Piece(IntType i);
 
-    bool operator==(Piece piece) const;
+    bool operator==(Piece piece) const { return m_i == piece.m_i; }
 
-    bool operator!=(Piece piece) const;
+    bool operator!=(Piece piece) const { return ! operator==(piece); }
 
     bool is_null() const;
 
@@ -54,7 +54,10 @@ private:
 
     IntType m_i;
 
-    bool is_initialized() const;
+
+#ifdef LIBBOARDGAME_DEBUG
+    bool is_initialized() const { return m_i < value_uninitialized; }
+#endif
 };
 
 inline Piece::Piece()
@@ -70,30 +73,10 @@ inline Piece::Piece(IntType i)
     m_i = i;
 }
 
-inline bool Piece::operator==(Piece piece) const
-{
-    return m_i == piece.m_i;
-}
-
-inline bool Piece::operator!=(Piece piece) const
-{
-    return ! operator==(piece);
-}
-
-inline bool Piece::is_initialized() const
-{
-    return m_i < value_uninitialized;
-}
-
 inline bool Piece::is_null() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i == value_null;
-}
-
-inline Piece Piece::null()
-{
-    return Piece(value_null);
 }
 
 inline auto Piece::to_int() const -> IntType

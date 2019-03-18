@@ -24,30 +24,15 @@ public:
     class Iterator
     {
     public:
-        explicit Iterator(IntType i)
-        {
-            m_i = i;
-        }
+        explicit Iterator(IntType i) { m_i = i; }
 
-        bool operator==(Iterator it) const
-        {
-            return m_i == it.m_i;
-        }
+        bool operator==(Iterator it) const { return m_i == it.m_i; }
 
-        bool operator!=(Iterator it) const
-        {
-            return m_i != it.m_i;
-        }
+        bool operator!=(Iterator it) const { return m_i != it.m_i; }
 
-        void operator++()
-        {
-            ++m_i;
-        }
+        void operator++() { ++m_i; }
 
-        Color operator*() const
-        {
-            return Color(m_i);
-        }
+        Color operator*() const { return Color(m_i); }
 
     private:
         IntType m_i;
@@ -76,7 +61,7 @@ public:
 
     bool operator==(Color c) const;
 
-    bool operator!=(Color c) const;
+    bool operator!=(Color c) const { return ! operator==(c); }
 
     bool operator<(Color c) const;
 
@@ -91,7 +76,9 @@ private:
 
     IntType m_i;
 
-    bool is_initialized() const;
+#ifdef LIBBOARDGAME_DEBUG
+    bool is_initialized() const { return m_i < value_uninitialized; }
+#endif
 };
 
 
@@ -115,11 +102,6 @@ inline bool Color::operator==(Color c) const
     return m_i == c.m_i;
 }
 
-inline bool Color::operator!=(Color c) const
-{
-    return ! operator==(c);
-}
-
 inline bool Color::operator<(Color c) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
@@ -135,11 +117,6 @@ inline Color Color::get_next(IntType nu_colors) const
 inline Color Color::get_previous(IntType nu_colors) const
 {
     return Color(static_cast<IntType>(m_i + nu_colors - 1) % nu_colors);
-}
-
-inline bool Color::is_initialized() const
-{
-    return m_i < value_uninitialized;
 }
 
 inline Color::IntType Color::to_int() const

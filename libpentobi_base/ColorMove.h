@@ -26,7 +26,8 @@ struct ColorMove
         comparisons. If you are sure that the color is never used and don't
         want to initialize it for efficiency, use the default constructor
         and then assign only the move. */
-    static ColorMove null();
+    static ColorMove null() { return {Color(0), Move::null()}; }
+
 
     ColorMove() = default;
 
@@ -38,9 +39,9 @@ struct ColorMove
 
     /** Inequality operator.
         @pre move, color, mv.move, mv.color are initialized. */
-    bool operator!=(ColorMove mv) const;
+    bool operator!=(ColorMove mv) const { return ! operator==(mv); }
 
-    bool is_null() const;
+    bool is_null() const { return move.is_null(); }
 };
 
 inline ColorMove::ColorMove(Color c, Move mv)
@@ -52,21 +53,6 @@ inline ColorMove::ColorMove(Color c, Move mv)
 inline bool ColorMove::operator==(ColorMove mv) const
 {
     return move == mv.move && color == mv.color;
-}
-
-inline bool ColorMove::operator!=(ColorMove mv) const
-{
-    return ! operator==(mv);
-}
-
-inline bool ColorMove::is_null() const
-{
-    return move.is_null();
-}
-
-inline ColorMove ColorMove::null()
-{
-    return {Color(0), Move::null()};
 }
 
 //-----------------------------------------------------------------------------

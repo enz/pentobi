@@ -52,7 +52,9 @@ public:
         variant, plus a null move. */
     static constexpr IntType range = onboard_moves_trigon + 1;
 
-    static Move null();
+
+    static Move null() { return Move(0); }
+
 
     Move();
 
@@ -60,7 +62,7 @@ public:
 
     bool operator==(Move mv) const;
 
-    bool operator!=(Move mv) const;
+    bool operator!=(Move mv) const { return ! operator==(mv); }
 
     bool operator<(Move mv) const;
 
@@ -74,7 +76,10 @@ private:
 
     IntType m_i;
 
-    bool is_initialized() const;
+
+#ifdef LIBBOARDGAME_DEBUG
+    bool is_initialized() const { return m_i < value_uninitialized; }
+#endif
 };
 
 inline Move::Move()
@@ -97,11 +102,6 @@ inline bool Move::operator==(Move mv) const
     return m_i == mv.m_i;
 }
 
-inline bool Move::operator!=(Move mv) const
-{
-    return ! operator==(mv);
-}
-
 inline bool Move::operator<(Move mv) const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
@@ -109,20 +109,10 @@ inline bool Move::operator<(Move mv) const
     return m_i < mv.m_i;
 }
 
-inline bool Move::is_initialized() const
-{
-    return m_i < value_uninitialized;
-}
-
 inline bool Move::is_null() const
 {
     LIBBOARDGAME_ASSERT(is_initialized());
     return m_i == 0;
-}
-
-inline Move Move::null()
-{
-    return Move(0);
 }
 
 inline Move::IntType Move::to_int() const
