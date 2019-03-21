@@ -267,7 +267,7 @@ Item
                 enabled: enableAnimations
 
                 PieceRotationAnimation { }
-                PieceFlipAnimation { target: flipX }
+                PieceRotationAnimation { target: flipX; property: "angle" }
             }
         ]
     }

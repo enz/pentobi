@@ -55,7 +55,6 @@
         <file>qml/OpenDialog.qml</file>
         <file>qml/PieceCallisto.qml</file>
         <file>qml/PieceClassic.qml</file>
-        <file>qml/PieceFlipAnimation.qml</file>
         <file>qml/PieceGembloQ.qml</file>
         <file>qml/PieceList.qml</file>
         <file>qml/PieceManipulator.qml</file>

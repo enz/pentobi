@@ -15,6 +15,6 @@ SequentialAnimation {
     PropertyAction {
         target: flipX; property: "angle"; value: flipX.angle
     }
-    PieceFlipAnimation { target: flipY; to: 180 }
+    PieceRotationAnimation { target: flipY; property: "angle"; to: 180 }
     PropertyAction { target: flipY; property: "angle"; value: 0 }
 }
