@@ -143,10 +143,12 @@ Item
                 name: "90"
 
                 PropertyChanges { target: root; rotation: 90 }
-                // flipY is temporarily not 0 during PieceSwitchedFlipAnimation
-                // If not explicitely set to 0, it can become stuck if states
-                // are changed while transitions are still running (e.g. by
-                // quickly selecting Find Move repeatedly).
+                // flipY is 0 in all states, but we need to make it part of the
+                // property changes because PieceSwitchedFlipAnimation changes
+                // it temporarily and otherwise it is not guaranteed to be set
+                // to 0 again if a state change is triggered while the last
+                // animation is still running, for example by pressing Ctrl-H
+                // (Find Move) in quick succession.
                 PropertyChanges { target: flipY; angle: 0 }
             },
             State {
