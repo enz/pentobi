@@ -141,34 +141,52 @@ Item
         states: [
             State {
                 name: "90"
+
                 PropertyChanges { target: root; rotation: 90 }
+                // flipY is temporarily not 0 during PieceSwitchedFlipAnimation
+                // If not explicitely set to 0, it can become stuck if states
+                // are changed while transitions are still running (e.g. by
+                // quickly selecting Find Move repeatedly).
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "180"
+
                 PropertyChanges { target: root; rotation: 180 }
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "270"
+
                 PropertyChanges { target: root; rotation: 270 }
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "flip"
+
                 PropertyChanges { target: flipX; angle: 180 }
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "90flip"
+
                 PropertyChanges { target: root; rotation: 90 }
                 PropertyChanges { target: flipX; angle: 180 }
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "180flip"
+
                 PropertyChanges { target: root; rotation: 180 }
                 PropertyChanges { target: flipX; angle: 180 }
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "270flip"
+
                 PropertyChanges { target: root; rotation: 270 }
                 PropertyChanges { target: flipX; angle: 180 }
+                PropertyChanges { target: flipY; angle: 0 }
             }
         ]
 

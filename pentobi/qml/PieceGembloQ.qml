@@ -150,34 +150,49 @@ Item
         states: [
             State {
                 name: "90"
+
                 PropertyChanges { target: root; rotation: 90 }
+                // See comment in PieceClassic about flipY property change
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "180"
+
                 PropertyChanges { target: root; rotation: 180 }
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "270"
+
                 PropertyChanges { target: root; rotation: 270 }
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "flip"
+
                 PropertyChanges { target: flipX; angle: 180 }
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "90flip"
+
                 PropertyChanges { target: root; rotation: 90 }
                 PropertyChanges { target: flipX; angle: 180 }
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "180flip"
+
                 PropertyChanges { target: root; rotation: 180 }
                 PropertyChanges { target: flipX; angle: 180 }
+                PropertyChanges { target: flipY; angle: 0 }
             },
             State {
                 name: "270flip"
+
                 PropertyChanges { target: root; rotation: 270 }
                 PropertyChanges { target: flipX; angle: 180 }
+                PropertyChanges { target: flipY; angle: 0 }
             }
         ]
 

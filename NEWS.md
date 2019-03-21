@@ -24,6 +24,11 @@ Version 16.x (master)
 * Renamed build configuration option PENTOBI_BUILD_TESTS to
   BUILD_TESTING for compatibility with CTest.
 
+### Bug Fixes
+
+* Piece could become stuck in partially flipped state if Find Move was
+  selected multiple times in quick succession.
+
 Version 16.2.x (v16-fixes)
 --------------------------
 
