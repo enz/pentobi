@@ -147,23 +147,23 @@ Item
 
         states: [
             State {
-                name: "rot60"
+                name: "60"
                 PropertyChanges { target: root; rotation: 60 }
             },
             State {
-                name: "rot120"
+                name: "120"
                 PropertyChanges { target: root; rotation: 120 }
             },
             State {
-                name: "rot180"
+                name: "180"
                 PropertyChanges { target: root; rotation: 180 }
             },
             State {
-                name: "rot240"
+                name: "240"
                 PropertyChanges { target: root; rotation: 240 }
             },
             State {
-                name: "rot300"
+                name: "300"
                 PropertyChanges { target: root; rotation: 300 }
             },
             State {
@@ -171,27 +171,27 @@ Item
                 PropertyChanges { target: flipX; angle: 180 }
             },
             State {
-                name: "rot60Flip"
+                name: "60flip"
                 PropertyChanges { target: root; rotation: 60 }
                 PropertyChanges { target: flipX; angle: 180 }
             },
             State {
-                name: "rot120Flip"
+                name: "120flip"
                 PropertyChanges { target: root; rotation: 120 }
                 PropertyChanges { target: flipX; angle: 180 }
             },
             State {
-                name: "rot180Flip"
+                name: "180flip"
                 PropertyChanges { target: root; rotation: 180 }
                 PropertyChanges { target: flipX; angle: 180 }
             },
             State {
-                name: "rot240Flip"
+                name: "240flip"
                 PropertyChanges { target: root; rotation: 240 }
                 PropertyChanges { target: flipX; angle: 180 }
             },
             State {
-                name: "rot300Flip"
+                name: "300flip"
                 PropertyChanges { target: root; rotation: 300 }
                 PropertyChanges { target: flipX; angle: 180 }
             }
@@ -199,37 +199,37 @@ Item
 
         transitions: [
             Transition {
-                from: ",rot180Flip"; to: from
+                from: ",180flip"; to: from
                 enabled: enableAnimations
 
                 PieceSwitchedFlipAnimation { }
             },
             Transition {
-                from: "rot60,rot240Flip"; to: from
+                from: "60,240flip"; to: from
                 enabled: enableAnimations
 
                 PieceSwitchedFlipAnimation { }
             },
             Transition {
-                from: "rot120,rot300Flip"; to: from
+                from: "120,300flip"; to: from
                 enabled: enableAnimations
 
                 PieceSwitchedFlipAnimation { }
             },
             Transition {
-                from: "rot180,flip"; to: from
+                from: "180,flip"; to: from
                 enabled: enableAnimations
 
                 PieceSwitchedFlipAnimation { }
             },
             Transition {
-                from: "rot240,rot60Flip"; to: from
+                from: "240,60flip"; to: from
                 enabled: enableAnimations
 
                 PieceSwitchedFlipAnimation { }
             },
             Transition {
-                from: "rot300,rot120Flip"; to: from
+                from: "300,120flip"; to: from
                 enabled: enableAnimations
 
                 PieceSwitchedFlipAnimation { }

@@ -185,61 +185,61 @@ const Transform* PieceModel::getTransform(const QString& state) const
     auto pieceSet = m_bd.get_piece_set();
     if (pieceSet == PieceSet::trigon)
     {
-        if (state == QStringLiteral("rot60"))
+        if (state == QStringLiteral("60"))
             return transforms.find<TransfTrigonRot60>();
-        if (state == QStringLiteral("rot120"))
+        if (state == QStringLiteral("120"))
             return transforms.find<TransfTrigonRot120>();
-        if (state == QStringLiteral("rot180"))
+        if (state == QStringLiteral("180"))
             return transforms.find<TransfTrigonRot180>();
-        if (state == QStringLiteral("rot240"))
+        if (state == QStringLiteral("240"))
             return transforms.find<TransfTrigonRot240>();
-        if (state == QStringLiteral("rot300"))
+        if (state == QStringLiteral("300"))
             return transforms.find<TransfTrigonRot300>();
         if (state == QStringLiteral("flip"))
             return transforms.find<TransfTrigonReflRot180>();
-        if (state == QStringLiteral("rot60Flip"))
+        if (state == QStringLiteral("60flip"))
             return transforms.find<TransfTrigonReflRot120>();
-        if (state == QStringLiteral("rot120Flip"))
+        if (state == QStringLiteral("120flip"))
             return transforms.find<TransfTrigonReflRot60>();
-        if (state == QStringLiteral("rot180Flip"))
+        if (state == QStringLiteral("180flip"))
             return transforms.find<TransfTrigonRefl>();
-        if (state == QStringLiteral("rot240Flip"))
+        if (state == QStringLiteral("240flip"))
             return transforms.find<TransfTrigonReflRot300>();
-        if (state == QStringLiteral("rot300Flip"))
+        if (state == QStringLiteral("300flip"))
             return transforms.find<TransfTrigonReflRot240>();
         return transforms.find<TransfTrigonIdentity>();
     }
     if (pieceSet == PieceSet::gembloq)
     {
-        if (state == QStringLiteral("rot90"))
+        if (state == QStringLiteral("90"))
             return transforms.find<TransfGembloQRot90>();
-        if (state == QStringLiteral("rot180"))
+        if (state == QStringLiteral("180"))
             return transforms.find<TransfGembloQRot180>();
-        if (state == QStringLiteral("rot270"))
+        if (state == QStringLiteral("270"))
             return transforms.find<TransfGembloQRot270>();
         if (state == QStringLiteral("flip"))
             return transforms.find<TransfGembloQRot180Refl>();
-        if (state == QStringLiteral("rot90Flip"))
+        if (state == QStringLiteral("90flip"))
             return transforms.find<TransfGembloQRot90Refl>();
-        if (state == QStringLiteral("rot180Flip"))
+        if (state == QStringLiteral("180flip"))
             return transforms.find<TransfGembloQRefl>();
-        if (state == QStringLiteral("rot270Flip"))
+        if (state == QStringLiteral("270flip"))
             return transforms.find<TransfGembloQRot270Refl>();
         return transforms.find<TransfGembloQIdentity>();
     }
-    if (state == QStringLiteral("rot90"))
+    if (state == QStringLiteral("90"))
         return transforms.find<TransfRectRot90>();
-    if (state == QStringLiteral("rot180"))
+    if (state == QStringLiteral("180"))
         return transforms.find<TransfRectRot180>();
-    if (state == QStringLiteral("rot270"))
+    if (state == QStringLiteral("270"))
         return transforms.find<TransfRectRot270>();
     if (state == QStringLiteral("flip"))
         return transforms.find<TransfRectRot180Refl>();
-    if (state == QStringLiteral("rot90Flip"))
+    if (state == QStringLiteral("90flip"))
         return transforms.find<TransfRectRot90Refl>();
-    if (state == QStringLiteral("rot180Flip"))
+    if (state == QStringLiteral("180flip"))
         return transforms.find<TransfRectRefl>();
-    if (state == QStringLiteral("rot270Flip"))
+    if (state == QStringLiteral("270flip"))
         return transforms.find<TransfRectRot270Refl>();
     return transforms.find<TransfIdentity>();
 }
@@ -359,61 +359,61 @@ void PieceModel::setTransform(const Transform* transform)
     if (pieceSet == PieceSet::trigon)
     {
         if (dynamic_cast<const TransfTrigonRot60*>(transform))
-            state = QStringLiteral("rot60");
+            state = QStringLiteral("60");
         else if (dynamic_cast<const TransfTrigonRot120*>(transform))
-            state = QStringLiteral("rot120");
+            state = QStringLiteral("120");
         else if (dynamic_cast<const TransfTrigonRot180*>(transform))
-            state = QStringLiteral("rot180");
+            state = QStringLiteral("180");
         else if (dynamic_cast<const TransfTrigonRot240*>(transform))
-            state = QStringLiteral("rot240");
+            state = QStringLiteral("240");
         else if (dynamic_cast<const TransfTrigonRot300*>(transform))
-            state = QStringLiteral("rot300");
+            state = QStringLiteral("300");
         else if (dynamic_cast<const TransfTrigonReflRot180*>(transform))
             state = QStringLiteral("flip");
         else if (dynamic_cast<const TransfTrigonReflRot120*>(transform))
-            state = QStringLiteral("rot60Flip");
+            state = QStringLiteral("60flip");
         else if (dynamic_cast<const TransfTrigonReflRot60*>(transform))
-            state = QStringLiteral("rot120Flip");
+            state = QStringLiteral("120flip");
         else if (dynamic_cast<const TransfTrigonRefl*>(transform))
-            state = QStringLiteral("rot180Flip");
+            state = QStringLiteral("180flip");
         else if (dynamic_cast<const TransfTrigonReflRot300*>(transform))
-            state = QStringLiteral("rot240Flip");
+            state = QStringLiteral("240flip");
         else if (dynamic_cast<const TransfTrigonReflRot240*>(transform))
-            state = QStringLiteral("rot300Flip");
+            state = QStringLiteral("300flip");
     }
     else if (pieceSet == PieceSet::gembloq)
     {
         if (dynamic_cast<const TransfGembloQRot90*>(transform))
-            state = QStringLiteral("rot90");
+            state = QStringLiteral("90");
         else if (dynamic_cast<const TransfGembloQRot180*>(transform))
-            state = QStringLiteral("rot180");
+            state = QStringLiteral("180");
         else if (dynamic_cast<const TransfGembloQRot270*>(transform))
-            state = QStringLiteral("rot270");
+            state = QStringLiteral("270");
         else if (dynamic_cast<const TransfGembloQRot180Refl*>(transform))
             state = QStringLiteral("flip");
         else if (dynamic_cast<const TransfGembloQRot90Refl*>(transform))
-            state = QStringLiteral("rot90Flip");
+            state = QStringLiteral("90flip");
         else if (dynamic_cast<const TransfGembloQRefl*>(transform))
-            state = QStringLiteral("rot180Flip");
+            state = QStringLiteral("180flip");
         else if (dynamic_cast<const TransfGembloQRot270Refl*>(transform))
-            state = QStringLiteral("rot270Flip");
+            state = QStringLiteral("270flip");
     }
     else
     {
         if (dynamic_cast<const TransfRectRot90*>(transform))
-            state = QStringLiteral("rot90");
+            state = QStringLiteral("90");
         else if (dynamic_cast<const TransfRectRot180*>(transform))
-            state = QStringLiteral("rot180");
+            state = QStringLiteral("180");
         else if (dynamic_cast<const TransfRectRot270*>(transform))
-            state = QStringLiteral("rot270");
+            state = QStringLiteral("270");
         else if (dynamic_cast<const TransfRectRot180Refl*>(transform))
             state = QStringLiteral("flip");
         else if (dynamic_cast<const TransfRectRot90Refl*>(transform))
-            state = QStringLiteral("rot90Flip");
+            state = QStringLiteral("90flip");
         else if (dynamic_cast<const TransfRectRefl*>(transform))
-            state = QStringLiteral("rot180Flip");
+            state = QStringLiteral("180flip");
         else if (dynamic_cast<const TransfRectRot270Refl*>(transform))
-            state = QStringLiteral("rot270Flip");
+            state = QStringLiteral("270flip");
     }
     if (m_state == state)
         return;

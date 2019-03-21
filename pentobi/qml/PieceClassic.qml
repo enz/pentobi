@@ -140,15 +140,15 @@ Item
 
         states: [
             State {
-                name: "rot90"
+                name: "90"
                 PropertyChanges { target: root; rotation: 90 }
             },
             State {
-                name: "rot180"
+                name: "180"
                 PropertyChanges { target: root; rotation: 180 }
             },
             State {
-                name: "rot270"
+                name: "270"
                 PropertyChanges { target: root; rotation: 270 }
             },
             State {
@@ -156,17 +156,17 @@ Item
                 PropertyChanges { target: flipX; angle: 180 }
             },
             State {
-                name: "rot90Flip"
+                name: "90flip"
                 PropertyChanges { target: root; rotation: 90 }
                 PropertyChanges { target: flipX; angle: 180 }
             },
             State {
-                name: "rot180Flip"
+                name: "180flip"
                 PropertyChanges { target: root; rotation: 180 }
                 PropertyChanges { target: flipX; angle: 180 }
             },
             State {
-                name: "rot270Flip"
+                name: "270flip"
                 PropertyChanges { target: root; rotation: 270 }
                 PropertyChanges { target: flipX; angle: 180 }
             }
@@ -174,25 +174,25 @@ Item
 
         transitions: [
             Transition {
-                from: ",rot180Flip"; to: from
+                from: ",180flip"; to: from
                 enabled: enableAnimations
 
                 PieceSwitchedFlipAnimation { }
             },
             Transition {
-                from: "rot90,rot270Flip"; to: from
+                from: "90,270flip"; to: from
                 enabled: enableAnimations
 
                 PieceSwitchedFlipAnimation { }
             },
             Transition {
-                from: "rot180,flip"; to: from
+                from: "180,flip"; to: from
                 enabled: enableAnimations
 
                 PieceSwitchedFlipAnimation { }
             },
             Transition {
-                from: "rot270,rot90Flip"; to: from
+                from: "270,90flip"; to: from
                 enabled: enableAnimations
 
                 PieceSwitchedFlipAnimation { }
