@@ -925,6 +925,11 @@ bool GameModel::loadAutoSave()
                 settings.value(QStringLiteral("autosaveDate")).toDateTime();
         setFile(file);
     }
+    auto& node = m_game.get_current();
+    if (file.isEmpty()
+            && (node.has_parent() || node.has_children() || has_setup(node)))
+        // Can only happen if settings were edited from outside
+        isModified = true;
     setIsModified(isModified);
     restoreAutoSaveLocation();
     updateProperties();
@@ -1097,16 +1102,19 @@ bool GameModel::openClipboard()
         return false;
     }
     istringstream in(text.toLocal8Bit().constData());
+    bool result;
     if (openStream(in))
     {
         auto& root = m_game.get_root();
         if (! has_setup(root) && root.has_children())
             goEnd();
-        clearFile();
-        return true;
+        result = true;
     }
+    else
+        result = false;
     clearFile();
-    return false;
+    setIsModified(true);
+    return result;
 }
 
 PieceModel* GameModel::pickNamedPiece(const QString& name,
