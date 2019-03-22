@@ -99,6 +99,7 @@ Pentobi.Dialog {
                 Layout.fillWidth: true
                 Component.onCompleted: nameField.cursorPosition = nameField.length
                 onTextEdited: view.currentIndex = -1
+                onVisibleChanged: if (isAndroid) focus = false
             }
             RowLayout {
                 Layout.fillWidth: true
