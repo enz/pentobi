@@ -119,7 +119,7 @@ void AndroidUtils::scanFile([[maybe_unused]] const QString& pathname)
 #ifdef Q_OS_ANDROID
     // Corresponding Java code:
     //   sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-    //                       Uri.fromFile(File(pathname).getCanonicalFile())));
+    //                         Uri.fromFile(File(pathname).getAbsoluteFile())))
     auto action = QAndroidJniObject::getStaticObjectField<jstring>(
                 "android/content/Intent", "ACTION_MEDIA_SCANNER_SCAN_FILE");
     if (! action.isValid())
