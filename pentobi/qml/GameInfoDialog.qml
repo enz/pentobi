@@ -20,10 +20,6 @@ Pentobi.Dialog {
         textFieldTime.text = gameModel.time
         textFieldEvent.text = gameModel.event
         textFieldRound.text = gameModel.round
-        // Remove focus from text fields in case dialog was used before. It
-        // might be a different game now, which makes keeping the last focus
-        // meaningless.
-        gridLayout.focus = true
     }
     onAccepted: {
         gameModel.playerName0 = textFieldPlayerName0.text
@@ -65,6 +61,11 @@ Pentobi.Dialog {
 
                 selectByMouse: true
                 Layout.fillWidth: true
+                // Remove focus in case dialog was used before. It might be a
+                // different game now, which makes keeping the last focus
+                // meaningless. Also, it would automatically open the virtual
+                // keaboard on Android.
+                onVisibleChanged: focus = false
             }
             Label {
                 text: {
@@ -82,6 +83,7 @@ Pentobi.Dialog {
 
                 selectByMouse: true
                 Layout.fillWidth: true
+                onVisibleChanged: focus = false
             }
             Label {
                 visible: textFieldPlayerName2.visible
@@ -93,6 +95,7 @@ Pentobi.Dialog {
                 visible: gameModel.nuPlayers > 2
                 selectByMouse: true
                 Layout.fillWidth: true
+                onVisibleChanged: focus = false
             }
             Label {
                 visible: textFieldPlayerName3.visible
@@ -104,6 +107,7 @@ Pentobi.Dialog {
                 visible: gameModel.nuPlayers > 3
                 selectByMouse: true
                 Layout.fillWidth: true
+                onVisibleChanged: focus = false
             }
             Label { text: qsTr("Date:") }
             TextField {
@@ -111,6 +115,7 @@ Pentobi.Dialog {
 
                 selectByMouse: true
                 Layout.fillWidth: true
+                onVisibleChanged: focus = false
             }
             Label { text: qsTr("Time:") }
             TextField {
@@ -118,6 +123,7 @@ Pentobi.Dialog {
 
                 selectByMouse: true
                 Layout.fillWidth: true
+                onVisibleChanged: focus = false
             }
             Label { text: qsTr("Event:") }
             TextField {
@@ -125,6 +131,7 @@ Pentobi.Dialog {
 
                 selectByMouse: true
                 Layout.fillWidth: true
+                onVisibleChanged: focus = false
             }
             Label { text: qsTr("Round:") }
             TextField {
@@ -132,6 +139,7 @@ Pentobi.Dialog {
 
                 selectByMouse: true
                 Layout.fillWidth: true
+                onVisibleChanged: focus = false
             }
         }
     }
