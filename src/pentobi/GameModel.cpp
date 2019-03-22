@@ -1133,6 +1133,7 @@ bool GameModel::openClipboard()
         auto& root = m_game.get_root();
         if (! has_setup(root) && root.has_children())
             goEnd();
+        clearFile();
         return true;
     }
     clearFile();
