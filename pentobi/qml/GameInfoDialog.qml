@@ -20,6 +20,10 @@ Pentobi.Dialog {
         textFieldTime.text = gameModel.time
         textFieldEvent.text = gameModel.event
         textFieldRound.text = gameModel.round
+        // Remove focus from text fields in case dialog was used before. It
+        // might be a different game now, which makes keeping the last focus
+        // meaningless.
+        gridLayout.focus = true
     }
     onAccepted: {
         gameModel.playerName0 = textFieldPlayerName0.text
