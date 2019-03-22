@@ -34,6 +34,8 @@ Version 16.2.x (v16-fixes)
 
 * Selected piece in GembloQ could temporarily disappear if the rotate
   backward button was hit quickly multiple times.
+* Current file name was not cleared after opening a file from
+  clipboard.
 * Shared MIME Info was missing a pattern for detecting Classic 3-player
   game files independent of the file extension.
 * Development tool twogtp did not resolve ties as a win for the second
