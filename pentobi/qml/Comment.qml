@@ -7,37 +7,36 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 
-ScrollView {
+Rectangle {
     function dropFocus() { textArea.focus = false }
 
-    clip: true
-    ScrollBar.vertical.minimumSize: 0.2
+    color: theme.colorCommentBase
+    radius: 2
+    border.color:
+        textArea.activeFocus ? theme.colorCommentFocus
+                             : theme.colorCommentBorder
 
-    TextArea {
-        id: textArea
+    ScrollView {
+        anchors.fill: parent
+        clip: true
+        ScrollBar.vertical.minimumSize: 0.2
 
-        text: gameModel.comment
-        color: theme.colorCommentText
-        selectionColor: theme.colorSelection
-        selectedTextColor: theme.colorSelectedText
-        selectByMouse: isDesktop
-        wrapMode: TextEdit.Wrap
-        focus: true
-        onTextChanged: gameModel.comment = text
-        background: Rectangle {
-            // Qt 5.12.0 alpha doesn't size the background if it is in a
-            // SwipeView like in GameViewMobile
-            anchors.fill: parent
-            color: theme.colorCommentBase
-            radius: 2
-            border.color:
-                textArea.activeFocus ? theme.colorCommentFocus
-                                     : theme.colorCommentBorder
+        TextArea {
+            id: textArea
+
+            text: gameModel.comment
+            color: theme.colorCommentText
+            selectionColor: theme.colorSelection
+            selectedTextColor: theme.colorSelectedText
+            selectByMouse: isDesktop
+            wrapMode: TextEdit.Wrap
+            focus: true
+            onTextChanged: gameModel.comment = text
+            Keys.onPressed:
+                if (event.key === Qt.Key_Tab) {
+                    focus = false
+                    event.accepted = true
+                }
         }
-        Keys.onPressed:
-            if (event.key === Qt.Key_Tab) {
-                focus = false
-                event.accepted = true
-            }
     }
 }
