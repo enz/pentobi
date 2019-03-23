@@ -28,9 +28,6 @@ android {
 }
 QMAKE_CXXFLAGS_DEBUG += -DLIBBOARDGAME_DEBUG
 gcc {
-    # CONFIG += c++17 doesn't work with Qt 5.11/Android
-    QMAKE_CXXFLAGS += -std=c++17
-
     QMAKE_CXXFLAGS_RELEASE -= -O
     QMAKE_CXXFLAGS_RELEASE -= -O1
     QMAKE_CXXFLAGS_RELEASE -= -O2
