@@ -49,7 +49,6 @@ Pentobi.Dialog {
 
                 text: gameModel.moveNumber === 0 ?
                           gameModel.moveNumber + gameModel.movesLeft : gameModel.moveNumber
-                focus: true
                 selectByMouse: true
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{
@@ -57,6 +56,7 @@ Pentobi.Dialog {
                     top: gameModel.moveNumber + gameModel.movesLeft
                 }
                 Layout.preferredWidth: font.pixelSize * 5
+                onVisibleChanged: focus = true
             }
             Item { Layout.fillWidth: true }
         }
