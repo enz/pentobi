@@ -361,8 +361,14 @@ ApplicationWindow {
 
         shortcut: "Ctrl+N"
         text: qsTr("New")
+        // The conditions canGoBackward/Forward are not really needed because
+        // they can only be true if either a file was loaded or the game is
+        // modified, but we add them to make sure that the New Game button is
+        // always enabled when needed even if there is an inconsistency in the
+        // other conditions due to a bug in Pentobi.
         enabled: gameView.setupMode || gameModel.isModified
-                 || gameModel.file !== "" || isRated
+                 || gameModel.file !== "" || isRated || gameModel.canGoBackward
+                 || gameModel.canGoForward
         onTriggered: Qt.callLater(function() { Logic.newGame() }) // QTBUG-69682
     }
     Action {
