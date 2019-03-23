@@ -925,10 +925,8 @@ bool GameModel::loadAutoSave()
                 settings.value(QStringLiteral("autosaveDate")).toDateTime();
         setFile(file);
     }
-    auto& node = m_game.get_current();
-    if (file.isEmpty()
-            && (node.has_parent() || node.has_children() || has_setup(node)))
-        // Can only happen if settings were edited from outside
+    // Sanitize isModified if value from settings is inconsistent
+    if (file.isEmpty() && ! libboardgame_base::is_empty(m_game.get_tree()))
         isModified = true;
     setIsModified(isModified);
     restoreAutoSaveLocation();
