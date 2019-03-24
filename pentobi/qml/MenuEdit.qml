@@ -100,8 +100,10 @@ Pentobi.Menu {
             gameView.setupMode = checked
             if (checked)
                 gameView.showPieces()
-            else
+            else {
+                gameView.pickedPiece = null
                 Logic.setComputerNone()
+            }
         }
     }
     Pentobi.MenuItem {
