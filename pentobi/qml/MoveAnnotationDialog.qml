@@ -59,7 +59,7 @@ Pentobi.Dialog {
             anchors.fill: parent
 
             Label { text: qsTr("Move %1").arg(moveNumber) }
-            ComboBox {
+            Pentobi.ComboBox {
                 id: comboBox
 
                 model: [

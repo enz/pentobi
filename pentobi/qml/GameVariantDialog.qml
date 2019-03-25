@@ -38,7 +38,7 @@ Pentobi.Dialog {
 
             anchors.fill: parent
 
-            ComboBox {
+            Pentobi.ComboBox {
                 id: comboBox
 
                 model: [

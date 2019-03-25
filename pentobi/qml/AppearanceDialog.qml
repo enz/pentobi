@@ -147,7 +147,7 @@ Pentobi.Dialog {
 
 
             }
-            ComboBox {
+            Pentobi.ComboBox {
                 id: comboBoxTheme
 
                 model: isAndroid ?
@@ -174,7 +174,7 @@ Pentobi.Dialog {
 
 
             }
-            ComboBox {
+            Pentobi.ComboBox {
                 id: comboBoxMoveMarking
 
                 model: [
@@ -194,7 +194,7 @@ Pentobi.Dialog {
 
 
             }
-            ComboBox {
+            Pentobi.ComboBox {
                 id: comboBoxComment
 
                 visible: isDesktop

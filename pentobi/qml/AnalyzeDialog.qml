@@ -39,7 +39,7 @@ Pentobi.Dialog {
                 Layout.fillWidth: true
                 text: qsTr("Analysis speed:")
             }
-            ComboBox {
+            Pentobi.ComboBox {
                 id: comboBox
 
                 model: [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
