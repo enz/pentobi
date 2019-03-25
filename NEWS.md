@@ -28,6 +28,8 @@ Version 16.x (master)
 
 * Piece could become stuck in partially flipped state if Find Move was
   selected multiple times in quick succession.
+* Added workaround for bad contrast (white text on light background) in
+  highlighted combobox menu items on Android if compiled with Qt 5.12.2.
 
 Version 16.2.x (v16-fixes)
 --------------------------
