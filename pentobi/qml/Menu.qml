@@ -29,8 +29,7 @@ Menu {
     delegate: Pentobi.MenuItem { }
     background: Rectangle {
         // Note that MenuItem in Qt 5.11 does neither fully use the system
-        // palette, nor make its actually used colors available in its own
-        // palette.
+        // palette, nor make its actually used colors available.
         color: isDesktop ? palette.window : palette.base
         border.color: palette.mid
     }
