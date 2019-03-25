@@ -187,10 +187,11 @@ Pentobi.Dialog {
                         if (currentIndex >= 0
                                 && ! folderModel.isFolder(currentIndex))
                             name = folderModel.get(currentIndex, "fileName")
-                    delegate: AbstractButton {
+                    delegate: ItemDelegate {
                         width: view.width
                         height: 2 * font.pixelSize
                         focusPolicy: Qt.NoFocus
+                        highlighted: ListView.isCurrentItem
                         contentItem: Row {
                             spacing: 0.3 * font.pixelSize
                             leftPadding: 0.2 * font.pixelSize
@@ -208,7 +209,7 @@ Pentobi.Dialog {
                                 width: parent.width - parent.spacing - parent.leftPadding
                                 text: index < 0 ? "" : fileName
                                 anchors.verticalCenter: parent.verticalCenter
-                                color: view.currentIndex == index ?
+                                color: highlighted ?
                                            // See comment at highlight
                                            (isDesktop ? frame.palette.highlightedText
                                                       : frame.palette.buttonText) :
