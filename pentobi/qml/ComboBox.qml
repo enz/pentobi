@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.11
-import QtQuick.Controls 2.11
+import QtQuick.Controls 2.4
 
 /** Custom ComboBox.
     Explicitely set text color to work around QTBUG-74678 (ComboBox with
