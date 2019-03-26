@@ -61,6 +61,9 @@ MenuItem {
                 return "transparent"
             // Note that MenuItem in Qt 5.11 does neither fully use the system
             // palette, nor make its actually used colors available.
+            // palette.midlight looks similar to the one used in style Default,
+            // but doesn't work in style Fusion on KDE, so we use
+            // palette.highlight on the desktop.
             return isDesktop ? palette.highlight : palette.midlight
         }
     }
@@ -81,7 +84,8 @@ MenuItem {
             color: {
                 // See comment at background
                 if (root.highlighted)
-                    return isDesktop ? palette.highlightedText : palette.buttonText
+                    return isDesktop ? palette.highlightedText
+                                     : palette.buttonText
                 return palette.text
             }
             verticalAlignment: Text.AlignVCenter
