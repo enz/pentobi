@@ -124,7 +124,7 @@ PieceModel::PieceModel(QObject* parent, const Board& bd, Piece piece, Color c)
             m_junctionType.append(junctionType);
         }
     }
-    if (isCallisto)
+    else if (isCallisto)
         for (auto& p : points)
         {
             bool hasRight = points.contains({p.x + 1, p. y});
