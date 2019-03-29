@@ -26,6 +26,7 @@ Version 16.x (master)
 
 ### Bug Fixes
 
+* Comment scrolling did not always work.
 * Added workaround for bad contrast (white text on light background) in
   highlighted combobox menu items on Android if compiled with Qt 5.12.2.
 
