@@ -8,10 +8,10 @@ import QtQuick 2.11
 import QtQuick.Controls 2.4
 
 /** Custom ComboBox.
-    Explicitely set text color to work around QTBUG-74678 (ComboBox with
-    default style uses white text on light background for highlighted items,
-    last tested with Qt 5.12.2 and 5.13.0-beta1). Using custom colors also
-    ensures that popup menu uses the same colors as our custom MenuItem. */
+    Explicitly set text color to work around QTBUG-74678 (ComboBox with default
+    style uses white text on light background for highlighted items, last
+    tested with Qt 5.12.2 and 5.13.0-beta1). Using custom colors also ensures
+    that popup menu uses the same colors as our custom MenuItem. */
 ComboBox {
     id: root
 
