@@ -10,8 +10,6 @@ Version 16.x (master)
   dependencies.
 * New UI translation: Simplified Chinese (thanks to Cherry)
 * New manpages translation: German
-* The Android version now interactively asks for permission when opening
-  or saving a game if storage permission has not yet been granted.
 * Added --version command line options to pentobi and
   pentobi-thumbnailer.
 * The compiler now needs to support C++17.
@@ -37,6 +35,8 @@ Version 16.2.x (v16-fixes)
 * Avoid jumping of splashscreen icon on Android.
 * Shared MIME Info was missing a pattern for detecting Classic 3-player
   game files independent of the file extension.
+* The Android version now interactively asks for permission when opening
+  or saving a game if storage permission has not yet been granted.
 * Development tool twogtp did not resolve ties as a win for the second
   player in two-player Callisto.
 
