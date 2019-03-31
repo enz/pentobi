@@ -26,7 +26,6 @@ Version 16.x (master)
 
 ### Bug Fixes
 
-* Comment scrolling did not always work.
 * Added workaround for bad contrast (white text on light background) in
   highlighted combobox menu items on Android if compiled with Qt 5.12.2.
 
@@ -39,6 +38,7 @@ Version 16.2.x (v16-fixes)
   selected multiple times in quick succession.
 * Current file name was not cleared and button New Game not enabled
   after opening a file from clipboard.
+* Comment scrolling did not always work.
 * Avoid jumping of splashscreen icon on Android.
 * Shared MIME Info was missing a pattern for detecting Classic 3-player
   game files independent of the file extension.
