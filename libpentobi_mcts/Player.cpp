@@ -84,7 +84,7 @@ size_t get_memory(unsigned max_level)
         // simulations (e.g. because the expand threshold increases with the
         // depth). We approximate this by adding an exponent to the ratio
         // and not taking into account if m_max_level is very small.
-        LIBBOARDGAME_ASSERT(Player::max_supported_level >= 5);
+        static_assert(Player::max_supported_level >= 5);
         auto factor = pow(counts_trigon[Player::max_supported_level - 1]
                           / counts_trigon[max(max_level, 5u) - 1], 0.8);
         wanted = static_cast<size_t>(double(wanted) / factor);
