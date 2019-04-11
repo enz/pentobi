@@ -52,7 +52,12 @@ Dialog {
         return false
     }
 
+    // We make all dialogs modal even if they wouldn't need to be because
+    // QtQuickControls2 dialogs are not windows but immovable popup items, so
+    // they inevitably cover parts of the parent window, such that the parent
+    // window is not fully usable anyway.
     modal: true
+
     focus: true
     clip: true
     closePolicy: Popup.CloseOnEscape
