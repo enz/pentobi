@@ -5,7 +5,6 @@ find_package(Qt5Concurrent 5.11 REQUIRED)
 find_package(Qt5QuickControls2 5.11 REQUIRED)
 find_package(Qt5LinguistTools 5.11 REQUIRED)
 find_package(Qt5Svg 5.11 REQUIRED)
-find_package(Qt5QuickCompiler REQUIRED)
 find_package(Qt5WebView 5.11 QUIET)
 
 qt5_add_translation(pentobi_QM
@@ -26,9 +25,6 @@ qt5_add_resources(pentobi_RC_SRCS
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     ../opening_books/pentobi_books.qrc
     icon/pentobi_icon.qrc
-    )
-
-qtquick_compiler_add_resources(pentobi_RC_SRCS_QML
     resources.qrc
     resources_desktop.qrc
     qml/themes/themes.qrc
@@ -36,7 +32,6 @@ qtquick_compiler_add_resources(pentobi_RC_SRCS_QML
 
 add_executable(pentobi WIN32
     ${pentobi_RC_SRCS}
-    ${pentobi_RC_SRCS_QML}
     AnalyzeGameModel.h
     AnalyzeGameModel.cpp
     AndroidUtils.h

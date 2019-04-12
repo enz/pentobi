@@ -39,6 +39,8 @@ Version 16.2.x (v16-fixes)
   or saving a game if storage permission has not yet been granted.
 * Development tool twogtp did not resolve ties as a win for the second
   player in two-player Callisto.
+* Disabled QtQuickCompiler for desktop version to avoid the need for
+  recompilation if the Qt libraries are updated.
 
 Version 16.2 (16 Jan 2019)
 --------------------------
