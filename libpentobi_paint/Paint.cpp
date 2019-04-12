@@ -30,9 +30,9 @@ void paintQuarterSquareBase(QPainter& painter, qreal x, qreal y, qreal width,
 {
     const QPointF polygon[3] =
     {
-        QPointF(x, y),
-        QPointF(x + width, y),
-        QPointF(x, y + height)
+        {x, y},
+        {x + width, y},
+        {x, y + height}
     };
     painter.setPen(Qt::NoPen);
     painter.setBrush(base);
@@ -44,10 +44,10 @@ void paintQuarterSquareFrame(QPainter& painter, qreal x, qreal y, qreal width,
 {
     const QPointF polygon[4] =
     {
-        QPointF(x, y + height),
-        QPointF(x, y + 0.9 * height),
-        QPointF(x + 0.9 * width, y),
-        QPointF(x + width, y)
+        {x, y + height},
+        {x, y + 0.9 * height},
+        {x + 0.9 * width, y},
+        {x + width, y}
     };
     painter.setPen(Qt::NoPen);
     painter.setBrush(light);
@@ -63,31 +63,31 @@ void paintSquareFrame(QPainter& painter, qreal x, qreal y, qreal width,
     qreal border = 0.05 * max(width, height);
     const QPointF down[4] =
         {
-            QPointF(border, height - border),
-            QPointF(width - border, height - border),
-            QPointF(width, height),
-            QPointF(0, height)
+            {border, height - border},
+            {width - border, height - border},
+            {width, height},
+            {0, height}
         };
     const QPointF right[4] =
         {
-            QPointF(width - border, height - border),
-            QPointF(width - border, border),
-            QPointF(width, 0),
-            QPointF(width, height)
+            {width - border, height - border},
+            {width - border, border},
+            {width, 0},
+            {width, height}
         };
     const QPointF up[4] =
         {
-            QPointF(0, 0),
-            QPointF(width, 0),
-            QPointF(width - border, border),
-            QPointF(border, border)
+            {0, 0},
+            {width, 0},
+            {width - border, border},
+            {border, border}
         };
     const QPointF left[4] =
         {
-            QPointF(0, 0),
-            QPointF(border, border),
-            QPointF(border, height - border),
-            QPointF(0, height)
+            {0, 0},
+            {border, border},
+            {border, height - border},
+            {0, height}
         };
     painter.setPen(Qt::NoPen);
     painter.setBrush(dark);
@@ -108,24 +108,24 @@ void paintTriangleDownFrame(QPainter& painter, qreal x, qreal y, qreal width,
     auto border = 0.05 * height;
     const QPointF left[4] =
     {
-        QPointF(0.5 * width, height),
-        QPointF(0.5 * width, height - 2 * border),
-        QPointF(width - 1.732 * border, border),
-        QPointF(width, 0)
+        {0.5 * width, height},
+        {0.5 * width, height - 2 * border},
+        {width - 1.732 * border, border},
+        {width, 0}
     };
     const QPointF right[4] =
     {
-        QPointF(0.5 * width, height),
-        QPointF(0.5 * width, height - 2 * border),
-        QPointF(1.732 * border, border),
-        QPointF(0, 0)
+        {0.5 * width, height},
+        {0.5 * width, height - 2 * border},
+        {1.732 * border, border},
+        {0, 0}
     };
     const QPointF up[4] =
     {
-        QPointF(width, 0),
-        QPointF(width - 1.732 * border, border),
-        QPointF(1.732 * border, border),
-        QPointF(0, 0)
+        {width, 0},
+        {width - 1.732 * border, border},
+        {1.732 * border, border},
+        {0, 0}
     };
     painter.setPen(Qt::NoPen);
     painter.setBrush(dark);
@@ -145,24 +145,24 @@ void paintTriangleUpFrame(QPainter& painter, qreal x, qreal y, qreal width,
     auto border = 0.05 * height;
     const QPointF down[4] =
     {
-        QPointF(0, height),
-        QPointF(width, height),
-        QPointF(width - 1.732 * border, height - border),
-        QPointF(1.732 * border, height - border)
+        {0, height},
+        {width, height},
+        {width - 1.732 * border, height - border},
+        {1.732 * border, height - border}
     };
     const QPointF left[4] =
     {
-        QPointF(0.5 * width, 0),
-        QPointF(0.5 * width, 2 * border),
-        QPointF(1.732 * border, height - border),
-        QPointF(0, height)
+        {0.5 * width, 0},
+        {0.5 * width, 2 * border},
+        {1.732 * border, height - border},
+        {0, height}
     };
     const QPointF right[4] =
     {
-        QPointF(0.5 * width, 0),
-        QPointF(0.5 * width, 2 * border),
-        QPointF(width - 1.732 * border, height - border),
-        QPointF(width, height)
+        {0.5 * width, 0},
+        {0.5 * width, 2 * border},
+        {width - 1.732 * border, height - border},
+        {width, height}
     };
     painter.setPen(Qt::NoPen);
     painter.setBrush(dark);
@@ -258,14 +258,14 @@ void paintBoardGembloQ(QPainter& painter, qreal width, qreal height,
     }
     const QPointF board[8] =
     {
-        QPointF(distX, 0),
-        QPointF(width - distX, 0),
-        QPointF(width, distY),
-        QPointF(width, height - distY),
-        QPointF(width - distX, height),
-        QPointF(distX, height),
-        QPointF(0, height - distY),
-        QPointF(0, distY)
+        {distX, 0},
+        {width - distX, 0},
+        {width, distY},
+        {width, height - distY},
+        {width - distX, height},
+        {distX, height},
+        {0, height - distY},
+        {0, distY}
     };
     painter.setPen(Qt::NoPen);
     painter.setBrush(base);
@@ -312,12 +312,12 @@ void paintBoardTrigon(QPainter& painter, qreal width, qreal height,
     auto dist = (geo.get_width() + 1 - geo.get_height()) * gridWidth/ 2;
     const QPointF board[6] =
     {
-        QPointF(dist, 0),
-        QPointF(width - dist, 0),
-        QPointF(width, height / 2),
-        QPointF(width - dist, height),
-        QPointF(dist, height),
-        QPointF(0, height / 2)
+        {dist, 0},
+        {width - dist, 0},
+        {width, height / 2},
+        {width - dist, height},
+        {dist, height},
+        {0, height / 2}
     };
     painter.setPen(Qt::NoPen);
     painter.setBrush(base);
@@ -817,9 +817,9 @@ void paintJunctionRight(QPainter& painter, qreal x, qreal y, qreal width,
     auto dy = 0.3 * height;
     const QPointF polygon[3] =
     {
-        QPointF(x + dx, y + height),
-        QPointF(x + width, y + height),
-        QPointF(x + width, y + dy)
+        {x + dx, y + height},
+        {x + width, y + height},
+        {x + width, y + dy}
     };
     painter.setPen(Qt::NoPen);
     painter.setBrush(base);
@@ -864,9 +864,9 @@ void paintTriangleDown(QPainter& painter, qreal x, qreal y, qreal width,
 {
     const QPointF polygon[3] =
     {
-        QPointF(x, y),
-        QPointF(x + width, y),
-        QPointF(x + 0.5 * width, y + height)
+        {x, y},
+        {x + width, y},
+        {x + 0.5 * width, y + height}
     };
     painter.setPen(Qt::NoPen);
     painter.setBrush(base);
@@ -880,9 +880,9 @@ void paintTriangleUp(QPainter& painter, qreal x, qreal y, qreal width,
 {
     const QPointF polygon[3] =
     {
-        QPointF(x, y + height),
-        QPointF(x + width, y + height),
-        QPointF(x + 0.5 * width, y)
+        {x, y + height},
+        {x + width, y + height},
+        {x + 0.5 * width, y}
     };
     painter.setPen(Qt::NoPen);
     painter.setBrush(base);
