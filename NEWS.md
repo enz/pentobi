@@ -32,7 +32,7 @@ Version 16.3 (17 Apr 2019)
 
 * Piece in GembloQ could temporarily disappear if the rotate backward
   button was hit quickly multiple times.
-* Piece could become partially flipped if orientation change was
+* Piece could become stuck partially flipped if orientation change was
   triggered while last animation was still running.
 * Current file name was not cleared and button New Game not enabled
   after opening a file from clipboard.
