@@ -22,13 +22,18 @@ Version 16.x (master)
 * Renamed build configuration option PENTOBI_BUILD_TESTS to
   BUILD_TESTING for compatibility with CTest.
 
-Version 16.2.x (v16-fixes)
+Version 16.3.x (v16-fixes)
 --------------------------
 
-* Selected piece in GembloQ could temporarily disappear if the rotate
-  backward button was hit quickly multiple times.
-* Piece could become stuck in partially flipped state if Find Move was
-  selected multiple times in quick succession.
+*
+
+Version 16.3 (17 Apr 2019)
+--------------------------
+
+* Piece in GembloQ could temporarily disappear if the rotate backward
+  button was hit quickly multiple times.
+* Piece could become partially flipped if orientation change was
+  triggered while last animation was still running.
 * Current file name was not cleared and button New Game not enabled
   after opening a file from clipboard.
 * Comment scrolling did not always work.
@@ -40,7 +45,8 @@ Version 16.2.x (v16-fixes)
 * Development tool twogtp did not resolve ties as a win for the second
   player in two-player Callisto.
 * Disabled QtQuickCompiler for desktop version to avoid the need for
-  recompilation if the Qt libraries are updated.
+  unneeded recompilation after upgrading the Qt libraries (see also
+  Ubuntu bug #1824560).
 
 Version 16.2 (16 Jan 2019)
 --------------------------
