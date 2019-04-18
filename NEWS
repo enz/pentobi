@@ -22,8 +22,8 @@ Version 16.3 (17 Apr 2019)
 * Development tool twogtp did not resolve ties as a win for the second
   player in two-player Callisto.
 * Disabled QtQuickCompiler for desktop version to avoid the need for
-  unneeded recompilation after upgrading the Qt libraries (see also
-  Ubuntu bug #1824560).
+  recompilation after upgrading the Qt libraries (see also Ubuntu bug
+  #1824560).
 
 
 Version 16.2 (16 Jan 2019)
