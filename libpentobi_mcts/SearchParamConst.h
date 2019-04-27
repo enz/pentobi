@@ -32,9 +32,10 @@ struct SearchParamConst
     /** The maximum number of moves in a simulation.
         This needs to include pass moves because in the in-tree phase pass
         moves (Move::null()) are used. The game ends after all colors have
-        passed in a row. Therefore, the maximum number of moves is reached in
-        case that a piece move is followed by (Color::range-1) pass moves and
-        an extra Color::range pass moves at the end. */
+        passed in a row. Note that we do not assume that a color passes only
+        if it has no legal moves because the search might prune legal moves
+        and it could happen that moves are generated again in later
+        positions. */
     static constexpr unsigned max_moves =
             Color::range * (Color::range * Board::max_pieces + 1);
 
