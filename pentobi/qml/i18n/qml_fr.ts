@@ -343,25 +343,6 @@
     </message>
 </context>
 <context>
-    <name>GameDisplayDesktop</name>
-    <message>
-        <source>Computer is thinking…</source>
-        <translation>L’ordinateur pense…</translation>
-    </message>
-    <message>
-        <source>Running game analysis…</source>
-        <translation>Exécution de l’analyse de la partie…</translation>
-    </message>
-    <message>
-        <source>Computer is thinking… (up to %1 seconds remaining)</source>
-        <translation>L’ordinateur pense… (jusqu’à %1 secondes restantes)</translation>
-    </message>
-    <message>
-        <source>Computer is thinking… (up to %1 minutes remaining)</source>
-        <translation>L’ordinateur pense… (jusqu’à %1 minutes restantes)</translation>
-    </message>
-</context>
-<context>
     <name>GameInfoDialog</name>
     <message>
         <source>Player Blue/Red:</source>
@@ -484,6 +465,7 @@
     </message>
     <message>
         <source>Green wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation>Vert gagne (égalité résolue).</translation>
     </message>
     <message>
@@ -504,6 +486,7 @@
     </message>
     <message>
         <source>Yellow/Green wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation>Jaune/vert gagne (égalité résolue).</translation>
     </message>
     <message>
@@ -520,10 +503,12 @@
     </message>
     <message>
         <source>Red wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation>Rouge gagne (égalité résolue).</translation>
     </message>
     <message>
         <source>Yellow wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation>Jaune gagne (égalité résolue).</translation>
     </message>
     <message>
@@ -643,6 +628,25 @@
     <message>
         <source>Colors:</source>
         <translation>Couleurs :</translation>
+    </message>
+</context>
+<context>
+    <name>GameViewDesktop</name>
+    <message>
+        <source>Computer is thinking…</source>
+        <translation>L’ordinateur pense…</translation>
+    </message>
+    <message>
+        <source>Running game analysis…</source>
+        <translation>Exécution de l’analyse de la partie…</translation>
+    </message>
+    <message>
+        <source>Computer is thinking… (up to %1 seconds remaining)</source>
+        <translation>L’ordinateur pense… (jusqu’à %1 secondes restantes)</translation>
+    </message>
+    <message>
+        <source>Computer is thinking… (up to %1 minutes remaining)</source>
+        <translation>L’ordinateur pense… (jusqu’à %1 minutes restantes)</translation>
     </message>
 </context>
 <context>
@@ -1033,6 +1037,10 @@
     <message>
         <source>Red</source>
         <translation>Rouge</translation>
+    </message>
+    <message>
+        <source>Pentobi failed to generate a move.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

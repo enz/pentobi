@@ -253,25 +253,6 @@
     </message>
 </context>
 <context>
-    <name>GameDisplayDesktop</name>
-    <message>
-        <source>Computer is thinking…</source>
-        <translation>电脑正在思考…</translation>
-    </message>
-    <message>
-        <source>Running game analysis…</source>
-        <translation>正在进行棋局分析…</translation>
-    </message>
-    <message>
-        <source>Computer is thinking… (up to %1 seconds remaining)</source>
-        <translation>电脑正在思考...（最多剩余%1秒）</translation>
-    </message>
-    <message>
-        <source>Computer is thinking… (up to %1 minutes remaining)</source>
-        <translation>电脑正在思考...(最多剩余%1分)</translation>
-    </message>
-</context>
-<context>
     <name>GameInfoDialog</name>
     <message>
         <source>Player Blue/Red:</source>
@@ -394,6 +375,7 @@
     </message>
     <message>
         <source>Green wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation>绿色 获胜（平局后）。</translation>
     </message>
     <message>
@@ -414,6 +396,7 @@
     </message>
     <message>
         <source>Yellow/Green wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation>黄/绿 获胜（平局后）。</translation>
     </message>
     <message>
@@ -430,10 +413,12 @@
     </message>
     <message>
         <source>Red wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation>红色 获胜（平局后）。</translation>
     </message>
     <message>
         <source>Yellow wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation>黄色 获胜（平局后）。</translation>
     </message>
     <message>
@@ -553,6 +538,25 @@
     <message>
         <source>Colors:</source>
         <translation>颜色：</translation>
+    </message>
+</context>
+<context>
+    <name>GameViewDesktop</name>
+    <message>
+        <source>Computer is thinking…</source>
+        <translation>电脑正在思考…</translation>
+    </message>
+    <message>
+        <source>Running game analysis…</source>
+        <translation>正在进行棋局分析…</translation>
+    </message>
+    <message>
+        <source>Computer is thinking… (up to %1 seconds remaining)</source>
+        <translation>电脑正在思考...（最多剩余%1秒）</translation>
+    </message>
+    <message>
+        <source>Computer is thinking… (up to %1 minutes remaining)</source>
+        <translation>电脑正在思考...(最多剩余%1分)</translation>
     </message>
 </context>
 <context>
@@ -943,6 +947,10 @@
     <message>
         <source>Red</source>
         <translation>红色</translation>
+    </message>
+    <message>
+        <source>Pentobi failed to generate a move.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -221,25 +221,6 @@
     </message>
 </context>
 <context>
-    <name>GameDisplayDesktop</name>
-    <message>
-        <source>Computer is thinking…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Running game analysis…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Computer is thinking… (up to %1 seconds remaining)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Computer is thinking… (up to %1 minutes remaining)</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>GameInfoDialog</name>
     <message>
         <source>Player Blue/Red:</source>
@@ -330,6 +311,7 @@
     </message>
     <message>
         <source>Green wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -350,6 +332,7 @@
     </message>
     <message>
         <source>Yellow/Green wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -366,10 +349,12 @@
     </message>
     <message>
         <source>Red wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Yellow wins (tie resolved).</source>
+        <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -488,6 +473,25 @@
     </message>
     <message>
         <source>Colors:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GameViewDesktop</name>
+    <message>
+        <source>Computer is thinking…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running game analysis…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Computer is thinking… (up to %1 seconds remaining)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Computer is thinking… (up to %1 minutes remaining)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -878,6 +882,10 @@
     </message>
     <message>
         <source>Red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pentobi failed to generate a move.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
