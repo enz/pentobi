@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -15,96 +13,6 @@
         <source>Pentobi %1</source>
         <extracomment>The argument is the application version.</extracomment>
         <translation>Pentobi %1</translation>
-    </message>
-</context>
-<context>
-    <name>Actions</name>
-    <message>
-        <source>Main Variation</source>
-        <translation type="vanished">Hauptvariante</translation>
-    </message>
-    <message>
-        <source>Beginning of Branch</source>
-        <translation type="vanished">Verzweigungsanfang</translation>
-    </message>
-    <message>
-        <source>Settings…</source>
-        <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="vanished">Einstellungen …</translation>
-    </message>
-    <message>
-        <source>Find Move</source>
-        <translation type="vanished">Zug finden</translation>
-    </message>
-    <message>
-        <source>Next Comment</source>
-        <translation type="vanished">Nächster Kommentar</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation type="vanished">Vollbild</translation>
-    </message>
-    <message>
-        <source>Move Number…</source>
-        <translation type="vanished">Zugnummer …</translation>
-    </message>
-    <message>
-        <source>Pentobi Help</source>
-        <translation type="vanished">Pentobi-Hilfe</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="vanished">Neu</translation>
-    </message>
-    <message>
-        <source>Rated Game</source>
-        <translation type="vanished">Gewertetes Spiel</translation>
-    </message>
-    <message>
-        <source>Open…</source>
-        <translation type="vanished">Öffnen …</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="vanished">Spielen</translation>
-    </message>
-    <message>
-        <source>Play Move</source>
-        <extracomment>Play a single move</extracomment>
-        <translation type="vanished">Zug spielen</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="vanished">Beenden</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Speichern</translation>
-    </message>
-    <message>
-        <source>Save As…</source>
-        <translation type="vanished">Speichern unter …</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="vanished">Stopp</translation>
-    </message>
-    <message>
-        <source>Undo Move</source>
-        <translation type="vanished">Zug rückgängig</translation>
-    </message>
-    <message>
-        <source>Game Info</source>
-        <translation type="vanished">Spielinformation</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation type="vanished">Kommentar</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="vanished">Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -280,38 +188,6 @@
         <translation>Computer spielt:</translation>
     </message>
     <message>
-        <source>Blue/Red</source>
-        <translation type="vanished">Blau/Rot</translation>
-    </message>
-    <message>
-        <source>Purple</source>
-        <translation type="vanished">Lila</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">Grün</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">Blau</translation>
-    </message>
-    <message>
-        <source>Yellow/Green</source>
-        <translation type="vanished">Gelb/Grün</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="vanished">Orange</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">Gelb</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">Rot</translation>
-    </message>
-    <message>
         <source>Level %1</source>
         <translation>Stufe %1</translation>
     </message>
@@ -395,38 +271,6 @@
 </context>
 <context>
     <name>GameModel</name>
-    <message>
-        <source>Blue/Red</source>
-        <translation type="vanished">Blau/Rot</translation>
-    </message>
-    <message>
-        <source>Purple</source>
-        <translation type="vanished">Lila</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">Grün</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">Blau</translation>
-    </message>
-    <message>
-        <source>Yellow/Green</source>
-        <translation type="vanished">Gelb/Grün</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="vanished">Orange</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">Gelb</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">Rot</translation>
-    </message>
     <message>
         <source>Purple wins with 1 point.</source>
         <translation>Lila gewinnt mit 1 Punkt.</translation>
@@ -1040,7 +884,7 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pentobi konnte keinen Zug generieren.</translation>
     </message>
 </context>
 <context>
@@ -1466,10 +1310,6 @@
         <source>V</source>
         <extracomment>Keyboard shortcut for menu View. Leave empty for no shortcut.</extracomment>
         <translation>A</translation>
-    </message>
-    <message>
-        <source>Appearance…</source>
-        <translation type="vanished">Erscheinungsbild …</translation>
     </message>
     <message>
         <source>A</source>
