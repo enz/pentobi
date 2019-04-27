@@ -10,6 +10,8 @@ Version 16.x (master)
   dependencies.
 * New UI translation: Simplified Chinese (thanks to Cherry)
 * New manpages translation: German
+* Show message if move generation fails, which can happen in certain setup
+  positions.
 * Added --version command line options to pentobi and
   pentobi-thumbnailer.
 * The compiler now needs to support C++17.

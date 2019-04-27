@@ -78,15 +78,10 @@ void PlayerModel::genMoveFinished()
     setIsGenMoveRunning(false);
     auto& bd = result.gameModel->getBoard();
     ColorMove mv(result.color, result.move);
-    if (mv.is_null())
-    {
-        qWarning("PlayerModel: failed to generate move");
-        return;
-    }
-    if (! bd.is_legal(mv.color, mv.move))
+    if (! mv.is_null() && ! bd.is_legal(mv.color, mv.move))
     {
         qWarning("PlayerModel: player generated illegal move");
-        return;
+        mv = ColorMove::null();
     }
     emit moveGenerated(new GameMove(this, mv));
 }

@@ -477,6 +477,11 @@ function moveDownVar() {
 }
 
 function moveGenerated(move) {
+    if (move.isNull()) {
+        showInfo(qsTr("Pentobi failed to generate a move."))
+        isPlaySingleMoveRunning = false
+        return
+    }
     gameModel.playMove(move)
     if (isPlaySingleMoveRunning)
         isPlaySingleMoveRunning = false
