@@ -35,7 +35,9 @@ struct SearchParamConst
         passed in a row. Note that we do not assume that a color passes only
         if it has no legal moves because the search might prune legal moves
         and it could happen that moves are generated again in later
-        positions. */
+        positions (although this should only happen in pathological setup
+        positions and we don't want to spend time to try to handle these cases
+        well, the simulation still ends after all colors passed). */
     static constexpr unsigned max_moves =
             Color::range * (Color::range * Board::max_pieces + 1);
 
