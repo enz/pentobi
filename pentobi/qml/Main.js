@@ -427,7 +427,7 @@ function init() {
         return
     }
     if (isComputerToPlay() && ! gameModel.canGoForward
-            && ! gameModel.isGameOver)
+            && ! gameModel.isGameOver && ! initialFile)
         showQuestion(qsTr("Continue computer move?"), checkComputerMove)
 }
 
