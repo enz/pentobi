@@ -12,6 +12,7 @@
 #include "libpentobi_paint/Paint.h"
 
 using namespace std;
+using libboardgame_sgf::SgfError;
 using libboardgame_sgf::SgfNode;
 using libboardgame_sgf::TreeReader;
 using libpentobi_base::Color;
@@ -141,29 +142,40 @@ bool getFinalPosition(const SgfNode& root, Variant& variant,
 
 bool createThumbnail(const QString& path, int width, int height, QImage& image)
 {
-    TreeReader reader;
-    reader.set_read_only_main_variation(true);
-    reader.read(path.toLocal8Bit().constData());
-    auto variant = Variant::classic; // Init to avoid compiler warning
-    const Geometry* geo;
-    Grid<PointState> pointState;
-    Grid<unsigned> pieceId;
-    if (! getFinalPosition(reader.get_tree(), variant, geo, pointState,
-                           pieceId))
+    try
+    {
+        TreeReader reader;
+        reader.set_read_only_main_variation(true);
+        reader.read(path.toLocal8Bit().constData());
+        auto variant = Variant::classic; // Init to avoid compiler warning
+        const Geometry* geo;
+        Grid<PointState> pointState;
+        Grid<unsigned> pieceId;
+        if (! getFinalPosition(reader.get_tree(), variant, geo, pointState,
+                               pieceId))
+            return false;
+        qreal ratio;
+        if (get_piece_set(variant) == PieceSet::trigon)
+            ratio = geo->get_height() * 1.732 / geo->get_width();
+        else
+            ratio = 1;
+        qreal paintWidth = min(static_cast<qreal>(width), height / ratio);
+        qreal paintHeight = ratio * paintWidth;
+        QPainter painter(&image);
+        painter.translate(QPointF((width - paintWidth) / 2,
+                                  (height - paintHeight) / 2));
+        libpentobi_paint::paint(painter, paintWidth, paintHeight, variant,
+                                *geo, pointState, pieceId);
+        return true;
+    }
+    catch (const SgfError&)
+    {
         return false;
-    qreal ratio;
-    if (get_piece_set(variant) == PieceSet::trigon)
-        ratio = geo->get_height() * 1.732 / geo->get_width();
-    else
-        ratio = 1;
-    qreal paintWidth = min(static_cast<qreal>(width), height / ratio);
-    qreal paintHeight = ratio * paintWidth;
-    QPainter painter(&image);
-    painter.translate(QPointF((width - paintWidth) / 2,
-                              (height - paintHeight) / 2));
-    libpentobi_paint::paint(painter, paintWidth, paintHeight, variant, *geo,
-                            pointState, pieceId);
-    return true;
+    }
+    catch (const TreeReader::ReadError&)
+    {
+        return false;
+    }
 }
 
 //-----------------------------------------------------------------------------
