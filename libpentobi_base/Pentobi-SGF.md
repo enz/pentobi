@@ -82,6 +82,12 @@ The strings are case-sensitive, words must be separated by exactly one
 space and must not contain whitespaces at the beginning or end of the
 string.
 
+### Note
+Although the SGF standard does not require an ordering of properties,
+it is recommended to put the `GM` property at the beginning because
+Pentobi's automatic MIME type detection looks only at the beginning
+of files.
+
 Color and Player Properties
 ---------------------------
 

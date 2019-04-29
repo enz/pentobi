@@ -14,6 +14,9 @@ Version 16.x (master)
   positions.
 * Added --version command line options to pentobi and
   pentobi-thumbnailer.
+* Recommend that Blokus SGF files start with the GM property and reduced
+  the maximum pattern offset for automatic MIME type detection to reduce
+  the probability of false positives.
 * The compiler now needs to support C++17.
 * The SVG to bitmap conversions at build time are now done using
   LibRsvg instead of a custom compiled Qt-based build helper to make
