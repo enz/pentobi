@@ -27,7 +27,8 @@ Version 16.x (master)
 Version 16.3.x (v16-fixes)
 --------------------------
 
-*
+* KDE thumbnailer crashed with unhandled exception on certain invalid
+  Blokus SGF files.
 
 Version 16.3 (17 Apr 2019)
 --------------------------
