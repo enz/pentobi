@@ -19,8 +19,8 @@ Dialog {
         return h
     }
     property real minContentWidth:
-        // Match window width on mobile devices within reason
-        isDesktop ? 0 : Math.min(30 * font.pixelSize, maxContentWidth)
+        // Match 90% window width on mobile devices within reason
+        isDesktop ? 0 : Math.min(27 * font.pixelSize, 0.9 * maxContentWidth)
 
     function centerDialog() {
         // Don't bind x and y because that can cause a binding loop if the
