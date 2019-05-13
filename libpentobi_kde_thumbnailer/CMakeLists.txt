@@ -16,7 +16,6 @@ find_package(Qt5Gui 5.9 REQUIRED)
 
 add_library(pentobi_kde_thumbnailer STATIC
   ../libboardgame_base/Assert.cpp
-  ../libboardgame_base/Log.cpp
   ../libboardgame_base/Reader.cpp
   ../libboardgame_base/SgfError.cpp
   ../libboardgame_base/SgfNode.cpp
