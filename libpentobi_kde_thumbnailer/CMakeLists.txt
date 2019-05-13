@@ -14,8 +14,6 @@
 
 find_package(Qt5Gui 5.9 REQUIRED)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_SHARED_LIBRARY_CXX_FLAGS}")
-
 add_library(pentobi_kde_thumbnailer STATIC
   ../libboardgame_base/Assert.cpp
   ../libboardgame_base/Log.cpp
@@ -37,6 +35,9 @@ add_library(pentobi_kde_thumbnailer STATIC
 )
 
 target_include_directories(pentobi_kde_thumbnailer PRIVATE ..)
+
+target_compile_options(pentobi_kde_thumbnailer PRIVATE
+    ${CMAKE_SHARED_LIBRARY_CXX_FLAGS})
 
 target_compile_definitions(pentobi_kde_thumbnailer PRIVATE
     QT_DEPRECATED_WARNINGS
