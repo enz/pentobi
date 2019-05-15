@@ -229,7 +229,7 @@ Item {
         Pentobi.Button {
             id: menuButton
 
-            icon.source: theme.getImage("menu")
+            icon.source: theme.getImage(isDesktop ? "menu-desktop" : "menu")
             down: pressed || (isDesktop && menu.item && menu.item.opened)
             onClicked: {
                 if (! menu.item)
@@ -344,5 +344,6 @@ Item {
     }
     ButtonToolTip {
         button: menuButton
+        ToolTip.text: qsTr("Open menu")
     }
 }
