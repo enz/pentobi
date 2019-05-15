@@ -1687,6 +1687,10 @@
         <extracomment>Tooltip for Undo button</extracomment>
         <translation>撤销一步</translation>
     </message>
+    <message>
+        <source>Open menu</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>main</name>

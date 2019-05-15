@@ -1621,6 +1621,10 @@
         <extracomment>Tooltip for Undo button</extracomment>
         <translation>Zug rückgängig</translation>
     </message>
+    <message>
+        <source>Open menu</source>
+        <translation>Menü öffnen</translation>
+    </message>
 </context>
 <context>
     <name>main</name>
