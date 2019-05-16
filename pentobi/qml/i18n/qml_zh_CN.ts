@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -190,38 +188,6 @@
         <translation>电脑执：</translation>
     </message>
     <message>
-        <source>Blue/Red</source>
-        <translation type="vanished">蓝/红</translation>
-    </message>
-    <message>
-        <source>Purple</source>
-        <translation type="vanished">紫色</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">绿色</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">蓝色</translation>
-    </message>
-    <message>
-        <source>Yellow/Green</source>
-        <translation type="vanished">黄/绿</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="vanished">橙色</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">黄色</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">红色</translation>
-    </message>
-    <message>
         <source>Level %1</source>
         <translation>等级 %1</translation>
     </message>
@@ -305,38 +271,6 @@
 </context>
 <context>
     <name>GameModel</name>
-    <message>
-        <source>Blue/Red</source>
-        <translation type="vanished">蓝/红</translation>
-    </message>
-    <message>
-        <source>Purple</source>
-        <translation type="vanished">紫色</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">绿色</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">蓝色</translation>
-    </message>
-    <message>
-        <source>Yellow/Green</source>
-        <translation type="vanished">黄/绿</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="vanished">橙色</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">黄色</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">红色</translation>
-    </message>
     <message>
         <source>Purple wins with 1 point.</source>
         <translation>紫色赢1分。</translation>
@@ -612,7 +546,7 @@
     <message>
         <source>Pentobi</source>
         <extracomment>Window title if no file is loaded.</extracomment>
-        <translation type="unfinished">角斗士</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
@@ -752,7 +686,7 @@
     <message>
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
-        <translation type="unfinished">%1 - 角斗士</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Not enough memory</source>
@@ -950,7 +884,7 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1689,74 +1623,74 @@
     </message>
     <message>
         <source>Open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>打开菜单</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
