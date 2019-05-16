@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -15,96 +13,6 @@
         <source>Pentobi %1</source>
         <extracomment>The argument is the application version.</extracomment>
         <translation>Pentobi %1</translation>
-    </message>
-</context>
-<context>
-    <name>Actions</name>
-    <message>
-        <source>Main Variation</source>
-        <translation type="vanished">Variation principale</translation>
-    </message>
-    <message>
-        <source>Beginning of Branch</source>
-        <translation type="vanished">Au début de la branche</translation>
-    </message>
-    <message>
-        <source>Settings…</source>
-        <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="vanished">Configuration…</translation>
-    </message>
-    <message>
-        <source>Find Move</source>
-        <translation type="vanished">Trouver un coup</translation>
-    </message>
-    <message>
-        <source>Next Comment</source>
-        <translation type="vanished">Commentaire suivant</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation type="vanished">Plein écran</translation>
-    </message>
-    <message>
-        <source>Move Number…</source>
-        <translation type="vanished">Numéro de coup…</translation>
-    </message>
-    <message>
-        <source>Pentobi Help</source>
-        <translation type="vanished">Aide de Pentobi</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="vanished">Nouveau</translation>
-    </message>
-    <message>
-        <source>Rated Game</source>
-        <translation type="vanished">Partie classée</translation>
-    </message>
-    <message>
-        <source>Open…</source>
-        <translation type="vanished">Ouvrir…</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="vanished">Jouer</translation>
-    </message>
-    <message>
-        <source>Play Move</source>
-        <extracomment>Play a single move</extracomment>
-        <translation type="vanished">Jouer un coup</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="vanished">Quitter</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Enregistrer</translation>
-    </message>
-    <message>
-        <source>Save As…</source>
-        <translation type="vanished">Enregistrer sous…</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="vanished">Arrêter</translation>
-    </message>
-    <message>
-        <source>Undo Move</source>
-        <translation type="vanished">Annuler le coup</translation>
-    </message>
-    <message>
-        <source>Game Info</source>
-        <translation type="vanished">Info sur la partie</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation type="vanished">Commentaire</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="vanished">Configuration</translation>
     </message>
 </context>
 <context>
@@ -280,38 +188,6 @@
         <translation>L’ordinateur joue :</translation>
     </message>
     <message>
-        <source>Blue/Red</source>
-        <translation type="vanished">Bleu/rouge</translation>
-    </message>
-    <message>
-        <source>Purple</source>
-        <translation type="vanished">Violet</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">Vert</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">Bleu</translation>
-    </message>
-    <message>
-        <source>Yellow/Green</source>
-        <translation type="vanished">Jaune/vert</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="vanished">Orange</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">Jaune</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">Rouge</translation>
-    </message>
-    <message>
         <source>Level %1</source>
         <translation>Niveau %1</translation>
     </message>
@@ -395,38 +271,6 @@
 </context>
 <context>
     <name>GameModel</name>
-    <message>
-        <source>Blue/Red</source>
-        <translation type="vanished">Bleu/rouge</translation>
-    </message>
-    <message>
-        <source>Purple</source>
-        <translation type="vanished">Violet</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">Vert</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">Bleu</translation>
-    </message>
-    <message>
-        <source>Yellow/Green</source>
-        <translation type="vanished">Jaune/vert</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="vanished">Orange</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">Jaune</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">Rouge</translation>
-    </message>
     <message>
         <source>Purple wins with 1 point.</source>
         <translation>Violet gagne avec 1 point.</translation>
@@ -1040,7 +884,7 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1468,10 +1312,6 @@
         <translation>A</translation>
     </message>
     <message>
-        <source>Appearance…</source>
-        <translation type="vanished">Apparence…</translation>
-    </message>
-    <message>
         <source>A</source>
         <extracomment>Keyboard shortcut for menu Appearance. Leave empty for no shortcut.</extracomment>
         <translation>E</translation>
@@ -1722,7 +1562,7 @@
     </message>
     <message>
         <source>Start a rated game</source>
-        <translation>Commence une partie classée</translation>
+        <translation>Commencer une partie classée</translation>
     </message>
     <message>
         <source>Set the colors played by the computer</source>
@@ -1783,74 +1623,74 @@
     </message>
     <message>
         <source>Open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir le menu</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
