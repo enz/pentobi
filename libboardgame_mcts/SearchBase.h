@@ -499,7 +499,7 @@ private:
     /** Time of last search. */
     double m_last_time;
 
-    atomic<bool> m_abort;
+    atomic<bool> m_abort = false;
 
     Float m_rave_parent_max = 50000;
 
