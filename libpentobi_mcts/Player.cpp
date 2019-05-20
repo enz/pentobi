@@ -46,19 +46,19 @@ namespace {
 //   For other game variants, we use the numbers of game variants with similar
 //   playing strength and speed of simulations.
 
-const float counts_classic[Player::max_supported_level] =
+constexpr float counts_classic[Player::max_supported_level] =
     { 3, 30, 90, 181, 667, 5028, 69809, 349044, 1745221 };
 
-const float counts_duo[Player::max_supported_level] =
+constexpr float counts_duo[Player::max_supported_level] =
     { 3, 21, 77, 213, 861, 7280, 221867, 1109339, 5546695 };
 
-const float counts_trigon[Player::max_supported_level] =
+constexpr float counts_trigon[Player::max_supported_level] =
     { 100, 246, 457, 876, 1882, 5506, 19819, 99092, 495465 };
 
-const float counts_nexos[Player::max_supported_level] =
+constexpr float counts_nexos[Player::max_supported_level] =
     { 250, 347, 625, 1223, 3117, 8270, 20954, 104774, 523877 };
 
-const float counts_callisto_2[Player::max_supported_level] =
+constexpr float counts_callisto_2[Player::max_supported_level] =
     { 30, 87, 300, 1017, 4729, 20435, 122778, 613905, 3069529 };
 
 /** Suggest how much memory to use for the trees depending on the maximum
