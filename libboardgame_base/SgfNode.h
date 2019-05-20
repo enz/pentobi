@@ -300,7 +300,7 @@ bool SgfNode::set_property(const string& id, const vector<T>& values)
     values_to_string.reserve(values.size());
     for (const T& v : values)
         values_to_string.push_back(to_string(v));
-    forward_list<Property>::const_iterator last = m_properties.end();
+    auto last = m_properties.end();
     for (auto i = m_properties.begin(); i != m_properties.end(); ++i)
         if (i->id == id)
         {
