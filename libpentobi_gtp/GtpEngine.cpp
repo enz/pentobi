@@ -393,4 +393,4 @@ void GtpEngine::set_show_board(bool enable)
 
 //-----------------------------------------------------------------------------
 
-} // namespace libpentobi_base
+} // namespace libpentobi_gtp
