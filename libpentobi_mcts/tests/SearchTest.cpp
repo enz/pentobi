@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libpentobi_mcts/SearchTest.cpp
+/** @file libpentobi_mcts/tests/SearchTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

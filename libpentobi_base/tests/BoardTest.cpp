@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libpentobi_base/BoardTest.cpp
+/** @file libpentobi_base/tests/BoardTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

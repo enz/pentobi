@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file unittest/libpentobi_base/GameTest.cpp
+/** @file libpentobi_base/tests/GameTest.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
