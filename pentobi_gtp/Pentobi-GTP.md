@@ -215,7 +215,7 @@ List all supported GTP commands, one command per line.
 
 Load a board position from a blksgf file with name _file_. If
 _move_number_ is specified, the board position will be set to the
-position in the main variation of the file <u>before</u> the move with
+position in the main variation of the file before the move with
 the given number was played, otherwise to the last position in the main
 variation.
 
