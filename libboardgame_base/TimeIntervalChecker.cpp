@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file TimeIntervalChecker.cpp
+/** @file libboardgame_base/TimeIntervalChecker.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
