@@ -44,7 +44,6 @@ GNU General Public License for more details. You should have received
 program. If not, see <https://www.gnu.org/licenses/>.
 
 ### Trademark Disclaimer
-
 The trademark Blokus and other trademarks referred to are property of
 their respective trademark holders. The trademark holders are not
 affiliated with the author of the program Pentobi.

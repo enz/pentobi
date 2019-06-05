@@ -1,19 +1,16 @@
 Pentobi Release Notes
 =====================
 
-Version 16.x (master)
----------------------
+Version 17.0 (05 Jun 2019)
+--------------------------
 
 * Small increase in playing strength, mainly in Callisto and Classic.
 * The user manual, desktop entry, AppData, MIME info and manpages are
   now translatable (GitHub issue #6). See INSTALL for the new build-time
   dependencies.
 * New UI translation: Simplified Chinese (thanks to Cherry)
-* New manpages translation: German
-* Show message if move generation fails, which can happen in certain setup
-  positions.
-* Added --version command line options to pentobi and
-  pentobi-thumbnailer.
+* Show message if move generation fails, which can happen in certain
+  setup positions.
 * Recommend that Blokus SGF files start with the GM property and reduced
   the maximum pattern offset for automatic MIME type detection to reduce
   the probability of false positives.
@@ -22,13 +19,11 @@ Version 16.x (master)
   LibRsvg instead of a custom compiled Qt-based build helper to make
   cross-compilation easier.
 * The MetaInfo file for the KDE thumbnailer was removed as current
-  software installations GUIs do not show addons anyway and it caused
-  the Dolphin file manager appear in search results for Pentobi.
-* Renamed build configuration option PENTOBI_BUILD_TESTS to
-  BUILD_TESTING for compatibility with CTest.
+  software installations GUIs do not show addons anyway.
+* Renamed build option PENTOBI_BUILD_TESTS to BUILD_TESTING for
+  compatibility with CTest.
 
-Version 16.3.x (v16-fixes)
---------------------------
+### Bug Fixes
 
 * KDE thumbnailer crashed with unhandled exception on certain invalid
   Blokus SGF files.
