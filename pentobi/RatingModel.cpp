@@ -30,87 +30,20 @@ const int maxSavedGames = 50;
 
 //-----------------------------------------------------------------------------
 
-TableModel::TableModel(QObject* parent, const QVector<RatedGameInfo>& history)
-    : QAbstractTableModel(parent),
-      m_history(history)
+RatedGameInfo::RatedGameInfo(QObject* parent, int number, int color,
+                             double result, const QString& date, int level,
+                             double rating)
+    : QObject(parent),
+      m_number(number),
+      m_color(color),
+      m_level(level),
+      m_result(result),
+      m_rating(rating),
+      m_date(date)
 {
-}
-
-int TableModel::rowCount([[maybe_unused]] const QModelIndex& parent) const
-{
-    return m_history.length() + 1;
-}
-
-int TableModel::columnCount([[maybe_unused]] const QModelIndex& parent) const
-{
-    return 5;
-}
-
-QVariant TableModel::data(const QModelIndex& index, int role) const
-{
-    auto row = index.row();
-    if (role != Qt::DisplayRole || row < 0 || row >= m_history.length() + 1)
-        return {};
-    if (row == 0)
-    {
-        // We currently put the table headers in row 0 because Qt 5.12 does
-        // not support table headers.
-        switch (index.column())
-        {
-        case 0:
-            //: Table header for game number in rating dialog
-            return tr("Game");
-        case 1:
-            //: Table header for game result in rating dialog
-            return tr("Result");
-        case 2:
-            //: Table header for level in rating dialog
-            return tr("Level");
-        case 3:
-            //: Table header for player color(s) in rating dialog
-            return tr("Your Color");
-        case 4:
-            //: Table header for game date in rating dialog
-            return tr("Date");
-        default:
-            return {};
-        }
-    }
-    auto& info = m_history[row - 1];
-    switch (index.column())
-    {
-    case 0:
-        return info.number;
-    case 1:
-        if (info.result == 1)
-            //: Result of rated game is a win
-            return tr("Win");
-        else if (info.result == 0)
-            //: Result of rated game is a loss
-            return tr("Loss");
-        else
-            //: Result of rated game is a tie. Abbreviate long translations
-            //: to ensure that all columns of rated games list are visible
-            //: on mobile devices with small screens.
-            return tr("Tie");
-    case 2:
-        return info.level;
-    case 3:
-        return info.color;
-    case 4:
-        return info.date;
-    default:
-        return {};
-    }
 }
 
 //-----------------------------------------------------------------------------
-
-RatingModel::RatingModel(QObject* parent)
-    : QObject(parent)
-{
-    m_tableModel = new TableModel(this, m_history);
-}
 
 void RatingModel::addResult(GameModel* gameModel, int level)
 {
@@ -140,13 +73,12 @@ void RatingModel::addResult(GameModel* gameModel, int level)
     if (numberGames == 1 || rating.get() > m_bestRating.get())
         setBestRating(rating.get());
     auto date = QDate::currentDate().toString(QStringLiteral("yyyy-MM-dd"));
-    m_history.prepend({numberGames, color, level, gameResult, m_rating.get(),
-                       date});
+    m_history.prepend(new RatedGameInfo(this, numberGames, color, gameResult,
+                                       date, level, m_rating.get()));
     auto file = getFile(numberGames);
     QFileInfo(file).dir().mkpath(QStringLiteral("."));
     gameModel->save(file);
-    emit ratingHistoryChanged();
-    emit tableModelChanged();
+    emit historyChanged();
     setNumberGames(numberGames);
     saveSettings();
 }
@@ -156,8 +88,7 @@ void RatingModel::clearRating()
     if (! m_history.isEmpty())
     {
         m_history.clear();
-        emit ratingHistoryChanged();
-        emit tableModelChanged();
+        emit historyChanged();
     }
     QDir(getDir()).removeRecursively();
     setRating(1000);
@@ -227,15 +158,6 @@ int RatingModel::getNextLevel(int maxLevel) const
     return level;
 }
 
-const QVector<qreal>& RatingModel::ratingHistory()
-{
-    m_ratingHistory.clear();
-    m_ratingHistory.reserve(m_history.length());
-    for (auto i = m_history.rbegin(); i != m_history.rend(); ++i)
-        m_ratingHistory.push_back(i->rating);
-    return m_ratingHistory;
-}
-
 void RatingModel::saveSettings()
 {
     QSettings settings(QStringLiteral("%1/%2.ini").arg(getDir(),
@@ -254,37 +176,38 @@ void RatingModel::saveSettings()
         settings.setValue(QStringLiteral("best_rating"),
                           round(m_bestRating.get()));
     }
-    QVector<RatedGameInfo> newHistory;
+    QList<QObject*> newHistory;
     newHistory.reserve(m_history.size());
-    for (auto& info : m_history)
+    for (auto& i : m_history)
     {
-        if (info.number <= m_numberGames - maxSavedGames)
-            QFile::remove(getFile(info.number));
+        auto& info = dynamic_cast<RatedGameInfo&>(*i);
+        if (info.number() <= m_numberGames - maxSavedGames)
+            QFile::remove(getFile(info.number()));
         else
-            newHistory.append(info);
+            newHistory.append(&info);
     }
     if (newHistory.size() != m_history.size())
     {
         m_history = newHistory;
-        emit ratingHistoryChanged();
-        emit tableModelChanged();
+        emit historyChanged();
     }
     settings.remove(QStringLiteral("rated_game_info"));
     if (m_numberGames > 0)
     {
         settings.beginWriteArray(QStringLiteral("rated_game_info"));
         int n = 0;
-        for (auto& info : m_history)
+        for (auto& i : m_history)
         {
-            if (info.number <= m_numberGames - maxSavedGames)
+            auto& info = dynamic_cast<RatedGameInfo&>(*i);
+            if (info.number() <= m_numberGames - maxSavedGames)
                 continue;
             settings.setArrayIndex(n++);
-            settings.setValue(QStringLiteral("number"), info.number);
-            settings.setValue(QStringLiteral("color"), info.color);
-            settings.setValue(QStringLiteral("result"), info.result);
-            settings.setValue(QStringLiteral("date"), info.date);
-            settings.setValue(QStringLiteral("level"), info.level);
-            settings.setValue(QStringLiteral("rating"), round(info.rating));
+            settings.setValue(QStringLiteral("number"), info.number());
+            settings.setValue(QStringLiteral("color"), info.color());
+            settings.setValue(QStringLiteral("result"), info.result());
+            settings.setValue(QStringLiteral("date"), info.date());
+            settings.setValue(QStringLiteral("level"), info.level());
+            settings.setValue(QStringLiteral("rating"), round(info.rating()));
         }
         settings.endArray();
     }
@@ -330,11 +253,11 @@ void RatingModel::setGameVariant(const QString& gameVariant)
         auto date = settings.value(QStringLiteral("date")).toString();
         auto level = settings.value(QStringLiteral("level")).toInt();
         auto rating = settings.value(QStringLiteral("rating")).toDouble();
-        m_history.append({number, color, level, result, rating, date});
+        m_history.append(new RatedGameInfo(this, number, color, result, date,
+                                           level, rating));
     }
     settings.endArray();
-    emit ratingHistoryChanged();
-    emit tableModelChanged();
+    emit historyChanged();
     setNumberGames(settings.value(QStringLiteral("rated_games"), 0).toInt());
     emit gameVariantChanged();
 }

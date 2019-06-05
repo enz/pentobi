@@ -28,13 +28,19 @@ Canvas {
         w -= 2 * margin
         h -= 2 * margin
         var i
+        var minX = Number.POSITIVE_INFINITY
+        var maxX = Number.NEGATIVE_INFINITY
         var minY = Number.POSITIVE_INFINITY
         var maxY = Number.NEGATIVE_INFINITY
         var info
         for (i = 0; i < n; ++i) {
-            minY = Math.min(minY, history[i])
-            maxY = Math.max(maxY, history[i])
+            info = ratingModel.history[i]
+            minX = Math.min(minX, info.number)
+            maxX = Math.max(maxX, info.number)
+            minY = Math.min(minY, info.rating)
+            maxY = Math.max(maxY, info.rating)
         }
+        maxX = minX + Math.ceil((maxX - minX) * 1.2)
         minY = Math.floor(minY / 100) * 100
         maxY = Math.ceil(maxY / 100) * 100
         if (maxY - minY < 100)
@@ -58,8 +64,11 @@ Canvas {
         ctx.fillText(maxY, w, w / 60)
 
         ctx.beginPath()
-        for (i = 0; i < n; ++i)
-            ctx.lineTo(i * w / n, h - (history[i] - minY)  / (maxY - minY) * h)
+        for (i = 0; i < n; ++i) {
+            info = ratingModel.history[i]
+            ctx.lineTo((info.number - minX)  / (maxX - minX) * w,
+                       h - (info.rating - minY)  / (maxY - minY) * h)
+        }
         ctx.strokeStyle = "red"
         ctx.stroke()
 

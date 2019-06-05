@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 17.x (master)
 ---------------------
 
-* The minimum required Qt version is now 5.12.
+*
 
 Version 17.0.x (v17-fixes)
 --------------------------

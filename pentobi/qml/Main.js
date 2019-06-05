@@ -327,9 +327,10 @@ function getPlayerString(variant, player)
             return qsTr("Yellow");
     case 2:
         return qsTr("Red");
-    default:
+    case 3:
         return qsTr("Green");
     }
+    return "";
 }
 
 function getWindowTitle(file, isModified) {

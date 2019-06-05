@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.12
+import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import "." as Pentobi
@@ -12,6 +12,7 @@ import "Main.js" as Logic
 
 Pentobi.Dialog {
     property int numberGames: ratingModel.numberGames
+    property var history: ratingModel.history
 
     footer: Pentobi.DialogButtonBox { ButtonClose { } }
 
@@ -115,12 +116,15 @@ Pentobi.Dialog {
                 }
             }
             ColumnLayout {
-                visible: ratingModel.ratingHistory.length > 1
                 Layout.fillWidth: true
 
-                Label { text: qsTr("Recent development:") }
+                Label {
+                    visible: history.length > 1
+                    text: qsTr("Recent development:")
+                }
                 RatingGraph {
-                    history: ratingModel.ratingHistory
+                    visible: history.length > 1
+                    history: ratingModel.history
                     Layout.preferredHeight:
                         Math.min(font.pixelSize * 8,
                                  0.22 * rootWindow.contentItem.width,
@@ -128,26 +132,123 @@ Pentobi.Dialog {
                     Layout.fillWidth: true
                 }
             }
-            TableView {
-                visible: ratingModel.ratingHistory.length > 0
+            ScrollView
+            {
+                visible: history.length > 0
                 clip: true
-                boundsBehavior: Flickable.StopAtBounds
-                model: ratingModel.tableModel
-                delegate: Label {
-                    font.underline: row === 0
-                    text: row > 0 && column === 3 ?
-                              Logic.getPlayerString(ratingModel.gameVariant,
-                                                    display)
-                            : display
-                }
-                columnSpacing: 0.4 * font.pixelSize
-                rowSpacing: columnLayout.spacing
                 Layout.fillWidth: true
                 Layout.preferredHeight:
                     Math.min(font.pixelSize * 8,
                              0.22 * rootWindow.contentItem.width,
                              0.22 * rootWindow.contentItem.height)
-                ScrollBar.vertical: ScrollBar { }
+
+                Item
+                {
+                    implicitHeight: grid.height
+                    implicitWidth: grid.width
+
+                    GridLayout {
+                        id: grid
+
+                        rows: history.length + 1
+                        flow: Grid.TopToBottom
+
+                        Label {
+                            id: gameHeader
+
+                            font.underline: true
+                            text: qsTr("Game")
+                        }
+                        Repeater {
+                            id: gameRepeater
+
+                            model: history
+
+                            Label { text: modelData.number }
+                        }
+                        Label { font.underline: true; text: qsTr("Result") }
+                        Repeater {
+                            model: history
+
+                            Label {
+                                text: switch (modelData.result) {
+                                      case 1:
+                                          //: Result of rated game is a win
+                                          return qsTr("Win")
+                                      case 0:
+                                          //: Result of rated game is a loss
+                                          return qsTr("Loss")
+                                      case 0.5:
+                                          //: Result of rated game is a tie. Abbreviate long translations to
+                                          //: ensure that all columns of rated games list are visible on
+                                          //: mobile devices with small screens.
+                                          return qsTr("Tie")
+                                      }
+                            }
+                        }
+                        Label { font.underline: true; text: qsTr("Level") }
+                        Repeater {
+                            model: history
+
+                            Label { text: modelData.level }
+                        }
+                        Label { font.underline: true; text: qsTr("Your Color") }
+                        Repeater {
+                            model: history
+
+                            Label {
+                                text:
+                                    Logic.getPlayerString(
+                                        gameModel.gameVariant, modelData.color)
+                            }
+                        }
+                        Label { font.underline: true; text: qsTr("Date") }
+                        Repeater {
+                            model: history
+
+                            Label { text: modelData.date }
+                        }
+                    }
+                    MouseArea {
+                        function openMenu(x, y) {
+                            if (y < gameHeader.height)
+                                return
+                            var n = history.length
+                            var i
+                            for (i = 1; i < n; ++i)
+                                if (y < gameRepeater.itemAt(i).y)
+                                    break
+                            menu.row = i - 1
+                            menu.popup(mouseX, mouseY)
+                        }
+
+                        anchors.fill: grid
+                        acceptedButtons: Qt.LeftButton | Qt.RightButton
+                        onClicked: openMenu(mouseX, mouseY)
+                        onPressAndHold: openMenu(mouseX, mouseY)
+
+                        Pentobi.Menu {
+                            id: menu
+
+                            property int row
+
+                            width:
+                                Math.min(font.pixelSize * 14, maxContentWidth)
+
+                            Pentobi.MenuItem {
+                                width: parent.width
+                                text: history && menu.row < history.length ?
+                                          qsTr("Open Game %1").arg(history[menu.row].number) : ""
+                                onTriggered: {
+                                    Logic.openFile(
+                                                ratingModel.getFile(
+                                                    history[menu.row].number))
+                                    close()
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

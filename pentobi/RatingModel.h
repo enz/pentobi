@@ -7,7 +7,7 @@
 #ifndef PENTOBI_RATING_MODEL_H
 #define PENTOBI_RATING_MODEL_H
 
-#include <QAbstractTableModel>
+#include <QObject>
 #include "libboardgame_base/Rating.h"
 
 class GameModel;
@@ -16,39 +16,59 @@ using libboardgame_base::Rating;
 
 //-----------------------------------------------------------------------------
 
-struct RatedGameInfo
-{
-    int number;
-
-    int color;
-
-    int level;
-
-    double result;
-
-    double rating;
-
-    QString date;
-};
-
-//-----------------------------------------------------------------------------
-
-class TableModel
-    : public QAbstractTableModel
+class RatedGameInfo
+    : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(int number READ number CONSTANT)
+
+    /** Color played by the human.
+        In game variants with multiple colors per player, the human played
+        all colors played by the player of this color. */
+    Q_PROPERTY(int color READ color CONSTANT)
+
+    /** Game result.
+        0=Loss, 0.5=tie, 1=win from the viewpoint of the human. */
+    Q_PROPERTY(double result READ result CONSTANT)
+
+    /** Date of the game in "YYYY-MM-DD" format. */
+    Q_PROPERTY(QString date READ date CONSTANT)
+
+    /** The playing level of the computer opponent. */
+    Q_PROPERTY(int level READ level CONSTANT)
+
+    /** The rating of the human after the game. */
+    Q_PROPERTY(double rating READ rating CONSTANT)
+
 public:
-    TableModel(QObject* parent, const QVector<RatedGameInfo>& history);
+    RatedGameInfo(QObject* parent, int number, int color, double result,
+                  const QString& date, int level, double rating);
 
-    int rowCount(const QModelIndex& parent) const override;
+    int number() const { return m_number; }
 
-    int columnCount(const QModelIndex& parent) const override;
+    int color() const { return m_color; }
 
-    QVariant data(const QModelIndex& index, int role) const override;
+    double result() const { return m_result; }
+
+    const QString& date() const { return m_date; }
+
+    int level() const { return m_level; }
+
+    double rating() const { return m_rating; }
 
 private:
-    const QVector<RatedGameInfo>& m_history;
+    int m_number;
+
+    int m_color;
+
+    int m_level;
+
+    double m_result;
+
+    double m_rating;
+
+    QString m_date;
 };
 
 //-----------------------------------------------------------------------------
@@ -60,13 +80,13 @@ class RatingModel
 
     Q_PROPERTY(double bestRating READ bestRating NOTIFY bestRatingChanged)
     Q_PROPERTY(QString gameVariant MEMBER m_gameVariant WRITE setGameVariant NOTIFY gameVariantChanged)
-    Q_PROPERTY(TableModel* tableModel READ tableModel NOTIFY tableModelChanged)
-    Q_PROPERTY(QVector<qreal> ratingHistory READ ratingHistory NOTIFY ratingHistoryChanged)
+    Q_PROPERTY(QList<QObject*> history READ history NOTIFY historyChanged)
     Q_PROPERTY(int numberGames READ numberGames NOTIFY numberGamesChanged)
     Q_PROPERTY(double rating READ rating NOTIFY ratingChanged)
 
 public:
-    RatingModel(QObject* parent = nullptr);
+    using QObject::QObject;
+
 
     Q_INVOKABLE void addResult(GameModel* gameModel, int level);
 
@@ -87,9 +107,7 @@ public:
 
     double bestRating() const { return m_bestRating.get(); }
 
-    const QVector<qreal>& ratingHistory();
-
-    TableModel* tableModel() { return m_tableModel; }
+    const QList<QObject*>& history() const { return m_history; }
 
     int numberGames() const { return m_numberGames; }
 
@@ -102,9 +120,7 @@ signals:
 
     void gameVariantChanged();
 
-    void ratingHistoryChanged();
-
-    void tableModelChanged();
+    void historyChanged();
 
     void numberGamesChanged();
 
@@ -121,11 +137,7 @@ private:
 
     QString m_gameVariantName;
 
-    QVector<RatedGameInfo> m_history;
-
-    QVector<qreal> m_ratingHistory;
-
-    TableModel* m_tableModel;
+    QList<QObject*> m_history;
 
 
     QString getDir() const;

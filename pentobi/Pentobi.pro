@@ -5,10 +5,10 @@
 #############################################################################
 
 lessThan(QT_MAJOR_VERSION, 5) {
-    error("Qt >=5.12 required")
+    error("Qt >=5.11 required")
 }
-equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 12) {
-    error("Qt >=5.12 required")
+equals(QT_MAJOR_VERSION, 5):lessThan(QT_MINOR_VERSION, 11) {
+    error("Qt >=5.11 required")
 }
 
 TEMPLATE = app
