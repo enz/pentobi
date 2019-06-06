@@ -9,7 +9,7 @@ Version 17.x (master)
 Version 17.0.x (v17-fixes)
 --------------------------
 
-*
+* Added search hint for DocBook XSL for compilation on OpenSUSE.
 
 Version 17.0 (05 Jun 2019)
 --------------------------
