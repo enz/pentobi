@@ -73,7 +73,7 @@ void PlayerModel::cancelGenMove()
 void PlayerModel::genMoveFinished()
 {
     auto result = m_watcher.future().result();
-    if (m_player->get_search().was_aborted())
+    if (m_player->was_aborted())
         return;
     setIsGenMoveRunning(false);
     auto& bd = result.gameModel->getBoard();
