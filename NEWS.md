@@ -4,6 +4,8 @@ Pentobi Release Notes
 Version 17.0.x (v17-fixes)
 --------------------------
 
+* Move generation hung if a move generation using search was aborted
+  and the next move generation used the opening book.
 * Added search hint for DocBook XSL for compilation on OpenSUSE.
 
 Version 17.0 (05 Jun 2019)

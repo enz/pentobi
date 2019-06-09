@@ -86,12 +86,17 @@ public:
     /** Get an estimated Elo-rating of the current level. */
     Rating get_rating(Variant variant) const;
 
+    /** Was last move generation based on an aborted search? */
+    bool was_aborted() const { return m_was_aborted; }
+
 private:
     bool m_is_book_loaded;
 
     bool m_use_book;
 
     bool m_resign;
+
+    bool m_was_aborted;
 
     string m_books_dir;
 

@@ -156,6 +156,7 @@ Player::Player(Variant initial_variant, unsigned max_level,
 Move Player::genmove(const Board& bd, Color c)
 {
     m_resign = false;
+    m_was_aborted = false;
     if (! bd.has_moves(c))
         return Move::null();
     Move mv;
@@ -249,6 +250,7 @@ Move Player::genmove(const Board& bd, Color c)
         LIBBOARDGAME_LOG("MaxTime ", max_time);
     if (! m_search.search(mv, bd, c, max_count, 0, max_time, *m_time_source))
         return Move::null();
+    m_was_aborted = m_search.was_aborted();
     // Resign only in two-player game variants
     if (get_nu_players(variant) == 2)
         if (m_search.get_root_visit_count() > 500
