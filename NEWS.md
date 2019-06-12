@@ -1,7 +1,7 @@
 Pentobi Release Notes
 =====================
 
-Version 17.0.x (v17-fixes)
+Version 17.1 (12 Jun 2019)
 --------------------------
 
 * Move generation hung if a move generation using search was aborted
