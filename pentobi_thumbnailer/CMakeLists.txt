@@ -38,6 +38,7 @@ endforeach()
 
 qt5_add_translation(pentobi_thumbnailer_QM
     i18n/de.ts
+    i18n/es.ts
     OPTIONS -removeidentical -nounfinished
     )
 add_custom_command(
@@ -106,4 +107,3 @@ foreach(lang ${linguas})
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi-thumbnailer.6"
         DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")
 endforeach()
-

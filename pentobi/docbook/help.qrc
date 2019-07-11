@@ -52,5 +52,20 @@
         <file>help/de/pentobi/trigon_rules.html</file>
         <file>help/de/pentobi/user_interface.html</file>
         <file>help/de/pentobi/window_menu.html</file>
+        <file>help/es/pentobi/become_stronger.html</file>
+        <file>help/es/pentobi/callisto_rules.html</file>
+        <file>help/es/pentobi/classic_rules.html</file>
+        <file>help/es/pentobi/duo_rules.html</file>
+        <file>help/es/pentobi/gembloq_rules.html</file>
+        <file>help/es/pentobi/index.html</file>
+        <file>help/es/pentobi/junior_rules.html</file>
+        <file>help/es/pentobi/license.html</file>
+        <file>help/es/pentobi/nexos_rules.html</file>
+        <file>help/es/pentobi/overview.html</file>
+        <file>help/es/pentobi/shortcuts.html</file>
+        <file>help/es/pentobi/system.html</file>
+        <file>help/es/pentobi/trigon_rules.html</file>
+        <file>help/es/pentobi/user_interface.html</file>
+        <file>help/es/pentobi/window_menu.html</file>
     </qresource>
 </RCC>

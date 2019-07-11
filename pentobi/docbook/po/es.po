@@ -1,0 +1,2189 @@
+# Translators:
+# Francisco Zamorano <pacozamo@gmail.com>, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2019-02-11 17:37+0100\n"
+"PO-Revision-Date: 2019-02-25 15:30+0000\n"
+"Last-Translator: Francisco Zamorano <pacozamo@gmail.com>, 2019\n"
+"Language-Team: Spanish (https://www.transifex.com/markus-enzenberger/teams/89074/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. (itstool) path: book/title
+#: index.docbook:5
+msgid "Pentobi"
+msgstr "Pentobi"
+
+#. (itstool) path: chapter/title
+#: index.docbook:8
+msgid "Overview"
+msgstr "Descripción"
+
+#. (itstool) path: chapter/para
+#: index.docbook:9
+msgid ""
+"Pentobi is a computer opponent for the board game Blokus. In this game, four"
+" players place pieces similar to the pieces of the computer game Tetris on a"
+" 20×20 board. Pentobi also supports the game variants for two or three "
+"players and the game variants Duo, Trigon, Junior, Nexos, GembloQ and "
+"Callisto."
+msgstr ""
+"Pentobi es un rival virtual para el juego de mesa Blokus. En este juego, "
+"hasta cuatro jugadores se dedican a colocar piezas parecidas a las del "
+"videojuego Tetris en un tablero de 20x20 casillas. Además, Pentobi también "
+"cuenta con variantes de juego para dos o tres jugadores y con las variantes "
+"de juego Dúo, Trigón, Sencillo, Nexos, GembloQ y Calisto."
+
+#. (itstool) path: chapter/title
+#: index.docbook:18
+msgid "Classic Rules"
+msgstr "Reglas de Clásico"
+
+#. (itstool) path: chapter/para
+#: index.docbook:19
+msgid ""
+"There are four players, Blue, Yellow, Red and Green, and a board consisting "
+"of 20×20 squares. Each player has a set of 21 pieces of his color shaped "
+"like the polyominoes up to size five. A polyomino is a shape built from a "
+"number of squares connected along the edges."
+msgstr ""
+"Hay cuatro jugadores: azul, amarillo, rojo y verde, y un tablero compuesto "
+"de 20x20 casillas. Cada jugador tiene un conjunto de 21 piezas de su color "
+"con forma de poliominós con un tamaño de hasta cinco cuadrados. Un poliominó"
+" es una forma construida a partir de la conexión por los laterales de "
+"cuadrados."
+
+#. (itstool) path: caption/para
+#: index.docbook:30 index.docbook:289 index.docbook:353
+msgid "The 21 pieces"
+msgstr "Las 21 piezas"
+
+#. (itstool) path: chapter/para
+#: index.docbook:33
+msgid ""
+"The players alternate in placing one of their pieces on the board. The first"
+" piece of a player must cover its starting square. The starting squares are "
+"located in the corners of the board."
+msgstr ""
+"Los jugadores juegan por turnos tratando de colocar una de sus piezas sobre "
+"el tablero. Con la primera pieza que coloque un jugador se tiene que cubrir "
+"la casilla de inicio. Las casillas de inicio están colocadas en las esquinas"
+" del tablero."
+
+#. (itstool) path: caption/para
+#: index.docbook:44
+msgid "The 20×20 board with the starting squares marked with colored dots"
+msgstr ""
+"El tablero de 20x20 con las casillas de inicio marcadas con puntos de "
+"colores"
+
+#. (itstool) path: chapter/para
+#: index.docbook:50
+msgid ""
+"The following pieces must be placed on empty squares such that the new piece"
+" touches at least one piece of its own color corner-to-corner but does not "
+"touch any piece of its own color along the edges. The new piece may touch "
+"edges of pieces of the opponent colors."
+msgstr ""
+"Las siguientes piezas deben colocarse sobre casillas vacías de tal manera "
+"que la nueva pieza toque al menos por una esquina una pieza del mismo color,"
+" pero no puede tocar ninguna otra pieza del mismo color por los lados. La "
+"nueva pieza puede tocar los lados de las piezas de otros colores rivales."
+
+#. (itstool) path: caption/para
+#: index.docbook:61 index.docbook:260 index.docbook:320 index.docbook:383
+msgid "An example position after a few moves"
+msgstr "Una posición de ejemplo después de algunos movimientos"
+
+#. (itstool) path: chapter/para
+#: index.docbook:64
+msgid ""
+"When the player of a color cannot place any more pieces, the player passes "
+"and the next color continues. When none of the players can place any more "
+"pieces, the player with the highest score wins. The score of a color is the "
+"number of squares on the board occupied by the color, plus a bonus of 15 "
+"points if the color could place all of its pieces, plus an additional bonus "
+"of 5 points if the color could place all pieces and the last piece played "
+"was the one-square piece."
+msgstr ""
+"Cuando el jugador de un color ya no puede colocar ninguna pieza más, el "
+"jugador pasa su turno para que continúe el jugador del siguiente color. "
+"Cuando ninguno de los jugadores puede colocar más piezas, el jugador con la "
+"puntuación más alta es el ganador. La puntuación de un color resulta del "
+"número de cuadrados de ese color ocupados sobre el tablero, más una "
+"bonificación de 15 puntos si el color fue capaz de colocar todas sus piezas,"
+" además de una bonificación adicional de 5 puntos si el color pudo colocar "
+"todos las piezas y la última pieza que jugó fue la pieza de un solo "
+"cuadrado."
+
+#. (itstool) path: sect1/title
+#: index.docbook:74 index.docbook:178 index.docbook:268
+msgid "Rules for Two Players"
+msgstr "Reglas para dos jugadores"
+
+#. (itstool) path: sect1/para
+#: index.docbook:75
+msgid ""
+"The game can be played with two players. The first player plays both Blue "
+"and Red, the second player Yellow and Green. The points of both colors "
+"played by a player are added up."
+msgstr ""
+"La partida puede jugarse a dos jugadores. El primer jugador juega con azules"
+" y rojas y el segundo jugador juega con amarillas y verdes. Al final se "
+"sumarán las puntuaciones de los dos colores con los que esté jugando el "
+"jugador."
+
+#. (itstool) path: sect1/title
+#: index.docbook:82 index.docbook:185
+msgid "Rules for Three Players"
+msgstr "Reglas para tres jugadores"
+
+#. (itstool) path: sect1/para
+#: index.docbook:83
+msgid ""
+"The game can also be played with three players. The players take turns "
+"playing the fourth color (Green). At the end of the game, the score of Green"
+" is ignored."
+msgstr ""
+"Se pueden realizar también partidas de tres jugadores. Los jugadores se "
+"turnan para jugar con el cuarto color (verde). Al final de la partida, la "
+"puntuación de las verdes se ignora."
+
+#. (itstool) path: sect1/title
+#: index.docbook:90
+msgid "Colorless Starting Points"
+msgstr "Puntos de inicio sin color"
+
+#. (itstool) path: sect1/para
+#: index.docbook:91
+msgid ""
+"Note that the original Blokus Classic rules used colorless starting points. "
+"This means that each color may freely choose, which of the remaining "
+"unoccupied starting points to use for its first move. Pentobi currently only"
+" supports the rule variant with colored starting points because this rule "
+"variant was used at the first Blokus online servers and Blokus tournaments."
+msgstr ""
+"Tenga en cuenta que las reglas clásicas del Blokus original usaban puntos de"
+" inicio sin color. Esto significa que cada color puede elegir libremente "
+"cuál de los puntos iniciales que no estén ocupados puede utilizar para "
+"realizar su primer movimiento. En estos momentos, Pentobi solo permite jugar"
+" con la variante de la regla con puntos de inicio con color, ya que fue esta"
+" variante de regla la que se usó en los primeros servidores en línea de "
+"Blokus y en los torneos de Blokus."
+
+#. (itstool) path: chapter/title
+#: index.docbook:102
+msgid "Duo Rules"
+msgstr "Reglas de Dúo"
+
+#. (itstool) path: chapter/para
+#: index.docbook:103
+msgid ""
+"The game variant Duo is another game variant for two players. The game is "
+"played on a smaller board with 14×14 squares. There is only one color per "
+"player (Purple and Orange) and the starting squares are not in the corners, "
+"but on the square with the coordinates (5,10) for Purple, and on (10,5) for "
+"Orange."
+msgstr ""
+"La variante de juego Dúo es otra variante de juego para dos jugadores. La "
+"partida se desarrolla en un tablero más pequeño de 14x14 casillas. Cada "
+"jugador juega con un único color (morado y naranja) y las casillas de inicio"
+" no se encuentran en las esquinas, sino en la casilla con las coordenadas "
+"(5,10) para el morado, y en (10,5) para el naranja."
+
+#. (itstool) path: caption/para
+#: index.docbook:114
+msgid ""
+"The 14×14 board used in game variant Duo with the starting squares marked "
+"with colored dots"
+msgstr ""
+"El tablero de 14x14 que se usa en la variante de juego Dúo con las casillas "
+"de inicio marcadas con puntos de colores"
+
+#. (itstool) path: caption/para
+#: index.docbook:126
+msgid "An example position in game variant Duo"
+msgstr "Una posición de ejemplo en la variante de juego Dúo"
+
+#. (itstool) path: chapter/title
+#: index.docbook:132
+msgid "Trigon Rules"
+msgstr "Reglas de Trigón"
+
+#. (itstool) path: chapter/para
+#: index.docbook:133
+msgid ""
+"Trigon is another game variant. The rules a similar to game variant Classic "
+"but it uses a differently shaped board and a different set of pieces. Each "
+"color uses 22 pieces that are shaped like the polyiamonds up to size six. A "
+"polyiamond is a shape built from a number of equilateral triangles connected"
+" along the edges."
+msgstr ""
+"Trigón es otra variante de juego. Las reglas son similares a la variante de "
+"juego clásica, pero en este caso se juega sobre un tablero con una forma "
+"diferente y un conjunto de piezas distinto. Cada color utiliza 22 piezas que"
+" tienen forma de polidiamante con un tamaño máximo de seis triángulos. Un "
+"polidiamante es un forma compuesta por un determinado número de triángulos "
+"equiláteros conectados por los lados."
+
+#. (itstool) path: caption/para
+#: index.docbook:145
+msgid "The 22 Trigon pieces"
+msgstr "Las 22 piezas de Trigón"
+
+#. (itstool) path: chapter/para
+#: index.docbook:148
+msgid ""
+"The board also consists of triangles and is shaped like a hexagon with an "
+"edge size of nine triangles."
+msgstr ""
+"El tablero también puede estar formado por triángulos y tiene forma de "
+"hexágono con un tamaño del borde de nueve triángulos."
+
+#. (itstool) path: caption/para
+#: index.docbook:158
+msgid "The board with the starting fields marked with gray dots"
+msgstr "El tablero con campos de inicio marcado con puntos grises"
+
+#. (itstool) path: chapter/para
+#: index.docbook:162
+msgid ""
+"There are six starting points on the board, each located in the middle of "
+"the fourth row away from each edge. The starting points are not colored and "
+"the players may freely choose a starting point for the first piece of a "
+"color."
+msgstr ""
+"Hay seis puntos de inicio sobre el tablero, cada uno de ellos situado en "
+"mitad de la cuarta fila contada a partir de cada uno de los laterales del "
+"tablero. Los puntos de inicio no pertenecen a un color determinado, por lo "
+"que los jugadores pueden elegir libremente en qué punto de inicio desean "
+"colocar la primera pieza de su color."
+
+#. (itstool) path: caption/para
+#: index.docbook:172
+msgid "An example position in game variant Trigon"
+msgstr "Una posición de ejemplo en la variante de juego Trigón"
+
+#. (itstool) path: sect1/para
+#: index.docbook:179
+msgid ""
+"Like game variant Classic, Trigon can be played with two players by having "
+"one player play Blue and Red and the other player Yellow and Green."
+msgstr ""
+"Como en el caso de la variante de juego Clásico, Trigón se puede jugar a dos"
+" jugadores, con un jugador a cargo de las azules y rojas y el otro jugador a"
+" cargo de amarillas y verdes."
+
+#. (itstool) path: sect1/para
+#: index.docbook:186
+msgid ""
+"Trigon can be played with three players using the same rules as for the "
+"four-player variant. The three-player variant is played on a smaller board "
+"with an edge size of eight triangles. The starting points are located in the"
+" middle of the third row away from each edge."
+msgstr ""
+"Trigón se puede jugar a tres jugadores utilizando las mismas reglas que para"
+" la variante de cuatro jugadores. La variante de tres jugadores se juega "
+"sobre un tablero más pequeño con un tamaño de los laterales de ocho "
+"triángulos. Los puntos de inicio están situados en mitad de la tercera fila "
+"contada a partir de cada uno de los laterales del tablero."
+
+#. (itstool) path: chapter/title
+#: index.docbook:196
+msgid "Junior Rules"
+msgstr "Reglas de Sencillo"
+
+#. (itstool) path: chapter/para
+#: index.docbook:197
+msgid ""
+"Junior is a simplified game variant for two players. It is played on the "
+"same 14×14 board as game variant Duo but uses only a subset of the "
+"polyominoes up to size five and the players get two of each of those "
+"polyominoes."
+msgstr ""
+"Sencillo es una variante de juego simplificada para dos jugadores. Se juega "
+"sobre el mismo tablero de 14x14 de la variante Dúo pero utiliza un grupo de "
+"poliominós con un máximo de cinco cuadrados y los jugadores reciben dos de "
+"cada uno de esos poliominós."
+
+#. (itstool) path: caption/para
+#: index.docbook:207
+msgid "The 24 pieces used in Junior"
+msgstr "Las 24 piezas utilizadas en Sencillo"
+
+#. (itstool) path: chapter/para
+#: index.docbook:210
+msgid "Bonus points are not used in Junior."
+msgstr "No se utilizan puntos de bonificación en Sencillo."
+
+#. (itstool) path: chapter/title
+#: index.docbook:216
+msgid "Nexos Rules"
+msgstr "Reglas de Nexos"
+
+#. (itstool) path: chapter/para
+#: index.docbook:217
+msgid ""
+"Nexos is a board game similar to Blokus. The board is a rectangular 13×13 "
+"line grid. Each color uses 24 pieces that consist of up to four connected "
+"line segments."
+msgstr ""
+"Nexos es un juego de mesa parecido a Blokus. El tablero es una cuadrícula "
+"rectangular de 13x13 líneas. Cada color utiliza 24 piezas compuestas de un "
+"máximo de cuatro segmentos de línea unidos entre sí."
+
+#. (itstool) path: caption/para
+#: index.docbook:227
+msgid "The 24 pieces"
+msgstr "Las 24 piezas"
+
+#. (itstool) path: chapter/para
+#: index.docbook:230
+msgid ""
+"Each color has a starting intersection on the intersection of the third "
+"lines close to a corner. The first piece must touch the starting "
+"intersection."
+msgstr ""
+"A cada color le corresponde una intersección de inicio cercana a cada "
+"esquina donde se entrecruzan la tercera línea vertical y horizontal. La "
+"primera pieza debe tocar la intersección de inicio."
+
+#. (itstool) path: caption/para
+#: index.docbook:240
+msgid ""
+"The board for Nexos with the starting intersections marked with colored dots"
+msgstr ""
+"El tablero para Nexos con las intersecciones de inicio marcadas con puntos "
+"de colores"
+
+#. (itstool) path: chapter/para
+#: index.docbook:246
+msgid ""
+"The following pieces must be placed on empty line segments such that a "
+"segment of the new piece touches an intersection that is already touched by "
+"a segment of the same color. It does not matter if pieces of other colors "
+"touch or cover the same intersection. However, pieces may not overlap. The "
+"junctions between the segments within a piece are such that two rectangular "
+"junctions of different pieces can cover the same intersection without "
+"overlapping, but straight junctions cannot."
+msgstr ""
+"Las siguientes piezas deben colocarse sobre segmentos de línea vacíos de tal"
+" manera que uno de los segmentos de la nueva pieza esté en contacto con una "
+"intersección que ya se encuentre en contacto con un segmento del mismo "
+"color. No importa si otras piezas de distinto color tocan o cubren la misma "
+"intersección. Sin embargo, las piezas no pueden solaparse. Las uniones entre"
+" segmentos de una pieza están hechas así para que las uniones rectangulares "
+"de piezas distintas puedan cubrir la misma intersección sin solaparse, pero "
+"esto no se puede hacer en el caso de las uniones rectas. "
+
+#. (itstool) path: chapter/para
+#: index.docbook:263
+msgid ""
+"The score of a color is the number of line segments on the board covered by "
+"the color, plus a bonus of 10 points if the color could place all of its "
+"pieces."
+msgstr ""
+"La puntuación de cada color es el número de segmentos de línea sobre el "
+"tablero cubiertos por dicho color, más una bonificación de 10 puntos si el "
+"color fue capaz de colocar todas las piezas."
+
+#. (itstool) path: sect1/para
+#: index.docbook:269
+msgid ""
+"Like Blokus, Nexos can be played with two players by having one player play "
+"Blue and Red and the other player Yellow and Green."
+msgstr ""
+"Al igual que en Blokus, Nexos puede jugarse a dos jugadores, con un jugador "
+"a cargo de azules y rojas y el otro jugador a cargo de amarillas y verdes."
+
+#. (itstool) path: chapter/title
+#: index.docbook:277
+msgid "GembloQ Rules"
+msgstr "Reglas de GembloQ"
+
+#. (itstool) path: chapter/para
+#: index.docbook:278
+msgid ""
+"GembloQ is a board game similar to Blokus. The squares of the board are "
+"rotated by 45 degrees. The board has a diagonal size of 27 squares. In "
+"addition to the full squares, the edges also contain half squares such that "
+"the edges are straight lines."
+msgstr ""
+"GembloQ es un juego de mesa parecido a Blokus. Las casillas del tablero "
+"están inclinadas 45 grados. El tablero tiene un tamaño en diagonal de 27 "
+"casillas. Además de las casillas completas con cuatro lados, a lo largo de "
+"los laterales hay también casillas cortadas por la mitad de tal manera que "
+"los laterales del tablero sean líneas rectas."
+
+#. (itstool) path: chapter/para
+#: index.docbook:292
+msgid ""
+"Each player has a set of 21 pieces, which include a subset of the pieces "
+"used in Blokus, but also some pieces that contain a half square."
+msgstr ""
+"Cada jugador tiene un conjunto de 21 piezas, que incluye las piezas usadas "
+"en Blokus, pero que además tiene algunas piezas que cuentan solo con medio "
+"cuadrado."
+
+#. (itstool) path: caption/para
+#: index.docbook:302
+msgid ""
+"The board for GembloQ with the starting points marked with colored dots"
+msgstr ""
+"El tablero para GembloQ con los puntos de inicio marcados con puntos de "
+"colores"
+
+#. (itstool) path: chapter/para
+#: index.docbook:308
+msgid ""
+"As in Blokus, the starting squares are in the corners, the first move must "
+"fully cover the starting square of the color and subsequent moves must touch"
+" a piece of the player color at a vertex, but not edge-to-edge. Moves are "
+"also legal, if a vertex of a half square touches an edge of a piece of the "
+"same color."
+msgstr ""
+"Tal y como sucede en Blokus, las casillas de inicio se encuentran en las "
+"esquinas. El primer movimiento debe cubrir por completo la casilla de inicio"
+" del color correspondiente y todos los movimientos posteriores deben tocar "
+"una pieza del color del jugador en uno de sus vértices, pero no esquina con "
+"esquina. Hay algunos movimientos que también se consideran legales, si un "
+"vértice de un medio cuadrado toca el lateral de una pieza del mismo color."
+
+#. (itstool) path: chapter/para
+#: index.docbook:323
+msgid ""
+"Scoring is done like in Blokus, half squares count 0.5 points. Bonus points "
+"are not used. Tie breaking by assigning additional values to the pieces, as "
+"described in the official GembloQ rules, is currently not supported by "
+"Pentobi."
+msgstr ""
+"La puntuación se obtiene de la misma manera que en Blokus; los medios "
+"cuadrados cuentan como 0,5 puntos. El desempate mediante la asignación de "
+"valores adicionales a las piezas, tal y como se describe en las reglas "
+"oficiales de GembloQ, no es una opción compatible actualmente con Pentobi."
+
+#. (itstool) path: sect1/title
+#: index.docbook:329 index.docbook:392
+msgid "Rules for Two and Three Players"
+msgstr "Reglas para dos y tres jugadores"
+
+#. (itstool) path: sect1/para
+#: index.docbook:330
+msgid ""
+"The game variants for two and three players use smaller boards and different"
+" starting point locations. In addition to the standard two-player variant, "
+"Pentobi also supports a game variant for two players like in Blokus, in "
+"which each player plays two colors."
+msgstr ""
+"Las variantes de juego para dos y tres jugadores utilizan tableros más "
+"pequeños y diferentes colocaciones de los puntos de inicio. Además de la "
+"variante de dos jugadores habitual, Pentobi también ofrece una variante de "
+"juego para dos jugadores como en Blokus, donde cada jugador juega con dos "
+"colores. "
+
+#. (itstool) path: chapter/title
+#: index.docbook:340
+msgid "Callisto Rules"
+msgstr "Reglas de Calisto"
+
+#. (itstool) path: chapter/para
+#: index.docbook:341
+msgid ""
+"Callisto is a another board game similar to Blokus. The board is derived "
+"from the classic 20×20 Blokus board by removing the corners such that an "
+"octagon with a top edge of size six remains. The pieces are a subset of the "
+"polyominoes up to size five. They include three 1×1 pieces per player that "
+"play a special role."
+msgstr ""
+"Calisto es otro juego de mesa parecido a Blokus. El tablero es una "
+"derivación del clásico 20x20 de Blokus, solo que eliminando las esquinas "
+"para conseguir un octógono con un lateral superior de seis casillas "
+"restantes. Las piezas son un grupo de poliominós de un máximo de cinco "
+"cuadrados. Entre ellas, hay tres piezas de 1x1 para cada jugador que "
+"desempeñan una función especial."
+
+#. (itstool) path: chapter/para
+#: index.docbook:356
+msgid ""
+"The 1×1 pieces may be placed anywhere on the board apart from the center of "
+"the board. The center consists of an octagon with width six and top edge "
+"size two. The first two moves of a player must use a 1×1 piece, the third "
+"1×1 piece may be played anytime later."
+msgstr ""
+"Las piezas de 1x1 pueden colocarse en cualquier lugar sobre el tablero a "
+"partir del centro del mismo. El centro consiste en un octógono con una "
+"anchura de seis casillas y un lateral superior de dos casillas. Para los dos"
+" primeros movimientos de un jugador se deben usar dos piezas de 1x1; la "
+"tercera pieza de 1x1 puede jugarse posteriormente en cualquier momento."
+
+#. (itstool) path: caption/para
+#: index.docbook:368
+msgid "The board with the center having a darker color"
+msgstr "El tablero con el centro de un color más oscuro"
+
+#. (itstool) path: chapter/para
+#: index.docbook:374
+msgid ""
+"All larger pieces may be placed anywhere on the board but must touch an "
+"existing piece of the same color edge-to-edge."
+msgstr ""
+"El resto de piezas más grandes se pueden colocar en cualquier lugar del "
+"tablero, pero deben tocar por la esquina una pieza ya existente del mismo "
+"color."
+
+#. (itstool) path: chapter/para
+#: index.docbook:386
+msgid ""
+"The score of a color is the number of squares on the board occupied by the "
+"color not counting 1×1 pieces. Bonus points are not used. Unlike in Blokus, "
+"ties are broken in favor of the player who started later."
+msgstr ""
+"La puntuación que recibe un color se corresponde con el número de cuadrados "
+"sobre el tablero que están ocupados por dicho color, sin contar las piezas "
+"de 1x1. No se utilizan puntos de bonificación. A diferencia de Blokus, los "
+"empates se deshacen a favor del jugador que comenzó último."
+
+#. (itstool) path: sect1/para
+#: index.docbook:393
+msgid ""
+"The game can be played with less than four players by using a smaller board."
+" For three players, the board is an octagon with width 20 and top edge size "
+"two. For two players, the board is an octagon with width 17 and top edge "
+"size two. The size of the center stays the same. In addition to the standard"
+" two-player variant, Pentobi also supports a game variant for two players "
+"like in Blokus, in which each player plays two colors."
+msgstr ""
+"A esta variante pueden jugar menos de cuatro jugadores utilizando un tablero"
+" más pequeño. Para tres jugadores, el tablero es un octógono con una anchura"
+" de 20 casillas y un lateral superior de 2 casillas. Para dos jugadores, el "
+"tablero es un octógono con una anchura de 17 casillas y un lateral superior "
+"de 2 casillas. Las dimensiones de la zona central siguen siendo las mismas. "
+"Además de la variante normal de dos jugadores, Pentobi también ofrece una "
+"variante de juego para dos jugadores como en Blokus, donde cada jugador "
+"juega con dos colores."
+
+#. (itstool) path: chapter/title
+#: index.docbook:405
+msgid "How to Use Pentobi"
+msgstr "Cómo usar Pentobi"
+
+#. (itstool) path: sect1/title
+#: index.docbook:407
+msgid "Board"
+msgstr "Tablero"
+
+#. (itstool) path: sect1/para
+#: index.docbook:408
+msgid ""
+"Pieces can be selected by clicking on one of the unplayed pieces or by using"
+" <link linkend=\"shortcuts\">shortcut keys</link>. Pieces can be played by "
+"dragging them to a place that corresponds to a legal move with the mouse or "
+"arrow keys and pressing the left mouse button or the Enter key."
+msgstr ""
+"La selección de las piezas puede realizarse haciendo clic sobre una de las "
+"que no se hayan jugado todavía o usando <link linkend=\"shortcuts\">teclas "
+"de método abreviado</link>. Se pueden jugar las piezas arrastrándolas a una "
+"posición que se corresponda con un movimiento legal, tanto con el ratón como"
+" con las teclas de dirección, y pulsar el botón izquierdo del ratón o la "
+"tecla Entrar."
+
+#. (itstool) path: sect1/para
+#: index.docbook:414
+msgid ""
+"Played pieces on the board can have numbers on them that indicate the move "
+"number in which the piece was played. A letter after the move number "
+"indicates that there exists a variation to this move (see below)."
+msgstr ""
+"Las piezas jugadas sobre el tablero puede que muestren números que sirven "
+"para indicar el número de movimiento en el que se jugó dicha pieza. Una "
+"letra a continuación del número de movimiento indica que existe una "
+"variación de este movimiento (ver a continuación)."
+
+#. (itstool) path: sect1/para
+#: index.docbook:419
+msgid ""
+"The score display shows the current points for each color or player. The "
+"points are the sum of on-board points and bonus points. Points are "
+"underlined if they are final because the color cannot play more pieces. A "
+"small star indicates that the points include a bonus."
+msgstr ""
+"El indicador de puntuación muestra los puntos actuales de cada color o "
+"jugador. Los puntos son la suma de los puntos sobre el tablero y los puntos "
+"de bonificación. Los puntos aparecen subrayados si se trata de los puntos "
+"finales debido a que dicho color ya no puede colocar más piezas. Una "
+"estrella pequeña indica que los puntos incluyen una bonificación."
+
+#. (itstool) path: sect1/title
+#: index.docbook:427
+msgid "Playing Against the Computer"
+msgstr "Jugar contra la máquina"
+
+#. (itstool) path: sect1/para
+#: index.docbook:428
+msgid ""
+"The board can be used for creating game records of games played by humans or"
+" for playing games against the computer. In games against the computer, the "
+"computer can play any (or several) of the colors."
+msgstr ""
+"El tablero se puede utilizar para crear registros de partidas jugadas por "
+"jugadores humanos o por partidas jugadas contra la máquina. En partidas "
+"contra la máquina, esta puede jugar con alguno (o la mayoría) de los "
+"colores."
+
+#. (itstool) path: sect1/para
+#: index.docbook:433
+msgid ""
+"When you start a new game, the human will play the color(s) of the first "
+"player by default and the computer all other colors. To change this, use "
+"<guimenuitem>Settings</guimenuitem> from the <guimenu>Computer</guimenu> "
+"menu or toolbar and select the colors the computer should play."
+msgstr ""
+"Cuando comienza una nueva partida, el jugador humano jugará por defecto con "
+"el color o los colores del primer jugador y la máquina jugará con el resto "
+"de colores. Para poder cambiar esto, puede ir a "
+"<guimenuitem>Ajustes</guimenuitem> en la opción de menú de la "
+"<guimenu>Máquina</guimenu> o desde la barra de herramientas y seleccionar "
+"los colores con los que quiere que juegue la máquina."
+
+#. (itstool) path: sect1/para
+#: index.docbook:439
+msgid ""
+"The exception is that the computer will play no color by default if it "
+"played no color in the previous game. This prevents the computer from "
+"automatically starting to play if the user mainly wants to use the board for"
+" entering move sequences or similar editing tasks. After loading a saved "
+"game, the computer also plays no color by default."
+msgstr ""
+"Existe una excepción en la que no se asignará un color predeterminado a la "
+"máquina cuando esta haya jugado sin un color asignado en la partida "
+"anterior. Esto impide que la máquina pueda comenzar a jugar de forma "
+"automática si el usuario quiere básicamente utilizar el tablero para "
+"introducir secuencias de movimientos o realizar tareas de edición similares."
+" Después de cargar una partida guardada, la máquina tampoco tendrá un color "
+"predeterminado."
+
+#. (itstool) path: sect1/para
+#: index.docbook:446
+msgid ""
+"Selecting <guimenuitem>Play</guimenuitem> from the "
+"<guimenu>Computer</guimenu> menu or the toolbar always makes the computer "
+"play a move for the current color. If the computer did not already play this"
+" color before, it will also make the computer play this color (and only this"
+" color) from now on."
+msgstr ""
+"Al seleccionar <guimenuitem>Jugar</guimenuitem> desde la opción de menú de "
+"<guimenu>Máquina</guimenu> o desde la barra de herramientas la máquina "
+"siempre realiza un movimiento para el color actual. Si la máquina no hubiera"
+" jugado con este color antes, de esta manera la máquina será capaz de jugar "
+"con este color (y solo con este color) de ahora en adelante."
+
+#. (itstool) path: sect1/title
+#: index.docbook:455
+msgid "Move Variations and the Game Tree"
+msgstr "Más variaciones y el árbol de la partida"
+
+#. (itstool) path: sect1/para
+#: index.docbook:456
+msgid ""
+"When you play a game, Pentobi will store the sequence of moves and it is "
+"always possible to go back to a previous position and play differently. If "
+"you do this, the new sequence is stored as an alternative sequence (called "
+"variation). Variations can also be used by annotators for commenting on "
+"existing games. Variations can exist at any board position and can have "
+"subvariations themselves. The game can therefore become a game tree, in "
+"which each node represents a board position. You can navigate in the game "
+"tree with the items in the <guimenu>Go</guimenu> menu and the navigation "
+"buttons."
+msgstr ""
+"Cuando juegue una partida, Pentobi guardará la secuencia de movimientos de "
+"tal manera que siempre es posible regresar a una posición anterior y "
+"realizar una jugada distinta. En caso de hacerlo así, la nueva secuencia se "
+"guarda también como una secuencia alternativa (llamada variación). Los "
+"anotadores también pueden hacer uso de las variaciones para realizar "
+"comentarios sobre partidas ya existentes. Las variaciones pueden existir en "
+"cualquier posición dentro del tablero y pueden contar con sus "
+"correspondientes subvariaciones. La partida puede llegar a convertirse en un"
+" árbol de partida, en el que cada nodo representa una posición de tablero. "
+"Puede navegar a través del árbol de la partida usando las opciones del menú "
+"<guimenu>Ir a</guimenu> y los botones de navegación."
+
+#. (itstool) path: sect1/para
+#: index.docbook:466
+msgid ""
+"The main variation is the sequence of moves that starts at the start "
+"position and always selects the first child node in each position (e.g. by "
+"pressing the forward button). The main variation is supposed to represent "
+"the real game played. If you want a side variation to become the main "
+"variation, select <guimenuitem>Make Main Variation</guimenuitem> from the "
+"<guimenu>Edit</guimenu> menu."
+msgstr ""
+"La variación principal es la secuencia de movimientos que comienza en la "
+"posición de inicio y siempre selecciona el primer nodo descendiente en cada "
+"posición (p. ej., al pulsar el botón de adelante). Se supone que la "
+"variación principal representa la partida que se ha jugado en realidad. Si "
+"desea que una variación alternativa se convierta en la variación principal, "
+"seleccione <guimenuitem>Convertir en variación principal</guimenuitem> desde"
+" el menú <guimenu>Editar</guimenu>."
+
+#. (itstool) path: chapter/title
+#: index.docbook:478
+msgid "Become a Stronger Player"
+msgstr "Mejore su juego"
+
+#. (itstool) path: chapter/para
+#: index.docbook:479
+msgid ""
+"Pentobi has functionality that can help you to become a stronger Blokus "
+"player."
+msgstr ""
+"Pentobi dispone de una funcionalidad que le puede ayudar a mejorar como "
+"jugador de Blokus."
+
+#. (itstool) path: sect1/title
+#: index.docbook:483
+msgid "Game Analysis"
+msgstr "Análisis de la partida"
+
+#. (itstool) path: sect1/para
+#: index.docbook:484
+msgid ""
+"A game can be analyzed by selecting <guimenuitem>Analyze Game</guimenuitem> "
+"from the <guimenu>Tools</guimenu> menu. This will make the computer player "
+"evaluate each position in the main variation. The result is displayed in a "
+"window with a diagram of colored dots."
+msgstr ""
+"Se puede analizar una partida seleccionando <guimenuitem>Analizar "
+"partida</guimenuitem> desde el menú <guimenu>Herramientas</guimenu>. Con "
+"esta acción el jugador de la máquina analizará cada posición de la variación"
+" principal. El resultado se mostrará en una ventana con un diagrama de "
+"puntos de colores."
+
+#. (itstool) path: caption/para
+#: index.docbook:496
+msgid "Analysis of a game of variant Classic (2 players)"
+msgstr "Análisis de una partida de la variante Clásico (2 jugadores)"
+
+#. (itstool) path: sect1/para
+#: index.docbook:500
+msgid ""
+"Each dot represents a game position in which the color of the dot was to "
+"play. The dots are ordered horizontally by move number. The vertical axis "
+"represents the estimated probability of winning the game for the color to "
+"play. Mouse clicks in the diagram will go to the corresponding position."
+msgstr ""
+"Cada uno de los puntos representa una posición dentro de la partida en la "
+"que el color del punto se jugó. Los puntos están ordenados de manera "
+"horizontal según el número del movimiento. El eje vertical representa una "
+"estimación de la probabilidad de ganar la partida del color en juego. Al "
+"hacer clic con el ratón sobre el diagrama, iremos a la posición "
+"correspondiente."
+
+#. (itstool) path: sect1/para
+#: index.docbook:506
+msgid ""
+"The position values are only estimates and the computer will sometimes "
+"evaluate positions incorrectly. But sudden drops in the value can help you "
+"find moves that were potentially bad. You can go back to the position before"
+" the move and try to find a better move or ask the computer what it would "
+"have played by selecting <guimenuitem>Play Single Move</guimenuitem> from "
+"the <guimenu>Computer</guimenu> menu."
+msgstr ""
+"Los valores de posición son solo estimaciones y a veces la máquina realizará"
+" estimaciones incorrectas. En cualquier caso, las caídas repentinas del "
+"valor de un movimiento le ayudarán a detectar movimientos que fueron "
+"potencialmente malos. De esta manera, puede regresar a la posición anterior "
+"a dicho movimiento e intentar encontrar un movimiento mejor o preguntar a la"
+" máquina que movimiento hubiera realizado ella seleccionando "
+"<guimenuitem>Jugar un movimiento</guimenuitem> desde el menú "
+"<guimenu>Máquina</guimenu>."
+
+#. (itstool) path: sect1/title
+#: index.docbook:516
+msgid "Determine Your Rating"
+msgstr "Determinar su nivel"
+
+#. (itstool) path: sect1/para
+#: index.docbook:517
+msgid ""
+"You can track your progress by playing rated games against the computer. The"
+" game results are used to determine your current rating. The rating is a "
+"number that represents your playing strength."
+msgstr ""
+"Puede realizar un seguimiento de su progreso jugando partidas contra la "
+"máquina con selección de nivel. Los resultados de la partida se utilizan "
+"para determinar su nivel actual. El nivel es una cifra que representa su "
+"habilidad con el juego."
+
+#. (itstool) path: sect1/para
+#: index.docbook:522
+msgid ""
+"A rated game is started with <guimenuitem>Rated Game</guimenuitem> from the "
+"<guimenu>Game</guimenu> menu or the toolbar. If you have not played any "
+"rated games in the current game variant, you will be asked to choose a start"
+" value, which can reduce the number of games needed for determining your "
+"real rating. If you are a beginner, leave the start value at 800."
+msgstr ""
+"Para comenzar una partida con selección de nivel tiene que ir a "
+"<guimenuitem>Partida con selección de nivel</guimenuitem> desde el menú o la"
+" barra de herramientas <guimenu>Partida</guimenu>. Si todavía no ha jugado "
+"ninguna partida con selección de nivel en esta variante de juego, se le "
+"pedirá que elija un valor de inicio, que puede reducir el número de partidas"
+" necesarias para determinar su nivel real. Si es principiante, deje el valor"
+" inicial en 800."
+
+#. (itstool) path: sect1/para
+#: index.docbook:529
+msgid ""
+"For each rated game, the computer will choose a playing level for the "
+"computer opponent according to your current rating. The color you play will "
+"be randomly chosen in each game."
+msgstr ""
+"Por cada partida con selección de nivel, la máquina elegirá un nivel de "
+"juego para el rival virtual en consonancia con su nivel actual. El color con"
+" el que jugará se escogerá de manera aleatoria en cada partida."
+
+#. (itstool) path: sect1/para
+#: index.docbook:534
+msgid ""
+"During a rated game, most of the functions not needed for playing are "
+"disabled: you cannot undo moves, navigate in the game, change the computer "
+"colors or change the playing level. To get an accurate rating, you should "
+"always play rated games until the end."
+msgstr ""
+"Durante una partida con selección de nivel, la mayoría de las funciones que "
+"no sean necesarias para jugar, se encontrarán desactivadas: no podrá "
+"deshacer movimientos, navegar por la partida, cambiar los colores del "
+"jugador virtual o cambiar el nivel de juego. Para conseguir una puntuación "
+"precisa, siempre es mejor finalizar las partidas con selección de nivel."
+
+#. (itstool) path: sect1/para
+#: index.docbook:540
+msgid ""
+"After the game has ended, your rating will be updated depending on the game "
+"result and the computer level. For the game result, it only matters whether "
+"the game was won, lost or a tie. The exact number of score points does not "
+"matter."
+msgstr ""
+"Una vez que la partida ha acabado, su nivel se actualizará en función del "
+"resultado de la partida y del nivel del rival virtual. En cuanto al "
+"resultado de la partida, lo único que importa es si se ha ganado la partida,"
+" perdido o ha habido un empate. El número exacto de puntos obtenidos es algo"
+" que no se tiene en cuenta."
+
+#. (itstool) path: caption/para
+#: index.docbook:552
+msgid "Window with rating graph"
+msgstr "Ventana donde se muestra el gráfico de nivel"
+
+#. (itstool) path: sect1/para
+#: index.docbook:556
+msgid ""
+"You can always see your current rating by selecting "
+"<guimenuitem>Rating</guimenuitem> from the <guimenu>Tools</guimenu> menu. "
+"This will open a window that shows the development of your rating during the"
+" last 50 games as a graph. The last 50 games are automatically saved and can"
+" be loaded by opening a context menu in the game table below the graph."
+msgstr ""
+"En cualquier momento, puede consultar el nivel que tiene seleccionado "
+"<guimenuitem>Nivel</guimenuitem> del menú de "
+"<guimenu>Herramientas</guimenu>. Esto abrirá una ventana donde se muestra la"
+" evolución mediante un gráfico de las últimas 50 partidas. Las últimas 50 "
+"partidas se guardan automáticamente y pueden cargarse abriendo un menú "
+"contextual en la tabla de la partida justo debajo del gráfico."
+
+#. (itstool) path: chapter/title
+#: index.docbook:567
+msgid "Window Menu and Toolbar"
+msgstr "Menú de ventana y barra de herramientas"
+
+#. (itstool) path: sect1/title
+#: index.docbook:569
+msgid "Navigation Buttons in Toolbar"
+msgstr "Botones de navegación en la barra de herramientas"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:572
+msgid "<guibutton>Beginning</guibutton>"
+msgstr "<guibutton>Inicio</guibutton>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:574
+msgid "Go to the beginning of the game."
+msgstr "Ir al inicio de la partida."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:580
+msgid "<guibutton>Backward 10</guibutton>"
+msgstr "<guibutton>Retroceder 10</guibutton>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:582
+msgid ""
+"Go ten moves backward in the current variation. The button supports "
+"autorepeat if pressed and held."
+msgstr ""
+"Retroceder diez movimientos dentro de la variación actual. El botón permite "
+"repetición automática si se pulsa y se mantiene pulsado."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:589
+msgid "<guibutton>Backward</guibutton>"
+msgstr "<guibutton>Retroceder</guibutton>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:591
+msgid ""
+"Go one move backward in the current variation. The button supports "
+"autorepeat if pressed and held."
+msgstr ""
+"Retroceder un movimiento dentro de la variación actual. El botón permite "
+"repetición automática si se pulsa y se mantiene pulsado."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:598
+msgid "<guibutton>Forward</guibutton>"
+msgstr "<guibutton>Adelante</guibutton>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:600
+msgid ""
+"Go one move forward in the current variation. If the current position has "
+"several follow-up variations (i.e. the current node in the game tree has "
+"several child nodes), the first variation will be used. The button supports "
+"autorepeat if pressed and held."
+msgstr ""
+"Avanzar un movimiento dentro de la variación actual. Si la posición actual "
+"se puede jugar de varias formas posibles (es decir, el nodo actual dentro "
+"del árbol de la partida tiene varios nodos descendientes), será la primera "
+"variación la que se use. El botón permite repetición automática si se pulsa "
+"y se mantiene pulsado."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:609
+msgid "<guibutton>Forward 10</guibutton>"
+msgstr "<guibutton>Avanzar 10</guibutton>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:611
+msgid ""
+"Go ten moves forward in the current variation. If a position has several "
+"follow-up variations (i.e. the current node in the game tree has several "
+"child nodes), the first variation will be used. The button supports "
+"autorepeat if pressed and held."
+msgstr ""
+"Avanzar diez movimientos dentro de la variación actual. Si una posición se "
+"puede jugar de varias formas posibles (es decir, el nodo actual dentro del "
+"árbol de la partida tiene varios nodos descendientes), será la primera "
+"variación la que se use. El botón permite repetición automática si se pulsa "
+"y se mantiene pulsado."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:620
+msgid "<guibutton>End</guibutton>"
+msgstr "<guibutton>Fin</guibutton>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:622
+msgid ""
+"Go to the end of the current variation. Like <guibutton>Forward</guibutton>,"
+" this also uses the first variation in positions with several follow-up "
+"variations."
+msgstr ""
+"Avanzar hasta el final de la variación actual. Como en la opción "
+"<guibutton>Adelante</guibutton>, esto también usa la primera variación en "
+"posiciones con múltiples variaciones."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:630
+msgid "<guibutton>Next Variation</guibutton>"
+msgstr "<guibutton>Siguiente variación</guibutton>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:632
+msgid ""
+"Go to the next variation to the last move played (i.e. the next sibling node"
+" of the current node in the game tree)."
+msgstr ""
+"Ir a la siguiente variación del último movimiento realizado (es decir, el "
+"anterior nodo del mismo nivel del nodo actual dentro del árbol de la "
+"partida)."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:639
+msgid "<guibutton>Previous Variation</guibutton>"
+msgstr "<guibutton>Variación anterior</guibutton>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:641
+msgid ""
+"Go to the previous variation to the last move played (i.e. the previous "
+"sibling node of the current node in the game tree)."
+msgstr ""
+"Ir a la variación anterior del último movimiento realizado (es decir, el "
+"anterior nodo del mismo nivel del nodo actual dentro del árbol de la "
+"partida)."
+
+#. (itstool) path: sect1/title
+#: index.docbook:650
+msgid "<guimenu>Game</guimenu> Menu"
+msgstr "Menú <guimenu>Partida</guimenu>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:653
+msgid "<guimenuitem>New</guimenuitem>"
+msgstr "<guimenuitem>Nueva</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:656
+msgid "Start a new game."
+msgstr "Comenzar una partida nueva."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:662
+msgid "<guimenuitem>Rated Game</guimenuitem>"
+msgstr "<guimenuitem>Partida con selección de nivel</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:664
+msgid ""
+"Start a new <link linkend=\"rating\">rated game</link> against the computer."
+msgstr ""
+"Comenzar una <link linkend=\"rating\">partida con selección de nivel</link> "
+"contra la máquina."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:670
+msgid "<guimenuitem>Game Variant</guimenuitem>"
+msgstr "<guimenuitem>Variante de juego</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:672
+msgid "Select a game variant and start a new game of this game variant."
+msgstr ""
+"Seleccionar una variante de juego y comenzar una partida nueva de esta "
+"variante de juego."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:677
+msgid "<guimenuitem>Game Info</guimenuitem>"
+msgstr "<guimenuitem>Información de la partida</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:679
+msgid ""
+"Display or edit additional information about the game like the name of the "
+"players or the date when the game was played."
+msgstr ""
+"Mostrar o editar información adicional de la partida como el número de "
+"jugadores o la fecha en la que se jugó la partida."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:685
+msgid "<guimenuitem>Undo Move</guimenuitem>"
+msgstr "<guimenuitem>Deshacer movimiento</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:687
+msgid ""
+"Undo the last move played and remove it from the game tree. Undoing a move "
+"is only possible if it is the last move in the current variation (i.e. a "
+"leaf node in the game tree; use "
+"<guimenu>Edit</guimenu>/<guimenuitem>Truncate</guimenuitem> to remove inner "
+"nodes of the game tree)."
+msgstr ""
+"Deshacer el último movimiento realizado y eliminarlo del árbol de la "
+"partida. Deshacer un movimiento solo es posible si este es el último "
+"movimiento dentro de la variación actual (es decir, una hoja del nodo dentro"
+" del árbol de la partida; usar "
+"<guimenu>Editar</guimenu>/<guimenuitem>Eliminar</guimenuitem> para borrar "
+"todos los nodos internos del árbol de la partida)."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:697
+msgid "<guimenuitem>Find Move</guimenuitem>"
+msgstr "<guimenuitem>Buscar movimiento</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:699
+msgid ""
+"Find a legal move for the current color and display it for a few seconds on "
+"the board. Selecting this item repeatedly will show all legal moves."
+msgstr ""
+"Buscar un movimiento legal para el color actual y mostrarlo durante unos "
+"segundos sobre el tablero. Al seleccionar esta opción de forma repetida se "
+"mostrarán todos los movimientos legales."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:706
+msgid "<guimenuitem>Open</guimenuitem>"
+msgstr "<guimenuitem>Abrir</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:708
+msgid ""
+"Load a saved game. The board position after loading will be the last "
+"position in the main variation unless the game starts with a setup position."
+" If the game starts with a setup, the board position will be the first "
+"position instead. This avoids that solutions are immediately shown if the "
+"file contains a Blokus puzzle as a setup with the solution as the main "
+"variation."
+msgstr ""
+"Cargar una partida guardada. La posición en el tablero después de cargar la "
+"partida será la última posición correspondiente a la variación principal, a "
+"menos que la partida comience con una posición predeterminada. Si la partida"
+" comienza de forma predeterminada, la posición en el tablero pasará a ser la"
+" primera posición. De este manera se evita que se muestren las soluciones de"
+" manera inmediata en caso de que el archivo contenga un rompecabezas de "
+"Blokus como predeterminado con la solución como variación principal."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:718
+msgid "<guimenu>Open Recent</guimenu>"
+msgstr "<guimenu>Abrir reciente</guimenu>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:720
+msgid "Load a recently used game."
+msgstr "Cargar una partida usada recientemente."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:726
+msgid "<guimenuitem>Open Clipboard</guimenuitem>"
+msgstr "<guimenuitem>Abrir portapapeles</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:728
+msgid ""
+"Open a game from a text copied to the clipboard. The text must be a valid "
+"game in Pentobi SGF file format."
+msgstr ""
+"Abrir una partida a partir de un texto copiado en el portapapeles. El texto "
+"debe ser una partida válida en formato de archivo SGF de Pentobi."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:735
+msgid "<guimenuitem>Save</guimenuitem>"
+msgstr "<guimenuitem>Guardar</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:737
+msgid "Save the current game."
+msgstr "Guardar la partida actual."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:743
+msgid "<guimenuitem>Save As</guimenuitem>"
+msgstr "<guimenuitem>Guardar como</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:745
+msgid "Save the current game under a new file name."
+msgstr "Guardar la partida actual con un nuevo nombre de archivo."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:751
+msgid "<guimenu>Export</guimenu>/<guimenuitem>Image</guimenuitem>"
+msgstr "<guimenu>Exportar</guimenu>/<guimenuitem>Imagen</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:753
+msgid ""
+"Save the current position as an image file. Several image file formats are "
+"supported, the file format is derived from the file name ending (e.g. "
+"\".png\" for the PNG format). For a crisp image, the image width should be "
+"an integer multiple of the number of board columns in the current game "
+"variant."
+msgstr ""
+"Guardar la posición actual como un archivo de imagen. Existen numerosos "
+"formatos de archivo de imagen compatibles; el formato de archivo se puede "
+"averiguar por la extensión del nombre del archivo (p. ej., \".png\" en el "
+"caso del formato PNG). Para conseguir una imagen nítida, la anchura de la "
+"imagen debería ser un múltiplo entero del número de columnas del tablero de "
+"la variante de juego actual."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:762
+msgid "<guimenu>Export</guimenu>/<guimenuitem>ASCII Art</guimenuitem>"
+msgstr "<guimenu>Exportar</guimenu>/<guimenuitem>arte ASCII</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:764
+msgid ""
+"Save the current position as a text diagram. The text diagram should be "
+"viewed using a monospace font."
+msgstr ""
+"Guardar la posición actual como diagrama de texto. El diagrama de texto "
+"debería visualizarse usando una fuente monoespacio."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:771
+msgid "<guimenuitem>Quit</guimenuitem>"
+msgstr "<guimenuitem>Salir</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:773
+msgid "Quit Pentobi."
+msgstr "Salir de Pentobi."
+
+#. (itstool) path: sect1/title
+#: index.docbook:781
+msgid "<guimenu>Go</guimenu> Menu"
+msgstr "Menú <guimenu>Ir a</guimenu>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:784
+msgid "<guimenuitem>Move Number</guimenuitem>"
+msgstr "<guimenuitem>Número de movimiento</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:786
+msgid "Go to the move with a given move number in the current variation."
+msgstr ""
+"Ir al movimiento con un número de movimiento asignado en la variación "
+"actual."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:792
+msgid "<guimenuitem>Main Variation</guimenuitem>"
+msgstr "<guimenuitem>Variación principal</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:794
+msgid ""
+"Go back to the last position in the current variation that belonged to the "
+"main variation."
+msgstr ""
+"Regresar a la última posición dentro de la variación actual correspondiente "
+"a la variación principal."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:801
+msgid "<guimenuitem>Beginning of Branch</guimenuitem>"
+msgstr "<guimenuitem>Inicio de rama</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:803
+msgid ""
+"Go back to the last position in the current variation that had an "
+"alternative move."
+msgstr ""
+"Regresar a la última posición dentro de la variación actual que tenía un "
+"movimiento alternativo."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:810
+msgid "<guimenuitem>Next Comment</guimenuitem>"
+msgstr "<guimenuitem>Siguiente comentario</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:812
+msgid ""
+"Go to the next position that has a comment. If the comment text field was "
+"not visible, it will become visible. Selecting this item repeatedly will "
+"show all positions with comments in the game tree."
+msgstr ""
+"Ir a la siguiente posición que tenga un comentario. Si el campo de texto del"
+" comentario no era visible, ahora se hará visible. Al seleccionar esta "
+"opción repetidamente se mostrarán todas las posiciones con comentarios "
+"dentro del árbol de la partida."
+
+#. (itstool) path: sect1/title
+#: index.docbook:822
+msgid "<guimenu>Edit</guimenu> Menu"
+msgstr "Menú <guimenu>Editar</guimenu>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:825
+msgid "<guimenuitem>Annotation</guimenuitem>"
+msgstr "<guimenuitem>Valoración</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:827
+msgid ""
+"Add a chess-style annotation symbol (e.g. ‼) to the current move. The "
+"symbols are appended to the move numbers in the status bar and, depending on"
+" the configuration of <guilabel>Move Marking</guilabel>, on the board."
+msgstr ""
+"Añadir un símbolo de valoración a la manera del ajedrez (p. ej., !!) al "
+"movimiento actual. Los símbolos se encuentran anexos a los números de los "
+"movimientos en la barra de estado y, en función de la configuración de "
+"<guilabel>Marcado de movimientos</guilabel>, en el tablero."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:835
+msgid "<guimenuitem>Make Main Variation</guimenuitem>"
+msgstr "<guimenuitem>Convertir en variación principal</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:837
+msgid ""
+"Make the current variation the main variation of the game. This reorders the"
+" nodes in the game tree such that the current variation becomes the main "
+"variation."
+msgstr ""
+"Hacer que la variación actual sea la variación principal de la partida. Esto"
+" reordena los nodos dentro del árbol de la partida de tal manera que la "
+"variación actual se convierte en la variación principal."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:845
+msgid "<guimenuitem>Variation Up</guimenuitem>"
+msgstr "<guimenuitem>Subir variación</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:847
+msgid ""
+"Changes the order of variations such that the current position will appear "
+"earlier when iterating over the variations with <guibutton>Next "
+"Variation</guibutton> /<guibutton>Previous Variation</guibutton>."
+msgstr ""
+"Cambia el orden de las variaciones de tal manera que la posición actual "
+"aparecerá más tarde cuando se recorran las variaciones con "
+"<guibutton>Siguiente variación</guibutton>/<guibutton>Variación "
+"anterior</guibutton>."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:856
+msgid "<guimenuitem>Variation Down</guimenuitem>"
+msgstr "<guimenuitem>Bajar variación</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:858
+msgid ""
+"Changes the order of variations such that the current position will appear "
+"later when iterating over the variations with <guibutton>Next "
+"Variation</guibutton> /<guibutton>Previous Variation</guibutton>."
+msgstr ""
+"Cambia el orden de las variaciones de tal manera que la posición actual "
+"aparecerá más tarde cuando se recorran las variaciones con "
+"<guibutton>Siguiente variación</guibutton>/<guibutton>Variación "
+"anterior</guibutton>."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:867
+msgid "<guimenuitem>Delete Variations</guimenuitem>"
+msgstr "<guimenuitem>Eliminar variaciones</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:869
+msgid ""
+"Delete all variations but the main variation. If the current position is not"
+" in the main variation, it will first be changed to a position as in "
+"<guimenuitem>Back to Main Variation</guimenuitem>."
+msgstr ""
+"Eliminar todas las variaciones excepto la variación principal. Si la "
+"posición actual no está en la variación principal, primero se cambiará a una"
+" posición como en <guimenuitem>Regresar a la variación "
+"principal</guimenuitem>."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:877
+msgid "<guimenuitem>Truncate</guimenuitem>"
+msgstr "<guimenuitem>Eliminar</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:879
+msgid ""
+"Remove the node with the current position, including any subtree, from the "
+"game tree."
+msgstr ""
+"Eliminar el nodo con la posición actual, incluido cualquier subárbol, del "
+"árbol de la partida."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:886
+msgid "<guimenuitem>Truncate Children</guimenuitem>"
+msgstr "<guimenuitem>Eliminar descendientes</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:888
+msgid ""
+"Remove all child nodes of the node with the current position from the game "
+"tree."
+msgstr ""
+"Eliminar todos los nodos descendientes del nodo con la posición actual del "
+"árbol de la partida."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:895
+msgid "<guimenuitem>Keep Position</guimenuitem>"
+msgstr "<guimenuitem>Conservar posición</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:897
+msgid ""
+"Delete all moves and keep only the current position as a setup. This can be "
+"used to create files that start with a given fixed position."
+msgstr ""
+"Elimina todos los movimientos y conserva solo la posición actual como "
+"preestablecida. Esto se puede usar para crear archivos que comiencen con una"
+" posición fija determinada."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:904
+msgid "<guimenuitem>Keep Subtree</guimenuitem>"
+msgstr "<guimenuitem>Conservar árbol</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:906
+msgid ""
+"Like <guimenuitem>Keep Position</guimenuitem> but does not delete the moves "
+"after the current position."
+msgstr ""
+"Como <guimenuitem>Conservar posicion</guimenuitem> pero no elimina los "
+"movimientos posteriores a la posición actual."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:913
+msgid "<guimenuitem>Setup Mode</guimenuitem>"
+msgstr "<guimenuitem>Modo configuración</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:915
+msgid ""
+"Enter or leave setup mode. In setup mode, pieces can be placed anywhere on "
+"the board, even in violation of the game rules. Existing pieces can be "
+"removed from the board by clicking on them. The currently selected color "
+"also determines the color to play after the setup is finished. It can be "
+"changed with <guimenuitem>Next Color</guimenuitem> or by clicking on the "
+"orientation selector while no piece is selected. Setup mode can only be used"
+" if no moves have been played yet."
+msgstr ""
+"Entrar o salir del modo de configuración. En el modo de configuración, las "
+"piezas pueden colocarse en cualquier lugar del tablero, incluso si esto "
+"supone una violación de las reglas del juego. Las piezas existentes se "
+"pueden eliminar del tablero haciendo clic sobre ellas. El color actual "
+"seleccionado también determina el color con el que se jugará una vez "
+"finalizada la configuración. Se puede cambiar el color con "
+"<guimenuitem>Siguiente color</guimenuitem> o haciendo clic sobre el selector"
+" de orientación cuando no haya ninguna pieza seleccionada. El modo de "
+"configuración solo puede usarse si no se ha jugado todavía ningún "
+"movimiento."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:927
+msgid "<guimenuitem>Next Color</guimenuitem>"
+msgstr "<guimenuitem>Siguiente color</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:929
+msgid ""
+"Choose the next color for selecting pieces. This can be used for example to "
+"enter game records, in which moves of a color were skipped because the color"
+" ran out of time."
+msgstr ""
+"Elija el siguiente color para seleccionar piezas. Esto puede utilizarse, por"
+" ejemplo, para introducir anotaciones de la partida, como cuántos "
+"movimientos de un color se omitieron debido a que el color se quedó sin "
+"tiempo."
+
+#. (itstool) path: sect1/title
+#: index.docbook:939
+msgid "<guimenu>View</guimenu> Menu"
+msgstr "Menú <guimenu>Vista</guimenu> "
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:941
+msgid "<guimenuitem>Appearance</guimenuitem>"
+msgstr "<guimenuitem>Apariencia</guimenuitem>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:946
+msgid "<guilabel>Coordinates</guilabel>"
+msgstr "<guilabel>Coordenadas</guilabel>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:948
+msgid ""
+"Display coordinates around the board for the fields on the board. The "
+"convention for the coordinates is the same as in the Blokus SGF file format "
+"used by Pentobi."
+msgstr ""
+"Muestra las coordenadas alrededor del tablero para cada una de los campos "
+"del tablero. La convención para utilizar las coordenadas es la misma que en "
+"el archivo con formato SGF de Blokus utilizado por Pentobi."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:956
+msgid "<guilabel>Show variations</guilabel>"
+msgstr "<guilabel>Mostrar variaciones</guilabel>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:958
+msgid ""
+"Appends a letter to the move number on the board if the move has variations."
+" If moves are marked with dots instead of numbers, a circle will be used "
+"instead of a dot for moves not in the main variation."
+msgstr ""
+"Añade una letra al número del movimiento sobre el tablero si el movimiento "
+"cuenta con variaciones. Si los movimientos están marcados con puntos en "
+"lugar de números, se utilizará un círculo en lugar de un punto para los "
+"movimientos que no estén en la variación principal."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:966
+msgid "<guilabel>Move number</guilabel>"
+msgstr "<guilabel>Número de movimiento</guilabel>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:968
+msgid ""
+"This option exists only in desktop mode and shows the move number, move "
+"annotation and variation information at the right side of the status bar."
+msgstr ""
+"Esta opción solo existe en el modo de escritorio y muestra el número de "
+"movimiento, la valoración del movimiento e información de la variación a la "
+"derecha de la barra de estado."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:975
+msgid "<guilabel>Animations</guilabel>"
+msgstr "<guilabel>Animaciones</guilabel>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:977
+msgid ""
+"Enables or disables the piece rotation, flipping and placement animations."
+msgstr ""
+"Activa o desactiva las animaciones de rotación, volteo y colocación de la "
+"pieza."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:983
+msgid "<guilabel>Color theme</guilabel>"
+msgstr "<guilabel>Color del tema</guilabel>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:985
+msgid "Changes the colors of the window, board and pieces."
+msgstr "Cambia los colores de la ventana, del tablero y de las piezas."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:991
+msgid "<guilabel>Move marking</guilabel>"
+msgstr "<guilabel>Marcado de movimientos</guilabel>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:993
+msgid ""
+"Change the way moves are marked on the board. The options are to mark the "
+"last move played with a dot or with a number, or to show the numbers of all "
+"moves, or not to show any marks."
+msgstr ""
+"Cambie la forma de marcar los movimientos en el tablero. Las opciones son "
+"marcar el último movimiento jugado con un punto o con un número, mostrar los"
+" números de todos los movimientos o no mostrar ninguna marca."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1001
+msgid "<guilabel>Show comment</guilabel>"
+msgstr "<guilabel>Mostrar comentario</guilabel>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1003
+msgid ""
+"This option exists only in desktop mode and configures the visibility of the"
+" comment area when the position changes. By default, the comment area is "
+"only shown if a comment exists for the current position."
+msgstr ""
+"Esta opción solo existe en el modo de escritorio y sirve para configurar la "
+"visibilidad del área de comentarios cuando la posición cambia. Por defecto, "
+"el área de comentarios solo se mostrará si existe un comentario para la "
+"posición actual."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1015
+msgid "<guimenuitem>Comment</guimenuitem>"
+msgstr "<guimenuitem>Comentario</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1017
+msgid "Toggle the visibility of the comment area in the current position."
+msgstr ""
+"Alternar la visibilidad del área de comentarios en la posición actual."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1023
+msgid "<guimenuitem>Fullscreen</guimenuitem>"
+msgstr "<guimenuitem>Pantalla completa</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1025
+msgid ""
+"Make the main window full screen or leave full screen mode. To leave "
+"fullscreen mode without using the window menu, press the F11 key."
+msgstr ""
+"Hacer que la ventana principal se vea a pantalla completa o abandonar el "
+"modo de pantalla completa. Para abandonar el modo de pantalla completa sin "
+"usar el menú de la ventana, pulse la tecla F11."
+
+#. (itstool) path: sect1/title
+#: index.docbook:1034
+msgid "<guimenu>Computer</guimenu> Menu"
+msgstr "Menú <guimenu>Máquina</guimenu>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1037
+msgid "<guimenuitem>Settings</guimenuitem>"
+msgstr "<guimenuitem>Ajustes</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1039
+msgid ""
+"Select which colors are played by the computer and the playing strength for "
+"the computer. Higher levels are stronger but can make the computer take a "
+"long time for playing moves on slow computers."
+msgstr ""
+"Seleccione con qué colores jugará la máquina y la habilidad de juego que "
+"tendrá el oponente virtual. Los niveles más altos son los más difíciles de "
+"ganar pero pueden hacer que la máquina tarde bastante tiempo en hacer una "
+"jugada en ordenadores lentos."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1047
+msgid "<guimenuitem>Play</guimenuitem>"
+msgstr "<guimenuitem>Jugar</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1049
+msgid ""
+"Make the computer play a move for the current color. This can be used to "
+"change the color the computer plays or to resume playing after navigating in"
+" the game tree. If the computer did not already play the current color, it "
+"will play this color (and only this color) from now on."
+msgstr ""
+"Hacer que la máquina realice un movimiento para el color actual. Esto puede "
+"usarse para cambiar el color con el que juega la máquina o para seguir "
+"jugando después de haber navegado por el árbol de la partida. Si la máquina "
+"no juega ya con el color actual, ahora jugará con este color (y solo con "
+"este color) durante el resto de la partida."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1058
+msgid "<guimenuitem>Play Move</guimenuitem>"
+msgstr "<guimenuitem>Realizar movimiento</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1060
+msgid ""
+"Make the computer play a single move for the current color without changing "
+"the colors played by the computer."
+msgstr ""
+"Hacer que la máquina realice un único movimiento para el color actual sin "
+"cambiar el color con el que juega la máquina."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1067
+msgid "<guimenuitem>Stop</guimenuitem>"
+msgstr "<guimenuitem>Detener</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1069
+msgid ""
+"Abort the current move generation. You can make the computer continue to "
+"play by selecting <guimenuitem>Play</guimenuitem>."
+msgstr ""
+"Anular la generación del movimiento actual. Puede hacer que la máquina siga "
+"jugando seleccionando <guimenuitem>Jugar</guimenuitem>."
+
+#. (itstool) path: sect1/title
+#: index.docbook:1078
+msgid "<guimenu>Tools</guimenu> Menu"
+msgstr "Menú <guimenu>Herramientas</guimenu>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1081
+msgid "<guimenuitem>Rating</guimenuitem>"
+msgstr "<guimenuitem>Nivel</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1083
+msgid ""
+"Show a dialog window with the <link linkend=\"rating\">rating</link> of the "
+"user in the current game variant."
+msgstr ""
+"Muestra una ventana de diálogo con el<link linkend=\"rating\">nivel</link> "
+"del usuario para la variante de juego actual."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1090
+msgid "<guimenuitem>Clear Rating</guimenuitem>"
+msgstr "<guimenuitem>Borrar nivel</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1092
+msgid ""
+"Deletes the rating information and history for the current game variant."
+msgstr ""
+"Borrar la información sobre el nivel y el historial de la variante de juego "
+"actual."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1098
+msgid "<guimenuitem>Analyze Game</guimenuitem>"
+msgstr "<guimenuitem>Analizar partida</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1100
+msgid "Perform a <link linkend=\"analysis\">game analysis</link>."
+msgstr "Realizar un <link linkend=\"analysis\">análisis de partida</link>."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1106
+msgid "<guimenuitem>Clear Analysis</guimenuitem>"
+msgstr "<guimenuitem>Borrar análisis</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1108
+msgid "Deletes the analysis for the current game."
+msgstr "Borra el análisis de la partida actual."
+
+#. (itstool) path: sect1/title
+#: index.docbook:1116
+msgid "<guimenu>Help</guimenu> Menu"
+msgstr "Menú <guimenu>Ayuda</guimenu>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1119
+msgid "<guimenuitem>Pentobi Help</guimenuitem>"
+msgstr "<guimenuitem>Ayuda para Pentobi</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1121
+msgid "Show a window to browse the Pentobi user manual."
+msgstr "Muestra una ventana para navegar por el manual de usuario de Pentobi."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1127
+msgid "<guimenuitem>About Pentobi</guimenuitem>"
+msgstr "<guimenuitem>Acerca de Pentobi</guimenuitem>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1129
+msgid "Show an info dialog with information about this version of Pentobi."
+msgstr ""
+"Muestra un diálogo de información con detalles sobre esta versión de "
+"Pentobi."
+
+#. (itstool) path: chapter/title
+#: index.docbook:1139
+msgid "Keyboard Shortcuts"
+msgstr "Atajos de teclado"
+
+#. (itstool) path: chapter/para
+#: index.docbook:1140
+msgid ""
+"In addition to the shortcut keys, which are shown in the window menu, the "
+"following shortcut keys are supported by Pentobi. Note that these shortcuts "
+"are not active when the comment text field has the focus. In this case, the "
+"focus can be switched away from the comment text with the Tab key."
+msgstr ""
+"Además de las teclas de método abreviado, que se muestran en el menú de "
+"ventana, Pentobi admite los siguientes atajos de teclado. Recuerde que estos"
+" atajos de teclado no se encuentran activos cuando el campo de texto de los "
+"comentarios está habilitado. En este caso, se puede salir del campo de texto"
+" con la tecla Tab."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1148
+msgid "<keysym>Plus</keysym>"
+msgstr "<keysym>Más</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1150
+msgid "Select next piece"
+msgstr "Seleccionar pieza siguiente"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1156
+msgid "<keysym>Minus</keysym>"
+msgstr "<keysym>Menos</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1158
+msgid "Select previous piece"
+msgstr "Seleccionar pieza anterior"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1164
+msgid "<keysym>Escape</keysym>"
+msgstr "<keysym>Escape</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1166
+msgid "Clear selected piece"
+msgstr "Retirar pieza seleccionada"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1172
+msgid "<keysym>Left</keysym>"
+msgstr "<keysym>Izquierda</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1173
+msgid "<keysym>Right</keysym>"
+msgstr "<keysym>Derecha</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1174
+msgid "<keysym>Up</keysym>"
+msgstr "<keysym>Arriba</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1175
+msgid "<keysym>Down</keysym>"
+msgstr "<keysym>Abajo</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1176
+msgid "<keysym>Shift+Left</keysym>"
+msgstr "<keysym>Mayús+Izquierda</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1177
+msgid "<keysym>Shift+Right</keysym>"
+msgstr "<keysym>Mayús+Derecha</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1178
+msgid "<keysym>Shift+Up</keysym>"
+msgstr "<keysym>Mayús+Arriba</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1179
+msgid "<keysym>Shift+Down</keysym>"
+msgstr "<keysym>Mayús+Abajo</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1181
+msgid "Move the selected piece. The Shift key makes the piece move faster."
+msgstr ""
+"Mover la pieza seleccionada. La tecla Mayúsculas hace que la pieza se mueva "
+"más rápido."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1187
+msgid "<keysym>Space</keysym>"
+msgstr "<keysym>Espacio</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1189
+msgid "Next orientation of the selected piece"
+msgstr "Siguiente orientación de la pieza seleccionada"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1195
+msgid "<keysym>Shift+Space</keysym>"
+msgstr "<keysym>Mayús+Espacio</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1197
+msgid "Previous orientation of the selected piece"
+msgstr "Anterior orientación de la pieza seleccionada"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1203
+msgid "<keysym>Enter</keysym>"
+msgstr "<keysym>Entrar</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1205
+msgid "Play the selected piece"
+msgstr "Jugar la pieza seleccionada"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1211
+msgid "<keysym>1</keysym>"
+msgstr "<keysym>1</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1212
+msgid "<keysym>2</keysym>"
+msgstr "<keysym>2</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1213
+msgid "<keysym>A</keysym>"
+msgstr "<keysym>A</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1214
+msgid "<keysym>C</keysym>"
+msgstr "<keysym>C</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1215
+msgid "<keysym>E</keysym>"
+msgstr "<keysym>E</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1216
+msgid "<keysym>F</keysym>"
+msgstr "<keysym>F</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1217
+msgid "<keysym>G</keysym>"
+msgstr "<keysym>G</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1218
+msgid "<keysym>H</keysym>"
+msgstr "<keysym>H</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1219
+msgid "<keysym>I</keysym>"
+msgstr "<keysym>I</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1220
+msgid "<keysym>J</keysym>"
+msgstr "<keysym>J</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1221
+msgid "<keysym>L</keysym>"
+msgstr "<keysym>L</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1222
+msgid "<keysym>N</keysym>"
+msgstr "<keysym>N</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1223
+msgid "<keysym>O</keysym>"
+msgstr "<keysym>O</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1224
+msgid "<keysym>P</keysym>"
+msgstr "<keysym>P</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1225
+msgid "<keysym>S</keysym>"
+msgstr "<keysym>S</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1226
+msgid "<keysym>T</keysym>"
+msgstr "<keysym>T</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1227
+msgid "<keysym>U</keysym>"
+msgstr "<keysym>U</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1228
+msgid "<keysym>V</keysym>"
+msgstr "<keysym>V</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1229
+msgid "<keysym>W</keysym>"
+msgstr "<keysym>W</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1230
+msgid "<keysym>X</keysym>"
+msgstr "<keysym>X</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1231
+msgid "<keysym>Y</keysym>"
+msgstr "<keysym>Y</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1232
+msgid "<keysym>Z</keysym>"
+msgstr "<keysym>Z</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1234
+msgid ""
+"Select piece according to commonly used piece names. If there are multiple "
+"pieces with the letter (e.g. I3, I4, I5), pressing the key several times "
+"cycles between them. Some letters are used only in certain game variants. "
+"For example, A is used only in Trigon for the pieces A6 and A4 (also known "
+"as \"lobster\" and \"triangle\")."
+msgstr ""
+"Seleccione una pieza de acuerdo con nombres de pieza utilizados comúnmente. "
+"Si existen varias piezas con una letra, (p. ej., I3, I4, I5), al pulsar "
+"varias veces la tecla hace que cambie de una a otra. Algunas letras solo se "
+"usan en ciertas variantes de juego. Por ejemplo, la A solo se usa en Trigón "
+"para las piezas A6 y A4 (también conocidas como la \"langosta\" y el "
+"\"triángulo\")."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1244
+msgid "<keysym>Ctrl+Home</keysym>"
+msgstr "<keysym>Ctrl+Inicio</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1245
+msgid "<keysym>Ctrl+Shift+Left</keysym>"
+msgstr "<keysym>Ctrl+Mayús+Izquierda</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1246
+msgid "<keysym>Ctrl+Left</keysym>"
+msgstr "<keysym>Ctrl+Izquierda</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1247
+msgid "<keysym>Ctrl+Right</keysym>"
+msgstr "<keysym>Ctrl+Derecha</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1248
+msgid "<keysym>Ctrl+Shift+Right</keysym>"
+msgstr "<keysym>Ctrl+Mayús+Derecha</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1249
+msgid "<keysym>Ctrl+End</keysym>"
+msgstr "<keysym>Ctrl+Fin</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1250
+msgid "<keysym>Ctrl+Up</keysym>"
+msgstr "<keysym>Ctrl+Arriba</keysym>"
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1251
+msgid "<keysym>Ctrl+Down</keysym>"
+msgstr "<keysym>Ctrl+Abajo</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1253
+msgid ""
+"Navigate in the game: beginning, ten moves backward, backward, forward, ten "
+"moves forward, end, previous variation, next variation."
+msgstr ""
+"Navegar durante la partida: inicio, retroceder diez movimientos, retroceder,"
+" avanzar, avanzar diez movimientos, final, variación anterior, siguiente "
+"variación."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1260
+msgid "<keysym>Ctrl+Shift+H</keysym>"
+msgstr "<keysym>Ctrl+Mayús+H</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1262
+msgid ""
+"Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards "
+"through the list of legal moves."
+msgstr ""
+"Como <guimenuitem>Buscar movimiento</guimenuitem> (Ctrl+H) pero recorre "
+"hacia atrás la lista de movimientos legales."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1269
+msgid "<keysym>Ctrl+T</keysym>"
+msgstr "<keysym>Ctrl+T</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1271
+msgid "Switch view between comment and game analysis."
+msgstr "Cambiar vista entre comentarios y análisis de la partida."
+
+#. (itstool) path: varlistentry/term
+#: index.docbook:1277
+msgid "<keysym>Alt+M</keysym>"
+msgstr "<keysym>Alt+M</keysym>"
+
+#. (itstool) path: listitem/para
+#: index.docbook:1279
+msgid "Open menu."
+msgstr "Abrir menú."
+
+#. (itstool) path: chapter/title
+#: index.docbook:1288
+msgid "System Requirements"
+msgstr "Requisitos de sistema"
+
+#. (itstool) path: chapter/para
+#: index.docbook:1289
+msgid "Minimum: 1 GB RAM, 1 GHz CPU"
+msgstr "Mínimo: 1 GB RAM, 1 GHz CPU"
+
+#. (itstool) path: chapter/para
+#: index.docbook:1292
+msgid ""
+"Recommended for playing level 9: 4 GB RAM, 2.5 GHz dual-core or faster CPU"
+msgstr ""
+"Recomendado para jugar nivel 9: 4 GB RAM, 2,5 GHz dual-core o CPU más rápida"
+
+#. (itstool) path: chapter/para
+#: index.docbook:1296
+msgid ""
+"Pentobi will also work on systems that do not meet the minimum requirements "
+"but the highest playing level will be very slow on those systems (if the CPU"
+" is too slow) or have a reduced playing strength (if there is not enough "
+"memory)."
+msgstr ""
+"Pentobi también funcionará en sistemas que no cumplen los requisitos mínimos"
+" pero los niveles de juego más altos se ralentizarán en estos sistemas ( si "
+"la CPU es demasiado lenta) o las opciones de habilidad para jugar se verán "
+"reducidas (si no hay suficiente memoria)."
+
+#. (itstool) path: chapter/title
+#: index.docbook:1304
+msgid "License"
+msgstr "Licencia"
+
+#. (itstool) path: chapter/para
+#: index.docbook:1305
+msgid "Copyright © 2011–2019 Markus Enzenberger"
+msgstr "Copyright © 2011–2019 Markus Enzenberger"
+
+#. (itstool) path: chapter/para
+#: index.docbook:1308
+msgid ""
+"This program is free software: you can redistribute it and/or modify it "
+"under the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version."
+msgstr ""
+"Este es un programa de software libre: puede distribuirlo o modificarlo de "
+"acuerdo con los términos de la Licencia Pública General de GNU tal y como ha"
+" sido publicada por la Free Software Foundation, tanto en la versión 3 de la"
+" licencia, o (a su elección) cualquier otra versión posterior."
+
+#. (itstool) path: chapter/para
+#: index.docbook:1314
+msgid ""
+"This program is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for "
+"more details."
+msgstr ""
+"Este programa se distribuye con la esperanza de que resulte útil, pero SIN "
+"NINGUNA GARANTÍA; ni siquiera cuenta con las garantías implícitas de "
+"COMERCIALIZACIÓN o ADECUACIÓN A UN PROPÓSITO PARTICULAR. Consulte la "
+"Licencia Pública General de GNU para obtener más información."
+
+#. (itstool) path: sect1/title
+#: index.docbook:1321
+msgid "Trademark Disclaimer"
+msgstr "Exención de responsabilidad de la marca comercial"
+
+#. (itstool) path: sect1/para
+#: index.docbook:1322
+msgid ""
+"The trademark Blokus and other trademarks referred to are property of their "
+"respective trademark holders. The trademark holders are not affiliated with "
+"the author of the program Pentobi."
+msgstr ""
+"La marca comercial Blokus y otras marcas comerciales mencionadas son "
+"propiedad de sus respectivos propietarios. Los propietarios de las marcas "
+"comerciales no están afiliados con el autor del programa Pentobi."

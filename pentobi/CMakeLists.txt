@@ -9,6 +9,7 @@ find_package(Qt5WebView 5.11 QUIET)
 
 qt5_add_translation(pentobi_QM
     qml/i18n/qml_de.ts
+    qml/i18n/qml_es.ts
     qml/i18n/qml_fr.ts
     qml/i18n/qml_nb_NO.ts
     qml/i18n/qml_zh_CN.ts
