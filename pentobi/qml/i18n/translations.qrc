@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/qml/i18n">
         <file>qml_de.qm</file>
+        <file>qml_es.qm</file>
         <file>qml_fr.qm</file>
         <file>qml_nb_NO.qm</file>
         <file>qml_zh_CN.qm</file>

@@ -351,7 +351,7 @@ function help() {
     var pos = lang.indexOf("_")
     if (pos >= 0)
         lang = lang.substr(0, pos)
-    if (lang !== "C" && lang !== "de")
+    if (lang !== "de" && lang !== "es")
         lang = "C"
     var url
     if (isAndroid)

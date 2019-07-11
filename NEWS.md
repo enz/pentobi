@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 17.1.x (v17-fixes)
 --------------------------
 
-*
+* New Spanish translation (thanks to Francisco Zamorano)
 
 Version 17.1 (12 Jun 2019)
 --------------------------
