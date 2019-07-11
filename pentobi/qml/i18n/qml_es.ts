@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -285,7 +287,7 @@
     </message>
     <message>
         <source>Orange wins with %L1 points.</source>
-        <translation> Naranjas ganan con %L1 puntos. </translation>
+        <translation>Naranjas ganan con %L1 puntos.</translation>
     </message>
     <message>
         <source>Game ends in a tie.</source>
@@ -305,7 +307,7 @@
     </message>
     <message>
         <source>Blue wins with %L1 points.</source>
-        <translation>Azules ganan con %L1  puntos.</translation>
+        <translation>Azules ganan con %L1 puntos.</translation>
     </message>
     <message>
         <source>Green wins (tie resolved).</source>
@@ -896,7 +898,7 @@
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu Computer. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>S</source>
@@ -906,7 +908,7 @@
     <message>
         <source>P</source>
         <extracomment>Keyboard shortcut for menu item Play. Leave empty for no shortcut.</extracomment>
-        <translation>P</translation>
+        <translation>U</translation>
     </message>
     <message>
         <source>M</source>
@@ -916,7 +918,7 @@
     <message>
         <source>O</source>
         <extracomment>Keyboard shortcut for menu item Stop. Leave empty for no shortcut.</extracomment>
-        <translation>O</translation>
+        <translation>D</translation>
     </message>
 </context>
 <context>
@@ -933,7 +935,7 @@
     <message>
         <source>M</source>
         <extracomment>Keyboard shortcut for menu item Make Main Variation. Leave empty for no shortcut.</extracomment>
-        <translation>M</translation>
+        <translation>V</translation>
     </message>
     <message>
         <source>Make Main Variation</source>
@@ -957,7 +959,7 @@
     <message>
         <source>W</source>
         <extracomment>Keyboard shortcut for menu item Variation Down. Leave empty for no shortcut.</extracomment>
-        <translation>W</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>Delete Variations</source>
@@ -966,7 +968,7 @@
     <message>
         <source>D</source>
         <extracomment>Keyboard shortcut for menu item Delete Variations. Leave empty for no shortcut.</extracomment>
-        <translation>D</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>Truncate</source>
@@ -975,7 +977,7 @@
     <message>
         <source>T</source>
         <extracomment>Keyboard shortcut for menu item Truncate. Leave empty for no shortcut.</extracomment>
-        <translation>T</translation>
+        <translation>L</translation>
     </message>
     <message>
         <source>Truncate Children</source>
@@ -1075,7 +1077,7 @@
     <message>
         <source>G</source>
         <extracomment>Keyboard shortcut for menu Game. Leave empty for no shortcut.</extracomment>
-        <translation>G</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>N</source>
@@ -1085,7 +1087,7 @@
     <message>
         <source>R</source>
         <extracomment>Keyboard shortcut for menu item Rated Game. Leave empty for no shortcut.</extracomment>
-        <translation>R</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>Game Variant…</source>
@@ -1104,17 +1106,17 @@
     <message>
         <source>U</source>
         <extracomment>Keyboard shortcut for menu item Undo. Leave empty for no shortcut.</extracomment>
-        <translation>U</translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>F</source>
         <extracomment>Keyboard shortcut for menu item Find Move. Leave empty for no shortcut.</extracomment>
-        <translation>F</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>O</source>
         <extracomment>Keyboard shortcut for menu item Open. Leave empty for no shortcut.</extracomment>
-        <translation>O</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Open Clipboard</source>
@@ -1123,22 +1125,22 @@
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu item Open Clipboard. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>S</source>
         <extracomment>Keyboard shortcut for menu item Save. Leave empty for no shortcut.</extracomment>
-        <translation>S</translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>A</source>
         <extracomment>Keyboard shortcut for menu item Save As. Leave empty for no shortcut.</extracomment>
-        <translation>A</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>Q</source>
         <extracomment>Keyboard shortcut for menu item Quit. Leave empty for no shortcut.</extracomment>
-        <translation>Q</translation>
+        <translation>L</translation>
     </message>
 </context>
 <context>
@@ -1150,7 +1152,7 @@
     <message>
         <source>O</source>
         <extracomment>Keyboard shortcut for menu Go. Leave empty for no shortcut.</extracomment>
-        <translation>O</translation>
+        <translation>I</translation>
     </message>
     <message>
         <source>N</source>
@@ -1160,17 +1162,17 @@
     <message>
         <source>M</source>
         <extracomment>Keyboard shortcut for menu item Go/Main Variation. Leave empty for no shortcut.</extracomment>
-        <translation>M</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>B</source>
         <extracomment>Keyboard shortcut for menu item Beginning Of Branch. Leave empty for no shortcut.</extracomment>
-        <translation>B</translation>
+        <translation>R</translation>
     </message>
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu item Next Comment. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
+        <translation>S</translation>
     </message>
 </context>
 <context>
@@ -1182,7 +1184,7 @@
     <message>
         <source>H</source>
         <extracomment>Keyboard shortcut for menu Help. Leave empty for no shortcut.</extracomment>
-        <translation>H</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>P</source>
@@ -1205,7 +1207,7 @@
     <message>
         <source>B</source>
         <extracomment>Keyboard shortcut for menu item Report Bug. Leave empty for no shortcut.</extracomment>
-        <translation>B</translation>
+        <translation>E</translation>
     </message>
 </context>
 <context>
@@ -1218,7 +1220,7 @@
     <message>
         <source>Shift</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Mayúsculas</translation>
+        <translation>Mayús</translation>
     </message>
 </context>
 <context>
@@ -1230,7 +1232,7 @@
     <message>
         <source>P</source>
         <extracomment>Keyboard shortcut for menu Open Recent. Leave empty for no shortcut.</extracomment>
-        <translation>P</translation>
+        <translation>R</translation>
     </message>
     <message>
         <source>%1. %2</source>
@@ -1245,7 +1247,7 @@
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu item Recent Files/Clear List. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
+        <translation>B</translation>
     </message>
 </context>
 <context>
@@ -1257,7 +1259,7 @@
     <message>
         <source>T</source>
         <extracomment>Keyboard shortcut for menu Tools. Leave empty for no shortcut.</extracomment>
-        <translation>T</translation>
+        <translation>H</translation>
     </message>
     <message>
         <source>Rating</source>
@@ -1266,7 +1268,7 @@
     <message>
         <source>R</source>
         <extracomment>Keyboard shortcut for menu item Rating. Leave empty for no shortcut.</extracomment>
-        <translation>R</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>Clear Rating</source>
@@ -1275,7 +1277,7 @@
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu item Clear Rating. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>Analyze Game</source>
@@ -1293,7 +1295,7 @@
     <message>
         <source>E</source>
         <extracomment>Keyboard shortcut for menu item Clear Analysis. Leave empty for no shortcut.</extracomment>
-        <translation>E</translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>Analyze Game…</source>
@@ -1319,7 +1321,7 @@
     <message>
         <source>F</source>
         <extracomment>Keyboard shortcut for menu item Fullscreen. Leave empty for no shortcut.</extracomment>
-        <translation>F</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>C</source>
@@ -1337,7 +1339,7 @@
     <message>
         <source>T</source>
         <extracomment>Keyboard shortcut for menu item View/Toolbar. Leave empty for no shortcut.</extracomment>
-        <translation>T</translation>
+        <translation>B</translation>
     </message>
 </context>
 <context>
