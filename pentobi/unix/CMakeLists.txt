@@ -9,7 +9,11 @@ find_file(METAINFO_ITS NAMES metainfo.its appdata.its
     HINTS ${GETTEXT_INSTALL_DIR}/share/gettext/its
     )
 if(NOT METAINFO_ITS)
-    message(FATAL_ERROR "metainfo.its not found (install appstream)")
+    message(FATAL_ERROR
+        "metainfo.its not found. Install appstream and/or use"
+        " -DMETAINFO_ITS=<file> to define the location of the metainfo.its"
+        " or appdata.its file."
+        )
 endif()
 find_program(RSVG_CONVERT rsvg-convert)
 if(NOT RSVG_CONVERT)
@@ -25,7 +29,9 @@ find_path(DOCBOOK_XSL manpages/docbook.xsl
     /usr/share/xsl/docbook /usr/local/share/xsl/docbook
     )
 if(NOT DOCBOOK_XSL)
-    message(FATAL_ERROR "docbook-xsl not found")
+    message(FATAL_ERROR
+        "docbook-xsl not found. Use -DDOCBOOK_XSL=<dir> to define the location"
+        " of the docbook-xsl directory.")
 endif()
 
 # Binary gettext files

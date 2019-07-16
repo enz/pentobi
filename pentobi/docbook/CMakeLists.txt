@@ -12,9 +12,11 @@ find_path(DOCBOOK_XSL html/chunk.xsl
     /usr/local/share/xml/docbook/stylesheet/docbook-xsl
     /usr/share/xsl/docbook /usr/local/share/xsl/docbook
     /usr/share/xml/docbook/stylesheet/nwalsh/current
-    )
+)
 if(NOT DOCBOOK_XSL)
-    message(FATAL_ERROR "docbook-xsl not found")
+    message(FATAL_ERROR
+        "docbook-xsl not found. Use -DDOCBOOK_XSL=<dir> to define the location"
+        " of the docbook-xsl directory.")
 endif()
 
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
