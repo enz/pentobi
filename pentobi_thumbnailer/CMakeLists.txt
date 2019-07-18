@@ -13,6 +13,8 @@ find_path(DOCBOOK_XSL manpages/docbook.xsl
     HINTS /usr/share/xml/docbook/stylesheet/docbook-xsl
     /usr/local/share/xml/docbook/stylesheet/docbook-xsl
     /usr/share/xsl/docbook /usr/local/share/xsl/docbook
+    /usr/share/xml/docbook/stylesheet/nwalsh/current
+    /usr/share/sgml/docbook/xsl-ns-stylesheets
     )
 if(NOT DOCBOOK_XSL)
     message(FATAL_ERROR
