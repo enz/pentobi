@@ -10,6 +10,7 @@ Version 17.1.x (v17-fixes)
 --------------------------
 
 * New Spanish translation (thanks to Francisco Zamorano)
+* Added search hint for DocBook XSL for compilation on Fedora.
 
 Version 17.1 (12 Jun 2019)
 --------------------------
