@@ -1,6 +1,7 @@
 find_package(Qt5Core 5.11 REQUIRED)
 find_package(Qt5LinguistTools 5.11 REQUIRED)
 find_package(Gettext 0.18 REQUIRED)
+find_package(DocBookXSL REQUIRED)
 find_program(ITSTOOL itstool)
 if(NOT ITSTOOL)
     message(FATAL_ERROR "itstool not found")
@@ -8,19 +9,6 @@ endif()
 find_program(XSLTPROC xsltproc)
 if(NOT XSLTPROC)
     message(FATAL_ERROR "xsltproc not found")
-endif()
-find_path(DOCBOOK_XSL manpages/docbook.xsl
-    HINTS /usr/share/xml/docbook/stylesheet/docbook-xsl
-    /usr/local/share/xml/docbook/stylesheet/docbook-xsl
-    /usr/share/xsl/docbook /usr/local/share/xsl/docbook
-    /usr/share/xml/docbook/stylesheet/nwalsh/current
-    /usr/share/sgml/docbook/xsl-ns-stylesheets
-    )
-if(NOT DOCBOOK_XSL)
-    message(FATAL_ERROR
-        "docbook-xsl not found. Install docbook-xsl and/or use"
-        " -DDOCBOOK_XSL=<dir> to define the location of the docbook-xsl"
-        " directory.")
 endif()
 
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
@@ -82,7 +70,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
 configure_file(pentobi-thumbnailer-manpage.docbook.in
     pentobi-thumbnailer-manpage.docbook @ONLY)
 add_custom_command(OUTPUT pentobi-thumbnailer.6
-    COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOK_XSL}/manpages"
+    COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOKXSL_DIR}/manpages"
     "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
     pentobi-thumbnailer-manpage.docbook
     DEPENDS
@@ -102,7 +90,7 @@ foreach(lang ${linguas})
         )
     add_custom_command(OUTPUT ${lang}/pentobi-thumbnailer.6
         COMMAND "${XSLTPROC}" --nonet --novalid
-        --path "${DOCBOOK_XSL}/manpages" -o ${lang}/
+        --path "${DOCBOOKXSL_DIR}/manpages" -o ${lang}/
         "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
         ${lang}/pentobi-thumbnailer-manpage.docbook
         DEPENDS

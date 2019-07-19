@@ -16,6 +16,8 @@ option(PENTOBI_BUILD_KDE_THUMBNAILER "Build KDE thumbnailer" OFF)
 option(PENTOBI_OPEN_HELP_EXTERNALLY "Force using web browser for displaying help" OFF)
 option(BUILD_TESTING "Build tests" OFF)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "No build type selected, default to Release")
   set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)

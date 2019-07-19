@@ -1,4 +1,5 @@
 find_package(Gettext 0.18 REQUIRED)
+find_package(DocBookXSL REQUIRED)
 find_program(ITSTOOL itstool)
 if(NOT ITSTOOL)
     message(FATAL_ERROR "itstool not found")
@@ -6,19 +7,6 @@ endif()
 find_program(XSLTPROC xsltproc)
 if(NOT XSLTPROC)
     message(FATAL_ERROR "xsltproc not found")
-endif()
-find_path(DOCBOOK_XSL html/chunk.xsl
-    HINTS /usr/share/xml/docbook/stylesheet/docbook-xsl
-    /usr/local/share/xml/docbook/stylesheet/docbook-xsl
-    /usr/share/xsl/docbook /usr/local/share/xsl/docbook
-    /usr/share/xml/docbook/stylesheet/nwalsh/current
-    /usr/share/sgml/docbook/xsl-ns-stylesheets
-    )
-if(NOT DOCBOOK_XSL)
-    message(FATAL_ERROR
-        "docbook-xsl not found. Install docbook-xsl and/or use"
-        " -DDOCBOOK_XSL=<dir> to define the location of the docbook-xsl"
-        " directory.")
 endif()
 
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
@@ -63,7 +51,7 @@ foreach(lang ${linguas})
         DEPENDS index.docbook ${lang}.mo
         )
     add_custom_command(OUTPUT "help/${lang}/pentobi/index.html"
-        COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOK_XSL}/html"
+        COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOKXSL_DIR}/html"
         --stringparam l10n.gentext.language ${lang}
         -o "help/${lang}/pentobi/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
         index_${lang}.docbook
@@ -72,7 +60,7 @@ foreach(lang ${linguas})
 endforeach()
 
 add_custom_command(OUTPUT "help/C/pentobi/index.html"
-    COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOK_XSL}/html"
+    COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOKXSL_DIR}/html"
     -o "help/C/pentobi/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
     "${CMAKE_CURRENT_SOURCE_DIR}/index.docbook"
     COMMAND ${CMAKE_COMMAND} -E copy

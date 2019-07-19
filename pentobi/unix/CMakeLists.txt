@@ -1,4 +1,5 @@
 find_package(Gettext 0.18 REQUIRED)
+find_package(DocBookXSL REQUIRED)
 find_program(ITSTOOL itstool)
 if(NOT ITSTOOL)
     message(FATAL_ERROR "itstool not found")
@@ -22,19 +23,6 @@ endif()
 find_program(XSLTPROC xsltproc)
 if(NOT XSLTPROC)
     message(FATAL_ERROR "xsltproc not found")
-endif()
-find_path(DOCBOOK_XSL manpages/docbook.xsl
-    HINTS /usr/share/xml/docbook/stylesheet/docbook-xsl
-    /usr/local/share/xml/docbook/stylesheet/docbook-xsl
-    /usr/share/xsl/docbook /usr/local/share/xsl/docbook
-    /usr/share/xml/docbook/stylesheet/nwalsh/current
-    /usr/share/sgml/docbook/xsl-ns-stylesheets
-    )
-if(NOT DOCBOOK_XSL)
-    message(FATAL_ERROR
-        "docbook-xsl not found. Install docbook-xsl and/or use"
-        " -DDOCBOOK_XSL=<dir> to define the location of the docbook-xsl"
-        " directory.")
 endif()
 
 # Binary gettext files
@@ -133,7 +121,7 @@ endforeach()
 
 configure_file(pentobi-manpage.docbook.in pentobi-manpage.docbook @ONLY)
 add_custom_command(OUTPUT pentobi.6
-    COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOK_XSL}/manpages"
+    COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOKXSL_DIR}/manpages"
     "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl" pentobi-manpage.docbook
     DEPENDS manpage.xsl "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
     )
@@ -150,7 +138,7 @@ foreach(lang ${linguas})
         )
     add_custom_command(OUTPUT ${lang}/pentobi.6
         COMMAND "${XSLTPROC}" --nonet --novalid
-        --path "${DOCBOOK_XSL}/manpages" -o ${lang}/
+        --path "${DOCBOOKXSL_DIR}/manpages" -o ${lang}/
         "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
         ${lang}/pentobi-manpage.docbook
         DEPENDS manpage.xsl ${lang}/pentobi-manpage.docbook
