@@ -76,8 +76,10 @@ if(Qt5WebView_FOUND AND NOT PENTOBI_OPEN_HELP_EXTERNALLY)
     target_link_libraries(pentobi Qt5::WebView)
 else()
     if(NOT Qt5WebView_FOUND AND NOT PENTOBI_OPEN_HELP_EXTERNALLY)
-        message(WARNING
-            "Qt5WebView not found, setting PENTOBI_OPEN_HELP_EXTERNALLY")
+        message(FATAL_ERROR
+            "Qt5WebView not found. Install Qt5WebView or set"
+            " PENTOBI_OPEN_HELP_EXTERNALLY to make Pentobi use an external"
+            " browser for displaying help.")
     endif()
     target_compile_definitions(pentobi PRIVATE PENTOBI_OPEN_HELP_EXTERNALLY)
 endif()
