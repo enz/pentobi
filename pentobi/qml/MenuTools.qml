@@ -34,12 +34,7 @@ Pentobi.Menu {
         text: addShortcut(isAndroid ? qsTr("Analyze Game") : qsTr("Analyze Game…"),
                           //: Keyboard shortcut for menu item Analyze Game. Leave empty for no shortcut.
                           qsTr("A"))
-        onTriggered: {
-            if (isAndroid)
-                Logic.analyzeGame(3000)
-            else
-                analyzeDialog.open()
-        }
+        onTriggered: analyzeDialog.open()
     }
     Action {
         enabled: analyzeGameModel.elements.length !== 0
