@@ -5,6 +5,7 @@ Version 17.1.x (v17-fixes)
 --------------------------
 
 * New Spanish translation (thanks to Francisco Zamorano).
+* Enabled analysis-speed dialog on Android (only fast and normal speed).
 * Added search hint for DocBook XSL for compilation on Fedora.
 * PENTOBI_OPEN_HELP_EXTERNALLY will no longer be set automatically if
   Qt5WebView is not found, but must be set explicitly.
