@@ -12,6 +12,7 @@ import "." as Pentobi
 
 Pentobi.Dialog {
     footer: DialogButtonBoxOkCancel { }
+    onOpened: comboBox.currentIndex = 0
     onAccepted: {
         var nuSimulations
         switch (comboBox.currentIndex) {
