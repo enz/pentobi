@@ -31,7 +31,7 @@ Pentobi.Menu {
         enabled: ! isRated && (gameModel.canGoBackward || gameModel.canGoForward)
         // Text needs to end with ellipsis on desktop because it opens a
         // dialog asking for analysis speed, but not on Android
-        text: addShortcut(isAndroid ? qsTr("Analyze Game") : qsTr("Analyze Game…"),
+        text: addShortcut(qsTr("Analyze Game…"),
                           //: Keyboard shortcut for menu item Analyze Game. Leave empty for no shortcut.
                           qsTr("A"))
         onTriggered: analyzeDialog.open()
