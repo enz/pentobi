@@ -165,11 +165,16 @@ int mainDesktop()
             throw QCoreApplication::translate("main", "Too many arguments");
         if (! args.empty())
             initialFile = args.at(0);
-        if (QQuickStyle::name().isEmpty() && isDesktop)
-            QQuickStyle::setStyle(QStringLiteral("Fusion"));
+        auto style = QQuickStyle::name();
+        if (style.isEmpty() && isDesktop)
+        {
+            style = QStringLiteral("Fusion");
+            QQuickStyle::setStyle(style);
+        }
         QQmlApplicationEngine engine;
         engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
         auto ctx = engine.rootContext();
+        ctx->setContextProperty(QStringLiteral("globalStyle"), style);
         ctx->setContextProperty(QStringLiteral("initialFile"), initialFile);
         ctx->setContextProperty(QStringLiteral("isDesktop"),
                                 QVariant(isDesktop));

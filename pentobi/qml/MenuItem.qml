@@ -63,8 +63,9 @@ MenuItem {
             // palette, nor make its actually used colors available.
             // palette.midlight looks similar to the one used in style Default,
             // but doesn't work in style Fusion on KDE, so we use
-            // palette.highlight on the desktop.
-            return isDesktop ? palette.highlight : palette.midlight
+            // palette.highlight there.
+            return globalStyle.toLowerCase() === "fusion" ?
+                        palette.highlight : palette.midlight
         }
     }
     contentItem: RowLayout {
@@ -84,8 +85,8 @@ MenuItem {
             color: {
                 // See comment at background
                 if (root.highlighted)
-                    return isDesktop ? palette.highlightedText
-                                     : palette.buttonText
+                    return globalStyle.toLowerCase() === "fusion" ?
+                                palette.highlightedText : palette.buttonText
                 return palette.text
             }
             verticalAlignment: Text.AlignVCenter
