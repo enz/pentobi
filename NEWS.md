@@ -9,6 +9,9 @@ Version 17.1.x (v17-fixes)
 * Added search hint for DocBook XSL for compilation on Fedora.
 * PENTOBI_OPEN_HELP_EXTERNALLY will no longer be set automatically if
   Qt5WebView is not found, but must be set explicitly.
+* New Game button and menu item were not enabled if no moves were played
+  but an analysis graph existed (e.g. after analyzing a game and then
+  undoing all moves).
 
 Version 17.1 (12 Jun 2019)
 --------------------------
