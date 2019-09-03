@@ -386,6 +386,7 @@ function init() {
         initComputerColorsOnNewGame =
                 syncSettings.valueBool("initComputerColorsOnNewGame",
                                        initComputerColorsOnNewGame)
+        analyzeGameModel.loadAutoSave(gameModel)
     }
     playerModel.level = syncSettings.valueInt("level", 1)
     if (isMultiColor()) {
@@ -399,7 +400,6 @@ function init() {
         showQuestion(qsTr("File has been modified by another application. Reload?"), reloadFile)
         return
     }
-    analyzeGameModel.loadAutoSave(gameModel)
     if (analyzeGameModel.elements.length > 0)
         gameView.analysisAutoloaded()
     // initialFile is a context property set from command line argument
