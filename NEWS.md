@@ -12,6 +12,8 @@ Version 17.1.x (v17-fixes)
 * New Game button and menu item were not enabled if no moves were played
   but an analysis graph existed (e.g. after analyzing a game and then
   undoing all moves).
+* Clear autosaved analysis if autosaved game corresponded to a file
+  that no longer exists.
 
 Version 17.1 (12 Jun 2019)
 --------------------------
