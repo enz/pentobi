@@ -180,9 +180,7 @@ Window geometry using the X11 syntax.
 <term><option>-style</option> <replaceable>s</replaceable></term>
 <listitem>
 <para>
-Set the style for the GUI elements of QQuickControls 2. If no style is
-chosen, the default style is Default if option <option>--mobile</option>
-is set and Fusion otherwise.
+Set the style for the GUI elements of QQuickControls.
 </para>
 </listitem>
 </varlistentry>

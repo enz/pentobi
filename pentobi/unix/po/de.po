@@ -223,13 +223,9 @@ msgstr "<_:option-1/> <replaceable>s</replaceable>"
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:182
 msgid ""
-"Set the style for the GUI elements of QQuickControls 2. If no style is "
-"chosen, the default style is Default if option <_:option-1/> is set and "
-"Fusion otherwise."
+"Set the style for the GUI elements of QQuickControls."
 msgstr ""
-"Setzen des Style für Benutzeroberflächenelemente von QtQuickControls 2. Wird "
-"kein Style gewählt, ist der Style Default voreingestellt, falls Option <_:"
-"option-1/> gesetzt ist, ansonsten Fusion."
+"Setzen des Style für Benutzeroberflächenelemente von QtQuickControls."
 
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:193
