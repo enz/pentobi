@@ -369,6 +369,7 @@ ApplicationWindow {
         enabled: gameView.setupMode || gameModel.isModified
                  || gameModel.file !== "" || isRated || gameModel.canGoBackward
                  || gameModel.canGoForward
+                 || analyzeGameModel.elements.length !== 0
         onTriggered: Qt.callLater(function() { Logic.newGame() }) // QTBUG-69682
     }
     Action {
