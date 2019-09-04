@@ -184,9 +184,7 @@ msgstr ""
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:182
 msgid ""
-"Set the style for the GUI elements of QQuickControls 2. If no style is "
-"chosen, the default style is Default if option <_:option-1/> is set and "
-"Fusion otherwise."
+"Set the style for the GUI elements of QQuickControls."
 msgstr ""
 
 #. (itstool) path: listitem/para
