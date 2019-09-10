@@ -157,7 +157,7 @@ struct SearchParamConstDefault
     produced better results in Pentobi (in Blokus and some similar games).
     It has the form
     @f$ c P_{move} \sqrt{N_{parent}} \log(N_{parent} + 1) / N_{child} @f$
-    with an exploration constant c and a move priors P. Children counts are
+    with an exploration constant c and move priors P. Children counts are
     assumed to be initialized greater than 0.
 
     @tparam S The game-dependent state of a simulation. The state provides
