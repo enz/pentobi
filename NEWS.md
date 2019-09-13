@@ -1,14 +1,17 @@
 Pentobi Release Notes
 =====================
 
-Version 17.1.x (v17-fixes)
+Version 17.2 (13 Sep 2019)
 --------------------------
 
 * New Spanish translation (thanks to Francisco Zamorano).
-* Enabled analysis-speed dialog on Android (only fast and normal speed).
-* Added search hint for DocBook XSL for compilation on Fedora.
+* Support for different analysis speeds on Android (only fast and normal
+  speed).
+* Added more search hints for location of DocBook XSL.
 * PENTOBI_OPEN_HELP_EXTERNALLY will no longer be set automatically if
-  Qt5WebView is not found, but must be set explicitly.
+  Qt5WebView is not found, but must be set explicitly to avoid that it
+  is accidentally used if the Qt5WebView package exists on the platform
+  but has not been installed.
 * New Game button and menu item were not enabled if no moves were played
   but an analysis graph existed (e.g. after analyzing a game and then
   undoing all moves).
