@@ -6,7 +6,12 @@ Version 17.x (master)
 
 *
 
-Version 17.2.x (v17-fixes)
+Version 17.3.x (v17-fixes)
+--------------------------
+
+*
+
+Version 17.3 (05 Nov 2019)
 --------------------------
 
 * Don't use Fusion style on desktop anymore because it is currently
