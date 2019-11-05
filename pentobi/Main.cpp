@@ -167,11 +167,12 @@ int mainDesktop()
         if (! args.empty())
             initialFile = args.at(0);
         auto style = QQuickStyle::name();
-        if (style.isEmpty() && isDesktop)
-        {
-            style = QStringLiteral("Fusion");
-            QQuickStyle::setStyle(style);
-        }
+        // Fusion is broken on Fedora 31 (QTBUG-77107)
+        //if (style.isEmpty() && isDesktop)
+        //{
+        //    style = QStringLiteral("Fusion");
+        //    QQuickStyle::setStyle(style);
+        //}
         QQmlApplicationEngine engine;
         engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
         auto ctx = engine.rootContext();

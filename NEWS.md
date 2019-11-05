@@ -4,6 +4,8 @@ Pentobi Release Notes
 Version 17.2.x (v17-fixes)
 --------------------------
 
+* Don't use Fusion style on desktop anymore because it is currently
+  broken on some Linux distributions (QTBUG-77107).
 * Added more search hints for location of DocBook XSL.
 
 Version 17.2 (13 Sep 2019)

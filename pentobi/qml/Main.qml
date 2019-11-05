@@ -31,7 +31,10 @@ ApplicationWindow {
     property bool initComputerColorsOnNewGame: true
 
     property bool isAndroid: Qt.platform.os === "android"
-    property string themeName: isAndroid ? "dark" : "system"
+    // "system" theme would be a better default on desktop with Fusion style
+    // but we currently don't use Fusion (see comment in Main.cpp about
+    // QTBUG-77107)
+    property string themeName: isAndroid ? "dark" : "light"
     property QtObject theme: Logic.createTheme(themeName)
     property url folder: androidUtils.getDefaultFolder()
 
@@ -105,7 +108,10 @@ ApplicationWindow {
         property real height: defaultHeight
         property int visibility
         property alias folder: rootWindow.folder
-        property alias themeName: rootWindow.themeName
+        // Changed alias name from themeName to theme to ignore old saved
+        // settings from Pentobi <=17.1 after changing default theme on desktop
+        // (see comment in Main.cpp about QTBUG-77107)
+        property alias theme: rootWindow.themeName
         property alias exportImageWidth: rootWindow.exportImageWidth
         property alias showToolBar: rootWindow.showToolBar
         property alias showVariations: gameModel.showVariations
