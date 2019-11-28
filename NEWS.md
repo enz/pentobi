@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 17.x (master)
 ---------------------
 
-*
+* The Android version now supports landscape orientation.
 
 Version 17.3.x (v17-fixes)
 --------------------------

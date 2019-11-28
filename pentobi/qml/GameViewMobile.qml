@@ -54,6 +54,7 @@ Item
     property var color2: theme.colorRed
     property var color3: theme.colorGreen
     property bool isCommentVisible: swipeView.currentIndex === 1
+    property bool isPortrait: width <= height
 
     signal play(var pieceModel, point gameCoord)
 
@@ -101,90 +102,85 @@ Item
 
         category: "GameViewMobile"
     }
-    Column {
-        id: column
+    Board {
+        id: board
 
-        width: root.width
-        anchors.centerIn: root
-        spacing: 0.01 * board.width
+        x: isPortrait ? (parent.width - width) / 2 : 0
+        width: isPortrait ? Math.min(parent.width, 0.7 * parent.height)
+                          : parent.width / 2
+        height: isPortrait ? width : parent.height
+        onClicked: Logic.onBoardClicked(pos)
+        onRightClicked: Logic.onBoardRightClicked(pos)
 
-        Board {
-            id: board
+        Loader {
+            id: boardContextMenu
 
-            width: Math.min(parent.width, 0.7 * root.height)
-            height: isTrigon ? Math.sqrt(3) / 2 * width : width
-            anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: Logic.onBoardClicked(pos)
-            onRightClicked: Logic.onBoardRightClicked(pos)
+            Component {
+                id: boardContextMenuComponent
 
-            Loader {
-                id: boardContextMenu
-
-                Component {
-                    id: boardContextMenuComponent
-
-                    BoardContextMenu { }
-                }
+                BoardContextMenu { }
             }
         }
-        SwipeView {
-            id: swipeView
+    }
+    SwipeView {
+        id: swipeView
 
-            width: Math.min(1.3 * board.width, root.width)
-            height: Math.min(root.height - board.height, board.height)
-            clip: width < rootWindow.contentItem.width
-            anchors.horizontalCenter: board.horizontalCenter
+        x: isPortrait ? (parent.width - board.width) / 2
+                      : board.width + 0.02 * board.width
+        y: isPortrait ? board.height + 0.01 * board.width
+                      : board.grabImageTarget.y
+        width: isPortrait ? board.width : parent.width - x
+        height: isPortrait ? parent.height - y : parent.height - y
+        clip: true
 
-            Column {
-                id: columnPieces
+        Column {
+            id: columnPieces
 
-                spacing: 2
+            spacing: 2
 
-                ScoreDisplay {
-                    id: scoreDisplay
+            ScoreDisplay {
+                id: scoreDisplay
 
-                    width: swipeView.width
-                    height: 0.06 * swipeView.width
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-                PieceSelectorMobile {
-                    id: pieceSelector
-
-                    property real elementSize:
-                        // Show at least 3 rows
-                        Math.min(board.width / columns, height / 3)
-
-                    columns: pieces0 && pieces0.length <= 21 ? 7 : 8
-                    width: elementSize * columns
-                    height: swipeView.height - scoreDisplay.height
-                            - columnPieces.spacing
-                    rowSpacing: {
-                        // Don't show partial pieces
-                        var n = Math.floor(height / elementSize)
-                        return (height - n * elementSize) / n
-                    }
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    transitionsEnabled: false
-                    onPiecePicked: Logic.pickPiece(piece)
-                }
+                width: swipeView.width
+                height: 0.06 * swipeView.width
             }
-            NavigationPanel {
-                id: navigationPanel
+            PieceSelectorMobile {
+                id: pieceSelector
+
+                property real elementSize:
+                    // Show at least 3 rows
+                    Math.min(parent.width / columns, height / 3)
+
+                columns: pieces0 && pieces0.length <= 21 ? 7 : 8
+                x: isPortrait ? (parent.width - width) / 2 : 0
+                width: elementSize * columns
+                height: swipeView.height - scoreDisplay.height
+                        - columnPieces.spacing
+                rowSpacing: {
+                    // Don't show partial pieces
+                    var n = Math.floor(height / elementSize)
+                    return (height - n * elementSize) / n
+                }
+                transitionsEnabled: false
+                onPiecePicked: Logic.pickPiece(piece)
             }
-            ColumnLayout {
-                AnalyzeGame {
-                    theme: rootWindow.theme
-                    Layout.margins: 0.01 * parent.width
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                }
-                NavigationButtons
-                {
-                    Layout.fillWidth: true
-                    Layout.maximumHeight:
-                        Math.min(50, 0.08 * rootWindow.contentItem.height,
-                                 root.width / 6)
-                }
+        }
+        NavigationPanel {
+            id: navigationPanel
+        }
+        ColumnLayout {
+            AnalyzeGame {
+                theme: rootWindow.theme
+                Layout.margins: 0.01 * parent.width
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+            NavigationButtons
+            {
+                Layout.fillWidth: true
+                Layout.maximumHeight:
+                    Math.min(50, 0.08 * rootWindow.contentItem.height,
+                             root.width / 6)
             }
         }
     }
@@ -194,8 +190,8 @@ Item
         running: busyIndicatorRunning
         width: Math.min(0.2 * swipeView.width, swipeView.height)
         height: width
-        x: (root.width - width) / 2
-        y: column.y + swipeView.y + (swipeView.height - height) / 2
+        x: swipeView.x + (swipeView.width - width) / 2
+        y: swipeView.y + (swipeView.height - height) / 2
         opacity: 0.7
     }
     Rectangle {
@@ -208,8 +204,8 @@ Item
         }
 
         opacity: 0
-        x: (root.width - width) / 2
-        y: column.y + swipeView.y + (swipeView.height - height) / 2
+        x: swipeView.x + (swipeView.width - width) / 2
+        y: swipeView.y + (swipeView.height - height) / 2
         radius: 0.1 * height
         color: theme.colorMessageBase
         implicitWidth: messageText.implicitWidth + 0.5 * messageText.implicitHeight

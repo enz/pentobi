@@ -16,6 +16,7 @@ ColumnLayout {
     Comment {
         id: comment
 
+        Layout.margins: 1
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
