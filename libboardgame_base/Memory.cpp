@@ -13,11 +13,6 @@
 #include <unistd.h>
 #endif
 
-// sysctl() is unsupported on Linux with x32 ABI (last checked on Ubuntu 18.10)
-#if __has_include(<sys/sysctl.h>) && ! (defined __x86_64__ && defined __ILP32__)
-#include <sys/sysctl.h>
-#endif
-
 namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
@@ -44,20 +39,9 @@ size_t get_memory()
         return 0;
     return static_cast<size_t>(phys_pages) * static_cast<size_t>(page_size);
 
-#elif defined HW_PHYSMEM // Mac OS X
-
-    unsigned int phys_mem;
-    size_t len = sizeof(phys_mem);
-    int name[2] = { CTL_HW, HW_PHYSMEM };
-    if (sysctl(name, 2, &phys_mem, &len, nullptr, 0) != 0
-        || len != sizeof(phys_mem))
-        return 0;
-    else
-        return phys_mem;
-
 #else
 
-    return 0;
+#error "Determining memory size on this platform not (yet) supported"
 
 #endif
 }

@@ -4,7 +4,8 @@ Pentobi Release Notes
 Version 17.3.x (v17-fixes)
 --------------------------
 
-*
+* Removed untested and probably no longer functional code for
+  determining memory size on Mac OS X.
 
 Version 17.3 (05 Nov 2019)
 --------------------------
