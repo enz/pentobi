@@ -5,6 +5,7 @@ Version 17.x (master)
 ---------------------
 
 * The Android version now supports landscape orientation.
+* The minimum required Qt version is now 5.12.
 
 Version 17.3.x (v17-fixes)
 --------------------------
