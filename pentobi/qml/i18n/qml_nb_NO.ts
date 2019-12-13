@@ -1435,7 +1435,7 @@
     </message>
     <message>
         <source>Analyze Game</source>
-        <translation>Analyser spill</translation>
+        <translation type="vanished">Analyser spill</translation>
     </message>
     <message>
         <source>A</source>
@@ -1665,11 +1665,81 @@
     </message>
     <message>
         <source>Game</source>
+        <translation type="vanished">Spil</translation>
+    </message>
+    <message>
+        <source>Result</source>
+        <translation type="vanished">Resultat</translation>
+    </message>
+    <message>
+        <source>Win</source>
+        <extracomment>Result of rated game is a win</extracomment>
+        <translation type="vanished">Vunnet</translation>
+    </message>
+    <message>
+        <source>Loss</source>
+        <extracomment>Result of rated game is a loss</extracomment>
+        <translation type="vanished">Tapt</translation>
+    </message>
+    <message>
+        <source>Tie</source>
+        <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
+        <translation type="vanished">Uavgjort</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation type="vanished">Nivå</translation>
+    </message>
+    <message>
+        <source>Your Color</source>
+        <translation type="vanished">Din farge</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="vanished">Dato</translation>
+    </message>
+    <message>
+        <source>Open Game %1</source>
+        <translation type="vanished">Åpne spill %1</translation>
+    </message>
+</context>
+<context>
+    <name>SaveDialog</name>
+    <message>
+        <source>Save</source>
+        <translation>Lagre</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Blokus-spill</translation>
+    </message>
+</context>
+<context>
+    <name>TableModel</name>
+    <message>
+        <source>Game</source>
+        <extracomment>Table header for game number in rating dialog</extracomment>
         <translation>Spil</translation>
     </message>
     <message>
         <source>Result</source>
+        <extracomment>Table header for game result in rating dialog</extracomment>
         <translation>Resultat</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <extracomment>Table header for level in rating dialog</extracomment>
+        <translation>Nivå</translation>
+    </message>
+    <message>
+        <source>Your Color</source>
+        <extracomment>Table header for player color(s) in rating dialog</extracomment>
+        <translation>Din farge</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <extracomment>Table header for game date in rating dialog</extracomment>
+        <translation>Dato</translation>
     </message>
     <message>
         <source>Win</source>
@@ -1685,33 +1755,6 @@
         <source>Tie</source>
         <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
         <translation>Uavgjort</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <translation>Nivå</translation>
-    </message>
-    <message>
-        <source>Your Color</source>
-        <translation>Din farge</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Dato</translation>
-    </message>
-    <message>
-        <source>Open Game %1</source>
-        <translation>Åpne spill %1</translation>
-    </message>
-</context>
-<context>
-    <name>SaveDialog</name>
-    <message>
-        <source>Save</source>
-        <translation>Lagre</translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation>Blokus-spill</translation>
     </message>
 </context>
 <context>

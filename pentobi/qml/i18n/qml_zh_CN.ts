@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -546,7 +548,7 @@
     <message>
         <source>Pentobi</source>
         <extracomment>Window title if no file is loaded.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
@@ -686,7 +688,7 @@
     <message>
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Not enough memory</source>
@@ -884,7 +886,7 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1279,7 +1281,7 @@
     </message>
     <message>
         <source>Analyze Game</source>
-        <translation>分析棋局</translation>
+        <translation type="vanished">分析棋局</translation>
     </message>
     <message>
         <source>A</source>
@@ -1505,11 +1507,81 @@
     </message>
     <message>
         <source>Game</source>
+        <translation type="vanished">总局数</translation>
+    </message>
+    <message>
+        <source>Result</source>
+        <translation type="vanished">结果</translation>
+    </message>
+    <message>
+        <source>Win</source>
+        <extracomment>Result of rated game is a win</extracomment>
+        <translation type="vanished">胜</translation>
+    </message>
+    <message>
+        <source>Loss</source>
+        <extracomment>Result of rated game is a loss</extracomment>
+        <translation type="vanished">负</translation>
+    </message>
+    <message>
+        <source>Tie</source>
+        <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
+        <translation type="vanished">平</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation type="vanished">级别</translation>
+    </message>
+    <message>
+        <source>Your Color</source>
+        <translation type="vanished">您执</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="vanished">日期</translation>
+    </message>
+    <message>
+        <source>Open Game %1</source>
+        <translation type="vanished">打开第%1局</translation>
+    </message>
+</context>
+<context>
+    <name>SaveDialog</name>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>角斗士游戏</translation>
+    </message>
+</context>
+<context>
+    <name>TableModel</name>
+    <message>
+        <source>Game</source>
+        <extracomment>Table header for game number in rating dialog</extracomment>
         <translation>总局数</translation>
     </message>
     <message>
         <source>Result</source>
+        <extracomment>Table header for game result in rating dialog</extracomment>
         <translation>结果</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <extracomment>Table header for level in rating dialog</extracomment>
+        <translation>级别</translation>
+    </message>
+    <message>
+        <source>Your Color</source>
+        <extracomment>Table header for player color(s) in rating dialog</extracomment>
+        <translation>您执</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <extracomment>Table header for game date in rating dialog</extracomment>
+        <translation>日期</translation>
     </message>
     <message>
         <source>Win</source>
@@ -1525,33 +1597,6 @@
         <source>Tie</source>
         <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
         <translation>平</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <translation>级别</translation>
-    </message>
-    <message>
-        <source>Your Color</source>
-        <translation>您执</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>日期</translation>
-    </message>
-    <message>
-        <source>Open Game %1</source>
-        <translation>打开第%1局</translation>
-    </message>
-</context>
-<context>
-    <name>SaveDialog</name>
-    <message>
-        <source>Save</source>
-        <translation>保存</translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation>角斗士游戏</translation>
     </message>
 </context>
 <context>
@@ -1630,67 +1675,67 @@
     <name>main</name>
     <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

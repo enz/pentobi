@@ -1280,10 +1280,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Analyze Game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>A</source>
         <extracomment>Keyboard shortcut for menu item Analyze Game. Leave empty for no shortcut.</extracomment>
         <translation type="unfinished"></translation>
@@ -1505,12 +1501,43 @@
         <source>Recent development:</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>SaveDialog</name>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TableModel</name>
     <message>
         <source>Game</source>
+        <extracomment>Table header for game number in rating dialog</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Result</source>
+        <extracomment>Table header for game result in rating dialog</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <extracomment>Table header for level in rating dialog</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your Color</source>
+        <extracomment>Table header for player color(s) in rating dialog</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <extracomment>Table header for game date in rating dialog</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1526,33 +1553,6 @@
     <message>
         <source>Tie</source>
         <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your Color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open Game %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SaveDialog</name>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
