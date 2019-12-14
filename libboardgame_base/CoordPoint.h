@@ -61,10 +61,10 @@ inline CoordPoint::CoordPoint(int x, int y)
 
 inline CoordPoint::CoordPoint(unsigned x, unsigned y)
 {
-    LIBBOARDGAME_ASSERT(x < numeric_limits<int>::max());
-    LIBBOARDGAME_ASSERT(y < numeric_limits<int>::max());
     this->x = static_cast<int>(x);
     this->y = static_cast<int>(y);
+    LIBBOARDGAME_ASSERT(this->x < numeric_limits<int>::max());
+    LIBBOARDGAME_ASSERT(this->y < numeric_limits<int>::max());
 }
 
 inline bool CoordPoint::operator==(CoordPoint p) const
