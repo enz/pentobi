@@ -8,5 +8,7 @@ find_path(DOCBOOKXSL_DIR html/chunk.xsl manpages/docbook.xsl
     /usr/share/sgml/docbook/xsl-stylesheets # Fedora
     )
 find_package_handle_standard_args(DocBookXSL
-    "Could NOT find DocBook XSL stylesheets" DOCBOOKXSL_DIR)
+    "Could NOT find DocBook XSL stylesheets. Install docbook-xsl and/or use \
+    -DDOCBOOKXSL_DIR=<dir> to define its location."
+    DOCBOOKXSL_DIR)
 mark_as_advanced(DOCBOOKXSL_DIR)
