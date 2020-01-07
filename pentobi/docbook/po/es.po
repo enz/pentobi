@@ -2113,15 +2113,15 @@ msgstr "Requisitos de sistema"
 
 #. (itstool) path: chapter/para
 #: index.docbook:1289
-msgid "Minimum: 1 GB RAM, 1 GHz CPU"
-msgstr "Mínimo: 1 GB RAM, 1 GHz CPU"
+msgid "Minimum: 1 GB RAM, 1 GHz CPU"
+msgstr "Mínimo: 1 GB RAM, 1 GHz CPU"
 
 #. (itstool) path: chapter/para
 #: index.docbook:1292
 msgid ""
-"Recommended for playing level 9: 4 GB RAM, 2.5 GHz dual-core or faster CPU"
+"Recommended for playing level 9: 4 GB RAM, 2.5 GHz dual-core or faster CPU"
 msgstr ""
-"Recomendado para jugar nivel 9: 4 GB RAM, 2,5 GHz dual-core o CPU más rápida"
+"Recomendado para jugar nivel 9: 4 GB RAM, 2,5 GHz dual-core o CPU más rápida"
 
 #. (itstool) path: chapter/para
 #: index.docbook:1296
@@ -2143,8 +2143,8 @@ msgstr "Licencia"
 
 #. (itstool) path: chapter/para
 #: index.docbook:1305
-msgid "Copyright © 2011–2019 Markus Enzenberger"
-msgstr "Copyright © 2011–2019 Markus Enzenberger"
+msgid "Copyright © 2011–2020 Markus Enzenberger"
+msgstr "Copyright © 2011–2020 Markus Enzenberger"
 
 #. (itstool) path: chapter/para
 #: index.docbook:1308
