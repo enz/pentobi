@@ -58,6 +58,7 @@ ApplicationWindow {
     title: Logic.getWindowTitle(gameModel.file, gameModel.isModified)
     onClosing: if ( ! Logic.quit()) close.accepted = false
     Component.onCompleted: Logic.init()
+    Component.onDestruction: Logic.cancelRunning()
 
     MouseArea {
         anchors.fill: parent
