@@ -28,7 +28,7 @@ development-related issues.
 License
 -------
 
-Copyright (C) 2011-2019 Markus Enzenberger.
+Copyright (C) 2011-2020 Markus Enzenberger.
 See [AUTHORS](AUTHORS.md) for a full list of authors.
 
 This program is free software: you can redistribute it and/or modify it
