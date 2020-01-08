@@ -1,5 +1,5 @@
 include(FindPackageHandleStandardArgs)
-find_path(DOCBOOKXSL_DIR html/chunk.xsl manpages/docbook.xsl
+find_path(DOCBOOKXSL_DIR html/chunk.xsl
     HINTS
     /usr/share/xml/docbook/stylesheet/docbook-xsl # Debian
     /usr/local/share/xsl/docbook # FreeBSD
