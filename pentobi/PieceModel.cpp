@@ -262,7 +262,8 @@ QPointF PieceModel::findCenter(const Board& bd, const PiecePoints& points,
         auto pointType = geo.get_point_type(p);
         if (isNexos && pointType == 0)
             continue;
-        qreal centerX, centerY;
+        qreal centerX;
+        qreal centerY;
         if (isTrigon)
         {
             bool isDownward = (pointType == (isOriginDownward ? 0 : 1));

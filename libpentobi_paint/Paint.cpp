@@ -242,7 +242,8 @@ void paintBoardGembloQ(QPainter& painter, qreal width, qreal height,
 {
     auto gridWidth = width / geo.get_width();
     auto gridHeight = height / geo.get_height();
-    qreal distX, distY;
+    qreal distX;
+    qreal distY;
     switch (geo.get_height())
     {
     case 22:
