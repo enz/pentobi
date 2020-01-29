@@ -119,7 +119,7 @@ protected:
 
 private:
     /** Flag to quit main loop. */
-    bool m_quit;
+    bool m_quit = false;
 
     map<string, Handler> m_handlers;
 

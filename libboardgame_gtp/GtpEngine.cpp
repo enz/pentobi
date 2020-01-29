@@ -115,7 +115,7 @@ bool GtpEngine::exec(istream& in, bool throw_on_fail, ostream* log)
     Response response;
     string buffer;
     CmdLine cmd;
-    while (getline(in, line))
+    while (!m_quit && getline(in, line))
     {
         if (! is_cmd_line(line))
             continue;
@@ -135,7 +135,6 @@ bool GtpEngine::exec(istream& in, bool throw_on_fail, ostream* log)
 
 void GtpEngine::exec_main_loop(istream& in, ostream& out)
 {
-    m_quit = false;
     CmdLine cmd;
     Response response;
     string buffer;
