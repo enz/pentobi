@@ -66,7 +66,7 @@ string_view CmdLine::get_trimmed_line_after_elem(unsigned i) const
 {
     assert(i < m_elem.size());
     auto& e = m_elem[i];
-    auto begin = e.end();
+    auto begin = &*e.end();
     auto end = &*m_line.end();
     if (begin < end && *begin == '"')
         ++begin;
