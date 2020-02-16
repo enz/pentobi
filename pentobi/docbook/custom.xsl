@@ -21,6 +21,12 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <xsl:param name="toc.section.depth" select="0"/>
 <xsl:param name="use.id.as.filename" select="1"/>
 
+<xsl:template name="user.head.content">
+<meta name="viewport">
+<xsl:attribute name="content">width=device-width,initial-scale=1</xsl:attribute>
+</meta>
+</xsl:template>
+
 <xsl:template name="body.attributes"/>
 
 <xsl:template name="header.navigation">
