@@ -140,8 +140,8 @@ LocalPoints local_points;
 Features feature_occured_globally;
 
 
-/** This function mirrors what is happening in PriorKnowledge::gen_children,
-    but produces feature vectors instead of a gamma value for each move. */
+/** This function mirrors what happens in PriorKnowledge::gen_children, but
+    produces feature vectors instead of a gamma value for each move. */
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
 void add_sample(const Board& bd, Color to_play, Move played_mv)
 {
