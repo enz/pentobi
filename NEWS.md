@@ -5,6 +5,8 @@ Version 17.3.x (v17-fixes)
 --------------------------
 
 * Fixed crash if application was closed while game analysis was running.
+* Added missing include that broke the compilation with GCC 10 if
+  compiled with PENTOBI_BUILD_GTP=1.
 * Removed untested and probably no longer functional code for
   determining memory size on Mac OS X.
 
