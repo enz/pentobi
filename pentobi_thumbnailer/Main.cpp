@@ -26,7 +26,6 @@ int main(int argc, char* argv[])
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
     QCoreApplication app(argc, argv);
 
-    // Qt translations needed for QCommandLineParser
     QTranslator qtTranslator;
     qtTranslator.load(
                 "qt_" + QLocale::system().name(),

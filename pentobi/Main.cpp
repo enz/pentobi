@@ -258,7 +258,6 @@ int main(int argc, char *argv[])
     qmlRegisterInterface<GameMove>("GameModelMove");
     qmlRegisterInterface<PieceModel>("PieceModel");
 #ifndef Q_OS_ANDROID
-    // Qt translations needed for QCommandLineParser
     QTranslator qtTranslator;
     qtTranslator.load(
                 "qt_" + QLocale::system().name(),
