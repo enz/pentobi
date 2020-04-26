@@ -107,7 +107,7 @@ Item
 
         x: isPortrait ? (parent.width - width) / 2 : 0
         width: isPortrait ? Math.min(parent.width, 0.7 * parent.height)
-                          : parent.width / 2
+                          : Math.min(parent.width / 2, parent.height)
         height: isPortrait ? width : parent.height
         onClicked: Logic.onBoardClicked(pos)
         onRightClicked: Logic.onBoardRightClicked(pos)
@@ -127,10 +127,10 @@ Item
 
         x: isPortrait ? (parent.width - board.width) / 2
                       : board.width + 0.02 * board.width
-        y: isPortrait ? board.height + 0.01 * board.width
-                      : board.grabImageTarget.y
-        width: isPortrait ? board.width : parent.width - x
-        height: isPortrait ? parent.height - y : parent.height - y
+        y: isPortrait ? board.height + 0.01 * board.width : 0
+        width: isPortrait ? board.width
+                          : Math.min(board.width, parent.width - x)
+        height: parent.height - y
         clip: true
 
         Column {

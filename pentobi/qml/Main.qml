@@ -86,8 +86,7 @@ ApplicationWindow {
             bottom: parent.bottom
             margins: isDesktop ? 2 : 0
         }
-        source:
-            isDesktop ? "GameViewDesktop.qml" : "GameViewMobile.qml"
+        source: isDesktop ? "GameViewDesktop.qml" : "GameViewMobile.qml"
 
         Connections {
             target: gameViewLoader.item
