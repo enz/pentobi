@@ -105,7 +105,11 @@ Item
     Board {
         id: board
 
-        x: isPortrait ? (parent.width - width) / 2 : 0
+        x: isPortrait ? (parent.width - width) / 2
+                      : Math.max(
+                            (parent.width - 2 * board.width
+                             - 0.02 * board.width) / 2,
+                            0)
         width: isPortrait ? Math.min(parent.width, 0.7 * parent.height)
                           : Math.min(parent.width / 2, parent.height)
         height: isPortrait ? width : parent.height
@@ -126,7 +130,7 @@ Item
         id: swipeView
 
         x: isPortrait ? (parent.width - board.width) / 2
-                      : board.width + 0.02 * board.width
+                      : board.x + board.width + 0.02 * board.width
         y: isPortrait ? board.height + 0.01 * board.width : 0
         width: isPortrait ? board.width
                           : Math.min(board.width, parent.width - x)
