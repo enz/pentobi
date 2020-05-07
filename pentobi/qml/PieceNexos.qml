@@ -120,16 +120,30 @@ Item
             antialiasing: true
         }
     }
-    Rectangle {
-        opacity: moveMarking == "last_dot" && pieceModel.isLastMove ? 0.5 : 0
-        color: gameModel.showVariations && ! gameModel.isMainVar ? "transparent" : border.color
-        border { width: 0.2 * width; color: root.color[3] }
-        width: 0.3 * board.gridHeight
-        height: width
-        radius: width / 2
-        x: pieceModel.labelPos.x * board.gridWidth - width / 2
-        y: pieceModel.labelPos.y * board.gridHeight - height / 2
-        Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
+    Loader {
+        sourceComponent:
+            (moveMarking == "last_dot" && pieceModel.isLastMove) || item ?
+                dotComponent : null
+
+        Component {
+            id: dotComponent
+
+            Rectangle {
+                opacity: moveMarking == "last_dot" && pieceModel.isLastMove ?
+                             0.5 : 0
+                color: gameModel.showVariations && ! gameModel.isMainVar ?
+                           "transparent" : border.color
+                border { width: 0.2 * width; color: root.color[3] }
+                width: 0.3 * board.gridHeight
+                height: width
+                radius: width / 2
+                x: pieceModel.labelPos.x * board.gridWidth - width / 2
+                y: pieceModel.labelPos.y * board.gridHeight - height / 2
+                Behavior on opacity {
+                    NumberAnimation { duration: animationDurationFast }
+                }
+            }
+        }
     }
     Loader {
         sourceComponent: moveMarking === "all_number"
