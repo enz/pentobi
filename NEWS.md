@@ -1,6 +1,11 @@
 Pentobi Release Notes
 =====================
 
+Version 18.x (master)
+---------------------
+
+*
+
 Version 18.0.x (v18-fixes)
 --------------------------
 
