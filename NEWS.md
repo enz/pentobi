@@ -1,21 +1,15 @@
 Pentobi Release Notes
 =====================
 
-Version 17.x (master)
----------------------
+Version 18.0 (11 May 2020)
+--------------------------
 
 * The minimum required Qt version is now 5.12.
 * Experimental support for landscape orientation on Android (not
   enabled by default yet, see comment in GameViewMobile.qml).
-
-Version 17.3.x (v17-fixes)
---------------------------
-
 * Fixed crash if application was closed while game analysis was running.
 * Added missing include that broke the compilation with GCC 10 if
   compiled with PENTOBI_BUILD_GTP=1.
-* Removed untested and probably no longer functional code for
-  determining memory size on Mac OS X.
 
 Version 17.3 (05 Nov 2019)
 --------------------------
