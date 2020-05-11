@@ -4,8 +4,9 @@ Pentobi Release Notes
 Version 17.x (master)
 ---------------------
 
-* The Android version now supports landscape orientation.
 * The minimum required Qt version is now 5.12.
+* Experimental support for landscape orientation on Android (not
+  enabled by default yet, see comment in GameViewMobile.qml).
 
 Version 17.3.x (v17-fixes)
 --------------------------
