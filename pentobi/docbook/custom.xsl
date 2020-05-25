@@ -37,7 +37,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <div class="navheader">
 <table width="100%">
 <tr>
-<td width="34%" align="{$direction.align.start}">
+<td width="34%" align="left">
 <xsl:if test="count($prev)>0">
 <a>
 <xsl:attribute name="href">
@@ -69,7 +69,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <xsl:otherwise>&#160;</xsl:otherwise>
 </xsl:choose>
 </td>
-<td width="34%" align="{$direction.align.end}">
+<td width="34%" align="right">
 <xsl:text>&#160;</xsl:text>
 <xsl:if test="count($next)>0">
 <a>
@@ -99,7 +99,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <hr/>
 <table width="100%">
 <tr>
-<td width="34%" align="{$direction.align.start}">
+<td width="34%" align="left">
 <xsl:if test="count($prev)>0">
 <a>
 <xsl:attribute name="href">
@@ -131,7 +131,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <xsl:otherwise>&#160;</xsl:otherwise>
 </xsl:choose>
 </td>
-<td width="34%" align="{$direction.align.end}">
+<td width="34%" align="right">
 <xsl:text>&#160;</xsl:text>
 <xsl:if test="count($next)>0">
 <a>
