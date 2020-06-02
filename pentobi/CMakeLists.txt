@@ -1,4 +1,5 @@
 set(CMAKE_AUTOMOC TRUE)
+set(CMAKE_AUTORCC TRUE)
 
 find_package(Threads)
 find_package(Qt5Concurrent 5.11 REQUIRED)
@@ -22,17 +23,7 @@ add_custom_command(
     DEPENDS qml/i18n/translations.qrc ${pentobi_QM}
     )
 
-qt5_add_resources(pentobi_RC_SRCS
-    "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
-    ../opening_books/pentobi_books.qrc
-    icon/pentobi_icon.qrc
-    resources.qrc
-    resources_desktop.qrc
-    qml/themes/themes.qrc
-    )
-
 add_executable(pentobi WIN32
-    ${pentobi_RC_SRCS}
     AnalyzeGameModel.h
     AnalyzeGameModel.cpp
     AndroidUtils.h
@@ -49,6 +40,12 @@ add_executable(pentobi WIN32
     RatingModel.h
     RatingModel.cpp
     SyncSettings.h
+    "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
+    ../opening_books/pentobi_books.qrc
+    icon/pentobi_icon.qrc
+    resources.qrc
+    resources_desktop.qrc
+    qml/themes/themes.qrc
     )
 
 file(GLOB qml_SRC "qml/*.qml" "qml/*.js" "qml/i18n/*.ts" "qml/themes/*/*.qml")
