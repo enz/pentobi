@@ -1,3 +1,5 @@
+set(CMAKE_AUTORCC TRUE)
+
 find_package(Qt5Core 5.11 REQUIRED)
 find_package(Qt5LinguistTools 5.11 REQUIRED)
 find_package(Gettext 0.18 REQUIRED)
@@ -41,13 +43,9 @@ add_custom_command(
     DEPENDS i18n/translations.qrc ${pentobi_thumbnailer_QM}
     )
 
-qt5_add_resources(pentobi_thumbnailer_RC_SRCS
-    ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
-    )
-
 add_executable(pentobi-thumbnailer
     Main.cpp
-    ${pentobi_thumbnailer_RC_SRCS}
+    ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
     ${man_files}
     )
 
