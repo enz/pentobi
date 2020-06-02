@@ -1,5 +1,5 @@
-set(CMAKE_AUTOMOC TRUE)
-set(CMAKE_AUTORCC TRUE)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 find_package(Threads)
 find_package(Qt5Concurrent 5.11 REQUIRED)
