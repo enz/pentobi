@@ -1,4 +1,4 @@
-set(CMAKE_AUTORCC TRUE)
+set(CMAKE_AUTORCC ON)
 
 find_package(Qt5Core 5.11 REQUIRED)
 find_package(Qt5LinguistTools 5.11 REQUIRED)
