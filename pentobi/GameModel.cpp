@@ -1493,7 +1493,7 @@ void GameModel::setTime(const QString& time)
         return;
     m_time = time;
     m_game.set_time(encode(time).constData());
-    emit playerName3Changed();
+    emit timeChanged();
     updateIsModified();
 }
 
