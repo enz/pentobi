@@ -4,6 +4,7 @@ Pentobi Release Notes
 Version 18.0.x (v18-fixes)
 --------------------------
 
+* Fixed compilation with Qt >= 5.15.
 * HTML manual generation failed with older versions of DocBook XSL.
 
 Version 18.0 (11 May 2020)
