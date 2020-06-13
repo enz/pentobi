@@ -69,4 +69,5 @@ Building the Android App
 
 Because building, deploying and debugging for Android is not yet
 functional for CMake projects in QtCreator, there exists a project file
-in `pentobi/Pentobi.pro` for building the Android app.
+in `pentobi/Pentobi.pro` for building the Android app. The Android
+project was tested with Qt 5.15.
