@@ -254,15 +254,10 @@ int main(int argc, char *argv[])
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterType<RatingModel>("pentobi", 1, 0, "RatingModel");
     qmlRegisterType<SyncSettings>("pentobi", 1, 0, "SyncSettings");
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-    qmlRegisterInterface<AnalyzeGameElement>("AnalyzeGameElement", 1);
-    qmlRegisterInterface<GameMove>("GameModelMove", 1);
-    qmlRegisterInterface<PieceModel>("PieceModel", 1);
-#else
-    qmlRegisterInterface<AnalyzeGameElement>("AnalyzeGameElement");
-    qmlRegisterInterface<GameMove>("GameModelMove");
-    qmlRegisterInterface<PieceModel>("PieceModel");
-#endif
+    qmlRegisterUncreatableType<AnalyzeGameElement>(
+                "pentobi", 1, 0, "AnalyzeGameElement", {});
+    qmlRegisterUncreatableType<GameMove>("pentobi", 1, 0, "GameMove", {});
+    qmlRegisterUncreatableType<PieceModel>("pentobi", 1, 0, "PieceModel", {});
 #ifndef Q_OS_ANDROID
     QTranslator qtTranslator;
     qtTranslator.load(
