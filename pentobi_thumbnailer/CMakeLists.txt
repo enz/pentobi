@@ -53,7 +53,7 @@ target_link_libraries(pentobi-thumbnailer pentobi_thumbnail)
 
 target_compile_definitions(pentobi-thumbnailer PRIVATE
     QT_DEPRECATED_WARNINGS
-    QT_DISABLE_DEPRECATED_BEFORE=0x051400
+    QT_DISABLE_DEPRECATED_BEFORE=0x060000
     VERSION="${PENTOBI_VERSION}"
     )
 
