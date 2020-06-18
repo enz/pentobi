@@ -11,10 +11,13 @@ import QtQuick.Controls 2.3
 ToolButton {
     id: root
 
-    // See ButtonToolTip
-    property bool buttonToolTipHovered
-    property bool effectiveHovered:
-        isDesktop && buttonToolTipHovered && enabled
+    // Used instead of attached tooltip because of QTBUG-30801 (tooltip not
+    // shown when the button is disabled).
+    property string toolTipText
+
+    property bool _toolTipHovered
+    property bool _effectiveHovered: isDesktop && _toolTipHovered && enabled
+    property bool _inhibitToolTip
 
     implicitWidth: Math.min(getIconSize() + (isDesktop ? 14 : 30),
                             0.11 * rootWindow.contentItem.height,
@@ -53,9 +56,32 @@ ToolButton {
     background: Rectangle {
         radius: 0.05 * width
         color: down ? theme.colorButtonPressed :
-                      effectiveHovered ? theme.colorButtonHovered
-                                       : "transparent"
-        border.color: down || effectiveHovered ? theme.colorButtonBorder
-                                               : "transparent"
+                      _effectiveHovered ? theme.colorButtonHovered
+                                        : "transparent"
+        border.color: down || _effectiveHovered ? theme.colorButtonBorder
+                                                : "transparent"
+    }
+    onPressed: _inhibitToolTip = true
+
+    MouseArea {
+        id: toolTipArea
+
+        parent: root.parent
+        x: root.x
+        y: root.y
+        width: root.width
+        height: root.height
+        visible: isDesktop
+        acceptedButtons: Qt.NoButton
+        hoverEnabled: true
+        onExited: root._inhibitToolTip = false
+        ToolTip.text: root.toolTipText
+        ToolTip.visible: containsMouse && ToolTip.text
+                         && ! root._inhibitToolTip
+        ToolTip.delay: 1000
+        ToolTip.timeout: 7000
+        Component.onCompleted:
+            root._toolTipHovered = Qt.binding(function() {
+                return containsMouse })
     }
 }
