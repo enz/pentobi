@@ -66,6 +66,7 @@ Item {
             icon.source: theme.getImage("pentobi-newgame")
             action: actionNew
             visible: showContent && (isDesktop || enabled)
+            toolTipText: qsTr("Start a new game")
         }
         Pentobi.Button {
             id: newGameRated
@@ -73,6 +74,7 @@ Item {
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-rated-game")
             action: actionNewRated
+            toolTipText: qsTr("Start a rated game")
         }
         Pentobi.Button {
             id: undo
@@ -84,7 +86,8 @@ Item {
             autoRepeatInterval:
                 rootWindow.gameView.item ?
                     2 * rootWindow.gameView.item.animationDuration : 400
-
+            //: Tooltip for Undo button
+            toolTipText: qsTr("Undo move")
         }
         Pentobi.Button {
             id: computerSettings
@@ -92,6 +95,7 @@ Item {
             icon.source: theme.getImage("pentobi-computer-colors")
             action: actionComputerSettings
             visible: showContent && (isDesktop || enabled)
+            toolTipText: qsTr("Set the colors played by the computer")
         }
         Pentobi.Button {
             id: play
@@ -103,6 +107,17 @@ Item {
             autoRepeatInterval:
                 rootWindow.gameView.item ?
                     rootWindow.gameView.item.animationDuration : 200
+            toolTipText: {
+                var toPlay = gameModel.toPlay
+                if (gameModel.gameVariant === "classic_3" && toPlay === 3)
+                    toPlay = gameModel.altPlayer
+                if ((computerPlays0 && toPlay === 0)
+                        || (computerPlays1 && toPlay === 1)
+                        || (computerPlays2 && toPlay === 2)
+                        || (computerPlays3 && toPlay === 3))
+                    return qsTr("Make the computer continue to play the current color")
+                return qsTr("Make the computer play the current color")
+            }
         }
         Pentobi.Button {
             id: stop
@@ -110,6 +125,9 @@ Item {
             icon.source: theme.getImage("pentobi-stop")
             action: actionStop
             visible: showContent && (isDesktop || ! isRated)
+            toolTipText: analyzeGameModel.isRunning ?
+                              qsTr("Abort game analysis")
+                            : qsTr("Abort computer move")
         }
         Item {
             visible: isDesktop
@@ -122,6 +140,7 @@ Item {
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-beginning")
             action: actionBeginning
+            toolTipText: qsTr("Go to beginning of game")
         }
         Pentobi.Button {
             id: backward10
@@ -133,6 +152,7 @@ Item {
             autoRepeatInterval:
                 rootWindow.gameView.item ?
                     rootWindow.gameView.item.animationDuration : 200
+            toolTipText: qsTr("Go ten moves backward")
         }
         Pentobi.Button {
             id: backward
@@ -141,6 +161,7 @@ Item {
             icon.source: theme.getImage("pentobi-backward")
             action: actionBackward
             autoRepeat: true
+            toolTipText: qsTr("Go one move backward")
         }
         Pentobi.Button {
             id: forward
@@ -149,6 +170,7 @@ Item {
             icon.source: theme.getImage("pentobi-forward")
             action: actionForward
             autoRepeat: true
+            toolTipText: qsTr("Go one move forward")
         }
         Pentobi.Button {
             id: forward10
@@ -160,6 +182,7 @@ Item {
             autoRepeatInterval:
                 rootWindow.gameView.item ?
                     rootWindow.gameView.item.animationDuration : 200
+            toolTipText: qsTr("Go ten moves forward")
         }
         Pentobi.Button {
             id: end
@@ -167,6 +190,7 @@ Item {
             visible: showContent && isDesktop
             icon.source: theme.getImage("pentobi-end")
             action: actionEnd
+            toolTipText: qsTr("Go to end of moves")
         }
         Item {
             visible: isDesktop
@@ -183,6 +207,7 @@ Item {
             autoRepeatInterval:
                 rootWindow.gameView.item ?
                     2 * rootWindow.gameView.item.animationDuration : 400
+            toolTipText: qsTr("Go to previous variation")
         }
         Pentobi.Button {
             id: nextVar
@@ -194,6 +219,7 @@ Item {
             autoRepeatInterval:
                 rootWindow.gameView.item ?
                     2 * rootWindow.gameView.item.animationDuration : 400
+            toolTipText: qsTr("Go to next variation")
         }
         Item {
             visible: isDesktop
@@ -241,6 +267,7 @@ Item {
                     menu.item.popup(0, isDesktop ? height : 0)
                 }
             }
+            toolTipText: qsTr("Open menu")
 
             Loader {
                 id: menu
@@ -272,78 +299,5 @@ Item {
                 }
             }
         }
-    }
-    ButtonToolTip {
-        button: newGame
-        ToolTip.text: qsTr("Start a new game")
-    }
-    ButtonToolTip {
-        button: newGameRated
-        ToolTip.text: qsTr("Start a rated game")
-    }
-    ButtonToolTip {
-        button: undo
-        //: Tooltip for Undo button
-        ToolTip.text: qsTr("Undo move")
-    }
-    ButtonToolTip {
-        button: computerSettings
-        ToolTip.text: qsTr("Set the colors played by the computer")
-    }
-    ButtonToolTip {
-        button: play
-        ToolTip.text: {
-            var toPlay = gameModel.toPlay
-            if (gameModel.gameVariant === "classic_3" && toPlay === 3)
-                toPlay = gameModel.altPlayer
-            if ((computerPlays0 && toPlay === 0)
-                    || (computerPlays1 && toPlay === 1)
-                    || (computerPlays2 && toPlay === 2)
-                    || (computerPlays3 && toPlay === 3))
-                return qsTr("Make the computer continue to play the current color")
-            return qsTr("Make the computer play the current color")
-        }
-    }
-    ButtonToolTip {
-        button: stop
-        ToolTip.text: analyzeGameModel.isRunning ?
-                          qsTr("Abort game analysis")
-                        : qsTr("Abort computer move")
-    }
-    ButtonToolTip {
-        button: beginning
-        ToolTip.text: qsTr("Go to beginning of game")
-    }
-    ButtonToolTip {
-        button: backward10
-        ToolTip.text: qsTr("Go ten moves backward")
-    }
-    ButtonToolTip {
-        button: backward
-        ToolTip.text: qsTr("Go one move backward")
-    }
-    ButtonToolTip {
-        button: forward
-        ToolTip.text: qsTr("Go one move forward")
-    }
-    ButtonToolTip {
-        button: forward10
-        ToolTip.text: qsTr("Go ten moves forward")
-    }
-    ButtonToolTip {
-        button: end
-        ToolTip.text: qsTr("Go to end of moves")
-    }
-    ButtonToolTip {
-        button: prevVar
-        ToolTip.text: qsTr("Go to previous variation")
-    }
-    ButtonToolTip {
-        button: nextVar
-        ToolTip.text: qsTr("Go to next variation")
-    }
-    ButtonToolTip {
-        button: menuButton
-        ToolTip.text: qsTr("Open menu")
     }
 }
