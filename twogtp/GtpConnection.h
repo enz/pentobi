@@ -31,7 +31,7 @@ public:
 
     ~GtpConnection();
 
-    void enable_log(const string& prefix = "");
+    void enable_log(const string& prefix = {});
 
     /** Send a GTP command.
         @param command The command.

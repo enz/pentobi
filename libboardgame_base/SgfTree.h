@@ -138,7 +138,7 @@ public:
 
     void set_charset(const string& charset);
 
-    void set_application(const string& name, const string& version = "");
+    void set_application(const string& name, const string& version = {});
 
     string get_date() const { return m_root->get_property("DT", ""); }
 

@@ -26,7 +26,7 @@ class GtpEngine
 public:
     explicit GtpEngine(
             Variant variant, unsigned level = 5, bool use_book = true,
-            const string& books_dir = "", unsigned nu_threads = 0);
+            const string& books_dir = {}, unsigned nu_threads = 0);
 
     ~GtpEngine() override;
 

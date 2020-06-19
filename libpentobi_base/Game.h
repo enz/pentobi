@@ -152,7 +152,7 @@ public:
     bool is_modified() const;
 
     /** Set the AP property at the root node. */
-    void set_application(const string& name, const string& version = "");
+    void set_application(const string& name, const string& version = {});
 
     string get_player_name(Color c) const;
 
