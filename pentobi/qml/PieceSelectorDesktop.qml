@@ -14,7 +14,8 @@ Item {
     property alias pieces2: pieceList2.pieces
     property alias pieces3: pieceList3.pieces
     property alias columns: pieceList0.columns
-    property alias transitionsEnabled: transition.enabled
+    // Dummy for compatibility with PieceSelectorMobile
+    property bool transitionsEnabled
 
     signal piecePicked(var piece)
 
@@ -122,13 +123,4 @@ Item {
             }
         }
     ]
-    transitions: Transition {
-        id: transition
-
-        NumberAnimation {
-            target: toPlayIndicator
-            property: "y"
-            duration: 0.6 * animationDurationFast
-        }
-    }
 }
