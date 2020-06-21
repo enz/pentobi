@@ -98,8 +98,6 @@ void Search::set_default_param(Variant variant)
     LIBBOARDGAME_LOG("Setting default parameters for ", to_string(variant));
     set_rave_weight(0.7f);
     set_rave_child_max(2000);
-    // The following parameters are currently tuned for duo, classic_2 and
-    // trigon_2 and used for all other game variants with the same board type
     switch (variant)
     {
     case Variant::classic:

@@ -63,6 +63,13 @@ Item
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
     function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
+    function onPositionChanged() {
+        if (analyzeGameModel.elements.length > 0
+                || analyzeGameModel.isRunning)
+            comment.visible = false
+        else
+            _updateCommentVisible()
+    }
     function pickPieceAtBoard(piece) { Logic.pickPieceAtBoard(piece) }
     function shiftPiece(dx, dy) { Logic.shiftPiece(dx, dy) }
     function shiftPieceFast(dx, dy) { Logic.shiftPieceFast(dx, dy) }
@@ -343,14 +350,5 @@ Item
         height: width
         pieceModel: pickedPiece ? pickedPiece.pieceModel : null
         onPiecePlayed: Logic.playPickedPiece()
-    }
-    Connections {
-        target: gameModel
-        onPositionChanged:
-            if (analyzeGameModel.elements.length > 0
-                    || analyzeGameModel.isRunning)
-                comment.visible = false
-            else
-                _updateCommentVisible()
     }
 }

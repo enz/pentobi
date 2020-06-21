@@ -67,6 +67,7 @@ Item
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
     function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
+    function onPositionChanged() { }
     function pickPieceAtBoard(piece) { Logic.pickPieceAtBoard(piece) }
     function shiftPiece(dx, dy) { Logic.shiftPiece(dx, dy) }
     function shiftPieceFast(dx, dy) { Logic.shiftPieceFast(dx, dy) }
