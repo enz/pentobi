@@ -1,7 +1,7 @@
 Pentobi Release Notes
 =====================
 
-Version 18.0.x (v18-fixes)
+Version 18.1 (25 Jun 2020)
 --------------------------
 
 * Fixed compilation with Qt 5.15.
