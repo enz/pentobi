@@ -9,7 +9,7 @@ Version 18.x (master)
 Version 18.1.x (v18-fixes)
 --------------------------
 
-*
+* Updated bugtracker link in AppData file for Linux.
 
 Version 18.1 (25 Jun 2020)
 --------------------------
