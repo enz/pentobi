@@ -108,11 +108,7 @@ void AnalyzeGameModel::clear()
 
 QQmlListProperty<AnalyzeGameElement> AnalyzeGameModel::elements()
 {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     return {this, &m_elements};
-#else
-    return {this, m_elements};
-#endif
 }
 
 void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)
