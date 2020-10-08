@@ -1,18 +1,5 @@
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt5Core 5.11 REQUIRED)
-find_package(Qt5LinguistTools 5.11 REQUIRED)
-find_package(Gettext 0.18 REQUIRED)
-find_package(DocBookXSL REQUIRED)
-find_program(ITSTOOL itstool)
-if(NOT ITSTOOL)
-    message(FATAL_ERROR "itstool not found")
-endif()
-find_program(XSLTPROC xsltproc)
-if(NOT XSLTPROC)
-    message(FATAL_ERROR "xsltproc not found")
-endif()
-
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
 string(REGEX REPLACE "\n" ";" linguas "${linguas}")
 

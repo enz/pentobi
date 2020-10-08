@@ -1,5 +1,3 @@
-find_package(Threads)
-
 add_executable(twogtp
   Analyze.h
   Analyze.cpp

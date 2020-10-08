@@ -1,14 +1,3 @@
-find_package(Gettext 0.18 REQUIRED)
-find_package(DocBookXSL REQUIRED)
-find_program(ITSTOOL itstool)
-if(NOT ITSTOOL)
-    message(FATAL_ERROR "itstool not found")
-endif()
-find_program(XSLTPROC xsltproc)
-if(NOT XSLTPROC)
-    message(FATAL_ERROR "xsltproc not found")
-endif()
-
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
 string(REGEX REPLACE "\n" ";" linguas "${linguas}")
 
@@ -76,6 +65,8 @@ add_custom_target(pentobi-help ALL DEPENDS
     "help/C/pentobi/index.html" ${index_files}
     )
 
-install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/help"
-    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR} FILES_MATCHING PATTERN "*.css"
-    PATTERN "*.html" PATTERN "*.png" PATTERN "*.jpg")
+if(NOT ANDROID)
+    install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/help"
+        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR} FILES_MATCHING PATTERN "*.css"
+        PATTERN "*.html" PATTERN "*.png" PATTERN "*.jpg")
+endif()

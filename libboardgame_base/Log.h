@@ -16,6 +16,10 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
+#if (defined ANDROID || defined __ANDROID__) && ! defined LIBBOARDGAME_DEBUG
+#define LIBBOARDGAME_DISABLE_LOG 1
+#endif
+
 #ifndef LIBBOARDGAME_DISABLE_LOG
 extern ostream* _log_stream;
 #endif

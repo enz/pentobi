@@ -1,5 +1,3 @@
-find_package(Qt5Gui 5.9 REQUIRED)
-
 add_library(pentobi_paint STATIC
 Paint.cpp
 Paint.h

@@ -1,9 +1,3 @@
-find_package(Gettext 0.18 REQUIRED)
-find_package(DocBookXSL REQUIRED)
-find_program(ITSTOOL itstool)
-if(NOT ITSTOOL)
-    message(FATAL_ERROR "itstool not found")
-endif()
 get_filename_component(GETTEXT_BIN_DIR ${GETTEXT_MSGFMT_EXECUTABLE} DIRECTORY)
 get_filename_component(GETTEXT_INSTALL_DIR ${GETTEXT_BIN_DIR} DIRECTORY)
 find_file(METAINFO_ITS NAMES metainfo.its appdata.its

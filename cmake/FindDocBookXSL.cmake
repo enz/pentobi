@@ -6,6 +6,7 @@ find_path(DOCBOOKXSL_DIR html/chunk.xsl
     /usr/share/xml/docbook/stylesheet/nwalsh/current # OpenSUSE
     /usr/share/sgml/docbook/xsl-ns-stylesheets # Fedora
     /usr/share/sgml/docbook/xsl-stylesheets # Fedora
+    NO_CMAKE_FIND_ROOT_PATH
     )
 find_package_handle_standard_args(DocBookXSL
     "Could NOT find DocBook XSL stylesheets. Install docbook-xsl and/or use \
