@@ -35,23 +35,6 @@ Menu {
     }
     // Workaround for QTBUG-69541 (Opened Menu highlights last used item on Android)
     onOpened: if (isAndroid) currentIndex = -1
-    // Workaround for QTBUG-69540 (Menu highlights disabled item on click).
-    onCurrentIndexChanged: {
-        if (isAndroid || currentIndex < 0)
-            return
-        var i
-        for (i = currentIndex; i < count; ++i)
-            if (itemAt(i) instanceof MenuItem && itemAt(i).enabled) {
-                currentIndex = i
-                return
-            }
-        for (i = currentIndex - 1; i >= 0; --i)
-            if (itemAt(i) instanceof MenuItem && itemAt(i).enabled) {
-                currentIndex = i
-                return
-            }
-        currentIndex = -1
-    }
     Component.onCompleted: {
         // Sanity checks for shortcuts
         if (! isDebug || ! isDesktop)
