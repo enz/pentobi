@@ -244,10 +244,10 @@ int main(int argc, char *argv[])
 #ifdef VERSION
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif
-    QGuiApplication app(argc, argv);
 #ifndef PENTOBI_OPEN_HELP_EXTERNALLY
     QtWebView::initialize();
 #endif
+    QGuiApplication app(argc, argv);
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
     qmlRegisterType<AndroidUtils>("pentobi", 1, 0, "AndroidUtils");
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
