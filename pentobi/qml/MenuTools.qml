@@ -41,10 +41,9 @@ Pentobi.Menu {
         text: addShortcut(qsTr("Clear Analysis"),
                           //: Keyboard shortcut for menu item Clear Analysis. Leave empty for no shortcut.
                           qsTr("E"))
-        onTriggered:
-            Qt.callLater(function() { // QTBUG-69682
-                analyzeGameModel.clear()
-                gameView.deleteAnalysis()
-            })
+        onTriggered: {
+            analyzeGameModel.clear()
+            gameView.deleteAnalysis()
+        }
     }
 }

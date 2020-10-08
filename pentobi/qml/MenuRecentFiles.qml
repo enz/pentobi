@@ -90,8 +90,9 @@ Pentobi.Menu {
         text: addShortcut(qsTr("Clear List"),
                           //: Keyboard shortcut for menu item Recent Files/Clear List. Leave empty for no shortcut.
                           qsTr("C"))
-        onTriggered: Qt.callLater(function() { // QTBUG-69682
-            gameModel.clearRecentFiles()
-        })
+        // clearRecentFiles() must be called after menu is closed because it
+        // modifies the menu and otherwise the menu stays visible (tested with
+        // Qt 5.15.1)
+        onTriggered: Qt.callLater(function() { gameModel.clearRecentFiles() })
     }
 }

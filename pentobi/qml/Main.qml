@@ -225,7 +225,7 @@ ApplicationWindow {
         shortcut: "Ctrl+M"
         text: qsTr("Main Variation")
         enabled: ! isRated && ! gameModel.isMainVar
-        onTriggered: Qt.callLater(function() { gameModel.backToMainVar() }) // QTBUG-69682
+        onTriggered: gameModel.backToMainVar()
     }
     Action {
         id: actionBackward
@@ -289,7 +289,7 @@ ApplicationWindow {
         shortcut: "Ctrl+B"
         text: qsTr("Beginning of Branch")
         enabled: ! isRated && gameModel.hasEarlierVar
-        onTriggered: Qt.callLater(function() { gameModel.gotoBeginningOfBranch() }) // QTBUG-69682
+        onTriggered: gameModel.gotoBeginningOfBranch()
     }
     Action {
         id: actionComment
@@ -382,7 +382,7 @@ ApplicationWindow {
                  || gameModel.file !== "" || isRated || gameModel.canGoBackward
                  || gameModel.canGoForward
                  || analyzeGameModel.elements.length !== 0
-        onTriggered: Qt.callLater(function() { Logic.newGame() }) // QTBUG-69682
+        onTriggered: Logic.newGame()
     }
     Action {
         id: actionNewRated
@@ -447,15 +447,14 @@ ApplicationWindow {
                   || delayedCheckComputerMove.running
                   || analyzeGameModel.isRunning)
                  && ! isRated
-        onTriggered:
-            Qt.callLater(function() { Logic.cancelRunning(true) }) // QTBUG-69682
+        onTriggered: Logic.cancelRunning(true)
     }
     Action {
         id: actionUndo
 
         text: qsTr("Undo Move")
         enabled: gameModel.canUndo && ! gameView.setupMode && ! isRated
-        onTriggered: Qt.callLater(function() { Logic.undo() }) // QTBUG-69682
+        onTriggered: Logic.undo()
     }
     Instantiator {
         model: [ "1", "2", "A", "C", "E", "F", "G", "H", "I", "J", "L",
