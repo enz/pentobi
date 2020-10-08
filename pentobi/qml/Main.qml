@@ -90,10 +90,10 @@ ApplicationWindow {
 
         Connections {
             target: gameViewLoader.item
-            // This creates a runtime deprecations warning with Qt 5.15.
-            // Convert to new Connections syntax once we increase our minimum
-            // Qt version requirements.
-            onPlay: Logic.play(pieceModel, gameCoord)
+
+            function onPlay(pieceModel, gameCoord) {
+                Logic.play(pieceModel, gameCoord)
+            }
         }
     }
     MouseArea {
@@ -212,12 +212,11 @@ ApplicationWindow {
     Connections {
         target: Qt.application
         enabled: isAndroid
-        // This creates a runtime deprecations warning with Qt 5.15.
-        // Convert to new Connections syntax once we increase our minimum
-        // Qt version requirements.
-        onStateChanged:
+
+        function onStateChanged() {
             if (Qt.application.state === Qt.ApplicationSuspended)
                 Logic.autoSaveNoVerify()
+        }
     }
 
     Action {
