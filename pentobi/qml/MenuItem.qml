@@ -43,18 +43,6 @@ MenuItem {
     // Explicitly set hoverEnabled to true, otherwise hover highlighting and
     // submenu opening doesn't work in KDE on Ubuntu 18.10 (bug in Qt?)
     hoverEnabled: true
-    Keys.onPressed:
-        // Workaround for QTBUG-70181 (disabled items take part in arrow key
-        // navigation). Only handle Up key, the Down key case is already
-        // handled in Pentobi.Menu.onCurrentIndexChanged
-        if (event.key === Qt.Key_Up && menu) {
-            for (var i = menu.currentIndex - 1; i >= 0; --i)
-                if (menu.itemAt(i) instanceof MenuItem && menu.itemAt(i).enabled) {
-                    menu.currentIndex = i
-                    break
-                }
-            event.accepted = true
-        }
     background: Rectangle {
         color: {
             if (! root.highlighted)
