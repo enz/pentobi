@@ -10,6 +10,7 @@ Version 18.x (master)
 Version 18.1.x (v18-fixes)
 --------------------------
 
+* Fixed truncated submenu width in desktop version with Qt 5.15.
 * Updated bugtracker link in documentation.
 
 Version 18.1 (25 Jun 2020)

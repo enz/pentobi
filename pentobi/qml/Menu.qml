@@ -12,16 +12,7 @@ import "." as Pentobi
 Menu {
     function addShortcut(text, shortcut) { return PentobiControls.addShortcut(text, shortcut) }
 
-    property bool dynamicWidth: isDesktop
-
-    width: {
-        if (! dynamicWidth)
-            return Math.min(font.pixelSize * 18, rootWindow.contentItem.width)
-        var maxWidth = 0
-        for (var i = 0; i < count; ++i)
-            maxWidth = Math.max(maxWidth, itemAt(i).implicitWidth)
-        return Math.min(maxWidth, rootWindow.contentItem.width)
-    }
+    width: Math.min(font.pixelSize * 18, rootWindow.contentItem.width)
     cascade: isDesktop
     closePolicy: isDesktop ?
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
