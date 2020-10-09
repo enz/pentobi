@@ -22,7 +22,7 @@ Pentobi.Menu {
         text: addShortcut(qsTr("Report Bug"),
                           //: Keyboard shortcut for menu item Report Bug. Leave empty for no shortcut.
                           qsTr("B"))
-        onTriggered: Qt.openUrlExternally("https://sourceforge.net/p/pentobi/bugs/")
+        onTriggered: Qt.openUrlExternally("https://github.com/enz/pentobi/issues")
     }
     Action {
         text: addShortcut(qsTr("About Pentobi"),
