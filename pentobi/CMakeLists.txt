@@ -53,6 +53,7 @@ else()
     add_executable(pentobi WIN32
         ${pentobi_shared_src}
         resources_desktop.qrc)
+    install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})
 endif()
 
 file(GLOB qml_SRC "qml/*.qml" "qml/*.js" "qml/i18n/*.ts" "qml/themes/*/*.qml")
@@ -87,8 +88,6 @@ else()
     endif()
     target_compile_definitions(pentobi PRIVATE PENTOBI_OPEN_HELP_EXTERNALLY)
 endif()
-
-install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 add_subdirectory(docbook)
 if(UNIX AND NOT ANDROID)
