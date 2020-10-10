@@ -1,13 +1,18 @@
 Pentobi Release Notes
 =====================
 
-Version 18.x (master)
+Version 18.X (master)
 ---------------------
 
 * The minimum required Qt version is now 5.15.
 * Migrated build system for Android app from qmake to CMake.
 
-Version 18.1.x (v18-fixes)
+Version 18.2.X (v18-fixes)
+--------------------------
+
+*
+
+Version 18.2 (10 Oct 2020)
 --------------------------
 
 * Fixed truncated submenu in desktop version with Qt 5.15.
