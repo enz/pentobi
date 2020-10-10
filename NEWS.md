@@ -1,7 +1,7 @@
 Pentobi Release Notes
 =====================
 
-Version 18.1.x (v18-fixes)
+Version 18.2 (10 Oct 2020)
 --------------------------
 
 * Fixed truncated submenu in desktop version with Qt 5.15.
