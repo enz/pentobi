@@ -16,7 +16,9 @@
     but get/set methods for getting and setting values at defined times. It
     also provides a sync() method, which is necessary to ensure that pending
     changes are written in case the application in killed on Android soon after
-    having been suspended (see QTBUG-70291). */
+    having been suspended (see QTBUG-70291). Note that Settings.sync()
+    introduced in Qt 5.13 does not seem to guarantee that changes are saved
+    if the process is killed shortly afterwards (last tested with Qt 5.15.1) */
 class SyncSettings
     : public QObject
 {
