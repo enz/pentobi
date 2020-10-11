@@ -1,9 +1,5 @@
 <?xml version="1.0"?>
-<<<<<<< HEAD
 <manifest package="net.sf.pentobi" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="18.x" android:versionCode="18999000" android:installLocation="auto">
-=======
-<manifest package="net.sf.pentobi" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="18.2.X" android:versionCode="18002000" android:installLocation="auto">
->>>>>>> v18-fixes
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <!-- The following comment will be replaced upon deployment with default features based on the dependencies of the application.
