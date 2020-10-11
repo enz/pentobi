@@ -84,7 +84,7 @@ Pentobi.Menu {
         onTriggered: Logic.openRecentFile(gameModel.recentFiles[8])
     }
 
-    Pentobi.MenuSeparator { }
+    MenuSeparator { }
     Action {
         //: Menu item for clearing the recent files list
         text: addShortcut(qsTr("Clear List"),

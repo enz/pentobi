@@ -26,7 +26,7 @@ Pentobi.Menu {
                           qsTr("C"))
         onTriggered: Logic.clearRating()
     }
-    Pentobi.MenuSeparator { }
+    MenuSeparator { }
     Action {
         enabled: ! isRated && (gameModel.canGoBackward || gameModel.canGoForward)
         // Text needs to end with ellipsis on desktop because it opens a

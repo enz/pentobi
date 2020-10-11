@@ -4,6 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQuick.Controls 2.3
 import "." as Pentobi
 
 Pentobi.Menu {
@@ -29,7 +30,7 @@ Pentobi.Menu {
                           //: Keyboard shortcut for menu item Beginning Of Branch. Leave empty for no shortcut.
                           qsTr("B"))
     }
-    Pentobi.MenuSeparator { }
+    MenuSeparator { }
     Pentobi.MenuItem {
         action: actionNextComment
         text: addShortcut(action.text,

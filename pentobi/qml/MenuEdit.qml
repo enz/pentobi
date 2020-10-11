@@ -4,6 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQuick.Controls 2.3
 import "Main.js" as Logic
 import "." as Pentobi
 
@@ -23,7 +24,7 @@ Pentobi.Menu {
             moveAnnotationDialog.open()
         }
     }
-    Pentobi.MenuSeparator { }
+    MenuSeparator { }
     Pentobi.MenuItem {
         text: addShortcut(qsTr("Make Main Variation"),
                           //: Keyboard shortcut for menu item Make Main Variation. Leave empty for no shortcut.
@@ -57,7 +58,7 @@ Pentobi.Menu {
         enabled: gameModel.hasVariations && ! isRated
         onTriggered: Logic.deleteAllVar()
     }
-    Pentobi.MenuSeparator { }
+    MenuSeparator { }
     Pentobi.MenuItem {
         text: addShortcut(qsTr("Truncate"),
                           //: Keyboard shortcut for menu item Truncate. Leave empty for no shortcut.
@@ -86,7 +87,7 @@ Pentobi.Menu {
         enabled: gameModel.canGoBackward && gameModel.canGoForward && ! isRated
         onTriggered: Logic.keepOnlySubtree()
     }
-    Pentobi.MenuSeparator { }
+    MenuSeparator { }
     Pentobi.MenuItem {
         text: addShortcut(qsTr("Setup Mode"),
                           //: Keyboard shortcut for menu item Setup Mode. Leave empty for no shortcut.

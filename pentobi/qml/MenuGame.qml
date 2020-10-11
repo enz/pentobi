@@ -25,7 +25,7 @@ Pentobi.Menu {
                           //: Keyboard shortcut for menu item Rated Game. Leave empty for no shortcut.
                           qsTr("R"))
     }
-    Pentobi.MenuSeparator { }
+    MenuSeparator { }
     Action {
         text: addShortcut(qsTr("Game Variant…"),
                           //: Keyboard shortcut for menu item Game Variant. Leave empty for no shortcut.
@@ -38,7 +38,7 @@ Pentobi.Menu {
                           //: Keyboard shortcut for menu item Game Info. Leave empty for no shortcut.
                           qsTr("I"))
     }
-    Pentobi.MenuSeparator { }
+    MenuSeparator { }
     Pentobi.MenuItem {
         action: actionUndo
         text: addShortcut(actionUndo.text,
@@ -51,7 +51,7 @@ Pentobi.Menu {
                           //: Keyboard shortcut for menu item Find Move. Leave empty for no shortcut.
                           qsTr("F"))
     }
-    Pentobi.MenuSeparator { }
+    MenuSeparator { }
     Pentobi.MenuItem {
         action: actionOpen
         text: addShortcut(action.text,
@@ -79,7 +79,7 @@ Pentobi.Menu {
                           qsTr("A"))
     }
     MenuExport { }
-    Pentobi.MenuSeparator { }
+    MenuSeparator { }
     Pentobi.MenuItem {
         action: actionQuit
         text: addShortcut(action.text,
