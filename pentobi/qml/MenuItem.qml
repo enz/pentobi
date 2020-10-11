@@ -27,13 +27,6 @@ MenuItem {
                     return menu.itemAt(i).indicator.width
         return 0
     }
-    property real _anyItemArrowWidth: {
-        if (menu)
-            for (var i = 0; i < menu.count; ++i)
-                if (menu.menuAt(i))
-                    return menu.itemAt(i).arrow.width
-        return 0
-    }
 
     implicitHeight:
         Math.round(font.pixelSize * (isDesktop ? 1.9 : 2.2)
@@ -95,8 +88,7 @@ MenuItem {
             opacity: 0.6
             verticalAlignment: Text.AlignVCenter
             Layout.fillHeight: true
-            Layout.rightMargin: _anyItemArrowWidth > 0 ? _anyItemArrowWidth
-                                                       : 0.1 * font.pixelSize
+            Layout.rightMargin: 0.1 * font.pixelSize
         }
     }
 }
