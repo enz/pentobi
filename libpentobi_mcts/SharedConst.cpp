@@ -165,8 +165,6 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
             set_piece_considered(bc, "I5", is_piece_considered);
             set_piece_considered(bc, "L5", is_piece_considered);
         }
-        else if (nu_moves < 2 * nu_colors)
-            filter_min_size(bc, 5, is_piece_considered);
         else if (nu_moves < 3 * nu_colors)
             filter_min_size(bc, 5, is_piece_considered);
         else if (nu_moves < 5 * nu_colors)

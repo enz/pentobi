@@ -336,9 +336,7 @@ void get_transforms(Variant variant,
     case BoardType::gembloq_2:
     case BoardType::gembloq_3:
     case BoardType::nexos:
-        break;
     case BoardType::trigon_3:
-        // Can we use the same as for BoardType::trigon?
         break;
     }
 }
