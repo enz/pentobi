@@ -4,7 +4,8 @@ Pentobi Release Notes
 Version 18.2.X (v18-fixes)
 --------------------------
 
-*
+* Back key does not exit Android app anymore because it does not work
+  well with gesture navigation on newer Android versions.
 
 Version 18.2 (10 Oct 2020)
 --------------------------
