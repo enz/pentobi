@@ -471,8 +471,6 @@ ApplicationWindow {
         onActivated: {
             if (visibility === Window.FullScreen)
                 visibility = Window.AutomaticVisibility
-            else
-                close()
         }
     }
     Shortcut {
