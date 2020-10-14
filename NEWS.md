@@ -4,7 +4,6 @@ Pentobi Release Notes
 Version 18.2.X (v18-fixes)
 --------------------------
 
-* Enabled support for landscape orientation on Android.
 * Added workaround for white single-pixel line visible on some
   Android devices when leaving fullscreen mode (QTBUG-55600).
 * Back key does not exit Android app anymore because it does not work
