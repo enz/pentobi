@@ -53,15 +53,39 @@ ToolButton {
     }
     focusPolicy: Qt.NoFocus
     flat: true
-    background: Rectangle {
-        radius: 0.05 * width
-        color: down ? theme.colorButtonPressed :
-                      _effectiveHovered ? theme.colorButtonHovered
-                                        : "transparent"
-        border.color: down || _effectiveHovered ? theme.colorButtonBorder
+    background: Item {
+        id: backgroundItem
+
+        function startClickedAnimation() { pressedAnimation.restart() }
+
+        Rectangle {
+            id: pressedBackground
+
+            anchors.fill: parent
+            radius: 0.05 * width
+            color: theme.colorButtonPressed
+            opacity: down ? 1 : 0
+        }
+        Rectangle {
+            anchors.fill: parent
+            radius: 0.05 * width
+            color: _effectiveHovered  && ! down ? theme.colorButtonHovered
                                                 : "transparent"
+            border.color: _effectiveHovered ? theme.colorButtonBorder
+                                            : "transparent"
+        }
+        NumberAnimation {
+            id: pressedAnimation
+
+            target: pressedBackground
+            property: "opacity"
+            from: 1; to: 0
+            duration: isAndroid ? 300 : 0
+            easing.type: Easing.InQuad
+        }
     }
     onPressed: _inhibitToolTip = true
+    onClicked: backgroundItem.startClickedAnimation()
 
     MouseArea {
         id: toolTipArea
