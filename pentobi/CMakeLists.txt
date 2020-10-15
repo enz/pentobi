@@ -56,9 +56,6 @@ else()
     install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})
 endif()
 
-file(GLOB qml_SRC "qml/*.qml" "qml/*.js" "qml/i18n/*.ts" "qml/themes/*/*.qml")
-target_sources(pentobi PRIVATE ${qml_SRC})
-
 target_compile_definitions(pentobi PRIVATE
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
