@@ -13,7 +13,7 @@ Light.Theme {
                                "#696267", "#5a5458", "#797276" ]
 
     property color colorBackground: "#131313"
-    property color colorButtonPressed: Qt.lighter(colorBackground, 4)
+    property color colorButtonPressed: Qt.lighter(colorBackground, 7)
     property color colorButtonHovered: Qt.lighter(colorBackground, 2)
     property color colorButtonBorder: Qt.lighter(colorBackground, 5)
     property color colorCommentBase: "#1e2028"
