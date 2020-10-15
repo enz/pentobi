@@ -1,19 +1,20 @@
 Pentobi Release Notes
 =====================
 
-Version 18.X (master)
+Version 18.x (master)
 ---------------------
 
 * The minimum required Qt version is now 5.15.
 * Migrated build system for Android app from qmake to CMake.
 
-Version 18.2.X (v18-fixes)
+Version 18.2.x (v18-fixes)
 --------------------------
 
-* Added workaround for white single-pixel line visible on some
-  Android devices when leaving fullscreen mode (QTBUG-55600).
 * Back key does not exit Android app anymore because it does not work
   well with gesture navigation on newer Android versions.
+* Better visual feedback of button presses on newer Android devices.
+* Added workaround for white single-pixel line visible on some
+  Android devices when leaving fullscreen mode (QTBUG-55600).
 
 Version 18.2 (10 Oct 2020)
 --------------------------
