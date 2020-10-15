@@ -271,3 +271,8 @@ OTHER_FILES += android/AndroidManifest.xml
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 #ANDROID_ABIS=armeabi-v7a
+
+contains(ANDROID_TARGET_ARCH,) {
+    ANDROID_ABIS = \
+        armeabi-v7a
+}
