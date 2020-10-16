@@ -255,7 +255,7 @@ Item {
             id: menuButton
 
             icon.source: theme.getImage(isDesktop ? "menu-desktop" : "menu")
-            down: pressed || (isDesktop && menu.item && menu.item.opened)
+            down: isDesktop && (pressed || (menu.item && menu.item.opened))
             onClicked: {
                 if (! menu.item)
                     menu.sourceComponent = menuComponent
