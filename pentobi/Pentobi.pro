@@ -1,7 +1,9 @@
 #############################################################################
 # The preferred way of building Pentobi is using CMake. This project file
 # exists only because building, deploying and debugging for Android is not
-# yet functional for CMake projects in QtCreator.
+# yet functional for CMake projects with Qt <5.15. Note that this project
+# does not work with multi-ABI builds, select only a single ABI in the qmake
+# build settings (last tested with Qt 5.15.1, QtCreator 4.13.2).
 #############################################################################
 
 lessThan(QT_MAJOR_VERSION, 5) {
@@ -270,9 +272,5 @@ QMAKE_EXTRA_COMPILERS += gen_help
 OTHER_FILES += android/AndroidManifest.xml
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-#ANDROID_ABIS=armeabi-v7a
 
-contains(ANDROID_TARGET_ARCH,) {
-    ANDROID_ABIS = \
-        armeabi-v7a
-}
+ANDROID_ABIS = armeabi-v7a
