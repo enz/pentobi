@@ -103,9 +103,10 @@ Item {
             action: actionPlay
             visible: showContent && (isDesktop || enabled)
             autoRepeat: true
-            autoRepeatInterval:
-                rootWindow.gameView.item ?
-                    rootWindow.gameView.item.animationDuration : 200
+            // Use fast autorepeat to avoid flickering of
+            // Pentobi.Button.pressedAnimation, presses while computer is
+            // thinking are ignored anyway.
+            autoRepeatInterval: 50
             toolTipText: {
                 var toPlay = gameModel.toPlay
                 if (gameModel.gameVariant === "classic_3" && toPlay === 3)
