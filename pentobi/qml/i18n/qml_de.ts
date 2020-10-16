@@ -888,6 +888,10 @@
         <source>Pentobi failed to generate a move.</source>
         <translation>Pentobi konnte keinen Zug generieren.</translation>
     </message>
+    <message>
+        <source>Press back again to exit</source>
+        <translation>Zum Beenden noch einmal Zurück drücken</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
