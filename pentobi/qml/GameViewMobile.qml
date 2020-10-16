@@ -237,7 +237,7 @@ Item
         Timer {
             id: messageTimer
 
-            interval: 2000
+            interval: 2500
             onTriggered: message.opacity = 0
         }
     }
