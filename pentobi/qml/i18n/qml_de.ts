@@ -890,7 +890,7 @@
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation>Zum Beenden noch einmal Zurück drücken</translation>
+        <translation>Zum Beenden erneut Zurück drücken</translation>
     </message>
 </context>
 <context>
