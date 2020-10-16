@@ -212,7 +212,7 @@ ApplicationWindow {
     Timer {
         id: pressBackTwice
 
-        interval: 2000
+        interval: 2500
     }
     Connections {
         target: Qt.application
