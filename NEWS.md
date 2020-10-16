@@ -6,6 +6,8 @@ Version 18.x (master)
 
 * The minimum required Qt version is now 5.15.
 * Migrated build system for Android app from qmake to CMake.
+* Remaining pieces on Android are now always shown in order to play
+  even in the four-color/two-player game variants.
 
 Version 18.2.x (v18-fixes)
 --------------------------

@@ -59,10 +59,8 @@ Flickable {
         onPiecePicked: root.piecePicked(piece)
     }
 
-    // States order the piece lists such that the color to play is on top. If a
-    // player plays two colors, their second color follows, such that at least
-    // at the end of the game all of their remaining pieces should be in the
-    // visible area. Otherwise the colors are in order of play.
+    // States order the piece lists such that the color to play is on top and
+    // the colors are in order of play.
     states: [
         State {
             name: "toPlay0"
@@ -74,21 +72,11 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList1
-                y: {
-                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList0.height + pieceList2.height
-                                + 2.5 * rowSpacing
-                    return pieceList0.height + 1.5 * rowSpacing
-                }
+                y: pieceList0.height + 1.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList2
-                y: {
-                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList0.height + 1.5 * rowSpacing
-                    return pieceList0.height + pieceList1.height
-                            + 2.5 * rowSpacing
-                }
+                y: pieceList0.height + pieceList1.height + 2.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList3
@@ -106,21 +94,11 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList2
-                y: {
-                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList1.height + pieceList3.height
-                                + 2.5 * rowSpacing
-                    return pieceList1.height + 1.5 * rowSpacing
-                }
+                y: pieceList1.height + 1.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList3
-                y: {
-                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList1.height + 1.5 * rowSpacing
-                    return pieceList1.height + pieceList2.height
-                            + 2.5 * rowSpacing
-                }
+                y: pieceList1.height + pieceList2.height + 2.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList0
@@ -145,18 +123,11 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList3
-                y: {
-                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList2.height + pieceList0.height
-                                + 2.5 * rowSpacing
-                    return pieceList2.height + 1.5 * rowSpacing
-                }
+                y: pieceList2.height + 1.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList0
                 y: {
-                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList2.height + 1.5 * rowSpacing
                     if (gameModel.nuColors === 3)
                         return pieceList2.height + pieceList3.height
                                 + 2.5 * rowSpacing
@@ -185,21 +156,11 @@ Flickable {
             }
             PropertyChanges {
                 target: pieceList0
-                y: {
-                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList3.height + pieceList1.height
-                                + 2.5 * rowSpacing
-                    return pieceList3.height + 1.5 * rowSpacing
-                }
+                y: pieceList3.height + 1.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList1
-                y: {
-                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
-                        return pieceList3.height + 1.5 * rowSpacing
-                    return pieceList3.height + pieceList0.height
-                            + 2.5 * rowSpacing
-                }
+                y: pieceList3.height + pieceList0.height + 2.5 * rowSpacing
             }
             PropertyChanges {
                 target: pieceList2
