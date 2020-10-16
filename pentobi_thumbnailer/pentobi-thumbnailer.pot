@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-03-09 10:33+0100\n"
+"POT-Creation-Date: 2020-10-16 07:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 
 #. (itstool) path: refsection/para
 #: pentobi-thumbnailer-manpage.docbook.in:60
-msgid "The input file is a game file in Pentobi's SGF format as documented in Pentobi-SGF.md in the Pentobi source package. The output file is a thumbnail image. The wanted file format of the image is"
+msgid "The input file is a game file in Pentobi's SGF format as documented in Pentobi-SGF.md in the Pentobi source package. The output file is a thumbnail image in PNG format."
 msgstr ""
 
 #. (itstool) path: refsection/title
