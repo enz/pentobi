@@ -17,7 +17,6 @@ Item {
     property bool showContent: true
 
     function clickMenuButton() {
-        menuButton.checked = true
         menuButton.onClicked()
         menu.item.currentIndex = 0
     }
