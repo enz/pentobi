@@ -209,6 +209,11 @@ ApplicationWindow {
             isRunning = false
         }
     }
+    Timer {
+        id: pressBackTwice
+
+        interval: 2000
+    }
     Connections {
         target: Qt.application
         enabled: isAndroid
@@ -471,6 +476,12 @@ ApplicationWindow {
         onActivated: {
             if (visibility === Window.FullScreen)
                 visibility = Window.AutomaticVisibility
+            else if (pressBackTwice.running)
+                close()
+            else {
+                Logic.showTemporaryMessage(qsTr("Press back again to exit"))
+                pressBackTwice.start()
+            }
         }
     }
     Shortcut {
