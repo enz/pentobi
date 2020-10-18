@@ -1,20 +1,25 @@
-# Pentobi Unix Files.
-# This file is distributed under the same license as the pentobi package.
-# Copyright (C) 2019 Markus Enzenberger <enz@users.sourceforge.net>, 2019.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Markus Enzenberger <markus.enzenberger@gmail.com>, 2019
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-09 10:33+0100\n"
-"PO-Revision-Date: 2019-03-09 10:34+0100\n"
-"Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>\n"
-"Language-Team: \n"
-"Language: de\n"
+"PO-Revision-Date: 2019-02-25 15:36+0000\n"
+"Last-Translator: Markus Enzenberger <markus.enzenberger@gmail.com>, 2019\n"
+"Language-Team: German (https://www.transifex.com/markus-enzenberger/teams/89074/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -40,15 +45,15 @@ msgstr "Computer-Gegner für das Brettspiel Blokus"
 #. (itstool) path: refsynopsisdiv/cmdsynopsis
 #: pentobi-manpage.docbook.in:23
 msgid ""
-"<_:command-1/> <arg><_:option-2/> <replaceable>n</replaceable></arg> <arg><_:"
-"option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/></arg> <arg><_:"
-"option-6/> <replaceable>n</replaceable></arg> <arg><_:option-7/> "
+"<_:command-1/> <arg><_:option-2/> <replaceable>n</replaceable></arg> "
+"<arg><_:option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/></arg> "
+"<arg><_:option-6/> <replaceable>n</replaceable></arg> <arg><_:option-7/> "
 "<replaceable>n</replaceable></arg> <arg><_:option-8/></arg> "
 "<arg><replaceable>file.blksgf</replaceable></arg>"
 msgstr ""
-"<_:command-1/> <arg><_:option-2/> <replaceable>n</replaceable></arg> <arg><_:"
-"option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/></arg> <arg><_:"
-"option-6/> <replaceable>n</replaceable></arg> <arg><_:option-7/> "
+"<_:command-1/> <arg><_:option-2/> <replaceable>n</replaceable></arg> "
+"<arg><_:option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/></arg> "
+"<arg><_:option-6/> <replaceable>n</replaceable></arg> <arg><_:option-7/> "
 "<replaceable>n</replaceable></arg> <arg><_:option-8/></arg> "
 "<arg><replaceable>Datei.blksgf</replaceable></arg>"
 
@@ -75,7 +80,8 @@ msgid ""
 msgstr ""
 "Der Befehl kann den Namen einer Spieldatei als optionales Argument haben, "
 "die beim Start geöffnet werden soll. Die Spieldatei muss im Pentobi-SGF-"
-"Format sein, wie beschrieben in Pentobi-SGF.md im Quelltextpaket von Pentobi."
+"Format sein, wie beschrieben in Pentobi-SGF.md im Quelltextpaket von "
+"Pentobi."
 
 #. (itstool) path: refsection/title
 #: pentobi-manpage.docbook.in:65
@@ -101,8 +107,8 @@ msgid ""
 "that have low memory or are too slow to use the highest levels. By default, "
 "Pentobi currently allocates up to 2 GB (but not more than a quarter of the "
 "physical memory available on the system). Reducing the maximum level to 8 "
-"currently reduces this amount by a factor of 3 to 4 and lower maximum levels "
-"even more."
+"currently reduces this amount by a factor of 3 to 4 and lower maximum levels"
+" even more."
 msgstr ""
 "Setzen der maximalen Spielstufe. Wird dieser Wert verkleinert, verringert "
 "sich der Speicherbedarf der Suche, was nützlich sein kann, um Pentobi auf "
@@ -125,8 +131,8 @@ msgstr ""
 "Ein Fensterlayout benutzen, das für Smartphones optimiert ist und einige "
 "Änderungen der Benutzerpberfläche vornehmen, die annehmen, dass ein "
 "Touchscreen als primäres Eingabegerät verwendet wird. Das Benutzen dieser "
-"Option ändert auch den voreingestellen Style für Benutzeroberflächenelemente "
-"von QQuickControls 2 nach Default, wenn der Style nicht explizit mit der "
+"Option ändert auch den voreingestellen Style für Benutzeroberflächenelemente"
+" von QQuickControls 2 nach Default, wenn der Style nicht explizit mit der "
 "Option <_:option-1/> gesetzt wird."
 
 #. (itstool) path: listitem/para
@@ -138,12 +144,12 @@ msgstr "Keine Eröffnungsbibliotheken benutzen."
 #: pentobi-manpage.docbook.in:114
 msgid ""
 "Do not delay fast computer moves. By default, the computer player adds a "
-"small delay if the move generation took less than a second to make it easier "
-"for the human to follow the game if the computer plays several moves in a "
+"small delay if the move generation took less than a second to make it easier"
+" for the human to follow the game if the computer plays several moves in a "
 "row."
 msgstr ""
-"Computer-Züge nicht verzögern. Voreingestellt ist, dass der Computer-Spieler "
-"Züge ein wenig verzögert, die schneller als innerhalb einer Sekunde "
+"Computer-Züge nicht verzögern. Voreingestellt ist, dass der Computer-Spieler"
+" Züge ein wenig verzögert, die schneller als innerhalb einer Sekunde "
 "generiert werden, um es dem Benutzer leichter zu machen, dem Spiel zu "
 "folgen, wenn der Computer mehrere Züge nacheinander generiert."
 
@@ -151,8 +157,8 @@ msgstr ""
 #: pentobi-manpage.docbook.in:125
 msgid ""
 "Set the seed for the random generator. Using a fixed seed makes the move "
-"generation deterministic if no multi-threading is used (see option <_:"
-"option-1/>)."
+"generation deterministic if no multi-threading is used (see option "
+"<_:option-1/>)."
 msgstr ""
 "Setzt die Seed für den Zufallszahlengenerator. Eine feste Seed macht die "
 "Zuggenerierung deterministisch, falls kein Multi-Threading verwendet wird  "
@@ -163,8 +169,8 @@ msgstr ""
 msgid ""
 "The number of threads to use in the search. By default, up to 8 threads are "
 "used in the search depending on the number of hardware threads supported by "
-"the current system. Using more threads will speed up the move generation but "
-"using a very high number of threads (e.g. more than 8) can degrade the "
+"the current system. Using more threads will speed up the move generation but"
+" using a very high number of threads (e.g. more than 8) can degrade the "
 "playing strength in higher playing levels."
 msgstr ""
 "Die Anzahl der Threads, die bei der Suche verwendet werden. Voreingestellt "
@@ -222,10 +228,8 @@ msgstr "<_:option-1/> <replaceable>s</replaceable>"
 
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:182
-msgid ""
-"Set the style for the GUI elements of QQuickControls."
-msgstr ""
-"Setzen des Style für Benutzeroberflächenelemente von QtQuickControls."
+msgid "Set the style for the GUI elements of QQuickControls."
+msgstr "Setzen des Style für Benutzeroberflächenelemente von QtQuickControls."
 
 #. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:193
@@ -244,8 +248,8 @@ msgstr "Computer-Gegner für das Brettspiel Blokus"
 #: io.sourceforge.pentobi.appdata.xml.in:9
 msgid ""
 "Pentobi is a computer opponent for the board game Blokus. It has a strong "
-"Blokus engine with different playing levels. The supported game variants are "
-"Classic, Duo, Trigon, Junior, Nexos, Callisto and GembloQ."
+"Blokus engine with different playing levels. The supported game variants are"
+" Classic, Duo, Trigon, Junior, Nexos, Callisto and GembloQ."
 msgstr ""
 "Pentobi ist ein Computer-Gegner für das Brettspiel Blokus. Es hat eine "
 "spielstarke Blokus-Engine mit verschiedenen Spielstufen. Die unterstützten "
@@ -311,9 +315,11 @@ msgstr "Computer-Gegner für Blokus"
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
 #: io.sourceforge.pentobi.desktop.in:7
 msgid ""
-"Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo Q;GembloQ"
+"Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo "
+"Q;GembloQ"
 msgstr ""
-"Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo Q;GembloQ"
+"Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo "
+"Q;GembloQ"
 
 #. TRANSLATORS: icon name in desktop entry, probably no need to change this
 #: io.sourceforge.pentobi.desktop.in:10
@@ -323,26 +329,3 @@ msgstr "pentobi"
 #: pentobi-mime.xml.in:4
 msgid "Blokus game"
 msgstr "Blokus-Partie"
-
-#~ msgid ""
-#~ "<_:command-1/> <group> <arg><_:option-2/> <replaceable>n</replaceable></"
-#~ "arg> <arg><_:option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/"
-#~ "></arg> <arg><_:option-6/> <replaceable>n</replaceable></arg> <arg><_:"
-#~ "option-7/> <replaceable>n</replaceable></arg> <arg><_:option-8/></arg> </"
-#~ "group> <arg><replaceable>file.blksgf</replaceable></arg>"
-#~ msgstr ""
-#~ "<_:command-1/> <group> <arg><_:option-2/> <replaceable>n</replaceable></"
-#~ "arg> <arg><_:option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/"
-#~ "></arg> <arg><_:option-6/> <replaceable>n</replaceable></arg> <arg><_:"
-#~ "option-7/> <replaceable>n</replaceable></arg> <arg><_:option-8/></arg> </"
-#~ "group> <arg><replaceable>Datei.blksgf</replaceable></arg>"
-
-#~ msgid "Pentobi @PENTOBI_VERSION@"
-#~ msgstr "Pentobi @PENTOBI_VERSION@"
-
-#~ msgid ""
-#~ "<personname> <firstname>Markus</firstname> <surname>Enzenberger</surname> "
-#~ "</personname>"
-#~ msgstr ""
-#~ "<personname> <firstname>Markus</firstname> <surname>Enzenberger</surname> "
-#~ "</personname>"
