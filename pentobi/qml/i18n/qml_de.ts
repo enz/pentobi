@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1284,10 +1282,6 @@
         <translation>L</translation>
     </message>
     <message>
-        <source>Analyze Game</source>
-        <translation type="vanished">Spiel analysieren</translation>
-    </message>
-    <message>
         <source>A</source>
         <extracomment>Keyboard shortcut for menu item Analyze Game. Leave empty for no shortcut.</extracomment>
         <translation>A</translation>
@@ -1508,45 +1502,6 @@
     <message>
         <source>Recent development:</source>
         <translation>Aktuelle Entwicklung:</translation>
-    </message>
-    <message>
-        <source>Game</source>
-        <translation type="vanished">Spiel</translation>
-    </message>
-    <message>
-        <source>Result</source>
-        <translation type="vanished">Ergebnis</translation>
-    </message>
-    <message>
-        <source>Win</source>
-        <extracomment>Result of rated game is a win</extracomment>
-        <translation type="vanished">Gewinn</translation>
-    </message>
-    <message>
-        <source>Loss</source>
-        <extracomment>Result of rated game is a loss</extracomment>
-        <translation type="vanished">Verlust</translation>
-    </message>
-    <message>
-        <source>Tie</source>
-        <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
-        <translation type="vanished">Unentsch.</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <translation type="vanished">Stufe</translation>
-    </message>
-    <message>
-        <source>Your Color</source>
-        <translation type="vanished">Ihre Farbe</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="vanished">Datum</translation>
-    </message>
-    <message>
-        <source>Open Game %1</source>
-        <translation type="vanished">Spiel %1 öffnen</translation>
     </message>
 </context>
 <context>

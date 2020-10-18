@@ -1,10 +1,11 @@
+# 
 # Translators:
 # Francisco Zamorano <pacozamo@gmail.com>, 2019
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-03-09 10:33+0100\n"
+"POT-Creation-Date: 2020-10-16 07:22+0200\n"
 "PO-Revision-Date: 2019-02-25 15:38+0000\n"
 "Last-Translator: Francisco Zamorano <pacozamo@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/markus-enzenberger/teams/89074/es/)\n"
@@ -74,12 +75,8 @@ msgstr ""
 msgid ""
 "The input file is a game file in Pentobi's SGF format as documented in "
 "Pentobi-SGF.md in the Pentobi source package. The output file is a thumbnail"
-" image. The wanted file format of the image is"
+" image in PNG format."
 msgstr ""
-"El archivo de entrada es un archivo de partida en formato SGF de Pentobi tal"
-" y como se explica en Pentobi-SGF.md dentro del paquete de origen de "
-"Pentobi. El archivo de salida es una imagen en miniatura. El formato de "
-"archivo requerido para la imagen es"
 
 #. (itstool) path: refsection/title
 #: pentobi-thumbnailer-manpage.docbook.in:68
