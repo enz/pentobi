@@ -11,6 +11,7 @@ import "." as Pentobi
 Pentobi.Menu {
     title: qsTr("Open Recent")
     enabled: gameModel.recentFiles.length > 0
+    relativeWidth: 23
 
     function getText(recentFiles, index) {
         if (index >= recentFiles.length)

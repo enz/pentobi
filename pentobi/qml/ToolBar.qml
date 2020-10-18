@@ -282,16 +282,18 @@ Item {
                     id: menuComponent
 
                     Pentobi.Menu {
+                        relativeWidth: 11
+
                         closePolicy: Popup.CloseOnPressOutsideParent
                                      | Popup.CloseOnEscape
 
-                        MenuGame { }
-                        MenuGo { }
-                        MenuEdit { }
-                        MenuView { }
-                        MenuComputer { }
-                        MenuTools { }
-                        MenuHelp { }
+                        MenuGame { relativeWidth: 23 }
+                        MenuGo { relativeWidth: 19 }
+                        MenuEdit { relativeWidth: 21 }
+                        MenuView { relativeWidth: 18 }
+                        MenuComputer { relativeWidth: 19 }
+                        MenuTools { relativeWidth: 13 }
+                        MenuHelp { relativeWidth: 13 }
                     }
                 }
             }
