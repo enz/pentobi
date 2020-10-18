@@ -17,7 +17,6 @@ Item {
     property bool showContent: true
 
     function clickMenuButton() {
-        menuButton.checked = true
         menuButton.onClicked()
         menu.item.currentIndex = 0
     }
@@ -104,9 +103,10 @@ Item {
             action: actionPlay
             visible: showContent && (isDesktop || enabled)
             autoRepeat: true
-            autoRepeatInterval:
-                rootWindow.gameView.item ?
-                    rootWindow.gameView.item.animationDuration : 200
+            // Use fast autorepeat to avoid flickering of
+            // Pentobi.Button.pressedAnimation, presses while computer is
+            // thinking are ignored anyway.
+            autoRepeatInterval: 50
             toolTipText: {
                 var toPlay = gameModel.toPlay
                 if (gameModel.gameVariant === "classic_3" && toPlay === 3)
@@ -256,7 +256,7 @@ Item {
             id: menuButton
 
             icon.source: theme.getImage(isDesktop ? "menu-desktop" : "menu")
-            down: pressed || (isDesktop && menu.item && menu.item.opened)
+            down: isDesktop && (pressed || (menu.item && menu.item.opened))
             onClicked: {
                 if (! menu.item)
                     menu.sourceComponent = menuComponent

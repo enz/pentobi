@@ -1,19 +1,19 @@
-# Pentobi User Manual.
-# This file is distributed under the same license as the pentobi package.
-# Copyright (C) 2019 Markus Enzenberger <enz@users.sourceforge.net>, 2019.
+# 
+# Translators:
+# Markus Enzenberger <markus.enzenberger@gmail.com>, 2020
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2019-02-11 17:37+0100\n"
-"PO-Revision-Date: 2019-02-11 17:38+0100\n"
-"Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>\n"
-"Language-Team: \n"
-"Language: de\n"
+"PO-Revision-Date: 2019-02-25 15:30+0000\n"
+"Last-Translator: Markus Enzenberger <markus.enzenberger@gmail.com>, 2020\n"
+"Language-Team: German (https://www.transifex.com/markus-enzenberger/teams/89074/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 2.1.1\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. (itstool) path: book/title
 #: index.docbook:5
@@ -28,9 +28,9 @@ msgstr "Übersicht"
 #. (itstool) path: chapter/para
 #: index.docbook:9
 msgid ""
-"Pentobi is a computer opponent for the board game Blokus. In this game, four "
-"players place pieces similar to the pieces of the computer game Tetris on a "
-"20×20 board. Pentobi also supports the game variants for two or three "
+"Pentobi is a computer opponent for the board game Blokus. In this game, four"
+" players place pieces similar to the pieces of the computer game Tetris on a"
+" 20×20 board. Pentobi also supports the game variants for two or three "
 "players and the game variants Duo, Trigon, Junior, Nexos, GembloQ and "
 "Callisto."
 msgstr ""
@@ -53,8 +53,8 @@ msgid ""
 "like the polyominoes up to size five. A polyomino is a shape built from a "
 "number of squares connected along the edges."
 msgstr ""
-"Es gibt vier Spieler, Blau, Gelb, Rot und Grün, und ein Brett, das aus 20×20 "
-"Quadraten besteht. Jeder Spieler besitzt 21 Spielsteine seiner Farbe, die "
+"Es gibt vier Spieler, Blau, Gelb, Rot und Grün, und ein Brett, das aus 20×20"
+" Quadraten besteht. Jeder Spieler besitzt 21 Spielsteine seiner Farbe, die "
 "die Form von Polyominos bis zur Größe fünf haben. Ein Polyomino ist eine "
 "Figur, die aus einer Anzahl von Quadraten besteht, die entlang der Kanten "
 "verbunden sind."
@@ -67,12 +67,12 @@ msgstr "Die 21 Spielsteine"
 #. (itstool) path: chapter/para
 #: index.docbook:33
 msgid ""
-"The players alternate in placing one of their pieces on the board. The first "
-"piece of a player must cover its starting square. The starting squares are "
+"The players alternate in placing one of their pieces on the board. The first"
+" piece of a player must cover its starting square. The starting squares are "
 "located in the corners of the board."
 msgstr ""
-"Die Spieler setzen abwechselnd einen ihrer Spielsteine aufs Brett. Der erste "
-"Spielstein eines Spielers muss sein Startfeld abdecken. Die Startfelder "
+"Die Spieler setzen abwechselnd einen ihrer Spielsteine aufs Brett. Der erste"
+" Spielstein eines Spielers muss sein Startfeld abdecken. Die Startfelder "
 "befinden sich in den Ecken des Bretts."
 
 #. (itstool) path: caption/para
@@ -83,8 +83,8 @@ msgstr "Das 20×20-Brett mit den durch farbige Punkte markierten Startfeldern"
 #. (itstool) path: chapter/para
 #: index.docbook:50
 msgid ""
-"The following pieces must be placed on empty squares such that the new piece "
-"touches at least one piece of its own color corner-to-corner but does not "
+"The following pieces must be placed on empty squares such that the new piece"
+" touches at least one piece of its own color corner-to-corner but does not "
 "touch any piece of its own color along the edges. The new piece may touch "
 "edges of pieces of the opponent colors."
 msgstr ""
@@ -115,8 +115,8 @@ msgstr ""
 "Punktzahl. Die Punktzahl einer Farbe ist die Anzahl der Quadrate auf dem "
 "Brett, die von der Farbe besetzt sind, plus ein Bonus von 15 Punkten, wenn "
 "die Farbe alle ihre Spielsteine setzen konnte, plus ein zusätzlicher Bonus "
-"von 5 Punkten, wenn die Farbe alle Spielsteine setzen konnte und der zuletzt "
-"gespielte Spielstein der Spielstein war, der aus einem Quadrat besteht."
+"von 5 Punkten, wenn die Farbe alle Spielsteine setzen konnte und der zuletzt"
+" gespielte Spielstein der Spielstein war, der aus einem Quadrat besteht."
 
 #. (itstool) path: sect1/title
 #: index.docbook:74 index.docbook:178 index.docbook:268
@@ -143,8 +143,8 @@ msgstr "Regeln für drei Spieler"
 #: index.docbook:83
 msgid ""
 "The game can also be played with three players. The players take turns "
-"playing the fourth color (Green). At the end of the game, the score of Green "
-"is ignored."
+"playing the fourth color (Green). At the end of the game, the score of Green"
+" is ignored."
 msgstr ""
 "Das Spiel kann auch mit drei Spielern gespielt werden. Die Spieler wechseln "
 "sich beim Spielen der vierten Farbe (Grün) ab. Am Spielende wird die "
@@ -160,12 +160,12 @@ msgstr "Farblose Startfelder"
 msgid ""
 "Note that the original Blokus Classic rules used colorless starting points. "
 "This means that each color may freely choose, which of the remaining "
-"unoccupied starting points to use for its first move. Pentobi currently only "
-"supports the rule variant with colored starting points because this rule "
+"unoccupied starting points to use for its first move. Pentobi currently only"
+" supports the rule variant with colored starting points because this rule "
 "variant was used at the first Blokus online servers and Blokus tournaments."
 msgstr ""
-"Beachten Sie, dass die ursprünglichen klassischen Regeln für Blokus farblose "
-"Startfelder benutzen. Dies bedeutet, dass jede Farbe frei wählen darf, "
+"Beachten Sie, dass die ursprünglichen klassischen Regeln für Blokus farblose"
+" Startfelder benutzen. Dies bedeutet, dass jede Farbe frei wählen darf, "
 "welches der verbleibenden noch freien Startfelder sie für ihren ersten Zug "
 "benutzt. Pentobi unterstützt zur Zeit nur die Regelvariante mit farbigen "
 "Startfeldern, weil diese Variante auf den ersten Blokus-Online-Servern und "
@@ -188,8 +188,8 @@ msgstr ""
 "Die Spielvariante Duo ist eine andere Spielvariante für zwei Spieler. Das "
 "Spiel wird auf einem kleineren Brett mit 14×14 Quadraten gespielt. Es gibt "
 "eine Farbe pro Spieler (Lila und Orange) und die Startfelder befinden sich "
-"nicht in den Ecken, sondern auf dem Feld mit den Koordinaten (5,10) für Lila "
-"und auf (10,5) für Orange."
+"nicht in den Ecken, sondern auf dem Feld mit den Koordinaten (5,10) für Lila"
+" und auf (10,5) für Orange."
 
 #. (itstool) path: caption/para
 #: index.docbook:114
@@ -216,15 +216,15 @@ msgid ""
 "Trigon is another game variant. The rules a similar to game variant Classic "
 "but it uses a differently shaped board and a different set of pieces. Each "
 "color uses 22 pieces that are shaped like the polyiamonds up to size six. A "
-"polyiamond is a shape built from a number of equilateral triangles connected "
-"along the edges."
+"polyiamond is a shape built from a number of equilateral triangles connected"
+" along the edges."
 msgstr ""
 "Trigon ist eine weitere Spielvariante. Die Regeln sind ähnlich wie in der "
 "Spielvariante Klassisch, aber es werden ein anders geformtes Brett und "
-"andere Spielsteine verwendet. Jede Farbe benutzt 22 Spielsteine, die wie die "
-"Polyiamonds bis zur Größe sechs geformt sind. Ein Polyiamond ist eine Figur, "
-"die aus einer Anzahl von gleichseitigen Dreiecken besteht, die entlang der "
-"Kanten verbunden sind."
+"andere Spielsteine verwendet. Jede Farbe benutzt 22 Spielsteine, die wie die"
+" Polyiamonds bis zur Größe sechs geformt sind. Ein Polyiamond ist eine "
+"Figur, die aus einer Anzahl von gleichseitigen Dreiecken besteht, die "
+"entlang der Kanten verbunden sind."
 
 #. (itstool) path: caption/para
 #: index.docbook:145
@@ -254,8 +254,8 @@ msgid ""
 "color."
 msgstr ""
 "Es gibt sechs Startfelder auf dem Brett, jedes in der Mitte der vierten "
-"Reihe von jeder Kante aus gesehen. Die Startfelder sind nicht farbig und die "
-"Spieler dürfen das Startfeld für den ersten Spielstein einer Farbe frei "
+"Reihe von jeder Kante aus gesehen. Die Startfelder sind nicht farbig und die"
+" Spieler dürfen das Startfeld für den ersten Spielstein einer Farbe frei "
 "wählen."
 
 #. (itstool) path: caption/para
@@ -275,10 +275,10 @@ msgstr ""
 #. (itstool) path: sect1/para
 #: index.docbook:186
 msgid ""
-"Trigon can be played with three players using the same rules as for the four-"
-"player variant. The three-player variant is played on a smaller board with "
-"an edge size of eight triangles. The starting points are located in the "
-"middle of the third row away from each edge."
+"Trigon can be played with three players using the same rules as for the "
+"four-player variant. The three-player variant is played on a smaller board "
+"with an edge size of eight triangles. The starting points are located in the"
+" middle of the third row away from each edge."
 msgstr ""
 "Trigon kann mit drei Spielern gespielt werden, wobei dieselben Regeln wie "
 "für die Variante mit vier Spielern benutzt werden. Die Variante für drei "
@@ -299,8 +299,8 @@ msgid ""
 "polyominoes up to size five and the players get two of each of those "
 "polyominoes."
 msgstr ""
-"Junior ist eine vereinfachte Spielvariante für zwei Spieler. Es wird auf dem "
-"gleichen 14×14-Brett gespielt wie die Spielvariante Duo, benutzt aber nur "
+"Junior ist eine vereinfachte Spielvariante für zwei Spieler. Es wird auf dem"
+" gleichen 14×14-Brett gespielt wie die Spielvariante Duo, benutzt aber nur "
 "eine Teilmenge der Polyominos bis zur Größe fünf und die Spieler bekommen "
 "zwei von jedem dieser Polyominos."
 
@@ -342,8 +342,9 @@ msgid ""
 "lines close to a corner. The first piece must touch the starting "
 "intersection."
 msgstr ""
-"Jede Farbe hat einen Startkreuzungspunkt auf der Kreuzung der dritten Linien "
-"nahe einer Ecke. Der erste Spielstein muss den Startkreuzungspunkt berühren."
+"Jede Farbe hat einen Startkreuzungspunkt auf der Kreuzung der dritten Linien"
+" nahe einer Ecke. Der erste Spielstein muss den Startkreuzungspunkt "
+"berühren."
 
 #. (itstool) path: caption/para
 #: index.docbook:240
@@ -364,8 +365,8 @@ msgid ""
 "junctions of different pieces can cover the same intersection without "
 "overlapping, but straight junctions cannot."
 msgstr ""
-"Die folgenden Spielsteine müssen so auf leere Liniensegmente gesetzt werden, "
-"dass ein Segment des neuen Spielsteins einen Kreuzungspunkt berührt, den "
+"Die folgenden Spielsteine müssen so auf leere Liniensegmente gesetzt werden,"
+" dass ein Segment des neuen Spielsteins einen Kreuzungspunkt berührt, den "
 "bereits ein Segment derselben Farbe berührt. Es spielt keine Rolle, ob "
 "Spielsteine anderer Farbe denselben Kreuzungspunkt berühren oder bedecken. "
 "Allerdings dürfen sich Spielsteine nicht überlappen. Die Verbindungen "
@@ -407,9 +408,9 @@ msgid ""
 "addition to the full squares, the edges also contain half squares such that "
 "the edges are straight lines."
 msgstr ""
-"GembloQ ist ein Brettspiel ähnlich wie Blokus. Die quadratischen Spielfelder "
-"des Bretts sind um 45 Grad gedreht. Die Diagonale des Bretts hat eine Größe "
-"von 27 Quadraten. Zusätzlich zu den vollen Quadraten enthalten die Ränder "
+"GembloQ ist ein Brettspiel ähnlich wie Blokus. Die quadratischen Spielfelder"
+" des Bretts sind um 45 Grad gedreht. Die Diagonale des Bretts hat eine Größe"
+" von 27 Quadraten. Zusätzlich zu den vollen Quadraten enthalten die Ränder "
 "noch halbe Quadrate, so dass die Ränder gerade Linien sind."
 
 #. (itstool) path: chapter/para
@@ -424,7 +425,8 @@ msgstr ""
 
 #. (itstool) path: caption/para
 #: index.docbook:302
-msgid "The board for GembloQ with the starting points marked with colored dots"
+msgid ""
+"The board for GembloQ with the starting points marked with colored dots"
 msgstr ""
 "Das Brett für GembloQ mit den durch farbige Punkte markierten Startfeldern"
 
@@ -432,15 +434,15 @@ msgstr ""
 #: index.docbook:308
 msgid ""
 "As in Blokus, the starting squares are in the corners, the first move must "
-"fully cover the starting square of the color and subsequent moves must touch "
-"a piece of the player color at a vertex, but not edge-to-edge. Moves are "
+"fully cover the starting square of the color and subsequent moves must touch"
+" a piece of the player color at a vertex, but not edge-to-edge. Moves are "
 "also legal, if a vertex of a half square touches an edge of a piece of the "
 "same color."
 msgstr ""
 "Wie in Blokus sind die Startfelder in den Ecken, der erste Zug muss das "
 "Startfeld der Farbe vollständig abdecken und folgende Züge müssen einen "
-"Spielstein der Farbe am Zug an einer Ecke berühren, jedoch noch entlang der "
-"Kanten. Züge sind auch legal, wenn eine Spitze eines halben Quadrats die "
+"Spielstein der Farbe am Zug an einer Ecke berühren, jedoch nicht entlang der"
+" Kanten. Züge sind auch legal, wenn eine Spitze eines halben Quadrats die "
 "Kante eines Spielsteins der selben Farbe berührt."
 
 #. (itstool) path: chapter/para
@@ -452,8 +454,8 @@ msgid ""
 "Pentobi."
 msgstr ""
 "Die Punktzahl am Spielende wird wie in Blokus ermittelt, wobei halbe "
-"Quadrate 0,5 Punkte zählen. Bonuspunkte werden nicht verwendet. Ein Auflösen "
-"von Unentschieden durch Zuweisen von zusätzlichen Werten zu den "
+"Quadrate 0,5 Punkte zählen. Bonuspunkte werden nicht verwendet. Ein Auflösen"
+" von Unentschieden durch Zuweisen von zusätzlichen Werten zu den "
 "Spielsteinen, wie in den offiziellen GembloQ-Regeln beschrieben, wird von "
 "Pentobi gegenwärtig nicht unterstützt."
 
@@ -465,8 +467,8 @@ msgstr "Regeln für zwei und drei Spieler"
 #. (itstool) path: sect1/para
 #: index.docbook:330
 msgid ""
-"The game variants for two and three players use smaller boards and different "
-"starting point locations. In addition to the standard two-player variant, "
+"The game variants for two and three players use smaller boards and different"
+" starting point locations. In addition to the standard two-player variant, "
 "Pentobi also supports a game variant for two players like in Blokus, in "
 "which each player plays two colors."
 msgstr ""
@@ -490,11 +492,11 @@ msgid ""
 "play a special role."
 msgstr ""
 "Callisto ist ein weiteres Brettspiel ähnlich wie Blokus. Das Spielbrett ist "
-"vom klassischen 20×20-Blokus-Spielbrett abgeleitet, indem die Ecken entfernt "
-"werden, sodass ein Achteck verbleibt mit einer oberen Kantenlänge von sechs. "
-"Die Spielsteine sind eine Untermenge der Polyominos bis zur Größe fünf. Sie "
-"beinhalten drei 1×1-Spielsteine pro Spieler, die eine besondere Rolle "
-"spielen."
+"vom klassischen 20×20-Blokus-Spielbrett abgeleitet, indem die Ecken entfernt"
+" werden, sodass ein Achteck verbleibt mit einer oberen Kantenlänge von "
+"sechs. Die Spielsteine sind eine Untermenge der Polyominos bis zur Größe "
+"fünf. Sie beinhalten drei 1×1-Spielsteine pro Spieler, die eine besondere "
+"Rolle spielen."
 
 #. (itstool) path: chapter/para
 #: index.docbook:356
@@ -532,28 +534,28 @@ msgid ""
 "color not counting 1×1 pieces. Bonus points are not used. Unlike in Blokus, "
 "ties are broken in favor of the player who started later."
 msgstr ""
-"Die Punktzahl einer Farbe ist die Anzahl der Quadrate auf dem Brett, die von "
-"der Farbe bedeckt sind, wobei die 1×1-Spielsteine nicht gezählt werden. "
+"Die Punktzahl einer Farbe ist die Anzahl der Quadrate auf dem Brett, die von"
+" der Farbe bedeckt sind, wobei die 1×1-Spielsteine nicht gezählt werden. "
 "Bonuspunkte werden nicht verwendet. Anders als in Blokus werden "
 "Unentschieden zugunsten des Spielers aufgelöst, der später begonnen hat."
 
 #. (itstool) path: sect1/para
 #: index.docbook:393
 msgid ""
-"The game can be played with less than four players by using a smaller board. "
-"For three players, the board is an octagon with width 20 and top edge size "
+"The game can be played with less than four players by using a smaller board."
+" For three players, the board is an octagon with width 20 and top edge size "
 "two. For two players, the board is an octagon with width 17 and top edge "
-"size two. The size of the center stays the same. In addition to the standard "
-"two-player variant, Pentobi also supports a game variant for two players "
+"size two. The size of the center stays the same. In addition to the standard"
+" two-player variant, Pentobi also supports a game variant for two players "
 "like in Blokus, in which each player plays two colors."
 msgstr ""
 "Das Spiel kann mit weniger als vier Spielern gespielt werden, indem ein "
 "kleineres Spielbrett verwendet wird. Für drei Spieler ist das Brett ein "
 "Achteck mit Breite 20 und obererer Kantenlänge zwei. Für zwei Spieler ist "
-"das Brett ein Achteck mit Breite 16 und obererer Kantenlänge zwei. Die Größe "
-"des Zentrums bleibt gleich. Zusätzlich zur Standardvariante für zwei Spieler "
-"unterstützt Pentobi auch eine Spielvariante für zwei Spieler wie in Blokus, "
-"in der jeder Spieler zwei Farben spielt."
+"das Brett ein Achteck mit Breite 16 und obererer Kantenlänge zwei. Die Größe"
+" des Zentrums bleibt gleich. Zusätzlich zur Standardvariante für zwei "
+"Spieler unterstützt Pentobi auch eine Spielvariante für zwei Spieler wie in "
+"Blokus, in der jeder Spieler zwei Farben spielt."
 
 #. (itstool) path: chapter/title
 #: index.docbook:405
@@ -568,17 +570,17 @@ msgstr "Spielbrett"
 #. (itstool) path: sect1/para
 #: index.docbook:408
 msgid ""
-"Pieces can be selected by clicking on one of the unplayed pieces or by using "
-"<link linkend=\"shortcuts\">shortcut keys</link>. Pieces can be played by "
+"Pieces can be selected by clicking on one of the unplayed pieces or by using"
+" <link linkend=\"shortcuts\">shortcut keys</link>. Pieces can be played by "
 "dragging them to a place that corresponds to a legal move with the mouse or "
 "arrow keys and pressing the left mouse button or the Enter key."
 msgstr ""
 "Spielsteine können durch Klicken auf einen ungespielten Spielstein "
-"ausgewählt werden oder durch Benutzen von <link linkend=\"shortcuts"
-"\">Tastenkürzeln</link>. Spielsteine können gespielt werden, indem sie mit "
-"der Maus oder den Pfeiltasten an eine Position gebracht werden, die einem "
-"legalen Zug entspricht, und dann die linke Maustaste oder die Eingabetaste "
-"gedrückt wird."
+"ausgewählt werden oder durch Benutzen von <link "
+"linkend=\"shortcuts\">Tastenkürzeln</link>. Spielsteine können gespielt "
+"werden, indem sie mit der Maus oder den Pfeiltasten an eine Position "
+"gebracht werden, die einem legalen Zug entspricht, und dann die linke "
+"Maustaste oder die Eingabetaste gedrückt wird."
 
 #. (itstool) path: sect1/para
 #: index.docbook:414
@@ -601,8 +603,8 @@ msgid ""
 "small star indicates that the points include a bonus."
 msgstr ""
 "Die Punkteanzeige zeigt die gegenwärtigen Punkte für jede Farbe oder jeden "
-"Spieler an. Die Punkte sind die Summe aus den Punkten auf dem Spielbrett und "
-"den Bonuspunkten. Punkte sind unterstrichen, wenn sie endgültig sind, weil "
+"Spieler an. Die Punkte sind die Summe aus den Punkten auf dem Spielbrett und"
+" den Bonuspunkten. Punkte sind unterstrichen, wenn sie endgültig sind, weil "
 "die Farbe keine Spielsteine mehr spielen kann. Eine kleiner Stern zeigt an, "
 "dass die Punkte einen Bonus beinhalten."
 
@@ -614,8 +616,8 @@ msgstr "Gegen den Computer spielen"
 #. (itstool) path: sect1/para
 #: index.docbook:428
 msgid ""
-"The board can be used for creating game records of games played by humans or "
-"for playing games against the computer. In games against the computer, the "
+"The board can be used for creating game records of games played by humans or"
+" for playing games against the computer. In games against the computer, the "
 "computer can play any (or several) of the colors."
 msgstr ""
 "Das Spielbrett kann benutzt werden, um Partien einzugeben, die von Menschen "
@@ -631,8 +633,8 @@ msgid ""
 "menu or toolbar and select the colors the computer should play."
 msgstr ""
 "Wenn Sie ein neues Spiel beginnen, ist voreingestellt, dass der Mensch die "
-"Farbe(n) des ersten Spielers spielt und der Computer alle anderen Farben. Um "
-"dies zu ändern, benutzen Sie <guimenuitem>Einstellungen</guimenuitem> aus "
+"Farbe(n) des ersten Spielers spielt und der Computer alle anderen Farben. Um"
+" dies zu ändern, benutzen Sie <guimenuitem>Einstellungen</guimenuitem> aus "
 "dem Menü <guimenu>Computer</guimenu> oder der Werkzeugleiste und wählen Sie "
 "die Farben, die der Computer spielen soll."
 
@@ -641,30 +643,30 @@ msgstr ""
 msgid ""
 "The exception is that the computer will play no color by default if it "
 "played no color in the previous game. This prevents the computer from "
-"automatically starting to play if the user mainly wants to use the board for "
-"entering move sequences or similar editing tasks. After loading a saved "
+"automatically starting to play if the user mainly wants to use the board for"
+" entering move sequences or similar editing tasks. After loading a saved "
 "game, the computer also plays no color by default."
 msgstr ""
 "Die Ausnahme ist, dass es voreingestellt ist, dass der Computer keine Farbe "
 "spielt, wenn er im letzten Spiel keine Farbe gespielt hat. Damit wird "
 "vermieden, dass der Computer unbeabsichtigt automatisch zu spielen beginnt, "
-"wenn der Benutzer das Spielbrett hauptsächlich zum Eingeben von Zugsequenzen "
-"oder für ähnliche Aufgaben benutzen will. Nach dem Laden eines Spiels ist "
+"wenn der Benutzer das Spielbrett hauptsächlich zum Eingeben von Zugsequenzen"
+" oder für ähnliche Aufgaben benutzen will. Nach dem Laden eines Spiels ist "
 "ebenfalls voreingestellt, dass der Computer keine Farbe spielt."
 
 #. (itstool) path: sect1/para
 #: index.docbook:446
 msgid ""
-"Selecting <guimenuitem>Play</guimenuitem> from the <guimenu>Computer</"
-"guimenu> menu or the toolbar always makes the computer play a move for the "
-"current color. If the computer did not already play this color before, it "
-"will also make the computer play this color (and only this color) from now "
-"on."
+"Selecting <guimenuitem>Play</guimenuitem> from the "
+"<guimenu>Computer</guimenu> menu or the toolbar always makes the computer "
+"play a move for the current color. If the computer did not already play this"
+" color before, it will also make the computer play this color (and only this"
+" color) from now on."
 msgstr ""
 "Die Auswahl von <guimenuitem>Spielen</guimenuitem> aus dem Menü "
-"<guimenu>Computer</guimenu> oder der Werkzeugleiste lässt den Computer immer "
-"einen Zug für die gegenwärtige Farbe spielen. Wenn der Computer diese Farbe "
-"bisher nicht gespielt hat, wird er außerdem im weiteren Spielverlauf diese "
+"<guimenu>Computer</guimenu> oder der Werkzeugleiste lässt den Computer immer"
+" einen Zug für die gegenwärtige Farbe spielen. Wenn der Computer diese Farbe"
+" bisher nicht gespielt hat, wird er außerdem im weiteren Spielverlauf diese "
 "Farbe (und nur diese Farbe) spielen."
 
 #. (itstool) path: sect1/title
@@ -690,10 +692,10 @@ msgstr ""
 "anders zu spielen. Wenn Sie das tun, wird die neue Zugfolgen als eine "
 "alternative Zugfolge (genannt Variante) gespeichert. Varianten können auch "
 "von Kommentatoren benutzt werden, um Kommentierungen zu existierenden "
-"Spielen hinzuzufügen. Varianten können in jeder Brettstellung existieren und "
-"ihrerseits Untervarianten besitzen. Das Spiel kann daher zu einem Spielbaum "
-"werden, in dem jeder Knoten eine Brettstellung repräsentiert. Sie können im "
-"Spielbaum mit den Menüpunkten des Menüs <guimenu>Gehe zu</guimenu> und den "
+"Spielen hinzuzufügen. Varianten können in jeder Brettstellung existieren und"
+" ihrerseits Untervarianten besitzen. Das Spiel kann daher zu einem Spielbaum"
+" werden, in dem jeder Knoten eine Brettstellung repräsentiert. Sie können im"
+" Spielbaum mit den Menüpunkten des Menüs <guimenu>Gehe zu</guimenu> und den "
 "Navigations-Buttons navigieren."
 
 #. (itstool) path: sect1/para
@@ -710,8 +712,8 @@ msgstr ""
 "immer den ersten Kindknoten in jeder Brettstellung wählt (z. B. indem Sie "
 "den Vorwärts-Button drücken). Die Hauptvariante sollte das wirklich "
 "gespielte Spiel darstellen. Wenn Sie eine Nebenvariante zur Hauptvariante "
-"machen wollen, wählen Sie <guimenuitem>Zu Hauptvariante machen</guimenuitem> "
-"aus dem Menü <guimenu>Bearbeiten</guimenu>."
+"machen wollen, wählen Sie <guimenuitem>Zu Hauptvariante machen</guimenuitem>"
+" aus dem Menü <guimenu>Bearbeiten</guimenu>."
 
 #. (itstool) path: chapter/title
 #: index.docbook:478
@@ -740,11 +742,11 @@ msgid ""
 "evaluate each position in the main variation. The result is displayed in a "
 "window with a diagram of colored dots."
 msgstr ""
-"Sie können ein Spiel analysieren, indem Sie <guimenuitem>Spiel analysieren</"
-"guimenuitem> aus dem Menü <guimenu>Extras</guimenu> wählen. Dies lässt den "
-"Computer eine Bewertung jeder Brettstellung der Hauptvariante ausführen. Das "
-"Ergebnis wird in einem Fenster mit einem Diagramm farbiger Punkte "
-"dargestellt."
+"Sie können ein Spiel analysieren, indem Sie <guimenuitem>Spiel "
+"analysieren</guimenuitem> aus dem Menü <guimenu>Extras</guimenu> wählen. "
+"Dies lässt den Computer eine Bewertung jeder Brettstellung der Hauptvariante"
+" ausführen. Das Ergebnis wird in einem Fenster mit einem Diagramm farbiger "
+"Punkte dargestellt."
 
 #. (itstool) path: caption/para
 #: index.docbook:496
@@ -759,18 +761,18 @@ msgid ""
 "represents the estimated probability of winning the game for the color to "
 "play. Mouse clicks in the diagram will go to the corresponding position."
 msgstr ""
-"Jeder Punkt repräsentiert eine Spielstellung, in der die Farbe des Punkts am "
-"Zug war. Die Punkte sind horizontal nach Zugnummer angeordnet. Die vertikale "
-"Achse repräsentiert die Wahrscheinlichkeit, dass die Farbe das Spiel "
-"gewinnt. Mausklicks im Diagramm gehen zur jeweiligen Stellung."
+"Jeder Punkt repräsentiert eine Spielstellung, in der die Farbe des Punkts am"
+" Zug war. Die Punkte sind horizontal nach Zugnummer angeordnet. Die "
+"vertikale Achse repräsentiert die Wahrscheinlichkeit, dass die Farbe das "
+"Spiel gewinnt. Mausklicks im Diagramm gehen zur jeweiligen Stellung."
 
 #. (itstool) path: sect1/para
 #: index.docbook:506
 msgid ""
 "The position values are only estimates and the computer will sometimes "
 "evaluate positions incorrectly. But sudden drops in the value can help you "
-"find moves that were potentially bad. You can go back to the position before "
-"the move and try to find a better move or ask the computer what it would "
+"find moves that were potentially bad. You can go back to the position before"
+" the move and try to find a better move or ask the computer what it would "
 "have played by selecting <guimenuitem>Play Single Move</guimenuitem> from "
 "the <guimenu>Computer</guimenu> menu."
 msgstr ""
@@ -790,12 +792,12 @@ msgstr "Ihre Wertung ermitteln"
 #. (itstool) path: sect1/para
 #: index.docbook:517
 msgid ""
-"You can track your progress by playing rated games against the computer. The "
-"game results are used to determine your current rating. The rating is a "
+"You can track your progress by playing rated games against the computer. The"
+" game results are used to determine your current rating. The rating is a "
 "number that represents your playing strength."
 msgstr ""
-"Sie können Ihre Fortschritte verfolgen, indem Sie gewertete Spiele gegen den "
-"Computer spielen. Die Spielergebnisse werden benutzt, um Ihre gegenwärtige "
+"Sie können Ihre Fortschritte verfolgen, indem Sie gewertete Spiele gegen den"
+" Computer spielen. Die Spielergebnisse werden benutzt, um Ihre gegenwärtige "
 "Wertung zu ermitteln. Die Wertung ist eine Zahl, die Ihre Spielstärke "
 "darstellt."
 
@@ -804,9 +806,9 @@ msgstr ""
 msgid ""
 "A rated game is started with <guimenuitem>Rated Game</guimenuitem> from the "
 "<guimenu>Game</guimenu> menu or the toolbar. If you have not played any "
-"rated games in the current game variant, you will be asked to choose a start "
-"value, which can reduce the number of games needed for determining your real "
-"rating. If you are a beginner, leave the start value at 800."
+"rated games in the current game variant, you will be asked to choose a start"
+" value, which can reduce the number of games needed for determining your "
+"real rating. If you are a beginner, leave the start value at 800."
 msgstr ""
 "Ein gewertetes Spiel wird mit <guimenuitem>Gewertetes Spiel</guimenuitem> "
 "aus dem Menü <guimenu>Spiel</guimenu> oder der Werkzeugleiste gestartet. "
@@ -824,8 +826,8 @@ msgid ""
 "be randomly chosen in each game."
 msgstr ""
 "Für jedes gewertete Spiel wird der Computer eine Spielstufe für den "
-"Computerspieler gemäß Ihrer gegenwärtigen Wertung wählen. Die Farbe, die Sie "
-"spielen, wird in jedem Spiel zufällig ausgewählt."
+"Computerspieler gemäß Ihrer gegenwärtigen Wertung wählen. Die Farbe, die Sie"
+" spielen, wird in jedem Spiel zufällig ausgewählt."
 
 #. (itstool) path: sect1/para
 #: index.docbook:534
@@ -836,9 +838,9 @@ msgid ""
 "always play rated games until the end."
 msgstr ""
 "Während eines gewerteten Spiels sind die meisten Funktionen, die nicht zum "
-"Spielen benötigt werden, deaktiviert: Sie können nicht Züge zurücknehmen, im "
-"Spiel navigieren, die Computer-Farben ändern oder die Spielstufe ändern. Um "
-"eine akkurate Wertung zu erhalten, sollten Sie gewertete Spiele immer bis "
+"Spielen benötigt werden, deaktiviert: Sie können nicht Züge zurücknehmen, im"
+" Spiel navigieren, die Computer-Farben ändern oder die Spielstufe ändern. Um"
+" eine akkurate Wertung zu erhalten, sollten Sie gewertete Spiele immer bis "
 "zum Ende spielen."
 
 #. (itstool) path: sect1/para
@@ -862,18 +864,18 @@ msgstr "Fenster mit Wertungsgraph"
 #. (itstool) path: sect1/para
 #: index.docbook:556
 msgid ""
-"You can always see your current rating by selecting <guimenuitem>Rating</"
-"guimenuitem> from the <guimenu>Tools</guimenu> menu. This will open a window "
-"that shows the development of your rating during the last 50 games as a "
-"graph. The last 50 games are automatically saved and can be loaded by "
-"opening a context menu in the game table below the graph."
+"You can always see your current rating by selecting "
+"<guimenuitem>Rating</guimenuitem> from the <guimenu>Tools</guimenu> menu. "
+"This will open a window that shows the development of your rating during the"
+" last 50 games as a graph. The last 50 games are automatically saved and can"
+" be loaded by opening a context menu in the game table below the graph."
 msgstr ""
-"Sie können Ihre aktuelle Wertung jederzeit mit <guimenuitem>Wertung</"
-"guimenuitem> aus dem Menü <guimenu>Extras</guimenu> sehen. Dies öffnet ein "
-"Fenster, in dem die Entwicklung Ihrer Wertung während der letzten 50 Spiele "
-"als Graph gezeigt wird. Die letzten 50 Spiele werden automatisch gespeichert "
-"und können durch Öffnen eines Kontextmenüs in der Spieltabelle unter dem "
-"Graph geladen werden."
+"Sie können Ihre aktuelle Wertung jederzeit mit "
+"<guimenuitem>Wertung</guimenuitem> aus dem Menü <guimenu>Extras</guimenu> "
+"sehen. Dies öffnet ein Fenster, in dem die Entwicklung Ihrer Wertung während"
+" der letzten 50 Spiele als Graph gezeigt wird. Die letzten 50 Spiele werden "
+"automatisch gespeichert und können durch Öffnen eines Kontextmenüs in der "
+"Spieltabelle unter dem Graph geladen werden."
 
 #. (itstool) path: chapter/title
 #: index.docbook:567
@@ -936,8 +938,8 @@ msgid ""
 "several child nodes), the first variation will be used. The button supports "
 "autorepeat if pressed and held."
 msgstr ""
-"Geht einen Zug in der gegenwärtigen Variante vorwärts. Wenn die gegenwärtige "
-"Brettstellung mehrerer nachfolgende Varianten hat (d. h. der gegenwärtige "
+"Geht einen Zug in der gegenwärtigen Variante vorwärts. Wenn die gegenwärtige"
+" Brettstellung mehrerer nachfolgende Varianten hat (d. h. der gegenwärtige "
 "Knoten im Spielbaum mehrere Kindknoten hat), wird die erste Variante "
 "benutzt. Der Button unterstützt automatische Wiederholung, wenn er gedrückt "
 "gehalten wird."
@@ -969,13 +971,13 @@ msgstr "<guibutton>Ende</guibutton>"
 #. (itstool) path: listitem/para
 #: index.docbook:622
 msgid ""
-"Go to the end of the current variation. Like <guibutton>Forward</guibutton>, "
-"this also uses the first variation in positions with several follow-up "
+"Go to the end of the current variation. Like <guibutton>Forward</guibutton>,"
+" this also uses the first variation in positions with several follow-up "
 "variations."
 msgstr ""
-"Geht zum Ende der gegenwärtigen Variante. Wie bei <guibutton>Vorwärts</"
-"guibutton> wird auch hier jeweils die erste Variante benutzt, wenn die "
-"Brettstellung mehrere nachfolgende Varianten hat."
+"Geht zum Ende der gegenwärtigen Variante. Wie bei "
+"<guibutton>Vorwärts</guibutton> wird auch hier jeweils die erste Variante "
+"benutzt, wenn die Brettstellung mehrere nachfolgende Varianten hat."
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:630
@@ -985,8 +987,8 @@ msgstr "<guibutton>Nächste Variante</guibutton>"
 #. (itstool) path: listitem/para
 #: index.docbook:632
 msgid ""
-"Go to the next variation to the last move played (i.e. the next sibling node "
-"of the current node in the game tree)."
+"Go to the next variation to the last move played (i.e. the next sibling node"
+" of the current node in the game tree)."
 msgstr ""
 "Geht zur nächsten Variante zum zuletzt gespielten Zug (d. h. zum nächsten "
 "Geschwisterknoten des gegenwärtigen Knotens im Spielbaum)."
@@ -1030,8 +1032,8 @@ msgstr "<guimenuitem>Gewertetes Spiel</guimenuitem>"
 msgid ""
 "Start a new <link linkend=\"rating\">rated game</link> against the computer."
 msgstr ""
-"Beginnt ein neues <link linkend=\"rating\">gewertetes Spiel</link> gegen den "
-"Computer."
+"Beginnt ein neues <link linkend=\"rating\">gewertetes Spiel</link> gegen den"
+" Computer."
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:670
@@ -1069,8 +1071,9 @@ msgstr "<guimenuitem>Zug rückgängig</guimenuitem>"
 msgid ""
 "Undo the last move played and remove it from the game tree. Undoing a move "
 "is only possible if it is the last move in the current variation (i.e. a "
-"leaf node in the game tree; use <guimenu>Edit</guimenu>/"
-"<guimenuitem>Truncate</guimenuitem> to remove inner nodes of the game tree)."
+"leaf node in the game tree; use "
+"<guimenu>Edit</guimenu>/<guimenuitem>Truncate</guimenuitem> to remove inner "
+"nodes of the game tree)."
 msgstr ""
 "Nimmt den zuletzt gespielten Zug zurück und entfernt ihn aus dem Spielbaum. "
 "Das Zurücknehmen eines Zugs ist nur möglich, wenn er der letzte Zug der "
@@ -1102,8 +1105,8 @@ msgstr "<guimenuitem>Öffnen</guimenuitem>"
 #: index.docbook:708
 msgid ""
 "Load a saved game. The board position after loading will be the last "
-"position in the main variation unless the game starts with a setup position. "
-"If the game starts with a setup, the board position will be the first "
+"position in the main variation unless the game starts with a setup position."
+" If the game starts with a setup, the board position will be the first "
 "position instead. This avoids that solutions are immediately shown if the "
 "file contains a Blokus puzzle as a setup with the solution as the main "
 "variation."
@@ -1112,8 +1115,8 @@ msgstr ""
 "letzte Stellung in der Hauptvariante, sofern das Spiel nicht mit einer "
 "aufgebauten Brettstellung beginnt. Wenn das Spiel mit einer aufgebauten "
 "Brettstellung beginnt, ist die Stellung nach dem Laden stattdessen die "
-"Anfangsstellung. Dies vermeidet, dass Lösungen sofort angezeigt werden, wenn "
-"die Datei ein Blokus-Problem als aufgebaute Brettstellung enthält mit der "
+"Anfangsstellung. Dies vermeidet, dass Lösungen sofort angezeigt werden, wenn"
+" die Datei ein Blokus-Problem als aufgebaute Brettstellung enthält mit der "
 "Lösung in der Hauptvariante."
 
 #. (itstool) path: varlistentry/term
@@ -1169,9 +1172,10 @@ msgstr "<guimenu>Exportieren</guimenu>/<guimenuitem>Grafik</guimenuitem>"
 #: index.docbook:753
 msgid ""
 "Save the current position as an image file. Several image file formats are "
-"supported, the file format is derived from the file name ending (e.g. \".png"
-"\" for the PNG format). For a crisp image, the image width should be an "
-"integer multiple of the number of board columns in the current game variant."
+"supported, the file format is derived from the file name ending (e.g. "
+"\".png\" for the PNG format). For a crisp image, the image width should be "
+"an integer multiple of the number of board columns in the current game "
+"variant."
 msgstr ""
 "Speichert die gegenwärtige Brettstellung als eine Grafikdatei. Mehrere "
 "Grafikdateiformate werden unterstützt, das Dateiformat wird von der "
@@ -1278,8 +1282,8 @@ msgstr "<guimenuitem>Annotierung</guimenuitem>"
 #: index.docbook:827
 msgid ""
 "Add a chess-style annotation symbol (e.g. ‼) to the current move. The "
-"symbols are appended to the move numbers in the status bar and, depending on "
-"the configuration of <guilabel>Move Marking</guilabel>, on the board."
+"symbols are appended to the move numbers in the status bar and, depending on"
+" the configuration of <guilabel>Move Marking</guilabel>, on the board."
 msgstr ""
 "Fügt ein wie in der Schachnotation benutztes Symbol (z. B. ‼) zum "
 "gegenwärtigen Zug hinzu. Die Symbole werden an die Zugnummern in der "
@@ -1294,8 +1298,8 @@ msgstr "<guimenuitem>Zu Hauptvariante machen</guimenuitem>"
 #. (itstool) path: listitem/para
 #: index.docbook:837
 msgid ""
-"Make the current variation the main variation of the game. This reorders the "
-"nodes in the game tree such that the current variation becomes the main "
+"Make the current variation the main variation of the game. This reorders the"
+" nodes in the game tree such that the current variation becomes the main "
 "variation."
 msgstr ""
 "Macht die gegenwärtige Variante zur Hauptvariante des Spiels. Dies ordnet "
@@ -1311,12 +1315,12 @@ msgstr "<guimenuitem>Variante nach oben</guimenuitem>"
 #: index.docbook:847
 msgid ""
 "Changes the order of variations such that the current position will appear "
-"earlier when iterating over the variations with <guibutton>Next Variation</"
-"guibutton> /<guibutton>Previous Variation</guibutton>."
+"earlier when iterating over the variations with <guibutton>Next "
+"Variation</guibutton> /<guibutton>Previous Variation</guibutton>."
 msgstr ""
-"Ändert die Reihenfolge der Varianten so, dass die gegenwärtige Brettstellung "
-"beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> /"
-"<guibutton>Vorherige Variante</guibutton> früher erscheint."
+"Ändert die Reihenfolge der Varianten so, dass die gegenwärtige Brettstellung"
+" beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> "
+"/<guibutton>Vorherige Variante</guibutton> früher erscheint."
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:856
@@ -1327,12 +1331,12 @@ msgstr "<guimenuitem>Variante nach unten</guimenuitem>"
 #: index.docbook:858
 msgid ""
 "Changes the order of variations such that the current position will appear "
-"later when iterating over the variations with <guibutton>Next Variation</"
-"guibutton> /<guibutton>Previous Variation</guibutton>."
+"later when iterating over the variations with <guibutton>Next "
+"Variation</guibutton> /<guibutton>Previous Variation</guibutton>."
 msgstr ""
-"Ändert die Reihenfolge der Varianten so, dass die gegenwärtige Brettstellung "
-"beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> /"
-"<guibutton>Vorherige Variante</guibutton> später erscheint."
+"Ändert die Reihenfolge der Varianten so, dass die gegenwärtige Brettstellung"
+" beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> "
+"/<guibutton>Vorherige Variante</guibutton> später erscheint."
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:867
@@ -1342,8 +1346,8 @@ msgstr "<guimenuitem>Varianten löschen</guimenuitem>"
 #. (itstool) path: listitem/para
 #: index.docbook:869
 msgid ""
-"Delete all variations but the main variation. If the current position is not "
-"in the main variation, it will first be changed to a position as in "
+"Delete all variations but the main variation. If the current position is not"
+" in the main variation, it will first be changed to a position as in "
 "<guimenuitem>Back to Main Variation</guimenuitem>."
 msgstr ""
 "Löscht alle Varianten außer der Hauptvariante. Wenn sich die gegenwärtige "
@@ -1362,8 +1366,8 @@ msgid ""
 "Remove the node with the current position, including any subtree, from the "
 "game tree."
 msgstr ""
-"Entfernt den Knoten mit der gegenwärtigen Brettstellung zusammen mit dem auf "
-"ihn folgenden Teilbaum aus dem Spielbaum."
+"Entfernt den Knoten mit der gegenwärtigen Brettstellung zusammen mit dem auf"
+" ihn folgenden Teilbaum aus dem Spielbaum."
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:886
@@ -1376,8 +1380,8 @@ msgid ""
 "Remove all child nodes of the node with the current position from the game "
 "tree."
 msgstr ""
-"Entfernt alle Kindknoten des Knotens mit der gegenwärtigen Brettstellung aus "
-"dem Spielbaum."
+"Entfernt alle Kindknoten des Knotens mit der gegenwärtigen Brettstellung aus"
+" dem Spielbaum."
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:895
@@ -1421,8 +1425,8 @@ msgid ""
 "removed from the board by clicking on them. The currently selected color "
 "also determines the color to play after the setup is finished. It can be "
 "changed with <guimenuitem>Next Color</guimenuitem> or by clicking on the "
-"orientation selector while no piece is selected. Setup mode can only be used "
-"if no moves have been played yet."
+"orientation selector while no piece is selected. Setup mode can only be used"
+" if no moves have been played yet."
 msgstr ""
 "Aktiviert oder deaktiviert den Stellungsaufbau-Modus. Im Stellungsaufbau-"
 "Modus können Spielsteine überall auf dem Brett abgelegt werden, auch unter "
@@ -1430,8 +1434,8 @@ msgstr ""
 "vom Brett entfernt werden. Die gegenwärtig gewählte Farbe legt auch die "
 "Farbe fest, die nach Beenden des Stellungsaufbaus am Zug ist. Sie kann mit "
 "<guimenuitem>Nächste Farbe</guimenuitem> oder durch Klicken auf die "
-"Orientierungsauswahl während kein Spielstein ausgewählt ist geändert werden. "
-"Der Stellungsaufbau-Modus kann nur benutzt werden, wenn noch keine Züge "
+"Orientierungsauswahl während kein Spielstein ausgewählt ist geändert werden."
+" Der Stellungsaufbau-Modus kann nur benutzt werden, wenn noch keine Züge "
 "gespielt wurden."
 
 #. (itstool) path: varlistentry/term
@@ -1443,8 +1447,8 @@ msgstr "<guimenuitem>Nächste Farbe</guimenuitem>"
 #: index.docbook:929
 msgid ""
 "Choose the next color for selecting pieces. This can be used for example to "
-"enter game records, in which moves of a color were skipped because the color "
-"ran out of time."
+"enter game records, in which moves of a color were skipped because the color"
+" ran out of time."
 msgstr ""
 "Wählt die nächste Farbe zum Auswählen eines Spielsteins. Dies kann zum "
 "Beispiel benutzt werden, um Partien einzugeben, bei denen Züge einer Farbe "
@@ -1485,8 +1489,8 @@ msgstr "<guilabel>Varianten zeigen</guilabel>"
 #. (itstool) path: listitem/para
 #: index.docbook:958
 msgid ""
-"Appends a letter to the move number on the board if the move has variations. "
-"If moves are marked with dots instead of numbers, a circle will be used "
+"Appends a letter to the move number on the board if the move has variations."
+" If moves are marked with dots instead of numbers, a circle will be used "
 "instead of a dot for moves not in the main variation."
 msgstr ""
 "Fügt einen Buchstaben an die Zugnummer auf dem Spielbrett an, wenn der Zug "
@@ -1556,9 +1560,9 @@ msgstr "<guilabel>Kommentar zeigen</guilabel>"
 #. (itstool) path: listitem/para
 #: index.docbook:1003
 msgid ""
-"This option exists only in desktop mode and configures the visibility of the "
-"comment area when the position changes. By default, the comment area is only "
-"shown if a comment exists for the current position."
+"This option exists only in desktop mode and configures the visibility of the"
+" comment area when the position changes. By default, the comment area is "
+"only shown if a comment exists for the current position."
 msgstr ""
 "Diese Option existiert nur im Desktop-Modus und konfiguriert die "
 "Sichtbarkeit des Kommentarbereichs, wenn sich die Stellung ändert. Die "
@@ -1610,8 +1614,8 @@ msgid ""
 "long time for playing moves on slow computers."
 msgstr ""
 "Wählt aus, welche Farben vom Computer gespielt werden und die Spielstärke "
-"des Computers. Höhere Spielstufen sind stärker, können aber die Bedenkzeiten "
-"des Computers auf langsamen Computern sehr verlängern."
+"des Computers. Höhere Spielstufen sind stärker, können aber die Bedenkzeiten"
+" des Computers auf langsamen Computern sehr verlängern."
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1047
@@ -1622,15 +1626,15 @@ msgstr "<guimenuitem>Spielen</guimenuitem>"
 #: index.docbook:1049
 msgid ""
 "Make the computer play a move for the current color. This can be used to "
-"change the color the computer plays or to resume playing after navigating in "
-"the game tree. If the computer did not already play the current color, it "
+"change the color the computer plays or to resume playing after navigating in"
+" the game tree. If the computer did not already play the current color, it "
 "will play this color (and only this color) from now on."
 msgstr ""
 "Lässt den Computer einen Zug für die gegenwärtige Farbe spielen. Dies kann "
 "zum Ändern der Computer-Farbe benutzt werden oder um nach dem Navigieren im "
 "Spielbaum mit dem Spielen fortzufahren. Wenn der Computer die gegenwärtige "
-"Farbe nicht bereits spielte, wird er diese Farbe (und nur diese) im weiteren "
-"Spielverlauf spielen."
+"Farbe nicht bereits spielte, wird er diese Farbe (und nur diese) im weiteren"
+" Spielverlauf spielen."
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1058
@@ -1658,7 +1662,8 @@ msgid ""
 "play by selecting <guimenuitem>Play</guimenuitem>."
 msgstr ""
 "Bricht die gegenwärtige Zuggenerierung ab. Sie können den Computer "
-"weiterspielen lassen, indem Sie <guimenuitem>Spielen</guimenuitem> auswählen."
+"weiterspielen lassen, indem Sie <guimenuitem>Spielen</guimenuitem> "
+"auswählen."
 
 #. (itstool) path: sect1/title
 #: index.docbook:1078
@@ -1754,8 +1759,8 @@ msgstr ""
 "Zusätzlich zu den Tastenkürzeln, die im Fenstermenü gezeigt werden, werden "
 "die folgenden weiteren Tastenkürzel von Pentobi unterstützt. Beachten Sie, "
 "dass diese Tastenkürzel nicht aktiv sind, wenn das Kommentarfeld den Fokus "
-"besitzt. In diesem Fall kann der Fokus vom Kommentartext durch die Tabulator-"
-"Taste entfernt werden."
+"besitzt. In diesem Fall kann der Fokus vom Kommentartext durch die "
+"Tabulator-Taste entfernt werden."
 
 #. (itstool) path: varlistentry/term
 #: index.docbook:1148
@@ -1986,8 +1991,8 @@ msgstr ""
 "Einen Spielstein entsprechend den üblicherweise benutzten Spielsteinnamen "
 "auswählen. Wenn es mehrere Spielsteine mit dem Buchstaben gibt (z. B. I3, "
 "I4, I5), dann kann durch mehrmaliges Drücken der Taste zwischen ihnen "
-"gewechselt werden. Einige Buchstaben werden nur in bestimmten Spielvarianten "
-"benutzt. Zum Beispiel wird A nur in Trigon für die Spielsteine A6 und A4 "
+"gewechselt werden. Einige Buchstaben werden nur in bestimmten Spielvarianten"
+" benutzt. Zum Beispiel wird A nur in Trigon für die Spielsteine A6 und A4 "
 "benutzt (auch bekannt als „Hummer“ und „Dreieck“)."
 
 #. (itstool) path: varlistentry/term
@@ -2094,8 +2099,8 @@ msgstr ""
 #: index.docbook:1296
 msgid ""
 "Pentobi will also work on systems that do not meet the minimum requirements "
-"but the highest playing level will be very slow on those systems (if the CPU "
-"is too slow) or have a reduced playing strength (if there is not enough "
+"but the highest playing level will be very slow on those systems (if the CPU"
+" is too slow) or have a reduced playing strength (if there is not enough "
 "memory)."
 msgstr ""
 "Pentobi funktioniert auch auf Systemen, die das Systemminimum nicht "
@@ -2134,9 +2139,9 @@ msgid ""
 "FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for "
 "more details."
 msgstr ""
-"Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, dass es Ihnen "
-"von Nutzen sein wird, aber OHNE IRGENDEINE GARANTIE, insbesondere ohne eine "
-"implizite Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN "
+"Die Veröffentlichung dieses Programms erfolgt in der Hoffnung, dass es Ihnen"
+" von Nutzen sein wird, aber OHNE IRGENDEINE GARANTIE, insbesondere ohne eine"
+" implizite Garantie der MARKTREIFE oder der VERWENDBARKEIT FÜR EINEN "
 "BESTIMMTEN ZWECK. Nähere Angaben finden Sie in der GNU General Public "
 "License."
 
@@ -2155,316 +2160,3 @@ msgstr ""
 "Der Markenname Blokus und andere erwähnte Marken sind Eigentum ihrer "
 "jeweiligen Markeninhaber. Die Markeninhaber stehen in keiner Verbindung mit "
 "dem Autor des Programms Pentobi."
-
-#~ msgid "Beginning"
-#~ msgstr "Anfang"
-
-#~ msgid "Backward 10"
-#~ msgstr "Zurück 10"
-
-#~ msgid "Backward"
-#~ msgstr "Zurück"
-
-#~ msgid "Forward"
-#~ msgstr "Vorwärts"
-
-#~ msgid "Forward 10"
-#~ msgstr "Vorwärts 10"
-
-#~ msgid "Next Variation"
-#~ msgstr "Nächste Variante"
-
-#~ msgid "Previous Variation"
-#~ msgstr "Vorherige Variante"
-
-#~ msgid "Rated Game"
-#~ msgstr "Gewertetes Spiel"
-
-#~ msgid "Game Variant"
-#~ msgstr "Spielvariante"
-
-#~ msgid "Game Info"
-#~ msgstr "Spielinformation"
-
-#~ msgid "Undo Move"
-#~ msgstr "Zug rückgängig"
-
-#~ msgid "Find Move"
-#~ msgstr "Zug finden"
-
-#~ msgid "Open"
-#~ msgstr "Öffnen"
-
-#~ msgid "Open Recent"
-#~ msgstr "Zuletzt benutzt"
-
-#~ msgid "Open Clipboard"
-#~ msgstr "Zwischenablage öffnen"
-
-#~ msgid "Save"
-#~ msgstr "Speichern"
-
-#~ msgid "Save As"
-#~ msgstr "Speichern unter"
-
-#~ msgid "Quit"
-#~ msgstr "Beenden"
-
-#~ msgid "Move Number"
-#~ msgstr "Zugnummer"
-
-#~ msgid "Main Variation"
-#~ msgstr "Hauptvariante"
-
-#~ msgid "Beginning of Branch"
-#~ msgstr "Verzweigungsanfang"
-
-#~ msgid "Next Comment"
-#~ msgstr "Nächster Kommentar"
-
-#~ msgid "Annotation"
-#~ msgstr "Annotierung"
-
-#~ msgid "Make Main Variation"
-#~ msgstr "Zu Hauptvariante machen"
-
-#~ msgid "Variation Up"
-#~ msgstr "Variante nach oben"
-
-#~ msgid "Variation Down"
-#~ msgstr "Variante nach unten"
-
-#~ msgid "Delete Variations"
-#~ msgstr "Varianten löschen"
-
-#~ msgid "Truncate"
-#~ msgstr "Abschneiden"
-
-#~ msgid "Truncate Children"
-#~ msgstr "Kindknoten abschneiden"
-
-#~ msgid "Keep Position"
-#~ msgstr "Brettstellung behalten"
-
-#~ msgid "Keep Subtree"
-#~ msgstr "Teilbaum behalten"
-
-#~ msgid "Setup Mode"
-#~ msgstr "Stellungsaufbau"
-
-#~ msgid "Next Color"
-#~ msgstr "Nächste Farbe"
-
-#~ msgid "Appearance"
-#~ msgstr "Erscheinungsbild"
-
-#~ msgid "Coordinates"
-#~ msgstr "Koordinaten"
-
-#~ msgid "Show variations"
-#~ msgstr "Varianten zeigen"
-
-#~ msgid "Move number"
-#~ msgstr "Zugnummer"
-
-#~ msgid "Animations"
-#~ msgstr "Animationen"
-
-#~ msgid "Color theme"
-#~ msgstr "Farbthema"
-
-#~ msgid "Move marking"
-#~ msgstr "Zugmarkierung"
-
-#~ msgid "Show comment"
-#~ msgstr "Kommentar zeigen"
-
-#~ msgid "Comment"
-#~ msgstr "Kommentar"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Vollbild"
-
-#~ msgid "Settings"
-#~ msgstr "Einstellungen"
-
-#~ msgid "Play"
-#~ msgstr "Spielen"
-
-#~ msgid "Play Move"
-#~ msgstr "Zug spielen"
-
-#~ msgid "Stop"
-#~ msgstr "Stopp"
-
-#~ msgid "Rating"
-#~ msgstr "Wertung"
-
-#~ msgid "Clear Rating"
-#~ msgstr "Wertung löschen"
-
-#~ msgid "Analyze Game"
-#~ msgstr "Spiel analysieren"
-
-#~ msgid "Clear Analysis"
-#~ msgstr "Analyse löschen"
-
-#~ msgid "Pentobi Help"
-#~ msgstr "Pentobi-Hilfe"
-
-#~ msgid "About Pentobi"
-#~ msgstr "Über Pentobi"
-
-#~ msgid "Plus"
-#~ msgstr "Plus"
-
-#~ msgid "Minus"
-#~ msgstr "Minus"
-
-#~ msgid "Escape"
-#~ msgstr "Escape"
-
-#~ msgid "Left"
-#~ msgstr "Links"
-
-#~ msgid "Right"
-#~ msgstr "Rechts"
-
-#~ msgid "Down"
-#~ msgstr "Unten"
-
-#~ msgid "Shift+Left"
-#~ msgstr "Umschalt+Links"
-
-#~ msgid "Shift+Right"
-#~ msgstr "Umschalt+Rechts"
-
-#~ msgid "Shift+Up"
-#~ msgstr "Umschalt+Oben"
-
-#~ msgid "Shift+Down"
-#~ msgstr "Umschalt+Unten"
-
-#~ msgid "Space"
-#~ msgstr "Leertaste"
-
-#~ msgid "Shift+Space"
-#~ msgstr "Umschalt+Leertaste"
-
-#~ msgid "Enter"
-#~ msgstr "Enter"
-
-#~ msgid "Ctrl+Home"
-#~ msgstr "Strg+Pos1"
-
-#~ msgid "Ctrl+Shift+Left"
-#~ msgstr "Strg+Umschalt+Links"
-
-#~ msgid "Ctrl+Left"
-#~ msgstr "Strg+Links"
-
-#~ msgid "Ctrl+Right"
-#~ msgstr "Strg+Rechts"
-
-#~ msgid "Ctrl+Shift+Right"
-#~ msgstr "Strg+Umschalt+Rechts"
-
-#~ msgid "Ctrl+End"
-#~ msgstr "Strg+Ende"
-
-#~ msgid "Ctrl+Up"
-#~ msgstr "Strg+Oben"
-
-#~ msgid "Ctrl+Down"
-#~ msgstr "Strg+Unten"
-
-#~ msgid "Ctrl+Shift+H"
-#~ msgstr "Strg+Umschalt+H"
-
-#~ msgid "Ctrl+T"
-#~ msgstr "Strg+T"
-
-#~ msgid "Alt+M"
-#~ msgstr "Alt+M"
-
-#~ msgid "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
-#~ msgstr "Minimum: 1&nbsp;GB RAM, 1&nbsp;GHz CPU"
-
-#~ msgid ""
-#~ "Recommended for playing level 9: 4&nbsp;GB RAM, 2.5&nbsp;GHz dual-core or "
-#~ "faster CPU"
-#~ msgstr ""
-#~ "Empfohlen für Spielstufe 9: 4&nbsp;GB RAM, 2,5&nbsp;GHz Dual-Core- oder "
-#~ "schnellere CPU"
-
-#~ msgid "Copyright © 2011–2018 Markus Enzenberger"
-#~ msgstr "Copyright © 2011–2018 Markus Enzenberger"
-
-#~ msgid "<term>Up</term>"
-#~ msgstr "<term>Oben</term>"
-
-#~ msgid "<term>1</term>"
-#~ msgstr "<term>1</term>"
-
-#~ msgid "<term>2</term>"
-#~ msgstr "<term>2</term>"
-
-#~ msgid "<term>A</term>"
-#~ msgstr "<term>A</term>"
-
-#~ msgid "<term>C</term>"
-#~ msgstr "<term>C</term>"
-
-#~ msgid "<term>E</term>"
-#~ msgstr "<term>E</term>"
-
-#~ msgid "<term>F</term>"
-#~ msgstr "<term>F</term>"
-
-#~ msgid "<term>G</term>"
-#~ msgstr "<term>G</term>"
-
-#~ msgid "<term>H</term>"
-#~ msgstr "<term>H</term>"
-
-#~ msgid "<term>I</term>"
-#~ msgstr "<term>I</term>"
-
-#~ msgid "<term>J</term>"
-#~ msgstr "<term>J</term>"
-
-#~ msgid "<term>L</term>"
-#~ msgstr "<term>L</term>"
-
-#~ msgid "<term>N</term>"
-#~ msgstr "<term>N</term>"
-
-#~ msgid "<term>O</term>"
-#~ msgstr "<term>O</term>"
-
-#~ msgid "<term>P</term>"
-#~ msgstr "<term>P</term>"
-
-#~ msgid "<term>S</term>"
-#~ msgstr "<term>S</term>"
-
-#~ msgid "<term>T</term>"
-#~ msgstr "<term>T</term>"
-
-#~ msgid "<term>U</term>"
-#~ msgstr "<term>U</term>"
-
-#~ msgid "<term>V</term>"
-#~ msgstr "<term>V</term>"
-
-#~ msgid "<term>W</term>"
-#~ msgstr "<term>W</term>"
-
-#~ msgid "<term>X</term>"
-#~ msgstr "<term>X</term>"
-
-#~ msgid "<term>Y</term>"
-#~ msgstr "<term>Y</term>"
-
-#~ msgid "<term>Z</term>"
-#~ msgstr "<term>Z</term>"

@@ -12,6 +12,7 @@ Version 18.x (master)
 Version 18.2.x (v18-fixes)
 --------------------------
 
+* New Russian translation (thanks to Victor Erukhin)
 * Back key needs to be pressed twice to exit Android app to avoid
   unintentional exit with gesture navigation on newer Android versions.
 * Better visual feedback of button presses on newer Android devices.

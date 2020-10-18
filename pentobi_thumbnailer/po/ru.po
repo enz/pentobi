@@ -1,24 +1,24 @@
 # 
 # Translators:
-# Markus Enzenberger <markus.enzenberger@gmail.com>, 2020
+# Виктор Ерухин <official159ru@mail.ru>, 2020
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2020-10-16 07:22+0200\n"
 "PO-Revision-Date: 2019-02-25 15:38+0000\n"
-"Last-Translator: Markus Enzenberger <markus.enzenberger@gmail.com>, 2020\n"
-"Language-Team: German (https://www.transifex.com/markus-enzenberger/teams/89074/de/)\n"
+"Last-Translator: Виктор Ерухин <official159ru@mail.ru>, 2020\n"
+"Language-Team: Russian (https://www.transifex.com/markus-enzenberger/teams/89074/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr "Markus Enzenberger <enz@users.sourceforge.net>, 2019"
+msgstr "переводчик-вклад"
 
 #. (itstool) path: refmeta/refmiscinfo
 #: pentobi-thumbnailer-manpage.docbook.in:11
@@ -28,16 +28,14 @@ msgstr "Pentobi"
 #. (itstool) path: refmeta/refmiscinfo
 #: pentobi-thumbnailer-manpage.docbook.in:13
 msgid "Pentobi Command Reference"
-msgstr "Pentobi Befehlsreferenz"
+msgstr "Справочник команд Pentobi"
 
 #. (itstool) path: refnamediv/refpurpose
 #: pentobi-thumbnailer-manpage.docbook.in:18
 msgid ""
 "thumbnailer for game records for the board game Blokus as used by the "
 "program Pentobi"
-msgstr ""
-"Vorschaubildgenerator für Spieldateien des Brettspiels Blokus, wie vom "
-"Programm Pentobi verwendet"
+msgstr "эскиз для записей игр Блокус, используемый Pentobi"
 
 #. (itstool) path: refsynopsisdiv/cmdsynopsis
 #: pentobi-thumbnailer-manpage.docbook.in:25
@@ -51,13 +49,13 @@ msgstr ""
 "<_:command-1/> <arg> <group choice=\"plain\"> <arg "
 "choice=\"plain\"><_:option-2/></arg> <arg "
 "choice=\"plain\"><_:option-3/></arg> </group> <replaceable>n</replaceable> "
-"</arg> <arg choice=\"plain\"><replaceable>Eingabedatei</replaceable></arg> "
-"<arg choice=\"plain\"><replaceable>Ausgabedatei</replaceable></arg>"
+"</arg> <arg choice=\"plain\"><replaceable>входной</replaceable></arg> <arg "
+"choice=\"plain\"><replaceable>выходной</replaceable></arg>"
 
 #. (itstool) path: refsection/title
 #: pentobi-thumbnailer-manpage.docbook.in:54
 msgid "Description"
-msgstr "Beschreibung"
+msgstr "Описание"
 
 #. (itstool) path: refsection/para
 #: pentobi-thumbnailer-manpage.docbook.in:55
@@ -66,9 +64,9 @@ msgid ""
 "thumbnailer for the Gnome desktop environment to generate previews of game "
 "files written by Pentobi."
 msgstr ""
-"<_:command-1/> ist ein Teil des Programms Pentobi und dafür gedacht, "
-"Vorschaubilder für die Desktopumgebung Gnome zu Spieldateien zu generieren, "
-"die von Pentobi gespeichert werden."
+"<_:command-1/> является частью программы Pentobi и предназначен для "
+"использования в качестве эскиза в среде рабочего стола Gnome для создания "
+"превью игровых файлов, написанных Pentobi."
 
 #. (itstool) path: refsection/para
 #: pentobi-thumbnailer-manpage.docbook.in:60
@@ -77,19 +75,19 @@ msgid ""
 "Pentobi-SGF.md in the Pentobi source package. The output file is a thumbnail"
 " image in PNG format."
 msgstr ""
-"Die Eingabedatei ist in Pentobis SGF-Format, wie in Pentobi-SGF.md im "
-"Quelltextpaket von Pentobi dokumentiert. Die Ausgabedatei ist ein "
-"Vorschaubild im PNG-Format."
+"Входной файл Pentobi представляет собой игровой файл в формате SGF, как "
+"описано в Pentobi-SGF.md в исходном пакете Pentobi. Выходной файл "
+"представляет собой уменьшенное изображение в формате PNG."
 
 #. (itstool) path: refsection/title
 #: pentobi-thumbnailer-manpage.docbook.in:68
 msgid "Options"
-msgstr "Optionen"
+msgstr "Параметры"
 
 #. (itstool) path: listitem/para
 #: pentobi-thumbnailer-manpage.docbook.in:74
 msgid "Display help and exit."
-msgstr "Hilfe anzeigen und Programm beenden."
+msgstr "Показать справку и выйти."
 
 #. (itstool) path: varlistentry/term
 #: pentobi-thumbnailer-manpage.docbook.in:80
@@ -100,25 +98,24 @@ msgstr "<_:option-1/> <replaceable>n</replaceable>"
 #. (itstool) path: listitem/para
 #: pentobi-thumbnailer-manpage.docbook.in:83
 msgid "The size of the thumbnail. The default is 128."
-msgstr "Die Größe des Vorschaubildes. Voreingestellt ist 128."
+msgstr "Размер эскиза. По умолчанию 128."
 
 #. (itstool) path: listitem/para
 #: pentobi-thumbnailer-manpage.docbook.in:92
 msgid "Display version and exit."
-msgstr "Version anzeigen und Programm beenden."
+msgstr "Показать версию и выйти."
 
 #. (itstool) path: refsection/title
 #: pentobi-thumbnailer-manpage.docbook.in:101
 msgid "Exit Status"
-msgstr "Rückgabewert"
+msgstr "Состояние завершения"
 
 #. (itstool) path: refsection/para
 #: pentobi-thumbnailer-manpage.docbook.in:102
 msgid "0 if the thumbnail generation succeeds, 1 on error."
-msgstr ""
-"0, wenn die Generierung des Vorschaubildes erfolgreich ist, 1 im Fehlerfall."
+msgstr "0 в случае успешной генерации эскиза, 1 в случае ошибки."
 
 #. (itstool) path: refsection/title
 #: pentobi-thumbnailer-manpage.docbook.in:108
 msgid "See Also"
-msgstr "Siehe auch"
+msgstr "Смотрите также"

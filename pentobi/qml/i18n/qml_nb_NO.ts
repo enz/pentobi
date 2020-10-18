@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nb_NO">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="nb_NO" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -15,96 +13,6 @@
         <source>Pentobi %1</source>
         <extracomment>The argument is the application version.</extracomment>
         <translation>Pentobi %1</translation>
-    </message>
-</context>
-<context>
-    <name>Actions</name>
-    <message>
-        <source>Main Variation</source>
-        <translation type="vanished">Hovedvariasjon</translation>
-    </message>
-    <message>
-        <source>Beginning of Branch</source>
-        <translation type="vanished">Begynnelse av forgreining</translation>
-    </message>
-    <message>
-        <source>Settings…</source>
-        <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="vanished">Innstillinger</translation>
-    </message>
-    <message>
-        <source>Find Move</source>
-        <translation type="vanished">Finn trekk</translation>
-    </message>
-    <message>
-        <source>Next Comment</source>
-        <translation type="vanished">Neste kommentar</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation type="vanished">Fullskjermsvisning</translation>
-    </message>
-    <message>
-        <source>Move Number…</source>
-        <translation type="vanished">Trekknummer…</translation>
-    </message>
-    <message>
-        <source>Pentobi Help</source>
-        <translation type="vanished">Pentobi-hjelp</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="vanished">Ny</translation>
-    </message>
-    <message>
-        <source>Rated Game</source>
-        <translation type="vanished">Vurdert spill</translation>
-    </message>
-    <message>
-        <source>Open…</source>
-        <translation type="vanished">Åpne…</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="vanished">Spill</translation>
-    </message>
-    <message>
-        <source>Play Move</source>
-        <extracomment>Play a single move</extracomment>
-        <translation type="vanished">Spill enkelt trekk</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="vanished">Avslutt</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Lagre</translation>
-    </message>
-    <message>
-        <source>Save As…</source>
-        <translation type="vanished">Lagre som…</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="vanished">Stopp</translation>
-    </message>
-    <message>
-        <source>Undo Move</source>
-        <translation type="vanished">Angre trekk</translation>
-    </message>
-    <message>
-        <source>Game Info</source>
-        <translation type="vanished">Spillinfo</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation type="vanished">Kommentar</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <extracomment>Menu item Computer/Settings</extracomment>
-        <translation type="vanished">Innstillinger</translation>
     </message>
 </context>
 <context>
@@ -280,38 +188,6 @@
         <translation>Datamaskinen spiller:</translation>
     </message>
     <message>
-        <source>Blue/Red</source>
-        <translation type="vanished">Blå/rød</translation>
-    </message>
-    <message>
-        <source>Purple</source>
-        <translation type="vanished">Lilla</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">Grønn</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">Blå</translation>
-    </message>
-    <message>
-        <source>Yellow/Green</source>
-        <translation type="vanished">Gul/grønn</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="vanished">Oransje</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">Gul</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">Rød</translation>
-    </message>
-    <message>
         <source>Level %1</source>
         <translation>Nivå %1</translation>
     </message>
@@ -395,38 +271,6 @@
 </context>
 <context>
     <name>GameModel</name>
-    <message>
-        <source>Blue/Red</source>
-        <translation type="vanished">Blå/rød</translation>
-    </message>
-    <message>
-        <source>Purple</source>
-        <translation type="vanished">Lilla</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="vanished">Grønn</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="vanished">Blå</translation>
-    </message>
-    <message>
-        <source>Yellow/Green</source>
-        <translation type="vanished">Gul/grønn</translation>
-    </message>
-    <message>
-        <source>Orange</source>
-        <translation type="vanished">Oransje</translation>
-    </message>
-    <message>
-        <source>Yellow</source>
-        <translation type="vanished">Gul</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="vanished">Rød</translation>
-    </message>
     <message>
         <source>Purple wins with 1 point.</source>
         <translation>Lilla vinner med ett poeng.</translation>
@@ -1040,7 +884,11 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Press back again to exit</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1434,10 +1282,6 @@
         <translation>F</translation>
     </message>
     <message>
-        <source>Analyze Game</source>
-        <translation type="vanished">Analyser spill</translation>
-    </message>
-    <message>
         <source>A</source>
         <extracomment>Keyboard shortcut for menu item Analyze Game. Leave empty for no shortcut.</extracomment>
         <translation>A</translation>
@@ -1466,10 +1310,6 @@
         <source>V</source>
         <extracomment>Keyboard shortcut for menu View. Leave empty for no shortcut.</extracomment>
         <translation>V</translation>
-    </message>
-    <message>
-        <source>Appearance…</source>
-        <translation type="vanished">Utseende…</translation>
     </message>
     <message>
         <source>A</source>
@@ -1663,45 +1503,6 @@
         <source>Recent development:</source>
         <translation>Nylig utvikling:</translation>
     </message>
-    <message>
-        <source>Game</source>
-        <translation type="vanished">Spil</translation>
-    </message>
-    <message>
-        <source>Result</source>
-        <translation type="vanished">Resultat</translation>
-    </message>
-    <message>
-        <source>Win</source>
-        <extracomment>Result of rated game is a win</extracomment>
-        <translation type="vanished">Vunnet</translation>
-    </message>
-    <message>
-        <source>Loss</source>
-        <extracomment>Result of rated game is a loss</extracomment>
-        <translation type="vanished">Tapt</translation>
-    </message>
-    <message>
-        <source>Tie</source>
-        <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
-        <translation type="vanished">Uavgjort</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <translation type="vanished">Nivå</translation>
-    </message>
-    <message>
-        <source>Your Color</source>
-        <translation type="vanished">Din farge</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="vanished">Dato</translation>
-    </message>
-    <message>
-        <source>Open Game %1</source>
-        <translation type="vanished">Åpne spill %1</translation>
-    </message>
 </context>
 <context>
     <name>SaveDialog</name>
@@ -1826,7 +1627,7 @@
     </message>
     <message>
         <source>Open menu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1858,7 +1659,7 @@
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished">Sett tilfeldig seeding til &lt;n&gt;.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>

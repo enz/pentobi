@@ -1,13 +1,13 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ru" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>Copyright © 2011–%1 Markus Enzenberger</source>
-        <translation>Copyright © 2011–%1 Markus Enzenberger</translation>
+        <translation>Авторское право © 2011–%1 Markus Enzenberger</translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus</source>
-        <translation>Computer-Gegner für das Brettspiel Blokus</translation>
+        <translation>Оппонент компьютерной настольной игры Блокус</translation>
     </message>
     <message>
         <source>Pentobi %1</source>
@@ -19,159 +19,159 @@
     <name>AnalyzeDialog</name>
     <message>
         <source>Analysis speed:</source>
-        <translation>Analysegeschwindigkeit:</translation>
+        <translation>Скорость анализа:</translation>
     </message>
     <message>
         <source>Fast</source>
-        <translation>Schnell</translation>
+        <translation>Быстро</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>Normal</translation>
+        <translation>Нормально</translation>
     </message>
     <message>
         <source>Slow</source>
-        <translation>Langsam</translation>
+        <translation>Медленно</translation>
     </message>
 </context>
 <context>
     <name>AnalyzeGame</name>
     <message>
         <source>(No analysis)</source>
-        <translation>(Keine Analyse)</translation>
+        <translation>(Без анализа)</translation>
     </message>
 </context>
 <context>
     <name>AppearanceDialog</name>
     <message>
         <source>Coordinates</source>
-        <translation>Koordinaten</translation>
+        <translation>Координаты</translation>
     </message>
     <message>
         <source>Show variations</source>
-        <translation>Varianten zeigen</translation>
+        <translation>Показать варианты</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation>Hell</translation>
+        <translation>Светлая</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation>Dunkel</translation>
+        <translation>Темная</translation>
     </message>
     <message>
         <source>Colorblind light</source>
-        <translation>Farbenblind hell</translation>
+        <translation>Цветовая слепота светлая</translation>
     </message>
     <message>
         <source>Colorblind dark</source>
-        <translation>Farbenblind dunkel</translation>
+        <translation>Цветовая слепота темная</translation>
     </message>
     <message>
         <source>System</source>
         <extracomment>Name of theme using default system colors</extracomment>
-        <translation>System</translation>
+        <translation>Системная</translation>
     </message>
     <message>
         <source>Move marking:</source>
-        <translation>Zugmarkierung:</translation>
+        <translation>Отметка хода:</translation>
     </message>
     <message>
         <source>Last with dot</source>
-        <translation>Letzter mit Punkt</translation>
+        <translation>Последний с точкой</translation>
     </message>
     <message>
         <source>Last with number</source>
-        <translation>Letzter mit Nummer</translation>
+        <translation>Последний с номером</translation>
     </message>
     <message>
         <source>All with number</source>
-        <translation>Alle mit Nummer</translation>
+        <translation>Все с номерами</translation>
     </message>
     <message>
         <source>None</source>
         <extracomment>Move marking/None</extracomment>
-        <translation>Keine</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Animations</source>
-        <translation>Animationen</translation>
+        <translation>Анимации</translation>
     </message>
     <message>
         <source>Show comment:</source>
-        <translation>Kommentar zeigen:</translation>
+        <translation>Показать комментарий:</translation>
     </message>
     <message>
         <source>Always</source>
         <extracomment>Show-comment mode</extracomment>
-        <translation>Immer</translation>
+        <translation>Всегда</translation>
     </message>
     <message>
         <source>As needed</source>
         <extracomment>Show-comment mode</extracomment>
-        <translation>Bei Bedarf</translation>
+        <translation>По необходимости</translation>
     </message>
     <message>
         <source>Never</source>
         <extracomment>Show-comment mode</extracomment>
-        <translation>Nie</translation>
+        <translation>Никогда</translation>
     </message>
     <message>
         <source>Color theme:</source>
-        <translation>Farbthema:</translation>
+        <translation>Цветовая тема:</translation>
     </message>
     <message>
         <source>Move number</source>
         <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
-        <translation>Zugnummer</translation>
+        <translation>Номер хода</translation>
     </message>
 </context>
 <context>
     <name>AsciiArtSaveDialog</name>
     <message>
         <source>Export ASCII Art</source>
-        <translation>ASCII-Art exportieren</translation>
+        <translation>Экспортировать ASCII</translation>
     </message>
     <message>
         <source>Text files</source>
-        <translation>Textdateien</translation>
+        <translation>Текстовый файл</translation>
     </message>
 </context>
 <context>
     <name>BoardContextMenu</name>
     <message>
         <source>Go to Move %1</source>
-        <translation>Gehe zu Zug %1</translation>
+        <translation>Перейти к ходу %1</translation>
     </message>
     <message>
         <source>Move Annotation</source>
-        <translation>Annotierung</translation>
+        <translation>Пояснение Хода</translation>
     </message>
     <message>
         <source>Move Annotation (%1)</source>
         <extracomment>The argument is the annotation symbol for the current move</extracomment>
-        <translation>Annotierung (%1)</translation>
+        <translation>Пояснение Хода (%1)</translation>
     </message>
 </context>
 <context>
     <name>ButtonApply</name>
     <message>
         <source>Apply</source>
-        <translation>Anwenden</translation>
+        <translation>Применить</translation>
     </message>
 </context>
 <context>
     <name>ButtonCancel</name>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
     <name>ButtonClose</name>
     <message>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
@@ -185,360 +185,360 @@
     <name>ComputerDialog</name>
     <message>
         <source>Computer plays:</source>
-        <translation>Computer spielt:</translation>
+        <translation>Играть Компьютеру:</translation>
     </message>
     <message>
         <source>Level %1</source>
-        <translation>Stufe %1</translation>
+        <translation>Уровень %1</translation>
     </message>
 </context>
 <context>
     <name>ExportImageDialog</name>
     <message>
         <source>Image width:</source>
-        <translation>Bildbreite:</translation>
+        <translation>Ширина изображения:</translation>
     </message>
 </context>
 <context>
     <name>FileDialog</name>
     <message>
         <source>Overwrite file?</source>
-        <translation>Datei überschreiben?</translation>
+        <translation>Перезаписать файл?</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Öffnen</translation>
+        <translation>Открыть</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation>Alle Dateien</translation>
+        <translation>Все файлы</translation>
     </message>
 </context>
 <context>
     <name>GameInfoDialog</name>
     <message>
         <source>Player Blue/Red:</source>
-        <translation>Spieler Blau/Rot:</translation>
+        <translation>Игрок Синий/Красный:</translation>
     </message>
     <message>
         <source>Player Purple:</source>
-        <translation>Spieler Lila:</translation>
+        <translation>Игрок Фиолетовый:</translation>
     </message>
     <message>
         <source>Player Green:</source>
-        <translation>Spieler Grün:</translation>
+        <translation>Игрок Зеленый:</translation>
     </message>
     <message>
         <source>Player Blue:</source>
-        <translation>Spieler Blau:</translation>
+        <translation>Игрок Синий:</translation>
     </message>
     <message>
         <source>Player Yellow/Green:</source>
-        <translation>Spieler Gelb/Grün:</translation>
+        <translation>Игрок Желтый/Зеленый:</translation>
     </message>
     <message>
         <source>Player Orange:</source>
-        <translation>Spieler Orange:</translation>
+        <translation>Игрок Оранжевый:</translation>
     </message>
     <message>
         <source>Player Yellow:</source>
-        <translation>Spieler Gelb:</translation>
+        <translation>Игрок Желтый:</translation>
     </message>
     <message>
         <source>Player Red:</source>
-        <translation>Spieler Rot:</translation>
+        <translation>Игрок Красный:</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation>Datum:</translation>
+        <translation>Дата:</translation>
     </message>
     <message>
         <source>Time:</source>
-        <translation>Bedenkzeit:</translation>
+        <translation>Время:</translation>
     </message>
     <message>
         <source>Event:</source>
-        <translation>Veranstaltung:</translation>
+        <translation>Событие:</translation>
     </message>
     <message>
         <source>Round:</source>
-        <translation>Runde:</translation>
+        <translation>Раунд:</translation>
     </message>
 </context>
 <context>
     <name>GameModel</name>
     <message>
         <source>Purple wins with 1 point.</source>
-        <translation>Lila gewinnt mit 1 Punkt.</translation>
+        <translation>Фиолетовый выигрывает с 1 очком.</translation>
     </message>
     <message>
         <source>Purple wins with %L1 points.</source>
-        <translation>Lila gewinnt mit %L1 Punkten.</translation>
+        <translation>Фиолетовый выигрывает с %L1 очками.</translation>
     </message>
     <message>
         <source>Orange wins with 1 point.</source>
-        <translation>Orange gewinnt mit 1 Punkt.</translation>
+        <translation>Оранжевый выигрывает с 1 очком.</translation>
     </message>
     <message>
         <source>Orange wins with %L1 points.</source>
-        <translation>Orange gewinnt mit %L1 Punkten.</translation>
+        <translation>Оранжевый выигрывает с %L1 очками.</translation>
     </message>
     <message>
         <source>Game ends in a tie.</source>
-        <translation>Spiel endet unentschieden.</translation>
+        <translation>Игра заканчивается ничьей.</translation>
     </message>
     <message>
         <source>Green wins with 1 point.</source>
-        <translation>Grün gewinnt mit 1 Punkt.</translation>
+        <translation>Зеленый выигрывает с 1 очком.</translation>
     </message>
     <message>
         <source>Green wins with %L1 points.</source>
-        <translation>Grün gewinnt mit %L1 Punkten.</translation>
+        <translation>Зеленый выигрывает с %L1 очками.</translation>
     </message>
     <message>
         <source>Blue wins with 1 point.</source>
-        <translation>Blau gewinnt mit 1 Punkt.</translation>
+        <translation>Синий выигрывает с 1 очком.</translation>
     </message>
     <message>
         <source>Blue wins with %L1 points.</source>
-        <translation>Blau gewinnt mit %L1 Punkten.</translation>
+        <translation>Синий выигрывает с %L1 очками.</translation>
     </message>
     <message>
         <source>Green wins (tie resolved).</source>
         <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
-        <translation>Grün gewinnt (Unentschieden aufgelöst).</translation>
+        <translation>Зеленый побеждает (ничья).</translation>
     </message>
     <message>
         <source>Blue/Red wins with 1 point.</source>
-        <translation>Blau/Rot gewinnt mit 1 Punkt.</translation>
+        <translation>Синий/Красный выигрывают с 1 очком.</translation>
     </message>
     <message>
         <source>Blue/Red wins with %L1 points.</source>
-        <translation>Blau/Rot gewinnt mit %L1 Punkten.</translation>
+        <translation>Синий/Красный выигрывают с %L1 очками.</translation>
     </message>
     <message>
         <source>Yellow/Green wins with 1 point.</source>
-        <translation>Gelb/Grün gewinnt mit 1 Punkt.</translation>
+        <translation>Желтый/Зеленый выигрывают с 1 очком.</translation>
     </message>
     <message>
         <source>Yellow/Green wins with %L1 points.</source>
-        <translation>Gelb/Grün gewinnt mit %L1 Punkten.</translation>
+        <translation>Желтый/Зеленый выигрывают с %L1 очками.</translation>
     </message>
     <message>
         <source>Yellow/Green wins (tie resolved).</source>
         <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
-        <translation>Gelb/Grün gewinnt (Unentschieden aufgelöst).</translation>
+        <translation>Желтый/Зеленый побеждают (ничья).</translation>
     </message>
     <message>
         <source>Blue wins.</source>
-        <translation>Blau gewinnt.</translation>
+        <translation>Синий побеждает.</translation>
     </message>
     <message>
         <source>Yellow wins.</source>
-        <translation>Gelb gewinnt.</translation>
+        <translation>Желтый побеждает.</translation>
     </message>
     <message>
         <source>Red wins.</source>
-        <translation>Rot gewinnt.</translation>
+        <translation>Красный побеждает.</translation>
     </message>
     <message>
         <source>Red wins (tie resolved).</source>
         <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
-        <translation>Rot gewinnt (Unentschieden aufgelöst).</translation>
+        <translation>Красный побеждает (ничья).</translation>
     </message>
     <message>
         <source>Yellow wins (tie resolved).</source>
         <extracomment>Game variant with tie-breaker rule made later player win.</extracomment>
-        <translation>Gelb gewinnt (Unentschieden aufgelöst).</translation>
+        <translation>Желтый побеждает (ничья).</translation>
     </message>
     <message>
         <source>Game ends in a tie between Blue and Yellow.</source>
-        <translation>Spiel endet unentschieden zwischen Blau und Gelb.</translation>
+        <translation>Игра заканчивается ничьей между Синим и Желтым.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Blue and Red.</source>
-        <translation>Spiel endet unentschieden zwischen Blau und Rot.</translation>
+        <translation>Игра заканчивается ничьей между Синим и Красными.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Yellow and Red.</source>
-        <translation>Spiel endet unentschieden zwischen Gelb und Rot.</translation>
+        <translation>Игра заканчивается ничьей между Желтыми и Красными.</translation>
     </message>
     <message>
         <source>Game ends in a tie between all players.</source>
-        <translation>Spiel endet unentschieden zwischen allen Spielern.</translation>
+        <translation>Игра заканчивается ничьей между всеми игроками.</translation>
     </message>
     <message>
         <source>Green wins.</source>
-        <translation>Grün gewinnt.</translation>
+        <translation>Зеленый побеждает.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Blue, Yellow and Red.</source>
-        <translation>Spiel endet unentschieden zwischen Blau, Gelb und Rot.</translation>
+        <translation>Игра заканчивается ничьей между Синим, Желтым и Красным.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Blue, Yellow and Green.</source>
-        <translation>Spiel endet unentschieden zwischen Blau, Gelb und Grün.</translation>
+        <translation>Игра заканчивается ничьей между Синим, Желтым и Зеленым.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Blue, Red and Green.</source>
-        <translation>Spiel endet unentschieden zwischen Blau, Rot und Grün.</translation>
+        <translation>Игра заканчивается ничьей между Синим, Красным и Зеленым.</translation>
     </message>
     <message>
         <source>Game ends in a tie between Yellow, Red and Green.</source>
-        <translation>Spiel endet unentschieden zwischen Gelb, Rot und Grün.</translation>
+        <translation>Игра заканчивается ничьей между Желтым, Красным и Зеленым.</translation>
     </message>
     <message>
         <source>Invalid Blokus SGF file. (%1)</source>
-        <translation>Ungültige Blokus-SGF-Datei. (%1)</translation>
+        <translation>Неверный файл Блокус SGF. (%1)</translation>
     </message>
     <message>
         <source>Clipboard is empty.</source>
-        <translation>Zwischenablage ist leer.</translation>
+        <translation>Буфер обмена пуст.</translation>
     </message>
     <message>
         <source>Untitled</source>
-        <translation>Unbenannt</translation>
+        <translation>Без названия</translation>
     </message>
     <message>
         <source>Untitled %1</source>
         <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation>Unbenannt %1</translation>
+        <translation>Без названия %1</translation>
     </message>
     <message>
         <source>New Folder</source>
-        <translation>Neuer Ordner</translation>
+        <translation>Новый Каталог</translation>
     </message>
     <message>
         <source>New Folder %1</source>
         <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation>Neuer Ordner %1</translation>
+        <translation>Новый Каталог %1</translation>
     </message>
     <message>
         <source>(Setup)</source>
-        <translation>(Stellung)</translation>
+        <translation>(Настройка)</translation>
     </message>
     <message>
         <source>(No moves)</source>
-        <translation>(Keine Züge)</translation>
+        <translation>(Нет ходов)</translation>
     </message>
     <message>
         <source>Move %1</source>
         <extracomment>The argument is the current move number.</extracomment>
-        <translation>Zug %1</translation>
+        <translation>Ход %1</translation>
     </message>
     <message>
         <source>Unsupported character set</source>
-        <translation>Zeichensatz nicht unterstützt</translation>
+        <translation>Неподдерживаемый набор символов</translation>
     </message>
 </context>
 <context>
     <name>GameVariantDialog</name>
     <message>
         <source>Classic</source>
-        <translation>Klassisch</translation>
+        <translation>Классическая</translation>
     </message>
     <message>
         <source>Duo</source>
-        <translation>Duo</translation>
+        <translation>Два игрока</translation>
     </message>
     <message>
         <source>Junior</source>
-        <translation>Junior</translation>
+        <translation>Юниор</translation>
     </message>
     <message>
         <source>Trigon</source>
-        <translation>Trigon</translation>
+        <translation>Тригон</translation>
     </message>
     <message>
         <source>Nexos</source>
-        <translation>Nexos</translation>
+        <translation>Нексос</translation>
     </message>
     <message>
         <source>GembloQ</source>
-        <translation>GembloQ</translation>
+        <translation>ГемблоQ</translation>
     </message>
     <message>
         <source>Callisto</source>
-        <translation>Callisto</translation>
+        <translation>Каллисто</translation>
     </message>
     <message>
         <source>Players:</source>
-        <translation>Spieler:</translation>
+        <translation>Игроки:</translation>
     </message>
     <message>
         <source>Colors:</source>
-        <translation>Farben:</translation>
+        <translation>Цвета:</translation>
     </message>
 </context>
 <context>
     <name>GameViewDesktop</name>
     <message>
         <source>Computer is thinking…</source>
-        <translation>Computer denkt …</translation>
+        <translation>Компьютер думает…</translation>
     </message>
     <message>
         <source>Running game analysis…</source>
-        <translation>Spiel wird analysiert …</translation>
+        <translation>Начать анализ игры…</translation>
     </message>
     <message>
         <source>Computer is thinking… (up to %1 seconds remaining)</source>
-        <translation>Computer denkt … (maximal %1 Sekunden verbleibend)</translation>
+        <translation>Компьютер думает… (осталось %1 секунд)</translation>
     </message>
     <message>
         <source>Computer is thinking… (up to %1 minutes remaining)</source>
-        <translation>Computer denkt … (maximal %1 Minuten verbleibend)</translation>
+        <translation>Компьютер думает… (осталось %1 минут)</translation>
     </message>
 </context>
 <context>
     <name>GotoMoveDialog</name>
     <message>
         <source>Move number:</source>
-        <translation>Zugnummer:</translation>
+        <translation>Номер хода:</translation>
     </message>
 </context>
 <context>
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation>Pentobi-Hilfe</translation>
+        <translation>Помощь</translation>
     </message>
 </context>
 <context>
     <name>ImageSaveDialog</name>
     <message>
         <source>Save Image</source>
-        <translation>Grafik speichern</translation>
+        <translation>Сохранить изображение</translation>
     </message>
     <message>
         <source>PNG image files</source>
-        <translation>PNG-Bilddateien</translation>
+        <translation>Файлы PNG</translation>
     </message>
     <message>
         <source>JPEG image files</source>
-        <translation>JPEG-Bilddateien</translation>
+        <translation>Файлы JPEG</translation>
     </message>
 </context>
 <context>
     <name>InitialRatingDialog</name>
     <message>
         <source>Initialize your rating for this game variant.</source>
-        <translation>Initialisieren Sie Ihre Wertung für diese Spielvariante.</translation>
+        <translation>Выберете свой рейтинг для этой игры.</translation>
     </message>
     <message>
         <source>Initial rating:</source>
-        <translation>Anfangswertung:</translation>
+        <translation>Начальный рейтинг:</translation>
     </message>
     <message>
         <source>Beginner</source>
-        <translation>Anfänger</translation>
+        <translation>Начинающий</translation>
     </message>
     <message>
         <source>Expert</source>
-        <translation>Experte</translation>
+        <translation>Эксперт</translation>
     </message>
 </context>
 <context>
@@ -550,138 +550,138 @@
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
-        <translation>Spielanalyse ist nur in Hauptvariante möglich.</translation>
+        <translation>Анализ игры возможен только в основном варианте.</translation>
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
-        <translation>Automatisch gespeichertes Spiel wurde von einer anderen Instanz von Pentobi geändert. Überschreiben?</translation>
+        <translation>Автосохраненная игра была изменена другим экземпляром Pentobi. Переписать?</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
-        <translation>Ihre Wertung hat sich von %1 auf %2 erhöht.</translation>
+        <translation>Ваш рейтинг вырос с %1 на %2.</translation>
     </message>
     <message>
         <source>Your rating has decreased from %1 to %2.</source>
-        <translation>Ihre Wertung hat sich von %1 auf %2 verringert.</translation>
+        <translation>Ваш рейтинг снизился с %1 на %2.</translation>
     </message>
     <message>
         <source>Your rating stays at %1.</source>
-        <translation>Ihre Wertung bleibt bei %1.</translation>
+        <translation>Ваш рейтинг остается на уровне %1.</translation>
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation>Keine Berechtigung zu Zugriff auf Speicher</translation>
+        <translation>Нет разрешения на доступ к хранилищу</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
-        <translation>Alle Wertungsinformationen für die gegenwärtige Spielvariante löschen?</translation>
+        <translation>Удалить всю информацию рейтинга для текущей игры?</translation>
     </message>
     <message>
         <source>Delete all variations?</source>
-        <translation>Alle Varianten löschen?</translation>
+        <translation>Удалить все варианты?</translation>
     </message>
     <message>
         <source>Save failed.</source>
-        <translation>Speichern fehlgeschlagen.</translation>
+        <translation>Сохранить не удалось.</translation>
     </message>
     <message>
         <source>End of tree was reached. Continue search from start of the tree?</source>
-        <translation>Ende des Spielbaums erreicht. Suche vom Start des Spielbaums fortsetzen?</translation>
+        <translation>Достигнут конец дерева. Продолжить поиск с начала дерева?</translation>
     </message>
     <message>
         <source>No comment found</source>
-        <translation>Kein Kommentar gefunden</translation>
+        <translation>Комментариев не найдено</translation>
     </message>
     <message>
         <source>%1 (modified)</source>
         <extracomment>Label for modified loaded game. The argument is the file name.</extracomment>
-        <translation>%1 (geändert)</translation>
+        <translation>%1 (измененная)</translation>
     </message>
     <message>
         <source>File has been modified by another application. Reload?</source>
-        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Neu laden?</translation>
+        <translation>Файл был изменен другим приложением. Перезапустить?</translation>
     </message>
     <message>
         <source>Continue computer move?</source>
-        <translation>Computer-Zug fortsetzen?</translation>
+        <translation>Передать ход компьютеру?</translation>
     </message>
     <message>
         <source>Keep only position?</source>
-        <translation>Nur Brettstellung behalten?</translation>
+        <translation>Сохранить только позицию?</translation>
     </message>
     <message>
         <source>Keep only subtree?</source>
-        <translation>Nur Teilbaum behalten?</translation>
+        <translation>Сохранить только поддерево?</translation>
     </message>
     <message>
         <source>Open failed.</source>
-        <translation>Öffnen fehlgeschlagen.</translation>
+        <translation>Открыть не удалось.</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Lila gegen Pentobi Stufe %1 beginnen?</translation>
+        <translation>Начать игру Фиолетовым против Pentobi уровня %1?</translation>
     </message>
     <message>
         <source>Start rated game with Green against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Grün gegen Pentobi Stufe %1 beginnen?</translation>
+        <translation>Начать игру Зеленым против Pentobi уровня %1?</translation>
     </message>
     <message>
         <source>Start rated game with Blue/Red against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Blau/Rot gegen Pentobi Stufe %1 beginnen?</translation>
+        <translation>Начать игру Синим/Красным против Pentobi уровня %1?</translation>
     </message>
     <message>
         <source>Start rated game with Blue against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Blau gegen Pentobi Stufe %1 beginnen?</translation>
+        <translation>Начать игру Синим против Pentobi уровня %1?</translation>
     </message>
     <message>
         <source>Start rated game with Orange against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Orange gegen Pentobi Stufe %1 beginnen?</translation>
+        <translation>Начать игру Оранжевым против Pentobi уровня %1?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Gelb/Grün gegen Pentobi Stufe %1 beginnen?</translation>
+        <translation>Начать игру Желтым/Зеленым против Pentobi уровня %1?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Gelb gegen Pentobi Stufe %1 beginnen?</translation>
+        <translation>Начать игру Желтым против Pentobi уровня %1?</translation>
     </message>
     <message>
         <source>Start rated game with Red against Pentobi level %1?</source>
-        <translation>Gewertetes Spiel mit Rot gegen Pentobi Stufe %1 beginnen?</translation>
+        <translation>Начать игру Красным против Pentobi уровня %1?</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant.</source>
-        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
+        <translation>Вы еще не играли в рейтинговые игры в этом варианте игры.</translation>
     </message>
     <message>
         <source>Truncate this subtree?</source>
-        <translation>Diesen Teilbaum abschneiden?</translation>
+        <translation>Защитить это поддерево?</translation>
     </message>
     <message>
         <source>Truncate children?</source>
-        <translation>Kindknoten abschneiden?</translation>
+        <translation>Защитить от детей?</translation>
     </message>
     <message>
         <source>Discard game?</source>
-        <translation>Spiel verwerfen?</translation>
+        <translation>Сбросить игру?</translation>
     </message>
     <message>
         <source>Pentobi %1 (level %2)</source>
         <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
-        <translation>Pentobi %1 (Stufe %2)</translation>
+        <translation>Pentobi %1 (уровень %2)</translation>
     </message>
     <message>
         <source>Human</source>
         <extracomment>Player name for game info in rated game.</extracomment>
-        <translation>Mensch</translation>
+        <translation>Человек</translation>
     </message>
     <message>
         <source>Rated game</source>
-        <translation>Gewertetes Spiel</translation>
+        <translation>Рэйтинг</translation>
     </message>
     <message>
         <source>File has been modified by another application. Overwrite?</source>
-        <translation>Datei wurde von einer anderen Anwendung bearbeitet. Überschreiben?</translation>
+        <translation>Файл был изменен другим приложением. Перезаписать?</translation>
     </message>
     <message>
         <source>%1 - Pentobi</source>
@@ -690,212 +690,212 @@
     </message>
     <message>
         <source>Not enough memory</source>
-        <translation>Nicht genügend Speicher</translation>
+        <translation>Недостаточно памяти</translation>
     </message>
     <message>
         <source>Game analysis aborted</source>
-        <translation>Spielanalyse abgebrochen</translation>
+        <translation>Анализ игры прерван</translation>
     </message>
     <message>
         <source>Computer move aborted</source>
-        <translation>Computer-Zug abgebrochen</translation>
+        <translation>Ход Компьютера прерван</translation>
     </message>
     <message>
         <source>Rating information deleted</source>
-        <translation>Wertungsinformationen gelöscht</translation>
+        <translation>Удаление информации рейтинга</translation>
     </message>
     <message>
         <source>Variations deleted</source>
-        <translation>Varianten gelöscht</translation>
+        <translation>Варианты удалены</translation>
     </message>
     <message>
         <source>File saved</source>
-        <translation>Datei gespeichert</translation>
+        <translation>Файл сохранен</translation>
     </message>
     <message>
         <source>Saving image failed or unsupported image format</source>
-        <translation>Grafik konnte nicht gespeichert werden oder Bildformat nicht unterstützt</translation>
+        <translation>Ошибка сохранения или неподдерживаемый формат изображения</translation>
     </message>
     <message>
         <source>Image saved</source>
-        <translation>Grafik gespeichert</translation>
+        <translation>Изображение сохранено</translation>
     </message>
     <message>
         <source>Creating image failed</source>
-        <translation>Grafik konnte nicht erzeugt werden</translation>
+        <translation>Не удалось создать изображение</translation>
     </message>
     <message>
         <source>Continuing rated game</source>
-        <translation>Gewertetes Spiel wird fortgesetzt</translation>
+        <translation>Продолжение рейтинговой игры</translation>
     </message>
     <message>
         <source>Kept only position</source>
-        <translation>Nur Brettstellung behalten</translation>
+        <translation>Сохранять только позицию</translation>
     </message>
     <message>
         <source>Kept only subtree</source>
-        <translation>Nur Teilbaum behalten</translation>
+        <translation>Сохранять только поддерево</translation>
     </message>
     <message>
         <source>Variation is now %1</source>
-        <translation>Variante ist jetzt %1</translation>
+        <translation>Текущий вариант %1</translation>
     </message>
     <message>
         <source>Children truncated</source>
-        <translation>Kindknoten abgeschnitten</translation>
+        <translation>Защищено от детей</translation>
     </message>
     <message>
         <source>Setup</source>
         <extracomment>Small-screen label for setup mode (short for &quot;Setup Mode&quot;).</extracomment>
-        <translation>Aufbau</translation>
+        <translation>Настроить</translation>
     </message>
     <message>
         <source>Setup Mode</source>
-        <translation>Stellungsaufbau</translation>
+        <translation>Режим настройки</translation>
     </message>
     <message>
         <source>Rated</source>
         <extracomment>Label for ongoing rated game</extracomment>
-        <translation>Gewertet</translation>
+        <translation>Рэйтинг</translation>
     </message>
     <message>
         <source>Rated %1</source>
         <extracomment>Small-screen label for finished rated game (short for &quot;Rated Game&quot;). The argument is the game number.</extracomment>
-        <translation>Gewertet %1</translation>
+        <translation>Рэйтинг %1</translation>
     </message>
     <message>
         <source>Rated Game %1</source>
         <extracomment>Label for rated game. The argument is the game number.</extracomment>
-        <translation>Gewertetes Spiel %1</translation>
+        <translation>Рэйтинговая игра %1</translation>
     </message>
     <message>
         <source>Main Variation</source>
-        <translation>Hauptvariante</translation>
+        <translation>Основной вариант</translation>
     </message>
     <message>
         <source>Beginning of Branch</source>
-        <translation>Verzweigungsanfang</translation>
+        <translation>Начало Ветки</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Kommentar</translation>
+        <translation>Комментарий</translation>
     </message>
     <message>
         <source>Settings</source>
         <extracomment>Menu item Computer/Settings</extracomment>
-        <translation>Einstellungen</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Find Move</source>
-        <translation>Zug finden</translation>
+        <translation>Подсказать ход</translation>
     </message>
     <message>
         <source>Next Comment</source>
-        <translation>Nächster Kommentar</translation>
+        <translation>Следующий комментарий</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation>Vollbild</translation>
+        <translation>На весь экран</translation>
     </message>
     <message>
         <source>Game Info</source>
-        <translation>Spielinformation</translation>
+        <translation>Информация Об Игре</translation>
     </message>
     <message>
         <source>Move Number…</source>
-        <translation>Zugnummer …</translation>
+        <translation>Номер хода...</translation>
     </message>
     <message>
         <source>Pentobi Help</source>
-        <translation>Pentobi-Hilfe</translation>
+        <translation>Помощь</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Neu</translation>
+        <translation>Новая</translation>
     </message>
     <message>
         <source>Rated Game</source>
-        <translation>Gewertetes Spiel</translation>
+        <translation>Рэйтинг игра</translation>
     </message>
     <message>
         <source>Open…</source>
-        <translation>Öffnen …</translation>
+        <translation>Открыть…</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Spielen</translation>
+        <translation>Игра</translation>
     </message>
     <message>
         <source>Play Move</source>
         <extracomment>Play a single move</extracomment>
-        <translation>Zug spielen</translation>
+        <translation>Воспроизвести ход</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Beenden</translation>
+        <translation>Выход</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <source>Save As…</source>
-        <translation>Speichern unter …</translation>
+        <translation>Сохранить как…</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation>Stopp</translation>
+        <translation>Стоп</translation>
     </message>
     <message>
         <source>Undo Move</source>
-        <translation>Zug rückgängig</translation>
+        <translation>Отменить Ход</translation>
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation>Blau/Rot</translation>
+        <translation>Синий/Красный</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>Lila</translation>
+        <translation>Фиолетовый</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>Grün</translation>
+        <translation>Зеленый</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>Blau</translation>
+        <translation>Синий</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>Gelb/Grün</translation>
+        <translation>Желтый/Зеленый</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>Orange</translation>
+        <translation>Оранжевый</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>Gelb</translation>
+        <translation>Желтый</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>Rot</translation>
+        <translation>Красный</translation>
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation>Pentobi konnte keinen Zug generieren.</translation>
+        <translation>Pentobi не сумел сгенерировать ход.</translation>
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation>Zum Beenden erneut Zurück drücken</translation>
+        <translation>Нажмите назад еще раз, чтобы выйти</translation>
     </message>
 </context>
 <context>
     <name>MenuComputer</name>
     <message>
         <source>Computer</source>
-        <translation>Computer</translation>
+        <translation>Компьютер</translation>
     </message>
     <message>
         <source>C</source>
@@ -905,17 +905,17 @@
     <message>
         <source>S</source>
         <extracomment>Keyboard shortcut for menu item Computer Settings. Leave empty for no shortcut.</extracomment>
-        <translation>E</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>P</source>
         <extracomment>Keyboard shortcut for menu item Play. Leave empty for no shortcut.</extracomment>
-        <translation>S</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>M</source>
         <extracomment>Keyboard shortcut for menu item Play Move. Leave empty for no shortcut.</extracomment>
-        <translation>Z</translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>O</source>
@@ -927,124 +927,124 @@
     <name>MenuEdit</name>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation>Редактировать</translation>
     </message>
     <message>
         <source>E</source>
         <extracomment>Keyboard shortcut for menu Edit. Leave empty for no shortcut.</extracomment>
-        <translation>B</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>M</source>
         <extracomment>Keyboard shortcut for menu item Make Main Variation. Leave empty for no shortcut.</extracomment>
-        <translation>H</translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>Make Main Variation</source>
-        <translation>Zu Hauptvariante machen</translation>
+        <translation>Сделать основным вариантом</translation>
     </message>
     <message>
         <source>Variation Up</source>
         <extracomment>Short for Move Variation Up</extracomment>
-        <translation>Variante nach oben</translation>
+        <translation>Вариант вверх</translation>
     </message>
     <message>
         <source>U</source>
         <extracomment>Keyboard shortcut for menu item Variation Up. Leave empty for no shortcut.</extracomment>
-        <translation>O</translation>
+        <translation>U</translation>
     </message>
     <message>
         <source>Variation Down</source>
         <extracomment>Short for Move Variation Down</extracomment>
-        <translation>Variante nach unten</translation>
+        <translation>Вариант вниз</translation>
     </message>
     <message>
         <source>W</source>
         <extracomment>Keyboard shortcut for menu item Variation Down. Leave empty for no shortcut.</extracomment>
-        <translation>U</translation>
+        <translation>W</translation>
     </message>
     <message>
         <source>Delete Variations</source>
-        <translation>Varianten löschen</translation>
+        <translation>Удалить варианты</translation>
     </message>
     <message>
         <source>D</source>
         <extracomment>Keyboard shortcut for menu item Delete Variations. Leave empty for no shortcut.</extracomment>
-        <translation>V</translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>Truncate</source>
-        <translation>Abschneiden</translation>
+        <translation>Защита</translation>
     </message>
     <message>
         <source>T</source>
         <extracomment>Keyboard shortcut for menu item Truncate. Leave empty for no shortcut.</extracomment>
-        <translation>A</translation>
+        <translation>T</translation>
     </message>
     <message>
         <source>Truncate Children</source>
-        <translation>Kindknoten abschneiden</translation>
+        <translation>Защита от детей</translation>
     </message>
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu item Truncate Children. Leave empty for no shortcut.</extracomment>
-        <translation>K</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>Keep Position</source>
-        <translation>Brettstellung behalten</translation>
+        <translation>Сохранить Позицию</translation>
     </message>
     <message>
         <source>P</source>
         <extracomment>Keyboard shortcut for menu item Keep Position. Leave empty for no shortcut.</extracomment>
-        <translation>B</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>Keep Subtree</source>
-        <translation>Teilbaum behalten</translation>
+        <translation>Сохранить Поддерево</translation>
     </message>
     <message>
         <source>S</source>
         <extracomment>Keyboard shortcut for menu item Keep Subtree. Leave empty for no shortcut.</extracomment>
-        <translation>T</translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>Setup Mode</source>
-        <translation>Stellungsaufbau</translation>
+        <translation>Режим Настройки</translation>
     </message>
     <message>
         <source>O</source>
         <extracomment>Keyboard shortcut for menu item Setup Mode. Leave empty for no shortcut.</extracomment>
-        <translation>S</translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>Next Color</source>
-        <translation>Nächste Farbe</translation>
+        <translation>Следующий Цвет</translation>
     </message>
     <message>
         <source>N</source>
         <extracomment>Keyboard shortcut for menu item Next Color. Leave empty for no shortcut.</extracomment>
-        <translation>F</translation>
+        <translation>N</translation>
     </message>
     <message>
         <source>Annotation…</source>
-        <translation>Annotierung …</translation>
+        <translation>Пояснение…</translation>
     </message>
     <message>
         <source>A</source>
         <extracomment>Keyboard shortcut for menu item Annotation. Leave empty for no shortcut.</extracomment>
-        <translation>N</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Made main variation</source>
-        <translation>Zu Hauptvariante gemacht</translation>
+        <translation>Основные изменения</translation>
     </message>
 </context>
 <context>
     <name>MenuExport</name>
     <message>
         <source>Export</source>
-        <translation>Exportieren</translation>
+        <translation>Экспорт</translation>
     </message>
     <message>
         <source>E</source>
@@ -1054,7 +1054,7 @@
     <message>
         <source>M</source>
         <extracomment>Keyboard shortcut for menu item Image. Leave empty for no shortcut.</extracomment>
-        <translation>G</translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>A</source>
@@ -1063,23 +1063,23 @@
     </message>
     <message>
         <source>Image…</source>
-        <translation>Grafik …</translation>
+        <translation>Изображение…</translation>
     </message>
     <message>
         <source>ASCII Art…</source>
-        <translation>ASCII-Art …</translation>
+        <translation>ASCII…</translation>
     </message>
 </context>
 <context>
     <name>MenuGame</name>
     <message>
         <source>Game</source>
-        <translation>Spiel</translation>
+        <translation>Игра</translation>
     </message>
     <message>
         <source>G</source>
         <extracomment>Keyboard shortcut for menu Game. Leave empty for no shortcut.</extracomment>
-        <translation>S</translation>
+        <translation>G</translation>
     </message>
     <message>
         <source>N</source>
@@ -1089,11 +1089,11 @@
     <message>
         <source>R</source>
         <extracomment>Keyboard shortcut for menu item Rated Game. Leave empty for no shortcut.</extracomment>
-        <translation>W</translation>
+        <translation>R</translation>
     </message>
     <message>
         <source>Game Variant…</source>
-        <translation>Spielvariante …</translation>
+        <translation>Вариант игры...</translation>
     </message>
     <message>
         <source>V</source>
@@ -1103,31 +1103,31 @@
     <message>
         <source>I</source>
         <extracomment>Keyboard shortcut for menu item Game Info. Leave empty for no shortcut.</extracomment>
-        <translation>O</translation>
+        <translation>I</translation>
     </message>
     <message>
         <source>U</source>
         <extracomment>Keyboard shortcut for menu item Undo. Leave empty for no shortcut.</extracomment>
-        <translation>R</translation>
+        <translation>U</translation>
     </message>
     <message>
         <source>F</source>
         <extracomment>Keyboard shortcut for menu item Find Move. Leave empty for no shortcut.</extracomment>
-        <translation>Z</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>O</source>
         <extracomment>Keyboard shortcut for menu item Open. Leave empty for no shortcut.</extracomment>
-        <translation>f</translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>Open Clipboard</source>
-        <translation>Zwischenablage öffnen</translation>
+        <translation>Открыть Буфер обмена</translation>
     </message>
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu item Open Clipboard. Leave empty for no shortcut.</extracomment>
-        <translation>A</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>S</source>
@@ -1137,24 +1137,24 @@
     <message>
         <source>A</source>
         <extracomment>Keyboard shortcut for menu item Save As. Leave empty for no shortcut.</extracomment>
-        <translation>U</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Q</source>
         <extracomment>Keyboard shortcut for menu item Quit. Leave empty for no shortcut.</extracomment>
-        <translation>B</translation>
+        <translation>Q</translation>
     </message>
 </context>
 <context>
     <name>MenuGo</name>
     <message>
         <source>Go</source>
-        <translation>Gehe zu</translation>
+        <translation>Ход</translation>
     </message>
     <message>
         <source>O</source>
         <extracomment>Keyboard shortcut for menu Go. Leave empty for no shortcut.</extracomment>
-        <translation>G</translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>N</source>
@@ -1164,24 +1164,24 @@
     <message>
         <source>M</source>
         <extracomment>Keyboard shortcut for menu item Go/Main Variation. Leave empty for no shortcut.</extracomment>
-        <translation>H</translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>B</source>
         <extracomment>Keyboard shortcut for menu item Beginning Of Branch. Leave empty for no shortcut.</extracomment>
-        <translation>V</translation>
+        <translation>B</translation>
     </message>
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu item Next Comment. Leave empty for no shortcut.</extracomment>
-        <translation>K</translation>
+        <translation>C</translation>
     </message>
 </context>
 <context>
     <name>MenuHelp</name>
     <message>
         <source>Help</source>
-        <translation>Hilfe</translation>
+        <translation>Помощь</translation>
     </message>
     <message>
         <source>H</source>
@@ -1195,21 +1195,21 @@
     </message>
     <message>
         <source>About Pentobi</source>
-        <translation>Über Pentobi</translation>
+        <translation>О Pentobi</translation>
     </message>
     <message>
         <source>A</source>
         <extracomment>Keyboard shortcut for menu item About Pentobi. Leave empty for no shortcut.</extracomment>
-        <translation>B</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Report Bug</source>
-        <translation>Fehler melden</translation>
+        <translation>Сообщить об ошибке</translation>
     </message>
     <message>
         <source>B</source>
         <extracomment>Keyboard shortcut for menu item Report Bug. Leave empty for no shortcut.</extracomment>
-        <translation>F</translation>
+        <translation>B</translation>
     </message>
 </context>
 <context>
@@ -1217,24 +1217,24 @@
     <message>
         <source>Ctrl</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Strg</translation>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <source>Shift</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Umschalt</translation>
+        <translation>Shift</translation>
     </message>
 </context>
 <context>
     <name>MenuRecentFiles</name>
     <message>
         <source>Open Recent</source>
-        <translation>Zuletzt benutzt</translation>
+        <translation>Открыть Недавние</translation>
     </message>
     <message>
         <source>P</source>
         <extracomment>Keyboard shortcut for menu Open Recent. Leave empty for no shortcut.</extracomment>
-        <translation>T</translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>%1. %2</source>
@@ -1244,42 +1244,42 @@
     <message>
         <source>Clear List</source>
         <extracomment>Menu item for clearing the recent files list</extracomment>
-        <translation>Liste leeren</translation>
+        <translation>Очистить Список</translation>
     </message>
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu item Recent Files/Clear List. Leave empty for no shortcut.</extracomment>
-        <translation>L</translation>
+        <translation>C</translation>
     </message>
 </context>
 <context>
     <name>MenuTools</name>
     <message>
         <source>Tools</source>
-        <translation>Extras</translation>
+        <translation>Инструменты</translation>
     </message>
     <message>
         <source>T</source>
         <extracomment>Keyboard shortcut for menu Tools. Leave empty for no shortcut.</extracomment>
-        <translation>X</translation>
+        <translation>T</translation>
     </message>
     <message>
         <source>Rating</source>
-        <translation>Wertung</translation>
+        <translation>Рейтинг</translation>
     </message>
     <message>
         <source>R</source>
         <extracomment>Keyboard shortcut for menu item Rating. Leave empty for no shortcut.</extracomment>
-        <translation>W</translation>
+        <translation>R</translation>
     </message>
     <message>
         <source>Clear Rating</source>
-        <translation>Wertung löschen</translation>
+        <translation>Очистить Рейтинг</translation>
     </message>
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu item Clear Rating. Leave empty for no shortcut.</extracomment>
-        <translation>L</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>A</source>
@@ -1288,231 +1288,231 @@
     </message>
     <message>
         <source>Clear Analysis</source>
-        <translation>Analyse löschen</translation>
+        <translation>Очистить Анализ</translation>
     </message>
     <message>
         <source>E</source>
         <extracomment>Keyboard shortcut for menu item Clear Analysis. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>Analyze Game…</source>
-        <translation>Spiel analysieren …</translation>
+        <translation>Анализировать игру…</translation>
     </message>
 </context>
 <context>
     <name>MenuView</name>
     <message>
         <source>View</source>
-        <translation>Ansicht</translation>
+        <translation>Просмотр</translation>
     </message>
     <message>
         <source>V</source>
         <extracomment>Keyboard shortcut for menu View. Leave empty for no shortcut.</extracomment>
-        <translation>A</translation>
+        <translation>V</translation>
     </message>
     <message>
         <source>A</source>
         <extracomment>Keyboard shortcut for menu Appearance. Leave empty for no shortcut.</extracomment>
-        <translation>E</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>F</source>
         <extracomment>Keyboard shortcut for menu item Fullscreen. Leave empty for no shortcut.</extracomment>
-        <translation>V</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>C</source>
         <extracomment>Keyboard shortcut for menu item View/Comment. Leave empty for no shortcut.</extracomment>
-        <translation>K</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>Appearance</source>
-        <translation>Erscheinungsbild</translation>
+        <translation>Внешний вид</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation>Werkzeugleiste</translation>
+        <translation>Панель инструментов</translation>
     </message>
     <message>
         <source>T</source>
         <extracomment>Keyboard shortcut for menu item View/Toolbar. Leave empty for no shortcut.</extracomment>
-        <translation>W</translation>
+        <translation>T</translation>
     </message>
 </context>
 <context>
     <name>MoveAnnotationDialog</name>
     <message>
         <source>Move %1</source>
-        <translation>Zug %1</translation>
+        <translation>Ход %1</translation>
     </message>
     <message>
         <source>Very good</source>
-        <translation>Sehr gut</translation>
+        <translation>Очень хорошо</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation>Gut</translation>
+        <translation>Хорошо</translation>
     </message>
     <message>
         <source>Interesting</source>
-        <translation>Interessant</translation>
+        <translation>Интересно</translation>
     </message>
     <message>
         <source>Doubtful</source>
-        <translation>Zweifelhaft</translation>
+        <translation>Сомнительно</translation>
     </message>
     <message>
         <source>Bad</source>
-        <translation>Schlecht</translation>
+        <translation>Плохо</translation>
     </message>
     <message>
         <source>Very Bad</source>
-        <translation>Sehr schlecht</translation>
+        <translation>Очень плохо</translation>
     </message>
     <message>
         <source>No annotation</source>
-        <translation>Keine Annotierung</translation>
+        <translation>Нет аннотации</translation>
     </message>
 </context>
 <context>
     <name>NewFolderDialog</name>
     <message>
         <source>Folder name:</source>
-        <translation>Name des Ordners:</translation>
+        <translation>Имя каталога:</translation>
     </message>
 </context>
 <context>
     <name>OpenDialog</name>
     <message>
         <source>Open</source>
-        <translation>Öffnen</translation>
+        <translation>Открыть</translation>
     </message>
     <message>
         <source>Blokus games</source>
-        <translation>Blokus-Partien</translation>
+        <translation>Игры Блокус</translation>
     </message>
 </context>
 <context>
     <name>RatingDialog</name>
     <message>
         <source>Your rating:</source>
-        <translation>Ihre Wertung:</translation>
+        <translation>Ваш рейтинг:</translation>
     </message>
     <message>
         <source>Game variant:</source>
-        <translation>Spielvariante:</translation>
+        <translation>Вариант игры:</translation>
     </message>
     <message>
         <source>Classic (2)</source>
         <extracomment>Short for Classic (2 players)</extracomment>
-        <translation>Klassisch (2)</translation>
+        <translation>Классическая (2)</translation>
     </message>
     <message>
         <source>Classic (3)</source>
         <extracomment>Short for Classic (3 players)</extracomment>
-        <translation>Klassisch (3)</translation>
+        <translation>Классическая (3)</translation>
     </message>
     <message>
         <source>Classic (4)</source>
         <extracomment>Short for Classic (4 players)</extracomment>
-        <translation>Klassisch (4)</translation>
+        <translation>Классическая (4)</translation>
     </message>
     <message>
         <source>Duo</source>
-        <translation>Duo</translation>
+        <translation>Два игрока</translation>
     </message>
     <message>
         <source>Junior</source>
-        <translation>Junior</translation>
+        <translation>Юниор</translation>
     </message>
     <message>
         <source>Trigon (2)</source>
         <extracomment>Short for Trigon (2 players)</extracomment>
-        <translation>Trigon (2)</translation>
+        <translation>Тригон (2)</translation>
     </message>
     <message>
         <source>Trigon (3)</source>
         <extracomment>Short for Trigon (3 players)</extracomment>
-        <translation>Trigon (3)</translation>
+        <translation>Тригон (3)</translation>
     </message>
     <message>
         <source>Trigon (4)</source>
         <extracomment>Short for Trigon (4 players)</extracomment>
-        <translation>Trigon (4)</translation>
+        <translation>Тригон (4)</translation>
     </message>
     <message>
         <source>Nexos (2)</source>
         <extracomment>Short for Nexos (2 players)</extracomment>
-        <translation>Nexos (2)</translation>
+        <translation>Нексос (2)</translation>
     </message>
     <message>
         <source>Nexos (4)</source>
         <extracomment>Short for Nexos (4 players)</extracomment>
-        <translation>Nexos (4)</translation>
+        <translation>Нексос (4)</translation>
     </message>
     <message>
         <source>Callisto (2)</source>
         <extracomment>Short for Callisto (2 players, 2 colors)</extracomment>
-        <translation>Callisto (2)</translation>
+        <translation>Каллисто (2)</translation>
     </message>
     <message>
         <source>Callisto (2/4)</source>
         <extracomment>Short for Callisto (2 players, 4 colors)</extracomment>
-        <translation>Callisto (2/4)</translation>
+        <translation>Каллисто (2/4)</translation>
     </message>
     <message>
         <source>Callisto (3)</source>
         <extracomment>Short for Callisto (3 players)</extracomment>
-        <translation>Callisto (3)</translation>
+        <translation>Каллисто (3)</translation>
     </message>
     <message>
         <source>Callisto (4)</source>
         <extracomment>Short for Callisto (4 players)</extracomment>
-        <translation>Callisto (4)</translation>
+        <translation>Каллисто (4)</translation>
     </message>
     <message>
         <source>GembloQ (4)</source>
         <extracomment>Short for GembloQ (4 players)</extracomment>
-        <translation>GembloQ (4)</translation>
+        <translation>ГемблоQ (4)</translation>
     </message>
     <message>
         <source>GembloQ (2)</source>
         <extracomment>Short for GembloQ (2 players, 2 colors)</extracomment>
-        <translation>GembloQ (2)</translation>
+        <translation>ГемблоQ (2)</translation>
     </message>
     <message>
         <source>GembloQ (2/4)</source>
         <extracomment>Short for GembloQ (2 players, 4 colors)</extracomment>
-        <translation>GembloQ (2/4)</translation>
+        <translation>ГемблоQ (2/4)</translation>
     </message>
     <message>
         <source>GembloQ (3)</source>
         <extracomment>Short for GembloQ (3 players)</extracomment>
-        <translation>GembloQ (3)</translation>
+        <translation>ГемблоQ (3)</translation>
     </message>
     <message>
         <source>Rated games:</source>
-        <translation>Gewertete Spiele:</translation>
+        <translation>Рэйтинг:</translation>
     </message>
     <message>
         <source>Best previous rating:</source>
-        <translation>Beste frühere Wertung:</translation>
+        <translation>Лучший предыдущий рейтинг:</translation>
     </message>
     <message>
         <source>Recent development:</source>
-        <translation>Aktuelle Entwicklung:</translation>
+        <translation>Последняя разработка:</translation>
     </message>
 </context>
 <context>
     <name>SaveDialog</name>
     <message>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <source>Blokus games</source>
-        <translation>Blokus-Partien</translation>
+        <translation>Игры Блокус</translation>
     </message>
 </context>
 <context>
@@ -1520,181 +1520,181 @@
     <message>
         <source>Game</source>
         <extracomment>Table header for game number in rating dialog</extracomment>
-        <translation>Spiel</translation>
+        <translation>Игра</translation>
     </message>
     <message>
         <source>Result</source>
         <extracomment>Table header for game result in rating dialog</extracomment>
-        <translation>Ergebnis</translation>
+        <translation>Результат</translation>
     </message>
     <message>
         <source>Level</source>
         <extracomment>Table header for level in rating dialog</extracomment>
-        <translation>Stufe</translation>
+        <translation>Уровень</translation>
     </message>
     <message>
         <source>Your Color</source>
         <extracomment>Table header for player color(s) in rating dialog</extracomment>
-        <translation>Ihre Farbe</translation>
+        <translation>Ваш Цвет</translation>
     </message>
     <message>
         <source>Date</source>
         <extracomment>Table header for game date in rating dialog</extracomment>
-        <translation>Datum</translation>
+        <translation>Дата:</translation>
     </message>
     <message>
         <source>Win</source>
         <extracomment>Result of rated game is a win</extracomment>
-        <translation>Gewinn</translation>
+        <translation>Победа</translation>
     </message>
     <message>
         <source>Loss</source>
         <extracomment>Result of rated game is a loss</extracomment>
-        <translation>Verlust</translation>
+        <translation>Проигрыш</translation>
     </message>
     <message>
         <source>Tie</source>
         <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
-        <translation>Unentsch.</translation>
+        <translation>Ничья</translation>
     </message>
 </context>
 <context>
     <name>ToolBar</name>
     <message>
         <source>Start a new game</source>
-        <translation>Ein neues Spiel beginnen</translation>
+        <translation>Начать новую игру</translation>
     </message>
     <message>
         <source>Start a rated game</source>
-        <translation>Ein gewertetes Spiel beginnen</translation>
+        <translation>Начать рейтинговую игру</translation>
     </message>
     <message>
         <source>Set the colors played by the computer</source>
-        <translation>Die vom Computer gespielten Farben festlegen</translation>
+        <translation>Установите цвета игроков компьютера</translation>
     </message>
     <message>
         <source>Make the computer continue to play the current color</source>
-        <translation>Den Computer die gegenwärtige Farbe weiterspielen lassen</translation>
+        <translation>Сделать так, чтобы компьютер продолжал играть в текущем цвете</translation>
     </message>
     <message>
         <source>Make the computer play the current color</source>
-        <translation>Den Computer die gegenwärtige Farbe spielen lassen</translation>
+        <translation>Сделать так, чтобы компьютер играл в текущем цвете</translation>
     </message>
     <message>
         <source>Go to beginning of game</source>
-        <translation>Zum Anfang des Spiels gehen</translation>
+        <translation>К началу игры</translation>
     </message>
     <message>
         <source>Go ten moves backward</source>
-        <translation>Zehn Züge zurück gehen</translation>
+        <translation>На десять ходов назад</translation>
     </message>
     <message>
         <source>Go one move backward</source>
-        <translation>Einen Zug zurück gehen</translation>
+        <translation>На один шаг назад</translation>
     </message>
     <message>
         <source>Go one move forward</source>
-        <translation>Einen Zug vorwärts gehen</translation>
+        <translation>Вперед на один ход</translation>
     </message>
     <message>
         <source>Go ten moves forward</source>
-        <translation>Zehn Züge vorwärts gehen</translation>
+        <translation>Вперед на десять ходов</translation>
     </message>
     <message>
         <source>Go to end of moves</source>
-        <translation>Zum Ende der Züge gehen</translation>
+        <translation>К концу ходов</translation>
     </message>
     <message>
         <source>Go to previous variation</source>
-        <translation>Zur vorherigen Variante gehen</translation>
+        <translation>К предыдущему варианту</translation>
     </message>
     <message>
         <source>Go to next variation</source>
-        <translation>Zur nächsten Variante gehen</translation>
+        <translation>К следующему варианту</translation>
     </message>
     <message>
         <source>Abort game analysis</source>
-        <translation>Spielanalyse abbrechen</translation>
+        <translation>Прервать анализ игры</translation>
     </message>
     <message>
         <source>Abort computer move</source>
-        <translation>Computer-Zug abbrechen</translation>
+        <translation>Прервать перемещение компьютера</translation>
     </message>
     <message>
         <source>Undo move</source>
         <extracomment>Tooltip for Undo button</extracomment>
-        <translation>Zug rückgängig</translation>
+        <translation>Отменить Ход</translation>
     </message>
     <message>
         <source>Open menu</source>
-        <translation>Menü öffnen</translation>
+        <translation>Открыть меню</translation>
     </message>
 </context>
 <context>
     <name>main</name>
     <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation>Computer-Gegner für das Brettspiel Blokus</translation>
+        <translation>оппонент компьютерной настольной игры Блокус</translation>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation>Maximale Spielstufe auf &lt;n&gt; setzen.</translation>
+        <translation>Установить максимальный уровень на &lt;n&gt;.</translation>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation>Keine Eröffnungsbibliotheken benutzen.</translation>
+        <translation>Не использовать открытие книг.</translation>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation>Für Smartphones optimiertes Layout benutzen.</translation>
+        <translation>Используйте макет, оптимизированный для смартфонов.</translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation>Schnelle Computer-Züge nicht verzögern.</translation>
+        <translation>Не снижать быстрые движения компьютера.</translation>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation>Seed für Zufallszahlen auf &lt;n&gt; setzen.</translation>
+        <translation>Установить случайный источник в &lt;n&gt;.</translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation>&lt;n&gt; Threads benutzen (0=automatisch).</translation>
+        <translation>Использовать &lt;n&gt; потоков (0=auto).</translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation>Log-Informationen auf Standard-Error ausgeben.</translation>
+        <translation>Печать информации журнала до стандартной ошибки.</translation>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation>Datei.blksgf</translation>
+        <translation>файл.blksgf</translation>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation>Zu öffnende Blokus-SGF-Datei (optional).</translation>
+        <translation>Blokus SGF файл для открытия (опционно).</translation>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation>--maxlevel muss zwischen 1 und %1 sein</translation>
+        <translation>--maxlevel должно быть между 1 и %1</translation>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation>--seed muss eine positive Zahl sein</translation>
+        <translation>--seed должно быть положительное число</translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation>--threads muss eine positive Zahl sein</translation>
+        <translation>--threads должно быть положительное число</translation>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation>Zu viele Argumente</translation>
+        <translation>Слишком много аргументов</translation>
     </message>
 </context>
 </TS>
