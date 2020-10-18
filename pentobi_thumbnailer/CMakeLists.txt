@@ -34,6 +34,7 @@ endforeach()
 qt5_add_translation(pentobi_thumbnailer_QM
     i18n/de.ts
     i18n/es.ts
+    i18n/ru.ts
     OPTIONS -removeidentical -nounfinished
     )
 add_custom_command(

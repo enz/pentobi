@@ -2,5 +2,6 @@
 <qresource prefix="/i18n">
 <file>de.qm</file>
 <file>es.qm</file>
+<file>ru.qm</file>
 </qresource>
 </RCC>
