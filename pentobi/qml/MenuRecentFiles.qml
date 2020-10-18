@@ -9,22 +9,14 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: addShortcut(qsTr("Open Recent"),
-                       //: Keyboard shortcut for menu Open Recent. Leave empty for no shortcut.
-                       qsTr("P"))
+    title: qsTr("Open Recent")
     enabled: gameModel.recentFiles.length > 0
 
     function getText(recentFiles, index) {
         if (index >= recentFiles.length)
             return ""
         var text = recentFiles[index]
-        text = text.substring(text.lastIndexOf("/") + 1)
-        if (isDesktop)
-            //: Format in recent files menu. First argument is the
-            //: file number, second argument the file name.
-            text = addShortcut(qsTr("%1. %2").arg(index + 1).arg(text),
-                               (index + 1).toString())
-        return text
+        return text.substring(text.lastIndexOf("/") + 1)
     }
 
     // Instantiator in Menu doesn't work reliably with Qt 5.11 or 5.12.0 alpha
@@ -87,9 +79,7 @@ Pentobi.Menu {
     MenuSeparator { }
     Action {
         //: Menu item for clearing the recent files list
-        text: addShortcut(qsTr("Clear List"),
-                          //: Keyboard shortcut for menu item Recent Files/Clear List. Leave empty for no shortcut.
-                          qsTr("C"))
+        text: qsTr("Clear List")
         // clearRecentFiles() must be called after menu is closed because it
         // modifies the menu and otherwise the menu stays visible (tested with
         // Qt 5.15.1)

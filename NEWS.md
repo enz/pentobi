@@ -18,6 +18,7 @@ Version 18.2.x (v18-fixes)
 * Better visual feedback of button presses on newer Android devices.
 * Added workaround for white single-pixel line visible on some
   Android devices when leaving fullscreen mode (QTBUG-55600).
+* Menu shortcuts are no longer supported.
 
 Version 18.2 (10 Oct 2020)
 --------------------------

@@ -9,38 +9,26 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: addShortcut(qsTr("Tools"),
-                       //: Keyboard shortcut for menu Tools. Leave empty for no shortcut.
-                       qsTr("T"))
+    title: qsTr("Tools")
 
     Pentobi.MenuItem {
-        text: addShortcut(qsTr("Rating"),
-                          //: Keyboard shortcut for menu item Rating. Leave empty for no shortcut.
-                          qsTr("R"))
+        text: qsTr("Rating")
         onTriggered: Logic.rating()
     }
     Action {
         enabled: ! isRated && ratingModel.numberGames > 0
-        text: addShortcut(qsTr("Clear Rating"),
-                          //: Keyboard shortcut for menu item Clear Rating. Leave empty for no shortcut.
-                          qsTr("C"))
+        text: qsTr("Clear Rating")
         onTriggered: Logic.clearRating()
     }
     MenuSeparator { }
     Action {
         enabled: ! isRated && (gameModel.canGoBackward || gameModel.canGoForward)
-        // Text needs to end with ellipsis on desktop because it opens a
-        // dialog asking for analysis speed, but not on Android
-        text: addShortcut(qsTr("Analyze Game…"),
-                          //: Keyboard shortcut for menu item Analyze Game. Leave empty for no shortcut.
-                          qsTr("A"))
+        text: qsTr("Analyze Game…")
         onTriggered: analyzeDialog.open()
     }
     Action {
         enabled: analyzeGameModel.elements.length !== 0
-        text: addShortcut(qsTr("Clear Analysis"),
-                          //: Keyboard shortcut for menu item Clear Analysis. Leave empty for no shortcut.
-                          qsTr("E"))
+        text: qsTr("Clear Analysis")
         onTriggered: {
             analyzeGameModel.clear()
             gameView.deleteAnalysis()
