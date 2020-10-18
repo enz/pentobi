@@ -8,17 +8,12 @@ import QtQuick 2.0
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import QtQuick.Window 2.2
-import "Controls.js" as PentobiControls
 
 // Custom menu item that displays shortcuts (MenuItem in Qt 5.11 does not).
 MenuItem {
     id: root
 
     property string shortcut: action && action.shortcut ? action.shortcut : ""
-
-    function addShortcut(text, shortcut) {
-        return PentobiControls.addShortcut(text, shortcut)
-    }
 
     property real _anyItemIndicatorWidth: {
         if (menu)

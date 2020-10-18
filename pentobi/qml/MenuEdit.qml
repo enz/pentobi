@@ -8,14 +8,10 @@ import "Main.js" as Logic
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: addShortcut(qsTr("Edit"),
-                       //: Keyboard shortcut for menu Edit. Leave empty for no shortcut.
-                       qsTr("E"))
+    title: qsTr("Edit")
 
     Pentobi.MenuItem {
-        text: addShortcut(qsTr("Annotation…"),
-                          //: Keyboard shortcut for menu item Annotation. Leave empty for no shortcut.
-                          qsTr("A"))
+        text: qsTr("Annotation…")
         enabled: gameModel.moveNumber > 0
         onTriggered: {
             var dialog = moveAnnotationDialog.get()
@@ -25,9 +21,7 @@ Pentobi.Menu {
     }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
-        text: addShortcut(qsTr("Make Main Variation"),
-                          //: Keyboard shortcut for menu item Make Main Variation. Leave empty for no shortcut.
-                          qsTr("M"))
+        text: qsTr("Make Main Variation")
         enabled: ! gameModel.isMainVar && ! isRated
         onTriggered: {
             gameModel.makeMainVar()
@@ -36,61 +30,45 @@ Pentobi.Menu {
     }
     Pentobi.MenuItem {
         //: Short for Move Variation Up
-        text: addShortcut(qsTr("Variation Up"),
-                          //: Keyboard shortcut for menu item Variation Up. Leave empty for no shortcut.
-                          qsTr("U"))
+        text: qsTr("Variation Up")
         enabled: gameModel.hasPrevVar && ! isRated
         onTriggered: Logic.moveUpVar()
     }
     Pentobi.MenuItem {
         //: Short for Move Variation Down
-        text: addShortcut(qsTr("Variation Down"),
-                          //: Keyboard shortcut for menu item Variation Down. Leave empty for no shortcut.
-                          qsTr("W"))
+        text: qsTr("Variation Down")
         enabled: gameModel.hasNextVar && ! isRated
         onTriggered: Logic.moveDownVar()
     }
     Pentobi.MenuItem {
-        text: addShortcut(qsTr("Delete Variations"),
-                          //: Keyboard shortcut for menu item Delete Variations. Leave empty for no shortcut.
-                          qsTr("D"))
+        text: qsTr("Delete Variations")
         enabled: gameModel.hasVariations && ! isRated
         onTriggered: Logic.deleteAllVar()
     }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
-        text: addShortcut(qsTr("Truncate"),
-                          //: Keyboard shortcut for menu item Truncate. Leave empty for no shortcut.
-                          qsTr("T"))
+        text: qsTr("Truncate")
         enabled: gameModel.canGoBackward && ! isRated
         onTriggered: Logic.truncate()
     }
     Pentobi.MenuItem {
-        text: addShortcut(qsTr("Truncate Children"),
-                          //: Keyboard shortcut for menu item Truncate Children. Leave empty for no shortcut.
-                          qsTr("C"))
+        text: qsTr("Truncate Children")
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: Logic.truncateChildren()
     }
     Pentobi.MenuItem {
-        text: addShortcut(qsTr("Keep Position"),
-                          //: Keyboard shortcut for menu item Keep Position. Leave empty for no shortcut.
-                          qsTr("P"))
+        text: qsTr("Keep Position")
         enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward) && ! isRated
         onTriggered: Logic.keepOnlyPosition()
     }
     Pentobi.MenuItem {
-        text: addShortcut(qsTr("Keep Subtree"),
-                          //: Keyboard shortcut for menu item Keep Subtree. Leave empty for no shortcut.
-                          qsTr("S"))
+        text: qsTr("Keep Subtree")
         enabled: gameModel.canGoBackward && gameModel.canGoForward && ! isRated
         onTriggered: Logic.keepOnlySubtree()
     }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
-        text: addShortcut(qsTr("Setup Mode"),
-                          //: Keyboard shortcut for menu item Setup Mode. Leave empty for no shortcut.
-                          qsTr("O"))
+        text: qsTr("Setup Mode")
         checkable: true
         enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
                  && gameModel.moveNumber === 0 && ! isRated
@@ -107,9 +85,7 @@ Pentobi.Menu {
         }
     }
     Pentobi.MenuItem {
-        text: addShortcut(qsTr("Next Color"),
-                          //: Keyboard shortcut for menu item Next Color. Leave empty for no shortcut.
-                          qsTr("N"))
+        text: qsTr("Next Color")
         enabled: ! isRated
         onTriggered: {
             gameView.pickedPiece = null

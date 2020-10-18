@@ -8,20 +8,14 @@ import QtQuick.Controls 2.3
 import "." as Pentobi
 
 Pentobi.Menu {
-    title: addShortcut(qsTr("Export"),
-                       //: Keyboard shortcut for menu Export. Leave empty for no shortcut.
-                       qsTr("E"))
+    title: qsTr("Export")
 
     Action {
-        text: addShortcut(qsTr("Image…"),
-                          //: Keyboard shortcut for menu item Image. Leave empty for no shortcut.
-                          qsTr("M"))
+        text: qsTr("Image…")
         onTriggered: exportImageDialog.open()
     }
     Action {
-        text: addShortcut(qsTr("ASCII Art…"),
-                          //: Keyboard shortcut for menu item ASCII Art. Leave empty for no shortcut.
-                          qsTr("A"))
+        text: qsTr("ASCII Art…")
         onTriggered: {
             var dialog = asciiArtSaveDialog.get()
             dialog.name = gameModel.suggestFileName(folder, "txt")
