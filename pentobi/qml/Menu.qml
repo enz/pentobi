@@ -9,7 +9,11 @@ import QtQuick.Controls 2.2
 import "." as Pentobi
 
 Menu {
-    width: Math.min(font.pixelSize * 23, rootWindow.contentItem.width)
+    // Width in font-size units
+    property real relativeWidth: 23
+
+    width: Math.min(font.pixelSize * (isDesktop ? relativeWidth : 23),
+                    rootWindow.contentItem.width)
     cascade: isDesktop
     closePolicy: isDesktop ?
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent

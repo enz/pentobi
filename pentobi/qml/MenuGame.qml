@@ -48,7 +48,7 @@ Pentobi.Menu {
     Pentobi.MenuItem {
         action: actionSaveAs
     }
-    MenuExport { }
+    MenuExport { relativeWidth: 10 }
     Pentobi.MenuSeparator { }
     Pentobi.MenuItem {
         action: actionQuit
