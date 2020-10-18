@@ -242,6 +242,7 @@ TRANSLATIONS = \
     qml/i18n/qml_es.ts \
     qml/i18n/qml_fr.ts \
     qml/i18n/qml_nb_NO.ts \
+    qml/i18n/qml_ru.ts \
     qml/i18n/qml_zh_CN.ts
 
 qtPrepareTool(LRELEASE, lrelease)
