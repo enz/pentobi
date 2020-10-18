@@ -1,0 +1,121 @@
+# 
+# Translators:
+# Виктор Ерухин <official159ru@mail.ru>, 2020
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2020-10-16 07:22+0200\n"
+"PO-Revision-Date: 2019-02-25 15:38+0000\n"
+"Last-Translator: Виктор Ерухин <official159ru@mail.ru>, 2020\n"
+"Language-Team: Russian (https://www.transifex.com/markus-enzenberger/teams/89074/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr "переводчик-вклад"
+
+#. (itstool) path: refmeta/refmiscinfo
+#: pentobi-thumbnailer-manpage.docbook.in:11
+msgid "Pentobi"
+msgstr "Pentobi"
+
+#. (itstool) path: refmeta/refmiscinfo
+#: pentobi-thumbnailer-manpage.docbook.in:13
+msgid "Pentobi Command Reference"
+msgstr "Справочник команд Pentobi"
+
+#. (itstool) path: refnamediv/refpurpose
+#: pentobi-thumbnailer-manpage.docbook.in:18
+msgid ""
+"thumbnailer for game records for the board game Blokus as used by the "
+"program Pentobi"
+msgstr "эскиз для записей игр Блокус, используемый Pentobi"
+
+#. (itstool) path: refsynopsisdiv/cmdsynopsis
+#: pentobi-thumbnailer-manpage.docbook.in:25
+msgid ""
+"<_:command-1/> <arg> <group choice=\"plain\"> <arg "
+"choice=\"plain\"><_:option-2/></arg> <arg "
+"choice=\"plain\"><_:option-3/></arg> </group> <replaceable>n</replaceable> "
+"</arg> <arg choice=\"plain\"><replaceable>inputfile</replaceable></arg> <arg"
+" choice=\"plain\"><replaceable>outputfile</replaceable></arg>"
+msgstr ""
+"<_:command-1/> <arg> <group choice=\"plain\"> <arg "
+"choice=\"plain\"><_:option-2/></arg> <arg "
+"choice=\"plain\"><_:option-3/></arg> </group> <replaceable>n</replaceable> "
+"</arg> <arg choice=\"plain\"><replaceable>входной</replaceable></arg> <arg "
+"choice=\"plain\"><replaceable>выходной</replaceable></arg>"
+
+#. (itstool) path: refsection/title
+#: pentobi-thumbnailer-manpage.docbook.in:54
+msgid "Description"
+msgstr "Описание"
+
+#. (itstool) path: refsection/para
+#: pentobi-thumbnailer-manpage.docbook.in:55
+msgid ""
+"<_:command-1/> is part of the program Pentobi and intended to be used as a "
+"thumbnailer for the Gnome desktop environment to generate previews of game "
+"files written by Pentobi."
+msgstr ""
+"<_:command-1/> является частью программы Pentobi и предназначен для "
+"использования в качестве эскиза в среде рабочего стола Gnome для создания "
+"превью игровых файлов, написанных Pentobi."
+
+#. (itstool) path: refsection/para
+#: pentobi-thumbnailer-manpage.docbook.in:60
+msgid ""
+"The input file is a game file in Pentobi's SGF format as documented in "
+"Pentobi-SGF.md in the Pentobi source package. The output file is a thumbnail"
+" image in PNG format."
+msgstr ""
+"Входной файл Pentobi представляет собой игровой файл в формате SGF, как "
+"описано в Pentobi-SGF.md в исходном пакете Pentobi. Выходной файл "
+"представляет собой уменьшенное изображение в формате PNG."
+
+#. (itstool) path: refsection/title
+#: pentobi-thumbnailer-manpage.docbook.in:68
+msgid "Options"
+msgstr "Параметры"
+
+#. (itstool) path: listitem/para
+#: pentobi-thumbnailer-manpage.docbook.in:74
+msgid "Display help and exit."
+msgstr "Показать справку и выйти."
+
+#. (itstool) path: varlistentry/term
+#: pentobi-thumbnailer-manpage.docbook.in:80
+#: pentobi-thumbnailer-manpage.docbook.in:81
+msgid "<_:option-1/> <replaceable>n</replaceable>"
+msgstr "<_:option-1/> <replaceable>n</replaceable>"
+
+#. (itstool) path: listitem/para
+#: pentobi-thumbnailer-manpage.docbook.in:83
+msgid "The size of the thumbnail. The default is 128."
+msgstr "Размер эскиза. По умолчанию 128."
+
+#. (itstool) path: listitem/para
+#: pentobi-thumbnailer-manpage.docbook.in:92
+msgid "Display version and exit."
+msgstr "Показать версию и выйти."
+
+#. (itstool) path: refsection/title
+#: pentobi-thumbnailer-manpage.docbook.in:101
+msgid "Exit Status"
+msgstr "Состояние завершения"
+
+#. (itstool) path: refsection/para
+#: pentobi-thumbnailer-manpage.docbook.in:102
+msgid "0 if the thumbnail generation succeeds, 1 on error."
+msgstr "0 в случае успешной генерации эскиза, 1 в случае ошибки."
+
+#. (itstool) path: refsection/title
+#: pentobi-thumbnailer-manpage.docbook.in:108
+msgid "See Also"
+msgstr "Смотрите также"
