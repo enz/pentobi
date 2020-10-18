@@ -897,47 +897,12 @@
         <source>Computer</source>
         <translation>Компьютер</translation>
     </message>
-    <message>
-        <source>C</source>
-        <extracomment>Keyboard shortcut for menu Computer. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <extracomment>Keyboard shortcut for menu item Computer Settings. Leave empty for no shortcut.</extracomment>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>P</source>
-        <extracomment>Keyboard shortcut for menu item Play. Leave empty for no shortcut.</extracomment>
-        <translation>P</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <extracomment>Keyboard shortcut for menu item Play Move. Leave empty for no shortcut.</extracomment>
-        <translation>M</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Keyboard shortcut for menu item Stop. Leave empty for no shortcut.</extracomment>
-        <translation>O</translation>
-    </message>
 </context>
 <context>
     <name>MenuEdit</name>
     <message>
         <source>Edit</source>
         <translation>Редактировать</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <extracomment>Keyboard shortcut for menu Edit. Leave empty for no shortcut.</extracomment>
-        <translation>E</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <extracomment>Keyboard shortcut for menu item Make Main Variation. Leave empty for no shortcut.</extracomment>
-        <translation>M</translation>
     </message>
     <message>
         <source>Make Main Variation</source>
@@ -949,91 +914,41 @@
         <translation>Вариант вверх</translation>
     </message>
     <message>
-        <source>U</source>
-        <extracomment>Keyboard shortcut for menu item Variation Up. Leave empty for no shortcut.</extracomment>
-        <translation>U</translation>
-    </message>
-    <message>
         <source>Variation Down</source>
         <extracomment>Short for Move Variation Down</extracomment>
         <translation>Вариант вниз</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <extracomment>Keyboard shortcut for menu item Variation Down. Leave empty for no shortcut.</extracomment>
-        <translation>W</translation>
     </message>
     <message>
         <source>Delete Variations</source>
         <translation>Удалить варианты</translation>
     </message>
     <message>
-        <source>D</source>
-        <extracomment>Keyboard shortcut for menu item Delete Variations. Leave empty for no shortcut.</extracomment>
-        <translation>D</translation>
-    </message>
-    <message>
         <source>Truncate</source>
         <translation>Защита</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <extracomment>Keyboard shortcut for menu item Truncate. Leave empty for no shortcut.</extracomment>
-        <translation>T</translation>
     </message>
     <message>
         <source>Truncate Children</source>
         <translation>Защита от детей</translation>
     </message>
     <message>
-        <source>C</source>
-        <extracomment>Keyboard shortcut for menu item Truncate Children. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
-    </message>
-    <message>
         <source>Keep Position</source>
         <translation>Сохранить Позицию</translation>
-    </message>
-    <message>
-        <source>P</source>
-        <extracomment>Keyboard shortcut for menu item Keep Position. Leave empty for no shortcut.</extracomment>
-        <translation>P</translation>
     </message>
     <message>
         <source>Keep Subtree</source>
         <translation>Сохранить Поддерево</translation>
     </message>
     <message>
-        <source>S</source>
-        <extracomment>Keyboard shortcut for menu item Keep Subtree. Leave empty for no shortcut.</extracomment>
-        <translation>S</translation>
-    </message>
-    <message>
         <source>Setup Mode</source>
         <translation>Режим Настройки</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Keyboard shortcut for menu item Setup Mode. Leave empty for no shortcut.</extracomment>
-        <translation>O</translation>
     </message>
     <message>
         <source>Next Color</source>
         <translation>Следующий Цвет</translation>
     </message>
     <message>
-        <source>N</source>
-        <extracomment>Keyboard shortcut for menu item Next Color. Leave empty for no shortcut.</extracomment>
-        <translation>N</translation>
-    </message>
-    <message>
         <source>Annotation…</source>
         <translation>Пояснение…</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <extracomment>Keyboard shortcut for menu item Annotation. Leave empty for no shortcut.</extracomment>
-        <translation>A</translation>
     </message>
     <message>
         <source>Made main variation</source>
@@ -1045,21 +960,6 @@
     <message>
         <source>Export</source>
         <translation>Экспорт</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <extracomment>Keyboard shortcut for menu Export. Leave empty for no shortcut.</extracomment>
-        <translation>E</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <extracomment>Keyboard shortcut for menu item Image. Leave empty for no shortcut.</extracomment>
-        <translation>M</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <extracomment>Keyboard shortcut for menu item ASCII Art. Leave empty for no shortcut.</extracomment>
-        <translation>A</translation>
     </message>
     <message>
         <source>Image…</source>
@@ -1077,72 +977,12 @@
         <translation>Игра</translation>
     </message>
     <message>
-        <source>G</source>
-        <extracomment>Keyboard shortcut for menu Game. Leave empty for no shortcut.</extracomment>
-        <translation>G</translation>
-    </message>
-    <message>
-        <source>N</source>
-        <extracomment>Keyboard shortcut for menu item New. Leave empty for no shortcut.</extracomment>
-        <translation>N</translation>
-    </message>
-    <message>
-        <source>R</source>
-        <extracomment>Keyboard shortcut for menu item Rated Game. Leave empty for no shortcut.</extracomment>
-        <translation>R</translation>
-    </message>
-    <message>
         <source>Game Variant…</source>
         <translation>Вариант игры...</translation>
     </message>
     <message>
-        <source>V</source>
-        <extracomment>Keyboard shortcut for menu item Game Variant. Leave empty for no shortcut.</extracomment>
-        <translation>V</translation>
-    </message>
-    <message>
-        <source>I</source>
-        <extracomment>Keyboard shortcut for menu item Game Info. Leave empty for no shortcut.</extracomment>
-        <translation>I</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <extracomment>Keyboard shortcut for menu item Undo. Leave empty for no shortcut.</extracomment>
-        <translation>U</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <extracomment>Keyboard shortcut for menu item Find Move. Leave empty for no shortcut.</extracomment>
-        <translation>F</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Keyboard shortcut for menu item Open. Leave empty for no shortcut.</extracomment>
-        <translation>O</translation>
-    </message>
-    <message>
         <source>Open Clipboard</source>
         <translation>Открыть Буфер обмена</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Keyboard shortcut for menu item Open Clipboard. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <extracomment>Keyboard shortcut for menu item Save. Leave empty for no shortcut.</extracomment>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <extracomment>Keyboard shortcut for menu item Save As. Leave empty for no shortcut.</extracomment>
-        <translation>A</translation>
-    </message>
-    <message>
-        <source>Q</source>
-        <extracomment>Keyboard shortcut for menu item Quit. Leave empty for no shortcut.</extracomment>
-        <translation>Q</translation>
     </message>
 </context>
 <context>
@@ -1150,31 +990,6 @@
     <message>
         <source>Go</source>
         <translation>Ход</translation>
-    </message>
-    <message>
-        <source>O</source>
-        <extracomment>Keyboard shortcut for menu Go. Leave empty for no shortcut.</extracomment>
-        <translation>O</translation>
-    </message>
-    <message>
-        <source>N</source>
-        <extracomment>Keyboard shortcut for menu item Go/Move Number. Leave empty for no shortcut.</extracomment>
-        <translation>N</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <extracomment>Keyboard shortcut for menu item Go/Main Variation. Leave empty for no shortcut.</extracomment>
-        <translation>M</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <extracomment>Keyboard shortcut for menu item Beginning Of Branch. Leave empty for no shortcut.</extracomment>
-        <translation>B</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Keyboard shortcut for menu item Next Comment. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
     </message>
 </context>
 <context>
@@ -1184,32 +999,12 @@
         <translation>Помощь</translation>
     </message>
     <message>
-        <source>H</source>
-        <extracomment>Keyboard shortcut for menu Help. Leave empty for no shortcut.</extracomment>
-        <translation>H</translation>
-    </message>
-    <message>
-        <source>P</source>
-        <extracomment>Keyboard shortcut for menu item Pentobi Help. Leave empty for no shortcut.</extracomment>
-        <translation>P</translation>
-    </message>
-    <message>
         <source>About Pentobi</source>
         <translation>О Pentobi</translation>
     </message>
     <message>
-        <source>A</source>
-        <extracomment>Keyboard shortcut for menu item About Pentobi. Leave empty for no shortcut.</extracomment>
-        <translation>A</translation>
-    </message>
-    <message>
         <source>Report Bug</source>
         <translation>Сообщить об ошибке</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <extracomment>Keyboard shortcut for menu item Report Bug. Leave empty for no shortcut.</extracomment>
-        <translation>B</translation>
     </message>
 </context>
 <context>
@@ -1232,24 +1027,9 @@
         <translation>Открыть Недавние</translation>
     </message>
     <message>
-        <source>P</source>
-        <extracomment>Keyboard shortcut for menu Open Recent. Leave empty for no shortcut.</extracomment>
-        <translation>P</translation>
-    </message>
-    <message>
-        <source>%1. %2</source>
-        <extracomment>Format in recent files menu. First argument is the file number, second argument the file name.</extracomment>
-        <translation>%1. %2</translation>
-    </message>
-    <message>
         <source>Clear List</source>
         <extracomment>Menu item for clearing the recent files list</extracomment>
         <translation>Очистить Список</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Keyboard shortcut for menu item Recent Files/Clear List. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
     </message>
 </context>
 <context>
@@ -1259,41 +1039,16 @@
         <translation>Инструменты</translation>
     </message>
     <message>
-        <source>T</source>
-        <extracomment>Keyboard shortcut for menu Tools. Leave empty for no shortcut.</extracomment>
-        <translation>T</translation>
-    </message>
-    <message>
         <source>Rating</source>
         <translation>Рейтинг</translation>
-    </message>
-    <message>
-        <source>R</source>
-        <extracomment>Keyboard shortcut for menu item Rating. Leave empty for no shortcut.</extracomment>
-        <translation>R</translation>
     </message>
     <message>
         <source>Clear Rating</source>
         <translation>Очистить Рейтинг</translation>
     </message>
     <message>
-        <source>C</source>
-        <extracomment>Keyboard shortcut for menu item Clear Rating. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <extracomment>Keyboard shortcut for menu item Analyze Game. Leave empty for no shortcut.</extracomment>
-        <translation>A</translation>
-    </message>
-    <message>
         <source>Clear Analysis</source>
         <translation>Очистить Анализ</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <extracomment>Keyboard shortcut for menu item Clear Analysis. Leave empty for no shortcut.</extracomment>
-        <translation>E</translation>
     </message>
     <message>
         <source>Analyze Game…</source>
@@ -1307,37 +1062,12 @@
         <translation>Просмотр</translation>
     </message>
     <message>
-        <source>V</source>
-        <extracomment>Keyboard shortcut for menu View. Leave empty for no shortcut.</extracomment>
-        <translation>V</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <extracomment>Keyboard shortcut for menu Appearance. Leave empty for no shortcut.</extracomment>
-        <translation>A</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <extracomment>Keyboard shortcut for menu item Fullscreen. Leave empty for no shortcut.</extracomment>
-        <translation>F</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <extracomment>Keyboard shortcut for menu item View/Comment. Leave empty for no shortcut.</extracomment>
-        <translation>C</translation>
-    </message>
-    <message>
         <source>Appearance</source>
         <translation>Внешний вид</translation>
     </message>
     <message>
         <source>Toolbar</source>
         <translation>Панель инструментов</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <extracomment>Keyboard shortcut for menu item View/Toolbar. Leave empty for no shortcut.</extracomment>
-        <translation>T</translation>
     </message>
 </context>
 <context>
