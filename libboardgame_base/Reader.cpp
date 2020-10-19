@@ -28,6 +28,8 @@ bool is_ascii_space(int c)
 
 //-----------------------------------------------------------------------------
 
+Reader::~Reader() = default; // Non-inline to avoid GCC -Winline warning
+
 void Reader::consume_char([[maybe_unused]] char expected)
 {
     [[maybe_unused]] char c = read_char();

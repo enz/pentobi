@@ -9,7 +9,7 @@ import "." as Pentobi
 Pentobi.Menu {
     property int moveNumber
 
-    relativeWidth: 14
+    relativeWidth: 15
     onOpened: {
         var annotation = gameModel.getMoveAnnotation(moveNumber)
         itemAnnotation.text =

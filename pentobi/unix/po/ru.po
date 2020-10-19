@@ -55,7 +55,7 @@ msgstr ""
 "<arg><_:option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/></arg> "
 "<arg><_:option-6/> <replaceable>n</replaceable></arg> <arg><_:option-7/> "
 "<replaceable>n</replaceable></arg> <arg><_:option-8/></arg> "
-"файл.blksgf</replaceable></arg>"
+"<arg><replaceable>файл.blksgf</replaceable></arg>"
 
 #. (itstool) path: refsection/title
 #: pentobi-manpage.docbook.in:51
