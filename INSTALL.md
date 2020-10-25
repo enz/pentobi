@@ -67,7 +67,9 @@ sudo update-desktop-database /usr/local/share/applications
 Building the Android App
 ------------------------
 
-Because building, deploying and debugging for Android is not yet
-functional for CMake projects in QtCreator, there exists a project file
-in `pentobi/Pentobi.pro` for building the Android app. The Android
-project was tested with Qt 5.15.
+Because building the Android app with CMake is not supported with Qt 5.12,
+there exists a qmake project file in `pentobi/Pentobi.pro`. The Android
+project was tested with Qt 5.15. Note that the maximum supported
+targetSdkVersion is currently 29 (Android 10) because the code
+currently uses legacy external storage access, which no longer works
+with targetSdkVersion 30 (Android 11).
