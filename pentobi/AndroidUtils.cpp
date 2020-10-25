@@ -10,11 +10,11 @@
 #include <QStandardPaths>
 
 #ifdef Q_OS_ANDROID
+#include <QAndroidJniObject>
 #include <QDir>
 #include <QDirIterator>
 #include <QHash>
-#include <QtAndroidExtras/QtAndroid>
-#include <QtAndroidExtras/QAndroidJniObject>
+#include <QtAndroid>
 #endif
 
 //-----------------------------------------------------------------------------
