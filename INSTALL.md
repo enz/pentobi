@@ -63,3 +63,11 @@ prefix `/usr/local`, this can be done by running
 sudo update-mime-database /usr/local/share/mime
 sudo update-desktop-database /usr/local/share/applications
 ```
+
+Building the Android App
+------------------------
+
+The Android project was tested with Qt 5.15. Note that the maximum
+supported targetSdkVersion is currently 29 (Android 10) because the code
+currently uses legacy external storage access, which no longer works
+with targetSdkVersion 30 (Android 11).

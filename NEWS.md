@@ -1,16 +1,16 @@
 Pentobi Release Notes
 =====================
 
-Version 18.x (master)
----------------------
+Version 19.0-dev (master)
+-------------------------
 
 * The minimum required Qt version is now 5.15.
 * Migrated build system for Android app from qmake to CMake.
 * Remaining pieces on Android are now always shown in order to play
   even in the four-color/two-player game variants.
 
-Version 18.2.x (v18-fixes)
---------------------------
+Version 18.3-dev (v18-fixes)
+----------------------------
 
 * New Russian translation (thanks to Victor Erukhin)
 * Back key needs to be pressed twice to exit Android app to avoid
@@ -18,6 +18,10 @@ Version 18.2.x (v18-fixes)
 * Better visual feedback of button presses on newer Android devices.
 * Added workaround for white single-pixel line visible on some
   Android devices when leaving fullscreen mode (QTBUG-55600).
+* Added requestLegacyExternalStorage attribute to Android manifest such
+  that saving files will still work if compiled with targetSdkVersion 29
+  (Android 10). Note that saving files will no longer work with higher
+  values for targetSdkVersion.
 * Menu shortcuts are no longer supported.
 
 Version 18.2 (10 Oct 2020)
