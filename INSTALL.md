@@ -68,7 +68,6 @@ Building the Android App
 ------------------------
 
 The Android app currently needs to be built with the qmake project file
-in `pentobi/Pentobi.pro`. It was tested with Qt 5.15. Note that the
-maximum supported targetSdkVersion is currently 29 (Android 10) because
-the code currently uses legacy external storage access, which no longer
-works with targetSdkVersion 30 (Android 11).
+in `pentobi/Pentobi.pro`. It was tested with Qt 5.15. The maximum
+supported targetSdkVersion is currently 29 (Android 10) because the code
+still relies on legacy external storage access.
