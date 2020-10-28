@@ -7,7 +7,6 @@
 #include "RatingModel.h"
 
 #include <random>
-#include <QDebug>
 #include <QDir>
 #include <QFileInfo>
 #include <QSettings>
@@ -303,10 +302,7 @@ void RatingModel::setGameVariant(const QString& gameVariant)
     Variant variant;
     if (! libpentobi_base::parse_variant_id(
                 gameVariant.toLocal8Bit().constData(), variant))
-    {
-        qDebug() << "Invalid game variant" << gameVariant;
         return;
-    }
     m_gameVariant = gameVariant;
     m_gameVariantName =
             QString::fromLocal8Bit(libpentobi_base::to_string(variant));

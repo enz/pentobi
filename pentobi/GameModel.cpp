@@ -12,7 +12,6 @@
 #include <fstream>
 #include <QClipboard>
 #include <QGuiApplication>
-#include <QDebug>
 #include <QDir>
 #include <QFileInfo>
 #include <QSettings>

@@ -125,15 +125,9 @@ void PlayerModel::startGenMove(GameModel* gameModel)
     cancelGenMove();
     auto level = m_level;
     if (level < 1)
-    {
-        qDebug() << "Invalid level:" << level << "using 1";
         level = 1;
-    }
     else if (level > maxLevel)
-    {
-        qDebug() << "Invalid level:" << level << "using" << maxLevel;
         level = maxLevel;
-    }
     m_player->set_level(level);
     auto variant = gameModel->getBoard().get_variant();
     if (! m_player->is_book_loaded(variant))
