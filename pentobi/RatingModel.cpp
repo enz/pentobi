@@ -349,10 +349,7 @@ void RatingModel::setInitialRating(double rating)
 void RatingModel::setNumberGames(int numberGames)
 {
     if (numberGames < 0)
-    {
-        qWarning("RatingModel: invalid number of games");
         return;
-    }
     if (m_numberGames == numberGames)
         return;
     m_numberGames = numberGames;

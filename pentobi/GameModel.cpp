@@ -261,10 +261,7 @@ void GameModel::changeGameVariant(const QString& gameVariant)
 {
     Variant variant;
     if (! parse_variant_id(gameVariant.toLocal8Bit().constData(), variant))
-    {
-        qWarning("GameModel: invalid game variant");
         return;
-    }
     initGameVariant(variant);
     setIsModified(false);
     clearFile();
@@ -414,16 +411,10 @@ bool GameModel::findMove(const PieceModel& pieceModel, const QString& state,
     auto piece = pieceModel.getPiece();
     auto& bd = getBoard();
     if (piece.to_int() >= bd.get_nu_uniq_pieces())
-    {
-        qWarning("GameModel::findMove: pieceModel invalid in game variant");
         return false;
-    }
     auto transform = pieceModel.getTransform(state);
     if (! transform)
-    {
-        qWarning("GameModel::findMove: transform not found");
         return false;
-    }
     auto& info = bd.get_piece_info(piece);
     PiecePoints piecePoints = info.get_points();
     transform->transform(piecePoints.begin(), piecePoints.end());
@@ -1168,10 +1159,7 @@ void GameModel::playPiece(PieceModel* pieceModel, QPointF coord)
     Color c(static_cast<Color::IntType>(pieceModel->color()));
     Move mv;
     if (! findMove(*pieceModel, pieceModel->state(), coord, mv))
-    {
-        qWarning("GameModel::play: illegal move");
         return;
-    }
     preparePositionChange();
     preparePieceGameCoord(pieceModel, mv);
     pieceModel->setIsPlayed(true);

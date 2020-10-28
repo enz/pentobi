@@ -79,10 +79,7 @@ void PlayerModel::genMoveFinished()
     auto& bd = result.gameModel->getBoard();
     ColorMove mv(result.color, result.move);
     if (! mv.is_null() && ! bd.is_legal(mv.color, mv.move))
-    {
-        qWarning("PlayerModel: player generated illegal move");
         mv = ColorMove::null();
-    }
     emit moveGenerated(new GameMove(this, mv));
 }
 
@@ -91,10 +88,7 @@ void PlayerModel::loadBook(Variant variant)
     QFile file(QStringLiteral(":/pentobi_books/book_%1.blksgf")
                .arg(to_string_id(variant)));
     if (! file.open(QIODevice::ReadOnly))
-    {
-        qWarning() << "PlayerModel: could not open " << file.fileName();
         return;
-    }
     QTextStream stream(&file);
     QString text = stream.readAll();
     istringstream in(text.toLocal8Bit().constData());
