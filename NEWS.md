@@ -13,15 +13,13 @@ Version 18.3-dev (v18-fixes)
 ----------------------------
 
 * New Russian translation (thanks to Victor Erukhin)
-* Back key needs to be pressed twice to exit Android app to avoid
+* Back key now needs to be pressed twice to exit Android app to avoid
   unintentional exit with gesture navigation on newer Android versions.
 * Better visual feedback of button presses on newer Android devices.
 * Added workaround for white single-pixel line visible on some
   Android devices when switching fullscreen mode (QTBUG-55600).
-* Added requestLegacyExternalStorage attribute to Android manifest such
-  that saving files will still work if compiled with targetSdkVersion 29
-  (Android 10). Note that saving files will no longer work with higher
-  values for targetSdkVersion.
+* Added requestLegacyExternalStorage to Android manifest, which supports
+  saving files if compiled with target SDK version 29 (Android 10).
 * Menu shortcuts are no longer supported.
 
 Version 18.2 (10 Oct 2020)
