@@ -20,6 +20,8 @@ class AndroidUtils
 public:
     using QObject::QObject;
 
+    Q_INVOKABLE static bool checkExists(const QString& file);
+
     Q_INVOKABLE static QUrl extractHelp(const QString& language);
 
     Q_INVOKABLE static QUrl getDefaultFolder();

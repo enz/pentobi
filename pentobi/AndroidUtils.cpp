@@ -19,6 +19,8 @@
 #include <QImage>
 #include <QtAndroid>
 #include <QVariant>
+#else
+#include <QFileInfo>
 #endif
 
 using namespace std;
@@ -195,6 +197,43 @@ bool AndroidUtils::checkException()
     return true;
 }
 #endif
+
+bool AndroidUtils::checkExists(const QString& file)
+{
+#ifdef Q_OS_ANDROID
+    auto contentResolver = getContentResolver();
+    if (! contentResolver.isValid())
+        return false;
+    auto uriObj = getUriObj(file);
+    if (! uriObj.isValid())
+        return false;
+    QAndroidJniExceptionCleaner exceptionCleaner;
+    QAndroidJniEnvironment env;
+    auto stringClass = env->FindClass("java/lang/String");
+    auto projection = env->NewObjectArray(1, stringClass, nullptr);
+    auto column = QAndroidJniObject::getStaticObjectField<jstring>(
+                "android/provider/DocumentsContract$Document",
+                "COLUMN_DOCUMENT_ID");
+    if (! column.isValid())
+        return false;
+    env->SetObjectArrayElement(projection, 0, column.object());
+    auto cursor = contentResolver.callObjectMethod(
+                "query",
+                "(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;"
+                "[Ljava/lang/String;Ljava/lang/String;)"
+                "Landroid/database/Cursor;",
+                uriObj.object(), projection, nullptr, nullptr, nullptr);
+    if (env->ExceptionCheck())
+        return false;
+    if (! cursor.isValid())
+        return false;
+    AutoClose autoClose{cursor};
+    auto count = cursor.callMethod<jint>("getCount", "()I");
+    return count > 0;
+#else
+    return QFileInfo::exists(file);
+#endif
+}
 
 QUrl AndroidUtils::extractHelp([[maybe_unused]] const QString& language)
 {

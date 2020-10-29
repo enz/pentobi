@@ -6,7 +6,6 @@
 
 #include "RecentFiles.h"
 
-#include <QFileInfo>
 #include <QSettings>
 #include "AndroidUtils.h"
 
@@ -79,17 +78,10 @@ void RecentFiles::load()
         auto entry = i.next().toMap();
         if (! entry.contains("file") || ! entry.contains("displayName"))
             i.remove();
-    }
-#ifndef Q_OS_ANDROID
-    i = m_entries;
-    while (i.hasNext())
-    {
-        auto entry = i.next().toMap();
         auto file = entry["file"].toString();
-        if (! QFileInfo::exists(file))
+        if (! AndroidUtils::checkExists(file))
             i.remove();
     }
-#endif
     checkMax();
     emit entriesChanged();
 }
