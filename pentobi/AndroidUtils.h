@@ -20,23 +20,29 @@ class AndroidUtils
 public:
     using QObject::QObject;
 
-    /** Calls QtAndroid::checkPermission().
-        On platforms other than Android, always returns true. */
-    Q_INVOKABLE static bool checkPermission(const QString& permission);
-
     Q_INVOKABLE static QUrl extractHelp(const QString& language);
 
-    /** Return a directory for storing files.
-        Avoids a dependency on qt.labs.platform only for StandardPaths and
-        handles Android better. On Android, it returns
-        android.os.Environment.getExternalStorageDirectory(). On other
-        platforms, it returns QStandardPaths::HomeLocation */
     Q_INVOKABLE static QUrl getDefaultFolder();
 
-    /** Request the Android media scanner to scan a file.
-        Ensures that the file will be visible via MTP. On platforms other
-        than Android, this function does nothing. */
-    Q_INVOKABLE static void scanFile(const QString& pathname);
+    Q_INVOKABLE QString getError() const { return m_error; }
+
+    Q_INVOKABLE static bool open(const QString& uri, QByteArray& sgf);
+
+    Q_INVOKABLE void openImageSaveDialog(const QString& suggestedName);
+
+    Q_INVOKABLE void openOpenDialog();
+
+    Q_INVOKABLE void openTextSaveDialog();
+
+    Q_INVOKABLE void openSaveDialog(const QString& suggestedName);
+
+    Q_INVOKABLE static void releasePersistableUriPermission(
+            const QString& uri);
+
+    Q_INVOKABLE static bool save(const QString& uri, const QByteArray& array);
+
+    Q_INVOKABLE static bool saveImage(const QString& uri,
+                                      const QVariant& image);
 
 #ifdef Q_OS_ANDROID
     /** Return the logical density of the display.
@@ -45,6 +51,25 @@ public:
         constructed.
         @return The density or 0 on error. */
     static float getDensity();
+
+    static QString getInitialFile();
+#endif
+
+signals:
+    void imageSaveDialogAccepted(const QString& uri);
+
+    void openDialogAccepted(const QString& uri, const QString& displayName);
+
+    void saveDialogAccepted(const QString& uri, const QString& displayName);
+
+    void textSaveDialogAccepted(const QString& uri);
+
+private:
+    static QString m_error;
+
+
+#ifdef Q_OS_ANDROID
+    static bool checkException();
 #endif
 };
 

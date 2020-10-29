@@ -30,6 +30,8 @@ set(pentobi_shared_src
     PlayerModel.cpp
     RatingModel.h
     RatingModel.cpp
+    RecentFiles.h
+    RecentFiles.cpp
     SyncSettings.h
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     ../opening_books/pentobi_books.qrc

@@ -109,14 +109,6 @@ function checkComputerMove() {
     genMove()
 }
 
-function checkStoragePermission() {
-    if (! androidUtils.checkPermission("android.permission.WRITE_EXTERNAL_STORAGE")) {
-        showInfo(qsTr("No permission to access storage"))
-        return false
-    }
-    return true
-}
-
 function clearRating() {
     showQuestion(qsTr("Delete all rating information for the current game variant?"),
                  clearRatingNoVerify)
@@ -199,30 +191,26 @@ function deleteAllVarNoVerify() {
 }
 
 function exportAsciiArt(fileUrl) {
-    if (! checkStoragePermission())
-        return
-    var file = getFileFromUrl(fileUrl)
+    var file = isAndroid ? fileUrl : getFileFromUrl(fileUrl)
     if (! gameModel.saveAsciiArt(file))
         showInfo(qsTr("Save failed.") + "\n" + gameModel.getError())
-    else {
-        androidUtils.scanFile(file)
+    else
         showTemporaryMessage(qsTr("File saved"))
-    }
 }
 
 function exportImage(fileUrl) {
-    if (! checkStoragePermission())
-        return
     var board = gameView.getBoard()
     var size = Qt.size(exportImageWidth, exportImageWidth * board.height / board.width)
     if (! board.grabImageTarget.grabToImage(function(result) {
-        var file = getFileFromUrl(fileUrl)
-        if (! result.saveToFile(file))
+        var ok
+        if (isAndroid)
+            ok = androidUtils.saveImage(fileUrl, result.image)
+        else
+            ok = result.saveToFile(getFileFromUrl(fileUrl))
+        if (! ok)
             showInfo(qsTr("Saving image failed or unsupported image format"))
-        else {
-            androidUtils.scanFile(file)
+        else
             showTemporaryMessage(qsTr("Image saved"))
-        }
     }, size))
         showInfo(qsTr("Creating image failed"))
 }
@@ -293,10 +281,13 @@ function getGameLabel(setupMode, isRated, file, isModified, short) {
                     qsTr("Rated %1").arg(n)
                   : qsTr("Rated Game %1").arg(n)
     else {
-        var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"))
-        label = file.substring(pos + 1)
-        if (label.toLowerCase().endsWith(".blksgf"))
-            label = label.substring(0, label.length - ".blksgf".length)
+        if (isAndroid && displayName !== "")
+            label = displayName
+        else {
+            var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"))
+            label = file.substring(pos + 1)
+        }
+        label = label.replace("\.blksgf", "")
     }
     return (isModified ? "*" : "") + label
 }
@@ -396,7 +387,8 @@ function init() {
     if (gameModel.checkFileModifiedOutside())
     {
         showWindow()
-        showQuestion(qsTr("File has been modified by another application. Reload?"), reloadFile)
+        showQuestion(qsTr("File has been modified by another application. Reload?"),
+                     reloadFile)
         return
     }
     if (analyzeGameModel.elements.length > 0)
@@ -405,7 +397,7 @@ function init() {
     if (initialFile) {
         if (gameModel.isModified)
             showWindow()
-        verify(function() { openFileBlocking(initialFile) })
+        verify(function() { openFileBlocking(initialFile, displayName ) })
     }
     showWindow()
     if (isRated) {
@@ -519,27 +511,31 @@ function nextPiece() {
 }
 
 function open() {
-    if (! checkStoragePermission())
-        return
     verify(openNoVerify)
 }
 
 function openNoVerify() {
-    openDialog.open()
+    if (isAndroid)
+        androidUtils.openOpenDialog()
+    else
+        openDialog.open()
 }
 
-function openFile(file) {
-    lengthyCommand.run(function() { openFileBlocking(file) })
+function openFile(file, displayName) {
+    lengthyCommand.run(function() { openFileBlocking(file, displayName) })
 }
 
-function openFileBlocking(file) {
+function openFileBlocking(file, displayName) {
     var oldGameVariant = gameModel.gameVariant
     var oldEnableAnimations = gameView.enableAnimations
     gameView.enableAnimations = false
-    if (! gameModel.openFile(file))
+    if (! gameModel.openFile(file, displayName))
         showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
-    else
+    else {
+        recentFiles.add(file, displayName)
+        rootWindow.displayName = displayName
         setComputerNone()
+    }
     if (gameModel.gameVariant !== oldGameVariant)
         gameView.createPieces()
     gameView.showToPlay()
@@ -554,7 +550,7 @@ function openFileBlocking(file) {
 }
 
 function openFileUrl() {
-    openFile(getFileFromUrl(openDialog.item.fileUrl))
+    openFile(getFileFromUrl(openDialog.item.fileUrl), "")
 }
 
 function openClipboard()
@@ -581,10 +577,8 @@ function openClipboardNoVerify() {
     })
 }
 
-function openRecentFile(file) {
-    if (! checkStoragePermission())
-        return
-    verify(function() { openFile(file) })
+function openRecentFile(file, displayName) {
+    verify(function() { openFile(file, displayName) })
 }
 
 function pickNamedPiece(name) {
@@ -722,12 +716,10 @@ function rating() {
 }
 
 function reloadFile() {
-    openFile(gameModel.file)
+    openFile(gameModel.file, displayName)
 }
 
 function save() {
-    if (! checkStoragePermission())
-        return
     if (gameModel.checkFileModifiedOutside())
         showQuestion(qsTr("File has been modified by another application. Overwrite?"),
                      saveCurrentFile)
@@ -736,22 +728,27 @@ function save() {
 }
 
 function saveAs() {
-    if (! checkStoragePermission())
-        return
-    var dialog = saveDialog.get()
-    dialog.name = gameModel.suggestGameFileName(folder)
-    dialog.open()
+    if (isAndroid) {
+        androidUtils.openSaveDialog(gameModel.suggestGameFileName(""))
+    } else {
+        var dialog = saveDialog.get()
+        dialog.name = gameModel.suggestGameFileName(folder)
+        dialog.open()
+    }
 }
 
 function saveCurrentFile() {
-    saveFile(gameModel.file)
+    saveFile(gameModel.file, displayName)
 }
 
-function saveFile(file) {
+function saveFile(file, displayName) {
     if (! gameModel.save(file))
         showInfo(qsTr("Save failed.") + "\n" + gameModel.getError())
-    else
+    else {
+        recentFiles.add(file, displayName)
+        rootWindow.displayName = displayName
         showTemporaryMessage(qsTr("File saved"))
+    }
 }
 
 function setComputerNone() {

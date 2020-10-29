@@ -23,10 +23,15 @@ Pentobi.Dialog {
     onOpened: textField.selectAll()
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
-        var dialog = imageSaveDialog.get()
-        dialog.name = gameModel.suggestFileName(folder, "png")
-        dialog.selectNameFilter(0)
-        dialog.open()
+        var name = gameModel.suggestFileName(folder, "png")
+        if (isAndroid)
+            androidUtils.openImageSaveDialog(name)
+        else {
+            var dialog = imageSaveDialog.get()
+            dialog.name = name
+            dialog.selectNameFilter(0)
+            dialog.open()
+        }
     }
 
     function returnPressed() {

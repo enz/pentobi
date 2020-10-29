@@ -16,11 +16,14 @@ Pentobi.Menu {
     }
     Action {
         text: qsTr("ASCII Art…")
-        onTriggered: {
-            var dialog = asciiArtSaveDialog.get()
-            dialog.name = gameModel.suggestFileName(folder, "txt")
-            dialog.selectNameFilter(0)
-            dialog.open()
-        }
+        onTriggered:
+            if (isAndroid)
+                androidUtils.openTextSaveDialog()
+            else {
+                var dialog = asciiArtSaveDialog.get()
+                dialog.name = gameModel.suggestFileName(folder, "txt")
+                dialog.selectNameFilter(0)
+                dialog.open()
+            }
     }
 }

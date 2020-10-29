@@ -15,6 +15,7 @@
 #include "ImageProvider.h"
 #include "PlayerModel.h"
 #include "RatingModel.h"
+#include "RecentFiles.h"
 #include "SyncSettings.h"
 #include "libboardgame_base/Log.h"
 
@@ -38,7 +39,8 @@ int mainAndroid()
     engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
     auto ctx = engine.rootContext();
     ctx->setContextProperty(QStringLiteral("globalStyle"), QString());
-    ctx->setContextProperty(QStringLiteral("initialFile"), QString());
+    ctx->setContextProperty(QStringLiteral("initialFile"),
+                            AndroidUtils::getInitialFile());
     ctx->setContextProperty(QStringLiteral("isDesktop"), QVariant(false));
 #ifdef QT_DEBUG
     ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(true));
@@ -253,6 +255,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterType<RatingModel>("pentobi", 1, 0, "RatingModel");
+    qmlRegisterType<RecentFiles>("pentobi", 1, 0, "RecentFiles");
     qmlRegisterType<SyncSettings>("pentobi", 1, 0, "SyncSettings");
     qmlRegisterUncreatableType<AnalyzeGameElement>(
                 "pentobi", 1, 0, "AnalyzeGameElement", {});

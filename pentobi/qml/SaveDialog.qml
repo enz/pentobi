@@ -16,6 +16,6 @@ Pentobi.FileDialog {
     folder: rootWindow.folder
     onAccepted: {
         rootWindow.folder = folder
-        Logic.saveFile(Logic.getFileFromUrl(fileUrl))
+        Logic.saveFile(Logic.getFileFromUrl(fileUrl), "")
     }
 }

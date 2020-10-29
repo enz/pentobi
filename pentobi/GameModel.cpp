@@ -148,7 +148,6 @@ GameModel::GameModel(QObject* parent)
       m_nuColors(getBoard().get_nu_colors()),
       m_nuPlayers(getBoard().get_nu_players())
 {
-    loadRecentFiles();
     initGame(m_game.get_variant());
     createPieceModels();
     updateProperties();
@@ -183,17 +182,6 @@ PieceModel* GameModel::addEmpty(const QPoint& pos)
     setSetupPlayer();
     updateProperties();
     return result;
-}
-
-void GameModel::addRecentFile(const QString& file)
-{
-    m_recentFiles.removeAll(file);
-    m_recentFiles.prepend(file);
-    while (m_recentFiles.length() > maxRecentFiles)
-        m_recentFiles.removeLast();
-    QSettings settings;
-    settings.setValue(QStringLiteral("recentFiles"), m_recentFiles);
-    emit recentFilesChanged();
 }
 
 void GameModel::addSetup(PieceModel* pieceModel, QPointF coord)
@@ -268,6 +256,9 @@ void GameModel::changeGameVariant(const QString& gameVariant)
 
 bool GameModel::checkAutosaveModifiedOutside()
 {
+#ifdef Q_OS_ANDROID
+    return false;
+#else
     QSettings settings;
     auto autosaveDate =
             settings.value(QStringLiteral("autosaveDate")).toDateTime();
@@ -275,6 +266,7 @@ bool GameModel::checkAutosaveModifiedOutside()
             && m_autosaveDate != autosaveDate
             && settings.value(QStringLiteral("isModified")).toBool()
             && settings.value(QStringLiteral("autosave")).toByteArray() != getSgf();
+#endif
 }
 
 bool GameModel::checkFileExists(const QString& file)
@@ -284,12 +276,16 @@ bool GameModel::checkFileExists(const QString& file)
 
 bool GameModel::checkFileModifiedOutside()
 {
+#ifdef Q_OS_ANDROID
+    return false;
+#else
     if (m_file.isEmpty() || ! m_fileDate.isValid())
         return false;
     QFileInfo fileInfo(m_file);
     if (! fileInfo.exists())
         return false;
     return fileInfo.lastModified() != m_fileDate;
+#endif
 }
 
 /** Check if setup is allowed in the current position.
@@ -310,14 +306,6 @@ void GameModel::clearFile()
     emit fileChanged();
 }
 
-void GameModel::clearRecentFiles()
-{
-    m_recentFiles.clear();
-    QSettings settings;
-    settings.setValue(QStringLiteral("recentFiles"), m_recentFiles);
-    emit recentFilesChanged();
-}
-
 bool GameModel::createFolder(const QUrl& folder)
 {
     auto localFolder = folder.toLocalFile();
@@ -325,7 +313,6 @@ bool GameModel::createFolder(const QUrl& folder)
         m_error = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
-    AndroidUtils::scanFile(localFolder);
     return true;
 }
 
@@ -715,12 +702,12 @@ QString GameModel::getResultMessage()
     return tr("Game ends in a tie between all players.");
 }
 
-QByteArray GameModel::getSgf() const
+QByteArray GameModel::getSgf(int indent) const
 {
     auto& tree = m_game.get_tree();
     ostringstream s;
     PentobiTreeWriter writer(s, tree);
-    writer.set_indent(-1);
+    writer.set_indent(indent);
     writer.write();
     return QByteArray(s.str().c_str());
 }
@@ -899,7 +886,7 @@ bool GameModel::loadAutoSave()
     auto isModified = settings.value(QStringLiteral("isModified")).toBool();
     if (! file.isEmpty() && ! isModified)
     {
-        if (! checkFileExists(file) || ! openFile(file))
+        if (! openFile(file))
             return false;
         updateFileInfo(file);
         m_autosaveDate = m_fileDate;
@@ -922,23 +909,6 @@ bool GameModel::loadAutoSave()
     restoreAutoSaveLocation();
     updateProperties();
     return true;
-}
-
-void GameModel::loadRecentFiles()
-{
-    QSettings settings;
-    m_recentFiles =
-            settings.value(QStringLiteral("recentFiles")).toStringList();
-    QMutableListIterator i(m_recentFiles);
-    while (i.hasNext())
-    {
-        auto file = i.next();
-        if (file.isEmpty() || ! QFileInfo::exists(file))
-            i.remove();
-    }
-    while (m_recentFiles.length() > maxRecentFiles)
-        m_recentFiles.removeLast();
-    emit recentFilesChanged();
 }
 
 bool GameModel::openByteArray(const QByteArray& byteArray)
@@ -1017,6 +987,70 @@ void GameModel::newGame()
     updateProperties();
 }
 
+bool GameModel::openClipboard()
+{
+    auto text = QGuiApplication::clipboard()->text();
+    if (text.isEmpty())
+    {
+        m_error = tr("Clipboard is empty.");
+        return false;
+    }
+    istringstream in(text.toLocal8Bit().constData());
+    bool result;
+    if (openStream(in))
+    {
+        auto& root = m_game.get_root();
+        if (! has_setup(root) && root.has_children())
+            goEnd();
+        result = true;
+    }
+    else
+        result = false;
+    clearFile();
+    setIsModified(true);
+    return result;
+}
+
+bool GameModel::openFile(const QString& file)
+{
+    istream* in;
+    QString canonicalFile;
+#ifdef Q_OS_ANDROID
+    canonicalFile = file;
+    QByteArray sgf;
+    if (! AndroidUtils::open(file, sgf))
+    {
+        m_error.clear(); // AndroidUtils does not return error message yet
+        return false;
+    }
+    string s(sgf.constData(), sgf.size());
+    istringstream sin(s);
+    in = &sin;
+#else
+    canonicalFile = QFileInfo(file).absoluteFilePath();
+    ifstream fin(canonicalFile.toLocal8Bit().constData());
+    in = &fin;
+#endif
+    if (! *in)
+    {
+        m_error = QString::fromLocal8Bit(strerror(errno));
+        return false;
+    }
+    if (openStream(*in))
+    {
+        updateFileInfo(canonicalFile);
+        auto& root = m_game.get_root();
+        // Show end of game position by default unless the root node has
+        // setup stones or comments, because then it might be a puzzle and
+        // we don't want to show the solution.
+        if (! has_setup(root) && ! has_comment(root) && root.has_children())
+            goEnd();
+        return true;
+    }
+    clearFile();
+    return false;
+}
+
 bool GameModel::openStream(istream& in)
 {
     bool result = true;
@@ -1054,55 +1088,6 @@ bool GameModel::openStream(istream& in)
     setIsModified(false);
     updateGameInfo();
     updateProperties();
-    return result;
-}
-
-bool GameModel::openFile(const QString& file)
-{
-    auto absoluteFile = QFileInfo(file).absoluteFilePath();
-    ifstream in(absoluteFile.toLocal8Bit().constData());
-    if (! in)
-    {
-        m_error = QString::fromLocal8Bit(strerror(errno));
-        return false;
-    }
-    if (openStream(in))
-    {
-        updateFileInfo(absoluteFile);
-        addRecentFile(absoluteFile);
-        auto& root = m_game.get_root();
-        // Show end of game position by default unless the root node has
-        // setup stones or comments, because then it might be a puzzle and
-        // we don't want to show the solution.
-        if (! has_setup(root) && ! has_comment(root) && root.has_children())
-            goEnd();
-        return true;
-    }
-    clearFile();
-    return false;
-}
-
-bool GameModel::openClipboard()
-{
-    auto text = QGuiApplication::clipboard()->text();
-    if (text.isEmpty())
-    {
-        m_error = tr("Clipboard is empty.");
-        return false;
-    }
-    istringstream in(text.toLocal8Bit().constData());
-    bool result;
-    if (openStream(in))
-    {
-        auto& root = m_game.get_root();
-        if (! has_setup(root) && root.has_children())
-            goEnd();
-        result = true;
-    }
-    else
-        result = false;
-    clearFile();
-    setIsModified(true);
     return result;
 }
 
@@ -1291,26 +1276,44 @@ void GameModel::restoreAutoSaveLocation()
 
 bool GameModel::save(const QString& file)
 {
+    int indent = 1;
+    auto sgf = getSgf(indent);
+#ifdef Q_OS_ANDROID
+    if (! AndroidUtils::save(file, sgf))
+    {
+        m_error.clear(); // AndroidUtils does not return error message yet
+        return false;
+    }
+#else
     {
         ofstream out(file.toLocal8Bit().constData());
-        PentobiTreeWriter writer(out, m_game.get_tree());
-        writer.set_indent(1);
-        writer.write();
+        out.write(sgf.constData(), sgf.size());
         if (! out)
         {
             m_error = QString::fromLocal8Bit(strerror(errno));
             return false;
         }
     }
-    AndroidUtils::scanFile(file);
+#endif
     updateFileInfo(file);
     setIsModified(false);
-    addRecentFile(file);
     return true;
 }
 
 bool GameModel::saveAsciiArt(const QString& file)
 {
+#ifdef Q_OS_ANDROID
+    ostringstream out;
+    getBoard().write(out, false);
+    string s(out.str());
+    QByteArray array(&*s.begin(), s.size());
+    if (! AndroidUtils::save(file, array))
+    {
+        m_error.clear(); // AndroidUtils does not return error message yet
+        return false;
+    }
+    return true;
+#else
     ofstream out(file.toLocal8Bit().constData());
     getBoard().write(out, false);
     if (! out)
@@ -1318,8 +1321,8 @@ bool GameModel::saveAsciiArt(const QString& file)
         m_error = QString::fromLocal8Bit(strerror(errno));
         return false;
     }
-    AndroidUtils::scanFile(file);
     return true;
+#endif
 }
 
 template<typename T>
@@ -1488,10 +1491,9 @@ void GameModel::setTime(const QString& time)
 QString GameModel::suggestFileName(const QUrl& folder,
                                    const QString& fileEnding)
 {
-    QString suffix =
-            ! fileEnding.isEmpty()
-            && ! fileEnding.startsWith(QStringLiteral(".")) ?
-                QStringLiteral(".") + fileEnding : fileEnding;
+    QString suffix = QStringLiteral(".") + fileEnding;
+    if (folder.isEmpty())
+        return tr("Untitled") + suffix;
     auto localFolder = folder.toLocalFile();
     QString file = localFolder + '/' + tr("Untitled") + suffix;
     if (QFileInfo::exists(file))

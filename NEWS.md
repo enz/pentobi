@@ -5,9 +5,13 @@ Version 19.0-dev (master)
 -------------------------
 
 * The minimum required Qt version is now 5.15.
+* Saving games on Android now uses the Storage Access Framework instead
+  of legacy external storage, which supports building the app with
+  target SDK version 30 (Android 11) and adds support for cloud-based
+  storage.
 * Migrated build system for Android app from qmake to CMake.
 * Remaining pieces on Android are now always shown in order to play
-  even in the four-color/two-player game variants.
+  even in game variants where a player plays two colors.
 
 Version 18.3-dev (v18-fixes)
 ----------------------------

@@ -65,7 +65,6 @@ class GameModel
     Q_PROPERTY(QString positionInfoShort READ positionInfoShort NOTIFY positionInfoShortChanged)
     Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
     Q_PROPERTY(QString file READ file NOTIFY fileChanged)
-    Q_PROPERTY(QStringList recentFiles READ recentFiles NOTIFY recentFilesChanged)
     Q_PROPERTY(unsigned nuColors READ nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(unsigned nuPlayers READ nuPlayers NOTIFY nuPlayersChanged)
     Q_PROPERTY(unsigned toPlay READ toPlay NOTIFY toPlayChanged)
@@ -111,8 +110,6 @@ class GameModel
     Q_PROPERTY(QString round READ getRound WRITE setRound NOTIFY roundChanged)
 
 public:
-    static constexpr int maxRecentFiles = 9;
-
     static Variant getInitialGameVariant();
 
 
@@ -129,8 +126,6 @@ public:
         @return The PieceModel corresponding to the removed piece or null if
         there is no piece at this location. */
     Q_INVOKABLE PieceModel* addEmpty(const QPoint& pos);
-
-    Q_INVOKABLE void clearRecentFiles();
 
     Q_INVOKABLE bool createFolder(const QUrl& folder);
 
@@ -251,7 +246,7 @@ public:
     Q_INVOKABLE QVariantList getPieceModels(int color);
 
 
-    QByteArray getSgf() const;
+    QByteArray getSgf(int indent = -1) const;
 
     void setComment(const QString& comment);
 
@@ -322,8 +317,6 @@ public:
     bool hasVariations() const { return m_hasVariations; }
 
     bool isMainVar() const { return m_isMainVar; }
-
-    const QStringList& recentFiles() const { return m_recentFiles; }
 
     const QVariantList& startingPoints0() const { return m_startingPoints0; }
 
@@ -469,8 +462,6 @@ signals:
 
     void nuPlayersChanged();
 
-    void recentFilesChanged();
-
     void startingPoints0Changed();
 
     void startingPoints1Changed();
@@ -529,8 +520,6 @@ private:
     QString m_event;
 
     QString m_round;
-
-    QStringList m_recentFiles;
 
     QDateTime m_fileDate;
 
@@ -622,8 +611,6 @@ private:
     unique_ptr<MoveMarker> m_marker;
 
 
-    void addRecentFile(const QString& file);
-
     bool checkSetupAllowed() const;
 
     void clearFile();
@@ -648,8 +635,6 @@ private:
     void initGame(Variant variant);
 
     void initGameVariant(Variant variant);
-
-    void loadRecentFiles();
 
     bool openStream(istream& in);
 

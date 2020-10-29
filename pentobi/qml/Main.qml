@@ -31,12 +31,17 @@ ApplicationWindow {
     property bool initComputerColorsOnNewGame: true
 
     property bool isAndroid: Qt.platform.os === "android"
+
     // "system" theme would be a better default on desktop with Fusion style
     // but we currently don't use Fusion (see comment in Main.cpp about
     // QTBUG-77107)
     property string themeName: isAndroid ? "dark" : "light"
+
     property QtObject theme: Logic.createTheme(themeName)
     property url folder: androidUtils.getDefaultFolder()
+
+    // Display name if current file is a Android content URI
+    property string displayName
 
     property real defaultWidth:
         isAndroid ? Screen.desktopAvailableWidth
@@ -111,6 +116,7 @@ ApplicationWindow {
         property real height: defaultHeight
         property int visibility
         property alias folder: rootWindow.folder
+        property alias displayName: rootWindow.displayName
         // Changed alias name from themeName to theme to ignore old saved
         // settings from Pentobi <=17.1 after changing default theme on desktop
         // (see comment in Main.cpp about QTBUG-77107)
@@ -157,7 +163,17 @@ ApplicationWindow {
 
         gameVariant: gameModel.gameVariant
     }
-    AndroidUtils { id: androidUtils }
+    RecentFiles {
+        id: recentFiles
+    }
+    AndroidUtils {
+        id: androidUtils
+
+        onImageSaveDialogAccepted: Logic.exportImage(uri)
+        onOpenDialogAccepted: Logic.openFile(uri, displayName)
+        onSaveDialogAccepted: Logic.saveFile(uri, displayName)
+        onTextSaveDialogAccepted: Logic.exportAsciiArt(uri)
+    }
     SyncSettings { id: syncSettings }
     DialogLoader { id: aboutDialog; url: "AboutDialog.qml" }
     DialogLoader { id: computerDialog; url: "ComputerDialog.qml" }

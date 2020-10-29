@@ -11,29 +11,179 @@
 
 #ifdef Q_OS_ANDROID
 #include <QAndroidJniObject>
+#include <QAndroidJniExceptionCleaner>
+#include <QBuffer>
 #include <QDir>
 #include <QDirIterator>
 #include <QHash>
+#include <QImage>
 #include <QtAndroid>
+#include <QVariant>
 #endif
+
+using namespace std;
 
 //-----------------------------------------------------------------------------
 
-bool AndroidUtils::checkPermission([[maybe_unused]] const QString& permission)
-{
+namespace {
+
 #ifdef Q_OS_ANDROID
-    using QtAndroid::PermissionResult;
-    if (QtAndroid::checkPermission(permission) == PermissionResult::Denied)
+
+void takePersistableUriPermission(QAndroidJniObject intent,
+                                  QAndroidJniObject uri);
+
+QAndroidJniObject getContentResolver()
+{
+    return QtAndroid::androidActivity().callObjectMethod(
+                "getContentResolver", "()Landroid/content/ContentResolver;");
+}
+
+QString getDisplayName(QAndroidJniObject uri)
+{
+    auto contentResolver = getContentResolver();
+    if (! contentResolver.isValid())
+        return {};
+    QAndroidJniExceptionCleaner exceptionCleaner;
+    QAndroidJniEnvironment env;
+    auto stringClass = env->FindClass("java/lang/String");
+    auto projection = env->NewObjectArray(1, stringClass, nullptr);
+    auto column = QAndroidJniObject::getStaticObjectField<jstring>(
+                "android/provider/OpenableColumns", "DISPLAY_NAME");
+    if (! column.isValid())
+        return {};
+    env->SetObjectArrayElement(projection, 0, column.object());
+    auto cursor = contentResolver.callObjectMethod(
+                "query",
+                "(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;"
+                "[Ljava/lang/String;Ljava/lang/String;)"
+                "Landroid/database/Cursor;",
+                uri.object(), projection, nullptr, nullptr, nullptr);
+    if (env->ExceptionCheck())
+        return {};
+    if (! cursor.callMethod<jboolean>("moveToFirst", "()Z"))
+        return {};
+    auto index = cursor.callMethod<jint>(
+                "getColumnIndex", "(Ljava/lang/String;)I", column.object());
+    if (index < 0)
+        return {};
+    auto name = cursor.callObjectMethod(
+                "getString", "(I)Ljava/lang/String;", index);
+    if (! name.isValid())
+        return {};
+    return name.toString();
+}
+
+QAndroidJniObject getUriObj(const QString& uri)
+{
+    QAndroidJniExceptionCleaner exceptionCleaner;
+    auto uriString = QAndroidJniObject::fromString(uri);
+    return QAndroidJniObject::callStaticObjectMethod(
+                "android/net/Uri", "parse",
+                "(Ljava/lang/String;)Landroid/net/Uri;",
+                uriString.object<jstring>());
+}
+
+void startDocumentActivity(
+        const char* actionField, const QString& type,
+        const QString& extraTitle, bool takePersistablePermission,
+        const function<void(const QString& uri,const QString& displayNamei)>&
+        callback)
+{
+    auto action = QAndroidJniObject::getStaticObjectField<jstring>(
+                "android/content/Intent", actionField);
+    if (! action.isValid())
+        return;
+    QAndroidJniObject intent("android/content/Intent", "(Ljava/lang/String;)V",
+                             action.object<jstring>());
+    if (! intent.isValid())
+        return;
+    auto category = QAndroidJniObject::getStaticObjectField<jstring>(
+                "android/content/Intent", "CATEGORY_OPENABLE");
+    if (! category.isValid())
+        return;
+    intent.callObjectMethod(
+                "addCategory",
+                "(Ljava/lang/String;)Landroid/content/Intent;",
+                category.object<jstring>());
+    auto typeObj = QAndroidJniObject::fromString(type);
+    intent.callObjectMethod(
+                "setType",
+                "(Ljava/lang/String;)Landroid/content/Intent;",
+                typeObj.object<jstring>());
+    if (! extraTitle.isEmpty())
     {
-        QStringList permissions;
-        permissions << permission;
-        auto result = QtAndroid::requestPermissionsSync(permissions);
-        if (result[permission] == PermissionResult::Denied)
-            return false;
+        auto extraTitleObj = QAndroidJniObject::getStaticObjectField<jstring>(
+                    "android/content/Intent", "EXTRA_TITLE");
+        if (! extraTitleObj.isValid())
+            return;
+        auto extraTitleValue = QAndroidJniObject::fromString(extraTitle);
+        intent.callObjectMethod(
+                    "putExtra",
+                    "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;",
+                    extraTitleObj.object<jstring>(),
+                    extraTitleValue.object<jstring>());
     }
+    QtAndroid::startActivity(intent, 0,
+                             [takePersistablePermission, callback](int, int
+                             result, const QAndroidJniObject& data) {
+        auto ok = QAndroidJniObject::getStaticField<jint>(
+                    "android/app/Activity", "RESULT_OK");
+        if (result != ok)
+            return;
+        if (! data.isValid())
+            return;
+        auto uri = data.callObjectMethod("getData", "()Landroid/net/Uri;");
+        if (! uri.isValid())
+            return;
+        auto uriString =
+                uri.callObjectMethod("toString", "()Ljava/lang/String;");
+        if (! uriString.isValid())
+            return;
+        if (takePersistablePermission)
+            takePersistableUriPermission(data, uri);
+        auto displayName = getDisplayName(uri);
+        callback(uriString.toString(), displayName);
+    });
+}
+
+void takePersistableUriPermission(QAndroidJniObject intent,
+                                  QAndroidJniObject uri)
+{
+    auto contentResolver = getContentResolver();
+    if (! contentResolver.isValid())
+        return;
+    auto flags = intent.callMethod<jint>("getFlags", "()I");
+    auto flagRead = QAndroidJniObject::getStaticField<jint>(
+                "android/content/Intent", "FLAG_GRANT_READ_URI_PERMISSION");
+    auto flagWrite = QAndroidJniObject::getStaticField<jint>(
+                "android/content/Intent", "FLAG_GRANT_WRITE_URI_PERMISSION");
+    contentResolver.callMethod<void>(
+                "takePersistableUriPermission", "(Landroid/net/Uri;I)V",
+                uri.object(), flags & (flagRead | flagWrite));
+}
+
 #endif
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
+QString AndroidUtils::m_error;
+
+#ifdef Q_OS_ANDROID
+bool AndroidUtils::checkException()
+{
+    QAndroidJniEnvironment env;
+    if (! env->ExceptionCheck())
+        return false;
+    auto e = env->ExceptionOccurred();
+    auto method = env->GetMethodID(env->GetObjectClass(e),
+                                   "getMessage", "()Ljava/lang/String;");
+    QAndroidJniObject message(env->CallObjectMethod(e, method));
+    m_error = message.toString();
     return true;
 }
+#endif
 
 QUrl AndroidUtils::extractHelp([[maybe_unused]] const QString& language)
 {
@@ -82,18 +232,12 @@ QUrl AndroidUtils::extractHelp([[maybe_unused]] const QString& language)
 QUrl AndroidUtils::getDefaultFolder()
 {
 #ifdef Q_OS_ANDROID
-    QUrl fallback(QStringLiteral("file:///sdcard"));
-    auto file = QAndroidJniObject::callStaticObjectMethod(
-                "android/os/Environment", "getExternalStorageDirectory",
-                "()Ljava/io/File;");
-    if (! file.isValid())
-        return fallback;
-    auto fileString = file.callObjectMethod("toString",
-                                            "()Ljava/lang/String;");
-    if (! fileString.isValid())
-        return fallback;
-    return QUrl::fromLocalFile(fileString.toString());
+    // We don't need to know a default folder on Android anymore since we
+    // now use the Storage Access Framework.
+    return {};
 #else
+    // We could also get the home directory Qt.labs.platform.StandardPaths but
+    // we don't want a dependency on Qt.labs.platform for only one function.
     return QUrl::fromLocalFile(
                 QStandardPaths::writableLocation(QStandardPaths::HomeLocation));
 #endif
@@ -114,38 +258,184 @@ float AndroidUtils::getDensity()
 }
 #endif
 
-void AndroidUtils::scanFile([[maybe_unused]] const QString& pathname)
+#ifdef Q_OS_ANDROID
+QString AndroidUtils::getInitialFile()
+{
+    auto intent = QtAndroid::androidActivity().callObjectMethod(
+                "getIntent", "()Landroid/content/Intent;");
+    if (! intent.isValid())
+        return {};
+    auto uri = intent.callObjectMethod("getData", "()Landroid/net/Uri;");
+    if (! uri.isValid())
+        return {};
+    auto uriString =
+            uri.callObjectMethod("toString", "()Ljava/lang/String;");
+    if (! uriString.isValid())
+        return {};
+    return uriString.toString();
+}
+#endif
+
+bool AndroidUtils::open(
+        [[maybe_unused]]const QString& uri, [[maybe_unused]]QByteArray& sgf)
 {
 #ifdef Q_OS_ANDROID
-    // Corresponding Java code:
-    //   sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-    //                         Uri.fromFile(File(pathname).getAbsoluteFile())))
-    auto action = QAndroidJniObject::getStaticObjectField<jstring>(
-                "android/content/Intent", "ACTION_MEDIA_SCANNER_SCAN_FILE");
-    if (! action.isValid())
+    m_error.clear();
+    auto contentResolver = getContentResolver();
+    if (! contentResolver.isValid())
+        return false;
+    auto uriObj = getUriObj(uri);
+    if (! uriObj.isValid())
+        return false;
+    auto inputStream = contentResolver.callObjectMethod(
+                "openInputStream",
+                "(Landroid/net/Uri;)Ljava/io/InputStream;", uriObj.object());
+    QAndroidJniExceptionCleaner exceptionCleaner;
+    if (checkException())
+        return false;
+    if (! inputStream.isValid())
+        return false;
+    sgf.clear();
+    QAndroidJniEnvironment env;
+    const int bufSize = 2048;
+    auto byteArray = env->NewByteArray(bufSize);
+    jbyte buf[bufSize];
+    jint n;
+    while ((n = inputStream.callMethod<jint>("read", "([B)I", byteArray)) >= 0)
+    {
+        if (checkException())
+        {
+            exceptionCleaner.clean();
+            inputStream.callMethod<void>("close", "()V");
+            return false;
+        }
+        env->GetByteArrayRegion(byteArray, 0, n, buf);
+        sgf.append(reinterpret_cast<const char*>(&buf[0]), n);
+    }
+    inputStream.callMethod<void>("close", "()V");
+    return true;
+#else
+    return false;
+#endif
+}
+
+void AndroidUtils::openImageSaveDialog(
+        [[maybe_unused]] const QString& suggestedName)
+{
+#ifdef Q_OS_ANDROID
+    startDocumentActivity("ACTION_CREATE_DOCUMENT", "image/png",
+                          suggestedName, false,
+                          [this](const QString& uri,
+                          [[maybe_unused]]const QString& displayName) {
+        emit imageSaveDialogAccepted(uri);
+    });
+#endif
+}
+
+void AndroidUtils::openOpenDialog()
+{
+#ifdef Q_OS_ANDROID
+    startDocumentActivity("ACTION_OPEN_DOCUMENT", "*/*", "", true,
+                          [this](const QString& uri,
+                          const QString& displayName) {
+        emit openDialogAccepted(uri, displayName);
+    });
+#endif
+}
+
+void AndroidUtils::openTextSaveDialog()
+{
+#ifdef Q_OS_ANDROID
+    startDocumentActivity("ACTION_CREATE_DOCUMENT", "text/plain",
+                          "", false,
+                          [this](const QString& uri,
+                          [[maybe_unused]]const QString& displayName) {
+        emit textSaveDialogAccepted(uri);
+    });
+#endif
+}
+
+void AndroidUtils::openSaveDialog(
+        [[maybe_unused]] const QString& suggestedName)
+{
+#ifdef Q_OS_ANDROID
+    startDocumentActivity("ACTION_CREATE_DOCUMENT", "application/x-blokus-sgf",
+                          suggestedName, true,
+                          [this](const QString& uri,
+                          const QString& displayName) {
+        emit saveDialogAccepted(uri, displayName);
+    });
+#endif
+}
+
+void AndroidUtils::releasePersistableUriPermission(
+        [[maybe_unused]]const QString& uri)
+{
+#ifdef Q_OS_ANDROID
+    auto uriObj = getUriObj(uri);
+    if (! uriObj.isValid())
         return;
-    auto pathnameString = QAndroidJniObject::fromString(pathname);
-    QAndroidJniObject file("java/io/File", "(Ljava/lang/String;)V",
-                           pathnameString.object<jstring>());
-    if (! file.isValid())
+    auto contentResolver = getContentResolver();
+    if (! contentResolver.isValid())
         return;
-    auto absoluteFile = file.callObjectMethod(
-                "getAbsoluteFile", "()Ljava/io/File;");
-    if (! absoluteFile.isValid())
-        return;
-    auto uri = QAndroidJniObject::callStaticObjectMethod(
-                "android/net/Uri", "fromFile",
-                "(Ljava/io/File;)Landroid/net/Uri;", absoluteFile.object());
-    if (! uri.isValid())
-        return;
-    QAndroidJniObject intent("android/content/Intent",
-                             "(Ljava/lang/String;Landroid/net/Uri;)V",
-                             action.object<jstring>(), uri.object());
-    if (! intent.isValid())
-        return;
-    QtAndroid::androidActivity().callMethod<void>(
-                "sendBroadcast", "(Landroid/content/Intent;)V",
-                intent.object());
+    auto flagRead = QAndroidJniObject::getStaticField<jint>(
+                "android/content/Intent", "FLAG_GRANT_READ_URI_PERMISSION");
+    auto flagWrite = QAndroidJniObject::getStaticField<jint>(
+                "android/content/Intent", "FLAG_GRANT_WRITE_URI_PERMISSION");
+    contentResolver.callMethod<void>(
+                "releasePersistableUriPermission", "(Landroid/net/Uri;I)V",
+                uriObj.object(), flagRead | flagWrite);
+#endif
+}
+
+bool AndroidUtils::save([[maybe_unused]]const QString& uri,
+                        [[maybe_unused]]const QByteArray& array)
+{
+#ifdef Q_OS_ANDROID
+    auto contentResolver = getContentResolver();
+    if (! contentResolver.isValid())
+        return false;
+    auto uriObj = getUriObj(uri);
+    if (! uriObj.isValid())
+        return false;
+    auto outputStream = contentResolver.callObjectMethod(
+                "openOutputStream",
+                "(Landroid/net/Uri;)Ljava/io/OutputStream;", uriObj.object());
+    QAndroidJniExceptionCleaner exceptionCleaner;
+    QAndroidJniEnvironment env;
+    if (env->ExceptionCheck())
+        return false;
+    if (! outputStream.isValid())
+        return false;
+    auto byteArray = env->NewByteArray(array.size());
+    env->SetByteArrayRegion(byteArray, 0, array.size(),
+                            reinterpret_cast<const jbyte*>(array.constData()));
+    outputStream.callMethod<void>("write", "([B)V", byteArray);
+    if (env->ExceptionCheck())
+        return false;
+    outputStream.callMethod<void>("close", "()V");
+    if (env->ExceptionCheck())
+        return false;
+    return true;
+#else
+    return false;
+#endif
+}
+
+bool AndroidUtils::saveImage([[maybe_unused]]const QString& uri,
+                             [[maybe_unused]]const QVariant& image)
+{
+#ifdef Q_OS_ANDROID
+    auto img = image.value<QImage>();
+    if (img.isNull())
+        return false;
+    QByteArray array;
+    QBuffer buffer(&array);
+    buffer.open(QIODevice::WriteOnly);
+    img.save(&buffer, "PNG");
+    return save(uri, array);
+#else
+    return false;
 #endif
 }
 

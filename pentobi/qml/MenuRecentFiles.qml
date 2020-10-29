@@ -10,80 +10,97 @@ import "." as Pentobi
 
 Pentobi.Menu {
     title: qsTr("Open Recent")
-    enabled: gameModel.recentFiles.length > 0
-    relativeWidth: 23
+    enabled: recentFiles.entries.length > 0
+    relativeWidth: 19
 
     function getText(recentFiles, index) {
         if (index >= recentFiles.length)
             return ""
-        var text = recentFiles[index]
-        return text.substring(text.lastIndexOf("/") + 1)
+        var text
+        if (isAndroid)
+            text = recentFiles[index].displayName
+        else  {
+            text = recentFiles[index].file
+            text = text.substring(text.lastIndexOf("/") + 1)
+        }
+        text = text.replace("\.blksgf", "")
+        return text
     }
 
     // Instantiator in Menu doesn't work reliably with Qt 5.11 or 5.12.0 alpha
     Pentobi.MenuItem {
-        visible: gameModel.recentFiles.length > 0
+        visible: recentFiles.entries.length > 0
         // Invisible menu item still use space in Qt 5.11
         height: visible ? implicitHeight : 0
-        text: getText(gameModel.recentFiles, 0)
-        onTriggered: Logic.openRecentFile(gameModel.recentFiles[0])
+        text: getText(recentFiles.entries, 0)
+        onTriggered: Logic.openRecentFile(recentFiles.entries[0].file,
+                                          recentFiles.entries[0].displayName)
     }
     Pentobi.MenuItem {
-        visible: gameModel.recentFiles.length > 1
+        visible: recentFiles.entries.length > 1
         height: visible ? implicitHeight : 0
-        text: getText(gameModel.recentFiles, 1)
-        onTriggered: Logic.openRecentFile(gameModel.recentFiles[1])
+        text: getText(recentFiles.entries, 1)
+        onTriggered: Logic.openRecentFile(recentFiles.entries[1].file,
+                                          recentFiles.entries[1].displayName)
     }
     Pentobi.MenuItem {
-        visible: gameModel.recentFiles.length > 2
+        visible: recentFiles.entries.length > 2
         height: visible ? implicitHeight : 0
-        text: getText(gameModel.recentFiles, 2)
-        onTriggered: Logic.openRecentFile(gameModel.recentFiles[2])
+        text: getText(recentFiles.entries, 2)
+        onTriggered: Logic.openRecentFile(recentFiles.entries[2].file,
+                                          recentFiles.entries[2].displayName)
     }
     Pentobi.MenuItem {
-        visible: gameModel.recentFiles.length > 3
+        visible: recentFiles.entries.length > 3
         height: visible ? implicitHeight : 0
-        text: getText(gameModel.recentFiles, 3)
-        onTriggered: Logic.openRecentFile(gameModel.recentFiles[3])
+        text: getText(recentFiles.entries, 3)
+        onTriggered: Logic.openRecentFile(recentFiles.entries[3].file,
+                                          recentFiles.entries[3].displayName)
     }
     Pentobi.MenuItem {
-        visible: gameModel.recentFiles.length > 4
+        visible: recentFiles.entries.length > 4
         height: visible ? implicitHeight : 0
-        text: getText(gameModel.recentFiles, 4)
-        onTriggered: Logic.openRecentFile(gameModel.recentFiles[4])
+        text: getText(recentFiles.entries, 4)
+        onTriggered: Logic.openRecentFile(recentFiles.entries[4].file,
+                                          recentFiles.entries[4].displayName)
     }
     Pentobi.MenuItem {
-        visible: gameModel.recentFiles.length > 5
+        visible: recentFiles.entries.length > 5
         height: visible ? implicitHeight : 0
-        text: getText(gameModel.recentFiles, 5)
-        onTriggered: Logic.openRecentFile(gameModel.recentFiles[5])
+        text: getText(recentFiles.entries, 5)
+        onTriggered: Logic.openRecentFile(recentFiles.entries[5].file,
+                                          recentFiles.entries[5].displayName)
     }
     Pentobi.MenuItem {
-        visible: gameModel.recentFiles.length > 6
+        visible: recentFiles.entries.length > 6
         height: visible ? implicitHeight : 0
-        text: getText(gameModel.recentFiles, 6)
-        onTriggered: Logic.openRecentFile(gameModel.recentFiles[6])
+        text: getText(recentFiles.entries, 6)
+        onTriggered: Logic.openRecentFile(recentFiles.entries[6].file,
+                                          recentFiles.entries[6].displayName)
     }
     Pentobi.MenuItem {
-        visible: gameModel.recentFiles.length > 7
+        visible: recentFiles.entries.length > 7
         height: visible ? implicitHeight : 0
-        text: getText(gameModel.recentFiles, 7)
-        onTriggered: Logic.openRecentFile(gameModel.recentFiles[7])
+        text: getText(recentFiles.entries, 7)
+        onTriggered: Logic.openRecentFile(recentFiles.entries[7].file,
+                                          recentFiles.entries[7].displayName)
     }
     Pentobi.MenuItem {
-        visible: gameModel.recentFiles.length > 8
+        visible: recentFiles.entries.length > 8
         height: visible ? implicitHeight : 0
-        text: getText(gameModel.recentFiles, 8)
-        onTriggered: Logic.openRecentFile(gameModel.recentFiles[8])
+        text: getText(recentFiles.entries, 8)
+        onTriggered: Logic.openRecentFile(recentFiles.entries[8].file,
+                                          recentFiles.entries[8].displayName)
     }
-
     MenuSeparator { }
     Action {
         //: Menu item for clearing the recent files list
         text: qsTr("Clear List")
-        // clearRecentFiles() must be called after menu is closed because it
+        // recentFiles.clear() must be called after menu is closed because it
         // modifies the menu and otherwise the menu stays visible (tested with
         // Qt 5.15.1)
-        onTriggered: Qt.callLater(function() { gameModel.clearRecentFiles() })
+        onTriggered: Qt.callLater(function() {
+            recentFiles.clear(gameModel.file)
+        })
     }
 }
