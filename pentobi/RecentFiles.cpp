@@ -86,7 +86,7 @@ void RecentFiles::load()
     {
         auto entry = i.next().toMap();
         auto file = entry["file"].toString();
-        if (entry.isEmpty() || ! QFileInfo::exists(file))
+        if (! QFileInfo::exists(file))
             i.remove();
     }
 #endif
