@@ -38,7 +38,7 @@ Item {
             visible: ! isDesktop && showContent
             color: theme.colorText
             opacity: isRated ? 0.6 : 0.8
-            elide: Text.ElideRight
+            elide: Text.ElideMiddle
             text: Logic.getGameLabel(gameView.setupMode, isRated,
                                      gameModel.file, gameModel.isModified, true)
             // There is a bug in Qt 5.11 that in some situations elides the
