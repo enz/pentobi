@@ -1020,7 +1020,7 @@ bool GameModel::openFile(const QString& file)
     QByteArray sgf;
     if (! AndroidUtils::open(file, sgf))
     {
-        m_error.clear(); // AndroidUtils does not return error message yet
+        m_error = AndroidUtils::getError();
         return false;
     }
     string s(sgf.constData(), sgf.size());
@@ -1281,7 +1281,7 @@ bool GameModel::save(const QString& file)
 #ifdef Q_OS_ANDROID
     if (! AndroidUtils::save(file, sgf))
     {
-        m_error.clear(); // AndroidUtils does not return error message yet
+        m_error = AndroidUtils::getError();
         return false;
     }
 #else
@@ -1309,7 +1309,7 @@ bool GameModel::saveAsciiArt(const QString& file)
     QByteArray array(&*s.begin(), s.size());
     if (! AndroidUtils::save(file, array))
     {
-        m_error.clear(); // AndroidUtils does not return error message yet
+        m_error = AndroidUtils::getError();
         return false;
     }
     return true;

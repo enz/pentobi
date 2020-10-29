@@ -190,8 +190,10 @@ bool AndroidUtils::checkException()
     if (! env->ExceptionCheck())
         return false;
     auto e = env->ExceptionOccurred();
+    env->ExceptionClear();
     auto method = env->GetMethodID(env->GetObjectClass(e),
-                                   "getMessage", "()Ljava/lang/String;");
+                                   "getLocalizedMessage",
+                                   "()Ljava/lang/String;");
     QAndroidJniObject message(env->CallObjectMethod(e, method));
     m_error = message.toString();
     return true;
@@ -337,10 +339,10 @@ bool AndroidUtils::open(
     auto uriObj = getUriObj(uri);
     if (! uriObj.isValid())
         return false;
+    QAndroidJniExceptionCleaner exceptionCleaner;
     auto inputStream = contentResolver.callObjectMethod(
                 "openInputStream",
                 "(Landroid/net/Uri;)Ljava/io/InputStream;", uriObj.object());
-    QAndroidJniExceptionCleaner exceptionCleaner;
     if (checkException())
         return false;
     if (! inputStream.isValid())
@@ -442,18 +444,19 @@ bool AndroidUtils::save([[maybe_unused]]const QString& uri,
                         [[maybe_unused]]const QByteArray& array)
 {
 #ifdef Q_OS_ANDROID
+    m_error.clear();
     auto contentResolver = getContentResolver();
     if (! contentResolver.isValid())
         return false;
     auto uriObj = getUriObj(uri);
     if (! uriObj.isValid())
         return false;
+    QAndroidJniExceptionCleaner exceptionCleaner;
     auto outputStream = contentResolver.callObjectMethod(
                 "openOutputStream",
                 "(Landroid/net/Uri;)Ljava/io/OutputStream;", uriObj.object());
-    QAndroidJniExceptionCleaner exceptionCleaner;
     QAndroidJniEnvironment env;
-    if (env->ExceptionCheck())
+    if (checkException())
         return false;
     if (! outputStream.isValid())
         return false;
@@ -461,7 +464,7 @@ bool AndroidUtils::save([[maybe_unused]]const QString& uri,
     env->SetByteArrayRegion(byteArray, 0, array.size(),
                             reinterpret_cast<const jbyte*>(array.constData()));
     outputStream.callMethod<void>("write", "([B)V", byteArray);
-    if (env->ExceptionCheck())
+    if (checkException())
         return false;
     outputStream.callMethod<void>("close", "()V");
     if (env->ExceptionCheck())

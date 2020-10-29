@@ -26,10 +26,6 @@ public:
 
     Q_INVOKABLE static QUrl getDefaultFolder();
 
-    Q_INVOKABLE QString getError() const { return m_error; }
-
-    Q_INVOKABLE static bool open(const QString& uri, QByteArray& sgf);
-
     Q_INVOKABLE void openImageSaveDialog(const QString& suggestedName);
 
     Q_INVOKABLE void openOpenDialog();
@@ -54,7 +50,11 @@ public:
         @return The density or 0 on error. */
     static float getDensity();
 
+    static QString getError() { return m_error; }
+
     static QString getInitialFile();
+
+    static bool open(const QString& uri, QByteArray& sgf);
 #endif
 
 signals:
