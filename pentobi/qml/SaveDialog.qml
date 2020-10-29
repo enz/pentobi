@@ -12,7 +12,7 @@ Pentobi.FileDialog {
     title: qsTr("Save")
     selectExisting: false
     nameFilterLabels: [ qsTr("Blokus games") ]
-    nameFilters: [ [ "*.blksgf", "*.BLKSGF" ] ]
+    nameFilters: [ [ "*.blksgf" ] ]
     folder: rootWindow.folder
     onAccepted: {
         rootWindow.folder = folder
