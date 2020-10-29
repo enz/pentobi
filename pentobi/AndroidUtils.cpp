@@ -29,6 +29,16 @@ namespace {
 
 #ifdef Q_OS_ANDROID
 
+struct AutoClose
+{
+    const QAndroidJniObject& m_obj;
+
+    ~AutoClose()
+    {
+        m_obj.callMethod<void>("close", "()V");
+    }
+};
+
 void takePersistableUriPermission(QAndroidJniObject intent,
                                   QAndroidJniObject uri);
 
@@ -60,6 +70,7 @@ QString getDisplayName(QAndroidJniObject uri)
                 uri.object(), projection, nullptr, nullptr, nullptr);
     if (env->ExceptionCheck())
         return {};
+    AutoClose autoClose{cursor};
     if (! cursor.callMethod<jboolean>("moveToFirst", "()Z"))
         return {};
     auto index = cursor.callMethod<jint>(
