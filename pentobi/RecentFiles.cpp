@@ -77,7 +77,10 @@ void RecentFiles::load()
     {
         auto entry = i.next().toMap();
         if (! entry.contains("file") || ! entry.contains("displayName"))
+        {
             i.remove();
+            continue;
+        }
         auto file = entry["file"].toString();
         if (! AndroidUtils::checkExists(file))
             i.remove();
