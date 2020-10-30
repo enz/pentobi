@@ -377,6 +377,7 @@ function init() {
                 syncSettings.valueBool("initComputerColorsOnNewGame",
                                        initComputerColorsOnNewGame)
         analyzeGameModel.loadAutoSave(gameModel)
+        updateDisplayName()
     }
     playerModel.level = syncSettings.valueInt("level", 1)
     if (isMultiColor()) {
@@ -532,6 +533,7 @@ function openFileBlocking(file, displayName) {
     if (! gameModel.openFile(file, displayName))
         showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
     else {
+        updateDisplayName()
         recentFiles.add(file, displayName)
         rootWindow.displayName = displayName
         setComputerNone()
@@ -809,6 +811,15 @@ function truncateChildrenNoVerify() {
 
 function undo() {
     gameModel.undo()
+}
+
+function updateDisplayName() {
+    if (isAndroid && gameModel.file !== "") {
+        // File could have been renamed outside this app
+        var newDisplayName = androidUtils.getDisplayName(gameModel.file)
+        if (newDisplayName !== "")
+            displayName = newDisplayName
+    }
 }
 
 function verify(callback)
