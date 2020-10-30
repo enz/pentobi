@@ -71,6 +71,10 @@ add_library(boardgame_base STATIC
 target_compile_options(boardgame_base PUBLIC
     "$<$<CONFIG:DEBUG>:-DLIBBOARDGAME_DEBUG>")
 
+if(ANDROID)
+    target_link_libraries(boardgame_base INTERFACE debug log)
+endif()
+
 target_include_directories(boardgame_base PUBLIC ..)
 
 if(BUILD_TESTING)
