@@ -27,7 +27,7 @@ void RecentFiles::add(const QString& file, const QString& displayName)
     while (i.hasNext())
     {
         auto entry = i.next().value<QVariantMap>();
-        if (entry["file"] == file)
+        if (entry[QStringLiteral("file")] == file)
             i.remove();
     }
     QVariantMap entry{ { "file", file }, { "displayName", displayName } };
@@ -44,7 +44,7 @@ void RecentFiles::checkMax([[maybe_unused]]const QString& currentFile)
     {
 #ifdef Q_OS_ANDROID
         auto entry = m_entries.last().value<QVariantMap>();
-        auto file = entry["file"].toString();
+        auto file = entry[QStringLiteral("file")].toString();
         if (currentFile.isEmpty() || file != currentFile)
             AndroidUtils::releasePersistableUriPermission(file);
 #endif
@@ -57,7 +57,8 @@ void RecentFiles::clear([[maybe_unused]]const QString& currentFile)
 #ifdef Q_OS_ANDROID
     for (auto& entry : as_const(m_entries))
     {
-        auto file = entry.value<QVariantMap>()["file"].toString();
+        auto file =
+                entry.value<QVariantMap>()[QStringLiteral("file")].toString();
         if (file != currentFile)
             AndroidUtils::releasePersistableUriPermission(file);
     }
@@ -76,12 +77,13 @@ void RecentFiles::load()
     while (i.hasNext())
     {
         auto entry = i.next().toMap();
-        if (! entry.contains("file") || ! entry.contains("displayName"))
+        if (! entry.contains(QStringLiteral("file"))
+                || ! entry.contains(QStringLiteral("displayName")))
         {
             i.remove();
             continue;
         }
-        auto file = entry["file"].toString();
+        auto file = entry[QStringLiteral("file")].toString();
         if (! AndroidUtils::checkExists(file))
             i.remove();
     }
