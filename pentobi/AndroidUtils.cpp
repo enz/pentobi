@@ -41,8 +41,8 @@ struct AutoClose
     }
 };
 
-void takePersistableUriPermission(QAndroidJniObject intent,
-                                  QAndroidJniObject uri);
+void takePersistableUriPermission(const QAndroidJniObject& intent,
+                                  const QAndroidJniObject& uri);
 
 QAndroidJniObject getContentResolver()
 {
@@ -159,8 +159,8 @@ void startDocumentActivity(
     });
 }
 
-void takePersistableUriPermission(QAndroidJniObject intent,
-                                  QAndroidJniObject uri)
+void takePersistableUriPermission(const QAndroidJniObject& intent,
+                                  const QAndroidJniObject& uri)
 {
     auto contentResolver = getContentResolver();
     if (! contentResolver.isValid())
