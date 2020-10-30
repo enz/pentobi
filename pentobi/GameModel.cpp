@@ -1511,8 +1511,10 @@ QString GameModel::suggestFileName(const QUrl& folder,
 
 QString GameModel::suggestGameFileName(const QUrl& folder)
 {
+#ifndef Q_OS_ANDROID
     if (! m_file.isEmpty())
         return QUrl::fromLocalFile(m_file).fileName();
+#endif
     return suggestFileName(folder, QStringLiteral("blksgf"));
 }
 
