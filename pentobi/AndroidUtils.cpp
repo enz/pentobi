@@ -310,12 +310,12 @@ float AndroidUtils::getDensity()
 }
 #endif
 
-QString AndroidUtils::getDisplayName(const QString& uri)
+QString AndroidUtils::getDisplayName([[maybe_unused]]const QString& uri)
 {
 #ifdef Q_OS_ANDROID
     return ::getDisplayName(getUriObj(uri));
 #else
-    return {}
+    return {};
 #endif
 }
 
@@ -337,10 +337,10 @@ QString AndroidUtils::getInitialFile()
 }
 #endif
 
+#ifdef Q_OS_ANDROID
 bool AndroidUtils::open(
         [[maybe_unused]]const QString& uri, [[maybe_unused]]QByteArray& sgf)
 {
-#ifdef Q_OS_ANDROID
     m_error.clear();
     auto contentResolver = getContentResolver();
     if (! contentResolver.isValid())
@@ -375,10 +375,8 @@ bool AndroidUtils::open(
     }
     inputStream.callMethod<void>("close", "()V");
     return true;
-#else
-    return false;
-#endif
 }
+#endif
 
 void AndroidUtils::openImageSaveDialog(
         [[maybe_unused]] const QString& suggestedName)
