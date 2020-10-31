@@ -16,6 +16,7 @@ Version 19.0-dev (master)
 Version 18.3-dev (v18-fixes)
 ----------------------------
 
+* Made opening of recent rated games from rating dialog work again.
 * New Russian translation (thanks to Victor Erukhin)
 * Back key now needs to be pressed twice to exit Android app to avoid
   unintentional exit with gesture navigation on newer Android versions.

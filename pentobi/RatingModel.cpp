@@ -177,6 +177,13 @@ QString RatingModel::getFile(int gameNumber) const
                 getDir(), m_gameVariantName, QString::number(gameNumber));
 }
 
+int RatingModel::getGameNumber(int historyIndex) const
+{
+    if (historyIndex < 0 || historyIndex >= m_history.length())
+        return -1;
+    return m_history[historyIndex].number;
+}
+
 int RatingModel::getGameNumberOfFile(const QString& file) const
 {
     QString left = QStringLiteral("%1/%2 ").arg(getDir(), m_gameVariantName);
