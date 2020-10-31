@@ -139,6 +139,12 @@ Pentobi.Dialog {
                               Logic.getPlayerString(ratingModel.gameVariant,
                                                     display)
                             : display
+                    MouseArea {
+                        anchors.fill: parent
+                        acceptedButtons: Qt.LeftButton | Qt.RightButton
+                        onClicked: menu.openMenu(row, parent)
+                        onPressAndHold: menu.openMenu(row, parent)
+                    }
                 }
                 columnSpacing: 0.4 * font.pixelSize
                 rowSpacing: columnLayout.spacing
@@ -148,6 +154,31 @@ Pentobi.Dialog {
                              0.22 * rootWindow.contentItem.width,
                              0.22 * rootWindow.contentItem.height)
                 ScrollBar.vertical: ScrollBar { }
+            }
+            Pentobi.Menu {
+                id: menu
+
+                property int row
+
+                function openMenu(row, parent) {
+                    if (row < 1)
+                        return
+                    menu.parent = parent
+                    menu.row = row
+                    popup()
+                }
+
+                relativeWidth: 14
+
+                Pentobi.MenuItem {
+                    text: qsTr("Open Game %1").arg(
+                                ratingModel.getGameNumber(menu.row - 1))
+                    onTriggered: {
+                        var n = ratingModel.getGameNumber(menu.row - 1)
+                        Logic.openFile(ratingModel.getFile(n))
+                        close()
+                    }
+                }
             }
         }
     }

@@ -80,6 +80,8 @@ public:
 
     Q_INVOKABLE QString getFile(int gameNumber) const;
 
+    Q_INVOKABLE int getGameNumber(int historyIndex) const;
+
     /** Get the game number corresponding to a file.
         @return The game number or 0 if file is not a rated game. */
     Q_INVOKABLE int getGameNumberOfFile(const QString& file) const;
