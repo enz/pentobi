@@ -1235,6 +1235,10 @@
         <source>Recent development:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open Game %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SaveDialog</name>
