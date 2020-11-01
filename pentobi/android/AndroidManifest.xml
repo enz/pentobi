@@ -8,8 +8,8 @@
 
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
 
-    <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Pentobi" android:extractNativeLibs="true" android:theme="@android:style/Theme.NoTitleBar" android:icon="@drawable/icon" android:requestLegacyExternalStorage="true">
-        <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density" android:name="org.qtproject.qt5.android.bindings.QtActivity" android:label="Pentobi" android:screenOrientation="portrait" android:launchMode="singleTop">
+    <application android:hardwareAccelerated="true" android:name="org.qtproject.qt5.android.bindings.QtApplication" android:label="Pentobi" android:extractNativeLibs="true" android:theme="@style/AppTheme" android:icon="@drawable/icon" android:requestLegacyExternalStorage="true">
+        <activity android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density" android:name="net.sf.pentobi.Activity" android:label="Pentobi" android:screenOrientation="portrait" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -43,6 +43,7 @@
                  then android.app.splash_screen_drawable. For best results, use together with splash_screen_sticky and
                  use hideSplashScreen() with a fade-out animation from Qt Android Extras to hide the splash screen when you
                  are done populating your window with content. -->
+            <meta-data android:name="android.app.splash_screen_drawable_portrait" android:resource="@drawable/splash" />
             <!-- meta-data android:name="android.app.splash_screen_drawable_portrait" android:resource="@drawable/logo_portrait" / -->
             <!-- meta-data android:name="android.app.splash_screen_drawable_landscape" android:resource="@drawable/logo_landscape" / -->
             <!-- meta-data android:name="android.app.splash_screen_sticky" android:value="true"/ -->
