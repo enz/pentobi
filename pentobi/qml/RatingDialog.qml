@@ -143,7 +143,6 @@ Pentobi.Dialog {
                         anchors.fill: parent
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
                         onClicked: menu.openMenu(row, parent)
-                        onPressAndHold: menu.openMenu(row, parent)
                     }
                 }
                 columnSpacing: 0.4 * font.pixelSize
@@ -175,7 +174,7 @@ Pentobi.Dialog {
                                 ratingModel.getGameNumber(menu.row - 1))
                     onTriggered: {
                         var n = ratingModel.getGameNumber(menu.row - 1)
-                        Logic.openFile(ratingModel.getFile(n))
+                        Logic.openFile(ratingModel.getFile(n), "")
                         close()
                     }
                 }

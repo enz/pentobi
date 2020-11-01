@@ -84,7 +84,7 @@ void RecentFiles::load()
             continue;
         }
         auto file = entry[QStringLiteral("file")].toString();
-        if (! AndroidUtils::checkExists(file))
+        if (! QUrl(file).isRelative() && ! AndroidUtils::checkExists(file))
             i.remove();
     }
     checkMax();

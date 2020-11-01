@@ -16,10 +16,8 @@ Pentobi.Menu {
     function getText(recentFiles, index) {
         if (index >= recentFiles.length)
             return ""
-        var text
-        if (isAndroid)
-            text = recentFiles[index].displayName
-        else  {
+        var text = recentFiles[index].displayName
+        if (! text || text === "") {
             text = recentFiles[index].file
             text = text.substring(text.lastIndexOf("/") + 1)
         }

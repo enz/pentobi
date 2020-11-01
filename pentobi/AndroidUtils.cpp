@@ -313,10 +313,10 @@ float AndroidUtils::getDensity()
 QString AndroidUtils::getDisplayName([[maybe_unused]]const QString& uri)
 {
 #ifdef Q_OS_ANDROID
-    return ::getDisplayName(getUriObj(uri));
-#else
-    return {};
+    if (! QUrl(uri).isRelative())
+        return ::getDisplayName(getUriObj(uri));
 #endif
+    return {};
 }
 
 #ifdef Q_OS_ANDROID

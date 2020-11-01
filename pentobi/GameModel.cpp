@@ -1013,42 +1013,47 @@ bool GameModel::openClipboard()
 
 bool GameModel::openFile(const QString& file)
 {
-    istream* in;
-    QString canonicalFile;
 #ifdef Q_OS_ANDROID
-    canonicalFile = file;
-    QByteArray sgf;
-    if (! AndroidUtils::open(file, sgf))
+    if (! QUrl(file).isRelative())
     {
-        m_error = AndroidUtils::getError();
-        return false;
+        QByteArray sgf;
+        if (! AndroidUtils::open(file, sgf))
+        {
+            m_error = AndroidUtils::getError();
+            return false;
+        }
+        string s(sgf.constData(), sgf.size());
+        istringstream in(s);
+        if (! openStream(in))
+        {
+            clearFile();
+            return false;
+        }
     }
-    string s(sgf.constData(), sgf.size());
-    istringstream sin(s);
-    in = &sin;
-#else
-    canonicalFile = QFileInfo(file).absoluteFilePath();
-    ifstream fin(canonicalFile.toLocal8Bit().constData());
-    in = &fin;
+    else
 #endif
-    if (! *in)
     {
-        m_error = QString::fromLocal8Bit(strerror(errno));
-        return false;
-    }
-    if (openStream(*in))
-    {
+        auto canonicalFile = QFileInfo(file).absoluteFilePath();
+        ifstream in(canonicalFile.toLocal8Bit().constData());
+        if (! in)
+        {
+            m_error = QString::fromLocal8Bit(strerror(errno));
+            return false;
+        }
+        if (! openStream(in))
+        {
+            clearFile();
+            return false;
+        }
         updateFileInfo(canonicalFile);
-        auto& root = m_game.get_root();
-        // Show end of game position by default unless the root node has
-        // setup stones or comments, because then it might be a puzzle and
-        // we don't want to show the solution.
-        if (! has_setup(root) && ! has_comment(root) && root.has_children())
-            goEnd();
-        return true;
     }
-    clearFile();
-    return false;
+    auto& root = m_game.get_root();
+    // Show end of game position by default unless the root node has
+    // setup stones or comments, because then it might be a puzzle and
+    // we don't want to show the solution.
+    if (! has_setup(root) && ! has_comment(root) && root.has_children())
+        goEnd();
+    return true;
 }
 
 bool GameModel::openStream(istream& in)
@@ -1276,15 +1281,18 @@ void GameModel::restoreAutoSaveLocation()
 
 bool GameModel::save(const QString& file)
 {
-    int indent = 1;
-    auto sgf = getSgf(indent);
+    auto sgf = getSgf(1);
 #ifdef Q_OS_ANDROID
-    if (! AndroidUtils::save(file, sgf))
+    if (! QUrl(file).isRelative())
     {
-        m_error = AndroidUtils::getError();
-        return false;
+        if (! AndroidUtils::save(file, sgf))
+        {
+            m_error = AndroidUtils::getError();
+            return false;
+        }
     }
-#else
+    else
+#endif
     {
         ofstream out(file.toLocal8Bit().constData());
         out.write(sgf.constData(), sgf.size());
@@ -1294,7 +1302,6 @@ bool GameModel::save(const QString& file)
             return false;
         }
     }
-#endif
     updateFileInfo(file);
     setIsModified(false);
     return true;
