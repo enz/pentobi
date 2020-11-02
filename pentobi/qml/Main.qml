@@ -319,15 +319,7 @@ ApplicationWindow {
         text: qsTr("Comment")
         checkable: true
         checked: gameView.isCommentVisible
-        onTriggered:
-            if (isDesktop)
-                gameView.setCommentVisible(checked)
-            else {
-                if (checked)
-                    gameView.showComment()
-                else
-                    gameView.showPieces()
-            }
+        onTriggered: gameView.setCommentVisible(checked)
     }
     Action {
         id: actionComputerSettings

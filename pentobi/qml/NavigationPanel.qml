@@ -11,8 +11,14 @@ import QtQuick.Controls 2.2
 ColumnLayout {
     id: root
 
+    property alias comment: comment
+
     function dropCommentFocus() { comment.dropFocus() }
 
+    Item {
+        visible: ! comment.visible
+        Layout.fillHeight: true
+    }
     Comment {
         id: comment
 
@@ -24,6 +30,10 @@ ColumnLayout {
         text: gameModel.positionInfo
         color: theme.colorText
         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+    }
+    Item {
+        visible: ! comment.visible
+        Layout.fillHeight: true
     }
     NavigationButtons {
         Layout.fillWidth: true

@@ -63,16 +63,15 @@ Pentobi.Dialog {
         else
             currentMoveMarkingIndex = 0
         comboBoxMoveMarking.currentIndex = currentMoveMarkingIndex
-        if (isDesktop) {
+        if (gameView.commentMode === "always")
+            currentCommentIndex = 0
+        else if (gameView.commentMode === "never")
+            currentCommentIndex = 2
+        else
+            currentCommentIndex = 1
+        comboBoxComment.currentIndex = currentCommentIndex
+        if (isDesktop)
             checkBoxMoveNumber.checked = gameView.showMoveNumber
-            if (gameView.commentMode === "always")
-                currentCommentIndex = 0
-            else if (gameView.commentMode === "never")
-                currentCommentIndex = 2
-            else
-                currentCommentIndex = 1
-            comboBoxComment.currentIndex = currentCommentIndex
-        }
     }
     onAccepted: {
         gameView.showCoordinates = checkBoxCoordinates.checked
@@ -91,14 +90,13 @@ Pentobi.Dialog {
         case 2: gameView.moveMarking = "all_number"; break
         case 3: gameView.moveMarking = "none"; break
         }
-        if (isDesktop) {
-            gameView.showMoveNumber = checkBoxMoveNumber.checked
-            switch (comboBoxComment.currentIndex) {
-            case 0: gameView.commentMode = "always"; break
-            case 1: gameView.commentMode = "as_needed"; break
-            case 2: gameView.commentMode = "never"; break
-            }
+        switch (comboBoxComment.currentIndex) {
+        case 0: gameView.commentMode = "always"; break
+        case 1: gameView.commentMode = "as_needed"; break
+        case 2: gameView.commentMode = "never"; break
         }
+        if (isDesktop)
+            gameView.showMoveNumber = checkBoxMoveNumber.checked
     }
     onApplied: {
         onAccepted()
@@ -188,16 +186,12 @@ Pentobi.Dialog {
                 Layout.fillWidth: true
             }
             Label {
-                visible: isDesktop
                 text: qsTr("Show comment:")
                 Layout.topMargin: 0.5 * font.pixelSize
-
-
             }
             Pentobi.ComboBox {
                 id: comboBoxComment
 
-                visible: isDesktop
                 model: [
                     //: Show-comment mode
                     qsTr("Always"),

@@ -31,6 +31,7 @@ Item
     property real animationDurationMove: enableAnimations ? 300 : 0
     property real animationDurationFast: enableAnimations ? 80 : 0
     property bool setupMode
+    property string commentMode: "as_needed"
     property alias boardContextMenu: boardContextMenu
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
@@ -59,7 +60,7 @@ Item
     }
     property var color2: theme.colorRed
     property var color3: theme.colorGreen
-    property bool isCommentVisible: swipeView.currentIndex === 1
+    property bool isCommentVisible: navigationPanel.comment.visible
     property bool isPortrait: width <= height
 
     signal play(var pieceModel, point gameCoord)
@@ -67,7 +68,9 @@ Item
     function createPieces() { Logic.createPieces() }
     function destroyPieces() { Logic.destroyPieces() }
     function findPiece(pieceModel) { return Logic.findPiece(pieceModel) }
-    function onPositionChanged() { }
+    function onPositionChanged() {
+        _updateCommentVisible()
+    }
     function pickPieceAtBoard(piece) { Logic.pickPieceAtBoard(piece) }
     function shiftPiece(dx, dy) { Logic.shiftPiece(dx, dy) }
     function shiftPieceFast(dx, dy) { Logic.shiftPieceFast(dx, dy) }
@@ -75,6 +78,11 @@ Item
     function showToPlay() { pieceSelector.contentY = 0 }
     function showAnalyzeGame() { pickedPiece = null; swipeView.currentIndex = 2 }
     function showComment() { pickedPiece = null; swipeView.currentIndex = 1 }
+    function setCommentVisible(visible) {
+        navigationPanel.comment.visible = visible
+        if (visible)
+            showComment()
+    }
     function showPieces() { swipeView.currentIndex = 0 }
     function dropCommentFocus() { navigationPanel.dropCommentFocus() }
     function showMove(move) { Logic.showMove(move) }
@@ -97,8 +105,18 @@ Item
             boardContextMenu.item.popup(x, y)
     }
 
+    function _updateCommentVisible() {
+        if (commentMode === "always")
+            navigationPanel.comment.visible = true
+        else if (commentMode === "never")
+            navigationPanel.comment.visible = false
+        else
+            navigationPanel.comment.visible = gameModel.comment !== ""
+    }
+
     onWidthChanged: Logic.dropPieceFast()
     onHeightChanged: Logic.dropPieceFast()
+    onCommentModeChanged: _updateCommentVisible()
 
     Settings {
         property alias enableAnimations: root.enableAnimations

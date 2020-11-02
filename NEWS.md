@@ -10,6 +10,8 @@ Version 19.0-dev (master)
   target SDK version 30 (Android 11) and adds support for cloud-based
   storage.
 * Migrated build system for Android app from qmake to CMake.
+* Support for different comment showing modes (Always/As Needed/Never)
+  on Android. 
 * Remaining pieces on Android are now always shown in order to play
   even in game variants where a player plays two colors.
 
