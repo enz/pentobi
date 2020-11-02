@@ -1029,6 +1029,7 @@ bool GameModel::openFile(const QString& file)
             clearFile();
             return false;
         }
+        updateFileInfo(file);
     }
     else
 #endif
