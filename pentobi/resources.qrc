@@ -1,8 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/icons/filedialog-folder.svg</file>
-        <file>qml/icons/filedialog-newfolder.svg</file>
-        <file>qml/icons/filedialog-parent.svg</file>
         <file>qml/AboutDialog.qml</file>
         <file>qml/AnalyzeDialog.qml</file>
         <file>qml/AnalyzeGame.qml</file>
@@ -25,13 +22,11 @@
         <file>qml/DialogLoader.qml</file>
         <file>qml/ExportImageDialog.qml</file>
         <file>qml/FatalMessage.qml</file>
-        <file>qml/FileDialog.qml</file>
         <file>qml/GameViewMobile.qml</file>
         <file>qml/GameInfoDialog.qml</file>
         <file>qml/GameVariantDialog.qml</file>
         <file>qml/GotoMoveDialog.qml</file>
         <file>qml/HelpWindow.qml</file>
-        <file>qml/ImageSaveDialog.qml</file>
         <file>qml/InitialRatingDialog.qml</file>
         <file>qml/LineSegment.qml</file>
         <file>qml/Main.qml</file>
@@ -50,8 +45,6 @@
         <file>qml/MoveAnnotationDialog.qml</file>
         <file>qml/NavigationButtons.qml</file>
         <file>qml/NavigationPanel.qml</file>
-        <file>qml/NewFolderDialog.qml</file>
-        <file>qml/OpenDialog.qml</file>
         <file>qml/PieceCallisto.qml</file>
         <file>qml/PieceClassic.qml</file>
         <file>qml/PieceGembloQ.qml</file>
@@ -66,7 +59,6 @@
         <file>qml/QuestionDialog.qml</file>
         <file>qml/RatingDialog.qml</file>
         <file>qml/RatingGraph.qml</file>
-        <file>qml/SaveDialog.qml</file>
         <file>qml/ScoreDisplay.qml</file>
         <file>qml/ScoreElement.qml</file>
         <file>qml/ScoreElement2.qml</file>

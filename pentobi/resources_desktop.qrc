@@ -1,6 +1,14 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/icons/filedialog-folder.svg</file>
+        <file>qml/icons/filedialog-newfolder.svg</file>
+        <file>qml/icons/filedialog-parent.svg</file>
+        <file>qml/FileDialog.qml</file>
         <file>qml/GameViewDesktop.qml</file>
+        <file>qml/ImageSaveDialog.qml</file>
+        <file>qml/NewFolderDialog.qml</file>
+        <file>qml/OpenDialog.qml</file>
         <file>qml/PieceSelectorDesktop.qml</file>
+        <file>qml/SaveDialog.qml</file>
     </qresource>
 </RCC>
