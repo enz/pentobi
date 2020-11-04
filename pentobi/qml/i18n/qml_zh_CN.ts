@@ -1233,6 +1233,10 @@
         <source>Recent development:</source>
         <translation>最近的发展：</translation>
     </message>
+    <message>
+        <source>Open Game %1</source>
+        <translation>打开第%1局</translation>
+    </message>
 </context>
 <context>
     <name>SaveDialog</name>

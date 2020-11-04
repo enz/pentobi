@@ -1233,6 +1233,10 @@
         <source>Recent development:</source>
         <translation>Nylig utvikling:</translation>
     </message>
+    <message>
+        <source>Open Game %1</source>
+        <translation>Åpne spill %1</translation>
+    </message>
 </context>
 <context>
     <name>SaveDialog</name>
@@ -1389,7 +1393,7 @@
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"/>
+        <translation>Sett tilfeldig seeding til &lt;n&gt;.</translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>

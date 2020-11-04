@@ -15,11 +15,16 @@ Version 19.0-dev (master)
 * Remaining pieces on Android are now always shown in order to play
   even in game variants where a player plays two colors.
 
-Version 18.3-dev (v18-fixes)
+Version 18.4-dev (v18-fixes)
 ----------------------------
 
+*
+
+Version 18.3 (04 Nov 2020)
+--------------------------
+
 * Made opening of recent rated games from rating dialog work again.
-* New Russian translation (thanks to Victor Erukhin)
+* New Russian UI translation (thanks to Viktor Erukhin)
 * Back key now needs to be pressed twice to exit Android app to avoid
   unintentional exit with gesture navigation on newer Android versions.
 * Better visual feedback of button presses on newer Android devices.

@@ -13,4 +13,4 @@ Translators
 * Cherry <taikocherry@126.com> (Simplified Chinese)
 * Francisco Zamorano <pacozamo@gmail.com> (Spanish)
 * Markus Enzenberger <enz@users.sourceforge.net> (German, French)
-* Victor Erukhin <official159ru@mail.ru> (Russian)
+* Viktor Erukhin <official159ru@mail.ru> (Russian)
