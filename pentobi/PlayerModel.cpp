@@ -65,7 +65,7 @@ void PlayerModel::cancelGenMove()
 {
     if (! m_isGenMoveRunning)
         return;
-    m_player->get_search().abort();
+    m_player->abort();
     m_watcher.waitForFinished();
     setIsGenMoveRunning(false);
 }
