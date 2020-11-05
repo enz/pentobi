@@ -86,6 +86,13 @@ public:
     /** Get an estimated Elo-rating of the current level. */
     Rating get_rating(Variant variant) const;
 
+    /** Abort the current search.
+        This function is intended to be called from a different thread to stop
+        a currently running genmove(). The move generation will still return
+        the best move found so far. Any calls to was_aborted() will return
+        true until the next genmove() is started. */
+    void abort();
+
     /** Was last move generation based on an aborted search? */
     bool was_aborted() const { return m_was_aborted; }
 

@@ -153,6 +153,12 @@ Player::Player(Variant initial_variant, unsigned max_level,
     }
 }
 
+void Player::abort()
+{
+    m_search.abort();
+    m_was_aborted = true;
+}
+
 Move Player::genmove(const Board& bd, Color c)
 {
     m_resign = false;
