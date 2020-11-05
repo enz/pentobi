@@ -144,7 +144,7 @@ void PlayerModel::startGenMove(GameModel* gameModel)
     auto variant = gameModel->getBoard().get_variant();
     if (! m_player->is_book_loaded(variant))
         loadBook(variant);
-    QFuture<GenMoveResult> future =
+    auto future =
             QtConcurrent::run(this, &PlayerModel::asyncGenMove, gameModel,
                               bd.get_effective_to_play());
     m_watcher.setFuture(future);
