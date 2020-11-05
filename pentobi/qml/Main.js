@@ -532,6 +532,8 @@ function openFileBlocking(file, displayName) {
     if (! gameModel.openFile(file, displayName))
         showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
     else {
+        if (isAndroid)
+            displayName = androidUtils.getDisplayName(file)
         rootWindow.displayName = displayName
         recentFiles.add(file, displayName)
         setComputerNone()

@@ -310,6 +310,15 @@ float AndroidUtils::getDensity()
 }
 #endif
 
+QString AndroidUtils::getDisplayName([[maybe_unused]]const QString& uri)
+{
+#ifdef Q_OS_ANDROID
+    if (! QUrl(uri).isRelative())
+        return ::getDisplayName(getUriObj(uri));
+#endif
+    return {};
+}
+
 #ifdef Q_OS_ANDROID
 QString AndroidUtils::getInitialFile()
 {
