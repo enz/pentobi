@@ -54,10 +54,10 @@ PlayerModel::GenMoveResult PlayerModel::asyncGenMove(GameModel* gm, Color c)
     result.color = c;
     result.gameModel = gm;
     result.move = m_player->genmove(bd, c);
-    auto elapsed = timer.elapsed();
     // Enforce minimum thinking time of 1 sec
-    if (elapsed < 1000 && ! noDelay)
-        QThread::msleep(static_cast<unsigned long>(1000 - elapsed));
+    while (timer.elapsed() < 1000 && ! noDelay && ! m_player->was_aborted())
+        QThread::msleep(static_cast<unsigned long>(
+                            min(qint64(1000) - timer.elapsed(), qint64(250))));
     return result;
 }
 
