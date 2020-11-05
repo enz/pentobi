@@ -24,6 +24,10 @@ Pentobi.Menu {
         text = text.replace("\.blksgf", "")
         return text
     }
+    function openFile(index) {
+        Logic.openRecentFile(recentFiles.entries[index].file,
+                             recentFiles.entries[index].displayName)
+    }
 
     // Instantiator in Menu doesn't work reliably with Qt 5.11 or 5.12.0 alpha
     Pentobi.MenuItem {
@@ -31,64 +35,55 @@ Pentobi.Menu {
         // Invisible menu item still use space in Qt 5.11
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 0)
-        onTriggered: Logic.openRecentFile(recentFiles.entries[0].file,
-                                          recentFiles.entries[0].displayName)
+        onTriggered: openFile(0)
     }
     Pentobi.MenuItem {
         visible: recentFiles.entries.length > 1
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 1)
-        onTriggered: Logic.openRecentFile(recentFiles.entries[1].file,
-                                          recentFiles.entries[1].displayName)
+        onTriggered: openFile(1)
     }
     Pentobi.MenuItem {
         visible: recentFiles.entries.length > 2
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 2)
-        onTriggered: Logic.openRecentFile(recentFiles.entries[2].file,
-                                          recentFiles.entries[2].displayName)
+        onTriggered: openFile(2)
     }
     Pentobi.MenuItem {
         visible: recentFiles.entries.length > 3
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 3)
-        onTriggered: Logic.openRecentFile(recentFiles.entries[3].file,
-                                          recentFiles.entries[3].displayName)
+        onTriggered: openFile(3)
     }
     Pentobi.MenuItem {
         visible: recentFiles.entries.length > 4
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 4)
-        onTriggered: Logic.openRecentFile(recentFiles.entries[4].file,
-                                          recentFiles.entries[4].displayName)
+        onTriggered: openFile(4)
     }
     Pentobi.MenuItem {
         visible: recentFiles.entries.length > 5
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 5)
-        onTriggered: Logic.openRecentFile(recentFiles.entries[5].file,
-                                          recentFiles.entries[5].displayName)
+        onTriggered: openFile(5)
     }
     Pentobi.MenuItem {
         visible: recentFiles.entries.length > 6
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 6)
-        onTriggered: Logic.openRecentFile(recentFiles.entries[6].file,
-                                          recentFiles.entries[6].displayName)
+        onTriggered: openFile(6)
     }
     Pentobi.MenuItem {
         visible: recentFiles.entries.length > 7
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 7)
-        onTriggered: Logic.openRecentFile(recentFiles.entries[7].file,
-                                          recentFiles.entries[7].displayName)
+        onTriggered: openFile(7)
     }
     Pentobi.MenuItem {
         visible: recentFiles.entries.length > 8
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 8)
-        onTriggered: Logic.openRecentFile(recentFiles.entries[8].file,
-                                          recentFiles.entries[8].displayName)
+        onTriggered: openFile(8)
     }
     MenuSeparator { }
     Action {
