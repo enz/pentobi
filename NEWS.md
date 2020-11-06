@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 18.4-dev (v18-fixes)
 ----------------------------
 
-* Avoid unnecessary dependeny on QtQml QML module (see also Debian bug
+* Avoid unnecessary dependency on QtQml QML module (see also Debian bug
   973855).
 * Aborting computer play with the Stop button did not work reliably
   when the computer played multiple colors at low levels.
