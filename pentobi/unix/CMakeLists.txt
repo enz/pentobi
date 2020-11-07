@@ -14,10 +14,6 @@ find_program(RSVG_CONVERT rsvg-convert)
 if(NOT RSVG_CONVERT)
     message(FATAL_ERROR "rsvg-convert not found (install librsvg2-bin)")
 endif()
-find_program(XSLTPROC xsltproc)
-if(NOT XSLTPROC)
-    message(FATAL_ERROR "xsltproc not found")
-endif()
 
 # Binary gettext files
 
