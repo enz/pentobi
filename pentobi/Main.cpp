@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include <QApplication>
+#include <QFile>
 #include <QIcon>
 #include <QQuickStyle>
 #include <QtQml>
