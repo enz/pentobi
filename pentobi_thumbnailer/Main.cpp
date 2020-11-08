@@ -27,14 +27,14 @@ int main(int argc, char* argv[])
     QCoreApplication app(argc, argv);
 
     QTranslator qtTranslator;
-    qtTranslator.load(
+    if (qtTranslator.load(
                 "qt_" + QLocale::system().name(),
-                QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    QCoreApplication::installTranslator(&qtTranslator);
+                QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+        QCoreApplication::installTranslator(&qtTranslator);
 
     QTranslator translator;
-    translator.load(":i18n/" + QLocale::system().name());
-    QCoreApplication::installTranslator(&translator);
+    if (translator.load(":i18n/" + QLocale::system().name()))
+        QCoreApplication::installTranslator(&translator);
 
     try
     {

@@ -263,14 +263,14 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<PieceModel>("pentobi", 1, 0, "PieceModel", {});
 #ifndef Q_OS_ANDROID
     QTranslator qtTranslator;
-    qtTranslator.load(
+    if (qtTranslator.load(
                 "qt_" + QLocale::system().name(),
-                QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    QCoreApplication::installTranslator(&qtTranslator);
+                QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+        QCoreApplication::installTranslator(&qtTranslator);
 #endif
     QTranslator translator;
-    translator.load(":qml/i18n/qml_" + QLocale::system().name());
-    QCoreApplication::installTranslator(&translator);
+    if (translator.load(":qml/i18n/qml_" + QLocale::system().name()))
+        QCoreApplication::installTranslator(&translator);
 #ifdef Q_OS_ANDROID
     return mainAndroid();
 #else
