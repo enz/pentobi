@@ -12,8 +12,6 @@
 #include "PieceModel.h"
 #include "libpentobi_base/Game.h"
 
-class QTextCodec;
-
 using namespace std;
 using libboardgame_base::SgfNode;
 using libpentobi_base::ColorMap;
@@ -600,8 +598,6 @@ private:
     QVariantList m_startingPointsAny;
 
     QVariantList m_tmpPoints;
-
-    QTextCodec* m_textCodec;
 
     unique_ptr<MoveList> m_legalMoves;
 

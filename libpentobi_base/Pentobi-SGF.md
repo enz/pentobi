@@ -46,11 +46,18 @@ AddType application/x-blokus-sgf blksgf
 Character Set
 -------------
 
-UTF-8 should be used as the character set. Pentobi always writes files
-in UTF-8 and indicates that with the `CA` property. Pentobi versions
-before 13.0 can only read SGF files encoded in UTF-8 or
-ISO-8859-1 (Latin1). As specified by the SGF standard, ISO-8859-1 is
-assumed for files without `CA` property.
+Only UTF-8 is supported as the character set. Files without a `CA`
+property are interpreted as UTF-8. This differs from the original SGF
+standard, which specified ISO-8859-1 (Latin1) as the default.
+
+### Note
+Even if Pentobi always wrote files with UTF-8 encoding, some earlier
+versions supported loading files with different encodings and assumed
+ISO-8859-1 for files without a `CA` property. Pentobi versions before
+13.0 could read SGF files encoded in UTF-8 or ISO-8859-1. Versions
+before 19.0 could read all encodings handled by the Qt 5 library.
+Starting with Pentobi 19.0, support for encodings other than UTF-8 was
+dropped.
 
 Game Property
 -------------

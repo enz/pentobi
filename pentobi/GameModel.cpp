@@ -15,9 +15,9 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QSettings>
-#include <QTextCodec>
 #include "AndroidUtils.h"
 #include "libboardgame_base/SgfUtil.h"
+#include "libboardgame_base/StringUtil.h"
 #include "libboardgame_base/TreeReader.h"
 #include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/NodeUtil.h"
@@ -33,6 +33,7 @@ using libboardgame_base::get_letter_coord;
 using libboardgame_base::has_comment;
 using libboardgame_base::has_earlier_variation;
 using libboardgame_base::is_main_variation;
+using libboardgame_base::to_lower;
 using libboardgame_base::ArrayList;
 using libboardgame_base::SgfError;
 using libboardgame_base::TreeReader;
@@ -351,7 +352,7 @@ void GameModel::createPieceModels(Color c)
 
 QString GameModel::decode(const string& s) const
 {
-    return m_textCodec->toUnicode(s.c_str());
+    return QString::fromStdString(s);
 }
 
 void GameModel::deleteAllVar()
@@ -365,7 +366,7 @@ void GameModel::deleteAllVar()
 
 QByteArray GameModel::encode(const QString& s) const
 {
-    return m_textCodec->fromUnicode(s);
+    return s.toUtf8();
 }
 
 GameMove* GameModel::findMoveNext()
@@ -825,7 +826,6 @@ void GameModel::initGame(Variant variant)
 #endif
     m_game.set_date_today();
     m_game.set_charset("UTF-8");
-    m_textCodec = QTextCodec::codecForName("UTF-8");
     updateGameInfo();
 }
 
@@ -1075,14 +1075,9 @@ bool GameModel::openStream(istream& in)
                 .arg(QString::fromLocal8Bit(e.what()));
         result = false;
     }
-    auto charSet = m_game.get_charset();
-    if (charSet.empty())
-        m_textCodec = QTextCodec::codecForName("ISO 8859-1");
-    else
-        m_textCodec = QTextCodec::codecForName(m_game.get_charset().c_str());
-    if (! m_textCodec)
+    auto charSet = to_lower(m_game.get_charset());
+    if (! charSet.empty() && charSet != "utf-8" && charSet != "utf8")
     {
-        m_textCodec = QTextCodec::codecForName("ISO 8859-1");
         m_error = tr("Unsupported character set");
         result = false;
     }
