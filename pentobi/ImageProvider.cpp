@@ -36,55 +36,55 @@ QPixmap ImageProvider::requestPixmap(const QString& id, QSize* size,
     pixmap.fill(Qt::transparent);
     QPainter painter(&pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
-    auto splitRef = id.splitRef(QStringLiteral("/"));
-    if (splitRef.empty())
+    auto elem = id.split('/');
+    if (elem.empty())
         return pixmap;
-    auto name = splitRef[0];
-    if (name == "board" && splitRef.size() == 8)
+    auto name = elem[0];
+    if (name == QStringLiteral("board") && elem.size() == 8)
     {
-        auto gameVariant = splitRef[1].toLocal8Bit();
-        QColor base(splitRef[2]);
-        QColor dark(splitRef[3]);
-        QColor light(splitRef[4]);
-        QColor centerBase(splitRef[5]);
-        QColor centerDark(splitRef[6]);
-        QColor centerLight(splitRef[7]);
+        auto gameVariant = elem[1].toLocal8Bit();
+        QColor base(elem[2]);
+        QColor dark(elem[3]);
+        QColor light(elem[4]);
+        QColor centerBase(elem[5]);
+        QColor centerDark(elem[6]);
+        QColor centerLight(elem[7]);
         Variant variant;
         if (parse_variant_id(gameVariant.constData(), variant))
             paintBoard(painter, width, height, variant, base, light, dark,
                        centerBase, centerLight, centerDark);
     }
-    else if (splitRef.size() == 2)
+    else if (elem.size() == 2)
     {
-        QColor base(splitRef[1]);
-        if (name == "junction-all")
+        QColor base(elem[1]);
+        if (name == QStringLiteral("junction-all"))
             paintJunctionAll(painter, 0, 0, width, height, base);
-        else if (name == "junction-right")
+        else if (name == QStringLiteral("junction-right"))
             paintJunctionRight(painter, 0, 0, width, height, base);
-        else if (name == "junction-straight")
+        else if (name == QStringLiteral("junction-straight"))
             paintJunctionStraight(painter, 0, 0, width, height, base);
-        else if (name == "junction-t")
+        else if (name == QStringLiteral("junction-t"))
             paintJunctionT(painter, 0, 0, width, height, base);
     }
-    else if (name == "quarter-square" && splitRef.size() == 3)
+    else if (name == QStringLiteral("quarter-square") && elem.size() == 3)
     {
-        QColor base(splitRef[1]);
-        QColor light(splitRef[2]);
+        QColor base(elem[1]);
+        QColor light(elem[2]);
         paintQuarterSquare(painter, 0, 0, width, height, base, light);
     }
-    else if (splitRef.size() == 4)
+    else if (elem.size() == 4)
     {
-        QColor base(splitRef[1]);
-        QColor dark(splitRef[2]);
-        QColor light(splitRef[3]);
-        if (name == "frame")
+        QColor base(elem[1]);
+        QColor dark(elem[2]);
+        QColor light(elem[3]);
+        if (name == QStringLiteral("frame"))
             paintCallistoOnePiece(painter, 0, 0, width, height, base, light,
                                   dark);
-        else if (name == "square")
+        else if (name == QStringLiteral("square"))
             paintSquare(painter, 0, 0, width, height, base, light, dark);
-        else if (name == "triangle")
+        else if (name == QStringLiteral("triangle"))
             paintTriangleUp(painter, 0, 0, width, height, base, light, dark);
-        else if (name == "triangle-down")
+        else if (name == QStringLiteral("triangle-down"))
             paintTriangleDown(painter, 0, 0, width, height, base, light, dark);
     }
     return pixmap;
