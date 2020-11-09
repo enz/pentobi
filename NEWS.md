@@ -11,6 +11,7 @@ Version 19.0-dev (master)
   of legacy external storage, which supports building the app with
   target SDK version 30 (Android 11) and adds support for cloud-based
   storage.
+* Enabled support for landscape orientation on Android.
 * Migrated build system for Android app from qmake to CMake.
 * Support for different comment showing modes (Always/As Needed/Never)
   on Android. 
