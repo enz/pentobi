@@ -51,8 +51,9 @@ property are interpreted as UTF-8. This differs from the original SGF
 standard, which specified ISO-8859-1 (Latin1) as the default.
 
 ### Note
-Even if Pentobi always wrote files with UTF-8 encoding, some earlier
-versions supported loading files with different encodings and assumed
+Pentobi has always written files with UTF-8 encoding and indicated that
+with the `CA[UTF-8]` property. Some earlier versions of Pentobi
+supported loading files with different encodings and assumed
 ISO-8859-1 for files without a `CA` property. Pentobi versions before
 13.0 could read SGF files encoded in UTF-8 or ISO-8859-1. Versions
 before 19.0 could read all encodings handled by the Qt 5 library.
