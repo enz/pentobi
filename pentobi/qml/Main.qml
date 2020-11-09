@@ -71,7 +71,6 @@ ApplicationWindow {
     Pentobi.ToolBar {
         id: toolBar
 
-        visible: isDesktop || visibility !== Window.FullScreen
         showContent: ! isDesktop || showToolBar
         anchors {
             left: parent.left
@@ -350,9 +349,12 @@ ApplicationWindow {
         shortcut: "F11"
         text: qsTr("Fullscreen")
         checkable: true
-        checked: visibility === Window.FullScreen
+        checked: (isAndroid && ! toolBar.visible)
+                 || (! isAndroid && visibility === Window.FullScreen)
         onTriggered: {
-            if (visibility !== Window.FullScreen)
+            if (isAndroid)
+                toolBar.visible = ! toolBar.visible
+            else if (visibility !== Window.FullScreen)
                 visibility = Window.FullScreen
             else
                 visibility = Window.AutomaticVisibility
@@ -481,8 +483,8 @@ ApplicationWindow {
         sequence: "Back"
         enabled: isAndroid
         onActivated: {
-            if (visibility === Window.FullScreen)
-                visibility = Window.AutomaticVisibility
+            if (! toolBar.visible)
+                toolBar.visible = true
             else if (pressBackTwice.running)
                 close()
             else {

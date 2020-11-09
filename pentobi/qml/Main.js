@@ -789,11 +789,14 @@ function showWindow() {
     y = settings.y
     width = settings.width
     height = settings.height
-    switch (settings.visibility) {
-    case Window.Maximized: showMaximized(); break
-    case Window.FullScreen: showFullScreen(); break
-    default: show()
-    }
+    if (isAndroid)
+        show()
+    else
+        switch (settings.visibility) {
+        case Window.Maximized: showMaximized(); break
+        case Window.FullScreen: showFullScreen(); break
+        default: show()
+        }
 }
 
 function truncate() {
