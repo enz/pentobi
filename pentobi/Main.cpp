@@ -239,6 +239,10 @@ int main(int argc, char *argv[])
     auto density = AndroidUtils::getDensity();
     if (density == 0 || density > 1)
         QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    // Rounding on Android uses PassThrough by default which causes rendering
+    // errors on some devices when switching fullscreen or orientation
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
+                Qt::HighDpiScaleFactorRoundingPolicy::Round);
 #else
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
