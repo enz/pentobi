@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QIcon>
 #include <QQuickStyle>
 #include <QtQml>
