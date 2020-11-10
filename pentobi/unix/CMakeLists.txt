@@ -4,6 +4,10 @@ find_program(ITSTOOL itstool)
 if(NOT ITSTOOL)
     message(FATAL_ERROR "itstool not found")
 endif()
+
+# The AppData ITS file (named metainfo.its or appdata.its) is usually installed
+# in the gettext folder but provided but the appdata package. We want to check
+# its existence already at configuration time.
 get_filename_component(GETTEXT_BIN_DIR ${GETTEXT_MSGFMT_EXECUTABLE} DIRECTORY)
 get_filename_component(GETTEXT_INSTALL_DIR ${GETTEXT_BIN_DIR} DIRECTORY)
 find_file(METAINFO_ITS NAMES metainfo.its appdata.its
@@ -16,6 +20,7 @@ if(NOT METAINFO_ITS)
         " or appdata.its file."
         )
 endif()
+
 find_program(RSVG_CONVERT rsvg-convert)
 if(NOT RSVG_CONVERT)
     message(FATAL_ERROR "rsvg-convert not found (install librsvg2-bin)")
@@ -89,7 +94,7 @@ add_custom_command(OUTPUT io.sourceforge.pentobi.appdata.translated.xml
     --template io.sourceforge.pentobi.appdata.xml
     -o io.sourceforge.pentobi.appdata.translated.xml
     DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml"
-    ${po_files} po/LINGUAS
+    ${METAINFO_ITS} ${po_files} po/LINGUAS
     )
 
 install(
