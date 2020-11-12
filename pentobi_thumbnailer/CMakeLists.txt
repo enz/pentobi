@@ -18,7 +18,7 @@ foreach(lang ${linguas})
     list(APPEND mo_files ${lang}.mo)
 endforeach()
 
-qt5_add_translation(pentobi_thumbnailer_QM
+qt_add_translation(pentobi_thumbnailer_QM
     i18n/de.ts
     i18n/es.ts
     i18n/ru.ts

@@ -1,4 +1,4 @@
-qt5_add_translation(pentobi_QM
+qt_add_translation(pentobi_QM
     qml/i18n/qml_de.ts
     qml/i18n/qml_es.ts
     qml/i18n/qml_fr.ts
@@ -51,7 +51,7 @@ if(ANDROID)
         ${pentobi_shared_src}
         "${CMAKE_CURRENT_BINARY_DIR}/docbook/help.qrc"
         )
-    target_link_libraries(pentobi Qt5::AndroidExtras)
+    target_link_libraries(pentobi Qt::AndroidExtras)
 else()
     add_executable(pentobi WIN32
         ${pentobi_shared_src}
@@ -70,19 +70,19 @@ target_compile_definitions(pentobi PRIVATE
 target_link_libraries(pentobi
     pentobi_paint
     pentobi_mcts
-    Qt5::Concurrent
-    Qt5::Qml
-    Qt5::QuickControls2
-    Qt5::Svg
+    Qt::Concurrent
+    Qt::Qml
+    Qt::QuickControls2
+    Qt::Svg
     Threads::Threads
     )
 
 if(Qt5WebView_FOUND AND NOT PENTOBI_OPEN_HELP_EXTERNALLY)
-    target_link_libraries(pentobi Qt5::WebView)
+    target_link_libraries(pentobi Qt::WebView)
 else()
-    if(NOT Qt5WebView_FOUND AND NOT PENTOBI_OPEN_HELP_EXTERNALLY)
+    if(NOT QtWebView_FOUND AND NOT PENTOBI_OPEN_HELP_EXTERNALLY)
         message(FATAL_ERROR
-            "Qt5WebView not found. Install Qt5WebView or set"
+            "QtWebView not found. Install QtWebView or set"
             " PENTOBI_OPEN_HELP_EXTERNALLY to make Pentobi use an external"
             " browser for displaying help.")
     endif()
