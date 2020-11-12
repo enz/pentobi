@@ -25,6 +25,7 @@ Version 18.4-dev (v18-fixes)
   973855).
 * Aborting computer play with the Stop button did not work reliably
   when the computer played multiple colors at low levels.
+* New Russian translation of manual.
 
 Version 18.3 (04 Nov 2020)
 --------------------------
