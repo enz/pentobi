@@ -20,6 +20,21 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+QString getTranslationsPath()
+{
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    return QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+#else
+    return QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+#endif
+}
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
 int main(int argc, char* argv[])
 {
     libboardgame_base::LogInitializer log_initializer;
@@ -27,9 +42,8 @@ int main(int argc, char* argv[])
     QCoreApplication app(argc, argv);
 
     QTranslator qtTranslator;
-    if (qtTranslator.load(
-                "qt_" + QLocale::system().name(),
-                QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtTranslator.load("qt_" + QLocale::system().name(),
+                          getTranslationsPath()))
         QCoreApplication::installTranslator(&qtTranslator);
 
     QTranslator translator;

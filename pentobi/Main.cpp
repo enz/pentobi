@@ -59,6 +59,15 @@ int mainAndroid()
 
 #else // ! defined(Q_OS_ANDROID)
 
+QString getTranslationsPath()
+{
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    return QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+#else
+    return QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+#endif
+}
+
 int mainDesktop()
 {
     QIcon icon(QStringLiteral(":/pentobi_icon/pentobi-128.svg"));
@@ -269,9 +278,8 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<PieceModel>("pentobi", 1, 0, "PieceModel", {});
 #ifndef Q_OS_ANDROID
     QTranslator qtTranslator;
-    if (qtTranslator.load(
-                "qt_" + QLocale::system().name(),
-                QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+    if (qtTranslator.load("qt_" + QLocale::system().name(),
+                          getTranslationsPath()))
         QCoreApplication::installTranslator(&qtTranslator);
 #endif
     QTranslator translator;
