@@ -911,7 +911,7 @@
     <message>
         <source>Variation Up</source>
         <extracomment>Short for Move Variation Up</extracomment>
-        <translation>Вариант вверх</translation>
+        <translation>Вариант выше</translation>
     </message>
     <message>
         <source>Variation Down</source>
@@ -1232,6 +1232,10 @@
     <message>
         <source>Recent development:</source>
         <translation>Последняя разработка:</translation>
+    </message>
+    <message>
+        <source>Open Game %1</source>
+        <translation>Открыть Игру %1</translation>
     </message>
 </context>
 <context>
