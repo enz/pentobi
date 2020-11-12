@@ -243,18 +243,13 @@ int mainDesktop()
 int main(int argc, char *argv[])
 {
     libboardgame_base::LogInitializer log_initializer;
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #ifdef Q_OS_ANDROID
-    // We don't use HighDpiScaling on low-DPI Android devices because of
-    // QTBUG-69102 and other bugs
-    auto density = AndroidUtils::getDensity();
-    if (density == 0 || density > 1)
-        QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     // Rounding on Android uses PassThrough by default which causes rendering
-    // errors on some devices when switching fullscreen or orientation
+    // errors on some devices when switching fullscreen or orientation and
+    // incorrect canvas painting on low-DPI devices with devicePixelRatio<1
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
                 Qt::HighDpiScaleFactorRoundingPolicy::Round);
-#else
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
     QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
     QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
