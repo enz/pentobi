@@ -60,16 +60,7 @@ MenuItem {
         Label {
             id: labelText
 
-            text: {
-                if (! isDesktop)
-                    return root.text
-                var pos = root.text.indexOf("&")
-                if (pos < 0 || pos === root.text.length - 1)
-                    return root.text
-                return root.text.substring(0, pos) + "<u>"
-                        + root.text.substring(pos + 1, pos + 2)
-                        + "</u>" + root.text.substring(pos + 2)
-            }
+            text: root.text
             color: {
                 // See comment at background
                 if (root.highlighted)
