@@ -22,6 +22,7 @@
 
 #ifndef Q_OS_ANDROID
 #include <QCommandLineParser>
+#include <QLibraryInfo>
 #endif
 
 #ifndef PENTOBI_OPEN_HELP_EXTERNALLY
