@@ -36,6 +36,10 @@ cmake -DCMAKE_BUILD_TYPE=Release .
 make
 ```
 
+On platforms without support for the Qt WebView module, Pentobi can
+be configured with -DPENTOBI_OPEN_HELP_EXTERNALLY=ON to use an
+external web browser for displaying help.
+
 Building the KDE Thumbnailer Plugin
 -----------------------------------
 

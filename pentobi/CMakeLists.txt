@@ -77,16 +77,10 @@ target_link_libraries(pentobi
     Threads::Threads
     )
 
-if(Qt5WebView_FOUND AND NOT PENTOBI_OPEN_HELP_EXTERNALLY)
-    target_link_libraries(pentobi Qt::WebView)
-else()
-    if(NOT Qt5WebView_FOUND AND NOT PENTOBI_OPEN_HELP_EXTERNALLY)
-        message(FATAL_ERROR
-            "QtWebView not found. Install QtWebView or set"
-            " PENTOBI_OPEN_HELP_EXTERNALLY to make Pentobi use an external"
-            " browser for displaying help.")
-    endif()
+if(PENTOBI_OPEN_HELP_EXTERNALLY)
     target_compile_definitions(pentobi PRIVATE PENTOBI_OPEN_HELP_EXTERNALLY)
+else()
+    target_link_libraries(pentobi Qt::WebView)
 endif()
 
 add_subdirectory(docbook)
