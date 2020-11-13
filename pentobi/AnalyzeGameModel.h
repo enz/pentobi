@@ -106,8 +106,6 @@ private:
     Q_INVOKABLE void updateElements();
 
 
-    void asyncRun(const Game* game);
-
     void setIsRunning(bool isRunning);
 
     void setMarkMoveNumber(int markMoveNumber);

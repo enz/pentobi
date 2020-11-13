@@ -48,19 +48,6 @@ AnalyzeGameModel::~AnalyzeGameModel()
     cancel();
 }
 
-void AnalyzeGameModel::asyncRun(const Game* game)
-{
-    auto progressCallback =
-        [&]([[maybe_unused]] unsigned movesAnalyzed,
-            [[maybe_unused]] unsigned totalMoves)
-        {
-            // Use invokeMethod() because callback runs in different thread
-            QMetaObject::invokeMethod(this, "updateElements",
-                                      Qt::BlockingQueuedConnection);
-        };
-    m_analyzeGame.run(*game, *m_search, m_nuSimulations, progressCallback);
-}
-
 void AnalyzeGameModel::autoSave(GameModel* gameModel)
 {
     auto& bd = gameModel->getGame().get_board();
@@ -247,8 +234,13 @@ void AnalyzeGameModel::start(GameModel* gameModel, PlayerModel* playerModel,
     m_nuSimulations = static_cast<size_t>(nuSimulations);
     cancel();
     m_search = &playerModel->getSearch();
-    auto future = QtConcurrent::run(this, &AnalyzeGameModel::asyncRun,
-                                    &gameModel->getGame());
+    auto future = QtConcurrent::run([=]() {
+        m_analyzeGame.run(gameModel->getGame(), *m_search, m_nuSimulations,
+                          [=](unsigned, unsigned) {
+            QMetaObject::invokeMethod(this, "updateElements",
+                                      Qt::BlockingQueuedConnection);
+        });
+    });
     m_watcher.setFuture(future);
     setIsRunning(true);
 }

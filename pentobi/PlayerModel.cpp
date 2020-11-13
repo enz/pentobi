@@ -45,22 +45,6 @@ PlayerModel::~PlayerModel()
     cancelGenMove();
 }
 
-PlayerModel::GenMoveResult PlayerModel::asyncGenMove(GameModel* gm, Color c)
-{
-    QElapsedTimer timer;
-    timer.start();
-    auto& bd = gm->getBoard();
-    GenMoveResult result;
-    result.color = c;
-    result.gameModel = gm;
-    result.move = m_player->genmove(bd, c);
-    // Enforce minimum thinking time of 1 sec
-    while (timer.elapsed() < 1000 && ! noDelay && ! m_player->was_aborted())
-        QThread::msleep(static_cast<unsigned long>(
-                            min(qint64(1000) - timer.elapsed(), qint64(250))));
-    return result;
-}
-
 void PlayerModel::cancelGenMove()
 {
     if (! m_isGenMoveRunning)
@@ -132,9 +116,23 @@ void PlayerModel::startGenMove(GameModel* gameModel)
     auto variant = gameModel->getBoard().get_variant();
     if (! m_player->is_book_loaded(variant))
         loadBook(variant);
-    auto future =
-            QtConcurrent::run(this, &PlayerModel::asyncGenMove, gameModel,
-                              bd.get_effective_to_play());
+    auto c = bd.get_effective_to_play();
+    auto future = QtConcurrent::run([=]() {
+        QElapsedTimer timer;
+        timer.start();
+        auto& bd = gameModel->getBoard();
+        GenMoveResult result;
+        result.color = c;
+        result.gameModel = gameModel;
+        result.move = m_player->genmove(bd, c);
+        // Enforce minimum thinking time of 1 sec
+        while (timer.elapsed() < 1000 && ! noDelay
+               && ! m_player->was_aborted())
+            QThread::msleep(static_cast<unsigned long>(
+                                min(qint64(1000) - timer.elapsed(),
+                                    qint64(250))));
+        return result;
+    });
     m_watcher.setFuture(future);
     setIsGenMoveRunning(true);
 }

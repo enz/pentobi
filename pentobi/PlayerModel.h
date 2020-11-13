@@ -134,14 +134,11 @@ private:
     QFutureWatcher<GenMoveResult> m_watcher;
 
 
-    GenMoveResult asyncGenMove(GameModel* gm, Color c);
-
     void genMoveFinished();
 
     void loadBook(Variant variant);
 
     void setIsGenMoveRunning(bool isGenMoveRunning);
-
 };
 
 //-----------------------------------------------------------------------------
