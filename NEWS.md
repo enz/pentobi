@@ -4,6 +4,8 @@ Pentobi Release Notes
 Version 18.4-dev (v18-fixes)
 ----------------------------
 
+* Added workaround for QTBUG-85449, which made the Android app crash
+  on exit on some Huawei devices.
 * Avoid unnecessary dependency on QtQml QML module (see also Debian bug
   973855).
 * Aborting computer play with the Stop button did not work reliably

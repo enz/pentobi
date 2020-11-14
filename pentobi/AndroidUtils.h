@@ -33,6 +33,14 @@ public:
         platforms, it returns QStandardPaths::HomeLocation */
     Q_INVOKABLE static QUrl getDefaultFolder();
 
+    /** Exit application and avoid crash due to QTBUG-85449.
+        On Android, this exits the application with java.lang.System.exit(),
+        which avoids crashes on some devices due to QTBUG-85449. Global
+        destructors will not be called, but we cannot rely on that anyway
+        because Android can also kill suspended apps without calling global
+        destructors. On other platforms, Qt.quit() will be called. */
+    void quit();
+
     /** Request the Android media scanner to scan a file.
         Ensures that the file will be visible via MTP. On platforms other
         than Android, this function does nothing. */
