@@ -39,7 +39,7 @@ public:
         destructors will not be called, but we cannot rely on that anyway
         because Android can also kill suspended apps without calling global
         destructors. Does nothing on other platforms. */
-    void quit();
+    Q_INVOKABLE void quit();
 
     /** Request the Android media scanner to scan a file.
         Ensures that the file will be visible via MTP. On platforms other
