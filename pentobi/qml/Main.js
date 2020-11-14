@@ -621,7 +621,10 @@ function quit() {
                      autoSaveNoVerifyAndQuit)
         return false
     }
-    autoSaveNoVerify()
+    if (isAndroid)
+        autoSaveNoVerifyAndQuit()
+    else
+        autoSaveNoVerify()
     return true
 }
 
