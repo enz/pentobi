@@ -71,7 +71,7 @@ private:
         destructors will not be called, but we cannot rely on that anyway
         because Android can also kill suspended apps without calling global
         destructors. Does nothing on other platforms. */
-    void quit();
+    Q_INVOKABLE void quit();
 
 #ifdef Q_OS_ANDROID
     static bool checkException();
