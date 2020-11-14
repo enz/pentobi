@@ -65,6 +65,14 @@ private:
     static QString m_error;
 
 
+    /** Exit application and avoid crash due to QTBUG-85449.
+        On Android, this exits the application with java.lang.System.exit(),
+        which avoids crashes on some devices due to QTBUG-85449. Global
+        destructors will not be called, but we cannot rely on that anyway
+        because Android can also kill suspended apps without calling global
+        destructors. On other platforms, Qt.quit() will be called. */
+    void quit();
+
 #ifdef Q_OS_ANDROID
     static bool checkException();
 #endif
