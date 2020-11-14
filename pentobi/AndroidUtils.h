@@ -38,7 +38,7 @@ public:
         which avoids crashes on some devices due to QTBUG-85449. Global
         destructors will not be called, but we cannot rely on that anyway
         because Android can also kill suspended apps without calling global
-        destructors. On other platforms, Qt.quit() will be called. */
+        destructors. Does nothing on other platforms. */
     void quit();
 
     /** Request the Android media scanner to scan a file.
