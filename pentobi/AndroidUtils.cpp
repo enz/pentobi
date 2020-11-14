@@ -417,8 +417,6 @@ void AndroidUtils::quit()
 #ifdef Q_OS_ANDROID
     QAndroidJniObject::callStaticMethod<void>(
                 "java/lang/System", "exit", "(I)V", 0);
-#else
-    Qt::quit();
 #endif
 }
 
