@@ -7,6 +7,8 @@ Version 19.0-dev (master)
 * The minimum required Qt version is now 5.15.
 * Loading game files in encodings other than UTF-8 is no longer
   supported.
+* Enabled Fusion style on desktop again now that QTBUG-77107 no longer
+  appears in newer Fedora versions.
 * Saving games on Android now uses the Storage Access Framework instead
   of legacy external storage, which supports building the app with
   target SDK version 30 (Android 11) and adds support for cloud-based
