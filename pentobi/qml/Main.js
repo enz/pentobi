@@ -40,7 +40,7 @@ function autoSaveNoVerify() {
 function autoSaveNoVerifyAndQuit() {
     autoSaveNoVerify()
     if (isAndroid)
-        androidUtils.quit()
+        androidUtils.exit()
     else
         Qt.quit()
 }
@@ -625,10 +625,9 @@ function quit() {
                      autoSaveNoVerifyAndQuit)
         return false
     }
+    autoSaveNoVerify()
     if (isAndroid)
-        autoSaveNoVerifyAndQuit()
-    else
-        autoSaveNoVerify()
+        androidUtils.exit()
     return true
 }
 

@@ -35,6 +35,14 @@ bool AndroidUtils::checkPermission([[maybe_unused]] const QString& permission)
     return true;
 }
 
+void AndroidUtils::exit()
+{
+#ifdef Q_OS_ANDROID
+    QAndroidJniObject::callStaticMethod<void>(
+                "java/lang/System", "exit", "(I)V", 0);
+#endif
+}
+
 QUrl AndroidUtils::extractHelp([[maybe_unused]] const QString& language)
 {
 #ifdef Q_OS_ANDROID
@@ -113,14 +121,6 @@ float AndroidUtils::getDensity()
     return metrics.getField<jfloat>("density");
 }
 #endif
-
-void AndroidUtils::quit()
-{
-#ifdef Q_OS_ANDROID
-    QAndroidJniObject::callStaticMethod<void>(
-                "java/lang/System", "exit", "(I)V", 0);
-#endif
-}
 
 void AndroidUtils::scanFile([[maybe_unused]] const QString& pathname)
 {
