@@ -44,6 +44,14 @@ public:
     Q_INVOKABLE static bool saveImage(const QString& uri,
                                       const QVariant& image);
 
+    /** Exit application and avoid crash due to QTBUG-85449.
+        On Android, this exits the application with java.lang.System.exit(),
+        which avoids crashes on some devices due to QTBUG-85449. Global
+        destructors will not be called, but we cannot rely on that anyway
+        because Android can also kill suspended apps without calling global
+        destructors. Does nothing on other platforms. */
+    Q_INVOKABLE void exit();
+
 #ifdef Q_OS_ANDROID
     static QString getError() { return m_error; }
 
@@ -64,14 +72,6 @@ signals:
 private:
     static QString m_error;
 
-
-    /** Exit application and avoid crash due to QTBUG-85449.
-        On Android, this exits the application with java.lang.System.exit(),
-        which avoids crashes on some devices due to QTBUG-85449. Global
-        destructors will not be called, but we cannot rely on that anyway
-        because Android can also kill suspended apps without calling global
-        destructors. Does nothing on other platforms. */
-    Q_INVOKABLE void quit();
 
 #ifdef Q_OS_ANDROID
     static bool checkException();

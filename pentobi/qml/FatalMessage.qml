@@ -7,7 +7,7 @@
 MessageDialog {
     onClosed:
         if (isAndroid)
-            androidUtils.quit()
+            androidUtils.exit()
         else
             Qt.quit()
 }

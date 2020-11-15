@@ -237,6 +237,14 @@ bool AndroidUtils::checkExists(const QString& file)
 #endif
 }
 
+void AndroidUtils::exit()
+{
+#ifdef Q_OS_ANDROID
+    QAndroidJniObject::callStaticMethod<void>(
+                "java/lang/System", "exit", "(I)V", 0);
+#endif
+}
+
 QUrl AndroidUtils::extractHelp([[maybe_unused]] const QString& language)
 {
 #ifdef Q_OS_ANDROID
@@ -409,14 +417,6 @@ void AndroidUtils::openSaveDialog(
                           const QString& displayName) {
         emit saveDialogAccepted(uri, displayName);
     });
-#endif
-}
-
-void AndroidUtils::quit()
-{
-#ifdef Q_OS_ANDROID
-    QAndroidJniObject::callStaticMethod<void>(
-                "java/lang/System", "exit", "(I)V", 0);
 #endif
 }
 
