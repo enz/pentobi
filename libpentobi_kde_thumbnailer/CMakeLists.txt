@@ -12,8 +12,6 @@
 # exceptions (which should be fine as long as no exceptions are thrown
 # from the thumbnailer plugin functions).
 
-find_package(Qt5Gui 5.9 REQUIRED)
-
 add_library(pentobi_kde_thumbnailer STATIC
   ../libboardgame_base/Assert.cpp
   ../libboardgame_base/Reader.cpp
@@ -42,4 +40,4 @@ target_compile_definitions(pentobi_kde_thumbnailer PRIVATE
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x051200)
 
-target_link_libraries(pentobi_kde_thumbnailer Qt5::Gui)
+target_link_libraries(pentobi_kde_thumbnailer Qt::Gui)
