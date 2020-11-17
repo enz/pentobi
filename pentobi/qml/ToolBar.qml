@@ -11,13 +11,11 @@ import "." as Pentobi
 import "Main.js" as Logic
 
 Item {
-    id: root
-
     // Show toolbar content (menu button is always shown)
     property bool showContent: true
 
     function clickMenuButton() {
-        menuButton.onClicked()
+        menuButton.clicked()
         menu.item.currentIndex = 0
     }
 
@@ -41,12 +39,8 @@ Item {
             elide: Text.ElideMiddle
             text: Logic.getGameLabel(gameView.setupMode, isRated,
                                      gameModel.file, gameModel.isModified, true)
-            // There is a bug in Qt 5.11 that in some situations elides the
-            // text even if there is enough room for it. It doesn't occur if
-            // we use implicitWidth + 1 instead if implicitWidth
-            Layout.maximumWidth: implicitWidth + 1
             Layout.fillWidth: true
-            Layout.leftMargin: root.height / 10
+            Layout.leftMargin: font.pixelSize / 10
 
             MouseArea {
                 anchors.fill: parent
@@ -132,7 +126,7 @@ Item {
         Item {
             visible: isDesktop
             Layout.fillWidth: true
-            Layout.maximumWidth: 0.3 * parent.height
+            Layout.maximumWidth: 0.7 * font.pixelSize
         }
         Pentobi.Button {
             id: beginning
@@ -195,7 +189,7 @@ Item {
         Item {
             visible: isDesktop
             Layout.fillWidth: true
-            Layout.maximumWidth: 0.3 * parent.height
+            Layout.maximumWidth: 0.7 * font.pixelSize
         }
         Pentobi.Button {
             id: prevVar
@@ -224,7 +218,7 @@ Item {
         Item {
             visible: isDesktop
             Layout.fillWidth: true
-            Layout.maximumWidth: 0.3 * parent.height
+            Layout.maximumWidth: 0.7 * font.pixelSize
         }
         Label {
             visible: showContent && isDesktop
@@ -233,8 +227,6 @@ Item {
             color: theme.colorText
             opacity: 0.8
             elide: Text.ElideRight
-            // See comment at Layout.maximumWidth of first label
-            Layout.maximumWidth: implicitWidth + 1
             Layout.fillWidth: true
 
             MouseArea {
@@ -249,8 +241,8 @@ Item {
             }
         }
         Item {
+            visible: isDesktop
             Layout.fillWidth: true
-            Layout.maximumWidth: isDesktop ? root.width : 0.3 * parent.height
         }
         Pentobi.Button {
             id: menuButton
