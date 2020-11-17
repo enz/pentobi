@@ -17,6 +17,7 @@ Item {
     property string toolTipText
 
     property alias action: button.action
+    property alias enabled: button.enabled
     property alias icon: button.icon
     property alias down: button.down
     property alias pressed: button.pressed
