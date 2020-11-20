@@ -24,8 +24,8 @@ Item {
     property alias autoRepeat: button.autoRepeat
     property alias autoRepeatInterval: button.autoRepeatInterval
 
-    property bool _toolTipHovered: toolTipArea.containsMouse
-    property bool _effectiveHovered: isDesktop && _toolTipHovered && enabled
+    property bool _effectiveHovered:
+        isDesktop && toolTipArea.containsMouse && enabled
     property bool _inhibitToolTip
 
     // We want the icon about the same size as the font, but use multipliers in
