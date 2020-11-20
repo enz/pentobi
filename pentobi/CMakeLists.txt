@@ -73,6 +73,7 @@ target_link_libraries(pentobi
     Qt::Concurrent
     Qt::Qml
     Qt::QuickControls2
+    Qt::Svg
     Threads::Threads
     )
 
