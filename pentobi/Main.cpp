@@ -242,7 +242,9 @@ int mainDesktop()
 int main(int argc, char *argv[])
 {
     libboardgame_base::LogInitializer log_initializer;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
 #ifdef Q_OS_ANDROID
     // Rounding on Android uses PassThrough by default which causes rendering
     // errors on some devices when switching fullscreen or orientation and
