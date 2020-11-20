@@ -4,8 +4,6 @@ Pentobi Release Notes
 Version 18.4-dev (v18-fixes)
 ----------------------------
 
-* Updated CMakeLists.txt and INSTALL to reflect that the Qt SVG module
-  is a runtime dependency, not needed at compile time.
 * Added workaround for QTBUG-85449, which made the Android app crash
   on exit on some Huawei devices.
 * Avoid unnecessary dependency on QtQml QML module (see also Debian bug
