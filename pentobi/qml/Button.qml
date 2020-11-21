@@ -30,15 +30,15 @@ Item {
 
     signal clicked()
 
-    implicitWidth: Math.min(button.implicitWidth,
-                            0.11 * rootWindow.contentItem.height,
-                            0.13 * rootWindow.contentItem.width)
-    implicitHeight: implicitWidth
+    implicitWidth: button.implicitWidth
+    implicitHeight: button.implicitHeight
 
     ToolButton {
         id: button
 
-        padding: isDesktop ? 7 : 15
+        padding: Math.min(isDesktop ? 7 : 15,
+                          0.03 * rootWindow.contentItem.height,
+                          0.03 * rootWindow.contentItem.width)
         opacity: enabled ? 0.55 : 0.25
         hoverEnabled: false
         display: AbstractButton.IconOnly
@@ -47,9 +47,12 @@ Item {
         contentItem: Item {
             // We want the icon about the same size as the font, but use
             // multipliers in quarter-size steps (4) for better pixel
-            // alignment.
+            // alignment. We also want it smaller on very small screens.
             implicitWidth:
-                Math.round(1.2 * font.pixelSize * Screen.devicePixelRatio / 4)
+                Math.round(Math.min(1.2 * font.pixelSize,
+                                    0.06 * rootWindow.contentItem.height,
+                                    0.06 * rootWindow.contentItem.width)
+                           * Screen.devicePixelRatio / 4)
                 / Screen.devicePixelRatio * 4
             implicitHeight: implicitWidth
 
