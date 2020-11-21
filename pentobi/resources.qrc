@@ -1,70 +1,75 @@
 <RCC>
-    <qresource prefix="/">
-        <file>qml/AboutDialog.qml</file>
-        <file>qml/AnalyzeDialog.qml</file>
-        <file>qml/AnalyzeGame.qml</file>
-        <file>qml/AppearanceDialog.qml</file>
-        <file>qml/Board.qml</file>
-        <file>qml/BoardContextMenu.qml</file>
-        <file>qml/BusyIndicator.qml</file>
-        <file>qml/Button.qml</file>
-        <file>qml/ButtonApply.qml</file>
-        <file>qml/ButtonCancel.qml</file>
-        <file>qml/ButtonClose.qml</file>
-        <file>qml/ButtonOk.qml</file>
-        <file>qml/ComboBox.qml</file>
-        <file>qml/ComputerDialog.qml</file>
-        <file>qml/Comment.qml</file>
-        <file>qml/Dialog.qml</file>
-        <file>qml/DialogButtonBox.qml</file>
-        <file>qml/DialogButtonBoxOkCancel.qml</file>
-        <file>qml/DialogLoader.qml</file>
-        <file>qml/ExportImageDialog.qml</file>
-        <file>qml/FatalMessage.qml</file>
-        <file>qml/GameViewMobile.qml</file>
-        <file>qml/GameInfoDialog.qml</file>
-        <file>qml/GameVariantDialog.qml</file>
-        <file>qml/GotoMoveDialog.qml</file>
-        <file>qml/HelpWindow.qml</file>
-        <file>qml/InitialRatingDialog.qml</file>
-        <file>qml/LineSegment.qml</file>
-        <file>qml/Main.qml</file>
-        <file>qml/MessageDialog.qml</file>
-        <file>qml/Menu.qml</file>
-        <file>qml/MenuComputer.qml</file>
-        <file>qml/MenuEdit.qml</file>
-        <file>qml/MenuExport.qml</file>
-        <file>qml/MenuGame.qml</file>
-        <file>qml/MenuGo.qml</file>
-        <file>qml/MenuHelp.qml</file>
-        <file>qml/MenuItem.qml</file>
-        <file>qml/MenuRecentFiles.qml</file>
-        <file>qml/MenuTools.qml</file>
-        <file>qml/MenuView.qml</file>
-        <file>qml/MoveAnnotationDialog.qml</file>
-        <file>qml/NavigationButtons.qml</file>
-        <file>qml/NavigationPanel.qml</file>
-        <file>qml/PieceCallisto.qml</file>
-        <file>qml/PieceClassic.qml</file>
-        <file>qml/PieceGembloQ.qml</file>
-        <file>qml/PieceList.qml</file>
-        <file>qml/PieceManipulator.qml</file>
-        <file>qml/PieceNexos.qml</file>
-        <file>qml/PieceRotationAnimation.qml</file>
-        <file>qml/PieceSelectorMobile.qml</file>
-        <file>qml/PieceSwitchedFlipAnimation.qml</file>
-        <file>qml/PieceTrigon.qml</file>
-        <file>qml/QuarterSquare.qml</file>
-        <file>qml/QuestionDialog.qml</file>
-        <file>qml/RatingDialog.qml</file>
-        <file>qml/RatingGraph.qml</file>
-        <file>qml/ScoreDisplay.qml</file>
-        <file>qml/ScoreElement.qml</file>
-        <file>qml/ScoreElement2.qml</file>
-        <file>qml/Square.qml</file>
-        <file>qml/ToolBar.qml</file>
-        <file>qml/Triangle.qml</file>
-        <file>qml/Main.js</file>
-        <file>qml/GameView.js</file>
-    </qresource>
+<qresource prefix="/">
+<file>qml/AboutDialog.qml</file>
+<file>qml/AnalyzeDialog.qml</file>
+<file>qml/AnalyzeGame.qml</file>
+<file>qml/AppearanceDialog.qml</file>
+<file>qml/Board.qml</file>
+<file>qml/BoardContextMenu.qml</file>
+<file>qml/BusyIndicator.qml</file>
+<file>qml/Button.qml</file>
+<file>qml/ButtonApply.qml</file>
+<file>qml/ButtonCancel.qml</file>
+<file>qml/ButtonClose.qml</file>
+<file>qml/ButtonOk.qml</file>
+<file>qml/ComboBox.qml</file>
+<file>qml/ComputerDialog.qml</file>
+<file>qml/Comment.qml</file>
+<file>qml/Dialog.qml</file>
+<file>qml/DialogButtonBox.qml</file>
+<file>qml/DialogButtonBoxOkCancel.qml</file>
+<file>qml/DialogLoader.qml</file>
+<file>qml/ExportImageDialog.qml</file>
+<file>qml/FatalMessage.qml</file>
+<file>qml/GameViewMobile.qml</file>
+<file>qml/GameInfoDialog.qml</file>
+<file>qml/GameVariantDialog.qml</file>
+<file>qml/GotoMoveDialog.qml</file>
+<file>qml/HelpWindow.qml</file>
+<file>qml/InitialRatingDialog.qml</file>
+<file>qml/LineSegment.qml</file>
+<file>qml/Main.qml</file>
+<file>qml/MessageDialog.qml</file>
+<file>qml/Menu.qml</file>
+<file>qml/MenuComputer.qml</file>
+<file>qml/MenuEdit.qml</file>
+<file>qml/MenuExport.qml</file>
+<file>qml/MenuGame.qml</file>
+<file>qml/MenuGo.qml</file>
+<file>qml/MenuHelp.qml</file>
+<file>qml/MenuItem.qml</file>
+<file>qml/MenuRecentFiles.qml</file>
+<file>qml/MenuTools.qml</file>
+<file>qml/MenuView.qml</file>
+<file>qml/MoveAnnotationDialog.qml</file>
+<file>qml/NavigationButtons.qml</file>
+<file>qml/NavigationPanel.qml</file>
+<file>qml/PieceCallisto.qml</file>
+<file>qml/PieceClassic.qml</file>
+<file>qml/PieceGembloQ.qml</file>
+<file>qml/PieceList.qml</file>
+<file>qml/PieceManipulator.qml</file>
+<file>qml/PieceNexos.qml</file>
+<file>qml/PieceRotationAnimation.qml</file>
+<file>qml/PieceSelectorMobile.qml</file>
+<file>qml/PieceSwitchedFlipAnimation.qml</file>
+<file>qml/PieceTrigon.qml</file>
+<file>qml/QuarterSquare.qml</file>
+<file>qml/QuestionDialog.qml</file>
+<file>qml/RatingDialog.qml</file>
+<file>qml/RatingGraph.qml</file>
+<file>qml/ScoreDisplay.qml</file>
+<file>qml/ScoreElement.qml</file>
+<file>qml/ScoreElement2.qml</file>
+<file>qml/Square.qml</file>
+<file>qml/ToolBar.qml</file>
+<file>qml/Triangle.qml</file>
+<file>qml/Main.js</file>
+<file>qml/GameView.js</file>
+<file>qml/themes/colorblind-dark/Theme.qml</file>
+<file>qml/themes/colorblind-light/Theme.qml</file>
+<file>qml/themes/dark/Theme.qml</file>
+<file>qml/themes/light/Theme.qml</file>
+<file>qml/themes/system/Theme.qml</file>
+</qresource>
 </RCC>

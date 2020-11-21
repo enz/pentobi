@@ -16,9 +16,9 @@ Item {
 
     property string toolTipText
 
+    property alias source: image.source
     property alias action: button.action
     property alias enabled: button.enabled
-    property alias icon: button.icon
     property alias down: button.down
     property alias pressed: button.pressed
     property alias autoRepeat: button.autoRepeat
@@ -28,15 +28,9 @@ Item {
         isDesktop && toolTipArea.containsMouse && enabled
     property bool _inhibitToolTip
 
-    // We want the icon about the same size as the font, but use multipliers in
-    // quarter-size steps (4) for better pixel alignment.
-    property int _iconSize:
-        Math.round(1.2 * font.pixelSize * Screen.devicePixelRatio / 4)
-        / Screen.devicePixelRatio * 4
-
     signal clicked()
 
-    implicitWidth: Math.min(_iconSize + (isDesktop ? 14 : 30),
+    implicitWidth: Math.min(button.implicitWidth,
                             0.11 * rootWindow.contentItem.height,
                             0.13 * rootWindow.contentItem.width)
     implicitHeight: implicitWidth
@@ -44,17 +38,27 @@ Item {
     ToolButton {
         id: button
 
-        anchors.fill:parent
+        padding: isDesktop ? 7 : 15
         opacity: enabled ? 0.55 : 0.25
         hoverEnabled: false
         display: AbstractButton.IconOnly
-        icon {
-            color: theme.colorText
-            width: _iconSize
-            height: _iconSize
-        }
         focusPolicy: Qt.NoFocus
         flat: true
+        contentItem: Item {
+            // We want the icon about the same size as the font, but use
+            // multipliers in quarter-size steps (4) for better pixel
+            // alignment.
+            implicitWidth:
+                Math.round(1.2 * font.pixelSize * Screen.devicePixelRatio / 4)
+                / Screen.devicePixelRatio * 4
+            implicitHeight: implicitWidth
+
+            Image {
+                id: image
+
+                anchors.fill: parent
+            }
+        }
         background: Item {
             id: backgroundItem
 

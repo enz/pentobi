@@ -32,7 +32,7 @@ Item {
         anchors.fill: root
         source: isDesktop ? theme.getImage("piece-manipulator-desktop")
                           : theme.getImage("piece-manipulator")
-        sourceSize { width: width; height: height }
+        sourceSize { width: 800; height: 800 }
         opacity: pieceModel && ! legal ? 0.7 : 0
 
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
@@ -41,7 +41,7 @@ Item {
         anchors.fill: root
         source: isDesktop ? theme.getImage("piece-manipulator-desktop-legal")
                           : theme.getImage("piece-manipulator-legal")
-        sourceSize { width: width; height: height }
+        sourceSize { width: 800; height: 800 }
         opacity: pieceModel && legal ? 0.55 : 0
 
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }

@@ -14,11 +14,6 @@ if(NOT METAINFO_ITS)
         )
 endif()
 
-find_program(RSVG_CONVERT rsvg-convert)
-if(NOT RSVG_CONVERT)
-    message(FATAL_ERROR "rsvg-convert not found (install librsvg2-bin)")
-endif()
-
 # Binary gettext files
 
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)

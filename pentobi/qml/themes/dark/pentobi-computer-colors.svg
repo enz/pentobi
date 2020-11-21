@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16" height="16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <rect id="a" x="2" y="2" width="6" height="6" fill="#e6d5e1" style="paint-order:fill markers stroke"/>
+ <rect x=".5" y=".5" width="15" height="15" stroke="#e6d5e1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" style="paint-order:fill markers stroke"/>
+ <use transform="translate(6,6)" width="100%" height="100%" xlink:href="#a"/>
+</svg>

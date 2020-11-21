@@ -120,8 +120,7 @@ Pentobi.Dialog {
                                 name = ""
                         }
                     icon {
-                        source: "icons/filedialog-parent.svg"
-                        // Icon size is 16x16
+                        source: "qrc:/qml/icons/filedialog-parent.png"
                         width: font.pixelSize < 20 ? 16 : font.pixelSize
                         height: font.pixelSize < 20 ? 16 : font.pixelSize
                         color: frame.palette.buttonText
@@ -140,8 +139,7 @@ Pentobi.Dialog {
                 ToolButton {
                     visible: ! selectExisting
                     icon {
-                        source: "icons/filedialog-newfolder.svg"
-                        // Icon size is 16x16
+                        source: "qrc:/qml/icons/filedialog-newfolder.png"
                         width: font.pixelSize < 20 ? 16 : font.pixelSize
                         height: font.pixelSize < 20 ? 16 : font.pixelSize
                         color: frame.palette.buttonText
@@ -199,10 +197,10 @@ Pentobi.Dialog {
                             Image {
                                 anchors.verticalCenter: parent.verticalCenter
                                 visible: folderModel.isFolder(index)
-                                // Icon size is 16x16
                                 width: font.pixelSize < 20 ? 16 : font.pixelSize
                                 height: width
-                                source: "icons/filedialog-folder.svg"
+                                sourceSize { width: 64; height: 64 }
+                                source: "icons/filedialog-folder.png"
                                 sourceSize { width: width; height: height }
                             }
                             Label {

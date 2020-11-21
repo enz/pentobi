@@ -5,6 +5,7 @@ Version 19.0-dev (master)
 -------------------------
 
 * The minimum required Qt version is now 5.15.
+* The Qt SVG library is no longer needed.
 * Loading game files in encodings other than UTF-8 is no longer
   supported.
 * Enabled Fusion style on desktop again now that QTBUG-77107 no longer

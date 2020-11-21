@@ -22,8 +22,9 @@ Pentobi.Dialog {
             rightPadding: leftPadding
 
             Image {
-                source: "qrc:pentobi_icon/pentobi-128.svg"
-                sourceSize { width: 64; height: 64 }
+                source: "qrc:icon/pentobi-128.png"
+                width: 64; height: 64
+                sourceSize { width: 256; height: 256 }
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {

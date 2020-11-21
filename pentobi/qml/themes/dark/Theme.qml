@@ -27,12 +27,7 @@ Light.Theme {
     property color colorStartingPoint: "#82777E"
     property color colorText: "#e6d5e1"
 
-    function getImage(name) {
-        if (name === "pentobi-rated-game"
-                || name.startsWith("piece-manipulator"))
-            return "themes/dark/" + name + ".svg"
-        return light.getImage(name)
-    }
+    function getImage(name) { return "themes/dark/" + name + ".png" }
 
     Light.Theme { id: light }
 }

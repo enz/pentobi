@@ -40,5 +40,5 @@ Item {
     property color colorStartingPoint: "#767074"
     property color colorText: "#111111"
 
-    function getImage(name) { return "themes/light/" + name + ".svg" }
+    function getImage(name) { return "themes/light/" + name + ".png" }
 }
