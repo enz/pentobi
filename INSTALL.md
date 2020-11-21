@@ -22,7 +22,7 @@ sudo apt install appstream cmake docbook-xsl g++ gettext itstool \
   libqt5webview5-dev make qml-module-qt-labs-folderlistmodel \
   qml-module-qt-labs-settings qml-module-qtquick2 \
   qml-module-qtquick-controls2 qml-module-qtquick-layouts \
-  qml-module-qtquick-window2 qml-module-qtwebview qt5-default \
+  qml-module-qtquick-window2 qml-module-qtwebview \
   qtquickcontrols2-5-dev qttools5-dev xsltproc
 ```
 
