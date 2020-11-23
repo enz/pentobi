@@ -37,7 +37,7 @@ struct AutoClose
 
     ~AutoClose()
     {
-        m_obj.callMethod<void>("close", "()V");
+        m_obj.callMethod<void>("close");
     }
 };
 
@@ -73,7 +73,7 @@ QString getDisplayName(QAndroidJniObject uri)
     if (env->ExceptionCheck())
         return {};
     AutoClose autoClose{cursor};
-    if (! cursor.callMethod<jboolean>("moveToFirst", "()Z"))
+    if (! cursor.callMethod<jboolean>("moveToFirst"))
         return {};
     auto index = cursor.callMethod<jint>(
                 "getColumnIndex", "(Ljava/lang/String;)I", column.object());
@@ -165,7 +165,7 @@ void takePersistableUriPermission(const QAndroidJniObject& intent,
     auto contentResolver = getContentResolver();
     if (! contentResolver.isValid())
         return;
-    auto flags = intent.callMethod<jint>("getFlags", "()I");
+    auto flags = intent.callMethod<jint>("getFlags");
     auto flagRead = QAndroidJniObject::getStaticField<jint>(
                 "android/content/Intent", "FLAG_GRANT_READ_URI_PERMISSION");
     auto flagWrite = QAndroidJniObject::getStaticField<jint>(
@@ -230,7 +230,7 @@ bool AndroidUtils::checkExists(const QString& file)
     if (! cursor.isValid())
         return false;
     AutoClose autoClose{cursor};
-    auto count = cursor.callMethod<jint>("getCount", "()I");
+    auto count = cursor.callMethod<jint>("getCount");
     return count > 0;
 #else
     return QFileInfo::exists(file);
@@ -360,13 +360,13 @@ bool AndroidUtils::open(
         if (checkException())
         {
             exceptionCleaner.clean();
-            inputStream.callMethod<void>("close", "()V");
+            inputStream.callMethod<void>("close");
             return false;
         }
         env->GetByteArrayRegion(byteArray, 0, n, buf);
         sgf.append(reinterpret_cast<const char*>(&buf[0]), n);
     }
-    inputStream.callMethod<void>("close", "()V");
+    inputStream.callMethod<void>("close");
     return true;
 }
 #endif
@@ -466,7 +466,7 @@ bool AndroidUtils::save([[maybe_unused]]const QString& uri,
     outputStream.callMethod<void>("write", "([B)V", byteArray);
     if (checkException())
         return false;
-    outputStream.callMethod<void>("close", "()V");
+    outputStream.callMethod<void>("close");
     if (env->ExceptionCheck())
         return false;
     return true;
