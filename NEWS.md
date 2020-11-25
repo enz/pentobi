@@ -21,16 +21,23 @@ Version 19.0-dev (master)
 * Remaining pieces on Android are now always shown in order to play
   even in game variants where a player plays two colors.
 
-Version 18.4-dev (v18-fixes)
+Version 18.5-dev (v18-fixes)
 ----------------------------
+
+*
+
+Version 18.4 (25 Nov 2020)
+--------------------------
 
 * Added workaround for QTBUG-85449, which made the Android app crash
   on exit on some Huawei devices.
 * Avoid unnecessary dependency on QtQml QML module (see also Debian bug
   973855).
+* Added explicit dependency on metainfo.its in
+  pentobi/unix/CMakeLists.txt.
 * Aborting computer play with the Stop button did not work reliably
   when the computer played multiple colors at low levels.
-* New Russian translation of manual.
+* Russian translation of most of the manual.
 
 Version 18.3 (04 Nov 2020)
 --------------------------
