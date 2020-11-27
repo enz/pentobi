@@ -245,11 +245,10 @@ function findNextComment() {
 }
 
 function findNextCommentContinueFromRoot() {
-    if (gameModel.findNextCommentContinueFromRoot()) {
+    if (gameModel.findNextCommentContinueFromRoot())
         gameView.showComment()
-        return
-    }
-    showInfo(qsTr("No comment found"))
+    else
+        showInfo(qsTr("No comment found"))
 }
 
 function genMove() {
