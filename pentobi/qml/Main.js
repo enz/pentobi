@@ -193,6 +193,18 @@ function deleteAllVarNoVerify() {
     showTemporaryMessage(qsTr("Variations deleted"))
 }
 
+function expirePersistedUriPermissions() {
+    var uris = androidUtils.getPersistedUriPermissions()
+    if (initialFile && ! uris.includes(initialFile))
+        uris.push(initialFile)
+    if (gameModel.file && ! uris.includes(gameModel.file))
+        uris.push(gameModel.file)
+    var len = uris.length
+    for (var i = 0; i < len; ++i)
+        if (! recentFilesContains(uris[i]))
+            androidUtils.releasePersistableUriPermission(uris[i])
+}
+
 function exportAsciiArt(fileUrl) {
     var file = isAndroid ? fileUrl : getFileFromUrl(fileUrl)
     if (! gameModel.saveAsciiArt(file))
@@ -381,6 +393,8 @@ function init() {
                                        initComputerColorsOnNewGame)
         analyzeGameModel.loadAutoSave(gameModel)
     }
+    if (isAndroid)
+        expirePersistedUriPermissions(initialFile, gameModel.file)
     playerModel.level = syncSettings.valueInt("level", 1)
     if (isMultiColor()) {
         computerPlays2 = computerPlays0
@@ -720,6 +734,15 @@ function rating() {
     // See comment in Main.qml at ratingModel.onHistoryChanged
     ratingDialog.sourceComponent = null
     ratingDialog.open()
+}
+
+function recentFilesContains(file) {
+    var entries = recentFiles.entries
+    var len = entries.length
+    for (var i = 0; i < len; ++i)
+        if (entries[i].file === file)
+            return true
+    return false
 }
 
 function reloadFile() {

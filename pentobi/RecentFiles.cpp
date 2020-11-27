@@ -41,28 +41,11 @@ void RecentFiles::add(const QString& file, const QString& displayName)
 void RecentFiles::checkMax([[maybe_unused]]const QString& currentFile)
 {
     while (m_entries.length() > maxRecentFiles)
-    {
-#ifdef Q_OS_ANDROID
-        auto entry = m_entries.last().value<QVariantMap>();
-        auto file = entry[QStringLiteral("file")].toString();
-        if (currentFile.isEmpty() || file != currentFile)
-            AndroidUtils::releasePersistableUriPermission(file);
-#endif
         m_entries.removeLast();
-    }
 }
 
 void RecentFiles::clear([[maybe_unused]]const QString& currentFile)
 {
-#ifdef Q_OS_ANDROID
-    for (auto& entry : as_const(m_entries))
-    {
-        auto file =
-                entry.value<QVariantMap>()[QStringLiteral("file")].toString();
-        if (file != currentFile)
-            AndroidUtils::releasePersistableUriPermission(file);
-    }
-#endif
     m_entries.clear();
     QSettings settings;
     settings.setValue(QStringLiteral("recentFiles"), m_entries);

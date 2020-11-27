@@ -36,6 +36,8 @@ public:
 
     Q_INVOKABLE void openSaveDialog(const QString& suggestedName);
 
+    Q_INVOKABLE static QStringList getPersistedUriPermissions();
+
     Q_INVOKABLE static void releasePersistableUriPermission(
             const QString& uri);
 

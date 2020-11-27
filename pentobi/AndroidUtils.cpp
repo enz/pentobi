@@ -330,6 +330,36 @@ QString AndroidUtils::getInitialFile()
 }
 #endif
 
+QStringList AndroidUtils::getPersistedUriPermissions()
+{
+    QStringList result;
+#ifdef Q_OS_ANDROID
+    auto contentResolver = getContentResolver();
+    if (! contentResolver.isValid())
+        return result;
+    auto permissions = contentResolver.callObjectMethod(
+                "getPersistedUriPermissions", "()Ljava/util/List;");
+    if (! permissions.isValid())
+        return result;
+    auto size = permissions.callMethod<jint>("size");
+    for (jint i = 0; i < size; ++i)
+    {
+        auto p = permissions.callObjectMethod(
+                    "get", "(I)Ljava/lang/Object;", i);
+        if (! p.isValid())
+            continue;
+        auto uri = p.callObjectMethod("getUri", "()Landroid/net/Uri;");
+        if (! uri.isValid())
+            continue;
+        auto s = uri.callObjectMethod<jstring>("toString");
+        if (! s.isValid())
+            continue;
+        result.append(s.toString());
+    }
+#endif
+    return result;
+}
+
 #ifdef Q_OS_ANDROID
 bool AndroidUtils::open(
         [[maybe_unused]]const QString& uri, [[maybe_unused]]QByteArray& sgf)
