@@ -306,8 +306,7 @@ function getGameLabel(setupMode, isRated, file, isModified, short) {
     return (isModified ? "*" : "") + label
 }
 
-function getPlayerString(variant, player)
-{
+function getPlayerString(variant, player) {
     var isMultiColor = (variant === "classic_2" || variant === "trigon_2"
                         || variant === "nexos_2" || variant === "callisto_2_4"
                         || variant === "gembloq_2_4")
@@ -501,13 +500,11 @@ function moveUpVar() {
     showVariationInfo()
 }
 
-function newGame()
-{
+function newGame() {
     verify(newGameNoVerify)
 }
 
-function newGameNoVerify()
-{
+function newGameNoVerify() {
     gameModel.newGame()
     gameView.setupMode = false
     gameView.showToPlay()
@@ -571,8 +568,7 @@ function openFileUrl() {
     openFile(getFileFromUrl(openDialog.item.fileUrl), "")
 }
 
-function openClipboard()
-{
+function openClipboard() {
     verify(openClipboardNoVerify)
 }
 
@@ -640,8 +636,7 @@ function quit() {
     return true
 }
 
-function ratedGame()
-{
+function ratedGame() {
     verify(ratedGameCheckFirstGame)
 }
 
@@ -652,8 +647,7 @@ function ratedGameCheckFirstGame() {
         ratedGameNoVerify()
 }
 
-function ratedGameNoVerify()
-{
+function ratedGameNoVerify() {
     var player = ratingModel.getNextHumanPlayer()
     var level = ratingModel.getNextLevel(playerModel.maxLevel)
     var gameVariant = gameModel.gameVariant
@@ -843,8 +837,7 @@ function undo() {
     gameModel.undo()
 }
 
-function verify(callback)
-{
+function verify(callback) {
     if (gameModel.isModified) {
         showQuestion(qsTr("Discard game?"), callback)
         return
