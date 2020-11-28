@@ -529,7 +529,7 @@ function open() {
 
 function openNoVerify() {
     if (isAndroid)
-        androidUtils.openOpenDialog()
+        androidUtils.openOpenDialog(gameModel.file)
     else
         openDialog.open()
 }
@@ -751,9 +751,12 @@ function save() {
 }
 
 function saveAs() {
-    if (isAndroid) {
-        androidUtils.openSaveDialog(gameModel.suggestGameFileName(""))
-    } else {
+    if (isAndroid)
+        androidUtils.openSaveDialog(
+                    gameModel.file,
+                    displayName !== "" ? displayName
+                                       : gameModel.suggestGameFileName(""))
+    else {
         var dialog = saveDialog.get()
         dialog.name = gameModel.suggestGameFileName(folder)
         dialog.open()

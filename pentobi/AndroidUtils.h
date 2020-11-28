@@ -30,11 +30,12 @@ public:
 
     Q_INVOKABLE void openImageSaveDialog(const QString& suggestedName);
 
-    Q_INVOKABLE void openOpenDialog();
+    Q_INVOKABLE void openOpenDialog(const QString& suggestedUri);
 
     Q_INVOKABLE void openTextSaveDialog();
 
-    Q_INVOKABLE void openSaveDialog(const QString& suggestedName);
+    Q_INVOKABLE void openSaveDialog(const QString& suggestedUri,
+                                    const QString& suggestedName);
 
     Q_INVOKABLE static QStringList getPersistedUriPermissions();
 

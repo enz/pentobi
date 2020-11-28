@@ -96,9 +96,30 @@ QAndroidJniObject getUriObj(const QString& uri)
                 uriString.object<jstring>());
 }
 
+void setExtraInitialUri(QAndroidJniObject& intent, const QString& uri)
+{
+    QAndroidJniExceptionCleaner exceptionCleaner;
+    QAndroidJniEnvironment env;
+    auto extraInitialUriObj =
+            QAndroidJniObject::getStaticObjectField<jstring>(
+                "android/provider/DocumentsContract", "EXTRA_INITIAL_URI");
+    // Might throw because EXTRA_INITIAL_URI needs Android 8.0
+    if (env->ExceptionCheck())
+        return;
+    auto value = getUriObj(uri);
+    if (! value.isValid())
+        return;
+    intent.callObjectMethod(
+                "putExtra",
+                "(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;",
+                extraInitialUriObj.object<jstring>(),
+                value.object<jstring>());
+}
+
 void startDocumentActivity(
         const char* actionField, const QString& type,
-        const QString& extraTitle, bool takePersistablePermission,
+        const QString& extraInitialUri, const QString& extraTitle,
+        bool takePersistablePermission,
         const function<void(const QString& uri,const QString& displayNamei)>&
         callback)
 {
@@ -136,6 +157,8 @@ void startDocumentActivity(
                     extraTitleObj.object<jstring>(),
                     extraTitleValue.object<jstring>());
     }
+    if (! extraInitialUri.isEmpty() && ! QUrl(extraInitialUri).isRelative())
+        setExtraInitialUri(intent, extraInitialUri);
     QtAndroid::startActivity(intent, 0,
                              [takePersistablePermission, callback](int, int
                              result, const QAndroidJniObject& data) {
@@ -406,7 +429,7 @@ void AndroidUtils::openImageSaveDialog(
 {
 #ifdef Q_OS_ANDROID
     startDocumentActivity("ACTION_CREATE_DOCUMENT", "image/png",
-                          suggestedName, false,
+                          "", suggestedName, false,
                           [this](const QString& uri,
                           [[maybe_unused]]const QString& displayName) {
         emit imageSaveDialogAccepted(uri);
@@ -414,10 +437,11 @@ void AndroidUtils::openImageSaveDialog(
 #endif
 }
 
-void AndroidUtils::openOpenDialog()
+void AndroidUtils::openOpenDialog(const QString& suggestedUri)
 {
 #ifdef Q_OS_ANDROID
-    startDocumentActivity("ACTION_OPEN_DOCUMENT", "*/*", "", true,
+    startDocumentActivity("ACTION_OPEN_DOCUMENT", "*/*", suggestedUri, "",
+                          true,
                           [this](const QString& uri,
                           const QString& displayName) {
         emit openDialogAccepted(uri, displayName);
@@ -428,8 +452,8 @@ void AndroidUtils::openOpenDialog()
 void AndroidUtils::openTextSaveDialog()
 {
 #ifdef Q_OS_ANDROID
-    startDocumentActivity("ACTION_CREATE_DOCUMENT", "text/plain",
-                          "", false,
+    startDocumentActivity("ACTION_CREATE_DOCUMENT", "text/plain", "", "",
+                          false,
                           [this](const QString& uri,
                           [[maybe_unused]]const QString& displayName) {
         emit textSaveDialogAccepted(uri);
@@ -438,11 +462,12 @@ void AndroidUtils::openTextSaveDialog()
 }
 
 void AndroidUtils::openSaveDialog(
+        [[maybe_unused]] const QString& suggestedUri,
         [[maybe_unused]] const QString& suggestedName)
 {
 #ifdef Q_OS_ANDROID
     startDocumentActivity("ACTION_CREATE_DOCUMENT", "application/x-blokus-sgf",
-                          suggestedName, true,
+                          suggestedUri, suggestedName, true,
                           [this](const QString& uri,
                           const QString& displayName) {
         emit saveDialogAccepted(uri, displayName);
