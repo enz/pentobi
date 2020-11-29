@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/DialogButtonBox.qml
+/** @file pentobi/qml/PentobiDialogButtonBox.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

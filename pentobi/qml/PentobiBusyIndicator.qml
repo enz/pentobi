@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/BusyIndicator.qml
+/** @file pentobi/qml/PentobiBusyIndicator.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

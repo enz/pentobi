@@ -8,9 +8,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
 import "Main.js" as Logic
-import "." as Pentobi
 
-Pentobi.Dialog {
+PentobiDialog {
     footer: DialogButtonBoxOkCancel { }
     onOpened: comboBox.currentIndex = 0
     onAccepted: {
@@ -40,7 +39,7 @@ Pentobi.Dialog {
                 Layout.fillWidth: true
                 text: qsTr("Analysis speed:")
             }
-            Pentobi.ComboBox {
+            PentobiComboBox {
                 id: comboBox
 
                 model:

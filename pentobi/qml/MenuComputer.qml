@@ -4,21 +4,19 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import "." as Pentobi
-
-Pentobi.Menu {
+PentobiMenu {
     title: qsTr("Computer")
 
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionComputerSettings
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionPlay
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionPlaySingle
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionStop
     }
 }

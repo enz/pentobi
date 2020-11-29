@@ -9,7 +9,6 @@ import QtQuick.Controls 2.3
 import QtQuick.Window 2.1
 import Qt.labs.settings 1.0
 import pentobi 1.0
-import "." as Pentobi
 import "Main.js" as Logic
 
 ApplicationWindow {
@@ -65,7 +64,7 @@ ApplicationWindow {
         anchors.fill: parent
         onClicked: gameView.dropCommentFocus()
     }
-    Pentobi.ToolBar {
+    PentobiToolBar {
         id: toolBar
 
         showContent: ! isDesktop || showToolBar

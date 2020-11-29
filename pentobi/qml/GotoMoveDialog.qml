@@ -7,12 +7,11 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.2
-import "." as Pentobi
 
-Pentobi.Dialog {
+PentobiDialog {
     id: root
 
-    footer: Pentobi.DialogButtonBox {
+    footer: PentobiDialogButtonBox {
         ButtonOk {
             enabled: textField.acceptableInput
             onClicked: checkAccept()

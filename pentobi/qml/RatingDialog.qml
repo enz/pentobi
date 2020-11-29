@@ -7,13 +7,12 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
-import "." as Pentobi
 import "Main.js" as Logic
 
-Pentobi.Dialog {
+PentobiDialog {
     property int numberGames: ratingModel.numberGames
 
-    footer: Pentobi.DialogButtonBox { ButtonClose { } }
+    footer: PentobiDialogButtonBox { ButtonClose { } }
 
     Item {
         implicitWidth: Math.max(Math.min(font.pixelSize * 22, maxContentWidth),
@@ -155,7 +154,7 @@ Pentobi.Dialog {
                              0.22 * rootWindow.contentItem.height)
                 ScrollBar.vertical: ScrollBar { }
             }
-            Pentobi.Menu {
+            PentobiMenu {
                 id: menu
 
                 property int row
@@ -170,7 +169,7 @@ Pentobi.Dialog {
 
                 relativeWidth: 14
 
-                Pentobi.MenuItem {
+                PentobiMenuItem {
                     text: qsTr("Open Game %1").arg(
                                 ratingModel.getGameNumber(menu.row - 1))
                     onTriggered: {

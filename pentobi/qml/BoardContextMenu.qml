@@ -4,9 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import "." as Pentobi
-
-Pentobi.Menu {
+PentobiMenu {
     property int moveNumber
 
     relativeWidth: 15
@@ -19,12 +17,12 @@ Pentobi.Menu {
                     qsTr("Move Annotation (%1)").arg(annotation)
     }
 
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         enabled: moveNumber !== gameModel.moveNumber && ! isRated
         text: qsTr("Go to Move %1").arg(moveNumber)
         onTriggered: gameModel.gotoMove(moveNumber)
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         id: itemAnnotation
 
         onTriggered: {

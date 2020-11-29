@@ -6,15 +6,14 @@
 
 import QtQuick.Controls 2.3
 import "Main.js" as Logic
-import "." as Pentobi
 
-Pentobi.Menu {
+PentobiMenu {
     title: qsTr("Game")
 
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionNew
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionNewRated
     }
     MenuSeparator { }
@@ -22,18 +21,18 @@ Pentobi.Menu {
         text: qsTr("Game Variant…")
         onTriggered: gameVariantDialog.open()
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionGameInfo
     }
     MenuSeparator { }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionUndo
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionFindMove
     }
     MenuSeparator { }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionOpen
     }
     MenuRecentFiles { }
@@ -41,16 +40,16 @@ Pentobi.Menu {
         text: qsTr("Open Clipboard")
         onTriggered: Logic.openClipboard()
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionSave
         enabled: actionSave.enabled && gameModel.file !== ""
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionSaveAs
     }
     MenuExport { relativeWidth: 10 }
     MenuSeparator { }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionQuit
     }
 }

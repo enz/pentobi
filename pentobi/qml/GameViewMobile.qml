@@ -8,7 +8,6 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import Qt.labs.settings 1.0
-import "." as Pentobi
 import "GameView.js" as Logic
 
 /** Game view optimized for mobile devices.
@@ -211,7 +210,7 @@ Item
             }
         }
     }
-    Pentobi.BusyIndicator {
+    PentobiBusyIndicator {
         id: busyIndicator
 
         running: busyIndicatorRunning

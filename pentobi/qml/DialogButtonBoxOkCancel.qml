@@ -4,9 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import "." as Pentobi
-
-Pentobi.DialogButtonBox {
+PentobiDialogButtonBox {
     ButtonCancel { }
     ButtonOk { }
 }

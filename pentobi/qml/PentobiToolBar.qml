@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/ToolBar.qml
+/** @file pentobi/qml/PentobiToolBar.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -7,7 +7,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.1
-import "." as Pentobi
 import "Main.js" as Logic
 
 Item {
@@ -53,7 +52,7 @@ Item {
             visible: ! isDesktop
             Layout.fillWidth: true
         }
-        Pentobi.Button {
+        PentobiButton {
             id: newGame
 
             source: theme.getImage("pentobi-newgame")
@@ -61,7 +60,7 @@ Item {
             visible: showContent && (isDesktop || enabled)
             toolTipText: qsTr("Start a new game")
         }
-        Pentobi.Button {
+        PentobiButton {
             id: newGameRated
 
             visible: showContent && isDesktop
@@ -69,7 +68,7 @@ Item {
             action: actionNewRated
             toolTipText: qsTr("Start a rated game")
         }
-        Pentobi.Button {
+        PentobiButton {
             id: undo
 
             source: theme.getImage("pentobi-undo")
@@ -82,7 +81,7 @@ Item {
             //: Tooltip for Undo button
             toolTipText: qsTr("Undo move")
         }
-        Pentobi.Button {
+        PentobiButton {
             id: computerSettings
 
             source: theme.getImage("pentobi-computer-colors")
@@ -90,7 +89,7 @@ Item {
             visible: showContent && (isDesktop || enabled)
             toolTipText: qsTr("Set the colors played by the computer")
         }
-        Pentobi.Button {
+        PentobiButton {
             id: play
 
             source: theme.getImage("pentobi-play")
@@ -98,7 +97,7 @@ Item {
             visible: showContent && (isDesktop || enabled)
             autoRepeat: true
             // Use fast autorepeat to avoid flickering of
-            // Pentobi.Button.pressedAnimation, presses while computer is
+            // PentobiButton.pressedAnimation, presses while computer is
             // thinking are ignored anyway.
             autoRepeatInterval: 50
             toolTipText: {
@@ -113,7 +112,7 @@ Item {
                 return qsTr("Make the computer play the current color")
             }
         }
-        Pentobi.Button {
+        PentobiButton {
             id: stop
 
             source: theme.getImage("pentobi-stop")
@@ -128,7 +127,7 @@ Item {
             Layout.fillWidth: true
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
-        Pentobi.Button {
+        PentobiButton {
             id: beginning
 
             visible: showContent && isDesktop
@@ -136,7 +135,7 @@ Item {
             action: actionBeginning
             toolTipText: qsTr("Go to beginning of game")
         }
-        Pentobi.Button {
+        PentobiButton {
             id: backward10
 
             visible: showContent && isDesktop
@@ -148,7 +147,7 @@ Item {
                     rootWindow.gameView.item.animationDuration : 200
             toolTipText: qsTr("Go ten moves backward")
         }
-        Pentobi.Button {
+        PentobiButton {
             id: backward
 
             visible: showContent && isDesktop
@@ -157,7 +156,7 @@ Item {
             autoRepeat: true
             toolTipText: qsTr("Go one move backward")
         }
-        Pentobi.Button {
+        PentobiButton {
             id: forward
 
             visible: showContent && isDesktop
@@ -166,7 +165,7 @@ Item {
             autoRepeat: true
             toolTipText: qsTr("Go one move forward")
         }
-        Pentobi.Button {
+        PentobiButton {
             id: forward10
 
             visible: showContent && isDesktop
@@ -178,7 +177,7 @@ Item {
                     rootWindow.gameView.item.animationDuration : 200
             toolTipText: qsTr("Go ten moves forward")
         }
-        Pentobi.Button {
+        PentobiButton {
             id: end
 
             visible: showContent && isDesktop
@@ -191,7 +190,7 @@ Item {
             Layout.fillWidth: true
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
-        Pentobi.Button {
+        PentobiButton {
             id: prevVar
 
             visible: showContent && isDesktop
@@ -203,7 +202,7 @@ Item {
                     2 * rootWindow.gameView.item.animationDuration : 400
             toolTipText: qsTr("Go to previous variation")
         }
-        Pentobi.Button {
+        PentobiButton {
             id: nextVar
 
             visible: showContent && isDesktop
@@ -244,7 +243,7 @@ Item {
             visible: isDesktop
             Layout.fillWidth: true
         }
-        Pentobi.Button {
+        PentobiButton {
             id: menuButton
 
             source: theme.getImage(isDesktop ? "menu-desktop" : "menu")
@@ -273,7 +272,7 @@ Item {
                 Component {
                     id: menuComponent
 
-                    Pentobi.Menu {
+                    PentobiMenu {
                         relativeWidth: 12
 
                         closePolicy: Popup.CloseOnPressOutsideParent

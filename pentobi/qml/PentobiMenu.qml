@@ -1,12 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/Menu.qml
+/** @file pentobi/qml/PentobiMenu.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 import QtQuick 2.0
 import QtQuick.Controls 2.2
-import "." as Pentobi
 
 Menu {
     // Width in font-size units
@@ -18,7 +17,7 @@ Menu {
     closePolicy: isDesktop ?
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                    : Popup.CloseOnEscape | Popup.CloseOnPressOutside
-    delegate: Pentobi.MenuItem { }
+    delegate: PentobiMenuItem { }
     background: Rectangle {
         // Note that MenuItem in Qt 5.11 does neither fully use the system
         // palette, nor make its actually used colors available.

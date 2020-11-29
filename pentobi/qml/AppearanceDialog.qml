@@ -7,9 +7,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
-import "." as Pentobi
 
-Pentobi.Dialog {
+PentobiDialog {
     id: root
 
     // Mobile layout may not have enough screen space for apply button and the
@@ -17,7 +16,7 @@ Pentobi.Dialog {
     // the same ButtonBox for both and setting visible to false for ButtonApply
     // if not desktop causes a binding loop for implicitWidth in Qt 5.11 and
     // elided Text on the dialog buttons.
-    property DialogButtonBox footerDesktop: Pentobi.DialogButtonBox {
+    property DialogButtonBox footerDesktop: PentobiDialogButtonBox {
         ButtonCancel { }
         ButtonApply {
             enabled:
@@ -145,7 +144,7 @@ Pentobi.Dialog {
 
 
             }
-            Pentobi.ComboBox {
+            PentobiComboBox {
                 id: comboBoxTheme
 
                 model: isAndroid ?
@@ -172,7 +171,7 @@ Pentobi.Dialog {
 
 
             }
-            Pentobi.ComboBox {
+            PentobiComboBox {
                 id: comboBoxMoveMarking
 
                 model: [
@@ -189,7 +188,7 @@ Pentobi.Dialog {
                 text: qsTr("Show comment:")
                 Layout.topMargin: 0.5 * font.pixelSize
             }
-            Pentobi.ComboBox {
+            PentobiComboBox {
                 id: comboBoxComment
 
                 model: [

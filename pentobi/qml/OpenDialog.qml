@@ -6,9 +6,8 @@
 
 import QtQuick 2.0
 import "Main.js" as Logic
-import "." as Pentobi
 
-Pentobi.FileDialog {
+PentobiFileDialog {
     title: qsTr("Open")
     nameFilterLabels: [ qsTr("Blokus games") ]
     nameFilters: [ [ "*.blksgf" ] ]

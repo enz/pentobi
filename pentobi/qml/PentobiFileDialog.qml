@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/FileDialog.qml
+/** @file pentobi/qml/PentobiFileDialog.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -8,10 +8,9 @@ import QtQuick 2.11
 import QtQuick.Controls 2.4
 import QtQuick.Layouts 1.1
 import Qt.labs.folderlistmodel 2.11
-import "." as Pentobi
 import "Main.js" as Logic
 
-Pentobi.Dialog {
+PentobiDialog {
     id: root
 
     property bool selectExisting: true
@@ -63,7 +62,7 @@ Pentobi.Dialog {
         accept()
     }
 
-    footer: Pentobi.DialogButtonBox {
+    footer: PentobiDialogButtonBox {
         Button {
             enabled: isValidName(name)
             text: selectExisting ? qsTr("Open") : qsTr("Save")
@@ -272,7 +271,7 @@ Pentobi.Dialog {
                     }
                 }
             }
-            Pentobi.ComboBox {
+            PentobiComboBox {
                 id: comboBoxNameFilter
 
                 model: {

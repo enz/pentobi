@@ -6,9 +6,8 @@
 
 import QtQuick.Controls 2.4
 import "Main.js" as Logic
-import "." as Pentobi
 
-Pentobi.Menu {
+PentobiMenu {
     title: qsTr("Open Recent")
     enabled: recentFiles.entries.length > 0
     relativeWidth: 19
@@ -30,56 +29,56 @@ Pentobi.Menu {
     }
 
     // Instantiator in Menu doesn't work reliably with Qt 5.11 or 5.12.0 alpha
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         visible: recentFiles.entries.length > 0
         // Invisible menu item still use space in Qt 5.11
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 0)
         onTriggered: openFile(0)
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         visible: recentFiles.entries.length > 1
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 1)
         onTriggered: openFile(1)
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         visible: recentFiles.entries.length > 2
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 2)
         onTriggered: openFile(2)
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         visible: recentFiles.entries.length > 3
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 3)
         onTriggered: openFile(3)
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         visible: recentFiles.entries.length > 4
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 4)
         onTriggered: openFile(4)
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         visible: recentFiles.entries.length > 5
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 5)
         onTriggered: openFile(5)
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         visible: recentFiles.entries.length > 6
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 6)
         onTriggered: openFile(6)
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         visible: recentFiles.entries.length > 7
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 7)
         onTriggered: openFile(7)
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         visible: recentFiles.entries.length > 8
         height: visible ? implicitHeight : 0
         text: getText(recentFiles.entries, 8)

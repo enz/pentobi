@@ -6,13 +6,12 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.0
-import "." as Pentobi
 
 RowLayout
 {
     spacing: 0
 
-    Pentobi.Button {
+    PentobiButton {
         id: buttonBeginning
 
         source: theme.getImage("pentobi-beginning")
@@ -20,33 +19,33 @@ RowLayout
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
-    Pentobi.Button {
+    PentobiButton {
         source: theme.getImage("pentobi-backward")
         action: actionBackward
         autoRepeat: true
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
-    Pentobi.Button {
+    PentobiButton {
         source: theme.getImage("pentobi-forward")
         action: actionForward
         autoRepeat: true
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
-    Pentobi.Button {
+    PentobiButton {
         source: theme.getImage("pentobi-end")
         action: actionEnd
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
-    Pentobi.Button {
+    PentobiButton {
         source: theme.getImage("pentobi-previous-variation")
         action: actionPrevVar
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
-    Pentobi.Button {
+    PentobiButton {
         source: theme.getImage("pentobi-next-variation")
         action: actionNextVar
         Layout.fillWidth: true

@@ -7,9 +7,8 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import "Main.js" as Logic
-import "." as Pentobi
 
-Pentobi.Dialog {
+PentobiDialog {
     function openWithCallback(text, acceptedFunc) {
         label.text = text
         _acceptedFunc = acceptedFunc

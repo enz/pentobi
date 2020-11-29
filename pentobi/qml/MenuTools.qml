@@ -6,12 +6,11 @@
 
 import QtQuick.Controls 2.3
 import "Main.js" as Logic
-import "." as Pentobi
 
-Pentobi.Menu {
+PentobiMenu {
     title: qsTr("Tools")
 
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         text: qsTr("Rating")
         onTriggered: Logic.rating()
     }

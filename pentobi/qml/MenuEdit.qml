@@ -6,12 +6,11 @@
 
 import QtQuick.Controls 2.3
 import "Main.js" as Logic
-import "." as Pentobi
 
-Pentobi.Menu {
+PentobiMenu {
     title: qsTr("Edit")
 
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         text: qsTr("Annotation…")
         enabled: gameModel.moveNumber > 0
         onTriggered: {
@@ -21,7 +20,7 @@ Pentobi.Menu {
         }
     }
     MenuSeparator { }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         text: qsTr("Make Main Variation")
         enabled: ! gameModel.isMainVar && ! isRated
         onTriggered: {
@@ -29,46 +28,46 @@ Pentobi.Menu {
             Logic.showTemporaryMessage(qsTr("Made main variation"))
         }
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         //: Short for Move Variation Up
         text: qsTr("Variation Up")
         enabled: gameModel.hasPrevVar && ! isRated
         onTriggered: Logic.moveUpVar()
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         //: Short for Move Variation Down
         text: qsTr("Variation Down")
         enabled: gameModel.hasNextVar && ! isRated
         onTriggered: Logic.moveDownVar()
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         text: qsTr("Delete Variations")
         enabled: gameModel.hasVariations && ! isRated
         onTriggered: Logic.deleteAllVar()
     }
     MenuSeparator { }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         text: qsTr("Truncate")
         enabled: gameModel.canGoBackward && ! isRated
         onTriggered: Logic.truncate()
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         text: qsTr("Truncate Children")
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: Logic.truncateChildren()
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         text: qsTr("Keep Position")
         enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward) && ! isRated
         onTriggered: Logic.keepOnlyPosition()
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         text: qsTr("Keep Subtree")
         enabled: gameModel.canGoBackward && gameModel.canGoForward && ! isRated
         onTriggered: Logic.keepOnlySubtree()
     }
     MenuSeparator { }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         text: qsTr("Setup Mode")
         checkable: true
         enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
@@ -85,7 +84,7 @@ Pentobi.Menu {
             }
         }
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         text: qsTr("Next Color")
         enabled: ! isRated
         onTriggered: {

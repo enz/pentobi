@@ -8,9 +8,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
 import "Main.js" as Logic
-import "." as Pentobi
 
-Pentobi.Dialog {
+PentobiDialog {
     id: root
 
     property int moveNumber
@@ -59,7 +58,7 @@ Pentobi.Dialog {
             anchors.fill: parent
 
             Label { text: qsTr("Move %1").arg(moveNumber) }
-            Pentobi.ComboBox {
+            PentobiComboBox {
                 id: comboBox
 
                 model: [

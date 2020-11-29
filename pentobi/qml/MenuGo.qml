@@ -5,22 +5,21 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick.Controls 2.3
-import "." as Pentobi
 
-Pentobi.Menu {
+PentobiMenu {
     title: qsTr("Go")
 
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionGotoMove
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionBackToMainVar
     }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionBeginningOfBranch
     }
     MenuSeparator { }
-    Pentobi.MenuItem {
+    PentobiMenuItem {
         action: actionNextComment
     }
 }

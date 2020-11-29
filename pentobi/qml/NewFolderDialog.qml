@@ -7,10 +7,9 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.2
-import "." as Pentobi
 import "Main.js" as Logic
 
-Pentobi.Dialog {
+PentobiDialog {
     id: root
 
     property url folder
@@ -32,7 +31,7 @@ Pentobi.Dialog {
 
     function isValidName(name) { return name.trim().length > 0 }
 
-    footer: Pentobi.DialogButtonBox {
+    footer: PentobiDialogButtonBox {
         ButtonOk {
             enabled: isValidName(name)
             onClicked: checkAccept()

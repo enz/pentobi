@@ -7,12 +7,11 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import "Main.js" as Logic
-import "." as Pentobi
 
-Pentobi.Dialog {
+PentobiDialog {
     property alias text: label.text
 
-    footer: Pentobi.DialogButtonBox { ButtonOk { } }
+    footer: PentobiDialogButtonBox { ButtonOk { } }
 
     Item {
         implicitWidth:
