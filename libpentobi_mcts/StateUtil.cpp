@@ -31,7 +31,7 @@ bool check_symmetry_broken(const Board& bd)
     auto& symmetric_points = bd.get_board_const().get_symmetrc_points();
     Color to_play = bd.get_to_play();
     auto& geo = bd.get_geometry();
-    // No need to iterator over the whole board when checking symmetry (this
+    // No need to iterate over the whole board when checking symmetry (this
     // makes the assumption that the symmetric points of the points in the
     // first half of the integer range are in the second half).
     Geometry::Iterator begin = geo.begin();
