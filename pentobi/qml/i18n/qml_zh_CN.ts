@@ -200,7 +200,7 @@
     </message>
 </context>
 <context>
-    <name>FileDialog</name>
+    <name>PentobiFileDialog</name>
     <message>
         <source>Overwrite file?</source>
         <translation>覆盖文件？</translation>
@@ -1293,7 +1293,7 @@
     </message>
 </context>
 <context>
-    <name>ToolBar</name>
+    <name>PentobiToolBar</name>
     <message>
         <source>Start a new game</source>
         <translation>开始新游戏</translation>
