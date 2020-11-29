@@ -39,10 +39,6 @@ bool run_all_tests();
 
 bool run_test(const string& name);
 
-/** Main function that runs all tests (if no arguments) or only the tests
-    given as arguments. */
-int test_main(int argc, char* argv[]);
-
 //-----------------------------------------------------------------------------
 
 /** Helper class that automatically adds a test when an instance is

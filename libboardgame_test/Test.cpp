@@ -94,18 +94,6 @@ bool run_test(const string& name)
     return false;
 }
 
-int test_main(int argc, char* argv[])
-{
-    libboardgame_base::LogInitializer log_initializer;
-    if (argc < 2)
-        return run_all_tests() ? 0 : 1;
-    int result = 0;
-    for (int i = 1; i < argc; ++i)
-        if (! run_test(argv[i]))
-            result = 1;
-    return result;
-}
-
 //-----------------------------------------------------------------------------
 
 } // namespace libboardgame_test
