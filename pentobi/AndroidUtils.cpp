@@ -437,7 +437,7 @@ void AndroidUtils::openImageSaveDialog(
 #endif
 }
 
-void AndroidUtils::openOpenDialog(const QString& suggestedUri)
+void AndroidUtils::openOpenDialog([[maybe_unused]] const QString& suggestedUri)
 {
 #ifdef Q_OS_ANDROID
     startDocumentActivity("ACTION_OPEN_DOCUMENT", "*/*", suggestedUri, "",
