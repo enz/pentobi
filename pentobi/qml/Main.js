@@ -196,13 +196,10 @@ function deleteAllVarNoVerify() {
 
 function expirePersistedUriPermissions() {
     var uris = androidUtils.getPersistedUriPermissions()
-    if (initialFile && ! uris.includes(initialFile))
-        uris.push(initialFile)
-    if (gameModel.file && ! uris.includes(gameModel.file))
-        uris.push(gameModel.file)
     var len = uris.length
     for (var i = 0; i < len; ++i)
-        if (! recentFilesContains(uris[i]))
+        if (! recentFilesContains(uris[i]) && uris[i] !== initialFile
+                && uris[i] !== gameModel.file)
             androidUtils.releasePersistableUriPermission(uris[i])
 }
 
