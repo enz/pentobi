@@ -97,6 +97,7 @@ function checkComputerMove() {
             else
                 msg += qsTr("Your rating stays at %1.").arg(newRating)
             isRated = false
+            recentFiles.add(gameModel.file, "")
         }
         showInfo(msg)
         return
