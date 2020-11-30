@@ -360,6 +360,7 @@ QStringList AndroidUtils::getPersistedUriPermissions()
     auto contentResolver = getContentResolver();
     if (! contentResolver.isValid())
         return result;
+    QAndroidJniExceptionCleaner exceptionCleaner;
     auto permissions = contentResolver.callObjectMethod(
                 "getPersistedUriPermissions", "()Ljava/util/List;");
     if (! permissions.isValid())
@@ -489,6 +490,7 @@ void AndroidUtils::releasePersistableUriPermission(
                 "android/content/Intent", "FLAG_GRANT_READ_URI_PERMISSION");
     auto flagWrite = QAndroidJniObject::getStaticField<jint>(
                 "android/content/Intent", "FLAG_GRANT_WRITE_URI_PERMISSION");
+    QAndroidJniExceptionCleaner exceptionCleaner;
     contentResolver.callMethod<void>(
                 "releasePersistableUriPermission", "(Landroid/net/Uri;I)V",
                 uriObj.object(), flagRead | flagWrite);
