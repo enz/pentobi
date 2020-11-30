@@ -480,6 +480,8 @@ void AndroidUtils::releasePersistableUriPermission(
         [[maybe_unused]]const QString& uri)
 {
 #ifdef Q_OS_ANDROID
+    if (QUrl(uri).isRelative())
+        return;
     auto uriObj = getUriObj(uri);
     if (! uriObj.isValid())
         return;
