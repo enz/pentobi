@@ -24,7 +24,8 @@ Version 19.0-dev (master)
 Version 18.5-dev (v18-fixes)
 ----------------------------
 
-*
+* Require GNU gettext >=0.19.6, which has built-in support for AppData,
+  such that installing the appstream package is no longer needed.
 
 Version 18.4 (25 Nov 2020)
 --------------------------
