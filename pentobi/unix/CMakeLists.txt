@@ -1,24 +1,8 @@
-find_package(Gettext 0.18 REQUIRED)
+find_package(Gettext 0.19.6 REQUIRED)
 find_package(DocBookXSL REQUIRED)
 find_program(ITSTOOL itstool)
 if(NOT ITSTOOL)
     message(FATAL_ERROR "itstool not found")
-endif()
-
-# The AppData ITS file (named metainfo.its or appdata.its) is usually installed
-# in the gettext folder but provided but the appdata package. We want to check
-# its existence already at configuration time.
-get_filename_component(GETTEXT_BIN_DIR ${GETTEXT_MSGFMT_EXECUTABLE} DIRECTORY)
-get_filename_component(GETTEXT_INSTALL_DIR ${GETTEXT_BIN_DIR} DIRECTORY)
-find_file(METAINFO_ITS NAMES metainfo.its appdata.its
-    HINTS ${GETTEXT_INSTALL_DIR}/share/gettext/its
-    )
-if(NOT METAINFO_ITS)
-    message(FATAL_ERROR
-        "metainfo.its not found. Install appstream and/or use"
-        " -DMETAINFO_ITS=<file> to define the location of the metainfo.its"
-        " or appdata.its file."
-        )
 endif()
 
 find_program(RSVG_CONVERT rsvg-convert)
@@ -94,7 +78,7 @@ add_custom_command(OUTPUT io.sourceforge.pentobi.appdata.translated.xml
     --template io.sourceforge.pentobi.appdata.xml
     -o io.sourceforge.pentobi.appdata.translated.xml
     DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.appdata.xml"
-    ${METAINFO_ITS} ${po_files} po/LINGUAS
+    ${po_files} po/LINGUAS
     )
 
 install(
