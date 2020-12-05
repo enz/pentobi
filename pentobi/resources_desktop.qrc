@@ -1,5 +1,6 @@
 <RCC>
 <qresource prefix="/">
+<file>icons/pentobi/index.theme</file>
 <file>qml/AsciiArtSaveDialog.qml</file>
 <file>qml/GameViewDesktop.qml</file>
 <file>qml/ImageSaveDialog.qml</file>

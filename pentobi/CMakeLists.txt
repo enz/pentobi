@@ -14,15 +14,14 @@ add_custom_command(
     DEPENDS qml/i18n/translations.qrc ${pentobi_QM}
     )
 
+# Images and icons to be used with QtQuick Image. Here we use a sourceSize four
+# times larger than the device-indepenent size to support high-dpi images.
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icon")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/icons")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/themes/dark")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/themes/light")
-set(pentobi_icons
+set(pentobi_images
     icon/pentobi-128
     qml/icons/filedialog-folder
-    qml/icons/filedialog-newfolder
-    qml/icons/filedialog-parent
     qml/themes/dark/menu
     qml/themes/dark/menu-desktop
     qml/themes/dark/pentobi-backward
@@ -64,26 +63,51 @@ set(pentobi_icons
     qml/themes/light/piece-manipulator
     qml/themes/light/piece-manipulator-legal
     )
-foreach(icon ${pentobi_icons})
-    # Create PNGs with 4 times higher resultion than SVG size because they will
-    # be used with high-DPI scaling.
-    add_custom_command(OUTPUT "${icon}.png"
+foreach(image ${pentobi_images})
+    add_custom_command(OUTPUT "${image}.png"
         COMMAND "${RSVG_CONVERT}" -x 4 -y 4
-        "${CMAKE_CURRENT_SOURCE_DIR}/${icon}.svg" > "${icon}.png"
-        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${icon}.svg"
+        "${CMAKE_CURRENT_SOURCE_DIR}/${image}.svg" > "${image}.png"
+        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${image}.svg"
         )
-    list(APPEND icons_png "${icon}.png")
+    list(APPEND images_png "${image}.png")
 endforeach()
 add_custom_command(
     OUTPUT icons.qrc
     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/icons.qrc" .
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons.qrc" ${icons_png}
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons.qrc" ${images_png}
     )
+
+# Icons to be used with QtQuickControls2 ToolButton.icon. Here we cannot
+# specify a sourceSize different from size, so we use a custom icon theme to
+# support high-dpi icons.
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons/pentobi-theme/16x16")
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons/pentobi-theme/16x16@2")
+set(pentobi_icons
+    filedialog-newfolder
+    filedialog-parent
+    )
+foreach(icon ${pentobi_icons})
+    add_custom_command(OUTPUT "icons/pentobi/16x16/${icon}.png"
+        COMMAND "${RSVG_CONVERT}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/icons/${icon}.svg"
+        > "icons/pentobi/16x16/${icon}.png"
+        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons/${icon}.svg"
+        )
+    list(APPEND icons_png "icons/pentobi/16x16/${icon}.png")
+    add_custom_command(OUTPUT "icons/pentobi/16x16@2/${icon}.png"
+        COMMAND "${RSVG_CONVERT}" -x 2 -y 2
+        "${CMAKE_CURRENT_SOURCE_DIR}/icons/${icon}.svg"
+        > "icons/pentobi/16x16@2/${icon}.png"
+        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons/${icon}.svg"
+        )
+    list(APPEND icons_png "icons/pentobi/16x16@2/${icon}.png")
+endforeach()
 add_custom_command(
     OUTPUT icons_desktop.qrc
     COMMAND ${CMAKE_COMMAND} -E copy
     "${CMAKE_CURRENT_SOURCE_DIR}/icons_desktop.qrc" .
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons_desktop.qrc" ${icons_png}
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons_desktop.qrc" ${images_png}
+    ${icons_png}
     )
 
 set(pentobi_shared_src

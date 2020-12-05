@@ -119,7 +119,7 @@ PentobiDialog {
                                 name = ""
                         }
                     icon {
-                        source: "qrc:/qml/icons/filedialog-parent.png"
+                        name: "filedialog-parent"
                         width: font.pixelSize < 20 ? 16 : font.pixelSize
                         height: font.pixelSize < 20 ? 16 : font.pixelSize
                         color: frame.palette.buttonText
@@ -138,7 +138,7 @@ PentobiDialog {
                 ToolButton {
                     visible: ! selectExisting
                     icon {
-                        source: "qrc:/qml/icons/filedialog-newfolder.png"
+                        name: "filedialog-newfolder"
                         width: font.pixelSize < 20 ? 16 : font.pixelSize
                         height: font.pixelSize < 20 ? 16 : font.pixelSize
                         color: frame.palette.buttonText

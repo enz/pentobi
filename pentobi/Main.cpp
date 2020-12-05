@@ -70,6 +70,7 @@ QString getTranslationsPath()
 
 int mainDesktop()
 {
+    QIcon::setThemeName("pentobi");
     QIcon icon(QStringLiteral(":/icon/pentobi-128.png"));
     QGuiApplication::setWindowIcon(icon);
     QGuiApplication::setDesktopFileName(
