@@ -3,6 +3,7 @@ package net.sf.pentobi;
 import android.app.Activity;
 import android.os.Bundle;
 import android.net.Uri;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -19,11 +20,9 @@ public class HelpBrowserActivity
             WebView webView = (WebView)findViewById(R.id.webview);
             webView.setWebViewClient(new WebViewClient() {
                 @Override
-                public boolean shouldOverrideUrlLoading(WebView view,
-                                                        String url)
-                {
-                    view.loadUrl(url);
-                    return true;
+                public boolean shouldOverrideUrlLoading(
+                                 WebView view, WebResourceRequest request) {
+                    return false;
                 }
             });
             webView.loadUrl(getIntent().getData().toString());
