@@ -14,7 +14,7 @@ if(UNIX AND NOT ANDROID)
 else()
     set(build_thumbnailer_default OFF)
 endif()
-option(USE_QT6 "User Qt version 6" OFF)
+option(USE_QT6 "Use Qt version 6" OFF)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build GUI" ON)
 option(PENTOBI_BUILD_THUMBNAILER "Build Gnome thumbnailer"
