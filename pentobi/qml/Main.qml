@@ -185,7 +185,6 @@ ApplicationWindow {
     DialogLoader { id: analyzeDialog; url: "AnalyzeDialog.qml" }
     DialogLoader { id: appearanceDialog; url: "AppearanceDialog.qml" }
     DialogLoader { id: moveAnnotationDialog; url: "MoveAnnotationDialog.qml" }
-    Loader { id: helpWindow }
 
     // Used to delay calls to Logic.checkComputerMove such that the computer
     // starts thinking and the busy indicator is visible after the current move

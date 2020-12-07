@@ -20,7 +20,6 @@
 <file>qml/GameInfoDialog.qml</file>
 <file>qml/GameVariantDialog.qml</file>
 <file>qml/GotoMoveDialog.qml</file>
-<file>qml/HelpWindow.qml</file>
 <file>qml/InitialRatingDialog.qml</file>
 <file>qml/LineSegment.qml</file>
 <file>qml/Main.qml</file>

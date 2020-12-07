@@ -173,10 +173,6 @@ target_link_libraries(pentobi
     Threads::Threads
     )
 
-if(ANDROID)
-    target_link_libraries(pentobi Qt::WebView)
-endif()
-
 add_subdirectory(docbook)
 if(UNIX AND NOT ANDROID)
     add_subdirectory(unix)

@@ -354,23 +354,16 @@ function help() {
         lang = lang.substr(0, pos)
     if (! ["de", "es", "ru"].includes(lang))
         lang = "C"
-    var url
     if (isAndroid)
-        url = androidUtils.extractHelp(lang)
-    else if (helpDir)
-        url = "file://" + helpDir + "/" + lang + "/pentobi/index.html"
-    else
-        url = "qrc:///qml/help/" + lang + "/pentobi/index.html"
-    if (! isAndroid) {
+        androidUtils.openHelp(lang)
+    else {
+        var url
+        if (helpDir)
+            url = "file://" + helpDir + "/" + lang + "/pentobi/index.html"
+        else
+            url = "qrc:///qml/help/" + lang + "/pentobi/index.html"
         Qt.openUrlExternally(url)
-        return
     }
-    if (! helpWindow.item) {
-        helpWindow.source = "HelpWindow.qml"
-        helpWindow.item.startUrl = url
-    }
-    helpWindow.item.show()
-    helpWindow.item.init()
 }
 
 function init() {

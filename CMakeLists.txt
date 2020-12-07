@@ -93,7 +93,6 @@ if(PENTOBI_BUILD_GUI)
         set(ANDROID_PACKAGE_SOURCE_DIR
             "${CMAKE_CURRENT_SOURCE_DIR}/pentobi/android" CACHE INTERNAL "")
         find_package(Qt5AndroidExtras 5.15 REQUIRED)
-        find_package(Qt5WebView 5.15 REQUIRED)
     endif()
     find_package(Qt5 5.15 REQUIRED
         COMPONENTS Concurrent LinguistTools QuickControls2)

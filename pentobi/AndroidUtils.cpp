@@ -10,6 +10,7 @@
 #include <QStandardPaths>
 
 #ifdef Q_OS_ANDROID
+#include <QAndroidIntent>
 #include <QAndroidJniObject>
 #include <QAndroidJniExceptionCleaner>
 #include <QBuffer>
@@ -268,9 +269,9 @@ void AndroidUtils::exit()
 #endif
 }
 
-QUrl AndroidUtils::extractHelp([[maybe_unused]] const QString& language)
-{
 #ifdef Q_OS_ANDROID
+QUrl AndroidUtils::extractHelp(const QString& language)
+{
     if (language != QStringLiteral("C"))
         // Other languages use pictures from C
         extractHelp(QStringLiteral("C"));
@@ -307,10 +308,8 @@ QUrl AndroidUtils::extractHelp([[maybe_unused]] const QString& language)
     }
     auto file = QFileInfo(dirPath + "/index.html").absoluteFilePath();
     return QUrl::fromLocalFile(file);
-#else
-    return {};
-#endif
 }
+#endif
 
 QUrl AndroidUtils::getDefaultFolder()
 {
@@ -424,6 +423,23 @@ bool AndroidUtils::open(
     return true;
 }
 #endif
+
+void AndroidUtils::openHelp([[maybe_unused]] const QString& language)
+{
+#ifdef Q_OS_ANDROID
+    auto url = extractHelp(language);
+    QAndroidIntent intent(QtAndroid::androidActivity().object(),
+                          "net/sf/pentobi/HelpBrowserActivity");
+    auto uriObj = getUriObj(url.toString());
+    if (! uriObj.isValid())
+        return;
+    intent.handle().callObjectMethod(
+                "setData",
+                "(Landroid/net/Uri;)Landroid/content/Intent;",
+                uriObj.object());
+    QtAndroid::startActivity(intent.handle(), 0);
+#endif
+}
 
 void AndroidUtils::openImageSaveDialog(
         [[maybe_unused]] const QString& suggestedName)

@@ -22,7 +22,7 @@ public:
 
     Q_INVOKABLE static bool checkExists(const QString& file);
 
-    Q_INVOKABLE static QUrl extractHelp(const QString& language);
+    Q_INVOKABLE static void openHelp(const QString& language);
 
     Q_INVOKABLE static QUrl getDefaultFolder();
 
@@ -78,6 +78,8 @@ private:
 
 #ifdef Q_OS_ANDROID
     static bool checkException();
+
+    static QUrl extractHelp(const QString& language);
 #endif
 };
 

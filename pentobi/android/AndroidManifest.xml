@@ -85,7 +85,8 @@
             <meta-data android:name="android.app_extract_android_style" android:value="minimal"/>
             <!-- extract android style -->
         </activity>
-        <!-- For adding service(s) please check: https://wiki.qt.io/AndroidServices -->
-    </application>
-
+        <activity android:name=".HelpBrowserActivity" android:label="-- %%INSERT_APP_NAME%% --">
+            <meta-data android:name="android.app.lib_name" android:value="-- %%INSERT_APP_LIB_NAME%% --"/>
+        </activity>
+     </application>
 </manifest>

@@ -23,8 +23,6 @@
 #ifndef Q_OS_ANDROID
 #include <QCommandLineParser>
 #include <QLibraryInfo>
-#else
-#include <QtWebView>
 #endif
 
 //-----------------------------------------------------------------------------
@@ -241,7 +239,6 @@ int main(int argc, char *argv[])
     // incorrect canvas painting on low-DPI devices with devicePixelRatio<1
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
                 Qt::HighDpiScaleFactorRoundingPolicy::Round);
-    QtWebView::initialize();
 #endif
     QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
     QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
