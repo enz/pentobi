@@ -34,6 +34,8 @@ cmake -DCMAKE_BUILD_TYPE=Release .
 make
 ```
 
+To compile with Qt 6, add -DUSE_QT6=ON to the cmake options.
+
 Building the KDE Thumbnailer Plugin
 -----------------------------------
 
