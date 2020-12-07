@@ -23,9 +23,7 @@
 #ifndef Q_OS_ANDROID
 #include <QCommandLineParser>
 #include <QLibraryInfo>
-#endif
-
-#ifndef PENTOBI_OPEN_HELP_EXTERNALLY
+#else
 #include <QtWebView>
 #endif
 
@@ -49,8 +47,6 @@ int mainAndroid()
 #else
     ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(false));
 #endif
-    ctx->setContextProperty(QStringLiteral("openHelpExternally"),
-                            QVariant(false));
     engine.load(QStringLiteral("qrc:///qml/Main.qml"));
     if (engine.rootObjects().empty())
         return 1;
@@ -210,13 +206,6 @@ int mainDesktop()
 #endif
         }
         ctx->setContextProperty(QStringLiteral("helpDir"), helpDir);
-#ifdef PENTOBI_OPEN_HELP_EXTERNALLY
-        ctx->setContextProperty(QStringLiteral("openHelpExternally"),
-                                QVariant(true));
-#else
-        ctx->setContextProperty(QStringLiteral("openHelpExternally"),
-                                QVariant(false));
-#endif
         engine.load(QStringLiteral("qrc:///qml/Main.qml"));
         if (engine.rootObjects().empty())
             return 1;
@@ -252,14 +241,12 @@ int main(int argc, char *argv[])
     // incorrect canvas painting on low-DPI devices with devicePixelRatio<1
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
                 Qt::HighDpiScaleFactorRoundingPolicy::Round);
+    QtWebView::initialize();
 #endif
     QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
     QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
 #ifdef VERSION
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
-#endif
-#ifndef PENTOBI_OPEN_HELP_EXTERNALLY
-    QtWebView::initialize();
 #endif
     QGuiApplication app(argc, argv);
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");

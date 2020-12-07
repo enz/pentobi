@@ -173,9 +173,7 @@ target_link_libraries(pentobi
     Threads::Threads
     )
 
-if(PENTOBI_OPEN_HELP_EXTERNALLY)
-    target_compile_definitions(pentobi PRIVATE PENTOBI_OPEN_HELP_EXTERNALLY)
-else()
+if(ANDROID)
     target_link_libraries(pentobi Qt::WebView)
 endif()
 

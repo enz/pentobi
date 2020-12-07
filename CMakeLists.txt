@@ -19,8 +19,6 @@ option(PENTOBI_BUILD_GUI "Build GUI" ON)
 option(PENTOBI_BUILD_THUMBNAILER "Build Gnome thumbnailer"
     ${build_thumbnailer_default})
 option(PENTOBI_BUILD_KDE_THUMBNAILER "Build KDE thumbnailer" OFF)
-option(PENTOBI_OPEN_HELP_EXTERNALLY
-    "Force using web browser for displaying help" OFF)
 option(BUILD_TESTING "Build tests" OFF)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
@@ -95,12 +93,10 @@ if(PENTOBI_BUILD_GUI)
         set(ANDROID_PACKAGE_SOURCE_DIR
             "${CMAKE_CURRENT_SOURCE_DIR}/pentobi/android" CACHE INTERNAL "")
         find_package(Qt5AndroidExtras 5.15 REQUIRED)
+        find_package(Qt5WebView 5.15 REQUIRED)
     endif()
     find_package(Qt5 5.15 REQUIRED
         COMPONENTS Concurrent LinguistTools QuickControls2)
-    if(NOT PENTOBI_OPEN_HELP_EXTERNALLY)
-        find_package(Qt5 5.15 REQUIRED COMPONENTS WebView)
-    endif()
     add_subdirectory(libpentobi_paint)
     add_subdirectory(pentobi)
     if(PENTOBI_BUILD_THUMBNAILER)

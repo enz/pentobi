@@ -18,11 +18,11 @@ Building Pentobi requires the following tools and libraries:
 In Debian-based distributions, they can be installed with the command
 ```
 sudo apt install cmake docbook-xsl g++ gettext itstool \
-  libqt5webview5-dev librsvg2-bin make \
-  qml-module-qt-labs-folderlistmodel qml-module-qt-labs-settings \
-  qml-module-qtquick2 qml-module-qtquick-controls2 \
-  qml-module-qtquick-layouts qml-module-qtquick-window2 \
-  qml-module-qtwebview qtquickcontrols2-5-dev qttools5-dev xsltproc
+  librsvg2-bin make qml-module-qt-labs-folderlistmodel \
+  qml-module-qt-labs-settings qml-module-qtquick2 \
+  qml-module-qtquick-controls2 qml-module-qtquick-layouts \
+  qml-module-qtquick-window2 qtquickcontrols2-5-dev \
+  qttools5-dev xsltproc
 ```
 
 Building
@@ -33,10 +33,6 @@ Pentobi can be compiled from the source directory with the commands
 cmake -DCMAKE_BUILD_TYPE=Release .
 make
 ```
-
-On platforms without support for the Qt WebView module, Pentobi can
-be configured with -DPENTOBI_OPEN_HELP_EXTERNALLY=ON to use an
-external web browser for displaying help.
 
 Building the KDE Thumbnailer Plugin
 -----------------------------------

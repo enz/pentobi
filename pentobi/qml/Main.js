@@ -361,7 +361,7 @@ function help() {
         url = "file://" + helpDir + "/" + lang + "/pentobi/index.html"
     else
         url = "qrc:///qml/help/" + lang + "/pentobi/index.html"
-    if (openHelpExternally) {
+    if (! isAndroid) {
         Qt.openUrlExternally(url)
         return
     }

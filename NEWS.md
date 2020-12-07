@@ -5,6 +5,9 @@ Version 19.0-dev (master)
 -------------------------
 
 * The minimum required Qt version is now 5.15.
+* The desktop version now always displays the manual with an external
+  browser, which removes the dependency on the Qt WebView library and
+  the compilation option PENTOBI_OPEN_HELP_EXTERNALLY.
 * The Qt SVG library is no longer needed.
 * Loading game files in encodings other than UTF-8 is no longer
   supported.
