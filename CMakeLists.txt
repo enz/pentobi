@@ -70,6 +70,11 @@ if(PENTOBI_BUILD_GTP)
     add_subdirectory(learn_tool)
 endif()
 if(PENTOBI_BUILD_GUI OR PENTOBI_BUILD_KDE_THUMBNAILER)
+    if(ANDROID)
+        # Needs to be set before the find_package(Qt) call
+        set(ANDROID_PACKAGE_SOURCE_DIR
+            "${CMAKE_CURRENT_SOURCE_DIR}/pentobi/android")
+    endif()
     find_package(QT NAMES Qt6 Qt5 REQUIRED)
     find_package(Qt${QT_VERSION_MAJOR}Gui 5.15 REQUIRED)
 endif()
@@ -91,8 +96,6 @@ if(PENTOBI_BUILD_GUI)
         message(FATAL_ERROR "rsvg-convert not found (install librsvg2-bin)")
     endif()
     if(ANDROID)
-        set(ANDROID_PACKAGE_SOURCE_DIR
-            "${CMAKE_CURRENT_SOURCE_DIR}/pentobi/android" CACHE INTERNAL "")
         find_package(Qt${QT_VERSION_MAJOR}AndroidExtras 5.15 REQUIRED)
     endif()
     find_package(Qt${QT_VERSION_MAJOR} 5.15 REQUIRED
