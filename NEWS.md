@@ -5,7 +5,7 @@ Version 19.0-dev (master)
 -------------------------
 
 * The minimum required Qt version is now 5.15.
-* Support compilation with Qt 6 (add -DUSE_QT6=ON to cmake options).
+* Support compilation with Qt 6.
 * The desktop version now always displays the manual with an external
   browser, which removes the dependency on the Qt WebView library and
   the compilation option PENTOBI_OPEN_HELP_EXTERNALLY.
