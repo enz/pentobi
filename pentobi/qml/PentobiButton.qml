@@ -46,11 +46,10 @@ Item {
         flat: true
         contentItem: Item {
             // We want the icon about the same size as the font, but use
-            // multipliers in quarter-size steps (4) for better pixel
-            // alignment.
+            // multipliers of 8 for better pixel alignment.
             implicitWidth:
-                Math.round(1.2 * font.pixelSize * Screen.devicePixelRatio / 4)
-                / Screen.devicePixelRatio * 4
+                Math.round(1.2 * font.pixelSize * Screen.devicePixelRatio / 8)
+                / Screen.devicePixelRatio * 8
             implicitHeight: implicitWidth
 
             Image {
