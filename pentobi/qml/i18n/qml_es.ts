@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -484,13 +482,6 @@
     </message>
 </context>
 <context>
-    <name>HelpWindow</name>
-    <message>
-        <source>Pentobi Help</source>
-        <translation type="vanished">Ayuda para Pentobi</translation>
-    </message>
-</context>
-<context>
     <name>ImageSaveDialog</name>
     <message>
         <source>Save Image</source>
@@ -550,10 +541,6 @@
     <message>
         <source>Your rating stays at %1.</source>
         <translation>Su nivel sigue siendo %1.</translation>
-    </message>
-    <message>
-        <source>No permission to access storage</source>
-        <translation type="vanished">Sin permiso para acceder al almacenamiento</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
@@ -991,19 +978,6 @@
     </message>
 </context>
 <context>
-    <name>MenuItem</name>
-    <message>
-        <source>Ctrl</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation type="vanished">Ctrl</translation>
-    </message>
-    <message>
-        <source>Shift</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation type="vanished">Mayús</translation>
-    </message>
-</context>
-<context>
     <name>MenuRecentFiles</name>
     <message>
         <source>Open Recent</source>
@@ -1130,12 +1104,12 @@
     <message>
         <source>Ctrl</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation type="unfinished">Ctrl</translation>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <source>Shift</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation type="unfinished">Mayús</translation>
+        <translation>Mayús</translation>
     </message>
 </context>
 <context>
