@@ -888,7 +888,7 @@
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation type="unfinished"/>
+        <translation>Vuelva a presionar atrás para salir</translation>
     </message>
 </context>
 <context>

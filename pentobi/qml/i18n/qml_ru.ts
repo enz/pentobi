@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>Show variations</source>
-        <translation>Показать варианты</translation>
+        <translation>Показать вариации</translation>
     </message>
     <message>
         <source>Light</source>
@@ -550,7 +550,7 @@
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
-        <translation>Анализ игры возможен только в основном варианте.</translation>
+        <translation>Анализ игры возможен только в основной вариации.</translation>
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
@@ -578,7 +578,7 @@
     </message>
     <message>
         <source>Delete all variations?</source>
-        <translation>Удалить все варианты?</translation>
+        <translation>Удалить все вариации?</translation>
     </message>
     <message>
         <source>Save failed.</source>
@@ -706,7 +706,7 @@
     </message>
     <message>
         <source>Variations deleted</source>
-        <translation>Варианты удалены</translation>
+        <translation>Вариации удалены</translation>
     </message>
     <message>
         <source>File saved</source>
@@ -738,7 +738,7 @@
     </message>
     <message>
         <source>Variation is now %1</source>
-        <translation>Текущий вариант %1</translation>
+        <translation>Текущая вариация %1</translation>
     </message>
     <message>
         <source>Children truncated</source>
@@ -770,7 +770,7 @@
     </message>
     <message>
         <source>Main Variation</source>
-        <translation>Основной вариант</translation>
+        <translation>Основная вариация</translation>
     </message>
     <message>
         <source>Beginning of Branch</source>
@@ -828,7 +828,7 @@
     <message>
         <source>Play Move</source>
         <extracomment>Play a single move</extracomment>
-        <translation>Воспроизвести ход</translation>
+        <translation>Сыграть ход</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -906,21 +906,21 @@
     </message>
     <message>
         <source>Make Main Variation</source>
-        <translation>Сделать основным вариантом</translation>
+        <translation>Сделать основной вариацией</translation>
     </message>
     <message>
         <source>Variation Up</source>
         <extracomment>Short for Move Variation Up</extracomment>
-        <translation>Вариант выше</translation>
+        <translation>Вариация выше</translation>
     </message>
     <message>
         <source>Variation Down</source>
         <extracomment>Short for Move Variation Down</extracomment>
-        <translation>Вариант вниз</translation>
+        <translation>Вариант ниже</translation>
     </message>
     <message>
         <source>Delete Variations</source>
-        <translation>Удалить варианты</translation>
+        <translation>Удалить вариации</translation>
     </message>
     <message>
         <source>Truncate</source>
