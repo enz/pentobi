@@ -68,8 +68,10 @@ Translations
 ============
 
 Translations can be contributed at [Transifex](https://www.transifex.com/markus-enzenberger/pentobi/).
-Translation components will be included in Pentobi if at least 75
-percent of the strings are translated. The translation components are:
+Check the announcements at Transifex for information about what branch
+the translations currently correspond to. Translation components will
+be included in releases if at least 75 percent of the strings are
+translated. The translation components are:
 
 * __Pentobi__ ([QT format](https://doc.qt.io/qt-5/linguist-ts-file-format.html))
   User interface of Pentobi main program
