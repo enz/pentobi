@@ -2115,8 +2115,8 @@ msgstr "Lizenz"
 
 #. (itstool) path: chapter/para
 #: index.docbook:1305
-msgid "Copyright © 2011–2020 Markus Enzenberger"
-msgstr "Copyright © 2011–2020 Markus Enzenberger"
+msgid "Copyright © 2011–2021 Markus Enzenberger"
+msgstr "Copyright © 2011–2021 Markus Enzenberger"
 
 #. (itstool) path: chapter/para
 #: index.docbook:1308
