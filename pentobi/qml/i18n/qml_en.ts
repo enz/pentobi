@@ -202,25 +202,6 @@
     </message>
 </context>
 <context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>GameInfoDialog</name>
     <message>
         <source>Player Blue/Red:</source>
@@ -503,13 +484,6 @@
     </message>
 </context>
 <context>
-    <name>HelpWindow</name>
-    <message>
-        <source>Pentobi Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ImageSaveDialog</name>
     <message>
         <source>Save Image</source>
@@ -568,10 +542,6 @@
     </message>
     <message>
         <source>Your rating stays at %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No permission to access storage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1010,19 +980,6 @@
     </message>
 </context>
 <context>
-    <name>MenuItem</name>
-    <message>
-        <source>Ctrl</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Shift</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>MenuRecentFiles</name>
     <message>
         <source>Open Recent</source>
@@ -1122,6 +1079,110 @@
     </message>
     <message>
         <source>Blokus games</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PentobiFileDialog</name>
+    <message>
+        <source>Overwrite file?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PentobiMenuItem</name>
+    <message>
+        <source>Ctrl</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PentobiToolBar</name>
+    <message>
+        <source>Start a new game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start a rated game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the colors played by the computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to beginning of game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go ten moves backward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go one move backward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go one move forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go ten moves forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to end of moves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to previous variation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go to next variation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abort game analysis</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abort computer move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Undo move</source>
+        <extracomment>Tooltip for Undo button</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open menu</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1291,78 +1352,6 @@
     <message>
         <source>Tie</source>
         <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PentobiToolBar</name>
-    <message>
-        <source>Start a new game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start a rated game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Set the colors played by the computer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play the current color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Make the computer play the current color</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to beginning of game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go ten moves backward</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go one move backward</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go one move forward</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go ten moves forward</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to end of moves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to previous variation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go to next variation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abort game analysis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abort computer move</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Undo move</source>
-        <extracomment>Tooltip for Undo button</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open menu</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

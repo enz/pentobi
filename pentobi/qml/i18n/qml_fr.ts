@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fr">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -197,25 +199,6 @@
     <message>
         <source>Image width:</source>
         <translation>Largeur de l’image :</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>Remplacer le fichier ?</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Ouvrir</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Enregistrer</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation>Tous les fichiers</translation>
     </message>
 </context>
 <context>
@@ -504,7 +487,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation>Aide de Pentobi</translation>
+        <translation type="vanished">Aide de Pentobi</translation>
     </message>
 </context>
 <context>
@@ -570,7 +553,7 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation>Aucune autorisation d’accès au stockage</translation>
+        <translation type="vanished">Aucune autorisation d’accès au stockage</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
@@ -884,11 +867,11 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1012,12 +995,12 @@
     <message>
         <source>Ctrl</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Ctrl</translation>
+        <translation type="vanished">Ctrl</translation>
     </message>
     <message>
         <source>Shift</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Maj</translation>
+        <translation type="vanished">Maj</translation>
     </message>
 </context>
 <context>
@@ -1121,6 +1104,110 @@
     <message>
         <source>Blokus games</source>
         <translation>Parties de Blokus</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiFileDialog</name>
+    <message>
+        <source>Overwrite file?</source>
+        <translation>Remplacer le fichier ?</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Ouvrir</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Enregistrer</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Tous les fichiers</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiMenuItem</name>
+    <message>
+        <source>Ctrl</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished">Ctrl</translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished">Maj</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiToolBar</name>
+    <message>
+        <source>Start a new game</source>
+        <translation>Commencer une nouvelle partie</translation>
+    </message>
+    <message>
+        <source>Start a rated game</source>
+        <translation>Commencer une partie classée</translation>
+    </message>
+    <message>
+        <source>Set the colors played by the computer</source>
+        <translation>Définir les couleurs joué par l’ordinateur</translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation>Faire que l’ordinateur continue à jouer la couleur actuelle</translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation>Faire que l’ordinateur joue la couleur actuelle</translation>
+    </message>
+    <message>
+        <source>Go to beginning of game</source>
+        <translation>Aller en début de partie</translation>
+    </message>
+    <message>
+        <source>Go ten moves backward</source>
+        <translation>Revenir dix coups en arrière</translation>
+    </message>
+    <message>
+        <source>Go one move backward</source>
+        <translation>Revenir un coup en arrière</translation>
+    </message>
+    <message>
+        <source>Go one move forward</source>
+        <translation>Avancer d’un coup</translation>
+    </message>
+    <message>
+        <source>Go ten moves forward</source>
+        <translation>Avancer de dix coups</translation>
+    </message>
+    <message>
+        <source>Go to end of moves</source>
+        <translation>Aller à la fin de coups</translation>
+    </message>
+    <message>
+        <source>Go to previous variation</source>
+        <translation>Aller à la variation précédente</translation>
+    </message>
+    <message>
+        <source>Go to next variation</source>
+        <translation>Aller à la variation suivante</translation>
+    </message>
+    <message>
+        <source>Abort game analysis</source>
+        <translation>Abandonner l&apos;analyse</translation>
+    </message>
+    <message>
+        <source>Abort computer move</source>
+        <translation>Abandonner le coup de l&apos;ordinateur</translation>
+    </message>
+    <message>
+        <source>Undo move</source>
+        <extracomment>Tooltip for Undo button</extracomment>
+        <translation>Annuler le coup</translation>
+    </message>
+    <message>
+        <source>Open menu</source>
+        <translation>Ouvrir le menu</translation>
     </message>
 </context>
 <context>
@@ -1293,142 +1380,70 @@
     </message>
 </context>
 <context>
-    <name>PentobiToolBar</name>
-    <message>
-        <source>Start a new game</source>
-        <translation>Commencer une nouvelle partie</translation>
-    </message>
-    <message>
-        <source>Start a rated game</source>
-        <translation>Commencer une partie classée</translation>
-    </message>
-    <message>
-        <source>Set the colors played by the computer</source>
-        <translation>Définir les couleurs joué par l’ordinateur</translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play the current color</source>
-        <translation>Faire que l’ordinateur continue à jouer la couleur actuelle</translation>
-    </message>
-    <message>
-        <source>Make the computer play the current color</source>
-        <translation>Faire que l’ordinateur joue la couleur actuelle</translation>
-    </message>
-    <message>
-        <source>Go to beginning of game</source>
-        <translation>Aller en début de partie</translation>
-    </message>
-    <message>
-        <source>Go ten moves backward</source>
-        <translation>Revenir dix coups en arrière</translation>
-    </message>
-    <message>
-        <source>Go one move backward</source>
-        <translation>Revenir un coup en arrière</translation>
-    </message>
-    <message>
-        <source>Go one move forward</source>
-        <translation>Avancer d’un coup</translation>
-    </message>
-    <message>
-        <source>Go ten moves forward</source>
-        <translation>Avancer de dix coups</translation>
-    </message>
-    <message>
-        <source>Go to end of moves</source>
-        <translation>Aller à la fin de coups</translation>
-    </message>
-    <message>
-        <source>Go to previous variation</source>
-        <translation>Aller à la variation précédente</translation>
-    </message>
-    <message>
-        <source>Go to next variation</source>
-        <translation>Aller à la variation suivante</translation>
-    </message>
-    <message>
-        <source>Abort game analysis</source>
-        <translation>Abandonner l&apos;analyse</translation>
-    </message>
-    <message>
-        <source>Abort computer move</source>
-        <translation>Abandonner le coup de l&apos;ordinateur</translation>
-    </message>
-    <message>
-        <source>Undo move</source>
-        <extracomment>Tooltip for Undo button</extracomment>
-        <translation>Annuler le coup</translation>
-    </message>
-    <message>
-        <source>Open menu</source>
-        <translation>Ouvrir le menu</translation>
-    </message>
-</context>
-<context>
     <name>main</name>
     <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

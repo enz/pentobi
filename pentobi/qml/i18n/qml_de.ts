@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="de">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -197,25 +199,6 @@
     <message>
         <source>Image width:</source>
         <translation>Bildbreite:</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>Datei überschreiben?</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Speichern</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation>Alle Dateien</translation>
     </message>
 </context>
 <context>
@@ -504,7 +487,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation>Pentobi-Hilfe</translation>
+        <translation type="vanished">Pentobi-Hilfe</translation>
     </message>
 </context>
 <context>
@@ -570,7 +553,7 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation>Keine Berechtigung zu Zugriff auf Speicher</translation>
+        <translation type="vanished">Keine Berechtigung zu Zugriff auf Speicher</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
@@ -1012,12 +995,12 @@
     <message>
         <source>Ctrl</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Strg</translation>
+        <translation type="vanished">Strg</translation>
     </message>
     <message>
         <source>Shift</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Umschalt</translation>
+        <translation type="vanished">Umschalt</translation>
     </message>
 </context>
 <context>
@@ -1121,6 +1104,110 @@
     <message>
         <source>Blokus games</source>
         <translation>Blokus-Partien</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiFileDialog</name>
+    <message>
+        <source>Overwrite file?</source>
+        <translation>Datei überschreiben?</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Öffnen</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Speichern</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Alle Dateien</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiMenuItem</name>
+    <message>
+        <source>Ctrl</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished">Strg</translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished">Umschalt</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiToolBar</name>
+    <message>
+        <source>Start a new game</source>
+        <translation>Ein neues Spiel beginnen</translation>
+    </message>
+    <message>
+        <source>Start a rated game</source>
+        <translation>Ein gewertetes Spiel beginnen</translation>
+    </message>
+    <message>
+        <source>Set the colors played by the computer</source>
+        <translation>Die vom Computer gespielten Farben festlegen</translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation>Den Computer die gegenwärtige Farbe weiterspielen lassen</translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation>Den Computer die gegenwärtige Farbe spielen lassen</translation>
+    </message>
+    <message>
+        <source>Go to beginning of game</source>
+        <translation>Zum Anfang des Spiels gehen</translation>
+    </message>
+    <message>
+        <source>Go ten moves backward</source>
+        <translation>Zehn Züge zurück gehen</translation>
+    </message>
+    <message>
+        <source>Go one move backward</source>
+        <translation>Einen Zug zurück gehen</translation>
+    </message>
+    <message>
+        <source>Go one move forward</source>
+        <translation>Einen Zug vorwärts gehen</translation>
+    </message>
+    <message>
+        <source>Go ten moves forward</source>
+        <translation>Zehn Züge vorwärts gehen</translation>
+    </message>
+    <message>
+        <source>Go to end of moves</source>
+        <translation>Zum Ende der Züge gehen</translation>
+    </message>
+    <message>
+        <source>Go to previous variation</source>
+        <translation>Zur vorherigen Variante gehen</translation>
+    </message>
+    <message>
+        <source>Go to next variation</source>
+        <translation>Zur nächsten Variante gehen</translation>
+    </message>
+    <message>
+        <source>Abort game analysis</source>
+        <translation>Spielanalyse abbrechen</translation>
+    </message>
+    <message>
+        <source>Abort computer move</source>
+        <translation>Computer-Zug abbrechen</translation>
+    </message>
+    <message>
+        <source>Undo move</source>
+        <extracomment>Tooltip for Undo button</extracomment>
+        <translation>Zug rückgängig</translation>
+    </message>
+    <message>
+        <source>Open menu</source>
+        <translation>Menü öffnen</translation>
     </message>
 </context>
 <context>
@@ -1290,78 +1377,6 @@
         <source>Tie</source>
         <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
         <translation>Unentsch.</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiToolBar</name>
-    <message>
-        <source>Start a new game</source>
-        <translation>Ein neues Spiel beginnen</translation>
-    </message>
-    <message>
-        <source>Start a rated game</source>
-        <translation>Ein gewertetes Spiel beginnen</translation>
-    </message>
-    <message>
-        <source>Set the colors played by the computer</source>
-        <translation>Die vom Computer gespielten Farben festlegen</translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play the current color</source>
-        <translation>Den Computer die gegenwärtige Farbe weiterspielen lassen</translation>
-    </message>
-    <message>
-        <source>Make the computer play the current color</source>
-        <translation>Den Computer die gegenwärtige Farbe spielen lassen</translation>
-    </message>
-    <message>
-        <source>Go to beginning of game</source>
-        <translation>Zum Anfang des Spiels gehen</translation>
-    </message>
-    <message>
-        <source>Go ten moves backward</source>
-        <translation>Zehn Züge zurück gehen</translation>
-    </message>
-    <message>
-        <source>Go one move backward</source>
-        <translation>Einen Zug zurück gehen</translation>
-    </message>
-    <message>
-        <source>Go one move forward</source>
-        <translation>Einen Zug vorwärts gehen</translation>
-    </message>
-    <message>
-        <source>Go ten moves forward</source>
-        <translation>Zehn Züge vorwärts gehen</translation>
-    </message>
-    <message>
-        <source>Go to end of moves</source>
-        <translation>Zum Ende der Züge gehen</translation>
-    </message>
-    <message>
-        <source>Go to previous variation</source>
-        <translation>Zur vorherigen Variante gehen</translation>
-    </message>
-    <message>
-        <source>Go to next variation</source>
-        <translation>Zur nächsten Variante gehen</translation>
-    </message>
-    <message>
-        <source>Abort game analysis</source>
-        <translation>Spielanalyse abbrechen</translation>
-    </message>
-    <message>
-        <source>Abort computer move</source>
-        <translation>Computer-Zug abbrechen</translation>
-    </message>
-    <message>
-        <source>Undo move</source>
-        <extracomment>Tooltip for Undo button</extracomment>
-        <translation>Zug rückgängig</translation>
-    </message>
-    <message>
-        <source>Open menu</source>
-        <translation>Menü öffnen</translation>
     </message>
 </context>
 <context>

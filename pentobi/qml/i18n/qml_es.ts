@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -197,25 +199,6 @@
     <message>
         <source>Image width:</source>
         <translation>Ancho de la imagen:</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>¿Sobrescribir archivo?</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Abrir</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Guardar</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation>Todos los archivos</translation>
     </message>
 </context>
 <context>
@@ -504,7 +487,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation>Ayuda para Pentobi</translation>
+        <translation type="vanished">Ayuda para Pentobi</translation>
     </message>
 </context>
 <context>
@@ -570,7 +553,7 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation>Sin permiso para acceder al almacenamiento</translation>
+        <translation type="vanished">Sin permiso para acceder al almacenamiento</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
@@ -1012,12 +995,12 @@
     <message>
         <source>Ctrl</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Ctrl</translation>
+        <translation type="vanished">Ctrl</translation>
     </message>
     <message>
         <source>Shift</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Mayús</translation>
+        <translation type="vanished">Mayús</translation>
     </message>
 </context>
 <context>
@@ -1121,6 +1104,110 @@
     <message>
         <source>Blokus games</source>
         <translation>Partidas de Blokus</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiFileDialog</name>
+    <message>
+        <source>Overwrite file?</source>
+        <translation>¿Sobrescribir archivo?</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Abrir</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Guardar</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Todos los archivos</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiMenuItem</name>
+    <message>
+        <source>Ctrl</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished">Ctrl</translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished">Mayús</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiToolBar</name>
+    <message>
+        <source>Start a new game</source>
+        <translation>Comenzar una partida nueva</translation>
+    </message>
+    <message>
+        <source>Start a rated game</source>
+        <translation>Comenzar una partida con selección de nivel</translation>
+    </message>
+    <message>
+        <source>Set the colors played by the computer</source>
+        <translation>Elija los colores con los que jugará la máquina</translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation>Haga que la máquina siga jugando con el color actual</translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation>Haga que la máquina juegue con el color actual</translation>
+    </message>
+    <message>
+        <source>Go to beginning of game</source>
+        <translation>Ir al inicio de la partida</translation>
+    </message>
+    <message>
+        <source>Go ten moves backward</source>
+        <translation>Retroceder diez movimientos</translation>
+    </message>
+    <message>
+        <source>Go one move backward</source>
+        <translation>Retroceder un movimiento</translation>
+    </message>
+    <message>
+        <source>Go one move forward</source>
+        <translation>Avanzar un movimiento</translation>
+    </message>
+    <message>
+        <source>Go ten moves forward</source>
+        <translation>Avanzar diez movimientos</translation>
+    </message>
+    <message>
+        <source>Go to end of moves</source>
+        <translation>Ir al final de los movimientos</translation>
+    </message>
+    <message>
+        <source>Go to previous variation</source>
+        <translation>Ir a la variación anterior</translation>
+    </message>
+    <message>
+        <source>Go to next variation</source>
+        <translation>Ir a la siguiente variación</translation>
+    </message>
+    <message>
+        <source>Abort game analysis</source>
+        <translation>Anular análisis de la partida</translation>
+    </message>
+    <message>
+        <source>Abort computer move</source>
+        <translation>Anular movimiento de la máquina</translation>
+    </message>
+    <message>
+        <source>Undo move</source>
+        <extracomment>Tooltip for Undo button</extracomment>
+        <translation>Deshacer movimiento</translation>
+    </message>
+    <message>
+        <source>Open menu</source>
+        <translation>Abrir menú</translation>
     </message>
 </context>
 <context>
@@ -1290,78 +1377,6 @@
         <source>Tie</source>
         <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
         <translation>Empate</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiToolBar</name>
-    <message>
-        <source>Start a new game</source>
-        <translation>Comenzar una partida nueva</translation>
-    </message>
-    <message>
-        <source>Start a rated game</source>
-        <translation>Comenzar una partida con selección de nivel</translation>
-    </message>
-    <message>
-        <source>Set the colors played by the computer</source>
-        <translation>Elija los colores con los que jugará la máquina</translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play the current color</source>
-        <translation>Haga que la máquina siga jugando con el color actual</translation>
-    </message>
-    <message>
-        <source>Make the computer play the current color</source>
-        <translation>Haga que la máquina juegue con el color actual</translation>
-    </message>
-    <message>
-        <source>Go to beginning of game</source>
-        <translation>Ir al inicio de la partida</translation>
-    </message>
-    <message>
-        <source>Go ten moves backward</source>
-        <translation>Retroceder diez movimientos</translation>
-    </message>
-    <message>
-        <source>Go one move backward</source>
-        <translation>Retroceder un movimiento</translation>
-    </message>
-    <message>
-        <source>Go one move forward</source>
-        <translation>Avanzar un movimiento</translation>
-    </message>
-    <message>
-        <source>Go ten moves forward</source>
-        <translation>Avanzar diez movimientos</translation>
-    </message>
-    <message>
-        <source>Go to end of moves</source>
-        <translation>Ir al final de los movimientos</translation>
-    </message>
-    <message>
-        <source>Go to previous variation</source>
-        <translation>Ir a la variación anterior</translation>
-    </message>
-    <message>
-        <source>Go to next variation</source>
-        <translation>Ir a la siguiente variación</translation>
-    </message>
-    <message>
-        <source>Abort game analysis</source>
-        <translation>Anular análisis de la partida</translation>
-    </message>
-    <message>
-        <source>Abort computer move</source>
-        <translation>Anular movimiento de la máquina</translation>
-    </message>
-    <message>
-        <source>Undo move</source>
-        <extracomment>Tooltip for Undo button</extracomment>
-        <translation>Deshacer movimiento</translation>
-    </message>
-    <message>
-        <source>Open menu</source>
-        <translation>Abrir menú</translation>
     </message>
 </context>
 <context>

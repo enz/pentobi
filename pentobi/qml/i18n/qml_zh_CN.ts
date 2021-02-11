@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -197,25 +199,6 @@
     <message>
         <source>Image width:</source>
         <translation>图像宽度：</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>覆盖文件？</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>打开</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>保存</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation>所有文件</translation>
     </message>
 </context>
 <context>
@@ -504,7 +487,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation>Pentobi 帮助</translation>
+        <translation type="vanished">Pentobi 帮助</translation>
     </message>
 </context>
 <context>
@@ -546,7 +529,7 @@
     <message>
         <source>Pentobi</source>
         <extracomment>Window title if no file is loaded.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
@@ -570,7 +553,7 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation>没有访问存储器的权限</translation>
+        <translation type="vanished">没有访问存储器的权限</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
@@ -686,7 +669,7 @@
     <message>
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Not enough memory</source>
@@ -884,11 +867,11 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1012,12 +995,12 @@
     <message>
         <source>Ctrl</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Ctrl</translation>
+        <translation type="vanished">Ctrl</translation>
     </message>
     <message>
         <source>Shift</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Shift</translation>
+        <translation type="vanished">Shift</translation>
     </message>
 </context>
 <context>
@@ -1121,6 +1104,110 @@
     <message>
         <source>Blokus games</source>
         <translation>角斗士游戏</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiFileDialog</name>
+    <message>
+        <source>Overwrite file?</source>
+        <translation>覆盖文件？</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>打开</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>保存</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>所有文件</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiMenuItem</name>
+    <message>
+        <source>Ctrl</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished">Ctrl</translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished">Shift</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiToolBar</name>
+    <message>
+        <source>Start a new game</source>
+        <translation>开始新游戏</translation>
+    </message>
+    <message>
+        <source>Start a rated game</source>
+        <translation>开始一局等级赛</translation>
+    </message>
+    <message>
+        <source>Set the colors played by the computer</source>
+        <translation>设置电脑控制的颜色</translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation>使电脑执当前颜色继续</translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation>使电脑执当前颜色</translation>
+    </message>
+    <message>
+        <source>Go to beginning of game</source>
+        <translation>转到棋局开始</translation>
+    </message>
+    <message>
+        <source>Go ten moves backward</source>
+        <translation>向后跳转10步</translation>
+    </message>
+    <message>
+        <source>Go one move backward</source>
+        <translation>向后跳转一步</translation>
+    </message>
+    <message>
+        <source>Go one move forward</source>
+        <translation>向前跳转一步</translation>
+    </message>
+    <message>
+        <source>Go ten moves forward</source>
+        <translation>向前跳转10步</translation>
+    </message>
+    <message>
+        <source>Go to end of moves</source>
+        <translation>转到棋局末尾</translation>
+    </message>
+    <message>
+        <source>Go to previous variation</source>
+        <translation>转到上一变例</translation>
+    </message>
+    <message>
+        <source>Go to next variation</source>
+        <translation>转到下一变例</translation>
+    </message>
+    <message>
+        <source>Abort game analysis</source>
+        <translation>取消棋局分析</translation>
+    </message>
+    <message>
+        <source>Abort computer move</source>
+        <translation>取消电脑行棋</translation>
+    </message>
+    <message>
+        <source>Undo move</source>
+        <extracomment>Tooltip for Undo button</extracomment>
+        <translation>撤销一步</translation>
+    </message>
+    <message>
+        <source>Open menu</source>
+        <translation>打开菜单</translation>
     </message>
 </context>
 <context>
@@ -1293,142 +1380,70 @@
     </message>
 </context>
 <context>
-    <name>PentobiToolBar</name>
-    <message>
-        <source>Start a new game</source>
-        <translation>开始新游戏</translation>
-    </message>
-    <message>
-        <source>Start a rated game</source>
-        <translation>开始一局等级赛</translation>
-    </message>
-    <message>
-        <source>Set the colors played by the computer</source>
-        <translation>设置电脑控制的颜色</translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play the current color</source>
-        <translation>使电脑执当前颜色继续</translation>
-    </message>
-    <message>
-        <source>Make the computer play the current color</source>
-        <translation>使电脑执当前颜色</translation>
-    </message>
-    <message>
-        <source>Go to beginning of game</source>
-        <translation>转到棋局开始</translation>
-    </message>
-    <message>
-        <source>Go ten moves backward</source>
-        <translation>向后跳转10步</translation>
-    </message>
-    <message>
-        <source>Go one move backward</source>
-        <translation>向后跳转一步</translation>
-    </message>
-    <message>
-        <source>Go one move forward</source>
-        <translation>向前跳转一步</translation>
-    </message>
-    <message>
-        <source>Go ten moves forward</source>
-        <translation>向前跳转10步</translation>
-    </message>
-    <message>
-        <source>Go to end of moves</source>
-        <translation>转到棋局末尾</translation>
-    </message>
-    <message>
-        <source>Go to previous variation</source>
-        <translation>转到上一变例</translation>
-    </message>
-    <message>
-        <source>Go to next variation</source>
-        <translation>转到下一变例</translation>
-    </message>
-    <message>
-        <source>Abort game analysis</source>
-        <translation>取消棋局分析</translation>
-    </message>
-    <message>
-        <source>Abort computer move</source>
-        <translation>取消电脑行棋</translation>
-    </message>
-    <message>
-        <source>Undo move</source>
-        <extracomment>Tooltip for Undo button</extracomment>
-        <translation>撤销一步</translation>
-    </message>
-    <message>
-        <source>Open menu</source>
-        <translation>打开菜单</translation>
-    </message>
-</context>
-<context>
     <name>main</name>
     <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

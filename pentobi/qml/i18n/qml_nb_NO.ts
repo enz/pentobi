@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="nb_NO" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="nb_NO">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -197,25 +199,6 @@
     <message>
         <source>Image width:</source>
         <translation>Bildebredde:</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>Overskriv fil?</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Åpne</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Lagre</translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation>Alle filer</translation>
     </message>
 </context>
 <context>
@@ -504,7 +487,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation>Pentobi-hjelp</translation>
+        <translation type="vanished">Pentobi-hjelp</translation>
     </message>
 </context>
 <context>
@@ -570,7 +553,7 @@
     </message>
     <message>
         <source>No permission to access storage</source>
-        <translation>Mangler lagringstilgang</translation>
+        <translation type="vanished">Mangler lagringstilgang</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
@@ -884,11 +867,11 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1012,12 +995,12 @@
     <message>
         <source>Ctrl</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Ctrl</translation>
+        <translation type="vanished">Ctrl</translation>
     </message>
     <message>
         <source>Shift</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Shift</translation>
+        <translation type="vanished">Shift</translation>
     </message>
 </context>
 <context>
@@ -1121,6 +1104,110 @@
     <message>
         <source>Blokus games</source>
         <translation>Blokus-spill</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiFileDialog</name>
+    <message>
+        <source>Overwrite file?</source>
+        <translation>Overskriv fil?</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Åpne</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Lagre</translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation>Alle filer</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiMenuItem</name>
+    <message>
+        <source>Ctrl</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished">Ctrl</translation>
+    </message>
+    <message>
+        <source>Shift</source>
+        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
+        <translation type="unfinished">Shift</translation>
+    </message>
+</context>
+<context>
+    <name>PentobiToolBar</name>
+    <message>
+        <source>Start a new game</source>
+        <translation>Start nytt spill</translation>
+    </message>
+    <message>
+        <source>Start a rated game</source>
+        <translation>Start vurdert spill</translation>
+    </message>
+    <message>
+        <source>Set the colors played by the computer</source>
+        <translation>Sett fargene spilt av datamaskinen</translation>
+    </message>
+    <message>
+        <source>Make the computer continue to play the current color</source>
+        <translation>Få datamaskinen til å fortsette å spille gjeldende farge</translation>
+    </message>
+    <message>
+        <source>Make the computer play the current color</source>
+        <translation>Få datamaskinen til å spille gjeldende farge</translation>
+    </message>
+    <message>
+        <source>Go to beginning of game</source>
+        <translation>Gå til begynnelsen av spillet</translation>
+    </message>
+    <message>
+        <source>Go ten moves backward</source>
+        <translation>Gå ti trekk tilbake</translation>
+    </message>
+    <message>
+        <source>Go one move backward</source>
+        <translation>Gå ett steg bakover</translation>
+    </message>
+    <message>
+        <source>Go one move forward</source>
+        <translation>Gå ett steg forover</translation>
+    </message>
+    <message>
+        <source>Go ten moves forward</source>
+        <translation>Gå ti trekk forover</translation>
+    </message>
+    <message>
+        <source>Go to end of moves</source>
+        <translation>Gå til trekkslutt</translation>
+    </message>
+    <message>
+        <source>Go to previous variation</source>
+        <translation>Gå til forrige variasjon</translation>
+    </message>
+    <message>
+        <source>Go to next variation</source>
+        <translation>Gå til neste variasjon</translation>
+    </message>
+    <message>
+        <source>Abort game analysis</source>
+        <translation>Avbryt spillanalyse</translation>
+    </message>
+    <message>
+        <source>Abort computer move</source>
+        <translation>Avbryt datamaskintrekk</translation>
+    </message>
+    <message>
+        <source>Undo move</source>
+        <extracomment>Tooltip for Undo button</extracomment>
+        <translation>Angre trekk</translation>
+    </message>
+    <message>
+        <source>Open menu</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1290,78 +1377,6 @@
         <source>Tie</source>
         <extracomment>Result of rated game is a tie. Abbreviate long translations to ensure that all columns of rated games list are visible on mobile devices with small screens.</extracomment>
         <translation>Uavgjort</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiToolBar</name>
-    <message>
-        <source>Start a new game</source>
-        <translation>Start nytt spill</translation>
-    </message>
-    <message>
-        <source>Start a rated game</source>
-        <translation>Start vurdert spill</translation>
-    </message>
-    <message>
-        <source>Set the colors played by the computer</source>
-        <translation>Sett fargene spilt av datamaskinen</translation>
-    </message>
-    <message>
-        <source>Make the computer continue to play the current color</source>
-        <translation>Få datamaskinen til å fortsette å spille gjeldende farge</translation>
-    </message>
-    <message>
-        <source>Make the computer play the current color</source>
-        <translation>Få datamaskinen til å spille gjeldende farge</translation>
-    </message>
-    <message>
-        <source>Go to beginning of game</source>
-        <translation>Gå til begynnelsen av spillet</translation>
-    </message>
-    <message>
-        <source>Go ten moves backward</source>
-        <translation>Gå ti trekk tilbake</translation>
-    </message>
-    <message>
-        <source>Go one move backward</source>
-        <translation>Gå ett steg bakover</translation>
-    </message>
-    <message>
-        <source>Go one move forward</source>
-        <translation>Gå ett steg forover</translation>
-    </message>
-    <message>
-        <source>Go ten moves forward</source>
-        <translation>Gå ti trekk forover</translation>
-    </message>
-    <message>
-        <source>Go to end of moves</source>
-        <translation>Gå til trekkslutt</translation>
-    </message>
-    <message>
-        <source>Go to previous variation</source>
-        <translation>Gå til forrige variasjon</translation>
-    </message>
-    <message>
-        <source>Go to next variation</source>
-        <translation>Gå til neste variasjon</translation>
-    </message>
-    <message>
-        <source>Abort game analysis</source>
-        <translation>Avbryt spillanalyse</translation>
-    </message>
-    <message>
-        <source>Abort computer move</source>
-        <translation>Avbryt datamaskintrekk</translation>
-    </message>
-    <message>
-        <source>Undo move</source>
-        <extracomment>Tooltip for Undo button</extracomment>
-        <translation>Angre trekk</translation>
-    </message>
-    <message>
-        <source>Open menu</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
