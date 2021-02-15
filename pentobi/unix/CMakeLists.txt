@@ -39,14 +39,12 @@ install(FILES application-x-blokus-sgf-128.svg
 
 # Desktop entry
 
-configure_file(io.sourceforge.pentobi.desktop.in
-    io.sourceforge.pentobi.desktop.in.2 @ONLY)
 add_custom_command(OUTPUT io.sourceforge.pentobi.desktop
     COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" --desktop
     -d "${CMAKE_CURRENT_SOURCE_DIR}/po"
-    --template io.sourceforge.pentobi.desktop.in.2
+    --template "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.desktop.in"
     -o io.sourceforge.pentobi.desktop
-    DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.desktop.in.2"
+    DEPENDS io.sourceforge.pentobi.desktop.in
     ${po_files} po/LINGUAS)
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.desktop
