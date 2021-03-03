@@ -11,6 +11,7 @@
 #include <array>
 #include <initializer_list>
 #include <iostream>
+#include <limits>
 #include "Assert.h"
 
 namespace libboardgame_base {

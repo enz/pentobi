@@ -6,6 +6,8 @@ Version 18.5-dev (v18-fixes)
 
 * Require GNU gettext >=0.19.6, which has built-in support for AppData,
   such that installing the appstream package is no longer needed.
+* Added missing include that broke the compilation with GCC 11
+  (Debian bug 984290).
 
 Version 18.4 (25 Nov 2020)
 --------------------------
