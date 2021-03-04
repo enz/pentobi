@@ -17,6 +17,7 @@ add_custom_command(
 # Images and icons to be used with QtQuick Image. Here we use a sourceSize four
 # times larger than the device-indepenent size to support high-dpi images.
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icon")
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/icons")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/themes/dark")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/themes/light")
 set(pentobi_images
@@ -80,8 +81,8 @@ add_custom_command(
 # Icons to be used with QtQuickControls2 ToolButton.icon. Here we cannot
 # specify a sourceSize different from size, so we use a custom icon theme to
 # support high-dpi icons.
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons/pentobi-theme/16x16")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons/pentobi-theme/16x16@2")
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons/pentobi/16x16")
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons/pentobi/16x16@2")
 set(pentobi_icons
     filedialog-newfolder
     filedialog-parent
