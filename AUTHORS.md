@@ -10,7 +10,7 @@ Translators
 -----------
 
 * Allan Nordhøy <epost@anotheragency.no> (Norwegian Bokmål)
-* Cherry <taikocherry@126.com> (Simplified Chinese)
+* Cherry Lee <taikocherry@126.com> (Simplified Chinese)
 * Francisco Zamorano <pacozamo@gmail.com> (Spanish)
 * Markus Enzenberger <enz@users.sourceforge.net> (German, French)
 * Viktor Erukhin <official159ru@mail.ru> (Russian)
