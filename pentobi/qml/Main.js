@@ -39,10 +39,7 @@ function autoSaveNoVerify() {
 
 function autoSaveNoVerifyAndQuit() {
     autoSaveNoVerify()
-    if (isAndroid)
-        androidUtils.exit()
-    else
-        Qt.quit()
+    Qt.quit()
 }
 
 function cancelRunning(showMessage) {
@@ -622,8 +619,6 @@ function quit() {
         return false
     }
     autoSaveNoVerify()
-    if (isAndroid)
-        androidUtils.exit()
     return true
 }
 

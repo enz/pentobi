@@ -261,14 +261,6 @@ bool AndroidUtils::checkExists(const QString& file)
 #endif
 }
 
-void AndroidUtils::exit()
-{
-#ifdef Q_OS_ANDROID
-    QAndroidJniObject::callStaticMethod<void>(
-                "java/lang/System", "exit", "(I)V", 0);
-#endif
-}
-
 #ifdef Q_OS_ANDROID
 QUrl AndroidUtils::extractHelp(const QString& language)
 {
