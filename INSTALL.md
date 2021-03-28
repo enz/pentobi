@@ -15,7 +15,7 @@ Building Pentobi requires the following tools and libraries:
 * [DocBooc XSL](http://www.sagehill.net/docbookxsl/)
 * [LibRsvg](https://wiki.gnome.org/Projects/LibRsvg)
 
-In Debian-based distributions, they can be installed with the command
+In Ubuntu 21.04, they can be installed with the command
 ```
 sudo apt install cmake docbook-xsl g++ gettext itstool \
   librsvg2-bin make qml-module-qt-labs-folderlistmodel \
