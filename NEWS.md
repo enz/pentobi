@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 19.1-dev (v19-fixes)
 ----------------------------
 
-*
+* Tuned landscape display layout.
 
 Version 19.0 (16 Apr 2021)
 --------------------------

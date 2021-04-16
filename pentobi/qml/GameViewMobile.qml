@@ -133,7 +133,7 @@ Item
                (parent.width - width) / 2 :
                Math.max((parent.width - 2 * width - 0.02 * width) / 2, 0)
         width: isPortrait ? Math.min(parent.width, 0.7 * parent.height)
-                          : Math.min(parent.width / 2, parent.height)
+                          : Math.min(parent.width * 0.57, parent.height)
         height: isPortrait ? width : parent.height
         onClicked: Logic.onBoardClicked(pos)
         onRightClicked: Logic.onBoardRightClicked(pos)
