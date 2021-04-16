@@ -1,8 +1,8 @@
 Pentobi Release Notes
 =====================
 
-Version 19.0-dev (master)
--------------------------
+Version 19.0 (16 Apr 2021)
+--------------------------
 
 * The minimum required Qt version is now 5.15.
 * Support compilation with Qt 6.
@@ -24,11 +24,6 @@ Version 19.0-dev (master)
   on Android. 
 * Remaining pieces on Android are now always shown in order to play
   even in game variants where a player plays two colors.
-
-Version 18.6-dev (v18-fixes)
-----------------------------
-
-*
 
 Version 18.5 (04 Mar 2021)
 --------------------------
