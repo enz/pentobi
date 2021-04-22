@@ -150,6 +150,15 @@ information to standard error.
 </para>
 </listitem>
 </varlistentry>
+<varlistentry>
+<term><option>-v</option></term>
+<term><option>--version</option></term>
+<listitem>
+<para>
+Display version and exit.
+</para>
+</listitem>
+</varlistentry>
 </variablelist>
 </refsection>
 
@@ -181,15 +190,6 @@ Window geometry using the X11 syntax.
 <listitem>
 <para>
 Set the style for the GUI elements of QQuickControls.
-</para>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term><option>-v</option></term>
-<term><option>--version</option></term>
-<listitem>
-<para>
-Display version and exit.
 </para>
 </listitem>
 </varlistentry>
