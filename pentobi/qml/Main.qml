@@ -135,8 +135,10 @@ ApplicationWindow {
         id: playerModel
 
         gameVariant: gameModel.gameVariant
-        onMoveGenerated: Logic.moveGenerated(move)
-        onSearchCallback: gameView.searchCallback(elapsedSeconds, remainingSeconds)
+        onMoveGenerated: move => Logic.moveGenerated(move)
+        onSearchCallback:
+            (elapsedSeconds, remainingSeconds) =>
+            gameView.searchCallback(elapsedSeconds, remainingSeconds)
         onIsGenMoveRunningChanged:
             if (isGenMoveRunning) gameView.startSearch()
             else gameView.endSearch()
