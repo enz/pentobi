@@ -6,6 +6,7 @@ Version 19.1-dev (v19-fixes)
 
 * Tuned landscape display layout.
 * Avoid deprecated mimetypes tag in AppStream file.
+* Avoid warnings with Qt 6 caused by deprecated signal handler syntax.
 
 Version 19.0 (16 Apr 2021)
 --------------------------

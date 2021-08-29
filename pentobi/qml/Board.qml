@@ -280,7 +280,7 @@ Item {
                 pos.y = Math.floor(pos.y)
                 root.rightClicked(pos)
             }
-            onClicked: {
+            onClicked: mouse => {
                 var pos = mapToGame(Qt.point(mouseX + grabImageTarget.x,
                                              mouseY + grabImageTarget.y))
                 pos.x = Math.floor(pos.x)

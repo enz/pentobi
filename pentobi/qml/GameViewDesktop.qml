@@ -182,8 +182,8 @@ Item
                     bottom: parent.bottom
                 }
                 width: _relativeBoardWidth * parent.width
-                onClicked: Logic.onBoardClicked(pos)
-                onRightClicked: Logic.onBoardRightClicked(pos)
+                onClicked: pos => Logic.onBoardClicked(pos)
+                onRightClicked: pos => Logic.onBoardRightClicked(pos)
 
                 Loader {
                     id: boardContextMenu
