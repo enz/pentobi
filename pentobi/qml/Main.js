@@ -533,7 +533,7 @@ function openFileBlocking(file, displayName) {
     var oldGameVariant = gameModel.gameVariant
     var oldEnableAnimations = gameView.enableAnimations
     gameView.enableAnimations = false
-    if (! gameModel.openFile(file, displayName))
+    if (! gameModel.openFile(file))
         showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
     else {
         if (isAndroid)
