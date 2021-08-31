@@ -18,7 +18,7 @@ PentobiDialog {
     property var _acceptedFunc
 
     footer: DialogButtonBoxOkCancel { }
-    onAccepted: _acceptedFunc()
+    onAccepted: Qt.callLater(_acceptedFunc)
 
     Item {
         implicitWidth:
