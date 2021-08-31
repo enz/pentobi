@@ -9,6 +9,8 @@ Version 20.0-dev (master)
 Version 19.1-dev (v19-fixes)
 ----------------------------
 
+* Dialog for starting rated game was not shown after accepting a dialog
+  to discard current game.
 * Tuned landscape layout on Android for 16:10 tablets.
 * Avoid deprecated mimetypes tag in AppStream file.
 * Avoid warnings with Qt 6 caused by deprecated signal handler syntax.
