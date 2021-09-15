@@ -7,13 +7,13 @@ Libboardgame Modules
 The Libboardgame modules contain code that is not specific to Blokus and
 could be reused for other board games.
 
-* __libboardgame_base__
+* __[libboardgame_base](libboardgame_base)__
   General utilities and functionality for board games
-* __libboardgame_gtp__
+* __[libboardgame_gtp](libboardgame_gtp)__
   Implementation of the [Go Text Protocol](https://en.wikipedia.org/wiki/Go_Text_Protocol) (GTP)
-* __libboardgame_test__
+* __[libboardgame_test](libboardgame_test)__
   Functionality for unit tests
-* __libboardgame_mcts__
+* __[libboardgame_mcts](libboardgame_mcts)__
   Abstract Monte-Carlo tree search (MCTS)
 
 Pentobi Engine Modules
@@ -22,24 +22,24 @@ Pentobi Engine Modules
 The engine modules contain code that is specific to Blokus and the
 computer player used in Pentobi.
 
-* __libpentobi_base__
+* __[libpentobi_base](libpentobi_base)__
   General Blokus-specific functionality. The board implementation is
   optimized for fast move generation needed in MCTS. For a definition
   of the game file format, see [Pentobi-SGF](libpentobi_base/Pentobi-SGF.md)
-* __libpentobi_gtp__
+* __[libpentobi_gtp](libpentobi_gtp)__
   General Blokus-specific GTP interface based on libboardgame_gtp and
   libpentobi_base.
-* __libpentobi_mcts__
+* __[libpentobi_mcts](libpentobi_mcts)__
   Main Blokus computer player used in Pentobi based on libboardgame_mcts
-* __opening_books__
+* __[opening_books](opening_books)__
   Opening moves in SGF format used by libpentobi_mcts for fast move
   generation without search in early positions
-* __learn_tool__
+* __[learn_tool](learn_tool)__
   Tool for learning the move priors used in libpentobi_mcts
-* __pentobi_gtp__
+* __[pentobi_gtp](pentobi_gtp)__
   GTP interface to the player in libpentobi_mcts.
   See [Pentobi-GTP](pentobi_gtp/Pentobi-GTP.md) for more information.
-* __twogtp__
+* __[twogtp](twogtp)__
   Tool for playing Blokus games between two GTP engines (currently only
   supported on Unix)
 
@@ -49,20 +49,20 @@ Pentobi GUI Modules
 The GUI modules implement the user interface. They depend on the
 [Qt](https://www.qt.io/) libraries.
 
-* __pentobi__
+* __[pentobi](pentobi)__
   Main program that provides a GUI for the player in libpentobi_mcts
-* __pentobi_thumbnailer__
+* __[pentobi_thumbnailer](pentobi_thumbnailer)__
   File preview generator for the [Gnome](http://www.gnome.org) desktop
-* __pentobi_kde_thumbnailer__
+* __[pentobi_kde_thumbnailer](pentobi_kde_thumbnailer)__
   File preview generator for the [KDE](http://www.kde.org) desktop
-* __libpentobi_paint__
+* __[libpentobi_paint](libpentobi_paint)__
   Common functionality for pentobi and libpentobi_thumbnail
-* __libpentobi_thumbnail__
+* __[libpentobi_thumbnail](libpentobi_thumbnail)__
   Common functionality for pentobi_thumbnailer and
   pentobi_kde_thumbnailer
-* __libpentobi_kde_thumbnailer__
+* __[libpentobi_kde_thumbnailer](libpentobi_kde_thumbnailer)__
   Only needed for technical reasons during compilation, see comment in
-  libpentobi_kde_thumbnailer/CMakeLists.txt
+  [libpentobi_kde_thumbnailer/CMakeLists.txt](libpentobi_kde_thumbnailer/CMakeLists.txt)
 
 Translations
 ============
