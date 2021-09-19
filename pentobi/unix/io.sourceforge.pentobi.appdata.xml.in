@@ -64,7 +64,6 @@ https://pentobi.sourceforge.io/pentobi-gembloq.png</image>
 <binary>pentobi</binary>
 <mediatype>application/x-blokus-sgf</mediatype>
 </provides>
-<translation type="qt">pentobi</translation>
 <content_rating type="oars-1.1"/>
 <releases>
 <release version="@PENTOBI_VERSION@" date="@PENTOBI_RELEASE_DATE@"/>
