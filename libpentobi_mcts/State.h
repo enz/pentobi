@@ -62,7 +62,7 @@ public:
         board with (may avoid unnecessary BoardConst creation for game variant
         that is never used)
         @param shared_const The state shared between all threads, which
-        ist not modified during the search. The lifetime of this
+        is not modified during the search. The lifetime of this
         parameter must exceed the lifetime of the class instance. */
     State(Variant initial_variant, const SharedConst& shared_const);
 

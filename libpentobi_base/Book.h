@@ -20,7 +20,7 @@ using libboardgame_base::RandomGenerator;
 //-----------------------------------------------------------------------------
 
 /** Opening book.
-    Opening books are stored as trees in SGF files. Thay contain move
+    Opening books are stored as trees in SGF files. They contain move
     annotation properties according to the SGF standard. The book will select
     randomly among the child nodes that have the move annotation good move
     or very good move (TE[1] or TE[2]). */

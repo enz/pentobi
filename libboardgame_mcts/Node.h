@@ -116,7 +116,7 @@ public:
     /** Get node index of first child.
         @pre get_nu_children() > 0. Note that in lock-free search, it can
         happen that get_nu_children() was greater 0 but becomes negative
-        again if two threads expand the node simultaneosly and one thread
+        again if two threads expand the node simultaneously and one thread
         sets nu_children to value_expanding because it missed that the other
         thread already expanded it. But since nodes never get deleted during
         the lock-free search, and the number of children is deterministic,
