@@ -201,7 +201,7 @@ template<typename N>
 inline void Tree<N>::NodeExpander::add_child(const Move& mv, Float value,
                                              Float count, Float move_prior)
 {
-    // -numeric_limits<Float>::max() ist init value for m_best_value
+    // -numeric_limits<Float>::max() is init value for m_best_value
     LIBBOARDGAME_ASSERT(value > -numeric_limits<Float>::max());
     LIBBOARDGAME_ASSERT(count >= m_child_min_count);
     LIBBOARDGAME_ASSERT(move_prior <= m_max_move_prior);

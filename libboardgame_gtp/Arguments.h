@@ -72,7 +72,7 @@ public:
 
     /** Get argument line.
         Get all arguments as a line.
-        No modfications to the line were made apart from trimmimg leading
+        No modifications to the line were made apart from trimmimg leading
         and trailing white spaces. */
     string_view get_line() const;
 

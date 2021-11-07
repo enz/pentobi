@@ -25,7 +25,7 @@ QPixmap ImageProvider::requestPixmap(const QString& id, QSize* size,
     // the image might be requested temporarily with a useless sourceSize, for
     // example 0 or negative if scaleUnplayed of a piece is 0, or width 1 but
     // height greater 1 for a square because the width and height properties
-    // are updated in two steps. In theses cases, we return a 1x1 pixmap (0x0
+    // are updated in two steps. In these cases, we return a 1x1 pixmap (0x0
     // would cause a QQuickImageProvider warning).
     int width = max(requestedSize.width(), 1);
     int height = max(requestedSize.height(), 1);

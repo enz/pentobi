@@ -13,7 +13,7 @@ import "GameView.js" as Logic
 /** Game view optimized for mobile devices.
     Landscape orientation is still experimental because of bugs in Qt (with
     Qt 5.12, there is sometimes a 1-pixel wide white line visible after
-    rotating the screen. So far, this bug has only occured in the Android
+    rotating the screen. So far, this bug has only occurred in the Android
     emulator.) To enable support for landscape, remove
     android:screenOrientation="portrait" from AndroidManifest.xml. */
 Item
