@@ -274,7 +274,6 @@ Item {
 
                     PentobiMenu {
                         relativeWidth: 12
-
                         closePolicy: Popup.CloseOnPressOutsideParent
                                      | Popup.CloseOnEscape
 

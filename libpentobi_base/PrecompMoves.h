@@ -7,6 +7,7 @@
 #ifndef LIBPENTOBI_BASE_PRECOMP_MOVES_H
 #define LIBPENTOBI_BASE_PRECOMP_MOVES_H
 
+#include <array>
 #include "Grid.h"
 #include "Move.h"
 #include "PieceMap.h"
@@ -14,6 +15,8 @@
 #include "libboardgame_base/Range.h"
 
 namespace libpentobi_base {
+
+using namespace std;
 
 //-----------------------------------------------------------------------------
 
