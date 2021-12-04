@@ -9,7 +9,6 @@
 #include <QElapsedTimer>
 #include <QFile>
 #include <QtConcurrentRun>
-#include <QSettings>
 #include "GameModel.h"
 
 using namespace std;
