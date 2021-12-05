@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 19.1-dev (v19-fixes)
 ----------------------------
 
-* Workaround for a crash at exit with Qt 5.15.2.
+* Workaround for a crash at exit in some situations.
 * Dialog for starting rated game was not shown after accepting a dialog
   to discard current game.
 * Tuned landscape layout on Android for 16:10 tablets.

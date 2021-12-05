@@ -222,7 +222,7 @@ void GameModel::autoSave()
         settings.setValue(QStringLiteral("autosave"), getSgf());
     settings.setValue(QStringLiteral("file"), m_file);
     m_autosaveDate = QDateTime::currentDateTime();
-    // Note that Qt 5.15.2 crashes when adding invalid QDateTime to QSettings
+    // Note: some Qt versions crash when adding invalid QDateTime to QSettings
     if (m_autosaveDate.isValid())
         settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
     else
@@ -899,7 +899,7 @@ bool GameModel::loadAutoSave()
                 return false;
             updateFileInfo(file);
             m_autosaveDate = m_fileDate;
-            // Note: Qt 5.15.2 crashes when adding invalid QDateTime to
+            // Note: some Qt versions crash when adding invalid QDateTime to
             // QSettings
             if (m_autosaveDate.isValid())
                 settings.setValue(
