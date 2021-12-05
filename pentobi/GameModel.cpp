@@ -221,10 +221,17 @@ void GameModel::autoSave()
     else
         settings.setValue(QStringLiteral("autosave"), getSgf());
     settings.setValue(QStringLiteral("file"), m_file);
-    settings.setValue(QStringLiteral("fileDate"), m_fileDate);
-    settings.setValue(QStringLiteral("isModified"), m_isModified);
     m_autosaveDate = QDateTime::currentDateTime();
-    settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+    // Note that Qt 5.15.2 crashes when adding invalid QDateTime to QSettings
+    if (m_autosaveDate.isValid())
+        settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+    else
+        settings.remove(QStringLiteral("autosaveDate"));
+    if (m_fileDate.isValid())
+        settings.setValue(QStringLiteral("fileDate"), m_fileDate);
+    else
+        settings.remove(QStringLiteral("fileDate"));
+    settings.setValue(QStringLiteral("isModified"), m_isModified);
     QVariantList location;
     uint depth = 0;
     auto node = &m_game.get_current();
@@ -892,7 +899,13 @@ bool GameModel::loadAutoSave()
                 return false;
             updateFileInfo(file);
             m_autosaveDate = m_fileDate;
-            settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+            // Note: Qt 5.15.2 crashes when adding invalid QDateTime to
+            // QSettings
+            if (m_autosaveDate.isValid())
+                settings.setValue(
+                            QStringLiteral("autosaveDate"), m_autosaveDate);
+            else
+                settings.remove(QStringLiteral("autosaveDate"));
         }
         else
         {
