@@ -221,10 +221,17 @@ void GameModel::autoSave()
     else
         settings.setValue(QStringLiteral("autosave"), getSgf());
     settings.setValue(QStringLiteral("file"), m_file);
-    settings.setValue(QStringLiteral("fileDate"), m_fileDate);
-    settings.setValue(QStringLiteral("isModified"), m_isModified);
     m_autosaveDate = QDateTime::currentDateTime();
-    settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+    // Note: some Qt versions crash when adding invalid QDateTime to QSettings
+    if (m_autosaveDate.isValid())
+        settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+    else
+        settings.remove(QStringLiteral("autosaveDate"));
+    if (m_fileDate.isValid())
+        settings.setValue(QStringLiteral("fileDate"), m_fileDate);
+    else
+        settings.remove(QStringLiteral("fileDate"));
+    settings.setValue(QStringLiteral("isModified"), m_isModified);
     QVariantList location;
     uint depth = 0;
     auto node = &m_game.get_current();
@@ -881,31 +888,41 @@ void GameModel::keepOnlySubtree()
 
 bool GameModel::loadAutoSave()
 {
-    QSettings settings;
-    auto file = settings.value(QStringLiteral("file")).toString();
-    auto isModified = settings.value(QStringLiteral("isModified")).toBool();
-    if (! file.isEmpty() && ! isModified)
     {
-        if (! openFile(file))
-            return false;
-        updateFileInfo(file);
-        m_autosaveDate = m_fileDate;
-        settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+        QSettings settings;
+        auto file = settings.value(QStringLiteral("file")).toString();
+        auto isModified =
+                settings.value(QStringLiteral("isModified")).toBool();
+        if (! file.isEmpty() && ! isModified)
+        {
+            if (! openFile(file))
+                return false;
+            updateFileInfo(file);
+            m_autosaveDate = m_fileDate;
+            // Note: some Qt versions crash when adding invalid QDateTime to
+            // QSettings
+            if (m_autosaveDate.isValid())
+                settings.setValue(
+                            QStringLiteral("autosaveDate"), m_autosaveDate);
+            else
+                settings.remove(QStringLiteral("autosaveDate"));
+        }
+        else
+        {
+            if (! openByteArray(settings.value(
+                                    QStringLiteral("autosave")).toByteArray()))
+                return false;
+            m_fileDate = settings.value(
+                        QStringLiteral("fileDate")).toDateTime();
+            m_autosaveDate = settings.value(
+                        QStringLiteral("autosaveDate")).toDateTime();
+            setFile(file);
+        }
+        // Sanitize isModified if value from settings is inconsistent
+        if (file.isEmpty() && ! libboardgame_base::is_empty(m_game.get_tree()))
+            isModified = true;
+        setIsModified(isModified);
     }
-    else
-    {
-        if (! openByteArray(
-                    settings.value(QStringLiteral("autosave")).toByteArray()))
-            return false;
-        m_fileDate = settings.value(QStringLiteral("fileDate")).toDateTime();
-        m_autosaveDate =
-                settings.value(QStringLiteral("autosaveDate")).toDateTime();
-        setFile(file);
-    }
-    // Sanitize isModified if value from settings is inconsistent
-    if (file.isEmpty() && ! libboardgame_base::is_empty(m_game.get_tree()))
-        isModified = true;
-    setIsModified(isModified);
     restoreAutoSaveLocation();
     updateProperties();
     return true;
