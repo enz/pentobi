@@ -881,31 +881,35 @@ void GameModel::keepOnlySubtree()
 
 bool GameModel::loadAutoSave()
 {
-    QSettings settings;
-    auto file = settings.value(QStringLiteral("file")).toString();
-    auto isModified = settings.value(QStringLiteral("isModified")).toBool();
-    if (! file.isEmpty() && ! isModified)
     {
-        if (! openFile(file))
-            return false;
-        updateFileInfo(file);
-        m_autosaveDate = m_fileDate;
-        settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+        QSettings settings;
+        auto file = settings.value(QStringLiteral("file")).toString();
+        auto isModified =
+                settings.value(QStringLiteral("isModified")).toBool();
+        if (! file.isEmpty() && ! isModified)
+        {
+            if (! openFile(file))
+                return false;
+            updateFileInfo(file);
+            m_autosaveDate = m_fileDate;
+            settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+        }
+        else
+        {
+            if (! openByteArray(settings.value(
+                                    QStringLiteral("autosave")).toByteArray()))
+                return false;
+            m_fileDate = settings.value(
+                        QStringLiteral("fileDate")).toDateTime();
+            m_autosaveDate = settings.value(
+                        QStringLiteral("autosaveDate")).toDateTime();
+            setFile(file);
+        }
+        // Sanitize isModified if value from settings is inconsistent
+        if (file.isEmpty() && ! libboardgame_base::is_empty(m_game.get_tree()))
+            isModified = true;
+        setIsModified(isModified);
     }
-    else
-    {
-        if (! openByteArray(
-                    settings.value(QStringLiteral("autosave")).toByteArray()))
-            return false;
-        m_fileDate = settings.value(QStringLiteral("fileDate")).toDateTime();
-        m_autosaveDate =
-                settings.value(QStringLiteral("autosaveDate")).toDateTime();
-        setFile(file);
-    }
-    // Sanitize isModified if value from settings is inconsistent
-    if (file.isEmpty() && ! libboardgame_base::is_empty(m_game.get_tree()))
-        isModified = true;
-    setIsModified(isModified);
     restoreAutoSaveLocation();
     updateProperties();
     return true;
