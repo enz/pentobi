@@ -1,8 +1,8 @@
 Pentobi Release Notes
 =====================
 
-Version 19.1-dev (v19-fixes)
-----------------------------
+Version 19.1 (05 Dec 2021)
+--------------------------
 
 * Workaround for a crash at exit in some situations.
 * Dialog for starting rated game was not shown after accepting a dialog
