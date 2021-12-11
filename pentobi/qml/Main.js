@@ -401,9 +401,15 @@ function init() {
         gameView.analysisAutoloaded()
     // initialFile is a context property set from command line argument
     if (initialFile) {
-        if (gameModel.isModified)
+        if (! gameModel.isModified) {
+            openFileBlocking(initialFile, displayName )
             showWindow()
-        verify(function() { openFileBlocking(initialFile, displayName ) })
+        }
+        else {
+            showWindow()
+            verify(function() { openFileBlocking(initialFile, displayName ) })
+        }
+        return
     }
     showWindow()
     if (isRated) {
