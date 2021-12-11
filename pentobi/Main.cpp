@@ -33,6 +33,7 @@ namespace {
 
 int mainAndroid()
 {
+    QQuickStyle::setStyle("Basic");
     QQmlApplicationEngine engine;
     engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
     auto ctx = engine.rootContext();

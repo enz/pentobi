@@ -1,5 +1,6 @@
 package net.sf.pentobi;
 
+import net.sf.pentobi.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.net.Uri;
@@ -18,6 +19,7 @@ public class HelpBrowserActivity
             super.onCreate(savedInstanceState);
             setContentView(R.layout.help_browser_activity);
             WebView webView = (WebView)findViewById(R.id.webview);
+            webView.getSettings().setAllowFileAccess(true);
             webView.setWebViewClient(new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(

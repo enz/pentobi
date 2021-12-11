@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 20.0-dev (master)
 -------------------------
 
-*
+* Migrated Android version from Qt 5.15 to Qt 6.2.
 
 Version 19.2-dev (v19-fixes)
 ----------------------------
