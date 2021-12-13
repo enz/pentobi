@@ -19,7 +19,7 @@ PentobiDialog {
         }
         ButtonCancel { }
     }
-    onOpened: textField.selectAll()
+    onOpened: if (! isAndroid) textField.selectAll()
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
         var name = gameModel.suggestFileName(folder, "png")
@@ -58,7 +58,7 @@ PentobiDialog {
                 id: textField
 
                 text: exportImageWidth
-                focus: true
+                focus: ! isAndroid
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{ bottom: 0; top: 32767 }
                 selectByMouse: true
