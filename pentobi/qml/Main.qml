@@ -162,12 +162,12 @@ ApplicationWindow {
     AndroidUtils {
         id: androidUtils
 
-        onImageSaveDialogAccepted: uri => { Logic.exportImage(uri) }
+        onImageSaveDialogAccepted: uri => Logic.exportImage(uri)
         onOpenDialogAccepted:
-            (uri, displayName) => { Logic.openFile(uri, displayName) }
+            (uri, displayName) => Logic.openFile(uri, displayName)
         onSaveDialogAccepted:
-            (uri, displayName) => { Logic.saveFile(uri, displayName) }
-        onTextSaveDialogAccepted: uri => { Logic.exportAsciiArt(uri) }
+            (uri, displayName) => Logic.saveFile(uri, displayName)
+        onTextSaveDialogAccepted: uri => Logic.exportAsciiArt(uri)
     }
     SyncSettings { id: syncSettings }
     DialogLoader { id: aboutDialog; url: "AboutDialog.qml" }

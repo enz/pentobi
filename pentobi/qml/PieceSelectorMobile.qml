@@ -32,7 +32,7 @@ Flickable {
         id: pieceList0
 
         width: root.width
-        onPiecePicked: piece => { root.piecePicked(piece) }
+        onPiecePicked: piece => root.piecePicked(piece)
     }
     PieceList {
         id: pieceList1
@@ -40,7 +40,7 @@ Flickable {
         width: root.width
         columns: root.columns
         rowSpacing: root.rowSpacing
-        onPiecePicked: piece => { root.piecePicked(piece) }
+        onPiecePicked: piece => root.piecePicked(piece)
     }
     PieceList {
         id: pieceList2
@@ -48,7 +48,7 @@ Flickable {
         width: root.width
         columns: root.columns
         rowSpacing: root.rowSpacing
-        onPiecePicked: piece => { root.piecePicked(piece) }
+        onPiecePicked: piece => root.piecePicked(piece)
     }
     PieceList {
         id: pieceList3
@@ -56,7 +56,7 @@ Flickable {
         width: root.width
         columns: root.columns
         rowSpacing: root.rowSpacing
-        onPiecePicked: piece => { root.piecePicked(piece) }
+        onPiecePicked: piece => root.piecePicked(piece)
     }
 
     // States order the piece lists such that the color to play is on top and

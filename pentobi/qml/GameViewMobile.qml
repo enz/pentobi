@@ -188,7 +188,7 @@ Item
                     return (height - n * elementSize) / n
                 }
                 transitionsEnabled: false
-                onPiecePicked: piece => { Logic.pickPiece(piece) }
+                onPiecePicked: piece => Logic.pickPiece(piece)
             }
         }
         NavigationPanel {
