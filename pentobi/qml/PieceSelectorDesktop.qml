@@ -52,28 +52,28 @@ Item {
 
                 width: parent.width
                 columns: pieces0 ? Math.ceil(pieces0.length / 2) : 11
-                onPiecePicked: root.piecePicked(piece)
+                onPiecePicked: piece => root.piecePicked(piece)
             }
             PieceList {
                 id: pieceList1
 
                 width: parent.width
                 columns: root.columns
-                onPiecePicked: root.piecePicked(piece)
+                onPiecePicked: piece => root.piecePicked(piece)
             }
             PieceList {
                 id: pieceList2
 
                 width: parent.width
                 columns: root.columns
-                onPiecePicked: root.piecePicked(piece)
+                onPiecePicked: piece => root.piecePicked(piece)
             }
             PieceList {
                 id: pieceList3
 
                 width: parent.width
                 columns: root.columns
-                onPiecePicked: root.piecePicked(piece)
+                onPiecePicked: piece => root.piecePicked(piece)
             }
         }
     }

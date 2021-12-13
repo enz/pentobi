@@ -231,7 +231,7 @@ Item
                     }
                     height: (board.isTrigon ? 0.75 : 0.7) * parent.height
                     transitionsEnabled: false
-                    onPiecePicked: Logic.pickPiece(piece)
+                    onPiecePicked: piece => Logic.pickPiece(piece)
                 }
                 Item {
                     anchors {
