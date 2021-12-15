@@ -27,7 +27,7 @@ namespace {
 void write_result(const Statistics<>& stat)
 {
     FmtSaver saver(cout);
-    cout << fixed << setprecision(1) << stat.get_mean() * 100 << u8"±"
+    cout << fixed << setprecision(1) << stat.get_mean() * 100 << "+/-"
          << stat.get_error() * 100;
 }
 
@@ -105,7 +105,7 @@ void analyze(const string& file)
             FmtSaver saver(cout);
             auto fraction = i.second / count;
             cout << fixed << setprecision(1) << fraction * 100
-                 << u8"±" << sqrt(fraction * (1 - fraction) / count) * 100;
+                 << "+/-" << sqrt(fraction * (1 - fraction) / count) * 100;
         }
     }
     cout << "\nCpuB ";
@@ -118,7 +118,7 @@ void analyze(const string& file)
     auto err_cpu_w = stat_cpu_w.get_error();
     cout << "\nCpuB/CpuW ";
     if (cpu_b > 0 && cpu_w > 0)
-        cout << fixed << setprecision(3) << cpu_b / cpu_w << u8"±"
+        cout << fixed << setprecision(3) << cpu_b / cpu_w << "+/-"
              << cpu_b / cpu_w * hypot(err_cpu_b / cpu_b, err_cpu_w / cpu_w);
     else
         cout << "-";
