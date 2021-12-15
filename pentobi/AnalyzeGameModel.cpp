@@ -234,9 +234,9 @@ void AnalyzeGameModel::start(GameModel* gameModel, PlayerModel* playerModel,
     m_nuSimulations = static_cast<size_t>(nuSimulations);
     cancel();
     m_search = &playerModel->getSearch();
-    auto future = QtConcurrent::run([=]() {
+    auto future = QtConcurrent::run([=, this]() {
         m_analyzeGame.run(gameModel->getGame(), *m_search, m_nuSimulations,
-                          [=](unsigned, unsigned) {
+                          [this](unsigned, unsigned) {
             QMetaObject::invokeMethod(this, "updateElements",
                                       Qt::BlockingQueuedConnection);
         });

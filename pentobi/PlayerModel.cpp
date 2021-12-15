@@ -116,7 +116,7 @@ void PlayerModel::startGenMove(GameModel* gameModel)
     if (! m_player->is_book_loaded(variant))
         loadBook(variant);
     auto c = bd.get_effective_to_play();
-    auto future = QtConcurrent::run([=]() {
+    auto future = QtConcurrent::run([gameModel, c, this]() {
         QElapsedTimer timer;
         timer.start();
         auto& bd = gameModel->getBoard();
