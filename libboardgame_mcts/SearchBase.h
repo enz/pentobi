@@ -18,7 +18,6 @@
 #include "Tree.h"
 #include "TreeUtil.h"
 #include "libboardgame_base/ArrayList.h"
-#include "libboardgame_base/Barrier.h"
 #include "libboardgame_base/Compiler.h"
 #include "libboardgame_base/IntervalChecker.h"
 #include "libboardgame_base/Log.h"
@@ -34,7 +33,6 @@ using namespace std;
 using libboardgame_base::time_to_string;
 using libboardgame_base::to_string;
 using libboardgame_base::ArrayList;
-using libboardgame_base::Barrier;
 using libboardgame_base::IntervalChecker;
 using libboardgame_base::RandomGenerator;
 using libboardgame_base::StatisticsBase;
@@ -441,15 +439,19 @@ private:
 
         bool m_quit = false;
 
+        bool m_thread_ready_flag = false;
+
         bool m_start_search_flag = false;
 
         bool m_search_finished_flag = false;
 
-        Barrier m_thread_ready{2};
+        mutex m_thread_ready_mutex;
 
         mutex m_start_search_mutex;
 
         mutex m_search_finished_mutex;
+
+        condition_variable m_thread_ready_cond;
 
         condition_variable m_start_search_cond;
 
@@ -594,8 +596,10 @@ SearchBase<S, M, R>::Thread::~Thread()
 template<class S, class M, class R>
 void SearchBase<S, M, R>::Thread::run()
 {
+    unique_lock<mutex> lock(m_thread_ready_mutex);
     m_thread = thread(bind(&Thread::thread_main, this));
-    m_thread_ready.wait();
+    while (! m_thread_ready_flag)
+        m_thread_ready_cond.wait(lock);
 }
 
 template<class S, class M, class R>
@@ -614,7 +618,11 @@ template<class S, class M, class R>
 void SearchBase<S, M, R>::Thread::thread_main()
 {
     unique_lock<mutex> lock(m_start_search_mutex);
-    m_thread_ready.wait();
+    {
+        lock_guard lock(m_thread_ready_mutex);
+        m_thread_ready_flag = true;
+        m_thread_ready_cond.notify_one();
+    }
     while (true)
     {
         while (! m_start_search_flag)

@@ -2,8 +2,6 @@ add_library(boardgame_base STATIC
     ArrayList.h
     Assert.h
     Assert.cpp
-    Barrier.h
-    Barrier.cpp
     Compiler.h
     CoordPoint.h
     CoordPoint.cpp
