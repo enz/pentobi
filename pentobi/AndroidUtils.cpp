@@ -284,17 +284,16 @@ QUrl AndroidUtils::extractHelp(const QString& language)
     if (! filesDirString.isValid())
         return {};
     QDir dir(filesDirString.toString() + "/help/"
-             + QCoreApplication::applicationVersion() + "/" + language
-             + "/pentobi");
+             + QCoreApplication::applicationVersion() + "/" + language);
     auto dirPath = dir.path();
     if (QFileInfo::exists(dirPath + "/index.html"))
         return QUrl::fromLocalFile(dirPath + "/index.html");
     if (! QFileInfo::exists(filesDirString.toString() + "/help/"
                             + QCoreApplication::applicationVersion()
-                            + "/C/pentobi/index.html"))
+                            + "/C/index.html"))
         // No need to keep files from older versions around
         QDir(filesDirString.toString() + "/help").removeRecursively();
-    QDirIterator it(":qml/help/" + language + "/pentobi");
+    QDirIterator it(":qml/help/" + language);
     while (it.hasNext())
     {
         it.next();

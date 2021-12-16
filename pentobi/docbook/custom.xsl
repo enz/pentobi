@@ -13,7 +13,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  version="1.0">
 <xsl:param name="generate.toc" select="'book toc'"/>
 <xsl:param name="header.rule" select="1"/>
 <xsl:param name="html.cleanup" select="1"/>
-<xsl:param name="html.stylesheet" select="'../../C/pentobi/stylesheet.css'"/>
+<xsl:param name="html.stylesheet" select="'../C/stylesheet.css'"/>
 <xsl:param name="make.valid.html" select="1"/>
 <xsl:param name="refentry.generate.name" select="0"/>
 <xsl:param name="refentry.generate.title" select="1"/>

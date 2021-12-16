@@ -25,7 +25,7 @@ squares connected along the edges.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/pieces.png"/>
+<imagedata fileref="../C/pieces.png"/>
 </imageobject>
 <caption><para>The 21 pieces</para></caption>
 </mediaobject>
@@ -38,7 +38,7 @@ located in the corners of the board.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/board_classic.png"/>
+<imagedata fileref="../C/board_classic.png"/>
 </imageobject>
 <caption>
 <para>
@@ -56,7 +56,7 @@ pieces of the opponent colors.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/position_classic.png"/>
+<imagedata fileref="../C/position_classic.png"/>
 </imageobject>
 <caption><para>An example position after a few moves</para></caption>
 </mediaobject>
@@ -109,7 +109,7 @@ Orange.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject><imagedata fileref="../../C/pentobi/board_duo.png"/></imageobject>
+<imageobject><imagedata fileref="../C/board_duo.png"/></imageobject>
 <caption>
 <para>
 The 14×14 board used in game variant Duo with the starting squares marked with
@@ -121,7 +121,7 @@ colored dots
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/position_duo.png"/>
+<imagedata fileref="../C/position_duo.png"/>
 </imageobject>
 <caption><para>An example position in game variant Duo</para></caption>
 </mediaobject>
@@ -140,7 +140,7 @@ along the edges.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/pieces_trigon.jpg"/>
+<imagedata fileref="../C/pieces_trigon.jpg"/>
 </imageobject>
 <caption><para>The 22 Trigon pieces</para></caption>
 </mediaobject>
@@ -152,7 +152,7 @@ size of nine triangles.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/board_trigon.jpg"/>
+<imagedata fileref="../C/board_trigon.jpg"/>
 </imageobject>
 <caption>
 <para>The board with the starting fields marked with gray dots</para>
@@ -167,7 +167,7 @@ players may freely choose a starting point for the first piece of a color.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/position_trigon.jpg"/>
+<imagedata fileref="../C/position_trigon.jpg"/>
 </imageobject>
 <caption><para>
 An example position in game variant Trigon
@@ -202,7 +202,7 @@ size five and the players get two of each of those polyominoes.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/pieces_junior.png"/>
+<imagedata fileref="../C/pieces_junior.png"/>
 </imageobject>
 <caption><para>The 24 pieces used in Junior</para></caption>
 </mediaobject>
@@ -222,7 +222,7 @@ segments.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/pieces_nexos.png"/>
+<imagedata fileref="../C/pieces_nexos.png"/>
 </imageobject>
 <caption><para>The 24 pieces</para></caption>
 </mediaobject>
@@ -234,7 +234,7 @@ close to a corner. The first piece must touch the starting intersection.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/board_nexos.png"/>
+<imagedata fileref="../C/board_nexos.png"/>
 </imageobject>
 <caption>
 <para>
@@ -255,7 +255,7 @@ straight junctions cannot.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/position_nexos.png"/>
+<imagedata fileref="../C/position_nexos.png"/>
 </imageobject>
 <caption><para>An example position after a few moves</para></caption>
 </mediaobject>
@@ -284,7 +284,7 @@ straight lines.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/pieces_gembloq.jpg"/>
+<imagedata fileref="../C/pieces_gembloq.jpg"/>
 </imageobject>
 <caption><para>The 21 pieces</para></caption>
 </mediaobject>
@@ -296,7 +296,7 @@ in Blokus, but also some pieces that contain a half square.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/board_gembloq.png"/>
+<imagedata fileref="../C/board_gembloq.png"/>
 </imageobject>
 <caption>
 <para>
@@ -315,7 +315,7 @@ color.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/position_gembloq.png"/>
+<imagedata fileref="../C/position_gembloq.png"/>
 </imageobject>
 <caption><para>An example position after a few moves</para></caption>
 </mediaobject>
@@ -348,7 +348,7 @@ role.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/pieces_callisto.png"/>
+<imagedata fileref="../C/pieces_callisto.png"/>
 </imageobject>
 <caption><para>The 21 pieces</para></caption>
 </mediaobject>
@@ -362,7 +362,7 @@ be played anytime later.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/board_callisto.png"/>
+<imagedata fileref="../C/board_callisto.png"/>
 </imageobject>
 <caption>
 <para>
@@ -378,7 +378,7 @@ existing piece of the same color edge-to-edge.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/position_callisto.png"/>
+<imagedata fileref="../C/position_callisto.png"/>
 </imageobject>
 <caption><para>An example position after a few moves</para></caption>
 </mediaobject>
@@ -490,7 +490,7 @@ window with a diagram of colored dots.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/analysis.jpg"/>
+<imagedata fileref="../C/analysis.jpg"/>
 </imageobject>
 <caption>
 <para>Analysis of a game of variant Classic (2 players)</para>
@@ -546,7 +546,7 @@ matter.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../../C/pentobi/rating.jpg"/>
+<imagedata fileref="../C/rating.jpg"/>
 </imageobject>
 <caption>
 <para>Window with rating graph</para>

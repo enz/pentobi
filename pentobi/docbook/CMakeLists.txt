@@ -33,40 +33,38 @@ foreach(lang ${linguas})
         "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
         DEPENDS po/${lang}.po
         )
-    list(APPEND index_files "help/${lang}/pentobi/index.html")
+    list(APPEND index_files "help/${lang}/index.html")
     add_custom_command(OUTPUT "index_${lang}.docbook"
         COMMAND "${ITSTOOL}" -m ${lang}.mo -o "index_${lang}.docbook"
         "${CMAKE_CURRENT_SOURCE_DIR}/index.docbook"
         DEPENDS index.docbook ${lang}.mo
         )
-    add_custom_command(OUTPUT "help/${lang}/pentobi/index.html"
+    add_custom_command(OUTPUT "help/${lang}/index.html"
         COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOKXSL_DIR}/html"
         --stringparam l10n.gentext.language ${lang}
-        -o "help/${lang}/pentobi/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
+        -o "help/${lang}/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
         index_${lang}.docbook
         DEPENDS "index_${lang}.docbook" ${DOCBOOK_SRC}
         )
 endforeach()
 
-add_custom_command(OUTPUT "help/C/pentobi/index.html"
+add_custom_command(OUTPUT "help/C/index.html"
     COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOKXSL_DIR}/html"
-    -o "help/C/pentobi/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
+    -o "help/C/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
     "${CMAKE_CURRENT_SOURCE_DIR}/index.docbook"
     COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/figures/*.png" "help/C/pentobi/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/figures/*.png" "help/C/"
     COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/figures/*.jpg" "help/C/pentobi/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/figures/*.jpg" "help/C/"
     COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/figures/stylesheet.css" "help/C/pentobi/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/figures/stylesheet.css" "help/C/"
     DEPENDS ${DOCBOOK_SRC}
     )
 
-add_custom_target(pentobi-help ALL DEPENDS
-    "help/C/pentobi/index.html" ${index_files}
-    )
+add_custom_target(pentobi-help ALL DEPENDS "help/C/index.html" ${index_files})
 
 if(NOT ANDROID)
     install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/help"
-        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR} FILES_MATCHING PATTERN "*.css"
+        DESTINATION ${CMAKE_INSTALL_FULL_DOCDIR} FILES_MATCHING PATTERN "*.css"
         PATTERN "*.html" PATTERN "*.png" PATTERN "*.jpg")
 endif()

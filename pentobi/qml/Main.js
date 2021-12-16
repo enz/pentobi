@@ -359,9 +359,9 @@ function help() {
     else {
         var url
         if (helpDir)
-            url = "file://" + helpDir + "/" + lang + "/pentobi/index.html"
+            url = "file://" + helpDir + "/" + lang + "/index.html"
         else
-            url = "qrc:///qml/help/" + lang + "/pentobi/index.html"
+            url = "qrc:///qml/help/" + lang + "/index.html"
         Qt.openUrlExternally(url)
     }
 }
