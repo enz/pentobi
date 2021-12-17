@@ -8,7 +8,7 @@ Building Pentobi requires the following tools and libraries:
 
 * C++ compiler with C++17 support (e.g. GCC >=5)
 * [Qt libraries](https://www.qt.io/) (Linux: >=5.15; Android: 6.2)
-* [CMake](https://cmake.org/) (>=3.16.0)
+* [CMake](https://cmake.org/) (>=3.18)
 * [GNU gettext](https://www.gnu.org/software/gettext/) (>=0.19.6)
 * [ITS Tool](http://itstool.org/)
 * [xsltproc](http://xmlsoft.org/XSLT/xsltproc.html)

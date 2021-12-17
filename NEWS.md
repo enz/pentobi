@@ -8,7 +8,7 @@ Version 20.0-dev (master)
   conform to the GNU standard directories and because Firefox on Ubuntu
   21.10 has no permissions to open files in /usr/share/help.
 * Migrated Android version from Qt 5.15 to Qt 6.2.
-* Minimum required CMake version is now 3.16.0.
+* Minimum required CMake version is now 3.18.
 
 Version 19.2-dev (v19-fixes)
 ----------------------------
