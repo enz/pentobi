@@ -19,7 +19,7 @@ PentobiFileDialog {
         [ "*.jpg", "*.JPG", "*.jpeg", "*.JPEG" ]
     ]
     folder: rootWindow.folder
-    onNameFilterChanged: {
+    onNameFilterChanged: index => {
         if (index >= nameFilters.length)
             return
         var pos = name.lastIndexOf(".")
