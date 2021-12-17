@@ -64,7 +64,7 @@ add_custom_command(OUTPUT "help/C/index.html"
 add_custom_target(pentobi-help ALL DEPENDS "help/C/index.html" ${index_files})
 
 if(NOT ANDROID)
-    install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/help"
-        DESTINATION ${CMAKE_INSTALL_FULL_DOCDIR} FILES_MATCHING PATTERN "*.css"
-        PATTERN "*.html" PATTERN "*.png" PATTERN "*.jpg")
+    install(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/help" TYPE DOC
+        FILES_MATCHING PATTERN "*.css" PATTERN "*.html" PATTERN "*.png"
+        PATTERN "*.jpg")
 endif()
