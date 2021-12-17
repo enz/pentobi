@@ -47,7 +47,7 @@ target_compile_definitions(pentobi-thumbnailer PRIVATE
 
 configure_file(pentobi.thumbnailer.in pentobi.thumbnailer @ONLY)
 
-install(TARGETS pentobi-thumbnailer DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS pentobi-thumbnailer)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/thumbnailers)
 

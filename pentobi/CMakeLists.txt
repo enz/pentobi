@@ -159,7 +159,7 @@ else()
         "${CMAKE_CURRENT_BINARY_DIR}/icons_desktop.qrc"
         resources_desktop.qrc
         )
-    install(TARGETS pentobi DESTINATION ${CMAKE_INSTALL_BINDIR})
+    install(TARGETS pentobi)
 endif()
 
 target_compile_definitions(pentobi PRIVATE
