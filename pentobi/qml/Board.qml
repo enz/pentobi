@@ -72,7 +72,7 @@ Item {
         if (isGembloQ) return 0.35 * gridHeight
         return 0.6 * gridHeight
     }
-    property Item grabImageTarget: grabImageTarget
+    property alias grabImageTarget: grabImageTarget
 
     signal clicked(point pos)
     signal rightClicked(point pos)
