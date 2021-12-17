@@ -118,12 +118,6 @@ foreach(lang ${linguas})
         DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")
 endforeach()
 
-# User manual
-
-install(DIRECTORY help DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}
-    FILES_MATCHING PATTERN "*.css" PATTERN "*.html" PATTERN "*.png"
-    PATTERN "*.jpg")
-
 # Target
 
 add_custom_target(pentobi-unix ALL DEPENDS
