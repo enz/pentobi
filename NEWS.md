@@ -4,9 +4,9 @@ Pentobi Release Notes
 Version 20.0-dev (master)
 -------------------------
 
-* Install manual to /usr/share/doc instead of /usr/share/help to better
-  conform to the GNU standard directories and because Firefox on Ubuntu
-  21.10 has no permissions to open files in /usr/share/help.
+* Install user manual to /usr/share/doc to better conform to the GNU
+  standard directories and because Firefox and Chromium on Ubuntu 21.10
+  have no permissions to open files in /usr/share/help.
 * Migrated Android version from Qt 5.15 to Qt 6.2.
 * Minimum required CMake version is now 3.18.
 
