@@ -138,6 +138,15 @@ bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
     return nuSiblingMoves != 1;
 }
 
+void setValue(QSettings& settings, const QString& key, const QDateTime& date)
+{
+    // In Qt 5.15 ~QSettings() crashes if it contains invalid QDateTime
+    if (date.isValid())
+        settings.setValue(key, date);
+    else
+        settings.remove(key);
+}
+
 } //namespace
 
 //-----------------------------------------------------------------------------
@@ -222,15 +231,8 @@ void GameModel::autoSave()
         settings.setValue(QStringLiteral("autosave"), getSgf());
     settings.setValue(QStringLiteral("file"), m_file);
     m_autosaveDate = QDateTime::currentDateTime();
-    // In Qt 5.15 ~QSettings() crashes if it contains invalid QDateTime
-    if (m_autosaveDate.isValid())
-        settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
-    else
-        settings.remove(QStringLiteral("autosaveDate"));
-    if (m_fileDate.isValid())
-        settings.setValue(QStringLiteral("fileDate"), m_fileDate);
-    else
-        settings.remove(QStringLiteral("fileDate"));
+    setValue(settings, QStringLiteral("autosaveDate"), m_autosaveDate);
+    setValue(settings, QStringLiteral("fileDate"), m_fileDate);
     settings.setValue(QStringLiteral("isModified"), m_isModified);
     QVariantList location;
     uint depth = 0;
@@ -899,12 +901,7 @@ bool GameModel::loadAutoSave()
                 return false;
             updateFileInfo(file);
             m_autosaveDate = m_fileDate;
-            // In Qt 5.15 ~QSettings() crashes if it contains invalid QDateTime
-            if (m_autosaveDate.isValid())
-                settings.setValue(
-                            QStringLiteral("autosaveDate"), m_autosaveDate);
-            else
-                settings.remove(QStringLiteral("autosaveDate"));
+            setValue(settings, QStringLiteral("autosaveDate"), m_autosaveDate);
         }
         else
         {
