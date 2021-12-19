@@ -40,11 +40,7 @@ Building the KDE Thumbnailer Plugin
 A thumbnailer plugin for KDE can be built by using the cmake option
 `-DPENTOBI_BUILD_KDE_THUMBNAILER=ON`. In this case, the KDE development
 files need to be installed (packages `libkf5kio-dev` and
-`extra-cmake-modules` on Debian-based distributions). Note that the
-plugin might not be found if the default installation prefix `/usr/local`
-is used. You need to add `QT_PLUGIN_PATH=/usr/local/lib/plugins` to
-`/etc/environment`. After that, you can enable previews for Blokus game
-file in the Dolphin file manager in Configure Dolphin/General/Previews.
+`extra-cmake-modules` on Debian-based distributions).
 
 Installing
 ----------
