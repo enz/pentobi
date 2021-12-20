@@ -7,7 +7,6 @@
 #ifndef LIBBOARDGAME_BASE_TIMER_H
 #define LIBBOARDGAME_BASE_TIMER_H
 
-#include "Assert.h"
 #include "TimeSource.h"
 
 namespace libboardgame_base {
