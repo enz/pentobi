@@ -48,8 +48,6 @@ add_library(boardgame_base STATIC
     StringRep.cpp
     StringUtil.h
     StringUtil.cpp
-    TimeIntervalChecker.h
-    TimeIntervalChecker.cpp
     Timer.h
     Timer.cpp
     TimeSource.h

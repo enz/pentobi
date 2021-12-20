@@ -24,7 +24,6 @@
 #include "libboardgame_base/RandomGenerator.h"
 #include "libboardgame_base/Statistics.h"
 #include "libboardgame_base/StringUtil.h"
-#include "libboardgame_base/TimeIntervalChecker.h"
 #include "libboardgame_base/Timer.h"
 
 namespace libboardgame_mcts {
@@ -39,7 +38,6 @@ using libboardgame_base::StatisticsBase;
 using libboardgame_base::StatisticsDirty;
 using libboardgame_base::StatisticsExt;
 using libboardgame_base::Timer;
-using libboardgame_base::TimeIntervalChecker;
 using libboardgame_base::TimeSource;
 using libboardgame_mcts::find_node;
 
