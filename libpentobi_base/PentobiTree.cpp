@@ -13,7 +13,6 @@ namespace libpentobi_base {
 
 using libboardgame_base::InvalidProperty;
 using libboardgame_base::SgfError;
-using libpentobi_base::get_current_position_as_setup;
 
 //-----------------------------------------------------------------------------
 

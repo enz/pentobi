@@ -34,12 +34,10 @@ using libboardgame_base::to_string;
 using libboardgame_base::ArrayList;
 using libboardgame_base::IntervalChecker;
 using libboardgame_base::RandomGenerator;
-using libboardgame_base::StatisticsBase;
 using libboardgame_base::StatisticsDirty;
 using libboardgame_base::StatisticsExt;
 using libboardgame_base::Timer;
 using libboardgame_base::TimeSource;
-using libboardgame_mcts::find_node;
 
 //-----------------------------------------------------------------------------
 

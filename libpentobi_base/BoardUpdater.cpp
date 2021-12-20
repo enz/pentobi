@@ -12,7 +12,6 @@
 
 namespace libpentobi_base {
 
-using libpentobi_base::get_current_position_as_setup;
 using libboardgame_base::SgfError;
 using libboardgame_base::get_path_from_root;
 
