@@ -16,12 +16,10 @@ using namespace std;
 using libboardgame_base::SgfNode;
 using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
-using libpentobi_base::Board;
 using libpentobi_base::Game;
 using libpentobi_base::Move;
 using libpentobi_base::MoveList;
 using libpentobi_base::MoveMarker;
-using libpentobi_base::ScoreType;
 using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------

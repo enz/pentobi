@@ -7,7 +7,6 @@
 #include "BoardUpdater.h"
 
 #include "BoardUtil.h"
-#include "NodeUtil.h"
 #include "libboardgame_base/SgfUtil.h"
 
 namespace libpentobi_base {

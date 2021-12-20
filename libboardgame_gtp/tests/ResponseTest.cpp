@@ -7,7 +7,6 @@
 #include "libboardgame_gtp/Response.h"
 #include "libboardgame_test/Test.h"
 
-using namespace std;
 using namespace libboardgame_gtp;
 
 //-----------------------------------------------------------------------------

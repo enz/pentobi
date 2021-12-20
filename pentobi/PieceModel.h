@@ -10,7 +10,6 @@
 #include <QObject>
 #include <QPointF>
 #include <QVariant>
-#include "libpentobi_base/Color.h"
 #include "libpentobi_base/Piece.h"
 #include "libpentobi_base/PieceInfo.h"
 

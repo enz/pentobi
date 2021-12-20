@@ -7,7 +7,6 @@
 #include "GtpEngine.h"
 
 #include <fstream>
-#include <memory>
 #include "libboardgame_base/CpuTime.h"
 #include "libboardgame_base/Log.h"
 #include "libboardgame_base/RandomGenerator.h"
@@ -21,7 +20,6 @@ namespace libpentobi_gtp {
 using namespace std;
 using libboardgame_base::RandomGenerator;
 using libboardgame_base::TreeReader;
-using libboardgame_base::get_last_node;
 using libboardgame_gtp::Failure;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;

@@ -10,7 +10,6 @@
 #include <algorithm>
 #include <array>
 #include "Color.h"
-#include "PieceInfo.h"
 
 namespace libpentobi_base {
 

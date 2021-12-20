@@ -7,7 +7,6 @@
 #ifndef LIBBOARDGAME_BASE_SGF_UTIL_H
 #define LIBBOARDGAME_BASE_SGF_UTIL_H
 
-#include <string>
 #include "SgfTree.h"
 
 namespace libboardgame_base {

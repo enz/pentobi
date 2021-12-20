@@ -6,8 +6,6 @@
 
 #include "TreeUtil.h"
 
-#include "NodeUtil.h"
-
 namespace libpentobi_base {
 
 //-----------------------------------------------------------------------------

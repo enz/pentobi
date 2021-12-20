@@ -7,7 +7,6 @@
 #include "AnalyzeGame.h"
 
 #include "Search.h"
-#include "libboardgame_base/Log.h"
 #include "libboardgame_base/WallTimeSource.h"
 
 namespace libpentobi_mcts {

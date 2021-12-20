@@ -8,7 +8,6 @@
 
 #include "libboardgame_test/Test.h"
 
-using namespace std;
 using namespace libpentobi_base;
 
 //-----------------------------------------------------------------------------

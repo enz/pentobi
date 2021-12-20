@@ -7,7 +7,6 @@
 #ifndef LIBPENTOBI_BASE_STARTING_POINTS_H
 #define LIBPENTOBI_BASE_STARTING_POINTS_H
 
-#include "Color.h"
 #include "ColorMap.h"
 #include "Geometry.h"
 #include "Grid.h"

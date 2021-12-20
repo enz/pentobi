@@ -8,7 +8,6 @@
 #include "libboardgame_base/SgfNode.h"
 #include "libboardgame_test/Test.h"
 
-using namespace std;
 using namespace libboardgame_base;
 
 //-----------------------------------------------------------------------------

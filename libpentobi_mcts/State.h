@@ -20,15 +20,7 @@ namespace libpentobi_mcts {
 
 using libboardgame_base::RandomGenerator;
 using libboardgame_base::Statistics;
-using libboardgame_mcts::LastGoodReply;
-using libboardgame_mcts::PlayerInt;
-using libpentobi_base::BoardConst;
-using libpentobi_base::MoveInfo;
-using libpentobi_base::MoveInfoExt;
-using libpentobi_base::Piece;
-using libpentobi_base::PieceInfo;
 using libpentobi_base::PieceSet;
-using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 

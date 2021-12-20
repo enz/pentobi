@@ -10,7 +10,6 @@
 #include <atomic>
 #include <cmath>
 #include <iomanip>
-#include <iosfwd>
 #include <limits>
 #include <sstream>
 #include <string>

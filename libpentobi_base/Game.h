@@ -9,7 +9,6 @@
 
 #include "Board.h"
 #include "BoardUpdater.h"
-#include "NodeUtil.h"
 #include "PentobiTree.h"
 
 namespace libpentobi_base {

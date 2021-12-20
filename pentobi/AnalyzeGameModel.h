@@ -16,7 +16,6 @@ class PlayerModel;
 namespace libpentobi_base { class Game; }
 namespace libpentobi_mcts { class Search; }
 
-using libpentobi_base::Game;
 using libpentobi_mcts::AnalyzeGame;
 using libpentobi_mcts::Search;
 

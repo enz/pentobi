@@ -6,17 +6,13 @@
 
 #include "RatingModel.h"
 
-#include <random>
 #include <QDir>
 #include <QFileInfo>
 #include <QSettings>
 #include <QStandardPaths>
 #include "GameModel.h"
-#include "libpentobi_base/Variant.h"
 #include "libpentobi_mcts/Player.h"
 
-using namespace std;
-using libpentobi_base::Variant;
 using libpentobi_mcts::Player;
 
 //-----------------------------------------------------------------------------

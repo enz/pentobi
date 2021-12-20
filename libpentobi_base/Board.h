@@ -10,13 +10,11 @@
 #include "BoardConst.h"
 #include "ColorMap.h"
 #include "ColorMove.h"
-#include "Geometry.h"
 #include "MoveList.h"
 #include "PointList.h"
 #include "PointState.h"
 #include "Setup.h"
 #include "StartingPoints.h"
-#include "Variant.h"
 
 namespace libpentobi_base {
 

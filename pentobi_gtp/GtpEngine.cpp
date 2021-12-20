@@ -13,7 +13,6 @@
 using libboardgame_base::Writer;
 using libboardgame_gtp::Failure;
 using libpentobi_base::Board;
-using libpentobi_base::get_color_id;
 using libpentobi_mcts::Float;
 
 //-----------------------------------------------------------------------------

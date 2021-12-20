@@ -8,7 +8,6 @@
 #define LIBPENTOBI_MCTS_SEARCH_H
 
 #include "History.h"
-#include "SearchParamConst.h"
 #include "State.h"
 #include "libboardgame_mcts/SearchBase.h"
 
@@ -16,8 +15,6 @@ namespace libpentobi_mcts {
 
 using namespace std;
 using libboardgame_base::TimeSource;
-using libboardgame_mcts::PlayerInt;
-using libpentobi_base::Setup;
 
 //-----------------------------------------------------------------------------
 

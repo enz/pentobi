@@ -11,8 +11,6 @@
 
 namespace libpentobi_base {
 
-using libboardgame_base::back_to_main_variation;
-using libboardgame_base::is_main_variation;
 using libboardgame_base::SgfError;
 
 //-----------------------------------------------------------------------------

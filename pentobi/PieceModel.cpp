@@ -11,7 +11,6 @@
 #include "libpentobi_base/GembloQTransform.h"
 #include "libpentobi_base/TrigonTransform.h"
 
-using namespace std;
 using libboardgame_base::ArrayList;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::TransfIdentity;

@@ -11,7 +11,6 @@
 #include "Grid.h"
 #include "Move.h"
 #include "PieceMap.h"
-#include "Point.h"
 #include "libboardgame_base/Range.h"
 
 namespace libpentobi_base {

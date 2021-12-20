@@ -26,12 +26,10 @@ using libpentobi_base::Board;
 using libpentobi_base::BoardConst;
 using libpentobi_base::Color;
 using libpentobi_base::Game;
-using libpentobi_base::Geometry;
 using libpentobi_base::GridExt;
 using libpentobi_base::Move;
 using libpentobi_base::MoveList;
 using libpentobi_base::MoveMarker;
-using libpentobi_base::PointList;
 using libpentobi_base::Variant;
 using libpentobi_mcts::LocalPoints;
 

@@ -10,14 +10,10 @@
 #include "libboardgame_base/Options.h"
 #include "libboardgame_base/RandomGenerator.h"
 
-using namespace std;
 using libboardgame_base::Options;
 using libboardgame_base::RandomGenerator;
 using libboardgame_gtp::Failure;
-using libpentobi_base::parse_variant_id;
 using libpentobi_base::Board;
-using libpentobi_base::Variant;
-using libpentobi_mcts::Player;
 
 //-----------------------------------------------------------------------------
 

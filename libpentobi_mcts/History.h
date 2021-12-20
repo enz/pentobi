@@ -13,8 +13,6 @@
 namespace libpentobi_mcts {
 
 using libboardgame_base::ArrayList;
-using libpentobi_base::Board;
-using libpentobi_base::Color;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Move;
 using libpentobi_base::Setup;

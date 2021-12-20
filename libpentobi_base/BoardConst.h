@@ -8,10 +8,8 @@
 #define LIBPENTOBI_BASE_BOARD_CONST_H
 
 #include "MoveInfo.h"
-#include "PieceInfo.h"
 #include "PrecompMoves.h"
 #include "SymmetricPoints.h"
-#include "Variant.h"
 #include "libboardgame_base/Range.h"
 
 namespace libpentobi_base {

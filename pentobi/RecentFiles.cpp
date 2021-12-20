@@ -9,8 +9,6 @@
 #include <QSettings>
 #include "AndroidUtils.h"
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 RecentFiles::RecentFiles(QObject* parent)

@@ -9,8 +9,6 @@
 #include "libboardgame_base/RectGeometry.h"
 #include "libboardgame_test/Test.h"
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 using Point = libboardgame_base::Point<19 * 19, 19, 19, unsigned short>;

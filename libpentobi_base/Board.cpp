@@ -6,7 +6,6 @@
 
 #include "Board.h"
 
-#include <functional>
 #include "CallistoGeometry.h"
 #include "MoveMarker.h"
 

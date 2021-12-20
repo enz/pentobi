@@ -16,19 +16,13 @@
 namespace libpentobi_mcts {
 
 using namespace std;
-using libpentobi_base::Board;
-using libpentobi_base::BoardConst;
 using libpentobi_base::ColorMap;
 using libpentobi_base::ColorMove;
 using libpentobi_base::Grid;
-using libpentobi_base::GridExt;
 using libpentobi_base::Move;
 using libpentobi_base::MoveList;
 using libpentobi_base::Piece;
 using libpentobi_base::PieceMap;
-using libpentobi_base::Point;
-using libpentobi_base::PointList;
-using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 

@@ -8,7 +8,6 @@
 
 #include <algorithm>
 #include <sstream>
-#include "StringUtil.h"
 
 namespace libboardgame_base {
 

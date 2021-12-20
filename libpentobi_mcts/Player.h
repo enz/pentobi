@@ -17,7 +17,6 @@ namespace libpentobi_mcts {
 using libboardgame_base::Rating;
 using libpentobi_base::Book;
 using libpentobi_base::PlayerBase;
-using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 

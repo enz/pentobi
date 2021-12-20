@@ -7,7 +7,6 @@
 #include "GameModel.h"
 
 #include <cerrno>
-#include <cmath>
 #include <cstring>
 #include <fstream>
 #include <QClipboard>
@@ -15,45 +14,28 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QSettings>
-#include "AndroidUtils.h"
 #include "libboardgame_base/SgfUtil.h"
-#include "libboardgame_base/StringUtil.h"
 #include "libboardgame_base/TreeReader.h"
 #include "libpentobi_base/MoveMarker.h"
-#include "libpentobi_base/NodeUtil.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
+#ifdef Q_OS_ANDROID
+#include "AndroidUtils.h"
+#endif
 
-using namespace std;
-using libboardgame_base::back_to_main_variation;
-using libboardgame_base::beginning_of_branch;
-using libboardgame_base::find_next_comment;
-using libboardgame_base::get_last_node;
 using libboardgame_base::get_letter_coord;
-using libboardgame_base::has_comment;
-using libboardgame_base::has_earlier_variation;
-using libboardgame_base::is_main_variation;
 using libboardgame_base::to_lower;
 using libboardgame_base::ArrayList;
 using libboardgame_base::SgfError;
 using libboardgame_base::TreeReader;
-using libpentobi_base::to_string_id;
 using libpentobi_base::BoardType;
-using libpentobi_base::Color;
-using libpentobi_base::ColorMap;
-using libpentobi_base::ColorMove;
 using libpentobi_base::MovePoints;
 using libpentobi_base::PentobiTree;
 using libpentobi_base::PentobiTreeWriter;
-using libpentobi_base::Piece;
 using libpentobi_base::PieceInfo;
-using libpentobi_base::PiecePoints;
 using libpentobi_base::PieceSet;
 using libpentobi_base::Point;
 using libpentobi_base::has_setup;
-using libpentobi_base::get_move_number;
-using libpentobi_base::get_moves_left;
-using libpentobi_base::get_move_node;
 
 //-----------------------------------------------------------------------------
 

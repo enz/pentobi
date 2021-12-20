@@ -11,8 +11,6 @@
 #include <QtConcurrentRun>
 #include "GameModel.h"
 
-using namespace std;
-
 //-----------------------------------------------------------------------------
 
 PlayerModel::PlayerModel(QObject* parent)

@@ -15,7 +15,6 @@ using libboardgame_base::ArrayList;
 using libpentobi_base::CallistoGeometry;
 using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
-using libpentobi_base::Geometry;
 using libpentobi_base::GeometryType;
 using libpentobi_base::Point;
 

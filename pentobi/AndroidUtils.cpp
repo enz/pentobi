@@ -6,9 +6,6 @@
 
 #include "AndroidUtils.h"
 
-#include <QCoreApplication>
-#include <QStandardPaths>
-
 #ifdef Q_OS_ANDROID
 #include <QtCore/private/qandroidextras_p.h>
 #include <QBuffer>
@@ -21,6 +18,7 @@
 #include <QVariant>
 #else
 #include <QFileInfo>
+#include <QStandardPaths>
 #endif
 
 using namespace std;

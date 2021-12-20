@@ -13,9 +13,6 @@
 #include "libboardgame_base/SgfUtil.h"
 
 using libboardgame_base::ArrayList;
-using libboardgame_base::is_main_variation;
-using libboardgame_base::find_root;
-using libpentobi_base::ColorMove;
 
 //-----------------------------------------------------------------------------
 
