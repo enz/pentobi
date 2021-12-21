@@ -7,9 +7,9 @@
 #ifndef LIBBOARDGAME_BASE_TIMER_H
 #define LIBBOARDGAME_BASE_TIMER_H
 
-#include "TimeSource.h"
-
 namespace libboardgame_base {
+
+class TimeSource;
 
 class Timer
 {

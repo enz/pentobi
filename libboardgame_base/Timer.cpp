@@ -7,6 +7,7 @@
 #include "Timer.h"
 
 #include "Assert.h"
+#include "TimeSource.h"
 
 namespace libboardgame_base {
 
