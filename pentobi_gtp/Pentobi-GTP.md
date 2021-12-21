@@ -95,13 +95,6 @@ Use ANSI escape sequences to colorize the text output of boards (for
 example in the response to the `showboard` command or with the
 --showboard command line option).
 
-`--cputime`
-
-Use CPU time instead of wall time for time measurement. Currently, there
-is no way to make Pentobi play with time limits, the levels are defined
-by the number of simulations in the MCTS search, so this affects only
-the debugging output, which prints the time used after each search.
-
 `--game,-g` _variant_
 
 Specify the game variant used at start-up. Valid arguments are classic,

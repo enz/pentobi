@@ -109,8 +109,7 @@ Player::Player(Variant initial_variant, unsigned max_level,
       m_level(4),
       m_fixed_simulations(0),
       m_search(initial_variant, nu_threads, get_memory(max_level)),
-      m_book(initial_variant),
-      m_time_source(new WallTimeSource)
+      m_book(initial_variant)
 {
     for (unsigned i = 0; i < Board::max_player_moves; ++i)
     {
@@ -254,7 +253,7 @@ Move Player::genmove(const Board& bd, Color c)
         LIBBOARDGAME_LOG("MaxCnt ", fixed, setprecision(0), max_count);
     else
         LIBBOARDGAME_LOG("MaxTime ", max_time);
-    if (! m_search.search(mv, bd, c, max_count, 0, max_time, *m_time_source))
+    if (! m_search.search(mv, bd, c, max_count, 0, max_time, m_time_source))
         return Move::null();
     m_was_aborted = m_search.was_aborted();
     // Resign only in two-player game variants
@@ -359,14 +358,6 @@ bool Player::load_book(const string& filepath)
 bool Player::resign() const
 {
     return m_resign;
-}
-
-void Player::use_cpu_time(bool enable)
-{
-    if (enable)
-        m_time_source = make_unique<CpuTimeSource>();
-    else
-        m_time_source = make_unique<WallTimeSource>();
 }
 
 //-----------------------------------------------------------------------------

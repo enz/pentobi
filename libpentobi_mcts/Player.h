@@ -9,12 +9,14 @@
 
 #include "Search.h"
 #include "libboardgame_base/Rating.h"
+#include "libboardgame_base/WallTimeSource.h"
 #include "libpentobi_base/Book.h"
 #include "libpentobi_base/PlayerBase.h"
 
 namespace libpentobi_mcts {
 
 using libboardgame_base::Rating;
+using libboardgame_base::WallTimeSource;
 using libpentobi_base::Book;
 using libpentobi_base::PlayerBase;
 
@@ -63,9 +65,6 @@ public:
     unsigned get_level() const;
 
     void set_level(unsigned level);
-
-    /** Use CPU time instead of Wall time to measure time. */
-    void use_cpu_time(bool enable);
 
     Search& get_search();
 
@@ -128,7 +127,7 @@ private:
 
     Book m_book;
 
-    unique_ptr<TimeSource> m_time_source;
+    WallTimeSource m_time_source;
 
 
     void init_settings();

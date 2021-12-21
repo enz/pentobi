@@ -196,9 +196,4 @@ Search& GtpEngine::get_search()
     return get_mcts_player().get_search();
 }
 
-void GtpEngine::use_cpu_time(bool enable)
-{
-    get_mcts_player().use_cpu_time(enable);
-}
-
 //-----------------------------------------------------------------------------

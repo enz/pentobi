@@ -48,7 +48,6 @@ int main(int argc, char** argv)
             "book:",
             "config|c:",
             "color",
-            "cputime",
             "game|g:",
             "help|h",
             "level|l:",
@@ -68,7 +67,6 @@ int main(int argc, char** argv)
                 "--book       load an external book file\n"
                 "--config,-c  set GTP config file\n"
                 "--color      colorize text output of boards\n"
-                "--cputime    use CPU time\n"
                 "--game,-g    game variant (classic, classic_2, classic_3,\n"
                 "             duo, trigon, trigon_2, trigon_3, junior)\n"
                 "--help,-h    print help message and exit\n"
@@ -118,8 +116,6 @@ int main(int argc, char** argv)
         engine.set_resign(! opt.contains("noresign"));
         if (opt.contains("showboard"))
             engine.set_show_board(true);
-        if (opt.contains("cputime"))
-            engine.use_cpu_time(true);
         string book_file = opt.get("book", "");
         if (! book_file.empty())
         {

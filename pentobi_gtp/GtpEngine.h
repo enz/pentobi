@@ -40,9 +40,6 @@ public:
 
     Player& get_mcts_player();
 
-    /** @see Player::use_cpu_time() */
-    void use_cpu_time(bool enable);
-
 private:
     unique_ptr<PlayerBase> m_player;
 
