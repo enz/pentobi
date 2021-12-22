@@ -1,26 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.sf.pentobi"
     android:installLocation="auto"
     android:versionCode="19999000"
     android:versionName="20.0-dev" >
 
-    <uses-sdk
-        android:minSdkVersion="23"
-        android:targetSdkVersion="30" />
-
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true" />
-
     <application
         android:name="org.qtproject.qt.android.bindings.QtApplication"
-        android:allowNativeHeapPointerTagging="false"
         android:extractNativeLibs="true"
         android:hardwareAccelerated="true"
         android:label="Pentobi"
+        android:allowNativeHeapPointerTagging="false"
         android:theme="@style/AppTheme"
         android:icon="@drawable/icon" >
         <activity
@@ -28,10 +23,9 @@
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density"
             android:label="Pentobi"
             android:launchMode="singleTop"
-            android:screenOrientation="unspecified" >
+            android:screenOrientation="unspecified">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
@@ -53,12 +47,14 @@
                     android:pathPattern=".*\\.blksgf" />
             </intent-filter>
 
-            <meta-data
+          <meta-data
                 android:name="android.app.lib_name"
-                android:value="pentobi" />
-            <meta-data
+                android:value="-- %%INSERT_APP_LIB_NAME%% --" />
+
+          <meta-data
                 android:name="android.app.arguments"
-                android:value="" />
+                android:value="-- %%INSERT_APP_ARGUMENTS%% --" />
+
             <meta-data
                 android:name="android.app.extract_android_style"
                 android:value="minimal" />
@@ -77,5 +73,4 @@
             android:value="pentobi" />
         </activity>
     </application>
-
 </manifest>
