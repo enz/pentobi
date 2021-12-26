@@ -31,7 +31,7 @@ SgfNode& SgfNode::create_new_child()
 {
     auto node = make_unique<SgfNode>();
     node->m_parent = this;
-    auto& result = *(node.get());
+    auto& result = *node;
     auto last_child = get_last_child();
     if (last_child == nullptr)
         m_first_child = move(node);
