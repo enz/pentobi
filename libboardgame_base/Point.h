@@ -75,7 +75,11 @@ private:
 
     IntType m_i;
 
-    LIBBOARDGAME_FORCE_INLINE bool is_initialized() const;
+
+#ifdef LIBBOARDGAME_DEBUG
+    LIBBOARDGAME_FORCE_INLINE
+    bool is_initialized() const { return m_i < value_uninitialized; }
+#endif
 };
 
 
@@ -114,12 +118,6 @@ inline bool Point<M, W, H, I>::operator<(const Point& p) const
     LIBBOARDGAME_ASSERT(is_initialized());
     LIBBOARDGAME_ASSERT(p.is_initialized());
     return m_i < p.m_i;
-}
-
-template<unsigned M, unsigned W, unsigned H, typename I>
-inline bool Point<M, W, H, I>::is_initialized() const
-{
-    return m_i < value_uninitialized;
 }
 
 template<unsigned M, unsigned W, unsigned H, typename I>
