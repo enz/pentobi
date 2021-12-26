@@ -33,10 +33,10 @@ public:
     void cmd_param(Arguments args, Response& response);
     void cmd_get_value(Response& response);
     void cmd_move_values(Response& response);
-    void cmd_name(Response& response);
+    static void cmd_name(Response& response);
     void cmd_selfplay(Arguments args);
     void cmd_save_tree(Arguments args);
-    void cmd_version(Response& response);
+    static void cmd_version(Response& response);
 
     Player& get_mcts_player();
 

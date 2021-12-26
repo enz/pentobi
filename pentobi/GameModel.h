@@ -213,7 +213,7 @@ public:
 
     Q_INVOKABLE QString getResultMessage();
 
-    Q_INVOKABLE bool checkFileExists(const QString& file);
+    Q_INVOKABLE static bool checkFileExists(const QString& file);
 
     Q_INVOKABLE bool checkFileModifiedOutside();
 
@@ -230,12 +230,12 @@ public:
 
     Q_INVOKABLE PieceModel* previousPiece(PieceModel* currentPickedPiece);
 
-    Q_INVOKABLE QString suggestFileName(const QUrl& folder,
-                                        const QString& fileEnding);
+    Q_INVOKABLE static QString suggestFileName(const QUrl& folder,
+                                               const QString& fileEnding);
 
     Q_INVOKABLE QString suggestGameFileName(const QUrl& folder);
 
-    Q_INVOKABLE QString suggestNewFolderName(const QUrl& folder);
+    Q_INVOKABLE static QString suggestNewFolderName(const QUrl& folder);
 
     Q_INVOKABLE QString getError() const { return m_error; }
 
@@ -613,9 +613,9 @@ private:
 
     void createPieceModels(Color c);
 
-    QString decode(const string& s) const;
+    static QString decode(const string& s);
 
-    QByteArray encode(const QString& s) const;
+    static QByteArray encode(const QString& s);
 
     bool findMove(const PieceModel& pieceModel, const QString& state,
                   QPointF coord, Move& mv) const;

@@ -56,7 +56,7 @@ double SgfTree::get_bad_move(const SgfNode& node)
     return node.parse_property<double>("BM", 0);
 }
 
-string SgfTree::get_comment(const SgfNode& node) const
+string SgfTree::get_comment(const SgfNode& node)
 {
     return node.get_property("C", "");
 }

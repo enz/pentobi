@@ -114,7 +114,7 @@ public:
     /** Get comment.
         @return The comment, or an empty string if the node contains no
         comment. */
-    string get_comment(const SgfNode& node) const;
+    static string get_comment(const SgfNode& node);
 
     void set_comment(const SgfNode& node, const string& s);
 

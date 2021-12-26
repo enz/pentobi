@@ -55,7 +55,7 @@ private:
 
     void send_both(const string& cmd);
 
-    double send_cputime(GtpConnection& gtp_connection);
+    static double send_cputime(GtpConnection& gtp_connection);
 };
 
 //-----------------------------------------------------------------------------

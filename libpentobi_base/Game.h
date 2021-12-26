@@ -96,13 +96,13 @@ public:
 
     void remove_move_annotation(const SgfNode& node);
 
-    double get_bad_move(const SgfNode& node) const;
+    static double get_bad_move(const SgfNode& node);
 
-    double get_good_move(const SgfNode& node) const;
+    static double get_good_move(const SgfNode& node);
 
-    bool is_doubtful_move(const SgfNode& node) const;
+    static bool is_doubtful_move(const SgfNode& node);
 
-    bool is_interesting_move(const SgfNode& node) const;
+    static bool is_interesting_move(const SgfNode& node);
 
     void set_bad_move(const SgfNode& node, double value = 1);
 
@@ -207,7 +207,7 @@ inline void Game::clear_modified()
     m_tree.clear_modified();
 }
 
-inline double Game::get_bad_move(const SgfNode& node) const
+inline double Game::get_bad_move(const SgfNode& node)
 {
     return SgfTree::get_bad_move(node);
 }
@@ -219,7 +219,7 @@ inline const Board& Game::get_board() const
 
 inline string Game::get_comment() const
 {
-    return m_tree.get_comment(*m_current);
+    return SgfTree::get_comment(*m_current);
 }
 
 inline string Game::get_date() const
@@ -237,7 +237,7 @@ inline const SgfNode& Game::get_current() const
     return *m_current;
 }
 
-inline double Game::get_good_move(const SgfNode& node) const
+inline double Game::get_good_move(const SgfNode& node)
 {
     return SgfTree::get_good_move(node);
 }
@@ -292,12 +292,12 @@ inline void Game::init()
     init(m_bd->get_variant());
 }
 
-inline bool Game::is_doubtful_move(const SgfNode& node) const
+inline bool Game::is_doubtful_move(const SgfNode& node)
 {
     return SgfTree::is_doubtful_move(node);
 }
 
-inline bool Game::is_interesting_move(const SgfNode& node) const
+inline bool Game::is_interesting_move(const SgfNode& node)
 {
     return SgfTree::is_interesting_move(node);
 }

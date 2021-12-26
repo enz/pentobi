@@ -27,9 +27,9 @@ class InvalidResponseEngine
 public:
     InvalidResponseEngine();
 
-    void invalid_response(Response& r);
+    static void invalid_response(Response& r);
 
-    void invalid_response_2(Response& r);
+    static void invalid_response_2(Response& r);
 };
 
 InvalidResponseEngine::InvalidResponseEngine()

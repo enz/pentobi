@@ -13,6 +13,7 @@
 
 using libboardgame_base::ArrayList;
 using libboardgame_base::SgfNode;
+using libboardgame_base::SgfTree;
 using libboardgame_base::TreeReader;
 using libboardgame_base::TreeWriter;
 using libpentobi_base::get_transforms;
@@ -31,7 +32,7 @@ void add(PentobiTree& tree, const SgfNode& node, bool is_player_black,
     array<unsigned short, 2> count;
     array<float, 2> avg_result;
     array<unsigned short, 2> real_count;
-    auto comment = tree.get_comment(node);
+    auto comment = SgfTree::get_comment(node);
     if (comment.empty())
     {
         count.fill(0);
@@ -75,14 +76,13 @@ bool compare_sequence(ArrayList<ColorMove, Board::max_moves>& s1,
     return false;
 }
 
-unsigned get_real_count(PentobiTree& tree, const SgfNode& node,
-                        bool is_player_black)
+unsigned get_real_count(const SgfNode& node, bool is_player_black)
 {
     unsigned index = is_player_black ? 0 : 1;
     array<unsigned, 2> count;
     array<double, 2> avg_result;
     array<unsigned, 2> real_count;
-    auto comment = tree.get_comment(node);
+    auto comment = SgfTree::get_comment(node);
     istringstream in(comment);
     in >> count[0] >> real_count[0] >> avg_result[0]
        >> count[1] >> real_count[1] >> avg_result[1];
@@ -188,7 +188,7 @@ void OutputTree::generate_move(bool is_player_black, const Board& bd,
     }
     unsigned sum = 0;
     for (auto& i : node->get_children())
-        sum += get_real_count(m_tree, i, is_player_black);
+        sum += get_real_count(i, is_player_black);
     if (sum == 0)
         return;
     uniform_real_distribution<double> distribution(0, 1);
@@ -201,7 +201,7 @@ void OutputTree::generate_move(bool is_player_black, const Board& bd,
     sum = 0;
     for (auto& i : node->get_children())
     {
-        auto real_count = get_real_count(m_tree, i, is_player_black);
+        auto real_count = get_real_count(i, is_player_black);
         if (real_count == 0)
             continue;
         sum += real_count;

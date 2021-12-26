@@ -91,7 +91,7 @@ public:
     void play_playout(Move mv);
 
     /** Check if RAVE value for this move should not be updated. */
-    bool skip_rave(Move mv) const;
+    static bool skip_rave([[maybe_unused]] Move mv) { return false; }
 
 #ifdef LIBBOARDGAME_DEBUG
     string dump() const;
@@ -468,11 +468,6 @@ inline void State::play_playout(Move mv)
     ++m_nu_new_moves[to_play];
     m_last_move[to_play] = mv;
     m_nu_passes = 0;
-}
-
-inline bool State::skip_rave([[maybe_unused]] Move mv) const
-{
-    return false;
 }
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>

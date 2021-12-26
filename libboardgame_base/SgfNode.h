@@ -83,7 +83,7 @@ public:
 
         Iterator begin() const { return m_begin; }
 
-        Iterator end() const { return Iterator(nullptr); }
+        static Iterator end() { return Iterator(nullptr); }
 
         bool empty() const { return m_begin.is_null(); }
 

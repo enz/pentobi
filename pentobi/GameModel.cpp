@@ -341,7 +341,7 @@ void GameModel::createPieceModels(Color c)
     }
 }
 
-QString GameModel::decode(const string& s) const
+QString GameModel::decode(const string& s)
 {
     return QString::fromStdString(s);
 }
@@ -355,7 +355,7 @@ void GameModel::deleteAllVar()
 }
 
 
-QByteArray GameModel::encode(const QString& s) const
+QByteArray GameModel::encode(const QString& s)
 {
     return s.toUtf8();
 }

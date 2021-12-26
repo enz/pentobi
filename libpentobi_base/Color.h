@@ -45,7 +45,7 @@ public:
             : m_nu_colors(nu_colors)
         { }
 
-        Iterator begin() const { return Iterator(0); }
+        static Iterator begin() { return Iterator(0); }
 
         Iterator end() const { return Iterator(m_nu_colors); }
 

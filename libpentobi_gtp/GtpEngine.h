@@ -32,7 +32,7 @@ public:
 
     void cmd_all_legal(Arguments args, Response& response);
     void cmd_clear_board();
-    void cmd_cputime(Response& response);
+    static void cmd_cputime(Response& response);
     void cmd_final_score(Response& response);
     void cmd_g(Response& response);
     void cmd_genmove(Arguments args, Response& response);
@@ -46,7 +46,7 @@ public:
     void cmd_reg_genmove(Arguments args, Response& response);
     void cmd_savesgf(Arguments args);
     void cmd_set_game(Arguments args);
-    void cmd_set_random_seed(Arguments args);
+    static void cmd_set_random_seed(Arguments args);
     void cmd_undo();
 
     /** Set the player.
