@@ -81,7 +81,7 @@ private:
 
     PlayerBase* m_player = nullptr;
 
-    void board_changed();
+    void board_changed() const;
 
     void genmove(Color c, Response& response);
 

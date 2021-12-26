@@ -634,9 +634,9 @@ private:
 
     void prepareFindMove();
 
-    void preparePieceGameCoord(PieceModel* pieceModel, Move mv);
+    void preparePieceGameCoord(PieceModel* pieceModel, Move mv) const;
 
-    void preparePieceTransform(PieceModel* pieceModel, Move mv);
+    void preparePieceTransform(PieceModel* pieceModel, Move mv) const;
 
     void preparePositionChange();
 

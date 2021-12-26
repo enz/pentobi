@@ -1188,12 +1188,12 @@ PieceModel* GameModel::preparePiece(GameMove* move)
     return nullptr;
 }
 
-void GameModel::preparePieceGameCoord(PieceModel* pieceModel, Move mv)
+void GameModel::preparePieceGameCoord(PieceModel* pieceModel, Move mv) const
 {
     pieceModel->setGameCoord(getGameCoord(getBoard(), mv));
 }
 
-void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv)
+void GameModel::preparePieceTransform(PieceModel* pieceModel, Move mv) const
 {
     auto& bd = getBoard();
     auto transform = bd.find_transform(mv);

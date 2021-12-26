@@ -51,7 +51,7 @@ GtpEngine::GtpEngine(Variant variant)
     add("undo", &GtpEngine::cmd_undo);
 }
 
-void GtpEngine::board_changed()
+void GtpEngine::board_changed() const
 {
     if (m_show_board)
         LIBBOARDGAME_LOG(get_board());
