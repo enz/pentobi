@@ -4,8 +4,9 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include <memory>
 #include "libboardgame_base/SgfNode.h"
+
+#include <memory>
 #include "libboardgame_test/Test.h"
 
 using namespace libboardgame_base;

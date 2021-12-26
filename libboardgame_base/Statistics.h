@@ -73,7 +73,7 @@ void StatisticsBase<FLOAT>::write(ostream& out, bool fixed,
     out << setprecision(precision) << m_mean;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename FLOAT = double>
 class Statistics
@@ -153,7 +153,7 @@ void Statistics<FLOAT>::write(ostream& out, bool fixed, int precision) const
     out << setprecision(precision) << get_mean() << " dev=" << get_deviation();
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename FLOAT = double>
 class StatisticsExt
@@ -243,7 +243,7 @@ void StatisticsExt<FLOAT>::write(ostream& out, bool fixed, int precision,
     }
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 /** Like StatisticsBase, but for lock-free multithreading with potentially
     lost updates.
@@ -316,7 +316,7 @@ void StatisticsDirty<FLOAT>::write(ostream& out, bool fixed,
     out << setprecision(precision) << get_mean();
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 template<typename FLOAT>
 inline ostream& operator<<(ostream& out, const StatisticsExt<FLOAT>& s)
@@ -325,7 +325,7 @@ inline ostream& operator<<(ostream& out, const StatisticsExt<FLOAT>& s)
     return out;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 } // namespace libboardgame_base
 

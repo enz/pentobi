@@ -4,9 +4,10 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+#include "libpentobi_base/PentobiTree.h"
+
 #include "libboardgame_base/TreeReader.h"
 #include "libboardgame_test/Test.h"
-#include "libpentobi_base/PentobiTree.h"
 
 using namespace std;
 using namespace libpentobi_base;

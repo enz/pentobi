@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include "libboardgame_gtp/Arguments.h"
+
 #include "libboardgame_test/Test.h"
 
 using namespace libboardgame_gtp;

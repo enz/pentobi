@@ -4,8 +4,9 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#include "libboardgame_base/Point.h"
 #include "libboardgame_base/RectGeometry.h"
+
+#include "libboardgame_base/Point.h"
 #include "libboardgame_test/Test.h"
 
 using namespace std;

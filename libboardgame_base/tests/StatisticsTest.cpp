@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include "libboardgame_base/Statistics.h"
+
 #include "libboardgame_test/Test.h"
 
 using namespace libboardgame_base;

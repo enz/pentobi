@@ -11,6 +11,8 @@ namespace libboardgame_base {
 
 class TimeSource;
 
+//-----------------------------------------------------------------------------
+
 class Timer
 {
 public:

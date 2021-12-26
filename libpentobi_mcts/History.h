@@ -1,8 +1,8 @@
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 /** @file libpentobi_mcts/History.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 #ifndef LIBPENTOBI_MCTS_HISTORY_H
 #define LIBPENTOBI_MCTS_HISTORY_H
@@ -18,7 +18,7 @@ using libpentobi_base::Move;
 using libpentobi_base::Setup;
 using libpentobi_base::Variant;
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 /** Identifier for board state including history.
     This class can be used, for instance, to uniquely remember a board
@@ -96,7 +96,7 @@ inline bool History::is_valid() const
     return m_is_valid;
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 } // namespace libpentobi_mcts
 

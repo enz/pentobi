@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include "libboardgame_gtp/GtpEngine.h"
+
 #include "libboardgame_test/Test.h"
 
 using namespace std;

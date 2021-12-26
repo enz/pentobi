@@ -19,7 +19,7 @@ namespace libboardgame_base {
 
 using namespace std;
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 class OptionError
     : public runtime_error
@@ -27,7 +27,7 @@ class OptionError
     using runtime_error::runtime_error;
 };
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 /** Parser for command line options.
     The syntax of options is similar to GNU getopt. Options start with "--"
@@ -111,7 +111,7 @@ T Options::get(const string& name, const T& default_value) const
     return get<T>(name);
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 } // namespace libboardgame_base
 

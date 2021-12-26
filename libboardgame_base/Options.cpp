@@ -8,7 +8,7 @@
 
 namespace libboardgame_base {
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 Options::Options(int argc, const char** argv, const vector<string>& specs)
 {
@@ -150,6 +150,6 @@ string Options::get(const string& name, const char* default_value) const
     return get(name, string(default_value));
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 } // namespace libboardgame_base

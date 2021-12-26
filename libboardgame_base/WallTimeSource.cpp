@@ -20,6 +20,6 @@ double WallTimeSource::operator()()
     return duration_cast<duration<double>>(t).count();
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 } // namespace libboardgame_base

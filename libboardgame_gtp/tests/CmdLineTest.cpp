@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include "libboardgame_gtp/CmdLine.h"
+
 #include "libboardgame_test/Test.h"
 
 using namespace std;

@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include "libboardgame_base/Marker.h"
+
 #include "libboardgame_base/Point.h"
 #include "libboardgame_test/Test.h"
 

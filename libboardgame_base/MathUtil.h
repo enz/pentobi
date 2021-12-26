@@ -1,8 +1,8 @@
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 /** @file libboardgame_base/MathUtil.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 #ifndef LIBBOARDGAME_BASE_MATH_UTIL_H
 #define LIBBOARDGAME_BASE_MATH_UTIL_H

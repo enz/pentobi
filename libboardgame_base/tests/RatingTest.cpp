@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include "libboardgame_base/Rating.h"
+
 #include "libboardgame_test/Test.h"
 
 using namespace libboardgame_base;

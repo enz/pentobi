@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include "libboardgame_base/Options.h"
+
 #include "libboardgame_test/Test.h"
 
 using namespace std;

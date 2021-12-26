@@ -10,7 +10,7 @@
 using namespace std;
 using namespace libboardgame_base;
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 LIBBOARDGAME_TEST_CASE(libboardgame_base_get_letter_coord)
 {
@@ -82,4 +82,4 @@ LIBBOARDGAME_TEST_CASE(libboardgame_base_trim)
     LIBBOARDGAME_CHECK_EQUAL(trim(""), "");
 }
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
