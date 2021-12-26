@@ -50,7 +50,7 @@ template<>
 string Arguments::get(unsigned i) const
 {
     auto s = get(i);
-    return string(&*s.begin(), s.size());
+    return {&*s.begin(), s.size()};
 }
 
 string Arguments::get_tolower(unsigned i) const

@@ -701,7 +701,7 @@ QByteArray GameModel::getSgf(int indent) const
     PentobiTreeWriter writer(s, tree);
     writer.set_indent(indent);
     writer.write();
-    return QByteArray(s.str().c_str());
+    return {s.str().c_str()};
 }
 
 QString GameModel::getVariationInfo() const
