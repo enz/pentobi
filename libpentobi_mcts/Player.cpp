@@ -14,8 +14,6 @@
 
 namespace libpentobi_mcts {
 
-using libboardgame_base::CpuTimeSource;
-using libboardgame_base::WallTimeSource;
 using libpentobi_base::BoardType;
 
 //-----------------------------------------------------------------------------
