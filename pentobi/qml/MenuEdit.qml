@@ -74,7 +74,6 @@ PentobiMenu {
                  && gameModel.moveNumber === 0 && ! isRated
         checked: gameView.setupMode
         onTriggered: {
-            checked = ! gameView.setupMode // Workaround for QTBUG-69401
             gameView.setupMode = checked
             if (checked)
                 gameView.showPieces()
