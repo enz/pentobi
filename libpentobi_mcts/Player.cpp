@@ -8,9 +8,7 @@
 
 #include <fstream>
 #include <iomanip>
-#include "libboardgame_base/CpuTimeSource.h"
 #include "libboardgame_base/Memory.h"
-#include "libboardgame_base/WallTimeSource.h"
 
 namespace libpentobi_mcts {
 
