@@ -30,7 +30,7 @@ Building
 
 Pentobi can be compiled from the source directory with the commands
 ```
-cmake -DCMAKE_BUILD_TYPE=Release .
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release .
 make
 ```
 
