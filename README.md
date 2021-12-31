@@ -22,7 +22,7 @@ at the [issue tracker](https://github.com/enz/pentobi/issues) at GitHub.
 License
 -------
 
-Copyright (C) 2011-2021 Markus Enzenberger.
+Copyright (C) 2011-2022 Markus Enzenberger.
 See [AUTHORS](AUTHORS.md) for a full list of authors.
 
 This program is free software: you can redistribute it and/or modify it

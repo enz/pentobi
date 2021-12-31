@@ -1385,7 +1385,7 @@ msgstr ""
 
 #. (itstool) path: chapter/para
 #: index.docbook:1305
-msgid "Copyright © 2011–2021 Markus Enzenberger"
+msgid "Copyright © 2011–2022 Markus Enzenberger"
 msgstr ""
 
 #. (itstool) path: chapter/para
