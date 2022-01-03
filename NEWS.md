@@ -20,7 +20,7 @@ Version 19.2-dev (v19-fixes)
 Version 19.1 (05 Dec 2021)
 --------------------------
 
-* Workaround for a crash at exit in some situations.
+* Workaround for a crash with Qt 5.15.
 * Dialog for starting rated game was not shown after accepting a dialog
   to discard current game.
 * Tuned landscape layout on Android for 16:10 tablets.
