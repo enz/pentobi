@@ -9,6 +9,7 @@ Version 20.0-dev (master)
   have no permissions to open files in /usr/share/help.
 * Migrated Android version from Qt 5.15 to Qt 6.2.
 * Faster move generation in multi-player game variants.
+* Show error message if launching web browser failed.
 * Minimum required CMake version is now 3.18.
 
 Version 19.2-dev (v19-fixes)
