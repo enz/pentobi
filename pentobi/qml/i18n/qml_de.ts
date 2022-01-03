@@ -860,6 +860,10 @@
         <source>Press back again to exit</source>
         <translation>Zum Beenden erneut Zurück drücken</translation>
     </message>
+    <message>
+        <source>Starting web browser failed</source>
+        <translation>Starten des Webbrowsers fehlgeschlagen</translation>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>

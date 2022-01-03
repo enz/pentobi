@@ -860,6 +860,10 @@
         <source>Press back again to exit</source>
         <translation type="unfinished"/>
     </message>
+    <message>
+        <source>Starting web browser failed</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>MenuComputer</name>
