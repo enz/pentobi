@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-11 17:37+0100\n"
+"POT-Creation-Date: 2022-01-03 22:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1385,26 +1385,21 @@ msgstr ""
 
 #. (itstool) path: chapter/para
 #: index.docbook:1305
-msgid "Copyright © 2011–2022 Markus Enzenberger"
-msgstr ""
-
-#. (itstool) path: chapter/para
-#: index.docbook:1308
 msgid "This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version."
 msgstr ""
 
 #. (itstool) path: chapter/para
-#: index.docbook:1314
+#: index.docbook:1311
 msgid "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details."
 msgstr ""
 
 #. (itstool) path: sect1/title
-#: index.docbook:1321
+#: index.docbook:1318
 msgid "Trademark Disclaimer"
 msgstr ""
 
 #. (itstool) path: sect1/para
-#: index.docbook:1322
+#: index.docbook:1319
 msgid "The trademark Blokus and other trademarks referred to are property of their respective trademark holders. The trademark holders are not affiliated with the author of the program Pentobi."
 msgstr ""
 

@@ -1303,9 +1303,6 @@ slow) or have a reduced playing strength (if there is not enough memory).
 <chapter id="license">
 <title>License</title>
 <para>
-Copyright © 2011–2022 Markus Enzenberger
-</para>
-<para>
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later
