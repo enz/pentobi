@@ -1,6 +1,6 @@
 <RCC>
 <qresource>
-<file>icon/pentobi-128.png</file>
+<file>icon/pentobi-48.png</file>
 <file>qml/themes/dark/menu.png</file>
 <file>qml/themes/dark/pentobi-backward.png</file>
 <file>qml/themes/dark/pentobi-backward10.png</file>

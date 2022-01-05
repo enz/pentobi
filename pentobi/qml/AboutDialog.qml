@@ -21,18 +21,15 @@ PentobiDialog {
             rightPadding: leftPadding
 
             Image {
-                source: "qrc:icon/pentobi-128.png"
-                width: 64; height: 64
-                sourceSize { width: 256; height: 256 }
+                source: "qrc:icon/pentobi-48.png"
+                width: 48; height: 48
+                sourceSize { width: 192; height: 192 }
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
                 //: The argument is the application version.
                 text: qsTr("Pentobi %1").arg(Qt.application.version)
-                font {
-                    bold: true
-                    pixelSize: 1.3 * root.font.pixelSize
-                }
+                font { bold: true }
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {

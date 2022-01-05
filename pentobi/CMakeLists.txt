@@ -21,7 +21,7 @@ file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/icons")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/themes/dark")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/themes/light")
 set(pentobi_images
-    icon/pentobi-128
+    icon/pentobi-48
     qml/icons/filedialog-folder
     qml/themes/dark/menu
     qml/themes/dark/menu-desktop
