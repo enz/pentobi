@@ -271,15 +271,12 @@ Item
             name: "unplayed"
             when: parentUnplayed != null
 
-            PropertyChanges {
-                target: root
-                scale: scaleUnplayed
-            }
             ParentChange {
                 target: root
                 parent: parentUnplayed
                 x: parentUnplayed.width / 2
                 y: parentUnplayed.height / 2
+                scale: scaleUnplayed
             }
         }
     ]
