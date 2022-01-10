@@ -6,19 +6,10 @@
 
 import QtQuick 2.0
 
-Item
+PieceBase
 {
     id: root
 
-    property QtObject pieceModel
-    property var color:
-        switch (pieceModel.color) {
-        case 0: return color0
-        case 1: return color1
-        case 2: return color2
-        case 3: return color3
-        }
-    property Item parentUnplayed
     property string imageName:
         "image://pentobi/triangle/" + color[0] + "/" + color[1] + "/"
         + color[2]
@@ -27,9 +18,6 @@ Item
         + color[2]
     property real scaleUnplayed:
         parentUnplayed ? 0.14 * parentUnplayed.width / board.gridWidth : 0
-    property bool flippedX: Math.abs(flipX.angle - 180) < 90
-    property real pieceAngle: flippedX ? rotation + 180 : rotation
-    property real isSmall: scale < 0.5 ? 1 : 0
     property real imageOpacity0: imageOpacity(pieceAngle, 0) * (1 - isSmall)
     property real imageOpacity60: imageOpacity(pieceAngle, 60) * (1 - isSmall)
     property real imageOpacity120: imageOpacity(pieceAngle, 120) * (1 - isSmall)
@@ -42,19 +30,6 @@ Item
     property real imageOpacitySmall180: imageOpacity(pieceAngle, 180) * isSmall
     property real imageOpacitySmall240: imageOpacity(pieceAngle, 240) * isSmall
     property real imageOpacitySmall300: imageOpacity(pieceAngle, 300) * isSmall
-
-    transform: [
-        Rotation {
-            id: flipX
-
-            axis { x: 1; y: 0; z: 0 }
-        },
-        Rotation {
-            id: flipY
-
-            axis { x: 0; y: 1; z: 0 }
-        }
-    ]
 
     function _isDownward(pos) { return (pos.x % 2 == 0) != (pos.y % 2 == 0) }
     function imageOpacity(pieceAngle, imgAngle) {
@@ -153,192 +128,6 @@ Item
                 Behavior on opacity {
                     NumberAnimation { duration: animationDurationFast }
                 }
-            }
-        }
-    }
-    StateGroup {
-        state: pieceModel.state
-
-        states: [
-            State {
-                name: "60"
-
-                PropertyChanges { target: root; rotation: 60 }
-                // See comment in PieceClassic about flipY property change
-                PropertyChanges { target: flipY; angle: 0 }
-            },
-            State {
-                name: "120"
-
-                PropertyChanges { target: root; rotation: 120 }
-                PropertyChanges { target: flipY; angle: 0 }
-            },
-            State {
-                name: "180"
-
-                PropertyChanges { target: root; rotation: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
-            },
-            State {
-                name: "240"
-
-                PropertyChanges { target: root; rotation: 240 }
-                PropertyChanges { target: flipY; angle: 0 }
-            },
-            State {
-                name: "300"
-
-                PropertyChanges { target: root; rotation: 300 }
-                PropertyChanges { target: flipY; angle: 0 }
-            },
-            State {
-                name: "flip"
-
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
-            },
-            State {
-                name: "60flip"
-
-                PropertyChanges { target: root; rotation: 60 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
-            },
-            State {
-                name: "120flip"
-
-                PropertyChanges { target: root; rotation: 120 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
-            },
-            State {
-                name: "180flip"
-
-                PropertyChanges { target: root; rotation: 180 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
-            },
-            State {
-                name: "240flip"
-
-                PropertyChanges { target: root; rotation: 240 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
-            },
-            State {
-                name: "300flip"
-
-                PropertyChanges { target: root; rotation: 300 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
-            }
-        ]
-
-        transitions: [
-            Transition {
-                from: ",180flip"; to: from
-                enabled: enableAnimations
-
-                PieceSwitchedFlipAnimation { }
-            },
-            Transition {
-                from: "60,240flip"; to: from
-                enabled: enableAnimations
-
-                PieceSwitchedFlipAnimation { }
-            },
-            Transition {
-                from: "120,300flip"; to: from
-                enabled: enableAnimations
-
-                PieceSwitchedFlipAnimation { }
-            },
-            Transition {
-                from: "180,flip"; to: from
-                enabled: enableAnimations
-
-                PieceSwitchedFlipAnimation { }
-            },
-            Transition {
-                from: "240,60flip"; to: from
-                enabled: enableAnimations
-
-                PieceSwitchedFlipAnimation { }
-            },
-            Transition {
-                from: "300,120flip"; to: from
-                enabled: enableAnimations
-
-                PieceSwitchedFlipAnimation { }
-            },
-            Transition {
-                enabled: enableAnimations
-
-                PieceRotationAnimation { }
-                PieceRotationAnimation { target: flipX; property: "angle" }
-            }
-        ]
-    }
-
-    states: [
-        State {
-            name: "picked"
-            when: root === pickedPiece
-
-            ParentChange {
-                target: root
-                parent: pieceManipulator
-                x: pieceManipulator.width / 2
-                y: pieceManipulator.height / 2
-            }
-        },
-        State {
-            name: "played"
-            when: pieceModel.isPlayed
-
-            ParentChange {
-                target: root
-                parent: board.grabImageTarget
-                x: board.mapFromGameX(pieceModel.gameCoord.x) - board.grabImageTarget.x
-                y: board.mapFromGameY(pieceModel.gameCoord.y) - board.grabImageTarget.y
-            }
-        },
-        State {
-            name: "unplayed"
-            when: parentUnplayed != null
-
-            ParentChange {
-                target: root
-                parent: parentUnplayed
-                x: parentUnplayed.width / 2
-                y: parentUnplayed.height / 2
-                scale: scaleUnplayed
-            }
-        }
-    ]
-
-    transitions:
-        Transition {
-        from: "unplayed,picked,played"; to: from
-        enabled: enableAnimations
-
-        SequentialAnimation {
-            PropertyAction {
-                target: parentUnplayed.parent
-                property: "z"; value: 1
-            }
-            ParentAnimation {
-                via: isDesktop ? null : gameView
-
-                NumberAnimation {
-                    properties: "x,y,scale"
-                    duration: animationDurationMove
-                    easing.type: Easing.InOutSine
-                }
-            }
-            PropertyAction {
-                target: parentUnplayed.parent
-                property: "z"; value: 0
             }
         }
     }

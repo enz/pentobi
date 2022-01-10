@@ -44,6 +44,7 @@
 <file>qml/PentobiMenu.qml</file>
 <file>qml/PentobiMenuItem.qml</file>
 <file>qml/PentobiToolBar.qml</file>
+<file>qml/PieceBase.qml</file>
 <file>qml/PieceCallisto.qml</file>
 <file>qml/PieceClassic.qml</file>
 <file>qml/PieceGembloQ.qml</file>
