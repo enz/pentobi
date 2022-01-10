@@ -479,7 +479,9 @@ ApplicationWindow {
         sequence: "Back"
         enabled: isAndroid
         onActivated: {
-            if (! toolBar.visible)
+            if (gameView.pickedPiece)
+                gameView.pickedPiece = null
+            else if (! toolBar.visible)
                 toolBar.visible = true
             else if (pressBackTwice.running)
                 close()
