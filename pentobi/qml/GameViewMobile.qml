@@ -130,8 +130,8 @@ Item
         width: isPortrait ? Math.min(parent.width, 0.7 * parent.height)
                           : Math.min(parent.width * 0.57, parent.height)
         height: isPortrait ? width : parent.height
-        onClicked: Logic.onBoardClicked(pos)
-        onRightClicked: Logic.onBoardRightClicked(pos)
+        onClicked: pos => Logic.onBoardClicked(pos)
+        onRightClicked: pos => Logic.onBoardRightClicked(pos)
 
         Loader {
             id: boardContextMenu
