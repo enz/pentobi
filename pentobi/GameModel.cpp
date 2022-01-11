@@ -122,7 +122,10 @@ bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
 
 void setValue(QSettings& settings, const QString& key, const QDateTime& date)
 {
-    // In Qt 5.15 ~QSettings() crashes if it contains invalid QDateTime
+    // We had crashes in Qt 5.15 in ~QSettings() that can be reduced by not
+    // unnecessarily adding QDateTime to QSettings. Probably related to
+    // QTBUG-84575 (QCalendar class is not reentrant), which has been fixed in
+    // Qt 6.
     if (date.isValid())
         settings.setValue(key, date);
     else
