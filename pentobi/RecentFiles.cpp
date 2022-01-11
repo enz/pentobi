@@ -31,8 +31,10 @@ void RecentFiles::add(const QString& file, const QString& displayName)
     QVariantMap entry{ { "file", file }, { "displayName", displayName } };
     m_entries.prepend(QVariant::fromValue(entry));
     checkMax(file);
-    QSettings settings;
-    settings.setValue(QStringLiteral("recentFiles"), m_entries);
+    {
+        QSettings settings;
+        settings.setValue(QStringLiteral("recentFiles"), m_entries);
+    }
     emit entriesChanged();
 }
 
@@ -45,15 +47,19 @@ void RecentFiles::checkMax([[maybe_unused]]const QString& currentFile)
 void RecentFiles::clear([[maybe_unused]]const QString& currentFile)
 {
     m_entries.clear();
-    QSettings settings;
-    settings.setValue(QStringLiteral("recentFiles"), m_entries);
+    {
+        QSettings settings;
+        settings.remove(QStringLiteral("recentFiles"));
+    }
     emit entriesChanged();
 }
 
 void RecentFiles::load()
 {
-    QSettings settings;
-    m_entries = settings.value(QStringLiteral("recentFiles")).toList();
+    {
+        QSettings settings;
+        m_entries = settings.value(QStringLiteral("recentFiles")).toList();
+    }
     QMutableListIterator i(m_entries);
     while (i.hasNext())
     {
