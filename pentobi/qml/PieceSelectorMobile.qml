@@ -23,7 +23,7 @@ Flickable {
     contentHeight: Math.max(pieceList0.y + pieceList0.height,
                             pieceList1.y + pieceList1.height,
                             pieceList2.y + pieceList2.height,
-                            pieceList3.y + pieceList3.height, rowSpacing)
+                            pieceList3.y + pieceList3.height)
     clip: true
 
     // States order the piece lists such that the color to play is on top and
