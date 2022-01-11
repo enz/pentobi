@@ -23,8 +23,48 @@ Flickable {
     contentHeight: Math.max(pieceList0.y + pieceList0.height,
                             pieceList1.y + pieceList1.height,
                             pieceList2.y + pieceList2.height,
-                            pieceList3.y + pieceList3.height)
+                            pieceList3.y + pieceList3.height, rowSpacing)
     clip: true
+
+    // States order the piece lists such that the color to play is on top and
+    // the colors are in order of play (c=color of piece list, h0-h3=heights of
+    // piece lists, d=rowSpacing)
+    function getY(toPlay, c, h0, h1, h2, h3, d) {
+        switch (toPlay) {
+        case 0:
+            switch (c) {
+            case 0: return 0.5 * d
+            case 1: return h0 + 1.5 * d
+            case 2: return h0 + h1 + 2.5 * d
+            case 3: return h0 + h1 + h2 + 3.5 * d
+            }
+            break
+        case 1:
+            switch (c) {
+            case 1: return 0.5 * d
+            case 2: return h1 + 1.5 * d
+            case 3: return h1 + h2 + 2.5 * d
+            case 0: return h1 + h2 + h3 + 3.5 * d
+            }
+            break
+        case 2:
+            switch (c) {
+            case 2: return 0.5 * d
+            case 3: return h2 + 1.5 * d
+            case 0: return h2 + h3 + 2.5 * d
+            case 1: return h2 + h3 + h0 + 3.5 * d
+            }
+            break
+        case 3:
+            switch (c) {
+            case 3: return 0.5 * d
+            case 0: return h3 + 1.5 * d
+            case 1: return h3 + h0 + 2.5 * d
+            case 2: return h3 + h0 + h1 + 3.5 * d
+            }
+            break
+        }
+    }
 
     Behavior on contentY { NumberAnimation { duration: animationDurationFast } }
 
@@ -68,20 +108,23 @@ Flickable {
 
             PropertyChanges {
                 target: pieceList0
-                y: 0.5 * rowSpacing
+                y: getY(0, 0, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
             PropertyChanges {
                 target: pieceList1
-                y: pieceList0.height + 1.5 * rowSpacing
+                y: getY(0, 1, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
             PropertyChanges {
                 target: pieceList2
-                y: pieceList0.height + pieceList1.height + 2.5 * rowSpacing
+                y: getY(0, 2, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
             PropertyChanges {
                 target: pieceList3
-                y: pieceList0.height + pieceList1.height + pieceList2.height
-                   + 3.5 * rowSpacing
+                y: getY(0, 3, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
         },
         State {
@@ -89,28 +132,24 @@ Flickable {
             when: gameModel.toPlay === 1
 
             PropertyChanges {
+                target: pieceList0
+                y: getY(1, 0, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
+            }
+            PropertyChanges {
                 target: pieceList1
-                y: 0.5 * rowSpacing
+                y: getY(1, 1, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
             PropertyChanges {
                 target: pieceList2
-                y: pieceList1.height + 1.5 * rowSpacing
+                y: getY(1, 2, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
             PropertyChanges {
                 target: pieceList3
-                y: pieceList1.height + pieceList2.height + 2.5 * rowSpacing
-            }
-            PropertyChanges {
-                target: pieceList0
-                y: {
-                    if (gameModel.nuColors === 2)
-                        return pieceList1.height + 1.5 * rowSpacing
-                    if (gameModel.nuColors === 3)
-                        return pieceList1.height + pieceList2.height
-                                + 2.5 * rowSpacing
-                    return pieceList1.height + pieceList2.height
-                            + pieceList3.height + 3.5 * rowSpacing
-                }
+                y: getY(1, 3, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
         },
         State {
@@ -118,32 +157,24 @@ Flickable {
             when: gameModel.toPlay === 2
 
             PropertyChanges {
-                target: pieceList2
-                y: 0.5 * rowSpacing
-            }
-            PropertyChanges {
-                target: pieceList3
-                y: pieceList2.height + 1.5 * rowSpacing
-            }
-            PropertyChanges {
                 target: pieceList0
-                y: {
-                    if (gameModel.nuColors === 3)
-                        return pieceList2.height + pieceList3.height
-                                + 2.5 * rowSpacing
-                    return pieceList2.height + pieceList3.height
-                            + 2.5 * rowSpacing
-                }
+                y: getY(2, 0, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
             PropertyChanges {
                 target: pieceList1
-                y: {
-                    if (gameModel.nuColors === 3)
-                        return pieceList2.height + pieceList0.height
-                                + 2.5 * rowSpacing
-                    return pieceList2.height + pieceList3.height
-                            + pieceList0.height + 3.5 * rowSpacing
-                }
+                y: getY(2, 1, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
+            }
+            PropertyChanges {
+                target: pieceList2
+                y: getY(2, 2, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
+            }
+            PropertyChanges {
+                target: pieceList3
+                y: getY(2, 3, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
         },
         State {
@@ -151,21 +182,24 @@ Flickable {
             when: gameModel.toPlay === 3
 
             PropertyChanges {
-                target: pieceList3
-                y: 0.5 * rowSpacing
-            }
-            PropertyChanges {
                 target: pieceList0
-                y: pieceList3.height + 1.5 * rowSpacing
+                y: getY(3, 0, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
             PropertyChanges {
                 target: pieceList1
-                y: pieceList3.height + pieceList0.height + 2.5 * rowSpacing
+                y: getY(3, 1, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
             PropertyChanges {
                 target: pieceList2
-                y: pieceList3.height + pieceList0.height + pieceList1.height
-                   + 3.5 * rowSpacing
+                y: getY(3, 2, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
+            }
+            PropertyChanges {
+                target: pieceList3
+                y: getY(3, 3, pieceList0.height, pieceList1.height,
+                        pieceList2.height, pieceList3.height, rowSpacing)
             }
         }
     ]
@@ -177,8 +211,8 @@ Flickable {
                 // Delay showing new color because of piece placement animation
                 PauseAnimation {
                     duration:
-                        Math.max(animationDurationMove - animationDurationFast,
-                                 0)
+                        Math.max(
+                            animationDurationMove - animationDurationFast, 0)
                 }
                 NumberAnimation {
                     target: root
@@ -188,6 +222,29 @@ Flickable {
                 }
                 PropertyAction { property: "y" }
                 PropertyAction { target: root; property: "contentY"; value: 0 }
+                // Workaround for a bug in Qt 6.2, which makes the lists end up
+                // at the wrong y if the heights change while the transition is
+                // running.
+                ScriptAction {
+                    script: {
+                        pieceList0.y =
+                                getY(gameModel.toPlay, 0, pieceList0.height,
+                                     pieceList1.height, pieceList2.height,
+                                     pieceList3.height, rowSpacing)
+                        pieceList1.y =
+                                getY(gameModel.toPlay, 1, pieceList0.height,
+                                     pieceList1.height, pieceList2.height,
+                                     pieceList3.height, rowSpacing)
+                        pieceList2.y =
+                                getY(gameModel.toPlay, 2, pieceList0.height,
+                                     pieceList1.height, pieceList2.height,
+                                     pieceList3.height, rowSpacing)
+                        pieceList3.y =
+                                getY(gameModel.toPlay, 3, pieceList0.height,
+                                     pieceList1.height, pieceList2.height,
+                                     pieceList3.height, rowSpacing)
+                    }
+                }
                 NumberAnimation {
                     target: root
                     property: "opacity"
