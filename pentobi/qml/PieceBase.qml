@@ -251,14 +251,8 @@ Item
             enabled: enableAnimations
 
             SequentialAnimation {
-                // Avoid piece being overlapped by pieces of different color
-                // during ParentAnimation
-                PropertyAction {
-                    target: parentUnplayed.parent
-                    property: "z"; value: 1
-                }
                 ParentAnimation {
-                    via: isDesktop ? null : gameView
+                    via: gameView
 
                     NumberAnimation {
                         properties: "x,y,scale"
@@ -266,10 +260,26 @@ Item
                         easing.type: Easing.InOutSine
                     }
                 }
-                PropertyAction {
-                    target: parentUnplayed.parent
-                    property: "z"; value: 0
+                // Workaround for QTBUG-99695 (ParentAnimation with via leaves
+                // item at wrong position if target moves; Qt 6.2)
+                ScriptAction {
+                    script: {
+                        switch (state) {
+                        case "picked":
+                            x = pieceManipulator.width / 2
+                            y = pieceManipulator.height / 2
+                            break
+                        case "played":
+                            x = board.mapFromGameX(pieceModel.gameCoord.x) - board.grabImageTarget.x
+                            y = board.mapFromGameX(pieceModel.gameCoord.y) - board.grabImageTarget.y
+                            break
+                        case "unplayed":
+                            x = parentUnplayed.width / 2
+                            y = parentUnplayed.height / 2
+                            break
+                        }
+                    }
                 }
             }
-    }
+        }
 }
