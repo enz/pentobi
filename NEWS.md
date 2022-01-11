@@ -21,7 +21,9 @@ Version 19.2-dev (v19-fixes)
 Version 19.1 (05 Dec 2021)
 --------------------------
 
-* Workaround for a crash with Qt 5.15.
+* Workaround to reduce the likelihood of crashes with Qt 5.15 that
+  sometimes garbled file dates in Pentobi's config file and made it
+  crash the next time Pentobi is run (probably caused by QTBUG-84575).
 * Dialog for starting rated game was not shown after accepting a dialog
   to discard current game.
 * Tuned landscape layout on Android for 16:10 tablets.
