@@ -120,19 +120,29 @@ bool getVariationIndex(const PentobiTree& tree, const SgfNode& node,
     return nuSiblingMoves != 1;
 }
 
-void setValue(QSettings& settings, const QString& key, const QDateTime& date)
+// Don't store QDateTime as QVariant. There is a bug in Qt 5.15 that sometimes
+// causes crashes in operator<<(QDataStream&, QTimeZone const&) invoked by
+// QSettings::~QSettings. Seems to fixed in Qt 6.
+void setDateValue(QSettings& settings, const QString& key,
+                  const QDateTime& date)
 {
-    // We had crashes in Qt 5.15 in ~QSettings() that can be reduced by not
-    // unnecessarily adding QDateTime's. Probably caused by QSettings sometimes
-    // garbling the serialization of QDateTime when lazy-saving from a
-    // different thread due to QTBUG-84575 (QCalendar class is not reentrant).
-    // The garbled string then can be deserialized but crashes next time the
-    // QDateTime is serialized again. This probably has been fixed in Qt 6.
     if (date.isValid())
-        settings.setValue(key, date);
+        settings.setValue(key, date.toSecsSinceEpoch());
     else
         settings.remove(key);
 }
+
+// See setDateValue()
+QDateTime getDateValue(const QSettings& settings, const QString& key)
+{
+    QDateTime date;
+    auto secs = settings.value(key, QVariant(qlonglong(0))).toLongLong();
+    if (secs > 0)
+        date.setSecsSinceEpoch(secs);
+    return date;
+}
+
+
 
 } //namespace
 
@@ -218,8 +228,8 @@ void GameModel::autoSave()
         settings.setValue(QStringLiteral("autosave"), getSgf());
     settings.setValue(QStringLiteral("file"), m_file);
     m_autosaveDate = QDateTime::currentDateTime();
-    setValue(settings, QStringLiteral("autosaveDate"), m_autosaveDate);
-    setValue(settings, QStringLiteral("fileDate"), m_fileDate);
+    setDateValue(settings, QStringLiteral("autosaveDate"), m_autosaveDate);
+    setDateValue(settings, QStringLiteral("fileDate"), m_fileDate);
     settings.setValue(QStringLiteral("isModified"), m_isModified);
     QVariantList location;
     uint depth = 0;
@@ -257,8 +267,7 @@ bool GameModel::checkAutosaveModifiedOutside()
     return false;
 #else
     QSettings settings;
-    auto autosaveDate =
-            settings.value(QStringLiteral("autosaveDate")).toDateTime();
+    auto autosaveDate = getDateValue(settings, QStringLiteral("autosaveDate"));
     return m_autosaveDate.isValid() && autosaveDate.isValid()
             && m_autosaveDate != autosaveDate
             && settings.value(QStringLiteral("isModified")).toBool()
@@ -888,17 +897,17 @@ bool GameModel::loadAutoSave()
                 return false;
             updateFileInfo(file);
             m_autosaveDate = m_fileDate;
-            setValue(settings, QStringLiteral("autosaveDate"), m_autosaveDate);
+            setDateValue(settings, QStringLiteral("autosaveDate"),
+                         m_autosaveDate);
         }
         else
         {
             if (! openByteArray(settings.value(
                                     QStringLiteral("autosave")).toByteArray()))
                 return false;
-            m_fileDate = settings.value(
-                        QStringLiteral("fileDate")).toDateTime();
-            m_autosaveDate = settings.value(
-                        QStringLiteral("autosaveDate")).toDateTime();
+            m_fileDate = getDateValue(settings, QStringLiteral("fileDate"));
+            m_autosaveDate =
+                    getDateValue(settings, QStringLiteral("autosaveDate"));
             setFile(file);
         }
         // Sanitize isModified if value from settings is inconsistent

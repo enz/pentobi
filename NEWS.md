@@ -4,6 +4,8 @@ Pentobi Release Notes
 Version 20.0-dev (master)
 -------------------------
 
+* More general workaround to avoid crashes with Qt 5.15 related to
+  storing QDateTime in QSettings.
 * Install user manual to /usr/share/doc to better conform to the GNU
   standard directories and because Firefox and Chromium on Ubuntu 21.10
   have no permissions to open files in /usr/share/help.
@@ -21,9 +23,8 @@ Version 19.2-dev (v19-fixes)
 Version 19.1 (05 Dec 2021)
 --------------------------
 
-* Workaround to reduce the likelihood of crashes with Qt 5.15 that
-  sometimes garbled file dates in Pentobi's config file and made it
-  crash the next time Pentobi is run (probably caused by QTBUG-84575).
+* Workaround to reduce the likelihood of crashes with Qt 5.15 related
+  to storing QDateTime in QSettings.
 * Dialog for starting rated game was not shown after accepting a dialog
   to discard current game.
 * Tuned landscape layout on Android for 16:10 tablets.
