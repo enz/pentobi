@@ -222,9 +222,8 @@ Flickable {
                 }
                 PropertyAction { property: "y" }
                 PropertyAction { target: root; property: "contentY"; value: 0 }
-                // Workaround for a bug in Qt 6.2, which makes the lists end up
-                // at the wrong y if the heights change while the transition is
-                // running.
+                // Workaround for QTBUG-99739 (Transition does not correctly
+                // set value if target changes while transition runs; Qt 6.2)
                 ScriptAction {
                     script: {
                         pieceList0.y =
