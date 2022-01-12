@@ -33,18 +33,15 @@ Pentobi can be compiled from the source directory with the commands
 cmake -DCMAKE_BUILD_TYPE=Release .
 make
 ```
-To use an installation directory different from the cmake default, you
-can use CMAKE_INSTALL_PREFIX, for example with
-```
-cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release .
-```
+To use an installation directory different from the cmake default, use
+the cmake option `CMAKE_INSTALL_PREFIX`.
 
-Note that Pentobi shows its help by launching an external browser, which
-requires that the browser has permissions to read files in the `doc`
-subdirectory. In Ubuntu 21.10, the version of Firefox installed with
-snap currently has no permission to access `/usr/local/share/doc`, to
-work around this use the version of Firefox installed with apt instead
-(see Ubuntu bug #1955325).
+To show its help, Pentobi requires an external browser, which has
+permissions to read files in the `doc` installation directory.
+Note that in Ubuntu 21.10, the versions of Firefox and Chromium
+installed with snap have permissions to access `/usr/share/doc` but not
+`/usr/local/share/doc`, the version of Firefox installed with apt works
+with both directories.
 
 Building the KDE Thumbnailer Plugin
 -----------------------------------
@@ -52,10 +49,10 @@ Building the KDE Thumbnailer Plugin
 A thumbnailer plugin for KDE can be built by using the cmake option
 `-DPENTOBI_BUILD_KDE_THUMBNAILER=ON`. In this case, the KDE development
 files need to be installed (packages `libkf5kio-dev` and
-`extra-cmake-modules` on Debian-based distributions).
+`extra-cmake-modules` on Ubuntu 21.10).
 
-Note that depending on your distribution, KDE will not search /usr/local
-for plugins, for example it might be necessary to add
+Note that depending on your distribution, KDE will not search
+`/usr/local` for plugins, for example it might be necessary to add
 `QT_PLUGIN_PATH=/usr/local/lib/plugins` or
 `QT_PLUGIN_PATH=/usr/local/lib64/plugins` to `/etc/environment`.
 
@@ -65,7 +62,7 @@ Blokus file previews in Configure Dolphin > General > Previews
 Installing
 ----------
 
-On Linux, Pentobi can be installed after compilation with the command
+Pentobi can be installed after compilation with the command
 ```
 sudo make install
 ```
@@ -78,4 +75,5 @@ sudo update-mime-database /usr/local/share/mime
 sudo update-desktop-database /usr/local/share/applications
 ```
 Depending on your distribution and desktop environment, it might be
-necessary to run more commands.
+necessary to run more commands, for example to update the GTK icon
+cache.
