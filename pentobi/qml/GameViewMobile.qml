@@ -178,6 +178,7 @@ Item
                 height: swipeView.height - scoreDisplay.height
                         - columnPieces.spacing
                 rowSpacing: {
+                    if (elementSize <= 0) return 0
                     // Don't show partial pieces
                     var n = Math.floor(height / elementSize)
                     return (height - n * elementSize) / n
