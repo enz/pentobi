@@ -6,6 +6,8 @@ Version 20.0-dev (master)
 
 * More general workaround to avoid crashes with Qt 5.15 related to
   storing QDateTime in QSettings.
+* Workarounds for bugs in Qt 6.2 that sometimes caused wrong positions
+  of unplayed pieces.
 * Install user manual to /usr/share/doc to better conform to the GNU
   standard directories and because Firefox and Chromium on Ubuntu 21.10
   have no permissions to open files in /usr/share/help.
