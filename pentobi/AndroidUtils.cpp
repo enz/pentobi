@@ -7,18 +7,29 @@
 #include "AndroidUtils.h"
 
 #ifdef Q_OS_ANDROID
-#include <QtCore/private/qandroidextras_p.h>
+
 #include <QBuffer>
 #include <QCoreApplication>
 #include <QDir>
 #include <QDirIterator>
-#include <QJniObject>
 #include <QHash>
 #include <QImage>
 #include <QVariant>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QAndroidIntent>
+#include <QAndroidJniObject>
+#include <QAndroidJniExceptionCleaner>
+#include <QtAndroid>
 #else
+#include <QtCore/private/qandroidextras_p.h>
+#include <QJniObject>
+#endif
+
+#else
+
 #include <QFileInfo>
 #include <QStandardPaths>
+
 #endif
 
 using namespace std;
@@ -28,6 +39,11 @@ using namespace std;
 namespace {
 
 #ifdef Q_OS_ANDROID
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+using QJniEnvironment = QAndroidJniEnvironment;
+using QJniObject = QAndroidJniObject;
+#endif
 
 struct AutoClose
 {
@@ -44,7 +60,11 @@ void takePersistableUriPermission(const QJniObject& intent,
 
 QJniObject getContext()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    return QtAndroid::androidActivity();
+#else
     return {QNativeInterface::QAndroidApplication::context()};
+#endif
 }
 
 QJniObject getContentResolver()
@@ -116,6 +136,25 @@ void setExtraInitialUri(QJniObject& intent, const QString& uri)
                 value.object<jstring>());
 }
 
+void startActivity(const QJniObject& intent, int code)
+{
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    return QtAndroid::startActivity(intent, code);
+#else
+    return QtAndroidPrivate::startActivity(intent, code);
+#endif
+}
+
+void startActivity(const QJniObject& intent, int code,
+                   function<void (int, int, const QJniObject &)> callback)
+{
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    return QtAndroid::startActivity(intent, code, callback);
+#else
+    return QtAndroidPrivate::startActivity(intent, code, callback);
+#endif
+}
+
 void startDocumentActivity(
         const char* actionField, const QString& type,
         const QString& extraInitialUri, const QString& extraTitle,
@@ -159,9 +198,9 @@ void startDocumentActivity(
     }
     if (! extraInitialUri.isEmpty() && ! QUrl(extraInitialUri).isRelative())
         setExtraInitialUri(intent, extraInitialUri);
-    QtAndroidPrivate::startActivity(intent, 0,
-                             [takePersistablePermission, callback](int, int
-                             result, const QJniObject& data) {
+    startActivity(intent, 0,
+                  [takePersistablePermission, callback](int, int result,
+                  const QJniObject& data) {
         auto ok = QJniObject::getStaticField<jint>(
                     "android/app/Activity", "RESULT_OK");
         if (result != ok)
@@ -431,7 +470,7 @@ void AndroidUtils::openHelp([[maybe_unused]] const QString& language)
                 "setData",
                 "(Landroid/net/Uri;)Landroid/content/Intent;",
                 uriObj.object());
-    QtAndroidPrivate::startActivity(intent.handle(), 0);
+    startActivity(intent.handle(), 0);
 #endif
 }
 

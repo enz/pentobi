@@ -143,16 +143,23 @@ if(ANDROID)
         "${CMAKE_CURRENT_SOURCE_DIR}/docbook/help.qrc" docbook
         DEPENDS pentobi-help docbook/help.qrc
         )
-    qt_add_executable(pentobi
-        MANUAL_FINALIZATION
-        ${pentobi_shared_src}
-        "${CMAKE_CURRENT_BINARY_DIR}/docbook/help.qrc"
-        )
-    target_link_libraries(pentobi PRIVATE Qt::CorePrivate)
-    set_property(TARGET pentobi APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
-        ${CMAKE_CURRENT_SOURCE_DIR}/android
-    )
-    qt_finalize_executable(pentobi)
+    if (QT_VERSION_MAJOR EQUAL 5)
+        add_library(pentobi SHARED ${pentobi_shared_src}
+            "${CMAKE_CURRENT_BINARY_DIR}/docbook/help.qrc")
+        set_property(TARGET pentobi APPEND PROPERTY
+            QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
+        target_link_libraries(pentobi PRIVATE Qt::AndroidExtras)
+    else()
+        qt_add_executable(pentobi
+            MANUAL_FINALIZATION
+            ${pentobi_shared_src}
+            "${CMAKE_CURRENT_BINARY_DIR}/docbook/help.qrc"
+            )
+        target_link_libraries(pentobi PRIVATE Qt::CorePrivate)
+        set_property(TARGET pentobi APPEND PROPERTY
+            QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
+        qt_finalize_executable(pentobi)
+    endif()
 else()
     add_executable(pentobi WIN32
         ${pentobi_shared_src}
