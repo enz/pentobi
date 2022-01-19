@@ -61,6 +61,8 @@ public:
               GeometryType geometry_type, CoordPoint label_pos,
               unsigned nu_instances = 1);
 
+    ~PieceInfo();
+
     const string& get_name() const { return m_name; }
 
     /** The points of the piece.

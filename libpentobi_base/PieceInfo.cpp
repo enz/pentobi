@@ -146,6 +146,8 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
         m_score_points = static_cast<ScoreType>(points.size());
 }
 
+PieceInfo::~PieceInfo() = default; // Non-inline to avoid GCC -Winline warning
+
 const Transform* PieceInfo::find_transform(const Geometry& geo,
                                            const Points& points) const
 {
