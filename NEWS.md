@@ -12,7 +12,6 @@ Version 20.0-dev (master)
   standard directories and because Firefox and Chromium on Ubuntu 21.10
   have no permissions to open files in /usr/share/help.
 * Support for compiling Android app with Qt >=6.2.
-* Faster move generation in multi-player game variants.
 * Install application and mimetype bitmap icons for multiple sizes.
 * Show error message if launching web browser failed.
 * Minimum required CMake version is now 3.18.
