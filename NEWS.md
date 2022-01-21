@@ -1,8 +1,8 @@
 Pentobi Release Notes
 =====================
 
-Version 20.0-dev (master)
--------------------------
+Version 20.0 (21 Jan 2022)
+--------------------------
 
 * More general workaround to avoid crashes with Qt 5.15 related to
   storing QDateTime in QSettings.
@@ -15,11 +15,6 @@ Version 20.0-dev (master)
 * Install application and mimetype bitmap icons for multiple sizes.
 * Show error message if launching web browser failed.
 * Minimum required CMake version is now 3.18.
-
-Version 19.2-dev (v19-fixes)
-----------------------------
-
-*
 
 Version 19.1 (05 Dec 2021)
 --------------------------
