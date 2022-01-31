@@ -1,9 +1,11 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="nb_NO" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS language="nb_NO" version="2.1">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>Copyright © 2011–%1 Markus Enzenberger</source>
-        <translation>Copyright © 2011–%1 Markus Enzenberger</translation>
+        <translation>Opphavsrett © 2011–%1 Markus Enzenberger</translation>
     </message>
     <message>
         <source>Computer opponent for the board game Blokus</source>
@@ -854,15 +856,15 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"/>
+        <translation>Pentobi klarte ikke å generere et trekk.</translation>
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation type="unfinished"/>
+        <translation>Trykk «Tilbake» igjen for å avslutte.</translation>
     </message>
     <message>
         <source>Starting web browser failed</source>
-        <translation type="unfinished"/>
+        <translation>Kunne ikke starte nettleser</translation>
     </message>
 </context>
 <context>
@@ -1108,12 +1110,12 @@
     <message>
         <source>Ctrl</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation type="unfinished"/>
+        <translation>Ctrl</translation>
     </message>
     <message>
         <source>Shift</source>
         <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation type="unfinished"/>
+        <translation>Shift</translation>
     </message>
 </context>
 <context>
@@ -1185,7 +1187,7 @@
     </message>
     <message>
         <source>Open menu</source>
-        <translation type="unfinished"/>
+        <translation>Åpne meny</translation>
     </message>
 </context>
 <context>
