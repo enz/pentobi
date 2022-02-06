@@ -357,9 +357,10 @@ function help() {
     if (isAndroid)
         androidUtils.openHelp(lang)
     else {
+        var isWindowsPath = isLetter(helpDir[0])
         var url
         if (helpDir)
-            url = "file:///" + helpDir + "/" + lang + "/index.html"
+            url = "file://" + (isWindowsPath ? "/" : "") + helpDir + "/" + lang + "/index.html"
         else
             url = "qrc:///qml/help/" + lang + "/index.html"
         if (! Qt.openUrlExternally(url))
@@ -451,6 +452,10 @@ function isComputerToPlay() {
     if (gameModel.gameVariant == "classic_3" && gameModel.toPlay === 3)
         return computerPlays(gameModel.altPlayer)
     return computerPlays(gameModel.toPlay)
+}
+
+function isLetter(letter) {
+    return letter >= "A" && letter <= "Z" || letter >= "a" && letter <= "z"
 }
 
 function isMultiColor() {
