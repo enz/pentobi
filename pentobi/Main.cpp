@@ -196,7 +196,7 @@ int mainDesktop()
         // Prefer help from build directory if executable was not installed
         auto helpDir =
                 QCoreApplication::applicationDirPath() + "/docbook/help";
-        if (! QFile::exists(helpDir + "/C/pentobi/index.html"))
+        if (! QFile::exists(helpDir + "/C/index.html"))
         {
 #ifdef PENTOBI_HELP_DIR
             helpDir = QString::fromLocal8Bit(PENTOBI_HELP_DIR);
