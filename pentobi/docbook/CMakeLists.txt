@@ -52,12 +52,8 @@ add_custom_command(OUTPUT "help/C/index.html"
     COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOKXSL_DIR}/html"
     -o "help/C/" "${CMAKE_CURRENT_SOURCE_DIR}/custom.xsl"
     "${CMAKE_CURRENT_SOURCE_DIR}/index.docbook"
-    COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/figures/*.png" "help/C/"
-    COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/figures/*.jpg" "help/C/"
-    COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/figures/stylesheet.css" "help/C/"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${CMAKE_CURRENT_SOURCE_DIR}/figures" "help/C/"
     DEPENDS ${DOCBOOK_SRC}
     )
 

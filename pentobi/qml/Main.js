@@ -359,7 +359,8 @@ function help() {
     else {
         var url
         if (helpDir)
-            url = "file://" + helpDir + "/" + lang + "/index.html"
+            url = "file://" + (Qt.platform.os == "windows" ? "/" : "")
+                  + helpDir + "/" + lang + "/index.html"
         else
             url = "qrc:///qml/help/" + lang + "/index.html"
         if (! Qt.openUrlExternally(url))
