@@ -363,7 +363,7 @@ function help() {
         else
             url = "qrc:///qml/help/" + lang + "/index.html"
         if (! Qt.openUrlExternally(url))
-            showInfo(qsTr("Starting web browser failed") + "\n" + "URL: " + url)
+            showInfo(qsTr("Starting web browser failed"))
     }
 }
 
