@@ -359,11 +359,11 @@ function help() {
     else {
         var url
         if (helpDir)
-            url = "file://" + helpDir + "/" + lang + "/index.html"
+            url = "file:///" + helpDir + "/" + lang + "/index.html"
         else
             url = "qrc:///qml/help/" + lang + "/index.html"
         if (! Qt.openUrlExternally(url))
-            showInfo(qsTr("Starting web browser failed"))
+            showInfo(qsTr("Starting web browser failed") + "\n" + "URL: " + url)
     }
 }
 
