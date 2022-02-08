@@ -4,7 +4,8 @@ Pentobi Release Notes
 Version 20.1-dev (v20-fixes)
 ----------------------------
 
-*
+* Fixed detection of loaded files or autosaved games modified by
+  another application.
 
 Version 20.0 (21 Jan 2022)
 --------------------------
