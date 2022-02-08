@@ -6,6 +6,7 @@
 
 #include "RatingModel.h"
 
+#include <QDateTime>
 #include <QDir>
 #include <QFileInfo>
 #include <QSettings>
