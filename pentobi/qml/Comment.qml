@@ -33,9 +33,11 @@ Rectangle {
             focus: true
             onTextChanged: gameModel.comment = text
             Keys.onPressed:
-                if (event.key === Qt.Key_Tab) {
-                    focus = false
-                    event.accepted = true
+                event => {
+                    if (event.key === Qt.Key_Tab) {
+                        focus = false
+                        event.accepted = true
+                    }
                 }
         }
     }
