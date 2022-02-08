@@ -10,6 +10,7 @@
 #include <cstring>
 #include <fstream>
 #include <QClipboard>
+#include <QDateTime>
 #include <QGuiApplication>
 #include <QDir>
 #include <QFileInfo>
