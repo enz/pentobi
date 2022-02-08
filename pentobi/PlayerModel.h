@@ -32,9 +32,9 @@ class PlayerModel
         the current game variant. The level will also be updated on
         startGenMove() but the user interface might want to display the current
         level immediately after changing the game variant. */
-    Q_PROPERTY(QString gameVariant READ gameVariant WRITE setGameVariant NOTIFY gameVariantChanged)
+    Q_PROPERTY(QString gameVariant MEMBER m_gameVariant NOTIFY gameVariantChanged)
 
-    Q_PROPERTY(unsigned level READ level WRITE setLevel NOTIFY levelChanged)
+    Q_PROPERTY(unsigned level MEMBER m_level NOTIFY levelChanged)
     Q_PROPERTY(bool isGenMoveRunning READ isGenMoveRunning NOTIFY isGenMoveRunningChanged)
     Q_PROPERTY(unsigned maxLevel MEMBER maxLevel CONSTANT)
 
@@ -86,14 +86,6 @@ public:
     /** Cancel the move generation in the background thread if one is
         running. */
     Q_INVOKABLE void cancelGenMove();
-
-    const QString& gameVariant() const { return m_gameVariant; }
-
-    void setGameVariant(const QString& gameVariant);
-
-    unsigned level() const { return m_level; }
-
-    void setLevel(unsigned level);
 
     bool isGenMoveRunning() const { return m_isGenMoveRunning; }
 

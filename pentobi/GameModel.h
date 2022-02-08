@@ -59,7 +59,7 @@ class GameModel
     Q_PROPERTY(QString gameVariant READ gameVariant NOTIFY gameVariantChanged)
     Q_PROPERTY(QString positionInfo READ positionInfo NOTIFY positionInfoChanged)
     Q_PROPERTY(QString positionInfoShort READ positionInfoShort NOTIFY positionInfoShortChanged)
-    Q_PROPERTY(QString comment READ comment WRITE setComment NOTIFY commentChanged)
+    Q_PROPERTY(QString comment MEMBER m_comment WRITE setComment NOTIFY commentChanged)
     Q_PROPERTY(QString file READ file NOTIFY fileChanged)
     Q_PROPERTY(unsigned nuColors READ nuColors NOTIFY nuColorsChanged)
     Q_PROPERTY(unsigned nuPlayers READ nuPlayers NOTIFY nuPlayersChanged)
@@ -81,7 +81,7 @@ class GameModel
     Q_PROPERTY(bool hasMoves3 READ hasMoves3 NOTIFY hasMoves3Changed)
     Q_PROPERTY(bool isBoardEmpty READ isBoardEmpty NOTIFY isBoardEmptyChanged)
     Q_PROPERTY(bool isGameOver READ isGameOver NOTIFY isGameOverChanged)
-    Q_PROPERTY(bool isModified READ isModified WRITE setIsModified NOTIFY isModifiedChanged)
+    Q_PROPERTY(bool isModified MEMBER m_isModified WRITE setIsModified NOTIFY isModifiedChanged)
     Q_PROPERTY(bool canUndo READ canUndo NOTIFY canUndoChanged)
     Q_PROPERTY(bool canGoBackward READ canGoBackward NOTIFY canGoBackwardChanged)
     Q_PROPERTY(bool canGoForward READ canGoForward NOTIFY canGoForwardChanged)
@@ -96,14 +96,14 @@ class GameModel
     Q_PROPERTY(QVariantList startingPoints2 READ startingPoints2 NOTIFY startingPoints2Changed)
     Q_PROPERTY(QVariantList startingPoints3 READ startingPoints3 NOTIFY startingPoints3Changed)
     Q_PROPERTY(QVariantList startingPointsAny READ startingPointsAny NOTIFY startingPointsAnyChanged)
-    Q_PROPERTY(QString playerName0 READ playerName0 WRITE setPlayerName0 NOTIFY playerName0Changed)
-    Q_PROPERTY(QString playerName1 READ playerName1 WRITE setPlayerName1 NOTIFY playerName1Changed)
-    Q_PROPERTY(QString playerName2 READ playerName2 WRITE setPlayerName2 NOTIFY playerName2Changed)
-    Q_PROPERTY(QString playerName3 READ playerName3 WRITE setPlayerName3 NOTIFY playerName3Changed)
-    Q_PROPERTY(QString date READ date WRITE setDate NOTIFY dateChanged)
-    Q_PROPERTY(QString time READ time WRITE setTime NOTIFY timeChanged)
-    Q_PROPERTY(QString event READ getEvent WRITE setEvent NOTIFY eventChanged)
-    Q_PROPERTY(QString round READ getRound WRITE setRound NOTIFY roundChanged)
+    Q_PROPERTY(QString playerName0 MEMBER m_playerName0 WRITE setPlayerName0 NOTIFY playerName0Changed)
+    Q_PROPERTY(QString playerName1 MEMBER m_playerName1 WRITE setPlayerName1 NOTIFY playerName1Changed)
+    Q_PROPERTY(QString playerName2 MEMBER m_playerName2 WRITE setPlayerName2 NOTIFY playerName2Changed)
+    Q_PROPERTY(QString playerName3 MEMBER m_playerName3 WRITE setPlayerName3 NOTIFY playerName3Changed)
+    Q_PROPERTY(QString date MEMBER m_date WRITE setDate NOTIFY dateChanged)
+    Q_PROPERTY(QString time MEMBER m_time WRITE setTime NOTIFY timeChanged)
+    Q_PROPERTY(QString event MEMBER m_event WRITE setEvent NOTIFY eventChanged)
+    Q_PROPERTY(QString round MEMBER m_round WRITE setRound NOTIFY roundChanged)
 
 public:
     static Variant getInitialGameVariant();
@@ -254,8 +254,6 @@ public:
 
     const QString& file() const { return m_file; }
 
-    const QString& comment() const { return m_comment; }
-
     unsigned nuColors() const { return m_nuColors; }
 
     unsigned nuPlayers() const { return m_nuPlayers; }
@@ -296,8 +294,6 @@ public:
 
     bool isGameOver() const { return m_isGameOver; }
 
-    bool isModified() const { return m_isModified; }
-
     bool canUndo() const { return m_canUndo; }
 
     bool canGoBackward() const { return m_canGoBackward; }
@@ -323,26 +319,6 @@ public:
     const QVariantList& startingPoints3() const { return m_startingPoints3; }
 
     const QVariantList& startingPointsAny() const { return m_startingPointsAny; }
-
-    const QString& playerName0() const { return m_playerName0; }
-
-    const QString& playerName1() const { return m_playerName1; }
-
-    const QString& playerName2() const { return m_playerName2; }
-
-    const QString& playerName3() const { return m_playerName3; }
-
-    const QString& date() const { return m_date; }
-
-    const QString& time() const { return m_time; }
-
-    // Avoid conflict with QObject::event()
-    const QString& getEvent() const { return m_event; }
-
-    // Avoid conflict with round(), which cannot be resolved by using fully
-    // qualified std::round(), because with many GCC versions it's in the
-    // global namespace (http://stackoverflow.com/questions/1882689)
-    const QString& getRound() const { return m_round; }
 
     void setIsModified(bool isModified);
 

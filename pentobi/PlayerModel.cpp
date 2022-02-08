@@ -76,28 +76,12 @@ void PlayerModel::loadBook(Variant variant)
     m_player->load_book(in);
 }
 
-void PlayerModel::setGameVariant(const QString& gameVariant)
-{
-    if (m_gameVariant == gameVariant)
-        return;
-    m_gameVariant = gameVariant;
-    emit gameVariantChanged();
-}
-
 void PlayerModel::setIsGenMoveRunning(bool isGenMoveRunning)
 {
     if (m_isGenMoveRunning == isGenMoveRunning)
         return;
     m_isGenMoveRunning = isGenMoveRunning;
     emit isGenMoveRunningChanged();
-}
-
-void PlayerModel::setLevel(unsigned level)
-{
-    if (m_level == level)
-        return;
-    m_level = level;
-    emit levelChanged();
 }
 
 void PlayerModel::startGenMove(GameModel* gameModel)
