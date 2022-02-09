@@ -139,9 +139,9 @@ void setExtraInitialUri(QJniObject& intent, const QString& uri)
 void startActivity(const QJniObject& intent, int code)
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    return QtAndroid::startActivity(intent, code);
+    QtAndroid::startActivity(intent, code);
 #else
-    return QtAndroidPrivate::startActivity(intent, code);
+    QtAndroidPrivate::startActivity(intent, code);
 #endif
 }
 
@@ -149,9 +149,9 @@ void startActivity(const QJniObject& intent, int code,
                    function<void (int, int, const QJniObject &)> callback)
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    return QtAndroid::startActivity(intent, code, callback);
+    QtAndroid::startActivity(intent, code, callback);
 #else
-    return QtAndroidPrivate::startActivity(intent, code, callback);
+    QtAndroidPrivate::startActivity(intent, code, callback);
 #endif
 }
 
