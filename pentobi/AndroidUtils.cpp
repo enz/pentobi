@@ -145,8 +145,9 @@ void startActivity(const QJniObject& intent, int code)
 #endif
 }
 
-void startActivity(const QJniObject& intent, int code,
-                   function<void (int, int, const QJniObject &)> callback)
+void startActivity(
+        const QJniObject& intent, int code,
+        const function<void (int, int, const QJniObject &)>& callback)
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QtAndroid::startActivity(intent, code, callback);
