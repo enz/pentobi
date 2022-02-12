@@ -110,12 +110,5 @@
                 android:name="android.app.auto_screen_scale_factor"
                 android:value="false" />
         </activity>
-        <activity
-            android:name=".HelpBrowserActivity"
-            android:label="Pentobi">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="-- %%INSERT_APP_LIB_NAME%% --" />
-        </activity>
      </application>
 </manifest>

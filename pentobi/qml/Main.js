@@ -347,27 +347,6 @@ function getWindowTitle(file, isModified) {
     return qsTr("%1 - Pentobi").arg(name)
 }
 
-function help() {
-    var lang = Qt.locale().name
-    var pos = lang.indexOf("_")
-    if (pos >= 0)
-        lang = lang.substr(0, pos)
-    if (! ["de", "es", "ru"].includes(lang))
-        lang = "C"
-    if (isAndroid)
-        androidUtils.openHelp(lang)
-    else {
-        var url
-        if (helpDir)
-            url = "file://" + (Qt.platform.os == "windows" ? "/" : "")
-                  + helpDir + "/" + lang + "/index.html"
-        else
-            url = "qrc:///qml/help/" + lang + "/index.html"
-        if (! Qt.openUrlExternally(url))
-            showInfo(qsTr("Starting web browser failed"))
-    }
-}
-
 function init() {
     if (gameModel.loadAutoSave()) {
         computerPlays0 =

@@ -195,6 +195,24 @@
     </message>
 </context>
 <context>
+    <name>DocbookReader</name>
+    <message>
+        <source>Previous</source>
+        <extracomment>Go to previous page of user manual</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contents</source>
+        <extracomment>Go to table of contents of user manual</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <extracomment>Go to next page of user manual</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ExportImageDialog</name>
     <message>
         <source>Image width:</source>
@@ -480,6 +498,13 @@
     <name>GotoMoveDialog</name>
     <message>
         <source>Move number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HelpWindow</name>
+    <message>
+        <source>Pentobi Help</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -860,10 +885,6 @@
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Starting web browser failed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

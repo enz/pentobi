@@ -63,12 +63,5 @@
                 android:name="android.app.splash_screen_drawable_landscape"
                 android:resource="@drawable/splash" />
         </activity>
-        <activity
-            android:name=".HelpBrowserActivity"
-            android:label="Pentobi">
-            <meta-data
-               android:name="android.app.lib_name"
-               android:value="-- %%INSERT_APP_LIB_NAME%% --" />
-        </activity>
     </application>
 </manifest>

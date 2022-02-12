@@ -111,11 +111,13 @@ add_custom_command(
     ${icons_png}
     )
 
-set(pentobi_shared_src
+set(pentobi_src
     AnalyzeGameModel.h
     AnalyzeGameModel.cpp
     AndroidUtils.h
     AndroidUtils.cpp
+    DocbookReader.h
+    DocbookReader.cpp
     GameModel.h
     GameModel.cpp
     ImageProvider.h
@@ -132,29 +134,26 @@ set(pentobi_shared_src
     SyncSettings.h
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/icons.qrc"
+    "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
     resources.qrc
     )
 
+add_custom_command(
+    OUTPUT help/help.qrc
+    COMMAND ${CMAKE_COMMAND} -E copy
+    "${CMAKE_CURRENT_SOURCE_DIR}/help/help.qrc" help
+    DEPENDS pentobi-help help/help.qrc
+    )
+
 if(ANDROID)
-    add_custom_command(
-        OUTPUT docbook/help.qrc
-        COMMAND ${CMAKE_COMMAND} -E copy
-        "${CMAKE_CURRENT_SOURCE_DIR}/docbook/help.qrc" docbook
-        DEPENDS pentobi-help docbook/help.qrc
-        )
     if (QT_VERSION_MAJOR EQUAL 5)
-        add_library(pentobi SHARED ${pentobi_shared_src}
-            "${CMAKE_CURRENT_BINARY_DIR}/docbook/help.qrc")
+        add_library(pentobi SHARED ${pentobi_src})
         set_property(TARGET pentobi APPEND PROPERTY
             QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
         target_link_libraries(pentobi PRIVATE Qt::AndroidExtras)
     else()
-        qt_add_executable(pentobi
-            MANUAL_FINALIZATION
-            ${pentobi_shared_src}
-            "${CMAKE_CURRENT_BINARY_DIR}/docbook/help.qrc"
-            )
+        qt_add_executable(pentobi MANUAL_FINALIZATION ${pentobi_src})
         target_link_libraries(pentobi PRIVATE Qt::CorePrivate)
         set_property(TARGET pentobi APPEND PROPERTY
             QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
@@ -162,7 +161,7 @@ if(ANDROID)
     endif()
 else()
     add_executable(pentobi WIN32
-        ${pentobi_shared_src}
+        ${pentobi_src}
         "${CMAKE_CURRENT_BINARY_DIR}/icons_desktop.qrc"
         resources_desktop.qrc
         )
@@ -173,7 +172,6 @@ target_compile_definitions(pentobi PRIVATE
     QT_DEPRECATED_WARNINGS
     QT_DISABLE_DEPRECATED_BEFORE=0x060000
     QT_NO_NARROWING_CONVERSIONS_IN_CONNECT
-    PENTOBI_HELP_DIR="${CMAKE_INSTALL_FULL_DOCDIR}/help"
     VERSION="${PENTOBI_VERSION}"
     )
 
@@ -186,7 +184,7 @@ target_link_libraries(pentobi PRIVATE
     Threads::Threads
     )
 
-add_subdirectory(docbook)
+add_subdirectory(help)
 if(UNIX AND NOT ANDROID)
     add_subdirectory(unix)
 endif()

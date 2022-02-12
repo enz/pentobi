@@ -11,9 +11,9 @@ Building Pentobi requires the following tools and libraries:
 * [CMake](https://cmake.org/) (>=3.18)
 * [GNU gettext](https://www.gnu.org/software/gettext/) (>=0.19.6)
 * [ITS Tool](http://itstool.org/)
-* [xsltproc](http://xmlsoft.org/XSLT/xsltproc.html)
-* [DocBooc XSL](http://www.sagehill.net/docbookxsl/)
 * [LibRsvg](https://wiki.gnome.org/Projects/LibRsvg)
+* [xsltproc](http://xmlsoft.org/XSLT/xsltproc.html) (only on Unix)
+* [DocBooc XSL](http://www.sagehill.net/docbookxsl/) (only on Unix)
 
 In Ubuntu 21.10, they can be installed with the command
 ```
@@ -35,13 +35,6 @@ make
 ```
 To use an installation directory different from the cmake default, use
 the cmake option `CMAKE_INSTALL_PREFIX`.
-
-To show its help, Pentobi requires an external browser, which has
-permissions to read files in the `doc` installation directory.
-Note that in Ubuntu 21.10, the versions of Firefox and Chromium
-installed with snap have permissions to access `/usr/share/doc` but not
-`/usr/local/share/doc`, the version of Firefox installed with apt works
-with both directories.
 
 KDE Thumbnailer
 ---------------

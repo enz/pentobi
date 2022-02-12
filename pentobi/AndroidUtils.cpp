@@ -10,8 +10,6 @@
 
 #include <QBuffer>
 #include <QCoreApplication>
-#include <QDir>
-#include <QDirIterator>
 #include <QHash>
 #include <QImage>
 #include <QVariant>
@@ -134,15 +132,6 @@ void setExtraInitialUri(QJniObject& intent, const QString& uri)
                 "(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;",
                 extraInitialUriObj.object<jstring>(),
                 value.object<jstring>());
-}
-
-void startActivity(const QJniObject& intent, int code)
-{
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QtAndroid::startActivity(intent, code);
-#else
-    QtAndroidPrivate::startActivity(intent, code);
-#endif
 }
 
 void startActivity(
@@ -307,46 +296,6 @@ void AndroidUtils::exit()
 #endif
 }
 
-#ifdef Q_OS_ANDROID
-QUrl AndroidUtils::extractHelp(const QString& language)
-{
-    if (language != QStringLiteral("C"))
-        // Other languages use pictures from C
-        extractHelp(QStringLiteral("C"));
-    auto filesDir =
-            getContext().callObjectMethod("getFilesDir", "()Ljava/io/File;");
-    if (! filesDir.isValid())
-        return {};
-    auto filesDirString = filesDir.callObjectMethod("toString",
-                                                    "()Ljava/lang/String;");
-    if (! filesDirString.isValid())
-        return {};
-    QDir dir(filesDirString.toString() + "/help/"
-             + QCoreApplication::applicationVersion() + "/" + language);
-    auto dirPath = dir.path();
-    if (QFileInfo::exists(dirPath + "/index.html"))
-        return QUrl::fromLocalFile(dirPath + "/index.html");
-    if (! QFileInfo::exists(filesDirString.toString() + "/help/"
-                            + QCoreApplication::applicationVersion()
-                            + "/C/index.html"))
-        // No need to keep files from older versions around
-        QDir(filesDirString.toString() + "/help").removeRecursively();
-    QDirIterator it(":qml/help/" + language);
-    while (it.hasNext())
-    {
-        it.next();
-        if (! it.fileInfo().isFile())
-            continue;
-        QFile dest(dirPath + "/" + it.fileName());
-        QFileInfo(dest).dir().mkpath(QStringLiteral("."));
-        dest.remove();
-        QFile::copy(it.filePath(), dest.fileName());
-    }
-    auto file = QFileInfo(dirPath + "/index.html").absoluteFilePath();
-    return QUrl::fromLocalFile(file);
-}
-#endif
-
 QUrl AndroidUtils::getDefaultFolder()
 {
 #ifdef Q_OS_ANDROID
@@ -457,23 +406,6 @@ bool AndroidUtils::open(
     return true;
 }
 #endif
-
-void AndroidUtils::openHelp([[maybe_unused]] const QString& language)
-{
-#ifdef Q_OS_ANDROID
-    auto url = extractHelp(language);
-    QAndroidIntent intent(getContext(),
-                          "net/sf/pentobi/HelpBrowserActivity");
-    auto uriObj = getUriObj(url.toString());
-    if (! uriObj.isValid())
-        return;
-    intent.handle().callObjectMethod(
-                "setData",
-                "(Landroid/net/Uri;)Landroid/content/Intent;",
-                uriObj.object());
-    startActivity(intent.handle(), 0);
-#endif
-}
 
 void AndroidUtils::openImageSaveDialog(
         [[maybe_unused]] const QString& suggestedName)

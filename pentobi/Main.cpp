@@ -12,6 +12,7 @@
 #include <QTranslator>
 #include "AnalyzeGameModel.h"
 #include "AndroidUtils.h"
+#include "DocbookReader.h"
 #include "GameModel.h"
 #include "ImageProvider.h"
 #include "PlayerModel.h"
@@ -193,18 +194,6 @@ int mainDesktop()
 #else
         ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(false));
 #endif
-        // Prefer help from build directory if executable was not installed
-        auto helpDir =
-                QCoreApplication::applicationDirPath() + "/docbook/help";
-        if (! QFile::exists(helpDir + "/C/index.html"))
-        {
-#ifdef PENTOBI_HELP_DIR
-            helpDir = QString::fromLocal8Bit(PENTOBI_HELP_DIR);
-#else
-            helpDir.clear();
-#endif
-        }
-        ctx->setContextProperty(QStringLiteral("helpDir"), helpDir);
         engine.load(QStringLiteral("qrc:///qml/Main.qml"));
         if (engine.rootObjects().empty())
             return 1;
@@ -249,6 +238,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
     qmlRegisterType<AndroidUtils>("pentobi", 1, 0, "AndroidUtils");
+    qmlRegisterType<DocbookReader>("pentobi", 1, 0, "DocbookReader");
     qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
     qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
     qmlRegisterType<RatingModel>("pentobi", 1, 0, "RatingModel");

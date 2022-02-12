@@ -25,9 +25,8 @@ squares connected along the edges.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/pieces.png"/>
+<imagedata fileref="pieces.png"/>
 </imageobject>
-<caption><para>The 21 pieces</para></caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -38,13 +37,8 @@ located in the corners of the board.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/board_classic.png"/>
+<imagedata fileref="board_classic.png"/>
 </imageobject>
-<caption>
-<para>
-The 20×20 board with the starting squares marked with colored dots
-</para>
-</caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -56,9 +50,8 @@ pieces of the opponent colors.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/position_classic.png"/>
+<imagedata fileref="position_classic.png"/>
 </imageobject>
-<caption><para>An example position after a few moves</para></caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -109,21 +102,14 @@ Orange.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject><imagedata fileref="../C/board_duo.png"/></imageobject>
-<caption>
-<para>
-The 14×14 board used in game variant Duo with the starting squares marked with
-colored dots
-</para>
-</caption>
+<imageobject><imagedata fileref="board_duo.png"/></imageobject>
 </mediaobject>
 </informalfigure>
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/position_duo.png"/>
+<imagedata fileref="position_duo.png"/>
 </imageobject>
-<caption><para>An example position in game variant Duo</para></caption>
 </mediaobject>
 </informalfigure>
 </chapter>
@@ -140,9 +126,8 @@ along the edges.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/pieces_trigon.jpg"/>
+<imagedata fileref="pieces_trigon.jpg"/>
 </imageobject>
-<caption><para>The 22 Trigon pieces</para></caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -152,11 +137,8 @@ size of nine triangles.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/board_trigon.jpg"/>
+<imagedata fileref="board_trigon.jpg"/>
 </imageobject>
-<caption>
-<para>The board with the starting fields marked with gray dots</para>
-</caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -167,11 +149,8 @@ players may freely choose a starting point for the first piece of a color.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/position_trigon.jpg"/>
+<imagedata fileref="position_trigon.jpg"/>
 </imageobject>
-<caption><para>
-An example position in game variant Trigon
-</para></caption>
 </mediaobject>
 </informalfigure>
 <sect1>
@@ -202,9 +181,8 @@ size five and the players get two of each of those polyominoes.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/pieces_junior.png"/>
+<imagedata fileref="pieces_junior.png"/>
 </imageobject>
-<caption><para>The 24 pieces used in Junior</para></caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -222,9 +200,8 @@ segments.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/pieces_nexos.png"/>
+<imagedata fileref="pieces_nexos.png"/>
 </imageobject>
-<caption><para>The 24 pieces</para></caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -234,13 +211,8 @@ close to a corner. The first piece must touch the starting intersection.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/board_nexos.png"/>
+<imagedata fileref="board_nexos.png"/>
 </imageobject>
-<caption>
-<para>
-The board for Nexos with the starting intersections marked with colored dots
-</para>
-</caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -255,9 +227,8 @@ straight junctions cannot.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/position_nexos.png"/>
+<imagedata fileref="position_nexos.png"/>
 </imageobject>
-<caption><para>An example position after a few moves</para></caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -284,9 +255,8 @@ straight lines.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/pieces_gembloq.jpg"/>
+<imagedata fileref="pieces_gembloq.jpg"/>
 </imageobject>
-<caption><para>The 21 pieces</para></caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -296,13 +266,8 @@ in Blokus, but also some pieces that contain a half square.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/board_gembloq.png"/>
+<imagedata fileref="board_gembloq.png"/>
 </imageobject>
-<caption>
-<para>
-The board for GembloQ with the starting points marked with colored dots
-</para>
-</caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -315,9 +280,8 @@ color.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/position_gembloq.png"/>
+<imagedata fileref="position_gembloq.png"/>
 </imageobject>
-<caption><para>An example position after a few moves</para></caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -348,9 +312,8 @@ role.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/pieces_callisto.png"/>
+<imagedata fileref="pieces_callisto.png"/>
 </imageobject>
-<caption><para>The 21 pieces</para></caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -362,13 +325,8 @@ be played anytime later.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/board_callisto.png"/>
+<imagedata fileref="board_callisto.png"/>
 </imageobject>
-<caption>
-<para>
-The board with the center having a darker color
-</para>
-</caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -378,9 +336,8 @@ existing piece of the same color edge-to-edge.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/position_callisto.png"/>
+<imagedata fileref="position_callisto.png"/>
 </imageobject>
-<caption><para>An example position after a few moves</para></caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -490,11 +447,8 @@ window with a diagram of colored dots.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/analysis.jpg"/>
+<imagedata fileref="analysis.jpg"/>
 </imageobject>
-<caption>
-<para>Analysis of a game of variant Classic (2 players)</para>
-</caption>
 </mediaobject>
 </informalfigure>
 <para>
@@ -546,11 +500,8 @@ matter.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="../C/rating.jpg"/>
+<imagedata fileref="rating.jpg"/>
 </imageobject>
-<caption>
-<para>Window with rating graph</para>
-</caption>
 </mediaobject>
 </informalfigure>
 <para>

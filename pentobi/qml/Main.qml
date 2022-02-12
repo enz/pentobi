@@ -189,6 +189,20 @@ ApplicationWindow {
     DialogLoader { id: analyzeDialog; url: "AnalyzeDialog.qml" }
     DialogLoader { id: appearanceDialog; url: "AppearanceDialog.qml" }
     DialogLoader { id: moveAnnotationDialog; url: "MoveAnnotationDialog.qml" }
+    Loader {
+        id: helpWindow
+
+        function show() {
+            if (isDesktop) {
+                if (! item) source = "HelpWindow.qml"
+                item.show()
+            }
+            else {
+                if (! item) source = "HelpDialog.qml"
+                item.open()
+            }
+        }
+    }
 
     // Used to delay calls to Logic.checkComputerMove such that the computer
     // starts thinking and the busy indicator is visible after the current move
@@ -376,7 +390,7 @@ ApplicationWindow {
 
         shortcut: "F1"
         text: qsTr("Pentobi Help")
-        onTriggered: Logic.help()
+        onTriggered: helpWindow.show()
     }
     Action {
         id: actionNew
