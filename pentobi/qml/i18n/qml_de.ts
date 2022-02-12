@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="de" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -190,6 +190,24 @@
     <message>
         <source>Level %1</source>
         <translation>Stufe %1</translation>
+    </message>
+</context>
+<context>
+    <name>DocbookReader</name>
+    <message>
+        <source>Previous</source>
+        <extracomment>Go to previous page of user manual</extracomment>
+        <translation>Zurück</translation>
+    </message>
+    <message>
+        <source>Contents</source>
+        <extracomment>Go to table of contents of user manual</extracomment>
+        <translation>Inhalt</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <extracomment>Go to next page of user manual</extracomment>
+        <translation>Weiter</translation>
     </message>
 </context>
 <context>
@@ -479,6 +497,13 @@
     <message>
         <source>Move number:</source>
         <translation>Zugnummer:</translation>
+    </message>
+</context>
+<context>
+    <name>HelpWindow</name>
+    <message>
+        <source>Pentobi Help</source>
+        <translation>Pentobi-Hilfe</translation>
     </message>
 </context>
 <context>
@@ -859,10 +884,6 @@
     <message>
         <source>Press back again to exit</source>
         <translation>Zum Beenden erneut Zurück drücken</translation>
-    </message>
-    <message>
-        <source>Starting web browser failed</source>
-        <translation>Starten des Webbrowsers fehlgeschlagen</translation>
     </message>
 </context>
 <context>
