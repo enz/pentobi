@@ -143,7 +143,12 @@ QString DocbookReader::getPage(const QString& id) const
         switch (reader.readNext())
         {
         case QXmlStreamReader::StartElement:
-            if (reader.name() == QStringLiteral("imagedata"))
+            if (reader.name() == QStringLiteral("guibutton")
+                    || reader.name() == QStringLiteral("guilabel")
+                    || reader.name() == QStringLiteral("guimenu")
+                    || reader.name() == QStringLiteral("guimenuitem"))
+                text.append(QStringLiteral("<i>"));
+            else if (reader.name() == QStringLiteral("imagedata"))
             {
                 text.append(QStringLiteral("<div style=\"margin-left:"));
                 text.append(QString::number((m_textWidth - m_imageWidth) / 2));
@@ -160,6 +165,8 @@ QString DocbookReader::getPage(const QString& id) const
                 text.append(QStringLiteral("<p>"));
             else if (reader.name() == QStringLiteral("sect1"))
                 ++headerLevel;
+            else if (reader.name() == QStringLiteral("term"))
+                text.append(QStringLiteral("<div>"));
             else if (reader.name() == QStringLiteral("title"))
             {
                 if (headerLevel > 1)
@@ -169,7 +176,12 @@ QString DocbookReader::getPage(const QString& id) const
             }
             break;
         case QXmlStreamReader::EndElement:
-            if (reader.name() == QStringLiteral("chapter"))
+            if (reader.name() == QStringLiteral("guibutton")
+                    || reader.name() == QStringLiteral("guilabel")
+                    || reader.name() == QStringLiteral("guimenu")
+                    || reader.name() == QStringLiteral("guimenuitem"))
+                text.append(QStringLiteral("</i>"));
+            else if (reader.name() == QStringLiteral("chapter"))
                 finished = true;
             else if (reader.name() == QStringLiteral("listitem"))
                 text.append(QStringLiteral("</blockquote>"));
@@ -177,6 +189,8 @@ QString DocbookReader::getPage(const QString& id) const
                 text.append(QStringLiteral("</p>"));
             else if (reader.name() == QStringLiteral("sect1"))
                 --headerLevel;
+            else if (reader.name() == QStringLiteral("term"))
+                text.append(QStringLiteral("</div>"));
             else if (reader.name() == QStringLiteral("title"))
             {
                 if (headerLevel > 1)
