@@ -10,11 +10,39 @@ import QtQuick.Layouts 1.1
 import pentobi 1.0
 
 Item {
-    id: root
-
     property real textAreaPadding:
         Math.max((width - 45 * textArea.font.pixelSize) / 2,
                  textArea.font.pixelSize)
+
+    function goHome() {
+        docbookReader.pageId = "index"
+    }
+    function scrollUp() {
+        if (flickable.contentY > 0)
+            flickable.contentY =
+                    Math.max(flickable.contentY - textArea.font.pixelSize, 0)
+    }
+    function scrollDown() {
+        if (flickable.contentY < flickable.contentHeight - textArea.font.pixelSize)
+            flickable.contentY += textArea.font.pixelSize
+    }
+    function scrollPageUp() {
+        if (flickable.contentY > 0)
+            flickable.contentY =
+                    Math.max(flickable.contentY - flickable.height, 0)
+    }
+    function scrollPageDown() {
+        if (flickable.contentY < flickable.contentHeight - flickable.height)
+            flickable.contentY += flickable.height
+    }
+    function nextPage() {
+        if (docbookReader.nextPageId !== "")
+            docbookReader.pageId = docbookReader.nextPageId
+    }
+    function prevPage() {
+        if (docbookReader.prevPageId !== "")
+            docbookReader.pageId = docbookReader.prevPageId
+    }
 
     DocbookReader {
         id: docbookReader
@@ -72,47 +100,5 @@ Item {
                 policy: isDesktop ? ScrollBar.AlwaysOn : ScrollBar.AsNeeded
             }
         }
-    }
-    Shortcut {
-        sequence: StandardKey.MoveToStartOfLine
-        onActivated: docbookReader.pageId = "index"
-    }
-    Shortcut {
-        sequence: StandardKey.MoveToNextPage
-        onActivated:
-            if (flickable.contentY < flickable.contentHeight - flickable.height)
-                flickable.contentY += flickable.height
-    }
-    Shortcut {
-        sequence: StandardKey.MoveToPreviousPage
-        onActivated:
-            if (flickable.contentY > 0)
-                flickable.contentY =
-                        Math.max(flickable.contentY - flickable.height, 0)
-    }
-    Shortcut {
-        sequence: StandardKey.MoveToNextLine
-        onActivated:
-            if (flickable.contentY < flickable.contentHeight - textArea.font.pixelSize)
-                flickable.contentY += textArea.font.pixelSize
-    }
-    Shortcut {
-        sequence: StandardKey.MoveToPreviousLine
-        onActivated:
-            if (flickable.contentY > 0)
-                flickable.contentY =
-                        Math.max(flickable.contentY - textArea.font.pixelSize, 0)
-    }
-    Shortcut {
-        sequence: StandardKey.MoveToNextChar
-        onActivated:
-            if (docbookReader.nextPageId !== "")
-                docbookReader.pageId = docbookReader.nextPageId
-    }
-    Shortcut {
-        sequence: StandardKey.MoveToPreviousChar
-        onActivated:
-            if (docbookReader.prevPageId !== "")
-                docbookReader.pageId = docbookReader.prevPageId
     }
 }

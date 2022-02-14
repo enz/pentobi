@@ -20,10 +20,40 @@ Window {
     title: qsTr("Pentobi Help")
 
     HelpViewer {
+        id: helpViewer
+
         anchors.fill: parent
     }
     Shortcut {
         sequence: StandardKey.Close
         onActivated: hide()
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToStartOfLine
+        onActivated: helpViewer.goHome()
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToNextPage
+        onActivated: helpViewer.scrollPageDown()
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToPreviousPage
+        onActivated: helpViewer.scrollPageUp()
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToNextLine
+        onActivated: helpViewer.scrollDown()
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToPreviousLine
+        onActivated: helpViewer.scrollUp()
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToNextChar
+        onActivated: helpViewer.nextPage()
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToPreviousChar
+        onActivated: helpViewer.prevPage()
     }
 }
