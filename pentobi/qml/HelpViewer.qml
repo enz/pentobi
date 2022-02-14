@@ -73,4 +73,46 @@ Item {
             }
         }
     }
+    Shortcut {
+        sequence: StandardKey.MoveToStartOfLine
+        onActivated: docbookReader.pageId = "index"
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToNextPage
+        onActivated:
+            if (flickable.contentY < flickable.contentHeight - flickable.height)
+                flickable.contentY += flickable.height
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToPreviousPage
+        onActivated:
+            if (flickable.contentY > 0)
+                flickable.contentY =
+                        Math.max(flickable.contentY - flickable.height, 0)
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToNextLine
+        onActivated:
+            if (flickable.contentY < flickable.contentHeight - textArea.font.pixelSize)
+                flickable.contentY += textArea.font.pixelSize
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToPreviousLine
+        onActivated:
+            if (flickable.contentY > 0)
+                flickable.contentY =
+                        Math.max(flickable.contentY - textArea.font.pixelSize, 0)
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToNextChar
+        onActivated:
+            if (docbookReader.nextPageId !== "")
+                docbookReader.pageId = docbookReader.nextPageId
+    }
+    Shortcut {
+        sequence: StandardKey.MoveToPreviousChar
+        onActivated:
+            if (docbookReader.prevPageId !== "")
+                docbookReader.pageId = docbookReader.prevPageId
+    }
 }

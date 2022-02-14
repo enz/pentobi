@@ -65,56 +65,6 @@ DocbookReader::DocbookReader(QObject* parent)
     setText();
 }
 
-QString DocbookReader::getNavigationText() const
-{
-    int prevId = -1;
-    int nextId = -1;
-    int i = m_pageIds.indexOf(m_pageId);
-    if (i >= 0)
-    {
-        prevId = i - 1;
-        nextId = i + 1;
-        if (nextId >= m_pageIds.size())
-            nextId = -1;
-    }
-    QString text;
-    addHeader(text);
-    text.append(QStringLiteral("<table width=100%><tr><td width=34%>"));
-    if (prevId >= 0)
-    {
-        text.append(QStringLiteral("<a href="));
-        text.append(m_pageIds[prevId]);
-        text.append(QStringLiteral(">"));
-        //: Go to previous page of user manual
-        text.append(tr("Previous"));
-        text.append(QStringLiteral("</a>"));
-    }
-    else
-        text.append(QStringLiteral("&#160;"));
-    text.append(QStringLiteral("</td><td width=32% align=center>"));
-    if (m_pageId != QStringLiteral("index"))
-    {
-        text.append(QStringLiteral("<a href=index>"));
-        //: Go to table of contents of user manual
-        text.append(tr("Contents"));
-        text.append(QStringLiteral("</a>"));
-    }
-    text.append(QStringLiteral("</td><td width=34% align=right>"));
-    if (nextId >= 0)
-    {
-        text.append(QStringLiteral("<a href="));
-        text.append(m_pageIds[nextId]);
-        text.append(QStringLiteral(">"));
-        //: Go to next page of user manual
-        text.append(tr("Next"));
-        text.append(QStringLiteral("</a>"));
-    }
-    else
-        text.append(QStringLiteral("&#160;"));
-    text.append(QStringLiteral("</td></tr></table>"));
-    return text;
-}
-
 QString DocbookReader::getPage(const QString& id) const
 {
     QFile file(m_fileName);
@@ -259,12 +209,70 @@ QString DocbookReader::getTableOfContents() const
     return text;
 }
 
+void DocbookReader::setNavigation()
+{
+    int prevId = -1;
+    int nextId = -1;
+    int i = m_pageIds.indexOf(m_pageId);
+    if (i >= 0)
+    {
+        prevId = i - 1;
+        nextId = i + 1;
+        if (nextId >= m_pageIds.size())
+            nextId = -1;
+    }
+    QString text;
+    addHeader(text);
+    text.append(QStringLiteral("<table width=100%><tr><td width=34%>"));
+    if (prevId >= 0)
+    {
+        text.append(QStringLiteral("<a href="));
+        text.append(m_pageIds[prevId]);
+        text.append(QStringLiteral(">"));
+        //: Go to previous page of user manual
+        text.append(tr("Previous"));
+        text.append(QStringLiteral("</a>"));
+    }
+    else
+        text.append(QStringLiteral("&#160;"));
+    text.append(QStringLiteral("</td><td width=32% align=center>"));
+    if (m_pageId != QStringLiteral("index"))
+    {
+        text.append(QStringLiteral("<a href=index>"));
+        //: Go to table of contents of user manual
+        text.append(tr("Contents"));
+        text.append(QStringLiteral("</a>"));
+    }
+    text.append(QStringLiteral("</td><td width=34% align=right>"));
+    if (nextId >= 0)
+    {
+        text.append(QStringLiteral("<a href="));
+        text.append(m_pageIds[nextId]);
+        text.append(QStringLiteral(">"));
+        //: Go to next page of user manual
+        text.append(tr("Next"));
+        text.append(QStringLiteral("</a>"));
+    }
+    else
+        text.append(QStringLiteral("&#160;"));
+    text.append(QStringLiteral("</td></tr></table>"));
+    m_navigationText = text;
+    if (prevId >= 0)
+        m_prevPageId = m_pageIds[prevId];
+    else
+        m_prevPageId.clear();
+    if (nextId >= 0)
+        m_nextPageId = m_pageIds[nextId];
+    else
+        m_nextPageId.clear();
+    emit navigationTextChanged();
+}
+
 void DocbookReader::setPageId(const QString& pageId)
 {
     if (m_pageId == pageId)
         return;
     m_pageId = pageId;
-    emit pageIdChanged();
     setText();
 }
 
@@ -275,8 +283,7 @@ void DocbookReader::setText()
     else
         m_text = getPage(m_pageId);
     emit textChanged();
-    m_navigationText = getNavigationText();
-    emit navigationTextChanged();
+    setNavigation();
 }
 
 void DocbookReader::setTextWidth(qreal textWidth)
@@ -287,7 +294,6 @@ void DocbookReader::setTextWidth(qreal textWidth)
     if (m_imageWidth > textWidth)
         m_imageWidth = textWidth;
     m_textWidth = textWidth;
-    emit textWidthChanged();
     setText();
 }
 

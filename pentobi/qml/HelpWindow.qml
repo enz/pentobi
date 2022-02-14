@@ -23,7 +23,7 @@ Window {
         anchors.fill: parent
     }
     Shortcut {
-        sequence: "Ctrl+W"
+        sequence: StandardKey.Close
         onActivated: hide()
     }
 }

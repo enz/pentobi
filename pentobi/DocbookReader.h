@@ -23,10 +23,12 @@ class DocbookReader
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString pageId MEMBER m_pageId WRITE setPageId NOTIFY pageIdChanged)
+    Q_PROPERTY(QString pageId MEMBER m_pageId WRITE setPageId)
+    Q_PROPERTY(QString nextPageId READ nextPageId)
+    Q_PROPERTY(QString prevPageId READ prevPageId)
     Q_PROPERTY(QString text READ text NOTIFY textChanged)
     Q_PROPERTY(QString navigationText READ navigationText NOTIFY navigationTextChanged)
-    Q_PROPERTY(qreal textWidth MEMBER m_textWidth WRITE setTextWidth NOTIFY textWidthChanged)
+    Q_PROPERTY(qreal textWidth MEMBER m_textWidth WRITE setTextWidth)
 
 public:
     DocbookReader(QObject* parent = nullptr);
@@ -37,13 +39,15 @@ public:
 
     const QString& text() const { return m_text; }
 
+    const QString& nextPageId() const { return m_nextPageId; }
+
+    const QString& prevPageId() const { return m_prevPageId; }
+
     void setTextWidth(qreal textWidth);
 
 signals:
     void navigationTextChanged();
-    void pageIdChanged();
     void textChanged();
-    void textWidthChanged();
 
 private:
     qreal m_textWidth = 0;
@@ -54,6 +58,10 @@ private:
 
     QString m_text;
 
+    QString m_nextPageId;
+
+    QString m_prevPageId;
+
     QString m_navigationText;
 
     QString m_fileName;
@@ -61,11 +69,11 @@ private:
     QStringList m_pageIds;
 
 
-    QString getNavigationText() const;
-
     QString getPage(const QString& id) const;
 
     QString getTableOfContents() const;
+
+    void setNavigation();
 
     void setText();
 };
