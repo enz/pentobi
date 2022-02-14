@@ -390,7 +390,7 @@ ApplicationWindow {
 
         shortcut: "F1"
         text: qsTr("Pentobi Help")
-        onTriggered: helpWindow.show()
+        onTriggered: { gameView.dropCommentFocus(); helpWindow.show() }
     }
     Action {
         id: actionNew
