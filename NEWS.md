@@ -9,6 +9,7 @@ Version 21.0-dev (master)
   with all installation directories on Ubuntu 21.10 because Firefox
   and Chromium have restricted access to local files, or using WebView,
   which is not supported on all Linux architectures or in Qt 6.0/6.1.
+* Fixed visibility of markup on Callisto 1x1-piece in dark theme.
 
 Version 20.1-dev (v20-fixes)
 ----------------------------

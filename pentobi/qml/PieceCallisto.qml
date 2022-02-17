@@ -98,7 +98,11 @@ PieceBase
                              0.5 : 0
                 color: gameModel.showVariations && ! gameModel.isMainVar ?
                            "transparent" : border.color
-                border { width: 0.2 * width; color: root.color[3] }
+                border {
+                    width: 0.2 * width
+                    color: pieceModel.elements.length > 1 ?
+                               root.color[3] : theme.colorBoardMarkup
+                }
                 width: 0.3 * board.gridHeight
                 height: width
                 radius: width / 2
@@ -124,7 +128,8 @@ PieceBase
                           && pieceModel.isLastMove) ?
                           pieceModel.moveLabel : ""
                 opacity: text === "" ? 0 : 1
-                color: root.color[3]
+                color: pieceModel.elements.length > 1 ?
+                           root.color[3] : theme.colorBoardMarkup
                 width: board.gridWidth
                 height: board.gridHeight
                 fontSizeMode: Text.Fit

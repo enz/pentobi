@@ -42,6 +42,8 @@ Item {
     property color colorSelection: palette.highlight
     property color colorStartingPoint:
         _isDark ? dark.colorStartingPoint : light.colorStartingPoint
+    property color colorBoardMarkup:
+        _isDark ? dark.colorBoardMarkup : light.colorBoardMarkup
     property color colorText: palette.text
 
     property bool _isDark: palette.window.hslLightness < 0.5

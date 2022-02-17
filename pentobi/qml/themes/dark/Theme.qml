@@ -25,6 +25,7 @@ Light.Theme {
     property color colorSelectedText: colorBackground
     property color colorSelection: "#4799cc"
     property color colorStartingPoint: "#82777E"
+    property color colorBoardMarkup: "#ffffff"
     property color colorText: "#e6d5e1"
 
     function getImage(name) { return "themes/dark/" + name + ".png" }

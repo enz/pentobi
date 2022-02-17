@@ -38,6 +38,7 @@ Item {
     property color colorSelectedText: colorBackground
     property color colorSelection: "#4799cc"
     property color colorStartingPoint: "#767074"
+    property color colorBoardMarkup: "#111111"
     property color colorText: "#111111"
 
     function getImage(name) { return "themes/light/" + name + ".png" }
