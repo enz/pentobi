@@ -9,7 +9,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 import pentobi 1.0
 
-Item {
+Rectangle {
     property real textAreaPadding:
         Math.max((width - 45 * textArea.font.pixelSize) / 2,
                  textArea.font.pixelSize)
@@ -44,14 +44,12 @@ Item {
             docbookReader.pageId = docbookReader.prevPageId
     }
 
+    color: "white"
+
     DocbookReader {
         id: docbookReader
 
         textWidth: textArea.width - 2 * textAreaPadding
-    }
-    Rectangle {
-        anchors.fill: parent
-        color: "white"
     }
     ColumnLayout {
         anchors.fill: parent
