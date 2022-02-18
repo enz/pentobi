@@ -7,11 +7,12 @@
 import QtQuick.Controls 2.15
 
 Dialog {
-    width: rootWindow.width; height: rootWindow.height
+    width: rootWindow.contentItem.width
+    height: rootWindow.contentItem.height
+    padding: 0
     modal: true
 
     HelpViewer {
-        anchors.centerIn: parent
-        width: rootWindow.width; height: rootWindow.height
+        anchors.fill: parent
     }
 }
