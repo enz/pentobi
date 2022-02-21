@@ -788,11 +788,23 @@ function showVariationInfo() {
 }
 
 function showWindow() {
-    x = settings.x
-    y = settings.y
     width = settings.width
     height = settings.height
+    x = settings.x
+    y = settings.y
     show()
+    var maxWidth = rootWindow.Screen.desktopAvailableWidth
+    var maxHeight = rootWindow.Screen.desktopAvailableHeight
+    if (settings.width <= 0 || settings.height <= 0
+            || settings.x < 0 || settings.y < 0
+            || settings.x + settings.width >= maxWidth
+            || settings.y + settings.height >= maxHeight)
+    {
+        width = isAndroid ? maxWidth : Math.min(maxWidth, 1164)
+        height = isAndroid ? maxHeight : Math.min(maxHeight, width * 662 / 1164)
+        x = (Screen.width - width) / 2
+        y = (Screen.height - height) / 2
+    }
 }
 
 function truncate() {

@@ -38,14 +38,6 @@ ApplicationWindow {
     // Display name if current file is a Android content URI
     property string displayName
 
-    property real defaultWidth:
-        isAndroid ? Screen.desktopAvailableWidth
-                  : Math.min(Screen.desktopAvailableWidth, 1164)
-    property real defaultHeight:
-        isAndroid ? Screen.desktopAvailableHeight
-                  : Math.min(Screen.desktopAvailableHeight,
-                             defaultWidth * 662 / 1164)
-
     property int exportImageWidth: 420
     property bool busyIndicatorRunning: lengthyCommand.isRunning
                                         || playerModel.isGenMoveRunning
@@ -104,10 +96,10 @@ ApplicationWindow {
     Settings {
         id: settings
 
-        property real x: (Screen.width - defaultWidth) / 2
-        property real y: (Screen.height - defaultHeight) / 2
-        property real width: defaultWidth
-        property real height: defaultHeight
+        property real x
+        property real y
+        property real width
+        property real height
         property alias folder: rootWindow.folder
         property alias displayName: rootWindow.displayName
         property alias themeName: rootWindow.themeName
