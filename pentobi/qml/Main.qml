@@ -108,7 +108,6 @@ ApplicationWindow {
         property real y: (Screen.height - defaultHeight) / 2
         property real width: defaultWidth
         property real height: defaultHeight
-        property int visibility
         property alias folder: rootWindow.folder
         property alias displayName: rootWindow.displayName
         property alias themeName: rootWindow.themeName

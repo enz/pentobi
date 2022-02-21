@@ -25,16 +25,12 @@ function autoSaveNoVerify() {
     syncSettings.setValueInt("level", playerModel.level)
     syncSettings.sync()
     analyzeGameModel.autoSave(gameModel)
-    // This will lose the geometry if the user has changed it, maximized the
-    // window and then closed it before returning to windowed state. But better
-    // than overwriting the geometry with the maximized/fullscreen one.
     if (visibility === Window.Windowed) {
         settings.x = x
         settings.y = y
         settings.width = width
         settings.height = height
     }
-    settings.visibility = visibility
 }
 
 function autoSaveNoVerifyAndQuit() {
@@ -796,14 +792,7 @@ function showWindow() {
     y = settings.y
     width = settings.width
     height = settings.height
-    if (isAndroid)
-        show()
-    else
-        switch (settings.visibility) {
-        case Window.Maximized: showMaximized(); break
-        case Window.FullScreen: showFullScreen(); break
-        default: show()
-        }
+    show()
 }
 
 function truncate() {
