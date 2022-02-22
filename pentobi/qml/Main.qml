@@ -184,14 +184,9 @@ ApplicationWindow {
         id: helpWindow
 
         function show() {
-            if (isDesktop) {
-                if (! item) source = "HelpWindow.qml"
-                item.show()
-            }
-            else {
-                if (! item) source = "HelpDialog.qml"
-                item.open()
-            }
+            if (! item)
+                source = isDesktop ? "HelpWindow.qml" : "HelpDialog.qml"
+            item.open()
         }
     }
 

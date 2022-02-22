@@ -6,23 +6,53 @@
 
 import QtQuick 2.15
 import QtQuick.Window 2.15
+import Qt.labs.settings 1.0
 
 Window {
-    property real defaultWidth:
-        Math.min(font.pixelSize * 40, Screen.desktopAvailableWidth)
-    property real defaultHeight:
-        Math.min(font.pixelSize * 50, Screen.desktopAvailableHeight)
-
-    width: defaultWidth; height: defaultHeight
     minimumWidth: 240; minimumHeight: 240
-    x: (Screen.width - defaultWidth) / 2
-    y: (Screen.height - defaultHeight) / 2
     title: qsTr("Pentobi Help")
+    onVisibleChanged:
+        if (! visible && visibility == Window.Windowed) {
+            settings.x = x
+            settings.y = y
+            settings.width = width
+            settings.height = height
+        }
+
+    function open() {
+        width = settings.width
+        height = settings.height
+        x = settings.x
+        y = settings.y
+        show()
+        var maxWidth = rootWindow.Screen.desktopAvailableWidth
+        var maxHeight = rootWindow.Screen.desktopAvailableHeight
+        if (settings.width <= 0 || settings.height <= 0
+                || settings.x < 0 || settings.y < 0
+                || settings.x + settings.width >= maxWidth
+                || settings.y + settings.height >= maxHeight)
+        {
+            width = Math.min(font.pixelSize * 40, maxWidth)
+            height = Math.min(font.pixelSize * 50, maxHeight)
+            x = (Screen.width - width) / 2
+            y = (Screen.height - height) / 2
+        }
+    }
 
     HelpViewer {
         id: helpViewer
 
         anchors.fill: parent
+    }
+    Settings {
+        id: settings
+
+        property real x
+        property real y
+        property real width
+        property real height
+
+        category: "HelpWindow"
     }
     Shortcut {
         sequence: StandardKey.Close
