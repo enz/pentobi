@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ru" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ru">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -190,6 +190,24 @@
     <message>
         <source>Level %1</source>
         <translation>Уровень %1</translation>
+    </message>
+</context>
+<context>
+    <name>DocbookReader</name>
+    <message>
+        <source>Previous</source>
+        <extracomment>Go to previous page of user manual</extracomment>
+        <translation>Пред.</translation>
+    </message>
+    <message>
+        <source>Contents</source>
+        <extracomment>Go to table of contents of user manual</extracomment>
+        <translation>Начало</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <extracomment>Go to next page of user manual</extracomment>
+        <translation>След.</translation>
     </message>
 </context>
 <context>
@@ -479,6 +497,13 @@
     <message>
         <source>Move number:</source>
         <translation>Номер хода:</translation>
+    </message>
+</context>
+<context>
+    <name>HelpWindow</name>
+    <message>
+        <source>Pentobi Help</source>
+        <translation>Помощь</translation>
     </message>
 </context>
 <context>
