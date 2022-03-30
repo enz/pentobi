@@ -1,0 +1,29 @@
+version: 1.0.{build}
+configuration: Release
+platform: x64
+environment:
+  QT_DIR: C:\Qt\6.2.2\msvc2019_64
+  MINGW_DIR: C:\msys64\mingw64
+  OUTPUT_DIR: '"%APPVEYOR_BUILD_FOLDER%\build\x64"'
+  PATH: '%MINGW_DIR%\bin;%PATH%'
+install:
+- cmd: >-
+    C:\msys64\usr\bin\bash -lc "pacman --noconfirm -Syuu"
+
+    C:\msys64\usr\bin\bash -lc "pacman --noconfirm -Syuu"
+
+    C:\msys64\usr\bin\bash -lc "pacman --noconfirm --needed -S mingw-w64-x86_64-gettext mingw-w64-x86_64-itstool mingw-w64-x86_64-librsvg"
+before_build:
+- cmd: cmake -DCMAKE_CONFIGURATION_TYPES=Release -DCMAKE_PREFIX_PATH="%QT_DIR%" -G "Visual Studio 16 2019" -S . -B "%OUTPUT_DIR%"
+build:
+  verbosity: minimal
+before_package:
+- cmd: >-
+    mkdir "%OUTPUT_DIR%\Release"
+
+    copy /b /y "%OUTPUT_DIR%\pentobi\Release\pentobi.exe" "%OUTPUT_DIR%\Release"
+
+    "%QT_DIR%\bin\windeployqt" --release --qmldir "%APPVEYOR_BUILD_FOLDER%\pentobi\qml" "%OUTPUT_DIR%\Release\pentobi.exe"
+artifacts:
+- path: build\x64\Release
+  name: pentobi
