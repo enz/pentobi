@@ -2,7 +2,7 @@ version: 1.0.{build}
 configuration: Release
 platform: x64
 environment:
-  QT_DIR: C:\Qt\6.2.2\msvc2019_64
+  QT_DIR: C:\Qt\6.2.4\msvc2019_64
   MINGW_DIR: C:\msys64\mingw64
   OUTPUT_DIR: '"%APPVEYOR_BUILD_FOLDER%\build\x64"'
   PATH: '%MINGW_DIR%\bin;%PATH%'
