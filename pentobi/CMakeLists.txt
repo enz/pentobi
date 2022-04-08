@@ -138,6 +138,9 @@ set(pentobi_src
     ../opening_books/pentobi_books.qrc
     resources.qrc
     )
+if (WIN32)
+    list(APPEND pentobi_src "windows/pentobi.rc")
+endif()
 
 add_custom_command(
     OUTPUT help/help.qrc
