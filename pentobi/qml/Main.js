@@ -255,6 +255,8 @@ function genMove() {
 function getFileFromUrl(fileUrl) {
     var file = fileUrl.toString()
     file = file.replace(/^(file:\/{3})/,"/")
+    if (Qt.platform.os == "windows")
+        file = file.replace(/^\/(\w:)/,"$1").replace(/\//g,"\\")
     return decodeURIComponent(file)
 }
 
