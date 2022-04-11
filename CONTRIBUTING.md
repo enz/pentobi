@@ -9,6 +9,9 @@ at GitHub. There are no plans to add more game variants or new features to
 Pentobi, so please use the issue tracker only for bugs or issues with running
 or compiling Pentobi on newer operating system versions.
 
+The Windows version is maintained by an external maintainer, please reported
+Windows-related bugs [here](https://github.com/lwchkg/pentobi/issues).
+
 Translations
 ------------
 
