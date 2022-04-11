@@ -224,7 +224,7 @@ int main(int argc, char *argv[])
     // incorrect canvas painting on low-DPI devices with devicePixelRatio<1
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
                 Qt::HighDpiScaleFactorRoundingPolicy::Round);
-#elseif
+#else
     QQuickStyle::setFallbackStyle(QStringLiteral("Fusion"));
 #endif
     QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
