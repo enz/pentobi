@@ -17,8 +17,7 @@ Contact
 -------
 
 The homepage of Pentobi is at https://pentobi.sourceforge.io.
-The maintainer of Pentobi is Markus Enzenberger. Bugs can be reported
-at the [issue tracker](https://github.com/enz/pentobi/issues) at GitHub.
+The maintainer of Pentobi is Markus Enzenberger.
 
 License
 -------
