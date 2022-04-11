@@ -10,7 +10,8 @@ Trigon, Junior, Nexos, GembloQ and Callisto.
 
 See [INSTALL](INSTALL.md) for instructions how to build and install
 the program from the sources. See [NEWS](NEWS.md) for release notes.
-See [HACKING](HACKING.md) for an overview of the source code.
+See [CONTRIBUTING](CONTRIBUTING.md) for information on how to report bugs and
+an overview of the source code.
 
 Contact
 -------
