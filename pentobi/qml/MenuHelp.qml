@@ -13,10 +13,6 @@ PentobiMenu {
         action: actionHelp
     }
     Action {
-        text: qsTr("Report Bug")
-        onTriggered: Qt.openUrlExternally("https://github.com/enz/pentobi/issues")
-    }
-    Action {
         text: qsTr("About Pentobi")
         onTriggered: aboutDialog.open()
     }
