@@ -225,7 +225,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
                 Qt::HighDpiScaleFactorRoundingPolicy::Round);
 #else
-    QQuickStyle::setFallbackStyle(QStringLiteral("Fusion"));
+    qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
 #endif
     QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
     QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
