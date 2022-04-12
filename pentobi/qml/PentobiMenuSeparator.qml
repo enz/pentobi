@@ -11,5 +11,5 @@ import QtQuick.Window 2.2
 
 MenuSeparator {
     // Background used by style might not fit background used in PentobiMenu
-    background: Rectangle { color: "transparent" }
+    background: Item { }
 }
