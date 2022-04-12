@@ -19,7 +19,7 @@ PentobiMenu {
             moveAnnotationDialog.open()
         }
     }
-    MenuSeparator { }
+    PentobiMenuSeparator { }
     PentobiMenuItem {
         text: qsTr("Make Main Variation")
         enabled: ! gameModel.isMainVar && ! isRated
@@ -45,7 +45,7 @@ PentobiMenu {
         enabled: gameModel.hasVariations && ! isRated
         onTriggered: Logic.deleteAllVar()
     }
-    MenuSeparator { }
+    PentobiMenuSeparator { }
     PentobiMenuItem {
         text: qsTr("Truncate")
         enabled: gameModel.canGoBackward && ! isRated
@@ -66,7 +66,7 @@ PentobiMenu {
         enabled: gameModel.canGoBackward && gameModel.canGoForward && ! isRated
         onTriggered: Logic.keepOnlySubtree()
     }
-    MenuSeparator { }
+    PentobiMenuSeparator { }
     PentobiMenuItem {
         text: qsTr("Setup Mode")
         checkable: true

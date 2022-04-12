@@ -19,7 +19,7 @@ PentobiMenu {
         text: qsTr("Clear Rating")
         onTriggered: Logic.clearRating()
     }
-    MenuSeparator { }
+    PentobiMenuSeparator { }
     Action {
         enabled: ! isRated && (gameModel.canGoBackward || gameModel.canGoForward)
         text: qsTr("Analyze Game…")

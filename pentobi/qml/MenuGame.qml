@@ -16,7 +16,7 @@ PentobiMenu {
     PentobiMenuItem {
         action: actionNewRated
     }
-    MenuSeparator { }
+    PentobiMenuSeparator { }
     Action {
         text: qsTr("Game Variant…")
         onTriggered: gameVariantDialog.open()
@@ -24,14 +24,14 @@ PentobiMenu {
     PentobiMenuItem {
         action: actionGameInfo
     }
-    MenuSeparator { }
+    PentobiMenuSeparator { }
     PentobiMenuItem {
         action: actionUndo
     }
     PentobiMenuItem {
         action: actionFindMove
     }
-    MenuSeparator { }
+    PentobiMenuSeparator { }
     PentobiMenuItem {
         action: actionOpen
     }
@@ -48,7 +48,7 @@ PentobiMenu {
         action: actionSaveAs
     }
     MenuExport { relativeWidth: 10 }
-    MenuSeparator { }
+    PentobiMenuSeparator { }
     PentobiMenuItem {
         action: actionQuit
     }

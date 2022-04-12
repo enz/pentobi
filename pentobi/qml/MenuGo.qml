@@ -18,7 +18,7 @@ PentobiMenu {
     PentobiMenuItem {
         action: actionBeginningOfBranch
     }
-    MenuSeparator { }
+    PentobiMenuSeparator { }
     PentobiMenuItem {
         action: actionNextComment
     }

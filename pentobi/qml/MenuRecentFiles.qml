@@ -84,7 +84,7 @@ PentobiMenu {
         text: getText(recentFiles.entries, 8)
         onTriggered: openFile(8)
     }
-    MenuSeparator { }
+    PentobiMenuSeparator { }
     Action {
         //: Menu item for clearing the recent files list
         text: qsTr("Clear List")
