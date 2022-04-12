@@ -51,6 +51,7 @@ ApplicationWindow {
     onClosing: if ( ! Logic.quit()) close.accepted = false
     Component.onCompleted: Logic.init()
     Component.onDestruction: Logic.cancelRunning()
+    Material.accent: Material.BlueGrey
 
     MouseArea {
         anchors.fill: parent
