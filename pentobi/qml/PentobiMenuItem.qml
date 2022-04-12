@@ -56,7 +56,7 @@ MenuItem {
                     // Workaround for bug in Universal style, which sets
                     // palette.windowText to #000000 for enabled items but to
                     // #bebebe for disabled items (last tested with Qt 6.2.3)
-                    return "black"
+                    return menu.palette.windowText
                 return palette.windowText
             }
             verticalAlignment: Text.AlignVCenter
