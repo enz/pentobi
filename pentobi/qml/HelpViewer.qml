@@ -59,10 +59,14 @@ Rectangle {
             id: navigation
 
             Layout.fillWidth: true
+            // Avoid frame in some styles
+            // (https://github.com/lwchkg/pentobi/issues/2#issuecomment-1095506572)
+            background: Item { }
             leftPadding: font.pixelSize
             rightPadding: leftPadding
             textFormat: TextArea.RichText
             readOnly: true
+            focus: false
             text: docbookReader.navigationText
             onLinkActivated: link => docbookReader.pageId = link
         }
@@ -84,12 +88,16 @@ Rectangle {
                 id: textArea
 
                 width: flickable.width
+                // Avoid frame in some styles
+                // (https://github.com/lwchkg/pentobi/issues/2#issuecomment-1095506572)
+                background: Item { }
                 font.pixelSize: 1.1 * navigation.font.pixelSize
                 leftPadding: textAreaPadding
                 rightPadding: textAreaPadding
                 textFormat: TextArea.RichText
                 wrapMode: TextArea.WordWrap
                 readOnly: true
+                focus: false
                 text: docbookReader.text
                 onLinkActivated: link => docbookReader.pageId = link
                 onTextChanged: flickable.contentY = 0
