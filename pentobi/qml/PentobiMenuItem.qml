@@ -52,7 +52,12 @@ MenuItem {
                 if (root.highlighted)
                     return globalStyle === "Fusion" ?
                                 palette.highlightedText : palette.buttonText
-                return palette.text
+                if (! root.enabled && globalStyle === "Universal")
+                    // Workaround for bug in Universal style, which sets
+                    // palette.windowText to #000000 for enabled items but to
+                    // #bebebe for disabled items (last tested with Qt 6.2.3)
+                    return "black"
+                return palette.windowText
             }
             verticalAlignment: Text.AlignVCenter
             Layout.fillWidth: true
