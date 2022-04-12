@@ -38,7 +38,7 @@ MenuItem {
             // palette.midlight looks similar to the one used in style Default,
             // but doesn't work in style Fusion on KDE, so we use
             // palette.highlight there.
-            return globalStyle.toLowerCase() === "fusion" ?
+            return globalStyle === "Fusion" ?
                         palette.highlight : palette.midlight
         }
     }
@@ -50,7 +50,7 @@ MenuItem {
             color: {
                 // See comment at background
                 if (root.highlighted)
-                    return globalStyle.toLowerCase() === "fusion" ?
+                    return globalStyle === "Fusion" ?
                                 palette.highlightedText : palette.buttonText
                 return palette.text
             }
