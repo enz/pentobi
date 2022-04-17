@@ -154,55 +154,75 @@ Item
         height: parent.height - y
         clip: true
 
-        Column {
-            id: columnPieces
+        // Use Rectangle to explicitely draw background of each page, otherwise
+        // all pages are shown simultaneously and overlapping with Qt 6.3.0
+        // until first swipe.
+        Rectangle {
+            color: theme.colorBackground
 
-            spacing: 2
+            Column {
+                id: columnPieces
 
-            ScoreDisplay {
-                id: scoreDisplay
+                anchors.fill: parent
+                spacing: 2
 
-                width: swipeView.width
-                height: 0.06 * swipeView.width
-            }
-            PieceSelectorMobile {
-                id: pieceSelector
+                ScoreDisplay {
+                    id: scoreDisplay
 
-                property real elementSize:
-                    // Show at least 3 rows
-                    Math.min(parent.width / columns, height / 3)
-
-                columns: pieces0 && pieces0.length <= 21 ? 7 : 8
-                x: isPortrait ? (parent.width - width) / 2 : 0
-                width: elementSize * columns
-                height: swipeView.height - scoreDisplay.height
-                        - columnPieces.spacing
-                rowSpacing: {
-                    if (elementSize <= 0) return 0
-                    // Don't show partial pieces
-                    var n = Math.floor(height / elementSize)
-                    return (height - n * elementSize) / n
+                    width: swipeView.width
+                    height: 0.06 * swipeView.width
                 }
-                transitionsEnabled: false
-                onPiecePicked: piece => Logic.pickPiece(piece)
+                PieceSelectorMobile {
+                    id: pieceSelector
+
+                    property real elementSize:
+                        // Show at least 3 rows
+                        Math.min(parent.width / columns, height / 3)
+
+                    columns: pieces0 && pieces0.length <= 21 ? 7 : 8
+                    x: isPortrait ? (parent.width - width) / 2 : 0
+                    width: elementSize * columns
+                    height: swipeView.height - scoreDisplay.height
+                            - columnPieces.spacing
+                    rowSpacing: {
+                        if (elementSize <= 0) return 0
+                        // Don't show partial pieces
+                        var n = Math.floor(height / elementSize)
+                        return (height - n * elementSize) / n
+                    }
+                    transitionsEnabled: false
+                    onPiecePicked: piece => Logic.pickPiece(piece)
+                }
             }
         }
-        NavigationPanel {
-            id: navigationPanel
-        }
-        ColumnLayout {
-            AnalyzeGame {
-                theme: rootWindow.theme
-                Layout.margins: 0.01 * parent.width
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+        Rectangle {
+            color: theme.colorBackground
+
+            NavigationPanel {
+                id: navigationPanel
+
+                anchors.fill: parent
             }
-            NavigationButtons
-            {
-                Layout.fillWidth: true
-                Layout.maximumHeight:
-                    Math.min(50, 0.08 * rootWindow.contentItem.height,
-                             root.width / 6)
+        }
+        Rectangle {
+            color: theme.colorBackground
+
+            ColumnLayout {
+                anchors.fill: parent
+
+                AnalyzeGame {
+                    theme: rootWindow.theme
+                    Layout.margins: 0.01 * parent.width
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                }
+                NavigationButtons
+                {
+                    Layout.fillWidth: true
+                    Layout.maximumHeight:
+                        Math.min(50, 0.08 * rootWindow.contentItem.height,
+                                 root.width / 6)
+                }
             }
         }
     }

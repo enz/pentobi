@@ -10,6 +10,7 @@ Version 21.0-dev (master)
   and Chromium have restricted access to local files, or using WebView,
   which is not supported on all Linux architectures or in Qt 6.0/6.1.
 * Fixed visibility of labels on Callisto 1x1-piece in dark theme.
+* Fixed rendering issues on Android with Qt 6.3.0.
 
 Version 20.1-dev (v20-fixes)
 ----------------------------
