@@ -66,8 +66,6 @@ Flickable {
         }
     }
 
-    Behavior on contentY { NumberAnimation { duration: animationDurationFast } }
-
     PieceList {
         id: pieceList0
 
