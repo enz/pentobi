@@ -15,7 +15,7 @@ Building Pentobi requires the following tools and libraries:
 * [xsltproc](http://xmlsoft.org/XSLT/xsltproc.html) (only on Unix)
 * [DocBooc XSL](http://www.sagehill.net/docbookxsl/) (only on Unix)
 
-In Ubuntu 21.10, they can be installed with the command
+In Ubuntu 22.04, they can be installed with the command
 ```
 sudo apt install cmake docbook-xsl g++ gettext itstool \
   librsvg2-bin make qml-module-qt-labs-folderlistmodel \
@@ -42,7 +42,7 @@ KDE Thumbnailer
 A thumbnailer plugin for KDE can be built by using the cmake option
 `-DPENTOBI_BUILD_KDE_THUMBNAILER=ON`. In this case, the KDE development
 files need to be installed (packages `libkf5kio-dev` and
-`extra-cmake-modules` on Ubuntu 21.10).
+`extra-cmake-modules` on Ubuntu 22.04).
 
 Note that depending on your distribution, KDE will not search
 `/usr/local` for plugins, for example it might be necessary to add
