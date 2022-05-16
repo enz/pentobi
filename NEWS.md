@@ -11,6 +11,8 @@ Version 21.0-dev (master)
   which is not supported on all Linux architectures or in Qt 6.0/6.1.
 * Fixed visibility of labels on Callisto 1x1-piece in dark theme.
 * Fixed rendering issues on Android with Qt 6.3.0.
+* Several fixes to make Pentobi work on Windows (see
+  https://github.com/lwchkg/pentobi/)
 
 Version 20.1-dev (v20-fixes)
 ----------------------------
