@@ -1,4 +1,4 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="zh_CN" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_CN">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -190,6 +190,24 @@
     <message>
         <source>Level %1</source>
         <translation>等级 %1</translation>
+    </message>
+</context>
+<context>
+    <name>DocbookReader</name>
+    <message>
+        <source>Previous</source>
+        <extracomment>Go to previous page of user manual</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Contents</source>
+        <extracomment>Go to table of contents of user manual</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Next</source>
+        <extracomment>Go to next page of user manual</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -479,6 +497,13 @@
     <message>
         <source>Move number:</source>
         <translation>棋步序号：</translation>
+    </message>
+</context>
+<context>
+    <name>HelpWindow</name>
+    <message>
+        <source>Pentobi Help</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -858,10 +883,6 @@
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Starting web browser failed</source>
         <translation type="unfinished"/>
     </message>
 </context>

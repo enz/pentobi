@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS language="nb_NO" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nb_NO">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -192,6 +190,24 @@
     <message>
         <source>Level %1</source>
         <translation>Nivå %1</translation>
+    </message>
+</context>
+<context>
+    <name>DocbookReader</name>
+    <message>
+        <source>Previous</source>
+        <extracomment>Go to previous page of user manual</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Contents</source>
+        <extracomment>Go to table of contents of user manual</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Next</source>
+        <extracomment>Go to next page of user manual</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -481,6 +497,13 @@
     <message>
         <source>Move number:</source>
         <translation>Trekknummer:</translation>
+    </message>
+</context>
+<context>
+    <name>HelpWindow</name>
+    <message>
+        <source>Pentobi Help</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -861,10 +884,6 @@
     <message>
         <source>Press back again to exit</source>
         <translation>Trykk «Tilbake» igjen for å avslutte.</translation>
-    </message>
-    <message>
-        <source>Starting web browser failed</source>
-        <translation>Kunne ikke starte nettleser</translation>
     </message>
 </context>
 <context>
