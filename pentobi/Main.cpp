@@ -224,6 +224,8 @@ int main(int argc, char *argv[])
     // incorrect canvas painting on low-DPI devices with devicePixelRatio<1
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
                 Qt::HighDpiScaleFactorRoundingPolicy::Round);
+#elif defined(Q_OS_WIN)
+    qputenv("QT_QUICK_CONTROLS_STYLE", "Universal");
 #else
     qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
 #endif
