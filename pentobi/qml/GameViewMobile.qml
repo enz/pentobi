@@ -154,7 +154,7 @@ Item
         height: parent.height - y
         clip: true
 
-        // Use Rectangle to explicitely draw background of each page, otherwise
+        // Use Rectangle to explicitly draw background of each page, otherwise
         // all pages are shown simultaneously and overlapping with Qt 6.3.0
         // until first swipe.
         Rectangle {
