@@ -1,6 +1,11 @@
 Pentobi Release Notes
 =====================
 
+Version 22.0-dev (master)
+-------------------------
+
+*
+
 Version 21.1-dev (v21-fixes)
 ----------------------------
 
