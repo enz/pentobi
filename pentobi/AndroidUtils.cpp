@@ -296,20 +296,6 @@ void AndroidUtils::exit()
 #endif
 }
 
-QUrl AndroidUtils::getDefaultFolder()
-{
-#ifdef Q_OS_ANDROID
-    // We don't need to know a default folder on Android anymore since we
-    // now use the Storage Access Framework.
-    return {};
-#else
-    // We could also get the home directory Qt.labs.platform.StandardPaths but
-    // we don't want a dependency on Qt.labs.platform for only one function.
-    return QUrl::fromLocalFile(
-                QStandardPaths::writableLocation(QStandardPaths::HomeLocation));
-#endif
-}
-
 QString AndroidUtils::getDisplayName([[maybe_unused]]const QString& uri)
 {
 #ifdef Q_OS_ANDROID

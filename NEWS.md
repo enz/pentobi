@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 22.0-dev (master)
 -------------------------
 
-*
+* New runtime-dependency qml-module-qt-labs-platform.
 
 Version 21.1-dev (v21-fixes)
 ----------------------------

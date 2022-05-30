@@ -7,6 +7,7 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.3
 import QtQuick.Window 2.1
+import Qt.labs.platform 1.1
 import Qt.labs.settings 1.0
 import pentobi 1.0
 import "Main.js" as Logic
@@ -33,7 +34,8 @@ ApplicationWindow {
     property string themeName: isAndroid ? "dark" : "system"
 
     property QtObject theme: Logic.createTheme(themeName)
-    property url folder: androidUtils.getDefaultFolder()
+    property url folder:
+        StandardPaths.writableLocation(StandardPaths.HomeLocation)
 
     // Display name if current file is a Android content URI
     property string displayName

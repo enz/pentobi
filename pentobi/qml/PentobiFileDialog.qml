@@ -8,6 +8,7 @@ import QtQuick 2.11
 import QtQuick.Controls 2.4
 import QtQuick.Layouts 1.1
 import Qt.labs.folderlistmodel 2.11
+import Qt.labs.platform 1.1
 import "Main.js" as Logic
 
 PentobiDialog {
@@ -19,7 +20,8 @@ PentobiDialog {
     property url fileUrl
     property var nameFilterLabels
     property var nameFilters
-    readonly property url defaultFolder: androidUtils.getDefaultFolder()
+    readonly property url defaultFolder:
+        StandardPaths.writableLocation(StandardPaths.HomeLocation)
 
     function returnPressed() {
         if (! hasButtonFocus())

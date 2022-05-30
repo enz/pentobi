@@ -22,8 +22,6 @@ public:
 
     Q_INVOKABLE static bool checkExists(const QString& file);
 
-    Q_INVOKABLE static QUrl getDefaultFolder();
-
     Q_INVOKABLE static QString getDisplayName(const QString& uri);
 
     Q_INVOKABLE void openImageSaveDialog(const QString& suggestedName);

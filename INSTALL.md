@@ -19,10 +19,10 @@ In Ubuntu 22.04, they can be installed with the command
 ```
 sudo apt install cmake docbook-xsl g++ gettext itstool \
   librsvg2-bin make qml-module-qt-labs-folderlistmodel \
-  qml-module-qt-labs-settings qml-module-qtquick2 \
-  qml-module-qtquick-controls2 qml-module-qtquick-layouts \
-  qml-module-qtquick-window2 qtdeclarative5-dev qtquickcontrols2-5-dev \
-  qttools5-dev xsltproc
+  qml-module-qt-labs-platform qml-module-qt-labs-settings \
+  qml-module-qtquick2 qml-module-qtquick-controls2 \
+  qml-module-qtquick-layouts qml-module-qtquick-window2 \
+  qtdeclarative5-dev qtquickcontrols2-5-dev qttools5-dev xsltproc
 ```
 
 Building
