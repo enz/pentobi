@@ -23,7 +23,7 @@ Item {
         Math.max(Math.min(parent.width / columns, parent.height / 8.3) / 10, 2)
 
     Row {
-        // Set size sich that width/height ration fits the number of columns,
+        // Set size such that width/height ratio fits the number of columns,
         // taking toPlayIndicator and column spacing into account
         width: Math.min(parent.width - toPlayIndicatorWidth,
                         parent.height / 8.3 * columns)
