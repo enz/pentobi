@@ -26,13 +26,11 @@ PentobiDialog {
             checkAccept()
     }
     function selectNameField() {
-        if (! isAndroid) {
-            var pos = name.lastIndexOf(".")
-            if (pos < 0)
-                nameField.selectAll()
-            else
-                nameField.select(0, pos)
-        }
+        var pos = name.lastIndexOf(".")
+        if (pos < 0)
+            nameField.selectAll()
+        else
+            nameField.select(0, pos)
         view.currentIndex = -1
     }
 
@@ -70,11 +68,7 @@ PentobiDialog {
         }
         ButtonCancel { }
     }
-    onOpened: {
-        if (isAndroid && ! folder.toString().startsWith(defaultFolder.toString()))
-            folder = defaultFolder
-        selectNameField()
-    }
+    onOpened: selectNameField()
 
     Item {
         implicitWidth: Math.max(Math.min(font.pixelSize * 30, maxContentWidth),
@@ -93,12 +87,11 @@ PentobiDialog {
                 id: nameField
 
                 visible: ! selectExisting
-                focus: ! isAndroid
+                focus: true
                 selectByMouse: true
                 Layout.fillWidth: true
                 Component.onCompleted: nameField.cursorPosition = nameField.length
                 onTextEdited: view.currentIndex = -1
-                onVisibleChanged: if (isAndroid) focus = false
             }
             RowLayout {
                 Layout.fillWidth: true
@@ -108,7 +101,6 @@ PentobiDialog {
 
                     property bool hasParent:
                         ! folderModel.folder.toString().endsWith(":///")
-                        && ! (isAndroid && folderModel.folder === defaultFolder)
 
                     opacity: hasParent ? 1 : 0.5
                     onClicked:
@@ -126,12 +118,7 @@ PentobiDialog {
                     }
                 }
                 Label {
-                    text: {
-                        if (isAndroid
-                                && folderModel.folder.toString().startsWith(defaultFolder.toString()))
-                            return folderModel.folder.toString().substr(defaultFolder.toString().length + 1)
-                        Logic.getFileFromUrl(folderModel.folder)
-                    }
+                    text: Logic.getFileFromUrl(folderModel.folder)
                     elide: Text.ElideLeft
                     Layout.fillWidth: true
                 }
