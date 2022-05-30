@@ -540,8 +540,8 @@ function openFileBlocking(file, displayName) {
         gameView.showPieces()
 }
 
-function openFileUrl() {
-    openFile(getFileFromUrl(openDialog.item.fileUrl), "")
+function openFileUrl(fileUrl) {
+    openFile(getFileFromUrl(fileUrl), "")
 }
 
 function openClipboard() {
@@ -834,4 +834,8 @@ function verify(callback) {
         return
     }
     callback()
+}
+
+function useNativeDialog() {
+    return Qt.platform.os == "windows"
 }

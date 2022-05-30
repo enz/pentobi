@@ -1,20 +1,19 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/OpenDialog.qml
+/** @file pentobi/qml/OpenDialogNative.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.0
+import QtQuick.Dialogs
 import "Main.js" as Logic
 
-PentobiFileDialog {
+FileDialog {
     title: qsTr("Open")
-    nameFilterLabels: [ qsTr("Blokus games") ]
-    nameFilters: [ [ "*.blksgf" ] ]
-    folder: rootWindow.folder
-    onOpened: name = ""
+    nameFilters: [ qsTr("Blokus games") + " (*.blksgf)" ]
+    currentFolder: rootWindow.folder
+    fileMode: FileDialog.OpenFile
     onAccepted: {
-        rootWindow.folder = folder
-        Logic.openFileUrl(openDialog.item.fileUrl)
+        rootWindow.folder = currentFolder
+        Logic.openFileUrl(selectedFile)
     }
 }
