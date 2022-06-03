@@ -31,6 +31,10 @@ ApplicationWindow {
 
     property bool isAndroid: Qt.platform.os === "android"
 
+    property bool isWindows: Qt.platform.os === "windows"
+
+    property bool useNativeFileDialog: isWindows
+
     property string themeName: isAndroid ? "dark" : "system"
 
     property QtObject theme: Logic.createTheme(themeName)
@@ -170,13 +174,25 @@ ApplicationWindow {
     DialogLoader { id: gameInfoDialog; url: "GameInfoDialog.qml" }
     DialogLoader { id: initialRatingDialog; url: "InitialRatingDialog.qml" }
     DialogLoader { id: newFolderDialog; url: "NewFolderDialog.qml" }
-    DialogLoader { id: openDialog; url: (Logic.useNativeDialog() ? "OpenDialogNative.qml" : "OpenDialog.qml") }
+    DialogLoader {
+        id: openDialog;
+        url: useNativeFileDialog ? "OpenDialogNative.qml" : "OpenDialog.qml"
+    }
     DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
-    DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
-    DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }
+    DialogLoader {
+        id: imageSaveDialog;
+        url: useNativeFileDialog ? "ImageSaveDialogNative.qml" : "ImageSaveDialog.qml"
+    }
+    DialogLoader {
+        id: asciiArtSaveDialog;
+        url: useNativeFileDialog ? "AsciiArtSaveDialogNative.qml" : "AsciiArtSaveDialog.qml"
+    }
     DialogLoader { id: gotoMoveDialog; url: "GotoMoveDialog.qml" }
     DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
-    DialogLoader { id: saveDialog; url: "SaveDialog.qml" }
+    DialogLoader {
+        id: saveDialog;
+        url: useNativeFileDialog ? "SaveDialogNative.qml" : "SaveDialog.qml"
+    }
     DialogLoader { id: infoMessage; url: "MessageDialog.qml" }
     DialogLoader { id: questionMessage; url: "QuestionDialog.qml" }
     DialogLoader { id: analyzeDialog; url: "AnalyzeDialog.qml" }

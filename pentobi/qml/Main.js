@@ -739,7 +739,8 @@ function saveAs() {
         androidUtils.openSaveDialog(file, name)
     } else {
         var dialog = saveDialog.get()
-        dialog.name = gameModel.suggestGameFileName(folder)
+        if (! useNativeFileDialog)
+            dialog.name = gameModel.suggestGameFileName(folder)
         dialog.open()
     }
 }
@@ -834,8 +835,4 @@ function verify(callback) {
         return
     }
     callback()
-}
-
-function useNativeDialog() {
-    return Qt.platform.os == "windows"
 }

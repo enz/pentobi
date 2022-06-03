@@ -20,8 +20,10 @@ PentobiMenu {
                 androidUtils.openTextSaveDialog()
             else {
                 var dialog = asciiArtSaveDialog.get()
-                dialog.name = gameModel.suggestFileName(folder, "txt")
-                dialog.selectNameFilter(0)
+                if (! rootWindow.useNativeFileDialog) {
+                    dialog.name = gameModel.suggestFileName(folder, "txt")
+                    dialog.selectNameFilter(0)
+                }
                 dialog.open()
             }
     }
