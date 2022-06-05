@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
 /** @file pentobi/qml/SaveDialog.qml
-    @author Markus Enzenberger
+    @author Wing-chung Leung
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
