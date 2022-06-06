@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/AsciiArtSaveDialog.qml
+/** @file pentobi/qml/AsciiArtSaveDialogNative.qml
     @author Wing-chung Leung
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

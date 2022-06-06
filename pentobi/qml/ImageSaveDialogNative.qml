@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/qml/ImageSaveDialog.qml
+/** @file pentobi/qml/ImageSaveDialogNative.qml
     @author Wing-chung Leung
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
