@@ -15,6 +15,6 @@ PentobiFileDialog {
     onOpened: name = ""
     onAccepted: {
         rootWindow.folder = folder
-        Logic.openFileUrl()
+        Logic.openFileUrl(openDialog.item.fileUrl)
     }
 }

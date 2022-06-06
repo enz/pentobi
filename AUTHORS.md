@@ -6,6 +6,11 @@ Main Developer
 
 * Markus Enzenberger <enz@users.sourceforge.net>
 
+Contributors
+------------
+
+* Wing-chung Leung <lwchkg@gmail.com>
+
 Translators
 -----------
 
