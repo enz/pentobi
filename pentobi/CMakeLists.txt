@@ -150,18 +150,11 @@ add_custom_command(
     )
 
 if(ANDROID)
-    if (QT_VERSION_MAJOR EQUAL 5)
-        add_library(pentobi SHARED ${pentobi_src})
-        set_property(TARGET pentobi APPEND PROPERTY
-            QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
-        target_link_libraries(pentobi PRIVATE Qt::AndroidExtras)
-    else()
-        qt_add_executable(pentobi MANUAL_FINALIZATION ${pentobi_src})
-        target_link_libraries(pentobi PRIVATE Qt::CorePrivate)
-        set_property(TARGET pentobi APPEND PROPERTY
-            QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
-        qt_finalize_executable(pentobi)
-    endif()
+    qt_add_executable(pentobi MANUAL_FINALIZATION ${pentobi_src})
+    target_link_libraries(pentobi PRIVATE Qt::CorePrivate)
+    set_property(TARGET pentobi APPEND PROPERTY
+        QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
+    qt_finalize_executable(pentobi)
 else()
     add_executable(pentobi WIN32
         ${pentobi_src}
