@@ -5,6 +5,7 @@ Version 22.0-dev (master)
 -------------------------
 
 * Dropped support for Qt 5 on Android.
+* Use native file dialogs on Windows.
 
 Version 21.1-dev (v21-fixes)
 ----------------------------
