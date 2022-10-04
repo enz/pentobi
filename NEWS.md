@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 21.1-dev (v21-fixes)
 ----------------------------
 
-*
+* Fixed removal of no longer existing files from recent files menu.
 
 Version 21.0 (17 May 2022)
 --------------------------
