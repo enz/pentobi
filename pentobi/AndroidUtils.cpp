@@ -6,11 +6,12 @@
 
 #include "AndroidUtils.h"
 
+#include <QFileInfo>
+
 #ifdef Q_OS_ANDROID
 
 #include <QBuffer>
 #include <QCoreApplication>
-#include <QFileInfo>
 #include <QHash>
 #include <QImage>
 #include <QVariant>
@@ -26,7 +27,6 @@
 
 #else
 
-#include <QFileInfo>
 #include <QStandardPaths>
 
 #endif
