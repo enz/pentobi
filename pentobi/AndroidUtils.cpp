@@ -229,6 +229,10 @@ bool AndroidUtils::checkException()
 bool AndroidUtils::checkExists(const QString& file)
 {
 #ifdef Q_OS_ANDROID
+    // Note: using ContentResolver::query() on persisted URIs without calling
+    // ACTION_OPEN_DOCUMENT first only works on some devices. Maybe try
+    // DocumentFile.exist(DocumentFile.fromSingleUri()) once we require a
+    // Qt version that supports androidx (see also QTBUG-73904).
     auto contentResolver = getContentResolver();
     if (! contentResolver.isValid())
         return false;
