@@ -10,6 +10,7 @@
 
 #include <QBuffer>
 #include <QCoreApplication>
+#include <QFileInfo>
 #include <QHash>
 #include <QImage>
 #include <QVariant>
@@ -255,6 +256,8 @@ bool AndroidUtils::checkException()
 bool AndroidUtils::checkExists(const QString& file)
 {
 #ifdef Q_OS_ANDROID
+    if (QUrl(file).isRelative())
+        return QFileInfo::exists(file);
     auto contentResolver = getContentResolver();
     if (! contentResolver.isValid())
         return false;
