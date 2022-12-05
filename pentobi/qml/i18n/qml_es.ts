@@ -138,6 +138,17 @@
     </message>
 </context>
 <context>
+    <name>AsciiArtSaveDialogNative</name>
+    <message>
+        <source>Export ASCII Art</source>
+        <translation>Exportar arte ASCII</translation>
+    </message>
+    <message>
+        <source>Text files</source>
+        <translation>Archivos de texto</translation>
+    </message>
+</context>
+<context>
     <name>BoardContextMenu</name>
     <message>
         <source>Go to Move %1</source>
@@ -508,6 +519,21 @@
 </context>
 <context>
     <name>ImageSaveDialog</name>
+    <message>
+        <source>Save Image</source>
+        <translation>Guardar imagen</translation>
+    </message>
+    <message>
+        <source>PNG image files</source>
+        <translation>Archivos de imagen PNG</translation>
+    </message>
+    <message>
+        <source>JPEG image files</source>
+        <translation>Archivos de imagen JPEG</translation>
+    </message>
+</context>
+<context>
+    <name>ImageSaveDialogNative</name>
     <message>
         <source>Save Image</source>
         <translation>Guardar imagen</translation>
@@ -997,10 +1023,6 @@
         <source>About Pentobi</source>
         <translation>Acerca de Pentobi</translation>
     </message>
-    <message>
-        <source>Report Bug</source>
-        <translation>Informe de errores</translation>
-    </message>
 </context>
 <context>
     <name>MenuRecentFiles</name>
@@ -1096,6 +1118,17 @@
 </context>
 <context>
     <name>OpenDialog</name>
+    <message>
+        <source>Open</source>
+        <translation>Abrir</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Partidas de Blokus</translation>
+    </message>
+</context>
+<context>
+    <name>OpenDialogNative</name>
     <message>
         <source>Open</source>
         <translation>Abrir</translation>
@@ -1326,6 +1359,17 @@
 </context>
 <context>
     <name>SaveDialog</name>
+    <message>
+        <source>Save</source>
+        <translation>Guardar</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Partidas de Blokus</translation>
+    </message>
+</context>
+<context>
+    <name>SaveDialogNative</name>
     <message>
         <source>Save</source>
         <translation>Guardar</translation>
