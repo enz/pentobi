@@ -175,7 +175,7 @@ inline void SgfTree::append(const SgfNode& node, unique_ptr<SgfNode> child)
 {
     if (child)
         m_modified = true;
-    non_const(node).append(move(child));
+    non_const(node).append(std::move(child));
 }
 
 inline SgfNode& SgfTree::non_const(const SgfNode& node)

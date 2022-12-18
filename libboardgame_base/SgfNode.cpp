@@ -22,9 +22,9 @@ void SgfNode::append(unique_ptr<SgfNode> node)
 {
     node->m_parent = this;
     if (! m_first_child)
-        m_first_child = move(node);
+        m_first_child = std::move(node);
     else
-        get_last_child()->m_sibling = move(node);
+        get_last_child()->m_sibling = std::move(node);
 }
 
 SgfNode& SgfNode::create_new_child()
@@ -34,9 +34,9 @@ SgfNode& SgfNode::create_new_child()
     auto& result = *node;
     auto last_child = get_last_child();
     if (last_child == nullptr)
-        m_first_child = move(node);
+        m_first_child = std::move(node);
     else
-        last_child->m_sibling = move(node);
+        last_child->m_sibling = std::move(node);
     return result;
 }
 
@@ -160,10 +160,10 @@ void SgfNode::make_first_child()
         auto sibling = current_child->m_sibling.get();
         if (sibling == this)
         {
-            auto tmp = move(m_parent->m_first_child);
-            m_parent->m_first_child = move(current_child->m_sibling);
-            current_child->m_sibling = move(m_sibling);
-            m_sibling = move(tmp);
+            auto tmp = std::move(m_parent->m_first_child);
+            m_parent->m_first_child = std::move(current_child->m_sibling);
+            current_child->m_sibling = std::move(m_sibling);
+            m_sibling = std::move(tmp);
             return;
         }
         current_child = sibling;
@@ -193,10 +193,10 @@ void SgfNode::move_down()
     auto current = m_parent->m_first_child.get();
     if (current == this)
     {
-        auto tmp = move(m_parent->m_first_child);
-        m_parent->m_first_child = move(m_sibling);
-        m_sibling = move(m_parent->m_first_child->m_sibling);
-        m_parent->m_first_child->m_sibling = move(tmp);
+        auto tmp = std::move(m_parent->m_first_child);
+        m_parent->m_first_child = std::move(m_sibling);
+        m_sibling = std::move(m_parent->m_first_child->m_sibling);
+        m_parent->m_first_child->m_sibling = std::move(tmp);
         return;
     }
     while (true)
@@ -206,10 +206,10 @@ void SgfNode::move_down()
         {
             if (! m_sibling)
                 return;
-            auto tmp = move(current->m_sibling);
-            current->m_sibling = move(m_sibling);
-            m_sibling = move(current->m_sibling->m_sibling);
-            current->m_sibling->m_sibling = move(tmp);
+            auto tmp = std::move(current->m_sibling);
+            current->m_sibling = std::move(m_sibling);
+            m_sibling = std::move(current->m_sibling->m_sibling);
+            current->m_sibling->m_sibling = std::move(tmp);
             return;
         }
         current = sibling;
@@ -233,10 +233,10 @@ void SgfNode::move_up()
                 make_first_child();
                 return;
             }
-            auto tmp = move(prev->m_sibling);
-            prev->m_sibling = move(current->m_sibling);
-            current->m_sibling = move(m_sibling);
-            m_sibling = move(tmp);
+            auto tmp = std::move(prev->m_sibling);
+            prev->m_sibling = std::move(current->m_sibling);
+            current->m_sibling = std::move(m_sibling);
+            m_sibling = std::move(tmp);
             return;
         }
         prev = current;
@@ -269,11 +269,11 @@ unique_ptr<SgfNode> SgfNode::remove_child(SgfNode& child)
     {
         if (node->get() == &child)
         {
-            auto result = move(*node);
+            auto result = std::move(*node);
             if (previous == nullptr)
-                m_first_child = move(child.m_sibling);
+                m_first_child = std::move(child.m_sibling);
             else
-                (*previous)->m_sibling = move(child.m_sibling);
+                (*previous)->m_sibling = std::move(child.m_sibling);
             result->m_parent = nullptr;
             return result;
         }

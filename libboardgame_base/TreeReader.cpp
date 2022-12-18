@@ -16,7 +16,7 @@ TreeReader::~TreeReader() = default; // Non-inline to avoid GCC -Winline warning
 
 unique_ptr<SgfNode> TreeReader::get_tree_transfer_ownership()
 {
-    return move(m_root);
+    return std::move(m_root);
 }
 
 void TreeReader::on_begin_tree(bool is_root)

@@ -191,7 +191,7 @@ private:
 
 template<class P>
 Geometry<P>::Geometry(unique_ptr<StringRep> string_rep)
-    : m_string_rep(move(string_rep))
+    : m_string_rep(std::move(string_rep))
 { }
 
 template<class P>

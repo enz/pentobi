@@ -804,7 +804,7 @@ void SearchBase<S, M, R>::create_threads()
             was_played = max_players;
         if (i > 0)
             t->run();
-        m_threads.push_back(move(t));
+        m_threads.push_back(std::move(t));
     }
 }
 

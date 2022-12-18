@@ -79,7 +79,7 @@ double SgfTree::get_good_move(const SgfNode& node)
 
 unique_ptr<SgfNode> SgfTree::get_tree_transfer_ownership()
 {
-    return move(m_root);
+    return std::move(m_root);
 }
 
 bool SgfTree::has_variations() const
@@ -98,13 +98,13 @@ bool SgfTree::has_variations() const
 void SgfTree::init()
 {
     auto root = make_unique<SgfNode>();
-    m_root = move(root);
+    m_root = std::move(root);
     m_modified = false;
 }
 
 void SgfTree::init(unique_ptr<SgfNode>& root)
 {
-    m_root = move(root);
+    m_root = std::move(root);
     m_modified = false;
 }
 
@@ -145,7 +145,7 @@ void SgfTree::make_root(const SgfNode& node)
     LIBBOARDGAME_ASSERT(contains(node));
     auto& parent = node.get_parent();
     unique_ptr<SgfNode> new_root = non_const(parent).remove_child(non_const(node));
-    m_root = move(new_root);
+    m_root = std::move(new_root);
     m_modified = true;
 }
 
