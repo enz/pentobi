@@ -36,13 +36,9 @@ LIBBOARDGAME_TEST_CASE(boardgame_marker_basic)
     value.
     This is a critical point of the implementation, which assumes that
     values not equal to a clear counter are unmarked and the overflow of the
-    clear counter must be handled correctly.
-    This test is only run, if integers are not larger than 32-bit, otherwise
-    it would take too long. */
+    clear counter must be handled correctly. */
 LIBBOARDGAME_TEST_CASE(boardgame_marker_overflow)
 {
-    if (numeric_limits<unsigned>::digits > 32)
-        return;
     Marker m;
     m.setup_for_overflow_test(numeric_limits<unsigned>::max() - 5);
     Point p1(10);
