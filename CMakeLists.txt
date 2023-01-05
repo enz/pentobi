@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.19)
 
 project(pentobi CXX)
 set(PENTOBI_VERSION 22.0-dev)
