@@ -69,6 +69,13 @@ Rectangle {
             focus: false
             text: docbookReader.navigationText
             onLinkActivated: link => docbookReader.pageId = link
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor
+                                                : Qt.ArrowCursor
+                acceptedButtons: Qt.NoButton
+            }
         }
         ToolSeparator {
             Layout.fillWidth: true
@@ -100,6 +107,13 @@ Rectangle {
                 text: docbookReader.text
                 onLinkActivated: link => docbookReader.pageId = link
                 onTextChanged: flickable.contentY = 0
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor
+                                                    : Qt.ArrowCursor
+                    acceptedButtons: Qt.NoButton
+                }
             }
             ScrollBar.vertical: ScrollBar {
                 policy: isDesktop ? ScrollBar.AlwaysOn : ScrollBar.AsNeeded
