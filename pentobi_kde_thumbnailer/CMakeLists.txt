@@ -19,5 +19,6 @@ target_link_libraries(pentobi-thumbnail
   KF5::KIOWidgets
 )
 
-install(TARGETS pentobi-thumbnail DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES pentobi-thumbnail.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+install(TARGETS pentobi-thumbnail DESTINATION ${KDE_INSTALL_PLUGINDIR})
+install(FILES pentobi-thumbnail.desktop
+    DESTINATION ${KDE_INSTALL_KSERVICESDIR})
