@@ -32,12 +32,14 @@ add_custom_command(
     )
 
 add_executable(pentobi-thumbnailer
+    CreateThumbnail.h
+    CreateThumbnail.cpp
     Main.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
     ${man_files}
     )
 
-target_link_libraries(pentobi-thumbnailer pentobi_thumbnail)
+target_link_libraries(pentobi-thumbnailer pentobi_paint)
 
 target_compile_definitions(pentobi-thumbnailer PRIVATE
     QT_DEPRECATED_WARNINGS

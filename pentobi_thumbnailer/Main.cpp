@@ -14,7 +14,7 @@
 #include <QString>
 #include <QTranslator>
 #include "libboardgame_base/Log.h"
-#include "libpentobi_thumbnail/CreateThumbnail.h"
+#include "CreateThumbnail.h"
 
 using namespace std;
 

@@ -36,22 +36,6 @@ make
 To use an installation directory different from the cmake default, use
 the cmake option `CMAKE_INSTALL_PREFIX`.
 
-KDE Thumbnailer
----------------
-
-A thumbnailer plugin for KDE can be built by using the cmake option
-`-DPENTOBI_BUILD_KDE_THUMBNAILER=ON`. In this case, the KDE development
-files need to be installed (packages `libkf5kio-dev` and
-`extra-cmake-modules` on Ubuntu 22.04).
-
-Note that depending on your distribution, KDE will not search
-`/usr/local` for plugins, for example it might be necessary to add
-`QT_PLUGIN_PATH=/usr/local/lib/plugins` or
-`QT_PLUGIN_PATH=/usr/local/lib64/plugins` to `/etc/environment`.
-
-If the plugin is found, the KDE file manager shows an option to enable
-Blokus file previews in Configure Dolphin > General > Previews
-
 Installing
 ----------
 

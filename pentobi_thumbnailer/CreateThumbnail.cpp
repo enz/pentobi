@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_thumbnail/CreateThumbnail.cpp
+/** @file pentobi_thumbnailer/CreateThumbnail.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

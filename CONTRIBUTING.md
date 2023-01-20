@@ -79,13 +79,5 @@ The GUI modules implement the user interface. They depend on the
   Main program that provides a GUI for the player in libpentobi_mcts
 * __[pentobi_thumbnailer](pentobi_thumbnailer)__
   File preview generator for the [Gnome](http://www.gnome.org) desktop
-* __[pentobi_kde_thumbnailer](pentobi_kde_thumbnailer)__
-  File preview generator for the [KDE](http://www.kde.org) desktop
 * __[libpentobi_paint](libpentobi_paint)__
-  Common functionality for pentobi and libpentobi_thumbnail
-* __[libpentobi_thumbnail](libpentobi_thumbnail)__
-  Common functionality for pentobi_thumbnailer and
-  pentobi_kde_thumbnailer
-* __[libpentobi_kde_thumbnailer](libpentobi_kde_thumbnailer)__
-  Only needed for technical reasons during compilation, see comment in
-  [libpentobi_kde_thumbnailer/CMakeLists.txt](libpentobi_kde_thumbnailer/CMakeLists.txt)
+  Common functionality for pentobi and pentobi_thumbnailer
