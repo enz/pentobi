@@ -4,9 +4,9 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.15
-import QtQuick.Window 2.15
-import Qt.labs.settings 1.0
+import QtQuick
+import QtQuick.Window
+import Qt.labs.settings
 
 Window {
     minimumWidth: 240; minimumHeight: 240

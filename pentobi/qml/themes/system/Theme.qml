@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.11
+import QtQuick
 import "../dark" as Dark
 import "../light" as Light
 

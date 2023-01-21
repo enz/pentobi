@@ -4,9 +4,9 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.0
-import QtQuick.Window 2.2
-import QtQuick.Controls 2.3
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
 
 /** Custom tool button.
     Adds a hover effect on the desktop and contains a workaroround for

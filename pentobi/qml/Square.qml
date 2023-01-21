@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.3
+import QtQuick
 
 // Piece element (square) with pseudo-3D effect.
 // Simulates lighting by using different images for the lighting at different

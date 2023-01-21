@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.3
+import QtQuick
 
 // Piece element for Nexos. See Square.qml for comments.
 Item {

@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick.Controls 2.15
+import QtQuick.Controls
 
 Dialog {
     width: rootWindow.contentItem.width

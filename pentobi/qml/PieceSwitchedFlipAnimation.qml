@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.0
+import QtQuick
 
 // Helper animation for pieces.
 // Unique piece states are defined by rotating and flipping around the x axis

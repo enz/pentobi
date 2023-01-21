@@ -4,8 +4,8 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick.Controls 2.3
-import QtQuick.Window 2.1
+import QtQuick.Controls
+import QtQuick.Window
 
 PentobiMenu {
     title: qsTr("View")

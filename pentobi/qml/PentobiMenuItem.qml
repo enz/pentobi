@@ -4,10 +4,10 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.0
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.0
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Window
 
 // Custom menu item that displays shortcuts (MenuItem in Qt 5.11 does not).
 MenuItem {

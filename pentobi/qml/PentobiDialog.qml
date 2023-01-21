@@ -4,8 +4,8 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.11
-import QtQuick.Controls 2.2
+import QtQuick
+import QtQuick.Controls
 
 Dialog {
     property real maxContentWidth:

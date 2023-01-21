@@ -4,12 +4,12 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.11
-import QtQuick.Controls 2.3
-import QtQuick.Window 2.1
-import Qt.labs.platform 1.1
-import Qt.labs.settings 1.0
-import pentobi 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
+import Qt.labs.platform
+import Qt.labs.settings
+import pentobi
 import "Main.js" as Logic
 
 ApplicationWindow {

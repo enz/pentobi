@@ -1,5 +1,5 @@
-import QtQuick 2.11
-import QtQuick.Controls 2.2
+import QtQuick
+import QtQuick.Controls
 
 PentobiDialog {
     id: root

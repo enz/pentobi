@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick.Controls 2.4
+import QtQuick.Controls
 import "Main.js" as Logic
 
 PentobiMenu {

@@ -4,7 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick 2.11
+import QtQuick
 import "../light" as Light
 
 // See themes/light/Theme.qml for comments
