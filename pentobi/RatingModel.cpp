@@ -6,6 +6,7 @@
 
 #include "RatingModel.h"
 
+#include <limits>
 #include <QDateTime>
 #include <QDir>
 #include <QFileInfo>
@@ -20,7 +21,7 @@ using libpentobi_mcts::Player;
 
 namespace {
 
-const int maxSavedGames = 50;
+const qsizetype maxSavedGames = 50;
 
 } // namespace
 
@@ -34,7 +35,9 @@ TableModel::TableModel(QObject* parent, const QList<RatedGameInfo>& history)
 
 int TableModel::rowCount([[maybe_unused]] const QModelIndex& parent) const
 {
-    return m_history.length() + 1;
+    qsizetype length = min(m_history.length(), maxSavedGames);
+    static_assert(maxSavedGames < numeric_limits<int>::max());
+    return static_cast<int>(length + 1);
 }
 
 int TableModel::columnCount([[maybe_unused]] const QModelIndex& parent) const
