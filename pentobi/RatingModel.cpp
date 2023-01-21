@@ -334,7 +334,10 @@ void RatingModel::setGameVariant(const QString& gameVariant)
         auto date = settings.value(QStringLiteral("date")).toString();
         auto level = settings.value(QStringLiteral("level")).toInt();
         auto rating = settings.value(QStringLiteral("rating")).toDouble();
-        m_history.append({number, color, level, result, rating, date});
+        if (i < maxSavedGames)
+            m_history.append({number, color, level, result, rating, date});
+        else
+            QFile::remove(getFile(number));
     }
     settings.endArray();
     emit ratingHistoryChanged();
