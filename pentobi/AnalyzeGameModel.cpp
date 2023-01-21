@@ -140,8 +140,8 @@ void AnalyzeGameModel::loadAutoSave(GameModel* gameModel)
     auto list =
             settings.value(
                 QStringLiteral("analyzeGame")).value<QVariantList>();
-    int size = list.size();
-    int index = 0;
+    qsizetype size = list.size();
+    qsizetype index = 0;
     if (index >= size)
         return;
     auto variant = list[index++].toString();

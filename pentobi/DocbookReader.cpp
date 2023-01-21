@@ -211,9 +211,9 @@ QString DocbookReader::getTableOfContents() const
 
 void DocbookReader::setNavigation()
 {
-    int prevId = -1;
-    int nextId = -1;
-    int i = m_pageIds.indexOf(m_pageId);
+    qsizetype prevId = -1;
+    qsizetype nextId = -1;
+    qsizetype i = m_pageIds.indexOf(m_pageId);
     if (i >= 0)
     {
         prevId = i - 1;
