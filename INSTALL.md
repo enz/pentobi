@@ -7,7 +7,7 @@ Requirements
 Building Pentobi requires the following tools and libraries:
 
 * C++ compiler with C++17 support (e.g. GCC >=5)
-* [Qt libraries](https://www.qt.io/) (>=5.15)
+* [Qt libraries](https://www.qt.io/) (>=6.3)
 * [CMake](https://cmake.org/) (>=3.19)
 * [GNU gettext](https://www.gnu.org/software/gettext/) (>=0.19.6)
 * [ITS Tool](http://itstool.org/)
@@ -15,14 +15,15 @@ Building Pentobi requires the following tools and libraries:
 * [xsltproc](http://xmlsoft.org/XSLT/xsltproc.html) (only on Unix)
 * [DocBooc XSL](http://www.sagehill.net/docbookxsl/) (only on Unix)
 
-In Ubuntu 22.04, they can be installed with the command
+In Debian 12, they can be installed with the command
 ```
-sudo apt install cmake docbook-xsl g++ gettext itstool \
-  librsvg2-bin make qml-module-qt-labs-folderlistmodel \
-  qml-module-qt-labs-platform qml-module-qt-labs-settings \
-  qml-module-qtquick2 qml-module-qtquick-controls2 \
-  qml-module-qtquick-layouts qml-module-qtquick-window2 \
-  qtdeclarative5-dev qtquickcontrols2-5-dev qttools5-dev xsltproc
+sudo apt install cmake docbook-xsl g++ gettext itstool librsvg2-bin \
+  make qml6-module-qt-labs-folderlistmodel \
+  qml6-module-qt-labs-platform qml6-module-qt-labs-settings \
+  qml6-module-qtqml-workerscript qml6-module-qtquick-controls \
+  qml6-module-qtquick-layouts qml6-module-qtquick-templates \
+  qml6-module-qtquick-window qt6-base-dev qt6-declarative-dev \
+  qt6-tools-dev xsltproc
 ```
 
 Building

@@ -5,7 +5,7 @@ Version 22.0-dev (master)
 -------------------------
 
 * Removed support for KDE thumbnailer.
-* Dropped support for Qt 5 on Android.
+* Minimum required Qt version is now 6.3.
 * Minimum required CMake version is now 3.19.
 * Use native file dialogs on Windows.
 
