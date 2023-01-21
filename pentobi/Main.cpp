@@ -55,15 +55,6 @@ int mainAndroid()
 
 #else // ! defined(Q_OS_ANDROID)
 
-QString getTranslationsPath()
-{
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    return QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-#else
-    return QLibraryInfo::path(QLibraryInfo::TranslationsPath);
-#endif
-}
-
 int mainDesktop()
 {
     QIcon::setThemeName(QStringLiteral("pentobi"));
@@ -215,9 +206,6 @@ int mainDesktop()
 int main(int argc, char *argv[])
 {
     libboardgame_base::LogInitializer log_initializer;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-#endif
 #ifdef Q_OS_ANDROID
     // Rounding on Android uses PassThrough by default which causes rendering
     // errors on some devices when switching fullscreen or orientation and
@@ -250,7 +238,7 @@ int main(int argc, char *argv[])
 #ifndef Q_OS_ANDROID
     QTranslator qtTranslator;
     if (qtTranslator.load("qt_" + QLocale::system().name(),
-                          getTranslationsPath()))
+                          QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
         QCoreApplication::installTranslator(&qtTranslator);
 #endif
     QTranslator translator;
