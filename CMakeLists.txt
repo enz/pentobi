@@ -69,7 +69,7 @@ if(PENTOBI_BUILD_GUI)
         find_package(DocBookXSL REQUIRED)
         find_program(XSLTPROC xsltproc REQUIRED)
     endif()
-    find_package(Qt6 6.3 REQUIRED
+    find_package(Qt6 6.2 REQUIRED
         COMPONENTS Concurrent LinguistTools QuickControls2)
     add_subdirectory(libpentobi_paint)
     add_subdirectory(pentobi)
