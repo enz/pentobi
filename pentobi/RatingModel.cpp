@@ -26,7 +26,7 @@ const int maxSavedGames = 50;
 
 //-----------------------------------------------------------------------------
 
-TableModel::TableModel(QObject* parent, const QVector<RatedGameInfo>& history)
+TableModel::TableModel(QObject* parent, const QList<RatedGameInfo>& history)
     : QAbstractTableModel(parent),
       m_history(history)
 {
@@ -231,7 +231,7 @@ int RatingModel::getNextLevel(int maxLevel) const
     return level;
 }
 
-const QVector<qreal>& RatingModel::ratingHistory()
+const QList<qreal>& RatingModel::ratingHistory()
 {
     m_ratingHistory.clear();
     m_ratingHistory.reserve(m_history.length());
@@ -258,7 +258,7 @@ void RatingModel::saveSettings()
         settings.setValue(QStringLiteral("best_rating"),
                           round(m_bestRating.get()));
     }
-    QVector<RatedGameInfo> newHistory;
+    QList<RatedGameInfo> newHistory;
     newHistory.reserve(m_history.size());
     for (auto& info : m_history)
     {

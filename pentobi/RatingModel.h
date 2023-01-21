@@ -39,7 +39,7 @@ class TableModel
     Q_OBJECT
 
 public:
-    TableModel(QObject* parent, const QVector<RatedGameInfo>& history);
+    TableModel(QObject* parent, const QList<RatedGameInfo>& history);
 
     int rowCount(const QModelIndex& parent) const override;
 
@@ -48,7 +48,7 @@ public:
     QVariant data(const QModelIndex& index, int role) const override;
 
 private:
-    const QVector<RatedGameInfo>& m_history;
+    const QList<RatedGameInfo>& m_history;
 };
 
 //-----------------------------------------------------------------------------
@@ -61,7 +61,7 @@ class RatingModel
     Q_PROPERTY(double bestRating READ bestRating NOTIFY bestRatingChanged)
     Q_PROPERTY(QString gameVariant MEMBER m_gameVariant WRITE setGameVariant NOTIFY gameVariantChanged)
     Q_PROPERTY(TableModel* tableModel READ tableModel NOTIFY tableModelChanged)
-    Q_PROPERTY(QVector<qreal> ratingHistory READ ratingHistory NOTIFY ratingHistoryChanged)
+    Q_PROPERTY(QList<qreal> ratingHistory READ ratingHistory NOTIFY ratingHistoryChanged)
     Q_PROPERTY(int numberGames READ numberGames NOTIFY numberGamesChanged)
     Q_PROPERTY(double rating READ rating NOTIFY ratingChanged)
 
@@ -89,7 +89,7 @@ public:
 
     double bestRating() const { return m_bestRating.get(); }
 
-    const QVector<qreal>& ratingHistory();
+    const QList<qreal>& ratingHistory();
 
     TableModel* tableModel() { return m_tableModel; }
 
@@ -123,9 +123,9 @@ private:
 
     QString m_gameVariantName;
 
-    QVector<RatedGameInfo> m_history;
+    QList<RatedGameInfo> m_history;
 
-    QVector<qreal> m_ratingHistory;
+    QList<qreal> m_ratingHistory;
 
     TableModel* m_tableModel;
 
