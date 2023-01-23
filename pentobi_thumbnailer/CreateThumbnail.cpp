@@ -144,7 +144,7 @@ bool createThumbnail(const QString& path, int width, int height, QImage& image)
 {
     try
     {
-        image.fill(Qt::transparent);
+        image.fill({230, 230, 230});
         TreeReader reader;
         reader.set_read_only_main_variation(true);
         reader.read(path.toLocal8Bit().constData());

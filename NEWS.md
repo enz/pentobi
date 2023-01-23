@@ -7,6 +7,8 @@ Version 22.0-dev (master)
 * Removed support for KDE thumbnailer.
 * Minimum required Qt version is now 6.2.
 * Minimum required CMake version is now 3.19.
+* Don't use transparent background in thumbnails, which is displayed as
+  a checkerboard in recent Gnome versions.
 * Use native file dialogs on Windows.
 
 Version 21.1-dev (v21-fixes)
