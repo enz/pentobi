@@ -10,9 +10,7 @@ import QtQuick
 // Simulates lighting by using different images for the lighting at different
 // rotations and interpolating between them with an opacity animation. All
 // images have two versions with the sourceSize optimzed for the statically
-// displayed states on the board and in the piece selector, which produces
-// better results than using Image.mipmap and avoids a mipmap bug with Nvidia
-// cards (QTBUG-57845).
+// displayed states on the board and in the piece selector.
 Item {
     Loader {
         opacity: imageOpacity0
