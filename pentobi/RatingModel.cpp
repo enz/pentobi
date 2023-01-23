@@ -234,7 +234,7 @@ int RatingModel::getNextLevel(int maxLevel) const
     return level;
 }
 
-const QList<qreal>& RatingModel::ratingHistory()
+const QList<double>& RatingModel::ratingHistory()
 {
     m_ratingHistory.clear();
     m_ratingHistory.reserve(m_history.length());

@@ -61,7 +61,7 @@ class RatingModel
     Q_PROPERTY(double bestRating READ bestRating NOTIFY bestRatingChanged)
     Q_PROPERTY(QString gameVariant MEMBER m_gameVariant WRITE setGameVariant NOTIFY gameVariantChanged)
     Q_PROPERTY(TableModel* tableModel READ tableModel NOTIFY tableModelChanged)
-    Q_PROPERTY(QList<qreal> ratingHistory READ ratingHistory NOTIFY ratingHistoryChanged)
+    Q_PROPERTY(QList<double> ratingHistory READ ratingHistory NOTIFY ratingHistoryChanged)
     Q_PROPERTY(int numberGames READ numberGames NOTIFY numberGamesChanged)
     Q_PROPERTY(double rating READ rating NOTIFY ratingChanged)
 
@@ -89,7 +89,7 @@ public:
 
     double bestRating() const { return m_bestRating.get(); }
 
-    const QList<qreal>& ratingHistory();
+    const QList<double>& ratingHistory();
 
     TableModel* tableModel() { return m_tableModel; }
 
@@ -125,7 +125,7 @@ private:
 
     QList<RatedGameInfo> m_history;
 
-    QList<qreal> m_ratingHistory;
+    QList<double> m_ratingHistory;
 
     TableModel* m_tableModel;
 
