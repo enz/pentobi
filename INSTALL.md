@@ -46,7 +46,7 @@ sudo make install
 ```
 After installation, the system-wide databases should be updated to
 make Pentobi appear in the desktop menu and register it as handler for
-Blokus files (*.blksgf). On Ubuntu with install prefix `/usr/local`,
+Blokus files (*.blksgf). On Debian with install prefix `/usr/local`,
 this can be done by running
 ```
 sudo update-mime-database /usr/local/share/mime
