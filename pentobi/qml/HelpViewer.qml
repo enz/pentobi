@@ -66,6 +66,7 @@ Rectangle {
             rightPadding: leftPadding
             textFormat: TextArea.RichText
             readOnly: true
+            selectByMouse: false
             focus: false
             text: docbookReader.navigationText
             onLinkActivated: link => docbookReader.pageId = link
