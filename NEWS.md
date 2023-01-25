@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 22.1-dev (v22-fixes)
 ----------------------------
 
-*
+* Made keyboard shortcuts in help window work with Qt 6.4.
 
 Version 22.0 (24 Jan 2023)
 --------------------------

@@ -68,6 +68,7 @@ Rectangle {
             readOnly: true
             selectByMouse: false
             focus: false
+            activeFocusOnPress: false
             text: docbookReader.navigationText
             onLinkActivated: link => docbookReader.pageId = link
 
@@ -105,6 +106,7 @@ Rectangle {
                 wrapMode: TextArea.WordWrap
                 readOnly: true
                 focus: false
+                activeFocusOnPress: false
                 text: docbookReader.text
                 onLinkActivated: link => docbookReader.pageId = link
                 onTextChanged: flickable.contentY = 0
