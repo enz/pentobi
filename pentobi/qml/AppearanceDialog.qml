@@ -144,7 +144,7 @@ PentobiDialog {
 
 
             }
-            PentobiComboBox {
+            ComboBox {
                 id: comboBoxTheme
 
                 model: isAndroid ?
@@ -171,7 +171,7 @@ PentobiDialog {
 
 
             }
-            PentobiComboBox {
+            ComboBox {
                 id: comboBoxMoveMarking
 
                 model: [
@@ -188,7 +188,7 @@ PentobiDialog {
                 text: qsTr("Show comment:")
                 Layout.topMargin: 0.5 * font.pixelSize
             }
-            PentobiComboBox {
+            ComboBox {
                 id: comboBoxComment
 
                 model: [

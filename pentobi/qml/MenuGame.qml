@@ -10,29 +10,29 @@ import "Main.js" as Logic
 PentobiMenu {
     title: qsTr("Game")
 
-    PentobiMenuItem {
+    MenuItem {
         action: actionNew
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionNewRated
     }
-    PentobiMenuSeparator { }
+    MenuSeparator { }
     Action {
         text: qsTr("Game Variant…")
         onTriggered: gameVariantDialog.open()
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionGameInfo
     }
-    PentobiMenuSeparator { }
-    PentobiMenuItem {
+    MenuSeparator { }
+    MenuItem {
         action: actionUndo
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionFindMove
     }
-    PentobiMenuSeparator { }
-    PentobiMenuItem {
+    MenuSeparator { }
+    MenuItem {
         action: actionOpen
     }
     MenuRecentFiles { }
@@ -40,16 +40,16 @@ PentobiMenu {
         text: qsTr("Open Clipboard")
         onTriggered: Logic.openClipboard()
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionSave
         enabled: actionSave.enabled && gameModel.file !== ""
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionSaveAs
     }
     MenuExport { relativeWidth: 10 }
-    PentobiMenuSeparator { }
-    PentobiMenuItem {
+    MenuSeparator { }
+    MenuItem {
         action: actionQuit
     }
 }

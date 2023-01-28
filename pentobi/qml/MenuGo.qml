@@ -9,17 +9,17 @@ import QtQuick.Controls
 PentobiMenu {
     title: qsTr("Go")
 
-    PentobiMenuItem {
+    MenuItem {
         action: actionGotoMove
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionBackToMainVar
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionBeginningOfBranch
     }
-    PentobiMenuSeparator { }
-    PentobiMenuItem {
+    MenuSeparator { }
+    MenuItem {
         action: actionNextComment
     }
 }

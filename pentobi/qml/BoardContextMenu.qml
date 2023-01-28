@@ -4,6 +4,8 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQuick.Controls
+
 PentobiMenu {
     property int moveNumber
 
@@ -17,12 +19,12 @@ PentobiMenu {
                     qsTr("Move Annotation (%1)").arg(annotation)
     }
 
-    PentobiMenuItem {
+    MenuItem {
         enabled: moveNumber !== gameModel.moveNumber && ! isRated
         text: qsTr("Go to Move %1").arg(moveNumber)
         onTriggered: gameModel.gotoMove(moveNumber)
     }
-    PentobiMenuItem {
+    MenuItem {
         id: itemAnnotation
 
         onTriggered: {

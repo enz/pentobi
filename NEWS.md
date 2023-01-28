@@ -4,6 +4,9 @@ Pentobi Release Notes
 Version 22.1-dev (v22-fixes)
 ----------------------------
 
+* Don't use custom menu implementation, which caused problems in dark
+  mode on Android and KDE 5. As a consequence, shortcuts are no longer
+  shown on the menu but documented in the Pentobi manual.
 * Made keyboard shortcuts in help window work with Qt 6.4.
 
 Version 22.0 (24 Jan 2023)

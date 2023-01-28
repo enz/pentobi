@@ -4,19 +4,21 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQuick.Controls
+
 PentobiMenu {
     title: qsTr("Computer")
 
-    PentobiMenuItem {
+    MenuItem {
         action: actionComputerSettings
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionPlay
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionPlaySingle
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionStop
     }
 }

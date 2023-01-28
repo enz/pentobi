@@ -260,7 +260,7 @@ PentobiDialog {
                     }
                 }
             }
-            PentobiComboBox {
+            ComboBox {
                 id: comboBoxNameFilter
 
                 model: {
