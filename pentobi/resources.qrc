@@ -40,12 +40,9 @@
 <file>qml/NavigationPanel.qml</file>
 <file>qml/PentobiBusyIndicator.qml</file>
 <file>qml/PentobiButton.qml</file>
-<file>qml/PentobiComboBox.qml</file>
 <file>qml/PentobiDialog.qml</file>
 <file>qml/PentobiDialogButtonBox.qml</file>
 <file>qml/PentobiMenu.qml</file>
-<file>qml/PentobiMenuItem.qml</file>
-<file>qml/PentobiMenuSeparator.qml</file>
 <file>qml/PentobiToolBar.qml</file>
 <file>qml/PieceBase.qml</file>
 <file>qml/PieceCallisto.qml</file>

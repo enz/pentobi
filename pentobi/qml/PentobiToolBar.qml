@@ -277,13 +277,13 @@ Item {
                         closePolicy: Popup.CloseOnPressOutsideParent
                                      | Popup.CloseOnEscape
 
-                        MenuGame { relativeWidth: 24 }
-                        MenuGo { relativeWidth: 19 }
-                        MenuEdit { relativeWidth: 21 }
-                        MenuView { relativeWidth: 18 }
-                        MenuComputer { relativeWidth: 19 }
-                        MenuTools { relativeWidth: 14 }
-                        MenuHelp { relativeWidth: 14 }
+                        MenuGame { relativeWidth: 16 }
+                        MenuGo { relativeWidth: 15 }
+                        MenuEdit { relativeWidth: 20 }
+                        MenuView { relativeWidth: 14 }
+                        MenuComputer { relativeWidth: 11 }
+                        MenuTools { relativeWidth: 13 }
+                        MenuHelp { relativeWidth: 11 }
                     }
                 }
             }

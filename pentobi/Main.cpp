@@ -38,7 +38,8 @@ int mainAndroid()
     QQmlApplicationEngine engine;
     engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
     auto ctx = engine.rootContext();
-    ctx->setContextProperty(QStringLiteral("globalStyle"), QString());
+    ctx->setContextProperty(QStringLiteral("globalStyle"),
+                            QQuickStyle::name());
     ctx->setContextProperty(QStringLiteral("initialFile"),
                             AndroidUtils::getInitialFile());
     ctx->setContextProperty(QStringLiteral("isDesktop"), QVariant(false));

@@ -9,7 +9,7 @@ import QtQuick.Controls
 PentobiMenu {
     title: qsTr("Help")
 
-    PentobiMenuItem {
+    MenuItem {
         action: actionHelp
     }
     Action {
