@@ -25,6 +25,9 @@
 #endif
 
 using namespace std;
+#ifdef Q_OS_ANDROID
+using QNativeInterface::QAndroidApplication;
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -47,7 +50,7 @@ void takePersistableUriPermission(const QJniObject& intent,
 
 QJniObject getContext()
 {
-    return {QNativeInterface::QAndroidApplication::context()};
+    return {QAndroidApplication::context()};
 }
 
 QJniObject getContentResolver()
@@ -333,6 +336,55 @@ QStringList AndroidUtils::getPersistedUriPermissions()
     }
 #endif
     return result;
+}
+
+void AndroidUtils::initTheme(QColor colorBackground)
+{
+#ifdef Q_OS_ANDROID
+    QAndroidApplication::runOnAndroidMainThread([=]() {
+        auto window = getContext().callObjectMethod("getWindow",
+                                                    "()Landroid/view/Window;");
+        if (! window.isValid())
+            return;
+        auto flagDrawsSystemBarBackgrounds =
+                QJniObject::getStaticField<jint>(
+                    "android/view/WindowManager$LayoutParams",
+                    "FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS");
+        window.callMethod<void>("addFlags", "(I)V",
+                                flagDrawsSystemBarBackgrounds);
+        auto flagTranslucentStatus =
+                QJniObject::getStaticField<jint>(
+                    "android/view/WindowManager$LayoutParams",
+                    "FLAG_TRANSLUCENT_STATUS");
+        window.callMethod<void>("clearFlags", "(I)V", flagTranslucentStatus);
+        auto view = window.callObjectMethod("getDecorView",
+                                            "()Landroid/view/View;");
+        // Note: getSystemUiVisibility() has been deprecated in API 30,
+        // in the future use WindowInsetsController for API >= 30
+        int visibility = view.callMethod<int>("getSystemUiVisibility", "()I");
+        auto systemUiFlagLightStatusBar =
+                QJniObject::getStaticField<jint>(
+                    "android/view/View", "SYSTEM_UI_FLAG_LIGHT_STATUS_BAR");
+        auto systemUiFlagLightNavigationBar =
+                QJniObject::getStaticField<jint>(
+                    "android/view/View", "SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR");
+        if (colorBackground.lightness() > 128)
+        {
+            visibility |= systemUiFlagLightStatusBar;
+            visibility |= systemUiFlagLightNavigationBar;
+        }
+        else
+        {
+            visibility &= ~systemUiFlagLightStatusBar;
+            visibility &= ~systemUiFlagLightNavigationBar;
+        }
+        view.callMethod<void>("setSystemUiVisibility", "(I)V", visibility);
+        window.callMethod<void>("setStatusBarColor", "(I)V",
+                                colorBackground.rgba());
+        window.callMethod<void>("setNavigationBarColor", "(I)V",
+                                colorBackground.rgba());
+    });
+#endif
 }
 
 #ifdef Q_OS_ANDROID
