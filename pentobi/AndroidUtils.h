@@ -7,6 +7,7 @@
 #ifndef PENTOBI_ANDROID_UTILS_H
 #define PENTOBI_ANDROID_UTILS_H
 
+#include <QColor>
 #include <QObject>
 #include <QUrl>
 
@@ -23,6 +24,8 @@ public:
     Q_INVOKABLE static bool checkExists(const QString& file);
 
     Q_INVOKABLE static QString getDisplayName(const QString& uri);
+
+    Q_INVOKABLE static void initTheme(QColor colorBackground);
 
     Q_INVOKABLE void openImageSaveDialog(const QString& suggestedName);
 

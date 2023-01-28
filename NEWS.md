@@ -16,6 +16,7 @@ Version 22.1-dev (v22-fixes)
   avoid a bug in Qt that made the text sometimes disappear if a
   navigation link was pressed with a scrolled page.
 * Made keyboard shortcuts in help window work with Qt 6.4.
+* Android status and navigation bar colors now fit theme background.
 
 Version 22.0 (24 Jan 2023)
 --------------------------
