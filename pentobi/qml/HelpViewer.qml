@@ -60,15 +60,15 @@ Rectangle {
         clip: true
         boundsMovement: Flickable.StopAtBounds
         contentWidth: width
-        contentHeight: textArea.implicitHeight
+        contentHeight: column.implicitHeight
 
         Column {
+            id : column
+
             width: flickable.width
             spacing: 0
 
             TextArea {
-                id: navigation
-
                 width: parent.width
                 // Avoid frame in some styles
                 // (https://github.com/lwchkg/pentobi/issues/2#issuecomment-1095506572)
