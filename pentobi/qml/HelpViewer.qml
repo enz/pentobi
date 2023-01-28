@@ -51,52 +51,53 @@ Rectangle {
 
         textWidth: textArea.width - 2 * textAreaPadding
     }
-    ColumnLayout {
+    Flickable {
+        id: flickable
+
         anchors.fill: parent
-        spacing: 0
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+        clip: true
+        boundsMovement: Flickable.StopAtBounds
+        contentWidth: width
+        contentHeight: textArea.implicitHeight
 
-        TextArea {
-            id: navigation
+        Column {
+            width: flickable.width
+            spacing: 0
 
-            Layout.fillWidth: true
-            // Avoid frame in some styles
-            // (https://github.com/lwchkg/pentobi/issues/2#issuecomment-1095506572)
-            background: Item { }
-            leftPadding: font.pixelSize
-            rightPadding: leftPadding
-            textFormat: TextArea.RichText
-            readOnly: true
-            selectByMouse: false
-            focus: false
-            activeFocusOnPress: false
-            text: docbookReader.navigationText
-            onLinkActivated: link => docbookReader.pageId = link
+            TextArea {
+                id: navigation
 
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor
-                                                : Qt.ArrowCursor
-                acceptedButtons: Qt.NoButton
+                width: parent.width
+                // Avoid frame in some styles
+                // (https://github.com/lwchkg/pentobi/issues/2#issuecomment-1095506572)
+                background: Item { }
+                leftPadding: font.pixelSize
+                rightPadding: leftPadding
+                textFormat: TextArea.RichText
+                readOnly: true
+                selectByMouse: false
+                focus: false
+                activeFocusOnPress: false
+                text: docbookReader.navigationText
+                onLinkActivated: link => docbookReader.pageId = link
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor
+                                                    : Qt.ArrowCursor
+                    acceptedButtons: Qt.NoButton
+                }
             }
-        }
-        ToolSeparator {
-            Layout.fillWidth: true
-            orientation: Qt.Horizontal
-        }
-        Flickable {
-            id: flickable
-
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            clip: true
-            boundsMovement: Flickable.StopAtBounds
-            contentWidth: width
-            contentHeight: textArea.implicitHeight
-
+            ToolSeparator {
+                width: parent.width
+                orientation: Qt.Horizontal
+            }
             TextArea {
                 id: textArea
 
-                width: flickable.width
+                width: parent.width
                 // Avoid frame in some styles
                 // (https://github.com/lwchkg/pentobi/issues/2#issuecomment-1095506572)
                 background: Item { }
@@ -118,9 +119,9 @@ Rectangle {
                     acceptedButtons: Qt.NoButton
                 }
             }
-            ScrollBar.vertical: ScrollBar {
-                policy: isDesktop ? ScrollBar.AlwaysOn : ScrollBar.AsNeeded
-            }
+        }
+        ScrollBar.vertical: ScrollBar {
+            policy: isDesktop ? ScrollBar.AlwaysOn : ScrollBar.AsNeeded
         }
     }
 }
