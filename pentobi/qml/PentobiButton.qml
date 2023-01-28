@@ -9,8 +9,10 @@ import QtQuick.Window
 import QtQuick.Controls
 
 /** Custom tool button.
-    Adds a hover effect on the desktop and contains a workaroround for
-    QTBUG-30801 (tooltip not shown when the button is disabled). */
+    Adds a hover effect on the desktop and contains a workaround for
+    QTBUG-30801 (tooltip not shown when the button is disabled; the bug has
+    been fixed in Qt 6.4 but still doesn't work reliably when the enabled
+    status changes while moving the mouse, so we keep our implementation) */
 Item {
     id: root
 
