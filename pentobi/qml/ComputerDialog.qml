@@ -68,7 +68,7 @@ PentobiDialog {
                             anchors.verticalCenter: parent.verticalCenter
                             color: gameView.color2[0]
                         }
-                        CheckBox {
+                        Switch {
                             id: checkBox0
 
                             enabled: ! isRated
@@ -97,7 +97,7 @@ PentobiDialog {
                             anchors.verticalCenter: parent.verticalCenter
                             color: gameView.color3[0]
                         }
-                        CheckBox {
+                        Switch {
                             id: checkBox1
 
                             enabled: ! isRated
@@ -119,7 +119,7 @@ PentobiDialog {
                             anchors.verticalCenter: parent.verticalCenter
                             color: gameView.color3[0]
                         }
-                        CheckBox {
+                        Switch {
                             id: checkBox3
 
                             enabled: ! isRated
@@ -137,7 +137,7 @@ PentobiDialog {
                             anchors.verticalCenter: parent.verticalCenter
                             color: gameView.color2[0]
                         }
-                        CheckBox {
+                        Switch {
                             id: checkBox2
 
                             enabled: ! isRated

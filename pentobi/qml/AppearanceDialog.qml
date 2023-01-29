@@ -115,17 +115,17 @@ PentobiDialog {
 
             anchors.fill: parent
 
-            CheckBox {
+            Switch {
                 id: checkBoxCoordinates
 
                 text: qsTr("Coordinates")
             }
-            CheckBox {
+            Switch {
                 id: checkBoxShowVariations
 
                 text: qsTr("Show variations")
             }
-            CheckBox {
+            Switch {
                 id: checkBoxMoveNumber
 
                 visible: isDesktop
@@ -133,7 +133,7 @@ PentobiDialog {
                 //: move number in the status bar.
                 text: qsTr("Move number")
             }
-            CheckBox {
+            Switch {
                 id: checkBoxAnimatePieces
 
                 text: qsTr("Animations")
