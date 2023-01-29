@@ -31,6 +31,9 @@ PentobiDialog {
         if (! gameModel.isGameOver)
             Logic.checkComputerMove()
     }
+    // Switch animations run even if the checked status is changed when the
+    // switch is not visible. So we don't reuse the dialog.
+    onClosed: computerDialog.source = ""
 
     Item {
         implicitWidth:
@@ -53,6 +56,7 @@ PentobiDialog {
                     Layout.fillWidth: true
                     enabled: ! isRated
                     text: Logic.getPlayerString(gameModel.gameVariant, 0)
+                    checked: computerPlays0
                     onClicked:
                         if (gameModel.nuColors === 4
                                 && gameModel.nuPlayers === 2)
@@ -63,6 +67,7 @@ PentobiDialog {
 
                     enabled: ! isRated
                     text: Logic.getPlayerString(gameModel.gameVariant, 1)
+                    checked: computerPlays1
                     onClicked:
                         if (gameModel.nuColors === 4
                                 && gameModel.nuPlayers === 2)
@@ -75,6 +80,7 @@ PentobiDialog {
                     visible: gameModel.nuPlayers > 2
                     enabled: ! isRated
                     text: Logic.getPlayerString(gameModel.gameVariant, 2)
+                    checked: computerPlays2
                     Layout.fillWidth: true
                 }
                 Switch {
@@ -83,6 +89,7 @@ PentobiDialog {
                     visible: gameModel.nuPlayers > 3
                     enabled: ! isRated
                     text: Logic.getPlayerString(gameModel.gameVariant, 3)
+                    checked: computerPlays3
                     Layout.fillWidth: true
                 }
             }
