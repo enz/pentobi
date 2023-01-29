@@ -1,5 +1,6 @@
 <RCC>
 <qresource>
+<file>qtquickcontrols2.conf</file>
 <file>qml/AboutDialog.qml</file>
 <file>qml/AnalyzeDialog.qml</file>
 <file>qml/AnalyzeGame.qml</file>

@@ -68,14 +68,12 @@ PentobiMenu {
     }
     MenuSeparator { }
     MenuItem {
-        text: (! checkable && checked ? "✓  " : "") + qsTr("Setup Mode")
-        checkable: globalStyle !== "Basic"
+        text: qsTr("Setup Mode")
+        checkable: true
         enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
                  && gameModel.moveNumber === 0 && ! isRated
         checked: gameView.setupMode
         onTriggered: {
-            if (! checkable)
-                checked = ! checked
             gameView.setupMode = checked
             if (checked)
                 gameView.showPieces()

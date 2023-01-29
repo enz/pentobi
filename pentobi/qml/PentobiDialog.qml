@@ -57,7 +57,7 @@ Dialog {
     // they inevitably cover parts of the parent window, such that the parent
     // window is not fully usable anyway.
     modal: true
-    dim: isAndroid ? modal : false
+    dim: false
 
     focus: true
     clip: true

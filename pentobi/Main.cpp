@@ -34,7 +34,7 @@ namespace {
 
 int mainAndroid()
 {
-    QQuickStyle::setStyle("Basic");
+    QQuickStyle::setStyle("Material");
     QQmlApplicationEngine engine;
     engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
     auto ctx = engine.rootContext();
