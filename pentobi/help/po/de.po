@@ -952,7 +952,7 @@ msgstr "<guimenuitem>Gewertetes Spiel</guimenuitem>"
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:614
 msgid "(<keysym>Ctrl+Shift+N</keysym>)"
-msgstr "(<keysym>Strg+Umschlat+N</keysym>)"
+msgstr "(<keysym>Strg+Umschalt+N</keysym>)"
 
 #. (itstool) path: listitem/para
 #: docbook/index.docbook:616
