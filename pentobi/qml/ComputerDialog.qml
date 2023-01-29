@@ -14,17 +14,17 @@ PentobiDialog {
 
     footer: DialogButtonBoxOkCancel { }
     onOpened: {
-        checkBox0.checked = computerPlays0
-        checkBox1.checked = computerPlays1
-        checkBox2.checked = computerPlays2
-        checkBox3.checked = computerPlays3
+        switch0.checked = computerPlays0
+        switch1.checked = computerPlays1
+        switch2.checked = computerPlays2
+        switch3.checked = computerPlays3
         slider.value = playerModel.level
     }
     onAccepted: {
-        computerPlays0 = checkBox0.checked
-        computerPlays1 = checkBox1.checked
-        computerPlays2 = checkBox2.checked
-        computerPlays3 = checkBox3.checked
+        computerPlays0 = switch0.checked
+        computerPlays1 = switch1.checked
+        computerPlays2 = switch2.checked
+        computerPlays3 = switch3.checked
         if (! Logic.isComputerToPlay() || playerModel.level !== slider.value)
             Logic.cancelRunning()
         playerModel.level = slider.value
@@ -47,104 +47,43 @@ PentobiDialog {
                 Layout.fillWidth: true
 
                 Label { text: qsTr("Computer plays:") }
-                GridLayout {
-                    columns: gameModel.nuPlayers === 2 ? 1 : 2
+                Switch {
+                    id: switch0
+
                     Layout.fillWidth: true
+                    enabled: ! isRated
+                    text: Logic.getPlayerString(gameModel.gameVariant, 0)
+                    onClicked:
+                        if (gameModel.nuColors === 4
+                                && gameModel.nuPlayers === 2)
+                            switch2.checked = checked
+                }
+                Switch {
+                    id: switch1
 
-                    Row {
-                        Layout.fillWidth: true
+                    enabled: ! isRated
+                    text: Logic.getPlayerString(gameModel.gameVariant, 1)
+                    onClicked:
+                        if (gameModel.nuColors === 4
+                                && gameModel.nuPlayers === 2)
+                            switch3.checked = checked
+                    Layout.fillWidth: true
+                }
+                Switch {
+                    id: switch2
 
-                        Rectangle {
-                            width: font.pixelSize; height: width
-                            radius: width / 2
-                            anchors.verticalCenter: parent.verticalCenter
-                            color: gameView.color0[0]
-                        }
-                        Rectangle {
-                            visible: gameModel.nuColors === 4
-                                     && gameModel.nuPlayers === 2
-                            width: font.pixelSize; height: width
-                            radius: width / 2
-                            anchors.verticalCenter: parent.verticalCenter
-                            color: gameView.color2[0]
-                        }
-                        Switch {
-                            id: checkBox0
+                    visible: gameModel.nuPlayers > 2
+                    enabled: ! isRated
+                    text: Logic.getPlayerString(gameModel.gameVariant, 2)
+                    Layout.fillWidth: true
+                }
+                Switch {
+                    id: switch3
 
-                            enabled: ! isRated
-                            text:
-                                Logic.getPlayerString(gameModel.gameVariant, 0)
-                            onClicked:
-                                if (gameModel.nuColors === 4
-                                        && gameModel.nuPlayers === 2)
-                                    checkBox2.checked = checked
-                        }
-                    }
-                    Row {
-                        Layout.fillWidth: true
-
-                        Rectangle {
-                            width: font.pixelSize; height: width
-                            radius: width / 2
-                            anchors.verticalCenter: parent.verticalCenter
-                            color: gameView.color1[0]
-                        }
-                        Rectangle {
-                            visible: gameModel.nuColors === 4
-                                     && gameModel.nuPlayers === 2
-                            width: font.pixelSize; height: width
-                            radius: width / 2
-                            anchors.verticalCenter: parent.verticalCenter
-                            color: gameView.color3[0]
-                        }
-                        Switch {
-                            id: checkBox1
-
-                            enabled: ! isRated
-                            text:
-                                Logic.getPlayerString(gameModel.gameVariant, 1)
-                            onClicked:
-                                if (gameModel.nuColors === 4
-                                        && gameModel.nuPlayers === 2)
-                                    checkBox3.checked = checked
-                        }
-                    }
-                    Row {
-                        visible: gameModel.nuPlayers > 3
-                        Layout.fillWidth: true
-
-                        Rectangle {
-                            width: font.pixelSize; height: width
-                            radius: width / 2
-                            anchors.verticalCenter: parent.verticalCenter
-                            color: gameView.color3[0]
-                        }
-                        Switch {
-                            id: checkBox3
-
-                            enabled: ! isRated
-                            text:
-                                Logic.getPlayerString(gameModel.gameVariant, 3)
-                        }
-                    }
-                    Row {
-                        visible: gameModel.nuPlayers > 2
-                        Layout.fillWidth: true
-
-                        Rectangle {
-                            width: font.pixelSize; height: width
-                            radius: width / 2
-                            anchors.verticalCenter: parent.verticalCenter
-                            color: gameView.color2[0]
-                        }
-                        Switch {
-                            id: checkBox2
-
-                            enabled: ! isRated
-                            text:
-                                Logic.getPlayerString(gameModel.gameVariant, 2)
-                        }
-                    }
+                    visible: gameModel.nuPlayers > 3
+                    enabled: ! isRated
+                    text: Logic.getPlayerString(gameModel.gameVariant, 3)
+                    Layout.fillWidth: true
                 }
             }
             RowLayout {
