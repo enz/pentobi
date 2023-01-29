@@ -361,22 +361,24 @@ void AndroidUtils::initTheme([[maybe_unused]]QColor colorBackground)
                                             "()Landroid/view/View;");
         // Note: getSystemUiVisibility() has been deprecated in API 30,
         // in the future use WindowInsetsController for API >= 30
+        bool isLight = (colorBackground.lightness() > 128);
         int visibility = view.callMethod<int>("getSystemUiVisibility", "()I");
         auto systemUiFlagLightStatusBar =
                 QJniObject::getStaticField<jint>(
                     "android/view/View", "SYSTEM_UI_FLAG_LIGHT_STATUS_BAR");
-        auto systemUiFlagLightNavigationBar =
-                QJniObject::getStaticField<jint>(
-                    "android/view/View", "SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR");
-        if (colorBackground.lightness() > 128)
-        {
+        if (isLight)
             visibility |= systemUiFlagLightStatusBar;
-            visibility |= systemUiFlagLightNavigationBar;
-        }
         else
-        {
             visibility &= ~systemUiFlagLightStatusBar;
-            visibility &= ~systemUiFlagLightNavigationBar;
+        if (QAndroidApplication::sdkVersion() >= 26)
+        {
+            auto systemUiFlagLightNavigationBar =
+                    QJniObject::getStaticField<jint>(
+                        "android/view/View", "SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR");
+            if (isLight)
+                visibility |= systemUiFlagLightNavigationBar;
+            else
+                visibility &= ~systemUiFlagLightNavigationBar;
         }
         view.callMethod<void>("setSystemUiVisibility", "(I)V", visibility);
         window.callMethod<void>("setStatusBarColor", "(I)V",
