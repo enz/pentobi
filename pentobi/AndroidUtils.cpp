@@ -338,7 +338,7 @@ QStringList AndroidUtils::getPersistedUriPermissions()
     return result;
 }
 
-void AndroidUtils::initTheme(QColor colorBackground)
+void AndroidUtils::initTheme([[maybe_unused]]QColor colorBackground)
 {
 #ifdef Q_OS_ANDROID
     QAndroidApplication::runOnAndroidMainThread([=]() {
