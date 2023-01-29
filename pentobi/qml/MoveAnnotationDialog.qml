@@ -15,7 +15,7 @@ PentobiDialog {
     property int moveNumber
 
     footer: DialogButtonBoxOkCancel { }
-    onOpened: {
+    onAboutToShow: {
         var annotation = gameModel.getMoveAnnotation(moveNumber)
         if (annotation === "")
             comboBox.currentIndex = 0

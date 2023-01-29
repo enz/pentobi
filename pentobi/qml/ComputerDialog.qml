@@ -13,7 +13,7 @@ PentobiDialog {
     id: root
 
     footer: DialogButtonBoxOkCancel { }
-    onOpened: {
+    onAboutToShow: {
         switch0.checked = computerPlays0
         switch1.checked = computerPlays1
         switch2.checked = computerPlays2

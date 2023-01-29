@@ -12,7 +12,7 @@ PentobiFileDialog {
     nameFilterLabels: [ qsTr("Blokus games") ]
     nameFilters: [ [ "*.blksgf" ] ]
     folder: rootWindow.folder
-    onOpened: name = ""
+    onAboutToShow: name = ""
     onAccepted: {
         rootWindow.folder = folder
         Logic.openFileUrl(openDialog.item.fileUrl)

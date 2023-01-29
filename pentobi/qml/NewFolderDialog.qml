@@ -39,7 +39,7 @@ PentobiDialog {
         }
         ButtonCancel { }
     }
-    onOpened: {
+    onAboutToShow: {
         name = gameModel.suggestNewFolderName(folder)
         textField.selectAll()
     }

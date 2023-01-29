@@ -36,7 +36,7 @@ PentobiDialog {
     property int currentCommentIndex
 
     footer: isDesktop ? footerDesktop : footerMobile
-    onOpened: {
+    onAboutToShow: {
         switchCoordinates.checked = gameView.showCoordinates
         switchShowVariations.checked = gameModel.showVariations
         switchAnimatePieces.checked = gameView.enableAnimations
