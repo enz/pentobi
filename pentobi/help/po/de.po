@@ -1,13 +1,13 @@
 # 
 # Translators:
-# Markus Enzenberger <enz@users.sourceforge.net>, 2020
+# Markus Enzenberger <enz@users.sourceforge.net>, 2023
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-02-10 20:13+0100\n"
+"POT-Creation-Date: 2023-01-27 21:00+0100\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
-"Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2020\n"
+"Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2023\n"
 "Language-Team: German (https://www.transifex.com/markus-enzenberger/teams/89074/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -934,6 +934,11 @@ msgstr "<guimenu>Spiel</guimenu>-Menü"
 msgid "<guimenuitem>New</guimenuitem>"
 msgstr "<guimenuitem>Neu</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:605
+msgid "(<keysym>Ctrl+N</keysym>)"
+msgstr "(<keysym>Strg+N</keysym>)"
+
 #. (itstool) path: listitem/para
 #: docbook/index.docbook:607
 msgid "Start a new game."
@@ -944,8 +949,13 @@ msgstr "Beginnt ein neues Spiel."
 msgid "<guimenuitem>Rated Game</guimenuitem>"
 msgstr "<guimenuitem>Gewertetes Spiel</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:614
+msgid "(<keysym>Ctrl+Shift+N</keysym>)"
+msgstr "(<keysym>Strg+Umschlat+N</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:615
+#: docbook/index.docbook:616
 msgid ""
 "Start a new <link linkend=\"rating\">rated game</link> against the computer."
 msgstr ""
@@ -953,23 +963,28 @@ msgstr ""
 " Computer."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:621
+#: docbook/index.docbook:622
 msgid "<guimenuitem>Game Variant</guimenuitem>"
 msgstr "<guimenuitem>Spielvariante</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:623
+#: docbook/index.docbook:624
 msgid "Select a game variant and start a new game of this game variant."
 msgstr ""
 "Wählt eine Spielvariante und beginnt ein neues Spiel dieser Spielvariante."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:628
+#: docbook/index.docbook:630
 msgid "<guimenuitem>Game Info</guimenuitem>"
 msgstr "<guimenuitem>Spielinformation</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:631
+msgid "(<keysym>Ctrl+I</keysym>)"
+msgstr "(<keysym>Strg+I</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:630
+#: docbook/index.docbook:633
 msgid ""
 "Display or edit additional information about the game like the name of the "
 "players or the date when the game was played."
@@ -979,12 +994,12 @@ msgstr ""
 "dem das Spiel gespielt wurde."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:636
+#: docbook/index.docbook:639
 msgid "<guimenuitem>Undo Move</guimenuitem>"
 msgstr "<guimenuitem>Zug rückgängig</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:638
+#: docbook/index.docbook:641
 msgid ""
 "Undo the last move played and remove it from the game tree. Undoing a move "
 "is only possible if it is the last move in the current variation (i.e. a "
@@ -999,12 +1014,17 @@ msgstr ""
 "Entfernen innerer Knoten aus dem Spielbaum)."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:648
+#: docbook/index.docbook:651
 msgid "<guimenuitem>Find Move</guimenuitem>"
 msgstr "<guimenuitem>Zug finden</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:652
+msgid "(<keysym>Ctrl+H</keysym>)"
+msgstr "(<keysym>Strg+H</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:650
+#: docbook/index.docbook:654
 msgid ""
 "Find a legal move for the current color and display it for a few seconds on "
 "the board. Selecting this item repeatedly will show all legal moves."
@@ -1014,12 +1034,17 @@ msgstr ""
 "Menüpunkts zeigt alle legalen Züge."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:657
+#: docbook/index.docbook:661
 msgid "<guimenuitem>Open</guimenuitem>"
 msgstr "<guimenuitem>Öffnen</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:662
+msgid "(<keysym>Ctrl+O</keysym>)"
+msgstr "(<keysym>Strg+O</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:659
+#: docbook/index.docbook:664
 msgid ""
 "Load a saved game. The board position after loading will be the last "
 "position in the main variation unless the game starts with a setup position."
@@ -1037,22 +1062,22 @@ msgstr ""
 "Lösung in der Hauptvariante."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:669
+#: docbook/index.docbook:674
 msgid "<guimenu>Open Recent</guimenu>"
 msgstr "<guimenu>Zuletzt benutzt</guimenu>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:671
+#: docbook/index.docbook:676
 msgid "Load a recently used game."
 msgstr "Lädt ein kürzlich benutztes Spiel."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:677
+#: docbook/index.docbook:682
 msgid "<guimenuitem>Open Clipboard</guimenuitem>"
 msgstr "<guimenuitem>Zwischenablage öffnen</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:679
+#: docbook/index.docbook:684
 msgid ""
 "Open a game from a text copied to the clipboard. The text must be a valid "
 "game in Pentobi SGF file format."
@@ -1061,32 +1086,42 @@ msgstr ""
 "Der Text muss ein gültiges Spiel im Pentobi-SGF-Dateiformat sein."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:686
+#: docbook/index.docbook:691
 msgid "<guimenuitem>Save</guimenuitem>"
 msgstr "<guimenuitem>Speichern</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:692
+msgid "(<keysym>Ctrl+S</keysym>)"
+msgstr "(<keysym>Strg+S</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:688
+#: docbook/index.docbook:694
 msgid "Save the current game."
 msgstr "Speichert das gegenwärtige Spiel."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:694
+#: docbook/index.docbook:700
 msgid "<guimenuitem>Save As</guimenuitem>"
 msgstr "<guimenuitem>Speichern unter</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:701
+msgid "(<keysym>Ctrl+Shift+S</keysym>)"
+msgstr "(<keysym>Strg+Umschalt+S</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:696
+#: docbook/index.docbook:703
 msgid "Save the current game under a new file name."
 msgstr "Speichert das gegenwärtige Spiel unter einem neuen Dateinamen."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:702
+#: docbook/index.docbook:709
 msgid "<guimenu>Export</guimenu>/<guimenuitem>Image</guimenuitem>"
 msgstr "<guimenu>Exportieren</guimenu>/<guimenuitem>Grafik</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:704
+#: docbook/index.docbook:711
 msgid ""
 "Save the current position as an image file. Several image file formats are "
 "supported, the file format is derived from the file name ending (e.g. "
@@ -1101,12 +1136,12 @@ msgstr ""
 "Spaltenanzahl des Bretts in der gegenwärtigen Spielvariante sein."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:713
+#: docbook/index.docbook:720
 msgid "<guimenu>Export</guimenu>/<guimenuitem>ASCII Art</guimenuitem>"
 msgstr "<guimenu>Exportieren</guimenu>/<guimenuitem>ASCII-Art</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:715
+#: docbook/index.docbook:722
 msgid ""
 "Save the current position as a text diagram. The text diagram should be "
 "viewed using a monospace font."
@@ -1115,38 +1150,53 @@ msgstr ""
 "sollte mit einer Schriftart fester Breite betrachtet werden."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:722
+#: docbook/index.docbook:729
 msgid "<guimenuitem>Quit</guimenuitem>"
 msgstr "<guimenuitem>Beenden</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:730
+msgid "(<keysym>Ctrl+Q</keysym>)"
+msgstr "(<keysym>Strg+Q</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:724
+#: docbook/index.docbook:732
 msgid "Quit Pentobi."
 msgstr "Beendet Pentobi."
 
 #. (itstool) path: sect1/title
-#: docbook/index.docbook:732
+#: docbook/index.docbook:740
 msgid "<guimenu>Go</guimenu> Menu"
 msgstr "<guimenu>Gehe-zu</guimenu>-Menü"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:735
+#: docbook/index.docbook:743
 msgid "<guimenuitem>Move Number</guimenuitem>"
 msgstr "<guimenuitem>Zugnummer</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:744
+msgid "(<keysym>Ctrl+G</keysym>)"
+msgstr "(<keysym>Strg+G</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:737
+#: docbook/index.docbook:746
 msgid "Go to the move with a given move number in the current variation."
 msgstr ""
 "Geht zum Zug mit einer bestimmten Nummer in der gegenwärtigen Variante."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:743
+#: docbook/index.docbook:752
 msgid "<guimenuitem>Main Variation</guimenuitem>"
 msgstr "<guimenuitem>Hauptvariante</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:753
+msgid "(<keysym>Ctrl+M</keysym>)"
+msgstr "(<keysym>Strg+M</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:745
+#: docbook/index.docbook:755
 msgid ""
 "Go back to the last position in the current variation that belonged to the "
 "main variation."
@@ -1155,12 +1205,17 @@ msgstr ""
 "zur Hauptvariante gehörte."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:752
+#: docbook/index.docbook:762
 msgid "<guimenuitem>Beginning of Branch</guimenuitem>"
 msgstr "<guimenuitem>Verzweigungsanfang</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:763
+msgid "(<keysym>Ctrl+B</keysym>)"
+msgstr "(<keysym>Strgl+B</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:754
+#: docbook/index.docbook:765
 msgid ""
 "Go back to the last position in the current variation that had an "
 "alternative move."
@@ -1169,12 +1224,17 @@ msgstr ""
 "einen alternativen Zug hatte."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:761
+#: docbook/index.docbook:772
 msgid "<guimenuitem>Next Comment</guimenuitem>"
 msgstr "<guimenuitem>Nächster Kommentar</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:773
+msgid "(<keysym>Ctrl+E</keysym>)"
+msgstr "(<keysym>Strg+E</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:763
+#: docbook/index.docbook:775
 msgid ""
 "Go to the next position that has a comment. If the comment text field was "
 "not visible, it will become visible. Selecting this item repeatedly will "
@@ -1186,17 +1246,17 @@ msgstr ""
 "Kommentaren im Spielbaum."
 
 #. (itstool) path: sect1/title
-#: docbook/index.docbook:773
+#: docbook/index.docbook:785
 msgid "<guimenu>Edit</guimenu> Menu"
 msgstr "<guimenu>Bearbeiten</guimenu>-Menü"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:776
+#: docbook/index.docbook:788
 msgid "<guimenuitem>Annotation</guimenuitem>"
 msgstr "<guimenuitem>Annotierung</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:778
+#: docbook/index.docbook:790
 msgid ""
 "Add a chess-style annotation symbol (e.g. ‼) to the current move. The "
 "symbols are appended to the move numbers in the status bar and, depending on"
@@ -1208,12 +1268,12 @@ msgstr ""
 "<guilabel>Zugmarkierung</guilabel>, an die auf dem Spielbrett."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:786
+#: docbook/index.docbook:798
 msgid "<guimenuitem>Make Main Variation</guimenuitem>"
 msgstr "<guimenuitem>Zu Hauptvariante machen</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:788
+#: docbook/index.docbook:800
 msgid ""
 "Make the current variation the main variation of the game. This reorders the"
 " nodes in the game tree such that the current variation becomes the main "
@@ -1224,12 +1284,12 @@ msgstr ""
 "Hauptvariante wird."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:796
+#: docbook/index.docbook:808
 msgid "<guimenuitem>Variation Up</guimenuitem>"
 msgstr "<guimenuitem>Variante nach oben</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:798
+#: docbook/index.docbook:810
 msgid ""
 "Changes the order of variations such that the current position will appear "
 "earlier when iterating over the variations with <guibutton>Next "
@@ -1240,12 +1300,12 @@ msgstr ""
 "/<guibutton>Vorherige Variante</guibutton> früher erscheint."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:807
+#: docbook/index.docbook:819
 msgid "<guimenuitem>Variation Down</guimenuitem>"
 msgstr "<guimenuitem>Variante nach unten</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:809
+#: docbook/index.docbook:821
 msgid ""
 "Changes the order of variations such that the current position will appear "
 "later when iterating over the variations with <guibutton>Next "
@@ -1256,12 +1316,12 @@ msgstr ""
 "/<guibutton>Vorherige Variante</guibutton> später erscheint."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:818
+#: docbook/index.docbook:830
 msgid "<guimenuitem>Delete Variations</guimenuitem>"
 msgstr "<guimenuitem>Varianten löschen</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:820
+#: docbook/index.docbook:832
 msgid ""
 "Delete all variations but the main variation. If the current position is not"
 " in the main variation, it will first be changed to a position as in "
@@ -1273,12 +1333,12 @@ msgstr ""
 "Hauptvariante</guimenuitem>."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:828
+#: docbook/index.docbook:840
 msgid "<guimenuitem>Truncate</guimenuitem>"
 msgstr "<guimenuitem>Abschneiden</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:830
+#: docbook/index.docbook:842
 msgid ""
 "Remove the node with the current position, including any subtree, from the "
 "game tree."
@@ -1287,12 +1347,12 @@ msgstr ""
 " ihn folgenden Teilbaum aus dem Spielbaum."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:837
+#: docbook/index.docbook:849
 msgid "<guimenuitem>Truncate Children</guimenuitem>"
 msgstr "<guimenuitem>Kindknoten abschneiden</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:839
+#: docbook/index.docbook:851
 msgid ""
 "Remove all child nodes of the node with the current position from the game "
 "tree."
@@ -1301,12 +1361,12 @@ msgstr ""
 " dem Spielbaum."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:846
+#: docbook/index.docbook:858
 msgid "<guimenuitem>Keep Position</guimenuitem>"
 msgstr "<guimenuitem>Brettstellung behalten</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:848
+#: docbook/index.docbook:860
 msgid ""
 "Delete all moves and keep only the current position as a setup. This can be "
 "used to create files that start with a given fixed position."
@@ -1316,12 +1376,12 @@ msgstr ""
 "festgelegten Brettstellung beginnen."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:855
+#: docbook/index.docbook:867
 msgid "<guimenuitem>Keep Subtree</guimenuitem>"
 msgstr "<guimenuitem>Teilbaum behalten</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:857
+#: docbook/index.docbook:869
 msgid ""
 "Like <guimenuitem>Keep Position</guimenuitem> but does not delete the moves "
 "after the current position."
@@ -1330,12 +1390,12 @@ msgstr ""
 "der gegenwärtigen Brettstellung werden nicht gelöscht."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:864
+#: docbook/index.docbook:876
 msgid "<guimenuitem>Setup Mode</guimenuitem>"
 msgstr "<guimenuitem>Stellungsaufbau</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:866
+#: docbook/index.docbook:878
 msgid ""
 "Enter or leave setup mode. In setup mode, pieces can be placed anywhere on "
 "the board, even in violation of the game rules. Existing pieces can be "
@@ -1356,12 +1416,12 @@ msgstr ""
 "gespielt wurden."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:878
+#: docbook/index.docbook:890
 msgid "<guimenuitem>Next Color</guimenuitem>"
 msgstr "<guimenuitem>Nächste Farbe</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:880
+#: docbook/index.docbook:892
 msgid ""
 "Choose the next color for selecting pieces. This can be used for example to "
 "enter game records, in which moves of a color were skipped because the color"
@@ -1373,22 +1433,22 @@ msgstr ""
 "vom Weiterspielen ausgeschlossen wurde."
 
 #. (itstool) path: sect1/title
-#: docbook/index.docbook:890
+#: docbook/index.docbook:902
 msgid "<guimenu>View</guimenu> Menu"
 msgstr "<guimenu>Ansicht</guimenu>-Menü"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:892
+#: docbook/index.docbook:904
 msgid "<guimenuitem>Appearance</guimenuitem>"
 msgstr "<guimenuitem>Erscheinungsbild</guimenuitem>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:897
+#: docbook/index.docbook:909
 msgid "<guilabel>Coordinates</guilabel>"
 msgstr "<guilabel>Koordinaten</guilabel>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:899
+#: docbook/index.docbook:911
 msgid ""
 "Display coordinates around the board for the fields on the board. The "
 "convention for the coordinates is the same as in the Blokus SGF file format "
@@ -1399,12 +1459,12 @@ msgstr ""
 "Pentobi benutzten Blokus-SGF-Dateiformat."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:907
+#: docbook/index.docbook:919
 msgid "<guilabel>Show variations</guilabel>"
 msgstr "<guilabel>Varianten zeigen</guilabel>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:909
+#: docbook/index.docbook:921
 msgid ""
 "Appends a letter to the move number on the board if the move has variations."
 " If moves are marked with dots instead of numbers, a circle will be used "
@@ -1416,12 +1476,12 @@ msgstr ""
 "Hauptvariante sind."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:917
+#: docbook/index.docbook:929
 msgid "<guilabel>Move number</guilabel>"
 msgstr "<guilabel>Zugnummer</guilabel>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:919
+#: docbook/index.docbook:931
 msgid ""
 "This option exists only in desktop mode and shows the move number, move "
 "annotation and variation information at the right side of the status bar."
@@ -1431,12 +1491,12 @@ msgstr ""
 "Statusleiste an."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:926
+#: docbook/index.docbook:938
 msgid "<guilabel>Animations</guilabel>"
 msgstr "<guilabel>Animationen</guilabel>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:928
+#: docbook/index.docbook:940
 msgid ""
 "Enables or disables the piece rotation, flipping and placement animations."
 msgstr ""
@@ -1444,22 +1504,22 @@ msgstr ""
 "Platzieren der Spielsteine."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:934
+#: docbook/index.docbook:946
 msgid "<guilabel>Color theme</guilabel>"
 msgstr "<guilabel>Farbthema</guilabel>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:936
+#: docbook/index.docbook:948
 msgid "Changes the colors of the window, board and pieces."
 msgstr "Ändert die Farben des Fensters, des Spielbretts und der Spielsteine."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:942
+#: docbook/index.docbook:954
 msgid "<guilabel>Move marking</guilabel>"
 msgstr "<guilabel>Zugmarkierung</guilabel>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:944
+#: docbook/index.docbook:956
 msgid ""
 "Change the way moves are marked on the board. The options are to mark the "
 "last move played with a dot or with a number, or to show the numbers of all "
@@ -1470,12 +1530,12 @@ msgstr ""
 "die Nummern aller Züge zu zeigen oder gar keine Markierung zu zeigen."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:952
+#: docbook/index.docbook:964
 msgid "<guilabel>Show comment</guilabel>"
 msgstr "<guilabel>Kommentar zeigen</guilabel>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:954
+#: docbook/index.docbook:966
 msgid ""
 "This option exists only in desktop mode and configures the visibility of the"
 " comment area when the position changes. By default, the comment area is "
@@ -1487,24 +1547,34 @@ msgstr ""
 "ein Kommentar zur aktuellen Stellung existiert."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:966
+#: docbook/index.docbook:978
 msgid "<guimenuitem>Comment</guimenuitem>"
 msgstr "<guimenuitem>Kommentar</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:979
+msgid "(<keysym>Ctrl+T</keysym>)"
+msgstr "(<keysym>Strg+T</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:968
+#: docbook/index.docbook:981
 msgid "Toggle the visibility of the comment area in the current position."
 msgstr ""
 "Mach den Kommentarbereich in der aktuellen Stellung sichtbar oder nicht "
 "sichtbar."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:974
+#: docbook/index.docbook:987
 msgid "<guimenuitem>Fullscreen</guimenuitem>"
 msgstr "<guimenuitem>Vollbild</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:988
+msgid "(<keysym>F11</keysym>)"
+msgstr "(<keysym>F11</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:976
+#: docbook/index.docbook:990
 msgid ""
 "Make the main window full screen or leave full screen mode. To leave "
 "fullscreen mode without using the window menu, press the F11 key."
@@ -1514,17 +1584,22 @@ msgstr ""
 "verlassen, drücken Sie die F11-Taste."
 
 #. (itstool) path: sect1/title
-#: docbook/index.docbook:985
+#: docbook/index.docbook:999
 msgid "<guimenu>Computer</guimenu> Menu"
 msgstr "<guimenu>Computer</guimenu>-Menü"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:988
+#: docbook/index.docbook:1002
 msgid "<guimenuitem>Settings</guimenuitem>"
 msgstr "<guimenuitem>Einstellungen</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:1003
+msgid "(<keysym>Ctrl+U</keysym>)"
+msgstr "(<keysym>Strg+U</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:990
+#: docbook/index.docbook:1005
 msgid ""
 "Select which colors are played by the computer and the playing strength for "
 "the computer. Higher levels are stronger but can make the computer take a "
@@ -1535,12 +1610,17 @@ msgstr ""
 " des Computers auf langsamen Computern sehr verlängern."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:998
+#: docbook/index.docbook:1013
 msgid "<guimenuitem>Play</guimenuitem>"
 msgstr "<guimenuitem>Spielen</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:1014
+msgid "(<keysym>Ctrl+L</keysym>)"
+msgstr "(<keysym>Strg+L</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1000
+#: docbook/index.docbook:1016
 msgid ""
 "Make the computer play a move for the current color. This can be used to "
 "change the color the computer plays or to resume playing after navigating in"
@@ -1554,12 +1634,17 @@ msgstr ""
 " Spielverlauf spielen."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1009
+#: docbook/index.docbook:1025
 msgid "<guimenuitem>Play Move</guimenuitem>"
 msgstr "<guimenuitem>Zug spielen</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:1026
+msgid "(<keysym>Ctrl+Shift+L</keysym>)"
+msgstr "(<keysym>Strg+Umschalt+L</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1011
+#: docbook/index.docbook:1028
 msgid ""
 "Make the computer play a single move for the current color without changing "
 "the colors played by the computer."
@@ -1568,12 +1653,12 @@ msgstr ""
 "ohne die vom Computer gespielten Farben zu ändern."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1018
+#: docbook/index.docbook:1035
 msgid "<guimenuitem>Stop</guimenuitem>"
 msgstr "<guimenuitem>Stopp</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1020
+#: docbook/index.docbook:1037
 msgid ""
 "Abort the current move generation. You can make the computer continue to "
 "play by selecting <guimenuitem>Play</guimenuitem>."
@@ -1583,17 +1668,17 @@ msgstr ""
 "auswählen."
 
 #. (itstool) path: sect1/title
-#: docbook/index.docbook:1029
+#: docbook/index.docbook:1046
 msgid "<guimenu>Tools</guimenu> Menu"
 msgstr "<guimenu>Extras</guimenu>-Menü"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1032
+#: docbook/index.docbook:1049
 msgid "<guimenuitem>Rating</guimenuitem>"
 msgstr "<guimenuitem>Wertung</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1034
+#: docbook/index.docbook:1051
 msgid ""
 "Show a dialog window with the <link linkend=\"rating\">rating</link> of the "
 "user in the current game variant."
@@ -1602,12 +1687,12 @@ msgstr ""
 "Benutzers in der gegenwärtigen Spielvariante."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1041
+#: docbook/index.docbook:1058
 msgid "<guimenuitem>Clear Rating</guimenuitem>"
 msgstr "<guimenuitem>Wertung löschen</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1043
+#: docbook/index.docbook:1060
 msgid ""
 "Deletes the rating information and history for the current game variant."
 msgstr ""
@@ -1615,58 +1700,63 @@ msgstr ""
 "Spielvariante."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1049
+#: docbook/index.docbook:1066
 msgid "<guimenuitem>Analyze Game</guimenuitem>"
 msgstr "<guimenuitem>Spiel analysieren</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1051
+#: docbook/index.docbook:1068
 msgid "Perform a <link linkend=\"analysis\">game analysis</link>."
 msgstr "Führt eine <link linkend=\"analysis\">Spielanalyse</link> durch."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1057
+#: docbook/index.docbook:1074
 msgid "<guimenuitem>Clear Analysis</guimenuitem>"
 msgstr "<guimenuitem>Analyse löschen</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1059
+#: docbook/index.docbook:1076
 msgid "Deletes the analysis for the current game."
 msgstr "Löscht die Analyse des gegenwärtigen Spiels."
 
 #. (itstool) path: sect1/title
-#: docbook/index.docbook:1067
+#: docbook/index.docbook:1084
 msgid "<guimenu>Help</guimenu> Menu"
 msgstr "<guimenu>Hilfe</guimenu>-Menü"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1070
+#: docbook/index.docbook:1087
 msgid "<guimenuitem>Pentobi Help</guimenuitem>"
 msgstr "<guimenuitem>Pentobi-Hilfe</guimenuitem>"
 
+#. (itstool) path: varlistentry/term
+#: docbook/index.docbook:1088
+msgid "(<keysym>F1</keysym>)"
+msgstr "(<keysym>F1</keysym>)"
+
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1072
+#: docbook/index.docbook:1090
 msgid "Show a window to browse the Pentobi user manual."
 msgstr "Zeigt ein Fenster mit dem Pentobi-Benutzerhandbuch."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1078
+#: docbook/index.docbook:1096
 msgid "<guimenuitem>About Pentobi</guimenuitem>"
 msgstr "<guimenuitem>Über Pentobi</guimenuitem>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1080
+#: docbook/index.docbook:1098
 msgid "Show an info dialog with information about this version of Pentobi."
 msgstr ""
 "Zeigt eine Dialogfenster mit Informationen über diese Version von Pentobi."
 
 #. (itstool) path: chapter/title
-#: docbook/index.docbook:1090
+#: docbook/index.docbook:1108
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkürzel"
 
 #. (itstool) path: chapter/para
-#: docbook/index.docbook:1091
+#: docbook/index.docbook:1109
 msgid ""
 "In addition to the shortcut keys, which are shown in the window menu, the "
 "following shortcut keys are supported by Pentobi. Note that these shortcuts "
@@ -1680,224 +1770,224 @@ msgstr ""
 "Tabulator-Taste entfernt werden."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1099
+#: docbook/index.docbook:1117
 msgid "<keysym>Plus</keysym>"
 msgstr "<keysym>Plus</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1101
+#: docbook/index.docbook:1119
 msgid "Select next piece"
 msgstr "Nächsten Spielstein auswählen"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1107
+#: docbook/index.docbook:1125
 msgid "<keysym>Minus</keysym>"
 msgstr "<keysym>Minus</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1109
+#: docbook/index.docbook:1127
 msgid "Select previous piece"
 msgstr "Vorherigen Spielstein auswählen"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1115
+#: docbook/index.docbook:1133
 msgid "<keysym>Escape</keysym>"
 msgstr "<keysym>Escape</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1117
+#: docbook/index.docbook:1135
 msgid "Clear selected piece"
 msgstr "Spielsteinauswahl löschen"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1123
+#: docbook/index.docbook:1141
 msgid "<keysym>Left</keysym>"
 msgstr "<keysym>Links</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1124
+#: docbook/index.docbook:1142
 msgid "<keysym>Right</keysym>"
 msgstr "<keysym>Rechts</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1125
+#: docbook/index.docbook:1143
 msgid "<keysym>Up</keysym>"
 msgstr "<keysym>Oben</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1126
+#: docbook/index.docbook:1144
 msgid "<keysym>Down</keysym>"
 msgstr "<keysym>Unten</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1127
+#: docbook/index.docbook:1145
 msgid "<keysym>Shift+Left</keysym>"
 msgstr "<keysym>Umschalt+Links</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1128
+#: docbook/index.docbook:1146
 msgid "<keysym>Shift+Right</keysym>"
 msgstr "<keysym>Umschalt+Rechts</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1129
+#: docbook/index.docbook:1147
 msgid "<keysym>Shift+Up</keysym>"
 msgstr "<keysym>Umschalt+Oben</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1130
+#: docbook/index.docbook:1148
 msgid "<keysym>Shift+Down</keysym>"
 msgstr "<keysym>Umschalt+Unten</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1132
+#: docbook/index.docbook:1150
 msgid "Move the selected piece. The Shift key makes the piece move faster."
 msgstr ""
 "Bewegen des ausgewählten Spielsteins. Mit der Umschalttaste wird der "
 "Spielstein schneller bewegt."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1138
+#: docbook/index.docbook:1156
 msgid "<keysym>Space</keysym>"
 msgstr "<keysym>Leertaste</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1140
+#: docbook/index.docbook:1158
 msgid "Next orientation of the selected piece"
 msgstr "Nächste Ausrichtung des ausgewählten Spielsteins"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1146
+#: docbook/index.docbook:1164
 msgid "<keysym>Shift+Space</keysym>"
 msgstr "<keysym>Umschalt+Leertaste</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1148
+#: docbook/index.docbook:1166
 msgid "Previous orientation of the selected piece"
 msgstr "Vorherige Ausrichtung des ausgewählten Spielsteins"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1154
+#: docbook/index.docbook:1172
 msgid "<keysym>Enter</keysym>"
 msgstr "<keysym>Enter</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1156
+#: docbook/index.docbook:1174
 msgid "Play the selected piece"
 msgstr "Spielen des ausgewählten Spielsteins"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1162
+#: docbook/index.docbook:1180
 msgid "<keysym>1</keysym>"
 msgstr "<keysym>1</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1163
+#: docbook/index.docbook:1181
 msgid "<keysym>2</keysym>"
 msgstr "<keysym>2</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1164
+#: docbook/index.docbook:1182
 msgid "<keysym>A</keysym>"
 msgstr "<keysym>A</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1165
+#: docbook/index.docbook:1183
 msgid "<keysym>C</keysym>"
 msgstr "<keysym>C</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1166
+#: docbook/index.docbook:1184
 msgid "<keysym>E</keysym>"
 msgstr "<keysym>E</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1167
+#: docbook/index.docbook:1185
 msgid "<keysym>F</keysym>"
 msgstr "<keysym>F</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1168
+#: docbook/index.docbook:1186
 msgid "<keysym>G</keysym>"
 msgstr "<keysym>G</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1169
+#: docbook/index.docbook:1187
 msgid "<keysym>H</keysym>"
 msgstr "<keysym>H</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1170
+#: docbook/index.docbook:1188
 msgid "<keysym>I</keysym>"
 msgstr "<keysym>I</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1171
+#: docbook/index.docbook:1189
 msgid "<keysym>J</keysym>"
 msgstr "<keysym>J</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1172
+#: docbook/index.docbook:1190
 msgid "<keysym>L</keysym>"
 msgstr "<keysym>L</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1173
+#: docbook/index.docbook:1191
 msgid "<keysym>N</keysym>"
 msgstr "<keysym>N</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1174
+#: docbook/index.docbook:1192
 msgid "<keysym>O</keysym>"
 msgstr "<keysym>O</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1175
+#: docbook/index.docbook:1193
 msgid "<keysym>P</keysym>"
 msgstr "<keysym>P</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1176
+#: docbook/index.docbook:1194
 msgid "<keysym>S</keysym>"
 msgstr "<keysym>S</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1177
+#: docbook/index.docbook:1195
 msgid "<keysym>T</keysym>"
 msgstr "<keysym>T</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1178
+#: docbook/index.docbook:1196
 msgid "<keysym>U</keysym>"
 msgstr "<keysym>U</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1179
+#: docbook/index.docbook:1197
 msgid "<keysym>V</keysym>"
 msgstr "<keysym>V</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1180
+#: docbook/index.docbook:1198
 msgid "<keysym>W</keysym>"
 msgstr "<keysym>W</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1181
+#: docbook/index.docbook:1199
 msgid "<keysym>X</keysym>"
 msgstr "<keysym>X</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1182
+#: docbook/index.docbook:1200
 msgid "<keysym>Y</keysym>"
 msgstr "<keysym>Y</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1183
+#: docbook/index.docbook:1201
 msgid "<keysym>Z</keysym>"
 msgstr "<keysym>Z</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1185
+#: docbook/index.docbook:1203
 msgid ""
 "Select piece according to commonly used piece names. If there are multiple "
 "pieces with the letter (e.g. I3, I4, I5), pressing the key several times "
@@ -1913,47 +2003,47 @@ msgstr ""
 "benutzt (auch bekannt als „Hummer“ und „Dreieck“)."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1195
+#: docbook/index.docbook:1213
 msgid "<keysym>Ctrl+Home</keysym>"
 msgstr "<keysym>Strg+Pos1</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1196
+#: docbook/index.docbook:1214
 msgid "<keysym>Ctrl+Shift+Left</keysym>"
 msgstr "<keysym>Strg+Umschalt+Links</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1197
+#: docbook/index.docbook:1215
 msgid "<keysym>Ctrl+Left</keysym>"
 msgstr "<keysym>Strg+Links</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1198
+#: docbook/index.docbook:1216
 msgid "<keysym>Ctrl+Right</keysym>"
 msgstr "<keysym>Strg+Rechts</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1199
+#: docbook/index.docbook:1217
 msgid "<keysym>Ctrl+Shift+Right</keysym>"
 msgstr "<keysym>Strg+Umschalt+Rechts</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1200
+#: docbook/index.docbook:1218
 msgid "<keysym>Ctrl+End</keysym>"
 msgstr "<keysym>Strg+Ende</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1201
+#: docbook/index.docbook:1219
 msgid "<keysym>Ctrl+Up</keysym>"
 msgstr "<keysym>Strg+Oben</keysym>"
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1202
+#: docbook/index.docbook:1220
 msgid "<keysym>Ctrl+Down</keysym>"
 msgstr "<keysym>Strg+Unten</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1204
+#: docbook/index.docbook:1222
 msgid ""
 "Navigate in the game: beginning, ten moves backward, backward, forward, ten "
 "moves forward, end, previous variation, next variation."
@@ -1962,12 +2052,12 @@ msgstr ""
 "vorwärts, Ende, vorherige Variante, nächste Variante."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1211
+#: docbook/index.docbook:1229
 msgid "<keysym>Ctrl+Shift+H</keysym>"
 msgstr "<keysym>Strg+Umschalt+H</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1213
+#: docbook/index.docbook:1231
 msgid ""
 "Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards "
 "through the list of legal moves."
@@ -1976,44 +2066,44 @@ msgstr ""
 "durch die Liste der legalen Züge iteriert."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1220
+#: docbook/index.docbook:1238
 msgid "<keysym>Ctrl+T</keysym>"
 msgstr "<keysym>Strg+T</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1222
+#: docbook/index.docbook:1240
 msgid "Switch view between comment and game analysis."
 msgstr "Ansicht zwischen Kommentar und Spielanalyse umschalten."
 
 #. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1228
+#: docbook/index.docbook:1246
 msgid "<keysym>Alt+M</keysym>"
 msgstr "<keysym>Alt+M</keysym>"
 
 #. (itstool) path: listitem/para
-#: docbook/index.docbook:1230
+#: docbook/index.docbook:1248
 msgid "Open menu."
 msgstr "Menü öffnen."
 
 #. (itstool) path: chapter/title
-#: docbook/index.docbook:1239
+#: docbook/index.docbook:1257
 msgid "System Requirements"
 msgstr "Systemvoraussetzungen"
 
 #. (itstool) path: chapter/para
-#: docbook/index.docbook:1240
+#: docbook/index.docbook:1258
 msgid "Minimum: 1 GB RAM, 1 GHz CPU"
 msgstr "Minimum: 1 GB RAM, 1 GHz CPU"
 
 #. (itstool) path: chapter/para
-#: docbook/index.docbook:1243
+#: docbook/index.docbook:1261
 msgid ""
 "Recommended for playing level 9: 4 GB RAM, 2.5 GHz dual-core or faster CPU"
 msgstr ""
 "Empfohlen für Spielstufe 9: 4 GB RAM, 2,5 GHz Dual-Core- oder schnellere CPU"
 
 #. (itstool) path: chapter/para
-#: docbook/index.docbook:1247
+#: docbook/index.docbook:1265
 msgid ""
 "Pentobi will also work on systems that do not meet the minimum requirements "
 "but the highest playing level will be very slow on those systems (if the CPU"
@@ -2026,12 +2116,12 @@ msgstr ""
 "(wenn nicht genügend Arbeitsspeicher vorhanden ist)."
 
 #. (itstool) path: chapter/title
-#: docbook/index.docbook:1255
+#: docbook/index.docbook:1273
 msgid "License"
 msgstr "Lizenz"
 
 #. (itstool) path: chapter/para
-#: docbook/index.docbook:1256
+#: docbook/index.docbook:1274
 msgid ""
 "This program is free software: you can redistribute it and/or modify it "
 "under the terms of the GNU General Public License as published by the Free "
@@ -2044,7 +2134,7 @@ msgstr ""
 "der Lizenz oder (nach Ihrer Wahl) jeder späteren Version."
 
 #. (itstool) path: chapter/para
-#: docbook/index.docbook:1262
+#: docbook/index.docbook:1280
 msgid ""
 "This program is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -2058,12 +2148,12 @@ msgstr ""
 "License."
 
 #. (itstool) path: sect1/title
-#: docbook/index.docbook:1269
+#: docbook/index.docbook:1287
 msgid "Trademark Disclaimer"
 msgstr "Hinweis zu Markennamen"
 
 #. (itstool) path: sect1/para
-#: docbook/index.docbook:1270
+#: docbook/index.docbook:1288
 msgid ""
 "The trademark Blokus and other trademarks referred to are property of their "
 "respective trademark holders. The trademark holders are not affiliated with "
