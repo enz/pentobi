@@ -48,7 +48,8 @@ Item {
             // We want the icon about the same size as the font, but use
             // multipliers of 8 for better pixel alignment.
             implicitWidth:
-                Math.round(1.2 * font.pixelSize * Screen.devicePixelRatio / 8)
+                Math.round((globalStyle === "Material" ? 1.3 : 1.2)
+                           * font.pixelSize * Screen.devicePixelRatio / 8)
                 / Screen.devicePixelRatio * 8
             implicitHeight: implicitWidth
 
