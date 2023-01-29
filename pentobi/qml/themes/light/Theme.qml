@@ -25,7 +25,7 @@ Item {
     property var colorYellow: [ "#f5c320", "#aa8516", "#ffdb58", "#333333" ]
     /// @}
 
-    property color colorBackground: "#eff0f1"
+    property color colorBackground: "#e8e8e8"
     property color colorButtonPressed: Qt.darker(colorBackground, 1.1)
     property color colorButtonHovered: Qt.lighter(colorBackground, 3)
     property color colorButtonBorder: Qt.darker(colorBackground, 2)
@@ -34,7 +34,7 @@ Item {
     property color colorCommentFocus: "#4799cc"
     property color colorCommentText: colorText
     property color colorMessageText: "black"
-    property color colorMessageBase: "#cac9c9"
+    property color colorMessageBase: "#e0e0e0"
     property color colorSelectedText: colorBackground
     property color colorSelection: "#4799cc"
     property color colorStartingPoint: "#767074"
