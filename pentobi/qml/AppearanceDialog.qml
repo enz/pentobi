@@ -20,10 +20,10 @@ PentobiDialog {
         ButtonCancel { }
         ButtonApply {
             enabled:
-                checkBoxCoordinates.checked !== gameView.showCoordinates
-                || checkBoxShowVariations.checked !== gameModel.showVariations
-                || checkBoxAnimatePieces.checked !== gameView.enableAnimations
-                || checkBoxMoveNumber.checked !== gameView.showMoveNumber
+                switchCoordinates.checked !== gameView.showCoordinates
+                || switchShowVariations.checked !== gameModel.showVariations
+                || switchAnimatePieces.checked !== gameView.enableAnimations
+                || switchMoveNumber.checked !== gameView.showMoveNumber
                 || comboBoxTheme.currentIndex !== currentThemeIndex
                 || comboBoxMoveMarking.currentIndex !== currentMoveMarkingIndex
                 || comboBoxComment.currentIndex !== currentCommentIndex
@@ -36,10 +36,10 @@ PentobiDialog {
     property int currentCommentIndex
 
     footer: isDesktop ? footerDesktop : footerMobile
-    onOpened: {
-        checkBoxCoordinates.checked = gameView.showCoordinates
-        checkBoxShowVariations.checked = gameModel.showVariations
-        checkBoxAnimatePieces.checked = gameView.enableAnimations
+    onAboutToShow: {
+        switchCoordinates.checked = gameView.showCoordinates
+        switchShowVariations.checked = gameModel.showVariations
+        switchAnimatePieces.checked = gameView.enableAnimations
         if (themeName === "dark")
             currentThemeIndex = 1
         else if (themeName === "colorblind-light")
@@ -70,12 +70,12 @@ PentobiDialog {
             currentCommentIndex = 1
         comboBoxComment.currentIndex = currentCommentIndex
         if (isDesktop)
-            checkBoxMoveNumber.checked = gameView.showMoveNumber
+            switchMoveNumber.checked = gameView.showMoveNumber
     }
     onAccepted: {
-        gameView.showCoordinates = checkBoxCoordinates.checked
-        gameModel.showVariations = checkBoxShowVariations.checked
-        gameView.enableAnimations = checkBoxAnimatePieces.checked
+        gameView.showCoordinates = switchCoordinates.checked
+        gameModel.showVariations = switchShowVariations.checked
+        gameView.enableAnimations = switchAnimatePieces.checked
         switch (comboBoxTheme.currentIndex) {
         case 0: themeName = "light"; break
         case 1: themeName = "dark"; break
@@ -95,7 +95,7 @@ PentobiDialog {
         case 2: gameView.commentMode = "never"; break
         }
         if (isDesktop)
-            gameView.showMoveNumber = checkBoxMoveNumber.checked
+            gameView.showMoveNumber = switchMoveNumber.checked
     }
     onApplied: {
         onAccepted()
@@ -115,26 +115,26 @@ PentobiDialog {
 
             anchors.fill: parent
 
-            CheckBox {
-                id: checkBoxCoordinates
+            Switch {
+                id: switchCoordinates
 
                 text: qsTr("Coordinates")
             }
-            CheckBox {
-                id: checkBoxShowVariations
+            Switch {
+                id: switchShowVariations
 
                 text: qsTr("Show variations")
             }
-            CheckBox {
-                id: checkBoxMoveNumber
+            Switch {
+                id: switchMoveNumber
 
                 visible: isDesktop
                 //: Check box in appearance dialog whether to show the
                 //: move number in the status bar.
                 text: qsTr("Move number")
             }
-            CheckBox {
-                id: checkBoxAnimatePieces
+            Switch {
+                id: switchAnimatePieces
 
                 text: qsTr("Animations")
             }

@@ -10,7 +10,7 @@ import QtQuick.Layouts
 
 PentobiDialog {
     footer: DialogButtonBoxOkCancel { }
-    onOpened: {
+    onAboutToShow: {
         textFieldPlayerName0.text = gameModel.playerName0
         textFieldPlayerName1.text = gameModel.playerName1
         textFieldPlayerName2.text = gameModel.playerName2

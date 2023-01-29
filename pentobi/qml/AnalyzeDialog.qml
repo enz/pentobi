@@ -11,7 +11,7 @@ import "Main.js" as Logic
 
 PentobiDialog {
     footer: DialogButtonBoxOkCancel { }
-    onOpened: comboBox.currentIndex = 0
+    onAboutToShow: comboBox.currentIndex = 0
     onAccepted: {
         var nuSimulations
         switch (comboBox.currentIndex) {

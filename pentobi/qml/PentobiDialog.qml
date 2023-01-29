@@ -62,7 +62,7 @@ Dialog {
     focus: true
     clip: true
     closePolicy: Popup.CloseOnEscape
-    onOpened: centerDialog()
+    onAboutToShow: centerDialog()
     onWidthChanged: centerDialog()
     onHeightChanged: centerDialog()
     ApplicationWindow.onWindowChanged:

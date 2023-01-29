@@ -10,7 +10,7 @@ PentobiMenu {
     property int moveNumber
 
     relativeWidth: 15
-    onOpened: {
+    onAboutToShow: {
         var annotation = gameModel.getMoveAnnotation(moveNumber)
         itemAnnotation.text =
                 annotation === "" ?

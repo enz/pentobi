@@ -19,7 +19,7 @@ PentobiDialog {
         }
         ButtonCancel { }
     }
-    onOpened: if (! isAndroid) textField.selectAll()
+    onAboutToShow: if (! isAndroid) textField.selectAll()
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
     function returnPressed() {

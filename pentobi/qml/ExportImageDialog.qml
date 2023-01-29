@@ -19,7 +19,7 @@ PentobiDialog {
         }
         ButtonCancel { }
     }
-    onOpened: if (! isAndroid) textField.selectAll()
+    onAboutToShow: if (! isAndroid) textField.selectAll()
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
         var name = gameModel.suggestFileName(folder, "png")

@@ -70,7 +70,7 @@ PentobiDialog {
         }
         ButtonCancel { }
     }
-    onOpened: selectNameField()
+    onAboutToShow: selectNameField()
 
     Item {
         implicitWidth: Math.max(Math.min(font.pixelSize * 30, maxContentWidth),

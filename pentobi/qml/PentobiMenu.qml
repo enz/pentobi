@@ -18,5 +18,5 @@ Menu {
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                    : Popup.CloseOnEscape | Popup.CloseOnPressOutside
     // Workaround for QTBUG-69541 (Opened Menu highlights last used item on Android)
-    onOpened: if (isAndroid) currentIndex = -1
+    onAboutToShow: if (isAndroid) currentIndex = -1
 }
