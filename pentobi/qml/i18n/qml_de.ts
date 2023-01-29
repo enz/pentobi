@@ -1158,19 +1158,6 @@
     </message>
 </context>
 <context>
-    <name>PentobiMenuItem</name>
-    <message>
-        <source>Ctrl</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Strg</translation>
-    </message>
-    <message>
-        <source>Shift</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Umschalt</translation>
-    </message>
-</context>
-<context>
     <name>PentobiToolBar</name>
     <message>
         <source>Start a new game</source>
