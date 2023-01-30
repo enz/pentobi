@@ -255,7 +255,7 @@ void AnalyzeGameModel::start(GameModel* gameModel, PlayerModel* playerModel,
     auto future = QtConcurrent::run([&](QPromise<ColorValueList>& promise) {
         m_analyzeGame.run(gameModel->getGame(), *this->m_search,
                                   this->m_nuSimulations,
-                                  [&](unsigned, unsigned) {
+                                  [&]() {
             promise.addResult(getColorValueList());
         });
     });

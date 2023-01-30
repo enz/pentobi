@@ -35,10 +35,9 @@ public:
         @param search
         @param nu_simulations
         @param progress_callback Function that will be called at the beginning
-        of the analysis of a position. Arguments: number moves analyzed so far,
-        total number of moves. */
+        of the analysis of each position. */
     void run(const Game& game, Search& search, size_t nu_simulations,
-             const function<void(unsigned,unsigned)>& progress_callback);
+             const function<void()>& progress_callback);
 
     Variant get_variant() const;
 

@@ -24,7 +24,7 @@ void AnalyzeGame::clear()
 }
 
 void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
-                      const function<void(unsigned,unsigned)>& progress_callback)
+                      const function<void()>& progress_callback)
 {
     m_variant = game.get_variant();
     m_moves.clear();
@@ -34,17 +34,8 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     BoardUpdater updater;
     auto& root = game.get_root();
     auto node = &root;
-    unsigned total_moves = 0;
-    do
-    {
-        if (tree.has_move(*node))
-            ++total_moves;
-        node = node->get_first_child_or_null();
-    }
-    while (node != nullptr);
     WallTimeSource time_source;
     node = &root;
-    unsigned move_number = 0;
     auto tie_value = Search::SearchParamConst::tie_value;
     const auto max_count = Float(nu_simulations);
     double max_time = 0;
@@ -67,7 +58,7 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
             }
             else
             {
-                progress_callback(move_number, total_moves);
+                progress_callback();
                 try
                 {
                     updater.update(*bd, tree, node->get_parent());
@@ -85,7 +76,6 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
                     break;
                 }
             }
-            ++move_number;
         }
         if (! node->has_children())
         {
