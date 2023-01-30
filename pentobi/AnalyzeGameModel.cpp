@@ -252,10 +252,11 @@ void AnalyzeGameModel::start(GameModel* gameModel, PlayerModel* playerModel,
     cancel();
     setIsRunning(true);
     m_search = &playerModel->getSearch();
-    auto future = QtConcurrent::run([&](QPromise<ColorValueList>& promise) {
+    auto future = QtConcurrent::run(
+                [this, gameModel](QPromise<ColorValueList>& promise) {
         m_analyzeGame.run(gameModel->getGame(), *this->m_search,
                                   this->m_nuSimulations,
-                                  [&](unsigned, unsigned) {
+                                  [this, &promise](unsigned, unsigned) {
             promise.addResult(getColorValueList());
         });
     });
