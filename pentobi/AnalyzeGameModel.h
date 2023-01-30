@@ -7,6 +7,8 @@
 #ifndef PENTOBI_ANALYZE_GAME_MODEL_H
 #define PENTOBI_ANALYZE_GAME_MODEL_H
 
+#include <utility>
+#include <vector>
 #include <QFutureWatcher>
 #include <QQmlListProperty>
 #include "libpentobi_mcts/AnalyzeGame.h"
@@ -87,6 +89,9 @@ signals:
     void elementsChanged();
 
 private:
+    using ColorValueList = std::vector<std::pair<int, double>>;
+
+
     bool m_isRunning = false;
 
     int m_markMoveNumber = -1;
@@ -95,19 +100,22 @@ private:
 
     QList<AnalyzeGameElement*> m_elements;
 
-    QFutureWatcher<void> m_watcher;
+    QFutureWatcher<ColorValueList> m_watcher;
 
     AnalyzeGame m_analyzeGame;
 
     Search* m_search;
 
 
-    Q_INVOKABLE void updateElements();
-
+    ColorValueList getColorValueList() const;
 
     void setIsRunning(bool isRunning);
 
     void setMarkMoveNumber(int markMoveNumber);
+
+    void updateElements();
+
+    void updateElements(const ColorValueList& colorValueList);
 };
 
 //-----------------------------------------------------------------------------
