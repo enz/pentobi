@@ -9,6 +9,7 @@ Version 23.0-dev (master)
 Version 22.1-dev (v22-fixes)
 ----------------------------
 
+* Fixed game analysis hanging on some platforms.
 * Don't use custom menu implementation, which caused problems in dark
   mode on Android and KDE 5. As a consequence, shortcuts are no longer
   shown on the menu but documented in the Pentobi manual.

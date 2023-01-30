@@ -6,6 +6,7 @@
 
 #include "AnalyzeGameModel.h"
 
+#include <QPromise>
 #include <QSettings>
 #include <QtConcurrentRun>
 #include "GameModel.h"
@@ -37,6 +38,11 @@ AnalyzeGameModel::AnalyzeGameModel(QObject* parent)
         // analysis and we don't want it to disappear if a game with one move
         // was analyzed.
         setIsRunning(false);
+    });
+    connect(&m_watcher,
+            &QFutureWatcher<void>::resultReadyAt, this, [this](int index)
+    {
+        updateElements(m_watcher.resultAt(index));
     });
 }
 
@@ -93,6 +99,20 @@ void AnalyzeGameModel::clear()
 QQmlListProperty<AnalyzeGameElement> AnalyzeGameModel::elements()
 {
     return {this, &m_elements};
+}
+
+AnalyzeGameModel::ColorValueList AnalyzeGameModel::getColorValueList() const
+{
+    ColorValueList result;
+    for (unsigned i = 0; i < m_analyzeGame.get_nu_moves(); ++i)
+    {
+        auto moveColor = m_analyzeGame.get_move(i).color.to_int();
+        // Values of search are supposed to be win/loss probabilities but can
+        // be slightly outside [0..1] (see libpentobi_mcts::State).
+        auto value = max(0., min(1., m_analyzeGame.get_value(i)));
+        result.push_back({moveColor, value});
+    }
+    return result;
 }
 
 void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)
@@ -230,30 +250,28 @@ void AnalyzeGameModel::start(GameModel* gameModel, PlayerModel* playerModel,
     m_markMoveNumber = -1;
     m_nuSimulations = static_cast<size_t>(nuSimulations);
     cancel();
+    setIsRunning(true);
     m_search = &playerModel->getSearch();
-    auto future = QtConcurrent::run([gameModel, this]() {
+    auto future = QtConcurrent::run([&](QPromise<ColorValueList>& promise) {
         m_analyzeGame.run(gameModel->getGame(), *this->m_search,
-                          this->m_nuSimulations,
-                          [this](unsigned, unsigned) {
-            QMetaObject::invokeMethod(this, "updateElements",
-                                      Qt::BlockingQueuedConnection);
+                                  this->m_nuSimulations,
+                                  [&](unsigned, unsigned) {
+            promise.addResult(getColorValueList());
         });
     });
     m_watcher.setFuture(future);
-    setIsRunning(true);
 }
 
 void AnalyzeGameModel::updateElements()
 {
+    updateElements(getColorValueList());
+}
+
+void AnalyzeGameModel::updateElements(const ColorValueList& colorValueList)
+{
     m_elements.clear();
-    for (unsigned i = 0; i < m_analyzeGame.get_nu_moves(); ++i)
-    {
-        auto moveColor = m_analyzeGame.get_move(i).color.to_int();
-        // Values of search are supposed to be win/loss probabilities but can
-        // be slightly outside [0..1] (see libpentobi_mcts::State).
-        auto value = max(0., min(1., m_analyzeGame.get_value(i)));
-        m_elements.append(new AnalyzeGameElement(this, moveColor, value));
-    }
+    for (auto& i : colorValueList)
+        m_elements.append(new AnalyzeGameElement(this, i.first, i.second));
     emit elementsChanged();
 }
 
