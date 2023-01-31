@@ -1,8 +1,8 @@
 Pentobi Release Notes
 =====================
 
-Version 22.1-dev (v22-fixes)
-----------------------------
+Version 22.1 (31 Jan 2023)
+--------------------------
 
 * Fixed game analysis hanging on some platforms.
 * Don't use custom menu implementation, which caused problems in dark
@@ -11,7 +11,7 @@ Version 22.1-dev (v22-fixes)
 * Made navigation links in help viewer part of the scrollable page to
   avoid a bug in Qt that made the text sometimes disappear if a
   navigation link was pressed with a scrolled page.
-* Made keyboard shortcuts in help window work with Qt 6.4.
+* Help window shortcuts stopped working after mouse click with Qt 6.4.
 * Use Material style on Android.
 * Android status and navigation bar colors now fit theme background.
 * Busy indicator was not visible on Android if animations were disabled.

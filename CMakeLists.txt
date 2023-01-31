@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.19)
 
 project(pentobi CXX)
-set(PENTOBI_VERSION 22.1-dev)
-set(PENTOBI_RELEASE_DATE XXXX-XX-XX)
+set(PENTOBI_VERSION 22.1)
+set(PENTOBI_RELEASE_DATE 2023-01-31)
 
 include(GNUInstallDirs)
 
