@@ -14,6 +14,7 @@ Version 22.1-dev (v22-fixes)
 * Made keyboard shortcuts in help window work with Qt 6.4.
 * Use Material style on Android.
 * Android status and navigation bar colors now fit theme background.
+* Busy indicator was not visible on Android if animations were disabled.
 
 Version 22.0 (24 Jan 2023)
 --------------------------
