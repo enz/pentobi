@@ -108,14 +108,7 @@ PentobiDialog {
 
                     enabled: ! isRated
                     from: 1; to: playerModel.maxLevel; stepSize: 1
-                    snapMode: Slider.SnapAlways
-                    // Implicit width of main contentItem might not fully fit
-                    // on small screens if 2x2 check boxes are displayed. In
-                    // this case, there is no need to clip the slider also,
-                    // which expands to the dialog width if ! isDesktop
-                    Layout.maximumWidth:
-                        maxContentWidth - labelLevel.implicitWidth
-                        - parent.spacing
+                    snapMode: Slider.SnapOnRelease
                     Layout.fillWidth: true
                 }
             }

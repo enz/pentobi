@@ -20,12 +20,6 @@ BusyIndicator {
             anchors.fill: parent
             opacity: root.running ? 1 : 0
 
-            Behavior on opacity {
-                OpacityAnimator {
-                    duration: enableAnimations ? animationDurationFast : 0
-                }
-            }
-
             Repeater {
                 id: repeater
 
