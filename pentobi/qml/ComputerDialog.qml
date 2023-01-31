@@ -108,7 +108,7 @@ PentobiDialog {
 
                     enabled: ! isRated
                     from: 1; to: playerModel.maxLevel; stepSize: 1
-                    snapMode: Slider.SnapAlways
+                    snapMode: Slider.SnapOnRelease
                     Layout.fillWidth: true
                 }
             }
