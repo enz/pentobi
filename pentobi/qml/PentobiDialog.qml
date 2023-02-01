@@ -37,7 +37,7 @@ Dialog {
     // not consume the event in Qt 5.11 even if it accepts the key event and
     // might therefore trigger global actions.
     function returnPressed() {
-        if (! hasButtonFocus())
+        if (! hasButtonFocus() && ! isAndroid)
             accept()
     }
     // Check if any button in the footer the focus. We don't want to handle
