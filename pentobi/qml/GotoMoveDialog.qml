@@ -19,7 +19,7 @@ PentobiDialog {
         }
         ButtonCancel { }
     }
-    onAboutToShow: if (! isAndroid) textField.selectAll()
+    onAboutToShow: textField.text = ""
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
     function returnPressed() {
@@ -46,8 +46,10 @@ PentobiDialog {
             TextField {
                 id: textField
 
-                text: gameModel.moveNumber === 0 ?
-                          gameModel.moveNumber + gameModel.movesLeft : gameModel.moveNumber
+                placeholderText:
+                    gameModel.moveNumber === 0 ?
+                        gameModel.moveNumber + gameModel.movesLeft
+                      : gameModel.moveNumber
                 selectByMouse: true
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{
