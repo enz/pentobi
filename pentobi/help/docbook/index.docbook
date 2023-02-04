@@ -935,14 +935,6 @@ annotation and variation information at the right side of the status bar.
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guilabel>Animations</guilabel></term>
-<listitem>
-<para>
-Enables or disables the piece rotation, flipping and placement animations.
-</para>
-</listitem>
-</varlistentry>
-<varlistentry>
 <term><guilabel>Color theme</guilabel></term>
 <listitem>
 <para>

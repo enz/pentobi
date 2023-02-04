@@ -22,7 +22,6 @@ PentobiDialog {
             enabled:
                 switchCoordinates.checked !== gameView.showCoordinates
                 || switchShowVariations.checked !== gameModel.showVariations
-                || switchAnimatePieces.checked !== gameView.enableAnimations
                 || switchMoveNumber.checked !== gameView.showMoveNumber
                 || comboBoxTheme.currentIndex !== currentThemeIndex
                 || comboBoxMoveMarking.currentIndex !== currentMoveMarkingIndex
@@ -39,7 +38,6 @@ PentobiDialog {
     onAboutToShow: {
         switchCoordinates.checked = gameView.showCoordinates
         switchShowVariations.checked = gameModel.showVariations
-        switchAnimatePieces.checked = gameView.enableAnimations
         if (themeName === "dark")
             currentThemeIndex = 1
         else if (themeName === "colorblind-light")
@@ -75,7 +73,6 @@ PentobiDialog {
     onAccepted: {
         gameView.showCoordinates = switchCoordinates.checked
         gameModel.showVariations = switchShowVariations.checked
-        gameView.enableAnimations = switchAnimatePieces.checked
         switch (comboBoxTheme.currentIndex) {
         case 0: themeName = "light"; break
         case 1: themeName = "dark"; break
@@ -132,11 +129,6 @@ PentobiDialog {
                 //: Check box in appearance dialog whether to show the
                 //: move number in the status bar.
                 text: qsTr("Move number")
-            }
-            Switch {
-                id: switchAnimatePieces
-
-                text: qsTr("Animations")
             }
             Label {
                 text: qsTr("Color theme:")
