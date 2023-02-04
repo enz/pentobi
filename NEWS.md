@@ -9,7 +9,8 @@ Version 23.0-dev (master)
 Version 22.2-dev (v22-fixes)
 ----------------------------
 
-*
+* Don't initialize move number dialog with current move but show
+  it as placeholder text.
 
 Version 22.1 (31 Jan 2023)
 --------------------------
