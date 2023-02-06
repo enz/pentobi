@@ -11,6 +11,7 @@ Version 22.2-dev (v22-fixes)
 
 * Don't initialize move number dialog with current move but show
   it as placeholder text.
+* Don't require device with touchscreen on Android.
 
 Version 22.1 (31 Jan 2023)
 --------------------------
