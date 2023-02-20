@@ -58,7 +58,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pentobi.thumbnailer
 configure_file(pentobi-thumbnailer-manpage.docbook.in
     pentobi-thumbnailer-manpage.docbook @ONLY)
 add_custom_command(OUTPUT pentobi-thumbnailer.6
-    COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOKXSL_DIR}/manpages"
+    COMMAND "${XSLTPROC}" --nonet --novalid
     "${CMAKE_CURRENT_SOURCE_DIR}/../pentobi/unix/manpage.xsl"
     pentobi-thumbnailer-manpage.docbook
     DEPENDS

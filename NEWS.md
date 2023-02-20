@@ -4,6 +4,8 @@ Pentobi Release Notes
 Version 23.0-dev (master)
 -------------------------
 
+* Removed custom CMake module to find path of Docbook XSL and let the
+  local XML catalog do the mapping between URL and path.
 * Removed option to disable animations.
 
 Version 22.2-dev (v22-fixes)

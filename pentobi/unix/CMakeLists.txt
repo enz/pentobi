@@ -180,8 +180,7 @@ foreach(lang ${linguas})
         )
     add_custom_command(OUTPUT ${lang}/pentobi.6
         COMMAND "${XSLTPROC}" --nonet --novalid
-        --path "${DOCBOOKXSL_DIR}/manpages" -o ${lang}/
-        "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
+        -o ${lang}/ "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
         ${lang}/pentobi-manpage.docbook
         DEPENDS manpage.xsl ${lang}/pentobi-manpage.docbook
         )

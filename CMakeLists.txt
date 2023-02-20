@@ -10,8 +10,6 @@ option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(PENTOBI_BUILD_GUI "Build GUI" ON)
 option(BUILD_TESTING "Build tests" OFF)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
-
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "No build type selected, default to Release")
   set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
@@ -56,8 +54,7 @@ if(PENTOBI_BUILD_GUI)
     find_package(Gettext 0.19.6 REQUIRED)
     find_program(ITSTOOL itstool REQUIRED)
     find_program(RSVG_CONVERT rsvg-convert REQUIRED)
-    if((UNIX AND NOT ANDROID))
-        find_package(DocBookXSL REQUIRED)
+    if(UNIX AND NOT ANDROID)
         find_program(XSLTPROC xsltproc REQUIRED)
     endif()
     find_package(Qt6 6.2 REQUIRED
