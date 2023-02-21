@@ -179,8 +179,8 @@ foreach(lang ${linguas})
         DEPENDS ${lang}.mo "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
         )
     add_custom_command(OUTPUT ${lang}/pentobi.6
-        COMMAND "${XSLTPROC}" --novalid
-        -o ${lang}/ "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
+        COMMAND "${XSLTPROC}" --nonet -o ${lang}/
+        "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
         ${lang}/pentobi-manpage.docbook
         DEPENDS manpage.xsl ${lang}/pentobi-manpage.docbook
         )
