@@ -163,7 +163,7 @@ endforeach()
 
 configure_file(pentobi-manpage.docbook.in pentobi-manpage.docbook @ONLY)
 add_custom_command(OUTPUT pentobi.6
-    COMMAND "${XSLTPROC}" --nonet --novalid --path "${DOCBOOKXSL_DIR}/manpages"
+    COMMAND "${XSLTPROC}" --nonet --novalid
     "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl" pentobi-manpage.docbook
     DEPENDS manpage.xsl "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
     )
