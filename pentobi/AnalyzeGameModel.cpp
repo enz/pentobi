@@ -103,8 +103,10 @@ QQmlListProperty<AnalyzeGameElement> AnalyzeGameModel::elements()
 
 AnalyzeGameModel::ColorValueList AnalyzeGameModel::getColorValueList() const
 {
+    auto nuMoves = m_analyzeGame.get_nu_moves();
     ColorValueList result;
-    for (unsigned i = 0; i < m_analyzeGame.get_nu_moves(); ++i)
+    result.reserve(nuMoves);
+    for (unsigned i = 0; i < nuMoves; ++i)
     {
         auto moveColor = m_analyzeGame.get_move(i).color.to_int();
         // Values of search are supposed to be win/loss probabilities but can
