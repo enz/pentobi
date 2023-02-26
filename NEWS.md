@@ -4,6 +4,7 @@ Pentobi Release Notes
 Version 23.0-dev (master)
 -------------------------
 
+* Minimum required Qt version is now 6.4
 * Use native file dialogs on Linux to make saving files work in flatpak
   sandboxes. This adds a run-time dependency on package
   qml6-module-qtquick-dialogs.
