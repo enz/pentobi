@@ -1,20 +1,20 @@
 //-----------------------------------------------------------------------------
 /** @file pentobi/qml/AsciiArtSaveDialog.qml
-    @author Markus Enzenberger
+    @author Wing-chung Leung
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick
+import QtQuick.Dialogs
 import "Main.js" as Logic
 
-PentobiFileDialog {
+FileDialog {
     title: qsTr("Export ASCII Art")
-    selectExisting: false
-    nameFilterLabels: [ qsTr("Text files") ]
-    nameFilters: [ [ "*.txt", "*.TXT" ] ]
-    folder: rootWindow.folder
+    defaultSuffix: "txt"
+    nameFilters: [ qsTr("Text files") + " (*.txt)" ]
+    currentFolder: rootWindow.folder
+    fileMode: FileDialog.SaveFile
     onAccepted: {
-        rootWindow.folder = folder
-        Logic.exportAsciiArt(fileUrl)
+        rootWindow.folder = currentFolder
+        Logic.exportAsciiArt(selectedFile)
     }
 }

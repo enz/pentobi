@@ -1,20 +1,20 @@
 //-----------------------------------------------------------------------------
 /** @file pentobi/qml/SaveDialog.qml
-    @author Markus Enzenberger
+    @author Wing-chung Leung
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick
+import QtQuick.Dialogs
 import "Main.js" as Logic
 
-PentobiFileDialog {
+FileDialog {
     title: qsTr("Save")
-    selectExisting: false
-    nameFilterLabels: [ qsTr("Blokus games") ]
-    nameFilters: [ [ "*.blksgf" ] ]
-    folder: rootWindow.folder
+    defaultSuffix: "blksgf"
+    nameFilters: [ qsTr("Blokus games") + " (*.blksgf)" ]
+    currentFolder: rootWindow.folder
+    fileMode: FileDialog.SaveFile
     onAccepted: {
-        rootWindow.folder = folder
-        Logic.saveFile(Logic.getFileFromUrl(fileUrl), "")
+        rootWindow.folder = currentFolder
+        Logic.saveFile(Logic.getFileFromUrl(selectedFile), "")
     }
 }

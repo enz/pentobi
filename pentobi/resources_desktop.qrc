@@ -2,17 +2,11 @@
 <qresource>
 <file>icons/pentobi/index.theme</file>
 <file>qml/AsciiArtSaveDialog.qml</file>
-<file>qml/AsciiArtSaveDialogNative.qml</file>
 <file>qml/GameViewDesktop.qml</file>
 <file>qml/HelpWindow.qml</file>
 <file>qml/ImageSaveDialog.qml</file>
-<file>qml/ImageSaveDialogNative.qml</file>
-<file>qml/NewFolderDialog.qml</file>
 <file>qml/OpenDialog.qml</file>
-<file>qml/OpenDialogNative.qml</file>
-<file>qml/PentobiFileDialog.qml</file>
 <file>qml/PieceSelectorDesktop.qml</file>
 <file>qml/SaveDialog.qml</file>
-<file>qml/SaveDialogNative.qml</file>
 </qresource>
 </RCC>

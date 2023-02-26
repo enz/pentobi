@@ -739,8 +739,6 @@ function saveAs() {
         androidUtils.openSaveDialog(file, name)
     } else {
         var dialog = saveDialog.get()
-        if (! useNativeFileDialog)
-            dialog.name = gameModel.suggestGameFileName(folder)
         dialog.open()
     }
 }

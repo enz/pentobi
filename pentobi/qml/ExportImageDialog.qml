@@ -27,10 +27,6 @@ PentobiDialog {
             androidUtils.openImageSaveDialog(name)
         else {
             var dialog = imageSaveDialog.get()
-            if (! rootWindow.useNativeFileDialog) {
-                dialog.name = name
-                dialog.selectNameFilter(0)
-            }
             dialog.open()
         }
     }

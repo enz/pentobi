@@ -1,38 +1,23 @@
 //-----------------------------------------------------------------------------
 /** @file pentobi/qml/ImageSaveDialog.qml
-    @author Markus Enzenberger
+    @author Wing-chung Leung
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick
+import QtQuick.Dialogs
 import "Main.js" as Logic
 
-PentobiFileDialog {
+FileDialog {
     title: qsTr("Save Image")
-    selectExisting: false
-    nameFilterLabels: [
-        qsTr("PNG image files"),
-        qsTr("JPEG image files")
-    ]
+    defaultSuffix: "png"
     nameFilters: [
-        [ "*.png", "*.PNG" ],
-        [ "*.jpg", "*.JPG", "*.jpeg", "*.JPEG" ]
+        qsTr("PNG image files") + " (*.png)",
+        qsTr("JPEG image files") + " (*.jpg *.jpeg)"
     ]
-    folder: rootWindow.folder
-    onNameFilterChanged: index => {
-        if (index >= nameFilters.length)
-            return
-        var pos = name.lastIndexOf(".")
-        if (pos < 0)
-            return
-        var newName = name.substr(0, pos + 1)
-        pos = nameFilters[index][0].lastIndexOf(".")
-        newName += nameFilters[index][0].substr(pos + 1)
-        name = newName
-        selectNameField()
-    }
+    currentFolder: rootWindow.folder
+    fileMode: FileDialog.SaveFile
     onAccepted: {
-        rootWindow.folder = folder
-        Logic.exportImage(fileUrl)
+        rootWindow.folder = currentFolder
+        Logic.exportImage(selectedFile)
     }
 }

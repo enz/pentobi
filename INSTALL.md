@@ -21,9 +21,9 @@ sudo apt install cmake docbook-xsl g++ gettext itstool librsvg2-bin \
   make qml6-module-qt-labs-folderlistmodel \
   qml6-module-qt-labs-platform qml6-module-qt-labs-settings \
   qml6-module-qtqml-workerscript qml6-module-qtquick-controls \
-  qml6-module-qtquick-layouts qml6-module-qtquick-templates \
-  qml6-module-qtquick-window qt6-base-dev qt6-declarative-dev \
-  qt6-tools-dev xsltproc
+  qml6-module-qtquick-dialogs qml6-module-qtquick-layouts \
+  qml6-module-qtquick-templates qml6-module-qtquick-window \
+  qt6-base-dev qt6-declarative-dev qt6-tools-dev xsltproc
 ```
 
 Building
