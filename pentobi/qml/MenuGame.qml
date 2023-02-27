@@ -36,10 +36,6 @@ PentobiMenu {
         action: actionOpen
     }
     MenuRecentFiles { }
-    Action {
-        text: qsTr("Open Clipboard")
-        onTriggered: Logic.openClipboard()
-    }
     MenuItem {
         action: actionSave
         enabled: actionSave.enabled && gameModel.file !== ""

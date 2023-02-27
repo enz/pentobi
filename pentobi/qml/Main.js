@@ -544,29 +544,6 @@ function openFileUrl(fileUrl) {
     openFile(getFileFromUrl(fileUrl), "")
 }
 
-function openClipboard() {
-    verify(openClipboardNoVerify)
-}
-
-function openClipboardNoVerify() {
-    lengthyCommand.run(function() {
-        var oldGameVariant = gameModel.gameVariant
-        var oldEnableAnimations = gameView.enableAnimations
-        gameView.enableAnimations = false
-        if (! gameModel.openClipboard())
-            showInfo(qsTr("Open failed.") + "\n" + gameModel.getError())
-        else
-            setComputerNone()
-        if (gameModel.gameVariant !== oldGameVariant)
-            gameView.createPieces()
-        gameView.showToPlay()
-        gameView.enableAnimations = oldEnableAnimations
-        gameView.setupMode = false
-        isRated = false
-        analyzeGameModel.clear()
-    })
-}
-
 function openRecentFile(file, displayName) {
     verify(function() { openFile(file, displayName) })
 }

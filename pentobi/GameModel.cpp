@@ -9,7 +9,6 @@
 #include <cerrno>
 #include <cstring>
 #include <fstream>
-#include <QClipboard>
 #include <QDateTime>
 #include <QGuiApplication>
 #include <QDir>
@@ -971,30 +970,6 @@ void GameModel::newGame()
             pieceModel->setDefaultState();
         }
     updateProperties();
-}
-
-bool GameModel::openClipboard()
-{
-    auto text = QGuiApplication::clipboard()->text();
-    if (text.isEmpty())
-    {
-        m_error = tr("Clipboard is empty.");
-        return false;
-    }
-    istringstream in(text.toLocal8Bit().constData());
-    bool result;
-    if (openStream(in))
-    {
-        auto& root = m_game.get_root();
-        if (! has_setup(root) && root.has_children())
-            goEnd();
-        result = true;
-    }
-    else
-        result = false;
-    clearFile();
-    setIsModified(true);
-    return result;
 }
 
 bool GameModel::openFile(const QString& file)

@@ -149,8 +149,6 @@ public:
 
     Q_INVOKABLE bool openByteArray(const QByteArray& byteArray);
 
-    Q_INVOKABLE bool openClipboard();
-
     Q_INVOKABLE bool openFile(const QString& file);
 
     Q_INVOKABLE PieceModel* preparePiece(GameMove* move);

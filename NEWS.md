@@ -9,6 +9,7 @@ Version 23.0-dev (master)
   sandboxes. This adds a run-time dependency on package
   qml6-module-qtquick-dialogs.
 * Removed option to disable animations.
+* Removed menu item Open Clipboard.
 
 Version 22.2-dev (v22-fixes)
 ----------------------------

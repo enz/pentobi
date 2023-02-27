@@ -679,15 +679,6 @@ Load a recently used game.
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guimenuitem>Open Clipboard</guimenuitem></term>
-<listitem>
-<para>
-Open a game from a text copied to the clipboard. The text must be a valid game
-in Pentobi SGF file format.
-</para>
-</listitem>
-</varlistentry>
-<varlistentry>
 <term><guimenuitem>Save</guimenuitem></term>
 <term>(<keysym>Ctrl+S</keysym>)</term>
 <listitem>
