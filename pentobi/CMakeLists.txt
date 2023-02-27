@@ -134,6 +134,7 @@ set(pentobi_src
     SyncSettings.h
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/icons.qrc"
+    "${CMAKE_CURRENT_BINARY_DIR}/icons_desktop.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
     resources.qrc
@@ -149,17 +150,13 @@ add_custom_command(
     DEPENDS pentobi-help help/help.qrc
     )
 
+qt_add_executable(pentobi WIN32 ${pentobi_src})
+
 if(ANDROID)
-    qt_add_executable(pentobi ${pentobi_src})
     target_link_libraries(pentobi PRIVATE Qt::CorePrivate)
     set_property(TARGET pentobi APPEND PROPERTY
         QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
 else()
-    add_executable(pentobi WIN32
-        ${pentobi_src}
-        "${CMAKE_CURRENT_BINARY_DIR}/icons_desktop.qrc"
-        resources_desktop.qrc
-        )
     install(TARGETS pentobi)
 endif()
 
