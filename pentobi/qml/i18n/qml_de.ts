@@ -94,10 +94,6 @@
         <translation>Keine</translation>
     </message>
     <message>
-        <source>Animations</source>
-        <translation>Animationen</translation>
-    </message>
-    <message>
         <source>Show comment:</source>
         <translation>Kommentar zeigen:</translation>
     </message>
@@ -128,17 +124,6 @@
 </context>
 <context>
     <name>AsciiArtSaveDialog</name>
-    <message>
-        <source>Export ASCII Art</source>
-        <translation>ASCII-Art exportieren</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>Textdateien</translation>
-    </message>
-</context>
-<context>
-    <name>AsciiArtSaveDialogNative</name>
     <message>
         <source>Export ASCII Art</source>
         <translation>ASCII-Art exportieren</translation>
@@ -406,10 +391,6 @@
         <translation>Ungültige Blokus-SGF-Datei. (%1)</translation>
     </message>
     <message>
-        <source>Clipboard is empty.</source>
-        <translation>Zwischenablage ist leer.</translation>
-    </message>
-    <message>
         <source>Untitled</source>
         <translation>Unbenannt</translation>
     </message>
@@ -519,21 +500,6 @@
 </context>
 <context>
     <name>ImageSaveDialog</name>
-    <message>
-        <source>Save Image</source>
-        <translation>Grafik speichern</translation>
-    </message>
-    <message>
-        <source>PNG image files</source>
-        <translation>PNG-Bilddateien</translation>
-    </message>
-    <message>
-        <source>JPEG image files</source>
-        <translation>JPEG-Bilddateien</translation>
-    </message>
-</context>
-<context>
-    <name>ImageSaveDialogNative</name>
     <message>
         <source>Save Image</source>
         <translation>Grafik speichern</translation>
@@ -1001,10 +967,6 @@
         <source>Game Variant…</source>
         <translation>Spielvariante …</translation>
     </message>
-    <message>
-        <source>Open Clipboard</source>
-        <translation>Zwischenablage öffnen</translation>
-    </message>
 </context>
 <context>
     <name>MenuGo</name>
@@ -1110,13 +1072,6 @@
     </message>
 </context>
 <context>
-    <name>NewFolderDialog</name>
-    <message>
-        <source>Folder name:</source>
-        <translation>Name des Ordners:</translation>
-    </message>
-</context>
-<context>
     <name>OpenDialog</name>
     <message>
         <source>Open</source>
@@ -1125,32 +1080,6 @@
     <message>
         <source>Blokus games</source>
         <translation>Blokus-Partien</translation>
-    </message>
-</context>
-<context>
-    <name>OpenDialogNative</name>
-    <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation>Blokus-Partien</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>Datei überschreiben?</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Öffnen</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Speichern</translation>
     </message>
     <message>
         <source>All files</source>
@@ -1346,17 +1275,6 @@
 </context>
 <context>
     <name>SaveDialog</name>
-    <message>
-        <source>Save</source>
-        <translation>Speichern</translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation>Blokus-Partien</translation>
-    </message>
-</context>
-<context>
-    <name>SaveDialogNative</name>
     <message>
         <source>Save</source>
         <translation>Speichern</translation>
