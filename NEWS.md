@@ -8,6 +8,8 @@ Version 23.0-dev (master)
 * Use native file dialogs on Linux to make saving files work in flatpak
   sandboxes. This adds a run-time dependency on package
   qml6-module-qtquick-dialogs.
+* Prefix mime type file and icons with io.sourceforge.pentobi, such
+  that they are exported with flatpak.
 * Removed option to disable animations.
 * Removed menu item Open Clipboard.
 

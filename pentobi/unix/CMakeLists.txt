@@ -62,51 +62,61 @@ install(FILES ../icon/pentobi-128.svg
     RENAME pentobi.svg)
 
 foreach(sz 16 22 48 128)
-    add_custom_command(OUTPUT application-x-blokus-sgf-${sz}.png
+    add_custom_command(
+        OUTPUT io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.png
         COMMAND "${RSVG_CONVERT}"
-        "${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-${sz}.svg"
-        > application-x-blokus-sgf-${sz}.png
-        DEPENDS application-x-blokus-sgf-${sz}.svg)
+        "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.svg"
+        > io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.png
+        DEPENDS io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.svg)
     install(
-        FILES "${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-${sz}.png"
+        FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.png"
         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${sz}x${sz}/mimetypes
-        RENAME application-x-blokus-sgf.png)
+        RENAME io.sourceforge.pentobi.application-x-blokus-sgf.png)
 endforeach()
-add_custom_command(OUTPUT application-x-blokus-sgf-24.png
+add_custom_command(
+    OUTPUT io.sourceforge.pentobi.application-x-blokus-sgf-24.png
     COMMAND "${RSVG_CONVERT}" -z 0.5
-    "${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-48.svg"
-    > application-x-blokus-sgf-24.png
-    DEPENDS application-x-blokus-sgf-48.svg)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-24.png"
+    "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-48.svg"
+    > io.sourceforge.pentobi.application-x-blokus-sgf-24.png
+    DEPENDS io.sourceforge.pentobi.application-x-blokus-sgf-48.svg)
+install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-24.png"
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/24x24/mimetypes
-    RENAME application-x-blokus-sgf.png)
-add_custom_command(OUTPUT application-x-blokus-sgf-32.png
+    RENAME io.sourceforge.pentobi.application-x-blokus-sgf.png)
+add_custom_command(
+    OUTPUT io.sourceforge.pentobi.application-x-blokus-sgf-32.png
     COMMAND "${RSVG_CONVERT}" -z 0.25
-    "${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-128.svg"
-    > application-x-blokus-sgf-32.png
-    DEPENDS application-x-blokus-sgf-128.svg)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-32.png"
+    "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-128.svg"
+    > io.sourceforge.pentobi.application-x-blokus-sgf-32.png
+    DEPENDS io.sourceforge.pentobi.application-x-blokus-sgf-128.svg)
+install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-32.png"
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/mimetypes
-    RENAME application-x-blokus-sgf.png)
-add_custom_command(OUTPUT application-x-blokus-sgf-64.png
+    RENAME io.sourceforge.pentobi.application-x-blokus-sgf.png)
+add_custom_command(
+    OUTPUT io.sourceforge.pentobi.application-x-blokus-sgf-64.png
     COMMAND "${RSVG_CONVERT}" -z 0.5
-    "${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-128.svg"
-    > application-x-blokus-sgf-64.png
-    DEPENDS application-x-blokus-sgf-128.svg)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-64.png"
+    "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-128.svg"
+    > io.sourceforge.pentobi.application-x-blokus-sgf-64.png
+    DEPENDS io.sourceforge.pentobi.application-x-blokus-sgf-128.svg)
+install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-64.png"
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/mimetypes
-    RENAME application-x-blokus-sgf.png)
-add_custom_command(OUTPUT application-x-blokus-sgf-256.png
+    RENAME io.sourceforge.pentobi.application-x-blokus-sgf.png)
+add_custom_command(
+    OUTPUT io.sourceforge.pentobi.application-x-blokus-sgf-256.png
     COMMAND "${RSVG_CONVERT}" -z 2
-    "${CMAKE_CURRENT_SOURCE_DIR}/application-x-blokus-sgf-128.svg"
-    > application-x-blokus-sgf-256.png
-    DEPENDS application-x-blokus-sgf-128.svg)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/application-x-blokus-sgf-256.png"
+    "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-128.svg"
+    > io.sourceforge.pentobi.application-x-blokus-sgf-256.png
+    DEPENDS io.sourceforge.pentobi.application-x-blokus-sgf-128.svg)
+install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-256.png"
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/256x256/mimetypes
-    RENAME application-x-blokus-sgf.png)
-install(FILES application-x-blokus-sgf-128.svg
+    RENAME io.sourceforge.pentobi.application-x-blokus-sgf.png)
+install(
+    FILES io.sourceforge.pentobi.application-x-blokus-sgf-128.svg
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/mimetypes
-    RENAME application-x-blokus-sgf.svg)
+    RENAME io.sourceforge.pentobi.application-x-blokus-sgf.svg)
 
 # Desktop entry
 
@@ -143,15 +153,13 @@ install(
 
 # Shared MIME info
 
-# Use itstool until shared-mime-info includes its/loc files for gettext (see
-# also https://gitlab.freedesktop.org/xdg/shared-mime-info/merge_requests/4)
-add_custom_command(OUTPUT pentobi-mime.xml
+add_custom_command(OUTPUT io.sourceforge.pentobi.xml
     COMMAND "${ITSTOOL}"
-    -j "${CMAKE_CURRENT_SOURCE_DIR}/pentobi-mime.xml.in"
-    -o pentobi-mime.xml ${mo_files}
-    DEPENDS pentobi-mime.xml.in ${mo_files} po/LINGUAS
+    -j "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.xml.in"
+    -o io.sourceforge.pentobi.xml ${mo_files}
+    DEPENDS io.sourceforge.pentobi.xml.in ${mo_files} po/LINGUAS
     )
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-mime.xml"
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.xml"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/mime/packages")
 
 # Man page
@@ -191,9 +199,17 @@ endforeach()
 # Target
 
 add_custom_target(pentobi-unix ALL DEPENDS
-    io.sourceforge.pentobi.desktop
     io.sourceforge.pentobi.appdata.translated.xml
-    pentobi-mime.xml
+    io.sourceforge.pentobi.application-x-blokus-sgf-16.png
+    io.sourceforge.pentobi.application-x-blokus-sgf-22.png
+    io.sourceforge.pentobi.application-x-blokus-sgf-24.png
+    io.sourceforge.pentobi.application-x-blokus-sgf-32.png
+    io.sourceforge.pentobi.application-x-blokus-sgf-48.png
+    io.sourceforge.pentobi.application-x-blokus-sgf-64.png
+    io.sourceforge.pentobi.application-x-blokus-sgf-128.png
+    io.sourceforge.pentobi.application-x-blokus-sgf-256.png
+    io.sourceforge.pentobi.desktop
+    io.sourceforge.pentobi.xml
     pentobi-16.png
     pentobi-22.png
     pentobi-24.png
@@ -202,13 +218,5 @@ add_custom_target(pentobi-unix ALL DEPENDS
     pentobi-64.png
     pentobi-128.png
     pentobi-256.png
-    application-x-blokus-sgf-16.png
-    application-x-blokus-sgf-22.png
-    application-x-blokus-sgf-24.png
-    application-x-blokus-sgf-32.png
-    application-x-blokus-sgf-48.png
-    application-x-blokus-sgf-64.png
-    application-x-blokus-sgf-128.png
-    application-x-blokus-sgf-256.png
     ${man_files}
     )
