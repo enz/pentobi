@@ -96,10 +96,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Animations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show comment:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -130,17 +126,6 @@
 </context>
 <context>
     <name>AsciiArtSaveDialog</name>
-    <message>
-        <source>Export ASCII Art</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>AsciiArtSaveDialogNative</name>
     <message>
         <source>Export ASCII Art</source>
         <translation type="unfinished"></translation>
@@ -408,10 +393,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clipboard is empty.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Untitled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -521,21 +502,6 @@
 </context>
 <context>
     <name>ImageSaveDialog</name>
-    <message>
-        <source>Save Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PNG image files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>JPEG image files</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ImageSaveDialogNative</name>
     <message>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
@@ -1003,10 +969,6 @@
         <source>Game Variant…</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Open Clipboard</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MenuGo</name>
@@ -1112,13 +1074,6 @@
     </message>
 </context>
 <context>
-    <name>NewFolderDialog</name>
-    <message>
-        <source>Folder name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>OpenDialog</name>
     <message>
         <source>Open</source>
@@ -1126,32 +1081,6 @@
     </message>
     <message>
         <source>Blokus games</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OpenDialogNative</name>
-    <message>
-        <source>Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1348,17 +1277,6 @@
 </context>
 <context>
     <name>SaveDialog</name>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SaveDialogNative</name>
     <message>
         <source>Save</source>
         <translation type="unfinished"></translation>
