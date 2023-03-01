@@ -2,7 +2,7 @@
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
 <mime-type type="application/x-blokus-sgf">
 <comment>Blokus game</comment>
-<icon name="io.sourceforge.pentobi-application-x-blokus-sgf"/>
+<icon name="io.sourceforge.pentobi.application-x-blokus-sgf"/>
 <magic priority="60">
 <match type="string" offset="2:10" value="GM[Blokus]"/>
 <match type="string" offset="2:10" value="GM[Blokus Duo]"/>
