@@ -377,8 +377,6 @@ void AndroidUtils::initTheme([[maybe_unused]]QColor colorBackground)
                     view.callObjectMethod(
                         "getWindowInsetsController",
                         "()Landroid/view/WindowInsetsController;");
-            int appearance = insetsController.callMethod<int>(
-                        "getSystemBarsAppearance", "()I");
             if (isLight)
                 insetsController.callMethod<void>(
                             "setSystemBarsAppearance", "(II)V",
