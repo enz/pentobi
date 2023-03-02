@@ -340,10 +340,10 @@ public:
 
     /** Abort a running search before the time limit or maximum number
         of simulations is reached. */
-    void abort() { m_abort = true; }
+    void abort() { m_abort.test_and_set(); }
 
     /** Was the last search aborted? */
-    bool was_aborted() const { return m_abort; }
+    bool was_aborted() const { return m_abort.test(); }
 
     /** Create the threads used in the search.
         This cannot be done in the constructor because it uses the virtual
@@ -497,7 +497,7 @@ private:
     /** Time of last search. */
     double m_last_time;
 
-    atomic<bool> m_abort = false;
+    atomic_flag m_abort;
 
     Float m_rave_parent_max = 50000;
 
@@ -691,7 +691,7 @@ template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_abort_expensive(
         ThreadState& thread_state) const
 {
-    if (m_abort)
+    if (m_abort.test())
     {
         LIBBOARDGAME_LOG_THREAD(thread_state, "Search aborted");
         return true;
@@ -1100,7 +1100,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     else
         for (PlayerInt i = 0; i < m_nu_players; ++i)
             m_root_val[i].init(SearchParamConst::tie_value, 1);
-    if ((m_reuse_subtree && (is_followup || m_abort))
+    if ((m_reuse_subtree && (is_followup || m_abort.test()))
             || (m_reuse_tree && is_same))
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
@@ -1149,7 +1149,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
 
     m_timer.reset(time_source);
     m_time_source = &time_source;
-    m_abort = false;
+    m_abort.clear();
     if (SearchParamConst::use_lgr && ! is_followup)
         m_lgr.init(m_nu_players);
     for (auto& i : m_threads)
