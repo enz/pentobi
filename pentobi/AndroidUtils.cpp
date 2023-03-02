@@ -346,45 +346,57 @@ void AndroidUtils::initTheme([[maybe_unused]]QColor colorBackground)
                                                     "()Landroid/view/Window;");
         if (! window.isValid())
             return;
-        auto flagDrawsSystemBarBackgrounds =
-                QJniObject::getStaticField<jint>(
-                    "android/view/WindowManager$LayoutParams",
-                    "FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS");
-        window.callMethod<void>("addFlags", "(I)V",
-                                flagDrawsSystemBarBackgrounds);
-        auto flagTranslucentStatus =
-                QJniObject::getStaticField<jint>(
-                    "android/view/WindowManager$LayoutParams",
-                    "FLAG_TRANSLUCENT_STATUS");
-        window.callMethod<void>("clearFlags", "(I)V", flagTranslucentStatus);
+        window.callMethod<void>(
+                    "addFlags", "(I)V",
+                    0x80000000 /* FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS */);
+        window.callMethod<void>("clearFlags", "(I)V",
+                                0x04000000 /* FLAG_TRANSLUCENT_STATUS */);
         auto view = window.callObjectMethod("getDecorView",
                                             "()Landroid/view/View;");
-        // Note: getSystemUiVisibility() has been deprecated in API 30,
-        // in the future use WindowInsetsController for API >= 30
         bool isLight = (colorBackground.lightness() > 128);
-        int visibility = view.callMethod<int>("getSystemUiVisibility", "()I");
-        auto systemUiFlagLightStatusBar =
-                QJniObject::getStaticField<jint>(
-                    "android/view/View", "SYSTEM_UI_FLAG_LIGHT_STATUS_BAR");
-        if (isLight)
-            visibility |= systemUiFlagLightStatusBar;
-        else
-            visibility &= ~systemUiFlagLightStatusBar;
-        if (QAndroidApplication::sdkVersion() >= 26)
+        if (QAndroidApplication::sdkVersion() < 30)
         {
-            auto systemUiFlagLightNavigationBar =
-                    QJniObject::getStaticField<jint>(
-                        "android/view/View", "SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR");
+            int visibility =
+                    view.callMethod<int>("getSystemUiVisibility", "()I");
             if (isLight)
-                visibility |= systemUiFlagLightNavigationBar;
+                visibility |= 0x00002000; // SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             else
-                visibility &= ~systemUiFlagLightNavigationBar;
+                visibility &= ~0x00002000;
+            if (QAndroidApplication::sdkVersion() >= 26)
+            {
+                if (isLight)
+                    visibility |= 0x00000010; // SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                else
+                    visibility &= ~0x00000010;
+            }
+            view.callMethod<void>("setSystemUiVisibility", "(I)V", visibility);
         }
-        view.callMethod<void>("setSystemUiVisibility", "(I)V", visibility);
+        else // QAndroidApplication::sdkVersion() >= 30
+        {
+            auto insetsController =
+                    view.callObjectMethod(
+                        "getWindowInsetsController",
+                        "()Landroid/view/WindowInsetsController;");
+            int appearance = insetsController.callMethod<int>(
+                        "getSystemBarsAppearance", "()I");
+            if (isLight)
+                insetsController.callMethod<void>(
+                            "setSystemBarsAppearance", "(II)V",
+                            0x00000008 // APPEARANCE_LIGHT_STATUS_BARS
+                            | 0x00000010, // APPEARANCE_LIGHT_NAVIGATION_BARS
+                            0x00000008 | 0x00000010);
+            else
+                insetsController.callMethod<void>(
+                            "setSystemBarsAppearance", "(II)V",
+                            0, 0x00000008 | 0x00000010);
+        }
         window.callMethod<void>("setStatusBarColor", "(I)V",
                                 colorBackground.rgba());
-        window.callMethod<void>("setNavigationBarColor", "(I)V",
-                                colorBackground.rgba());
+        // Set navigation bar color only if we can also use
+        // SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR (API level 26)
+        if (QAndroidApplication::sdkVersion() >= 26)
+            window.callMethod<void>("setNavigationBarColor", "(I)V",
+                                    colorBackground.rgba());
     });
 #endif
 }
