@@ -15,23 +15,8 @@ please report Windows-related bugs [here](https://github.com/lwchkg/pentobi/issu
 Translations
 ------------
 
-Translations can be contributed at [Transifex](https://www.transifex.com/markus-enzenberger/pentobi/).
-Check the announcements at Transifex for information about what branch
-the translations currently correspond to. Translation components will
-be included in releases if at least 75 percent of the strings are
-translated. The translation components are:
-
-* __Pentobi__ ([QT format](https://doc.qt.io/qt-5/linguist-ts-file-format.html))
-  User interface of Pentobi main program
-* __Pentobi Manual__ ([PO format](https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html))
-  User manual
-* __Pentobi Unix Files__ (PO format)
-  Additional Pentobi files installed on Unix (desktop entry, appstream
-  file, manpage, etc.)
-* __Pentobi Thumbnailer__ (QT format)
-  Messages used in Gnome thumbnailer
-* __Pentobi Thumbnailer Unix Files__ (PO format)
-  Additional Pentobi Thumbnailer files installed on Unix (manpage)
+See the [here](https://pentobi.sourceforge.io/translator-instructions.html)
+for how to contribute translations.
 
 Source Code Overview
 --------------------
