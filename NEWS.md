@@ -1,22 +1,18 @@
 Pentobi Release Notes
 =====================
 
-Version 23.0-dev (master)
--------------------------
+Version 23.0 (06 Mar 2023)
+--------------------------
 
-* Require C++ compiler with C++20 support.
-* Minimum required Qt version is now 6.4
-* Use native file dialogs on Linux to make saving files work in flatpak
-  sandboxes. This adds a run-time dependency on package
-  qml6-module-qtquick-dialogs.
-* Prefix mime type file and icons with io.sourceforge.pentobi, such
-  that they are exported with flatpak.
+* Use native file dialogs on Linux to make loading and saving of games
+  work with flatpak. This adds a run-time dependency on package
+  qml6-module-qtquick-dialogs (on Debian).
+* Prefix MIME config and icons with io.sourceforge.pentobi, such that
+  registering Pentobi as an app for its game files works with flatpak.
 * Removed option to disable animations.
 * Removed menu item Open Clipboard.
-
-Version 22.2-dev (v22-fixes)
-----------------------------
-
+* Require C++ compiler with C++20 support.
+* Minimum required Qt version is now 6.4
 * Removed custom CMake module to find path of Docbook XSL and let the
   local XML catalog do the mapping between URL and path.
 * Don't initialize move number dialog with current move but show
