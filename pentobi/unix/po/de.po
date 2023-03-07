@@ -1,17 +1,11 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Markus Enzenberger <enz@users.sourceforge.net>, 2021
 # 
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-09 10:33+0100\n"
+"POT-Creation-Date: 2023-03-01 17:33+0100\n"
 "PO-Revision-Date: 2019-02-25 15:36+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2021\n"
 "Language-Team: German (https://www.transifex.com/markus-enzenberger/teams/89074/de/)\n"
@@ -27,7 +21,7 @@ msgid "translator-credits"
 msgstr "Markus Enzenberger <enz@users.sourceforge.net>, 2019"
 
 #. (itstool) path: refmeta/refmiscinfo
-#: pentobi-manpage.docbook.in:11 io.sourceforge.pentobi.appdata.xml.in:6
+#: pentobi-manpage.docbook.in:11 io.sourceforge.pentobi.appdata.xml.in:7
 #: io.sourceforge.pentobi.desktop.in:3
 msgid "Pentobi"
 msgstr "Pentobi"
@@ -188,13 +182,18 @@ msgstr ""
 "Interne Informationen zur Zuggenerierung und andere Debugging-Informationen "
 "auf dem Standard-Error-Stream ausgeben."
 
-#. (itstool) path: refsection/title
+#. (itstool) path: listitem/para
 #: pentobi-manpage.docbook.in:157
+msgid "Display version and exit."
+msgstr "Hilfe anzeigen und Programm beenden."
+
+#. (itstool) path: refsection/title
+#: pentobi-manpage.docbook.in:166
 msgid "Standard Qt Options"
 msgstr "Standardoptionen von Qt"
 
 #. (itstool) path: refsection/para
-#: pentobi-manpage.docbook.in:158
+#: pentobi-manpage.docbook.in:167
 msgid ""
 "Additionally, any options supported by Qt applications can be used, such as:"
 msgstr ""
@@ -202,50 +201,45 @@ msgstr ""
 "unterstützt werden, wie zum Beispiel:"
 
 #. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:164
+#: pentobi-manpage.docbook.in:173
 msgid "<_:option-1/> <replaceable>d</replaceable>"
 msgstr "<_:option-1/> <replaceable>d</replaceable>"
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:166
+#: pentobi-manpage.docbook.in:175
 msgid "Switches displays on X11."
 msgstr "Schaltet unter X11 das Anzeigegerät um."
 
 #. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:172
+#: pentobi-manpage.docbook.in:181
 msgid "<_:option-1/> <replaceable>g</replaceable>"
 msgstr "<_:option-1/> <replaceable>g</replaceable>"
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:174
+#: pentobi-manpage.docbook.in:183
 msgid "Window geometry using the X11 syntax."
 msgstr "Fenstergeometrie in X11-Syntax."
 
 #. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:180
+#: pentobi-manpage.docbook.in:189
 msgid "<_:option-1/> <replaceable>s</replaceable>"
 msgstr "<_:option-1/> <replaceable>s</replaceable>"
 
 #. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:182
+#: pentobi-manpage.docbook.in:191
 msgid "Set the style for the GUI elements of QQuickControls."
 msgstr "Setzen des Style für Benutzeroberflächenelemente von QtQuickControls."
 
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:193
-msgid "Display version and exit."
-msgstr "Hilfe anzeigen und Programm beenden."
-
 #. (itstool) path: refsection/title
-#: pentobi-manpage.docbook.in:202
+#: pentobi-manpage.docbook.in:200
 msgid "See Also"
 msgstr "Siehe auch"
 
-#: io.sourceforge.pentobi.appdata.xml.in:7 io.sourceforge.pentobi.desktop.in:5
+#: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:5
 msgid "Computer opponent for the board game Blokus"
 msgstr "Computer-Gegner für das Brettspiel Blokus"
 
-#: io.sourceforge.pentobi.appdata.xml.in:9
+#: io.sourceforge.pentobi.appdata.xml.in:10
 msgid ""
 "Pentobi is a computer opponent for the board game Blokus. It has a strong "
 "Blokus engine with different playing levels. The supported game variants are"
@@ -256,7 +250,7 @@ msgstr ""
 "Spielvarianten sind : Klassisch, Duo, Trigon, Junior, Nexos, Callisto und "
 "GembloQ."
 
-#: io.sourceforge.pentobi.appdata.xml.in:14
+#: io.sourceforge.pentobi.appdata.xml.in:15
 msgid ""
 "Players can determine their strength by playing rated games against the "
 "computer and use a game analysis function. Games can be saved in Smart Game "
@@ -266,7 +260,7 @@ msgstr ""
 "den Computer spielen, und eine Spielanalysefunktion benutzen. Spiele können "
 "im Smart-Game-Format gespeichert werden mit Kommentaren und Zugvarianten."
 
-#: io.sourceforge.pentobi.appdata.xml.in:19
+#: io.sourceforge.pentobi.appdata.xml.in:20
 msgid ""
 "System requirements: 1 GB RAM, 1 GHz CPU (4 GB RAM, 2.5 GHz dual-core or "
 "faster CPU recommended for playing level 9)."
@@ -274,7 +268,7 @@ msgstr ""
 "Systemminima: 1 GB RAM, 1 GHz CPU (4 GB RAM, 2,5 GHz Dual-Core- oder "
 "schnellere CPU empfohlen für Spielstufe 9)."
 
-#: io.sourceforge.pentobi.appdata.xml.in:23
+#: io.sourceforge.pentobi.appdata.xml.in:24
 msgid ""
 "Trademark disclaimer: The trademark Blokus and other trademarks referred to "
 "are property of their respective trademark holders. The trademark holders "
@@ -284,27 +278,27 @@ msgstr ""
 "sind Eigentum ihrer jeweiligen Markeninhaber. Die Markeninhaber stehen in "
 "keiner Verbindung mit dem Autor des Programms Pentobi."
 
-#: io.sourceforge.pentobi.appdata.xml.in:34
+#: io.sourceforge.pentobi.appdata.xml.in:35
 msgid "Game variant Classic"
 msgstr "Spielvariante Klassisch"
 
-#: io.sourceforge.pentobi.appdata.xml.in:39
+#: io.sourceforge.pentobi.appdata.xml.in:40
 msgid "Game variant Duo"
 msgstr "Spielvariante Duo"
 
-#: io.sourceforge.pentobi.appdata.xml.in:44
+#: io.sourceforge.pentobi.appdata.xml.in:45
 msgid "Game variant Trigon"
 msgstr "Spielvariante Trigon"
 
-#: io.sourceforge.pentobi.appdata.xml.in:49
+#: io.sourceforge.pentobi.appdata.xml.in:50
 msgid "Game variant Nexos"
 msgstr "Spielvariante Nexos"
 
-#: io.sourceforge.pentobi.appdata.xml.in:54
+#: io.sourceforge.pentobi.appdata.xml.in:55
 msgid "Game variant GembloQ"
 msgstr "Spielvariante GembloQ"
 
-#: io.sourceforge.pentobi.appdata.xml.in:61
+#: io.sourceforge.pentobi.appdata.xml.in:62
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
 
@@ -321,11 +315,6 @@ msgstr ""
 "Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo "
 "Q;GembloQ"
 
-#. TRANSLATORS: icon name in desktop entry, probably no need to change this
-#: io.sourceforge.pentobi.desktop.in:10
-msgid "pentobi"
-msgstr "pentobi"
-
-#: pentobi-mime.xml.in:4
+#: io.sourceforge.pentobi.xml.in:4
 msgid "Blokus game"
 msgstr "Blokus-Partie"

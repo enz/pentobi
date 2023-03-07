@@ -943,21 +943,6 @@
     </message>
 </context>
 <context>
-    <name>MenuExport</name>
-    <message>
-        <source>Export</source>
-        <translation>Exportieren</translation>
-    </message>
-    <message>
-        <source>Image…</source>
-        <translation>Grafik …</translation>
-    </message>
-    <message>
-        <source>ASCII Art…</source>
-        <translation>ASCII-Art …</translation>
-    </message>
-</context>
-<context>
     <name>MenuGame</name>
     <message>
         <source>Game</source>
@@ -966,6 +951,10 @@
     <message>
         <source>Game Variant…</source>
         <translation>Spielvariante …</translation>
+    </message>
+    <message>
+        <source>Export Image…</source>
+        <translation>Grafik exportieren …</translation>
     </message>
 </context>
 <context>
