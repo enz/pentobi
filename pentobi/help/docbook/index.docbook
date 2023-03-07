@@ -697,22 +697,13 @@ Save the current game under a new file name.
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guimenu>Export</guimenu>/<guimenuitem>Image</guimenuitem></term>
+<term><guimenuitem>Export Image</guimenuitem></term>
 <listitem>
 <para>
 Save the current position as an image file. Several image file formats are
 supported, the file format is derived from the file name ending (e.g. ".png"
 for the PNG format). For a crisp image, the image width should be an integer
 multiple of the number of board columns in the current game variant.
-</para>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term><guimenu>Export</guimenu>/<guimenuitem>ASCII Art</guimenuitem></term>
-<listitem>
-<para>
-Save the current position as a text diagram. The text diagram should be viewed
-using a monospace font.
 </para>
 </listitem>
 </varlistentry>

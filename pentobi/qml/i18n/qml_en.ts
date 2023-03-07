@@ -945,21 +945,6 @@
     </message>
 </context>
 <context>
-    <name>MenuExport</name>
-    <message>
-        <source>Export</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Image…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ASCII Art…</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>MenuGame</name>
     <message>
         <source>Game</source>
@@ -967,6 +952,10 @@
     </message>
     <message>
         <source>Game Variant…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Image…</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

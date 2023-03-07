@@ -43,7 +43,10 @@ PentobiMenu {
     MenuItem {
         action: actionSaveAs
     }
-    MenuExport { relativeWidth: 10 }
+    Action {
+        text: qsTr("Export Image…")
+        onTriggered: exportImageDialog.open()
+    }
     MenuSeparator { }
     MenuItem {
         action: actionQuit

@@ -1264,31 +1264,6 @@ bool GameModel::save(const QString& file)
     return true;
 }
 
-bool GameModel::saveAsciiArt(const QString& file)
-{
-#ifdef Q_OS_ANDROID
-    ostringstream out;
-    getBoard().write(out, false);
-    string s(out.str());
-    QByteArray array(&*s.begin(), s.size());
-    if (! AndroidUtils::save(file, array))
-    {
-        m_error = AndroidUtils::getError();
-        return false;
-    }
-    return true;
-#else
-    ofstream out(file.toLocal8Bit().constData());
-    getBoard().write(out, false);
-    if (! out)
-    {
-        m_error = QString::fromLocal8Bit(strerror(errno));
-        return false;
-    }
-    return true;
-#endif
-}
-
 template<typename T>
 bool GameModel::set(T& target, const T& value,
                     void (GameModel::*changedSignal)())

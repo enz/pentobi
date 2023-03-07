@@ -199,14 +199,6 @@ function expirePersistedUriPermissions() {
             androidUtils.releasePersistableUriPermission(uris[i])
 }
 
-function exportAsciiArt(fileUrl) {
-    var file = isAndroid ? fileUrl : getFileFromUrl(fileUrl)
-    if (! gameModel.saveAsciiArt(file))
-        showInfo(qsTr("Save failed.") + "\n" + gameModel.getError())
-    else
-        showTemporaryMessage(qsTr("File saved"))
-}
-
 function exportImage(fileUrl) {
     var board = gameView.getBoard()
     var size = Qt.size(exportImageWidth, exportImageWidth * board.height / board.width)
