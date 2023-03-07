@@ -6,7 +6,6 @@
 <file>qml/AnalyzeDialog.qml</file>
 <file>qml/AnalyzeGame.qml</file>
 <file>qml/AppearanceDialog.qml</file>
-<file>qml/AsciiArtSaveDialog.qml</file>
 <file>qml/Board.qml</file>
 <file>qml/BoardContextMenu.qml</file>
 <file>qml/ButtonApply.qml</file>
