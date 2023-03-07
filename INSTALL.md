@@ -18,7 +18,7 @@ Building Pentobi requires the following tools and libraries:
 In Debian 12, they can be installed with the command
 ```
 sudo apt install cmake docbook-xsl g++ gettext itstool librsvg2-bin \
-  make qml6-module-qt-labs-settings qml6-module-qtcore \
+  make qml6-module-qt-labs-platform qml6-module-qt-labs-settings \
   qml6-module-qtqml-workerscript qml6-module-qtquick-controls \
   qml6-module-qtquick-dialogs qml6-module-qtquick-layouts \
   qml6-module-qtquick-templates qml6-module-qtquick-window \

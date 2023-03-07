@@ -4,10 +4,10 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtCore
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
+import Qt.labs.platform
 import Qt.labs.settings
 import pentobi
 import "Main.js" as Logic
