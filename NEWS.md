@@ -9,8 +9,9 @@ Version 24.0-dev (master)
 Version 23.1-dev (v23-fixes)
 ----------------------------
 
-* Don't use Qt.labs.platform anymore. This removes the run-time
-  dependency on package qml6-module-qt-labs-platform (on Debian).
+* Don't use Qt.labs.platform anymore. This replaces the run-time
+  dependency on package qml6-module-qt-labs-platform by
+  qml6-module-qtcore (on Debian).
 
 Version 23.0 (06 Mar 2023)
 --------------------------
