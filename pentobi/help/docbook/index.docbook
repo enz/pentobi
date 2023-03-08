@@ -1227,44 +1227,4 @@ Open menu.
 </variablelist>
 </chapter>
 
-<chapter id="system">
-<title>System Requirements</title>
-<para>
-Minimum: 1&#160;GB RAM, 1&#160;GHz CPU
-</para>
-<para>
-Recommended for playing level 9: 4&#160;GB RAM, 2.5&#160;GHz dual-core or
-faster CPU
-</para>
-<para>
-Pentobi will also work on systems that do not meet the minimum requirements but
-the highest playing level will be very slow on those systems (if the CPU is too
-slow) or have a reduced playing strength (if there is not enough memory).
-</para>
-</chapter>
-
-<chapter id="license">
-<title>License</title>
-<para>
-This program is free software: you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version.
-</para>
-<para>
-This program is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-details.
-</para>
-<sect1>
-<title>Trademark Disclaimer</title>
-<para>
-The trademark Blokus and other trademarks referred to are property of their
-respective trademark holders. The trademark holders are not affiliated with the
-author of the program Pentobi.
-</para>
-</sect1>
-</chapter>
-
 </book>
