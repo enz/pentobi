@@ -94,10 +94,6 @@
         <translation>Ninguno</translation>
     </message>
     <message>
-        <source>Animations</source>
-        <translation>Animaciones</translation>
-    </message>
-    <message>
         <source>Show comment:</source>
         <translation>Mostrar comentario:</translation>
     </message>
@@ -124,28 +120,6 @@
         <source>Move number</source>
         <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
         <translation>Número de movimiento</translation>
-    </message>
-</context>
-<context>
-    <name>AsciiArtSaveDialog</name>
-    <message>
-        <source>Export ASCII Art</source>
-        <translation>Exportar arte ASCII</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>Archivos de texto</translation>
-    </message>
-</context>
-<context>
-    <name>AsciiArtSaveDialogNative</name>
-    <message>
-        <source>Export ASCII Art</source>
-        <translation>Exportar arte ASCII</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>Archivos de texto</translation>
     </message>
 </context>
 <context>
@@ -406,10 +380,6 @@
         <translation>Archivo SGF de Blokus no válido. (%1)</translation>
     </message>
     <message>
-        <source>Clipboard is empty.</source>
-        <translation>El portapapeles está vacío.</translation>
-    </message>
-    <message>
         <source>Untitled</source>
         <translation>Sin título</translation>
     </message>
@@ -519,21 +489,6 @@
 </context>
 <context>
     <name>ImageSaveDialog</name>
-    <message>
-        <source>Save Image</source>
-        <translation>Guardar imagen</translation>
-    </message>
-    <message>
-        <source>PNG image files</source>
-        <translation>Archivos de imagen PNG</translation>
-    </message>
-    <message>
-        <source>JPEG image files</source>
-        <translation>Archivos de imagen JPEG</translation>
-    </message>
-</context>
-<context>
-    <name>ImageSaveDialogNative</name>
     <message>
         <source>Save Image</source>
         <translation>Guardar imagen</translation>
@@ -977,21 +932,6 @@
     </message>
 </context>
 <context>
-    <name>MenuExport</name>
-    <message>
-        <source>Export</source>
-        <translation>Exportar</translation>
-    </message>
-    <message>
-        <source>Image…</source>
-        <translation>Imagen...</translation>
-    </message>
-    <message>
-        <source>ASCII Art…</source>
-        <translation>Arte ASCII...</translation>
-    </message>
-</context>
-<context>
     <name>MenuGame</name>
     <message>
         <source>Game</source>
@@ -1002,8 +942,8 @@
         <translation>Variante de juego...</translation>
     </message>
     <message>
-        <source>Open Clipboard</source>
-        <translation>Abrir portapapeles</translation>
+        <source>Export Image…</source>
+        <translation>Exportar imagen...</translation>
     </message>
 </context>
 <context>
@@ -1110,13 +1050,6 @@
     </message>
 </context>
 <context>
-    <name>NewFolderDialog</name>
-    <message>
-        <source>Folder name:</source>
-        <translation>Nombre de la carpeta:</translation>
-    </message>
-</context>
-<context>
     <name>OpenDialog</name>
     <message>
         <source>Open</source>
@@ -1126,48 +1059,9 @@
         <source>Blokus games</source>
         <translation>Partidas de Blokus</translation>
     </message>
-</context>
-<context>
-    <name>OpenDialogNative</name>
-    <message>
-        <source>Open</source>
-        <translation>Abrir</translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation>Partidas de Blokus</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>¿Sobrescribir archivo?</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Abrir</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Guardar</translation>
-    </message>
     <message>
         <source>All files</source>
         <translation>Todos los archivos</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiMenuItem</name>
-    <message>
-        <source>Ctrl</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Ctrl</translation>
-    </message>
-    <message>
-        <source>Shift</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Mayús</translation>
     </message>
 </context>
 <context>
@@ -1359,17 +1253,6 @@
 </context>
 <context>
     <name>SaveDialog</name>
-    <message>
-        <source>Save</source>
-        <translation>Guardar</translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation>Partidas de Blokus</translation>
-    </message>
-</context>
-<context>
-    <name>SaveDialogNative</name>
     <message>
         <source>Save</source>
         <translation>Guardar</translation>
