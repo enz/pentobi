@@ -31,8 +31,6 @@ public:
 
     Q_INVOKABLE void openOpenDialog(const QString& suggestedUri);
 
-    Q_INVOKABLE void openTextSaveDialog();
-
     Q_INVOKABLE void openSaveDialog(const QString& suggestedUri,
                                     const QString& suggestedName);
 
@@ -68,8 +66,6 @@ signals:
     void openDialogAccepted(const QString& uri, const QString& displayName);
 
     void saveDialogAccepted(const QString& uri, const QString& displayName);
-
-    void textSaveDialogAccepted(const QString& uri);
 
 private:
     static QString m_error;

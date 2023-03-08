@@ -463,18 +463,6 @@ void AndroidUtils::openOpenDialog([[maybe_unused]] const QString& suggestedUri)
 #endif
 }
 
-void AndroidUtils::openTextSaveDialog()
-{
-#ifdef Q_OS_ANDROID
-    startDocumentActivity("ACTION_CREATE_DOCUMENT", "text/plain", "", "",
-                          false,
-                          [this](const QString& uri,
-                          [[maybe_unused]]const QString& displayName) {
-        emit textSaveDialogAccepted(uri);
-    });
-#endif
-}
-
 void AndroidUtils::openSaveDialog(
         [[maybe_unused]] const QString& suggestedUri,
         [[maybe_unused]] const QString& suggestedName)

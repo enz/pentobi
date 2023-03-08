@@ -163,7 +163,6 @@ ApplicationWindow {
             (uri, displayName) => Logic.openFile(uri, displayName)
         onSaveDialogAccepted:
             (uri, displayName) => Logic.saveFile(uri, displayName)
-        onTextSaveDialogAccepted: uri => Logic.exportAsciiArt(uri)
     }
     SyncSettings { id: syncSettings }
     DialogLoader { id: aboutDialog; url: "AboutDialog.qml" }
@@ -176,7 +175,6 @@ ApplicationWindow {
     DialogLoader { id: openDialog; url: "OpenDialog.qml" }
     DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
     DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
-    DialogLoader { id: asciiArtSaveDialog; url: "AsciiArtSaveDialog.qml" }
     DialogLoader { id: gotoMoveDialog; url: "GotoMoveDialog.qml" }
     DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
     DialogLoader { id: saveDialog; url: "SaveDialog.qml" }
