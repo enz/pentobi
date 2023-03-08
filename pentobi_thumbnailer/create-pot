@@ -1,5 +1,0 @@
-#!/bin/bash
-
-cd $(dirname "$0")
-itstool -i ../pentobi/unix/manpage.its pentobi-thumbnailer-manpage.docbook.in \
-  > pentobi-thumbnailer.pot

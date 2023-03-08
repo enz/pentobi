@@ -162,40 +162,6 @@ add_custom_command(OUTPUT io.sourceforge.pentobi.xml
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.xml"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/mime/packages")
 
-# Man page
-
-set(man_files "pentobi.6")
-foreach(lang ${linguas})
-    list(APPEND man_files "${lang}/pentobi.6")
-endforeach()
-
-configure_file(pentobi-manpage.docbook.in pentobi-manpage.docbook @ONLY)
-add_custom_command(OUTPUT pentobi.6
-    COMMAND "${XSLTPROC}" --nonet
-    "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl" pentobi-manpage.docbook
-    DEPENDS manpage.xsl "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
-    )
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi.6"
-    DESTINATION "${CMAKE_INSTALL_MANDIR}/man6")
-foreach(lang ${linguas})
-    add_custom_command(OUTPUT ${lang}/pentobi-manpage.docbook
-        COMMAND ${CMAKE_COMMAND} -E make_directory ${lang}
-        COMMAND "${ITSTOOL}" -l ${lang} -m ${lang}.mo
-        -o ${lang}/pentobi-manpage.docbook
-        -i "${CMAKE_CURRENT_SOURCE_DIR}/manpage.its"
-        pentobi-manpage.docbook
-        DEPENDS ${lang}.mo "${CMAKE_CURRENT_BINARY_DIR}/pentobi-manpage.docbook"
-        )
-    add_custom_command(OUTPUT ${lang}/pentobi.6
-        COMMAND "${XSLTPROC}" --nonet -o ${lang}/
-        "${CMAKE_CURRENT_SOURCE_DIR}/manpage.xsl"
-        ${lang}/pentobi-manpage.docbook
-        DEPENDS manpage.xsl ${lang}/pentobi-manpage.docbook
-        )
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${lang}/pentobi.6"
-        DESTINATION "${CMAKE_INSTALL_MANDIR}/${lang}/man6")
-endforeach()
-
 # Target
 
 add_custom_target(pentobi-unix ALL DEPENDS
@@ -218,5 +184,4 @@ add_custom_target(pentobi-unix ALL DEPENDS
     pentobi-64.png
     pentobi-128.png
     pentobi-256.png
-    ${man_files}
     )

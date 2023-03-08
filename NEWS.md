@@ -4,6 +4,11 @@ Pentobi Release Notes
 Version 24.0-dev (master)
 -------------------------
 
+* Don't include man pages anymore because it has become less common to
+  include them for desktop applications, removes the build-time
+  dependency on xsltproc and docbook-xsl, and reduces the amount of
+  translation text. Use --help or --help-all to list the command line
+  options for pentobi and pentobi-thumbnailer.
 * Don't use Qt.labs.platform anymore. This replaces the run-time
   dependency on package qml6-module-qt-labs-platform by
   qml6-module-qtcore (on Debian).
