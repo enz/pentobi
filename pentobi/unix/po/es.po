@@ -6,6 +6,7 @@ msgid ""
 msgstr ""
 "Last-Translator: Francisco Zamorano <pacozamo@gmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/markus-enzenberger/teams/89074/es/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Language: es\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
