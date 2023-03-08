@@ -10,7 +10,6 @@ foreach(lang ${linguas})
         DEPENDS po/${lang}.po
         )
     list(APPEND po_files po/${lang}.po)
-    list(APPEND mo_files ${lang}.mo)
 endforeach()
 
 # Icons
@@ -154,10 +153,11 @@ install(
 # Shared MIME info
 
 add_custom_command(OUTPUT io.sourceforge.pentobi.xml
-    COMMAND "${ITSTOOL}"
-    -j "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.xml.in"
-    -o io.sourceforge.pentobi.xml ${mo_files}
-    DEPENDS io.sourceforge.pentobi.xml.in ${mo_files} po/LINGUAS
+    COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" --xml
+    -d "${CMAKE_CURRENT_SOURCE_DIR}/po"
+    --template "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.xml.in"
+    -o io.sourceforge.pentobi.xml
+    DEPENDS io.sourceforge.pentobi.xml.in ${po_files} po/LINGUAS
     )
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.xml"
     DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/mime/packages")

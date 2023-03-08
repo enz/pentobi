@@ -7,6 +7,8 @@ Version 24.0-dev (master)
 * Don't use Qt.labs.platform anymore. This replaces the run-time
   dependency on package qml6-module-qt-labs-platform by
   qml6-module-qtcore (on Debian).
+* Assume that a recent version of package shared-mime-info is installed
+  at build time that includes shared-mime-info.its.
 * Removed menu item Export Ascii Art.
 
 Version 23.1-dev (v23-fixes)

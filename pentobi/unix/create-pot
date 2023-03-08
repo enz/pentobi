@@ -3,6 +3,5 @@
 cd $(dirname "$0")
 itstool -i manpage.its pentobi-manpage.docbook.in > pentobi-unix.pot
 xgettext -j -o pentobi-unix.pot --omit-header --add-comments="TRANSLATORS:" \
-  io.sourceforge.pentobi.appdata.xml.in io.sourceforge.pentobi.desktop.in
-xgettext -j -o pentobi-unix.pot --omit-header --its=mime.its \
+  io.sourceforge.pentobi.appdata.xml.in io.sourceforge.pentobi.desktop.in \
   io.sourceforge.pentobi.xml.in
