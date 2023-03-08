@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-03-01 17:33+0100\n"
+"POT-Creation-Date: 2023-03-08 10:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -208,38 +208,32 @@ msgstr ""
 
 #: io.sourceforge.pentobi.appdata.xml.in:20
 msgid ""
-"System requirements: 1 GB RAM, 1 GHz CPU (4 GB RAM, 2.5 GHz dual-core or "
-"faster CPU recommended for playing level 9)."
-msgstr ""
-
-#: io.sourceforge.pentobi.appdata.xml.in:24
-msgid ""
 "Trademark disclaimer: The trademark Blokus and other trademarks referred to "
 "are property of their respective trademark holders. The trademark holders "
 "are not affiliated with the author of the program Pentobi."
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:35
+#: io.sourceforge.pentobi.appdata.xml.in:31
 msgid "Game variant Classic"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:40
+#: io.sourceforge.pentobi.appdata.xml.in:36
 msgid "Game variant Duo"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:45
+#: io.sourceforge.pentobi.appdata.xml.in:41
 msgid "Game variant Trigon"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:50
+#: io.sourceforge.pentobi.appdata.xml.in:46
 msgid "Game variant Nexos"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:55
+#: io.sourceforge.pentobi.appdata.xml.in:51
 msgid "Game variant GembloQ"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:62
+#: io.sourceforge.pentobi.appdata.xml.in:60
 msgid "Markus Enzenberger"
 msgstr ""
 
