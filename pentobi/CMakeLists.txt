@@ -156,6 +156,8 @@ if(ANDROID)
     target_link_libraries(pentobi PRIVATE Qt::CorePrivate)
     set_property(TARGET pentobi APPEND PROPERTY
         QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
+    set_property(TARGET pentobi APPEND PROPERTY
+        QT_ANDROID_TARGET_SDK_VERSION 31)
 else()
     install(TARGETS pentobi)
 endif()
