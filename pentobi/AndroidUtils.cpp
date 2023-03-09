@@ -58,7 +58,7 @@ QJniObject getContentResolver()
                 "getContentResolver", "()Landroid/content/ContentResolver;");
 }
 
-QString getDisplayName(QJniObject uri)
+QString getDisplayName(const QJniObject& uri)
 {
     auto contentResolver = getContentResolver();
     if (! contentResolver.isValid())
