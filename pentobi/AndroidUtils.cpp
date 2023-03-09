@@ -45,8 +45,7 @@ struct AutoClose
     }
 };
 
-void takePersistableUriPermission(const QJniObject& intent,
-                                  const QJniObject& uri);
+void takePersistableUriPermission(const QJniObject& uri);
 
 QJniObject getContext()
 {
@@ -183,26 +182,23 @@ void startDocumentActivity(
         if (! uriString.isValid())
             return;
         if (takePersistablePermission)
-            takePersistableUriPermission(data, uri);
+            takePersistableUriPermission(uri);
         auto displayName = getDisplayName(uri);
         callback(uriString.toString(), displayName);
     });
 }
 
-void takePersistableUriPermission(const QJniObject& intent,
-                                  const QJniObject& uri)
+void takePersistableUriPermission(const QJniObject& uri)
 {
     auto contentResolver = getContentResolver();
     if (! contentResolver.isValid())
         return;
-    auto flags = intent.callMethod<jint>("getFlags");
-    auto flagRead = QJniObject::getStaticField<jint>(
-                "android/content/Intent", "FLAG_GRANT_READ_URI_PERMISSION");
-    auto flagWrite = QJniObject::getStaticField<jint>(
-                "android/content/Intent", "FLAG_GRANT_WRITE_URI_PERMISSION");
     contentResolver.callMethod<void>(
                 "takePersistableUriPermission", "(Landroid/net/Uri;I)V",
-                uri.object(), flags & (flagRead | flagWrite));
+                uri.object(),
+                0x00000001 // FLAG_GRANT_READ_URI_PERMISSION
+                | 0x00000002 // FLAG_GRANT_WRITE_URI_PERMISSION
+                );
 }
 
 #endif
