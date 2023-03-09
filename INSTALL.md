@@ -49,6 +49,3 @@ this can be done by running
 sudo update-mime-database /usr/local/share/mime
 sudo update-desktop-database /usr/local/share/applications
 ```
-Depending on your distribution and desktop environment, it might be
-necessary to run more commands, for example to update the GTK icon
-cache.
