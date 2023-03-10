@@ -158,7 +158,6 @@ ApplicationWindow {
     AndroidUtils {
         id: androidUtils
 
-        onImageSaveDialogAccepted: uri => Logic.exportImage(uri)
         onOpenDialogAccepted:
             (uri, displayName) => Logic.openFile(uri, displayName)
         onSaveDialogAccepted:
