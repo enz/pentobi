@@ -27,11 +27,6 @@ public:
 
     Q_INVOKABLE static void initTheme(QColor colorBackground);
 
-    /** Open a native file dialog for saving a game.
-        Note that we cannot migrate this to QtQuick.Dialogs.FileDialog because
-        we need to call ACTION_CREATE_DOCUMENT with type
-        application/x-blokus-sgf and Qt automatically sets the type using
-        QMimeDatabase, which knows only standard types. */
     Q_INVOKABLE void openSaveDialog(const QString& suggestedUri,
                                     const QString& suggestedName);
 

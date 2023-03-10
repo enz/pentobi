@@ -122,8 +122,8 @@ void setExtraInitialUri(QJniObject& intent, const QString& uri)
 }
 
 void startDocumentActivity(
-        const char* actionField, const QString& type,
-        const QString& extraInitialUri, const QString& extraTitle,
+        const char* actionField, const QString& extraInitialUri,
+        const QString& extraTitle,
         const function<void(const QString& uri,const QString& displayNamei)>&
         callback)
 {
@@ -143,7 +143,7 @@ void startDocumentActivity(
                 "addCategory",
                 "(Ljava/lang/String;)Landroid/content/Intent;",
                 category.object<jstring>());
-    auto typeObj = QJniObject::fromString(type);
+    auto typeObj = QJniObject::fromString("*/*");
     intent.callObjectMethod(
                 "setType",
                 "(Ljava/lang/String;)Landroid/content/Intent;",
@@ -436,7 +436,7 @@ void AndroidUtils::openSaveDialog(
         [[maybe_unused]] const QString& suggestedName)
 {
 #ifdef Q_OS_ANDROID
-    startDocumentActivity("ACTION_CREATE_DOCUMENT", "application/x-blokus-sgf",
+    startDocumentActivity("ACTION_CREATE_DOCUMENT",
                           suggestedUri, suggestedName,
                           [this](const QString& uri,
                           const QString& displayName) {
