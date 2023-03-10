@@ -10,10 +10,7 @@ import "Main.js" as Logic
 FileDialog {
     title: qsTr("Save Image")
     defaultSuffix: "png"
-    nameFilters: [
-        qsTr("PNG image files") + " (*.png)",
-        qsTr("JPEG image files") + " (*.jpg *.jpeg)"
-    ]
+    nameFilters: [ qsTr("PNG image files") + " (*.png)" ]
     currentFolder: rootWindow.folder
     fileMode: FileDialog.SaveFile
     onAccepted: {
