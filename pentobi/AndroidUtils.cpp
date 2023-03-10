@@ -368,7 +368,9 @@ bool AndroidUtils::save([[maybe_unused]]const QString& uri,
         return false;
     auto outputStream = contentResolver.callObjectMethod(
                 "openOutputStream",
-                "(Landroid/net/Uri;)Ljava/io/OutputStream;", uriObj.object());
+                "(Landroid/net/Uri;Ljava/lang/String;)Ljava/io/OutputStream;",
+                uriObj.object(),
+                QJniObject::fromString("wt").object<jstring>());
     QJniEnvironment env;
     if (checkException())
         return false;
