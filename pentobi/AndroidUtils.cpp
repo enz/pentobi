@@ -45,8 +45,6 @@ struct AutoClose
     }
 };
 
-void takePersistableUriPermission(const QJniObject& uri);
-
 QJniObject getContext()
 {
     return {QAndroidApplication::context()};
@@ -100,102 +98,6 @@ QJniObject getUriObj(const QString& uri)
                 "android/net/Uri", "parse",
                 "(Ljava/lang/String;)Landroid/net/Uri;",
                 uriString.object<jstring>());
-}
-
-void setExtraInitialUri(QJniObject& intent, const QString& uri)
-{
-    QJniEnvironment env;
-    auto extraInitialUriObj =
-            QJniObject::getStaticObjectField<jstring>(
-                "android/provider/DocumentsContract", "EXTRA_INITIAL_URI");
-    // Might throw because EXTRA_INITIAL_URI needs Android 8.0
-    if (env->ExceptionCheck())
-        return;
-    auto value = getUriObj(uri);
-    if (! value.isValid())
-        return;
-    intent.callObjectMethod(
-                "putExtra",
-                "(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;",
-                extraInitialUriObj.object<jstring>(),
-                value.object<jstring>());
-}
-
-void startDocumentActivity(
-        const char* actionField, const QString& extraInitialUri,
-        const QString& extraTitle,
-        const function<void(const QString& uri,const QString& displayNamei)>&
-        callback)
-{
-    auto action = QJniObject::getStaticObjectField<jstring>(
-                "android/content/Intent", actionField);
-    if (! action.isValid())
-        return;
-    QJniObject intent("android/content/Intent", "(Ljava/lang/String;)V",
-                             action.object<jstring>());
-    if (! intent.isValid())
-        return;
-    auto category = QJniObject::getStaticObjectField<jstring>(
-                "android/content/Intent", "CATEGORY_OPENABLE");
-    if (! category.isValid())
-        return;
-    intent.callObjectMethod(
-                "addCategory",
-                "(Ljava/lang/String;)Landroid/content/Intent;",
-                category.object<jstring>());
-    auto typeObj = QJniObject::fromString("*/*");
-    intent.callObjectMethod(
-                "setType",
-                "(Ljava/lang/String;)Landroid/content/Intent;",
-                typeObj.object<jstring>());
-    if (! extraTitle.isEmpty())
-    {
-        auto extraTitleObj = QJniObject::getStaticObjectField<jstring>(
-                    "android/content/Intent", "EXTRA_TITLE");
-        if (! extraTitleObj.isValid())
-            return;
-        auto extraTitleValue = QJniObject::fromString(extraTitle);
-        intent.callObjectMethod(
-                    "putExtra",
-                    "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;",
-                    extraTitleObj.object<jstring>(),
-                    extraTitleValue.object<jstring>());
-    }
-    if (! extraInitialUri.isEmpty() && ! QUrl(extraInitialUri).isRelative())
-        setExtraInitialUri(intent, extraInitialUri);
-    QtAndroidPrivate::startActivity(
-                intent, 0,
-                [callback](int, int result, const QJniObject& data) {
-        auto ok = QJniObject::getStaticField<jint>(
-                    "android/app/Activity", "RESULT_OK");
-        if (result != ok)
-            return;
-        if (! data.isValid())
-            return;
-        auto uri = data.callObjectMethod("getData", "()Landroid/net/Uri;");
-        if (! uri.isValid())
-            return;
-        auto uriString =
-                uri.callObjectMethod("toString", "()Ljava/lang/String;");
-        if (! uriString.isValid())
-            return;
-        takePersistableUriPermission(uri);
-        auto displayName = getDisplayName(uri);
-        callback(uriString.toString(), displayName);
-    });
-}
-
-void takePersistableUriPermission(const QJniObject& uri)
-{
-    auto contentResolver = getContentResolver();
-    if (! contentResolver.isValid())
-        return;
-    contentResolver.callMethod<void>(
-                "takePersistableUriPermission", "(Landroid/net/Uri;I)V",
-                uri.object(),
-                0x00000001 // FLAG_GRANT_READ_URI_PERMISSION
-                | 0x00000002 // FLAG_GRANT_WRITE_URI_PERMISSION
-                );
 }
 
 #endif
@@ -430,20 +332,6 @@ bool AndroidUtils::open(
     return true;
 }
 #endif
-
-void AndroidUtils::openSaveDialog(
-        [[maybe_unused]] const QString& suggestedUri,
-        [[maybe_unused]] const QString& suggestedName)
-{
-#ifdef Q_OS_ANDROID
-    startDocumentActivity("ACTION_CREATE_DOCUMENT",
-                          suggestedUri, suggestedName,
-                          [this](const QString& uri,
-                          const QString& displayName) {
-        emit saveDialogAccepted(uri, displayName);
-    });
-#endif
-}
 
 void AndroidUtils::releasePersistableUriPermission(
         [[maybe_unused]]const QString& uri)

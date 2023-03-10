@@ -693,22 +693,10 @@ function save() {
 }
 
 function saveAs() {
-    if (isAndroid) {
-        var file = gameModel.file
-        var name
-        if (ratingModel.getGameNumberOfFile(file) > 0)
-            name = file.substring(file.lastIndexOf("/") + 1)
-        else if (displayName !== "")
-            name = displayName
-        else
-            name = gameModel.suggestGameFileName("")
-        androidUtils.openSaveDialog(file, name)
-    } else {
-        var dialog = saveDialog.get()
-        dialog.selectedFile =
-                folder + "/" + gameModel.suggestGameFileName(folder)
-        dialog.open()
-    }
+    var dialog = saveDialog.get()
+    dialog.selectedFile =
+            folder + "/" + gameModel.suggestGameFileName(folder)
+    dialog.open()
 }
 
 function saveCurrentFile() {

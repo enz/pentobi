@@ -27,9 +27,6 @@ public:
 
     Q_INVOKABLE static void initTheme(QColor colorBackground);
 
-    Q_INVOKABLE void openSaveDialog(const QString& suggestedUri,
-                                    const QString& suggestedName);
-
     Q_INVOKABLE static QStringList getPersistedUriPermissions();
 
     Q_INVOKABLE static void releasePersistableUriPermission(
@@ -55,9 +52,6 @@ public:
 
     static bool open(const QString& uri, QByteArray& sgf);
 #endif
-
-signals:
-    void saveDialogAccepted(const QString& uri, const QString& displayName);
 
 private:
     static QString m_error;

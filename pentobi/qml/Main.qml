@@ -157,9 +157,6 @@ ApplicationWindow {
     }
     AndroidUtils {
         id: androidUtils
-
-        onSaveDialogAccepted:
-            (uri, displayName) => Logic.saveFile(uri, displayName)
     }
     SyncSettings { id: syncSettings }
     DialogLoader { id: aboutDialog; url: "AboutDialog.qml" }

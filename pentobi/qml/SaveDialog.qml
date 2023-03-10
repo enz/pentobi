@@ -15,6 +15,10 @@ FileDialog {
     fileMode: FileDialog.SaveFile
     onAccepted: {
         rootWindow.folder = currentFolder
-        Logic.saveFile(Logic.getFileFromUrl(selectedFile), "")
+        if (isAndroid)
+            Logic.saveFile(selectedFile,
+                           androidUtils.getDisplayName(selectedFile))
+        else
+            Logic.saveFile(Logic.getFileFromUrl(selectedFile), "")
     }
 }
