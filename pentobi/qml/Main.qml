@@ -158,8 +158,6 @@ ApplicationWindow {
     AndroidUtils {
         id: androidUtils
 
-        onOpenDialogAccepted:
-            (uri, displayName) => Logic.openFile(uri, displayName)
         onSaveDialogAccepted:
             (uri, displayName) => Logic.saveFile(uri, displayName)
     }

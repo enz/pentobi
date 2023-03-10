@@ -10,13 +10,14 @@ import "Main.js" as Logic
 
 FileDialog {
     title: qsTr("Open")
-    nameFilters: [
-        qsTr("Blokus games") + " (*.blksgf)",
-        qsTr("All files") + " (*)" ]
+    nameFilters: [ qsTr("Blokus games") + " (*.blksgf)" ]
     currentFolder: rootWindow.folder
     fileMode: FileDialog.OpenFile
     onAccepted: {
         rootWindow.folder = currentFolder
-        Logic.openFileUrl(selectedFile)
+        if (isAndroid)
+            Logic.openFile(selectedFile, "")
+        else
+            Logic.openFileUrl(selectedFile)
     }
 }

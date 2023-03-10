@@ -27,8 +27,6 @@ public:
 
     Q_INVOKABLE static void initTheme(QColor colorBackground);
 
-    Q_INVOKABLE void openOpenDialog(const QString& suggestedUri);
-
     /** Open a native file dialog for saving a game.
         Note that we cannot migrate this to QtQuick.Dialogs.FileDialog because
         we need to call ACTION_CREATE_DOCUMENT with type
@@ -64,8 +62,6 @@ public:
 #endif
 
 signals:
-    void openDialogAccepted(const QString& uri, const QString& displayName);
-
     void saveDialogAccepted(const QString& uri, const QString& displayName);
 
 private:

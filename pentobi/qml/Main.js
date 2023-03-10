@@ -496,10 +496,7 @@ function open() {
 }
 
 function openNoVerify() {
-    if (isAndroid)
-        androidUtils.openOpenDialog(gameModel.file)
-    else
-        openDialog.open()
+    openDialog.open()
 }
 
 function openFile(file, displayName) {

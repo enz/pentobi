@@ -431,17 +431,6 @@ bool AndroidUtils::open(
 }
 #endif
 
-void AndroidUtils::openOpenDialog([[maybe_unused]] const QString& suggestedUri)
-{
-#ifdef Q_OS_ANDROID
-    startDocumentActivity("ACTION_OPEN_DOCUMENT", "*/*", suggestedUri, "",
-                          [this](const QString& uri,
-                          const QString& displayName) {
-        emit openDialogAccepted(uri, displayName);
-    });
-#endif
-}
-
 void AndroidUtils::openSaveDialog(
         [[maybe_unused]] const QString& suggestedUri,
         [[maybe_unused]] const QString& suggestedName)
