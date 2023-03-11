@@ -189,7 +189,7 @@ public:
 
     Q_INVOKABLE bool loadAutoSave();
 
-    Q_INVOKABLE bool save(const QString& file);
+    Q_INVOKABLE bool save(const QString& fileName);
 
     Q_INVOKABLE void setMoveAnnotation(int moveNumber,
                                        const QString& annotation);

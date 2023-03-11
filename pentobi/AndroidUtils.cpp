@@ -273,40 +273,4 @@ void AndroidUtils::releasePersistableUriPermission(
 #endif
 }
 
-bool AndroidUtils::save([[maybe_unused]]const QString& uri,
-                        [[maybe_unused]]const QByteArray& array)
-{
-#ifdef Q_OS_ANDROID
-    m_error.clear();
-    auto contentResolver = getContentResolver();
-    if (! contentResolver.isValid())
-        return false;
-    auto uriObj = getUriObj(uri);
-    if (! uriObj.isValid())
-        return false;
-    auto outputStream = contentResolver.callObjectMethod(
-                "openOutputStream",
-                "(Landroid/net/Uri;Ljava/lang/String;)Ljava/io/OutputStream;",
-                uriObj.object(),
-                QJniObject::fromString("wt"_L1).object<jstring>());
-    QJniEnvironment env;
-    if (checkException())
-        return false;
-    if (! outputStream.isValid())
-        return false;
-    auto byteArray = env->NewByteArray(array.size());
-    env->SetByteArrayRegion(byteArray, 0, array.size(),
-                            reinterpret_cast<const jbyte*>(array.constData()));
-    outputStream.callMethod<void>("write", "([B)V", byteArray);
-    if (checkException())
-        return false;
-    outputStream.callMethod<void>("close");
-    if (env->ExceptionCheck())
-        return false;
-    return true;
-#else
-    return false;
-#endif
-}
-
 //-----------------------------------------------------------------------------

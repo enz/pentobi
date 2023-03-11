@@ -18,9 +18,6 @@
 #include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
-#ifdef Q_OS_ANDROID
-#include "AndroidUtils.h"
-#endif
 
 using namespace Qt::StringLiterals;
 using libboardgame_base::get_letter_coord;
@@ -1186,30 +1183,14 @@ void GameModel::restoreAutoSaveLocation()
     gotoNode(*node);
 }
 
-bool GameModel::save(const QString& file)
+bool GameModel::save(const QString& fileName)
 {
     auto sgf = getSgf(1);
-#ifdef Q_OS_ANDROID
-    if (! QUrl(file).isRelative())
-    {
-        if (! AndroidUtils::save(file, sgf))
-        {
-            m_error = AndroidUtils::getError();
-            return false;
-        }
-    }
-    else
-#endif
-    {
-        ofstream out(file.toLocal8Bit().constData());
-        out.write(sgf.constData(), sgf.size());
-        if (! out)
-        {
-            m_error = QString::fromLocal8Bit(strerror(errno));
-            return false;
-        }
-    }
-    setFile(file);
+    QFile file(fileName);
+    if (! file.open(QIODevice::WriteOnly | QIODevice::Truncate))
+        return false;
+    file.write(sgf);
+    setFile(fileName);
     setIsModified(false);
     return true;
 }
