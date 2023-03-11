@@ -21,8 +21,6 @@ class AndroidUtils
 public:
     using QObject::QObject;
 
-    Q_INVOKABLE static bool checkExists(const QString& file);
-
     Q_INVOKABLE static QString getDisplayName(const QString& uri);
 
     Q_INVOKABLE static void initTheme(QColor colorBackground);

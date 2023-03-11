@@ -6,8 +6,6 @@
 
 #include "AndroidUtils.h"
 
-#include <QFileInfo>
-
 #ifdef Q_OS_ANDROID
 
 #include <QBuffer>
@@ -125,48 +123,6 @@ bool AndroidUtils::checkException()
     return true;
 }
 #endif
-
-bool AndroidUtils::checkExists(const QString& file)
-{
-#ifdef Q_OS_ANDROID
-    if (QUrl(file).isRelative())
-        return QFileInfo::exists(file);
-    // Note: using ContentResolver::query() on persisted URIs without calling
-    // ACTION_OPEN_DOCUMENT first only works on some devices. Maybe try
-    // DocumentFile.exist(DocumentFile.fromSingleUri()) once we require a
-    // Qt version that supports androidx (see also QTBUG-73904).
-    auto contentResolver = getContentResolver();
-    if (! contentResolver.isValid())
-        return false;
-    auto uriObj = getUriObj(file);
-    if (! uriObj.isValid())
-        return false;
-    QJniEnvironment env;
-    auto stringClass = env->FindClass("java/lang/String");
-    auto projection = env->NewObjectArray(1, stringClass, nullptr);
-    auto column = QJniObject::getStaticObjectField<jstring>(
-                "android/provider/DocumentsContract$Document",
-                "COLUMN_DOCUMENT_ID");
-    if (! column.isValid())
-        return false;
-    env->SetObjectArrayElement(projection, 0, column.object());
-    auto cursor = contentResolver.callObjectMethod(
-                "query",
-                "(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;"
-                "[Ljava/lang/String;Ljava/lang/String;)"
-                "Landroid/database/Cursor;",
-                uriObj.object(), projection, nullptr, nullptr, nullptr);
-    if (env->ExceptionCheck())
-        return false;
-    if (! cursor.isValid())
-        return false;
-    AutoClose autoClose{cursor};
-    auto count = cursor.callMethod<jint>("getCount");
-    return count > 0;
-#else
-    return QFileInfo::exists(file);
-#endif
-}
 
 void AndroidUtils::exit()
 {
