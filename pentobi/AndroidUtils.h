@@ -34,9 +34,6 @@ public:
 
     Q_INVOKABLE static bool save(const QString& uri, const QByteArray& array);
 
-    Q_INVOKABLE static bool saveImage(const QString& uri,
-                                      const QVariant& image);
-
     /** Exit application and avoid crash due to QTBUG-85449.
         On Android, this exits the application with java.lang.System.exit(),
         which avoids crashes on some devices due to QTBUG-85449. Global

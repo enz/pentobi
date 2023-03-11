@@ -203,12 +203,7 @@ function exportImage(fileUrl) {
     var board = gameView.getBoard()
     var size = Qt.size(exportImageWidth, exportImageWidth * board.height / board.width)
     if (! board.grabImageTarget.grabToImage(function(result) {
-        var ok
-        if (isAndroid)
-            ok = androidUtils.saveImage(fileUrl, result.image)
-        else
-            ok = result.saveToFile(getFileFromUrl(fileUrl))
-        if (! ok)
+        if (! result.saveToFile(getFileFromUrl(fileUrl)))
             showInfo(qsTr("Saving image failed or unsupported image format"))
         else
             showTemporaryMessage(qsTr("Image saved"))

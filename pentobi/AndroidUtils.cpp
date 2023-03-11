@@ -391,21 +391,4 @@ bool AndroidUtils::save([[maybe_unused]]const QString& uri,
 #endif
 }
 
-bool AndroidUtils::saveImage([[maybe_unused]]const QString& uri,
-                             [[maybe_unused]]const QVariant& image)
-{
-#ifdef Q_OS_ANDROID
-    auto img = image.value<QImage>();
-    if (img.isNull())
-        return false;
-    QByteArray array;
-    QBuffer buffer(&array);
-    buffer.open(QIODevice::WriteOnly);
-    img.save(&buffer, "PNG");
-    return save(uri, array);
-#else
-    return false;
-#endif
-}
-
 //-----------------------------------------------------------------------------
