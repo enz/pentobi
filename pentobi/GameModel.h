@@ -147,8 +147,6 @@ public:
 
     Q_INVOKABLE void nextColor();
 
-    Q_INVOKABLE bool openByteArray(const QByteArray& byteArray);
-
     Q_INVOKABLE bool openFile(const QString& file);
 
     Q_INVOKABLE PieceModel* preparePiece(GameMove* move);
@@ -607,6 +605,8 @@ private:
     void initGame(Variant variant);
 
     void initGameVariant(Variant variant);
+
+    bool openByteArray(const QByteArray& byteArray);
 
     bool openStream(istream& in);
 
