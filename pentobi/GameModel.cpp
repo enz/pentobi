@@ -1457,25 +1457,6 @@ QString GameModel::suggestGameFileName(const QUrl& folder)
     return suggestFileName(folder, QStringLiteral("blksgf"));
 }
 
-QString GameModel::suggestNewFolderName(const QUrl& folder)
-{
-    auto localFolder = folder.toLocalFile();
-    QString file = localFolder;
-    if (! file.endsWith('/'))
-        file.append('/');
-    file.append(tr("New Folder"));
-    if (QFileInfo::exists(file))
-        for (unsigned i = 1; ; ++i)
-        {
-            //: The argument is a number, which will be increased if a
-            //: folder with the same name already exists
-            file = localFolder + '/' + tr("New Folder %1").arg(i);
-            if (! QFileInfo::exists(file))
-                break;
-        }
-    return QUrl::fromLocalFile(file).fileName();
-}
-
 void GameModel::truncate()
 {
     if (! m_game.get_current().has_parent())
