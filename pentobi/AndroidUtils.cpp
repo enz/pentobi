@@ -26,6 +26,7 @@
 
 using namespace std;
 #ifdef Q_OS_ANDROID
+using namespace Qt::StringLiterals;
 using QNativeInterface::QAndroidApplication;
 #endif
 
@@ -370,7 +371,7 @@ bool AndroidUtils::save([[maybe_unused]]const QString& uri,
                 "openOutputStream",
                 "(Landroid/net/Uri;Ljava/lang/String;)Ljava/io/OutputStream;",
                 uriObj.object(),
-                QJniObject::fromString("wt").object<jstring>());
+                QJniObject::fromString("wt"_L1).object<jstring>());
     QJniEnvironment env;
     if (checkException())
         return false;
