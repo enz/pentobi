@@ -147,7 +147,9 @@ public:
 
     Q_INVOKABLE void nextColor();
 
-    Q_INVOKABLE bool openFile(const QString& name);
+    Q_INVOKABLE bool openByteArray(const QByteArray& byteArray);
+
+    Q_INVOKABLE bool openFile(const QString& file);
 
     Q_INVOKABLE PieceModel* preparePiece(GameMove* move);
 
@@ -189,7 +191,7 @@ public:
 
     Q_INVOKABLE bool loadAutoSave();
 
-    Q_INVOKABLE bool save(const QString& fileName);
+    Q_INVOKABLE bool save(const QString& file);
 
     Q_INVOKABLE void setMoveAnnotation(int moveNumber,
                                        const QString& annotation);
@@ -206,6 +208,10 @@ public:
 
     Q_INVOKABLE QString getResultMessage();
 
+    Q_INVOKABLE static bool checkFileExists(const QString& file);
+
+    Q_INVOKABLE bool checkFileModifiedOutside();
+
     Q_INVOKABLE bool checkAutosaveModifiedOutside();
 
     Q_INVOKABLE GameMove* findMoveNext();
@@ -218,6 +224,13 @@ public:
     Q_INVOKABLE PieceModel* nextPiece(PieceModel* currentPickedPiece);
 
     Q_INVOKABLE PieceModel* previousPiece(PieceModel* currentPickedPiece);
+
+    Q_INVOKABLE static QString suggestFileName(const QUrl& folder,
+                                               const QString& fileEnding);
+
+    Q_INVOKABLE QString suggestGameFileName(const QUrl& folder);
+
+    Q_INVOKABLE static QString suggestNewFolderName(const QUrl& folder);
 
     Q_INVOKABLE QString getError() const { return m_error; }
 
@@ -475,6 +488,15 @@ private:
 
     QString m_round;
 
+    // Last-modified date of current file.
+    // Uses MSecsSinceEpoch because storing QDateTime as QVariant in QSettings
+    // can trigger a bug in Qt 5.15 that sometimes causes crashes in
+    // operator<<(QDataStream&, QTimeZone const&) invoked by
+    // QSettings::~QSettings. Seems to fixed in Qt 6.
+    qint64 m_fileDate = 0;
+
+    // Date of last auto-save.
+    // Uses MSecsSinceEpoch (see m_fileDate).
     qint64 m_autosaveDate = 0;
 
     unsigned m_nuColors;
@@ -586,8 +608,6 @@ private:
 
     void initGameVariant(Variant variant);
 
-    bool openByteArray(const QByteArray& byteArray);
-
     bool openStream(istream& in);
 
     void prepareFindMove();
@@ -606,6 +626,8 @@ private:
     void setFile(const QString& file);
 
     void setSetupPlayer();
+
+    void updateFileInfo(const QString& file);
 
     void updateGameInfo();
 

@@ -7,6 +7,7 @@
 #include "RecentFiles.h"
 
 #include <QSettings>
+#include "AndroidUtils.h"
 
 //-----------------------------------------------------------------------------
 
@@ -58,6 +59,20 @@ void RecentFiles::load()
     {
         QSettings settings;
         m_entries = settings.value(QStringLiteral("recentFiles")).toList();
+    }
+    QMutableListIterator i(m_entries);
+    while (i.hasNext())
+    {
+        auto entry = i.next().toMap();
+        if (! entry.contains(QStringLiteral("file"))
+                || ! entry.contains(QStringLiteral("displayName")))
+        {
+            i.remove();
+            continue;
+        }
+        auto file = entry[QStringLiteral("file")].toString();
+        if (! AndroidUtils::checkExists(file))
+            i.remove();
     }
     checkMax();
     emit entriesChanged();

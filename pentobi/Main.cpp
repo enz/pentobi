@@ -4,6 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+#include <QFile>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QQuickStyle>

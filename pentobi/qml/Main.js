@@ -203,7 +203,12 @@ function exportImage(fileUrl) {
     var board = gameView.getBoard()
     var size = Qt.size(exportImageWidth, exportImageWidth * board.height / board.width)
     if (! board.grabImageTarget.grabToImage(function(result) {
-        if (! result.saveToFile(getFileFromUrl(fileUrl)))
+        var ok
+        if (isAndroid)
+            ok = androidUtils.saveImage(fileUrl, result.image)
+        else
+            ok = result.saveToFile(getFileFromUrl(fileUrl))
+        if (! ok)
             showInfo(qsTr("Saving image failed or unsupported image format"))
         else
             showTemporaryMessage(qsTr("Image saved"))
@@ -356,6 +361,13 @@ function init() {
         computerPlays3 = computerPlays1
     }
     gameView.createPieces()
+    if (gameModel.checkFileModifiedOutside())
+    {
+        showWindow()
+        showQuestion(qsTr("File has been modified by another application. Reload?"),
+                     reloadFile)
+        return
+    }
     if (analyzeGameModel.elements.length > 0)
         gameView.analysisAutoloaded()
     // initialFile is a context property set from command line argument
@@ -484,7 +496,10 @@ function open() {
 }
 
 function openNoVerify() {
-    openDialog.open()
+    if (isAndroid)
+        androidUtils.openOpenDialog(gameModel.file)
+    else
+        openDialog.open()
 }
 
 function openFile(file, displayName) {
@@ -673,13 +688,34 @@ function reloadFile() {
 }
 
 function save() {
-    saveFile(gameModel.file, displayName)
+    if (gameModel.checkFileModifiedOutside())
+        showQuestion(qsTr("File has been modified by another application. Overwrite?"),
+                     saveCurrentFile)
+    else
+        saveCurrentFile()
 }
 
 function saveAs() {
-    var dialog = saveDialog.get()
-    dialog.selectedFile = folder + "/" + qsTr("Untitled.blksgf")
-    dialog.open()
+    if (isAndroid) {
+        var file = gameModel.file
+        var name
+        if (ratingModel.getGameNumberOfFile(file) > 0)
+            name = file.substring(file.lastIndexOf("/") + 1)
+        else if (displayName !== "")
+            name = displayName
+        else
+            name = gameModel.suggestGameFileName("")
+        androidUtils.openSaveDialog(file, name)
+    } else {
+        var dialog = saveDialog.get()
+        dialog.selectedFile =
+                folder + "/" + gameModel.suggestGameFileName(folder)
+        dialog.open()
+    }
+}
+
+function saveCurrentFile() {
+    saveFile(gameModel.file, displayName)
 }
 
 function saveFile(file, displayName) {

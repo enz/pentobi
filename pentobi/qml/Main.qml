@@ -52,7 +52,7 @@ ApplicationWindow {
     minimumHeight: isDesktop ? 303 : 301
     color: theme.colorBackground
     title: Logic.getWindowTitle(gameModel.file, gameModel.isModified)
-    onClosing: close => { if ( ! Logic.quit()) close.accepted = false }
+    onClosing: if ( ! Logic.quit()) close.accepted = false
     onThemeChanged: androidUtils.initTheme(theme.colorBackground)
     Component.onCompleted: Logic.init()
     Component.onDestruction: Logic.cancelRunning()
@@ -157,6 +157,11 @@ ApplicationWindow {
     }
     AndroidUtils {
         id: androidUtils
+
+        onOpenDialogAccepted:
+            (uri, displayName) => Logic.openFile(uri, displayName)
+        onSaveDialogAccepted:
+            (uri, displayName) => Logic.saveFile(uri, displayName)
     }
     SyncSettings { id: syncSettings }
     DialogLoader { id: aboutDialog; url: "AboutDialog.qml" }

@@ -12,14 +12,17 @@
 #include <QDateTime>
 #include <QGuiApplication>
 #include <QDir>
+#include <QFileInfo>
 #include <QSettings>
 #include "libboardgame_base/SgfUtil.h"
 #include "libboardgame_base/TreeReader.h"
 #include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
+#ifdef Q_OS_ANDROID
+#include "AndroidUtils.h"
+#endif
 
-using namespace Qt::StringLiterals;
 using libboardgame_base::get_letter_coord;
 using libboardgame_base::to_lower;
 using libboardgame_base::ArrayList;
@@ -202,6 +205,7 @@ void GameModel::autoSave()
     settings.setValue(QStringLiteral("file"), m_file);
     m_autosaveDate = QDateTime::currentMSecsSinceEpoch();
     settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+    settings.setValue(QStringLiteral("fileDate"), m_fileDate);
     settings.setValue(QStringLiteral("isModified"), m_isModified);
     QVariantList location;
     uint depth = 0;
@@ -235,12 +239,35 @@ void GameModel::changeGameVariant(const QString& gameVariant)
 
 bool GameModel::checkAutosaveModifiedOutside()
 {
+#ifdef Q_OS_ANDROID
+    return false;
+#else
     QSettings settings;
     auto autosaveDate = settings.value(QStringLiteral("autosaveDate"));
     return m_autosaveDate != 0 && autosaveDate != 0
             && m_autosaveDate != autosaveDate
-            && settings.value("isModified"_L1).toBool()
-            && settings.value("autosave"_L1).toByteArray() != getSgf();
+            && settings.value(QStringLiteral("isModified")).toBool()
+            && settings.value(QStringLiteral("autosave")).toByteArray() != getSgf();
+#endif
+}
+
+bool GameModel::checkFileExists(const QString& file)
+{
+    return QFileInfo::exists(file);
+}
+
+bool GameModel::checkFileModifiedOutside()
+{
+#ifdef Q_OS_ANDROID
+    return false;
+#else
+    if (m_file.isEmpty() || m_fileDate == 0)
+        return false;
+    QFileInfo fileInfo(m_file);
+    if (! fileInfo.exists())
+        return false;
+    return fileInfo.lastModified().toMSecsSinceEpoch() != m_fileDate;
+#endif
 }
 
 /** Check if setup is allowed in the current position.
@@ -844,16 +871,19 @@ bool GameModel::loadAutoSave()
         {
             if (! openFile(file))
                 return false;
-            setFile(file);
-            m_autosaveDate = QDateTime::currentMSecsSinceEpoch();
-            settings.setValue("autosaveDate"_L1, m_autosaveDate);
+            updateFileInfo(file);
+            m_autosaveDate = m_fileDate;
+            settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
         }
         else
         {
             if (! openByteArray(settings.value(
                                     QStringLiteral("autosave")).toByteArray()))
                 return false;
-            m_autosaveDate = settings.value("autosaveDate"_L1).toLongLong();
+            m_fileDate = settings.value(
+                        QStringLiteral("fileDate")).toLongLong();
+            m_autosaveDate = settings.value(
+                        QStringLiteral("autosaveDate")).toLongLong();
             setFile(file);
         }
         // Sanitize isModified if value from settings is inconsistent
@@ -942,20 +972,43 @@ void GameModel::newGame()
     updateProperties();
 }
 
-bool GameModel::openFile(const QString& name)
+bool GameModel::openFile(const QString& file)
 {
-    QFile file(name);
-    if (! file.open(QIODevice::ReadOnly))
-        return false;
-    QByteArray sgf = file.readAll();
-    string s(sgf.constData(), sgf.size());
-    istringstream in(s);
-    if (! openStream(in))
+#ifdef Q_OS_ANDROID
+    if (! QUrl(file).isRelative())
     {
-        clearFile();
-        return false;
+        QByteArray sgf;
+        if (! AndroidUtils::open(file, sgf))
+        {
+            m_error = AndroidUtils::getError();
+            return false;
+        }
+        string s(sgf.constData(), sgf.size());
+        istringstream in(s);
+        if (! openStream(in))
+        {
+            clearFile();
+            return false;
+        }
+        updateFileInfo(file);
     }
-    setFile(name);
+    else
+#endif
+    {
+        auto canonicalFile = QFileInfo(file).absoluteFilePath();
+        ifstream in(canonicalFile.toLocal8Bit().constData());
+        if (! in)
+        {
+            m_error = QString::fromLocal8Bit(strerror(errno));
+            return false;
+        }
+        if (! openStream(in))
+        {
+            clearFile();
+            return false;
+        }
+        updateFileInfo(canonicalFile);
+    }
     auto& root = m_game.get_root();
     // Show end of game position by default unless the root node has
     // setup stones or comments, because then it might be a puzzle and
@@ -1183,14 +1236,30 @@ void GameModel::restoreAutoSaveLocation()
     gotoNode(*node);
 }
 
-bool GameModel::save(const QString& fileName)
+bool GameModel::save(const QString& file)
 {
     auto sgf = getSgf(1);
-    QFile file(fileName);
-    if (! file.open(QIODevice::WriteOnly | QIODevice::Truncate))
-        return false;
-    file.write(sgf);
-    setFile(fileName);
+#ifdef Q_OS_ANDROID
+    if (! QUrl(file).isRelative())
+    {
+        if (! AndroidUtils::save(file, sgf))
+        {
+            m_error = AndroidUtils::getError();
+            return false;
+        }
+    }
+    else
+#endif
+    {
+        ofstream out(file.toLocal8Bit().constData());
+        out.write(sgf.constData(), sgf.size());
+        if (! out)
+        {
+            m_error = QString::fromLocal8Bit(strerror(errno));
+            return false;
+        }
+    }
+    updateFileInfo(file);
     setIsModified(false);
     return true;
 }
@@ -1358,6 +1427,55 @@ void GameModel::setTime(const QString& time)
     updateIsModified();
 }
 
+QString GameModel::suggestFileName(const QUrl& folder,
+                                   const QString& fileEnding)
+{
+    QString suffix = QStringLiteral(".") + fileEnding;
+    if (folder.isEmpty())
+        return tr("Untitled") + suffix;
+    auto localFolder = folder.toLocalFile();
+    QString file = localFolder + '/' + tr("Untitled") + suffix;
+    if (QFileInfo::exists(file))
+        for (unsigned i = 1; ; ++i)
+        {
+            //: The argument is a number, which will be increased if a
+            //: file with the same name already exists
+            file = localFolder + '/' + tr("Untitled %1").arg(i)
+                    + suffix;
+            if (! QFileInfo::exists(file))
+                break;
+        }
+    return QUrl::fromLocalFile(file).fileName();
+}
+
+QString GameModel::suggestGameFileName(const QUrl& folder)
+{
+#ifndef Q_OS_ANDROID
+    if (! m_file.isEmpty())
+        return QUrl::fromLocalFile(m_file).fileName();
+#endif
+    return suggestFileName(folder, QStringLiteral("blksgf"));
+}
+
+QString GameModel::suggestNewFolderName(const QUrl& folder)
+{
+    auto localFolder = folder.toLocalFile();
+    QString file = localFolder;
+    if (! file.endsWith('/'))
+        file.append('/');
+    file.append(tr("New Folder"));
+    if (QFileInfo::exists(file))
+        for (unsigned i = 1; ; ++i)
+        {
+            //: The argument is a number, which will be increased if a
+            //: folder with the same name already exists
+            file = localFolder + '/' + tr("New Folder %1").arg(i);
+            if (! QFileInfo::exists(file))
+                break;
+        }
+    return QUrl::fromLocalFile(file).fileName();
+}
+
 void GameModel::truncate()
 {
     if (! m_game.get_current().has_parent())
@@ -1380,6 +1498,12 @@ void GameModel::undo()
     preparePositionChange();
     m_game.undo();
     updateProperties();
+}
+
+void GameModel::updateFileInfo(const QString& file)
+{
+    setFile(file);
+    m_fileDate = QFileInfo(file).lastModified().toMSecsSinceEpoch();
 }
 
 void GameModel::updateGameInfo()

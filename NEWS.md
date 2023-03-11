@@ -19,8 +19,7 @@ Version 24.0-dev (master)
 Version 23.1-dev (v23-fixes)
 ----------------------------
 
-* Overwriting an existing game file on Android with a shorter game file
-  created a corrupted file.
+*
 
 Version 23.0 (06 Mar 2023)
 --------------------------
