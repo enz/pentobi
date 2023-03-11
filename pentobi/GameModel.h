@@ -147,7 +147,7 @@ public:
 
     Q_INVOKABLE void nextColor();
 
-    Q_INVOKABLE bool openFile(const QString& file);
+    Q_INVOKABLE bool openFile(const QString& name);
 
     Q_INVOKABLE PieceModel* preparePiece(GameMove* move);
 

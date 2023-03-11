@@ -946,43 +946,20 @@ void GameModel::newGame()
     updateProperties();
 }
 
-bool GameModel::openFile(const QString& file)
+bool GameModel::openFile(const QString& name)
 {
-#ifdef Q_OS_ANDROID
-    if (! QUrl(file).isRelative())
+    QFile file(name);
+    if (! file.open(QIODevice::ReadOnly))
+        return false;
+    QByteArray sgf = file.readAll();
+    string s(sgf.constData(), sgf.size());
+    istringstream in(s);
+    if (! openStream(in))
     {
-        QByteArray sgf;
-        if (! AndroidUtils::open(file, sgf))
-        {
-            m_error = AndroidUtils::getError();
-            return false;
-        }
-        string s(sgf.constData(), sgf.size());
-        istringstream in(s);
-        if (! openStream(in))
-        {
-            clearFile();
-            return false;
-        }
-        setFile(file);
+        clearFile();
+        return false;
     }
-    else
-#endif
-    {
-        auto canonicalFile = QFileInfo(file).absoluteFilePath();
-        ifstream in(canonicalFile.toLocal8Bit().constData());
-        if (! in)
-        {
-            m_error = QString::fromLocal8Bit(strerror(errno));
-            return false;
-        }
-        if (! openStream(in))
-        {
-            clearFile();
-            return false;
-        }
-        setFile(canonicalFile);
-    }
+    setFile(name);
     auto& root = m_game.get_root();
     // Show end of game position by default unless the root node has
     // setup stones or comments, because then it might be a puzzle and

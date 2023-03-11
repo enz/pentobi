@@ -295,45 +295,6 @@ void AndroidUtils::initTheme([[maybe_unused]]QColor colorBackground)
 #endif
 }
 
-#ifdef Q_OS_ANDROID
-bool AndroidUtils::open(
-        [[maybe_unused]]const QString& uri, [[maybe_unused]]QByteArray& sgf)
-{
-    m_error.clear();
-    auto contentResolver = getContentResolver();
-    if (! contentResolver.isValid())
-        return false;
-    auto uriObj = getUriObj(uri);
-    if (! uriObj.isValid())
-        return false;
-    auto inputStream = contentResolver.callObjectMethod(
-                "openInputStream",
-                "(Landroid/net/Uri;)Ljava/io/InputStream;", uriObj.object());
-    if (checkException())
-        return false;
-    if (! inputStream.isValid())
-        return false;
-    sgf.clear();
-    QJniEnvironment env;
-    const int bufSize = 2048;
-    auto byteArray = env->NewByteArray(bufSize);
-    jbyte buf[bufSize];
-    jint n;
-    while ((n = inputStream.callMethod<jint>("read", "([B)I", byteArray)) >= 0)
-    {
-        if (checkException())
-        {
-            inputStream.callMethod<void>("close");
-            return false;
-        }
-        env->GetByteArrayRegion(byteArray, 0, n, buf);
-        sgf.append(reinterpret_cast<const char*>(&buf[0]), n);
-    }
-    inputStream.callMethod<void>("close");
-    return true;
-}
-#endif
-
 void AndroidUtils::releasePersistableUriPermission(
         [[maybe_unused]]const QString& uri)
 {

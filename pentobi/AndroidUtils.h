@@ -46,8 +46,6 @@ public:
     static QString getError() { return m_error; }
 
     static QString getInitialFile();
-
-    static bool open(const QString& uri, QByteArray& sgf);
 #endif
 
 private:
