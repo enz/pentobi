@@ -232,8 +232,6 @@ public:
 
     Q_INVOKABLE QString suggestGameFileName(const QUrl& folder);
 
-    Q_INVOKABLE static QString suggestNewFolderName(const QUrl& folder);
-
     Q_INVOKABLE QString getError() const { return m_error; }
 
     Q_INVOKABLE QVariantList getPieceModels(int color);
