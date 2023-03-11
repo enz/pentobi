@@ -208,8 +208,6 @@ public:
 
     Q_INVOKABLE static bool checkFileExists(const QString& file);
 
-    Q_INVOKABLE bool checkFileModifiedOutside();
-
     Q_INVOKABLE bool checkAutosaveModifiedOutside();
 
     Q_INVOKABLE GameMove* findMoveNext();
@@ -486,15 +484,6 @@ private:
 
     QString m_round;
 
-    // Last-modified date of current file.
-    // Uses MSecsSinceEpoch because storing QDateTime as QVariant in QSettings
-    // can trigger a bug in Qt 5.15 that sometimes causes crashes in
-    // operator<<(QDataStream&, QTimeZone const&) invoked by
-    // QSettings::~QSettings. Seems to fixed in Qt 6.
-    qint64 m_fileDate = 0;
-
-    // Date of last auto-save.
-    // Uses MSecsSinceEpoch (see m_fileDate).
     qint64 m_autosaveDate = 0;
 
     unsigned m_nuColors;
@@ -626,8 +615,6 @@ private:
     void setFile(const QString& file);
 
     void setSetupPlayer();
-
-    void updateFileInfo(const QString& file);
 
     void updateGameInfo();
 

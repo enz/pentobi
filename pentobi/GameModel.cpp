@@ -23,6 +23,7 @@
 #include "AndroidUtils.h"
 #endif
 
+using namespace Qt::StringLiterals;
 using libboardgame_base::get_letter_coord;
 using libboardgame_base::to_lower;
 using libboardgame_base::ArrayList;
@@ -205,7 +206,6 @@ void GameModel::autoSave()
     settings.setValue(QStringLiteral("file"), m_file);
     m_autosaveDate = QDateTime::currentMSecsSinceEpoch();
     settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
-    settings.setValue(QStringLiteral("fileDate"), m_fileDate);
     settings.setValue(QStringLiteral("isModified"), m_isModified);
     QVariantList location;
     uint depth = 0;
@@ -239,35 +239,17 @@ void GameModel::changeGameVariant(const QString& gameVariant)
 
 bool GameModel::checkAutosaveModifiedOutside()
 {
-#ifdef Q_OS_ANDROID
-    return false;
-#else
     QSettings settings;
     auto autosaveDate = settings.value(QStringLiteral("autosaveDate"));
     return m_autosaveDate != 0 && autosaveDate != 0
             && m_autosaveDate != autosaveDate
-            && settings.value(QStringLiteral("isModified")).toBool()
-            && settings.value(QStringLiteral("autosave")).toByteArray() != getSgf();
-#endif
+            && settings.value("isModified"_L1).toBool()
+            && settings.value("autosave"_L1).toByteArray() != getSgf();
 }
 
 bool GameModel::checkFileExists(const QString& file)
 {
     return QFileInfo::exists(file);
-}
-
-bool GameModel::checkFileModifiedOutside()
-{
-#ifdef Q_OS_ANDROID
-    return false;
-#else
-    if (m_file.isEmpty() || m_fileDate == 0)
-        return false;
-    QFileInfo fileInfo(m_file);
-    if (! fileInfo.exists())
-        return false;
-    return fileInfo.lastModified().toMSecsSinceEpoch() != m_fileDate;
-#endif
 }
 
 /** Check if setup is allowed in the current position.
@@ -871,19 +853,16 @@ bool GameModel::loadAutoSave()
         {
             if (! openFile(file))
                 return false;
-            updateFileInfo(file);
-            m_autosaveDate = m_fileDate;
-            settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+            setFile(file);
+            m_autosaveDate = QDateTime::currentMSecsSinceEpoch();
+            settings.setValue("autosaveDate"_L1, m_autosaveDate);
         }
         else
         {
             if (! openByteArray(settings.value(
                                     QStringLiteral("autosave")).toByteArray()))
                 return false;
-            m_fileDate = settings.value(
-                        QStringLiteral("fileDate")).toLongLong();
-            m_autosaveDate = settings.value(
-                        QStringLiteral("autosaveDate")).toLongLong();
+            m_autosaveDate = settings.value("autosaveDate"_L1).toLongLong();
             setFile(file);
         }
         // Sanitize isModified if value from settings is inconsistent
@@ -990,7 +969,7 @@ bool GameModel::openFile(const QString& file)
             clearFile();
             return false;
         }
-        updateFileInfo(file);
+        setFile(file);
     }
     else
 #endif
@@ -1007,7 +986,7 @@ bool GameModel::openFile(const QString& file)
             clearFile();
             return false;
         }
-        updateFileInfo(canonicalFile);
+        setFile(canonicalFile);
     }
     auto& root = m_game.get_root();
     // Show end of game position by default unless the root node has
@@ -1259,7 +1238,7 @@ bool GameModel::save(const QString& file)
             return false;
         }
     }
-    updateFileInfo(file);
+    setFile(file);
     setIsModified(false);
     return true;
 }
@@ -1498,12 +1477,6 @@ void GameModel::undo()
     preparePositionChange();
     m_game.undo();
     updateProperties();
-}
-
-void GameModel::updateFileInfo(const QString& file)
-{
-    setFile(file);
-    m_fileDate = QFileInfo(file).lastModified().toMSecsSinceEpoch();
 }
 
 void GameModel::updateGameInfo()

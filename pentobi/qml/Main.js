@@ -356,13 +356,6 @@ function init() {
         computerPlays3 = computerPlays1
     }
     gameView.createPieces()
-    if (gameModel.checkFileModifiedOutside())
-    {
-        showWindow()
-        showQuestion(qsTr("File has been modified by another application. Reload?"),
-                     reloadFile)
-        return
-    }
     if (analyzeGameModel.elements.length > 0)
         gameView.analysisAutoloaded()
     // initialFile is a context property set from command line argument
@@ -680,11 +673,7 @@ function reloadFile() {
 }
 
 function save() {
-    if (gameModel.checkFileModifiedOutside())
-        showQuestion(qsTr("File has been modified by another application. Overwrite?"),
-                     saveCurrentFile)
-    else
-        saveCurrentFile()
+    saveFile(gameModel.file, displayName)
 }
 
 function saveAs() {
@@ -692,10 +681,6 @@ function saveAs() {
     dialog.selectedFile =
             folder + "/" + gameModel.suggestGameFileName(folder)
     dialog.open()
-}
-
-function saveCurrentFile() {
-    saveFile(gameModel.file, displayName)
 }
 
 function saveFile(file, displayName) {
