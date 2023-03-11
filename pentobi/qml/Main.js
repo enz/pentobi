@@ -678,8 +678,7 @@ function save() {
 
 function saveAs() {
     var dialog = saveDialog.get()
-    dialog.selectedFile =
-            folder + "/" + gameModel.suggestGameFileName(folder)
+    dialog.selectedFile = folder + "/" + qsTr("Untitled.blksgf")
     dialog.open()
 }
 

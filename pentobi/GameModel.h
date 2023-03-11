@@ -206,8 +206,6 @@ public:
 
     Q_INVOKABLE QString getResultMessage();
 
-    Q_INVOKABLE static bool checkFileExists(const QString& file);
-
     Q_INVOKABLE bool checkAutosaveModifiedOutside();
 
     Q_INVOKABLE GameMove* findMoveNext();
@@ -220,11 +218,6 @@ public:
     Q_INVOKABLE PieceModel* nextPiece(PieceModel* currentPickedPiece);
 
     Q_INVOKABLE PieceModel* previousPiece(PieceModel* currentPickedPiece);
-
-    Q_INVOKABLE static QString suggestFileName(const QUrl& folder,
-                                               const QString& fileEnding);
-
-    Q_INVOKABLE QString suggestGameFileName(const QUrl& folder);
 
     Q_INVOKABLE QString getError() const { return m_error; }
 

@@ -247,11 +247,6 @@ bool GameModel::checkAutosaveModifiedOutside()
             && settings.value("autosave"_L1).toByteArray() != getSgf();
 }
 
-bool GameModel::checkFileExists(const QString& file)
-{
-    return QFileInfo::exists(file);
-}
-
 /** Check if setup is allowed in the current position.
     Currently, we support setup mode only if no moves have been played. It
     should also work in inner nodes but this might be confusing for users and
@@ -1404,36 +1399,6 @@ void GameModel::setTime(const QString& time)
     m_game.set_time(encode(time).constData());
     emit timeChanged();
     updateIsModified();
-}
-
-QString GameModel::suggestFileName(const QUrl& folder,
-                                   const QString& fileEnding)
-{
-    QString suffix = QStringLiteral(".") + fileEnding;
-    if (folder.isEmpty())
-        return tr("Untitled") + suffix;
-    auto localFolder = folder.toLocalFile();
-    QString file = localFolder + '/' + tr("Untitled") + suffix;
-    if (QFileInfo::exists(file))
-        for (unsigned i = 1; ; ++i)
-        {
-            //: The argument is a number, which will be increased if a
-            //: file with the same name already exists
-            file = localFolder + '/' + tr("Untitled %1").arg(i)
-                    + suffix;
-            if (! QFileInfo::exists(file))
-                break;
-        }
-    return QUrl::fromLocalFile(file).fileName();
-}
-
-QString GameModel::suggestGameFileName(const QUrl& folder)
-{
-#ifndef Q_OS_ANDROID
-    if (! m_file.isEmpty())
-        return QUrl::fromLocalFile(m_file).fileName();
-#endif
-    return suggestFileName(folder, QStringLiteral("blksgf"));
 }
 
 void GameModel::truncate()
