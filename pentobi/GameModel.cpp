@@ -12,7 +12,6 @@
 #include <QDateTime>
 #include <QGuiApplication>
 #include <QDir>
-#include <QFileInfo>
 #include <QSettings>
 #include "libboardgame_base/SgfUtil.h"
 #include "libboardgame_base/TreeReader.h"
