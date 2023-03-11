@@ -77,7 +77,7 @@ QString getDisplayName(const QJniObject& uri)
                 "[Ljava/lang/String;Ljava/lang/String;)"
                 "Landroid/database/Cursor;",
                 uri.object(), projection, nullptr, nullptr, nullptr);
-    if (cursor.isValid())
+    if (! cursor.isValid())
         return {};
     AutoClose autoClose{cursor};
     if (! cursor.callMethod<jboolean>("moveToFirst"))
