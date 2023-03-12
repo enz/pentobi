@@ -1,11 +1,11 @@
 Pentobi Release Notes
 =====================
 
-Version 23.1-dev (v23-fixes)
-----------------------------
+Version 23.1 (12 Mar 2023)
+--------------------------
 
-* Overwriting an existing game file on Android with a shorter game file
-  created a corrupted file.
+* Overwriting game file on Android with shorter file created corrupted
+  file.
 
 Version 23.0 (06 Mar 2023)
 --------------------------
