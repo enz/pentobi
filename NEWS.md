@@ -16,11 +16,16 @@ Version 24.0-dev (master)
   at build time that includes shared-mime-info.its.
 * Removed menu item Export Ascii Art.
 
-Version 23.1-dev (v23-fixes)
+Version 23.2-dev (v23-fixes)
 ----------------------------
 
-* Overwriting an existing game file on Android with a shorter game file
-  created a corrupted file.
+*
+
+Version 23.1 (12 Mar 2023)
+--------------------------
+
+* Overwriting game file on Android with shorter file created corrupted
+  file.
 
 Version 23.0 (06 Mar 2023)
 --------------------------
