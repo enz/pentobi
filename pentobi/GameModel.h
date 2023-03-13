@@ -122,8 +122,6 @@ public:
         there is no piece at this location. */
     Q_INVOKABLE PieceModel* addEmpty(const QPoint& pos);
 
-    Q_INVOKABLE bool createFolder(const QUrl& folder);
-
     Q_INVOKABLE void deleteAllVar();
 
     Q_INVOKABLE bool findNextComment();

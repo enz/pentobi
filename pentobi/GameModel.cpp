@@ -11,7 +11,6 @@
 #include <fstream>
 #include <QDateTime>
 #include <QGuiApplication>
-#include <QDir>
 #include <QFileInfo>
 #include <QSettings>
 #include "libboardgame_base/SgfUtil.h"
@@ -286,16 +285,6 @@ void GameModel::clearFile()
         return;
     m_file.clear();
     emit fileChanged();
-}
-
-bool GameModel::createFolder(const QUrl& folder)
-{
-    auto localFolder = folder.toLocalFile();
-    if (! QDir().mkdir(localFolder)) {
-        m_error = QString::fromLocal8Bit(strerror(errno));
-        return false;
-    }
-    return true;
 }
 
 void GameModel::createPieceModels()
