@@ -23,8 +23,7 @@ PentobiDialog {
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
         var dialog = imageSaveDialog.get()
-        dialog.selectedFile =
-                folder + "/" + gameModel.suggestFileName(folder, "png")
+        dialog.selectedFile = dialog.currentFolder + "/" + qsTr("Untitled.png")
         dialog.open()
     }
 
