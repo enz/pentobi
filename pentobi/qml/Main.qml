@@ -171,7 +171,6 @@ ApplicationWindow {
     DialogLoader { id: gameVariantDialog; url: "GameVariantDialog.qml" }
     DialogLoader { id: gameInfoDialog; url: "GameInfoDialog.qml" }
     DialogLoader { id: initialRatingDialog; url: "InitialRatingDialog.qml" }
-    DialogLoader { id: newFolderDialog; url: "NewFolderDialog.qml" }
     DialogLoader { id: openDialog; url: "OpenDialog.qml" }
     DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
     DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
