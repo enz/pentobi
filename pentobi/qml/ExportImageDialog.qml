@@ -22,9 +22,14 @@ PentobiDialog {
     onAboutToShow: if (! isAndroid) textField.selectAll()
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
-        var dialog = imageSaveDialog.get()
-        dialog.selectedFile = dialog.currentFolder + "/" + qsTr("Untitled.png")
-        dialog.open()
+        var name = qsTr("Untitled.png")
+        if (isAndroid)
+            androidUtils.openImageSaveDialog(name)
+        else {
+            var dialog = imageSaveDialog.get()
+            dialog.selectedFile = dialog.currentFolder + "/" + name
+            dialog.open()
+        }
     }
 
     function returnPressed() {
