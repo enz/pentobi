@@ -1416,36 +1416,6 @@ void GameModel::setTime(const QString& time)
     updateIsModified();
 }
 
-QString GameModel::suggestFileName(const QUrl& folder,
-                                   const QString& fileEnding)
-{
-    QString suffix = QStringLiteral(".") + fileEnding;
-    if (folder.isEmpty())
-        return tr("Untitled") + suffix;
-    auto localFolder = folder.toLocalFile();
-    QString file = localFolder + '/' + tr("Untitled") + suffix;
-    if (QFileInfo::exists(file))
-        for (unsigned i = 1; ; ++i)
-        {
-            //: The argument is a number, which will be increased if a
-            //: file with the same name already exists
-            file = localFolder + '/' + tr("Untitled %1").arg(i)
-                    + suffix;
-            if (! QFileInfo::exists(file))
-                break;
-        }
-    return QUrl::fromLocalFile(file).fileName();
-}
-
-QString GameModel::suggestGameFileName(const QUrl& folder)
-{
-#ifndef Q_OS_ANDROID
-    if (! m_file.isEmpty())
-        return QUrl::fromLocalFile(m_file).fileName();
-#endif
-    return suggestFileName(folder, QStringLiteral("blksgf"));
-}
-
 void GameModel::truncate()
 {
     if (! m_game.get_current().has_parent())

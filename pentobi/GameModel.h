@@ -7,7 +7,6 @@
 #ifndef PENTOBI_GAME_MODEL_H
 #define PENTOBI_GAME_MODEL_H
 
-#include <QUrl>
 #include "PieceModel.h"
 #include "libpentobi_base/Game.h"
 
@@ -222,11 +221,6 @@ public:
     Q_INVOKABLE PieceModel* nextPiece(PieceModel* currentPickedPiece);
 
     Q_INVOKABLE PieceModel* previousPiece(PieceModel* currentPickedPiece);
-
-    Q_INVOKABLE static QString suggestFileName(const QUrl& folder,
-                                               const QString& fileEnding);
-
-    Q_INVOKABLE QString suggestGameFileName(const QUrl& folder);
 
     Q_INVOKABLE QString getError() const { return m_error; }
 

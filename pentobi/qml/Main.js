@@ -696,20 +696,19 @@ function save() {
 }
 
 function saveAs() {
-    if (isAndroid) {
-        var file = gameModel.file
-        var name
-        if (ratingModel.getGameNumberOfFile(file) > 0)
-            name = file.substring(file.lastIndexOf("/") + 1)
-        else if (displayName !== "")
-            name = displayName
-        else
-            name = gameModel.suggestGameFileName("")
+    var file = gameModel.file
+    var name
+    if (displayName !== "")
+        name = displayName
+    else if (file !== "")
+        name = file.substring(file.lastIndexOf("/") + 1)
+    else
+        name = qsTr("Untitled.blksgf")
+    if (isAndroid)
         androidUtils.openSaveDialog(file, name)
-    } else {
+    else {
         var dialog = saveDialog.get()
-        dialog.selectedFile =
-                folder + "/" + gameModel.suggestGameFileName(folder)
+        dialog.selectedFile = dialog.currentFolder + "/" + name
         dialog.open()
     }
 }
