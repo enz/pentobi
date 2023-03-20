@@ -18,10 +18,6 @@
 #include <QtCore/private/qandroidextras_p.h>
 #include <QJniObject>
 
-#else
-
-#include <QStandardPaths>
-
 #endif
 
 using namespace std;
