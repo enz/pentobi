@@ -205,8 +205,6 @@ public:
 
     Q_INVOKABLE QString getResultMessage();
 
-    Q_INVOKABLE static bool checkFileExists(const QString& file);
-
     Q_INVOKABLE bool checkFileModifiedOutside();
 
     Q_INVOKABLE bool checkAutosaveModifiedOutside();

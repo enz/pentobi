@@ -252,11 +252,6 @@ bool GameModel::checkAutosaveModifiedOutside()
 #endif
 }
 
-bool GameModel::checkFileExists(const QString& file)
-{
-    return QFileInfo::exists(file);
-}
-
 bool GameModel::checkFileModifiedOutside()
 {
 #ifdef Q_OS_ANDROID
