@@ -18,7 +18,9 @@
 #include "libpentobi_base/MoveMarker.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 #include "libpentobi_base/TreeUtil.h"
+
 #ifdef Q_OS_ANDROID
+#include <QUrl>
 #include "AndroidUtils.h"
 #endif
 

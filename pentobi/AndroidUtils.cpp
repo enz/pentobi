@@ -14,6 +14,7 @@
 #include <QCoreApplication>
 #include <QHash>
 #include <QImage>
+#include <QUrl>
 #include <QVariant>
 #include <QtCore/private/qandroidextras_p.h>
 #include <QJniObject>
