@@ -103,7 +103,6 @@ Player::Player(Variant initial_variant, unsigned max_level,
       m_books_dir(books_dir),
       m_max_level(max_level),
       m_level(4),
-      m_fixed_simulations(0),
       m_search(initial_variant, nu_threads, get_memory(max_level)),
       m_book(initial_variant)
 {
@@ -180,70 +179,63 @@ Move Player::genmove(const Board& bd, Color c)
     }
     Float max_count = 0;
     double max_time = 0;
-    if (m_fixed_simulations > 0)
-        max_count = m_fixed_simulations;
-    else if (m_fixed_time > 0)
-        max_time = m_fixed_time;
-    else
+    switch (board_type)
     {
+    case BoardType::classic:
+    case BoardType::gembloq_2:
+        max_count = counts_classic[level - 1];
+        break;
+    case BoardType::duo:
+        max_count = counts_duo[level - 1];
+        break;
+    case BoardType::trigon:
+    case BoardType::trigon_3:
+    case BoardType::callisto:
+    case BoardType::callisto_3:
+    case BoardType::gembloq:
+    case BoardType::gembloq_3:
+        max_count = counts_trigon[level - 1];
+        break;
+    case BoardType::nexos:
+        max_count = counts_nexos[level - 1];
+        break;
+    case BoardType::callisto_2:
+        max_count = counts_callisto_2[level - 1];
+        break;
+    }
+    // Don't weight max_count in low levels, otherwise it is still too
+    // strong for beginners (later in the game, the weight becomes much
+    // greater than 1 because the simulations become very fast)
+    bool weight_max_count = (level >= 4);
+    if (weight_max_count)
+    {
+        auto player_move = bd.get_nu_onboard_pieces(c);
+        float weight = 1; // Init to avoid compiler warning
         switch (board_type)
         {
         case BoardType::classic:
-        case BoardType::gembloq_2:
-            max_count = counts_classic[level - 1];
+            weight = m_weight_max_count_classic[player_move];
             break;
         case BoardType::duo:
-            max_count = counts_duo[level - 1];
+        case BoardType::gembloq_2:
+            weight = m_weight_max_count_duo[player_move];
+            break;
+        case BoardType::callisto:
+        case BoardType::callisto_3:
+            weight = m_weight_max_count_callisto[player_move];
+            break;
+        case BoardType::callisto_2:
+            weight = m_weight_max_count_callisto_2[player_move];
             break;
         case BoardType::trigon:
         case BoardType::trigon_3:
-        case BoardType::callisto:
-        case BoardType::callisto_3:
+        case BoardType::nexos:
         case BoardType::gembloq:
         case BoardType::gembloq_3:
-            max_count = counts_trigon[level - 1];
-            break;
-        case BoardType::nexos:
-            max_count = counts_nexos[level - 1];
-            break;
-        case BoardType::callisto_2:
-            max_count = counts_callisto_2[level - 1];
+            weight = m_weight_max_count_trigon[player_move];
             break;
         }
-        // Don't weight max_count in low levels, otherwise it is still too
-        // strong for beginners (later in the game, the weight becomes much
-        // greater than 1 because the simulations become very fast)
-        bool weight_max_count = (level >= 4);
-        if (weight_max_count)
-        {
-            auto player_move = bd.get_nu_onboard_pieces(c);
-            float weight = 1; // Init to avoid compiler warning
-            switch (board_type)
-            {
-            case BoardType::classic:
-                weight = m_weight_max_count_classic[player_move];
-                break;
-            case BoardType::duo:
-            case BoardType::gembloq_2:
-                weight = m_weight_max_count_duo[player_move];
-                break;
-            case BoardType::callisto:
-            case BoardType::callisto_3:
-                weight = m_weight_max_count_callisto[player_move];
-                break;
-            case BoardType::callisto_2:
-                weight = m_weight_max_count_callisto_2[player_move];
-                break;
-            case BoardType::trigon:
-            case BoardType::trigon_3:
-            case BoardType::nexos:
-            case BoardType::gembloq:
-            case BoardType::gembloq_3:
-                weight = m_weight_max_count_trigon[player_move];
-                break;
-            }
-            max_count = ceil(max_count * weight);
-        }
+        max_count = ceil(max_count * weight);
     }
     if (max_count != 0)
         LIBBOARDGAME_LOG("MaxCnt ", fixed, setprecision(0), max_count);

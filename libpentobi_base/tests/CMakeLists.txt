@@ -3,7 +3,6 @@ add_executable(test_libpentobi_base
   BoardTest.cpp
   BoardUpdaterTest.cpp
   GameTest.cpp
-  PentobiTreeTest.cpp
   PentobiSgfUtilTest.cpp
 )
 

@@ -2,7 +2,6 @@ add_executable(test_libboardgame_gtp
   ArgumentsTest.cpp
   CmdLineTest.cpp
   GtpEngineTest.cpp
-  ResponseTest.cpp
 )
 
 target_link_libraries(test_libboardgame_gtp

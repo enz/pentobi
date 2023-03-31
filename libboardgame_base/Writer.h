@@ -53,8 +53,6 @@ public:
 private:
     ostream& m_out;
 
-    bool m_is_first_prop;
-
     int m_indent = 0;
 
     unsigned m_current_indent = 0;
@@ -84,13 +82,8 @@ template<typename T>
 void Writer::write_property(const string& id, const vector<T>& values)
 {
     m_out << id;
-    bool is_first_value = true;
     for (auto& i : values)
-    {
         m_out << '[' << get_escaped(to_string(i)) << ']';
-        is_first_value = false;
-    }
-    m_is_first_prop = false;
 }
 
 //-----------------------------------------------------------------------------

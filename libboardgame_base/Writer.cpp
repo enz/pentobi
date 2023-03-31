@@ -18,7 +18,6 @@ Writer::Writer(ostream& out)
 
 void Writer::begin_node()
 {
-    m_is_first_prop = true;
     write_indent();
     m_out << ';';
 }

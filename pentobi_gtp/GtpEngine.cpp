@@ -121,7 +121,6 @@ void GtpEngine::cmd_param(Arguments args, Response& response)
         response
             << "avoid_symmetric_draw " << s.get_avoid_symmetric_draw() << '\n'
             << "exploration_constant " << s.get_exploration_constant() << '\n'
-            << "fixed_simulations " << p.get_fixed_simulations() << '\n'
             << "rave_child_max " << s.get_rave_child_max() << '\n'
             << "rave_parent_max " << s.get_rave_parent_max() << '\n'
             << "rave_weight " << s.get_rave_weight() << '\n'
@@ -135,8 +134,6 @@ void GtpEngine::cmd_param(Arguments args, Response& response)
             s.set_avoid_symmetric_draw(args.get<bool>(1));
         else if (name == "exploration_constant")
             s.set_exploration_constant(args.get<Float>(1));
-        else if (name == "fixed_simulations")
-            p.set_fixed_simulations(args.get<Float>(1));
         else if (name == "rave_child_max")
             s.set_rave_child_max(args.get<Float>(1));
         else if (name == "rave_parent_max")
