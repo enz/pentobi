@@ -178,7 +178,6 @@ Move Player::genmove(const Board& bd, Color c)
         }
     }
     Float max_count = 0;
-    double max_time = 0;
     switch (board_type)
     {
     case BoardType::classic:
@@ -206,8 +205,7 @@ Move Player::genmove(const Board& bd, Color c)
     // Don't weight max_count in low levels, otherwise it is still too
     // strong for beginners (later in the game, the weight becomes much
     // greater than 1 because the simulations become very fast)
-    bool weight_max_count = (level >= 4);
-    if (weight_max_count)
+    if (level >= 4)
     {
         auto player_move = bd.get_nu_onboard_pieces(c);
         float weight = 1; // Init to avoid compiler warning
@@ -237,11 +235,8 @@ Move Player::genmove(const Board& bd, Color c)
         }
         max_count = ceil(max_count * weight);
     }
-    if (max_count != 0)
-        LIBBOARDGAME_LOG("MaxCnt ", fixed, setprecision(0), max_count);
-    else
-        LIBBOARDGAME_LOG("MaxTime ", max_time);
-    if (! m_search.search(mv, bd, c, max_count, 0, max_time, m_time_source))
+    LIBBOARDGAME_LOG("MaxCnt ", fixed, setprecision(0), max_count);
+    if (! m_search.search(mv, bd, c, max_count, 0, 0, m_time_source))
         return Move::null();
     m_was_aborted = m_search.was_aborted();
     // Resign only in two-player game variants
