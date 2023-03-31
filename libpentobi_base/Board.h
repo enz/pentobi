@@ -72,10 +72,6 @@ public:
 
     Color::Range get_colors() const { return Color::Range(m_nu_colors); }
 
-    /** Number of colors that are not played alternately.
-        This is equal to get_nu_colors() apart from Variant::classic_3. */
-    Color::IntType get_nu_nonalt_colors() const;
-
     unsigned get_nu_players() const;
 
     Piece::IntType get_nu_uniq_pieces() const;
@@ -215,10 +211,6 @@ public:
         @pre ! mv.is_null() */
     bool is_legal(Color c, Move mv) const;
 
-    /** Check if a move is legal for the current color to play.
-        @pre ! mv.is_null() */
-    bool is_legal(Move mv) const;
-
     /** Check that point is not already occupied or adjacent to own color.
         Point::null() is an allowed argument and returns false. */
     bool is_forbidden(Point p, Color c) const;
@@ -250,9 +242,6 @@ public:
         Callisto?
         Always returns false for other game variants. */
     bool is_center_section(Point p) const { return m_is_center_section[p]; }
-
-    PrecompMoves::Range get_moves(Piece piece, Point p,
-                                  unsigned adj_status) const;
 
     /** Get score.
         The score is the number of points for a color minus the number of
@@ -294,15 +283,11 @@ public:
     bool from_string(Move& mv, const string& s) const {
         return m_bc->from_string(mv, s); }
 
-    bool find_move(const MovePoints& points, Move& mv) const;
-
     bool find_move(const MovePoints& points, Piece piece, Move& mv) const;
 
     const Transform* find_transform(Move mv) const;
 
     const PieceInfo& get_piece_info(Piece piece) const;
-
-    bool get_piece_by_name(const string& name, Piece& piece) const;
 
     /** The 1x1 piece. */
     Piece get_one_piece() const { return m_one_piece; }
@@ -321,11 +306,6 @@ public:
 
     const ArrayList<Point,StartingPoints::max_starting_points>&
     get_starting_points(Color c) const;
-
-    /** Number of starting points the first move needs to cover.
-        This is needed for GembloQ Three-Player to ensure that the first
-        player covers all four triangles of the starting square. */
-    unsigned get_needed_starting_points() const { return m_needed_starting_points; }
 
     /** Get the second color in game variants in which a player plays two
         colors.
@@ -490,11 +470,6 @@ private:
 };
 
 
-inline bool Board::find_move(const MovePoints& points, Move& mv) const
-{
-    return m_bc->find_move(points, mv);
-}
-
 inline bool Board::find_move(const MovePoints& points, Piece piece,
                              Move& mv) const
 {
@@ -554,12 +529,6 @@ inline auto Board::get_moves() const -> const ArrayList<ColorMove, max_moves>&
     return m_moves;
 }
 
-inline PrecompMoves::Range Board::get_moves(Piece piece, Point p,
-                                            unsigned adj_status) const
-{
-    return m_bc->get_moves(piece, p, adj_status);
-}
-
 inline Color Board::get_next(Color c) const
 {
     return c.get_next(m_nu_colors);
@@ -579,11 +548,6 @@ inline unsigned Board::get_nu_left_piece(Color c, Piece piece) const
 inline unsigned Board::get_nu_moves() const
 {
     return m_moves.size();
-}
-
-inline Color::IntType Board::get_nu_nonalt_colors() const
-{
-    return m_variant != Variant::classic_3 ? m_nu_colors : 3;
 }
 
 inline unsigned Board::get_nu_onboard_pieces() const
@@ -614,11 +578,6 @@ inline Piece::IntType Board::get_nu_uniq_pieces() const
 inline const PieceInfo& Board::get_piece_info(Piece piece) const
 {
     return m_bc->get_piece_info(piece);
-}
-
-inline bool Board::get_piece_by_name(const string& name, Piece& piece) const
-{
-    return m_bc->get_piece_by_name(name, piece);
 }
 
 inline const Board::PiecesLeftList& Board::get_pieces_left(Color c) const
@@ -771,11 +730,6 @@ inline bool Board::is_forbidden(Color c, Move mv) const
             return true;
     while (++i != end);
     return false;
-}
-
-inline bool Board::is_legal(Move mv) const
-{
-    return is_legal(m_state_base.to_play, mv);
 }
 
 inline bool Board::is_piece_left(Color c, Piece piece) const

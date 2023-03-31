@@ -34,9 +34,6 @@ public:
         to this class. */
     virtual void init(unique_ptr<SgfNode>& root);
 
-    /** Get the root node and transfer the ownership to the caller. */
-    unique_ptr<SgfNode> get_tree_transfer_ownership();
-
     /** Check if the tree was modified since the construction or the last call
         to init() or clear_modified() */
     bool is_modified() const { return m_modified; }
@@ -109,8 +106,6 @@ public:
     /** See Node::remove_children() */
     void remove_children(const SgfNode& node);
 
-    void append(const SgfNode& node, unique_ptr<SgfNode> child);
-
     /** Get comment.
         @return The comment, or an empty string if the node contains no
         comment. */
@@ -170,13 +165,6 @@ private:
 
     SgfNode& non_const(const SgfNode& node);
 };
-
-inline void SgfTree::append(const SgfNode& node, unique_ptr<SgfNode> child)
-{
-    if (child)
-        m_modified = true;
-    non_const(node).append(std::move(child));
-}
 
 inline SgfNode& SgfTree::non_const(const SgfNode& node)
 {

@@ -39,8 +39,6 @@ public:
 
     void init(const string& line);
 
-    void init(const CmdLine& c);
-
     const string& get_line() const { return m_line; }
 
     /** Get command name. */

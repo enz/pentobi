@@ -18,15 +18,6 @@ Property::~Property() = default; // Non-inline to avoid GCC -Winline warning
 
 SgfNode::~SgfNode() = default;  // Non-inline to avoid GCC -Winline warning
 
-void SgfNode::append(unique_ptr<SgfNode> node)
-{
-    node->m_parent = this;
-    if (! m_first_child)
-        m_first_child = std::move(node);
-    else
-        get_last_child()->m_sibling = std::move(node);
-}
-
 SgfNode& SgfNode::create_new_child()
 {
     auto node = make_unique<SgfNode>();

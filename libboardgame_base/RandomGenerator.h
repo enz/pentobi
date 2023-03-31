@@ -66,18 +66,9 @@ public:
     /** Generate a float in [a..b]. */
     float generate_float(float a, float b);
 
-    /** Generate a double in [a..b]. */
-    double generate_double(double a, double b);
-
 private:
     Generator m_generator;
 };
-
-inline double RandomGenerator::generate_double(double a, double b)
-{
-    uniform_real_distribution<double> distribution(a, b);
-    return distribution(m_generator);
-}
 
 inline float RandomGenerator::generate_float(float a, float b)
 {

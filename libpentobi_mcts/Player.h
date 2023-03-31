@@ -62,8 +62,6 @@ public:
 
     void set_use_book(bool enable);
 
-    unsigned get_level() const;
-
     void set_level(unsigned level);
 
     Search& get_search();
@@ -80,9 +78,6 @@ public:
         usually overestimate the rating differences when playing against
         humans. */
     static Rating get_rating(Variant variant, unsigned level);
-
-    /** Get an estimated Elo-rating of the current level. */
-    Rating get_rating(Variant variant) const;
 
     /** Abort the current search.
         This function is intended to be called from a different thread to stop
@@ -143,16 +138,6 @@ inline Float Player::get_fixed_simulations() const
 inline double Player::get_fixed_time() const
 {
     return m_fixed_time;
-}
-
-inline unsigned Player::get_level() const
-{
-    return m_level;
-}
-
-inline Rating Player::get_rating(Variant variant) const
-{
-    return get_rating(variant, m_level);
 }
 
 inline Search& Player::get_search()

@@ -183,15 +183,12 @@ void GtpEngine::cmd_param_base(Arguments args, Response& response)
 {
     if (args.get_size() == 0)
         response
-            << "accept_illegal " << m_accept_illegal << '\n'
             << "resign " << m_resign << '\n';
     else
     {
         args.check_size(2);
         auto name = args.get(0);
-        if (name == "accept_illegal")
-            m_accept_illegal = args.get<bool>(1);
-        else if (name == "resign")
+        if (name == "resign")
             m_resign = args.get<bool>(1);
         else
         {
@@ -368,7 +365,7 @@ void GtpEngine::play(Color c, Arguments args, unsigned arg_move_begin)
     // piece-left count is already zero.
     if (! bd.is_piece_left(c, bd.get_move_piece(mv)))
         throw Failure("piece already played");
-    if (! m_accept_illegal && ! bd.is_legal(c, mv))
+    if (! bd.is_legal(c, mv))
         throw Failure("illegal move");
     m_game.play(c, mv, true);
     board_changed();

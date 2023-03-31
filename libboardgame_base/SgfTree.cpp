@@ -77,11 +77,6 @@ double SgfTree::get_good_move(const SgfNode& node)
     return node.parse_property<double>("TE", 0);
 }
 
-unique_ptr<SgfNode> SgfTree::get_tree_transfer_ownership()
-{
-    return std::move(m_root);
-}
-
 bool SgfTree::has_variations() const
 {
     auto node = m_root.get();

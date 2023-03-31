@@ -46,14 +46,12 @@ bool PieceMap<T>::operator==(const PieceMap& piece_map) const
 template<typename T>
 inline T& PieceMap<T>::operator[](Piece piece)
 {
-    LIBBOARDGAME_ASSERT(! piece.is_null());
     return m_a[piece.to_int()];
 }
 
 template<typename T>
 inline const T& PieceMap<T>::operator[](Piece piece) const
 {
-    LIBBOARDGAME_ASSERT(! piece.is_null());
     return m_a[piece.to_int()];
 }
 

@@ -7,9 +7,7 @@
 #ifndef LIBBOARDGAME_BASE_COORD_POINT_H
 #define LIBBOARDGAME_BASE_COORD_POINT_H
 
-#include <limits>
 #include <iosfwd>
-#include "Assert.h"
 
 namespace libboardgame_base {
 
@@ -24,9 +22,9 @@ struct CoordPoint
 
     int y;
 
+
     static bool is_onboard(int x, int y, unsigned width, unsigned height);
 
-    static CoordPoint null();
 
     CoordPoint() = default;
 
@@ -48,8 +46,6 @@ struct CoordPoint
 
     CoordPoint& operator-=(CoordPoint p);
 
-    bool is_null() const { return x == numeric_limits<int>::max(); }
-
     bool is_onboard(unsigned width, unsigned height) const;
 };
 
@@ -61,8 +57,6 @@ inline CoordPoint::CoordPoint(int x, int y)
 
 inline CoordPoint::CoordPoint(unsigned x, unsigned y)
 {
-    LIBBOARDGAME_ASSERT(x < static_cast<unsigned>(numeric_limits<int>::max()));
-    LIBBOARDGAME_ASSERT(y < static_cast<unsigned>(numeric_limits<int>::max()));
     this->x = static_cast<int>(x);
     this->y = static_cast<int>(y);
 }
@@ -99,11 +93,6 @@ inline CoordPoint& CoordPoint::operator-=(CoordPoint p)
 {
     *this = *this - p;
     return *this;
-}
-
-inline CoordPoint CoordPoint::null()
-{
-    return {numeric_limits<int>::max(), numeric_limits<int>::max()};
 }
 
 inline bool CoordPoint::is_onboard(int x, int y, unsigned width,

@@ -19,10 +19,6 @@ using namespace std;
 class Response
 {
 public:
-    /** Get response.
-        @return A copy of the internal response string stream */
-    string to_string() const { return m_stream.str(); }
-
     /** Set response. */
     void set(const string& response) { m_stream.str(response); }
 

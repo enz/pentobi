@@ -150,12 +150,6 @@ void Game::set_player(Color c)
     update(*m_current);
 }
 
-void Game::set_result(int score)
-{
-    if (is_main_variation(*m_current))
-        m_tree.set_result(m_tree.get_root(), score);
-}
-
 void Game::set_to_play(Color c)
 {
     m_bd->set_to_play(c);

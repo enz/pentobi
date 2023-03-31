@@ -27,12 +27,6 @@ public:
         Should be set before starting to write. */
     /** @{ */
 
-    void set_one_prop_per_line(bool enable) { m_one_prop_per_line = enable; }
-
-    void set_one_prop_value_per_line(bool enable) {
-        m_one_prop_value_per_line = enable;
-    }
-
     /** @param indent The number of spaces to indent subtrees, -1 means
         to not even use newlines. */
     void set_indent(int indent) { m_indent = indent; }
@@ -46,7 +40,7 @@ public:
 
     void begin_node();
 
-    void end_node();
+    void end_node() { }
 
     void write_property(const string& id, const char* value);
 
@@ -58,10 +52,6 @@ public:
 
 private:
     ostream& m_out;
-
-    bool m_one_prop_per_line = false;
-
-    bool m_one_prop_value_per_line = false;
 
     bool m_is_first_prop;
 
@@ -93,28 +83,13 @@ void Writer::write_property(const string& id, const T& value)
 template<typename T>
 void Writer::write_property(const string& id, const vector<T>& values)
 {
-    if (m_one_prop_per_line && ! m_is_first_prop)
-    {
-        write_indent();
-        m_out << ' ';
-    }
     m_out << id;
     bool is_first_value = true;
     for (auto& i : values)
     {
-        if (m_one_prop_per_line && m_one_prop_value_per_line
-                && ! is_first_value && m_indent >= 0)
-        {
-            m_out << '\n';
-            auto indent = m_current_indent + 1 + id.size();
-            for (unsigned i = 0; i < indent; ++i)
-                m_out << ' ';
-        }
         m_out << '[' << get_escaped(to_string(i)) << ']';
         is_first_value = false;
     }
-    if (m_one_prop_per_line && m_indent >= 0)
-        m_out << '\n';
     m_is_first_prop = false;
 }
 

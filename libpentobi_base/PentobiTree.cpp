@@ -272,24 +272,6 @@ void PentobiTree::set_player_name(Color c, const string& name)
     }
 }
 
-void PentobiTree::set_result(const SgfNode& node, int score)
-{
-    if (score > 0)
-    {
-        ostringstream s;
-        s << "B+" << score;
-        set_property(node, "RE", s.str());
-    }
-    else if (score < 0)
-    {
-        ostringstream s;
-        s << "W+" << (-score);
-        set_property(node, "RE", s.str());
-    }
-    else
-        set_property(node, "RE", "0");
-}
-
 void PentobiTree::set_setup(const SgfNode& node, const Setup& setup)
 {
     auto nu_colors = get_nu_colors(m_variant);

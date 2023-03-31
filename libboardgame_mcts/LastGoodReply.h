@@ -10,6 +10,7 @@
 #include <cstddef>
 #include <random>
 #include "Atomic.h"
+#include "PlayerMove.h"
 
 namespace libboardgame_mcts {
 

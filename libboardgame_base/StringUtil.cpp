@@ -14,13 +14,6 @@ namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
-template<>
-bool from_string(const string& s, string& t)
-{
-    t = s;
-    return true;
-}
-
 string get_letter_coord(unsigned i)
 {
     string result;

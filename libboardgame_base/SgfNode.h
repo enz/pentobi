@@ -67,8 +67,6 @@ public:
 
         const SgfNode* operator->() const { return m_node; }
 
-        bool is_null() const { return m_node == nullptr; }
-
     private:
         const SgfNode* m_node;
     };
@@ -85,8 +83,6 @@ public:
 
         static Iterator end() { return Iterator(nullptr); }
 
-        bool empty() const { return m_begin.is_null(); }
-
     private:
         Iterator m_begin;
     };
@@ -94,9 +90,6 @@ public:
 
     ~SgfNode();
 
-
-    /** Append a new child. */
-    void append(unique_ptr<SgfNode> node);
 
     bool has_property(const string& id) const;
 

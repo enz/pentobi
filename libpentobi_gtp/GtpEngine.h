@@ -54,8 +54,6 @@ public:
         exceed the lifetime of the class instance. */
     void set_player(PlayerBase& player);
 
-    void set_accept_illegal(bool enable) { m_accept_illegal = enable; }
-
     /** Enable or disable resigning. */
     void set_resign(bool enable) { m_resign = enable; }
 
@@ -71,8 +69,6 @@ protected:
     void on_handle_cmd_begin() override;
 
 private:
-    bool m_accept_illegal = false;
-
     bool m_show_board = false;
 
     bool m_resign = true;

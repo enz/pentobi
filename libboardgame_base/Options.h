@@ -63,8 +63,6 @@ public:
 
     string get(const string& name, const string& default_value) const;
 
-    string get(const string& name, const char* default_value) const;
-
     /** Get option value.
         @param name The (long) option name.
         @throws OptionError If option does not exist or has the wrong type. */

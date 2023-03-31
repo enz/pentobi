@@ -51,11 +51,6 @@ public:
 
     const PentobiTree& get_tree() const;
 
-    /** Get the current color to play.
-        Initialized with get_to_play_default() but may be changed with
-        set_to_play(). */
-    Color get_to_play() const;
-
     /** @param mv
         @param always_create_new_node Always create a new child of the current
         node even if a child with the move already exists. */
@@ -83,12 +78,6 @@ public:
         Does not store a player property in the tree or affect what color is to
         play when navigating away from and back to the current node. */
     void set_to_play(Color c);
-
-    ColorMove get_move() const;
-
-    /** Add final score to root node if the current node is in the main
-        variation. */
-    void set_result(int score);
 
     string get_charset() const;
 
@@ -141,12 +130,7 @@ public:
         to the node as in libboardgame_base::back_to_main_variation() */
     void delete_all_variations();
 
-    /** Make the current node the first child of its parent. */
-    void make_first_child();
-
     void set_modified(bool is_modified = true);
-
-    void clear_modified();
 
     bool is_modified() const;
 
@@ -202,11 +186,6 @@ private:
     void update(const SgfNode& node);
 };
 
-inline void Game::clear_modified()
-{
-    m_tree.clear_modified();
-}
-
 inline double Game::get_bad_move(const SgfNode& node)
 {
     return SgfTree::get_bad_move(node);
@@ -242,19 +221,9 @@ inline double Game::get_good_move(const SgfNode& node)
     return SgfTree::get_good_move(node);
 }
 
-inline ColorMove Game::get_move() const
-{
-    return m_tree.get_move(*m_current);
-}
-
 inline string Game::get_player_name(Color c) const
 {
     return m_tree.get_player_name(c);
-}
-
-inline Color Game::get_to_play() const
-{
-    return m_bd->get_to_play();
 }
 
 inline string Game::get_round() const
@@ -305,11 +274,6 @@ inline bool Game::is_interesting_move(const SgfNode& node)
 inline bool Game::is_modified() const
 {
     return m_tree.is_modified();
-}
-
-inline void Game::make_first_child()
-{
-    m_tree.make_first_child(*m_current);
 }
 
 inline void Game::make_main_variation()

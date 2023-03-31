@@ -25,9 +25,6 @@ bool from_string(const string& s, T& t)
     return ! in.fail();
 }
 
-template<>
-bool from_string(const string& s, string& t);
-
 /** Get a letter representing a coordinate.
     Returns 'a' to 'z' for i between 0 and 25 and continues with 'aa','ab'...
     for coordinates larger than 25. */

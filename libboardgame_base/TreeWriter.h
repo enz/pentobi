@@ -32,14 +32,6 @@ public:
         Should be set before starting to write. */
     /** @{ */
 
-    void set_one_prop_per_line(bool enable) {
-        m_writer.set_one_prop_per_line(enable);
-    }
-
-    void set_one_prop_value_per_line(bool enable) {
-        m_writer.set_one_prop_value_per_line(enable);
-    }
-
     void set_indent(int indent) { m_writer.set_indent(indent); }
 
     /** @} */ // @name

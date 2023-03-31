@@ -67,9 +67,6 @@ public:
                 size_t min_simulations, double max_time,
                 TimeSource& time_source);
 
-    /** Get color to play at root node of the last search. */
-    Color get_to_play() const;
-
     const History& get_last_history() const;
 
     /** Get board position of last search at root node as setup.
@@ -124,11 +121,6 @@ inline PlayerInt Search::get_player() const
     if ( m_variant == Variant::classic_3 && to_play == 3)
         return static_cast<PlayerInt>(to_play + get_board().get_alt_player());
     return to_play;
-}
-
-inline Color Search::get_to_play() const
-{
-    return m_to_play;
 }
 
 inline void Search::set_avoid_symmetric_draw(bool enable)

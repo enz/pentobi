@@ -57,8 +57,6 @@ public:
     const SgfNode* find_child_with_move(const SgfNode& node,
                                         ColorMove mv) const;
 
-    void set_result(const SgfNode& node, int score);
-
     const SgfNode* get_node_before_move_number(unsigned move_number) const;
 
     Variant get_variant() const;
@@ -66,8 +64,6 @@ public:
     string get_player_name(Color c) const;
 
     void set_player_name(Color c, const string& name);
-
-    const BoardConst& get_board_const() const;
 
     void keep_only_subtree(const SgfNode& node);
 
@@ -113,11 +109,6 @@ private:
     void set_setup_property(const SgfNode& node, const char* id,
                             const Setup::PlacementList& placements);
 };
-
-inline const BoardConst& PentobiTree::get_board_const() const
-{
-    return *m_bc;
-}
 
 inline const char* PentobiTree::get_color(Color c) const
 {

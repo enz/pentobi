@@ -43,9 +43,6 @@ public:
 
     double get() const { return m_elo; }
 
-    /** Get rating rounded to an integer. */
-    int to_int() const { return static_cast<int>(round(m_elo)); }
-
 private:
     double m_elo;
 };

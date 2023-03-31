@@ -145,11 +145,6 @@ string Options::get(const string& name, const string& default_value) const
     return pos->second;
 }
 
-string Options::get(const string& name, const char* default_value) const
-{
-    return get(name, string(default_value));
-}
-
 //-----------------------------------------------------------------------------
 
 } // namespace libboardgame_base
