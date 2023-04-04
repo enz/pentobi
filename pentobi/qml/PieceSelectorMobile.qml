@@ -220,28 +220,6 @@ Flickable {
                 }
                 PropertyAction { property: "y" }
                 PropertyAction { target: root; property: "contentY"; value: 0 }
-                // Workaround for QTBUG-99739 (Transition does not correctly
-                // set value if target changes while transition runs; Qt 6.2)
-                ScriptAction {
-                    script: {
-                        pieceList0.y =
-                                getY(gameModel.toPlay, 0, pieceList0.height,
-                                     pieceList1.height, pieceList2.height,
-                                     pieceList3.height, rowSpacing)
-                        pieceList1.y =
-                                getY(gameModel.toPlay, 1, pieceList0.height,
-                                     pieceList1.height, pieceList2.height,
-                                     pieceList3.height, rowSpacing)
-                        pieceList2.y =
-                                getY(gameModel.toPlay, 2, pieceList0.height,
-                                     pieceList1.height, pieceList2.height,
-                                     pieceList3.height, rowSpacing)
-                        pieceList3.y =
-                                getY(gameModel.toPlay, 3, pieceList0.height,
-                                     pieceList1.height, pieceList2.height,
-                                     pieceList3.height, rowSpacing)
-                    }
-                }
                 NumberAnimation {
                     target: root
                     property: "opacity"
