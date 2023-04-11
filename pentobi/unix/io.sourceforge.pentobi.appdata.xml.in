@@ -58,7 +58,7 @@ https://pentobi.sourceforge.io/pentobi-gembloq.png</image>
 <url type="homepage">https://pentobi.sourceforge.io/</url>
 <url type="bugtracker">https://github.com/enz/pentobi/issues</url>
 <url type="donation">https://sourceforge.net/p/pentobi/donate/</url>
-<url type="translate">https://www.transifex.com/markus-enzenberger/pentobi/</url>
+<url type="translate">https://app.transifex.com/markus-enzenberger/pentobi/</url>
 <url type="vcs-browser">https://github.com/enz/pentobi</url>
 <url type="contribute">https://github.com/enz/pentobi/blob/master/CONTRIBUTING.md</url>
 <developer_name>Markus Enzenberger</developer_name>
