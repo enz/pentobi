@@ -51,6 +51,12 @@ msgstr ""
 msgid "Markus Enzenberger"
 msgstr ""
 
+#: io.sourceforge.pentobi.appdata.xml.in:70
+msgid ""
+"Release notes are available in the file NEWS in the source code (https://"
+"github.com/enz/pentobi/blob/master/NEWS.md)."
+msgstr ""
+
 #: io.sourceforge.pentobi.desktop.in:4
 msgid "Computer opponent for Blokus"
 msgstr ""

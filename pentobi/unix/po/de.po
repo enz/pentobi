@@ -1,239 +1,17 @@
 # 
 # Translators:
-# Markus Enzenberger <enz@users.sourceforge.net>, 2021
+# Markus Enzenberger <enz@users.sourceforge.net>, 2023
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-03-01 17:33+0100\n"
-"PO-Revision-Date: 2019-02-25 15:36+0000\n"
-"Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2021\n"
-"Language-Team: German (https://www.transifex.com/markus-enzenberger/teams/89074/de/)\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2023\n"
+"Language-Team: German (https://app.transifex.com/markus-enzenberger/teams/89074/de/)\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
-msgctxt "_"
-msgid "translator-credits"
-msgstr "Markus Enzenberger <enz@users.sourceforge.net>, 2019"
-
-#. (itstool) path: refmeta/refmiscinfo
-#: pentobi-manpage.docbook.in:11 io.sourceforge.pentobi.appdata.xml.in:7
-#: io.sourceforge.pentobi.desktop.in:3
+#: io.sourceforge.pentobi.appdata.xml.in:7 io.sourceforge.pentobi.desktop.in:3
 msgid "Pentobi"
 msgstr "Pentobi"
-
-#. (itstool) path: refmeta/refmiscinfo
-#: pentobi-manpage.docbook.in:13
-msgid "Pentobi Command Reference"
-msgstr "Pentobi Befehlsreferenz"
-
-#. (itstool) path: refnamediv/refpurpose
-#: pentobi-manpage.docbook.in:17
-msgid "computer opponent for the board game Blokus"
-msgstr "Computer-Gegner für das Brettspiel Blokus"
-
-#. (itstool) path: refsynopsisdiv/cmdsynopsis
-#: pentobi-manpage.docbook.in:23
-msgid ""
-"<_:command-1/> <arg><_:option-2/> <replaceable>n</replaceable></arg> "
-"<arg><_:option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/></arg> "
-"<arg><_:option-6/> <replaceable>n</replaceable></arg> <arg><_:option-7/> "
-"<replaceable>n</replaceable></arg> <arg><_:option-8/></arg> "
-"<arg><replaceable>file.blksgf</replaceable></arg>"
-msgstr ""
-"<_:command-1/> <arg><_:option-2/> <replaceable>n</replaceable></arg> "
-"<arg><_:option-3/></arg> <arg><_:option-4/></arg> <arg><_:option-5/></arg> "
-"<arg><_:option-6/> <replaceable>n</replaceable></arg> <arg><_:option-7/> "
-"<replaceable>n</replaceable></arg> <arg><_:option-8/></arg> "
-"<arg><replaceable>Datei.blksgf</replaceable></arg>"
-
-#. (itstool) path: refsection/title
-#: pentobi-manpage.docbook.in:51
-msgid "Description"
-msgstr "Beschreibung"
-
-#. (itstool) path: refsection/para
-#: pentobi-manpage.docbook.in:52
-msgid ""
-"<_:command-1/> is the command to invoke the program Pentobi, which is a "
-"graphical user interface and computer opponent for the board game Blokus."
-msgstr ""
-"<_:command-1/> ist der Befehl zu Starten des Programms Pentobi, das eine "
-"grafische Oberfläche und ein Computer-Gegner für das Brettspiel Blokus ist."
-
-#. (itstool) path: refsection/para
-#: pentobi-manpage.docbook.in:57
-msgid ""
-"The command can take the name of a game file to open at startup as an "
-"optional argument. The game file is expected to be in Pentobi's SGF format "
-"as documented in Pentobi-SGF.md in the Pentobi source package."
-msgstr ""
-"Der Befehl kann den Namen einer Spieldatei als optionales Argument haben, "
-"die beim Start geöffnet werden soll. Die Spieldatei muss im Pentobi-SGF-"
-"Format sein, wie beschrieben in Pentobi-SGF.md im Quelltextpaket von "
-"Pentobi."
-
-#. (itstool) path: refsection/title
-#: pentobi-manpage.docbook.in:65
-msgid "Options"
-msgstr "Optionen"
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:71
-msgid "Display help and exit."
-msgstr "Hilfe anzeigen und Programm beenden."
-
-#. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:77 pentobi-manpage.docbook.in:123
-#: pentobi-manpage.docbook.in:133
-msgid "<_:option-1/> <replaceable>n</replaceable>"
-msgstr "<_:option-1/> <replaceable>n</replaceable>"
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:79
-msgid ""
-"Set the maximum playing level. Reducing this value reduces the amount of "
-"memory used by the search, which can be useful to run Pentobi on systems "
-"that have low memory or are too slow to use the highest levels. By default, "
-"Pentobi currently allocates up to 2 GB (but not more than a quarter of the "
-"physical memory available on the system). Reducing the maximum level to 8 "
-"currently reduces this amount by a factor of 3 to 4 and lower maximum levels"
-" even more."
-msgstr ""
-"Setzen der maximalen Spielstufe. Wird dieser Wert verkleinert, verringert "
-"sich der Speicherbedarf der Suche, was nützlich sein kann, um Pentobi auf "
-"Systemen laufen zu lassen, die wenig Speicher besitzen oder zu langsam für "
-"die höchsten Spielstufen sind. Standardmäßig belegt Pentobi bis zu 2 GB "
-"(aber nicht mehr als ein Viertel des auf dem System verfügbaren physischen "
-"Speichers). Ein Verringern der maximalen Spielstufe auf 8 vermindert "
-"gegenwärtig den Speicherbedarf um den Faktor 3 bis 4 und geringere maximale "
-"Spielstufen sogar noch mehr."
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:93
-msgid ""
-"Use a window layout optimized for smartphones and apply some user interface "
-"changes that assume that a touchscreen is the main input device. If this "
-"option is not used, the default layout depends on the platform. Using this "
-"option also changes the default style for GUI elements of QQuickControls 2 "
-"to Default if the style is not explicitly set with option <_:option-1/>."
-msgstr ""
-"Ein Fensterlayout benutzen, das für Smartphones optimiert ist und einige "
-"Änderungen der Benutzerpberfläche vornehmen, die annehmen, dass ein "
-"Touchscreen als primäres Eingabegerät verwendet wird. Das Benutzen dieser "
-"Option ändert auch den voreingestellen Style für Benutzeroberflächenelemente"
-" von QQuickControls 2 nach Default, wenn der Style nicht explizit mit der "
-"Option <_:option-1/> gesetzt wird."
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:106
-msgid "Do not use opening books."
-msgstr "Keine Eröffnungsbibliotheken benutzen."
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:114
-msgid ""
-"Do not delay fast computer moves. By default, the computer player adds a "
-"small delay if the move generation took less than a second to make it easier"
-" for the human to follow the game if the computer plays several moves in a "
-"row."
-msgstr ""
-"Computer-Züge nicht verzögern. Voreingestellt ist, dass der Computer-Spieler"
-" Züge ein wenig verzögert, die schneller als innerhalb einer Sekunde "
-"generiert werden, um es dem Benutzer leichter zu machen, dem Spiel zu "
-"folgen, wenn der Computer mehrere Züge nacheinander generiert."
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:125
-msgid ""
-"Set the seed for the random generator. Using a fixed seed makes the move "
-"generation deterministic if no multi-threading is used (see option "
-"<_:option-1/>)."
-msgstr ""
-"Setzt die Seed für den Zufallszahlengenerator. Eine feste Seed macht die "
-"Zuggenerierung deterministisch, falls kein Multi-Threading verwendet wird  "
-"(siehe Option <_:option-1/>)."
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:135
-msgid ""
-"The number of threads to use in the search. By default, up to 8 threads are "
-"used in the search depending on the number of hardware threads supported by "
-"the current system. Using more threads will speed up the move generation but"
-" using a very high number of threads (e.g. more than 8) can degrade the "
-"playing strength in higher playing levels."
-msgstr ""
-"Die Anzahl der Threads, die bei der Suche verwendet werden. Voreingestellt "
-"ist, dass die Suche bis zu 8 Threads verwendet, abhängig von Anzahl der auf "
-"dem System verfügbaren Hardware-Threads. Mehr Threads machen die Suche "
-"schneller, aber eine sehr hohen Anzahl (z. B. mehr als 8) kann die "
-"Spielstärke in höheren Spielstufen beeinträchtigen."
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:147
-msgid ""
-"Print internal information about the move generation and other debugging "
-"information to standard error."
-msgstr ""
-"Interne Informationen zur Zuggenerierung und andere Debugging-Informationen "
-"auf dem Standard-Error-Stream ausgeben."
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:157
-msgid "Display version and exit."
-msgstr "Hilfe anzeigen und Programm beenden."
-
-#. (itstool) path: refsection/title
-#: pentobi-manpage.docbook.in:166
-msgid "Standard Qt Options"
-msgstr "Standardoptionen von Qt"
-
-#. (itstool) path: refsection/para
-#: pentobi-manpage.docbook.in:167
-msgid ""
-"Additionally, any options supported by Qt applications can be used, such as:"
-msgstr ""
-"Zusätzlich können Optionen verwendet werden, die von Qt-Anwendungen "
-"unterstützt werden, wie zum Beispiel:"
-
-#. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:173
-msgid "<_:option-1/> <replaceable>d</replaceable>"
-msgstr "<_:option-1/> <replaceable>d</replaceable>"
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:175
-msgid "Switches displays on X11."
-msgstr "Schaltet unter X11 das Anzeigegerät um."
-
-#. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:181
-msgid "<_:option-1/> <replaceable>g</replaceable>"
-msgstr "<_:option-1/> <replaceable>g</replaceable>"
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:183
-msgid "Window geometry using the X11 syntax."
-msgstr "Fenstergeometrie in X11-Syntax."
-
-#. (itstool) path: varlistentry/term
-#: pentobi-manpage.docbook.in:189
-msgid "<_:option-1/> <replaceable>s</replaceable>"
-msgstr "<_:option-1/> <replaceable>s</replaceable>"
-
-#. (itstool) path: listitem/para
-#: pentobi-manpage.docbook.in:191
-msgid "Set the style for the GUI elements of QQuickControls."
-msgstr "Setzen des Style für Benutzeroberflächenelemente von QtQuickControls."
-
-#. (itstool) path: refsection/title
-#: pentobi-manpage.docbook.in:200
-msgid "See Also"
-msgstr "Siehe auch"
 
 #: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:5
 msgid "Computer opponent for the board game Blokus"
@@ -262,14 +40,6 @@ msgstr ""
 
 #: io.sourceforge.pentobi.appdata.xml.in:20
 msgid ""
-"System requirements: 1 GB RAM, 1 GHz CPU (4 GB RAM, 2.5 GHz dual-core or "
-"faster CPU recommended for playing level 9)."
-msgstr ""
-"Systemminima: 1 GB RAM, 1 GHz CPU (4 GB RAM, 2,5 GHz Dual-Core- oder "
-"schnellere CPU empfohlen für Spielstufe 9)."
-
-#: io.sourceforge.pentobi.appdata.xml.in:24
-msgid ""
 "Trademark disclaimer: The trademark Blokus and other trademarks referred to "
 "are property of their respective trademark holders. The trademark holders "
 "are not affiliated with the author of the program Pentobi."
@@ -278,29 +48,37 @@ msgstr ""
 "sind Eigentum ihrer jeweiligen Markeninhaber. Die Markeninhaber stehen in "
 "keiner Verbindung mit dem Autor des Programms Pentobi."
 
-#: io.sourceforge.pentobi.appdata.xml.in:35
+#: io.sourceforge.pentobi.appdata.xml.in:31
 msgid "Game variant Classic"
 msgstr "Spielvariante Klassisch"
 
-#: io.sourceforge.pentobi.appdata.xml.in:40
+#: io.sourceforge.pentobi.appdata.xml.in:36
 msgid "Game variant Duo"
 msgstr "Spielvariante Duo"
 
-#: io.sourceforge.pentobi.appdata.xml.in:45
+#: io.sourceforge.pentobi.appdata.xml.in:41
 msgid "Game variant Trigon"
 msgstr "Spielvariante Trigon"
 
-#: io.sourceforge.pentobi.appdata.xml.in:50
+#: io.sourceforge.pentobi.appdata.xml.in:46
 msgid "Game variant Nexos"
 msgstr "Spielvariante Nexos"
 
-#: io.sourceforge.pentobi.appdata.xml.in:55
+#: io.sourceforge.pentobi.appdata.xml.in:51
 msgid "Game variant GembloQ"
 msgstr "Spielvariante GembloQ"
 
-#: io.sourceforge.pentobi.appdata.xml.in:62
+#: io.sourceforge.pentobi.appdata.xml.in:60
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
+
+#: io.sourceforge.pentobi.appdata.xml.in:70
+msgid ""
+"Release notes are available in the file NEWS in the source code "
+"(https://github.com/enz/pentobi/blob/master/NEWS.md)."
+msgstr ""
+"Versionshinweise sind in der Datei NEWS im Quelltext verfügbar "
+"(https://github.com/enz/pentobi/blob/master/NEWS.md)."
 
 #: io.sourceforge.pentobi.desktop.in:4
 msgid "Computer opponent for Blokus"

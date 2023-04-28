@@ -65,6 +65,13 @@ https://pentobi.sourceforge.io/pentobi-gembloq.png</image>
 </provides>
 <content_rating type="oars-1.1"/>
 <releases>
-<release version="@PENTOBI_VERSION@" date="@PENTOBI_RELEASE_DATE@"/>
+<release version="@PENTOBI_VERSION@" date="@PENTOBI_RELEASE_DATE@">
+<description>
+<p>
+Release notes are available in the file NEWS in the source code
+(https://github.com/enz/pentobi/blob/master/NEWS.md).
+</p>
+</description>
+</release>
 </releases>
 </component>
