@@ -6,6 +6,7 @@ msgid ""
 msgstr ""
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2023\n"
 "Language-Team: German (https://app.transifex.com/markus-enzenberger/teams/89074/de/)\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 

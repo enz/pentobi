@@ -1,6 +1,6 @@
 #!/bin/bash
 
 cd $(dirname "$0")
-xgettext -o pentobi-unix.pot --omit-header --add-comments="TRANSLATORS:" \
+xgettext -o pentobi-unix.pot --add-comments="TRANSLATORS:" \
   io.sourceforge.pentobi.appdata.xml.in io.sourceforge.pentobi.desktop.in \
   io.sourceforge.pentobi.xml.in
