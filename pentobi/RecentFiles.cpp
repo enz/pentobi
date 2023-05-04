@@ -40,8 +40,8 @@ void RecentFiles::add(const QString& file, const QString& displayName)
 
 void RecentFiles::checkMax([[maybe_unused]]const QString& currentFile)
 {
-    while (m_entries.length() > maxRecentFiles)
-        m_entries.removeLast();
+    if (m_entries.length() > maxRecentFiles)
+        m_entries.resize(maxRecentFiles);
 }
 
 void RecentFiles::clear([[maybe_unused]]const QString& currentFile)
