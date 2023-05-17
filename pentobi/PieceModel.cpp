@@ -11,6 +11,7 @@
 #include "libpentobi_base/GembloQTransform.h"
 #include "libpentobi_base/TrigonTransform.h"
 
+using namespace Qt::StringLiterals;
 using libboardgame_base::ArrayList;
 using libboardgame_base::CoordPoint;
 using libboardgame_base::TransfIdentity;
@@ -184,61 +185,61 @@ const Transform* PieceModel::getTransform(const QString& state) const
     auto pieceSet = m_bd.get_piece_set();
     if (pieceSet == PieceSet::trigon)
     {
-        if (state == QStringLiteral("60"))
+        if (state == "60"_L1)
             return transforms.find<TransfTrigonRot60>();
-        if (state == QStringLiteral("120"))
+        if (state == "120"_L1)
             return transforms.find<TransfTrigonRot120>();
-        if (state == QStringLiteral("180"))
+        if (state == "180"_L1)
             return transforms.find<TransfTrigonRot180>();
-        if (state == QStringLiteral("240"))
+        if (state == "240"_L1)
             return transforms.find<TransfTrigonRot240>();
-        if (state == QStringLiteral("300"))
+        if (state == "300"_L1)
             return transforms.find<TransfTrigonRot300>();
-        if (state == QStringLiteral("flip"))
+        if (state == "flip"_L1)
             return transforms.find<TransfTrigonReflRot180>();
-        if (state == QStringLiteral("60flip"))
+        if (state == "60flip"_L1)
             return transforms.find<TransfTrigonReflRot120>();
-        if (state == QStringLiteral("120flip"))
+        if (state == "120flip"_L1)
             return transforms.find<TransfTrigonReflRot60>();
-        if (state == QStringLiteral("180flip"))
+        if (state == "180flip"_L1)
             return transforms.find<TransfTrigonRefl>();
-        if (state == QStringLiteral("240flip"))
+        if (state == "240flip"_L1)
             return transforms.find<TransfTrigonReflRot300>();
-        if (state == QStringLiteral("300flip"))
+        if (state == "300flip"_L1)
             return transforms.find<TransfTrigonReflRot240>();
         return transforms.find<TransfTrigonIdentity>();
     }
     if (pieceSet == PieceSet::gembloq)
     {
-        if (state == QStringLiteral("90"))
+        if (state == "90"_L1)
             return transforms.find<TransfGembloQRot90>();
-        if (state == QStringLiteral("180"))
+        if (state == "180"_L1)
             return transforms.find<TransfGembloQRot180>();
-        if (state == QStringLiteral("270"))
+        if (state == "270"_L1)
             return transforms.find<TransfGembloQRot270>();
-        if (state == QStringLiteral("flip"))
+        if (state == "flip"_L1)
             return transforms.find<TransfGembloQRot180Refl>();
-        if (state == QStringLiteral("90flip"))
+        if (state == "90flip"_L1)
             return transforms.find<TransfGembloQRot90Refl>();
-        if (state == QStringLiteral("180flip"))
+        if (state == "180flip"_L1)
             return transforms.find<TransfGembloQRefl>();
-        if (state == QStringLiteral("270flip"))
+        if (state == "270flip"_L1)
             return transforms.find<TransfGembloQRot270Refl>();
         return transforms.find<TransfGembloQIdentity>();
     }
-    if (state == QStringLiteral("90"))
+    if (state == "90"_L1)
         return transforms.find<TransfRectRot90>();
-    if (state == QStringLiteral("180"))
+    if (state == "180"_L1)
         return transforms.find<TransfRectRot180>();
-    if (state == QStringLiteral("270"))
+    if (state == "270"_L1)
         return transforms.find<TransfRectRot270>();
-    if (state == QStringLiteral("flip"))
+    if (state == "flip"_L1)
         return transforms.find<TransfRectRot180Refl>();
-    if (state == QStringLiteral("90flip"))
+    if (state == "90flip"_L1)
         return transforms.find<TransfRectRot90Refl>();
-    if (state == QStringLiteral("180flip"))
+    if (state == "180flip"_L1)
         return transforms.find<TransfRectRefl>();
-    if (state == QStringLiteral("270flip"))
+    if (state == "270flip"_L1)
         return transforms.find<TransfRectRot270Refl>();
     return transforms.find<TransfIdentity>();
 }
@@ -359,61 +360,61 @@ void PieceModel::setTransform(const Transform* transform)
     if (pieceSet == PieceSet::trigon)
     {
         if (dynamic_cast<const TransfTrigonRot60*>(transform))
-            state = QStringLiteral("60");
+            state = "60"_L1;
         else if (dynamic_cast<const TransfTrigonRot120*>(transform))
-            state = QStringLiteral("120");
+            state = "120"_L1;
         else if (dynamic_cast<const TransfTrigonRot180*>(transform))
-            state = QStringLiteral("180");
+            state = "180"_L1;
         else if (dynamic_cast<const TransfTrigonRot240*>(transform))
-            state = QStringLiteral("240");
+            state = "240"_L1;
         else if (dynamic_cast<const TransfTrigonRot300*>(transform))
-            state = QStringLiteral("300");
+            state = "300"_L1;
         else if (dynamic_cast<const TransfTrigonReflRot180*>(transform))
-            state = QStringLiteral("flip");
+            state = "flip"_L1;
         else if (dynamic_cast<const TransfTrigonReflRot120*>(transform))
-            state = QStringLiteral("60flip");
+            state = "60flip"_L1;
         else if (dynamic_cast<const TransfTrigonReflRot60*>(transform))
-            state = QStringLiteral("120flip");
+            state = "120flip"_L1;
         else if (dynamic_cast<const TransfTrigonRefl*>(transform))
-            state = QStringLiteral("180flip");
+            state = "180flip"_L1;
         else if (dynamic_cast<const TransfTrigonReflRot300*>(transform))
-            state = QStringLiteral("240flip");
+            state = "240flip"_L1;
         else if (dynamic_cast<const TransfTrigonReflRot240*>(transform))
-            state = QStringLiteral("300flip");
+            state = "300flip"_L1;
     }
     else if (pieceSet == PieceSet::gembloq)
     {
         if (dynamic_cast<const TransfGembloQRot90*>(transform))
-            state = QStringLiteral("90");
+            state = "90"_L1;
         else if (dynamic_cast<const TransfGembloQRot180*>(transform))
-            state = QStringLiteral("180");
+            state = "180"_L1;
         else if (dynamic_cast<const TransfGembloQRot270*>(transform))
-            state = QStringLiteral("270");
+            state = "270"_L1;
         else if (dynamic_cast<const TransfGembloQRot180Refl*>(transform))
-            state = QStringLiteral("flip");
+            state = "flip"_L1;
         else if (dynamic_cast<const TransfGembloQRot90Refl*>(transform))
-            state = QStringLiteral("90flip");
+            state = "90flip"_L1;
         else if (dynamic_cast<const TransfGembloQRefl*>(transform))
-            state = QStringLiteral("180flip");
+            state = "180flip"_L1;
         else if (dynamic_cast<const TransfGembloQRot270Refl*>(transform))
-            state = QStringLiteral("270flip");
+            state = "270flip"_L1;
     }
     else
     {
         if (dynamic_cast<const TransfRectRot90*>(transform))
-            state = QStringLiteral("90");
+            state = "90"_L1;
         else if (dynamic_cast<const TransfRectRot180*>(transform))
-            state = QStringLiteral("180");
+            state = "180"_L1;
         else if (dynamic_cast<const TransfRectRot270*>(transform))
-            state = QStringLiteral("270");
+            state = "270"_L1;
         else if (dynamic_cast<const TransfRectRot180Refl*>(transform))
-            state = QStringLiteral("flip");
+            state = "flip"_L1;
         else if (dynamic_cast<const TransfRectRot90Refl*>(transform))
-            state = QStringLiteral("90flip");
+            state = "90flip"_L1;
         else if (dynamic_cast<const TransfRectRefl*>(transform))
-            state = QStringLiteral("180flip");
+            state = "180flip"_L1;
         else if (dynamic_cast<const TransfRectRot270Refl*>(transform))
-            state = QStringLiteral("270flip");
+            state = "270flip"_L1;
     }
     if (m_state == state)
         return;

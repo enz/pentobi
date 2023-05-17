@@ -16,6 +16,7 @@
 #include "libboardgame_base/Log.h"
 #include "CreateThumbnail.h"
 
+using namespace Qt::StringLiterals;
 using namespace std;
 
 //-----------------------------------------------------------------------------
@@ -43,15 +44,14 @@ int main(int argc, char* argv[])
                         "main",
                         "thumbnailer for Blokus game records as used by Pentobi"));
         QCommandLineOption optionSize(
-                    QStringList() << QStringLiteral("s")
-                    << QStringLiteral("size"),
+                    QStringList() << "s"_L1 << "size"_L1,
                     //: Description for command line option --size
                     QCoreApplication::translate(
                         "main",
                         "Generate image with height and width <size>."),
                     //: Value name for command line option --size
                     QCoreApplication::translate("main", "size"),
-                    QStringLiteral("128"));
+                    "128"_L1);
         parser.addOption(optionSize);
         parser.addHelpOption();
         parser.addVersionOption();

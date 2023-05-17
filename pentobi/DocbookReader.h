@@ -9,6 +9,8 @@
 
 #include <QObject>
 
+using namespace Qt::StringLiterals;
+
 //-----------------------------------------------------------------------------
 
 /** Converts help in Docbook format into Qt rich text.
@@ -54,7 +56,7 @@ private:
 
     qreal m_imageWidth = 0;
 
-    QString m_pageId = {QStringLiteral("index")};
+    QString m_pageId = {"index"_L1};
 
     QString m_text;
 

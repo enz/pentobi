@@ -25,6 +25,8 @@
 #include <QLibraryInfo>
 #endif
 
+using namespace Qt::StringLiterals;
+
 //-----------------------------------------------------------------------------
 
 namespace {
@@ -33,21 +35,19 @@ namespace {
 
 int mainAndroid()
 {
-    QQuickStyle::setStyle("Material");
+    QQuickStyle::setStyle("Material"_L1);
     QQmlApplicationEngine engine;
-    engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
+    engine.addImageProvider("pentobi"_L1, new ImageProvider);
     auto ctx = engine.rootContext();
-    ctx->setContextProperty(QStringLiteral("globalStyle"),
-                            QQuickStyle::name());
-    ctx->setContextProperty(QStringLiteral("initialFile"),
-                            AndroidUtils::getInitialFile());
-    ctx->setContextProperty(QStringLiteral("isDesktop"), QVariant(false));
+    ctx->setContextProperty("globalStyle"_L1, QQuickStyle::name());
+    ctx->setContextProperty("initialFile"_L1, AndroidUtils::getInitialFile());
+    ctx->setContextProperty("isDesktop"_L1, QVariant(false));
 #ifdef QT_DEBUG
-    ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(true));
+    ctx->setContextProperty("isDebug"_L1, QVariant(true));
 #else
-    ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(false));
+    ctx->setContextProperty("isDebug"_L1, QVariant(false));
 #endif
-    engine.load(QStringLiteral("qrc:///qml/Main.qml"));
+    engine.load("qrc:///qml/Main.qml"_L1);
     if (engine.rootObjects().empty())
         return 1;
     return QGuiApplication::exec();
@@ -57,11 +57,10 @@ int mainAndroid()
 
 int mainDesktop()
 {
-    QIcon::setThemeName(QStringLiteral("pentobi"));
-    QIcon icon(QStringLiteral(":/icon/pentobi-48.png"));
+    QIcon::setThemeName("pentobi"_L1);
+    QIcon icon(":/icon/pentobi-48.png"_L1);
     QGuiApplication::setWindowIcon(icon);
-    QGuiApplication::setDesktopFileName(
-                QStringLiteral("io.sourceforge.pentobi"));
+    QGuiApplication::setDesktopFileName("io.sourceforge.pentobi"_L1);
     QCommandLineParser parser;
     parser.setApplicationDescription(
                 QCoreApplication::translate(
@@ -69,48 +68,48 @@ int mainDesktop()
                     "computer opponent for the board game Blokus"));
     auto maxSupportedLevel = Player::max_supported_level;
     QCommandLineOption optionMaxLevel(
-                QStringLiteral("maxlevel"),
+                "maxlevel"_L1,
                 //: Description for command line option --maxlevel
                 QCoreApplication::translate(
                     "main", "Set maximum level to <n>."),
-                QStringLiteral("n"),
+                "n"_L1,
                 QString::number(PlayerModel::maxLevel));
     parser.addOption(optionMaxLevel);
     QCommandLineOption optionNoBook(
-                QStringLiteral("nobook"),
+                "nobook"_L1,
                 //: Description for command line option --nobook
                 QCoreApplication::translate(
                     "main", "Do not use opening books."));
     QCommandLineOption optionMobile(
-                QStringLiteral("mobile"),
+                "mobile"_L1,
                 //: Description for command line option --mobile
                 QCoreApplication::translate(
                     "main", "Use layout optimized for smartphones."));
     parser.addOption(optionMobile);
     parser.addOption(optionNoBook);
     QCommandLineOption optionNoDelay(
-                QStringLiteral("nodelay"),
+                "nodelay"_L1,
                 //: Description for command line option --nodelay
                 QCoreApplication::translate(
                     "main", "Do not delay fast computer moves."));
     parser.addOption(optionNoDelay);
     QCommandLineOption optionSeed(
-                QStringLiteral("seed"),
+                "seed"_L1,
                 //: Description for command line option --seed
                 QCoreApplication::translate(
                     "main", "Set random seed to <n>."),
-                QStringLiteral("n"));
+                "n"_L1);
     parser.addOption(optionSeed);
     QCommandLineOption optionThreads(
-                QStringLiteral("threads"),
+                "threads"_L1,
                 //: Description for command line option --threads
                 QCoreApplication::translate(
                     "main", "Use <n> threads (0=auto)."),
-                QStringLiteral("n"));
+                "n"_L1);
     parser.addOption(optionThreads);
 #ifndef LIBBOARDGAME_DISABLE_LOG
     QCommandLineOption optionVerbose(
-                QStringLiteral("verbose"),
+                "verbose"_L1,
                 //: Description for command line option --verbose
                 QCoreApplication::translate(
                     "main",
@@ -168,19 +167,17 @@ int mainDesktop()
         if (! args.empty())
             initialFile = args.at(0);
         QQmlApplicationEngine engine;
-        engine.addImageProvider(QStringLiteral("pentobi"), new ImageProvider);
+        engine.addImageProvider("pentobi"_L1, new ImageProvider);
         auto ctx = engine.rootContext();
-        ctx->setContextProperty(QStringLiteral("globalStyle"),
-                                QQuickStyle::name());
-        ctx->setContextProperty(QStringLiteral("initialFile"), initialFile);
-        ctx->setContextProperty(QStringLiteral("isDesktop"),
-                                QVariant(isDesktop));
+        ctx->setContextProperty("globalStyle"_L1, QQuickStyle::name());
+        ctx->setContextProperty("initialFile"_L1, initialFile);
+        ctx->setContextProperty("isDesktop"_L1, QVariant(isDesktop));
 #ifdef QT_DEBUG
-        ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(true));
+        ctx->setContextProperty("isDebug"_L1, QVariant(true));
 #else
-        ctx->setContextProperty(QStringLiteral("isDebug"), QVariant(false));
+        ctx->setContextProperty("isDebug"_L1, QVariant(false));
 #endif
-        engine.load(QStringLiteral("qrc:///qml/Main.qml"));
+        engine.load("qrc:///qml/Main.qml"_L1);
         if (engine.rootObjects().empty())
             return 1;
         return QGuiApplication::exec();
@@ -217,8 +214,8 @@ int main(int argc, char *argv[])
 #else
     qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
 #endif
-    QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
-    QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
+    QCoreApplication::setOrganizationName("Pentobi"_L1);
+    QCoreApplication::setApplicationName("Pentobi"_L1);
 #ifdef VERSION
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif

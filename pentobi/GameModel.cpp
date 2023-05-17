@@ -24,6 +24,7 @@
 #include "AndroidUtils.h"
 #endif
 
+using namespace Qt::StringLiterals;
 using libboardgame_base::get_letter_coord;
 using libboardgame_base::to_lower;
 using libboardgame_base::ArrayList;
@@ -197,17 +198,16 @@ void GameModel::autoSave()
 {
     auto& tree = m_game.get_tree();
     QSettings settings;
-    settings.setValue(QStringLiteral("variant"),
-                      to_string_id(m_game.get_variant()));
+    settings.setValue("variant"_L1, to_string_id(m_game.get_variant()));
     if (! m_file.isEmpty() && ! m_isModified)
-        settings.remove(QStringLiteral("autosave"));
+        settings.remove("autosave"_L1);
     else
-        settings.setValue(QStringLiteral("autosave"), getSgf());
-    settings.setValue(QStringLiteral("file"), m_file);
+        settings.setValue("autosave"_L1, getSgf());
+    settings.setValue("file"_L1, m_file);
     m_autosaveDate = QDateTime::currentMSecsSinceEpoch();
-    settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
-    settings.setValue(QStringLiteral("fileDate"), m_fileDate);
-    settings.setValue(QStringLiteral("isModified"), m_isModified);
+    settings.setValue("autosaveDate"_L1, m_autosaveDate);
+    settings.setValue("fileDate"_L1, m_fileDate);
+    settings.setValue("isModified"_L1, m_isModified);
     QVariantList location;
     uint depth = 0;
     auto node = &m_game.get_current();
@@ -220,7 +220,7 @@ void GameModel::autoSave()
         ++depth;
     }
     location.prepend(depth);
-    settings.setValue(QStringLiteral("autosaveLocation"), location);
+    settings.setValue("autosaveLocation"_L1, location);
 }
 
 void GameModel::backToMainVar()
@@ -244,11 +244,11 @@ bool GameModel::checkAutosaveModifiedOutside()
     return false;
 #else
     QSettings settings;
-    auto autosaveDate = settings.value(QStringLiteral("autosaveDate"));
+    auto autosaveDate = settings.value("autosaveDate"_L1);
     return m_autosaveDate != 0 && autosaveDate != 0
             && m_autosaveDate != autosaveDate
-            && settings.value(QStringLiteral("isModified")).toBool()
-            && settings.value(QStringLiteral("autosave")).toByteArray() != getSgf();
+            && settings.value("isModified"_L1).toBool()
+            && settings.value("autosave"_L1).toByteArray() != getSgf();
 #endif
 }
 
@@ -447,7 +447,7 @@ QVariantList GameModel::getPieceModels(int color)
 Variant GameModel::getInitialGameVariant()
 {
     QSettings settings;
-    auto variantString = settings.value(QStringLiteral("variant")).toString();
+    auto variantString = settings.value("variant"_L1).toString();
     Variant variant;
     if (! parse_variant_id(variantString.toLocal8Bit().constData(), variant))
         variant = Variant::duo;
@@ -470,17 +470,17 @@ QString GameModel::getMoveAnnotationAtNode(const SgfNode& node) const
     try
     {
         if (m_game.get_good_move(node) == 2)
-            return QStringLiteral("‼");
+            return u"‼"_s;
         if (m_game.get_good_move(node) == 1)
-            return QStringLiteral("!");
+            return u"!"_s;
         if (m_game.is_interesting_move(node))
-            return QStringLiteral("⁉");
+            return u"⁉"_s;
         if (m_game.is_doubtful_move(node))
-            return QStringLiteral("⁈");
+            return u"⁈"_s;
         if (m_game.get_bad_move(node) == 1)
-            return QStringLiteral("?");
+            return u"?"_s;
         if (m_game.get_bad_move(node) == 2)
-            return QStringLiteral("⁇");
+            return u"⁇"_s;
     }
     catch (const SgfError&)
     {
@@ -850,26 +850,22 @@ bool GameModel::loadAutoSave()
 {
     {
         QSettings settings;
-        auto file = settings.value(QStringLiteral("file")).toString();
-        auto isModified =
-                settings.value(QStringLiteral("isModified")).toBool();
+        auto file = settings.value("file"_L1).toString();
+        auto isModified = settings.value("isModified"_L1).toBool();
         if (! file.isEmpty() && ! isModified)
         {
             if (! openFile(file))
                 return false;
             updateFileInfo(file);
             m_autosaveDate = m_fileDate;
-            settings.setValue(QStringLiteral("autosaveDate"), m_autosaveDate);
+            settings.setValue("autosaveDate"_L1, m_autosaveDate);
         }
         else
         {
-            if (! openByteArray(settings.value(
-                                    QStringLiteral("autosave")).toByteArray()))
+            if (! openByteArray(settings.value("autosave"_L1).toByteArray()))
                 return false;
-            m_fileDate = settings.value(
-                        QStringLiteral("fileDate")).toLongLong();
-            m_autosaveDate = settings.value(
-                        QStringLiteral("autosaveDate")).toLongLong();
+            m_fileDate = settings.value("fileDate"_L1).toLongLong();
+            m_autosaveDate = settings.value("autosaveDate"_L1).toLongLong();
             setFile(file);
         }
         // Sanitize isModified if value from settings is inconsistent
@@ -1192,7 +1188,7 @@ void GameModel::restoreAutoSaveLocation()
 {
     QSettings settings;
     auto location =
-            settings.value(QStringLiteral("autosaveLocation")).value<QVariantList>();
+        settings.value("autosaveLocation"_L1).value<QVariantList>();
     if (location.empty())
         return;
     int index = 0;
@@ -1311,17 +1307,17 @@ void GameModel::setMoveAnnotationAtNode(const SgfNode& node,
                                         const QString& annotation)
 {
     m_game.remove_move_annotation(node);
-    if (annotation == QStringLiteral("!"))
+    if (annotation == u"!"_s)
         m_game.set_good_move(node);
-    else if (annotation == QStringLiteral("‼"))
+    else if (annotation == u"‼"_s)
         m_game.set_good_move(node, 2);
-    else if (annotation == QStringLiteral("?"))
+    else if (annotation == u"?"_s)
         m_game.set_bad_move(node);
-    else if (annotation == QStringLiteral("⁇"))
+    else if (annotation == u"⁇"_s)
         m_game.set_bad_move(node, 2);
-    else if (annotation == QStringLiteral("⁉"))
+    else if (annotation == u"⁉"_s)
         m_game.set_interesting_move(node);
-    else if (annotation == QStringLiteral("⁈"))
+    else if (annotation == u"⁈"_s)
         m_game.set_doubtful_move(node);
     updateIsModified();
     updatePositionInfo();

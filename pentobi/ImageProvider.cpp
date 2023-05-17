@@ -10,6 +10,7 @@
 #include "libpentobi_paint/Paint.h"
 
 using namespace std;
+using namespace Qt::StringLiterals;
 using namespace libpentobi_paint;
 
 //-----------------------------------------------------------------------------
@@ -40,7 +41,7 @@ QPixmap ImageProvider::requestPixmap(const QString& id, QSize* size,
     if (elem.empty())
         return pixmap;
     auto name = elem[0];
-    if (name == QStringLiteral("board") && elem.size() == 8)
+    if (name == "board"_L1 && elem.size() == 8)
     {
         auto gameVariant = elem[1].toLocal8Bit();
         QColor base(elem[2]);
@@ -57,16 +58,16 @@ QPixmap ImageProvider::requestPixmap(const QString& id, QSize* size,
     else if (elem.size() == 2)
     {
         QColor base(elem[1]);
-        if (name == QStringLiteral("junction-all"))
+        if (name == "junction-all"_L1)
             paintJunctionAll(painter, 0, 0, width, height, base);
-        else if (name == QStringLiteral("junction-right"))
+        else if (name == "junction-right"_L1)
             paintJunctionRight(painter, 0, 0, width, height, base);
-        else if (name == QStringLiteral("junction-straight"))
+        else if (name == "junction-straight"_L1)
             paintJunctionStraight(painter, 0, 0, width, height, base);
-        else if (name == QStringLiteral("junction-t"))
+        else if (name == "junction-t"_L1)
             paintJunctionT(painter, 0, 0, width, height, base);
     }
-    else if (name == QStringLiteral("quarter-square") && elem.size() == 3)
+    else if (name == "quarter-square"_L1 && elem.size() == 3)
     {
         QColor base(elem[1]);
         QColor light(elem[2]);
@@ -77,14 +78,14 @@ QPixmap ImageProvider::requestPixmap(const QString& id, QSize* size,
         QColor base(elem[1]);
         QColor dark(elem[2]);
         QColor light(elem[3]);
-        if (name == QStringLiteral("frame"))
+        if (name == "frame"_L1)
             paintCallistoOnePiece(painter, 0, 0, width, height, base, light,
                                   dark);
-        else if (name == QStringLiteral("square"))
+        else if (name == "square"_L1)
             paintSquare(painter, 0, 0, width, height, base, light, dark);
-        else if (name == QStringLiteral("triangle"))
+        else if (name == "triangle"_L1)
             paintTriangleUp(painter, 0, 0, width, height, base, light, dark);
-        else if (name == QStringLiteral("triangle-down"))
+        else if (name == "triangle-down"_L1)
             paintTriangleDown(painter, 0, 0, width, height, base, light, dark);
     }
     return pixmap;

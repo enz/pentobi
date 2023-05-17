@@ -66,8 +66,8 @@ void PlayerModel::genMoveFinished()
 
 void PlayerModel::loadBook(Variant variant)
 {
-    QFile file(QStringLiteral(":/pentobi_books/book_%1.blksgf")
-               .arg(to_string_id(variant)));
+    QFile file(QString(":/pentobi_books/book_%1.blksgf")
+                   .arg(to_string_id(variant)));
     if (! file.open(QIODevice::ReadOnly))
         return;
     QTextStream stream(&file);

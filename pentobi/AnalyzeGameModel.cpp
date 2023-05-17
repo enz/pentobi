@@ -13,6 +13,7 @@
 #include "PlayerModel.h"
 #include "libboardgame_base/SgfUtil.h"
 
+using namespace Qt::StringLiterals;
 using libboardgame_base::ArrayList;
 
 //-----------------------------------------------------------------------------
@@ -59,7 +60,7 @@ void AnalyzeGameModel::autoSave(GameModel* gameModel)
     auto nuMoves = m_analyzeGame.get_nu_moves();
     QSettings settings;
     if (nuMoves == 0 || m_analyzeGame.get_variant() != variant)
-        settings.remove(QStringLiteral("analyzeGame"));
+        settings.remove("analyzeGame"_L1);
     else
     {
         list.append(to_string_id(variant));
@@ -71,8 +72,7 @@ void AnalyzeGameModel::autoSave(GameModel* gameModel)
             list.append(bd.to_string(mv.move).c_str());
             list.append(m_analyzeGame.get_value(i));
         }
-        settings.setValue(QStringLiteral("analyzeGame"),
-                          QVariant::fromValue(list));
+        settings.setValue("analyzeGame"_L1, QVariant::fromValue(list));
     }
 }
 
@@ -159,9 +159,7 @@ void AnalyzeGameModel::gotoMove(GameModel* gameModel, int moveNumber)
 void AnalyzeGameModel::loadAutoSave(GameModel* gameModel)
 {
     QSettings settings;
-    auto list =
-            settings.value(
-                QStringLiteral("analyzeGame")).value<QVariantList>();
+    auto list = settings.value("analyzeGame"_L1).value<QVariantList>();
     qsizetype size = list.size();
     qsizetype index = 0;
     if (index >= size)

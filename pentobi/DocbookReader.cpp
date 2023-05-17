@@ -21,12 +21,11 @@ namespace {
 
 void addHeader(QString& text)
 {
-    text.append(QStringLiteral(
-                    "<head><style>"
-                    "body { background-color:white;color:black;"
-                    "       line-height:115% }"
-                    ":link { text-decoration:none;color:blue }"
-                    "</style></head><body>"));
+    text.append("<head><style>"
+                "body { background-color:white;color:black;"
+                "       line-height:115% }"
+                ":link { text-decoration:none;color:blue }"
+                "</style></head><body>"_L1);
 }
 
 } //namespace
@@ -38,28 +37,25 @@ DocbookReader::DocbookReader(QObject* parent)
 {
 
     QString locale = QLocale::system().name();
-    m_fileName = QStringLiteral(":/help/index_%1.docbook").arg(locale);
+    m_fileName = ":/help/index_%1.docbook"_L1.arg(locale);
     if (! QFile::exists(m_fileName))
     {
-        m_fileName = QStringLiteral(":/help/index_%1.docbook").arg(
-                    locale.left(locale.indexOf(QStringLiteral("_"))));
+        m_fileName = ":/help/index_%1.docbook"_L1.arg(
+                         locale.left(locale.indexOf("_"_L1)));
         if (! QFile::exists(m_fileName))
-            m_fileName = QStringLiteral(":/help/index.docbook");
+            m_fileName = ":/help/index.docbook"_L1;
     }
     QFile file(m_fileName);
     if (! file.open(QFile::ReadOnly))
         return;
     QXmlStreamReader reader(&file);
-    if (! reader.readNextStartElement()
-            || reader.name() != QStringLiteral("book"))
+    if (! reader.readNextStartElement() || reader.name() != "book"_L1)
         return;
-    m_pageIds.append(QStringLiteral("index"));
+    m_pageIds.append("index"_L1);
     while (reader.readNextStartElement())
     {
-        if (reader.name() == QStringLiteral("chapter"))
-            m_pageIds.append(
-                        reader.attributes().value(
-                            QStringLiteral("id")).toString());
+        if (reader.name() == "chapter"_L1)
+            m_pageIds.append(reader.attributes().value("id"_L1).toString());
         reader.skipCurrentElement();
     }
     setText();
@@ -71,14 +67,13 @@ QString DocbookReader::getPage(const QString& id) const
     if (! file.open(QFile::ReadOnly))
         return {};
     QXmlStreamReader reader(&file);
-    if (! reader.readNextStartElement()
-            || reader.name() != QStringLiteral("book"))
+    if (! reader.readNextStartElement() || reader.name() != "book"_L1)
         return {};
     while (reader.readNextStartElement())
     {
-        if (reader.name() == QStringLiteral("chapter"))
+        if (reader.name() == "chapter"_L1)
         {
-            if (reader.attributes().value(QStringLiteral("id")) == id)
+            if (reader.attributes().value("id"_L1) == id)
                 break;
             reader.skipCurrentElement();
         }
@@ -93,63 +88,62 @@ QString DocbookReader::getPage(const QString& id) const
         switch (reader.readNext())
         {
         case QXmlStreamReader::StartElement:
-            if (reader.name() == QStringLiteral("guibutton")
-                    || reader.name() == QStringLiteral("guilabel")
-                    || reader.name() == QStringLiteral("guimenu")
-                    || reader.name() == QStringLiteral("guimenuitem")
-                    || reader.name() == QStringLiteral("keysym"))
-                text.append(QStringLiteral("<i>"));
-            else if (reader.name() == QStringLiteral("imagedata"))
+            if (reader.name() == "guibutton"_L1
+                    || reader.name() == "guilabel"_L1
+                    || reader.name() == "guimenu"_L1
+                    || reader.name() == "guimenuitem"_L1
+                    || reader.name() == "keysym"_L1)
+                text.append("<i>"_L1);
+            else if (reader.name() == "imagedata"_L1)
             {
-                text.append(QStringLiteral("<div style=\"margin-left:"));
+                text.append("<div style=\"margin-left:"_L1);
                 text.append(QString::number((m_textWidth - m_imageWidth) / 2));
-                text.append(QStringLiteral("\"><img src=qrc:/help/"));
-                text.append(reader.attributes().value(
-                                QStringLiteral("fileref")));
-                text.append(QStringLiteral(" width="));
+                text.append("\"><img src=qrc:/help/"_L1);
+                text.append(reader.attributes().value("fileref"_L1));
+                text.append(" width="_L1);
                 text.append(QString::number(m_imageWidth));
-                text.append(QStringLiteral("></div>"));
+                text.append("></div>"_L1);
             }
-            else if (reader.name() == QStringLiteral("listitem"))
-                text.append(QStringLiteral("<blockquote>"));
-            else if (reader.name() == QStringLiteral("para"))
-                text.append(QStringLiteral("<p>"));
-            else if (reader.name() == QStringLiteral("sect1"))
+            else if (reader.name() == "listitem"_L1)
+                text.append("<blockquote>"_L1);
+            else if (reader.name() == "para"_L1)
+                text.append("<p>"_L1);
+            else if (reader.name() == "sect1"_L1)
                 ++headerLevel;
-            else if (reader.name() == QStringLiteral("title"))
+            else if (reader.name() == "title"_L1)
             {
                 if (headerLevel > 1)
-                    text.append(QStringLiteral("<h2>"));
+                    text.append("<h2>"_L1);
                 else
-                    text.append(QStringLiteral("<h1>"));
+                    text.append("<h1>"_L1);
             }
-            else if (reader.name() == QStringLiteral("varlistentry"))
-                text.append(QStringLiteral("<div>"));
+            else if (reader.name() == "varlistentry"_L1)
+                text.append("<div>"_L1);
             break;
         case QXmlStreamReader::EndElement:
-            if (reader.name() == QStringLiteral("guibutton")
-                    || reader.name() == QStringLiteral("guilabel")
-                    || reader.name() == QStringLiteral("guimenu")
-                    || reader.name() == QStringLiteral("guimenuitem")
-                    || reader.name() == QStringLiteral("keysym"))
-                text.append(QStringLiteral("</i>"));
-            else if (reader.name() == QStringLiteral("chapter"))
+            if (reader.name() == "guibutton"_L1
+                    || reader.name() == "guilabel"_L1
+                    || reader.name() == "guimenu"_L1
+                    || reader.name() == "guimenuitem"_L1
+                    || reader.name() == "keysym"_L1)
+                text.append("</i>"_L1);
+            else if (reader.name() == "chapter"_L1)
                 finished = true;
-            else if (reader.name() == QStringLiteral("listitem"))
-                text.append(QStringLiteral("</blockquote>"));
-            else if (reader.name() == QStringLiteral("para"))
-                text.append(QStringLiteral("</p>"));
-            else if (reader.name() == QStringLiteral("sect1"))
+            else if (reader.name() == "listitem"_L1)
+                text.append("</blockquote>"_L1);
+            else if (reader.name() == "para"_L1)
+                text.append("</p>"_L1);
+            else if (reader.name() == "sect1"_L1)
                 --headerLevel;
-            else if (reader.name() == QStringLiteral("title"))
+            else if (reader.name() == "title"_L1)
             {
                 if (headerLevel > 1)
-                    text.append(QStringLiteral("</h2>"));
+                    text.append("</h2>"_L1);
                 else
-                    text.append(QStringLiteral("</h1>"));
+                    text.append("</h1>"_L1);
             }
-            else if (reader.name() == QStringLiteral("varlistentry"))
-                text.append(QStringLiteral("</div>"));
+            else if (reader.name() == "varlistentry"_L1)
+                text.append("</div>"_L1);
             break;
         case QXmlStreamReader::Characters:
             text.append(reader.text());
@@ -166,21 +160,20 @@ QString DocbookReader::getTableOfContents() const
     if (! file.open(QFile::ReadOnly))
         return {};
     QXmlStreamReader reader(&file);
-    if (! reader.readNextStartElement()
-            || reader.name() != QStringLiteral("book"))
+    if (! reader.readNextStartElement() || reader.name() != "book"_L1)
         return {};
     QString bookTitle;
     QStringList chapterTitles;
     while (reader.readNextStartElement())
     {
-        if (reader.name() == QStringLiteral("title"))
+        if (reader.name() == "title"_L1)
             bookTitle = reader.readElementText();
-        else if (reader.name() == QStringLiteral("chapter"))
+        else if (reader.name() == "chapter"_L1)
         {
             QString chapterTitle;
             while (reader.readNextStartElement())
             {
-                if (reader.name() == QStringLiteral("title"))
+                if (reader.name() == "title"_L1)
                     chapterTitle = reader.readElementText();
                 else
                     reader.skipCurrentElement();
@@ -192,19 +185,19 @@ QString DocbookReader::getTableOfContents() const
     }
     QString text;
     addHeader(text);
-    text.append(QStringLiteral("<h1>"));
+    text.append("<h1>"_L1);
     text.append(bookTitle);
-    text.append(QStringLiteral("</h1>"));
+    text.append("</h1>"_L1);
     for (int i = 0; i < chapterTitles.size(); ++i)
     {
-        text.append(QStringLiteral("<a href="));
+        text.append("<a href="_L1);
         if (i + 1 < m_pageIds.size())
             text.append(m_pageIds[i + 1]);
         else
             LIBBOARDGAME_ASSERT(false);
-        text.append(QStringLiteral(">"));
+        text.append(">"_L1);
         text.append(chapterTitles[i]);
-        text.append(QStringLiteral("</a><br/>"));
+        text.append("</a><br/>"_L1);
     }
     return text;
 }
@@ -223,39 +216,39 @@ void DocbookReader::setNavigation()
     }
     QString text;
     addHeader(text);
-    text.append(QStringLiteral("<table width=100%><tr><td width=34%>"));
+    text.append("<table width=100%><tr><td width=34%>"_L1);
     if (prevId >= 0)
     {
-        text.append(QStringLiteral("<a href="));
+        text.append("<a href="_L1);
         text.append(m_pageIds[prevId]);
-        text.append(QStringLiteral(">"));
+        text.append(">"_L1);
         //: Go to previous page of user manual
         text.append(tr("Previous"));
-        text.append(QStringLiteral("</a>"));
+        text.append("</a>"_L1);
     }
     else
-        text.append(QStringLiteral("&#160;"));
-    text.append(QStringLiteral("</td><td width=32% align=center>"));
-    if (m_pageId != QStringLiteral("index"))
+        text.append("&#160;"_L1);
+    text.append("</td><td width=32% align=center>"_L1);
+    if (m_pageId != "index"_L1)
     {
-        text.append(QStringLiteral("<a href=index>"));
+        text.append("<a href=index>"_L1);
         //: Go to table of contents of user manual
         text.append(tr("Contents"));
-        text.append(QStringLiteral("</a>"));
+        text.append("</a>"_L1);
     }
-    text.append(QStringLiteral("</td><td width=34% align=right>"));
+    text.append("</td><td width=34% align=right>"_L1);
     if (nextId >= 0)
     {
-        text.append(QStringLiteral("<a href="));
+        text.append("<a href="_L1);
         text.append(m_pageIds[nextId]);
-        text.append(QStringLiteral(">"));
+        text.append(">"_L1);
         //: Go to next page of user manual
         text.append(tr("Next"));
-        text.append(QStringLiteral("</a>"));
+        text.append("</a>"_L1);
     }
     else
-        text.append(QStringLiteral("&#160;"));
-    text.append(QStringLiteral("</td></tr></table>"));
+        text.append("&#160;"_L1);
+    text.append("</td></tr></table>"_L1);
     m_navigationText = text;
     if (prevId >= 0)
         m_prevPageId = m_pageIds[prevId];
@@ -278,7 +271,7 @@ void DocbookReader::setPageId(const QString& pageId)
 
 void DocbookReader::setText()
 {
-    if (m_pageId == QStringLiteral("index"))
+    if (m_pageId == "index"_L1)
         m_text = getTableOfContents();
     else
         m_text = getPage(m_pageId);

@@ -9,6 +9,8 @@
 #include <QSettings>
 #include "AndroidUtils.h"
 
+using namespace Qt::StringLiterals;
+
 //-----------------------------------------------------------------------------
 
 RecentFiles::RecentFiles(QObject* parent)
@@ -25,7 +27,7 @@ void RecentFiles::add(const QString& file, const QString& displayName)
     while (i.hasNext())
     {
         auto entry = i.next().value<QVariantMap>();
-        if (entry[QStringLiteral("file")] == file)
+        if (entry["file"_L1] == file)
             i.remove();
     }
     QVariantMap entry{ { "file", file }, { "displayName", displayName } };
@@ -33,7 +35,7 @@ void RecentFiles::add(const QString& file, const QString& displayName)
     checkMax(file);
     {
         QSettings settings;
-        settings.setValue(QStringLiteral("recentFiles"), m_entries);
+        settings.setValue("recentFiles"_L1, m_entries);
     }
     emit entriesChanged();
 }
@@ -49,7 +51,7 @@ void RecentFiles::clear([[maybe_unused]]const QString& currentFile)
     m_entries.clear();
     {
         QSettings settings;
-        settings.remove(QStringLiteral("recentFiles"));
+        settings.remove("recentFiles"_L1);
     }
     emit entriesChanged();
 }
@@ -58,19 +60,18 @@ void RecentFiles::load()
 {
     {
         QSettings settings;
-        m_entries = settings.value(QStringLiteral("recentFiles")).toList();
+        m_entries = settings.value("recentFiles"_L1).toList();
     }
     QMutableListIterator i(m_entries);
     while (i.hasNext())
     {
         auto entry = i.next().toMap();
-        if (! entry.contains(QStringLiteral("file"))
-                || ! entry.contains(QStringLiteral("displayName")))
+        if (! entry.contains("file"_L1) || ! entry.contains("displayName"_L1))
         {
             i.remove();
             continue;
         }
-        auto file = entry[QStringLiteral("file")].toString();
+        auto file = entry["file"_L1].toString();
         if (! AndroidUtils::checkExists(file))
             i.remove();
     }
