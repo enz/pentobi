@@ -6,7 +6,6 @@
 
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
 import pentobi
 
 Rectangle {
@@ -55,8 +54,6 @@ Rectangle {
         id: flickable
 
         anchors.fill: parent
-        Layout.fillHeight: true
-        Layout.fillWidth: true
         clip: true
         boundsMovement: Flickable.StopAtBounds
         contentWidth: width
