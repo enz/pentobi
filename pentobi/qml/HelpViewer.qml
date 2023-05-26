@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Basic
 import pentobi
 
 Rectangle {
@@ -67,11 +67,8 @@ Rectangle {
 
             TextArea {
                 width: parent.width
-                // Avoid frame in some styles
-                // (https://github.com/lwchkg/pentobi/issues/2#issuecomment-1095506572)
-                background: Item { }
-                leftPadding: font.pixelSize
-                rightPadding: leftPadding
+                leftPadding: textAreaPadding
+                rightPadding: textAreaPadding
                 textFormat: TextArea.RichText
                 readOnly: true
                 selectByMouse: false
@@ -95,9 +92,6 @@ Rectangle {
                 id: textArea
 
                 width: parent.width
-                // Avoid frame in some styles
-                // (https://github.com/lwchkg/pentobi/issues/2#issuecomment-1095506572)
-                background: Item { }
                 leftPadding: textAreaPadding
                 rightPadding: textAreaPadding
                 textFormat: TextArea.RichText
