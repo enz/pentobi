@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 23.2-dev (v23-fixes)
 ----------------------------
 
-*
+* Fixed rendering issues in help viewer on Android with Qt 6.5.
 
 Version 23.1 (12 Mar 2023)
 --------------------------
