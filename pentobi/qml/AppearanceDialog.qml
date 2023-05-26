@@ -96,7 +96,7 @@ PentobiDialog {
     }
     onApplied: {
         onAccepted()
-        onOpened()
+        onAboutToShow()
     }
 
     Flickable {
