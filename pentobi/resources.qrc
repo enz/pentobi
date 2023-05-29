@@ -8,7 +8,6 @@
 <file>qml/AppearanceDialog.qml</file>
 <file>qml/Board.qml</file>
 <file>qml/BoardContextMenu.qml</file>
-<file>qml/ButtonApply.qml</file>
 <file>qml/ButtonCancel.qml</file>
 <file>qml/ButtonClose.qml</file>
 <file>qml/ButtonOk.qml</file>
