@@ -14,6 +14,8 @@ Version 24.0-dev (master)
 Version 23.2-dev (v23-fixes)
 ----------------------------
 
+* Don't refuse to open SGF files with non-SGF text after tree (e.g.
+  files that were corrupted on Android by bug fixed in version 23.1).
 * Apply button in appearance dialog was sometimes wrongly disabled.
 * Fixed rendering issues in help viewer on Android with Qt 6.5.
 
