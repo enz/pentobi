@@ -96,7 +96,7 @@ bool Reader::read(istream& in, bool check_single_tree)
         if (is_ascii_space(c))
             m_in->get();
         else
-            throw ReadError("Extra characters after end of tree.");
+            return false;
     }
 }
 
