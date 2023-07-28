@@ -216,7 +216,9 @@ int main(int argc, char *argv[])
 #elif defined(Q_OS_WIN)
     qputenv("QT_QUICK_CONTROLS_STYLE", "Universal");
 #else
-    qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
+    // Fusion style is buggy in Qt 6.5. Disabled and enabled menu items look
+    // the same (tested with Qt 6.5.2 on Ubuntu 23.04)
+    qputenv("QT_QUICK_CONTROLS_STYLE", "Basic");
 #endif
     QCoreApplication::setOrganizationName(QStringLiteral("Pentobi"));
     QCoreApplication::setApplicationName(QStringLiteral("Pentobi"));
