@@ -8,7 +8,6 @@ Version 23.2-dev (v23-fixes)
   files that were corrupted on Android by bug fixed in version 23.1).
 * Apply button in appearance dialog was sometimes wrongly disabled.
 * Fixed rendering issues in help viewer on Android with Qt 6.5.
-* Use Basic style on desktop because Fusion style is buggy in Qt 6.5. 
 
 Version 23.1 (12 Mar 2023)
 --------------------------
