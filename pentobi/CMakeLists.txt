@@ -157,7 +157,7 @@ if(ANDROID)
     set_property(TARGET pentobi APPEND PROPERTY
         QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
     set_property(TARGET pentobi APPEND PROPERTY
-        QT_ANDROID_TARGET_SDK_VERSION 31)
+        QT_ANDROID_TARGET_SDK_VERSION 33)
 else()
     install(TARGETS pentobi)
 endif()
