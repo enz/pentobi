@@ -167,15 +167,15 @@ void RatingModel::clearRating()
 
 QString RatingModel::getDir() const
 {
-    return "%1/Rated Games/%2"_L1.arg(
-                QStandardPaths::writableLocation(QStandardPaths::AppDataLocation),
-                m_gameVariantName);
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+           + QDir::separator() + "Rated Games" + QDir::separator()
+           + m_gameVariantName;
 }
 
 QString RatingModel::getFile(int gameNumber) const
 {
-    return "%1/%2 %3.blksgf"_L1.arg(getDir(), m_gameVariantName,
-                                    QString::number(gameNumber));
+    return getDir() + QDir::separator() + m_gameVariantName + " "_L1
+           + QString::number(gameNumber) + ".blksgf"_L1;
 }
 
 int RatingModel::getGameNumber(int historyIndex) const
@@ -187,7 +187,7 @@ int RatingModel::getGameNumber(int historyIndex) const
 
 int RatingModel::getGameNumberOfFile(const QString& file) const
 {
-    QString left = "%1/%2 "_L1.arg(getDir(), m_gameVariantName);
+    QString left = getDir() + QDir::separator() + m_gameVariantName + " "_L1;
     if (! file.startsWith(left))
         return 0;
     QString right = ".blksgf"_L1;
