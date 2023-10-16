@@ -1,11 +1,11 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_paint/Paint.h
+/** @file pentobi/Paint.h
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-#ifndef LIBPENTOBI_PAINT_H
-#define LIBPENTOBI_PAINT_H
+#ifndef PENTOBI_PAINT_H
+#define PENTOBI_PAINT_H
 
 #include <QtGlobal>
 #include "libpentobi_base/Grid.h"
@@ -14,8 +14,6 @@
 
 class QColor;
 class QPainter;
-
-namespace libpentobi_paint {
 
 using libpentobi_base::Grid;
 using libpentobi_base::Geometry;
@@ -76,6 +74,4 @@ void paintTriangleUp(QPainter& painter, qreal x, qreal y, qreal width,
 
 //-----------------------------------------------------------------------------
 
-} // namespace libpentobi_paint
-
-#endif // LIBPENTOBI_PAINT_H
+#endif // PENTOBI_PAINT_H

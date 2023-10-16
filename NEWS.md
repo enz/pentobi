@@ -4,6 +4,8 @@ Pentobi Release Notes
 Version 24.0-dev (master)
 -------------------------
 
+* Removed GNOME thumbnailer, which didn't work anyway if installed via
+  Flatpak.
 * Don't include man pages anymore. Use --help or --help-all to list the
   command line options for pentobi and pentobi-thumbnailer.
 * Don't use Qt.labs.platform anymore. This replaces the run-time

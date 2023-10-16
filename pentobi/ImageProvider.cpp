@@ -7,11 +7,10 @@
 #include "ImageProvider.h"
 
 #include <QPainter>
-#include "libpentobi_paint/Paint.h"
+#include "Paint.h"
 
 using namespace std;
 using namespace Qt::StringLiterals;
-using namespace libpentobi_paint;
 
 //-----------------------------------------------------------------------------
 

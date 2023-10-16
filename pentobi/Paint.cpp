@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file libpentobi_paint/Paint.cpp
+/** @file pentobi/Paint.cpp
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -17,8 +17,6 @@ using libpentobi_base::Color;
 using libpentobi_base::ColorMap;
 using libpentobi_base::GeometryType;
 using libpentobi_base::Point;
-
-namespace libpentobi_paint {
 
 //-----------------------------------------------------------------------------
 
@@ -891,5 +889,3 @@ void paintTriangleUp(QPainter& painter, qreal x, qreal y, qreal width,
 }
 
 //-----------------------------------------------------------------------------
-
-} // namespace libpentobi_paint

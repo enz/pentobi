@@ -7,7 +7,6 @@ set(PENTOBI_RELEASE_DATE XXXX-XX-XX)
 include(GNUInstallDirs)
 
 option(PENTOBI_BUILD_GUI "Build GUI" ON)
-option(PENTOBI_BUILD_THUMBNAILER "Build thumbnailer for Gnome" ON)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
 option(BUILD_TESTING "Build tests" OFF)
 
@@ -57,9 +56,5 @@ if(PENTOBI_BUILD_GUI)
     find_package(Qt6 6.4 REQUIRED
         COMPONENTS Concurrent LinguistTools QuickControls2)
     qt_standard_project_setup()
-    add_subdirectory(libpentobi_paint)
     add_subdirectory(pentobi)
-    if(PENTOBI_BUILD_THUMBNAILER AND UNIX AND NOT ANDROID)
-        add_subdirectory(pentobi_thumbnailer)
-    endif()
 endif()

@@ -57,12 +57,8 @@ computer player used in Pentobi.
   Tool for playing Blokus games between two GTP engines (currently only
   supported on Unix)
 
-The GUI modules implement the user interface. They depend on the
+The GUI module implements the user interface. It depends on the
 [Qt](https://www.qt.io/) libraries.
 
 * __[pentobi](pentobi)__
   Main program that provides a GUI for the player in libpentobi_mcts
-* __[pentobi_thumbnailer](pentobi_thumbnailer)__
-  File preview generator for the [Gnome](http://www.gnome.org) desktop
-* __[libpentobi_paint](libpentobi_paint)__
-  Common functionality for pentobi and pentobi_thumbnailer

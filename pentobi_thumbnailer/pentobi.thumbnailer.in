@@ -1,3 +1,0 @@
-[Thumbnailer Entry]
-Exec=@CMAKE_INSTALL_FULL_BINDIR@/pentobi-thumbnailer --size %s %i %o
-MimeType=application/x-blokus-sgf;

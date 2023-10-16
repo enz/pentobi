@@ -123,6 +123,8 @@ set(pentobi_src
     ImageProvider.h
     ImageProvider.cpp
     Main.cpp
+    Paint.h
+    Paint.cpp
     PieceModel.h
     PieceModel.cpp
     PlayerModel.h
@@ -170,7 +172,6 @@ target_compile_definitions(pentobi PRIVATE
     )
 
 target_link_libraries(pentobi PRIVATE
-    pentobi_paint
     pentobi_mcts
     Qt::Concurrent
     Qt::Qml
