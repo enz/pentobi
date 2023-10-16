@@ -167,7 +167,7 @@ void RatingModel::clearRating()
 
 QString RatingModel::getDir() const
 {
-    return QString("%1/Rated Games/%2").arg(
+    return "%1/Rated Games/%2"_L1.arg(
                 QStandardPaths::writableLocation(QStandardPaths::AppDataLocation),
                 m_gameVariantName);
 }
@@ -197,8 +197,6 @@ int RatingModel::getGameNumberOfFile(const QString& file) const
     auto rightLen = right.length();
     int n;
     bool ok;
-    // Don't use midRef() as suggested by clazy-qstring-ref, QString::midRef()
-    // doesn't exist in Qt 6
     n = file.mid(leftLen, file.length() - leftLen - rightLen).toInt(&ok);
     return ok && n >= 1 && n <= m_numberGames ? n : 0;
 }
