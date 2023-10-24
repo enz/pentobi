@@ -35,7 +35,6 @@ void AnalyzeGame::run(const Game& game, Search& search, size_t nu_simulations,
     auto& root = game.get_root();
     auto node = &root;
     WallTimeSource time_source;
-    node = &root;
     auto tie_value = Search::SearchParamConst::tie_value;
     const auto max_count = Float(nu_simulations);
     double max_time = 0;
