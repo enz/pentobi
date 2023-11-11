@@ -65,7 +65,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_command)
     ostringstream out;
     GtpEngine engine;
     engine.exec_main_loop(in, out);
-    LIBBOARDGAME_CHECK_EQUAL(string("= true\n\n"), out.str());
+    LIBBOARDGAME_CHECK_EQUAL(string("= true\n\n"), out.str())
 }
 
 LIBBOARDGAME_TEST_CASE(gtp_engine_command_with_id)
@@ -74,7 +74,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_command_with_id)
     ostringstream out;
     GtpEngine engine;
     engine.exec_main_loop(in, out);
-    LIBBOARDGAME_CHECK_EQUAL(string("=10 true\n\n"), out.str());
+    LIBBOARDGAME_CHECK_EQUAL(string("=10 true\n\n"), out.str())
 }
 
 /** Check that invalid responses with one empty line are sanitized. */
@@ -88,7 +88,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_empty_lines)
                              " \n"
                              "because it contains an empty line\n"
                              "\n"),
-                      out.str());
+                      out.str())
 }
 
 /** Check that invalid responses with two empty lines are sanitized. */
@@ -103,7 +103,7 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_empty_lines_2)
                              " \n"
                              "because it contains two empty lines\n"
                              "\n"),
-                      out.str());
+                      out.str())
 }
 
 LIBBOARDGAME_TEST_CASE(gtp_engine_unknown_command)
@@ -112,8 +112,8 @@ LIBBOARDGAME_TEST_CASE(gtp_engine_unknown_command)
     ostringstream out;
     GtpEngine engine;
     engine.exec_main_loop(in, out);
-    LIBBOARDGAME_CHECK(out.str().size() >= 2);
-    LIBBOARDGAME_CHECK_EQUAL(string("? "), out.str().substr(0, 2));
+    LIBBOARDGAME_CHECK(out.str().size() >= 2)
+    LIBBOARDGAME_CHECK_EQUAL(string("? "), out.str().substr(0, 2))
 }
 
 //-----------------------------------------------------------------------------

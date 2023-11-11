@@ -22,19 +22,19 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_delete_all_variations)
     auto& node2 = tree.create_new_child(node1);
     auto& node3 = tree.create_new_child(node2);
     auto& node4 = tree.create_new_child(node1);
-    LIBBOARDGAME_CHECK_EQUAL(root.get_nu_children(), 1u);
-    LIBBOARDGAME_CHECK_EQUAL(node1.get_nu_children(), 2u);
-    LIBBOARDGAME_CHECK_EQUAL(node2.get_nu_children(), 1u);
-    LIBBOARDGAME_CHECK_EQUAL(node3.get_nu_children(), 0u);
-    LIBBOARDGAME_CHECK_EQUAL(node4.get_nu_children(), 0u);
+    LIBBOARDGAME_CHECK_EQUAL(root.get_nu_children(), 1u)
+    LIBBOARDGAME_CHECK_EQUAL(node1.get_nu_children(), 2u)
+    LIBBOARDGAME_CHECK_EQUAL(node2.get_nu_children(), 1u)
+    LIBBOARDGAME_CHECK_EQUAL(node3.get_nu_children(), 0u)
+    LIBBOARDGAME_CHECK_EQUAL(node4.get_nu_children(), 0u)
     tree.clear_modified();
-    LIBBOARDGAME_CHECK(! tree.is_modified());
+    LIBBOARDGAME_CHECK(! tree.is_modified())
     tree.delete_all_variations();
-    LIBBOARDGAME_CHECK(tree.is_modified());
-    LIBBOARDGAME_CHECK_EQUAL(root.get_nu_children(), 1u);
-    LIBBOARDGAME_CHECK_EQUAL(node1.get_nu_children(), 1u);
-    LIBBOARDGAME_CHECK_EQUAL(node2.get_nu_children(), 1u);
-    LIBBOARDGAME_CHECK_EQUAL(node3.get_nu_children(), 0u);
+    LIBBOARDGAME_CHECK(tree.is_modified())
+    LIBBOARDGAME_CHECK_EQUAL(root.get_nu_children(), 1u)
+    LIBBOARDGAME_CHECK_EQUAL(node1.get_nu_children(), 1u)
+    LIBBOARDGAME_CHECK_EQUAL(node2.get_nu_children(), 1u)
+    LIBBOARDGAME_CHECK_EQUAL(node3.get_nu_children(), 0u)
 }
 
 //-----------------------------------------------------------------------------

@@ -36,34 +36,34 @@ LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_iterate)
     auto& geo = RectGeometry::get(3, 3);
     auto i = geo.begin();
     auto end = geo.end();
-    LIBBOARDGAME_CHECK(i != end);
-    LIBBOARDGAME_CHECK(geo.get_point(0, 0) == *i);
+    LIBBOARDGAME_CHECK(i != end)
+    LIBBOARDGAME_CHECK(geo.get_point(0, 0) == *i)
     ++i;
-    LIBBOARDGAME_CHECK(i != end);
-    LIBBOARDGAME_CHECK(geo.get_point(1, 0) == *i);
+    LIBBOARDGAME_CHECK(i != end)
+    LIBBOARDGAME_CHECK(geo.get_point(1, 0) == *i)
     ++i;
-    LIBBOARDGAME_CHECK(i != end);
-    LIBBOARDGAME_CHECK(geo.get_point(2, 0) == *i);
+    LIBBOARDGAME_CHECK(i != end)
+    LIBBOARDGAME_CHECK(geo.get_point(2, 0) == *i)
     ++i;
-    LIBBOARDGAME_CHECK(i != end);
-    LIBBOARDGAME_CHECK(geo.get_point(0, 1) == *i);
+    LIBBOARDGAME_CHECK(i != end)
+    LIBBOARDGAME_CHECK(geo.get_point(0, 1) == *i)
     ++i;
-    LIBBOARDGAME_CHECK(i != end);
-    LIBBOARDGAME_CHECK(geo.get_point(1, 1) == *i);
+    LIBBOARDGAME_CHECK(i != end)
+    LIBBOARDGAME_CHECK(geo.get_point(1, 1) == *i)
     ++i;
-    LIBBOARDGAME_CHECK(i != end);
-    LIBBOARDGAME_CHECK(geo.get_point(2, 1) == *i);
+    LIBBOARDGAME_CHECK(i != end)
+    LIBBOARDGAME_CHECK(geo.get_point(2, 1) == *i)
     ++i;
-    LIBBOARDGAME_CHECK(i != end);
-    LIBBOARDGAME_CHECK(geo.get_point(0, 2) == *i);
+    LIBBOARDGAME_CHECK(i != end)
+    LIBBOARDGAME_CHECK(geo.get_point(0, 2) == *i)
     ++i;
-    LIBBOARDGAME_CHECK(i != end);
-    LIBBOARDGAME_CHECK(geo.get_point(1, 2) == *i);
+    LIBBOARDGAME_CHECK(i != end)
+    LIBBOARDGAME_CHECK(geo.get_point(1, 2) == *i)
     ++i;
-    LIBBOARDGAME_CHECK(i != end);
-    LIBBOARDGAME_CHECK(geo.get_point(2, 2) == *i);
+    LIBBOARDGAME_CHECK(i != end)
+    LIBBOARDGAME_CHECK(geo.get_point(2, 2) == *i)
     ++i;
-    LIBBOARDGAME_CHECK(i == end);
+    LIBBOARDGAME_CHECK(i == end)
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_from_string)
@@ -71,28 +71,28 @@ LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_from_string)
     auto& geo = RectGeometry::get(19, 19);
     Point p;
 
-    LIBBOARDGAME_CHECK(from_string("a1", geo, p));
-    LIBBOARDGAME_CHECK(p == geo.get_point(0, 18));
+    LIBBOARDGAME_CHECK(from_string("a1", geo, p))
+    LIBBOARDGAME_CHECK(p == geo.get_point(0, 18))
 
-    LIBBOARDGAME_CHECK(from_string("a19", geo, p));
-    LIBBOARDGAME_CHECK(p == geo.get_point(0, 0));
+    LIBBOARDGAME_CHECK(from_string("a19", geo, p))
+    LIBBOARDGAME_CHECK(p == geo.get_point(0, 0))
 
-    LIBBOARDGAME_CHECK(from_string("A1", geo, p));
-    LIBBOARDGAME_CHECK(p == geo.get_point(0, 18));
+    LIBBOARDGAME_CHECK(from_string("A1", geo, p))
+    LIBBOARDGAME_CHECK(p == geo.get_point(0, 18))
 
-    LIBBOARDGAME_CHECK(! from_string("foobar", geo, p));
-    LIBBOARDGAME_CHECK(! from_string("a123", geo, p));
-    LIBBOARDGAME_CHECK(! from_string("a56", geo, p));
-    LIBBOARDGAME_CHECK(! from_string("aa1", geo, p));
-    LIBBOARDGAME_CHECK(! from_string("c3#", geo, p));
+    LIBBOARDGAME_CHECK(! from_string("foobar", geo, p))
+    LIBBOARDGAME_CHECK(! from_string("a123", geo, p))
+    LIBBOARDGAME_CHECK(! from_string("a56", geo, p))
+    LIBBOARDGAME_CHECK(! from_string("aa1", geo, p))
+    LIBBOARDGAME_CHECK(! from_string("c3#", geo, p))
 }
 
 LIBBOARDGAME_TEST_CASE(boardgame_rect_geometry_to_string)
 {
     auto& geo = RectGeometry::get(19, 19);
-    LIBBOARDGAME_CHECK_EQUAL(string("a1"), geo.to_string(geo.get_point(0, 18)));
-    LIBBOARDGAME_CHECK_EQUAL(string("a19"), geo.to_string(geo.get_point(0, 0)));
-    LIBBOARDGAME_CHECK_EQUAL(string("j10"), geo.to_string(geo.get_point(9, 9)));
+    LIBBOARDGAME_CHECK_EQUAL(string("a1"), geo.to_string(geo.get_point(0, 18)))
+    LIBBOARDGAME_CHECK_EQUAL(string("a19"), geo.to_string(geo.get_point(0, 0)))
+    LIBBOARDGAME_CHECK_EQUAL(string("j10"), geo.to_string(geo.get_point(9, 9)))
 }
 
 //-----------------------------------------------------------------------------

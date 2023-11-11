@@ -65,7 +65,7 @@ struct TestRegistrar
 
 #define LIBBOARDGAME_CHECK(expr)                                        \
     if (! (expr))                                                       \
-        throw libboardgame_test::TestFail(__FILE__, __LINE__, "check failed")
+        throw libboardgame_test::TestFail(__FILE__, __LINE__, "check failed");
 
 #define LIBBOARDGAME_CHECK_EQUAL(expr1, expr2)                          \
     {                                                                   \

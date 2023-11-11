@@ -24,17 +24,17 @@ LIBBOARDGAME_TEST_CASE(boardgame_point_transform_get_transformed)
     Point p = geo.get_point(1, 2);
     {
         libboardgame_base::PointTransfIdent<Point> transform;
-        LIBBOARDGAME_CHECK(transform.get_transformed(p, geo) == p);
+        LIBBOARDGAME_CHECK(transform.get_transformed(p, geo) == p)
     }
     {
         libboardgame_base::PointTransfRot180<Point> transform;
         LIBBOARDGAME_CHECK(transform.get_transformed(p, geo)
-                           == geo.get_point(7, 6));
+                           == geo.get_point(7, 6))
     }
     {
         libboardgame_base::PointTransfRot270Refl<Point> transform;
         LIBBOARDGAME_CHECK(transform.get_transformed(p, geo)
-                           == geo.get_point(2, 1));
+                           == geo.get_point(2, 1))
     }
 }
 

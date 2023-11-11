@@ -19,9 +19,9 @@ LIBBOARDGAME_TEST_CASE(sgf_util_get_path_from_root)
     auto& child = root->create_new_child();
     vector<const SgfNode*> path;
     get_path_from_root(child, path);
-    LIBBOARDGAME_CHECK_EQUAL(path.size(), 2u);
-    LIBBOARDGAME_CHECK_EQUAL(path[0], root.get());
-    LIBBOARDGAME_CHECK_EQUAL(path[1], &child);
+    LIBBOARDGAME_CHECK_EQUAL(path.size(), 2u)
+    LIBBOARDGAME_CHECK_EQUAL(path[0], root.get())
+    LIBBOARDGAME_CHECK_EQUAL(path[1], &child)
 }
 
 //-----------------------------------------------------------------------------

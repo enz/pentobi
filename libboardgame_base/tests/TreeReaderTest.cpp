@@ -21,11 +21,11 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_basic)
     TreeReader reader;
     reader.read(in);
     auto& root = reader.get_tree();
-    LIBBOARDGAME_CHECK(root.has_property("B"));
-    LIBBOARDGAME_CHECK(root.has_single_child());
+    LIBBOARDGAME_CHECK(root.has_property("B"))
+    LIBBOARDGAME_CHECK(root.has_single_child())
     auto& child = root.get_child();
-    LIBBOARDGAME_CHECK(child.has_property("W"));
-    LIBBOARDGAME_CHECK(! child.has_children());
+    LIBBOARDGAME_CHECK(child.has_property("W"))
+    LIBBOARDGAME_CHECK(! child.has_children())
 }
 
 LIBBOARDGAME_TEST_CASE(sgf_tree_reader_basic_2)
@@ -34,10 +34,10 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_basic_2)
     TreeReader reader;
     reader.read(in);
     auto& root = reader.get_tree();
-    LIBBOARDGAME_CHECK_EQUAL(root.get_property("C"), "1");
-    LIBBOARDGAME_CHECK_EQUAL(root.get_nu_children(), 2u);
-    LIBBOARDGAME_CHECK_EQUAL(root.get_child(0).get_property("C"), "2.1");
-    LIBBOARDGAME_CHECK_EQUAL(root.get_child(1).get_property("C"), "2.2");
+    LIBBOARDGAME_CHECK_EQUAL(root.get_property("C"), "1")
+    LIBBOARDGAME_CHECK_EQUAL(root.get_nu_children(), 2u)
+    LIBBOARDGAME_CHECK_EQUAL(root.get_child(0).get_property("C"), "2.1")
+    LIBBOARDGAME_CHECK_EQUAL(root.get_child(1).get_property("C"), "2.2")
 }
 
 LIBBOARDGAME_TEST_CASE(sgf_tree_reader_multiprop_with_whitespace)
@@ -47,12 +47,12 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_multiprop_with_whitespace)
     reader.read(in);
     auto& root = reader.get_tree();
     auto values = root.get_multi_property("A");
-    LIBBOARDGAME_CHECK_EQUAL(values.size(), 5u);
-    LIBBOARDGAME_CHECK_EQUAL(values[0], "1");
-    LIBBOARDGAME_CHECK_EQUAL(values[1], "2");
-    LIBBOARDGAME_CHECK_EQUAL(values[2], "3");
-    LIBBOARDGAME_CHECK_EQUAL(values[3], "4");
-    LIBBOARDGAME_CHECK_EQUAL(values[4], "5");
+    LIBBOARDGAME_CHECK_EQUAL(values.size(), 5u)
+    LIBBOARDGAME_CHECK_EQUAL(values[0], "1")
+    LIBBOARDGAME_CHECK_EQUAL(values[1], "2")
+    LIBBOARDGAME_CHECK_EQUAL(values[2], "3")
+    LIBBOARDGAME_CHECK_EQUAL(values[3], "4")
+    LIBBOARDGAME_CHECK_EQUAL(values[4], "5")
 }
 
 /** Test that a property value with a unicode character is preserved after
@@ -73,7 +73,7 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_unicode)
     istringstream in(out.str());
     TreeReader reader;
     reader.read(in);
-    LIBBOARDGAME_CHECK_EQUAL(reader.get_tree().get_property(id), value);
+    LIBBOARDGAME_CHECK_EQUAL(reader.get_tree().get_property(id), value)
 }
 
 LIBBOARDGAME_TEST_CASE(sgf_tree_reader_property_after_newline)
@@ -83,8 +83,8 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_property_after_newline)
     TreeReader reader;
     reader.read(in);
     auto& root = reader.get_tree();
-    LIBBOARDGAME_CHECK(root.has_property("FF"));
-    LIBBOARDGAME_CHECK(root.has_property("CA"));
+    LIBBOARDGAME_CHECK(root.has_property("FF"))
+    LIBBOARDGAME_CHECK(root.has_property("CA"))
 }
 
 /** Test cross-platform handling of property values containing newlines.
@@ -98,21 +98,21 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_newline)
         TreeReader reader;
         reader.read(in);
         auto& root = reader.get_tree();
-        LIBBOARDGAME_CHECK_EQUAL(root.get_property("C"), "1\n2");
+        LIBBOARDGAME_CHECK_EQUAL(root.get_property("C"), "1\n2")
     }
     {
         istringstream in("(;C[1\r\n2])");
         TreeReader reader;
         reader.read(in);
         auto& root = reader.get_tree();
-        LIBBOARDGAME_CHECK_EQUAL(root.get_property("C"), "1\n2");
+        LIBBOARDGAME_CHECK_EQUAL(root.get_property("C"), "1\n2")
     }
     {
         istringstream in("(;C[1\r2])");
         TreeReader reader;
         reader.read(in);
         auto& root = reader.get_tree();
-        LIBBOARDGAME_CHECK_EQUAL(root.get_property("C"), "1\n2");
+        LIBBOARDGAME_CHECK_EQUAL(root.get_property("C"), "1\n2")
     }
 }
 
@@ -120,14 +120,14 @@ LIBBOARDGAME_TEST_CASE(sgf_tree_reader_property_without_value)
 {
     istringstream in("(;B)");
     TreeReader reader;
-    LIBBOARDGAME_CHECK_THROW(reader.read(in), TreeReader::ReadError);
+    LIBBOARDGAME_CHECK_THROW(reader.read(in), TreeReader::ReadError)
 }
 
 LIBBOARDGAME_TEST_CASE(sgf_tree_reader_text_before_node)
 {
     istringstream in("(B;)");
     TreeReader reader;
-    LIBBOARDGAME_CHECK_THROW(reader.read(in), TreeReader::ReadError);
+    LIBBOARDGAME_CHECK_THROW(reader.read(in), TreeReader::ReadError)
 }
 
 //-----------------------------------------------------------------------------

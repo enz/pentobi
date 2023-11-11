@@ -23,13 +23,13 @@ LIBBOARDGAME_TEST_CASE(boardgame_marker_basic)
     Marker m;
     Point p1(10);
     Point p2(11);
-    LIBBOARDGAME_CHECK(! m.set(p1));
-    LIBBOARDGAME_CHECK(! m.set(p2));
-    LIBBOARDGAME_CHECK(m.set(p1));
-    LIBBOARDGAME_CHECK(m.set(p2));
+    LIBBOARDGAME_CHECK(! m.set(p1))
+    LIBBOARDGAME_CHECK(! m.set(p2))
+    LIBBOARDGAME_CHECK(m.set(p1))
+    LIBBOARDGAME_CHECK(m.set(p2))
     m.clear();
-    LIBBOARDGAME_CHECK(! m.set(p1));
-    LIBBOARDGAME_CHECK(! m.set(p2));
+    LIBBOARDGAME_CHECK(! m.set(p1))
+    LIBBOARDGAME_CHECK(! m.set(p2))
 }
 
 /** Test clear after a number of clears around the maximum unsigned integer
@@ -45,8 +45,8 @@ LIBBOARDGAME_TEST_CASE(boardgame_marker_overflow)
     Point p2(11);
     for (int i = 0; i < 10; ++i)
     {
-        LIBBOARDGAME_CHECK(! m.set(p1));
-        LIBBOARDGAME_CHECK(! m.set(p2));
+        LIBBOARDGAME_CHECK(! m.set(p1))
+        LIBBOARDGAME_CHECK(! m.set(p2))
         m.clear();
     }
 }

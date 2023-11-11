@@ -111,19 +111,19 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_classic_2)
     play(*bd, Color(0), "l9,k10,l10");
     play(*bd, Color(0), "j11,j12");
     play(*bd, Color(0), "i10");
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_moves(), 37u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(0)), ScoreType(109));
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(1)), ScoreType(7));
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(2)), ScoreType(38));
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(3)), ScoreType(7));
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(0)), ScoreType(133));
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(1)), ScoreType(-133));
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(2)), ScoreType(133));
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(3)), ScoreType(-133));
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(0)), 21u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(1)), 3u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(2)), 10u);
-    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(3)), 3u);
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_moves(), 37u)
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(0)), ScoreType(109))
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(1)), ScoreType(7))
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(2)), ScoreType(38))
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_points(Color(3)), ScoreType(7))
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(0)), ScoreType(133))
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(1)), ScoreType(-133))
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(2)), ScoreType(133))
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_score(Color(3)), ScoreType(-133))
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(0)), 21u)
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(1)), 3u)
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(2)), 10u)
+    LIBBOARDGAME_CHECK_EQUAL(bd->get_nu_onboard_pieces(Color(3)), 3u)
 }
 
 LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_classic_initial)
@@ -132,7 +132,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_gen_moves_classic_initial)
     auto moves = make_unique<MoveList>();
     auto marker = make_unique<MoveMarker>();
     bd->gen_moves(Color(0), *marker, *moves);
-    LIBBOARDGAME_CHECK_EQUAL(moves->size(), 58u);
+    LIBBOARDGAME_CHECK_EQUAL(moves->size(), 58u)
 }
 
 /** Test get_place() in a 4-color, 2-player game when the player 1 has
@@ -148,17 +148,17 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_get_place)
     unsigned place;
     bool isPlaceShared;
     bd->get_place(Color(0), place, isPlaceShared);
-    LIBBOARDGAME_CHECK_EQUAL(place, 0u);
-    LIBBOARDGAME_CHECK(! isPlaceShared);
+    LIBBOARDGAME_CHECK_EQUAL(place, 0u)
+    LIBBOARDGAME_CHECK(! isPlaceShared)
     bd->get_place(Color(1), place, isPlaceShared);
-    LIBBOARDGAME_CHECK_EQUAL(place, 1u);
-    LIBBOARDGAME_CHECK(! isPlaceShared);
+    LIBBOARDGAME_CHECK_EQUAL(place, 1u)
+    LIBBOARDGAME_CHECK(! isPlaceShared)
     bd->get_place(Color(2), place, isPlaceShared);
-    LIBBOARDGAME_CHECK_EQUAL(place, 0u);
-    LIBBOARDGAME_CHECK(! isPlaceShared);
+    LIBBOARDGAME_CHECK_EQUAL(place, 0u)
+    LIBBOARDGAME_CHECK(! isPlaceShared)
     bd->get_place(Color(3), place, isPlaceShared);
-    LIBBOARDGAME_CHECK_EQUAL(place, 1u);
-    LIBBOARDGAME_CHECK(! isPlaceShared);
+    LIBBOARDGAME_CHECK_EQUAL(place, 1u)
+    LIBBOARDGAME_CHECK(! isPlaceShared)
 }
 
 //-----------------------------------------------------------------------------

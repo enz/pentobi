@@ -20,10 +20,10 @@ LIBBOARDGAME_TEST_CASE(libboardgame_base_statistics_basic)
     s.add(14);
     s.add(16);
     s.add(15);
-    LIBBOARDGAME_CHECK_EQUAL(s.get_count(), 5.);
-    LIBBOARDGAME_CHECK_CLOSE_EPS(s.get_mean(), 13.6, 1e-6);
-    LIBBOARDGAME_CHECK_CLOSE_EPS(s.get_variance(), 3.44, 1e-6);
-    LIBBOARDGAME_CHECK_CLOSE_EPS(s.get_deviation(), 1.854723, 1e-6);
+    LIBBOARDGAME_CHECK_EQUAL(s.get_count(), 5.)
+    LIBBOARDGAME_CHECK_CLOSE_EPS(s.get_mean(), 13.6, 1e-6)
+    LIBBOARDGAME_CHECK_CLOSE_EPS(s.get_variance(), 3.44, 1e-6)
+    LIBBOARDGAME_CHECK_CLOSE_EPS(s.get_deviation(), 1.854723, 1e-6)
 }
 
 //-----------------------------------------------------------------------------

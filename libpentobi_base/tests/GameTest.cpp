@@ -32,7 +32,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_game_current_defined_invalid_root)
     {
         // ignore
     }
-    LIBBOARDGAME_CHECK_EQUAL(&game.get_current(), &game.get_root());
+    LIBBOARDGAME_CHECK_EQUAL(&game.get_current(), &game.get_root())
 }
 
 //-----------------------------------------------------------------------------

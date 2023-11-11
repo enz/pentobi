@@ -61,8 +61,8 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
     Move mv;
     bool res = search->search(mv, *bd, Color(1), max_count, min_simulations,
                               max_time, time_source);
-    LIBBOARDGAME_CHECK(res);
-    LIBBOARDGAME_CHECK(! mv.is_null());
+    LIBBOARDGAME_CHECK(res)
+    LIBBOARDGAME_CHECK(! mv.is_null())
 }
 
 /** Test that useless one-piece moves are generated if no other moves exist.
@@ -101,9 +101,9 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_callisto_useless_one_piece)
     Move mv;
     bool res = search->search(mv, *bd, Color(0), max_count, min_simulations,
                               max_time, time_source);
-    LIBBOARDGAME_CHECK(res);
-    LIBBOARDGAME_CHECK(! mv.is_null());
-    LIBBOARDGAME_CHECK(bd->get_move_piece(mv) == bd->get_one_piece());
+    LIBBOARDGAME_CHECK(res)
+    LIBBOARDGAME_CHECK(! mv.is_null())
+    LIBBOARDGAME_CHECK(bd->get_move_piece(mv) == bd->get_one_piece())
 }
 
 //-----------------------------------------------------------------------------
