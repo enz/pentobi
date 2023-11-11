@@ -10,11 +10,11 @@
 #include <algorithm>
 #include <memory>
 #include "Node.h"
+#include "libboardgame_base/Range.h"
 
 namespace libboardgame_mcts {
 
 using namespace std;
-using libboardgame_base::Range;
 
 //-----------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ public:
     using Float = typename Node::Float;
 
     /** Range for iterating over the children of a node. */
-    using Children = Range<const Node>;
+    using Children = libboardgame_base::Range<const Node>;
 
 
     /** Helper class that is passed to the search state during node expansion.
