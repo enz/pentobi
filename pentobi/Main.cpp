@@ -7,9 +7,9 @@
 #include <QGuiApplication>
 #include <QIcon>
 #include <QQuickStyle>
+#include <QtGlobal>
 #include <QtQml>
 #include <QTranslator>
-#include <QtGlobal>
 #include "AnalyzeGameModel.h"
 #include "AndroidUtils.h"
 #include "DocbookReader.h"
