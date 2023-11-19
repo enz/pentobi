@@ -9,6 +9,7 @@
 #include <QQuickStyle>
 #include <QtQml>
 #include <QTranslator>
+#include <QtGlobal>
 #include "AnalyzeGameModel.h"
 #include "AndroidUtils.h"
 #include "DocbookReader.h"
@@ -166,6 +167,7 @@ int mainDesktop()
             throw QCoreApplication::translate("main", "Too many arguments");
         if (! args.empty())
             initialFile = args.at(0);
+        LIBBOARDGAME_LOG("Using Qt ", qVersion());
         QQmlApplicationEngine engine;
         engine.addImageProvider("pentobi"_L1, new ImageProvider);
         auto ctx = engine.rootContext();
