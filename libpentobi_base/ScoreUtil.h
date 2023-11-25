@@ -41,7 +41,12 @@ void get_multiplayer_result(unsigned nu_players,
             points[i] +=  0.001f * i;
         sorted[i] = points[i];
     }
+    // Disable false-positive GCC warning if compiled with -O2
+    // (last tested with GCC 13.2.0)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Warray-bounds"
     sort(sorted.begin(), sorted.begin() + nu_players);
+#pragma GCC diagnostic pop
     for (Color::IntType i = 0; i < nu_players; ++i)
     {
         FLOAT sum = 0;

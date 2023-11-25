@@ -197,7 +197,12 @@ void Board::get_place(Color c, unsigned& place, bool& is_shared) const
             all_scores[i] += i * 0.0001f;
     }
     auto score = all_scores[c.to_int()];
+    // Disable false-positive GCC warning if compiled with -O2
+    // (last tested with GCC 13.2.0)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Warray-bounds"
     sort(all_scores.begin(), all_scores.begin() + m_nu_players, greater<>());
+#pragma GCC diagnostic pop
     is_shared = false;
     bool found = false;
     for (unsigned i = 0; i < m_nu_players; ++i)
