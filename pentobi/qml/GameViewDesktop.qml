@@ -4,9 +4,9 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtCore
 import QtQuick
 import QtQuick.Controls
-import Qt.labs.settings
 import "GameView.js" as Logic
 
 Item

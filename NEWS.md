@@ -4,13 +4,14 @@ Pentobi Release Notes
 Version 24.0-dev (master)
 -------------------------
 
+* Minimum required Qt version is now 6.5
 * Removed GNOME thumbnailer, which didn't work anyway if installed via
   Flatpak.
 * Don't include man pages anymore. Use --help or --help-all to list the
   command line options for pentobi.
-* Don't use Qt.labs.platform anymore. This replaces the run-time
-  dependency on qml6-module-qt-labs-platform by qml6-module-qtcore
-  (on Debian).
+* Don't use Qt.labs.platform/settings anymore. This replaces the
+  run-time dependency on qml6-module-qt-labs-platform/settings
+  by qml6-module-qtcore (on Debian).
 * Removed menu item Export Ascii Art.
 
 Version 23.2-dev (v23-fixes)
