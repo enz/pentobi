@@ -22,7 +22,6 @@ file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/themes/dark")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/themes/light")
 set(pentobi_images
     icon/pentobi-48
-    qml/icons/filedialog-folder
     qml/themes/dark/menu
     qml/themes/dark/menu-desktop
     qml/themes/dark/pentobi-backward
@@ -78,37 +77,11 @@ add_custom_command(
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons.qrc" ${images_png}
     )
 
-# Icons to be used with QtQuickControls2 ToolButton.icon. Here we cannot
-# specify a sourceSize different from size, so we use a custom icon theme to
-# support high-dpi icons.
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons/pentobi/16x16")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons/pentobi/16x16@2")
-set(pentobi_icons
-    filedialog-newfolder
-    filedialog-parent
-    )
-foreach(icon ${pentobi_icons})
-    add_custom_command(OUTPUT "icons/pentobi/16x16/${icon}.png"
-        COMMAND "${RSVG_CONVERT}"
-        "${CMAKE_CURRENT_SOURCE_DIR}/icons/${icon}.svg"
-        > "icons/pentobi/16x16/${icon}.png"
-        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons/${icon}.svg"
-        )
-    list(APPEND icons_png "icons/pentobi/16x16/${icon}.png")
-    add_custom_command(OUTPUT "icons/pentobi/16x16@2/${icon}.png"
-        COMMAND "${RSVG_CONVERT}" -x 2 -y 2
-        "${CMAKE_CURRENT_SOURCE_DIR}/icons/${icon}.svg"
-        > "icons/pentobi/16x16@2/${icon}.png"
-        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons/${icon}.svg"
-        )
-    list(APPEND icons_png "icons/pentobi/16x16@2/${icon}.png")
-endforeach()
 add_custom_command(
     OUTPUT icons_desktop.qrc
     COMMAND ${CMAKE_COMMAND} -E copy
     "${CMAKE_CURRENT_SOURCE_DIR}/icons_desktop.qrc" .
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons_desktop.qrc" ${images_png}
-    ${icons_png}
     )
 
 set(pentobi_src
