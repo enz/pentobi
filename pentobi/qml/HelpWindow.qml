@@ -4,9 +4,9 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtCore
 import QtQuick
 import QtQuick.Window
+import Qt.labs.settings
 
 Window {
     minimumWidth: 240; minimumHeight: 240
