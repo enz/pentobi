@@ -26,8 +26,6 @@ class DocbookReader
     Q_OBJECT
 
     Q_PROPERTY(QString pageId MEMBER m_pageId WRITE setPageId)
-    Q_PROPERTY(QString nextPageId READ nextPageId)
-    Q_PROPERTY(QString prevPageId READ prevPageId)
     Q_PROPERTY(QString text READ text NOTIFY textChanged)
     Q_PROPERTY(QString navigationText READ navigationText NOTIFY navigationTextChanged)
     Q_PROPERTY(qreal textWidth MEMBER m_textWidth WRITE setTextWidth)
@@ -35,15 +33,15 @@ class DocbookReader
 public:
     DocbookReader(QObject* parent = nullptr);
 
+    Q_INVOKABLE QString getNextPageId() const { return m_nextPageId; }
+
+    Q_INVOKABLE QString getPrevPageId() const { return m_prevPageId; }
+
     void setPageId(const QString& pageId);
 
     const QString& navigationText() const { return m_navigationText; }
 
     const QString& text() const { return m_text; }
-
-    const QString& nextPageId() const { return m_nextPageId; }
-
-    const QString& prevPageId() const { return m_prevPageId; }
 
     void setTextWidth(qreal textWidth);
 

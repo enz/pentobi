@@ -35,12 +35,12 @@ Rectangle {
             flickable.contentY += flickable.height
     }
     function nextPage() {
-        if (docbookReader.nextPageId !== "")
-            docbookReader.pageId = docbookReader.nextPageId
+        if (docbookReader.getNextPageId() !== "")
+            docbookReader.pageId = docbookReader.getNextPageId()
     }
     function prevPage() {
-        if (docbookReader.prevPageId !== "")
-            docbookReader.pageId = docbookReader.prevPageId
+        if (docbookReader.getPrevPageId() !== "")
+            docbookReader.pageId = docbookReader.getPrevPageId()
     }
 
     color: "white"
