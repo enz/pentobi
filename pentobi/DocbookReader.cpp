@@ -6,7 +6,6 @@
 
 #include "DocbookReader.h"
 
-#include <cmath>
 #include <QFile>
 #include <QLocale>
 #include <QStack>
