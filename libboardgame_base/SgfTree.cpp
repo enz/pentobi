@@ -7,8 +7,6 @@
 #include "SgfTree.h"
 
 #include <ctime>
-#include <cstdio>
-#include <cstdlib>
 #include "SgfUtil.h"
 #include "StringUtil.h"
 
