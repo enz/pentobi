@@ -6,7 +6,7 @@
 
 #include "StringRep.h"
 
-#include <cstdio>
+#include <cctype>
 #include <iostream>
 #include "StringUtil.h"
 
