@@ -25,35 +25,18 @@ public:
 
     explicit PieceMap(const T& val) { fill(val); }
 
-    bool operator==(const PieceMap& piece_map) const;
+    bool operator==(const PieceMap& piece_map) const {
+        return std::equal(m_a.begin(), m_a.end(), piece_map.m_a.begin()); }
 
-    T& operator[](Piece piece);
+    T& operator[](Piece piece) { return m_a[piece.to_int()]; }
 
-    const T& operator[](Piece piece) const;
+    const T& operator[](Piece piece) const { return m_a[piece.to_int()]; }
 
     void fill(const T& val) { m_a.fill(val); }
 
 private:
-    std::array<T, Piece::range_not_null> m_a;
+    std::array<T, Piece::max_pieces> m_a;
 };
-
-template<typename T>
-bool PieceMap<T>::operator==(const PieceMap& piece_map) const
-{
-    return equal(m_a.begin(), m_a.end(), piece_map.m_a.begin());
-}
-
-template<typename T>
-inline T& PieceMap<T>::operator[](Piece piece)
-{
-    return m_a[piece.to_int()];
-}
-
-template<typename T>
-inline const T& PieceMap<T>::operator[](Piece piece) const
-{
-    return m_a[piece.to_int()];
-}
 
 //-----------------------------------------------------------------------------
 

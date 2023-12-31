@@ -24,13 +24,6 @@ public:
     /** Maximum number of unique pieces per color. */
     static constexpr IntType max_pieces = 24;
 
-    /** Integer range used for unique pieces without the null piece. */
-    static constexpr IntType range_not_null = max_pieces;
-
-    /** Integer range used for unique pieces including the null piece */
-    static constexpr IntType range = max_pieces + 1;
-
-
     Piece();
 
     explicit Piece(IntType i);
@@ -43,9 +36,7 @@ public:
     IntType to_int() const;
 
 private:
-    static constexpr IntType value_null = range - 1;
-
-    static constexpr IntType value_uninitialized = range;
+    static constexpr IntType value_uninitialized = max_pieces;
 
     IntType m_i;
 
@@ -64,7 +55,7 @@ inline Piece::Piece()
 
 inline Piece::Piece(IntType i)
 {
-    LIBBOARDGAME_ASSERT(i < range);
+    LIBBOARDGAME_ASSERT(i < max_pieces);
     m_i = i;
 }
 
