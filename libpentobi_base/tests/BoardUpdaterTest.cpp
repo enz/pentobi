@@ -27,7 +27,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_piece_played_twice)
     istringstream in("(;GM[Blokus];1[a1];1[a3])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.move_tree();
     PentobiTree tree(root);
     auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
@@ -43,7 +43,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup)
                      "AW[i4,h5,i5,j5,i6][j7,j8,j9,k9,j10])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.move_tree();
     PentobiTree tree(root);
     auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
@@ -62,7 +62,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_inner_node)
                      " ;W[j7,j8,j9,k9,j10])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.move_tree();
     PentobiTree tree(root);
     auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
@@ -84,7 +84,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty)
                      " ;AE[e8,e9,f9,d10,e10])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.move_tree();
     PentobiTree tree(root);
     auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
@@ -106,7 +106,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty_1)
                      " ;AE[e8,e9,f9,d10,e10])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.move_tree();
     PentobiTree tree(root);
     auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
@@ -126,7 +126,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_updater_setup_empty_multi_instance)
     istringstream in("(;GM[Blokus Junior];B[e10];W[j5];B[f9];AE[f9][e10])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.move_tree();
     PentobiTree tree(root);
     auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;

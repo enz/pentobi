@@ -70,7 +70,7 @@ void Book::load(istream& in)
     {
         throw runtime_error(string("could not read book: ") + e.what());
     }
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.move_tree();
     m_tree.init(root);
     get_transforms(m_tree.get_variant(), m_transforms, m_inv_transforms);
 }

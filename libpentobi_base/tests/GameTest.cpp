@@ -22,7 +22,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_game_current_defined_invalid_root)
     istringstream in("(;GM[Blokus]1[a99999])");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.move_tree();
     Game game(Variant::classic);
     try
     {

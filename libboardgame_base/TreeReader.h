@@ -38,7 +38,7 @@ public:
     const SgfNode& get_tree() const { return *m_root; }
 
     /** Get the tree and transfer the ownership to the caller. */
-    unique_ptr<SgfNode> get_tree_transfer_ownership();
+    unique_ptr<SgfNode> move_tree();
 
 private:
     SgfNode* m_current = nullptr;

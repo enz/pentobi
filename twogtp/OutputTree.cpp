@@ -223,7 +223,7 @@ void OutputTree::load(const string& file)
 {
     TreeReader reader;
     reader.read(file);
-    auto tree = reader.get_tree_transfer_ownership();
+    auto tree = reader.move_tree();
     m_tree.init(tree);
 }
 

@@ -122,7 +122,7 @@ void GtpEngine::cmd_loadsgf(Arguments args)
     {
         TreeReader reader;
         reader.read(file);
-        auto tree = reader.get_tree_transfer_ownership();
+        auto tree = reader.move_tree();
         m_game.init(tree);
         const SgfNode* node = nullptr;
         if (move_number > 0)

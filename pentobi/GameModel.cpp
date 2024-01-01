@@ -1008,7 +1008,7 @@ bool GameModel::openStream(istream& in)
         preparePositionChange();
         TreeReader reader;
         reader.read(in);
-        auto root = reader.get_tree_transfer_ownership();
+        auto root = reader.move_tree();
         m_game.init(root);
     }
     catch (const runtime_error& e)

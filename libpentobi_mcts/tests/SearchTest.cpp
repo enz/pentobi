@@ -46,7 +46,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
            )delim");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.move_tree();
     PentobiTree tree(root);
     auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;
@@ -86,7 +86,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_callisto_useless_one_piece)
            )delim");
     TreeReader reader;
     reader.read(in);
-    unique_ptr<SgfNode> root = reader.get_tree_transfer_ownership();
+    unique_ptr<SgfNode> root = reader.move_tree();
     PentobiTree tree(root);
     auto bd = make_unique<Board>(tree.get_variant());
     BoardUpdater updater;

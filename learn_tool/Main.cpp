@@ -325,7 +325,7 @@ void gen_train_data(const string& file, Variant& variant)
     do
     {
         has_more = reader.read(in, false);
-        auto tree = reader.get_tree_transfer_ownership();
+        auto tree = reader.move_tree();
         game.init(tree);
         if (nu_games > 0 && game.get_variant() != variant)
             throw runtime_error("Files have inconsistent game variants");
