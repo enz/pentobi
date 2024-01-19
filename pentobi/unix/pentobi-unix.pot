@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-19 11:50+0100\n"
+"POT-Creation-Date: 2024-01-19 14:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,6 +68,22 @@ msgstr ""
 
 #: io.sourceforge.pentobi.appdata.xml.in:60
 msgid "Markus Enzenberger"
+msgstr ""
+
+#: io.sourceforge.pentobi.appdata.xml.in:71
+msgid "Removed rarely used menu item Export ASCII Art."
+msgstr ""
+
+#: io.sourceforge.pentobi.appdata.xml.in:72
+msgid ""
+"Removed Unix man pages and Gnome thumbnailer, which did not work anyway if "
+"Pentobi was installed via Flatpak."
+msgstr ""
+
+#: io.sourceforge.pentobi.appdata.xml.in:73
+msgid ""
+"Support opening certain invalid game files as written by the Android version "
+"of Pentobi 23.0 or earlier."
 msgstr ""
 
 #: io.sourceforge.pentobi.desktop.in:4

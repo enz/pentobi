@@ -1,6 +1,11 @@
 Pentobi Release Notes
 =====================
 
+This list contains release notes including technical changes in the build
+process or the required versions of libraries and tools. See the
+[AppData file](pentobi/unix/io.sourceforge.pentobi.appdata.xml.in)
+for a translatable end user documentation of user-visible changes.
+
 Version 24.0-dev (master)
 -------------------------
 
