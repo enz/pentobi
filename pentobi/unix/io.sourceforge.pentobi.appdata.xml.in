@@ -26,28 +26,28 @@ holders are not affiliated with the author of the program Pentobi.
 <launchable type="desktop-id">io.sourceforge.pentobi.desktop</launchable>
 <screenshots>
 <screenshot type="default">
-<image width="1248" height="702">
-https://pentobi.sourceforge.io/pentobi-classic.png</image>
+<image width="1177" height="720">
+https://pentobi.sourceforge.io/pentobi-classic-20240119.png</image>
 <caption>Game variant Classic</caption>
 </screenshot>
 <screenshot>
-<image width="1248" height="702">
-https://pentobi.sourceforge.io/pentobi-duo.png</image>
+<image width="1177" height="720">
+https://pentobi.sourceforge.io/pentobi-duo-20240119.png</image>
 <caption>Game variant Duo</caption>
 </screenshot>
 <screenshot>
-<image width="1248" height="702">
-https://pentobi.sourceforge.io/pentobi-trigon.png</image>
+<image width="1177" height="720">
+https://pentobi.sourceforge.io/pentobi-trigon-20240119.png</image>
 <caption>Game variant Trigon</caption>
 </screenshot>
 <screenshot>
-<image width="1248" height="702">
-https://pentobi.sourceforge.io/pentobi-nexos.png</image>
+<image width="1177" height="720">
+https://pentobi.sourceforge.io/pentobi-nexos-20240119.png</image>
 <caption>Game variant Nexos</caption>
 </screenshot>
 <screenshot>
-<image width="1248" height="702">
-https://pentobi.sourceforge.io/pentobi-gembloq.png</image>
+<image width="1177" height="720">
+https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 <caption>Game variant GembloQ</caption>
 </screenshot>
 </screenshots>
