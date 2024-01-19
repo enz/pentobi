@@ -1,8 +1,6 @@
 Pentobi Readme
 ==============
 
-![Screenshot](https://pentobi.sourceforge.io/pentobi-classic-small.png)
-
 Pentobi is a computer opponent for the board game
 [Blokus](https://en.wikipedia.org/wiki/Blokus). It has a strong Blokus engine
 with different playing levels. The supported game variants are Classic, Duo,
