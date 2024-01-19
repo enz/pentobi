@@ -123,17 +123,6 @@
     </message>
 </context>
 <context>
-    <name>AsciiArtSaveDialog</name>
-    <message>
-        <source>Export ASCII Art</source>
-        <translation>ASCII-Art exportieren</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>Textdateien</translation>
-    </message>
-</context>
-<context>
     <name>BoardContextMenu</name>
     <message>
         <source>Go to Move %1</source>

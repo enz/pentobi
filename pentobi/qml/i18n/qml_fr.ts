@@ -94,10 +94,6 @@
         <translation>Aucune</translation>
     </message>
     <message>
-        <source>Animations</source>
-        <translation>Animations</translation>
-    </message>
-    <message>
         <source>Show comment:</source>
         <translation>Afficher le commentaire :</translation>
     </message>
@@ -124,17 +120,6 @@
         <source>Move number</source>
         <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
         <translation>Numéro de coup</translation>
-    </message>
-</context>
-<context>
-    <name>AsciiArtSaveDialog</name>
-    <message>
-        <source>Export ASCII Art</source>
-        <translation>Exporter art ASCII</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>Fichiers texte</translation>
     </message>
 </context>
 <context>
@@ -393,10 +378,6 @@
     <message>
         <source>Invalid Blokus SGF file. (%1)</source>
         <translation>Le fichier n’est pas un fichier Blokus SGF valable. (%1)</translation>
-    </message>
-    <message>
-        <source>Clipboard is empty.</source>
-        <translation>Le presse-papiers est vide.</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -951,21 +932,6 @@
     </message>
 </context>
 <context>
-    <name>MenuExport</name>
-    <message>
-        <source>Export</source>
-        <translation>Exporter</translation>
-    </message>
-    <message>
-        <source>Image…</source>
-        <translation>Image…</translation>
-    </message>
-    <message>
-        <source>ASCII Art…</source>
-        <translation>Art ASCII…</translation>
-    </message>
-</context>
-<context>
     <name>MenuGame</name>
     <message>
         <source>Game</source>
@@ -976,8 +942,8 @@
         <translation>Variante du jeu…</translation>
     </message>
     <message>
-        <source>Open Clipboard</source>
-        <translation>Ouvrir le presse-papiers</translation>
+        <source>Export Image…</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -996,10 +962,6 @@
     <message>
         <source>About Pentobi</source>
         <translation>À propos de Pentobi</translation>
-    </message>
-    <message>
-        <source>Report Bug</source>
-        <translation>Rapportez une erreur</translation>
     </message>
 </context>
 <context>
@@ -1088,13 +1050,6 @@
     </message>
 </context>
 <context>
-    <name>NewFolderDialog</name>
-    <message>
-        <source>Folder name:</source>
-        <translation>Nom de dossier :</translation>
-    </message>
-</context>
-<context>
     <name>OpenDialog</name>
     <message>
         <source>Open</source>
@@ -1104,37 +1059,9 @@
         <source>Blokus games</source>
         <translation>Parties de Blokus</translation>
     </message>
-</context>
-<context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>Remplacer le fichier ?</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>Ouvrir</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Enregistrer</translation>
-    </message>
     <message>
         <source>All files</source>
-        <translation>Tous les fichiers</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiMenuItem</name>
-    <message>
-        <source>Ctrl</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Ctrl</translation>
-    </message>
-    <message>
-        <source>Shift</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation>Maj</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

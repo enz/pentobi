@@ -1,12 +1,23 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Francisco Zamorano <pacozamo@gmail.com>, 2019
 # 
+#, fuzzy
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-19 14:48+0100\n"
+"PO-Revision-Date: 2019-02-25 15:36+0000\n"
 "Last-Translator: Francisco Zamorano <pacozamo@gmail.com>, 2019\n"
-"Language-Team: Spanish (https://www.transifex.com/markus-enzenberger/teams/89074/es/)\n"
+"Language-Team: Spanish (https://app.transifex.com/markus-enzenberger/teams/89074/es/)\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
@@ -74,6 +85,22 @@ msgstr "Variante de juego GembloQ"
 #: io.sourceforge.pentobi.appdata.xml.in:60
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
+
+#: io.sourceforge.pentobi.appdata.xml.in:71
+msgid "Removed rarely used menu item Export ASCII Art."
+msgstr ""
+
+#: io.sourceforge.pentobi.appdata.xml.in:72
+msgid ""
+"Removed Unix man pages and Gnome thumbnailer, which did not work anyway if "
+"Pentobi was installed via Flatpak."
+msgstr ""
+
+#: io.sourceforge.pentobi.appdata.xml.in:73
+msgid ""
+"Support opening certain invalid game files as written by the Android version"
+" of Pentobi 23.0 or earlier."
+msgstr ""
 
 #: io.sourceforge.pentobi.desktop.in:4
 msgid "Computer opponent for Blokus"

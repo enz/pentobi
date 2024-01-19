@@ -94,10 +94,6 @@
         <translation>无</translation>
     </message>
     <message>
-        <source>Animations</source>
-        <translation>动画</translation>
-    </message>
-    <message>
         <source>Show comment:</source>
         <translation>显示注解：</translation>
     </message>
@@ -124,17 +120,6 @@
         <source>Move number</source>
         <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
         <translation>棋步顺序</translation>
-    </message>
-</context>
-<context>
-    <name>AsciiArtSaveDialog</name>
-    <message>
-        <source>Export ASCII Art</source>
-        <translation>导出字符画</translation>
-    </message>
-    <message>
-        <source>Text files</source>
-        <translation>文本文件</translation>
     </message>
 </context>
 <context>
@@ -393,10 +378,6 @@
     <message>
         <source>Invalid Blokus SGF file. (%1)</source>
         <translation>无效的角斗士游戏文件。（%1）</translation>
-    </message>
-    <message>
-        <source>Clipboard is empty.</source>
-        <translation>剪贴板为空。</translation>
     </message>
     <message>
         <source>Untitled</source>
@@ -951,21 +932,6 @@
     </message>
 </context>
 <context>
-    <name>MenuExport</name>
-    <message>
-        <source>Export</source>
-        <translation>导出</translation>
-    </message>
-    <message>
-        <source>Image…</source>
-        <translation>图像…</translation>
-    </message>
-    <message>
-        <source>ASCII Art…</source>
-        <translation>字符画…</translation>
-    </message>
-</context>
-<context>
     <name>MenuGame</name>
     <message>
         <source>Game</source>
@@ -976,8 +942,8 @@
         <translation>游戏规则…</translation>
     </message>
     <message>
-        <source>Open Clipboard</source>
-        <translation>打开剪贴板</translation>
+        <source>Export Image…</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -996,10 +962,6 @@
     <message>
         <source>About Pentobi</source>
         <translation>关于</translation>
-    </message>
-    <message>
-        <source>Report Bug</source>
-        <translation>报告bug</translation>
     </message>
 </context>
 <context>
@@ -1088,13 +1050,6 @@
     </message>
 </context>
 <context>
-    <name>NewFolderDialog</name>
-    <message>
-        <source>Folder name:</source>
-        <translation>文件夹名：</translation>
-    </message>
-</context>
-<context>
     <name>OpenDialog</name>
     <message>
         <source>Open</source>
@@ -1104,36 +1059,8 @@
         <source>Blokus games</source>
         <translation>角斗士游戏</translation>
     </message>
-</context>
-<context>
-    <name>PentobiFileDialog</name>
-    <message>
-        <source>Overwrite file?</source>
-        <translation>覆盖文件？</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation>打开</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>保存</translation>
-    </message>
     <message>
         <source>All files</source>
-        <translation>所有文件</translation>
-    </message>
-</context>
-<context>
-    <name>PentobiMenuItem</name>
-    <message>
-        <source>Ctrl</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Shift</source>
-        <extracomment>Shortcut modifier key as displayed in menu item text (abbreviate if long)</extracomment>
         <translation type="unfinished"/>
     </message>
 </context>
