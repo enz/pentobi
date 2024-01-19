@@ -24,6 +24,10 @@ holders are not affiliated with the author of the program Pentobi.
 </p>
 </description>
 <launchable type="desktop-id">io.sourceforge.pentobi.desktop</launchable>
+<categories>
+<category>Game</category>
+<category>BoardGame</category>
+</categories>
 <screenshots>
 <screenshot type="default">
 <image width="1000" height="627">
