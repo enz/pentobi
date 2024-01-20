@@ -440,7 +440,7 @@ ApplicationWindow {
 
         shortcut: "Ctrl+S"
         text: qsTr("Save")
-        enabled: gameModel.isModified
+        enabled: gameModel.isModified && gameModel.file !== ""
         onTriggered: if (gameModel.file !== "") Logic.save(); else Logic.saveAs()
     }
     Action {
@@ -448,7 +448,6 @@ ApplicationWindow {
 
         shortcut: "Ctrl+Shift+S"
         text: qsTr("Save As…")
-        enabled: gameModel.isModified || gameModel.file !== ""
         onTriggered: Logic.saveAs()
     }
     Action {
