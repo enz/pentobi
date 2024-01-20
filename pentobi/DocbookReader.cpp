@@ -20,11 +20,16 @@ namespace {
 
 void addHeader(QString& text)
 {
-    text.append("<head><style>"
-                "body { background-color:white;color:black;"
-                "       line-height:115% }"
-                ":link { text-decoration:none;color:blue }"
-                "</style></head><body>"_L1);
+    // Maybe explicitely setting the text and background colors can be avoided
+    // in the future to support dark mode but right now TextArea in QtQuick
+    // doesn't support dark mode anyway and with Qt 6.5/6.6, the default color
+    // scheme is broken even in light mode (white h1 text on white background,
+    // last tested on Ubuntu 23.10)
+     text.append("<head><style>"
+                 "body { background-color:white;color:black;"
+                 "       line-height:115% }"
+                 ":link { text-decoration:none;color:blue }"
+                 "</style></head><body>"_L1);
 }
 
 } //namespace
