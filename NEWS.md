@@ -17,6 +17,7 @@ Version 24.0-dev (master)
   dependency on qml6-module-qt-labs-platform by qml6-module-qtcore
   (on Debian).
 * Removed menu item Export Ascii Art.
+* Enable only menu item Save As but not Save if game has no filename yet.
 
 Version 23.2-dev (v23-fixes)
 ----------------------------
