@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-19 14:48+0100\n"
+"POT-Creation-Date: 2024-01-20 11:32+0100\n"
 "PO-Revision-Date: 2019-02-25 15:36+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2024\n"
 "Language-Team: German (https://app.transifex.com/markus-enzenberger/teams/89074/de/)\n"
@@ -60,35 +60,35 @@ msgstr ""
 "sind Eigentum ihrer jeweiligen Markeninhaber. Die Markeninhaber stehen in "
 "keiner Verbindung mit dem Autor des Programms Pentobi."
 
-#: io.sourceforge.pentobi.appdata.xml.in:31
+#: io.sourceforge.pentobi.appdata.xml.in:35
 msgid "Game variant Classic"
 msgstr "Spielvariante Klassisch"
 
-#: io.sourceforge.pentobi.appdata.xml.in:36
+#: io.sourceforge.pentobi.appdata.xml.in:40
 msgid "Game variant Duo"
 msgstr "Spielvariante Duo"
 
-#: io.sourceforge.pentobi.appdata.xml.in:41
+#: io.sourceforge.pentobi.appdata.xml.in:45
 msgid "Game variant Trigon"
 msgstr "Spielvariante Trigon"
 
-#: io.sourceforge.pentobi.appdata.xml.in:46
+#: io.sourceforge.pentobi.appdata.xml.in:50
 msgid "Game variant Nexos"
 msgstr "Spielvariante Nexos"
 
-#: io.sourceforge.pentobi.appdata.xml.in:51
+#: io.sourceforge.pentobi.appdata.xml.in:55
 msgid "Game variant GembloQ"
 msgstr "Spielvariante GembloQ"
 
-#: io.sourceforge.pentobi.appdata.xml.in:60
+#: io.sourceforge.pentobi.appdata.xml.in:64
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
 
-#: io.sourceforge.pentobi.appdata.xml.in:71
+#: io.sourceforge.pentobi.appdata.xml.in:75
 msgid "Removed rarely used menu item Export ASCII Art."
 msgstr "Selten benutzten Menüpunkt ASCII-Art exportieren entfernt."
 
-#: io.sourceforge.pentobi.appdata.xml.in:72
+#: io.sourceforge.pentobi.appdata.xml.in:76
 msgid ""
 "Removed Unix man pages and Gnome thumbnailer, which did not work anyway if "
 "Pentobi was installed via Flatpak."
@@ -96,13 +96,20 @@ msgstr ""
 "Unix-Manpages und Gnome-Vorschaubildgenerator entfernt, die sowieso nicht "
 "funktioniert haben, wenn Pentobi über Flatpak installiert wurde."
 
-#: io.sourceforge.pentobi.appdata.xml.in:73
+#: io.sourceforge.pentobi.appdata.xml.in:77
 msgid ""
 "Support opening certain invalid game files as written by the Android version"
 " of Pentobi 23.0 or earlier."
 msgstr ""
 "Unterstützung für das Öffnen bestimmter ungültiger Spieldateien, wie sie von"
 " der Android-Version von Pentobi 23.0 oder früher geschrieben wurden."
+
+#: io.sourceforge.pentobi.appdata.xml.in:78
+msgid ""
+"Enable only menu item Save As but not Save if game has no filename yet."
+msgstr ""
+"Aktiviere nur den Menüpunkt Speichern unter, nicht aber Speichern, wenn das "
+"Spiel noch keinen Dateinamen hat."
 
 #: io.sourceforge.pentobi.desktop.in:4
 msgid "Computer opponent for Blokus"
