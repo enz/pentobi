@@ -207,7 +207,7 @@ function exportImage(fileUrl) {
         if (isAndroid)
             ok = androidUtils.saveImage(fileUrl, result.image)
         else
-            ok = result.saveToFile(getFileFromUrl(fileUrl))
+            ok = result.saveToFile(gameModel.urlToFile(fileUrl))
         if (! ok)
             showInfo(qsTr("Saving image failed or unsupported image format"))
         else
@@ -242,14 +242,6 @@ function genMove() {
     gameView.pickedPiece = null
     gameView.showToPlay()
     playerModel.startGenMove(gameModel)
-}
-
-function getFileFromUrl(fileUrl) {
-    var file = fileUrl.toString()
-    file = file.replace(/^(file:\/{3})/,"/")
-    if (Qt.platform.os == "windows")
-        file = file.replace(/^\/(\w:)/,"$1").replace(/\//g,"\\")
-    return decodeURIComponent(file)
 }
 
 function getFileInfo(isRated, file, isModified) {
@@ -532,10 +524,6 @@ function openFileBlocking(file, displayName) {
         gameView.showPieces()
 }
 
-function openFileUrl(fileUrl) {
-    openFile(getFileFromUrl(fileUrl), "")
-}
-
 function openRecentFile(file, displayName) {
     verify(function() { openFile(file, displayName) })
 }
@@ -708,7 +696,11 @@ function saveAs() {
         androidUtils.openSaveDialog(file, name)
     else {
         var dialog = saveDialog.get()
-        dialog.selectedFile = dialog.currentFolder + "/" + name
+        if (file === "")
+            // Does this work on all platforms?
+            dialog.selectedFile = dialog.currentFolder + "/" + name
+        else
+            dialog.selectedFile = gameModel.fileToUrl(gameModel.file)
         dialog.open()
     }
 }

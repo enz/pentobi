@@ -17,6 +17,6 @@ FileDialog {
     fileMode: FileDialog.OpenFile
     onAccepted: {
         rootWindow.folder = currentFolder
-        Logic.openFileUrl(selectedFile)
+        Logic.openFile(gameModel.urlToFile(selectedFile), "")
     }
 }

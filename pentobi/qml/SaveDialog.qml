@@ -15,6 +15,6 @@ FileDialog {
     fileMode: FileDialog.SaveFile
     onAccepted: {
         rootWindow.folder = currentFolder
-        Logic.saveFile(Logic.getFileFromUrl(selectedFile), "")
+        Logic.saveFile(gameModel.urlToFile(selectedFile), "")
     }
 }

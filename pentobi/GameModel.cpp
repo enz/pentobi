@@ -13,6 +13,7 @@
 #include <QGuiApplication>
 #include <QFileInfo>
 #include <QSettings>
+#include <QUrl>
 #include "libboardgame_base/SgfUtil.h"
 #include "libboardgame_base/TreeReader.h"
 #include "libpentobi_base/MoveMarker.h"
@@ -20,7 +21,6 @@
 #include "libpentobi_base/TreeUtil.h"
 
 #ifdef Q_OS_ANDROID
-#include <QUrl>
 #include "AndroidUtils.h"
 #endif
 
@@ -334,6 +334,15 @@ void GameModel::deleteAllVar()
 QByteArray GameModel::encode(const QString& s)
 {
     return s.toUtf8();
+}
+
+QString GameModel::fileToUrl(const QString& file)
+{
+#ifdef Q_OS_ANDROID
+    // We don't treat Android content URIs as URLs yet
+    return file;
+#endif
+    return QUrl::fromLocalFile(file).toString();
 }
 
 GameMove* GameModel::findMoveNext()
@@ -1431,6 +1440,15 @@ void GameModel::undo()
     preparePositionChange();
     m_game.undo();
     updateProperties();
+}
+
+QString GameModel::urlToFile(const QString& url)
+{
+#ifdef Q_OS_ANDROID
+    // We don't treat Android content URIs as URLs yet
+    return url;
+#endif
+    return QUrl(url).toLocalFile();
 }
 
 void GameModel::updateFileInfo(const QString& file)

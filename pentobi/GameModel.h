@@ -224,6 +224,10 @@ public:
 
     Q_INVOKABLE QVariantList getPieceModels(int color);
 
+    Q_INVOKABLE static QString fileToUrl(const QString& file);
+
+    Q_INVOKABLE static QString urlToFile(const QString& url);
+
 
     QByteArray getSgf(int indent = -1) const;
 
