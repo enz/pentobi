@@ -20,7 +20,7 @@ namespace {
 
 void addHeader(QString& text)
 {
-    // Maybe explicitely setting the text and background colors can be avoided
+    // Maybe explicitly setting the text and background colors can be avoided
     // in the future to support dark mode but right now TextArea in QtQuick
     // doesn't support dark mode anyway and with Qt 6.5/6.6, the default color
     // scheme is broken even in light mode (white h1 text on white background,
