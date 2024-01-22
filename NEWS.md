@@ -1,31 +1,20 @@
 Pentobi Release Notes
 =====================
 
-This list contains release notes including technical changes in the build
-process or the required versions of libraries and tools. See the
-[AppData file](pentobi/unix/io.sourceforge.pentobi.appdata.xml.in)
-for translatable end user documentation of user-visible changes.
+Version 24.0 (22 Jan 2024)
+--------------------------
 
-Version 24.0-dev (master)
--------------------------
-
-* Removed GNOME thumbnailer, which didn't work anyway if installed via
-  Flatpak.
-* Don't include man pages anymore. Use --help or --help-all to list the
-  command line options for pentobi.
+* Removed GNOME thumbnailer and man pages, which didn't work anyway if
+  installed via Flatpak. Use --help or --help-all to list the command
+  line options for pentobi.
+* Removed rarely used menu item Export Ascii Art.
+* Enable only menu item Save As but not Save if game has no filename yet.
+* Don't refuse to open SGF files with non-SGF text after tree (e.g.
+  files that were corrupted on Android by bug fixed in version 23.1).
+* Fixed rendering issues in help viewer on Android with Qt 6.5.
 * Don't use Qt.labs.platform anymore. This replaces the run-time
   dependency on qml6-module-qt-labs-platform by qml6-module-qtcore
   (on Debian).
-* Removed menu item Export Ascii Art.
-* Enable only menu item Save As but not Save if game has no filename yet.
-
-Version 23.2-dev (v23-fixes)
-----------------------------
-
-* Don't refuse to open SGF files with non-SGF text after tree (e.g.
-  files that were corrupted on Android by bug fixed in version 23.1).
-* Apply button in appearance dialog was sometimes wrongly disabled.
-* Fixed rendering issues in help viewer on Android with Qt 6.5.
 
 Version 23.1 (12 Mar 2023)
 --------------------------
