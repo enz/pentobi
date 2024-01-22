@@ -69,14 +69,8 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 </provides>
 <content_rating type="oars-1.1"/>
 <releases>
-<release version="24.0" date="2024-01-22">
+<release version="24.1-dev" date="XXXX-XX-XX">
 <description>
-<ul>
-<li>Removed rarely used menu item Export ASCII Art.</li>
-<li>Removed Unix man pages and Gnome thumbnailer, which did not work anyway if Pentobi was installed via Flatpak.</li>
-<li>Support opening certain invalid game files as written by the Android version of Pentobi 23.0 or earlier.</li>
-<li>Enable only menu item Save As but not Save if game has no filename yet.</li>
-</ul>
 </description>
 </release>
 </releases>
