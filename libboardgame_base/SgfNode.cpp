@@ -12,12 +12,6 @@ namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
-Property::~Property() = default; // Non-inline to avoid GCC -Winline warning
-
-//-----------------------------------------------------------------------------
-
-SgfNode::~SgfNode() = default;  // Non-inline to avoid GCC -Winline warning
-
 SgfNode& SgfNode::create_new_child()
 {
     auto node = make_unique<SgfNode>();

@@ -197,7 +197,7 @@ public:
         @param memory The memory to be used for (all) the search trees. */
     SearchBase(unsigned nu_threads, size_t memory);
 
-    virtual ~SearchBase();
+    virtual ~SearchBase() = default;
 
 
     /** @name Pure virtual functions */
@@ -671,9 +671,6 @@ SearchBase<S, M, R>::SearchBase(unsigned nu_threads, size_t memory)
       , m_assertion_handler(*this)
 #endif
 { }
-
-template<class S, class M, class R>
-SearchBase<S, M, R>::~SearchBase() = default; // Non-inline to avoid GCC -Winline warning
 
 template<class S, class M, class R>
 bool SearchBase<S, M, R>::check_abort(

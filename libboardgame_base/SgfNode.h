@@ -39,8 +39,6 @@ struct Property
         LIBBOARDGAME_ASSERT(! id.empty());
         LIBBOARDGAME_ASSERT(! values.empty());
     }
-
-    ~Property();
 };
 
 //-----------------------------------------------------------------------------
@@ -86,10 +84,6 @@ public:
     private:
         Iterator m_begin;
     };
-
-
-    ~SgfNode();
-
 
     bool has_property(const string& id) const;
 
