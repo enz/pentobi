@@ -10,10 +10,6 @@ namespace libboardgame_base {
 
 //-----------------------------------------------------------------------------
 
-TreeReader::TreeReader() = default; // Non-inline to avoid GCC -Winline warning
-
-TreeReader::~TreeReader() = default; // Non-inline to avoid GCC -Winline warning
-
 unique_ptr<SgfNode> TreeReader::move_tree()
 {
     return std::move(m_root);

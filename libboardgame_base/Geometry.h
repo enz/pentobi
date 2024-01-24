@@ -68,7 +68,7 @@ public:
         IntType m_i;
     };
 
-    virtual ~Geometry();
+    virtual ~Geometry() = default;
 
     /** Get points that share an edge with this point. */
     virtual AdjCoordList get_adj_coord(int x, int y) const = 0;
@@ -193,9 +193,6 @@ template<class P>
 Geometry<P>::Geometry(unique_ptr<StringRep> string_rep)
     : m_string_rep(std::move(string_rep))
 { }
-
-template<class P>
-Geometry<P>::~Geometry() = default; // Non-inline to avoid GCC -Winline warning
 
 template<class P>
 bool Geometry<P>::from_string(string::const_iterator begin,

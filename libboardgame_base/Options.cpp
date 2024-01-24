@@ -113,8 +113,6 @@ Options::Options(int argc, char** argv, const vector<string>& specs)
 {
 }
 
-Options::~Options() = default; // Non-inline to avoid GCC -Winline warning
-
 void Options::check_name(const string& name) const
 {
     if (m_names.count(name) == 0)

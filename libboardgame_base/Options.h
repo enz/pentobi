@@ -53,8 +53,6 @@ public:
         argv is not modified by this constructor.  */
     Options(int argc, char** argv, const vector<string>& specs);
 
-    ~Options();
-
     /** Check if an option exists in the command line arguments.
         @param name The (long) option name.  */
     bool contains(const string& name) const;

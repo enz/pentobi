@@ -20,10 +20,6 @@ class TreeReader
     : public Reader
 {
 public:
-    TreeReader();
-
-    ~TreeReader() override;
-
     void on_begin_tree(bool is_root) override;
 
     void on_end_tree(bool is_root) override;

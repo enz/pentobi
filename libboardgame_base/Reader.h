@@ -27,9 +27,7 @@ public:
         using runtime_error::runtime_error;
     };
 
-
-    virtual ~Reader();
-
+    virtual ~Reader() = default;
 
     virtual void on_begin_tree(bool is_root);
 
