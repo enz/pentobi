@@ -15,8 +15,8 @@ please report Windows-related bugs [here](https://github.com/lwchkg/pentobi/issu
 Translations
 ------------
 
-See the [here](https://pentobi.sourceforge.io/translator-instructions.html)
-for how to contribute translations.
+Translations can be contributed at
+[Transifex](https://app.transifex.com/markus-enzenberger/pentobi/).
 
 Source Code Overview
 --------------------
