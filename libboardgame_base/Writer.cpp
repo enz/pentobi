@@ -34,6 +34,12 @@ void Writer::begin_tree()
         m_out << '\n';
 }
 
+void Writer::end_node()
+{
+    if (m_indent >= 0)
+        m_out << '\n';
+}
+
 void Writer::end_tree()
 {
     --m_level;

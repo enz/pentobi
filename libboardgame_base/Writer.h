@@ -40,7 +40,7 @@ public:
 
     void begin_node();
 
-    void end_node() { }
+    void end_node();
 
     void write_property(const string& id, const char* value);
 
