@@ -229,7 +229,9 @@ Item {
             Layout.fillWidth: true
 
             MouseArea {
-                anchors.fill: parent
+                anchors { top: parent.top; left: parent.left }
+                width: Math.min(parent.implicitWidth, parent.width)
+                height: parent.height
                 hoverEnabled: true
                 ToolTip.text: Logic.getFileInfo(isRated, gameModel.file,
                                                 gameModel.isModified)
