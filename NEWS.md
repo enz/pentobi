@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 24.1-dev (v24-fixes)
 ----------------------------
 
-*
+* Fixed formatting of written SGF files.
 
 Version 24.0 (22 Jan 2024)
 --------------------------
