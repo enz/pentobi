@@ -92,8 +92,6 @@ PieceBase
             id: textComponent
 
             Text {
-                property bool flippedY: Math.abs(flipY.angle - 180) < 90
-
                 text: moveMarking == "all_number"
                       || (moveMarking == "last_number"
                           && pieceModel.isLastMove) ?
