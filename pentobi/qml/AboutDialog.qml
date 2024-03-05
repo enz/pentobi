@@ -45,7 +45,7 @@ PentobiDialog {
                 elide: Qt.ElideRight
                 width: Math.min(implicitWidth, maxContentWidth)
                 anchors.horizontalCenter: parent.horizontalCenter
-                onLinkActivated: Qt.openUrlExternally(link)
+                onLinkActivated: link => Qt.openUrlExternally(link)
 
                 MouseArea {
                     enabled: isDesktop
