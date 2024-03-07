@@ -43,7 +43,7 @@ Item {
             var ctx = getContext("2d")
             ctx.fillStyle = theme.colorBackground
             ctx.fillRect(0, 0, w, h)
-            ctx.strokeStyle = theme.colorCommentBorder
+            ctx.strokeStyle = Qt.alpha(theme.colorText, 0.3)
             ctx.save()
             ctx.translate(d / 2, d / 2)
             w -= d
