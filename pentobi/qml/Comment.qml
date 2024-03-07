@@ -14,7 +14,7 @@ Rectangle {
     radius: 2
     border.color:
         textArea.activeFocus ? theme.colorCommentFocus
-                             : theme.colorCommentBorder
+                             : Qt.alpha(theme.colorCommentText, 0.3)
 
     ScrollView {
         anchors.fill: parent

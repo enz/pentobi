@@ -33,7 +33,6 @@ Item {
     property color colorButtonHovered: palette.window
     property color colorButtonBorder: palette.dark
     property color colorCommentBase: palette.base
-    property color colorCommentBorder: palette.mid
     property color colorCommentFocus: palette.highlight
     property color colorCommentText: colorText
     property color colorMessageText: colorText

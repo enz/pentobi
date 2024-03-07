@@ -18,6 +18,8 @@ Item {
     property real margin
     // Distance between moves on the x axis
     property real dist
+    property color colorBackground: theme.colorBackground
+    property color colorLine: Qt.alpha(theme.colorText, 0.3)
 
     onElementsChanged: {
         analyzeGameModel.markCurrentMove(gameModel)
@@ -25,6 +27,8 @@ Item {
     }
     onMarkMoveNumberChanged: canvas.requestPaint()
     onThemeChanged: canvas.requestPaint()
+    onColorBackgroundChanged: canvas.requestPaint()
+    onColorLineChanged: canvas.requestPaint()
 
     Canvas {
         id: canvas
@@ -41,9 +45,9 @@ Item {
             var nuBins = Math.ceil(Math.max(nuMoves, 50))
             var d = w / nuBins
             var ctx = getContext("2d")
-            ctx.fillStyle = theme.colorBackground
+            ctx.fillStyle = colorBackground
             ctx.fillRect(0, 0, w, h)
-            ctx.strokeStyle = theme.colorCommentBorder
+            ctx.strokeStyle = colorLine
             ctx.save()
             ctx.translate(d / 2, d / 2)
             w -= d
