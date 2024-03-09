@@ -11,6 +11,8 @@ Version 24.1-dev (v24-fixes)
 
 * Fixed formatting of written SGF files.
 * Improved visibility of lines in analysis graph.
+* Disable QML cache on Linux. It did not reliably get updated if
+  installed via Flatpak.
 * Other minor fixes.
 
 Version 24.0 (22 Jan 2024)
