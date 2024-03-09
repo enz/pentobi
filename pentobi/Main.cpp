@@ -216,6 +216,11 @@ int main(int argc, char *argv[])
 #else
     qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
 #endif
+#ifdef Q_OS_LINUX
+    // QML cache does not reliably get updated if installed via Flatpak
+    // (last tested with flatpak 1.14.4, org.kde.Platform 6.5/6.6)
+    qputenv("QML_DISABLE_DISK_CACHE", "1");
+#endif
     QCoreApplication::setOrganizationName("Pentobi"_L1);
     QCoreApplication::setApplicationName("Pentobi"_L1);
 #ifdef VERSION
