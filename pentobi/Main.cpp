@@ -213,8 +213,6 @@ int main(int argc, char *argv[])
                 Qt::HighDpiScaleFactorRoundingPolicy::Round);
 #elif defined(Q_OS_WIN)
     qputenv("QT_QUICK_CONTROLS_STYLE", "Universal");
-#else
-    qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
 #endif
     // QML cache does not reliably get updated if installed via Flatpak
     // (last tested with flatpak 1.14.4, org.kde.Platform 6.5/6.6)
