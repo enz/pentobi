@@ -3,26 +3,6 @@
 <mime-type type="application/x-blokus-sgf">
 <comment>Blokus game</comment>
 <generic-icon name="io.sourceforge.pentobi.application-x-blokus-sgf"/>
-<magic priority="60">
-<match type="string" offset="2:10" value="GM[Blokus]"/>
-<match type="string" offset="2:10" value="GM[Blokus Duo]"/>
-<match type="string" offset="2:10" value="GM[Blokus Junior]"/>
-<match type="string" offset="2:10" value="GM[Blokus Three-Player]"/>
-<match type="string" offset="2:10" value="GM[Blokus Trigon]"/>
-<match type="string" offset="2:10" value="GM[Blokus Trigon Three-Player]"/>
-<match type="string" offset="2:10" value="GM[Blokus Trigon Two-Player]"/>
-<match type="string" offset="2:10" value="GM[Blokus Two-Player]"/>
-<match type="string" offset="2:10" value="GM[Callisto]"/>
-<match type="string" offset="2:10" value="GM[Callisto Three-Player]"/>
-<match type="string" offset="2:10" value="GM[Callisto Two-Player]"/>
-<match type="string" offset="2:10" value="GM[Callisto Two-Player Four-Color]"/>
-<match type="string" offset="2:10" value="GM[GembloQ]"/>
-<match type="string" offset="2:10" value="GM[GembloQ Three-Player]"/>
-<match type="string" offset="2:10" value="GM[GembloQ Two-Player]"/>
-<match type="string" offset="2:10" value="GM[GembloQ Two-Player Four-Color]"/>
-<match type="string" offset="2:10" value="GM[Nexos]"/>
-<match type="string" offset="2:10" value="GM[Nexos Two-Player]"/>
-</magic>
 <sub-class-of type="text/plain"/>
 <glob pattern="*.blksgf"/>
 </mime-type>
