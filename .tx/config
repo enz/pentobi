@@ -2,8 +2,8 @@
 host = https://www.transifex.com
 
 [o:markus-enzenberger:p:pentobi:r:pentobi]
-file_filter  = pentobi/qml/i18n/qml_<lang>.ts
-source_file  = pentobi/qml/i18n/qml_en.ts
+file_filter  = pentobi/i18n/qml_<lang>.ts
+source_file  = pentobi/i18n/qml_en.ts
 source_lang  = en
 type         = QT
 minimum_perc = 0

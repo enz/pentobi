@@ -1,10 +1,10 @@
 <RCC>
-<qresource>
-<file>qml/themes/dark/menu-desktop.png</file>
-<file>qml/themes/dark/piece-manipulator-desktop.png</file>
-<file>qml/themes/dark/piece-manipulator-desktop-legal.png</file>
-<file>qml/themes/light/menu-desktop.png</file>
-<file>qml/themes/light/piece-manipulator-desktop.png</file>
-<file>qml/themes/light/piece-manipulator-desktop-legal.png</file>
+<qresource prefix="qml">
+<file>themes/dark/menu-desktop.png</file>
+<file>themes/dark/piece-manipulator-desktop.png</file>
+<file>themes/dark/piece-manipulator-desktop-legal.png</file>
+<file>themes/light/menu-desktop.png</file>
+<file>themes/light/piece-manipulator-desktop.png</file>
+<file>themes/light/piece-manipulator-desktop-legal.png</file>
 </qresource>
 </RCC>

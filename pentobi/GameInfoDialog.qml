@@ -1,0 +1,145 @@
+//-----------------------------------------------------------------------------
+/** @file pentobi/GameInfoDialog.qml
+    @author Markus Enzenberger
+    @copyright GNU General Public License version 3 or later */
+//-----------------------------------------------------------------------------
+
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+
+PentobiDialog {
+    footer: DialogButtonBoxOkCancel { }
+    onAboutToShow: {
+        textFieldPlayerName0.text = gameModel.playerName0
+        textFieldPlayerName1.text = gameModel.playerName1
+        textFieldPlayerName2.text = gameModel.playerName2
+        textFieldPlayerName3.text = gameModel.playerName3
+        textFieldDate.text = gameModel.date
+        textFieldTime.text = gameModel.time
+        textFieldEvent.text = gameModel.event
+        textFieldRound.text = gameModel.round
+    }
+    onAccepted: {
+        gameModel.playerName0 = textFieldPlayerName0.text
+        gameModel.playerName1 = textFieldPlayerName1.text
+        gameModel.playerName2 = textFieldPlayerName2.text
+        gameModel.playerName3 = textFieldPlayerName3.text
+        gameModel.date = textFieldDate.text
+        gameModel.time = textFieldTime.text
+        gameModel.event = textFieldEvent.text
+        gameModel.round = textFieldRound.text
+    }
+
+    Flickable {
+        implicitWidth: Math.max(Math.min(font.pixelSize * 22, maxContentWidth),
+                                minContentWidth)
+        implicitHeight: Math.min(gridLayout.implicitHeight, maxContentHeight)
+        contentHeight: gridLayout.implicitHeight
+        clip: true
+
+        GridLayout {
+            id: gridLayout
+
+            anchors.fill: parent
+            columns: 2
+
+            Label {
+                text: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return qsTr("Player Blue/Red:")
+                    if (gameModel.gameVariant === "duo")
+                        return qsTr("Player Purple:")
+                    if (gameModel.gameVariant === "junior")
+                        return qsTr("Player Green:")
+                    return qsTr("Player Blue:")
+                }
+            }
+            TextField {
+                id: textFieldPlayerName0
+
+                selectByMouse: true
+                Layout.fillWidth: true
+                // Remove focus in case dialog was used before. It might be a
+                // different game now, which makes keeping the last focus
+                // meaningless. Also, it would automatically open the virtual
+                // keaboard on Android.
+                onVisibleChanged: focus = false
+            }
+            Label {
+                text: {
+                    if (gameModel.nuColors === 4 && gameModel.nuPlayers === 2)
+                        return qsTr("Player Yellow/Green:")
+                    if (gameModel.gameVariant === "duo" || gameModel.gameVariant === "junior")
+                        return qsTr("Player Orange:")
+                    if (gameModel.nuColors === 2)
+                        return qsTr("Player Green:")
+                    return qsTr("Player Yellow:")
+                }
+            }
+            TextField {
+                id: textFieldPlayerName1
+
+                selectByMouse: true
+                Layout.fillWidth: true
+                onVisibleChanged: focus = false
+            }
+            Label {
+                visible: textFieldPlayerName2.visible
+                text: qsTr("Player Red:")
+            }
+            TextField {
+                id: textFieldPlayerName2
+
+                visible: gameModel.nuPlayers > 2
+                selectByMouse: true
+                Layout.fillWidth: true
+                onVisibleChanged: focus = false
+            }
+            Label {
+                visible: textFieldPlayerName3.visible
+                text: qsTr("Player Green:")
+            }
+            TextField {
+                id: textFieldPlayerName3
+
+                visible: gameModel.nuPlayers > 3
+                selectByMouse: true
+                Layout.fillWidth: true
+                onVisibleChanged: focus = false
+            }
+            Label { text: qsTr("Date:") }
+            TextField {
+                id: textFieldDate
+
+                selectByMouse: true
+                Layout.fillWidth: true
+                onVisibleChanged: focus = false
+            }
+            Label { text: qsTr("Time:") }
+            TextField {
+                id: textFieldTime
+
+                selectByMouse: true
+                Layout.fillWidth: true
+                onVisibleChanged: focus = false
+            }
+            Label { text: qsTr("Event:") }
+            TextField {
+                id: textFieldEvent
+
+                selectByMouse: true
+                Layout.fillWidth: true
+                onVisibleChanged: focus = false
+            }
+            Label { text: qsTr("Round:") }
+            TextField {
+                id: textFieldRound
+
+                selectByMouse: true
+                Layout.fillWidth: true
+                onVisibleChanged: focus = false
+            }
+        }
+    }
+}

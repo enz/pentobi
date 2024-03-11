@@ -179,7 +179,7 @@ int mainDesktop()
 #else
         ctx->setContextProperty("isDebug"_L1, QVariant(false));
 #endif
-        engine.load("qrc:///qml/Main.qml"_L1);
+        engine.load("qrc:/qml/Main.qml"_L1);
         if (engine.rootObjects().empty())
             return 1;
         return QGuiApplication::exec();
@@ -214,10 +214,6 @@ int main(int argc, char *argv[])
 #elif defined(Q_OS_WIN)
     qputenv("QT_QUICK_CONTROLS_STYLE", "Universal");
 #endif
-    // QML cache does not reliably get updated if installed via Flatpak
-    // (last tested with flatpak 1.14.4, org.kde.Platform 6.5/6.6)
-    // It doesn't significantly reduce startup time anyway.
-    qputenv("QML_DISABLE_DISK_CACHE", "1");
     QCoreApplication::setOrganizationName("Pentobi"_L1);
     QCoreApplication::setApplicationName("Pentobi"_L1);
 #ifdef VERSION

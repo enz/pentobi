@@ -1,67 +1,67 @@
 qt_add_translation(pentobi_QM
-    qml/i18n/qml_de.ts
-    qml/i18n/qml_es.ts
-    qml/i18n/qml_fr.ts
-    qml/i18n/qml_nb_NO.ts
-    qml/i18n/qml_ru.ts
-    qml/i18n/qml_zh_CN.ts
+    i18n/qml_de.ts
+    i18n/qml_es.ts
+    i18n/qml_fr.ts
+    i18n/qml_nb_NO.ts
+    i18n/qml_ru.ts
+    i18n/qml_zh_CN.ts
     OPTIONS -removeidentical -nounfinished
     )
 add_custom_command(
     OUTPUT translations.qrc
     COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/qml/i18n/translations.qrc" .
-    DEPENDS qml/i18n/translations.qrc ${pentobi_QM}
+    "${CMAKE_CURRENT_SOURCE_DIR}/i18n/translations.qrc" .
+    DEPENDS i18n/translations.qrc ${pentobi_QM}
     )
 
 # Images and icons to be used with QtQuick Image. Here we use a sourceSize four
 # times larger than the device-indepenent size to support high-dpi images.
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icon")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/icons")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/themes/dark")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/qml/themes/light")
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons")
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/themes/dark")
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/themes/light")
 set(pentobi_images
     icon/pentobi-48
-    qml/themes/dark/menu
-    qml/themes/dark/menu-desktop
-    qml/themes/dark/pentobi-backward
-    qml/themes/dark/pentobi-backward10
-    qml/themes/dark/pentobi-beginning
-    qml/themes/dark/pentobi-computer-colors
-    qml/themes/dark/pentobi-end
-    qml/themes/dark/pentobi-forward
-    qml/themes/dark/pentobi-forward10
-    qml/themes/dark/pentobi-newgame
-    qml/themes/dark/pentobi-next-variation
-    qml/themes/dark/pentobi-play
-    qml/themes/dark/pentobi-previous-variation
-    qml/themes/dark/pentobi-rated-game
-    qml/themes/dark/pentobi-stop
-    qml/themes/dark/pentobi-undo
-    qml/themes/dark/piece-manipulator-desktop
-    qml/themes/dark/piece-manipulator-desktop-legal
-    qml/themes/dark/piece-manipulator
-    qml/themes/dark/piece-manipulator-legal
-    qml/themes/light/menu
-    qml/themes/light/menu-desktop
-    qml/themes/light/pentobi-backward
-    qml/themes/light/pentobi-backward10
-    qml/themes/light/pentobi-beginning
-    qml/themes/light/pentobi-computer-colors
-    qml/themes/light/pentobi-end
-    qml/themes/light/pentobi-forward
-    qml/themes/light/pentobi-forward10
-    qml/themes/light/pentobi-newgame
-    qml/themes/light/pentobi-next-variation
-    qml/themes/light/pentobi-play
-    qml/themes/light/pentobi-previous-variation
-    qml/themes/light/pentobi-rated-game
-    qml/themes/light/pentobi-stop
-    qml/themes/light/pentobi-undo
-    qml/themes/light/piece-manipulator-desktop
-    qml/themes/light/piece-manipulator-desktop-legal
-    qml/themes/light/piece-manipulator
-    qml/themes/light/piece-manipulator-legal
+    themes/dark/menu
+    themes/dark/menu-desktop
+    themes/dark/pentobi-backward
+    themes/dark/pentobi-backward10
+    themes/dark/pentobi-beginning
+    themes/dark/pentobi-computer-colors
+    themes/dark/pentobi-end
+    themes/dark/pentobi-forward
+    themes/dark/pentobi-forward10
+    themes/dark/pentobi-newgame
+    themes/dark/pentobi-next-variation
+    themes/dark/pentobi-play
+    themes/dark/pentobi-previous-variation
+    themes/dark/pentobi-rated-game
+    themes/dark/pentobi-stop
+    themes/dark/pentobi-undo
+    themes/dark/piece-manipulator-desktop
+    themes/dark/piece-manipulator-desktop-legal
+    themes/dark/piece-manipulator
+    themes/dark/piece-manipulator-legal
+    themes/light/menu
+    themes/light/menu-desktop
+    themes/light/pentobi-backward
+    themes/light/pentobi-backward10
+    themes/light/pentobi-beginning
+    themes/light/pentobi-computer-colors
+    themes/light/pentobi-end
+    themes/light/pentobi-forward
+    themes/light/pentobi-forward10
+    themes/light/pentobi-newgame
+    themes/light/pentobi-next-variation
+    themes/light/pentobi-play
+    themes/light/pentobi-previous-variation
+    themes/light/pentobi-rated-game
+    themes/light/pentobi-stop
+    themes/light/pentobi-undo
+    themes/light/piece-manipulator-desktop
+    themes/light/piece-manipulator-desktop-legal
+    themes/light/piece-manipulator
+    themes/light/piece-manipulator-legal
     )
 foreach(image ${pentobi_images})
     add_custom_command(OUTPUT "${image}.png"
@@ -112,7 +112,6 @@ set(pentobi_src
     "${CMAKE_CURRENT_BINARY_DIR}/icons_desktop.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
-    resources.qrc
     )
 if (WIN32)
     list(APPEND pentobi_src "windows/pentobi.rc")
@@ -126,6 +125,90 @@ add_custom_command(
     )
 
 qt_add_executable(pentobi WIN32 ${pentobi_src})
+
+qt_add_qml_module(pentobi
+    URI qml
+    VERSION 0.0
+    QML_FILES
+      AboutDialog.qml
+      AnalyzeDialog.qml
+      AnalyzeGame.qml
+      AppearanceDialog.qml
+      Board.qml
+      BoardContextMenu.qml
+      ButtonCancel.qml
+      ButtonClose.qml
+      ButtonOk.qml
+      ComputerDialog.qml
+      Comment.qml
+      DialogButtonBoxOkCancel.qml
+      DialogLoader.qml
+      ExportImageDialog.qml
+      FatalMessage.qml
+      GameViewDesktop.qml
+      GameViewMobile.qml
+      GameInfoDialog.qml
+      GameVariantDialog.qml
+      GotoMoveDialog.qml
+      HelpDialog.qml
+      HelpViewer.qml
+      HelpWindow.qml
+      ImageSaveDialog.qml
+      InitialRatingDialog.qml
+      LineSegment.qml
+      Main.qml
+      MessageDialog.qml
+      MenuComputer.qml
+      MenuEdit.qml
+      MenuGame.qml
+      MenuGo.qml
+      MenuHelp.qml
+      MenuRecentFiles.qml
+      MenuTools.qml
+      MenuView.qml
+      MoveAnnotationDialog.qml
+      NavigationButtons.qml
+      NavigationPanel.qml
+      OpenDialog.qml
+      PentobiBusyIndicator.qml
+      PentobiButton.qml
+      PentobiDialog.qml
+      PentobiDialogButtonBox.qml
+      PentobiMenu.qml
+      PentobiToolBar.qml
+      PieceBase.qml
+      PieceCallisto.qml
+      PieceClassic.qml
+      PieceGembloQ.qml
+      PieceList.qml
+      PieceManipulator.qml
+      PieceNexos.qml
+      PieceRotationAnimation.qml
+      PieceSelectorDesktop.qml
+      PieceSelectorMobile.qml
+      PieceSwitchedFlipAnimation.qml
+      PieceTrigon.qml
+      QuarterSquare.qml
+      QuestionDialog.qml
+      RatingDialog.qml
+      RatingGraph.qml
+      SaveDialog.qml
+      ScoreDisplay.qml
+      ScoreElement.qml
+      ScoreElement2.qml
+      Square.qml
+      Triangle.qml
+      Main.js
+      GameView.js
+      themes/colorblind-dark/Theme.qml
+      themes/colorblind-light/Theme.qml
+      themes/dark/Theme.qml
+      themes/light/Theme.qml
+      themes/system/Theme.qml
+    RESOURCES
+      qtquickcontrols2.conf
+      icons/pentobi/index.theme
+)
 
 if(ANDROID)
     target_link_libraries(pentobi PRIVATE Qt::CorePrivate)
