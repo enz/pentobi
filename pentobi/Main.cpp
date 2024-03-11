@@ -220,18 +220,18 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif
     QGuiApplication app(argc, argv);
-    qmlRegisterType<AnalyzeGameModel>("pentobi", 1, 0, "AnalyzeGameModel");
-    qmlRegisterType<AndroidUtils>("pentobi", 1, 0, "AndroidUtils");
-    qmlRegisterType<DocbookReader>("pentobi", 1, 0, "DocbookReader");
-    qmlRegisterType<GameModel>("pentobi", 1, 0, "GameModel");
-    qmlRegisterType<PlayerModel>("pentobi", 1, 0, "PlayerModel");
-    qmlRegisterType<RatingModel>("pentobi", 1, 0, "RatingModel");
-    qmlRegisterType<RecentFiles>("pentobi", 1, 0, "RecentFiles");
-    qmlRegisterType<SyncSettings>("pentobi", 1, 0, "SyncSettings");
+    qmlRegisterType<AnalyzeGameModel>("pentobi", 0, 0, "AnalyzeGameModel");
+    qmlRegisterType<AndroidUtils>("pentobi", 0, 0, "AndroidUtils");
+    qmlRegisterType<DocbookReader>("pentobi", 0, 0, "DocbookReader");
+    qmlRegisterType<GameModel>("pentobi", 0, 0, "GameModel");
+    qmlRegisterType<PlayerModel>("pentobi", 0, 0, "PlayerModel");
+    qmlRegisterType<RatingModel>("pentobi", 0, 0, "RatingModel");
+    qmlRegisterType<RecentFiles>("pentobi", 0, 0, "RecentFiles");
+    qmlRegisterType<SyncSettings>("pentobi", 0, 0, "SyncSettings");
     qmlRegisterUncreatableType<AnalyzeGameElement>(
-                "pentobi", 1, 0, "AnalyzeGameElement", {});
-    qmlRegisterUncreatableType<GameMove>("pentobi", 1, 0, "GameMove", {});
-    qmlRegisterUncreatableType<PieceModel>("pentobi", 1, 0, "PieceModel", {});
+                "pentobi", 0, 0, "AnalyzeGameElement", {});
+    qmlRegisterUncreatableType<GameMove>("pentobi", 0, 0, "GameMove", {});
+    qmlRegisterUncreatableType<PieceModel>("pentobi", 0, 0, "PieceModel", {});
 #ifndef Q_OS_ANDROID
     QTranslator qtTranslator;
     if (qtTranslator.load("qt_" + QLocale::system().name(),
