@@ -139,13 +139,6 @@
     </message>
 </context>
 <context>
-    <name>ButtonApply</name>
-    <message>
-        <source>Apply</source>
-        <translation>Применить</translation>
-    </message>
-</context>
-<context>
     <name>ButtonCancel</name>
     <message>
         <source>Cancel</source>
@@ -200,6 +193,10 @@
     <message>
         <source>Image width:</source>
         <translation>Ширина изображения:</translation>
+    </message>
+    <message>
+        <source>Untitled.png</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -380,24 +377,6 @@
         <translation>Неверный файл Блокус SGF. (%1)</translation>
     </message>
     <message>
-        <source>Untitled</source>
-        <translation>Без названия</translation>
-    </message>
-    <message>
-        <source>Untitled %1</source>
-        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation>Без названия %1</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation>Новый Каталог</translation>
-    </message>
-    <message>
-        <source>New Folder %1</source>
-        <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation>Новый Каталог %1</translation>
-    </message>
-    <message>
         <source>(Setup)</source>
         <translation>(Настройка)</translation>
     </message>
@@ -496,10 +475,6 @@
     <message>
         <source>PNG image files</source>
         <translation>Файлы PNG</translation>
-    </message>
-    <message>
-        <source>JPEG image files</source>
-        <translation>Файлы JPEG</translation>
     </message>
 </context>
 <context>
@@ -865,6 +840,10 @@
     <message>
         <source>Press back again to exit</source>
         <translation>Нажмите назад еще раз, чтобы выйти</translation>
+    </message>
+    <message>
+        <source>Untitled.blksgf</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

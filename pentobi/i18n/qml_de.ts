@@ -139,13 +139,6 @@
     </message>
 </context>
 <context>
-    <name>ButtonApply</name>
-    <message>
-        <source>Apply</source>
-        <translation>Anwenden</translation>
-    </message>
-</context>
-<context>
     <name>ButtonCancel</name>
     <message>
         <source>Cancel</source>
@@ -200,6 +193,10 @@
     <message>
         <source>Image width:</source>
         <translation>Bildbreite:</translation>
+    </message>
+    <message>
+        <source>Untitled.png</source>
+        <translation>Unbenannt.png</translation>
     </message>
 </context>
 <context>
@@ -380,24 +377,6 @@
         <translation>Ungültige Blokus-SGF-Datei. (%1)</translation>
     </message>
     <message>
-        <source>Untitled</source>
-        <translation>Unbenannt</translation>
-    </message>
-    <message>
-        <source>Untitled %1</source>
-        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation>Unbenannt %1</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation>Neuer Ordner</translation>
-    </message>
-    <message>
-        <source>New Folder %1</source>
-        <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation>Neuer Ordner %1</translation>
-    </message>
-    <message>
         <source>(Setup)</source>
         <translation>(Stellung)</translation>
     </message>
@@ -496,10 +475,6 @@
     <message>
         <source>PNG image files</source>
         <translation>PNG-Bilddateien</translation>
-    </message>
-    <message>
-        <source>JPEG image files</source>
-        <translation>JPEG-Bilddateien</translation>
     </message>
 </context>
 <context>
@@ -865,6 +840,10 @@
     <message>
         <source>Press back again to exit</source>
         <translation>Zum Beenden erneut Zurück drücken</translation>
+    </message>
+    <message>
+        <source>Untitled.blksgf</source>
+        <translation>Unbenannt.blksgf</translation>
     </message>
 </context>
 <context>

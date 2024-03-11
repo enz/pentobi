@@ -139,13 +139,6 @@
     </message>
 </context>
 <context>
-    <name>ButtonApply</name>
-    <message>
-        <source>Apply</source>
-        <translation>Aplicar</translation>
-    </message>
-</context>
-<context>
     <name>ButtonCancel</name>
     <message>
         <source>Cancel</source>
@@ -200,6 +193,10 @@
     <message>
         <source>Image width:</source>
         <translation>Ancho de la imagen:</translation>
+    </message>
+    <message>
+        <source>Untitled.png</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -380,24 +377,6 @@
         <translation>Archivo SGF de Blokus no válido. (%1)</translation>
     </message>
     <message>
-        <source>Untitled</source>
-        <translation>Sin título</translation>
-    </message>
-    <message>
-        <source>Untitled %1</source>
-        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation>Sin título %1</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation>Nueva carpeta</translation>
-    </message>
-    <message>
-        <source>New Folder %1</source>
-        <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation>Nueva carpeta %1</translation>
-    </message>
-    <message>
         <source>(Setup)</source>
         <translation>(Configuración)</translation>
     </message>
@@ -496,10 +475,6 @@
     <message>
         <source>PNG image files</source>
         <translation>Archivos de imagen PNG</translation>
-    </message>
-    <message>
-        <source>JPEG image files</source>
-        <translation>Archivos de imagen JPEG</translation>
     </message>
 </context>
 <context>
@@ -865,6 +840,10 @@
     <message>
         <source>Press back again to exit</source>
         <translation>Vuelva a presionar atrás para salir</translation>
+    </message>
+    <message>
+        <source>Untitled.blksgf</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

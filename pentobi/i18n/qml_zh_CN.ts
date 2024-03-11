@@ -139,13 +139,6 @@
     </message>
 </context>
 <context>
-    <name>ButtonApply</name>
-    <message>
-        <source>Apply</source>
-        <translation>应用</translation>
-    </message>
-</context>
-<context>
     <name>ButtonCancel</name>
     <message>
         <source>Cancel</source>
@@ -200,6 +193,10 @@
     <message>
         <source>Image width:</source>
         <translation>图像宽度：</translation>
+    </message>
+    <message>
+        <source>Untitled.png</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -380,24 +377,6 @@
         <translation>无效的角斗士游戏文件。（%1）</translation>
     </message>
     <message>
-        <source>Untitled</source>
-        <translation>无标题</translation>
-    </message>
-    <message>
-        <source>Untitled %1</source>
-        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation>无标题%1</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation>新文件夹</translation>
-    </message>
-    <message>
-        <source>New Folder %1</source>
-        <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation>新文件夹%1</translation>
-    </message>
-    <message>
         <source>(Setup)</source>
         <translation>（设置模式）</translation>
     </message>
@@ -496,10 +475,6 @@
     <message>
         <source>PNG image files</source>
         <translation>PNG图像文件</translation>
-    </message>
-    <message>
-        <source>JPEG image files</source>
-        <translation>JPEG图像文件</translation>
     </message>
 </context>
 <context>
@@ -864,6 +839,10 @@
     </message>
     <message>
         <source>Press back again to exit</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Untitled.blksgf</source>
         <translation type="unfinished"/>
     </message>
 </context>

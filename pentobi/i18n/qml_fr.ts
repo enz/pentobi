@@ -139,13 +139,6 @@
     </message>
 </context>
 <context>
-    <name>ButtonApply</name>
-    <message>
-        <source>Apply</source>
-        <translation>Appliquer</translation>
-    </message>
-</context>
-<context>
     <name>ButtonCancel</name>
     <message>
         <source>Cancel</source>
@@ -200,6 +193,10 @@
     <message>
         <source>Image width:</source>
         <translation>Largeur de l’image :</translation>
+    </message>
+    <message>
+        <source>Untitled.png</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -380,24 +377,6 @@
         <translation>Le fichier n’est pas un fichier Blokus SGF valable. (%1)</translation>
     </message>
     <message>
-        <source>Untitled</source>
-        <translation>Sans nom</translation>
-    </message>
-    <message>
-        <source>Untitled %1</source>
-        <extracomment>The argument is a number, which will be increased if a file with the same name already exists</extracomment>
-        <translation>Sans nom %1</translation>
-    </message>
-    <message>
-        <source>New Folder</source>
-        <translation>Nouveau dossier</translation>
-    </message>
-    <message>
-        <source>New Folder %1</source>
-        <extracomment>The argument is a number, which will be increased if a folder with the same name already exists</extracomment>
-        <translation>Nouveau dossier %1</translation>
-    </message>
-    <message>
         <source>(Setup)</source>
         <translation>(Position)</translation>
     </message>
@@ -496,10 +475,6 @@
     <message>
         <source>PNG image files</source>
         <translation>Image PNG</translation>
-    </message>
-    <message>
-        <source>JPEG image files</source>
-        <translation>Image JPEG</translation>
     </message>
 </context>
 <context>
@@ -864,6 +839,10 @@
     </message>
     <message>
         <source>Press back again to exit</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Untitled.blksgf</source>
         <translation type="unfinished"/>
     </message>
 </context>
