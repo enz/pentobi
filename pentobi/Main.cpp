@@ -36,7 +36,6 @@ namespace {
 
 int mainAndroid()
 {
-    QQuickStyle::setStyle("Material"_L1);
     QQmlApplicationEngine engine;
     engine.addImageProvider("pentobi"_L1, new ImageProvider);
     auto ctx = engine.rootContext();
@@ -48,7 +47,7 @@ int mainAndroid()
 #else
     ctx->setContextProperty("isDebug"_L1, QVariant(false));
 #endif
-    engine.load("qrc:///qml/Main.qml"_L1);
+    engine.load("qrc:/qml/Main.qml"_L1);
     if (engine.rootObjects().empty())
         return 1;
     return QGuiApplication::exec();
