@@ -1,7 +1,6 @@
 <RCC>
 <qresource prefix="/">
 <file>qtquickcontrols2.conf</file>
-<file>icons/pentobi/index.theme</file>
 </qresource>
 </RCC>
 

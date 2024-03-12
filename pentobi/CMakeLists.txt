@@ -14,8 +14,8 @@ add_custom_command(
     DEPENDS i18n/translations.qrc ${pentobi_QM}
     )
 
-# Images and icons to be used with QtQuick Image. Here we use a sourceSize four
-# times larger than the device-indepenent size to support high-dpi images.
+# Images and icons to be used with QtQuick Image. We use sourceSize four times
+# larger than the device-indepenent size to support high-dpi images.
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icon")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/themes/dark")
