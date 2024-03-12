@@ -107,6 +107,7 @@ set(pentobi_src
     RecentFiles.h
     RecentFiles.cpp
     SyncSettings.h
+    resources.qrc
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/icons.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/icons_desktop.qrc"
@@ -205,9 +206,6 @@ qt_add_qml_module(pentobi
       themes/dark/Theme.qml
       themes/light/Theme.qml
       themes/system/Theme.qml
-    RESOURCES
-      qtquickcontrols2.conf
-      icons/pentobi/index.theme
 )
 
 if(ANDROID)
