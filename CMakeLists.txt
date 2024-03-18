@@ -54,6 +54,7 @@ if(PENTOBI_BUILD_GUI)
     set(CMAKE_AUTORCC ON)
     find_package(Qt6 6.4 REQUIRED
         COMPONENTS Concurrent LinguistTools QuickControls2)
+    qt_policy(SET QTP0001 NEW)
     qt_standard_project_setup()
     add_subdirectory(pentobi)
 endif()

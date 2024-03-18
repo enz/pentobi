@@ -27,7 +27,7 @@ PentobiDialog {
             rightPadding: leftPadding
 
             Image {
-                source: "qrc:qml/icon/pentobi-48.png"
+                source: "qrc:/qt/qml/qml/icon/pentobi-48.png"
                 width: 48; height: 48
                 sourceSize { width: 192; height: 192 }
                 anchors.horizontalCenter: parent.horizontalCenter
