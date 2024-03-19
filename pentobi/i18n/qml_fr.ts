@@ -196,7 +196,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"/>
+        <translation>Sans titre.png</translation>
     </message>
 </context>
 <context>
@@ -463,7 +463,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation type="unfinished"/>
+        <translation>Aide de Pentobi</translation>
     </message>
 </context>
 <context>
@@ -551,10 +551,6 @@
     <message>
         <source>File has been modified by another application. Reload?</source>
         <translation>Le fichier a été modifié par une autre application. Recharger ?</translation>
-    </message>
-    <message>
-        <source>Continue computer move?</source>
-        <translation>Coninuer le coup de l’ordinateur ?</translation>
     </message>
     <message>
         <source>Keep only position?</source>
@@ -835,15 +831,15 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"/>
+        <translation>Pentobi n&apos;a pas réussi à générer un coup.</translation>
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation type="unfinished"/>
+        <translation>Appuyez à nouveau sur retour pour quitter</translation>
     </message>
     <message>
         <source>Untitled.blksgf</source>
-        <translation type="unfinished"/>
+        <translation>Sans titre.blksgf</translation>
     </message>
 </context>
 <context>
@@ -922,7 +918,7 @@
     </message>
     <message>
         <source>Export Image…</source>
-        <translation type="unfinished"/>
+        <translation>Exporter une image…</translation>
     </message>
 </context>
 <context>
@@ -1040,7 +1036,7 @@
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"/>
+        <translation>Tous les fichiers</translation>
     </message>
 </context>
 <context>
