@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-19 11:34+0100\n"
+"POT-Creation-Date: 2024-03-19 20:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Pentobi"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:5
+#: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:4
 msgid "Computer opponent for the board game Blokus"
 msgstr ""
 
@@ -70,12 +70,8 @@ msgstr ""
 msgid "Markus Enzenberger"
 msgstr ""
 
-#: io.sourceforge.pentobi.desktop.in:4
-msgid "Computer opponent for Blokus"
-msgstr ""
-
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
-#: io.sourceforge.pentobi.desktop.in:7
+#: io.sourceforge.pentobi.desktop.in:6
 msgid ""
 "Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo Q;GembloQ"
 msgstr ""
