@@ -4,8 +4,6 @@ Pentobi Release Notes
 Version 25.0-dev (master)
 -------------------------
 
-* Save state after every change of position to preserve it on desktop
-  environments that don't send a window closing signal when logging out.
 * Don't ask for continuing computer move anymore if computer is to play
   in current position after program startup.
 * Don't support magic MIME type detection on Unix anymore, which was
