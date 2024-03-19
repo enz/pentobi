@@ -392,9 +392,6 @@ function init() {
         checkComputerMove()
         return
     }
-    if (isComputerToPlay() && ! gameModel.canGoForward
-            && ! gameModel.isGameOver && ! initialFile)
-        showQuestion(qsTr("Continue computer move?"), checkComputerMove)
 }
 
 function initComputerColors() {

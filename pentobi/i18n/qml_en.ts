@@ -555,10 +555,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Continue computer move?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Keep only position?</source>
         <translation type="unfinished"></translation>
     </message>
