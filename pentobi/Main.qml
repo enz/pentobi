@@ -124,6 +124,7 @@ ApplicationWindow {
             analyzeGameModel.markCurrentMove(gameModel)
             gameView.onPositionChanged()
             gameView.dropCommentFocus()
+            Logic.autoSaveNoVerify()
         }
         onInvalidSgfFile: Logic.showInfo(gameModel.getError())
     }

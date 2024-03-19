@@ -4,6 +4,8 @@ Pentobi Release Notes
 Version 25.0-dev (master)
 -------------------------
 
+* Save state after every change of position to preserve it on desktop
+  environments that don't send a window closing signal when logging out.
 * Don't support magic MIME type detection on Unix anymore, which was
   not reliable anyway and not working if installed via Flatpak.
 
