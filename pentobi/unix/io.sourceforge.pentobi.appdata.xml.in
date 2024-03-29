@@ -63,6 +63,10 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 <url type="contribute">https://github.com/enz/pentobi/blob/master/CONTRIBUTING.md</url>
 <developer_name>Markus Enzenberger</developer_name>
 <update_contact>enz@users.sourceforge.net</update_contact>
+<branding>
+<color type="primary" scheme_preference="light">#c0bfbc</color>
+<color type="primary" scheme_preference="dark">#5e5c64</color>
+</branding>
 <provides>
 <binary>pentobi</binary>
 <mediatype>application/x-blokus-sgf</mediatype>
