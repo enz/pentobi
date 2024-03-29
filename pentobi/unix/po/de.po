@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-20 11:32+0100\n"
+"POT-Creation-Date: 2024-03-29 11:47+0100\n"
 "PO-Revision-Date: 2019-02-25 15:36+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2024\n"
 "Language-Team: German (https://app.transifex.com/markus-enzenberger/teams/89074/de/)\n"
@@ -25,9 +25,9 @@ msgstr ""
 msgid "Pentobi"
 msgstr "Pentobi"
 
-#: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:5
-msgid "Computer opponent for the board game Blokus"
-msgstr "Computer-Gegner für das Brettspiel Blokus"
+#: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:4
+msgid "Computer opponent for Blokus"
+msgstr "Computer-Gegner für Blokus"
 
 #: io.sourceforge.pentobi.appdata.xml.in:10
 msgid ""
@@ -84,39 +84,8 @@ msgstr "Spielvariante GembloQ"
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
 
-#: io.sourceforge.pentobi.appdata.xml.in:75
-msgid "Removed rarely used menu item Export ASCII Art."
-msgstr "Selten benutzten Menüpunkt ASCII-Art exportieren entfernt."
-
-#: io.sourceforge.pentobi.appdata.xml.in:76
-msgid ""
-"Removed Unix man pages and Gnome thumbnailer, which did not work anyway if "
-"Pentobi was installed via Flatpak."
-msgstr ""
-"Unix-Manpages und Gnome-Vorschaubildgenerator entfernt, die sowieso nicht "
-"funktioniert haben, wenn Pentobi über Flatpak installiert wurde."
-
-#: io.sourceforge.pentobi.appdata.xml.in:77
-msgid ""
-"Support opening certain invalid game files as written by the Android version"
-" of Pentobi 23.0 or earlier."
-msgstr ""
-"Unterstützung für das Öffnen bestimmter ungültiger Spieldateien, wie sie von"
-" der Android-Version von Pentobi 23.0 oder früher geschrieben wurden."
-
-#: io.sourceforge.pentobi.appdata.xml.in:78
-msgid ""
-"Enable only menu item Save As but not Save if game has no filename yet."
-msgstr ""
-"Aktiviere nur den Menüpunkt Speichern unter, nicht aber Speichern, wenn das "
-"Spiel noch keinen Dateinamen hat."
-
-#: io.sourceforge.pentobi.desktop.in:4
-msgid "Computer opponent for Blokus"
-msgstr "Computer-Gegner für Blokus"
-
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
-#: io.sourceforge.pentobi.desktop.in:7
+#: io.sourceforge.pentobi.desktop.in:6
 msgid ""
 "Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo "
 "Q;GembloQ"

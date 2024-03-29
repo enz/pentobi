@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Francisco Zamorano <pacozamo@gmail.com>, 2019
+# Markus Enzenberger <enz@users.sourceforge.net>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-19 14:48+0100\n"
+"POT-Creation-Date: 2024-03-29 11:47+0100\n"
 "PO-Revision-Date: 2019-02-25 15:36+0000\n"
-"Last-Translator: Francisco Zamorano <pacozamo@gmail.com>, 2019\n"
+"Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2024\n"
 "Language-Team: Spanish (https://app.transifex.com/markus-enzenberger/teams/89074/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,9 +26,9 @@ msgstr ""
 msgid "Pentobi"
 msgstr "Pentobi"
 
-#: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:5
-msgid "Computer opponent for the board game Blokus"
-msgstr "Rival virtual para el juego de mesa Blokus"
+#: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:4
+msgid "Computer opponent for Blokus"
+msgstr "Rival virtual para Blokus"
 
 #: io.sourceforge.pentobi.appdata.xml.in:10
 msgid ""
@@ -62,52 +63,32 @@ msgstr ""
 "propietarios. Los propietarios de las marcas comerciales no están afiliados "
 "con el autor del programa Pentobi."
 
-#: io.sourceforge.pentobi.appdata.xml.in:31
+#: io.sourceforge.pentobi.appdata.xml.in:35
 msgid "Game variant Classic"
 msgstr "Variante de juego Clásico"
 
-#: io.sourceforge.pentobi.appdata.xml.in:36
+#: io.sourceforge.pentobi.appdata.xml.in:40
 msgid "Game variant Duo"
 msgstr "Variante de juego Dúo"
 
-#: io.sourceforge.pentobi.appdata.xml.in:41
+#: io.sourceforge.pentobi.appdata.xml.in:45
 msgid "Game variant Trigon"
 msgstr "Variante de juego Trigón"
 
-#: io.sourceforge.pentobi.appdata.xml.in:46
+#: io.sourceforge.pentobi.appdata.xml.in:50
 msgid "Game variant Nexos"
 msgstr "Variante de juego Nexos"
 
-#: io.sourceforge.pentobi.appdata.xml.in:51
+#: io.sourceforge.pentobi.appdata.xml.in:55
 msgid "Game variant GembloQ"
 msgstr "Variante de juego GembloQ"
 
-#: io.sourceforge.pentobi.appdata.xml.in:60
+#: io.sourceforge.pentobi.appdata.xml.in:64
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
 
-#: io.sourceforge.pentobi.appdata.xml.in:71
-msgid "Removed rarely used menu item Export ASCII Art."
-msgstr ""
-
-#: io.sourceforge.pentobi.appdata.xml.in:72
-msgid ""
-"Removed Unix man pages and Gnome thumbnailer, which did not work anyway if "
-"Pentobi was installed via Flatpak."
-msgstr ""
-
-#: io.sourceforge.pentobi.appdata.xml.in:73
-msgid ""
-"Support opening certain invalid game files as written by the Android version"
-" of Pentobi 23.0 or earlier."
-msgstr ""
-
-#: io.sourceforge.pentobi.desktop.in:4
-msgid "Computer opponent for Blokus"
-msgstr "Rival virtual para Blokus"
-
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
-#: io.sourceforge.pentobi.desktop.in:7
+#: io.sourceforge.pentobi.desktop.in:6
 msgid ""
 "Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo "
 "Q;GembloQ"

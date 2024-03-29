@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-19 11:34+0100\n"
+"POT-Creation-Date: 2024-03-29 11:47+0100\n"
 "PO-Revision-Date: 2019-02-25 15:36+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2024\n"
 "Language-Team: French (https://app.transifex.com/markus-enzenberger/teams/89074/fr/)\n"
@@ -25,9 +25,9 @@ msgstr ""
 msgid "Pentobi"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:5
-msgid "Computer opponent for the board game Blokus"
-msgstr "Adversaire d'ordinateur pour le jeu de société Blokus"
+#: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:4
+msgid "Computer opponent for Blokus"
+msgstr "Adversaire d'ordinateur pour jouer à Blokus"
 
 #: io.sourceforge.pentobi.appdata.xml.in:10
 msgid ""
@@ -74,12 +74,8 @@ msgstr ""
 msgid "Markus Enzenberger"
 msgstr ""
 
-#: io.sourceforge.pentobi.desktop.in:4
-msgid "Computer opponent for Blokus"
-msgstr "Adversaire d'ordinateur pour Blokus"
-
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
-#: io.sourceforge.pentobi.desktop.in:7
+#: io.sourceforge.pentobi.desktop.in:6
 msgid ""
 "Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo "
 "Q;GembloQ"
