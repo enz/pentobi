@@ -5,7 +5,7 @@
 <metadata_license>CC0-1.0</metadata_license>
 <project_license>GPL-3.0+</project_license>
 <name>Pentobi</name>
-<summary>Computer opponent for the board game Blokus</summary>
+<summary>Computer opponent for Blokus</summary>
 <description>
 <p>
 Pentobi is a computer opponent for the board game Blokus. It has a

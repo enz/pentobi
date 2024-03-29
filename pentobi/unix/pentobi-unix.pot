@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-19 20:33+0100\n"
+"POT-Creation-Date: 2024-03-29 11:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "Pentobi"
 msgstr ""
 
 #: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:4
-msgid "Computer opponent for the board game Blokus"
+msgid "Computer opponent for Blokus"
 msgstr ""
 
 #: io.sourceforge.pentobi.appdata.xml.in:10
