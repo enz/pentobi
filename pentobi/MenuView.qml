@@ -24,15 +24,9 @@ PentobiMenu {
         onTriggered: rootWindow.showToolBar = checked
     }
     MenuItem {
-        text: actionComment.text
-        checkable: true
-        checked: actionComment.checked
-        onTriggered: actionComment.trigger()
+        action: actionComment
     }
     MenuItem {
-        text: actionFullscreen.text
-        checkable: true
-        checked: actionFullscreen.checked
-        onTriggered: actionFullscreen.trigger()
+        action: actionFullscreen
     }
 }
