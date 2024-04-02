@@ -39,7 +39,7 @@ PentobiDialog {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
-                text: qsTr("Computer opponent for the board game Blokus")
+                text: qsTr("Computer opponent for Blokus")
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
                 width: Math.min(implicitWidth, maxContentWidth)

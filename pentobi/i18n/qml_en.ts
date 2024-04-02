@@ -8,12 +8,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Computer opponent for the board game Blokus</source>
+        <source>Pentobi %1</source>
+        <extracomment>The argument is the application version.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Pentobi %1</source>
-        <extracomment>The argument is the application version.</extracomment>
+        <source>Computer opponent for Blokus</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -6,13 +6,13 @@
         <translation>版权所有 2011–%1 Markus Enzenberger</translation>
     </message>
     <message>
-        <source>Computer opponent for the board game Blokus</source>
-        <translation>经典桌游《角斗士》的计算机对手</translation>
-    </message>
-    <message>
         <source>Pentobi %1</source>
         <extracomment>The argument is the application version.</extracomment>
         <translation>Pentobi 版本%1</translation>
+    </message>
+    <message>
+        <source>Computer opponent for Blokus</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -551,10 +551,6 @@
     <message>
         <source>File has been modified by another application. Reload?</source>
         <translation>文件被其他程序修改。重新加载吗？</translation>
-    </message>
-    <message>
-        <source>Continue computer move?</source>
-        <translation>是否由电脑继续行棋？</translation>
     </message>
     <message>
         <source>Keep only position?</source>

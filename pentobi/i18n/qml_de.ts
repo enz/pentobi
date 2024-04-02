@@ -6,13 +6,13 @@
         <translation>Copyright © 2011–%1 Markus Enzenberger</translation>
     </message>
     <message>
-        <source>Computer opponent for the board game Blokus</source>
-        <translation>Computer-Gegner für das Brettspiel Blokus</translation>
-    </message>
-    <message>
         <source>Pentobi %1</source>
         <extracomment>The argument is the application version.</extracomment>
         <translation>Pentobi %1</translation>
+    </message>
+    <message>
+        <source>Computer opponent for Blokus</source>
+        <translation>Computer-Gegner für Blokus</translation>
     </message>
 </context>
 <context>
@@ -551,10 +551,6 @@
     <message>
         <source>File has been modified by another application. Reload?</source>
         <translation>Datei wurde von einer anderen Anwendung bearbeitet. Neu laden?</translation>
-    </message>
-    <message>
-        <source>Continue computer move?</source>
-        <translation>Computer-Zug fortsetzen?</translation>
     </message>
     <message>
         <source>Keep only position?</source>

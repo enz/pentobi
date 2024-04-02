@@ -6,13 +6,13 @@
         <translation>Copyright © 2011–%1 Markus Enzenberger</translation>
     </message>
     <message>
-        <source>Computer opponent for the board game Blokus</source>
-        <translation>Un adversaire d’ordinateur pour le jeu Blokus</translation>
-    </message>
-    <message>
         <source>Pentobi %1</source>
         <extracomment>The argument is the application version.</extracomment>
         <translation>Pentobi %1</translation>
+    </message>
+    <message>
+        <source>Computer opponent for Blokus</source>
+        <translation>Adversaire d&apos;ordinateur pour jouer à Blokus</translation>
     </message>
 </context>
 <context>
