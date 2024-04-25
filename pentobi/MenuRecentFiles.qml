@@ -9,7 +9,6 @@ import "Main.js" as Logic
 
 PentobiMenu {
     title: qsTr("Open Recent")
-    enabled: recentFiles.entries.length > 0
     relativeWidth: 19
 
     function getText(recentFiles, index) {
@@ -84,10 +83,13 @@ PentobiMenu {
         text: getText(recentFiles.entries, 8)
         onTriggered: openFile(8)
     }
-    MenuSeparator { }
+    MenuSeparator {
+        visible: recentFiles.entries.length > 0
+    }
     PentobiMenuItem {
         //: Menu item for clearing the recent files list
         text: qsTr("Clear List")
+        enabled: recentFiles.entries.length > 0
         // recentFiles.clear() must be called after menu is closed because it
         // modifies the menu and otherwise the menu stays visible (tested with
         // Qt 5.15.1)
