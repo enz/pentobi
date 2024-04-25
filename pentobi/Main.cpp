@@ -47,7 +47,7 @@ int mainAndroid()
 #else
     ctx->setContextProperty("isDebug"_L1, QVariant(false));
 #endif
-    engine.load("qrc:/qt/qml/qml/Main.qml"_L1);
+    engine.load("qrc:/qml/Main.qml"_L1);
     if (engine.rootObjects().empty())
         return 1;
     return QGuiApplication::exec();
@@ -178,7 +178,7 @@ int mainDesktop()
 #else
         ctx->setContextProperty("isDebug"_L1, QVariant(false));
 #endif
-        engine.load("qrc:/qt/qml/qml/Main.qml"_L1);
+        engine.load("qrc:/qml/Main.qml"_L1);
         if (engine.rootObjects().empty())
             return 1;
         return QGuiApplication::exec();

@@ -1,5 +1,5 @@
 <RCC>
-<qresource prefix="qt/qml/qml">
+<qresource prefix="qml">
 <file>themes/dark/menu-desktop.png</file>
 <file>themes/dark/piece-manipulator-desktop.png</file>
 <file>themes/dark/piece-manipulator-desktop-legal.png</file>
