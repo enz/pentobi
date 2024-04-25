@@ -10,11 +10,11 @@ import QtQuick.Window
 PentobiMenu {
     title: qsTr("View")
 
-    Action {
+    PentobiMenuItem {
         text: qsTr("Appearance")
         onTriggered: appearanceDialog.open()
     }
-    MenuItem {
+    PentobiMenuItem {
         visible: isDesktop
         // Invisible menu item still use space in Qt 5.11
         height: visible ? implicitHeight : 0
@@ -23,10 +23,10 @@ PentobiMenu {
         checked: rootWindow.showToolBar
         onTriggered: rootWindow.showToolBar = checked
     }
-    MenuItem {
+    PentobiMenuItem {
         action: actionComment
     }
-    MenuItem {
+    PentobiMenuItem {
         action: actionFullscreen
     }
 }

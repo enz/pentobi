@@ -8,6 +8,8 @@ Version 25.0-dev (master)
   in current position after program startup.
 * Don't support magic MIME type detection on Unix anymore, which was
   not reliable anyway and not working if installed via Flatpak.
+* Added workaround for QTBUG-119198 (Disabled menu item indistinguishable
+  from enabled one)
 * Compile QML sources into executable, which avoids problems of
   QML cache sometimes not being updated if installed via Flatpak.
 

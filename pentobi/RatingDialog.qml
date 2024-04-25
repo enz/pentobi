@@ -169,7 +169,7 @@ PentobiDialog {
 
                 relativeWidth: 14
 
-                MenuItem {
+                PentobiMenuItem {
                     text: qsTr("Open Game %1").arg(
                                 ratingModel.getGameNumber(menu.row - 1))
                     onTriggered: {

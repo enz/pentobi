@@ -10,7 +10,7 @@ import "Main.js" as Logic
 PentobiMenu {
     title: qsTr("Edit")
 
-    MenuItem {
+    PentobiMenuItem {
         text: qsTr("Annotation…")
         enabled: gameModel.moveNumber > 0
         onTriggered: {
@@ -20,7 +20,7 @@ PentobiMenu {
         }
     }
     MenuSeparator { }
-    MenuItem {
+    PentobiMenuItem {
         text: qsTr("Make Main Variation")
         enabled: ! gameModel.isMainVar && ! isRated
         onTriggered: {
@@ -28,46 +28,46 @@ PentobiMenu {
             Logic.showTemporaryMessage(qsTr("Made main variation"))
         }
     }
-    MenuItem {
+    PentobiMenuItem {
         //: Short for Move Variation Up
         text: qsTr("Variation Up")
         enabled: gameModel.hasPrevVar && ! isRated
         onTriggered: Logic.moveUpVar()
     }
-    MenuItem {
+    PentobiMenuItem {
         //: Short for Move Variation Down
         text: qsTr("Variation Down")
         enabled: gameModel.hasNextVar && ! isRated
         onTriggered: Logic.moveDownVar()
     }
-    MenuItem {
+    PentobiMenuItem {
         text: qsTr("Delete Variations")
         enabled: gameModel.hasVariations && ! isRated
         onTriggered: Logic.deleteAllVar()
     }
     MenuSeparator { }
-    MenuItem {
+    PentobiMenuItem {
         text: qsTr("Truncate")
         enabled: gameModel.canGoBackward && ! isRated
         onTriggered: Logic.truncate()
     }
-    MenuItem {
+    PentobiMenuItem {
         text: qsTr("Truncate Children")
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: Logic.truncateChildren()
     }
-    MenuItem {
+    PentobiMenuItem {
         text: qsTr("Keep Position")
         enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward) && ! isRated
         onTriggered: Logic.keepOnlyPosition()
     }
-    MenuItem {
+    PentobiMenuItem {
         text: qsTr("Keep Subtree")
         enabled: gameModel.canGoBackward && gameModel.canGoForward && ! isRated
         onTriggered: Logic.keepOnlySubtree()
     }
     MenuSeparator { }
-    MenuItem {
+    PentobiMenuItem {
         text: qsTr("Setup Mode")
         checkable: true
         enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
@@ -83,7 +83,7 @@ PentobiMenu {
             }
         }
     }
-    MenuItem {
+    PentobiMenuItem {
         text: qsTr("Next Color")
         enabled: ! isRated
         onTriggered: {

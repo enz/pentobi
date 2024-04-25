@@ -10,45 +10,45 @@ import "Main.js" as Logic
 PentobiMenu {
     title: qsTr("Game")
 
-    MenuItem {
+    PentobiMenuItem {
         action: actionNew
     }
-    MenuItem {
+    PentobiMenuItem {
         action: actionNewRated
     }
     MenuSeparator { }
-    Action {
+    PentobiMenuItem {
         text: qsTr("Game Variant…")
         onTriggered: gameVariantDialog.open()
     }
-    MenuItem {
+    PentobiMenuItem {
         action: actionGameInfo
     }
     MenuSeparator { }
-    MenuItem {
+    PentobiMenuItem {
         action: actionUndo
     }
-    MenuItem {
+    PentobiMenuItem {
         action: actionFindMove
     }
     MenuSeparator { }
-    MenuItem {
+    PentobiMenuItem {
         action: actionOpen
     }
     MenuRecentFiles { }
-    MenuItem {
+    PentobiMenuItem {
         action: actionSave
         enabled: actionSave.enabled && gameModel.file !== ""
     }
-    MenuItem {
+    PentobiMenuItem {
         action: actionSaveAs
     }
-    Action {
+    PentobiMenuItem {
         text: qsTr("Export Image…")
         onTriggered: exportImageDialog.open()
     }
     MenuSeparator { }
-    MenuItem {
+    PentobiMenuItem {
         action: actionQuit
     }
 }

@@ -9,16 +9,16 @@ import QtQuick.Controls
 PentobiMenu {
     title: qsTr("Computer")
 
-    MenuItem {
+    PentobiMenuItem {
         action: actionComputerSettings
     }
-    MenuItem {
+    PentobiMenuItem {
         action: actionPlay
     }
-    MenuItem {
+    PentobiMenuItem {
         action: actionPlaySingle
     }
-    MenuItem {
+    PentobiMenuItem {
         action: actionStop
     }
 }

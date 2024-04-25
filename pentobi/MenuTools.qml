@@ -10,22 +10,22 @@ import "Main.js" as Logic
 PentobiMenu {
     title: qsTr("Tools")
 
-    MenuItem {
+    PentobiMenuItem {
         text: qsTr("Rating")
         onTriggered: Logic.rating()
     }
-    Action {
+    PentobiMenuItem {
         enabled: ! isRated && ratingModel.numberGames > 0
         text: qsTr("Clear Rating")
         onTriggered: Logic.clearRating()
     }
     MenuSeparator { }
-    Action {
+    PentobiMenuItem {
         enabled: ! isRated && (gameModel.canGoBackward || gameModel.canGoForward)
         text: qsTr("Analyze Game…")
         onTriggered: analyzeDialog.open()
     }
-    Action {
+    PentobiMenuItem {
         enabled: analyzeGameModel.elements.length !== 0
         text: qsTr("Clear Analysis")
         onTriggered: {
