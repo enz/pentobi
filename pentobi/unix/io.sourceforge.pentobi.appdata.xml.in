@@ -73,17 +73,8 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 </provides>
 <content_rating type="oars-1.1"/>
 <releases>
-<release version="25.0" date="2024-04-26">
+<release version="25.1-dev" date="XXXX-XX-XX">
 <description>
-<ul>
-<li>Fixed formatting of written game files.</li>
-<li>Improved visibility of analysis graph lines in theme System.</li>
-<li>Workaround for QTBUG-119198 (Disabled menu item indistinguishable from
-enabled one).</li>
-<li>Compile QML bytecode into executable to avoid bytecode caching problems
-one some platforms.</li>
-<li>Minor fixes.</li>
-</ul>
 </description>
 </release>
 </releases>
