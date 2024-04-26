@@ -1,26 +1,20 @@
 Pentobi Release Notes
 =====================
 
-Version 25.0-dev (master)
--------------------------
+Version 25.0 (26 Apr 2024)
+--------------------------
 
 * Don't ask for continuing computer move anymore if computer is to play
   in current position after program startup.
 * Don't support magic MIME type detection on Unix anymore, which was
   not reliable anyway and not working if installed via Flatpak.
-* Added workaround for QTBUG-119198 (Disabled menu item indistinguishable
-  from enabled one)
+* Workaround for QTBUG-119198 (Disabled menu item indistinguishable from
+  enabled one).
 * Compile QML sources into executable, which avoids problems of
   QML cache sometimes not being updated if installed via Flatpak.
-
-Version 24.1-dev (v24-fixes)
-----------------------------
-
-* Fixed formatting of written SGF files.
-* Improved visibility of lines in analysis graph.
-* Disable QML cache on Linux. It did not reliably get updated if
-  installed via Flatpak.
-* Other minor fixes.
+* Fixed formatting of written game files.
+* Improved visibility of analysis graph lines in theme System.
+* Minor fixes.
 
 Version 24.0 (22 Jan 2024)
 --------------------------

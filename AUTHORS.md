@@ -15,6 +15,6 @@ Translators
 -----------
 
 * Allan Nordhøy <epost@anotheragency.no> (Norwegian Bokmål)
-* Cherry Lee <taikocherry@126.com> (Simplified Chinese)
+* Cherry <taikocherry@126.com> (Simplified Chinese)
 * Francisco Zamorano <pacozamo@gmail.com> (Spanish)
 * Viktor Erukhin <official159ru@mail.ru> (Russian)
