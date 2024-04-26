@@ -28,11 +28,9 @@ Building
 
 Pentobi can be compiled from the source directory with the commands
 ```
-cmake -DCMAKE_BUILD_TYPE=Release .
+cmake .
 make
 ```
-To use an installation directory different from the cmake default, use
-the cmake option `CMAKE_INSTALL_PREFIX`.
 
 Installing
 ----------
@@ -40,12 +38,4 @@ Installing
 Pentobi can be installed after compilation with the command
 ```
 sudo make install
-```
-After installation, the system-wide databases should be updated to
-make Pentobi appear in the desktop menu and register it as handler for
-Blokus files (*.blksgf). On Debian with install prefix `/usr/local`,
-this can be done by running
-```
-sudo update-mime-database /usr/local/share/mime
-sudo update-desktop-database /usr/local/share/applications
 ```
