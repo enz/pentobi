@@ -93,11 +93,13 @@ PentobiDialog {
                 id: switchCoordinates
 
                 text: qsTr("Coordinates")
+                checked: gameView.showCoordinates
             }
             Switch {
                 id: switchShowVariations
 
                 text: qsTr("Show variations")
+                checked: gameModel.showVariations
             }
             Switch {
                 id: switchMoveNumber
@@ -106,6 +108,7 @@ PentobiDialog {
                 //: Check box in appearance dialog whether to show the
                 //: move number in the status bar.
                 text: qsTr("Move number")
+                checked: gameView.showMoveNumber
             }
             Label {
                 text: qsTr("Color theme:")
