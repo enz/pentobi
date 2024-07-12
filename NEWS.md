@@ -1,8 +1,8 @@
 Pentobi Release Notes
 =====================
 
-Version 26.0-dev (master)
--------------------------
+Version 26.0-dev (main)
+-----------------------
 
 *
 
