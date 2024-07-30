@@ -290,7 +290,7 @@ Item {
                         MenuView { relativeWidth: 25 }
                         MenuComputer { relativeWidth: 25 }
                         MenuTools { relativeWidth: 25 }
-                        MenuHelp { relativeWidth: 25 }
+                        MenuHelp { relativeWidth: 20 }
                     }
                 }
             }
