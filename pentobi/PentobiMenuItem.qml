@@ -10,5 +10,5 @@ import QtQuick.Controls
 MenuItem {
     // Add extra transparency as a workaround for QTBUG-119198 (Disabled menu
     // item indistinguishable from enabled one).
-    opacity: workaroundQtBug119198 && ! enabled ? 0.65 : 1
+    opacity: workaroundQtBug119198 && ! enabled ? 0.5 : 1
 }
