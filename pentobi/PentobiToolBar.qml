@@ -279,13 +279,18 @@ Item {
                         closePolicy: Popup.CloseOnPressOutsideParent
                                      | Popup.CloseOnEscape
 
-                        MenuGame { relativeWidth: 16 }
-                        MenuGo { relativeWidth: 15 }
-                        MenuEdit { relativeWidth: 20 }
-                        MenuView { relativeWidth: 14 }
-                        MenuComputer { relativeWidth: 11 }
-                        MenuTools { relativeWidth: 13 }
-                        MenuHelp { relativeWidth: 11 }
+                        // QtQuick.Controls.Menu is fixed-width so we need to
+                        // test with all supported languages that the items are
+                        // not truncated or overlap with shortcuts, which are
+                        // shown with newer versions of Qt on KDE (last tested
+                        // with Qt 6.7.2)
+                        MenuGame { relativeWidth: 29 }
+                        MenuGo { relativeWidth: 25 }
+                        MenuEdit { relativeWidth: 25 }
+                        MenuView { relativeWidth: 25 }
+                        MenuComputer { relativeWidth: 25 }
+                        MenuTools { relativeWidth: 25 }
+                        MenuHelp { relativeWidth: 25 }
                     }
                 }
             }

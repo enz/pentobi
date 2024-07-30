@@ -4,7 +4,8 @@ Pentobi Release Notes
 Version 25.1-dev (v25-fixes)
 ----------------------------
 
-*
+* Avoid that menu item texts are truncated or overlap with shortcuts,
+  which are shown with newer versions of Qt on KDE.
 
 Version 25.0 (26 Apr 2024)
 --------------------------
