@@ -6,11 +6,15 @@ Version 26.0-dev (main)
 
 *
 
-Version 25.1-dev (v25-fixes)
+Version 25.2-dev (v25-fixes)
 ----------------------------
 
-* Avoid that menu item texts are truncated or overlap with shortcuts shown
-  with newer versions of Qt on KDE.
+*
+
+Version 25.1 (31 Jul 2024)
+--------------------------
+
+* Fixed menu text rendering issues on newer versions of KDE.
 
 Version 25.0 (26 Apr 2024)
 --------------------------
