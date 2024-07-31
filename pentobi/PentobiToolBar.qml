@@ -281,9 +281,9 @@ Item {
 
                         // QtQuick.Controls.Menu is fixed-width so we need to
                         // test with all supported languages that the items are
-                        // not truncated or overlap with shortcuts, which are
-                        // shown with newer versions of Qt on KDE (last tested
-                        // with Qt 6.7.2)
+                        // not truncated or overlap with shortcuts shown with
+                        // newer versions of Qt on KDE (last tested with
+                        // Qt 6.7.2)
                         MenuGame { relativeWidth: 29 }
                         MenuGo { relativeWidth: 25 }
                         MenuEdit { relativeWidth: 25 }
