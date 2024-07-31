@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-29 11:47+0100\n"
-"PO-Revision-Date: 2024-07-31 15:36+0000\n"
+"PO-Revision-Date: 2019-02-25 15:36+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2024\n"
 "Language-Team: German (https://app.transifex.com/markus-enzenberger/teams/89074/de/)\n"
 "MIME-Version: 1.0\n"
@@ -83,10 +83,6 @@ msgstr "Spielvariante GembloQ"
 #: io.sourceforge.pentobi.appdata.xml.in:64
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
-
-#: io.sourceforge.pentobi.appdata.xml.in:79
-msgid "Fixed menu text rendering issues on newer versions of KDE."
-msgstr "Darstellungsprobleme von Menütexten in neueren Versionen von KDE behoben."
 
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
 #: io.sourceforge.pentobi.desktop.in:6
