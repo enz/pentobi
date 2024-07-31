@@ -73,8 +73,13 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 </provides>
 <content_rating type="oars-1.1"/>
 <releases>
-<release version="25.1-dev" date="XXXX-XX-XX">
+<release version="25.1-dev" date="2024-07-31">
 <description>
+<ul>
+<li>
+Fixed menu text rendering issues on newer versions of KDE.
+</li>
+</ul>
 </description>
 </release>
 </releases>
