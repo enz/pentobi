@@ -8,7 +8,6 @@ import QtCore
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
-import Qt.labs.settings
 import pentobi
 import "Main.js" as Logic
 
