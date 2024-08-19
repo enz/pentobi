@@ -129,7 +129,6 @@ qt_add_executable(pentobi WIN32 ${pentobi_src})
 
 qt_add_qml_module(pentobi
     URI qml
-    VERSION 0.0
     QML_FILES
       AboutDialog.qml
       AnalyzeDialog.qml
