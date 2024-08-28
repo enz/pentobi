@@ -1,5 +1,5 @@
 <RCC>
-<qresource prefix="qml">
+<qresource prefix="qt/qml/PentobiGui">
 <file>icon/pentobi-48.png</file>
 <file>themes/dark/menu.png</file>
 <file>themes/dark/pentobi-backward.png</file>

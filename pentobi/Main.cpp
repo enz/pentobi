@@ -34,7 +34,7 @@ namespace {
 
 #ifdef Q_OS_ANDROID
 
-int mainAndroid()
+int mainAndroid(QGuiApplication& app)
 {
     QQmlApplicationEngine engine;
     engine.addImageProvider("pentobi"_L1, new ImageProvider);
@@ -47,30 +47,32 @@ int mainAndroid()
 #else
     ctx->setContextProperty("isDebug"_L1, QVariant(false));
 #endif
-    engine.load("qrc:/qml/Main.qml"_L1);
-    if (engine.rootObjects().empty())
-        return 1;
-    return QGuiApplication::exec();
+    QObject::connect(&engine,
+                     &QQmlApplicationEngine::objectCreationFailed,
+                     &app, []() { QCoreApplication::exit(1); },
+                     Qt::QueuedConnection);
+    engine.loadFromModule("PentobiGui"_L1, "Main"_L1);
+    return app.exec();
 }
 
 #else // ! defined(Q_OS_ANDROID)
 
-int mainDesktop()
+int mainDesktop(QGuiApplication& app)
 {
     QIcon::setThemeName("pentobi"_L1);
     QIcon icon(":/icon/pentobi-48.png"_L1);
-    QGuiApplication::setWindowIcon(icon);
-    QGuiApplication::setDesktopFileName("io.sourceforge.pentobi"_L1);
+    app.setWindowIcon(icon);
+    app.setDesktopFileName("io.sourceforge.pentobi"_L1);
     QCommandLineParser parser;
     parser.setApplicationDescription(
-                QCoreApplication::translate(
+                app.translate(
                     "main",
                     "computer opponent for the board game Blokus"));
     auto maxSupportedLevel = Player::max_supported_level;
     QCommandLineOption optionMaxLevel(
                 "maxlevel"_L1,
                 //: Description for command line option --maxlevel
-                QCoreApplication::translate(
+                app.translate(
                     "main", "Set maximum level to <n>."),
                 "n"_L1,
                 QString::number(PlayerModel::maxLevel));
@@ -78,32 +80,32 @@ int mainDesktop()
     QCommandLineOption optionNoBook(
                 "nobook"_L1,
                 //: Description for command line option --nobook
-                QCoreApplication::translate(
+                app.translate(
                     "main", "Do not use opening books."));
     QCommandLineOption optionMobile(
                 "mobile"_L1,
                 //: Description for command line option --mobile
-                QCoreApplication::translate(
+                app.translate(
                     "main", "Use layout optimized for smartphones."));
     parser.addOption(optionMobile);
     parser.addOption(optionNoBook);
     QCommandLineOption optionNoDelay(
                 "nodelay"_L1,
                 //: Description for command line option --nodelay
-                QCoreApplication::translate(
+                app.translate(
                     "main", "Do not delay fast computer moves."));
     parser.addOption(optionNoDelay);
     QCommandLineOption optionSeed(
                 "seed"_L1,
                 //: Description for command line option --seed
-                QCoreApplication::translate(
+                app.translate(
                     "main", "Set random seed to <n>."),
                 "n"_L1);
     parser.addOption(optionSeed);
     QCommandLineOption optionThreads(
                 "threads"_L1,
                 //: Description for command line option --threads
-                QCoreApplication::translate(
+                app.translate(
                     "main", "Use <n> threads (0=auto)."),
                 "n"_L1);
     parser.addOption(optionThreads);
@@ -111,21 +113,21 @@ int mainDesktop()
     QCommandLineOption optionVerbose(
                 "verbose"_L1,
                 //: Description for command line option --verbose
-                QCoreApplication::translate(
+                app.translate(
                     "main",
                     "Print logging information to standard error."));
     parser.addOption(optionVerbose);
 #endif
     parser.addPositionalArgument(
                 //: Name of command line argument.
-                QCoreApplication::translate("main", "file.blksgf"),
-                QCoreApplication::translate(
+                app.translate("main", "file.blksgf"),
+                app.translate(
                     "main",
                     //: Description of command line argument.
                     "Blokus SGF file to open (optional)."));
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.process(*QCoreApplication::instance());
+    parser.process(*app.instance());
     try
     {
 #ifndef LIBBOARDGAME_DISABLE_LOG
@@ -139,7 +141,7 @@ int mainDesktop()
         bool ok;
         auto maxLevel = parser.value(optionMaxLevel).toUInt(&ok);
         if (! ok || maxLevel < 1 || maxLevel > maxSupportedLevel)
-            throw QCoreApplication::translate(
+            throw app.translate(
                     "main", "--maxlevel must be between 1 and %1")
                 .arg(maxSupportedLevel);
         PlayerModel::maxLevel = maxLevel;
@@ -147,7 +149,7 @@ int mainDesktop()
         {
             auto seed = parser.value(optionSeed).toUInt(&ok);
             if (! ok)
-                throw QCoreApplication::translate(
+                throw app.translate(
                         "main", "--seed must be a positive number");
             libboardgame_base::RandomGenerator::set_global_seed(seed);
         }
@@ -155,7 +157,7 @@ int mainDesktop()
         {
             auto nuThreads = parser.value(optionThreads).toUInt(&ok);
             if (! ok)
-                throw QCoreApplication::translate(
+                throw app.translate(
                         "main", "--threads must be a positive number");
             PlayerModel::nuThreads = nuThreads;
         }
@@ -163,7 +165,7 @@ int mainDesktop()
         QString initialFile;
         auto args = parser.positionalArguments();
         if (args.size() > 1)
-            throw QCoreApplication::translate("main", "Too many arguments");
+            throw app.translate("main", "Too many arguments");
         if (! args.empty())
             initialFile = args.at(0);
         LIBBOARDGAME_LOG("Using Qt ", qVersion());
@@ -178,10 +180,12 @@ int mainDesktop()
 #else
         ctx->setContextProperty("isDebug"_L1, QVariant(false));
 #endif
-        engine.load("qrc:/qml/Main.qml"_L1);
-        if (engine.rootObjects().empty())
-            return 1;
-        return QGuiApplication::exec();
+        QObject::connect(&engine,
+                         &QQmlApplicationEngine::objectCreationFailed,
+                         &app, []() { QCoreApplication::exit(1); },
+                         Qt::QueuedConnection);
+        engine.loadFromModule("PentobiGui"_L1, "Main"_L1);
+        return app.exec();
     }
     catch (const QString& s)
     {
@@ -219,18 +223,18 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif
     QGuiApplication app(argc, argv);
-    qmlRegisterType<AnalyzeGameModel>("pentobi", 0, 0, "AnalyzeGameModel");
-    qmlRegisterType<AndroidUtils>("pentobi", 0, 0, "AndroidUtils");
-    qmlRegisterType<DocbookReader>("pentobi", 0, 0, "DocbookReader");
-    qmlRegisterType<GameModel>("pentobi", 0, 0, "GameModel");
-    qmlRegisterType<PlayerModel>("pentobi", 0, 0, "PlayerModel");
-    qmlRegisterType<RatingModel>("pentobi", 0, 0, "RatingModel");
-    qmlRegisterType<RecentFiles>("pentobi", 0, 0, "RecentFiles");
-    qmlRegisterType<SyncSettings>("pentobi", 0, 0, "SyncSettings");
+    qmlRegisterType<AnalyzeGameModel>("PentobiGui", 0, 0, "AnalyzeGameModel");
+    qmlRegisterType<AndroidUtils>("PentobiGui", 0, 0, "AndroidUtils");
+    qmlRegisterType<DocbookReader>("PentobiGui", 0, 0, "DocbookReader");
+    qmlRegisterType<GameModel>("PentobiGui", 0, 0, "GameModel");
+    qmlRegisterType<PlayerModel>("PentobiGui", 0, 0, "PlayerModel");
+    qmlRegisterType<RatingModel>("PentobiGui", 0, 0, "RatingModel");
+    qmlRegisterType<RecentFiles>("PentobiGui", 0, 0, "RecentFiles");
+    qmlRegisterType<SyncSettings>("PentobiGui", 0, 0, "SyncSettings");
     qmlRegisterUncreatableType<AnalyzeGameElement>(
-                "pentobi", 0, 0, "AnalyzeGameElement", {});
-    qmlRegisterUncreatableType<GameMove>("pentobi", 0, 0, "GameMove", {});
-    qmlRegisterUncreatableType<PieceModel>("pentobi", 0, 0, "PieceModel", {});
+                "PentobiGui", 0, 0, "AnalyzeGameElement", {});
+    qmlRegisterUncreatableType<GameMove>("PentobiGui", 0, 0, "GameMove", {});
+    qmlRegisterUncreatableType<PieceModel>("PentobiGui", 0, 0, "PieceModel", {});
 #ifndef Q_OS_ANDROID
     QTranslator qtTranslator;
     if (qtTranslator.load("qt_" + QLocale::system().name(),
@@ -241,9 +245,9 @@ int main(int argc, char *argv[])
     if (translator.load(":qml/i18n/qml_" + QLocale::system().name()))
         QCoreApplication::installTranslator(&translator);
 #ifdef Q_OS_ANDROID
-    return mainAndroid();
+    return mainAndroid(app);
 #else
-    return mainDesktop();
+    return mainDesktop(app);
 #endif
 }
 
