@@ -84,7 +84,100 @@ add_custom_command(
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons_desktop.qrc" ${images_png}
     )
 
-set(pentobi_src
+add_custom_command(
+    OUTPUT help/help.qrc
+    COMMAND ${CMAKE_COMMAND} -E copy
+    "${CMAKE_CURRENT_SOURCE_DIR}/help/help.qrc" help
+    DEPENDS pentobi-help help/help.qrc
+    )
+
+qt_add_executable(pentobi WIN32 Main.cpp)
+
+if (WIN32)
+    target_sources(pentobi "windows/pentobi.rc")
+endif()
+
+qt_add_qml_module(pentobi
+    URI PentobiGui
+    QML_FILES
+    AboutDialog.qml
+    AnalyzeDialog.qml
+    AnalyzeGame.qml
+    AppearanceDialog.qml
+    Board.qml
+    BoardContextMenu.qml
+    ButtonCancel.qml
+    ButtonClose.qml
+    ButtonOk.qml
+    ComputerDialog.qml
+    Comment.qml
+    DialogButtonBoxOkCancel.qml
+    DialogLoader.qml
+    ExportImageDialog.qml
+    FatalMessage.qml
+    GameViewDesktop.qml
+    GameViewMobile.qml
+    GameInfoDialog.qml
+    GameVariantDialog.qml
+    GotoMoveDialog.qml
+    HelpDialog.qml
+    HelpViewer.qml
+    HelpWindow.qml
+    ImageSaveDialog.qml
+    InitialRatingDialog.qml
+    LineSegment.qml
+    Main.qml
+    MessageDialog.qml
+    MenuComputer.qml
+    MenuEdit.qml
+    MenuGame.qml
+    MenuGo.qml
+    MenuHelp.qml
+    MenuRecentFiles.qml
+    MenuTools.qml
+    MenuView.qml
+    MoveAnnotationDialog.qml
+    NavigationButtons.qml
+    NavigationPanel.qml
+    OpenDialog.qml
+    PentobiBusyIndicator.qml
+    PentobiButton.qml
+    PentobiDialog.qml
+    PentobiDialogButtonBox.qml
+    PentobiMenu.qml
+    PentobiMenuItem.qml
+    PentobiToolBar.qml
+    PieceBase.qml
+    PieceCallisto.qml
+    PieceClassic.qml
+    PieceGembloQ.qml
+    PieceList.qml
+    PieceManipulator.qml
+    PieceNexos.qml
+    PieceRotationAnimation.qml
+    PieceSelectorDesktop.qml
+    PieceSelectorMobile.qml
+    PieceSwitchedFlipAnimation.qml
+    PieceTrigon.qml
+    QuarterSquare.qml
+    QuestionDialog.qml
+    RatingDialog.qml
+    RatingGraph.qml
+    SaveDialog.qml
+    ScoreDisplay.qml
+    ScoreElement.qml
+    ScoreElement2.qml
+    Square.qml
+    Triangle.qml
+    Main.js
+    GameView.js
+    themes/colorblind-dark/Theme.qml
+    themes/colorblind-light/Theme.qml
+    themes/dark/Theme.qml
+    themes/light/Theme.qml
+    themes/system/Theme.qml
+
+    SOURCES
     AnalyzeGameModel.h
     AnalyzeGameModel.cpp
     AndroidUtils.h
@@ -113,99 +206,6 @@ set(pentobi_src
     "${CMAKE_CURRENT_BINARY_DIR}/icons_desktop.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
-    )
-if (WIN32)
-    list(APPEND pentobi_src "windows/pentobi.rc")
-endif()
-
-add_custom_command(
-    OUTPUT help/help.qrc
-    COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/help/help.qrc" help
-    DEPENDS pentobi-help help/help.qrc
-    )
-
-qt_add_executable(pentobi WIN32 ${pentobi_src})
-
-qt_add_qml_module(pentobi
-    URI PentobiGui
-    QML_FILES
-      AboutDialog.qml
-      AnalyzeDialog.qml
-      AnalyzeGame.qml
-      AppearanceDialog.qml
-      Board.qml
-      BoardContextMenu.qml
-      ButtonCancel.qml
-      ButtonClose.qml
-      ButtonOk.qml
-      ComputerDialog.qml
-      Comment.qml
-      DialogButtonBoxOkCancel.qml
-      DialogLoader.qml
-      ExportImageDialog.qml
-      FatalMessage.qml
-      GameViewDesktop.qml
-      GameViewMobile.qml
-      GameInfoDialog.qml
-      GameVariantDialog.qml
-      GotoMoveDialog.qml
-      HelpDialog.qml
-      HelpViewer.qml
-      HelpWindow.qml
-      ImageSaveDialog.qml
-      InitialRatingDialog.qml
-      LineSegment.qml
-      Main.qml
-      MessageDialog.qml
-      MenuComputer.qml
-      MenuEdit.qml
-      MenuGame.qml
-      MenuGo.qml
-      MenuHelp.qml
-      MenuRecentFiles.qml
-      MenuTools.qml
-      MenuView.qml
-      MoveAnnotationDialog.qml
-      NavigationButtons.qml
-      NavigationPanel.qml
-      OpenDialog.qml
-      PentobiBusyIndicator.qml
-      PentobiButton.qml
-      PentobiDialog.qml
-      PentobiDialogButtonBox.qml
-      PentobiMenu.qml
-      PentobiMenuItem.qml
-      PentobiToolBar.qml
-      PieceBase.qml
-      PieceCallisto.qml
-      PieceClassic.qml
-      PieceGembloQ.qml
-      PieceList.qml
-      PieceManipulator.qml
-      PieceNexos.qml
-      PieceRotationAnimation.qml
-      PieceSelectorDesktop.qml
-      PieceSelectorMobile.qml
-      PieceSwitchedFlipAnimation.qml
-      PieceTrigon.qml
-      QuarterSquare.qml
-      QuestionDialog.qml
-      RatingDialog.qml
-      RatingGraph.qml
-      SaveDialog.qml
-      ScoreDisplay.qml
-      ScoreElement.qml
-      ScoreElement2.qml
-      Square.qml
-      Triangle.qml
-      Main.js
-      GameView.js
-      themes/colorblind-dark/Theme.qml
-      themes/colorblind-light/Theme.qml
-      themes/dark/Theme.qml
-      themes/light/Theme.qml
-      themes/system/Theme.qml
 )
 
 if(ANDROID)
