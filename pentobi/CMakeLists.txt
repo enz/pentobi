@@ -188,7 +188,6 @@ qt_add_qml_module(pentobi
     GameModel.cpp
     ImageProvider.h
     ImageProvider.cpp
-    Main.cpp
     Paint.h
     Paint.cpp
     PieceModel.h
