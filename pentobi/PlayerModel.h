@@ -8,6 +8,7 @@
 #define PENTOBI_PLAYER_MODEL_H
 
 #include <QFutureWatcher>
+#include <QtQml/qqmlregistration.h>
 #include "libpentobi_mcts/Player.h"
 
 class GameModel;
@@ -26,6 +27,7 @@ class PlayerModel
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     /** Game variant should be bound to GameModel.gameVariant.
         This automatically updates the level property to the stored level for

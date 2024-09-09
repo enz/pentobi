@@ -8,6 +8,7 @@
 #define PENTOBI_RATING_MODEL_H
 
 #include <QAbstractTableModel>
+#include <QtQml/qqmlregistration.h>
 #include "libboardgame_base/Rating.h"
 
 class GameModel;
@@ -57,6 +58,7 @@ class RatingModel
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(double bestRating READ bestRating NOTIFY bestRatingChanged)
     Q_PROPERTY(QString gameVariant MEMBER m_gameVariant WRITE setGameVariant NOTIFY gameVariantChanged)

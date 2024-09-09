@@ -8,6 +8,7 @@
 #define PENTOBI_SYNC_SETTINGS_H
 
 #include <QSettings>
+#include <QtQml/qqmlregistration.h>
 
 //-----------------------------------------------------------------------------
 
@@ -23,6 +24,7 @@ class SyncSettings
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     using QObject::QObject;

@@ -7,6 +7,7 @@
 #ifndef PENTOBI_GAME_MODEL_H
 #define PENTOBI_GAME_MODEL_H
 
+#include <QtQml/qqmlregistration.h>
 #include "PieceModel.h"
 #include "libpentobi_base/Game.h"
 
@@ -26,6 +27,8 @@ class GameMove
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("GameMove is only created by GameModel")
 
     Q_PROPERTY(int color READ color CONSTANT)
 
@@ -53,6 +56,7 @@ class GameModel
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(QString gameVariant READ gameVariant NOTIFY gameVariantChanged)
     Q_PROPERTY(QString positionInfo READ positionInfo NOTIFY positionInfoChanged)

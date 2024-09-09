@@ -9,6 +9,7 @@
 
 #include <QObject>
 #include <QVariant>
+#include <QtQml/qqmlregistration.h>
 
 //-----------------------------------------------------------------------------
 
@@ -16,6 +17,7 @@ class RecentFiles
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(QVariantList entries READ entries NOTIFY entriesChanged)
 

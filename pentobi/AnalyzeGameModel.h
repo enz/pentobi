@@ -11,10 +11,11 @@
 #include <vector>
 #include <QFutureWatcher>
 #include <QQmlListProperty>
+#include <QtQml/qqmlregistration.h>
+#include "GameModel.h"
+#include "PlayerModel.h"
 #include "libpentobi_mcts/AnalyzeGame.h"
 
-class GameModel;
-class PlayerModel;
 namespace libpentobi_base { class Game; }
 namespace libpentobi_mcts { class Search; }
 
@@ -27,6 +28,8 @@ class AnalyzeGameElement
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("AnalyzeGameElement is only created by AnalyzeGameModel")
 
     Q_PROPERTY(int moveColor MEMBER m_moveColor CONSTANT)
     Q_PROPERTY(double value MEMBER m_value CONSTANT)
@@ -46,6 +49,7 @@ class AnalyzeGameModel
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(QQmlListProperty<AnalyzeGameElement> elements READ elements NOTIFY elementsChanged)
     Q_PROPERTY(bool isRunning READ isRunning NOTIFY isRunningChanged)

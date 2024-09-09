@@ -223,18 +223,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif
     QGuiApplication app(argc, argv);
-    qmlRegisterType<AnalyzeGameModel>("PentobiGui", 0, 0, "AnalyzeGameModel");
-    qmlRegisterType<AndroidUtils>("PentobiGui", 0, 0, "AndroidUtils");
-    qmlRegisterType<DocbookReader>("PentobiGui", 0, 0, "DocbookReader");
-    qmlRegisterType<GameModel>("PentobiGui", 0, 0, "GameModel");
-    qmlRegisterType<PlayerModel>("PentobiGui", 0, 0, "PlayerModel");
-    qmlRegisterType<RatingModel>("PentobiGui", 0, 0, "RatingModel");
-    qmlRegisterType<RecentFiles>("PentobiGui", 0, 0, "RecentFiles");
-    qmlRegisterType<SyncSettings>("PentobiGui", 0, 0, "SyncSettings");
-    qmlRegisterUncreatableType<AnalyzeGameElement>(
-                "PentobiGui", 0, 0, "AnalyzeGameElement", {});
-    qmlRegisterUncreatableType<GameMove>("PentobiGui", 0, 0, "GameMove", {});
-    qmlRegisterUncreatableType<PieceModel>("PentobiGui", 0, 0, "PieceModel", {});
 #ifndef Q_OS_ANDROID
     QTranslator qtTranslator;
     if (qtTranslator.load("qt_" + QLocale::system().name(),

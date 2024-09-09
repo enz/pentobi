@@ -9,6 +9,7 @@
 
 #include <QColor>
 #include <QObject>
+#include <QtQml/qqmlregistration.h>
 
 //-----------------------------------------------------------------------------
 
@@ -16,6 +17,7 @@ class AndroidUtils
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     using QObject::QObject;

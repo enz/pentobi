@@ -10,6 +10,7 @@
 #include <QObject>
 #include <QPointF>
 #include <QVariant>
+#include <QtQml/qqmlregistration.h>
 #include "libpentobi_base/Piece.h"
 #include "libpentobi_base/PieceInfo.h"
 
@@ -28,6 +29,8 @@ class PieceModel
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("PieceModel is only created by GameModel")
 
     Q_PROPERTY(int color READ color CONSTANT)
 
