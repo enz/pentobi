@@ -8,6 +8,7 @@
 #define PENTOBI_DOCBOOK_READER_H
 
 #include <QObject>
+#include <QtQml/qqmlregistration.h>
 
 using namespace Qt::StringLiterals;
 
@@ -24,6 +25,7 @@ class DocbookReader
     : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(QString pageId MEMBER m_pageId WRITE setPageId)
     Q_PROPERTY(QString text READ text NOTIFY textChanged)
