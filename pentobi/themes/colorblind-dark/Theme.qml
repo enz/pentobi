@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick
-import "../colorblind-light" as ColorblindLight
 import "../dark" as Dark
 
 Dark.Theme {
