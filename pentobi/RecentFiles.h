@@ -8,6 +8,7 @@
 #define PENTOBI_RECENT_FILES_H
 
 #include <QObject>
+#include <QVariant>
 
 //-----------------------------------------------------------------------------
 
