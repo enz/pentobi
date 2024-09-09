@@ -109,16 +109,16 @@ qt_add_qml_module(pentobi
     ButtonCancel.qml
     ButtonClose.qml
     ButtonOk.qml
-    ComputerDialog.qml
     Comment.qml
+    ComputerDialog.qml
     DialogButtonBoxOkCancel.qml
     DialogLoader.qml
     ExportImageDialog.qml
     FatalMessage.qml
-    GameViewDesktop.qml
-    GameViewMobile.qml
     GameInfoDialog.qml
     GameVariantDialog.qml
+    GameViewDesktop.qml
+    GameViewMobile.qml
     GotoMoveDialog.qml
     HelpDialog.qml
     HelpViewer.qml
@@ -174,8 +174,8 @@ qt_add_qml_module(pentobi
     ThemeLight.qml
     ThemeSystem.qml
     Triangle.qml
-    Main.js
     GameView.js
+    Main.js
 
     SOURCES
     AnalyzeGameModel.h
