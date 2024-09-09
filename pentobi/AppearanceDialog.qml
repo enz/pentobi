@@ -19,13 +19,13 @@ PentobiDialog {
     onAboutToShow: {
         switchCoordinates.checked = gameView.showCoordinates
         switchShowVariations.checked = gameModel.showVariations
-        if (themeName === "dark")
+        if (themeName === "Dark")
             currentThemeIndex = 1
-        else if (themeName === "colorblind-light")
+        else if (themeName === "ColorblindLight")
             currentThemeIndex = 2
-        else if (themeName === "colorblind-dark")
+        else if (themeName === "ColorblindDark")
             currentThemeIndex = 3
-        else if (themeName === "system")
+        else if (themeName === "System")
             currentThemeIndex = isAndroid ? 1 : 4
         else
             currentThemeIndex = 0
@@ -55,11 +55,11 @@ PentobiDialog {
         gameView.showCoordinates = switchCoordinates.checked
         gameModel.showVariations = switchShowVariations.checked
         switch (comboBoxTheme.currentIndex) {
-        case 0: themeName = "light"; break
-        case 1: themeName = "dark"; break
-        case 2: themeName = "colorblind-light"; break
-        case 3: themeName = "colorblind-dark"; break
-        case 4: themeName = "system"; break
+        case 0: themeName = "Light"; break
+        case 1: themeName = "Dark"; break
+        case 2: themeName = "ColorblindLight"; break
+        case 3: themeName = "ColorblindDark"; break
+        case 4: themeName = "System"; break
         }
         switch (comboBoxMoveMarking.currentIndex) {
         case 0: gameView.moveMarking = "last_dot"; break

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/themes/light/Theme.qml
+/** @file pentobi/ThemeLight.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

@@ -32,7 +32,7 @@ ApplicationWindow {
 
     property bool isWindows: Qt.platform.os === "windows"
 
-    property string themeName: isAndroid ? "dark" : "system"
+    property string themeName: isAndroid ? "Dark" : "System"
 
     property QtObject theme: Logic.createTheme(themeName)
     property url folder:

@@ -1,13 +1,10 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/themes/colorblind-dark/Theme.qml
+/** @file pentobi/ThemeColorblindDark.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick
-import "../dark" as Dark
-
-Dark.Theme {
+ThemeDark {
     property var colorBlue: [ "#008f9d", "#006069", "#00bcce", "#ffffff" ]
     property var colorGreen: [ "#72a074", "#4e7450", "#9cbc9e", "#ffffff" ]
     property var colorOrange: colorRed

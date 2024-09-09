@@ -1,12 +1,10 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/themes/system/Theme.qml
+/** @file pentobi/ThemeSystem.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 import QtQuick
-import "../dark" as Dark
-import "../light" as Light
 
 // See themes/light/Theme.qml for comments
 Item {
@@ -57,6 +55,6 @@ Item {
     }
 
     SystemPalette { id: palette }
-    Dark.Theme { id: dark }
-    Light.Theme { id: light }
+    ThemeDark { id: dark }
+    ThemeLight { id: light }
 }

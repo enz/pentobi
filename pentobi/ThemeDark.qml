@@ -1,14 +1,13 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/themes/dark/Theme.qml
+/** @file pentobi/ThemeDark.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 import QtQuick
-import "../light" as Light
 
-// See themes/light/Theme.qml for comments
-Light.Theme {
+// See ThemeLight.qml for comments
+ThemeLight {
     property var colorBoard: [ "#494347", "#3b3639", "#6d686b",
                                "#696267", "#5a5458", "#797276" ]
 
@@ -29,5 +28,5 @@ Light.Theme {
 
     function getImage(name) { return "themes/dark/" + name + ".png" }
 
-    Light.Theme { id: light }
+    ThemeLight { id: light }
 }

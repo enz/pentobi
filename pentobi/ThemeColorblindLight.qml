@@ -1,12 +1,10 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/themes/colorblind-light/Theme.qml
+/** @file pentobi/ThemeColorblindLight.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import "../light" as Light
-
-Light.Theme {
+ThemeLight {
     property var colorBlue: [ "#008f9d", "#006069", "#00bcce", "#ffffff" ]
     property var colorGreen: [ "#72a074", "#4e7450", "#9cbc9e", "#ffffff" ]
     property var colorOrange: colorRed

@@ -168,14 +168,14 @@ qt_add_qml_module(pentobi
     ScoreElement.qml
     ScoreElement2.qml
     Square.qml
+    ThemeColorblindDark.qml
+    ThemeColorblindLight.qml
+    ThemeDark.qml
+    ThemeLight.qml
+    ThemeSystem.qml
     Triangle.qml
     Main.js
     GameView.js
-    themes/colorblind-dark/Theme.qml
-    themes/colorblind-light/Theme.qml
-    themes/dark/Theme.qml
-    themes/light/Theme.qml
-    themes/system/Theme.qml
 
     SOURCES
     AnalyzeGameModel.h
