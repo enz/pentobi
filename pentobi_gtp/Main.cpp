@@ -90,13 +90,9 @@ int main(int argc, char** argv)
 #endif
             return 0;
         }
-        unsigned threads = 1;
-        if (opt.contains("threads"))
-        {
-            threads = opt.get<unsigned>("threads");
-            if (threads == 0)
-                throw runtime_error("Number of threads must be greater zero.");
-        }
+        unsigned threads = opt.get<unsigned>("threads", 1);
+        if (threads == 0)
+            throw runtime_error("Number of threads must be greater zero.");
         Board::color_output = opt.contains("color");
         if (opt.contains("quiet"))
             libboardgame_base::disable_logging();
