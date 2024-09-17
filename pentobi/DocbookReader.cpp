@@ -75,14 +75,10 @@ QString DocbookReader::getPage(const QString& id) const
         return {};
     while (reader.readNextStartElement())
     {
-        if (reader.name() == "chapter"_L1)
-        {
-            if (reader.attributes().value("id"_L1) == id)
+        if (reader.name() == "chapter"_L1
+            && reader.attributes().value("id"_L1) == id)
                 break;
-            reader.skipCurrentElement();
-        }
-        else
-            reader.skipCurrentElement();
+        reader.skipCurrentElement();
     }
     QString text;
     addHeader(text);
