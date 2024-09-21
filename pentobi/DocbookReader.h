@@ -11,8 +11,6 @@
 #include <QDomDocument>
 #include <QtQml/qqmlregistration.h>
 
-class QFile;
-
 using namespace Qt::StringLiterals;
 
 //-----------------------------------------------------------------------------
