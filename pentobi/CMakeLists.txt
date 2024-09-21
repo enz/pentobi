@@ -227,6 +227,7 @@ target_link_libraries(pentobi PRIVATE
     Qt::Concurrent
     Qt::Qml
     Qt::QuickControls2
+    Qt::Xml
     Threads::Threads
     )
 

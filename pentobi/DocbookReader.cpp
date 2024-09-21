@@ -9,8 +9,6 @@
 #include <QFile>
 #include <QLocale>
 #include <QStack>
-#include <QXmlStreamReader>
-#include "libboardgame_base/Assert.h"
 
 using namespace std;
 
@@ -39,149 +37,101 @@ void addHeader(QString& text)
 DocbookReader::DocbookReader(QObject* parent)
     : QObject(parent)
 {
-
-    QString locale = QLocale::system().name();
-    m_fileName = ":/help/index_%1.docbook"_L1.arg(locale);
-    if (! QFile::exists(m_fileName))
+    m_locale = QLocale::system().name();
+    m_lang = m_locale.left(m_locale.indexOf("_"_L1));
+    QString fileName = ":/help/index_%1.docbook"_L1.arg(m_locale);
+    if (! QFile::exists(fileName))
     {
-        m_fileName = ":/help/index_%1.docbook"_L1.arg(
-                         locale.left(locale.indexOf("_"_L1)));
-        if (! QFile::exists(m_fileName))
-            m_fileName = ":/help/index.docbook"_L1;
+        fileName = ":/help/index_%1.docbook"_L1.arg(m_lang);
+        if (! QFile::exists(fileName))
+            fileName = ":/help/index.docbook"_L1;
     }
-    QFile file(m_fileName);
-    if (! file.open(QFile::ReadOnly))
-        return;
-    QXmlStreamReader reader(&file);
-    if (! reader.readNextStartElement() || reader.name() != "book"_L1)
+    QFile file(fileName);
+    file.open(QIODevice::ReadOnly);
+    if (! m_doc.setContent(&file))
         return;
     m_pageIds.append("index"_L1);
-    while (reader.readNextStartElement())
+    QDomElement elem = m_doc.documentElement().firstChildElement();
+    while(! elem.isNull())
     {
-        if (reader.name() == "chapter"_L1)
-            m_pageIds.append(reader.attributes().value("id"_L1).toString());
-        reader.skipCurrentElement();
+        if (elem.tagName() == "chapter"_L1)
+            m_pageIds.append(elem.attribute("id"_L1));
+        elem = elem.nextSiblingElement();
     }
     setText();
 }
 
-QString DocbookReader::getPage(const QString& id) const
+QDomElement DocbookReader::findLocalized(const QDomElement& elem) const
 {
-    QFile file(m_fileName);
-    if (! file.open(QFile::ReadOnly))
-        return {};
-    QXmlStreamReader reader(&file);
-    if (! reader.readNextStartElement() || reader.name() != "book"_L1)
-        return {};
-    while (reader.readNextStartElement())
+    QString name = elem.tagName();
+    QDomElement result = elem;
+    QDomElement e = elem;
+    while (true)
     {
-        if (reader.name() == "chapter"_L1
-            && reader.attributes().value("id"_L1) == id)
-                break;
-        reader.skipCurrentElement();
-    }
-    QString text;
-    addHeader(text);
-    bool finished = false;
-    int headerLevel = 1;
-    while (! finished && ! reader.atEnd())
-        switch (reader.readNext())
+        e = e.nextSiblingElement();
+        if (e.isNull() || e.tagName() != name)
+            break;
+        QString l = e.attribute("xml:lang"_L1);
+        if (l.isEmpty())
+            break;
+        if (l == m_locale)
         {
-        case QXmlStreamReader::StartElement:
-            if (reader.name() == "guibutton"_L1
-                    || reader.name() == "guilabel"_L1
-                    || reader.name() == "guimenu"_L1
-                    || reader.name() == "guimenuitem"_L1
-                    || reader.name() == "keysym"_L1)
-                text.append("<i>"_L1);
-            else if (reader.name() == "imagedata"_L1)
-            {
-                text.append("<div style=\"margin-left:"_L1);
-                text.append(QString::number((m_textWidth - m_imageWidth) / 2));
-                text.append("\"><img src=qrc:/help/"_L1);
-                text.append(reader.attributes().value("fileref"_L1));
-                text.append(" width="_L1);
-                text.append(QString::number(m_imageWidth));
-                text.append("></div>"_L1);
-            }
-            else if (reader.name() == "listitem"_L1)
-                text.append("<blockquote>"_L1);
-            else if (reader.name() == "para"_L1)
-                text.append("<p>"_L1);
-            else if (reader.name() == "sect1"_L1)
-                ++headerLevel;
-            else if (reader.name() == "title"_L1)
-            {
-                if (headerLevel > 1)
-                    text.append("<h2>"_L1);
-                else
-                    text.append("<h1>"_L1);
-            }
-            else if (reader.name() == "varlistentry"_L1)
-                text.append("<div>"_L1);
-            break;
-        case QXmlStreamReader::EndElement:
-            if (reader.name() == "guibutton"_L1
-                    || reader.name() == "guilabel"_L1
-                    || reader.name() == "guimenu"_L1
-                    || reader.name() == "guimenuitem"_L1
-                    || reader.name() == "keysym"_L1)
-                text.append("</i>"_L1);
-            else if (reader.name() == "chapter"_L1)
-                finished = true;
-            else if (reader.name() == "listitem"_L1)
-                text.append("</blockquote>"_L1);
-            else if (reader.name() == "para"_L1)
-                text.append("</p>"_L1);
-            else if (reader.name() == "sect1"_L1)
-                --headerLevel;
-            else if (reader.name() == "title"_L1)
-            {
-                if (headerLevel > 1)
-                    text.append("</h2>"_L1);
-                else
-                    text.append("</h1>"_L1);
-            }
-            else if (reader.name() == "varlistentry"_L1)
-                text.append("</div>"_L1);
-            break;
-        case QXmlStreamReader::Characters:
-            text.append(reader.text());
-            break;
-        default:
+            result = e;
             break;
         }
+        if (l == m_lang)
+            result = e;
+    }
+    return result;
+}
+
+QString DocbookReader::getPage(const QString& id) const
+{
+    QDomElement elem = m_doc.documentElement().firstChildElement();
+    QString text;
+    addHeader(text);
+    while(! elem.isNull())
+    {
+        if (elem.tagName() == "chapter"_L1 && elem.attribute("id"_L1) == id)
+        {
+            handleNode(elem, 1, text);
+            break;
+        }
+        elem = elem.nextSiblingElement();
+    }
     return text;
 }
 
 QString DocbookReader::getTableOfContents() const
 {
-    QFile file(m_fileName);
-    if (! file.open(QFile::ReadOnly))
-        return {};
-    QXmlStreamReader reader(&file);
-    if (! reader.readNextStartElement() || reader.name() != "book"_L1)
-        return {};
     QString bookTitle;
     QStringList chapterTitles;
-    while (reader.readNextStartElement())
+    QDomElement elem = m_doc.documentElement().firstChildElement();
+    while(! elem.isNull())
     {
-        if (reader.name() == "title"_L1)
-            bookTitle = reader.readElementText();
-        else if (reader.name() == "chapter"_L1)
+        if (! elem.hasAttribute("xml:lang"_L1))
         {
-            QString chapterTitle;
-            while (reader.readNextStartElement())
+            if (elem.tagName() == "title"_L1)
             {
-                if (reader.name() == "title"_L1)
-                    chapterTitle = reader.readElementText();
-                else
-                    reader.skipCurrentElement();
+                elem = findLocalized(elem);
+                bookTitle = elem.text();
             }
-            chapterTitles.append(chapterTitle);
+            else if (elem.tagName() == "chapter"_L1)
+            {
+                QDomElement childElem = elem.firstChildElement();
+                while (! childElem.isNull())
+                {
+                    if (childElem.tagName() == "title"_L1)
+                    {
+                        childElem = findLocalized(childElem);
+                        chapterTitles.append(childElem.text());
+                        break;
+                    }
+                    childElem = childElem.nextSiblingElement();
+                }
+            }
         }
-        else
-            reader.skipCurrentElement();
+        elem = elem.nextSiblingElement();
     }
     QString text;
     addHeader(text);
@@ -193,13 +143,106 @@ QString DocbookReader::getTableOfContents() const
         text.append("<a href="_L1);
         if (i + 1 < m_pageIds.size())
             text.append(m_pageIds[i + 1]);
-        else
-            LIBBOARDGAME_ASSERT(false);
         text.append(">"_L1);
         text.append(chapterTitles[i]);
         text.append("</a><br/>"_L1);
     }
     return text;
+}
+
+void DocbookReader::handleChildren(const QDomNode& node, int headerLevel,
+                                   QString& text) const
+{
+    QDomNode child = node.firstChild();
+    while (! child.isNull())
+    {
+        child = handleNode(child, headerLevel, text);
+        child = child.nextSibling();
+    }
+}
+
+QDomNode DocbookReader::handleNode(const QDomNode& node, int headerLevel,
+                                   QString& text) const
+{
+    if (node.isText())
+    {
+        text.append(node.toText().data());
+        return node;
+    }
+    if (! node.isElement())
+    {
+        handleChildren(node, headerLevel, text);
+        return node;
+    }
+    QDomElement elem = node.toElement();
+    if (elem.hasAttribute("xml:lang"_L1))
+        return node;
+    QString name = elem.tagName();
+    if (name == "guibutton"_L1
+        || name == "guilabel"_L1
+        || name == "guimenu"_L1
+        || name == "guimenuitem"_L1
+        || name == "keysym"_L1)
+    {
+        text.append("<i>"_L1);
+        handleChildren(elem, headerLevel, text);
+        text.append("</i>"_L1);
+        return node;
+    }
+    if (name == "imagedata"_L1)
+    {
+        text.append("<div style=\"margin-left:"_L1);
+        text.append(QString::number((m_textWidth - m_imageWidth) / 2));
+        text.append("\"><img src=qrc:/help/"_L1);
+        text.append(elem.attribute("fileref"_L1));
+        text.append(" width="_L1);
+        text.append(QString::number(m_imageWidth));
+        text.append("></div>"_L1);
+    }
+    if (name == "listitem"_L1)
+    {
+        text.append("<blockquote>"_L1);
+        handleChildren(elem, headerLevel, text);
+        text.append("</blockquote>"_L1);
+        return node;
+    }
+    if (name == "para"_L1)
+    {
+        text.append("<p>"_L1);
+        QDomElement localizedElem = findLocalized(elem);
+        handleChildren(localizedElem, headerLevel, text);
+        text.append("</p>"_L1);
+        return localizedElem;
+    }
+    if (name == "sect1"_L1)
+    {
+        ++headerLevel;
+        handleChildren(elem, headerLevel, text);
+        return node;
+    }
+    if (name == "term"_L1)
+    {
+        handleChildren(elem, headerLevel, text);
+        text.append("\n"_L1);
+        return node;
+    }
+    if (name == "title"_L1)
+    {
+        text.append(headerLevel > 1 ? "<h2>"_L1 : "<h1>"_L1);
+        QDomElement localizedElem = findLocalized(elem);
+        handleChildren(localizedElem, headerLevel, text);
+        text.append(headerLevel > 1 ? "</h2>"_L1 : "</h1>"_L1);
+        return localizedElem;
+    }
+    if (name == "varlistentry"_L1)
+    {
+        text.append("<div>"_L1);
+        handleChildren(elem, headerLevel, text);
+        text.append("</div>"_L1);
+        return node;
+    }
+    handleChildren(elem, headerLevel, text);
+    return node;
 }
 
 void DocbookReader::setNavigation()

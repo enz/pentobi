@@ -8,7 +8,10 @@
 #define PENTOBI_DOCBOOK_READER_H
 
 #include <QObject>
+#include <QDomDocument>
 #include <QtQml/qqmlregistration.h>
+
+class QFile;
 
 using namespace Qt::StringLiterals;
 
@@ -66,14 +69,26 @@ private:
 
     QString m_navigationText;
 
-    QString m_fileName;
+    QString m_locale;
+
+    QString m_lang;
 
     QStringList m_pageIds;
 
+    QDomDocument m_doc;
+
+
+    QDomElement findLocalized(const QDomElement& elem) const;
 
     QString getPage(const QString& id) const;
 
     QString getTableOfContents() const;
+
+    void handleChildren(const QDomNode& node, int headerLevel,
+                        QString& text) const;
+
+    QDomNode handleNode(const QDomNode& node, int headerLevel,
+                        QString& text) const;
 
     void setNavigation();
 
