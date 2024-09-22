@@ -70,7 +70,7 @@ Item {
     property int coordinateFontSize: {
         if (isTrigon) return 0.4 * gridHeight
         if (isGembloQ) return 0.35 * gridHeight
-        return 0.6 * gridHeight
+        return 0.5 * gridHeight
     }
     property alias grabImageTarget: grabImageTarget
 
