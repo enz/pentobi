@@ -16,11 +16,15 @@ Rectangle {
                  textArea.font.pixelSize)
 
     function loadPage(pageId) {
-        flickable.contentY = 0
-        // Without callLater() sometimes results in empty text area (e.g. if
-        // page is scrolled down and goHome() is triggered with shortcut key;
-        // last tested with Qt 6.6 on Gnome)
-        Qt.callLater(function() { docbookReader.pageId = pageId })
+        if (flickable.contentY == 0)
+            docbookReader.pageId = pageId
+        else {
+            flickable.contentY = 0
+            // Without callLater() sometimes results in empty text area (e.g. if
+            // page is scrolled down and goHome() is triggered with shortcut key;
+            // last tested with Qt 6.6 on Gnome)
+            Qt.callLater(function() { docbookReader.pageId = pageId })
+        }
     }
     function goHome() {
         loadPage("index");
