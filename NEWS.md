@@ -10,7 +10,7 @@ Version 26.0-dev (main)
 Version 25.2-dev (v25-fixes)
 ----------------------------
 
-*
+* Fixed display problems in help window in some situations.
 
 Version 25.1 (31 Jul 2024)
 --------------------------

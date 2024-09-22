@@ -15,8 +15,15 @@ Rectangle {
         Math.max((width - 45 * textArea.font.pixelSize) / 2,
                  textArea.font.pixelSize)
 
+    function loadPage(pageId) {
+        flickable.contentY = 0
+        // Without callLater() sometimes results in empty text area (e.g. if
+        // page is scrolled down and goHome() is triggered with shortcut key;
+        // last tested with Qt 6.6 on Gnome)
+        Qt.callLater(function() { docbookReader.pageId = pageId })
+    }
     function goHome() {
-        docbookReader.pageId = "index"
+        loadPage("index");
     }
     function scrollUp() {
         if (flickable.contentY > 0)
@@ -38,11 +45,11 @@ Rectangle {
     }
     function nextPage() {
         if (docbookReader.getNextPageId() !== "")
-            docbookReader.pageId = docbookReader.getNextPageId()
+            loadPage(docbookReader.getNextPageId())
     }
     function prevPage() {
         if (docbookReader.getPrevPageId() !== "")
-            docbookReader.pageId = docbookReader.getPrevPageId()
+            loadPage(docbookReader.getPrevPageId())
     }
 
     color: "white"
@@ -77,7 +84,7 @@ Rectangle {
                 focus: false
                 activeFocusOnPress: false
                 text: docbookReader.navigationText
-                onLinkActivated: link => docbookReader.pageId = link
+                onLinkActivated: link => loadPage(link)
 
                 MouseArea {
                     anchors.fill: parent
@@ -102,7 +109,7 @@ Rectangle {
                 focus: false
                 activeFocusOnPress: false
                 text: docbookReader.text
-                onLinkActivated: link => docbookReader.pageId = link
+                onLinkActivated: link => loadPage(link)
                 onTextChanged: flickable.contentY = 0
 
                 MouseArea {
