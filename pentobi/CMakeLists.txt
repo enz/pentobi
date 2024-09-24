@@ -203,7 +203,7 @@ qt_add_qml_module(pentobi
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/icons.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/icons_desktop.qrc"
-    "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
+    help/help.qrc
     ../opening_books/pentobi_books.qrc
 )
 
@@ -231,7 +231,6 @@ target_link_libraries(pentobi PRIVATE
     Threads::Threads
     )
 
-add_subdirectory(help)
 if(UNIX AND NOT ANDROID)
     add_subdirectory(unix)
 endif()

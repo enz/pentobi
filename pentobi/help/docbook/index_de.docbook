@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book lang="de">
+<title>Pentobi</title>
+
+<chapter id="overview">
+<title>Übersicht</title>
+<para>Pentobi ist ein Computer-Gegner für das Brettspiel Blokus. In diesem Spiel setzen vier Spieler Spielsteine, die ähnlich den Spielsteinen des Computerspiels Tetris sind, auf ein 20×20-Brett. Pentobi unterstützt auch die Spielvarianten für zwei oder drei Spieler und die Spielvarianten Duo, Trigon, Junior, Nexos, GembloQ und Callisto.</para>
+</chapter>
+
+<chapter id="classic_rules">
+<title>Klassische Regeln</title>
+<para>Es gibt vier Spieler, Blau, Gelb, Rot und Grün, und ein Brett, das aus 20×20 Quadraten besteht. Jeder Spieler besitzt 21 Spielsteine seiner Farbe, die die Form von Polyominos bis zur Größe fünf haben. Ein Polyomino ist eine Figur, die aus einer Anzahl von Quadraten besteht, die entlang der Kanten verbunden sind.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Die Spieler setzen abwechselnd einen ihrer Spielsteine aufs Brett. Der erste Spielstein eines Spielers muss sein Startfeld abdecken. Die Startfelder befinden sich in den Ecken des Bretts.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_classic.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Die folgenden Spielsteine müssen so auf leere Quadrate gesetzt werden, dass der neue Spielstein mindestens einen Spielstein der eigenen Farbe Ecke an Ecke berührt, aber keinen Spielstein der eigenen Farbe entlang der Kanten. Der neue Spielstein darf die Kanten von gegnerischen Spielsteinen berühren.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_classic.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Wenn der Spieler einer Farbe keine Spielsteine mehr setzen kann, muss der Spieler aussetzen und die nächste Farbe ist am Zug. Wenn keiner der Spieler mehr einen Spielstein setzen kann, gewinnt der Spieler mit der höchsten Punktzahl. Die Punktzahl einer Farbe ist die Anzahl der Quadrate auf dem Brett, die von der Farbe besetzt sind, plus ein Bonus von 15 Punkten, wenn die Farbe alle ihre Spielsteine setzen konnte, plus ein zusätzlicher Bonus von 5 Punkten, wenn die Farbe alle Spielsteine setzen konnte und der zuletzt gespielte Spielstein der Spielstein war, der aus einem Quadrat besteht.</para>
+<sect1>
+<title>Regeln für zwei Spieler</title>
+<para>Das Spiel kann mit zwei Spielern gespielt werden. Der erste Spieler spielt Blau und Rot, der zweite Spieler Gelb und Grün. Die Punkte beider Farben eines Spielers werden addiert.</para>
+</sect1>
+<sect1>
+<title>Regeln für drei Spieler</title>
+<para>Das Spiel kann auch mit drei Spielern gespielt werden. Die Spieler wechseln sich beim Spielen der vierten Farbe (Grün) ab. Am Spielende wird die Punktzahl von Grün ignoriert.</para>
+</sect1>
+<sect1>
+<title>Farblose Startfelder</title>
+<para>Beachten Sie, dass die ursprünglichen klassischen Regeln für Blokus farblose Startfelder benutzen. Dies bedeutet, dass jede Farbe frei wählen darf, welches der verbleibenden noch freien Startfelder sie für ihren ersten Zug benutzt. Pentobi unterstützt zur Zeit nur die Regelvariante mit farbigen Startfeldern, weil diese Variante auf den ersten Blokus-Online-Servern und Blokus-Turnieren verwendet wurde.</para>
+</sect1>
+</chapter>
+
+<chapter id="duo_rules">
+<title>Duo-Regeln</title>
+<para>Die Spielvariante Duo ist eine andere Spielvariante für zwei Spieler. Das Spiel wird auf einem kleineren Brett mit 14×14 Quadraten gespielt. Es gibt eine Farbe pro Spieler (Lila und Orange) und die Startfelder befinden sich nicht in den Ecken, sondern auf dem Feld mit den Koordinaten (5,10) für Lila und auf (10,5) für Orange.</para>
+<informalfigure>
+<mediaobject>
+<imageobject><imagedata fileref="board_duo.png"/></imageobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_duo.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+</chapter>
+
+<chapter id="trigon_rules">
+<title>Trigon-Regeln</title>
+<para>Trigon ist eine weitere Spielvariante. Die Regeln sind ähnlich wie in der Spielvariante Klassisch, aber es werden ein anders geformtes Brett und andere Spielsteine verwendet. Jede Farbe benutzt 22 Spielsteine, die wie die Polyiamonds bis zur Größe sechs geformt sind. Ein Polyiamond ist eine Figur, die aus einer Anzahl von gleichseitigen Dreiecken besteht, die entlang der Kanten verbunden sind.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_trigon.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Das Spielbrett besteht ebenfalls aus Dreiecken und hat die Form eines Sechsecks mit jeweils neun Dreiecken pro Kante.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_trigon.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Es gibt sechs Startfelder auf dem Brett, jedes in der Mitte der vierten Reihe von jeder Kante aus gesehen. Die Startfelder sind nicht farbig und die Spieler dürfen das Startfeld für den ersten Spielstein einer Farbe frei wählen.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_trigon.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<sect1>
+<title>Regeln für zwei Spieler</title>
+<para>Wie die Spielvariante Klassisch kann Trigon mit zwei Spielern gespielt werden, indem ein Spieler Blau und Rot und der andere Gelb und Grün spielt.</para>
+</sect1>
+<sect1>
+<title>Regeln für drei Spieler</title>
+<para>Trigon kann mit drei Spielern gespielt werden, wobei dieselben Regeln wie für die Variante mit vier Spielern benutzt werden. Die Variante für drei Spieler wird auf einem kleineren Spielbrett mit einer Kantenlänge von acht Dreiecken gespielt. Die Startfelder sind in der Mitte der dritten Reihe von jeder Kante aus gesehen.</para>
+</sect1>
+</chapter>
+
+<chapter id="junior_rules">
+<title>Junior-Regeln</title>
+<para>Junior ist eine vereinfachte Spielvariante für zwei Spieler. Es wird auf dem gleichen 14×14-Brett gespielt wie die Spielvariante Duo, benutzt aber nur eine Teilmenge der Polyominos bis zur Größe fünf und die Spieler bekommen zwei von jedem dieser Polyominos.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_junior.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Bonuspunkte werden in Junior nicht benutzt.</para>
+</chapter>
+
+<chapter id="nexos_rules">
+<title>Nexos-Regeln</title>
+<para>Nexos ist ein Brettspiel ähnlich wie Blokus. Das Spielbrett ist ein rechtwinkliges 13×13-Liniengitter. Jede Farbe benutzt 24 Spielsteine, die aus bis zu vier verbundenen Liniensegmenten bestehen.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_nexos.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Jede Farbe hat einen Startkreuzungspunkt auf der Kreuzung der dritten Linien nahe einer Ecke. Der erste Spielstein muss den Startkreuzungspunkt berühren.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_nexos.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Die folgenden Spielsteine müssen so auf leere Liniensegmente gesetzt werden, dass ein Segment des neuen Spielsteins einen Kreuzungspunkt berührt, den bereits ein Segment derselben Farbe berührt. Es spielt keine Rolle, ob Spielsteine anderer Farbe denselben Kreuzungspunkt berühren oder bedecken. Allerdings dürfen sich Spielsteine nicht überlappen. Die Verbindungen zwischen den Segmenten innerhalb eines Spielsteins sind so, dass zwei rechtwinklige Verbindungen verschiedener Spielsteine denselben Kreuzungspunkt bedecken können ohne sich zu überlappen, während gerade Verbindungen das nicht können.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_nexos.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Die Punktzahl einer Farbe ist die Anzahl der Liniensegmente auf dem Brett, die von der Farbe bedeckt sind, plus ein Bonus von 10 Punkten, wenn die Farbe alle ihre Spielsteine setzen konnte.</para>
+<sect1>
+<title>Regeln für zwei Spieler</title>
+<para>Wie Blokus kann Nexos von zwei Spielern gespielt werden, indem ein Spieler Rot und Blau, und der andere Spieler Gelb und Grün spielt.</para>
+</sect1>
+</chapter>
+
+<chapter id="gembloq_rules">
+<title>GembloQ-Regeln</title>
+<para>GembloQ ist ein Brettspiel ähnlich wie Blokus. Die quadratischen Spielfelder des Bretts sind um 45 Grad gedreht. Die Diagonale des Bretts hat eine Größe von 27 Quadraten. Zusätzlich zu den vollen Quadraten enthalten die Ränder noch halbe Quadrate, so dass die Ränder gerade Linien sind.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_gembloq.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Jeder Spieler besitzt 21 Spielsteine, unter denen eine Teilmenge der in Blokus benutzten Spielsteine ist, jedoch zusätzlich einige Spielsteine, die ein halbes Quadrat beinhalten.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_gembloq.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Wie in Blokus sind die Startfelder in den Ecken, der erste Zug muss das Startfeld der Farbe vollständig abdecken und folgende Züge müssen einen Spielstein der Farbe am Zug an einer Ecke berühren, jedoch nicht entlang der Kanten. Züge sind auch legal, wenn eine Spitze eines halben Quadrats die Kante eines Spielsteins der selben Farbe berührt.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_gembloq.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Die Punktzahl am Spielende wird wie in Blokus ermittelt, wobei halbe Quadrate 0,5 Punkte zählen. Bonuspunkte werden nicht verwendet. Ein Auflösen von Unentschieden durch Zuweisen von zusätzlichen Werten zu den Spielsteinen, wie in den offiziellen GembloQ-Regeln beschrieben, wird von Pentobi gegenwärtig nicht unterstützt.</para>
+<sect1>
+<title>Regeln für zwei und drei Spieler</title>
+<para>Die Spielvarianten für zwei und drei Spieler benutzen kleinere Spielbretter und andere Positionen für die Startfelder. Zusätzlich zur Standardvariante für zwei Spieler unterstützt Pentobi auch eine Spielvariante für zwei Spieler wie in Blokus, in der jeder Spieler zwei Farben spielt.</para>
+</sect1>
+</chapter>
+
+<chapter id="callisto_rules">
+<title>Callisto-Regeln</title>
+<para>Callisto ist ein weiteres Brettspiel ähnlich wie Blokus. Das Spielbrett ist vom klassischen 20×20-Blokus-Spielbrett abgeleitet, indem die Ecken entfernt werden, sodass ein Achteck verbleibt mit einer oberen Kantenlänge von sechs. Die Spielsteine sind eine Untermenge der Polyominos bis zur Größe fünf. Sie beinhalten drei 1×1-Spielsteine pro Spieler, die eine besondere Rolle spielen.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_callisto.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Die 1×1-Spielsteine dürfen überall auf dem Spielbrett gesetzt werden außer im Zentrum des Spielbretts. Das Zentrums besteht aus einem Achteck mit Breite sechs und oberer Kantenlänge zwei. Die ersten zwei Züge eines Spielers müssen einen 1×1-Spielstein benutzen, der dritte 1×1-Spielstein kann jederzeit später gespielt werden.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_callisto.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Alle größeren Spielsteine dürfen überall auf dem Brett gesetzt werden, müssen aber einen existierenden Spielstein der selben Farbe Kante an Kante berühren.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_callisto.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Die Punktzahl einer Farbe ist die Anzahl der Quadrate auf dem Brett, die von der Farbe bedeckt sind, wobei die 1×1-Spielsteine nicht gezählt werden. Bonuspunkte werden nicht verwendet. Anders als in Blokus werden Unentschieden zugunsten des Spielers aufgelöst, der später begonnen hat.</para>
+<sect1>
+<title>Regeln für zwei und drei Spieler</title>
+<para>Das Spiel kann mit weniger als vier Spielern gespielt werden, indem ein kleineres Spielbrett verwendet wird. Für drei Spieler ist das Brett ein Achteck mit Breite 20 und obererer Kantenlänge zwei. Für zwei Spieler ist das Brett ein Achteck mit Breite 16 und obererer Kantenlänge zwei. Die Größe des Zentrums bleibt gleich. Zusätzlich zur Standardvariante für zwei Spieler unterstützt Pentobi auch eine Spielvariante für zwei Spieler wie in Blokus, in der jeder Spieler zwei Farben spielt.</para>
+</sect1>
+</chapter>
+
+<chapter id="user_interface">
+<title>Wie Sie Pentobi benutzen</title>
+<sect1>
+<title>Spielbrett</title>
+<para>Spielsteine können durch Klicken auf einen ungespielten Spielstein ausgewählt werden oder durch Benutzen von <link linkend="shortcuts">Tastenkürzeln</link>. Spielsteine können gespielt werden, indem sie mit der Maus oder den Pfeiltasten an eine Position gebracht werden, die einem legalen Zug entspricht, und dann die linke Maustaste oder die Eingabetaste gedrückt wird.</para>
+<para>Auf den gespielten Spielsteinen auf dem Brett können sich Nummern befinden, die die Zugnummer angeben, zu der der Spielstein gespielt wurde. Ein Buchstabe nach der Zugnummer zeigt an, dass zu diesem Zug eine Variante existiert (siehe unten).</para>
+<para>Die Punkteanzeige zeigt die gegenwärtigen Punkte für jede Farbe oder jeden Spieler an. Die Punkte sind die Summe aus den Punkten auf dem Spielbrett und den Bonuspunkten. Punkte sind unterstrichen, wenn sie endgültig sind, weil die Farbe keine Spielsteine mehr spielen kann. Eine kleiner Stern zeigt an, dass die Punkte einen Bonus beinhalten.</para>
+</sect1>
+<sect1>
+<title>Gegen den Computer spielen</title>
+<para>Das Spielbrett kann benutzt werden, um Partien einzugeben, die von Menschen gespielt werden, oder um Spiele gegen den Computer zu spielen. In Spielen gegen den Computer kann der Computer jede der Farben (oder mehrere) spielen.</para>
+<para>Wenn Sie ein neues Spiel beginnen, ist voreingestellt, dass der Mensch die Farbe(n) des ersten Spielers spielt und der Computer alle anderen Farben. Um dies zu ändern, benutzen Sie <guimenuitem>Einstellungen</guimenuitem> aus dem Menü <guimenu>Computer</guimenu> oder der Werkzeugleiste und wählen Sie die Farben, die der Computer spielen soll.</para>
+<para>Die Ausnahme ist, dass es voreingestellt ist, dass der Computer keine Farbe spielt, wenn er im letzten Spiel keine Farbe gespielt hat. Damit wird vermieden, dass der Computer unbeabsichtigt automatisch zu spielen beginnt, wenn der Benutzer das Spielbrett hauptsächlich zum Eingeben von Zugsequenzen oder für ähnliche Aufgaben benutzen will. Nach dem Laden eines Spiels ist ebenfalls voreingestellt, dass der Computer keine Farbe spielt.</para>
+<para>Die Auswahl von <guimenuitem>Spielen</guimenuitem> aus dem Menü <guimenu>Computer</guimenu> oder der Werkzeugleiste lässt den Computer immer einen Zug für die gegenwärtige Farbe spielen. Wenn der Computer diese Farbe bisher nicht gespielt hat, wird er außerdem im weiteren Spielverlauf diese Farbe (und nur diese Farbe) spielen.</para>
+</sect1>
+<sect1>
+<title>Zugvarianten und der Spielbaum</title>
+<para>Wenn Sie ein Spiel spielen, wird Pentobi die Abfolge der Züge speichern und es ist jederzeit möglich, zu einer früheren Brettstellung zurückzugehen und anders zu spielen. Wenn Sie das tun, wird die neue Zugfolgen als eine alternative Zugfolge (genannt Variante) gespeichert. Varianten können auch von Kommentatoren benutzt werden, um Kommentierungen zu existierenden Spielen hinzuzufügen. Varianten können in jeder Brettstellung existieren und ihrerseits Untervarianten besitzen. Das Spiel kann daher zu einem Spielbaum werden, in dem jeder Knoten eine Brettstellung repräsentiert. Sie können im Spielbaum mit den Menüpunkten des Menüs <guimenu>Gehe zu</guimenu> und den Navigations-Buttons navigieren.</para>
+<para>Die Hauptvariante ist die Zugfolge, die in der Startstellung beginnt und immer den ersten Kindknoten in jeder Brettstellung wählt (z. B. indem Sie den Vorwärts-Button drücken). Die Hauptvariante sollte das wirklich gespielte Spiel darstellen. Wenn Sie eine Nebenvariante zur Hauptvariante machen wollen, wählen Sie <guimenuitem>Zu Hauptvariante machen</guimenuitem> aus dem Menü <guimenu>Bearbeiten</guimenu>.</para>
+</sect1>
+</chapter>
+
+<chapter id="become_stronger">
+<title>Ein stärkerer Spieler werden</title>
+<para>Pentobi besitzt Funktionen, die Ihnen helfen können, ein stärkerer Blokus-Spieler zu werden.</para>
+<sect1 id="analysis">
+<title>Spielanalyse</title>
+<para>Sie können ein Spiel analysieren, indem Sie <guimenuitem>Spiel analysieren</guimenuitem> aus dem Menü <guimenu>Extras</guimenu> wählen. Dies lässt den Computer eine Bewertung jeder Brettstellung der Hauptvariante ausführen. Das Ergebnis wird in einem Fenster mit einem Diagramm farbiger Punkte dargestellt.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="analysis.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Jeder Punkt repräsentiert eine Spielstellung, in der die Farbe des Punkts am Zug war. Die Punkte sind horizontal nach Zugnummer angeordnet. Die vertikale Achse repräsentiert die Wahrscheinlichkeit, dass die Farbe das Spiel gewinnt. Mausklicks im Diagramm gehen zur jeweiligen Stellung.</para>
+<para>Die Werte stellen nur Schätzwerte dar und der Computer wird manchmal Stellungen nicht korrekt bewerten. Aber ein plötzliches Abfallen des Wertes kann Ihnen dabei helfen, Züge zu finden, die möglicherweise schlecht waren. Sie können zur Stellung vor dem Zug zurückgehen und versuchen, einen besseren Zug zu finden oder den Computer fragen, was er gespielt hätte, indem Sie <guimenuitem>Einzelnen Zug spielen</guimenuitem> aus dem Menü <guimenu>Computer</guimenu> auswählen.</para>
+</sect1>
+<sect1 id="rating">
+<title>Ihre Wertung ermitteln</title>
+<para>Sie können Ihre Fortschritte verfolgen, indem Sie gewertete Spiele gegen den Computer spielen. Die Spielergebnisse werden benutzt, um Ihre gegenwärtige Wertung zu ermitteln. Die Wertung ist eine Zahl, die Ihre Spielstärke darstellt.</para>
+<para>Ein gewertetes Spiel wird mit <guimenuitem>Gewertetes Spiel</guimenuitem> aus dem Menü <guimenu>Spiel</guimenu> oder der Werkzeugleiste gestartet. Wenn Sie in der gegenwärtigen Spielvariante noch keine gewerteten Spiele gespielt haben, werden Sie gefragt, eine Anfangswertung zu wählen, wodurch die Anzahl der Spiele reduziert wird, die nötig ist, um Ihre wirkliche Wertung zu bestimmen. Falls Sie Anfänger sind, belassen Sie die Anfangswertung auf 800.</para>
+<para>Für jedes gewertete Spiel wird der Computer eine Spielstufe für den Computerspieler gemäß Ihrer gegenwärtigen Wertung wählen. Die Farbe, die Sie spielen, wird in jedem Spiel zufällig ausgewählt.</para>
+<para>Während eines gewerteten Spiels sind die meisten Funktionen, die nicht zum Spielen benötigt werden, deaktiviert: Sie können nicht Züge zurücknehmen, im Spiel navigieren, die Computer-Farben ändern oder die Spielstufe ändern. Um eine akkurate Wertung zu erhalten, sollten Sie gewertete Spiele immer bis zum Ende spielen.</para>
+<para>Nachdem das Spiel beendet ist, wird Ihre Wertung in Abhängigkeit vom Spielergebnis und der Spielstufe aktualisiert. Für das Spielergebnis zählt nur, ob Sie gewonnen oder verloren haben, oder ob das Spiel in einem Unentschieden endete. Die genaue Anzahl der Spielpunkte spielt keine Rolle.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="rating.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Sie können Ihre aktuelle Wertung jederzeit mit <guimenuitem>Wertung</guimenuitem> aus dem Menü <guimenu>Extras</guimenu> sehen. Dies öffnet ein Fenster, in dem die Entwicklung Ihrer Wertung während der letzten 50 Spiele als Graph gezeigt wird. Die letzten 50 Spiele werden automatisch gespeichert und können durch Öffnen eines Kontextmenüs in der Spieltabelle unter dem Graph geladen werden.</para>
+</sect1>
+</chapter>
+
+<chapter id="window_menu">
+<title>Fenstermenü und Werkzeugleiste</title>
+<sect1>
+<title>Navigations-Buttons in der Werkzeugleiste</title>
+<variablelist>
+<varlistentry>
+<term><guibutton>Anfang</guibutton></term>
+<listitem>
+<para>Geht zum Anfang des Spiels.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Zurück 10</guibutton></term>
+<listitem>
+<para>Geht zehn Züge in der gegenwärtigen Variante zurück. Der Button unterstützt automatische Wiederholung, wenn er gedrückt gehalten wird.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Zurück</guibutton></term>
+<listitem>
+<para>Geht einen Zug in der gegenwärtigen Variante zurück. Der Button unterstützt automatische Wiederholung, wenn er gedrückt gehalten wird.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Vorwärts</guibutton></term>
+<listitem>
+<para>Geht einen Zug in der gegenwärtigen Variante vorwärts. Wenn die gegenwärtige Brettstellung mehrerer nachfolgende Varianten hat (d. h. der gegenwärtige Knoten im Spielbaum mehrere Kindknoten hat), wird die erste Variante benutzt. Der Button unterstützt automatische Wiederholung, wenn er gedrückt gehalten wird.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Vorwärts 10</guibutton></term>
+<listitem>
+<para>Geht zehn Züge in der gegenwärtigen Variante vorwärts. Wenn eine Brettstellung mehrerer nachfolgende Varianten hat (d. h. der gegenwärtige Knoten im Spielbaum mehrere Kindknoten hat), wird die erste Variante benutzt. Der Button unterstützt automatische Wiederholung, wenn er gedrückt gehalten wird.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Ende</guibutton></term>
+<listitem>
+<para>Geht zum Ende der gegenwärtigen Variante. Wie bei <guibutton>Vorwärts</guibutton> wird auch hier jeweils die erste Variante benutzt, wenn die Brettstellung mehrere nachfolgende Varianten hat.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Nächste Variante</guibutton></term>
+<listitem>
+<para>Geht zur nächsten Variante zum zuletzt gespielten Zug (d. h. zum nächsten Geschwisterknoten des gegenwärtigen Knotens im Spielbaum).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Vorherige Variante</guibutton></term>
+<listitem>
+<para>Geht zur vorherigen Variante zum zuletzt gespielten Zug (d. h. zum vorherigen Geschwisterknoten des gegenwärtigen Knotens im Spielbaum).</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Spiel</guimenu>-Menü</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Neu</guimenuitem></term>
+<term>(<keysym>Strg+N</keysym>)</term>
+<listitem>
+<para>Beginnt ein neues Spiel.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Gewertetes Spiel</guimenuitem></term>
+<term>(<keysym>Strg+Umschalt+N</keysym>)</term>
+<listitem>
+<para>Beginnt ein neues <link linkend="rating">gewertetes Spiel</link> gegen den Computer.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Spielvariante</guimenuitem></term>
+<listitem>
+<para>Wählt eine Spielvariante und beginnt ein neues Spiel dieser Spielvariante.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Spielinformation</guimenuitem></term>
+<term>(<keysym>Strg+I</keysym>)</term>
+<listitem>
+<para>Öffnet ein Dialogfenster zum Anzeigen oder Bearbeiten zusätzlicher Informationen über das Spiel, wie die Namen der Spieler oder das Datum, an dem das Spiel gespielt wurde.</para>
+</listitem>
+</varlistentry>
+<varlistentry><term><guimenuitem>Zug rückgängig</guimenuitem></term>
+<listitem>
+<para>Nimmt den zuletzt gespielten Zug zurück und entfernt ihn aus dem Spielbaum. Das Zurücknehmen eines Zugs ist nur möglich, wenn er der letzte Zug der gegenwärtigen Variante ist (d. h. ein Endknoten im Spielbaum; benutzen Sie <guimenu>Bearbeiten</guimenu>/<guimenuitem>Abschneiden</guimenuitem> zum Entfernen innerer Knoten aus dem Spielbaum).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Zug finden</guimenuitem></term>
+<term>(<keysym>Strg+H</keysym>)</term>
+<listitem>
+<para>Findet einen legalen Zug für die gegenwärtige Farbe und zeigt ihn für ein paar Sekunden auf dem Spielbrett. Das wiederholte Auswählen dieses Menüpunkts zeigt alle legalen Züge.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Öffnen</guimenuitem></term>
+<term>(<keysym>Strg+O</keysym>)</term>
+<listitem>
+<para>Lädt ein gespeichertes Spiel. Die Brettstellung nach dem Laden ist die letzte Stellung in der Hauptvariante, sofern das Spiel nicht mit einer aufgebauten Brettstellung beginnt. Wenn das Spiel mit einer aufgebauten Brettstellung beginnt, ist die Stellung nach dem Laden stattdessen die Anfangsstellung. Dies vermeidet, dass Lösungen sofort angezeigt werden, wenn die Datei ein Blokus-Problem als aufgebaute Brettstellung enthält mit der Lösung in der Hauptvariante.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenu>Zuletzt benutzt</guimenu></term>
+<listitem>
+<para>Lädt ein kürzlich benutztes Spiel.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Speichern</guimenuitem></term>
+<term>(<keysym>Strg+S</keysym>)</term>
+<listitem>
+<para>Speichert das gegenwärtige Spiel.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Speichern unter</guimenuitem></term>
+<term>(<keysym>Strg+Umschalt+S</keysym>)</term>
+<listitem>
+<para>Speichert das gegenwärtige Spiel unter einem neuen Dateinamen.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Grafik exportieren</guimenuitem></term>
+<listitem>
+<para>Speichert die gegenwärtige Brettstellung als eine Grafikdatei. Mehrere Grafikdateiformate werden unterstützt, das Dateiformat wird von der Dateiendung abgeleitet (z. B. „.png“ für das PNG-Format). Für ein gestochen scharfes Bild sollte die Bildbreite ein ganzzahliges Vielfaches der Spaltenanzahl des Bretts in der gegenwärtigen Spielvariante sein.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Beenden</guimenuitem></term>
+<term>(<keysym>Strg+Q</keysym>)</term>
+<listitem>
+<para>Beendet Pentobi.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Gehe-zu</guimenu>-Menü</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Zugnummer</guimenuitem></term>
+<term>(<keysym>Strg+G</keysym>)</term>
+<listitem>
+<para>Geht zum Zug mit einer bestimmten Nummer in der gegenwärtigen Variante.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Hauptvariante</guimenuitem></term>
+<term>(<keysym>Strg+M</keysym>)</term>
+<listitem>
+<para>Kehrt zur letzten Brettstellung in der gegenwärtigen Variante zurück, die zur Hauptvariante gehörte.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Verzweigungsanfang</guimenuitem></term>
+<term>(<keysym>Strgl+B</keysym>)</term>
+<listitem>
+<para>Kehrt zur letzten Brettstellung in der gegenwärtigen Variante zurück, die einen alternativen Zug hatte.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Nächster Kommentar</guimenuitem></term>
+<term>(<keysym>Strg+E</keysym>)</term>
+<listitem>
+<para>Geht zur nächsten Brettstellung, die einen Kommentar besitzt. Wenn das Kommentarfeld nicht sichtbar ist, wird es sichtbar gemacht. Das wiederholte Auswählen dieses Menüpunkts zeigt nacheinander alle Brettstellungen mit Kommentaren im Spielbaum.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Bearbeiten</guimenu>-Menü</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Annotierung</guimenuitem></term>
+<listitem>
+<para>Fügt ein wie in der Schachnotation benutztes Symbol (z. B. ‼) zum gegenwärtigen Zug hinzu. Die Symbole werden an die Zugnummern in der Statusleiste angehängt und, abhängig von der Einstellung von <guilabel>Zugmarkierung</guilabel>, an die auf dem Spielbrett.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Zu Hauptvariante machen</guimenuitem></term>
+<listitem>
+<para>Macht die gegenwärtige Variante zur Hauptvariante des Spiels. Dies ordnet die Knoten im Spielbaum so um, dass die gegenwärtige Variante zur Hauptvariante wird.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Variante nach oben</guimenuitem></term>
+<listitem>
+<para>Ändert die Reihenfolge der Varianten so, dass die gegenwärtige Brettstellung beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> /<guibutton>Vorherige Variante</guibutton> früher erscheint.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Variante nach unten</guimenuitem></term>
+<listitem>
+<para>Ändert die Reihenfolge der Varianten so, dass die gegenwärtige Brettstellung beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> /<guibutton>Vorherige Variante</guibutton> später erscheint.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Varianten löschen</guimenuitem></term>
+<listitem>
+<para>Löscht alle Varianten außer der Hauptvariante. Wenn sich die gegenwärtige Brettstellung nicht in der Hauptvariante befindet, wird zuvor zu einer Brettstellung in der Hauptvariante gewechselt wie in <guimenuitem>Zurück zu Hauptvariante</guimenuitem>.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Abschneiden</guimenuitem></term>
+<listitem>
+<para>Entfernt den Knoten mit der gegenwärtigen Brettstellung zusammen mit dem auf ihn folgenden Teilbaum aus dem Spielbaum.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Kindknoten abschneiden</guimenuitem></term>
+<listitem>
+<para>Entfernt alle Kindknoten des Knotens mit der gegenwärtigen Brettstellung aus dem Spielbaum.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Brettstellung behalten</guimenuitem></term>
+<listitem>
+<para>Löscht alle Züge und behält nur die gegenwärtige Brettstellung als feste Stellung. Dies kann zur Erzeugung von Dateien benutzt werden, die mit einer festgelegten Brettstellung beginnen.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Teilbaum behalten</guimenuitem></term>
+<listitem>
+<para>Wie <guimenuitem>Brettstellung behalten</guimenuitem>, aber die Züge nach der gegenwärtigen Brettstellung werden nicht gelöscht.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Stellungsaufbau</guimenuitem></term>
+<listitem>
+<para>Aktiviert oder deaktiviert den Stellungsaufbau-Modus. Im Stellungsaufbau-Modus können Spielsteine überall auf dem Brett abgelegt werden, auch unter Verletzung der Spielregeln. Existierende Spielsteine können durch Anklicken vom Brett entfernt werden. Die gegenwärtig gewählte Farbe legt auch die Farbe fest, die nach Beenden des Stellungsaufbaus am Zug ist. Sie kann mit <guimenuitem>Nächste Farbe</guimenuitem> oder durch Klicken auf die Orientierungsauswahl während kein Spielstein ausgewählt ist geändert werden. Der Stellungsaufbau-Modus kann nur benutzt werden, wenn noch keine Züge gespielt wurden.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Nächste Farbe</guimenuitem></term>
+<listitem>
+<para>Wählt die nächste Farbe zum Auswählen eines Spielsteins. Dies kann zum Beispiel benutzt werden, um Partien einzugeben, bei denen Züge einer Farbe übersprungen wurden, da die Farbe aufgrund einer Bedenkzeitüberschreitung vom Weiterspielen ausgeschlossen wurde.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Ansicht</guimenu>-Menü</title>
+<variablelist>
+<varlistentry><term><guimenuitem>Erscheinungsbild</guimenuitem></term>
+<listitem>
+<para>
+<variablelist>
+<varlistentry>
+<term><guilabel>Koordinaten</guilabel></term>
+<listitem>
+<para>Zeigt Koordinaten an den Rändern des Spielbretts für die Felder auf dem Spielbrett. Die Konvention für die Koordinaten ist dieselbe wie im von Pentobi benutzten Blokus-SGF-Dateiformat.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Varianten zeigen</guilabel></term>
+<listitem>
+<para>Fügt einen Buchstaben an die Zugnummer auf dem Spielbrett an, wenn der Zug Varianten besitzt. Wenn Züge mit einem Punkt statt einer Nummer markiert werden, wird ein Kreis statt ein Punkt für Züge verwendet, die nicht in der Hauptvariante sind.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Zugnummer</guilabel></term>
+<listitem>
+<para>Diese Option existiert nur im Desktop-Modus und zeigt die Zugnummer, Zugannotierung und Varianteninformation auf der rechten Seite der Statusleiste an.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Farbthema</guilabel></term>
+<listitem>
+<para>Ändert die Farben des Fensters, des Spielbretts und der Spielsteine.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Zugmarkierung</guilabel></term>
+<listitem>
+<para>Ändert die Markierung von Zügen auf dem Spielbrett. Die Optionen sind, den zuletzt gespielten Zug mit einem Punkt oder einer Nummer zu markieren, oder die Nummern aller Züge zu zeigen oder gar keine Markierung zu zeigen.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Kommentar zeigen</guilabel></term>
+<listitem>
+<para>Diese Option existiert nur im Desktop-Modus und konfiguriert die Sichtbarkeit des Kommentarbereichs, wenn sich die Stellung ändert. Die Standardeinstellung ist, dass der Kommentarbereich nur sichtbar ist, wenn ein Kommentar zur aktuellen Stellung existiert.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Kommentar</guimenuitem></term>
+<term>(<keysym>Strg+T</keysym>)</term>
+<listitem>
+<para>Mach den Kommentarbereich in der aktuellen Stellung sichtbar oder nicht sichtbar.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Vollbild</guimenuitem></term>
+<term>(<keysym>F11</keysym>)</term>
+<listitem>
+<para>Schaltet das Hauptfenster in den Vollbildmodus oder verlässt den Vollbildmodus. Um den Vollbildmodus ohne das Benutzen des Fenstermenüs zu verlassen, drücken Sie die F11-Taste.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Computer</guimenu>-Menü</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Einstellungen</guimenuitem></term>
+<term>(<keysym>Strg+U</keysym>)</term>
+<listitem>
+<para>Wählt aus, welche Farben vom Computer gespielt werden und die Spielstärke des Computers. Höhere Spielstufen sind stärker, können aber die Bedenkzeiten des Computers auf langsamen Computern sehr verlängern.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Spielen</guimenuitem></term>
+<term>(<keysym>Strg+L</keysym>)</term>
+<listitem>
+<para>Lässt den Computer einen Zug für die gegenwärtige Farbe spielen. Dies kann zum Ändern der Computer-Farbe benutzt werden oder um nach dem Navigieren im Spielbaum mit dem Spielen fortzufahren. Wenn der Computer die gegenwärtige Farbe nicht bereits spielte, wird er diese Farbe (und nur diese) im weiteren Spielverlauf spielen.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Zug spielen</guimenuitem></term>
+<term>(<keysym>Strg+Umschalt+L</keysym>)</term>
+<listitem>
+<para>Lässt den Computer einen einzelnen Zug für die gegenwärtige Farbe spielen ohne die vom Computer gespielten Farben zu ändern.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Stopp</guimenuitem></term>
+<listitem>
+<para>Bricht die gegenwärtige Zuggenerierung ab. Sie können den Computer weiterspielen lassen, indem Sie <guimenuitem>Spielen</guimenuitem> auswählen.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Extras</guimenu>-Menü</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Wertung</guimenuitem></term>
+<listitem>
+<para>Zeigt ein Dialogfenster mit der <link linkend="rating">Wertung</link> des Benutzers in der gegenwärtigen Spielvariante.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Wertung löschen</guimenuitem></term>
+<listitem>
+<para>Löscht die Wertungsinformationen und -entwicklung zur gegenwärtigen Spielvariante.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Spiel analysieren</guimenuitem></term>
+<listitem>
+<para>Führt eine <link linkend="analysis">Spielanalyse</link> durch.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Analyse löschen</guimenuitem></term>
+<listitem>
+<para>Löscht die Analyse des gegenwärtigen Spiels.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Hilfe</guimenu>-Menü</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Pentobi-Hilfe</guimenuitem></term>
+<term>(<keysym>F1</keysym>)</term>
+<listitem>
+<para>Zeigt ein Fenster mit dem Pentobi-Benutzerhandbuch.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Über Pentobi</guimenuitem></term>
+<listitem>
+<para>Zeigt eine Dialogfenster mit Informationen über diese Version von Pentobi.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+</chapter>
+
+<chapter id="shortcuts">
+<title>Tastenkürzel</title>
+<para>Zusätzlich zu den Tastenkürzeln, die im Fenstermenü gezeigt werden, werden die folgenden weiteren Tastenkürzel von Pentobi unterstützt. Beachten Sie, dass diese Tastenkürzel nicht aktiv sind, wenn das Kommentarfeld den Fokus besitzt. In diesem Fall kann der Fokus vom Kommentartext durch die Tabulator-Taste entfernt werden.</para>
+<variablelist>
+<varlistentry>
+<term><keysym>Plus</keysym></term>
+<listitem>
+<para>Nächsten Spielstein auswählen</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Minus</keysym></term>
+<listitem>
+<para>Vorherigen Spielstein auswählen</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Escape</keysym></term>
+<listitem>
+<para>Spielsteinauswahl löschen</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Links</keysym></term>
+<term><keysym>Rechts</keysym></term>
+<term><keysym>Oben</keysym></term>
+<term><keysym>Unten</keysym></term>
+<term><keysym>Umschalt+Links</keysym></term>
+<term><keysym>Umschalt+Rechts</keysym></term>
+<term><keysym>Umschalt+Oben</keysym></term>
+<term><keysym>Umschalt+Unten</keysym></term>
+<listitem>
+<para>Bewegen des ausgewählten Spielsteins. Mit der Umschalttaste wird der Spielstein schneller bewegt.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Leertaste</keysym></term>
+<listitem>
+<para>Nächste Ausrichtung des ausgewählten Spielsteins</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Umschalt+Leertaste</keysym></term>
+<listitem>
+<para>Vorherige Ausrichtung des ausgewählten Spielsteins</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Enter</keysym></term>
+<listitem>
+<para>Spielen des ausgewählten Spielsteins</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>1</keysym></term>
+<term><keysym>2</keysym></term>
+<term><keysym>A</keysym></term>
+<term><keysym>C</keysym></term>
+<term><keysym>E</keysym></term>
+<term><keysym>F</keysym></term>
+<term><keysym>G</keysym></term>
+<term><keysym>H</keysym></term>
+<term><keysym>I</keysym></term>
+<term><keysym>J</keysym></term>
+<term><keysym>L</keysym></term>
+<term><keysym>N</keysym></term>
+<term><keysym>O</keysym></term>
+<term><keysym>P</keysym></term>
+<term><keysym>S</keysym></term>
+<term><keysym>T</keysym></term>
+<term><keysym>U</keysym></term>
+<term><keysym>V</keysym></term>
+<term><keysym>W</keysym></term>
+<term><keysym>X</keysym></term>
+<term><keysym>Y</keysym></term>
+<term><keysym>Z</keysym></term>
+<listitem>
+<para>Einen Spielstein entsprechend den üblicherweise benutzten Spielsteinnamen auswählen. Wenn es mehrere Spielsteine mit dem Buchstaben gibt (z. B. I3, I4, I5), dann kann durch mehrmaliges Drücken der Taste zwischen ihnen gewechselt werden. Einige Buchstaben werden nur in bestimmten Spielvarianten benutzt. Zum Beispiel wird A nur in Trigon für die Spielsteine A6 und A4 benutzt (auch bekannt als „Hummer“ und „Dreieck“).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Strg+Pos1</keysym></term>
+<term><keysym>Strg+Umschalt+Links</keysym></term>
+<term><keysym>Strg+Links</keysym></term>
+<term><keysym>Strg+Rechts</keysym></term>
+<term><keysym>Strg+Umschalt+Rechts</keysym></term>
+<term><keysym>Strg+Ende</keysym></term>
+<term><keysym>Strg+Oben</keysym></term>
+<term><keysym>Strg+Unten</keysym></term>
+<listitem>
+<para>Im Spiel navigieren: Anfang, zehn Züge zurück, zurück, vorwärts, zehn Züge vorwärts, Ende, vorherige Variante, nächste Variante.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Strg+Umschalt+H</keysym></term>
+<listitem>
+<para>Wie <guimenuitem>Zug finden</guimenuitem> (Strg+H), jedoch wird rückwärts durch die Liste der legalen Züge iteriert.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Strg+T</keysym></term>
+<listitem>
+<para>Ansicht zwischen Kommentar und Spielanalyse umschalten.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Alt+M</keysym></term>
+<listitem>
+<para>Menü öffnen.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</chapter>
+
+</book>

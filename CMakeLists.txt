@@ -49,7 +49,6 @@ if(PENTOBI_BUILD_GTP)
 endif()
 if(PENTOBI_BUILD_GUI)
     find_package(Gettext 0.19.6 REQUIRED)
-    find_program(ITSTOOL itstool REQUIRED)
     find_program(RSVG_CONVERT rsvg-convert REQUIRED)
     set(CMAKE_AUTORCC ON)
     find_package(Qt6 6.5 REQUIRED

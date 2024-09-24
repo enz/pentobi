@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book lang="ru">
+<title>Pentobi</title>
+
+<chapter id="overview">
+<title>Обзор</title>
+<para>Pentobi оппонент компьютерной настольной игры Блокус. В этой игре четыре игрока размещают фигуры, похожие на фигуры компьютерной игры Тетрис, на доске размером 20×20. Pentobi также поддерживает варианты игры для двух или трех игроков, а также варианты игры Двое, Тригон, Юниор, Нексос, Каллисто и ГемблоQ.</para>
+</chapter>
+
+<chapter id="classic_rules">
+<title>Правила для Классической игры</title>
+<para>Есть четыре игрока: Синий, Желтый, Красный и Зеленый, а также доска, состоящая из квадратов 20×20. У каждого игрока есть набор из 21 фигуры своего цвета в форме полимино до пяти элементов. Полимино - это фигура, построенная из множества квадратов, соединенных по краям.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Игроки по очереди кладут одну из своих фигур на доску. Первая фигура игрока должна закрывать свою стартовую клетку. Стартовые клетки расположены по углам доски.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_classic.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Следующие фигуры должны быть размещены на пустых квадратах таким образом, чтобы новая фигура касалась хотя бы одной части своего цвета угол к углу, но не касалась какой-либо части своего цвета по краям. Новая фишка может касаться краев фишек цвета соперника.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_classic.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Когда игрок одного цвета не может разместить больше фигур, игрок пасует, и ход переходит следующему цвету. Когда никто из игроков не может разместить больше фигур, побеждает игрок с наибольшим количеством очков. Оценка цвета - это количество квадратов на доске, занятых этим цветом, плюс бонус в размере 15 очков, если цвет смог разместить все свои фигуры, плюс дополнительный бонус в размере 5 очков, если цвет смог разместить все фигуры и последней сыгранной фигурой была фигура с одним квадратом.</para>
+<sect1>
+<title>Правила для Двух Игроков</title>
+<para>В игру можно играть вдвоем. Первый игрок играет и Синим, и Красным, второй - Желтым и Зеленым. Очки обоих цветов, сыгранные игроком, суммируются.</para>
+</sect1>
+<sect1>
+<title>Правила для Трех Игроков</title>
+<para>В игру также можно играть с тремя игроками. Игроки по очереди играют четвертым цветом (Зеленым). В конце игры счет Зеленого игнорируется.</para>
+</sect1>
+<sect1>
+<title>Бесцветные начальные точки</title>
+<para>Обратите внимание, что в исходных правилах классической Блокус использовались бесцветные начальные точки. Это означает, что каждый цвет может свободно выбирать, какую из оставшихся незанятых начальных точек использовать для своего первого хода. Pentobi в настоящее время поддерживает только вариант с цветными начальными точками, потому что этот вариант правила использовался на первых онлайн-серверах Блокус и турнирах Блокус.</para>
+</sect1>
+</chapter>
+
+<chapter id="duo_rules">
+<title>Правила для игры Двое</title>
+<para>Вариант игры Duo - еще один вариант игры для двух игроков. Игра ведется на доске меньшего размера с квадратами 14×14. У каждого игрока есть только один цвет (Фиолетовый и Оранжевый), и стартовые квадраты находятся не в углах, а на квадрате с координатами (5,10) для Фиолетового и на (10,5) для Оранжевого.</para>
+<informalfigure>
+<mediaobject>
+<imageobject><imagedata fileref="board_duo.png"/></imageobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_duo.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+</chapter>
+
+<chapter id="trigon_rules">
+<title>Правила для игры Тригон</title>
+<para>Trigon - еще один вариант игры. Правила аналогичны варианту Классической игры, но в нем используется доска другой формы и другой набор фигур. Для каждого цвета используются 22 фигуры, которые имеют форму полиалмазов до шести элементов. Полиалмаз - это форма, состоящая из множества равносторонних треугольников, соединенных по краям.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_trigon.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Доска также состоит из треугольников и имеет форму шестиугольника с ребром размером в девять треугольников.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_trigon.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>На доске есть шесть начальных точек, каждая из которых расположена в середине четвертого ряда от каждого края. Начальные точки не окрашены, и игроки могут свободно выбирать начальную точку для первой части цвета.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_trigon.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<sect1>
+<title>Правила для Двух Игроков</title>
+<para>Как и в варианте Классической игры, в Тригон можно играть с двумя игроками, когда один игрок играет Синими и Красными, а другой Желтыми и Зелеными.</para>
+</sect1>
+<sect1>
+<title>Правила для Трех Игроков</title>
+<para>В Тригон можно играть с тремя игроками по тем же правилам, что и в варианте с четырьмя игроками. Вариант для трех игроков играется на маленькой доске с размером ребер в восемь треугольников. Начальные точки расположены в середине третьего ряда от каждого края.</para>
+</sect1>
+</chapter>
+
+<chapter id="junior_rules">
+<title>Правила для игры Юниор</title>
+<para>Юниор - это упрощенный вариант игры для двух игроков. В нее играют на той же доске 14×14, что и в варианте игры Двое, но используется только полимино до размера фигур из 5 элементов, и игроки получают два варианта из полимино.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_junior.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Бонусные баллы не используются в Юниор.</para>
+</chapter>
+
+<chapter id="nexos_rules">
+<title>Правила для игры Нексос</title>
+<para>Нексос - это настольная игра, похожая на Блокус. Доска представляет собой прямоугольную сетку 13×13 линий. Каждый цвет состоит из 24 фигур, которые состоят из четырех линейных сигментов.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_nexos.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Каждый цвет имеет начальное прикрепление на пересечении трех линий, близких к углу. Первая часть должна касаться начального пересечения.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_nexos.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Следующие фигуры должны быть размещены на пустых клетках таким образом, чтобы новая фигура касалась пересечения сегмента, которого уже касается сегмент того же цвета. Не имеет значения, касаются ли части другого цвета того же самого пересечения или покрывают его. Однако части не могут перекрываться. Соединения между сегментами внутри фигуры таковы, что два прямоугольных соединения разных фигур могут покрывать одно и то же пересечение без перекрытия, а прямые соединения - нет.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_nexos.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Очки цвета - это количество отрезков линии на доске, покрытых этим цветом, плюс бонус в размере 10 очков, если Цвет разместит все свои фигуры.</para>
+<sect1>
+<title>Правила для Двух Игроков</title>
+<para>Аналогично Блокус, в Нексос можно играть с двумя игроками, если один игрок играет Синим и Красным, а другой - Желтым и Зеленым.</para>
+</sect1>
+</chapter>
+
+<chapter id="gembloq_rules">
+<title>Правила для игры ГемблоQ</title>
+<para>ГемблоQ - игра, похожая на Блокус. Квадраты доски повернуты на 45 градусов. Доска имеет размер по диагонали 27 квадратов. Помимо полных квадратов, края также содержат полуквадраты, представляющие собой прямые линии.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_gembloq.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>У каждого игрока есть набор из 21 фигуры, который включает подмножество фигур, используемых в Блокус, а также фигуры, содержащие половину квадрата.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_gembloq.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Как и в Блокус, стартовые квадраты находятся в углах, первый ход должен полностью покрывать начальный квадрат этого цвета, а последующие ходы должны касаться фигуры цвета игрока в вершине, но не от края до края. Также допустимы ходы, если вершина полуквадрата касается ребра фишки того же цвета.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_gembloq.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Подсчет очков происходит так же, как в Блокус, полуквадраты дают 0,5 балла. Бонусные баллы не используются. Нарушение связи путем присвоения фигурам дополнительных значений, как описано в официальных правилах ГемблоQ, в настоящее время не поддерживается Pentobi.</para>
+<sect1>
+<title>Правила для Двух и Трех Игроков</title>
+<para>Варианты игры для двух и трех игроков используют доски меньшего размера и разные точки старта. В дополнение к стандартному варианту для двух игроков, Pentobi также поддерживает вариант игры для двух игроков, как в Блокус, в котором каждый игрок играет двумя цветами.</para>
+</sect1>
+</chapter>
+
+<chapter id="callisto_rules">
+<title>Правила для игры Каллисто</title>
+<para>Каллисто - это еще одна настольная игра, похожая на Блокус. Доска получена из классической доски 20×20 Блокус путем удаления углов таким образом, что остается восьмиугольник с верхним краем шестого размера. Кусочки представляют собой подмножество полимино до пяти элементов. Они включают в себя по три фигуры 1×1 на игрока, которые играют особую роль.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_callisto.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Фигуры размером 1×1 могут быть размещены в любом месте доски, кроме центра. Центр состоит из восьмиугольника шириной шесть и верхнего края размером два. Первые два хода игрока должны использовать фигуру 1×1, третья фигура 1×1 может быть сыграна в любое время позже.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_callisto.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Все более крупные части могут быть размещены в любом месте доски, но должны касаться существующей части того же цвета от края до края.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_callisto.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Оценка цвета - это количество квадратов на доске, занятых цветом, не считая фигур 1×1. Бонусные баллы не используются. В отличие от Блокуса, при ничьей, счет идет в пользу игрока, который начал позже.</para>
+<sect1>
+<title>Правила для Двух и Трех Игроков</title>
+<para>В игру можно играть менее чем с четырьмя игроками, используя меньшую доску. Для трех игроков доска представляет собой восьмиугольник шириной 20 и верхним краем размером два. Для двух игроков доска представляет собой восьмиугольник шириной 17 и верхним краем размером два. Размер центра остается прежним. В дополнение к стандартному варианту для двух игроков, Pentobi также поддерживает вариант игры для двух игроков, как в Блокус, в котором каждый игрок играет двумя цветами.</para>
+</sect1>
+</chapter>
+
+<chapter id="user_interface">
+<title>Инструкция по использованию Pentobi</title>
+<sect1>
+<title>Доска</title>
+<para>Фигуры можно выбирать, щелкнув одну из неигранных  или используя <link linkend="shortcuts">горячие клавиши</link>. Фигурами можно играть, перетаскивая их на место, соответствующее допустимому ходу, с помощью мыши или клавиш со стрелками и нажимая левую кнопку мыши или клавишу Enter.</para>
+<para>Играемые фигуры на доске могут иметь номера, указывающие номер хода, в котором была сыграна фигура. Буква после номера хода указывает на то, что существует вариант этого хода (см. ниже).</para>
+<para>На дисплее баллов отображаются текущие очки для каждого цвета или игрока. Баллы представляют собой сумму настольных и бонусных очков. Очки подчеркнуты, если они окончательные, потому что цвет не может играть больше фигур. Маленькая звездочка указывает на то, что очки включают бонус.</para>
+</sect1>
+<sect1>
+<title>Игра против компьютера</title>
+<para>Доска может использоваться для создания игр, записанных другими людьми, или для игр против компьютера. В играх против компьютера, компьютер может играть любыми (или несколькими) цветами.</para>
+<para>Когда вы начинаете новую игру, человек будет играть цветом(ами) первого игрока по умолчанию, а компьютер использовать все остальные цвета. Чтобы изменить это, используйте <guimenuitem>Настройки</guimenuitem> из меню <guimenu>Компьютер</guimenu> или панели инструментов и выберите цвета, которые должен воспроизводить компьютер.</para>
+<para>Исключением является то, что компьютер по умолчанию не воспроизводит цвет, если он не воспроизводил цвет в предыдущей игре. Это предотвращает автоматический запуск компьютера в игру, если пользователь в основном хочет использовать доску для ввода последовательностей ходов или аналогичных задач редактирования. После загрузки сохраненной игры компьютер по умолчанию также не воспроизводит цвета.</para>
+<para>Выбор <guimenuitem>Игра</guimenuitem> в меню <guimenu>Компьютер</guimenu>или на панели инструментов всегда заставляет компьютер воспроизводить ход для текущего цвета. Если компьютер не воспроизводил этот цвет раньше, он будет использовать этот цвет (и только этот цвет) с этого момента.</para>
+</sect1>
+<sect1>
+<title>Перемещение Вариаций и Дерево игры</title>
+<para>Когда вы играете в игру, Pentobi будет хранить последовательность ходов, и всегда можно вернуться на предыдущую позицию и играть по-другому. Если вы сделаете это, новая последовательность будет сохранена как альтернативная последовательность (называемая вариацией). Вариации также могут быть использованы аннотаторами для комментирования существующих игр. Вариации могут существовать в любом положении доски и могут иметь подвариации. Таким образом, игра может стать игровым деревом, в котором каждый узел представляет положение доски. Вы можете перемещаться по игровому дереву с помощью пунктов меню <guimenu>Ход</guimenu> и навигационных кнопок.</para>
+<para>Основной вариацией является последовательность ходов, которая начинается с начальной позиции и всегда выбирает первый дочерний узел в каждой позиции (например, нажав кнопку вперед). Предполагается, что основная вариация представляет реальную игру. Если вы хотите, чтобы побочная вариация стала основной вариацией, выберите пункт <guimenuitem>Сделать основной вариацией</guimenuitem> в меню <guimenu>Редактировать</guimenu>.</para>
+</sect1>
+</chapter>
+
+<chapter id="become_stronger">
+<title>Стать более сильным игроком</title>
+<para>Pentobi имеет функции, которые могут помочь вам стать более сильным игроком Блокус.</para>
+<sect1 id="analysis">
+<title>Анализ игры</title>
+<para>Игру можно проанализировать, выбрав пункт <guimenuitem>Анализировать игру</guimenuitem> в меню <guimenu>Инструменты</guimenu>. Это заставит компьютерного игрока оценить каждую позицию в основной вариации. Результат отображается в окне с диаграммой из цветных точек.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="analysis.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Каждая точка представляет собой игровую позицию, в которой цвет должен был начать играть. Количество точек отсортировано по горизонтали. Вертикальная ось представляет собой расчетную вероятность выигрыша в игре для того цвета, который будет играть. Щелчки мыши на диаграмме приведут к соответствующей позиции.</para>
+<para>Значения позиций являются только оценочными, и компьютер иногда неправильно оценивает позиции. Зато снижает поспешную оценку и поможет вам найти ходы, которые были потенциально плохими. Вы можете вернуться к позиции перед ходом и попытаться найти лучший ход или спросить компьютер, что бы он сыграл, выбрав пункт <guimenuitem>Воспроизвести ход</guimenuitem> в меню <guimenu>Компьютер</guimenu>.</para>
+</sect1>
+<sect1 id="rating">
+<title>Определение своего рейтинга</title>
+<para>Вы можете отслеживать свой прогресс, играя в рейтинговые игры против компьютера. По результатам игры определяется ваш текущий рейтинг. Рейтинг - это число, которое показывает вашу игровую силу.</para>
+<para>Игра с рейтингом запускается с помощью <guimenuitem>Рейтинговая игра</guimenuitem> из меню <guimenu>Игра</guimenu> или на панели инструментов. Если вы не играли в рейтинговые игры в текущей вариации игры, вам будет предложено выбрать начальное значение, которое может уменьшить количество игр, необходимых для определения вашего реального рейтинга. Если вы новичок, оставьте начальное значение 800.</para>
+<para>Для каждой рейтинговой игры компьютер будет выбирать уровень игры для компьютерного оппонента в соответствии с вашим текущим рейтингом. Цвет, которым вы играете, будет случайным образом выбран в каждой игре.</para>
+<para>Во время рейтинговой игры большинство функций, которые не нужны для игры, отключены: вы не можете отменять ходы, перемещаться по игре, изменять цвета компьютера или изменять уровень игры. Чтобы получить точный рейтинг, вы всегда должны играть в рейтинговые игры до конца.</para>
+<para>По окончании игры ваш рейтинг будет обновляться в зависимости от результата игры и уровня компьютера. Для результата игры имеет значение только то, была ли игра выиграна, проиграна или была ничья. Точное количество очков не имеет значения.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="rating.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Вы всегда можете увидеть свой текущий рейтинг, выбрав <guimenuitem>Рейтинг</guimenuitem> в меню <guimenu>Инструменты</guimenu>. Откроется окно, в котором в виде графика показано развитие вашего рейтинга за последние 50 игр. Последние 50 игр автоматически сохраняются и могут быть загружены, открыв контекстное меню в таблице игр под графиком.</para>
+</sect1>
+</chapter>
+
+<chapter id="window_menu">
+<title>Окно Меню и Панель инструментов</title>
+<sect1>
+<title>Кнопки навигации в Панели инструментов</title>
+<variablelist>
+<varlistentry>
+<term><guibutton>К началу</guibutton></term>
+<listitem>
+<para>К началу игры</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Назад 10</guibutton></term>
+<listitem>
+<para>Сделает десять ходов назад в текущей вариации. Кнопка поддерживает автоповтор при нажатии и удерживании.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Назад</guibutton></term>
+<listitem>
+<para>Сделает один шаг назад в текущей вариации. Кнопка поддерживает автоповтор при нажатии и удержании.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Вперед</guibutton></term>
+<listitem>
+<para>Сделает один шаг вперед в текущей вариации. Если текущая позиция имеет несколько последующих вариантов (т. е. текущий узел в игровом дереве имеет несколько дочерних узлов), то будет использоваться первый вариант. Кнопка поддерживает автоповтор, если ее нажать и удерживать.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Вперед 10</guibutton></term>
+<listitem>
+<para>Пройдите десять ходов вперед в текущей вариации. Если позиция имеет несколько последующих вариантов (т. е. текущий узел в игровом дереве имеет несколько дочерних узлов), то будет использоваться первый вариант. Кнопка поддерживает автоповтор при нажатии и удержании.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>End</guibutton></term>
+<listitem>
+<para>Перейти в конец текущей вариации. Как и в случае с <guibutton>Вперед</guibutton>, здесь также используется первый вариант позиции с несколькими последующими вариантами.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Следующий вариант</guibutton></term>
+<listitem>
+<para>Перейти к следующему варианту до последнего сыгранного хода (то есть к следующему родственному узлу текущего узла в игровом дереве).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Предыдущий вариант</guibutton></term>
+<listitem>
+<para>Перейти к предыдущему варианту до последнего сыгранного хода (то есть к предыдущему родственному узлу текущего узла в игровом дереве).</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Игра</guimenu> Меню</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Новая</guimenuitem></term>
+<term>(<keysym>Ctrl+N</keysym>)</term>
+<listitem>
+<para>Начать новую игру.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Рейтинговая игра</guimenuitem></term>
+<term>(<keysym>Ctrl+Shift+N</keysym>)</term>
+<listitem>
+<para>Начать новый <link linkend="rating">рейтинг</link> против компьютера.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Вариант игры</guimenuitem></term>
+<listitem>
+<para>Выберите вариант игры и начните новую игру в этом варианте.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Об игре</guimenuitem></term>
+<term>(<keysym>Ctrl+I</keysym>)</term>
+<listitem>
+<para>Отображение или редактирование дополнительной информации об игре, такой как имена игроков или дата начала игры.</para>
+</listitem>
+</varlistentry>
+<varlistentry><term><guimenuitem>Отменить Ход</guimenuitem></term>
+<listitem>
+<para>Отмените последний сыгранный ход и удалите его из игрового дерева. Отмена хода возможна только в том случае, если это последний ход в текущей вариации (т. е. конечный узел в игровом дереве; используйте <guimenu>Редактировать</guimenu>/<guimenuitem>Защита</guimenuitem> для удаления внутренних узлов игрового дерева).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Найти Ход</guimenuitem></term>
+<term>(<keysym>Ctrl+H</keysym>)</term>
+<listitem>
+<para>Найдите подходящий ход для текущего цвета и отобразите его на несколько секунд на доске. Повторный выбор этого элемента покажет все доступные ходы.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Открыть</guimenuitem></term>
+<term>(<keysym>Ctrl+O</keysym>)</term>
+<listitem>
+<para>Загрузите сохраненную игру. Позиция доски после загрузки будет последней позицией в основной вариации, если игра не начинается с позиции установки. Если игра начинается с установки, позиция на доске будет первой. Это позволяет избежать немедленного отображения решений, если файл содержит головоломку Blokus в качестве установки с решением в качестве основной вариации.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenu>Открыть Последнюю</guimenu></term>
+<listitem>
+<para>Загрузить последнюю игру.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Сохранить</guimenuitem></term>
+<term>(<keysym>Ctrl+S</keysym>)</term>
+<listitem>
+<para>Сохранить текущую игру.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Сохранить как</guimenuitem></term>
+<term>(<keysym>Ctrl+Shift+S</keysym>)</term>
+<listitem>
+<para>Сохранит текущую игру под новым именем файла.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Export Image</guimenuitem></term>
+<listitem>
+<para>Сохранит текущую позицию в виде файла изображения. Поддерживается несколько форматов файлов изображений, формат файла является производным от окончания имени файла (например,". png" для формата PNG). Для четкости изображения ширина изображения должна быть целым числом, кратным числу столбцов доски в текущем варианте игры.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Выход</guimenuitem></term>
+<term>(<keysym>Ctrl+Q</keysym>)</term>
+<listitem>
+<para>Выйти из Pentobi.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Ход</guimenu> Меню</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Номер хода</guimenuitem></term>
+<term>(<keysym>Ctrl+G</keysym>)</term>
+<listitem>
+<para>Переход к ходу с заданным номером в текущей вариации.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Основная вариация</guimenuitem></term>
+<term>(<keysym>Ctrl+M</keysym>)</term>
+<listitem>
+<para>Вернуть к последней позиции, которая принадлежит основной вариации.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Начало Ветки</guimenuitem></term>
+<term>(<keysym>Ctrl+B</keysym>)</term>
+<listitem>
+<para>Вернуть к последней позиции, где был альтернативный ход.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Следующий комментарий</guimenuitem></term>
+<term>(<keysym>Ctrl+E</keysym>)</term>
+<listitem>
+<para>Перейти к следующей позиции с комментарием. Если текстовое поле комментария не было видно, оно станет видимым. При повторном выборе этого элемента в дереве игры будут отображаться все позиции с комментариями.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Редактировать</guimenu> Меню</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Пояснение</guimenuitem></term>
+<listitem>
+<para>Добавьте к текущему ходу символ аннотации в шахматном стиле (например,‼).Символы добавляются к номерам ходов в строке состояния и, в зависимости от конфигурации <guilabel>Отметка хода</guilabel>, на доске.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Сделать основной вариацией</guimenuitem></term>
+<listitem>
+<para>Сделать текущую вариацию основной вариацией игры. Это переупорядочит узлы в дереве игры, так, что текущая вариация становится основной.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Вариация выше</guimenuitem></term>
+<listitem>
+<para>Изменяет порядок вариаций таким образом, что текущая позиция будет отображаться раньше при повторении вариаций с помощью <guibutton>Следующая вариация</guibutton> / <guibutton>Предыдущая вариация</guibutton>.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Вариант ниже</guimenuitem></term>
+<listitem>
+<para>Изменяет порядок вариантов, так ,что текущая позиция будет отображаться позже при итерации вариантов с помощью <guibutton>Следующий вариант</guibutton> / <guibutton>Предыдущий вариант</guibutton>.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Удалить вариации</guimenuitem></term>
+<listitem>
+<para>Удаление всех вариаций, кроме основной. Если текущая позиция не входит в основную вариацию, она сначала будет изменена на позицию, как в <guimenuitem>Возврат на Основную Вариацию</guimenuitem>.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Защита</guimenuitem></term>
+<listitem>
+<para>Удалить узел с текущей позиции, включая любое поддерево, из дерева игры.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Защита от детей</guimenuitem></term>
+<listitem>
+<para>Удалите все дочерние узлы узла с текущей позицией из дерева игры.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Сохранить Позицию</guimenuitem></term>
+<listitem>
+<para>Удалите все ходы и сохраните только текущую позицию в качестве настройки. Это может быть использовано для создания файлов, которые начинаются с заданной фиксированной позиции.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Сохранить Поддерево</guimenuitem></term>
+<listitem>
+<para>Подобно <guimenuitem>Сохранить Позицию</guimenuitem>, но не удаляет ходы после текущей позиции.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Режим настройки</guimenuitem></term>
+<listitem>
+<para>Вход в режим настройки или выход из него. В режиме настройки, фигуры могут быть размещены в любом месте на доске, даже с нарушением правил игры. Существующие фигуры можно убрать с доски, щелкнув по ним. Текущий выбранный цвет также определяет цвет, который будет воспроизводиться после завершения настройки. Его можно изменить с помощью <guimenuitem>Следующий Цвет</guimenuitem> или щелкнув переключатель ориентации, когда ни один элемент не выбран. Режим настройки можно использовать только в том случае, если еще не было сделано ни одного хода.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Следующий Цвет</guimenuitem></term>
+<listitem>
+<para>Выберите следующий цвет для выделения фигур. Это можно использовать, например, для ведения игровых записей, в которых ходы одного цвета были пропущены из-за того, что цвет цвет исчерпал свое время.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Просмотр</guimenu> Меню</title>
+<variablelist>
+<varlistentry><term><guimenuitem>Внешний вид</guimenuitem></term>
+<listitem>
+<para>
+<variablelist>
+<varlistentry>
+<term><guilabel>Координаты</guilabel></term>
+<listitem>
+<para>Отображает координаты вокруг доски на полях. Расположение координат в Pentobi такое же, как и в формате файла Blokus SGF.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Показать вариации</guilabel></term>
+<listitem>
+<para>Добавляет букву к номеру хода на доске, Если ход имеет варианты. Если ходы помечены точками вместо цифр, то вместо точки будет использоваться круг для ходов, не входящих в основную вариацию.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Номер хода</guilabel></term>
+<listitem>
+<para>Эта опция существует только в режиме рабочего стола и показывает номер перемещения, аннотацию перемещения и информацию об изменении в правой части строки состояния.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Цветовая тема</guilabel></term>
+<listitem>
+<para>Меняет цвета окна, доски и фигур.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Метка хода</guilabel></term>
+<listitem>
+<para>Изменяет способ, которым ходы отмечаются на доске. Варианты заключаются в том, чтобы отметить последний сыгранный ход точкой или цифрой, или показать номера всех ходов, или не показывать никаких меток.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Показать комментарий</guilabel></term>
+<listitem>
+<para>Эта опция существует только в режиме рабочего стола и настраивает видимость области комментариев при изменении позиции. По умолчанию область комментариев отображается только в том случае, если комментарий существует для текущей позиции.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Комментарии</guimenuitem></term>
+<term>(<keysym>Ctrl+T</keysym>)</term>
+<listitem>
+<para>Переключить видимость области комментариев в текущей позиции.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>На весь экран</guimenuitem></term>
+<term>(<keysym>F11</keysym>)</term>
+<listitem>
+<para>Сделайте главное окно полноэкранным или выйдите из полноэкранного режима. Чтобы выйти из полноэкранного режима без использования меню окна, нажмите клавишу F11.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Компьютер</guimenu> Меню</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Настройки</guimenuitem></term>
+<term>(<keysym>Ctrl+U</keysym>)</term>
+<listitem>
+<para>Выберите, какие цвета воспроизводятся компьютером, и силу игры для компьютера. Более высокие уровни сильнее, но могут заставить компьютер долго обдумывать ходы на медленных компьютерах.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Игра</guimenuitem></term>
+<term>(<keysym>Ctrl+L</keysym>)</term>
+<listitem>
+<para>Дает компьютеру сыграть ход для текущего цвета. Это можно использовать для изменения цвета, воспроизводимого компьютером, или для возобновления игры после навигации по дереву игры. Если компьютер еще не воспроизводил текущий цвет, с этого момента он будет воспроизводить этот цвет (и только этот цвет).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Сыграть ход</guimenuitem></term>
+<term>(<keysym>Ctrl+Shift+L</keysym>)</term>
+<listitem>
+<para>Дает компьютеру сыграть один ход за текущий цвет, без изменения цветов, воспроизводимых компьютером.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Стоп</guimenuitem></term>
+<listitem>
+<para>Прервать текущую генерацию хода. Вы можете дать компьютеру продолжить игру, выбрав <guimenuitem>Игра</guimenuitem>.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Инструменты</guimenu> Меню</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Рейтинг</guimenuitem></term>
+<listitem>
+<para>Показать диалоговое окно с <link linkend="rating">рейтингом</link> пользователя в текущей игре.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Очистить Рейтинг</guimenuitem></term>
+<listitem>
+<para>Удаляет рейтинг и историю для текущего варианта игры.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Анализ Игры</guimenuitem></term>
+<listitem>
+<para>Выполнить <link linkend="analysis">анализ игры</link>.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Очистить Анализ</guimenuitem></term>
+<listitem>
+<para>Удалить анализ для текущей игры.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title><guimenu>Помощь</guimenu> Меню</title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Помощь Pentobi</guimenuitem></term>
+<term>(<keysym>F1</keysym>)</term>
+<listitem>
+<para>Показать окно для просмотра руководства пользователя Pentobi.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>О Pentobi</guimenuitem></term>
+<listitem>
+<para>Показать информацию об этой версии Pentobi.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+</chapter>
+
+<chapter id="shortcuts">
+<title>Горячие клавиши</title>
+<para>В дополнение к сочетаниям клавиш, которые отображаются в меню окна, Pentobi поддерживает перечисленные ниже сочетания клавиш. Обратите внимание, что эти иконки не активны, когда текстовое поле комментария находится в фокусе. В этом случае фокус можно переключить с текста комментария с помощью клавиши Tab.</para>
+<variablelist>
+<varlistentry>
+<term><keysym>Плюс</keysym></term>
+<listitem>
+<para>Выбрать следующую фигуру</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Минус</keysym></term>
+<listitem>
+<para>Выбрать предыдущую фигуру</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Escape</keysym></term>
+<listitem>
+<para>Убрать выбранную фигуру</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Влево</keysym></term>
+<term><keysym>Вправо</keysym></term>
+<term><keysym>Вверх</keysym></term>
+<term><keysym>Вниз</keysym></term>
+<term><keysym>Shift+Влево</keysym></term>
+<term><keysym>Shift+Вправо</keysym></term>
+<term><keysym>Shift+Вверх</keysym></term>
+<term><keysym>Shift+Вниз</keysym></term>
+<listitem>
+<para>Переместить выбранную фигуру. Клавиша Shift заставляет фигуру двигаться быстрее.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Пробел</keysym></term>
+<listitem>
+<para>Следующая ориентация выбранной фигуры</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Shift+Пробел</keysym></term>
+<listitem>
+<para>Предыдущая ориентация выбранной фигуры</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Ввод</keysym></term>
+<listitem>
+<para>Выбрать фигуру</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>1</keysym></term>
+<term><keysym>2</keysym></term>
+<term><keysym>A</keysym></term>
+<term><keysym>C</keysym></term>
+<term><keysym>E</keysym></term>
+<term><keysym>F</keysym></term>
+<term><keysym>G</keysym></term>
+<term><keysym>H</keysym></term>
+<term><keysym>I</keysym></term>
+<term><keysym>J</keysym></term>
+<term><keysym>L</keysym></term>
+<term><keysym>N</keysym></term>
+<term><keysym>O</keysym></term>
+<term><keysym>P</keysym></term>
+<term><keysym>S</keysym></term>
+<term><keysym>T</keysym></term>
+<term><keysym>U</keysym></term>
+<term><keysym>V</keysym></term>
+<term><keysym>W</keysym></term>
+<term><keysym>X</keysym></term>
+<term><keysym>Y</keysym></term>
+<term><keysym>Z</keysym></term>
+<listitem>
+<para>Выберите фигуру в соответствии с названием. Если есть несколько фигур с буквой (например, I3, I4, I5), нажатие клавиши несколько раз переключает их между собой. Некоторые буквы используются только в определенных вариантах игры. Например, А используется только в Тригон для фигур А6 и А4 (также известных как "лобстер" и "треугольник").</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Ctrl+Home</keysym></term>
+<term><keysym>Ctrl+Shift+Влево</keysym></term>
+<term><keysym>Ctrl+Влево</keysym></term>
+<term><keysym>Ctrl+Вправо</keysym></term>
+<term><keysym>Ctrl+Shift+Вправо</keysym></term>
+<term><keysym>Ctrl+End</keysym></term>
+<term><keysym>Ctrl+Up</keysym></term>
+<term><keysym>Ctrl+Down</keysym></term>
+<listitem>
+<para>Перемещение в игре: К началу игры, На десять ходов назад, На один шаг назад, Вперед на один ход, Вперед на десять ходов, К концу ходов, К предыдущей вариации, К следующей вариации.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Ctrl+Shift+H</keysym></term>
+<listitem>
+<para>Аналогично <guimenuitem>Найти ход</guimenuitem> (Ctrl+H), но выполняет итерацию назад по списку допустимых ходов.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Ctrl+T</keysym></term>
+<listitem>
+<para>Переключение между комментарием и анализом игры.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Alt+M</keysym></term>
+<listitem>
+<para>Открыть меню.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</chapter>
+
+</book>

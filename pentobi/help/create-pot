@@ -1,4 +1,5 @@
 #!/bin/bash
 
+# See also comments in create-translations
 cd $(dirname "$0")
 itstool -i docbook.its docbook/index.docbook > pentobi-manual.pot

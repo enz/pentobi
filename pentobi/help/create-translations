@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# For now, we use itstool to translate the docbook files even if itstool no
+# longer seems to be maintained. Future alternatives are:
+#
+# poxml: works like itstool, but is not part of the KDE SDK in flatpak. This
+#   is why we include the translated docbook files in the soure tree, such
+#   that running poxml would not be required for the normal build process as
+#   long as the translations haven't changed.
+#
+# gettext: msgfmt has no --its option but requires a its and loc file and
+#   using the environment variable GETTEXTDATADIRS. It only produces
+#   multilingual XML files (we alreadsy added support for this in
+#   DocbookReader) and seemingly has a bug that does not handle within-text
+#   elements correctly (greater/less characters are escaped in translated
+#   files, last tested with gettext 0.21)
+
+cd $(dirname "$0")
+for lang in `cat po/LINGUAS`; do
+  msgfmt -o $lang.mo po/$lang.po
+  itstool -m $lang.mo -o docbook/index_$lang.docbook docbook/index.docbook
+done
