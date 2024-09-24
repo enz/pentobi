@@ -10,7 +10,7 @@
 #
 # gettext: msgfmt has no --its option but requires a its and loc file and
 #   using the environment variable GETTEXTDATADIRS. It only produces
-#   multilingual XML files (we alreadsy added support for this in
+#   multilingual XML files (we already added support for this in
 #   DocbookReader) and seemingly has a bug that does not handle within-text
 #   elements correctly (greater/less characters are escaped in translated
 #   files, last tested with gettext 0.21)
