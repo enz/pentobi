@@ -84,13 +84,6 @@ add_custom_command(
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons_desktop.qrc" ${images_png}
     )
 
-add_custom_command(
-    OUTPUT help/help.qrc
-    COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/help/help.qrc" help
-    DEPENDS pentobi-help help/help.qrc
-    )
-
 qt_add_executable(pentobi WIN32 Main.cpp)
 
 if (WIN32)
