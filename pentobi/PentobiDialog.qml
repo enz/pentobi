@@ -22,14 +22,6 @@ Dialog {
         // Match 90% window width on mobile devices within reason
         isDesktop ? 0 : Math.min(27 * font.pixelSize, 0.9 * maxContentWidth)
 
-    function centerDialog() {
-        // Don't bind x and y because that can cause a binding loop if the
-        // application window is interactively resized
-        if (ApplicationWindow.window) {
-            x = (ApplicationWindow.window.width - width) / 2
-            y = (ApplicationWindow.window.height - height) / 2
-        }
-    }
     // Qt 5.11 doesn't support default buttons yet, this function can be
     // called as a replacement if the Return key is pressed and should be
     // reimplemented if needed in derived dialogs.
@@ -58,18 +50,11 @@ Dialog {
     // window is not fully usable anyway.
     modal: true
     dim: false
+    anchors.centerIn: Overlay.overlay
 
     focus: true
     clip: true
     closePolicy: Popup.CloseOnEscape
-    onAboutToShow: centerDialog()
-    onWidthChanged: centerDialog()
-    onHeightChanged: centerDialog()
-    ApplicationWindow.onWindowChanged:
-        if (ApplicationWindow.window) {
-            ApplicationWindow.window.onWidthChanged.connect(centerDialog)
-            ApplicationWindow.window.onHeightChanged.connect(centerDialog)
-        }
     Component.onCompleted:
         if (! isDesktop)
             // Save some screen space on smartphones
