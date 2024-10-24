@@ -55,10 +55,6 @@ Dialog {
     focus: true
     clip: true
     closePolicy: Popup.CloseOnEscape
-    Component.onCompleted:
-        if (! isDesktop)
-            // Save some screen space on smartphones
-            title = ""
 
     Shortcut {
         sequence: "Return"
