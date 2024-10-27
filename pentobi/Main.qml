@@ -34,7 +34,7 @@ ApplicationWindow {
 
     property string themeName: isAndroid ? "Dark" : "System"
 
-    property QtObject theme: Logic.createTheme(themeName)
+    property Item theme: Logic.createTheme(themeName)
     property url folder:
         StandardPaths.writableLocation(StandardPaths.HomeLocation)
 

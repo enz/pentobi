@@ -13,7 +13,7 @@ Item {
     property var elements: analyzeGameModel.elements
     property var color: [ color0[0], color1[0], color2[0], color3[0] ]
     property int markMoveNumber: analyzeGameModel.markMoveNumber
-    property QtObject theme
+    property Item theme
 
     property real margin
     // Distance between moves on the x axis

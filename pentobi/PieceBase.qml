@@ -5,12 +5,13 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick
+import PentobiGui
 
 Item
 {
     id: root
 
-    property QtObject pieceModel
+    property PieceModel pieceModel
     property Item parentUnplayed
     property var color:
         switch (pieceModel.color) {

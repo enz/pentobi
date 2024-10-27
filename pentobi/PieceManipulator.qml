@@ -5,11 +5,12 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick
+import PentobiGui
 
 Item {
     id: root
 
-    property QtObject pieceModel
+    property PieceModel pieceModel
     // True if piece manipulator is at a board location that is a legal move
     property bool legal
 
