@@ -44,7 +44,7 @@ Item
     ]
 
     StateGroup {
-        state: pieceModel.state
+        state: root.pieceModel.state
 
         states: [
             State {
@@ -265,7 +265,7 @@ Item
                 // item at wrong position if target moves; Qt 6.2)
                 ScriptAction {
                     script: {
-                        switch (state) {
+                        switch (root.state) {
                         case "picked":
                             x = pieceManipulator.width / 2
                             y = pieceManipulator.height / 2
