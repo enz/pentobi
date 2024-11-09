@@ -7,7 +7,7 @@
 
 import QtCore
 import QtQuick.Dialogs
-import "Main.js" as Logic
+import "main.js" as Logic
 
 FileDialog {
     title: qsTr("Save Image")

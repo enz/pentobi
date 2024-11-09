@@ -7,7 +7,7 @@
 import QtCore
 import QtQuick
 import QtQuick.Controls
-import "GameView.js" as Logic
+import "gameview.js" as Logic
 
 Item
 {

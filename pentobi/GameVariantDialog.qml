@@ -7,7 +7,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import "Main.js" as Logic
+import "main.js" as Logic
 
 PentobiDialog {
     property string gameVariant

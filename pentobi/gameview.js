@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/GameView.js
+/** @file pentobi/gameView.js
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

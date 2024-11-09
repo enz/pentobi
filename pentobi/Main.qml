@@ -9,7 +9,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
 import PentobiGui
-import "Main.js" as Logic
+import "main.js" as Logic
 
 ApplicationWindow {
     id: rootWindow

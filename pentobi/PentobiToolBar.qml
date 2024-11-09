@@ -7,7 +7,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import "Main.js" as Logic
+import "main.js" as Logic
 
 Item {
     // Show toolbar content (menu button is always shown)

@@ -167,8 +167,8 @@ qt_add_qml_module(pentobi
     ThemeLight.qml
     ThemeSystem.qml
     Triangle.qml
-    GameView.js
-    Main.js
+    gameview.js
+    main.js
 
     SOURCES
     AnalyzeGameModel.h
