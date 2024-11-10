@@ -7,7 +7,6 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import "main.js" as Logic
 
 PentobiDialog {
     id: root

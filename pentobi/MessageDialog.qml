@@ -6,7 +6,6 @@
 
 import QtQuick
 import QtQuick.Controls
-import "main.js" as Logic
 
 PentobiDialog {
     property alias text: label.text

@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick.Controls
-import "main.js" as Logic
 
 PentobiMenu {
     title: qsTr("Game")
