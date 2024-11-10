@@ -843,6 +843,352 @@
     </message>
 </context>
 <context>
+    <name>main</name>
+    <message>
+        <source>Pentobi</source>
+        <extracomment>Window title if no file is loaded.</extracomment>
+        <translation>Pentobi</translation>
+    </message>
+    <message>
+        <source>Game analysis is only possible in main variation.</source>
+        <translation>Анализ игры возможен только в основной вариации.</translation>
+    </message>
+    <message>
+        <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
+        <translation>Автосохраненная игра была изменена другим экземпляром Pentobi. Переписать?</translation>
+    </message>
+    <message>
+        <source>Your rating has increased from %1 to %2.</source>
+        <translation>Ваш рейтинг вырос с %1 на %2.</translation>
+    </message>
+    <message>
+        <source>Your rating has decreased from %1 to %2.</source>
+        <translation>Ваш рейтинг снизился с %1 на %2.</translation>
+    </message>
+    <message>
+        <source>Your rating stays at %1.</source>
+        <translation>Ваш рейтинг остается на уровне %1.</translation>
+    </message>
+    <message>
+        <source>Delete all rating information for the current game variant?</source>
+        <translation>Удалить всю информацию рейтинга для текущей игры?</translation>
+    </message>
+    <message>
+        <source>Delete all variations?</source>
+        <translation>Удалить все вариации?</translation>
+    </message>
+    <message>
+        <source>Save failed.</source>
+        <translation>Сохранить не удалось.</translation>
+    </message>
+    <message>
+        <source>End of tree was reached. Continue search from start of the tree?</source>
+        <translation>Достигнут конец дерева. Продолжить поиск с начала дерева?</translation>
+    </message>
+    <message>
+        <source>No comment found</source>
+        <translation>Комментариев не найдено</translation>
+    </message>
+    <message>
+        <source>%1 (modified)</source>
+        <extracomment>Label for modified loaded game. The argument is the file name.</extracomment>
+        <translation>%1 (измененная)</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Reload?</source>
+        <translation>Файл был изменен другим приложением. Перезапустить?</translation>
+    </message>
+    <message>
+        <source>Keep only position?</source>
+        <translation>Сохранить только позицию?</translation>
+    </message>
+    <message>
+        <source>Keep only subtree?</source>
+        <translation>Сохранить только поддерево?</translation>
+    </message>
+    <message>
+        <source>Open failed.</source>
+        <translation>Открыть не удалось.</translation>
+    </message>
+    <message>
+        <source>Start rated game with Purple against Pentobi level %1?</source>
+        <translation>Начать игру Фиолетовым против Pentobi уровня %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Green against Pentobi level %1?</source>
+        <translation>Начать игру Зеленым против Pentobi уровня %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue/Red against Pentobi level %1?</source>
+        <translation>Начать игру Синим/Красным против Pentobi уровня %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue against Pentobi level %1?</source>
+        <translation>Начать игру Синим против Pentobi уровня %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Orange against Pentobi level %1?</source>
+        <translation>Начать игру Оранжевым против Pentobi уровня %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
+        <translation>Начать игру Желтым/Зеленым против Pentobi уровня %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow against Pentobi level %1?</source>
+        <translation>Начать игру Желтым против Pentobi уровня %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Red against Pentobi level %1?</source>
+        <translation>Начать игру Красным против Pentobi уровня %1?</translation>
+    </message>
+    <message>
+        <source>You have not yet played rated games in this game variant.</source>
+        <translation>Вы еще не играли в рейтинговые игры в этом варианте игры.</translation>
+    </message>
+    <message>
+        <source>Truncate this subtree?</source>
+        <translation>Защитить это поддерево?</translation>
+    </message>
+    <message>
+        <source>Truncate children?</source>
+        <translation>Защитить от детей?</translation>
+    </message>
+    <message>
+        <source>Discard game?</source>
+        <translation>Сбросить игру?</translation>
+    </message>
+    <message>
+        <source>Pentobi %1 (level %2)</source>
+        <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
+        <translation>Pentobi %1 (уровень %2)</translation>
+    </message>
+    <message>
+        <source>Human</source>
+        <extracomment>Player name for game info in rated game.</extracomment>
+        <translation>Человек</translation>
+    </message>
+    <message>
+        <source>Rated game</source>
+        <translation>Рэйтинг</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Overwrite?</source>
+        <translation>Файл был изменен другим приложением. Перезаписать?</translation>
+    </message>
+    <message>
+        <source>%1 - Pentobi</source>
+        <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
+        <translation>%1 - Pentobi</translation>
+    </message>
+    <message>
+        <source>Not enough memory</source>
+        <translation>Недостаточно памяти</translation>
+    </message>
+    <message>
+        <source>Game analysis aborted</source>
+        <translation>Анализ игры прерван</translation>
+    </message>
+    <message>
+        <source>Computer move aborted</source>
+        <translation>Ход Компьютера прерван</translation>
+    </message>
+    <message>
+        <source>Rating information deleted</source>
+        <translation>Удаление информации рейтинга</translation>
+    </message>
+    <message>
+        <source>Variations deleted</source>
+        <translation>Вариации удалены</translation>
+    </message>
+    <message>
+        <source>File saved</source>
+        <translation>Файл сохранен</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format</source>
+        <translation>Ошибка сохранения или неподдерживаемый формат изображения</translation>
+    </message>
+    <message>
+        <source>Image saved</source>
+        <translation>Изображение сохранено</translation>
+    </message>
+    <message>
+        <source>Creating image failed</source>
+        <translation>Не удалось создать изображение</translation>
+    </message>
+    <message>
+        <source>Continuing rated game</source>
+        <translation>Продолжение рейтинговой игры</translation>
+    </message>
+    <message>
+        <source>Kept only position</source>
+        <translation>Сохранять только позицию</translation>
+    </message>
+    <message>
+        <source>Kept only subtree</source>
+        <translation>Сохранять только поддерево</translation>
+    </message>
+    <message>
+        <source>Variation is now %1</source>
+        <translation>Текущая вариация %1</translation>
+    </message>
+    <message>
+        <source>Children truncated</source>
+        <translation>Защищено от детей</translation>
+    </message>
+    <message>
+        <source>Setup</source>
+        <extracomment>Small-screen label for setup mode (short for &quot;Setup Mode&quot;).</extracomment>
+        <translation>Настроить</translation>
+    </message>
+    <message>
+        <source>Setup Mode</source>
+        <translation>Режим настройки</translation>
+    </message>
+    <message>
+        <source>Rated</source>
+        <extracomment>Label for ongoing rated game</extracomment>
+        <translation>Рэйтинг</translation>
+    </message>
+    <message>
+        <source>Rated %1</source>
+        <extracomment>Small-screen label for finished rated game (short for &quot;Rated Game&quot;). The argument is the game number.</extracomment>
+        <translation>Рэйтинг %1</translation>
+    </message>
+    <message>
+        <source>Rated Game %1</source>
+        <extracomment>Label for rated game. The argument is the game number.</extracomment>
+        <translation>Рэйтинговая игра %1</translation>
+    </message>
+    <message>
+        <source>Main Variation</source>
+        <translation>Основная вариация</translation>
+    </message>
+    <message>
+        <source>Beginning of Branch</source>
+        <translation>Начало Ветки</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation>Комментарий</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation>Настройки</translation>
+    </message>
+    <message>
+        <source>Find Move</source>
+        <translation>Подсказать ход</translation>
+    </message>
+    <message>
+        <source>Next Comment</source>
+        <translation>Следующий комментарий</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation>На весь экран</translation>
+    </message>
+    <message>
+        <source>Game Info</source>
+        <translation>Информация Об Игре</translation>
+    </message>
+    <message>
+        <source>Move Number…</source>
+        <translation>Номер хода...</translation>
+    </message>
+    <message>
+        <source>Pentobi Help</source>
+        <translation>Помощь</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Новая</translation>
+    </message>
+    <message>
+        <source>Rated Game</source>
+        <translation>Рэйтинг игра</translation>
+    </message>
+    <message>
+        <source>Open…</source>
+        <translation>Открыть…</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation>Игра</translation>
+    </message>
+    <message>
+        <source>Play Move</source>
+        <extracomment>Play a single move</extracomment>
+        <translation>Сыграть ход</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>Выход</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Сохранить</translation>
+    </message>
+    <message>
+        <source>Save As…</source>
+        <translation>Сохранить как…</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>Стоп</translation>
+    </message>
+    <message>
+        <source>Undo Move</source>
+        <translation>Отменить Ход</translation>
+    </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation>Синий/Красный</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Фиолетовый</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Зеленый</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>Синий</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation>Желтый/Зеленый</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Оранжевый</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Желтый</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Красный</translation>
+    </message>
+    <message>
+        <source>Pentobi failed to generate a move.</source>
+        <translation>Pentobi не сумел сгенерировать ход.</translation>
+    </message>
+    <message>
+        <source>Press back again to exit</source>
+        <translation>Нажмите назад еще раз, чтобы выйти</translation>
+    </message>
+    <message>
+        <source>Untitled.blksgf</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>MenuComputer</name>
     <message>
         <source>Computer</source>

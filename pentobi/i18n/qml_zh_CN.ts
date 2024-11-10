@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_CN">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -12,7 +14,7 @@
     </message>
     <message>
         <source>Computer opponent for Blokus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -175,17 +177,17 @@
     <message>
         <source>Previous</source>
         <extracomment>Go to previous page of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Contents</source>
         <extracomment>Go to table of contents of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Next</source>
         <extracomment>Go to next page of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -196,7 +198,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -463,7 +465,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Pentobi 帮助</translation>
     </message>
 </context>
 <context>
@@ -499,141 +501,131 @@
 <context>
     <name>Main</name>
     <message>
-        <source>Pentobi</source>
-        <extracomment>Window title if no file is loaded.</extracomment>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Game analysis is only possible in main variation.</source>
-        <translation>棋局分析只能在主变化中进行。</translation>
+        <translation type="vanished">棋局分析只能在主变化中进行。</translation>
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
-        <translation>自动保存的棋局被另一个程序实例更改。要覆盖吗？</translation>
+        <translation type="vanished">自动保存的棋局被另一个程序实例更改。要覆盖吗？</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
-        <translation>您的等级从%1升到%2。</translation>
+        <translation type="vanished">您的等级从%1升到%2。</translation>
     </message>
     <message>
         <source>Your rating has decreased from %1 to %2.</source>
-        <translation>您的等级从%1降到%2。</translation>
+        <translation type="vanished">您的等级从%1降到%2。</translation>
     </message>
     <message>
         <source>Your rating stays at %1.</source>
-        <translation>您的等级仍然是%1。</translation>
+        <translation type="vanished">您的等级仍然是%1。</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
-        <translation>删除此游戏规则下的所有等级数据？</translation>
+        <translation type="vanished">删除此游戏规则下的所有等级数据？</translation>
     </message>
     <message>
         <source>Delete all variations?</source>
-        <translation>删除所有变例？</translation>
+        <translation type="vanished">删除所有变例？</translation>
     </message>
     <message>
         <source>Save failed.</source>
-        <translation>保存失败。</translation>
+        <translation type="vanished">保存失败。</translation>
     </message>
     <message>
         <source>End of tree was reached. Continue search from start of the tree?</source>
-        <translation>已经到达棋局树的最末端。从树的开头继续搜索？</translation>
+        <translation type="vanished">已经到达棋局树的最末端。从树的开头继续搜索？</translation>
     </message>
     <message>
         <source>No comment found</source>
-        <translation>无注解</translation>
+        <translation type="vanished">无注解</translation>
     </message>
     <message>
         <source>%1 (modified)</source>
         <extracomment>Label for modified loaded game. The argument is the file name.</extracomment>
-        <translation>%1 （已修改）</translation>
+        <translation type="vanished">%1 （已修改）</translation>
     </message>
     <message>
         <source>File has been modified by another application. Reload?</source>
-        <translation>文件被其他程序修改。重新加载吗？</translation>
+        <translation type="vanished">文件被其他程序修改。重新加载吗？</translation>
     </message>
     <message>
         <source>Keep only position?</source>
-        <translation>只保留棋子位置吗？</translation>
+        <translation type="vanished">只保留棋子位置吗？</translation>
     </message>
     <message>
         <source>Keep only subtree?</source>
-        <translation>只保留子树吗？</translation>
+        <translation type="vanished">只保留子树吗？</translation>
     </message>
     <message>
         <source>Open failed.</source>
-        <translation>打开失败。</translation>
+        <translation type="vanished">打开失败。</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
-        <translation>是否开始等级赛，你执紫色，对阵级别%1的电脑？</translation>
+        <translation type="vanished">是否开始等级赛，你执紫色，对阵级别%1的电脑？</translation>
     </message>
     <message>
         <source>Start rated game with Green against Pentobi level %1?</source>
-        <translation>是否开始等级赛，你执绿色，对阵级别%1的电脑？</translation>
+        <translation type="vanished">是否开始等级赛，你执绿色，对阵级别%1的电脑？</translation>
     </message>
     <message>
         <source>Start rated game with Blue/Red against Pentobi level %1?</source>
-        <translation>是否开始等级赛，你执蓝/红，对阵级别%1的电脑？</translation>
+        <translation type="vanished">是否开始等级赛，你执蓝/红，对阵级别%1的电脑？</translation>
     </message>
     <message>
         <source>Start rated game with Blue against Pentobi level %1?</source>
-        <translation>是否开始等级赛，你执蓝色，对阵级别%1的电脑？</translation>
+        <translation type="vanished">是否开始等级赛，你执蓝色，对阵级别%1的电脑？</translation>
     </message>
     <message>
         <source>Start rated game with Orange against Pentobi level %1?</source>
-        <translation>是否开始等级赛，你执橙色，对阵级别%1的电脑？</translation>
+        <translation type="vanished">是否开始等级赛，你执橙色，对阵级别%1的电脑？</translation>
     </message>
     <message>
         <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
-        <translation>是否开始等级赛，你执黄/绿，对阵级别%1的电脑？</translation>
+        <translation type="vanished">是否开始等级赛，你执黄/绿，对阵级别%1的电脑？</translation>
     </message>
     <message>
         <source>Start rated game with Yellow against Pentobi level %1?</source>
-        <translation>是否开始等级赛，你执黄色，对阵级别%1的电脑？</translation>
+        <translation type="vanished">是否开始等级赛，你执黄色，对阵级别%1的电脑？</translation>
     </message>
     <message>
         <source>Start rated game with Red against Pentobi level %1?</source>
-        <translation>是否开始等级赛，你执红色，对阵级别%1的电脑？</translation>
+        <translation type="vanished">是否开始等级赛，你执红色，对阵级别%1的电脑？</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant.</source>
-        <translation>在此规则下，您还没有玩过等级赛。</translation>
+        <translation type="vanished">在此规则下，您还没有玩过等级赛。</translation>
     </message>
     <message>
         <source>Truncate this subtree?</source>
-        <translation>截断此子树？</translation>
+        <translation type="vanished">截断此子树？</translation>
     </message>
     <message>
         <source>Truncate children?</source>
-        <translation>截断此结点下面的子结点？</translation>
+        <translation type="vanished">截断此结点下面的子结点？</translation>
     </message>
     <message>
         <source>Discard game?</source>
-        <translation>丢弃本局吗？</translation>
+        <translation type="vanished">丢弃本局吗？</translation>
     </message>
     <message>
         <source>Pentobi %1 (level %2)</source>
         <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
-        <translation>Pentobi 版本%1（级别%2）</translation>
+        <translation type="vanished">Pentobi 版本%1（级别%2）</translation>
     </message>
     <message>
         <source>Human</source>
         <extracomment>Player name for game info in rated game.</extracomment>
-        <translation>人脑</translation>
+        <translation type="vanished">人脑</translation>
     </message>
     <message>
         <source>Rated game</source>
-        <translation>等级赛</translation>
+        <translation type="vanished">等级赛</translation>
     </message>
     <message>
         <source>File has been modified by another application. Overwrite?</source>
-        <translation>文件已被其他程序修改。覆盖吗？</translation>
-    </message>
-    <message>
-        <source>%1 - Pentobi</source>
-        <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="vanished">文件已被其他程序修改。覆盖吗？</translation>
     </message>
     <message>
         <source>Not enough memory</source>
@@ -641,79 +633,79 @@
     </message>
     <message>
         <source>Game analysis aborted</source>
-        <translation>棋局分析被取消</translation>
+        <translation type="vanished">棋局分析被取消</translation>
     </message>
     <message>
         <source>Computer move aborted</source>
-        <translation>电脑行棋被取消</translation>
+        <translation type="vanished">电脑行棋被取消</translation>
     </message>
     <message>
         <source>Rating information deleted</source>
-        <translation>等级数据已删除</translation>
+        <translation type="vanished">等级数据已删除</translation>
     </message>
     <message>
         <source>Variations deleted</source>
-        <translation>变例已删除</translation>
+        <translation type="vanished">变例已删除</translation>
     </message>
     <message>
         <source>File saved</source>
-        <translation>文件已保存</translation>
+        <translation type="vanished">文件已保存</translation>
     </message>
     <message>
         <source>Saving image failed or unsupported image format</source>
-        <translation>图像保存失败，或不支持的图像格式</translation>
+        <translation type="vanished">图像保存失败，或不支持的图像格式</translation>
     </message>
     <message>
         <source>Image saved</source>
-        <translation>图像已保存</translation>
+        <translation type="vanished">图像已保存</translation>
     </message>
     <message>
         <source>Creating image failed</source>
-        <translation>图像创建失败</translation>
+        <translation type="vanished">图像创建失败</translation>
     </message>
     <message>
         <source>Continuing rated game</source>
-        <translation>继续等级赛</translation>
+        <translation type="vanished">继续等级赛</translation>
     </message>
     <message>
         <source>Kept only position</source>
-        <translation>只保留棋子位置</translation>
+        <translation type="vanished">只保留棋子位置</translation>
     </message>
     <message>
         <source>Kept only subtree</source>
-        <translation>只保留子树</translation>
+        <translation type="vanished">只保留子树</translation>
     </message>
     <message>
         <source>Variation is now %1</source>
-        <translation>当前变例为 %1</translation>
+        <translation type="vanished">当前变例为 %1</translation>
     </message>
     <message>
         <source>Children truncated</source>
-        <translation>子结点已截断</translation>
+        <translation type="vanished">子结点已截断</translation>
     </message>
     <message>
         <source>Setup</source>
         <extracomment>Small-screen label for setup mode (short for &quot;Setup Mode&quot;).</extracomment>
-        <translation>设置模式</translation>
+        <translation type="vanished">设置模式</translation>
     </message>
     <message>
         <source>Setup Mode</source>
-        <translation>设置模式</translation>
+        <translation type="vanished">设置模式</translation>
     </message>
     <message>
         <source>Rated</source>
         <extracomment>Label for ongoing rated game</extracomment>
-        <translation>等级赛</translation>
+        <translation type="vanished">等级赛</translation>
     </message>
     <message>
         <source>Rated %1</source>
         <extracomment>Small-screen label for finished rated game (short for &quot;Rated Game&quot;). The argument is the game number.</extracomment>
-        <translation>等级赛 第%1局</translation>
+        <translation type="vanished">等级赛 第%1局</translation>
     </message>
     <message>
         <source>Rated Game %1</source>
         <extracomment>Label for rated game. The argument is the game number.</extracomment>
-        <translation>等级赛 第%1局</translation>
+        <translation type="vanished">等级赛 第%1局</translation>
     </message>
     <message>
         <source>Main Variation</source>
@@ -799,47 +791,39 @@
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation>蓝/红</translation>
+        <translation type="vanished">蓝/红</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>紫色</translation>
+        <translation type="vanished">紫色</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>绿色</translation>
+        <translation type="vanished">绿色</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>蓝色</translation>
+        <translation type="vanished">蓝色</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>黄/绿</translation>
+        <translation type="vanished">黄/绿</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>橙色</translation>
+        <translation type="vanished">橙色</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>黄色</translation>
+        <translation type="vanished">黄色</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>红色</translation>
-    </message>
-    <message>
-        <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"/>
+        <translation type="vanished">红色</translation>
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>Untitled.blksgf</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -918,7 +902,7 @@
     </message>
     <message>
         <source>Export Image…</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1036,7 +1020,7 @@
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1283,68 +1267,407 @@
 <context>
     <name>main</name>
     <message>
+        <source>Pentobi</source>
+        <extracomment>Window title if no file is loaded.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Game analysis is only possible in main variation.</source>
+        <translation>棋局分析只能在主变化中进行。</translation>
+    </message>
+    <message>
+        <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
+        <translation>自动保存的棋局被另一个程序实例更改。要覆盖吗？</translation>
+    </message>
+    <message>
+        <source>Your rating has increased from %1 to %2.</source>
+        <translation>您的等级从%1升到%2。</translation>
+    </message>
+    <message>
+        <source>Your rating has decreased from %1 to %2.</source>
+        <translation>您的等级从%1降到%2。</translation>
+    </message>
+    <message>
+        <source>Your rating stays at %1.</source>
+        <translation>您的等级仍然是%1。</translation>
+    </message>
+    <message>
+        <source>Delete all rating information for the current game variant?</source>
+        <translation>删除此游戏规则下的所有等级数据？</translation>
+    </message>
+    <message>
+        <source>Delete all variations?</source>
+        <translation>删除所有变例？</translation>
+    </message>
+    <message>
+        <source>Save failed.</source>
+        <translation>保存失败。</translation>
+    </message>
+    <message>
+        <source>End of tree was reached. Continue search from start of the tree?</source>
+        <translation>已经到达棋局树的最末端。从树的开头继续搜索？</translation>
+    </message>
+    <message>
+        <source>No comment found</source>
+        <translation>无注解</translation>
+    </message>
+    <message>
+        <source>%1 (modified)</source>
+        <extracomment>Label for modified loaded game. The argument is the file name.</extracomment>
+        <translation>%1 （已修改）</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Reload?</source>
+        <translation>文件被其他程序修改。重新加载吗？</translation>
+    </message>
+    <message>
+        <source>Keep only position?</source>
+        <translation>只保留棋子位置吗？</translation>
+    </message>
+    <message>
+        <source>Keep only subtree?</source>
+        <translation>只保留子树吗？</translation>
+    </message>
+    <message>
+        <source>Open failed.</source>
+        <translation>打开失败。</translation>
+    </message>
+    <message>
+        <source>Start rated game with Purple against Pentobi level %1?</source>
+        <translation>是否开始等级赛，你执紫色，对阵级别%1的电脑？</translation>
+    </message>
+    <message>
+        <source>Start rated game with Green against Pentobi level %1?</source>
+        <translation>是否开始等级赛，你执绿色，对阵级别%1的电脑？</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue/Red against Pentobi level %1?</source>
+        <translation>是否开始等级赛，你执蓝/红，对阵级别%1的电脑？</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue against Pentobi level %1?</source>
+        <translation>是否开始等级赛，你执蓝色，对阵级别%1的电脑？</translation>
+    </message>
+    <message>
+        <source>Start rated game with Orange against Pentobi level %1?</source>
+        <translation>是否开始等级赛，你执橙色，对阵级别%1的电脑？</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
+        <translation>是否开始等级赛，你执黄/绿，对阵级别%1的电脑？</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow against Pentobi level %1?</source>
+        <translation>是否开始等级赛，你执黄色，对阵级别%1的电脑？</translation>
+    </message>
+    <message>
+        <source>Start rated game with Red against Pentobi level %1?</source>
+        <translation>是否开始等级赛，你执红色，对阵级别%1的电脑？</translation>
+    </message>
+    <message>
+        <source>You have not yet played rated games in this game variant.</source>
+        <translation>在此规则下，您还没有玩过等级赛。</translation>
+    </message>
+    <message>
+        <source>Truncate this subtree?</source>
+        <translation>截断此子树？</translation>
+    </message>
+    <message>
+        <source>Truncate children?</source>
+        <translation>截断此结点下面的子结点？</translation>
+    </message>
+    <message>
+        <source>Discard game?</source>
+        <translation>丢弃本局吗？</translation>
+    </message>
+    <message>
+        <source>Pentobi %1 (level %2)</source>
+        <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
+        <translation>Pentobi 版本%1（级别%2）</translation>
+    </message>
+    <message>
+        <source>Human</source>
+        <extracomment>Player name for game info in rated game.</extracomment>
+        <translation>人脑</translation>
+    </message>
+    <message>
+        <source>Rated game</source>
+        <translation>等级赛</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Overwrite?</source>
+        <translation>文件已被其他程序修改。覆盖吗？</translation>
+    </message>
+    <message>
+        <source>%1 - Pentobi</source>
+        <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not enough memory</source>
+        <translation type="vanished">内存不足</translation>
+    </message>
+    <message>
+        <source>Game analysis aborted</source>
+        <translation>棋局分析被取消</translation>
+    </message>
+    <message>
+        <source>Computer move aborted</source>
+        <translation>电脑行棋被取消</translation>
+    </message>
+    <message>
+        <source>Rating information deleted</source>
+        <translation>等级数据已删除</translation>
+    </message>
+    <message>
+        <source>Variations deleted</source>
+        <translation>变例已删除</translation>
+    </message>
+    <message>
+        <source>File saved</source>
+        <translation>文件已保存</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format</source>
+        <translation>图像保存失败，或不支持的图像格式</translation>
+    </message>
+    <message>
+        <source>Image saved</source>
+        <translation>图像已保存</translation>
+    </message>
+    <message>
+        <source>Creating image failed</source>
+        <translation>图像创建失败</translation>
+    </message>
+    <message>
+        <source>Continuing rated game</source>
+        <translation>继续等级赛</translation>
+    </message>
+    <message>
+        <source>Kept only position</source>
+        <translation>只保留棋子位置</translation>
+    </message>
+    <message>
+        <source>Kept only subtree</source>
+        <translation>只保留子树</translation>
+    </message>
+    <message>
+        <source>Variation is now %1</source>
+        <translation>当前变例为 %1</translation>
+    </message>
+    <message>
+        <source>Children truncated</source>
+        <translation>子结点已截断</translation>
+    </message>
+    <message>
+        <source>Setup</source>
+        <extracomment>Small-screen label for setup mode (short for &quot;Setup Mode&quot;).</extracomment>
+        <translation>设置模式</translation>
+    </message>
+    <message>
+        <source>Setup Mode</source>
+        <translation>设置模式</translation>
+    </message>
+    <message>
+        <source>Rated</source>
+        <extracomment>Label for ongoing rated game</extracomment>
+        <translation>等级赛</translation>
+    </message>
+    <message>
+        <source>Rated %1</source>
+        <extracomment>Small-screen label for finished rated game (short for &quot;Rated Game&quot;). The argument is the game number.</extracomment>
+        <translation>等级赛 第%1局</translation>
+    </message>
+    <message>
+        <source>Rated Game %1</source>
+        <extracomment>Label for rated game. The argument is the game number.</extracomment>
+        <translation>等级赛 第%1局</translation>
+    </message>
+    <message>
+        <source>Main Variation</source>
+        <translation type="vanished">主变例</translation>
+    </message>
+    <message>
+        <source>Beginning of Branch</source>
+        <translation type="vanished">分支的开始</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="vanished">注解</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation type="vanished">设置</translation>
+    </message>
+    <message>
+        <source>Find Move</source>
+        <translation type="vanished">寻找棋步</translation>
+    </message>
+    <message>
+        <source>Next Comment</source>
+        <translation type="vanished">下一个注解</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="vanished">全屏幕</translation>
+    </message>
+    <message>
+        <source>Game Info</source>
+        <translation type="vanished">棋局信息</translation>
+    </message>
+    <message>
+        <source>Move Number…</source>
+        <translation type="vanished">指定棋步…</translation>
+    </message>
+    <message>
+        <source>Pentobi Help</source>
+        <translation type="vanished">Pentobi 帮助</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="vanished">新棋局</translation>
+    </message>
+    <message>
+        <source>Rated Game</source>
+        <translation type="vanished">等级赛</translation>
+    </message>
+    <message>
+        <source>Open…</source>
+        <translation type="vanished">打开…</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation type="vanished">行棋</translation>
+    </message>
+    <message>
+        <source>Play Move</source>
+        <extracomment>Play a single move</extracomment>
+        <translation type="vanished">走一步</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="vanished">退出</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="vanished">保存</translation>
+    </message>
+    <message>
+        <source>Save As…</source>
+        <translation type="vanished">另存为…</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="vanished">停止</translation>
+    </message>
+    <message>
+        <source>Undo Move</source>
+        <translation type="vanished">撤销一步</translation>
+    </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation>蓝/红</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>紫色</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>绿色</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>蓝色</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation>黄/绿</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>橙色</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>黄色</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>红色</translation>
+    </message>
+    <message>
+        <source>Pentobi failed to generate a move.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Untitled.blksgf</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

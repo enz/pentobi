@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fr">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -175,17 +177,17 @@
     <message>
         <source>Previous</source>
         <extracomment>Go to previous page of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Contents</source>
         <extracomment>Go to table of contents of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Next</source>
         <extracomment>Go to next page of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -501,139 +503,139 @@
     <message>
         <source>Pentobi</source>
         <extracomment>Window title if no file is loaded.</extracomment>
-        <translation>Pentobi</translation>
+        <translation type="vanished">Pentobi</translation>
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
-        <translation>L’analyse de la partie n’est possible que dans la variation principale.</translation>
+        <translation type="vanished">L’analyse de la partie n’est possible que dans la variation principale.</translation>
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
-        <translation>Jeu sauvé automatiquement a été changé par une autre instance de Pentobi. Remplacer ?</translation>
+        <translation type="vanished">Jeu sauvé automatiquement a été changé par une autre instance de Pentobi. Remplacer ?</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
-        <translation>Votre classement a augmenté de %1 à %2.</translation>
+        <translation type="vanished">Votre classement a augmenté de %1 à %2.</translation>
     </message>
     <message>
         <source>Your rating has decreased from %1 to %2.</source>
-        <translation>Votre classement a diminué de %1 à %2.</translation>
+        <translation type="vanished">Votre classement a diminué de %1 à %2.</translation>
     </message>
     <message>
         <source>Your rating stays at %1.</source>
-        <translation>Votre classement reste à %1.</translation>
+        <translation type="vanished">Votre classement reste à %1.</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
-        <translation>Supprimer toutes les informations de classement de l’actuelle variante du jeu ?</translation>
+        <translation type="vanished">Supprimer toutes les informations de classement de l’actuelle variante du jeu ?</translation>
     </message>
     <message>
         <source>Delete all variations?</source>
-        <translation>Détruire toutes les variations ?</translation>
+        <translation type="vanished">Détruire toutes les variations ?</translation>
     </message>
     <message>
         <source>Save failed.</source>
-        <translation>Échec de l’enregistrement.</translation>
+        <translation type="vanished">Échec de l’enregistrement.</translation>
     </message>
     <message>
         <source>End of tree was reached. Continue search from start of the tree?</source>
-        <translation>La fin de l’arbre est atteinte. Continuer la recherche depuis la racine ?</translation>
+        <translation type="vanished">La fin de l’arbre est atteinte. Continuer la recherche depuis la racine ?</translation>
     </message>
     <message>
         <source>No comment found</source>
-        <translation>Aucun commentaire trouvé</translation>
+        <translation type="vanished">Aucun commentaire trouvé</translation>
     </message>
     <message>
         <source>%1 (modified)</source>
         <extracomment>Label for modified loaded game. The argument is the file name.</extracomment>
-        <translation>%1 (modifié)</translation>
+        <translation type="vanished">%1 (modifié)</translation>
     </message>
     <message>
         <source>File has been modified by another application. Reload?</source>
-        <translation>Le fichier a été modifié par une autre application. Recharger ?</translation>
+        <translation type="vanished">Le fichier a été modifié par une autre application. Recharger ?</translation>
     </message>
     <message>
         <source>Keep only position?</source>
-        <translation>Garder seulement la position ?</translation>
+        <translation type="vanished">Garder seulement la position ?</translation>
     </message>
     <message>
         <source>Keep only subtree?</source>
-        <translation>Garder seulement le sous-arbre ?</translation>
+        <translation type="vanished">Garder seulement le sous-arbre ?</translation>
     </message>
     <message>
         <source>Open failed.</source>
-        <translation>Échec de l’ouverture.</translation>
+        <translation type="vanished">Échec de l’ouverture.</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec violet contre Pentobi niveau %1 ?</translation>
+        <translation type="vanished">Commencer une partie classée avec violet contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Green against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec vert contre Pentobi niveau %1 ?</translation>
+        <translation type="vanished">Commencer une partie classée avec vert contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Blue/Red against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec bleu/rouge contre Pentobi niveau %1 ?</translation>
+        <translation type="vanished">Commencer une partie classée avec bleu/rouge contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Blue against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec bleu contre Pentobi niveau %1 ?</translation>
+        <translation type="vanished">Commencer une partie classée avec bleu contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Orange against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec orange contre Pentobi niveau %1 ?</translation>
+        <translation type="vanished">Commencer une partie classée avec orange contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec jaune/vert contre Pentobi niveau %1 ?</translation>
+        <translation type="vanished">Commencer une partie classée avec jaune/vert contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec jaune contre Pentobi niveau %1 ?</translation>
+        <translation type="vanished">Commencer une partie classée avec jaune contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>Start rated game with Red against Pentobi level %1?</source>
-        <translation>Commencer une partie classée avec rouge contre Pentobi niveau %1 ?</translation>
+        <translation type="vanished">Commencer une partie classée avec rouge contre Pentobi niveau %1 ?</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant.</source>
-        <translation>Vous n’avez pas encore joué des parties classées dans cette variante du jeu.</translation>
+        <translation type="vanished">Vous n’avez pas encore joué des parties classées dans cette variante du jeu.</translation>
     </message>
     <message>
         <source>Truncate this subtree?</source>
-        <translation>Élaguer la branche actuelle ?</translation>
+        <translation type="vanished">Élaguer la branche actuelle ?</translation>
     </message>
     <message>
         <source>Truncate children?</source>
-        <translation>Élaguer les branches filles ?</translation>
+        <translation type="vanished">Élaguer les branches filles ?</translation>
     </message>
     <message>
         <source>Discard game?</source>
-        <translation>Abandonner la partie ?</translation>
+        <translation type="vanished">Abandonner la partie ?</translation>
     </message>
     <message>
         <source>Pentobi %1 (level %2)</source>
         <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
-        <translation>Pentobi %1 (niveau %2)</translation>
+        <translation type="vanished">Pentobi %1 (niveau %2)</translation>
     </message>
     <message>
         <source>Human</source>
         <extracomment>Player name for game info in rated game.</extracomment>
-        <translation>Personne</translation>
+        <translation type="vanished">Personne</translation>
     </message>
     <message>
         <source>Rated game</source>
-        <translation>Partie classée</translation>
+        <translation type="vanished">Partie classée</translation>
     </message>
     <message>
         <source>File has been modified by another application. Overwrite?</source>
-        <translation>Le fichier a été modifié par une autre application. Remplacer ?</translation>
+        <translation type="vanished">Le fichier a été modifié par une autre application. Remplacer ?</translation>
     </message>
     <message>
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
-        <translation>%1 - Pentobi</translation>
+        <translation type="vanished">%1 - Pentobi</translation>
     </message>
     <message>
         <source>Not enough memory</source>
@@ -641,79 +643,79 @@
     </message>
     <message>
         <source>Game analysis aborted</source>
-        <translation>Analyse de la partie abandonnée</translation>
+        <translation type="vanished">Analyse de la partie abandonnée</translation>
     </message>
     <message>
         <source>Computer move aborted</source>
-        <translation>Coup de l&apos;ordinateur abandonné</translation>
+        <translation type="vanished">Coup de l&apos;ordinateur abandonné</translation>
     </message>
     <message>
         <source>Rating information deleted</source>
-        <translation>Informations de classement supprimées</translation>
+        <translation type="vanished">Informations de classement supprimées</translation>
     </message>
     <message>
         <source>Variations deleted</source>
-        <translation>Variations supprimées</translation>
+        <translation type="vanished">Variations supprimées</translation>
     </message>
     <message>
         <source>File saved</source>
-        <translation>Fichier enregistré</translation>
+        <translation type="vanished">Fichier enregistré</translation>
     </message>
     <message>
         <source>Saving image failed or unsupported image format</source>
-        <translation>Impossible d’enregistrer l’image ou format de l’image non pris en charge</translation>
+        <translation type="vanished">Impossible d’enregistrer l’image ou format de l’image non pris en charge</translation>
     </message>
     <message>
         <source>Image saved</source>
-        <translation>Image enregistrée</translation>
+        <translation type="vanished">Image enregistrée</translation>
     </message>
     <message>
         <source>Creating image failed</source>
-        <translation>La création d’image a échoué</translation>
+        <translation type="vanished">La création d’image a échoué</translation>
     </message>
     <message>
         <source>Continuing rated game</source>
-        <translation>Partie classée est continuée</translation>
+        <translation type="vanished">Partie classée est continuée</translation>
     </message>
     <message>
         <source>Kept only position</source>
-        <translation>Gardé seulement la position</translation>
+        <translation type="vanished">Gardé seulement la position</translation>
     </message>
     <message>
         <source>Kept only subtree</source>
-        <translation>Gardé seulement le sous-arbre</translation>
+        <translation type="vanished">Gardé seulement le sous-arbre</translation>
     </message>
     <message>
         <source>Variation is now %1</source>
-        <translation>La variation est maintenant %1</translation>
+        <translation type="vanished">La variation est maintenant %1</translation>
     </message>
     <message>
         <source>Children truncated</source>
-        <translation>Nœuds fils coupé</translation>
+        <translation type="vanished">Nœuds fils coupé</translation>
     </message>
     <message>
         <source>Setup</source>
         <extracomment>Small-screen label for setup mode (short for &quot;Setup Mode&quot;).</extracomment>
-        <translation>Position</translation>
+        <translation type="vanished">Position</translation>
     </message>
     <message>
         <source>Setup Mode</source>
-        <translation>Position</translation>
+        <translation type="vanished">Position</translation>
     </message>
     <message>
         <source>Rated</source>
         <extracomment>Label for ongoing rated game</extracomment>
-        <translation>Classée</translation>
+        <translation type="vanished">Classée</translation>
     </message>
     <message>
         <source>Rated %1</source>
         <extracomment>Small-screen label for finished rated game (short for &quot;Rated Game&quot;). The argument is the game number.</extracomment>
-        <translation>Classée %1</translation>
+        <translation type="vanished">Classée %1</translation>
     </message>
     <message>
         <source>Rated Game %1</source>
         <extracomment>Label for rated game. The argument is the game number.</extracomment>
-        <translation>Partie classée %1</translation>
+        <translation type="vanished">Partie classée %1</translation>
     </message>
     <message>
         <source>Main Variation</source>
@@ -799,39 +801,39 @@
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation>Bleu/rouge</translation>
+        <translation type="vanished">Bleu/rouge</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>Violet</translation>
+        <translation type="vanished">Violet</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>Vert</translation>
+        <translation type="vanished">Vert</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>Bleu</translation>
+        <translation type="vanished">Bleu</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>Jaune/vert</translation>
+        <translation type="vanished">Jaune/vert</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>Orange</translation>
+        <translation type="vanished">Orange</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>Jaune</translation>
+        <translation type="vanished">Jaune</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>Rouge</translation>
+        <translation type="vanished">Rouge</translation>
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation>Pentobi n&apos;a pas réussi à générer un coup.</translation>
+        <translation type="vanished">Pentobi n&apos;a pas réussi à générer un coup.</translation>
     </message>
     <message>
         <source>Press back again to exit</source>
@@ -839,7 +841,7 @@
     </message>
     <message>
         <source>Untitled.blksgf</source>
-        <translation>Sans titre.blksgf</translation>
+        <translation type="vanished">Sans titre.blksgf</translation>
     </message>
 </context>
 <context>
@@ -1283,68 +1285,411 @@
 <context>
     <name>main</name>
     <message>
+        <source>Pentobi</source>
+        <extracomment>Window title if no file is loaded.</extracomment>
+        <translation>Pentobi</translation>
+    </message>
+    <message>
+        <source>Game analysis is only possible in main variation.</source>
+        <translation>L’analyse de la partie n’est possible que dans la variation principale.</translation>
+    </message>
+    <message>
+        <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
+        <translation>Jeu sauvé automatiquement a été changé par une autre instance de Pentobi. Remplacer ?</translation>
+    </message>
+    <message>
+        <source>Your rating has increased from %1 to %2.</source>
+        <translation>Votre classement a augmenté de %1 à %2.</translation>
+    </message>
+    <message>
+        <source>Your rating has decreased from %1 to %2.</source>
+        <translation>Votre classement a diminué de %1 à %2.</translation>
+    </message>
+    <message>
+        <source>Your rating stays at %1.</source>
+        <translation>Votre classement reste à %1.</translation>
+    </message>
+    <message>
+        <source>Delete all rating information for the current game variant?</source>
+        <translation>Supprimer toutes les informations de classement de l’actuelle variante du jeu ?</translation>
+    </message>
+    <message>
+        <source>Delete all variations?</source>
+        <translation>Détruire toutes les variations ?</translation>
+    </message>
+    <message>
+        <source>Save failed.</source>
+        <translation>Échec de l’enregistrement.</translation>
+    </message>
+    <message>
+        <source>End of tree was reached. Continue search from start of the tree?</source>
+        <translation>La fin de l’arbre est atteinte. Continuer la recherche depuis la racine ?</translation>
+    </message>
+    <message>
+        <source>No comment found</source>
+        <translation>Aucun commentaire trouvé</translation>
+    </message>
+    <message>
+        <source>%1 (modified)</source>
+        <extracomment>Label for modified loaded game. The argument is the file name.</extracomment>
+        <translation>%1 (modifié)</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Reload?</source>
+        <translation>Le fichier a été modifié par une autre application. Recharger ?</translation>
+    </message>
+    <message>
+        <source>Keep only position?</source>
+        <translation>Garder seulement la position ?</translation>
+    </message>
+    <message>
+        <source>Keep only subtree?</source>
+        <translation>Garder seulement le sous-arbre ?</translation>
+    </message>
+    <message>
+        <source>Open failed.</source>
+        <translation>Échec de l’ouverture.</translation>
+    </message>
+    <message>
+        <source>Start rated game with Purple against Pentobi level %1?</source>
+        <translation>Commencer une partie classée avec violet contre Pentobi niveau %1 ?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Green against Pentobi level %1?</source>
+        <translation>Commencer une partie classée avec vert contre Pentobi niveau %1 ?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue/Red against Pentobi level %1?</source>
+        <translation>Commencer une partie classée avec bleu/rouge contre Pentobi niveau %1 ?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue against Pentobi level %1?</source>
+        <translation>Commencer une partie classée avec bleu contre Pentobi niveau %1 ?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Orange against Pentobi level %1?</source>
+        <translation>Commencer une partie classée avec orange contre Pentobi niveau %1 ?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
+        <translation>Commencer une partie classée avec jaune/vert contre Pentobi niveau %1 ?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow against Pentobi level %1?</source>
+        <translation>Commencer une partie classée avec jaune contre Pentobi niveau %1 ?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Red against Pentobi level %1?</source>
+        <translation>Commencer une partie classée avec rouge contre Pentobi niveau %1 ?</translation>
+    </message>
+    <message>
+        <source>You have not yet played rated games in this game variant.</source>
+        <translation>Vous n’avez pas encore joué des parties classées dans cette variante du jeu.</translation>
+    </message>
+    <message>
+        <source>Truncate this subtree?</source>
+        <translation>Élaguer la branche actuelle ?</translation>
+    </message>
+    <message>
+        <source>Truncate children?</source>
+        <translation>Élaguer les branches filles ?</translation>
+    </message>
+    <message>
+        <source>Discard game?</source>
+        <translation>Abandonner la partie ?</translation>
+    </message>
+    <message>
+        <source>Pentobi %1 (level %2)</source>
+        <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
+        <translation>Pentobi %1 (niveau %2)</translation>
+    </message>
+    <message>
+        <source>Human</source>
+        <extracomment>Player name for game info in rated game.</extracomment>
+        <translation>Personne</translation>
+    </message>
+    <message>
+        <source>Rated game</source>
+        <translation>Partie classée</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Overwrite?</source>
+        <translation>Le fichier a été modifié par une autre application. Remplacer ?</translation>
+    </message>
+    <message>
+        <source>%1 - Pentobi</source>
+        <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
+        <translation>%1 - Pentobi</translation>
+    </message>
+    <message>
+        <source>Not enough memory</source>
+        <translation type="vanished">Mémoire insuffisante</translation>
+    </message>
+    <message>
+        <source>Game analysis aborted</source>
+        <translation>Analyse de la partie abandonnée</translation>
+    </message>
+    <message>
+        <source>Computer move aborted</source>
+        <translation>Coup de l&apos;ordinateur abandonné</translation>
+    </message>
+    <message>
+        <source>Rating information deleted</source>
+        <translation>Informations de classement supprimées</translation>
+    </message>
+    <message>
+        <source>Variations deleted</source>
+        <translation>Variations supprimées</translation>
+    </message>
+    <message>
+        <source>File saved</source>
+        <translation>Fichier enregistré</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format</source>
+        <translation>Impossible d’enregistrer l’image ou format de l’image non pris en charge</translation>
+    </message>
+    <message>
+        <source>Image saved</source>
+        <translation>Image enregistrée</translation>
+    </message>
+    <message>
+        <source>Creating image failed</source>
+        <translation>La création d’image a échoué</translation>
+    </message>
+    <message>
+        <source>Continuing rated game</source>
+        <translation>Partie classée est continuée</translation>
+    </message>
+    <message>
+        <source>Kept only position</source>
+        <translation>Gardé seulement la position</translation>
+    </message>
+    <message>
+        <source>Kept only subtree</source>
+        <translation>Gardé seulement le sous-arbre</translation>
+    </message>
+    <message>
+        <source>Variation is now %1</source>
+        <translation>La variation est maintenant %1</translation>
+    </message>
+    <message>
+        <source>Children truncated</source>
+        <translation>Nœuds fils coupé</translation>
+    </message>
+    <message>
+        <source>Setup</source>
+        <extracomment>Small-screen label for setup mode (short for &quot;Setup Mode&quot;).</extracomment>
+        <translation>Position</translation>
+    </message>
+    <message>
+        <source>Setup Mode</source>
+        <translation>Position</translation>
+    </message>
+    <message>
+        <source>Rated</source>
+        <extracomment>Label for ongoing rated game</extracomment>
+        <translation>Classée</translation>
+    </message>
+    <message>
+        <source>Rated %1</source>
+        <extracomment>Small-screen label for finished rated game (short for &quot;Rated Game&quot;). The argument is the game number.</extracomment>
+        <translation>Classée %1</translation>
+    </message>
+    <message>
+        <source>Rated Game %1</source>
+        <extracomment>Label for rated game. The argument is the game number.</extracomment>
+        <translation>Partie classée %1</translation>
+    </message>
+    <message>
+        <source>Main Variation</source>
+        <translation type="vanished">Variation principale</translation>
+    </message>
+    <message>
+        <source>Beginning of Branch</source>
+        <translation type="vanished">Au début de la branche</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="vanished">Commentaire</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation type="vanished">Configuration</translation>
+    </message>
+    <message>
+        <source>Find Move</source>
+        <translation type="vanished">Trouver un coup</translation>
+    </message>
+    <message>
+        <source>Next Comment</source>
+        <translation type="vanished">Commentaire suivant</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="vanished">Plein écran</translation>
+    </message>
+    <message>
+        <source>Game Info</source>
+        <translation type="vanished">Info sur la partie</translation>
+    </message>
+    <message>
+        <source>Move Number…</source>
+        <translation type="vanished">Numéro de coup…</translation>
+    </message>
+    <message>
+        <source>Pentobi Help</source>
+        <translation type="vanished">Aide de Pentobi</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="vanished">Nouveau</translation>
+    </message>
+    <message>
+        <source>Rated Game</source>
+        <translation type="vanished">Partie classée</translation>
+    </message>
+    <message>
+        <source>Open…</source>
+        <translation type="vanished">Ouvrir…</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation type="vanished">Jouer</translation>
+    </message>
+    <message>
+        <source>Play Move</source>
+        <extracomment>Play a single move</extracomment>
+        <translation type="vanished">Jouer un coup</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="vanished">Quitter</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="vanished">Enregistrer</translation>
+    </message>
+    <message>
+        <source>Save As…</source>
+        <translation type="vanished">Enregistrer sous…</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="vanished">Arrêter</translation>
+    </message>
+    <message>
+        <source>Undo Move</source>
+        <translation type="vanished">Annuler le coup</translation>
+    </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation>Bleu/rouge</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Violet</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Vert</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>Bleu</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation>Jaune/vert</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Orange</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Jaune</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rouge</translation>
+    </message>
+    <message>
+        <source>Pentobi failed to generate a move.</source>
+        <translation>Pentobi n&apos;a pas réussi à générer un coup.</translation>
+    </message>
+    <message>
+        <source>Press back again to exit</source>
+        <translation type="vanished">Appuyez à nouveau sur retour pour quitter</translation>
+    </message>
+    <message>
+        <source>Untitled.blksgf</source>
+        <translation>Sans titre.blksgf</translation>
+    </message>
+    <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

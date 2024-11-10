@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nb_NO">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="nb_NO">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -12,7 +14,7 @@
     </message>
     <message>
         <source>Computer opponent for Blokus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -175,17 +177,17 @@
     <message>
         <source>Previous</source>
         <extracomment>Go to previous page of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Contents</source>
         <extracomment>Go to table of contents of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Next</source>
         <extracomment>Go to next page of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -196,7 +198,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -463,7 +465,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Pentobi-hjelp</translation>
     </message>
 </context>
 <context>
@@ -501,139 +503,139 @@
     <message>
         <source>Pentobi</source>
         <extracomment>Window title if no file is loaded.</extracomment>
-        <translation>Pentobi</translation>
+        <translation type="vanished">Pentobi</translation>
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
-        <translation>Spillanalyse er kun tilgjengelig i hovedvariasjonen.</translation>
+        <translation type="vanished">Spillanalyse er kun tilgjengelig i hovedvariasjonen.</translation>
     </message>
     <message>
         <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
-        <translation>Automatisk lagret spill ble endret av en annen kjørende utgave av Pentobi. Overskriv?</translation>
+        <translation type="vanished">Automatisk lagret spill ble endret av en annen kjørende utgave av Pentobi. Overskriv?</translation>
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
-        <translation>Din vurdering har økt fra %1 til %2.</translation>
+        <translation type="vanished">Din vurdering har økt fra %1 til %2.</translation>
     </message>
     <message>
         <source>Your rating has decreased from %1 to %2.</source>
-        <translation>Din vurdering har sunket fra %1 til %2.</translation>
+        <translation type="vanished">Din vurdering har sunket fra %1 til %2.</translation>
     </message>
     <message>
         <source>Your rating stays at %1.</source>
-        <translation>Din vurdering forblir %1.</translation>
+        <translation type="vanished">Din vurdering forblir %1.</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
-        <translation>Slett all vurderingsinformasjon fra nåværende spillvariant?</translation>
+        <translation type="vanished">Slett all vurderingsinformasjon fra nåværende spillvariant?</translation>
     </message>
     <message>
         <source>Delete all variations?</source>
-        <translation>Slett alle variasjoner?</translation>
+        <translation type="vanished">Slett alle variasjoner?</translation>
     </message>
     <message>
         <source>Save failed.</source>
-        <translation>Lagring mislyktes.</translation>
+        <translation type="vanished">Lagring mislyktes.</translation>
     </message>
     <message>
         <source>End of tree was reached. Continue search from start of the tree?</source>
-        <translation>Nådde slutten av treet. Fortsett søket fra starten av treet?</translation>
+        <translation type="vanished">Nådde slutten av treet. Fortsett søket fra starten av treet?</translation>
     </message>
     <message>
         <source>No comment found</source>
-        <translation>Ingen kommentar funnet</translation>
+        <translation type="vanished">Ingen kommentar funnet</translation>
     </message>
     <message>
         <source>%1 (modified)</source>
         <extracomment>Label for modified loaded game. The argument is the file name.</extracomment>
-        <translation>%1 (endret)</translation>
+        <translation type="vanished">%1 (endret)</translation>
     </message>
     <message>
         <source>File has been modified by another application. Reload?</source>
-        <translation>Filen har blitt endret av et annet program. Last inn på nytt?</translation>
+        <translation type="vanished">Filen har blitt endret av et annet program. Last inn på nytt?</translation>
     </message>
     <message>
         <source>Keep only position?</source>
-        <translation>Kun behold posisjonen?</translation>
+        <translation type="vanished">Kun behold posisjonen?</translation>
     </message>
     <message>
         <source>Keep only subtree?</source>
-        <translation>Kun behold undertreet?</translation>
+        <translation type="vanished">Kun behold undertreet?</translation>
     </message>
     <message>
         <source>Open failed.</source>
-        <translation>Åpning mislyktes.</translation>
+        <translation type="vanished">Åpning mislyktes.</translation>
     </message>
     <message>
         <source>Start rated game with Purple against Pentobi level %1?</source>
-        <translation>Start vurdert spill med lilla mot Pentobi nivå %1?</translation>
+        <translation type="vanished">Start vurdert spill med lilla mot Pentobi nivå %1?</translation>
     </message>
     <message>
         <source>Start rated game with Green against Pentobi level %1?</source>
-        <translation>Start vurdert spill med grønn mot Pentobi nivå %1?</translation>
+        <translation type="vanished">Start vurdert spill med grønn mot Pentobi nivå %1?</translation>
     </message>
     <message>
         <source>Start rated game with Blue/Red against Pentobi level %1?</source>
-        <translation>Start vurdert spill med blå/rød mot Pentobi nivå %1?</translation>
+        <translation type="vanished">Start vurdert spill med blå/rød mot Pentobi nivå %1?</translation>
     </message>
     <message>
         <source>Start rated game with Blue against Pentobi level %1?</source>
-        <translation>Start vurdert spill med blå mot Pentobi nivå %1?</translation>
+        <translation type="vanished">Start vurdert spill med blå mot Pentobi nivå %1?</translation>
     </message>
     <message>
         <source>Start rated game with Orange against Pentobi level %1?</source>
-        <translation>Start vurdert spill med oransje mot Pentobi nivå %1?</translation>
+        <translation type="vanished">Start vurdert spill med oransje mot Pentobi nivå %1?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
-        <translation>Start vurdert spill med gul/grønn mot Pentobi nivå %1?</translation>
+        <translation type="vanished">Start vurdert spill med gul/grønn mot Pentobi nivå %1?</translation>
     </message>
     <message>
         <source>Start rated game with Yellow against Pentobi level %1?</source>
-        <translation>Start vurdert spill med gul mot Pentobi nivå %1?</translation>
+        <translation type="vanished">Start vurdert spill med gul mot Pentobi nivå %1?</translation>
     </message>
     <message>
         <source>Start rated game with Red against Pentobi level %1?</source>
-        <translation>Start vurdert spill med rød mot Pentobi nivå %1?</translation>
+        <translation type="vanished">Start vurdert spill med rød mot Pentobi nivå %1?</translation>
     </message>
     <message>
         <source>You have not yet played rated games in this game variant.</source>
-        <translation>Du har ikke spillt noen vurderte spill i denne varianten enda.</translation>
+        <translation type="vanished">Du har ikke spillt noen vurderte spill i denne varianten enda.</translation>
     </message>
     <message>
         <source>Truncate this subtree?</source>
-        <translation>Forkort dette undertreet?</translation>
+        <translation type="vanished">Forkort dette undertreet?</translation>
     </message>
     <message>
         <source>Truncate children?</source>
-        <translation>Forkort underprosess?</translation>
+        <translation type="vanished">Forkort underprosess?</translation>
     </message>
     <message>
         <source>Discard game?</source>
-        <translation>Forkast spill?</translation>
+        <translation type="vanished">Forkast spill?</translation>
     </message>
     <message>
         <source>Pentobi %1 (level %2)</source>
         <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
-        <translation>Pentobi %1 (nivå %2)</translation>
+        <translation type="vanished">Pentobi %1 (nivå %2)</translation>
     </message>
     <message>
         <source>Human</source>
         <extracomment>Player name for game info in rated game.</extracomment>
-        <translation>Menneske</translation>
+        <translation type="vanished">Menneske</translation>
     </message>
     <message>
         <source>Rated game</source>
-        <translation>Vurdert spill</translation>
+        <translation type="vanished">Vurdert spill</translation>
     </message>
     <message>
         <source>File has been modified by another application. Overwrite?</source>
-        <translation>Filen har blitt endret av et annet program. Overskriv?</translation>
+        <translation type="vanished">Filen har blitt endret av et annet program. Overskriv?</translation>
     </message>
     <message>
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
-        <translation>%1 - Pentobi</translation>
+        <translation type="vanished">%1 - Pentobi</translation>
     </message>
     <message>
         <source>Not enough memory</source>
@@ -641,79 +643,79 @@
     </message>
     <message>
         <source>Game analysis aborted</source>
-        <translation>Spillanalyse avbrutt</translation>
+        <translation type="vanished">Spillanalyse avbrutt</translation>
     </message>
     <message>
         <source>Computer move aborted</source>
-        <translation>Datamaskintrekk avbrutt</translation>
+        <translation type="vanished">Datamaskintrekk avbrutt</translation>
     </message>
     <message>
         <source>Rating information deleted</source>
-        <translation>Vurderingsinformasjon slettet</translation>
+        <translation type="vanished">Vurderingsinformasjon slettet</translation>
     </message>
     <message>
         <source>Variations deleted</source>
-        <translation>Variasjoner slettet</translation>
+        <translation type="vanished">Variasjoner slettet</translation>
     </message>
     <message>
         <source>File saved</source>
-        <translation>Fil lagret</translation>
+        <translation type="vanished">Fil lagret</translation>
     </message>
     <message>
         <source>Saving image failed or unsupported image format</source>
-        <translation>Lagring av bilde mislyktes, eller ustøttet bildeformat</translation>
+        <translation type="vanished">Lagring av bilde mislyktes, eller ustøttet bildeformat</translation>
     </message>
     <message>
         <source>Image saved</source>
-        <translation>Bilde lagret</translation>
+        <translation type="vanished">Bilde lagret</translation>
     </message>
     <message>
         <source>Creating image failed</source>
-        <translation>Oppretting av bilde mislyktes</translation>
+        <translation type="vanished">Oppretting av bilde mislyktes</translation>
     </message>
     <message>
         <source>Continuing rated game</source>
-        <translation>Fortsetter vurdert spill</translation>
+        <translation type="vanished">Fortsetter vurdert spill</translation>
     </message>
     <message>
         <source>Kept only position</source>
-        <translation>Beholdt kun posisjonen</translation>
+        <translation type="vanished">Beholdt kun posisjonen</translation>
     </message>
     <message>
         <source>Kept only subtree</source>
-        <translation>Beholdte kun undertre</translation>
+        <translation type="vanished">Beholdte kun undertre</translation>
     </message>
     <message>
         <source>Variation is now %1</source>
-        <translation>Varianten er nå %1</translation>
+        <translation type="vanished">Varianten er nå %1</translation>
     </message>
     <message>
         <source>Children truncated</source>
-        <translation>Underprosess forkortet</translation>
+        <translation type="vanished">Underprosess forkortet</translation>
     </message>
     <message>
         <source>Setup</source>
         <extracomment>Small-screen label for setup mode (short for &quot;Setup Mode&quot;).</extracomment>
-        <translation>Oppsett</translation>
+        <translation type="vanished">Oppsett</translation>
     </message>
     <message>
         <source>Setup Mode</source>
-        <translation>Oppsettsmodus</translation>
+        <translation type="vanished">Oppsettsmodus</translation>
     </message>
     <message>
         <source>Rated</source>
         <extracomment>Label for ongoing rated game</extracomment>
-        <translation>Vurdert</translation>
+        <translation type="vanished">Vurdert</translation>
     </message>
     <message>
         <source>Rated %1</source>
         <extracomment>Small-screen label for finished rated game (short for &quot;Rated Game&quot;). The argument is the game number.</extracomment>
-        <translation>Vurdert %1</translation>
+        <translation type="vanished">Vurdert %1</translation>
     </message>
     <message>
         <source>Rated Game %1</source>
         <extracomment>Label for rated game. The argument is the game number.</extracomment>
-        <translation>Vurdert spill %1</translation>
+        <translation type="vanished">Vurdert spill %1</translation>
     </message>
     <message>
         <source>Main Variation</source>
@@ -799,47 +801,43 @@
     </message>
     <message>
         <source>Blue/Red</source>
-        <translation>Blå/rød</translation>
+        <translation type="vanished">Blå/rød</translation>
     </message>
     <message>
         <source>Purple</source>
-        <translation>Lilla</translation>
+        <translation type="vanished">Lilla</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation>Grønn</translation>
+        <translation type="vanished">Grønn</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation>Blå</translation>
+        <translation type="vanished">Blå</translation>
     </message>
     <message>
         <source>Yellow/Green</source>
-        <translation>Gul/grønn</translation>
+        <translation type="vanished">Gul/grønn</translation>
     </message>
     <message>
         <source>Orange</source>
-        <translation>Oransje</translation>
+        <translation type="vanished">Oransje</translation>
     </message>
     <message>
         <source>Yellow</source>
-        <translation>Gul</translation>
+        <translation type="vanished">Gul</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation>Rød</translation>
+        <translation type="vanished">Rød</translation>
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation>Pentobi klarte ikke å generere et trekk.</translation>
+        <translation type="vanished">Pentobi klarte ikke å generere et trekk.</translation>
     </message>
     <message>
         <source>Press back again to exit</source>
         <translation>Trykk «Tilbake» igjen for å avslutte.</translation>
-    </message>
-    <message>
-        <source>Untitled.blksgf</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -918,7 +916,7 @@
     </message>
     <message>
         <source>Export Image…</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1036,7 +1034,7 @@
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1282,6 +1280,349 @@
 </context>
 <context>
     <name>main</name>
+    <message>
+        <source>Pentobi</source>
+        <extracomment>Window title if no file is loaded.</extracomment>
+        <translation>Pentobi</translation>
+    </message>
+    <message>
+        <source>Game analysis is only possible in main variation.</source>
+        <translation>Spillanalyse er kun tilgjengelig i hovedvariasjonen.</translation>
+    </message>
+    <message>
+        <source>Autosaved game was changed by another instance of Pentobi. Overwrite?</source>
+        <translation>Automatisk lagret spill ble endret av en annen kjørende utgave av Pentobi. Overskriv?</translation>
+    </message>
+    <message>
+        <source>Your rating has increased from %1 to %2.</source>
+        <translation>Din vurdering har økt fra %1 til %2.</translation>
+    </message>
+    <message>
+        <source>Your rating has decreased from %1 to %2.</source>
+        <translation>Din vurdering har sunket fra %1 til %2.</translation>
+    </message>
+    <message>
+        <source>Your rating stays at %1.</source>
+        <translation>Din vurdering forblir %1.</translation>
+    </message>
+    <message>
+        <source>Delete all rating information for the current game variant?</source>
+        <translation>Slett all vurderingsinformasjon fra nåværende spillvariant?</translation>
+    </message>
+    <message>
+        <source>Delete all variations?</source>
+        <translation>Slett alle variasjoner?</translation>
+    </message>
+    <message>
+        <source>Save failed.</source>
+        <translation>Lagring mislyktes.</translation>
+    </message>
+    <message>
+        <source>End of tree was reached. Continue search from start of the tree?</source>
+        <translation>Nådde slutten av treet. Fortsett søket fra starten av treet?</translation>
+    </message>
+    <message>
+        <source>No comment found</source>
+        <translation>Ingen kommentar funnet</translation>
+    </message>
+    <message>
+        <source>%1 (modified)</source>
+        <extracomment>Label for modified loaded game. The argument is the file name.</extracomment>
+        <translation>%1 (endret)</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Reload?</source>
+        <translation>Filen har blitt endret av et annet program. Last inn på nytt?</translation>
+    </message>
+    <message>
+        <source>Keep only position?</source>
+        <translation>Kun behold posisjonen?</translation>
+    </message>
+    <message>
+        <source>Keep only subtree?</source>
+        <translation>Kun behold undertreet?</translation>
+    </message>
+    <message>
+        <source>Open failed.</source>
+        <translation>Åpning mislyktes.</translation>
+    </message>
+    <message>
+        <source>Start rated game with Purple against Pentobi level %1?</source>
+        <translation>Start vurdert spill med lilla mot Pentobi nivå %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Green against Pentobi level %1?</source>
+        <translation>Start vurdert spill med grønn mot Pentobi nivå %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue/Red against Pentobi level %1?</source>
+        <translation>Start vurdert spill med blå/rød mot Pentobi nivå %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Blue against Pentobi level %1?</source>
+        <translation>Start vurdert spill med blå mot Pentobi nivå %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Orange against Pentobi level %1?</source>
+        <translation>Start vurdert spill med oransje mot Pentobi nivå %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow/Green against Pentobi level %1?</source>
+        <translation>Start vurdert spill med gul/grønn mot Pentobi nivå %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Yellow against Pentobi level %1?</source>
+        <translation>Start vurdert spill med gul mot Pentobi nivå %1?</translation>
+    </message>
+    <message>
+        <source>Start rated game with Red against Pentobi level %1?</source>
+        <translation>Start vurdert spill med rød mot Pentobi nivå %1?</translation>
+    </message>
+    <message>
+        <source>You have not yet played rated games in this game variant.</source>
+        <translation>Du har ikke spillt noen vurderte spill i denne varianten enda.</translation>
+    </message>
+    <message>
+        <source>Truncate this subtree?</source>
+        <translation>Forkort dette undertreet?</translation>
+    </message>
+    <message>
+        <source>Truncate children?</source>
+        <translation>Forkort underprosess?</translation>
+    </message>
+    <message>
+        <source>Discard game?</source>
+        <translation>Forkast spill?</translation>
+    </message>
+    <message>
+        <source>Pentobi %1 (level %2)</source>
+        <extracomment>Player name for game info in rated game. First argument is version of Pentobi, second argument is level.</extracomment>
+        <translation>Pentobi %1 (nivå %2)</translation>
+    </message>
+    <message>
+        <source>Human</source>
+        <extracomment>Player name for game info in rated game.</extracomment>
+        <translation>Menneske</translation>
+    </message>
+    <message>
+        <source>Rated game</source>
+        <translation>Vurdert spill</translation>
+    </message>
+    <message>
+        <source>File has been modified by another application. Overwrite?</source>
+        <translation>Filen har blitt endret av et annet program. Overskriv?</translation>
+    </message>
+    <message>
+        <source>%1 - Pentobi</source>
+        <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
+        <translation>%1 - Pentobi</translation>
+    </message>
+    <message>
+        <source>Not enough memory</source>
+        <translation type="vanished">Ikke nok minne</translation>
+    </message>
+    <message>
+        <source>Game analysis aborted</source>
+        <translation>Spillanalyse avbrutt</translation>
+    </message>
+    <message>
+        <source>Computer move aborted</source>
+        <translation>Datamaskintrekk avbrutt</translation>
+    </message>
+    <message>
+        <source>Rating information deleted</source>
+        <translation>Vurderingsinformasjon slettet</translation>
+    </message>
+    <message>
+        <source>Variations deleted</source>
+        <translation>Variasjoner slettet</translation>
+    </message>
+    <message>
+        <source>File saved</source>
+        <translation>Fil lagret</translation>
+    </message>
+    <message>
+        <source>Saving image failed or unsupported image format</source>
+        <translation>Lagring av bilde mislyktes, eller ustøttet bildeformat</translation>
+    </message>
+    <message>
+        <source>Image saved</source>
+        <translation>Bilde lagret</translation>
+    </message>
+    <message>
+        <source>Creating image failed</source>
+        <translation>Oppretting av bilde mislyktes</translation>
+    </message>
+    <message>
+        <source>Continuing rated game</source>
+        <translation>Fortsetter vurdert spill</translation>
+    </message>
+    <message>
+        <source>Kept only position</source>
+        <translation>Beholdt kun posisjonen</translation>
+    </message>
+    <message>
+        <source>Kept only subtree</source>
+        <translation>Beholdte kun undertre</translation>
+    </message>
+    <message>
+        <source>Variation is now %1</source>
+        <translation>Varianten er nå %1</translation>
+    </message>
+    <message>
+        <source>Children truncated</source>
+        <translation>Underprosess forkortet</translation>
+    </message>
+    <message>
+        <source>Setup</source>
+        <extracomment>Small-screen label for setup mode (short for &quot;Setup Mode&quot;).</extracomment>
+        <translation>Oppsett</translation>
+    </message>
+    <message>
+        <source>Setup Mode</source>
+        <translation>Oppsettsmodus</translation>
+    </message>
+    <message>
+        <source>Rated</source>
+        <extracomment>Label for ongoing rated game</extracomment>
+        <translation>Vurdert</translation>
+    </message>
+    <message>
+        <source>Rated %1</source>
+        <extracomment>Small-screen label for finished rated game (short for &quot;Rated Game&quot;). The argument is the game number.</extracomment>
+        <translation>Vurdert %1</translation>
+    </message>
+    <message>
+        <source>Rated Game %1</source>
+        <extracomment>Label for rated game. The argument is the game number.</extracomment>
+        <translation>Vurdert spill %1</translation>
+    </message>
+    <message>
+        <source>Main Variation</source>
+        <translation type="vanished">Hovedvariasjon</translation>
+    </message>
+    <message>
+        <source>Beginning of Branch</source>
+        <translation type="vanished">Begynnelse av forgreining</translation>
+    </message>
+    <message>
+        <source>Comment</source>
+        <translation type="vanished">Kommentar</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <extracomment>Menu item Computer/Settings</extracomment>
+        <translation type="vanished">Innstillinger</translation>
+    </message>
+    <message>
+        <source>Find Move</source>
+        <translation type="vanished">Finn trekk</translation>
+    </message>
+    <message>
+        <source>Next Comment</source>
+        <translation type="vanished">Neste kommentar</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="vanished">Fullskjermsvisning</translation>
+    </message>
+    <message>
+        <source>Game Info</source>
+        <translation type="vanished">Spillinfo</translation>
+    </message>
+    <message>
+        <source>Move Number…</source>
+        <translation type="vanished">Trekknummer…</translation>
+    </message>
+    <message>
+        <source>Pentobi Help</source>
+        <translation type="vanished">Pentobi-hjelp</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="vanished">Ny</translation>
+    </message>
+    <message>
+        <source>Rated Game</source>
+        <translation type="vanished">Vurdert spill</translation>
+    </message>
+    <message>
+        <source>Open…</source>
+        <translation type="vanished">Åpne…</translation>
+    </message>
+    <message>
+        <source>Play</source>
+        <translation type="vanished">Spill</translation>
+    </message>
+    <message>
+        <source>Play Move</source>
+        <extracomment>Play a single move</extracomment>
+        <translation type="vanished">Spill enkelt trekk</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation type="vanished">Avslutt</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="vanished">Lagre</translation>
+    </message>
+    <message>
+        <source>Save As…</source>
+        <translation type="vanished">Lagre som…</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation type="vanished">Stopp</translation>
+    </message>
+    <message>
+        <source>Undo Move</source>
+        <translation type="vanished">Angre trekk</translation>
+    </message>
+    <message>
+        <source>Blue/Red</source>
+        <translation>Blå/rød</translation>
+    </message>
+    <message>
+        <source>Purple</source>
+        <translation>Lilla</translation>
+    </message>
+    <message>
+        <source>Green</source>
+        <translation>Grønn</translation>
+    </message>
+    <message>
+        <source>Blue</source>
+        <translation>Blå</translation>
+    </message>
+    <message>
+        <source>Yellow/Green</source>
+        <translation>Gul/grønn</translation>
+    </message>
+    <message>
+        <source>Orange</source>
+        <translation>Oransje</translation>
+    </message>
+    <message>
+        <source>Yellow</source>
+        <translation>Gul</translation>
+    </message>
+    <message>
+        <source>Red</source>
+        <translation>Rød</translation>
+    </message>
+    <message>
+        <source>Pentobi failed to generate a move.</source>
+        <translation>Pentobi klarte ikke å generere et trekk.</translation>
+    </message>
+    <message>
+        <source>Press back again to exit</source>
+        <translation type="vanished">Trykk «Tilbake» igjen for å avslutte.</translation>
+    </message>
+    <message>
+        <source>Untitled.blksgf</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>computer opponent for the board game Blokus</source>
         <translation>datamaskinsmotstander for brettspillet Blokus</translation>
