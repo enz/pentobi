@@ -4,8 +4,6 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-import QtQuick.Controls
-
 PentobiMenu {
     property int moveNumber
 
