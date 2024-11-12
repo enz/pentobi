@@ -360,7 +360,10 @@ ApplicationWindow {
             else if (visibility !== Window.FullScreen)
                 visibility = Window.FullScreen
             else
-                visibility = Window.AutomaticVisibility
+                // Should better use Window.AutomaticVisibility but that
+                // is broken with Qt 6.7 on desktop, which makes the window
+                // disappear when returning from fullscreen.
+                visibility = Window.Windowed
         }
     }
     Action {
