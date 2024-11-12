@@ -9,8 +9,13 @@ Version 26.0-dev (main)
 * itstool is no longer required during the normal build process,
   (see comment in pentobi/help/create-translations)
 
-Version 25.2-dev (v25-fixes)
+Version 25.3-dev (v25-fixes)
 ----------------------------
+
+*
+
+Version 25.2 (12 Nov 2024)
+--------------------------
 
 * Fixed display problems in help window in some situations.
 * Workaround for a Qt bug that made window disappear on some platforms
