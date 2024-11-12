@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-29 11:47+0100\n"
+"POT-Creation-Date: 2024-11-12 12:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,6 +68,16 @@ msgstr ""
 
 #: io.sourceforge.pentobi.appdata.xml.in:64
 msgid "Markus Enzenberger"
+msgstr ""
+
+#: io.sourceforge.pentobi.appdata.xml.in:79
+msgid "Fixed display problems in help window in some situations."
+msgstr ""
+
+#: io.sourceforge.pentobi.appdata.xml.in:82
+msgid ""
+"Workaround for a Qt bug that made window disappear on some platforms when "
+"returning from fullscreen."
 msgstr ""
 
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons

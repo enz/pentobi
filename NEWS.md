@@ -1,8 +1,8 @@
 Pentobi Release Notes
 =====================
 
-Version 25.2-dev (v25-fixes)
-----------------------------
+Version 25.2 (12 Nov 2024)
+--------------------------
 
 * Fixed display problems in help window in some situations.
 * Workaround for a Qt bug that made window disappear on some platforms

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.sf.pentobi"
     android:installLocation="auto"
-    android:versionCode="25001999"
-    android:versionName="25.2-dev" >
+    android:versionCode="25002000"
+    android:versionName="25.2" >
 
     <supports-screens
         android:anyDensity="true"

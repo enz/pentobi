@@ -84,6 +84,19 @@ msgstr "Spielvariante GembloQ"
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
 
+#: io.sourceforge.pentobi.appdata.xml.in:79
+msgid "Fixed display problems in help window in some situations."
+msgstr ""
+"Anzeigeprobleme behoben, die unter Umständen im Hilfefenster auftraten."
+
+#: io.sourceforge.pentobi.appdata.xml.in:82
+msgid ""
+"Workaround for a Qt bug that made window disappear on some platforms when "
+"returning from fullscreen."
+msgstr ""
+"Umgehung eines Qt-Bugs, der auf einigen Plattformen das Fenster bei "
+"Rückkehr aus dem Vollbildmodus verschwinden ließ."
+
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
 #: io.sourceforge.pentobi.desktop.in:6
 msgid ""
