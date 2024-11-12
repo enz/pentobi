@@ -70,16 +70,6 @@ msgstr ""
 msgid "Markus Enzenberger"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:79
-msgid "Fixed display problems in help window in some situations."
-msgstr ""
-
-#: io.sourceforge.pentobi.appdata.xml.in:82
-msgid ""
-"Workaround for a Qt bug that made window disappear on some platforms when "
-"returning from fullscreen."
-msgstr ""
-
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
 #: io.sourceforge.pentobi.desktop.in:6
 msgid ""
