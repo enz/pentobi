@@ -13,6 +13,8 @@ Version 25.2-dev (v25-fixes)
 ----------------------------
 
 * Fixed display problems in help window in some situations.
+* Workaround for a Qt bug that made window disappear on some platforms
+  when returning from fullscreen.
 
 Version 25.1 (31 Jul 2024)
 --------------------------
