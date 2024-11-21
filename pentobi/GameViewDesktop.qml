@@ -290,7 +290,6 @@ Item
 
             anchors {
                 left: parent.left
-                top: top.right
                 bottom: parent.bottom
                 leftMargin: 5
             }
@@ -307,7 +306,6 @@ Item
             visible: root.showMoveNumber
             anchors {
                 right: parent.right
-                top: top.right
                 bottom: parent.bottom
                 rightMargin: 5
             }
