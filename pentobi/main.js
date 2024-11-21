@@ -330,6 +330,14 @@ function getWindowTitle(file, isModified) {
 }
 
 function init() {
+    // Convert theme settings used by older versions of Pentobi
+    switch (themeName) {
+    case "light": themeName = "Light"; break
+    case "dark": themeName = "dark"; break
+    case "colorblind-light": themeName = "ColorblindLight"; break
+    case "colorblind-dark": themeName = "ColorblindDark"; break
+    case "system": themeName = "System"; break
+    }
     if (gameModel.loadAutoSave()) {
         computerPlays0 =
                 syncSettings.valueBool("computerPlays0", computerPlays0)
