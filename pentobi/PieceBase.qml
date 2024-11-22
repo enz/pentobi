@@ -50,105 +50,135 @@ Item
             State {
                 name: "60"
 
-                PropertyChanges { target: root; rotation: 60 }
-                // flipY is 0 in all states, but we need to make it part of the
-                // property changes because PieceSwitchedFlipAnimation changes
-                // it temporarily and otherwise it is not guaranteed to be set
-                // to 0 again if a state change is triggered while the last
-                // animation is still running, for example by selecting Find
-                // Move in quick succession.
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 60
+                    // flipY is 0 in all states, but we need to make it part of
+                    // the property changes because PieceSwitchedFlipAnimation
+                    // changes it temporarily and otherwise it is not
+                    // guaranteed to be set to 0 again if a state change is
+                    // triggered while the last animation is still running, for
+                    // example by selecting Find Move in quick succession.
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "90"
 
-                PropertyChanges { target: root; rotation: 90 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 90
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "120"
 
-                PropertyChanges { target: root; rotation: 120 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 120
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "180"
 
-                PropertyChanges { target: root; rotation: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 180
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "240"
 
-                PropertyChanges { target: root; rotation: 240 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 240
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "270"
 
-                PropertyChanges { target: root; rotation: 270 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 270
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "300"
 
-                PropertyChanges { target: root; rotation: 300 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 300
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "flip"
 
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    flipX.angle: 180
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "60flip"
 
-                PropertyChanges { target: root; rotation: 60 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 60
+                    flipX.angle: 180
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "90flip"
 
-                PropertyChanges { target: root; rotation: 90 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 90
+                    flipX.angle: 180
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "120flip"
 
-                PropertyChanges { target: root; rotation: 120 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 120
+                    flipX.angle: 180
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "180flip"
 
-                PropertyChanges { target: root; rotation: 180 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 180
+                    flipX.angle: 180
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "240flip"
 
-                PropertyChanges { target: root; rotation: 240 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 240
+                    flipX.angle: 180
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "270flip"
 
-                PropertyChanges { target: root; rotation: 270 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 270
+                    flipX.angle: 180
+                    flipY.angle: 0
+                }
             },
             State {
                 name: "300flip"
 
-                PropertyChanges { target: root; rotation: 300 }
-                PropertyChanges { target: flipX; angle: 180 }
-                PropertyChanges { target: flipY; angle: 0 }
+                PropertyChanges {
+                    root.rotation: 300
+                    flipX.angle: 180
+                    flipY.angle: 0
+                }
             }
         ]
 

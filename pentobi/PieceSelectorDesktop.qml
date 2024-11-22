@@ -23,6 +23,8 @@ Item {
         Math.max(Math.min(parent.width / columns, parent.height / 8.3) / 10, 2)
 
     Row {
+        id: row
+
         // Set size such that width/height ratio fits the number of columns,
         // taking toPlayIndicator and column spacing into account
         width: Math.min(parent.width - toPlayIndicatorWidth,
@@ -87,9 +89,10 @@ Item {
             when: gameModel.toPlay === 0
 
             PropertyChanges {
-                target: toPlayIndicator
-                y: column.mapToItem(parent, 0, pieceList0.y).y
-                height: pieceList0.height
+                toPlayIndicator {
+                    y: column.mapToItem(row, 0, pieceList0.y).y
+                    height: pieceList0.height
+                }
             }
         },
         State {
@@ -97,9 +100,10 @@ Item {
             when: gameModel.toPlay === 1
 
             PropertyChanges {
-                target: toPlayIndicator
-                y: column.mapToItem(parent, 0, pieceList1.y).y
-                height: pieceList1.height
+                toPlayIndicator {
+                    y: column.mapToItem(row, 0, pieceList1.y).y
+                    height: pieceList1.height
+                }
             }
         },
         State {
@@ -107,9 +111,10 @@ Item {
             when: gameModel.toPlay === 2
 
             PropertyChanges {
-                target: toPlayIndicator
-                y: column.mapToItem(parent, 0, pieceList2.y).y
-                height: pieceList2.height
+                toPlayIndicator {
+                    y: column.mapToItem(row, 0, pieceList2.y).y
+                    height: pieceList2.height
+                }
             }
         },
         State {
@@ -117,9 +122,10 @@ Item {
             when: gameModel.toPlay === 3
 
             PropertyChanges {
-                target: toPlayIndicator
-                y: column.mapToItem(parent, 0, pieceList3.y).y
-                height: pieceList0.height
+                toPlayIndicator {
+                    y: column.mapToItem(row, 0, pieceList3.y).y
+                    height: pieceList0.height
+                }
             }
         }
     ]

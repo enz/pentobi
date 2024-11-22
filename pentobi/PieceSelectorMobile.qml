@@ -105,24 +105,18 @@ Flickable {
             when: gameModel.toPlay === 0
 
             PropertyChanges {
-                target: pieceList0
-                y: getY(0, 0, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList1
-                y: getY(0, 1, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList2
-                y: getY(0, 2, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList3
-                y: getY(0, 3, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
+                pieceList0.y: getY(0, 0, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList1.y: getY(0, 1, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList2.y: getY(0, 2, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList3.y: getY(0, 3, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
             }
         },
         State {
@@ -130,24 +124,18 @@ Flickable {
             when: gameModel.toPlay === 1
 
             PropertyChanges {
-                target: pieceList0
-                y: getY(1, 0, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList1
-                y: getY(1, 1, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList2
-                y: getY(1, 2, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList3
-                y: getY(1, 3, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
+                pieceList0.y: getY(1, 0, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList1.y: getY(1, 1, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList2.y: getY(1, 2, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList3.y: getY(1, 3, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
             }
         },
         State {
@@ -155,24 +143,18 @@ Flickable {
             when: gameModel.toPlay === 2
 
             PropertyChanges {
-                target: pieceList0
-                y: getY(2, 0, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList1
-                y: getY(2, 1, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList2
-                y: getY(2, 2, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList3
-                y: getY(2, 3, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
+                pieceList0.y: getY(2, 0, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList1.y: getY(2, 1, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList2.y: getY(2, 2, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList3.y: getY(2, 3, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
             }
         },
         State {
@@ -180,24 +162,18 @@ Flickable {
             when: gameModel.toPlay === 3
 
             PropertyChanges {
-                target: pieceList0
-                y: getY(3, 0, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList1
-                y: getY(3, 1, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList2
-                y: getY(3, 2, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
-            }
-            PropertyChanges {
-                target: pieceList3
-                y: getY(3, 3, pieceList0.height, pieceList1.height,
-                        pieceList2.height, pieceList3.height, rowSpacing)
+                pieceList0.y: getY(3, 0, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList1.y: getY(3, 1, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList2.y: getY(3, 2, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
+                pieceList3.y: getY(3, 3, pieceList0.height, pieceList1.height,
+                                   pieceList2.height, pieceList3.height,
+                                   rowSpacing)
             }
         }
     ]
