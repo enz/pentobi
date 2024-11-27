@@ -232,7 +232,7 @@
 <sect1>
 <title>Variations de coups et l'arbre de jeu</title>
 <para>Lorsque vous jouez une partie, Pentobi enregistre la séquence des coups et il est toujours possible de revenir à une position précédente et de jouer différemment. Si vous faites cela, la nouvelle séquence est enregistrée comme une séquence alternative (appelée variation). Les variations peuvent également être utilisées par les annotateurs pour commenter des parties existantes. Les variations peuvent exister à n'importe quelle position du plateau et peuvent avoir elles-mêmes des sous-variations. La partie peut donc devenir un arbre de jeu, dans lequel chaque nœud représente une position du plateau. Vous pouvez naviguer dans l'arbre de jeu avec les éléments du menu <guimenu>Déplacement</guimenu> et les boutons de navigation.</para>
-<para>La variation principale est la séquence de coups qui commence à la position de départ et sélectionne toujours le premier nœud enfant à chaque position (par exemple en appuyant sur le bouton avancer). La variation principale est censée représenter la vraie partie jouée. Si vous souhaitez qu'une variation secondaire devienne la variation principale, sélectionnez <guimenuitem>'Choisir comme variation principale'</guimenuitem> dans le menu <guimenu>Édition</guimenu>.</para>
+<para>La variation principale est la séquence de coups qui commence à la position de départ et sélectionne toujours le premier nœud enfant à chaque position (par exemple en appuyant sur le bouton avancer). La variation principale est censée représenter la vraie partie jouée. Si vous souhaitez qu'une variation secondaire devienne la variation principale, sélectionnez <guimenuitem>Choisir comme variation principale</guimenuitem> dans le menu <guimenu>Édition</guimenu>.</para>
 </sect1>
 </chapter>
 
@@ -241,7 +241,7 @@
 <para>Pentobi dispose de fonctionnalités qui peuvent vous aider à devenir un joueur de Blokus plus fort.</para>
 <sect1 id="analysis">
 <title>Analyse de la partie</title>
-<para>Une partie peut être analysée en sélectionnant <guimenuitem>'Analyser la partie'</guimenuitem> dans le menu <guimenu>Outils</guimenu>. Cela fera évaluer chaque position de la variation principale par le joueur ordinateur. Le résultat est affiché dans une fenêtre avec un diagramme de points colorés.</para>
+<para>Une partie peut être analysée en sélectionnant <guimenuitem>Analyser la partie</guimenuitem> dans le menu <guimenu>Outils</guimenu>. Cela fera évaluer chaque position de la variation principale par le joueur ordinateur. Le résultat est affiché dans une fenêtre avec un diagramme de points colorés.</para>
 <informalfigure>
 <mediaobject>
 <imageobject>
@@ -250,12 +250,12 @@
 </mediaobject>
 </informalfigure>
 <para>Chaque point représente une position de jeu dans laquelle la couleur du point devait jouer. Les points sont disposés horizontalement par numéro de coup. L'axe vertical représente la probabilité estimée de gagner la partie pour la couleur qui devait jouer. Les clics de souris sur le diagramme vous amèneront à la position correspondante.</para>
-<para>Les valeurs de position ne sont que des estimations et l'ordinateur peut parfois évaluer incorrectement certaines positions. Cependant, les chutes soudaines de la valeur peuvent vous aider à repérer des coups potentiellement mauvais. Vous pouvez revenir à la position avant le coup et essayer de trouver un meilleur coup ou demander à l'ordinateur ce qu'il aurait joué en sélectionnant <guimenuitem>'Jouer un coup'</guimenuitem> dans le menu <guimenu>Ordinateur</guimenu>.</para>
+<para>Les valeurs de position ne sont que des estimations et l'ordinateur peut parfois évaluer incorrectement certaines positions. Cependant, les chutes soudaines de la valeur peuvent vous aider à repérer des coups potentiellement mauvais. Vous pouvez revenir à la position avant le coup et essayer de trouver un meilleur coup ou demander à l'ordinateur ce qu'il aurait joué en sélectionnant <guimenuitem>Jouer un coup</guimenuitem> dans le menu <guimenu>Ordinateur</guimenu>.</para>
 </sect1>
 <sect1 id="rating">
 <title>Déterminer votre classement</title>
 <para>Vous pouvez suivre vos progrès en jouant des parties notées contre l'ordinateur. Les résultats des parties sont utilisés pour déterminer votre classement actuel. Le classement est un nombre qui représente votre niveau de jeu.</para>
-<para>Une partie classée est lancée en sélectionnant <guimenuitem>'Partie classée'</guimenuitem> dans le menu <guimenu>Partie</guimenu> ou la barre d'outils. Si vous n'avez joué aucune partie classée dans la variante de jeu actuelle, il vous sera demandé de choisir une valeur de départ, ce qui peut réduire le nombre de parties nécessaires pour déterminer votre véritable classement. Si vous êtes débutant, laissez la valeur de départ à 800.</para>
+<para>Une partie classée est lancée en sélectionnant <guimenuitem>Partie classée</guimenuitem> dans le menu <guimenu>Partie</guimenu> ou la barre d'outils. Si vous n'avez joué aucune partie classée dans la variante de jeu actuelle, il vous sera demandé de choisir une valeur de départ, ce qui peut réduire le nombre de parties nécessaires pour déterminer votre véritable classement. Si vous êtes débutant, laissez la valeur de départ à 800.</para>
 <para>Pour chaque partie classée, l'ordinateur choisira un niveau de jeu pour l'adversaire informatique en fonction de votre classement actuel. La couleur que vous jouez sera choisie au hasard à chaque partie.</para>
 <para>Pendant une partie classée, la plupart des fonctions non nécessaires pour jouer sont désactivées : vous ne pouvez pas annuler les coups, naviguer dans la partie, changer les couleurs de l'ordinateur ou modifier le niveau de jeu. Pour obtenir un classement précis, vous devez toujours jouer les parties classées jusqu'à la fin.</para>
 <para>Une fois la partie terminée, votre classement sera mis à jour en fonction du résultat de la partie et du niveau de l'ordinateur. Pour le résultat de la partie, seul le fait d'avoir gagné, perdu ou fait égalité compte. Le nombre exact de points obtenus n'a pas d'importance.</para>
@@ -266,7 +266,7 @@
 </imageobject>
 </mediaobject>
 </informalfigure>
-<para>Vous pouvez toujours voir votre classement actuel en sélectionnant <guimenuitem>'Classement'</guimenuitem> dans le menu <guimenu>Outils</guimenu>. Cela ouvrira une fenêtre affichant l'évolution de votre classement au cours des 50 dernières parties sous forme de graphique. Les 50 dernières parties sont automatiquement enregistrées et peuvent être chargées en ouvrant un menu contextuel dans la table de jeu sous le graphique.</para>
+<para>Vous pouvez toujours voir votre classement actuel en sélectionnant <guimenuitem>Classement</guimenuitem> dans le menu <guimenu>Outils</guimenu>. Cela ouvrira une fenêtre affichant l'évolution de votre classement au cours des 50 dernières parties sous forme de graphique. Les 50 dernières parties sont automatiquement enregistrées et peuvent être chargées en ouvrant un menu contextuel dans la table de jeu sous le graphique.</para>
 </sect1>
 </chapter>
 
@@ -308,11 +308,11 @@
 <varlistentry>
 <term><guibutton>Fin</guibutton></term>
 <listitem>
-<para>Aller à la fin de la variation actuelle. Comme <guibutton>'Avancer'</guibutton>, cela utilise également la première variation dans les positions avec plusieurs variations de suite.</para>
+<para>Aller à la fin de la variation actuelle. Comme <guibutton>Avancer</guibutton>, cela utilise également la première variation dans les positions avec plusieurs variations de suite.</para>
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guibutton>Prochaine variation</guibutton></term>
+<term><guibutton>Variation suivante</guibutton></term>
 <listitem>
 <para>Aller à la variation suivante du dernier coup joué (c'est-à-dire au nœud frère suivant du nœud actuel dans l'arbre de jeu).</para>
 </listitem>
@@ -460,13 +460,13 @@
 <varlistentry>
 <term><guimenuitem>Variation vers le haut</guimenuitem></term>
 <listitem>
-<para>Modifie l'ordre des variations de sorte que la position actuelle apparaisse plus tôt lors de la navigation avec <guibutton>Variation prochaine</guibutton> /<guibutton>Variation précédente</guibutton>.</para>
+<para>Modifie l'ordre des variations de sorte que la position actuelle apparaisse plus tôt lors de la navigation avec <guibutton>Variation suivante</guibutton> /<guibutton>Variation précédente</guibutton>.</para>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Variation vers le bas</guimenuitem></term>
 <listitem>
-<para>Modifie l'ordre des variations de sorte que la position actuelle apparaisse plus tard lors de la navigation avec <guibutton>Variation prochaine</guibutton> /<guibutton>Variation précédente</guibutton>.</para>
+<para>Modifie l'ordre des variations de sorte que la position actuelle apparaisse plus tard lors de la navigation avec <guibutton>Variation suivante</guibutton> /<guibutton>Variation précédente</guibutton>.</para>
 </listitem>
 </varlistentry>
 <varlistentry>
@@ -502,7 +502,7 @@
 <varlistentry>
 <term><guimenuitem>Position</guimenuitem></term>
 <listitem>
-<para>Entrer ou quitter le mode de configuration. En mode de configuration, les pièces peuvent être placées n'importe où sur le plateau, même en violation des règles du jeu. Les pièces existantes peuvent être supprimées du plateau en cliquant dessus. La couleur actuellement sélectionnée détermine également la couleur à jouer après la fin de la configuration. Elle peut être changée avec <guimenuitem>'Couleur suivante'</guimenuitem> ou en cliquant sur le sélecteur d'orientation lorsqu'aucune pièce n'est sélectionnée. Le mode de configuration ne peut être utilisé que si aucun coup n'a encore été joué.</para>
+<para>Entrer ou quitter le mode de configuration. En mode de configuration, les pièces peuvent être placées n'importe où sur le plateau, même en violation des règles du jeu. Les pièces existantes peuvent être supprimées du plateau en cliquant dessus. La couleur actuellement sélectionnée détermine également la couleur à jouer après la fin de la configuration. Elle peut être changée avec <guimenuitem>Couleur suivante</guimenuitem> ou en cliquant sur le sélecteur d'orientation lorsqu'aucune pièce n'est sélectionnée. Le mode de configuration ne peut être utilisé que si aucun coup n'a encore été joué.</para>
 </listitem>
 </varlistentry>
 <varlistentry>
@@ -603,7 +603,7 @@
 <varlistentry>
 <term><guimenuitem>Arrêter</guimenuitem></term>
 <listitem>
-<para>Abandonner la génération du coup actuel. Vous pouvez faire continuer l'ordinateur en sélectionnant <guimenuitem>'Jouer'</guimenuitem>.</para>
+<para>Abandonner la génération du coup actuel. Vous pouvez faire continuer l'ordinateur en sélectionnant <guimenuitem>Jouer</guimenuitem>.</para>
 </listitem>
 </varlistentry>
 </variablelist>
@@ -753,7 +753,7 @@
 <varlistentry>
 <term><keysym>Ctrl+Maj+H</keysym></term>
 <listitem>
-<para>Comme <guimenuitem>'Trouver un coup'</guimenuitem> (Ctrl+H), mais parcourt la liste des coups légaux en arrière.</para>
+<para>Comme <guimenuitem>Trouver un coup</guimenuitem> (Ctrl+H), mais parcourt la liste des coups légaux en arrière.</para>
 </listitem>
 </varlistentry>
 <varlistentry>

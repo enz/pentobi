@@ -637,8 +637,8 @@ msgstr ""
 "(par exemple en appuyant sur le bouton avancer). La variation principale est"
 " censée représenter la vraie partie jouée. Si vous souhaitez qu'une "
 "variation secondaire devienne la variation principale, sélectionnez "
-"<guimenuitem>'Choisir comme variation principale'</guimenuitem> dans le menu"
-" <guimenu>Édition</guimenu>."
+"<guimenuitem>Choisir comme variation principale</guimenuitem> dans le menu "
+"<guimenu>Édition</guimenu>."
 
 #. (itstool) path: chapter/title
 #: docbook/index.docbook:435
@@ -667,8 +667,8 @@ msgid ""
 "evaluate each position in the main variation. The result is displayed in a "
 "window with a diagram of colored dots."
 msgstr ""
-"Une partie peut être analysée en sélectionnant <guimenuitem>'Analyser la "
-"partie'</guimenuitem> dans le menu <guimenu>Outils</guimenu>. Cela fera "
+"Une partie peut être analysée en sélectionnant <guimenuitem>Analyser la "
+"partie</guimenuitem> dans le menu <guimenu>Outils</guimenu>. Cela fera "
 "évaluer chaque position de la variation principale par le joueur ordinateur."
 " Le résultat est affiché dans une fenêtre avec un diagramme de points "
 "colorés."
@@ -702,8 +702,8 @@ msgstr ""
 "soudaines de la valeur peuvent vous aider à repérer des coups "
 "potentiellement mauvais. Vous pouvez revenir à la position avant le coup et "
 "essayer de trouver un meilleur coup ou demander à l'ordinateur ce qu'il "
-"aurait joué en sélectionnant <guimenuitem>'Jouer un coup'</guimenuitem> dans"
-" le menu <guimenu>Ordinateur</guimenu>."
+"aurait joué en sélectionnant <guimenuitem>Jouer un coup</guimenuitem> dans "
+"le menu <guimenu>Ordinateur</guimenu>."
 
 #. (itstool) path: sect1/title
 #: docbook/index.docbook:470
@@ -731,8 +731,8 @@ msgid ""
 " value, which can reduce the number of games needed for determining your "
 "real rating. If you are a beginner, leave the start value at 800."
 msgstr ""
-"Une partie classée est lancée en sélectionnant <guimenuitem>'Partie "
-"classée'</guimenuitem> dans le menu <guimenu>Partie</guimenu> ou la barre "
+"Une partie classée est lancée en sélectionnant <guimenuitem>Partie "
+"classée</guimenuitem> dans le menu <guimenu>Partie</guimenu> ou la barre "
 "d'outils. Si vous n'avez joué aucune partie classée dans la variante de jeu "
 "actuelle, il vous sera demandé de choisir une valeur de départ, ce qui peut "
 "réduire le nombre de parties nécessaires pour déterminer votre véritable "
@@ -786,7 +786,7 @@ msgid ""
 " be loaded by opening a context menu in the game table below the graph."
 msgstr ""
 "Vous pouvez toujours voir votre classement actuel en sélectionnant "
-"<guimenuitem>'Classement'</guimenuitem> dans le menu "
+"<guimenuitem>Classement</guimenuitem> dans le menu "
 "<guimenu>Outils</guimenu>. Cela ouvrira une fenêtre affichant l'évolution de"
 " votre classement au cours des 50 dernières parties sous forme de graphique."
 " Les 50 dernières parties sont automatiquement enregistrées et peuvent être "
@@ -890,13 +890,13 @@ msgid ""
 "variations."
 msgstr ""
 "Aller à la fin de la variation actuelle. Comme "
-"<guibutton>'Avancer'</guibutton>, cela utilise également la première "
-"variation dans les positions avec plusieurs variations de suite."
+"<guibutton>Avancer</guibutton>, cela utilise également la première variation"
+" dans les positions avec plusieurs variations de suite."
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:581
 msgid "<guibutton>Next Variation</guibutton>"
-msgstr "<guibutton>Prochaine variation</guibutton>"
+msgstr "<guibutton>Variation suivante</guibutton>"
 
 #. (itstool) path: listitem/para
 #: docbook/index.docbook:583
@@ -1266,7 +1266,7 @@ msgid ""
 msgstr ""
 "Modifie l'ordre des variations de sorte que la position actuelle apparaisse "
 "plus tôt lors de la navigation avec <guibutton>Variation "
-"prochaine</guibutton> /<guibutton>Variation précédente</guibutton>."
+"suivante</guibutton> /<guibutton>Variation précédente</guibutton>."
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:801
@@ -1282,7 +1282,7 @@ msgid ""
 msgstr ""
 "Modifie l'ordre des variations de sorte que la position actuelle apparaisse "
 "plus tard lors de la navigation avec <guibutton>Variation "
-"prochaine</guibutton> /<guibutton>Variation précédente</guibutton>."
+"suivante</guibutton> /<guibutton>Variation précédente</guibutton>."
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:812
@@ -1379,7 +1379,7 @@ msgstr ""
 "des règles du jeu. Les pièces existantes peuvent être supprimées du plateau "
 "en cliquant dessus. La couleur actuellement sélectionnée détermine également"
 " la couleur à jouer après la fin de la configuration. Elle peut être changée"
-" avec <guimenuitem>'Couleur suivante'</guimenuitem> ou en cliquant sur le "
+" avec <guimenuitem>Couleur suivante</guimenuitem> ou en cliquant sur le "
 "sélecteur d'orientation lorsqu'aucune pièce n'est sélectionnée. Le mode de "
 "configuration ne peut être utilisé que si aucun coup n'a encore été joué."
 
@@ -1618,7 +1618,7 @@ msgid ""
 "play by selecting <guimenuitem>Play</guimenuitem>."
 msgstr ""
 "Abandonner la génération du coup actuel. Vous pouvez faire continuer "
-"l'ordinateur en sélectionnant <guimenuitem>'Jouer'</guimenuitem>."
+"l'ordinateur en sélectionnant <guimenuitem>Jouer</guimenuitem>."
 
 #. (itstool) path: sect1/title
 #: docbook/index.docbook:1020
@@ -2016,8 +2016,8 @@ msgid ""
 "Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards "
 "through the list of legal moves."
 msgstr ""
-"Comme <guimenuitem>'Trouver un coup'</guimenuitem> (Ctrl+H), mais parcourt "
-"la liste des coups légaux en arrière."
+"Comme <guimenuitem>Trouver un coup</guimenuitem> (Ctrl+H), mais parcourt la "
+"liste des coups légaux en arrière."
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:1212
