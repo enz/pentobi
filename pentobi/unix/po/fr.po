@@ -23,11 +23,11 @@ msgstr ""
 
 #: io.sourceforge.pentobi.appdata.xml.in:7 io.sourceforge.pentobi.desktop.in:3
 msgid "Pentobi"
-msgstr ""
+msgstr "Pentobi"
 
 #: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:4
 msgid "Computer opponent for Blokus"
-msgstr "Adversaire d'ordinateur pour jouer à Blokus"
+msgstr "Adversaire informatique pour jouer à Blokus"
 
 #: io.sourceforge.pentobi.appdata.xml.in:10
 msgid ""
@@ -35,6 +35,10 @@ msgid ""
 "Blokus engine with different playing levels. The supported game variants are"
 " Classic, Duo, Trigon, Junior, Nexos, Callisto and GembloQ."
 msgstr ""
+"Pentobi est un adversaire informatique pour jouer à Blokus. Il dispose d'un "
+"moteur de jeu puissant avec différents niveaux de difficulté. Les variantes "
+"de jeu prises en charge sont : Classic, Duo, Trigon, Junior, Nexos, Callisto"
+" et GembloQ."
 
 #: io.sourceforge.pentobi.appdata.xml.in:15
 msgid ""
@@ -42,6 +46,10 @@ msgid ""
 "computer and use a game analysis function. Games can be saved in Smart Game "
 "Format with comments and move variations."
 msgstr ""
+"Les joueurs peuvent évaluer leur niveau en jouant des parties classées "
+"contre l'ordinateur et utiliser la fonction d'analyse de jeu. Les parties "
+"peuvent être sauvegardées au format Smart Game Format avec des commentaires "
+"et des variations de coups."
 
 #: io.sourceforge.pentobi.appdata.xml.in:20
 msgid ""
@@ -49,30 +57,34 @@ msgid ""
 "are property of their respective trademark holders. The trademark holders "
 "are not affiliated with the author of the program Pentobi."
 msgstr ""
+"Avertissement concernant les marques déposées : La marque Blokus et les "
+"autres marques mentionnées sont la propriété de leurs détenteurs respectifs."
+" Les détenteurs de ces marques ne sont pas affiliés à l'auteur du programme "
+"Pentobi."
 
 #: io.sourceforge.pentobi.appdata.xml.in:35
 msgid "Game variant Classic"
-msgstr ""
+msgstr "Variant de jeu Classique"
 
 #: io.sourceforge.pentobi.appdata.xml.in:40
 msgid "Game variant Duo"
-msgstr ""
+msgstr "Variant de jeu Duo"
 
 #: io.sourceforge.pentobi.appdata.xml.in:45
 msgid "Game variant Trigon"
-msgstr ""
+msgstr "Variant de jeu Trigon"
 
 #: io.sourceforge.pentobi.appdata.xml.in:50
 msgid "Game variant Nexos"
-msgstr ""
+msgstr "Variant de jeu Nexos"
 
 #: io.sourceforge.pentobi.appdata.xml.in:55
 msgid "Game variant GembloQ"
-msgstr ""
+msgstr "Variant de jeu GembloQ"
 
 #: io.sourceforge.pentobi.appdata.xml.in:64
 msgid "Markus Enzenberger"
-msgstr ""
+msgstr "Markus Enzenberger"
 
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
 #: io.sourceforge.pentobi.desktop.in:6

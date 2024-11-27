@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book lang="fr">
+<title>Pentobi</title>
+
+<chapter id="overview">
+<title>Introduction</title>
+<para>Pentobi est un adversaire informatique pour jouer à Blokus. Dans ce jeu, quatre joueurs placent des pièces similaires à celles du jeu vidéo Tetris sur un plateau de 20×20. Pentobi prend également en charge les variantes de jeu pour deux ou trois joueurs ainsi que les variantes Duo, Trigon, Junior, Nexos, GembloQ et Callisto.</para>
+</chapter>
+
+<chapter id="classic_rules">
+<title>Règles classiques</title>
+<para>Il y a quatre joueurs : Bleu, Jaune, Rouge et Vert, et un plateau composé de carrés de 20×20. Chaque joueur dispose d'un ensemble de 21 pièces de sa couleur, de forme polyomino, allant jusqu'à la taille cinq. Un polyomino est une forme composée de carrés reliés par leurs bords.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Les joueurs alternent pour placer une de leurs pièces sur le plateau. La première pièce d'un joueur doit couvrir son carré de départ. Les carrés de départ sont situés dans les coins du plateau.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_classic.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Les pièces suivantes doivent être placées sur des cases vides de manière à ce que la nouvelle pièce touche au moins une pièce de sa propre couleur par les coins, mais ne touche aucune pièce de sa propre couleur par les bords. La nouvelle pièce peut toucher les bords des pièces des couleurs adverses.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_classic.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Lorsque le joueur d'une couleur ne peut plus placer de pièces, il passe son tour et la couleur suivante continue. Lorsqu'aucun joueur ne peut plus placer de pièces, le joueur avec le score le plus élevé gagne. Le score d'une couleur est le nombre de cases occupées sur le plateau par cette couleur, plus un bonus de 15 points si la couleur a pu placer toutes ses pièces, et un bonus supplémentaire de 5 points si la couleur a pu placer toutes ses pièces et que la dernière pièce jouée était la pièce de un carré.</para>
+<sect1>
+<title>Règles pour deux joueurs</title>
+<para>Le jeu peut se jouer à deux joueurs. Le premier joueur joue les couleurs Bleu et Rouge, le deuxième joueur joue Jaune et Vert. Les points des deux couleurs jouées par un joueur sont additionnés.</para>
+</sect1>
+<sect1>
+<title>Règles pour trois joueurs</title>
+<para>Le jeu peut également se jouer à trois joueurs. Les joueurs jouent à tour de rôle la quatrième couleur (Vert). À la fin de la partie, le score du Vert est ignoré.</para>
+</sect1>
+<sect1>
+<title>Points de départ sans couleur</title>
+<para>Notez que les règles originales de Blokus Classic utilisaient des points de départ sans couleur. Cela signifie que chaque couleur peut librement choisir lequel des points de départ non occupés utiliser pour son premier coup. Pentobi ne supporte actuellement que la variante de règle avec des points de départ colorés, car cette variante de règle a été utilisée lors des premiers serveurs en ligne Blokus et des tournois Blokus.</para>
+</sect1>
+</chapter>
+
+<chapter id="duo_rules">
+<title>Règles du Duo</title>
+<para>La variante de jeu Duo est une autre variante pour deux joueurs. Le jeu se joue sur un plateau plus petit de 14×14 cases. Il n'y a qu'une seule couleur par joueur (Violet et Orange) et les cases de départ ne sont pas dans les coins, mais sur la case avec les coordonnées (5,10) pour Violet, et sur (10,5) pour Orange.</para>
+<informalfigure>
+<mediaobject>
+<imageobject><imagedata fileref="board_duo.png"/></imageobject>
+</mediaobject>
+</informalfigure>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_duo.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+</chapter>
+
+<chapter id="trigon_rules">
+<title>Règles du Trigon</title>
+<para>Le Trigon est une autre variante du jeu. Les règles sont similaires à celles de la variante Classic, mais il utilise un plateau de forme différente et un ensemble de pièces différent. Chaque couleur utilise 22 pièces de forme polyiamant, allant jusqu'à la taille six. Un polyiamant est une forme composée d'un certain nombre de triangles équilatéraux reliés par leurs bords.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_trigon.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Le plateau est également composé de triangles et a la forme d'un hexagone avec une taille de côté de neuf triangles.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_trigon.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Il y a six points de départ sur le plateau, chacun situé au centre de la quatrième rangée, éloigné de chaque bord. Les points de départ ne sont pas colorés et les joueurs peuvent librement choisir un point de départ pour la première pièce d'une couleur.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_trigon.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<sect1>
+<title>Règles pour deux joueurs</title>
+<para>Comme la variante de jeu Classic, Trigon peut se jouer à deux joueurs, un joueur jouant Bleu et Rouge, et l'autre joueur Jaune et Vert.</para>
+</sect1>
+<sect1>
+<title>Règles pour trois joueurs</title>
+<para>Trigon peut se jouer à trois joueurs en utilisant les mêmes règles que pour la variante à quatre joueurs. La variante à trois joueurs se joue sur un plateau plus petit, avec une taille de côté de huit triangles. Les points de départ sont situés au centre de la troisième rangée, éloignés de chaque bord.</para>
+</sect1>
+</chapter>
+
+<chapter id="junior_rules">
+<title>Règles du Junior</title>
+<para>Junior est une variante simplifiée du jeu pour deux joueurs. Il se joue sur le même plateau de 14×14 que la variante Duo, mais utilise uniquement un sous-ensemble des polyominos jusqu'à la taille cinq, et les joueurs reçoivent deux de chaque polyomino.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_junior.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Les points bonus ne sont pas utilisés dans Junior.</para>
+</chapter>
+
+<chapter id="nexos_rules">
+<title>Règles du Nexos</title>
+<para>Nexos est un jeu de société similaire à Blokus. Le plateau est une grille rectangulaire de 13×13 cases. Chaque couleur utilise 24 pièces composées de jusqu'à quatre segments de ligne connectés.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_nexos.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Chaque couleur a un point de départ à l'intersection des troisième lignes près d'un coin. La première pièce doit toucher le point de départ.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_nexos.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Les pièces suivantes doivent être placées sur des segments de ligne vides de manière à ce qu'un segment de la nouvelle pièce touche une intersection déjà touchée par un segment de la même couleur. Peu importe si des pièces d'autres couleurs touchent ou couvrent la même intersection. Cependant, les pièces ne doivent pas se chevaucher. Les jonctions entre les segments d'une pièce sont telles que deux jonctions rectangulaires de pièces différentes peuvent couvrir la même intersection sans se chevaucher, mais les jonctions droites ne peuvent pas.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_nexos.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Le score d'une couleur est le nombre de segments de ligne sur le plateau couverts par cette couleur, plus un bonus de 10 points si la couleur a pu placer toutes ses pièces.</para>
+<sect1>
+<title>Règles pour deux joueurs</title>
+<para>Comme Blokus, Nexos peut se jouer à deux joueurs, un joueur jouant Bleu et Rouge, et l'autre joueur Jaune et Vert.</para>
+</sect1>
+</chapter>
+
+<chapter id="gembloq_rules">
+<title>Règles du GembloQ</title>
+<para>GembloQ est un jeu de société similaire à Blokus. Les cases du plateau sont tournées de 45 degrés. Le plateau a une taille diagonale de 27 cases. En plus des cases entières, les bords contiennent également des demi-cases de sorte que les bords forment des lignes droites.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_gembloq.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Chaque joueur dispose d'un ensemble de 21 pièces, comprenant un sous-ensemble des pièces utilisées dans Blokus, mais également certaines pièces contenant une demi-case.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_gembloq.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Comme dans Blokus, les cases de départ sont dans les coins, le premier coup doit couvrir complètement la case de départ de la couleur et les coups suivants doivent toucher une pièce de la couleur du joueur par un sommet, mais pas bord à bord. Les coups sont également légaux si un sommet d'une demi-case touche un bord d'une pièce de la même couleur.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_gembloq.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Le score est calculé comme dans Blokus, les demi-cases comptent 0,5 point. Les points bonus ne sont pas utilisés. Le départage par l'attribution de valeurs supplémentaires aux pièces, comme décrit dans les règles officielles de GembloQ, n'est actuellement pas pris en charge par Pentobi.</para>
+<sect1>
+<title>Règles pour deux et trois joueurs</title>
+<para>Les variantes de jeu pour deux et trois joueurs utilisent des plateaux plus petits et des emplacements de points de départ différents. En plus de la variante standard pour deux joueurs, Pentobi prend également en charge une variante de jeu pour deux joueurs comme dans Blokus, où chaque joueur joue deux couleurs.</para>
+</sect1>
+</chapter>
+
+<chapter id="callisto_rules">
+<title>Règles du Callisto</title>
+<para>Callisto est un autre jeu de société similaire à Blokus. Le plateau est dérivé du plateau classique de 20×20 de Blokus en supprimant les coins, de sorte qu'il reste un octogone avec un côté supérieur de taille six. Les pièces sont un sous-ensemble des polyominos jusqu'à la taille cinq. Elles incluent trois pièces de 1×1 par joueur qui jouent un rôle spécial.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="pieces_callisto.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Les pièces de 1×1 peuvent être placées n'importe où sur le plateau, à l'exception du centre du plateau. Le centre est constitué d'un octogone de largeur six et de côté supérieur de taille deux. Les deux premiers coups d'un joueur doivent utiliser une pièce de 1×1, la troisième pièce de 1×1 peut être jouée à tout moment par la suite.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="board_callisto.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Toutes les pièces plus grandes peuvent être placées n'importe où sur le plateau, mais doivent toucher une pièce existante de la même couleur bord à bord.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="position_callisto.png"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Le score d'une couleur est le nombre de cases sur le plateau occupées par cette couleur, sans compter les pièces de 1×1. Les points bonus ne sont pas utilisés. Contrairement à Blokus, en cas d'égalité, le départage est en faveur du joueur qui a commencé plus tard.</para>
+<sect1>
+<title>Règles pour deux et trois joueurs</title>
+<para>Le jeu peut se jouer avec moins de quatre joueurs en utilisant un plateau plus petit. Pour trois joueurs, le plateau est un octogone de largeur 20 et de côté supérieur de taille deux. Pour deux joueurs, le plateau est un octogone de largeur 17 et de côté supérieur de taille deux. La taille du centre reste inchangée. En plus de la variante standard pour deux joueurs, Pentobi prend également en charge une variante de jeu pour deux joueurs comme dans Blokus, où chaque joueur joue deux couleurs.</para>
+</sect1>
+</chapter>
+
+<chapter id="user_interface">
+<title>Comment utiliser Pentobi</title>
+<sect1>
+<title>Plateau</title>
+<para>Les pièces peuvent être sélectionnées en cliquant sur l'une des pièces non jouées ou en utilisant les <link linkend="shortcuts">touches de raccourci</link>. Les pièces peuvent être jouées en les faisant glisser à un emplacement correspondant à un coup légal avec la souris ou les touches fléchées, puis en appuyant sur le bouton gauche de la souris ou la touche Entrée.</para>
+<para>Les pièces jouées sur le plateau peuvent avoir des numéros indiquant le numéro du coup dans lequel la pièce a été jouée. Une lettre après le numéro du coup indique qu'il existe une variation pour ce coup (voir ci-dessous).</para>
+<para>L'affichage du score montre les points actuels pour chaque couleur ou joueur. Les points sont la somme des points sur le plateau et des points bonus. Les points sont soulignés s'ils sont définitifs, car la couleur ne peut plus jouer d'autres pièces. Une petite étoile indique que les points incluent un bonus.</para>
+</sect1>
+<sect1>
+<title>Jouer contre l'ordinateur</title>
+<para>Le plateau peut être utilisé pour créer des enregistrements de parties jouées par des humains ou pour jouer contre l'ordinateur. Dans les parties contre l'ordinateur, l'ordinateur peut jouer n'importe quelle (ou plusieurs) couleurs.</para>
+<para>Lorsque vous commencez une nouvelle partie, l'humain jouera la ou les couleurs du premier joueur par défaut et l'ordinateur jouera toutes les autres couleurs. Pour modifier cela, utilisez <guimenuitem>Configuration</guimenuitem> depuis le menu <guimenu>Ordinateur</guimenu> ou la barre d'outils et sélectionnez les couleurs que l'ordinateur doit jouer.</para>
+<para>L'exception est que l'ordinateur ne jouera aucune couleur par défaut s'il n'a joué aucune couleur dans la partie précédente. Cela empêche l'ordinateur de commencer à jouer automatiquement si l'utilisateur souhaite principalement utiliser le plateau pour saisir des séquences de coups ou pour des tâches d'édition similaires. Après avoir chargé une partie sauvegardée, l'ordinateur ne joue également aucune couleur par défaut.</para>
+<para>Sélectionner <guimenuitem>Jouer</guimenuitem> dans le menu <guimenu>Ordinateur</guimenu> ou la barre d'outils fait toujours jouer un coup à l'ordinateur pour la couleur actuelle. Si l'ordinateur n'a pas encore joué cette couleur, il commencera également à jouer cette couleur (et uniquement cette couleur) à partir de maintenant.</para>
+</sect1>
+<sect1>
+<title>Variations de coups et l'arbre de jeu</title>
+<para>Lorsque vous jouez une partie, Pentobi enregistre la séquence des coups et il est toujours possible de revenir à une position précédente et de jouer différemment. Si vous faites cela, la nouvelle séquence est enregistrée comme une séquence alternative (appelée variation). Les variations peuvent également être utilisées par les annotateurs pour commenter des parties existantes. Les variations peuvent exister à n'importe quelle position du plateau et peuvent avoir elles-mêmes des sous-variations. La partie peut donc devenir un arbre de jeu, dans lequel chaque nœud représente une position du plateau. Vous pouvez naviguer dans l'arbre de jeu avec les éléments du menu <guimenu>Déplacement</guimenu> et les boutons de navigation.</para>
+<para>La variation principale est la séquence de coups qui commence à la position de départ et sélectionne toujours le premier nœud enfant à chaque position (par exemple en appuyant sur le bouton avancer). La variation principale est censée représenter la vraie partie jouée. Si vous souhaitez qu'une variation secondaire devienne la variation principale, sélectionnez <guimenuitem>'Choisir comme variation principale'</guimenuitem> dans le menu <guimenu>Édition</guimenu>.</para>
+</sect1>
+</chapter>
+
+<chapter id="become_stronger">
+<title>Devenir un joueur plus fort</title>
+<para>Pentobi dispose de fonctionnalités qui peuvent vous aider à devenir un joueur de Blokus plus fort.</para>
+<sect1 id="analysis">
+<title>Analyse de la partie</title>
+<para>Une partie peut être analysée en sélectionnant <guimenuitem>'Analyser la partie'</guimenuitem> dans le menu <guimenu>Outils</guimenu>. Cela fera évaluer chaque position de la variation principale par le joueur ordinateur. Le résultat est affiché dans une fenêtre avec un diagramme de points colorés.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="analysis.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Chaque point représente une position de jeu dans laquelle la couleur du point devait jouer. Les points sont disposés horizontalement par numéro de coup. L'axe vertical représente la probabilité estimée de gagner la partie pour la couleur qui devait jouer. Les clics de souris sur le diagramme vous amèneront à la position correspondante.</para>
+<para>Les valeurs de position ne sont que des estimations et l'ordinateur peut parfois évaluer incorrectement certaines positions. Cependant, les chutes soudaines de la valeur peuvent vous aider à repérer des coups potentiellement mauvais. Vous pouvez revenir à la position avant le coup et essayer de trouver un meilleur coup ou demander à l'ordinateur ce qu'il aurait joué en sélectionnant <guimenuitem>'Jouer un coup'</guimenuitem> dans le menu <guimenu>Ordinateur</guimenu>.</para>
+</sect1>
+<sect1 id="rating">
+<title>Déterminer votre classement</title>
+<para>Vous pouvez suivre vos progrès en jouant des parties notées contre l'ordinateur. Les résultats des parties sont utilisés pour déterminer votre classement actuel. Le classement est un nombre qui représente votre niveau de jeu.</para>
+<para>Une partie classée est lancée en sélectionnant <guimenuitem>'Partie classée'</guimenuitem> dans le menu <guimenu>Partie</guimenu> ou la barre d'outils. Si vous n'avez joué aucune partie classée dans la variante de jeu actuelle, il vous sera demandé de choisir une valeur de départ, ce qui peut réduire le nombre de parties nécessaires pour déterminer votre véritable classement. Si vous êtes débutant, laissez la valeur de départ à 800.</para>
+<para>Pour chaque partie classée, l'ordinateur choisira un niveau de jeu pour l'adversaire informatique en fonction de votre classement actuel. La couleur que vous jouez sera choisie au hasard à chaque partie.</para>
+<para>Pendant une partie classée, la plupart des fonctions non nécessaires pour jouer sont désactivées : vous ne pouvez pas annuler les coups, naviguer dans la partie, changer les couleurs de l'ordinateur ou modifier le niveau de jeu. Pour obtenir un classement précis, vous devez toujours jouer les parties classées jusqu'à la fin.</para>
+<para>Une fois la partie terminée, votre classement sera mis à jour en fonction du résultat de la partie et du niveau de l'ordinateur. Pour le résultat de la partie, seul le fait d'avoir gagné, perdu ou fait égalité compte. Le nombre exact de points obtenus n'a pas d'importance.</para>
+<informalfigure>
+<mediaobject>
+<imageobject>
+<imagedata fileref="rating.jpg"/>
+</imageobject>
+</mediaobject>
+</informalfigure>
+<para>Vous pouvez toujours voir votre classement actuel en sélectionnant <guimenuitem>'Classement'</guimenuitem> dans le menu <guimenu>Outils</guimenu>. Cela ouvrira une fenêtre affichant l'évolution de votre classement au cours des 50 dernières parties sous forme de graphique. Les 50 dernières parties sont automatiquement enregistrées et peuvent être chargées en ouvrant un menu contextuel dans la table de jeu sous le graphique.</para>
+</sect1>
+</chapter>
+
+<chapter id="window_menu">
+<title>Menu fenêtre et barre d'outils</title>
+<sect1>
+<title>Boutons de navigation dans la barre d'outils</title>
+<variablelist>
+<varlistentry>
+<term><guibutton>Début</guibutton></term>
+<listitem>
+<para>Aller au début de la partie.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>En arrière de 10</guibutton></term>
+<listitem>
+<para>Revenir de 10 coups en arrière dans la variation actuelle. Le bouton supporte l'auto-répétition lorsqu'il est maintenu enfoncé.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>En arrière</guibutton></term>
+<listitem>
+<para>Revenir d'un coup en arrière dans la variation actuelle. Le bouton supporte l'auto-répétition lorsqu'il est maintenu enfoncé.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>En avant</guibutton></term>
+<listitem>
+<para>Avancer d'un coup dans la variation actuelle. Si la position actuelle a plusieurs variations de suite (c'est-à-dire que le nœud actuel dans l'arbre de jeu a plusieurs nœuds enfants), la première variation sera utilisée. Le bouton supporte l'auto-répétition lorsqu'il est maintenu enfoncé.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>En avant de 10</guibutton></term>
+<listitem>
+<para>Avancer de 10 coups dans la variation actuelle. Si une position a plusieurs variations de suite (c'est-à-dire que le nœud actuel dans l'arbre de jeu a plusieurs nœuds enfants), la première variation sera utilisée. Le bouton supporte l'auto-répétition lorsqu'il est maintenu enfoncé.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Fin</guibutton></term>
+<listitem>
+<para>Aller à la fin de la variation actuelle. Comme <guibutton>'Avancer'</guibutton>, cela utilise également la première variation dans les positions avec plusieurs variations de suite.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Prochaine variation</guibutton></term>
+<listitem>
+<para>Aller à la variation suivante du dernier coup joué (c'est-à-dire au nœud frère suivant du nœud actuel dans l'arbre de jeu).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guibutton>Variation précédente</guibutton></term>
+<listitem>
+<para>Aller à la variation précédente du dernier coup joué (c'est-à-dire au nœud frère précédent du nœud actuel dans l'arbre de jeu).</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title>Menu <guimenu>Partie</guimenu></title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Nouveau</guimenuitem></term>
+<term>(<keysym>Ctrl+N</keysym>)</term>
+<listitem>
+<para>Commencer une nouvelle partie.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Partie classée</guimenuitem></term>
+<term>(<keysym>Ctrl+Maj+N</keysym>)</term>
+<listitem>
+<para>Commencer une nouvelle <link linkend="rating">partie classée</link> contre l'ordinateur.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Variante de jeu</guimenuitem></term>
+<listitem>
+<para>Sélectionner une variante de jeu et commencer une nouvelle partie de cette variante.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Infos sur la partie</guimenuitem></term>
+<term>(<keysym>Ctrl+I</keysym>)</term>
+<listitem>
+<para>Afficher ou modifier des informations supplémentaires sur la partie, comme le nom des joueurs ou la date à laquelle la partie a été jouée.</para>
+</listitem>
+</varlistentry>
+<varlistentry><term><guimenuitem>Annuler le coup</guimenuitem></term>
+<listitem>
+<para>Annuler le dernier coup joué et le supprimer de l'arbre de jeu. Annuler un coup n'est possible que s'il s'agit du dernier coup de la variation en cours (c'est-à-dire d'un nœud feuille dans l'arbre de jeu ; utilisez <guimenu>Édition</guimenu>/<guimenuitem>Couper</guimenuitem> pour supprimer les nœuds internes de l'arbre de jeu).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Trouver un coup</guimenuitem></term>
+<term>(<keysym>Ctrl+H</keysym>)</term>
+<listitem>
+<para>Trouver un coup légal pour la couleur actuelle et l'afficher pendant quelques secondes sur le plateau. Sélectionner cette option plusieurs fois affichera tous les coups légaux.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Ouvrir</guimenuitem></term>
+<term>(<keysym>Ctrl+O</keysym>)</term>
+<listitem>
+<para>Ouvrir une partie sauvegardée. La position du plateau après le chargement sera la dernière position de la variation principale, sauf si la partie commence par une position de départ. Si la partie commence par une position de départ, la position du plateau sera la première position à la place. Cela évite que des solutions soient immédiatement affichées si le fichier contient un puzzle Blokus avec la solution comme variation principale.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenu>Fichiers récents</guimenu></term>
+<listitem>
+<para>Charger une partie récemment utilisée.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Enregistrer</guimenuitem></term>
+<term>(<keysym>Ctrl+S</keysym>)</term>
+<listitem>
+<para>Enregistrer la partie en cours.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Enregistrer sous</guimenuitem></term>
+<term>(<keysym>Ctrl+Maj+S</keysym>)</term>
+<listitem>
+<para>Enregistrer la partie en cours sous un nouveau nom de fichier.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Exporter une image</guimenuitem></term>
+<listitem>
+<para>Enregistrer la position actuelle sous forme de fichier image. Plusieurs formats de fichiers image sont pris en charge, le format étant dérivé de l'extension du nom du fichier (par exemple, ".png" pour le format PNG). Pour une image nette, la largeur de l'image doit être un multiple entier du nombre de colonnes du plateau dans la variante de jeu actuelle.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Quitter</guimenuitem></term>
+<term>(<keysym>Ctrl+Q</keysym>)</term>
+<listitem>
+<para>Quitter Pentobi.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title>Menu <guimenu>Déplacement</guimenu> </title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Numéro de coup</guimenuitem></term>
+<term>(<keysym>Ctrl+G</keysym>)</term>
+<listitem>
+<para>Aller au coup correspondant au numéro de coup donné dans la variation en cours.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Variation principale</guimenuitem></term>
+<term>(<keysym>Ctrl+M</keysym>)</term>
+<listitem>
+<para>Revenir à la dernière position de la variation en cours qui faisait partie de la variation principale.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>Au début de la branche</term>
+<term>(<keysym>Ctrl+B</keysym>)</term>
+<listitem>
+<para>Revenir à la dernière position de la variation en cours qui avait un coup alternatif.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Commentaire suivant</guimenuitem></term>
+<term>(<keysym>Ctrl+E</keysym>)</term>
+<listitem>
+<para>Aller à la position suivante avec un commentaire. Si le champ de texte du commentaire n'était pas visible, il le deviendra. Sélectionner cet élément plusieurs fois affichera toutes les positions avec des commentaires dans l'arbre de jeu.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title>Menu <guimenu>Édition</guimenu> </title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Annotation</guimenuitem></term>
+<listitem>
+<para>Ajouter un symbole d'annotation de style échecs (par exemple ‼) au coup en cours. Les symboles sont ajoutés aux numéros de coup dans la barre d'état et, selon la configuration de <guilabel>Marquage des coups</guilabel>, sur le plateau.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Choisir comme variation principale</guimenuitem></term>
+<listitem>
+<para>Faire de la variation actuelle la variation principale de la partie. Cela réorganise les nœuds de l'arbre de jeu de sorte que la variation actuelle devienne la variation principale.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Variation vers le haut</guimenuitem></term>
+<listitem>
+<para>Modifie l'ordre des variations de sorte que la position actuelle apparaisse plus tôt lors de la navigation avec <guibutton>Variation prochaine</guibutton> /<guibutton>Variation précédente</guibutton>.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Variation vers le bas</guimenuitem></term>
+<listitem>
+<para>Modifie l'ordre des variations de sorte que la position actuelle apparaisse plus tard lors de la navigation avec <guibutton>Variation prochaine</guibutton> /<guibutton>Variation précédente</guibutton>.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Détruire les variations</guimenuitem></term>
+<listitem>
+<para>Supprimer toutes les variations sauf la variation principale. Si la position actuelle ne fait pas partie de la variation principale, elle sera d'abord modifiée pour correspondre à une position de la variation principale (comme dans <guimenuitem>Variation principale</guimenuitem>).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Couper</guimenuitem></term>
+<listitem>
+<para>Supprimer le nœud avec la position actuelle, ainsi que tout son sous-arbre, de l'arbre de jeu.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Couper les branches filles</guimenuitem></term>
+<listitem>
+<para>Supprimer tous les nœuds enfants du nœud avec la position actuelle de l'arbre de jeu.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Garder la position</guimenuitem></term>
+<listitem>
+<para>Supprimer tous les coups et garder uniquement la position actuelle comme position de départ. Cela peut être utilisé pour créer des fichiers qui commencent avec une position fixe donnée.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Garder le sous-arbre</guimenuitem></term>
+<listitem>
+<para>Comme <guimenuitem>Garder la position</guimenuitem>, mais ne supprime pas les coups après la position actuelle.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Position</guimenuitem></term>
+<listitem>
+<para>Entrer ou quitter le mode de configuration. En mode de configuration, les pièces peuvent être placées n'importe où sur le plateau, même en violation des règles du jeu. Les pièces existantes peuvent être supprimées du plateau en cliquant dessus. La couleur actuellement sélectionnée détermine également la couleur à jouer après la fin de la configuration. Elle peut être changée avec <guimenuitem>'Couleur suivante'</guimenuitem> ou en cliquant sur le sélecteur d'orientation lorsqu'aucune pièce n'est sélectionnée. Le mode de configuration ne peut être utilisé que si aucun coup n'a encore été joué.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Couleur suivante</guimenuitem></term>
+<listitem>
+<para>Choisir la couleur suivante pour sélectionner les pièces. Cela peut être utilisé, par exemple, pour entrer des records de parties, dans lesquels les coups d'une couleur ont été ignorés parce que cette couleur a manqué de temps.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title>Menu <guimenu>Affichage</guimenu> </title>
+<variablelist>
+<varlistentry><term><guimenuitem>Apparence</guimenuitem></term>
+<listitem>
+<para>
+<variablelist>
+<varlistentry>
+<term><guilabel>Coordonnées</guilabel></term>
+<listitem>
+<para>Afficher les coordonnées autour du plateau pour les cases. La convention des coordonnées est la même que celle utilisée dans le format de fichier SGF Blokus utilisé par Pentobi.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Afficher les variations</guilabel></term>
+<listitem>
+<para>Ajoute une lettre au numéro du coup sur le plateau si le coup a des variations. Si les coups sont marqués par des points au lieu de numéros, un cercle sera utilisé à la place du point pour les coups qui ne font pas partie de la variation principale.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Numéro de coup</guilabel></term>
+<listitem>
+<para>Cette option existe uniquement en mode bureau et affiche le numéro du coup, l'annotation du coup et les informations sur les variations du côté droit de la barre d'état.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Thème de couleur</guilabel></term>
+<listitem>
+<para>Change les couleurs de la fenêtre, du plateau et des pièces.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Marquage des coups</guilabel></term>
+<listitem>
+<para>Modifie la façon dont les coups sont marqués sur le plateau. Les options sont : marquer le dernier coup joué avec un point ou un numéro, afficher les numéros de tous les coups, ou ne pas afficher de marque.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Afficher le commentaire</guilabel></term>
+<listitem>
+<para>Cette option n'existe que en mode bureau et configure la visibilité de la zone de commentaire lorsque la position change. Par défaut, la zone de commentaire n'est affichée que s'il existe un commentaire pour la position actuelle.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Commentaire</guimenuitem></term>
+<term>(<keysym>Ctrl+T</keysym>)</term>
+<listitem>
+<para>Alterner la visibilité de la zone de commentaire pour la position actuelle.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Plein écran</guimenuitem></term>
+<term>(<keysym>F11</keysym>)</term>
+<listitem>
+<para>Passer en plein écran ou quitter le mode plein écran. Pour quitter le mode plein écran sans utiliser le menu de la fenêtre, appuyez sur la touche F11.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title>Menu <guimenu>Ordinateur</guimenu></title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Configuration</guimenuitem></term>
+<term>(<keysym>Ctrl+U</keysym>)</term>
+<listitem>
+<para>Sélectionner les couleurs jouées par l'ordinateur et le niveau de jeu de l'ordinateur. Les niveaux plus élevés sont plus forts, mais peuvent faire prendre plus de temps à l'ordinateur pour jouer sur des ordinateurs plus lents.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Jouer</guimenuitem></term>
+<term>(<keysym>Ctrl+L</keysym>)</term>
+<listitem>
+<para>Faire jouer un coup à l'ordinateur pour la couleur actuelle. Cela peut être utilisé pour changer la couleur jouée par l'ordinateur ou pour reprendre la partie après avoir navigué dans l'arbre de jeu. Si l'ordinateur n'a pas encore joué cette couleur, il jouera désormais cette couleur (et uniquement cette couleur).</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Jouer un coup</guimenuitem></term>
+<term>(<keysym>Ctrl+Maj+L</keysym>)</term>
+<listitem>
+<para>Faire jouer un seul coup à l'ordinateur pour la couleur actuelle sans changer les couleurs jouées par l'ordinateur.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Arrêter</guimenuitem></term>
+<listitem>
+<para>Abandonner la génération du coup actuel. Vous pouvez faire continuer l'ordinateur en sélectionnant <guimenuitem>'Jouer'</guimenuitem>.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title>Menu <guimenu>Outils</guimenu></title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Classement</guimenuitem></term>
+<listitem>
+<para>Afficher une fenêtre de dialogue avec le classement de l'utilisateur dans la variante de jeu actuelle.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Effacer le classement</guimenuitem></term>
+<listitem>
+<para>Supprime les informations de classement et l'historique pour la variante de jeu actuelle.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Analyser la partie</guimenuitem></term>
+<listitem>
+<para>Effectuer une <link linkend="analysis">analyse de la partie</link>.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>Effacer l’analyse</guimenuitem></term>
+<listitem>
+<para>Supprimer l'analyse de la partie actuelle.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+<sect1>
+<title>Menu <guimenu>Aide</guimenu></title>
+<variablelist>
+<varlistentry>
+<term><guimenuitem>Aide de Pentobi</guimenuitem></term>
+<term>(<keysym>F1</keysym>)</term>
+<listitem>
+<para>Afficher une fenêtre pour parcourir le manuel utilisateur de Pentobi.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><guimenuitem>À propos de Pentobi</guimenuitem></term>
+<listitem>
+<para>Afficher une fenêtre d'information avec des détails sur cette version de Pentobi.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+</chapter>
+
+<chapter id="shortcuts">
+<title>Touches de raccourci</title>
+<para>En plus des touches de raccourci, qui sont affichées dans le menu Fenêtre, les touches de raccourci suivantes sont prises en charge par Pentobi. Notez que ces raccourcis ne sont pas actifs lorsque le champ de texte des commentaires a le focus. Dans ce cas, le focus peut être déplacé en dehors du champ de texte des commentaires en appuyant sur la touche Tab.</para>
+<variablelist>
+<varlistentry>
+<term><keysym>Plus</keysym></term>
+<listitem>
+<para>Sélectionner la pièce suivante</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Moins</keysym></term>
+<listitem>
+<para>Sélectionner la pièce précédente</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Échap</keysym></term>
+<listitem>
+<para>Effacer la pièce sélectionnée</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Gauche</keysym></term>
+<term><keysym>Droite</keysym></term>
+<term><keysym>Haut</keysym></term>
+<term><keysym>Bas</keysym></term>
+<term><keysym>Maj+Gauche</keysym></term>
+<term><keysym>Maj+Droite</keysym></term>
+<term><keysym>Maj+Haut</keysym></term>
+<term><keysym>Maj+Bas</keysym></term>
+<listitem>
+<para>Déplacer la pièce sélectionnée. La touche Maj permet de déplacer la pièce plus rapidement.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Espace</keysym></term>
+<listitem>
+<para>Orientation suivante de la pièce sélectionnée</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Maj+Espace</keysym></term>
+<listitem>
+<para>Orientation précédente de la pièce sélectionnée</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Entrée</keysym></term>
+<listitem>
+<para>Jouer la pièce sélectionnée</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>1</keysym></term>
+<term><keysym>2</keysym></term>
+<term><keysym>A</keysym></term>
+<term><keysym>C</keysym></term>
+<term><keysym>E</keysym></term>
+<term><keysym>F</keysym></term>
+<term><keysym>G</keysym></term>
+<term><keysym>H</keysym></term>
+<term><keysym>I</keysym></term>
+<term><keysym>J</keysym></term>
+<term><keysym>L</keysym></term>
+<term><keysym>N</keysym></term>
+<term><keysym>O</keysym></term>
+<term><keysym>P</keysym></term>
+<term><keysym>S</keysym></term>
+<term><keysym>T</keysym></term>
+<term><keysym>U</keysym></term>
+<term><keysym>V</keysym></term>
+<term><keysym>W</keysym></term>
+<term><keysym>X</keysym></term>
+<term><keysym>Y</keysym></term>
+<term><keysym>Z</keysym></term>
+<listitem>
+<para>Sélectionner une pièce selon les noms de pièces couramment utilisés. S'il y a plusieurs pièces avec la même lettre (par exemple, I3, I4, I5), appuyer plusieurs fois sur la touche permet de faire défiler les options. Certaines lettres sont utilisées uniquement dans certaines variantes de jeu. Par exemple, A est utilisé uniquement dans Trigon pour les pièces A6 et A4 (également appelées 'homard' et 'triangle').</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Ctrl+Début</keysym></term>
+<term><keysym>Ctrl+Maj+Gauche</keysym></term>
+<term><keysym>Ctrl+Gauche</keysym></term>
+<term><keysym>Ctrl+Droite</keysym></term>
+<term><keysym>Ctrl+Maj+Droite</keysym></term>
+<term><keysym>Ctrl+Fin</keysym></term>
+<term><keysym>Ctrl+Haut</keysym></term>
+<term><keysym>Ctrl+Bas</keysym></term>
+<listitem>
+<para>Naviguer dans la partie : début, dix coups en arrière, en arrière, en avant, dix coups en avant, fin, variation précédente, variation suivante.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Ctrl+Maj+H</keysym></term>
+<listitem>
+<para>Comme <guimenuitem>'Trouver un coup'</guimenuitem> (Ctrl+H), mais parcourt la liste des coups légaux en arrière.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Ctrl+T</keysym></term>
+<listitem>
+<para>Alterner la vue entre le commentaire et l'analyse de la partie.</para>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term><keysym>Alt+M</keysym></term>
+<listitem>
+<para>Ouvrir le menu</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</chapter>
+
+</book>

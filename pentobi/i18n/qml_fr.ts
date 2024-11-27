@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -14,7 +12,7 @@
     </message>
     <message>
         <source>Computer opponent for Blokus</source>
-        <translation>Adversaire d&apos;ordinateur pour jouer à Blokus</translation>
+        <translation>Adversaire informatique pour jouer à Blokus</translation>
     </message>
 </context>
 <context>
@@ -76,7 +74,7 @@
     </message>
     <message>
         <source>Move marking:</source>
-        <translation>Marquage de coups :</translation>
+        <translation>Marquage des coups :</translation>
     </message>
     <message>
         <source>Last with dot</source>
@@ -177,17 +175,17 @@
     <message>
         <source>Previous</source>
         <extracomment>Go to previous page of user manual</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Précédent</translation>
     </message>
     <message>
         <source>Contents</source>
         <extracomment>Go to table of contents of user manual</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Sommaire</translation>
     </message>
     <message>
         <source>Next</source>
         <extracomment>Go to next page of user manual</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Suivant</translation>
     </message>
 </context>
 <context>
@@ -483,7 +481,7 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initialize your rating for this game variant.</source>
-        <translation>Initialisez votre classement pour cette variante du jeu.</translation>
+        <translation>Initialiser votre classement pour cette variante de jeu.</translation>
     </message>
     <message>
         <source>Initial rating:</source>
@@ -535,7 +533,7 @@
     </message>
     <message>
         <source>Game Info</source>
-        <translation>Info sur la partie</translation>
+        <translation>Infos sur la partie</translation>
     </message>
     <message>
         <source>Move Number…</source>
@@ -663,7 +661,7 @@
     </message>
     <message>
         <source>Game Variant…</source>
-        <translation>Variante du jeu…</translation>
+        <translation>Variante de jeu…</translation>
     </message>
     <message>
         <source>Export Image…</source>
@@ -868,7 +866,7 @@
     </message>
     <message>
         <source>Game variant:</source>
-        <translation>Variante du jeu :</translation>
+        <translation>Variante de jeu :</translation>
     </message>
     <message>
         <source>Classic (2)</source>
@@ -1058,7 +1056,7 @@
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
-        <translation>Supprimer toutes les informations de classement de l’actuelle variante du jeu ?</translation>
+        <translation>Supprimer toutes les informations de classement pour la variante de jeu actuelle ?</translation>
     </message>
     <message>
         <source>Delete all variations?</source>
@@ -1131,7 +1129,7 @@
     </message>
     <message>
         <source>You have not yet played rated games in this game variant.</source>
-        <translation>Vous n’avez pas encore joué des parties classées dans cette variante du jeu.</translation>
+        <translation>Vous n’avez pas encore joué de parties classées dans cette variante de jeu.</translation>
     </message>
     <message>
         <source>Truncate this subtree?</source>
@@ -1286,67 +1284,67 @@
     </message>
     <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"></translation>
+        <translation>adversaire informatique pour jouer à Blokus</translation>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Définir le niveau maximum à &lt;n&gt;.</translation>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas utiliser de bibliothèques d&apos;ouvertures.</translation>
     </message>
     <message>
         <source>Use layout optimized for smartphones.</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser une mise en page optimisée pour les smartphones.</translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ne pas retarder les coups rapides de l&apos;ordinateur.</translation>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Définir la graine aléatoire sur &lt;n&gt;.</translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser &lt;n&gt; threads (0 = auto).</translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Imprimer les informations de journalisation sur l&apos;erreur standard.</translation>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>fichier.blksgf</translation>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier SGF Blokus à ouvrir (facultatif).</translation>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"></translation>
+        <translation>--maxlevel doit être entre 1 et %1</translation>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"></translation>
+        <translation>--seed doit être un nombre positif</translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"></translation>
+        <translation>--threads doit être un nombre positif</translation>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"></translation>
+        <translation>Trop d&apos;arguments</translation>
     </message>
 </context>
 </TS>
