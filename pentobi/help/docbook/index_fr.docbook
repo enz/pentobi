@@ -45,7 +45,7 @@
 </sect1>
 <sect1>
 <title>Points de départ sans couleur</title>
-<para>Notez que les règles originales de Blokus Classic utilisaient des points de départ sans couleur. Cela signifie que chaque couleur peut librement choisir lequel des points de départ non occupés utiliser pour son premier coup. Pentobi ne supporte actuellement que la variante de règle avec des points de départ colorés, car cette variante de règle a été utilisée lors des premiers serveurs en ligne Blokus et des tournois Blokus.</para>
+<para>Notez que les règles originales de Blokus Classique utilisaient des points de départ sans couleur. Cela signifie que chaque couleur peut librement choisir lequel des points de départ non occupés utiliser pour son premier coup. Pentobi ne supporte actuellement que la variante de règle avec des points de départ colorés, car cette variante de règle a été utilisée lors des premiers serveurs en ligne Blokus et des tournois Blokus.</para>
 </sect1>
 </chapter>
 
@@ -68,7 +68,7 @@
 
 <chapter id="trigon_rules">
 <title>Règles du Trigon</title>
-<para>Trigon est une autre variante du jeu. Les règles sont similaires à celles de la variante Classic, mais il utilise un plateau de forme différente et un ensemble de pièces différent. Chaque couleur utilise 22 pièces de forme polyiamant, allant jusqu'à la taille six. Un polyiamant est une forme composée d'un certain nombre de triangles équilatéraux reliés par leurs bords.</para>
+<para>Trigon est une autre variante du jeu. Les règles sont similaires à celles de la variante Classique, mais il utilise un plateau de forme différente et un ensemble de pièces différent. Chaque couleur utilise 22 pièces de forme polyiamant, allant jusqu'à la taille six. Un polyiamant est une forme composée d'un certain nombre de triangles équilatéraux reliés par leurs bords.</para>
 <informalfigure>
 <mediaobject>
 <imageobject>
@@ -94,7 +94,7 @@
 </informalfigure>
 <sect1>
 <title>Règles pour deux joueurs</title>
-<para>Comme la variante de jeu Classic, Trigon peut se jouer à deux joueurs, un joueur jouant Bleu et Rouge, et l'autre joueur Jaune et Vert.</para>
+<para>Comme la variante de jeu Classique, Trigon peut se jouer à deux joueurs, un joueur jouant Bleu et Rouge, et l'autre joueur Jaune et Vert.</para>
 </sect1>
 <sect1>
 <title>Règles pour trois joueurs</title>
