@@ -472,7 +472,7 @@
 <varlistentry>
 <term><guimenuitem>Détruire les variations</guimenuitem></term>
 <listitem>
-<para>Supprimer toutes les variations sauf la variation principale. Si la position actuelle ne fait pas partie de la variation principale, elle sera d'abord modifiée pour correspondre à une position de la variation principale (comme dans <guimenuitem>Variation principale</guimenuitem>).</para>
+<para>Supprimer toutes les variations sauf la variation principale. Si la position actuelle ne fait pas partie de la variation principale, elle sera d'abord modifiée pour correspondre à une position de la variation principale (comme dans <guimenu>Déplacement</guimenu> / <guimenuitem>Variation principale</guimenuitem>).</para>
 </listitem>
 </varlistentry>
 <varlistentry>

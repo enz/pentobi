@@ -472,7 +472,7 @@
 <varlistentry>
 <term><guimenuitem>Удалить вариации</guimenuitem></term>
 <listitem>
-<para>Удаление всех вариаций, кроме основной. Если текущая позиция не входит в основную вариацию, она сначала будет изменена на позицию, как в <guimenuitem>Возврат на Основную Вариацию</guimenuitem>.</para>
+<para>Удаление всех вариаций, кроме основной. Если текущая позиция не входит в основную вариацию, она сначала будет изменена на позицию, как в <guimenu>Ход</guimenu> / <guimenuitem>Основная вариация</guimenuitem>.</para>
 </listitem>
 </varlistentry>
 <varlistentry>

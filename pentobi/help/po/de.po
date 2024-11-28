@@ -1297,12 +1297,12 @@ msgstr "<guimenuitem>Varianten löschen</guimenuitem>"
 msgid ""
 "Delete all variations but the main variation. If the current position is not"
 " in the main variation, it will first be changed to a position as in "
-"<guimenuitem>Back to Main Variation</guimenuitem>."
+"<guimenu>Go</guimenu> / <guimenuitem>Main Variation</guimenuitem>."
 msgstr ""
 "Löscht alle Varianten außer der Hauptvariante. Wenn sich die gegenwärtige "
 "Brettstellung nicht in der Hauptvariante befindet, wird zuvor zu einer "
-"Brettstellung in der Hauptvariante gewechselt wie in <guimenuitem>Zurück zu "
-"Hauptvariante</guimenuitem>."
+"Brettstellung in der Hauptvariante gewechselt wie in <guimenu>Gehe zu</guimenu> "
+"/ <guimenuitem>Hauptvariante</guimenuitem>."
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:822

@@ -472,7 +472,7 @@
 <varlistentry>
 <term><guimenuitem>Varianten löschen</guimenuitem></term>
 <listitem>
-<para>Löscht alle Varianten außer der Hauptvariante. Wenn sich die gegenwärtige Brettstellung nicht in der Hauptvariante befindet, wird zuvor zu einer Brettstellung in der Hauptvariante gewechselt wie in <guimenuitem>Zurück zu Hauptvariante</guimenuitem>.</para>
+<para>Löscht alle Varianten außer der Hauptvariante. Wenn sich die gegenwärtige Brettstellung nicht in der Hauptvariante befindet, wird zuvor zu einer Brettstellung in der Hauptvariante gewechselt wie in <guimenu>Gehe zu</guimenu> / <guimenuitem>Hauptvariante</guimenuitem>.</para>
 </listitem>
 </varlistentry>
 <varlistentry>

@@ -814,7 +814,7 @@ later when iterating over the variations with
 <para>
 Delete all variations but the main variation. If the current position is not in
 the main variation, it will first be changed to a position as in
-<guimenuitem>Back to Main Variation</guimenuitem>.
+<guimenu>Go</guimenu> / <guimenuitem>Main Variation</guimenuitem>.
 </para>
 </listitem>
 </varlistentry>

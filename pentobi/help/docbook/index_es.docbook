@@ -472,7 +472,7 @@
 <varlistentry>
 <term><guimenuitem>Eliminar variaciones</guimenuitem></term>
 <listitem>
-<para>Eliminar todas las variaciones excepto la variación principal. Si la posición actual no está en la variación principal, primero se cambiará a una posición como en <guimenuitem>Regresar a la variación principal</guimenuitem>.</para>
+<para>Eliminar todas las variaciones excepto la variación principal. Si la posición actual no está en la variación principal, primero se cambiará a una posición como en <guimenu>Ir a</guimenu> / <guimenuitem>Variación principal</guimenuitem>.</para>
 </listitem>
 </varlistentry>
 <varlistentry>

@@ -1321,11 +1321,11 @@ msgstr "<guimenuitem>Eliminar variaciones</guimenuitem>"
 msgid ""
 "Delete all variations but the main variation. If the current position is not"
 " in the main variation, it will first be changed to a position as in "
-"<guimenuitem>Back to Main Variation</guimenuitem>."
+"<guimenu>Go</guimenu> / <guimenuitem>Main Variation</guimenuitem>."
 msgstr ""
 "Eliminar todas las variaciones excepto la variación principal. Si la "
 "posición actual no está en la variación principal, primero se cambiará a una"
-" posición como en <guimenuitem>Regresar a la variación "
+" posición como en <guimenu>Ir a</guimenu> / <guimenuitem>Variación "
 "principal</guimenuitem>."
 
 #. (itstool) path: varlistentry/term
