@@ -55,35 +55,35 @@ Window {
         category: "HelpWindow"
     }
     Shortcut {
-        sequence: StandardKey.Close
+        sequences: [ StandardKey.Close ]
         onActivated: hide()
     }
     Shortcut {
-        sequence: StandardKey.MoveToStartOfLine
+        sequences: [ StandardKey.MoveToStartOfLine ]
         onActivated: helpViewer.goHome()
     }
     Shortcut {
-        sequence: StandardKey.MoveToNextPage
+        sequences: [ StandardKey.MoveToNextPage ]
         onActivated: helpViewer.scrollPageDown()
     }
     Shortcut {
-        sequence: StandardKey.MoveToPreviousPage
+        sequences: [ StandardKey.MoveToPreviousPage ]
         onActivated: helpViewer.scrollPageUp()
     }
     Shortcut {
-        sequence: StandardKey.MoveToNextLine
+        sequences: [ StandardKey.MoveToNextLine ]
         onActivated: helpViewer.scrollDown()
     }
     Shortcut {
-        sequence: StandardKey.MoveToPreviousLine
+        sequences: [ StandardKey.MoveToPreviousLine ]
         onActivated: helpViewer.scrollUp()
     }
     Shortcut {
-        sequence: StandardKey.MoveToNextChar
+        sequences: [ StandardKey.MoveToNextChar ]
         onActivated: helpViewer.nextPage()
     }
     Shortcut {
-        sequence: StandardKey.MoveToPreviousChar
+        sequences: [ StandardKey.MoveToPreviousChar ]
         onActivated: helpViewer.prevPage()
     }
 }
