@@ -70,6 +70,10 @@ Window {
         sequences: [ StandardKey.MoveToPreviousPage ]
         onActivated: helpViewer.scrollPageUp()
     }
+    // Note that MoveToNextLine, MoveToPreviousLine, MoveToNextChar and
+    // MoveToPreviousChar currently don't work for unknown reasons (last
+    // tested with Qt 6.8.0) but the remaining shortcuts are enough for basic
+    // navigation without a mouse.
     Shortcut {
         sequences: [ StandardKey.MoveToNextLine ]
         onActivated: helpViewer.scrollDown()
@@ -79,11 +83,11 @@ Window {
         onActivated: helpViewer.scrollUp()
     }
     Shortcut {
-        sequences: [ StandardKey.MoveToNextChar ]
+        sequences: [ StandardKey.MoveToNextChar, StandardKey.MoveToNextWord ]
         onActivated: helpViewer.nextPage()
     }
     Shortcut {
-        sequences: [ StandardKey.MoveToPreviousChar ]
+        sequences: [ StandardKey.MoveToPreviousChar, StandardKey.MoveToPreviousWord ]
         onActivated: helpViewer.prevPage()
     }
 }
