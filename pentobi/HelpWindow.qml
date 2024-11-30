@@ -9,6 +9,8 @@ import QtQuick
 import QtQuick.Window
 
 Window {
+    id: root
+
     minimumWidth: 240; minimumHeight: 240
     title: qsTr("Pentobi Help")
     onVisibleChanged:
@@ -56,7 +58,7 @@ Window {
     }
     Shortcut {
         sequences: [ StandardKey.Close ]
-        onActivated: hide()
+        onActivated: root.hide()
     }
     Shortcut {
         sequences: [ StandardKey.MoveToStartOfLine ]
