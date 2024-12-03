@@ -72,24 +72,24 @@ Window {
         sequences: [ StandardKey.MoveToPreviousPage ]
         onActivated: helpViewer.scrollPageUp()
     }
-    // Note that MoveToNextLine, MoveToPreviousLine, MoveToNextChar and
-    // MoveToPreviousChar currently don't work for unknown reasons (last
-    // tested with Qt 6.8.0) but the remaining shortcuts are enough for basic
-    // navigation without a mouse.
     Shortcut {
+        // Doesn't work with Qt 6.8
         sequences: [ StandardKey.MoveToNextLine ]
         onActivated: helpViewer.scrollDown()
     }
     Shortcut {
+        // Doesn't work with Qt 6.8
         sequences: [ StandardKey.MoveToPreviousLine ]
         onActivated: helpViewer.scrollUp()
     }
     Shortcut {
-        sequences: [ StandardKey.MoveToNextChar, StandardKey.MoveToNextWord ]
+        // Doesn't work with Qt 6.8
+        sequences: [ StandardKey.MoveToNextChar ]
         onActivated: helpViewer.nextPage()
     }
     Shortcut {
-        sequences: [ StandardKey.MoveToPreviousChar, StandardKey.MoveToPreviousWord ]
+        // Doesn't work with Qt 6.8
+        sequences: [ StandardKey.MoveToPreviousChar ]
         onActivated: helpViewer.prevPage()
     }
 }
