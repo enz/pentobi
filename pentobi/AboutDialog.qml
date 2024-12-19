@@ -14,15 +14,15 @@ PentobiDialog {
 
     Item {
         implicitWidth:
-            Math.max(Math.min(column.implicitWidth, maxContentWidth),
-                     minContentWidth)
+            Math.max(Math.min(column.implicitWidth, root.maxContentWidth),
+                     root.minContentWidth)
         implicitHeight: column.implicitHeight
 
         Column {
             id: column
 
             anchors.fill: parent
-            spacing: 0.5 * font.pixelSize
+            spacing: 0.5 * root.font.pixelSize
             leftPadding: spacing
             rightPadding: leftPadding
 
@@ -42,19 +42,18 @@ PentobiDialog {
                 text: qsTr("Computer opponent for Blokus")
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
-                width: Math.min(implicitWidth, maxContentWidth)
+                width: Math.min(implicitWidth, root.maxContentWidth)
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
                 text: "<a href=\"https://pentobi.sourceforge.io\" style=\"text-decoration:none\">pentobi.sourceforge.io</a>"
                 textFormat: Text.RichText
                 elide: Qt.ElideRight
-                width: Math.min(implicitWidth, maxContentWidth)
+                width: Math.min(implicitWidth, root.maxContentWidth)
                 anchors.horizontalCenter: parent.horizontalCenter
                 onLinkActivated: link => Qt.openUrlExternally(link)
 
                 MouseArea {
-                    enabled: isDesktop
                     anchors.fill: parent
                     hoverEnabled: true
                     acceptedButtons: Qt.NoButton
@@ -67,7 +66,7 @@ PentobiDialog {
                 opacity: 0.8
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
-                width: Math.min(implicitWidth, maxContentWidth)
+                width: Math.min(implicitWidth, root.maxContentWidth)
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }
