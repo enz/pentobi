@@ -34,7 +34,7 @@ Item {
         source: isDesktop ? theme.getImage("piece-manipulator-desktop")
                           : theme.getImage("piece-manipulator")
         sourceSize { width: 800; height: 800 }
-        opacity: pieceModel && ! legal ? 0.7 : 0
+        opacity: root.pieceModel && ! root.legal ? 0.7 : 0
 
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
@@ -43,7 +43,7 @@ Item {
         source: isDesktop ? theme.getImage("piece-manipulator-desktop-legal")
                           : theme.getImage("piece-manipulator-legal")
         sourceSize { width: 800; height: 800 }
-        opacity: pieceModel && legal ? 0.55 : 0
+        opacity: root.pieceModel && root.legal ? 0.55 : 0
 
         Behavior on opacity { NumberAnimation { duration: animationDurationFast } }
     }
@@ -53,7 +53,7 @@ Item {
         anchors.centerIn: root
         // Make drag area a bit larger than image to avoid accidental
         // flicking in PieceSelectorMobile when wanting to drag
-        width: root.width + buttonSize; height: width
+        width: root.width + root.buttonSize; height: width
         drag {
             target: root
             filterChildren: true
@@ -63,12 +63,12 @@ Item {
             maximumY: root.parent.height - root.height / 2
         }
         // Consume mouse hover events in case it is over toolbar
-        hoverEnabled: isDesktop
+        hoverEnabled: true
 
         MouseArea {
             anchors.centerIn: dragArea
-            width: 0.9 * (root.width - 2 * buttonSize); height: width
-            onClicked: piecePlayed()
+            width: 0.9 * (root.width - 2 * root.buttonSize); height: width
+            onClicked: root.piecePlayed()
         }
         MouseArea {
             anchors {
@@ -76,8 +76,8 @@ Item {
                 margins: (dragArea.width - root.width) / 2
                 horizontalCenter: dragArea.horizontalCenter
             }
-            width: buttonSize; height: width
-            onClicked: pieceModel.rotateRight()
+            width: root.buttonSize; height: width
+            onClicked: root.pieceModel.rotateRight()
         }
         MouseArea {
             anchors {
@@ -85,8 +85,8 @@ Item {
                 margins: (dragArea.width - root.width) / 2
                 verticalCenter: dragArea.verticalCenter
             }
-            width: buttonSize; height: width
-            onClicked: pieceModel.flipAcrossX()
+            width: root.buttonSize; height: width
+            onClicked: root.pieceModel.flipAcrossX()
         }
         MouseArea {
             anchors {
@@ -94,8 +94,8 @@ Item {
                 margins: (dragArea.width - root.width) / 2
                 horizontalCenter: dragArea.horizontalCenter
             }
-            width: buttonSize; height: width
-            onClicked: pieceModel.flipAcrossY()
+            width: root.buttonSize; height: width
+            onClicked: root.pieceModel.flipAcrossY()
         }
         MouseArea {
             anchors {
@@ -103,8 +103,8 @@ Item {
                 margins: (dragArea.width - root.width) / 2
                 verticalCenter: dragArea.verticalCenter
             }
-            width: buttonSize; height: width
-            onClicked: pieceModel.rotateLeft()
+            width: root.buttonSize; height: width
+            onClicked: root.pieceModel.rotateLeft()
         }
     }
 
