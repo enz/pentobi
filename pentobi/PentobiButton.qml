@@ -26,8 +26,7 @@ Item {
     property alias autoRepeat: button.autoRepeat
     property alias autoRepeatInterval: button.autoRepeatInterval
 
-    property bool _effectiveHovered:
-        isDesktop && toolTipArea.containsMouse && enabled
+    property bool _effectiveHovered: toolTipArea.containsMouse && enabled
     property bool _inhibitToolTip
 
     signal clicked()
@@ -77,10 +76,10 @@ Item {
             Rectangle {
                 anchors.fill: parent
                 radius: 0.05 * width
-                color: _effectiveHovered && ! button.down ?
+                color: root._effectiveHovered && ! button.down ?
                            theme.colorButtonHovered : "transparent"
-                border.color: _effectiveHovered ? theme.colorButtonBorder
-                                                : "transparent"
+                border.color: root._effectiveHovered ? theme.colorButtonBorder
+                                                     : "transparent"
             }
             NumberAnimation {
                 id: pressedAnimation
@@ -92,7 +91,7 @@ Item {
                 easing.type: Easing.InQuad
             }
         }
-        onPressed: _inhibitToolTip = true
+        onPressed: root._inhibitToolTip = true
         onClicked: { backgroundItem.startClickedAnimation(); root.clicked() }
 
         Behavior on opacity {
@@ -106,8 +105,8 @@ Item {
         visible: isDesktop
         acceptedButtons: Qt.NoButton
         hoverEnabled: true
-        onExited: _inhibitToolTip = false
-        ToolTip.text: toolTipText
+        onExited: root._inhibitToolTip = false
+        ToolTip.text: root.toolTipText
         ToolTip.visible: containsMouse && ToolTip.text
                          && ! root._inhibitToolTip
         ToolTip.delay: 1000

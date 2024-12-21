@@ -254,24 +254,24 @@ Item
         },
         State {
             name: "played"
-            when: pieceModel.isPlayed
+            when: root.pieceModel.isPlayed
 
             ParentChange {
                 target: root
                 parent: board.grabImageTarget
-                x: board.mapFromGameX(pieceModel.gameCoord.x) - board.grabImageTarget.x
-                y: board.mapFromGameY(pieceModel.gameCoord.y) - board.grabImageTarget.y
+                x: board.mapFromGameX(root.pieceModel.gameCoord.x) - board.grabImageTarget.x
+                y: board.mapFromGameY(root.pieceModel.gameCoord.y) - board.grabImageTarget.y
             }
         },
         State {
             name: "unplayed"
-            when: parentUnplayed != null
+            when: root.parentUnplayed != null
 
             ParentChange {
                 target: root
-                parent: parentUnplayed
-                x: parentUnplayed.width / 2
-                y: parentUnplayed.height / 2
+                parent: root.parentUnplayed
+                x: root.parentUnplayed.width / 2
+                y: root.parentUnplayed.height / 2
                 scale: scaleUnplayed
             }
         }
@@ -301,8 +301,8 @@ Item
                             y = pieceManipulator.height / 2
                             break
                         case "played":
-                            x = board.mapFromGameX(pieceModel.gameCoord.x) - board.grabImageTarget.x
-                            y = board.mapFromGameX(pieceModel.gameCoord.y) - board.grabImageTarget.y
+                            x = board.mapFromGameX(root.pieceModel.gameCoord.x) - board.grabImageTarget.x
+                            y = board.mapFromGameX(root.pieceModel.gameCoord.y) - board.grabImageTarget.y
                             break
                         case "unplayed":
                             x = parentUnplayed.width / 2

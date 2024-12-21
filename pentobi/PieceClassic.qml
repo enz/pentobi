@@ -31,7 +31,7 @@ PieceBase
     }
 
     Repeater {
-        model: pieceModel.elements
+        model: root.pieceModel.elements
 
         Square {
             x: (modelData.x - pieceModel.center.x) * board.gridWidth
