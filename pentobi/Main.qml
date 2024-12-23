@@ -122,8 +122,7 @@ ApplicationWindow {
         onPositionAboutToChange: Logic.cancelRunning(true)
         onPositionChanged: {
             gameView.pickedPiece = null
-            if (gameModel.canGoBackward || gameModel.canGoForward
-                    || gameModel.moveNumber > 0)
+            if (canGoBackward || canGoForward || moveNumber > 0)
                 gameView.setupMode = false
             analyzeGameModel.markCurrentMove(gameModel)
             gameView.onPositionChanged()
