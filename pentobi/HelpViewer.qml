@@ -8,7 +8,6 @@ import QtQuick
 // Enforce Basic style to avoid frames around TextArea in Material and
 // Universal style
 import QtQuick.Controls.Basic
-import PentobiGui
 
 Rectangle {
     property real textAreaPadding:

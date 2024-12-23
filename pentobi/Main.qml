@@ -8,7 +8,6 @@ import QtCore
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
-import PentobiGui
 import "main.js" as Logic
 
 ApplicationWindow {
