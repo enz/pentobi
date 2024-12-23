@@ -168,23 +168,23 @@ ApplicationWindow {
             (uri, displayName) => Logic.saveFile(uri, displayName)
     }
     SyncSettings { id: syncSettings }
-    DialogLoader { id: aboutDialog; component: AboutDialog { } }
-    DialogLoader { id: computerDialog; component: ComputerDialog { } }
-    DialogLoader { id: fatalMessage; component: FatalMessage { } }
-    DialogLoader { id: gameVariantDialog; component: GameVariantDialog { } }
-    DialogLoader { id: gameInfoDialog; component: GameInfoDialog { } }
-    DialogLoader { id: initialRatingDialog; component: InitialRatingDialog { } }
-    DialogLoader { id: openDialog; component: OpenDialog { } }
-    DialogLoader { id: exportImageDialog; component: ExportImageDialog { } }
-    DialogLoader { id: imageSaveDialog; component: ImageSaveDialog { } }
-    DialogLoader { id: gotoMoveDialog; component: GotoMoveDialog { } }
-    DialogLoader { id: ratingDialog; component: RatingDialog { } }
-    DialogLoader { id: saveDialog; component: SaveDialog { } }
-    DialogLoader { id: infoMessage; component: MessageDialog { } }
-    DialogLoader { id: questionMessage; component: QuestionDialog { } }
-    DialogLoader { id: analyzeDialog; component: AnalyzeDialog { } }
-    DialogLoader { id: appearanceDialog; component: AppearanceDialog { } }
-    DialogLoader { id: moveAnnotationDialog; component: MoveAnnotationDialog { } }
+    DialogLoader { id: aboutDialog; url: "AboutDialog.qml" }
+    DialogLoader { id: computerDialog; url: "ComputerDialog.qml" }
+    DialogLoader { id: fatalMessage; url: "FatalMessage.qml" }
+    DialogLoader { id: gameVariantDialog; url: "GameVariantDialog.qml" }
+    DialogLoader { id: gameInfoDialog; url: "GameInfoDialog.qml" }
+    DialogLoader { id: initialRatingDialog; url: "InitialRatingDialog.qml" }
+    DialogLoader { id: openDialog; url: "OpenDialog.qml" }
+    DialogLoader { id: exportImageDialog; url: "ExportImageDialog.qml" }
+    DialogLoader { id: imageSaveDialog; url: "ImageSaveDialog.qml" }
+    DialogLoader { id: gotoMoveDialog; url: "GotoMoveDialog.qml" }
+    DialogLoader { id: ratingDialog; url: "RatingDialog.qml" }
+    DialogLoader { id: saveDialog; url: "SaveDialog.qml" }
+    DialogLoader { id: infoMessage; url: "MessageDialog.qml" }
+    DialogLoader { id: questionMessage; url: "QuestionDialog.qml" }
+    DialogLoader { id: analyzeDialog; url: "AnalyzeDialog.qml" }
+    DialogLoader { id: appearanceDialog; url: "AppearanceDialog.qml" }
+    DialogLoader { id: moveAnnotationDialog; url: "MoveAnnotationDialog.qml" }
     Loader {
         id: helpWindow
 

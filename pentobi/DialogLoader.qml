@@ -7,10 +7,10 @@
 import QtQuick
 
 Loader {
-    property Component component
+    property string url
 
     function get() {
-        if (! item) sourceComponent = component
+        if (! item) source = url
         return item
     }
     function open() { get().open() }
