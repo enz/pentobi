@@ -161,6 +161,7 @@ qt_add_qml_module(pentobi
     ScoreElement.qml
     ScoreElement2.qml
     Square.qml
+    Theme.qml
     ThemeColorblindDark.qml
     ThemeColorblindLight.qml
     ThemeDark.qml

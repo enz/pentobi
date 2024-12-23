@@ -5,10 +5,10 @@
 //-----------------------------------------------------------------------------
 
 ThemeLight {
-    property var colorBlue: [ "#008f9d", "#006069", "#00bcce", "#ffffff" ]
-    property var colorGreen: [ "#72a074", "#4e7450", "#9cbc9e", "#ffffff" ]
-    property var colorOrange: colorRed
-    property var colorPurple: colorBlue
-    property var colorRed: [ "#984326", "#692e19", "#ca5a30", "#ffffff" ]
-    property var colorYellow: [ "#bb7031", "#8c5525", "#d28b4f", "#ffffff" ]
+    colorBlue: [ "#008f9d", "#006069", "#00bcce", "#ffffff" ]
+    colorGreen: [ "#72a074", "#4e7450", "#9cbc9e", "#ffffff" ]
+    colorOrange: [ "#984326", "#692e19", "#ca5a30", "#ffffff" ]
+    colorPurple: [ "#008f9d", "#006069", "#00bcce", "#ffffff" ]
+    colorRed: [ "#984326", "#692e19", "#ca5a30", "#ffffff" ]
+    colorYellow: [ "#bb7031", "#8c5525", "#d28b4f", "#ffffff" ]
 }

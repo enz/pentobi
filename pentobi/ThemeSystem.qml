@@ -6,9 +6,15 @@
 
 import QtQuick
 
-// See themes/light/Theme.qml for comments
-Item {
-    property color colorBackground: {
+Theme {
+    property bool _isDark: palette.window.hslLightness < 0.5
+
+    function _contrast(color1, color2) {
+        return 0.30 * (color1.r - color2.r) + 0.59 * (color1.g - color2.g)
+                + 0.11 * (color1.b - color2.b)
+    }
+
+    colorBackground: {
         // If the contrast to yellow is too bad, we use a slightly modified
         // system background color
         var c = _contrast(palette.window, colorYellow)
@@ -19,40 +25,31 @@ Item {
         return palette.window
     }
 
-    property var colorBlue: _isDark ? dark.colorBlue : light.colorBlue
-    property var colorBoard: _isDark ? dark.colorBoard : light.colorBoard
-    property var colorGreen: _isDark ? dark.colorGreen : light.colorGreen
-    property var colorOrange: _isDark ? dark.colorOrange : light.colorOrange
-    property var colorPurple: _isDark ? dark.colorPurple : light.colorPurple
-    property var colorRed: _isDark ? dark.colorRed : light.colorRed
-    property var colorYellow: _isDark ? dark.colorYellow : light.colorYellow
+    colorBlue: _isDark ? dark.colorBlue : light.colorBlue
+    colorBoard: _isDark ? dark.colorBoard : light.colorBoard
+    colorGreen: _isDark ? dark.colorGreen : light.colorGreen
+    colorOrange: _isDark ? dark.colorOrange : light.colorOrange
+    colorPurple: _isDark ? dark.colorPurple : light.colorPurple
+    colorRed: _isDark ? dark.colorRed : light.colorRed
+    colorYellow: _isDark ? dark.colorYellow : light.colorYellow
 
-    property color colorButtonPressed: palette.mid
-    property color colorButtonHovered: palette.window
-    property color colorButtonBorder: palette.dark
-    property color colorCommentBase: palette.base
-    property color colorCommentFocus: palette.highlight
-    property color colorCommentText: colorText
-    property color colorMessageText: colorText
-    property color colorMessageBase: palette.base
-    property color colorSelectedText: palette.highlightedText
-    property color colorSelection: palette.highlight
-    property color colorStartingPoint:
+    colorButtonPressed: palette.mid
+    colorButtonHovered: palette.window
+    colorButtonBorder: palette.dark
+    colorCommentBase: palette.base
+    colorCommentFocus: palette.highlight
+    colorCommentText: colorText
+    colorMessageText: colorText
+    colorMessageBase: palette.base
+    colorSelectedText: palette.highlightedText
+    colorSelection: palette.highlight
+    colorStartingPoint:
         _isDark ? dark.colorStartingPoint : light.colorStartingPoint
-    property color colorBoardMarkup:
+    colorBoardMarkup:
         _isDark ? dark.colorBoardMarkup : light.colorBoardMarkup
-    property color colorText: palette.text
+    colorText: palette.text
 
-    property bool _isDark: palette.window.hslLightness < 0.5
-
-    function getImage(name) {
-        return _isDark ? dark.getImage(name) : light.getImage(name)
-    }
-
-    function _contrast(color1, color2) {
-        return 0.30 * (color1.r - color2.r) + 0.59 * (color1.g - color2.g)
-                + 0.11 * (color1.b - color2.b)
-    }
+    imageDir: _isDark ? dark.imageDir : light.imageDir
 
     SystemPalette { id: palette }
     ThemeDark { id: dark }

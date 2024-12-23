@@ -13,7 +13,7 @@ Item
 
     property PieceModel pieceModel
     property Item parentUnplayed
-    property var color:
+    property list<color> color:
         switch (pieceModel.color) {
         case 0: return color0
         case 1: return color1
