@@ -7,7 +7,7 @@
 import QtQuick
 
 Canvas {
-    property var history
+    property list<double> history
 
     antialiasing: true
     onHistoryChanged: requestPaint()
