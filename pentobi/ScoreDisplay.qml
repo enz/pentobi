@@ -37,8 +37,8 @@ Item {
             id: playerScore0
 
             visible: gameModel.nuColors === 4 && gameModel.nuPlayers === 2
-            value: points0 + points2
-            isFinal: ! hasMoves0 && ! hasMoves2
+            value: root.points0 + root.points2
+            isFinal: ! root.hasMoves0 && ! root.hasMoves2
             fontSize: rowLayout.height
             color1: gameView.color0[0]
             color2: gameView.color2[0]
@@ -50,8 +50,8 @@ Item {
             id: playerScore1
 
             visible: gameModel.nuColors === 4 && gameModel.nuPlayers === 2
-            value: points1 + points3
-            isFinal: ! hasMoves1 && ! hasMoves3
+            value: root.points1 + root.points3
+            isFinal: ! root.hasMoves1 && ! root.hasMoves3
             fontSize: rowLayout.height
             color1: gameView.color1[0]
             color2: gameView.color3[0]
@@ -62,9 +62,9 @@ Item {
         ScoreElement {
             id: colorScore0
 
-            value: points0
-            bonus: bonus0
-            isFinal: ! hasMoves0
+            value: root.points0
+            bonus: root.bonus0
+            isFinal: ! root.hasMoves0
             fontSize: rowLayout.height
             color: color0[0]
             // Avoid position changes unless score text gets really long
@@ -74,9 +74,9 @@ Item {
         ScoreElement {
             id: colorScore1
 
-            value: points1
-            bonus: bonus1
-            isFinal: ! hasMoves1
+            value: root.points1
+            bonus: root.bonus1
+            isFinal: ! root.hasMoves1
             fontSize: rowLayout.height
             color: color1[0]
             // Avoid position changes unless score text gets really long
@@ -87,9 +87,9 @@ Item {
             id: colorScore2
 
             visible: gameModel.nuColors > 2
-            value: points2
-            bonus: bonus2
-            isFinal: ! hasMoves2
+            value: root.points2
+            bonus: root.bonus2
+            isFinal: ! root.hasMoves2
             fontSize: rowLayout.height
             color: color2[0]
             // Avoid position changes unless score text gets really long
@@ -101,9 +101,9 @@ Item {
 
             visible: gameModel.nuColors > 3
                      && gameModel.gameVariant !== "classic_3"
-            value: points3
-            bonus: bonus3
-            isFinal: ! hasMoves3
+            value: root.points3
+            bonus: root.bonus3
+            isFinal: ! root.hasMoves3
             fontSize: rowLayout.height
             color: color3[0]
             // Avoid position changes unless score text gets really long
@@ -113,14 +113,14 @@ Item {
         ScoreElement2 {
             id: altColorIndicator
 
-            visible: gameModel.gameVariant === "classic_3" && hasMoves3
-            value: points3
+            visible: gameModel.gameVariant === "classic_3" && root.hasMoves3
+            value: root.points3
             isAltColor: true
-            isFinal: ! hasMoves3
+            isFinal: ! root.hasMoves3
             fontSize: rowLayout.height
             color1: theme.colorGreen[0]
             color2:
-                switch (altPlayer) {
+                switch (root.altPlayer) {
                 case 0: return gameView.color0[0]
                 case 1: return gameView.color1[0]
                 case 2: return gameView.color2[0]

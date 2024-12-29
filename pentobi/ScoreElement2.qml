@@ -9,7 +9,7 @@ import QtQuick
 Item {
     id: root
 
-    property color color1
+    property alias color1: point1.color
     property color color2
     property bool isFinal
     property bool isAltColor
@@ -25,10 +25,9 @@ Item {
         id: point1
 
         anchors.verticalCenter: parent.verticalCenter
-        implicitWidth: 0.7 * fontSize
-        implicitHeight: 0.7 * fontSize
-        color: color1
-        opacity: isAltColor && isFinal ? 0 : 1
+        implicitWidth: 0.7 * root.fontSize
+        implicitHeight: 0.7 * root.fontSize
+        opacity: root.isAltColor && root.isFinal ? 0 : 1
         radius: width / 2
     }
     Rectangle {
@@ -38,9 +37,9 @@ Item {
             verticalCenter: parent.verticalCenter
             left: point1.right
         }
-        implicitWidth: 0.7 * fontSize
-        implicitHeight: 0.7 * fontSize
-        color: isAltColor && isFinal ? color1 : color2
+        implicitWidth: 0.7 * root.fontSize
+        implicitHeight: 0.7 * root.fontSize
+        color: root.isAltColor && root.isFinal ? root.color1 : root.color2
         radius: width / 2
     }
     Text {
@@ -51,8 +50,10 @@ Item {
             left: point2.right
             leftMargin: 0.14 * font.pixelSize
         }
-        text: isAltColor ? ""
-                         : isFinal ? "<u>%L1</u>".arg(value) : "%L1".arg(value)
+        text: root.isAltColor ? ""
+                              : root.isFinal ?
+                                    "<u>%L1</u>".arg(root.value)
+                                  : "%L1".arg(root.value)
         color: theme.colorText
         opacity: 0.8
         font.preferShaping: false

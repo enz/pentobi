@@ -7,6 +7,8 @@
 import QtQuick
 
 Item {
+    id: root
+
     property alias color: point.color
     property bool isFinal
     property real value
@@ -21,8 +23,8 @@ Item {
         id: point
 
         anchors.verticalCenter: parent.verticalCenter
-        implicitWidth: 0.7 * fontSize
-        implicitHeight: 0.7 * fontSize
+        implicitWidth: 0.7 * root.fontSize
+        implicitHeight: 0.7 * root.fontSize
         radius: width / 2
     }
     Text {
@@ -33,9 +35,9 @@ Item {
             left: point.right
             leftMargin: 0.14 * font.pixelSize
         }
-        text: ! isFinal ?
-                  "%L1".arg(value) :
-                  "%1<u>%L2</u>".arg(bonus > 0 ? "★" : "").arg(value)
+        text: ! root.isFinal ?
+                  "%L1".arg(root.value) :
+                  "%1<u>%L2</u>".arg(root.bonus > 0 ? "★" : "").arg(root.value)
         color: theme.colorText
         opacity: 0.8
         font.preferShaping: false
