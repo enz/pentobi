@@ -22,19 +22,6 @@ using libpentobi_base::Variant;
 
 //-----------------------------------------------------------------------------
 
-/** Paint the board and pieces.
-    This function takes a Grid<PointState> for the board positions instead of
-    an instance of libpentobi_base::Board, because creating a Board is too
-    expensive for lightweight use cases like a thumbnailer.
-
-    The pieceId parameter only needs to be initialized in game variants Nexos
-    and Callisto. It is needed to paint the junctions between piece elements.
-    They must be 0 for empty points and contain a unique value for points
-    of the same piece. */
-void paint(QPainter& painter, qreal width, qreal height, Variant variant,
-           const Geometry& geo, const Grid<PointState>& pointState,
-           const Grid<unsigned>& pieceId);
-
 /** Paint empty board. */
 void paintBoard(QPainter& painter, qreal width, qreal height, Variant variant,
                 const QColor& base, const QColor& light, const QColor& dark,
