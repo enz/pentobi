@@ -6,9 +6,10 @@
 
 #include <QGuiApplication>
 #include <QIcon>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QQuickStyle>
 #include <QtGlobal>
-#include <QtQml>
 #include <QTranslator>
 #include "ImageProvider.h"
 #include "libboardgame_base/Log.h"
