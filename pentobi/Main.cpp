@@ -10,20 +10,15 @@
 #include <QtGlobal>
 #include <QtQml>
 #include <QTranslator>
-#include "AnalyzeGameModel.h"
-#include "AndroidUtils.h"
-#include "DocbookReader.h"
-#include "GameModel.h"
 #include "ImageProvider.h"
-#include "PlayerModel.h"
-#include "RatingModel.h"
-#include "RecentFiles.h"
-#include "SyncSettings.h"
 #include "libboardgame_base/Log.h"
 
-#ifndef Q_OS_ANDROID
+#ifdef Q_OS_ANDROID
+#include "AndroidUtils.h"
+#else
 #include <QCommandLineParser>
 #include <QLibraryInfo>
+#include "PlayerModel.h"
 #endif
 
 using namespace Qt::StringLiterals;
