@@ -39,10 +39,6 @@ public:
 
     virtual void on_property(const string& id, const vector<string>& values);
 
-    /** Read only the main variation.
-        Reduces CPU time and memory if only the main variation is needed. */
-    void set_read_only_main_variation(bool enable);
-
     /** Read a game tree from a stream.
         @param in The input stream containing the SGF game tree(s).
         @param check_single_tree If true, the caller does not want to
@@ -56,10 +52,6 @@ public:
     void read(const string& file);
 
 private:
-    bool m_read_only_main_variation = false;
-
-    bool m_is_in_main_variation;
-
     istream* m_in;
 
     /** Local variable in read_property().
@@ -90,11 +82,6 @@ private:
 
     void read_tree(bool is_root);
 };
-
-inline void Reader::set_read_only_main_variation(bool enable)
-{
-    m_read_only_main_variation = enable;
-}
 
 //-----------------------------------------------------------------------------
 

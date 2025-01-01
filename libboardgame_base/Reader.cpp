@@ -77,7 +77,6 @@ char Reader::peek()
 bool Reader::read(istream& in, bool check_single_tree)
 {
     m_in = &in;
-    m_is_in_main_variation = true;
     consume_whitespace();
     read_tree(true);
     while (true)
@@ -137,8 +136,7 @@ void Reader::read_expected(char expected)
 void Reader::read_node(bool is_root)
 {
     read_expected(';');
-    if (! m_read_only_main_variation || m_is_in_main_variation)
-        on_begin_node(is_root);
+    on_begin_node(is_root);
     while (true)
     {
         consume_whitespace();
@@ -147,66 +145,40 @@ void Reader::read_node(bool is_root)
             break;
         read_property();
     }
-    if (! m_read_only_main_variation || m_is_in_main_variation)
-        on_end_node();
+    on_end_node();
 }
 
 void Reader::read_property()
 {
-    if (m_read_only_main_variation && ! m_is_in_main_variation)
+    m_id.clear();
+    while (peek() != '[')
     {
-        while (peek() != '[')
-            read_char();
-        while (peek() == '[')
-        {
-            consume_char('[');
-            bool escape = false;
-            while (peek() != ']' || escape)
-            {
-                char c = read_char();
-                if (c == '\\' && ! escape)
-                {
-                    escape = true;
-                    continue;
-                }
-                escape = false;
-            }
-            consume_char(']');
-            consume_whitespace();
-        }
+        char c = read_char();
+        if (! is_ascii_space(c))
+            m_id += c;
     }
-    else
+    m_values.clear();
+    while (peek() == '[')
     {
-        m_id.clear();
-        while (peek() != '[')
+        consume_char('[');
+        m_value.clear();
+        bool escape = false;
+        while (peek() != ']' || escape)
         {
             char c = read_char();
-            if (! is_ascii_space(c))
-                m_id += c;
-        }
-        m_values.clear();
-        while (peek() == '[')
-        {
-            consume_char('[');
-            m_value.clear();
-            bool escape = false;
-            while (peek() != ']' || escape)
+            if (c == '\\' && ! escape)
             {
-                char c = read_char();
-                if (c == '\\' && ! escape)
-                {
-                    escape = true;
-                    continue;
-                }
-                escape = false;
-                m_value += c;
+                escape = true;
+                continue;
             }
-            consume_char(']');
-            consume_whitespace();
-            m_values.push_back(m_value);
+            escape = false;
+            m_value += c;
         }
-        on_property(m_id, m_values);
+        consume_char(']');
+        consume_whitespace();
+        m_values.push_back(m_value);
     }
+    on_property(m_id, m_values);
 }
 
 void Reader::read_tree(bool is_root)
@@ -231,7 +203,6 @@ void Reader::read_tree(bool is_root)
             throw ReadError("Extra text before node");
     }
     read_expected(')');
-    m_is_in_main_variation = false;
     on_end_tree(was_root);
 }
 
