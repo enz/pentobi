@@ -20,7 +20,7 @@ The maintainer of Pentobi is Markus Enzenberger.
 License
 -------
 
-Copyright (C) 2011-2024 Markus Enzenberger.
+Copyright (C) 2011-2025 Markus Enzenberger.
 See [AUTHORS](AUTHORS.md) for a full list of authors.
 
 This program is free software: you can redistribute it and/or modify it
