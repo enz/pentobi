@@ -22,6 +22,7 @@ using libboardgame_base::TransfRectRefl;
 using libboardgame_base::TransfRectRot90Refl;
 using libboardgame_base::TransfRectRot180Refl;
 using libboardgame_base::TransfRectRot270Refl;
+using libpentobi_base::Board;
 using libpentobi_base::BoardType;
 using libpentobi_base::GeometryType;
 using libpentobi_base::PieceInfo;

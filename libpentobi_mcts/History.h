@@ -8,7 +8,6 @@
 #define LIBPENTOBI_MCTS_HISTORY_H
 
 #include "SearchParamConst.h"
-#include "libpentobi_base/Board.h"
 
 namespace libpentobi_mcts {
 
