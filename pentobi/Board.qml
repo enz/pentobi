@@ -123,33 +123,33 @@ Item {
 
         anchors.centerIn: parent
         width: {
-            if (! showCoordinates)
+            if (! root.showCoordinates)
                 return image.width
-            if (isTrigon)
-                return image.width + 3 * gridWidth
-            return image.width + 2 * gridWidth
+            if (root.isTrigon)
+                return image.width + 3 * root.gridWidth
+            return image.width + 2 * root.gridWidth
         }
         height: {
-            if (! showCoordinates)
+            if (! root.showCoordinates)
                 return image.height
-            return image.height + 2 * gridHeight
+            return image.height + 2 * root.gridHeight
         }
 
         Image {
             id: image
 
             width: {
-                if (isTrigon) return gridWidth * (columns + 1)
-                if (isNexos) return gridWidth * (columns - 0.5)
-                return gridWidth * columns
+                if (root.isTrigon) return root.gridWidth * (root.columns + 1)
+                if (root.isNexos) return root.gridWidth * (root.columns - 0.5)
+                return root.gridWidth * root.columns
             }
             height: {
-                if (isNexos) return gridHeight * (rows - 0.5)
-                return gridHeight * rows
+                if (root.isNexos) return root.gridHeight * (root.rows - 0.5)
+                return root.gridHeight * root.rows
             }
             anchors.centerIn: parent
             source: width > 0 && height > 0 ?
-                        "image://pentobi/board/" + gameVariant + "/"
+                        "image://pentobi/board/" + root.gameVariant + "/"
                         + theme.colorBoard[0] + "/" + theme.colorBoard[1] + "/"
                         + theme.colorBoard[2] + "/" + theme.colorBoard[3] + "/"
                         + theme.colorBoard[4] + "/" + theme.colorBoard[5] :
@@ -215,7 +215,7 @@ Item {
             }
         }
         Repeater {
-            model: showCoordinates ? columns : 0
+            model: root.showCoordinates ? root.columns : 0
 
             Text {
                 text: getColumnCoord(index)
@@ -229,7 +229,7 @@ Item {
             }
         }
         Repeater {
-            model: showCoordinates ? columns : 0
+            model: root.showCoordinates ? root.columns : 0
 
             Text {
                 text: getColumnCoord(index)
@@ -243,7 +243,7 @@ Item {
             }
         }
         Repeater {
-            model: showCoordinates ? rows : 0
+            model: root.showCoordinates ? root.rows : 0
 
             Text {
                 text: index + 1
@@ -257,7 +257,7 @@ Item {
             }
         }
         Repeater {
-            model: showCoordinates ? rows : 0
+            model: root.showCoordinates ? root.rows : 0
 
             Text {
                 text: index + 1
@@ -274,15 +274,15 @@ Item {
             anchors.fill: parent
             acceptedButtons: Qt.LeftButton | Qt.RightButton
             onPressAndHold: {
-                var pos = mapToGame(Qt.point(mouseX + grabImageTarget.x,
-                                             mouseY + grabImageTarget.y))
+                var pos = root.mapToGame(Qt.point(mouseX + grabImageTarget.x,
+                                                  mouseY + grabImageTarget.y))
                 pos.x = Math.floor(pos.x)
                 pos.y = Math.floor(pos.y)
                 root.rightClicked(pos)
             }
             onClicked: mouse => {
-                var pos = mapToGame(Qt.point(mouseX + grabImageTarget.x,
-                                             mouseY + grabImageTarget.y))
+                var pos = root.mapToGame(Qt.point(mouseX + grabImageTarget.x,
+                                                  mouseY + grabImageTarget.y))
                 pos.x = Math.floor(pos.x)
                 pos.y = Math.floor(pos.y)
                 if (mouse.button & Qt.RightButton)
