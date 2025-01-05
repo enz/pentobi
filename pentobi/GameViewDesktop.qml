@@ -13,7 +13,7 @@ Item
 {
     id: root
 
-    property Item pickedPiece
+    property PieceBase pickedPiece
 
     // Values: "last_dot", "last_number", "all_number", "none"
     property string moveMarking: "last_dot"

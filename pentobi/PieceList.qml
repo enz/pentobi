@@ -9,7 +9,7 @@ import QtQuick
 Grid {
     id: root
 
-    property var pieces
+    property list<PieceBase> pieces
 
     signal piecePicked(var piece)
 
