@@ -9,7 +9,7 @@ import QtQuick
 Theme {
     property bool _isDark: palette.window.hslLightness < 0.5
 
-    function _contrast(color1, color2) {
+    function _contrast(color1: color, color2: color) : double {
         return 0.30 * (color1.r - color2.r) + 0.59 * (color1.g - color2.g)
                 + 0.11 * (color1.b - color2.b)
     }
