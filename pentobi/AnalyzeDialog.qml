@@ -10,6 +10,8 @@ import QtQuick.Controls
 import "main.js" as Logic
 
 PentobiDialog {
+    id: root
+
     footer: DialogButtonBoxOkCancel { }
     onAboutToShow: comboBox.currentIndex = 0
     onAccepted: {
@@ -24,8 +26,8 @@ PentobiDialog {
 
     Item {
         implicitWidth:
-            Math.max(Math.min(columnLayout.implicitWidth, maxContentWidth),
-                     minContentWidth)
+            Math.max(Math.min(columnLayout.implicitWidth, root.maxContentWidth),
+                     root.minContentWidth)
         implicitHeight: columnLayout.implicitHeight
 
         ColumnLayout {
