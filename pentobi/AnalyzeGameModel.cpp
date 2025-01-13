@@ -9,8 +9,6 @@
 #include <QPromise>
 #include <QSettings>
 #include <QtConcurrentRun>
-#include "GameModel.h"
-#include "PlayerModel.h"
 #include "libboardgame_base/SgfUtil.h"
 
 using namespace Qt::StringLiterals;
