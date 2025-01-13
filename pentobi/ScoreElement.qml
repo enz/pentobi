@@ -37,7 +37,7 @@ Item {
         }
         text: ! root.isFinal ?
                   "%L1".arg(root.value) :
-                  "%1<u>%L2</u>".arg(root.bonus > 0 ? "★" : "").arg(root.value)
+                  "<u>%L1</u>%2".arg(root.value).arg(root.bonus > 0 ? "<sup>*</sup>" : "")
         color: theme.colorText
         opacity: 0.8
         font.preferShaping: false
