@@ -56,6 +56,5 @@ Item {
                                   : "%L1".arg(root.value)
         color: theme.colorText
         opacity: 0.8
-        font.preferShaping: false
     }
 }

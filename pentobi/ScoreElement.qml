@@ -40,6 +40,5 @@ Item {
                   "<u>%L1</u>%2".arg(root.value).arg(root.bonus > 0 ? "<sup>*</sup>" : "")
         color: theme.colorText
         opacity: 0.8
-        font.preferShaping: false
     }
 }

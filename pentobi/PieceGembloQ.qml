@@ -101,10 +101,7 @@ PieceBase
                 width: 2 * board.gridWidth
                 height: 2 * board.gridHeight
                 fontSizeMode: Text.Fit
-                font {
-                    pixelSize: 0.7 * board.gridHeight
-                    preferShaping: false
-                }
+                font.pixelSize: 0.7 * board.gridHeight
                 minimumPixelSize: 5
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter

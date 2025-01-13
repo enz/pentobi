@@ -4,6 +4,7 @@ Pentobi Release Notes
 Version 26.0-dev (main)
 -----------------------
 
+* Use native text rendering on desktop.
 * Initial French translation of the manual (still rough and in need
   of revision by a native speaker)
 * The minimum required Qt version is now 6.5.

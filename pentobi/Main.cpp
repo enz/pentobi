@@ -9,6 +9,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <QQuickWindow>
 #include <QtGlobal>
 #include <QTranslator>
 #include "ImageProvider.h"
@@ -210,7 +211,10 @@ int main(int argc, char *argv[])
     // incorrect canvas painting on low-DPI devices with devicePixelRatio<1
     QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
                 Qt::HighDpiScaleFactorRoundingPolicy::Round);
-#elif defined(Q_OS_WIN)
+#else
+    QQuickWindow::setTextRenderType(QQuickWindow::NativeTextRendering);
+#endif
+#ifdef Q_OS_WIN
     qputenv("QT_QUICK_CONTROLS_STYLE", "Universal");
 #endif
     QCoreApplication::setOrganizationName("Pentobi"_L1);
