@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -1347,6 +1345,15 @@
     <message>
         <source>Too many arguments</source>
         <translation>Zu viele Argumente</translation>
+    </message>
+    <message>
+        <source>Use layout optimized for desktop.</source>
+        <extracomment>Description for command line option --desktop</extracomment>
+        <translation>Für Desktops optimiertes Layout benutzen.</translation>
+    </message>
+    <message>
+        <source>--mobile and --desktop cannot be used both</source>
+        <translation>--mobile und --desktop können nicht beide benutzt werden.</translation>
     </message>
 </context>
 </TS>

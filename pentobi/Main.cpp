@@ -54,6 +54,15 @@ int mainAndroid(QGuiApplication& app)
 
 #else // ! defined(Q_OS_ANDROID)
 
+bool isSmallScreen()
+{
+    auto size = qApp->screens().at(0)->physicalSize();
+    auto width = size.width();
+    auto height = size.height();
+    auto inches = sqrt(width * width + height * height) / 25.4;
+    return inches < 7;
+}
+
 int mainDesktop(QGuiApplication& app)
 {
     QIcon::setThemeName("pentobi"_L1);
@@ -65,6 +74,12 @@ int mainDesktop(QGuiApplication& app)
                 app.translate(
                     "main",
                     "computer opponent for the board game Blokus"));
+    QCommandLineOption optionDesktop(
+        "desktop"_L1,
+        //: Description for command line option --desktop
+        app.translate(
+            "main", "Use layout optimized for desktop."));
+    parser.addOption(optionDesktop);
     auto maxSupportedLevel = Player::max_supported_level;
     QCommandLineOption optionMaxLevel(
                 "maxlevel"_L1,
@@ -158,7 +173,16 @@ int mainDesktop(QGuiApplication& app)
                         "main", "--threads must be a positive number");
             PlayerModel::nuThreads = nuThreads;
         }
-        bool isDesktop = ! parser.isSet(optionMobile);
+        bool isDesktop;
+        if (parser.isSet(optionMobile) && parser.isSet(optionDesktop))
+            throw app.translate("main",
+                                "--mobile and --desktop cannot be used both");
+        else if (parser.isSet(optionMobile))
+            isDesktop = false;
+        else if (parser.isSet(optionDesktop))
+            isDesktop = true;
+        else
+            isDesktop = ! isSmallScreen();
         QString initialFile;
         auto args = parser.positionalArguments();
         if (args.size() > 1)

@@ -7,6 +7,8 @@ Version 26.0-dev (main)
 * Use native text rendering on desktop.
 * Initial French translation of the manual (still rough and in need
   of revision by a native speaker)
+* Mobile layout is now used by default on devices with small screens.
+* New option --desktop.
 * The minimum required Qt version is now 6.5.
 * Removed dependency on qml6-module-qt-labs-settings (on Debian).
 * itstool is no longer required during the normal build process,

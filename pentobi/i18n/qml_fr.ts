@@ -1346,5 +1346,14 @@
         <source>Too many arguments</source>
         <translation>Trop d&apos;arguments</translation>
     </message>
+    <message>
+        <source>Use layout optimized for desktop.</source>
+        <extracomment>Description for command line option --desktop</extracomment>
+        <translation>Utiliser une mise en page optimisée pour le bureau.</translation>
+    </message>
+    <message>
+        <source>--mobile and --desktop cannot be used both</source>
+        <translation>--mobile et --desktop ne peuvent pas être utilisés tous les deux</translation>
+    </message>
 </context>
 </TS>
