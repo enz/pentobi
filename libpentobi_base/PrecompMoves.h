@@ -22,7 +22,7 @@ using namespace std;
 /** Precomputed moves for fast move generation.
     Compact storage of precomputed lists with local moves. Each list contains
     all moves that include a given point constrained by the piece type and the
-    forbidden status of adjacant points. This drastically reduces the number of
+    forbidden status of adjacent points. This drastically reduces the number of
     moves that need to be checked for legality during move generation.
     @see Board::get_adj_status() */
 class PrecompMoves

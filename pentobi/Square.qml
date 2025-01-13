@@ -9,7 +9,7 @@ import QtQuick
 // Piece element (square) with pseudo-3D effect.
 // Simulates lighting by using different images for the lighting at different
 // rotations and interpolating between them with an opacity animation. All
-// images have two versions with the sourceSize optimzed for the statically
+// images have two versions with the sourceSize optimized for the statically
 // displayed states on the board and in the piece selector.
 Item {
     Loader {

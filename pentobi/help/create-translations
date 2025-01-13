@@ -4,7 +4,7 @@
 # longer seems to be maintained. Future alternatives are:
 #
 # poxml: works like itstool, but is not part of the KDE SDK in flatpak. This
-#   is why we include the translated docbook files in the soure tree, such
+#   is why we include the translated docbook files in the source tree, such
 #   that running poxml would not be required for the normal build process as
 #   long as the translations haven't changed.
 #
