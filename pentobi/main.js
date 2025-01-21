@@ -760,8 +760,8 @@ function showWindow() {
         show()
         return
     }
-    var defaultWidth = 1141
-    var defaultHeight= 649
+    var defaultWidth = 954
+    var defaultHeight= 551
     if (settings.width == 0) {
         settings.width = defaultWidth
         settings.height = defaultHeight
