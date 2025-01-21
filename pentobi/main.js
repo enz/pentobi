@@ -760,6 +760,12 @@ function showWindow() {
         show()
         return
     }
+    var defaultWidth = 1141
+    var defaultHeight= 649
+    if (settings.width == 0) {
+        settings.width = defaultWidth
+        settings.height = defaultHeight
+    }
     width = settings.width
     height = settings.height
     x = settings.x
@@ -768,10 +774,9 @@ function showWindow() {
     var maxWidth = rootWindow.Screen.desktopAvailableWidth
     var maxHeight = rootWindow.Screen.desktopAvailableHeight
     if (width < minimumWidth || height < minimumHeight || x < 0 || y < 0
-            || x + width >= maxWidth || y + height >= maxHeight)
-    {
-        width = Math.min(maxWidth, 1164)
-        height = Math.min(maxHeight, width * 662 / 1164)
+            || x + width >= maxWidth || y + height >= maxHeight) {
+        width = Math.min(maxWidth, defaultWidth)
+        height = Math.min(maxHeight, width * defaultHeight / defaultWidth)
         x = (rootWindow.Screen.width - width) / 2
         y = (rootWindow.Screen.height - height) / 2
     }
