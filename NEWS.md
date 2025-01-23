@@ -6,10 +6,20 @@ Version 27.0-dev (main)
 
 *
 
-Version 26.1-dev (v26-fixes)
+Version 26.3-dev (v26-fixes)
 ----------------------------
 
-* Added developer id to appstream file.
+*
+
+Version 26.2 (23 Jan 2025)
+----------------------------
+
+* Added release info to appstream file, which is required on Flathub.
+
+Version 26.1 (23 Jan 2025)
+----------------------------
+
+* Added developer id to appstream file, which is now required on Flathub.
 
 Version 26.0 (23 Jan 2025)
 --------------------------
