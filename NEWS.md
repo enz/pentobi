@@ -9,7 +9,7 @@ Version 27.0-dev (main)
 Version 26.1-dev (v26-fixes)
 ----------------------------
 
-*
+* Added developer id to appstream file.
 
 Version 26.0 (23 Jan 2025)
 --------------------------
