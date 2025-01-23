@@ -1,23 +1,17 @@
 Pentobi Release Notes
 =====================
 
-Version 26.0-dev (main)
------------------------
+Version 26.0 (23 Jan 2025)
+--------------------------
 
-* Use native text rendering on desktop.
-* Initial French translation of the manual (still rough and in need
-  of revision by a native speaker)
+* French translation of the manual.
+* Fixed default window size.
 * Mobile layout is now used by default on devices with small screens.
 * New option --desktop.
-* The minimum required Qt version is now 6.5.
-* Removed dependency on qml6-module-qt-labs-settings (on Debian).
+* Minimum required Qt version is now 6.5.
+* Removed dependency on qml6-module-qt-labs-settings (Debian).
 * itstool is no longer required during the normal build process,
-  (see comment in pentobi/help/create-translations)
-
-Version 25.3-dev (v25-fixes)
-----------------------------
-
-*
+  (see pentobi/help/create-translations)
 
 Version 25.2 (12 Nov 2024)
 --------------------------

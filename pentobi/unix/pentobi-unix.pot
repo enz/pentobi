@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-12 12:36+0100\n"
+"POT-Creation-Date: 2025-01-23 11:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,49 +25,61 @@ msgstr ""
 msgid "Computer opponent for Blokus"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:10
+#: io.sourceforge.pentobi.appdata.xml.in:15
 msgid ""
 "Pentobi is a computer opponent for the board game Blokus. It has a strong "
 "Blokus engine with different playing levels. The supported game variants are "
 "Classic, Duo, Trigon, Junior, Nexos, Callisto and GembloQ."
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:15
+#: io.sourceforge.pentobi.appdata.xml.in:20
 msgid ""
 "Players can determine their strength by playing rated games against the "
 "computer and use a game analysis function. Games can be saved in Smart Game "
 "Format with comments and move variations."
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:20
+#: io.sourceforge.pentobi.appdata.xml.in:25
 msgid ""
 "Trademark disclaimer: The trademark Blokus and other trademarks referred to "
 "are property of their respective trademark holders. The trademark holders "
 "are not affiliated with the author of the program Pentobi."
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:35
+#: io.sourceforge.pentobi.appdata.xml.in:40
 msgid "Game variant Classic"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:40
+#: io.sourceforge.pentobi.appdata.xml.in:45
 msgid "Game variant Duo"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:45
+#: io.sourceforge.pentobi.appdata.xml.in:50
 msgid "Game variant Trigon"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:50
+#: io.sourceforge.pentobi.appdata.xml.in:55
 msgid "Game variant Nexos"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:55
+#: io.sourceforge.pentobi.appdata.xml.in:60
 msgid "Game variant GembloQ"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:64
+#: io.sourceforge.pentobi.appdata.xml.in:69
 msgid "Markus Enzenberger"
+msgstr ""
+
+#: io.sourceforge.pentobi.appdata.xml.in:84
+msgid "French translation of the manual."
+msgstr ""
+
+#: io.sourceforge.pentobi.appdata.xml.in:87
+msgid "Fixed default window size."
+msgstr ""
+
+#: io.sourceforge.pentobi.appdata.xml.in:90
+msgid "Mobile layout is now used by default on devices with small screens."
 msgstr ""
 
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons

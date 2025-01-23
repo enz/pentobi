@@ -77,4 +77,21 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 <mediatype>application/x-blokus-sgf</mediatype>
 </provides>
 <content_rating type="oars-1.1"/>
+<releases>
+<release version="26.0" date="2025-01-23">
+<description>
+<ul>
+<li>
+French translation of the manual.
+</li>
+<li>
+Fixed default window size.
+</li>
+<li>
+Mobile layout is now used by default on devices with small screens.
+</li>
+</ul>
+</description>
+</release>
+</releases>
 </component>

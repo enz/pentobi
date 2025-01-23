@@ -12,7 +12,7 @@ Building Pentobi requires the following tools and libraries:
 * [GNU gettext](https://www.gnu.org/software/gettext/) (>=0.19.6)
 * [LibRsvg](https://wiki.gnome.org/Projects/LibRsvg)
 
-In Debian (Testing/upcoming 13), they can be installed with the command
+In Debian 13, they can be installed with the command
 ```
 sudo apt install cmake g++ gettext librsvg2-bin libxkbcommon-dev make \
   qml6-module-qtcore qml6-module-qtqml-workerscript \
