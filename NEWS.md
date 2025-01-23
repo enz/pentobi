@@ -1,6 +1,11 @@
 Pentobi Release Notes
 =====================
 
+Version 26.2 (23 Jan 2025)
+----------------------------
+
+* Added release info to appstream file, which is required on Flathub.
+
 Version 26.1 (23 Jan 2025)
 ----------------------------
 

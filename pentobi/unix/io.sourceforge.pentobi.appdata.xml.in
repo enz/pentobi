@@ -79,4 +79,15 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 <mediatype>application/x-blokus-sgf</mediatype>
 </provides>
 <content_rating type="oars-1.1"/>
+<releases>
+<release version="26.1" date="2025-01-23">
+<description>
+<ul>
+<li>
+Added release info to appstream file, which is required on Flathub.
+</li>
+</ul>
+</description>
+</release>
+</releases>
 </component>
