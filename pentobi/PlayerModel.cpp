@@ -35,8 +35,9 @@ PlayerModel::PlayerModel(QObject* parent)
                 [this](double elapsedSeconds, double remainingSeconds) {
         emit searchCallback(elapsedSeconds, remainingSeconds);
     });
-    connect(&m_watcher, &QFutureWatcher<GenMoveResult>::finished,
-            this, &PlayerModel::genMoveFinished);
+    if (! connect(&m_watcher, &QFutureWatcher<GenMoveResult>::finished,
+                 this, &PlayerModel::genMoveFinished))
+        qFatal("PlayerModel::connect() failed (check compiler/linker flags)");
 }
 
 PlayerModel::~PlayerModel()
