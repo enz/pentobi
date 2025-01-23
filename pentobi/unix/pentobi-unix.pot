@@ -70,18 +70,6 @@ msgstr ""
 msgid "Markus Enzenberger"
 msgstr ""
 
-#: io.sourceforge.pentobi.appdata.xml.in:84
-msgid "French translation of the manual."
-msgstr ""
-
-#: io.sourceforge.pentobi.appdata.xml.in:87
-msgid "Fixed default window size."
-msgstr ""
-
-#: io.sourceforge.pentobi.appdata.xml.in:90
-msgid "Mobile layout is now used by default on devices with small screens."
-msgstr ""
-
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
 #: io.sourceforge.pentobi.desktop.in:6
 msgid ""

@@ -84,18 +84,6 @@ msgstr "Spielvariante GembloQ"
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
 
-#: io.sourceforge.pentobi.appdata.xml.in:84
-msgid "French translation of the manual."
-msgstr "Französische Übersetzung der Hilfe."
-
-#: io.sourceforge.pentobi.appdata.xml.in:87
-msgid "Fixed default window size."
-msgstr "Vorgabegröße des Fensters berichtigt."
-
-#: io.sourceforge.pentobi.appdata.xml.in:90
-msgid "Mobile layout is now used by default on devices with small screens."
-msgstr "Smartphone-Layout wird jetzt automatisch auf Geräten mit kleinem Bildschirm benutzt."
-
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
 #: io.sourceforge.pentobi.desktop.in:6
 msgid ""
