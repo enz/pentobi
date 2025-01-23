@@ -66,7 +66,9 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 <url type="translate">https://app.transifex.com/markus-enzenberger/pentobi/</url>
 <url type="vcs-browser">https://github.com/enz/pentobi</url>
 <url type="contribute">https://github.com/enz/pentobi/blob/main/CONTRIBUTING.md</url>
-<developer><name>Markus Enzenberger</name></developer>
+<developer id="io.sourceforge.enz">
+<name>Markus Enzenberger</name>
+</developer>
 <update_contact>enz@users.sourceforge.net</update_contact>
 <branding>
 <color type="primary" scheme_preference="light">#c0bfbc</color>
