@@ -1,10 +1,10 @@
 Pentobi Release Notes
 =====================
 
-Version 26.1-dev (v26-fixes)
+Version 26.1 (23 Jan 2025)
 ----------------------------
 
-* Added developer id to appstream file.
+* Added developer id to appstream file, which is now required on Flathub.
 
 Version 26.0 (23 Jan 2025)
 --------------------------
