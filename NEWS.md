@@ -25,7 +25,7 @@ Version 26.0 (23 Jan 2025)
 * New option --desktop.
 * Minimum required Qt version is now 6.5.
 * Removed dependency on qml6-module-qt-labs-settings (Debian).
-* itstool is no longer required during the normal build process,
+* itstool is no longer required during the normal build process
   (see pentobi/help/create-translations)
 
 Version 25.2 (12 Nov 2024)
