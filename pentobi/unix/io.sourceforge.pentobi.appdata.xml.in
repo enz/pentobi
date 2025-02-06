@@ -83,18 +83,5 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 </provides>
 <content_rating type="oars-1.1"/>
 <releases>
-<release version="26.3" date="2025-02-06">
-<description>
-<ul>
-<li>
-Disabled native text rendering on desktop, which did not work well
-on some platforms.
-</li>
-<li>
-Indicate support for mobile devices in metainfo file.
-</li>
-</ul>
-</description>
-</release>
 </releases>
 </component>
