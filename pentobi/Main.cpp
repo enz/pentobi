@@ -60,7 +60,7 @@ bool isSmallScreen()
     auto width = size.width();
     auto height = size.height();
     auto inches = sqrt(width * width + height * height) / 25.4;
-    return inches < 7;
+    return inches < 10;
 }
 
 int mainDesktop(QGuiApplication& app)
