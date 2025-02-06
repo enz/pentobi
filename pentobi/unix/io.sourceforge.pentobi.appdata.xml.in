@@ -7,8 +7,8 @@
 <name>Pentobi</name>
 <summary>Computer opponent for Blokus</summary>
 <recommends>
-<control>pointing</control>
 <control>keyboard</control>
+<control>pointing</control>
 <control>touch</control>
 </recommends>
 <requires>
