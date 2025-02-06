@@ -6,10 +6,17 @@ Version 27.0-dev (main)
 
 *
 
-Version 26.3-dev (v26-fixes)
+Version 26.4-dev (v26-fixes)
 ----------------------------
 
 *
+
+Version 26.3 (06 Feb 2025)
+--------------------------
+
+* Disabled native text rendering on desktop, which did not work well
+  on some platforms.
+* Indicate support for mobile devices in metainfo file.
 
 Version 26.2 (23 Jan 2025)
 ----------------------------

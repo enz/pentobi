@@ -26,6 +26,7 @@ Item
     property real animationDurationFast: enableAnimations ? 80 : 0
     property bool setupMode
     property string commentMode: "as_needed"
+    property bool showMoveNumber // Dummy for compatibilty with GameViewDesktop
     property alias boardContextMenu: boardContextMenu
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight
