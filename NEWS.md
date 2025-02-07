@@ -4,8 +4,7 @@ Pentobi Release Notes
 Version 26.4-dev (v26-fixes)
 ----------------------------
 
-* Increased maximum screen size for using layout for mobile devices
-  from 7 to 10 inches.
+*
 
 Version 26.3 (06 Feb 2025)
 --------------------------
