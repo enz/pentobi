@@ -15,7 +15,7 @@ Rectangle {
                  textArea.font.pixelSize)
 
     function loadPage(pageId) {
-        if (flickable.contentY == 0)
+        if (flickable.contentY === 0)
             docbookReader.pageId = pageId
         else {
             flickable.contentY = 0
