@@ -33,7 +33,7 @@ Dialog {
             accept()
     }
     // Check if any button in the footer the focus. We don't want to handle
-    // the return key as accept (see comemnt above) if any button has the
+    // the return key as accept (see comment above) if any button has the
     // visual focus because the user might expect that pressing return triggers
     // the button with the focus.
     function hasButtonFocus() {
