@@ -39,7 +39,7 @@ QPixmap ImageProvider::requestPixmap(const QString& id, QSize* size,
     auto elem = id.split('/');
     if (elem.empty())
         return pixmap;
-    auto name = elem[0];
+    const auto& name = elem[0];
     if (name == "board"_L1 && elem.size() == 8)
     {
         auto gameVariant = elem[1].toLocal8Bit();
