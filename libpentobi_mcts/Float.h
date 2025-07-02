@@ -19,7 +19,7 @@ using Float = LIBPENTOBI_MCTS_FLOAT_TYPE;
 using Float = float;
 #endif
 
-static_assert(std::is_floating_point<Float>::value);
+static_assert(std::is_floating_point_v<Float>);
 
 //-----------------------------------------------------------------------------
 
