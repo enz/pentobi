@@ -89,7 +89,7 @@ public:
     /** Specialized version for trivially copyable elements.
         Can be used instead of copy_from if the compiler is not smart enough to
         figure out that it can use memcpy.
-        @pre std::is_trivially_copyable<T>::value */
+        @pre std::is_trivially_copyable_v<T> */
     void memcpy_from(const Grid& grid, const Geometry& geo);
 
 private:
@@ -132,7 +132,7 @@ inline void Grid<P, T>::fill_all(const T& val)
 template<class P, typename T>
 void Grid<P, T>::memcpy_from(const Grid& grid, const Geometry& geo)
 {
-    static_assert(is_trivially_copyable<T>::value);
+    static_assert(is_trivially_copyable_v<T>);
     memcpy(&m_a, grid.m_a, geo.get_range() * sizeof(T));
 }
 
