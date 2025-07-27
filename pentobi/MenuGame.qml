@@ -9,45 +9,45 @@ import QtQuick.Controls
 PentobiMenu {
     title: qsTr("Game")
 
-    PentobiMenuItem {
+    MenuItem {
         action: actionNew
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionNewRated
     }
     MenuSeparator { }
-    PentobiMenuItem {
+    MenuItem {
         text: qsTr("Game Variant…")
         onTriggered: gameVariantDialog.open()
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionGameInfo
     }
     MenuSeparator { }
-    PentobiMenuItem {
+    MenuItem {
         action: actionUndo
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionFindMove
     }
     MenuSeparator { }
-    PentobiMenuItem {
+    MenuItem {
         action: actionOpen
     }
     MenuRecentFiles { }
-    PentobiMenuItem {
+    MenuItem {
         action: actionSave
         enabled: actionSave.enabled && gameModel.file !== ""
     }
-    PentobiMenuItem {
+    MenuItem {
         action: actionSaveAs
     }
-    PentobiMenuItem {
+    MenuItem {
         text: qsTr("Export Image…")
         onTriggered: exportImageDialog.open()
     }
     MenuSeparator { }
-    PentobiMenuItem {
+    MenuItem {
         action: actionQuit
     }
 }

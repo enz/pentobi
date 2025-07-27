@@ -4,7 +4,9 @@ Pentobi Release Notes
 Version 27.0-dev (main)
 -----------------------
 
-*
+* Removed workaround for QTBUG-119198 (Disabled menu item
+  indistinguishable from enabled one), which no longer seems
+  to be necessary on newer Linux distributions.
 
 Version 26.4-dev (v26-fixes)
 ----------------------------

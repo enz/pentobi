@@ -4,13 +4,15 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQuick.Controls
+
 PentobiMenu {
     title: qsTr("Help")
 
-    PentobiMenuItem {
+    MenuItem {
         action: actionHelp
     }
-    PentobiMenuItem {
+    MenuItem {
         text: qsTr("About Pentobi")
         onTriggered: aboutDialog.open()
     }

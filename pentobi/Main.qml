@@ -46,11 +46,6 @@ ApplicationWindow {
                                         || analyzeGameModel.isRunning
     property bool showToolBar: true
 
-    // Enable workaround for QTBUG-119198 (Disabled menu item indistinguishable
-    // from enabled one)
-    property bool workaroundQtBug119198:
-        palette.buttonText == palette.disabled.buttonText
-
     minimumWidth: isDesktop ? 481 : 240
     minimumHeight: isDesktop ? 303 : 301
     color: theme.colorBackground
