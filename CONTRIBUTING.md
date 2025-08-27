@@ -8,7 +8,7 @@ Bugs can be reported at the [issue tracker](https://github.com/enz/pentobi/issue
 at GitHub. There are no plans to add more game variants or new features to
 Pentobi, so please use the issue tracker only for bugs.
 
-The only officially supported platforms is Linux, releases are done only as
+The only officially supported platform is Linux, releases are done only as
 source code. The Windows version is maintained by an external maintainer,
 please report Windows-related bugs [here](https://github.com/lwchkg/pentobi/issues).
 
