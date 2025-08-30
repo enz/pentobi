@@ -47,8 +47,7 @@ DocbookReader::DocbookReader(QObject* parent)
             fileName = ":/docbook/index.docbook"_L1;
     }
     QFile file(fileName);
-    file.open(QIODevice::ReadOnly);
-    if (! m_doc.setContent(&file))
+    if (! file.open(QIODevice::ReadOnly) || ! m_doc.setContent(&file))
         return;
     m_pageIds.append("index"_L1);
     QDomElement elem = m_doc.documentElement().firstChildElement();
