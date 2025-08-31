@@ -539,9 +539,11 @@
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guilabel>Цветовая тема</guilabel></term>
+<term><guilabel>Colorblind</guilabel></term>
 <listitem>
-<para>Меняет цвета окна, доски и фигур.</para>
+<para>
+Use piece colors more distinguishable for colorblind users.
+</para>
 </listitem>
 </varlistentry>
 <varlistentry>

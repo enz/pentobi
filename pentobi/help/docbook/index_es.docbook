@@ -539,9 +539,11 @@
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guilabel>Color del tema</guilabel></term>
+<term><guilabel>Colorblind</guilabel></term>
 <listitem>
-<para>Cambia los colores de la ventana, del tablero y de las piezas.</para>
+<para>
+Use piece colors more distinguishable for colorblind users.
+</para>
 </listitem>
 </varlistentry>
 <varlistentry>

@@ -539,9 +539,9 @@
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guilabel>Farbthema</guilabel></term>
+<term><guilabel>Farbenblind</guilabel></term>
 <listitem>
-<para>Ändert die Farben des Fensters, des Spielbretts und der Spielsteine.</para>
+<para>Benutzt Spielsteinfarben, die für farbenblinde Benutzer besser unterscheidbar sind.</para>
 </listitem>
 </varlistentry>
 <varlistentry>

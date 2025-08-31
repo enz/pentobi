@@ -539,9 +539,9 @@
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guilabel>Thème de couleur</guilabel></term>
+<term><guilabel>Daltonien</guilabel></term>
 <listitem>
-<para>Change les couleurs de la fenêtre, du plateau et des pièces.</para>
+<para>Utilisez des couleurs de pièces plus reconnaissables pour les utilisateurs daltoniens.</para>
 </listitem>
 </varlistentry>
 <varlistentry>

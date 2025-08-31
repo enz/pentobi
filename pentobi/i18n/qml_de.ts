@@ -52,27 +52,6 @@
         <translation>Varianten zeigen</translation>
     </message>
     <message>
-        <source>Light</source>
-        <translation>Hell</translation>
-    </message>
-    <message>
-        <source>Dark</source>
-        <translation>Dunkel</translation>
-    </message>
-    <message>
-        <source>Colorblind light</source>
-        <translation>Farbenblind hell</translation>
-    </message>
-    <message>
-        <source>Colorblind dark</source>
-        <translation>Farbenblind dunkel</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <extracomment>Name of theme using default system colors</extracomment>
-        <translation>System</translation>
-    </message>
-    <message>
         <source>Move marking:</source>
         <translation>Zugmarkierung:</translation>
     </message>
@@ -113,13 +92,13 @@
         <translation>Nie</translation>
     </message>
     <message>
-        <source>Color theme:</source>
-        <translation>Farbthema:</translation>
-    </message>
-    <message>
         <source>Move number</source>
         <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
         <translation>Zugnummer</translation>
+    </message>
+    <message>
+        <source>Colorblind</source>
+        <translation>Farbenblind</translation>
     </message>
 </context>
 <context>

@@ -52,27 +52,6 @@
         <translation>Afficher les variations</translation>
     </message>
     <message>
-        <source>Light</source>
-        <translation>Clair</translation>
-    </message>
-    <message>
-        <source>Dark</source>
-        <translation>Noir</translation>
-    </message>
-    <message>
-        <source>Colorblind light</source>
-        <translation>Daltonien clair</translation>
-    </message>
-    <message>
-        <source>Colorblind dark</source>
-        <translation>Daltonien noir</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <extracomment>Name of theme using default system colors</extracomment>
-        <translation>Système</translation>
-    </message>
-    <message>
         <source>Move marking:</source>
         <translation>Marquage des coups :</translation>
     </message>
@@ -113,13 +92,13 @@
         <translation>Jamais</translation>
     </message>
     <message>
-        <source>Color theme:</source>
-        <translation>Thème de couleur :</translation>
-    </message>
-    <message>
         <source>Move number</source>
         <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
         <translation>Numéro de coup</translation>
+    </message>
+    <message>
+        <source>Colorblind</source>
+        <translation>Daltonien</translation>
     </message>
 </context>
 <context>
