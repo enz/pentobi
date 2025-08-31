@@ -79,8 +79,19 @@ ApplicationWindow {
             bottom: parent.bottom
             margins: isDesktop ? 2 : 0
         }
-        source: isDesktop ? "GameViewDesktop.qml" : "GameViewMobile.qml"
+        sourceComponent:
+            isDesktop ? componentGameViewDesktop : componentGameViewMobile
 
+        Component {
+            id: componentGameViewDesktop
+
+            GameViewDesktop { }
+        }
+        Component {
+            id: componentGameViewMobile
+
+            GameViewMobile { }
+        }
         Connections {
             target: gameViewLoader.item
 
