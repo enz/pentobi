@@ -41,7 +41,6 @@ Item {
             x: 0
             width: toPlayIndicatorWidth
             radius: width / 2
-            color: theme.colorText
         }
         Column {
             id: column

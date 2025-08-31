@@ -158,9 +158,7 @@ Item
         // Use Rectangle to explicitly draw background of each page, otherwise
         // all pages are shown simultaneously and overlapping with Qt 6.3.0
         // until first swipe.
-        Rectangle {
-            color: theme.colorBackground
-
+        Page {
             Column {
                 id: columnPieces
 
@@ -196,18 +194,14 @@ Item
                 }
             }
         }
-        Rectangle {
-            color: theme.colorBackground
-
+        Page {
             NavigationPanel {
                 id: navigationPanel
 
                 anchors.fill: parent
             }
         }
-        Rectangle {
-            color: theme.colorBackground
-
+        Page {
             ColumnLayout {
                 anchors.fill: parent
 
@@ -260,11 +254,10 @@ Item
             }
         }
 
-        Text {
+        Label {
             id: messageText
 
             anchors.centerIn: parent
-            color: theme.colorMessageText
         }
         Timer {
             id: messageTimer

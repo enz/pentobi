@@ -28,7 +28,6 @@ ColumnLayout {
     }
     Label {
         text: gameModel.positionInfo
-        color: theme.colorText
         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     }
     Item {

@@ -21,6 +21,7 @@ ApplicationWindow {
     property bool isRated
 
     property alias gameView: gameViewLoader.item
+    property alias theme: theme
 
     // If the user manually disabled all computer colors in the dialog, we
     // assume that they want to edit games rather than play, and we will not
@@ -31,9 +32,6 @@ ApplicationWindow {
 
     property bool isWindows: Qt.platform.os === "windows"
 
-    property string themeName: isAndroid ? "Dark" : "System"
-
-    property Theme theme: Logic.createTheme(themeName)
     property url folder:
         StandardPaths.writableLocation(StandardPaths.HomeLocation)
 
@@ -48,13 +46,14 @@ ApplicationWindow {
 
     minimumWidth: isDesktop ? 481 : 240
     minimumHeight: isDesktop ? 303 : 301
-    color: theme.colorBackground
     title: Logic.getWindowTitle(gameModel.file, gameModel.isModified)
     onClosing: if ( ! Logic.quit()) close.accepted = false
-    onThemeChanged: androidUtils.initTheme(theme.colorBackground)
     Component.onCompleted: Logic.init()
     Component.onDestruction: Logic.cancelRunning()
 
+    Theme {
+        id: theme
+    }
     MouseArea {
         anchors.fill: parent
         onClicked: gameView.dropCommentFocus()
@@ -103,9 +102,9 @@ ApplicationWindow {
         property real y
         property real width
         property real height
+        property alias colorblind: theme.colorblind
         property alias folder: rootWindow.folder
         property alias displayName: rootWindow.displayName
-        property alias themeName: rootWindow.themeName
         property alias exportImageWidth: rootWindow.exportImageWidth
         property alias showToolBar: rootWindow.showToolBar
         property alias showVariations: gameModel.showVariations

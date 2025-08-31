@@ -4,9 +4,8 @@ Pentobi Release Notes
 Version 27.0-dev (main)
 -----------------------
 
-* Removed workaround for QTBUG-119198 (Disabled menu item
-  indistinguishable from enabled one), which no longer seems
-  to be necessary on newer Linux distributions.
+* No longer implement different themes; always use QtQuickControls
+  style colors to avoid customization issues with some styles.
 
 Version 26.4-dev (v26-fixes)
 ----------------------------

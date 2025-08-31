@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-11-28 16:40+0100\n"
+"POT-Creation-Date: 2025-08-31 13:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -840,12 +840,12 @@ msgstr ""
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:920
-msgid "<guilabel>Color theme</guilabel>"
+msgid "<guilabel>Colorblind</guilabel>"
 msgstr ""
 
 #. (itstool) path: listitem/para
 #: docbook/index.docbook:922
-msgid "Changes the colors of the window, board and pieces."
+msgid "Use piece colors more distinguishable for colorblind users."
 msgstr ""
 
 #. (itstool) path: varlistentry/term

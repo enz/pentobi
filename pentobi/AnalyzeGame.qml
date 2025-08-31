@@ -86,7 +86,6 @@ Item {
     Label {
         visible: elements.length === 0 && ! analyzeGameModel.isRunning
         anchors.centerIn: parent
-        color: theme.colorText
         opacity: 0.8
         text: qsTr("(No analysis)")
     }

@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Window
 
 Item {
@@ -217,9 +218,8 @@ Item {
         Repeater {
             model: root.showCoordinates ? root.columns : 0
 
-            Text {
+            Label {
                 text: getColumnCoord(index)
-                color: theme.colorText
                 opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
                 font.pixelSize: coordinateFontSize
                 x: mapFromGameX(index) - grabImageTarget.x
@@ -231,9 +231,8 @@ Item {
         Repeater {
             model: root.showCoordinates ? root.columns : 0
 
-            Text {
+            Label {
                 text: getColumnCoord(index)
-                color: theme.colorText
                 opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
                 font.pixelSize: coordinateFontSize
                 x: mapFromGameX(index) - grabImageTarget.x
@@ -245,9 +244,8 @@ Item {
         Repeater {
             model: root.showCoordinates ? root.rows : 0
 
-            Text {
+            Label {
                 text: index + 1
-                color: theme.colorText
                 opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
                 font.pixelSize: coordinateFontSize
                 x: mapFromGameX(isTrigon ? -1.5 : -1) - grabImageTarget.x
@@ -259,9 +257,8 @@ Item {
         Repeater {
             model: root.showCoordinates ? root.rows : 0
 
-            Text {
+            Label {
                 text: index + 1
-                color: theme.colorText
                 opacity: 0.55 - 0.1 * theme.colorBackground.hslLightness
                 font.pixelSize: coordinateFontSize
                 x: mapFromGameX(isTrigon ? columns + 0.5 : columns)

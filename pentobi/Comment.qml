@@ -10,11 +10,9 @@ import QtQuick.Controls
 Rectangle {
     function dropFocus() { textArea.focus = false }
 
-    color: theme.colorCommentBase
     radius: 2
-    border.color:
-        textArea.activeFocus ? theme.colorCommentFocus
-                             : Qt.alpha(theme.colorCommentText, 0.3)
+    border.color: textArea.activeFocus ? theme.colorCommentFocus
+                                       : Qt.alpha(theme.colorText, 0.3)
 
     ScrollView {
         anchors.fill: parent
@@ -25,9 +23,6 @@ Rectangle {
             id: textArea
 
             text: gameModel.comment
-            color: theme.colorCommentText
-            selectionColor: theme.colorSelection
-            selectedTextColor: theme.colorSelectedText
             selectByMouse: isDesktop
             wrapMode: TextEdit.Wrap
             focus: true

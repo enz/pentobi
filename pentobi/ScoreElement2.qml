@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick
+import QtQuick.Controls
 
 Item {
     id: root
@@ -42,7 +43,7 @@ Item {
         color: root.isAltColor && root.isFinal ? root.color1 : root.color2
         radius: width / 2
     }
-    Text {
+    Label {
         id: text
 
         anchors {
@@ -54,7 +55,6 @@ Item {
                               : root.isFinal ?
                                     "<u>%L1</u>".arg(root.value)
                                   : "%L1".arg(root.value)
-        color: theme.colorText
         opacity: 0.8
     }
 }

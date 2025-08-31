@@ -170,17 +170,6 @@ function computerPlays(color) {
     }
 }
 
-function createTheme(themeName) {
-    var source = "Theme" + themeName + ".qml"
-    var component = Qt.createComponent(source)
-    if (component.status !== Component.Ready) {
-        console.warn(component.errorString())
-        source = isAndroid ? "ThemeDark.qml" : "ThemeSystem.qml"
-        component = Qt.createComponent(source)
-    }
-    return component.createObject(rootWindow)
-}
-
 function deleteAllVar() {
     showQuestion(qsTr("Delete all variations?"), deleteAllVarNoVerify)
 }
@@ -330,14 +319,6 @@ function getWindowTitle(file, isModified) {
 }
 
 function init() {
-    // Convert theme settings used by older versions of Pentobi
-    switch (themeName) {
-    case "light": themeName = "Light"; break
-    case "dark": themeName = "dark"; break
-    case "colorblind-light": themeName = "ColorblindLight"; break
-    case "colorblind-dark": themeName = "ColorblindDark"; break
-    case "system": themeName = "System"; break
-    }
     if (gameModel.loadAutoSave()) {
         computerPlays0 =
                 syncSettings.valueBool("computerPlays0", computerPlays0)

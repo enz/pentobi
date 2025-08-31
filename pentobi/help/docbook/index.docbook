@@ -917,10 +917,10 @@ annotation and variation information at the right side of the status bar.
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guilabel>Color theme</guilabel></term>
+<term><guilabel>Colorblind</guilabel></term>
 <listitem>
 <para>
-Changes the colors of the window, board and pieces.
+Use piece colors more distinguishable for colorblind users.
 </para>
 </listitem>
 </varlistentry>

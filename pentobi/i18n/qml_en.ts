@@ -54,27 +54,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Light</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colorblind light</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colorblind dark</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System</source>
-        <extracomment>Name of theme using default system colors</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Move marking:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -115,12 +94,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color theme:</source>
+        <source>Move number</source>
+        <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Move number</source>
-        <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
+        <source>Colorblind</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

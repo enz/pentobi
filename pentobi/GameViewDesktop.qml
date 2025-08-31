@@ -294,7 +294,6 @@ Item
                 leftMargin: 5
             }
             opacity: 0
-            color: theme.colorText
 
             Behavior on opacity {
                 NumberAnimation {
@@ -310,7 +309,6 @@ Item
                 rightMargin: 5
             }
             text: gameModel.positionInfoShort
-            color: theme.colorText
             opacity: 0.8
         }
         Timer {
