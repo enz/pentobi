@@ -57,6 +57,7 @@ Item
     property list<color> color3: theme.colorGreen
     property bool isCommentVisible: navigationPanel.comment.visible
     property bool isPortrait: width <= height
+    property bool hasCommentFocus: navigationPanel.comment.hasFocus
 
     signal play(var pieceModel, point gameCoord)
 

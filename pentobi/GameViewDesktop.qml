@@ -25,6 +25,7 @@ Item
     property bool setupMode
     property string commentMode: "as_needed"
     property bool showMoveNumber
+    property bool hasCommentFocus: comment.item && comment.item.hasFocus
 
     property size imageSourceSize: {
         var width = board.gridWidth, height = board.gridHeight

@@ -10,7 +10,8 @@ Version 27.0-dev (main)
 Version 26.4-dev (v26-fixes)
 ----------------------------
 
-*
+* Workaround for QTBUG-139679 which broke entering text in comment
+  area in Qt 6.9.2.
 
 Version 26.3 (06 Feb 2025)
 --------------------------
