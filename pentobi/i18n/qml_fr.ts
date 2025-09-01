@@ -139,6 +139,13 @@
     </message>
 </context>
 <context>
+    <name>Comment</name>
+    <message>
+        <source>No comment</source>
+        <translation>Aucun commentaire</translation>
+    </message>
+</context>
+<context>
     <name>ComputerDialog</name>
     <message>
         <source>Computer plays:</source>
