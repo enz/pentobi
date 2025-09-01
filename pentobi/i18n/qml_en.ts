@@ -143,7 +143,7 @@
 <context>
     <name>Comment</name>
     <message>
-        <source>No comment</source>
+        <source>Comment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
