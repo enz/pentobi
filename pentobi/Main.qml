@@ -477,6 +477,7 @@ ApplicationWindow {
             "N", "O", "P", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
 
         Shortcut {
+            enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
             sequence: modelData
             onActivated: Logic.pickNamedPiece(modelData)
         }
@@ -499,11 +500,12 @@ ApplicationWindow {
     }
     Shortcut {
         sequence: "Return"
-        enabled: ! isAndroid
+        enabled: ! isAndroid && ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: gameView.playPickedPiece()
     }
     Shortcut {
         sequence: "Escape"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated:
             if (gameView.pickedPiece)
                 gameView.pickedPiece = null
@@ -517,43 +519,53 @@ ApplicationWindow {
     }
     Shortcut {
         sequence: "Down"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: gameView.shiftPiece(0, 1)
     }
     Shortcut {
         sequence: "Shift+Down"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: gameView.shiftPieceFast(0, 1)
     }
     Shortcut {
         sequence: "Left"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: gameView.shiftPiece(-1, 0)
     }
     Shortcut {
         sequence: "Shift+Left"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: gameView.shiftPieceFast(-1, 0)
     }
     Shortcut {
         sequence: "Right"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: gameView.shiftPiece(1, 0)
     }
     Shortcut {
         sequence: "Shift+Right"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: gameView.shiftPieceFast(1, 0)
     }
     Shortcut {
         sequence: "Up"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: gameView.shiftPiece(0, -1)
     }
     Shortcut {
         sequence: "Shift+Up"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: gameView.shiftPieceFast(0, -1)
     }
     Shortcut {
         enabled: gameView.pickedPiece
+                 && ! gameView.hasCommentFocus /* QTBUG-139679 */
         sequence: "Space"
         onActivated: gameView.pickedPiece.pieceModel.nextOrientation()
     }
     Shortcut {
         sequence: "+"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: Logic.nextPiece()
     }
     Shortcut {
@@ -562,11 +574,13 @@ ApplicationWindow {
     }
     Shortcut {
         enabled: gameView.pickedPiece
+                 && ! gameView.hasCommentFocus /* QTBUG-139679 */
         sequence: "Shift+Space"
         onActivated: gameView.pickedPiece.pieceModel.previousOrientation()
     }
     Shortcut {
         sequence: "-"
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: Logic.prevPiece()
     }
 }

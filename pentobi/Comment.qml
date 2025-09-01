@@ -8,6 +8,8 @@ import QtQuick
 import QtQuick.Controls
 
 Rectangle {
+    property alias hasFocus: textArea.activeFocus
+
     function dropFocus() { textArea.focus = false }
 
     color: theme.colorCommentBase
