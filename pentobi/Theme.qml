@@ -61,7 +61,6 @@ Item {
         isMaterial ? Qt.lighter(colorBackground, 2) : palette.window
     property color colorButtonPressed:
         isMaterial ? Qt.lighter(colorBackground, 5) : palette.mid
-    property color colorCommentFocus: isMaterial ? "#4799cc" : palette.highlight
     property color colorMessageBase: isMaterial ? "#333333" : palette.base
     property color colorText: isMaterial ? "#e6d5e1" : palette.text
 
