@@ -19,7 +19,7 @@ ScrollView {
         id: textArea
 
         text: gameModel.comment
-        placeholderText: qsTr("No comment")
+        placeholderText: qsTr("Comment")
         color: theme.colorCommentText
         selectionColor: theme.colorSelection
         selectedTextColor: theme.colorSelectedText
