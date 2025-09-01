@@ -141,6 +141,13 @@
     </message>
 </context>
 <context>
+    <name>Comment</name>
+    <message>
+        <source>No comment</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ComputerDialog</name>
     <message>
         <source>Computer plays:</source>
