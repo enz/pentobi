@@ -7,29 +7,23 @@
 import QtQuick
 import QtQuick.Controls
 
-Rectangle {
+ScrollView {
     property alias hasFocus: textArea.activeFocus
 
     function dropFocus() { textArea.focus = false }
 
-    radius: 2
-    border.color: textArea.activeFocus ? theme.colorCommentFocus
-                                       : Qt.alpha(theme.colorText, 0.3)
+    clip: true
+    ScrollBar.vertical.minimumSize: 0.2
 
-    ScrollView {
-        anchors.fill: parent
-        clip: true
-        ScrollBar.vertical.minimumSize: 0.2
+    TextArea {
+        id: textArea
 
-        TextArea {
-            id: textArea
-
-            text: gameModel.comment
-            selectByMouse: isDesktop
-            wrapMode: TextEdit.Wrap
-            focus: true
-            onTextChanged: gameModel.comment = text
-            Keys.onTabPressed: focus = false
-        }
+        text: gameModel.comment
+        placeholderText: qsTr("No comment")
+        selectByMouse: isDesktop
+        wrapMode: TextEdit.Wrap
+        focus: true
+        onTextChanged: gameModel.comment = text
+        Keys.onTabPressed: focus = false
     }
 }
