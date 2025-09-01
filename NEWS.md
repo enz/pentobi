@@ -7,11 +7,17 @@ Version 27.0-dev (main)
 * No longer implement different themes; always use QtQuickControls
   style colors to avoid customization issues with some styles.
 
-Version 26.4-dev (v26-fixes)
+Version 26.5-dev (v26-fixes)
 ----------------------------
 
-* Workaround for bugs in Pentobi and Qt (QTBUG-139679) which broke
-  entering text in comment area in Qt 6.9.2.
+*
+
+Version 26.4 (01 Sep 2025)
+--------------------------
+
+* Fixed comment area colors in dark mode
+* Workaround for QTBUG-139679 which broke entering text in comment area
+  in Qt 6.9.2
 
 Version 26.3 (06 Feb 2025)
 --------------------------

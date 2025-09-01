@@ -19,7 +19,7 @@ ScrollView {
         id: textArea
 
         text: gameModel.comment
-        placeholderText: qsTr("No comment")
+        placeholderText: qsTr("Comment")
         selectByMouse: isDesktop
         wrapMode: TextEdit.Wrap
         focus: true
