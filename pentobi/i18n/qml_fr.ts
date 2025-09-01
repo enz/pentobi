@@ -141,8 +141,8 @@
 <context>
     <name>Comment</name>
     <message>
-        <source>No comment</source>
-        <translation>Aucun commentaire</translation>
+        <source>Comment</source>
+        <translation>Commentaire</translation>
     </message>
 </context>
 <context>
