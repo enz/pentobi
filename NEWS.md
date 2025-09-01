@@ -1,8 +1,13 @@
 Pentobi Release Notes
 =====================
 
-Version 26.4 (01 Sep 2025)
+Version 26.5-dev (v26-fixes)
 ----------------------------
+
+*
+
+Version 26.4 (01 Sep 2025)
+--------------------------
 
 * Fixed comment area colors in dark mode
 * Workaround for QTBUG-139679 which broke entering text in comment area

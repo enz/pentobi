@@ -83,18 +83,5 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 </provides>
 <content_rating type="oars-1.1"/>
 <releases>
-<release version="26.4" date="2025-09-01">
-<description>
-<ul>
-<li>
-Fixed comment area colors in dark mode
-</li>
-<li>
-Workaround for QTBUG-139679 which broke entering text in comment area
-in Qt 6.9.2
-</li>
-</ul>
-</description>
-</release>
 </releases>
 </component>
