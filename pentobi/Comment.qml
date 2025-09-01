@@ -27,13 +27,7 @@ Rectangle {
             wrapMode: TextEdit.Wrap
             focus: true
             onTextChanged: gameModel.comment = text
-            Keys.onPressed:
-                event => {
-                    if (event.key === Qt.Key_Tab) {
-                        focus = false
-                        event.accepted = true
-                    }
-                }
+            Keys.onTabPressed: focus = false
         }
     }
 }
