@@ -249,12 +249,12 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 #ifndef Q_OS_ANDROID
     QTranslator qtTranslator;
-    if (qtTranslator.load("qt_" + QLocale::system().name(),
+    if (qtTranslator.load("qt_"_L1 + QLocale::system().name(),
                           QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
         QCoreApplication::installTranslator(&qtTranslator);
 #endif
     QTranslator translator;
-    if (translator.load(":qml/i18n/qml_" + QLocale::system().name()))
+    if (translator.load(":qml/i18n/qml_"_L1 + QLocale::system().name()))
         QCoreApplication::installTranslator(&translator);
 #ifdef Q_OS_ANDROID
     return mainAndroid(app);

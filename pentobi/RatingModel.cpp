@@ -168,7 +168,7 @@ void RatingModel::clearRating()
 QString RatingModel::getDir() const
 {
     return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
-           + QDir::separator() + "Rated Games" + QDir::separator()
+           + QDir::separator() + "Rated Games"_L1 + QDir::separator()
            + m_gameVariantName;
 }
 
