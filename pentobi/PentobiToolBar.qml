@@ -248,7 +248,7 @@ Item {
         PentobiButton {
             id: menuButton
 
-            source: theme.getImage(isDesktop ? "menu-desktop" : "menu")
+            source: theme.getImage(isAndroid ? "menu" : "menu-desktop")
             down: isDesktop && (pressed || (menu.item && menu.item.opened))
             onClicked: {
                 if (! menu.item)
