@@ -14,6 +14,8 @@
 class ImageProvider
     : public QQuickImageProvider
 {
+    Q_OBJECT
+
 public:
     ImageProvider();
 
