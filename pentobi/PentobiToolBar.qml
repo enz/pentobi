@@ -257,7 +257,7 @@ Item {
                     menu.item.close()
                 else {
                     gameView.dropCommentFocus()
-                    menu.item.popup(0, isDesktop ? height : 0)
+                    menu.item.popup(0, isAndroid ? 0 : height)
                 }
             }
             toolTipText: qsTr("Open menu")

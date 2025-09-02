@@ -7,6 +7,8 @@ Version 27.0-dev (main)
 * The minimum required Qt version is now 6.8
 * No longer implement different themes; always use QtQuickControls
   style colors to avoid customization issues with some styles.
+* Menu no longer covers menu button in mobile view (if not on Android),
+  which works better for Plasma Mobile.
 
 Version 26.5-dev (v26-fixes)
 ----------------------------
