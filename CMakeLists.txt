@@ -51,8 +51,8 @@ if(PENTOBI_BUILD_GUI)
     find_package(Gettext 0.19.6 REQUIRED)
     find_program(RSVG_CONVERT rsvg-convert REQUIRED)
     set(CMAKE_AUTORCC ON)
-    find_package(Qt6 6.5 REQUIRED
+    find_package(Qt6 6.8 REQUIRED
         COMPONENTS Concurrent LinguistTools QuickControls2 Xml)
-    qt_standard_project_setup(REQUIRES 6.5)
+    qt_standard_project_setup(REQUIRES 6.8)
     add_subdirectory(pentobi)
 endif()

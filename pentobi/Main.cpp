@@ -239,7 +239,7 @@ int main(int argc, char *argv[])
                 Qt::HighDpiScaleFactorRoundingPolicy::Round);
 #endif
 #ifdef Q_OS_WIN
-    qputenv("QT_QUICK_CONTROLS_STYLE", "Universal");
+    qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
 #endif
     QCoreApplication::setOrganizationName("Pentobi"_L1);
     QCoreApplication::setApplicationName("Pentobi"_L1);

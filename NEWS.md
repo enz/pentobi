@@ -4,6 +4,7 @@ Pentobi Release Notes
 Version 27.0-dev (main)
 -----------------------
 
+* The minimum required Qt version is now 6.8
 * No longer implement different themes; always use QtQuickControls
   style colors to avoid customization issues with some styles.
 
