@@ -23,6 +23,7 @@ file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/themes/light")
 set(pentobi_images
     icon/pentobi-48
     themes/dark/menu
+    themes/dark/menu-desktop
     themes/dark/pentobi-backward
     themes/dark/pentobi-backward10
     themes/dark/pentobi-beginning
@@ -42,6 +43,7 @@ set(pentobi_images
     themes/dark/piece-manipulator
     themes/dark/piece-manipulator-legal
     themes/light/menu
+    themes/light/menu-desktop
     themes/light/pentobi-backward
     themes/light/pentobi-backward10
     themes/light/pentobi-beginning
