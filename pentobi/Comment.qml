@@ -7,23 +7,34 @@
 import QtQuick
 import QtQuick.Controls
 
-ScrollView {
+Item {
     property alias hasFocus: textArea.activeFocus
 
     function dropFocus() { textArea.focus = false }
 
-    clip: true
-    ScrollBar.vertical.minimumSize: 0.2
+    // Workaround for QTBUG-139715 (TextArea background invisible in Fusion)
+    Rectangle {
+        anchors.fill: parent
+        visible: globalStyle === "Fusion"
+        color: Qt.lighter(palette.window, 1.2)
+        border.color:
+            textArea.activeFocus ? palette.highlight
+                                 : Qt.alpha(theme.colorText, 0.3)
+    }
+    ScrollView {
+        anchors.fill: parent
+        clip: true
+        ScrollBar.vertical.minimumSize: 0.2
 
-    TextArea {
-        id: textArea
+        TextArea {
+            id: textArea
 
-        text: gameModel.comment
-        placeholderText: qsTr("Comment")
-        selectByMouse: isDesktop
-        wrapMode: TextEdit.Wrap
-        focus: true
-        onTextChanged: gameModel.comment = text
-        Keys.onTabPressed: focus = false
+            text: gameModel.comment
+            selectByMouse: isDesktop
+            wrapMode: TextEdit.Wrap
+            focus: true
+            onTextChanged: gameModel.comment = text
+            Keys.onTabPressed: focus = false
+        }
     }
 }
