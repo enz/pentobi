@@ -56,7 +56,7 @@ Item {
 
     property color colorBackground: isMaterial ? "#1c1b1f" : palette.window
     property color colorButtonBorder:
-        isMaterial ? Qt.lighter(colorBackground, 5) : palette.dark
+        isMaterial ? Qt.lighter(colorBackground, 3) : palette.dark
     property color colorButtonHovered:
         isMaterial ? "transparent" : palette.window
     property color colorButtonPressed:
