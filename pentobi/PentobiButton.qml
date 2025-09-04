@@ -94,11 +94,7 @@ Item {
                 anchors.fill: parent
                 radius: 0.05 * width
                 color: theme.colorButtonHovered
-                opacity: button.hovered ? 1 : 0
-
-                Behavior on opacity {
-                    NumberAnimation { duration: gameView.animationDurationFast }
-                }
+                visible: button.hovered
             }
         }
         ToolTip.text: root.toolTipText
