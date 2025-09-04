@@ -14,12 +14,19 @@ ScrollView {
 
     clip: true
     ScrollBar.vertical.minimumSize: 0.2
+    // Workaround for QTBUG-139715 (TextArea background invisible in Fusion)
+    background: Rectangle {
+        visible: globalStyle === "Fusion"
+        color: Qt.lighter(palette.window, 1.2)
+        border.color:
+            textArea.activeFocus ? palette.highlight
+                                 : Qt.alpha(theme.colorText, 0.3)
+    }
 
     TextArea {
         id: textArea
 
         text: gameModel.comment
-        placeholderText: qsTr("Comment")
         selectByMouse: isDesktop
         wrapMode: TextEdit.Wrap
         focus: true
