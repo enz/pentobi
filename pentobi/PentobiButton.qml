@@ -66,9 +66,6 @@ Item {
 
                 anchors.fill: parent
             }
-            Behavior on opacity {
-                NumberAnimation { duration: gameView.animationDurationFast }
-            }
         }
         background: Item {
             id: backgroundItem
@@ -83,13 +80,19 @@ Item {
                 anchors.fill: parent
                 radius: 0.05 * width
                 color: theme.colorButtonPressed
-                visible: button.down
+                opacity: button.down ? 1 : 0
+                Behavior on opacity {
+                    NumberAnimation { duration: gameView.animationDurationFast }
+                }
             }
             Rectangle {
                 anchors.fill: parent
                 radius: 0.05 * width
                 color: theme.colorButtonHovered
-                visible: button.hovered
+                opacity: button.hovered ? 1 : 0
+                Behavior on opacity {
+                    NumberAnimation { duration: gameView.animationDurationFast }
+                }
             }
         }
         ToolTip.text: root.toolTipText
