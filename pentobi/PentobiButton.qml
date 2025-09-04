@@ -65,6 +65,10 @@ Item {
                 id: image
 
                 anchors.fill: parent
+                opacity: button.enabled ? 1 : 0.5
+            }
+            Behavior on opacity {
+                NumberAnimation { duration: gameView.animationDurationFast }
             }
         }
         background: Item {
@@ -81,6 +85,7 @@ Item {
                 radius: 0.05 * width
                 color: theme.colorButtonPressed
                 opacity: button.down ? 1 : 0
+
                 Behavior on opacity {
                     NumberAnimation { duration: gameView.animationDurationFast }
                 }
@@ -90,6 +95,7 @@ Item {
                 radius: 0.05 * width
                 color: theme.colorButtonHovered
                 opacity: button.hovered ? 1 : 0
+
                 Behavior on opacity {
                     NumberAnimation { duration: gameView.animationDurationFast }
                 }
