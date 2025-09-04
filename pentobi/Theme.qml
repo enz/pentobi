@@ -54,13 +54,12 @@ Item {
     property color colorStartingPoint: isDark ? "#82777E" : "#767074"
     property color colorBoardMarkup: isDark ? "#ffffff" : "#111111"
 
+    // Should be the dame as used in dark/light SVG icon sources
+    property color colorIcon: isDark ? "#91888f" : "#7b7b7b"
+
     property color colorBackground: isMaterial ? "#1c1b1f" : palette.window
-    property color colorButtonBorder:
-        isMaterial ? Qt.lighter(colorBackground, 3) : palette.dark
-    property color colorButtonHovered:
-        isMaterial ? "transparent" : palette.window
-    property color colorButtonPressed:
-        isMaterial ? Qt.lighter(colorBackground, 2) : palette.mid
+    property color colorButtonHovered: Qt.alpha(colorIcon, 0.2)
+    property color colorButtonPressed: Qt.alpha(colorIcon, 0.4)
     property color colorMessageBase: isMaterial ? "#333333" : palette.base
     property color colorText: isMaterial ? "#e6d5e1" : palette.text
 

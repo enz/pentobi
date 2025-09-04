@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="16" height="16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
- <path id="a" d="M 10,2 A 2,2 0 0 1 8,4 2,2 0 0 1 6,2 2,2 0 0 1 8,0 2,2 0 0 1 10,2" fill="#e6d5e1" style="paint-order:fill markers stroke"/>
+ <path id="a" d="M 10,2 A 2,2 0 0 1 8,4 2,2 0 0 1 6,2 2,2 0 0 1 8,0 2,2 0 0 1 10,2" fill="#91888f" style="paint-order:fill markers stroke"/>
  <use transform="translate(0,6)" width="100%" height="100%" xlink:href="#a"/>
  <use transform="translate(0 12)" width="100%" height="100%" xlink:href="#a"/>
 </svg>

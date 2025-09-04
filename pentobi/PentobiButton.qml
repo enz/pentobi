@@ -31,6 +31,14 @@ Item {
     property alias autoRepeat: button.autoRepeat
     property alias autoRepeatInterval: button.autoRepeatInterval
 
+    // We want the icon about the same size as the font, but use
+    // multipliers of 8 for better pixel alignment (source images
+    // are 64x64 aligned to 16x16 grid)
+    property real _imageSize:
+        Math.round((globalStyle === "Material" ? 1.3 : 1.2)
+                   * font.pixelSize * Screen.devicePixelRatio / 8)
+        / Screen.devicePixelRatio * 8
+
     signal clicked()
 
     implicitWidth: button.implicitWidth
@@ -50,12 +58,8 @@ Item {
             // We want the icon about the same size as the font, but use
             // multipliers of 8 for better pixel alignment (source images
             // are 64x64 aligned to 16x16 grid)
-            implicitWidth:
-                Math.round((globalStyle === "Material" ? 1.3 : 1.2)
-                           * font.pixelSize * Screen.devicePixelRatio / 8)
-                / Screen.devicePixelRatio * 8
-            implicitHeight: implicitWidth
-            opacity: button.enabled ? 0.55 : 0.25
+            implicitWidth: _imageSize
+            implicitHeight: _imageSize
 
             Image {
                 id: image
@@ -69,23 +73,23 @@ Item {
         background: Item {
             id: backgroundItem
 
-            Rectangle {
-                id: pressedBackground
+            implicitWidth:
+                Math.round((globalStyle === "Material" ? 1.3 : 1.2)
+                           * font.pixelSize * Screen.devicePixelRatio / 8)
+                / Screen.devicePixelRatio * 8
+            implicitHeight: implicitWidth
 
+            Rectangle {
                 anchors.fill: parent
                 radius: 0.05 * width
                 color: theme.colorButtonPressed
-                opacity: button.down ? 1 : 0
+                visible: button.down
             }
             Rectangle {
                 anchors.fill: parent
                 radius: 0.05 * width
-                color:
-                    button.hovered && ! button.down ?
-                           theme.colorButtonHovered : "transparent"
-                border.color:
-                    button.hovered && button.enabled ?
-                        theme.colorButtonBorder : "transparent"
+                color: theme.colorButtonHovered
+                visible: button.hovered
             }
         }
         ToolTip.text: root.toolTipText
