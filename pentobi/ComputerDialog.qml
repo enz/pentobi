@@ -107,7 +107,9 @@ PentobiDialog {
                     id: slider
 
                     enabled: ! isRated
-                    from: 1; to: playerModel.maxLevel; stepSize: 1
+                    from: 1
+                    to: playerModel.maxLevel
+                    stepSize: 1
                     snapMode: Slider.SnapOnRelease
                     Layout.fillWidth: true
                 }
