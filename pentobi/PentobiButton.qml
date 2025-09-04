@@ -84,7 +84,8 @@ Item {
                     button.hovered && ! button.down ?
                            theme.colorButtonHovered : "transparent"
                 border.color:
-                    button.hovered ? theme.colorButtonBorder : "transparent"
+                    button.hovered && button.enabled ?
+                        theme.colorButtonBorder : "transparent"
             }
         }
         ToolTip.text: root.toolTipText
