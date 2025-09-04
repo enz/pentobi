@@ -155,6 +155,7 @@ Item
                           : Math.min(board.width, parent.width - x)
         height: parent.height - y
         clip: true
+        onCurrentIndexChanged: dropCommentFocus()
 
         // Use Rectangle to explicitly draw background of each page, otherwise
         // all pages are shown simultaneously and overlapping with Qt 6.3.0
