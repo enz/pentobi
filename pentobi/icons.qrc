@@ -2,6 +2,7 @@
 <qresource prefix="qt/qml/PentobiGui">
 <file>icon/pentobi-48.png</file>
 <file>themes/dark/menu.png</file>
+<file>themes/dark/menu-desktop.png</file>
 <file>themes/dark/pentobi-backward.png</file>
 <file>themes/dark/pentobi-backward10.png</file>
 <file>themes/dark/pentobi-beginning.png</file>
@@ -17,8 +18,11 @@
 <file>themes/dark/pentobi-stop.png</file>
 <file>themes/dark/pentobi-undo.png</file>
 <file>themes/dark/piece-manipulator.png</file>
+<file>themes/dark/piece-manipulator-desktop.png</file>
+<file>themes/dark/piece-manipulator-desktop-legal.png</file>
 <file>themes/dark/piece-manipulator-legal.png</file>
 <file>themes/light/menu.png</file>
+<file>themes/light/menu-desktop.png</file>
 <file>themes/light/pentobi-backward.png</file>
 <file>themes/light/pentobi-backward10.png</file>
 <file>themes/light/pentobi-beginning.png</file>
@@ -34,6 +38,8 @@
 <file>themes/light/pentobi-stop.png</file>
 <file>themes/light/pentobi-undo.png</file>
 <file>themes/light/piece-manipulator.png</file>
+<file>themes/light/piece-manipulator-desktop.png</file>
+<file>themes/light/piece-manipulator-desktop-legal.png</file>
 <file>themes/light/piece-manipulator-legal.png</file>
 </qresource>
 </RCC>

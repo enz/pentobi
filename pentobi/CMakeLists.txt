@@ -77,13 +77,6 @@ add_custom_command(
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons.qrc" ${images_png}
     )
 
-add_custom_command(
-    OUTPUT icons_desktop.qrc
-    COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/icons_desktop.qrc" .
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons_desktop.qrc" ${images_png}
-    )
-
 qt_add_executable(pentobi WIN32 Main.cpp)
 
 if (WIN32)
@@ -190,7 +183,6 @@ qt_add_qml_module(pentobi
     resources.qrc
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/icons.qrc"
-    "${CMAKE_CURRENT_BINARY_DIR}/icons_desktop.qrc"
     help/help.qrc
     ../opening_books/pentobi_books.qrc
 )
