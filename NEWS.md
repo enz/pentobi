@@ -9,6 +9,7 @@ Version 27.0-dev (main)
   style colors to avoid customization issues with some styles.
 * Menu no longer covers menu button in mobile view (if not on Android),
   which works better for Plasma Mobile.
+* Added close link in help viewer
 
 Version 26.5-dev (v26-fixes)
 ----------------------------

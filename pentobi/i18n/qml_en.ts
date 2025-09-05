@@ -141,13 +141,6 @@
     </message>
 </context>
 <context>
-    <name>Comment</name>
-    <message>
-        <source>Comment</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ComputerDialog</name>
     <message>
         <source>Computer plays:</source>
@@ -173,6 +166,10 @@
     <message>
         <source>Next</source>
         <extracomment>Go to next page of user manual</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

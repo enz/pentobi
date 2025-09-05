@@ -258,7 +258,7 @@ void DocbookReader::setNavigation()
     }
     QString text;
     addHeader(text);
-    text.append("<table width=100%><tr><td width=34%>"_L1);
+    text.append("<table width=100%><tr><td align=right>"_L1);
     if (prevId >= 0)
     {
         text.append("<a href="_L1);
@@ -266,19 +266,15 @@ void DocbookReader::setNavigation()
         text.append(">"_L1);
         //: Go to previous page of user manual
         text.append(tr("Previous"));
-        text.append("</a>"_L1);
+        text.append("</a> | "_L1);
     }
-    else
-        text.append("&#160;"_L1);
-    text.append("</td><td width=32% align=center>"_L1);
     if (m_pageId != "index"_L1)
     {
         text.append("<a href=index>"_L1);
         //: Go to table of contents of user manual
         text.append(tr("Contents"));
-        text.append("</a>"_L1);
+        text.append("</a> | "_L1);
     }
-    text.append("</td><td width=34% align=right>"_L1);
     if (nextId >= 0)
     {
         text.append("<a href="_L1);
@@ -286,11 +282,11 @@ void DocbookReader::setNavigation()
         text.append(">"_L1);
         //: Go to next page of user manual
         text.append(tr("Next"));
-        text.append("</a>"_L1);
+        text.append("</a> | "_L1);
     }
-    else
-        text.append("&#160;"_L1);
-    text.append("</td></tr></table>"_L1);
+    text.append("<a href=close>"_L1);
+    text.append(tr("Close"));
+    text.append("</a></td></tr></table>"_L1);
     m_navigationText = text;
     if (prevId >= 0)
         m_prevPageId = m_pageIds[prevId];

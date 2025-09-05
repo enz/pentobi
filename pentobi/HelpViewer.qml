@@ -14,6 +14,8 @@ Rectangle {
         Math.max((width - 45 * textArea.font.pixelSize) / 2,
                  textArea.font.pixelSize)
 
+    signal closeClicked()
+
     function loadPage(pageId) {
         if (flickable.contentY === 0)
             docbookReader.pageId = pageId
@@ -87,7 +89,12 @@ Rectangle {
                 focus: false
                 activeFocusOnPress: false
                 text: docbookReader.navigationText
-                onLinkActivated: link => loadPage(link)
+                onLinkActivated:
+                    link => {
+                        if (link === "close")
+                            closeClicked()
+                        loadPage(link)
+                    }
 
                 MouseArea {
                     anchors.fill: parent

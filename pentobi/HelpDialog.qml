@@ -16,5 +16,6 @@ Dialog {
 
     HelpViewer {
         anchors.fill: parent
+        onCloseClicked: close()
     }
 }
