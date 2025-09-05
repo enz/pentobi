@@ -94,7 +94,7 @@ Item {
                 anchors.fill: parent
                 radius: 0.05 * width
                 color: theme.colorButtonHovered
-                visible: button.hovered
+                visible: button.enabled && button.hovered
             }
         }
         ToolTip.text: root.toolTipText
