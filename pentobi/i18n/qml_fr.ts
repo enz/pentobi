@@ -139,13 +139,6 @@
     </message>
 </context>
 <context>
-    <name>Comment</name>
-    <message>
-        <source>Comment</source>
-        <translation>Commentaire</translation>
-    </message>
-</context>
-<context>
     <name>ComputerDialog</name>
     <message>
         <source>Computer plays:</source>
@@ -172,6 +165,10 @@
         <source>Next</source>
         <extracomment>Go to next page of user manual</extracomment>
         <translation>Suivant</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Fermer</translation>
     </message>
 </context>
 <context>
