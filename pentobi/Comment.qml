@@ -19,7 +19,7 @@ Item {
         color: Qt.lighter(palette.window, 1.2)
         border.color:
             textArea.activeFocus ? palette.highlight
-                                 : Qt.alpha(theme.colorText, 0.3)
+                                 : Qt.alpha(theme.colorText, 0.1)
     }
     ScrollView {
         anchors.fill: parent
