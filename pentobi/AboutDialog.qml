@@ -46,7 +46,11 @@ PentobiDialog {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
-                text: "<a href=\"https://pentobi.sourceforge.io\" style=\"text-decoration:none\">pentobi.sourceforge.io</a>"
+                text:
+                    // Default link color in dark mode has low contrast (Qt 6.9)
+                    "<style>:link{text-decoration:none;color:\""
+                    + (theme.isDark ? "lightskyblue" : "blue")
+                    + "\"}</style><a href=\"https://pentobi.sourceforge.io\">pentobi.sourceforge.io</a>"
                 textFormat: Text.RichText
                 elide: Qt.ElideRight
                 width: Math.min(implicitWidth, root.maxContentWidth)
