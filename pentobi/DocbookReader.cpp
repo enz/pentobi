@@ -258,7 +258,7 @@ void DocbookReader::setNavigation()
     }
     QString text;
     addHeader(text);
-    text.append("<table width=100%><tr><td align=right>"_L1);
+    text.append("<p width=100% align=right>"_L1);
     if (prevId >= 0)
     {
         text.append("<a href="_L1);
@@ -286,7 +286,7 @@ void DocbookReader::setNavigation()
     }
     text.append("<a href=close>"_L1);
     text.append(tr("Close"));
-    text.append("</a></td></tr></table>"_L1);
+    text.append("</a></p>"_L1);
     m_navigationText = text;
     if (prevId >= 0)
         m_prevPageId = m_pageIds[prevId];
