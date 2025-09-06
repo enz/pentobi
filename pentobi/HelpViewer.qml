@@ -133,8 +133,6 @@ Rectangle {
                 }
             }
         }
-        ScrollBar.vertical: ScrollBar {
-            policy: isDesktop ? ScrollBar.AlwaysOn : ScrollBar.AsNeeded
-        }
+        ScrollBar.vertical: ScrollBar { }
     }
 }
