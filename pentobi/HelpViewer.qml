@@ -98,7 +98,8 @@ Rectangle {
                     link => {
                         if (link === "close")
                             closeClicked()
-                        loadPage(link)
+                        else
+                            loadPage(link)
                     }
 
                 MouseArea {
