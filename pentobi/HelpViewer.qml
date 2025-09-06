@@ -29,9 +29,6 @@ Rectangle {
         flickable.contentY = 0
         docbookReader.pageId = pageId
     }
-    function loadIndex() {
-        loadPage("index")
-    }
     function goHome() {
         loadPage("index");
     }
