@@ -11,16 +11,6 @@ import QtQuick.Window
 Window {
     id: root
 
-    minimumWidth: 240; minimumHeight: 240
-    title: qsTr("Pentobi Help")
-    onVisibleChanged:
-        if (! visible && visibility == Window.Windowed) {
-            settings.x = x
-            settings.y = y
-            settings.width = width
-            settings.height = height
-        }
-
     function open() {
         width = settings.width
         height = settings.height
@@ -38,6 +28,22 @@ Window {
             height = Math.min(font.pixelSize * 50, maxHeight)
             x = (Screen.width - width) / 2
             y = (Screen.height - height) / 2
+        }
+    }
+
+    minimumWidth: 240; minimumHeight: 240
+    title: qsTr("Pentobi Help")
+    onVisibleChanged: {
+        // We might want to keep the current page if viewer was only temporarily
+        // hidden, but reloading the index page avoid a bug that sometimes results
+        // in empty text area in such situations (Qt 6.9, Android)
+        if (visible)
+            helpViewer.loadIndex()
+        else if (visibility == Window.Windowed) {
+            settings.x = x
+            settings.y = y
+            settings.width = width
+            settings.height = height
         }
     }
 
