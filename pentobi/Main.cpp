@@ -191,9 +191,11 @@ int mainDesktop(QGuiApplication& app)
             throw app.translate("main", "Too many arguments");
         if (! args.empty())
             initialFile = args.at(0);
-        LIBBOARDGAME_LOG("Using Qt ", qVersion());
         QQmlApplicationEngine engine;
         engine.addImageProvider("pentobi"_L1, new ImageProvider);
+        LIBBOARDGAME_LOG("Using Qt ", qVersion(), " ",
+                         QQuickStyle::name().toLocal8Bit().constData(),
+                         " style");
         auto ctx = engine.rootContext();
         ctx->setContextProperty("globalStyle"_L1, QQuickStyle::name());
         ctx->setContextProperty("initialFile"_L1, initialFile);
