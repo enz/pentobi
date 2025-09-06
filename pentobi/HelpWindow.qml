@@ -45,7 +45,7 @@ Window {
         id: helpViewer
 
         anchors.fill: parent
-        onCloseClicked: close()
+        onCloseClicked: root.hide()
     }
     Settings {
         id: settings
