@@ -34,11 +34,8 @@ Window {
     minimumWidth: 240; minimumHeight: 240
     title: qsTr("Pentobi Help")
     onVisibleChanged: {
-        // We might want to keep the current page if viewer was only temporarily
-        // hidden, but reloading the index page avoid a bug that sometimes results
-        // in empty text area in such situations (Qt 6.9, Android)
         if (visible)
-            helpViewer.loadIndex()
+            helpViewer.forceReload()
         else if (visibility == Window.Windowed) {
             settings.x = x
             settings.y = y

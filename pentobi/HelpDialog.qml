@@ -14,12 +14,9 @@ Dialog {
     padding: 0
     modal: true
 
-    // We might want to keep the current page if viewer was only temporarily
-    // hidden, but reloading the index page avoid a bug that sometimes results
-    // in empty text area in such situations (Qt 6.9, Android)
     onVisibleChanged:
         if (visible)
-            helpViewer.loadIndex()
+            helpViewer.forceReload()
 
     HelpViewer {
         id: helpViewer

@@ -16,16 +16,18 @@ Rectangle {
 
     signal closeClicked()
 
+    // Workaround that enforces a repainting of the text area to workaround
+    // a Qt bug that results in an empty text area if the text area was
+    // scrolled down and then the viewer becomes visible again after it was
+    // temporarily hidden by closing its window or dialog (Qt 6.9)
+    function forceReload() {
+        textArea.text = ""
+        textArea.text = Qt.binding(function() { return docbookReader.text })
+    }
+
     function loadPage(pageId) {
-        if (flickable.contentY === 0)
-            docbookReader.pageId = pageId
-        else {
-            flickable.contentY = 0
-            // Without callLater() sometimes results in empty text area (e.g. if
-            // page is scrolled down and goHome() is triggered with shortcut key;
-            // last tested with Qt 6.6 on Gnome)
-            Qt.callLater(function() { docbookReader.pageId = pageId })
-        }
+        flickable.contentY = 0
+        docbookReader.pageId = pageId
     }
     function loadIndex() {
         loadPage("index")
