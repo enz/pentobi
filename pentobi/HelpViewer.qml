@@ -16,47 +16,33 @@ Rectangle {
 
     signal closeClicked()
 
-    // Workaround that enforces a repainting of the text area to workaround
-    // a Qt bug that results in an empty text area if the text area was
-    // scrolled down and then the viewer becomes visible again after it was
-    // temporarily hidden by closing its window or dialog (Qt 6.9)
-    function forceReload() {
-        textArea.text = ""
-        textArea.text = Qt.binding(function() { return docbookReader.text })
-    }
-
     function loadPage(pageId) {
         flickable.contentY = 0
-        docbookReader.pageId = pageId
+        // callLater() is a workaround for Qt bug that sometimes results in
+        // empty page (press Home when large page is scrolled down)
+        Qt.callLater(function() { docbookReader.pageId = pageId })
     }
     function goHome() {
         loadPage("index");
-    }
-    function scrollUp() {
-        if (flickable.contentY > 0)
-            flickable.contentY =
-                    Math.max(flickable.contentY - textArea.font.pixelSize, 0)
-    }
-    function scrollDown() {
-        if (flickable.contentY < flickable.contentHeight - textArea.font.pixelSize)
-            flickable.contentY += textArea.font.pixelSize
     }
     function scrollPageUp() {
         if (flickable.contentY > 0)
             flickable.contentY =
                     Math.max(flickable.contentY - flickable.height, 0)
+        else
+            if (docbookReader.getPrevPageId() !== "")
+                loadPage(docbookReader.getPrevPageId())
     }
     function scrollPageDown() {
         if (flickable.contentY < flickable.contentHeight - flickable.height)
             flickable.contentY += flickable.height
+        else
+            if (docbookReader.getNextPageId() !== "")
+                loadPage(docbookReader.getNextPageId())
     }
     function nextPage() {
         if (docbookReader.getNextPageId() !== "")
             loadPage(docbookReader.getNextPageId())
-    }
-    function prevPage() {
-        if (docbookReader.getPrevPageId() !== "")
-            loadPage(docbookReader.getPrevPageId())
     }
 
     color: "white"

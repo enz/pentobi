@@ -14,10 +14,6 @@ Dialog {
     padding: 0
     modal: true
 
-    onVisibleChanged:
-        if (visible)
-            helpViewer.forceReload()
-
     HelpViewer {
         id: helpViewer
 

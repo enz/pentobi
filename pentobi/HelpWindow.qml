@@ -34,9 +34,7 @@ Window {
     minimumWidth: 240; minimumHeight: 240
     title: qsTr("Pentobi Help")
     onVisibleChanged: {
-        if (visible)
-            helpViewer.forceReload()
-        else if (visibility == Window.Windowed) {
+        if (visibility == Window.Windowed) {
             settings.x = x
             settings.y = y
             settings.width = width
@@ -75,25 +73,5 @@ Window {
     Shortcut {
         sequences: [ StandardKey.MoveToPreviousPage ]
         onActivated: helpViewer.scrollPageUp()
-    }
-    Shortcut {
-        // Doesn't work with Qt 6.8
-        sequences: [ StandardKey.MoveToNextLine ]
-        onActivated: helpViewer.scrollDown()
-    }
-    Shortcut {
-        // Doesn't work with Qt 6.8
-        sequences: [ StandardKey.MoveToPreviousLine ]
-        onActivated: helpViewer.scrollUp()
-    }
-    Shortcut {
-        // Doesn't work with Qt 6.8
-        sequences: [ StandardKey.MoveToNextChar ]
-        onActivated: helpViewer.nextPage()
-    }
-    Shortcut {
-        // Doesn't work with Qt 6.8
-        sequences: [ StandardKey.MoveToPreviousChar ]
-        onActivated: helpViewer.prevPage()
     }
 }
