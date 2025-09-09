@@ -24,9 +24,8 @@ void addHeader(QString& text)
     // scheme is broken even in light mode (white h1 text on white background,
     // last tested on Ubuntu 23.10)
      text.append("<head><style>"
-                 "body { background-color:white;color:black;"
-                 "       line-height:115% }"
-                 ":link { text-decoration:none;color:blue }"
+                 "body {background-color:white;color:black;line-height:115%}"
+                 ":link {text-decoration:none;color:blue}"
                  "</style></head><body>"_L1);
 }
 
@@ -60,35 +59,61 @@ DocbookReader::DocbookReader(QObject* parent)
     setText();
 }
 
-QDomElement DocbookReader::findLocalized(const QDomElement& elem) const
+void DocbookReader::addNavigation(QString& text)
 {
-    QString name = elem.tagName();
-    QDomElement result = elem;
-    QDomElement e = elem;
-    while (true)
+    qsizetype prevId = -1;
+    qsizetype nextId = -1;
+    qsizetype i = m_pageIds.indexOf(m_pageId);
+    if (i >= 0)
     {
-        e = e.nextSiblingElement();
-        if (e.isNull() || e.tagName() != name)
-            break;
-        QString l = e.attribute("xml:lang"_L1);
-        if (l.isEmpty())
-            break;
-        if (l == m_locale)
-        {
-            result = e;
-            break;
-        }
-        if (l == m_lang)
-            result = e;
+        prevId = i - 1;
+        nextId = i + 1;
+        if (nextId >= m_pageIds.size())
+            nextId = -1;
     }
-    return result;
+    addHeader(text);
+    text.append("<p width=100% align=right>"_L1);
+    if (prevId >= 0)
+    {
+        text.append("<a href="_L1);
+        text.append(m_pageIds[prevId]);
+        text.append(">"_L1);
+        //: Go to previous page of user manual
+        text.append(tr("Previous"));
+        text.append("</a> | "_L1);
+    }
+    if (m_pageId != "index"_L1)
+    {
+        text.append("<a href=index>"_L1);
+        //: Go to table of contents of user manual
+        text.append(tr("Contents"));
+        text.append("</a> | "_L1);
+    }
+    if (nextId >= 0)
+    {
+        text.append("<a href="_L1);
+        text.append(m_pageIds[nextId]);
+        text.append(">"_L1);
+        //: Go to next page of user manual
+        text.append(tr("Next"));
+        text.append("</a> | "_L1);
+    }
+    text.append("<a href=close>"_L1);
+    text.append(tr("Close"));
+    text.append("</a></p>"_L1);
+    if (prevId >= 0)
+        m_prevPageId = m_pageIds[prevId];
+    else
+        m_prevPageId.clear();
+    if (nextId >= 0)
+        m_nextPageId = m_pageIds[nextId];
+    else
+        m_nextPageId.clear();
 }
 
-QString DocbookReader::getPage(const QString& id) const
+void DocbookReader::addPage(const QString& id, QString& text)
 {
     QDomElement elem = m_doc.documentElement().firstChildElement();
-    QString text;
-    addHeader(text);
     while(! elem.isNull())
     {
         if (elem.tagName() == "chapter"_L1 && elem.attribute("id"_L1) == id)
@@ -98,10 +123,9 @@ QString DocbookReader::getPage(const QString& id) const
         }
         elem = elem.nextSiblingElement();
     }
-    return text;
 }
 
-QString DocbookReader::getTableOfContents() const
+void DocbookReader::addTableOfContents(QString& text)
 {
     QString bookTitle;
     QStringList chapterTitles;
@@ -132,7 +156,6 @@ QString DocbookReader::getTableOfContents() const
         }
         elem = elem.nextSiblingElement();
     }
-    QString text;
     addHeader(text);
     text.append("<h1>"_L1);
     text.append(bookTitle);
@@ -146,7 +169,30 @@ QString DocbookReader::getTableOfContents() const
         text.append(chapterTitles[i]);
         text.append("</a><br/>"_L1);
     }
-    return text;
+}
+
+QDomElement DocbookReader::findLocalized(const QDomElement& elem) const
+{
+    QString name = elem.tagName();
+    QDomElement result = elem;
+    QDomElement e = elem;
+    while (true)
+    {
+        e = e.nextSiblingElement();
+        if (e.isNull() || e.tagName() != name)
+            break;
+        QString l = e.attribute("xml:lang"_L1);
+        if (l.isEmpty())
+            break;
+        if (l == m_locale)
+        {
+            result = e;
+            break;
+        }
+        if (l == m_lang)
+            result = e;
+    }
+    return result;
 }
 
 void DocbookReader::handleChildren(const QDomNode& node, int headerLevel,
@@ -190,9 +236,7 @@ QDomNode DocbookReader::handleNode(const QDomNode& node, int headerLevel,
     }
     if (name == "imagedata"_L1)
     {
-        text.append("<div style=\"margin-left:"_L1);
-        text.append(QString::number((m_textWidth - m_imageWidth) / 2));
-        text.append("\"><img src=qrc:/docbook/"_L1);
+        text.append("<div><img src=qrc:/docbook/"_L1);
         text.append(elem.attribute("fileref"_L1));
         text.append(" width="_L1);
         text.append(QString::number(m_imageWidth));
@@ -244,61 +288,6 @@ QDomNode DocbookReader::handleNode(const QDomNode& node, int headerLevel,
     return node;
 }
 
-void DocbookReader::setNavigation()
-{
-    qsizetype prevId = -1;
-    qsizetype nextId = -1;
-    qsizetype i = m_pageIds.indexOf(m_pageId);
-    if (i >= 0)
-    {
-        prevId = i - 1;
-        nextId = i + 1;
-        if (nextId >= m_pageIds.size())
-            nextId = -1;
-    }
-    QString text;
-    addHeader(text);
-    text.append("<p width=100% align=right>"_L1);
-    if (prevId >= 0)
-    {
-        text.append("<a href="_L1);
-        text.append(m_pageIds[prevId]);
-        text.append(">"_L1);
-        //: Go to previous page of user manual
-        text.append(tr("Previous"));
-        text.append("</a> | "_L1);
-    }
-    if (m_pageId != "index"_L1)
-    {
-        text.append("<a href=index>"_L1);
-        //: Go to table of contents of user manual
-        text.append(tr("Contents"));
-        text.append("</a> | "_L1);
-    }
-    if (nextId >= 0)
-    {
-        text.append("<a href="_L1);
-        text.append(m_pageIds[nextId]);
-        text.append(">"_L1);
-        //: Go to next page of user manual
-        text.append(tr("Next"));
-        text.append("</a> | "_L1);
-    }
-    text.append("<a href=close>"_L1);
-    text.append(tr("Close"));
-    text.append("</a></p>"_L1);
-    m_navigationText = text;
-    if (prevId >= 0)
-        m_prevPageId = m_pageIds[prevId];
-    else
-        m_prevPageId.clear();
-    if (nextId >= 0)
-        m_nextPageId = m_pageIds[nextId];
-    else
-        m_nextPageId.clear();
-    emit navigationTextChanged();
-}
-
 void DocbookReader::setPageId(const QString& pageId)
 {
     if (m_pageId == pageId)
@@ -309,23 +298,15 @@ void DocbookReader::setPageId(const QString& pageId)
 
 void DocbookReader::setText()
 {
+    m_text.clear();
+    addHeader(m_text);
+    addNavigation(m_text);
+    m_text.append("<p>"_L1);
     if (m_pageId == "index"_L1)
-        m_text = getTableOfContents();
+        addTableOfContents(m_text);
     else
-        m_text = getPage(m_pageId);
+        addPage(m_pageId, m_text);
     emit textChanged();
-    setNavigation();
-}
-
-void DocbookReader::setTextWidth(qreal textWidth)
-{
-    if (textWidth == m_textWidth)
-        return;
-    m_imageWidth = 320;
-    if (m_imageWidth > textWidth)
-        m_imageWidth = textWidth;
-    m_textWidth = textWidth;
-    setText();
 }
 
 //-----------------------------------------------------------------------------

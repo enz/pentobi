@@ -30,31 +30,19 @@ class DocbookReader
 
     Q_PROPERTY(QString pageId MEMBER m_pageId WRITE setPageId)
     Q_PROPERTY(QString text READ text NOTIFY textChanged)
-    Q_PROPERTY(QString navigationText READ navigationText NOTIFY navigationTextChanged)
-    Q_PROPERTY(qreal textWidth MEMBER m_textWidth WRITE setTextWidth)
 
 public:
     DocbookReader(QObject* parent = nullptr);
 
-    Q_INVOKABLE QString getNextPageId() const { return m_nextPageId; }
-
-    Q_INVOKABLE QString getPrevPageId() const { return m_prevPageId; }
-
     void setPageId(const QString& pageId);
 
-    const QString& navigationText() const { return m_navigationText; }
-
     const QString& text() const { return m_text; }
-
-    void setTextWidth(qreal textWidth);
 
 signals:
     void navigationTextChanged();
     void textChanged();
 
 private:
-    qreal m_textWidth = 0;
-
     qreal m_imageWidth = 0;
 
     QString m_pageId = {"index"_L1};
@@ -76,19 +64,19 @@ private:
     QDomDocument m_doc;
 
 
+    void addNavigation(QString& text);
+
+    void addPage(const QString& id, QString& text);
+
+    void addTableOfContents(QString& text);
+
     QDomElement findLocalized(const QDomElement& elem) const;
-
-    QString getPage(const QString& id) const;
-
-    QString getTableOfContents() const;
 
     void handleChildren(const QDomNode& node, int headerLevel,
                         QString& text) const;
 
     QDomNode handleNode(const QDomNode& node, int headerLevel,
                         QString& text) const;
-
-    void setNavigation();
 
     void setText();
 };

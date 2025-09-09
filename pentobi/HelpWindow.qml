@@ -62,16 +62,4 @@ Window {
         sequences: [ StandardKey.Close ]
         onActivated: root.hide()
     }
-    Shortcut {
-        sequences: [ StandardKey.MoveToStartOfLine ]
-        onActivated: helpViewer.goHome()
-    }
-    Shortcut {
-        sequences: [ StandardKey.MoveToNextPage ]
-        onActivated: helpViewer.scrollPageDown()
-    }
-    Shortcut {
-        sequences: [ StandardKey.MoveToPreviousPage ]
-        onActivated: helpViewer.scrollPageUp()
-    }
 }
