@@ -7,7 +7,7 @@
 // Enforce Basic style to avoid rounded dialog corners in Material style
 import QtQuick.Controls.Basic
 
-// Dialog used instead of a window for showing help on Android
+// Dialog used instead of a window for showing help in mobile view
 Dialog {
     width: rootWindow.contentItem.width
     height: rootWindow.contentItem.height
