@@ -23,7 +23,6 @@ Item {
     }
     ScrollView {
         anchors.fill: parent
-        clip: true
         ScrollBar.vertical.minimumSize: 0.2
 
         TextArea {
