@@ -61,7 +61,7 @@ bool isSmallScreen()
     auto height = size.height();
     auto inches = sqrt(width * width + height * height) / 25.4;
     LIBBOARDGAME_LOG("Main screen ", width, " mm x ", height, " mm, diag ",
-                     inches, " in");
+                     round(inches * 10) / 10, " in");
     return inches < 10;
 }
 
@@ -193,7 +193,7 @@ int mainDesktop(QGuiApplication& app)
             initialFile = args.at(0);
         QQmlApplicationEngine engine;
         engine.addImageProvider("pentobi"_L1, new ImageProvider);
-        LIBBOARDGAME_LOG("Using Qt ", qVersion(), " ",
+        LIBBOARDGAME_LOG("Qt ", qVersion(), " ",
                          QQuickStyle::name().toLocal8Bit().constData(),
                          " style");
         auto ctx = engine.rootContext();
