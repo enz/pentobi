@@ -4,6 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+import QtQuick
 // Enforce Basic style to avoid rounded dialog corners in Material style
 import QtQuick.Controls.Basic
 
@@ -14,10 +15,16 @@ Dialog {
     padding: 0
     modal: true
 
-    HelpViewer {
-        id: helpViewer
-
+    // Put help viewer in Rectangle to enforce white background, otherwise
+    // space below help page is gray (Material style, Qt 6.9)
+    Rectangle {
         anchors.fill: parent
-        onCloseClicked: close()
+
+        HelpViewer {
+            id: helpViewer
+
+            anchors.fill: parent
+            onCloseClicked: close()
+        }
     }
 }
