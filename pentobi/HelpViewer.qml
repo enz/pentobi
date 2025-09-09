@@ -15,7 +15,6 @@ ScrollView {
     TextArea {
         id: textArea
 
-        width: parent.width
         textFormat: TextArea.RichText
         wrapMode: TextArea.WordWrap
         readOnly: true
