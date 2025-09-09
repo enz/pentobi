@@ -12,7 +12,6 @@ import QtQuick.Controls.Basic
 ScrollView {
     signal closeClicked()
 
-
     TextArea {
         id: textArea
 
