@@ -194,8 +194,20 @@ ApplicationWindow {
 
         function show() {
             if (! item)
-                source = isDesktop ? "HelpWindow.qml" : "HelpDialog.qml"
+                sourceComponent
+                        = isDesktop ? helpWindowComponent : helpDialogComponent
             item.open()
+        }
+
+        Component {
+            id: helpWindowComponent
+
+            HelpWindow { }
+        }
+        Component {
+            id: helpDialogComponent
+
+            HelpDialog { }
         }
     }
 
