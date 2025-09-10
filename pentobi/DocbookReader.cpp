@@ -236,7 +236,9 @@ QDomNode DocbookReader::handleNode(const QDomNode& node, int headerLevel,
     }
     if (name == "imagedata"_L1)
     {
-        text.append("<div><img src=qrc:/docbook/"_L1);
+        text.append("<div style=\"margin-left:"_L1);
+        text.append(QString::number((m_textWidth - m_imageWidth) / 2));
+        text.append("\"><img src=qrc:/docbook/"_L1);
         text.append(elem.attribute("fileref"_L1));
         text.append(" width="_L1);
         text.append(QString::number(m_imageWidth));
@@ -307,6 +309,17 @@ void DocbookReader::setText()
     else
         addPage(m_pageId, m_text);
     emit textChanged();
+}
+
+void DocbookReader::setTextWidth(qreal textWidth)
+{
+    if (textWidth == m_textWidth)
+        return;
+    m_imageWidth = 320;
+    if (m_imageWidth > textWidth)
+        m_imageWidth = textWidth;
+    m_textWidth = textWidth;
+    setText();
 }
 
 //-----------------------------------------------------------------------------

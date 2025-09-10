@@ -30,6 +30,9 @@ class DocbookReader
 
     Q_PROPERTY(QString pageId MEMBER m_pageId WRITE setPageId)
     Q_PROPERTY(QString text READ text NOTIFY textChanged)
+    // DocbookReader needs to know the width of the text area to scale and
+    // center the images (center tag/attribute doesn't work in TextEdit)
+    Q_PROPERTY(qreal textWidth MEMBER m_textWidth WRITE setTextWidth)
 
 public:
     DocbookReader(QObject* parent = nullptr);
@@ -43,6 +46,8 @@ signals:
     void textChanged();
 
 private:
+    qreal m_textWidth = 0;
+
     qreal m_imageWidth = 0;
 
     QString m_pageId = {"index"_L1};
@@ -79,6 +84,8 @@ private:
                         QString& text) const;
 
     void setText();
+
+    void setTextWidth(qreal textWidth);
 };
 
 //-----------------------------------------------------------------------------

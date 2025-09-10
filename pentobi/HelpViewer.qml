@@ -36,5 +36,7 @@ ScrollView {
     }
     DocbookReader {
         id: docbookReader
+
+        textWidth: parent.width - textArea.leftPadding - textArea.rightPadding
     }
 }
