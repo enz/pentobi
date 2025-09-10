@@ -72,9 +72,9 @@ foreach(image ${pentobi_images})
     list(APPEND images_png "${image}.png")
 endforeach()
 add_custom_command(
-    OUTPUT icons.qrc
-    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/icons.qrc" .
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/icons.qrc" ${images_png}
+    OUTPUT images.qrc
+    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/images.qrc" .
+    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/images.qrc" ${images_png}
     )
 
 qt_add_executable(pentobi WIN32 Main.cpp)
@@ -182,7 +182,7 @@ qt_add_qml_module(pentobi
     SyncSettings.h
     resources.qrc
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
-    "${CMAKE_CURRENT_BINARY_DIR}/icons.qrc"
+    "${CMAKE_CURRENT_BINARY_DIR}/images.qrc"
     help/help.qrc
     ../opening_books/pentobi_books.qrc
 )
