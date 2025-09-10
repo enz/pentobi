@@ -15,7 +15,7 @@ Item {
     // Workaround for QTBUG-139715 (TextArea background invisible in Fusion)
     Rectangle {
         anchors.fill: parent
-        visible: globalStyle === "Fusion"
+        visible: globalStyle === "Fusion" || globalStyle === "Basic"
         color: Qt.lighter(palette.window, 1.2)
         border.color:
             textArea.activeFocus ? palette.highlight
