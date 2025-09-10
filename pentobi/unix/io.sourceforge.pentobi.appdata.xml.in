@@ -83,26 +83,5 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 </provides>
 <content_rating type="oars-1.1"/>
 <releases>
-<release version="27.0" date="2025-09-10">
-<description>
-<ul>
-<li>
-Always use system theme (Note that on Ubunutu/Flatpak, you might
-have to install the Flatpak package org.gtk.Gtk3theme.Yaru-dark
-for dark mode support)
-</li>
-<li>
-Menu no longer covers menu button in mobile view (if not on Android)
-for better usability on mobile Linux devices
-</li>
-<li>
-Added close link in help viewer
-</li>
-<li>
-Workaround for QTBUG-140033 (Scrollbar not painted in Fusion style)
-</li>
-</ul>
-</description>
-</release>
 </releases>
 </component>
