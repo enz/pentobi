@@ -1,14 +1,15 @@
 Pentobi Release Notes
 =====================
 
-Version 27.0-dev (main)
------------------------
+Version 27.0 (10 Sep 2025)
+--------------------------
 
-* The minimum required Qt version is now 6.8
-* No longer implement different themes; always use QtQuickControls
-  style colors to avoid customization issues with some styles.
-* Menu no longer covers menu button in mobile view (if not on Android),
-  which works better for Plasma Mobile.
+* Minimum required Qt version is now 6.8
+* Always use system theme (Note that on Ubunutu/Flatpak, you might
+  have to install the Flatpak package org.gtk.Gtk3theme.Yaru-dark
+  for dark mode support)
+* Menu no longer covers menu button in mobile view (if not on Android)
+  for better usability on mobile Linux devices
 * Added close link in help viewer
 * Workaround for QTBUG-140033 (Scrollbar not painted in Fusion style)
 
