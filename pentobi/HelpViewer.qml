@@ -10,7 +10,27 @@ import QtQuick
 import QtQuick.Controls.Basic
 
 ScrollView {
+    id: scrollView
+
     signal closeClicked()
+
+    // Workaround for QTBUG-140033 (Scrollbar not painted in Fusion style,
+    // Qt 6.9.2)
+    ScrollBar.vertical.contentItem: Rectangle {
+        implicitWidth: 6
+        radius: 3
+        color: "black"
+        opacity:
+            if (scrollView.ScrollBar.vertical.pressed)
+                return 0.4
+            else if (scrollView.ScrollBar.vertical.hovered)
+                return 0.3
+            else if (scrollView.ScrollBar.vertical.size < 1)
+                return 0.2
+            else
+                return 0
+    }
+    rightPadding: 6
 
     TextArea {
         id: textArea
