@@ -1,6 +1,16 @@
 Pentobi Release Notes
 =====================
 
+Version 28.0-dev (main)
+-----------------------
+
+*
+
+Version 27.1-dev (v27-fixes)
+----------------------------
+
+*
+
 Version 27.0 (10 Sep 2025)
 --------------------------
 
@@ -12,11 +22,6 @@ Version 27.0 (10 Sep 2025)
   for better usability on mobile Linux devices
 * Added close link in help viewer
 * Workaround for QTBUG-140033 (Scrollbar not painted in Fusion style)
-
-Version 26.5-dev (v26-fixes)
-----------------------------
-
-*
 
 Version 26.4 (01 Sep 2025)
 --------------------------
