@@ -1,11 +1,6 @@
 Pentobi Release Notes
 =====================
 
-Version 28.0-dev (main)
------------------------
-
-*
-
 Version 27.1-dev (v27-fixes)
 ----------------------------
 
