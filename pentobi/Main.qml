@@ -252,6 +252,14 @@ ApplicationWindow {
         function onStateChanged() {
             if (Qt.application.state === Qt.ApplicationSuspended)
                 Logic.autoSaveNoVerify()
+            else if (Qt.application.state === Qt.ApplicationActive) {
+                // Workaround for a Qt bug that sometimes results in empty
+                // window if app becomes active again (Qt 6.9.2, Android)
+                if (isAndroid) {
+                    contentItem.visible = false
+                    Qt.callLater(function() { contentItem.visible = true })
+                }
+            }
         }
     }
 
