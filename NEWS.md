@@ -11,6 +11,7 @@ Version 27.1-dev (v27-fixes)
 
 * Workaround for a Qt bug on Android that sometimes resulted in empty
   window if app becomes active again
+* Enable android.jniLibs.useLegacyPackaging for smaller APK size
 
 Version 27.0 (10 Sep 2025)
 --------------------------
