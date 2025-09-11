@@ -4,7 +4,8 @@ Pentobi Release Notes
 Version 27.1-dev (v27-fixes)
 ----------------------------
 
-*
+* Workaround for a Qt bug on Android that sometimes resulted in empty
+  window if app becomes active again
 
 Version 27.0 (10 Sep 2025)
 --------------------------
