@@ -6,8 +6,13 @@ Version 28.0-dev (main)
 
 * 
 
-Version 27.1-dev (v27-fixes)
+Version 27.2-dev (v27-fixes)
 ----------------------------
+
+*
+
+Version 27.1 (12 Sep 2025)
+--------------------------
 
 * Workaround for a Qt bug on Android that sometimes resulted in empty
   window if app becomes active again
