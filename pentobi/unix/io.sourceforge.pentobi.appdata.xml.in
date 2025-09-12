@@ -83,5 +83,18 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 </provides>
 <content_rating type="oars-1.1"/>
 <releases>
+<release version="27.1" date="2025-09-12">
+<description>
+<ul>
+<li>
+Workaround for a Qt bug on Android that sometimes resulted in empty
+window if app becomes active again
+</li>
+<li>
+Enable android.jniLibs.useLegacyPackaging for smaller APK size
+</li>
+</ul>
+</description>
+</release>
 </releases>
 </component>
