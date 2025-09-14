@@ -47,9 +47,8 @@ PentobiDialog {
             }
             Label {
                 text:
-                    // Default link color in dark mode has low contrast (Qt 6.9)
                     "<style>:link{text-decoration:none;color:\""
-                    + (theme.isDark ? "lightskyblue" : "blue")
+                    + theme.colorLink
                     + "\"}</style><a href=\"https://pentobi.sourceforge.io\">pentobi.sourceforge.io</a>"
                 textFormat: Text.RichText
                 elide: Qt.ElideRight

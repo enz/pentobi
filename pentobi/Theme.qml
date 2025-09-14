@@ -63,6 +63,9 @@ Item {
     property color colorMessageBase: isMaterial ? "#333333" : palette.base
     property color colorText: isMaterial ? "#e6d5e1" : palette.text
 
+    // Default link color in dark mode has low contrast (Qt 6.9)
+    property color colorLink: isDark ? "lightskyblue" : "blue"
+
     function getImage(name) {
         if (isDark)
             return "themes/dark/" + name + ".png"
