@@ -190,7 +190,9 @@ function expirePersistedUriPermissions() {
 
 function exportImage(fileUrl) {
     var board = gameView.getBoard()
-    var size = Qt.size(exportImageWidth, exportImageWidth * board.height / board.width)
+    var size = Qt.size(exportImageWidth,
+                       exportImageWidth * board.grabImageTarget.height
+                       / board.grabImageTarget.width)
     if (! board.grabImageTarget.grabToImage(function(result) {
         var ok
         if (isAndroid)

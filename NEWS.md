@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 27.2-dev (v27-fixes)
 ----------------------------
 
-*
+* Fixed aspect ratio of exported Trigon images
 
 Version 27.1 (12 Sep 2025)
 --------------------------
