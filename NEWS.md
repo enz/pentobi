@@ -10,6 +10,8 @@ Version 27.2-dev (v27-fixes)
 ----------------------------
 
 * Fixed aspect ratio of exported Trigon images
+* Disabled text selection in help viewer, which sometimes triggered
+  Qt bugs that made clicking on links no longer work
 
 Version 27.1 (12 Sep 2025)
 --------------------------
