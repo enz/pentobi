@@ -157,9 +157,6 @@ Item
         clip: true
         onCurrentIndexChanged: dropCommentFocus()
 
-        // Use Rectangle to explicitly draw background of each page, otherwise
-        // all pages are shown simultaneously and overlapping with Qt 6.3.0
-        // until first swipe.
         Page {
             Column {
                 id: columnPieces
