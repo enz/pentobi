@@ -7,7 +7,6 @@
 #include "Player.h"
 
 #include <fstream>
-#include <iomanip>
 #include "libboardgame_base/Memory.h"
 
 namespace libpentobi_mcts {
