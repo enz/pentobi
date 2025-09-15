@@ -5,6 +5,9 @@ Version 28.0-dev (main)
 -----------------------
 
 * Support dark mode in help viewer
+* Always limit maximum level to 7 if using mobile view (not only on
+  Android), since mobile devices usually have a weaker CPU and less
+  memory
 
 Version 27.2-dev (v27-fixes)
 ----------------------------

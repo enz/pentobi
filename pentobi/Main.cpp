@@ -82,14 +82,13 @@ int mainDesktop(QGuiApplication& app)
         app.translate(
             "main", "Use layout optimized for desktop."));
     parser.addOption(optionDesktop);
-    auto maxSupportedLevel = Player::max_supported_level;
     QCommandLineOption optionMaxLevel(
                 "maxlevel"_L1,
                 //: Description for command line option --maxlevel
                 app.translate(
                     "main", "Set maximum level to <n>."),
                 "n"_L1,
-                QString::number(PlayerModel::maxLevel));
+                QString::number(Player::max_supported_level));
     parser.addOption(optionMaxLevel);
     QCommandLineOption optionNoBook(
                 "nobook"_L1,
@@ -153,12 +152,6 @@ int mainDesktop(QGuiApplication& app)
         if (parser.isSet(optionNoDelay))
             PlayerModel::noDelay = true;
         bool ok;
-        auto maxLevel = parser.value(optionMaxLevel).toUInt(&ok);
-        if (! ok || maxLevel < 1 || maxLevel > maxSupportedLevel)
-            throw app.translate(
-                    "main", "--maxlevel must be between 1 and %1")
-                .arg(maxSupportedLevel);
-        PlayerModel::maxLevel = maxLevel;
         if (parser.isSet(optionSeed))
         {
             auto seed = parser.value(optionSeed).toUInt(&ok);
@@ -185,6 +178,16 @@ int mainDesktop(QGuiApplication& app)
             isDesktop = true;
         else
             isDesktop = ! isSmallScreen();
+        unsigned maxLevel = isDesktop ? 9 : 7;
+        if (parser.isSet(optionMaxLevel))
+        {
+            maxLevel = parser.value(optionMaxLevel).toUInt(&ok);
+            if (! ok || maxLevel < 1 || maxLevel > Player::max_supported_level)
+                throw app.translate(
+                             "main", "--maxlevel must be between 1 and %1")
+                    .arg(Player::max_supported_level);
+        }
+        PlayerModel::maxLevel = maxLevel;
         QString initialFile;
         auto args = parser.positionalArguments();
         if (args.size() > 1)

@@ -59,13 +59,10 @@ public:
     static inline unsigned nuThreads = 0;
 
     /** Global variable to set the maximum level.
-        Must be set before creating any instances of PlayerModel and not be
-        changed afterwards. */
-#ifdef Q_OS_ANDROID
-    static inline unsigned maxLevel = 7;
-#else
+        Setting this to a value smaller than Player::max_supported_level
+        reduces the memory requirements. Must be set before creating any
+        instances of PlayerModel and not be changed afterwards. */
     static inline unsigned maxLevel = 9;
-#endif
 
 
     explicit PlayerModel(QObject* parent = nullptr);
