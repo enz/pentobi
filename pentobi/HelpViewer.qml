@@ -39,6 +39,10 @@ ScrollView {
         wrapMode: TextArea.WordWrap
         readOnly: true
         text: docbookReader.text
+        // Selecting text sometimes triggers Qt bugs that break clicking
+        // on links (Qt 6.9.2)
+        selectByMouse: false
+        selectByKeyboard: false
         onLinkActivated:
             link => {
                 if (link === "close")
