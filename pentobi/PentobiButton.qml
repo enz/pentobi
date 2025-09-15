@@ -13,7 +13,7 @@ import QtQuick.Controls
     - icon.source resizes loaded images before scaling to HDPI, so they look
       blurry in HDPI displays (Qt 6.9)
     - Issues with default button size or padding in some styles
-    - Using icon.source sometimes resizes images differently even if thes have
+    - Using icon.source sometimes resizes images differently even if they have
       the same source size (Qt 6.9, Android)
     If you make changes, make sure the toolbar and mobile view navigation panel
     work at least in the default styles used by Pentobi (Fusion or
