@@ -15,10 +15,9 @@ Dialog {
     padding: 0
     modal: true
 
-    // Put help viewer in Rectangle to enforce white background, otherwise
-    // space below help page is gray (Material style, Qt 6.9)
     Rectangle {
         anchors.fill: parent
+        color: theme.colorBackground
 
         HelpViewer {
             id: helpViewer

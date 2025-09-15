@@ -14,25 +14,6 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-namespace {
-
-void addHeader(QString& text)
-{
-    // Maybe explicitly setting the text and background colors can be avoided
-    // in the future to support dark mode but right now TextArea in QtQuick
-    // doesn't support dark mode anyway and with Qt 6.5/6.6, the default color
-    // scheme is broken even in light mode (white h1 text on white background,
-    // last tested on Ubuntu 23.10)
-     text.append("<head><style>"
-                 "body {background-color:white;color:black;line-height:115%}"
-                 ":link {text-decoration:none;color:blue}"
-                 "</style></head><body>"_L1);
-}
-
-} //namespace
-
-//-----------------------------------------------------------------------------
-
 DocbookReader::DocbookReader(QObject* parent)
     : QObject(parent)
 {
@@ -57,6 +38,20 @@ DocbookReader::DocbookReader(QObject* parent)
         elem = elem.nextSiblingElement();
     }
     setText();
+}
+
+void DocbookReader::addHeader(QString& text) const
+{
+    // Maybe explicitly setting the text/background colors can be avoided in
+    // the future but presently TextArea doesn't fully support the palette in
+    // Basic style dark mode
+    text.append("<head><style>body{background-color:");
+    text.append(m_colorBackground.name());
+    text.append(";color:");
+    text.append(m_colorText.name());
+    text.append(";line-height:115%}:link{text-decoration:none;color:");
+    text.append(m_colorLink.name());
+    text.append("}</style></head><body>"_L1);
 }
 
 void DocbookReader::addNavigation(QString& text)
@@ -288,6 +283,24 @@ QDomNode DocbookReader::handleNode(const QDomNode& node, int headerLevel,
     }
     handleChildren(elem, headerLevel, text);
     return node;
+}
+
+void DocbookReader::setColorBackground(const QColor& color)
+{
+    m_colorBackground = color;
+    setText();
+}
+
+void DocbookReader::setColorLink(const QColor& color)
+{
+    m_colorLink = color;
+    setText();
+}
+
+void DocbookReader::setColorText(const QColor& color)
+{
+    m_colorText = color;
+    setText();
 }
 
 void DocbookReader::setPageId(const QString& pageId)

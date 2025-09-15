@@ -33,6 +33,7 @@ Window {
 
     minimumWidth: 240; minimumHeight: 240
     title: qsTr("Pentobi Help")
+    color: theme.colorBackground
     onVisibleChanged: {
         if (visibility == Window.Windowed) {
             settings.x = x

@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 28.0-dev (main)
 -----------------------
 
-* 
+* Support dark mode in help viewer
 
 Version 27.2-dev (v27-fixes)
 ----------------------------

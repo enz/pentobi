@@ -126,7 +126,7 @@ along the edges.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="pieces_trigon.jpg"/>
+<imagedata fileref="pieces_trigon.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -137,7 +137,7 @@ size of nine triangles.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="board_trigon.jpg"/>
+<imagedata fileref="board_trigon.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -149,7 +149,7 @@ players may freely choose a starting point for the first piece of a color.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="position_trigon.jpg"/>
+<imagedata fileref="position_trigon.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -255,7 +255,7 @@ straight lines.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="pieces_gembloq.jpg"/>
+<imagedata fileref="pieces_gembloq.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -447,7 +447,7 @@ window with a diagram of colored dots.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="analysis.jpg"/>
+<imagedata fileref="analysis.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -500,7 +500,7 @@ matter.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="rating.jpg"/>
+<imagedata fileref="rating.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>

@@ -72,7 +72,7 @@
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="pieces_trigon.jpg"/>
+<imagedata fileref="pieces_trigon.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -80,7 +80,7 @@
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="board_trigon.jpg"/>
+<imagedata fileref="board_trigon.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -88,7 +88,7 @@
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="position_trigon.jpg"/>
+<imagedata fileref="position_trigon.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -154,7 +154,7 @@
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="pieces_gembloq.jpg"/>
+<imagedata fileref="pieces_gembloq.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -245,7 +245,7 @@
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="analysis.jpg"/>
+<imagedata fileref="analysis.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -262,7 +262,7 @@
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="rating.jpg"/>
+<imagedata fileref="rating.png"/>
 </imageobject>
 </mediaobject>
 </informalfigure>

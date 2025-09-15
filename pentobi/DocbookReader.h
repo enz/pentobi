@@ -7,6 +7,7 @@
 #ifndef PENTOBI_DOCBOOK_READER_H
 #define PENTOBI_DOCBOOK_READER_H
 
+#include <QColor>
 #include <QObject>
 #include <QDomDocument>
 #include <QtQml/qqmlregistration.h>
@@ -28,6 +29,9 @@ class DocbookReader
     Q_OBJECT
     QML_ELEMENT
 
+    Q_PROPERTY(QColor colorBackground MEMBER m_colorBackground WRITE setColorBackground)
+    Q_PROPERTY(QColor colorLink MEMBER m_colorLink WRITE setColorLink)
+    Q_PROPERTY(QColor colorText MEMBER m_colorText WRITE setColorText)
     Q_PROPERTY(QString pageId MEMBER m_pageId WRITE setPageId)
     Q_PROPERTY(QString text READ text NOTIFY textChanged)
     // DocbookReader needs to know the width of the text area to scale and
@@ -50,6 +54,12 @@ private:
 
     qreal m_imageWidth = 0;
 
+    QColor m_colorBackground = "white";
+
+    QColor m_colorLink = "blue";
+
+    QColor m_colorText = "black";
+
     QString m_pageId = {"index"_L1};
 
     QString m_text;
@@ -69,6 +79,8 @@ private:
     QDomDocument m_doc;
 
 
+    void addHeader(QString& text) const;
+
     void addNavigation(QString& text);
 
     void addPage(const QString& id, QString& text);
@@ -82,6 +94,12 @@ private:
 
     QDomNode handleNode(const QDomNode& node, int headerLevel,
                         QString& text) const;
+
+    void setColorBackground(const QColor& color);
+
+    void setColorLink(const QColor& color);
+
+    void setColorText(const QColor& color);
 
     void setText();
 

@@ -19,7 +19,7 @@ ScrollView {
     ScrollBar.vertical.contentItem: Rectangle {
         implicitWidth: 6
         radius: 3
-        color: "black"
+        color: theme.isDark ? "white" : "black"
         opacity:
             if (scrollView.ScrollBar.vertical.pressed)
                 return 0.4
@@ -61,6 +61,9 @@ ScrollView {
     DocbookReader {
         id: docbookReader
 
+        colorBackground: theme.colorBackground
+        colorText: theme.colorText
+        colorLink: theme.colorLink
         textWidth: parent.width - textArea.leftPadding - textArea.rightPadding
     }
 }
