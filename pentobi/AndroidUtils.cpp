@@ -328,67 +328,6 @@ QStringList AndroidUtils::getPersistedUriPermissions()
     return result;
 }
 
-void AndroidUtils::initTheme([[maybe_unused]]QColor colorBackground)
-{
-#ifdef Q_OS_ANDROID
-    QAndroidApplication::runOnAndroidMainThread([=]() {
-        auto window = getContext().callObjectMethod("getWindow",
-                                                    "()Landroid/view/Window;");
-        if (! window.isValid())
-            return;
-        window.callMethod<void>(
-                    "addFlags", "(I)V",
-                    0x80000000 /* FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS */);
-        window.callMethod<void>("clearFlags", "(I)V",
-                                0x04000000 /* FLAG_TRANSLUCENT_STATUS */);
-        auto view = window.callObjectMethod("getDecorView",
-                                            "()Landroid/view/View;");
-        bool isLight = (colorBackground.lightness() > 128);
-        if (QAndroidApplication::sdkVersion() < 30)
-        {
-            int visibility =
-                    view.callMethod<int>("getSystemUiVisibility", "()I");
-            if (isLight)
-                visibility |= 0x00002000; // SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            else
-                visibility &= ~0x00002000;
-            if (QAndroidApplication::sdkVersion() >= 26)
-            {
-                if (isLight)
-                    visibility |= 0x00000010; // SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                else
-                    visibility &= ~0x00000010;
-            }
-            view.callMethod<void>("setSystemUiVisibility", "(I)V", visibility);
-        }
-        else // QAndroidApplication::sdkVersion() >= 30
-        {
-            auto insetsController =
-                    view.callObjectMethod(
-                        "getWindowInsetsController",
-                        "()Landroid/view/WindowInsetsController;");
-            if (isLight)
-                insetsController.callMethod<void>(
-                            "setSystemBarsAppearance", "(II)V",
-                            0x00000008 // APPEARANCE_LIGHT_STATUS_BARS
-                            | 0x00000010, // APPEARANCE_LIGHT_NAVIGATION_BARS
-                            0x00000008 | 0x00000010);
-            else
-                insetsController.callMethod<void>(
-                            "setSystemBarsAppearance", "(II)V",
-                            0, 0x00000008 | 0x00000010);
-        }
-        window.callMethod<void>("setStatusBarColor", "(I)V",
-                                colorBackground.rgba());
-        // Set navigation bar color only if we can also use
-        // SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR (API level 26)
-        if (QAndroidApplication::sdkVersion() >= 26)
-            window.callMethod<void>("setNavigationBarColor", "(I)V",
-                                    colorBackground.rgba());
-    });
-#endif
-}
-
 #ifdef Q_OS_ANDROID
 bool AndroidUtils::open(
         [[maybe_unused]]const QString& uri, [[maybe_unused]]QByteArray& sgf)
