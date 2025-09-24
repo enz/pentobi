@@ -19,12 +19,12 @@ DocbookReader::DocbookReader(QObject* parent)
 {
     m_locale = QLocale::system().name();
     m_lang = m_locale.left(m_locale.indexOf("_"_L1));
-    QString fileName = ":/docbook/index_%1.docbook"_L1.arg(m_locale);
+    QString fileName = ":/help/index_%1.docbook"_L1.arg(m_locale);
     if (! QFile::exists(fileName))
     {
-        fileName = ":/docbook/index_%1.docbook"_L1.arg(m_lang);
+        fileName = ":/help/index_%1.docbook"_L1.arg(m_lang);
         if (! QFile::exists(fileName))
-            fileName = ":/docbook/index.docbook"_L1;
+            fileName = ":/help/index.docbook"_L1;
     }
     QFile file(fileName);
     if (! file.open(QIODevice::ReadOnly) || ! m_doc.setContent(&file))
@@ -233,7 +233,7 @@ QDomNode DocbookReader::handleNode(const QDomNode& node, int headerLevel,
     {
         text.append("<div style=\"margin-left:"_L1);
         text.append(QString::number((m_textWidth - m_imageWidth) / 2));
-        text.append("\"><img src=qrc:/docbook/"_L1);
+        text.append("\"><img src=qrc:/help/"_L1);
         text.append(elem.attribute("fileref"_L1));
         text.append(" width="_L1);
         text.append(QString::number(m_imageWidth));

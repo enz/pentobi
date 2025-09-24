@@ -76,6 +76,12 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/images.qrc" .
     DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/images.qrc" ${images_png}
     )
+add_custom_command(
+    OUTPUT help/help.qrc
+    COMMAND ${CMAKE_COMMAND} -E copy
+    "${CMAKE_CURRENT_SOURCE_DIR}/help/help.qrc" help
+    DEPENDS pentobi-help help/help.qrc
+)
 
 qt_add_executable(pentobi WIN32 Main.cpp)
 
@@ -183,7 +189,7 @@ qt_add_qml_module(pentobi
     resources.qrc
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/images.qrc"
-    help/help.qrc
+    "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
 
     RESOURCES
@@ -214,6 +220,7 @@ target_link_libraries(pentobi PRIVATE
     Threads::Threads
     )
 
+add_subdirectory(help)
 if(UNIX AND NOT ANDROID)
     add_subdirectory(unix)
 endif()
