@@ -917,7 +917,7 @@ annotation and variation information at the right side of the status bar.
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guilabel>Colorblind</guilabel></term>
+<term><guilabel>Colorblind mode</guilabel></term>
 <listitem>
 <para>
 Use piece colors more distinguishable for colorblind users.

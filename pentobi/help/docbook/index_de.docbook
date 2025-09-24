@@ -539,7 +539,7 @@
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><guilabel>Farbenblind</guilabel></term>
+<term><guilabel>Farbenblindmodus</guilabel></term>
 <listitem>
 <para>Benutzt Spielsteinfarben, die für farbenblinde Benutzer besser unterscheidbar sind.</para>
 </listitem>

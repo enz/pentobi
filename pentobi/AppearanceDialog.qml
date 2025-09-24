@@ -96,7 +96,7 @@ PentobiDialog {
             Switch {
                 id: switchColorblind
 
-                text: qsTr("Colorblind")
+                text: qsTr("Colorblind mode")
                 checked: rootWindow.theme.colorblind
             }
             Label {

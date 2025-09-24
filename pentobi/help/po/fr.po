@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-08-31 13:24+0200\n"
+"POT-Creation-Date: 2025-09-24 12:03+0200\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2025\n"
 "Language-Team: French (https://app.transifex.com/markus-enzenberger/teams/89074/fr/)\n"
@@ -1461,8 +1461,8 @@ msgstr ""
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:920
-msgid "<guilabel>Colorblind</guilabel>"
-msgstr "<guilabel>Daltonien</guilabel>"
+msgid "<guilabel>Colorblind mode</guilabel>"
+msgstr "<guilabel>Mode daltonien</guilabel>"
 
 #. (itstool) path: listitem/para
 #: docbook/index.docbook:922

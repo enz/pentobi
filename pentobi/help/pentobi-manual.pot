@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-08-31 13:24+0200\n"
+"POT-Creation-Date: 2025-09-24 12:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -840,7 +840,7 @@ msgstr ""
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:920
-msgid "<guilabel>Colorblind</guilabel>"
+msgid "<guilabel>Colorblind mode</guilabel>"
 msgstr ""
 
 #. (itstool) path: listitem/para

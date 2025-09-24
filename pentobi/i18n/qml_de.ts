@@ -97,8 +97,8 @@
         <translation>Zugnummer</translation>
     </message>
     <message>
-        <source>Colorblind</source>
-        <translation>Farbenblind</translation>
+        <source>Colorblind mode</source>
+        <translation>Farbenblindmodus</translation>
     </message>
 </context>
 <context>

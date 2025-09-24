@@ -99,7 +99,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Colorblind</source>
+        <source>Colorblind mode</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

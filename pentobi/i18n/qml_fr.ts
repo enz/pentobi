@@ -97,8 +97,8 @@
         <translation>Numéro de coup</translation>
     </message>
     <message>
-        <source>Colorblind</source>
-        <translation>Daltonien</translation>
+        <source>Colorblind mode</source>
+        <translation>Mode daltonien</translation>
     </message>
 </context>
 <context>
