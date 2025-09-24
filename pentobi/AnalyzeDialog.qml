@@ -45,8 +45,8 @@ PentobiDialog {
                 id: comboBox
 
                 model:
-                    isAndroid ? [ qsTr("Fast"), qsTr("Normal") ]
-                              : [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
+                    isDesktop ? [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
+                              : [ qsTr("Fast"), qsTr("Normal") ]
                 Layout.fillWidth: true
                 Layout.preferredWidth: font.pixelSize * 15
             }

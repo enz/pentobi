@@ -6,9 +6,9 @@ Version 28.0-dev (main)
 
 * Support dark mode in help viewer (on platforms/styles where dark
   mode actually works in Qt)
-* Always limit maximum level to 7 if using mobile view (not only on
-  Android), since mobile devices usually have a weaker CPU and less
-  memory
+* Always limit maximum level to 7 and analysis speed to Normal if using
+  mobile view (not only on Android), since mobile devices usually have
+  a weaker CPU and less memory
 * Generate translated help files during build again (reintroduces a
   build dependency on itstool)
 
