@@ -4,7 +4,8 @@ Pentobi Release Notes
 Version 28.0-dev (main)
 -----------------------
 
-* Support dark mode in help viewer
+* Support dark mode in help viewer (on platforms/styles where dark
+  mode actually works in Qt)
 * Always limit maximum level to 7 if using mobile view (not only on
   Android), since mobile devices usually have a weaker CPU and less
   memory
