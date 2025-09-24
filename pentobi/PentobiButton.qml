@@ -50,7 +50,6 @@ Item {
         padding: Math.min(isDesktop ? 7 : 15,
                           0.03 * rootWindow.contentItem.height,
                           0.03 * rootWindow.contentItem.width)
-        hoverEnabled: ! isAndroid
         display: AbstractButton.IconOnly
         focusPolicy: Qt.NoFocus
         flat: true
