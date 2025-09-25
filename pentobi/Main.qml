@@ -509,7 +509,6 @@ ApplicationWindow {
     }
     Shortcut {
         sequence: "Back"
-        enabled: isAndroid
         onActivated: {
             if (gameView.pickedPiece)
                 gameView.pickedPiece = null
