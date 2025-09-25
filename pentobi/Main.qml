@@ -524,7 +524,7 @@ ApplicationWindow {
     }
     Shortcut {
         sequence: "Return"
-        enabled: ! isAndroid && ! gameView.hasCommentFocus /* QTBUG-139679 */
+        enabled: ! gameView.hasCommentFocus /* QTBUG-139679 */
         onActivated: gameView.playPickedPiece()
     }
     Shortcut {
