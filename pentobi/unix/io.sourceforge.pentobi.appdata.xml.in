@@ -83,27 +83,5 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 </provides>
 <content_rating type="oars-1.1"/>
 <releases>
-<release version="28.0" date="2025-09-28">
-<description>
-<ul>
-<li>
-Support dark mode in help viewer (on platforms/styles where dark mode actually
-works in Qt)
-</li>
-<li>
-Always limit maximum level to 7 and analysis speed to Normal if using
-mobile view (not only on Android), since mobile devices usually have
-a weaker CPU and less memory
-</li>
-<li>
-Fixed aspect ratio of exported Trigon images
-</li>
-<li>
-Disabled text selection in help viewer, which sometimes triggered
-Qt bugs that made clicking on links no longer work
-</li>
-</ul>
-</description>
-</release>
 </releases>
 </component>
