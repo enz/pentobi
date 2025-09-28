@@ -96,10 +96,11 @@ int mainDesktop(QGuiApplication& app)
                 app.translate(
                     "main", "Do not use opening books."));
     QCommandLineOption optionMobile(
-                "mobile"_L1,
-                //: Description for command line option --mobile
-                app.translate(
-                    "main", "Use layout optimized for smartphones."));
+        "mobile"_L1,
+        //: Description for command line option --mobile
+        app.translate(
+            "main",
+            "Use smartphone layout (default on small screens, also limits maximum level)."));
     parser.addOption(optionMobile);
     parser.addOption(optionNoBook);
     QCommandLineOption optionNoDelay(

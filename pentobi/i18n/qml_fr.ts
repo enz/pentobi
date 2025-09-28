@@ -1280,11 +1280,6 @@
         <translation>Ne pas utiliser de bibliothèques d&apos;ouvertures.</translation>
     </message>
     <message>
-        <source>Use layout optimized for smartphones.</source>
-        <extracomment>Description for command line option --mobile</extracomment>
-        <translation>Utiliser une mise en page optimisée pour les smartphones.</translation>
-    </message>
-    <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
         <translation>Ne pas retarder les coups rapides de l&apos;ordinateur.</translation>
@@ -1337,6 +1332,11 @@
     <message>
         <source>--mobile and --desktop cannot be used both</source>
         <translation>--mobile et --desktop ne peuvent pas être utilisés tous les deux</translation>
+    </message>
+    <message>
+        <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
+        <extracomment>Description for command line option --mobile</extracomment>
+        <translation>Utiliser le format mobile (par défaut sur petit écran ; limite également le niveau maximal).</translation>
     </message>
 </context>
 </TS>

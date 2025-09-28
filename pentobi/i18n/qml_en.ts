@@ -1282,11 +1282,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Use layout optimized for smartphones.</source>
-        <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
         <translation type="unfinished"></translation>
@@ -1338,6 +1333,11 @@
     </message>
     <message>
         <source>--mobile and --desktop cannot be used both</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
+        <extracomment>Description for command line option --mobile</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
