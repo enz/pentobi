@@ -1,8 +1,8 @@
 Pentobi Release Notes
 =====================
 
-Version 28.0-dev (main)
------------------------
+Version 28.0 (28 Sep 2025)
+--------------------------
 
 * Support dark mode in help viewer (on platforms/styles where dark
   mode actually works in Qt)
@@ -11,10 +11,6 @@ Version 28.0-dev (main)
   a weaker CPU and less memory
 * Generate translated help files during build again (reintroduces a
   build dependency on itstool)
-
-Version 27.2-dev (v27-fixes)
-----------------------------
-
 * Fixed aspect ratio of exported Trigon images
 * Disabled text selection in help viewer, which sometimes triggered
   Qt bugs that made clicking on links no longer work
