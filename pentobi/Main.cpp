@@ -253,12 +253,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif
     QGuiApplication app(argc, argv);
-#ifndef Q_OS_ANDROID
     QTranslator qtTranslator;
     if (qtTranslator.load("qt_"_L1 + QLocale::system().name(),
                           QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
         QCoreApplication::installTranslator(&qtTranslator);
-#endif
     QTranslator translator;
     if (translator.load(":qml/i18n/qml_"_L1 + QLocale::system().name()))
         QCoreApplication::installTranslator(&translator);
