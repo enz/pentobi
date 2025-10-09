@@ -247,7 +247,6 @@ ApplicationWindow {
     }
     Connections {
         target: Qt.application
-        enabled: isAndroid
 
         function onStateChanged() {
             if (Qt.application.state === Qt.ApplicationSuspended)
