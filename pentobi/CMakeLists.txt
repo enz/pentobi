@@ -185,7 +185,6 @@ qt_add_qml_module(pentobi
     RatingModel.cpp
     RecentFiles.h
     RecentFiles.cpp
-    SyncSettings.h
     resources.qrc
     "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/images.qrc"

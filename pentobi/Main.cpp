@@ -6,6 +6,7 @@
 
 #include <QGuiApplication>
 #include <QIcon>
+#include <QLibraryInfo>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
@@ -19,8 +20,6 @@
 #include "AndroidUtils.h"
 #else
 #include <QCommandLineParser>
-#include <QLibraryInfo>
-#include "PlayerModel.h"
 #endif
 
 using namespace Qt::StringLiterals;

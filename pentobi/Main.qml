@@ -113,12 +113,20 @@ ApplicationWindow {
         property real y
         property real width
         property real height
+        property alias level: playerModel.level
         property alias colorblind: theme.colorblind
         property alias folder: rootWindow.folder
         property alias displayName: rootWindow.displayName
         property alias exportImageWidth: rootWindow.exportImageWidth
         property alias showToolBar: rootWindow.showToolBar
         property alias showVariations: gameModel.showVariations
+        property bool computerPlays0
+        property bool computerPlays1
+        property bool computerPlays2
+        property bool computerPlays3
+        property bool initComputerColorsOnNewGame
+        property bool isRated
+
     }
     GameModel {
         id: gameModel
@@ -171,7 +179,6 @@ ApplicationWindow {
         onSaveDialogAccepted:
             (uri, displayName) => Logic.saveFile(uri, displayName)
     }
-    SyncSettings { id: syncSettings }
     DialogLoader { id: aboutDialog; url: "AboutDialog.qml" }
     DialogLoader { id: computerDialog; url: "ComputerDialog.qml" }
     DialogLoader { id: fatalMessage; url: "FatalMessage.qml" }
@@ -249,11 +256,12 @@ ApplicationWindow {
         target: Qt.application
 
         function onStateChanged() {
-            // Autosave is needed on ApplicationSuspended because the app
-            // might get killed afterwards and on ApplicationInactive because
-            // Gnome kills apps when logging off
-            if (Qt.application.state === Qt.ApplicationSuspended
-                    || Qt.application.state === Qt.ApplicationInactive)
+            if (Qt.application.state === Qt.ApplicationInactive)
+                // Autosaving on ApplicationInactive seems the best way to
+                // minimize data loss without having to save after every move.
+                // Note that Settings don’t sync after every change and even
+                // calling Settings.sync() on ApplicationSuspended didn’t work
+                // reliably on Android.
                 Logic.autoSaveNoVerify()
             else if (Qt.application.state === Qt.ApplicationActive) {
                 // Workaround for a Qt bug that sometimes results in empty

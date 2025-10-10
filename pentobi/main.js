@@ -16,14 +16,12 @@ function analyzeGame(nuSimulations) {
 
 function autoSaveNoVerify() {
     gameModel.autoSave()
-    syncSettings.setValueBool("computerPlays0", computerPlays0)
-    syncSettings.setValueBool("computerPlays1", computerPlays1)
-    syncSettings.setValueBool("computerPlays2", computerPlays2)
-    syncSettings.setValueBool("computerPlays3", computerPlays3)
-    syncSettings.setValueBool("isRated", isRated)
-    syncSettings.setValueBool("initComputerColorsOnNewGame", initComputerColorsOnNewGame)
-    syncSettings.setValueInt("level", playerModel.level)
-    syncSettings.sync()
+    settings.computerPlays0 = computerPlays0
+    settings.computerPlays1 = computerPlays1
+    settings.computerPlays2 = computerPlays2
+    settings.computerPlays3 = computerPlays3
+    settings.isRated = isRated
+    settings.initComputerColorsOnNewGame = initComputerColorsOnNewGame
     analyzeGameModel.autoSave(gameModel)
     if (visibility === Window.Windowed) {
         settings.x = x
@@ -322,23 +320,16 @@ function getWindowTitle(file, isModified) {
 
 function init() {
     if (gameModel.loadAutoSave()) {
-        computerPlays0 =
-                syncSettings.valueBool("computerPlays0", computerPlays0)
-        computerPlays1 =
-                syncSettings.valueBool("computerPlays1", computerPlays1)
-        computerPlays2 =
-                syncSettings.valueBool("computerPlays2", computerPlays2)
-        computerPlays3 =
-                syncSettings.valueBool("computerPlays3", computerPlays3)
-        isRated = syncSettings.valueBool("isRated", isRated)
-        initComputerColorsOnNewGame =
-                syncSettings.valueBool("initComputerColorsOnNewGame",
-                                       initComputerColorsOnNewGame)
+        computerPlays0 = settings.computerPlays0
+        computerPlays1 = settings.computerPlays1
+        computerPlays2 = settings.computerPlays2
+        computerPlays3 = settings.computerPlays3
+        isRated = settings.isRated
+        initComputerColorsOnNewGame = settings.initComputerColorsOnNewGame
         analyzeGameModel.loadAutoSave(gameModel)
     }
     if (isAndroid)
         expirePersistedUriPermissions(initialFile, gameModel.file)
-    playerModel.level = syncSettings.valueInt("level", 1)
     if (isMultiColor()) {
         computerPlays2 = computerPlays0
         computerPlays3 = computerPlays1
