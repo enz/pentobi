@@ -110,7 +110,7 @@ PentobiDialog {
                     from: 1
                     to: playerModel.maxLevel
                     stepSize: 1
-                    snapMode: Slider.SnapOnRelease
+                    snapMode: Slider.SnapAlways
                     Layout.fillWidth: true
                 }
             }
