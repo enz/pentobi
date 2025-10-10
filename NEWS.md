@@ -9,7 +9,8 @@ Version 29.0-dev (main)
 Version 28.1-dev (v28-fixes)
 ----------------------------
 
-*
+* Autosave state whenever window becomes inactive, which retains
+  the state when logging off on Gnome wthout closing the window
 
 Version 28.0 (28 Sep 2025)
 --------------------------
