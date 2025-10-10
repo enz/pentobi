@@ -250,7 +250,11 @@ ApplicationWindow {
         enabled: isAndroid
 
         function onStateChanged() {
-            if (Qt.application.state === Qt.ApplicationSuspended)
+            // Autosave is needed on ApplicationSuspended because the app
+            // might get killed afterwards and on ApplicationInactive because
+            // Gnome kills apps when logging off
+            if (Qt.application.state === Qt.ApplicationSuspended
+                    || Qt.application.state === Qt.ApplicationInactive)
                 Logic.autoSaveNoVerify()
             else if (Qt.application.state === Qt.ApplicationActive) {
                 // Workaround for a Qt bug that sometimes results in empty
