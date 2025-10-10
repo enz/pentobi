@@ -20,6 +20,7 @@
 #include "AndroidUtils.h"
 #else
 #include <QCommandLineParser>
+#include "PlayerModel.h"
 #endif
 
 using namespace Qt::StringLiterals;
