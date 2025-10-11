@@ -4,6 +4,7 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
+#include <QCommandLineParser>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QLibraryInfo>
@@ -14,13 +15,11 @@
 #include <QtGlobal>
 #include <QTranslator>
 #include "ImageProvider.h"
+#include "PlayerModel.h"
 #include "libboardgame_base/Log.h"
 
 #ifdef Q_OS_ANDROID
 #include "AndroidUtils.h"
-#else
-#include <QCommandLineParser>
-#include "PlayerModel.h"
 #endif
 
 using namespace Qt::StringLiterals;
@@ -28,31 +27,6 @@ using namespace Qt::StringLiterals;
 //-----------------------------------------------------------------------------
 
 namespace {
-
-#ifdef Q_OS_ANDROID
-
-int mainAndroid(QGuiApplication& app)
-{
-    QQmlApplicationEngine engine;
-    engine.addImageProvider("pentobi"_L1, new ImageProvider);
-    auto ctx = engine.rootContext();
-    ctx->setContextProperty("globalStyle"_L1, QQuickStyle::name());
-    ctx->setContextProperty("initialFile"_L1, AndroidUtils::getInitialFile());
-    ctx->setContextProperty("isDesktop"_L1, QVariant(false));
-#ifdef QT_DEBUG
-    ctx->setContextProperty("isDebug"_L1, QVariant(true));
-#else
-    ctx->setContextProperty("isDebug"_L1, QVariant(false));
-#endif
-    QObject::connect(&engine,
-                     &QQmlApplicationEngine::objectCreationFailed,
-                     &app, []() { QCoreApplication::exit(1); },
-                     Qt::QueuedConnection);
-    engine.loadFromModule("PentobiGui"_L1, "Main"_L1);
-    return app.exec();
-}
-
-#else // ! defined(Q_OS_ANDROID)
 
 bool isSmallScreen()
 {
@@ -65,17 +39,44 @@ bool isSmallScreen()
     return inches < 10;
 }
 
-int mainDesktop(QGuiApplication& app)
+} // namespace
+
+//-----------------------------------------------------------------------------
+
+int main(int argc, char *argv[])
 {
-    QIcon::setThemeName("pentobi"_L1);
+    libboardgame_base::LogInitializer log_initializer;
+#ifdef Q_OS_ANDROID
+    // Rounding on Android uses PassThrough by default which causes rendering
+    // errors on some devices when switching fullscreen or orientation and
+    // incorrect canvas painting on low-DPI devices with devicePixelRatio<1
+    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
+                Qt::HighDpiScaleFactorRoundingPolicy::Round);
+#endif
+#ifdef Q_OS_WIN
+    qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
+#endif
+    QCoreApplication::setOrganizationName("Pentobi"_L1);
+    QCoreApplication::setApplicationName("Pentobi"_L1);
+#ifdef VERSION
+    QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
+#endif
+    QGuiApplication app(argc, argv);
+    QTranslator qtTranslator;
+    if (qtTranslator.load("qt_"_L1 + QLocale::system().name(),
+                          QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+        QCoreApplication::installTranslator(&qtTranslator);
+    QTranslator translator;
+    if (translator.load(":qml/i18n/qml_"_L1 + QLocale::system().name()))
+        QCoreApplication::installTranslator(&translator);
     QIcon icon(":/icon/pentobi-48.png"_L1);
     app.setWindowIcon(icon);
     app.setDesktopFileName("io.sourceforge.pentobi"_L1);
     QCommandLineParser parser;
     parser.setApplicationDescription(
-                app.translate(
-                    "main",
-                    "computer opponent for the board game Blokus"));
+        app.translate(
+            "main",
+            "computer opponent for the board game Blokus"));
     QCommandLineOption optionDesktop(
         "desktop"_L1,
         //: Description for command line option --desktop
@@ -83,18 +84,18 @@ int mainDesktop(QGuiApplication& app)
             "main", "Use layout optimized for desktop."));
     parser.addOption(optionDesktop);
     QCommandLineOption optionMaxLevel(
-                "maxlevel"_L1,
-                //: Description for command line option --maxlevel
-                app.translate(
-                    "main", "Set maximum level to <n>."),
-                "n"_L1,
-                QString::number(Player::max_supported_level));
+        "maxlevel"_L1,
+        //: Description for command line option --maxlevel
+        app.translate(
+            "main", "Set maximum level to <n>."),
+        "n"_L1,
+        QString::number(Player::max_supported_level));
     parser.addOption(optionMaxLevel);
     QCommandLineOption optionNoBook(
-                "nobook"_L1,
-                //: Description for command line option --nobook
-                app.translate(
-                    "main", "Do not use opening books."));
+        "nobook"_L1,
+        //: Description for command line option --nobook
+        app.translate(
+            "main", "Do not use opening books."));
     QCommandLineOption optionMobile(
         "mobile"_L1,
         //: Description for command line option --mobile
@@ -104,41 +105,41 @@ int mainDesktop(QGuiApplication& app)
     parser.addOption(optionMobile);
     parser.addOption(optionNoBook);
     QCommandLineOption optionNoDelay(
-                "nodelay"_L1,
-                //: Description for command line option --nodelay
-                app.translate(
-                    "main", "Do not delay fast computer moves."));
+        "nodelay"_L1,
+        //: Description for command line option --nodelay
+        app.translate(
+            "main", "Do not delay fast computer moves."));
     parser.addOption(optionNoDelay);
     QCommandLineOption optionSeed(
-                "seed"_L1,
-                //: Description for command line option --seed
-                app.translate(
-                    "main", "Set random seed to <n>."),
-                "n"_L1);
+        "seed"_L1,
+        //: Description for command line option --seed
+        app.translate(
+            "main", "Set random seed to <n>."),
+        "n"_L1);
     parser.addOption(optionSeed);
     QCommandLineOption optionThreads(
-                "threads"_L1,
-                //: Description for command line option --threads
-                app.translate(
-                    "main", "Use <n> threads (0=auto)."),
-                "n"_L1);
+        "threads"_L1,
+        //: Description for command line option --threads
+        app.translate(
+            "main", "Use <n> threads (0=auto)."),
+        "n"_L1);
     parser.addOption(optionThreads);
 #ifndef LIBBOARDGAME_DISABLE_LOG
     QCommandLineOption optionVerbose(
-                "verbose"_L1,
-                //: Description for command line option --verbose
-                app.translate(
-                    "main",
-                    "Print logging information to standard error."));
+        "verbose"_L1,
+        //: Description for command line option --verbose
+        app.translate(
+            "main",
+            "Print logging information to standard error."));
     parser.addOption(optionVerbose);
 #endif
     parser.addPositionalArgument(
-                //: Name of command line argument.
-                app.translate("main", "file.blksgf"),
-                app.translate(
-                    "main",
-                    //: Description of command line argument.
-                    "Blokus SGF file to open (optional)."));
+        //: Name of command line argument.
+        app.translate("main", "file.blksgf"),
+        app.translate(
+            "main",
+            //: Description of command line argument.
+            "Blokus SGF file to open (optional)."));
     parser.addHelpOption();
     parser.addVersionOption();
     parser.process(*app.instance());
@@ -158,7 +159,7 @@ int mainDesktop(QGuiApplication& app)
             auto seed = parser.value(optionSeed).toUInt(&ok);
             if (! ok)
                 throw app.translate(
-                        "main", "--seed must be a positive number");
+                    "main", "--seed must be a positive number");
             libboardgame_base::RandomGenerator::set_global_seed(seed);
         }
         if (parser.isSet(optionThreads))
@@ -166,7 +167,7 @@ int mainDesktop(QGuiApplication& app)
             auto nuThreads = parser.value(optionThreads).toUInt(&ok);
             if (! ok)
                 throw app.translate(
-                        "main", "--threads must be a positive number");
+                    "main", "--threads must be a positive number");
             PlayerModel::nuThreads = nuThreads;
         }
         bool isDesktop;
@@ -178,7 +179,11 @@ int mainDesktop(QGuiApplication& app)
         else if (parser.isSet(optionDesktop))
             isDesktop = true;
         else
+#ifdef Q_OS_ANDROID
+            isDesktop = false;
+#else
             isDesktop = ! isSmallScreen();
+#endif
         unsigned maxLevel = isDesktop ? 9 : 7;
         if (parser.isSet(optionMaxLevel))
         {
@@ -190,6 +195,9 @@ int mainDesktop(QGuiApplication& app)
         }
         PlayerModel::maxLevel = maxLevel;
         QString initialFile;
+#ifdef Q_OS_ANDROID
+        initialFile = AndroidUtils::getInitialFile();
+#endif
         auto args = parser.positionalArguments();
         if (args.size() > 1)
             throw app.translate("main", "Too many arguments");
@@ -226,45 +234,6 @@ int mainDesktop(QGuiApplication& app)
         cerr << e.what() << '\n';
         return 1;
     }
-}
-
-#endif // Q_OS_ANDROID
-
-} // namespace
-
-//-----------------------------------------------------------------------------
-
-int main(int argc, char *argv[])
-{
-    libboardgame_base::LogInitializer log_initializer;
-#ifdef Q_OS_ANDROID
-    // Rounding on Android uses PassThrough by default which causes rendering
-    // errors on some devices when switching fullscreen or orientation and
-    // incorrect canvas painting on low-DPI devices with devicePixelRatio<1
-    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
-                Qt::HighDpiScaleFactorRoundingPolicy::Round);
-#endif
-#ifdef Q_OS_WIN
-    qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
-#endif
-    QCoreApplication::setOrganizationName("Pentobi"_L1);
-    QCoreApplication::setApplicationName("Pentobi"_L1);
-#ifdef VERSION
-    QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
-#endif
-    QGuiApplication app(argc, argv);
-    QTranslator qtTranslator;
-    if (qtTranslator.load("qt_"_L1 + QLocale::system().name(),
-                          QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
-        QCoreApplication::installTranslator(&qtTranslator);
-    QTranslator translator;
-    if (translator.load(":qml/i18n/qml_"_L1 + QLocale::system().name()))
-        QCoreApplication::installTranslator(&translator);
-#ifdef Q_OS_ANDROID
-    return mainAndroid(app);
-#else
-    return mainDesktop(app);
-#endif
 }
 
 //-----------------------------------------------------------------------------
