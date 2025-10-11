@@ -74,14 +74,11 @@ int main(int argc, char *argv[])
     app.setDesktopFileName("io.sourceforge.pentobi"_L1);
     QCommandLineParser parser;
     parser.setApplicationDescription(
-        app.translate(
-            "main",
-            "computer opponent for the board game Blokus"));
+        app.translate("main", "computer opponent for the board game Blokus"));
     QCommandLineOption optionDesktop(
         "desktop"_L1,
         //: Description for command line option --desktop
-        app.translate(
-            "main", "Use layout optimized for desktop."));
+        app.translate("main", "Use layout optimized for desktop."));
     parser.addOption(optionDesktop);
     QCommandLineOption optionMaxLevel(
         "maxlevel"_L1,
@@ -94,8 +91,7 @@ int main(int argc, char *argv[])
     QCommandLineOption optionNoBook(
         "nobook"_L1,
         //: Description for command line option --nobook
-        app.translate(
-            "main", "Do not use opening books."));
+        app.translate("main", "Do not use opening books."));
     QCommandLineOption optionMobile(
         "mobile"_L1,
         //: Description for command line option --mobile
@@ -107,39 +103,30 @@ int main(int argc, char *argv[])
     QCommandLineOption optionNoDelay(
         "nodelay"_L1,
         //: Description for command line option --nodelay
-        app.translate(
-            "main", "Do not delay fast computer moves."));
+        app.translate("main", "Do not delay fast computer moves."));
     parser.addOption(optionNoDelay);
     QCommandLineOption optionSeed(
         "seed"_L1,
         //: Description for command line option --seed
-        app.translate(
-            "main", "Set random seed to <n>."),
-        "n"_L1);
+        app.translate("main", "Set random seed to <n>."), "n"_L1);
     parser.addOption(optionSeed);
     QCommandLineOption optionThreads(
         "threads"_L1,
         //: Description for command line option --threads
-        app.translate(
-            "main", "Use <n> threads (0=auto)."),
-        "n"_L1);
+        app.translate("main", "Use <n> threads (0=auto)."), "n"_L1);
     parser.addOption(optionThreads);
 #ifndef LIBBOARDGAME_DISABLE_LOG
     QCommandLineOption optionVerbose(
         "verbose"_L1,
         //: Description for command line option --verbose
-        app.translate(
-            "main",
-            "Print logging information to standard error."));
+        app.translate("main", "Print logging information to standard error."));
     parser.addOption(optionVerbose);
 #endif
     parser.addPositionalArgument(
         //: Name of command line argument.
         app.translate("main", "file.blksgf"),
-        app.translate(
-            "main",
-            //: Description of command line argument.
-            "Blokus SGF file to open (optional)."));
+        //: Description of command line argument.
+        app.translate("main", "Blokus SGF file to open (optional)."));
     parser.addHelpOption();
     parser.addVersionOption();
     parser.process(*app.instance());
