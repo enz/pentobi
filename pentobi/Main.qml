@@ -259,9 +259,10 @@ ApplicationWindow {
             if (Qt.application.state === Qt.ApplicationInactive)
                 // Autosaving on ApplicationInactive seems the best way to
                 // minimize data loss without having to save after every move.
-                // Note that Settings don’t sync after every change and even
-                // calling Settings.sync() on ApplicationSuspended didn’t work
-                // reliably on Android.
+                // Note that we get no close signal on Gnome if the user logs
+                // out while the window is open and that Android might kill
+                // suspended apps and calling Settings.sync() on
+                // ApplicationSuspended does not work reliably.
                 Logic.autoSaveNoVerify()
             else if (Qt.application.state === Qt.ApplicationActive) {
                 // Workaround for a Qt bug that sometimes results in empty
