@@ -20,5 +20,7 @@ Menu {
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                    : Popup.CloseOnEscape | Popup.CloseOnPressOutside
     // Material style highlights first item in menu (see also QTBUG-69541)
-    onAboutToShow: if (globalStyle === "Material") currentIndex = -1
+    onAboutToShow:
+        if (globalStyle === "Material" && ! isDesktop)
+            currentIndex = -1
 }
