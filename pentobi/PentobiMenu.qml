@@ -19,4 +19,6 @@ Menu {
     closePolicy: isDesktop ?
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                    : Popup.CloseOnEscape | Popup.CloseOnPressOutside
+    // Workaround for QTBUG-69541 (Opened Menu highlights last used item on Android)
+    onAboutToShow: if (isAndroid) currentIndex = -1
 }
