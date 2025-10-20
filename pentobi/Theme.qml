@@ -16,7 +16,7 @@ Item {
     // globalStyle is a contxt property set in Main.cpp
     property bool isMaterial: globalStyle === "Material"
 
-    // Don't use Applyication.styleHints.colorScheme. On some platforms/styles,
+    // Don't use Application.styleHints.colorScheme. On some platforms/styles,
     // it is Qt.Dark in dark mode, even if the style doesn't support dark mode
     // and we better stay in light mode than use a broken dark mode.
     property bool isDark: isMaterial || palette.window.hslLightness < 0.5
