@@ -198,6 +198,9 @@ qt_add_qml_module(pentobi
 
 if(ANDROID)
     target_link_libraries(pentobi PRIVATE Qt::CorePrivate)
+    set_target_properties(pentobi PROPERTIES
+        QT_ANDROID_PACKAGE_NAME "net.sf.pentobi"
+    )
     set_property(TARGET pentobi APPEND PROPERTY
         QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)
 else()
