@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 3.19)
 
 project(pentobi CXX)
-set(PENTOBI_VERSION 29.0-dev)
+set(PENTOBI_VERSION_MAJOR 29)
+set(PENTOBI_VERSION_MINOR 0)
+set(PENTOBI_IS_RELEASE FALSE)
+set(PENTOBI_VERSION ${PENTOBI_VERSION_MAJOR}.${PENTOBI_VERSION_MINOR})
+if(NOT PENTOBI_IS_RELEASE)
+    string(APPEND PENTOBI_VERSION "-dev")
+endif()
 
 include(GNUInstallDirs)
 
@@ -52,8 +58,7 @@ if(PENTOBI_BUILD_GUI)
     find_program(ITSTOOL itstool REQUIRED)
     find_program(RSVG_CONVERT rsvg-convert REQUIRED)
     set(CMAKE_AUTORCC ON)
-    find_package(Qt6 6.8 REQUIRED
-        COMPONENTS Concurrent LinguistTools QuickControls2 Xml)
-    qt_standard_project_setup(REQUIRES 6.8)
+    find_package(Qt6 COMPONENTS Concurrent LinguistTools QuickControls2 Xml)
+    qt_standard_project_setup(REQUIRES 6.9)
     add_subdirectory(pentobi)
 endif()

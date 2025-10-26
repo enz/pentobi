@@ -189,16 +189,30 @@ qt_add_qml_module(pentobi
     "${CMAKE_CURRENT_BINARY_DIR}/images.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
-
-    RESOURCES
-    android/AndroidManifest.xml
-    android/build.gradle
 )
 
 if(ANDROID)
     target_link_libraries(pentobi PRIVATE Qt::CorePrivate)
+    math(EXPR PENTOBI_ANDROID_CODE
+        "${PENTOBI_VERSION_MAJOR} * 1000000 + ${PENTOBI_VERSION_MINOR} * 1000")
+    if(PENTOBI_IS_RELEASE)
+        math(EXPR PENTOBI_ANDROID_CODE "${PENTOBI_ANDROID_CODE} + 10")
+    endif()
+    if(ANDROID_ABI STREQUAL "arm64-v8a")
+        math(EXPR PENTOBI_ANDROID_CODE "${PENTOBI_ANDROID_CODE} + 1")
+    elseif(ANDROID_ABI STREQUAL "x86")
+        math(EXPR PENTOBI_ANDROID_CODE "${PENTOBI_ANDROID_CODE} + 2")
+    elseif(ANDROID_ABI STREQUAL "x86_64")
+        math(EXPR PENTOBI_ANDROID_CODE "${PENTOBI_ANDROID_CODE} + 3")
+    elseif(NOT STREQUAL "armeabi-v7a")
+        message(WARNING "Unknown Android ABI: ${ANDROID_ABI}")
+    endif()
     set_target_properties(pentobi PROPERTIES
+        QT_ANDROID_APP_ICON "@drawable/icon"
+        QT_ANDROID_APP_NAME "Pentobi"
         QT_ANDROID_PACKAGE_NAME "net.sf.pentobi"
+        QT_ANDROID_VERSION_CODE ${PENTOBI_ANDROID_CODE}
+        QT_ANDROID_VERSION_NAME ${PENTOBI_VERSION}
     )
     set_property(TARGET pentobi APPEND PROPERTY
         QT_ANDROID_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/android)

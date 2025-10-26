@@ -4,7 +4,9 @@ Pentobi Release Notes
 Version 29.0-dev (main)
 -----------------------
 
-* 
+* Minimum required Qt version is now 6.9
+* Android app no longer registers as handler for custom MIME type
+  x-blokus-sgf, which didn't work anyway on Samsung devices
 
 Version 28.1-dev (v28-fixes)
 ----------------------------
