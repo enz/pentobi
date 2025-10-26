@@ -5,6 +5,7 @@ Version 29.0-dev (main)
 -----------------------
 
 * Minimum required Qt version is now 6.9
+* Minimum required CMake version is now 3.22
 * Android app no longer registers as handler for custom MIME type
   x-blokus-sgf, which didn't work anyway on Samsung devices
 
