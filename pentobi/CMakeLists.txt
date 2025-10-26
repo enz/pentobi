@@ -205,7 +205,7 @@ if(ANDROID)
     elseif(ANDROID_ABI STREQUAL "x86_64")
         math(EXPR PENTOBI_ANDROID_CODE "${PENTOBI_ANDROID_CODE} + 3")
     elseif(NOT STREQUAL "armeabi-v7a")
-        message(WARNING "Unknown Android ABI: ${ANDROID_ABI}")
+        message(FATAL_ERROR "Unknown Android ABI: ${ANDROID_ABI}")
     endif()
     set_target_properties(pentobi PROPERTIES
         QT_ANDROID_APP_ICON "@drawable/icon"
