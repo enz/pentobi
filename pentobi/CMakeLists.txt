@@ -17,7 +17,6 @@ add_custom_command(
 # Images and icons to be used with QtQuick Image. We use sourceSize four times
 # larger than the device-indepenent size to support high-dpi images.
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icon")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icons")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/themes/dark")
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/themes/light")
 set(pentobi_images
