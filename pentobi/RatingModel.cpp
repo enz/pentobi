@@ -197,7 +197,8 @@ int RatingModel::getGameNumberOfFile(const QString& file) const
     auto rightLen = right.length();
     int n;
     bool ok;
-    n = file.mid(leftLen, file.length() - leftLen - rightLen).toInt(&ok);
+    QStringView view(file);
+    n = view.sliced(leftLen, file.length() - leftLen - rightLen).toInt(&ok);
     return ok && n >= 1 && n <= m_numberGames ? n : 0;
 }
 
