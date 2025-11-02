@@ -301,7 +301,7 @@ Item
                             break
                         case "played":
                             x = board.mapFromGameX(root.pieceModel.gameCoord.x) - board.grabImageTarget.x
-                            y = board.mapFromGameX(root.pieceModel.gameCoord.y) - board.grabImageTarget.y
+                            y = board.mapFromGameY(root.pieceModel.gameCoord.y) - board.grabImageTarget.y
                             break
                         case "unplayed":
                             x = parentUnplayed.width / 2
