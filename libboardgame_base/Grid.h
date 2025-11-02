@@ -133,7 +133,7 @@ template<class P, typename T>
 void Grid<P, T>::memcpy_from(const Grid& grid, const Geometry& geo)
 {
     static_assert(is_trivially_copyable_v<T>);
-    memcpy(&m_a, grid.m_a, geo.get_range() * sizeof(T));
+    memcpy(m_a, grid.m_a, geo.get_range() * sizeof(T));
 }
 
 template<class P, typename T>
