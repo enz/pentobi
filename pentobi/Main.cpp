@@ -30,6 +30,11 @@ namespace {
 
 bool isSmallScreen()
 {
+    if (qApp->screens().empty())
+    {
+        LIBBOARDGAME_LOG("No screens found");
+        return false;
+    }
     auto size = qApp->screens().at(0)->physicalSize();
     auto width = size.width();
     auto height = size.height();
