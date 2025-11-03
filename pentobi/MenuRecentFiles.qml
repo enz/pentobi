@@ -19,7 +19,7 @@ PentobiMenu {
             text = recentFiles[index].file
             text = text.substring(text.lastIndexOf("/") + 1)
         }
-        text = text.replace("\.blksgf", "")
+        text = text.replace(/\.blksgf$/i, "")
         return text
     }
     function openFile(index) {
