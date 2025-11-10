@@ -9,14 +9,20 @@ Version 29.0-dev (main)
 * Android app no longer registers as handler for custom MIME type
   x-blokus-sgf, which didn't work anyway on Samsung devices
 
-Version 28.1-dev (v28-fixes)
+Version 28.2-dev (v28-fixes)
 ----------------------------
+
+* 
+
+Version 28.1 (10 Nov 2025)
+--------------------------
 
 * Autosave state whenever window becomes inactive, which retains
   the state when logging off on Gnome without closing the window
 * Fixed piece position after picking up piece from board in setup mode
-* Fixed workaround for QTBUG-99695 in Trigon, which sometimes causes
+* Improved workaround for QTBUG-99695 in Trigon, which sometimes causes
   wrong piece positions at the end of piece placement animations
+* Made Android version compile with Qt 6.10
 
 Version 28.0 (28 Sep 2025)
 --------------------------
