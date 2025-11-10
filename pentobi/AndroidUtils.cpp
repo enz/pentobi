@@ -279,25 +279,6 @@ QString AndroidUtils::getDisplayName([[maybe_unused]]const QString& uri)
     return {};
 }
 
-#ifdef Q_OS_ANDROID
-QString AndroidUtils::getInitialFile()
-{
-    auto intent =
-            getContext().callObjectMethod(
-                "getIntent", "()Landroid/content/Intent;");
-    if (! intent.isValid())
-        return {};
-    auto uri = intent.callObjectMethod("getData", "()Landroid/net/Uri;");
-    if (! uri.isValid())
-        return {};
-    auto uriString =
-            uri.callObjectMethod("toString", "()Ljava/lang/String;");
-    if (! uriString.isValid())
-        return {};
-    return uriString.toString();
-}
-#endif
-
 QStringList AndroidUtils::getPersistedUriPermissions()
 {
     QStringList result;

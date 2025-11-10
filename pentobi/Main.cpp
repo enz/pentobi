@@ -187,9 +187,6 @@ int main(int argc, char *argv[])
         }
         PlayerModel::maxLevel = maxLevel;
         QString initialFile;
-#ifdef Q_OS_ANDROID
-        initialFile = AndroidUtils::getInitialFile();
-#endif
         auto args = parser.positionalArguments();
         if (args.size() > 1)
             throw app.translate("main", "Too many arguments");
