@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.sf.pentobi"
     android:installLocation="auto"
-    android:versionCode="28001000"
-    android:versionName="28.1" >
+    android:versionCode="28001999"
+    android:versionName="28.2-dev" >
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
