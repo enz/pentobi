@@ -319,7 +319,7 @@ void GameModel::createPieceModels(Color c)
 
 QString GameModel::decode(const string& s)
 {
-    return QString::fromStdString(s);
+    return QString::fromUtf8(s);
 }
 
 void GameModel::deleteAllVar()
