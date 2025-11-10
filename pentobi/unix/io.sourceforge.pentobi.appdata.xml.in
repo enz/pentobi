@@ -83,5 +83,22 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 </provides>
 <content_rating type="oars-1.1"/>
 <releases>
+<release version="28.1" date="2025-11-10">
+<description>
+<ul>
+<li>
+Autosave state whenever window becomes inactive, which retains
+the state when logging off on Gnome without closing the window
+</li>
+<li>
+Fixed piece position after picking up piece from board in setup mode
+</li>
+<li>
+Improved workaround for QTBUG-99695 in Trigon, which sometimes causes
+wrong piece positions at the end of piece placement animations
+</li>
+</ul>
+</description>
+</release>
 </releases>
 </component>
