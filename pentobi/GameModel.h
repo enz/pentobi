@@ -632,11 +632,11 @@ private:
     PieceModel* updatePiece(Color c, Move mv,
                             array<bool, Board::max_pieces>& isPlayed);
 
-    void updatePieces();
+    void updatePieces(bool restoreDefaultState = true);
 
     void updatePositionInfo();
 
-    void updateProperties();
+    void updateProperties(bool restoreDefaultState = true);
 };
 
 //-----------------------------------------------------------------------------

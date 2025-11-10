@@ -125,10 +125,9 @@ function onBoardClicked(pos) {
     if (! pieceModel)
         return
     var piece = findPiece(pieceModel)
-    pos = mapFromItem(piece, (piece.width - pieceManipulator.width) / 2,
-                      (piece.height - pieceManipulator.height) / 2)
-    pieceManipulator.x = pos.x
-    pieceManipulator.y = pos.y
+    pos = mapFromItem(piece, 0, 0)
+    pieceManipulator.x = pos.x - pieceManipulator.width / 2
+    pieceManipulator.y = pos.y - pieceManipulator.height / 2
     pickedPiece = piece
 }
 

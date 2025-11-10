@@ -165,7 +165,7 @@ PieceModel* GameModel::addEmpty(const QPoint& pos)
     preparePositionChange();
     m_game.remove_setup(c, mv);
     setSetupPlayer();
-    updateProperties();
+    updateProperties(false);
     return result;
 }
 
@@ -1531,7 +1531,10 @@ PieceModel* GameModel::updatePiece(Color c, Move mv,
     return nullptr;
 }
 
-void GameModel::updatePieces()
+/** Update pieces.
+    @param restoreDefaultState Restore default orientation for pieces that are
+    no longer played on the board. */
+void GameModel::updatePieces(bool restoreDefaultState)
 {
     auto& bd = getBoard();
     ColorMap<array<bool, Board::max_pieces>> isPlayed;
@@ -1594,7 +1597,8 @@ void GameModel::updatePieces()
             auto pieceModel = qvariant_cast<PieceModel*>(m_pieceModels[c][i]);
             if (! isPlayed[c][i] && pieceModel->isPlayed())
             {
-                pieceModel->setDefaultState();
+                if (restoreDefaultState)
+                    pieceModel->setDefaultState();
                 pieceModel->setIsPlayed(false);
                 pieceModel->setMoveLabel(QString());
             }
@@ -1648,8 +1652,10 @@ void GameModel::updatePositionInfo()
 }
 
 /** Update all properties that might change when changing the current
-    position in the game tree. */
-void GameModel::updateProperties()
+    position in the game tree.
+    @param restoreDefaultState Restore default orientation for pieces that are
+    no longer played on the board. */
+void GameModel::updateProperties(bool restoreDefaultState)
 {
     auto& bd = getBoard();
     auto& geo = bd.get_geometry();
@@ -1768,7 +1774,7 @@ void GameModel::updateProperties()
         &GameModel::isBoardEmptyChanged);
     set(m_isGameOver, isGameOver, &GameModel::isGameOverChanged);
     updateIsModified();
-    updatePieces();
+    updatePieces(restoreDefaultState);
     set(m_comment, decode(m_game.get_comment()), &GameModel::commentChanged);
     set(m_toPlay, m_isGameOver ? 0u : bd.get_effective_to_play().to_int(),
         &GameModel::toPlayChanged);
