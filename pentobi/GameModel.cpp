@@ -300,6 +300,13 @@ void GameModel::createPieceModels()
 
 void GameModel::createPieceModels(Color c)
 {
+    for (auto& variant : m_pieceModels[c])
+    {
+        auto pieceModel = qvariant_cast<PieceModel*>(variant);
+        if (pieceModel)
+            pieceModel->deleteLater();
+    }
+    m_pieceModels[c].clear();
     auto& bd = getBoard();
     auto nuPieces = bd.get_nu_uniq_pieces();
     m_pieceModels[c].clear();
