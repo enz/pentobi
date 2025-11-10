@@ -18,10 +18,6 @@
 #include "PlayerModel.h"
 #include "libboardgame_base/Log.h"
 
-#ifdef Q_OS_ANDROID
-#include "AndroidUtils.h"
-#endif
-
 using namespace Qt::StringLiterals;
 
 //-----------------------------------------------------------------------------
