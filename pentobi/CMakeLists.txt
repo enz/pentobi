@@ -193,7 +193,6 @@ qt_add_qml_module(pentobi
 
     RESOURCES
     android/AndroidManifest.xml
-    android/build.gradle
 )
 
 if(ANDROID)
