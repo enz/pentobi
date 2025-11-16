@@ -27,6 +27,11 @@ Item
         if (flippedX) return rotation + 180
         return rotation + 270
     }
+    // Each piece element has large and small images for optimal rendering on
+    // the board and in the piece selector. The isSmall property is 1 when
+    // using the large images and 0 when using the small images; it switches
+    // during placement animations. The type is real for performance reasons
+    // (see usage in PieceClassic).
     property real isSmall: scale < 0.5 ? 1 : 0
 
     transform: [
