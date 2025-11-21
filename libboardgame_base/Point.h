@@ -9,7 +9,6 @@
 
 #include <limits>
 #include "Assert.h"
-#include "Compiler.h"
 
 namespace libboardgame_base {
 

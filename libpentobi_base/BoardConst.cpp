@@ -11,6 +11,7 @@
 #include "PieceTransformsClassic.h"
 #include "PieceTransformsGembloQ.h"
 #include "PieceTransformsTrigon.h"
+#include "libboardgame_base/Compiler.h"
 #include "libboardgame_base/Log.h"
 
 namespace libpentobi_base {

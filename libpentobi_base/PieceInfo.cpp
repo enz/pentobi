@@ -7,6 +7,7 @@
 #include "PieceInfo.h"
 
 #include <algorithm>
+#include "libboardgame_base/Compiler.h"
 #include "libboardgame_base/GeometryUtil.h"
 #include "libboardgame_base/Log.h"
 

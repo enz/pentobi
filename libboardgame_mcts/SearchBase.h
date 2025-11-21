@@ -18,7 +18,6 @@
 #include "Tree.h"
 #include "TreeUtil.h"
 #include "libboardgame_base/ArrayList.h"
-#include "libboardgame_base/Compiler.h"
 #include "libboardgame_base/IntervalChecker.h"
 #include "libboardgame_base/Log.h"
 #include "libboardgame_base/RandomGenerator.h"
