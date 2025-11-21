@@ -51,7 +51,8 @@ struct Atomic<T, false>
         return val;
     }
 
-    T fetch_add(T t)
+    T fetch_add(T t,
+                [[maybe_unused]] memory_order order = memory_order_seq_cst)
     {
         T tmp = val;
         val += t;
@@ -85,9 +86,9 @@ struct Atomic<T, true>
         return load();
     }
 
-    T fetch_add(T t)
+    T fetch_add(T t, memory_order order = memory_order_seq_cst)
     {
-        return val.fetch_add(t);
+        return val.fetch_add(t, order);
     }
 };
 

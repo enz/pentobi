@@ -1248,7 +1248,8 @@ void SearchBase<S, M, R>::search_loop(ThreadState& thread_state)
         if ((check_abort(thread_state) || expensive_abort_checker())
                 && m_nu_simulations >= m_min_simulations)
             break;
-        state.start_simulation(m_nu_simulations.fetch_add(1));
+        state.start_simulation(
+            m_nu_simulations.fetch_add(1, memory_order_relaxed));
         play_in_tree(thread_state);
         if (thread_state.is_out_of_mem)
             break;
