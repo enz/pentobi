@@ -206,11 +206,9 @@ private:
                    float& total_gamma, MoveList& moves, unsigned& nu_moves);
 
     template<unsigned MAX_SIZE>
-    LIBBOARDGAME_NOINLINE
     void add_starting_moves(Color c, const Board::PiecesLeftList& pieces,
                             bool with_gamma, MoveList& moves);
 
-    LIBBOARDGAME_NOINLINE
     void add_callisto_one_piece_moves(Color c, bool with_gamma,
                                       float& total_gamma, MoveList& moves,
                                       unsigned& nu_moves);
@@ -280,7 +278,7 @@ private:
     void update_playout_features(Color c, Move mv);
 
     template<unsigned MAX_SIZE>
-    LIBBOARDGAME_NOINLINE void update_symmetry_broken(Move mv);
+    void update_symmetry_broken(Move mv);
 };
 
 /** Check if last-good-reply move is applicable.

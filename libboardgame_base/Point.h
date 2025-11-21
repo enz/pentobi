@@ -52,7 +52,7 @@ public:
     static Point null() { return Point(value_null); }
 
 
-    LIBBOARDGAME_FORCE_INLINE Point();
+    Point();
 
     explicit Point(unsigned i);
 
@@ -77,7 +77,6 @@ private:
 
 
 #ifdef LIBBOARDGAME_DEBUG
-    LIBBOARDGAME_FORCE_INLINE
     bool is_initialized() const { return m_i < value_uninitialized; }
 #endif
 };

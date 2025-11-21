@@ -20,28 +20,6 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-#ifdef __GNUC__
-#define LIBBOARDGAME_FORCE_INLINE inline __attribute__((always_inline))
-#elif defined _MSC_VER
-#define LIBBOARDGAME_FORCE_INLINE inline __forceinline
-#else
-#define LIBBOARDGAME_FORCE_INLINE inline
-#endif
-
-#ifdef __GNUC__
-#define LIBBOARDGAME_NOINLINE __attribute__((noinline))
-#elif defined _MSC_VER
-#define LIBBOARDGAME_NOINLINE __declspec(noinline)
-#else
-#define LIBBOARDGAME_NOINLINE
-#endif
-
-#if defined __GNUC__ && ! defined __ICC &&  ! defined __clang__
-#define LIBBOARDGAME_FLATTEN __attribute__((flatten))
-#else
-#define LIBBOARDGAME_FLATTEN
-#endif
-
 template<typename T>
 string get_type_name(const T& t)
 {

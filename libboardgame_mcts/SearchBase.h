@@ -539,7 +539,6 @@ private:
 
     bool check_abort(const ThreadState& thread_state) const;
 
-    LIBBOARDGAME_NOINLINE
     bool check_abort_expensive(ThreadState& thread_state) const;
 
     bool check_cannot_change(ThreadState& thread_state, Float remaining) const;
