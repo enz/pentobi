@@ -7,7 +7,6 @@
 #include "PieceInfo.h"
 
 #include <algorithm>
-#include "libboardgame_base/Compiler.h"
 #include "libboardgame_base/GeometryUtil.h"
 #include "libboardgame_base/Log.h"
 
@@ -98,7 +97,7 @@ PieceInfo::PieceInfo(const string& name, const PiecePoints& points,
     for (auto transform : all_transforms)
     {
         if (log_piece_creation)
-            LIBBOARDGAME_LOG("Transformation ", get_type_name(*transform));
+            LIBBOARDGAME_LOG("Transformation ", typeid(*transform).name());
         transformed_points = points;
         transform->transform(transformed_points.begin(),
                              transformed_points.end());

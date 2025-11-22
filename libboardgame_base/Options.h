@@ -12,7 +12,6 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include "Compiler.h"
 #include "StringUtil.h"
 
 namespace libboardgame_base {
@@ -94,8 +93,7 @@ T Options::get(const string& name) const
 {
     T t;
     if (! from_string(get(name), t))
-        throw OptionError("Option --" + name + " needs type "
-                          + get_type_name(t));
+        throw OptionError("Option --" + name + " has invalid type");
     return t;
 }
 

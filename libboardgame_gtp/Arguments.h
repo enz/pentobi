@@ -89,9 +89,6 @@ public:
 
 private:
     const CmdLine& m_line;
-
-    template<typename T>
-    static string get_type_name();
 };
 
 inline string_view Arguments::get_line() const
@@ -104,23 +101,6 @@ inline unsigned Arguments::get_size() const
     return
         static_cast<unsigned>(m_line.get_elements().size())
         - m_line.get_idx_name() - 1;
-}
-
-template<typename T>
-string Arguments::get_type_name()
-{
-#if defined __GNUC__ && __has_include(<cxxabi.h>)
-    int status;
-    auto name_ptr =
-        abi::__cxa_demangle(typeid(T).name(), nullptr, nullptr, &status);
-    if (status == 0)
-    {
-        string result(name_ptr);
-        free(name_ptr);
-        return result;
-    }
-#endif
-    return typeid(T).name();
 }
 
 template<typename T>
@@ -146,8 +126,7 @@ T Arguments::get(unsigned i) const
     if (! in)
     {
         ostringstream msg;
-        msg << "argument " << (i + 1) << " ('" << s
-            << "') has invalid type (expected " << get_type_name<T>() << ")";
+        msg << "argument " << (i + 1) << " ('" << s << "') has invalid type";
         throw Failure(msg.str());
     }
     return result;

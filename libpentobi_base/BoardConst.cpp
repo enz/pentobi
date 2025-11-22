@@ -11,12 +11,9 @@
 #include "PieceTransformsClassic.h"
 #include "PieceTransformsGembloQ.h"
 #include "PieceTransformsTrigon.h"
-#include "libboardgame_base/Compiler.h"
 #include "libboardgame_base/Log.h"
 
 namespace libpentobi_base {
-
-using libboardgame_base::get_type_name;
 
 //-----------------------------------------------------------------------------
 
@@ -1014,7 +1011,7 @@ void BoardConst::create_moves(unsigned& moves_created, Piece piece)
             {
 #ifndef LIBBOARDGAME_DISABLE_LOG
                 auto& transform = *transforms[i];
-                LIBBOARDGAME_LOG("Transformation ", get_type_name(transform));
+                LIBBOARDGAME_LOG("Transformation ", typeid(transform).name());
 #endif
             }
             if (transforms[i]->get_point_type() != point_type)
