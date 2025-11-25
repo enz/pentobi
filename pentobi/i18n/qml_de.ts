@@ -464,7 +464,7 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initialize your rating for this game variant.</source>
-        <translation>Initialisieren Sie Ihre Wertung für diese Spielvariante.</translation>
+        <translation>Initialisiere deine Wertung für diese Spielvariante.</translation>
     </message>
     <message>
         <source>Initial rating:</source>
@@ -1112,7 +1112,7 @@
     </message>
     <message>
         <source>You have not yet played rated games in this game variant.</source>
-        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
+        <translation>Du hast noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
     </message>
     <message>
         <source>Truncate this subtree?</source>
