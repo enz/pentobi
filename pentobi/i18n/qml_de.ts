@@ -777,7 +777,7 @@
     </message>
     <message>
         <source>Start a rated game</source>
-        <translation>Ein gewertetes Spiel beginnen</translation>
+        <translation>Gewertetes Spiel starten</translation>
     </message>
     <message>
         <source>Set the colors played by the computer</source>
