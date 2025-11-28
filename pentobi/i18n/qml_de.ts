@@ -109,12 +109,12 @@
     </message>
     <message>
         <source>Move Annotation</source>
-        <translation>Annotierung</translation>
+        <translation>Annotation</translation>
     </message>
     <message>
         <source>Move Annotation (%1)</source>
         <extracomment>The argument is the annotation symbol for the current move</extracomment>
-        <translation>Annotierung (%1)</translation>
+        <translation>Annotation (%1)</translation>
     </message>
 </context>
 <context>
@@ -428,11 +428,11 @@
     </message>
     <message>
         <source>Computer is thinking… (up to %1 seconds remaining)</source>
-        <translation>Computer denkt … (maximal %1 Sekunden verbleibend)</translation>
+        <translation>Computer denkt … (bis zu %1 Sekunden verbleibend)</translation>
     </message>
     <message>
         <source>Computer is thinking… (up to %1 minutes remaining)</source>
-        <translation>Computer denkt … (maximal %1 Minuten verbleibend)</translation>
+        <translation>Computer denkt … (bis zu %1 Minuten verbleibend)</translation>
     </message>
 </context>
 <context>
@@ -516,7 +516,7 @@
     </message>
     <message>
         <source>Game Info</source>
-        <translation>Spielinformation</translation>
+        <translation>Spielinformationen</translation>
     </message>
     <message>
         <source>Move Number…</source>
@@ -629,7 +629,7 @@
     </message>
     <message>
         <source>Annotation…</source>
-        <translation>Annotierung …</translation>
+        <translation>Annotation …</translation>
     </message>
     <message>
         <source>Made main variation</source>
@@ -751,7 +751,7 @@
     </message>
     <message>
         <source>No annotation</source>
-        <translation>Keine Annotierung</translation>
+        <translation>Keine Annotation</translation>
     </message>
 </context>
 <context>
@@ -773,7 +773,7 @@
     <name>PentobiToolBar</name>
     <message>
         <source>Start a new game</source>
-        <translation>Ein neues Spiel beginnen</translation>
+        <translation>Neues Spiel starten</translation>
     </message>
     <message>
         <source>Start a rated game</source>
@@ -797,11 +797,11 @@
     </message>
     <message>
         <source>Go ten moves backward</source>
-        <translation>Zehn Züge zurück gehen</translation>
+        <translation>Zehn Züge zurückgehen</translation>
     </message>
     <message>
         <source>Go one move backward</source>
-        <translation>Einen Zug zurück gehen</translation>
+        <translation>Einen Zug zurückgehen</translation>
     </message>
     <message>
         <source>Go one move forward</source>
@@ -845,7 +845,7 @@
     <name>RatingDialog</name>
     <message>
         <source>Your rating:</source>
-        <translation>Ihre Wertung:</translation>
+        <translation>Deine Wertung:</translation>
     </message>
     <message>
         <source>Game variant:</source>
@@ -987,7 +987,7 @@
     <message>
         <source>Your Color</source>
         <extracomment>Table header for player color(s) in rating dialog</extracomment>
-        <translation>Ihre Farbe</translation>
+        <translation>Deine Farbe</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1002,7 +1002,7 @@
     <message>
         <source>Loss</source>
         <extracomment>Result of rated game is a loss</extracomment>
-        <translation>Verlust</translation>
+        <translation>Niederlage</translation>
     </message>
     <message>
         <source>Tie</source>
@@ -1027,15 +1027,15 @@
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
-        <translation>Ihre Wertung hat sich von %1 auf %2 erhöht.</translation>
+        <translation>Deine Wertung hat sich von %1 auf %2 erhöht.</translation>
     </message>
     <message>
         <source>Your rating has decreased from %1 to %2.</source>
-        <translation>Ihre Wertung hat sich von %1 auf %2 verringert.</translation>
+        <translation>Deine Wertung hat sich von %1 auf %2 verringert.</translation>
     </message>
     <message>
         <source>Your rating stays at %1.</source>
-        <translation>Ihre Wertung bleibt bei %1.</translation>
+        <translation>Deine Wertung bleibt bei %1.</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>

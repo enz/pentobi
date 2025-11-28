@@ -152,7 +152,7 @@ msgid ""
 msgstr ""
 "Beachte, dass die ursprünglichen klassischen Regeln für Blokus farblose "
 "Startfelder benutzen. Dies bedeutet, dass jede Farbe frei wählen darf, "
-"welches der verbleibenden noch freien Startfelder sie für ihren ersten Zug "
+"welches der verbleibenden noch freien Startfelder sie für deinen ersten Zug "
 "benutzt. Pentobi unterstützt zur Zeit nur die Regelvariante mit farbigen "
 "Startfeldern, weil diese Variante auf den ersten Blokus-Online-Servern und "
 "Blokus-Turnieren verwendet wurde."
@@ -709,7 +709,7 @@ msgstr ""
 #. (itstool) path: sect1/title
 #: docbook/index.docbook:470
 msgid "Determine Your Rating"
-msgstr "Ihre Wertung ermitteln"
+msgstr "Deine Wertung ermitteln"
 
 #. (itstool) path: sect1/para
 #: docbook/index.docbook:471
@@ -718,9 +718,9 @@ msgid ""
 " game results are used to determine your current rating. The rating is a "
 "number that represents your playing strength."
 msgstr ""
-"Du kannst Ihre Fortschritte verfolgen, indem du gewertete Spiele gegen den "
-"Computer spielst. Die Spielergebnisse werden benutzt, um Ihre gegenwärtige "
-"Wertung zu ermitteln. Die Wertung ist eine Zahl, die Ihre Spielstärke "
+"Du kannst deine Fortschritte verfolgen, indem du gewertete Spiele gegen den "
+"Computer spielst. Die Spielergebnisse werden benutzt, um deine aktuelle "
+"Wertung zu ermitteln. Die Wertung ist eine Zahl, die deine Spielstärke "
 "darstellt."
 
 #. (itstool) path: sect1/para
@@ -736,7 +736,7 @@ msgstr ""
 "aus dem Menü <guimenu>Spiel</guimenu> oder der Werkzeugleiste gestartet. "
 "Wenn du in der gegenwärtigen Spielvariante noch keine gewerteten Spiele "
 "gespielt hast, wirst du gefragt, eine Anfangswertung zu wählen, wodurch die "
-"Anzahl der Spiele reduziert wird, die nötig ist, um Ihre wirkliche Wertung "
+"Anzahl der Spiele reduziert wird, die nötig ist, um deine wirkliche Wertung "
 "zu bestimmen. Falls du Anfänger bist, belasse die Anfangswertung auf 800."
 
 #. (itstool) path: sect1/para
@@ -747,7 +747,7 @@ msgid ""
 "be randomly chosen in each game."
 msgstr ""
 "Für jedes gewertete Spiel wird der Computer eine Spielstufe für den "
-"Computerspieler gemäß Ihrer gegenwärtigen Wertung wählen. Die Farbe, die du "
+"Computerspieler gemäß deiner aktuellen Wertung wählen. Die Farbe, die du "
 "spielst, wird in jedem Spiel zufällig ausgewählt."
 
 #. (itstool) path: sect1/para
@@ -772,7 +772,7 @@ msgid ""
 "the game was won, lost or a tie. The exact number of score points does not "
 "matter."
 msgstr ""
-"Nachdem das Spiel beendet ist, wird Ihre Wertung in Abhängigkeit vom "
+"Nachdem das Spiel beendet ist, wird deine Wertung in Abhängigkeit vom "
 "Spielergebnis und der Spielstufe aktualisiert. Für das Spielergebnis zählt "
 "nur, ob du gewonnen oder verloren hast, oder ob das Spiel in einem "
 "Unentschieden endete. Die genaue Anzahl der Spielpunkte spielt keine Rolle."
@@ -786,12 +786,12 @@ msgid ""
 " last 50 games as a graph. The last 50 games are automatically saved and can"
 " be loaded by opening a context menu in the game table below the graph."
 msgstr ""
-"Du kannst Ihre aktuelle Wertung jederzeit mit "
+"Du kannst deine aktuelle Wertung jederzeit mit "
 "<guimenuitem>Wertung</guimenuitem> aus dem Menü <guimenu>Extras</guimenu> "
-"sehen. Dies öffnet ein Fenster, in dem die Entwicklung Ihrer Wertung während"
-" der letzten 50 Spiele als Graph gezeigt wird. Die letzten 50 Spiele werden "
-"automatisch gespeichert und können durch Öffnen eines Kontextmenüs in der "
-"Spieltabelle unter dem Graph geladen werden."
+"sehen. Dies öffnet ein Fenster, in dem die Entwicklung deiner Wertung "
+"während der letzten 50 Spiele als Graph gezeigt wird. Die letzten 50 Spiele "
+"werden automatisch gespeichert und können durch Öffnen eines Kontextmenüs in"
+" der Spieltabelle unter dem Graph geladen werden."
 
 #. (itstool) path: chapter/title
 #: docbook/index.docbook:518
@@ -975,7 +975,7 @@ msgstr ""
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:630
 msgid "<guimenuitem>Game Info</guimenuitem>"
-msgstr "<guimenuitem>Spielinformation</guimenuitem>"
+msgstr "<guimenuitem>Spielinformationen</guimenuitem>"
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:631
@@ -1224,7 +1224,7 @@ msgstr "<guimenu>Bearbeiten</guimenu>-Menü"
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:770
 msgid "<guimenuitem>Annotation</guimenuitem>"
-msgstr "<guimenuitem>Annotierung</guimenuitem>"
+msgstr "<guimenuitem>Annotation</guimenuitem>"
 
 #. (itstool) path: listitem/para
 #: docbook/index.docbook:772
@@ -1458,7 +1458,7 @@ msgid ""
 "annotation and variation information at the right side of the status bar."
 msgstr ""
 "Diese Option existiert nur im Desktop-Modus und zeigt die Zugnummer, "
-"Zugannotierung und Varianteninformation auf der rechten Seite der "
+"Zugannotation und Varianteninformation auf der rechten Seite der "
 "Statusleiste an."
 
 #. (itstool) path: varlistentry/term
