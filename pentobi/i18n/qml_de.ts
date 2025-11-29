@@ -464,7 +464,7 @@
     <name>InitialRatingDialog</name>
     <message>
         <source>Initialize your rating for this game variant.</source>
-        <translation>Initialisiere deine Wertung für diese Spielvariante.</translation>
+        <translation>Initialisieren Sie Ihre Wertung für diese Spielvariante.</translation>
     </message>
     <message>
         <source>Initial rating:</source>
@@ -845,7 +845,7 @@
     <name>RatingDialog</name>
     <message>
         <source>Your rating:</source>
-        <translation>Deine Wertung:</translation>
+        <translation>Ihre Wertung:</translation>
     </message>
     <message>
         <source>Game variant:</source>
@@ -987,7 +987,7 @@
     <message>
         <source>Your Color</source>
         <extracomment>Table header for player color(s) in rating dialog</extracomment>
-        <translation>Deine Farbe</translation>
+        <translation>Ihre Farbe</translation>
     </message>
     <message>
         <source>Date</source>
@@ -1027,15 +1027,15 @@
     </message>
     <message>
         <source>Your rating has increased from %1 to %2.</source>
-        <translation>Deine Wertung hat sich von %1 auf %2 erhöht.</translation>
+        <translation>Ihre Wertung hat sich von %1 auf %2 erhöht.</translation>
     </message>
     <message>
         <source>Your rating has decreased from %1 to %2.</source>
-        <translation>Deine Wertung hat sich von %1 auf %2 verringert.</translation>
+        <translation>Ihre Wertung hat sich von %1 auf %2 verringert.</translation>
     </message>
     <message>
         <source>Your rating stays at %1.</source>
-        <translation>Deine Wertung bleibt bei %1.</translation>
+        <translation>Ihre Wertung bleibt bei %1.</translation>
     </message>
     <message>
         <source>Delete all rating information for the current game variant?</source>
@@ -1112,7 +1112,7 @@
     </message>
     <message>
         <source>You have not yet played rated games in this game variant.</source>
-        <translation>Du hast noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
+        <translation>Sie haben noch keine gewerteten Spiele in dieser Spielvariante gespielt.</translation>
     </message>
     <message>
         <source>Truncate this subtree?</source>
