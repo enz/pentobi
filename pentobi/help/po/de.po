@@ -153,7 +153,7 @@ msgstr ""
 "Beachte, dass die ursprünglichen klassischen Regeln für Blokus farblose "
 "Startfelder benutzen. Dies bedeutet, dass jede Farbe frei wählen darf, "
 "welches der verbleibenden noch freien Startfelder sie für ihren ersten Zug "
-"benutzt. Pentobi unterstützt zur Zeit nur die Regelvariante mit farbigen "
+"benutzt. Pentobi unterstützt zurzeit nur die Regelvariante mit farbigen "
 "Startfeldern, weil diese Variante auf den ersten Blokus-Online-Servern und "
 "Blokus-Turnieren verwendet wurde."
 
@@ -205,7 +205,7 @@ msgid ""
 "edge size of nine triangles."
 msgstr ""
 "Das Spielbrett besteht ebenfalls aus Dreiecken und hat die Form eines "
-"Sechsecks mit jeweils neun Dreiecken pro Kante."
+"Sechsecks mit neun Dreiecken pro Kante."
 
 #. (itstool) path: chapter/para
 #: docbook/index.docbook:144
@@ -279,8 +279,8 @@ msgid ""
 "line segments."
 msgstr ""
 "Nexos ist ein Brettspiel ähnlich wie Blokus. Das Spielbrett ist ein "
-"rechtwinkliges 13×13-Liniengitter. Jede Farbe benutzt 24 Spielsteine, die "
-"aus bis zu vier verbundenen Liniensegmenten bestehen."
+"rechteckiges 13×13-Liniengitter. Jede Farbe benutzt 24 Spielsteine, die aus "
+"bis zu vier verbundenen Liniensegmenten bestehen."
 
 #. (itstool) path: chapter/para
 #: docbook/index.docbook:207
@@ -375,7 +375,7 @@ msgstr ""
 "Startfeld der Farbe vollständig abdecken und folgende Züge müssen einen "
 "Spielstein der Farbe am Zug an einer Ecke berühren, jedoch nicht entlang der"
 " Kanten. Züge sind auch legal, wenn eine Spitze eines halben Quadrats die "
-"Kante eines Spielsteins der selben Farbe berührt."
+"Kante eines Spielsteins derselben Farbe berührt."
 
 #. (itstool) path: chapter/para
 #: docbook/index.docbook:287
@@ -438,11 +438,11 @@ msgid ""
 "size two. The first two moves of a player must use a 1×1 piece, the third "
 "1×1 piece may be played anytime later."
 msgstr ""
-"Die 1×1-Spielsteine dürfen überall auf dem Spielbrett gesetzt werden außer "
-"im Zentrum des Spielbretts. Das Zentrums besteht aus einem Achteck mit "
-"Breite sechs und oberer Kantenlänge zwei. Die ersten zwei Züge eines "
-"Spielers müssen einen 1×1-Spielstein benutzen, der dritte 1×1-Spielstein "
-"kann jederzeit später gespielt werden."
+"Die 1×1-Spielsteine dürfen überall gesetzt werden außer im Zentrum des "
+"Spielbretts. Das Zentrum besteht aus einem Achteck mit Breite sechs und "
+"oberer Kantenlänge zwei. Die ersten zwei Züge eines Spielers müssen einen "
+"1×1-Spielstein benutzen, der dritte 1×1-Spielstein kann jederzeit später "
+"gespielt werden."
 
 #. (itstool) path: chapter/para
 #: docbook/index.docbook:332
@@ -451,7 +451,7 @@ msgid ""
 "existing piece of the same color edge-to-edge."
 msgstr ""
 "Alle größeren Spielsteine dürfen überall auf dem Brett gesetzt werden, "
-"müssen aber einen existierenden Spielstein der selben Farbe Kante an Kante "
+"müssen aber einen existierenden Spielstein derselben Farbe Kante an Kante "
 "berühren."
 
 #. (itstool) path: chapter/para
@@ -478,11 +478,11 @@ msgid ""
 msgstr ""
 "Das Spiel kann mit weniger als vier Spielern gespielt werden, indem ein "
 "kleineres Spielbrett verwendet wird. Für drei Spieler ist das Brett ein "
-"Achteck mit Breite 20 und obererer Kantenlänge zwei. Für zwei Spieler ist "
-"das Brett ein Achteck mit Breite 16 und obererer Kantenlänge zwei. Die Größe"
-" des Zentrums bleibt gleich. Zusätzlich zur Standardvariante für zwei "
-"Spieler unterstützt Pentobi auch eine Spielvariante für zwei Spieler wie in "
-"Blokus, in der jeder Spieler zwei Farben spielt."
+"Achteck mit Breite 20 und oberer Kantenlänge zwei. Für zwei Spieler ist das "
+"Brett ein Achteck mit Breite 16 und oberer Kantenlänge zwei. Die Größe des "
+"Zentrums bleibt gleich. Zusätzlich zur Standardvariante für zwei Spieler "
+"unterstützt Pentobi auch eine Spielvariante für zwei Spieler wie in Blokus, "
+"in der jeder Spieler zwei Farben spielt."
 
 #. (itstool) path: chapter/title
 #: docbook/index.docbook:362
@@ -529,10 +529,10 @@ msgid ""
 "underlined if they are final because the color cannot play more pieces. A "
 "small star indicates that the points include a bonus."
 msgstr ""
-"Die Punkteanzeige zeigt die gegenwärtigen Punkte für jede Farbe oder jeden "
+"Die Punkteanzeige zeigt die aktuellen Punkte für jede Farbe oder jeden "
 "Spieler an. Die Punkte sind die Summe aus den Punkten auf dem Spielbrett und"
 " den Bonuspunkten. Punkte sind unterstrichen, wenn sie endgültig sind, weil "
-"die Farbe keine Spielsteine mehr spielen kann. Eine kleiner Stern zeigt an, "
+"die Farbe keine Spielsteine mehr spielen kann. Ein kleiner Stern zeigt an, "
 "dass die Punkte einen Bonus beinhalten."
 
 #. (itstool) path: sect1/title
@@ -616,7 +616,7 @@ msgid ""
 msgstr ""
 "Wenn du ein Spiel spielst, wird Pentobi die Abfolge der Züge speichern und "
 "es ist jederzeit möglich, zu einer früheren Brettstellung zurückzugehen und "
-"anders zu spielen. Wenn du das tust, wird die neue Zugfolgen als eine "
+"anders zu spielen. Wenn du das tust, wird die neue Zugfolge als eine "
 "alternative Zugfolge (genannt Variante) gespeichert. Varianten können auch "
 "von Kommentatoren benutzt werden, um Kommentierungen zu existierenden "
 "Spielen hinzuzufügen. Varianten können in jeder Brettstellung existieren und"
@@ -892,8 +892,8 @@ msgid ""
 "variations."
 msgstr ""
 "Geht zum Ende der gegenwärtigen Variante. Wie bei "
-"<guibutton>Vorwärts</guibutton> wird auch hier jeweils die erste Variante "
-"benutzt, wenn die Brettstellung mehrere nachfolgende Varianten hat."
+"<guibutton>Vorwärts</guibutton> wird auch hier die erste Variante benutzt, "
+"wenn die Brettstellung mehrere nachfolgende Varianten hat."
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:581
@@ -1183,7 +1183,7 @@ msgstr "<guimenuitem>Verzweigungsanfang</guimenuitem>"
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:745
 msgid "(<keysym>Ctrl+B</keysym>)"
-msgstr "(<keysym>Strgl+B</keysym>)"
+msgstr "(<keysym>Strg+B</keysym>)"
 
 #. (itstool) path: listitem/para
 #: docbook/index.docbook:747
@@ -1211,7 +1211,7 @@ msgid ""
 "not visible, it will become visible. Selecting this item repeatedly will "
 "show all positions with comments in the game tree."
 msgstr ""
-"Geht zur nächsten Brettstellung, die einen Kommentar besitzt. Wenn das "
+"Geht zur nächsten Brettstellung, die einen Kommentar enthält. Wenn das "
 "Kommentarfeld nicht sichtbar ist, wird es sichtbar gemacht. Das wiederholte "
 "Auswählen dieses Menüpunkts zeigt nacheinander alle Brettstellungen mit "
 "Kommentaren im Spielbaum."
@@ -1342,9 +1342,9 @@ msgid ""
 "Delete all moves and keep only the current position as a setup. This can be "
 "used to create files that start with a given fixed position."
 msgstr ""
-"Löscht alle Züge und behält nur die gegenwärtige Brettstellung als feste "
-"Stellung. Dies kann zur Erzeugung von Dateien benutzt werden, die mit einer "
-"festgelegten Brettstellung beginnen."
+"Löscht alle Züge und behält nur die gegenwärtige Brettstellung als "
+"Ausgangsstellung. Dies kann zur Erzeugung von Dateien benutzt werden, die "
+"mit einer festgelegten Brettstellung beginnen."
 
 #. (itstool) path: varlistentry/term
 #: docbook/index.docbook:849
@@ -1377,7 +1377,7 @@ msgid ""
 " if no moves have been played yet."
 msgstr ""
 "Aktiviert oder deaktiviert den Stellungsaufbau-Modus. Im Stellungsaufbau-"
-"Modus können Spielsteine überall auf dem Brett abgelegt werden, auch unter "
+"Modus können Spielsteine überall auf dem Brett platziert werden, auch unter "
 "Verletzung der Spielregeln. Existierende Spielsteine können durch Anklicken "
 "vom Brett entfernt werden. Die gegenwärtig gewählte Farbe legt auch die "
 "Farbe fest, die nach Beenden des Stellungsaufbaus am Zug ist. Sie kann mit "
@@ -1400,8 +1400,8 @@ msgid ""
 msgstr ""
 "Wählt die nächste Farbe zum Auswählen eines Spielsteins. Dies kann zum "
 "Beispiel benutzt werden, um Partien einzugeben, bei denen Züge einer Farbe "
-"übersprungen wurden, da die Farbe aufgrund einer Bedenkzeitüberschreitung "
-"vom Weiterspielen ausgeschlossen wurde."
+"übersprungen wurden, da die Farbe wegen Bedenkzeitüberschreitung vom "
+"Weiterspielen ausgeschlossen wurde."
 
 #. (itstool) path: sect1/title
 #: docbook/index.docbook:884
@@ -1707,7 +1707,7 @@ msgstr "<guimenuitem>Über Pentobi</guimenuitem>"
 #: docbook/index.docbook:1072
 msgid "Show an info dialog with information about this version of Pentobi."
 msgstr ""
-"Zeigt eine Dialogfenster mit Informationen über diese Version von Pentobi."
+"Zeigt ein Dialogfenster mit Informationen über diese Version von Pentobi."
 
 #. (itstool) path: chapter/title
 #: docbook/index.docbook:1082
