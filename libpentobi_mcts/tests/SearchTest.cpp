@@ -9,15 +9,15 @@
 #include "libboardgame_base/SgfUtil.h"
 #include "libboardgame_base/TreeReader.h"
 #include "libboardgame_test/Test.h"
-#include "libboardgame_base/CpuTimeSource.h"
+#include "libboardgame_base/WallTimeSource.h"
 #include "libpentobi_base/BoardUpdater.h"
 #include "libpentobi_base/PentobiTree.h"
 
 using namespace std;
 using namespace libpentobi_mcts;
-using libboardgame_base::CpuTimeSource;
 using libboardgame_base::SgfNode;
 using libboardgame_base::TreeReader;
+using libboardgame_base::WallTimeSource;
 using libboardgame_base::get_last_node;
 using libpentobi_base::BoardUpdater;
 using libpentobi_base::PentobiTree;
@@ -57,7 +57,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_no_large_pieces)
     Float max_count = 1;
     size_t min_simulations = 1;
     double max_time = 0;
-    CpuTimeSource time_source;
+    WallTimeSource time_source;
     Move mv;
     bool res = search->search(mv, *bd, Color(1), max_count, min_simulations,
                               max_time, time_source);
@@ -97,7 +97,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_callisto_useless_one_piece)
     Float max_count = 1;
     size_t min_simulations = 1;
     double max_time = 0;
-    CpuTimeSource time_source;
+    WallTimeSource time_source;
     Move mv;
     bool res = search->search(mv, *bd, Color(0), max_count, min_simulations,
                               max_time, time_source);

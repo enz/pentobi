@@ -6,8 +6,6 @@ add_library(boardgame_base STATIC
     CoordPoint.cpp
     CpuTime.h
     CpuTime.cpp
-    CpuTimeSource.h
-    CpuTimeSource.cpp
     FmtSaver.h
     Geometry.h
     GeometryUtil.h
