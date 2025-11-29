@@ -138,6 +138,8 @@ PentobiDialog {
                               Logic.getPlayerString(ratingModel.gameVariant,
                                                     display)
                             : display
+                    horizontalAlignment:
+                        column == 2 ? Text.AlignHCenter : Text.AlignLeft
                     MouseArea {
                         anchors.fill: parent
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
