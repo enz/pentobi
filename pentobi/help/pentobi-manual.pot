@@ -230,7 +230,7 @@ msgstr ""
 
 #. (itstool) path: sect1/para
 #: docbook/index.docbook:350
-msgid "The game can be played with less than four players by using a smaller board. For three players, the board is an octagon with width 20 and top edge size two. For two players, the board is an octagon with width 17 and top edge size two. The size of the center stays the same. In addition to the standard two-player variant, Pentobi also supports a game variant for two players like in Blokus, in which each player plays two colors."
+msgid "The game can be played with less than four players by using a smaller board. For three players, the board is an octagon with width 20 and top edge size two. For two players, the board is an octagon with width 16 and top edge size two. The size of the center stays the same. In addition to the standard two-player variant, Pentobi also supports a game variant for two players like in Blokus, in which each player plays two colors."
 msgstr ""
 
 #. (itstool) path: chapter/title
