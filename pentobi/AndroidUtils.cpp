@@ -225,10 +225,11 @@ bool AndroidUtils::checkExists(const QString& file)
 #ifdef Q_OS_ANDROID
     if (QUrl(file).isRelative())
         return QFileInfo::exists(file);
-    // Note: using ContentResolver::query() on persisted URIs without calling
-    // ACTION_OPEN_DOCUMENT first only works on some devices. Maybe try
-    // DocumentFile.exist(DocumentFile.fromSingleUri()) once we require a
-    // Qt version that supports androidx (see also QTBUG-73904).
+    // It would be easier to use DocumentFile.exists() or fromSingleUri() but
+    // adding a dependency on androidx.documentfile requires maintaining a
+    // custom build.gradle. Note that using ContentResolver::query() on
+    // persisted URIs without calling ACTION_OPEN_DOCUMENT first only works on
+    // some devices.
     auto contentResolver = getContentResolver();
     if (! contentResolver.isValid())
         return false;
