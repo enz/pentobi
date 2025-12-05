@@ -330,7 +330,7 @@ function init() {
     }
     if (isAndroid) {
         Application.styleHints.colorScheme = Qt.ColorScheme.Dark
-        expirePersistedUriPermissions(initialFile, gameModel.file)
+        expirePersistedUriPermissions()
     }
     if (isMultiColor()) {
         computerPlays2 = computerPlays0
