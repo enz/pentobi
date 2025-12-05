@@ -391,7 +391,7 @@ function initComputerColors() {
 }
 
 function isComputerToPlay() {
-    if (gameModel.gameVariant == "classic_3" && gameModel.toPlay === 3)
+    if (gameModel.gameVariant === "classic_3" && gameModel.toPlay === 3)
         return computerPlays(gameModel.altPlayer)
     return computerPlays(gameModel.toPlay)
 }
