@@ -26,6 +26,8 @@ public:
 
     Q_INVOKABLE static QString getDisplayName(const QString& uri);
 
+    Q_INVOKABLE void openImageSaveDialog(const QString& suggestedName);
+
     Q_INVOKABLE void openOpenDialog(const QString& suggestedUri);
 
     /** Open a native file dialog for saving a game.
@@ -61,6 +63,8 @@ public:
 #endif
 
 signals:
+    void imageSaveDialogAccepted(const QString& uri);
+
     void openDialogAccepted(const QString& uri, const QString& displayName);
 
     void saveDialogAccepted(const QString& uri, const QString& displayName);
