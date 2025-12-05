@@ -349,18 +349,6 @@ bool AndroidUtils::open(
 }
 #endif
 
-void AndroidUtils::openImageSaveDialog(
-        [[maybe_unused]] const QString& suggestedName)
-{
-#ifdef Q_OS_ANDROID
-    startDocumentActivity("ACTION_CREATE_DOCUMENT", "image/png",
-                          "", suggestedName,
-                          [this](const QString& uri,
-                          [[maybe_unused]]const QString& displayName) {
-        emit imageSaveDialogAccepted(uri);
-    });
-#endif
-}
 void AndroidUtils::openOpenDialog([[maybe_unused]] const QString& suggestedUri)
 {
 #ifdef Q_OS_ANDROID
