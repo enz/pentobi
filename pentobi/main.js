@@ -328,8 +328,10 @@ function init() {
         initComputerColorsOnNewGame = settings.initComputerColorsOnNewGame
         analyzeGameModel.loadAutoSave(gameModel)
     }
-    if (isAndroid)
+    if (isAndroid) {
+        Application.styleHints.colorScheme = Qt.ColorScheme.Dark
         expirePersistedUriPermissions(initialFile, gameModel.file)
+    }
     if (isMultiColor()) {
         computerPlays2 = computerPlays0
         computerPlays3 = computerPlays1
