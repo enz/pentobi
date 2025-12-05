@@ -270,7 +270,7 @@ function getGameLabel(setupMode, isRated, file, isModified, short) {
             var pos = Math.max(file.lastIndexOf("/"), file.lastIndexOf("\\"))
             label = file.substring(pos + 1)
         }
-        label = label.replace("\.blksgf", "")
+        label = label.replace(/.blksgf$/i, "")
     }
     return (isModified ? "*" : "") + label
 }
