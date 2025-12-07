@@ -1,8 +1,13 @@
 Pentobi Release Notes
 =====================
 
-Version 29.0-dev (v29.0)
+Version 29.1 (v29-fixes)
 ------------------------
+
+*
+
+Version 29.0 (2025-12-07)
+-------------------------
 
 * Minimum required Qt version is now 6.9
 * Minimum required CMake version is now 3.22
