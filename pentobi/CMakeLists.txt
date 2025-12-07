@@ -189,6 +189,9 @@ qt_add_qml_module(pentobi
     "${CMAKE_CURRENT_BINARY_DIR}/images.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
+
+    RESOURCES
+    android/AndroidManifest.xml
 )
 
 if(ANDROID)
