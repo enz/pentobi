@@ -1617,13 +1617,12 @@ void GameModel::updatePositionInfo()
     auto& current = m_game.get_current();
     auto& bd = m_game.get_board();
     auto move = get_move_number(tree, current);
-    auto left = get_moves_left(tree, current);
-    auto total = move + left;
+    auto total = move + get_moves_left(tree, current);
     auto variation = get_variation_string(current);
     QString positionInfo = QString::number(move);
-    if (left > 0 || move > 0)
+    if (move > 0 || total > move)
         positionInfo.append(getMoveAnnotationAtNode(current));
-    if (left > 0)
+    if (total > move)
     {
         positionInfo.append('/');
         positionInfo.append(QString::number(total));
@@ -1635,7 +1634,7 @@ void GameModel::updatePositionInfo()
         positionInfo.append(')');
     }
     auto positionInfoShort = positionInfo;
-    if (positionInfo.isEmpty())
+    if (positionInfo == QString::number(0))
     {
         positionInfo = bd.has_setup() ? tr("(Setup)") : tr("(No moves)");
         positionInfoShort = bd.has_setup() ? tr("(Setup)") : QString();
