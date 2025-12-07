@@ -286,39 +286,34 @@ void GameModel::clearFile()
 
 void GameModel::createPieceModels()
 {
-    createPieceModels(Color(0));
-    createPieceModels(Color(1));
-    if (m_nuColors > 2)
-        createPieceModels(Color(2));
-    else
-        m_pieceModels[Color(2)].clear();
-    if (m_nuColors > 3)
-        createPieceModels(Color(3));
-    else
-        m_pieceModels[Color(3)].clear();
+    auto variant = m_game.get_variant();
+    auto& pieceModelsCache = m_pieceModelsCache[variant];
+    if (pieceModelsCache[Color(0)].empty())
+    {
+        createPieceModelsCache(pieceModelsCache, Color(0));
+        createPieceModelsCache(pieceModelsCache, Color(1));
+        if (m_nuColors > 2)
+            createPieceModelsCache(pieceModelsCache, Color(2));
+        if (m_nuColors > 3)
+            createPieceModelsCache(pieceModelsCache, Color(3));
+    }
+    m_pieceModels = pieceModelsCache;
 }
 
-void GameModel::createPieceModels(Color c)
+void GameModel::createPieceModelsCache(
+    ColorMap<QVariantList>& pieceModelsCache, Color c)
 {
-    for (auto& variant : m_pieceModels[c])
-    {
-        auto pieceModel = qvariant_cast<PieceModel*>(variant);
-        if (pieceModel)
-            pieceModel->deleteLater();
-    }
     auto& bd = getBoard();
     auto nuPieces = bd.get_nu_uniq_pieces();
-    m_pieceModels[c].clear();
-    m_pieceModels[c].reserve(nuPieces);
+    pieceModelsCache[c].reserve(nuPieces);
     for (Piece::IntType i = 0; i < nuPieces; ++i)
     {
         Piece piece(i);
         auto nuInstances = bd.get_piece_info(piece).get_nu_instances();
         for (unsigned j = 0; j < nuInstances; ++j)
         {
-            auto variant =
-                    QVariant::fromValue(new PieceModel(this, bd, piece, c));
-            m_pieceModels[c].append(variant);
+            auto var = QVariant::fromValue(new PieceModel(this, bd, piece, c));
+            pieceModelsCache[c].append(var);
         }
     }
 }

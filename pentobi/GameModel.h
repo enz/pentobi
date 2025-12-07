@@ -557,6 +557,8 @@ private:
 
     ColorMap<QVariantList> m_pieceModels;
 
+    map<Variant, ColorMap<QVariantList>> m_pieceModelsCache;
+
     PieceModel* m_lastMovePieceModel = nullptr;
 
     QVariantList m_startingPoints0;
@@ -585,7 +587,8 @@ private:
 
     void createPieceModels();
 
-    void createPieceModels(Color c);
+    void createPieceModelsCache(ColorMap<QVariantList>& pieceModelsCache,
+                                Color c);
 
     static QString decode(const string& s);
 
