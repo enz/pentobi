@@ -325,21 +325,12 @@ void AndroidUtils::initTheme([[maybe_unused]]QColor colorBackground)
                                 0x04000000 /* FLAG_TRANSLUCENT_STATUS */);
         auto view = window.callObjectMethod("getDecorView",
                                             "()Landroid/view/View;");
-        bool isLight = (colorBackground.lightness() > 128);
         if (QAndroidApplication::sdkVersion() < 30)
         {
             int visibility =
                     view.callMethod<int>("getSystemUiVisibility", "()I");
-            if (isLight)
-            {
-                visibility |= 0x00002000; // SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                visibility |= 0x00000010; // SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-            }
-            else
-            {
-                visibility &= ~0x00002000;
-                visibility &= ~0x00000010;
-            }
+            visibility &= ~0x00002000;
+            visibility &= ~0x00000010;
             view.callMethod<void>("setSystemUiVisibility", "(I)V", visibility);
         }
         else // QAndroidApplication::sdkVersion() >= 30
@@ -348,16 +339,9 @@ void AndroidUtils::initTheme([[maybe_unused]]QColor colorBackground)
                     view.callObjectMethod(
                         "getWindowInsetsController",
                         "()Landroid/view/WindowInsetsController;");
-            if (isLight)
-                insetsController.callMethod<void>(
-                            "setSystemBarsAppearance", "(II)V",
-                            0x00000008 // APPEARANCE_LIGHT_STATUS_BARS
-                            | 0x00000010, // APPEARANCE_LIGHT_NAVIGATION_BARS
-                            0x00000008 | 0x00000010);
-            else
-                insetsController.callMethod<void>(
-                            "setSystemBarsAppearance", "(II)V",
-                            0, 0x00000008 | 0x00000010);
+            insetsController.callMethod<void>("setSystemBarsAppearance",
+                                              "(II)V",
+                                              0, 0x00000008 | 0x00000010);
         }
         window.callMethod<void>("setStatusBarColor", "(I)V",
                                 colorBackground.rgba());

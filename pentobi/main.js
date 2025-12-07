@@ -330,6 +330,7 @@ function init() {
     }
     if (isAndroid) {
         Application.styleHints.colorScheme = Qt.ColorScheme.Dark
+        androidUtils.initTheme(theme.colorBackground)
         expirePersistedUriPermissions()
     }
     if (isMultiColor()) {
