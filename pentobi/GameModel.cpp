@@ -306,7 +306,6 @@ void GameModel::createPieceModels(Color c)
         if (pieceModel)
             pieceModel->deleteLater();
     }
-    m_pieceModels[c].clear();
     auto& bd = getBoard();
     auto nuPieces = bd.get_nu_uniq_pieces();
     m_pieceModels[c].clear();
