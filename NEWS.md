@@ -1,21 +1,16 @@
 Pentobi Release Notes
 =====================
 
-Version 29.0-dev (main)
------------------------
+Version 29.0-dev (v29.0)
+------------------------
 
 * Minimum required Qt version is now 6.9
 * Minimum required CMake version is now 3.22
 * Android app no longer registers as handler for custom MIME type
   x-blokus-sgf, which didn't work anyway on Samsung devices
-* Minor fixes in German translation
+* Fixes in German translation
 * Fixed statusbar color on some Android devices
 * Avoid console warnings when switching game variant in some cases
-
-Version 28.2-dev (v28-fixes)
-----------------------------
-
-* 
 
 Version 28.1 (10 Nov 2025)
 --------------------------
