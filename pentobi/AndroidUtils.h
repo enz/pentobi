@@ -26,6 +26,8 @@ public:
 
     Q_INVOKABLE static QString getDisplayName(const QString& uri);
 
+    Q_INVOKABLE static void initTheme(QColor colorBackground);
+
     Q_INVOKABLE void openImageSaveDialog(const QString& suggestedName);
 
     Q_INVOKABLE void openOpenDialog(const QString& suggestedUri);

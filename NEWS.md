@@ -8,6 +8,7 @@ Version 29.0-dev (main)
 * Minimum required CMake version is now 3.22
 * Android app no longer registers as handler for custom MIME type
   x-blokus-sgf, which didn't work anyway on Samsung devices
+* Fixed statusbar color on some Android devices
 * Avoid console warnings when switching game variant in some cases
 
 Version 28.2-dev (v28-fixes)

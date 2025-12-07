@@ -48,6 +48,7 @@ ApplicationWindow {
     minimumHeight: isDesktop ? 303 : 301
     title: Logic.getWindowTitle(gameModel.file, gameModel.isModified)
     onClosing: if ( ! Logic.quit()) close.accepted = false
+    onThemeChanged: androidUtils.initTheme(theme.colorBackground)
     Component.onCompleted: Logic.init()
     Component.onDestruction: Logic.cancelRunning()
 
