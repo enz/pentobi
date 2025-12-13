@@ -18,3 +18,5 @@ Translators
 * Cherry <taikocherry@126.com> (Simplified Chinese)
 * Francisco Zamorano <pacozamo@gmail.com> (Spanish)
 * Viktor Erukhin <official159ru@mail.ru> (Russian)
+* Loc Huynh (Vietnamese)
+
