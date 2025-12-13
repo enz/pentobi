@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nb_NO">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nb_NO">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -14,7 +12,7 @@
     </message>
     <message>
         <source>Computer opponent for Blokus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -52,27 +50,6 @@
     <message>
         <source>Show variations</source>
         <translation>Vis variasjoner</translation>
-    </message>
-    <message>
-        <source>Light</source>
-        <translation>Lys</translation>
-    </message>
-    <message>
-        <source>Dark</source>
-        <translation>Mørk</translation>
-    </message>
-    <message>
-        <source>Colorblind light</source>
-        <translation>Fargeblind lys</translation>
-    </message>
-    <message>
-        <source>Colorblind dark</source>
-        <translation>Fargeblind mørk</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <extracomment>Name of theme using default system colors</extracomment>
-        <translation>System</translation>
     </message>
     <message>
         <source>Move marking:</source>
@@ -115,13 +92,13 @@
         <translation>Aldri</translation>
     </message>
     <message>
-        <source>Color theme:</source>
-        <translation>Fargepalett:</translation>
-    </message>
-    <message>
         <source>Move number</source>
         <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
         <translation>Trekknummer</translation>
+    </message>
+    <message>
+        <source>Colorblind mode</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -177,17 +154,21 @@
     <message>
         <source>Previous</source>
         <extracomment>Go to previous page of user manual</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contents</source>
         <extracomment>Go to table of contents of user manual</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Next</source>
         <extracomment>Go to next page of user manual</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -198,7 +179,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -465,7 +446,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation type="unfinished">Pentobi-hjelp</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -667,7 +648,7 @@
     </message>
     <message>
         <source>Export Image…</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -785,7 +766,7 @@
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1282,7 +1263,7 @@
     </message>
     <message>
         <source>Untitled.blksgf</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>computer opponent for the board game Blokus</source>
@@ -1297,11 +1278,6 @@
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
         <translation>Ikke bruk åpningsbøker.</translation>
-    </message>
-    <message>
-        <source>Use layout optimized for smartphones.</source>
-        <extracomment>Description for command line option --mobile</extracomment>
-        <translation>Bruk visning optimalisert for smarttelefoner.</translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
@@ -1347,6 +1323,20 @@
     <message>
         <source>Too many arguments</source>
         <translation>For mange argumenter</translation>
+    </message>
+    <message>
+        <source>Use layout optimized for desktop.</source>
+        <extracomment>Description for command line option --desktop</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>--mobile and --desktop cannot be used both</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
+        <extracomment>Description for command line option --mobile</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -54,27 +52,6 @@
         <translation>Mostrar variaciones</translation>
     </message>
     <message>
-        <source>Light</source>
-        <translation>Blanco</translation>
-    </message>
-    <message>
-        <source>Dark</source>
-        <translation>Negro</translation>
-    </message>
-    <message>
-        <source>Colorblind light</source>
-        <translation>Fondo blanco para daltónicos</translation>
-    </message>
-    <message>
-        <source>Colorblind dark</source>
-        <translation>Fondo negro para daltónicos</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <extracomment>Name of theme using default system colors</extracomment>
-        <translation>Sistema</translation>
-    </message>
-    <message>
         <source>Move marking:</source>
         <translation>Marcado de movimientos:</translation>
     </message>
@@ -115,13 +92,13 @@
         <translation>Nunca</translation>
     </message>
     <message>
-        <source>Color theme:</source>
-        <translation>Color del tema:</translation>
-    </message>
-    <message>
         <source>Move number</source>
         <extracomment>Check box in appearance dialog whether to show the move number in the status bar.</extracomment>
         <translation>Número de movimiento</translation>
+    </message>
+    <message>
+        <source>Colorblind mode</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -189,6 +166,10 @@
         <extracomment>Go to next page of user manual</extracomment>
         <translation>Siguiente</translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation>Cerrar</translation>
+    </message>
 </context>
 <context>
     <name>ExportImageDialog</name>
@@ -198,7 +179,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1282,7 +1263,7 @@
     </message>
     <message>
         <source>Untitled.blksgf</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>computer opponent for the board game Blokus</source>
@@ -1297,11 +1278,6 @@
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
         <translation>No utilizar abrir libros.</translation>
-    </message>
-    <message>
-        <source>Use layout optimized for smartphones.</source>
-        <extracomment>Description for command line option --mobile</extracomment>
-        <translation>Utilizar el diseño optimizado para móviles.</translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
@@ -1347,6 +1323,20 @@
     <message>
         <source>Too many arguments</source>
         <translation>Demasiados argumentos</translation>
+    </message>
+    <message>
+        <source>Use layout optimized for desktop.</source>
+        <extracomment>Description for command line option --desktop</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>--mobile and --desktop cannot be used both</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
+        <extracomment>Description for command line option --mobile</extracomment>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
