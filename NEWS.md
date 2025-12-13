@@ -9,7 +9,7 @@ Version 30.0-dev (main)
 Version 29.1 (v29-fixes)
 ------------------------
 
-*
+* Vietnamese translation (thanks to Loc Huynh)
 
 Version 29.0 (2025-12-07)
 -------------------------

@@ -4,6 +4,7 @@ qt_add_translation(pentobi_QM
     i18n/qml_fr.ts
     i18n/qml_nb_NO.ts
     i18n/qml_ru.ts
+    i18n/qml_vi.ts
     i18n/qml_zh_CN.ts
     OPTIONS -removeidentical -nounfinished
     )
