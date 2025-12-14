@@ -63,6 +63,10 @@ if(PENTOBI_BUILD_GUI)
     if(ANDROID AND Qt6Core_VERSION VERSION_GREATER_EQUAL "6.10.0")
         find_package(Qt6 REQUIRED COMPONENTS CorePrivate)
     endif()
-    qt_standard_project_setup(REQUIRES 6.9)
+    qt_standard_project_setup(
+        REQUIRES 6.9
+        I18N_SOURCE_LANGUAGE en
+        I18N_TRANSLATED_LANGUAGES de es nb_NO vi fr ru zh_CN
+    )
     add_subdirectory(pentobi)
 endif()

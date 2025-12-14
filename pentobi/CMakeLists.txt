@@ -1,20 +1,3 @@
-qt_add_translation(pentobi_QM
-    i18n/qml_de.ts
-    i18n/qml_es.ts
-    i18n/qml_fr.ts
-    i18n/qml_nb_NO.ts
-    i18n/qml_ru.ts
-    i18n/qml_vi.ts
-    i18n/qml_zh_CN.ts
-    OPTIONS -removeidentical -nounfinished
-    )
-add_custom_command(
-    OUTPUT translations.qrc
-    COMMAND ${CMAKE_COMMAND} -E copy
-    "${CMAKE_CURRENT_SOURCE_DIR}/i18n/translations.qrc" .
-    DEPENDS i18n/translations.qrc ${pentobi_QM}
-    )
-
 # Images and icons to be used with QtQuick Image. We use sourceSize four times
 # larger than the device-indepenent size to support high-dpi images.
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icon")
@@ -186,13 +169,18 @@ qt_add_qml_module(pentobi
     RecentFiles.h
     RecentFiles.cpp
     resources.qrc
-    "${CMAKE_CURRENT_BINARY_DIR}/translations.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/images.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
 
     RESOURCES
     android/AndroidManifest.xml
+)
+
+qt_add_translations(pentobi
+    TS_OUTPUT_DIRECTORY i18n
+    TS_FILE_BASE qml
+    LRELEASE_OPTIONS -removeidentical -nounfinished
 )
 
 if(ANDROID)
