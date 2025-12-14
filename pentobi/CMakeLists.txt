@@ -181,6 +181,7 @@ qt_add_translations(pentobi
     TS_OUTPUT_DIRECTORY i18n
     TS_FILE_BASE qml
     LRELEASE_OPTIONS -removeidentical -nounfinished
+    LUPDATE_OPTIONS -locations none
 )
 
 if(ANDROID)
