@@ -33,7 +33,7 @@ void RecentFiles::add(const QString& file, const QString& displayName)
     QVariantMap entry{ { "file"_L1, file },
                        { "displayName"_L1, displayName } };
     m_entries.prepend(QVariant::fromValue(entry));
-    checkMax(file);
+    checkMax();
     {
         QSettings settings;
         settings.setValue("recentFiles"_L1, m_entries);
@@ -41,13 +41,13 @@ void RecentFiles::add(const QString& file, const QString& displayName)
     emit entriesChanged();
 }
 
-void RecentFiles::checkMax([[maybe_unused]]const QString& currentFile)
+void RecentFiles::checkMax()
 {
     if (m_entries.length() > maxRecentFiles)
         m_entries.resize(maxRecentFiles);
 }
 
-void RecentFiles::clear([[maybe_unused]]const QString& currentFile)
+void RecentFiles::clear()
 {
     m_entries.clear();
     {

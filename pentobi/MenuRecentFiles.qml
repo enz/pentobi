@@ -42,7 +42,7 @@ PentobiMenu {
         // Call recentFiles.clear() after menu is closed because it modifies
         // the menu and otherwise the menu stays visible (Qt 5.15.1)
         onTriggered: Qt.callLater(function() {
-            recentFiles.clear(gameModel.file)
+            recentFiles.clear()
         })
     }
 }

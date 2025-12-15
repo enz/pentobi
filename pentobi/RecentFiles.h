@@ -32,7 +32,7 @@ public:
 
     Q_INVOKABLE void add(const QString& file, const QString& displayName);
 
-    Q_INVOKABLE void clear(const QString& currentFile);
+    Q_INVOKABLE void clear();
 
     const QVariantList& entries() const { return m_entries; }
 
@@ -43,7 +43,7 @@ private:
     QVariantList m_entries;
 
 
-    void checkMax(const QString& currentFile = {});
+    void checkMax();
 
     void load();
 };
