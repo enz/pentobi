@@ -30,7 +30,8 @@ void RecentFiles::add(const QString& file, const QString& displayName)
         if (entry["file"_L1] == file)
             i.remove();
     }
-    QVariantMap entry{ { "file", file }, { "displayName", displayName } };
+    QVariantMap entry{ { "file"_L1, file },
+                       { "displayName"_L1, displayName } };
     m_entries.prepend(QVariant::fromValue(entry));
     checkMax(file);
     {
