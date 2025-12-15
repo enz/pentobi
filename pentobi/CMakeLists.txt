@@ -179,7 +179,7 @@ qt_add_qml_module(pentobi
 
 qt_add_translations(pentobi
     TS_OUTPUT_DIRECTORY i18n
-    TS_FILE_BASE qml
+    NO_GENERATE_PLURALS_TS_FILE # Not needed yet
     LRELEASE_OPTIONS -removeidentical -nounfinished
     LUPDATE_OPTIONS -locations none
 )
