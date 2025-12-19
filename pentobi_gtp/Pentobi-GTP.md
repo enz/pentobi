@@ -192,7 +192,7 @@ response is undefined.
 
 Generate and play a move for a given color in the current position. If
 the color has no more moves, the response is `pass`. If resignation is
-not disabled, the response is `resign` if the players is very likely to
+not disabled, the response is `resign` if the player is very likely to
 lose. Otherwise the response is the move.
 
 `known_command` _command_
