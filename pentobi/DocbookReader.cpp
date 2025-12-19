@@ -19,12 +19,12 @@ DocbookReader::DocbookReader(QObject* parent)
 {
     m_locale = QLocale::system().name();
     m_lang = m_locale.left(m_locale.indexOf("_"_L1));
-    QString fileName = ":/help/index_%1.docbook"_L1.arg(m_locale);
+    QString fileName = ":/help/index_%1.xml"_L1.arg(m_locale);
     if (! QFile::exists(fileName))
     {
-        fileName = ":/help/index_%1.docbook"_L1.arg(m_lang);
+        fileName = ":/help/index_%1.xml"_L1.arg(m_lang);
         if (! QFile::exists(fileName))
-            fileName = ":/help/index.docbook"_L1;
+            fileName = ":/help/index.xml"_L1;
     }
     QFile file(fileName);
     if (! file.open(QIODevice::ReadOnly) || ! m_doc.setContent(&file))

@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd $(dirname "$0")
-itstool -i docbook.its docbook/index.docbook > pentobi-manual.pot
+xgettext -o pentobi-manual.pot docbook/index.xml

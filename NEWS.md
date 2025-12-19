@@ -4,7 +4,8 @@ Pentobi Release Notes
 Version 30.0-dev (main)
 -----------------------
 
-*
+* itstool is no longer a build dependency
+* Minimum required gettext version is now 0.23
 
 Version 29.1 (v29-fixes)
 ------------------------

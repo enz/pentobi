@@ -2,7 +2,7 @@ file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
 string(REGEX REPLACE "\n" ";" linguas "${linguas}")
 
 set(DOCBOOK_SRC
-    docbook/index.docbook
+    docbook/index.xml
     docbook/analysis.png
     docbook/board_callisto.png
     docbook/board_classic.png
@@ -26,23 +26,20 @@ set(DOCBOOK_SRC
     )
 
 foreach(lang ${linguas})
-    add_custom_command(OUTPUT ${lang}.mo
-        COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" -o ${lang}.mo
+    list(APPEND index_files "help/index_${lang}.xml")
+    add_custom_command(OUTPUT "help/index_${lang}.xml"
+        COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}"
+        --xml --template "${CMAKE_CURRENT_SOURCE_DIR}/docbook/index.xml"
+        -l "${lang}" -o "help/index_${lang}.xml" --replace-text
         "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
-        DEPENDS po/${lang}.po
-        )
-    list(APPEND index_files "help/index_${lang}.docbook")
-    add_custom_command(OUTPUT "help/index_${lang}.docbook"
-        COMMAND "${ITSTOOL}" -m ${lang}.mo -o "help/index_${lang}.docbook"
-        "${CMAKE_CURRENT_SOURCE_DIR}/docbook/index.docbook"
-        DEPENDS docbook/index.docbook ${lang}.mo
+        DEPENDS docbook/index.xml
         )
 endforeach()
 
-add_custom_command(OUTPUT "help/index.docbook"
+add_custom_command(OUTPUT "help/index.xml"
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     "${CMAKE_CURRENT_SOURCE_DIR}/docbook" "help"
     DEPENDS ${DOCBOOK_SRC}
     )
 
-add_custom_target(pentobi-help ALL DEPENDS "help/index.docbook" ${index_files})
+add_custom_target(pentobi-help ALL DEPENDS "help/index.xml" ${index_files})
