@@ -127,26 +127,19 @@ void DocbookReader::addTableOfContents(QString& text)
     QDomElement elem = m_doc.documentElement().firstChildElement();
     while(! elem.isNull())
     {
-        if (! elem.hasAttribute("xml:lang"_L1))
+        if (elem.tagName() == "title"_L1)
+            bookTitle = elem.text();
+        else if (elem.tagName() == "chapter"_L1)
         {
-            if (elem.tagName() == "title"_L1)
+            QDomElement childElem = elem.firstChildElement();
+            while (! childElem.isNull())
             {
-                elem = findLocalized(elem);
-                bookTitle = elem.text();
-            }
-            else if (elem.tagName() == "chapter"_L1)
-            {
-                QDomElement childElem = elem.firstChildElement();
-                while (! childElem.isNull())
+                if (childElem.tagName() == "title"_L1)
                 {
-                    if (childElem.tagName() == "title"_L1)
-                    {
-                        childElem = findLocalized(childElem);
-                        chapterTitles.append(childElem.text());
-                        break;
-                    }
-                    childElem = childElem.nextSiblingElement();
+                    chapterTitles.append(childElem.text());
+                    break;
                 }
+                childElem = childElem.nextSiblingElement();
             }
         }
         elem = elem.nextSiblingElement();
@@ -164,30 +157,6 @@ void DocbookReader::addTableOfContents(QString& text)
         text.append(chapterTitles[i]);
         text.append("</a><br/>"_L1);
     }
-}
-
-QDomElement DocbookReader::findLocalized(const QDomElement& elem) const
-{
-    QString name = elem.tagName();
-    QDomElement result = elem;
-    QDomElement e = elem;
-    while (true)
-    {
-        e = e.nextSiblingElement();
-        if (e.isNull() || e.tagName() != name)
-            break;
-        QString l = e.attribute("xml:lang"_L1);
-        if (l.isEmpty())
-            break;
-        if (l == m_locale)
-        {
-            result = e;
-            break;
-        }
-        if (l == m_lang)
-            result = e;
-    }
-    return result;
 }
 
 void DocbookReader::handleChildren(const QDomNode& node, int headerLevel,
@@ -215,8 +184,6 @@ QDomNode DocbookReader::handleNode(const QDomNode& node, int headerLevel,
         return node;
     }
     QDomElement elem = node.toElement();
-    if (elem.hasAttribute("xml:lang"_L1))
-        return node;
     QString name = elem.tagName();
     if (name == "guibutton"_L1
         || name == "guilabel"_L1
@@ -249,10 +216,9 @@ QDomNode DocbookReader::handleNode(const QDomNode& node, int headerLevel,
     if (name == "para"_L1)
     {
         text.append("<p>"_L1);
-        QDomElement localizedElem = findLocalized(elem);
-        handleChildren(localizedElem, headerLevel, text);
+        handleChildren(elem, headerLevel, text);
         text.append("</p>"_L1);
-        return localizedElem;
+        return elem;
     }
     if (name == "sect1"_L1)
     {
@@ -269,10 +235,9 @@ QDomNode DocbookReader::handleNode(const QDomNode& node, int headerLevel,
     if (name == "title"_L1)
     {
         text.append(headerLevel > 1 ? "<h2>"_L1 : "<h1>"_L1);
-        QDomElement localizedElem = findLocalized(elem);
-        handleChildren(localizedElem, headerLevel, text);
+        handleChildren(elem, headerLevel, text);
         text.append(headerLevel > 1 ? "</h2>"_L1 : "</h1>"_L1);
-        return localizedElem;
+        return elem;
     }
     if (name == "varlistentry"_L1)
     {

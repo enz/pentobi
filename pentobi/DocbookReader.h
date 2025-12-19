@@ -17,12 +17,8 @@ using namespace Qt::StringLiterals;
 //-----------------------------------------------------------------------------
 
 /** Converts help in Docbook format into Qt rich text.
-    This avoids using an external browser, which did not work with all
-    installation directories on Ubuntu 21.10 because Firefox and Chromium have
-    restricted access to local files, or using WebView, which is not supported
-    on all Linux architectures or in Qt 6.0/6.1. This class parses Docbook
-    files included in the resources and converts them into the subset of HTML
-    supported by TextEdit.RichText. */
+    This class parses Docbook files included in the resources and converts them
+    into the subset of HTML supported by TextEdit.RichText. */
 class DocbookReader
     : public QObject
 {
@@ -86,8 +82,6 @@ private:
     void addPage(const QString& id, QString& text);
 
     void addTableOfContents(QString& text);
-
-    QDomElement findLocalized(const QDomElement& elem) const;
 
     void handleChildren(const QDomNode& node, int headerLevel,
                         QString& text) const;
