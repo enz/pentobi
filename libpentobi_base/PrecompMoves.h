@@ -90,7 +90,7 @@ public:
         index of old iterators with the current get_size() to ensure that
         we don't overwrite any old content that we still need to read
         during the construction. */
-    const Move* move_lists_begin() const { return &(*m_move_lists.begin()); }
+    const Move* move_lists_begin() const { return m_move_lists.data(); }
 
 private:
     class CompressedRange
