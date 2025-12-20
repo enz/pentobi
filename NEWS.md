@@ -4,6 +4,7 @@ Pentobi Release Notes
 Version 30.0-dev (main)
 -----------------------
 
+* Fixed horizontal flick in help view on Android
 * itstool is no longer a build dependency
 * Minimum required gettext version is now 0.23
 

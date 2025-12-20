@@ -32,30 +32,37 @@ ScrollView {
     }
     rightPadding: 6
 
-    TextArea {
-        id: textArea
+    Flickable {
+        contentWidth: width
+        contentHeight: textArea.implicitHeight
+        clip: true
 
-        textFormat: TextArea.RichText
-        wrapMode: TextArea.WordWrap
-        readOnly: true
-        text: docbookReader.text
-        // Selecting text sometimes triggers Qt bugs that break clicking
-        // on links (Qt 6.9.2)
-        selectByMouse: false
-        selectByKeyboard: false
-        onLinkActivated:
-            link => {
-                if (link === "close")
+        TextArea {
+            id: textArea
+
+            width: parent.width
+            textFormat: TextArea.RichText
+            wrapMode: TextArea.WordWrap
+            readOnly: true
+            text: docbookReader.text
+            // Selecting text sometimes triggers Qt bugs that break clicking
+            // on links (Qt 6.9.2)
+            selectByMouse: false
+            selectByKeyboard: false
+            onLinkActivated:
+                link => {
+                    if (link === "close")
                     closeClicked()
-                else
+                    else
                     docbookReader.pageId = link
-            }
+                }
 
-        MouseArea {
-            anchors.fill: parent
-            cursorShape: parent.hoveredLink ? Qt.PointingHandCursor
-                                            : Qt.ArrowCursor
-            acceptedButtons: Qt.NoButton
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor
+                                                : Qt.ArrowCursor
+                acceptedButtons: Qt.NoButton
+            }
         }
     }
     DocbookReader {
