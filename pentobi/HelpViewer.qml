@@ -32,6 +32,8 @@ ScrollView {
     }
     rightPadding: 6
 
+    // Without declaring a Flickable inside the ScrollView, the TextArea can
+    // needlessly be flicked horizontally on Android (Qt 6.10)
     Flickable {
         contentWidth: width
         contentHeight: textArea.implicitHeight
