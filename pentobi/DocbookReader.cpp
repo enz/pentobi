@@ -66,7 +66,6 @@ void DocbookReader::addNavigation(QString& text)
         if (nextId >= m_pageIds.size())
             nextId = -1;
     }
-    addHeader(text);
     text.append("<p width=100% align=right>"_L1);
     if (prevId >= 0)
     {
@@ -144,7 +143,6 @@ void DocbookReader::addTableOfContents(QString& text)
         }
         elem = elem.nextSiblingElement();
     }
-    addHeader(text);
     text.append("<h1>"_L1);
     text.append(bookTitle);
     text.append("</h1>"_L1);
