@@ -63,12 +63,13 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif
     QGuiApplication app(argc, argv);
+    QLocale locale;
     QTranslator qtTranslator;
-    if (qtTranslator.load("qt_"_L1 + QLocale::system().name(),
+    if (qtTranslator.load(locale, "qt"_L1, "_"_L1,
                           QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
         QCoreApplication::installTranslator(&qtTranslator);
     QTranslator translator;
-    if (translator.load(":/i18n/pentobi_"_L1 + QLocale::system().name()))
+    if (translator.load(locale, ":/i18n/pentobi"_L1, "_"_L1, ":/i18n"_L1))
         QCoreApplication::installTranslator(&translator);
     QIcon icon(":/icon/pentobi-48.png"_L1);
     app.setWindowIcon(icon);
