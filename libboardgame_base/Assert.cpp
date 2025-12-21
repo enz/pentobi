@@ -9,8 +9,6 @@
 #include <list>
 
 #ifdef LIBBOARDGAME_DEBUG
-#include <algorithm>
-#include <functional>
 #include "Log.h"
 #endif
 
@@ -56,8 +54,8 @@ void handle_assertion(
     if (! is_during_handle_assertion)
     {
         is_during_handle_assertion = true;
-        for_each(get_all_handlers().begin(), get_all_handlers().end(),
-                 mem_fn(&AssertionHandler::run));
+        for (auto handler : get_all_handlers())
+            handler->run();
     }
     abort();
 }
