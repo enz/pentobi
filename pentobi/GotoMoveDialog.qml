@@ -13,21 +13,22 @@ PentobiDialog {
 
     footer: PentobiDialogButtonBox {
         ButtonOk {
-            enabled: textField.acceptableInput
-            onClicked: checkAccept()
-            DialogButtonBox.buttonRole: DialogButtonBox.InvalidRole
+            id: buttonOk
         }
         ButtonCancel { }
     }
-    onAboutToShow: textField.text = ""
+    onAboutToShow: {
+        textField.text = gameModel.moveNumber === 0 ?
+                    gameModel.moveNumber + gameModel.movesLeft
+                  : gameModel.moveNumber
+        if (! isAndroid)
+            textField.selectAll()
+        buttonOk.enabled = true
+    }
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
     function returnPressed() {
-        if (! hasButtonFocus())
-            checkAccept()
-    }
-    function checkAccept() {
-        if (textField.acceptableInput)
+        if (! hasButtonFocus() && textField.acceptableInput)
             accept()
     }
 
@@ -46,10 +47,6 @@ PentobiDialog {
             TextField {
                 id: textField
 
-                placeholderText:
-                    gameModel.moveNumber === 0 ?
-                        gameModel.moveNumber + gameModel.movesLeft
-                      : gameModel.moveNumber
                 selectByMouse: true
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{
@@ -58,6 +55,7 @@ PentobiDialog {
                 }
                 Layout.preferredWidth: font.pixelSize * 5
                 onVisibleChanged: focus = true
+                onAcceptableInputChanged: buttonOk.enabled = acceptableInput
             }
             Item { Layout.fillWidth: true }
         }

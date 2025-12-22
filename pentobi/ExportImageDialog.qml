@@ -13,13 +13,15 @@ PentobiDialog {
 
     footer: PentobiDialogButtonBox {
         ButtonOk {
-            enabled: textField.acceptableInput
-            onClicked: checkAccept()
-            DialogButtonBox.buttonRole: DialogButtonBox.InvalidRole
+            id: buttonOk
         }
         ButtonCancel { }
     }
-    onAboutToShow: if (! isAndroid) textField.selectAll()
+    onAboutToShow: {
+        buttonOk.enabled = textField.acceptableInput
+        if (! isAndroid)
+            textField.selectAll()
+    }
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
         var name = qsTr("Untitled.png")
@@ -33,11 +35,7 @@ PentobiDialog {
     }
 
     function returnPressed() {
-        if (! hasButtonFocus())
-            checkAccept()
-    }
-    function checkAccept() {
-        if (textField.acceptableInput)
+        if (! hasButtonFocus() && textField.acceptableInput)
             accept()
     }
 
@@ -62,6 +60,7 @@ PentobiDialog {
                 validator: IntValidator{ bottom: 0; top: 32767 }
                 selectByMouse: true
                 Layout.preferredWidth: font.pixelSize * 5
+                onAcceptableInputChanged: buttonOk.enabled = acceptableInput
             }
             Item { Layout.fillWidth: true }
         }
