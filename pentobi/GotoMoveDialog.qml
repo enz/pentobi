@@ -12,9 +12,7 @@ PentobiDialog {
     id: root
 
     footer: PentobiDialogButtonBox {
-        ButtonOk {
-            id: buttonOk
-        }
+        ButtonOk { enabled: textField.acceptableInput }
         ButtonCancel { }
     }
     onAboutToShow: {
@@ -23,7 +21,6 @@ PentobiDialog {
                   : gameModel.moveNumber
         if (! isAndroid)
             textField.selectAll()
-        buttonOk.enabled = true
     }
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
@@ -55,7 +52,6 @@ PentobiDialog {
                 }
                 Layout.preferredWidth: font.pixelSize * 5
                 onVisibleChanged: focus = true
-                onAcceptableInputChanged: buttonOk.enabled = acceptableInput
             }
             Item { Layout.fillWidth: true }
         }

@@ -12,13 +12,10 @@ PentobiDialog {
     id: root
 
     footer: PentobiDialogButtonBox {
-        ButtonOk {
-            id: buttonOk
-        }
+        ButtonOk { enabled: textField.acceptableInput }
         ButtonCancel { }
     }
     onAboutToShow: {
-        buttonOk.enabled = textField.acceptableInput
         if (! isAndroid)
             textField.selectAll()
     }
@@ -60,7 +57,6 @@ PentobiDialog {
                 validator: IntValidator{ bottom: 0; top: 32767 }
                 selectByMouse: true
                 Layout.preferredWidth: font.pixelSize * 5
-                onAcceptableInputChanged: buttonOk.enabled = acceptableInput
             }
             Item { Layout.fillWidth: true }
         }
