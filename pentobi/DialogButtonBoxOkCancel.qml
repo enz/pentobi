@@ -4,7 +4,9 @@
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
-PentobiDialogButtonBox {
+import QtQuick.Controls
+
+DialogButtonBox {
     ButtonCancel { }
     ButtonOk { }
 }

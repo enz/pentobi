@@ -11,7 +11,7 @@ import QtQuick.Controls
 PentobiDialog {
     id: root
 
-    footer: PentobiDialogButtonBox {
+    footer: DialogButtonBox {
         ButtonOk { enabled: textField.acceptableInput }
         ButtonCancel { }
     }

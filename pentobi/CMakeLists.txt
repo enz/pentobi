@@ -118,7 +118,6 @@ qt_add_qml_module(pentobi
     PentobiBusyIndicator.qml
     PentobiButton.qml
     PentobiDialog.qml
-    PentobiDialogButtonBox.qml
     PentobiMenu.qml
     PentobiToolBar.qml
     PieceBase.qml

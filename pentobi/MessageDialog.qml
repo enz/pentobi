@@ -12,7 +12,7 @@ PentobiDialog {
 
     property alias text: label.text
 
-    footer: PentobiDialogButtonBox { ButtonOk { } }
+    footer: DialogButtonBox { ButtonOk { } }
 
     Item {
         implicitWidth:
