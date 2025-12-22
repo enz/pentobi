@@ -6,6 +6,8 @@
 
 import QtQuick.Controls
 
+/** Replacement for standard button Dialog.Cancel, which does not provide
+    translations for all needed languages. */
 Button {
     text: qsTr("Cancel")
     DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
