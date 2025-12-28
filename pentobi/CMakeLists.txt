@@ -21,8 +21,6 @@ set(pentobi_images
     themes/dark/pentobi-rated-game
     themes/dark/pentobi-stop
     themes/dark/pentobi-undo
-    themes/dark/piece-manipulator-desktop
-    themes/dark/piece-manipulator-desktop-legal
     themes/dark/piece-manipulator
     themes/dark/piece-manipulator-legal
     themes/light/menu
@@ -41,8 +39,6 @@ set(pentobi_images
     themes/light/pentobi-rated-game
     themes/light/pentobi-stop
     themes/light/pentobi-undo
-    themes/light/piece-manipulator-desktop
-    themes/light/piece-manipulator-desktop-legal
     themes/light/piece-manipulator
     themes/light/piece-manipulator-legal
     )

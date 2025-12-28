@@ -17,8 +17,7 @@ Item {
     // before the next auto-repeat keyboard command
     property bool fastMove: false
 
-    // Manipulator buttons are smaller on desktop with mouse usage
-    property real buttonSize: (isDesktop ? 0.12 : 0.17) * root.width
+    property real buttonSize: 0.15 * root.width
 
     property real animationDuration:
         ! pieceModel || ! gameView.enableAnimations ?
@@ -30,8 +29,7 @@ Item {
 
     Image {
         anchors.fill: root
-        source: isDesktop ? theme.getImage("piece-manipulator-desktop")
-                          : theme.getImage("piece-manipulator")
+        source: theme.getImage("piece-manipulator")
         sourceSize { width: 800; height: 800 }
         opacity: root.pieceModel && ! root.legal ? 0.7 : 0
 
@@ -39,8 +37,7 @@ Item {
     }
     Image {
         anchors.fill: root
-        source: isDesktop ? theme.getImage("piece-manipulator-desktop-legal")
-                          : theme.getImage("piece-manipulator-legal")
+        source: theme.getImage("piece-manipulator-legal")
         sourceSize { width: 800; height: 800 }
         opacity: root.pieceModel && root.legal ? 0.55 : 0
 
