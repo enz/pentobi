@@ -1,1340 +1,1483 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-11-29 17:59+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-29 20:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. (itstool) path: book/title
-#: docbook/index.docbook:5
+#: docbook/index.xml:5
 msgid "Pentobi"
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:8
+#: docbook/index.xml:8
 msgid "Overview"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:9
-msgid "Pentobi is a computer opponent for the board game Blokus. In this game, four players place pieces similar to the pieces of the computer game Tetris on a 20×20 board. Pentobi also supports the game variants for two or three players and the game variants Duo, Trigon, Junior, Nexos, GembloQ and Callisto."
+#: docbook/index.xml:9
+msgid ""
+"Pentobi is a computer opponent for the board game Blokus. In this game, four "
+"players place pieces similar to the pieces of the computer game Tetris on a "
+"20×20 board. Pentobi also supports the game variants for two or three "
+"players and the game variants Duo, Trigon, Junior, Nexos, GembloQ and "
+"Callisto."
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:18
+#: docbook/index.xml:18
 msgid "Classic Rules"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:19
-msgid "There are four players, Blue, Yellow, Red and Green, and a board consisting of 20×20 squares. Each player has a set of 21 pieces of his color shaped like the polyominoes up to size five. A polyomino is a shape built from a number of squares connected along the edges."
+#: docbook/index.xml:19
+msgid ""
+"There are four players, Blue, Yellow, Red and Green, and a board consisting "
+"of 20×20 squares. Each player has a set of 21 pieces of his color shaped "
+"like the polyominoes up to size five. A polyomino is a shape built from a "
+"number of squares connected along the edges."
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:32
-msgid "The players alternate in placing one of their pieces on the board. The first piece of a player must cover its starting square. The starting squares are located in the corners of the board."
+#: docbook/index.xml:26
+msgid "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:44
-msgid "The following pieces must be placed on empty squares such that the new piece touches at least one piece of its own color corner-to-corner but does not touch any piece of its own color along the edges. The new piece may touch edges of pieces of the opponent colors."
+#: docbook/index.xml:32
+msgid ""
+"The players alternate in placing one of their pieces on the board. The first "
+"piece of a player must cover its starting square. The starting squares are "
+"located in the corners of the board."
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:57
-msgid "When the player of a color cannot place any more pieces, the player passes and the next color continues. When none of the players can place any more pieces, the player with the highest score wins. The score of a color is the number of squares on the board occupied by the color, plus a bonus of 15 points if the color could place all of its pieces, plus an additional bonus of 5 points if the color could place all pieces and the last piece played was the one-square piece."
+#: docbook/index.xml:38
+msgid "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:67
-#: docbook/index.docbook:157
-#: docbook/index.docbook:239
+#: docbook/index.xml:44
+msgid ""
+"The following pieces must be placed on empty squares such that the new piece "
+"touches at least one piece of its own color corner-to-corner but does not "
+"touch any piece of its own color along the edges. The new piece may touch "
+"edges of pieces of the opponent colors."
+msgstr ""
+
+#: docbook/index.xml:51
+msgid ""
+"<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:57
+msgid ""
+"When the player of a color cannot place any more pieces, the player passes "
+"and the next color continues. When none of the players can place any more "
+"pieces, the player with the highest score wins. The score of a color is the "
+"number of squares on the board occupied by the color, plus a bonus of 15 "
+"points if the color could place all of its pieces, plus an additional bonus "
+"of 5 points if the color could place all pieces and the last piece played "
+"was the one-square piece."
+msgstr ""
+
+#: docbook/index.xml:67 docbook/index.xml:157 docbook/index.xml:239
 msgid "Rules for Two Players"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:68
-msgid "The game can be played with two players. The first player plays both Blue and Red, the second player Yellow and Green. The points of both colors played by a player are added up."
+#: docbook/index.xml:68
+msgid ""
+"The game can be played with two players. The first player plays both Blue "
+"and Red, the second player Yellow and Green. The points of both colors "
+"played by a player are added up."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:75
-#: docbook/index.docbook:164
+#: docbook/index.xml:75 docbook/index.xml:164
 msgid "Rules for Three Players"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:76
-msgid "The game can also be played with three players. The players take turns playing the fourth color (Green). At the end of the game, the score of Green is ignored."
+#: docbook/index.xml:76
+msgid ""
+"The game can also be played with three players. The players take turns "
+"playing the fourth color (Green). At the end of the game, the score of Green "
+"is ignored."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:83
+#: docbook/index.xml:83
 msgid "Colorless Starting Points"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:84
-msgid "Note that the original Blokus Classic rules used colorless starting points. This means that each color may freely choose, which of the remaining unoccupied starting points to use for its first move. Pentobi currently only supports the rule variant with colored starting points because this rule variant was used at the first Blokus online servers and Blokus tournaments."
+#: docbook/index.xml:84
+msgid ""
+"Note that the original Blokus Classic rules used colorless starting points. "
+"This means that each color may freely choose, which of the remaining "
+"unoccupied starting points to use for its first move. Pentobi currently only "
+"supports the rule variant with colored starting points because this rule "
+"variant was used at the first Blokus online servers and Blokus tournaments."
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:95
+#: docbook/index.xml:95
 msgid "Duo Rules"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:96
-msgid "The game variant Duo is another game variant for two players. The game is played on a smaller board with 14×14 squares. There is only one color per player (Purple and Orange) and the starting squares are not in the corners, but on the square with the coordinates (5,10) for Purple, and on (10,5) for Orange."
+#: docbook/index.xml:96
+msgid ""
+"The game variant Duo is another game variant for two players. The game is "
+"played on a smaller board with 14×14 squares. There is only one color per "
+"player (Purple and Orange) and the starting squares are not in the corners, "
+"but on the square with the coordinates (5,10) for Purple, and on (10,5) for "
+"Orange."
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:118
+#: docbook/index.xml:104
+msgid "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:109
+msgid "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:118
 msgid "Trigon Rules"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:119
-msgid "Trigon is another game variant. The rules a similar to game variant Classic but it uses a differently shaped board and a different set of pieces. Each color uses 22 pieces that are shaped like the polyiamonds up to size six. A polyiamond is a shape built from a number of equilateral triangles connected along the edges."
+#: docbook/index.xml:119
+msgid ""
+"Trigon is another game variant. The rules a similar to game variant Classic "
+"but it uses a differently shaped board and a different set of pieces. Each "
+"color uses 22 pieces that are shaped like the polyiamonds up to size six. A "
+"polyiamond is a shape built from a number of equilateral triangles connected "
+"along the edges."
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:133
-msgid "The board also consists of triangles and is shaped like a hexagon with an edge size of nine triangles."
+#: docbook/index.xml:127
+msgid "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:144
-msgid "There are six starting points on the board, each located in the middle of the fourth row away from each edge. The starting points are not colored and the players may freely choose a starting point for the first piece of a color."
+#: docbook/index.xml:133
+msgid ""
+"The board also consists of triangles and is shaped like a hexagon with an "
+"edge size of nine triangles."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:158
-msgid "Like game variant Classic, Trigon can be played with two players by having one player play Blue and Red and the other player Yellow and Green."
+#: docbook/index.xml:138
+msgid "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:165
-msgid "Trigon can be played with three players using the same rules as for the four-player variant. The three-player variant is played on a smaller board with an edge size of eight triangles. The starting points are located in the middle of the third row away from each edge."
+#: docbook/index.xml:144
+msgid ""
+"There are six starting points on the board, each located in the middle of "
+"the fourth row away from each edge. The starting points are not colored and "
+"the players may freely choose a starting point for the first piece of a "
+"color."
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:175
+#: docbook/index.xml:150
+msgid "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:158
+msgid ""
+"Like game variant Classic, Trigon can be played with two players by having "
+"one player play Blue and Red and the other player Yellow and Green."
+msgstr ""
+
+#: docbook/index.xml:165
+msgid ""
+"Trigon can be played with three players using the same rules as for the four-"
+"player variant. The three-player variant is played on a smaller board with "
+"an edge size of eight triangles. The starting points are located in the "
+"middle of the third row away from each edge."
+msgstr ""
+
+#: docbook/index.xml:175
 msgid "Junior Rules"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:176
-msgid "Junior is a simplified game variant for two players. It is played on the same 14×14 board as game variant Duo but uses only a subset of the polyominoes up to size five and the players get two of each of those polyominoes."
+#: docbook/index.xml:176
+msgid ""
+"Junior is a simplified game variant for two players. It is played on the "
+"same 14×14 board as game variant Duo but uses only a subset of the "
+"polyominoes up to size five and the players get two of each of those "
+"polyominoes."
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:188
+#: docbook/index.xml:182
+msgid "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:188
 msgid "Bonus points are not used in Junior."
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:194
+#: docbook/index.xml:194
 msgid "Nexos Rules"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:195
-msgid "Nexos is a board game similar to Blokus. The board is a rectangular 13×13 line grid. Each color uses 24 pieces that consist of up to four connected line segments."
+#: docbook/index.xml:195
+msgid ""
+"Nexos is a board game similar to Blokus. The board is a rectangular 13×13 "
+"line grid. Each color uses 24 pieces that consist of up to four connected "
+"line segments."
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:207
-msgid "Each color has a starting intersection on the intersection of the third lines close to a corner. The first piece must touch the starting intersection."
+#: docbook/index.xml:201
+msgid "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:218
-msgid "The following pieces must be placed on empty line segments such that a segment of the new piece touches an intersection that is already touched by a segment of the same color. It does not matter if pieces of other colors touch or cover the same intersection. However, pieces may not overlap. The junctions between the segments within a piece are such that two rectangular junctions of different pieces can cover the same intersection without overlapping, but straight junctions cannot."
+#: docbook/index.xml:207
+msgid ""
+"Each color has a starting intersection on the intersection of the third "
+"lines close to a corner. The first piece must touch the starting "
+"intersection."
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:234
-msgid "The score of a color is the number of line segments on the board covered by the color, plus a bonus of 10 points if the color could place all of its pieces."
+#: docbook/index.xml:212
+msgid "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:240
-msgid "Like Blokus, Nexos can be played with two players by having one player play Blue and Red and the other player Yellow and Green."
+#: docbook/index.xml:218
+msgid ""
+"The following pieces must be placed on empty line segments such that a "
+"segment of the new piece touches an intersection that is already touched by "
+"a segment of the same color. It does not matter if pieces of other colors "
+"touch or cover the same intersection. However, pieces may not overlap. The "
+"junctions between the segments within a piece are such that two rectangular "
+"junctions of different pieces can cover the same intersection without "
+"overlapping, but straight junctions cannot."
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:248
+#: docbook/index.xml:228
+msgid "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:234
+msgid ""
+"The score of a color is the number of line segments on the board covered by "
+"the color, plus a bonus of 10 points if the color could place all of its "
+"pieces."
+msgstr ""
+
+#: docbook/index.xml:240
+msgid ""
+"Like Blokus, Nexos can be played with two players by having one player play "
+"Blue and Red and the other player Yellow and Green."
+msgstr ""
+
+#: docbook/index.xml:248
 msgid "GembloQ Rules"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:249
-msgid "GembloQ is a board game similar to Blokus. The squares of the board are rotated by 45 degrees. The board has a diagonal size of 27 squares. In addition to the full squares, the edges also contain half squares such that the edges are straight lines."
+#: docbook/index.xml:249
+msgid ""
+"GembloQ is a board game similar to Blokus. The squares of the board are "
+"rotated by 45 degrees. The board has a diagonal size of 27 squares. In "
+"addition to the full squares, the edges also contain half squares such that "
+"the edges are straight lines."
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:262
-msgid "Each player has a set of 21 pieces, which include a subset of the pieces used in Blokus, but also some pieces that contain a half square."
+#: docbook/index.xml:256
+msgid "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:273
-msgid "As in Blokus, the starting squares are in the corners, the first move must fully cover the starting square of the color and subsequent moves must touch a piece of the player color at a vertex, but not edge-to-edge. Moves are also legal, if a vertex of a half square touches an edge of a piece of the same color."
+#: docbook/index.xml:262
+msgid ""
+"Each player has a set of 21 pieces, which include a subset of the pieces "
+"used in Blokus, but also some pieces that contain a half square."
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:287
-msgid "Scoring is done like in Blokus, half squares count 0.5 points. Bonus points are not used. Tie breaking by assigning additional values to the pieces, as described in the official GembloQ rules, is currently not supported by Pentobi."
+#: docbook/index.xml:267
+msgid "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:293
-#: docbook/index.docbook:349
+#: docbook/index.xml:273
+msgid ""
+"As in Blokus, the starting squares are in the corners, the first move must "
+"fully cover the starting square of the color and subsequent moves must touch "
+"a piece of the player color at a vertex, but not edge-to-edge. Moves are "
+"also legal, if a vertex of a half square touches an edge of a piece of the "
+"same color."
+msgstr ""
+
+#: docbook/index.xml:281
+msgid ""
+"<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:287
+msgid ""
+"Scoring is done like in Blokus, half squares count 0.5 points. Bonus points "
+"are not used. Tie breaking by assigning additional values to the pieces, as "
+"described in the official GembloQ rules, is currently not supported by "
+"Pentobi."
+msgstr ""
+
+#: docbook/index.xml:293 docbook/index.xml:349
 msgid "Rules for Two and Three Players"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:294
-msgid "The game variants for two and three players use smaller boards and different starting point locations. In addition to the standard two-player variant, Pentobi also supports a game variant for two players like in Blokus, in which each player plays two colors."
+#: docbook/index.xml:294
+msgid ""
+"The game variants for two and three players use smaller boards and different "
+"starting point locations. In addition to the standard two-player variant, "
+"Pentobi also supports a game variant for two players like in Blokus, in "
+"which each player plays two colors."
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:304
+#: docbook/index.xml:304
 msgid "Callisto Rules"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:305
-msgid "Callisto is a another board game similar to Blokus. The board is derived from the classic 20×20 Blokus board by removing the corners such that an octagon with a top edge of size six remains. The pieces are a subset of the polyominoes up to size five. They include three 1×1 pieces per player that play a special role."
+#: docbook/index.xml:305
+msgid ""
+"Callisto is a another board game similar to Blokus. The board is derived "
+"from the classic 20×20 Blokus board by removing the corners such that an "
+"octagon with a top edge of size six remains. The pieces are a subset of the "
+"polyominoes up to size five. They include three 1×1 pieces per player that "
+"play a special role."
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:319
-msgid "The 1×1 pieces may be placed anywhere on the board apart from the center of the board. The center consists of an octagon with width six and top edge size two. The first two moves of a player must use a 1×1 piece, the third 1×1 piece may be played anytime later."
+#: docbook/index.xml:313
+msgid "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:332
-msgid "All larger pieces may be placed anywhere on the board but must touch an existing piece of the same color edge-to-edge."
+#: docbook/index.xml:319
+msgid ""
+"The 1×1 pieces may be placed anywhere on the board apart from the center of "
+"the board. The center consists of an octagon with width six and top edge "
+"size two. The first two moves of a player must use a 1×1 piece, the third "
+"1×1 piece may be played anytime later."
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:343
-msgid "The score of a color is the number of squares on the board occupied by the color not counting 1×1 pieces. Bonus points are not used. Unlike in Blokus, ties are broken in favor of the player who started later."
+#: docbook/index.xml:326
+msgid "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:350
-msgid "The game can be played with less than four players by using a smaller board. For three players, the board is an octagon with width 20 and top edge size two. For two players, the board is an octagon with width 16 and top edge size two. The size of the center stays the same. In addition to the standard two-player variant, Pentobi also supports a game variant for two players like in Blokus, in which each player plays two colors."
+#: docbook/index.xml:332
+msgid ""
+"All larger pieces may be placed anywhere on the board but must touch an "
+"existing piece of the same color edge-to-edge."
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:362
+#: docbook/index.xml:337
+msgid ""
+"<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:343
+msgid ""
+"The score of a color is the number of squares on the board occupied by the "
+"color not counting 1×1 pieces. Bonus points are not used. Unlike in Blokus, "
+"ties are broken in favor of the player who started later."
+msgstr ""
+
+#: docbook/index.xml:350
+msgid ""
+"The game can be played with less than four players by using a smaller board. "
+"For three players, the board is an octagon with width 20 and top edge size "
+"two. For two players, the board is an octagon with width 16 and top edge "
+"size two. The size of the center stays the same. In addition to the standard "
+"two-player variant, Pentobi also supports a game variant for two players "
+"like in Blokus, in which each player plays two colors."
+msgstr ""
+
+#: docbook/index.xml:362
 msgid "How to Use Pentobi"
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:364
+#: docbook/index.xml:364
 msgid "Board"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:365
-msgid "Pieces can be selected by clicking on one of the unplayed pieces or by using <link linkend=\"shortcuts\">shortcut keys</link>. Pieces can be played by dragging them to a place that corresponds to a legal move with the mouse or arrow keys and pressing the left mouse button or the Enter key."
+#: docbook/index.xml:365
+msgid ""
+"Pieces can be selected by clicking on one of the unplayed pieces or by using "
+"<link linkend=\"shortcuts\">shortcut keys</link>. Pieces can be played by "
+"dragging them to a place that corresponds to a legal move with the mouse or "
+"arrow keys and pressing the left mouse button or the Enter key."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:371
-msgid "Played pieces on the board can have numbers on them that indicate the move number in which the piece was played. A letter after the move number indicates that there exists a variation to this move (see below)."
+#: docbook/index.xml:371
+msgid ""
+"Played pieces on the board can have numbers on them that indicate the move "
+"number in which the piece was played. A letter after the move number "
+"indicates that there exists a variation to this move (see below)."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:376
-msgid "The score display shows the current points for each color or player. The points are the sum of on-board points and bonus points. Points are underlined if they are final because the color cannot play more pieces. A small star indicates that the points include a bonus."
+#: docbook/index.xml:376
+msgid ""
+"The score display shows the current points for each color or player. The "
+"points are the sum of on-board points and bonus points. Points are "
+"underlined if they are final because the color cannot play more pieces. A "
+"small star indicates that the points include a bonus."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:384
+#: docbook/index.xml:384
 msgid "Playing Against the Computer"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:385
-msgid "The board can be used for creating game records of games played by humans or for playing games against the computer. In games against the computer, the computer can play any (or several) of the colors."
+#: docbook/index.xml:385
+msgid ""
+"The board can be used for creating game records of games played by humans or "
+"for playing games against the computer. In games against the computer, the "
+"computer can play any (or several) of the colors."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:390
-msgid "When you start a new game, the human will play the color(s) of the first player by default and the computer all other colors. To change this, use <guimenuitem>Settings</guimenuitem> from the <guimenu>Computer</guimenu> menu or toolbar and select the colors the computer should play."
+#: docbook/index.xml:390
+msgid ""
+"When you start a new game, the human will play the color(s) of the first "
+"player by default and the computer all other colors. To change this, use "
+"<guimenuitem>Settings</guimenuitem> from the <guimenu>Computer</guimenu> "
+"menu or toolbar and select the colors the computer should play."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:396
-msgid "The exception is that the computer will play no color by default if it played no color in the previous game. This prevents the computer from automatically starting to play if the user mainly wants to use the board for entering move sequences or similar editing tasks. After loading a saved game, the computer also plays no color by default."
+#: docbook/index.xml:396
+msgid ""
+"The exception is that the computer will play no color by default if it "
+"played no color in the previous game. This prevents the computer from "
+"automatically starting to play if the user mainly wants to use the board for "
+"entering move sequences or similar editing tasks. After loading a saved "
+"game, the computer also plays no color by default."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:403
-msgid "Selecting <guimenuitem>Play</guimenuitem> from the <guimenu>Computer</guimenu> menu or the toolbar always makes the computer play a move for the current color. If the computer did not already play this color before, it will also make the computer play this color (and only this color) from now on."
+#: docbook/index.xml:403
+msgid ""
+"Selecting <guimenuitem>Play</guimenuitem> from the <guimenu>Computer</"
+"guimenu> menu or the toolbar always makes the computer play a move for the "
+"current color. If the computer did not already play this color before, it "
+"will also make the computer play this color (and only this color) from now "
+"on."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:412
+#: docbook/index.xml:412
 msgid "Move Variations and the Game Tree"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:413
-msgid "When you play a game, Pentobi will store the sequence of moves and it is always possible to go back to a previous position and play differently. If you do this, the new sequence is stored as an alternative sequence (called variation). Variations can also be used by annotators for commenting on existing games. Variations can exist at any board position and can have subvariations themselves. The game can therefore become a game tree, in which each node represents a board position. You can navigate in the game tree with the items in the <guimenu>Go</guimenu> menu and the navigation buttons."
+#: docbook/index.xml:413
+msgid ""
+"When you play a game, Pentobi will store the sequence of moves and it is "
+"always possible to go back to a previous position and play differently. If "
+"you do this, the new sequence is stored as an alternative sequence (called "
+"variation). Variations can also be used by annotators for commenting on "
+"existing games. Variations can exist at any board position and can have "
+"subvariations themselves. The game can therefore become a game tree, in "
+"which each node represents a board position. You can navigate in the game "
+"tree with the items in the <guimenu>Go</guimenu> menu and the navigation "
+"buttons."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:423
-msgid "The main variation is the sequence of moves that starts at the start position and always selects the first child node in each position (e.g. by pressing the forward button). The main variation is supposed to represent the real game played. If you want a side variation to become the main variation, select <guimenuitem>Make Main Variation</guimenuitem> from the <guimenu>Edit</guimenu> menu."
+#: docbook/index.xml:423
+msgid ""
+"The main variation is the sequence of moves that starts at the start "
+"position and always selects the first child node in each position (e.g. by "
+"pressing the forward button). The main variation is supposed to represent "
+"the real game played. If you want a side variation to become the main "
+"variation, select <guimenuitem>Make Main Variation</guimenuitem> from the "
+"<guimenu>Edit</guimenu> menu."
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:435
+#: docbook/index.xml:435
 msgid "Become a Stronger Player"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:436
-msgid "Pentobi has functionality that can help you to become a stronger Blokus player."
+#: docbook/index.xml:436
+msgid ""
+"Pentobi has functionality that can help you to become a stronger Blokus "
+"player."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:440
+#: docbook/index.xml:440
 msgid "Game Analysis"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:441
-msgid "A game can be analyzed by selecting <guimenuitem>Analyze Game</guimenuitem> from the <guimenu>Tools</guimenu> menu. This will make the computer player evaluate each position in the main variation. The result is displayed in a window with a diagram of colored dots."
+#: docbook/index.xml:441
+msgid ""
+"A game can be analyzed by selecting <guimenuitem>Analyze Game</guimenuitem> "
+"from the <guimenu>Tools</guimenu> menu. This will make the computer player "
+"evaluate each position in the main variation. The result is displayed in a "
+"window with a diagram of colored dots."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:454
-msgid "Each dot represents a game position in which the color of the dot was to play. The dots are ordered horizontally by move number. The vertical axis represents the estimated probability of winning the game for the color to play. Mouse clicks in the diagram will go to the corresponding position."
+#: docbook/index.xml:448
+msgid "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:460
-msgid "The position values are only estimates and the computer will sometimes evaluate positions incorrectly. But sudden drops in the value can help you find moves that were potentially bad. You can go back to the position before the move and try to find a better move or ask the computer what it would have played by selecting <guimenuitem>Play Single Move</guimenuitem> from the <guimenu>Computer</guimenu> menu."
+#: docbook/index.xml:454
+msgid ""
+"Each dot represents a game position in which the color of the dot was to "
+"play. The dots are ordered horizontally by move number. The vertical axis "
+"represents the estimated probability of winning the game for the color to "
+"play. Mouse clicks in the diagram will go to the corresponding position."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:470
+#: docbook/index.xml:460
+msgid ""
+"The position values are only estimates and the computer will sometimes "
+"evaluate positions incorrectly. But sudden drops in the value can help you "
+"find moves that were potentially bad. You can go back to the position before "
+"the move and try to find a better move or ask the computer what it would "
+"have played by selecting <guimenuitem>Play Single Move</guimenuitem> from "
+"the <guimenu>Computer</guimenu> menu."
+msgstr ""
+
+#: docbook/index.xml:470
 msgid "Determine Your Rating"
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:471
-msgid "You can track your progress by playing rated games against the computer. The game results are used to determine your current rating. The rating is a number that represents your playing strength."
+#: docbook/index.xml:471
+msgid ""
+"You can track your progress by playing rated games against the computer. The "
+"game results are used to determine your current rating. The rating is a "
+"number that represents your playing strength."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:476
-msgid "A rated game is started with <guimenuitem>Rated Game</guimenuitem> from the <guimenu>Game</guimenu> menu or the toolbar. If you have not played any rated games in the current game variant, you will be asked to choose a start value, which can reduce the number of games needed for determining your real rating. If you are a beginner, leave the start value at 800."
+#: docbook/index.xml:476
+msgid ""
+"A rated game is started with <guimenuitem>Rated Game</guimenuitem> from the "
+"<guimenu>Game</guimenu> menu or the toolbar. If you have not played any "
+"rated games in the current game variant, you will be asked to choose a start "
+"value, which can reduce the number of games needed for determining your real "
+"rating. If you are a beginner, leave the start value at 800."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:483
-msgid "For each rated game, the computer will choose a playing level for the computer opponent according to your current rating. The color you play will be randomly chosen in each game."
+#: docbook/index.xml:483
+msgid ""
+"For each rated game, the computer will choose a playing level for the "
+"computer opponent according to your current rating. The color you play will "
+"be randomly chosen in each game."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:488
-msgid "During a rated game, most of the functions not needed for playing are disabled: you cannot undo moves, navigate in the game, change the computer colors or change the playing level. To get an accurate rating, you should always play rated games until the end."
+#: docbook/index.xml:488
+msgid ""
+"During a rated game, most of the functions not needed for playing are "
+"disabled: you cannot undo moves, navigate in the game, change the computer "
+"colors or change the playing level. To get an accurate rating, you should "
+"always play rated games until the end."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:494
-msgid "After the game has ended, your rating will be updated depending on the game result and the computer level. For the game result, it only matters whether the game was won, lost or a tie. The exact number of score points does not matter."
+#: docbook/index.xml:494
+msgid ""
+"After the game has ended, your rating will be updated depending on the game "
+"result and the computer level. For the game result, it only matters whether "
+"the game was won, lost or a tie. The exact number of score points does not "
+"matter."
 msgstr ""
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:507
-msgid "You can always see your current rating by selecting <guimenuitem>Rating</guimenuitem> from the <guimenu>Tools</guimenu> menu. This will open a window that shows the development of your rating during the last 50 games as a graph. The last 50 games are automatically saved and can be loaded by opening a context menu in the game table below the graph."
+#: docbook/index.xml:501
+msgid "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:518
+#: docbook/index.xml:507
+msgid ""
+"You can always see your current rating by selecting <guimenuitem>Rating</"
+"guimenuitem> from the <guimenu>Tools</guimenu> menu. This will open a window "
+"that shows the development of your rating during the last 50 games as a "
+"graph. The last 50 games are automatically saved and can be loaded by "
+"opening a context menu in the game table below the graph."
+msgstr ""
+
+#: docbook/index.xml:518
 msgid "Window Menu and Toolbar"
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:520
+#: docbook/index.xml:520
 msgid "Navigation Buttons in Toolbar"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:523
+#: docbook/index.xml:523
 msgid "<guibutton>Beginning</guibutton>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:525
+#: docbook/index.xml:525
 msgid "Go to the beginning of the game."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:531
+#: docbook/index.xml:531
 msgid "<guibutton>Backward 10</guibutton>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:533
-msgid "Go ten moves backward in the current variation. The button supports autorepeat if pressed and held."
+#: docbook/index.xml:533
+msgid ""
+"Go ten moves backward in the current variation. The button supports "
+"autorepeat if pressed and held."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:540
+#: docbook/index.xml:540
 msgid "<guibutton>Backward</guibutton>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:542
-msgid "Go one move backward in the current variation. The button supports autorepeat if pressed and held."
+#: docbook/index.xml:542
+msgid ""
+"Go one move backward in the current variation. The button supports "
+"autorepeat if pressed and held."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:549
+#: docbook/index.xml:549
 msgid "<guibutton>Forward</guibutton>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:551
-msgid "Go one move forward in the current variation. If the current position has several follow-up variations (i.e. the current node in the game tree has several child nodes), the first variation will be used. The button supports autorepeat if pressed and held."
+#: docbook/index.xml:551
+msgid ""
+"Go one move forward in the current variation. If the current position has "
+"several follow-up variations (i.e. the current node in the game tree has "
+"several child nodes), the first variation will be used. The button supports "
+"autorepeat if pressed and held."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:560
+#: docbook/index.xml:560
 msgid "<guibutton>Forward 10</guibutton>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:562
-msgid "Go ten moves forward in the current variation. If a position has several follow-up variations (i.e. the current node in the game tree has several child nodes), the first variation will be used. The button supports autorepeat if pressed and held."
+#: docbook/index.xml:562
+msgid ""
+"Go ten moves forward in the current variation. If a position has several "
+"follow-up variations (i.e. the current node in the game tree has several "
+"child nodes), the first variation will be used. The button supports "
+"autorepeat if pressed and held."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:571
+#: docbook/index.xml:571
 msgid "<guibutton>End</guibutton>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:573
-msgid "Go to the end of the current variation. Like <guibutton>Forward</guibutton>, this also uses the first variation in positions with several follow-up variations."
+#: docbook/index.xml:573
+msgid ""
+"Go to the end of the current variation. Like <guibutton>Forward</guibutton>, "
+"this also uses the first variation in positions with several follow-up "
+"variations."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:581
+#: docbook/index.xml:581
 msgid "<guibutton>Next Variation</guibutton>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:583
-msgid "Go to the next variation to the last move played (i.e. the next sibling node of the current node in the game tree)."
+#: docbook/index.xml:583
+msgid ""
+"Go to the next variation to the last move played (i.e. the next sibling node "
+"of the current node in the game tree)."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:590
+#: docbook/index.xml:590
 msgid "<guibutton>Previous Variation</guibutton>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:592
-msgid "Go to the previous variation to the last move played (i.e. the previous sibling node of the current node in the game tree)."
+#: docbook/index.xml:592
+msgid ""
+"Go to the previous variation to the last move played (i.e. the previous "
+"sibling node of the current node in the game tree)."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:601
+#: docbook/index.xml:601
 msgid "<guimenu>Game</guimenu> Menu"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:604
+#: docbook/index.xml:604
 msgid "<guimenuitem>New</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:605
+#: docbook/index.xml:605
 msgid "(<keysym>Ctrl+N</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:607
+#: docbook/index.xml:607
 msgid "Start a new game."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:613
+#: docbook/index.xml:613
 msgid "<guimenuitem>Rated Game</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:614
+#: docbook/index.xml:614
 msgid "(<keysym>Ctrl+Shift+N</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:616
-msgid "Start a new <link linkend=\"rating\">rated game</link> against the computer."
+#: docbook/index.xml:616
+msgid ""
+"Start a new <link linkend=\"rating\">rated game</link> against the computer."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:622
+#: docbook/index.xml:622
 msgid "<guimenuitem>Game Variant</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:624
+#: docbook/index.xml:624
 msgid "Select a game variant and start a new game of this game variant."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:630
+#: docbook/index.xml:630
 msgid "<guimenuitem>Game Info</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:631
+#: docbook/index.xml:631
 msgid "(<keysym>Ctrl+I</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:633
-msgid "Display or edit additional information about the game like the name of the players or the date when the game was played."
+#: docbook/index.xml:633
+msgid ""
+"Display or edit additional information about the game like the name of the "
+"players or the date when the game was played."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:639
+#: docbook/index.xml:639
 msgid "<guimenuitem>Undo Move</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:641
-msgid "Undo the last move played and remove it from the game tree. Undoing a move is only possible if it is the last move in the current variation (i.e. a leaf node in the game tree; use <guimenu>Edit</guimenu>/<guimenuitem>Truncate</guimenuitem> to remove inner nodes of the game tree)."
+#: docbook/index.xml:641
+msgid ""
+"Undo the last move played and remove it from the game tree. Undoing a move "
+"is only possible if it is the last move in the current variation (i.e. a "
+"leaf node in the game tree; use <guimenu>Edit</guimenu>/"
+"<guimenuitem>Truncate</guimenuitem> to remove inner nodes of the game tree)."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:651
+#: docbook/index.xml:651
 msgid "<guimenuitem>Find Move</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:652
+#: docbook/index.xml:652
 msgid "(<keysym>Ctrl+H</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:654
-msgid "Find a legal move for the current color and display it for a few seconds on the board. Selecting this item repeatedly will show all legal moves."
+#: docbook/index.xml:654
+msgid ""
+"Find a legal move for the current color and display it for a few seconds on "
+"the board. Selecting this item repeatedly will show all legal moves."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:661
+#: docbook/index.xml:661
 msgid "<guimenuitem>Open</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:662
+#: docbook/index.xml:662
 msgid "(<keysym>Ctrl+O</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:664
-msgid "Load a saved game. The board position after loading will be the last position in the main variation unless the game starts with a setup position. If the game starts with a setup, the board position will be the first position instead. This avoids that solutions are immediately shown if the file contains a Blokus puzzle as a setup with the solution as the main variation."
+#: docbook/index.xml:664
+msgid ""
+"Load a saved game. The board position after loading will be the last "
+"position in the main variation unless the game starts with a setup position. "
+"If the game starts with a setup, the board position will be the first "
+"position instead. This avoids that solutions are immediately shown if the "
+"file contains a Blokus puzzle as a setup with the solution as the main "
+"variation."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:674
+#: docbook/index.xml:674
 msgid "<guimenu>Open Recent</guimenu>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:676
+#: docbook/index.xml:676
 msgid "Load a recently used game."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:682
+#: docbook/index.xml:682
 msgid "<guimenuitem>Save</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:683
+#: docbook/index.xml:683
 msgid "(<keysym>Ctrl+S</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:685
+#: docbook/index.xml:685
 msgid "Save the current game."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:691
+#: docbook/index.xml:691
 msgid "<guimenuitem>Save As</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:692
+#: docbook/index.xml:692
 msgid "(<keysym>Ctrl+Shift+S</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:694
+#: docbook/index.xml:694
 msgid "Save the current game under a new file name."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:700
+#: docbook/index.xml:700
 msgid "<guimenuitem>Export Image</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:702
-msgid "Save the current position as an image file. Several image file formats are supported, the file format is derived from the file name ending (e.g. \".png\" for the PNG format). For a crisp image, the image width should be an integer multiple of the number of board columns in the current game variant."
+#: docbook/index.xml:702
+msgid ""
+"Save the current position as an image file. Several image file formats are "
+"supported, the file format is derived from the file name ending (e.g. "
+"\".png\" for the PNG format). For a crisp image, the image width should be "
+"an integer multiple of the number of board columns in the current game "
+"variant."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:711
+#: docbook/index.xml:711
 msgid "<guimenuitem>Quit</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:712
+#: docbook/index.xml:712
 msgid "(<keysym>Ctrl+Q</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:714
+#: docbook/index.xml:714
 msgid "Quit Pentobi."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:722
+#: docbook/index.xml:722
 msgid "<guimenu>Go</guimenu> Menu"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:725
+#: docbook/index.xml:725
 msgid "<guimenuitem>Move Number</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:726
+#: docbook/index.xml:726
 msgid "(<keysym>Ctrl+G</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:728
+#: docbook/index.xml:728
 msgid "Go to the move with a given move number in the current variation."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:734
+#: docbook/index.xml:734
 msgid "<guimenuitem>Main Variation</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:735
+#: docbook/index.xml:735
 msgid "(<keysym>Ctrl+M</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:737
-msgid "Go back to the last position in the current variation that belonged to the main variation."
+#: docbook/index.xml:737
+msgid ""
+"Go back to the last position in the current variation that belonged to the "
+"main variation."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:744
+#: docbook/index.xml:744
 msgid "<guimenuitem>Beginning of Branch</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:745
+#: docbook/index.xml:745
 msgid "(<keysym>Ctrl+B</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:747
-msgid "Go back to the last position in the current variation that had an alternative move."
+#: docbook/index.xml:747
+msgid ""
+"Go back to the last position in the current variation that had an "
+"alternative move."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:754
+#: docbook/index.xml:754
 msgid "<guimenuitem>Next Comment</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:755
+#: docbook/index.xml:755
 msgid "(<keysym>Ctrl+E</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:757
-msgid "Go to the next position that has a comment. If the comment text field was not visible, it will become visible. Selecting this item repeatedly will show all positions with comments in the game tree."
+#: docbook/index.xml:757
+msgid ""
+"Go to the next position that has a comment. If the comment text field was "
+"not visible, it will become visible. Selecting this item repeatedly will "
+"show all positions with comments in the game tree."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:767
+#: docbook/index.xml:767
 msgid "<guimenu>Edit</guimenu> Menu"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:770
+#: docbook/index.xml:770
 msgid "<guimenuitem>Annotation</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:772
-msgid "Add a chess-style annotation symbol (e.g. ‼) to the current move. The symbols are appended to the move numbers in the status bar and, depending on the configuration of <guilabel>Move Marking</guilabel>, on the board."
+#: docbook/index.xml:772
+msgid ""
+"Add a chess-style annotation symbol (e.g. ‼) to the current move. The "
+"symbols are appended to the move numbers in the status bar and, depending on "
+"the configuration of <guilabel>Move Marking</guilabel>, on the board."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:780
+#: docbook/index.xml:780
 msgid "<guimenuitem>Make Main Variation</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:782
-msgid "Make the current variation the main variation of the game. This reorders the nodes in the game tree such that the current variation becomes the main variation."
+#: docbook/index.xml:782
+msgid ""
+"Make the current variation the main variation of the game. This reorders the "
+"nodes in the game tree such that the current variation becomes the main "
+"variation."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:790
+#: docbook/index.xml:790
 msgid "<guimenuitem>Variation Up</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:792
-msgid "Changes the order of variations such that the current position will appear earlier when iterating over the variations with <guibutton>Next Variation</guibutton> /<guibutton>Previous Variation</guibutton>."
+#: docbook/index.xml:792
+msgid ""
+"Changes the order of variations such that the current position will appear "
+"earlier when iterating over the variations with <guibutton>Next Variation</"
+"guibutton> /<guibutton>Previous Variation</guibutton>."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:801
+#: docbook/index.xml:801
 msgid "<guimenuitem>Variation Down</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:803
-msgid "Changes the order of variations such that the current position will appear later when iterating over the variations with <guibutton>Next Variation</guibutton> /<guibutton>Previous Variation</guibutton>."
+#: docbook/index.xml:803
+msgid ""
+"Changes the order of variations such that the current position will appear "
+"later when iterating over the variations with <guibutton>Next Variation</"
+"guibutton> /<guibutton>Previous Variation</guibutton>."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:812
+#: docbook/index.xml:812
 msgid "<guimenuitem>Delete Variations</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:814
-msgid "Delete all variations but the main variation. If the current position is not in the main variation, it will first be changed to a position as in <guimenu>Go</guimenu> / <guimenuitem>Main Variation</guimenuitem>."
+#: docbook/index.xml:814
+msgid ""
+"Delete all variations but the main variation. If the current position is not "
+"in the main variation, it will first be changed to a position as in "
+"<guimenu>Go</guimenu> / <guimenuitem>Main Variation</guimenuitem>."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:822
+#: docbook/index.xml:822
 msgid "<guimenuitem>Truncate</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:824
-msgid "Remove the node with the current position, including any subtree, from the game tree."
+#: docbook/index.xml:824
+msgid ""
+"Remove the node with the current position, including any subtree, from the "
+"game tree."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:831
+#: docbook/index.xml:831
 msgid "<guimenuitem>Truncate Children</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:833
-msgid "Remove all child nodes of the node with the current position from the game tree."
+#: docbook/index.xml:833
+msgid ""
+"Remove all child nodes of the node with the current position from the game "
+"tree."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:840
+#: docbook/index.xml:840
 msgid "<guimenuitem>Keep Position</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:842
-msgid "Delete all moves and keep only the current position as a setup. This can be used to create files that start with a given fixed position."
+#: docbook/index.xml:842
+msgid ""
+"Delete all moves and keep only the current position as a setup. This can be "
+"used to create files that start with a given fixed position."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:849
+#: docbook/index.xml:849
 msgid "<guimenuitem>Keep Subtree</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:851
-msgid "Like <guimenuitem>Keep Position</guimenuitem> but does not delete the moves after the current position."
+#: docbook/index.xml:851
+msgid ""
+"Like <guimenuitem>Keep Position</guimenuitem> but does not delete the moves "
+"after the current position."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:858
+#: docbook/index.xml:858
 msgid "<guimenuitem>Setup Mode</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:860
-msgid "Enter or leave setup mode. In setup mode, pieces can be placed anywhere on the board, even in violation of the game rules. Existing pieces can be removed from the board by clicking on them. The currently selected color also determines the color to play after the setup is finished. It can be changed with <guimenuitem>Next Color</guimenuitem> or by clicking on the orientation selector while no piece is selected. Setup mode can only be used if no moves have been played yet."
+#: docbook/index.xml:860
+msgid ""
+"Enter or leave setup mode. In setup mode, pieces can be placed anywhere on "
+"the board, even in violation of the game rules. Existing pieces can be "
+"removed from the board by clicking on them. The currently selected color "
+"also determines the color to play after the setup is finished. It can be "
+"changed with <guimenuitem>Next Color</guimenuitem> or by clicking on the "
+"orientation selector while no piece is selected. Setup mode can only be used "
+"if no moves have been played yet."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:872
+#: docbook/index.xml:872
 msgid "<guimenuitem>Next Color</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:874
-msgid "Choose the next color for selecting pieces. This can be used for example to enter game records, in which moves of a color were skipped because the color ran out of time."
+#: docbook/index.xml:874
+msgid ""
+"Choose the next color for selecting pieces. This can be used for example to "
+"enter game records, in which moves of a color were skipped because the color "
+"ran out of time."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:884
+#: docbook/index.xml:884
 msgid "<guimenu>View</guimenu> Menu"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:886
+#: docbook/index.xml:886
 msgid "<guimenuitem>Appearance</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:891
+#: docbook/index.xml:891
 msgid "<guilabel>Coordinates</guilabel>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:893
-msgid "Display coordinates around the board for the fields on the board. The convention for the coordinates is the same as in the Blokus SGF file format used by Pentobi."
+#: docbook/index.xml:893
+msgid ""
+"Display coordinates around the board for the fields on the board. The "
+"convention for the coordinates is the same as in the Blokus SGF file format "
+"used by Pentobi."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:901
+#: docbook/index.xml:901
 msgid "<guilabel>Show variations</guilabel>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:903
-msgid "Appends a letter to the move number on the board if the move has variations. If moves are marked with dots instead of numbers, a circle will be used instead of a dot for moves not in the main variation."
+#: docbook/index.xml:903
+msgid ""
+"Appends a letter to the move number on the board if the move has variations. "
+"If moves are marked with dots instead of numbers, a circle will be used "
+"instead of a dot for moves not in the main variation."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:911
+#: docbook/index.xml:911
 msgid "<guilabel>Move number</guilabel>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:913
-msgid "This option exists only in desktop mode and shows the move number, move annotation and variation information at the right side of the status bar."
+#: docbook/index.xml:913
+msgid ""
+"This option exists only in desktop mode and shows the move number, move "
+"annotation and variation information at the right side of the status bar."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:920
+#: docbook/index.xml:920
 msgid "<guilabel>Colorblind mode</guilabel>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:922
+#: docbook/index.xml:922
 msgid "Use piece colors more distinguishable for colorblind users."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:928
+#: docbook/index.xml:928
 msgid "<guilabel>Move marking</guilabel>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:930
-msgid "Change the way moves are marked on the board. The options are to mark the last move played with a dot or with a number, or to show the numbers of all moves, or not to show any marks."
+#: docbook/index.xml:930
+msgid ""
+"Change the way moves are marked on the board. The options are to mark the "
+"last move played with a dot or with a number, or to show the numbers of all "
+"moves, or not to show any marks."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:938
+#: docbook/index.xml:938
 msgid "<guilabel>Show comment</guilabel>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:940
-msgid "This option exists only in desktop mode and configures the visibility of the comment area when the position changes. By default, the comment area is only shown if a comment exists for the current position."
+#: docbook/index.xml:940
+msgid ""
+"This option exists only in desktop mode and configures the visibility of the "
+"comment area when the position changes. By default, the comment area is only "
+"shown if a comment exists for the current position."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:952
+#: docbook/index.xml:952
 msgid "<guimenuitem>Comment</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:953
+#: docbook/index.xml:953
 msgid "(<keysym>Ctrl+T</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:955
+#: docbook/index.xml:955
 msgid "Toggle the visibility of the comment area in the current position."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:961
+#: docbook/index.xml:961
 msgid "<guimenuitem>Fullscreen</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:962
+#: docbook/index.xml:962
 msgid "(<keysym>F11</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:964
-msgid "Make the main window full screen or leave full screen mode. To leave fullscreen mode without using the window menu, press the F11 key."
+#: docbook/index.xml:964
+msgid ""
+"Make the main window full screen or leave full screen mode. To leave "
+"fullscreen mode without using the window menu, press the F11 key."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:973
+#: docbook/index.xml:973
 msgid "<guimenu>Computer</guimenu> Menu"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:976
+#: docbook/index.xml:976
 msgid "<guimenuitem>Settings</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:977
+#: docbook/index.xml:977
 msgid "(<keysym>Ctrl+U</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:979
-msgid "Select which colors are played by the computer and the playing strength for the computer. Higher levels are stronger but can make the computer take a long time for playing moves on slow computers."
+#: docbook/index.xml:979
+msgid ""
+"Select which colors are played by the computer and the playing strength for "
+"the computer. Higher levels are stronger but can make the computer take a "
+"long time for playing moves on slow computers."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:987
+#: docbook/index.xml:987
 msgid "<guimenuitem>Play</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:988
+#: docbook/index.xml:988
 msgid "(<keysym>Ctrl+L</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:990
-msgid "Make the computer play a move for the current color. This can be used to change the color the computer plays or to resume playing after navigating in the game tree. If the computer did not already play the current color, it will play this color (and only this color) from now on."
+#: docbook/index.xml:990
+msgid ""
+"Make the computer play a move for the current color. This can be used to "
+"change the color the computer plays or to resume playing after navigating in "
+"the game tree. If the computer did not already play the current color, it "
+"will play this color (and only this color) from now on."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:999
+#: docbook/index.xml:999
 msgid "<guimenuitem>Play Move</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1000
+#: docbook/index.xml:1000
 msgid "(<keysym>Ctrl+Shift+L</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1002
-msgid "Make the computer play a single move for the current color without changing the colors played by the computer."
+#: docbook/index.xml:1002
+msgid ""
+"Make the computer play a single move for the current color without changing "
+"the colors played by the computer."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1009
+#: docbook/index.xml:1009
 msgid "<guimenuitem>Stop</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1011
-msgid "Abort the current move generation. You can make the computer continue to play by selecting <guimenuitem>Play</guimenuitem>."
+#: docbook/index.xml:1011
+msgid ""
+"Abort the current move generation. You can make the computer continue to "
+"play by selecting <guimenuitem>Play</guimenuitem>."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:1020
+#: docbook/index.xml:1020
 msgid "<guimenu>Tools</guimenu> Menu"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1023
+#: docbook/index.xml:1023
 msgid "<guimenuitem>Rating</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1025
-msgid "Show a dialog window with the <link linkend=\"rating\">rating</link> of the user in the current game variant."
+#: docbook/index.xml:1025
+msgid ""
+"Show a dialog window with the <link linkend=\"rating\">rating</link> of the "
+"user in the current game variant."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1032
+#: docbook/index.xml:1032
 msgid "<guimenuitem>Clear Rating</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1034
-msgid "Deletes the rating information and history for the current game variant."
+#: docbook/index.xml:1034
+msgid ""
+"Deletes the rating information and history for the current game variant."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1040
+#: docbook/index.xml:1040
 msgid "<guimenuitem>Analyze Game</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1042
+#: docbook/index.xml:1042
 msgid "Perform a <link linkend=\"analysis\">game analysis</link>."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1048
+#: docbook/index.xml:1048
 msgid "<guimenuitem>Clear Analysis</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1050
+#: docbook/index.xml:1050
 msgid "Deletes the analysis for the current game."
 msgstr ""
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:1058
+#: docbook/index.xml:1058
 msgid "<guimenu>Help</guimenu> Menu"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1061
+#: docbook/index.xml:1061
 msgid "<guimenuitem>Pentobi Help</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1062
+#: docbook/index.xml:1062
 msgid "(<keysym>F1</keysym>)"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1064
+#: docbook/index.xml:1064
 msgid "Show a window to browse the Pentobi user manual."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1070
+#: docbook/index.xml:1070
 msgid "<guimenuitem>About Pentobi</guimenuitem>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1072
+#: docbook/index.xml:1072
 msgid "Show an info dialog with information about this version of Pentobi."
 msgstr ""
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:1082
+#: docbook/index.xml:1082
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:1083
-msgid "In addition to the shortcut keys, which are shown in the window menu, the following shortcut keys are supported by Pentobi. Note that these shortcuts are not active when the comment text field has the focus. In this case, the focus can be switched away from the comment text with the Tab key."
+#: docbook/index.xml:1083
+msgid ""
+"In addition to the shortcut keys, which are shown in the window menu, the "
+"following shortcut keys are supported by Pentobi. Note that these shortcuts "
+"are not active when the comment text field has the focus. In this case, the "
+"focus can be switched away from the comment text with the Tab key."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1091
+#: docbook/index.xml:1091
 msgid "<keysym>Plus</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1093
+#: docbook/index.xml:1093
 msgid "Select next piece"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1099
+#: docbook/index.xml:1099
 msgid "<keysym>Minus</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1101
+#: docbook/index.xml:1101
 msgid "Select previous piece"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1107
+#: docbook/index.xml:1107
 msgid "<keysym>Escape</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1109
+#: docbook/index.xml:1109
 msgid "Clear selected piece"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1115
+#: docbook/index.xml:1115
 msgid "<keysym>Left</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1116
+#: docbook/index.xml:1116
 msgid "<keysym>Right</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1117
+#: docbook/index.xml:1117
 msgid "<keysym>Up</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1118
+#: docbook/index.xml:1118
 msgid "<keysym>Down</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1119
+#: docbook/index.xml:1119
 msgid "<keysym>Shift+Left</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1120
+#: docbook/index.xml:1120
 msgid "<keysym>Shift+Right</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1121
+#: docbook/index.xml:1121
 msgid "<keysym>Shift+Up</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1122
+#: docbook/index.xml:1122
 msgid "<keysym>Shift+Down</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1124
+#: docbook/index.xml:1124
 msgid "Move the selected piece. The Shift key makes the piece move faster."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1130
+#: docbook/index.xml:1130
 msgid "<keysym>Space</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1132
+#: docbook/index.xml:1132
 msgid "Next orientation of the selected piece"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1138
+#: docbook/index.xml:1138
 msgid "<keysym>Shift+Space</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1140
+#: docbook/index.xml:1140
 msgid "Previous orientation of the selected piece"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1146
+#: docbook/index.xml:1146
 msgid "<keysym>Enter</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1148
+#: docbook/index.xml:1148
 msgid "Play the selected piece"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1154
+#: docbook/index.xml:1154
 msgid "<keysym>1</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1155
+#: docbook/index.xml:1155
 msgid "<keysym>2</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1156
+#: docbook/index.xml:1156
 msgid "<keysym>A</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1157
+#: docbook/index.xml:1157
 msgid "<keysym>C</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1158
+#: docbook/index.xml:1158
 msgid "<keysym>E</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1159
+#: docbook/index.xml:1159
 msgid "<keysym>F</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1160
+#: docbook/index.xml:1160
 msgid "<keysym>G</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1161
+#: docbook/index.xml:1161
 msgid "<keysym>H</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1162
+#: docbook/index.xml:1162
 msgid "<keysym>I</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1163
+#: docbook/index.xml:1163
 msgid "<keysym>J</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1164
+#: docbook/index.xml:1164
 msgid "<keysym>L</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1165
+#: docbook/index.xml:1165
 msgid "<keysym>N</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1166
+#: docbook/index.xml:1166
 msgid "<keysym>O</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1167
+#: docbook/index.xml:1167
 msgid "<keysym>P</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1168
+#: docbook/index.xml:1168
 msgid "<keysym>S</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1169
+#: docbook/index.xml:1169
 msgid "<keysym>T</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1170
+#: docbook/index.xml:1170
 msgid "<keysym>U</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1171
+#: docbook/index.xml:1171
 msgid "<keysym>V</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1172
+#: docbook/index.xml:1172
 msgid "<keysym>W</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1173
+#: docbook/index.xml:1173
 msgid "<keysym>X</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1174
+#: docbook/index.xml:1174
 msgid "<keysym>Y</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1175
+#: docbook/index.xml:1175
 msgid "<keysym>Z</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1177
-msgid "Select piece according to commonly used piece names. If there are multiple pieces with the letter (e.g. I3, I4, I5), pressing the key several times cycles between them. Some letters are used only in certain game variants. For example, A is used only in Trigon for the pieces A6 and A4 (also known as \"lobster\" and \"triangle\")."
+#: docbook/index.xml:1177
+msgid ""
+"Select piece according to commonly used piece names. If there are multiple "
+"pieces with the letter (e.g. I3, I4, I5), pressing the key several times "
+"cycles between them. Some letters are used only in certain game variants. "
+"For example, A is used only in Trigon for the pieces A6 and A4 (also known "
+"as \"lobster\" and \"triangle\")."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1187
+#: docbook/index.xml:1187
 msgid "<keysym>Ctrl+Home</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1188
+#: docbook/index.xml:1188
 msgid "<keysym>Ctrl+Shift+Left</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1189
+#: docbook/index.xml:1189
 msgid "<keysym>Ctrl+Left</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1190
+#: docbook/index.xml:1190
 msgid "<keysym>Ctrl+Right</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1191
+#: docbook/index.xml:1191
 msgid "<keysym>Ctrl+Shift+Right</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1192
+#: docbook/index.xml:1192
 msgid "<keysym>Ctrl+End</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1193
+#: docbook/index.xml:1193
 msgid "<keysym>Ctrl+Up</keysym>"
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1194
+#: docbook/index.xml:1194
 msgid "<keysym>Ctrl+Down</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1196
-msgid "Navigate in the game: beginning, ten moves backward, backward, forward, ten moves forward, end, previous variation, next variation."
+#: docbook/index.xml:1196
+msgid ""
+"Navigate in the game: beginning, ten moves backward, backward, forward, ten "
+"moves forward, end, previous variation, next variation."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1203
+#: docbook/index.xml:1203
 msgid "<keysym>Ctrl+Shift+H</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1205
-msgid "Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards through the list of legal moves."
+#: docbook/index.xml:1205
+msgid ""
+"Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards "
+"through the list of legal moves."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1212
+#: docbook/index.xml:1212
 msgid "<keysym>Ctrl+T</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1214
+#: docbook/index.xml:1214
 msgid "Switch view between comment and game analysis."
 msgstr ""
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1220
+#: docbook/index.xml:1220
 msgid "<keysym>Alt+M</keysym>"
 msgstr ""
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1222
+#: docbook/index.xml:1222
 msgid "Open menu."
 msgstr ""
-
