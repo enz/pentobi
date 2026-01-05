@@ -1,11 +1,17 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
 # Loc Huynh, 2025
 # 
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2025-09-24 12:03+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-29 20:55+0100\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
 "Last-Translator: Loc Huynh, 2025\n"
 "Language-Team: Vietnamese (https://app.transifex.com/markus-enzenberger/teams/89074/vi/)\n"
@@ -15,18 +21,15 @@ msgstr ""
 "Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. (itstool) path: book/title
-#: docbook/index.docbook:5
+#: docbook/index.xml:5
 msgid "Pentobi"
 msgstr "Pentobi"
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:8
+#: docbook/index.xml:8
 msgid "Overview"
 msgstr "Tổng quan"
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:9
+#: docbook/index.xml:9
 msgid ""
 "Pentobi is a computer opponent for the board game Blokus. In this game, four"
 " players place pieces similar to the pieces of the computer game Tetris on a"
@@ -39,13 +42,11 @@ msgstr ""
 "cũng hỗ trợ các biến thể cho hai hoặc ba người chơi cùng các biến thể Duo, "
 "Trigon, Junior, Nexos, GembloQ và Callisto."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:18
+#: docbook/index.xml:18
 msgid "Classic Rules"
 msgstr "Luật Classic"
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:19
+#: docbook/index.xml:19
 msgid ""
 "There are four players, Blue, Yellow, Red and Green, and a board consisting "
 "of 20×20 squares. Each player has a set of 21 pieces of his color shaped "
@@ -56,8 +57,11 @@ msgstr ""
 " Mỗi người chơi có bộ 21 mảnh cùng màu, hình dạng là các polyomino tối đa 5 "
 "ô. Polyomino là hình được tạo từ nhiều ô vuông nối cạnh nhau."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:32
+#: docbook/index.xml:26
+msgid "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:32
 msgid ""
 "The players alternate in placing one of their pieces on the board. The first"
 " piece of a player must cover its starting square. The starting squares are "
@@ -66,8 +70,11 @@ msgstr ""
 "Các người chơi lần lượt đặt một mảnh lên bảng. Mảnh đầu tiên của mỗi người "
 "chơi phải che ô khởi đầu của mình. Các ô khởi đầu nằm ở bốn góc bảng."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:44
+#: docbook/index.xml:38
+msgid "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:44
 msgid ""
 "The following pieces must be placed on empty squares such that the new piece"
 " touches at least one piece of its own color corner-to-corner but does not "
@@ -78,8 +85,11 @@ msgstr ""
 "màu nhưng không được chạm cạnh với mảnh cùng màu. Mảnh mới được phép chạm "
 "cạnh với mảnh màu đối thủ."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:57
+#: docbook/index.xml:51
+msgid "<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:57
 msgid ""
 "When the player of a color cannot place any more pieces, the player passes "
 "and the next color continues. When none of the players can place any more "
@@ -94,14 +104,11 @@ msgstr ""
 " màu = số ô chiếm được + 15 điểm nếu đặt hết 21 mảnh + thêm 5 điểm nếu đặt "
 "hết và mảnh cuối cùng là mảnh 1 ô."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:67 docbook/index.docbook:157
-#: docbook/index.docbook:239
+#: docbook/index.xml:67 docbook/index.xml:157 docbook/index.xml:239
 msgid "Rules for Two Players"
 msgstr "Luật cho hai người chơi"
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:68
+#: docbook/index.xml:68
 msgid ""
 "The game can be played with two players. The first player plays both Blue "
 "and Red, the second player Yellow and Green. The points of both colors "
@@ -111,13 +118,11 @@ msgstr ""
 " người thứ hai chơi Vàng và Xanh lá. Điểm của hai màu do một người chơi được"
 " cộng lại."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:75 docbook/index.docbook:164
+#: docbook/index.xml:75 docbook/index.xml:164
 msgid "Rules for Three Players"
 msgstr "Luật cho ba người chơi"
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:76
+#: docbook/index.xml:76
 msgid ""
 "The game can also be played with three players. The players take turns "
 "playing the fourth color (Green). At the end of the game, the score of Green"
@@ -126,13 +131,11 @@ msgstr ""
 "Trò chơi cũng có thể chơi với ba người. Các người chơi lần lượt chơi màu thứ"
 " tư (Xanh lá). Khi kết thúc, điểm của Xanh lá bị bỏ qua."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:83
+#: docbook/index.xml:83
 msgid "Colorless Starting Points"
 msgstr "Điểm khởi đầu không màu"
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:84
+#: docbook/index.xml:84
 msgid ""
 "Note that the original Blokus Classic rules used colorless starting points. "
 "This means that each color may freely choose, which of the remaining "
@@ -145,13 +148,11 @@ msgstr ""
 "trợ biến thể có điểm khởi đầu cố định theo màu vì đây là luật được dùng ở "
 "các server trực tuyến và giải đấu Blokus đầu tiên."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:95
+#: docbook/index.xml:95
 msgid "Duo Rules"
 msgstr "Luật Duo"
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:96
+#: docbook/index.xml:96
 msgid ""
 "The game variant Duo is another game variant for two players. The game is "
 "played on a smaller board with 14×14 squares. There is only one color per "
@@ -163,13 +164,19 @@ msgstr ""
 "duy nhất (Tím và Cam), ô khởi đầu không ở góc mà ở tọa độ (5,10) cho Tím và "
 "(10,5) cho Cam."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:118
+#: docbook/index.xml:104
+msgid "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:109
+msgid "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:118
 msgid "Trigon Rules"
 msgstr "Luật Trigon"
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:119
+#: docbook/index.xml:119
 msgid ""
 "Trigon is another game variant. The rules a similar to game variant Classic "
 "but it uses a differently shaped board and a different set of pieces. Each "
@@ -180,15 +187,21 @@ msgstr ""
 "Trigon là biến thể khác, luật gần giống Classic nhưng bảng hình lục giác và "
 "dùng mảnh polyiamond (tam giác đều) tối đa 6 tam giác, mỗi màu có 22 mảnh."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:133
+#: docbook/index.xml:127
+msgid "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:133
 msgid ""
 "The board also consists of triangles and is shaped like a hexagon with an "
 "edge size of nine triangles."
 msgstr "Bảng gồm các tam giác đều, hình lục giác với cạnh dài 9 tam giác."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:144
+#: docbook/index.xml:138
+msgid "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:144
 msgid ""
 "There are six starting points on the board, each located in the middle of "
 "the fourth row away from each edge. The starting points are not colored and "
@@ -198,8 +211,11 @@ msgstr ""
 "Có sáu điểm khởi đầu không màu, nằm giữa hàng thứ tư tính từ mỗi cạnh. Người"
 " chơi tự chọn điểm khởi đầu cho mảnh đầu tiên của mỗi màu."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:158
+#: docbook/index.xml:150
+msgid "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:158
 msgid ""
 "Like game variant Classic, Trigon can be played with two players by having "
 "one player play Blue and Red and the other player Yellow and Green."
@@ -207,8 +223,7 @@ msgstr ""
 "Tương tự Classic, Trigon có thể chơi hai người bằng cách một người chơi Xanh"
 " dương + Đỏ, người còn lại chơi Vàng + Xanh lá."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:165
+#: docbook/index.xml:165
 msgid ""
 "Trigon can be played with three players using the same rules as for the "
 "four-player variant. The three-player variant is played on a smaller board "
@@ -218,13 +233,11 @@ msgstr ""
 "Trigon chơi ba người dùng luật giống bốn người nhưng bảng nhỏ hơn (cạnh 8 "
 "tam giác), điểm khởi đầu nằm giữa hàng thứ ba tính từ mỗi cạnh."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:175
+#: docbook/index.xml:175
 msgid "Junior Rules"
 msgstr "Luật Junior"
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:176
+#: docbook/index.xml:176
 msgid ""
 "Junior is a simplified game variant for two players. It is played on the "
 "same 14×14 board as game variant Duo but uses only a subset of the "
@@ -235,18 +248,19 @@ msgstr ""
 "nhưng chỉ dùng một phần polyomino ≤5 ô và mỗi người có hai bản sao của mỗi "
 "mảnh."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:188
+#: docbook/index.xml:182
+msgid "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:188
 msgid "Bonus points are not used in Junior."
 msgstr "Junior không dùng điểm thưởng."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:194
+#: docbook/index.xml:194
 msgid "Nexos Rules"
 msgstr "Luật Nexos"
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:195
+#: docbook/index.xml:195
 msgid ""
 "Nexos is a board game similar to Blokus. The board is a rectangular 13×13 "
 "line grid. Each color uses 24 pieces that consist of up to four connected "
@@ -255,8 +269,11 @@ msgstr ""
 "Nexos là trò chơi tương tự Blokus. Bảng là lưới đường 13×13. Mỗi màu có 24 "
 "mảnh gồm tối đa 4 đoạn đường nối nhau."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:207
+#: docbook/index.xml:201
+msgid "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:207
 msgid ""
 "Each color has a starting intersection on the intersection of the third "
 "lines close to a corner. The first piece must touch the starting "
@@ -265,8 +282,11 @@ msgstr ""
 "Mỗi màu có giao điểm khởi đầu nằm tại giao của đường thứ ba gần góc. Mảnh "
 "đầu tiên phải chạm giao điểm khởi đầu đó."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:218
+#: docbook/index.xml:212
+msgid "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:218
 msgid ""
 "The following pieces must be placed on empty line segments such that a "
 "segment of the new piece touches an intersection that is already touched by "
@@ -282,8 +302,11 @@ msgstr ""
 "góc của hai mảnh khác nhau có thể cùng chiếm một giao điểm mà không chồng, "
 "nhưng mối nối thẳng thì không."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:234
+#: docbook/index.xml:228
+msgid "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:234
 msgid ""
 "The score of a color is the number of line segments on the board covered by "
 "the color, plus a bonus of 10 points if the color could place all of its "
@@ -291,8 +314,7 @@ msgid ""
 msgstr ""
 "Điểm của một màu = số đoạn đường bị chiếm + 10 điểm nếu đặt hết 24 mảnh."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:240
+#: docbook/index.xml:240
 msgid ""
 "Like Blokus, Nexos can be played with two players by having one player play "
 "Blue and Red and the other player Yellow and Green."
@@ -300,13 +322,11 @@ msgstr ""
 "Tương tự Blokus, Nexos có thể chơi hai người bằng cách một người chơi Xanh "
 "dương + Đỏ, người kia chơi Vàng + Xanh lá."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:248
+#: docbook/index.xml:248
 msgid "GembloQ Rules"
 msgstr "Luật GembloQ"
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:249
+#: docbook/index.xml:249
 msgid ""
 "GembloQ is a board game similar to Blokus. The squares of the board are "
 "rotated by 45 degrees. The board has a diagonal size of 27 squares. In "
@@ -316,8 +336,11 @@ msgstr ""
 "GembloQ tương tự Blokus nhưng ô vuông xoay 45°. Bảng có đường chéo 27 ô, các"
 " cạnh chứa nửa ô để tạo biên thẳng."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:262
+#: docbook/index.xml:256
+msgid "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:262
 msgid ""
 "Each player has a set of 21 pieces, which include a subset of the pieces "
 "used in Blokus, but also some pieces that contain a half square."
@@ -325,8 +348,11 @@ msgstr ""
 "Mỗi người chơi có 21 mảnh, gồm một phần mảnh Blokus và một số mảnh chứa nửa "
 "ô."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:273
+#: docbook/index.xml:267
+msgid "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:273
 msgid ""
 "As in Blokus, the starting squares are in the corners, the first move must "
 "fully cover the starting square of the color and subsequent moves must touch"
@@ -338,8 +364,11 @@ msgstr ""
 "chạm đỉnh (không chạm cạnh) với mảnh cùng màu. Nước đi cũng hợp lệ nếu đỉnh "
 "của nửa ô chạm cạnh mảnh cùng màu."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:287
+#: docbook/index.xml:281
+msgid "<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:287
 msgid ""
 "Scoring is done like in Blokus, half squares count 0.5 points. Bonus points "
 "are not used. Tie breaking by assigning additional values to the pieces, as "
@@ -350,13 +379,11 @@ msgstr ""
 " hiện không hỗ trợ cách phá hòa theo giá trị mảnh của luật GembloQ chính "
 "thức."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:293 docbook/index.docbook:349
+#: docbook/index.xml:293 docbook/index.xml:349
 msgid "Rules for Two and Three Players"
 msgstr "Luật cho hai và ba người chơi"
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:294
+#: docbook/index.xml:294
 msgid ""
 "The game variants for two and three players use smaller boards and different"
 " starting point locations. In addition to the standard two-player variant, "
@@ -367,13 +394,11 @@ msgstr ""
 "Ngoài biến thể hai người tiêu chuẩn, Pentobi còn hỗ trợ kiểu hai người giống"
 " Blokus (mỗi người chơi hai màu)."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:304
+#: docbook/index.xml:304
 msgid "Callisto Rules"
 msgstr "Luật Callisto"
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:305
+#: docbook/index.xml:305
 msgid ""
 "Callisto is a another board game similar to Blokus. The board is derived "
 "from the classic 20×20 Blokus board by removing the corners such that an "
@@ -385,8 +410,11 @@ msgstr ""
 "cắt góc để còn bát giác với cạnh trên dài 6 ô. Mảnh là tập con của polyomino"
 " ≤5 ô, mỗi người có thêm ba mảnh 1×1 có vai trò đặc biệt."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:319
+#: docbook/index.xml:313
+msgid "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:319
 msgid ""
 "The 1×1 pieces may be placed anywhere on the board apart from the center of "
 "the board. The center consists of an octagon with width six and top edge "
@@ -397,8 +425,11 @@ msgstr ""
 "dài 2). Hai nước đầu của mỗi màu phải dùng mảnh 1×1, mảnh 1×1 thứ ba có thể "
 "dùng bất kỳ lúc nào."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:332
+#: docbook/index.xml:326
+msgid "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:332
 msgid ""
 "All larger pieces may be placed anywhere on the board but must touch an "
 "existing piece of the same color edge-to-edge."
@@ -406,8 +437,11 @@ msgstr ""
 "Các mảnh lớn hơn được đặt bất kỳ đâu nhưng phải chạm cạnh với mảnh cùng màu "
 "đã có."
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:343
+#: docbook/index.xml:337
+msgid "<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:343
 msgid ""
 "The score of a color is the number of squares on the board occupied by the "
 "color not counting 1×1 pieces. Bonus points are not used. Unlike in Blokus, "
@@ -416,8 +450,7 @@ msgstr ""
 "Điểm của một màu = số ô chiếm được (không tính mảnh 1×1). Không dùng điểm "
 "thưởng. Phá hòa ưu tiên người đi sau."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:350
+#: docbook/index.xml:350
 msgid ""
 "The game can be played with less than four players by using a smaller board."
 " For three players, the board is an octagon with width 20 and top edge size "
@@ -431,18 +464,15 @@ msgstr ""
 "kích thước. Ngoài biến thể hai người tiêu chuẩn, Pentobi còn hỗ trợ kiểu hai"
 " người giống Blokus (mỗi người chơi hai màu)."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:362
+#: docbook/index.xml:362
 msgid "How to Use Pentobi"
 msgstr "Cách sử dụng Pentobi"
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:364
+#: docbook/index.xml:364
 msgid "Board"
 msgstr "Bảng chơi"
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:365
+#: docbook/index.xml:365
 msgid ""
 "Pieces can be selected by clicking on one of the unplayed pieces or by using"
 " <link linkend=\"shortcuts\">shortcut keys</link>. Pieces can be played by "
@@ -453,8 +483,7 @@ msgstr ""
 "linkend=\"shortcuts\">phím tắt</link>. Đặt mảnh bằng cách kéo thả hoặc dùng "
 "phím mũi tên đến vị trí hợp lệ rồi nhấn chuột trái hoặc Enter."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:371
+#: docbook/index.xml:371
 msgid ""
 "Played pieces on the board can have numbers on them that indicate the move "
 "number in which the piece was played. A letter after the move number "
@@ -463,8 +492,7 @@ msgstr ""
 "Các mảnh đã đặt trên bảng có thể hiển thị số thứ tự nước đi. Chữ cái sau số "
 "nước đi cho biết tồn tại một biến thể tại nước đó (xem bên dưới)."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:376
+#: docbook/index.xml:376
 msgid ""
 "The score display shows the current points for each color or player. The "
 "points are the sum of on-board points and bonus points. Points are "
@@ -475,13 +503,11 @@ msgstr ""
 " thưởng). Điểm được gạch chân khi đã cuối cùng (màu đó không còn nước đi). "
 "Dấu sao nhỏ biểu thị có điểm thưởng."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:384
+#: docbook/index.xml:384
 msgid "Playing Against the Computer"
 msgstr "Chơi với máy"
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:385
+#: docbook/index.xml:385
 msgid ""
 "The board can be used for creating game records of games played by humans or"
 " for playing games against the computer. In games against the computer, the "
@@ -490,8 +516,7 @@ msgstr ""
 "Bảng có thể dùng để ghi lại ván người đấu người hoặc chơi với máy. Khi chơi "
 "với máy, máy có thể đảm nhận bất kỳ màu nào (hoặc nhiều màu)."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:390
+#: docbook/index.xml:390
 msgid ""
 "When you start a new game, the human will play the color(s) of the first "
 "player by default and the computer all other colors. To change this, use "
@@ -503,8 +528,7 @@ msgstr ""
 "<guimenuitem>Settings</guimenuitem> hoặc thanh công cụ để chọn màu máy sẽ "
 "chơi."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:396
+#: docbook/index.xml:396
 msgid ""
 "The exception is that the computer will play no color by default if it "
 "played no color in the previous game. This prevents the computer from "
@@ -517,8 +541,7 @@ msgstr ""
 " hoặc chỉnh sửa. Sau khi nạp ván đã lưu, máy cũng mặc định không chơi màu "
 "nào."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:403
+#: docbook/index.xml:403
 msgid ""
 "Selecting <guimenuitem>Play</guimenuitem> from the "
 "<guimenu>Computer</guimenu> menu or the toolbar always makes the computer "
@@ -530,13 +553,11 @@ msgstr ""
 "hoặc thanh công cụ sẽ khiến máy đi một nước cho màu hiện tại. Nếu trước đó "
 "máy chưa chơi màu này thì từ giờ máy sẽ chỉ chơi màu này."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:412
+#: docbook/index.xml:412
 msgid "Move Variations and the Game Tree"
 msgstr "Biến thể nước đi và cây ván cờ"
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:413
+#: docbook/index.xml:413
 msgid ""
 "When you play a game, Pentobi will store the sequence of moves and it is "
 "always possible to go back to a previous position and play differently. If "
@@ -555,8 +576,7 @@ msgstr ""
 "một thế cờ. Bạn có thể di chuyển trong cây ván cờ bằng các mục trong menu "
 "<guimenu>Go</guimenu> và các nút điều hướng."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:423
+#: docbook/index.xml:423
 msgid ""
 "The main variation is the sequence of moves that starts at the start "
 "position and always selects the first child node in each position (e.g. by "
@@ -571,25 +591,21 @@ msgstr ""
 " <guimenuitem>Đặt làm biến thể chính</guimenuitem> trong menu "
 "<guimenu>Edit</guimenu>."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:435
+#: docbook/index.xml:435
 msgid "Become a Stronger Player"
 msgstr "Trở thành người chơi mạnh hơn"
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:436
+#: docbook/index.xml:436
 msgid ""
 "Pentobi has functionality that can help you to become a stronger Blokus "
 "player."
 msgstr "Pentobi có các tính năng giúp bạn nâng cao trình độ chơi Blokus."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:440
+#: docbook/index.xml:440
 msgid "Game Analysis"
 msgstr "Phân tích ván cờ"
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:441
+#: docbook/index.xml:441
 msgid ""
 "A game can be analyzed by selecting <guimenuitem>Analyze Game</guimenuitem> "
 "from the <guimenu>Tools</guimenu> menu. This will make the computer player "
@@ -600,8 +616,11 @@ msgstr ""
 "trong menu <guimenu>Tools</guimenu>. Máy sẽ đánh giá từng vị trí trong biến "
 "thể chính. Kết quả hiển thị trong cửa sổ dạng biểu đồ chấm màu."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:454
+#: docbook/index.xml:448
+msgid "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:454
 msgid ""
 "Each dot represents a game position in which the color of the dot was to "
 "play. The dots are ordered horizontally by move number. The vertical axis "
@@ -612,8 +631,7 @@ msgstr ""
 "chấm sắp xếp ngang theo số nước đi. Trục dọc thể hiện xác suất thắng ước "
 "tính của màu đang đi. Nhấp chuột vào biểu đồ sẽ chuyển tới vị trí tương ứng."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:460
+#: docbook/index.xml:460
 msgid ""
 "The position values are only estimates and the computer will sometimes "
 "evaluate positions incorrectly. But sudden drops in the value can help you "
@@ -628,13 +646,11 @@ msgstr ""
 "nước</guimenuitem> trong menu <guimenu>Computer</guimenu> để xem máy sẽ đi "
 "gì."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:470
+#: docbook/index.xml:470
 msgid "Determine Your Rating"
 msgstr "Xác định elo của bạn"
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:471
+#: docbook/index.xml:471
 msgid ""
 "You can track your progress by playing rated games against the computer. The"
 " game results are used to determine your current rating. The rating is a "
@@ -644,8 +660,7 @@ msgstr ""
 " ván sẽ được dùng để tính elo hiện tại của bạn – con số thể hiện trình độ "
 "chơi."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:476
+#: docbook/index.xml:476
 msgid ""
 "A rated game is started with <guimenuitem>Rated Game</guimenuitem> from the "
 "<guimenu>Game</guimenu> menu or the toolbar. If you have not played any "
@@ -658,8 +673,7 @@ msgstr ""
 "nào ở biến thể hiện tại, chương trình sẽ yêu cầu chọn giá trị elo khởi đầu "
 "(giúp xác định elo thật nhanh hơn). Nếu bạn mới chơi, để nguyên giá trị 800."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:483
+#: docbook/index.xml:483
 msgid ""
 "For each rated game, the computer will choose a playing level for the "
 "computer opponent according to your current rating. The color you play will "
@@ -668,8 +682,7 @@ msgstr ""
 "Mỗi ván tính elo, máy sẽ tự chọn cấp độ đối thủ phù hợp với elo hiện tại của"
 " bạn. Màu bạn chơi sẽ được chọn ngẫu nhiên mỗi ván."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:488
+#: docbook/index.xml:488
 msgid ""
 "During a rated game, most of the functions not needed for playing are "
 "disabled: you cannot undo moves, navigate in the game, change the computer "
@@ -680,8 +693,7 @@ msgstr ""
 "hoàn tác nước đi, duyệt ván, đổi màu máy hoặc đổi cấp độ. Để elo chính xác, "
 "luôn chơi hết ván tính elo."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:494
+#: docbook/index.xml:494
 msgid ""
 "After the game has ended, your rating will be updated depending on the game "
 "result and the computer level. For the game result, it only matters whether "
@@ -691,8 +703,11 @@ msgstr ""
 "Sau khi ván kết thúc, elo của bạn sẽ được cập nhật dựa trên kết quả và cấp "
 "độ máy. Kết quả chỉ xét thắng–thua–hòa, không xét chênh lệch điểm."
 
-#. (itstool) path: sect1/para
-#: docbook/index.docbook:507
+#: docbook/index.xml:501
+msgid "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
+msgstr ""
+
+#: docbook/index.xml:507
 msgid ""
 "You can always see your current rating by selecting "
 "<guimenuitem>Rating</guimenuitem> from the <guimenu>Tools</guimenu> menu. "
@@ -705,57 +720,47 @@ msgstr ""
 "sẽ hiển thị đồ thị thay đổi elo trong 50 ván gần nhất. 50 ván này được tự "
 "động lưu và có thể mở lại bằng menu ngữ cảnh trong bảng ván dưới đồ thị."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:518
+#: docbook/index.xml:518
 msgid "Window Menu and Toolbar"
 msgstr "Menu và thanh công cụ"
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:520
+#: docbook/index.xml:520
 msgid "Navigation Buttons in Toolbar"
 msgstr "Các nút điều hướng trên thanh công cụ"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:523
+#: docbook/index.xml:523
 msgid "<guibutton>Beginning</guibutton>"
 msgstr "<guibutton>Đầu ván</guibutton>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:525
+#: docbook/index.xml:525
 msgid "Go to the beginning of the game."
 msgstr "Về đầu ván cờ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:531
+#: docbook/index.xml:531
 msgid "<guibutton>Backward 10</guibutton>"
 msgstr "<guibutton>Lùi 10 nước</guibutton>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:533
+#: docbook/index.xml:533
 msgid ""
 "Go ten moves backward in the current variation. The button supports "
 "autorepeat if pressed and held."
 msgstr "Lùi 10 nước trong biến thể hiện tại. Nút hỗ trợ tự động lặp khi giữ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:540
+#: docbook/index.xml:540
 msgid "<guibutton>Backward</guibutton>"
 msgstr "<guibutton>Lùi</guibutton>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:542
+#: docbook/index.xml:542
 msgid ""
 "Go one move backward in the current variation. The button supports "
 "autorepeat if pressed and held."
 msgstr "Lùi 1 nước trong biến thể hiện tại. Nút hỗ trợ tự động lặp khi giữ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:549
+#: docbook/index.xml:549
 msgid "<guibutton>Forward</guibutton>"
 msgstr "<guibutton>Tiến</guibutton>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:551
+#: docbook/index.xml:551
 msgid ""
 "Go one move forward in the current variation. If the current position has "
 "several follow-up variations (i.e. the current node in the game tree has "
@@ -765,13 +770,11 @@ msgstr ""
 "Tiến 1 nước trong biến thể hiện tại. Nếu vị trí có nhiều biến thể tiếp theo,"
 " sẽ dùng biến thể đầu tiên. Nút hỗ trợ tự động lặp khi giữ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:560
+#: docbook/index.xml:560
 msgid "<guibutton>Forward 10</guibutton>"
 msgstr "<guibutton>Tiến 10 nước</guibutton>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:562
+#: docbook/index.xml:562
 msgid ""
 "Go ten moves forward in the current variation. If a position has several "
 "follow-up variations (i.e. the current node in the game tree has several "
@@ -781,13 +784,11 @@ msgstr ""
 "Tiến 10 nước trong biến thể hiện tại. Nếu vị trí có nhiều biến thể tiếp "
 "theo, sẽ dùng biến thể đầu tiên. Nút hỗ trợ tự động lặp khi giữ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:571
+#: docbook/index.xml:571
 msgid "<guibutton>End</guibutton>"
 msgstr "<guibutton>Cuối ván</guibutton>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:573
+#: docbook/index.xml:573
 msgid ""
 "Go to the end of the current variation. Like <guibutton>Forward</guibutton>,"
 " this also uses the first variation in positions with several follow-up "
@@ -796,13 +797,11 @@ msgstr ""
 "Đến cuối biến thể hiện tại. Cũng dùng biến thể đầu tiên ở các vị trí có "
 "nhiều nhánh."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:581
+#: docbook/index.xml:581
 msgid "<guibutton>Next Variation</guibutton>"
 msgstr "<guibutton>Biến thể tiếp theo</guibutton>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:583
+#: docbook/index.xml:583
 msgid ""
 "Go to the next variation to the last move played (i.e. the next sibling node"
 " of the current node in the game tree)."
@@ -810,13 +809,11 @@ msgstr ""
 "Đến biến thể tiếp theo của nước đi cuối cùng (nút anh em tiếp theo trong cây"
 " ván cờ)."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:590
+#: docbook/index.xml:590
 msgid "<guibutton>Previous Variation</guibutton>"
 msgstr "<guibutton>Biến thể trước</guibutton>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:592
+#: docbook/index.xml:592
 msgid ""
 "Go to the previous variation to the last move played (i.e. the previous "
 "sibling node of the current node in the game tree)."
@@ -824,64 +821,52 @@ msgstr ""
 "Đến biến thể trước của nước đi cuối cùng (nút anh em trước trong cây ván "
 "cờ)."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:601
+#: docbook/index.xml:601
 msgid "<guimenu>Game</guimenu> Menu"
 msgstr "Menu <guimenu>Ván cờ</guimenu>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:604
+#: docbook/index.xml:604
 msgid "<guimenuitem>New</guimenuitem>"
 msgstr "<guimenuitem>Ván mới</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:605
+#: docbook/index.xml:605
 msgid "(<keysym>Ctrl+N</keysym>)"
 msgstr "(<keysym>Ctrl+N</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:607
+#: docbook/index.xml:607
 msgid "Start a new game."
 msgstr "Bắt đầu ván mới."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:613
+#: docbook/index.xml:613
 msgid "<guimenuitem>Rated Game</guimenuitem>"
 msgstr "<guimenuitem>Ván tính elo</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:614
+#: docbook/index.xml:614
 msgid "(<keysym>Ctrl+Shift+N</keysym>)"
 msgstr "(<keysym>Ctrl+Shift+N</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:616
+#: docbook/index.xml:616
 msgid ""
 "Start a new <link linkend=\"rating\">rated game</link> against the computer."
 msgstr "Bắt đầu một <link linkend=\"rating\">ván tính elo</link> với máy."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:622
+#: docbook/index.xml:622
 msgid "<guimenuitem>Game Variant</guimenuitem>"
 msgstr "<guimenuitem>Biến thể trò chơi</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:624
+#: docbook/index.xml:624
 msgid "Select a game variant and start a new game of this game variant."
 msgstr "Chọn một biến thể trò chơi và bắt đầu ván mới với biến thể đó."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:630
+#: docbook/index.xml:630
 msgid "<guimenuitem>Game Info</guimenuitem>"
 msgstr "<guimenuitem>Thông tin ván cờ</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:631
+#: docbook/index.xml:631
 msgid "(<keysym>Ctrl+I</keysym>)"
 msgstr "(<keysym>Ctrl+I</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:633
+#: docbook/index.xml:633
 msgid ""
 "Display or edit additional information about the game like the name of the "
 "players or the date when the game was played."
@@ -889,13 +874,11 @@ msgstr ""
 "Hiển thị hoặc chỉnh sửa thông tin bổ sung về ván cờ như tên người chơi hoặc "
 "ngày diễn ra."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:639
+#: docbook/index.xml:639
 msgid "<guimenuitem>Undo Move</guimenuitem>"
 msgstr "<guimenuitem>Hoàn tác nước đi</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:641
+#: docbook/index.xml:641
 msgid ""
 "Undo the last move played and remove it from the game tree. Undoing a move "
 "is only possible if it is the last move in the current variation (i.e. a "
@@ -907,18 +890,15 @@ msgstr ""
 "cuối cùng trong biến thể hiện tại (nút lá); dùng <guimenu>Edit</guimenu> → "
 "<guimenuitem>Cắt ngắn</guimenuitem> để xóa các nút giữa."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:651
+#: docbook/index.xml:651
 msgid "<guimenuitem>Find Move</guimenuitem>"
 msgstr "<guimenuitem>Tìm nước đi hợp lệ</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:652
+#: docbook/index.xml:652
 msgid "(<keysym>Ctrl+H</keysym>)"
 msgstr "(<keysym>Ctrl+H</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:654
+#: docbook/index.xml:654
 msgid ""
 "Find a legal move for the current color and display it for a few seconds on "
 "the board. Selecting this item repeatedly will show all legal moves."
@@ -926,18 +906,15 @@ msgstr ""
 "Tìm một nước đi hợp lệ cho màu hiện tại và hiển thị vài giây trên bảng. Chọn"
 " lặp lại sẽ hiển thị tuần tự tất cả nước hợp lệ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:661
+#: docbook/index.xml:661
 msgid "<guimenuitem>Open</guimenuitem>"
 msgstr "<guimenuitem>Mở…</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:662
+#: docbook/index.xml:662
 msgid "(<keysym>Ctrl+O</keysym>)"
 msgstr "(<keysym>Ctrl+O</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:664
+#: docbook/index.xml:664
 msgid ""
 "Load a saved game. The board position after loading will be the last "
 "position in the main variation unless the game starts with a setup position."
@@ -950,53 +927,43 @@ msgstr ""
 "chính, trừ khi ván bắt đầu bằng thế cờ cài sẵn – lúc đó sẽ hiển thị vị trí "
 "đầu tiên để tránh lộ đáp án."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:674
+#: docbook/index.xml:674
 msgid "<guimenu>Open Recent</guimenu>"
 msgstr "<guimenu>Mở gần đây</guimenu>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:676
+#: docbook/index.xml:676
 msgid "Load a recently used game."
 msgstr "Mở một ván đã chơi gần đây."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:682
+#: docbook/index.xml:682
 msgid "<guimenuitem>Save</guimenuitem>"
 msgstr "<guimenuitem>Lưu</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:683
+#: docbook/index.xml:683
 msgid "(<keysym>Ctrl+S</keysym>)"
 msgstr "(<keysym>Ctrl+S</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:685
+#: docbook/index.xml:685
 msgid "Save the current game."
 msgstr "Lưu ván hiện tại."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:691
+#: docbook/index.xml:691
 msgid "<guimenuitem>Save As</guimenuitem>"
 msgstr "<guimenuitem>Lưu thành…</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:692
+#: docbook/index.xml:692
 msgid "(<keysym>Ctrl+Shift+S</keysym>)"
 msgstr "(<keysym>Ctrl+Shift+S</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:694
+#: docbook/index.xml:694
 msgid "Save the current game under a new file name."
 msgstr "Lưu ván hiện tại với tên tệp mới."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:700
+#: docbook/index.xml:700
 msgid "<guimenuitem>Export Image</guimenuitem>"
 msgstr "<guimenuitem>Xuất ảnh</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:702
+#: docbook/index.xml:702
 msgid ""
 "Save the current position as an image file. Several image file formats are "
 "supported, the file format is derived from the file name ending (e.g. "
@@ -1008,71 +975,58 @@ msgstr ""
 "được suy ra từ phần mở rộng tên tệp (ví dụ “.png”). Để ảnh sắc nét, chiều "
 "rộng ảnh nên là bội số của số cột bảng trong biến thể hiện tại."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:711
+#: docbook/index.xml:711
 msgid "<guimenuitem>Quit</guimenuitem>"
 msgstr "<guimenuitem>Thoát</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:712
+#: docbook/index.xml:712
 msgid "(<keysym>Ctrl+Q</keysym>)"
 msgstr "(<keysym>Ctrl+Q</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:714
+#: docbook/index.xml:714
 msgid "Quit Pentobi."
 msgstr "Thoát Pentobi."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:722
+#: docbook/index.xml:722
 msgid "<guimenu>Go</guimenu> Menu"
 msgstr "Menu <guimenu>Di chuyển</guimenu>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:725
+#: docbook/index.xml:725
 msgid "<guimenuitem>Move Number</guimenuitem>"
 msgstr "<guimenuitem>Số nước đi</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:726
+#: docbook/index.xml:726
 msgid "(<keysym>Ctrl+G</keysym>)"
 msgstr "(<keysym>Ctrl+G</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:728
+#: docbook/index.xml:728
 msgid "Go to the move with a given move number in the current variation."
 msgstr "Đến nước đi có số thứ tự chỉ định trong biến thể hiện tại."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:734
+#: docbook/index.xml:734
 msgid "<guimenuitem>Main Variation</guimenuitem>"
 msgstr "<guimenuitem>Biến thể chính</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:735
+#: docbook/index.xml:735
 msgid "(<keysym>Ctrl+M</keysym>)"
 msgstr "(<keysym>Ctrl+M</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:737
+#: docbook/index.xml:737
 msgid ""
 "Go back to the last position in the current variation that belonged to the "
 "main variation."
 msgstr ""
 "Quay lại vị trí cuối cùng trong biến thể hiện tại thuộc về biến thể chính."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:744
+#: docbook/index.xml:744
 msgid "<guimenuitem>Beginning of Branch</guimenuitem>"
 msgstr "<guimenuitem>Đầu nhánh</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:745
+#: docbook/index.xml:745
 msgid "(<keysym>Ctrl+B</keysym>)"
 msgstr "(<keysym>Ctrl+B</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:747
+#: docbook/index.xml:747
 msgid ""
 "Go back to the last position in the current variation that had an "
 "alternative move."
@@ -1080,18 +1034,15 @@ msgstr ""
 "Quay lại vị trí cuối cùng trong biến thể hiện tại có nước đi thay thế (đầu "
 "nhánh)."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:754
+#: docbook/index.xml:754
 msgid "<guimenuitem>Next Comment</guimenuitem>"
 msgstr "<guimenuitem>Bình luận tiếp theo</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:755
+#: docbook/index.xml:755
 msgid "(<keysym>Ctrl+E</keysym>)"
 msgstr "(<keysym>Ctrl+E</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:757
+#: docbook/index.xml:757
 msgid ""
 "Go to the next position that has a comment. If the comment text field was "
 "not visible, it will become visible. Selecting this item repeatedly will "
@@ -1101,18 +1052,15 @@ msgstr ""
 "ra. Chọn lặp lại sẽ duyệt lần lượt tất cả vị trí có bình luận trong cây ván "
 "cờ."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:767
+#: docbook/index.xml:767
 msgid "<guimenu>Edit</guimenu> Menu"
 msgstr "Menu <guimenu>Chỉnh sửa</guimenu>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:770
+#: docbook/index.xml:770
 msgid "<guimenuitem>Annotation</guimenuitem>"
 msgstr "<guimenuitem>Ghi chú nước đi</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:772
+#: docbook/index.xml:772
 msgid ""
 "Add a chess-style annotation symbol (e.g. ‼) to the current move. The "
 "symbols are appended to the move numbers in the status bar and, depending on"
@@ -1122,13 +1070,11 @@ msgstr ""
 " hiện sau số nước đi trên thanh trạng thái và (tùy cấu hình <guilabel>Đánh "
 "dấu nước đi</guilabel>) trên bảng cờ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:780
+#: docbook/index.xml:780
 msgid "<guimenuitem>Make Main Variation</guimenuitem>"
 msgstr "<guimenuitem>Đặt làm biến thể chính</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:782
+#: docbook/index.xml:782
 msgid ""
 "Make the current variation the main variation of the game. This reorders the"
 " nodes in the game tree such that the current variation becomes the main "
@@ -1137,13 +1083,11 @@ msgstr ""
 "Đặt biến thể hiện tại thành biến thể chính. Thao tác này sắp xếp lại các nút"
 " trong cây ván cờ để biến thể hiện tại trở thành biến thể chính."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:790
+#: docbook/index.xml:790
 msgid "<guimenuitem>Variation Up</guimenuitem>"
 msgstr "<guimenuitem>Biến thể lên</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:792
+#: docbook/index.xml:792
 msgid ""
 "Changes the order of variations such that the current position will appear "
 "earlier when iterating over the variations with <guibutton>Next "
@@ -1153,13 +1097,11 @@ msgstr ""
 "theo</guibutton> / <guibutton>Biến thể trước</guibutton> thì vị trí hiện tại"
 " xuất hiện sớm hơn."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:801
+#: docbook/index.xml:801
 msgid "<guimenuitem>Variation Down</guimenuitem>"
 msgstr "<guimenuitem>Biến thể xuống</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:803
+#: docbook/index.xml:803
 msgid ""
 "Changes the order of variations such that the current position will appear "
 "later when iterating over the variations with <guibutton>Next "
@@ -1169,13 +1111,11 @@ msgstr ""
 "theo</guibutton> / <guibutton>Biến thể trước</guibutton> thì vị trí hiện tại"
 " xuất hiện muộn hơn."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:812
+#: docbook/index.xml:812
 msgid "<guimenuitem>Delete Variations</guimenuitem>"
 msgstr "<guimenuitem>Xóa các biến thể</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:814
+#: docbook/index.xml:814
 msgid ""
 "Delete all variations but the main variation. If the current position is not"
 " in the main variation, it will first be changed to a position as in "
@@ -1184,37 +1124,31 @@ msgstr ""
 "Xóa tất cả biến thể trừ biến thể chính. Nếu vị trí hiện tại không thuộc biến"
 " thể chính, chương trình sẽ tự chuyển về biến thể chính trước khi xóa."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:822
+#: docbook/index.xml:822
 msgid "<guimenuitem>Truncate</guimenuitem>"
 msgstr "<guimenuitem>Cắt ngắn</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:824
+#: docbook/index.xml:824
 msgid ""
 "Remove the node with the current position, including any subtree, from the "
 "game tree."
 msgstr "Xóa nút vị trí hiện tại cùng toàn bộ cây con khỏi cây ván cờ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:831
+#: docbook/index.xml:831
 msgid "<guimenuitem>Truncate Children</guimenuitem>"
 msgstr "<guimenuitem>Xóa các nhánh con</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:833
+#: docbook/index.xml:833
 msgid ""
 "Remove all child nodes of the node with the current position from the game "
 "tree."
 msgstr "Xóa tất cả nút con của vị trí hiện tại khỏi cây ván cờ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:840
+#: docbook/index.xml:840
 msgid "<guimenuitem>Keep Position</guimenuitem>"
 msgstr "<guimenuitem>Giữ lại vị trí</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:842
+#: docbook/index.xml:842
 msgid ""
 "Delete all moves and keep only the current position as a setup. This can be "
 "used to create files that start with a given fixed position."
@@ -1222,13 +1156,11 @@ msgstr ""
 "Xóa toàn bộ nước đi, chỉ giữ lại vị trí hiện tại làm thế cờ khởi đầu. Dùng "
 "để tạo tệp bắt đầu bằng một thế cờ cố định."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:849
+#: docbook/index.xml:849
 msgid "<guimenuitem>Keep Subtree</guimenuitem>"
 msgstr "<guimenuitem>Giữ lại cây con</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:851
+#: docbook/index.xml:851
 msgid ""
 "Like <guimenuitem>Keep Position</guimenuitem> but does not delete the moves "
 "after the current position."
@@ -1236,13 +1168,11 @@ msgstr ""
 "Giống <guimenuitem>Giữ lại vị trí</guimenuitem> nhưng giữ nguyên các nước đi"
 " sau vị trí hiện tại."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:858
+#: docbook/index.xml:858
 msgid "<guimenuitem>Setup Mode</guimenuitem>"
 msgstr "<guimenuitem>Chế độ cài đặt thế cờ</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:860
+#: docbook/index.xml:860
 msgid ""
 "Enter or leave setup mode. In setup mode, pieces can be placed anywhere on "
 "the board, even in violation of the game rules. Existing pieces can be "
@@ -1258,13 +1188,11 @@ msgstr ""
 "<guimenuitem>Màu tiếp theo</guimenuitem> hoặc nhấp vào bộ chọn hướng khi "
 "không chọn mảnh. Chỉ dùng được khi chưa có nước đi nào."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:872
+#: docbook/index.xml:872
 msgid "<guimenuitem>Next Color</guimenuitem>"
 msgstr "<guimenuitem>Màu tiếp theo</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:874
+#: docbook/index.xml:874
 msgid ""
 "Choose the next color for selecting pieces. This can be used for example to "
 "enter game records, in which moves of a color were skipped because the color"
@@ -1273,23 +1201,19 @@ msgstr ""
 "Chọn màu tiếp theo để đặt mảnh. Dùng khi nhập biên bản ván cờ mà có màu bị "
 "bỏ lượt (ví dụ hết giờ)."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:884
+#: docbook/index.xml:884
 msgid "<guimenu>View</guimenu> Menu"
 msgstr "Menu <guimenu>Xem</guimenu>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:886
+#: docbook/index.xml:886
 msgid "<guimenuitem>Appearance</guimenuitem>"
 msgstr "<guimenuitem>Giao diện</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:891
+#: docbook/index.xml:891
 msgid "<guilabel>Coordinates</guilabel>"
 msgstr "<guilabel>Hiển thị tọa độ</guilabel>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:893
+#: docbook/index.xml:893
 msgid ""
 "Display coordinates around the board for the fields on the board. The "
 "convention for the coordinates is the same as in the Blokus SGF file format "
@@ -1298,13 +1222,11 @@ msgstr ""
 "Hiển thị tọa độ quanh bảng cờ. Quy ước tọa độ giống định dạng tệp SGF Blokus"
 " mà Pentobi dùng."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:901
+#: docbook/index.xml:901
 msgid "<guilabel>Show variations</guilabel>"
 msgstr "<guilabel>Hiển thị biến thể</guilabel>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:903
+#: docbook/index.xml:903
 msgid ""
 "Appends a letter to the move number on the board if the move has variations."
 " If moves are marked with dots instead of numbers, a circle will be used "
@@ -1313,13 +1235,11 @@ msgstr ""
 "Thêm chữ cái sau số nước đi trên bảng nếu nước đó có biến thể. Nếu dùng chấm"
 " thay số, nước không thuộc biến thể chính sẽ dùng vòng tròn thay vì chấm."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:911
+#: docbook/index.xml:911
 msgid "<guilabel>Move number</guilabel>"
 msgstr "<guilabel>Số nước đi</guilabel>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:913
+#: docbook/index.xml:913
 msgid ""
 "This option exists only in desktop mode and shows the move number, move "
 "annotation and variation information at the right side of the status bar."
@@ -1327,23 +1247,19 @@ msgstr ""
 "Chỉ có trên chế độ desktop, hiển thị số nước đi, ghi chú và thông tin biến "
 "thể ở bên phải thanh trạng thái."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:920
+#: docbook/index.xml:920
 msgid "<guilabel>Colorblind mode</guilabel>"
 msgstr "<guilabel>Chế độ mù màu</guilabel>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:922
+#: docbook/index.xml:922
 msgid "Use piece colors more distinguishable for colorblind users."
 msgstr "Dùng màu mảnh dễ phân biệt hơn cho người mù màu."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:928
+#: docbook/index.xml:928
 msgid "<guilabel>Move marking</guilabel>"
 msgstr "<guilabel>Đánh dấu nước đi</guilabel>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:930
+#: docbook/index.xml:930
 msgid ""
 "Change the way moves are marked on the board. The options are to mark the "
 "last move played with a dot or with a number, or to show the numbers of all "
@@ -1352,13 +1268,11 @@ msgstr ""
 "Thay đổi cách đánh dấu nước đi trên bảng. Có thể: chỉ đánh dấu nước cuối "
 "bằng chấm hoặc số, hiển thị số tất cả nước đi, hoặc không đánh dấu."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:938
+#: docbook/index.xml:938
 msgid "<guilabel>Show comment</guilabel>"
 msgstr "<guilabel>Hiển thị bình luận</guilabel>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:940
+#: docbook/index.xml:940
 msgid ""
 "This option exists only in desktop mode and configures the visibility of the"
 " comment area when the position changes. By default, the comment area is "
@@ -1367,33 +1281,27 @@ msgstr ""
 "Chỉ có trên chế độ desktop, cấu hình việc hiện vùng bình luận khi đổi vị "
 "trí. Mặc định chỉ hiện khi vị trí có bình luận."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:952
+#: docbook/index.xml:952
 msgid "<guimenuitem>Comment</guimenuitem>"
 msgstr "<guimenuitem>Bình luận</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:953
+#: docbook/index.xml:953
 msgid "(<keysym>Ctrl+T</keysym>)"
 msgstr "(<keysym>Ctrl+T</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:955
+#: docbook/index.xml:955
 msgid "Toggle the visibility of the comment area in the current position."
 msgstr "Bật/tắt hiển thị vùng bình luận cho vị trí hiện tại."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:961
+#: docbook/index.xml:961
 msgid "<guimenuitem>Fullscreen</guimenuitem>"
 msgstr "<guimenuitem>Toàn màn hình</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:962
+#: docbook/index.xml:962
 msgid "(<keysym>F11</keysym>)"
 msgstr "(<keysym>F11</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:964
+#: docbook/index.xml:964
 msgid ""
 "Make the main window full screen or leave full screen mode. To leave "
 "fullscreen mode without using the window menu, press the F11 key."
@@ -1401,23 +1309,19 @@ msgstr ""
 "Chuyển cửa sổ chính sang toàn màn hình hoặc thoát. Để thoát toàn màn hình mà"
 " không dùng menu, nhấn phím F11."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:973
+#: docbook/index.xml:973
 msgid "<guimenu>Computer</guimenu> Menu"
 msgstr "Menu <guimenu>Máy</guimenu>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:976
+#: docbook/index.xml:976
 msgid "<guimenuitem>Settings</guimenuitem>"
 msgstr "<guimenuitem>Cấu hình</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:977
+#: docbook/index.xml:977
 msgid "(<keysym>Ctrl+U</keysym>)"
 msgstr "(<keysym>Ctrl+U</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:979
+#: docbook/index.xml:979
 msgid ""
 "Select which colors are played by the computer and the playing strength for "
 "the computer. Higher levels are stronger but can make the computer take a "
@@ -1426,18 +1330,15 @@ msgstr ""
 "Chọn màu máy sẽ chơi và độ mạnh của máy. Cấp độ cao hơn mạnh hơn nhưng có "
 "thể lâu đi trên máy tính chậm."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:987
+#: docbook/index.xml:987
 msgid "<guimenuitem>Play</guimenuitem>"
 msgstr "<guimenuitem>Đi</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:988
+#: docbook/index.xml:988
 msgid "(<keysym>Ctrl+L</keysym>)"
 msgstr "(<keysym>Ctrl+L</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:990
+#: docbook/index.xml:990
 msgid ""
 "Make the computer play a move for the current color. This can be used to "
 "change the color the computer plays or to resume playing after navigating in"
@@ -1448,18 +1349,15 @@ msgstr ""
 "chơi sau khi duyệt cây ván cờ. Nếu máy chưa chơi màu này thì từ giờ chỉ chơi"
 " màu này."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:999
+#: docbook/index.xml:999
 msgid "<guimenuitem>Play Move</guimenuitem>"
 msgstr "<guimenuitem>Đi một nước</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1000
+#: docbook/index.xml:1000
 msgid "(<keysym>Ctrl+Shift+L</keysym>)"
 msgstr "(<keysym>Ctrl+Shift+L</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1002
+#: docbook/index.xml:1002
 msgid ""
 "Make the computer play a single move for the current color without changing "
 "the colors played by the computer."
@@ -1467,13 +1365,11 @@ msgstr ""
 "Để máy đi một nước duy nhất cho màu hiện tại mà không thay đổi các màu máy "
 "đang chơi."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1009
+#: docbook/index.xml:1009
 msgid "<guimenuitem>Stop</guimenuitem>"
 msgstr "<guimenuitem>Dừng</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1011
+#: docbook/index.xml:1011
 msgid ""
 "Abort the current move generation. You can make the computer continue to "
 "play by selecting <guimenuitem>Play</guimenuitem>."
@@ -1481,18 +1377,15 @@ msgstr ""
 "Dừng việc tính nước đi hiện tại. Có thể cho máy tiếp tục bằng cách chọn "
 "<guimenuitem>Đi</guimenuitem>."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:1020
+#: docbook/index.xml:1020
 msgid "<guimenu>Tools</guimenu> Menu"
 msgstr "Menu <guimenu>Công cụ</guimenu>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1023
+#: docbook/index.xml:1023
 msgid "<guimenuitem>Rating</guimenuitem>"
 msgstr "<guimenuitem>Elo</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1025
+#: docbook/index.xml:1025
 msgid ""
 "Show a dialog window with the <link linkend=\"rating\">rating</link> of the "
 "user in the current game variant."
@@ -1500,74 +1393,60 @@ msgstr ""
 "Hiển thị cửa sổ chứa <link linkend=\"rating\">elo</link> của bạn trong biến "
 "thể hiện tại."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1032
+#: docbook/index.xml:1032
 msgid "<guimenuitem>Clear Rating</guimenuitem>"
 msgstr "<guimenuitem>Xóa elo</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1034
+#: docbook/index.xml:1034
 msgid ""
 "Deletes the rating information and history for the current game variant."
 msgstr "Xóa toàn bộ thông tin và lịch sử elo của biến thể trò chơi hiện tại."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1040
+#: docbook/index.xml:1040
 msgid "<guimenuitem>Analyze Game</guimenuitem>"
 msgstr "<guimenuitem>Phân tích ván cờ</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1042
+#: docbook/index.xml:1042
 msgid "Perform a <link linkend=\"analysis\">game analysis</link>."
 msgstr "Thực hiện <link linkend=\"analysis\">phân tích ván cờ</link>."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1048
+#: docbook/index.xml:1048
 msgid "<guimenuitem>Clear Analysis</guimenuitem>"
 msgstr "<guimenuitem>Xóa phân tích</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1050
+#: docbook/index.xml:1050
 msgid "Deletes the analysis for the current game."
 msgstr "Xóa kết quả phân tích của ván hiện tại."
 
-#. (itstool) path: sect1/title
-#: docbook/index.docbook:1058
+#: docbook/index.xml:1058
 msgid "<guimenu>Help</guimenu> Menu"
 msgstr "Menu <guimenu>Trợ giúp</guimenu>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1061
+#: docbook/index.xml:1061
 msgid "<guimenuitem>Pentobi Help</guimenuitem>"
 msgstr "<guimenuitem>Trợ giúp Pentobi</guimenuitem>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1062
+#: docbook/index.xml:1062
 msgid "(<keysym>F1</keysym>)"
 msgstr "(<keysym>F1</keysym>)"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1064
+#: docbook/index.xml:1064
 msgid "Show a window to browse the Pentobi user manual."
 msgstr "Mở cửa sổ xem hướng dẫn sử dụng Pentobi."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1070
+#: docbook/index.xml:1070
 msgid "<guimenuitem>About Pentobi</guimenuitem>"
 msgstr "<guimenuitem>Giới thiệu Pentobi</guimenuitem>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1072
+#: docbook/index.xml:1072
 msgid "Show an info dialog with information about this version of Pentobi."
 msgstr "Hiển thị hộp thoại thông tin về phiên bản Pentobi hiện tại."
 
-#. (itstool) path: chapter/title
-#: docbook/index.docbook:1082
+#: docbook/index.xml:1082
 msgid "Keyboard Shortcuts"
 msgstr "Phím tắt bàn phím"
 
-#. (itstool) path: chapter/para
-#: docbook/index.docbook:1083
+#: docbook/index.xml:1083
 msgid ""
 "In addition to the shortcut keys, which are shown in the window menu, the "
 "following shortcut keys are supported by Pentobi. Note that these shortcuts "
@@ -1578,223 +1457,179 @@ msgstr ""
 " Lưu ý: các phím tắt này không hoạt động khi vùng nhập bình luận đang có "
 "tiêu điểm. Dùng phím Tab để chuyển tiêu điểm ra khỏi vùng bình luận."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1091
+#: docbook/index.xml:1091
 msgid "<keysym>Plus</keysym>"
 msgstr "<keysym>Dấu cộng</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1093
+#: docbook/index.xml:1093
 msgid "Select next piece"
 msgstr "Chọn mảnh tiếp theo"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1099
+#: docbook/index.xml:1099
 msgid "<keysym>Minus</keysym>"
 msgstr "<keysym>Dấu trừ</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1101
+#: docbook/index.xml:1101
 msgid "Select previous piece"
 msgstr "Chọn mảnh trước đó"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1107
+#: docbook/index.xml:1107
 msgid "<keysym>Escape</keysym>"
 msgstr "<keysym>Escape</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1109
+#: docbook/index.xml:1109
 msgid "Clear selected piece"
 msgstr "Bỏ chọn mảnh"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1115
+#: docbook/index.xml:1115
 msgid "<keysym>Left</keysym>"
 msgstr "<keysym>Trái</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1116
+#: docbook/index.xml:1116
 msgid "<keysym>Right</keysym>"
 msgstr "<keysym>Phải</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1117
+#: docbook/index.xml:1117
 msgid "<keysym>Up</keysym>"
 msgstr "<keysym>Lên</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1118
+#: docbook/index.xml:1118
 msgid "<keysym>Down</keysym>"
 msgstr "<keysym>Xuống</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1119
+#: docbook/index.xml:1119
 msgid "<keysym>Shift+Left</keysym>"
 msgstr "<keysym>Shift+Trái</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1120
+#: docbook/index.xml:1120
 msgid "<keysym>Shift+Right</keysym>"
 msgstr "<keysym>Shift+Phải</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1121
+#: docbook/index.xml:1121
 msgid "<keysym>Shift+Up</keysym>"
 msgstr "<keysym>Shift+Lên</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1122
+#: docbook/index.xml:1122
 msgid "<keysym>Shift+Down</keysym>"
 msgstr "<keysym>Shift+Xuống</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1124
+#: docbook/index.xml:1124
 msgid "Move the selected piece. The Shift key makes the piece move faster."
 msgstr "Di chuyển mảnh đang chọn. Giữ Shift để di chuyển nhanh hơn."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1130
+#: docbook/index.xml:1130
 msgid "<keysym>Space</keysym>"
 msgstr "<keysym>Phím cách</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1132
+#: docbook/index.xml:1132
 msgid "Next orientation of the selected piece"
 msgstr "Xoay mảnh theo chiều kim đồng hồ"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1138
+#: docbook/index.xml:1138
 msgid "<keysym>Shift+Space</keysym>"
 msgstr "<keysym>Shift+Phím cách</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1140
+#: docbook/index.xml:1140
 msgid "Previous orientation of the selected piece"
 msgstr "Xoay mảnh ngược chiều kim đồng hồ"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1146
+#: docbook/index.xml:1146
 msgid "<keysym>Enter</keysym>"
 msgstr "<keysym>Enter</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1148
+#: docbook/index.xml:1148
 msgid "Play the selected piece"
 msgstr "Đặt mảnh đang chọn"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1154
+#: docbook/index.xml:1154
 msgid "<keysym>1</keysym>"
 msgstr "<keysym>1</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1155
+#: docbook/index.xml:1155
 msgid "<keysym>2</keysym>"
 msgstr "<keysym>2</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1156
+#: docbook/index.xml:1156
 msgid "<keysym>A</keysym>"
 msgstr "<keysym>A</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1157
+#: docbook/index.xml:1157
 msgid "<keysym>C</keysym>"
 msgstr "<keysym>C</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1158
+#: docbook/index.xml:1158
 msgid "<keysym>E</keysym>"
 msgstr "<keysym>E</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1159
+#: docbook/index.xml:1159
 msgid "<keysym>F</keysym>"
 msgstr "<keysym>F</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1160
+#: docbook/index.xml:1160
 msgid "<keysym>G</keysym>"
 msgstr "<keysym>G</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1161
+#: docbook/index.xml:1161
 msgid "<keysym>H</keysym>"
 msgstr "<keysym>H</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1162
+#: docbook/index.xml:1162
 msgid "<keysym>I</keysym>"
 msgstr "<keysym>I</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1163
+#: docbook/index.xml:1163
 msgid "<keysym>J</keysym>"
 msgstr "<keysym>J</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1164
+#: docbook/index.xml:1164
 msgid "<keysym>L</keysym>"
 msgstr "<keysym>L</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1165
+#: docbook/index.xml:1165
 msgid "<keysym>N</keysym>"
 msgstr "<keysym>N</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1166
+#: docbook/index.xml:1166
 msgid "<keysym>O</keysym>"
 msgstr "<keysym>O</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1167
+#: docbook/index.xml:1167
 msgid "<keysym>P</keysym>"
 msgstr "<keysym>P</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1168
+#: docbook/index.xml:1168
 msgid "<keysym>S</keysym>"
 msgstr "<keysym>S</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1169
+#: docbook/index.xml:1169
 msgid "<keysym>T</keysym>"
 msgstr "<keysym>T</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1170
+#: docbook/index.xml:1170
 msgid "<keysym>U</keysym>"
 msgstr "<keysym>U</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1171
+#: docbook/index.xml:1171
 msgid "<keysym>V</keysym>"
 msgstr "<keysym>V</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1172
+#: docbook/index.xml:1172
 msgid "<keysym>W</keysym>"
 msgstr "<keysym>W</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1173
+#: docbook/index.xml:1173
 msgid "<keysym>X</keysym>"
 msgstr "<keysym>X</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1174
+#: docbook/index.xml:1174
 msgid "<keysym>Y</keysym>"
 msgstr "<keysym>Y</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1175
+#: docbook/index.xml:1175
 msgid "<keysym>Z</keysym>"
 msgstr "<keysym>Z</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1177
+#: docbook/index.xml:1177
 msgid ""
 "Select piece according to commonly used piece names. If there are multiple "
 "pieces with the letter (e.g. I3, I4, I5), pressing the key several times "
@@ -1807,48 +1642,39 @@ msgstr ""
 "trong một số biến thể, ví dụ chữ A chỉ dùng ở Trigon cho mảnh A6 và A4 (còn "
 "gọi là “tôm hùm” và “tam giác”)."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1187
+#: docbook/index.xml:1187
 msgid "<keysym>Ctrl+Home</keysym>"
 msgstr "<keysym>Ctrl+Home</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1188
+#: docbook/index.xml:1188
 msgid "<keysym>Ctrl+Shift+Left</keysym>"
 msgstr "<keysym>Ctrl+Shift+Trái</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1189
+#: docbook/index.xml:1189
 msgid "<keysym>Ctrl+Left</keysym>"
 msgstr "<keysym>Ctrl+Trái</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1190
+#: docbook/index.xml:1190
 msgid "<keysym>Ctrl+Right</keysym>"
 msgstr "<keysym>Ctrl+Phải</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1191
+#: docbook/index.xml:1191
 msgid "<keysym>Ctrl+Shift+Right</keysym>"
 msgstr "<keysym>Ctrl+Shift+Phải</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1192
+#: docbook/index.xml:1192
 msgid "<keysym>Ctrl+End</keysym>"
 msgstr "<keysym>Ctrl+End</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1193
+#: docbook/index.xml:1193
 msgid "<keysym>Ctrl+Up</keysym>"
 msgstr "<keysym>Ctrl+Lên</keysym>"
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1194
+#: docbook/index.xml:1194
 msgid "<keysym>Ctrl+Down</keysym>"
 msgstr "<keysym>Ctrl+Xuống</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1196
+#: docbook/index.xml:1196
 msgid ""
 "Navigate in the game: beginning, ten moves backward, backward, forward, ten "
 "moves forward, end, previous variation, next variation."
@@ -1856,13 +1682,11 @@ msgstr ""
 "Duyệt ván cờ: đầu ván, lùi 10 nước, lùi 1 nước, tiến 1 nước, tiến 10 nước, "
 "cuối ván, biến thể trước, biến thể tiếp theo."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1203
+#: docbook/index.xml:1203
 msgid "<keysym>Ctrl+Shift+H</keysym>"
 msgstr "<keysym>Ctrl+Shift+H</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1205
+#: docbook/index.xml:1205
 msgid ""
 "Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards "
 "through the list of legal moves."
@@ -1870,22 +1694,18 @@ msgstr ""
 "Giống <guimenuitem>Tìm nước đi hợp lệ</guimenuitem> (Ctrl+H) nhưng duyệt "
 "ngược lại trong danh sách nước đi hợp lệ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1212
+#: docbook/index.xml:1212
 msgid "<keysym>Ctrl+T</keysym>"
 msgstr "<keysym>Ctrl+T</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1214
+#: docbook/index.xml:1214
 msgid "Switch view between comment and game analysis."
 msgstr "Chuyển đổi hiển thị giữa bình luận và phân tích ván cờ."
 
-#. (itstool) path: varlistentry/term
-#: docbook/index.docbook:1220
+#: docbook/index.xml:1220
 msgid "<keysym>Alt+M</keysym>"
 msgstr "<keysym>Alt+M</keysym>"
 
-#. (itstool) path: listitem/para
-#: docbook/index.docbook:1222
+#: docbook/index.xml:1222
 msgid "Open menu."
 msgstr "Mở menu."
