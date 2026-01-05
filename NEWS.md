@@ -1,17 +1,13 @@
 Pentobi Release Notes
 =====================
 
-Version 30.0-dev (main)
------------------------
+Version 30.0 (2026-01-05)
+-------------------------
 
+* Vietnamese translation (thanks to Loc Huynh)
 * Fixed horizontal flick in help view on Android
 * itstool is no longer a build dependency
 * Minimum required gettext version is now 0.23
-
-Version 29.1 (v29-fixes)
-------------------------
-
-* Vietnamese translation (thanks to Loc Huynh)
 
 Version 29.0 (2025-12-07)
 -------------------------
@@ -59,7 +55,7 @@ Version 27.0 (10 Sep 2025)
 --------------------------
 
 * Minimum required Qt version is now 6.8
-* Always use system theme (Note that on Ubunutu/Flatpak, you might
+* Always use system theme (Note that on Ubuntu/Flatpak, you might
   have to install the Flatpak package org.gtk.Gtk3theme.Yaru-dark
   for dark mode support)
 * Menu no longer covers menu button in mobile view (if not on Android)
@@ -193,7 +189,7 @@ Version 22.0 (24 Jan 2023)
 * Don't use transparent background in thumbnails, which is displayed as
   a checkerboard in recent Gnome versions.
 * Fixed removal of no longer existing files from recent files menu.
-* Don't enforce compilation option -Wall to avoid false-positve
+* Don't enforce compilation option -Wall to avoid false-positive
   array-bounds warnings with GCC.
 * Use native file dialogs on Windows.
 * Other minor fixes.
@@ -733,7 +729,7 @@ Version 11.0 (29 Dec 2015)
 
 * Message dialog about discarding unsaved current game was not shown if
   a file was loaded by clicking on a game in the rating dialog.
-* Last move marking did not work anymore after after interrupting a
+* Last move marking did not work anymore after interrupting a
   computer move generation and then using Undo Move.
 * Autosaving unfinished games did not work if game was finished
   first but then made unfinished again with Undo Move.
