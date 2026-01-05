@@ -47,7 +47,7 @@ public:
         @throws OptionError on error */
     Options(int argc, const char** argv, const vector<string>& specs);
 
-    /** Overloaded version for con-const character strings in argv.
+    /** Overloaded version for non-const character strings in argv.
         Needed because the portable signature of main is (int, char**).
         argv is not modified by this constructor.  */
     Options(int argc, char** argv, const vector<string>& specs);
