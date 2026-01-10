@@ -257,6 +257,7 @@ Item {
                     menu.item.close()
                 else {
                     gameView.dropCommentFocus()
+                    ToolTip.toolTip.hide()
                     menu.item.popup(0, isAndroid ? 0 : height)
                 }
             }
