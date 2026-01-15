@@ -6,7 +6,7 @@
 
 #include "CoordPoint.h"
 
-#include <iostream>
+#include <ostream>
 
 namespace libboardgame_base {
 
