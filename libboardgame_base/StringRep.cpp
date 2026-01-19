@@ -7,7 +7,7 @@
 #include "StringRep.h"
 
 #include <cctype>
-#include <iostream>
+#include <ostream>
 #include "StringUtil.h"
 
 namespace libboardgame_base {
