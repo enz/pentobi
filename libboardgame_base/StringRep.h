@@ -33,11 +33,11 @@ struct StringRep
 
 /** Spreadsheet-style string representation of points.
     Can be used as a template argument for Point.
-    Columns are represented as letters including the letter 'J'. After 'Z',
-    multi-letter combinations are used: 'AA', 'AB', etc. Rows are represented
-    by numbers starting with '1'. Note that unlike in spreadsheets, row number
-    1 is at the bottom and increases to the top to be compatible with the
-    convention used in chess. */
+    Columns are represented as letters including the letter 'I' (unlike in Go).
+    After 'Z', multi-letter combinations are used: 'AA', 'AB', etc. Rows are
+    represented by numbers starting with '1'. Note that unlike in spreadsheets,
+    row number 1 is at the bottom and increases to the top to be compatible
+    with the convention used in chess. */
 struct StdStringRep
         : public StringRep
 {
