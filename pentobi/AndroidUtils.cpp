@@ -201,9 +201,10 @@ void takePersistableUriPermission(const QJniObject& uri)
 
 //-----------------------------------------------------------------------------
 
+#ifdef Q_OS_ANDROID
+
 QString AndroidUtils::m_error;
 
-#ifdef Q_OS_ANDROID
 bool AndroidUtils::checkException()
 {
     QJniEnvironment env;

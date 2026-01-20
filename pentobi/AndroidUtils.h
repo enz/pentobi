@@ -72,10 +72,10 @@ signals:
     void saveDialogAccepted(const QString& uri, const QString& displayName);
 
 private:
+#ifdef Q_OS_ANDROID
     static QString m_error;
 
 
-#ifdef Q_OS_ANDROID
     static bool checkException();
 #endif
 };
