@@ -333,17 +333,18 @@ void AndroidUtils::initTheme([[maybe_unused]] const QColor& colorBackground)
             visibility &= ~0x00000010; // SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
             view.callMethod<void>("setSystemUiVisibility", "(I)V", visibility);
         }
-        else // QAndroidApplication::sdkVersion() >= 30
+        else
         {
             auto insetsController =
                     view.callObjectMethod(
                         "getWindowInsetsController",
                         "()Landroid/view/WindowInsetsController;");
-            // Clear APPEARANCE_LIGHT_STATUS_BARS and
-            // APPEARANCE_LIGHT_NAVIGATION_BARS
-            insetsController.callMethod<void>("setSystemBarsAppearance",
-                                              "(II)V", 0,
-                                              0x00000008 | 0x00000010);
+            if (insetsController.isValid())
+                // Clear APPEARANCE_LIGHT_STATUS_BARS and
+                // APPEARANCE_LIGHT_NAVIGATION_BARS
+                insetsController.callMethod<void>("setSystemBarsAppearance",
+                                                  "(II)V", 0,
+                                                  0x00000008 | 0x00000010);
         }
         window.callMethod<void>("setStatusBarColor", "(I)V",
                                 colorBackground.rgba());
