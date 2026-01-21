@@ -114,8 +114,7 @@ void setExtraInitialUri(QJniObject& intent, const QString& uri)
     intent.callObjectMethod(
                 "putExtra",
                 "(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;",
-                extraInitialUriObj.object<jstring>(),
-                value.object<jstring>());
+                extraInitialUriObj.object<jstring>(), value.object());
 }
 
 void startDocumentActivity(
