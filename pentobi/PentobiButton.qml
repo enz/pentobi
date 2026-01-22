@@ -25,7 +25,6 @@ Item {
 
     property alias source: image.source
     property alias action: button.action
-    property alias enabled: button.enabled
     property alias down: button.down
     property alias pressed: button.pressed
     property alias autoRepeat: button.autoRepeat
@@ -43,6 +42,7 @@ Item {
 
     implicitWidth: button.implicitWidth
     implicitHeight: button.implicitHeight
+    enabled: button.enabled
 
     ToolButton {
         id: button

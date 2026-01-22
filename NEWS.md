@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 30.1-dev (v30-fixes)
 ----------------------------
 
-*
+* Avoid console warning message with Qt 6.11
 
 Version 30.0 (2026-01-05)
 -------------------------
