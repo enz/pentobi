@@ -57,7 +57,7 @@ Item {
 
             source: theme.getImage("pentobi-newgame")
             action: actionNew
-            visible: showContent && (isDesktop || enabled)
+            visible: showContent && (isDesktop || action.enabled)
             toolTipText: qsTr("Start a new game")
         }
         PentobiButton {
@@ -73,7 +73,7 @@ Item {
 
             source: theme.getImage("pentobi-undo")
             action: actionUndo
-            visible: showContent && (isDesktop || enabled)
+            visible: showContent && (isDesktop || action.enabled)
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameView.item ?
@@ -86,7 +86,7 @@ Item {
 
             source: theme.getImage("pentobi-computer-colors")
             action: actionComputerSettings
-            visible: showContent && (isDesktop || enabled)
+            visible: showContent && (isDesktop || action.enabled)
             toolTipText: qsTr("Set the colors played by the computer")
         }
         PentobiButton {
@@ -94,7 +94,7 @@ Item {
 
             source: theme.getImage("pentobi-play")
             action: actionPlay
-            visible: showContent && (isDesktop || enabled)
+            visible: showContent && (isDesktop || action.enabled)
             autoRepeat: true
             // Use fast autorepeat to avoid flickering of
             // PentobiButton.pressedAnimation, presses while computer is
