@@ -42,7 +42,6 @@ Item {
 
     implicitWidth: button.implicitWidth
     implicitHeight: button.implicitHeight
-    enabled: button.enabled
 
     ToolButton {
         id: button
