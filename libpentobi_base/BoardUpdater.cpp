@@ -86,14 +86,7 @@ void init_setup(Board& bd, const SgfNode& node)
     handle_setup_property(node, "AW", Color(1), bd, setup, all_pieces_left);
     handle_setup_empty(node, bd, setup, all_pieces_left);
     if (! libpentobi_base::get_player(node, bd.get_nu_colors(), setup.to_play))
-    {
-        // Try to guess who should be to play based on the setup pieces.
-        Color to_play = Color(0);
-        for (Color c : bd.get_colors())
-            if (setup.placements[c].size() < setup.placements[to_play].size())
-                to_play = c;
-        setup.to_play = to_play;
-    }
+        setup.to_play = Color(0);
     bd.init(&setup);
 }
 
