@@ -85,8 +85,7 @@ void init_setup(Board& bd, const SgfNode& node)
     handle_setup_property(node, "AB", Color(0), bd, setup, all_pieces_left);
     handle_setup_property(node, "AW", Color(1), bd, setup, all_pieces_left);
     handle_setup_empty(node, bd, setup, all_pieces_left);
-    if (! libpentobi_base::get_player(node, bd.get_nu_colors(), setup.to_play))
-        setup.to_play = Color(0);
+    libpentobi_base::get_player(node, bd.get_nu_colors(), setup.to_play);
     bd.init(&setup);
 }
 
