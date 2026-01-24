@@ -7,6 +7,7 @@
 #include "Analyze.h"
 
 #include <fstream>
+#include <iostream>
 #include <map>
 #include "libboardgame_base/FmtSaver.h"
 #include "libboardgame_base/Statistics.h"

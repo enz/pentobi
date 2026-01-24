@@ -7,7 +7,7 @@
 #ifndef LIBBOARDGAME_BASE_FMT_SAVER_H
 #define LIBBOARDGAME_BASE_FMT_SAVER_H
 
-#include <iostream>
+#include <ostream>
 
 namespace libboardgame_base {
 
