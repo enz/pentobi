@@ -4,8 +4,8 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Francisco Zamorano <pacozamo@gmail.com>, 2023
 # Markus Enzenberger <enz@users.sourceforge.net>, 2025
+# Francisco Zamorano <pacozamo@gmail.com>, 2026
 # 
 #, fuzzy
 msgid ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-29 20:55+0100\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
-"Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2025\n"
+"Last-Translator: Francisco Zamorano <pacozamo@gmail.com>, 2026\n"
 "Language-Team: Spanish (https://app.transifex.com/markus-enzenberger/teams/89074/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,7 +63,7 @@ msgstr ""
 
 #: docbook/index.xml:26
 msgid "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
 
 #: docbook/index.xml:32
 msgid ""
@@ -78,7 +78,7 @@ msgstr ""
 
 #: docbook/index.xml:38
 msgid "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
 
 #: docbook/index.xml:44
 msgid ""
@@ -94,7 +94,7 @@ msgstr ""
 
 #: docbook/index.xml:51
 msgid "<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
 
 #: docbook/index.xml:57
 msgid ""
@@ -185,11 +185,11 @@ msgstr ""
 
 #: docbook/index.xml:104
 msgid "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
 
 #: docbook/index.xml:109
 msgid "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
 
 #: docbook/index.xml:118
 msgid "Trigon Rules"
@@ -212,7 +212,7 @@ msgstr ""
 
 #: docbook/index.xml:127
 msgid "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
 
 #: docbook/index.xml:133
 msgid ""
@@ -224,7 +224,7 @@ msgstr ""
 
 #: docbook/index.xml:138
 msgid "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
 
 #: docbook/index.xml:144
 msgid ""
@@ -241,7 +241,7 @@ msgstr ""
 
 #: docbook/index.xml:150
 msgid "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
 
 #: docbook/index.xml:158
 msgid ""
@@ -283,7 +283,7 @@ msgstr ""
 
 #: docbook/index.xml:182
 msgid "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
 
 #: docbook/index.xml:188
 msgid "Bonus points are not used in Junior."
@@ -305,7 +305,7 @@ msgstr ""
 
 #: docbook/index.xml:201
 msgid "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
 
 #: docbook/index.xml:207
 msgid ""
@@ -319,7 +319,7 @@ msgstr ""
 
 #: docbook/index.xml:212
 msgid "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
 
 #: docbook/index.xml:218
 msgid ""
@@ -342,7 +342,7 @@ msgstr ""
 
 #: docbook/index.xml:228
 msgid "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
 
 #: docbook/index.xml:234
 msgid ""
@@ -381,7 +381,7 @@ msgstr ""
 
 #: docbook/index.xml:256
 msgid "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
 
 #: docbook/index.xml:262
 msgid ""
@@ -394,7 +394,7 @@ msgstr ""
 
 #: docbook/index.xml:267
 msgid "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
 
 #: docbook/index.xml:273
 msgid ""
@@ -413,7 +413,7 @@ msgstr ""
 
 #: docbook/index.xml:281
 msgid "<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
 
 #: docbook/index.xml:287
 msgid ""
@@ -465,7 +465,7 @@ msgstr ""
 
 #: docbook/index.xml:313
 msgid "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
 
 #: docbook/index.xml:319
 msgid ""
@@ -482,7 +482,7 @@ msgstr ""
 
 #: docbook/index.xml:326
 msgid "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
 
 #: docbook/index.xml:332
 msgid ""
@@ -495,7 +495,7 @@ msgstr ""
 
 #: docbook/index.xml:337
 msgid "<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
 
 #: docbook/index.xml:343
 msgid ""
@@ -707,7 +707,7 @@ msgstr ""
 
 #: docbook/index.xml:448
 msgid "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
 
 #: docbook/index.xml:454
 msgid ""
@@ -810,7 +810,7 @@ msgstr ""
 
 #: docbook/index.xml:501
 msgid "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
-msgstr ""
+msgstr "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
 
 #: docbook/index.xml:507
 msgid ""
@@ -1410,11 +1410,12 @@ msgstr ""
 
 #: docbook/index.xml:920
 msgid "<guilabel>Colorblind mode</guilabel>"
-msgstr ""
+msgstr "<guilabel>Modo para daltónicos</guilabel>"
 
 #: docbook/index.xml:922
 msgid "Use piece colors more distinguishable for colorblind users."
 msgstr ""
+"Usar colores para las piezas más distinguibles para usuarios con daltonismo."
 
 #: docbook/index.xml:928
 msgid "<guilabel>Move marking</guilabel>"
