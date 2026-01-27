@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Colorblind mode</source>
-        <translation type="unfinished"/>
+        <translation>Modo para daltónicos</translation>
     </message>
 </context>
 <context>
@@ -179,7 +179,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"/>
+        <translation>Untitled.png</translation>
     </message>
 </context>
 <context>
@@ -1263,7 +1263,7 @@
     </message>
     <message>
         <source>Untitled.blksgf</source>
-        <translation type="unfinished"/>
+        <translation>Untitled.blksgf</translation>
     </message>
     <message>
         <source>computer opponent for the board game Blokus</source>
@@ -1327,16 +1327,16 @@
     <message>
         <source>Use layout optimized for desktop.</source>
         <extracomment>Description for command line option --desktop</extracomment>
-        <translation type="unfinished"/>
+        <translation>Utilizar el diseño optimizado para ordenador.</translation>
     </message>
     <message>
         <source>--mobile and --desktop cannot be used both</source>
-        <translation type="unfinished"/>
+        <translation>No se pueden usar ambos diseños para ordenador y móvil a la vez</translation>
     </message>
     <message>
         <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"/>
+        <translation>Usar el diseño para móvil (predeterminado en pantallas pequeñas y también limita el nivel máximo). </translation>
     </message>
 </context>
 </TS>
