@@ -20,17 +20,12 @@ namespace libboardgame_base {
 size_t get_memory()
 {
 #ifdef _WIN32
-
     MEMORYSTATUSEX status;
     status.dwLength = sizeof(status);
     if (! GlobalMemoryStatusEx(&status))
         return 0;
-    auto total_virtual = static_cast<size_t>(status.ullTotalVirtual);
-    auto total_phys = static_cast<size_t>(status.ullTotalPhys);
-    return min(total_virtual, total_phys);
-
+    return static_cast<size_t>(status.ullTotalPhys);
 #elif defined _SC_PHYS_PAGES
-
     long phys_pages = sysconf(_SC_PHYS_PAGES);
     if (phys_pages < 0)
         return 0;
@@ -38,11 +33,8 @@ size_t get_memory()
     if (page_size < 0)
         return 0;
     return static_cast<size_t>(phys_pages) * static_cast<size_t>(page_size);
-
 #else
-
 #error "Determining memory size on this platform not (yet) supported"
-
 #endif
 }
 
