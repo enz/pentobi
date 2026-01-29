@@ -29,6 +29,8 @@ endif()
 
 if(UNIX)
   add_custom_target(dist
+    COMMAND git diff --quiet
+    COMMAND git diff --cached --quiet
     COMMAND git archive --prefix=pentobi-${PENTOBI_VERSION}/ HEAD
     | xz -e > ${CMAKE_BINARY_DIR}/pentobi-${PENTOBI_VERSION}.tar.xz
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
