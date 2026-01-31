@@ -6,6 +6,8 @@ Pentobi is a computer opponent for the board game
 with different playing levels. The supported game variants are Classic, Duo,
 Trigon, Junior, Nexos, GembloQ and Callisto.
 
+Official support is only provided for Linux, but releases are usually tested
+to ensure they can be built for Android.
 See [INSTALL](INSTALL.md) for instructions how to build and install
 the program from the sources. See [NEWS](NEWS.md) for release notes.
 See [CONTRIBUTING](CONTRIBUTING.md) for information on how to report bugs and
