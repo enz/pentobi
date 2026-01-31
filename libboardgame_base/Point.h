@@ -39,7 +39,7 @@ public:
 
     static constexpr unsigned max_width = W;
 
-    static constexpr unsigned max_height = W;
+    static constexpr unsigned max_height = H;
 
     static_assert(numeric_limits<I>::is_integer);
     static_assert(! numeric_limits<I>::is_signed);
