@@ -63,7 +63,7 @@ public:
 
     bool is_null() const;
 
-    /** Return point as an integer between 0 and Point::range */
+    /** Return point as an integer between 0 and Point::range - 1 */
     IntType to_int() const;
 
 private:
