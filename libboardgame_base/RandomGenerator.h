@@ -22,7 +22,7 @@ using namespace std;
     All instances of this class register themselves automatically at a
     global list of random generators, such that the random seed can be
     changed at all existing generators with a single function call.
-    Reentrant after construction. */
+    Constructor and global seed functions are not reentrant. */
 class RandomGenerator
 {
 public:
