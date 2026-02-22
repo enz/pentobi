@@ -103,4 +103,4 @@ public:
 
 } // namespace libboardgame_base
 
-#endif // LIBBOARDGAME_BASE_TRANSFORM_H
+#endif // LIBBOARDGAME_BASE_RECTTRANSFORM_H
