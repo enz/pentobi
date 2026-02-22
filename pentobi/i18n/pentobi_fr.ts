@@ -84,7 +84,7 @@
     <message>
         <source>As needed</source>
         <extracomment>Show-comment mode</extracomment>
-        <translation>Comme requis</translation>
+        <translation>Au besoin</translation>
     </message>
     <message>
         <source>Never</source>
@@ -230,7 +230,7 @@
     </message>
     <message>
         <source>Round:</source>
-        <translation>Round :</translation>
+        <translation>Ronde :</translation>
     </message>
 </context>
 <context>
@@ -781,7 +781,7 @@
     </message>
     <message>
         <source>Set the colors played by the computer</source>
-        <translation>Définir les couleurs joué par l’ordinateur</translation>
+        <translation>Définir les couleurs jouées par l’ordinateur</translation>
     </message>
     <message>
         <source>Make the computer continue to play the current color</source>
