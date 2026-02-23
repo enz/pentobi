@@ -97,7 +97,7 @@ Item {
         }
         ToolTip.text: root.toolTipText
         ToolTip.visible: toolTipText !== "" && hovered
-        ToolTip.delay: 700
+        ToolTip.delay: 1000
         ToolTip.timeout: 5000
         onClicked: {
             ToolTip.toolTip.hide()
