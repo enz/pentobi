@@ -4,9 +4,10 @@ Contributing to Pentobi
 Report Bugs
 -----------
 
-Bugs can be reported at the [issue tracker](https://github.com/enz/pentobi/issues)
-at GitHub. There are no plans to add more game variants or new features to
-Pentobi, so please use the issue tracker only for bugs.
+Bugs can be reported at the
+[issue tracker](https://github.com/enz/pentobi/issues) at GitHub.
+Pentobi is mainly in maintenance mode. There are no plans to add more game
+variants or new features, so please use the issue tracker only for bugs.
 
 Translations
 ------------
