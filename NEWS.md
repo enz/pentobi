@@ -5,7 +5,7 @@ Version 30.1-dev (v30-fixes)
 ----------------------------
 
 * Avoid console warning message with Qt 6.11
-* Use QT_ANDROID_PACKAGE_NAME instead if package attribute in manifest
+* Use QT_ANDROID_PACKAGE_NAME instead of package attribute in manifest
 
 Version 30.0 (2026-01-05)
 -------------------------
