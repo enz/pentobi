@@ -198,8 +198,7 @@ if(ANDROID)
     set_target_properties(pentobi PROPERTIES
         QT_ANDROID_APP_ICON "@drawable/icon"
         QT_ANDROID_APP_NAME "Pentobi"
-        # No insert macro for package name in manifest (Qt. 6.10)
-        # QT_ANDROID_PACKAGE_NAME "net.sf.pentobi"
+        QT_ANDROID_PACKAGE_NAME "net.sf.pentobi"
         QT_ANDROID_VERSION_CODE ${PENTOBI_ANDROID_CODE}
         QT_ANDROID_VERSION_NAME ${PENTOBI_VERSION}
     )
