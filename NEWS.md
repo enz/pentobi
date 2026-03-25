@@ -1,22 +1,24 @@
 Pentobi Release Notes
 =====================
 
-Version 30.1-dev (v30-fixes)
-----------------------------
+Version 30.1 (25 Mar 2026)
+--------------------------
 
+* Minor translation updates
+* Hide tooltip after button was clicked
 * Avoid console warning message with Qt 6.11
 * Use QT_ANDROID_PACKAGE_NAME instead of package attribute in manifest
 
-Version 30.0 (2026-01-05)
--------------------------
+Version 30.0 (05 Jan 2026)
+--------------------------
 
 * Vietnamese translation (thanks to Loc Huynh)
 * Fixed horizontal flick in help view on Android
 * itstool is no longer a build dependency
 * Minimum required gettext version is now 0.23
 
-Version 29.0 (2025-12-07)
--------------------------
+Version 29.0 (07 Dec 2025)
+--------------------------
 
 * Minimum required Qt version is now 6.9
 * Minimum required CMake version is now 3.22
