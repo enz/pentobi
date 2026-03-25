@@ -6,8 +6,8 @@ Version 31.0-dev (main)
 
 * …
 
-Version 30.2 (v30-fixes)
-------------------------
+Version 30.2-dev (v30-fixes)
+----------------------------
 
 * …
 
