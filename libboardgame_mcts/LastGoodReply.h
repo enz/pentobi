@@ -34,7 +34,7 @@ using namespace std;
     probably rare, no major negative effect is expected from these collisions.
     @tparam M The move type.
     @tparam P The (maximum) number of players.
-    @tparam S The number of entries in the LGR2 has table (per player).
+    @tparam S The number of entries in the LGR2 hash table (per player).
     @tparam MT Whether the LGR table is used in a multi-threaded search. */
 template<class M, unsigned P, size_t S, bool MT>
 class LastGoodReply
