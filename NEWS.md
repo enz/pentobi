@@ -12,7 +12,7 @@ Version 30.1 (25 Mar 2026)
 * Minor translation updates
 * Hide tooltip after button was clicked
 * Avoid console warning message with Qt 6.11
-* Use QT_ANDROID_PACKAGE_NAME instead of package attribute in manifest
+* Use QT_ANDROID_PACKAGE_NAME
 
 Version 30.0 (05 Jan 2026)
 --------------------------
