@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Виктор Ерухин <official159ru@mail.ru>, 2021
-# Markus Enzenberger <enz@users.sourceforge.net>, 2025
+# Markus Enzenberger <enz@users.sourceforge.net>, 2026
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 20:55+0100\n"
+"POT-Creation-Date: 2026-03-29 09:00+0200\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
-"Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2025\n"
+"Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2026\n"
 "Language-Team: Russian (https://app.transifex.com/markus-enzenberger/teams/89074/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -189,11 +189,11 @@ msgstr "Правила для игры Тригон"
 
 #: docbook/index.xml:119
 msgid ""
-"Trigon is another game variant. The rules a similar to game variant Classic "
-"but it uses a differently shaped board and a different set of pieces. Each "
-"color uses 22 pieces that are shaped like the polyiamonds up to size six. A "
-"polyiamond is a shape built from a number of equilateral triangles connected"
-" along the edges."
+"Trigon is another game variant. The rules are similar to game variant "
+"Classic but it uses a differently shaped board and a different set of "
+"pieces. Each color uses 22 pieces that are shaped like the polyiamonds up to"
+" size six. A polyiamond is a shape built from a number of equilateral "
+"triangles connected along the edges."
 msgstr ""
 "Trigon - еще один вариант игры. Правила аналогичны варианту Классической "
 "игры, но в нем используется доска другой формы и другой набор фигур. Для "
