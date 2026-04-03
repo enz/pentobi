@@ -118,7 +118,7 @@ private:
     BoardConst::MoveInfoExtArray m_move_info_ext_array;
 
     /** Incrementally updated lists of legal moves for both colors.
-        Only the move list for the color to play van be used in any given
+        Only the move list for the color to play can be used in any given
         position, the other color is not updated immediately after a move. */
     ColorMap<MoveList> m_moves;
 
