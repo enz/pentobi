@@ -486,7 +486,7 @@ void State::update_symmetry_broken(Move mv)
 {
     Color to_play = m_bd.get_to_play();
     Color second_color = m_bd.get_second_color(to_play);
-    auto& symmetric_points = m_bc->get_symmetrc_points();
+    auto& symmetric_points = m_bc->get_symmetric_points();
     auto& info = get_move_info<MAX_SIZE>(mv);
     auto i = info.begin();
     auto end = info.end();
