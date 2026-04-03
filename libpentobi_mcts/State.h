@@ -385,7 +385,7 @@ inline PrecompMoves::Range State::get_moves(Color c, Piece piece, Point p,
 inline PlayerInt State::get_player() const
 {
     unsigned player = m_bd.get_to_play().to_int();
-    if ( m_bd.get_variant() == Variant::classic_3 && player == 3)
+    if (m_bd.get_variant() == Variant::classic_3 && player == 3)
         player += m_bd.get_alt_player();
     return static_cast<PlayerInt>(player);
 }
