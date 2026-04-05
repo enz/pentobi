@@ -82,7 +82,7 @@ const SgfNode* get_next_earlier_variation(const SgfNode& node)
 {
     auto child = &node;
     auto current = node.get_parent_or_null();
-    while (current != nullptr && (child->get_sibling() == nullptr))
+    while (current != nullptr && child->get_sibling() == nullptr)
     {
         child = current;
         current = current->get_parent_or_null();
@@ -104,7 +104,7 @@ void get_path_from_root(const SgfNode& node, vector<const SgfNode*>& path)
 {
     auto current = &node;
     path.assign(1, current);
-    while(current->has_parent())
+    while (current->has_parent())
     {
         current = &current->get_parent();
         path.push_back(current);
