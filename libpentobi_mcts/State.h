@@ -10,7 +10,6 @@
 #include "PlayoutFeatures.h"
 #include "PriorKnowledge.h"
 #include "SharedConst.h"
-#include "StateUtil.h"
 #include "libboardgame_mcts/LastGoodReply.h"
 #include "libboardgame_mcts/PlayerMove.h"
 #include "libboardgame_base/RandomGenerator.h"
@@ -64,7 +63,7 @@ public:
     void play_in_tree(Move mv);
 
     /** Handle end of in-tree phase. */
-    void finish_in_tree();
+    void finish_in_tree() { };
 
     /** Play a move right after expanding a node. */
     void play_expanded_child(Move mv);
@@ -167,11 +166,7 @@ private:
     /** Used in get_quality_bonus(). */
     Statistics<Float> m_stat_attach;
 
-    bool m_check_symmetric_draw;
-
     bool m_check_terminate_early;
-
-    bool m_is_symmetry_broken;
 
     /** Enforce all pieces to be considered for the rest of the simulation.
         This applies to all colors, because it is only used if no moves were
@@ -181,15 +176,6 @@ private:
     bool m_force_consider_all_pieces;
 
     bool m_is_callisto;
-
-    /** Minimum number of pieces on board to perform a symmetry check.
-        3 in Duo/Junior or 5 in Trigon because this is the earliest move number
-        to break the symmetry. The early playout termination that evaluates all
-        symmetric positions as a draw should not be used earlier because it can
-        cause bad move selection in very short searches if all moves are
-        evaluated as draw and the search is not deep enough to find that the
-        symmetry can be broken a few moves later. */
-    unsigned m_symmetry_min_nu_pieces;
 
     /** Cache of m_bc->get_max_piece_size() */
     unsigned m_max_piece_size;
@@ -276,9 +262,6 @@ private:
 
     template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
     void update_playout_features(Color c, Move mv);
-
-    template<unsigned MAX_SIZE>
-    void update_symmetry_broken(Move mv);
 };
 
 /** Check if last-good-reply move is applicable.
@@ -329,20 +312,10 @@ inline void State::evaluate_playout(array<Float, 6>& result)
         evaluate_multiplayer(result);
 }
 
-inline void State::finish_in_tree()
-{
-    if (m_check_symmetric_draw)
-        m_is_symmetry_broken = check_symmetry_broken(m_bd);
-}
-
 inline bool State::gen_playout_move(const LastGoodReply& lgr, Move last,
                                     Move second_last, PlayerMove& mv)
 {
     if (m_nu_passes == m_nu_colors)
-        return false;
-    if (! m_is_symmetry_broken
-            && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
-        // See also the comment in evaluate_playout()
         return false;
     PlayerInt player = get_player();
     Move lgr2 = lgr.get_lgr2(player, last, second_last);
@@ -439,29 +412,21 @@ inline void State::play_playout(Move mv)
     {
         m_bd.play<5, 16>(to_play, mv);
         update_playout_features<5, 16>(to_play, mv);
-        if (! m_is_symmetry_broken)
-            update_symmetry_broken<5>(mv);
     }
     else if (m_max_piece_size == 6)
     {
         m_bd.play<6, 22>(to_play, mv);
         update_playout_features<6, 22>(to_play, mv);
-        if (! m_is_symmetry_broken)
-            update_symmetry_broken<6>(mv);
     }
     else if (m_max_piece_size == 7)
     {
         m_bd.play<7, 12>(to_play, mv);
         update_playout_features<7, 12>(to_play, mv);
-        // No game variant with piece size 7 uses m_is_symmetry_broken
-        LIBBOARDGAME_ASSERT(m_is_symmetry_broken);
     }
     else
     {
         m_bd.play<22, 44>(to_play, mv);
         update_playout_features<22, 44>(to_play, mv);
-        if (! m_is_symmetry_broken)
-            update_symmetry_broken<22>(mv);
     }
     ++m_nu_new_moves[to_play];
     m_last_move[to_play] = mv;
@@ -479,48 +444,6 @@ inline void State::update_playout_features(Color c, Move mv)
     else
         m_playout_features[c].set_forbidden<MAX_ADJ_ATTACH>(
                     get_move_info_ext<MAX_ADJ_ATTACH>(mv));
-}
-
-template<unsigned MAX_SIZE>
-void State::update_symmetry_broken(Move mv)
-{
-    Color to_play = m_bd.get_to_play();
-    Color second_color = m_bd.get_second_color(to_play);
-    auto& symmetric_points = m_bc->get_symmetric_points();
-    auto& info = get_move_info<MAX_SIZE>(mv);
-    auto i = info.begin();
-    auto end = info.end();
-    if (to_play == Color(0) || to_play == Color(2))
-    {
-        // First player to play: Check that all symmetric points of the last
-        // move of the second player are occupied by the first player
-        do
-        {
-            Point symm_p = symmetric_points[*i];
-            if (m_bd.get_point_state(symm_p) != second_color)
-            {
-                m_is_symmetry_broken = true;
-                return;
-            }
-        }
-        while (++i != end);
-    }
-    else
-    {
-        // Second player to play: Check that all symmetric points of the last
-        // move of the first player are empty (i.e. the second player can play
-        // there to preserve the symmetry)
-        do
-        {
-            Point symm_p = symmetric_points[*i];
-            if (! m_bd.get_point_state(symm_p).is_empty())
-            {
-                m_is_symmetry_broken = true;
-                return;
-            }
-        }
-        while (++i != end);
-    }
 }
 
 //-----------------------------------------------------------------------------

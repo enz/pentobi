@@ -287,16 +287,6 @@ of the current value with one key/value pair per line, otherwise the
 parameter with the given key will be set to the given value. Generally
 useful parameters are:
 
-`param avoid_symmetric_draw 0|1`
-In some game variants (Duo, Trigon_2), the second player can enforce a
-tie by answering each move by its symmetric counterpart if the first
-players misses the opportunity to break the symmetry in the center.
-Technically, exploiting this mistake by the first player is a good
-strategy for the second player because a draw is a good result
-considering the first-play advantage. However, playing symmetrically
-could be considered bad style, so this behavior is avoided (value `1`)
-by default.
-
 `param fixed_simulations` _n_
 Use exactly _n_ MCTS simulations during a search. By default, the
 search engine uses levels, which determine how many MCTS simulations are

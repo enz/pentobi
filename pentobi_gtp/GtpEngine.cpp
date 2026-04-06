@@ -119,7 +119,6 @@ void GtpEngine::cmd_param(Arguments args, Response& response)
     auto& s = get_search();
     if (args.get_size() == 0)
         response
-            << "avoid_symmetric_draw " << s.get_avoid_symmetric_draw() << '\n'
             << "exploration_constant " << s.get_exploration_constant() << '\n'
             << "rave_child_max " << s.get_rave_child_max() << '\n'
             << "rave_parent_max " << s.get_rave_parent_max() << '\n'
@@ -130,9 +129,7 @@ void GtpEngine::cmd_param(Arguments args, Response& response)
     {
         args.check_size(2);
         auto name = args.get(0);
-        if (name == "avoid_symmetric_draw")
-            s.set_avoid_symmetric_draw(args.get<bool>(1));
-        else if (name == "exploration_constant")
+        if (name == "exploration_constant")
             s.set_exploration_constant(args.get<Float>(1));
         else if (name == "rave_child_max")
             s.set_rave_child_max(args.get<Float>(1));

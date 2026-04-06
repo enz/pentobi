@@ -852,12 +852,6 @@ BoardConst::BoardConst(BoardType board_type, PieceSet piece_set)
         LIBBOARDGAME_ASSERT(m_nu_pieces == 21);
         break;
     }
-    if (board_type == BoardType::duo || board_type == BoardType::callisto_2)
-        init_symmetry_info<5>();
-    else if (board_type == BoardType::trigon)
-        init_symmetry_info<6>();
-    else if (board_type == BoardType::gembloq_2)
-        init_symmetry_info<22>();
 }
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH>
@@ -919,8 +913,6 @@ inline void BoardConst::create_move(unsigned& moves_created, Piece piece,
     info_ext.size_attach_points =
             static_cast<uint_least8_t>(p - info_ext.end_adj());
     info_ext_2.label_pos = label_pos;
-    info_ext_2.breaks_symmetry = false;
-    info_ext_2.symmetric_move = Move::null();
     m_nu_attach_points[piece] =
         max(m_nu_attach_points[piece],
             static_cast<unsigned>(info_ext.size_attach_points));
@@ -1197,37 +1189,6 @@ void BoardConst::init_adj_status_points(Point p)
 
     LIBBOARDGAME_ASSERT(n == max_size);
 }
-
-template<unsigned MAX_SIZE>
-void BoardConst::init_symmetry_info()
-{
-    m_symmetric_points.init(m_geo);
-    for (Move::IntType i = 1; i < m_range; ++i)
-    {
-        Move mv(i);
-        auto& info = get_move_info<MAX_SIZE>(mv);
-        auto& info_ext_2 = m_move_info_ext_2[i];
-        info_ext_2.breaks_symmetry = false;
-        array<Point, PieceInfo::max_size> sym_points;
-        MovePoints::IntType n = 0;
-        for (Point p : info)
-        {
-            auto symm_p = m_symmetric_points[p];
-            auto end = info.end();
-            if (find(info.begin(), end, symm_p) != end)
-                info_ext_2.breaks_symmetry = true;
-            sym_points[n++] = symm_p;
-        }
-        for (auto mv : get_moves(info.get_piece(), sym_points[0]))
-            if (is_reverse(sym_points.begin(),
-                           get_move_info<MAX_SIZE>(mv).begin(), n))
-            {
-                info_ext_2.symmetric_move = mv;
-                break;
-            }
-    }
-}
-
 void BoardConst::sort(MovePoints& points) const
 {
     auto less = [this](Point a, Point b)

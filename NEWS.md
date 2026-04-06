@@ -4,7 +4,9 @@ Pentobi Release Notes
 Version 31.0-dev (main)
 -----------------------
 
-* …
+* Removed code to detect opportunities for the second player to enforce
+  symmetric draws (was already unused in the GUI and disabled by default
+  in the GTP interface)
 
 Version 30.2-dev (v30-fixes)
 ----------------------------

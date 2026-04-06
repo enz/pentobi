@@ -9,7 +9,6 @@
 
 #include "MoveInfo.h"
 #include "PrecompMoves.h"
-#include "SymmetricPoints.h"
 #include "libboardgame_base/Range.h"
 
 namespace libpentobi_base {
@@ -130,13 +129,6 @@ public:
         return m_board_type != BoardType::nexos || m_geo.get_point_type(p) != 0;
     }
 
-    /** Only initialized in game variants with central symmetry of board
-        including starting points. */
-    const SymmetricPoints& get_symmetric_points() const
-    {
-        return m_symmetric_points;
-    }
-
     /** Convert a move to its string representation.
         The string representation is a comma-separated list of points (without
         spaces between the commas or points). If with_piece_name is true,
@@ -201,8 +193,6 @@ private:
         for Point is that y goes downwards. */
     Grid<unsigned> m_compare_val;
 
-    SymmetricPoints m_symmetric_points;
-
 
     BoardConst(BoardType board_type, PieceSet piece_set);
 
@@ -219,9 +209,6 @@ private:
     const MoveInfo<MAX_SIZE>& get_move_info(Move mv) const;
 
     void init_adj_status_points(Point p);
-
-    template<unsigned MAX_SIZE>
-    void init_symmetry_info();
 };
 
 inline const Geometry& BoardConst::get_geometry() const

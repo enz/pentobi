@@ -50,8 +50,7 @@ public:
         @return false If the tree has not enough capacity for the children. */
     template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
     bool gen_children(const Board& bd, const MoveList& moves,
-                      bool is_symmetry_broken, Tree::NodeExpander& expander,
-                      Float root_val);
+                      Tree::NodeExpander& expander, Float root_val);
 
 private:
     struct MoveFeatures
@@ -337,7 +336,6 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
 
 template<unsigned MAX_SIZE, unsigned MAX_ADJ_ATTACH, bool IS_CALLISTO>
 bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
-                                  bool is_symmetry_broken,
                                   Tree::NodeExpander& expander, Float root_val)
 {
     if (moves.empty())
@@ -363,39 +361,6 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                 bd, moves, check_dist_to_center, check_connect);
     if (! m_has_connect_move)
         check_connect = false;
-    bool has_symmetry_breaker = false;
-    if (! is_symmetry_broken)
-    {
-        unsigned nu_moves = bd.get_nu_moves();
-        if (to_play == Color(1) || to_play == Color(3))
-        {
-            if (nu_moves > 0)
-            {
-                // If a symmetric draw is still possible, encourage exploring
-                // the move that keeps the symmetry
-                ColorMove last = bd.get_move(nu_moves - 1);
-                Move symmetric_mv =
-                        bd.get_move_info_ext_2(last.move).symmetric_move;
-                for (unsigned i = 0; i < moves.size(); ++i)
-                    if (moves[i] == symmetric_mv)
-                    {
-                        m_sum_gamma -= m_features[i].gamma;
-                        m_features[i].gamma *= 100.f;
-                        m_sum_gamma += m_features[i].gamma;
-                        if (m_features[i].gamma > m_max_gamma)
-                            m_max_gamma = m_features[i].gamma;
-                        break;
-                    }
-            }
-        }
-        else if (nu_moves > 0)
-            for (Move mv : moves)
-                if (bd.get_move_info_ext_2(mv).breaks_symmetry)
-                {
-                    has_symmetry_breaker = true;
-                    break;
-                }
-    }
     m_min_dist_to_center += m_max_dist_diff;
     if (! expander.check_capacity(static_cast<unsigned short>(moves.size())))
         return false;
@@ -412,11 +377,6 @@ bool PriorKnowledge::gen_children(const Board& bd, const MoveList& moves,
                 || (check_connect && ! features.connect))
             continue;
         auto mv = moves[i];
-        // If a symmetric draw is still possible, consider only moves that
-        // break the symmetry
-        if (has_symmetry_breaker
-                && ! bd.get_move_info_ext_2(mv).breaks_symmetry)
-            continue;
         Float move_prior = features.gamma * inv_sum_gamma;
         // Empirical good formula for value initialization
         Float value = root_val * sqrt(features.gamma * inv_max_gamma);

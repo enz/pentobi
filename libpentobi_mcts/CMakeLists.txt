@@ -21,8 +21,6 @@ add_library(pentobi_mcts STATIC
   Search.cpp
   State.h
   State.cpp
-  StateUtil.h
-  StateUtil.cpp
   Util.h
   Util.cpp
 )

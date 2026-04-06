@@ -92,20 +92,7 @@ struct MoveInfoExt
     performance. */
 struct MoveInfoExt2
 {
-    /** Whether the move breaks rotational symmetry of the board.
-        Currently not initialized for classic and trigon_3 board types because
-        enforced rotational-symmetric draws are not used in the MCTS search on
-        these boards (trigon_3 has no 2-player game variant and classic_2
-        currently only supports colored starting points, which makes rotational
-        draws impossible. */
-    bool breaks_symmetry;
-
     uint_least8_t scored_points_size;
-
-    /** The rotational-symmetric counterpart to this move.
-        Only initialized for game variants that have rotational-symmetric
-        boards and starting points. */
-    Move symmetric_move;
 
     Point label_pos;
 
