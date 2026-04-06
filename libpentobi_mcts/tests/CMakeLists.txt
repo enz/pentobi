@@ -1,5 +1,6 @@
 add_executable(test_libpentobi_mcts
   SearchTest.cpp
+  StateUtilTest.cpp
 )
 
 target_link_libraries(test_libpentobi_mcts
