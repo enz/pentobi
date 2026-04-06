@@ -197,6 +197,17 @@ void State::evaluate_multicolor(array<Float, 6>& result)
 {
     LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
     LIBBOARDGAME_ASSERT(m_bd.get_nu_colors() == 4);
+    // Always evaluate symmetric positions in trigon_2 as a draw in the
+    // playouts. See comment in evaluate_playout_duo.
+    // m_is_symmetry_broken is always true in classic_2, no need to check for
+    // game variant.
+    if (! m_is_symmetry_broken
+            && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
+    {
+        result[0] = result[1] = result[2] = result[3] = 0.5;
+        return;
+    }
+
     auto s = m_bd.get_score_multicolor(Color(0));
     Float res;
     if (s > 0)
@@ -248,7 +259,12 @@ void State::evaluate_twocolor(array<Float, 6>& result)
 {
     LIBBOARDGAME_ASSERT(m_bd.get_nu_players() == 2);
     LIBBOARDGAME_ASSERT(m_bd.get_nu_colors() == 2);
-    ScoreType s = m_bd.get_score_twocolor(Color(0));
+    ScoreType s;
+    if (! m_is_symmetry_broken
+            && m_bd.get_nu_onboard_pieces() >= m_symmetry_min_nu_pieces)
+        s = 0;
+    else
+        s = m_bd.get_score_twocolor(Color(0));
     Float res;
     if (s > 0)
         res = 1;
@@ -333,28 +349,33 @@ bool State::gen_children(Tree::NodeExpander& expander, Float root_val)
         {
             init_moves_without_gamma<5, false>(to_play);
             return m_prior_knowledge.gen_children<5, 16, false>(
-                        m_bd, m_moves[to_play], expander, root_val);
+                        m_bd, m_moves[to_play], m_is_symmetry_broken,
+                        expander, root_val);
         }
         init_moves_without_gamma<5, true>(to_play);
         return m_prior_knowledge.gen_children<5, 16, true>(
-                    m_bd, m_moves[to_play], expander, root_val);
+                    m_bd, m_moves[to_play], m_is_symmetry_broken,
+                    expander, root_val);
     }
     if (m_max_piece_size == 6)
     {
         init_moves_without_gamma<6, false>(to_play);
         return m_prior_knowledge.gen_children<6, 22, false>(
-                    m_bd, m_moves[to_play], expander, root_val);
+                    m_bd, m_moves[to_play], m_is_symmetry_broken, expander,
+                    root_val);
     }
     if (m_max_piece_size == 7)
     {
         init_moves_without_gamma<7, false>(to_play);
         return m_prior_knowledge.gen_children<7, 12, false>(
-                    m_bd, m_moves[to_play], expander, root_val);
+                    m_bd, m_moves[to_play], m_is_symmetry_broken, expander,
+                    root_val);
     }
     LIBBOARDGAME_ASSERT(m_max_piece_size == 22);
     init_moves_without_gamma<22, false>(to_play);
     return m_prior_knowledge.gen_children<22, 44, false>(
-                m_bd, m_moves[to_play], expander, root_val);
+                m_bd, m_moves[to_play], m_is_symmetry_broken, expander,
+                root_val);
 }
 
 bool State::gen_playout_move_full(PlayerMove& mv)
@@ -405,6 +426,8 @@ bool State::gen_playout_move_full(PlayerMove& mv)
         }
         to_play = to_play.get_next(m_nu_colors);
         m_bd.set_to_play(to_play);
+        // Don't try to handle symmetry after pass moves
+        m_is_symmetry_broken = true;
     }
 
     auto& moves = m_moves[to_play];
@@ -749,6 +772,11 @@ void State::play_expanded_child(Move mv)
     {
         ++m_nu_passes;
         m_bd.set_to_play(m_bd.get_to_play().get_next(m_nu_colors));
+        // Don't try to handle pass moves: a pass move either breaks symmetry
+        // or both players have passed and it's the end of the game and we need
+        // symmetry detection only as a heuristic (playouts and move value
+        // initialization)
+        m_is_symmetry_broken = true;
     }
 }
 
@@ -769,11 +797,33 @@ void State::start_search()
     m_check_terminate_early =
             (bd.get_nu_moves() < 10u * m_nu_colors
              && m_bd.get_nu_players() == 2);
+    auto variant = bd.get_variant();
+    m_check_symmetric_draw =
+            (has_central_symmetry(variant)
+             && ! ((m_shared_const.to_play == Color(1)
+                    || m_shared_const.to_play == Color(3))
+                   && m_shared_const.avoid_symmetric_draw)
+             && ! check_symmetry_broken(bd));
+    if (! m_check_symmetric_draw)
+        // Pretending that the symmetry is always broken is equivalent to
+        // ignoring symmetric draws
+        m_is_symmetry_broken = true;
+    if (variant == Variant::trigon_2 || variant == Variant::callisto_2)
+        m_symmetry_min_nu_pieces = 5;
+    else
+    {
+        LIBBOARDGAME_ASSERT(! m_check_symmetric_draw || variant == Variant::duo
+                            || variant == Variant::junior
+                            || variant == Variant::gembloq_2);
+        m_symmetry_min_nu_pieces = 3;
+    }
+
     m_prior_knowledge.start_search(bd);
     m_stat_len.clear();
     m_stat_attach.clear();
     for (Color c : Color::Range(m_nu_colors))
         m_stat_score[c].clear();
+
     init_gamma();
 }
 

@@ -198,7 +198,8 @@ void set_pieces_considered(const Board& bd, unsigned nu_moves,
 
 SharedConst::SharedConst(const Color& to_play)
     : board(nullptr),
-      to_play(to_play)
+      to_play(to_play),
+      avoid_symmetric_draw(true)
 { }
 
 void SharedConst::init(bool is_followup)

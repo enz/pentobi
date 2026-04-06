@@ -52,6 +52,17 @@ public:
 
     string get_info() const override;
 
+
+    /** @name Parameters */
+    /** @{ */
+
+    bool get_avoid_symmetric_draw() const;
+
+    void set_avoid_symmetric_draw(bool enable);
+
+    /** @} */ // @name
+
+
     bool search(Move& mv, const Board& bd, Color to_play, Float max_count,
                 size_t min_simulations, double max_time,
                 TimeSource& time_source);
@@ -84,6 +95,11 @@ private:
     void set_default_param(Variant variant);
 };
 
+inline bool Search::get_avoid_symmetric_draw() const
+{
+    return m_shared_const.avoid_symmetric_draw;
+}
+
 inline const Board& Search::get_board() const
 {
     return *m_shared_const.board;
@@ -105,6 +121,11 @@ inline PlayerInt Search::get_player() const
     if ( m_variant == Variant::classic_3 && to_play == 3)
         return static_cast<PlayerInt>(to_play + get_board().get_alt_player());
     return to_play;
+}
+
+inline void Search::set_avoid_symmetric_draw(bool enable)
+{
+    m_shared_const.avoid_symmetric_draw = enable;
 }
 
 //-----------------------------------------------------------------------------

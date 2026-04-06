@@ -60,6 +60,8 @@ add_library(pentobi_base STATIC
   Setup.h
   StartingPoints.h
   StartingPoints.cpp
+  SymmetricPoints.h
+  SymmetricPoints.cpp
   TreeUtil.h
   TreeUtil.cpp
   TrigonGeometry.h

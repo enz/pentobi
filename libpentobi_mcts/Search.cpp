@@ -26,6 +26,19 @@ bool Search::check_followup(ArrayList<Move, max_moves>& sequence)
     auto& bd = get_board();
     m_history.init(bd, m_to_play);
     bool is_followup = m_history.is_followup(m_last_history, sequence);
+
+    // If avoid_symmetric_draw is enabled, class State uses a different
+    // evaluation function depending on which player is to play in the root
+    // position (the first player knows about symmetric draws to be able to
+    // play a symmetry breaker but the second player pretends not to know about
+    // symmetric draws to avoid going for such a draw). In this case, we cannot
+    // reuse parts of the old search tree if the computer plays both colors.
+    if (m_shared_const.avoid_symmetric_draw
+            && is_followup && m_to_play != m_last_history.get_to_play()
+            && has_central_symmetry(bd.get_variant())
+            && ! check_symmetry_broken(bd))
+        is_followup = false;
+
     m_last_history = m_history;
     return is_followup;
 }

@@ -41,6 +41,8 @@ public:
     /** The color to play at the root of the search. */
     const Color& to_play;
 
+    bool avoid_symmetric_draw;
+
     /** Minimum total number of pieces on the board where all pieces are
         considered until the rest of the simulation. */
     unsigned min_move_all_considered;

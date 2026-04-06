@@ -168,6 +168,10 @@ void GtpEngine::cmd_move_info(Arguments args, Response& response)
         << "Points:";
     for (auto p : bd.get_move_points(mv))
         response << ' ' << geo.to_string(p);
+    response
+        << "\n"
+        << "BrkSym: " << info_ext_2.breaks_symmetry << "\n"
+        << "SymMv:  " << bd.to_string(info_ext_2.symmetric_move);
 }
 
 void GtpEngine::cmd_p(Arguments args)

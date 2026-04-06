@@ -34,4 +34,16 @@ LIBBOARDGAME_TEST_CASE(pentobi_base_board_const_to_string_ordered)
     LIBBOARDGAME_CHECK_EQUAL(bc.to_string(mv), "j5,i6,j6,h7,i7")
 }
 
+/** Check symmetry information in MoveInfoExt for some moves. */
+LIBBOARDGAME_TEST_CASE(pentobi_base_board_const_symmetry_info)
+{
+    auto& bc = BoardConst::get(Variant::trigon_2);
+    Move mv;
+    LIBBOARDGAME_CHECK(bc.from_string(mv, "q9,q10,r10,q11,r11,s11"))
+    auto& info_ext_2 = bc.get_move_info_ext_2(mv);
+    LIBBOARDGAME_CHECK(! info_ext_2.breaks_symmetry)
+    LIBBOARDGAME_CHECK(bc.from_string(mv, "q8,r8,s8,r9,s9,s10"))
+    LIBBOARDGAME_CHECK_EQUAL(info_ext_2.symmetric_move.to_int(), mv.to_int())
+}
+
 //-----------------------------------------------------------------------------
