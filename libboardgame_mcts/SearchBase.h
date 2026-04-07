@@ -261,7 +261,7 @@ public:
         The default value is false, because the usually preferred behavior
         is to see if the search generates different moves when doing subsequent
         searches in the same position.
-        @see set_subreuse_tree() */
+        @see set_reuse_subtree() */
     void set_reuse_tree(bool enable);
 
     bool get_reuse_tree() const;
@@ -1307,7 +1307,7 @@ inline auto SearchBase<S, M, R>::select_child(
 }
 
 template<class S, class M, class R>
-auto SearchBase<S, M, R>::select_final() const-> const Node*
+auto SearchBase<S, M, R>::select_final() const -> const Node*
 {
     // Select the child with the highest number of wins
     auto children = m_tree.get_children(m_tree.get_root());
