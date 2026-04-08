@@ -142,7 +142,7 @@ const char* to_string_id(Variant variant);
     @result True if the string contained a valid game variant. */
 bool parse_variant(const string& s, Variant& variant);
 
-/** Parse short lowercase name of game variant as returned to_string_id().
+/** Parse short lowercase name of game variant as returned by to_string_id().
     @param s
     @param[out] variant
     @result True if the string contained a valid game variant. */
