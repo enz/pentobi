@@ -350,13 +350,13 @@ void GtpEngine::play(Color c, Arguments args, unsigned arg_move_begin)
     {
         auto line = args.get_line();
         if (! bd.from_string(mv, string(&*line.begin(), line.size())))
-            throw Failure("invalid move ");
+            throw Failure("invalid move");
     }
     else
     {
         auto line = args.get_remaining_line(arg_move_begin - 1);
         if (! bd.from_string(mv, string(&*line.begin(), line.size())))
-            throw Failure("invalid move ");
+            throw Failure("invalid move");
     }
     if (mv.is_null())
         throw Failure("play pass not supported (anymore)");
