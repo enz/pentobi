@@ -350,12 +350,12 @@ function init() {
     // initialFile is a context property set from command line argument
     if (initialFile) {
         if (! gameModel.isModified) {
-            openFileBlocking(initialFile, displayName )
+            openFileBlocking(initialFile, displayName)
             showWindow()
         }
         else {
             showWindow()
-            verify(function() { openFileBlocking(initialFile, displayName ) })
+            verify(function() { openFileBlocking(initialFile, displayName) })
         }
         return
     }
@@ -738,7 +738,7 @@ function showWindow() {
         return
     }
     var defaultWidth = 954
-    var defaultHeight= 551
+    var defaultHeight = 551
     if (settings.width == 0) {
         settings.width = defaultWidth
         settings.height = defaultHeight
