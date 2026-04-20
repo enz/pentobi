@@ -39,7 +39,7 @@ function autoSaveNoVerifyAndQuit() {
         Qt.quit()
 }
 
-function cancelRunning(showMessage) {
+function cancelRunning(showMessage = false) {
     if (analyzeGameModel.isRunning) {
         analyzeGameModel.cancel()
         if (showMessage)
