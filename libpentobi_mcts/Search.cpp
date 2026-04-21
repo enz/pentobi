@@ -86,7 +86,6 @@ bool Search::search(Move& mv, const Board& bd, Color to_play,
                                                             p, 0);
                 LIBBOARDGAME_ASSERT(moves.size() == 1);
                 mv = *moves.begin();
-                result = true;
                 break;
             }
     }
