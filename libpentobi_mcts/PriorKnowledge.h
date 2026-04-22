@@ -251,7 +251,7 @@ void PriorKnowledge::compute_features(const Board& bd, const MoveList& moves,
     }
     m_max_gamma = -numeric_limits<Float>::max();
     m_sum_gamma = 0;
-    m_min_dist_to_center = numeric_limits<unsigned short>::max();
+    m_min_dist_to_center = numeric_limits<float>::max();
     m_has_connect_move = false;
     for (unsigned i = 0; i < moves.size(); ++i)
     {
