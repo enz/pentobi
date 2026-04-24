@@ -106,8 +106,6 @@ private:
     WallTimeSource m_time_source;
 
 
-    void init_settings();
-
     bool load_book(const string& filepath);
 };
 
