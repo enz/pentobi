@@ -24,7 +24,7 @@ class TwoGtp
 public:
     TwoGtp(const string& black, const string& white, Variant variant,
            unsigned nu_games, Output& output, bool quiet,
-           const string& log_prefix, bool fast_open);
+           const string& log_prefix);
 
     void run();
 
@@ -32,8 +32,6 @@ public:
 
 private:
     bool m_quiet;
-
-    bool m_fast_open;
 
     Variant m_variant;
 

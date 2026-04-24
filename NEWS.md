@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 31.0-dev (main)
 -----------------------
 
-* …
+* twogtp option --fastopen is no longer supported
 
 Version 30.2-dev (v30-fixes)
 ----------------------------

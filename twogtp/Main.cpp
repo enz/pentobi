@@ -27,7 +27,6 @@ int main(int argc, char** argv)
         vector<string> specs = {
             "analyze:",
             "black|b:",
-            "fastopen",
             "file|f:",
             "game|g:",
             "nugames|n:",
@@ -53,8 +52,7 @@ int main(int argc, char** argv)
         bool quiet = opt.contains("quiet");
         if (quiet)
             libboardgame_base::disable_logging();
-        bool fast_open = opt.contains("fastopen");
-        bool create_tree = opt.contains("tree") || fast_open;
+        bool create_tree = opt.contains("tree");
         Variant variant;
         if (! parse_variant_id(variant_string, variant))
             throw runtime_error("invalid game variant " + variant_string);
@@ -68,7 +66,7 @@ int main(int argc, char** argv)
                 log_prefix = to_string(i + 1);
             auto twogtp = make_shared<TwoGtp>(black, white, variant,
                                               nu_games, output, quiet,
-                                              log_prefix, fast_open);
+                                              log_prefix);
             twogtp->set_save_interval(save_interval);
             twogtps.push_back(twogtp);
         }

@@ -38,9 +38,6 @@ public:
 
     bool check_sentinel();
 
-    bool generate_fast_open_move(bool is_player_black, const Board& bd,
-                                 Color to_play, Move& mv);
-
 private:
     bool m_create_tree;
 

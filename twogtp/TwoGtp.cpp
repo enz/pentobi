@@ -19,9 +19,8 @@ using libpentobi_base::ScoreType;
 
 TwoGtp::TwoGtp(const string& black, const string& white, Variant variant,
                unsigned nu_games, Output& output, bool quiet,
-               const string& log_prefix, bool fast_open)
+               const string& log_prefix)
     : m_quiet(quiet),
-      m_fast_open(fast_open),
       m_variant(variant),
       m_nu_games(nu_games),
       m_bd(variant),
@@ -110,27 +109,16 @@ void TwoGtp::play_game(unsigned game_number)
         auto& player_connection = (player == player_black ? m_black : m_white);
         auto& other_connection = (player == player_black ? m_white : m_black);
         auto color = m_colors[to_play.to_int()];
+        is_real_move[m_bd.get_nu_moves()] = true;
+        auto response = player_connection.send("genmove " + color);
+        if (response == "resign")
+        {
+            resign = true;
+            break;
+        }
         Move mv;
-        if (m_fast_open
-                && m_output.generate_fast_open_move(player == player_black,
-                                                    m_bd, to_play, mv))
-        {
-            is_real_move[m_bd.get_nu_moves()] = false;
-            LIBBOARDGAME_LOG("Playing fast opening move");
-            player_connection.send("play " + color + " " + m_bd.to_string(mv));
-        }
-        else
-        {
-            is_real_move[m_bd.get_nu_moves()] = true;
-            auto response = player_connection.send("genmove " + color);
-            if (response == "resign")
-            {
-                resign = true;
-                break;
-            }
-            if (! m_bd.from_string(mv, response))
-                throw runtime_error("invalid move");
-        }
+        if (! m_bd.from_string(mv, response))
+            throw runtime_error("invalid move");
         sgf.begin_node();
         sgf.write_property(string(1, static_cast<char>(toupper(color[0]))),
                            m_bd.to_string(mv));

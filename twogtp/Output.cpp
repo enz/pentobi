@@ -100,14 +100,6 @@ bool Output::check_sentinel()
     return ! ifstream(m_prefix + ".stop").fail();
 }
 
-bool Output::generate_fast_open_move(bool is_player_black, const Board& bd,
-                                     Color to_play, Move& mv)
-{
-    lock_guard lock(m_mutex);
-    m_output_tree.generate_move(is_player_black, bd, to_play, mv);
-    return ! mv.is_null();
-}
-
 unsigned Output::get_next()
 {
     lock_guard lock(m_mutex);
