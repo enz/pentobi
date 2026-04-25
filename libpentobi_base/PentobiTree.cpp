@@ -83,26 +83,26 @@ const SgfNode* PentobiTree::get_node_before_move_number(
     return nullptr;
 }
 
-string PentobiTree::get_player_name(Color c) const
+string PentobiTree::get_player_name(unsigned player) const
 {
     string name;
     auto& root = get_root();
     if (get_nu_players(m_variant) == 2)
     {
-        if (c == Color(0) || c == Color(2))
+        if (player == 0)
             name = root.get_property("PB", "");
-        else if (c == Color(1) || c == Color(3))
+        else if (player == 1)
             name = root.get_property("PW", "");
     }
     else
     {
-        if (c == Color(0))
+        if (player == 0)
             name = root.get_property("P1", "");
-        else if (c == Color(1))
+        else if (player == 1)
             name = root.get_property("P2", "");
-        else if (c == Color(2))
+        else if (player == 2)
             name = root.get_property("P3", "");
-        else if (c == Color(3))
+        else if (player == 3)
             name = root.get_property("P4", "");
     }
     return name;
@@ -249,25 +249,25 @@ void PentobiTree::set_player(const SgfNode& node, Color c)
     set_property(node, "PL", get_color(c));
 }
 
-void PentobiTree::set_player_name(Color c, const string& name)
+void PentobiTree::set_player_name(unsigned player, const string& name)
 {
     auto& root = get_root();
     if (get_nu_players(m_variant) == 2)
     {
-        if (c == Color(0) || c == Color(2))
+        if (player == 0)
             set_property_remove_empty(root, "PB", name);
-        else if (c == Color(1) || c == Color(3))
+        else if (player == 1)
             set_property_remove_empty(root, "PW", name);
     }
     else
     {
-        if (c == Color(0))
+        if (player == 0)
             set_property_remove_empty(root, "P1", name);
-        else if (c == Color(1))
+        else if (player == 1)
             set_property_remove_empty(root, "P2", name);
-        else if (c == Color(2))
+        else if (player == 2)
             set_property_remove_empty(root, "P3", name);
-        else if (c == Color(3))
+        else if (player == 3)
             set_property_remove_empty(root, "P4", name);
     }
 }

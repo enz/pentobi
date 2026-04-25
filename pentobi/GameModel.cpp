@@ -1350,7 +1350,7 @@ void GameModel::setPlayerName0(const QString& name)
     if (name == m_playerName0)
         return;
     m_playerName0 = name;
-    m_game.set_player_name(Color(0), encode(name).constData());
+    m_game.set_player_name(0, encode(name).constData());
     emit playerName0Changed();
     updateIsModified();
 }
@@ -1360,7 +1360,7 @@ void GameModel::setPlayerName1(const QString& name)
     if (name == m_playerName1)
         return;
     m_playerName1 = name;
-    m_game.set_player_name(Color(1), encode(name).constData());
+    m_game.set_player_name(1, encode(name).constData());
     emit playerName1Changed();
     updateIsModified();
 }
@@ -1370,7 +1370,7 @@ void GameModel::setPlayerName2(const QString& name)
     if (name == m_playerName2)
         return;
     m_playerName2 = name;
-    m_game.set_player_name(Color(2), encode(name).constData());
+    m_game.set_player_name(2, encode(name).constData());
     emit playerName2Changed();
     updateIsModified();
 }
@@ -1380,7 +1380,7 @@ void GameModel::setPlayerName3(const QString& name)
     if (name == m_playerName3)
         return;
     m_playerName3 = name;
-    m_game.set_player_name(Color(3), encode(name).constData());
+    m_game.set_player_name(3, encode(name).constData());
     emit playerName3Changed();
     updateIsModified();
 }
@@ -1461,12 +1461,12 @@ void GameModel::updateFileInfo(const QString& file)
 void GameModel::updateGameInfo()
 {
     static_assert(Color::range == 4);
-    setPlayerName0(decode(m_game.get_player_name(Color(0))));
-    setPlayerName1(decode(m_game.get_player_name(Color(1))));
+    setPlayerName0(decode(m_game.get_player_name(0)));
+    setPlayerName1(decode(m_game.get_player_name(1)));
     if (m_nuPlayers > 2)
-        setPlayerName2(decode(m_game.get_player_name(Color(2))));
+        setPlayerName2(decode(m_game.get_player_name(2)));
     if (m_nuPlayers > 3)
-        setPlayerName3(decode(m_game.get_player_name(Color(3))));
+        setPlayerName3(decode(m_game.get_player_name(3)));
     setDate(decode(m_game.get_date()));
     setTime(decode(m_game.get_time()));
     setEvent(decode(m_game.get_event()));

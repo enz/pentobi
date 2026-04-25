@@ -137,9 +137,9 @@ public:
     /** Set the AP property at the root node. */
     void set_application(const string& name, const string& version = {});
 
-    string get_player_name(Color c) const;
+    string get_player_name(unsigned player) const;
 
-    void set_player_name(Color c, const string& name);
+    void set_player_name(unsigned player, const string& name);
 
     string get_date() const;
 
@@ -221,9 +221,9 @@ inline double Game::get_good_move(const SgfNode& node)
     return SgfTree::get_good_move(node);
 }
 
-inline string Game::get_player_name(Color c) const
+inline string Game::get_player_name(unsigned player) const
 {
-    return m_tree.get_player_name(c);
+    return m_tree.get_player_name(player);
 }
 
 inline string Game::get_round() const
@@ -356,9 +356,9 @@ inline void Game::set_modified(bool is_modified)
     m_tree.set_modified(is_modified);
 }
 
-inline void Game::set_player_name(Color c, const string& name)
+inline void Game::set_player_name(unsigned player, const string& name)
 {
-    m_tree.set_player_name(c, name);
+    m_tree.set_player_name(player, name);
 }
 
 inline void Game::set_round(const string& round)

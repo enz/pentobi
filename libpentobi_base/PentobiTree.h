@@ -61,9 +61,9 @@ public:
 
     Variant get_variant() const;
 
-    string get_player_name(Color c) const;
+    string get_player_name(unsigned player) const;
 
-    void set_player_name(Color c, const string& name);
+    void set_player_name(unsigned player, const string& name);
 
     void keep_only_subtree(const SgfNode& node);
 
