@@ -91,7 +91,7 @@ string PentobiTree::get_player_name(Color c) const
     {
         if (c == Color(0) || c == Color(2))
             name = root.get_property("PB", "");
-        else if (c == Color(1) || c == Color(2))
+        else if (c == Color(1) || c == Color(3))
             name = root.get_property("PW", "");
     }
     else
