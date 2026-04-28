@@ -36,7 +36,7 @@ void dump_tree_recurse(Writer& writer, Variant variant,
     Color next_to_play = to_play.get_next(get_nu_colors(variant));    
     vector<const Search::Node*> sorted_children;
     sorted_children.reserve(children.size());
-    for (auto& i : tree.get_children(node))
+    for (auto& i : children)
         sorted_children.push_back(&i);
     sort(sorted_children.begin(), sorted_children.end(), compare_node);
     for (const auto i : sorted_children)
