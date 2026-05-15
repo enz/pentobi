@@ -47,13 +47,6 @@ bool isSmallScreen()
 int main(int argc, char *argv[])
 {
     libboardgame_base::LogInitializer log_initializer;
-#ifdef Q_OS_ANDROID
-    // Rounding on Android uses PassThrough by default which causes rendering
-    // errors on some devices when switching fullscreen or orientation and
-    // incorrect canvas painting on low-DPI devices with devicePixelRatio<1
-    QGuiApplication::setHighDpiScaleFactorRoundingPolicy(
-                Qt::HighDpiScaleFactorRoundingPolicy::Round);
-#endif
 #ifdef Q_OS_WIN
     qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
 #endif
