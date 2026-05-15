@@ -161,7 +161,7 @@ Move Player::genmove(const Board& bd, Color c)
     Move mv;
     auto variant = bd.get_variant();
     auto board_type = bd.get_board_type();
-    auto level = min(max(m_level, 1u), m_max_level);
+    auto level = min({ max( m_level, 1u), 9u, m_max_level });
     // Don't use more than 2 moves per color from opening book in lower levels
     if (m_use_book
         && (level >= 4 || bd.get_nu_moves() < 2u * bd.get_nu_colors()))
