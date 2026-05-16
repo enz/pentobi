@@ -11,7 +11,7 @@ Grid {
 
     property list<PieceBase> pieces
 
-    signal piecePicked(var piece)
+    signal piecePicked(PieceBase piece)
 
     Repeater {
         model: pieces

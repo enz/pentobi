@@ -17,7 +17,7 @@ Item {
     // Dummy for compatibility with PieceSelectorMobile
     property bool transitionsEnabled
 
-    signal piecePicked(var piece)
+    signal piecePicked(PieceBase piece)
 
     property real toPlayIndicatorWidth:
         Math.max(Math.min(parent.width / columns, parent.height / 8.3) / 10, 2)

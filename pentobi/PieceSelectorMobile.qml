@@ -17,7 +17,7 @@ Flickable {
     property alias rowSpacing: pieceList0.rowSpacing
     property alias transitionsEnabled: transition.enabled
 
-    signal piecePicked(var piece)
+    signal piecePicked(PieceBase piece)
 
     flickableDirection: Flickable.VerticalFlick
     contentHeight: Math.max(pieceList0.y + pieceList0.height,
