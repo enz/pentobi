@@ -47,7 +47,7 @@ public:
 
     GtpEngine(const GtpEngine&) = delete;
 
-    GtpEngine& operator=(const GtpEngine&) const = delete;
+    GtpEngine& operator=(const GtpEngine&) = delete;
 
     virtual ~GtpEngine();
 
