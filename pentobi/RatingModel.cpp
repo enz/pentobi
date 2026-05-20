@@ -16,6 +16,7 @@
 #include "libpentobi_mcts/Player.h"
 
 using namespace Qt::StringLiterals;
+using libpentobi_base::parse_variant_id;
 using libpentobi_mcts::Player;
 
 //-----------------------------------------------------------------------------
@@ -305,8 +306,7 @@ void RatingModel::setGameVariant(const QString& gameVariant)
     if (m_gameVariant == gameVariant)
         return;
     Variant variant;
-    if (! libpentobi_base::parse_variant_id(
-                gameVariant.toLocal8Bit().constData(), variant))
+    if (! parse_variant_id(gameVariant.toLocal8Bit().constData(), variant))
         return;
     m_gameVariant = gameVariant;
     m_gameVariantName =
