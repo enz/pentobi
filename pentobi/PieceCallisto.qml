@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick
-import QtQuick.Window
 
 PieceBase
 {
