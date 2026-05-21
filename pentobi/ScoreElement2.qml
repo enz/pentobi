@@ -17,7 +17,7 @@ Item {
     property real value
     property alias fontSize: text.font.pixelSize
 
-    implicitWidth: point1.implicitWidth + point1.implicitWidth
+    implicitWidth: point1.implicitWidth + point2.implicitWidth
                    + text.implicitWidth + text.anchors.leftMargin
     implicitHeight: Math.max(point1.implicitHeight, point2.implicitHeight,
                              text.implicitHeight)
