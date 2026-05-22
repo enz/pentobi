@@ -63,7 +63,7 @@ PentobiDialog {
                 // Remove focus in case dialog was used before. It might be a
                 // different game now, which makes keeping the last focus
                 // meaningless. Also, it would automatically open the virtual
-                // keaboard on Android.
+                // keyboard on Android.
                 onVisibleChanged: focus = false
             }
             Label {
