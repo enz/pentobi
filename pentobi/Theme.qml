@@ -13,7 +13,7 @@ import QtQuick
 Item {
     property bool colorblind
 
-    // globalStyle is a contxt property set in Main.cpp
+    // globalStyle is a context property set in Main.cpp
     property bool isMaterial: globalStyle === "Material"
 
     // Don't use Application.styleHints.colorScheme. On some platforms/styles,
@@ -57,7 +57,7 @@ Item {
     property color colorStartingPoint: isDark ? "#82777E" : "#767074"
     property color colorBoardMarkup: isDark ? "#ffffff" : "#111111"
 
-    // Should be the dame as used in dark/light SVG icon sources
+    // Should be the same as used in dark/light SVG icon sources
     property color colorIcon: isDark ? "#91888f" : "#7b7b7b"
 
     property color colorBackground: isMaterial ? "#1c1b1f" : palette.window
