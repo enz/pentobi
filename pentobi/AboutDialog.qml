@@ -10,7 +10,7 @@ import QtQuick.Controls
 PentobiDialog {
     id: root
 
-    footer: DialogButtonBox { ButtonClose { } }
+    footer: DialogButtonBoxClose { }
 
     Item {
         implicitWidth:

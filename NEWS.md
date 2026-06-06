@@ -4,6 +4,7 @@ Pentobi Release Notes
 Version 31.0-dev (main)
 -----------------------
 
+* Minimum required Qt version is now 6.11
 * twogtp option --fastopen is no longer supported
 
 Version 30.2-dev (v30-fixes)

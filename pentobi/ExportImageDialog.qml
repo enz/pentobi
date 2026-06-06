@@ -12,7 +12,9 @@ PentobiDialog {
     id: root
 
     footer: DialogButtonBox {
-        ButtonOk { enabled: textField.acceptableInput }
+        defaultButton: buttonOk
+
+        ButtonOk { id: buttonOk; enabled: textField.acceptableInput }
         ButtonCancel { }
     }
     onAboutToShow: {
@@ -29,11 +31,6 @@ PentobiDialog {
             dialog.selectedFile = dialog.currentFolder + "/" + name
             dialog.open()
         }
-    }
-
-    function returnPressed() {
-        if (! hasButtonFocus() && textField.acceptableInput)
-            accept()
     }
 
     Item {
@@ -57,6 +54,7 @@ PentobiDialog {
                 validator: IntValidator{ bottom: 0; top: 32767 }
                 selectByMouse: true
                 Layout.preferredWidth: font.pixelSize * 5
+                onAccepted: root.accept()
             }
             Item { Layout.fillWidth: true }
         }

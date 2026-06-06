@@ -65,7 +65,7 @@ if(PENTOBI_BUILD_GUI)
         find_package(Qt6 REQUIRED COMPONENTS CorePrivate)
     endif()
     qt_standard_project_setup(
-        REQUIRES 6.9
+        REQUIRES 6.11
         I18N_SOURCE_LANGUAGE en_US
         I18N_TRANSLATED_LANGUAGES de es nb_NO vi fr ru zh_CN
     )

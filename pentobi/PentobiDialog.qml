@@ -22,28 +22,6 @@ Dialog {
         // Match 90% window width on mobile devices within reason
         isDesktop ? 0 : Math.min(27 * font.pixelSize, 0.9 * maxContentWidth)
 
-    // Qt 5.11 doesn't support default buttons yet, this function can be
-    // called as a replacement if the Return key is pressed and should be
-    // reimplemented if needed in derived dialogs.
-    // We don't handle the return key inside the dialog because the dialog will
-    // not consume the event in Qt 5.11 even if it accepts the key event and
-    // might therefore trigger global actions.
-    function returnPressed() {
-        if (! hasButtonFocus())
-            accept()
-    }
-    // Check if any button in the footer the focus. We don't want to handle
-    // the return key as accept (see comment above) if any button has the
-    // visual focus because the user might expect that pressing return triggers
-    // the button with the focus.
-    function hasButtonFocus() {
-        for (var i = 0; i < footer.contentChildren.length; ++i) {
-            if (footer.contentChildren[i].visualFocus)
-                return true
-        }
-        return false
-    }
-
     // We make all dialogs modal even if they wouldn't need to be because
     // QtQuickControls2 dialogs are not windows but immovable popup items, so
     // they inevitably cover parts of the parent window, such that the parent
@@ -55,10 +33,4 @@ Dialog {
     focus: true
     clip: true
     closePolicy: Popup.CloseOnEscape
-
-    Shortcut {
-        sequence: "Return"
-        enabled: visible
-        onActivated: returnPressed()
-    }
 }

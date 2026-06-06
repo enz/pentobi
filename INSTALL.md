@@ -7,7 +7,7 @@ Requirements
 Building Pentobi requires the following tools and libraries:
 
 * C++ compiler with C++20 support
-* [Qt libraries](https://www.qt.io/) (>=6.9)
+* [Qt libraries](https://www.qt.io/) (>=6.11)
 * [CMake](https://cmake.org/) (>=3.22)
 * [GNU gettext](https://www.gnu.org/software/gettext/) (>=0.23)
 * [LibRsvg](https://wiki.gnome.org/Projects/LibRsvg)

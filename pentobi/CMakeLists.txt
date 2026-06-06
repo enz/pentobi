@@ -81,6 +81,7 @@ qt_add_qml_module(pentobi
     Comment.qml
     ComputerDialog.qml
     DialogButtonBoxOkCancel.qml
+    DialogButtonBoxClose.qml
     DialogLoader.qml
     ExportImageDialog.qml
     FatalMessage.qml

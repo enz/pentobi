@@ -12,7 +12,9 @@ PentobiDialog {
     id: root
 
     footer: DialogButtonBox {
-        ButtonOk { enabled: textField.acceptableInput }
+        defaultButton: buttonOk
+
+        ButtonOk { id: buttonOk; enabled: textField.acceptableInput }
         ButtonCancel { }
     }
     onAboutToShow: {
@@ -23,11 +25,6 @@ PentobiDialog {
             textField.selectAll()
     }
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
-
-    function returnPressed() {
-        if (! hasButtonFocus() && textField.acceptableInput)
-            accept()
-    }
 
     Item {
         implicitWidth:
@@ -52,6 +49,7 @@ PentobiDialog {
                 }
                 Layout.preferredWidth: font.pixelSize * 5
                 onVisibleChanged: focus = true
+                onAccepted: root.accept()
             }
             Item { Layout.fillWidth: true }
         }

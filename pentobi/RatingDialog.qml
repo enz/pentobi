@@ -12,7 +12,7 @@ import "main.js" as Logic
 PentobiDialog {
     property int numberGames: ratingModel.numberGames
 
-    footer: DialogButtonBox { ButtonClose { } }
+    footer: DialogButtonBoxClose { }
 
     Item {
         implicitWidth: Math.max(Math.min(font.pixelSize * 26, maxContentWidth),

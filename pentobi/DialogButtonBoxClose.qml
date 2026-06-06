@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/DialogButtonBoxOkCancel.qml
+/** @file pentobi/DialogButtonClose.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -7,8 +7,7 @@
 import QtQuick.Controls
 
 DialogButtonBox {
-    defaultButton: buttonOk
+    defaultButton: buttonClose
 
-    ButtonCancel { }
-    ButtonOk { id: buttonOk }
+    ButtonClose { id: buttonClose }
 }
