@@ -61,7 +61,7 @@ if(PENTOBI_BUILD_GUI)
     set(CMAKE_AUTORCC ON)
     find_package(Qt6 REQUIRED COMPONENTS
         Concurrent LinguistTools QuickControls2 Xml)
-    if(ANDROID AND Qt6Core_VERSION VERSION_GREATER_EQUAL "6.10.0")
+    if(ANDROID)
         find_package(Qt6 REQUIRED COMPONENTS CorePrivate)
     endif()
     qt_standard_project_setup(
