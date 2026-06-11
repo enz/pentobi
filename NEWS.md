@@ -1,11 +1,10 @@
 Pentobi Release Notes
 =====================
 
-Version 30.2-dev (v30-fixes)
-----------------------------
+Version 30.2 (11 Jun 2026)
+--------------------------
 
 * Fixed race condition in pentobi/help/ causing build failures
-
 
 Version 30.1 (25 Mar 2026)
 --------------------------
