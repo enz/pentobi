@@ -1,8 +1,8 @@
 Pentobi Release Notes
 =====================
 
-Version 30.3 (v30-fixes)
-------------------------
+Version 30.3-dev (v30-fixes)
+----------------------------
 
 * …
 
