@@ -10,7 +10,8 @@ Version 31.0-dev (main)
 Version 30.2-dev (v30-fixes)
 ----------------------------
 
-* …
+* Fixed race condition in pentobi/help/ causing build failures
+
 
 Version 30.1 (25 Mar 2026)
 --------------------------
