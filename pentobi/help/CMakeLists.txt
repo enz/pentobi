@@ -28,6 +28,7 @@ set(DOCBOOK_SRC
 foreach(lang ${linguas})
     list(APPEND index_files "help/index_${lang}.xml")
     add_custom_command(OUTPUT "help/index_${lang}.xml"
+        COMMAND ${CMAKE_COMMAND} -E make_directory help
         COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}"
         --xml --template "${CMAKE_CURRENT_SOURCE_DIR}/docbook/index.xml"
         -l "${lang}" -o "help/index_${lang}.xml" --replace-text
