@@ -7,11 +7,15 @@ Version 31.0-dev (main)
 * Minimum required Qt version is now 6.11
 * twogtp option --fastopen is no longer supported
 
-Version 30.2-dev (v30-fixes)
+Version 30.3-dev (v30-fixes)
 ----------------------------
 
-* Fixed race condition in pentobi/help/ causing build failures
+* …
 
+Version 30.2 (11 Jun 2026)
+--------------------------
+
+* Fixed race condition in pentobi/help/ causing build failures
 
 Version 30.1 (25 Mar 2026)
 --------------------------
