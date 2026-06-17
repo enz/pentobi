@@ -18,7 +18,7 @@ Translations can be contributed at
 Source Code Overview
 --------------------
 
-The Libboardgame modules contain code that is not specific to Blokus and
+The board game modules contain code that is not specific to Blokus and
 could be reused for other board games.
 
 * __[libboardgame_base](libboardgame_base)__
@@ -54,8 +54,8 @@ computer player used in Pentobi.
   Tool for playing Blokus games between two GTP engines (currently only
   supported on Unix)
 
-The GUI module implements the user interface. It depends on the
-[Qt](https://www.qt.io/) libraries.
+The GUI module implements the user interface with [Qt](https://www.qt.io/)
+(QtQuick Controls).
 
 * __[pentobi](pentobi)__
   Main program that provides a GUI for the player in libpentobi_mcts
