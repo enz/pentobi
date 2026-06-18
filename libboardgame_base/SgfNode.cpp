@@ -125,8 +125,7 @@ const string& SgfNode::get_property(const string& id) const
     return property->values[0];
 }
 
-const string& SgfNode::get_property(const string& id,
-                                 const string& default_value) const
+string SgfNode::get_property(const string& id, const string& default_value) const
 {
     auto property = find_property(id);
     if (property == m_properties.end())
