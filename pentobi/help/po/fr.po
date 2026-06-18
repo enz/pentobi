@@ -1132,7 +1132,7 @@ msgstr ""
 
 #: docbook/index.xml:744
 msgid "<guimenuitem>Beginning of Branch</guimenuitem>"
-msgstr "Au début de la branche"
+msgstr "<guimenuitem>Au début de la branche</guimenuitem>"
 
 #: docbook/index.xml:745
 msgid "(<keysym>Ctrl+B</keysym>)"
@@ -1413,7 +1413,7 @@ msgid ""
 " comment area when the position changes. By default, the comment area is "
 "only shown if a comment exists for the current position."
 msgstr ""
-"Cette option n'existe que en mode bureau et configure la visibilité de la "
+"Cette option n'existe qu'en mode bureau et configure la visibilité de la "
 "zone de commentaire lorsque la position change. Par défaut, la zone de "
 "commentaire n'est affichée que s'il existe un commentaire pour la position "
 "actuelle."

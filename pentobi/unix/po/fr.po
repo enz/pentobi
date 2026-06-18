@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-29 11:47+0100\n"
+"POT-Creation-Date: 2025-01-23 11:26+0100\n"
 "PO-Revision-Date: 2019-02-25 15:36+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2024\n"
 "Language-Team: French (https://app.transifex.com/markus-enzenberger/teams/89074/fr/)\n"
@@ -29,7 +29,7 @@ msgstr "Pentobi"
 msgid "Computer opponent for Blokus"
 msgstr "Adversaire informatique pour jouer à Blokus"
 
-#: io.sourceforge.pentobi.appdata.xml.in:10
+#: io.sourceforge.pentobi.appdata.xml.in:15
 msgid ""
 "Pentobi is a computer opponent for the board game Blokus. It has a strong "
 "Blokus engine with different playing levels. The supported game variants are"
@@ -40,7 +40,7 @@ msgstr ""
 "de jeu prises en charge sont : Classic, Duo, Trigon, Junior, Nexos, Callisto"
 " et GembloQ."
 
-#: io.sourceforge.pentobi.appdata.xml.in:15
+#: io.sourceforge.pentobi.appdata.xml.in:20
 msgid ""
 "Players can determine their strength by playing rated games against the "
 "computer and use a game analysis function. Games can be saved in Smart Game "
@@ -51,7 +51,7 @@ msgstr ""
 "peuvent être sauvegardées au format Smart Game Format avec des commentaires "
 "et des variations de coups."
 
-#: io.sourceforge.pentobi.appdata.xml.in:20
+#: io.sourceforge.pentobi.appdata.xml.in:25
 msgid ""
 "Trademark disclaimer: The trademark Blokus and other trademarks referred to "
 "are property of their respective trademark holders. The trademark holders "
@@ -62,27 +62,27 @@ msgstr ""
 " Les détenteurs de ces marques ne sont pas affiliés à l'auteur du programme "
 "Pentobi."
 
-#: io.sourceforge.pentobi.appdata.xml.in:35
+#: io.sourceforge.pentobi.appdata.xml.in:40
 msgid "Game variant Classic"
 msgstr "Variant de jeu Classique"
 
-#: io.sourceforge.pentobi.appdata.xml.in:40
+#: io.sourceforge.pentobi.appdata.xml.in:45
 msgid "Game variant Duo"
 msgstr "Variant de jeu Duo"
 
-#: io.sourceforge.pentobi.appdata.xml.in:45
+#: io.sourceforge.pentobi.appdata.xml.in:50
 msgid "Game variant Trigon"
 msgstr "Variant de jeu Trigon"
 
-#: io.sourceforge.pentobi.appdata.xml.in:50
+#: io.sourceforge.pentobi.appdata.xml.in:55
 msgid "Game variant Nexos"
 msgstr "Variant de jeu Nexos"
 
-#: io.sourceforge.pentobi.appdata.xml.in:55
+#: io.sourceforge.pentobi.appdata.xml.in:60
 msgid "Game variant GembloQ"
 msgstr "Variant de jeu GembloQ"
 
-#: io.sourceforge.pentobi.appdata.xml.in:64
+#: io.sourceforge.pentobi.appdata.xml.in:69
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
 
