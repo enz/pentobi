@@ -54,9 +54,9 @@ ScrollView {
             onLinkActivated:
                 link => {
                     if (link === "close")
-                    closeClicked()
+                        closeClicked()
                     else
-                    docbookReader.pageId = link
+                        docbookReader.pageId = link
                 }
 
             MouseArea {
