@@ -17,8 +17,8 @@ Window {
         x = settings.x
         y = settings.y
         show()
-        var maxWidth = rootWindow.Screen.desktopAvailableWidth
-        var maxHeight = rootWindow.Screen.desktopAvailableHeight
+        var maxWidth = Screen.desktopAvailableWidth
+        var maxHeight = Screen.desktopAvailableHeight
         if (settings.width <= 0 || settings.height <= 0
                 || settings.x < 0 || settings.y < 0
                 || settings.x + settings.width >= maxWidth
