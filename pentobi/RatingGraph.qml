@@ -30,7 +30,6 @@ Canvas {
         var i
         var minY = Number.POSITIVE_INFINITY
         var maxY = Number.NEGATIVE_INFINITY
-        var info
         for (i = 0; i < n; ++i) {
             minY = Math.min(minY, history[i])
             maxY = Math.max(maxY, history[i])
