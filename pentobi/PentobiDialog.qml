@@ -23,14 +23,11 @@ Dialog {
         isDesktop ? 0 : Math.min(27 * font.pixelSize, 0.9 * maxContentWidth)
 
     // We make all dialogs modal even if they wouldn't need to be because
-    // QtQuickControls2 dialogs are not windows but immovable popup items, so
+    // QtQuickControls dialogs are not windows but immovable popup items, so
     // they inevitably cover parts of the parent window, such that the parent
     // window is not fully usable anyway.
     modal: true
     dim: false
     anchors.centerIn: Overlay.overlay
-
-    focus: true
-    clip: true
     closePolicy: Popup.CloseOnEscape
 }
