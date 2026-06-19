@@ -28,11 +28,7 @@ PentobiDialog {
             GridLayout {
                 columns: 2
 
-                Label {
-                    id: labelYourRating
-
-                    text: qsTr("Your rating:")
-                }
+                Label { text: qsTr("Your rating:") }
                 Label {
                     text: ratingModel.numberGames === 0 ?
                               "" : Math.round(ratingModel.rating).toString()
