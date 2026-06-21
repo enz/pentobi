@@ -7,9 +7,6 @@
 #ifndef LIBBOARDGAME_GTP_ARGUMENTS_H
 #define LIBBOARDGAME_GTP_ARGUMENTS_H
 
-#if defined __GNUC__ && __has_include(<cxxabi.h>)
-#include <cxxabi.h>
-#endif
 #include <sstream>
 #include "CmdLine.h"
 #include "Failure.h"
