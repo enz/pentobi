@@ -32,7 +32,7 @@ public:
 
     bool operator!=(Piece piece) const { return ! operator==(piece); }
 
-    /** Return move as an integer between 0 and Piece::range */
+    /** Return piece as an integer between 0 and Piece::range */
     IntType to_int() const;
 
 private:
