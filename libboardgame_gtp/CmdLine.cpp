@@ -32,17 +32,18 @@ void CmdLine::add_elem(string::const_iterator begin,
 /** Find elements (ID, command name, arguments).
     Arguments are words separated by whitespaces.
     Arguments with whitespaces can be quoted with quotation marks ('"').
-    Escaping is not supported. */
+    Characters can be escaped with a backslash ('\'). */
 void CmdLine::find_elem()
 {
     m_elem.clear();
+    bool escape = false;
     bool is_in_string = false;
     string::const_iterator begin = m_line.begin();
     string::const_iterator i;
     for (i = begin; i < m_line.end(); ++i)
     {
         char c = *i;
-        if (c == '"')
+        if (c == '"' && ! escape)
         {
             if (is_in_string)
                 add_elem(begin, i);
@@ -55,6 +56,7 @@ void CmdLine::find_elem()
                 m_elem.emplace_back(&*begin, i - begin);
             begin = i + 1;
         }
+        escape = (c == '\\' && ! escape);
     }
     if (i > begin)
         m_elem.emplace_back(&*begin, m_line.end() - begin);
