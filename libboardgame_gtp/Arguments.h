@@ -28,7 +28,10 @@ public:
 
     /** Get argument.        
         @param i Argument index starting with 0
-        @return Argument value        
+        @return Argument value. Arguments with whitespaces may be quoted with
+        quotation marks and characters can be escaped with a backslash, however
+        the backslashes will be included in the returned value and must be
+        handled by the caller (string_view used for performance).
         @throws Failure If no such argument
         @tparam T The type the argument should be converted to. The type
         must implement operator<< */

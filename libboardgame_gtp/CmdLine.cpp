@@ -30,9 +30,8 @@ void CmdLine::add_elem(string::const_iterator begin,
 }
 
 /** Find elements (ID, command name, arguments).
-    Arguments are words separated by whitespaces.
-    Arguments with whitespaces can be quoted with quotation marks ('"').
-    Characters can be escaped with a backslash ('\'). */
+    Arguments are words separated by whitespaces. See Arguments::get(unsigned)
+    for how quoting and escaping is supported. */
 void CmdLine::find_elem()
 {
     m_elem.clear();

@@ -64,4 +64,20 @@ LIBBOARDGAME_TEST_CASE(gtp_cmd_line_parse)
     LIBBOARDGAME_CHECK_EQUAL(2u, c.get_elements().size())
 }
 
+LIBBOARDGAME_TEST_CASE(gtp_cmd_line_quoting)
+{
+    CmdLine c("10 command \"a b\"");
+    LIBBOARDGAME_CHECK_EQUAL("10", get_id(c))
+    LIBBOARDGAME_CHECK_EQUAL("command", string(c.get_name()))
+    LIBBOARDGAME_CHECK_EQUAL(3u, c.get_elements().size())
+    LIBBOARDGAME_CHECK_EQUAL("a b", get_element(c, 2))
+
+    // See Arguments::get(unsigned) for how escaping is supported
+    c.init("20 command \"a\\\"b\"");
+    LIBBOARDGAME_CHECK_EQUAL("20", get_id(c))
+    LIBBOARDGAME_CHECK_EQUAL("command", string(c.get_name()))
+    LIBBOARDGAME_CHECK_EQUAL(3u, c.get_elements().size())
+    LIBBOARDGAME_CHECK_EQUAL("a\\\"b", get_element(c, 2))
+}
+
 //-----------------------------------------------------------------------------
