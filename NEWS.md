@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 30.3-dev (v30-fixes)
 ----------------------------
 
-* …
+* Fixed height of turn indicator for Green in desktop mode
 
 Version 30.2 (11 Jun 2026)
 --------------------------

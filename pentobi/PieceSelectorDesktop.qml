@@ -124,7 +124,7 @@ Item {
             PropertyChanges {
                 toPlayIndicator {
                     y: column.mapToItem(row, 0, pieceList3.y).y
-                    height: pieceList0.height
+                    height: pieceList3.height
                 }
             }
         }
