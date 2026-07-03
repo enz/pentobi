@@ -4,11 +4,6 @@ file(READ "${CMAKE_CURRENT_SOURCE_DIR}/po/LINGUAS" linguas)
 string(REGEX REPLACE "\n" ";" linguas "${linguas}")
 
 foreach(lang ${linguas})
-    add_custom_command(OUTPUT ${lang}.mo
-        COMMAND "${GETTEXT_MSGFMT_EXECUTABLE}" -o ${lang}.mo
-        "${CMAKE_CURRENT_SOURCE_DIR}/po/${lang}.po"
-        DEPENDS po/${lang}.po
-        )
     list(APPEND po_files po/${lang}.po)
 endforeach()
 
