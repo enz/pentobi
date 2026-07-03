@@ -42,8 +42,8 @@ set(pentobi_images
     )
 foreach(image ${pentobi_images})
     add_custom_command(OUTPUT "${image}.png"
-        COMMAND "${RSVG_CONVERT}" -x 4 -y 4
-        "${CMAKE_CURRENT_SOURCE_DIR}/${image}.svg" > "${image}.png"
+        COMMAND "${RSVG_CONVERT}" -x 4 -y 4 -o "${image}.png"
+        "${CMAKE_CURRENT_SOURCE_DIR}/${image}.svg"
         DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${image}.svg"
         )
     list(APPEND images_png "${image}.png")

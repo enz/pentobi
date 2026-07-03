@@ -16,42 +16,37 @@ endforeach()
 
 foreach(sz 16 22 48 128)
     add_custom_command(OUTPUT pentobi-${sz}.png
-        COMMAND "${RSVG_CONVERT}"
+        COMMAND "${RSVG_CONVERT}" -o pentobi-${sz}.png
         "${CMAKE_CURRENT_SOURCE_DIR}/../icon/pentobi-${sz}.svg"
-        > pentobi-${sz}.png
         DEPENDS ../icon/pentobi-${sz}.svg)
     install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-${sz}.png"
         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${sz}x${sz}/apps
         RENAME pentobi.png)
 endforeach()
 add_custom_command(OUTPUT pentobi-24.png
-    COMMAND "${RSVG_CONVERT}" -z 0.5
+    COMMAND "${RSVG_CONVERT}" -z 0.5 -o pentobi-24.png
     "${CMAKE_CURRENT_SOURCE_DIR}/../icon/pentobi-48.svg"
-    > pentobi-24.png
     DEPENDS ../icon/pentobi-48.svg)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-24.png"
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/24x24/apps
     RENAME pentobi.png)
 add_custom_command(OUTPUT pentobi-32.png
-    COMMAND "${RSVG_CONVERT}" -z 0.25
+    COMMAND "${RSVG_CONVERT}" -z 0.25 -o pentobi-32.png
     "${CMAKE_CURRENT_SOURCE_DIR}/../icon/pentobi-128.svg"
-    > pentobi-32.png
     DEPENDS ../icon/pentobi-128.svg)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-32.png"
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/32x32/apps
     RENAME pentobi.png)
 add_custom_command(OUTPUT pentobi-64.png
-    COMMAND "${RSVG_CONVERT}" -z 0.5
+    COMMAND "${RSVG_CONVERT}" -z 0.5 -o pentobi-64.png
     "${CMAKE_CURRENT_SOURCE_DIR}/../icon/pentobi-128.svg"
-    > pentobi-64.png
     DEPENDS ../icon/pentobi-128.svg)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-64.png"
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/64x64/apps
     RENAME pentobi.png)
 add_custom_command(OUTPUT pentobi-256.png
-    COMMAND "${RSVG_CONVERT}" -z 2
+    COMMAND "${RSVG_CONVERT}" -z 2 -o pentobi-256.png
     "${CMAKE_CURRENT_SOURCE_DIR}/../icon/pentobi-128.svg"
-    > pentobi-256.png
     DEPENDS ../icon/pentobi-128.svg)
 install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pentobi-256.png"
     DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/256x256/apps
@@ -64,8 +59,8 @@ foreach(sz 16 22 48 128)
     add_custom_command(
         OUTPUT io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.png
         COMMAND "${RSVG_CONVERT}"
+        -o io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.png
         "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.svg"
-        > io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.png
         DEPENDS io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.svg)
     install(
         FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-${sz}.png"
@@ -75,8 +70,8 @@ endforeach()
 add_custom_command(
     OUTPUT io.sourceforge.pentobi.application-x-blokus-sgf-24.png
     COMMAND "${RSVG_CONVERT}" -z 0.5
+    -o io.sourceforge.pentobi.application-x-blokus-sgf-24.png
     "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-48.svg"
-    > io.sourceforge.pentobi.application-x-blokus-sgf-24.png
     DEPENDS io.sourceforge.pentobi.application-x-blokus-sgf-48.svg)
 install(
     FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-24.png"
@@ -85,8 +80,8 @@ install(
 add_custom_command(
     OUTPUT io.sourceforge.pentobi.application-x-blokus-sgf-32.png
     COMMAND "${RSVG_CONVERT}" -z 0.25
+    -o io.sourceforge.pentobi.application-x-blokus-sgf-32.png
     "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-128.svg"
-    > io.sourceforge.pentobi.application-x-blokus-sgf-32.png
     DEPENDS io.sourceforge.pentobi.application-x-blokus-sgf-128.svg)
 install(
     FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-32.png"
@@ -95,8 +90,8 @@ install(
 add_custom_command(
     OUTPUT io.sourceforge.pentobi.application-x-blokus-sgf-64.png
     COMMAND "${RSVG_CONVERT}" -z 0.5
+    -o io.sourceforge.pentobi.application-x-blokus-sgf-64.png
     "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-128.svg"
-    > io.sourceforge.pentobi.application-x-blokus-sgf-64.png
     DEPENDS io.sourceforge.pentobi.application-x-blokus-sgf-128.svg)
 install(
     FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-64.png"
@@ -105,8 +100,8 @@ install(
 add_custom_command(
     OUTPUT io.sourceforge.pentobi.application-x-blokus-sgf-256.png
     COMMAND "${RSVG_CONVERT}" -z 2
+    -o io.sourceforge.pentobi.application-x-blokus-sgf-256.png
     "${CMAKE_CURRENT_SOURCE_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-128.svg"
-    > io.sourceforge.pentobi.application-x-blokus-sgf-256.png
     DEPENDS io.sourceforge.pentobi.application-x-blokus-sgf-128.svg)
 install(
     FILES "${CMAKE_CURRENT_BINARY_DIR}/io.sourceforge.pentobi.application-x-blokus-sgf-256.png"
