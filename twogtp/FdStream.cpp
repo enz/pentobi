@@ -40,8 +40,17 @@ auto FdInBuf::underflow() -> int_type
         memmove(base, egptr() - put_back, put_back);
         start += put_back;
     }
-    auto n = read(m_fd, start, m_buf.size() - (start - base));
-    if (n <= 0)
+    ssize_t n;
+    while (true)
+    {
+        n = read(m_fd, start, m_buf.size() - (start - base));
+        if (n >= 0)
+            break;
+        if (errno == EINTR)
+            continue;
+        return traits_type::eof();
+    }
+    if (n == 0)
         return traits_type::eof();
     setg(base, start, start + n);
     return traits_type::to_int_type(*gptr());
@@ -62,19 +71,49 @@ FdOutBuf::~FdOutBuf() = default; // Non-inline to avoid GCC -Winline warning
 
 auto FdOutBuf::overflow(int_type c) -> int_type
 {
-    if (c != traits_type::eof())
+    if (c == traits_type::eof())
+        return traits_type::not_eof(c);
+    auto ch = traits_type::to_char_type(c);
+    auto ptr = &ch;
+    size_t remaining = 1;
+    while (remaining > 0)
     {
-        char buffer[1];
-        buffer[0] = static_cast<char>(c);
-        if (write(m_fd, buffer, 1) != 1)
+        auto n = write(m_fd, ptr, remaining);
+        if (n >= 0)
+        {
+            ptr += n;
+            remaining -= static_cast<size_t>(n);
+        }
+        else
+        {
+            if (errno == EINTR)
+                continue;
             return traits_type::eof();
+        }
     }
     return c;
 }
 
 streamsize FdOutBuf::xsputn(const char_type* s, streamsize count)
 {
-    return write(m_fd, s, count);
+    if (count <= 0)
+        return 0;
+    streamsize total = 0;
+    while (total < count)
+    {
+        auto n = write(m_fd, s + total, static_cast<size_t>(count - total));
+        if (n > 0)
+            total += n;
+        else if (n == 0)
+            break;
+        else
+        {
+            if (errno == EINTR)
+                continue;
+            break;
+        }
+    }
+    return total;
 }
 
 //-----------------------------------------------------------------------------
