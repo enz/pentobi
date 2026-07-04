@@ -23,7 +23,7 @@ FdInBuf::FdInBuf(int fd, size_t buf_size)
     : m_fd(fd),
       m_buf(buf_size + put_back)
 {
-    auto end = &(*m_buf.begin()) + m_buf.size();
+    auto end = m_buf.data() + m_buf.size();
     setg(end, end, end);
 }
 
@@ -33,7 +33,7 @@ auto FdInBuf::underflow() -> int_type
 {
     if (gptr() < egptr())
         return traits_type::to_int_type(*gptr());
-    auto base = &m_buf.front();
+    auto base = m_buf.data();
     auto start = base;
     if (eback() == base)
     {
