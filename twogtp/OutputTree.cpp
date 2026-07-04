@@ -76,21 +76,6 @@ bool compare_sequence(ArrayList<ColorMove, Board::max_moves>& s1,
     return false;
 }
 
-unsigned get_real_count(const SgfNode& node, bool is_player_black)
-{
-    unsigned index = is_player_black ? 0 : 1;
-    array<unsigned, 2> count;
-    array<double, 2> avg_result;
-    array<unsigned, 2> real_count;
-    auto comment = SgfTree::get_comment(node);
-    istringstream in(comment);
-    in >> count[0] >> real_count[0] >> avg_result[0]
-       >> count[1] >> real_count[1] >> avg_result[1];
-    if (! in)
-        throw runtime_error("OutputTree: invalid comment: " + comment);
-    return real_count[index];
-}
-
 } // namespace
 
 //-----------------------------------------------------------------------------
