@@ -18,7 +18,6 @@ using libboardgame_base::TreeReader;
 using libboardgame_base::TreeWriter;
 using libpentobi_base::get_transforms;
 using libpentobi_base::ColorMove;
-using libpentobi_base::MovePoints;
 using libpentobi_base::get_transformed;
 
 //-----------------------------------------------------------------------------
