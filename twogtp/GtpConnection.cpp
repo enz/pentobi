@@ -106,7 +106,7 @@ GtpConnection::GtpConnection(const string& command)
     for (auto& a : args)
         argv.push_back(const_cast<char*>(a.c_str()));
     argv.push_back(nullptr);
-    execvp(args[0].c_str(), &(*argv.begin()));
+    execvp(args[0].c_str(), argv.data());
     terminate_child("Could not execute '" + command + "': " + strerror(errno));
 }
 
