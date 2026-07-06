@@ -74,24 +74,14 @@ auto FdOutBuf::overflow(int_type c) -> int_type
     if (c == traits_type::eof())
         return traits_type::not_eof(c);
     auto ch = traits_type::to_char_type(c);
-    auto ptr = &ch;
-    size_t remaining = 1;
-    while (remaining > 0)
+    while (true)
     {
-        auto n = write(m_fd, ptr, remaining);
-        if (n >= 0)
-        {
-            ptr += n;
-            remaining -= static_cast<size_t>(n);
-        }
-        else
-        {
-            if (errno == EINTR)
-                continue;
+        auto n = write(m_fd, &ch, 1);
+        if (n > 0)
+            return c;
+        if (n < 0 && errno != EINTR)
             return traits_type::eof();
-        }
     }
-    return c;
 }
 
 streamsize FdOutBuf::xsputn(const char_type* s, streamsize count)
