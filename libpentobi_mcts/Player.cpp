@@ -19,7 +19,7 @@ namespace {
 
 // Rationale for choosing the number of simulations:
 // * Level 9, the highest desktop level, is tuned for maximum strength on a
-//   mid-range PC (as of 2016) with target thinking times of 2-3 min per player
+//   mid-range PC (as of 2018) with target thinking times of 2-3 min per player
 //   in 2-color game variants and 5-6 min in the others.
 // * Level 7, the highest level on mobile devices, is tuned for typical mobile
 //   hardware and uses 4% of the level 9 simulations.
