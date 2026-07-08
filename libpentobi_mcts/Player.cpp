@@ -18,28 +18,23 @@ using libpentobi_base::BoardType;
 namespace {
 
 // Rationale for choosing the number of simulations:
-// * Level 9, the highest in the desktop version, should be as strong as
-//   possible on a mid-range PC with reasonable thinking times. The average
-//   time per game and player is targeted at 2-3 min for the 2-color game
-//   variants and 5-6 min for the others.
-// * Level 7, the highest in the Android version, should be as strong as
-//   possible on typical mobile hardware. It is set to 4% of level 9.
-// * Level 8 is set to 20% of level 9, the middle (on a log scale) between
-//   level 7 and 9. Since most parameter tuning is done at level 7 or 8, it is
-//   better for development purposes to define level 8 in terms of time, even
-//   if it doesn't necessarily correspond to the middle wrt. playing strength.
-// * The numbers for level 1 are set to a value that is weak enough for
-//   beginners without playing silly moves. They are currently chosen depending
-//   on how strong we estimate Pentobi is in a game variant. It is also taken
-//   into consideration how much the Elo difference level 1-9 is in self-play
-//   experiments. After applying the scale factor (see comment in
-//   Player::get_rating()), we want a range of about 1000 Elo (difference
-//   between beginner and lower master level).
-// * The numbers for level 1-6 are chosen such that they correspond to roughly
-//   equidistant Elo differences measured in self-play experiments.
-// * We only calibrate the numbers for the game variants we care most about.
-//   For other game variants, we use the numbers of game variants with similar
-//   playing strength and speed of simulations.
+// * Level 9, the highest desktop level, is tuned for maximum strength on a
+//   mid-range PC (as of 2016) with target thinking times of 2-3 min per player
+//   in 2-color game variants and 5-6 min in the others.
+// * Level 7, the highest level on mobile devices, is tuned for typical mobile
+//   hardware and uses 4% of the level 9 simulations.
+// * Level 8 uses 20% of the level 9 simulations, the logarithmic midpoint
+//   between levels 7 and 9. Defining it by time rather than playing strength
+//   simplifies parameter tuning.
+// * Level 1 is intended to challenge beginners without playing obviously poor
+//   moves. The simulation count depends on the estimated strength of each game
+//   variant and is chosen to achieve an overall rating range of about 1000 Elo
+//   after applying the scale factor (see Player::get_rating()).
+// * Levels 2-6 are spaced to produce approximately equal Elo differences in
+//   self-play experiments.
+// * Only the most important game variants are calibrated individually. The
+//   remaining variants reuse values from variants with similar playing
+//   strength and simulation speed.
 
 constexpr float counts_classic[Player::max_supported_level] =
     { 3, 30, 90, 181, 667, 5028, 69809, 349044, 1745221 };
