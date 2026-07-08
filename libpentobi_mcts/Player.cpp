@@ -26,10 +26,11 @@ namespace {
 // * Level 8 uses 20% of the level 9 simulations, the logarithmic midpoint
 //   between levels 7 and 9. Defining it by time rather than playing strength
 //   simplifies parameter tuning.
-// * Level 1 is intended to challenge beginners without playing obviously poor
-//   moves. The simulation count depends on the estimated strength of each game
-//   variant and is chosen to achieve an overall rating range of about 1000 Elo
-//   after applying the scale factor (see Player::get_rating()).
+// * Level 1 is intended to be weak enough for beginners without playing
+//   obviously poor moves. The simulation count depends on the estimated
+//   strength of each game variant and is chosen to achieve an overall rating
+//   range of about 1000 Elo after applying the scale factor (see
+//   Player::get_rating()).
 // * Levels 2-6 are spaced to produce approximately equal Elo differences in
 //   self-play experiments.
 // * Only the most important game variants are calibrated individually. The
