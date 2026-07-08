@@ -23,16 +23,11 @@ class MoveMarker;
 //-----------------------------------------------------------------------------
 
 /** Blokus board.
-    The implementation is speed-optimized for Monte-Carlo tree search. Only
-    data that is needed during the MCTS search is computed incrementally.
-    For the same reason, it does not provide an undo function, but instead
-    a snapshot state that can can be restored quickly at the start of each
-    MCTS simulation.
+    Optimized for Monte-Carlo tree search. Incrementally updates only the data
+    needed during the search. Uses snapshots instead of undo to restore states.
 
-    @note The size of this class is large because it contains large members
-    that are not allocated on the heap to avoid dereferencing pointers for
-    speed reasons. It should be avoided to create instances of this class on
-    the stack. */
+    @note Large size comes from non-heap members for speed. Avoid creating
+    instances on the stack. */
 class Board
 {
 public:
