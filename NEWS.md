@@ -279,7 +279,7 @@ Version 19.0 (16 Apr 2021)
 * Enabled support for landscape orientation on Android.
 * Migrated build system for Android app from qmake to CMake.
 * Support for different comment showing modes (Always/As Needed/Never)
-  on Android. 
+  on Android.
 * Remaining pieces on Android are now always shown in order to play
   even in game variants where a player plays two colors.
 

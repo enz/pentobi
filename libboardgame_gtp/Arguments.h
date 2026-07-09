@@ -26,7 +26,7 @@ public:
         must exceed the lifetime of the class instance. */
     explicit Arguments(const CmdLine& line) : m_line(line) { }
 
-    /** Get argument.        
+    /** Get argument.
         @param i Argument index starting with 0
         @return Argument value. Arguments with whitespaces may be quoted with
         quotation marks and characters can be escaped with a backslash, however
@@ -38,7 +38,7 @@ public:
     template<typename T = string_view>
     T get(unsigned i) const;
 
-    /** Get single argument.        
+    /** Get single argument.
         Like get(unsigned) but throws if there is not exactly one argument. */
     template<typename T = string_view>
     T get() const;
