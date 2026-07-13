@@ -204,8 +204,8 @@ The setup properties `AB`, `AW`, `A1`, `A2`, `A3`, `A4` can be used to
 place several pieces simultaneously on the board. The setup property
 `AE` can be used to remove pieces from the board. All these properties
 can have multiple values, each value represents a piece by its
-coordinates as in the move properties. The `PL` can be used to set the
-color to play in a setup position.
+coordinates as in the move properties. The `PL` property can be used to set
+the color to play in a setup position.
 
 ### Example
 ```
