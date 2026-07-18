@@ -29,7 +29,7 @@ Item {
 
     Image {
         anchors.fill: root
-        source: theme.getImage("piece-manipulator")
+        source: theme.getImage("piece-manipulator", theme.isDark)
         sourceSize { width: 800; height: 800 }
         opacity: root.pieceModel && ! root.legal ? 0.7 : 0
 
@@ -37,7 +37,7 @@ Item {
     }
     Image {
         anchors.fill: root
-        source: theme.getImage("piece-manipulator-legal")
+        source: theme.getImage("piece-manipulator-legal", theme.isDark)
         sourceSize { width: 800; height: 800 }
         opacity: root.pieceModel && root.legal ? 0.55 : 0
 

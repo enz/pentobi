@@ -69,7 +69,8 @@ Item {
     // Default link color in dark mode has low contrast (Qt 6.9)
     property color colorLink: isDark ? "lightskyblue" : "blue"
 
-    function getImage(name) {
+    // isDark is passed explicitly so callers create a binding dependency
+    function getImage(name, isDark) {
         if (isDark)
             return "themes/dark/" + name + ".png"
         else

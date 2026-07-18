@@ -13,39 +13,39 @@ RowLayout
     PentobiButton {
         id: buttonBeginning
 
-        source: theme.getImage("pentobi-beginning")
+        source: theme.getImage("pentobi-beginning", theme.isDark)
         action: actionBeginning
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
     PentobiButton {
-        source: theme.getImage("pentobi-backward")
+        source: theme.getImage("pentobi-backward", theme.isDark)
         action: actionBackward
         autoRepeat: true
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
     PentobiButton {
-        source: theme.getImage("pentobi-forward")
+        source: theme.getImage("pentobi-forward", theme.isDark)
         action: actionForward
         autoRepeat: true
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
     PentobiButton {
-        source: theme.getImage("pentobi-end")
+        source: theme.getImage("pentobi-end", theme.isDark)
         action: actionEnd
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
     PentobiButton {
-        source: theme.getImage("pentobi-previous-variation")
+        source: theme.getImage("pentobi-previous-variation", theme.isDark)
         action: actionPrevVar
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
     PentobiButton {
-        source: theme.getImage("pentobi-next-variation")
+        source: theme.getImage("pentobi-next-variation", theme.isDark)
         action: actionNextVar
         Layout.fillWidth: true
         Layout.fillHeight: true
