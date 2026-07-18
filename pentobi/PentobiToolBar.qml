@@ -55,7 +55,7 @@ Item {
         PentobiButton {
             id: newGame
 
-            source: theme.getImage("pentobi-newgame")
+            source: theme.getImage("pentobi-newgame", theme.isDark)
             action: actionNew
             visible: showContent && (isDesktop || action.enabled)
             toolTipText: qsTr("Start a new game")
@@ -64,14 +64,14 @@ Item {
             id: newGameRated
 
             visible: showContent && isDesktop
-            source: theme.getImage("pentobi-rated-game")
+            source: theme.getImage("pentobi-rated-game", theme.isDark)
             action: actionNewRated
             toolTipText: qsTr("Start a rated game")
         }
         PentobiButton {
             id: undo
 
-            source: theme.getImage("pentobi-undo")
+            source: theme.getImage("pentobi-undo", theme.isDark)
             action: actionUndo
             visible: showContent && (isDesktop || action.enabled)
             autoRepeat: true
@@ -84,7 +84,7 @@ Item {
         PentobiButton {
             id: computerSettings
 
-            source: theme.getImage("pentobi-computer-colors")
+            source: theme.getImage("pentobi-computer-colors", theme.isDark)
             action: actionComputerSettings
             visible: showContent && (isDesktop || action.enabled)
             toolTipText: qsTr("Set the colors played by the computer")
@@ -92,7 +92,7 @@ Item {
         PentobiButton {
             id: play
 
-            source: theme.getImage("pentobi-play")
+            source: theme.getImage("pentobi-play", theme.isDark)
             action: actionPlay
             visible: showContent && (isDesktop || action.enabled)
             autoRepeat: true
@@ -115,7 +115,7 @@ Item {
         PentobiButton {
             id: stop
 
-            source: theme.getImage("pentobi-stop")
+            source: theme.getImage("pentobi-stop", theme.isDark)
             action: actionStop
             visible: showContent && (isDesktop || ! isRated)
             toolTipText: analyzeGameModel.isRunning ?
@@ -131,7 +131,7 @@ Item {
             id: beginning
 
             visible: showContent && isDesktop
-            source: theme.getImage("pentobi-beginning")
+            source: theme.getImage("pentobi-beginning", theme.isDark)
             action: actionBeginning
             toolTipText: qsTr("Go to beginning of game")
         }
@@ -139,7 +139,7 @@ Item {
             id: backward10
 
             visible: showContent && isDesktop
-            source: theme.getImage("pentobi-backward10")
+            source: theme.getImage("pentobi-backward10", theme.isDark)
             action: actionBackward10
             autoRepeat: true
             autoRepeatInterval:
@@ -151,7 +151,7 @@ Item {
             id: backward
 
             visible: showContent && isDesktop
-            source: theme.getImage("pentobi-backward")
+            source: theme.getImage("pentobi-backward", theme.isDark)
             action: actionBackward
             autoRepeat: true
             toolTipText: qsTr("Go one move backward")
@@ -160,7 +160,7 @@ Item {
             id: forward
 
             visible: showContent && isDesktop
-            source: theme.getImage("pentobi-forward")
+            source: theme.getImage("pentobi-forward", theme.isDark)
             action: actionForward
             autoRepeat: true
             toolTipText: qsTr("Go one move forward")
@@ -169,7 +169,7 @@ Item {
             id: forward10
 
             visible: showContent && isDesktop
-            source: theme.getImage("pentobi-forward10")
+            source: theme.getImage("pentobi-forward10", theme.isDark)
             action: actionForward10
             autoRepeat: true
             autoRepeatInterval:
@@ -181,7 +181,7 @@ Item {
             id: end
 
             visible: showContent && isDesktop
-            source: theme.getImage("pentobi-end")
+            source: theme.getImage("pentobi-end", theme.isDark)
             action: actionEnd
             toolTipText: qsTr("Go to end of moves")
         }
@@ -194,7 +194,7 @@ Item {
             id: prevVar
 
             visible: showContent && isDesktop
-            source: theme.getImage("pentobi-previous-variation")
+            source: theme.getImage("pentobi-previous-variation", theme.isDark)
             action: actionPrevVar
             autoRepeat: true
             autoRepeatInterval:
@@ -206,7 +206,7 @@ Item {
             id: nextVar
 
             visible: showContent && isDesktop
-            source: theme.getImage("pentobi-next-variation")
+            source: theme.getImage("pentobi-next-variation", theme.isDark)
             action: actionNextVar
             autoRepeat: true
             autoRepeatInterval:
@@ -248,7 +248,7 @@ Item {
         PentobiButton {
             id: menuButton
 
-            source: theme.getImage("menu")
+            source: theme.getImage("menu", theme.isDark)
             down: isDesktop && (pressed || (menu.item && menu.item.opened))
             onClicked: {
                 if (! menu.item)
