@@ -16,9 +16,12 @@ Item {
     // globalStyle is a context property set in Main.cpp
     property bool isMaterial: globalStyle === "Material"
 
-    // Don't use Application.styleHints.colorScheme. On some platforms/styles,
-    // it is Qt.Dark in dark mode, even if the style doesn't support dark mode
-    // and we better stay in light mode than use a broken dark mode.
+    // Don't use Application.styleHints.colorScheme == Qt.Dark yet. On some
+    // platforms/styles, colors may still be light (Fusion, Qt 5.11), or they
+    // may be dark while Item.palette still contains light values (Basic,
+    // Qt 5.11). We use palette.window.hslLightness, which works with Fusion,
+    // the default style on Linux/Gnome, without breaking org.kde.breeze,
+    // the default style in OpenSuse/KDE.
     property bool isDark: isMaterial || palette.window.hslLightness < 0.5
 
     /** @name Colors for board and piece elements.
