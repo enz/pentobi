@@ -21,7 +21,8 @@ Item {
     // may be dark while Item.palette still contains light values (Basic,
     // Qt 5.11). We use palette.window.hslLightness, which correctly detects
     // the used color scheme in Fusion, the default style on Linux/Gnome,
-    // without breaking org.kde.breeze, the default style in OpenSUSE/KDE.
+    // without breaking org.kde.breeze, the default style in OpenSUSE/KDE
+    // (see QTBUG-148414 and QTBUG-148414)
     property bool isDark: isMaterial || palette.window.hslLightness < 0.5
 
     /** @name Colors for board and piece elements.
