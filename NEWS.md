@@ -5,6 +5,8 @@ Version 31.0-dev (main)
 -----------------------
 
 * Minimum required Qt version is now 6.11
+* New config option PENTOBI_USE_QAPPLICATION to make native file
+  dialogs work in KDE platform theme (adds dependency on QtWidgets)
 * twogtp option --fastopen is no longer supported
 
 Version 30.3-dev (v30-fixes)
