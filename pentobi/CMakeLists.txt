@@ -220,10 +220,6 @@ target_link_libraries(pentobi PRIVATE
     Qt::Xml
     Threads::Threads
     )
-if (PENTOBI_USE_QAPPLICATION)
-    target_link_libraries(pentobi PRIVATE Qt::Widgets)
-    target_compile_definitions(pentobi PRIVATE PENTOBI_USE_QAPPLICATION)
-endif()
 
 add_subdirectory(help)
 if(UNIX AND NOT ANDROID)

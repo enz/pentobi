@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------
 
 #include <QCommandLineParser>
+#include <QGuiApplication>
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QQmlApplicationEngine>
@@ -16,12 +17,6 @@
 #include "ImageProvider.h"
 #include "PlayerModel.h"
 #include "libboardgame_base/Log.h"
-
-#ifdef PENTOBI_USE_QAPPLICATION
-#include <QApplication>
-#else
-#include <QGuiApplication>
-#endif
 
 using namespace Qt::StringLiterals;
 
@@ -60,12 +55,7 @@ int main(int argc, char *argv[])
 #ifdef VERSION
     QCoreApplication::setApplicationVersion(QStringLiteral(VERSION));
 #endif
-#ifdef PENTOBI_USE_QAPPLICATION
-    // QApplication still needed for native file dialogs in KDE platform theme
-    QApplication app(argc, argv);
-#else
     QGuiApplication app(argc, argv);
-#endif
     QLocale locale;
     QTranslator qtTranslator;
     if (qtTranslator.load(locale, "qt"_L1, "_"_L1,

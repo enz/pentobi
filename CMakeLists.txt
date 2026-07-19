@@ -13,8 +13,6 @@ include(GNUInstallDirs)
 
 option(PENTOBI_BUILD_GUI "Build GUI" ON)
 option(PENTOBI_BUILD_GTP "Build GTP interface" OFF)
-option(PENTOBI_USE_QAPPLICATION
-    "Use QApplication (for native KDE file dialogs)" OFF)
 option(BUILD_TESTING "Build tests" OFF)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
@@ -63,9 +61,6 @@ if(PENTOBI_BUILD_GUI)
     set(CMAKE_AUTORCC ON)
     find_package(Qt6 REQUIRED COMPONENTS
         Concurrent LinguistTools QuickControls2 Xml)
-    if (PENTOBI_USE_QAPPLICATION)
-        find_package(Qt6 REQUIRED Widgets)
-    endif()
     if(ANDROID)
         find_package(Qt6 REQUIRED COMPONENTS CorePrivate)
     endif()
