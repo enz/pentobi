@@ -36,18 +36,14 @@ public:
         number will make the precomputed lists shorter but exponentially
         increase the number of lists and the total memory used for all lists.
         Therefore, the optimal value for speeding up the matching depends on
-        the CPU cache size. */
-#ifdef PENTOBI_LOW_RESOURCES
-    static constexpr unsigned adj_status_nu_adj = 5;
-#else
+        the CPU cache size. If this parameter is changed,
+        max_move_lists_sum_length needs to be changed accordingly. */
     static constexpr unsigned adj_status_nu_adj = 6;
-#endif
 
     /** The maximum sum of the sizes of all precomputed move lists in any
         game variant. */
-    static constexpr unsigned max_move_lists_sum_length =
-            adj_status_nu_adj == 5 ? 2356736 : 2628840;
-    static_assert(adj_status_nu_adj == 5 || adj_status_nu_adj == 6);
+    static constexpr unsigned max_move_lists_sum_length = 2628840;
+    static_assert(adj_status_nu_adj == 6);
 
     /** The range of values for the adjacent status. */
     static constexpr unsigned nu_adj_status = 1 << adj_status_nu_adj;
