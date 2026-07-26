@@ -82,15 +82,4 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 <mediatype>application/x-blokus-sgf</mediatype>
 </provides>
 <content_rating type="oars-1.1"/>
-<releases>
-<release version="30.3" date="2026-07-26">
-<description>
-<ul>
-<li>
-Height of turn indicator for Green in desktop mode was sometimes wrong
-</li>
-</ul>
-</description>
-</release>
-</releases>
 </component>
