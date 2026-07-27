@@ -4,6 +4,8 @@ Pentobi Release Notes
 Version 31.0-dev (main)
 -----------------------
 
+* Make slow analysis speed available on mobile devices
+* Remember selected analysis speed for the current session
 * Minimum required Qt version is now 6.11
 * twogtp option --fastopen is no longer supported
 

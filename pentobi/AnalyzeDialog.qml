@@ -13,7 +13,6 @@ PentobiDialog {
     id: root
 
     footer: DialogButtonBoxOkCancel { }
-    onAboutToShow: comboBox.currentIndex = 0
     onAccepted: {
         var nuSimulations
         switch (comboBox.currentIndex) {
@@ -44,9 +43,7 @@ PentobiDialog {
             ComboBox {
                 id: comboBox
 
-                model:
-                    isDesktop ? [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
-                              : [ qsTr("Fast"), qsTr("Normal") ]
+                model: [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
                 Layout.fillWidth: true
                 Layout.preferredWidth: font.pixelSize * 15
             }
