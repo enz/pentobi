@@ -233,8 +233,6 @@ public:
 
     virtual string get_info() const;
 
-    virtual string get_info_ext() const;
-
     /** @} */ // @name
 
 
@@ -1004,12 +1002,6 @@ string SearchBase<S, M, R>::get_info() const
       << "\nDp " << thread_state.stat_in_tree_len.to_string(true, 1, true)
       << "\n";
     return s.str();
-}
-
-template<class S, class M, class R>
-string SearchBase<S, M, R>::get_info_ext() const
-{
-    return {};
 }
 
 template<class S, class M, class R>
