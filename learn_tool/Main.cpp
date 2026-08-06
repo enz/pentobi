@@ -171,7 +171,6 @@ void add_sample(const Board& bd, Color to_play, Move played_mv)
     }
     for (auto p : geo)
     {
-        auto& feature_point = feature_grid_point[p].feature;
         auto& feature_adj = feature_grid_adj[p].feature;
         auto& feature_attach = feature_grid_attach[p].feature;
         auto s = bd.get_point_state(p);
@@ -190,7 +189,7 @@ void add_sample(const Board& bd, Color to_play, Move played_mv)
         }
         else
         {
-            feature_point[point_other] = 1;
+            feature_grid_point[p].feature[point_other] = 1;
             if (bd.is_attach_point(p, to_play))
                 feature_adj[adj_own_attach] = 1;
             else
