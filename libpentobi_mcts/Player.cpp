@@ -20,12 +20,11 @@ namespace {
 // Rationale for choosing the number of simulations:
 // * Level 9, the highest desktop level, is tuned for maximum strength on a
 //   mid-range PC (as of 2018) with target thinking times of 2-3 min per player
-//   in 2-color game variants and 5-6 min in the others.
+//   and game in 2-color game variants and 5-6 min in the others.
 // * Level 7, the highest level on mobile devices, is tuned for typical mobile
 //   hardware and uses 4% of the level 9 simulations.
-// * Level 8 uses 20% of the level 9 simulations, the logarithmic midpoint
-//   between levels 7 and 9. Defining it by time rather than playing strength
-//   simplifies parameter tuning.
+// * Level 8 uses 20% of the level 9 simulations, roughly the measured middle
+//   between level 7 and 9 wrt. thinking time (not playing strength)
 // * Level 1 is intended to be weak enough for beginners without playing
 //   obviously poor moves. The simulation count depends on the estimated
 //   strength of each game variant and is chosen to achieve an overall rating
@@ -34,8 +33,8 @@ namespace {
 // * Levels 2-6 are spaced to produce approximately equal Elo differences in
 //   self-play experiments.
 // * Only the most important game variants are calibrated individually. The
-//   remaining variants reuse values from variants with similar playing
-//   strength and simulation speed.
+//   remaining variants use values from variants with similar playing strength
+//   and simulation speed.
 
 constexpr float counts_classic[Player::max_supported_level] =
     { 3, 30, 90, 181, 667, 5028, 69809, 349044, 1745221 };
