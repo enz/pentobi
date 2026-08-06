@@ -589,8 +589,8 @@ void Board::write(ostream& out, bool mark_last_move) const
             bool is_offboard = p.is_null();
             auto point_type = m_geo->get_point_type(static_cast<int>(x),
                                                     static_cast<int>(y));
-            if ((x > 0 || (is_trigon && x == 0 && m_geo->is_onboard(x + 1, y)))
-                    && ! is_offboard)
+            if ((x > 0 || (is_trigon && m_geo->is_onboard(x + 1, y)))
+                && ! is_offboard)
             {
                 // Print a space horizontally between fields on the board. On a
                 // Trigon board, a slash or backslash is used instead of the
