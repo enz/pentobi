@@ -83,7 +83,7 @@ LastGoodReply<M, P, S>::LastGoodReply()
 
 template<class M, unsigned P, size_t S>
 inline size_t LastGoodReply<M, P, S>::get_index(Move last,
-                                                    Move second_last) const
+                                                Move second_last) const
 {
     size_t hash = (m_hash1[last.to_int()] ^ m_hash2[second_last.to_int()]);
     return hash % hash_table_size;
@@ -91,7 +91,7 @@ inline size_t LastGoodReply<M, P, S>::get_index(Move last,
 
 template<class M, unsigned P, size_t S>
 inline auto LastGoodReply<M, P, S>::get_lgr1(PlayerInt player,
-                                                 Move last) const -> Move
+                                             Move last) const -> Move
 {
     return Move(m_lgr1[player][last.to_int()].load(memory_order_relaxed));
 }
@@ -118,7 +118,7 @@ void LastGoodReply<M, P, S>::init(PlayerInt nu_players)
 
 template<class M, unsigned P, size_t S>
 inline void LastGoodReply<M, P, S>::forget(PlayerInt player, Move last,
-                                               Move second_last, Move reply)
+                                           Move second_last, Move reply)
 {
     auto reply_int = reply.to_int();
     auto null_int = Move::null().to_int();
@@ -135,7 +135,7 @@ inline void LastGoodReply<M, P, S>::forget(PlayerInt player, Move last,
 
 template<class M, unsigned P, size_t S>
 inline void LastGoodReply<M, P, S>::store(PlayerInt player, Move last,
-                                              Move second_last, Move reply)
+                                          Move second_last, Move reply)
 {
     auto reply_int = reply.to_int();
     auto index = get_index(last, second_last);

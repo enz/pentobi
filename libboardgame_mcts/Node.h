@@ -238,7 +238,7 @@ inline void Node<M, F>::inc_visit_count()
 
 template<typename M, typename F>
 void Node<M, F>::init(const Move& mv, Float value, Float count,
-                          Float move_prior)
+                      Float move_prior)
 {
     // The node is not yet visible to other threads because init() is called
     // before the children are linked to its parent with link_children()
@@ -265,7 +265,7 @@ void Node<M, F>::init_root()
 
 template<typename M, typename F>
 inline void Node<M, F>::link_children(NodeIdx first_child,
-                                          unsigned nu_children)
+                                      unsigned nu_children)
 {
     LIBBOARDGAME_ASSERT(nu_children < max_children);
     LIBBOARDGAME_ASSERT(nu_children < Move::range);
@@ -284,7 +284,7 @@ inline void Node<M, F>::link_children(NodeIdx first_child,
 
 template<typename M, typename F>
 inline void Node<M, F>::link_children_st(NodeIdx first_child,
-                                             unsigned nu_children)
+                                         unsigned nu_children)
 {
     LIBBOARDGAME_ASSERT(nu_children < max_children);
     LIBBOARDGAME_ASSERT(nu_children < Move::range);
