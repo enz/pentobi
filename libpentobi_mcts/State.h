@@ -309,7 +309,7 @@ inline bool State::check_lgr(Move mv) const
         Piece one_piece = m_bd.get_one_piece();
         if (piece == one_piece)
             return true;
-        if (m_bd.get_nu_left_piece(c, one_piece) > 1 && piece != one_piece)
+        if (m_bd.get_nu_left_piece(c, one_piece) > 1)
             return false;
     }
     return has_attach_point != 0;
