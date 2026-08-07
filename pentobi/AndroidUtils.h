@@ -50,9 +50,9 @@ public:
     Q_INVOKABLE static bool saveImage(const QString& uri,
                                       const QVariant& image);
 
-    /** Exit application and avoid crash due to QTBUG-85449.
+    /** Exit application and avoid crash due to QTBUG-82617.
         On Android, this exits the application with java.lang.System.exit(),
-        which avoids crashes on some devices due to QTBUG-85449. Global
+        which avoids crashes on some devices due to QTBUG-82617. Global
         destructors will not be called, but we cannot rely on that anyway
         because Android can also kill suspended apps without calling global
         destructors. Does nothing on other platforms. */
