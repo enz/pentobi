@@ -65,11 +65,6 @@ struct SearchParamConstDefault
     /** The maximum length of a game. */
     static constexpr unsigned max_moves = 1000;
 
-    /** Compile with support for multi-threaded search.
-        Disabling this slightly increases the performance if support for a
-        multi-threaded search is not needed. */
-    static constexpr bool multithread = true;
-
     /** Use RAVE. */
     static constexpr bool rave = false;
 
