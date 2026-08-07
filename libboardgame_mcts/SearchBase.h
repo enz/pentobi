@@ -12,7 +12,6 @@
 #include <functional>
 #include <mutex>
 #include <thread>
-#include "Atomic.h"
 #include "LastGoodReply.h"
 #include "PlayerMove.h"
 #include "Tree.h"
@@ -170,11 +169,9 @@ public:
 
     using SearchParamConst = R;
 
-    static constexpr bool multithread = SearchParamConst::multithread;
-
     using Float = typename SearchParamConst::Float;
 
-    using Node = libboardgame_mcts::Node<M, Float, multithread>;
+    using Node = libboardgame_mcts::Node<M, Float>;
 
     using Tree = libboardgame_mcts::Tree<Node>;
 
@@ -468,10 +465,10 @@ private:
     /** See get_root_val(). */
     array<StatisticsDirty<Float>, max_players> m_root_val;
 
-    LastGoodReply<Move, max_players, lgr_hash_table_size, multithread> m_lgr;
+    LastGoodReply<Move, max_players, lgr_hash_table_size> m_lgr;
 
     /** See get_nu_simulations(). */
-    Atomic<size_t, multithread> m_nu_simulations;
+    atomic<size_t> m_nu_simulations;
 
     /** @} */ // @name
 
@@ -778,9 +775,6 @@ bool SearchBase<S, M, R>::check_followup(
 template<class S, class M, class R>
 void SearchBase<S, M, R>::create_threads()
 {
-    if (! multithread && m_nu_threads > 1)
-        throw runtime_error("libboardgame_mcts::Search was compiled"
-                            " without support for multithreading");
     LIBBOARDGAME_LOG("Creating ", m_nu_threads, " threads");
     m_threads.clear();
     m_threads.reserve(m_nu_threads);
@@ -952,7 +946,7 @@ void SearchBase<S, M, R>::play_in_tree(ThreadState& thread_state)
     while (! (children = m_tree.get_children(*node)).empty())
     {
         node = select_child(*node, children);
-        if (multithread && SearchParamConst::virtual_loss)
+        if (SearchParamConst::virtual_loss)
             m_tree.add_value(*node, 0);
         simulation.nodes.push_back(node);
         Move mv = node->get_move();
@@ -1481,7 +1475,7 @@ void SearchBase<S, M, R>::update_values(ThreadState& thread_state)
     {
         auto& node = *nodes[i];
         auto mv = simulation.moves[i - 1];
-        if (multithread && SearchParamConst::virtual_loss)
+        if (SearchParamConst::virtual_loss)
             // Note that this could become problematic if the number of threads
             // is large. The lock-free algorithm intentionally ignores lost or
             // partial updates to run faster. But the probability that adding

@@ -8,6 +8,7 @@ Version 31.0-dev (main)
 * Remember selected analysis speed for the current session
 * Minimum required Qt version is now 6.11
 * twogtp option --fastopen is no longer supported
+* Compilation option LIBBOARDGAME_MCTS_SINGLE_THREAD is no longer supported
 
 Version 30.4-dev (v30-fixes)
 ----------------------------

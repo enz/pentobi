@@ -36,8 +36,7 @@ using libpentobi_base::PieceMap;
 class PriorKnowledge
 {
 public:
-    using Node =
-        libboardgame_mcts::Node<Move, Float, SearchParamConst::multithread>;
+    using Node = libboardgame_mcts::Node<Move, Float>;
 
     using Tree = libboardgame_mcts::Tree<Node>;
 

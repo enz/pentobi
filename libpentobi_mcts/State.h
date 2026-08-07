@@ -35,16 +35,14 @@ using libpentobi_base::PieceSet;
 class State
 {
 public:
-    using Node =
-        libboardgame_mcts::Node<Move, Float, SearchParamConst::multithread>;
+    using Node = libboardgame_mcts::Node<Move, Float>;
 
     using Tree = libboardgame_mcts::Tree<Node>;
 
     using LastGoodReply =
         libboardgame_mcts::LastGoodReply<Move,
                                          SearchParamConst::max_players,
-                                         SearchParamConst::lgr_hash_table_size,
-                                         SearchParamConst::multithread>;
+                                         SearchParamConst::lgr_hash_table_size>;
 
     using PlayerMove = libboardgame_mcts::PlayerMove<Move>;
 

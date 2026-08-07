@@ -9,7 +9,7 @@
 
 #include <cstddef>
 #include <random>
-#include "Atomic.h"
+#include <atomic>
 #include "PlayerMove.h"
 
 namespace libboardgame_mcts {
@@ -34,9 +34,8 @@ using namespace std;
     probably rare, no major negative effect is expected from these collisions.
     @tparam M The move type.
     @tparam P The (maximum) number of players.
-    @tparam S The number of entries in the LGR2 hash table (per player).
-    @tparam MT Whether the LGR table is used in a multi-threaded search. */
-template<class M, unsigned P, size_t S, bool MT>
+    @tparam S The number of entries in the LGR2 hash table (per player). */
+template<class M, unsigned P, size_t S>
 class LastGoodReply
 {
 public:
@@ -65,15 +64,15 @@ private:
 
     size_t m_hash2[Move::range];
 
-    Atomic<typename Move::IntType, MT> m_lgr1[max_players][Move::range];
+    atomic<typename Move::IntType> m_lgr1[max_players][Move::range];
 
-    Atomic<typename Move::IntType, MT> m_lgr2[max_players][hash_table_size];
+    atomic<typename Move::IntType> m_lgr2[max_players][hash_table_size];
 
     size_t get_index(Move last, Move second_last) const;
 };
 
-template<class M, unsigned P, size_t S, bool MT>
-LastGoodReply<M, P, S, MT>::LastGoodReply()
+template<class M, unsigned P, size_t S>
+LastGoodReply<M, P, S>::LastGoodReply()
 {
     mt19937 generator;
     for (auto& hash : m_hash1)
@@ -82,31 +81,31 @@ LastGoodReply<M, P, S, MT>::LastGoodReply()
         hash = generator();
 }
 
-template<class M, unsigned P, size_t S, bool MT>
-inline size_t LastGoodReply<M, P, S, MT>::get_index(Move last,
+template<class M, unsigned P, size_t S>
+inline size_t LastGoodReply<M, P, S>::get_index(Move last,
                                                     Move second_last) const
 {
     size_t hash = (m_hash1[last.to_int()] ^ m_hash2[second_last.to_int()]);
     return hash % hash_table_size;
 }
 
-template<class M, unsigned P, size_t S, bool MT>
-inline auto LastGoodReply<M, P, S, MT>::get_lgr1(PlayerInt player,
+template<class M, unsigned P, size_t S>
+inline auto LastGoodReply<M, P, S>::get_lgr1(PlayerInt player,
                                                  Move last) const -> Move
 {
     return Move(m_lgr1[player][last.to_int()].load(memory_order_relaxed));
 }
 
-template<class M, unsigned P, size_t S, bool MT>
-inline auto LastGoodReply<M, P, S, MT>::get_lgr2(
+template<class M, unsigned P, size_t S>
+inline auto LastGoodReply<M, P, S>::get_lgr2(
         PlayerInt player, Move last, Move second_last) const -> Move
 {
     auto index = get_index(last, second_last);
     return Move(m_lgr2[player][index].load(memory_order_relaxed));
 }
 
-template<class M, unsigned P, size_t S, bool MT>
-void LastGoodReply<M, P, S, MT>::init(PlayerInt nu_players)
+template<class M, unsigned P, size_t S>
+void LastGoodReply<M, P, S>::init(PlayerInt nu_players)
 {
     for (PlayerInt i = 0; i < nu_players; ++i)
     {
@@ -117,8 +116,8 @@ void LastGoodReply<M, P, S, MT>::init(PlayerInt nu_players)
     }
 }
 
-template<class M, unsigned P, size_t S, bool MT>
-inline void LastGoodReply<M, P, S, MT>::forget(PlayerInt player, Move last,
+template<class M, unsigned P, size_t S>
+inline void LastGoodReply<M, P, S>::forget(PlayerInt player, Move last,
                                                Move second_last, Move reply)
 {
     auto reply_int = reply.to_int();
@@ -134,8 +133,8 @@ inline void LastGoodReply<M, P, S, MT>::forget(PlayerInt player, Move last,
         stored_reply.store(null_int, memory_order_relaxed);
 }
 
-template<class M, unsigned P, size_t S, bool MT>
-inline void LastGoodReply<M, P, S, MT>::store(PlayerInt player, Move last,
+template<class M, unsigned P, size_t S>
+inline void LastGoodReply<M, P, S>::store(PlayerInt player, Move last,
                                               Move second_last, Move reply)
 {
     auto reply_int = reply.to_int();
