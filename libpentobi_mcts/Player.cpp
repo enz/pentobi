@@ -162,8 +162,15 @@ Move Player::genmove(const Board& bd, Color c)
         && (level >= 4 || bd.get_nu_moves() < 2u * bd.get_nu_colors()))
     {
         if (! is_book_loaded(variant))
-            load_book(m_books_dir
-                      + "/book_" + to_string_id(variant) + ".blksgf");
+        {
+            string book_file = m_books_dir;
+            if (! book_file.empty())
+                book_file.append("/");
+            book_file.append("book_");
+            book_file.append(to_string_id(variant));
+            book_file.append(".blksgf");
+            load_book(book_file);
+        }
         if (m_is_book_loaded)
         {
             mv = m_book.genmove(bd, c);
