@@ -53,24 +53,18 @@ Item {
             Layout.fillWidth: true
         }
         PentobiButton {
-            id: newGame
-
             source: theme.getImage("pentobi-newgame", theme.isDark)
             action: actionNew
             visible: showContent && (isDesktop || action.enabled)
             toolTipText: qsTr("Start a new game")
         }
         PentobiButton {
-            id: newGameRated
-
             visible: showContent && isDesktop
             source: theme.getImage("pentobi-rated-game", theme.isDark)
             action: actionNewRated
             toolTipText: qsTr("Start a rated game")
         }
         PentobiButton {
-            id: undo
-
             source: theme.getImage("pentobi-undo", theme.isDark)
             action: actionUndo
             visible: showContent && (isDesktop || action.enabled)
@@ -82,16 +76,12 @@ Item {
             toolTipText: qsTr("Undo move")
         }
         PentobiButton {
-            id: computerSettings
-
             source: theme.getImage("pentobi-computer-colors", theme.isDark)
             action: actionComputerSettings
             visible: showContent && (isDesktop || action.enabled)
             toolTipText: qsTr("Set the colors played by the computer")
         }
         PentobiButton {
-            id: play
-
             source: theme.getImage("pentobi-play", theme.isDark)
             action: actionPlay
             visible: showContent && (isDesktop || action.enabled)
@@ -113,8 +103,6 @@ Item {
             }
         }
         PentobiButton {
-            id: stop
-
             source: theme.getImage("pentobi-stop", theme.isDark)
             action: actionStop
             visible: showContent && (isDesktop || ! isRated)
@@ -128,16 +116,12 @@ Item {
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
         PentobiButton {
-            id: beginning
-
             visible: showContent && isDesktop
             source: theme.getImage("pentobi-beginning", theme.isDark)
             action: actionBeginning
             toolTipText: qsTr("Go to beginning of game")
         }
         PentobiButton {
-            id: backward10
-
             visible: showContent && isDesktop
             source: theme.getImage("pentobi-backward10", theme.isDark)
             action: actionBackward10
@@ -148,8 +132,6 @@ Item {
             toolTipText: qsTr("Go ten moves backward")
         }
         PentobiButton {
-            id: backward
-
             visible: showContent && isDesktop
             source: theme.getImage("pentobi-backward", theme.isDark)
             action: actionBackward
@@ -157,8 +139,6 @@ Item {
             toolTipText: qsTr("Go one move backward")
         }
         PentobiButton {
-            id: forward
-
             visible: showContent && isDesktop
             source: theme.getImage("pentobi-forward", theme.isDark)
             action: actionForward
@@ -166,8 +146,6 @@ Item {
             toolTipText: qsTr("Go one move forward")
         }
         PentobiButton {
-            id: forward10
-
             visible: showContent && isDesktop
             source: theme.getImage("pentobi-forward10", theme.isDark)
             action: actionForward10
@@ -178,8 +156,6 @@ Item {
             toolTipText: qsTr("Go ten moves forward")
         }
         PentobiButton {
-            id: end
-
             visible: showContent && isDesktop
             source: theme.getImage("pentobi-end", theme.isDark)
             action: actionEnd
@@ -191,8 +167,6 @@ Item {
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
         PentobiButton {
-            id: prevVar
-
             visible: showContent && isDesktop
             source: theme.getImage("pentobi-previous-variation", theme.isDark)
             action: actionPrevVar
@@ -203,8 +177,6 @@ Item {
             toolTipText: qsTr("Go to previous variation")
         }
         PentobiButton {
-            id: nextVar
-
             visible: showContent && isDesktop
             source: theme.getImage("pentobi-next-variation", theme.isDark)
             action: actionNextVar
