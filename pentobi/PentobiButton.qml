@@ -12,9 +12,11 @@ import QtQuick.Controls
     Contains workarounds for using ToolButton directly:
     - icon.source resizes loaded images before scaling to HDPI, so they look
       blurry in HDPI displays (Qt 6.9)
-    - Issues with default button size or padding in some styles
+    - Style org.kde.breeze does not support icons in resources even if
+      QIcon::setThemeSearchPaths() is used (Qt 6.11)
     - Using icon.source sometimes resizes images differently even if they have
       the same source size (Qt 6.9, Android)
+    - Issues with default button size or padding in some styles
     If you make changes, make sure the toolbar and mobile view navigation panel
     work at least in the default styles used by Pentobi (Fusion or
     org.kde.breeze on Linux, Material on Android, FluentWinUI3 on Windows) */
