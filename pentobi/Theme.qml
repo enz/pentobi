@@ -61,9 +61,6 @@ Item {
     property color colorStartingPoint: isDark ? "#82777E" : "#767074"
     property color colorBoardMarkup: isDark ? "#ffffff" : "#111111"
 
-    // Should be the same as used in dark/light SVG icon sources
-    property color colorIcon: isDark ? "#91888f" : "#7b7b7b"
-
     property color colorBackground: isMaterial ? "#1c1b1f" : palette.window
     property color colorMessageBase: isMaterial ? "#333333" : palette.base
     property color colorText: isMaterial ? "#e6d5e1" : palette.text
