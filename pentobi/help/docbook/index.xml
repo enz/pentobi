@@ -602,7 +602,6 @@ sibling node of the current node in the game tree).
 <variablelist>
 <varlistentry>
 <term><guimenuitem>New</guimenuitem></term>
-<term>(<keysym>Ctrl+N</keysym>)</term>
 <listitem>
 <para>
 Start a new game.
@@ -611,7 +610,6 @@ Start a new game.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Rated Game</guimenuitem></term>
-<term>(<keysym>Ctrl+Shift+N</keysym>)</term>
 <listitem>
 <para>
 Start a new <link linkend="rating">rated game</link> against the computer.
@@ -628,7 +626,6 @@ Select a game variant and start a new game of this game variant.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Game Info</guimenuitem></term>
-<term>(<keysym>Ctrl+I</keysym>)</term>
 <listitem>
 <para>
 Display or edit additional information about the game like the name of the
@@ -649,7 +646,6 @@ nodes of the game tree).
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Find Move</guimenuitem></term>
-<term>(<keysym>Ctrl+H</keysym>)</term>
 <listitem>
 <para>
 Find a legal move for the current color and display it for a few seconds on the
@@ -659,7 +655,6 @@ board. Selecting this item repeatedly will show all legal moves.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Open</guimenuitem></term>
-<term>(<keysym>Ctrl+O</keysym>)</term>
 <listitem>
 <para>
 Load a saved game. The board position after loading will be the last position
@@ -680,7 +675,6 @@ Load a recently used game.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Save</guimenuitem></term>
-<term>(<keysym>Ctrl+S</keysym>)</term>
 <listitem>
 <para>
 Save the current game.
@@ -689,7 +683,6 @@ Save the current game.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Save As</guimenuitem></term>
-<term>(<keysym>Ctrl+Shift+S</keysym>)</term>
 <listitem>
 <para>
 Save the current game under a new file name.
@@ -709,7 +702,6 @@ multiple of the number of board columns in the current game variant.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Quit</guimenuitem></term>
-<term>(<keysym>Ctrl+Q</keysym>)</term>
 <listitem>
 <para>
 Quit Pentobi.
@@ -723,7 +715,6 @@ Quit Pentobi.
 <variablelist>
 <varlistentry>
 <term><guimenuitem>Move Number</guimenuitem></term>
-<term>(<keysym>Ctrl+G</keysym>)</term>
 <listitem>
 <para>
 Go to the move with a given move number in the current variation.
@@ -732,7 +723,6 @@ Go to the move with a given move number in the current variation.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Main Variation</guimenuitem></term>
-<term>(<keysym>Ctrl+M</keysym>)</term>
 <listitem>
 <para>
 Go back to the last position in the current variation that belonged to the main
@@ -742,7 +732,6 @@ variation.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Beginning of Branch</guimenuitem></term>
-<term>(<keysym>Ctrl+B</keysym>)</term>
 <listitem>
 <para>
 Go back to the last position in the current variation that had an alternative
@@ -752,7 +741,6 @@ move.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Next Comment</guimenuitem></term>
-<term>(<keysym>Ctrl+E</keysym>)</term>
 <listitem>
 <para>
 Go to the next position that has a comment. If the comment text field was not
@@ -950,7 +938,6 @@ shown if a comment exists for the current position.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Comment</guimenuitem></term>
-<term>(<keysym>Ctrl+T</keysym>)</term>
 <listitem>
 <para>
 Toggle the visibility of the comment area in the current position.
@@ -959,7 +946,6 @@ Toggle the visibility of the comment area in the current position.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Fullscreen</guimenuitem></term>
-<term>(<keysym>F11</keysym>)</term>
 <listitem>
 <para>
 Make the main window full screen or leave full screen mode. To leave fullscreen
@@ -974,7 +960,6 @@ mode without using the window menu, press the F11 key.
 <variablelist>
 <varlistentry>
 <term><guimenuitem>Settings</guimenuitem></term>
-<term>(<keysym>Ctrl+U</keysym>)</term>
 <listitem>
 <para>
 Select which colors are played by the computer and the playing strength for the
@@ -985,7 +970,6 @@ for playing moves on slow computers.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Play</guimenuitem></term>
-<term>(<keysym>Ctrl+L</keysym>)</term>
 <listitem>
 <para>
 Make the computer play a move for the current color. This can be used to change
@@ -997,7 +981,6 @@ color (and only this color) from now on.
 </varlistentry>
 <varlistentry>
 <term><guimenuitem>Play Move</guimenuitem></term>
-<term>(<keysym>Ctrl+Shift+L</keysym>)</term>
 <listitem>
 <para>
 Make the computer play a single move for the current color without changing the
@@ -1059,7 +1042,6 @@ Deletes the analysis for the current game.
 <variablelist>
 <varlistentry>
 <term><guimenuitem>Pentobi Help</guimenuitem></term>
-<term>(<keysym>F1</keysym>)</term>
 <listitem>
 <para>
 Show a window to browse the Pentobi user manual.

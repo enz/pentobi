@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-29 09:00+0200\n"
+"POT-Creation-Date: 2026-08-11 08:29+0200\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2026\n"
 "Language-Team: German (https://app.transifex.com/markus-enzenberger/teams/89074/de/)\n"
@@ -929,47 +929,35 @@ msgstr "<guimenu>Spiel</guimenu>-Menü"
 msgid "<guimenuitem>New</guimenuitem>"
 msgstr "<guimenuitem>Neu</guimenuitem>"
 
-#: docbook/index.xml:605
-msgid "(<keysym>Ctrl+N</keysym>)"
-msgstr "(<keysym>Strg+N</keysym>)"
-
-#: docbook/index.xml:607
+#: docbook/index.xml:606
 msgid "Start a new game."
 msgstr "Beginnt ein neues Spiel."
 
-#: docbook/index.xml:613
+#: docbook/index.xml:612
 msgid "<guimenuitem>Rated Game</guimenuitem>"
 msgstr "<guimenuitem>Gewertetes Spiel</guimenuitem>"
 
 #: docbook/index.xml:614
-msgid "(<keysym>Ctrl+Shift+N</keysym>)"
-msgstr "(<keysym>Strg+Umschalt+N</keysym>)"
-
-#: docbook/index.xml:616
 msgid ""
 "Start a new <link linkend=\"rating\">rated game</link> against the computer."
 msgstr ""
 "Beginnt ein neues <link linkend=\"rating\">gewertetes Spiel</link> gegen den"
 " Computer."
 
-#: docbook/index.xml:622
+#: docbook/index.xml:620
 msgid "<guimenuitem>Game Variant</guimenuitem>"
 msgstr "<guimenuitem>Spielvariante</guimenuitem>"
 
-#: docbook/index.xml:624
+#: docbook/index.xml:622
 msgid "Select a game variant and start a new game of this game variant."
 msgstr ""
 "Wählt eine Spielvariante und beginnt ein neues Spiel dieser Spielvariante."
 
-#: docbook/index.xml:630
+#: docbook/index.xml:628
 msgid "<guimenuitem>Game Info</guimenuitem>"
 msgstr "<guimenuitem>Spielinformationen</guimenuitem>"
 
-#: docbook/index.xml:631
-msgid "(<keysym>Ctrl+I</keysym>)"
-msgstr "(<keysym>Strg+I</keysym>)"
-
-#: docbook/index.xml:633
+#: docbook/index.xml:630
 msgid ""
 "Display or edit additional information about the game like the name of the "
 "players or the date when the game was played."
@@ -978,11 +966,11 @@ msgstr ""
 "Informationen über das Spiel, wie die Namen der Spieler oder das Datum, an "
 "dem das Spiel gespielt wurde."
 
-#: docbook/index.xml:639
+#: docbook/index.xml:636
 msgid "<guimenuitem>Undo Move</guimenuitem>"
 msgstr "<guimenuitem>Zug rückgängig</guimenuitem>"
 
-#: docbook/index.xml:641
+#: docbook/index.xml:638
 msgid ""
 "Undo the last move played and remove it from the game tree. Undoing a move "
 "is only possible if it is the last move in the current variation (i.e. a "
@@ -996,15 +984,11 @@ msgstr ""
 "<guimenu>Bearbeiten</guimenu>/<guimenuitem>Abschneiden</guimenuitem> zum "
 "Entfernen innerer Knoten aus dem Spielbaum)."
 
-#: docbook/index.xml:651
+#: docbook/index.xml:648
 msgid "<guimenuitem>Find Move</guimenuitem>"
 msgstr "<guimenuitem>Zug finden</guimenuitem>"
 
-#: docbook/index.xml:652
-msgid "(<keysym>Ctrl+H</keysym>)"
-msgstr "(<keysym>Strg+H</keysym>)"
-
-#: docbook/index.xml:654
+#: docbook/index.xml:650
 msgid ""
 "Find a legal move for the current color and display it for a few seconds on "
 "the board. Selecting this item repeatedly will show all legal moves."
@@ -1013,15 +997,11 @@ msgstr ""
 "paar Sekunden auf dem Spielbrett. Das wiederholte Auswählen dieses "
 "Menüpunkts zeigt alle legalen Züge."
 
-#: docbook/index.xml:661
+#: docbook/index.xml:657
 msgid "<guimenuitem>Open</guimenuitem>"
 msgstr "<guimenuitem>Öffnen</guimenuitem>"
 
-#: docbook/index.xml:662
-msgid "(<keysym>Ctrl+O</keysym>)"
-msgstr "(<keysym>Strg+O</keysym>)"
-
-#: docbook/index.xml:664
+#: docbook/index.xml:659
 msgid ""
 "Load a saved game. The board position after loading will be the last "
 "position in the main variation unless the game starts with a setup position."
@@ -1038,43 +1018,35 @@ msgstr ""
 " die Datei ein Blokus-Problem als aufgebaute Brettstellung enthält mit der "
 "Lösung in der Hauptvariante."
 
-#: docbook/index.xml:674
+#: docbook/index.xml:669
 msgid "<guimenu>Open Recent</guimenu>"
 msgstr "<guimenu>Zuletzt benutzt</guimenu>"
 
-#: docbook/index.xml:676
+#: docbook/index.xml:671
 msgid "Load a recently used game."
 msgstr "Lädt ein kürzlich benutztes Spiel."
 
-#: docbook/index.xml:682
+#: docbook/index.xml:677
 msgid "<guimenuitem>Save</guimenuitem>"
 msgstr "<guimenuitem>Speichern</guimenuitem>"
 
-#: docbook/index.xml:683
-msgid "(<keysym>Ctrl+S</keysym>)"
-msgstr "(<keysym>Strg+S</keysym>)"
-
-#: docbook/index.xml:685
+#: docbook/index.xml:679
 msgid "Save the current game."
 msgstr "Speichert das gegenwärtige Spiel."
 
-#: docbook/index.xml:691
+#: docbook/index.xml:685
 msgid "<guimenuitem>Save As</guimenuitem>"
 msgstr "<guimenuitem>Speichern unter</guimenuitem>"
 
-#: docbook/index.xml:692
-msgid "(<keysym>Ctrl+Shift+S</keysym>)"
-msgstr "(<keysym>Strg+Umschalt+S</keysym>)"
-
-#: docbook/index.xml:694
+#: docbook/index.xml:687
 msgid "Save the current game under a new file name."
 msgstr "Speichert das gegenwärtige Spiel unter einem neuen Dateinamen."
 
-#: docbook/index.xml:700
+#: docbook/index.xml:693
 msgid "<guimenuitem>Export Image</guimenuitem>"
 msgstr "<guimenuitem>Grafik exportieren</guimenuitem>"
 
-#: docbook/index.xml:702
+#: docbook/index.xml:695
 msgid ""
 "Save the current position as an image file. Several image file formats are "
 "supported, the file format is derived from the file name ending (e.g. "
@@ -1088,44 +1060,32 @@ msgstr ""
 "scharfes Bild sollte die Bildbreite ein ganzzahliges Vielfaches der "
 "Spaltenanzahl des Bretts in der gegenwärtigen Spielvariante sein."
 
-#: docbook/index.xml:711
+#: docbook/index.xml:704
 msgid "<guimenuitem>Quit</guimenuitem>"
 msgstr "<guimenuitem>Beenden</guimenuitem>"
 
-#: docbook/index.xml:712
-msgid "(<keysym>Ctrl+Q</keysym>)"
-msgstr "(<keysym>Strg+Q</keysym>)"
-
-#: docbook/index.xml:714
+#: docbook/index.xml:706
 msgid "Quit Pentobi."
 msgstr "Beendet Pentobi."
 
-#: docbook/index.xml:722
+#: docbook/index.xml:714
 msgid "<guimenu>Go</guimenu> Menu"
 msgstr "<guimenu>Gehe-zu</guimenu>-Menü"
 
-#: docbook/index.xml:725
+#: docbook/index.xml:717
 msgid "<guimenuitem>Move Number</guimenuitem>"
 msgstr "<guimenuitem>Zugnummer</guimenuitem>"
 
-#: docbook/index.xml:726
-msgid "(<keysym>Ctrl+G</keysym>)"
-msgstr "(<keysym>Strg+G</keysym>)"
-
-#: docbook/index.xml:728
+#: docbook/index.xml:719
 msgid "Go to the move with a given move number in the current variation."
 msgstr ""
 "Geht zum Zug mit einer bestimmten Nummer in der gegenwärtigen Variante."
 
-#: docbook/index.xml:734
+#: docbook/index.xml:725
 msgid "<guimenuitem>Main Variation</guimenuitem>"
 msgstr "<guimenuitem>Hauptvariante</guimenuitem>"
 
-#: docbook/index.xml:735
-msgid "(<keysym>Ctrl+M</keysym>)"
-msgstr "(<keysym>Strg+M</keysym>)"
-
-#: docbook/index.xml:737
+#: docbook/index.xml:727
 msgid ""
 "Go back to the last position in the current variation that belonged to the "
 "main variation."
@@ -1133,15 +1093,11 @@ msgstr ""
 "Kehrt zur letzten Brettstellung in der gegenwärtigen Variante zurück, die "
 "zur Hauptvariante gehörte."
 
-#: docbook/index.xml:744
+#: docbook/index.xml:734
 msgid "<guimenuitem>Beginning of Branch</guimenuitem>"
 msgstr "<guimenuitem>Verzweigungsanfang</guimenuitem>"
 
-#: docbook/index.xml:745
-msgid "(<keysym>Ctrl+B</keysym>)"
-msgstr "(<keysym>Strg+B</keysym>)"
-
-#: docbook/index.xml:747
+#: docbook/index.xml:736
 msgid ""
 "Go back to the last position in the current variation that had an "
 "alternative move."
@@ -1149,15 +1105,11 @@ msgstr ""
 "Kehrt zur letzten Brettstellung in der gegenwärtigen Variante zurück, die "
 "einen alternativen Zug hatte."
 
-#: docbook/index.xml:754
+#: docbook/index.xml:743
 msgid "<guimenuitem>Next Comment</guimenuitem>"
 msgstr "<guimenuitem>Nächster Kommentar</guimenuitem>"
 
-#: docbook/index.xml:755
-msgid "(<keysym>Ctrl+E</keysym>)"
-msgstr "(<keysym>Strg+E</keysym>)"
-
-#: docbook/index.xml:757
+#: docbook/index.xml:745
 msgid ""
 "Go to the next position that has a comment. If the comment text field was "
 "not visible, it will become visible. Selecting this item repeatedly will "
@@ -1168,15 +1120,15 @@ msgstr ""
 "Auswählen dieses Menüpunkts zeigt nacheinander alle Brettstellungen mit "
 "Kommentaren im Spielbaum."
 
-#: docbook/index.xml:767
+#: docbook/index.xml:755
 msgid "<guimenu>Edit</guimenu> Menu"
 msgstr "<guimenu>Bearbeiten</guimenu>-Menü"
 
-#: docbook/index.xml:770
+#: docbook/index.xml:758
 msgid "<guimenuitem>Annotation</guimenuitem>"
 msgstr "<guimenuitem>Annotation</guimenuitem>"
 
-#: docbook/index.xml:772
+#: docbook/index.xml:760
 msgid ""
 "Add a chess-style annotation symbol (e.g. ‼) to the current move. The "
 "symbols are appended to the move numbers in the status bar and, depending on"
@@ -1187,11 +1139,11 @@ msgstr ""
 "Statusleiste angehängt und, abhängig von der Einstellung von "
 "<guilabel>Zugmarkierung</guilabel>, an die auf dem Spielbrett."
 
-#: docbook/index.xml:780
+#: docbook/index.xml:768
 msgid "<guimenuitem>Make Main Variation</guimenuitem>"
 msgstr "<guimenuitem>Zu Hauptvariante machen</guimenuitem>"
 
-#: docbook/index.xml:782
+#: docbook/index.xml:770
 msgid ""
 "Make the current variation the main variation of the game. This reorders the"
 " nodes in the game tree such that the current variation becomes the main "
@@ -1201,11 +1153,11 @@ msgstr ""
 "die Knoten im Spielbaum so um, dass die gegenwärtige Variante zur "
 "Hauptvariante wird."
 
-#: docbook/index.xml:790
+#: docbook/index.xml:778
 msgid "<guimenuitem>Variation Up</guimenuitem>"
 msgstr "<guimenuitem>Variante nach oben</guimenuitem>"
 
-#: docbook/index.xml:792
+#: docbook/index.xml:780
 msgid ""
 "Changes the order of variations such that the current position will appear "
 "earlier when iterating over the variations with <guibutton>Next "
@@ -1215,11 +1167,11 @@ msgstr ""
 " beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> "
 "/<guibutton>Vorherige Variante</guibutton> früher erscheint."
 
-#: docbook/index.xml:801
+#: docbook/index.xml:789
 msgid "<guimenuitem>Variation Down</guimenuitem>"
 msgstr "<guimenuitem>Variante nach unten</guimenuitem>"
 
-#: docbook/index.xml:803
+#: docbook/index.xml:791
 msgid ""
 "Changes the order of variations such that the current position will appear "
 "later when iterating over the variations with <guibutton>Next "
@@ -1229,11 +1181,11 @@ msgstr ""
 " beim Durchlaufen der Varianten mit <guibutton>Nächste Variante</guibutton> "
 "/<guibutton>Vorherige Variante</guibutton> später erscheint."
 
-#: docbook/index.xml:812
+#: docbook/index.xml:800
 msgid "<guimenuitem>Delete Variations</guimenuitem>"
 msgstr "<guimenuitem>Varianten löschen</guimenuitem>"
 
-#: docbook/index.xml:814
+#: docbook/index.xml:802
 msgid ""
 "Delete all variations but the main variation. If the current position is not"
 " in the main variation, it will first be changed to a position as in "
@@ -1244,11 +1196,11 @@ msgstr ""
 "Brettstellung in der Hauptvariante gewechselt wie in <guimenu>Gehe "
 "zu</guimenu> / <guimenuitem>Hauptvariante</guimenuitem>."
 
-#: docbook/index.xml:822
+#: docbook/index.xml:810
 msgid "<guimenuitem>Truncate</guimenuitem>"
 msgstr "<guimenuitem>Abschneiden</guimenuitem>"
 
-#: docbook/index.xml:824
+#: docbook/index.xml:812
 msgid ""
 "Remove the node with the current position, including any subtree, from the "
 "game tree."
@@ -1256,11 +1208,11 @@ msgstr ""
 "Entfernt den Knoten mit der gegenwärtigen Brettstellung zusammen mit dem auf"
 " ihn folgenden Teilbaum aus dem Spielbaum."
 
-#: docbook/index.xml:831
+#: docbook/index.xml:819
 msgid "<guimenuitem>Truncate Children</guimenuitem>"
 msgstr "<guimenuitem>Kindknoten abschneiden</guimenuitem>"
 
-#: docbook/index.xml:833
+#: docbook/index.xml:821
 msgid ""
 "Remove all child nodes of the node with the current position from the game "
 "tree."
@@ -1268,11 +1220,11 @@ msgstr ""
 "Entfernt alle Kindknoten des Knotens mit der gegenwärtigen Brettstellung aus"
 " dem Spielbaum."
 
-#: docbook/index.xml:840
+#: docbook/index.xml:828
 msgid "<guimenuitem>Keep Position</guimenuitem>"
 msgstr "<guimenuitem>Brettstellung behalten</guimenuitem>"
 
-#: docbook/index.xml:842
+#: docbook/index.xml:830
 msgid ""
 "Delete all moves and keep only the current position as a setup. This can be "
 "used to create files that start with a given fixed position."
@@ -1281,11 +1233,11 @@ msgstr ""
 "Ausgangsstellung. Dies kann zur Erzeugung von Dateien benutzt werden, die "
 "mit einer festgelegten Brettstellung beginnen."
 
-#: docbook/index.xml:849
+#: docbook/index.xml:837
 msgid "<guimenuitem>Keep Subtree</guimenuitem>"
 msgstr "<guimenuitem>Teilbaum behalten</guimenuitem>"
 
-#: docbook/index.xml:851
+#: docbook/index.xml:839
 msgid ""
 "Like <guimenuitem>Keep Position</guimenuitem> but does not delete the moves "
 "after the current position."
@@ -1293,11 +1245,11 @@ msgstr ""
 "Wie <guimenuitem>Brettstellung behalten</guimenuitem>, aber die Züge nach "
 "der gegenwärtigen Brettstellung werden nicht gelöscht."
 
-#: docbook/index.xml:858
+#: docbook/index.xml:846
 msgid "<guimenuitem>Setup Mode</guimenuitem>"
 msgstr "<guimenuitem>Stellungsaufbau</guimenuitem>"
 
-#: docbook/index.xml:860
+#: docbook/index.xml:848
 msgid ""
 "Enter or leave setup mode. In setup mode, pieces can be placed anywhere on "
 "the board, even in violation of the game rules. Existing pieces can be "
@@ -1317,11 +1269,11 @@ msgstr ""
 " Der Stellungsaufbau-Modus kann nur benutzt werden, wenn noch keine Züge "
 "gespielt wurden."
 
-#: docbook/index.xml:872
+#: docbook/index.xml:860
 msgid "<guimenuitem>Next Color</guimenuitem>"
 msgstr "<guimenuitem>Nächste Farbe</guimenuitem>"
 
-#: docbook/index.xml:874
+#: docbook/index.xml:862
 msgid ""
 "Choose the next color for selecting pieces. This can be used for example to "
 "enter game records, in which moves of a color were skipped because the color"
@@ -1332,19 +1284,19 @@ msgstr ""
 "übersprungen wurden, da die Farbe wegen Bedenkzeitüberschreitung vom "
 "Weiterspielen ausgeschlossen wurde."
 
-#: docbook/index.xml:884
+#: docbook/index.xml:872
 msgid "<guimenu>View</guimenu> Menu"
 msgstr "<guimenu>Ansicht</guimenu>-Menü"
 
-#: docbook/index.xml:886
+#: docbook/index.xml:874
 msgid "<guimenuitem>Appearance</guimenuitem>"
 msgstr "<guimenuitem>Erscheinungsbild</guimenuitem>"
 
-#: docbook/index.xml:891
+#: docbook/index.xml:879
 msgid "<guilabel>Coordinates</guilabel>"
 msgstr "<guilabel>Koordinaten</guilabel>"
 
-#: docbook/index.xml:893
+#: docbook/index.xml:881
 msgid ""
 "Display coordinates around the board for the fields on the board. The "
 "convention for the coordinates is the same as in the Blokus SGF file format "
@@ -1354,11 +1306,11 @@ msgstr ""
 "Spielbrett. Die Konvention für die Koordinaten ist dieselbe wie im von "
 "Pentobi benutzten Blokus-SGF-Dateiformat."
 
-#: docbook/index.xml:901
+#: docbook/index.xml:889
 msgid "<guilabel>Show variations</guilabel>"
 msgstr "<guilabel>Varianten zeigen</guilabel>"
 
-#: docbook/index.xml:903
+#: docbook/index.xml:891
 msgid ""
 "Appends a letter to the move number on the board if the move has variations."
 " If moves are marked with dots instead of numbers, a circle will be used "
@@ -1369,11 +1321,11 @@ msgstr ""
 "werden, wird ein Kreis statt ein Punkt für Züge verwendet, die nicht in der "
 "Hauptvariante sind."
 
-#: docbook/index.xml:911
+#: docbook/index.xml:899
 msgid "<guilabel>Move number</guilabel>"
 msgstr "<guilabel>Zugnummer</guilabel>"
 
-#: docbook/index.xml:913
+#: docbook/index.xml:901
 msgid ""
 "This option exists only in desktop mode and shows the move number, move "
 "annotation and variation information at the right side of the status bar."
@@ -1382,21 +1334,21 @@ msgstr ""
 "Zugannotation und Varianteninformation auf der rechten Seite der "
 "Statusleiste an."
 
-#: docbook/index.xml:920
+#: docbook/index.xml:908
 msgid "<guilabel>Colorblind mode</guilabel>"
 msgstr "<guilabel>Farbenblindmodus</guilabel>"
 
-#: docbook/index.xml:922
+#: docbook/index.xml:910
 msgid "Use piece colors more distinguishable for colorblind users."
 msgstr ""
 "Benutzt Spielsteinfarben, die für farbenblinde Benutzer besser "
 "unterscheidbar sind."
 
-#: docbook/index.xml:928
+#: docbook/index.xml:916
 msgid "<guilabel>Move marking</guilabel>"
 msgstr "<guilabel>Zugmarkierung</guilabel>"
 
-#: docbook/index.xml:930
+#: docbook/index.xml:918
 msgid ""
 "Change the way moves are marked on the board. The options are to mark the "
 "last move played with a dot or with a number, or to show the numbers of all "
@@ -1406,11 +1358,11 @@ msgstr ""
 "zuletzt gespielten Zug mit einem Punkt oder einer Nummer zu markieren, oder "
 "die Nummern aller Züge zu zeigen oder gar keine Markierung zu zeigen."
 
-#: docbook/index.xml:938
+#: docbook/index.xml:926
 msgid "<guilabel>Show comment</guilabel>"
 msgstr "<guilabel>Kommentar zeigen</guilabel>"
 
-#: docbook/index.xml:940
+#: docbook/index.xml:928
 msgid ""
 "This option exists only in desktop mode and configures the visibility of the"
 " comment area when the position changes. By default, the comment area is "
@@ -1421,29 +1373,21 @@ msgstr ""
 "Standardeinstellung ist, dass der Kommentarbereich nur sichtbar ist, wenn "
 "ein Kommentar zur aktuellen Stellung existiert."
 
-#: docbook/index.xml:952
+#: docbook/index.xml:940
 msgid "<guimenuitem>Comment</guimenuitem>"
 msgstr "<guimenuitem>Kommentar</guimenuitem>"
 
-#: docbook/index.xml:953
-msgid "(<keysym>Ctrl+T</keysym>)"
-msgstr "(<keysym>Strg+T</keysym>)"
-
-#: docbook/index.xml:955
+#: docbook/index.xml:942
 msgid "Toggle the visibility of the comment area in the current position."
 msgstr ""
 "Mach den Kommentarbereich in der aktuellen Stellung sichtbar oder nicht "
 "sichtbar."
 
-#: docbook/index.xml:961
+#: docbook/index.xml:948
 msgid "<guimenuitem>Fullscreen</guimenuitem>"
 msgstr "<guimenuitem>Vollbild</guimenuitem>"
 
-#: docbook/index.xml:962
-msgid "(<keysym>F11</keysym>)"
-msgstr "(<keysym>F11</keysym>)"
-
-#: docbook/index.xml:964
+#: docbook/index.xml:950
 msgid ""
 "Make the main window full screen or leave full screen mode. To leave "
 "fullscreen mode without using the window menu, press the F11 key."
@@ -1452,19 +1396,15 @@ msgstr ""
 "Vollbildmodus. Um den Vollbildmodus ohne das Benutzen des Fenstermenüs zu "
 "verlassen, drücken Sie die F11-Taste."
 
-#: docbook/index.xml:973
+#: docbook/index.xml:959
 msgid "<guimenu>Computer</guimenu> Menu"
 msgstr "<guimenu>Computer</guimenu>-Menü"
 
-#: docbook/index.xml:976
+#: docbook/index.xml:962
 msgid "<guimenuitem>Settings</guimenuitem>"
 msgstr "<guimenuitem>Einstellungen</guimenuitem>"
 
-#: docbook/index.xml:977
-msgid "(<keysym>Ctrl+U</keysym>)"
-msgstr "(<keysym>Strg+U</keysym>)"
-
-#: docbook/index.xml:979
+#: docbook/index.xml:964
 msgid ""
 "Select which colors are played by the computer and the playing strength for "
 "the computer. Higher levels are stronger but can make the computer take a "
@@ -1474,15 +1414,11 @@ msgstr ""
 "des Computers. Höhere Spielstufen sind stärker, können aber die Bedenkzeiten"
 " des Computers auf langsamen Computern sehr verlängern."
 
-#: docbook/index.xml:987
+#: docbook/index.xml:972
 msgid "<guimenuitem>Play</guimenuitem>"
 msgstr "<guimenuitem>Spielen</guimenuitem>"
 
-#: docbook/index.xml:988
-msgid "(<keysym>Ctrl+L</keysym>)"
-msgstr "(<keysym>Strg+L</keysym>)"
-
-#: docbook/index.xml:990
+#: docbook/index.xml:974
 msgid ""
 "Make the computer play a move for the current color. This can be used to "
 "change the color the computer plays or to resume playing after navigating in"
@@ -1495,15 +1431,11 @@ msgstr ""
 "Farbe nicht bereits spielte, wird er diese Farbe (und nur diese) im weiteren"
 " Spielverlauf spielen."
 
-#: docbook/index.xml:999
+#: docbook/index.xml:983
 msgid "<guimenuitem>Play Move</guimenuitem>"
 msgstr "<guimenuitem>Zug spielen</guimenuitem>"
 
-#: docbook/index.xml:1000
-msgid "(<keysym>Ctrl+Shift+L</keysym>)"
-msgstr "(<keysym>Strg+Umschalt+L</keysym>)"
-
-#: docbook/index.xml:1002
+#: docbook/index.xml:985
 msgid ""
 "Make the computer play a single move for the current color without changing "
 "the colors played by the computer."
@@ -1511,11 +1443,11 @@ msgstr ""
 "Lässt den Computer einen einzelnen Zug für die gegenwärtige Farbe spielen "
 "ohne die vom Computer gespielten Farben zu ändern."
 
-#: docbook/index.xml:1009
+#: docbook/index.xml:992
 msgid "<guimenuitem>Stop</guimenuitem>"
 msgstr "<guimenuitem>Stopp</guimenuitem>"
 
-#: docbook/index.xml:1011
+#: docbook/index.xml:994
 msgid ""
 "Abort the current move generation. You can make the computer continue to "
 "play by selecting <guimenuitem>Play</guimenuitem>."
@@ -1524,15 +1456,15 @@ msgstr ""
 "weiterspielen lassen, indem Sie <guimenuitem>Spielen</guimenuitem> "
 "auswählen."
 
-#: docbook/index.xml:1020
+#: docbook/index.xml:1003
 msgid "<guimenu>Tools</guimenu> Menu"
 msgstr "<guimenu>Extras</guimenu>-Menü"
 
-#: docbook/index.xml:1023
+#: docbook/index.xml:1006
 msgid "<guimenuitem>Rating</guimenuitem>"
 msgstr "<guimenuitem>Wertung</guimenuitem>"
 
-#: docbook/index.xml:1025
+#: docbook/index.xml:1008
 msgid ""
 "Show a dialog window with the <link linkend=\"rating\">rating</link> of the "
 "user in the current game variant."
@@ -1540,63 +1472,59 @@ msgstr ""
 "Zeigt ein Dialogfenster mit der <link linkend=\"rating\">Wertung</link> des "
 "Benutzers in der gegenwärtigen Spielvariante."
 
-#: docbook/index.xml:1032
+#: docbook/index.xml:1015
 msgid "<guimenuitem>Clear Rating</guimenuitem>"
 msgstr "<guimenuitem>Wertung löschen</guimenuitem>"
 
-#: docbook/index.xml:1034
+#: docbook/index.xml:1017
 msgid ""
 "Deletes the rating information and history for the current game variant."
 msgstr ""
 "Löscht die Wertungsinformationen und -entwicklung zur gegenwärtigen "
 "Spielvariante."
 
-#: docbook/index.xml:1040
+#: docbook/index.xml:1023
 msgid "<guimenuitem>Analyze Game</guimenuitem>"
 msgstr "<guimenuitem>Spiel analysieren</guimenuitem>"
 
-#: docbook/index.xml:1042
+#: docbook/index.xml:1025
 msgid "Perform a <link linkend=\"analysis\">game analysis</link>."
 msgstr "Führt eine <link linkend=\"analysis\">Spielanalyse</link> durch."
 
-#: docbook/index.xml:1048
+#: docbook/index.xml:1031
 msgid "<guimenuitem>Clear Analysis</guimenuitem>"
 msgstr "<guimenuitem>Analyse löschen</guimenuitem>"
 
-#: docbook/index.xml:1050
+#: docbook/index.xml:1033
 msgid "Deletes the analysis for the current game."
 msgstr "Löscht die Analyse des gegenwärtigen Spiels."
 
-#: docbook/index.xml:1058
+#: docbook/index.xml:1041
 msgid "<guimenu>Help</guimenu> Menu"
 msgstr "<guimenu>Hilfe</guimenu>-Menü"
 
-#: docbook/index.xml:1061
+#: docbook/index.xml:1044
 msgid "<guimenuitem>Pentobi Help</guimenuitem>"
 msgstr "<guimenuitem>Pentobi-Hilfe</guimenuitem>"
 
-#: docbook/index.xml:1062
-msgid "(<keysym>F1</keysym>)"
-msgstr "(<keysym>F1</keysym>)"
-
-#: docbook/index.xml:1064
+#: docbook/index.xml:1046
 msgid "Show a window to browse the Pentobi user manual."
 msgstr "Zeigt ein Fenster mit dem Pentobi-Benutzerhandbuch."
 
-#: docbook/index.xml:1070
+#: docbook/index.xml:1052
 msgid "<guimenuitem>About Pentobi</guimenuitem>"
 msgstr "<guimenuitem>Über Pentobi</guimenuitem>"
 
-#: docbook/index.xml:1072
+#: docbook/index.xml:1054
 msgid "Show an info dialog with information about this version of Pentobi."
 msgstr ""
 "Zeigt ein Dialogfenster mit Informationen über diese Version von Pentobi."
 
-#: docbook/index.xml:1082
+#: docbook/index.xml:1064
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkürzel"
 
-#: docbook/index.xml:1083
+#: docbook/index.xml:1065
 msgid ""
 "In addition to the shortcut keys, which are shown in the window menu, the "
 "following shortcut keys are supported by Pentobi. Note that these shortcuts "
@@ -1609,181 +1537,181 @@ msgstr ""
 "besitzt. In diesem Fall kann der Fokus vom Kommentartext durch die "
 "Tabulator-Taste entfernt werden."
 
-#: docbook/index.xml:1091
+#: docbook/index.xml:1073
 msgid "<keysym>Plus</keysym>"
 msgstr "<keysym>Plus</keysym>"
 
-#: docbook/index.xml:1093
+#: docbook/index.xml:1075
 msgid "Select next piece"
 msgstr "Nächsten Spielstein auswählen"
 
-#: docbook/index.xml:1099
+#: docbook/index.xml:1081
 msgid "<keysym>Minus</keysym>"
 msgstr "<keysym>Minus</keysym>"
 
-#: docbook/index.xml:1101
+#: docbook/index.xml:1083
 msgid "Select previous piece"
 msgstr "Vorherigen Spielstein auswählen"
 
-#: docbook/index.xml:1107
+#: docbook/index.xml:1089
 msgid "<keysym>Escape</keysym>"
 msgstr "<keysym>Escape</keysym>"
 
-#: docbook/index.xml:1109
+#: docbook/index.xml:1091
 msgid "Clear selected piece"
 msgstr "Spielsteinauswahl löschen"
 
-#: docbook/index.xml:1115
+#: docbook/index.xml:1097
 msgid "<keysym>Left</keysym>"
 msgstr "<keysym>Links</keysym>"
 
-#: docbook/index.xml:1116
+#: docbook/index.xml:1098
 msgid "<keysym>Right</keysym>"
 msgstr "<keysym>Rechts</keysym>"
 
-#: docbook/index.xml:1117
+#: docbook/index.xml:1099
 msgid "<keysym>Up</keysym>"
 msgstr "<keysym>Oben</keysym>"
 
-#: docbook/index.xml:1118
+#: docbook/index.xml:1100
 msgid "<keysym>Down</keysym>"
 msgstr "<keysym>Unten</keysym>"
 
-#: docbook/index.xml:1119
+#: docbook/index.xml:1101
 msgid "<keysym>Shift+Left</keysym>"
 msgstr "<keysym>Umschalt+Links</keysym>"
 
-#: docbook/index.xml:1120
+#: docbook/index.xml:1102
 msgid "<keysym>Shift+Right</keysym>"
 msgstr "<keysym>Umschalt+Rechts</keysym>"
 
-#: docbook/index.xml:1121
+#: docbook/index.xml:1103
 msgid "<keysym>Shift+Up</keysym>"
 msgstr "<keysym>Umschalt+Oben</keysym>"
 
-#: docbook/index.xml:1122
+#: docbook/index.xml:1104
 msgid "<keysym>Shift+Down</keysym>"
 msgstr "<keysym>Umschalt+Unten</keysym>"
 
-#: docbook/index.xml:1124
+#: docbook/index.xml:1106
 msgid "Move the selected piece. The Shift key makes the piece move faster."
 msgstr ""
 "Bewegen des ausgewählten Spielsteins. Mit der Umschalttaste wird der "
 "Spielstein schneller bewegt."
 
-#: docbook/index.xml:1130
+#: docbook/index.xml:1112
 msgid "<keysym>Space</keysym>"
 msgstr "<keysym>Leertaste</keysym>"
 
-#: docbook/index.xml:1132
+#: docbook/index.xml:1114
 msgid "Next orientation of the selected piece"
 msgstr "Nächste Ausrichtung des ausgewählten Spielsteins"
 
-#: docbook/index.xml:1138
+#: docbook/index.xml:1120
 msgid "<keysym>Shift+Space</keysym>"
 msgstr "<keysym>Umschalt+Leertaste</keysym>"
 
-#: docbook/index.xml:1140
+#: docbook/index.xml:1122
 msgid "Previous orientation of the selected piece"
 msgstr "Vorherige Ausrichtung des ausgewählten Spielsteins"
 
-#: docbook/index.xml:1146
+#: docbook/index.xml:1128
 msgid "<keysym>Enter</keysym>"
 msgstr "<keysym>Enter</keysym>"
 
-#: docbook/index.xml:1148
+#: docbook/index.xml:1130
 msgid "Play the selected piece"
 msgstr "Spielen des ausgewählten Spielsteins"
 
-#: docbook/index.xml:1154
+#: docbook/index.xml:1136
 msgid "<keysym>1</keysym>"
 msgstr "<keysym>1</keysym>"
 
-#: docbook/index.xml:1155
+#: docbook/index.xml:1137
 msgid "<keysym>2</keysym>"
 msgstr "<keysym>2</keysym>"
 
-#: docbook/index.xml:1156
+#: docbook/index.xml:1138
 msgid "<keysym>A</keysym>"
 msgstr "<keysym>A</keysym>"
 
-#: docbook/index.xml:1157
+#: docbook/index.xml:1139
 msgid "<keysym>C</keysym>"
 msgstr "<keysym>C</keysym>"
 
-#: docbook/index.xml:1158
+#: docbook/index.xml:1140
 msgid "<keysym>E</keysym>"
 msgstr "<keysym>E</keysym>"
 
-#: docbook/index.xml:1159
+#: docbook/index.xml:1141
 msgid "<keysym>F</keysym>"
 msgstr "<keysym>F</keysym>"
 
-#: docbook/index.xml:1160
+#: docbook/index.xml:1142
 msgid "<keysym>G</keysym>"
 msgstr "<keysym>G</keysym>"
 
-#: docbook/index.xml:1161
+#: docbook/index.xml:1143
 msgid "<keysym>H</keysym>"
 msgstr "<keysym>H</keysym>"
 
-#: docbook/index.xml:1162
+#: docbook/index.xml:1144
 msgid "<keysym>I</keysym>"
 msgstr "<keysym>I</keysym>"
 
-#: docbook/index.xml:1163
+#: docbook/index.xml:1145
 msgid "<keysym>J</keysym>"
 msgstr "<keysym>J</keysym>"
 
-#: docbook/index.xml:1164
+#: docbook/index.xml:1146
 msgid "<keysym>L</keysym>"
 msgstr "<keysym>L</keysym>"
 
-#: docbook/index.xml:1165
+#: docbook/index.xml:1147
 msgid "<keysym>N</keysym>"
 msgstr "<keysym>N</keysym>"
 
-#: docbook/index.xml:1166
+#: docbook/index.xml:1148
 msgid "<keysym>O</keysym>"
 msgstr "<keysym>O</keysym>"
 
-#: docbook/index.xml:1167
+#: docbook/index.xml:1149
 msgid "<keysym>P</keysym>"
 msgstr "<keysym>P</keysym>"
 
-#: docbook/index.xml:1168
+#: docbook/index.xml:1150
 msgid "<keysym>S</keysym>"
 msgstr "<keysym>S</keysym>"
 
-#: docbook/index.xml:1169
+#: docbook/index.xml:1151
 msgid "<keysym>T</keysym>"
 msgstr "<keysym>T</keysym>"
 
-#: docbook/index.xml:1170
+#: docbook/index.xml:1152
 msgid "<keysym>U</keysym>"
 msgstr "<keysym>U</keysym>"
 
-#: docbook/index.xml:1171
+#: docbook/index.xml:1153
 msgid "<keysym>V</keysym>"
 msgstr "<keysym>V</keysym>"
 
-#: docbook/index.xml:1172
+#: docbook/index.xml:1154
 msgid "<keysym>W</keysym>"
 msgstr "<keysym>W</keysym>"
 
-#: docbook/index.xml:1173
+#: docbook/index.xml:1155
 msgid "<keysym>X</keysym>"
 msgstr "<keysym>X</keysym>"
 
-#: docbook/index.xml:1174
+#: docbook/index.xml:1156
 msgid "<keysym>Y</keysym>"
 msgstr "<keysym>Y</keysym>"
 
-#: docbook/index.xml:1175
+#: docbook/index.xml:1157
 msgid "<keysym>Z</keysym>"
 msgstr "<keysym>Z</keysym>"
 
-#: docbook/index.xml:1177
+#: docbook/index.xml:1159
 msgid ""
 "Select piece according to commonly used piece names. If there are multiple "
 "pieces with the letter (e.g. I3, I4, I5), pressing the key several times "
@@ -1798,39 +1726,39 @@ msgstr ""
 " benutzt. Zum Beispiel wird A nur in Trigon für die Spielsteine A6 und A4 "
 "benutzt (auch bekannt als „Hummer“ und „Dreieck“)."
 
-#: docbook/index.xml:1187
+#: docbook/index.xml:1169
 msgid "<keysym>Ctrl+Home</keysym>"
 msgstr "<keysym>Strg+Pos1</keysym>"
 
-#: docbook/index.xml:1188
+#: docbook/index.xml:1170
 msgid "<keysym>Ctrl+Shift+Left</keysym>"
 msgstr "<keysym>Strg+Umschalt+Links</keysym>"
 
-#: docbook/index.xml:1189
+#: docbook/index.xml:1171
 msgid "<keysym>Ctrl+Left</keysym>"
 msgstr "<keysym>Strg+Links</keysym>"
 
-#: docbook/index.xml:1190
+#: docbook/index.xml:1172
 msgid "<keysym>Ctrl+Right</keysym>"
 msgstr "<keysym>Strg+Rechts</keysym>"
 
-#: docbook/index.xml:1191
+#: docbook/index.xml:1173
 msgid "<keysym>Ctrl+Shift+Right</keysym>"
 msgstr "<keysym>Strg+Umschalt+Rechts</keysym>"
 
-#: docbook/index.xml:1192
+#: docbook/index.xml:1174
 msgid "<keysym>Ctrl+End</keysym>"
 msgstr "<keysym>Strg+Ende</keysym>"
 
-#: docbook/index.xml:1193
+#: docbook/index.xml:1175
 msgid "<keysym>Ctrl+Up</keysym>"
 msgstr "<keysym>Strg+Oben</keysym>"
 
-#: docbook/index.xml:1194
+#: docbook/index.xml:1176
 msgid "<keysym>Ctrl+Down</keysym>"
 msgstr "<keysym>Strg+Unten</keysym>"
 
-#: docbook/index.xml:1196
+#: docbook/index.xml:1178
 msgid ""
 "Navigate in the game: beginning, ten moves backward, backward, forward, ten "
 "moves forward, end, previous variation, next variation."
@@ -1838,11 +1766,11 @@ msgstr ""
 "Im Spiel navigieren: Anfang, zehn Züge zurück, zurück, vorwärts, zehn Züge "
 "vorwärts, Ende, vorherige Variante, nächste Variante."
 
-#: docbook/index.xml:1203
+#: docbook/index.xml:1185
 msgid "<keysym>Ctrl+Shift+H</keysym>"
 msgstr "<keysym>Strg+Umschalt+H</keysym>"
 
-#: docbook/index.xml:1205
+#: docbook/index.xml:1187
 msgid ""
 "Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards "
 "through the list of legal moves."
@@ -1850,18 +1778,18 @@ msgstr ""
 "Wie <guimenuitem>Zug finden</guimenuitem> (Strg+H), jedoch wird rückwärts "
 "durch die Liste der legalen Züge iteriert."
 
-#: docbook/index.xml:1212
+#: docbook/index.xml:1194
 msgid "<keysym>Ctrl+T</keysym>"
 msgstr "<keysym>Strg+T</keysym>"
 
-#: docbook/index.xml:1214
+#: docbook/index.xml:1196
 msgid "Switch view between comment and game analysis."
 msgstr "Ansicht zwischen Kommentar und Spielanalyse umschalten."
 
-#: docbook/index.xml:1220
+#: docbook/index.xml:1202
 msgid "<keysym>Alt+M</keysym>"
 msgstr "<keysym>Alt+M</keysym>"
 
-#: docbook/index.xml:1222
+#: docbook/index.xml:1204
 msgid "Open menu."
 msgstr "Menü öffnen."
