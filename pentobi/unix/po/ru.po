@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-23 11:26+0100\n"
+"POT-Creation-Date: 2026-08-11 08:55+0200\n"
 "PO-Revision-Date: 2019-02-25 15:36+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2024\n"
 "Language-Team: Russian (https://app.transifex.com/markus-enzenberger/teams/89074/ru/)\n"
@@ -22,15 +22,15 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: io.sourceforge.pentobi.appdata.xml.in:7 io.sourceforge.pentobi.desktop.in:3
+#: io.sourceforge.pentobi.appdata.xml.in io.sourceforge.pentobi.desktop.in
 msgid "Pentobi"
 msgstr "Pentobi"
 
-#: io.sourceforge.pentobi.appdata.xml.in:8 io.sourceforge.pentobi.desktop.in:4
+#: io.sourceforge.pentobi.appdata.xml.in io.sourceforge.pentobi.desktop.in
 msgid "Computer opponent for Blokus"
 msgstr "Оппонент компьютерной настольной игры Блокус"
 
-#: io.sourceforge.pentobi.appdata.xml.in:15
+#: io.sourceforge.pentobi.appdata.xml.in
 msgid ""
 "Pentobi is a computer opponent for the board game Blokus. It has a strong "
 "Blokus engine with different playing levels. The supported game variants are"
@@ -40,7 +40,7 @@ msgstr ""
 "движок Блокус с различными уровнями игры. Поддерживаемые варианты игры-"
 "Классический, Двое, Тригон, Юниор, Нексос, Каллисто и ГемблоQ."
 
-#: io.sourceforge.pentobi.appdata.xml.in:20
+#: io.sourceforge.pentobi.appdata.xml.in
 msgid ""
 "Players can determine their strength by playing rated games against the "
 "computer and use a game analysis function. Games can be saved in Smart Game "
@@ -50,7 +50,7 @@ msgstr ""
 "компьютера и используя функцию анализа игры. Игры могут быть сохранены в "
 "формате Smart Game с комментариями и вариациями ходов."
 
-#: io.sourceforge.pentobi.appdata.xml.in:25
+#: io.sourceforge.pentobi.appdata.xml.in
 msgid ""
 "Trademark disclaimer: The trademark Blokus and other trademarks referred to "
 "are property of their respective trademark holders. The trademark holders "
@@ -61,32 +61,32 @@ msgstr ""
 "владельцев товарных знаков. Владельцы товарных знаков не связаны с автором "
 "программы Pentobi."
 
-#: io.sourceforge.pentobi.appdata.xml.in:40
+#: io.sourceforge.pentobi.appdata.xml.in
 msgid "Game variant Classic"
 msgstr "Вариант игры Классический"
 
-#: io.sourceforge.pentobi.appdata.xml.in:45
+#: io.sourceforge.pentobi.appdata.xml.in
 msgid "Game variant Duo"
 msgstr "Вариант игры Двое"
 
-#: io.sourceforge.pentobi.appdata.xml.in:50
+#: io.sourceforge.pentobi.appdata.xml.in
 msgid "Game variant Trigon"
 msgstr "Вариант игры Тригон"
 
-#: io.sourceforge.pentobi.appdata.xml.in:55
+#: io.sourceforge.pentobi.appdata.xml.in
 msgid "Game variant Nexos"
 msgstr "Вариант игры Нексос"
 
-#: io.sourceforge.pentobi.appdata.xml.in:60
+#: io.sourceforge.pentobi.appdata.xml.in
 msgid "Game variant GembloQ"
 msgstr "Вариант игры ГемблоQ"
 
-#: io.sourceforge.pentobi.appdata.xml.in:69
+#: io.sourceforge.pentobi.appdata.xml.in
 msgid "Markus Enzenberger"
 msgstr "Markus Enzenberger"
 
 #. TRANSLATORS: keywords in desktop entry, separate with semicolons
-#: io.sourceforge.pentobi.desktop.in:6
+#: io.sourceforge.pentobi.desktop.in
 msgid ""
 "Blokus;Blokus Duo;Blokus Trigon;Blokus Junior;Nexos;Callisto;Gemblo "
 "Q;GembloQ"
@@ -94,6 +94,6 @@ msgstr ""
 "Блокус;Блокус Двое;Блокус Тригон;Блокус Юниор;Нексос;Каллисто;Гембло "
 "Q;ГемблоQ"
 
-#: io.sourceforge.pentobi.xml.in:4
+#: io.sourceforge.pentobi.xml.in
 msgid "Blokus game"
 msgstr "Игра Блокус"

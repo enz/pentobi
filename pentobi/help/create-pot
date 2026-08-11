@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd $(dirname "$0")
-xgettext -o pentobi-manual.pot docbook/index.xml
+xgettext --add-location=file -o pentobi-manual.pot docbook/index.xml

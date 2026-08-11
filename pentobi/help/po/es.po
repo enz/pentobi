@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-11 08:29+0200\n"
+"POT-Creation-Date: 2026-08-11 08:55+0200\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2026\n"
 "Language-Team: Spanish (https://app.transifex.com/markus-enzenberger/teams/89074/es/)\n"
@@ -22,15 +22,15 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
-#: docbook/index.xml:5
+#: docbook/index.xml
 msgid "Pentobi"
 msgstr "Pentobi"
 
-#: docbook/index.xml:8
+#: docbook/index.xml
 msgid "Overview"
 msgstr "Descripción"
 
-#: docbook/index.xml:9
+#: docbook/index.xml
 msgid ""
 "Pentobi is a computer opponent for the board game Blokus. In this game, four"
 " players place pieces similar to the pieces of the computer game Tetris on a"
@@ -44,11 +44,11 @@ msgstr ""
 "cuenta con variantes de juego para dos o tres jugadores y con las variantes "
 "de juego Dúo, Trigón, Sencillo, Nexos, GembloQ y Calisto."
 
-#: docbook/index.xml:18
+#: docbook/index.xml
 msgid "Classic Rules"
 msgstr "Reglas de Clásico"
 
-#: docbook/index.xml:19
+#: docbook/index.xml
 msgid ""
 "There are four players, Blue, Yellow, Red and Green, and a board consisting "
 "of 20×20 squares. Each player has a set of 21 pieces of his color shaped "
@@ -61,11 +61,11 @@ msgstr ""
 " es una forma construida a partir de la conexión por los laterales de "
 "cuadrados."
 
-#: docbook/index.xml:26
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
 
-#: docbook/index.xml:32
+#: docbook/index.xml
 msgid ""
 "The players alternate in placing one of their pieces on the board. The first"
 " piece of a player must cover its starting square. The starting squares are "
@@ -76,11 +76,11 @@ msgstr ""
 "la casilla de inicio. Las casillas de inicio están colocadas en las esquinas"
 " del tablero."
 
-#: docbook/index.xml:38
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
 
-#: docbook/index.xml:44
+#: docbook/index.xml
 msgid ""
 "The following pieces must be placed on empty squares such that the new piece"
 " touches at least one piece of its own color corner-to-corner but does not "
@@ -92,11 +92,11 @@ msgstr ""
 " pero no puede tocar ninguna otra pieza del mismo color por los lados. La "
 "nueva pieza puede tocar los lados de las piezas de otros colores rivales."
 
-#: docbook/index.xml:51
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
 
-#: docbook/index.xml:57
+#: docbook/index.xml
 msgid ""
 "When the player of a color cannot place any more pieces, the player passes "
 "and the next color continues. When none of the players can place any more "
@@ -116,11 +116,11 @@ msgstr ""
 "todos las piezas y la última pieza que jugó fue la pieza de un solo "
 "cuadrado."
 
-#: docbook/index.xml:67 docbook/index.xml:157 docbook/index.xml:239
+#: docbook/index.xml
 msgid "Rules for Two Players"
 msgstr "Reglas para dos jugadores"
 
-#: docbook/index.xml:68
+#: docbook/index.xml
 msgid ""
 "The game can be played with two players. The first player plays both Blue "
 "and Red, the second player Yellow and Green. The points of both colors "
@@ -131,11 +131,11 @@ msgstr ""
 "sumarán las puntuaciones de los dos colores con los que esté jugando el "
 "jugador."
 
-#: docbook/index.xml:75 docbook/index.xml:164
+#: docbook/index.xml
 msgid "Rules for Three Players"
 msgstr "Reglas para tres jugadores"
 
-#: docbook/index.xml:76
+#: docbook/index.xml
 msgid ""
 "The game can also be played with three players. The players take turns "
 "playing the fourth color (Green). At the end of the game, the score of Green"
@@ -145,11 +145,11 @@ msgstr ""
 "turnan para jugar con el cuarto color (verde). Al final de la partida, la "
 "puntuación de las verdes se ignora."
 
-#: docbook/index.xml:83
+#: docbook/index.xml
 msgid "Colorless Starting Points"
 msgstr "Puntos de inicio sin color"
 
-#: docbook/index.xml:84
+#: docbook/index.xml
 msgid ""
 "Note that the original Blokus Classic rules used colorless starting points. "
 "This means that each color may freely choose, which of the remaining "
@@ -165,11 +165,11 @@ msgstr ""
 " variante de regla la que se usó en los primeros servidores en línea de "
 "Blokus y en los torneos de Blokus."
 
-#: docbook/index.xml:95
+#: docbook/index.xml
 msgid "Duo Rules"
 msgstr "Reglas de Dúo"
 
-#: docbook/index.xml:96
+#: docbook/index.xml
 msgid ""
 "The game variant Duo is another game variant for two players. The game is "
 "played on a smaller board with 14×14 squares. There is only one color per "
@@ -183,19 +183,19 @@ msgstr ""
 " no se encuentran en las esquinas, sino en la casilla con las coordenadas "
 "(5,10) para el morado, y en (10,5) para el naranja."
 
-#: docbook/index.xml:104
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
 
-#: docbook/index.xml:109
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
 
-#: docbook/index.xml:118
+#: docbook/index.xml
 msgid "Trigon Rules"
 msgstr "Reglas de Trigón"
 
-#: docbook/index.xml:119
+#: docbook/index.xml
 msgid ""
 "Trigon is another game variant. The rules are similar to game variant "
 "Classic but it uses a differently shaped board and a different set of "
@@ -210,11 +210,11 @@ msgstr ""
 "polidiamante es un forma compuesta por un determinado número de triángulos "
 "equiláteros conectados por los lados."
 
-#: docbook/index.xml:127
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
 
-#: docbook/index.xml:133
+#: docbook/index.xml
 msgid ""
 "The board also consists of triangles and is shaped like a hexagon with an "
 "edge size of nine triangles."
@@ -222,11 +222,11 @@ msgstr ""
 "El tablero también puede estar formado por triángulos y tiene forma de "
 "hexágono con un tamaño del borde de nueve triángulos."
 
-#: docbook/index.xml:138
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
 
-#: docbook/index.xml:144
+#: docbook/index.xml
 msgid ""
 "There are six starting points on the board, each located in the middle of "
 "the fourth row away from each edge. The starting points are not colored and "
@@ -239,11 +239,11 @@ msgstr ""
 "que los jugadores pueden elegir libremente en qué punto de inicio desean "
 "colocar la primera pieza de su color."
 
-#: docbook/index.xml:150
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
 
-#: docbook/index.xml:158
+#: docbook/index.xml
 msgid ""
 "Like game variant Classic, Trigon can be played with two players by having "
 "one player play Blue and Red and the other player Yellow and Green."
@@ -252,7 +252,7 @@ msgstr ""
 " jugadores, con un jugador a cargo de las azules y rojas y el otro jugador a"
 " cargo de amarillas y verdes."
 
-#: docbook/index.xml:165
+#: docbook/index.xml
 msgid ""
 "Trigon can be played with three players using the same rules as for the "
 "four-player variant. The three-player variant is played on a smaller board "
@@ -265,11 +265,11 @@ msgstr ""
 "triángulos. Los puntos de inicio están situados en mitad de la tercera fila "
 "contada a partir de cada uno de los laterales del tablero."
 
-#: docbook/index.xml:175
+#: docbook/index.xml
 msgid "Junior Rules"
 msgstr "Reglas de Sencillo"
 
-#: docbook/index.xml:176
+#: docbook/index.xml
 msgid ""
 "Junior is a simplified game variant for two players. It is played on the "
 "same 14×14 board as game variant Duo but uses only a subset of the "
@@ -281,19 +281,19 @@ msgstr ""
 "poliominós con un máximo de cinco cuadrados y los jugadores reciben dos de "
 "cada uno de esos poliominós."
 
-#: docbook/index.xml:182
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
 
-#: docbook/index.xml:188
+#: docbook/index.xml
 msgid "Bonus points are not used in Junior."
 msgstr "No se utilizan puntos de bonificación en Sencillo."
 
-#: docbook/index.xml:194
+#: docbook/index.xml
 msgid "Nexos Rules"
 msgstr "Reglas de Nexos"
 
-#: docbook/index.xml:195
+#: docbook/index.xml
 msgid ""
 "Nexos is a board game similar to Blokus. The board is a rectangular 13×13 "
 "line grid. Each color uses 24 pieces that consist of up to four connected "
@@ -303,11 +303,11 @@ msgstr ""
 "rectangular de 13x13 líneas. Cada color utiliza 24 piezas compuestas de un "
 "máximo de cuatro segmentos de línea unidos entre sí."
 
-#: docbook/index.xml:201
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
 
-#: docbook/index.xml:207
+#: docbook/index.xml
 msgid ""
 "Each color has a starting intersection on the intersection of the third "
 "lines close to a corner. The first piece must touch the starting "
@@ -317,11 +317,11 @@ msgstr ""
 "esquina donde se entrecruzan la tercera línea vertical y horizontal. La "
 "primera pieza debe tocar la intersección de inicio."
 
-#: docbook/index.xml:212
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
 
-#: docbook/index.xml:218
+#: docbook/index.xml
 msgid ""
 "The following pieces must be placed on empty line segments such that a "
 "segment of the new piece touches an intersection that is already touched by "
@@ -340,11 +340,11 @@ msgstr ""
 "de piezas distintas puedan cubrir la misma intersección sin solaparse, pero "
 "esto no se puede hacer en el caso de las uniones rectas. "
 
-#: docbook/index.xml:228
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
 
-#: docbook/index.xml:234
+#: docbook/index.xml
 msgid ""
 "The score of a color is the number of line segments on the board covered by "
 "the color, plus a bonus of 10 points if the color could place all of its "
@@ -354,7 +354,7 @@ msgstr ""
 "tablero cubiertos por dicho color, más una bonificación de 10 puntos si el "
 "color fue capaz de colocar todas las piezas."
 
-#: docbook/index.xml:240
+#: docbook/index.xml
 msgid ""
 "Like Blokus, Nexos can be played with two players by having one player play "
 "Blue and Red and the other player Yellow and Green."
@@ -362,11 +362,11 @@ msgstr ""
 "Al igual que en Blokus, Nexos puede jugarse a dos jugadores, con un jugador "
 "a cargo de azules y rojas y el otro jugador a cargo de amarillas y verdes."
 
-#: docbook/index.xml:248
+#: docbook/index.xml
 msgid "GembloQ Rules"
 msgstr "Reglas de GembloQ"
 
-#: docbook/index.xml:249
+#: docbook/index.xml
 msgid ""
 "GembloQ is a board game similar to Blokus. The squares of the board are "
 "rotated by 45 degrees. The board has a diagonal size of 27 squares. In "
@@ -379,11 +379,11 @@ msgstr ""
 "los laterales hay también casillas cortadas por la mitad de tal manera que "
 "los laterales del tablero sean líneas rectas."
 
-#: docbook/index.xml:256
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
 
-#: docbook/index.xml:262
+#: docbook/index.xml
 msgid ""
 "Each player has a set of 21 pieces, which include a subset of the pieces "
 "used in Blokus, but also some pieces that contain a half square."
@@ -392,11 +392,11 @@ msgstr ""
 "en Blokus, pero que además tiene algunas piezas que cuentan solo con medio "
 "cuadrado."
 
-#: docbook/index.xml:267
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
 
-#: docbook/index.xml:273
+#: docbook/index.xml
 msgid ""
 "As in Blokus, the starting squares are in the corners, the first move must "
 "fully cover the starting square of the color and subsequent moves must touch"
@@ -411,11 +411,11 @@ msgstr ""
 "esquina. Hay algunos movimientos que también se consideran legales, si un "
 "vértice de un medio cuadrado toca el lateral de una pieza del mismo color."
 
-#: docbook/index.xml:281
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
 
-#: docbook/index.xml:287
+#: docbook/index.xml
 msgid ""
 "Scoring is done like in Blokus, half squares count 0.5 points. Bonus points "
 "are not used. Tie breaking by assigning additional values to the pieces, as "
@@ -427,11 +427,11 @@ msgstr ""
 "valores adicionales a las piezas, tal y como se describe en las reglas "
 "oficiales de GembloQ, no es una opción compatible actualmente con Pentobi."
 
-#: docbook/index.xml:293 docbook/index.xml:349
+#: docbook/index.xml
 msgid "Rules for Two and Three Players"
 msgstr "Reglas para dos y tres jugadores"
 
-#: docbook/index.xml:294
+#: docbook/index.xml
 msgid ""
 "The game variants for two and three players use smaller boards and different"
 " starting point locations. In addition to the standard two-player variant, "
@@ -444,11 +444,11 @@ msgstr ""
 "juego para dos jugadores como en Blokus, donde cada jugador juega con dos "
 "colores. "
 
-#: docbook/index.xml:304
+#: docbook/index.xml
 msgid "Callisto Rules"
 msgstr "Reglas de Calisto"
 
-#: docbook/index.xml:305
+#: docbook/index.xml
 msgid ""
 "Callisto is a another board game similar to Blokus. The board is derived "
 "from the classic 20×20 Blokus board by removing the corners such that an "
@@ -463,11 +463,11 @@ msgstr ""
 "cuadrados. Entre ellas, hay tres piezas de 1x1 para cada jugador que "
 "desempeñan una función especial."
 
-#: docbook/index.xml:313
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
 
-#: docbook/index.xml:319
+#: docbook/index.xml
 msgid ""
 "The 1×1 pieces may be placed anywhere on the board apart from the center of "
 "the board. The center consists of an octagon with width six and top edge "
@@ -480,11 +480,11 @@ msgstr ""
 " primeros movimientos de un jugador se deben usar dos piezas de 1x1; la "
 "tercera pieza de 1x1 puede jugarse posteriormente en cualquier momento."
 
-#: docbook/index.xml:326
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
 
-#: docbook/index.xml:332
+#: docbook/index.xml
 msgid ""
 "All larger pieces may be placed anywhere on the board but must touch an "
 "existing piece of the same color edge-to-edge."
@@ -493,11 +493,11 @@ msgstr ""
 "tablero, pero deben tocar por la esquina una pieza ya existente del mismo "
 "color."
 
-#: docbook/index.xml:337
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
 
-#: docbook/index.xml:343
+#: docbook/index.xml
 msgid ""
 "The score of a color is the number of squares on the board occupied by the "
 "color not counting 1×1 pieces. Bonus points are not used. Unlike in Blokus, "
@@ -508,7 +508,7 @@ msgstr ""
 "de 1x1. No se utilizan puntos de bonificación. A diferencia de Blokus, los "
 "empates se deshacen a favor del jugador que comenzó último."
 
-#: docbook/index.xml:350
+#: docbook/index.xml
 msgid ""
 "The game can be played with less than four players by using a smaller board."
 " For three players, the board is an octagon with width 20 and top edge size "
@@ -526,15 +526,15 @@ msgstr ""
 "variante de juego para dos jugadores como en Blokus, donde cada jugador "
 "juega con dos colores."
 
-#: docbook/index.xml:362
+#: docbook/index.xml
 msgid "How to Use Pentobi"
 msgstr "Cómo usar Pentobi"
 
-#: docbook/index.xml:364
+#: docbook/index.xml
 msgid "Board"
 msgstr "Tablero"
 
-#: docbook/index.xml:365
+#: docbook/index.xml
 msgid ""
 "Pieces can be selected by clicking on one of the unplayed pieces or by using"
 " <link linkend=\"shortcuts\">shortcut keys</link>. Pieces can be played by "
@@ -548,7 +548,7 @@ msgstr ""
 " con las teclas de dirección, y pulsar el botón izquierdo del ratón o la "
 "tecla Entrar."
 
-#: docbook/index.xml:371
+#: docbook/index.xml
 msgid ""
 "Played pieces on the board can have numbers on them that indicate the move "
 "number in which the piece was played. A letter after the move number "
@@ -559,7 +559,7 @@ msgstr ""
 "letra a continuación del número de movimiento indica que existe una "
 "variación de este movimiento (ver a continuación)."
 
-#: docbook/index.xml:376
+#: docbook/index.xml
 msgid ""
 "The score display shows the current points for each color or player. The "
 "points are the sum of on-board points and bonus points. Points are "
@@ -572,11 +572,11 @@ msgstr ""
 "finales debido a que dicho color ya no puede colocar más piezas. Una "
 "estrella pequeña indica que los puntos incluyen una bonificación."
 
-#: docbook/index.xml:384
+#: docbook/index.xml
 msgid "Playing Against the Computer"
 msgstr "Jugar contra la máquina"
 
-#: docbook/index.xml:385
+#: docbook/index.xml
 msgid ""
 "The board can be used for creating game records of games played by humans or"
 " for playing games against the computer. In games against the computer, the "
@@ -587,7 +587,7 @@ msgstr ""
 "contra la máquina, esta puede jugar con alguno (o la mayoría) de los "
 "colores."
 
-#: docbook/index.xml:390
+#: docbook/index.xml
 msgid ""
 "When you start a new game, the human will play the color(s) of the first "
 "player by default and the computer all other colors. To change this, use "
@@ -601,7 +601,7 @@ msgstr ""
 "<guimenu>Máquina</guimenu> o desde la barra de herramientas y seleccionar "
 "los colores con los que quiere que juegue la máquina."
 
-#: docbook/index.xml:396
+#: docbook/index.xml
 msgid ""
 "The exception is that the computer will play no color by default if it "
 "played no color in the previous game. This prevents the computer from "
@@ -617,7 +617,7 @@ msgstr ""
 " Después de cargar una partida guardada, la máquina tampoco tendrá un color "
 "predeterminado."
 
-#: docbook/index.xml:403
+#: docbook/index.xml
 msgid ""
 "Selecting <guimenuitem>Play</guimenuitem> from the "
 "<guimenu>Computer</guimenu> menu or the toolbar always makes the computer "
@@ -631,11 +631,11 @@ msgstr ""
 " jugado con este color antes, de esta manera la máquina será capaz de jugar "
 "con este color (y solo con este color) de ahora en adelante."
 
-#: docbook/index.xml:412
+#: docbook/index.xml
 msgid "Move Variations and the Game Tree"
 msgstr "Más variaciones y el árbol de la partida"
 
-#: docbook/index.xml:413
+#: docbook/index.xml
 msgid ""
 "When you play a game, Pentobi will store the sequence of moves and it is "
 "always possible to go back to a previous position and play differently. If "
@@ -659,7 +659,7 @@ msgstr ""
 "Puede navegar a través del árbol de la partida usando las opciones del menú "
 "<guimenu>Ir a</guimenu> y los botones de navegación."
 
-#: docbook/index.xml:423
+#: docbook/index.xml
 msgid ""
 "The main variation is the sequence of moves that starts at the start "
 "position and always selects the first child node in each position (e.g. by "
@@ -676,11 +676,11 @@ msgstr ""
 "seleccione <guimenuitem>Convertir en variación principal</guimenuitem> desde"
 " el menú <guimenu>Editar</guimenu>."
 
-#: docbook/index.xml:435
+#: docbook/index.xml
 msgid "Become a Stronger Player"
 msgstr "Mejore su juego"
 
-#: docbook/index.xml:436
+#: docbook/index.xml
 msgid ""
 "Pentobi has functionality that can help you to become a stronger Blokus "
 "player."
@@ -688,11 +688,11 @@ msgstr ""
 "Pentobi dispone de una funcionalidad que le puede ayudar a mejorar como "
 "jugador de Blokus."
 
-#: docbook/index.xml:440
+#: docbook/index.xml
 msgid "Game Analysis"
 msgstr "Análisis de la partida"
 
-#: docbook/index.xml:441
+#: docbook/index.xml
 msgid ""
 "A game can be analyzed by selecting <guimenuitem>Analyze Game</guimenuitem> "
 "from the <guimenu>Tools</guimenu> menu. This will make the computer player "
@@ -705,11 +705,11 @@ msgstr ""
 " principal. El resultado se mostrará en una ventana con un diagrama de "
 "puntos de colores."
 
-#: docbook/index.xml:448
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
 
-#: docbook/index.xml:454
+#: docbook/index.xml
 msgid ""
 "Each dot represents a game position in which the color of the dot was to "
 "play. The dots are ordered horizontally by move number. The vertical axis "
@@ -723,7 +723,7 @@ msgstr ""
 "hacer clic con el ratón sobre el diagrama, iremos a la posición "
 "correspondiente."
 
-#: docbook/index.xml:460
+#: docbook/index.xml
 msgid ""
 "The position values are only estimates and the computer will sometimes "
 "evaluate positions incorrectly. But sudden drops in the value can help you "
@@ -741,11 +741,11 @@ msgstr ""
 "<guimenuitem>Jugar un movimiento</guimenuitem> desde el menú "
 "<guimenu>Máquina</guimenu>."
 
-#: docbook/index.xml:470
+#: docbook/index.xml
 msgid "Determine Your Rating"
 msgstr "Determinar su nivel"
 
-#: docbook/index.xml:471
+#: docbook/index.xml
 msgid ""
 "You can track your progress by playing rated games against the computer. The"
 " game results are used to determine your current rating. The rating is a "
@@ -756,7 +756,7 @@ msgstr ""
 "para determinar su nivel actual. El nivel es una cifra que representa su "
 "habilidad con el juego."
 
-#: docbook/index.xml:476
+#: docbook/index.xml
 msgid ""
 "A rated game is started with <guimenuitem>Rated Game</guimenuitem> from the "
 "<guimenu>Game</guimenu> menu or the toolbar. If you have not played any "
@@ -772,7 +772,7 @@ msgstr ""
 " necesarias para determinar su nivel real. Si es principiante, deje el valor"
 " inicial en 800."
 
-#: docbook/index.xml:483
+#: docbook/index.xml
 msgid ""
 "For each rated game, the computer will choose a playing level for the "
 "computer opponent according to your current rating. The color you play will "
@@ -782,7 +782,7 @@ msgstr ""
 "juego para el rival virtual en consonancia con su nivel actual. El color con"
 " el que jugará se escogerá de manera aleatoria en cada partida."
 
-#: docbook/index.xml:488
+#: docbook/index.xml
 msgid ""
 "During a rated game, most of the functions not needed for playing are "
 "disabled: you cannot undo moves, navigate in the game, change the computer "
@@ -795,7 +795,7 @@ msgstr ""
 "jugador virtual o cambiar el nivel de juego. Para conseguir una puntuación "
 "precisa, siempre es mejor finalizar las partidas con selección de nivel."
 
-#: docbook/index.xml:494
+#: docbook/index.xml
 msgid ""
 "After the game has ended, your rating will be updated depending on the game "
 "result and the computer level. For the game result, it only matters whether "
@@ -808,11 +808,11 @@ msgstr ""
 " perdido o ha habido un empate. El número exacto de puntos obtenidos es algo"
 " que no se tiene en cuenta."
 
-#: docbook/index.xml:501
+#: docbook/index.xml
 msgid "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
 msgstr "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
 
-#: docbook/index.xml:507
+#: docbook/index.xml
 msgid ""
 "You can always see your current rating by selecting "
 "<guimenuitem>Rating</guimenuitem> from the <guimenu>Tools</guimenu> menu. "
@@ -827,27 +827,27 @@ msgstr ""
 "partidas se guardan automáticamente y pueden cargarse abriendo un menú "
 "contextual en la tabla de la partida justo debajo del gráfico."
 
-#: docbook/index.xml:518
+#: docbook/index.xml
 msgid "Window Menu and Toolbar"
 msgstr "Menú de ventana y barra de herramientas"
 
-#: docbook/index.xml:520
+#: docbook/index.xml
 msgid "Navigation Buttons in Toolbar"
 msgstr "Botones de navegación en la barra de herramientas"
 
-#: docbook/index.xml:523
+#: docbook/index.xml
 msgid "<guibutton>Beginning</guibutton>"
 msgstr "<guibutton>Inicio</guibutton>"
 
-#: docbook/index.xml:525
+#: docbook/index.xml
 msgid "Go to the beginning of the game."
 msgstr "Ir al inicio de la partida."
 
-#: docbook/index.xml:531
+#: docbook/index.xml
 msgid "<guibutton>Backward 10</guibutton>"
 msgstr "<guibutton>Retroceder 10</guibutton>"
 
-#: docbook/index.xml:533
+#: docbook/index.xml
 msgid ""
 "Go ten moves backward in the current variation. The button supports "
 "autorepeat if pressed and held."
@@ -855,11 +855,11 @@ msgstr ""
 "Retroceder diez movimientos dentro de la variación actual. El botón permite "
 "repetición automática si se pulsa y se mantiene pulsado."
 
-#: docbook/index.xml:540
+#: docbook/index.xml
 msgid "<guibutton>Backward</guibutton>"
 msgstr "<guibutton>Retroceder</guibutton>"
 
-#: docbook/index.xml:542
+#: docbook/index.xml
 msgid ""
 "Go one move backward in the current variation. The button supports "
 "autorepeat if pressed and held."
@@ -867,11 +867,11 @@ msgstr ""
 "Retroceder un movimiento dentro de la variación actual. El botón permite "
 "repetición automática si se pulsa y se mantiene pulsado."
 
-#: docbook/index.xml:549
+#: docbook/index.xml
 msgid "<guibutton>Forward</guibutton>"
 msgstr "<guibutton>Adelante</guibutton>"
 
-#: docbook/index.xml:551
+#: docbook/index.xml
 msgid ""
 "Go one move forward in the current variation. If the current position has "
 "several follow-up variations (i.e. the current node in the game tree has "
@@ -884,11 +884,11 @@ msgstr ""
 "variación la que se use. El botón permite repetición automática si se pulsa "
 "y se mantiene pulsado."
 
-#: docbook/index.xml:560
+#: docbook/index.xml
 msgid "<guibutton>Forward 10</guibutton>"
 msgstr "<guibutton>Avanzar 10</guibutton>"
 
-#: docbook/index.xml:562
+#: docbook/index.xml
 msgid ""
 "Go ten moves forward in the current variation. If a position has several "
 "follow-up variations (i.e. the current node in the game tree has several "
@@ -901,11 +901,11 @@ msgstr ""
 "variación la que se use. El botón permite repetición automática si se pulsa "
 "y se mantiene pulsado."
 
-#: docbook/index.xml:571
+#: docbook/index.xml
 msgid "<guibutton>End</guibutton>"
 msgstr "<guibutton>Fin</guibutton>"
 
-#: docbook/index.xml:573
+#: docbook/index.xml
 msgid ""
 "Go to the end of the current variation. Like <guibutton>Forward</guibutton>,"
 " this also uses the first variation in positions with several follow-up "
@@ -915,11 +915,11 @@ msgstr ""
 "<guibutton>Adelante</guibutton>, esto también usa la primera variación en "
 "posiciones con múltiples variaciones."
 
-#: docbook/index.xml:581
+#: docbook/index.xml
 msgid "<guibutton>Next Variation</guibutton>"
 msgstr "<guibutton>Siguiente variación</guibutton>"
 
-#: docbook/index.xml:583
+#: docbook/index.xml
 msgid ""
 "Go to the next variation to the last move played (i.e. the next sibling node"
 " of the current node in the game tree)."
@@ -928,11 +928,11 @@ msgstr ""
 "anterior nodo del mismo nivel del nodo actual dentro del árbol de la "
 "partida)."
 
-#: docbook/index.xml:590
+#: docbook/index.xml
 msgid "<guibutton>Previous Variation</guibutton>"
 msgstr "<guibutton>Variación anterior</guibutton>"
 
-#: docbook/index.xml:592
+#: docbook/index.xml
 msgid ""
 "Go to the previous variation to the last move played (i.e. the previous "
 "sibling node of the current node in the game tree)."
@@ -941,44 +941,44 @@ msgstr ""
 "anterior nodo del mismo nivel del nodo actual dentro del árbol de la "
 "partida)."
 
-#: docbook/index.xml:601
+#: docbook/index.xml
 msgid "<guimenu>Game</guimenu> Menu"
 msgstr "Menú <guimenu>Partida</guimenu>"
 
-#: docbook/index.xml:604
+#: docbook/index.xml
 msgid "<guimenuitem>New</guimenuitem>"
 msgstr "<guimenuitem>Nueva</guimenuitem>"
 
-#: docbook/index.xml:606
+#: docbook/index.xml
 msgid "Start a new game."
 msgstr "Comenzar una partida nueva."
 
-#: docbook/index.xml:612
+#: docbook/index.xml
 msgid "<guimenuitem>Rated Game</guimenuitem>"
 msgstr "<guimenuitem>Partida con selección de nivel</guimenuitem>"
 
-#: docbook/index.xml:614
+#: docbook/index.xml
 msgid ""
 "Start a new <link linkend=\"rating\">rated game</link> against the computer."
 msgstr ""
 "Comenzar una <link linkend=\"rating\">partida con selección de nivel</link> "
 "contra la máquina."
 
-#: docbook/index.xml:620
+#: docbook/index.xml
 msgid "<guimenuitem>Game Variant</guimenuitem>"
 msgstr "<guimenuitem>Variante de juego</guimenuitem>"
 
-#: docbook/index.xml:622
+#: docbook/index.xml
 msgid "Select a game variant and start a new game of this game variant."
 msgstr ""
 "Seleccionar una variante de juego y comenzar una partida nueva de esta "
 "variante de juego."
 
-#: docbook/index.xml:628
+#: docbook/index.xml
 msgid "<guimenuitem>Game Info</guimenuitem>"
 msgstr "<guimenuitem>Información de la partida</guimenuitem>"
 
-#: docbook/index.xml:630
+#: docbook/index.xml
 msgid ""
 "Display or edit additional information about the game like the name of the "
 "players or the date when the game was played."
@@ -986,11 +986,11 @@ msgstr ""
 "Mostrar o editar información adicional de la partida como el número de "
 "jugadores o la fecha en la que se jugó la partida."
 
-#: docbook/index.xml:636
+#: docbook/index.xml
 msgid "<guimenuitem>Undo Move</guimenuitem>"
 msgstr "<guimenuitem>Deshacer movimiento</guimenuitem>"
 
-#: docbook/index.xml:638
+#: docbook/index.xml
 msgid ""
 "Undo the last move played and remove it from the game tree. Undoing a move "
 "is only possible if it is the last move in the current variation (i.e. a "
@@ -1005,11 +1005,11 @@ msgstr ""
 "<guimenu>Editar</guimenu>/<guimenuitem>Eliminar</guimenuitem> para borrar "
 "todos los nodos internos del árbol de la partida)."
 
-#: docbook/index.xml:648
+#: docbook/index.xml
 msgid "<guimenuitem>Find Move</guimenuitem>"
 msgstr "<guimenuitem>Buscar movimiento</guimenuitem>"
 
-#: docbook/index.xml:650
+#: docbook/index.xml
 msgid ""
 "Find a legal move for the current color and display it for a few seconds on "
 "the board. Selecting this item repeatedly will show all legal moves."
@@ -1018,11 +1018,11 @@ msgstr ""
 "segundos sobre el tablero. Al seleccionar esta opción de forma repetida se "
 "mostrarán todos los movimientos legales."
 
-#: docbook/index.xml:657
+#: docbook/index.xml
 msgid "<guimenuitem>Open</guimenuitem>"
 msgstr "<guimenuitem>Abrir</guimenuitem>"
 
-#: docbook/index.xml:659
+#: docbook/index.xml
 msgid ""
 "Load a saved game. The board position after loading will be the last "
 "position in the main variation unless the game starts with a setup position."
@@ -1039,35 +1039,35 @@ msgstr ""
 " manera inmediata en caso de que el archivo contenga un rompecabezas de "
 "Blokus como predeterminado con la solución como variación principal."
 
-#: docbook/index.xml:669
+#: docbook/index.xml
 msgid "<guimenu>Open Recent</guimenu>"
 msgstr "<guimenu>Abrir reciente</guimenu>"
 
-#: docbook/index.xml:671
+#: docbook/index.xml
 msgid "Load a recently used game."
 msgstr "Cargar una partida usada recientemente."
 
-#: docbook/index.xml:677
+#: docbook/index.xml
 msgid "<guimenuitem>Save</guimenuitem>"
 msgstr "<guimenuitem>Guardar</guimenuitem>"
 
-#: docbook/index.xml:679
+#: docbook/index.xml
 msgid "Save the current game."
 msgstr "Guardar la partida actual."
 
-#: docbook/index.xml:685
+#: docbook/index.xml
 msgid "<guimenuitem>Save As</guimenuitem>"
 msgstr "<guimenuitem>Guardar como</guimenuitem>"
 
-#: docbook/index.xml:687
+#: docbook/index.xml
 msgid "Save the current game under a new file name."
 msgstr "Guardar la partida actual con un nuevo nombre de archivo."
 
-#: docbook/index.xml:693
+#: docbook/index.xml
 msgid "<guimenuitem>Export Image</guimenuitem>"
 msgstr "<guimenuitem>Exportar imagen</guimenuitem>"
 
-#: docbook/index.xml:695
+#: docbook/index.xml
 msgid ""
 "Save the current position as an image file. Several image file formats are "
 "supported, the file format is derived from the file name ending (e.g. "
@@ -1082,33 +1082,33 @@ msgstr ""
 "imagen debería ser un múltiplo entero del número de columnas del tablero de "
 "la variante de juego actual."
 
-#: docbook/index.xml:704
+#: docbook/index.xml
 msgid "<guimenuitem>Quit</guimenuitem>"
 msgstr "<guimenuitem>Salir</guimenuitem>"
 
-#: docbook/index.xml:706
+#: docbook/index.xml
 msgid "Quit Pentobi."
 msgstr "Salir de Pentobi."
 
-#: docbook/index.xml:714
+#: docbook/index.xml
 msgid "<guimenu>Go</guimenu> Menu"
 msgstr "Menú <guimenu>Ir a</guimenu>"
 
-#: docbook/index.xml:717
+#: docbook/index.xml
 msgid "<guimenuitem>Move Number</guimenuitem>"
 msgstr "<guimenuitem>Número de movimiento</guimenuitem>"
 
-#: docbook/index.xml:719
+#: docbook/index.xml
 msgid "Go to the move with a given move number in the current variation."
 msgstr ""
 "Ir al movimiento con un número de movimiento asignado en la variación "
 "actual."
 
-#: docbook/index.xml:725
+#: docbook/index.xml
 msgid "<guimenuitem>Main Variation</guimenuitem>"
 msgstr "<guimenuitem>Variación principal</guimenuitem>"
 
-#: docbook/index.xml:727
+#: docbook/index.xml
 msgid ""
 "Go back to the last position in the current variation that belonged to the "
 "main variation."
@@ -1116,11 +1116,11 @@ msgstr ""
 "Regresar a la última posición dentro de la variación actual correspondiente "
 "a la variación principal."
 
-#: docbook/index.xml:734
+#: docbook/index.xml
 msgid "<guimenuitem>Beginning of Branch</guimenuitem>"
 msgstr "<guimenuitem>Inicio de rama</guimenuitem>"
 
-#: docbook/index.xml:736
+#: docbook/index.xml
 msgid ""
 "Go back to the last position in the current variation that had an "
 "alternative move."
@@ -1128,11 +1128,11 @@ msgstr ""
 "Regresar a la última posición dentro de la variación actual que tenía un "
 "movimiento alternativo."
 
-#: docbook/index.xml:743
+#: docbook/index.xml
 msgid "<guimenuitem>Next Comment</guimenuitem>"
 msgstr "<guimenuitem>Siguiente comentario</guimenuitem>"
 
-#: docbook/index.xml:745
+#: docbook/index.xml
 msgid ""
 "Go to the next position that has a comment. If the comment text field was "
 "not visible, it will become visible. Selecting this item repeatedly will "
@@ -1143,15 +1143,15 @@ msgstr ""
 "opción repetidamente se mostrarán todas las posiciones con comentarios "
 "dentro del árbol de la partida."
 
-#: docbook/index.xml:755
+#: docbook/index.xml
 msgid "<guimenu>Edit</guimenu> Menu"
 msgstr "Menú <guimenu>Editar</guimenu>"
 
-#: docbook/index.xml:758
+#: docbook/index.xml
 msgid "<guimenuitem>Annotation</guimenuitem>"
 msgstr "<guimenuitem>Valoración</guimenuitem>"
 
-#: docbook/index.xml:760
+#: docbook/index.xml
 msgid ""
 "Add a chess-style annotation symbol (e.g. ‼) to the current move. The "
 "symbols are appended to the move numbers in the status bar and, depending on"
@@ -1162,11 +1162,11 @@ msgstr ""
 "movimientos en la barra de estado y, en función de la configuración de "
 "<guilabel>Marcado de movimientos</guilabel>, en el tablero."
 
-#: docbook/index.xml:768
+#: docbook/index.xml
 msgid "<guimenuitem>Make Main Variation</guimenuitem>"
 msgstr "<guimenuitem>Convertir en variación principal</guimenuitem>"
 
-#: docbook/index.xml:770
+#: docbook/index.xml
 msgid ""
 "Make the current variation the main variation of the game. This reorders the"
 " nodes in the game tree such that the current variation becomes the main "
@@ -1176,11 +1176,11 @@ msgstr ""
 " reordena los nodos dentro del árbol de la partida de tal manera que la "
 "variación actual se convierte en la variación principal."
 
-#: docbook/index.xml:778
+#: docbook/index.xml
 msgid "<guimenuitem>Variation Up</guimenuitem>"
 msgstr "<guimenuitem>Subir variación</guimenuitem>"
 
-#: docbook/index.xml:780
+#: docbook/index.xml
 msgid ""
 "Changes the order of variations such that the current position will appear "
 "earlier when iterating over the variations with <guibutton>Next "
@@ -1191,11 +1191,11 @@ msgstr ""
 "<guibutton>Siguiente variación</guibutton>/<guibutton>Variación "
 "anterior</guibutton>."
 
-#: docbook/index.xml:789
+#: docbook/index.xml
 msgid "<guimenuitem>Variation Down</guimenuitem>"
 msgstr "<guimenuitem>Bajar variación</guimenuitem>"
 
-#: docbook/index.xml:791
+#: docbook/index.xml
 msgid ""
 "Changes the order of variations such that the current position will appear "
 "later when iterating over the variations with <guibutton>Next "
@@ -1206,11 +1206,11 @@ msgstr ""
 "<guibutton>Siguiente variación</guibutton>/<guibutton>Variación "
 "anterior</guibutton>."
 
-#: docbook/index.xml:800
+#: docbook/index.xml
 msgid "<guimenuitem>Delete Variations</guimenuitem>"
 msgstr "<guimenuitem>Eliminar variaciones</guimenuitem>"
 
-#: docbook/index.xml:802
+#: docbook/index.xml
 msgid ""
 "Delete all variations but the main variation. If the current position is not"
 " in the main variation, it will first be changed to a position as in "
@@ -1221,11 +1221,11 @@ msgstr ""
 " posición como en <guimenu>Ir a</guimenu> / <guimenuitem>Variación "
 "principal</guimenuitem>."
 
-#: docbook/index.xml:810
+#: docbook/index.xml
 msgid "<guimenuitem>Truncate</guimenuitem>"
 msgstr "<guimenuitem>Eliminar</guimenuitem>"
 
-#: docbook/index.xml:812
+#: docbook/index.xml
 msgid ""
 "Remove the node with the current position, including any subtree, from the "
 "game tree."
@@ -1233,11 +1233,11 @@ msgstr ""
 "Eliminar el nodo con la posición actual, incluido cualquier subárbol, del "
 "árbol de la partida."
 
-#: docbook/index.xml:819
+#: docbook/index.xml
 msgid "<guimenuitem>Truncate Children</guimenuitem>"
 msgstr "<guimenuitem>Eliminar descendientes</guimenuitem>"
 
-#: docbook/index.xml:821
+#: docbook/index.xml
 msgid ""
 "Remove all child nodes of the node with the current position from the game "
 "tree."
@@ -1245,11 +1245,11 @@ msgstr ""
 "Eliminar todos los nodos descendientes del nodo con la posición actual del "
 "árbol de la partida."
 
-#: docbook/index.xml:828
+#: docbook/index.xml
 msgid "<guimenuitem>Keep Position</guimenuitem>"
 msgstr "<guimenuitem>Conservar posición</guimenuitem>"
 
-#: docbook/index.xml:830
+#: docbook/index.xml
 msgid ""
 "Delete all moves and keep only the current position as a setup. This can be "
 "used to create files that start with a given fixed position."
@@ -1258,11 +1258,11 @@ msgstr ""
 "preestablecida. Esto se puede usar para crear archivos que comiencen con una"
 " posición fija determinada."
 
-#: docbook/index.xml:837
+#: docbook/index.xml
 msgid "<guimenuitem>Keep Subtree</guimenuitem>"
 msgstr "<guimenuitem>Conservar árbol</guimenuitem>"
 
-#: docbook/index.xml:839
+#: docbook/index.xml
 msgid ""
 "Like <guimenuitem>Keep Position</guimenuitem> but does not delete the moves "
 "after the current position."
@@ -1270,11 +1270,11 @@ msgstr ""
 "Como <guimenuitem>Conservar posicion</guimenuitem> pero no elimina los "
 "movimientos posteriores a la posición actual."
 
-#: docbook/index.xml:846
+#: docbook/index.xml
 msgid "<guimenuitem>Setup Mode</guimenuitem>"
 msgstr "<guimenuitem>Modo configuración</guimenuitem>"
 
-#: docbook/index.xml:848
+#: docbook/index.xml
 msgid ""
 "Enter or leave setup mode. In setup mode, pieces can be placed anywhere on "
 "the board, even in violation of the game rules. Existing pieces can be "
@@ -1295,11 +1295,11 @@ msgstr ""
 "configuración solo puede usarse si no se ha jugado todavía ningún "
 "movimiento."
 
-#: docbook/index.xml:860
+#: docbook/index.xml
 msgid "<guimenuitem>Next Color</guimenuitem>"
 msgstr "<guimenuitem>Siguiente color</guimenuitem>"
 
-#: docbook/index.xml:862
+#: docbook/index.xml
 msgid ""
 "Choose the next color for selecting pieces. This can be used for example to "
 "enter game records, in which moves of a color were skipped because the color"
@@ -1310,19 +1310,19 @@ msgstr ""
 "movimientos de un color se omitieron debido a que el color se quedó sin "
 "tiempo."
 
-#: docbook/index.xml:872
+#: docbook/index.xml
 msgid "<guimenu>View</guimenu> Menu"
 msgstr "Menú <guimenu>Vista</guimenu> "
 
-#: docbook/index.xml:874
+#: docbook/index.xml
 msgid "<guimenuitem>Appearance</guimenuitem>"
 msgstr "<guimenuitem>Apariencia</guimenuitem>"
 
-#: docbook/index.xml:879
+#: docbook/index.xml
 msgid "<guilabel>Coordinates</guilabel>"
 msgstr "<guilabel>Coordenadas</guilabel>"
 
-#: docbook/index.xml:881
+#: docbook/index.xml
 msgid ""
 "Display coordinates around the board for the fields on the board. The "
 "convention for the coordinates is the same as in the Blokus SGF file format "
@@ -1332,11 +1332,11 @@ msgstr ""
 "del tablero. La convención para utilizar las coordenadas es la misma que en "
 "el archivo con formato SGF de Blokus utilizado por Pentobi."
 
-#: docbook/index.xml:889
+#: docbook/index.xml
 msgid "<guilabel>Show variations</guilabel>"
 msgstr "<guilabel>Mostrar variaciones</guilabel>"
 
-#: docbook/index.xml:891
+#: docbook/index.xml
 msgid ""
 "Appends a letter to the move number on the board if the move has variations."
 " If moves are marked with dots instead of numbers, a circle will be used "
@@ -1347,11 +1347,11 @@ msgstr ""
 "lugar de números, se utilizará un círculo en lugar de un punto para los "
 "movimientos que no estén en la variación principal."
 
-#: docbook/index.xml:899
+#: docbook/index.xml
 msgid "<guilabel>Move number</guilabel>"
 msgstr "<guilabel>Número de movimiento</guilabel>"
 
-#: docbook/index.xml:901
+#: docbook/index.xml
 msgid ""
 "This option exists only in desktop mode and shows the move number, move "
 "annotation and variation information at the right side of the status bar."
@@ -1360,20 +1360,20 @@ msgstr ""
 "movimiento, la valoración del movimiento e información de la variación a la "
 "derecha de la barra de estado."
 
-#: docbook/index.xml:908
+#: docbook/index.xml
 msgid "<guilabel>Colorblind mode</guilabel>"
 msgstr "<guilabel>Modo para daltónicos</guilabel>"
 
-#: docbook/index.xml:910
+#: docbook/index.xml
 msgid "Use piece colors more distinguishable for colorblind users."
 msgstr ""
 "Usar colores para las piezas más distinguibles para usuarios con daltonismo."
 
-#: docbook/index.xml:916
+#: docbook/index.xml
 msgid "<guilabel>Move marking</guilabel>"
 msgstr "<guilabel>Marcado de movimientos</guilabel>"
 
-#: docbook/index.xml:918
+#: docbook/index.xml
 msgid ""
 "Change the way moves are marked on the board. The options are to mark the "
 "last move played with a dot or with a number, or to show the numbers of all "
@@ -1383,11 +1383,11 @@ msgstr ""
 "marcar el último movimiento jugado con un punto o con un número, mostrar los"
 " números de todos los movimientos o no mostrar ninguna marca."
 
-#: docbook/index.xml:926
+#: docbook/index.xml
 msgid "<guilabel>Show comment</guilabel>"
 msgstr "<guilabel>Mostrar comentario</guilabel>"
 
-#: docbook/index.xml:928
+#: docbook/index.xml
 msgid ""
 "This option exists only in desktop mode and configures the visibility of the"
 " comment area when the position changes. By default, the comment area is "
@@ -1398,20 +1398,20 @@ msgstr ""
 "el área de comentarios solo se mostrará si existe un comentario para la "
 "posición actual."
 
-#: docbook/index.xml:940
+#: docbook/index.xml
 msgid "<guimenuitem>Comment</guimenuitem>"
 msgstr "<guimenuitem>Comentario</guimenuitem>"
 
-#: docbook/index.xml:942
+#: docbook/index.xml
 msgid "Toggle the visibility of the comment area in the current position."
 msgstr ""
 "Alternar la visibilidad del área de comentarios en la posición actual."
 
-#: docbook/index.xml:948
+#: docbook/index.xml
 msgid "<guimenuitem>Fullscreen</guimenuitem>"
 msgstr "<guimenuitem>Pantalla completa</guimenuitem>"
 
-#: docbook/index.xml:950
+#: docbook/index.xml
 msgid ""
 "Make the main window full screen or leave full screen mode. To leave "
 "fullscreen mode without using the window menu, press the F11 key."
@@ -1420,15 +1420,15 @@ msgstr ""
 "modo de pantalla completa. Para abandonar el modo de pantalla completa sin "
 "usar el menú de la ventana, pulse la tecla F11."
 
-#: docbook/index.xml:959
+#: docbook/index.xml
 msgid "<guimenu>Computer</guimenu> Menu"
 msgstr "Menú <guimenu>Máquina</guimenu>"
 
-#: docbook/index.xml:962
+#: docbook/index.xml
 msgid "<guimenuitem>Settings</guimenuitem>"
 msgstr "<guimenuitem>Ajustes</guimenuitem>"
 
-#: docbook/index.xml:964
+#: docbook/index.xml
 msgid ""
 "Select which colors are played by the computer and the playing strength for "
 "the computer. Higher levels are stronger but can make the computer take a "
@@ -1439,11 +1439,11 @@ msgstr ""
 "ganar pero pueden hacer que la máquina tarde bastante tiempo en hacer una "
 "jugada en ordenadores lentos."
 
-#: docbook/index.xml:972
+#: docbook/index.xml
 msgid "<guimenuitem>Play</guimenuitem>"
 msgstr "<guimenuitem>Jugar</guimenuitem>"
 
-#: docbook/index.xml:974
+#: docbook/index.xml
 msgid ""
 "Make the computer play a move for the current color. This can be used to "
 "change the color the computer plays or to resume playing after navigating in"
@@ -1456,11 +1456,11 @@ msgstr ""
 "no juega ya con el color actual, ahora jugará con este color (y solo con "
 "este color) durante el resto de la partida."
 
-#: docbook/index.xml:983
+#: docbook/index.xml
 msgid "<guimenuitem>Play Move</guimenuitem>"
 msgstr "<guimenuitem>Realizar movimiento</guimenuitem>"
 
-#: docbook/index.xml:985
+#: docbook/index.xml
 msgid ""
 "Make the computer play a single move for the current color without changing "
 "the colors played by the computer."
@@ -1468,11 +1468,11 @@ msgstr ""
 "Hacer que la máquina realice un único movimiento para el color actual sin "
 "cambiar el color con el que juega la máquina."
 
-#: docbook/index.xml:992
+#: docbook/index.xml
 msgid "<guimenuitem>Stop</guimenuitem>"
 msgstr "<guimenuitem>Detener</guimenuitem>"
 
-#: docbook/index.xml:994
+#: docbook/index.xml
 msgid ""
 "Abort the current move generation. You can make the computer continue to "
 "play by selecting <guimenuitem>Play</guimenuitem>."
@@ -1480,15 +1480,15 @@ msgstr ""
 "Anular la generación del movimiento actual. Puede hacer que la máquina siga "
 "jugando seleccionando <guimenuitem>Jugar</guimenuitem>."
 
-#: docbook/index.xml:1003
+#: docbook/index.xml
 msgid "<guimenu>Tools</guimenu> Menu"
 msgstr "Menú <guimenu>Herramientas</guimenu>"
 
-#: docbook/index.xml:1006
+#: docbook/index.xml
 msgid "<guimenuitem>Rating</guimenuitem>"
 msgstr "<guimenuitem>Nivel</guimenuitem>"
 
-#: docbook/index.xml:1008
+#: docbook/index.xml
 msgid ""
 "Show a dialog window with the <link linkend=\"rating\">rating</link> of the "
 "user in the current game variant."
@@ -1496,60 +1496,60 @@ msgstr ""
 "Muestra una ventana de diálogo con el<link linkend=\"rating\">nivel</link> "
 "del usuario para la variante de juego actual."
 
-#: docbook/index.xml:1015
+#: docbook/index.xml
 msgid "<guimenuitem>Clear Rating</guimenuitem>"
 msgstr "<guimenuitem>Borrar nivel</guimenuitem>"
 
-#: docbook/index.xml:1017
+#: docbook/index.xml
 msgid ""
 "Deletes the rating information and history for the current game variant."
 msgstr ""
 "Borrar la información sobre el nivel y el historial de la variante de juego "
 "actual."
 
-#: docbook/index.xml:1023
+#: docbook/index.xml
 msgid "<guimenuitem>Analyze Game</guimenuitem>"
 msgstr "<guimenuitem>Analizar partida</guimenuitem>"
 
-#: docbook/index.xml:1025
+#: docbook/index.xml
 msgid "Perform a <link linkend=\"analysis\">game analysis</link>."
 msgstr "Realizar un <link linkend=\"analysis\">análisis de partida</link>."
 
-#: docbook/index.xml:1031
+#: docbook/index.xml
 msgid "<guimenuitem>Clear Analysis</guimenuitem>"
 msgstr "<guimenuitem>Borrar análisis</guimenuitem>"
 
-#: docbook/index.xml:1033
+#: docbook/index.xml
 msgid "Deletes the analysis for the current game."
 msgstr "Borra el análisis de la partida actual."
 
-#: docbook/index.xml:1041
+#: docbook/index.xml
 msgid "<guimenu>Help</guimenu> Menu"
 msgstr "Menú <guimenu>Ayuda</guimenu>"
 
-#: docbook/index.xml:1044
+#: docbook/index.xml
 msgid "<guimenuitem>Pentobi Help</guimenuitem>"
 msgstr "<guimenuitem>Ayuda para Pentobi</guimenuitem>"
 
-#: docbook/index.xml:1046
+#: docbook/index.xml
 msgid "Show a window to browse the Pentobi user manual."
 msgstr "Muestra una ventana para navegar por el manual de usuario de Pentobi."
 
-#: docbook/index.xml:1052
+#: docbook/index.xml
 msgid "<guimenuitem>About Pentobi</guimenuitem>"
 msgstr "<guimenuitem>Acerca de Pentobi</guimenuitem>"
 
-#: docbook/index.xml:1054
+#: docbook/index.xml
 msgid "Show an info dialog with information about this version of Pentobi."
 msgstr ""
 "Muestra un diálogo de información con detalles sobre esta versión de "
 "Pentobi."
 
-#: docbook/index.xml:1064
+#: docbook/index.xml
 msgid "Keyboard Shortcuts"
 msgstr "Atajos de teclado"
 
-#: docbook/index.xml:1065
+#: docbook/index.xml
 msgid ""
 "In addition to the shortcut keys, which are shown in the window menu, the "
 "following shortcut keys are supported by Pentobi. Note that these shortcuts "
@@ -1562,181 +1562,181 @@ msgstr ""
 "comentarios está habilitado. En este caso, se puede salir del campo de texto"
 " con la tecla Tab."
 
-#: docbook/index.xml:1073
+#: docbook/index.xml
 msgid "<keysym>Plus</keysym>"
 msgstr "<keysym>Más</keysym>"
 
-#: docbook/index.xml:1075
+#: docbook/index.xml
 msgid "Select next piece"
 msgstr "Seleccionar pieza siguiente"
 
-#: docbook/index.xml:1081
+#: docbook/index.xml
 msgid "<keysym>Minus</keysym>"
 msgstr "<keysym>Menos</keysym>"
 
-#: docbook/index.xml:1083
+#: docbook/index.xml
 msgid "Select previous piece"
 msgstr "Seleccionar pieza anterior"
 
-#: docbook/index.xml:1089
+#: docbook/index.xml
 msgid "<keysym>Escape</keysym>"
 msgstr "<keysym>Escape</keysym>"
 
-#: docbook/index.xml:1091
+#: docbook/index.xml
 msgid "Clear selected piece"
 msgstr "Retirar pieza seleccionada"
 
-#: docbook/index.xml:1097
+#: docbook/index.xml
 msgid "<keysym>Left</keysym>"
 msgstr "<keysym>Izquierda</keysym>"
 
-#: docbook/index.xml:1098
+#: docbook/index.xml
 msgid "<keysym>Right</keysym>"
 msgstr "<keysym>Derecha</keysym>"
 
-#: docbook/index.xml:1099
+#: docbook/index.xml
 msgid "<keysym>Up</keysym>"
 msgstr "<keysym>Arriba</keysym>"
 
-#: docbook/index.xml:1100
+#: docbook/index.xml
 msgid "<keysym>Down</keysym>"
 msgstr "<keysym>Abajo</keysym>"
 
-#: docbook/index.xml:1101
+#: docbook/index.xml
 msgid "<keysym>Shift+Left</keysym>"
 msgstr "<keysym>Mayús+Izquierda</keysym>"
 
-#: docbook/index.xml:1102
+#: docbook/index.xml
 msgid "<keysym>Shift+Right</keysym>"
 msgstr "<keysym>Mayús+Derecha</keysym>"
 
-#: docbook/index.xml:1103
+#: docbook/index.xml
 msgid "<keysym>Shift+Up</keysym>"
 msgstr "<keysym>Mayús+Arriba</keysym>"
 
-#: docbook/index.xml:1104
+#: docbook/index.xml
 msgid "<keysym>Shift+Down</keysym>"
 msgstr "<keysym>Mayús+Abajo</keysym>"
 
-#: docbook/index.xml:1106
+#: docbook/index.xml
 msgid "Move the selected piece. The Shift key makes the piece move faster."
 msgstr ""
 "Mover la pieza seleccionada. La tecla Mayúsculas hace que la pieza se mueva "
 "más rápido."
 
-#: docbook/index.xml:1112
+#: docbook/index.xml
 msgid "<keysym>Space</keysym>"
 msgstr "<keysym>Espacio</keysym>"
 
-#: docbook/index.xml:1114
+#: docbook/index.xml
 msgid "Next orientation of the selected piece"
 msgstr "Siguiente orientación de la pieza seleccionada"
 
-#: docbook/index.xml:1120
+#: docbook/index.xml
 msgid "<keysym>Shift+Space</keysym>"
 msgstr "<keysym>Mayús+Espacio</keysym>"
 
-#: docbook/index.xml:1122
+#: docbook/index.xml
 msgid "Previous orientation of the selected piece"
 msgstr "Anterior orientación de la pieza seleccionada"
 
-#: docbook/index.xml:1128
+#: docbook/index.xml
 msgid "<keysym>Enter</keysym>"
 msgstr "<keysym>Entrar</keysym>"
 
-#: docbook/index.xml:1130
+#: docbook/index.xml
 msgid "Play the selected piece"
 msgstr "Jugar la pieza seleccionada"
 
-#: docbook/index.xml:1136
+#: docbook/index.xml
 msgid "<keysym>1</keysym>"
 msgstr "<keysym>1</keysym>"
 
-#: docbook/index.xml:1137
+#: docbook/index.xml
 msgid "<keysym>2</keysym>"
 msgstr "<keysym>2</keysym>"
 
-#: docbook/index.xml:1138
+#: docbook/index.xml
 msgid "<keysym>A</keysym>"
 msgstr "<keysym>A</keysym>"
 
-#: docbook/index.xml:1139
+#: docbook/index.xml
 msgid "<keysym>C</keysym>"
 msgstr "<keysym>C</keysym>"
 
-#: docbook/index.xml:1140
+#: docbook/index.xml
 msgid "<keysym>E</keysym>"
 msgstr "<keysym>E</keysym>"
 
-#: docbook/index.xml:1141
+#: docbook/index.xml
 msgid "<keysym>F</keysym>"
 msgstr "<keysym>F</keysym>"
 
-#: docbook/index.xml:1142
+#: docbook/index.xml
 msgid "<keysym>G</keysym>"
 msgstr "<keysym>G</keysym>"
 
-#: docbook/index.xml:1143
+#: docbook/index.xml
 msgid "<keysym>H</keysym>"
 msgstr "<keysym>H</keysym>"
 
-#: docbook/index.xml:1144
+#: docbook/index.xml
 msgid "<keysym>I</keysym>"
 msgstr "<keysym>I</keysym>"
 
-#: docbook/index.xml:1145
+#: docbook/index.xml
 msgid "<keysym>J</keysym>"
 msgstr "<keysym>J</keysym>"
 
-#: docbook/index.xml:1146
+#: docbook/index.xml
 msgid "<keysym>L</keysym>"
 msgstr "<keysym>L</keysym>"
 
-#: docbook/index.xml:1147
+#: docbook/index.xml
 msgid "<keysym>N</keysym>"
 msgstr "<keysym>N</keysym>"
 
-#: docbook/index.xml:1148
+#: docbook/index.xml
 msgid "<keysym>O</keysym>"
 msgstr "<keysym>O</keysym>"
 
-#: docbook/index.xml:1149
+#: docbook/index.xml
 msgid "<keysym>P</keysym>"
 msgstr "<keysym>P</keysym>"
 
-#: docbook/index.xml:1150
+#: docbook/index.xml
 msgid "<keysym>S</keysym>"
 msgstr "<keysym>S</keysym>"
 
-#: docbook/index.xml:1151
+#: docbook/index.xml
 msgid "<keysym>T</keysym>"
 msgstr "<keysym>T</keysym>"
 
-#: docbook/index.xml:1152
+#: docbook/index.xml
 msgid "<keysym>U</keysym>"
 msgstr "<keysym>U</keysym>"
 
-#: docbook/index.xml:1153
+#: docbook/index.xml
 msgid "<keysym>V</keysym>"
 msgstr "<keysym>V</keysym>"
 
-#: docbook/index.xml:1154
+#: docbook/index.xml
 msgid "<keysym>W</keysym>"
 msgstr "<keysym>W</keysym>"
 
-#: docbook/index.xml:1155
+#: docbook/index.xml
 msgid "<keysym>X</keysym>"
 msgstr "<keysym>X</keysym>"
 
-#: docbook/index.xml:1156
+#: docbook/index.xml
 msgid "<keysym>Y</keysym>"
 msgstr "<keysym>Y</keysym>"
 
-#: docbook/index.xml:1157
+#: docbook/index.xml
 msgid "<keysym>Z</keysym>"
 msgstr "<keysym>Z</keysym>"
 
-#: docbook/index.xml:1159
+#: docbook/index.xml
 msgid ""
 "Select piece according to commonly used piece names. If there are multiple "
 "pieces with the letter (e.g. I3, I4, I5), pressing the key several times "
@@ -1751,39 +1751,39 @@ msgstr ""
 "para las piezas A6 y A4 (también conocidas como la \"langosta\" y el "
 "\"triángulo\")."
 
-#: docbook/index.xml:1169
+#: docbook/index.xml
 msgid "<keysym>Ctrl+Home</keysym>"
 msgstr "<keysym>Ctrl+Inicio</keysym>"
 
-#: docbook/index.xml:1170
+#: docbook/index.xml
 msgid "<keysym>Ctrl+Shift+Left</keysym>"
 msgstr "<keysym>Ctrl+Mayús+Izquierda</keysym>"
 
-#: docbook/index.xml:1171
+#: docbook/index.xml
 msgid "<keysym>Ctrl+Left</keysym>"
 msgstr "<keysym>Ctrl+Izquierda</keysym>"
 
-#: docbook/index.xml:1172
+#: docbook/index.xml
 msgid "<keysym>Ctrl+Right</keysym>"
 msgstr "<keysym>Ctrl+Derecha</keysym>"
 
-#: docbook/index.xml:1173
+#: docbook/index.xml
 msgid "<keysym>Ctrl+Shift+Right</keysym>"
 msgstr "<keysym>Ctrl+Mayús+Derecha</keysym>"
 
-#: docbook/index.xml:1174
+#: docbook/index.xml
 msgid "<keysym>Ctrl+End</keysym>"
 msgstr "<keysym>Ctrl+Fin</keysym>"
 
-#: docbook/index.xml:1175
+#: docbook/index.xml
 msgid "<keysym>Ctrl+Up</keysym>"
 msgstr "<keysym>Ctrl+Arriba</keysym>"
 
-#: docbook/index.xml:1176
+#: docbook/index.xml
 msgid "<keysym>Ctrl+Down</keysym>"
 msgstr "<keysym>Ctrl+Abajo</keysym>"
 
-#: docbook/index.xml:1178
+#: docbook/index.xml
 msgid ""
 "Navigate in the game: beginning, ten moves backward, backward, forward, ten "
 "moves forward, end, previous variation, next variation."
@@ -1792,11 +1792,11 @@ msgstr ""
 " avanzar, avanzar diez movimientos, final, variación anterior, siguiente "
 "variación."
 
-#: docbook/index.xml:1185
+#: docbook/index.xml
 msgid "<keysym>Ctrl+Shift+H</keysym>"
 msgstr "<keysym>Ctrl+Mayús+H</keysym>"
 
-#: docbook/index.xml:1187
+#: docbook/index.xml
 msgid ""
 "Like <guimenuitem>Find Move</guimenuitem> (Ctrl+H) but iterates backwards "
 "through the list of legal moves."
@@ -1804,18 +1804,18 @@ msgstr ""
 "Como <guimenuitem>Buscar movimiento</guimenuitem> (Ctrl+H) pero recorre "
 "hacia atrás la lista de movimientos legales."
 
-#: docbook/index.xml:1194
+#: docbook/index.xml
 msgid "<keysym>Ctrl+T</keysym>"
 msgstr "<keysym>Ctrl+T</keysym>"
 
-#: docbook/index.xml:1196
+#: docbook/index.xml
 msgid "Switch view between comment and game analysis."
 msgstr "Cambiar vista entre comentarios y análisis de la partida."
 
-#: docbook/index.xml:1202
+#: docbook/index.xml
 msgid "<keysym>Alt+M</keysym>"
 msgstr "<keysym>Alt+M</keysym>"
 
-#: docbook/index.xml:1204
+#: docbook/index.xml
 msgid "Open menu."
 msgstr "Abrir menú."
