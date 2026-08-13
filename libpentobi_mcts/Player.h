@@ -43,9 +43,9 @@ public:
     bool resign() const override;
 
     /** Get opening book usage setting.
-        This is true by default and requires that before calling genmove()
-        a book for the current game variant must be loaded with load_book().
-        To play without book, call set_use_book(false). */
+        This is true by default, which makes genmove() throw if no book for the
+        current game variant has been loaded with load_book(). To play without
+        book, call set_use_book(false). */
     bool get_use_book() const;
 
     /** Set opening book usage.
