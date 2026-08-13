@@ -33,23 +33,30 @@ public:
         board with (may avoid unnecessary BoardConst creation for game variant
         that is never used)
         @param max_level The maximum level used
-        @param books_dir Directory containing opening books.
         @param nu_threads The number of threads to use in the search (0 means
         to select a reasonable default value) */
-    Player(Variant initial_variant, unsigned max_level, const string& books_dir,
+    Player(Variant initial_variant, unsigned max_level,
            unsigned nu_threads = 0);
 
     Move genmove(const Board& bd, Color c) override;
 
     bool resign() const override;
 
+    /** Get opening book usage setting.
+        This is true by default and requires that before calling genmove()
+        a book for the current game variant must be loaded with load_book().
+        To play without book, call set_use_book(false). */
     bool get_use_book() const;
 
+    /** Set opening book usage.
+        See get_use_book() */
     void set_use_book(bool enable);
 
     void set_level(unsigned level);
 
     Search& get_search();
+
+    bool load_book(const string& filepath);
 
     void load_book(istream& in);
 
@@ -83,8 +90,6 @@ private:
 
     bool m_was_aborted;
 
-    string m_books_dir;
-
     unsigned m_max_level;
 
     unsigned m_level;
@@ -104,9 +109,6 @@ private:
     Book m_book;
 
     WallTimeSource m_time_source;
-
-
-    bool load_book(const string& filepath);
 };
 
 inline Search& Player::get_search()

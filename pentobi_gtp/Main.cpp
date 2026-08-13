@@ -17,31 +17,9 @@ using libpentobi_base::Board;
 
 //-----------------------------------------------------------------------------
 
-namespace {
-
-string get_application_dir_path(int argc, char** argv)
-{
-    if (argc == 0 || argv == nullptr || argv[0] == nullptr)
-        return "";
-    string application_path(argv[0]);
-#ifdef _WIN32
-    auto pos = application_path.find_last_of("/\\");
-#else
-    auto pos = application_path.find_last_of('/');
-#endif
-    if (pos == string::npos)
-        return "";
-    return application_path.substr(0, pos);
-}
-
-} // namespace
-
-//-----------------------------------------------------------------------------
-
 int main(int argc, char** argv)
 {
     libboardgame_base::LogInitializer log_initializer;
-    string application_dir_path = get_application_dir_path(argc, argv);
     try
     {
         vector<string> specs = {
@@ -107,17 +85,20 @@ int main(int argc, char** argv)
         if (level < 1 || level > Player::max_supported_level)
             throw runtime_error("invalid level");
         auto use_book = (! opt.contains("nobook"));
-        const string& books_dir = application_dir_path;
-        GtpEngine engine(variant, level, use_book, books_dir, threads);
+        GtpEngine engine(variant, level, use_book, threads);
         engine.set_resign(! opt.contains("noresign"));
         if (opt.contains("showboard"))
             engine.set_show_board(true);
         string book_file = opt.get("book", "");
         if (! book_file.empty())
         {
-            ifstream in(book_file);
-            engine.get_mcts_player().load_book(in);
+            auto& player = engine.get_mcts_player();
+            player.load_book(book_file);
+            if (! player.is_book_loaded(variant))
+                throw runtime_error("Opening book invalid for game variant");
         }
+        else if (use_book)
+            throw runtime_error("Must use either --book or --nobook");
         string config_file = opt.get("config", "");
         if (! config_file.empty())
         {

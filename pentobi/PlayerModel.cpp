@@ -21,7 +21,7 @@ PlayerModel::PlayerModel(QObject* parent)
     try
     {
         m_player = make_unique<Player>(GameModel::getInitialGameVariant(),
-                                       maxLevel, "", nuThreads);
+                                       maxLevel, nuThreads);
         m_notEnoughMemory = false;
     }
     catch (const bad_alloc&)

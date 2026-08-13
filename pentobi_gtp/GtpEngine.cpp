@@ -18,11 +18,10 @@ using libpentobi_mcts::Float;
 //-----------------------------------------------------------------------------
 
 GtpEngine::GtpEngine(
-        Variant variant, unsigned level, bool use_book,
-        const string& books_dir, unsigned nu_threads)
+        Variant variant, unsigned level, bool use_book, unsigned nu_threads)
     : libpentobi_gtp::GtpEngine(variant)
 {
-    create_player(variant, level, books_dir, nu_threads);
+    create_player(variant, level, nu_threads);
     get_mcts_player().set_use_book(use_book);
     add("get_value", &GtpEngine::cmd_get_value);
     add("name", &GtpEngine::cmd_name);
@@ -168,10 +167,10 @@ void GtpEngine::cmd_version(Response& response)
 }
 
 void GtpEngine::create_player(Variant variant, unsigned level,
-                           const string& books_dir, unsigned nu_threads)
+                              unsigned nu_threads)
 {
     auto max_level = level;
-    m_player = make_unique<Player>(variant, max_level, books_dir, nu_threads);
+    m_player = make_unique<Player>(variant, max_level, nu_threads);
     get_mcts_player().set_level(level);
     set_player(*m_player);
 }

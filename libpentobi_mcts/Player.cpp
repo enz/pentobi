@@ -90,11 +90,10 @@ size_t get_memory(unsigned max_level)
 //-----------------------------------------------------------------------------
 
 Player::Player(Variant initial_variant, unsigned max_level,
-               const string&  books_dir, unsigned nu_threads)
+               unsigned nu_threads)
     : m_is_book_loaded(false),
       m_use_book(true),
       m_resign(false),
-      m_books_dir(books_dir),
       m_max_level(max_level),
       m_level(4),
       m_search(initial_variant, nu_threads, get_memory(max_level)),
@@ -161,22 +160,11 @@ Move Player::genmove(const Board& bd, Color c)
     if (m_use_book
         && (level >= 4 || bd.get_nu_moves() < 2u * bd.get_nu_colors()))
     {
-        if (! is_book_loaded(variant))
-        {
-            string book_file = m_books_dir;
-            if (! book_file.empty())
-                book_file.append("/");
-            book_file.append("book_");
-            book_file.append(to_string_id(variant));
-            book_file.append(".blksgf");
-            load_book(book_file);
-        }
-        if (m_is_book_loaded)
-        {
-            mv = m_book.genmove(bd, c);
-            if (! mv.is_null())
-                return mv;
-        }
+        if (! m_is_book_loaded)
+            throw runtime_error("wrong or invalid opening book");
+        mv = m_book.genmove(bd, c);
+        if (! mv.is_null())
+            return mv;
     }
     Float max_count = 0;
     switch (board_type)

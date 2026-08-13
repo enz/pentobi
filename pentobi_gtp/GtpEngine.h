@@ -24,9 +24,8 @@ class GtpEngine
     : public libpentobi_gtp::GtpEngine
 {
 public:
-    explicit GtpEngine(
-            Variant variant, unsigned level = 5, bool use_book = true,
-            const string& books_dir = {}, unsigned nu_threads = 0);
+    explicit GtpEngine(Variant variant, unsigned level = 5,
+                       bool use_book = true, unsigned nu_threads = 0);
 
     ~GtpEngine() override;
 
@@ -43,8 +42,7 @@ public:
 private:
     unique_ptr<PlayerBase> m_player;
 
-    void create_player(Variant variant, unsigned level,
-                       const string& books_dir, unsigned nu_threads);
+    void create_player(Variant variant, unsigned level, unsigned nu_threads);
 
     Search& get_search();
 };
