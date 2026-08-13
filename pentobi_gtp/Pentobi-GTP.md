@@ -75,12 +75,7 @@ The following command-line options are supported by `pentobi-gtp`:
 Specify a file name for the opening book. Opening books are blksgf files
 containing trees, in which moves that Pentobi should select are marked
 as good moves with the corresponding SGF property (see the files in
-`opening_books`). If no opening book is specified and opening books are
-not disabled, `pentobi-gtp` will automatically search for an opening
-book for the current game variant in the directory of the executable
-using the same file name conventions as in `opening_books`. If no such
-file is found it will print an error message to standard error and
-disable the use of opening books.
+`opening_books`). Use `--nobook` to disable the usage of opening books.
 
 `--config,-c` _file_
 
