@@ -145,15 +145,14 @@ error.
 
 Use _n_ threads during the search. Note that the default is 1, unlike
 in the GUI version of Pentobi, which sets the default according to the number
-of hardware threads (CPUs, cores or virtual cores) available on the current
-system. The reason is that, for example, using 2 threads makes the search twice
-as fast but may lose a bit of playing strength compared to the single-threaded
-search. Therefore, if the GTP engine is used to play many test games with
-twogtp (which supports playing games in parallel), it is better to play the
-games with single-threaded search in parallel than with multi-threaded search
-sequentially. Using a large number of threads (e.g. more than 8) is untested
-and might reduce the playing strength compared to the single-threaded
-search.
+of logical cores (up to 8) available on the current system. The reason is that,
+for example, using 2 threads makes the search twice as fast but may lose a bit
+of playing strength compared to the single-threaded search. Therefore, if the
+GTP engine is used to play many test games with twogtp (which supports playing
+games in parallel), it is better to play the games with single-threaded search
+in parallel than with multi-threaded search sequentially. Using a large number
+of threads (e.g. more than 8) is untested and might reduce the playing strength
+compared to the single-threaded search.
 
 `--version,-v`
 
