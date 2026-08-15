@@ -5,8 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick
-// Enforce Basic style to avoid frame around TextArea in Material and
-// Universal style
+// Enforce Basic style to avoid frame around TextArea in Material style
 import QtQuick.Controls.Basic
 
 ScrollView {
