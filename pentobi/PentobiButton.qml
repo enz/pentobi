@@ -32,14 +32,6 @@ Item {
     property alias autoRepeat: button.autoRepeat
     property alias autoRepeatInterval: button.autoRepeatInterval
 
-    // We want the icon about the same size as the font, but use
-    // multipliers of 8 for better pixel alignment (source images
-    // are 64x64 aligned to 16x16 grid)
-    property real _imageSize:
-        Math.round((globalStyle === "Material" ? 1.3 : 1.2)
-                   * font.pixelSize * Screen.devicePixelRatio / 8)
-        / Screen.devicePixelRatio * 8
-
     signal clicked()
 
     implicitWidth: button.implicitWidth
@@ -58,8 +50,11 @@ Item {
             // We want the icon about the same size as the font, but use
             // multipliers of 8 for better pixel alignment (source images
             // are 64x64 aligned to 16x16 grid)
-            implicitWidth: _imageSize
-            implicitHeight: _imageSize
+            implicitWidth:
+                Math.round((globalStyle === "Material" ? 1.3 : 1.2)
+                           * font.pixelSize * Screen.devicePixelRatio / 8)
+                / Screen.devicePixelRatio * 8
+            implicitHeight: implicitWidth
 
             Image {
                 id: image
