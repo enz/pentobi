@@ -61,9 +61,11 @@ Item {
 
                 anchors.fill: parent
                 opacity: button.enabled ? 1 : 0.5
-            }
-            Behavior on opacity {
-                NumberAnimation { duration: gameView.animationDurationFast }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: gameView.animationDurationFast
+                    }
+                }
             }
         }
         ToolTip.text: root.toolTipText
