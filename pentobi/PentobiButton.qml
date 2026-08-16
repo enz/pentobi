@@ -47,14 +47,8 @@ Item {
         focusPolicy: Qt.NoFocus
         flat: true
         contentItem: Item {
-            // We want the icon about the same size as the font, but use
-            // multipliers of 8 for better pixel alignment (source images
-            // are 64x64 aligned to 16x16 grid)
-            implicitWidth:
-                Math.round((globalStyle === "Material" ? 1.3 : 1.2)
-                           * font.pixelSize * Screen.devicePixelRatio / 8)
-                / Screen.devicePixelRatio * 8
-            implicitHeight: implicitWidth
+            implicitWidth: 16
+            implicitHeight: 16
 
             Image {
                 id: image
@@ -71,11 +65,8 @@ Item {
         background: Item {
             id: backgroundItem
 
-            implicitWidth:
-                Math.round((globalStyle === "Material" ? 1.3 : 1.2)
-                           * font.pixelSize * Screen.devicePixelRatio / 8)
-                / Screen.devicePixelRatio * 8
-            implicitHeight: implicitWidth
+            implicitWidth: 16
+            implicitHeight: 16
 
             Rectangle {
                 anchors.fill: parent
