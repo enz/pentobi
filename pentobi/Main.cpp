@@ -48,7 +48,8 @@ int main(int argc, char *argv[])
 {
     libboardgame_base::LogInitializer log_initializer;
 #ifdef Q_OS_WIN
-    qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
+    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
+        qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
 #endif
     QCoreApplication::setOrganizationName("Pentobi"_L1);
     QCoreApplication::setApplicationName("Pentobi"_L1);
