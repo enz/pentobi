@@ -68,6 +68,32 @@ Item {
                 }
             }
         }
+        background: Item {
+            id: backgroundItem
+
+            implicitWidth:
+                Math.round((globalStyle === "Material" ? 1.3 : 1.2)
+                           * font.pixelSize * Screen.devicePixelRatio / 8)
+                / Screen.devicePixelRatio * 8
+            implicitHeight: implicitWidth
+
+            Rectangle {
+                anchors.fill: parent
+                radius: 0.05 * width
+                color: theme.colorButtonPressed
+                opacity: button.down ? 1 : 0
+
+                Behavior on opacity {
+                    NumberAnimation { duration: gameView.animationDurationFast }
+                }
+            }
+            Rectangle {
+                anchors.fill: parent
+                radius: 0.05 * width
+                color: theme.colorButtonHovered
+                visible: button.enabled && button.hovered
+            }
+        }
         ToolTip.text: root.toolTipText
         ToolTip.visible: toolTipText !== "" && hovered
         ToolTip.delay: 1000

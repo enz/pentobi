@@ -65,6 +65,8 @@ Item {
     property color colorIcon: isDark ? "#91888f" : "#7b7b7b"
 
     property color colorBackground: isMaterial ? "#1c1b1f" : palette.window
+    property color colorButtonHovered: Qt.alpha(colorIcon, 0.2)
+    property color colorButtonPressed: Qt.alpha(colorIcon, 0.4)
     property color colorMessageBase: isMaterial ? "#333333" : palette.base
     property color colorText: isMaterial ? "#e6d5e1" : palette.text
 
