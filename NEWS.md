@@ -7,6 +7,7 @@ Version 31.0-dev (main)
 * Make slow analysis speed available on mobile devices
 * Remember selected analysis speed for the current session
 * Minimum required Qt version is now 6.11
+* Menu item View/Toolbar is no longer supported
 * twogtp option --fastopen is no longer supported
 * pentobi-gtp now requires --book or --nobook
 * Compilation option LIBBOARDGAME_MCTS_SINGLE_THREAD is no longer supported

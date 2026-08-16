@@ -714,10 +714,6 @@
         <source>Appearance</source>
         <translation>Giao diện</translation>
     </message>
-    <message>
-        <source>Toolbar</source>
-        <translation>Thanh công cụ</translation>
-    </message>
 </context>
 <context>
     <name>MoveAnnotationDialog</name>
@@ -1306,6 +1302,7 @@
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
+        <extracomment>Description of command line argument.</extracomment>
         <translation>Tệp Blokus SGF để mở (tùy chọn).</translation>
     </message>
     <message>

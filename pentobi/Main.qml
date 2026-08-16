@@ -42,7 +42,6 @@ ApplicationWindow {
     property bool busyIndicatorRunning: lengthyCommand.isRunning
                                         || playerModel.isGenMoveRunning
                                         || analyzeGameModel.isRunning
-    property bool showToolBar: true
 
     minimumWidth: isDesktop ? 481 : 240
     minimumHeight: isDesktop ? 303 : 301
@@ -61,7 +60,6 @@ ApplicationWindow {
     PentobiToolBar {
         id: toolBar
 
-        showContent: ! isDesktop || showToolBar
         anchors {
             left: parent.left
             right: parent.right
@@ -118,7 +116,6 @@ ApplicationWindow {
         property alias folder: rootWindow.folder
         property alias displayName: rootWindow.displayName
         property alias exportImageWidth: rootWindow.exportImageWidth
-        property alias showToolBar: rootWindow.showToolBar
         property alias showVariations: gameModel.showVariations
         property bool computerPlays0
         property bool computerPlays1

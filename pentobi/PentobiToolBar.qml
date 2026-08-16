@@ -10,9 +10,6 @@ import QtQuick.Layouts
 import "main.js" as Logic
 
 Item {
-    // Show toolbar content (menu button is always shown)
-    property bool showContent: true
-
     function clickMenuButton() {
         menuButton.clicked()
         menu.item.currentIndex = 0
@@ -32,7 +29,7 @@ Item {
         Label {
             id: mobileLabel
 
-            visible: ! isDesktop && showContent
+            visible: ! isDesktop
             color: theme.colorText
             opacity: isRated ? 0.6 : 0.8
             elide: Text.ElideMiddle
@@ -55,11 +52,11 @@ Item {
         PentobiButton {
             source: theme.getImage("pentobi-newgame", theme.isDark)
             action: actionNew
-            visible: showContent && (isDesktop || action.enabled)
+            visible: isDesktop || action.enabled
             toolTipText: qsTr("Start a new game")
         }
         PentobiButton {
-            visible: showContent && isDesktop
+            visible: isDesktop
             source: theme.getImage("pentobi-rated-game", theme.isDark)
             action: actionNewRated
             toolTipText: qsTr("Start a rated game")
@@ -67,7 +64,7 @@ Item {
         PentobiButton {
             source: theme.getImage("pentobi-undo", theme.isDark)
             action: actionUndo
-            visible: showContent && (isDesktop || action.enabled)
+            visible: isDesktop || action.enabled
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameView.item ?
@@ -78,13 +75,13 @@ Item {
         PentobiButton {
             source: theme.getImage("pentobi-computer-colors", theme.isDark)
             action: actionComputerSettings
-            visible: showContent && (isDesktop || action.enabled)
+            visible: isDesktop || action.enabled
             toolTipText: qsTr("Set the colors played by the computer")
         }
         PentobiButton {
             source: theme.getImage("pentobi-play", theme.isDark)
             action: actionPlay
-            visible: showContent && (isDesktop || action.enabled)
+            visible: isDesktop || action.enabled
             autoRepeat: true
             // Use fast autorepeat to avoid flickering of
             // PentobiButton.pressedAnimation, presses while computer is
@@ -105,7 +102,7 @@ Item {
         PentobiButton {
             source: theme.getImage("pentobi-stop", theme.isDark)
             action: actionStop
-            visible: showContent && (isDesktop || ! isRated)
+            visible: isDesktop || ! isRated
             toolTipText: analyzeGameModel.isRunning ?
                               qsTr("Abort game analysis")
                             : qsTr("Abort computer move")
@@ -116,13 +113,13 @@ Item {
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
         PentobiButton {
-            visible: showContent && isDesktop
+            visible: isDesktop
             source: theme.getImage("pentobi-beginning", theme.isDark)
             action: actionBeginning
             toolTipText: qsTr("Go to beginning of game")
         }
         PentobiButton {
-            visible: showContent && isDesktop
+            visible: isDesktop
             source: theme.getImage("pentobi-backward10", theme.isDark)
             action: actionBackward10
             autoRepeat: true
@@ -132,21 +129,21 @@ Item {
             toolTipText: qsTr("Go ten moves backward")
         }
         PentobiButton {
-            visible: showContent && isDesktop
+            visible: isDesktop
             source: theme.getImage("pentobi-backward", theme.isDark)
             action: actionBackward
             autoRepeat: true
             toolTipText: qsTr("Go one move backward")
         }
         PentobiButton {
-            visible: showContent && isDesktop
+            visible: isDesktop
             source: theme.getImage("pentobi-forward", theme.isDark)
             action: actionForward
             autoRepeat: true
             toolTipText: qsTr("Go one move forward")
         }
         PentobiButton {
-            visible: showContent && isDesktop
+            visible: isDesktop
             source: theme.getImage("pentobi-forward10", theme.isDark)
             action: actionForward10
             autoRepeat: true
@@ -156,7 +153,7 @@ Item {
             toolTipText: qsTr("Go ten moves forward")
         }
         PentobiButton {
-            visible: showContent && isDesktop
+            visible: isDesktop
             source: theme.getImage("pentobi-end", theme.isDark)
             action: actionEnd
             toolTipText: qsTr("Go to end of moves")
@@ -167,7 +164,7 @@ Item {
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
         PentobiButton {
-            visible: showContent && isDesktop
+            visible: isDesktop
             source: theme.getImage("pentobi-previous-variation", theme.isDark)
             action: actionPrevVar
             autoRepeat: true
@@ -177,7 +174,7 @@ Item {
             toolTipText: qsTr("Go to previous variation")
         }
         PentobiButton {
-            visible: showContent && isDesktop
+            visible: isDesktop
             source: theme.getImage("pentobi-next-variation", theme.isDark)
             action: actionNextVar
             autoRepeat: true
@@ -192,7 +189,7 @@ Item {
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
         Label {
-            visible: showContent && isDesktop
+            visible: isDesktop
             text: Logic.getGameLabel(gameView.setupMode, isRated,
                                      gameModel.file, gameModel.isModified, false)
             color: theme.colorText

@@ -714,10 +714,6 @@
         <source>Appearance</source>
         <translation>Erscheinungsbild</translation>
     </message>
-    <message>
-        <source>Toolbar</source>
-        <translation>Werkzeugleiste</translation>
-    </message>
 </context>
 <context>
     <name>MoveAnnotationDialog</name>
@@ -1306,6 +1302,7 @@
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
+        <extracomment>Description of command line argument.</extracomment>
         <translation>Zu öffnende Blokus-SGF-Datei (optional).</translation>
     </message>
     <message>

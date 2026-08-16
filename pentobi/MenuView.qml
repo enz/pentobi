@@ -14,15 +14,6 @@ PentobiMenu {
         onTriggered: appearanceDialog.open()
     }
     MenuItem {
-        visible: isDesktop
-        // Invisible menu item still use space in Qt 5.11
-        height: visible ? implicitHeight : 0
-        text: qsTr("Toolbar")
-        checkable: true
-        checked: rootWindow.showToolBar
-        onTriggered: rootWindow.showToolBar = checked
-    }
-    MenuItem {
         action: actionComment
     }
     MenuItem {
