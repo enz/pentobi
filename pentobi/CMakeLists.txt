@@ -113,7 +113,6 @@ qt_add_qml_module(pentobi
     ../opening_books/pentobi_books.qrc
 
     RESOURCES
-    icon/pentobi-48.svg
     icon/pentobi-128.svg
     icons/dark/pentobi-newgame.svg
     icons/dark/pentobi-undo.svg
