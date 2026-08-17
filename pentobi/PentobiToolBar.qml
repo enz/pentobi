@@ -14,11 +14,12 @@ ToolBar {
         menuButton.clicked()
         menu.item.currentIndex = 0
     }
+
     // We don't want the toolbar to be visually separated from the main window
     // content. Also, Material.Dark uses a wrong toolbar color (Qt 6.11).
-    // Note that this negatively affects Basic style (toolbutton background
+    // However this negatively affects Basic style (toolbutton background
     // doesn't match toolbar)
-    background: null
+    Component.onCompleted: if (globalStyle != "Basic") background = null
 
     RowLayout {
         id: rowLayout
