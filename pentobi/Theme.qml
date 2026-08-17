@@ -61,12 +61,7 @@ Item {
     property color colorStartingPoint: isDark ? "#82777E" : "#767074"
     property color colorBoardMarkup: isDark ? "#ffffff" : "#111111"
 
-    // Should be the same as used in dark/light SVG icon sources
-    property color colorIcon: isDark ? "#91888f" : "#7b7b7b"
-
     property color colorBackground: isDark ? "#000000" : "#ffffff"
-    property color colorButtonHovered: Qt.alpha(colorIcon, 0.2)
-    property color colorButtonPressed: Qt.alpha(colorIcon, 0.4)
     property color colorMessageBase: colorBackground
     property color colorText: isDark ? "#ffffff" : "#000000"
 
