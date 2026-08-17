@@ -21,6 +21,12 @@ Button {
         width: 16
         height: 16
     }
+    opacity: {
+        // org.kde.* already apply transparency to disabled icons
+        if (globalStyle == "org.kde.breeze" || globalStyle == "org.kde.desktop")
+            return 1
+        return enabled ? 1 : 0.4
+    }
     ToolTip.visible: ToolTip.text !== "" && hovered
     ToolTip.delay: 1000
     ToolTip.timeout: 5000
