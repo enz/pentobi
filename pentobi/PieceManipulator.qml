@@ -29,7 +29,8 @@ Item {
 
     Image {
         anchors.fill: root
-        source: theme.getImage("piece-manipulator", theme.isDark)
+        source: theme.isDark ? "piece-manipulator-dark.svg"
+                             : "piece-manipulator.svg"
         sourceSize { width: 800; height: 800 }
         opacity: root.pieceModel && ! root.legal ? 0.7 : 0
 
@@ -37,7 +38,8 @@ Item {
     }
     Image {
         anchors.fill: root
-        source: theme.getImage("piece-manipulator-legal", theme.isDark)
+        source: theme.isDark ? "piece-manipulator-legal-dark.svg"
+                             : "piece-manipulator-legal.svg"
         sourceSize { width: 800; height: 800 }
         opacity: root.pieceModel && root.legal ? 0.55 : 0
 

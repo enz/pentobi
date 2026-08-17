@@ -1,58 +1,3 @@
-# Images and icons to be used with QtQuick Image. We use sourceSize four times
-# larger than the device-indepenent size to support high-dpi images.
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/icon")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/themes/dark")
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/themes/light")
-set(pentobi_images
-    icon/pentobi-48
-    themes/dark/menu
-    themes/dark/pentobi-backward
-    themes/dark/pentobi-backward10
-    themes/dark/pentobi-beginning
-    themes/dark/pentobi-computer-colors
-    themes/dark/pentobi-end
-    themes/dark/pentobi-forward
-    themes/dark/pentobi-forward10
-    themes/dark/pentobi-newgame
-    themes/dark/pentobi-next-variation
-    themes/dark/pentobi-play
-    themes/dark/pentobi-previous-variation
-    themes/dark/pentobi-rated-game
-    themes/dark/pentobi-stop
-    themes/dark/pentobi-undo
-    themes/dark/piece-manipulator
-    themes/dark/piece-manipulator-legal
-    themes/light/menu
-    themes/light/pentobi-backward
-    themes/light/pentobi-backward10
-    themes/light/pentobi-beginning
-    themes/light/pentobi-computer-colors
-    themes/light/pentobi-end
-    themes/light/pentobi-forward
-    themes/light/pentobi-forward10
-    themes/light/pentobi-newgame
-    themes/light/pentobi-next-variation
-    themes/light/pentobi-play
-    themes/light/pentobi-previous-variation
-    themes/light/pentobi-rated-game
-    themes/light/pentobi-stop
-    themes/light/pentobi-undo
-    themes/light/piece-manipulator
-    themes/light/piece-manipulator-legal
-    )
-foreach(image ${pentobi_images})
-    add_custom_command(OUTPUT "${image}.png"
-        COMMAND "${RSVG_CONVERT}" -x 4 -y 4 -o "${image}.png"
-        "${CMAKE_CURRENT_SOURCE_DIR}/${image}.svg"
-        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/${image}.svg"
-        )
-    list(APPEND images_png "${image}.png")
-endforeach()
-add_custom_command(
-    OUTPUT images.qrc
-    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/images.qrc" .
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/images.qrc" ${images_png}
-    )
 add_custom_command(
     OUTPUT help/help.qrc
     COMMAND ${CMAKE_COMMAND} -E copy
@@ -115,6 +60,7 @@ qt_add_qml_module(pentobi
     PentobiDialog.qml
     PentobiMenu.qml
     PentobiToolBar.qml
+    PentobiToolButton.qml
     PieceBase.qml
     PieceCallisto.qml
     PieceClassic.qml
@@ -163,9 +109,46 @@ qt_add_qml_module(pentobi
     RecentFiles.h
     RecentFiles.cpp
     resources.qrc
-    "${CMAKE_CURRENT_BINARY_DIR}/images.qrc"
     "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
+
+    RESOURCES
+    icon/pentobi-48.svg
+    icon/pentobi-128.svg
+    icons/dark/pentobi-newgame.svg
+    icons/dark/pentobi-undo.svg
+    icons/dark/pentobi-previous-variation.svg
+    icons/dark/pentobi-play.svg
+    icons/dark/pentobi-menu.svg
+    icons/dark/pentobi-rated-game.svg
+    icons/dark/pentobi-end.svg
+    icons/dark/pentobi-backward.svg
+    icons/dark/pentobi-computer-colors.svg
+    icons/dark/pentobi-beginning.svg
+    icons/dark/pentobi-forward10.svg
+    icons/dark/pentobi-next-variation.svg
+    icons/dark/pentobi-stop.svg
+    icons/dark/pentobi-backward10.svg
+    icons/dark/pentobi-forward.svg
+    icons/light/pentobi-newgame.svg
+    icons/light/pentobi-undo.svg
+    icons/light/pentobi-previous-variation.svg
+    icons/light/pentobi-play.svg
+    icons/light/pentobi-menu.svg
+    icons/light/pentobi-rated-game.svg
+    icons/light/pentobi-end.svg
+    icons/light/pentobi-backward.svg
+    icons/light/pentobi-computer-colors.svg
+    icons/light/pentobi-beginning.svg
+    icons/light/pentobi-forward10.svg
+    icons/light/pentobi-next-variation.svg
+    icons/light/pentobi-stop.svg
+    icons/light/pentobi-backward10.svg
+    icons/light/pentobi-forward.svg
+    piece-manipulator.svg
+    piece-manipulator-dark.svg
+    piece-manipulator-legal.svg
+    piece-manipulator-legal-dark.svg
 )
 
 qt_add_translations(pentobi

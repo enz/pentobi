@@ -13,26 +13,8 @@ Item {
     function dropFocus() { textArea.focus = false }
 
     ScrollView {
-        id: scrollView
-
         anchors.fill: parent
         ScrollBar.vertical.minimumSize: 0.15
-        // Workaround for QTBUG-140033 (Scrollbar not painted in Fusion style,
-        // Qt 6.9.2)
-        ScrollBar.vertical.contentItem: Rectangle {
-            implicitWidth: 6
-            radius: 3
-            color: theme.colorText
-            opacity:
-                if (scrollView.ScrollBar.vertical.pressed)
-                    return 0.4
-                else if (scrollView.ScrollBar.vertical.hovered)
-                    return 0.3
-                else if (scrollView.ScrollBar.vertical.size < 1)
-                    return 0.2
-                else
-                    return 0
-        }
 
         TextArea {
             id: textArea
@@ -44,5 +26,22 @@ Item {
             onTextChanged: gameModel.comment = text
             Keys.onTabPressed: focus = false
         }
+    }
+    // Workaround for QTBUG-149233 (TextArea background invisible in Basic
+    // style)
+    Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+        border.width: 1
+        border.color: {
+            if (globalStyle != "Basic")
+                return "transparent"
+            if (theme.isDark)
+                return textArea.activeFocus ? "#0D69F2" : "#626262"
+            else
+                return textArea.activeFocus ? "#0066FF" : "#BDBDBD"
+        }
+        radius: 2
+        z: 1
     }
 }

@@ -47,7 +47,7 @@ bool isSmallScreen()
 int main(int argc, char *argv[])
 {
     libboardgame_base::LogInitializer log_initializer;
-#ifdef Q_OS_WIN
+#ifdef Q_OS_WINDOWS
     if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
         qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
 #endif
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
     QTranslator translator;
     if (translator.load(locale, ":/i18n/pentobi"_L1, "_"_L1, ":/i18n"_L1))
         QCoreApplication::installTranslator(&translator);
-    QIcon icon(":/icon/pentobi-48.png"_L1);
+    QIcon icon(":/qt/qml/PentobiGui/icon/pentobi-128.svg"_L1);
     app.setWindowIcon(icon);
     app.setDesktopFileName("io.sourceforge.pentobi"_L1);
     QCommandLineParser parser;

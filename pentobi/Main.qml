@@ -30,8 +30,6 @@ ApplicationWindow {
 
     property bool isAndroid: Qt.platform.os === "android"
 
-    property bool isWindows: Qt.platform.os === "windows"
-
     property url folder:
         StandardPaths.writableLocation(StandardPaths.HomeLocation)
 
@@ -64,7 +62,6 @@ ApplicationWindow {
             left: parent.left
             right: parent.right
             top: parent.top
-            margins: isDesktop ? 2 : 0
         }
     }
     Loader {

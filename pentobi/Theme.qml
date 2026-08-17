@@ -6,24 +6,24 @@
 
 import QtQuick
 
-/** Provides colors for painting the board and customizing items according
-    to the system palette.
-    Note that Material style doesn't implement the system palette yet (Qt 6.9),
-    so we hardcode some colors and support only Material.Dark. */
+/** Provides colors for painting the board and for customizing items.
+    Note that many styles have broken styleHints, palette, and/or icon
+    coloring. The palette is even broken in dark mode of Basic style
+    (QTBUG-148414), so we avoid using it. */
 Item {
     property bool colorblind
 
-    // globalStyle is a context property set in Main.cpp
-    property bool isMaterial: globalStyle === "Material"
-
-    // Don't use Application.styleHints.colorScheme === Qt.Dark yet. On some
-    // platforms/styles, colors may still be light (Fusion, Qt 5.11), or they
-    // may be dark while Item.palette still contains light values (Basic,
-    // Qt 5.11). We use palette.window.hslLightness, which correctly detects
-    // the used color scheme in Fusion, the default style on Linux/Gnome,
-    // without breaking org.kde.breeze, the default style in OpenSUSE/KDE
-    // (see QTBUG-148414 and QTBUG-148414)
-    property bool isDark: isMaterial || palette.window.hslLightness < 0.5
+    property bool isDark: {
+        // globalStyle is a context property set in Main.cpp
+        if (globalStyle === "Material")
+            // styleHints don't work in Material (Qt 6.11) we fixed dark mode
+            // in qtquickcontrols2.conf
+            return true
+        if (globalStyle === "Fusion")
+            // styleHints is broken in Fusion (QTBUG-148413)
+            return palette.window.hslLightness < 0.5
+        return Application.styleHints.colorScheme == Qt.Dark
+    }
 
     /** @name Colors for board and piece elements.
         Each color has several versions to paint raised or sunken borders. The
@@ -52,10 +52,10 @@ Item {
                    : [ "#a12ccf", "#6d2787", "#be70dc", "#ffffff" ]
 
     property list<color> colorBoard:
-        isDark ? [ "#494347", "#3b3639", "#6d686b",
-                  "#696267", "#5a5458", "#797276" ]
-               : [ "#aea7ac", "#868084", "#c7bfc5",
-                  "#918b8f", "#7c777b", "#a09a9f"]
+        isDark ? [ "#494949", "#3b3b3b", "#6d6d6d",
+                  "#696969", "#5a5a5a", "#797979" ]
+               : [ "#aeaeae", "#868686", "#c7c7c7",
+                  "#919191", "#7c7c7c", "#a0a0a0" ]
     /// @}
 
     property color colorStartingPoint: isDark ? "#82777E" : "#767074"
@@ -64,21 +64,13 @@ Item {
     // Should be the same as used in dark/light SVG icon sources
     property color colorIcon: isDark ? "#91888f" : "#7b7b7b"
 
-    property color colorBackground: isMaterial ? "#1c1b1f" : palette.window
+    property color colorBackground: isDark ? "#000000" : "#ffffff"
     property color colorButtonHovered: Qt.alpha(colorIcon, 0.2)
     property color colorButtonPressed: Qt.alpha(colorIcon, 0.4)
-    property color colorMessageBase: isMaterial ? "#333333" : palette.base
-    property color colorText: isMaterial ? "#e6d5e1" : palette.text
+    property color colorMessageBase: colorBackground
+    property color colorText: isDark ? "#ffffff" : "#000000"
 
     // Default link color in dark mode has low contrast (Qt 6.9)
     property color colorLink: isDark ? "lightskyblue" : "blue"
-
-    // isDark is passed explicitly so callers create a binding dependency
-    function getImage(name, isDark) {
-        if (isDark)
-            return "themes/dark/" + name + ".png"
-        else
-            return "themes/light/" + name + ".png"
-    }
 }
 

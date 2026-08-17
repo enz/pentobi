@@ -5,7 +5,7 @@
 //-----------------------------------------------------------------------------
 
 import QtQuick
-// Enforce Basic style to avoid frame around TextArea in Material style
+// Enforce Basic style to avoid frame around TextArea in some styles
 import QtQuick.Controls.Basic
 
 ScrollView {
@@ -13,22 +13,6 @@ ScrollView {
 
     signal closeClicked()
 
-    // Workaround for QTBUG-140033 (Scrollbar not painted in Fusion style,
-    // Qt 6.9.2)
-    ScrollBar.vertical.contentItem: Rectangle {
-        implicitWidth: 6
-        radius: 3
-        color: theme.isDark ? "white" : "black"
-        opacity:
-            if (scrollView.ScrollBar.vertical.pressed)
-                return 0.4
-            else if (scrollView.ScrollBar.vertical.hovered)
-                return 0.3
-            else if (scrollView.ScrollBar.vertical.size < 1)
-                return 0.2
-            else
-                return 0
-    }
     rightPadding: 6
 
     // Without declaring a Flickable inside the ScrollView, the TextArea can

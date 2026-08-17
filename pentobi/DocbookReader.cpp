@@ -42,9 +42,6 @@ DocbookReader::DocbookReader(QObject* parent)
 
 void DocbookReader::addHeader(QString& text) const
 {
-    // Maybe explicitly setting the text/background colors can be avoided in
-    // the future but presently TextArea doesn't fully support the palette in
-    // Basic style dark mode
     text.append("<head><style>body{background-color:");
     text.append(m_colorBackground.name());
     text.append(";color:");

@@ -27,9 +27,7 @@ PentobiDialog {
             rightPadding: leftPadding
 
             Image {
-                source: "icon/pentobi-48.png"
-                width: 48; height: 48
-                sourceSize { width: 192; height: 192 }
+                source: "icon/pentobi-48.svg"
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
@@ -46,8 +44,10 @@ PentobiDialog {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {
-                text: "<style>:link{text-decoration:none}</style>" +
-                      "<a href=\"https://pentobi.sourceforge.io\">pentobi.sourceforge.io</a>"
+                text:
+                    "<style>:link{text-decoration:none;color:\""
+                    + theme.colorLink
+                    + "\"}</style><a href=\"https://pentobi.sourceforge.io\">pentobi.sourceforge.io</a>"
                 textFormat: Text.RichText
                 elide: Qt.ElideRight
                 width: Math.min(implicitWidth, root.maxContentWidth)

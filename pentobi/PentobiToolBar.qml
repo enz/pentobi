@@ -9,14 +9,16 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import "main.js" as Logic
 
-Item {
+ToolBar {
     function clickMenuButton() {
         menuButton.clicked()
         menu.item.currentIndex = 0
     }
-
-    implicitWidth: rowLayout.implicitWidth
-    implicitHeight: rowLayout.implicitHeight
+    // We don't want the toolbar to be visually separated from the main window
+    // content. Also, Material.Dark uses a wrong toolbar color (Qt 6.11).
+    // Note that this negatively affects Basic style (toolbutton background
+    // doesn't match toolbar)
+    background: null
 
     RowLayout {
         id: rowLayout
@@ -49,20 +51,20 @@ Item {
             visible: ! isDesktop
             Layout.fillWidth: true
         }
-        PentobiButton {
-            source: theme.getImage("pentobi-newgame", theme.isDark)
+        PentobiToolButton {
+            iconSource: "pentobi-newgame"
             action: actionNew
             visible: isDesktop || action.enabled
-            toolTipText: qsTr("Start a new game")
+            ToolTip.text: qsTr("Start a new game")
         }
-        PentobiButton {
-            visible: isDesktop
-            source: theme.getImage("pentobi-rated-game", theme.isDark)
+        PentobiToolButton {
+            iconSource: "pentobi-rated-game"
             action: actionNewRated
-            toolTipText: qsTr("Start a rated game")
+            visible: isDesktop
+            ToolTip.text: qsTr("Start a rated game")
         }
-        PentobiButton {
-            source: theme.getImage("pentobi-undo", theme.isDark)
+        PentobiToolButton {
+            iconSource: "pentobi-undo"
             action: actionUndo
             visible: isDesktop || action.enabled
             autoRepeat: true
@@ -70,24 +72,24 @@ Item {
                 rootWindow.gameView.item ?
                     2 * rootWindow.gameView.item.animationDuration : 400
             //: Tooltip for Undo button
-            toolTipText: qsTr("Undo move")
+            ToolTip.text: qsTr("Undo move")
         }
-        PentobiButton {
-            source: theme.getImage("pentobi-computer-colors", theme.isDark)
+        PentobiToolButton {
+            iconSource: "pentobi-computer-colors"
             action: actionComputerSettings
             visible: isDesktop || action.enabled
-            toolTipText: qsTr("Set the colors played by the computer")
+            ToolTip.text: qsTr("Set the colors played by the computer")
         }
-        PentobiButton {
-            source: theme.getImage("pentobi-play", theme.isDark)
+        PentobiToolButton {
+            iconSource: "pentobi-play"
             action: actionPlay
             visible: isDesktop || action.enabled
             autoRepeat: true
             // Use fast autorepeat to avoid flickering of
-            // PentobiButton.pressedAnimation, presses while computer is
+            // PentobiToolButton.pressedAnimation, presses while computer is
             // thinking are ignored anyway.
             autoRepeatInterval: 50
-            toolTipText: {
+            ToolTip.text: {
                 var toPlay = gameModel.toPlay
                 if (gameModel.gameVariant === "classic_3" && toPlay === 3)
                     toPlay = gameModel.altPlayer
@@ -99,11 +101,11 @@ Item {
                 return qsTr("Make the computer play the current color")
             }
         }
-        PentobiButton {
-            source: theme.getImage("pentobi-stop", theme.isDark)
+        PentobiToolButton {
+            iconSource: "pentobi-stop"
             action: actionStop
             visible: isDesktop || ! isRated
-            toolTipText: analyzeGameModel.isRunning ?
+            ToolTip.text: analyzeGameModel.isRunning ?
                               qsTr("Abort game analysis")
                             : qsTr("Abort computer move")
         }
@@ -112,76 +114,76 @@ Item {
             Layout.fillWidth: true
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
-        PentobiButton {
-            visible: isDesktop
-            source: theme.getImage("pentobi-beginning", theme.isDark)
+        PentobiToolButton {
+            iconSource: "pentobi-beginning"
             action: actionBeginning
-            toolTipText: qsTr("Go to beginning of game")
-        }
-        PentobiButton {
             visible: isDesktop
-            source: theme.getImage("pentobi-backward10", theme.isDark)
+            ToolTip.text: qsTr("Go to beginning of game")
+        }
+        PentobiToolButton {
+            iconSource: "pentobi-backward10"
             action: actionBackward10
+            visible: isDesktop
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameView.item ?
                     rootWindow.gameView.item.animationDuration : 200
-            toolTipText: qsTr("Go ten moves backward")
+            ToolTip.text: qsTr("Go ten moves backward")
         }
-        PentobiButton {
-            visible: isDesktop
-            source: theme.getImage("pentobi-backward", theme.isDark)
+        PentobiToolButton {
+            iconSource: "pentobi-backward"
             action: actionBackward
-            autoRepeat: true
-            toolTipText: qsTr("Go one move backward")
-        }
-        PentobiButton {
             visible: isDesktop
-            source: theme.getImage("pentobi-forward", theme.isDark)
+            autoRepeat: true
+            ToolTip.text: qsTr("Go one move backward")
+        }
+        PentobiToolButton {
+            iconSource: "pentobi-forward"
             action: actionForward
-            autoRepeat: true
-            toolTipText: qsTr("Go one move forward")
-        }
-        PentobiButton {
             visible: isDesktop
-            source: theme.getImage("pentobi-forward10", theme.isDark)
+            autoRepeat: true
+            ToolTip.text: qsTr("Go one move forward")
+        }
+        PentobiToolButton {
+            iconSource: "pentobi-forward10"
             action: actionForward10
+            visible: isDesktop
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameView.item ?
                     rootWindow.gameView.item.animationDuration : 200
-            toolTipText: qsTr("Go ten moves forward")
+            ToolTip.text: qsTr("Go ten moves forward")
         }
-        PentobiButton {
-            visible: isDesktop
-            source: theme.getImage("pentobi-end", theme.isDark)
+        PentobiToolButton {
+            iconSource: "pentobi-end"
             action: actionEnd
-            toolTipText: qsTr("Go to end of moves")
+            visible: isDesktop
+            ToolTip.text: qsTr("Go to end of moves")
         }
         Item {
             visible: isDesktop
             Layout.fillWidth: true
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
-        PentobiButton {
-            visible: isDesktop
-            source: theme.getImage("pentobi-previous-variation", theme.isDark)
+        PentobiToolButton {
+            iconSource: "pentobi-previous-variation"
             action: actionPrevVar
-            autoRepeat: true
-            autoRepeatInterval:
-                rootWindow.gameView.item ?
-                    2 * rootWindow.gameView.item.animationDuration : 400
-            toolTipText: qsTr("Go to previous variation")
-        }
-        PentobiButton {
             visible: isDesktop
-            source: theme.getImage("pentobi-next-variation", theme.isDark)
-            action: actionNextVar
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameView.item ?
                     2 * rootWindow.gameView.item.animationDuration : 400
-            toolTipText: qsTr("Go to next variation")
+            ToolTip.text: qsTr("Go to previous variation")
+        }
+        PentobiToolButton {
+            iconSource: "pentobi-next-variation"
+            action: actionNextVar
+            visible: isDesktop
+            autoRepeat: true
+            autoRepeatInterval:
+                rootWindow.gameView.item ?
+                    2 * rootWindow.gameView.item.animationDuration : 400
+            ToolTip.text: qsTr("Go to next variation")
         }
         Item {
             visible: isDesktop
@@ -214,10 +216,10 @@ Item {
             visible: isDesktop
             Layout.fillWidth: true
         }
-        PentobiButton {
+        PentobiToolButton {
             id: menuButton
 
-            source: theme.getImage("menu", theme.isDark)
+            iconSource: "pentobi-menu"
             down: isDesktop && (pressed || (menu.item && menu.item.opened))
             onClicked: {
                 if (! menu.item)
@@ -230,7 +232,7 @@ Item {
                     menu.item.popup(0, isAndroid ? 0 : height)
                 }
             }
-            toolTipText: qsTr("Open menu")
+            ToolTip.text: qsTr("Open menu")
 
             Loader {
                 id: menu
@@ -252,8 +254,7 @@ Item {
                         // QtQuick.Controls.Menu is fixed-width so we need to
                         // test with all supported languages that the items are
                         // not truncated or overlap with shortcuts shown with
-                        // newer versions of Qt on KDE (last tested with
-                        // Qt 6.7.2)
+                        // newer versions of Qt
                         MenuGame { relativeWidth: 29 }
                         MenuGo { relativeWidth: 25 }
                         MenuEdit { relativeWidth: 25 }

@@ -9,13 +9,20 @@ import QtQuick
 Canvas {
     property list<double> history
 
+    property color colorBackground: theme.isDark ? "black" : "white"
+    property color colorLine: theme.isDark ? "skyblue" : "royalblue"
+    property color colorAxes: "gray"
+
     antialiasing: true
     onHistoryChanged: requestPaint()
+    onColorBackgroundChanged: requestPaint()
+    onColorLineChanged: requestPaint()
+    onColorAxesChanged: requestPaint()
     onPaint: {
         var w = width
         var h = height
         var ctx = getContext("2d")
-        ctx.fillStyle = "white"
+        ctx.fillStyle = colorBackground
         ctx.fillRect(0, 0, w, h)
         if (history === null)
             return
@@ -50,7 +57,7 @@ Canvas {
         ctx.stroke()
 
         ctx.font = Math.ceil(0.15 * h) + "px sans-serif"
-        ctx.fillStyle = "gray"
+        ctx.fillStyle = colorAxes
         ctx.textAlign = "right"
         ctx.fillText(minY, w, h - w / 60)
         ctx.textBaseline = "top"
@@ -59,7 +66,7 @@ Canvas {
         ctx.beginPath()
         for (i = 0; i < n; ++i)
             ctx.lineTo(i * w / n, h - (history[i] - minY)  / (maxY - minY) * h)
-        ctx.strokeStyle = "red"
+        ctx.strokeStyle = colorLine
         ctx.stroke()
 
         ctx.restore()
