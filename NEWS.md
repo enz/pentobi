@@ -4,6 +4,8 @@ Pentobi Release Notes
 Version 31.0-dev (main)
 -----------------------
 
+* Better support for dark mode in some styles (Basic, FluentWinUI3);
+  default Fusion style is still broken in Qt 5.11 (see #26)
 * Make slow analysis speed available on mobile devices
 * Remember selected analysis speed for the current session
 * Minimum required Qt version is now 6.11
