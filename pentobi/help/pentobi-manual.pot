@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-11 08:55+0200\n"
+"POT-Creation-Date: 2026-08-18 08:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,18 +47,10 @@ msgid ""
 msgstr ""
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "The players alternate in placing one of their pieces on the board. The first "
 "piece of a player must cover its starting square. The starting squares are "
 "located in the corners of the board."
-msgstr ""
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
 msgstr ""
 
 #: docbook/index.xml
@@ -67,11 +59,6 @@ msgid ""
 "touches at least one piece of its own color corner-to-corner but does not "
 "touch any piece of its own color along the edges. The new piece may touch "
 "edges of pieces of the opponent colors."
-msgstr ""
-
-#: docbook/index.xml
-msgid ""
-"<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
 msgstr ""
 
 #: docbook/index.xml
@@ -134,14 +121,6 @@ msgid ""
 msgstr ""
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid "Trigon Rules"
 msgstr ""
 
@@ -155,17 +134,9 @@ msgid ""
 msgstr ""
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "The board also consists of triangles and is shaped like a hexagon with an "
 "edge size of nine triangles."
-msgstr ""
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
 msgstr ""
 
 #: docbook/index.xml
@@ -174,10 +145,6 @@ msgid ""
 "the fourth row away from each edge. The starting points are not colored and "
 "the players may freely choose a starting point for the first piece of a "
 "color."
-msgstr ""
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
 msgstr ""
 
 #: docbook/index.xml
@@ -207,10 +174,6 @@ msgid ""
 msgstr ""
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid "Bonus points are not used in Junior."
 msgstr ""
 
@@ -226,18 +189,10 @@ msgid ""
 msgstr ""
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "Each color has a starting intersection on the intersection of the third "
 "lines close to a corner. The first piece must touch the starting "
 "intersection."
-msgstr ""
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
 msgstr ""
 
 #: docbook/index.xml
@@ -249,10 +204,6 @@ msgid ""
 "junctions between the segments within a piece are such that two rectangular "
 "junctions of different pieces can cover the same intersection without "
 "overlapping, but straight junctions cannot."
-msgstr ""
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
 msgstr ""
 
 #: docbook/index.xml
@@ -281,17 +232,9 @@ msgid ""
 msgstr ""
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "Each player has a set of 21 pieces, which include a subset of the pieces "
 "used in Blokus, but also some pieces that contain a half square."
-msgstr ""
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
 msgstr ""
 
 #: docbook/index.xml
@@ -301,11 +244,6 @@ msgid ""
 "a piece of the player color at a vertex, but not edge-to-edge. Moves are "
 "also legal, if a vertex of a half square touches an edge of a piece of the "
 "same color."
-msgstr ""
-
-#: docbook/index.xml
-msgid ""
-"<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
 msgstr ""
 
 #: docbook/index.xml
@@ -342,10 +280,6 @@ msgid ""
 msgstr ""
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "The 1×1 pieces may be placed anywhere on the board apart from the center of "
 "the board. The center consists of an octagon with width six and top edge "
@@ -354,18 +288,9 @@ msgid ""
 msgstr ""
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "All larger pieces may be placed anywhere on the board but must touch an "
 "existing piece of the same color edge-to-edge."
-msgstr ""
-
-#: docbook/index.xml
-msgid ""
-"<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
 msgstr ""
 
 #: docbook/index.xml
@@ -503,10 +428,6 @@ msgid ""
 msgstr ""
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "Each dot represents a game position in which the color of the dot was to "
 "play. The dots are ordered horizontally by move number. The vertical axis "
@@ -565,10 +486,6 @@ msgid ""
 "result and the computer level. For the game result, it only matters whether "
 "the game was won, lost or a tie. The exact number of score points does not "
 "matter."
-msgstr ""
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
 msgstr ""
 
 #: docbook/index.xml

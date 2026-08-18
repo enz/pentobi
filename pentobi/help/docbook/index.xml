@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<book>
+<book xmlns="http://docbook.org/ns/docbook"
+      xmlns:its="http://www.w3.org/2005/11/its">
 <title>Pentobi</title>
 
 <chapter id="overview">
@@ -25,7 +26,7 @@ squares connected along the edges.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="pieces.png"/>
+<imagedata fileref="pieces.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -36,8 +37,11 @@ located in the corners of the board.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="board_classic.png"/>
+<imageobject role="light">
+<imagedata fileref="board_classic.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="board_classic_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -49,8 +53,11 @@ pieces of the opponent colors.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="position_classic.png"/>
+<imageobject role="light">
+<imagedata fileref="position_classic.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="position_classic_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -102,13 +109,21 @@ Orange.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject><imagedata fileref="board_duo.png"/></imageobject>
+<imageobject role="light">
+<imagedata fileref="board_duo.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="board_duo_dark.png" its:translate="no"/>
+</imageobject>
 </mediaobject>
 </informalfigure>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="position_duo.png"/>
+<imageobject role="light">
+<imagedata fileref="position_duo.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="position_duo_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -126,7 +141,7 @@ along the edges.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="pieces_trigon.png"/>
+<imagedata fileref="pieces_trigon.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -136,8 +151,11 @@ size of nine triangles.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="board_trigon.png"/>
+<imageobject role="light">
+<imagedata fileref="board_trigon.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="board_trigon_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -148,8 +166,11 @@ players may freely choose a starting point for the first piece of a color.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="position_trigon.png"/>
+<imageobject role="light">
+<imagedata fileref="position_trigon.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="position_trigon_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -181,7 +202,7 @@ size five and the players get two of each of those polyominoes.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="pieces_junior.png"/>
+<imagedata fileref="pieces_junior.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -200,7 +221,7 @@ segments.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="pieces_nexos.png"/>
+<imagedata fileref="pieces_nexos.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -210,8 +231,11 @@ close to a corner. The first piece must touch the starting intersection.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="board_nexos.png"/>
+<imageobject role="light">
+<imagedata fileref="board_nexos.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="board_nexos_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -226,8 +250,11 @@ straight junctions cannot.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="position_nexos.png"/>
+<imageobject role="light">
+<imagedata fileref="position_nexos.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="position_nexos_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -255,7 +282,7 @@ straight lines.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="pieces_gembloq.png"/>
+<imagedata fileref="pieces_gembloq.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -265,8 +292,11 @@ in Blokus, but also some pieces that contain a half square.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="board_gembloq.png"/>
+<imageobject role="light">
+<imagedata fileref="board_gembloq.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="board_gembloq_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -279,8 +309,11 @@ color.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="position_gembloq.png"/>
+<imageobject role="light">
+<imagedata fileref="position_gembloq.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="position_gembloq_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -312,7 +345,7 @@ role.
 <informalfigure>
 <mediaobject>
 <imageobject>
-<imagedata fileref="pieces_callisto.png"/>
+<imagedata fileref="pieces_callisto.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -324,8 +357,11 @@ be played anytime later.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="board_callisto.png"/>
+<imageobject role="light">
+<imagedata fileref="board_callisto.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="board_callisto_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -335,8 +371,11 @@ existing piece of the same color edge-to-edge.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="position_callisto.png"/>
+<imageobject role="light">
+<imagedata fileref="position_callisto.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="position_callisto_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -446,8 +485,11 @@ window with a diagram of colored dots.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="analysis.png"/>
+<imageobject role="light">
+<imagedata fileref="analysis.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="analysis_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>
@@ -499,8 +541,11 @@ matter.
 </para>
 <informalfigure>
 <mediaobject>
-<imageobject>
-<imagedata fileref="rating.png"/>
+<imageobject role="light">
+<imagedata fileref="rating.png" its:translate="no"/>
+</imageobject>
+<imageobject role="dark">
+<imagedata fileref="rating_dark.png" its:translate="no"/>
 </imageobject>
 </mediaobject>
 </informalfigure>

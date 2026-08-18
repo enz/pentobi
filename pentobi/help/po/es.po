@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-11 08:55+0200\n"
+"POT-Creation-Date: 2026-08-18 08:40+0200\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2026\n"
 "Language-Team: Spanish (https://app.transifex.com/markus-enzenberger/teams/89074/es/)\n"
@@ -62,10 +62,6 @@ msgstr ""
 "cuadrados."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
-
-#: docbook/index.xml
 msgid ""
 "The players alternate in placing one of their pieces on the board. The first"
 " piece of a player must cover its starting square. The starting squares are "
@@ -75,10 +71,6 @@ msgstr ""
 "el tablero. Con la primera pieza que coloque un jugador se tiene que cubrir "
 "la casilla de inicio. Las casillas de inicio están colocadas en las esquinas"
 " del tablero."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
 
 #: docbook/index.xml
 msgid ""
@@ -91,10 +83,6 @@ msgstr ""
 "que la nueva pieza toque al menos por una esquina una pieza del mismo color,"
 " pero no puede tocar ninguna otra pieza del mismo color por los lados. La "
 "nueva pieza puede tocar los lados de las piezas de otros colores rivales."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
 
 #: docbook/index.xml
 msgid ""
@@ -184,14 +172,6 @@ msgstr ""
 "(5,10) para el morado, y en (10,5) para el naranja."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
-
-#: docbook/index.xml
 msgid "Trigon Rules"
 msgstr "Reglas de Trigón"
 
@@ -211,20 +191,12 @@ msgstr ""
 "equiláteros conectados por los lados."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
-
-#: docbook/index.xml
 msgid ""
 "The board also consists of triangles and is shaped like a hexagon with an "
 "edge size of nine triangles."
 msgstr ""
 "El tablero también puede estar formado por triángulos y tiene forma de "
 "hexágono con un tamaño del borde de nueve triángulos."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
 
 #: docbook/index.xml
 msgid ""
@@ -238,10 +210,6 @@ msgstr ""
 "tablero. Los puntos de inicio no pertenecen a un color determinado, por lo "
 "que los jugadores pueden elegir libremente en qué punto de inicio desean "
 "colocar la primera pieza de su color."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
 
 #: docbook/index.xml
 msgid ""
@@ -282,10 +250,6 @@ msgstr ""
 "cada uno de esos poliominós."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
-
-#: docbook/index.xml
 msgid "Bonus points are not used in Junior."
 msgstr "No se utilizan puntos de bonificación en Sencillo."
 
@@ -304,10 +268,6 @@ msgstr ""
 "máximo de cuatro segmentos de línea unidos entre sí."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
-
-#: docbook/index.xml
 msgid ""
 "Each color has a starting intersection on the intersection of the third "
 "lines close to a corner. The first piece must touch the starting "
@@ -316,10 +276,6 @@ msgstr ""
 "A cada color le corresponde una intersección de inicio cercana a cada "
 "esquina donde se entrecruzan la tercera línea vertical y horizontal. La "
 "primera pieza debe tocar la intersección de inicio."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
 
 #: docbook/index.xml
 msgid ""
@@ -339,10 +295,6 @@ msgstr ""
 " segmentos de una pieza están hechas así para que las uniones rectangulares "
 "de piezas distintas puedan cubrir la misma intersección sin solaparse, pero "
 "esto no se puede hacer en el caso de las uniones rectas. "
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
 
 #: docbook/index.xml
 msgid ""
@@ -380,10 +332,6 @@ msgstr ""
 "los laterales del tablero sean líneas rectas."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
-
-#: docbook/index.xml
 msgid ""
 "Each player has a set of 21 pieces, which include a subset of the pieces "
 "used in Blokus, but also some pieces that contain a half square."
@@ -391,10 +339,6 @@ msgstr ""
 "Cada jugador tiene un conjunto de 21 piezas, que incluye las piezas usadas "
 "en Blokus, pero que además tiene algunas piezas que cuentan solo con medio "
 "cuadrado."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
 
 #: docbook/index.xml
 msgid ""
@@ -410,10 +354,6 @@ msgstr ""
 "una pieza del color del jugador en uno de sus vértices, pero no esquina con "
 "esquina. Hay algunos movimientos que también se consideran legales, si un "
 "vértice de un medio cuadrado toca el lateral de una pieza del mismo color."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
 
 #: docbook/index.xml
 msgid ""
@@ -464,10 +404,6 @@ msgstr ""
 "desempeñan una función especial."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
-
-#: docbook/index.xml
 msgid ""
 "The 1×1 pieces may be placed anywhere on the board apart from the center of "
 "the board. The center consists of an octagon with width six and top edge "
@@ -481,10 +417,6 @@ msgstr ""
 "tercera pieza de 1x1 puede jugarse posteriormente en cualquier momento."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
-
-#: docbook/index.xml
 msgid ""
 "All larger pieces may be placed anywhere on the board but must touch an "
 "existing piece of the same color edge-to-edge."
@@ -492,10 +424,6 @@ msgstr ""
 "El resto de piezas más grandes se pueden colocar en cualquier lugar del "
 "tablero, pero deben tocar por la esquina una pieza ya existente del mismo "
 "color."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
 
 #: docbook/index.xml
 msgid ""
@@ -706,10 +634,6 @@ msgstr ""
 "puntos de colores."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
-
-#: docbook/index.xml
 msgid ""
 "Each dot represents a game position in which the color of the dot was to "
 "play. The dots are ordered horizontally by move number. The vertical axis "
@@ -807,10 +731,6 @@ msgstr ""
 "resultado de la partida, lo único que importa es si se ha ganado la partida,"
 " perdido o ha habido un empate. El número exacto de puntos obtenidos es algo"
 " que no se tiene en cuenta."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
-msgstr "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
 
 #: docbook/index.xml
 msgid ""

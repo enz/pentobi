@@ -25,6 +25,7 @@ class DocbookReader
     Q_OBJECT
     QML_ELEMENT
 
+    Q_PROPERTY(bool isDark MEMBER m_isDark WRITE setIsDark)
     Q_PROPERTY(QColor colorBackground MEMBER m_colorBackground WRITE setColorBackground)
     Q_PROPERTY(QColor colorLink MEMBER m_colorLink WRITE setColorLink)
     Q_PROPERTY(QColor colorText MEMBER m_colorText WRITE setColorText)
@@ -46,6 +47,8 @@ signals:
     void textChanged();
 
 private:
+    bool m_isDark = false;
+
     qreal m_textWidth = 0;
 
     qreal m_imageWidth = 0;
@@ -94,6 +97,8 @@ private:
     void setColorLink(const QColor& color);
 
     void setColorText(const QColor& color);
+
+    void setIsDark(bool isDark);
 
     void setText();
 

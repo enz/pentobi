@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-11 08:55+0200\n"
+"POT-Creation-Date: 2026-08-18 08:40+0200\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2026\n"
 "Language-Team: Vietnamese (https://app.transifex.com/markus-enzenberger/teams/89074/vi/)\n"
@@ -59,10 +59,6 @@ msgstr ""
 "ô. Polyomino là hình được tạo từ nhiều ô vuông nối cạnh nhau."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "The players alternate in placing one of their pieces on the board. The first"
 " piece of a player must cover its starting square. The starting squares are "
@@ -70,10 +66,6 @@ msgid ""
 msgstr ""
 "Các người chơi lần lượt đặt một mảnh lên bảng. Mảnh đầu tiên của mỗi người "
 "chơi phải che ô khởi đầu của mình. Các ô khởi đầu nằm ở bốn góc bảng."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -85,10 +77,6 @@ msgstr ""
 "Các mảnh tiếp theo phải đặt lên ô trống, chạm góc với ít nhất một mảnh cùng "
 "màu nhưng không được chạm cạnh với mảnh cùng màu. Mảnh mới được phép chạm "
 "cạnh với mảnh màu đối thủ."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -166,14 +154,6 @@ msgstr ""
 "(10,5) cho Cam."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid "Trigon Rules"
 msgstr "Luật Trigon"
 
@@ -189,18 +169,10 @@ msgstr ""
 "dùng mảnh polyiamond (tam giác đều) tối đa 6 tam giác, mỗi màu có 22 mảnh."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "The board also consists of triangles and is shaped like a hexagon with an "
 "edge size of nine triangles."
 msgstr "Bảng gồm các tam giác đều, hình lục giác với cạnh dài 9 tam giác."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -211,10 +183,6 @@ msgid ""
 msgstr ""
 "Có sáu điểm khởi đầu không màu, nằm giữa hàng thứ tư tính từ mỗi cạnh. Người"
 " chơi tự chọn điểm khởi đầu cho mảnh đầu tiên của mỗi màu."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -250,10 +218,6 @@ msgstr ""
 "mảnh."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid "Bonus points are not used in Junior."
 msgstr "Junior không dùng điểm thưởng."
 
@@ -271,10 +235,6 @@ msgstr ""
 "mảnh gồm tối đa 4 đoạn đường nối nhau."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "Each color has a starting intersection on the intersection of the third "
 "lines close to a corner. The first piece must touch the starting "
@@ -282,10 +242,6 @@ msgid ""
 msgstr ""
 "Mỗi màu có giao điểm khởi đầu nằm tại giao của đường thứ ba gần góc. Mảnh "
 "đầu tiên phải chạm giao điểm khởi đầu đó."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -302,10 +258,6 @@ msgstr ""
 "cùng chạm một giao điểm. Mảnh không được chồng lên nhau. Hai mối nối vuông "
 "góc của hai mảnh khác nhau có thể cùng chiếm một giao điểm mà không chồng, "
 "nhưng mối nối thẳng thì không."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -338,20 +290,12 @@ msgstr ""
 " cạnh chứa nửa ô để tạo biên thẳng."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "Each player has a set of 21 pieces, which include a subset of the pieces "
 "used in Blokus, but also some pieces that contain a half square."
 msgstr ""
 "Mỗi người chơi có 21 mảnh, gồm một phần mảnh Blokus và một số mảnh chứa nửa "
 "ô."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -364,10 +308,6 @@ msgstr ""
 "Như Blokus, ô khởi đầu ở góc, nước đầu phải che kín ô đó. Các nước sau phải "
 "chạm đỉnh (không chạm cạnh) với mảnh cùng màu. Nước đi cũng hợp lệ nếu đỉnh "
 "của nửa ô chạm cạnh mảnh cùng màu."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -412,10 +352,6 @@ msgstr ""
 " ≤5 ô, mỗi người có thêm ba mảnh 1×1 có vai trò đặc biệt."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "The 1×1 pieces may be placed anywhere on the board apart from the center of "
 "the board. The center consists of an octagon with width six and top edge "
@@ -427,20 +363,12 @@ msgstr ""
 "dùng bất kỳ lúc nào."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "All larger pieces may be placed anywhere on the board but must touch an "
 "existing piece of the same color edge-to-edge."
 msgstr ""
 "Các mảnh lớn hơn được đặt bất kỳ đâu nhưng phải chạm cạnh với mảnh cùng màu "
 "đã có."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -618,10 +546,6 @@ msgstr ""
 "thể chính. Kết quả hiển thị trong cửa sổ dạng biểu đồ chấm màu."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "Each dot represents a game position in which the color of the dot was to "
 "play. The dots are ordered horizontally by move number. The vertical axis "
@@ -703,10 +627,6 @@ msgid ""
 msgstr ""
 "Sau khi ván kết thúc, elo của bạn sẽ được cập nhật dựa trên kết quả và cấp "
 "độ máy. Kết quả chỉ xét thắng–thua–hòa, không xét chênh lệch điểm."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""

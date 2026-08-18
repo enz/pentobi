@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-11 08:55+0200\n"
+"POT-Creation-Date: 2026-08-18 08:40+0200\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2026\n"
 "Language-Team: Russian (https://app.transifex.com/markus-enzenberger/teams/89074/ru/)\n"
@@ -61,10 +61,6 @@ msgstr ""
 "построенная из множества квадратов, соединенных по краям."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "The players alternate in placing one of their pieces on the board. The first"
 " piece of a player must cover its starting square. The starting squares are "
@@ -73,10 +69,6 @@ msgstr ""
 "Игроки по очереди кладут одну из своих фигур на доску. Первая фигура игрока "
 "должна закрывать свою стартовую клетку. Стартовые клетки расположены по "
 "углам доски."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_classic.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -89,10 +81,6 @@ msgstr ""
 "чтобы новая фигура касалась хотя бы одной части своего цвета угол к углу, но"
 " не касалась какой-либо части своего цвета по краям. Новая фишка может "
 "касаться краев фишек цвета соперника."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_classic.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -176,14 +164,6 @@ msgstr ""
 "Оранжевого."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_duo.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_duo.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid "Trigon Rules"
 msgstr "Правила для игры Тригон"
 
@@ -202,20 +182,12 @@ msgstr ""
 "равносторонних треугольников, соединенных по краям."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_trigon.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "The board also consists of triangles and is shaped like a hexagon with an "
 "edge size of nine triangles."
 msgstr ""
 "Доска также состоит из треугольников и имеет форму шестиугольника с ребром "
 "размером в девять треугольников."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_trigon.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -227,10 +199,6 @@ msgstr ""
 "На доске есть шесть начальных точек, каждая из которых расположена в "
 "середине четвертого ряда от каждого края. Начальные точки не окрашены, и "
 "игроки могут свободно выбирать начальную точку для первой части цвета."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_trigon.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -268,10 +236,6 @@ msgstr ""
 " размера фигур из 5 элементов, и игроки получают два варианта из полимино."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_junior.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid "Bonus points are not used in Junior."
 msgstr "Бонусные баллы не используются в Юниор."
 
@@ -290,10 +254,6 @@ msgstr ""
 "состоят из четырех линейных сигментов."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_nexos.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "Each color has a starting intersection on the intersection of the third "
 "lines close to a corner. The first piece must touch the starting "
@@ -301,10 +261,6 @@ msgid ""
 msgstr ""
 "Каждый цвет имеет начальное прикрепление на пересечении трех линий, близких "
 "к углу. Первая часть должна касаться начального пересечения."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_nexos.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -323,10 +279,6 @@ msgstr ""
 "перекрываться. Соединения между сегментами внутри фигуры таковы, что два "
 "прямоугольных соединения разных фигур могут покрывать одно и то же "
 "пересечение без перекрытия, а прямые соединения - нет."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_nexos.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -361,20 +313,12 @@ msgstr ""
 "также содержат полуквадраты, представляющие собой прямые линии."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_gembloq.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "Each player has a set of 21 pieces, which include a subset of the pieces "
 "used in Blokus, but also some pieces that contain a half square."
 msgstr ""
 "У каждого игрока есть набор из 21 фигуры, который включает подмножество "
 "фигур, используемых в Блокус, а также фигуры, содержащие половину квадрата."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_gembloq.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -389,10 +333,6 @@ msgstr ""
 " касаться фигуры цвета игрока в вершине, но не от края до края. Также "
 "допустимы ходы, если вершина полуквадрата касается ребра фишки того же "
 "цвета."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_gembloq.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -441,10 +381,6 @@ msgstr ""
 "себя по три фигуры 1×1 на игрока, которые играют особую роль."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"pieces_callisto.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "The 1×1 pieces may be placed anywhere on the board apart from the center of "
 "the board. The center consists of an octagon with width six and top edge "
@@ -457,20 +393,12 @@ msgstr ""
 "может быть сыграна в любое время позже."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"board_callisto.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "All larger pieces may be placed anywhere on the board but must touch an "
 "existing piece of the same color edge-to-edge."
 msgstr ""
 "Все более крупные части могут быть размещены в любом месте доски, но должны "
 "касаться существующей части того же цвета от края до края."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"position_callisto.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""
@@ -667,10 +595,6 @@ msgstr ""
 "отображается в окне с диаграммой из цветных точек."
 
 #: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"analysis.png\"/></imageobject>"
-msgstr ""
-
-#: docbook/index.xml
 msgid ""
 "Each dot represents a game position in which the color of the dot was to "
 "play. The dots are ordered horizontally by move number. The vertical axis "
@@ -761,10 +685,6 @@ msgstr ""
 "игры и уровня компьютера. Для результата игры имеет значение только то, была"
 " ли игра выиграна, проиграна или была ничья. Точное количество очков не "
 "имеет значения."
-
-#: docbook/index.xml
-msgid "<imageobject><imagedata fileref=\"rating.png\"/></imageobject>"
-msgstr ""
 
 #: docbook/index.xml
 msgid ""

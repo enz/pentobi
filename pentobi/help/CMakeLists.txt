@@ -6,6 +6,7 @@ set(DOCBOOK_SRC
     docbook/analysis.png
     docbook/board_callisto.png
     docbook/board_classic.png
+    docbook/board_classic_dark.png
     docbook/board_duo.png
     docbook/board_gembloq.png
     docbook/board_nexos.png

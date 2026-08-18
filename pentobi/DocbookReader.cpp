@@ -191,6 +191,14 @@ QDomNode DocbookReader::handleNode(const QDomNode& node, int headerLevel,
         text.append("</i>"_L1);
         return node;
     }
+    if (name == "imageobject"_L1)
+
+    {
+        auto role = elem.attribute("role"_L1);
+        if ((role == "light"_L1 && m_isDark)
+            || (role == "dark"_L1 && ! m_isDark))
+            return node;
+    }
     if (name == "imagedata"_L1)
     {
         text.append("<div style=\"margin-left:"_L1);
@@ -260,6 +268,12 @@ void DocbookReader::setColorLink(const QColor& color)
 void DocbookReader::setColorText(const QColor& color)
 {
     m_colorText = color;
+    setText();
+}
+
+void DocbookReader::setIsDark(bool isDark)
+{
+    m_isDark = isDark;
     setText();
 }
 

@@ -53,6 +53,7 @@ ScrollView {
     DocbookReader {
         id: docbookReader
 
+        isDark: theme.isDark
         colorBackground: theme.colorBackground
         colorText: theme.colorText
         colorLink: theme.colorLink
