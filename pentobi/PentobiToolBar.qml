@@ -9,17 +9,11 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import "main.js" as Logic
 
-ToolBar {
+PentobiToolBarBase {
     function clickMenuButton() {
         menuButton.clicked()
         menu.item.currentIndex = 0
     }
-
-    // We don't want the toolbar to be visually separated from the main window
-    // content. Also, Material.Dark uses a wrong toolbar color (Qt 6.11).
-    // However this negatively affects Basic style (toolbutton background
-    // doesn't match toolbar)
-    Component.onCompleted: if (globalStyle != "Basic") background = null
 
     RowLayout {
         id: rowLayout
