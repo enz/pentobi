@@ -11,6 +11,8 @@ import QtQuick.Window
 Window {
     id: root
 
+    property bool isDark
+
     function open() {
         width = settings.width
         height = settings.height
@@ -46,6 +48,7 @@ Window {
     HelpViewer {
         id: helpViewer
 
+        isDark: root.isDark
         anchors.fill: parent
         onCloseClicked: root.hide()
     }

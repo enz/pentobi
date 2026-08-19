@@ -14,7 +14,7 @@ Button {
     focusPolicy: Qt.NoFocus
     display: AbstractButton.IconOnly
     icon {
-        source: "qrc:/qt/qml/PentobiGui/icons/%1/%2.svg".arg(theme.isDark ? "dark" : "light").arg(iconSource)
+        source: "qrc:/qt/qml/PentobiGui/icons/%1/%2.svg".arg(isDark ? "dark" : "light").arg(iconSource)
         color: "transparent"
         width: 16
         height: 16

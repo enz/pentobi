@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/PentobiToolBarBase.qml
+/** @file pentobi/PentobiApplicationBase.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -7,11 +7,8 @@
 import QtQuick
 import QtQuick.Controls
 
-/** Style-dependent functionality of PentobiToolBar.
+/** Style-dependent functionality of PentobiApplication.
     Use file selectors to override. */
-ToolBar {
-
-    // By default, we don't want the toolbar to be visually separated from the
-    // main window content. This may have unwanted side effects in some styles.
-    background: Item { }
+ApplicationWindow {
+    property bool isDark: Application.styleHints.colorScheme === Qt.Dark
 }

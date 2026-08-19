@@ -14,6 +14,9 @@ endif()
 qt_add_qml_module(pentobi
     URI PentobiGui
     QML_FILES
+    +Basic/PentobiToolBarBase.qml
+    +Fusion/PentobiApplicationBase.qml
+    +Material/PentobiApplicationBase.qml
     AboutDialog.qml
     AnalyzeDialog.qml
     AnalyzeGame.qml
@@ -41,7 +44,6 @@ qt_add_qml_module(pentobi
     ImageSaveDialog.qml
     InitialRatingDialog.qml
     LineSegment.qml
-    Main.qml
     MessageDialog.qml
     MenuComputer.qml
     MenuEdit.qml
@@ -55,13 +57,14 @@ qt_add_qml_module(pentobi
     NavigationButtons.qml
     NavigationPanel.qml
     OpenDialog.qml
+    PentobiApplication.qml
+    PentobiApplicationBase.qml
     PentobiBusyIndicator.qml
     PentobiButton.qml
     PentobiDialog.qml
     PentobiMenu.qml
     PentobiToolBar.qml
     PentobiToolBarBase.qml
-    +Basic/PentobiToolBarBase.qml
     PentobiToolButton.qml
     PieceBase.qml
     PieceCallisto.qml
@@ -110,7 +113,6 @@ qt_add_qml_module(pentobi
     RatingModel.cpp
     RecentFiles.h
     RecentFiles.cpp
-    resources.qrc
     "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
 

@@ -13,18 +13,6 @@ import QtQuick
 Item {
     property bool colorblind
 
-    property bool isDark: {
-        // globalStyle is a context property set in Main.cpp
-        if (globalStyle === "Material")
-            // styleHints don't work in Material (Qt 6.11) we fixed dark mode
-            // in qtquickcontrols2.conf
-            return true
-        if (globalStyle === "Fusion")
-            // styleHints is broken in Fusion (QTBUG-148413)
-            return palette.window.hslLightness < 0.5
-        return Application.styleHints.colorScheme == Qt.Dark
-    }
-
     /** @name Colors for board and piece elements.
         Each color has several versions to paint raised or sunken borders. The
         first color is the base color, the second a darker version, the third

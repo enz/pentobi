@@ -16,7 +16,7 @@ ToolButton {
     display: AbstractButton.IconOnly
     icon {
         // org.kde.breeze needs absolute path (KDE bug 524343)
-        source: "qrc:/qt/qml/PentobiGui/icons/%1/%2.svg".arg(theme.isDark ? "dark" : "light").arg(iconSource)
+        source: "qrc:/qt/qml/PentobiGui/icons/%1/%2.svg".arg(isDark ? "dark" : "light").arg(iconSource)
         // We don't use automatic icon colors because the icons have a high
         // contrast in most styles that distracts from the Blokus board.
         // Also icon coloring is broken in org.kde.breeze (KDE bug 524344).

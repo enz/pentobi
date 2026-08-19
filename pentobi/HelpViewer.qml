@@ -9,7 +9,9 @@ import QtQuick
 import QtQuick.Controls.Basic
 
 ScrollView {
-    id: scrollView
+    id: root
+
+    property bool isDark
 
     signal closeClicked()
 
@@ -53,7 +55,7 @@ ScrollView {
     DocbookReader {
         id: docbookReader
 
-        isDark: theme.isDark
+        isDark: root.isDark
         colorBackground: theme.colorBackground
         colorText: theme.colorText
         colorLink: theme.colorLink

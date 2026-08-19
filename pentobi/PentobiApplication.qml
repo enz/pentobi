@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/Main.qml
+/** @file pentobi/PentobiApplication.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -10,7 +10,7 @@ import QtQuick.Controls
 import QtQuick.Window
 import "main.js" as Logic
 
-ApplicationWindow {
+PentobiApplicationBase {
     id: rootWindow
 
     property bool computerPlays0
@@ -203,12 +203,16 @@ ApplicationWindow {
         Component {
             id: helpWindowComponent
 
-            HelpWindow { }
+            HelpWindow {
+                isDark: rootWindow.isDark
+            }
         }
         Component {
             id: helpDialogComponent
 
-            HelpDialog { }
+            HelpDialog {
+                isDark: rootWindow.isDark
+            }
         }
     }
 

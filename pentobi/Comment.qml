@@ -36,7 +36,7 @@ Item {
         border.color: {
             if (globalStyle != "Basic")
                 return "transparent"
-            if (theme.isDark)
+            if (isDark)
                 return textArea.activeFocus ? "#0D69F2" : "#626262"
             else
                 return textArea.activeFocus ? "#0066FF" : "#BDBDBD"

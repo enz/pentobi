@@ -10,6 +10,10 @@ import QtQuick.Controls.Basic
 
 // Dialog used instead of a window for showing help in mobile view
 Dialog {
+    id: root
+
+    property bool isDark
+
     width: rootWindow.contentItem.width
     height: rootWindow.contentItem.height
     padding: 0
@@ -22,6 +26,7 @@ Dialog {
         HelpViewer {
             id: helpViewer
 
+            isDark: root.isDark
             anchors.fill: parent
             onCloseClicked: close()
         }
