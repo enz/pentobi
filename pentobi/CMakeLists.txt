@@ -14,7 +14,7 @@ endif()
 qt_add_qml_module(pentobi
     URI PentobiGui
     QML_FILES
-    +Basic/CommentBackground.qml
+    +Basic/CommentBase.qml
     +Basic/PentobiToolBarBase.qml
     +Fusion/PentobiApplicationBase.qml
     +Material/PentobiApplicationBase.qml
@@ -31,7 +31,7 @@ qt_add_qml_module(pentobi
     ButtonClose.qml
     ButtonOk.qml
     Comment.qml
-    CommentBackground.qml
+    CommentBase.qml
     ComputerDialog.qml
     DialogButtonBoxOkCancel.qml
     DialogButtonBoxClose.qml

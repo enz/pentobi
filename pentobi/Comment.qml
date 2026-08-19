@@ -7,14 +7,13 @@
 import QtQuick
 import QtQuick.Controls
 
-Item {
+CommentBase {
     property alias hasFocus: textArea.activeFocus
 
     function dropFocus() { textArea.focus = false }
 
-    CommentBackground {
-        drawFocus: textArea.activeFocus
-    }
+    drawFocus: textArea.activeFocus
+
     ScrollView {
         anchors.fill: parent
         ScrollBar.vertical.minimumSize: 0.15

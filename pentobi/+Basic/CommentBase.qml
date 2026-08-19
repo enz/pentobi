@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/+Basic/CommentBackground.qml
+/** @file pentobi/+Basic/CommentBase.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -11,7 +11,6 @@ import QtQuick
 Rectangle {
     property bool drawFocus
 
-    anchors.fill: parent
     color: "transparent"
     border.width: 1
     border.color: {

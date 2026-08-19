@@ -1,13 +1,15 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/CommentBackground.qml
+/** @file pentobi/CommentBase.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 import QtQuick
 
-/** Needed to work around a TextArea bug in Basic style.
-    See +Basic/CommentBackground.qml */
+/** Style-dependent functionality of PentobiApplication.
+    Use file selectors to override. */
 Item {
+    /** Needed for workarounds in buggy styles where we need to draw our own
+        background. Bound to activeFocus of the TextArea oin Comment. */
     property bool drawFocus
 }
