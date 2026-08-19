@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/+Material/PentobiApplicationBase.qml
+/** @file pentobi/+Material/MainBase.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

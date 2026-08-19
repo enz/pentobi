@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/PentobiApplication.qml
+/** @file pentobi/Main.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
@@ -10,7 +10,7 @@ import QtQuick.Controls
 import QtQuick.Window
 import "main.js" as Logic
 
-PentobiApplicationBase {
+MainBase {
     id: rootWindow
 
     property bool computerPlays0

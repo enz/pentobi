@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/+Fusion/PentobiApplicationBase.qml
+/** @file pentobi/+Fusion/MainBase.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------

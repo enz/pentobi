@@ -16,8 +16,8 @@ qt_add_qml_module(pentobi
     QML_FILES
     +Basic/CommentBase.qml
     +Basic/PentobiToolBarBase.qml
-    +Fusion/PentobiApplicationBase.qml
-    +Material/PentobiApplicationBase.qml
+    +Fusion/MainBase.qml
+    +Material/MainBase.qml
     +Material/PentobiMenuBase.qml
     +org.kde.breeze/PentobiToolButtonBase.qml
     +org.kde.breeze/PentobiButtonBase.qml
@@ -49,6 +49,8 @@ qt_add_qml_module(pentobi
     ImageSaveDialog.qml
     InitialRatingDialog.qml
     LineSegment.qml
+    Main.qml
+    MainBase.qml
     MessageDialog.qml
     MenuComputer.qml
     MenuEdit.qml
@@ -62,8 +64,6 @@ qt_add_qml_module(pentobi
     NavigationButtons.qml
     NavigationPanel.qml
     OpenDialog.qml
-    PentobiApplication.qml
-    PentobiApplicationBase.qml
     PentobiBusyIndicator.qml
     PentobiButton.qml
     PentobiButtonBase.qml

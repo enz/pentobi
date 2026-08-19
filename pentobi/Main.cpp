@@ -200,7 +200,7 @@ int main(int argc, char *argv[])
                          &QQmlApplicationEngine::objectCreationFailed,
                          &app, []() { QCoreApplication::exit(1); },
                          Qt::QueuedConnection);
-        engine.loadFromModule("PentobiGui"_L1, "PentobiApplication"_L1);
+        engine.loadFromModule("PentobiGui"_L1, "Main"_L1);
         return app.exec();
     }
     catch (const QString& s)
