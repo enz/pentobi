@@ -189,7 +189,6 @@ int main(int argc, char *argv[])
                          QQuickStyle::name().toLocal8Bit().constData(),
                          " style");
         auto ctx = engine.rootContext();
-        ctx->setContextProperty("globalStyle"_L1, QQuickStyle::name());
         ctx->setContextProperty("initialFile"_L1, initialFile);
         ctx->setContextProperty("isDesktop"_L1, QVariant(isDesktop));
 #ifdef QT_DEBUG

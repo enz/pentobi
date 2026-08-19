@@ -1,12 +1,12 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/+Basic/PentobiToolBarBase.qml
+/** @file pentobi/PentobiMenuBase.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 import QtQuick.Controls
 
-ToolBar {
-    // Don't use empty toolbar background because ToolBar and ToolButtons
-    // have gray background in Basic style (Qt. 6.11)
+/** Style-dependent functionality of PentobiMenu.
+    Use file selectors to override. */
+Menu {
 }

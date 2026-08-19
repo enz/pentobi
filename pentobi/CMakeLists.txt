@@ -14,9 +14,13 @@ endif()
 qt_add_qml_module(pentobi
     URI PentobiGui
     QML_FILES
+    +Basic/CommentBackground.qml
     +Basic/PentobiToolBarBase.qml
     +Fusion/PentobiApplicationBase.qml
     +Material/PentobiApplicationBase.qml
+    +Material/PentobiMenuBase.qml
+    +org.kde.breeze/PentobiToolButtonBase.qml
+    +org.kde.breeze/PentobiButtonBase.qml
     AboutDialog.qml
     AnalyzeDialog.qml
     AnalyzeGame.qml
@@ -27,6 +31,7 @@ qt_add_qml_module(pentobi
     ButtonClose.qml
     ButtonOk.qml
     Comment.qml
+    CommentBackground.qml
     ComputerDialog.qml
     DialogButtonBoxOkCancel.qml
     DialogButtonBoxClose.qml
@@ -61,11 +66,14 @@ qt_add_qml_module(pentobi
     PentobiApplicationBase.qml
     PentobiBusyIndicator.qml
     PentobiButton.qml
+    PentobiButtonBase.qml
     PentobiDialog.qml
     PentobiMenu.qml
+    PentobiMenuBase.qml
     PentobiToolBar.qml
     PentobiToolBarBase.qml
     PentobiToolButton.qml
+    PentobiToolButtonBase.qml
     PieceBase.qml
     PieceCallisto.qml
     PieceClassic.qml

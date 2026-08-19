@@ -12,6 +12,9 @@ Item {
 
     function dropFocus() { textArea.focus = false }
 
+    CommentBackground {
+        drawFocus: textArea.activeFocus
+    }
     ScrollView {
         anchors.fill: parent
         ScrollBar.vertical.minimumSize: 0.15
@@ -26,22 +29,5 @@ Item {
             onTextChanged: gameModel.comment = text
             Keys.onTabPressed: focus = false
         }
-    }
-    // Workaround for QTBUG-149233 (TextArea background invisible in Basic
-    // style)
-    Rectangle {
-        anchors.fill: parent
-        color: "transparent"
-        border.width: 1
-        border.color: {
-            if (globalStyle != "Basic")
-                return "transparent"
-            if (isDark)
-                return textArea.activeFocus ? "#0D69F2" : "#626262"
-            else
-                return textArea.activeFocus ? "#0066FF" : "#BDBDBD"
-        }
-        radius: 2
-        z: 1
     }
 }

@@ -7,7 +7,7 @@
 import QtQuick
 import QtQuick.Controls
 
-Menu {
+PentobiMenuBase {
     // Width in font-size units
     property real relativeWidth: 23
 
@@ -17,8 +17,4 @@ Menu {
     closePolicy: isDesktop ?
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                    : Popup.CloseOnEscape | Popup.CloseOnPressOutside
-    // Material style highlights first item in menu (see also QTBUG-69541)
-    onAboutToShow:
-        if (globalStyle === "Material" && ! isDesktop)
-            currentIndex = -1
 }
