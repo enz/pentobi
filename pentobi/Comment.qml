@@ -14,7 +14,7 @@ CommentBase {
 
     drawFocus: textArea.activeFocus
 
-    ScrollView {
+    PentobiScrollView {
         anchors.fill: parent
         ScrollBar.vertical.minimumSize: 0.15
 

@@ -8,7 +8,7 @@ import QtQuick
 // Enforce Basic style to avoid frame around TextArea in some styles
 import QtQuick.Controls.Basic
 
-ScrollView {
+PentobiScrollView {
     id: root
 
     property bool isDark
