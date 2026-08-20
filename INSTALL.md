@@ -12,7 +12,7 @@ Building Pentobi requires the following tools and libraries:
 * [GNU gettext](https://www.gnu.org/software/gettext/) (>=0.23)
 * [LibRsvg](https://wiki.gnome.org/Projects/LibRsvg)
 
-In Debian (Forky), they can be installed with the command
+In Debian, they can be installed with the command
 ```
 sudo apt install cmake g++ gettext librsvg2-bin make \
   qt6-declarative-dev qt6-tools-dev
