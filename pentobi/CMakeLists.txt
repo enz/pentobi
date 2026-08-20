@@ -19,7 +19,6 @@ qt_add_qml_module(pentobi
     +Fusion/MainBase.qml
     +Fusion/PentobiScrollView.qml
     +Material/MainBase.qml
-    +Material/PentobiMenuBase.qml
     +org.kde.breeze/PentobiToolButtonBase.qml
     +org.kde.breeze/PentobiButtonBase.qml
     AboutDialog.qml
@@ -63,7 +62,6 @@ qt_add_qml_module(pentobi
     PentobiButtonBase.qml
     PentobiDialog.qml
     PentobiMenu.qml
-    PentobiMenuBase.qml
     PentobiScrollView.qml
     PentobiToolBar.qml
     PentobiToolBarBase.qml
@@ -121,40 +119,44 @@ qt_add_qml_module(pentobi
 
     RESOURCES
     icon/pentobi-128.svg
-    icons/dark/pentobi-newgame.svg
-    icons/dark/pentobi-undo.svg
-    icons/dark/pentobi-previous-variation.svg
-    icons/dark/pentobi-play.svg
-    icons/dark/pentobi-menu.svg
-    icons/dark/pentobi-rated-game.svg
-    icons/dark/pentobi-end.svg
-    icons/dark/pentobi-backward.svg
-    icons/dark/pentobi-computer-colors.svg
-    icons/dark/pentobi-beginning.svg
-    icons/dark/pentobi-forward10.svg
-    icons/dark/pentobi-next-variation.svg
-    icons/dark/pentobi-stop.svg
+    icons/dark/menu-backward.svg
+    icons/dark/menu-forward.svg
     icons/dark/pentobi-backward10.svg
+    icons/dark/pentobi-backward.svg
+    icons/dark/pentobi-beginning.svg
+    icons/dark/pentobi-computer-colors.svg
+    icons/dark/pentobi-end.svg
+    icons/dark/pentobi-forward10.svg
     icons/dark/pentobi-forward.svg
-    icons/light/pentobi-newgame.svg
-    icons/light/pentobi-undo.svg
-    icons/light/pentobi-previous-variation.svg
-    icons/light/pentobi-play.svg
-    icons/light/pentobi-menu.svg
-    icons/light/pentobi-rated-game.svg
-    icons/light/pentobi-end.svg
-    icons/light/pentobi-backward.svg
-    icons/light/pentobi-computer-colors.svg
-    icons/light/pentobi-beginning.svg
-    icons/light/pentobi-forward10.svg
-    icons/light/pentobi-next-variation.svg
-    icons/light/pentobi-stop.svg
+    icons/dark/pentobi-menu.svg
+    icons/dark/pentobi-newgame.svg
+    icons/dark/pentobi-next-variation.svg
+    icons/dark/pentobi-play.svg
+    icons/dark/pentobi-previous-variation.svg
+    icons/dark/pentobi-rated-game.svg
+    icons/dark/pentobi-stop.svg
+    icons/dark/pentobi-undo.svg
+    icons/light/menu-backward.svg
+    icons/light/menu-forward.svg
     icons/light/pentobi-backward10.svg
+    icons/light/pentobi-backward.svg
+    icons/light/pentobi-beginning.svg
+    icons/light/pentobi-computer-colors.svg
+    icons/light/pentobi-end.svg
+    icons/light/pentobi-forward10.svg
     icons/light/pentobi-forward.svg
-    piece-manipulator.svg
+    icons/light/pentobi-menu.svg
+    icons/light/pentobi-newgame.svg
+    icons/light/pentobi-next-variation.svg
+    icons/light/pentobi-play.svg
+    icons/light/pentobi-previous-variation.svg
+    icons/light/pentobi-rated-game.svg
+    icons/light/pentobi-stop.svg
+    icons/light/pentobi-undo.svg
     piece-manipulator-dark.svg
-    piece-manipulator-legal.svg
     piece-manipulator-legal-dark.svg
+    piece-manipulator-legal.svg
+    piece-manipulator.svg
 )
 
 qt_add_translations(pentobi

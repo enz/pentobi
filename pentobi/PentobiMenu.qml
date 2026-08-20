@@ -7,7 +7,7 @@
 import QtQuick
 import QtQuick.Controls
 
-PentobiMenuBase {
+Menu {
     // Width in font-size units
     property real relativeWidth: 23
 
@@ -17,4 +17,5 @@ PentobiMenuBase {
     closePolicy: isDesktop ?
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                    : Popup.CloseOnEscape | Popup.CloseOnPressOutside
+    onAboutToShow: currentIndex = -1
 }

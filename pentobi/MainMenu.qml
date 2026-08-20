@@ -5,16 +5,135 @@
 //-----------------------------------------------------------------------------
 
 import QtQml.Models
+import QtQuick
 import QtQuick.Controls
 import "main.js" as Logic
 
-PentobiMenu {
-    relativeWidth: 12
-    closePolicy: Popup.CloseOnPressOutsideParent | Popup.CloseOnEscape
+/** Main menu.
+    Reuses Controls.Menu (Popup) and Controls.MenuItem (Item) where possible
+    without letting Qt do the submenu positioning to avoid covering the menu
+    button if cascade is used. Also adds a navigation header to submenus. */
+Item {
+    id: root
 
-    PentobiMenu {
+    property real popupY
+    property bool isOpen:
+        menuMain.opened
+        || menuGame.opened
+        || menuRecent.opened
+        || menuGo.opened
+        || menuEdit.opened
+        || menuView.opened
+        || menuComputer.opened
+        || menuTools.opened
+        || menuHelp.opened
+    property alias relativeWidth: menuMain.relativeWidth
+
+    function closeMenu() {
+        menuMain.close()
+        menuGame.close()
+        menuRecent.close()
+        menuGo.close()
+        menuEdit.close()
+        menuView.close()
+        menuComputer.close()
+        menuTools.close()
+        menuHelp.close()
+    }
+
+    function popupMenu() {
+        menuMain.popup(0, popupY)
+    }
+
+    component MenuPage: PentobiMenu {
+        relativeWidth: root.relativeWidth
+        closePolicy: Popup.CloseOnEscape
+    }
+    component Header: Item {
+        property alias text: label.text
+        property MenuPage parentMenu
+
+        implicitWidth: Math.max(button.implicitWidth, label.implicitWidth)
+        implicitHeight: Math.max(button.implicitHeight, label.implicitHeight)
+
+        PentobiToolButton {
+            id: button
+
+            iconSource: "menu-backward"
+            anchors {
+                left: parent.left
+                verticalCenter: parent.verticalCenter
+            }
+            onClicked: if (parentMenu) parentMenu.popup(0, popupY)
+
+        }
+        Label {
+            id: label
+
+            anchors { centerIn: parent }
+            font.bold: true
+        }
+    }
+    component Arrow: Image {
+
+        source: "qrc:/qt/qml/PentobiGui/icons/%1/menu-forward.svg".arg(isDark ? "dark" : "light")
+        width: 16
+        height: 16
+    }
+    component SubMenu: MenuItem {
+        arrow: Arrow {
+            x: parent.width - 1.5 * width
+            y: (parent.height - height)/ 2
+        }
+    }
+
+
+    MenuPage {
+        id: menuMain
+
+        SubMenu {
+            text: menuGame.title
+            onTriggered: menuGame.popup(0, popupY)
+        }
+        SubMenu {
+            text: menuGo.title
+            onTriggered: menuGo.popup(0, popupY)
+        }
+        SubMenu {
+            text: menuEdit.title
+            onTriggered: menuEdit.popup(0, popupY)
+        }
+        SubMenu {
+            text: menuView.title
+            onTriggered: menuView.popup(0, popupY)
+        }
+        SubMenu {
+            text: menuComputer.title
+            onTriggered: menuComputer.popup(0, popupY)
+        }
+        SubMenu {
+            text: menuTools.title
+            onTriggered: menuTools.popup(0, popupY)
+        }
+        SubMenu {
+            text: menuHelp.title
+            onTriggered: menuHelp.popup(0, popupY)
+        }
+        MenuSeparator { }
+        MenuItem {
+            action: actionQuit
+        }
+    }
+    MenuPage {
+        id: menuGame
+
         title: qsTr("Game")
 
+        Header {
+            text: menuGame.title
+            parentMenu: menuMain
+        }
+        MenuSeparator { }
         MenuItem {
             action: actionNew
         }
@@ -40,43 +159,11 @@ PentobiMenu {
         MenuItem {
             action: actionOpen
         }
-        PentobiMenu {
-            id: root
+        SubMenu {
+            text: menuRecent.title
 
-            title: qsTr("Open Recent")
-            relativeWidth: 19
-            enabled: instantiator.count > 0
-
-            Instantiator {
-                id: instantiator
-
-                model: recentFiles.entries
-                delegate: MenuItem {
-                    text: {
-                        var text = modelData.displayName
-                        if (! text || text === "") {
-                            text = modelData.file
-                            text = text.substring(text.lastIndexOf("/") + 1)
-                        }
-                        text = text.replace(/\.blksgf$/i, "")
-                        return text
-                    }
-                    onTriggered:
-                        Logic.openRecentFile(modelData.file, modelData.displayName)
-                }
-                onObjectAdded: (index, obj) => root.insertItem(index, obj)
-                onObjectRemoved: (index, obj) => root.removeItem(obj)
-            }
-            MenuSeparator { }
-            MenuItem {
-                //: Menu item for clearing the recent files list
-                text: qsTr("Clear List")
-                // Call recentFiles.clear() after menu is closed because it modifies
-                // the menu and otherwise the menu stays visible (Qt 5.15.1)
-                onTriggered: Qt.callLater(function() {
-                    recentFiles.clear()
-                })
-            }
+            enabled: menuRecent.enabled
+            onTriggered: menuRecent.popup(0, popupY)
         }
         MenuItem {
             action: actionSave
@@ -89,14 +176,55 @@ PentobiMenu {
             text: qsTr("Export Image…")
             onTriggered: exportImageDialog.open()
         }
+    }
+    MenuPage {
+        id: menuRecent
+
+        title: qsTr("Open Recent")
+        enabled: instantiator.count > 0
+
+        Header {
+            text: menuRecent.title
+            parentMenu: menuGame
+        }
+        MenuSeparator { }
+        Instantiator {
+            id: instantiator
+
+            model: recentFiles.entries
+            delegate: MenuItem {
+                text: {
+                    var text = modelData.displayName
+                    if (! text || text === "") {
+                        text = modelData.file
+                        text = text.substring(text.lastIndexOf("/") + 1)
+                    }
+                    text = text.replace(/\.blksgf$/i, "")
+                    return text
+                }
+                onTriggered:
+                    Logic.openRecentFile(modelData.file, modelData.displayName)
+            }
+            onObjectAdded: (index, obj) => menuRecent.insertItem(index + 2, obj)
+            onObjectRemoved: (index, obj) => menuRecent.removeItem(obj)
+        }
         MenuSeparator { }
         MenuItem {
-            action: actionQuit
+            //: Menu item for clearing the recent files list
+            text: qsTr("Clear List")
+            onTriggered: recentFiles.clear()
         }
     }
-    PentobiMenu {
+    MenuPage {
+        id: menuGo
+
         title: qsTr("Go")
 
+        Header {
+            text: menuGo.title
+            parentMenu: menuMain
+        }
+        MenuSeparator { }
         MenuItem {
             action: actionGotoMove
         }
@@ -111,9 +239,16 @@ PentobiMenu {
             action: actionNextComment
         }
     }
-    PentobiMenu {
+    MenuPage {
+        id: menuEdit
+
         title: qsTr("Edit")
 
+        Header {
+            text: menuEdit.title
+            parentMenu: menuMain
+        }
+        MenuSeparator { }
         MenuItem {
             text: qsTr("Annotation…")
             enabled: gameModel.moveNumber > 0
@@ -196,9 +331,16 @@ PentobiMenu {
             }
         }
     }
-    PentobiMenu {
+    MenuPage {
+        id: menuView
+
         title: qsTr("View")
 
+        Header {
+            text: menuView.title
+            parentMenu: menuMain
+        }
+        MenuSeparator { }
         MenuItem {
             text: qsTr("Appearance")
             onTriggered: appearanceDialog.open()
@@ -210,9 +352,16 @@ PentobiMenu {
             action: actionFullscreen
         }
     }
-    PentobiMenu {
+    MenuPage {
+        id: menuComputer
+
         title: qsTr("Computer")
 
+        Header {
+            text: menuComputer.title
+            parentMenu: menuMain
+        }
+        MenuSeparator { }
         MenuItem {
             action: actionComputerSettings
         }
@@ -226,9 +375,16 @@ PentobiMenu {
             action: actionStop
         }
     }
-    PentobiMenu {
+    MenuPage {
+        id: menuTools
+
         title: qsTr("Tools")
 
+        Header {
+            text: menuTools.title
+            parentMenu: menuMain
+        }
+        MenuSeparator { }
         MenuItem {
             text: qsTr("Rating")
             onTriggered: Logic.rating()
@@ -253,9 +409,16 @@ PentobiMenu {
             }
         }
     }
-    PentobiMenu {
+    MenuPage {
+        id: menuHelp
+
         title: qsTr("Help")
 
+        Header {
+            text: menuHelp.title
+            parentMenu: menuMain
+        }
+        MenuSeparator { }
         MenuItem {
             action: actionHelp
         }
@@ -265,4 +428,3 @@ PentobiMenu {
         }
     }
 }
-

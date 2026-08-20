@@ -12,7 +12,6 @@ import "main.js" as Logic
 PentobiToolBarBase {
     function clickMenuButton() {
         menuButton.clicked()
-        menu.item.currentIndex = 0
     }
 
     RowLayout {
@@ -215,34 +214,23 @@ PentobiToolBarBase {
             id: menuButton
 
             iconSource: "pentobi-menu"
-            down: isDesktop && (pressed || (menu.item && menu.item.opened))
+            checkable: true
+            checked: menu.isOpen
             onClicked: {
-                if (! menu.item)
-                    menu.sourceComponent = menuComponent
-                if (menu.item.opened)
-                    menu.item.close()
+                if (menu.isOpen)
+                    menu.closeMenu()
                 else {
                     gameView.dropCommentFocus()
                     ToolTip.toolTip.hide()
-                    menu.item.popup(0, isAndroid ? 0 : height)
+                    menu.popupMenu()
                 }
             }
             ToolTip.text: qsTr("Open menu")
 
-            Loader {
+            MainMenu {
                 id: menu
 
-                // Having the loader fill the button together with
-                // CloseOnPressOutsideParent and the function used in onClicked
-                // seems to be the only way to make a click on the button close
-                // the menu if it is already open. Is there a better way?
-                anchors.fill: parent
-
-                Component {
-                    id: menuComponent
-
-                    MainMenu { }
-                }
+                popupY: menuButton.height
             }
         }
     }

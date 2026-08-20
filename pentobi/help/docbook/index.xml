@@ -745,14 +745,6 @@ multiple of the number of board columns in the current game variant.
 </para>
 </listitem>
 </varlistentry>
-<varlistentry>
-<term><guimenuitem>Quit</guimenuitem></term>
-<listitem>
-<para>
-Quit Pentobi.
-</para>
-</listitem>
-</varlistentry>
 </variablelist>
 </sect1>
 <sect1>
