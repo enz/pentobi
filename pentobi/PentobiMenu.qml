@@ -11,10 +11,10 @@ Menu {
     // Width in font-size units
     property real relativeWidth: 23
 
-    width: Math.min(font.pixelSize * (isDesktop ? relativeWidth : 23),
+    width: Math.min(font.pixelSize * (isMobile ? 23 : relativeWidth),
                     rootWindow.contentItem.width)
-    cascade: isDesktop
-    closePolicy: isDesktop ?
+    cascade: ! isMobile
+    closePolicy: ! isMobile ?
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                    : Popup.CloseOnEscape | Popup.CloseOnPressOutside
     onAboutToShow: currentIndex = -1

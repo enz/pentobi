@@ -22,7 +22,7 @@ CommentBase {
             id: textArea
 
             text: gameModel.comment
-            selectByMouse: isDesktop
+            selectByMouse: ! isMobile
             wrapMode: TextEdit.Wrap
             onTextChanged: gameModel.comment = text
             Keys.onTabPressed: focus = false

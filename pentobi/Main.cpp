@@ -149,25 +149,25 @@ int main(int argc, char *argv[])
                     "main", "--threads must be a positive number");
             PlayerModel::nuThreads = nuThreads;
         }
-        bool isDesktop;
+        bool isMobile;
         if (parser.isSet(optionMobile) && parser.isSet(optionDesktop))
             throw app.translate("main",
                                 "--mobile and --desktop cannot be used both");
         else if (parser.isSet(optionMobile))
-            isDesktop = false;
+            isMobile = true;
         else if (parser.isSet(optionDesktop))
-            isDesktop = true;
+            isMobile = false;
         else
 #ifdef Q_OS_ANDROID
-            isDesktop = false;
+            isMobile = true;
 #else
-            isDesktop = ! isSmallScreen();
+            isMobile = isSmallScreen();
 #endif
 #ifdef Q_OS_WINDOWS
         if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
             qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
 #elif defined(Q_OS_LINUX)
-        if (! isDesktop)
+        if (isMobile)
         {
             // Material seems to be the best choice for mobile Linux until Qt
             // dark-mode bugs are fixed (Qt 6.11)
@@ -178,7 +178,7 @@ int main(int argc, char *argv[])
                 qputenv("QT_QUICK_CONTROLS_HOVER_ENABLED", "0");
         }
 #endif
-        unsigned maxLevel = isDesktop ? 9 : 7;
+        unsigned maxLevel = isMobile ? 7 : 9;
         if (parser.isSet(optionMaxLevel))
         {
             maxLevel = parser.value(optionMaxLevel).toUInt(&ok);
@@ -201,7 +201,7 @@ int main(int argc, char *argv[])
                          " style");
         auto ctx = engine.rootContext();
         ctx->setContextProperty("initialFile"_L1, initialFile);
-        ctx->setContextProperty("isDesktop"_L1, QVariant(isDesktop));
+        ctx->setContextProperty("isMobile"_L1, QVariant(isMobile));
 #ifdef QT_DEBUG
         ctx->setContextProperty("isDebug"_L1, QVariant(true));
 #else

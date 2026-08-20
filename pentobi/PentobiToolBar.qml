@@ -25,7 +25,7 @@ PentobiToolBarBase {
         Label {
             id: mobileLabel
 
-            visible: ! isDesktop
+            visible: isMobile
             color: theme.colorText
             opacity: isRated ? 0.6 : 0.8
             elide: Text.ElideMiddle
@@ -42,25 +42,25 @@ PentobiToolBarBase {
             }
         }
         Item {
-            visible: ! isDesktop
+            visible: isMobile
             Layout.fillWidth: true
         }
         PentobiToolButton {
             iconSource: "pentobi-newgame"
             action: actionNew
-            visible: isDesktop || action.enabled
+            visible: ! isMobile || action.enabled
             ToolTip.text: qsTr("Start a new game")
         }
         PentobiToolButton {
             iconSource: "pentobi-rated-game"
             action: actionNewRated
-            visible: isDesktop
+            visible: ! isMobile
             ToolTip.text: qsTr("Start a rated game")
         }
         PentobiToolButton {
             iconSource: "pentobi-undo"
             action: actionUndo
-            visible: isDesktop || action.enabled
+            visible: ! isMobile || action.enabled
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameView.item ?
@@ -71,13 +71,13 @@ PentobiToolBarBase {
         PentobiToolButton {
             iconSource: "pentobi-computer-colors"
             action: actionComputerSettings
-            visible: isDesktop || action.enabled
+            visible: ! isMobile || action.enabled
             ToolTip.text: qsTr("Set the colors played by the computer")
         }
         PentobiToolButton {
             iconSource: "pentobi-play"
             action: actionPlay
-            visible: isDesktop || action.enabled
+            visible:!  isMobile || action.enabled
             autoRepeat: true
             // Use fast autorepeat to avoid flickering of
             // PentobiToolButton.pressedAnimation, presses while computer is
@@ -98,26 +98,26 @@ PentobiToolBarBase {
         PentobiToolButton {
             iconSource: "pentobi-stop"
             action: actionStop
-            visible: isDesktop || ! isRated
+            visible: ! isMobile || ! isRated
             ToolTip.text: analyzeGameModel.isRunning ?
                               qsTr("Abort game analysis")
                             : qsTr("Abort computer move")
         }
         Item {
-            visible: isDesktop
+            visible: ! isMobile
             Layout.fillWidth: true
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
         PentobiToolButton {
             iconSource: "pentobi-beginning"
             action: actionBeginning
-            visible: isDesktop
+            visible: ! isMobile
             ToolTip.text: qsTr("Go to beginning of game")
         }
         PentobiToolButton {
             iconSource: "pentobi-backward10"
             action: actionBackward10
-            visible: isDesktop
+            visible: ! isMobile
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameView.item ?
@@ -127,21 +127,21 @@ PentobiToolBarBase {
         PentobiToolButton {
             iconSource: "pentobi-backward"
             action: actionBackward
-            visible: isDesktop
+            visible: ! isMobile
             autoRepeat: true
             ToolTip.text: qsTr("Go one move backward")
         }
         PentobiToolButton {
             iconSource: "pentobi-forward"
             action: actionForward
-            visible: isDesktop
+            visible: ! isMobile
             autoRepeat: true
             ToolTip.text: qsTr("Go one move forward")
         }
         PentobiToolButton {
             iconSource: "pentobi-forward10"
             action: actionForward10
-            visible: isDesktop
+            visible: ! isMobile
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameView.item ?
@@ -151,18 +151,18 @@ PentobiToolBarBase {
         PentobiToolButton {
             iconSource: "pentobi-end"
             action: actionEnd
-            visible: isDesktop
+            visible: ! isMobile
             ToolTip.text: qsTr("Go to end of moves")
         }
         Item {
-            visible: isDesktop
+            visible: ! isMobile
             Layout.fillWidth: true
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
         PentobiToolButton {
             iconSource: "pentobi-previous-variation"
             action: actionPrevVar
-            visible: isDesktop
+            visible: ! isMobile
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameView.item ?
@@ -172,7 +172,7 @@ PentobiToolBarBase {
         PentobiToolButton {
             iconSource: "pentobi-next-variation"
             action: actionNextVar
-            visible: isDesktop
+            visible: ! isMobile
             autoRepeat: true
             autoRepeatInterval:
                 rootWindow.gameView.item ?
@@ -180,12 +180,12 @@ PentobiToolBarBase {
             ToolTip.text: qsTr("Go to next variation")
         }
         Item {
-            visible: isDesktop
+            visible: ! isMobile
             Layout.fillWidth: true
             Layout.maximumWidth: 0.7 * font.pixelSize
         }
         Label {
-            visible: isDesktop
+            visible: ! isMobile
             text: Logic.getGameLabel(gameView.setupMode, isRated,
                                      gameModel.file, gameModel.isModified, false)
             color: theme.colorText
@@ -207,7 +207,7 @@ PentobiToolBarBase {
             }
         }
         Item {
-            visible: isDesktop
+            visible: ! isMobile
             Layout.fillWidth: true
         }
         PentobiToolButton {

@@ -20,7 +20,7 @@ Dialog {
     }
     property real minContentWidth:
         // Match 90% window width on mobile devices within reason
-        isDesktop ? 0 : Math.min(27 * font.pixelSize, 0.9 * maxContentWidth)
+        isMobile ? Math.min(27 * font.pixelSize, 0.9 * maxContentWidth) : 0
 
     // We make all dialogs modal even if they wouldn't need to be because
     // QtQuickControls dialogs are not windows but immovable popup items, so

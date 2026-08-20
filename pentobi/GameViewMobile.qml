@@ -95,10 +95,10 @@ Item
         if (! boardContextMenu.item)
             boardContextMenu.sourceComponent = boardContextMenuComponent
         boardContextMenu.item.moveNumber = moveNumber
-        if (isDesktop)
-            boardContextMenu.item.popup()
-        else
+        if (isMobile)
             boardContextMenu.item.popup(x, y)
+        else
+            boardContextMenu.item.popup()
     }
 
     function _updateCommentVisible() {

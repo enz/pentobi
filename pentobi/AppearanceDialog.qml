@@ -37,7 +37,7 @@ PentobiDialog {
         else
             currentCommentIndex = 1
         comboBoxComment.currentIndex = currentCommentIndex
-        if (isDesktop)
+        if (! isMobile)
             switchMoveNumber.checked = gameView.showMoveNumber
     }
     onAccepted: {
@@ -55,7 +55,7 @@ PentobiDialog {
         case 1: gameView.commentMode = "as_needed"; break
         case 2: gameView.commentMode = "never"; break
         }
-        if (isDesktop)
+        if (! isMobile)
             gameView.showMoveNumber = switchMoveNumber.checked
     }
 
@@ -87,7 +87,7 @@ PentobiDialog {
             Switch {
                 id: switchMoveNumber
 
-                visible: isDesktop
+                visible: ! isMobile
                 //: Check box in appearance dialog whether to show the
                 //: move number in the status bar.
                 text: qsTr("Move number")

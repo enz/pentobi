@@ -41,8 +41,8 @@ MainBase {
                                         || playerModel.isGenMoveRunning
                                         || analyzeGameModel.isRunning
 
-    minimumWidth: isDesktop ? 481 : 240
-    minimumHeight: isDesktop ? 303 : 301
+    minimumWidth: isMobile ? 240 : 481
+    minimumHeight: isMobile ? 301 : 303
     title: Logic.getWindowTitle(gameModel.file, gameModel.isModified)
     onClosing: if ( ! Logic.quit()) close.accepted = false
     Component.onCompleted: Logic.init()
@@ -72,10 +72,10 @@ MainBase {
             right: parent.right
             top: toolBar.visible ? toolBar.bottom : parent.top
             bottom: parent.bottom
-            margins: isDesktop ? 2 : 0
+            margins: isMobile ? 0 : 2
         }
         sourceComponent:
-            isDesktop ? componentGameViewDesktop : componentGameViewMobile
+            isMobile ? componentGameViewMobile : componentGameViewDesktop
 
         Component {
             id: componentGameViewDesktop
@@ -96,7 +96,7 @@ MainBase {
         }
     }
     MouseArea {
-        visible: isDesktop
+        visible: ! isMobile
         acceptedButtons: Qt.NoButton // only for setting cursor shape
         anchors.fill: parent
         cursorShape: busyIndicatorRunning ? Qt.BusyCursor : Qt.ArrowCursor
@@ -196,7 +196,7 @@ MainBase {
         function show() {
             if (! item)
                 sourceComponent
-                        = isDesktop ? helpWindowComponent : helpDialogComponent
+                        = isMobile ? helpDialogComponent : helpWindowComponent
             item.open()
         }
 
