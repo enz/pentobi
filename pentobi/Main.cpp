@@ -167,15 +167,16 @@ int main(int argc, char *argv[])
         if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
             qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
 #elif defined(Q_OS_LINUX)
-        // Material seems to be the best choice for mobile Linux until Qt
-        // dark-mode bugs are fixed (Qt 6.11)
-        if (! isDesktop
-            && qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
+        if (! isDesktop)
+        {
+            // Material seems to be the best choice for mobile Linux until Qt
+            // dark-mode bugs are fixed (Qt 6.11)
             qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
-        // Hovering causes unwanted tooltip popups and button-pressed states
-        // on mobile Linux (Qt 6.11)
-        if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_HOVER_ENABLED"))
-            qputenv("QT_QUICK_CONTROLS_HOVER_ENABLED", "0");
+            // Hovering causes unwanted tooltip popups and button-pressed
+            // states on mobile Linux (Qt 6.11)
+            if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_HOVER_ENABLED"))
+                qputenv("QT_QUICK_CONTROLS_HOVER_ENABLED", "0");
+        }
 #endif
         unsigned maxLevel = isDesktop ? 9 : 7;
         if (parser.isSet(optionMaxLevel))
