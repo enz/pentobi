@@ -4,10 +4,7 @@ Pentobi Release Notes
 Version 31.0-dev (main)
 -----------------------
 
-* Material style is now default on mobile Linux, which seems to be
-  the best choice until Qt dark-mode bugs are fixed
-* Hover is now disabled by default on mobile Linux to prevent unwanted
-  tooltip popups and button-pressed states
+* Several usability improvements for running on Linux phones
 * Make slow analysis speed available on mobile devices
 * Remember selected analysis speed for the current session
 * Minimum required Qt version is now 6.11
