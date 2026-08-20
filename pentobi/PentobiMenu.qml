@@ -13,7 +13,6 @@ Menu {
 
     width: Math.min(font.pixelSize * (isMobile ? 23 : relativeWidth),
                     rootWindow.contentItem.width)
-    cascade: ! isMobile
     closePolicy: ! isMobile ?
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                    : Popup.CloseOnEscape | Popup.CloseOnPressOutside
