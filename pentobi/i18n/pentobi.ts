@@ -575,20 +575,46 @@
     </message>
 </context>
 <context>
-    <name>MenuComputer</name>
+    <name>MainMenu</name>
     <message>
-        <source>Computer</source>
+        <source>Game</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>MenuEdit</name>
+    <message>
+        <source>Game Variant…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Recent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear List</source>
+        <extracomment>Menu item for clearing the recent files list</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Image…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Annotation…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Make Main Variation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Made main variation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -630,61 +656,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Annotation…</source>
+        <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Made main variation</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MenuGame</name>
-    <message>
-        <source>Game</source>
+        <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Game Variant…</source>
+        <source>Computer</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Export Image…</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MenuGo</name>
-    <message>
-        <source>Go</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MenuHelp</name>
-    <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About Pentobi</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MenuRecentFiles</name>
-    <message>
-        <source>Open Recent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clear List</source>
-        <extracomment>Menu item for clearing the recent files list</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MenuTools</name>
     <message>
         <source>Tools</source>
         <translation type="unfinished"></translation>
@@ -698,22 +680,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Analyze Game…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Clear Analysis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Analyze Game…</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MenuView</name>
-    <message>
-        <source>View</source>
+        <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Appearance</source>
+        <source>About Pentobi</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="de">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -573,14 +575,11 @@
     </message>
 </context>
 <context>
-    <name>MenuComputer</name>
+    <name>MainMenu</name>
     <message>
         <source>Computer</source>
         <translation>Computer</translation>
     </message>
-</context>
-<context>
-    <name>MenuEdit</name>
     <message>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
@@ -635,9 +634,6 @@
         <source>Made main variation</source>
         <translation>Zu Hauptvariante gemacht</translation>
     </message>
-</context>
-<context>
-    <name>MenuGame</name>
     <message>
         <source>Game</source>
         <translation>Spiel</translation>
@@ -650,16 +646,10 @@
         <source>Export Image…</source>
         <translation>Grafik exportieren …</translation>
     </message>
-</context>
-<context>
-    <name>MenuGo</name>
     <message>
         <source>Go</source>
         <translation>Gehe zu</translation>
     </message>
-</context>
-<context>
-    <name>MenuHelp</name>
     <message>
         <source>Help</source>
         <translation>Hilfe</translation>
@@ -668,9 +658,6 @@
         <source>About Pentobi</source>
         <translation>Über Pentobi</translation>
     </message>
-</context>
-<context>
-    <name>MenuRecentFiles</name>
     <message>
         <source>Open Recent</source>
         <translation>Zuletzt benutzt</translation>
@@ -680,9 +667,6 @@
         <extracomment>Menu item for clearing the recent files list</extracomment>
         <translation>Liste leeren</translation>
     </message>
-</context>
-<context>
-    <name>MenuTools</name>
     <message>
         <source>Tools</source>
         <translation>Extras</translation>
@@ -703,9 +687,6 @@
         <source>Analyze Game…</source>
         <translation>Spiel analysieren …</translation>
     </message>
-</context>
-<context>
-    <name>MenuView</name>
     <message>
         <source>View</source>
         <translation>Ansicht</translation>

@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="es">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -573,14 +575,11 @@
     </message>
 </context>
 <context>
-    <name>MenuComputer</name>
+    <name>MainMenu</name>
     <message>
         <source>Computer</source>
         <translation>Máquina</translation>
     </message>
-</context>
-<context>
-    <name>MenuEdit</name>
     <message>
         <source>Edit</source>
         <translation>Editar</translation>
@@ -635,9 +634,6 @@
         <source>Made main variation</source>
         <translation>Se ha convertido en variación principal</translation>
     </message>
-</context>
-<context>
-    <name>MenuGame</name>
     <message>
         <source>Game</source>
         <translation>Partida</translation>
@@ -650,16 +646,10 @@
         <source>Export Image…</source>
         <translation>Exportar imagen...</translation>
     </message>
-</context>
-<context>
-    <name>MenuGo</name>
     <message>
         <source>Go</source>
         <translation>Ir a</translation>
     </message>
-</context>
-<context>
-    <name>MenuHelp</name>
     <message>
         <source>Help</source>
         <translation>Ayuda</translation>
@@ -668,9 +658,6 @@
         <source>About Pentobi</source>
         <translation>Acerca de Pentobi</translation>
     </message>
-</context>
-<context>
-    <name>MenuRecentFiles</name>
     <message>
         <source>Open Recent</source>
         <translation>Abrir reciente</translation>
@@ -680,9 +667,6 @@
         <extracomment>Menu item for clearing the recent files list</extracomment>
         <translation>Borrar lista</translation>
     </message>
-</context>
-<context>
-    <name>MenuTools</name>
     <message>
         <source>Tools</source>
         <translation>Herramientas</translation>
@@ -703,9 +687,6 @@
         <source>Analyze Game…</source>
         <translation>Analizar partida...</translation>
     </message>
-</context>
-<context>
-    <name>MenuView</name>
     <message>
         <source>View</source>
         <translation>Vista</translation>

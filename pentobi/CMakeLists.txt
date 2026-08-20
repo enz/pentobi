@@ -52,15 +52,8 @@ qt_add_qml_module(pentobi
     LineSegment.qml
     Main.qml
     MainBase.qml
+    MainMenu.qml
     MessageDialog.qml
-    MenuComputer.qml
-    MenuEdit.qml
-    MenuGame.qml
-    MenuGo.qml
-    MenuHelp.qml
-    MenuRecentFiles.qml
-    MenuTools.qml
-    MenuView.qml
     MoveAnnotationDialog.qml
     NavigationButtons.qml
     NavigationPanel.qml

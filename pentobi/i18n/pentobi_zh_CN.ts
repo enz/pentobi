@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_CN">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="zh_CN">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -12,7 +14,7 @@
     </message>
     <message>
         <source>Computer opponent for Blokus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -98,7 +100,7 @@
     </message>
     <message>
         <source>Colorblind mode</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -154,21 +156,21 @@
     <message>
         <source>Previous</source>
         <extracomment>Go to previous page of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Contents</source>
         <extracomment>Go to table of contents of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Next</source>
         <extracomment>Go to next page of user manual</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">关闭</translation>
     </message>
 </context>
 <context>
@@ -179,7 +181,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -446,7 +448,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Pentobi 帮助</translation>
     </message>
 </context>
 <context>
@@ -569,18 +571,15 @@
     </message>
     <message>
         <source>Press back again to exit</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>MenuComputer</name>
+    <name>MainMenu</name>
     <message>
         <source>Computer</source>
         <translation>电脑</translation>
     </message>
-</context>
-<context>
-    <name>MenuEdit</name>
     <message>
         <source>Edit</source>
         <translation>编辑</translation>
@@ -635,9 +634,6 @@
         <source>Made main variation</source>
         <translation>已设为主变例</translation>
     </message>
-</context>
-<context>
-    <name>MenuGame</name>
     <message>
         <source>Game</source>
         <translation>棋局</translation>
@@ -648,18 +644,12 @@
     </message>
     <message>
         <source>Export Image…</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>MenuGo</name>
     <message>
         <source>Go</source>
         <translation>转到</translation>
     </message>
-</context>
-<context>
-    <name>MenuHelp</name>
     <message>
         <source>Help</source>
         <translation>帮助</translation>
@@ -668,9 +658,6 @@
         <source>About Pentobi</source>
         <translation>关于</translation>
     </message>
-</context>
-<context>
-    <name>MenuRecentFiles</name>
     <message>
         <source>Open Recent</source>
         <translation>打开最近文件</translation>
@@ -680,9 +667,6 @@
         <extracomment>Menu item for clearing the recent files list</extracomment>
         <translation>清除列表</translation>
     </message>
-</context>
-<context>
-    <name>MenuTools</name>
     <message>
         <source>Tools</source>
         <translation>工具</translation>
@@ -703,9 +687,6 @@
         <source>Analyze Game…</source>
         <translation>分析棋局…</translation>
     </message>
-</context>
-<context>
-    <name>MenuView</name>
     <message>
         <source>View</source>
         <translation>视图</translation>
@@ -762,7 +743,7 @@
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1011,7 +992,7 @@
     <message>
         <source>Pentobi</source>
         <extracomment>Window title if no file is loaded.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Game analysis is only possible in main variation.</source>
@@ -1143,7 +1124,7 @@
     <message>
         <source>%1 - Pentobi</source>
         <extracomment>Window title if file is loaded. The argument is the file name prepended with a star if the file has been modified.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Game analysis aborted</source>
@@ -1255,85 +1236,85 @@
     </message>
     <message>
         <source>Pentobi failed to generate a move.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Untitled.blksgf</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>computer opponent for the board game Blokus</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set maximum level to &lt;n&gt;.</source>
         <extracomment>Description for command line option --maxlevel</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not use opening books.</source>
         <extracomment>Description for command line option --nobook</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do not delay fast computer moves.</source>
         <extracomment>Description for command line option --nodelay</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Set random seed to &lt;n&gt;.</source>
         <extracomment>Description for command line option --seed</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use &lt;n&gt; threads (0=auto).</source>
         <extracomment>Description for command line option --threads</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Print logging information to standard error.</source>
         <extracomment>Description for command line option --verbose</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file.blksgf</source>
         <extracomment>Name of command line argument.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Blokus SGF file to open (optional).</source>
         <extracomment>Description of command line argument.</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--maxlevel must be between 1 and %1</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--seed must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--threads must be a positive number</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Too many arguments</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use layout optimized for desktop.</source>
         <extracomment>Description for command line option --desktop</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--mobile and --desktop cannot be used both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

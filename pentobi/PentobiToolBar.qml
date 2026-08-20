@@ -241,23 +241,7 @@ PentobiToolBarBase {
                 Component {
                     id: menuComponent
 
-                    PentobiMenu {
-                        relativeWidth: 12
-                        closePolicy: Popup.CloseOnPressOutsideParent
-                                     | Popup.CloseOnEscape
-
-                        // QtQuick.Controls.Menu is fixed-width so we need to
-                        // test with all supported languages that the items are
-                        // not truncated or overlap with shortcuts shown with
-                        // newer versions of Qt
-                        MenuGame { relativeWidth: 29 }
-                        MenuGo { relativeWidth: 25 }
-                        MenuEdit { relativeWidth: 25 }
-                        MenuView { relativeWidth: 25 }
-                        MenuComputer { relativeWidth: 25 }
-                        MenuTools { relativeWidth: 25 }
-                        MenuHelp { relativeWidth: 20 }
-                    }
+                    MainMenu { }
                 }
             }
         }

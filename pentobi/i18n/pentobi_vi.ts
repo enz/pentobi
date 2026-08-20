@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="vi">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="vi">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -573,14 +575,11 @@
     </message>
 </context>
 <context>
-    <name>MenuComputer</name>
+    <name>MainMenu</name>
     <message>
         <source>Computer</source>
         <translation>Máy tính</translation>
     </message>
-</context>
-<context>
-    <name>MenuEdit</name>
     <message>
         <source>Edit</source>
         <translation>Chỉnh sửa</translation>
@@ -635,9 +634,6 @@
         <source>Made main variation</source>
         <translation>Đã tạo biến thể chính</translation>
     </message>
-</context>
-<context>
-    <name>MenuGame</name>
     <message>
         <source>Game</source>
         <translation>Trò chơi</translation>
@@ -650,16 +646,10 @@
         <source>Export Image…</source>
         <translation>Xuất Hình ảnh…</translation>
     </message>
-</context>
-<context>
-    <name>MenuGo</name>
     <message>
         <source>Go</source>
         <translation>Đi</translation>
     </message>
-</context>
-<context>
-    <name>MenuHelp</name>
     <message>
         <source>Help</source>
         <translation>Trợ giúp</translation>
@@ -668,9 +658,6 @@
         <source>About Pentobi</source>
         <translation>Giới thiệu về Pentobi</translation>
     </message>
-</context>
-<context>
-    <name>MenuRecentFiles</name>
     <message>
         <source>Open Recent</source>
         <translation>Mở Gần đây</translation>
@@ -680,9 +667,6 @@
         <extracomment>Menu item for clearing the recent files list</extracomment>
         <translation>Xóa Danh sách</translation>
     </message>
-</context>
-<context>
-    <name>MenuTools</name>
     <message>
         <source>Tools</source>
         <translation>Công cụ</translation>
@@ -703,9 +687,6 @@
         <source>Analyze Game…</source>
         <translation>Phân tích Trò chơi…</translation>
     </message>
-</context>
-<context>
-    <name>MenuView</name>
     <message>
         <source>View</source>
         <translation>Xem</translation>

@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ru">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ru">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -98,7 +100,7 @@
     </message>
     <message>
         <source>Colorblind mode</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -179,7 +181,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -573,14 +575,11 @@
     </message>
 </context>
 <context>
-    <name>MenuComputer</name>
+    <name>MainMenu</name>
     <message>
         <source>Computer</source>
         <translation>Компьютер</translation>
     </message>
-</context>
-<context>
-    <name>MenuEdit</name>
     <message>
         <source>Edit</source>
         <translation>Редактировать</translation>
@@ -635,9 +634,6 @@
         <source>Made main variation</source>
         <translation>Основные изменения</translation>
     </message>
-</context>
-<context>
-    <name>MenuGame</name>
     <message>
         <source>Game</source>
         <translation>Игра</translation>
@@ -648,18 +644,12 @@
     </message>
     <message>
         <source>Export Image…</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>MenuGo</name>
     <message>
         <source>Go</source>
         <translation>Ход</translation>
     </message>
-</context>
-<context>
-    <name>MenuHelp</name>
     <message>
         <source>Help</source>
         <translation>Помощь</translation>
@@ -668,9 +658,6 @@
         <source>About Pentobi</source>
         <translation>О Pentobi</translation>
     </message>
-</context>
-<context>
-    <name>MenuRecentFiles</name>
     <message>
         <source>Open Recent</source>
         <translation>Открыть Недавние</translation>
@@ -680,9 +667,6 @@
         <extracomment>Menu item for clearing the recent files list</extracomment>
         <translation>Очистить Список</translation>
     </message>
-</context>
-<context>
-    <name>MenuTools</name>
     <message>
         <source>Tools</source>
         <translation>Инструменты</translation>
@@ -703,9 +687,6 @@
         <source>Analyze Game…</source>
         <translation>Анализировать игру…</translation>
     </message>
-</context>
-<context>
-    <name>MenuView</name>
     <message>
         <source>View</source>
         <translation>Просмотр</translation>
@@ -762,7 +743,7 @@
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1259,7 +1240,7 @@
     </message>
     <message>
         <source>Untitled.blksgf</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>computer opponent for the board game Blokus</source>
@@ -1324,16 +1305,16 @@
     <message>
         <source>Use layout optimized for desktop.</source>
         <extracomment>Description for command line option --desktop</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>--mobile and --desktop cannot be used both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
