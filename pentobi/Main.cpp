@@ -47,10 +47,6 @@ bool isSmallScreen()
 int main(int argc, char *argv[])
 {
     libboardgame_base::LogInitializer log_initializer;
-#ifdef Q_OS_WINDOWS
-    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
-        qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
-#endif
     QCoreApplication::setOrganizationName("Pentobi"_L1);
     QCoreApplication::setApplicationName("Pentobi"_L1);
 #ifdef VERSION
@@ -166,6 +162,16 @@ int main(int argc, char *argv[])
             isDesktop = false;
 #else
             isDesktop = ! isSmallScreen();
+#endif
+#ifdef Q_OS_WINDOWS
+        if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
+            qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
+#elif defined(Q_OS_LINUX)
+        if (! isDesktop
+            && qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
+            // Material seems to be the best choice for mobile Linux until
+            // Qt dark-mode bugs are fixed (Qt 6.11)
+            qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
 #endif
         unsigned maxLevel = isDesktop ? 9 : 7;
         if (parser.isSet(optionMaxLevel))

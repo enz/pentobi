@@ -4,6 +4,8 @@ Pentobi Release Notes
 Version 31.0-dev (main)
 -----------------------
 
+* Material style is now default on mobile Linux, which seems to be
+  the best choice until Qt dark-mode bugs are fixed
 * Make slow analysis speed available on mobile devices
 * Remember selected analysis speed for the current session
 * Minimum required Qt version is now 6.11
