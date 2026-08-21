@@ -70,7 +70,8 @@ int main(int argc, char *argv[])
     QCommandLineOption optionDesktop(
         "desktop"_L1,
         //: Description for command line option --desktop
-        app.translate("main", "Use layout optimized for desktop."));
+        app.translate("main",
+                      "Assume desktop (large screen, mouse/keyboard input)."));
     parser.addOption(optionDesktop);
     QCommandLineOption optionMaxLevel(
         "maxlevel"_L1,
@@ -89,7 +90,7 @@ int main(int argc, char *argv[])
         //: Description for command line option --mobile
         app.translate(
             "main",
-            "Use smartphone layout (default on small screens, also limits maximum level)."));
+            "Assume phone (small screen, touch input, limited maximum level)."));
     parser.addOption(optionMobile);
     parser.addOption(optionNoBook);
     QCommandLineOption optionNoDelay(

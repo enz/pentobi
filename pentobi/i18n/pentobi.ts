@@ -1303,16 +1303,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Use layout optimized for desktop.</source>
-        <extracomment>Description for command line option --desktop</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>--mobile and --desktop cannot be used both</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
+        <source>Assume desktop (large screen, mouse/keyboard input).</source>
+        <extracomment>Description for command line option --desktop</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assume phone (small screen, touch input, limited maximum level).</source>
         <extracomment>Description for command line option --mobile</extracomment>
         <translation type="unfinished"></translation>
     </message>
