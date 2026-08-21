@@ -4,9 +4,7 @@ Pentobi Release Notes
 Version 31.0-dev (main)
 -----------------------
 
-* Usability improvements on Linux phones (postmarketOS/Phosh),
-  including Material.Dark as the default style since Fusion dark mode
-  is broken and dark-only is preferable to light-only on phones
+* Improved usability on Linux phones (postmarketOS/Phosh)
 * Make slow analysis speed available on mobile devices
 * Remember selected analysis speed for the current session
 * Minimum required Qt version is now 6.11
