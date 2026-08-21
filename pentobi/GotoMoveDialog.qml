@@ -12,8 +12,6 @@ PentobiDialog {
     id: root
 
     footer: DialogButtonBox {
-        defaultButton: buttonOk
-
         ButtonOk { id: buttonOk; enabled: textField.acceptableInput }
         ButtonCancel { }
     }
