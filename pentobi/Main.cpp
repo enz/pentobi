@@ -169,8 +169,9 @@ int main(int argc, char *argv[])
             qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
 #elif defined(Q_OS_LINUX)
         if (isMobile && qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
-            // Material seems to be the best choice for mobile Linux until Qt
-            // dark-mode bugs are fixed (Qt 6.11)
+            // Use Material.Dark as the default style since Fusion dark mode is
+            // broken on postmarketOS/Phosh and dark-only is preferable to
+            // light-only on phones (Aug 2026)
             qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
 #endif
         unsigned maxLevel = isMobile ? 7 : 9;
