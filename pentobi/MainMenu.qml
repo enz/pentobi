@@ -84,6 +84,7 @@ Item {
         arrow: Arrow {
             x: parent.width - 1.5 * width
             y: (parent.height - height)/ 2
+            opacity: enabled ? 1 : 0.4
         }
     }
 
