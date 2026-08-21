@@ -49,7 +49,6 @@ PentobiDialog {
                 id: textField
 
                 text: exportImageWidth
-                focus: ! isAndroid
                 inputMethodHints: Qt.ImhDigitsOnly
                 validator: IntValidator{ bottom: 0; top: 32767 }
                 selectByMouse: true
