@@ -46,6 +46,8 @@ PentobiDialog {
                 model: [ qsTr("Fast"), qsTr("Normal"), qsTr("Slow") ]
                 Layout.fillWidth: true
                 Layout.preferredWidth: font.pixelSize * 15
+                // See PentobiMenuItem.focusPolicy
+                focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
             }
         }
     }

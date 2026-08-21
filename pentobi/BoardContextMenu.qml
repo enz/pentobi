@@ -19,12 +19,12 @@ PentobiMenu {
                     qsTr("Move Annotation (%1)").arg(annotation)
     }
 
-    MenuItem {
+    PentobiMenuItem {
         enabled: moveNumber !== gameModel.moveNumber && ! isRated
         text: qsTr("Go to Move %1").arg(moveNumber)
         onTriggered: gameModel.gotoMove(moveNumber)
     }
-    MenuItem {
+    PentobiMenuItem {
         id: itemAnnotation
 
         onTriggered: {

@@ -11,6 +11,6 @@ import QtQuick.Controls
 Button {
     text: qsTr("Cancel")
     DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
-    // See PentobiMenu.focusPolicy
+    // See PentobiMenuItem.focusPolicy
     focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
 }

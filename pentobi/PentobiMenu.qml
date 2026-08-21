@@ -16,7 +16,7 @@ Menu {
     closePolicy: ! isMobile ?
                      Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                    : Popup.CloseOnEscape | Popup.CloseOnPressOutside
-    // See PentobiMenu.focusPolicy
+    // See PentobiMenuItem.focusPolicy
     focus: ! isMobile
     onAboutToShow: currentIndex = -1
 }
