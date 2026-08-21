@@ -182,7 +182,7 @@ Item {
         id: menuRecent
 
         title: qsTr("Open Recent")
-        enabled: instantiator.count > 0
+        enabled: recentFiles.entries.length > 0
 
         Header {
             text: menuRecent.title
