@@ -167,7 +167,7 @@ int main(int argc, char *argv[])
         if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
             qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
 #elif defined(Q_OS_LINUX)
-        if (isMobile)
+        if (isMobile && qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
             // Material seems to be the best choice for mobile Linux until Qt
             // dark-mode bugs are fixed (Qt 6.11)
             qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
