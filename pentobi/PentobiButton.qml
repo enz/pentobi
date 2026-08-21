@@ -19,6 +19,7 @@ PentobiButtonBase {
         width: 16
         height: 16
     }
+    hoverEnabled: ! isMobile
     ToolTip.visible: ToolTip.text !== "" && hovered
     ToolTip.delay: 1000
     ToolTip.timeout: 5000
