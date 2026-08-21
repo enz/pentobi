@@ -1,16 +1,14 @@
 //-----------------------------------------------------------------------------
-/** @file pentobi/ButtonCancel.qml
+/** @file pentobi/PentobiMenuItem.qml
     @author Markus Enzenberger
     @copyright GNU General Public License version 3 or later */
 //-----------------------------------------------------------------------------
 
 import QtQuick.Controls
 
-/** Replacement for standard button Dialog.Cancel, which does not provide
-    translations for all needed languages. */
-Button {
-    text: qsTr("Cancel")
-    DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
-    // See PentobiMenu.focusPolicy
+MenuItem {
+    // Prevents unwanted appearances of the on-screen keyboard in
+    // postmarketOS/Phosh (Aug 2026) when popups (Menu, Dialog) are opened or
+    // closed
     focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
 }

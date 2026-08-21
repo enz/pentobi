@@ -62,6 +62,7 @@ qt_add_qml_module(pentobi
     PentobiButtonBase.qml
     PentobiDialog.qml
     PentobiMenu.qml
+    PentobiMenuItem.qml
     PentobiScrollView.qml
     PentobiToolBar.qml
     PentobiToolBarBase.qml

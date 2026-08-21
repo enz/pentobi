@@ -11,4 +11,6 @@ import QtQuick.Controls
 Button {
     text: qsTr("OK")
     DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+    // See PentobiMenu.focusPolicy
+    focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
 }

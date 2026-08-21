@@ -80,7 +80,7 @@ Item {
         width: 16
         height: 16
     }
-    component SubMenu: MenuItem {
+    component SubMenu: PentobiMenuItem {
         arrow: Arrow {
             x: parent.width - 1.5 * width
             y: (parent.height - height)/ 2
@@ -121,7 +121,7 @@ Item {
             onTriggered: menuHelp.popup(0, popupY)
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             action: actionQuit
         }
     }
@@ -135,29 +135,29 @@ Item {
             parentMenu: menuMain
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             action: actionNew
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionNewRated
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Game Variant…")
             onTriggered: gameVariantDialog.open()
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionGameInfo
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             action: actionUndo
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionFindMove
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             action: actionOpen
         }
         SubMenu {
@@ -166,14 +166,14 @@ Item {
             enabled: menuRecent.enabled
             onTriggered: menuRecent.popup(0, popupY)
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionSave
             enabled: actionSave.enabled && gameModel.file !== ""
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionSaveAs
         }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Export Image…")
             onTriggered: exportImageDialog.open()
         }
@@ -193,7 +193,7 @@ Item {
             id: instantiator
 
             model: recentFiles.entries
-            delegate: MenuItem {
+            delegate: PentobiMenuItem {
                 text: {
                     var text = modelData.displayName
                     if (! text || text === "") {
@@ -210,7 +210,7 @@ Item {
             onObjectRemoved: (index, obj) => menuRecent.removeItem(obj)
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             //: Menu item for clearing the recent files list
             text: qsTr("Clear List")
             onTriggered: recentFiles.clear()
@@ -226,17 +226,17 @@ Item {
             parentMenu: menuMain
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             action: actionGotoMove
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionBackToMainVar
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionBeginningOfBranch
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             action: actionNextComment
         }
     }
@@ -250,7 +250,7 @@ Item {
             parentMenu: menuMain
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Annotation…")
             enabled: gameModel.moveNumber > 0
             onTriggered: {
@@ -260,7 +260,7 @@ Item {
             }
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Make Main Variation")
             enabled: ! gameModel.isMainVar && ! isRated
             onTriggered: {
@@ -268,46 +268,46 @@ Item {
                 Logic.showTemporaryMessage(qsTr("Made main variation"))
             }
         }
-        MenuItem {
+        PentobiMenuItem {
             //: Short for Move Variation Up
             text: qsTr("Variation Up")
             enabled: gameModel.hasPrevVar && ! isRated
             onTriggered: Logic.moveUpVar()
         }
-        MenuItem {
+        PentobiMenuItem {
             //: Short for Move Variation Down
             text: qsTr("Variation Down")
             enabled: gameModel.hasNextVar && ! isRated
             onTriggered: Logic.moveDownVar()
         }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Delete Variations")
             enabled: gameModel.hasVariations && ! isRated
             onTriggered: Logic.deleteAllVar()
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Truncate")
             enabled: gameModel.canGoBackward && ! isRated
             onTriggered: Logic.truncate()
         }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Truncate Children")
             enabled: gameModel.canGoForward && ! isRated
             onTriggered: Logic.truncateChildren()
         }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Keep Position")
             enabled: ! gameModel.isBoardEmpty && (gameModel.canGoBackward || gameModel.canGoForward) && ! isRated
             onTriggered: Logic.keepOnlyPosition()
         }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Keep Subtree")
             enabled: gameModel.canGoBackward && gameModel.canGoForward && ! isRated
             onTriggered: Logic.keepOnlySubtree()
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Setup Mode")
             checkable: true
             enabled: ! gameModel.canGoBackward && ! gameModel.canGoForward
@@ -323,7 +323,7 @@ Item {
                 }
             }
         }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Next Color")
             enabled: ! isRated
             onTriggered: {
@@ -342,14 +342,14 @@ Item {
             parentMenu: menuMain
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Appearance")
             onTriggered: appearanceDialog.open()
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionComment
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionFullscreen
         }
     }
@@ -363,16 +363,16 @@ Item {
             parentMenu: menuMain
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             action: actionComputerSettings
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionPlay
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionPlaySingle
         }
-        MenuItem {
+        PentobiMenuItem {
             action: actionStop
         }
     }
@@ -386,22 +386,22 @@ Item {
             parentMenu: menuMain
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("Rating")
             onTriggered: Logic.rating()
         }
-        MenuItem {
+        PentobiMenuItem {
             enabled: ! isRated && ratingModel.numberGames > 0
             text: qsTr("Clear Rating")
             onTriggered: Logic.clearRating()
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             enabled: ! isRated && (gameModel.canGoBackward || gameModel.canGoForward)
             text: qsTr("Analyze Game…")
             onTriggered: analyzeDialog.open()
         }
-        MenuItem {
+        PentobiMenuItem {
             enabled: analyzeGameModel.elements.length !== 0
             text: qsTr("Clear Analysis")
             onTriggered: {
@@ -420,10 +420,10 @@ Item {
             parentMenu: menuMain
         }
         MenuSeparator { }
-        MenuItem {
+        PentobiMenuItem {
             action: actionHelp
         }
-        MenuItem {
+        PentobiMenuItem {
             text: qsTr("About Pentobi")
             onTriggered: aboutDialog.open()
         }

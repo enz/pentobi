@@ -30,4 +30,6 @@ Dialog {
     dim: false
     anchors.centerIn: Overlay.overlay
     closePolicy: Popup.CloseOnEscape
+    // See PentobiMenu.focusPolicy
+    focus: ! isMobile
 }
