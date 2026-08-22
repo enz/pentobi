@@ -7,65 +7,60 @@
 import QtQuick
 // Enforce Basic style to avoid frame around TextArea in some styles
 import QtQuick.Controls.Basic
-import QtQuick.Layouts
 
-ColumnLayout
-{
+PentobiScrollView {
     id: root
 
     property bool isDark
 
     signal closeClicked()
 
-    PentobiScrollView {
-        rightPadding: 6
-        Layout.fillWidth: true
-        Layout.maximumWidth: 800
-        Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+    contentWidth: width
+    contentHeight: textArea.implicitHeight
 
-        // Without declaring a Flickable inside the ScrollView, the TextArea
-        // can needlessly be flicked horizontally on Android (Qt 6.10)
-        Flickable {
-            contentWidth: width
-            contentHeight: textArea.implicitHeight
-            clip: true
+    Item
+    {
+        width: parent.width
 
-            TextArea {
-                id: textArea
+        TextArea {
+            id: textArea
 
-                width: parent.width
-                textFormat: TextArea.RichText
-                wrapMode: TextArea.WordWrap
-                readOnly: true
-                text: docbookReader.text
-                // Selecting text sometimes triggers Qt bugs that break
-                // clicking on links (Qt 6.9.2)
-                selectByMouse: false
-                selectByKeyboard: false
-                onLinkActivated:
-                    link => {
-                        if (link === "close")
+            width: Math.min(parent.width, 800)
+            anchors {
+                top: parent.top
+                horizontalCenter: parent.horizontalCenter
+            }
+            textFormat: TextArea.RichText
+            wrapMode: TextArea.WordWrap
+            readOnly: true
+            text: docbookReader.text
+            // Selecting text sometimes triggers Qt bugs that break
+            // clicking on links (Qt 6.9.2)
+            selectByMouse: false
+            selectByKeyboard: false
+            onLinkActivated:
+                link => {
+                    if (link === "close")
                         closeClicked()
-                        else
+                    else
                         docbookReader.pageId = link
-                    }
-
-                MouseArea {
-                    anchors.fill: parent
-                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor
-                                                    : Qt.ArrowCursor
-                    acceptedButtons: Qt.NoButton
                 }
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: parent.hoveredLink ? Qt.PointingHandCursor
+                                                : Qt.ArrowCursor
+                acceptedButtons: Qt.NoButton
             }
         }
-        DocbookReader {
-            id: docbookReader
+    }
+    DocbookReader {
+        id: docbookReader
 
-            isDark: root.isDark
-            colorBackground: theme.colorBackground
-            colorText: theme.colorText
-            colorLink: theme.colorLink
-            textWidth: textArea.width
-        }
+        isDark: root.isDark
+        colorBackground: theme.colorBackground
+        colorText: theme.colorText
+        colorLink: theme.colorLink
+        textWidth: textArea.width
     }
 }
