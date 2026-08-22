@@ -46,7 +46,7 @@ void DocbookReader::addHeader(QString& text) const
     text.append(m_colorBackground.name());
     text.append(";color:");
     text.append(m_colorText.name());
-    text.append(";line-height:115%}:link{text-decoration:none;color:");
+    text.append(";font-size:16px;line-height:115%}:link{text-decoration:none;color:");
     text.append(m_colorLink.name());
     text.append("}</style></head><body>"_L1);
 }
