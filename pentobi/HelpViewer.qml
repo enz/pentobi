@@ -20,7 +20,7 @@ PentobiScrollView {
 
     Item
     {
-        width: parent.width
+        width: Math.max(parent.width - 12, 0)
 
         TextArea {
             id: textArea
