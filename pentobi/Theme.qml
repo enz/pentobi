@@ -49,7 +49,7 @@ Item {
     property color colorStartingPoint: isDark ? "#82777E" : "#767074"
     property color colorBoardMarkup: isDark ? "#ffffff" : "#111111"
 
-    property color colorBackground: isDark ? "#000000" : "#ffffff"
+    property color colorBackground: isDark ? "#2a2a2a" : "#ffffff"
     property color colorMessageBase: colorBackground
     property color colorText: isDark ? "#ffffff" : "#000000"
 

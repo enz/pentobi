@@ -9,7 +9,7 @@ import QtQuick
 Canvas {
     property list<double> history
 
-    property color colorBackground: isDark ? "black" : "white"
+    property color colorBackground: theme.colorBackground
     property color colorLine: isDark ? "skyblue" : "royalblue"
     property color colorAxes: "gray"
 
