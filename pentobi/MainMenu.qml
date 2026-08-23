@@ -11,47 +11,37 @@ import "main.js" as Logic
 
 /** Main menu.
     Reuses Controls.Menu (Popup) and Controls.MenuItem (Item) where possible
-    without letting Qt do the submenu positioning to avoid covering the menu
-    button if cascade is used. Also adds a navigation header to submenus. */
+    without letting Qt do the SubMenuItem positioning to avoid covering the menu
+    button if cascade is used. Also adds a navigation header to SubMenuItems. */
 Item {
     id: root
 
     property real popupY
-    property bool isOpen:
-        menuMain.opened
-        || menuGame.opened
-        || menuRecent.opened
-        || menuGo.opened
-        || menuEdit.opened
-        || menuView.opened
-        || menuComputer.opened
-        || menuTools.opened
-        || menuHelp.opened
+    property bool isOpen: lastPage && lastPage.opened
     property alias relativeWidth: menuMain.relativeWidth
+    property Page lastPage
 
     function closeMenu() {
-        menuMain.close()
-        menuGame.close()
-        menuRecent.close()
-        menuGo.close()
-        menuEdit.close()
-        menuView.close()
-        menuComputer.close()
-        menuTools.close()
-        menuHelp.close()
+        if (lastPage)
+            lastPage.close()
     }
 
     function popupMenu() {
-        menuMain.popup(0, popupY)
+        openPage(menuMain)
     }
 
-    component MenuPage: PentobiMenu {
+    function openPage(page) {
+        page.popup(0, popupY)
+        lastPage = page
+    }
+
+    component Page: PentobiMenu {
         relativeWidth: root.relativeWidth
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     }
     component Header: Item {
         property alias text: label.text
-        property MenuPage parentMenu
+        property Page parentPage
 
         implicitWidth: Math.max(button.implicitWidth, label.implicitWidth)
         implicitHeight: Math.max(button.implicitHeight, label.implicitHeight)
@@ -64,7 +54,7 @@ Item {
                 left: parent.left
                 verticalCenter: parent.verticalCenter
             }
-            onClicked: if (parentMenu) parentMenu.popup(0, popupY)
+            onClicked: if (parentPage) openPage(parentPage)
 
         }
         Label {
@@ -80,59 +70,57 @@ Item {
         width: 16
         height: 16
     }
-    component SubMenu: PentobiMenuItem {
+    component SubMenuItem: PentobiMenuItem {
+        property Page page
+
+        text: page.title
         arrow: Arrow {
             x: parent.width - 1.5 * width
             y: (parent.height - height)/ 2
             opacity: enabled ? 1 : 0.4
         }
+        onTriggered: openPage(page)
     }
 
 
-    MenuPage {
+    Page {
         id: menuMain
 
-        SubMenu {
-            text: menuGame.title
-            onTriggered: menuGame.popup(0, popupY)
+        SubMenuItem {
+            page: menuGame
         }
-        SubMenu {
-            text: menuGo.title
-            onTriggered: menuGo.popup(0, popupY)
+        SubMenuItem {
+            page: menuGo
         }
-        SubMenu {
-            text: menuEdit.title
-            onTriggered: menuEdit.popup(0, popupY)
+        SubMenuItem {
+            page: menuEdit
+            onTriggered: openMenu(menuEdit)
         }
-        SubMenu {
-            text: menuView.title
-            onTriggered: menuView.popup(0, popupY)
+        SubMenuItem {
+            page: menuView
         }
-        SubMenu {
-            text: menuComputer.title
-            onTriggered: menuComputer.popup(0, popupY)
+        SubMenuItem {
+            page: menuComputer
         }
-        SubMenu {
-            text: menuTools.title
-            onTriggered: menuTools.popup(0, popupY)
+        SubMenuItem {
+            page: menuTools
         }
-        SubMenu {
-            text: menuHelp.title
-            onTriggered: menuHelp.popup(0, popupY)
+        SubMenuItem {
+            page: menuHelp
         }
         MenuSeparator { }
         PentobiMenuItem {
             action: actionQuit
         }
     }
-    MenuPage {
+    Page {
         id: menuGame
 
         title: qsTr("Game")
 
         Header {
             text: menuGame.title
-            parentMenu: menuMain
+            parentPage: menuMain
         }
         MenuSeparator { }
         PentobiMenuItem {
@@ -160,11 +148,9 @@ Item {
         PentobiMenuItem {
             action: actionOpen
         }
-        SubMenu {
-            text: menuRecent.title
-
+        SubMenuItem {
+            page: menuRecent
             enabled: menuRecent.enabled
-            onTriggered: menuRecent.popup(0, popupY)
         }
         PentobiMenuItem {
             action: actionSave
@@ -178,7 +164,7 @@ Item {
             onTriggered: exportImageDialog.open()
         }
     }
-    MenuPage {
+    Page {
         id: menuRecent
 
         title: qsTr("Open Recent")
@@ -186,7 +172,7 @@ Item {
 
         Header {
             text: menuRecent.title
-            parentMenu: menuGame
+            parentPage: menuGame
         }
         MenuSeparator { }
         Instantiator {
@@ -216,14 +202,14 @@ Item {
             onTriggered: recentFiles.clear()
         }
     }
-    MenuPage {
+    Page {
         id: menuGo
 
         title: qsTr("Go")
 
         Header {
             text: menuGo.title
-            parentMenu: menuMain
+            parentPage: menuMain
         }
         MenuSeparator { }
         PentobiMenuItem {
@@ -240,14 +226,14 @@ Item {
             action: actionNextComment
         }
     }
-    MenuPage {
+    Page {
         id: menuEdit
 
         title: qsTr("Edit")
 
         Header {
             text: menuEdit.title
-            parentMenu: menuMain
+            parentPage: menuMain
         }
         MenuSeparator { }
         PentobiMenuItem {
@@ -332,14 +318,14 @@ Item {
             }
         }
     }
-    MenuPage {
+    Page {
         id: menuView
 
         title: qsTr("View")
 
         Header {
             text: menuView.title
-            parentMenu: menuMain
+            parentPage: menuMain
         }
         MenuSeparator { }
         PentobiMenuItem {
@@ -353,14 +339,14 @@ Item {
             action: actionFullscreen
         }
     }
-    MenuPage {
+    Page {
         id: menuComputer
 
         title: qsTr("Computer")
 
         Header {
             text: menuComputer.title
-            parentMenu: menuMain
+            parentPage: menuMain
         }
         MenuSeparator { }
         PentobiMenuItem {
@@ -376,14 +362,14 @@ Item {
             action: actionStop
         }
     }
-    MenuPage {
+    Page {
         id: menuTools
 
         title: qsTr("Tools")
 
         Header {
             text: menuTools.title
-            parentMenu: menuMain
+            parentPage: menuMain
         }
         MenuSeparator { }
         PentobiMenuItem {
@@ -410,14 +396,14 @@ Item {
             }
         }
     }
-    MenuPage {
+    Page {
         id: menuHelp
 
         title: qsTr("Help")
 
         Header {
             text: menuHelp.title
-            parentMenu: menuMain
+            parentPage: menuMain
         }
         MenuSeparator { }
         PentobiMenuItem {
