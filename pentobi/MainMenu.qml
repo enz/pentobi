@@ -47,7 +47,6 @@ Item {
 
     component MenuPage: PentobiMenu {
         relativeWidth: root.relativeWidth
-        closePolicy: Popup.CloseOnEscape
     }
     component Header: Item {
         property alias text: label.text
