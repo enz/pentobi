@@ -230,6 +230,7 @@ PentobiToolBarBase {
             MainMenu {
                 id: menu
 
+                anchors.fill: parent
                 popupY: menuButton.height
             }
         }
