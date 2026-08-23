@@ -4,6 +4,7 @@ Pentobi Release Notes
 Version 31.0-dev (main)
 -----------------------
 
+* Partial workaround for broken dark mode on some platforms
 * Improved usability on Linux phones (postmarketOS/Phosh)
 * Make slow analysis speed available on mobile devices
 * Remember selected analysis speed for the current session
