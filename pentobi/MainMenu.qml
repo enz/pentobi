@@ -94,7 +94,6 @@ Item {
         }
         SubMenuItem {
             page: menuEdit
-            onTriggered: openMenu(menuEdit)
         }
         SubMenuItem {
             page: menuView
