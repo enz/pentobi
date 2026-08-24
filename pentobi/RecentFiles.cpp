@@ -23,13 +23,11 @@ RecentFiles::~RecentFiles() = default;
 
 void RecentFiles::add(const QString& file, const QString& displayName)
 {
-    QMutableListIterator i(m_entries);
-    while (i.hasNext())
-    {
-        auto entry = i.next().value<QVariantMap>();
-        if (entry["file"_L1] == file)
-            i.remove();
-    }
+    erase_if(
+        m_entries,
+        [&file](const QVariant& value) {
+            return value.toMap().value("file"_L1) == file;
+        });
     QVariantMap entry{ { "file"_L1, file },
                        { "displayName"_L1, displayName } };
     m_entries.prepend(QVariant::fromValue(entry));
@@ -63,19 +61,17 @@ void RecentFiles::load()
         QSettings settings;
         m_entries = settings.value("recentFiles"_L1).toList();
     }
-    QMutableListIterator i(m_entries);
-    while (i.hasNext())
-    {
-        auto entry = i.next().toMap();
-        if (! entry.contains("file"_L1) || ! entry.contains("displayName"_L1))
-        {
-            i.remove();
-            continue;
-        }
-        auto file = entry["file"_L1].toString();
-        if (! AndroidUtils::checkExists(file))
-            i.remove();
-    }
+    erase_if(
+        m_entries,
+            [](const QVariant& value)
+            {
+                const auto entry = value.toMap();
+                if (! entry.contains("file"_L1)
+                    || ! entry.contains("displayName"_L1))
+                    return true;
+                const auto file = entry.value("file"_L1).toString();
+                return ! AndroidUtils::checkExists(file);
+            });
     checkMax();
     emit entriesChanged();
 }
