@@ -7,6 +7,7 @@
 import QtQuick.Controls
 
 ToolButton {
+    opacity: enabled ? 1 : 0.4
     // Fusion uses no padding on icon-only toolbuttons (Qt 6.11)
     padding: 8
 }
