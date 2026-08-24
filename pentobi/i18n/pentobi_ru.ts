@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ru">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -100,7 +98,7 @@
     </message>
     <message>
         <source>Colorblind mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -181,7 +179,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -577,16 +575,45 @@
 <context>
     <name>MainMenu</name>
     <message>
-        <source>Computer</source>
-        <translation>Компьютер</translation>
+        <source>Game</source>
+        <translation>Игра</translation>
+    </message>
+    <message>
+        <source>Game Variant…</source>
+        <translation>Вариант игры...</translation>
+    </message>
+    <message>
+        <source>Open Recent</source>
+        <translation>Открыть Недавние</translation>
+    </message>
+    <message>
+        <source>Clear List</source>
+        <extracomment>Menu item for clearing the recent files list</extracomment>
+        <translation>Очистить Список</translation>
+    </message>
+    <message>
+        <source>Export Image…</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Go</source>
+        <translation>Ход</translation>
     </message>
     <message>
         <source>Edit</source>
         <translation>Редактировать</translation>
     </message>
     <message>
+        <source>Annotation…</source>
+        <translation>Пояснение…</translation>
+    </message>
+    <message>
         <source>Make Main Variation</source>
         <translation>Сделать основной вариацией</translation>
+    </message>
+    <message>
+        <source>Made main variation</source>
+        <translation>Основные изменения</translation>
     </message>
     <message>
         <source>Variation Up</source>
@@ -627,45 +654,16 @@
         <translation>Следующий Цвет</translation>
     </message>
     <message>
-        <source>Annotation…</source>
-        <translation>Пояснение…</translation>
+        <source>View</source>
+        <translation>Просмотр</translation>
     </message>
     <message>
-        <source>Made main variation</source>
-        <translation>Основные изменения</translation>
+        <source>Appearance</source>
+        <translation>Внешний вид</translation>
     </message>
     <message>
-        <source>Game</source>
-        <translation>Игра</translation>
-    </message>
-    <message>
-        <source>Game Variant…</source>
-        <translation>Вариант игры...</translation>
-    </message>
-    <message>
-        <source>Export Image…</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Go</source>
-        <translation>Ход</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Помощь</translation>
-    </message>
-    <message>
-        <source>About Pentobi</source>
-        <translation>О Pentobi</translation>
-    </message>
-    <message>
-        <source>Open Recent</source>
-        <translation>Открыть Недавние</translation>
-    </message>
-    <message>
-        <source>Clear List</source>
-        <extracomment>Menu item for clearing the recent files list</extracomment>
-        <translation>Очистить Список</translation>
+        <source>Computer</source>
+        <translation>Компьютер</translation>
     </message>
     <message>
         <source>Tools</source>
@@ -680,20 +678,20 @@
         <translation>Очистить Рейтинг</translation>
     </message>
     <message>
-        <source>Clear Analysis</source>
-        <translation>Очистить Анализ</translation>
-    </message>
-    <message>
         <source>Analyze Game…</source>
         <translation>Анализировать игру…</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Просмотр</translation>
+        <source>Clear Analysis</source>
+        <translation>Очистить Анализ</translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation>Внешний вид</translation>
+        <source>Help</source>
+        <translation>Помощь</translation>
+    </message>
+    <message>
+        <source>About Pentobi</source>
+        <translation>О Pentobi</translation>
     </message>
 </context>
 <context>
@@ -743,7 +741,7 @@
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1240,7 +1238,7 @@
     </message>
     <message>
         <source>Untitled.blksgf</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>computer opponent for the board game Blokus</source>
@@ -1303,18 +1301,18 @@
         <translation>Слишком много аргументов</translation>
     </message>
     <message>
-        <source>Use layout optimized for desktop.</source>
-        <extracomment>Description for command line option --desktop</extracomment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>--mobile and --desktop cannot be used both</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
+        <source>Assume desktop (large screen, mouse/keyboard input).</source>
+        <extracomment>Description for command line option --desktop</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Assume phone (small screen, touch input, limited maximum level).</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

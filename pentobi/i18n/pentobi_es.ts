@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="es">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="es">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -577,16 +575,45 @@
 <context>
     <name>MainMenu</name>
     <message>
-        <source>Computer</source>
-        <translation>Máquina</translation>
+        <source>Game</source>
+        <translation>Partida</translation>
+    </message>
+    <message>
+        <source>Game Variant…</source>
+        <translation>Variante de juego...</translation>
+    </message>
+    <message>
+        <source>Open Recent</source>
+        <translation>Abrir reciente</translation>
+    </message>
+    <message>
+        <source>Clear List</source>
+        <extracomment>Menu item for clearing the recent files list</extracomment>
+        <translation>Borrar lista</translation>
+    </message>
+    <message>
+        <source>Export Image…</source>
+        <translation>Exportar imagen...</translation>
+    </message>
+    <message>
+        <source>Go</source>
+        <translation>Ir a</translation>
     </message>
     <message>
         <source>Edit</source>
         <translation>Editar</translation>
     </message>
     <message>
+        <source>Annotation…</source>
+        <translation>Valoración...</translation>
+    </message>
+    <message>
         <source>Make Main Variation</source>
         <translation>Convertir en variación principal</translation>
+    </message>
+    <message>
+        <source>Made main variation</source>
+        <translation>Se ha convertido en variación principal</translation>
     </message>
     <message>
         <source>Variation Up</source>
@@ -627,45 +654,16 @@
         <translation>Siguiente color</translation>
     </message>
     <message>
-        <source>Annotation…</source>
-        <translation>Valoración...</translation>
+        <source>View</source>
+        <translation>Vista</translation>
     </message>
     <message>
-        <source>Made main variation</source>
-        <translation>Se ha convertido en variación principal</translation>
+        <source>Appearance</source>
+        <translation>Apariencia</translation>
     </message>
     <message>
-        <source>Game</source>
-        <translation>Partida</translation>
-    </message>
-    <message>
-        <source>Game Variant…</source>
-        <translation>Variante de juego...</translation>
-    </message>
-    <message>
-        <source>Export Image…</source>
-        <translation>Exportar imagen...</translation>
-    </message>
-    <message>
-        <source>Go</source>
-        <translation>Ir a</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Ayuda</translation>
-    </message>
-    <message>
-        <source>About Pentobi</source>
-        <translation>Acerca de Pentobi</translation>
-    </message>
-    <message>
-        <source>Open Recent</source>
-        <translation>Abrir reciente</translation>
-    </message>
-    <message>
-        <source>Clear List</source>
-        <extracomment>Menu item for clearing the recent files list</extracomment>
-        <translation>Borrar lista</translation>
+        <source>Computer</source>
+        <translation>Máquina</translation>
     </message>
     <message>
         <source>Tools</source>
@@ -680,20 +678,20 @@
         <translation>Borrar nivel</translation>
     </message>
     <message>
-        <source>Clear Analysis</source>
-        <translation>Borrar análisis</translation>
-    </message>
-    <message>
         <source>Analyze Game…</source>
         <translation>Analizar partida...</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Vista</translation>
+        <source>Clear Analysis</source>
+        <translation>Borrar análisis</translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation>Apariencia</translation>
+        <source>Help</source>
+        <translation>Ayuda</translation>
+    </message>
+    <message>
+        <source>About Pentobi</source>
+        <translation>Acerca de Pentobi</translation>
     </message>
 </context>
 <context>
@@ -1303,18 +1301,18 @@
         <translation>Demasiados argumentos</translation>
     </message>
     <message>
-        <source>Use layout optimized for desktop.</source>
-        <extracomment>Description for command line option --desktop</extracomment>
-        <translation>Utilizar el diseño optimizado para ordenador.</translation>
-    </message>
-    <message>
         <source>--mobile and --desktop cannot be used both</source>
         <translation>No se pueden usar ambos diseños para ordenador y móvil a la vez</translation>
     </message>
     <message>
-        <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
+        <source>Assume desktop (large screen, mouse/keyboard input).</source>
+        <extracomment>Description for command line option --desktop</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Assume phone (small screen, touch input, limited maximum level).</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation>Usar el diseño para móvil (predeterminado en pantallas pequeñas y también limita el nivel máximo). </translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

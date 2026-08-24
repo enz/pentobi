@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="vi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="vi">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -577,16 +575,45 @@
 <context>
     <name>MainMenu</name>
     <message>
-        <source>Computer</source>
-        <translation>Máy tính</translation>
+        <source>Game</source>
+        <translation>Trò chơi</translation>
+    </message>
+    <message>
+        <source>Game Variant…</source>
+        <translation>Biến thể Trò chơi…</translation>
+    </message>
+    <message>
+        <source>Open Recent</source>
+        <translation>Mở Gần đây</translation>
+    </message>
+    <message>
+        <source>Clear List</source>
+        <extracomment>Menu item for clearing the recent files list</extracomment>
+        <translation>Xóa Danh sách</translation>
+    </message>
+    <message>
+        <source>Export Image…</source>
+        <translation>Xuất Hình ảnh…</translation>
+    </message>
+    <message>
+        <source>Go</source>
+        <translation>Đi</translation>
     </message>
     <message>
         <source>Edit</source>
         <translation>Chỉnh sửa</translation>
     </message>
     <message>
+        <source>Annotation…</source>
+        <translation>Chú thích…</translation>
+    </message>
+    <message>
         <source>Make Main Variation</source>
         <translation>Tạo Biến thể Chính</translation>
+    </message>
+    <message>
+        <source>Made main variation</source>
+        <translation>Đã tạo biến thể chính</translation>
     </message>
     <message>
         <source>Variation Up</source>
@@ -627,45 +654,16 @@
         <translation>Màu Tiếp theo</translation>
     </message>
     <message>
-        <source>Annotation…</source>
-        <translation>Chú thích…</translation>
+        <source>View</source>
+        <translation>Xem</translation>
     </message>
     <message>
-        <source>Made main variation</source>
-        <translation>Đã tạo biến thể chính</translation>
+        <source>Appearance</source>
+        <translation>Giao diện</translation>
     </message>
     <message>
-        <source>Game</source>
-        <translation>Trò chơi</translation>
-    </message>
-    <message>
-        <source>Game Variant…</source>
-        <translation>Biến thể Trò chơi…</translation>
-    </message>
-    <message>
-        <source>Export Image…</source>
-        <translation>Xuất Hình ảnh…</translation>
-    </message>
-    <message>
-        <source>Go</source>
-        <translation>Đi</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Trợ giúp</translation>
-    </message>
-    <message>
-        <source>About Pentobi</source>
-        <translation>Giới thiệu về Pentobi</translation>
-    </message>
-    <message>
-        <source>Open Recent</source>
-        <translation>Mở Gần đây</translation>
-    </message>
-    <message>
-        <source>Clear List</source>
-        <extracomment>Menu item for clearing the recent files list</extracomment>
-        <translation>Xóa Danh sách</translation>
+        <source>Computer</source>
+        <translation>Máy tính</translation>
     </message>
     <message>
         <source>Tools</source>
@@ -680,20 +678,20 @@
         <translation>Xóa Xếp hạng</translation>
     </message>
     <message>
-        <source>Clear Analysis</source>
-        <translation>Xóa Phân tích</translation>
-    </message>
-    <message>
         <source>Analyze Game…</source>
         <translation>Phân tích Trò chơi…</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Xem</translation>
+        <source>Clear Analysis</source>
+        <translation>Xóa Phân tích</translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation>Giao diện</translation>
+        <source>Help</source>
+        <translation>Trợ giúp</translation>
+    </message>
+    <message>
+        <source>About Pentobi</source>
+        <translation>Giới thiệu về Pentobi</translation>
     </message>
 </context>
 <context>
@@ -1303,18 +1301,18 @@
         <translation>Quá nhiều đối số</translation>
     </message>
     <message>
-        <source>Use layout optimized for desktop.</source>
-        <extracomment>Description for command line option --desktop</extracomment>
-        <translation>Sử dụng bố cục tối ưu cho máy tính để bàn.</translation>
-    </message>
-    <message>
         <source>--mobile and --desktop cannot be used both</source>
         <translation>--mobile và --desktop không thể sử dụng cùng lúc</translation>
     </message>
     <message>
-        <source>Use smartphone layout (default on small screens, also limits maximum level).</source>
+        <source>Assume desktop (large screen, mouse/keyboard input).</source>
+        <extracomment>Description for command line option --desktop</extracomment>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Assume phone (small screen, touch input, limited maximum level).</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation>Sử dụng bố cục điện thoại thông minh (mặc định trên màn hình nhỏ, cũng giới hạn cấp tối đa).</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
