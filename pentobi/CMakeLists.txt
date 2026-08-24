@@ -18,6 +18,7 @@ qt_add_qml_module(pentobi
     +Basic/PentobiToolBarBase.qml
     +Fusion/MainBase.qml
     +Fusion/PentobiScrollView.qml
+    +Fusion/PentobiToolButtonBase.qml
     +Material/MainBase.qml
     +org.kde.breeze/PentobiToolButtonBase.qml
     +org.kde.breeze/PentobiButtonBase.qml
