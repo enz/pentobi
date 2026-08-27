@@ -120,6 +120,7 @@ Item
         property alias showCoordinates: root.showCoordinates
         property alias swipeViewCurrentIndex: swipeView.currentIndex
         property alias setupMode: root.setupMode
+        property alias commentMode: root.commentMode
 
         category: "GameViewMobile"
     }
