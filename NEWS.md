@@ -18,7 +18,7 @@ Version 31.0-dev (main)
 Version 30.4-dev (v30-fixes)
 ----------------------------
 
-* …
+* Made comment mode a persistent setting in mobile view
 
 Version 30.3 (26 Jul 2026)
 --------------------------
