@@ -158,6 +158,8 @@ int main(int argc, char *argv[])
             isMobile = true;
         else if (parser.isSet(optionDesktop))
             isMobile = false;
+        else if (qEnvironmentVariableIsSet("PENTOBI_MOBILE"))
+            isMobile = (qEnvironmentVariable("PENTOBI_MOBILE") != "0");
         else
 #ifdef Q_OS_ANDROID
             isMobile = true;
