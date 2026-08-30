@@ -11,6 +11,5 @@ import QtQuick.Controls
 Button {
     text: qsTr("Close")
     DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
-    // See PentobiMenuItem.focusPolicy
-    focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+    focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
 }

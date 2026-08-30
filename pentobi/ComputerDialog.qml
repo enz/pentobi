@@ -61,8 +61,7 @@ PentobiDialog {
                         if (gameModel.nuColors === 4
                                 && gameModel.nuPlayers === 2)
                             switch2.checked = checked
-                    // See PentobiMenuItem.focusPolicy
-                    focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                    focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                 }
                 Switch {
                     id: switch1
@@ -75,8 +74,7 @@ PentobiDialog {
                                 && gameModel.nuPlayers === 2)
                             switch3.checked = checked
                     Layout.fillWidth: true
-                    // See PentobiMenuItem.focusPolicy
-                    focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                    focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                 }
                 Switch {
                     id: switch2
@@ -86,8 +84,7 @@ PentobiDialog {
                     text: Logic.getPlayerString(gameModel.gameVariant, 2)
                     checked: computerPlays2
                     Layout.fillWidth: true
-                    // See PentobiMenuItem.focusPolicy
-                    focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                    focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                 }
                 Switch {
                     id: switch3
@@ -97,8 +94,7 @@ PentobiDialog {
                     text: Logic.getPlayerString(gameModel.gameVariant, 3)
                     checked: computerPlays3
                     Layout.fillWidth: true
-                    // See PentobiMenuItem.focusPolicy
-                    focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                    focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                 }
             }
             RowLayout {
@@ -120,8 +116,7 @@ PentobiDialog {
                     stepSize: 1
                     snapMode: Slider.SnapAlways
                     Layout.fillWidth: true
-                    // See PentobiMenuItem.focusPolicy
-                    focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                    focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                 }
             }
         }

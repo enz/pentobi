@@ -71,8 +71,7 @@ PentobiDialog {
                 ]
                 Layout.preferredWidth: 15 * font.pixelSize
                 Layout.fillWidth: true
-                // See PentobiMenuItem.focusPolicy
-                focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
             }
         }
     }

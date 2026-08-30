@@ -76,8 +76,7 @@ PentobiDialog {
                         break
                     }
                 Layout.fillWidth: true
-                // See PentobiMenuItem.focusPolicy
-                focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
             }
             GridLayout {
                 columns: 2
@@ -119,8 +118,7 @@ PentobiDialog {
                                     gameVariant = "gembloq_2"
                             }
                         Layout.fillWidth: true
-                        // See PentobiMenuItem.focusPolicy
-                        focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                        focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                     }
                     RadioButton {
                         text: "3"
@@ -145,8 +143,7 @@ PentobiDialog {
                                     gameVariant = "callisto_3"
                             }
                         Layout.fillWidth: true
-                        // See PentobiMenuItem.focusPolicy
-                        focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                        focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                     }
                     RadioButton {
                         text: "4"
@@ -175,8 +172,7 @@ PentobiDialog {
                                     gameVariant = "callisto"
                             }
                         Layout.fillWidth: true
-                        // See PentobiMenuItem.focusPolicy
-                        focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                        focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                     }
                 }
                 Label {
@@ -210,8 +206,7 @@ PentobiDialog {
                                     gameVariant = "gembloq_2"
                             }
                         Layout.fillWidth: true
-                        // See PentobiMenuItem.focusPolicy
-                        focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                        focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                     }
                     RadioButton {
                         text: "3"
@@ -232,8 +227,7 @@ PentobiDialog {
                                     gameVariant = "callisto_3"
                             }
                         Layout.fillWidth: true
-                        // See PentobiMenuItem.focusPolicy
-                        focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                        focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                     }
                     RadioButton {
                         text: "4"
@@ -276,8 +270,7 @@ PentobiDialog {
                                     gameVariant = "callisto"
                             }
                         Layout.fillWidth: true
-                        // See PentobiMenuItem.focusPolicy
-                        focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                        focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
                     }
                 }
             }

@@ -41,6 +41,12 @@ MainBase {
                                         || playerModel.isGenMoveRunning
                                         || analyzeGameModel.isRunning
 
+    // Prevent unwanted appearances of the on-screen keyboard in
+    // postmarketOS/Phosh (26.06) when popups (Menu, Dialog) are opened or
+    // closed. As a workaround, we set focus: true in dialogs and menus and
+    // focusPolicy: Qt.NoFocus in menu items and some other controls.
+    property bool workaroundOskBug: isMobile
+    
     minimumWidth: isMobile ? 240 : 481
     minimumHeight: isMobile ? 301 : 303
     title: Logic.getWindowTitle(gameModel.file, gameModel.isModified)

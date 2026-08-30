@@ -77,16 +77,14 @@ PentobiDialog {
 
                 text: qsTr("Coordinates")
                 checked: gameView.showCoordinates
-                // See PentobiMenuItem.focusPolicy
-                focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
             }
             Switch {
                 id: switchShowVariations
 
                 text: qsTr("Show variations")
                 checked: gameModel.showVariations
-                // See PentobiMenuItem.focusPolicy
-                focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
             }
             Switch {
                 id: switchMoveNumber
@@ -96,16 +94,14 @@ PentobiDialog {
                 //: move number in the status bar.
                 text: qsTr("Move number")
                 checked: gameView.showMoveNumber
-                // See PentobiMenuItem.focusPolicy
-                focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
             }
             Switch {
                 id: switchColorblind
 
                 text: qsTr("Colorblind mode")
                 checked: rootWindow.theme.colorblind
-                // See PentobiMenuItem.focusPolicy
-                focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
             }
             Label {
                 text: qsTr("Move marking:")
@@ -124,8 +120,7 @@ PentobiDialog {
                 ]
                 Layout.preferredWidth: font.pixelSize * 20
                 Layout.fillWidth: true
-                // See PentobiMenuItem.focusPolicy
-                focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
             }
             Label {
                 text: qsTr("Show comment:")
@@ -144,8 +139,7 @@ PentobiDialog {
                 ]
                 Layout.preferredWidth: font.pixelSize * 20
                 Layout.fillWidth: true
-                // See PentobiMenuItem.focusPolicy
-                focusPolicy: isMobile ? Qt.NoFocus : Qt.StrongFocus
+                focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
             }
         }
     }
