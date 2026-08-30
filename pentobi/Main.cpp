@@ -37,7 +37,15 @@ bool isSmallScreen()
     auto inches = sqrt(width * width + height * height) / 25.4;
     LIBBOARDGAME_LOG("Main screen ", width, " mm x ", height, " mm, diag ",
                      round(inches * 10) / 10, " in");
-    return inches < 10;
+    return inches < 11;
+}
+
+bool hasTouchInput()
+{
+    auto devices = QInputDevice::devices();
+    if (devices.empty())
+        return false;
+    return devices.at(0)->type() == QInputDevice::DeviceType::TouchScreen;
 }
 
 } // namespace
@@ -164,7 +172,7 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_ANDROID
             isMobile = true;
 #else
-            isMobile = isSmallScreen();
+            isMobile = isSmallScreen() && hasTouchInput();
 #endif
 #ifdef Q_OS_WINDOWS
         if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
