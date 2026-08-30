@@ -13,7 +13,6 @@ Menu {
 
     width: Math.min(font.pixelSize * (isMobile ? 23 : relativeWidth),
                     rootWindow.contentItem.width)
-    // See PentobiMenuItem.focusPolicy
-    focus: ! isMobile
+    focus: ! workaroundOskBug
     onAboutToShow: currentIndex = -1
 }
