@@ -51,8 +51,8 @@ computer player used in Pentobi.
   GTP interface to the player in libpentobi_mcts.
   See [Pentobi-GTP](pentobi_gtp/Pentobi-GTP.md) for more information.
 * __[twogtp](twogtp)__
-  Tool for playing Blokus games between two GTP engines (currently only
-  supported on Unix)
+  Tool for playing Blokus games between two GTP engines (only supported
+  on Unix)
 
 The GUI module implements the user interface with [Qt](https://www.qt.io/)
 (QtQuick Controls).
