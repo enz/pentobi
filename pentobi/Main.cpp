@@ -179,8 +179,8 @@ int main(int argc, char *argv[])
             qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
 #elif defined(Q_OS_LINUX)
         if (isMobile && qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
-            // Use Material.Dark as the default style since Fusion has tiny
-            // font on postmarketOS/Phosh (Aug 2026)
+            // Use Material as the default style since Fusion has small touch
+            // targets on mobile
             qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
 #endif
         unsigned maxLevel = isMobile ? 7 : 9;
