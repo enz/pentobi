@@ -15,12 +15,12 @@ PentobiScrollView {
 
     signal closeClicked()
 
-    contentWidth: width
+    contentWidth: availableWidth
     contentHeight: textArea.implicitHeight
 
     Item
     {
-        width: Math.max(parent.width - 12, 0)
+        width: Math.max(root.availableWidth - 12, 0)
 
         TextArea {
             id: textArea
