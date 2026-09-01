@@ -18,6 +18,7 @@ Dialog {
     height: rootWindow.contentItem.height
     padding: 0
     modal: true
+    focus: ! workaroundOskBug
 
     Rectangle {
         anchors.fill: parent

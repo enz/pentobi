@@ -33,6 +33,8 @@ PentobiScrollView {
             textFormat: TextArea.RichText
             wrapMode: TextArea.WordWrap
             readOnly: true
+            hoverEnabled: ! isMobile
+            activeFocusOnPress: false // See also comment at workaroundOskBug
             text: docbookReader.text
             // Selecting text sometimes triggers Qt bugs that break
             // clicking on links (Qt 6.9.2)
@@ -47,6 +49,7 @@ PentobiScrollView {
                 }
 
             MouseArea {
+                visible: ! isMobile
                 anchors.fill: parent
                 cursorShape: parent.hoveredLink ? Qt.PointingHandCursor
                                                 : Qt.ArrowCursor
