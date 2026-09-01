@@ -64,6 +64,6 @@ PentobiScrollView {
         colorBackground: theme.colorBackground
         colorText: theme.colorText
         colorLink: theme.colorLink
-        textWidth: textArea.width
+        textWidth: textArea.width - root.effectiveScrollBarWidth
     }
 }
