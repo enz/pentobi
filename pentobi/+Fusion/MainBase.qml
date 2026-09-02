@@ -8,10 +8,13 @@ import QtQuick
 import QtQuick.Controls
 
 // Fusion is broken on some platforms and uses a light palette even when
-// colorScheme is dark (#26; QTBUG-148413). We hardcode the values from
-// qtbase/src/gui/kernel/qplatformtheme.cpp (Qt 6.11.3) to ensure the palette
-// matches colorScheme. Note that the value of colorScheme depends on the
-// platform theme plugin and is broken on some platforms.
+// colorScheme is dark (#26; QTBUG-148413). As a workaround, we hardcode the
+// values from qtbase/src/gui/kernel/qplatformtheme.cpp (Qt 6.11.3) to ensure
+// that we at least use a palette that matches colorScheme (and even the
+// correct one if colorScheme has the correct value). The downside is that we
+// use the default Fusion palettes, not the system palette, but this was
+// also broken on some platforms (dialog had no visible borders in Debian 13,
+// Qt 6.11).
 ApplicationWindow {
     property bool isDark: Application.styleHints.colorScheme === Qt.Dark
 
