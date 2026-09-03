@@ -74,7 +74,7 @@ public:
 
     /** Return the number of points of the piece that contribute to the score.
         This excludes any junction points included in the piece definition in
-        Nexos.*/
+        Nexos. */
     ScoreType get_score_points() const { return m_score_points; }
 
     unsigned get_nu_instances() const { return m_nu_instances; }

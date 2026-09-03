@@ -270,7 +270,7 @@ bool GameModel::checkFileModifiedOutside()
     Currently, we support setup mode only if no moves have been played. It
     should also work in inner nodes but this might be confusing for users and
     violate some assumptions in the user interface (e.g. node depth is equal to
-    move number).*/
+    move number). */
 bool GameModel::checkSetupAllowed() const
 {
     return ! m_canGoBackward && ! m_canGoForward && m_moveNumber == 0;

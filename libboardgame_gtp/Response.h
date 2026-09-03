@@ -37,7 +37,7 @@ private:
     /** Response stream */
     ostringstream m_stream;
 
-    /** Dummy for restoring default format flags*/
+    /** Dummy for restoring default format flags */
     ios m_dummy{nullptr};
 };
 
