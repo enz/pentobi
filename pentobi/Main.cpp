@@ -183,7 +183,8 @@ int main(int argc, char *argv[])
             // and setting the minimum content width as in PentobiDialog
             // doesn't always work on org.kde.breeze. Also, phones usually have
             // brighter screens and the light mode of Fusion and org.kde.breeze
-            // doesn't look good.
+            // doesn't look good and org.kde.breeze and Fusion (Qt >6.12) would
+            // show keyboard shortcuts in the menu.
             QQuickStyle::setStyle("Material");
 #endif
         unsigned maxLevel = isMobile ? 7 : 9;
