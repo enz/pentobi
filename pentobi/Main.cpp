@@ -178,10 +178,13 @@ int main(int argc, char *argv[])
         if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
             qputenv("QT_QUICK_CONTROLS_STYLE", "FluentWinUI3");
 #elif defined(Q_OS_LINUX)
-        if (isMobile && qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE"))
-            // Use Material as the default style since Fusion has small touch
-            // targets on mobile
-            qputenv("QT_QUICK_CONTROLS_STYLE", "Material");
+        if (isMobile)
+            // Enforce Material since Fusion has small touch targets on mobile
+            // and setting the minimum content width as in PentobiDialog
+            // doesn't always work on org.kde.breeze. Also, phones usually have
+            // brighter screens and the light mode of Fusion and org.kde.breeze
+            // doesn't look good.
+            QQuickStyle::setStyle("Material");
 #endif
         unsigned maxLevel = isMobile ? 7 : 9;
         if (parser.isSet(optionMaxLevel))
