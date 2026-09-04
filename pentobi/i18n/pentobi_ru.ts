@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Colorblind mode</source>
-        <translation type="unfinished"/>
+        <translation>Режим для дальтоников</translation>
     </message>
 </context>
 <context>
@@ -593,7 +593,7 @@
     </message>
     <message>
         <source>Export Image…</source>
-        <translation type="unfinished"/>
+        <translation>Экспортировать изображение…</translation>
     </message>
     <message>
         <source>Go</source>
@@ -741,7 +741,7 @@
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"/>
+        <translation>Все файлы</translation>
     </message>
 </context>
 <context>

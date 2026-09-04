@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Colorblind mode</source>
-        <translation type="unfinished"/>
+        <translation>色盲模式</translation>
     </message>
 </context>
 <context>
@@ -593,7 +593,7 @@
     </message>
     <message>
         <source>Export Image…</source>
-        <translation type="unfinished"/>
+        <translation>导出图像…</translation>
     </message>
     <message>
         <source>Go</source>
@@ -741,7 +741,7 @@
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"/>
+        <translation>全部文件</translation>
     </message>
 </context>
 <context>
