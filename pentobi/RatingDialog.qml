@@ -129,6 +129,13 @@ PentobiDialog {
                 boundsBehavior: Flickable.StopAtBounds
                 model: ratingModel.tableModel
                 delegate: Label {
+                    function openMenu(row) {
+                        if (row < 1)
+                            return
+                        menu.row = row
+                        menu.popup(this, 0, height)
+                    }
+
                     font.underline: row === 0
                     text: row > 0 && column === 3 ?
                               Logic.getPlayerString(ratingModel.gameVariant,
@@ -136,11 +143,12 @@ PentobiDialog {
                             : display
                     horizontalAlignment:
                         column === 2 ? Text.AlignHCenter : Text.AlignLeft
+
                     MouseArea {
                         anchors.fill: parent
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
-                        onClicked: menu.openMenu(row, parent)
-                        onPressAndHold: menu.openMenu(row, parent)
+                        onClicked: openMenu(row)
+                        onPressAndHold: openMenu(row)
                     }
                 }
                 columnSpacing: 0.4 * font.pixelSize
@@ -156,14 +164,6 @@ PentobiDialog {
                 id: menu
 
                 property int row
-
-                function openMenu(row, parent) {
-                    if (row < 1)
-                        return
-                    menu.parent = parent
-                    menu.row = row
-                    popup()
-                }
 
                 relativeWidth: 14
 
