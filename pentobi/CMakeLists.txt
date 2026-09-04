@@ -116,6 +116,7 @@ qt_add_qml_module(pentobi
     RatingModel.cpp
     RecentFiles.h
     RecentFiles.cpp
+    resources.qrc
     "${CMAKE_CURRENT_BINARY_DIR}/help/help.qrc"
     ../opening_books/pentobi_books.qrc
 
