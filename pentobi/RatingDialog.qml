@@ -148,7 +148,6 @@ PentobiDialog {
                         anchors.fill: parent
                         acceptedButtons: Qt.LeftButton | Qt.RightButton
                         onClicked: openMenu(row)
-                        onPressAndHold: openMenu(row)
                     }
                 }
                 columnSpacing: 0.4 * font.pixelSize
