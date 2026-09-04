@@ -13,13 +13,6 @@ PentobiDialog {
     id: root
 
     footer: DialogButtonBoxOkCancel { }
-    onAboutToShow: {
-        switch0.checked = computerPlays0
-        switch1.checked = computerPlays1
-        switch2.checked = computerPlays2
-        switch3.checked = computerPlays3
-        slider.value = playerModel.level
-    }
     onAccepted: {
         computerPlays0 = switch0.checked
         computerPlays1 = switch1.checked
@@ -31,9 +24,15 @@ PentobiDialog {
         if (! gameModel.isGameOver)
             Logic.checkComputerMove()
     }
-    // Switch animations run even if the checked status is changed when the
-    // switch is not visible. So we don't reuse the dialog.
-    onClosed: computerDialog.source = ""
+    onClosed: {
+        // Restore bindings to initial valuess to avoid visible switch
+        // animations when opening the dialog in some situations/styles.
+        switch0.checked = Qt.binding(function() { return computerPlays0 })
+        switch1.checked = Qt.binding(function() { return computerPlays1 })
+        switch2.checked = Qt.binding(function() { return computerPlays2 })
+        switch3.checked = Qt.binding(function() { return computerPlays3 })
+        slider.value = Qt.binding(function() { return playerModel.level })
+    }
 
     Item {
         implicitWidth:
@@ -114,6 +113,7 @@ PentobiDialog {
                     from: 1
                     to: playerModel.maxLevel
                     stepSize: 1
+                    value: playerModel.level
                     snapMode: Slider.SnapAlways
                     Layout.fillWidth: true
                     focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
