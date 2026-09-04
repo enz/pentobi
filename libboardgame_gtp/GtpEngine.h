@@ -93,7 +93,7 @@ public:
     template<class T>
     void add(const string& name, void (T::*f)(), T* t);
 
-    /** Returns if command registered. */
+    /** Returns true if command is registered. */
     bool contains(const string& name) const;
 
 protected:
