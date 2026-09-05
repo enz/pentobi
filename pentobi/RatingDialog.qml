@@ -153,7 +153,8 @@ PentobiDialog {
                 editTriggers: TableView.NoEditTriggers
                 delegate: TableViewDelegate {
                     rightPadding: columnLayout.spacing
-                    topPadding: columnLayout.spacing
+                    topPadding: columnLayout.spacing / 2
+                    bottomPadding: columnLayout.spacing / 2
                     font.underline: row === 0
                     contentItem: Label {
                         text: row > 0 && column === 3 ?
