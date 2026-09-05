@@ -165,7 +165,7 @@ PentobiDialog {
                     }
                     background: Rectangle {
                         visible: row > 0 && selectionModel.currentIndex.row === row
-                        color: isDark ? "royalblue" : "skyblue"
+                        color: "#888888"
                     }
 
                     TapHandler {
