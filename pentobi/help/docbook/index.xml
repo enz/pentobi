@@ -1236,7 +1236,7 @@ Switch view between comment and game analysis.
 </listitem>
 </varlistentry>
 <varlistentry>
-<term><keysym>Alt+M</keysym></term>
+<term><keysym>F10</keysym></term>
 <listitem>
 <para>
 Open menu.
