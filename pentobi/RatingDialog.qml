@@ -150,6 +150,7 @@ PentobiDialog {
                 delegate: TableViewDelegate {
                     rightPadding: columnLayout.spacing
                     topPadding: columnLayout.spacing
+                    font.underline: row === 0
                     contentItem: Label {
                         text: row > 0 && column === 3 ?
                                   Logic.getPlayerString(ratingModel.gameVariant,
