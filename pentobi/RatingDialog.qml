@@ -156,6 +156,7 @@ PentobiDialog {
                                   Logic.getPlayerString(ratingModel.gameVariant,
                                                         model.display)
                                 : model.display
+                        horizontalAlignment: column === 2 ? Text.AlignHCenter : Text.AlignLeft
                     }
                     background: Rectangle {
                         visible: row > 0 && selectionModel.currentIndex.row === row
