@@ -609,7 +609,7 @@ MainBase {
         onActivated: Logic.nextPiece()
     }
     Shortcut {
-        sequence: "Alt+M"
+        sequence: "F10"
         onActivated: toolBar.clickMenuButton()
     }
     Shortcut {
