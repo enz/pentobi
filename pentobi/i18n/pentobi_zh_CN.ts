@@ -927,8 +927,8 @@
         <translation>最近的发展：</translation>
     </message>
     <message>
-        <source>Open Game %1</source>
-        <translation>打开第%1局</translation>
+        <source>Open Game</source>
+        <translation>打开第局</translation>
     </message>
 </context>
 <context>

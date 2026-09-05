@@ -927,8 +927,8 @@
         <translation>Aktuelle Entwicklung:</translation>
     </message>
     <message>
-        <source>Open Game %1</source>
-        <translation>Spiel %1 öffnen</translation>
+        <source>Open Game</source>
+        <translation>Spiel öffnen</translation>
     </message>
 </context>
 <context>

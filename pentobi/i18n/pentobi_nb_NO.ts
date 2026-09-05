@@ -927,8 +927,8 @@
         <translation>Nylig utvikling:</translation>
     </message>
     <message>
-        <source>Open Game %1</source>
-        <translation>Åpne spill %1</translation>
+        <source>Open Game</source>
+        <translation>Åpne spill</translation>
     </message>
 </context>
 <context>

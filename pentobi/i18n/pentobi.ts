@@ -929,7 +929,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open Game %1</source>
+        <source>Open Game</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

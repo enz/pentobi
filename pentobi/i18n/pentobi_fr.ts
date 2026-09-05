@@ -927,8 +927,8 @@
         <translation>Développement récent :</translation>
     </message>
     <message>
-        <source>Open Game %1</source>
-        <translation>Ouvrir la partie %1</translation>
+        <source>Open Game</source>
+        <translation>Ouvrir la partie</translation>
     </message>
 </context>
 <context>

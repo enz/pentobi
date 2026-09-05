@@ -12,7 +12,22 @@ import "main.js" as Logic
 PentobiDialog {
     property int numberGames: ratingModel.numberGames
 
-    footer: DialogButtonBoxClose { }
+    footer: DialogButtonBox {
+        Button {
+            enabled: selectionModel.currentIndex.row > 0
+            text: qsTr("Open Game")
+            DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
+            focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus            
+            onClicked: {
+                var row = selectionModel.currentIndex.row
+                if (row < 1)
+                    return
+                var n = ratingModel.getGameNumber(row - 1)
+                Logic.openFile(ratingModel.getFile(n), "")
+            }
+        }
+        ButtonClose { }
+    }
 
     Item {
         implicitWidth: Math.max(Math.min(font.pixelSize * 26, maxContentWidth),
@@ -128,53 +143,30 @@ PentobiDialog {
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
                 model: ratingModel.tableModel
-                delegate: Label {
-                    function openMenu(row) {
-                        if (row < 1)
-                            return
-                        menu.row = row
-                        menu.popup(this, 0, height)
+                selectionModel: ItemSelectionModel { id: selectionModel }
+                selectionBehavior: TableView.SelectRows
+                selectionMode: TableView.SingleSelection
+                editTriggers: TableView.NoEditTriggers
+                delegate: TableViewDelegate {
+                    rightPadding: columnLayout.spacing
+                    topPadding: columnLayout.spacing
+                    contentItem: Label {
+                        text: row > 0 && column === 3 ?
+                                  Logic.getPlayerString(ratingModel.gameVariant,
+                                                        model.display)
+                                : model.display
                     }
-
-                    font.underline: row === 0
-                    text: row > 0 && column === 3 ?
-                              Logic.getPlayerString(ratingModel.gameVariant,
-                                                    display)
-                            : display
-                    horizontalAlignment:
-                        column === 2 ? Text.AlignHCenter : Text.AlignLeft
-
-                    MouseArea {
-                        anchors.fill: parent
-                        acceptedButtons: Qt.LeftButton | Qt.RightButton
-                        onClicked: openMenu(row)
+                    background: Rectangle {
+                        visible: row > 0 && selectionModel.currentIndex.row === row
+                        color: isDark ? "royalblue" : "skyblue"
                     }
                 }
-                columnSpacing: 0.4 * font.pixelSize
-                rowSpacing: columnLayout.spacing
+                ScrollBar.vertical: ScrollBar { }
                 Layout.fillWidth: true
                 Layout.preferredHeight:
                     Math.min(font.pixelSize * 8,
                              0.22 * rootWindow.contentItem.width,
                              0.22 * rootWindow.contentItem.height)
-                ScrollBar.vertical: ScrollBar { }
-            }
-            PentobiMenu {
-                id: menu
-
-                property int row
-
-                relativeWidth: 14
-
-                PentobiMenuItem {
-                    text: qsTr("Open Game %1").arg(
-                                ratingModel.getGameNumber(menu.row - 1))
-                    onTriggered: {
-                        var n = ratingModel.getGameNumber(menu.row - 1)
-                        Logic.openFile(ratingModel.getFile(n), "")
-                        close()
-                    }
-                }
             }
         }
     }

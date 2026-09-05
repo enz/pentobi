@@ -927,8 +927,8 @@
         <translation>Phát triển gần đây:</translation>
     </message>
     <message>
-        <source>Open Game %1</source>
-        <translation>Mở Trò chơi %1</translation>
+        <source>Open Game</source>
+        <translation>Mở Trò chơi</translation>
     </message>
 </context>
 <context>

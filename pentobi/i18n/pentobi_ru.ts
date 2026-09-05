@@ -927,8 +927,8 @@
         <translation>Последняя разработка:</translation>
     </message>
     <message>
-        <source>Open Game %1</source>
-        <translation>Открыть Игру %1</translation>
+        <source>Open Game</source>
+        <translation>Открыть Игру</translation>
     </message>
 </context>
 <context>
