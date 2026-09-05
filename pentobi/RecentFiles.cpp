@@ -6,6 +6,7 @@
 
 #include "RecentFiles.h"
 
+#include <QMap>
 #include <QSettings>
 #include "AndroidUtils.h"
 
