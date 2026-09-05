@@ -160,6 +160,16 @@ PentobiDialog {
                         visible: row > 0 && selectionModel.currentIndex.row === row
                         color: isDark ? "royalblue" : "skyblue"
                     }
+
+                    TapHandler {
+                        gesturePolicy: TapHandler.ReleaseWithinBounds
+                        onTapped: {
+                            let modelIndex = tableView.model.index(row, column)
+                            selectionModel.setCurrentIndex(
+                                        modelIndex, 
+                                        ItemSelectionModel.ClearAndSelect | ItemSelectionModel.Rows)
+                        }
+                    }
                 }
                 ScrollBar.vertical: ScrollBar { }
                 Layout.fillWidth: true
