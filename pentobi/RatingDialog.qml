@@ -13,6 +13,8 @@ PentobiDialog {
     property int numberGames: ratingModel.numberGames
 
     footer: DialogButtonBox {
+        defaultButton: buttonClose
+
         Button {
             enabled: selectionModel.currentIndex.row > 0
             text: qsTr("Open Game")
@@ -26,7 +28,9 @@ PentobiDialog {
                 Logic.openFile(ratingModel.getFile(n), "")
             }
         }
-        ButtonClose { }
+        ButtonClose {
+            id: buttonClose
+        }
     }
 
     Item {
