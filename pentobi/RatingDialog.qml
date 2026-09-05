@@ -17,7 +17,7 @@ PentobiDialog {
             enabled: selectionModel.currentIndex.row > 0
             text: qsTr("Open Game")
             DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
-            focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus            
+            focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
             onClicked: {
                 var row = selectionModel.currentIndex.row
                 if (row < 1)
