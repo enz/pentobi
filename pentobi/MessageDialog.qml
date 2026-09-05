@@ -13,6 +13,8 @@ PentobiDialog {
     property alias text: label.text
 
     footer: DialogButtonBox {
+        defaultButton: buttonOk
+
         ButtonOk { id: buttonOk }
     }
 

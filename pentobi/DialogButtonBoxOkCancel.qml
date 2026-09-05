@@ -7,6 +7,8 @@
 import QtQuick.Controls
 
 DialogButtonBox {
+    defaultButton: buttonOk
+
     ButtonCancel { }
     ButtonOk { id: buttonOk }
 }

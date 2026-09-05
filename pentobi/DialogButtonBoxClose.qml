@@ -7,5 +7,7 @@
 import QtQuick.Controls
 
 DialogButtonBox {
+    defaultButton: buttonClose
+
     ButtonClose { id: buttonClose }
 }
