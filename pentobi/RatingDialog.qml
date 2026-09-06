@@ -26,7 +26,7 @@ PentobiDialog {
         Button {
             id: buttonOpen
 
-            enabled: selectionModel.currentIndex.row > 0
+            enabled: selectionModel.currentIndex.row >= 0
             text: qsTr("Open Game")
             DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
             focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
