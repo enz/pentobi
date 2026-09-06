@@ -12,21 +12,25 @@ import "main.js" as Logic
 PentobiDialog {
     property int numberGames: ratingModel.numberGames
 
+    function openSelectedGame() {
+        var row = selectionModel.currentIndex.row
+        if (row < 1)
+            return
+        var n = ratingModel.getGameNumber(row - 1)
+        Logic.openFile(ratingModel.getFile(n), "")
+    }
+
     footer: DialogButtonBox {
         defaultButton: buttonClose
 
         Button {
+            id: buttonOpen
+
             enabled: selectionModel.currentIndex.row > 0
             text: qsTr("Open Game")
             DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
             focusPolicy: workaroundOskBug ? Qt.NoFocus : Qt.StrongFocus
-            onClicked: {
-                var row = selectionModel.currentIndex.row
-                if (row < 1)
-                    return
-                var n = ratingModel.getGameNumber(row - 1)
-                Logic.openFile(ratingModel.getFile(n), "")
-            }
+            onClicked: openSelectedGame()
         }
         ButtonClose {
             id: buttonClose
@@ -144,10 +148,15 @@ PentobiDialog {
             }
             TableView {
                 visible: ratingModel.ratingHistory.length > 0
+                focus: true
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
                 model: ratingModel.tableModel
-                selectionModel: ItemSelectionModel { id: selectionModel }
+                selectionModel: ItemSelectionModel {
+                    id: selectionModel
+
+                    model: ratingModel.tableModel
+                }
                 selectionBehavior: TableView.SelectRows
                 selectionMode: TableView.SingleSelection
                 editTriggers: TableView.NoEditTriggers
@@ -164,7 +173,7 @@ PentobiDialog {
                         horizontalAlignment: column === 2 ? Text.AlignHCenter : Text.AlignLeft
                     }
                     background: Rectangle {
-                        visible: row > 0 && selectionModel.currentIndex.row === row
+                        visible: selectionModel.currentIndex.row === row
                         color: "#888888"
                     }
 
@@ -178,6 +187,13 @@ PentobiDialog {
                         }
                     }
                 }
+                Keys.onPressed:
+                    (event) => {
+                        if (event.key === Qt.Key_Space) {
+                            buttonOpen.click()
+                            event.accepted = true
+                        }
+                    }
                 ScrollBar.vertical: ScrollBar { }
                 Layout.fillWidth: true
                 Layout.preferredHeight: Math.min(font.pixelSize * 10)
