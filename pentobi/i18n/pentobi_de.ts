@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="de">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -971,31 +969,6 @@
 </context>
 <context>
     <name>TableModel</name>
-    <message>
-        <source>Game</source>
-        <extracomment>Table header for game number in rating dialog</extracomment>
-        <translation type="vanished">Spiel</translation>
-    </message>
-    <message>
-        <source>Result</source>
-        <extracomment>Table header for game result in rating dialog</extracomment>
-        <translation type="vanished">Ergebnis</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <extracomment>Table header for level in rating dialog</extracomment>
-        <translation type="vanished">Stufe</translation>
-    </message>
-    <message>
-        <source>Your Color</source>
-        <extracomment>Table header for player color(s) in rating dialog</extracomment>
-        <translation type="vanished">Ihre Farbe</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <extracomment>Table header for game date in rating dialog</extracomment>
-        <translation type="vanished">Datum</translation>
-    </message>
     <message>
         <source>Win</source>
         <extracomment>Result of rated game is a win</extracomment>

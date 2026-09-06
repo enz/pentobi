@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-18 08:40+0200\n"
+"POT-Creation-Date: 2026-09-05 18:57+0200\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2026\n"
 "Language-Team: Vietnamese (https://app.transifex.com/markus-enzenberger/teams/89074/vi/)\n"
@@ -869,14 +869,6 @@ msgstr ""
 "rộng ảnh nên là bội số của số cột bảng trong biến thể hiện tại."
 
 #: docbook/index.xml
-msgid "<guimenuitem>Quit</guimenuitem>"
-msgstr "<guimenuitem>Thoát</guimenuitem>"
-
-#: docbook/index.xml
-msgid "Quit Pentobi."
-msgstr "Thoát Pentobi."
-
-#: docbook/index.xml
 msgid "<guimenu>Go</guimenu> Menu"
 msgstr "Menu <guimenu>Di chuyển</guimenu>"
 
@@ -1552,8 +1544,8 @@ msgid "Switch view between comment and game analysis."
 msgstr "Chuyển đổi hiển thị giữa bình luận và phân tích ván cờ."
 
 #: docbook/index.xml
-msgid "<keysym>Alt+M</keysym>"
-msgstr "<keysym>Alt+M</keysym>"
+msgid "<keysym>F10</keysym>"
+msgstr ""
 
 #: docbook/index.xml
 msgid "Open menu."

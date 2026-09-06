@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-18 08:40+0200\n"
+"POT-Creation-Date: 2026-09-05 18:57+0200\n"
 "PO-Revision-Date: 2019-02-25 15:30+0000\n"
 "Last-Translator: Markus Enzenberger <enz@users.sourceforge.net>, 2026\n"
 "Language-Team: Russian (https://app.transifex.com/markus-enzenberger/teams/89074/ru/)\n"
@@ -944,14 +944,6 @@ msgstr ""
 "текущем варианте игры."
 
 #: docbook/index.xml
-msgid "<guimenuitem>Quit</guimenuitem>"
-msgstr "<guimenuitem>Выход</guimenuitem>"
-
-#: docbook/index.xml
-msgid "Quit Pentobi."
-msgstr "Выйти из Pentobi."
-
-#: docbook/index.xml
 msgid "<guimenu>Go</guimenu> Menu"
 msgstr "<guimenu>Ход</guimenu> Меню"
 
@@ -1646,8 +1638,8 @@ msgid "Switch view between comment and game analysis."
 msgstr "Переключение между комментарием и анализом игры."
 
 #: docbook/index.xml
-msgid "<keysym>Alt+M</keysym>"
-msgstr "<keysym>Alt+M</keysym>"
+msgid "<keysym>F10</keysym>"
+msgstr ""
 
 #: docbook/index.xml
 msgid "Open menu."

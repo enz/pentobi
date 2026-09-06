@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="vi">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="vi">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -972,31 +970,6 @@
 <context>
     <name>TableModel</name>
     <message>
-        <source>Game</source>
-        <extracomment>Table header for game number in rating dialog</extracomment>
-        <translation type="vanished">Trò chơi</translation>
-    </message>
-    <message>
-        <source>Result</source>
-        <extracomment>Table header for game result in rating dialog</extracomment>
-        <translation type="vanished">Kết quả</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <extracomment>Table header for level in rating dialog</extracomment>
-        <translation type="vanished">Cấp</translation>
-    </message>
-    <message>
-        <source>Your Color</source>
-        <extracomment>Table header for player color(s) in rating dialog</extracomment>
-        <translation type="vanished">Màu của bạn</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <extracomment>Table header for game date in rating dialog</extracomment>
-        <translation type="vanished">Ngày</translation>
-    </message>
-    <message>
         <source>Win</source>
         <extracomment>Result of rated game is a win</extracomment>
         <translation>Thắng</translation>
@@ -1334,12 +1307,12 @@
     <message>
         <source>Assume desktop (large screen, mouse/keyboard input).</source>
         <extracomment>Description for command line option --desktop</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Assume phone (small screen, touch input, limited maximum level).</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="nb_NO">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="nb_NO">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -14,7 +12,7 @@
     </message>
     <message>
         <source>Computer opponent for Blokus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -100,7 +98,7 @@
     </message>
     <message>
         <source>Colorblind mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -156,21 +154,21 @@
     <message>
         <source>Previous</source>
         <extracomment>Go to previous page of user manual</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Contents</source>
         <extracomment>Go to table of contents of user manual</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Next</source>
         <extracomment>Go to next page of user manual</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Lukk</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -181,7 +179,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -448,7 +446,7 @@
     <name>HelpWindow</name>
     <message>
         <source>Pentobi Help</source>
-        <translation type="unfinished">Pentobi-hjelp</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -595,7 +593,7 @@
     </message>
     <message>
         <source>Export Image…</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Go</source>
@@ -743,7 +741,7 @@
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -971,31 +969,6 @@
 </context>
 <context>
     <name>TableModel</name>
-    <message>
-        <source>Game</source>
-        <extracomment>Table header for game number in rating dialog</extracomment>
-        <translation type="vanished">Spil</translation>
-    </message>
-    <message>
-        <source>Result</source>
-        <extracomment>Table header for game result in rating dialog</extracomment>
-        <translation type="vanished">Resultat</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <extracomment>Table header for level in rating dialog</extracomment>
-        <translation type="vanished">Nivå</translation>
-    </message>
-    <message>
-        <source>Your Color</source>
-        <extracomment>Table header for player color(s) in rating dialog</extracomment>
-        <translation type="vanished">Din farge</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <extracomment>Table header for game date in rating dialog</extracomment>
-        <translation type="vanished">Dato</translation>
-    </message>
     <message>
         <source>Win</source>
         <extracomment>Result of rated game is a win</extracomment>
@@ -1265,7 +1238,7 @@
     </message>
     <message>
         <source>Untitled.blksgf</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>computer opponent for the board game Blokus</source>
@@ -1329,17 +1302,17 @@
     </message>
     <message>
         <source>--mobile and --desktop cannot be used both</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Assume desktop (large screen, mouse/keyboard input).</source>
         <extracomment>Description for command line option --desktop</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Assume phone (small screen, touch input, limited maximum level).</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
