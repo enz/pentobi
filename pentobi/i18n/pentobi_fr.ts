@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="fr">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fr">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -930,20 +932,6 @@
         <source>Open Game</source>
         <translation>Ouvrir la partie</translation>
     </message>
-</context>
-<context>
-    <name>SaveDialog</name>
-    <message>
-        <source>Save</source>
-        <translation>Enregistrer</translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation>Parties de Blokus</translation>
-    </message>
-</context>
-<context>
-    <name>TableModel</name>
     <message>
         <source>Game</source>
         <extracomment>Table header for game number in rating dialog</extracomment>
@@ -968,6 +956,45 @@
         <source>Date</source>
         <extracomment>Table header for game date in rating dialog</extracomment>
         <translation>Date</translation>
+    </message>
+</context>
+<context>
+    <name>SaveDialog</name>
+    <message>
+        <source>Save</source>
+        <translation>Enregistrer</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Parties de Blokus</translation>
+    </message>
+</context>
+<context>
+    <name>TableModel</name>
+    <message>
+        <source>Game</source>
+        <extracomment>Table header for game number in rating dialog</extracomment>
+        <translation type="vanished">Partie</translation>
+    </message>
+    <message>
+        <source>Result</source>
+        <extracomment>Table header for game result in rating dialog</extracomment>
+        <translation type="vanished">Résultat</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <extracomment>Table header for level in rating dialog</extracomment>
+        <translation type="vanished">Niveau</translation>
+    </message>
+    <message>
+        <source>Your Color</source>
+        <extracomment>Table header for player color(s) in rating dialog</extracomment>
+        <translation type="vanished">Votre couleur</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <extracomment>Table header for game date in rating dialog</extracomment>
+        <translation type="vanished">Date</translation>
     </message>
     <message>
         <source>Win</source>

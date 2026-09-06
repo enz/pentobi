@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ru">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ru">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -179,7 +181,7 @@
     </message>
     <message>
         <source>Untitled.png</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -930,20 +932,6 @@
         <source>Open Game</source>
         <translation>Открыть Игру</translation>
     </message>
-</context>
-<context>
-    <name>SaveDialog</name>
-    <message>
-        <source>Save</source>
-        <translation>Сохранить</translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation>Игры Блокус</translation>
-    </message>
-</context>
-<context>
-    <name>TableModel</name>
     <message>
         <source>Game</source>
         <extracomment>Table header for game number in rating dialog</extracomment>
@@ -968,6 +956,45 @@
         <source>Date</source>
         <extracomment>Table header for game date in rating dialog</extracomment>
         <translation>Дата:</translation>
+    </message>
+</context>
+<context>
+    <name>SaveDialog</name>
+    <message>
+        <source>Save</source>
+        <translation>Сохранить</translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation>Игры Блокус</translation>
+    </message>
+</context>
+<context>
+    <name>TableModel</name>
+    <message>
+        <source>Game</source>
+        <extracomment>Table header for game number in rating dialog</extracomment>
+        <translation type="vanished">Игра</translation>
+    </message>
+    <message>
+        <source>Result</source>
+        <extracomment>Table header for game result in rating dialog</extracomment>
+        <translation type="vanished">Результат</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <extracomment>Table header for level in rating dialog</extracomment>
+        <translation type="vanished">Уровень</translation>
+    </message>
+    <message>
+        <source>Your Color</source>
+        <extracomment>Table header for player color(s) in rating dialog</extracomment>
+        <translation type="vanished">Ваш Цвет</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <extracomment>Table header for game date in rating dialog</extracomment>
+        <translation type="vanished">Дата:</translation>
     </message>
     <message>
         <source>Win</source>
@@ -1238,7 +1265,7 @@
     </message>
     <message>
         <source>Untitled.blksgf</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>computer opponent for the board game Blokus</source>
@@ -1302,17 +1329,17 @@
     </message>
     <message>
         <source>--mobile and --desktop cannot be used both</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Assume desktop (large screen, mouse/keyboard input).</source>
         <extracomment>Description for command line option --desktop</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Assume phone (small screen, touch input, limited maximum level).</source>
         <extracomment>Description for command line option --mobile</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

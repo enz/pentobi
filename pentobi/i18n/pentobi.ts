@@ -932,20 +932,6 @@
         <source>Open Game</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>SaveDialog</name>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Blokus games</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TableModel</name>
     <message>
         <source>Game</source>
         <extracomment>Table header for game number in rating dialog</extracomment>
@@ -971,6 +957,20 @@
         <extracomment>Table header for game date in rating dialog</extracomment>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>SaveDialog</name>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Blokus games</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TableModel</name>
     <message>
         <source>Win</source>
         <extracomment>Result of rated game is a win</extracomment>

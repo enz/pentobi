@@ -38,7 +38,7 @@ PentobiDialog {
     }
 
     Item {
-        implicitWidth: Math.max(Math.min(font.pixelSize * 26, maxContentWidth),
+        implicitWidth: Math.max(Math.min(font.pixelSize * 28, maxContentWidth),
                                 minContentWidth)
         implicitHeight: columnLayout.implicitHeight
 
@@ -146,12 +146,46 @@ PentobiDialog {
                     Layout.fillWidth: true
                 }
             }
+            HorizontalHeaderView {
+                id: headerView
+
+                syncView: tableView
+                model: [
+                    //: Table header for game number in rating dialog
+                    qsTr("Game"),
+                    //: Table header for game result in rating dialog
+                    qsTr("Result"),
+                    //: Table header for level in rating dialog
+                    qsTr("Level"),
+                    //: Table header for player color(s) in rating dialog
+                    qsTr("Your Color"),
+                    //: Table header for game date in rating dialog
+                    qsTr("Date")
+                ]
+                delegate: Label {
+                    text: modelData
+                    font.underline: true
+                }
+                Layout.fillWidth: true
+            }
             TableView {
+                id: tableView
+
                 visible: ratingModel.ratingHistory.length > 0
                 focus: true
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
                 model: ratingModel.tableModel
+                columnWidthProvider:
+                    column => {
+                        switch (column) {
+                            case 0: return font.pixelSize * 4
+                            case 1: return font.pixelSize * 6
+                            case 2: return font.pixelSize * 5
+                            case 3: return font.pixelSize * 7
+                            case 4: return font.pixelSize * 6
+                        }
+                    }
                 selectionModel: ItemSelectionModel {
                     id: selectionModel
 
@@ -164,9 +198,8 @@ PentobiDialog {
                     rightPadding: columnLayout.spacing
                     topPadding: columnLayout.spacing / 2
                     bottomPadding: columnLayout.spacing / 2
-                    font.underline: row === 0
                     contentItem: Label {
-                        text: row > 0 && column === 3 ?
+                        text: column === 3 ?
                                   Logic.getPlayerString(ratingModel.gameVariant,
                                                         model.display)
                                 : model.display
@@ -188,9 +221,14 @@ PentobiDialog {
                     }
                 }
                 Keys.onPressed:
-                    (event) => {
+                    event => {
                         if (event.key === Qt.Key_Space) {
                             buttonOpen.click()
+                            event.accepted = true
+                        }
+                        else if (event.key === Qt.Key_Tab) {
+                            selectionModel.clearCurrentIndex()
+                            buttonClose.forceActiveFocus()
                             event.accepted = true
                         }
                     }

@@ -39,7 +39,7 @@ int TableModel::rowCount([[maybe_unused]] const QModelIndex& parent) const
 {
     qsizetype length = min(m_history.length(), maxSavedGames);
     static_assert(maxSavedGames < numeric_limits<int>::max());
-    return static_cast<int>(length + 1);
+    return static_cast<int>(length);
 }
 
 int TableModel::columnCount([[maybe_unused]] const QModelIndex& parent) const
@@ -50,34 +50,9 @@ int TableModel::columnCount([[maybe_unused]] const QModelIndex& parent) const
 QVariant TableModel::data(const QModelIndex& index, int role) const
 {
     auto row = index.row();
-    if (role != Qt::DisplayRole || row < 0 || row >= m_history.length() + 1)
+    if (role != Qt::DisplayRole || row < 0 || row >= m_history.length())
         return {};
-    if (row == 0)
-    {
-        // We currently put the table headers in row 0 because Qt 5.12 does
-        // not support table headers.
-        switch (index.column())
-        {
-        case 0:
-            //: Table header for game number in rating dialog
-            return tr("Game");
-        case 1:
-            //: Table header for game result in rating dialog
-            return tr("Result");
-        case 2:
-            //: Table header for level in rating dialog
-            return tr("Level");
-        case 3:
-            //: Table header for player color(s) in rating dialog
-            return tr("Your Color");
-        case 4:
-            //: Table header for game date in rating dialog
-            return tr("Date");
-        default:
-            return {};
-        }
-    }
-    auto& info = m_history[row - 1];
+    auto& info = m_history[row];
     switch (index.column())
     {
     case 0:
