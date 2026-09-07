@@ -166,6 +166,7 @@ PentobiDialog {
                     text: modelData
                     font.underline: true
                 }
+                clip: true
                 Layout.fillWidth: true
             }
             TableView {
