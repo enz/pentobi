@@ -234,7 +234,7 @@ PentobiDialog {
                     }
                 ScrollBar.vertical: ScrollBar { }
                 Layout.fillWidth: true
-                Layout.preferredHeight: Math.min(font.pixelSize * 10)
+                Layout.preferredHeight: font.pixelSize * 10
             }
         }
     }
