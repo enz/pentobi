@@ -232,7 +232,6 @@ PentobiDialog {
                             event.accepted = true
                         }
                     }
-                ScrollBar.vertical: ScrollBar { }
                 Layout.fillWidth: true
                 Layout.preferredHeight: font.pixelSize * 10
             }
