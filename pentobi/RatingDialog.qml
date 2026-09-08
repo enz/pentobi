@@ -14,9 +14,9 @@ PentobiDialog {
 
     function openSelectedGame() {
         var row = selectionModel.currentIndex.row
-        if (row < 1)
+        if (row < 0)
             return
-        var n = ratingModel.getGameNumber(row - 1)
+        var n = ratingModel.getGameNumber(row)
         Logic.openFile(ratingModel.getFile(n), "")
     }
 
