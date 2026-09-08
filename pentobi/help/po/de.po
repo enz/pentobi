@@ -1700,7 +1700,7 @@ msgstr "Ansicht zwischen Kommentar und Spielanalyse umschalten."
 
 #: docbook/index.xml
 msgid "<keysym>F10</keysym>"
-msgstr ""
+msgstr "<keysym>F10</keysym>"
 
 #: docbook/index.xml
 msgid "Open menu."
