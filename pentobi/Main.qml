@@ -385,8 +385,7 @@ MainBase {
         shortcut: "F11"
         text: qsTr("Fullscreen")
         checkable: true
-        checked: (isAndroid && ! toolBar.visible)
-                 || (! isAndroid && visibility === Window.FullScreen)
+        checked: visibility === Window.FullScreen
         onTriggered: {
             if (visibility !== Window.FullScreen)
                 visibility = Window.FullScreen
