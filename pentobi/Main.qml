@@ -521,9 +521,8 @@ MainBase {
     Shortcut {
         sequence: "Back"
         onActivated: {
-            if (gameView.pickedPiece)
-                gameView.pickedPiece = null
-            else if (! toolBar.visible)
+            if (! toolBar.visible)
+                // Return from Android "fullscreen" mode
                 toolBar.visible = true
             else
                 close()
