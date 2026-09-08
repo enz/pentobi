@@ -569,10 +569,6 @@
         <source>Undo Move</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Press back again to exit</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MainMenu</name>

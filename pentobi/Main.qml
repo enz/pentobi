@@ -251,11 +251,6 @@ MainBase {
             isRunning = false
         }
     }
-    Timer {
-        id: pressBackTwice
-
-        interval: 2500
-    }
     Connections {
         target: Qt.application
 
@@ -530,12 +525,8 @@ MainBase {
                 gameView.pickedPiece = null
             else if (! toolBar.visible)
                 toolBar.visible = true
-            else if (pressBackTwice.running)
+            else
                 close()
-            else {
-                Logic.showTemporaryMessage(qsTr("Press back again to exit"))
-                pressBackTwice.start()
-            }
         }
     }
     Shortcut {
