@@ -388,15 +388,10 @@ MainBase {
         checked: (isAndroid && ! toolBar.visible)
                  || (! isAndroid && visibility === Window.FullScreen)
         onTriggered: {
-            if (isAndroid)
-                toolBar.visible = ! toolBar.visible
-            else if (visibility !== Window.FullScreen)
+            if (visibility !== Window.FullScreen)
                 visibility = Window.FullScreen
             else
-                // Should better use Window.AutomaticVisibility but that
-                // is broken with Qt 6.7 on desktop, which makes the window
-                // disappear when returning from fullscreen.
-                visibility = Window.Windowed
+                visibility = Window.AutomaticVisibility
         }
     }
     Action {
@@ -520,13 +515,7 @@ MainBase {
     }
     Shortcut {
         sequence: "Back"
-        onActivated: {
-            if (! toolBar.visible)
-                // Return from Android "fullscreen" mode
-                toolBar.visible = true
-            else
-                close()
-        }
+        onActivated: close()
     }
     Shortcut {
         sequence: "Return"
