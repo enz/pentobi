@@ -163,6 +163,7 @@ PentobiDialog {
                     qsTr("Date")
                 ]
                 delegate: Label {
+                    elide: Qt.ElideRight
                     text: modelData
                     font.underline: true
                 }
@@ -200,6 +201,7 @@ PentobiDialog {
                     topPadding: columnLayout.spacing / 2
                     bottomPadding: columnLayout.spacing / 2
                     contentItem: Label {
+                        elide: Qt.ElideRight
                         text: column === 3 ?
                                   Logic.getPlayerString(ratingModel.gameVariant,
                                                         model.display)
