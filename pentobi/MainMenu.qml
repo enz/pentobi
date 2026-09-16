@@ -60,7 +60,7 @@ Item {
         Label {
             id: label
 
-            anchors { centerIn: parent }
+            anchors.centerIn: parent
             font.bold: true
         }
     }
