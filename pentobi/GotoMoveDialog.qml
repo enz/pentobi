@@ -21,8 +21,8 @@ PentobiDialog {
         textField.text = gameModel.moveNumber === 0 ?
                     gameModel.moveNumber + gameModel.movesLeft
                   : gameModel.moveNumber
-        if (! isAndroid)
-            textField.selectAll()
+        textField.selectAll()
+        textField.forceActiveFocus()
     }
     onAccepted: gameModel.gotoMove(parseInt(textField.text))
 
