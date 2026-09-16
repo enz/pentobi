@@ -277,7 +277,7 @@ MainBase {
     Action {
         id: actionBackToMainVar
 
-        shortcut: "Ctrl+M"
+        shortcut: isMobile ? "" : "Ctrl+M"
         text: qsTr("Main Variation")
         enabled: ! isRated && ! gameModel.isMainVar
         onTriggered: gameModel.backToMainVar()
@@ -285,63 +285,63 @@ MainBase {
     Action {
         id: actionBackward
 
-        shortcut: "Ctrl+Left"
+        shortcut: isMobile ? "" : "Ctrl+Left"
         enabled: gameModel.canGoBackward && ! isRated
         onTriggered: gameModel.goBackward()
     }
     Action {
         id: actionBackward10
 
-        shortcut: "Ctrl+Shift+Left"
+        shortcut: isMobile ? "" : "Ctrl+Shift+Left"
         enabled: gameModel.canGoBackward && ! isRated
         onTriggered: gameModel.goBackward10()
     }
     Action {
         id: actionBeginning
 
-        shortcut: "Ctrl+Home"
+        shortcut: isMobile ? "" : "Ctrl+Home"
         enabled: gameModel.canGoBackward && ! isRated
         onTriggered: gameModel.goBeginning()
     }
     Action {
         id: actionForward
 
-        shortcut: "Ctrl+Right"
+        shortcut: isMobile ? "" : "Ctrl+Right"
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goForward()
     }
     Action {
         id: actionForward10
 
-        shortcut: "Ctrl+Shift+Right"
+        shortcut: isMobile ? "" : "Ctrl+Shift+Right"
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goForward10()
     }
     Action {
         id: actionEnd
 
-        shortcut: "Ctrl+End"
+        shortcut: isMobile ? "" : "Ctrl+End"
         enabled: gameModel.canGoForward && ! isRated
         onTriggered: gameModel.goEnd()
     }
     Action {
         id: actionPrevVar
 
-        shortcut: "Ctrl+Up"
+        shortcut: isMobile ? "" : "Ctrl+Up"
         enabled: gameModel.hasPrevVar && ! isRated
         onTriggered: gameModel.goPrevVar()
     }
     Action {
         id: actionNextVar
 
-        shortcut: "Ctrl+Down"
+        shortcut: isMobile ? "" : "Ctrl+Down"
         enabled: gameModel.hasNextVar && ! isRated
         onTriggered: gameModel.goNextVar()
     }
     Action {
         id: actionBeginningOfBranch
 
-        shortcut: "Ctrl+B"
+        shortcut: isMobile ? "" : "Ctrl+B"
         text: qsTr("Beginning of Branch")
         enabled: ! isRated && gameModel.hasEarlierVar
         onTriggered: gameModel.gotoBeginningOfBranch()
@@ -349,7 +349,7 @@ MainBase {
     Action {
         id: actionComment
 
-        shortcut: "Ctrl+T"
+        shortcut: isMobile ? "" : "Ctrl+T"
         text: qsTr("Comment")
         checkable: true
         checked: gameView.isCommentVisible
@@ -358,7 +358,7 @@ MainBase {
     Action {
         id: actionComputerSettings
 
-        shortcut: "Ctrl+U"
+        shortcut: isMobile ? "" : "Ctrl+U"
         //: Menu item Computer/Settings
         text: qsTr("Settings")
         onTriggered: computerDialog.open()
@@ -366,7 +366,7 @@ MainBase {
     Action {
         id: actionFindMove
 
-        shortcut: "Ctrl+H"
+        shortcut: isMobile ? "" : "Ctrl+H"
         text: qsTr("Find Move")
         enabled: ! gameModel.isGameOver
         onTriggered: gameView.showMove(gameModel.findMoveNext())
@@ -374,7 +374,7 @@ MainBase {
     Action {
         id: actionNextComment
 
-        shortcut: "Ctrl+E"
+        shortcut: isMobile ? "" : "Ctrl+E"
         text: qsTr("Next Comment")
         enabled: ! isRated && (gameModel.canGoForward || gameModel.canGoBackward)
         onTriggered: Logic.findNextComment()
@@ -382,7 +382,7 @@ MainBase {
     Action {
         id: actionFullscreen
 
-        shortcut: "F11"
+        shortcut: isMobile ? "" : "F11"
         text: qsTr("Fullscreen")
         checkable: true
         checked: visibility === Window.FullScreen
@@ -396,14 +396,14 @@ MainBase {
     Action {
         id: actionGameInfo
 
-        shortcut: "Ctrl+I"
+        shortcut: isMobile ? "" : "Ctrl+I"
         text: qsTr("Game Info")
         onTriggered: gameInfoDialog.open()
     }
     Action {
         id: actionGotoMove
 
-        shortcut: "Ctrl+G"
+        shortcut: isMobile ? "" : "Ctrl+G"
         text: qsTr("Move Number…")
         enabled: ! isRated && (gameModel.moveNumber + gameModel.movesLeft >= 1)
         onTriggered: gotoMoveDialog.open()
@@ -411,14 +411,14 @@ MainBase {
     Action {
         id: actionHelp
 
-        shortcut: "F1"
+        shortcut: isMobile ? "" : "F1"
         text: qsTr("Pentobi Help")
         onTriggered: { gameView.dropCommentFocus(); helpWindow.show() }
     }
     Action {
         id: actionNew
 
-        shortcut: "Ctrl+N"
+        shortcut: isMobile ? "" : "Ctrl+N"
         text: qsTr("New")
         // The conditions canGoBackward/Forward are not really needed because
         // they can only be true if either a file was loaded or the game is
@@ -434,7 +434,7 @@ MainBase {
     Action {
         id: actionNewRated
 
-        shortcut: "Ctrl+Shift+N"
+        shortcut: isMobile ? "" : "Ctrl+Shift+N"
         text: qsTr("Rated Game")
         enabled: ! isRated
         onTriggered: Logic.ratedGame()
@@ -442,14 +442,14 @@ MainBase {
     Action {
         id: actionOpen
 
-        shortcut: "Ctrl+O"
+        shortcut: isMobile ? "" : "Ctrl+O"
         text: qsTr("Open…")
         onTriggered: Logic.open()
     }
     Action {
         id: actionPlay
 
-        shortcut: "Ctrl+L"
+        shortcut: isMobile ? "" : "Ctrl+L"
         text: qsTr("Play")
         enabled: ! gameModel.isGameOver && ! isRated
         onTriggered: Logic.computerPlay()
@@ -457,7 +457,7 @@ MainBase {
     Action {
         id: actionPlaySingle
 
-        shortcut: "Ctrl+Shift+L"
+        shortcut: isMobile ? "" : "Ctrl+Shift+L"
         //: Play a single move
         text: qsTr("Play Move")
         enabled: ! gameModel.isGameOver && ! isRated
@@ -466,14 +466,14 @@ MainBase {
     Action {
         id: actionQuit
 
-        shortcut: "Ctrl+Q"
+        shortcut: isMobile ? "" : "Ctrl+Q"
         text: qsTr("Quit")
         onTriggered: close()
     }
     Action {
         id: actionSave
 
-        shortcut: "Ctrl+S"
+        shortcut: isMobile ? "" : "Ctrl+S"
         text: qsTr("Save")
         enabled: gameModel.isModified && gameModel.file !== ""
         onTriggered: if (gameModel.file !== "") Logic.save(); else Logic.saveAs()
@@ -481,7 +481,7 @@ MainBase {
     Action {
         id: actionSaveAs
 
-        shortcut: "Ctrl+Shift+S"
+        shortcut: isMobile ? "" : "Ctrl+Shift+S"
         text: qsTr("Save As…")
         onTriggered: Logic.saveAs()
     }
@@ -507,19 +507,23 @@ MainBase {
             "N", "O", "P", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
 
         Shortcut {
+            enabled: ! isMobile
             sequence: modelData
             onActivated: Logic.pickNamedPiece(modelData)
         }
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Back"
         onActivated: close()
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Return"
         onActivated: gameView.playPickedPiece()
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Escape"
         onActivated:
             if (gameView.pickedPiece)
@@ -528,61 +532,72 @@ MainBase {
                 visibility = Window.AutomaticVisibility
     }
     Shortcut {
+        enabled: ! isMobile && ! ! gameModel.isGameOver
         sequence: "Ctrl+Shift+H"
-        enabled: ! gameModel.isGameOver
         onActivated: gameView.showMove(gameModel.findMovePrevious())
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Down"
         onActivated: gameView.shiftPiece(0, 1)
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Shift+Down"
         onActivated: gameView.shiftPieceFast(0, 1)
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Left"
         onActivated: gameView.shiftPiece(-1, 0)
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Shift+Left"
         onActivated: gameView.shiftPieceFast(-1, 0)
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Right"
         onActivated: gameView.shiftPiece(1, 0)
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Shift+Right"
         onActivated: gameView.shiftPieceFast(1, 0)
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Up"
         onActivated: gameView.shiftPiece(0, -1)
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "Shift+Up"
         onActivated: gameView.shiftPieceFast(0, -1)
     }
     Shortcut {
-        enabled: gameView.pickedPiece
+        enabled: ! isMobile && gameView.pickedPiece
         sequence: "Space"
         onActivated: gameView.pickedPiece.pieceModel.nextOrientation()
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "+"
         onActivated: Logic.nextPiece()
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "F10"
         onActivated: toolBar.clickMenuButton()
     }
     Shortcut {
-        enabled: gameView.pickedPiece
+        enabled: ! isMobile && gameView.pickedPiece
         sequence: "Shift+Space"
         onActivated: gameView.pickedPiece.pieceModel.previousOrientation()
     }
     Shortcut {
+        enabled: ! isMobile
         sequence: "-"
         onActivated: Logic.prevPiece()
     }
