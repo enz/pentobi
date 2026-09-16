@@ -17,10 +17,6 @@ PentobiDialog {
         ButtonOk { id: buttonOk; enabled: textField.acceptableInput }
         ButtonCancel { }
     }
-    onAboutToShow: {
-        if (! isAndroid)
-            textField.selectAll()
-    }
     onAccepted: {
         exportImageWidth = parseInt(textField.text)
         var name = qsTr("Untitled.png")
