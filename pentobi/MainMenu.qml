@@ -61,7 +61,7 @@ Item {
             id: label
 
             anchors.centerIn: parent
-            font.bold: true
+            font.weight: Font.DemiBold
         }
     }
     component Arrow: Image {

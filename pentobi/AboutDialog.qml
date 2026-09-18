@@ -35,7 +35,7 @@ PentobiDialog {
             Label {
                 //: The argument is the application version.
                 text: "<h3>" + qsTr("Pentobi %1").arg(Qt.application.version)
-                font { bold: true }
+                font.weight: Font.DemiBold
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Label {

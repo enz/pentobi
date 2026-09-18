@@ -41,7 +41,7 @@ PentobiDialog {
             }
             Label {
                 text: Math.round(slider.value)
-                font.bold: true
+                font.weight: Font.DemiBold
             }
         }
         Slider {

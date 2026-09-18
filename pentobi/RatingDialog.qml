@@ -55,8 +55,8 @@ PentobiDialog {
                 Label {
                     text: ratingModel.numberGames === 0 ?
                               "" : Math.round(ratingModel.rating).toString()
+                    font.weight: Font.DemiBold
                     Layout.fillWidth: true
-                    font.bold: true
                 }
                 Label { text: qsTr("Game variant:") }
                 Label {
