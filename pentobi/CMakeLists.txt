@@ -11,8 +11,15 @@ if (WIN32)
     target_sources(pentobi "windows/pentobi.rc")
 endif()
 
+if (LINUX AND NOT ANDROID)
+    # QML import scanner is not needed on Linux and generates unnecessary
+    # warnings about plugins not found (Qt 6.11, Debian)
+    set(NO_IMPORT_SCAN_FLAG "NO_IMPORT_SCAN")
+endif()
+
 qt_add_qml_module(pentobi
     URI PentobiGui
+    ${NO_IMPORT_SCAN_FLAG}
     QML_FILES
     +Basic/CommentBase.qml
     +Basic/PentobiToolBarBase.qml
