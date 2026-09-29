@@ -14,7 +14,7 @@ including comments and move variations.
 The only officially supported platform is Linux, but releases are usually
 tested to ensure that they can be built for Android. Pentobi is mainly in
 maintenance mode. There are no plans to add more game variants or new
-features, so please use the issue tracker only for bugs.
+features.
 
 See [INSTALL](INSTALL.md) for instructions on how to build and install
 the program from the sources. See [NEWS](NEWS.md) for release notes.
