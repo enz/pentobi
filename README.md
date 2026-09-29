@@ -2,12 +2,13 @@ Pentobi Readme
 ==============
 
 Pentobi is a computer opponent for the board game
-[Blokus](https://en.wikipedia.org/wiki/Blokus). It has a strong Blokus engine
-with different playing levels. The supported game variants are Classic, Duo,
-Trigon, Junior, Nexos, GembloQ and Callisto.
+[Blokus](https://en.wikipedia.org/wiki/Blokus).
+It supports the game variants Classic, Duo, Trigon, Junior, Nexos,
+GembloQ and Callisto.
 
-It features a player rating system based on rated games against the
-computer and a game analysis tool. Games can be saved in
+The program has a strong Blokus engine with different playing levels,
+a player rating system based on rated games against the computer and
+a game analysis tool. Games can be saved in
 [Smart Game Format](https://en.wikipedia.org/wiki/Smart_Game_Format)
 including comments and move variations.
 
