@@ -16,7 +16,7 @@ Translations can be contributed at
 Donate
 ------
 
-if you like this app, you can
+If you like this app, you can
 [buy me a coffee](https://buymeacoffee.com/enzenb).
 
 Source Code Overview
