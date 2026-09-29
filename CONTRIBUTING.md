@@ -7,11 +7,17 @@ Report Bugs
 Bugs can be reported at the
 [issue tracker](https://github.com/enz/pentobi/issues) at GitHub.
 
-Translations
-------------
+Translate
+---------
 
 Translations can be contributed at
 [Transifex](https://app.transifex.com/markus-enzenberger/pentobi/).
+
+Donate
+------
+
+if you like this app, you can
+[buy me a coffee](https://buymeacoffee.com/enzenb).
 
 Source Code Overview
 --------------------
