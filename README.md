@@ -22,17 +22,15 @@ the program from the sources. See [NEWS](NEWS.md) for release notes.
 See [CONTRIBUTING](CONTRIBUTING.md) for information on how to report bugs
 or contribute translations and an overview of the source code.
 
-Contact
--------
-
-The homepage of Pentobi is at https://pentobi.sourceforge.io.
-The maintainer of Pentobi is Markus Enzenberger.
+The homepage of Pentobi is at https://pentobi.sourceforge.io,
+the source code repository at https://github.com/enz/pentobi.
+The main author and maintainer of Pentobi is Markus Enzenberger
+(see [AUTHORS](AUTHORS.md) for a full list of authors).
 
 License
 -------
 
 Copyright (C) 2011-2026 Markus Enzenberger.
-See [AUTHORS](AUTHORS.md) for a full list of authors.
 
 This program is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
