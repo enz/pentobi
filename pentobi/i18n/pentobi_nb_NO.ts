@@ -567,10 +567,6 @@
         <source>Undo Move</source>
         <translation>Angre trekk</translation>
     </message>
-    <message>
-        <source>Press back again to exit</source>
-        <translation>Trykk «Tilbake» igjen for å avslutte.</translation>
-    </message>
 </context>
 <context>
     <name>MainMenu</name>

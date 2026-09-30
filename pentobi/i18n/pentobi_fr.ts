@@ -567,10 +567,6 @@
         <source>Undo Move</source>
         <translation>Annuler le coup</translation>
     </message>
-    <message>
-        <source>Press back again to exit</source>
-        <translation>Appuyez à nouveau sur retour pour quitter</translation>
-    </message>
 </context>
 <context>
     <name>MainMenu</name>

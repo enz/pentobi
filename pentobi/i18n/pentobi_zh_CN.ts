@@ -567,10 +567,6 @@
         <source>Undo Move</source>
         <translation>撤销一步</translation>
     </message>
-    <message>
-        <source>Press back again to exit</source>
-        <translation type="unfinished"/>
-    </message>
 </context>
 <context>
     <name>MainMenu</name>

@@ -567,10 +567,6 @@
         <source>Undo Move</source>
         <translation>Отменить Ход</translation>
     </message>
-    <message>
-        <source>Press back again to exit</source>
-        <translation>Нажмите назад еще раз, чтобы выйти</translation>
-    </message>
 </context>
 <context>
     <name>MainMenu</name>

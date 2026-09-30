@@ -567,10 +567,6 @@
         <source>Undo Move</source>
         <translation>Zug rückgängig</translation>
     </message>
-    <message>
-        <source>Press back again to exit</source>
-        <translation>Zum Beenden erneut Zurück drücken</translation>
-    </message>
 </context>
 <context>
     <name>MainMenu</name>

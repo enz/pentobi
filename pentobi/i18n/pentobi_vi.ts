@@ -567,10 +567,6 @@
         <source>Undo Move</source>
         <translation>Hoàn tác Nước đi</translation>
     </message>
-    <message>
-        <source>Press back again to exit</source>
-        <translation>Nhấn lại để thoát</translation>
-    </message>
 </context>
 <context>
     <name>MainMenu</name>
