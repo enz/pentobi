@@ -82,17 +82,4 @@ https://pentobi.sourceforge.io/pentobi-gembloq-20240119.png</image>
 <mediatype>application/x-blokus-sgf</mediatype>
 </provides>
 <content_rating type="oars-1.1"/>
-<releases>
-<release version="31.0" date="2026-10-01">
-<description>
-<ul>
-<li>Partial workaround for broken dark mode on some platforms</li>
-<li>Improved usability on Linux phones (postmarketOS/Nura)</li>
-<li>Removed menu item View/Toolbar</li>
-<li>Remember analysis speed for the current session</li>
-<li>Comment mode setting was not persistent in mobile view</li>
-</ul>
-</description>
-</release>
-</releases>
 </component>
