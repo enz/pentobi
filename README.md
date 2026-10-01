@@ -19,13 +19,14 @@ There are no plans to add more game variants or new features.
 
 See [INSTALL](INSTALL.md) for instructions on how to build and install
 the program from the sources. See [NEWS](NEWS.md) for release notes.
-See [CONTRIBUTING](CONTRIBUTING.md) for information on how to report bugs
-or contribute translations and an overview of the source code.
 
 The homepage of Pentobi is at https://pentobi.sourceforge.io,
 the source code repository at https://github.com/enz/pentobi.
 The main author and maintainer of Pentobi is Markus Enzenberger
 (see [AUTHORS](AUTHORS.md) for a full list of authors).
+
+See [CONTRIBUTING](CONTRIBUTING.md) for information on how to report bugs
+or contribute translations and an overview of the source code.
 
 License
 -------

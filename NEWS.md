@@ -1,24 +1,19 @@
 Pentobi Release Notes
 =====================
 
-Version 31.0-dev (main)
------------------------
+Version 31.0 (01 Oct 2026)
+--------------------------
 
-* Partial workaround for broken dark mode on some platforms
-* Improved usability on Linux phones (postmarketOS/Phosh)
-* Remember selected analysis speed for the current session
-* Support environment variable PENTOBI_MOBILE to use mobile view
+* Partial workaround for broken dark mode on some platforms (issue #26)
+* Improved usability on Linux phones (postmarketOS/Nura)
+* Removed menu item View/Toolbar
+* Remember analysis speed for the current session
+* Comment mode setting was not persistent in mobile view
 * Minimum required Qt version is now 6.11
 * Reintroduced runtime dependency on image and icon plugins of QtSvg
-* Menu item View/Toolbar is no longer supported
+* Support environment variable PENTOBI_MOBILE to use mobile view
 * twogtp option --fastopen is no longer supported
-* pentobi-gtp now requires --book or --nobook
 * Compilation option LIBBOARDGAME_MCTS_SINGLE_THREAD is no longer supported
-
-Version 30.4-dev (v30-fixes)
-----------------------------
-
-* Made comment mode a persistent setting in mobile view
 
 Version 30.3 (26 Jul 2026)
 --------------------------
