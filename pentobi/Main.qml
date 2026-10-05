@@ -588,6 +588,7 @@ MainBase {
     }
     Shortcut {
         enabled: ! isMobile
+        context: Qt.ApplicationShortcut
         sequence: "F10"
         onActivated: toolBar.clickMenuButton()
     }
