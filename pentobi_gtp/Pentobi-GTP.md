@@ -4,7 +4,7 @@ Pentobi GTP Interface
 This document describes the text-based interface to the engine of the
 Blokus program [Pentobi](https://pentobi.sourceforge.io). The interface
 is an adaptation of the
-[Go Text Protocol](https://www.lysator.liu.se/~gunnar/gtp/) (GTP) and
+[Go Text Protocol](https://web.archive.org/web/20260221033138/https://www.lysator.liu.se/~gunnar/gtp/) (GTP) and
 allows controller programs to use the engine in an automated way without
 the GUI. The most recent version of this document can be found in the
 source code distribution of Pentobi.
