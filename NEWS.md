@@ -4,7 +4,7 @@ Pentobi Release Notes
 Version 31.1-dev (v31-fixes)
 ----------------------------
 
-*
+* Show error if SVG plugins are unavailable
 
 Version 31.0 (01 Oct 2026)
 --------------------------
