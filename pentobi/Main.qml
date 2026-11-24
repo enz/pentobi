@@ -54,16 +54,6 @@ MainBase {
     Component.onCompleted: Logic.init()
     Component.onDestruction: Logic.cancelRunning()
 
-    // We cannot directly check whether the required SVG icon plugin is
-    // available, so we assume it is installed alongside the SVG image plugin.
-    Image {
-        source: "icons/light/pentobi-newgame.svg"
-        visible: false
-        onStatusChanged: {
-            if (status === Image.Error)
-                Logic.showFatal(qsTr("SVG image plugins are not installed"))
-        }
-    }
     Theme {
         id: theme
     }
