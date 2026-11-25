@@ -24,6 +24,23 @@ using libpentobi_base::PentobiTree;
 
 //-----------------------------------------------------------------------------
 
+LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_reuses_same_position)
+{
+    auto bd = make_unique<Board>(Variant::classic);
+    auto search = make_unique<Search>(Variant::classic, 1, 1000000);
+    search->set_reuse_tree(true);
+    WallTimeSource time_source;
+    Move move;
+    LIBBOARDGAME_CHECK(search->search(move, *bd, Color(0), 100, 1, 0,
+                                     time_source))
+    auto count = search->get_root_visit_count();
+    LIBBOARDGAME_CHECK(count > 1)
+    LIBBOARDGAME_CHECK(search->search(move, *bd, Color(0), 1, 0, 0,
+                                     time_source))
+    LIBBOARDGAME_CHECK(search->get_root_visit_count() >= count)
+    LIBBOARDGAME_CHECK(bd->is_legal(Color(0), move))
+}
+
 /** Test that state generates a playout move even if no large pieces are
     playable early in the game.
     This tests for a bug that occurred in Pentobi 1.1 with game variant Trigon:
