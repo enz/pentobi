@@ -59,7 +59,7 @@ public:
 
     void set_show_board(bool enable);
 
-    const Board& get_board() const { return m_game.get_board(); }
+    const Board& get_board() const { return m_game->get_board(); }
 
 protected:
     Color get_color_arg(Arguments args, unsigned i) const;
@@ -73,7 +73,7 @@ private:
 
     bool m_resign = true;
 
-    Game m_game;
+    std::unique_ptr<Game> m_game;
 
     PlayerBase* m_player = nullptr;
 

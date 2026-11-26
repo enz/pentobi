@@ -32,7 +32,7 @@ using libpentobi_base::SgfNode;
 //-----------------------------------------------------------------------------
 
 GtpEngine::GtpEngine(Variant variant)
-    : m_game(variant)
+    : m_game(make_unique<Game>(variant))
 {
     add("all_legal", &GtpEngine::cmd_all_legal);
     add("clear_board", &GtpEngine::cmd_clear_board);
@@ -69,7 +69,7 @@ void GtpEngine::cmd_all_legal(Arguments args, Response& response)
 
 void GtpEngine::cmd_clear_board()
 {
-    m_game.init();
+    m_game->init();
     board_changed();
 }
 
@@ -123,13 +123,13 @@ void GtpEngine::cmd_loadsgf(Arguments args)
         TreeReader reader;
         reader.read(file);
         auto tree = reader.move_tree();
-        m_game.init(tree);
+        m_game->init(tree);
         const SgfNode* node = nullptr;
         if (move_number > 0)
-            node = m_game.get_tree().get_node_before_move_number(move_number - 1);
+            node = m_game->get_tree().get_node_before_move_number(move_number - 1);
         if (node == nullptr)
-            node = &get_last_node(m_game.get_root());
-        m_game.goto_node(*node);
+            node = &get_last_node(m_game->get_root());
+        m_game->goto_node(*node);
         board_changed();
     }
     catch (const runtime_error& e)
@@ -225,7 +225,7 @@ void GtpEngine::cmd_reg_genmove(Arguments args, Response& response)
 void GtpEngine::cmd_savesgf(Arguments args)
 {
     ofstream out(args.get<string>());
-    PentobiTreeWriter writer(out, m_game.get_tree());
+    PentobiTreeWriter writer(out, m_game->get_tree());
     writer.set_indent(1);
     writer.write();
     if (! out)
@@ -244,7 +244,7 @@ void GtpEngine::cmd_set_game(Arguments args)
     string line(&*args.get_line().begin(), args.get_line().size());
     if (! parse_variant(line, variant))
         throw Failure("invalid argument");
-    m_game.init(variant);
+    m_game->init(variant);
     board_changed();
 }
 
@@ -265,7 +265,7 @@ void GtpEngine::cmd_undo()
     auto& bd = get_board();
     if (bd.get_nu_moves() == 0)
         throw Failure("cannot undo");
-    m_game.undo();
+    m_game->undo();
     board_changed();
 }
 
@@ -290,7 +290,7 @@ void GtpEngine::genmove(Color c, Response& response)
         response << "resign";
         return;
     }
-    m_game.play(c, mv, true);
+    m_game->play(c, mv, true);
     response << bd.to_string(mv, false);
     board_changed();
 }
@@ -367,7 +367,7 @@ void GtpEngine::play(Color c, Arguments args, unsigned arg_move_begin)
         throw Failure("piece already played");
     if (! bd.is_legal(c, mv))
         throw Failure("illegal move");
-    m_game.play(c, mv, true);
+    m_game->play(c, mv, true);
     board_changed();
 }
 
