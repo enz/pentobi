@@ -214,6 +214,41 @@ Return the name of the GTP engine (`Pentobi`).
 
 Play a move for a given color in the current board position.
 
+`set_board` _sgf_
+
+Replace the current position without reading a file. This is a Pentobi
+extension; check `known_command set_board` before using it. The position must
+be in the game variant the engine is currently running (see `set_game` and
+the `--game` option).
+
+```text
+set_board (;GM[Blokus]A1[b19,c19][a20]A2[t20]PL[2])
+set_board (;GM[Blokus Duo]AB[d9,c10,d10,e10,d11]AW[j5,i6,j6,k6,j7]PL[B])
+```
+
+The argument is the rest of the command line (at most 16384 bytes) and may
+contain printable ASCII characters and spaces, but no quotes, backslashes, or
+`#`. It must contain one SGF root node with `GM` equal to the current game
+variant (as written in Pentobi's SGF files, for example `Blokus Trigon` or
+`Callisto Two-Player`), `PL` to select the color to play, and optional setup
+properties with one bracket per piece. Variants with two colors use `AB`/`AW`
+and `PL[B]`/`PL[W]`; all other variants use `A1` to `A4` and `PL[1]` to
+`PL[4]` for the colors they have. A piece is written as the comma-separated
+points of the move, as in move properties, in any order; omit empty colors.
+Unused pieces are derived from the variant and placements.
+
+The command checks the static rules, not whether the position can arise in a
+game: pieces must exist and be used at most as often as the variant allows,
+must not overlap, and the pieces of each color must be placeable one after the
+other as legal moves of that color (for example, in Classic each piece must be
+diagonally connected to a piece of the same color on its starting corner, and
+in Callisto two of the three 1-pieces must be placed before other pieces).
+Another color may occupy an unused starting point.
+A successful response is empty; a rejected command leaves the previous position
+and turn unchanged. Use `all_legal` and `reg_genmove` with the requested color
+to analyze without playing a move. A setup replaces the previous history and
+cannot itself be undone.
+
 `quit`
 
 Exit the command loop and quit the engine.

@@ -45,6 +45,7 @@ public:
     void cmd_showboard(Response& response);
     void cmd_reg_genmove(Arguments args, Response& response);
     void cmd_savesgf(Arguments args);
+    void cmd_set_board(Arguments args);
     void cmd_set_game(Arguments args);
     static void cmd_set_random_seed(Arguments args);
     void cmd_undo();
