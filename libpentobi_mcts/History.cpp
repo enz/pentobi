@@ -46,6 +46,9 @@ bool History::is_followup(
             || m_moves.size() < other.m_moves.size())
         return false;
     for (Color::IntType c = 0; c < m_nu_colors; ++c)
+        // Sorting the placements before comparison is too expensive and
+        // failing to detect follow-ups in the rare case of same placements
+        // with different order is not critical.
         if (m_setup.placements[Color(c)] != other.m_setup.placements[Color(c)])
             return false;
     unsigned i = 0;
