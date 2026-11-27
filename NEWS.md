@@ -12,6 +12,7 @@ Version 31.1-dev (v31-fixes)
   position to a previous move generation when board setup was used
   (issue #30)
 * GTP command save_tree did not include board setup (issue #30)
+* Fixed search tree reuse after aborted searches (issue #31)
 
 Version 31.0 (01 Oct 2026)
 --------------------------
