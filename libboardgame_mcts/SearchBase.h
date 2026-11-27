@@ -1076,7 +1076,7 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
     else
         for (PlayerInt i = 0; i < m_nu_players; ++i)
             m_root_val[i].init(SearchParamConst::tie_value, 1);
-    if ((m_reuse_subtree && (is_followup || m_abort.test()))
+    if ((m_reuse_subtree && (is_followup || (is_same && m_abort.test())))
             || (m_reuse_tree && is_same))
     {
         size_t tree_nodes = m_tree.get_nu_nodes();
