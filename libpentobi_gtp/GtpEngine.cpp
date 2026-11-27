@@ -6,13 +6,16 @@
 
 #include "GtpEngine.h"
 
+#include <algorithm>
 #include <fstream>
+#include <set>
 #include "libboardgame_base/CpuTime.h"
 #include "libboardgame_base/Log.h"
 #include "libboardgame_base/RandomGenerator.h"
 #include "libboardgame_base/SgfUtil.h"
 #include "libboardgame_base/TreeReader.h"
 #include "libpentobi_base/MoveMarker.h"
+#include "libpentobi_base/PentobiSgfUtil.h"
 #include "libpentobi_base/PentobiTreeWriter.h"
 
 namespace libpentobi_gtp {
@@ -21,18 +24,229 @@ using namespace std;
 using libboardgame_base::RandomGenerator;
 using libboardgame_base::TreeReader;
 using libboardgame_gtp::Failure;
+using libpentobi_base::ColorMap;
 using libpentobi_base::Grid;
 using libpentobi_base::Move;
 using libpentobi_base::MoveList;
 using libpentobi_base::MoveMarker;
 using libpentobi_base::PentobiTreeWriter;
 using libpentobi_base::Point;
+using libpentobi_base::Setup;
 using libpentobi_base::SgfNode;
 
 //-----------------------------------------------------------------------------
 
+namespace {
+
+/** Split a move string into its point names and sort them. */
+vector<string> sorted_points(const string& s)
+{
+    vector<string> result;
+    auto begin = s.begin();
+    while (true)
+    {
+        auto end = find(begin, s.end(), ',');
+        result.emplace_back(begin, end);
+        if (end == s.end())
+            break;
+        begin = end + 1;
+    }
+    sort(result.begin(), result.end());
+    return result;
+}
+
+/** Reader for the argument of set_board.
+    Accepts only a single root node with the properties GM, PL and the setup
+    properties of the colors of the current game variant (A1-A4, or AB and AW
+    in variants with two colors). Duplicate properties are rejected before
+    SgfNode could overwrite them. */
+class SetboardReader
+    : public TreeReader
+{
+public:
+    explicit SetboardReader(const Board& bd);
+
+    void on_begin_tree(bool is_root) override;
+
+    void on_begin_node(bool is_root) override;
+
+    void on_property(const string& id, const vector<string>& values) override;
+
+    /** Check that the position follows the rules of the game variant.
+        Pieces must not overlap and the pieces of each color must be placeable
+        one after the other with legal moves of that color. The order of the
+        moves of different colors does not matter because the pieces of
+        another color only block the points they occupy. */
+    void validate() const;
+
+private:
+    const Board& m_bd;
+
+    set<string> m_properties;
+
+    ColorMap<vector<Move>> m_placements;
+
+    Grid<bool> m_is_occupied;
+
+    void add_piece(Color c, const string& s);
+
+    bool can_place(Color c, const Setup& others, Move first) const;
+};
+
+SetboardReader::SetboardReader(const Board& bd)
+    : m_bd(bd)
+{
+    m_is_occupied.fill(false, bd.get_geometry());
+}
+
+void SetboardReader::add_piece(Color c, const string& s)
+{
+    // Require the points of the piece as written by Board::to_string() in
+    // any order, Board::from_string() is more lenient
+    Move mv;
+    if (! m_bd.from_string(mv, s) || mv.is_null()
+            || sorted_points(s) != sorted_points(m_bd.to_string(mv)))
+        throw ReadError("invalid piece " + s);
+    auto piece = m_bd.get_move_piece(mv);
+    auto& placements = m_placements[c];
+    if (static_cast<unsigned>(count_if(placements.begin(), placements.end(),
+                                       [&](Move m) {
+                                           return m_bd.get_move_piece(m)
+                                                   == piece; }))
+            >= m_bd.get_nu_piece_instances(piece))
+        throw ReadError("piece played twice");
+    for (Point p : m_bd.get_move_points(mv))
+    {
+        if (m_is_occupied[p])
+            throw ReadError("overlapping pieces");
+        m_is_occupied[p] = true;
+    }
+    placements.push_back(mv);
+}
+
+/** Check if the pieces of a color can be played as legal moves.
+    @param c The color.
+    @param others A setup with all pieces of the other colors.
+    @param first The first move to play. */
+bool SetboardReader::can_place(Color c, const Setup& others, Move first) const
+{
+    auto bd = make_unique<Board>(m_bd.get_variant());
+    bd->init(&others);
+    bd->play(c, first);
+    auto left = m_placements[c];
+    left.erase(find(left.begin(), left.end(), first));
+    // Legality is monotonic in the set of already placed pieces of the
+    // position, so playing any legal move first does not prevent another one.
+    bool progress = true;
+    while (progress && ! left.empty())
+    {
+        progress = false;
+        for (auto i = left.begin(); i != left.end(); )
+            if (bd->is_legal(c, *i))
+            {
+                bd->play(c, *i);
+                i = left.erase(i);
+                progress = true;
+            }
+            else
+                ++i;
+    }
+    return left.empty();
+}
+
+void SetboardReader::on_begin_tree(bool is_root)
+{
+    if (! is_root)
+        throw ReadError("variations are not allowed");
+    TreeReader::on_begin_tree(is_root);
+}
+
+void SetboardReader::on_begin_node(bool is_root)
+{
+    if (! is_root)
+        throw ReadError("child nodes are not allowed");
+    TreeReader::on_begin_node(is_root);
+}
+
+void SetboardReader::on_property(const string& id,
+                                 const vector<string>& values)
+{
+    if (! m_properties.insert(id).second)
+        throw ReadError("duplicate property " + id);
+    auto variant = m_bd.get_variant();
+    if (id == "GM")
+    {
+        if (values.size() != 1
+                || values[0] != libpentobi_base::to_string(variant))
+            throw ReadError("invalid GM");
+        TreeReader::on_property(id, values);
+        return;
+    }
+    for (Color c : m_bd.get_colors())
+    {
+        if (id == "PL")
+        {
+            if (values.size() == 1
+                    && values[0] == libpentobi_base::get_color_id(variant, c))
+            {
+                TreeReader::on_property(id, values);
+                return;
+            }
+        }
+        else if (id == libpentobi_base::get_setup_id(variant, c))
+        {
+            if (values.empty())
+                throw ReadError("empty property " + id);
+            for (auto& s : values)
+                add_piece(c, s);
+            TreeReader::on_property(id, values);
+            return;
+        }
+    }
+    if (id == "PL")
+        throw ReadError("invalid PL");
+    throw ReadError("unknown property " + id);
+}
+
+void SetboardReader::validate() const
+{
+    if (m_properties.count("GM") == 0 || m_properties.count("PL") == 0)
+        throw ReadError("GM and PL are required");
+    auto empty = make_unique<Board>(m_bd.get_variant());
+    for (Color c : m_bd.get_colors())
+    {
+        auto& placements = m_placements[c];
+        if (placements.empty())
+            continue;
+        Setup others;
+        for (Color c2 : m_bd.get_colors())
+            if (c2 != c)
+                for (Move mv : m_placements[c2])
+                    others.placements[c2].push_back(mv);
+        empty->init(&others);
+        // Try each possible first move, the first piece is not
+        // necessarily attached to the other pieces of the color.
+        bool is_valid = false;
+        for (Move mv : placements)
+            if (empty->is_legal(c, mv) && can_place(c, others, mv))
+            {
+                is_valid = true;
+                break;
+            }
+        if (! is_valid)
+            throw ReadError(string("pieces of ")
+                            + libpentobi_base::get_setup_id(m_bd.get_variant(),
+                                                            c)
+                            + " cannot be placed with legal moves");
+    }
+}
+
+} // namespace
+
+//-----------------------------------------------------------------------------
+
 GtpEngine::GtpEngine(Variant variant)
-    : m_game(variant)
+    : m_game(make_unique<Game>(variant))
 {
     add("all_legal", &GtpEngine::cmd_all_legal);
     add("clear_board", &GtpEngine::cmd_clear_board);
@@ -45,6 +259,7 @@ GtpEngine::GtpEngine(Variant variant)
     add("param_base", &GtpEngine::cmd_param_base);
     add("play", &GtpEngine::cmd_play);
     add("savesgf", &GtpEngine::cmd_savesgf);
+    add("set_board", &GtpEngine::cmd_set_board);
     add("set_game", &GtpEngine::cmd_set_game);
     add("set_random_seed", &GtpEngine::cmd_set_random_seed);
     add("showboard", &GtpEngine::cmd_showboard);
@@ -69,7 +284,7 @@ void GtpEngine::cmd_all_legal(Arguments args, Response& response)
 
 void GtpEngine::cmd_clear_board()
 {
-    m_game.init();
+    m_game->init();
     board_changed();
 }
 
@@ -123,13 +338,43 @@ void GtpEngine::cmd_loadsgf(Arguments args)
         TreeReader reader;
         reader.read(file);
         auto tree = reader.move_tree();
-        m_game.init(tree);
+        m_game->init(tree);
         const SgfNode* node = nullptr;
         if (move_number > 0)
-            node = m_game.get_tree().get_node_before_move_number(move_number - 1);
+            node = m_game->get_tree().get_node_before_move_number(move_number - 1);
         if (node == nullptr)
-            node = &get_last_node(m_game.get_root());
-        m_game.goto_node(*node);
+            node = &get_last_node(m_game->get_root());
+        m_game->goto_node(*node);
+        board_changed();
+    }
+    catch (const runtime_error& e)
+    {
+        throw Failure(e.what());
+    }
+}
+
+void GtpEngine::cmd_set_board(Arguments args)
+{
+    auto line = args.get_line();
+    if (line.empty())
+        throw Failure("missing argument");
+    if (line.size() > 16384)
+        throw Failure("argument too long");
+    for (unsigned char c : line)
+        if (c < 32 || c > 126 || c == '"' || c == '\\' || c == '#')
+            throw Failure("invalid character in argument");
+    try
+    {
+        istringstream in{string(line)};
+        SetboardReader reader(get_board());
+        reader.read(in);
+        if (in.peek() != char_traits<char>::eof())
+            throw Failure("trailing text");
+        reader.validate();
+        auto tree = reader.move_tree();
+        auto game = make_unique<Game>(get_board().get_variant());
+        game->init(tree);
+        m_game.swap(game);
         board_changed();
     }
     catch (const runtime_error& e)
@@ -225,7 +470,7 @@ void GtpEngine::cmd_reg_genmove(Arguments args, Response& response)
 void GtpEngine::cmd_savesgf(Arguments args)
 {
     ofstream out(args.get<string>());
-    PentobiTreeWriter writer(out, m_game.get_tree());
+    PentobiTreeWriter writer(out, m_game->get_tree());
     writer.set_indent(1);
     writer.write();
     if (! out)
@@ -244,7 +489,7 @@ void GtpEngine::cmd_set_game(Arguments args)
     string line(&*args.get_line().begin(), args.get_line().size());
     if (! parse_variant(line, variant))
         throw Failure("invalid argument");
-    m_game.init(variant);
+    m_game->init(variant);
     board_changed();
 }
 
@@ -265,7 +510,7 @@ void GtpEngine::cmd_undo()
     auto& bd = get_board();
     if (bd.get_nu_moves() == 0)
         throw Failure("cannot undo");
-    m_game.undo();
+    m_game->undo();
     board_changed();
 }
 
@@ -290,7 +535,7 @@ void GtpEngine::genmove(Color c, Response& response)
         response << "resign";
         return;
     }
-    m_game.play(c, mv, true);
+    m_game->play(c, mv, true);
     response << bd.to_string(mv, false);
     board_changed();
 }
@@ -367,7 +612,7 @@ void GtpEngine::play(Color c, Arguments args, unsigned arg_move_begin)
         throw Failure("piece already played");
     if (! bd.is_legal(c, mv))
         throw Failure("illegal move");
-    m_game.play(c, mv, true);
+    m_game->play(c, mv, true);
     board_changed();
 }
 
