@@ -23,6 +23,7 @@ using libpentobi_base::Variant;
     This class can be used, for instance, to uniquely remember a board
     position for reusing parts of previous computations. The state includes:
     - the game variant
+    - the setup
     - the history of moves
     - the color to play */
 class History
@@ -72,6 +73,8 @@ private:
     ArrayList<ColorMove, Board::max_moves> m_moves;
 
     Color m_to_play;
+
+    Setup m_setup;
 };
 
 inline History::History()

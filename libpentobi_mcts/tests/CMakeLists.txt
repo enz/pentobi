@@ -1,4 +1,5 @@
 add_executable(test_libpentobi_mcts
+  HistoryTest.cpp
   SearchTest.cpp
   StateUtilTest.cpp
 )
