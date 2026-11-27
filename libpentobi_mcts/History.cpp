@@ -20,6 +20,7 @@ void History::get_as_setup(Variant& variant, Setup& setup) const
     LIBBOARDGAME_ASSERT(is_valid());
     variant = m_variant;
     auto bd = make_unique<Board>(variant);
+    bd->init(&m_setup);
     for (ColorMove mv : m_moves)
         bd->play(mv);
     get_current_position_as_setup(*bd, setup);
@@ -30,6 +31,7 @@ void History::init(const Board& bd, Color to_play)
     m_is_valid = true;
     m_variant = bd.get_variant();
     m_nu_colors = bd.get_nu_colors();
+    m_setup = bd.get_setup();
     m_moves.clear();
     for (unsigned i = 0; i < bd.get_nu_moves(); ++i)
         m_moves.push_back(bd.get_move(i));
@@ -43,6 +45,9 @@ bool History::is_followup(
     if (! m_is_valid || ! other.m_is_valid || m_variant != other.m_variant
             || m_moves.size() < other.m_moves.size())
         return false;
+    for (Color::IntType c = 0; c < m_nu_colors; ++c)
+        if (m_setup.placements[Color(c)] != other.m_setup.placements[Color(c)])
+            return false;
     unsigned i = 0;
     for ( ; i < other.m_moves.size(); ++i)
         if (m_moves[i] != other.m_moves[i])
