@@ -8,8 +8,8 @@ Version 32.0-dev (main)
 Version 31.1-dev (v31-fixes)
 ----------------------------
 * Fixed crash caused by search tree reuse when setup was used (issue #30)
+* Fixed search tree reuse after aborted searches (issue #31)
 * GTP command save_tree did not include board setup (issue #30)
-* Fixed crash caused by search tree reuse after aborted searches (issue #31)
 
 Version 31.0 (01 Oct 2026)
 --------------------------
