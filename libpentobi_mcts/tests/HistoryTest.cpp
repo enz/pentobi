@@ -30,7 +30,7 @@ LIBBOARDGAME_TEST_CASE(pentobi_mcts_history_get_as_setup_with_setup)
     Setup merged_setup;
     Variant variant;
     history.get_as_setup(variant, merged_setup);
-    Setup::PlacementList placements = merged_setup.placements[Color(0)];
+    auto& placements = merged_setup.placements[Color(0)];
     LIBBOARDGAME_CHECK(placements.size() == 2);
     LIBBOARDGAME_CHECK(placements.contains(mv1));
     LIBBOARDGAME_CHECK(placements.contains(mv2));
