@@ -1,10 +1,18 @@
 Pentobi Release Notes
 =====================
 
+Version 32.0-dev (main)
+-------------------
+
+*
+
 Version 31.1-dev (v31-fixes)
 ----------------------------
+
 * Fixed crash caused by search tree reuse when setup was used (issue #30)
 * Fixed search tree reuse after aborted searches (issue #31)
+* Find Moves and GTP command all_legal in Callisto did not restrict the
+  piece to the 1x1 piece in the second move (issue #32)
 * GTP command save_tree did not include board setup (issue #30)
 
 Version 31.0 (01 Oct 2026)

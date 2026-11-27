@@ -122,11 +122,17 @@ void Board::gen_moves(Color c, MoveMarker& marker, MoveList& moves) const
             }
         return;
     }
-    if (m_is_callisto && is_piece_left(c, m_one_piece))
-        for (auto p : *m_geo)
-            if (! is_forbidden(p, c) && ! m_is_center_section[p])
-                gen_moves(c, p, m_one_piece, get_adj_status(p, c), marker,
-                          moves);
+    if (m_is_callisto)
+    {
+        auto nu_one_piece = get_nu_left_piece(c, m_one_piece);
+        if (nu_one_piece > 0)
+            for (auto p : *m_geo)
+                if (! is_forbidden(p, c) && ! m_is_center_section[p])
+                    gen_moves(c, p, m_one_piece, get_adj_status(p, c), marker,
+                              moves);
+        if (nu_one_piece > 1)
+            return;
+    }
     for (Point p : get_attach_points(c))
         if (! m_state_color[c].forbidden[p])
         {
