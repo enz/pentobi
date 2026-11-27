@@ -44,7 +44,7 @@ public:
     /** Check if the state corresponds to any valid position. */
     bool is_valid() const;
 
-    /** Check if this position is a alternate-play followup to another one.
+    /** Check if this position is an alternate-play followup to another one.
         @param other The other position
         @param[out] sequence The sequence leading from the other position to
         this one. Pass (=null) moves are inserted to ensure alternating colors
