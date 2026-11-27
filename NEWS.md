@@ -7,10 +7,8 @@ Version 32.0-dev (main)
 
 Version 31.1-dev (v31-fixes)
 ----------------------------
-
-* Fixed crash caused by incorrectly treating a position as a follow-up
-  position to a previous move generation when board setup was used
-  (issue #30)
+* Fixed crash caused by incorrectly treating positions as follow-ups to
+  previous position when board setup was used (issue #30)
 * GTP command save_tree did not include board setup (issue #30)
 * Fixed search tree reuse after aborted searches (issue #31)
 
