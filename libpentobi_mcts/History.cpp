@@ -45,12 +45,20 @@ bool History::is_followup(
     if (! m_is_valid || ! other.m_is_valid || m_variant != other.m_variant
             || m_moves.size() < other.m_moves.size())
         return false;
-    for (Color::IntType c = 0; c < m_nu_colors; ++c)
-        // Sorting the placements before comparison is too expensive and
-        // failing to detect follow-ups in the rare case of same placements
-        // with different order is not critical.
-        if (m_setup.placements[Color(c)] != other.m_setup.placements[Color(c)])
+    Setup::PlacementList placements;
+    Setup::PlacementList placements_other;
+    for (Color::IntType i = 0; i < m_nu_colors; ++i)
+    {
+        Color c(i);
+        if (m_setup.placements[c].size() != other.m_setup.placements[c].size())
             return false;
+        placements = m_setup.placements[c];
+        placements_other = other.m_setup.placements[c];
+        sort(placements.begin(), placements.end());
+        sort(placements_other.begin(), placements_other.end());
+        if (placements != placements_other)
+            return false;
+    }
     unsigned i = 0;
     for ( ; i < other.m_moves.size(); ++i)
         if (m_moves[i] != other.m_moves[i])
