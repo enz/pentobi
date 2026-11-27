@@ -52,6 +52,10 @@ bool History::is_followup(
         Color c(i);
         if (m_setup.placements[c].size() != other.m_setup.placements[c].size())
             return false;
+    }
+    for (Color::IntType i = 0; i < m_nu_colors; ++i)
+    {
+        Color c(i);
         placements = m_setup.placements[c];
         placements_other = other.m_setup.placements[c];
         sort(placements.begin(), placements.end());
