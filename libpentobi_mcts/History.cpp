@@ -56,8 +56,6 @@ bool History::is_followup(
         if (m_moves[i] != other.m_moves[i])
             return false;
     sequence.clear();
-    // Populate the sequence and fill in pass moves if necessary to ensure
-    // that it can be matched with a path of nodes in the search tree.
     Color to_play = other.m_to_play;
     for ( ; i < m_moves.size(); ++i)
     {
