@@ -1083,8 +1083,11 @@ bool SearchBase<S, M, R>::search(Move& mv, Float max_count,
         if (m_followup_sequence.empty())
         {
             if (tree_nodes > 1)
+            {
                 LIBBOARDGAME_LOG("Reusing all ", tree_nodes, " nodes (count=",
                                  m_tree.get_root().get_visit_count(), ")");
+                clear_tree = false;
+            }
         }
         else
         {
