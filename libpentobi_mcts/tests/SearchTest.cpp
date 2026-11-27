@@ -24,6 +24,176 @@ using libpentobi_base::PentobiTree;
 
 //-----------------------------------------------------------------------------
 
+static Move parse_move(const Board& bd, const string& text)
+{
+    Move move;
+    LIBBOARDGAME_CHECK(bd.from_string(move, text))
+    return move;
+}
+
+LIBBOARDGAME_TEST_CASE(pentobi_mcts_history_setup_and_followup)
+{
+    auto bd = make_unique<Board>(Variant::classic);
+    auto a20 = parse_move(*bd, "a20");
+    auto b19 = parse_move(*bd, "b19,c19");
+    auto t20 = parse_move(*bd, "t20");
+    Setup first;
+    first.placements[Color(0)].push_back(a20);
+    first.placements[Color(0)].push_back(b19);
+    first.to_play = Color(1);
+    Setup other = first;
+    other.placements[Color(1)].push_back(t20);
+    Setup reordered;
+    reordered.placements[Color(0)].push_back(b19);
+    reordered.placements[Color(0)].push_back(a20);
+    auto original = make_unique<History>();
+    auto current = make_unique<History>();
+    ArrayList<Move, SearchParamConst::max_moves> sequence;
+
+    original->init(*bd, Color(1));
+    bd->init(&first);
+    current->init(*bd, Color(1));
+    LIBBOARDGAME_CHECK(! current->is_followup(*original, sequence))
+    LIBBOARDGAME_CHECK(! original->is_followup(*current, sequence))
+    original->init(*bd, Color(1));
+    LIBBOARDGAME_CHECK(current->is_followup(*original, sequence))
+    LIBBOARDGAME_CHECK(sequence.empty())
+    bd->init(&other);
+    current->init(*bd, Color(1));
+    LIBBOARDGAME_CHECK(! current->is_followup(*original, sequence))
+    bd->init(&reordered);
+    current->init(*bd, Color(1));
+    LIBBOARDGAME_CHECK(current->is_followup(*original, sequence))
+    LIBBOARDGAME_CHECK(sequence.empty())
+
+    bd->init(&first);
+    bd->play(Color(1), t20);
+    current->init(*bd, Color(2));
+    LIBBOARDGAME_CHECK(current->is_followup(*original, sequence))
+    LIBBOARDGAME_CHECK(sequence.size() == 1 && sequence[0] == t20)
+    Variant variant;
+    Setup exported;
+    current->get_as_setup(variant, exported);
+    LIBBOARDGAME_CHECK(variant == Variant::classic)
+    LIBBOARDGAME_CHECK(exported.placements[Color(0)] == first.placements[Color(0)])
+    LIBBOARDGAME_CHECK(exported.placements[Color(1)].size() == 1)
+    LIBBOARDGAME_CHECK(exported.placements[Color(1)][0] == t20)
+
+    bd->init(&other);
+    auto t1 = parse_move(*bd, "t1");
+    bd->play(Color(2), t1);
+    original->init(*bd, Color(3));
+    bd->init(&first);
+    bd->play(Color(2), t1);
+    current->init(*bd, Color(3));
+    LIBBOARDGAME_CHECK(! current->is_followup(*original, sequence))
+}
+
+LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_setup_replacement_and_abort)
+{
+    auto bd = make_unique<Board>(Variant::classic);
+    Setup setup;
+    setup.placements[Color(0)].push_back(parse_move(*bd, "b19,c19"));
+    setup.placements[Color(0)].push_back(parse_move(*bd, "a20"));
+    setup.placements[Color(1)].push_back(parse_move(*bd, "t20"));
+    auto search = make_unique<Search>(Variant::classic, 1, 100000);
+    WallTimeSource time_source;
+    Move move;
+    auto run = [&](Color color, Float count, size_t minimum)
+    {
+        LIBBOARDGAME_CHECK(search->search(move, *bd, color, count, minimum,
+                                         0, time_source))
+        LIBBOARDGAME_CHECK(! move.is_null() && bd->is_legal(color, move))
+    };
+
+    bd->init(&setup);
+    run(Color(1), 20, 1);
+    Variant variant;
+    Setup exported;
+    search->get_root_position(variant, exported);
+    LIBBOARDGAME_CHECK(exported.placements[Color(0)] == setup.placements[Color(0)])
+    LIBBOARDGAME_CHECK(exported.placements[Color(1)] == setup.placements[Color(1)])
+    LIBBOARDGAME_CHECK(exported.to_play == Color(1))
+
+    bd->init();
+    run(Color(3), 1, 1);
+    bd->init(&setup);
+    run(Color(1), 1, 1);
+    bd->init();
+    run(Color(1), 1, 1);
+
+    search->set_callback([&](double, double) { search->abort(); });
+    LIBBOARDGAME_CHECK(search->search(move, *bd, Color(1), 0, 1, 100,
+                                     time_source))
+    LIBBOARDGAME_CHECK(search->was_aborted())
+    search->set_callback({});
+    bd->init(&setup);
+    run(Color(1), 1, 1);
+    LIBBOARDGAME_CHECK(search->get_root_visit_count() == 1)
+}
+
+LIBBOARDGAME_TEST_CASE(pentobi_mcts_abort_replacement_with_stale_sequence)
+{
+    auto bd = make_unique<Board>(Variant::classic);
+    Setup blocked;
+    blocked.placements[Color(0)].push_back(parse_move(*bd, "a1"));
+    bd->init(&blocked);
+    auto search = make_unique<Search>(Variant::classic, 1, 1000000);
+    WallTimeSource time_source;
+    Move move;
+    LIBBOARDGAME_CHECK(search->search(move, *bd, Color(2), 1, 1, 0,
+                                     time_source))
+    search->set_callback([&](double, double) { search->abort(); });
+    LIBBOARDGAME_CHECK(search->search(move, *bd, Color(3), 0, 1, 100,
+                                     time_source))
+    LIBBOARDGAME_CHECK(move.is_null())
+    LIBBOARDGAME_CHECK(search->was_aborted())
+    auto& tree = search->get_tree();
+    auto& pass = *tree.get_root_children().begin();
+    LIBBOARDGAME_CHECK(pass.get_nu_children() > 0)
+    search->set_callback({});
+    bd->init();
+    LIBBOARDGAME_CHECK(search->search(move, *bd, Color(3), 1, 1, 0,
+                                     time_source))
+    LIBBOARDGAME_CHECK(! move.is_null() && bd->is_legal(Color(3), move))
+    LIBBOARDGAME_CHECK(search->get_root_visit_count() == 1)
+    for (auto& child : search->get_tree().get_root_children())
+        LIBBOARDGAME_CHECK(bd->is_legal(Color(3), child.get_move()))
+}
+
+LIBBOARDGAME_TEST_CASE(pentobi_mcts_search_reuses_setup_continuation)
+{
+    auto bd = make_unique<Board>(Variant::classic);
+    Setup setup;
+    setup.placements[Color(0)].push_back(parse_move(*bd, "a20"));
+    bd->init(&setup);
+    auto search = make_unique<Search>(Variant::classic, 1, 1000000);
+    WallTimeSource time_source;
+    Move move;
+    LIBBOARDGAME_CHECK(search->search(move, *bd, Color(1), 100, 1, 0,
+                                     time_source))
+    Float visits = 0;
+    for (auto& child : search->get_tree().get_root_children())
+        if (child.get_nu_children() > 0 && child.get_visit_count() > visits)
+        {
+            move = child.get_move();
+            visits = child.get_visit_count();
+        }
+    LIBBOARDGAME_CHECK(visits > 1)
+    bd->play(Color(1), move);
+    LIBBOARDGAME_CHECK(search->search(move, *bd, Color(2), 1, 0, 0,
+                                     time_source))
+    LIBBOARDGAME_CHECK(search->get_root_visit_count() >= visits)
+    LIBBOARDGAME_CHECK(bd->is_legal(Color(2), move))
+    Variant variant;
+    Setup exported;
+    search->get_root_position(variant, exported);
+    LIBBOARDGAME_CHECK(exported.placements[Color(0)] == setup.placements[Color(0)])
+    LIBBOARDGAME_CHECK(exported.placements[Color(1)].size() == 1)
+    LIBBOARDGAME_CHECK(exported.placements[Color(1)][0] == bd->get_move(0).move)
+    LIBBOARDGAME_CHECK(exported.to_play == Color(2))
+}
+
 /** Test that state generates a playout move even if no large pieces are
     playable early in the game.
     This tests for a bug that occurred in Pentobi 1.1 with game variant Trigon:
