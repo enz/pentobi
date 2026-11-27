@@ -300,6 +300,15 @@ game). For some experiments, it can be desirable to use a fixed number
 of simulations for each move. If this number is specified, the playing
 level is ignored.
 
+`param reuse_tree 0|1`
+Reuse the search tree from the previous search if the position is the
+same. A repeated `genmove` or `reg_genmove` in the same position then
+continues the previous search instead of starting a new one. Because the
+search ends when the number of simulations of the level is reached, a
+repeated search at the same level returns the same move without
+searching. Disabled (value `0`) by default, so that repeated searches can
+find different moves.
+
 `param use_book 0|1`
 Enable or disable the opening book.
 
